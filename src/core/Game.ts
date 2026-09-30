@@ -10,8 +10,10 @@ import { generateCharacterDNA } from '../characters/generateCharacterDNA';
 import { generatePhenotype } from '../characters/generatePhenotype';
 import { Mannequin } from '../character-lab/Mannequin';
 import { CharacterProfileCard } from '../ui/CharacterProfileCard';
+import { setupWorldHUD } from '../ui/WorldHUD';
 export class Game {
     async start(canvas: HTMLCanvasElement) {
+        setupWorldHUD();
         const renderer = createRenderer(canvas), scene = new Scene();
         scene.background = new Color(config.lighting.sky);
         const fog = new Fog(config.lighting.sky, config.lighting.fogNear, config.lighting.fogFar);

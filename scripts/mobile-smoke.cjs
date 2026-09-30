@@ -5,7 +5,9 @@ try{
 const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true,deviceScaleFactor:1});const errors=[];
 page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
 await page.goto(process.env.PROTOTYPE_URL||'http://127.0.0.1:4175/');await page.waitForFunction(()=>document.querySelector('#metrics').textContent.includes('Center '));
-assert.ok(await page.locator('.touch-control').first().isVisible());assert.equal(await page.locator('.desktop-control').first().isVisible(),false);
+assert.equal(await page.locator('footer').count(),0);assert.equal(await page.locator('.touch-control').first().isVisible(),false);
+await page.getByLabel('World controls',{exact:true}).click();assert.ok(await page.locator('.touch-control').first().isVisible());assert.equal(await page.locator('.desktop-control').first().isVisible(),false);
+await page.getByLabel('World controls',{exact:true}).click();
 assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
 const cdp=await page.context().newCDPSession(page);
 const send=(type,points)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:points.map(([id,x,y])=>({id,x,y}))});
@@ -23,7 +25,7 @@ await send('touchStart',[[3,130,420],[4,260,420]]);await send('touchMove',[[3,17
 await waitRadius(radius(rotated)*1.3,'out');const pinched=await read();
 await send('touchStart',[[5,170,420],[6,220,420]]);await send('touchMove',[[5,110,420],[6,280,420]]);await send('touchEnd',[]);
 await waitRadius(radius(pinched)*.75,'in');
-await page.click('#home');await page.waitForTimeout(1500);fs.mkdirSync('artifacts',{recursive:true});await page.screenshot({path:'artifacts/mobile-lan.png'});
+await page.getByLabel('Development tools',{exact:true}).click();await page.click('#home');await page.waitForTimeout(1500);fs.mkdirSync('artifacts',{recursive:true});await page.screenshot({path:'artifacts/mobile-lan.png'});
 assert.deepEqual(errors,[]);console.log((await read()).text);console.log(process.env.ZOOM_ONLY==='1'?'Mobile zoom passed: pinch out and spread in on LAN production build.':'Mobile browser passed: LAN loading, responsive UI, terrain tap, centered orbit, pinch out and spread in.');
 }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

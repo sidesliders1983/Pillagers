@@ -41,7 +41,7 @@ Mobile controls: tap a location to move the camera center there; swipe horizonta
 
 ## Character Lab v0.2
 
-Open `/character-lab` or use the Character Lab link in the world's toolbar. The same route works in the LAN preview, including mobile. Edit sex, age, seed, five traits and six normalized heritage shares; preview the derived low-poly mannequin and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
+Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Edit sex, age, seed, five traits and six normalized heritage shares; preview the derived low-poly mannequin and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
 
 Personal names now derive deterministically from heritage, sex, local culture and seed. The dominant heritage automatically chooses the naming culture; reroll only the name while preserving appearance. Naming configuration travels with DNA JSON and pinned comparisons. See [Naming v0.2](docs/CHARACTER-NAMING-V02.md) for curated patterns, patronymics and the historical/art-direction boundaries.
 
@@ -52,9 +52,10 @@ The model is independent of Three.js. Physicality/Agility influence build, while
 - WASD / arrow keys: pan relative to camera direction.
 - Drag the canvas with a mouse button: pan. Wheel: smooth zoom.
 - Q / E: rotate. Home: return to the settlement.
-- Debug: FPS, draw calls, triangles, inhabitants and camera coordinates; fog, shadows and helpers toggles.
+- ?: contextual mouse/touch help; dismiss by tapping the world or pressing Escape.
+- ⋯: Character Lab, Home and Debug. Debug shows FPS, draw calls, triangles, inhabitants and camera coordinates; fog, shadows and helpers toggles.
 
-Camera movement and zoom are bounded. The world has ten independently wandering characters generated with the Character Lab DNA pipeline. Click or tap a character to open a following profile card with name, gender, age, all five traits and the heritage mix. Close with the card button, Escape or a ground click/tap. Buildings, the hearth and well have circular navigation exclusions. There are no economy, combat or placement systems.
+Camera movement and zoom are bounded. The world has ten independently wandering characters generated with the Character Lab DNA pipeline. Click or tap a character to open a following profile card with name, gender, age, all five traits and the three largest heritage shares. Expand minor ancestries for the remaining shares. Close with the card button, Escape or a ground click/tap. Buildings, the hearth and well have circular navigation exclusions. There are no economy, combat or placement systems.
 
 ## Main files
 

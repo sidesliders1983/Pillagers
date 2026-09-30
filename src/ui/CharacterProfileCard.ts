@@ -12,6 +12,7 @@ export class CharacterProfileCard {
     private charactersByRoot=new Map<Object3D,Character>();
     constructor(private camera:PerspectiveCamera,private canvas:HTMLCanvasElement,private scene:Scene,characters:Character[]){
         this.card.id='character-profile';this.card.className='character-profile';this.card.hidden=true;
+        for(const edge of ['top','right','bottom','left'])this.card.style.setProperty(`--safe-${edge}`,`env(safe-area-inset-${edge}, 0px)`);
         this.card.setAttribute('aria-label','Selected character profile');this.card.setAttribute('aria-live','polite');
         document.body.append(this.card);
         // A generous invisible silhouette makes small RTS characters touchable.
@@ -40,11 +41,14 @@ export class CharacterProfileCard {
         const traits=this.card.querySelector('dl')!;
         for(const key of traitKeys){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key[0].toUpperCase()+key.slice(1);dd.textContent=`${Math.round(dna.traits[key]*100)}%`;traits.append(dt,dd);}
         const heritage=this.card.querySelector('.profile-heritage')!;
-        for(const key of [...heritageKeys].sort((a,b)=>dna.heritage[b]-dna.heritage[a])){
-            if(dna.heritage[key]===0)continue;
+        const sorted=[...heritageKeys].filter(key=>dna.heritage[key]>0).sort((a,b)=>dna.heritage[b]-dna.heritage[a]);
+        const minor=document.createElement('details');minor.className='profile-minor';
+        const summary=document.createElement('summary');summary.textContent=`+ ${Math.max(0,sorted.length-3)} minor ancestries`;minor.append(summary);
+        for(const [index,key] of sorted.entries()){
             const row=document.createElement('div'),label=document.createElement('span'),value=document.createElement('strong');
-            label.textContent=heritageLabels[key];value.textContent=`${(dna.heritage[key]*100).toFixed(1)}%`;row.append(label,value);heritage.append(row);
+            label.textContent=heritageLabels[key];value.textContent=`${(dna.heritage[key]*100).toFixed(1)}%`;row.append(label,value);(index<3?heritage:minor).append(row);
         }
+        if(sorted.length>3)heritage.append(minor);
         this.card.dataset.characterId=String(character.villager.id);this.card.hidden=false;this.update();return true;
     }
     private clear(){this.selected=null;this.card.hidden=true;delete this.card.dataset.characterId;}
@@ -56,8 +60,9 @@ export class CharacterProfileCard {
         this.card.hidden=false;
         const x=rect.left+(this.anchor.x+1)*rect.width/2,y=rect.top+(1-this.anchor.y)*rect.height/2;
         const width=this.card.offsetWidth,height=this.card.offsetHeight;
-        this.card.style.left=`${Math.max(8,Math.min(innerWidth-width-8,x-width/2))}px`;
-        this.card.style.top=`${Math.max(8,Math.min(innerHeight-height-8,y-height))}px`;
+        const style=getComputedStyle(this.card),safe=(edge:string)=>Math.max(8,parseFloat(style.getPropertyValue(`--safe-${edge}`))||0);
+        this.card.style.left=`${Math.max(safe('left'),Math.min(innerWidth-width-safe('right'),x-width/2))}px`;
+        this.card.style.top=`${Math.max(safe('top'),Math.min(innerHeight-height-safe('bottom'),y-height))}px`;
         this.card.style.setProperty('--profile-anchor',`${Math.max(12,Math.min(width-12,x-parseFloat(this.card.style.left)))}px`);
     }
 }

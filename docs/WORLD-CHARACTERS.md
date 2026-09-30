@@ -12,7 +12,7 @@ Character Lab scene is instantiated in the world. Movement remains the existing
 bounded wandering system; jobs, heredity and saves remain out of scope.
 
 Click/tap a resident to display their name, gender, age, five trait percentages
-and six heritage percentages. A generous invisible pick silhouette helps touch
+and the three largest heritage percentages, with remaining shares expandable. A generous invisible pick silhouette helps touch
 selection at RTS scale. The nearest scene mesh blocks selection through buildings.
 The card follows the resident's projected head position and stays inside the
 viewport, hiding when the resident leaves it. Its button, Escape or clicking/tapping
