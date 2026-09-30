@@ -22,6 +22,10 @@ export function normalizeHeritage(input: Partial<HeritageMix>): HeritageMix {
     }
     return Object.fromEntries(heritageKeys.map((key, i) => [key, total > 0 ? values[i] / total : 1 / heritageKeys.length])) as HeritageMix;
 }
+export function dominantHeritage(input: Partial<HeritageMix>): HeritageKey {
+    const mix=normalizeHeritage(input);
+    return heritageKeys.reduce((a,b)=>mix[a]>=mix[b]?a:b);
+}
 // Keep the edited percentage exact, rescaling the other five proportionally.
 export function editHeritage(mix: HeritageMix, key: HeritageKey, value: number): HeritageMix {
     const current = normalizeHeritage(mix), selected = Math.max(0, Math.min(1, value));
@@ -55,7 +59,7 @@ export function parseCharacterDNA(value: unknown): CharacterDNA {
         const config=data.naming as Record<string,unknown>;
         if(!heritageKeys.includes(config.culture as HeritageKey))throw new Error('Unknown naming culture.');
         if(!Number.isInteger(config.seed)||Number(config.seed)<0||Number(config.seed)>4294967295)throw new Error('Name seed must be an unsigned 32-bit integer.');
-        naming={culture:config.culture as HeritageKey,seed:Number(config.seed)};
+        naming={culture:dominantHeritage(heritage as Partial<HeritageMix>),seed:Number(config.seed)};
     }
     return {seed: Number(data.seed), sex: data.sex, age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{})};
 }

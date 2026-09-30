@@ -34,7 +34,7 @@ test('heritage shifts compatible source probabilities without forcing mixed name
  }
 });
 test('name configuration round trips independently of phenotype DNA; legacy DNA works',()=>{
- const dna=defaultDNA(),named={...dna,naming:{culture:'baltic',seed:13}};
+ const dna=defaultDNA(),named={...dna,naming:{culture:'scandinavian',seed:13}};
  assert.deepEqual(parseCharacterDNA(JSON.parse(JSON.stringify(named))),named);
  assert.deepEqual(characterName(dna),characterName(parseCharacterDNA(dna)));
  assert.notDeepEqual(characterName(named),characterName({...named,naming:{...named.naming,seed:14}}));
@@ -43,4 +43,16 @@ test('name configuration round trips independently of phenotype DNA; legacy DNA 
  const parent=generateName({...context,family:{father:{givenName:'Bjorn',genitive:'Bjarnar'}}});
  assert.equal(parent.patronymic,'Bjarnarson');assert.equal(parent.derivation.parentSource,'provided');
  assert.equal(fullName({...parent,epithet:'Wolf-Eye'}),fullName(parent)+' “Wolf-Eye”');
+});
+test('dominant heritage controls character naming even with an old culture override; seeds still vary names',()=>{
+ const dna=defaultDNA();
+ for(const culture of heritageKeys){
+  const character={...dna,heritage:{[culture]:1},naming:{culture:'scandinavian',seed:13}};
+  assert.equal(characterName(character).dominantCulture,culture);
+  assert.equal(parseCharacterDNA(character).naming.culture,culture);
+  assert.deepEqual(characterName(character),characterName(structuredClone(character)));
+  assert.ok(new Set(Array.from({length:30},(_,seed)=>fullName(characterName({...character,seed})))).size>2);
+ }
+ const tied={...dna,heritage:{gaelic:.5,baltic:.5}};
+ assert.equal(characterName(tied).dominantCulture,'gaelic');
 });

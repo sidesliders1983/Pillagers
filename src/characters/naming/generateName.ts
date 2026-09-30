@@ -1,4 +1,4 @@
-import { heritageKeys, normalizeHeritage, HeritageKey, CharacterDNA } from '../CharacterDNA';
+import { heritageKeys, normalizeHeritage, dominantHeritage, HeritageKey, CharacterDNA } from '../CharacterDNA';
 import { seededRandom } from '../seededRandom';
 import { GeneratedName, NamingContext } from './NameProfile';
 import { nameProfiles, norseParents } from './nameProfiles';
@@ -34,5 +34,5 @@ export function fullName(name:GeneratedName):string {
     return [name.givenName,name.patronymic,name.familyName,name.epithet?`“${name.epithet}”`:undefined].filter(Boolean).join(' ');
 }
 export function characterName(dna:CharacterDNA):GeneratedName {
-    return generateName({heritage:dna.heritage,sex:dna.sex,culture:dna.naming?.culture??'scandinavian',seed:(dna.seed^(dna.naming?.seed??0))>>>0});
+    return generateName({heritage:dna.heritage,sex:dna.sex,culture:dominantHeritage(dna.heritage),seed:(dna.seed^(dna.naming?.seed??0))>>>0});
 }

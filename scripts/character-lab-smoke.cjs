@@ -14,7 +14,8 @@ const slider=async(id,value)=>page.locator(id).evaluate((input,value)=>{input.va
 const initial=await dna();assert.equal(initial.seed,1983);
 const birthName=await page.locator('#lab-name').textContent(),birthPhenotype=await phenotype();
 await page.getByRole('button',{name:'Reroll name',exact:true}).click();assert.notEqual(await page.locator('#lab-name').textContent(),birthName);assert.deepEqual(await phenotype(),birthPhenotype);
-await page.locator('#lab-culture').selectOption('baltic');assert.equal((await dna()).naming.culture,'baltic');assert.deepEqual(await phenotype(),birthPhenotype);assert.equal(JSON.parse(await page.locator('#lab-name-derivation').textContent()).familyRule,'given-only');
+assert.ok(await page.locator('#lab-culture').isDisabled());
+await slider('#heritage-baltic',80);assert.equal(await page.locator('#lab-culture').inputValue(),'baltic');assert.equal((await dna()).naming.culture,'baltic');assert.equal(JSON.parse(await page.locator('#lab-name-derivation').textContent()).familyRule,'given-only');
 const namedDNA=await dna();await page.locator('.lab-json > summary').click();await page.locator('#lab-json').fill(JSON.stringify(namedDNA));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();assert.deepEqual(await dna(),namedDNA);await page.locator('.lab-json > summary').click();
 await page.getByRole('button',{name:'Reset DNA to defaults',exact:true}).click();assert.equal(await page.locator('#lab-name').textContent(),birthName);
 await slider('#trait-physicality',0);const slight=await phenotype(),lowFit=Number((await page.locator('#fit-value-blacksmith').textContent()).replace('%',''));
