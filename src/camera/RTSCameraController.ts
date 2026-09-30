@@ -1,0 +1,76 @@
+import {PerspectiveCamera,Vector2,Vector3,MathUtils,Object3D,Raycaster,Plane} from 'three';
+import {worldConfig} from '../config/worldConfig';
+import {TouchGestures} from './TouchGestures';
+const initialElevation=Math.atan2(.8,.7),orbitScale=Math.hypot(.8,.7);
+export class RTSCameraController {
+    readonly focus=new Vector3(0,0,2);
+    private desired=new Vector3(0,0,2);
+    private distance=worldConfig.camera.initialZoom;
+    private zoom=worldConfig.camera.initialZoom;
+    private angle=.45;private yaw=.45;
+    private elevation=initialElevation;private targetElevation=initialElevation;
+    private keys=new Set<string>();private drag=false;
+    private surface:Object3D|null=null;
+    private ray=new Raycaster();private pointer=new Vector2();
+    private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
+    private touch:TouchGestures;
+    constructor(readonly camera:PerspectiveCamera,private canvas:HTMLCanvasElement){
+        const settings=worldConfig.camera.touch;
+        this.touch=new TouchGestures({
+            navigate:(x,y)=>this.navigate(x,y),
+            rotate:(dx,dy)=>{this.yaw-=dx*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+dy*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);},
+            zoom:ratio=>this.setZoom(this.zoom/ratio),
+        },settings.tapThreshold);
+        window.addEventListener('keydown',e=>{
+            if(e.target instanceof HTMLInputElement)return;
+            if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
+            this.keys.add(e.key.toLowerCase());
+        });
+        window.addEventListener('keyup',e=>this.keys.delete(e.key.toLowerCase()));
+        window.addEventListener('blur',()=>{this.keys.clear();this.drag=false;this.touch.reset();});
+        canvas.addEventListener('wheel',e=>{e.preventDefault();this.setZoom(this.zoom+e.deltaY*.025);},{passive:false});
+        canvas.addEventListener('pointerdown',e=>{
+            canvas.setPointerCapture(e.pointerId);
+            if(e.pointerType==='touch'){e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
+            else this.drag=true;
+        });
+        canvas.addEventListener('pointermove',e=>{
+            if(e.pointerType==='touch'){e.preventDefault();this.touch.move(e.pointerId,e.clientX,e.clientY);}
+            else if(this.drag)this.pan(-e.movementX*this.distance*.0015,-e.movementY*this.distance*.0015);
+        });
+        const release=(e:PointerEvent,cancelled:boolean)=>{
+            if(e.pointerType==='touch'){
+                if(!cancelled)this.touch.move(e.pointerId,e.clientX,e.clientY);
+                this.touch.up(e.pointerId,cancelled);
+            }
+            else this.drag=false;
+        };
+        canvas.addEventListener('pointerup',e=>release(e,false));
+        canvas.addEventListener('pointercancel',e=>release(e,true));
+        canvas.addEventListener('lostpointercapture',e=>release(e,true));
+        canvas.addEventListener('contextmenu',e=>e.preventDefault());
+        this.update(1);
+    }
+    setNavigationSurface(surface:Object3D){this.surface=surface;}
+    home(){this.desired.set(0,0,2);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
+    private setZoom(value:number){this.zoom=MathUtils.clamp(value,worldConfig.camera.minZoom,worldConfig.camera.maxZoom);}
+    private navigate(x:number,y:number){
+        const rect=this.canvas.getBoundingClientRect();
+        this.pointer.set((x-rect.left)/rect.width*2-1,-(y-rect.top)/rect.height*2+1);
+        this.camera.updateMatrixWorld();this.ray.setFromCamera(this.pointer,this.camera);
+        const intersection=this.surface?this.ray.intersectObject(this.surface,false)[0]:undefined;
+        const point=intersection?.point??this.ray.ray.intersectPlane(this.fallback,this.hit);
+        if(!point)return;
+        this.desired.set(point.x,Math.max(0,point.y),point.z);this.clampFocus();
+    }
+    private clampFocus(){const b=worldConfig.camera.bounds;this.desired.x=MathUtils.clamp(this.desired.x,-b,b);this.desired.z=MathUtils.clamp(this.desired.z,-20,b);}
+    private pan(x:number,z:number){this.desired.x+=x*Math.cos(this.angle)+z*Math.sin(this.angle);this.desired.z+=-x*Math.sin(this.angle)+z*Math.cos(this.angle);this.clampFocus();}
+    update(dt:number){
+        const k=this.keys;
+        this.pan((Number(k.has('d')||k.has('arrowright'))-Number(k.has('a')||k.has('arrowleft')))*dt*worldConfig.camera.speed,(Number(k.has('s')||k.has('arrowdown'))-Number(k.has('w')||k.has('arrowup')))*dt*worldConfig.camera.speed);
+        this.yaw+=(Number(k.has('e'))-Number(k.has('q')))*dt*.8;
+        const t=1-Math.exp(-dt*8);this.focus.lerp(this.desired,t);this.distance=MathUtils.lerp(this.distance,this.zoom,t);this.angle=MathUtils.lerp(this.angle,this.yaw,t);this.elevation=MathUtils.lerp(this.elevation,this.targetElevation,t);
+        const horizontal=this.distance*Math.cos(this.elevation)*orbitScale,vertical=this.distance*Math.sin(this.elevation)*orbitScale;
+        this.camera.position.set(this.focus.x+Math.sin(this.angle)*horizontal,this.focus.y+vertical,this.focus.z+Math.cos(this.angle)*horizontal);this.camera.lookAt(this.focus);
+    }
+}

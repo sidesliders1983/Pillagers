@@ -1,0 +1,3 @@
+import {readFileSync} from 'node:fs';import {createRequire} from 'node:module';import ts from 'typescript';
+const nativeRequire=createRequire(import.meta.url),cache=new Map();
+export function load(path){const url=new URL(path,import.meta.url).href;if(cache.has(url))return cache.get(url);const result={exports:{}};cache.set(url,result.exports);const source=ts.transpileModule(readFileSync(new URL(url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;new Function('require','module','exports',source)(name=>name.startsWith('.')?load(new URL(name+'.ts',url).href):nativeRequire(name),result,result.exports);return result.exports;}
