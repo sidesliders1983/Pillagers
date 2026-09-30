@@ -1,8 +1,8 @@
 import './character-lab.css';
-import { CharacterDNA, defaultDNA, cloneDNA, parseCharacterDNA, normalizeHeritage, traitKeys, heritageKeys, CoreTraits, HeritageMix } from '../characters/CharacterDNA';
+import { CharacterDNA, defaultDNA, cloneDNA, parseCharacterDNA } from '../characters/CharacterDNA';
 import { generatePhenotype } from '../characters/generatePhenotype';
-import { seededRandom } from '../characters/seededRandom';
 import { dominantHeritage } from '../characters/CharacterDNA';
+import { generateCharacterDNA } from '../characters/generateCharacterDNA';
 import { CharacterPreview } from './CharacterPreview';
 import { CharacterLabUI, LabAction } from './CharacterLabUI';
 export class CharacterLab {
@@ -22,8 +22,7 @@ export class CharacterLab {
         if(action==='reroll-name'){this.dna={...this.dna,naming:{culture:dominantHeritage(this.dna.heritage),seed:((this.dna.naming?.seed??0)+1)>>>0}};this.update();this.ui.status('Name rerolled; appearance and traits kept.');}
         else if(action==='reroll'){this.dna={...this.dna,seed:this.newSeed()};this.update();this.ui.status('Seed rerolled; traits, age, sex and heritage kept.');}
         else if(action==='randomize'){
-            const seed=this.newSeed(),random=seededRandom(seed,'lab-randomize');
-            this.dna={seed,sex:random()<.5?'male':'female',age:18+Math.floor(random()*63),traits:Object.fromEntries(traitKeys.map(key=>[key,Math.round(random()*100)/100])) as CoreTraits,heritage:normalizeHeritage(Object.fromEntries(heritageKeys.map(key=>[key,.05+random()])) as HeritageMix)};
+            this.dna=generateCharacterDNA(this.newSeed());
             this.update();this.ui.status('New character generated. No occupation assigned.');
         }else if(action==='defaults'){this.dna=defaultDNA();this.update();this.ui.status('Default DNA restored.');}
         else if(action==='pin'){this.comparison=cloneDNA(this.dna);this.preview.setComparison(generatePhenotype(this.comparison));this.ui.update(this.dna,generatePhenotype(this.dna),this.comparison);this.ui.status('Comparison pinned. Edit the current character to compare.');}

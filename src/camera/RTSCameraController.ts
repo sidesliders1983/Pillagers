@@ -14,6 +14,8 @@ export class RTSCameraController {
     private ray=new Raycaster();private pointer=new Vector2();
     private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
     private touch:TouchGestures;
+    private select:((x:number,y:number)=>boolean)|null=null;
+    private mouseStart:{x:number;y:number;distance:number}|null=null;
     constructor(readonly camera:PerspectiveCamera,private canvas:HTMLCanvasElement){
         const settings=worldConfig.camera.touch;
         this.touch=new TouchGestures({
@@ -32,18 +34,18 @@ export class RTSCameraController {
         canvas.addEventListener('pointerdown',e=>{
             canvas.setPointerCapture(e.pointerId);
             if(e.pointerType==='touch'){e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
-            else this.drag=true;
+            else if(e.button===0){this.drag=true;this.mouseStart={x:e.clientX,y:e.clientY,distance:0};}
         });
         canvas.addEventListener('pointermove',e=>{
             if(e.pointerType==='touch'){e.preventDefault();this.touch.move(e.pointerId,e.clientX,e.clientY);}
-            else if(this.drag)this.pan(-e.movementX*this.distance*.0015,-e.movementY*this.distance*.0015);
+            else if(this.drag){if(this.mouseStart)this.mouseStart.distance=Math.max(this.mouseStart.distance,Math.hypot(e.clientX-this.mouseStart.x,e.clientY-this.mouseStart.y));this.pan(-e.movementX*this.distance*.0015,-e.movementY*this.distance*.0015);}
         });
         const release=(e:PointerEvent,cancelled:boolean)=>{
             if(e.pointerType==='touch'){
                 if(!cancelled)this.touch.move(e.pointerId,e.clientX,e.clientY);
                 this.touch.up(e.pointerId,cancelled);
             }
-            else this.drag=false;
+            else {if(!cancelled&&this.mouseStart&&this.mouseStart.distance<settings.tapThreshold)this.select?.(e.clientX,e.clientY);this.mouseStart=null;this.drag=false;}
         };
         canvas.addEventListener('pointerup',e=>release(e,false));
         canvas.addEventListener('pointercancel',e=>release(e,true));
@@ -52,9 +54,11 @@ export class RTSCameraController {
         this.update(1);
     }
     setNavigationSurface(surface:Object3D){this.surface=surface;}
+    setSelectionHandler(select:(x:number,y:number)=>boolean){this.select=select;}
     home(){this.desired.set(0,0,2);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
     private setZoom(value:number){this.zoom=MathUtils.clamp(value,worldConfig.camera.minZoom,worldConfig.camera.maxZoom);}
     private navigate(x:number,y:number){
+        if(this.select?.(x,y))return;
         const rect=this.canvas.getBoundingClientRect();
         this.pointer.set((x-rect.left)/rect.width*2-1,-(y-rect.top)/rect.height*2+1);
         this.camera.updateMatrixWorld();this.ray.setFromCamera(this.pointer,this.camera);

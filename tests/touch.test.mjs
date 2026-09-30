@@ -29,3 +29,16 @@ send('pointermove',4,320,300);controller.update(2);assert.ok(camera.position.dis
 send('pointerup',4,320,300);send('pointerup',3,300,300);controller.update(2);assert.ok(controller.focus.distanceTo(center)<.001);
 plane.geometry.dispose();plane.material.dispose();delete globalThis.window;
 });
+test('resident selection consumes taps and clicks while drags and pinch never select',()=>{
+ const handlers=new Map();globalThis.window={addEventListener(){}};
+ const canvas={addEventListener:(name,fn)=>handlers.set(name,fn),setPointerCapture(){},getBoundingClientRect:()=>({left:0,top:0,width:800,height:600})};
+ const controller=new RTSCameraController(new PerspectiveCamera(45,800/600,.1,240),canvas),selected=[];
+ controller.setSelectionHandler((x,y)=>{selected.push([x,y]);return true;});const focus=controller.focus.clone();
+ const send=(name,type,id,x,y,movementX=0)=>handlers.get(name)({pointerId:id,pointerType:type,button:0,clientX:x,clientY:y,movementX,movementY:0,preventDefault(){}});
+ send('pointerdown','touch',1,550,320);send('pointerup','touch',1,550,320);controller.update(2);assert.deepEqual(selected,[[550,320]]);assert.ok(controller.focus.equals(focus));
+ send('pointerdown','mouse',2,300,300);send('pointerup','mouse',2,300,300);assert.equal(selected.length,2);
+ send('pointerdown','mouse',3,300,300);send('pointermove','mouse',3,360,300,60);send('pointerup','mouse',3,360,300);assert.equal(selected.length,2);
+ send('pointerdown','touch',4,300,300);send('pointermove','touch',4,360,300);send('pointerup','touch',4,360,300);assert.equal(selected.length,2);
+ send('pointerdown','touch',5,300,300);send('pointerdown','touch',6,500,300);send('pointermove','touch',6,400,300);send('pointerup','touch',6,400,300);send('pointerup','touch',5,300,300);assert.equal(selected.length,2);
+ delete globalThis.window;
+});

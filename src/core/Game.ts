@@ -6,6 +6,10 @@ import { Villager } from '../entities/Villager';
 import { MovementSystem } from '../systems/MovementSystem';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { worldConfig as config } from '../config/worldConfig';
+import { generateCharacterDNA } from '../characters/generateCharacterDNA';
+import { generatePhenotype } from '../characters/generatePhenotype';
+import { Mannequin } from '../character-lab/Mannequin';
+import { CharacterProfileCard } from '../ui/CharacterProfileCard';
 export class Game {
     async start(canvas: HTMLCanvasElement) {
         const renderer = createRenderer(canvas), scene = new Scene();
@@ -28,9 +32,16 @@ export class Game {
         const world = new World(assets);
         scene.add(world.root);
         controller.setNavigationSurface(world.terrain);
-        const villagers = Array.from({ length: config.villagers }, (_, i) => new Villager(i));
+        const characters=Array.from({length:config.villagers},(_,i)=>{
+            const dna=generateCharacterDNA((config.seed+Math.imul(i+1,2654435761))>>>0);
+            const phenotype=generatePhenotype(dna),model=new Mannequin(phenotype);
+            return {dna,phenotype,model,villager:new Villager(i,model.root)};
+        });
+        const villagers = characters.map(character=>character.villager);
         villagers.forEach(v => scene.add(v.visual));
         const movement = new MovementSystem(villagers);
+        const profiles=new CharacterProfileCard(camera,canvas,scene,characters);
+        controller.setSelectionHandler((x,y)=>profiles.select(x,y));
         const helpers = new GridHelper(80, 20, 0x6d7874, 0xadb9a3);
         helpers.position.y = 1;
         helpers.visible = false;
@@ -54,7 +65,7 @@ export class Game {
             });
         });
         document.querySelector('#helpers')!.addEventListener('change', e => helpers.visible = (e.target as HTMLInputElement).checked);
-        document.querySelector('#status')!.textContent = 'FJORDSIDE · 8 inhabitants';
+        document.querySelector('#status')!.textContent = `FJORDSIDE · ${villagers.length} inhabitants`;
         const clock = new Clock();
         let time = 0, frames = 0, sample = 0;
         renderer.setAnimationLoop(() => {
@@ -65,6 +76,8 @@ export class Game {
             controller.update(dt);
             movement.update(dt);
             world.update(time);
+            characters.forEach(character=>character.model.update(time+character.villager.id));
+            profiles.update();
             renderer.render(scene, camera);
             if (sample > .5) {
                 document.querySelector('#metrics')!.textContent = `${Math.round(frames / sample)} FPS\n${renderer.info.render.calls} draw calls\n${renderer.info.render.triangles.toLocaleString()} triangles\n${villagers.length} inhabitants\nCamera ${camera.position.x.toFixed(1)}, ${camera.position.y.toFixed(1)}, ${camera.position.z.toFixed(1)}\nCenter ${controller.focus.x.toFixed(1)}, ${controller.focus.y.toFixed(1)}, ${controller.focus.z.toFixed(1)}`;

@@ -40,7 +40,7 @@ test('path grounding matches the rendered terrain triangles',()=>{
   terrain.geometry.dispose();terrain.material.dispose();
 });
 test('inhabitants stay on dry ground and outside buildings during ten simulated minutes',()=>{
-  const units=Array.from({length:8},(_,i)=>new Villager(i));const movement=new MovementSystem(units);const initial=units.map(u=>u.visual.position.clone());
+  const units=Array.from({length:10},(_,i)=>new Villager(i));const movement=new MovementSystem(units);const initial=units.map(u=>u.visual.position.clone());
   for(let frame=0;frame<12000;frame++){movement.update(.05);for(const unit of units){const p=unit.visual.position;assert.ok(walkable(p.x,p.z));assert.ok(heightAt(p.x,p.z)>0);}}
   assert.ok(units.every((u,i)=>u.visual.position.distanceTo(initial[i])>1));
 });

@@ -7,7 +7,7 @@ const fs = require('node:fs');
     const page=await browser.newPage({viewport:{width:1200,height:800}});const errors=[];
     page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
     await page.goto(process.env.PROTOTYPE_URL||'http://127.0.0.1:5173/');
-    await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('8 inhabitants'),{timeout:30000});
+    await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('10 inhabitants'),{timeout:30000});
     await page.click('#debug-toggle');await page.waitForFunction(()=>document.querySelector('#metrics').textContent.includes('Camera '));
     const before=await page.locator('#metrics').textContent();
     await page.keyboard.down('d');await page.waitForFunction(previous=>document.querySelector('#metrics').textContent.split('Camera ')[1]!==previous,before.split('Camera ')[1],{timeout:30000});await page.keyboard.up('d');await page.waitForTimeout(800);

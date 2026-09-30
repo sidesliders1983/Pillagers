@@ -45,7 +45,7 @@ Open `/character-lab` or use the Character Lab link in the world's toolbar. The 
 
 Personal names now derive deterministically from heritage, sex, local culture and seed. The dominant heritage automatically chooses the naming culture; reroll only the name while preserving appearance. Naming configuration travels with DNA JSON and pinned comparisons. See [Naming v0.2](docs/CHARACTER-NAMING-V02.md) for curated patterns, patronymics and the historical/art-direction boundaries.
 
-The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. Heritage uses overlapping illustrative art probabilities. The settlement villagers remain placeholders. See [Character Lab design and limitations](docs/CHARACTER-LAB-V01.md) for the generation model, occupation formulas and the boundary for replacing the mannequin with a real mesh. Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
+The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. See [Character Lab design and limitations](docs/CHARACTER-LAB-V01.md) for the generation model, occupation formulas and the boundary for replacing the mannequin with a real mesh. Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
 
 ## Explore
 
@@ -54,7 +54,7 @@ The model is independent of Three.js. Physicality/Agility influence build, while
 - Q / E: rotate. Home: return to the settlement.
 - Debug: FPS, draw calls, triangles, inhabitants and camera coordinates; fog, shadows and helpers toggles.
 
-Camera movement and zoom are bounded. The world has eight independently wandering placeholder inhabitants. Buildings, the hearth and well have circular navigation exclusions. There are no economy, combat, placement or character-generation systems.
+Camera movement and zoom are bounded. The world has ten independently wandering characters generated with the Character Lab DNA pipeline. Click or tap a character to open a following profile card with name, gender, age, all five traits and the heritage mix. Close with the card button, Escape or a ground click/tap. Buildings, the hearth and well have circular navigation exclusions. There are no economy, combat or placement systems.
 
 ## Main files
 
@@ -79,7 +79,7 @@ npm test
 npm run build
 ```
 
-Tests exercise deterministic randomness, coast/hill heights, shoreline continuity, level building footprints, connected paths and ten minutes of simulated movement for all eight villagers. Optional browser smoke testing requires Playwright and Chromium installed separately; run `node scripts/browser-smoke.cjs` while the dev server is running. `PLAYWRIGHT_MODULE` can point to a preinstalled Playwright package, and `PROTOTYPE_URL` can target a production preview. It checks rendering/asset loading, keyboard pan, zoom, home and debug controls, and saves `artifacts/world-prototype.png`. `node scripts/mobile-smoke.cjs` exercises native touch events in a mobile browser context, checks terrain taps, centered swipes, conventional pinch zoom and responsive controls, and saves `artifacts/mobile-lan.png`. Set `PROTOTYPE_URL` to the LAN preview address for this check.
+Tests exercise deterministic randomness, coast/hill heights, shoreline continuity, level building footprints, connected paths and ten minutes of simulated movement for all ten villagers. Optional browser smoke testing requires Playwright and Chromium installed separately; run `node scripts/browser-smoke.cjs` while the dev server is running. `PLAYWRIGHT_MODULE` can point to a preinstalled Playwright package, and `PROTOTYPE_URL` can target a production preview. It checks rendering/asset loading, keyboard pan, zoom, home and debug controls, and saves `artifacts/world-prototype.png`. `node scripts/mobile-smoke.cjs` exercises native touch events in a mobile browser context, checks terrain taps, centered swipes, conventional pinch zoom and responsive controls, and saves `artifacts/mobile-lan.png`. Set `PROTOTYPE_URL` to the LAN preview address for this check.
 
 ## Decisions and limitations
 
