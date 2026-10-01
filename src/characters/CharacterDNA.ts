@@ -13,6 +13,14 @@ export type CharacterDNA = {
     naming?: { culture: HeritageKey; seed: number };
     morphology?: { masculinity: number; height: number };
 };
+export function sexFromMasculinity(masculinity:number):CharacterDNA['sex'] {
+    if (!Number.isFinite(masculinity)||masculinity<0||masculinity>1||masculinity===.5) throw new Error('Masculinity must be 0–49% or 51–100%; exactly 50% is not allowed.');
+    return masculinity<.5?'female':'male';
+}
+export function nextMasculinity(percent:number,previous:number):number {
+    const value=Math.max(0,Math.min(100,Math.round(percent)));
+    return (value===50?(previous<.5?51:49):value)/100;
+}
 export function normalizeHeritage(input: Partial<HeritageMix>): HeritageMix {
     const values = heritageKeys.map(key => typeof input[key] === 'number' && Number.isFinite(input[key]) ? Math.max(0, input[key]!) : 0);
     const total = values.reduce((sum, value) => sum + value, 0);
@@ -42,7 +50,7 @@ export function cloneDNA(dna: CharacterDNA): CharacterDNA { return {...dna, trai
 export function parseCharacterDNA(value: unknown): CharacterDNA {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('DNA must be a JSON object.');
     const data = value as Record<string, unknown>;
-    if (data.sex !== 'male' && data.sex !== 'female') throw new Error('Sex must be male or female.');
+    if (data.morphology===undefined&&data.sex !== 'male' && data.sex !== 'female') throw new Error('Sex must be male or female for legacy DNA without morphology.');
     if (!Number.isInteger(data.seed) || Number(data.seed) < 0 || Number(data.seed) > 4294967295) throw new Error('Seed must be an unsigned 32-bit integer.');
     if (typeof data.age !== 'number' || !Number.isFinite(data.age) || data.age < 0 || data.age > 100) throw new Error('Age must be between 0 and 100.');
     if (!data.traits || typeof data.traits !== 'object') throw new Error('All five traits are required.');
@@ -67,8 +75,9 @@ export function parseCharacterDNA(value: unknown): CharacterDNA {
         if (!data.morphology || typeof data.morphology !== 'object' || Array.isArray(data.morphology)) throw new Error('Morphology must contain masculinity and height.');
         const m = data.morphology as Record<string, unknown>;
         if (typeof m.masculinity !== 'number' || !Number.isFinite(m.masculinity) || m.masculinity < 0 || m.masculinity > 1) throw new Error('Masculinity must be between 0 and 1.');
+        sexFromMasculinity(m.masculinity);
         if (typeof m.height !== 'number' || !Number.isFinite(m.height) || m.height < 1.45 || m.height > 2.1) throw new Error('Adult height must be between 1.45 and 2.10 metres.');
         morphology = {masculinity:m.masculinity,height:m.height};
     }
-    return {seed: Number(data.seed), sex: data.sex, age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{})};
+    return {seed: Number(data.seed), sex: morphology?sexFromMasculinity(morphology.masculinity):data.sex as CharacterDNA['sex'], age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{})};
 }

@@ -15,7 +15,7 @@ test('morph bind matrices remain independent of source and pinned instances; own
     mesh.bind(new THREE.Skeleton([root,head]));
     const source=mesh.skeleton.boneInverses.map(matrix=>matrix.toArray());
     const asset={scene,animations:['Idle','Walk','Run'].map(name=>new THREE.AnimationClip(name,1,[]))};
-    const dna=defaultDNA(),a=new UniversalHuman(asset,universalHumanProfile({...dna,morphology:{masculinity:.5,height:2.1}}),'#eeccbb');
+    const dna=defaultDNA(),a=new UniversalHuman(asset,universalHumanProfile({...dna,morphology:{masculinity:.51,height:2.1}}),'#eeccbb');
     let own;a.root.traverse(object=>{if(object.isSkinnedMesh)own=object;});
     const aInverses=own.skeleton.boneInverses.map(matrix=>matrix.toArray());
     const b=new UniversalHuman(asset,universalHumanProfile({...dna,morphology:{masculinity:0,height:1.45}}),'#eeccbb');
@@ -26,3 +26,4 @@ test('morph bind matrices remain independent of source and pinned instances; own
     own.skeleton.computeBoneTexture();let disposed=0;own.skeleton.boneTexture.addEventListener('dispose',()=>disposed++);
     a.dispose();b.dispose();assert.equal(disposed,1);
 });
+

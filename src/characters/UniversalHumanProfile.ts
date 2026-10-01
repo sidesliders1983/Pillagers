@@ -5,10 +5,10 @@ export const humanMorphNames = ['Masculine','Feminine','Powerful','Slight','Agil
 export type HumanMorph = typeof humanMorphNames[number];
 export type HumanProfile = { height:number; adultAge:number; masculinity:number; weights:Record<HumanMorph,number> };
 
-/** Anatomy depends only on physical axes and named seed samples. Sex controls identity, not mesh selection. */
+/** Anatomy depends only on physical axes and named seed samples. Masculinity determines sex and body shape on the shared mesh. */
 export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const dna=parseCharacterDNA(input), sample=(name:string)=>identitySample(dna.seed,`human.${name}`);
-    const masculinity=dna.morphology?.masculinity??.5;
+    const masculinity=dna.morphology?.masculinity??(dna.sex==='male'?.51:.49);
     const height=dna.morphology?.height??(1.65+sample('height')*.25);
     const adultAge=Math.max(18,dna.age);
     const signed=(v:number)=>[Math.min(1,Math.max(0,v)),Math.min(1,Math.max(0,-v))];
@@ -24,5 +24,6 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
 export const humanPresets={
     heavy:{physicality:.95,agility:.15,masculinity:.75},
     nimble:{physicality:.2,agility:.95,masculinity:.35},
-    balanced:{physicality:.5,agility:.5,masculinity:.5},
+    balanced:{physicality:.5,agility:.5,masculinity:.51},
 } as const;
+

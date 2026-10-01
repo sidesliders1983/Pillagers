@@ -38,6 +38,7 @@ def morph(point, key):
     side = 1 if x>=0 else -1
     head = band(z,1.67,.14)
     shoulder = band(z,1.39,.13)
+    chest = band(z,1.27,.16)
     waist = band(z,1.03,.16)
     hips = band(z,.89,.14)
     # Wide transition keeps adjacent vertices moving together, including elbows
@@ -48,8 +49,13 @@ def morph(point, key):
     cx=side*(armness*max(0,.235+(1.4-z)*.32)+(1-armness)*legness*(.21-.08*smooth(.10,.90,z))*smooth(0,.10,abs(x)))
     if key in ('Masculine','Feminine'):
         sign=1 if key=='Masculine' else -1
-        x *= 1+sign*(.15*shoulder-.10*hips+.055*head+.04*waist)
-        y *= 1+sign*(.12*shoulder-.06*hips+.035*head)
+        x *= 1+sign*(.15*shoulder+.06*chest-.13*hips+.055*head+.06*waist)
+        y *= 1+sign*(.12*shoulder+.06*chest-.06*hips+.035*head)
+        if key=='Feminine':
+            # Two modest chest lobes under the fitted shirt, with a smooth sternum
+            # transition and no separate garment volume or additional topology.
+            lobes=band(x,.085,.065)+band(x,-.085,.065)
+            y-=.06*band(z,1.29,.085)*lobes*smooth(-.015,.08,-y)
     elif key in ('Powerful','Slight'):
         sign=1 if key=='Powerful' else -1
         # Expand limb girth about its centre line, not distance from the body centre.

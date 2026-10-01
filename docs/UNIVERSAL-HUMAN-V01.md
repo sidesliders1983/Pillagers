@@ -1,6 +1,6 @@
 # Universal Human v0.1 (issue #7)
 
-Character Lab uses one image-derived adult base per LOD, one `PillagersHumanRig` contract and one set of morph names. Sex is identity data, independent of the continuous masculinity slider. There are no alternate male/female body assets.
+Character Lab uses one image-derived adult base per LOD, one `PillagersHumanRig` contract and one set of morph names. Sex derives from the Femininity ↔ Masculinity slider: 0–49% masculinity is female, 51–100% is male, and exactly 50% is excluded. Feminine forms narrow the shoulders, grow the chest and widen the hips; masculine forms broaden the shoulders, chest and waist. There are no alternate male/female body assets.
 
 ## Reproduction
 
@@ -12,7 +12,7 @@ Character Lab uses one image-derived adult base per LOD, one `PillagersHumanRig`
 
 ## DNA and deformation
 
-Optional `morphology: {masculinity: 0..1, height: 1.45..2.10}` round-trips through JSON. Legacy DNA defaults to neutral masculinity and a named deterministic height sample. Legacy ages below 18 are shown as adult anatomy; the editor only offers adult ages. Existing world mannequin behavior is unchanged.
+Optional `morphology: {masculinity: 0..1, height: 1.45..2.10}` round-trips through JSON. Legacy DNA defaults to 51% masculinity for male and 49% for female and a named deterministic height sample. Legacy ages below 18 are shown as adult anatomy; the editor only offers adult ages. Existing world mannequin behavior is unchanged.
 
 Physicality and agility compose independently. Height shape keys include a modest torso/leg proportion adjustment in addition to stature. Age shifts posture and mass gently. Named seed samples control small head width/length, jaw, nose, leg ratio, shoulder slope and asymmetry variations; these have smaller amplitudes than the explicit axes. Intelligence, Cunning and Temperament do not enter the anatomy profile.
 
@@ -25,3 +25,4 @@ The reference was supplied by the user. Its neutral bald body, fitted shirt and 
 This pipeline applies skinning to the image-generated, decimated topology. It does not claim artist-authored deformation loops or automatic production retopology. Joint deformation needs visual acceptance before closing #7; the generated shirt hem must also be checked for unwanted volume.
 
 Validated output: 7,999 / 3,999 / 1,199 triangles. Browser checks cover all 27 LOD/preset/animation combinations, pinned comparison, height/masculinity extremes, mobile layout/touch and the existing import/export/naming/heritage flows. GLB tests also reject hand vertices bound to leg bones and discontinuous build morphs. Instance tests ensure inverse-bind arrays never alter the cached source or another character, and per-instance bone textures are released. Hands are single rigid units with no finger bones, as requested. The exported clips are prototype motion loops; detailed locomotion polish remains separate from this integration.
+

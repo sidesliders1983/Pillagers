@@ -33,7 +33,7 @@ export class CharacterLab {
         else if(action==='idle'||action==='walk'||action==='run')this.preview.setAnimation(action==='idle'?'Idle':action==='walk'?'Walk':'Run');
         else if(action==='lod0'||action==='lod1'||action==='lod2')this.preview.setLOD(Number(action.slice(-1)));
         else if(action==='heavy'||action==='nimble'||action==='balanced'){
-            const preset=humanPresets[action];this.dna={...this.dna,traits:{...this.dna.traits,physicality:preset.physicality,agility:preset.agility},morphology:{masculinity:preset.masculinity,height:this.dna.morphology?.height??1.8}};this.update();
+            const preset=humanPresets[action];this.dna=parseCharacterDNA({...this.dna,traits:{...this.dna.traits,physicality:preset.physicality,agility:preset.agility},morphology:{masculinity:preset.masculinity,height:this.dna.morphology?.height??1.8}});this.update();
         }
         else if(action==='import'){const dna=parseCharacterDNA(JSON.parse(this.ui.getJSON()));this.dna=dna;this.update();this.ui.status('DNA imported; heritage normalized to 100%.');}
         else if(action==='copy'){
