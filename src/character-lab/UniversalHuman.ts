@@ -4,6 +4,7 @@ import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { HumanProfile } from '../characters/UniversalHumanProfile';
 import { SoftBodySpring } from './SoftBodySpring';
 import { appearanceModules, clothingLayer, disposeModules } from './AppearanceModules';
+import { skinTexture } from './SkinTint';
 
 export type HumanAnimation='Idle'|'Walk'|'Run';
 /** Per-character skeleton and materials; shared immutable source geometry and textures. */
@@ -15,6 +16,8 @@ export class UniversalHuman {
     private rest=new Map<Bone,Vector3>();
     private restRotation=new Map<Bone,Quaternion>();
     private materials:Material[]=[];
+    private sourceMaps=new Map<MeshStandardMaterial,import('three').Texture>();
+    private tintMaps:import('three').Texture[]=[];
     private animation:HumanAnimation='Idle';
     private belly=new SoftBodySpring(55,9);
     private breasts=new SoftBodySpring(100,12);
@@ -35,7 +38,7 @@ export class UniversalHuman {
                 // Skeleton.clone shares the inverse array. Detach it before adapting
                 // bind matrices, or the pinned character and cached source are changed too.
                 mesh.skeleton.boneInverses=mesh.skeleton.boneInverses.map(matrix=>matrix.clone());
-                const copy=(material:Material)=>{const m=material.clone();if((m as MeshStandardMaterial).isMeshStandardMaterial)(m as MeshStandardMaterial).flatShading=true;this.materials.push(m);return m;};
+                const copy=(material:Material)=>{const m=material.clone();if((m as MeshStandardMaterial).isMeshStandardMaterial){const standard=m as MeshStandardMaterial;standard.flatShading=true;if(standard.map)this.sourceMaps.set(standard,standard.map);}this.materials.push(m);return m;};
                 mesh.material=Array.isArray(mesh.material)?mesh.material.map(copy):copy(mesh.material);
                 this.meshes.push(mesh);
             }
@@ -44,6 +47,7 @@ export class UniversalHuman {
         this.mixer=new AnimationMixer(body);this.apply(profile,skinTone);this.setAnimation('Idle');
     }
     apply(profile:HumanProfile,skinTone:string){
+        for(const texture of this.tintMaps)texture.dispose();this.tintMaps=[];
         this.disposeAppearance();this.modules=new Group();this.motion=profile.motion;
         this.root.userData.universalHumanProfile=profile;
         this.softness={belly:profile.weights.Overweight,breasts:profile.weights.Feminine};
@@ -67,8 +71,13 @@ export class UniversalHuman {
             mesh.frustumCulled=false;
             // Albedo stays on the image-generated material. Heritage gently tints the whole base surface.
             const mats=Array.isArray(mesh.material)?mesh.material:[mesh.material];
-            const tint=new Color(skinTone).lerp(new Color('#ffffff'),.60);
-            for(const mat of mats)if((mat as MeshStandardMaterial).isMeshStandardMaterial)(mat as MeshStandardMaterial).color.copy(tint);
+            for(const mat of mats)if((mat as MeshStandardMaterial).isMeshStandardMaterial){
+                const standard=mat as MeshStandardMaterial,source=this.sourceMaps.get(standard);
+                const tinted=source?skinTexture(source,skinTone):null;
+                standard.map=tinted??source??null;standard.color.set('#ffffff');
+                if(tinted)this.tintMaps.push(tinted);
+                standard.needsUpdate=true;
+            }
         }
         this.root.updateMatrixWorld(true);
         const skeletons=new Set(this.meshes.map(mesh=>mesh.skeleton));
@@ -128,7 +137,7 @@ export class UniversalHuman {
         if(this.garment){this.garment.geometry.dispose();(this.garment.material as Material).dispose();this.garment.removeFromParent();this.garment=null;}
         disposeModules(this.modules);
     }
-    dispose(){this.disposeAppearance();this.mixer.stopAllAction();this.mixer.uncacheRoot(this.mixer.getRoot());for(const skeleton of new Set(this.meshes.map(mesh=>mesh.skeleton)))skeleton.dispose();for(const material of this.materials)material.dispose();}
+    dispose(){this.disposeAppearance();for(const texture of this.tintMaps)texture.dispose();this.mixer.stopAllAction();this.mixer.uncacheRoot(this.mixer.getRoot());for(const skeleton of new Set(this.meshes.map(mesh=>mesh.skeleton)))skeleton.dispose();for(const material of this.materials)material.dispose();}
 }
 
 
