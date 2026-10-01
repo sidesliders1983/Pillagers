@@ -31,7 +31,8 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const Overweight=Math.max(0,weightDeviation),Underweight=Math.max(0,-weightDeviation);
     const signed=(v:number)=>[Math.min(1,Math.max(0,v)),Math.min(1,Math.max(0,-v))];
     const [Masculine,Feminine]=signed((masculinity-.5)*2);
-    const [Powerful,Slight]=signed((dna.traits.physicality-.5)*2);
+    // Keep legacy DNA compatible without applying Physicality deformation.
+    const Powerful=0,Slight=0;
     const [Agile,Grounded]=signed((dna.traits.agility-.5)*2);
     const [Tall,Short]=signed((height-1.44)/(height>=1.44?.24:.28));
     return {seed:dna.seed,height,adultAge,masculinity,weightDeviation,age:dna.age,stage:dna.age<13?"child":dna.age<18?"teen":dna.age>50?"elder":"adult",appearance:characterAppearance(dna),appearanceFit:dna.appearanceFit??{hair:1,beard:1,clothing:1},motion:{cadence:(1+Child*.2-Math.max(0,dna.age-50)/50*.25)*(1+(dna.traits.agility-.5)*.12),stride:1-Child*.55-Math.max(0,dna.age-50)/50*.3,footfall:(.7+dna.traits.physicality*.6)*(1-Child*.45)},weights:{Masculine:Masculine*maturity,Feminine:Feminine*maturity,Breasts:Feminine*(1-Child)**2,Powerful:Powerful*maturity,Slight:Slight*maturity,Agile:Agile*maturity,Grounded:Grounded*maturity,Tall,Short,Overweight:Overweight*(1-Child*.5),Underweight:Underweight*(1-Child*.5),Age:Math.max(0,(adultAge-50)/50),

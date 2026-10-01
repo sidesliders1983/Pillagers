@@ -32,7 +32,7 @@ export class CharacterLabUI {
                     <div class="lab-button-row"><button data-action="reroll">Reroll seed</button><button data-action="randomize">Randomize character</button></div>
                     <div class="lab-naming"><h2>Personal name</h2><strong id="lab-name"></strong><label>Name culture (dominant heritage)<select id="lab-culture" disabled>${heritageKeys.map(key=>`<option value="${key}">${heritageLabels[key]}</option>`).join('')}</select></label><label>Name variation seed<input id="lab-name-seed" type="number" min="0" max="4294967295" step="1"></label><button data-action="reroll-name">Reroll name</button><p class="lab-note">The largest heritage share determines the naming grammar; compatible minority ingredients add subtle variation. Name variation leaves appearance unchanged.</p><details><summary>Name derivation</summary><pre id="lab-name-derivation"></pre></details></div>
                     <div class="lab-section-heading"><h2>02 <span>Core traits</span></h2><span class="lab-badge">5 AXES</span></div>
-                    ${traitKeys.map(key=>`<div class="lab-slider"><label for="trait-${key}">${traitInfo[key].label}<output id="value-${key}"></output></label><input id="trait-${key}" data-trait="${key}" type="range" min="0" max="100" step="1"><div class="lab-extremes"><span>${traitInfo[key].low}</span><span>${traitInfo[key].high}</span></div></div>`).join('')}
+                    ${traitKeys.filter(key=>key!=='physicality').map(key=>`<div class="lab-slider"><label for="trait-${key}">${traitInfo[key].label}<output id="value-${key}"></output></label><input id="trait-${key}" data-trait="${key}" type="range" min="0" max="100" step="1"><div class="lab-extremes"><span>${traitInfo[key].low}</span><span>${traitInfo[key].high}</span></div></div>`).join('')}
                     <p class="lab-note">Traits express disposition. Intelligence and Cunning do not change facial anatomy.</p>
                     <button class="lab-text-button" data-action="defaults">Reset DNA to defaults</button>
                 </section>
@@ -102,7 +102,7 @@ export class CharacterLabUI {
         (document.getElementById('fit-hair') as HTMLInputElement).disabled=!availableHairStyles.includes(body.appearance.hairStyle);
         text('fit-beard-value',body.appearance.beardStyle==='none'?'Not applicable':'Reference asset pending');
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
-        for(const key of traitKeys){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
+        for(const key of traitKeys.filter(key=>key!=='physicality')){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
         for(const key of heritageKeys){input(`heritage-${key}`,String(dna.heritage[key]*100));text(`heritage-value-${key}`,`${(dna.heritage[key]*100).toFixed(1)}%`);}
         const dominant=heritageKeys.reduce((a,b)=>dna.heritage[a]>=dna.heritage[b]?a:b);
         text('lab-dominant',`${heritageLabels[dominant]} ${Math.round(dna.heritage[dominant]*100)}% · mixed heritage`);
@@ -120,5 +120,4 @@ export class CharacterLabUI {
     selectJSON(){(document.querySelector('.lab-json') as HTMLDetailsElement).open=true;const area=document.getElementById('lab-json') as HTMLTextAreaElement;area.focus();area.select();}
     status(message:string,error=false){const status=document.getElementById('lab-status')!;status.textContent=message;status.classList.toggle('is-error',error);}
 }
-
 

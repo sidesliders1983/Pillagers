@@ -11,6 +11,14 @@ test('growth landmarks are continuous, monotone and finish at eighteen',()=>{
     }
     assert.equal(childGrowthWeight(90),0);
 });
+test('legacy Physicality cannot deform child adult or elder anatomy',()=>{
+    for(const age of [6,14,32,75]){
+        const dna={...defaultDNA(),age};
+        const low=universalHumanProfile({...dna,traits:{...dna.traits,physicality:0}});
+        const high=universalHumanProfile({...dna,traits:{...dna.traits,physicality:1}});
+        assert.deepEqual(low.weights,high.weights);
+    }
+});
 test('adult anatomy is deterministic and independent of cunning, temperament and identity sex',()=>{
     const dna={...defaultDNA(),morphology:{masculinity:.51,height:1.44}},first=universalHumanProfile(dna);
     assert.deepEqual(first,universalHumanProfile(dna));
@@ -23,7 +31,7 @@ test('physicality and agility compose independently; explicit morphology survive
     const dna={...defaultDNA(),morphology:{masculinity:.95,height:1.6},traits:{...defaultDNA().traits,physicality:1,agility:1}};
     assert.deepEqual(parseCharacterDNA(JSON.parse(JSON.stringify(dna))),dna);
     const profile=universalHumanProfile(dna);
-    assert.equal(profile.weights.Powerful,1);assert.equal(profile.weights.Agile,1);assert.ok(Math.abs(profile.weights.Tall-2/3)<1e-10);
+    assert.equal(profile.weights.Powerful,0);assert.equal(profile.weights.Agile,1);assert.ok(Math.abs(profile.weights.Tall-2/3)<1e-10);
     const clone=cloneDNA(dna);clone.morphology.height=1.5;assert.equal(dna.morphology.height,1.6);
     assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:NaN,height:1.44}}));
     assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:.5,height:0}}));
