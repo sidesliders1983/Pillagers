@@ -26,6 +26,10 @@ A separate simple waist wrap demonstrates the clothing hook. It copies the base'
 
 Character Lab reports life stage, assigned hair/beard, colour and grey percentage. JSON continues to store the underlying DNA only. Pin comparison supports age and morphology comparisons without appearance controls. Export character GLB includes the current morphology, appearance modules, waist wrap, skeleton and the three original clips. Root extras include the resolved profile and runtime motion parameters; consumers must apply those parameters for the same age-adjusted playback as Character Lab.
 
+## Reference-derived replacement pipeline
+
+The first appearance pass used procedural interpretations, not image-to-3D assets. They remain temporary. A local background queue now takes direct original-sheet crops through Pixal3D, candidate hair extraction and static optimization (1600/800/300 triangles). Candidate colour extraction and head fit require visual review before these assets replace the procedural styles. Per-style input/provenance/status/logs live in scratch/appearance-v02. No automatic publication occurs. The temporary common scalp cap now has a conservative circumscribed fit plus actual skull-coverage raycast checks on all LODs.
+
 ## Validation
 
 Unit tests verify determinism, eligibility at ages 17/18, all hairstyles for both sexes, stable underlying heritage colour and monotonic greying. Binary GLB checks verify all morph keys, rigid head/hands/feet, skinning, sockets and clip contracts. Actual posed-vertex checks cover ages 6/14/35/90, masculinity 0/1, high Physicality/Agility, all LODs and twelve phases each of Walk/Run. They also verify attachment parent, shared hair/beard colour, module triangle budget and clothing skeleton reuse.
