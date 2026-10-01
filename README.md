@@ -45,7 +45,7 @@ Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same rou
 
 Personal names now derive deterministically from heritage, sex, local culture and seed. The dominant heritage automatically chooses the naming culture; reroll only the name while preserving appearance. Naming configuration travels with DNA JSON and pinned comparisons. See [Naming v0.2](docs/CHARACTER-NAMING-V02.md) for curated patterns, patronymics and the historical/art-direction boundaries.
 
-The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. The Lab has one shared adult rig with continuous masculinity, height, physicality/agility and seed variation, three LODs, Idle/Walk/Run and Heavy/Nimble/Balanced presets. Hands have one bone each and attachment sockets, without finger rigging. See [Universal Human pipeline and validation](docs/UNIVERSAL-HUMAN-V01.md) and [DNA design](docs/CHARACTER-LAB-V01.md). Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
+The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. In Character Lab, Intelligence also reduces a seeded caricature weight deviation: low values allow an exaggerated belly or underweight; high values approach balanced body weight. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. The Lab has one shared adult rig with continuous masculinity, height, physicality/agility and seed variation, three LODs, Idle/Walk/Run and Heavy/Nimble/Balanced presets. Hands have one bone each and attachment sockets, without finger rigging. See [Universal Human pipeline and validation](docs/UNIVERSAL-HUMAN-V01.md) and [DNA design](docs/CHARACTER-LAB-V01.md). Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
 
 ## Explore
 
@@ -113,3 +113,4 @@ The scriptable Blender character optimization benchmark and /asset-lab compariso
 ## UI language
 
 English is the default language for all user-facing UI: labels, buttons, help text, status messages and errors. Apply this rule to new features and edits across the world and all labs. Character names retain their generated cultural spelling.
+
