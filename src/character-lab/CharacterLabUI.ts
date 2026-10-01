@@ -3,6 +3,7 @@ import { Phenotype } from '../characters/Phenotype';
 import { heritageLabels } from '../characters/heritageProfiles';
 import { occupations, occupationScores, occupationFit, OccupationKey } from '../characters/occupationFit';
 import { characterName, fullName } from '../characters/naming/generateName';
+import { availableHairStyles } from './GeneratedHair';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 
 const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
@@ -45,7 +46,7 @@ export class CharacterLabUI {
                     <div class="lab-dimensions" id="lab-dimensions"></div>
                     <div class="lab-panel" aria-label="Appearance size ratios"><h2>Appearance size</h2>
                     ${Object.entries(appearanceFitLimits).map(([key,[min,max]])=>`<div class="lab-slider"><label for="fit-${key}">${key==='hair'?'Hair clearance':key[0].toUpperCase()+key.slice(1)+' ratio'} <output id="fit-${key}-value">100%</output></label><input id="fit-${key}" data-appearance-fit="${key}" type="range" min="${min*100}" max="${max*100}" value="100" step="1"></div>`).join('')}
-                    <p class="lab-note">Hair: 1.0 is the fitted baseline; higher values add space around the head. Clothing cannot shrink below the safe fit. Styles and colours follow the profile. Current modules are temporary pending reference asset fitting.</p></div>
+                    <p class="lab-note">Hair: 1.0 is the fitted baseline; higher values add space around the head. Clothing cannot shrink below the safe fit. Styles and colours follow the profile. Only generated reference assets are shown. Short and medium hair are available; other hair and beard assets are pending.</p></div>
                     <div class="lab-compare"><div><strong>Keep an identity beside you.</strong><p>Pin this character, then change a trait or reroll the seed.</p></div><button id="lab-pin" data-action="pin">Pin comparison</button><button id="lab-unpin" data-action="unpin" hidden>Remove</button></div>
                 </section>
                 <section class="lab-panel lab-results" aria-label="Heritage and occupation fit">
@@ -96,8 +97,10 @@ export class CharacterLabUI {
         const text=(id:string,value:string)=>{document.getElementById(id)!.textContent=value;};
         text('lab-sex',dna.sex==='female'?'Female':'Male');input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
         const body=universalHumanProfile(dna);input('lab-masculinity',String(body.masculinity*100));text('lab-masculinity-value',`${Math.round(body.masculinity*100)}% M`);text('lab-femininity-share',`Femininity ${Math.round((1-body.masculinity)*100)}%`);text('lab-masculinity-share',`Masculinity ${Math.round(body.masculinity*100)}%`);input('lab-height',String(body.height*100));text('lab-height-value',`${Math.round(body.height*100)} cm`);
-        for(const key of Object.keys(appearanceFitLimits) as (keyof AppearanceFit)[]){const value=body.appearanceFit[key];input(`fit-${key}`,String(value*100));text(`fit-${key}-value`,key==='hair'?`${value.toFixed(2)} � � +${Math.round((value-1)*100)}% head radius`:`${Math.round(value*100)}%`);}
-        (document.getElementById('fit-beard') as HTMLInputElement).disabled=body.appearance.beardStyle==='none';
+        for(const key of Object.keys(appearanceFitLimits) as (keyof AppearanceFit)[]){const value=body.appearanceFit[key];input(`fit-${key}`,String(value*100));text(`fit-${key}-value`,key==='hair'?`${value.toFixed(2)} × · +${Math.round((value-1)*100)}% head radius`:`${Math.round(value*100)}%`);}
+        (document.getElementById('fit-beard') as HTMLInputElement).disabled=true;
+        (document.getElementById('fit-hair') as HTMLInputElement).disabled=!availableHairStyles.includes(body.appearance.hairStyle);
+        text('fit-beard-value',body.appearance.beardStyle==='none'?'Not applicable':'Reference asset pending');
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
         for(const key of heritageKeys){input(`heritage-${key}`,String(dna.heritage[key]*100));text(`heritage-value-${key}`,`${(dna.heritage[key]*100).toFixed(1)}%`);}
@@ -106,7 +109,7 @@ export class CharacterLabUI {
         text('lab-current-label',`CURRENT · ${fullName(name)} · Seed ${dna.seed}`);text('lab-comparison-label',comparison?`PINNED · ${fullName(characterName(comparison))} · Seed ${comparison.seed}`:'');
         document.getElementById('lab-comparison-label')!.hidden=!comparison;document.getElementById('lab-unpin')!.hidden=!comparison;
         text('lab-pin',comparison?'Replace comparison':'Pin comparison');
-        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Adult target height</span><strong>${Math.round(body.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>Weight deviation</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${body.appearance.hairStyle}<small> / ${body.appearance.beardStyle}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
+        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Adult target height</span><strong>${Math.round(body.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>Weight deviation</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${body.appearance.hairStyle}<small>${availableHairStyles.includes(body.appearance.hairStyle)?' · reference asset':' · asset pending'} / ${body.appearance.beardStyle}${body.appearance.beardStyle==='none'?'':' · asset pending'}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
         const scores=occupationScores(dna.traits);
         text('lab-fit-summary',`${scores[0].label} currently fits best${comparison?' · dark ticks show the pinned character':''}.`);
         for(const {key,fit} of scores){text(`fit-value-${key}`,`${(fit*100).toFixed(1)}%`);document.getElementById(`fit-bar-${key}`)!.style.width=`${fit*100}%`;

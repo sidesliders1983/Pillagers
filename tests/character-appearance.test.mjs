@@ -56,25 +56,39 @@ test('appearance fit round-trips without changing profile style, colour or anato
 });
 
 
-test('hair clearance offsets every style outward without scaling module transforms',async()=>{
+test('reference hair is owned, tinted and offset for clearance; pending styles have no substitute',async()=>{
     const {Vector3}=await import('three');
+    const {GLTFLoader}=await import('three/addons/loaders/GLTFLoader.js');
+    const {readFileSync}=await import('node:fs');
+    const {createHash}=await import('node:crypto');
     const {appearanceModules,disposeModules}=load('../src/character-lab/AppearanceModules.ts');
-    const size=new Vector3(.24,.32,.26),delta=.24*.5*.3;
-    for(const hairStyle of hairStyles)for(const lod of [0,1,2]){
+    const size=new Vector3(.1992,.2397,.2189),delta=.1992*.5*.3;
+    for(const hairStyle of ['short','medium'])for(const lod of [0,1,2]){
+        const bytes=readFileSync(new URL(`../public/appearance/${hairStyle}/Hair_${hairStyle}_LOD${lod}.glb`,import.meta.url));
+        const provenance=JSON.parse(readFileSync(new URL(`../public/appearance/${hairStyle}/Hair_${hairStyle}_LOD${lod}.provenance.json`,import.meta.url)));
+        assert.equal(provenance.outputSha256,createHash('sha256').update(bytes).digest('hex'));
+        assert.equal(provenance.sourceProvenance.generatedBust.reference.redrawn,false);
+        assert.equal(provenance.sourceProvenance.generatedBust.generation.input.sha256,provenance.sourceProvenance.generatedBust.reference.inputSha256);
+        const asset=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
         const profile={...characterAppearance(defaultDNA()),hairStyle,beardStyle:'none'};
-        const base=appearanceModules(profile,size,lod),spaced=appearanceModules(profile,size,lod,{hair:1.3,beard:1,clothing:1});
-        assert.equal(base.children.length,spaced.children.length);
-        for(let m=0;m<base.children.length;m++){
-            const a=base.children[m],b=spaced.children[m];
-            assert.deepEqual(a.position,b.position);assert.deepEqual(a.scale,b.scale);
+        const base=appearanceModules(profile,size,lod,undefined,asset.scene),spaced=appearanceModules(profile,size,lod,{hair:1.3,beard:1,clothing:1},asset.scene);
+        const meshes=group=>{const out=[];group.traverse(o=>{if(o.isMesh)out.push(o)});return out;};
+        const aMeshes=meshes(base),bMeshes=meshes(spaced),sourceMeshes=meshes(asset.scene);
+        assert.ok(aMeshes.length>0);assert.equal(aMeshes.length,bMeshes.length);
+        for(let m=0;m<aMeshes.length;m++){
+            const a=aMeshes[m],b=bMeshes[m];
+            assert.notEqual(a.geometry,sourceMeshes[m].geometry);
+            assert.equal('#'+a.material.color.getHexString(),profile.color);
             const p=a.geometry.attributes.position,q=b.geometry.attributes.position;
             for(let i=0;i<p.count;i++){
-                const original=new Vector3().fromBufferAttribute(p,i).multiply(a.scale).add(a.position);
-                const moved=new Vector3().fromBufferAttribute(q,i).multiply(b.scale).add(b.position);
-                assert.ok(Math.abs(original.distanceTo(moved)-delta)<1e-7,`${hairStyle} LOD${lod} clearance`);
-                assert.ok(moved.length()>original.length());
+                const original=new Vector3().fromBufferAttribute(p,i),moved=new Vector3().fromBufferAttribute(q,i);
+                assert.ok(Math.abs(original.distanceTo(moved)-delta)<1e-6,`${hairStyle} LOD${lod} clearance`);
             }
         }
         disposeModules(base);disposeModules(spaced);
+    }
+    for(const hairStyle of ['long','tied','bun','braid']){
+        const modules=appearanceModules({...characterAppearance(defaultDNA()),hairStyle},size,0);
+        assert.equal(modules.children.length,0);assert.equal(modules.userData.hairAsset,'pending');
     }
 });

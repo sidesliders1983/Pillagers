@@ -5,6 +5,7 @@ import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { CharacterDNA } from '../characters/CharacterDNA';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
+import { hairAssetPath } from './GeneratedHair';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 export class CharacterPreview {
     private scene=new Scene();
@@ -14,6 +15,7 @@ export class CharacterPreview {
     private current:UniversalHuman|null=null;
     private comparison:UniversalHuman|null=null;
     private assets=new Map<number,Promise<GLTF>>();
+    private hairAssets=new Map<string,Promise<GLTF>>();
     private currentDNA:CharacterDNA|null=null;
     private comparisonDNA:CharacterDNA|null=null;
     private currentPhenotype:Phenotype|null=null;
@@ -23,7 +25,7 @@ export class CharacterPreview {
     private animation:HumanAnimation='Idle';
     private clock=new Clock();
     private observer:ResizeObserver;
-    constructor(canvas:HTMLCanvasElement,private report:(message:string,error?:boolean)=>void=()=>{}){
+    constructor(private canvas:HTMLCanvasElement,private report:(message:string,error?:boolean)=>void=()=>{}){
         this.scene.background=new Color('#dbe1d7');
         this.renderer=new WebGLRenderer({canvas,antialias:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
         this.renderer.toneMapping=ACESFilmicToneMapping;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=PCFSoftShadowMap;
@@ -38,25 +40,36 @@ export class CharacterPreview {
     setCharacter(phenotype:Phenotype,dna:CharacterDNA){this.currentDNA=dna;this.currentPhenotype=phenotype;void this.refresh();}
     setComparison(phenotype:Phenotype|null,dna:CharacterDNA|null=null){this.comparisonDNA=dna;this.comparisonPhenotype=phenotype;void this.refresh();this.resetView();}
     setLOD(lod:number){this.lod=lod;void this.refresh();}
-    setAnimation(animation:HumanAnimation){this.animation=animation;this.current?.setAnimation(animation);this.comparison?.setAnimation(animation);this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig`);}
+    setAnimation(animation:HumanAnimation){this.animation=animation;this.current?.setAnimation(animation);this.comparison?.setAnimation(animation);this.reportModel();}
     private async refresh(){
-        const revision=++this.revision;
+        const revision=++this.revision;this.canvas.dataset.ready='false';
         try{
             let promise=this.assets.get(this.lod);
             if(!promise){promise=new GLTFLoader().loadAsync(`/universal-human/UniversalHuman_LOD${this.lod}.glb`);this.assets.set(this.lod,promise);this.report('Loading Universal Human…');}
+            const profiles=[this.currentDNA,this.comparisonDNA].map(dna=>dna?universalHumanProfile(dna):null);
+            const hair=await Promise.all(profiles.map(async profile=>{
+                const path=profile?hairAssetPath(profile.appearance.hairStyle,this.lod):null;
+                if(!path)return null;
+                let promise=this.hairAssets.get(path);if(!promise){promise=new GLTFLoader().loadAsync(path).then(asset=>{asset.scene.userData.referenceAsset={style:profile?.appearance.hairStyle,path,provenance:path.replace('.glb','.provenance.json')};return asset;});this.hairAssets.set(path,promise);}
+                try{return (await promise).scene;}catch(error){this.hairAssets.delete(path);throw error;}
+            }));
             const asset=await promise;if(revision!==this.revision)return;
             for(const model of [this.current,this.comparison])if(model){this.scene.remove(model.root);model.dispose();}
-            this.current=this.currentDNA&&this.currentPhenotype?new UniversalHuman(asset,universalHumanProfile(this.currentDNA),this.currentPhenotype.skinTone):null;
-            this.comparison=this.comparisonDNA&&this.comparisonPhenotype?new UniversalHuman(asset,universalHumanProfile(this.comparisonDNA),this.comparisonPhenotype.skinTone):null;
+            this.current=this.currentDNA&&this.currentPhenotype?new UniversalHuman(asset,universalHumanProfile(this.currentDNA),this.currentPhenotype.skinTone,hair[0]):null;
+            this.comparison=this.comparisonDNA&&this.comparisonPhenotype?new UniversalHuman(asset,universalHumanProfile(this.comparisonDNA),this.comparisonPhenotype.skinTone,hair[1]):null;
             for(const model of [this.current,this.comparison])if(model){model.setAnimation(this.animation);this.scene.add(model.root);}
-            this.layout();this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig`);
+            this.layout();this.canvas.dataset.ready='true';this.reportModel();
         }catch(error){if(revision!==this.revision)return;this.assets.delete(this.lod);this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
+    }
+    private reportModel(){
+        const appearance=this.current?.root.getObjectByName('Appearance');
+        this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig · ${appearance?.userData.hairAsset==='reference-generated'?'reference hair':'hair asset pending'}${appearance?.userData.beardAsset==='pending'?' · beard asset pending':''}`);
     }
     private layout(){if(this.current)this.current.root.position.x=this.comparison?-1:0;if(this.comparison)this.comparison.root.position.x=1;}
     resetView(){const comparing=this.comparisonDNA!==null;this.controls.target.set(0,.95,0);this.camera.position.set(comparing?0:1.8,1.75,comparing?4.7:3.2);this.controls.update();}
     overview(){this.controls.target.set(0,.8,0);this.camera.position.set(5.5,6.5,9);this.controls.update();}
     async exportGLB(){
-        if(!this.current||!this.currentDNA)throw new Error('Wait until the character has loaded.');
+        if(!this.current||!this.currentDNA||this.canvas.dataset.ready!=='true')throw new Error('Wait until the character has loaded.');
         const model=this.current,dna=this.currentDNA,lod=this.lod;
         const position=model.root.position.clone();model.root.position.set(0,0,0);model.root.updateMatrixWorld(true);
         try{

@@ -14,18 +14,20 @@ for(const fit of [{hair:1.3,beard:.75,clothing:1.3},{hair:1,beard:1.5,clothing:1
 for(const age of [6,14,30,45,55,70,90])cases.push({label:`age-${age}`,dna:{...defaultDNA(),seed:7,age,morphology:{masculinity:.9,height:1.44}}});
 const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-webgl']});
 try{
-    const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    const page=await browser.newPage({viewport:{width:1024,height:768}}),errors=[];page.setDefaultTimeout(90000);page.on('pageerror',e=>errors.push(e.message));
     await page.goto((process.env.PROTOTYPE_URL||'http://127.0.0.1:4175')+'/character-lab');
     await page.waitForFunction(()=>document.querySelector('#lab-status')?.textContent.includes('one shared rig'));
     await page.locator('.lab-json > summary').click();
     for(const {dna,label} of cases){
         await page.locator('#lab-json').fill(JSON.stringify(dna));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();
-        await page.waitForTimeout(200);
+        await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true');
+        console.log('Checking',label);
         const p=JSON.parse(await page.locator('#lab-phenotype').textContent()).universalHuman;
         assert.deepEqual(p.appearance,characterAppearance(dna));
         assert.deepEqual(p.appearanceFit,dna.appearanceFit??{hair:1,beard:1,clothing:1});
         for(const lod of label.startsWith('age')?['LOD0','LOD1','LOD2']:['LOD0']){
             await page.getByRole('button',{name:lod,exact:true}).click();await page.waitForFunction(lod=>document.querySelector('#lab-status')?.textContent.includes(lod+' ·'),lod);
+            if(label.includes('short')||label.includes('medium'))await page.locator('#lab-preview').screenshot({path:`artifacts/reference-before-${label}-${lod}.png`});
             for(const clip of ['Idle','Walk','Run']){await page.getByRole('button',{name:clip,exact:true}).click();await page.waitForTimeout(150);}
             await page.getByRole('button',{name:'Idle',exact:true}).click();
             await page.locator('#lab-preview').screenshot({path:`artifacts/appearance-${label}-${lod}.png`});
