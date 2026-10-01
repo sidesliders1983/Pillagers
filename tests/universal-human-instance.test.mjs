@@ -11,6 +11,7 @@ test('morph bind matrices remain independent of source and pinned instances; own
     root.name='Root';head.name='Head';head.position.y=1.5;root.add(head);scene.add(root);
     head.userData.morphTranslations=JSON.stringify({Tall:[0,.3,0]});
     const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute([0,0,0,1,0,0,0,1,0],3));
+    geometry.morphAttributes.position=['BellyJiggle','BreastJiggle'].map(name=>{const a=new THREE.Float32BufferAttribute(Array(9).fill(0),3);a.name=name;return a;});
     const mesh=new THREE.SkinnedMesh(geometry,new THREE.MeshStandardMaterial());scene.add(mesh);scene.updateMatrixWorld(true);
     mesh.bind(new THREE.Skeleton([root,head]));
     const source=mesh.skeleton.boneInverses.map(matrix=>matrix.toArray());
@@ -23,6 +24,12 @@ test('morph bind matrices remain independent of source and pinned instances; own
     assert.deepEqual(own.skeleton.boneInverses.map(matrix=>matrix.toArray()),aInverses);
     assert.notDeepEqual(aInverses,source);
     assert.equal(own.geometry,geometry);assert.notEqual(own.material,mesh.material);
+    for(let i=0;i<30;i++)a.update(1/60);
+    assert.notEqual(own.morphTargetInfluences[0],0);
+    assert.equal(own.morphTargetInfluences[1],0);
+    assert.deepEqual(mesh.morphTargetInfluences,[0,0]);
+    let pinned;b.root.traverse(object=>{if(object.isSkinnedMesh)pinned=object;});
+    assert.deepEqual(pinned.morphTargetInfluences,[0,0]);
     own.skeleton.computeBoneTexture();let disposed=0;own.skeleton.boneTexture.addEventListener('dispose',()=>disposed++);
     a.dispose();b.dispose();assert.equal(disposed,1);
 });

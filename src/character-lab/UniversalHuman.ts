@@ -2,6 +2,7 @@ import { AnimationMixer, Bone, Color, Group, Material, MeshStandardMaterial, Ski
 import { GLTF } from 'three/addons/loaders/GLTFLoader.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { HumanProfile } from '../characters/UniversalHumanProfile';
+import { SoftBodySpring } from './SoftBodySpring';
 
 export type HumanAnimation='Idle'|'Walk'|'Run';
 /** Per-character skeleton and materials; shared immutable source geometry and textures. */
@@ -13,6 +14,12 @@ export class UniversalHuman {
     private rest=new Map<Bone,Vector3>();
     private materials:Material[]=[];
     private animation:HumanAnimation='Idle';
+    private belly=new SoftBodySpring(55,9);
+    private breasts=new SoftBodySpring(100,12);
+    private softness={belly:0,breasts:0};
+    private elapsed=0;
+    private previousPosition:Vector3|null=null;
+    private previousVelocity=new Vector3();
     constructor(private asset:GLTF,profile:HumanProfile,skinTone:string){
         const body=clone(asset.scene);this.root.add(body);
         body.traverse(object=>{
@@ -31,6 +38,8 @@ export class UniversalHuman {
         this.mixer=new AnimationMixer(body);this.apply(profile,skinTone);this.setAnimation('Idle');
     }
     apply(profile:HumanProfile,skinTone:string){
+        this.softness={belly:profile.weights.Overweight,breasts:profile.weights.Feminine};
+        this.belly.reset();this.breasts.reset();this.previousPosition=null;this.previousVelocity.set(0,0,0);
         // Restore neutral pose before adapting bind translations and rebuilding inverse bind matrices.
         this.mixer.stopAllAction();this.root.scale.y=1;
         for(const bone of this.bones){
@@ -62,8 +71,28 @@ export class UniversalHuman {
         if(!clip)throw new Error(`Universal Human is missing ${name}.`);
         this.animation=name;this.mixer.stopAllAction();this.mixer.clipAction(clip).reset().play();
     }
-    update(delta:number){this.mixer.update(delta);}
+    update(delta:number){
+        const dt=Math.max(0,Math.min(.1,delta));this.mixer.update(dt);this.elapsed+=dt;
+        if(!dt)return;
+        const position=this.root.getWorldPosition(new Vector3());
+        const velocity=this.previousPosition?position.clone().sub(this.previousPosition).divideScalar(dt):new Vector3();
+        const acceleration=velocity.clone().sub(this.previousVelocity).divideScalar(dt);
+        this.previousPosition=position;this.previousVelocity.copy(velocity);
+        const clip=this.asset.animations.find(clip=>clip.name===this.animation)!;
+        const amplitude=this.animation==='Run'?.65:this.animation==='Walk'?.38:.035;
+        const footfall=Math.sin(this.elapsed/clip.duration*Math.PI*4)*amplitude;
+        const inertia=Math.max(-.4,Math.min(.4,-acceleration.y*.015));
+        const belly=this.softness.belly?this.belly.step(dt,footfall+inertia)*this.softness.belly:0;
+        const breasts=this.softness.breasts?this.breasts.step(dt,footfall+inertia)*this.softness.breasts:0;
+        for(const mesh of this.meshes){
+            for(const [name,value] of [['BellyJiggle',belly],['BreastJiggle',breasts]] as const){
+                const index=mesh.morphTargetDictionary?.[name];
+                if(index!==undefined&&mesh.morphTargetInfluences)mesh.morphTargetInfluences[index]=value;
+            }
+        }
+    }
     dispose(){this.mixer.stopAllAction();this.mixer.uncacheRoot(this.mixer.getRoot());for(const skeleton of new Set(this.meshes.map(mesh=>mesh.skeleton)))skeleton.dispose();for(const material of this.materials)material.dispose();}
 }
+
 
 
