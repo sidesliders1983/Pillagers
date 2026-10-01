@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {Vector3} from 'three';
+import {Vector3,Raycaster,DoubleSide} from 'three';
 import {load} from './load-source.mjs';
 const {UniversalHuman}=load('../src/character-lab/UniversalHuman.ts');
 const {defaultDNA}=load('../src/characters/CharacterDNA.ts');
@@ -40,6 +40,18 @@ test('actual skinned vertices remain connected through walk/run around arms and 
             const garment=human.root.getObjectByName('ClothingWaistWrap');
             assert.ok(garment);assert.equal(garment.skeleton,meshes.find(o=>o!==garment).skeleton,'garment shares the body skeleton');
             human.update(0);human.root.updateMatrixWorld(true);
+            const cap=appearance.getObjectByName('HairCap'),side=cap.material.side;
+            cap.material.side=DoubleSide;
+            const origin=appearance.getWorldPosition(new Vector3()),ray=new Raycaster();
+            for(const mesh of meshes.filter(o=>o!==garment)){
+                const position=mesh.geometry.attributes.position;
+                for(let i=0;i<position.count;i++)if(position.getY(i)>1.69){
+                    const point=mesh.localToWorld(mesh.getVertexPosition(i,new Vector3())),direction=point.clone().sub(origin),distance=direction.length();
+                    ray.set(origin,direction.normalize());const hit=ray.intersectObject(cap,false)[0];
+                    assert.ok(hit&&hit.distance>distance+.001,`LOD${lod} age ${age}: scalp must stay inside the hair cap`);
+                }
+            }
+            cap.material.side=side;
             const rest=meshes.map(mesh=>Array.from({length:mesh.geometry.attributes.position.count},(_,i)=>mesh.getVertexPosition(i,new Vector3())));
             for(const clip of ['Walk','Run']){
                 human.setAnimation(clip);

@@ -1,4 +1,4 @@
-import { BufferGeometry, Float32BufferAttribute, Group, IcosahedronGeometry, Mesh, MeshStandardMaterial, SphereGeometry, Vector3, SkinnedMesh } from 'three';
+import { BufferGeometry, Float32BufferAttribute, Group, IcosahedronGeometry, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } from 'three';
 import { CharacterAppearance } from '../characters/CharacterAppearance';
 
 /** Small faceted modules in model axes, centred on the rigid head. */
@@ -14,7 +14,9 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
     for(let r=0;r<=rows;r++)for(let i=0;i<=segments;i++){
         const theta=i/segments*Math.PI*2,front=Math.max(0,Math.cos(theta));
         const phi=r/rows*(Math.PI*(.73-front*.32));
-        const ridge=1+.035*Math.sin(theta*3+r*1.7);
+        // Circumscribe the faceted skull, including polygon chord loss at each
+        // LOD. A cap based only on bounding-box radii could cut through temples.
+        const ridge=1.20/(Math.cos(Math.PI/segments)*Math.cos(Math.PI*.73/rows/2));
         vertices.push(Math.sin(theta)*Math.sin(phi)*rx*ridge,Math.cos(phi)*ry*ridge,Math.cos(theta)*Math.sin(phi)*rz*ridge);
         if(r<rows&&i<segments){const a=r*(segments+1)+i,b=a+segments+1;indices.push(a,b,a+1,a+1,b,b+1);}
     }
