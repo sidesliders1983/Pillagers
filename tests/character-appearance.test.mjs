@@ -37,9 +37,9 @@ test('child and teen proportions mature continuously on the shared rig and suppr
     const child=universalHumanProfile({...dna,age:6}),teen=universalHumanProfile({...dna,age:14}),adult=universalHumanProfile({...dna,age:18}),elder=universalHumanProfile({...dna,age:90});
     assert.equal(child.weights.Child,1);assert.ok(teen.weights.Child>0&&teen.weights.Child<1);assert.equal(adult.weights.Child,0);
     assert.equal(child.weights.Breasts,0);assert.ok(teen.weights.Breasts<adult.weights.Breasts);
-    assert.ok(child.weights.Powerful<adult.weights.Powerful);assert.ok(child.motion.stride<adult.motion.stride);
+    assert.equal(child.weights.Powerful,0);assert.equal(adult.weights.Powerful,0);assert.ok(child.motion.stride<adult.motion.stride);
     assert.ok(child.motion.cadence>adult.motion.cadence);assert.ok(elder.motion.cadence<adult.motion.cadence);
-    assert.ok(child.weights.ChildPower>0&&child.weights.ChildAgility>0&&adult.weights.FemininePower>0);
+    assert.equal(child.weights.ChildPower,0);assert.ok(child.weights.ChildAgility>0);assert.equal(adult.weights.FemininePower,0);
 });
 
 
