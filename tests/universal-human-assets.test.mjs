@@ -77,7 +77,8 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                     const offsets=values(json,binary,p.targets[target].POSITION);
                     for(const [bone,group] of rigidGroups){
                         const reference=offsets[group[0]];
-                        for(const i of group)assert.ok(Math.hypot(...offsets[i].map((v,j)=>v-reference[j]))<.000002,`${humanMorphNames[target]} must only translate ${bone}, never deform it (including seed 473419265)`);
+                        const scale=humanMorphNames[target]==='Child'?(bone.startsWith('Foot')?.69:bone.startsWith('Hand')?.65:1):1;
+                        for(const i of group)assert.ok(Math.hypot(...offsets[i].map((v,j)=>v-reference[j]-(scale-1)*(points[i][j]-points[group[0]][j])))<.000002,`${humanMorphNames[target]} must preserve ${bone} shape; only age may uniformly scale it`);
                     }
                 }
                 const fat=values(json,binary,p.targets[humanMorphNames.indexOf('Overweight')].POSITION);

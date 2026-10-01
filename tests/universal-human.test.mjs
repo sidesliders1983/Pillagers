@@ -2,7 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {load} from './load-source.mjs';
 const {defaultDNA,parseCharacterDNA,cloneDNA,sexFromMasculinity,nextMasculinity}=load('../src/characters/CharacterDNA.ts');
-const {universalHumanProfile,humanMorphNames}=load('../src/characters/UniversalHumanProfile.ts');
+const {universalHumanProfile,humanMorphNames,childGrowthWeight}=load('../src/characters/UniversalHumanProfile.ts');
+test('growth landmarks are continuous, monotone and finish at eighteen',()=>{
+    assert.deepEqual([6,9,12,15,18].map(childGrowthWeight),[1,.72,.43,.16,0]);
+    for(let age=6;age<18;age+=.1){
+        assert.ok(childGrowthWeight(age)>=childGrowthWeight(age+.1));
+        assert.ok(Math.abs(childGrowthWeight(age)-childGrowthWeight(age+.001))<.001);
+    }
+    assert.equal(childGrowthWeight(90),0);
+});
 test('adult anatomy is deterministic and independent of cunning, temperament and identity sex',()=>{
     const dna={...defaultDNA(),morphology:{masculinity:.51,height:1.44}},first=universalHumanProfile(dna);
     assert.deepEqual(first,universalHumanProfile(dna));

@@ -4,6 +4,16 @@ import { identitySample } from './seededRandom';
 
 export const humanMorphNames = ['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle','Child','ChildPower','ChildAgility','FemininePower','MasculineAgility','TallSlight','ElderHeavy'] as const;
 export type HumanMorph = typeof humanMorphNames[number];
+/** Artistic growth landmarks, not a clinical prediction of an individual. */
+export function childGrowthWeight(age:number):number {
+    const landmarks=[[6,1],[9,.72],[12,.43],[15,.16],[18,0]];
+    if(age<=6)return 1;
+    for(let i=1;i<landmarks.length;i++)if(age<landmarks[i][0]){
+        const [a,x]=landmarks[i-1],[b,y]=landmarks[i],t=(age-a)/(b-a);
+        return x+(y-x)*t;
+    }
+    return 0;
+}
 export type HumanProfile = { seed:number; height:number; adultAge:number; masculinity:number; weightDeviation:number; age:number; stage:string; appearance:CharacterAppearance; appearanceFit:AppearanceFit; motion:{cadence:number;stride:number;footfall:number}; weights:Record<HumanMorph,number> };
 
 /** Anatomy depends only on physical axes and named seed samples. Masculinity determines sex and body shape on the shared mesh. */
@@ -12,7 +22,7 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const masculinity=dna.morphology?.masculinity??(dna.sex==='male'?.51:.49);
     const height=dna.morphology?.height??((1.65+sample('height')*.25)*.8);
     const adultAge=Math.max(18,dna.age);
-    const Child=Math.max(0,Math.min(1,(18-dna.age)/12)),maturity=1-Child*.85;
+    const Child=childGrowthWeight(dna.age),maturity=1-Child*.85;
     // Fictional caricature rule: intelligence reduces susceptibility; a stable
     // seed sample chooses the direction, biased toward a large belly.
     const tendency=sample('weightTendency');

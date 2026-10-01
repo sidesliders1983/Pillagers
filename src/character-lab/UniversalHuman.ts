@@ -98,8 +98,12 @@ export class UniversalHuman {
         this.mixer.timeScale=this.motion.cadence;
     }
     update(delta:number){
+        for(const bone of this.bones)bone.quaternion.copy(this.restRotation.get(bone)!);
         const dt=Math.max(0,Math.min(.1,delta));this.mixer.update(dt);this.elapsed+=dt;
-        for(const bone of this.bones)if(/^(UpperLeg|LowerLeg|UpperArm|LowerArm)_/.test(bone.name))bone.quaternion.slerp(this.restRotation.get(bone)!,1-this.motion.stride);
+        for(const bone of this.bones)if(/^(UpperLeg|LowerLeg|UpperArm|LowerArm)_/.test(bone.name)){
+            const arm=/Arm_/.test(bone.name),amplitude=arm? this.motion.stride+.08*(1-this.motion.stride):this.motion.stride;
+            bone.quaternion.slerp(this.restRotation.get(bone)!,1-amplitude);
+        }
         if(!dt)return;
         const position=this.root.getWorldPosition(new Vector3());
         const velocity=this.previousPosition?position.clone().sub(this.previousPosition).divideScalar(dt):new Vector3();
