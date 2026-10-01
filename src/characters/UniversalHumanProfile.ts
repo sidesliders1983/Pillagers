@@ -9,7 +9,7 @@ export type HumanProfile = { height:number; adultAge:number; masculinity:number;
 export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const dna=parseCharacterDNA(input), sample=(name:string)=>identitySample(dna.seed,`human.${name}`);
     const masculinity=dna.morphology?.masculinity??(dna.sex==='male'?.51:.49);
-    const height=dna.morphology?.height??(1.65+sample('height')*.25);
+    const height=dna.morphology?.height??((1.65+sample('height')*.25)*.8);
     const adultAge=Math.max(18,dna.age);
     // Fictional caricature rule: intelligence reduces susceptibility; a stable
     // seed sample chooses the direction, biased toward a large belly.
@@ -21,16 +21,9 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const [Masculine,Feminine]=signed((masculinity-.5)*2);
     const [Powerful,Slight]=signed((dna.traits.physicality-.5)*2);
     const [Agile,Grounded]=signed((dna.traits.agility-.5)*2);
-    const [Tall,Short]=signed((height-1.8)/(height>=1.8?.3:.35));
-    return {height,adultAge,masculinity,weightDeviation,weights:{Masculine,Feminine,Powerful,Slight,Agile,Grounded,Tall,Short,Overweight,Underweight,Age:Math.max(0,(adultAge-40)/60),
+    const [Tall,Short]=signed((height-1.44)/(height>=1.44?.24:.28));
+    return {height,adultAge,masculinity,weightDeviation,weights:{Masculine,Feminine,Powerful,Slight,Agile,Grounded,Tall,Short,Overweight,Underweight,Age:Math.max(0,(adultAge-50)/50),
         HeadWidth:(sample('headWidth')-.5)*.6,HeadLength:(sample('headLength')-.5)*.6,Jaw:(sample('jaw')-.5)*.6,Nose:(sample('nose')-.5)*.6,
         LegRatio:(sample('legRatio')-.5)*.5,ShoulderSlope:(sample('shoulderSlope')-.5)*.4,Asymmetry:(sample('asymmetry')-.5)*.35}};
 }
-
-export const humanPresets={
-    heavy:{physicality:.95,agility:.15,masculinity:.75},
-    nimble:{physicality:.2,agility:.95,masculinity:.35},
-    balanced:{physicality:.5,agility:.5,masculinity:.51},
-} as const;
-
 

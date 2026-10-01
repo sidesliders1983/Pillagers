@@ -20,7 +20,14 @@ const assert=require('node:assert/strict');
         await slider('#lab-seed',3);await slider('#trait-intelligence',0);
         const thin=await profile();assert.ok(thin.weights.Underweight>.65);assert.equal(thin.weights.Overweight,0);
         await page.waitForTimeout(600);await page.locator('#lab-preview').screenshot({path:'artifacts/human-underweight.png'});
+        await slider('#trait-intelligence',100);await slider('#lab-masculinity',0);
+        await page.waitForTimeout(500);await page.locator('#lab-preview').screenshot({path:'artifacts/human-feminine.png'});
+        await slider('#lab-age',100);assert.equal((await profile()).weights.Age,1);
+        await page.waitForTimeout(500);await page.locator('#lab-preview').screenshot({path:'artifacts/human-slouch.png'});
+        assert.equal(await page.getByRole('button',{name:'Heavy',exact:true}).count(),0);
+        assert.equal(await page.locator('#lab-height').getAttribute('max'),'160');
         assert.deepEqual(errors,[]);console.log('PASS: seeded overweight/underweight, intelligence balance, independent muscle axis and pinned comparison.');
     } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
+
 

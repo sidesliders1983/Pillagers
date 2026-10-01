@@ -5,7 +5,7 @@ import { dominantHeritage } from '../characters/CharacterDNA';
 import { generateCharacterDNA } from '../characters/generateCharacterDNA';
 import { CharacterPreview } from './CharacterPreview';
 import { CharacterLabUI, LabAction } from './CharacterLabUI';
-import { humanPresets } from '../characters/UniversalHumanProfile';
+
 export class CharacterLab {
     private dna=defaultDNA();
     private comparison:CharacterDNA|null=null;
@@ -32,9 +32,6 @@ export class CharacterLab {
         else if(action==='overview')this.preview.overview();
         else if(action==='idle'||action==='walk'||action==='run')this.preview.setAnimation(action==='idle'?'Idle':action==='walk'?'Walk':'Run');
         else if(action==='lod0'||action==='lod1'||action==='lod2')this.preview.setLOD(Number(action.slice(-1)));
-        else if(action==='heavy'||action==='nimble'||action==='balanced'){
-            const preset=humanPresets[action];this.dna=parseCharacterDNA({...this.dna,traits:{...this.dna.traits,physicality:preset.physicality,agility:preset.agility},morphology:{masculinity:preset.masculinity,height:this.dna.morphology?.height??1.8}});this.update();
-        }
         else if(action==='import'){const dna=parseCharacterDNA(JSON.parse(this.ui.getJSON()));this.dna=dna;this.update();this.ui.status('DNA imported; heritage normalized to 100%.');}
         else if(action==='copy'){
             const json=JSON.stringify(this.dna,null,2);
@@ -45,3 +42,4 @@ export class CharacterLab {
         }
     }
 }
+
