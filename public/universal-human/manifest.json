@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "rig": "PillagersHumanRig",
+  "deformBones": 26,
+  "sockets": [
+    "weapon_R",
+    "weapon_L",
+    "shield",
+    "back",
+    "hip",
+    "head"
+  ],
+  "morphs": [
+    "Masculine",
+    "Feminine",
+    "Powerful",
+    "Slight",
+    "Agile",
+    "Grounded",
+    "Tall",
+    "Short",
+    "Age",
+    "HeadWidth",
+    "HeadLength",
+    "Jaw",
+    "Nose",
+    "LegRatio",
+    "ShoulderSlope",
+    "Asymmetry"
+  ],
+  "clips": [
+    "Idle",
+    "Walk",
+    "Run"
+  ],
+  "lods": [
+    {
+      "file": "UniversalHuman_LOD0.glb",
+      "triangles": 7999,
+      "vertices": 23997,
+      "bytes": 5215608,
+      "sha256": "5b8a0e9b1f0ebb52fba074c35770688397d377f79b27d7f3b15696bf1933272a"
+    },
+    {
+      "file": "UniversalHuman_LOD1.glb",
+      "triangles": 3999,
+      "vertices": 11997,
+      "bytes": 2677856,
+      "sha256": "026b6cee3263d2b085c0a6d50b741a762feb557eaa52a5fdba04892c2f578d0b"
+    },
+    {
+      "file": "UniversalHuman_LOD2.glb",
+      "triangles": 1199,
+      "vertices": 3597,
+      "bytes": 860344,
+      "sha256": "15707aa96782189dcc8a699c8d32d6bcad6c1fbb225b7993bf368da13447311e"
+    }
+  ]
+}

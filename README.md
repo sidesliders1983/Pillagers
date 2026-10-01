@@ -39,13 +39,13 @@ Use `http://<computer-Wi-Fi-IP>:5175/` (development) or `http://<computer-Wi-Fi-
 
 Mobile controls: tap a location to move the camera center there; swipe horizontally to rotate around that center, vertically to adjust the orbit elevation. Pinch fingers together to zoom out; spread them apart to zoom in. A pinch never turns into an accidental tap when one finger lifts. Mouse/keyboard controls remain available. Gesture settings and zoom/elevation limits live in `worldConfig.camera.touch`.
 
-## Character Lab v0.2
+## Character Lab v0.3
 
-Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Edit sex, age, seed, five traits and six normalized heritage shares; preview the derived low-poly mannequin and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
+Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Edit sex, age, seed, five traits and six normalized heritage shares; preview the image-generated Universal Human and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
 
 Personal names now derive deterministically from heritage, sex, local culture and seed. The dominant heritage automatically chooses the naming culture; reroll only the name while preserving appearance. Naming configuration travels with DNA JSON and pinned comparisons. See [Naming v0.2](docs/CHARACTER-NAMING-V02.md) for curated patterns, patronymics and the historical/art-direction boundaries.
 
-The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. See [Character Lab design and limitations](docs/CHARACTER-LAB-V01.md) for the generation model, occupation formulas and the boundary for replacing the mannequin with a real mesh. Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
+The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. The Lab has one shared adult rig with continuous masculinity, height, physicality/agility and seed variation, three LODs, Idle/Walk/Run and Heavy/Nimble/Balanced presets. Hands have one bone each and attachment sockets, without finger rigging. See [Universal Human pipeline and validation](docs/UNIVERSAL-HUMAN-V01.md) and [DNA design](docs/CHARACTER-LAB-V01.md). Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
 
 ## Explore
 

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "reference": "User-supplied adult low-poly turnaround",
+  "referencePreparation": "Imagegen front view and knee repair, then local BiRefNet-general-lite background removal",
+  "inputSha256": "665c944189ce65a103cce349397510eefe83a78ea53318381315da462dbc73ed",
+  "rawModelSha256": "7772c4667baba50c5a1d890698817529bdc0f67b85ae3ebf5fdead7fb4a6d3dc",
+  "backend": "pixal3d",
+  "parameters": {
+    "fov": 0.3490658503988659,
+    "gsh": null,
+    "gss": 10,
+    "matted": true,
+    "res": 1024,
+    "seed": 1983,
+    "steps": 12
+  },
+  "components": [
+    {
+      "name": "pixal3d.cpp",
+      "license": "MIT"
+    },
+    {
+      "name": "Pixal3D flow weights",
+      "license": "MIT"
+    },
+    {
+      "name": "DINOv3 encoder",
+      "license": "DINOv3 License"
+    },
+    {
+      "name": "BiRefNet-general-lite",
+      "license": "MIT"
+    }
+  ],
+  "modelLicense": {
+    "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+    "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+  },
+  "staticLods": [
+    {
+      "label": "LOD0",
+      "triangles": 7999,
+      "textureSize": 1024,
+      "sha256": "c44fda908e2019fcc89fd6ea638b555a297b3dd7b2446b62f255bde3018dbfbf"
+    },
+    {
+      "label": "LOD1",
+      "triangles": 3999,
+      "textureSize": 512,
+      "sha256": "e2ed997eda63da9592d4260d4b3761c8ec5df3d81354e2fdba43abbd262d0569"
+    },
+    {
+      "label": "LOD2",
+      "triangles": 1199,
+      "textureSize": 256,
+      "sha256": "fe43331607fb7694e5dc10f995a23ac4ab86289a72a2d53678428ccd0f9b781d"
+    }
+  ],
+  "rigScriptSha256": "7d2fb924f63964b32f9c031af282423f32c6cca236fd65833a3e26cfa2492a50"
+}
