@@ -87,13 +87,20 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 assert.ok(belly.reduce((sum,{i})=>sum+fat[i][2],0)/belly.length>.30,'caricature belly must visibly project forwards');
                 assert.ok(belly.reduce((sum,{i})=>sum+fat[i][1],0)/belly.length<-.10,'large belly must hang down');
                 assert.ok(belly.reduce((sum,{i})=>sum+thin[i][2],0)/belly.length<0,'underweight must reduce soft torso volume');
-                const feminine=values(json,binary,p.targets[humanMorphNames.indexOf('Feminine')].POSITION);
+                const feminine=values(json,binary,p.targets[humanMorphNames.indexOf('Breasts')].POSITION);
                 const breasts=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)>.045&&Math.abs(x)<.13&&y>1.25&&y<1.32&&z>.03);
                 assert.ok(breasts.length>0);
                 assert.ok(breasts.reduce((sum,{i})=>sum+feminine[i][2],0)/breasts.length>.10,'femininity must grow a visible chest');
                 const lobes=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)>.055&&Math.abs(x)<.09&&y>1.25&&y<1.32&&z>.03);
                 assert.ok(lobes.length>0);
                 assert.ok(lobes.reduce((sum,{v,i})=>sum+Math.sign(v[0])*feminine[i][0],0)/lobes.length>0,'breast volume must grow laterally, not only project forwards');
+                const jiggle=values(json,binary,p.targets[humanMorphNames.indexOf('BreastJiggle')].POSITION);
+                points.forEach(([x,y,z],i)=>{
+                    if(Math.abs(x)>=.19||y<=1.215||y>=1.455||z<=.005){
+                        assert.ok(Math.hypot(...feminine[i])<.000001,'breast growth must not affect arms, belly, collar or back');
+                        assert.ok(Math.hypot(...jiggle[i])<.000001,'breast jiggle must stay inside the chest surface');
+                    }
+                });
                 const age=values(json,binary,p.targets[humanMorphNames.indexOf('Age')].POSITION);
                 const head=points.map((v,i)=>({v,i})).filter(({v})=>v[1]>1.65);
                 assert.ok(head.reduce((sum,{i})=>sum+age[i][1],0)/head.length<-.15,'old head must sink');
@@ -101,6 +108,7 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 for(const joint of joints){
                     const deltas=JSON.parse(json.nodes.find(n=>n.name===joint).extras.morphTranslations);
                     assert.deepEqual(deltas.Overweight,[0,0,0]);assert.deepEqual(deltas.Underweight,[0,0,0]);
+                    assert.deepEqual(deltas.Breasts,[0,0,0],'breast growth must never reposition the skeleton');
                 }
                 const triangles=values(json,binary,p.indices).flat();
                 for(const name of ['Powerful','Slight','Agile','Grounded']){
@@ -124,6 +132,7 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
     }
     assert.ok(manifest.lods[0].triangles>=6000&&manifest.lods[0].triangles<=10000);
 });
+
 
 
 

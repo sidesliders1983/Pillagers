@@ -1,7 +1,7 @@
 import { CharacterDNA, parseCharacterDNA } from './CharacterDNA';
 import { identitySample } from './seededRandom';
 
-export const humanMorphNames = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle'] as const;
+export const humanMorphNames = ['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle'] as const;
 export type HumanMorph = typeof humanMorphNames[number];
 export type HumanProfile = { height:number; adultAge:number; masculinity:number; weightDeviation:number; weights:Record<HumanMorph,number> };
 
@@ -22,9 +22,10 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const [Powerful,Slight]=signed((dna.traits.physicality-.5)*2);
     const [Agile,Grounded]=signed((dna.traits.agility-.5)*2);
     const [Tall,Short]=signed((height-1.44)/(height>=1.44?.24:.28));
-    return {height,adultAge,masculinity,weightDeviation,weights:{Masculine,Feminine,Powerful,Slight,Agile,Grounded,Tall,Short,Overweight,Underweight,Age:Math.max(0,(adultAge-50)/50),
+    return {height,adultAge,masculinity,weightDeviation,weights:{Masculine,Feminine,Breasts:Feminine,Powerful,Slight,Agile,Grounded,Tall,Short,Overweight,Underweight,Age:Math.max(0,(adultAge-50)/50),
         HeadWidth:(sample('headWidth')-.5)*.6,HeadLength:(sample('headLength')-.5)*.6,Jaw:(sample('jaw')-.5)*.6,Nose:(sample('nose')-.5)*.6,
         LegRatio:(sample('legRatio')-.5)*.5,ShoulderSlope:(sample('shoulderSlope')-.5)*.4,Asymmetry:(sample('asymmetry')-.5)*.35,BellyJiggle:0,BreastJiggle:0}};
 }
+
 
 
