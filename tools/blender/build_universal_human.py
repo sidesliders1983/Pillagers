@@ -1,0 +1,221 @@
+"""Rig the image-generated, statically optimized LODs. Run in a separate background Blender.
+
+blender -b --factory-startup --python tools/blender/build_universal_human.py -- --input scratch/universal-human/lods --output public/universal-human
+No downloads. Source topology/materials are preserved within each LOD. All axes share that topology.
+"""
+import argparse
+import hashlib
+import json
+import math
+import sys
+import struct
+from pathlib import Path
+
+import bpy
+from mathutils import Vector
+
+MORPHS = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry']
+
+def rotation_only_clips(path):
+    """Blender bakes constant bind translations too. Keep only rotation tracks so morphology can adapt joints."""
+    data=path.read_bytes();length,kind=struct.unpack_from('<II',data,12)
+    document=json.loads(data[20:20+length]);binary=data[20+length:]
+    for animation in document.get('animations',[]):
+        animation['channels']=[channel for channel in animation['channels'] if channel['target']['path']=='rotation']
+        assert animation['channels'],animation['name']
+    encoded=json.dumps(document,separators=(',',':')).encode();encoded+=b' '*((-len(encoded))%4)
+    path.write_bytes(struct.pack('<III',0x46546c67,2,20+len(encoded)+len(binary))+struct.pack('<II',len(encoded),0x4e4f534a)+encoded+binary)
+
+def band(z, center, width):
+    return math.exp(-((z-center)/width)**2)
+
+def smooth(low,high,value):
+    t=max(0,min(1,(value-low)/(high-low)))
+    return t*t*(3-2*t)
+
+def morph(point, key):
+    x,y,z = point
+    side = 1 if x>=0 else -1
+    head = band(z,1.67,.14)
+    shoulder = band(z,1.39,.13)
+    waist = band(z,1.03,.16)
+    hips = band(z,.89,.14)
+    # Wide transition keeps adjacent vertices moving together, including elbows
+    # near the torso; narrow region thresholds made extreme builds develop fins.
+    armness=smooth(.15,.40,abs(x))
+    legness=1-smooth(.77,.94,z)
+    limbs=max(armness,legness)
+    cx=side*(armness*max(0,.235+(1.4-z)*.32)+(1-armness)*legness*(.21-.08*smooth(.10,.90,z))*smooth(0,.10,abs(x)))
+    if key in ('Masculine','Feminine'):
+        sign=1 if key=='Masculine' else -1
+        x *= 1+sign*(.15*shoulder-.10*hips+.055*head+.04*waist)
+        y *= 1+sign*(.12*shoulder-.06*hips+.035*head)
+    elif key in ('Powerful','Slight'):
+        sign=1 if key=='Powerful' else -1
+        # Expand limb girth about its centre line, not distance from the body centre.
+        x += sign*((x-cx)*(.22+.02*limbs)+side*.015*shoulder*smooth(0,.12,abs(x)))
+        y *= 1+sign*.26
+    elif key in ('Agile','Grounded'):
+        sign=1 if key=='Agile' else -1
+        x-=sign*(x-cx)*.07
+        y*=1-sign*.07
+        z+=sign*.025*math.sin(math.pi*max(0,min(1,z/1.8)))
+    elif key=='Tall':
+        z=z*1.1666666667+.025*math.sin(math.pi*z/1.8);x*=1.035;y*=1.035
+    elif key=='Short':
+        z=z*.8055555556-.025*math.sin(math.pi*z/1.8);x*=.96;y*=.96
+    elif key=='Age':
+        y-=.065*max(0,(z-1)/.8)**2;x*=1+.025*waist
+    elif key=='HeadWidth':x*=1+.10*head
+    elif key=='HeadLength':z+=.045*head*(z-1.6)/.15
+    elif key=='Jaw':x*=1+.13*band(z,1.59,.055)
+    elif key=='Nose':y-=.028*band(z,1.67,.04)*band(x,0,.045)*max(0,min(1,-y/.08))
+    elif key=='LegRatio':z+=.08*math.sin(math.pi*max(0,min(1,z/1.8)))
+    elif key=='ShoulderSlope':z-=.04*shoulder*min(1,abs(x)/.25)
+    elif key=='Asymmetry':x+=.016*math.sin(z*4);z+=.008*max(-1,min(1,x/.15))*shoulder
+    return Vector((x,y,z))
+
+def rig():
+    bpy.ops.object.armature_add()
+    obj=bpy.context.object;obj.name='PillagersHumanRig'
+    bpy.ops.object.mode_set(mode='EDIT');obj.data.edit_bones.remove(obj.data.edit_bones[0])
+    definitions=[
+        ('Root',None,(0,0,0),(0,0,.15),False),
+        ('Hips','Root',(0,0,.9),(0,0,1.02),True),
+        ('Spine_01','Hips',(0,0,1.02),(0,0,1.15),True),
+        ('Spine_02','Spine_01',(0,0,1.15),(0,0,1.29),True),
+        ('Chest','Spine_02',(0,0,1.29),(0,0,1.43),True),
+        ('Neck','Chest',(0,0,1.43),(0,0,1.56),True),
+        ('Head','Neck',(0,0,1.56),(0,0,1.8),True),
+    ]
+    for side,s in [('L',1),('R',-1)]:
+        def p(x,y,z):return (s*x,y,z)
+        definitions += [
+            ('Clavicle_'+side,'Chest',p(.025,0,1.40),p(.235,0,1.40),True),
+            ('UpperArm_'+side,'Clavicle_'+side,p(.235,0,1.40),p(.33,0,1.10),True),
+            ('LowerArm_'+side,'UpperArm_'+side,p(.33,0,1.10),p(.39,0,.91),True),
+            ('Hand_'+side,'LowerArm_'+side,p(.39,0,.91),p(.425,0,.78),True),
+            ('UpperLeg_'+side,'Hips',p(.13,0,.90),p(.18,0,.49),True),
+            ('LowerLeg_'+side,'UpperLeg_'+side,p(.18,0,.49),p(.21,0,.105),True),
+            ('Foot_'+side,'LowerLeg_'+side,p(.21,0,.105),p(.21,-.13,.05),True),
+            ('Toe_'+side,'Foot_'+side,p(.21,-.13,.05),p(.21,-.22,.04),True),
+            ('UpperArmTwist_'+side,'UpperArm_'+side,p(.2825,0,1.25),p(.30,0,1.20),True),
+            ('UpperLegTwist_'+side,'UpperLeg_'+side,p(.155,0,.695),p(.16,0,.64),True),
+        ]
+    sockets=[('weapon_R','Hand_R',(-.42,-.035,.85)),('weapon_L','Hand_L',(.42,-.035,.85)),('shield','LowerArm_L',(.36,.045,1.02)),('back','Chest',(0,.13,1.33)),('hip','Hips',(.19,0,.91)),('head','Head',(0,0,1.8))]
+    definitions += [(name,parent,pos,(pos[0],pos[1],pos[2]+.035),False) for name,parent,pos in sockets]
+    for name,parent,head,tail,deform in definitions:
+        bone=obj.data.edit_bones.new(name);bone.head=head;bone.tail=tail;bone.use_deform=deform
+        if parent:bone.parent=obj.data.edit_bones[parent]
+    bpy.ops.object.mode_set(mode='OBJECT')
+    # Store local translation deltas in glTF coordinates. Runtime adapts bind skeleton along with mesh morphs.
+    for bone in obj.data.bones:
+        values={}
+        for key in MORPHS:
+            d=morph(bone.head_local,key)-bone.head_local
+            if bone.parent:d-=morph(bone.parent.head_local,key)-bone.parent.head_local
+            rotation=bone.parent.matrix_local.to_3x3().inverted() if bone.parent else None
+            if rotation:d=rotation@d
+            values[key]=[d.x,d.z,-d.y]
+        bone['morphTranslations']=json.dumps(values)
+    obj['rigContract']='PillagersHumanRig-v0.1'
+    return obj
+
+def distance(point,a,b):
+    segment=b-a;t=max(0,min(1,(point-a).dot(segment)/segment.length_squared))
+    return (point-(a+segment*t)).length
+
+def weights(body,armature):
+    bones=[b for b in armature.data.bones if b.use_deform and 'Twist' not in b.name]
+    groups={b.name:body.vertex_groups.new(name=b.name) for b in bones}
+    for vertex in body.data.vertices:
+        p=vertex.co;x,y,z=p;side='L' if x>=0 else 'R'
+        if z>1.52:names=['Head','Neck']
+        # Hands in the relaxed A-pose sit below hip height. Classify the outer
+        # arm region before legs, otherwise those vertices follow knee motion.
+        elif (abs(x)>.28 and z>.65) or (abs(x)>.205 and z>1.05):names=[part+'_'+side for part in ['Clavicle','UpperArm','LowerArm','Hand']]+['Chest']
+        elif z<.83:names=[part+'_'+side for part in ['UpperLeg','LowerLeg','Foot','Toe']]+['Hips']
+        else:names=['Hips','Spine_01','Spine_02','Chest','Neck']
+        candidates=sorted([(distance(p,b.head_local,b.tail_local),b) for b in bones if b.name in names],key=lambda item:item[0])[:4]
+        nearest=candidates[0][0]
+        blend=[(math.exp(-((d-nearest)/.065)**2),b) for d,b in candidates]
+        total=sum(w for w,b in blend)
+        for w,b in blend:
+            if w/total>.0001:groups[b.name].add([vertex.index],w/total,'REPLACE')
+        actual=sum(g.weight for g in vertex.groups)
+        for group in vertex.groups:body.vertex_groups[group.group].add([vertex.index],group.weight/actual,'REPLACE')
+    modifier=body.modifiers.new('PillagersHumanRig','ARMATURE');modifier.object=armature;body.parent=armature
+
+def animations(armature):
+    armature.animation_data_create()
+    bpy.context.scene.render.fps=30
+    for name,duration,amplitude in [('Idle',90,.025),('Walk',36,.38),('Run',24,.65)]:
+        action=bpy.data.actions.new(name);armature.animation_data.action=action
+        for frame in range(0,duration+1,3):
+            phase=2*math.pi*frame/duration
+            for bone in armature.pose.bones:
+                bone.rotation_mode='XYZ';bone.rotation_euler=(0,0,0)
+                side=1 if bone.name.endswith('_L') else -1
+                if name=='Idle':
+                    if bone.name in ('Chest','Spine_02'):bone.rotation_euler.x=math.sin(phase)*amplitude
+                else:
+                    if bone.name.startswith('UpperLeg_'):bone.rotation_euler.x=side*math.sin(phase)*amplitude
+                    elif bone.name.startswith('LowerLeg_'):bone.rotation_euler.x=max(0,-side*math.sin(phase))*amplitude*1.4
+                    elif bone.name.startswith('UpperArm_'):bone.rotation_euler.x=-side*math.sin(phase)*amplitude*.75
+                    elif bone.name.startswith('LowerArm_'):bone.rotation_euler.x=-.12-(.35 if name=='Run' else .05)
+                    elif bone.name=='Chest':bone.rotation_euler.z=math.sin(phase)*amplitude*.08
+                bone.keyframe_insert(data_path='rotation_euler',frame=frame,group=bone.name)
+        track=armature.animation_data.nla_tracks.new();track.name=name
+        strip=track.strips.new(name,0,action)
+        strip.action_frame_start=0;strip.action_frame_end=duration
+    armature.animation_data.action=None
+    for track in armature.animation_data.nla_tracks:track.mute=True
+    for bone in armature.pose.bones:bone.rotation_euler=(0,0,0)
+    bpy.context.scene.frame_set(0)
+
+def validate(body,armature):
+    assert len([b for b in armature.data.bones if b.use_deform])==26
+    assert all(name in armature.data.bones for name in ['weapon_R','weapon_L','shield','back','hip','head'])
+    assert [k.name for k in body.data.shape_keys.key_blocks][1:]==MORPHS
+    assert all(0<len(v.groups)<=4 and abs(sum(g.weight for g in v.groups)-1)<.001 for v in body.data.vertices)
+    assert all(bpy.data.actions.get(name) for name in ['Idle','Walk','Run'])
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
+    args=parser.parse_args(sys.argv[sys.argv.index('--')+1:]);args.output.mkdir(parents=True,exist_ok=True)
+    report={'schemaVersion':1,'rig':'PillagersHumanRig','deformBones':26,'sockets':['weapon_R','weapon_L','shield','back','hip','head'],'morphs':MORPHS,'clips':['Idle','Walk','Run'],'lods':[]}
+    for lod in range(3):
+        bpy.ops.wm.read_factory_settings(use_empty=True)
+        source=args.input/f'UniversalHuman_LOD{lod}.glb';assert source.is_file(),source
+        bpy.ops.import_scene.gltf(filepath=str(source))
+        meshes=[o for o in bpy.context.scene.objects if o.type=='MESH'];assert meshes
+        bpy.ops.object.select_all(action='DESELECT')
+        for o in meshes:o.select_set(True)
+        bpy.context.view_layer.objects.active=meshes[0];bpy.ops.object.join();body=bpy.context.object
+        bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+        positions=[v.co.copy() for v in body.data.vertices];low=Vector(tuple(min(p[i] for p in positions) for i in range(3)));high=Vector(tuple(max(p[i] for p in positions) for i in range(3)))
+        # Pixal's exported Y-up import is Z-up in Blender. Ground and centre the mesh once.
+        height=high.z-low.z;assert height>0
+        center=Vector(((low.x+high.x)/2,(low.y+high.y)/2,low.z))
+        for v in body.data.vertices:v.co=(v.co-center)*(1.8/height)
+        body.name='UniversalHuman';body['source']='Pixal3D reference image → static LOD → rig/morphs';body['lod']=lod
+        # Share vertex normals in storage. The runtime uses derivative-based flat shading,
+        # so faces remain faceted without tripling every morph's vertex payload.
+        for polygon in body.data.polygons:polygon.use_smooth=True
+        basis=body.shape_key_add(name='Basis')
+        for name in MORPHS:
+            key=body.shape_key_add(name=name);key.slider_min=-1
+            for vertex,original in zip(key.data,basis.data):vertex.co=morph(original.co,name)
+        armature=rig();weights(body,armature);animations(armature);validate(body,armature)
+        body.data.calc_loop_triangles();triangles=len(body.data.loop_triangles)
+        assert triangles<=[10000,4500,1400][lod]
+        bpy.ops.object.select_all(action='DESELECT');body.select_set(True);armature.select_set(True);bpy.context.view_layer.objects.active=armature
+        destination=args.output/f'UniversalHuman_LOD{lod}.glb'
+        bpy.ops.export_scene.gltf(filepath=str(destination),export_format='GLB',use_selection=True,export_extras=True,export_animations=True,export_animation_mode='NLA_TRACKS',export_frame_range=False,export_force_sampling=True,export_skins=True,export_morph=True,export_morph_normal=False,export_all_influences=False,export_def_bones=False,export_cameras=False,export_lights=False)
+        rotation_only_clips(destination)
+        report['lods'].append({'file':destination.name,'triangles':triangles,'vertices':len(body.data.vertices),'bytes':destination.stat().st_size,'sha256':hashlib.sha256(destination.read_bytes()).hexdigest()})
+        if lod==0:bpy.ops.wm.save_as_mainfile(filepath=str(args.input.parent/'UniversalHuman.blend'))
+    (args.output/'manifest.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+    print('UNIVERSAL_HUMAN::DONE',flush=True)
+
+if __name__=='__main__':main()

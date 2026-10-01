@@ -1,18 +1,28 @@
 import { Scene, Color, PerspectiveCamera, WebGLRenderer, HemisphereLight, DirectionalLight, Mesh, CylinderGeometry, MeshStandardMaterial, ACESFilmicToneMapping, PCFSoftShadowMap, Clock } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Phenotype } from '../characters/Phenotype';
-import { Mannequin } from './Mannequin';
+import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { CharacterDNA } from '../characters/CharacterDNA';
+import { universalHumanProfile } from '../characters/UniversalHumanProfile';
+import { UniversalHuman, HumanAnimation } from './UniversalHuman';
 export class CharacterPreview {
     private scene=new Scene();
     private camera=new PerspectiveCamera(38,1,.05,60);
     private renderer:WebGLRenderer;
     private controls:OrbitControls;
-    private current:Mannequin|null=null;
-    private comparison:Mannequin|null=null;
+    private current:UniversalHuman|null=null;
+    private comparison:UniversalHuman|null=null;
+    private assets=new Map<number,Promise<GLTF>>();
+    private currentDNA:CharacterDNA|null=null;
+    private comparisonDNA:CharacterDNA|null=null;
+    private currentPhenotype:Phenotype|null=null;
+    private comparisonPhenotype:Phenotype|null=null;
+    private revision=0;
+    private lod=0;
+    private animation:HumanAnimation='Idle';
     private clock=new Clock();
-    private time=0;
     private observer:ResizeObserver;
-    constructor(canvas:HTMLCanvasElement){
+    constructor(canvas:HTMLCanvasElement,private report:(message:string,error?:boolean)=>void=()=>{}){
         this.scene.background=new Color('#dbe1d7');
         this.renderer=new WebGLRenderer({canvas,antialias:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
         this.renderer.toneMapping=ACESFilmicToneMapping;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=PCFSoftShadowMap;
@@ -22,11 +32,26 @@ export class CharacterPreview {
         this.controls=new OrbitControls(this.camera,canvas);this.controls.enableDamping=true;this.controls.enablePan=false;this.controls.minDistance=2;this.controls.maxDistance=14;this.controls.maxPolarAngle=Math.PI*.49;
         this.resetView();
         this.observer=new ResizeObserver(()=>{const rect=canvas.getBoundingClientRect();this.renderer.setSize(rect.width,rect.height,false);this.camera.aspect=rect.width/Math.max(1,rect.height);this.camera.updateProjectionMatrix();});this.observer.observe(canvas);
-        this.renderer.setAnimationLoop(()=>{this.time+=Math.min(this.clock.getDelta(),.05);this.current?.update(this.time);this.comparison?.update(this.time);this.controls.update();this.renderer.render(this.scene,this.camera);});
+        this.renderer.setAnimationLoop(()=>{const delta=Math.min(this.clock.getDelta(),.05);this.current?.update(delta);this.comparison?.update(delta);this.controls.update();this.renderer.render(this.scene,this.camera);});
     }
-    setCharacter(phenotype:Phenotype){if(this.current){this.scene.remove(this.current.root);this.current.dispose();}this.current=new Mannequin(phenotype);this.scene.add(this.current.root);this.layout();}
-    setComparison(phenotype:Phenotype|null){if(this.comparison){this.scene.remove(this.comparison.root);this.comparison.dispose();}this.comparison=phenotype?new Mannequin(phenotype):null;if(this.comparison)this.scene.add(this.comparison.root);this.layout();this.resetView();}
+    setCharacter(phenotype:Phenotype,dna:CharacterDNA){this.currentDNA=dna;this.currentPhenotype=phenotype;void this.refresh();}
+    setComparison(phenotype:Phenotype|null,dna:CharacterDNA|null=null){this.comparisonDNA=dna;this.comparisonPhenotype=phenotype;void this.refresh();this.resetView();}
+    setLOD(lod:number){this.lod=lod;void this.refresh();}
+    setAnimation(animation:HumanAnimation){this.animation=animation;this.current?.setAnimation(animation);this.comparison?.setAnimation(animation);this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig`);}
+    private async refresh(){
+        const revision=++this.revision;
+        try{
+            let promise=this.assets.get(this.lod);
+            if(!promise){promise=new GLTFLoader().loadAsync(`/universal-human/UniversalHuman_LOD${this.lod}.glb`);this.assets.set(this.lod,promise);this.report('Loading Universal Human…');}
+            const asset=await promise;if(revision!==this.revision)return;
+            for(const model of [this.current,this.comparison])if(model){this.scene.remove(model.root);model.dispose();}
+            this.current=this.currentDNA&&this.currentPhenotype?new UniversalHuman(asset,universalHumanProfile(this.currentDNA),this.currentPhenotype.skinTone):null;
+            this.comparison=this.comparisonDNA&&this.comparisonPhenotype?new UniversalHuman(asset,universalHumanProfile(this.comparisonDNA),this.comparisonPhenotype.skinTone):null;
+            for(const model of [this.current,this.comparison])if(model){model.setAnimation(this.animation);this.scene.add(model.root);}
+            this.layout();this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig`);
+        }catch(error){if(revision!==this.revision)return;this.assets.delete(this.lod);this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
+    }
     private layout(){if(this.current)this.current.root.position.x=this.comparison?-1:0;if(this.comparison)this.comparison.root.position.x=1;}
-    resetView(){this.controls.target.set(0,.88,0);this.camera.position.set(this.comparison?2.7:2.25,1.85,this.comparison?4.6:4.1);this.controls.update();}
+    resetView(){const comparing=this.comparisonDNA!==null;this.controls.target.set(0,.95,0);this.camera.position.set(comparing?0:1.8,1.75,comparing?4.7:3.2);this.controls.update();}
     overview(){this.controls.target.set(0,.8,0);this.camera.position.set(5.5,6.5,9);this.controls.update();}
 }
