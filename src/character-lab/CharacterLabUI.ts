@@ -12,22 +12,22 @@ const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     cunning:{label:'Cunning',low:'Straightforward',high:'Crafty / opportunistic'},
     temperament:{label:'Temperament',low:'Calm / restrained',high:'Fierce / volatile'},
 };
-export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2';
+export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2';
 export class CharacterLabUI {
     private dna:CharacterDNA;
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void){
         this.dna=cloneDNA(dna);
         root.innerHTML=`<div class="lab">
-            <nav class="lab-nav"><div><span class="lab-eyebrow">PILLAGERS / DEVELOPMENT</span><h1>Character Lab <small>v0.3</small></h1></div><a href="/asset-lab">Asset optimization lab</a><a href="/">Back to the fjord <span aria-hidden="true">↗</span></a></nav>
+            <nav class="lab-nav"><div><span class="lab-eyebrow">PILLAGERS / DEVELOPMENT</span><h1>Character Lab <small>v0.4</small></h1></div><a href="/asset-lab">Asset optimization lab</a><a href="/">Back to the fjord <span aria-hidden="true">↗</span></a></nav>
             <div class="lab-layout">
                 <section class="lab-panel lab-controls" aria-label="Character controls">
                     <div class="lab-section-heading"><h2>01 <span>Identity</span></h2><span class="lab-badge">DNA</span></div>
                     <div class="lab-identity"><label>Sex (derived)<output id="lab-sex" aria-live="polite"></output></label>
                     <label>Seed<input id="lab-seed" type="number" min="0" max="4294967295" step="1"></label></div>
-                    <div class="lab-slider"><label for="lab-age">Adult age <output id="lab-age-value"></output></label><input id="lab-age" type="range" min="18" max="100" step="1"><div class="lab-extremes"><span>Young adult</span><span>Old adult</span></div></div>
+                    <div class="lab-slider"><label for="lab-age">Age <output id="lab-age-value"></output></label><input id="lab-age" type="range" min="6" max="100" step="1"><div class="lab-extremes"><span>Child</span><span>Elder</span></div></div>
                     <div class="lab-slider"><label for="lab-masculinity">Femininity ↔ Masculinity <output id="lab-masculinity-value"></output></label><input id="lab-masculinity" type="range" min="0" max="100" step="1"><div class="lab-extremes"><span id="lab-femininity-share">Femininity</span><span id="lab-masculinity-share">Masculinity</span></div></div>
                     <div class="lab-slider"><label for="lab-height">Adult height <output id="lab-height-value"></output></label><input id="lab-height" type="range" min="116" max="160" step="1"><div class="lab-extremes"><span>116 cm</span><span>160 cm</span></div></div>
-                    <p class="lab-note">The slider determines sex: up to 49% masculinity is female; from 51% is male. Exactly 50% is skipped. One shared adult mesh and rig.</p>
+                    <p class="lab-note">Up to 49% masculinity is female; from 51% is male. Exactly 50% is skipped. One mesh and rig from child to elder. Hair and adult male beards are assigned from the profile.</p>
                     <div class="lab-button-row"><button data-action="reroll">Reroll seed</button><button data-action="randomize">Randomize character</button></div>
                     <div class="lab-naming"><h2>Personal name</h2><strong id="lab-name"></strong><label>Name culture (dominant heritage)<select id="lab-culture" disabled>${heritageKeys.map(key=>`<option value="${key}">${heritageLabels[key]}</option>`).join('')}</select></label><label>Name variation seed<input id="lab-name-seed" type="number" min="0" max="4294967295" step="1"></label><button data-action="reroll-name">Reroll name</button><p class="lab-note">The largest heritage share determines the naming grammar; compatible minority ingredients add subtle variation. Name variation leaves appearance unchanged.</p><details><summary>Name derivation</summary><pre id="lab-name-derivation"></pre></details></div>
                     <div class="lab-section-heading"><h2>02 <span>Core traits</span></h2><span class="lab-badge">5 AXES</span></div>
@@ -53,7 +53,7 @@ export class CharacterLabUI {
                     <p class="lab-fit-intro" id="lab-fit-summary"></p>
                     <div class="lab-fit-list">${(Object.keys(occupations) as OccupationKey[]).map(key=>`<div class="lab-fit-row"><div><span>${occupations[key].label}</span><output id="fit-value-${key}"></output></div><div class="lab-fit-track"><div id="fit-bar-${key}" class="lab-fit-fill"></div><span id="fit-reference-${key}" class="lab-fit-reference" hidden></span></div></div>`).join('')}</div>
                     <p class="lab-note">A low fit never rules out a profession. These are design scores, not assigned jobs or progression.</p>
-                    <details class="lab-json"><summary>CharacterDNA JSON</summary><textarea id="lab-json" spellcheck="false" aria-label="CharacterDNA JSON"></textarea><div class="lab-button-row"><button data-action="copy">Copy</button><button data-action="export">Export JSON</button><button data-action="import">Apply JSON</button></div></details>
+                    <details class="lab-json"><summary>CharacterDNA JSON</summary><textarea id="lab-json" spellcheck="false" aria-label="CharacterDNA JSON"></textarea><div class="lab-button-row"><button data-action="copy">Copy</button><button data-action="export">Export JSON</button><button data-action="export-glb">Export character GLB</button><button data-action="import">Apply JSON</button></div></details>
                     <details class="lab-derived"><summary>Derived phenotype</summary><pre id="lab-phenotype"></pre></details>
                     <p id="lab-status" class="lab-status" role="status" aria-live="polite">One seed. One identity. Many possible lives.</p>
                 </section>
@@ -100,7 +100,7 @@ export class CharacterLabUI {
         text('lab-current-label',`CURRENT · ${fullName(name)} · Seed ${dna.seed}`);text('lab-comparison-label',comparison?`PINNED · ${fullName(characterName(comparison))} · Seed ${comparison.seed}`:'');
         document.getElementById('lab-comparison-label')!.hidden=!comparison;document.getElementById('lab-unpin')!.hidden=!comparison;
         text('lab-pin',comparison?'Replace comparison':'Pin comparison');
-        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Adult height</span><strong>${Math.round(body.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>Weight deviation</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
+        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Adult target height</span><strong>${Math.round(body.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>Weight deviation</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${body.appearance.hairStyle}<small> / ${body.appearance.beardStyle}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
         const scores=occupationScores(dna.traits);
         text('lab-fit-summary',`${scores[0].label} currently fits best${comparison?' · dark ticks show the pinned character':''}.`);
         for(const {key,fit} of scores){text(`fit-value-${key}`,`${(fit*100).toFixed(1)}%`);document.getElementById(`fit-bar-${key}`)!.style.width=`${fit*100}%`;

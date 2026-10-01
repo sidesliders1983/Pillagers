@@ -31,7 +31,7 @@ export function generatePhenotype(input: CharacterDNA): Phenotype {
         cheekboneHeight: .5+sample('cheekbones')*.16,
         eyeSpacing: (.067+sample('eyes-spacing')*.019)*(.72+.28*maturity),
         earSize: (.026+sample('ears')*.012)*(.75+.25*maturity), asymmetry: (sample('asymmetry')-.5)*.008,
-        hairColor: mixColor(hair,'#c2bcb3',clamp((dna.age-42)/58)*.8),
+        hairColor: mixColor(hair,'#c2bcb3',clamp((dna.age-45)/40)),
         eyeColor: eyeShades[weightedChoice(mixedProbabilities(dna.heritage,'eyes'),sample('eye-shade'))],
         skinTone: skinShades[weightedChoice(mixedProbabilities(dna.heritage,'skin'),sample('skin-shade'))],
         hairline: .12+sample('hairline')*.3+aging*.08,

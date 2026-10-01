@@ -15,7 +15,7 @@ import bpy
 import bmesh
 from mathutils import Vector
 
-MORPHS = ['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle']
+MORPHS = ['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle','Child','ChildPower','ChildAgility','FemininePower','MasculineAgility','TallSlight','ElderHeavy']
 
 def rotation_only_clips(path):
     """Blender bakes constant bind translations too. Keep only rotation tracks so morphology can adapt joints."""
@@ -53,7 +53,24 @@ def body_morph(point, key):
     legness=1-smooth(.77,.94,z)
     limbs=max(armness,legness)
     cx=side*(armness*max(0,.235+(1.4-z)*.32)+(1-armness)*legness*(.21-.08*smooth(.10,.90,z))*smooth(0,.10,abs(x)))
-    if key in ('Masculine','Feminine'):
+    if key=='Child':
+        # Keep head/hands/feet rigid through morph(); shorten torso and legs
+        # independently, so young bodies are not uniformly scaled adults.
+        z=z*.72-.11*smooth(.65,1.50,z)
+        x*=.72;y*=.78
+    elif key=='ChildPower':
+        x+=side*.012*shoulder*smooth(0,.10,abs(x));y-=.009*chest
+    elif key=='ChildAgility':
+        x+=side*.014*legness*smooth(0,.08,abs(x));y*=1+.045*limbs
+    elif key=='FemininePower':
+        x+=side*.018*shoulder*smooth(0,.12,abs(x));y-=.014*chest
+    elif key=='MasculineAgility':
+        x+=side*.012*shoulder*smooth(0,.12,abs(x))
+    elif key=='TallSlight':
+        x+=side*.008*waist*smooth(0,.10,abs(x));y*=1+.05*chest
+    elif key=='ElderHeavy':
+        y+=.045*waist;z+=.025*waist
+    elif key in ('Masculine','Feminine'):
         sign=1 if key=='Masculine' else -1
         breadth=(.30*shoulder+.16*chest-.24*hips+.055*head+.12*waist) if sign>0 else (.18*shoulder+.06*chest-.16*hips+.055*head+.04*waist)
         depth=(.24*shoulder+.16*chest-.10*hips+.035*head) if sign>0 else (.14*shoulder+.06*chest-.08*hips+.035*head)
@@ -214,10 +231,25 @@ def weights(body,armature):
         # Hard region cutoffs left inner-arm vertices following the static
         # spine while adjacent arm vertices followed the walking motion.
         names=[b.name for b in bones]
-        candidates=sorted([(distance(p,b.head_local,b.tail_local),b) for b in bones if b.name in names],key=lambda item:item[0])[:4]
-        nearest=candidates[0][0]
-        blend=[(math.exp(-((d-nearest)/.065)**2),b) for d,b in candidates]
+        blend=[]
+        for b in bones:
+            d=distance(p,b.head_local,b.tail_local)
+            w=math.exp(-(d/.065)**2)
+            # Inner torso stays on the spine even when an A-pose arm segment
+            # happens to be spatially close. Fade smoothly across the armpit.
+            if 'Arm' in b.name or 'Hand' in b.name:w*=smooth(.12,.27,abs(x))**2
+            blend.append((w,b))
+        blend=sorted(blend,key=lambda item:item[0],reverse=True)[:4]
         total=sum(w for w,b in blend)
+        core=(1-smooth(.17,.26,abs(x)))*smooth(.75,.93,z)*(1-smooth(1.40,1.50,z))
+        if core>0:
+            spine=[(math.exp(-(distance(p,b.head_local,b.tail_local)/.10)**2),b) for b in bones if b.name in ('Hips','Spine_01','Spine_02','Chest','Neck')]
+            spine=sorted(spine,key=lambda item:item[0],reverse=True)[:2]
+            spine_total=sum(w for w,b in spine)
+            combined={b.name:(w/total*(1-core),b) for w,b in blend}
+            for w,b in spine:combined[b.name]=(combined.get(b.name,(0,b))[0]+core*w/spine_total,b)
+            blend=sorted(combined.values(),key=lambda item:item[0],reverse=True)[:4]
+            total=sum(w for w,b in blend)
         for w,b in blend:
             if w/total>.0001:groups[b.name].add([vertex.index],w/total,'REPLACE')
         actual=sum(g.weight for g in vertex.groups)

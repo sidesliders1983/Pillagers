@@ -31,7 +31,14 @@
     "ShoulderSlope",
     "Asymmetry",
     "BellyJiggle",
-    "BreastJiggle"
+    "BreastJiggle",
+    "Child",
+    "ChildPower",
+    "ChildAgility",
+    "FemininePower",
+    "MasculineAgility",
+    "TallSlight",
+    "ElderHeavy"
   ],
   "clips": [
     "Idle",
@@ -43,22 +50,22 @@
       "file": "UniversalHuman_LOD0.glb",
       "triangles": 8559,
       "vertices": 4285,
-      "bytes": 3043256,
-      "sha256": "7972590f0ecdd6781d7579ffe42d6efb9dabed042e2bf3ee181b81b6004baacf"
+      "bytes": 3677860,
+      "sha256": "1999c4864811d84410a2bc943536d229319037e56fd85c52015958c892303473"
     },
     {
       "file": "UniversalHuman_LOD1.glb",
       "triangles": 4295,
       "vertices": 2153,
-      "bytes": 1657772,
-      "sha256": "985682bf6021bd064b61b45e53d6315bbf6deb816bf29da68ed5b1b59ef248b2"
+      "bytes": 2025492,
+      "sha256": "133e0ebbae79ad89138f146d8fe6d6426cc763821edcce3bd1f043f2c2e63556"
     },
     {
       "file": "UniversalHuman_LOD2.glb",
       "triangles": 1293,
       "vertices": 652,
-      "bytes": 649916,
-      "sha256": "288e5b1aa240b44a48eb8719aa1b9ee12649cd90cb4e81611e16677aef4dfc3b"
+      "bytes": 791584,
+      "sha256": "7c12729af7b449006b241dde8df58f0123e6745611938c5558e08d6c7da0de62"
     }
   ]
 }

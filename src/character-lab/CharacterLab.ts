@@ -32,6 +32,7 @@ export class CharacterLab {
         else if(action==='overview')this.preview.overview();
         else if(action==='idle'||action==='walk'||action==='run')this.preview.setAnimation(action==='idle'?'Idle':action==='walk'?'Walk':'Run');
         else if(action==='lod0'||action==='lod1'||action==='lod2')this.preview.setLOD(Number(action.slice(-1)));
+        else if(action==='export-glb'){await this.preview.exportGLB();this.ui.status('Character GLB exported with appearance and shared rig.');}
         else if(action==='import'){const dna=parseCharacterDNA(JSON.parse(this.ui.getJSON()));this.dna=dna;this.update();this.ui.status('DNA imported; heritage normalized to 100%.');}
         else if(action==='copy'){
             const json=JSON.stringify(this.dna,null,2);
