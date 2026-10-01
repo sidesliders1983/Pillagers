@@ -52,6 +52,10 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 }
                 for(let i=0;i<points.length;i++){
                     const [x,y]=points[i];
+                    if(Math.abs(x)>.26&&y>.95&&y<1.10){
+                        const armWeight=weights[i].reduce((sum,w,j)=>sum+(/^(Clavicle|UpperArm|LowerArm|Hand)_/.test(joints[indices[i][j]])?w:0),0);
+                        assert.ok(armWeight>.95,'inner forearm vertices must not remain anchored to waist/spine');
+                    }
                     if(Math.abs(x)>.32&&y>.65&&y<.95){
                         const strongest=weights[i].indexOf(Math.max(...weights[i]));
                         assert.match(joints[indices[i][strongest]],/^(UpperArm|LowerArm|Hand)_/, 'low A-pose hands must follow arms, not knees');

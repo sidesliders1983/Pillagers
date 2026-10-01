@@ -198,12 +198,10 @@ def weights(body,armature):
         if rigid_amount>=.999999:
             groups[rigid_bone].add([vertex.index],1,'REPLACE')
             continue
-        if z>1.52:names=['Head','Neck']
-        # Hands in the relaxed A-pose sit below hip height. Classify the outer
-        # arm region before legs, otherwise those vertices follow knee motion.
-        elif (abs(x)>.28 and z>.65) or (abs(x)>.205 and z>1.05):names=[part+'_'+side for part in ['Clavicle','UpperArm','LowerArm','Hand']]+['Chest']
-        elif z<.83:names=[part+'_'+side for part in ['UpperLeg','LowerLeg','Foot','Toe']]+['Hips']
-        else:names=['Hips','Spine_01','Spine_02','Chest','Neck']
+        # Continuous spatial weights across arm/torso and hip boundaries.
+        # Hard region cutoffs left inner-arm vertices following the static
+        # spine while adjacent arm vertices followed the walking motion.
+        names=[b.name for b in bones]
         candidates=sorted([(distance(p,b.head_local,b.tail_local),b) for b in bones if b.name in names],key=lambda item:item[0])[:4]
         nearest=candidates[0][0]
         blend=[(math.exp(-((d-nearest)/.065)**2),b) for d,b in candidates]
@@ -307,6 +305,7 @@ def main():
     print('UNIVERSAL_HUMAN::DONE',flush=True)
 
 if __name__=='__main__':main()
+
 
 
 
