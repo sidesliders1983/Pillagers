@@ -28,7 +28,9 @@
     "Nose",
     "LegRatio",
     "ShoulderSlope",
-    "Asymmetry"
+    "Asymmetry",
+    "BellyJiggle",
+    "BreastJiggle"
   ],
   "clips": [
     "Idle",
@@ -38,24 +40,24 @@
   "lods": [
     {
       "file": "UniversalHuman_LOD0.glb",
-      "triangles": 7999,
-      "vertices": 23997,
-      "bytes": 5753992,
-      "sha256": "4b813153a7125e7d67bdb5cc4bed40775d6e7572c242b17bb6c0763bc0b22a38"
+      "triangles": 8565,
+      "vertices": 4288,
+      "bytes": 2114316,
+      "sha256": "52682477f5e5c4d61ac3a3578e839cc797d8710065f637731b8e85da1678a60e"
     },
     {
       "file": "UniversalHuman_LOD1.glb",
-      "triangles": 3999,
-      "vertices": 11997,
-      "bytes": 2951284,
-      "sha256": "23ebf34ac73844aa51d3ca74e1820dca0f85f863df22ee67260fd9c1c2c61547"
+      "triangles": 4285,
+      "vertices": 2148,
+      "bytes": 1236948,
+      "sha256": "5d78d9ff0df4049ca8f5462e895695577d04778947a9241b60c9db31d3648d2c"
     },
     {
       "file": "UniversalHuman_LOD2.glb",
-      "triangles": 1199,
-      "vertices": 3597,
-      "bytes": 942456,
-      "sha256": "01d2a0b9017472a9997477afd169e6f8cedc429406b12931fee8c28b707aaf1f"
+      "triangles": 1293,
+      "vertices": 652,
+      "bytes": 493368,
+      "sha256": "c5daf874f4640cd21cc74c61aeffcd6f2c382790fe352b1748f9c1f8a66ab662"
     }
   ]
 }

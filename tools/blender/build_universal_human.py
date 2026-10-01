@@ -12,9 +12,10 @@ import struct
 from pathlib import Path
 
 import bpy
+import bmesh
 from mathutils import Vector
 
-MORPHS = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry']
+MORPHS = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle']
 
 def rotation_only_clips(path):
     """Blender bakes constant bind translations too. Keep only rotation tracks so morphology can adapt joints."""
@@ -55,7 +56,7 @@ def morph(point, key):
             # Two modest chest lobes under the fitted shirt, with a smooth sternum
             # transition and no separate garment volume or additional topology.
             lobes=band(x,.085,.065)+band(x,-.085,.065)
-            y-=.18*band(z,1.29,.10)*lobes*smooth(-.015,.08,-y)
+            y-=.18*band(z,1.29,.10)*lobes*smooth(-.025,.045,-y)
         else:
             x+=(x-cx)*.28*limbs
             y*=1+.28*limbs
@@ -74,12 +75,22 @@ def morph(point, key):
         # Strong caricature belly, with continuous transitions to hips/chest.
         # Soft volume is independent of shoulder breadth and muscular build.
         torso=1-smooth(.19,.36,abs(x))
-        belly=band(z,1.035,.20)*torso
+        belly=band(z,1.035,.26)*torso
         front=smooth(-.015,.08,-y)
-        x*=1+.95*belly+.08*head
-        y*=1+.45*belly+.12*head
-        y-=.48*belly*front
-        z-=.18*belly*front
+        # A broad, rounded ellipsoid cap instead of a narrow Gaussian peak.
+        vertical=max(0,1-((z-1.04)/.32)**2)**.65
+        horizontal=max(0,1-(x/.32)**2)**.65
+        volume=vertical*horizontal*front
+        x*=1+.65*belly+.08*head
+        y*=1+.18*belly+.12*head
+        y-=.42*volume
+        z-=.18*volume
+    elif key=='BellyJiggle':
+        soft=band(z,1.035,.25)*(1-smooth(.19,.36,abs(x)))*smooth(-.015,.08,-y)
+        z+=.055*soft;y-=.018*soft
+    elif key=='BreastJiggle':
+        soft=band(z,1.29,.11)*(band(x,.085,.08)+band(x,-.085,.08))*smooth(-.015,.08,-y)
+        z+=.035*soft;y-=.012*soft
     elif key=='Underweight':
         # Reduce soft volume around limb centres, preserving length and joints.
         torso=1-smooth(.19,.36,abs(x))
@@ -141,7 +152,7 @@ def rig():
     for bone in obj.data.bones:
         values={}
         for key in MORPHS:
-            if key in ('Overweight','Underweight'):
+            if key in ('Overweight','Underweight','BellyJiggle','BreastJiggle'):
                 values[key]=[0,0,0]
                 continue
             d=morph(bone.head_local,key)-bone.head_local
@@ -236,6 +247,15 @@ def main():
         body.rotation_mode='XYZ'
         body.rotation_euler.z=math.pi
         bpy.ops.object.transform_apply(location=False,rotation=True,scale=False)
+        # The static planar LOD pass leaves long triangles on the shirt. Add
+        # local surface samples before morphing, preserving UVs via bmesh.
+        bm=bmesh.new();bm.from_mesh(body.data)
+        bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.000001)
+        faces=[f for f in bm.faces if all(.78<v.co.z<1.44 and abs(v.co.x)<.30 and v.co.y<.025 for v in f.verts)]
+        faces=sorted(faces,key=lambda f:f.calc_area(),reverse=True)[:[120,60,20][lod]]
+        edges=list({e for f in faces for e in f.edges})
+        if edges:bmesh.ops.subdivide_edges(bm,edges=edges,cuts=1,use_grid_fill=True)
+        bm.to_mesh(body.data);bm.free();body.data.update()
         body.name='UniversalHuman';body['source']='Pixal3D reference image → static LOD → rig/morphs';body['lod']=lod
         # Share vertex normals in storage. The runtime uses derivative-based flat shading,
         # so faces remain faceted without tripling every morph's vertex payload.
@@ -257,4 +277,8 @@ def main():
     print('UNIVERSAL_HUMAN::DONE',flush=True)
 
 if __name__=='__main__':main()
+
+
+
+
 

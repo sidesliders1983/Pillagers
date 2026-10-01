@@ -24,7 +24,7 @@ The reference was supplied by the user. Its neutral bald body, fitted shirt and 
 
 This pipeline applies skinning to the image-generated, decimated topology. It does not claim artist-authored deformation loops or automatic production retopology. Joint deformation needs visual acceptance before closing #7; the generated shirt hem must also be checked for unwanted volume.
 
-Validated output: 7,999 / 3,999 / 1,199 triangles. Browser checks cover all 27 LOD/silhouette/animation combinations, pinned comparison, height/masculinity extremes, mobile layout/touch and the existing import/export/naming/heritage flows. GLB tests also reject hand vertices bound to leg bones and discontinuous build morphs. Instance tests ensure inverse-bind arrays never alter the cached source or another character, and per-instance bone textures are released. Hands are single rigid units with no finger bones, as requested. The exported clips are prototype motion loops; detailed locomotion polish remains separate from this integration.
+Validated output: 8,565 / 4,285 / 1,293 triangles. Browser checks cover all 27 LOD/silhouette/animation combinations, pinned comparison, height/masculinity extremes, mobile layout/touch and the existing import/export/naming/heritage flows. GLB tests also reject hand vertices bound to leg bones and discontinuous build morphs. Instance tests ensure inverse-bind arrays never alter the cached source or another character, and per-instance bone textures are released. Hands are single rigid units with no finger bones, as requested. The exported clips are prototype motion loops; detailed locomotion polish remains separate from this integration.
 
 
 
@@ -32,3 +32,9 @@ Validated output: 7,999 / 3,999 / 1,199 triangles. Browser checks cover all 27 L
 ## Orientation
 
 The generated source faces +Y in Blender. The rig, toes, belly/chest morphs and forward slouch use −Y in Blender (+Z in glTF). The exporter rotates the source 180 degrees around the vertical axis before building morphs, weights and clips; it explicitly switches the imported object's quaternion rotation mode to Euler for that operation. Asset validation compares the actual toe silhouette against the ankle centre to catch a reversed source independently of the procedural morphs.
+
+## Rounded soft regions and secondary motion
+
+Before morphing, duplicate surface vertices are welded (UVs remain on loops) and the largest front-torso triangles receive local subdivision. This keeps the three LOD budgets while providing enough surface samples for a broad ellipsoid belly cap and rounded hanging underside. The base remains faceted. Published files contain BellyJiggle and BreastJiggle morphs with no skeleton translation.
+
+Each runtime instance owns two bounded damped springs with fixed substeps, driven by the current locomotion cadence and vertical root acceleration. Belly response scales with Overweight; breast response scales with Feminine. Idle has a small drive, Walk and Run have progressively larger drives. Anatomy changes reset spring state; source geometry and pinned instances are independent. This is inexpensive secondary motion for the prototype, without soft-body collision simulation.
