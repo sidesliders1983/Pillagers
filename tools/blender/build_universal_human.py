@@ -15,7 +15,7 @@ import bpy
 import bmesh
 from mathutils import Vector
 
-MORPHS = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle']
+MORPHS = ['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle']
 
 def rotation_only_clips(path):
     """Blender bakes constant bind translations too. Keep only rotation tracks so morphology can adapt joints."""
@@ -37,7 +37,7 @@ def smooth(low,high,value):
 def breast_volume(x,z):
     # Two broad ellipsoid caps. max preserves the sternum valley instead of
     # adding both lobes into a central peak where they overlap.
-    return max(max(0,1-((x-center)/.115)**2-((z-1.285)/.155)**2)**.65 for center in (-.085,.085))
+    return max(max(0,1-((x-center)/.105)**2-((z-1.335)/.12)**2)**.65 for center in (-.085,.085))*(1-smooth(.15,.19,abs(x)))
 
 def body_morph(point, key):
     x,y,z = point
@@ -57,15 +57,16 @@ def body_morph(point, key):
         sign=1 if key=='Masculine' else -1
         x *= 1+sign*(.30*shoulder+.16*chest-.24*hips+.055*head+.12*waist)
         y *= 1+sign*(.24*shoulder+.16*chest-.10*hips+.035*head)
-        if key=='Feminine':
-            volume=breast_volume(x,z)*smooth(-.025,.045,-y)
-            # Grow width and vertical fullness as well as forward depth.
-            x+=side*.03*volume*smooth(0,.05,abs(x))
-            z+=(z-1.285)*.32*volume
-            y-=.20*volume
-        else:
+        if key=='Masculine':
             x+=(x-cx)*.28*limbs
             y*=1+.28*limbs
+    elif key=='Breasts':
+        # Use undeformed torso coordinates, before feminine shoulder narrowing.
+        # Soft volume must never adapt the skeleton or leak into the upper arm.
+        volume=breast_volume(x,z)*smooth(.005,.06,-y)
+        x+=side*.03*volume*smooth(0,.05,abs(x))
+        z+=(z-1.335)*.25*volume
+        y-=.20*volume
     elif key in ('Powerful','Slight'):
         sign=1 if key=='Powerful' else -1
         # Expand limb girth about its centre line, not distance from the body centre.
@@ -95,7 +96,7 @@ def body_morph(point, key):
         soft=band(z,1.035,.25)*(1-smooth(.19,.36,abs(x)))*smooth(-.015,.08,-y)
         z+=.055*soft;y-=.018*soft
     elif key=='BreastJiggle':
-        soft=breast_volume(x,z)*smooth(-.025,.045,-y)
+        soft=breast_volume(x,z)*smooth(.005,.06,-y)
         z+=.035*soft;y-=.012*soft
     elif key=='Underweight':
         # Reduce soft volume around limb centres, preserving length and joints.
@@ -173,7 +174,7 @@ def rig():
     for bone in obj.data.bones:
         values={}
         for key in MORPHS:
-            if key in ('Overweight','Underweight','BellyJiggle','BreastJiggle'):
+            if key in ('Overweight','Underweight','Breasts','BellyJiggle','BreastJiggle'):
                 values[key]=[0,0,0]
                 continue
             d=morph(bone.head_local,key)-bone.head_local
@@ -305,6 +306,8 @@ def main():
     print('UNIVERSAL_HUMAN::DONE',flush=True)
 
 if __name__=='__main__':main()
+
+
 
 
 

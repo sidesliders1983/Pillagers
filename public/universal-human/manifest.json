@@ -13,6 +13,7 @@
   "morphs": [
     "Masculine",
     "Feminine",
+    "Breasts",
     "Powerful",
     "Slight",
     "Agile",
@@ -42,22 +43,22 @@
       "file": "UniversalHuman_LOD0.glb",
       "triangles": 8559,
       "vertices": 4285,
-      "bytes": 2228768,
-      "sha256": "b09fc88c36b3160e6362e7e9f3ddf0365b89e9569a0577cafcf84a8f15cdff78"
+      "bytes": 2256712,
+      "sha256": "7fe698fdb75e3329b037849463805b905447f5baf4220359c3a2a928e291b95b"
     },
     {
       "file": "UniversalHuman_LOD1.glb",
       "triangles": 4295,
       "vertices": 2153,
-      "bytes": 1298416,
-      "sha256": "cb49236059145e7f8efd6819de0aadecc42cca7994f5c18d1e9f49e1ab0d969a"
+      "bytes": 1314160,
+      "sha256": "c0ccbd8a0b0f08dc0675ad247e5086a0701df6f70ca11bfed266f36252d963f0"
     },
     {
       "file": "UniversalHuman_LOD2.glb",
       "triangles": 1293,
       "vertices": 652,
-      "bytes": 524700,
-      "sha256": "600d2c9436c7a8a82d0109ccbcab1199dd371d0e3eca6a29f4150a1f1003414b"
+      "bytes": 530640,
+      "sha256": "1bf83c869c5a3e9ac3bd32223a8564d3f30db604433f45ec53d8b6ce98542170"
     }
   ]
 }
