@@ -67,7 +67,7 @@ export class UniversalHuman {
             mesh.frustumCulled=false;
             // Albedo stays on the image-generated material. Heritage gently tints the whole base surface.
             const mats=Array.isArray(mesh.material)?mesh.material:[mesh.material];
-            const tint=new Color(skinTone).lerp(new Color('#ffffff'),.78);
+            const tint=new Color(skinTone).lerp(new Color('#ffffff'),.60);
             for(const mat of mats)if((mat as MeshStandardMaterial).isMeshStandardMaterial)(mat as MeshStandardMaterial).color.copy(tint);
         }
         this.root.updateMatrixWorld(true);
