@@ -54,3 +54,27 @@ test('appearance fit round-trips without changing profile style, colour or anato
     for(const invalid of [{...fit,hair:.99},{...fit,beard:NaN},{...fit,clothing:1.31}])assert.throws(()=>parseCharacterDNA({...original,appearanceFit:invalid}));
     assert.deepEqual(universalHumanProfile(original).appearanceFit,{hair:1,beard:1,clothing:1});
 });
+
+
+test('hair clearance offsets every style outward without scaling module transforms',async()=>{
+    const {Vector3}=await import('three');
+    const {appearanceModules,disposeModules}=load('../src/character-lab/AppearanceModules.ts');
+    const size=new Vector3(.24,.32,.26),delta=.24*.5*.3;
+    for(const hairStyle of hairStyles)for(const lod of [0,1,2]){
+        const profile={...characterAppearance(defaultDNA()),hairStyle,beardStyle:'none'};
+        const base=appearanceModules(profile,size,lod),spaced=appearanceModules(profile,size,lod,{hair:1.3,beard:1,clothing:1});
+        assert.equal(base.children.length,spaced.children.length);
+        for(let m=0;m<base.children.length;m++){
+            const a=base.children[m],b=spaced.children[m];
+            assert.deepEqual(a.position,b.position);assert.deepEqual(a.scale,b.scale);
+            const p=a.geometry.attributes.position,q=b.geometry.attributes.position;
+            for(let i=0;i<p.count;i++){
+                const original=new Vector3().fromBufferAttribute(p,i).multiply(a.scale).add(a.position);
+                const moved=new Vector3().fromBufferAttribute(q,i).multiply(b.scale).add(b.position);
+                assert.ok(Math.abs(original.distanceTo(moved)-delta)<1e-7,`${hairStyle} LOD${lod} clearance`);
+                assert.ok(moved.length()>original.length());
+            }
+        }
+        disposeModules(base);disposeModules(spaced);
+    }
+});
