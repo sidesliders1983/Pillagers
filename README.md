@@ -57,6 +57,10 @@ The model is independent of Three.js. Physicality/Agility influence build, while
 
 Camera movement and zoom are bounded. The world has ten independently wandering characters generated with the Character Lab DNA pipeline. Click or tap a character to open a following profile card with name, gender, age, all five traits and the three largest heritage shares. Expand minor ancestries for the remaining shares. Close with the card button, Escape or a ground click/tap. Buildings, the hearth and well have circular navigation exclusions. There are no economy, combat or placement systems.
 
+## Night presentation
+
+Open ⋯ → Debug → Lighting to switch between Day and Night without reloading. Night combines cool moonlight/fog with warm flickering hearth light and emissive windows, retaining a single shadow source. Tuning values and performance notes are in [Night Mode v0.1](docs/NIGHT-MODE-V01.md).
+
 ## Main files
 
 - `src/core/Game.ts`: startup, lighting, frame loop and diagnostics.
