@@ -37,7 +37,19 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
         case 'short':blob('HairCrest',-.12,.85,.18,.85,.35,.7);break;
     }
     const hairMeshes=group.children.slice();
-    for(const mesh of hairMeshes){mesh.position.multiplyScalar(fit.hair);mesh.scale.multiplyScalar(fit.hair);}
+    // The hair control adds clearance from the head rather than scaling the
+    // whole hairstyle (which also lengthened tails and enlarged the bun).
+    const clearance=Math.min(size.x,size.y,size.z)*.5*(fit.hair-1);
+    if(clearance>0)for(const object of hairMeshes){
+        const mesh=object as Mesh,positions=mesh.geometry.attributes.position;
+        for(let i=0;i<positions.count;i++){
+            const point=new Vector3().fromBufferAttribute(positions,i).multiply(mesh.scale).add(mesh.position);
+            const outward=point.clone().normalize().multiplyScalar(clearance);
+            point.add(outward).sub(mesh.position).divide(mesh.scale);
+            positions.setXYZ(i,point.x,point.y,point.z);
+        }
+        mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();
+    }
     if(profile.beardStyle!=='none'){
         // Chin/jaw frame leaves the central upper face clear.
         for(const side of [-1,1])blob('BeardJaw',side*.65,-.63,.67,.28,.50,.28);
