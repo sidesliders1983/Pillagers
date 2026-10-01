@@ -12,7 +12,7 @@ const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     cunning:{label:'Cunning',low:'Straightforward',high:'Crafty / opportunistic'},
     temperament:{label:'Temperament',low:'Calm / restrained',high:'Fierce / volatile'},
 };
-export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|'heavy'|'nimble'|'balanced';
+export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2';
 export class CharacterLabUI {
     private dna:CharacterDNA;
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void){
@@ -26,7 +26,7 @@ export class CharacterLabUI {
                     <label>Seed<input id="lab-seed" type="number" min="0" max="4294967295" step="1"></label></div>
                     <div class="lab-slider"><label for="lab-age">Adult age <output id="lab-age-value"></output></label><input id="lab-age" type="range" min="18" max="100" step="1"><div class="lab-extremes"><span>Young adult</span><span>Old adult</span></div></div>
                     <div class="lab-slider"><label for="lab-masculinity">Femininity ↔ Masculinity <output id="lab-masculinity-value"></output></label><input id="lab-masculinity" type="range" min="0" max="100" step="1"><div class="lab-extremes"><span id="lab-femininity-share">Femininity</span><span id="lab-masculinity-share">Masculinity</span></div></div>
-                    <div class="lab-slider"><label for="lab-height">Adult height <output id="lab-height-value"></output></label><input id="lab-height" type="range" min="145" max="210" step="1"><div class="lab-extremes"><span>145 cm</span><span>210 cm</span></div></div>
+                    <div class="lab-slider"><label for="lab-height">Adult height <output id="lab-height-value"></output></label><input id="lab-height" type="range" min="116" max="160" step="1"><div class="lab-extremes"><span>116 cm</span><span>160 cm</span></div></div>
                     <p class="lab-note">The slider determines sex: up to 49% masculinity is female; from 51% is male. Exactly 50% is skipped. One shared adult mesh and rig.</p>
                     <div class="lab-button-row"><button data-action="reroll">Reroll seed</button><button data-action="randomize">Randomize character</button></div>
                     <div class="lab-naming"><h2>Personal name</h2><strong id="lab-name"></strong><label>Name culture (dominant heritage)<select id="lab-culture" disabled>${heritageKeys.map(key=>`<option value="${key}">${heritageLabels[key]}</option>`).join('')}</select></label><label>Name variation seed<input id="lab-name-seed" type="number" min="0" max="4294967295" step="1"></label><button data-action="reroll-name">Reroll name</button><p class="lab-note">The largest heritage share determines the naming grammar; compatible minority ingredients add subtle variation. Name variation leaves appearance unchanged.</p><details><summary>Name derivation</summary><pre id="lab-name-derivation"></pre></details></div>
@@ -40,7 +40,6 @@ export class CharacterLabUI {
                     <canvas id="lab-preview" aria-label="Universal Human. Drag to rotate, scroll or pinch to zoom."></canvas>
                     <div class="lab-button-row lab-model-tools" aria-label="Animation"><button data-action="idle">Idle</button><button data-action="walk">Walk</button><button data-action="run">Run</button></div>
                     <div class="lab-button-row lab-model-tools" aria-label="Level of detail"><button data-action="lod0">LOD0</button><button data-action="lod1">LOD1</button><button data-action="lod2">LOD2</button></div>
-                    <div class="lab-button-row lab-model-tools" aria-label="Body presets"><button data-action="heavy">Heavy</button><button data-action="nimble">Nimble</button><button data-action="balanced">Balanced</button></div>
                     <div class="lab-character-labels"><span id="lab-current-label"></span><span id="lab-comparison-label" hidden></span></div>
                     <div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button><button data-action="overview">RTS view</button></div></div>
                     <div class="lab-dimensions" id="lab-dimensions"></div>
@@ -112,4 +111,5 @@ export class CharacterLabUI {
     selectJSON(){(document.querySelector('.lab-json') as HTMLDetailsElement).open=true;const area=document.getElementById('lab-json') as HTMLTextAreaElement;area.focus();area.select();}
     status(message:string,error=false){const status=document.getElementById('lab-status')!;status.textContent=message;status.classList.toggle('is-error',error);}
 }
+
 

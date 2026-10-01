@@ -56,8 +56,17 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 const thin=values(json,binary,p.targets[humanMorphNames.indexOf('Underweight')].POSITION);
                 const belly=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)<.15&&y>.95&&y<1.12&&z>.03);
                 assert.ok(belly.length>0);
-                assert.ok(belly.reduce((sum,{i})=>sum+fat[i][2],0)/belly.length>.12,'caricature belly must visibly project forwards');
+                assert.ok(belly.reduce((sum,{i})=>sum+fat[i][2],0)/belly.length>.30,'caricature belly must visibly project forwards');
+                assert.ok(belly.reduce((sum,{i})=>sum+fat[i][1],0)/belly.length<-.10,'large belly must hang down');
                 assert.ok(belly.reduce((sum,{i})=>sum+thin[i][2],0)/belly.length<0,'underweight must reduce soft torso volume');
+                const feminine=values(json,binary,p.targets[humanMorphNames.indexOf('Feminine')].POSITION);
+                const breasts=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)>.045&&Math.abs(x)<.13&&y>1.25&&y<1.32&&z>.03);
+                assert.ok(breasts.length>0);
+                assert.ok(breasts.reduce((sum,{i})=>sum+feminine[i][2],0)/breasts.length>.10,'femininity must grow a visible chest');
+                const age=values(json,binary,p.targets[humanMorphNames.indexOf('Age')].POSITION);
+                const head=points.map((v,i)=>({v,i})).filter(({v})=>v[1]>1.65);
+                assert.ok(head.reduce((sum,{i})=>sum+age[i][1],0)/head.length<-.15,'old head must sink');
+                assert.ok(head.reduce((sum,{i})=>sum+age[i][2],0)/head.length>.20,'old head must lean forwards');
                 for(const joint of joints){
                     const deltas=JSON.parse(json.nodes.find(n=>n.name===joint).extras.morphTranslations);
                     assert.deepEqual(deltas.Overweight,[0,0,0]);assert.deepEqual(deltas.Underweight,[0,0,0]);

@@ -76,8 +76,9 @@ export function parseCharacterDNA(value: unknown): CharacterDNA {
         const m = data.morphology as Record<string, unknown>;
         if (typeof m.masculinity !== 'number' || !Number.isFinite(m.masculinity) || m.masculinity < 0 || m.masculinity > 1) throw new Error('Masculinity must be between 0 and 1.');
         sexFromMasculinity(m.masculinity);
-        if (typeof m.height !== 'number' || !Number.isFinite(m.height) || m.height < 1.45 || m.height > 2.1) throw new Error('Adult height must be between 1.45 and 2.10 metres.');
+        if (typeof m.height !== 'number' || !Number.isFinite(m.height) || m.height < 1.16 || m.height > 1.6) throw new Error('Adult height must be between 1.16 and 1.60 metres.');
         morphology = {masculinity:m.masculinity,height:m.height};
     }
     return {seed: Number(data.seed), sex: morphology?sexFromMasculinity(morphology.masculinity):data.sex as CharacterDNA['sex'], age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{})};
 }
+

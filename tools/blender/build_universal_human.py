@@ -49,18 +49,22 @@ def morph(point, key):
     cx=side*(armness*max(0,.235+(1.4-z)*.32)+(1-armness)*legness*(.21-.08*smooth(.10,.90,z))*smooth(0,.10,abs(x)))
     if key in ('Masculine','Feminine'):
         sign=1 if key=='Masculine' else -1
-        x *= 1+sign*(.15*shoulder+.06*chest-.13*hips+.055*head+.06*waist)
-        y *= 1+sign*(.12*shoulder+.06*chest-.06*hips+.035*head)
+        x *= 1+sign*(.30*shoulder+.16*chest-.24*hips+.055*head+.12*waist)
+        y *= 1+sign*(.24*shoulder+.16*chest-.10*hips+.035*head)
         if key=='Feminine':
             # Two modest chest lobes under the fitted shirt, with a smooth sternum
             # transition and no separate garment volume or additional topology.
             lobes=band(x,.085,.065)+band(x,-.085,.065)
-            y-=.06*band(z,1.29,.085)*lobes*smooth(-.015,.08,-y)
+            y-=.18*band(z,1.29,.10)*lobes*smooth(-.015,.08,-y)
+        else:
+            x+=(x-cx)*.28*limbs
+            y*=1+.28*limbs
     elif key in ('Powerful','Slight'):
         sign=1 if key=='Powerful' else -1
         # Expand limb girth about its centre line, not distance from the body centre.
-        x += sign*((x-cx)*(.22+.02*limbs)+side*.015*shoulder*smooth(0,.12,abs(x)))
-        y *= 1+sign*.26
+        girth=.65 if sign>0 else .22
+        x += sign*((x-cx)*(girth+.08*limbs)+side*.045*shoulder*smooth(0,.12,abs(x)))
+        y *= 1+sign*(.65 if sign>0 else .26)
     elif key in ('Agile','Grounded'):
         sign=1 if key=='Agile' else -1
         x-=sign*(x-cx)*.07
@@ -71,9 +75,11 @@ def morph(point, key):
         # Soft volume is independent of shoulder breadth and muscular build.
         torso=1-smooth(.19,.36,abs(x))
         belly=band(z,1.035,.20)*torso
-        x*=1+.85*belly+.08*head
+        front=smooth(-.015,.08,-y)
+        x*=1+.95*belly+.08*head
         y*=1+.45*belly+.12*head
-        y-=.24*belly*smooth(-.015,.08,-y)
+        y-=.48*belly*front
+        z-=.18*belly*front
     elif key=='Underweight':
         # Reduce soft volume around limb centres, preserving length and joints.
         torso=1-smooth(.19,.36,abs(x))
@@ -85,7 +91,10 @@ def morph(point, key):
     elif key=='Short':
         z=z*.8055555556-.025*math.sin(math.pi*z/1.8);x*=.96;y*=.96
     elif key=='Age':
-        y-=.065*max(0,(z-1)/.8)**2;x*=1+.025*waist
+        slump=smooth(.85,1.8,z)
+        y-=.28*slump**1.4
+        z-=.18*slump+.06*shoulder
+        x*=1+.025*waist
     elif key=='HeadWidth':x*=1+.10*head
     elif key=='HeadLength':z+=.045*head*(z-1.6)/.15
     elif key=='Jaw':x*=1+.13*band(z,1.59,.055)

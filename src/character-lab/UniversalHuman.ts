@@ -32,7 +32,7 @@ export class UniversalHuman {
     }
     apply(profile:HumanProfile,skinTone:string){
         // Restore neutral pose before adapting bind translations and rebuilding inverse bind matrices.
-        this.mixer.stopAllAction();
+        this.mixer.stopAllAction();this.root.scale.y=1;
         for(const bone of this.bones){
             bone.position.copy(this.rest.get(bone)!);
             const source=bone.userData.morphTranslations;
@@ -55,7 +55,7 @@ export class UniversalHuman {
         this.root.updateMatrixWorld(true);
         const skeletons=new Set(this.meshes.map(mesh=>mesh.skeleton));
         for(const skeleton of skeletons)skeleton.calculateInverses();
-        this.setAnimation(this.animation);
+        this.root.scale.y=.8;this.setAnimation(this.animation);
     }
     setAnimation(name:HumanAnimation){
         const clip=this.asset.animations.find(clip=>clip.name===name);
@@ -65,3 +65,5 @@ export class UniversalHuman {
     update(delta:number){this.mixer.update(delta);}
     dispose(){this.mixer.stopAllAction();this.mixer.uncacheRoot(this.mixer.getRoot());for(const skeleton of new Set(this.meshes.map(mesh=>mesh.skeleton)))skeleton.dispose();for(const material of this.materials)material.dispose();}
 }
+
+
