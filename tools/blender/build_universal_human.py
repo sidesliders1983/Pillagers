@@ -56,8 +56,12 @@ def body_morph(point, key):
     if key=='Child':
         # Keep head/hands/feet rigid through morph(); shorten torso and legs
         # independently, so young bodies are not uniformly scaled adults.
-        z=z*.72-.11*smooth(.65,1.50,z)
-        x*=.72;y*=.78
+        original_z=z
+        z=.62*z if z<=.90 else .558+(z-.90)*.80
+        arm=smooth(.15,.27,abs(x))*smooth(.70,.94,original_z)*(1-smooth(1.43,1.52,original_z))
+        arm_z=.958+(original_z-1.40)*.65
+        z=z*(1-arm)+arm_z*arm
+        x*=.72;y*=.74
     elif key=='ChildPower':
         x+=side*.012*shoulder*smooth(0,.10,abs(x));y-=.009*chest
     elif key=='ChildAgility':
@@ -162,7 +166,9 @@ def morph(point,key):
     # body proportions; volume, seed detail and soft motion never reshape it.
     anchor,amount,_=rigid_region(point)
     original=Vector(point)
-    rigid=original+body_morph(anchor,key)-anchor
+    # Age scales hands/feet uniformly; all other axes preserve their size.
+    scale=.69 if key=='Child' and _ and _.startswith('Foot') else .65 if key=='Child' and _ and _.startswith('Hand') else 1
+    rigid=(original-anchor)*scale+body_morph(anchor,key)
     return body_morph(point,key).lerp(rigid,amount)
 
 def rig():
