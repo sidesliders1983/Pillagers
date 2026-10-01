@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {Vector3,Raycaster,DoubleSide} from 'three';
+import {Vector3} from 'three';
 import {load} from './load-source.mjs';
 const {UniversalHuman}=load('../src/character-lab/UniversalHuman.ts');
 const {defaultDNA}=load('../src/characters/CharacterDNA.ts');
@@ -40,18 +40,8 @@ test('actual skinned vertices remain connected through walk/run around arms and 
             const garment=human.root.getObjectByName('ClothingWaistWrap');
             assert.ok(garment);assert.equal(garment.skeleton,meshes.find(o=>o!==garment).skeleton,'garment shares the body skeleton');
             human.update(0);human.root.updateMatrixWorld(true);
-            const cap=appearance.getObjectByName('HairCap'),side=cap.material.side;
-            cap.material.side=DoubleSide;
-            const origin=appearance.getWorldPosition(new Vector3()),ray=new Raycaster();
-            for(const mesh of meshes.filter(o=>o!==garment)){
-                const position=mesh.geometry.attributes.position;
-                for(let i=0;i<position.count;i++)if(position.getY(i)>1.69){
-                    const point=mesh.localToWorld(mesh.getVertexPosition(i,new Vector3())),direction=point.clone().sub(origin),distance=direction.length();
-                    ray.set(origin,direction.normalize());const hit=ray.intersectObject(cap,false)[0];
-                    assert.ok(hit&&hit.distance>distance+.001,`LOD${lod} age ${age}: scalp must stay inside the hair cap`);
-                }
-            }
-            cap.material.side=side;
+            assert.equal(appearance.getObjectByName('HairCap'),undefined,'no procedural hair fallback');
+            assert.equal(appearance.children.length,0,'unloaded reference modules remain absent');
             const rest=meshes.map(mesh=>Array.from({length:mesh.geometry.attributes.position.count},(_,i)=>mesh.getVertexPosition(i,new Vector3())));
             for(const clip of ['Walk','Run']){
                 human.setAnimation(clip);
@@ -76,3 +66,36 @@ test('actual skinned vertices remain connected through walk/run around arms and 
 });
 
 
+
+
+test('reference hair follows the existing head through child adult elder animations and all LODs',async()=>{
+    for(let lod=0;lod<3;lod++){
+        const body=await asset(lod);
+        for(const style of ['short','medium']){
+            const bytes=readFileSync(new URL(`../public/appearance/${style}/Hair_${style}_LOD${lod}.glb`,import.meta.url));
+            const hair=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+            for(const age of [6,35,90])for(const ratio of [1,1.3]){
+                const profile=universalHumanProfile({...defaultDNA(),age,appearanceFit:{hair:ratio,beard:1,clothing:1}});
+                profile.appearance.hairStyle=style;
+                const human=new UniversalHuman(body,profile,'#eeccbb',hair.scene);
+                const appearance=human.root.getObjectByName('Appearance'),head=appearance.parent;
+                assert.equal(head.name,'Head');assert.equal(appearance.userData.hairAsset,'reference-generated');
+                assert.equal(human.root.getObjectByName('HairCap'),undefined);
+                assert.equal(appearance.children.some(o=>o.name.startsWith('Beard')),false);
+                const mesh=appearance.getObjectByName(`Hair_${style}_LOD${lod}`);
+                assert.ok(mesh);assert.equal(mesh.isSkinnedMesh,undefined);
+                human.update(0);human.root.updateMatrixWorld(true);
+                const sample=()=>head.worldToLocal(mesh.localToWorld(new Vector3().fromBufferAttribute(mesh.geometry.attributes.position,0)));
+                const local=sample();
+                for(const clip of ['Idle','Walk','Run']){
+                    human.setAnimation(clip);
+                    for(let frame=0;frame<4;frame++){
+                        human.update(.1);human.root.updateMatrixWorld(true);
+                        assert.ok(sample().distanceTo(local)<1e-6,`${style} age${age} LOD${lod} ${clip} must follow the existing head rigidly`);
+                    }
+                }
+                human.dispose();
+            }
+        }
+    }
+});

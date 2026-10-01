@@ -1,70 +1,39 @@
-import { BufferGeometry, Float32BufferAttribute, Group, IcosahedronGeometry, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } from 'three';
+import { Group, Material, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } from 'three';
+import { ConvexHull } from 'three/addons/math/ConvexHull.js';
 import { CharacterAppearance } from '../characters/CharacterAppearance';
 import { AppearanceFit } from '../characters/CharacterDNA';
 
-/** Small faceted modules in model axes, centred on the rigid head. */
-export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1}){
-    const group=new Group();group.name='Appearance';group.userData.appearance=profile;
-    const material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
-    const bandMaterial=new MeshStandardMaterial({color:'#8b7047',roughness:1,flatShading:true});
-    const rx=size.x/2+.008,ry=size.y/2+.008,rz=size.z/2+.008;
-    const add=(geometry:BufferGeometry,name:string,position=new Vector3(),scale=new Vector3(1,1,1),band=false)=>{
-        const mesh=new Mesh(geometry,band?bandMaterial:material);mesh.name=name;mesh.position.copy(position);mesh.scale.copy(scale);mesh.castShadow=true;group.add(mesh);return mesh;
-    };
-    const segments=[12,10,8][lod],rows=[4,3,3][lod],vertices:number[]=[],indices:number[]=[];
-    for(let r=0;r<=rows;r++)for(let i=0;i<=segments;i++){
-        const theta=i/segments*Math.PI*2,front=Math.max(0,Math.cos(theta));
-        const phi=r/rows*(Math.PI*(.73-front*.32));
-        // Circumscribe the faceted skull, including polygon chord loss at each
-        // LOD. A cap based only on bounding-box radii could cut through temples.
-        const ridge=1.20/(Math.cos(Math.PI/segments)*Math.cos(Math.PI*.73/rows/2));
-        vertices.push(Math.sin(theta)*Math.sin(phi)*rx*ridge,Math.cos(phi)*ry*ridge,Math.cos(theta)*Math.sin(phi)*rz*ridge);
-        if(r<rows&&i<segments){const a=r*(segments+1)+i,b=a+segments+1;indices.push(a,b,a+1,a+1,b,b+1);}
-    }
-    const cap=new BufferGeometry();cap.setAttribute('position',new Float32BufferAttribute(vertices,3));cap.setIndex(indices);cap.computeVertexNormals();add(cap,'HairCap');
-    const blob=(name:string,x:number,y:number,z:number,sx:number,sy:number,sz:number)=>add(new IcosahedronGeometry(1,0),name,new Vector3(x*rx,y*ry,z*rz),new Vector3(sx*rx,sy*ry,sz*rz));
-    const chain=(name:string,x:number,y:number,z:number,length:number,width:number)=>{
-        const count=[5,4,3][lod];
-        for(let i=0;i<count;i++){const t=i/(count-1);blob(name,x+Math.sin(i*2)*.08,y-length*t,z,width*(1-t*.55),length/count*.8,width*(1-t*.55));}
-        add(new IcosahedronGeometry(1,0),name+'Tie',new Vector3(x*rx,(y-length+.08)*ry,z*rz),new Vector3(width*rx*.65,ry*.10,width*rz*.65),true);
-    };
-    switch(profile.hairStyle){
-        case 'medium':for(const side of [-1,1])blob('HairMedium',side*.8,-.32,-.15,.38,.75,.75);blob('HairBack',0,-.3,-.75,.85,.75,.4);break;
-        case 'long':for(const side of [-1,1])blob('HairLong',side*.83,-.7,-.25,.36,1.35,.65);blob('HairBack',0,-.65,-.85,.85,1.4,.32);break;
-        case 'tied':blob('HairTie',0,-.10,-1.02,.35,.35,.35);blob('HairTail',0,-.8,-1.1,.38,1.2,.35);break;
-        case 'bun':blob('HairBun',0,1.1,-.55,.55,.6,.55);break;
-        case 'braid':chain('HairBraid',.85,-.5,-.45,1.8,.4);break;
-        case 'short':blob('HairCrest',-.12,.85,.18,.85,.35,.7);break;
-    }
-    const hairMeshes=group.children.slice();
-    // The hair control adds clearance from the head rather than scaling the
-    // whole hairstyle (which also lengthened tails and enlarged the bun).
+/** Reference-generated geometry only. An unavailable module stays absent. */
+export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1},source:Group|null=null,skull:Vector3[]=[]){
+    const group=new Group();group.name='Appearance';group.userData.appearance=profile;group.userData.appearanceFit=fit;
+    group.userData.hairAsset=source?'reference-generated':'pending';
+    group.userData.beardAsset=profile.beardStyle==='none'?'not-applicable':'pending';
+    if(!source)return group;
+    const hair=source.clone(true);hair.name='GeneratedHair';hair.updateMatrixWorld(true);
+    const reference=new Vector3(.1992,.2397,.2189);
+    const scale=Math.max(size.x/reference.x,size.y/reference.y,size.z/reference.z);
+    const hull=skull.length>=4?new ConvexHull().setFromPoints(skull):null;
     const clearance=Math.min(size.x,size.y,size.z)*.5*(fit.hair-1);
-    if(clearance>0)for(const object of hairMeshes){
-        const mesh=object as Mesh,positions=mesh.geometry.attributes.position;
+    hair.traverse(object=>{
+        if(!(object as Mesh).isMesh)return;
+        const mesh=object as Mesh;mesh.geometry=mesh.geometry.clone();
+        mesh.material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
+        // Bake imported transforms into owned geometry before fitting, so LODs
+        // and exported GLBs share the same coordinate frame.
+        mesh.geometry.applyMatrix4(mesh.matrixWorld);mesh.position.set(0,0,0);mesh.quaternion.identity();mesh.scale.set(1,1,1);
+        const positions=mesh.geometry.attributes.position;
         for(let i=0;i<positions.count;i++){
-            const point=new Vector3().fromBufferAttribute(positions,i).multiply(mesh.scale).add(mesh.position);
-            const outward=point.clone().normalize().multiplyScalar(clearance);
-            point.add(outward).sub(mesh.position).divide(mesh.scale);
-            positions.setXYZ(i,point.x,point.y,point.z);
+            const p=new Vector3().fromBufferAttribute(positions,i).multiplyScalar(scale),direction=p.clone().normalize();
+            if(hull&&p.y>-size.y*.45){
+                let radius=Infinity;
+                for(const face of hull.faces){const denominator=face.normal.dot(direction);if(denominator>1e-6)radius=Math.min(radius,face.constant/denominator);}
+                if(Number.isFinite(radius)&&p.length()<radius+.003)p.copy(direction.multiplyScalar(radius+.003));
+            }
+            p.addScaledVector(p.clone().normalize(),clearance);positions.setXYZ(i,p.x,p.y,p.z);
         }
-        mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();
-    }
-    if(profile.beardStyle!=='none'){
-        // Chin/jaw frame leaves the central upper face clear.
-        for(const side of [-1,1])blob('BeardJaw',side*.65,-.63,.67,.28,.50,.28);
-        blob('Moustache',0,-.48,.91,.62,.13,.15);
-        const style=profile.beardStyle;
-        if(style==='stubble')blob('BeardChin',0,-.9,.70,.62,.24,.3);
-        else if(style==='braid')chain('BeardBraid',0,-.95,.86,1.5,.42);
-        else if(style==='split-braid')for(const side of [-1,1])chain('BeardBraid',side*.4,-.95,.78,1.2,.3);
-        else {const length=style==='short'?.45:style==='medium'?.8:1.6;blob('BeardVolume',0,-.95-length*.35,.75,.78,length,.42);}
-    }
-    // Scale the beard from its upper attachment, keeping it on the jaw.
-    const anchor=new Vector3(0,-.45*ry,.8*rz);
-    for(const mesh of group.children.filter(mesh=>!hairMeshes.includes(mesh))){mesh.position.sub(anchor).multiplyScalar(fit.beard).add(anchor);mesh.scale.multiplyScalar(fit.beard);}
-    group.userData.appearanceFit=fit;
-    return group;
+        mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();mesh.castShadow=true;
+    });
+    group.add(hair);return group;
 }
 
 /** A simple waist wrap proves a separate garment can share skinning and morphs. */
@@ -88,7 +57,7 @@ export function clothingLayer(body:SkinnedMesh,ratio=1){
 }
 
 export function disposeModules(group:Group){
-    const materials=new Set<MeshStandardMaterial>();
+    const materials=new Set<Material>();
     group.traverse(o=>{if((o as Mesh).isMesh){const mesh=o as Mesh;mesh.geometry.dispose();for(const m of Array.isArray(mesh.material)?mesh.material:[mesh.material])materials.add(m as MeshStandardMaterial);}});
     for(const material of materials)material.dispose();group.removeFromParent();
 }

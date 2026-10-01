@@ -26,7 +26,7 @@ export class UniversalHuman {
     private garment:SkinnedMesh|null=null;
     private motion={cadence:1,stride:1,footfall:1};
     get clips(){return this.asset.animations;}
-    constructor(private asset:GLTF,profile:HumanProfile,skinTone:string){
+    constructor(private asset:GLTF,profile:HumanProfile,skinTone:string,private hairAsset:Group|null=null){
         const body=clone(asset.scene);this.root.add(body);
         body.traverse(object=>{
             if((object as Bone).isBone){const bone=object as Bone;this.bones.push(bone);this.rest.set(bone,bone.position.clone());this.restRotation.set(bone,bone.quaternion.clone());}
@@ -75,14 +75,14 @@ export class UniversalHuman {
         for(const skeleton of skeletons)skeleton.calculateInverses();
         const head=this.bones.find(b=>b.name==='Head');
         if(head){
-            const bounds=new Box3();
+            const bounds=new Box3(),skull:Vector3[]=[];
             for(const mesh of this.meshes){const p=mesh.geometry.attributes.position;
-                for(let i=0;i<p.count;i++)if(p.getY(i)>1.50&&Math.abs(p.getX(i))<.18)bounds.expandByPoint(mesh.getVertexPosition(i,new Vector3()));
+                for(let i=0;i<p.count;i++)if(p.getY(i)>1.56&&Math.abs(p.getX(i))<.18){const point=mesh.getVertexPosition(i,new Vector3());bounds.expandByPoint(point);skull.push(point);}
             }
             if(!bounds.isEmpty()){
                 const size=bounds.getSize(new Vector3());
                 const lod=Number(this.meshes[0].userData.lod??0);
-                const appearance=appearanceModules(profile.appearance,size,lod,profile.appearanceFit);
+                const appearance=appearanceModules(profile.appearance,size,lod,profile.appearanceFit,this.hairAsset,skull.map(p=>p.sub(bounds.getCenter(new Vector3()))));
                 appearance.position.copy(bounds.getCenter(new Vector3()));this.root.add(appearance);this.root.updateMatrixWorld(true);head.attach(appearance);
 
                 this.modules.userData.appearanceObject=appearance;
