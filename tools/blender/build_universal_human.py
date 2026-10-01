@@ -55,8 +55,10 @@ def body_morph(point, key):
     cx=side*(armness*max(0,.235+(1.4-z)*.32)+(1-armness)*legness*(.21-.08*smooth(.10,.90,z))*smooth(0,.10,abs(x)))
     if key in ('Masculine','Feminine'):
         sign=1 if key=='Masculine' else -1
-        x *= 1+sign*(.30*shoulder+.16*chest-.24*hips+.055*head+.12*waist)
-        y *= 1+sign*(.24*shoulder+.16*chest-.10*hips+.035*head)
+        breadth=(.30*shoulder+.16*chest-.24*hips+.055*head+.12*waist) if sign>0 else (.18*shoulder+.06*chest-.16*hips+.055*head+.04*waist)
+        depth=(.24*shoulder+.16*chest-.10*hips+.035*head) if sign>0 else (.14*shoulder+.06*chest-.08*hips+.035*head)
+        x *= 1+sign*breadth
+        y *= 1+sign*depth
         if key=='Masculine':
             x+=(x-cx)*.28*limbs
             y*=1+.28*limbs
@@ -75,8 +77,15 @@ def body_morph(point, key):
         y *= 1+sign*(.65 if sign>0 else .26)
     elif key in ('Agile','Grounded'):
         sign=1 if key=='Agile' else -1
-        x-=sign*(x-cx)*.07
-        y*=1-sign*.07
+        arm=smooth(.19,.30,abs(x))*smooth(.65,.85,z)*(1-smooth(1.45,1.58,z))
+        leg=(1-smooth(.78,.90,z))*smooth(.05,.11,abs(x))
+        region=max(arm,leg)
+        arm_centre=side*max(.235,.235+(1.4-z)*.32)
+        leg_centre=side*(.21-.08*smooth(.105,.90,z))
+        centre=arm_centre if arm>leg else leg_centre
+        # Agility thins girth around the limb centre, not the torso width.
+        x-=sign*(x-centre)*.32*region
+        y*=1-sign*.32*region
         z+=sign*.025*math.sin(math.pi*max(0,min(1,z/1.8)))
     elif key=='Overweight':
         # Strong caricature belly, with continuous transitions to hips/chest.
@@ -101,7 +110,7 @@ def body_morph(point, key):
     elif key=='Underweight':
         # Reduce soft volume around limb centres, preserving length and joints.
         torso=1-smooth(.19,.36,abs(x))
-        thinning=.22*band(z,1.10,.29)*torso+.12*limbs+.04*head
+        thinning=.10*band(z,1.10,.29)*torso+.18*limbs+.04*head
         x-=(x-cx)*thinning
         y*=1-thinning
     elif key=='Tall':
@@ -124,13 +133,15 @@ def body_morph(point, key):
 
 def rigid_region(point):
     x,y,z=point;side=1 if x>=0 else -1
+    if z>1.25 and abs(x)<.40:
+        return Vector((0,0,1.56)),smooth(1.25,1.50,z)*(1-smooth(.18,.40,abs(x))),'Head'
     if z<.28 and abs(x)>.08:
         return Vector((side*.21,0,.105)),1-smooth(.17,.28,z),'Foot_'+('L' if side>0 else 'R')
     hand=(1-smooth(.93,1.05,z))*smooth(.28,.36,abs(x))*smooth(.62,.72,z)
     return Vector((side*.39,0,.91)),hand,'Hand_'+('L' if side>0 else 'R')
 
 def morph(point,key):
-    # A hand/foot is a rigid unit. Only its joint-centre translation can follow
+    # Head, hands and feet are rigid units. Only joint-centre translation follows
     # body proportions; volume, seed detail and soft motion never reshape it.
     anchor,amount,_=rigid_region(point)
     original=Vector(point)
@@ -306,6 +317,7 @@ def main():
     print('UNIVERSAL_HUMAN::DONE',flush=True)
 
 if __name__=='__main__':main()
+
 
 
 
