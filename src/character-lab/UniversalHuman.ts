@@ -82,13 +82,13 @@ export class UniversalHuman {
             if(!bounds.isEmpty()){
                 const size=bounds.getSize(new Vector3());
                 const lod=Number(this.meshes[0].userData.lod??0);
-                const appearance=appearanceModules(profile.appearance,size,lod);
+                const appearance=appearanceModules(profile.appearance,size,lod,profile.appearanceFit);
                 appearance.position.copy(bounds.getCenter(new Vector3()));this.root.add(appearance);this.root.updateMatrixWorld(true);head.attach(appearance);
 
                 this.modules.userData.appearanceObject=appearance;
             }
         }
-        for(const body of this.meshes){const garment=clothingLayer(body);if(garment){body.parent!.add(garment);this.garment=garment;break;}}
+        for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;break;}}
         this.root.scale.y=.8;this.setAnimation(this.animation);
     }
     setAnimation(name:HumanAnimation){
