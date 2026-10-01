@@ -1,8 +1,9 @@
 import { BufferGeometry, Float32BufferAttribute, Group, IcosahedronGeometry, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } from 'three';
 import { CharacterAppearance } from '../characters/CharacterAppearance';
+import { AppearanceFit } from '../characters/CharacterDNA';
 
 /** Small faceted modules in model axes, centred on the rigid head. */
-export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number){
+export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1}){
     const group=new Group();group.name='Appearance';group.userData.appearance=profile;
     const material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
     const bandMaterial=new MeshStandardMaterial({color:'#8b7047',roughness:1,flatShading:true});
@@ -35,6 +36,8 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
         case 'braid':chain('HairBraid',.85,-.5,-.45,1.8,.4);break;
         case 'short':blob('HairCrest',-.12,.85,.18,.85,.35,.7);break;
     }
+    const hairMeshes=group.children.slice();
+    for(const mesh of hairMeshes){mesh.position.multiplyScalar(fit.hair);mesh.scale.multiplyScalar(fit.hair);}
     if(profile.beardStyle!=='none'){
         // Chin/jaw frame leaves the central upper face clear.
         for(const side of [-1,1])blob('BeardJaw',side*.65,-.63,.67,.28,.50,.28);
@@ -45,11 +48,15 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
         else if(style==='split-braid')for(const side of [-1,1])chain('BeardBraid',side*.4,-.95,.78,1.2,.3);
         else {const length=style==='short'?.45:style==='medium'?.8:1.6;blob('BeardVolume',0,-.95-length*.35,.75,.78,length,.42);}
     }
+    // Scale the beard from its upper attachment, keeping it on the jaw.
+    const anchor=new Vector3(0,-.45*ry,.8*rz);
+    for(const mesh of group.children.filter(mesh=>!hairMeshes.includes(mesh))){mesh.position.sub(anchor).multiplyScalar(fit.beard).add(anchor);mesh.scale.multiplyScalar(fit.beard);}
+    group.userData.appearanceFit=fit;
     return group;
 }
 
 /** A simple waist wrap proves a separate garment can share skinning and morphs. */
-export function clothingLayer(body:SkinnedMesh){
+export function clothingLayer(body:SkinnedMesh,ratio=1){
     const source=body.geometry,position=source.attributes.position,index=source.index;
     if(!index||!source.attributes.skinIndex)return null;
     const triangles:number[]=[];
@@ -59,7 +66,10 @@ export function clothingLayer(body:SkinnedMesh){
     if(!triangles.length)return null;
     const geometry=source.clone();geometry.setIndex(triangles);
     const p=geometry.attributes.position;
-    for(let i=0;i<p.count;i++){p.setX(i,p.getX(i)*1.035);p.setZ(i,p.getZ(i)*1.035);}
+    const width=1.035*ratio;
+    for(let i=0;i<p.count;i++){p.setX(i,p.getX(i)*width);p.setZ(i,p.getZ(i)*width);}
+    // Inflate relative morph deltas too, so the wrap follows a growing belly.
+    for(const attribute of geometry.morphAttributes.position??[])for(let i=0;i<attribute.count;i++){attribute.setX(i,attribute.getX(i)*width);attribute.setZ(i,attribute.getZ(i)*width);}
     const garment=new SkinnedMesh(geometry,new MeshStandardMaterial({color:'#71634e',roughness:1,flatShading:true}));
     garment.name='ClothingWaistWrap';garment.bind(body.skeleton,body.bindMatrix);garment.morphTargetInfluences=body.morphTargetInfluences?.slice();garment.morphTargetDictionary=body.morphTargetDictionary;
     garment.frustumCulled=false;garment.castShadow=true;return garment;

@@ -4,6 +4,8 @@ export type CoreTraits = Record<TraitKey, number>;
 export const heritageKeys = ['scandinavian', 'angloSaxon', 'gaelic', 'finnic', 'sami', 'baltic'] as const;
 export type HeritageKey = typeof heritageKeys[number];
 export type HeritageMix = Record<HeritageKey, number>;
+export const appearanceFitLimits = {hair:[1,1.3],beard:[.75,1.5],clothing:[1,1.3]} as const;
+export type AppearanceFit = Record<keyof typeof appearanceFitLimits,number>;
 export type CharacterDNA = {
     seed: number;
     sex: 'male' | 'female';
@@ -12,6 +14,7 @@ export type CharacterDNA = {
     heritage: HeritageMix;
     naming?: { culture: HeritageKey; seed: number };
     morphology?: { masculinity: number; height: number };
+    appearanceFit?: AppearanceFit;
 };
 export function sexFromMasculinity(masculinity:number):CharacterDNA['sex'] {
     if (!Number.isFinite(masculinity)||masculinity<0||masculinity>1||masculinity===.5) throw new Error('Masculinity must be 0–49% or 51–100%; exactly 50% is not allowed.');
@@ -46,7 +49,7 @@ export function defaultDNA(): CharacterDNA {
         traits: {physicality: .55, agility: .55, intelligence: .55, cunning: .4, temperament: .4},
         heritage: {scandinavian: .5, angloSaxon: .2, gaelic: .15, finnic: .05, sami: .05, baltic: .05}};
 }
-export function cloneDNA(dna: CharacterDNA): CharacterDNA { return {...dna, traits: {...dna.traits}, heritage: {...dna.heritage}, ...(dna.naming ? {naming:{...dna.naming}} : {}), ...(dna.morphology ? {morphology:{...dna.morphology}} : {})}; }
+export function cloneDNA(dna: CharacterDNA): CharacterDNA { return {...dna, traits: {...dna.traits}, heritage: {...dna.heritage}, ...(dna.naming ? {naming:{...dna.naming}} : {}), ...(dna.morphology ? {morphology:{...dna.morphology}} : {}), ...(dna.appearanceFit ? {appearanceFit:{...dna.appearanceFit}} : {})}; }
 export function parseCharacterDNA(value: unknown): CharacterDNA {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('DNA must be a JSON object.');
     const data = value as Record<string, unknown>;
@@ -61,6 +64,15 @@ export function parseCharacterDNA(value: unknown): CharacterDNA {
     for (const key of Object.keys(heritage)) {
         if (!heritageKeys.includes(key as HeritageKey)) throw new Error(`Unknown heritage: ${key}.`);
         if (typeof heritage[key] !== 'number' || !Number.isFinite(heritage[key]) || Number(heritage[key]) < 0) throw new Error(`${key} heritage must be a non-negative number.`);
+    }
+    let appearanceFit: AppearanceFit|undefined;
+    if(data.appearanceFit!==undefined){
+        if(!data.appearanceFit||typeof data.appearanceFit!=='object'||Array.isArray(data.appearanceFit))throw new Error('Appearance fit must contain hair, beard and clothing ratios.');
+        const fit=data.appearanceFit as Record<string,unknown>;
+        for(const [key,[min,max]] of Object.entries(appearanceFitLimits)){
+            if(typeof fit[key]!=='number'||!Number.isFinite(fit[key])||Number(fit[key])<min||Number(fit[key])>max)throw new Error(`${key} ratio must be between ${min} and ${max}.`);
+        }
+        appearanceFit={hair:Number(fit.hair),beard:Number(fit.beard),clothing:Number(fit.clothing)};
     }
     let naming: CharacterDNA['naming'];
     if(data.naming!==undefined){
@@ -79,6 +91,6 @@ export function parseCharacterDNA(value: unknown): CharacterDNA {
         if (typeof m.height !== 'number' || !Number.isFinite(m.height) || m.height < 1.16 || m.height > 1.6) throw new Error('Adult height must be between 1.16 and 1.60 metres.');
         morphology = {masculinity:m.masculinity,height:m.height};
     }
-    return {seed: Number(data.seed), sex: morphology?sexFromMasculinity(morphology.masculinity):data.sex as CharacterDNA['sex'], age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{})};
+    return {seed: Number(data.seed), sex: morphology?sexFromMasculinity(morphology.masculinity):data.sex as CharacterDNA['sex'], age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{}), ...(appearanceFit?{appearanceFit}:{})};
 }
 

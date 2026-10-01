@@ -41,3 +41,16 @@ test('child and teen proportions mature continuously on the shared rig and suppr
     assert.ok(child.motion.cadence>adult.motion.cadence);assert.ok(elder.motion.cadence<adult.motion.cadence);
     assert.ok(child.weights.ChildPower>0&&child.weights.ChildAgility>0&&adult.weights.FemininePower>0);
 });
+
+
+test('appearance fit round-trips without changing profile style, colour or anatomy',()=>{
+    const {parseCharacterDNA,cloneDNA}=load('../src/characters/CharacterDNA.ts');
+    const original=defaultDNA(),fit={hair:1.3,beard:.75,clothing:1.3};
+    const dna=parseCharacterDNA({...original,appearanceFit:fit});
+    assert.deepEqual(parseCharacterDNA(JSON.parse(JSON.stringify(dna))).appearanceFit,fit);
+    assert.deepEqual(characterAppearance(dna),characterAppearance(original));
+    assert.deepEqual(universalHumanProfile(dna).weights,universalHumanProfile(original).weights);
+    const cloned=cloneDNA(dna);cloned.appearanceFit.hair=1;assert.equal(dna.appearanceFit.hair,1.3);
+    for(const invalid of [{...fit,hair:.99},{...fit,beard:NaN},{...fit,clothing:1.31}])assert.throws(()=>parseCharacterDNA({...original,appearanceFit:invalid}));
+    assert.deepEqual(universalHumanProfile(original).appearanceFit,{hair:1,beard:1,clothing:1});
+});

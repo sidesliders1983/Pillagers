@@ -1,4 +1,4 @@
-import { CharacterDNA, cloneDNA, editHeritage, traitKeys, heritageKeys, TraitKey, HeritageKey, nextMasculinity } from '../characters/CharacterDNA';
+import { CharacterDNA, cloneDNA, editHeritage, traitKeys, heritageKeys, TraitKey, HeritageKey, nextMasculinity, appearanceFitLimits, AppearanceFit } from '../characters/CharacterDNA';
 import { Phenotype } from '../characters/Phenotype';
 import { heritageLabels } from '../characters/heritageProfiles';
 import { occupations, occupationScores, occupationFit, OccupationKey } from '../characters/occupationFit';
@@ -43,6 +43,9 @@ export class CharacterLabUI {
                     <div class="lab-character-labels"><span id="lab-current-label"></span><span id="lab-comparison-label" hidden></span></div>
                     <div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button><button data-action="overview">RTS view</button></div></div>
                     <div class="lab-dimensions" id="lab-dimensions"></div>
+                    <div class="lab-panel" aria-label="Appearance size ratios"><h2>Appearance size</h2>
+                    ${Object.entries(appearanceFitLimits).map(([key,[min,max]])=>`<div class="lab-slider"><label for="fit-${key}">${key[0].toUpperCase()+key.slice(1)} ratio <output id="fit-${key}-value">100%</output></label><input id="fit-${key}" data-appearance-fit="${key}" type="range" min="${min*100}" max="${max*100}" value="100" step="1"></div>`).join('')}
+                    <p class="lab-note">Relative to the fitted module. Hair and clothing cannot shrink below the safe fit. Styles and colours follow the profile. Current modules are temporary pending reference asset fitting.</p></div>
                     <div class="lab-compare"><div><strong>Keep an identity beside you.</strong><p>Pin this character, then change a trait or reroll the seed.</p></div><button id="lab-pin" data-action="pin">Pin comparison</button><button id="lab-unpin" data-action="unpin" hidden>Remove</button></div>
                 </section>
                 <section class="lab-panel lab-results" aria-label="Heritage and occupation fit">
@@ -64,7 +67,8 @@ export class CharacterLabUI {
         root.addEventListener('input',event=>{
             const input=event.target as HTMLInputElement;
             const next=cloneDNA(this.dna);
-            if(input.dataset.trait)next.traits[input.dataset.trait as TraitKey]=Number(input.value)/100;
+            if(input.dataset.appearanceFit)next.appearanceFit={...(next.appearanceFit??{hair:1,beard:1,clothing:1}),[input.dataset.appearanceFit]:Number(input.value)/100};
+            else if(input.dataset.trait)next.traits[input.dataset.trait as TraitKey]=Number(input.value)/100;
             else if(input.dataset.heritage)next.heritage=editHeritage(next.heritage,input.dataset.heritage as HeritageKey,Number(input.value)/100);
             else if(input.id==='lab-age')next.age=Number(input.value);
             else if(input.id==='lab-masculinity'||input.id==='lab-height'){
@@ -92,6 +96,8 @@ export class CharacterLabUI {
         const text=(id:string,value:string)=>{document.getElementById(id)!.textContent=value;};
         text('lab-sex',dna.sex==='female'?'Female':'Male');input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
         const body=universalHumanProfile(dna);input('lab-masculinity',String(body.masculinity*100));text('lab-masculinity-value',`${Math.round(body.masculinity*100)}% M`);text('lab-femininity-share',`Femininity ${Math.round((1-body.masculinity)*100)}%`);text('lab-masculinity-share',`Masculinity ${Math.round(body.masculinity*100)}%`);input('lab-height',String(body.height*100));text('lab-height-value',`${Math.round(body.height*100)} cm`);
+        for(const key of Object.keys(appearanceFitLimits) as (keyof AppearanceFit)[]){const value=body.appearanceFit[key];input(`fit-${key}`,String(value*100));text(`fit-${key}-value`,`${Math.round(value*100)}%`);}
+        (document.getElementById('fit-beard') as HTMLInputElement).disabled=body.appearance.beardStyle==='none';
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
         for(const key of heritageKeys){input(`heritage-${key}`,String(dna.heritage[key]*100));text(`heritage-value-${key}`,`${(dna.heritage[key]*100).toFixed(1)}%`);}
