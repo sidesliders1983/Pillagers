@@ -47,16 +47,26 @@ foreach($style in @('medium','short','long','tied','bun','braid')) {
         $states|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $statusFile
         $hair=Join-Path $folder 'hair-candidate.glb'
         if(!(Test-Path -LiteralPath $hair)) {
+            try {
+                $ErrorActionPreference='Continue'
             & $blender --background --factory-startup --threads 2 --python-exit-code 1 --python (Join-Path $PSScriptRoot 'extract-generated-hair.py') -- $source $hair *> (Join-Path $folder 'extraction.log')
+            } finally {$ErrorActionPreference='Stop'}
             if($LASTEXITCODE -ne 0){throw "Hair extraction needs review (exit code $LASTEXITCODE)"}
         }
         $hairRecord=@{backend='pixal3d';generatedBust=$record;extraction=(Get-Content (Join-Path $folder 'hair-candidate.extraction.json') -Raw|ConvertFrom-Json);output=@{path=$hair;sha256=(Get-Sha256 $hair)};reviewRequired=$true}
         $hairRecord|ConvertTo-Json -Depth 25|Set-Content -LiteralPath (Join-Path $folder 'hair-candidate.provenance.json')
         $states[$style].stage='optimizing'
         $states|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $statusFile
-        $lods=Join-Path $folder 'lods'
+        $lods=Join-Path $folder 'lods-1600-1100-800'
+        if((Test-Path -LiteralPath $lods) -and !(Test-Path -LiteralPath (Join-Path $lods "Hair_${style}_report.json")) -and @(Get-ChildItem -LiteralPath $lods).Count){
+            $lods=Join-Path $folder ("lods-1600-1100-800-retry-"+(Get-Date -Format 'yyyyMMddHHmmss'))
+        }
+        $states[$style].lodDirectory=$lods
         if(!(Test-Path -LiteralPath (Join-Path $lods "Hair_${style}_report.json"))) {
+            try {
+                $ErrorActionPreference='Continue'
             & $blender --background --factory-startup --threads 2 --python-exit-code 1 --python (Join-Path $PSScriptRoot 'optimize-character.py') -- $hair $lods --name "Hair_$style" --targets 1600 1100 800 --textures 512 256 128 *> (Join-Path $folder 'optimization.log')
+            } finally {$ErrorActionPreference='Stop'}
             if($LASTEXITCODE -ne 0){throw "LOD optimization failed (exit code $LASTEXITCODE)"}
         }
         $states[$style].stage='awaiting-fit-review';$states[$style].finished=Get-Date -Format o
