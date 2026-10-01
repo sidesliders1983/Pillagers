@@ -230,6 +230,12 @@ def main():
         height=high.z-low.z;assert height>0
         center=Vector(((low.x+high.x)/2,(low.y+high.y)/2,low.z))
         for v in body.data.vertices:v.co=(v.co-center)*(1.8/height)
+        # Pixal source faces +Y in Blender (-Z in glTF). Our rig, toes,
+        # belly/breast morphs and forward slouch use -Y (+Z in glTF).
+        # Rotate the source surface BEFORE generating shape keys and weights.
+        body.rotation_mode='XYZ'
+        body.rotation_euler.z=math.pi
+        bpy.ops.object.transform_apply(location=False,rotation=True,scale=False)
         body.name='UniversalHuman';body['source']='Pixal3D reference image → static LOD → rig/morphs';body['lod']=lod
         # Share vertex normals in storage. The runtime uses derivative-based flat shading,
         # so faces remain faceted without tripling every morph's vertex payload.
