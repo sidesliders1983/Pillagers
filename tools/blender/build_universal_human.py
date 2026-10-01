@@ -34,7 +34,7 @@ def smooth(low,high,value):
     t=max(0,min(1,(value-low)/(high-low)))
     return t*t*(3-2*t)
 
-def morph(point, key):
+def body_morph(point, key):
     x,y,z = point
     side = 1 if x>=0 else -1
     head = band(z,1.67,.14)
@@ -115,6 +115,21 @@ def morph(point, key):
     elif key=='Asymmetry':x+=.016*math.sin(z*4);z+=.008*max(-1,min(1,x/.15))*shoulder
     return Vector((x,y,z))
 
+def rigid_region(point):
+    x,y,z=point;side=1 if x>=0 else -1
+    if z<.28 and abs(x)>.08:
+        return Vector((side*.21,0,.105)),1-smooth(.17,.28,z),'Foot_'+('L' if side>0 else 'R')
+    hand=(1-smooth(.93,1.05,z))*smooth(.28,.36,abs(x))*smooth(.62,.72,z)
+    return Vector((side*.39,0,.91)),hand,'Hand_'+('L' if side>0 else 'R')
+
+def morph(point,key):
+    # A hand/foot is a rigid unit. Only its joint-centre translation can follow
+    # body proportions; volume, seed detail and soft motion never reshape it.
+    anchor,amount,_=rigid_region(point)
+    original=Vector(point)
+    rigid=original+body_morph(anchor,key)-anchor
+    return body_morph(point,key).lerp(rigid,amount)
+
 def rig():
     bpy.ops.object.armature_add()
     obj=bpy.context.object;obj.name='PillagersHumanRig'
@@ -173,6 +188,10 @@ def weights(body,armature):
     groups={b.name:body.vertex_groups.new(name=b.name) for b in bones}
     for vertex in body.data.vertices:
         p=vertex.co;x,y,z=p;side='L' if x>=0 else 'R'
+        _,rigid_amount,rigid_bone=rigid_region(p)
+        if rigid_amount>=.999999:
+            groups[rigid_bone].add([vertex.index],1,'REPLACE')
+            continue
         if z>1.52:names=['Head','Neck']
         # Hands in the relaxed A-pose sit below hip height. Classify the outer
         # arm region before legs, otherwise those vertices follow knee motion.
@@ -277,6 +296,7 @@ def main():
     print('UNIVERSAL_HUMAN::DONE',flush=True)
 
 if __name__=='__main__':main()
+
 
 
 
