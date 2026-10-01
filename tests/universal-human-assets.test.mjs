@@ -65,13 +65,13 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 for(const target of p.targets)assert.equal(json.accessors[target.POSITION].count,position.count);
                 const rigidGroups=new Map();
                 points.forEach(([x,y],i)=>{
-                    const kind=y<=.17?'Foot':Math.abs(x)>=.36&&y>=.72&&y<=.93?'Hand':null;
+                    const kind=y>=1.50&&Math.abs(x)<.18?'Head':y<=.17?'Foot':Math.abs(x)>=.36&&y>=.72&&y<=.93?'Hand':null;
                     if(!kind)return;
-                    const bone=kind+'_'+(x>=0?'L':'R');
+                    const bone=kind==='Head'?'Head':kind+'_'+(x>=0?'L':'R');
                     const group=rigidGroups.get(bone)??[];group.push(i);rigidGroups.set(bone,group);
                     const strongest=weights[i].indexOf(Math.max(...weights[i]));
                     assert.equal(joints[indices[i][strongest]],bone);
-                    assert.ok(weights[i][strongest]>.9999,'hands/feet must have one rigid joint influence');
+                    assert.ok(weights[i][strongest]>.9999,'head/hands/feet must have one rigid joint influence');
                 });
                 for(let target=0;target<p.targets.length;target++){
                     const offsets=values(json,binary,p.targets[target].POSITION);
@@ -101,6 +101,16 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                         assert.ok(Math.hypot(...jiggle[i])<.000001,'breast jiggle must stay inside the chest surface');
                     }
                 });
+                const agile=values(json,binary,p.targets[humanMorphNames.indexOf('Agile')].POSITION);
+                for(const select of [v=>Math.abs(v[0])>.30&&v[1]>1.0&&v[1]<1.25,v=>Math.abs(v[0])>.10&&v[1]>.35&&v[1]<.65]){
+                    const region=points.map((v,i)=>({v,i})).filter(({v})=>select(v));
+                    const baseDepth=region.reduce((sum,{v})=>sum+Math.abs(v[2]),0);
+                    const agileDepth=region.reduce((sum,{v,i})=>sum+Math.abs(v[2]+agile[i][2]),0);
+                    assert.ok(region.length>0&&agileDepth<baseDepth*.85,'high agility must visibly thin both arm and leg girth');
+                }
+                points.forEach((v,i)=>{
+                    if(Math.abs(v[0])<.12&&v[1]>1.0&&v[1]<1.2)assert.ok(Math.abs(agile[i][0])<.000001,'agility must preserve central torso breadth');
+                });
                 const age=values(json,binary,p.targets[humanMorphNames.indexOf('Age')].POSITION);
                 const head=points.map((v,i)=>({v,i})).filter(({v})=>v[1]>1.65);
                 assert.ok(head.reduce((sum,{i})=>sum+age[i][1],0)/head.length<-.15,'old head must sink');
@@ -117,7 +127,7 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                         const a=triangles[edge],b=triangles[Math.floor(edge/3)*3+(edge+1)%3];
                         const base=Math.hypot(...points[a].map((v,i)=>v-points[b][i]));
                         const changed=Math.hypot(...points[a].map((v,i)=>v+offsets[a][i]-points[b][i]-offsets[b][i]));
-                        assert.ok(changed<=base*2.5+.002,`${name} must not create spikes across regional boundaries`);
+                        assert.ok(changed<=base*2.5+.002,`${name} must not create spikes across regional boundaries: ${JSON.stringify({a:points[a],b:points[b],base,changed})}`);
                     }
                 }
             }
@@ -132,6 +142,7 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
     }
     assert.ok(manifest.lods[0].triangles>=6000&&manifest.lods[0].triangles<=10000);
 });
+
 
 
 
