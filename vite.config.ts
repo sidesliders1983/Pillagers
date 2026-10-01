@@ -2,7 +2,10 @@ import { defineConfig } from 'vite';
 import { readFileSync, existsSync, cpSync, mkdirSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 // Serve the original local kit without relocating or tracking third-party files.
-export default defineConfig({ plugins: [{ name: 'local-world-assets',
+export default defineConfig({
+    optimizeDeps: { entries: ['index.html'], include: ['three', 'three/addons/loaders/GLTFLoader.js', 'three/addons/controls/OrbitControls.js'] },
+    server: { watch: { ignored: ['**/tools/**', '**/scratch/**', '**/artifacts/**'] } },
+    plugins: [{ name: 'local-world-assets',
             configureServer(server) {
                 server.middlewares.use((req, res, next) => {
                     const url = (req.url ?? '').split('?')[0];

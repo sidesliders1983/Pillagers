@@ -3,3 +3,9 @@ dist/
 Assets/
 *.log
 artifacts/
+tools/
+scratch/
+public/game-assets/
+public/model-preview/
+trellis-test-error.png
+__pycache__/

@@ -104,6 +104,8 @@ Production builds copy the licensed kit for use by the local application. The ra
 
 ## Next steps
 
+The scriptable Blender character optimization benchmark and /asset-lab comparison page are described in [Asset Optimization Pipeline v0.1](docs/ASSET-OPTIMIZATION-V01.md). Run npm run assets:optimize to generate three LODs and npm run assets:publish to compare them locally. Generated assets and downloaded tools remain Git-ignored. npm run assets:test runs the independent Blender fixture test.
+
 1. Build one production-direction Pillagers Viking, keeping the current placeholders for scale comparison.
 2. Validate that character at close, default and overview RTS camera distances; add a simple walk cycle.
 3. Tune the Character Lab distributions and occupation preferences through comparisons before expanding into VikingGenome.
