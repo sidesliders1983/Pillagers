@@ -43,21 +43,21 @@
       "triangles": 8559,
       "vertices": 4285,
       "bytes": 2228768,
-      "sha256": "5d22595af57f68c0f0130527d7981ff7ed41659dfe075b9f63652cc3e6929aa7"
+      "sha256": "b09fc88c36b3160e6362e7e9f3ddf0365b89e9569a0577cafcf84a8f15cdff78"
     },
     {
       "file": "UniversalHuman_LOD1.glb",
       "triangles": 4295,
       "vertices": 2153,
       "bytes": 1298416,
-      "sha256": "1ef364e25f091d6e13fe650dddf4907c8affad344d6024732a5d4c43c05c6c52"
+      "sha256": "cb49236059145e7f8efd6819de0aadecc42cca7994f5c18d1e9f49e1ab0d969a"
     },
     {
       "file": "UniversalHuman_LOD2.glb",
       "triangles": 1293,
       "vertices": 652,
       "bytes": 524700,
-      "sha256": "84fa8f492abf679c6f918e1a33097a878277b05de3ca47e63273be32a3c651b1"
+      "sha256": "600d2c9436c7a8a82d0109ccbcab1199dd371d0e3eca6a29f4150a1f1003414b"
     }
   ]
 }
