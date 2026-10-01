@@ -34,6 +34,11 @@ def smooth(low,high,value):
     t=max(0,min(1,(value-low)/(high-low)))
     return t*t*(3-2*t)
 
+def breast_volume(x,z):
+    # Two broad ellipsoid caps. max preserves the sternum valley instead of
+    # adding both lobes into a central peak where they overlap.
+    return max(max(0,1-((x-center)/.115)**2-((z-1.285)/.155)**2)**.65 for center in (-.085,.085))
+
 def body_morph(point, key):
     x,y,z = point
     side = 1 if x>=0 else -1
@@ -53,10 +58,11 @@ def body_morph(point, key):
         x *= 1+sign*(.30*shoulder+.16*chest-.24*hips+.055*head+.12*waist)
         y *= 1+sign*(.24*shoulder+.16*chest-.10*hips+.035*head)
         if key=='Feminine':
-            # Two modest chest lobes under the fitted shirt, with a smooth sternum
-            # transition and no separate garment volume or additional topology.
-            lobes=band(x,.085,.065)+band(x,-.085,.065)
-            y-=.18*band(z,1.29,.10)*lobes*smooth(-.025,.045,-y)
+            volume=breast_volume(x,z)*smooth(-.025,.045,-y)
+            # Grow width and vertical fullness as well as forward depth.
+            x+=side*.03*volume*smooth(0,.05,abs(x))
+            z+=(z-1.285)*.32*volume
+            y-=.20*volume
         else:
             x+=(x-cx)*.28*limbs
             y*=1+.28*limbs
@@ -89,7 +95,7 @@ def body_morph(point, key):
         soft=band(z,1.035,.25)*(1-smooth(.19,.36,abs(x)))*smooth(-.015,.08,-y)
         z+=.055*soft;y-=.018*soft
     elif key=='BreastJiggle':
-        soft=band(z,1.29,.11)*(band(x,.085,.08)+band(x,-.085,.08))*smooth(-.015,.08,-y)
+        soft=breast_volume(x,z)*smooth(-.025,.045,-y)
         z+=.035*soft;y-=.012*soft
     elif key=='Underweight':
         # Reduce soft volume around limb centres, preserving length and joints.
@@ -271,7 +277,12 @@ def main():
         bm=bmesh.new();bm.from_mesh(body.data)
         bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.000001)
         faces=[f for f in bm.faces if all(.78<v.co.z<1.44 and abs(v.co.x)<.30 and v.co.y<.025 for v in f.verts)]
-        faces=sorted(faces,key=lambda f:f.calc_area(),reverse=True)[:[120,60,20][lod]]
+        # Reserve samples for both the chest and belly; sorting solely by area
+        # could spend the entire budget on the shirt's abdominal panels.
+        chest_faces=[f for f in faces if f.calc_center_median().z>1.16]
+        belly_faces=[f for f in faces if f.calc_center_median().z<=1.16]
+        count=[120,60,20][lod]
+        faces=sorted(chest_faces,key=lambda f:f.calc_area(),reverse=True)[:count//2]+sorted(belly_faces,key=lambda f:f.calc_area(),reverse=True)[:count-count//2]
         edges=list({e for f in faces for e in f.edges})
         if edges:bmesh.ops.subdivide_edges(bm,edges=edges,cuts=1,use_grid_fill=True)
         bm.to_mesh(body.data);bm.free();body.data.update()

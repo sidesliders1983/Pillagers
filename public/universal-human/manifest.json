@@ -40,24 +40,24 @@
   "lods": [
     {
       "file": "UniversalHuman_LOD0.glb",
-      "triangles": 8565,
-      "vertices": 4288,
-      "bytes": 2246608,
-      "sha256": "0faf04a1a43c047d68d83706edc4c20660baf72b2950996a52275358764cb686"
+      "triangles": 8559,
+      "vertices": 4285,
+      "bytes": 2228768,
+      "sha256": "5d22595af57f68c0f0130527d7981ff7ed41659dfe075b9f63652cc3e6929aa7"
     },
     {
       "file": "UniversalHuman_LOD1.glb",
-      "triangles": 4285,
-      "vertices": 2148,
-      "bytes": 1306724,
-      "sha256": "c0c6de3287c129ec120c3f048586d50eae3e5ce9def4a78a7aa6e89ab6452c9f"
+      "triangles": 4295,
+      "vertices": 2153,
+      "bytes": 1298416,
+      "sha256": "1ef364e25f091d6e13fe650dddf4907c8affad344d6024732a5d4c43c05c6c52"
     },
     {
       "file": "UniversalHuman_LOD2.glb",
       "triangles": 1293,
       "vertices": 652,
-      "bytes": 527480,
-      "sha256": "c0646f27c0559a4e815e9f13f82a0911ac06b34666b27f36e467d31aebe356d0"
+      "bytes": 524700,
+      "sha256": "84fa8f492abf679c6f918e1a33097a878277b05de3ca47e63273be32a3c651b1"
     }
   ]
 }

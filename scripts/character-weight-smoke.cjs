@@ -27,6 +27,10 @@ const assert=require('node:assert/strict');
         await page.waitForTimeout(600);await page.locator('#lab-preview').screenshot({path:'artifacts/human-underweight.png'});
         await slider('#trait-intelligence',100);await slider('#lab-masculinity',0);
         await page.waitForTimeout(500);await page.locator('#lab-preview').screenshot({path:'artifacts/human-feminine.png'});
+        await page.mouse.move(box.x+box.width/2,box.y+box.height/2);
+        await page.mouse.down();await page.mouse.move(box.x+box.width/2+box.height/4,box.y+box.height/2,{steps:15});await page.mouse.up();
+        await page.waitForTimeout(500);await page.locator('#lab-preview').screenshot({path:'artifacts/human-feminine-side.png'});
+        await page.getByRole('button',{name:'Reset view',exact:true}).click();
         await slider('#lab-age',100);assert.equal((await profile()).weights.Age,1);
         await page.waitForTimeout(500);await page.locator('#lab-preview').screenshot({path:'artifacts/human-slouch.png'});
         assert.equal(await page.getByRole('button',{name:'Heavy',exact:true}).count(),0);
@@ -34,6 +38,7 @@ const assert=require('node:assert/strict');
         assert.deepEqual(errors,[]);console.log('PASS: seeded overweight/underweight, intelligence balance, independent muscle axis and pinned comparison.');
     } finally {await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
+
 
 
 

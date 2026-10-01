@@ -24,7 +24,7 @@ The reference was supplied by the user. Its neutral bald body, fitted shirt and 
 
 This pipeline applies skinning to the image-generated, decimated topology. It does not claim artist-authored deformation loops or automatic production retopology. Joint deformation needs visual acceptance before closing #7; the generated shirt hem must also be checked for unwanted volume.
 
-Validated output: 8,565 / 4,285 / 1,293 triangles. Browser checks cover all 27 LOD/silhouette/animation combinations, pinned comparison, height/masculinity extremes, mobile layout/touch and the existing import/export/naming/heritage flows. GLB tests also reject hand vertices bound to leg bones and discontinuous build morphs. Instance tests ensure inverse-bind arrays never alter the cached source or another character, and per-instance bone textures are released. Hands are single rigid units with no finger bones, as requested. The exported clips are prototype motion loops; detailed locomotion polish remains separate from this integration.
+Validated output: 8,559 / 4,295 / 1,293 triangles. Browser checks cover all 27 LOD/silhouette/animation combinations, pinned comparison, height/masculinity extremes, mobile layout/touch and the existing import/export/naming/heritage flows. GLB tests also reject hand vertices bound to leg bones and discontinuous build morphs. Instance tests ensure inverse-bind arrays never alter the cached source or another character, and per-instance bone textures are released. Hands are single rigid units with no finger bones, as requested. The exported clips are prototype motion loops; detailed locomotion polish remains separate from this integration.
 
 
 
@@ -42,3 +42,5 @@ Each runtime instance owns two bounded damped springs with fixed substeps, drive
 ## Rigid hands and feet
 
 Every morphology axis preserves hand and foot shape. These regions receive only a uniform joint-centre translation, blended smoothly into the wrist/ankle; core hand vertices have 100% Hand influence and core foot vertices 100% Foot influence. Seed variations, height, muscularity, weight, age and jiggle cannot change their thickness or reshape toes/fingers. Binary tests verify constant per-region morph offsets and a single bone influence across all LODs. The browser regression imports the supplied seed 473419265 DNA and captures Idle/Walk/Run for every LOD.
+
+Breast growth uses two broad ellipsoid caps with lateral and vertical fullness as well as depth. Taking the maximum of the overlapping caps preserves the sternum valley. Local subdivision reserves surface samples for both chest and belly on every LOD. The breast spring uses the same rounded region mask, and asset tests verify lateral volume growth.
