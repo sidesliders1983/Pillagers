@@ -7,10 +7,20 @@ const {humanMorphNames}=load('../src/characters/UniversalHumanProfile.ts');
 const root=new URL('../public/universal-human/',import.meta.url);
 function glb(file){const data=readFileSync(new URL(file,root));assert.equal(data.readUInt32LE(0),0x46546c67);assert.equal(data.readUInt32LE(8),data.length);const length=data.readUInt32LE(12);return {data,json:JSON.parse(data.subarray(20,20+length).toString()),binary:data.subarray(28+length)};}
 function values(json,binary,index){
-    const a=json.accessors[index],view=json.bufferViews[a.bufferView],width={SCALAR:1,VEC3:3,VEC4:4,MAT4:16}[a.type];
-    const bytes={5121:1,5123:2,5125:4,5126:4}[a.componentType],stride=view.byteStride??width*bytes,base=(view.byteOffset??0)+(a.byteOffset??0);
-    const reader={5121:'readUInt8',5123:'readUInt16LE',5125:'readUInt32LE',5126:'readFloatLE'}[a.componentType];
-    return Array.from({length:a.count},(_,i)=>Array.from({length:width},(_,j)=>{const v=binary[reader](base+i*stride+j*bytes);return a.normalized?v/(a.componentType===5121?255:65535):v;}));
+    const a=json.accessors[index],width={SCALAR:1,VEC3:3,VEC4:4,MAT4:16}[a.type];
+    const read=(bufferView,offset,type,count,columns)=>{
+        const view=json.bufferViews[bufferView],bytes={5121:1,5123:2,5125:4,5126:4}[type];
+        const stride=view.byteStride??columns*bytes,base=(view.byteOffset??0)+(offset??0);
+        const reader={5121:'readUInt8',5123:'readUInt16LE',5125:'readUInt32LE',5126:'readFloatLE'}[type];
+        return Array.from({length:count},(_,i)=>Array.from({length:columns},(_,j)=>binary[reader](base+i*stride+j*bytes)));
+    };
+    const rows=a.bufferView===undefined?Array.from({length:a.count},()=>Array(width).fill(0)):read(a.bufferView,a.byteOffset,a.componentType,a.count,width);
+    if(a.sparse){
+        const s=a.sparse,indices=read(s.indices.bufferView,s.indices.byteOffset,s.indices.componentType,s.count,1);
+        const replacements=read(s.values.bufferView,s.values.byteOffset,a.componentType,s.count,width);
+        indices.forEach(([i],j)=>{rows[i]=replacements[j];});
+    }
+    return a.normalized?rows.map(row=>row.map(v=>v/(a.componentType===5121?255:65535))):rows;
 }
 test('published image-generated LODs preserve rig, sockets, morphs, weights and in-place clips',()=>{
     const manifest=JSON.parse(readFileSync(new URL('manifest.json',root),'utf8'));
@@ -42,6 +52,16 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 }
                 const position=json.accessors[p.attributes.POSITION];
                 for(const target of p.targets)assert.equal(json.accessors[target.POSITION].count,position.count);
+                const fat=values(json,binary,p.targets[humanMorphNames.indexOf('Overweight')].POSITION);
+                const thin=values(json,binary,p.targets[humanMorphNames.indexOf('Underweight')].POSITION);
+                const belly=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)<.15&&y>.95&&y<1.12&&z>.03);
+                assert.ok(belly.length>0);
+                assert.ok(belly.reduce((sum,{i})=>sum+fat[i][2],0)/belly.length>.12,'caricature belly must visibly project forwards');
+                assert.ok(belly.reduce((sum,{i})=>sum+thin[i][2],0)/belly.length<0,'underweight must reduce soft torso volume');
+                for(const joint of joints){
+                    const deltas=JSON.parse(json.nodes.find(n=>n.name===joint).extras.morphTranslations);
+                    assert.deepEqual(deltas.Overweight,[0,0,0]);assert.deepEqual(deltas.Underweight,[0,0,0]);
+                }
                 const triangles=values(json,binary,p.indices).flat();
                 for(const name of ['Powerful','Slight','Agile','Grounded']){
                     const offsets=values(json,binary,p.targets[humanMorphNames.indexOf(name)].POSITION);

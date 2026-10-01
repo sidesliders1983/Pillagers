@@ -14,7 +14,7 @@ from pathlib import Path
 import bpy
 from mathutils import Vector
 
-MORPHS = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry']
+MORPHS = ['Masculine','Feminine','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry']
 
 def rotation_only_clips(path):
     """Blender bakes constant bind translations too. Keep only rotation tracks so morphology can adapt joints."""
@@ -66,6 +66,20 @@ def morph(point, key):
         x-=sign*(x-cx)*.07
         y*=1-sign*.07
         z+=sign*.025*math.sin(math.pi*max(0,min(1,z/1.8)))
+    elif key=='Overweight':
+        # Strong caricature belly, with continuous transitions to hips/chest.
+        # Soft volume is independent of shoulder breadth and muscular build.
+        torso=1-smooth(.19,.36,abs(x))
+        belly=band(z,1.035,.20)*torso
+        x*=1+.85*belly+.08*head
+        y*=1+.45*belly+.12*head
+        y-=.24*belly*smooth(-.015,.08,-y)
+    elif key=='Underweight':
+        # Reduce soft volume around limb centres, preserving length and joints.
+        torso=1-smooth(.19,.36,abs(x))
+        thinning=.22*band(z,1.10,.29)*torso+.12*limbs+.04*head
+        x-=(x-cx)*thinning
+        y*=1-thinning
     elif key=='Tall':
         z=z*1.1666666667+.025*math.sin(math.pi*z/1.8);x*=1.035;y*=1.035
     elif key=='Short':
@@ -118,6 +132,9 @@ def rig():
     for bone in obj.data.bones:
         values={}
         for key in MORPHS:
+            if key in ('Overweight','Underweight'):
+                values[key]=[0,0,0]
+                continue
             d=morph(bone.head_local,key)-bone.head_local
             if bone.parent:d-=morph(bone.parent.head_local,key)-bone.parent.head_local
             rotation=bone.parent.matrix_local.to_3x3().inverted() if bone.parent else None
@@ -225,3 +242,4 @@ def main():
     print('UNIVERSAL_HUMAN::DONE',flush=True)
 
 if __name__=='__main__':main()
+
