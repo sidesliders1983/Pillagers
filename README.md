@@ -41,7 +41,7 @@ Mobile controls: tap a location to move the camera center there; swipe horizonta
 
 ## Character Lab v0.3
 
-Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Edit sex, age, seed, five traits and six normalized heritage shares; preview the image-generated Universal Human and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
+Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Derive sex with the Femininity ↔ Masculinity slider (50% is skipped); edit age, seed, five traits and six normalized heritage shares; preview the image-generated Universal Human and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
 
 Personal names now derive deterministically from heritage, sex, local culture and seed. The dominant heritage automatically chooses the naming culture; reroll only the name while preserving appearance. Naming configuration travels with DNA JSON and pinned comparisons. See [Naming v0.2](docs/CHARACTER-NAMING-V02.md) for curated patterns, patronymics and the historical/art-direction boundaries.
 
@@ -109,3 +109,4 @@ The scriptable Blender character optimization benchmark and /asset-lab compariso
 1. Build one production-direction Pillagers Viking, keeping the current placeholders for scale comparison.
 2. Validate that character at close, default and overview RTS camera distances; add a simple walk cycle.
 3. Tune the Character Lab distributions and occupation preferences through comparisons before expanding into VikingGenome.
+

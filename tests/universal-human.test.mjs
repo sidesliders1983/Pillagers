@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {load} from './load-source.mjs';
-const {defaultDNA,parseCharacterDNA,cloneDNA}=load('../src/characters/CharacterDNA.ts');
+const {defaultDNA,parseCharacterDNA,cloneDNA,sexFromMasculinity,nextMasculinity}=load('../src/characters/CharacterDNA.ts');
 const {universalHumanProfile,humanMorphNames}=load('../src/characters/UniversalHumanProfile.ts');
 test('adult anatomy is deterministic and independent of cognitive traits, temperament and identity sex',()=>{
-    const dna=defaultDNA(),first=universalHumanProfile(dna);
+    const dna={...defaultDNA(),morphology:{masculinity:.51,height:1.8}},first=universalHumanProfile(dna);
     assert.deepEqual(first,universalHumanProfile(dna));
     for(const key of ['intelligence','cunning','temperament']) assert.deepEqual(first,universalHumanProfile({...dna,traits:{...dna.traits,[key]:1}}));
     assert.deepEqual(first,universalHumanProfile({...dna,sex:'female'}));
@@ -20,4 +20,14 @@ test('physicality and agility compose independently; explicit morphology survive
     assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:NaN,height:1.8}}));
     assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:.5,height:0}}));
     assert.equal(universalHumanProfile({...dna,age:0}).adultAge,18);
+});
+
+test('masculinity determines sex and excludes the midpoint in both slider directions',()=>{
+    assert.equal(sexFromMasculinity(.49),'female');assert.equal(sexFromMasculinity(.51),'male');
+    assert.throws(()=>sexFromMasculinity(.5));
+    assert.equal(nextMasculinity(50,.49),.51);assert.equal(nextMasculinity(50,.51),.49);
+    const dna={...defaultDNA(),sex:'male',morphology:{masculinity:.49,height:1.8}};
+    assert.equal(parseCharacterDNA(dna).sex,'female');
+    assert.equal(parseCharacterDNA({...dna,sex:undefined}).sex,'female');
+    assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:.5,height:1.8}}));
 });

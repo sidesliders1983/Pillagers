@@ -1,4 +1,4 @@
-import { CharacterDNA, cloneDNA, editHeritage, traitKeys, heritageKeys, TraitKey, HeritageKey } from '../characters/CharacterDNA';
+import { CharacterDNA, cloneDNA, editHeritage, traitKeys, heritageKeys, TraitKey, HeritageKey, nextMasculinity } from '../characters/CharacterDNA';
 import { Phenotype } from '../characters/Phenotype';
 import { heritageLabels } from '../characters/heritageProfiles';
 import { occupations, occupationScores, occupationFit, OccupationKey } from '../characters/occupationFit';
@@ -22,12 +22,12 @@ export class CharacterLabUI {
             <div class="lab-layout">
                 <section class="lab-panel lab-controls" aria-label="Character controls">
                     <div class="lab-section-heading"><h2>01 <span>Identity</span></h2><span class="lab-badge">DNA</span></div>
-                    <div class="lab-identity"><label>Sex<select id="lab-sex"><option value="male">Male</option><option value="female">Female</option></select></label>
+                    <div class="lab-identity"><label>Sex (derived)<output id="lab-sex" aria-live="polite"></output></label>
                     <label>Seed<input id="lab-seed" type="number" min="0" max="4294967295" step="1"></label></div>
                     <div class="lab-slider"><label for="lab-age">Adult age <output id="lab-age-value"></output></label><input id="lab-age" type="range" min="18" max="100" step="1"><div class="lab-extremes"><span>Young adult</span><span>Old adult</span></div></div>
-                    <div class="lab-slider"><label for="lab-masculinity">Masculinity <output id="lab-masculinity-value"></output></label><input id="lab-masculinity" type="range" min="0" max="100" step="1"><div class="lab-extremes"><span>Feminine</span><span>Neutral · Masculine</span></div></div>
+                    <div class="lab-slider"><label for="lab-masculinity">Femininity ↔ Masculinity <output id="lab-masculinity-value"></output></label><input id="lab-masculinity" type="range" min="0" max="100" step="1"><div class="lab-extremes"><span id="lab-femininity-share">Femininity</span><span id="lab-masculinity-share">Masculinity</span></div></div>
                     <div class="lab-slider"><label for="lab-height">Adult height <output id="lab-height-value"></output></label><input id="lab-height" type="range" min="145" max="210" step="1"><div class="lab-extremes"><span>145 cm</span><span>210 cm</span></div></div>
-                    <p class="lab-note">One neutral adult mesh and one rig. Sex is independent of morphology. Legacy ages below 18 preview as an adult.</p>
+                    <p class="lab-note">The slider determines sex: up to 49% masculinity is female; from 51% is male. Exactly 50% is skipped. One shared adult mesh and rig.</p>
                     <div class="lab-button-row"><button data-action="reroll">Reroll seed</button><button data-action="randomize">Randomize character</button></div>
                     <div class="lab-naming"><h2>Personal name</h2><strong id="lab-name"></strong><label>Name culture (dominant heritage)<select id="lab-culture" disabled>${heritageKeys.map(key=>`<option value="${key}">${heritageLabels[key]}</option>`).join('')}</select></label><label>Name variation seed<input id="lab-name-seed" type="number" min="0" max="4294967295" step="1"></label><button data-action="reroll-name">Reroll name</button><p class="lab-note">The largest heritage share determines the naming grammar; compatible minority ingredients add subtle variation. Name variation leaves appearance unchanged.</p><details><summary>Name derivation</summary><pre id="lab-name-derivation"></pre></details></div>
                     <div class="lab-section-heading"><h2>02 <span>Core traits</span></h2><span class="lab-badge">5 AXES</span></div>
@@ -67,11 +67,10 @@ export class CharacterLabUI {
             const next=cloneDNA(this.dna);
             if(input.dataset.trait)next.traits[input.dataset.trait as TraitKey]=Number(input.value)/100;
             else if(input.dataset.heritage)next.heritage=editHeritage(next.heritage,input.dataset.heritage as HeritageKey,Number(input.value)/100);
-            else if(input.id==='lab-sex')next.sex=input.value as 'male'|'female';
             else if(input.id==='lab-age')next.age=Number(input.value);
             else if(input.id==='lab-masculinity'||input.id==='lab-height'){
                 const profile=universalHumanProfile(next);
-                next.morphology={masculinity:input.id==='lab-masculinity'?Number(input.value)/100:profile.masculinity,height:input.id==='lab-height'?Number(input.value)/100:profile.height};
+                next.morphology={masculinity:input.id==='lab-masculinity'?nextMasculinity(Number(input.value),profile.masculinity):profile.masculinity,height:input.id==='lab-height'?Number(input.value)/100:profile.height};
             }
             else if(input.id==='lab-culture')next.naming={culture:input.value as HeritageKey,seed:next.naming?.seed??0};
             else if(input.id==='lab-name-seed'){
@@ -92,8 +91,8 @@ export class CharacterLabUI {
         this.dna=cloneDNA(dna);
         const input=(id:string,value:string)=>{(document.getElementById(id) as HTMLInputElement).value=value;};
         const text=(id:string,value:string)=>{document.getElementById(id)!.textContent=value;};
-        input('lab-sex',dna.sex);input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
-        const body=universalHumanProfile(dna);input('lab-masculinity',String(body.masculinity*100));text('lab-masculinity-value',`${Math.round(body.masculinity*100)}%`);input('lab-height',String(body.height*100));text('lab-height-value',`${Math.round(body.height*100)} cm`);
+        text('lab-sex',dna.sex==='female'?'Female':'Male');input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
+        const body=universalHumanProfile(dna);input('lab-masculinity',String(body.masculinity*100));text('lab-masculinity-value',`${Math.round(body.masculinity*100)}% M`);text('lab-femininity-share',`Femininity ${Math.round((1-body.masculinity)*100)}%`);text('lab-masculinity-share',`Masculinity ${Math.round(body.masculinity*100)}%`);input('lab-height',String(body.height*100));text('lab-height-value',`${Math.round(body.height*100)} cm`);
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
         for(const key of heritageKeys){input(`heritage-${key}`,String(dna.heritage[key]*100));text(`heritage-value-${key}`,`${(dna.heritage[key]*100).toFixed(1)}%`);}

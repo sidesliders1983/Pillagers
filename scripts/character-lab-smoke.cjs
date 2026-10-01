@@ -23,7 +23,7 @@ await slider('#trait-physicality',100);const strong=await phenotype();assert.ok(
 await slider('#trait-agility',0);const heavy=await phenotype();await slider('#trait-agility',100);const agile=await phenotype();assert.ok(agile.legRatio>heavy.legRatio);assert.ok(agile.movementWeight<heavy.movementWeight);
 const face=await phenotype();await slider('#trait-intelligence',100);const analytical=await phenotype();assert.equal(face.headWidth,analytical.headWidth);assert.equal(face.noseLength,analytical.noseLength);
 await slider('#heritage-sami',80);const mixed=await dna();assert.ok(Math.abs(mixed.heritage.sami-.8)<1e-12);assert.ok(Math.abs(Object.values(mixed.heritage).reduce((a,b)=>a+b,0)-1)<1e-12);
-await page.locator('#lab-sex').selectOption('female');await slider('#lab-age',68);assert.equal((await dna()).sex,'female');assert.equal((await dna()).age,68);
+await slider('#lab-masculinity',49);assert.equal((await dna()).sex,'female');await slider('#lab-masculinity',50);assert.equal((await dna()).morphology.masculinity,.51);assert.equal((await dna()).sex,'male');await slider('#lab-masculinity',50);assert.equal((await dna()).morphology.masculinity,.49);await slider('#lab-age',68);assert.equal((await dna()).sex,'female');assert.equal((await dna()).age,68);
 const beforeReroll=await dna();await page.getByRole('button',{name:'Reroll seed',exact:true}).click();const rerolled=await dna();assert.notEqual(rerolled.seed,beforeReroll.seed);assert.deepEqual({...rerolled,seed:beforeReroll.seed},beforeReroll);
 await page.getByRole('button',{name:'Pin comparison',exact:true}).click();const pinnedLabel=await page.locator('#lab-comparison-label').textContent();await slider('#trait-physicality',15);assert.equal(await page.locator('#lab-comparison-label').textContent(),pinnedLabel);assert.ok(await page.locator('#fit-reference-warrior').isVisible());
 await page.locator('.lab-json > summary').click();await page.locator('#lab-json').fill(JSON.stringify(initial));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();assert.deepEqual(await dna(),initial);
@@ -49,3 +49,5 @@ await mobile.waitForTimeout(700);await mobile.screenshot({path:'artifacts/charac
 assert.deepEqual(errors,[]);console.log('Character Lab browser passed: live model/traits, normalized heritage, sex/age, seed reroll, pinned comparison, valid/invalid import, real JSON download, orbit/zoom, mobile layout/touch and no scenery asset requests.');
 }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
+
+
