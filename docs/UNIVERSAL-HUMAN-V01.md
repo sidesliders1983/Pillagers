@@ -38,3 +38,7 @@ The generated source faces +Y in Blender. The rig, toes, belly/chest morphs and 
 Before morphing, duplicate surface vertices are welded (UVs remain on loops) and the largest front-torso triangles receive local subdivision. This keeps the three LOD budgets while providing enough surface samples for a broad ellipsoid belly cap and rounded hanging underside. The base remains faceted. Published files contain BellyJiggle and BreastJiggle morphs with no skeleton translation.
 
 Each runtime instance owns two bounded damped springs with fixed substeps, driven by the current locomotion cadence and vertical root acceleration. Belly response scales with Overweight; breast response scales with Feminine. Idle has a small drive, Walk and Run have progressively larger drives. Anatomy changes reset spring state; source geometry and pinned instances are independent. This is inexpensive secondary motion for the prototype, without soft-body collision simulation.
+
+## Rigid hands and feet
+
+Every morphology axis preserves hand and foot shape. These regions receive only a uniform joint-centre translation, blended smoothly into the wrist/ankle; core hand vertices have 100% Hand influence and core foot vertices 100% Foot influence. Seed variations, height, muscularity, weight, age and jiggle cannot change their thickness or reshape toes/fingers. Binary tests verify constant per-region morph offsets and a single bone influence across all LODs. The browser regression imports the supplied seed 473419265 DNA and captures Idle/Walk/Run for every LOD.

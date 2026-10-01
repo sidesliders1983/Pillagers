@@ -59,6 +59,23 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 }
                 const position=json.accessors[p.attributes.POSITION];
                 for(const target of p.targets)assert.equal(json.accessors[target.POSITION].count,position.count);
+                const rigidGroups=new Map();
+                points.forEach(([x,y],i)=>{
+                    const kind=y<=.17?'Foot':Math.abs(x)>=.36&&y>=.72&&y<=.93?'Hand':null;
+                    if(!kind)return;
+                    const bone=kind+'_'+(x>=0?'L':'R');
+                    const group=rigidGroups.get(bone)??[];group.push(i);rigidGroups.set(bone,group);
+                    const strongest=weights[i].indexOf(Math.max(...weights[i]));
+                    assert.equal(joints[indices[i][strongest]],bone);
+                    assert.ok(weights[i][strongest]>.9999,'hands/feet must have one rigid joint influence');
+                });
+                for(let target=0;target<p.targets.length;target++){
+                    const offsets=values(json,binary,p.targets[target].POSITION);
+                    for(const [bone,group] of rigidGroups){
+                        const reference=offsets[group[0]];
+                        for(const i of group)assert.ok(Math.hypot(...offsets[i].map((v,j)=>v-reference[j]))<.000002,`${humanMorphNames[target]} must only translate ${bone}, never deform it (including seed 473419265)`);
+                    }
+                }
                 const fat=values(json,binary,p.targets[humanMorphNames.indexOf('Overweight')].POSITION);
                 const thin=values(json,binary,p.targets[humanMorphNames.indexOf('Underweight')].POSITION);
                 const belly=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)<.15&&y>.95&&y<1.12&&z>.03);
