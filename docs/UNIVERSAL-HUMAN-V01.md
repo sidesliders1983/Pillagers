@@ -28,3 +28,7 @@ Validated output: 7,999 / 3,999 / 1,199 triangles. Browser checks cover all 27 L
 
 
 
+
+## Orientation
+
+The generated source faces +Y in Blender. The rig, toes, belly/chest morphs and forward slouch use −Y in Blender (+Z in glTF). The exporter rotates the source 180 degrees around the vertical axis before building morphs, weights and clips; it explicitly switches the imported object's quaternion rotation mode to Euler for that operation. Asset validation compares the actual toe silhouette against the ankle centre to catch a reversed source independently of the procedural morphs.

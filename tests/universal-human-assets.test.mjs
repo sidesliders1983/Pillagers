@@ -43,6 +43,13 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 const weights=values(json,binary,p.attributes.WEIGHTS_0);
                 for(const row of weights)assert.ok(Math.abs(row.reduce((a,b)=>a+b,0)-1)<.002);
                 const points=values(json,binary,p.attributes.POSITION),indices=values(json,binary,p.attributes.JOINTS_0);
+                // Independent surface landmark: toes of the image-derived mesh
+                // must project toward +Z, the same side as belly/breast morphs.
+                const feet=points.filter(([x,y])=>Math.abs(x)>.10&&y<.075);
+                if(feet.length){
+                    const ankles=points.filter(([x,y])=>Math.abs(x)>.10&&y>.13&&y<.22); const ankleZ=ankles.reduce((sum,v)=>sum+v[2],0)/ankles.length; const forward=Math.max(...feet.map(v=>v[2]))-ankleZ,backward=ankleZ-Math.min(...feet.map(v=>v[2]));
+                    assert.ok(forward>backward+.04,'source feet and rig/morph forward direction must agree');
+                }
                 for(let i=0;i<points.length;i++){
                     const [x,y]=points[i];
                     if(Math.abs(x)>.32&&y>.65&&y<.95){
@@ -93,3 +100,7 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
     }
     assert.ok(manifest.lods[0].triangles>=6000&&manifest.lods[0].triangles<=10000);
 });
+
+
+
+
