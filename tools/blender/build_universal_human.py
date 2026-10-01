@@ -258,6 +258,25 @@ def validate(body,armature):
     assert all(0<len(v.groups)<=4 and abs(sum(g.weight for g in v.groups)-1)<.001 for v in body.data.vertices)
     assert all(bpy.data.actions.get(name) for name in ['Idle','Walk','Run'])
 
+def pad_texture_atlas():
+    # Black unused atlas pixels bleed through mipmaps at UV island borders.
+    # Extend neighbouring surface colours without changing UVs or anatomy.
+    for image in bpy.data.images:
+        width,height=image.size
+        if width<128 or height<128:continue
+        pixels=list(image.pixels[:]);channels=image.channels
+        valid=[max(pixels[i*channels:i*channels+3])>.08 for i in range(width*height)]
+        for _ in range(max(4,width//128)):
+            updates=[]
+            for i,filled in enumerate(valid):
+                if filled:continue
+                x,y=i%width,i//width
+                neighbours=[j for j in (i-1 if x else -1,i+1 if x<width-1 else -1,i-width if y else -1,i+width if y<height-1 else -1) if j>=0 and valid[j]]
+                if neighbours:updates.append((i,[sum(pixels[j*channels+c] for j in neighbours)/len(neighbours) for c in range(channels)]))
+            for i,colour in updates:
+                pixels[i*channels:(i+1)*channels]=colour;valid[i]=True
+        image.pixels[:]=pixels;image.update();image.pack()
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--input',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:]);args.output.mkdir(parents=True,exist_ok=True)
@@ -266,6 +285,7 @@ def main():
         bpy.ops.wm.read_factory_settings(use_empty=True)
         source=args.input/f'UniversalHuman_LOD{lod}.glb';assert source.is_file(),source
         bpy.ops.import_scene.gltf(filepath=str(source))
+        pad_texture_atlas()
         meshes=[o for o in bpy.context.scene.objects if o.type=='MESH'];assert meshes
         bpy.ops.object.select_all(action='DESELECT')
         for o in meshes:o.select_set(True)
