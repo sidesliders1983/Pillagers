@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "file": "dwarf-pixal3d.glb",
+    "vertices": 680287,
+    "triangles": 966646,
+    "materials": 1,
+    "textures": 2,
+    "objects": 1,
+    "primitives": 1,
+    "bytes": 35851976,
+    "sha256": "bee663b74dfd87b6d2d4a3116611dc25ff6367d256d3dcd00ff7763b843c0333",
+    "boundsBlender": {
+      "min": [
+        -0.4105377197265625,
+        -0.3757495880126953,
+        -0.37618744373321533
+      ],
+      "max": [
+        0.45386138558387756,
+        0.26072657108306885,
+        0.345804363489151
+      ]
+    }
+  },
+  "blender": "4.5.9 LTS",
+  "settings": {
+    "voxelFraction": 0.0035,
+    "planarAngleDegrees": 6,
+    "targets": [
+      8000,
+      4000,
+      1200
+    ],
+    "textureSizes": [
+      1024,
+      512,
+      256
+    ]
+  },
+  "stages": [
+    {
+      "stage": "cleanup",
+      "vertices": 481602,
+      "triangles": 966452
+    },
+    {
+      "stage": "voxel-remesh",
+      "vertices": 332148,
+      "triangles": 664356
+    },
+    {
+      "stage": "planar",
+      "vertices": 110983,
+      "triangles": 222026
+    },
+    {
+      "stage": "dwarf_LOD0",
+      "vertices": 3999,
+      "triangles": 7998
+    },
+    {
+      "stage": "dwarf_LOD1",
+      "vertices": 1999,
+      "triangles": 3998
+    },
+    {
+      "stage": "dwarf_LOD2",
+      "vertices": 599,
+      "triangles": 1198
+    }
+  ],
+  "lods": [
+    {
+      "label": "LOD0",
+      "file": "dwarf_LOD0.glb",
+      "target": 8000,
+      "textureSize": 1024,
+      "boundsBlender": {
+        "min": [
+          -0.4094237983226776,
+          -0.37537357211112976,
+          -0.3753155767917633
+        ],
+        "max": [
+          0.4539543390274048,
+          0.25964900851249695,
+          0.34549230337142944
+        ]
+      },
+      "vertices": 23994,
+      "triangles": 7998,
+      "materials": 1,
+      "textures": 1,
+      "objects": 1,
+      "primitives": 1,
+      "bytes": 932480,
+      "sha256": "b68bc26d4db7bcae6e087d092d4508dfa029b4f8c1821e42f657d991f0cea11b",
+      "reductionPercent": 99.17260300047795,
+      "seconds": 17.47
+    },
+    {
+      "label": "LOD1",
+      "file": "dwarf_LOD1.glb",
+      "target": 4000,
+      "textureSize": 512,
+      "boundsBlender": {
+        "min": [
+          -0.40975943207740784,
+          -0.37537357211112976,
+          -0.3753155767917633
+        ],
+        "max": [
+          0.4539085030555725,
+          0.2601129412651062,
+          0.34419259428977966
+        ]
+      },
+      "vertices": 11994,
+      "triangles": 3998,
+      "materials": 1,
+      "textures": 1,
+      "objects": 1,
+      "primitives": 1,
+      "bytes": 465316,
+      "sha256": "5375f1944f1b39a10a7d2566c3ff2c628e7fcffb666a94d5dc9279ae96004a5f",
+      "reductionPercent": 99.58640495072653,
+      "seconds": 14.31
+    },
+    {
+      "label": "LOD2",
+      "file": "dwarf_LOD2.glb",
+      "target": 1200,
+      "textureSize": 256,
+      "boundsBlender": {
+        "min": [
+          -0.4116864800453186,
+          -0.37360164523124695,
+          -0.36199069023132324
+        ],
+        "max": [
+          0.44336143136024475,
+          0.24563631415367126,
+          0.341480016708374
+        ]
+      },
+      "vertices": 3594,
+      "triangles": 1198,
+      "materials": 1,
+      "textures": 1,
+      "objects": 1,
+      "primitives": 1,
+      "bytes": 144952,
+      "sha256": "f6e6a1959e70be931763294209619bfea3a7060468efcb28a18fcf47ad62ba6a",
+      "reductionPercent": 99.87606631590054,
+      "seconds": 14.21
+    }
+  ],
+  "seconds": 91.57
+}

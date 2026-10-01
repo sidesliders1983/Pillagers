@@ -17,7 +17,7 @@ export class CharacterLabUI {
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void){
         this.dna=cloneDNA(dna);
         root.innerHTML=`<div class="lab">
-            <nav class="lab-nav"><div><span class="lab-eyebrow">PILLAGERS / DEVELOPMENT</span><h1>Character Lab <small>v0.2</small></h1></div><a href="/">Back to the fjord <span aria-hidden="true">↗</span></a></nav>
+            <nav class="lab-nav"><div><span class="lab-eyebrow">PILLAGERS / DEVELOPMENT</span><h1>Character Lab <small>v0.2</small></h1></div><a href="/asset-lab">Asset optimization lab</a><a href="/">Back to the fjord <span aria-hidden="true">↗</span></a></nav>
             <div class="lab-layout">
                 <section class="lab-panel lab-controls" aria-label="Character controls">
                     <div class="lab-section-heading"><h2>01 <span>Identity</span></h2><span class="lab-badge">DNA</span></div>
