@@ -5,6 +5,7 @@ import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { CharacterDNA } from '../characters/CharacterDNA';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
+import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 export class CharacterPreview {
     private scene=new Scene();
     private camera=new PerspectiveCamera(38,1,.05,60);
@@ -54,4 +55,14 @@ export class CharacterPreview {
     private layout(){if(this.current)this.current.root.position.x=this.comparison?-1:0;if(this.comparison)this.comparison.root.position.x=1;}
     resetView(){const comparing=this.comparisonDNA!==null;this.controls.target.set(0,.95,0);this.camera.position.set(comparing?0:1.8,1.75,comparing?4.7:3.2);this.controls.update();}
     overview(){this.controls.target.set(0,.8,0);this.camera.position.set(5.5,6.5,9);this.controls.update();}
+    async exportGLB(){
+        if(!this.current||!this.currentDNA)throw new Error('Wait until the character has loaded.');
+        const model=this.current,dna=this.currentDNA,lod=this.lod;
+        const position=model.root.position.clone();model.root.position.set(0,0,0);model.root.updateMatrixWorld(true);
+        try{
+            const data=await new GLTFExporter().parseAsync(model.root,{binary:true,animations:model.clips});
+            const url=URL.createObjectURL(new Blob([data as ArrayBuffer],{type:'model/gltf-binary'}));
+            const link=document.createElement('a');link.href=url;link.download=`pillagers-${dna.seed}-age-${dna.age}-LOD${lod}.glb`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+        }finally{model.root.position.copy(position);}
+    }
 }
