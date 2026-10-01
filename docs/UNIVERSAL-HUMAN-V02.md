@@ -28,7 +28,7 @@ Character Lab reports life stage, assigned hair/beard, colour and grey percentag
 
 ## Reference-derived replacement pipeline
 
-The first appearance pass used procedural interpretations, not image-to-3D assets. They remain temporary. A local background queue now takes direct original-sheet crops through Pixal3D, candidate hair extraction and static optimization (1600/800/300 triangles). Candidate colour extraction and head fit require visual review before these assets replace the procedural styles. Per-style input/provenance/status/logs live in scratch/appearance-v02. No automatic publication occurs. The temporary common scalp cap now has a conservative circumscribed fit plus actual skull-coverage raycast checks on all LODs.
+The first appearance pass used procedural interpretations, not image-to-3D assets. They remain temporary. A local background queue now takes direct original-sheet crops through Pixal3D, candidate hair extraction and static optimization (1600/1100/800 triangles). Candidate colour extraction and head fit require visual review before these assets replace the procedural styles. Per-style input/provenance/status/logs live in scratch/appearance-v02. No automatic publication occurs. The temporary common scalp cap now has a conservative circumscribed fit plus actual skull-coverage raycast checks on all LODs.
 
 ## Validation
 
@@ -41,3 +41,5 @@ Unit tests verify determinism, eligibility at ages 17/18, all hairstyles for bot
 Character Lab now has independent hair, beard and clothing size ratios. They are saved as optional `appearanceFit: {hair, beard, clothing}` in CharacterDNA and included in exported GLB profile extras. Legacy DNA defaults to 1 for each ratio. These controls do not select styles or change the heritage colour, sex, body morphs or the rigid head/hands/feet. Beard controls are disabled when the profile has no beard.
 
 For the temporary modules, hair and clothing have a conservative 100–130% range; beard has 75–150%. Hair adds radial clearance from the head centre without scaling the entire hairstyle; 1.0 is the fitted baseline and 1.3 adds 30% of the smallest head radius. Beard scales around its upper jaw attachment, and clothing changes radial clearance while retaining the body's skeleton and relative morphs. The 100% hair baseline still uses the temporary roomy cap. Final reference-derived modules require visual fit review before replacing it; ratio controls alone do not establish their correct fit.
+
+The reference hair queue uses triangle budgets 1600/1100/800. The first extracted medium mesh retained 733 faces after repeated collapse toward 300, so the smallest budget was adjusted to preserve the topology; final fit and silhouette review remains required.

@@ -56,7 +56,7 @@ foreach($style in @('medium','short','long','tied','bun','braid')) {
         $states|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $statusFile
         $lods=Join-Path $folder 'lods'
         if(!(Test-Path -LiteralPath (Join-Path $lods "Hair_${style}_report.json"))) {
-            & $blender --background --factory-startup --threads 2 --python-exit-code 1 --python (Join-Path $PSScriptRoot 'optimize-character.py') -- $hair $lods --name "Hair_$style" --targets 1600 800 300 --textures 512 256 128 *> (Join-Path $folder 'optimization.log')
+            & $blender --background --factory-startup --threads 2 --python-exit-code 1 --python (Join-Path $PSScriptRoot 'optimize-character.py') -- $hair $lods --name "Hair_$style" --targets 1600 1100 800 --textures 512 256 128 *> (Join-Path $folder 'optimization.log')
             if($LASTEXITCODE -ne 0){throw "LOD optimization failed (exit code $LASTEXITCODE)"}
         }
         $states[$style].stage='awaiting-fit-review';$states[$style].finished=Get-Date -Format o
