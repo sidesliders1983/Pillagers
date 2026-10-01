@@ -87,6 +87,9 @@ test('published image-generated LODs preserve rig, sockets, morphs, weights and 
                 const breasts=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)>.045&&Math.abs(x)<.13&&y>1.25&&y<1.32&&z>.03);
                 assert.ok(breasts.length>0);
                 assert.ok(breasts.reduce((sum,{i})=>sum+feminine[i][2],0)/breasts.length>.10,'femininity must grow a visible chest');
+                const lobes=points.map((v,i)=>({v,i})).filter(({v:[x,y,z]})=>Math.abs(x)>.055&&Math.abs(x)<.09&&y>1.25&&y<1.32&&z>.03);
+                assert.ok(lobes.length>0);
+                assert.ok(lobes.reduce((sum,{v,i})=>sum+Math.sign(v[0])*feminine[i][0],0)/lobes.length>0,'breast volume must grow laterally, not only project forwards');
                 const age=values(json,binary,p.targets[humanMorphNames.indexOf('Age')].POSITION);
                 const head=points.map((v,i)=>({v,i})).filter(({v})=>v[1]>1.65);
                 assert.ok(head.reduce((sum,{i})=>sum+age[i][1],0)/head.length<-.15,'old head must sink');
