@@ -18,6 +18,7 @@ export class UniversalHuman {
     private materials:Material[]=[];
     private sourceMaps=new Map<MeshStandardMaterial,import('three').Texture>();
     private tintMaps:import('three').Texture[]=[];
+    private skinTone:string|null=null;
     private animation:HumanAnimation='Idle';
     private action:AnimationAction|null=null;
     private belly=new SoftBodySpring(55,9);
@@ -47,9 +48,15 @@ export class UniversalHuman {
         if(!this.meshes.length)throw new Error('Universal Human GLB has no skinned mesh.');
         this.mixer=new AnimationMixer(body);this.apply(profile,skinTone);this.setAnimation('Idle');
     }
-    apply(profile:HumanProfile,skinTone:string){
-        for(const texture of this.tintMaps)texture.dispose();this.tintMaps=[];
-        this.disposeAppearance();this.modules=new Group();this.motion=profile.motion;
+    apply(profile:HumanProfile,skinTone:string,refreshAppearance=true){
+        const retint=this.skinTone!==skinTone;
+        if(retint){for(const texture of this.tintMaps)texture.dispose();this.tintMaps=[];this.skinTone=skinTone;}
+        if(refreshAppearance){this.disposeAppearance();this.modules=new Group();}this.motion=profile.motion;
+        // Bind inverses must be measured in the asset's origin frame, never in
+        // the translated/rotated world or comparison container.
+        const parent=this.root.parent,position=this.root.position.clone(),rotation=this.root.quaternion.clone();
+        this.root.removeFromParent();this.root.position.set(0,0,0);this.root.quaternion.identity();
+        const actionTime=this.action?.time??0;
         this.root.userData.universalHumanProfile=profile;
         this.softness={belly:profile.weights.Overweight,breasts:profile.weights.Feminine};
         this.belly.reset();this.breasts.reset();this.previousPosition=null;this.previousVelocity.set(0,0,0);
@@ -74,6 +81,7 @@ export class UniversalHuman {
             const mats=Array.isArray(mesh.material)?mesh.material:[mesh.material];
             for(const mat of mats)if((mat as MeshStandardMaterial).isMeshStandardMaterial){
                 const standard=mat as MeshStandardMaterial,source=this.sourceMaps.get(standard);
+                if(!retint)continue;
                 const tinted=source?skinTexture(source,skinTone):null;
                 standard.map=tinted??source??null;standard.color.set('#ffffff');
                 if(tinted)this.tintMaps.push(tinted);
@@ -84,7 +92,7 @@ export class UniversalHuman {
         const skeletons=new Set(this.meshes.map(mesh=>mesh.skeleton));
         for(const skeleton of skeletons)skeleton.calculateInverses();
         const head=this.bones.find(b=>b.name==='Head');
-        if(head){
+        if(head&&refreshAppearance&&this.hairAsset){
             const bounds=new Box3(),skull:Vector3[]=[];
             for(const mesh of this.meshes){const p=mesh.geometry.attributes.position;
                 for(let i=0;i<p.count;i++)if(p.getY(i)>1.56&&Math.abs(p.getX(i))<.18){const point=mesh.getVertexPosition(i,new Vector3());bounds.expandByPoint(point);skull.push(point);}
@@ -98,8 +106,15 @@ export class UniversalHuman {
                 this.modules.userData.appearanceObject=appearance;
             }
         }
-        for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;break;}}
+        if(head&&refreshAppearance&&!this.hairAsset){
+            const appearance=new Group();appearance.name='Appearance';appearance.userData.beardAsset='pending';
+            head.add(appearance);this.modules.userData.appearanceObject=appearance;
+        }
+        if(refreshAppearance)for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;break;}}
         this.root.scale.y=.8;this.setAnimation(this.animation);
+        const active=this.action as AnimationAction|null;if(active)active.time=actionTime;
+        this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
+        this.root.updateMatrixWorld(true);
     }
     setAnimation(name:HumanAnimation){
         const clip=this.asset.animations.find(clip=>clip.name===name);

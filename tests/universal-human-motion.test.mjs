@@ -99,3 +99,28 @@ test('reference hair follows the existing head through child adult elder animati
         }
     }
 });
+
+
+test('annual aging on actual world LODs preserves local vertices and reuses garment geometry',async()=>{
+    const {Group}=await import('three');
+    for(const lod of [1,2]){
+        const source=await asset(lod),dna={...defaultDNA(),age:58};
+        const human=new UniversalHuman(source,universalHumanProfile(dna),'#eeccbb');
+        const parent=new Group();parent.position.set(12,2,-5);parent.rotation.y=1.7;parent.add(human.root);
+        const garment=human.root.getObjectByName('ClothingWaistWrap'),geometry=garment.geometry;
+        for(const age of [59,5,6]){
+            const profile=universalHumanProfile({...dna,age});
+            human.apply(profile,'#eeccbb',false);human.update(0);
+            const reference=new UniversalHuman(source,profile,'#eeccbb');reference.update(0);
+            const meshes=[];human.root.traverse(o=>{if(o.isSkinnedMesh&&o.name!=='ClothingWaistWrap')meshes.push(o);});
+            for(const mesh of meshes){const other=reference.root.getObjectByName(mesh.name);
+                for(let i=0;i<mesh.geometry.attributes.position.count;i+=7){
+                    const a=mesh.getVertexPosition(i,new Vector3()),b=other.getVertexPosition(i,new Vector3());
+                    assert.ok(a.distanceTo(b)<1e-5,`LOD${lod} age${age} vertex${i} differs from origin rig`);
+                }
+            }
+            assert.equal(human.root.parent,parent);assert.equal(garment.geometry,geometry);reference.dispose();
+        }
+        human.dispose();
+    }
+});

@@ -9,12 +9,16 @@ export const RESPAWN_AGE=5;
 export class AnnualCycle {
     year=START_YEAR;
     progress=0;
+    paused=false;
     private completed=0;
     constructor(private startedAt:number){}
+    pause(){this.paused=true;this.progress=0;}
+    resume(now:number){this.startedAt=now-this.completed*YEAR_DURATION_MS;this.paused=false;this.progress=0;}
     update(now:number,onYear:(year:number)=>void){
+        if(this.paused)return;
         const elapsed=Math.max(0,now-this.startedAt),completed=Math.floor(elapsed/YEAR_DURATION_MS);
-        while(this.completed<completed){this.completed++;this.year=START_YEAR+this.completed;onYear(this.year);}
-        this.progress=(elapsed%YEAR_DURATION_MS)/YEAR_DURATION_MS;
+        while(this.completed<completed){this.completed++;this.year=START_YEAR+this.completed;onYear(this.year);if(this.paused)break;}
+        this.progress=this.paused?0:(elapsed%YEAR_DURATION_MS)/YEAR_DURATION_MS;
     }
 }
 export function agePersona(dna:CharacterDNA,year:number,slot:number){

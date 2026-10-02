@@ -74,6 +74,10 @@ export class Game {
         document.querySelector('#status')!.textContent = `FJORDSIDE · ${villagers.length} inhabitants`;
         window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();profiles.dispose();seasons.dispose();renderer.dispose();},{once:true});
         const cycle=new AnnualCycle(performance.now());let replacements=0;
+        const summary=document.createElement('dialog');summary.id='year-summary';summary.setAttribute('aria-labelledby','year-summary-title');
+        summary.innerHTML='<h2 id="year-summary-title"></h2><p id="year-summary-count"></p><p id="year-summary-age"></p><button id="year-continue">Continue</button>';
+        document.body.append(summary);summary.addEventListener('cancel',event=>event.preventDefault());
+        summary.querySelector('button')!.addEventListener('click',()=>{summary.close();cycle.resume(performance.now());});
         const populationSnapshot=()=>{canvas.dataset.population=JSON.stringify(characters.map(c=>({seed:c.dna.seed,age:c.dna.age,x:c.villager.visual.position.x,z:c.villager.visual.position.z})));};
         populationSnapshot();
         const annualTick=(year:number)=>{
@@ -81,8 +85,10 @@ export class Game {
                 const result=agePersona(character.dna,year,index);
                 if(result.replaced){
                     const previous=character.villager.visual;
-                    const model=characterFactory.createWorldReady(result.dna),villager=new Villager(index,model.root);
-                    scene.remove(previous);character.model.dispose();
+                    // Retire the persona, retaining the slot's GPU geometry and rig.
+                    const model=character.model;model.applyDNA(result.dna);
+                    const villager=new Villager(index,model.root);
+                    scene.remove(previous);
                     Object.assign(character,{dna:result.dna,model,villager});villagers[index]=villager;
                     movement.spawn(villager);scene.add(villager.visual);replacements++;
                     character.phenotype=generatePhenotype(result.dna);
@@ -96,6 +102,12 @@ export class Game {
                 }
             }
             populationSnapshot();
+            cycle.pause();
+            summary.querySelector('h2')!.textContent=`Year ${year-1} complete`;
+            summary.querySelector('#year-summary-count')!.textContent=`Community: ${characters.length} persons`;
+            const average=characters.reduce((sum,c)=>sum+c.dna.age,0)/characters.length;
+            summary.querySelector('#year-summary-age')!.textContent=`Average age: ${average.toFixed(1)} years`;
+            summary.showModal();
         };
         const clock = new Clock();
         let time = 0, frames = 0, sample = 0;
@@ -104,16 +116,16 @@ export class Game {
             cycle.update(performance.now(),annualTick);
             canvas.dataset.yearProgress=String(cycle.progress);
             document.querySelector('#world-year')!.textContent=`Year: ${cycle.year} DC`;
-            time += dt;
+            if(!cycle.paused)time += dt;
             sample += elapsed;
             frames++;
             controller.update(dt);
-            movement.update(dt);
+            if(!cycle.paused)movement.update(dt);
             world.update(time);
             lighting.update(time,cycle.progress);
             seasons.update(lighting.visualization==='seasons'?cycle.progress:null);
             document.body.dataset.lighting=lighting.mode;
-            characters.forEach(character=>{character.model.setMovementSpeed(character.villager.speed);character.model.update(dt,camera.position.distanceTo(character.villager.visual.position));});
+            characters.forEach(character=>{if(!cycle.paused)character.model.setMovementSpeed(character.villager.speed);character.model.update(cycle.paused?0:dt,camera.position.distanceTo(character.villager.visual.position));});
             profiles.update();
             renderer.render(scene, camera);
             if (sample > .5) {

@@ -48,7 +48,8 @@ export class WorldCharacter {
     applyDNA(dna:CharacterDNA){
         // Preserve the reference captured by the close-LOD loader.
         if(this.dna)Object.assign(this.dna,dna);else this.dna=dna;
-        for(const model of this.models.values())model.apply(universalHumanProfile(dna),generatePhenotype(dna).skinTone);
+        this.root.userData.character.seed=dna.seed;
+        for(const model of this.models.values())model.apply(universalHumanProfile(dna),generatePhenotype(dna).skinTone,false);
     }
     setState(state:HumanAnimation){if(this.state!==state){this.state=state;this.models.get(this.lod)!.setAnimation(state);}}
     update(delta:number,distance:number){

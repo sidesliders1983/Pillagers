@@ -27,8 +27,16 @@ const assert=require('node:assert/strict');
   const old=await select(p=>p.age>=60,.7);assert.match(await page.locator('.profile-identity').textContent(),new RegExp(`${old.age} years`));
   await page.evaluate(()=>window.simulationTestTime=61000);await page.waitForFunction(()=>document.querySelector('#world-year').textContent==='Year: 1201 DC',null,{timeout:60000});
   assert.ok(await page.locator('#character-profile').isHidden(),'The deceased persona card closes');
+  assert.ok(await page.locator('#year-summary').isVisible());
+  assert.match(await page.locator('#year-summary-count').textContent(),/10 persons/);
+  const paused=await population();
+  await page.evaluate(()=>window.simulationTestTime=181000);
+  await page.waitForTimeout(500);
+  assert.equal(await page.locator('#world-year').textContent(),'Year: 1201 DC');
+  assert.deepEqual(await population(),paused);
+  await page.getByRole('button',{name:'Continue',exact:true}).click();
   await select(p=>p.age===5,.45);assert.match(await page.locator('.profile-identity').textContent(),/5 years/);
-  await page.evaluate(()=>window.simulationTestTime=121000);await page.waitForFunction(()=>document.querySelector('.profile-identity').textContent.includes('6 years'),null,{timeout:60000});
+  await page.evaluate(()=>window.simulationTestTime=241000);await page.waitForFunction(()=>document.querySelector('.profile-identity').textContent.includes('6 years'),null,{timeout:60000});
   assert.equal((await population()).length,10);console.log(`${mobile?'Mobile':'Desktop'}: deceased card closes, replacement child selectable and selected age refreshes from 5 to 6.`);
   await page.close();
  }}finally{await browser.close();}

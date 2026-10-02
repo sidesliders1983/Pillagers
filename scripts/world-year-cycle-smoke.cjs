@@ -15,6 +15,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   await page.waitForFunction(()=>document.querySelector('#world')?.dataset.population,null,{timeout:60000});
   const population=()=>page.locator('#world').evaluate(el=>JSON.parse(el.dataset.population));
   const step=async(ms,year,progress)=>{
+   if(await page.locator('#year-summary').isVisible())await page.getByRole('button',{name:'Continue',exact:true}).click();
    await page.evaluate(ms=>window.simulationTestTime=1000+ms,ms);
    await page.waitForFunction(({year,progress})=>document.querySelector('#world-year').textContent===`Year: ${year} DC`&&Math.abs(Number(document.querySelector('#world').dataset.yearProgress)-progress)<.00001,{year,progress},{timeout:60000});
   };
@@ -35,8 +36,9 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   assert.deepEqual((await population()).map(p=>p.age),expected.map(p=>p.age));
   // A delayed frame catches every annual tick and supports repeated death/respawn cycles.
   const endYear=process.env.SKIP_CATCHUP?1202:1260;
-  for(let year=1203;year<=endYear;year++)expected=expected.map((dna,i)=>agePersona(dna,year,i).dna);
-  await step((endYear-1200)*60000,endYear,0);const later=await population();
+  for(let year=1203;year<=endYear;year++){expected=expected.map((dna,i)=>agePersona(dna,year,i).dna);await step((year-1200)*60000,year,0);}
+  const later=await population();
+  if(await page.locator('#year-summary').isVisible())await page.getByRole('button',{name:'Continue',exact:true}).click();
   assert.equal(later.length,10);assert.deepEqual(later.map(p=>p.age),expected.map(p=>p.age));assert.deepEqual(later.map(p=>p.seed),expected.map(p=>p.seed));assert.ok(later.every(p=>walkable(p.x,p.z)));
   assert.equal(bodies.length,1,'Respawns reuse the cached GLB');
   await page.click('#time-off');assert.equal(await page.locator('#world-year').textContent(),`Year: ${endYear} DC`);

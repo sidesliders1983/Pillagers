@@ -27,6 +27,7 @@ export class CharacterProfileCard {
         pick.name='character-hit-area';root.add(pick);this.charactersByRoot.set(root,character);this.refresh(character);
     }
     replace(previous:Object3D,character:Character){
+        previous.getObjectByName('character-hit-area')?.removeFromParent();
         this.charactersByRoot.delete(previous);if(this.selected===character)this.clear();this.attach(character);
     }
     refresh(character:Character){
