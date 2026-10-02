@@ -1,0 +1,212 @@
+{
+  "reviewRequired": false,
+  "style": "long-dress",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\long-dress\\lod2-complete-skirt\\Clothing_long-dress_LOD2.glb",
+  "sourceSha256": "1d8b24ede8d53d4aa2310aed9104aecd4bdfe960c33afef964a85c32fb3661ae",
+  "outputSha256": "ba8c08e9f38b3171aa29c4714d2df85d44341ff91294c9acb3875efe1b633112",
+  "fit": {
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "ground / source skull axis",
+    "sourceUp": "+Y",
+    "sourceFront": "-Z",
+    "sourceCentreBlender": [
+      -0.005006914492696524,
+      0.03325001522898674,
+      -0.4456896185874939
+    ],
+    "scale": 2.0189063405341843,
+    "rotateBlenderZ": 180,
+    "frontMeasurement": "toe extension relative to ankle cross-section"
+  },
+  "geometryPolicy": "existing reference surfaces only; tagged drape regions; skirt underside reopened",
+  "removedFloatingFragmentFaces": 0,
+  "fragmentAreaThresholdMetresSquared": 0.004,
+  "sourceProvenance": {
+    "schemaVersion": 1,
+    "source": {
+      "file": "clothing-complete-skirt.glb",
+      "vertices": 484833,
+      "triangles": 679909,
+      "materials": 1,
+      "textures": 2,
+      "objects": 1,
+      "primitives": 1,
+      "bytes": 25641624,
+      "sha256": "d9d8108e3a437ff2d340be4523777f43990fa7682531b1547f45f2dc0ec61d75",
+      "boundsBlender": {
+        "min": [
+          -0.23114091157913208,
+          -0.1499117612838745,
+          -0.4456896185874939
+        ],
+        "max": [
+          0.21619191765785217,
+          0.13572075963020325,
+          0.2920418381690979
+        ]
+      }
+    },
+    "blender": "4.5.9 LTS",
+    "settings": {
+      "voxelFraction": 0.0025,
+      "planarAngleDegrees": 6,
+      "targets": [
+        10000,
+        6000,
+        4000
+      ],
+      "textureSizes": [
+        1024,
+        512,
+        512
+      ],
+      "weldFraction": 0.0003,
+      "minimumIslandArea": 0.0002,
+      "colourTransfer": "closest",
+      "selectedLOD": 2
+    },
+    "stages": [
+      {
+        "stage": "cleanup",
+        "vertices": 341972,
+        "triangles": 679695
+      },
+      {
+        "stage": "voxel-remesh",
+        "vertices": 484228,
+        "triangles": 968120
+      },
+      {
+        "stage": "planar",
+        "vertices": 75277,
+        "triangles": 150214
+      },
+      {
+        "stage": "remove-extraction-specks",
+        "vertices": 74467,
+        "triangles": 148958
+      },
+      {
+        "stage": "Clothing_long-dress_LOD2",
+        "vertices": 2011,
+        "triangles": 3999
+      }
+    ],
+    "lods": [
+      {
+        "label": "LOD2",
+        "file": "Clothing_long-dress_LOD2.glb",
+        "target": 4000,
+        "textureSize": 512,
+        "boundsBlender": {
+          "min": [
+            -0.19855642318725586,
+            -0.1500113606452942,
+            -0.44497764110565186
+          ],
+          "max": [
+            0.1794857680797577,
+            0.13540342450141907,
+            0.29156073927879333
+          ]
+        },
+        "vertices": 11997,
+        "triangles": 3999,
+        "materials": 1,
+        "textures": 1,
+        "objects": 1,
+        "primitives": 1,
+        "bytes": 481436,
+        "sha256": "1d8b24ede8d53d4aa2310aed9104aecd4bdfe960c33afef964a85c32fb3661ae",
+        "reductionPercent": 99.4118330541293,
+        "seconds": 5.22
+      }
+    ],
+    "seconds": 37.17,
+    "sourceProvenance": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\long-dress\\generated.glb",
+      "sourceSha256": "e553e44741e9566071a017e472963488e4f2a5e2dd1d3565bb69bad3d03c2a75",
+      "outputSha256": "d9d8108e3a437ff2d340be4523777f43990fa7682531b1547f45f2dc0ec61d75",
+      "selectedFaces": 679909,
+      "skinReferenceLinearRGB": [
+        0.7921569347381592,
+        0.5490196347236633,
+        0.4549019932746887
+      ],
+      "skinDistanceThreshold": 0.18,
+      "headCutoffHeightFraction": 0.83,
+      "reviewLayout": "long-dress",
+      "reviewRequired": true,
+      "rigged": false,
+      "published": false,
+      "sourceProvenance": {
+        "reference": {
+          "id": "long-dress",
+          "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\9A79D6BF-A177-40C0-A0ED-30AE044A6380\\1-Foto-1.jpg",
+          "referenceSha256": "689092042b9a28c248d804d9bcbb007df6758497c4b518d525c1040b61a2c959",
+          "crop": [
+            20,
+            20,
+            214,
+            319
+          ],
+          "inputSha256": "457c3bc6b1d519e98e36c5fac7672f626d9651a4e59a5f71591e5a7e9b5aaa7c",
+          "redrawn": false,
+          "stage": "cropped",
+          "reviewRequired": true,
+          "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\long-dress",
+          "jobId": "clothing-v03/long-dress"
+        },
+        "reviewRequired": true,
+        "generation": {
+          "backend": "pixal3d",
+          "components": [],
+          "input": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\long-dress\\reference.png",
+            "sha256": "abd7b8f96f00a711576d5f8a5b58b37d44a764383e38392be8ad5623e8828ca6"
+          },
+          "license": {
+            "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+            "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+          },
+          "output": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\long-dress\\generated.glb",
+            "sha256": "e553e44741e9566071a017e472963488e4f2a5e2dd1d3565bb69bad3d03c2a75"
+          },
+          "parameters": {
+            "fov": 0.3490658503988659,
+            "gsh": null,
+            "gss": 10.0,
+            "matted": true,
+            "res": 1024,
+            "seed": 1983,
+            "steps": 12
+          },
+          "schema_version": 1,
+          "timings_seconds": {
+            "total": 1599.2
+          }
+        },
+        "outputSha256": "e553e44741e9566071a017e472963488e4f2a5e2dd1d3565bb69bad3d03c2a75",
+        "matte": {
+          "model": "birefnet-general-lite",
+          "sourceSha256": "457c3bc6b1d519e98e36c5fac7672f626d9651a4e59a5f71591e5a7e9b5aaa7c",
+          "inputSha256": "abd7b8f96f00a711576d5f8a5b58b37d44a764383e38392be8ad5623e8828ca6",
+          "redrawn": false
+        }
+      }
+    }
+  },
+  "review": {
+    "scope": "First three reference outfits on LOD2; static fitting, no cloth simulation",
+    "runtime": "Character Lab desktop/mobile; Golden profile extremes; Idle/Walk/Run; shared-rig GLB export",
+    "views": [
+      "front",
+      "side",
+      "back"
+    ],
+    "date": "2026-10-02"
+  }
+}

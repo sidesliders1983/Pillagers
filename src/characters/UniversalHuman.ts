@@ -38,7 +38,7 @@ export class UniversalHuman {
     private garment:SkinnedMesh|null=null;
     private motion={cadence:1,stride:1,footfall:1};
     get clips(){return this.asset.animations;}
-    constructor(private asset:GLTF,profile:HumanProfile,skinTone:string,private hairAsset:Group|null=null,private beardAsset:Group|null=null){
+    constructor(private asset:GLTF,profile:HumanProfile,skinTone:string,private hairAsset:Group|null=null,private beardAsset:Group|null=null,garments:Array<{metadata:ModuleMetadata;source:Group}>=[]){
         const body=clone(asset.scene);this.root.add(body);
         body.traverse(object=>{
             if((object as Bone).isBone){const bone=object as Bone;this.bones.push(bone);this.rest.set(bone,bone.position.clone());this.restRotation.set(bone,bone.quaternion.clone());}
@@ -54,6 +54,7 @@ export class UniversalHuman {
         });
         if(!this.meshes.length)throw new Error('Universal Human GLB has no skinned mesh.');
         this.fit=new CharacterFitSystem(this.root,this.meshes,this.bones);
+        for(const garment of garments){validateModule(garment.metadata);this.equipped.set(garment.metadata.id,{...garment,object:new Group()});}
         this.mixer=new AnimationMixer(body);this.apply(profile,skinTone);this.setAnimation('Idle');
     }
     apply(profile:HumanProfile,skinTone:string,refreshAppearance=true){
@@ -119,7 +120,7 @@ export class UniversalHuman {
             const appearance=new Group();appearance.name='Appearance';appearance.userData.beardAsset='pending';
             head.add(appearance);this.modules.userData.appearanceObject=appearance;
         }
-        if(refreshAppearance)for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;
+        if(refreshAppearance&&![...this.equipped.values()].some(module=>module.metadata.type==='garment'))for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;
             this.fit.attach({version:attachmentVersion,id:'technical-waist-wrap',type:'garment',anchor:'socket_waist',fitCage:'PELVIS_CAGE',fitMode:'drape',slot:'lower',covers:['PELVIS'],clearance:.004,authoringFrame:'canonical'},garment);break;}}
         if(refreshAppearance)for(const module of this.equipped.values())this.installModule(module.metadata,module.source);
         this.root.scale.y=.8;this.setAnimation(this.animation);
@@ -153,7 +154,7 @@ export class UniversalHuman {
             object=source.clone(true);object.traverse(child=>{const mesh=child as import('three').Mesh;if(mesh.isMesh){mesh.geometry=mesh.geometry.clone();mesh.material=Array.isArray(mesh.material)?mesh.material.map(m=>m.clone()):mesh.material.clone();}});
         }
         this.fit.attach(metadata,object,metadata.type==='garment');this.equipped.get(metadata.id)!.object=object;
-        const covers=[...this.equipped.values()].flatMap(module=>module.metadata.covers??[]);this.fit.maskBody(covers);
+        const covers=[...this.equipped.values()].flatMap(module=>module.metadata.covers??[]),bands=Object.assign({},...[...this.equipped.values()].map(module=>module.metadata.coverageBands??{}));this.fit.maskBody(covers,bands);
     }
     setAnimation(name:HumanAnimation){
         const clip=this.asset.animations.find(clip=>clip.name===name);

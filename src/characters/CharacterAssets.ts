@@ -1,4 +1,5 @@
-import { ModuleMetadata, appearanceMetadata, validateModule } from './AttachmentContract';
+import { attachmentVersion, ModuleMetadata, appearanceMetadata, validateModule } from './AttachmentContract';
+import { identitySample } from './seededRandom';
 import { characterAssetMeasurements, AssetMeasurement } from './CharacterAssetMeasurements';
 import type { HairStyle, BeardStyle } from './AppearanceTypes';
 import { referenceHeadFrames } from '../character-lab/ReferenceHeadFrames';
@@ -21,6 +22,22 @@ function appearance(type:'hair'|'beard',style:string):CharacterAsset {
         // Hair LOD2 intentionally retains the reviewed finer surface.
         budgets:{triangles:{0:10000,1:10000,2:10000},materials:2}};
 }
+export const baseOutfits=[
+    {style:'cream-tunic',label:'Cream tunic'},
+    {style:'long-dress',label:'Long dress'},
+    {style:'mantle-tunic',label:'Tunic with mantle'},
+] as const;
+/** A named seed stream gives stable assignment, independent of age and sex. */
+export function characterOutfit(seed:number){return baseOutfits[Math.floor(identitySample(seed,'clothing.base-outfit')*baseOutfits.length)];}
+function outfit(style:string):CharacterAsset {
+    const dress=style==='long-dress';
+    return {id:`garment/${style}`,type:'garment',style,version:1,runtimeLOD:2,
+        lods:{2:`/clothing/${style}/Clothing_${style}_LOD2.glb`},
+        metadata:{version:attachmentVersion,id:`garment/${style}`,type:'garment',anchor:'socket_waist',fitCage:'TORSO_CAGE',fitMode:'drape',slot:'full',garmentFit:'regional',authoringFrame:'canonical',clearance:.025,
+            ...(!dress?{coverageBands:{UPPER_ARM_L:{minY:style==='cream-tunic'?1.18:1.09},UPPER_ARM_R:{minY:style==='cream-tunic'?1.18:1.09}}}:{}),
+            covers:['TORSO_UPPER','TORSO_LOWER','PELVIS','UPPER_LEG_L','UPPER_LEG_R','LOWER_LEG_L','LOWER_LEG_R','FEET',...(!dress?['UPPER_ARM_L','UPPER_ARM_R'] as const:[])]},
+        materialVariants:['reference-colours'],tags:['image-to-3d','reference-reviewed','base-outfit','shared-rig'],budgets:{triangles:{2:4400},materials:1}};
+}
 /** The only published character asset discovery list. Scratch candidates are not assets. */
 export const characterAssets:readonly CharacterAsset[]=[
     {id:'body/universal-human',type:'body',version:1,runtimeLOD:'requested',
@@ -28,6 +45,7 @@ export const characterAssets:readonly CharacterAsset[]=[
         materialVariants:['profile-skin-tone'],tags:['image-to-3d','PillagersHumanRig'],budgets:{triangles:{0:10000,1:5000,2:1600},materials:2}},
     ...['short','medium','long','tied','bun','braid'].map(style=>appearance('hair',style)),
     ...['stubble','short','medium','long','split-braid','braid'].map(style=>appearance('beard',style)),
+    ...baseOutfits.map(entry=>outfit(entry.style)),
 ];
 export const availableHairStyles=characterAssets.filter(asset=>asset.type==='hair').map(asset=>asset.style as HairStyle);
 export const availableBeardStyles=characterAssets.filter(asset=>asset.type==='beard').map(asset=>asset.style as BeardStyle);

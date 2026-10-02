@@ -25,6 +25,8 @@ export interface ModuleMetadata {
     fitMode:'conform'|'drape'|'rigid';
     slot?:'upper'|'lower'|'full'|'over';
     covers?:CoverageZone[];
+    /** Partial sleeves keep the uncovered arm below the source cuff visible. */
+    coverageBands?:Partial<Record<CoverageZone,{minY?:number;maxY?:number}>>;
     clearance:number;
     /** All imported geometry must first be calibrated to +Y up, +Z front. */
     authoringFrame:'canonical'|'measured-reference-head';
@@ -33,6 +35,8 @@ export interface ModuleMetadata {
     attachmentBand?:{minimumY:number|null;maximumY?:number|null};
     projection?:'shell'|'outward';
     subdivisions?:number;
+    /** Reference-derived outfits contain separately tagged skirt/mantle/boot surfaces. */
+    garmentFit?:'regional';
     trim?:{min:readonly (number|null)[];max:readonly (number|null)[]};
 }
 export function validateModule(metadata:ModuleMetadata){
@@ -40,7 +44,11 @@ export function validateModule(metadata:ModuleMetadata){
     if(metadata.fitMode!=='rigid'&&(!metadata.fitCage||!cageNames.includes(metadata.fitCage)))throw new Error('A fitted module needs a known cage.');
     if(!Number.isFinite(metadata.clearance)||metadata.clearance<0)throw new Error('Module clearance must be non-negative.');
     if(metadata.covers?.some(zone=>!coverageZones.includes(zone)))throw new Error('Unknown body coverage zone.');
-    if(metadata.type==='garment'&&(!metadata.slot||metadata.fitMode!=='drape'||metadata.authoringFrame!=='canonical'))throw new Error('Garments need a slot and canonical drape frame.');
+    if(metadata.coverageBands)for(const [zone,band] of Object.entries(metadata.coverageBands)){
+        if(!metadata.covers?.includes(zone as CoverageZone)||[band.minY,band.maxY].some(v=>v!==undefined&&!Number.isFinite(v))||(band.minY??-Infinity)>(band.maxY??Infinity))throw new Error('Invalid partial coverage band.');
+    }
+    if(metadata.type==='garment'&&(!['upper','lower','full','over'].includes(metadata.slot??'')||metadata.fitMode!=='drape'||metadata.authoringFrame!=='canonical'))throw new Error('Garments need a slot and canonical drape frame.');
+    if(metadata.garmentFit!==undefined&&(metadata.type!=='garment'||metadata.garmentFit!=='regional'))throw new Error('Invalid garment fit policy.');
     if(metadata.canonicalHeadSize?.some(value=>!Number.isFinite(value)||value<=0))throw new Error('Invalid canonical head dimensions.');
     if((metadata.type==='hair'||metadata.type==='beard')&&metadata.fitMode!=='conform')throw new Error('Hair and beard modules use conform fitting.');
     if(metadata.type==='equipment'&&metadata.fitMode!=='rigid')throw new Error('Equipment uses a rigid socket.');

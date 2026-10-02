@@ -1,0 +1,212 @@
+{
+  "reviewRequired": false,
+  "style": "mantle-tunic",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\mantle-tunic\\lod2-final\\Clothing_mantle-tunic_LOD2.glb",
+  "sourceSha256": "f8a69c3bd71af0201b84b17d06c07a41a579869961b97832afe918f2400d5aa4",
+  "outputSha256": "bc0ae0f85734248c038e7ae4b1e156ef39dfa0fb705539ac6d4ae3222143f366",
+  "fit": {
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "ground / source skull axis",
+    "sourceUp": "+Y",
+    "sourceFront": "-Z",
+    "sourceCentreBlender": [
+      -0.007672233507037163,
+      0.014734399504959583,
+      -0.4498556852340698
+    ],
+    "scale": 2.0040641924581886,
+    "rotateBlenderZ": 180,
+    "frontMeasurement": "toe extension relative to ankle cross-section"
+  },
+  "geometryPolicy": "existing reference surfaces only; tagged drape regions; skirt underside reopened",
+  "removedFloatingFragmentFaces": 0,
+  "fragmentAreaThresholdMetresSquared": 0.004,
+  "sourceProvenance": {
+    "schemaVersion": 1,
+    "source": {
+      "file": "clothing-reviewed.glb",
+      "vertices": 532789,
+      "triangles": 757197,
+      "materials": 1,
+      "textures": 2,
+      "objects": 1,
+      "primitives": 1,
+      "bytes": 28182016,
+      "sha256": "48b0c4058f92e67f70b29092754e4858ac852b1a3f017a7f10d3a4dd92787feb",
+      "boundsBlender": {
+        "min": [
+          -0.2117353081703186,
+          -0.12278153747320175,
+          -0.4498556852340698
+        ],
+        "max": [
+          0.21362969279289246,
+          0.15204480290412903,
+          0.29821211099624634
+        ]
+      }
+    },
+    "blender": "4.5.9 LTS",
+    "settings": {
+      "voxelFraction": 0.0025,
+      "planarAngleDegrees": 6,
+      "targets": [
+        10000,
+        6000,
+        4000
+      ],
+      "textureSizes": [
+        1024,
+        512,
+        512
+      ],
+      "weldFraction": 0.0003,
+      "minimumIslandArea": 0.0002,
+      "colourTransfer": "closest",
+      "selectedLOD": 2
+    },
+    "stages": [
+      {
+        "stage": "cleanup",
+        "vertices": 379939,
+        "triangles": 757070
+      },
+      {
+        "stage": "voxel-remesh",
+        "vertices": 762566,
+        "triangles": 1525164
+      },
+      {
+        "stage": "planar",
+        "vertices": 144333,
+        "triangles": 288692
+      },
+      {
+        "stage": "remove-extraction-specks",
+        "vertices": 144054,
+        "triangles": 288272
+      },
+      {
+        "stage": "Clothing_mantle-tunic_LOD2",
+        "vertices": 1974,
+        "triangles": 4000
+      }
+    ],
+    "lods": [
+      {
+        "label": "LOD2",
+        "file": "Clothing_mantle-tunic_LOD2.glb",
+        "target": 4000,
+        "textureSize": 512,
+        "boundsBlender": {
+          "min": [
+            -0.2137729823589325,
+            -0.12403186410665512,
+            -0.4492030441761017
+          ],
+          "max": [
+            0.20987866818904877,
+            0.15175840258598328,
+            0.29910778999328613
+          ]
+        },
+        "vertices": 12000,
+        "triangles": 4000,
+        "materials": 1,
+        "textures": 1,
+        "objects": 1,
+        "primitives": 1,
+        "bytes": 471160,
+        "sha256": "f8a69c3bd71af0201b84b17d06c07a41a579869961b97832afe918f2400d5aa4",
+        "reductionPercent": 99.47173588907509,
+        "seconds": 9.1
+      }
+    ],
+    "seconds": 73.31,
+    "sourceProvenance": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\mantle-tunic\\generated.glb",
+      "sourceSha256": "ef16e94e2d491147166463fac99dbd111cbb4faf48e777cc63070c78b110c594",
+      "outputSha256": "48b0c4058f92e67f70b29092754e4858ac852b1a3f017a7f10d3a4dd92787feb",
+      "selectedFaces": 757197,
+      "skinReferenceLinearRGB": [
+        0.760784387588501,
+        0.5058823823928833,
+        0.4235294461250305
+      ],
+      "skinDistanceThreshold": 0.18,
+      "headCutoffHeightFraction": 0.83,
+      "reviewLayout": "mantle-tunic",
+      "reviewRequired": true,
+      "rigged": false,
+      "published": false,
+      "sourceProvenance": {
+        "reference": {
+          "id": "mantle-tunic",
+          "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\9A79D6BF-A177-40C0-A0ED-30AE044A6380\\1-Foto-1.jpg",
+          "referenceSha256": "689092042b9a28c248d804d9bcbb007df6758497c4b518d525c1040b61a2c959",
+          "crop": [
+            860,
+            510,
+            1054,
+            809
+          ],
+          "inputSha256": "14d121e5fafae53374cd7d727642dda1e3fc46ed370e6a4031c96eb539d73bb8",
+          "redrawn": false,
+          "stage": "cropped",
+          "reviewRequired": true,
+          "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\mantle-tunic",
+          "jobId": "clothing-v03/mantle-tunic"
+        },
+        "reviewRequired": true,
+        "generation": {
+          "backend": "pixal3d",
+          "components": [],
+          "input": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\mantle-tunic\\reference.png",
+            "sha256": "56a558d7694a7b66eb438d9ef150b28b4e9bb6cef624b3b7f2b20aeb6a706ad4"
+          },
+          "license": {
+            "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+            "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+          },
+          "output": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\mantle-tunic\\generated.glb",
+            "sha256": "ef16e94e2d491147166463fac99dbd111cbb4faf48e777cc63070c78b110c594"
+          },
+          "parameters": {
+            "fov": 0.3490658503988659,
+            "gsh": null,
+            "gss": 10.0,
+            "matted": true,
+            "res": 1024,
+            "seed": 1983,
+            "steps": 12
+          },
+          "schema_version": 1,
+          "timings_seconds": {
+            "total": 2231.3
+          }
+        },
+        "outputSha256": "ef16e94e2d491147166463fac99dbd111cbb4faf48e777cc63070c78b110c594",
+        "matte": {
+          "model": "birefnet-general-lite",
+          "sourceSha256": "14d121e5fafae53374cd7d727642dda1e3fc46ed370e6a4031c96eb539d73bb8",
+          "inputSha256": "56a558d7694a7b66eb438d9ef150b28b4e9bb6cef624b3b7f2b20aeb6a706ad4",
+          "redrawn": false
+        }
+      }
+    }
+  },
+  "review": {
+    "scope": "First three reference outfits on LOD2; static fitting, no cloth simulation",
+    "runtime": "Character Lab desktop/mobile; Golden profile extremes; Idle/Walk/Run; shared-rig GLB export",
+    "views": [
+      "front",
+      "side",
+      "back"
+    ],
+    "date": "2026-10-02"
+  }
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('source', type=Path)
 parser.add_argument('output', type=Path)
+parser.add_argument('--layout', choices=['cream-tunic','long-dress','mantle-tunic'])
 args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
 if args.output.exists():
     raise RuntimeError('Candidate already exists; preserve it and use a new review run.')
@@ -52,11 +53,29 @@ for polygon in body.data.polygons:
 assert len(head_samples) > 30, 'Could not identify reference skin; manual extraction required'
 skin = [statistics.median(c[i] for c in head_samples) for i in range(3)]
 selected = []
+centre_x = (min(v.co.x for v in body.data.vertices)+max(v.co.x for v in body.data.vertices))/2
 for polygon in body.data.polygons:
     if polygon.center.z > minimum+height*.83 or polygon.material_index not in images:
         continue
     samples = [colour(polygon.material_index, loop) for loop in polygon.loop_indices]
     skin_corners = sum(math.dist(rgb, skin) < .18 for rgb in samples)
+    if args.layout:
+        # These reference outfits have covered legs/boots. Skin-colour alone
+        # incorrectly removes tan leather and cannot separate rust from skin.
+        # Spatial cuff/neck cuts complement colour, without creating surfaces.
+        y=(polygon.center.z-minimum)*1.8/height
+        x=abs(polygon.center.x-centre_x)*1.8/height
+        cuff={'cream-tunic':1.18,'mantle-tunic':1.06,'long-dress':1.45}[args.layout]
+        arm_limit=.21 if args.layout=='long-dress' else .28
+        arm_floor=1.12 if args.layout=='long-dress' else .60
+        if y>1.50 or (y>1.40 and x<.075) or (arm_floor<y<cuff and x>arm_limit):
+            continue
+        if y<1.12:
+            if args.layout=='long-dress' and .65<y and x>.24 and sum(rgb[0]>rgb[1]*1.3 and rgb[0]>rgb[2]*1.5 for rgb in samples)>len(samples)*.67:
+                continue
+            selected.append(polygon.index)
+            continue
+        skin_corners=sum(math.dist(rgb,skin)<.25 for rgb in samples)
     if skin_corners < len(samples)*.67:
         selected.append(polygon.index)
 assert len(selected) > 100, 'Extraction empty or ambiguous'
@@ -79,6 +98,7 @@ record = {'source': str(args.source.resolve()),
           'outputSha256': hashlib.sha256(args.output.read_bytes()).hexdigest(),
           'selectedFaces': len(selected), 'skinReferenceLinearRGB': skin,
           'skinDistanceThreshold': .18, 'headCutoffHeightFraction': .83,
+          'reviewLayout': args.layout,
           'reviewRequired': True, 'rigged': False, 'published': False,
           'sourceProvenance': json.loads(args.source.with_suffix('.provenance.json').read_text(encoding='utf-8-sig'))}
 args.output.with_suffix('.provenance.json').write_text(json.dumps(record, indent=2)+'\n', encoding='utf-8')

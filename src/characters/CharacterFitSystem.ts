@@ -116,13 +116,13 @@ export class CharacterFitSystem {
         cages:Object.fromEntries([...this.cages].map(([key,cage])=>[key,{min:cage.bounds.min.toArray(),max:cage.bounds.max.toArray(),vertices:cage.points.length}])),
         modules:[...this.modules.values()].map(module=>module.metadata)};}
     /** Reversible index-only masking; source geometry and its morphs remain immutable. */
-    maskBody(covers:CoverageZone[]=[]){
+    maskBody(covers:CoverageZone[]=[],bands:ModuleMetadata['coverageBands']={}){
         for(const mesh of this.meshes){const source=this.sourceGeometries.get(mesh)!;
             if(mesh.geometry!==source)mesh.geometry.dispose();
             if(!covers.length){mesh.geometry=source;continue;}
             const geometry=source.clone(),index=source.index,count=index?.count??source.attributes.position.count,kept:number[]=[];
             for(let i=0;i<count;i+=3){const ids=[0,1,2].map(k=>index?index.getX(i+k):i+k);
-                if(ids.every(id=>covers.includes(bodyZone(mesh,id))))continue;kept.push(...ids);
+                if(ids.every(id=>{const zone=bodyZone(mesh,id),band=bands?.[zone],y=source.attributes.position.getY(id);return covers.includes(zone)&&(!band||y>=(band.minY??-Infinity)&&y<=(band.maxY??Infinity));}))continue;kept.push(...ids);
             }geometry.setIndex(kept);mesh.geometry=geometry;
         }
     }

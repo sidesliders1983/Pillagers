@@ -6,6 +6,7 @@ import { CharacterDNA } from '../characters/CharacterDNA';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { FitDebugOptions, noFitDebug } from '../characters/CharacterFitSystem';
+import { deduplicateSharedSkins } from '../characters/CharacterExport';
 export class CharacterPreview {
     private scene=new Scene();
     private camera=new PerspectiveCamera(38,1,.05,60);
@@ -54,7 +55,7 @@ export class CharacterPreview {
     private reportModel(){
         const metadata=document.getElementById('lab-fit-metadata');if(metadata)metadata.textContent=JSON.stringify(this.current?.fit.snapshot()??{},null,2);
         const appearance=this.current?.root.getObjectByName('Appearance');
-        this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig · ${appearance?.userData.hairAsset==='reference-generated'?'reference hair':'hair asset pending'}${appearance?.userData.beardAsset==='pending'?' · beard asset pending':appearance?.userData.beardAsset==='reference-generated'?' · reference beard':''}`);
+        this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig · ${appearance?.userData.hairAsset==='reference-generated'?'reference hair':'hair asset pending'}${appearance?.userData.beardAsset==='pending'?' · beard asset pending':appearance?.userData.beardAsset==='reference-generated'?' · reference beard':''}${this.current?.root.userData.outfit?' · reference outfit (LOD2)':''}`);
     }
     private layout(){if(this.current)this.current.root.position.x=this.comparison?-1:0;if(this.comparison)this.comparison.root.position.x=1;}
     resetView(){const comparing=this.comparisonDNA!==null;this.controls.target.set(0,.95,0);this.camera.position.set(comparing?0:1.8,1.75,comparing?4.7:3.2);this.controls.update();}
@@ -66,7 +67,7 @@ export class CharacterPreview {
         const position=model.root.position.clone();model.root.position.set(0,0,0);model.root.updateMatrixWorld(true);
         try{
             const data=await new GLTFExporter().parseAsync(model.root,{binary:true,animations:model.clips});
-            const url=URL.createObjectURL(new Blob([data as ArrayBuffer],{type:'model/gltf-binary'}));
+            const url=URL.createObjectURL(new Blob([deduplicateSharedSkins(data as ArrayBuffer)],{type:'model/gltf-binary'}));
             const link=document.createElement('a');link.href=url;link.download=`pillagers-${dna.seed}-age-${dna.age}-LOD${lod}.glb`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
         }finally{model.root.position.copy(position);model.fit.setDebug(this.fitDebug);}
     }
