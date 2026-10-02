@@ -40,6 +40,16 @@ The northstar architecture, runtime/model, hosting, event authority, API boundar
 
 Generate at most once per annual summary and reuse saved results. Apply GP-002 regardless of where inference runs. The game and annual summary must remain usable while generation is pending or fails, using factual template-based chronicles as fallback. Avoid continuous inference requests and any automatic external-provider fallback. Full offline play is not required.
 
+## GP-004 — Settlement, residents and skilled work
+
+Approved vocabulary: **nederzetting / settlement** for the place, **gemeenschap / community** for the social group, **bewoner / resident** for a person living there, and **huishouden / household** for a domestic unit. A family/kin group is a separate relationship, not a synonym for the settlement. Settlement and resident are the default player-facing pair; persona remains development vocabulary. Tribe/clan is not the default.
+
+The ten approved work categories are farmer, livestock keeper/herder, fisher, hunter, textile worker, smith, woodworker, boatbuilder, trader, and **leer- en juwelenmaker / leather and jewellery maker**. They are a practical game selection, not a statistically ranked historical top ten. Residents have skills and can combine work; do not require one resident per category.
+
+Leather and jewellery making is a combined game role spanning distinct crafts. Decoration and jewellery belong in material culture and may express wealth, identity and cultural contacts. Detailed production, gifting, trade, inheritance and social effects need later design decisions. Do not infer factual relationships or motives from jewellery; lore remains governed by GP-002.
+
+Research, evidence limits and approved terms: [Viking occupations and terminology](docs/VIKING-OCCUPATIONS-AND-TERMINOLOGY.md). This decision does not implement jobs or rename code/save schemas.
+
 ## Scope and implementation status
 
 The calendar and age wording above are approved design decisions. They do not imply that the current code already implements them.
@@ -61,4 +71,4 @@ These are proposals, not requirements for Codex to implement automatically:
 
 ## Maintaining these principles
 
-When implementing time-related features or lore, check them against GP-001, GP-002 and GP-003 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features or lore, check them against GP-001 through GP-004 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
