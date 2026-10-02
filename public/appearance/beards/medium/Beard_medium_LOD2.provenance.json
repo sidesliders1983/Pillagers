@@ -1,0 +1,117 @@
+{
+  "reviewRequired": false,
+  "style": "medium",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\medium\\lods-retry-20261002-110038\\Beard_medium_LOD2.glb",
+  "sourceSha256": "114144756abd1e301570d0ec9efa2e5f9caa9973e0200d55a1692b6ffd968125",
+  "outputSha256": "c230b0c07329b618937e408421dc6b340cedfeb7c58668f02883a1794907557c",
+  "fit": {
+    "sourceSkullCentre": [
+      0,
+      0,
+      0.075
+    ],
+    "scale": 0.52,
+    "rotateBlenderZ": 180,
+    "headReferenceSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "removedSmallComponentVertices": 148,
+  "fragmentAreaThreshold": 0.015,
+  "sourceProvenance": {
+    "generatedBust": {
+      "reference": {
+        "id": "medium",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          440,
+          485,
+          634,
+          752
+        ],
+        "inputSha256": "73e41c53271dd2fcce7722376ac5310553dd23c7a89109c48a10e45a48b6465c",
+        "redrawn": false,
+        "reviewRequired": true,
+        "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\medium",
+        "jobId": "beards-v03/medium"
+      },
+      "reviewRequired": true,
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\medium\\reference.png",
+          "sha256": "68ec5de80298e2a5d8a0e26d3ca15ce8bc8572e3fa53d6374627ab8b6490374d"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\medium\\generated.glb",
+          "sha256": "486ee9a49d721d3f1451e74fe8f157b70b5437aa65a9cbbf84208dd37dae4e94"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10.0,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 3085.4
+        }
+      },
+      "outputSha256": "486ee9a49d721d3f1451e74fe8f157b70b5437aa65a9cbbf84208dd37dae4e94",
+      "matte": {
+        "model": "birefnet-general-lite",
+        "sourceSha256": "73e41c53271dd2fcce7722376ac5310553dd23c7a89109c48a10e45a48b6465c",
+        "inputSha256": "68ec5de80298e2a5d8a0e26d3ca15ce8bc8572e3fa53d6374627ab8b6490374d",
+        "redrawn": false
+      }
+    },
+    "style": "medium",
+    "outputSha256": "92137d375d48faaceb04f2f6f1996deaace052b57a5c8dffd7ea03006bf71e07",
+    "extraction": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\medium\\generated.glb",
+      "selectedFaces": 225119,
+      "fraction": 0.22885343027523122,
+      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+      "reviewRequired": true
+    },
+    "reviewRequired": true
+  },
+  "visualReview": {
+    "ages": [
+      35,
+      70
+    ],
+    "animations": [
+      "Idle",
+      "Walk",
+      "Run"
+    ],
+    "lods": [
+      2
+    ],
+    "fitRatios": [
+      1,
+      1.5
+    ],
+    "screenshots": [
+      "artifacts/generated-beard-medium-age35-LOD2.png",
+      "artifacts/generated-beard-medium-age70-LOD2.png"
+    ]
+  },
+  "runtimeFit": {
+    "cheekAttachment": "fixed head convex hull",
+    "sizeGrowth": "free beard only; cheek attachment fixed"
+  }
+}

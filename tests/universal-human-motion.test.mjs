@@ -101,6 +101,33 @@ test('reference hair follows the existing head through child adult elder animati
 });
 
 
+test('all LOD2 reference beards follow the existing head through adult and elder animation cycles',async()=>{
+    const body=await asset(2);
+    for(const style of ['stubble','short','medium','long','split-braid','braid']){
+        const bytes=readFileSync(new URL(`../public/appearance/beards/${style}/Beard_${style}_LOD2.glb`,import.meta.url));
+        const beard=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+        for(const age of [18,70]){
+            const profile=universalHumanProfile({...defaultDNA(),age,appearanceFit:{hair:1,beard:1.5,clothing:1}});
+            profile.appearance.beardStyle=style;
+            const human=new UniversalHuman(body,profile,'#eeccbb',null,beard.scene);
+            const appearance=human.root.getObjectByName('Appearance'),head=appearance.parent;
+            assert.equal(head.name,'Head');assert.equal(appearance.userData.beardAsset,'reference-generated');
+            const mesh=appearance.getObjectByName(`Beard_${style}_LOD2`);assert.ok(mesh);
+            human.update(0);human.root.updateMatrixWorld(true);
+            const sample=()=>head.worldToLocal(mesh.localToWorld(new Vector3().fromBufferAttribute(mesh.geometry.attributes.position,0)));
+            const local=sample();
+            for(const clip of ['Idle','Walk','Run']){
+                human.setAnimation(clip);
+                for(let frame=0;frame<20;frame++){
+                    human.update(.1);human.root.updateMatrixWorld(true);
+                    assert.ok(sample().distanceTo(local)<1e-6,`${style} age${age} ${clip} must stay fixed to Head`);
+                }
+            }
+            human.dispose();
+        }
+    }
+});
+
 test('annual aging on actual world LODs preserves local vertices and reuses garment geometry',async()=>{
     const {Group}=await import('three');
     for(const lod of [1,2]){

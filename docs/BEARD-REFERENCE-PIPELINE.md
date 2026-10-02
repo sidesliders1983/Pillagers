@@ -5,7 +5,18 @@ The appearance profile controls selection: male characters from age 18 only,
 with the same heritage and age colour as their hair. Unavailable styles remain
 absent. There are no manual style selectors and no substitute geometry.
 
-## Accepted module
+## Accepted modules
+
+All six beard styles are integrated: stubble, short, medium, long, split-braid
+and braid. The five newly accepted styles use LOD2 even when the body is shown
+in LOD0/1. Existing braid LOD0/1 assets remain available. Selection remains
+automatic; no separate beard style controls are introduced.
+
+The new fitted assets discard isolated extraction fragments below 1.5% of the
+largest connected component area. Provenance records the removed vertex count.
+Cheek attachments are fitted to the fixed head hull. The size slider grows the
+free part with a smooth transition below the jaw; it leaves cheek attachments
+fixed, avoiding detached sideburns when increasing beard size.
 
 `braid` uses the reviewed original-reference extraction, including its binding,
 and optimized LODs of 2475 / 1775 / 1175 triangles. Fitting applies the same
@@ -33,11 +44,9 @@ threads, records per-style stages and never publishes results. Incomplete output
 directories are preserved for inspection rather than overwritten. Do not start
 another copy while its named mutex is held.
 
-Inspect `scratch/beards-v03/lod-queue-status.json`, individual optimization logs
-and reports. Stubble and short have small stray source fragments; medium has
-irregular edges. Inspect and correct the optimized original surfaces before
-fitting and extending `GeneratedBeard.ts`. Split-braid bindings also require
-inspection. These five styles are not yet accepted or integrated.
+`scratch/beards-v03/integration-status.json` records accepted modules. Optimization
+status alone does not indicate publication. All six current styles have passed
+placement and motion review; future additions still require that step.
 
 The clothing extraction queue follows the beard worker. It creates candidates
 from the original textured figure surfaces with a source-specific skin mask;
@@ -52,5 +61,8 @@ boundary ambiguity must be reviewed before LOD optimization and loose fitting.
 - `node node_modules/vite/bin/vite.js build`
 - `PLAYWRIGHT_MODULE=<installed playwright> node scripts/generated-beard-smoke.mjs`
 
-The browser check uses automatic profile seed 12, all three LODs and Idle,
-Walk and Run. Screenshots are saved under ignored `artifacts/` for visual review.
+The browser check finds automatic profiles for all six styles at ages 35 and
+70, exercises Idle/Walk/Run on LOD2, checks beard eligibility for female and
+under-18 profiles and verifies the size control. Actual GLB tests verify Head
+attachment through full adult/elder animation cycles and fixed cheek attachment
+when changing size. Screenshots are saved under ignored `artifacts/` for review.

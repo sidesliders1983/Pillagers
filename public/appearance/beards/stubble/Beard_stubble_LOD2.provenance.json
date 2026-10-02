@@ -1,0 +1,117 @@
+{
+  "reviewRequired": false,
+  "style": "stubble",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\lods-2500-1800-1200\\Beard_stubble_LOD2.glb",
+  "sourceSha256": "8e24d928187868c6401a8e526225fe3b7730b6262d188f4cca617dae57c552f2",
+  "outputSha256": "67842a4d709f490f90732836ced388642aa3e9ebf8bdd4998107131522056528",
+  "fit": {
+    "sourceSkullCentre": [
+      0,
+      0,
+      0.075
+    ],
+    "scale": 0.52,
+    "rotateBlenderZ": 180,
+    "headReferenceSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "removedSmallComponentVertices": 201,
+  "fragmentAreaThreshold": 0.015,
+  "sourceProvenance": {
+    "generatedBust": {
+      "reference": {
+        "id": "stubble",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          20,
+          485,
+          214,
+          752
+        ],
+        "inputSha256": "a766ddabcbbdb9cb5262a47e525e4271dbae8a321800c8540405ee96cf7ca0d2",
+        "redrawn": false,
+        "reviewRequired": true,
+        "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble",
+        "jobId": "beards-v03/stubble"
+      },
+      "reviewRequired": true,
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\reference.png",
+          "sha256": "beed9e1c370d026c048ed20b6feed8bd476894bb0931e970dc2b6694be7816b5"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
+          "sha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10.0,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 3254.4
+        }
+      },
+      "outputSha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d",
+      "matte": {
+        "model": "birefnet-general-lite",
+        "sourceSha256": "a766ddabcbbdb9cb5262a47e525e4271dbae8a321800c8540405ee96cf7ca0d2",
+        "inputSha256": "beed9e1c370d026c048ed20b6feed8bd476894bb0931e970dc2b6694be7816b5",
+        "redrawn": false
+      }
+    },
+    "style": "stubble",
+    "outputSha256": "fd4ee00bd4f617c40e4e9a5df9060b313e94c2f1d8ec3b03197594fe72492058",
+    "extraction": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
+      "selectedFaces": 33364,
+      "fraction": 0.0355131870541426,
+      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+      "reviewRequired": true
+    },
+    "reviewRequired": true
+  },
+  "visualReview": {
+    "ages": [
+      35,
+      70
+    ],
+    "animations": [
+      "Idle",
+      "Walk",
+      "Run"
+    ],
+    "lods": [
+      2
+    ],
+    "fitRatios": [
+      1,
+      1.5
+    ],
+    "screenshots": [
+      "artifacts/generated-beard-stubble-age35-LOD2.png",
+      "artifacts/generated-beard-stubble-age70-LOD2.png"
+    ]
+  },
+  "runtimeFit": {
+    "cheekAttachment": "fixed head convex hull",
+    "sizeGrowth": "free beard only; cheek attachment fixed"
+  }
+}

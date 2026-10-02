@@ -1,0 +1,117 @@
+{
+  "reviewRequired": false,
+  "style": "short",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\short\\lods-2500-1800-1200\\Beard_short_LOD2.glb",
+  "sourceSha256": "b02a523a0eefcc35d4e5b77a60e32dbe3c83e3d5e244a555435b2a240b5e22b2",
+  "outputSha256": "f7328ebaeb77fae88af45429873ae1b4cc9017a586dc2e8dd54c8834b1e5ade6",
+  "fit": {
+    "sourceSkullCentre": [
+      0,
+      0,
+      0.075
+    ],
+    "scale": 0.52,
+    "rotateBlenderZ": 180,
+    "headReferenceSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "removedSmallComponentVertices": 424,
+  "fragmentAreaThreshold": 0.015,
+  "sourceProvenance": {
+    "generatedBust": {
+      "reference": {
+        "id": "short",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          230,
+          485,
+          424,
+          752
+        ],
+        "inputSha256": "0f49cbfc1913f4e53961961efae00bfa7c22af3164aa57d03606dac462ac1ba7",
+        "redrawn": false,
+        "reviewRequired": true,
+        "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\short",
+        "jobId": "beards-v03/short"
+      },
+      "reviewRequired": true,
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\short\\reference.png",
+          "sha256": "a81c61b7f71bf87e26cc6179bba211d963aaa52ad4a0d40e122d480eaf833b52"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\short\\generated.glb",
+          "sha256": "07123cce8412822d312a5f3ea98e7fae3353ee27f05d7a7d360c58adfec766c3"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10.0,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 2793.5
+        }
+      },
+      "outputSha256": "07123cce8412822d312a5f3ea98e7fae3353ee27f05d7a7d360c58adfec766c3",
+      "matte": {
+        "model": "birefnet-general-lite",
+        "sourceSha256": "0f49cbfc1913f4e53961961efae00bfa7c22af3164aa57d03606dac462ac1ba7",
+        "inputSha256": "a81c61b7f71bf87e26cc6179bba211d963aaa52ad4a0d40e122d480eaf833b52",
+        "redrawn": false
+      }
+    },
+    "style": "short",
+    "outputSha256": "00cf1bd5d690bc3685ff6b9c11dde5a33049fb07089ee5ceddcdee75331c8d2a",
+    "extraction": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\short\\generated.glb",
+      "selectedFaces": 139049,
+      "fraction": 0.14838509330026614,
+      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+      "reviewRequired": true
+    },
+    "reviewRequired": true
+  },
+  "visualReview": {
+    "ages": [
+      35,
+      70
+    ],
+    "animations": [
+      "Idle",
+      "Walk",
+      "Run"
+    ],
+    "lods": [
+      2
+    ],
+    "fitRatios": [
+      1,
+      1.5
+    ],
+    "screenshots": [
+      "artifacts/generated-beard-short-age35-LOD2.png",
+      "artifacts/generated-beard-short-age70-LOD2.png"
+    ]
+  },
+  "runtimeFit": {
+    "cheekAttachment": "fixed head convex hull",
+    "sizeGrowth": "free beard only; cheek attachment fixed"
+  }
+}

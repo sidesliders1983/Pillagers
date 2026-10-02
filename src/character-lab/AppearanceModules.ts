@@ -12,6 +12,7 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
         const beard=beardSource.clone(true);beard.name='GeneratedBeard';beard.updateMatrixWorld(true);
         const reference=new Vector3(.1992,.2397,.2189);
         const scale=Math.max(size.x/reference.x,size.y/reference.y,size.z/reference.z);
+        const jawHull=skull.length>=4?new ConvexHull().setFromPoints(skull):null;
         beard.traverse(object=>{
             if(!(object as Mesh).isMesh)return;
             const mesh=object as Mesh;mesh.geometry=mesh.geometry.clone();
@@ -20,7 +21,17 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
             const position=mesh.geometry.attributes.position,anchor=new Vector3(0,-.045,.065).multiplyScalar(scale);
             for(let i=0;i<position.count;i++){
                 const p=new Vector3().fromBufferAttribute(position,i).multiplyScalar(scale);
-                p.sub(anchor).multiplyScalar(fit.beard).add(anchor);position.setXYZ(i,p.x,p.y,p.z);
+                // Keep cheek/sideburn attachment against the actual fixed head.
+                // Only fit existing vertices; the generated beard silhouette below
+                // the jaw remains intact.
+                if(jawHull&&p.y>-.075*scale&&Math.abs(p.x)>size.x*.35&&p.z<size.z*.4){
+                    const direction=p.clone().normalize();let radius=Infinity;
+                    for(const face of jawHull.faces){const denominator=face.normal.dot(direction);if(denominator>1e-6)radius=Math.min(radius,face.constant/denominator);}
+                    if(Number.isFinite(radius)&&p.length()>radius+.003)p.copy(direction.multiplyScalar(radius+.003));
+                }
+                // The size slider grows the free beard, not its cheek attachments.
+                const t=Math.max(0,Math.min(1,(-.045*scale-p.y)/(.10*scale))),growth=1+(fit.beard-1)*t*t*(3-2*t);
+                p.sub(anchor).multiplyScalar(growth).add(anchor);position.setXYZ(i,p.x,p.y,p.z);
             }
             mesh.material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
             mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();mesh.castShadow=true;
