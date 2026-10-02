@@ -128,6 +128,42 @@ test('all LOD2 reference beards follow the existing head through adult and elder
     }
 });
 
+test('LOD2 reference surfaces fit the actual skull, including triangle interiors',async()=>{
+    const {Box3}=await import('three');
+    const {ConvexHull}=await import('three/addons/math/ConvexHull.js');
+    const {appearanceModules,disposeModules}=load('../src/character-lab/AppearanceModules.ts');
+    const body=await asset(2),skull=[];
+    body.scene.traverse(mesh=>{if(!mesh.isSkinnedMesh)return;const p=mesh.geometry.attributes.position;
+        for(let i=0;i<p.count;i++)if(p.getY(i)>1.56&&Math.abs(p.getX(i))<.18)skull.push(new Vector3().fromBufferAttribute(p,i));
+    });
+    const bounds=new Box3().setFromPoints(skull),centre=bounds.getCenter(new Vector3()),size=bounds.getSize(new Vector3());
+    skull.forEach(p=>p.sub(centre));const hull=new ConvexHull().setFromPoints(skull);
+    const gap=p=>{const direction=p.clone().normalize();let radius=Infinity;
+        for(const face of hull.faces){const d=face.normal.dot(direction);if(d>1e-6)radius=Math.min(radius,face.constant/d);}
+        return p.length()-radius;
+    };
+    for(const style of ['short','medium','long','tied','bun','braid']){
+        const bytes=readFileSync(new URL(`../public/appearance/${style}/Hair_${style}_LOD2.glb`,import.meta.url));
+        const hair=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+        const profile={hairStyle:style,beardStyle:'none',color:'#986e55',greyAmount:0};
+        const group=appearanceModules(profile,size,2,undefined,hair.scene,skull);
+        group.traverse(mesh=>{if(!mesh.isMesh)return;const position=mesh.geometry.attributes.position,index=mesh.geometry.index,count=index?.count??position.count;
+            for(let t=0;t<count;t+=3){const vertices=[0,1,2].map(k=>new Vector3().fromBufferAttribute(position,index?index.getX(t+k):t+k));
+                for(const weights of [[1/3,1/3,1/3],[.5,.5,0],[.5,0,.5],[0,.5,.5]]){
+                    const p=new Vector3();vertices.forEach((v,k)=>p.addScaledVector(v,weights[k]));
+                    if(p.y>=-size.y*.45)assert.ok(gap(p)>.002,`${style} triangle ${t/3} cuts through the head: ${gap(p)}`);
+                }
+            }
+        });disposeModules(group);
+    }
+    const bytes=readFileSync(new URL('../public/appearance/beards/stubble/Beard_stubble_LOD2.glb',import.meta.url));
+    const beard=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+    const group=appearanceModules({hairStyle:'short',beardStyle:'stubble',color:'#986e55',greyAmount:0},size,2,undefined,null,skull,beard.scene);
+    group.traverse(mesh=>{if(!mesh.isMesh)return;const p=mesh.geometry.attributes.position;
+        for(let i=0;i<p.count;i++)assert.ok(Math.abs(gap(new Vector3().fromBufferAttribute(p,i))-.003)<1e-6,'stubble must stay 3mm from the actual skull');
+    });disposeModules(group);
+});
+
 test('annual aging on actual world LODs preserves local vertices and reuses garment geometry',async()=>{
     const {Group}=await import('three');
     for(const lod of [1,2]){
