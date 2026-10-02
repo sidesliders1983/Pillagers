@@ -16,8 +16,9 @@ try{
   $taskStates[$taskStyle]=@{stage='extracting'}
   $taskStates|ConvertTo-Json -Depth 12|Set-Content (Join-Path $taskFolder 'extraction-status.json')
   if(!(Test-Path $taskOutput)){
+   $taskColourArgs=if($taskStyle -eq 'braid'){@('--max-saturation','.98','--beard-braid')}else{@()}
    try{$ErrorActionPreference='Continue'
-    & (Join-Path $taskRoot 'tools/blender-4.5.9-windows-x64/blender.exe') --background --factory-startup --threads 2 --python-exit-code 1 --python (Join-Path $PSScriptRoot 'extract-generated-hair.py') -- $taskSource $taskOutput *> (Join-Path $taskStyleFolder 'extraction.log')
+    & (Join-Path $taskRoot 'tools/blender-4.5.9-windows-x64/blender.exe') --background --factory-startup --threads 2 --python-exit-code 1 --python (Join-Path $PSScriptRoot 'extract-generated-hair.py') -- $taskSource $taskOutput @taskColourArgs *> (Join-Path $taskStyleFolder 'extraction.log')
    }finally{$ErrorActionPreference='Stop'}
    if($LASTEXITCODE -ne 0){$taskStates[$taskStyle]=@{stage='needs-review';exitCode=$LASTEXITCODE};continue}
   }
