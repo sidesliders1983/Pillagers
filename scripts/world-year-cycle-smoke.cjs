@@ -27,11 +27,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   await step(60000,1201,0);expected=expected.map((dna,i)=>agePersona(dna,1201,i).dna);
   const first=await population();assert.equal(first.length,10);assert.deepEqual(first.map(p=>p.age),expected.map(p=>p.age));assert.deepEqual(first.map(p=>p.seed),expected.map(p=>p.seed));
   assert.ok(first.every(p=>walkable(p.x,p.z)));assert.ok(first.some(p=>p.age===5));
-  await step(90000,1201,.5);assert.equal(await page.locator('body').getAttribute('data-lighting'),'night');
-  fs.mkdirSync('artifacts',{recursive:true});await page.screenshot({path:`artifacts/year-night-${mobile?'mobile':'desktop'}.png`,timeout:90000});
+  await step(90000,1201,.5);assert.equal(await page.locator('body').getAttribute('data-lighting'),'day');
+  fs.mkdirSync('artifacts',{recursive:true});await page.screenshot({path:`artifacts/year-noon-${mobile?'mobile':'desktop'}.png`,timeout:90000});
   await page.click('#time-seasons');assert.equal(await page.locator('#world-year').textContent(),'Year: 1201 DC');
   assert.equal(Number(await page.locator('#world').getAttribute('data-year-progress')),.5);assert.deepEqual((await population()).map(p=>p.age),expected.map(p=>p.age));
-  await step(105000,1201,.75);await page.screenshot({path:`artifacts/year-winter-${mobile?'mobile':'desktop'}.png`,timeout:90000});
+  await step(105000,1201,.75);await page.screenshot({path:`artifacts/year-autumn-${mobile?'mobile':'desktop'}.png`,timeout:90000});
   await step(120000,1202,0);expected=expected.map((dna,i)=>agePersona(dna,1202,i).dna);
   assert.deepEqual((await population()).map(p=>p.age),expected.map(p=>p.age));
   // A delayed frame catches every annual tick and supports repeated death/respawn cycles.

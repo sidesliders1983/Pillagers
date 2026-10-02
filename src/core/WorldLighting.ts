@@ -80,7 +80,7 @@ export class WorldLighting {
             this.ambient.intensity=MathUtils.lerp(config.day.ambient,config.night.ambient,night);
             blend(this.directional.color,config.day.sun,config.night.moon,night);
             this.directional.intensity=MathUtils.lerp(config.day.sunIntensity,config.night.moonIntensity,night);
-            const angle=progress*Math.PI*2;this.directional.position.set(-28*Math.cos(angle)+35*Math.sin(angle),8+40*Math.abs(Math.cos(angle)),18*Math.cos(angle));
+            const angle=progress*Math.PI*2+Math.PI;this.directional.position.set(-28*Math.cos(angle)+35*Math.sin(angle),8+40*Math.abs(Math.cos(angle)),18*Math.cos(angle));
             this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,config.night.exposure,night);
         }else if(this.visualization==='seasons'){
             const {from,to,mix}=seasonBlend(progress);this.nightWeight=0;this.mode='day';
