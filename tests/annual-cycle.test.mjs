@@ -26,6 +26,14 @@ test('population ages once per year and replaces age 60 with a deterministic ind
         assert.equal(population.length,10);assert.ok(population.every(dna=>dna.age>=5&&dna.age<60));
     }
 });
+test('annual summary pauses at the first boundary; Continue starts a fresh 60 seconds',()=>{
+    const cycle=new AnnualCycle(0),ticks=[];
+    cycle.update(180000,year=>{ticks.push(year);cycle.pause();});
+    assert.deepEqual(ticks,[1201]);assert.equal(cycle.progress,0);
+    cycle.update(500000,year=>ticks.push(year));assert.deepEqual(ticks,[1201]);
+    cycle.resume(500000);cycle.update(559999,year=>ticks.push(year));assert.deepEqual(ticks,[1201]);
+    cycle.update(560000,year=>{ticks.push(year);cycle.pause();});assert.deepEqual(ticks,[1201,1202]);
+});
 test('random respawn locations are dry, walkable and inside the playable area, including fallback',()=>{
     const random=seededRandom(1983),positions=[];
     for(let i=0;i<1000;i++){const p=randomWalkablePosition(random);assert.ok(walkable(p.x,p.z));assert.ok(heightAt(p.x,p.z)>0);positions.push(p);}
