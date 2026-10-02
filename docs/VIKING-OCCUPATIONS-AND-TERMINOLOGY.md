@@ -1,6 +1,6 @@
 # Viking Age work and Pillagers terminology — research notes
 
-Research date: 2026-10-02. Status: research and design proposals, not approved profession classes or terminology.
+Research date: 2026-10-02. Status: historical research with user-approved game work categories and terminology (2026-10-02). Mechanics, population distribution and implementation remain undecided.
 
 ## Scope and limits
 
@@ -10,7 +10,7 @@ Evidence spans the Viking Age and different locations. Jorvik/Coppergate evidenc
 
 ## Ten work categories
 
-| Suggested Dutch label | English label | Activities | Evidence |
+| Approved Dutch label | English label | Activities | Evidence |
 |---|---|---|---|
 | Boer / akkerbouwer | Farmer | Cultivating crops and harvesting | S1, S2 |
 | Veehouder / herder | Livestock keeper / herder | Caring for livestock; milk and wool supply | S2 |
@@ -21,23 +21,23 @@ Evidence spans the Viking Age and different locations. Jorvik/Coppergate evidenc
 | Houtbewerker | Woodworker | Woodworking and carving wooden objects | S4 |
 | Bootbouwer | Boatbuilder | Selecting and shaping timber, building and repairing vessels | S3 |
 | Handelaar | Trader | Exchange and distribution of local/imported goods | S5 |
-| Leerbewerker / schoenmaker | Leatherworker / shoemaker | Shoes, belts, straps and sheaths | S6 |
+| Leer- en juwelenmaker | Leather and jewellery maker | Leather goods, decorated fittings and jewellery | S6, S9 |
 
-Labels and grouping are our design interpretation. Farmer/herder and woodworker/boatbuilder overlap. These ten categories do not claim equal population shares or exhaust all important work. Food preparation, preservation, cleaning and care need explicit task coverage; the National Museum also identifies housewives, field workers and servants among ordinary people (S1). Rope-making is another well-documented craft (S3).
+Labels and grouping are approved game design choices, not claims about historical occupational titles. The combined leather and jewellery maker is a game role spanning distinct skills/materials; do not assume every historical leatherworker was also a jeweller. Farmer/herder and woodworker/boatbuilder overlap. These ten categories do not claim equal population shares or exhaust all important work. Food preparation, preservation, cleaning and care need explicit task coverage; the National Museum also identifies housewives, field workers and servants among ordinary people (S1). Rope-making is another well-documented craft (S3).
 
 Warrior, raider, poet, religious specialist or ruler should not displace everyday subsistence work solely because they are prominent in popular depictions. Social status (including historical unfree status) is a separate concept from occupation.
 
-## Suggested model for later design
+## Approved work model; mechanics for later design
 
 A resident has skills and performs tasks; they can farm in one season and fish, trade or repair equipment in another. A displayed main occupation can summarize current work without becoming an immutable identity. Do not infer a recorded action from skills, a role label or an occupation-fit score: lore needs actual completion events (GP-002).
 
 For ten starting residents, do not require one resident per category. Population composition and workload need separate decisions after the game economy is defined.
 
-## Terminology proposals — not approved
+## Approved terminology
 
 Use familiar UI labels first, with researched historical vocabulary added where useful.
 
-| Concept | Dutch proposal | English proposal | Meaning |
+| Concept | Dutch | English | Meaning |
 |---|---|---|---|
 | Physical settlement | Nederzetting | Settlement | The place: homes, farms, landing site, workshops |
 | Social community | Gemeenschap | Community | People belonging to the group, potentially including travellers |
@@ -45,11 +45,15 @@ Use familiar UI labels first, with researched historical vocabulary added where 
 | Family/kinship group | Familie / verwantschapsgroep | Family / kin group | A separately modelled relationship, not a synonym for the entire settlement |
 | Domestic unit | Huishouden | Household | People sharing a domestic/economic unit; distinct from settlement |
 
-For the present game, prefer **nederzetting + bewoner** as the default visible pair. Keep community distinct if membership and residence later differ. This is a recommendation, awaiting the user's choice.
+For the present game, prefer **nederzetting + bewoner** as the default visible pair. Keep community distinct if membership and residence later differ. The user approved these terms. Settlement/resident is the default visible pair; community refers to the social group.
 
 Do not make tribe/clan the default without defining a tribal or kinship structure in the game. The society source (S7) discusses possible tribes before the Viking Age and changing political organisation; it does not establish a universal tribe model for every Viking settlement. Likewise, using Viking as the label for every resident would be a game convention, not a precise universal historical self-description (S8).
 
-Member is appropriate for explicit membership; persona is currently useful development vocabulary rather than a proposed visible label. Do not rename code entities, saves or DNA schemas until terms and migration scope are approved.
+Member is appropriate for explicit membership; persona is currently useful development vocabulary rather than a proposed visible label. Code renaming and save/DNA migrations require a separate implementation scope; this document approves vocabulary, not a schema migration.
+
+## Jewellery as cultural expression
+
+The user explicitly includes jewellery in the tenth role. Archaeological jewellery can express wealth and identity, fasten clothing and show cultural influences and connections (S9). Decoration therefore belongs in the game's material culture, beyond utilitarian equipment. Production, exchange, wearing, gifting and inheritance are possible later mechanics, not implemented or approved rules. Specific meanings must be researched by place and period; do not infer a resident's allegiance, beliefs or relationships solely from an ornament. Lore may mention only recorded crafting, ownership or transfer events.
 
 ## Sources
 
@@ -62,6 +66,8 @@ Member is appropriate for explicit membership; persona is currently useful devel
 - S7: Viking Ship Museum, society and political organisation: https://www.vikingeskibsmuseet.dk/en/professions/education/the-viking-age-society
 - S8: Viking Ship Museum, Scandinavia and the term Viking: https://www.vikingeskibsmuseet.dk/fagligt/e-laering/vikingetidens-geografi/vikingetiden-i-skandinavien
 
+- S9: JORVIK Viking Centre, jewellery, status, identity and cultural contacts: https://www.jorvikvikingcentre.co.uk/summer-voyage/viking-jewellery/
+
 ## Deferred work
 
-The lore northstar architecture is explicitly deferred in GP-003. This study does not select an LLM, design infrastructure, implement occupations or approve terminology.
+The lore northstar architecture is explicitly deferred in GP-003. This study does not select an LLM, design infrastructure or implement occupations. It records the approved terminology and work categories; detailed mechanics remain deferred.
