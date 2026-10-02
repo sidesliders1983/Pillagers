@@ -4,10 +4,29 @@ import { CharacterAppearance } from '../characters/CharacterAppearance';
 import { AppearanceFit } from '../characters/CharacterDNA';
 
 /** Reference-generated geometry only. An unavailable module stays absent. */
-export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1},source:Group|null=null,skull:Vector3[]=[]){
+export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1},source:Group|null=null,skull:Vector3[]=[],beardSource:Group|null=null){
     const group=new Group();group.name='Appearance';group.userData.appearance=profile;group.userData.appearanceFit=fit;
     group.userData.hairAsset=source?'reference-generated':'pending';
-    group.userData.beardAsset=profile.beardStyle==='none'?'not-applicable':'pending';
+    group.userData.beardAsset=profile.beardStyle==='none'?'not-applicable':beardSource?'reference-generated':'pending';
+    if(beardSource&&profile.beardStyle!=='none'){
+        const beard=beardSource.clone(true);beard.name='GeneratedBeard';beard.updateMatrixWorld(true);
+        const reference=new Vector3(.1992,.2397,.2189);
+        const scale=Math.max(size.x/reference.x,size.y/reference.y,size.z/reference.z);
+        beard.traverse(object=>{
+            if(!(object as Mesh).isMesh)return;
+            const mesh=object as Mesh;mesh.geometry=mesh.geometry.clone();
+            mesh.geometry.applyMatrix4(mesh.matrixWorld);mesh.position.set(0,0,0);mesh.quaternion.identity();mesh.scale.set(1,1,1);
+            // Scale around the jaw attachment, keeping the upper edge in place.
+            const position=mesh.geometry.attributes.position,anchor=new Vector3(0,-.045,.065).multiplyScalar(scale);
+            for(let i=0;i<position.count;i++){
+                const p=new Vector3().fromBufferAttribute(position,i).multiplyScalar(scale);
+                p.sub(anchor).multiplyScalar(fit.beard).add(anchor);position.setXYZ(i,p.x,p.y,p.z);
+            }
+            mesh.material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
+            mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();mesh.castShadow=true;
+        });
+        group.add(beard);
+    }
     if(!source)return group;
     const hair=source.clone(true);hair.name='GeneratedHair';hair.updateMatrixWorld(true);
     const reference=new Vector3(.1992,.2397,.2189);

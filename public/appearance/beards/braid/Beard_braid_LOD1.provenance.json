@@ -1,0 +1,131 @@
+{
+  "style": "braid",
+  "lod": 1,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\lods-2500-1800-1200\\Beard_braid_LOD1.glb",
+  "sourceSha256": "cd6e17f0439cb459bc2bc6a6d4c47de0bfddb93bb2eef93bb1f714eca12bd6b8",
+  "outputSha256": "8912f32f9fe7d2c4507530ab4932e6d8718966220cec41a16cc5ec294b0136db",
+  "fit": {
+    "sourceSkullCentre": [
+      0,
+      0,
+      0.075
+    ],
+    "scale": 0.52,
+    "rotateBlenderZ": 180,
+    "headReferenceSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "removedSmallComponentVertices": 0,
+  "sourceProvenance": {
+    "style": "braid",
+    "generatedBust": {
+      "reference": {
+        "id": "braid",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          1070,
+          485,
+          1264,
+          780
+        ],
+        "inputSha256": "0442bdfeaf880010494623488e3c1fbc18451dcbc3d6d6c903a1c3d1d5656e14",
+        "redrawn": false,
+        "reviewRequired": true,
+        "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid",
+        "jobId": "beards-v03/braid"
+      },
+      "reviewRequired": true,
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\reference.png",
+          "sha256": "8f909efc1408532fb7a2ba70c8a2d0adeca67a693fca186fd619cb1cd4b02f38"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\generated.glb",
+          "sha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10.0,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 2461.9
+        }
+      },
+      "outputSha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058",
+      "matte": {
+        "model": "birefnet-general-lite",
+        "sourceSha256": "0442bdfeaf880010494623488e3c1fbc18451dcbc3d6d6c903a1c3d1d5656e14",
+        "inputSha256": "8f909efc1408532fb7a2ba70c8a2d0adeca67a693fca186fd619cb1cd4b02f38",
+        "redrawn": false
+      }
+    },
+    "extraction": {
+      "source": "scratch\\beards-v03\\braid\\generated.glb",
+      "selectedFaces": 214974,
+      "fraction": 0.22391912104760991,
+      "classification": "value 0.07..0.65, saturation <0.98, at least two thirds of UV corner samples",
+      "braidBustROI": {
+        "excludeAboveZ": 0.2,
+        "bindingZ": [
+          -0.35,
+          -0.25
+        ],
+        "bindingMinY": 0.13,
+        "bindingMaxAbsX": 0.12,
+        "bindingHue": [
+          0.1,
+          0.22
+        ],
+        "bindingMinSaturation": 0.12
+      },
+      "reviewRequired": false,
+      "visualReview": [
+        "front",
+        "side",
+        "back",
+        "binding retained",
+        "eye residue removed",
+        "skin residue removed"
+      ]
+    },
+    "outputSha256": "0a3352eac567f52ade12f28cd6cc3909643aae052021bc0caf8439bc79a0b373",
+    "reviewRequired": false
+  },
+  "reviewRequired": false,
+  "visualReview": {
+    "profileSeed": 12,
+    "placement": "existing Head bone; skull-relative fit",
+    "animations": [
+      "Idle",
+      "Walk",
+      "Run"
+    ],
+    "lods": [
+      0,
+      1,
+      2
+    ],
+    "screenshots": [
+      "artifacts/generated-beard-braid-LOD0.png",
+      "artifacts/generated-beard-braid-LOD1.png",
+      "artifacts/generated-beard-braid-LOD2.png"
+    ]
+  }
+}
