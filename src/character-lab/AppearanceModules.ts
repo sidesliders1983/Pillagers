@@ -4,10 +4,11 @@ import { CharacterAppearance } from '../characters/CharacterAppearance';
 import { AppearanceFit } from '../characters/CharacterDNA';
 import { referenceHeadMapper } from './ReferenceHeadFit';
 import { referenceHeadFrames } from './ReferenceHeadFrames';
+import { appearanceMetadata, CageName, FitVolume, ModuleMetadata } from '../characters/AttachmentContract';
 
 // A triangle can cut through a faceted skull even when its three vertices are
 // outside it. Check its surface too, retaining the generated topology.
-function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:number){
+function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:number,maxY=Infinity){
     const positions=mesh.geometry.attributes.position,index=mesh.geometry.index;
     const count=index?.count??positions.count;
     const samples:number[][]=[];
@@ -27,7 +28,7 @@ function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:num
             let deficit=0;
             for(const weights of samples){
                 const p=new Vector3();points.forEach((v,k)=>p.addScaledVector(v,weights[k]));
-                if(p.y<minY||p.length()<1e-8)continue;
+                if(p.y<minY||p.y>maxY||p.length()<1e-8)continue;
                 const direction=p.clone().normalize();let radius=Infinity;
                 for(const face of hull.faces){const d=face.normal.dot(direction);if(d>1e-6)radius=Math.min(radius,face.constant/d);}
                 if(Number.isFinite(radius))deficit=Math.max(deficit,radius+clearance-p.length());
@@ -40,9 +41,9 @@ function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:num
 
 // Retessellate the reference stubble before wrapping it onto the fixed skull.
 // Large flat source faces otherwise disappear inside the head between vertices.
-function subdivideStubble(mesh:Mesh){
+function subdivideSurface(mesh:Mesh,passes:number){
     let geometry=mesh.geometry.toNonIndexed();
-    for(let pass=0;pass<2;pass++){
+    for(let pass=0;pass<passes;pass++){
         const p=geometry.attributes.position,vertices:number[]=[];
         for(let i=0;i<p.count;i+=3){
             const a=new Vector3().fromBufferAttribute(p,i),b=new Vector3().fromBufferAttribute(p,i+1),c=new Vector3().fromBufferAttribute(p,i+2);
@@ -55,37 +56,42 @@ function subdivideStubble(mesh:Mesh){
 }
 
 /** Reference-generated geometry only. An unavailable module stays absent. */
-export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1},source:Group|null=null,skull:Vector3[]=[],beardSource:Group|null=null){
+export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1},source:Group|null=null,skull:Vector3[]=[],beardSource:Group|null=null,metadataOverride?:ModuleMetadata,volumes?:ReadonlyMap<CageName,FitVolume>){
+    const canonicalMap=(metadata:ModuleMetadata)=>(p:Vector3)=>p.multiply(size.clone().divide(new Vector3(...(metadata.canonicalHeadSize??[.1992,.2397,.2189]))));
     const group=new Group();group.name='Appearance';group.userData.appearance=profile;group.userData.appearanceFit=fit;
     group.userData.coordinateFrame={origin:'fixed skull bounding-box centre',front:'+Z',up:'+Y',attachment:'Head'};
     group.userData.hairAsset=source?'reference-generated':'pending';
     group.userData.beardAsset=profile.beardStyle==='none'?'not-applicable':beardSource?'reference-generated':'pending';
     if(beardSource&&profile.beardStyle!=='none'){
+        const metadata=metadataOverride??appearanceMetadata('beard',profile.beardStyle);
         const beard=beardSource.clone(true);beard.name='GeneratedBeard';beard.updateMatrixWorld(true);
         beard.userData.referenceHeadFrame=referenceHeadFrames[`beard/${profile.beardStyle}`];
         const reference=new Vector3(.1992,.2397,.2189);
         const scale=Math.max(size.x/reference.x,size.y/reference.y,size.z/reference.z);
-        const map=referenceHeadMapper('beard',profile.beardStyle,size);
+        const map=metadata.authoringFrame==='canonical'?canonicalMap(metadata):referenceHeadMapper('beard',metadata.sourceStyle??profile.beardStyle,size);
+        const faceVolume=volumes?.get(metadata.fitCage??'LOWER_FACE_CAGE');
+        const jawWidth=faceVolume?faceVolume.bounds.getSize(new Vector3()).x/Math.max(.001,faceVolume.canonicalBounds.getSize(new Vector3()).x):1;
         const jawHull=skull.length>=4?new ConvexHull().setFromPoints(skull):null;
         beard.traverse(object=>{
             if(!(object as Mesh).isMesh)return;
             const mesh=object as Mesh;mesh.geometry=mesh.geometry.clone();
             mesh.geometry.applyMatrix4(mesh.matrixWorld);mesh.position.set(0,0,0);mesh.quaternion.identity();mesh.scale.set(1,1,1);
-            if(profile.beardStyle==='stubble')subdivideStubble(mesh);
+            if(metadata.subdivisions)subdivideSurface(mesh,metadata.subdivisions);
             // Scale around the jaw attachment, keeping the upper edge in place.
             const position=mesh.geometry.attributes.position,anchor=new Vector3(0,-.045,.065).multiplyScalar(scale);
             for(let i=0;i<position.count;i++){
                 const p=map(new Vector3().fromBufferAttribute(position,i));
+                p.x*=jawWidth;
                 // Keep cheek/sideburn attachment against the actual fixed head.
                 // Only fit existing vertices; the generated beard silhouette below
                 // the jaw remains intact.
-                if(jawHull&&(profile.beardStyle==='stubble'||p.y>-.075*scale)){
+                if(jawHull&&p.y>(metadata.attachmentBand?(metadata.attachmentBand.minimumY??-Infinity):-.32)*size.y&&p.y<(metadata.attachmentBand?.maximumY??Infinity)*size.y){
                     const direction=p.clone().normalize();let radius=Infinity;
                     for(const face of jawHull.faces){const denominator=face.normal.dot(direction);if(denominator>1e-6)radius=Math.min(radius,face.constant/denominator);}
-                    if(Number.isFinite(radius))p.copy(direction.multiplyScalar(radius+.003));
+                    if(Number.isFinite(radius))p.copy(direction.multiplyScalar(radius+metadata.clearance));
                 }
                 // The size slider grows the free beard, not its cheek attachments.
-                const t=profile.beardStyle==='stubble'?0:Math.max(0,Math.min(1,(-.045*scale-p.y)/(.10*scale))),growth=1+(fit.beard-1)*t*t*(3-2*t);
+                const t=metadata.attachmentBand?.minimumY===null?0:Math.max(0,Math.min(1,(-.045*scale-p.y)/(.10*scale))),growth=1+(fit.beard-1)*t*t*(3-2*t);
                 p.sub(anchor).multiplyScalar(growth).add(anchor);position.setXYZ(i,p.x,p.y,p.z);
             }
             mesh.material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
@@ -95,8 +101,10 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
     }
     if(!source)return group;
     const hair=source.clone(true);hair.name='GeneratedHair';hair.updateMatrixWorld(true);
+    const metadata=metadataOverride??appearanceMetadata('hair',profile.hairStyle);
+    const minimumY=(metadata.attachmentBand?(metadata.attachmentBand.minimumY??-Infinity):-.45)*size.y,maximumY=(metadata.attachmentBand?.maximumY??Infinity)*size.y;
     hair.userData.referenceHeadFrame=referenceHeadFrames[`hair/${profile.hairStyle}`];
-    const map=referenceHeadMapper('hair',profile.hairStyle,size);
+    const map=metadata.authoringFrame==='canonical'?canonicalMap(metadata):referenceHeadMapper('hair',metadata.sourceStyle??profile.hairStyle,size);
     const hull=skull.length>=4?new ConvexHull().setFromPoints(skull):null;
     const clearance=Math.min(size.x,size.y,size.z)*.5*(fit.hair-1);
     hair.traverse(object=>{
@@ -109,22 +117,23 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
         const positions=mesh.geometry.attributes.position;
         for(let i=0;i<positions.count;i++){
             const p=map(new Vector3().fromBufferAttribute(positions,i)),direction=p.clone().normalize();
-            if(hull&&p.y>-size.y*.45){
+            if(hull&&p.y>minimumY&&p.y<maximumY){
                 let radius=Infinity;
                 for(const face of hull.faces){const denominator=face.normal.dot(direction);if(denominator>1e-6)radius=Math.min(radius,face.constant/denominator);}
                 if(Number.isFinite(radius)&&p.length()<radius+.003)p.copy(direction.multiplyScalar(radius+.003));
             }
             p.addScaledVector(p.clone().normalize(),clearance);positions.setXYZ(i,p.x,p.y,p.z);
         }
-        if(hull)clearSkullTriangles(mesh,hull,-size.y*.45,.004+clearance);
-        if(profile.hairStyle==='long'){
+        if(hull)clearSkullTriangles(mesh,hull,minimumY,metadata.clearance+clearance,maximumY);
+        if(metadata.trim){
             // The generated bust left a small central chin fragment in the hair
             // extraction. Keep the side locks and the back of the hairstyle.
             const index=mesh.geometry.index,kept:number[]=[],count=index?.count??positions.count;
             for(let i=0;i<count;i+=3){
                 const ids=[0,1,2].map(k=>index?index.getX(i+k):i+k),centre=new Vector3();
                 for(const id of ids)centre.add(new Vector3().fromBufferAttribute(positions,id));centre.multiplyScalar(1/3);
-                if(Math.abs(centre.x)<size.x*.24&&centre.y<-size.y*.32&&centre.z>size.z*.16)continue;
+                const coordinates=[centre.x/size.x,centre.y/size.y,centre.z/size.z];
+                if(coordinates.every((value,k)=>value>(metadata.trim!.min[k]??-Infinity)&&value<(metadata.trim!.max[k]??Infinity)))continue;
                 kept.push(...ids);
             }
             mesh.geometry.setIndex(kept);

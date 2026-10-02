@@ -6,12 +6,17 @@ import { universalHumanProfile } from './UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
 import { hairAssetPath } from '../character-lab/GeneratedHair';
 import { beardAssetPath } from '../character-lab/GeneratedBeard';
+import { ModuleMetadata, validateModule } from './AttachmentContract';
 
 /** Cached immutable sources; every create call owns its skeleton, mixer and materials. */
 export class CharacterFactory {
     private sources=new Map<string,Promise<GLTF>>();
     private ready=new Map<string,GLTF>();
+    private modules=new Map<string,{metadata:ModuleMetadata;path:string}>();
     constructor(private load:(path:string)=>Promise<GLTF>=path=>new GLTFLoader().loadAsync(path)){}
+    registerModule(metadata:ModuleMetadata,path:string){validateModule(metadata);if(!path)throw new Error('A module needs an asset path.');this.modules.set(metadata.id,{metadata,path});}
+    async equip(character:UniversalHuman,id:string){const module=this.modules.get(id);if(!module)throw new Error(`Unknown registered module: ${id}`);const source=await this.asset(module.path);return character.equip(module.metadata,source.scene);}
+    unequip(character:UniversalHuman,id:string){character.unequip(id);}
     private asset(path:string){
         let pending=this.sources.get(path);
         if(!pending){pending=this.load(path).then(asset=>{this.ready.set(path,asset);return asset;}).catch(error=>{this.sources.delete(path);throw error;});this.sources.set(path,pending);}

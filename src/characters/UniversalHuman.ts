@@ -5,11 +5,16 @@ import { HumanProfile } from '../characters/UniversalHumanProfile';
 import { SoftBodySpring } from '../character-lab/SoftBodySpring';
 import { appearanceModules, clothingLayer, disposeModules } from '../character-lab/AppearanceModules';
 import { skinTexture } from '../character-lab/SkinTint';
+import { CharacterFitSystem } from './CharacterFitSystem';
+import { appearanceMetadata, attachmentVersion, ModuleMetadata, validateModule } from './AttachmentContract';
+import { disposeGarment, fitGarment } from './GarmentFit';
 
 export type HumanAnimation='Idle'|'Walk'|'Run';
 /** Per-character skeleton and materials; shared immutable source geometry and textures. */
 export class UniversalHuman {
     readonly root=new Group();
+    readonly fit:CharacterFitSystem;
+    private equipped=new Map<string,{metadata:ModuleMetadata;source:Group;object:Group}>();
     private mixer:AnimationMixer;
     private meshes:SkinnedMesh[]=[];
     private bones:Bone[]=[];
@@ -46,9 +51,11 @@ export class UniversalHuman {
             }
         });
         if(!this.meshes.length)throw new Error('Universal Human GLB has no skinned mesh.');
+        this.fit=new CharacterFitSystem(this.root,this.meshes,this.bones);
         this.mixer=new AnimationMixer(body);this.apply(profile,skinTone);this.setAnimation('Idle');
     }
     apply(profile:HumanProfile,skinTone:string,refreshAppearance=true){
+        if(this.equipped.size)refreshAppearance=true;
         const retint=this.skinTone!==skinTone;
         if(retint){for(const texture of this.tintMaps)texture.dispose();this.tintMaps=[];this.skinTone=skinTone;}
         if(refreshAppearance){this.disposeAppearance();this.modules=new Group();}this.motion=profile.motion;
@@ -91,18 +98,18 @@ export class UniversalHuman {
         this.root.updateMatrixWorld(true);
         const skeletons=new Set(this.meshes.map(mesh=>mesh.skeleton));
         for(const skeleton of skeletons)skeleton.calculateInverses();
+        this.fit.refit();
         const head=this.bones.find(b=>b.name==='Head');
         if(head&&refreshAppearance&&(this.hairAsset||this.beardAsset)){
-            const bounds=new Box3(),skull:Vector3[]=[];
-            for(const mesh of this.meshes){const p=mesh.geometry.attributes.position;
-                for(let i=0;i<p.count;i++)if(p.getY(i)>1.56&&Math.abs(p.getX(i))<.18){const point=mesh.getVertexPosition(i,new Vector3());bounds.expandByPoint(point);skull.push(point);}
-            }
+            const cage=this.fit.cages.get('HEAD_CAGE')!,bounds=cage.bounds,skull=cage.points.map(point=>point.clone());
             if(!bounds.isEmpty()){
                 const size=bounds.getSize(new Vector3());
                 const lod=Number(this.meshes[0].userData.lod??0);
-                const appearance=appearanceModules(profile.appearance,size,lod,profile.appearanceFit,this.hairAsset,skull.map(p=>p.sub(bounds.getCenter(new Vector3()))),this.beardAsset);
+                const appearance=appearanceModules(profile.appearance,size,lod,profile.appearanceFit,this.hairAsset,skull.map(p=>p.sub(bounds.getCenter(new Vector3()))),this.beardAsset,undefined,this.fit.cages);
                 appearance.position.copy(bounds.getCenter(new Vector3()));this.root.add(appearance);this.root.updateMatrixWorld(true);head.attach(appearance);
-
+                for(const kind of ['hair','beard'] as const){const module=appearance.getObjectByName(kind==='hair'?'GeneratedHair':'GeneratedBeard') as Group|undefined;
+                    if(module)this.fit.attach(appearanceMetadata(kind,kind==='hair'?profile.appearance.hairStyle:profile.appearance.beardStyle),module);
+                }
                 this.modules.userData.appearanceObject=appearance;
             }
         }
@@ -110,11 +117,41 @@ export class UniversalHuman {
             const appearance=new Group();appearance.name='Appearance';appearance.userData.beardAsset='pending';
             head.add(appearance);this.modules.userData.appearanceObject=appearance;
         }
-        if(refreshAppearance)for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;break;}}
+        if(refreshAppearance)for(const body of this.meshes){const garment=clothingLayer(body,profile.appearanceFit.clothing);if(garment){body.parent!.add(garment);this.garment=garment;
+            this.fit.attach({version:attachmentVersion,id:'technical-waist-wrap',type:'garment',anchor:'socket_waist',fitCage:'PELVIS_CAGE',fitMode:'drape',slot:'lower',covers:['PELVIS'],clearance:.004,authoringFrame:'canonical'},garment);break;}}
+        if(refreshAppearance)for(const module of this.equipped.values())this.installModule(module.metadata,module.source);
         this.root.scale.y=.8;this.setAnimation(this.animation);
         const active=this.action as AnimationAction|null;if(active)active.time=actionTime;
         this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
         this.root.updateMatrixWorld(true);
+        this.fit.updateDebug();
+    }
+    /** Extension point shared by Lab and World; callers supply registered assets. */
+    equip(metadata:ModuleMetadata,source:Group){
+        validateModule(metadata);
+        for(const [id,module] of this.equipped)if(module.metadata.type===metadata.type&&(metadata.type==='hair'||metadata.type==='beard'||module.metadata.slot===metadata.slot))this.equipped.delete(id);
+        this.equipped.set(metadata.id,{metadata,source,object:new Group()});
+        this.apply(this.root.userData.universalHumanProfile,this.skinTone!);return this.equipped.get(metadata.id)!.object;
+    }
+    unequip(id:string){this.equipped.delete(id);this.apply(this.root.userData.universalHumanProfile,this.skinTone!);}
+    private installModule(metadata:ModuleMetadata,source:Group){
+        let object:Group;
+        const profile=this.root.userData.universalHumanProfile as HumanProfile;
+        if(metadata.type==='beard'&&(profile.age<18||profile.masculinity<.5))return;
+        if(metadata.type==='hair'||metadata.type==='beard'||metadata.type==='mask'&&metadata.fitMode==='conform'){
+            for(const [id,module] of this.fit.modules)if(module.metadata.type===metadata.type){disposeGarment(module.object as Group);this.fit.modules.delete(id);}
+            const cage=this.fit.cages.get('HEAD_CAGE')!,centre=cage.bounds.getCenter(new Vector3());
+            const appearance=appearanceModules({...profile.appearance,beardStyle:metadata.type==='beard'?(metadata.sourceStyle??'short') as HumanProfile['appearance']['beardStyle']:'none'},cage.bounds.getSize(new Vector3()),2,profile.appearanceFit,metadata.type!=='beard'?source:null,cage.points.map(p=>p.clone().sub(centre)),metadata.type==='beard'?source:null,metadata,this.fit.cages);
+            appearance.position.copy(centre);this.root.add(appearance);this.root.updateMatrixWorld(true);
+            object=appearance.getObjectByName(metadata.type==='beard'?'GeneratedBeard':'GeneratedHair') as Group;
+            this.fit.attach(metadata,object,true);appearance.removeFromParent();this.equipped.get(metadata.id)!.object=object;return;
+        }
+        if(metadata.type==='garment')object=fitGarment(source,metadata,this.meshes[0],this.fit,profile.appearanceFit.clothing);
+        else{
+            object=source.clone(true);object.traverse(child=>{const mesh=child as import('three').Mesh;if(mesh.isMesh){mesh.geometry=mesh.geometry.clone();mesh.material=Array.isArray(mesh.material)?mesh.material.map(m=>m.clone()):mesh.material.clone();}});
+        }
+        this.fit.attach(metadata,object,metadata.type==='garment');this.equipped.get(metadata.id)!.object=object;
+        const covers=[...this.equipped.values()].flatMap(module=>module.metadata.covers??[]);this.fit.maskBody(covers);
     }
     setAnimation(name:HumanAnimation){
         const clip=this.asset.animations.find(clip=>clip.name===name);
@@ -149,13 +186,16 @@ export class UniversalHuman {
             }
         }
         if(this.garment?.morphTargetInfluences&&this.meshes[0].morphTargetInfluences)this.garment.morphTargetInfluences.splice(0,this.garment.morphTargetInfluences.length,...this.meshes[0].morphTargetInfluences);
+        this.fit.updateDebug();
     }
     private disposeAppearance(){
+        for(const {object} of this.fit.modules.values())if(object!==this.garment)disposeGarment(object as Group);
+        this.fit.forgetModules();this.fit.maskBody();
         const appearance=this.modules.userData.appearanceObject as Group|undefined;if(appearance)disposeModules(appearance);
         if(this.garment){this.garment.geometry.dispose();(this.garment.material as Material).dispose();this.garment.removeFromParent();this.garment=null;}
         disposeModules(this.modules);
     }
-    dispose(){this.disposeAppearance();for(const texture of this.tintMaps)texture.dispose();this.mixer.stopAllAction();this.mixer.uncacheRoot(this.mixer.getRoot());for(const skeleton of new Set(this.meshes.map(mesh=>mesh.skeleton)))skeleton.dispose();for(const material of this.materials)material.dispose();}
+    dispose(){this.disposeAppearance();this.fit.dispose();for(const texture of this.tintMaps)texture.dispose();this.mixer.stopAllAction();this.mixer.uncacheRoot(this.mixer.getRoot());for(const skeleton of new Set(this.meshes.map(mesh=>mesh.skeleton)))skeleton.dispose();for(const material of this.materials)material.dispose();}
 }
 
 

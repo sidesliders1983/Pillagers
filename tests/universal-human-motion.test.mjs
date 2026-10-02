@@ -82,7 +82,7 @@ test('reference hair follows the existing head through child adult elder animati
                 assert.equal(head.name,'Head');assert.equal(appearance.userData.hairAsset,'reference-generated');
                 assert.equal(human.root.getObjectByName('HairCap'),undefined);
                 assert.equal(appearance.children.some(o=>o.name.startsWith('Beard')),false);
-                const mesh=appearance.getObjectByName(`Hair_${style}_LOD${lod}`);
+                const mesh=human.root.getObjectByName(`Hair_${style}_LOD${lod}`);
                 assert.ok(mesh);assert.equal(mesh.isSkinnedMesh,undefined);
                 human.update(0);human.root.updateMatrixWorld(true);
                 const sample=()=>head.worldToLocal(mesh.localToWorld(new Vector3().fromBufferAttribute(mesh.geometry.attributes.position,0)));
@@ -112,7 +112,7 @@ test('all LOD2 reference beards follow the existing head through adult and elder
             const human=new UniversalHuman(body,profile,'#eeccbb',null,beard.scene);
             const appearance=human.root.getObjectByName('Appearance'),head=appearance.parent;
             assert.equal(head.name,'Head');assert.equal(appearance.userData.beardAsset,'reference-generated');
-            const mesh=appearance.getObjectByName(`Beard_${style}_LOD2`);assert.ok(mesh);
+            const mesh=human.root.getObjectByName(`Beard_${style}_LOD2`);assert.ok(mesh);
             human.update(0);human.root.updateMatrixWorld(true);
             const sample=()=>head.worldToLocal(mesh.localToWorld(new Vector3().fromBufferAttribute(mesh.geometry.attributes.position,0)));
             const local=sample();

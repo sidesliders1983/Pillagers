@@ -5,6 +5,8 @@ import { dominantHeritage } from '../characters/CharacterDNA';
 import { generateCharacterDNA } from '../characters/generateCharacterDNA';
 import { CharacterPreview } from './CharacterPreview';
 import { CharacterLabUI, LabAction } from './CharacterLabUI';
+import { FitPreset, fitPreset } from '../characters/FitPresets';
+import { FitDebugOptions } from '../characters/CharacterFitSystem';
 
 export class CharacterLab {
     private dna=defaultDNA();
@@ -20,6 +22,8 @@ export class CharacterLab {
     private update(){const phenotype=generatePhenotype(this.dna);this.preview.setCharacter(phenotype,this.dna);this.ui.update(this.dna,phenotype,this.comparison);}
     private newSeed(){const array=new Uint32Array(1);crypto.getRandomValues(array);return array[0]===this.dna.seed?(array[0]+1)>>>0:array[0];}
     private async action(action:LabAction){
+        if(action.startsWith('debug-')){this.preview.toggleFitDebug(action.slice(6) as keyof FitDebugOptions);return;}
+        if(action.startsWith('preset-')){this.dna=fitPreset(action.slice(7) as FitPreset,this.dna);this.update();return;}
         if(action==='reroll-name'){this.dna={...this.dna,naming:{culture:dominantHeritage(this.dna.heritage),seed:((this.dna.naming?.seed??0)+1)>>>0}};this.update();this.ui.status('Name rerolled; appearance and traits kept.');}
         else if(action==='reroll'){this.dna={...this.dna,seed:this.newSeed()};this.update();this.ui.status('Seed rerolled; traits, age, sex and heritage kept.');}
         else if(action==='randomize'){

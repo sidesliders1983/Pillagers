@@ -5,6 +5,7 @@ import { characterFactory } from '../characters/CharacterFactory';
 import { CharacterDNA } from '../characters/CharacterDNA';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { FitDebugOptions, noFitDebug } from '../characters/CharacterFitSystem';
 export class CharacterPreview {
     private scene=new Scene();
     private camera=new PerspectiveCamera(38,1,.05,60);
@@ -21,6 +22,7 @@ export class CharacterPreview {
     private animation:HumanAnimation='Idle';
     private clock=new Clock();
     private observer:ResizeObserver;
+    private fitDebug={...noFitDebug};
     constructor(private canvas:HTMLCanvasElement,private report:(message:string,error?:boolean)=>void=()=>{}){
         this.scene.background=new Color('#dbe1d7');
         this.renderer=new WebGLRenderer({canvas,antialias:true});this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
@@ -36,6 +38,7 @@ export class CharacterPreview {
     setCharacter(phenotype:Phenotype,dna:CharacterDNA){this.currentDNA=dna;this.currentPhenotype=phenotype;void this.refresh();}
     setComparison(phenotype:Phenotype|null,dna:CharacterDNA|null=null){this.comparisonDNA=dna;this.comparisonPhenotype=phenotype;void this.refresh();this.resetView();}
     setLOD(lod:number){this.lod=lod;void this.refresh();}
+    toggleFitDebug(key:keyof FitDebugOptions){this.fitDebug[key]=!this.fitDebug[key];for(const model of [this.current,this.comparison])model?.fit.setDebug(this.fitDebug);this.reportModel();}
     setAnimation(animation:HumanAnimation){this.animation=animation;this.current?.setAnimation(animation);this.comparison?.setAnimation(animation);this.reportModel();}
     private async refresh(){
         const revision=++this.revision;this.canvas.dataset.ready='false';
@@ -44,11 +47,12 @@ export class CharacterPreview {
             if(revision!==this.revision){for(const model of models)model?.dispose();return;}
             for(const model of [this.current,this.comparison])if(model){this.scene.remove(model.root);model.dispose();}
             [this.current,this.comparison]=models;
-            for(const model of [this.current,this.comparison])if(model){model.setAnimation(this.animation);this.scene.add(model.root);}
+            for(const model of [this.current,this.comparison])if(model){model.setAnimation(this.animation);this.scene.add(model.root);model.fit.setDebug(this.fitDebug);}
             this.layout();this.canvas.dataset.ready='true';this.reportModel();
         }catch(error){if(revision!==this.revision)return;this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
     }
     private reportModel(){
+        const metadata=document.getElementById('lab-fit-metadata');if(metadata)metadata.textContent=JSON.stringify(this.current?.fit.snapshot()??{},null,2);
         const appearance=this.current?.root.getObjectByName('Appearance');
         this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig · ${appearance?.userData.hairAsset==='reference-generated'?'reference hair':'hair asset pending'}${appearance?.userData.beardAsset==='pending'?' · beard asset pending':appearance?.userData.beardAsset==='reference-generated'?' · reference beard':''}`);
     }
@@ -58,11 +62,12 @@ export class CharacterPreview {
     async exportGLB(){
         if(!this.current||!this.currentDNA||this.canvas.dataset.ready!=='true')throw new Error('Wait until the character has loaded.');
         const model=this.current,dna=this.currentDNA,lod=this.lod;
+        model.fit.setDebug(noFitDebug);
         const position=model.root.position.clone();model.root.position.set(0,0,0);model.root.updateMatrixWorld(true);
         try{
             const data=await new GLTFExporter().parseAsync(model.root,{binary:true,animations:model.clips});
             const url=URL.createObjectURL(new Blob([data as ArrayBuffer],{type:'model/gltf-binary'}));
             const link=document.createElement('a');link.href=url;link.download=`pillagers-${dna.seed}-age-${dna.age}-LOD${lod}.glb`;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
-        }finally{model.root.position.copy(position);}
+        }finally{model.root.position.copy(position);model.fit.setDebug(this.fitDebug);}
     }
 }
