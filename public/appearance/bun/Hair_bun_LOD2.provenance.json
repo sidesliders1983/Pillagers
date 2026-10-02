@@ -1,9 +1,9 @@
 {
   "style": "bun",
   "lod": 2,
-  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\bun\\lods-retry-20261002\\Hair_bun_LOD2.glb",
-  "sourceSha256": "01550bfa4a11ad764d165f0aa279d3fe46eefb36a0b1ab63cf761a7384091cdf",
-  "outputSha256": "252884e662d3a5f39f69732ef8fbf77bf58ce33b4c6c24cda1713a3d95f52203",
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\bun\\lods-retry-20261002\\Hair_bun_LOD0.glb",
+  "sourceSha256": "7343fcf25ebcb09afc8c291014bd24a1466f8875468a1c38314463b8b83feccb",
+  "outputSha256": "4c004e100563f2060ec71dfe6044356a282a1064e3dd92429e63e9bd17b92372",
   "fit": {
     "sourceSkullCentre": [
       0,
@@ -18,7 +18,7 @@
       0.2189
     ]
   },
-  "removedSmallComponentVertices": 171,
+  "removedSmallComponentVertices": 177,
   "sourceProvenance": {
     "generatedBust": {
       "reference": {
@@ -85,5 +85,20 @@
       "sha256": "bd29eb06fe22f3c78168ed6117f71c23ccee1d65eb3231071f640de7c894dea4",
       "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\bun\\hair-candidate.glb"
     }
+  },
+  "qualitySource": {
+    "publishedLOD": 0,
+    "sha256": "e2dd078e8eab13a316b6b30a309f0054244cd480917e0f14da278bca4c5223c5",
+    "triangles": 1838,
+    "reason": "Preserve the already generated reference surface at Character Lab viewing distances; no additional reduction"
+  },
+  "reviewRequired": false,
+  "fitReview": {
+    "date": "2026-10-02",
+    "checks": [
+      "front/side/back at Character Lab distances",
+      "shared seam vertices during skull fit",
+      "reported long and tied seeds"
+    ]
   }
 }

@@ -1,15 +1,23 @@
 import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
 import {load} from '../tests/load-source.mjs';
+import {readFileSync,existsSync} from 'node:fs';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE);
 const {defaultDNA}=load('../src/characters/CharacterDNA.ts');
 const {universalHumanProfile}=load('../src/characters/UniversalHumanProfile.ts');
 const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-webgl']});
-const examples=[defaultDNA(),{seed:1885184954,sex:'male',age:20,traits:{physicality:.78,agility:.57,intelligence:.12,cunning:.2,temperament:.71},heritage:{scandinavian:.028440025880589824,angloSaxon:.23439964981313144,gaelic:.1594962292471368,finnic:.17366774106331118,sami:.17360313309252673,baltic:.23039322090330414}}];
+const examples=[defaultDNA(),{seed:1885184954,sex:'male',age:20,traits:{physicality:.78,agility:.57,intelligence:.12,cunning:.2,temperament:.71},heritage:{scandinavian:.028440025880589824,angloSaxon:.23439964981313144,gaelic:.1594962292471368,finnic:.17366774106331118,sami:.17360313309252673,baltic:.23039322090330414}},
+ {...defaultDNA(),seed:847867552,age:72,morphology:{masculinity:.49,height:1.43}},
+ {...defaultDNA(),seed:778694923,age:35,morphology:{masculinity:.51,height:1.43}}];
 try {
  for(const mobile of [false,true]){
   const page=await browser.newPage({viewport:mobile?{width:390,height:844}:{width:1200,height:1000}});page.setDefaultTimeout(120000);
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  if(process.env.APPEARANCE_REVIEW_DIR)await page.route('**/appearance/*/Hair_*_LOD2.glb*',route=>{
+   const path=new URL(route.request().url()).pathname,style=path.split('/')[2];
+   const file=`${process.env.APPEARANCE_REVIEW_DIR}/${style}/Hair_${style}_LOD2.glb`;
+   return existsSync(file)?route.fulfill({status:200,contentType:'model/gltf-binary',body:readFileSync(file)}):route.continue();
+  });
   await page.goto('http://127.0.0.1:4175/character-lab');await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true');
   await page.locator('.lab-json > summary').click();
   const profiles=[...examples];
@@ -20,6 +28,7 @@ try {
    }
   }
   for(let n=0;n<profiles.length;n++){
+   if(process.env.APPEARANCE_REVIEW_STYLE&&universalHumanProfile(profiles[n]).appearance.hairStyle!==process.env.APPEARANCE_REVIEW_STYLE)continue;
    await page.locator('#lab-json').fill(JSON.stringify(profiles[n]));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();
    await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true');
    await page.getByRole('button',{name:'Reset view',exact:true}).click();

@@ -10,6 +10,13 @@ import { referenceHeadFrames } from './ReferenceHeadFrames';
 function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:number){
     const positions=mesh.geometry.attributes.position,index=mesh.geometry.index;
     const count=index?.count??positions.count;
+    // Flat normals/UV seams duplicate vertices in GLB. Move coincident copies
+    // together, otherwise the fit operation tears adjacent hair triangles apart.
+    const groups=new Map<string,number[]>(),shared:number[][]=[];
+    for(let i=0;i<positions.count;i++){
+        const key=[positions.getX(i),positions.getY(i),positions.getZ(i)].map(v=>Math.round(v*1e7)).join(',');
+        let ids=groups.get(key);if(!ids){ids=[];groups.set(key,ids);}ids.push(i);shared[i]=ids;
+    }
     for(let pass=0;pass<12;pass++){
         let changed=false;
         for(let triangle=0;triangle<count;triangle+=3){
@@ -23,7 +30,7 @@ function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:num
                 for(const face of hull.faces){const d=face.normal.dot(direction);if(d>1e-6)radius=Math.min(radius,face.constant/d);}
                 if(Number.isFinite(radius))deficit=Math.max(deficit,radius+clearance-p.length());
             }
-            if(deficit>.0001){changed=true;points.forEach((p,k)=>{p.addScaledVector(p.clone().normalize(),deficit*1.15);positions.setXYZ(ids[k],p.x,p.y,p.z);});}
+            if(deficit>.0001){changed=true;points.forEach((p,k)=>{p.addScaledVector(p.clone().normalize(),deficit*1.15);for(const id of shared[ids[k]])positions.setXYZ(id,p.x,p.y,p.z);});}
         }
         if(!changed)break;
     }
