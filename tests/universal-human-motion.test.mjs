@@ -71,7 +71,7 @@ test('actual skinned vertices remain connected through walk/run around arms and 
 test('reference hair follows the existing head through child adult elder animations and all LODs',async()=>{
     for(let lod=0;lod<3;lod++){
         const body=await asset(lod);
-        for(const style of ['short','medium']){
+        for(const style of ['short','medium','long','tied','bun','braid']){
             const bytes=readFileSync(new URL(`../public/appearance/${style}/Hair_${style}_LOD${lod}.glb`,import.meta.url));
             const hair=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
             for(const age of [6,35,90])for(const ratio of [1,1.3]){
