@@ -7,6 +7,8 @@ import { availableHairStyles } from './GeneratedHair';
 import { availableBeardStyles } from './GeneratedBeard';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { fitPresetLabels } from '../characters/FitPresets';
+import { goldenCharacters } from '../characters/GoldenCharacters';
+import { serializeCharacterDNA } from '../characters/CharacterDNA';
 
 const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     physicality:{label:'Physicality',low:'Slight / delicate',high:'Powerful / imposing'},
@@ -15,7 +17,7 @@ const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     cunning:{label:'Cunning',low:'Straightforward',high:'Crafty / opportunistic'},
     temperament:{label:'Temperament',low:'Calm / restrained',high:'Fierce / volatile'},
 };
-export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`;
+export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`|`golden-${string}`;
 export class CharacterLabUI {
     private dna:CharacterDNA;
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void){
@@ -50,6 +52,7 @@ export class CharacterLabUI {
                         <div class="lab-button-row">${['sockets','landmarks','cages','coverage','bounds'].map(key=>`<button data-action="debug-${key}" aria-pressed="false">${key}</button>`).join('')}</div>
                         <p class="lab-note">Blue: sockets · pink: surface landmarks · wireframes: fit cages / coverage. Overlays follow the animated rig. Physicality is retained only for legacy compatibility.</p>
                         <label>Fit test preset<select id="lab-fit-preset"><option value="">Choose a test profile</option>${Object.entries(fitPresetLabels).map(([key,label])=>`<option value="${key}">${label}</option>`).join('')}</select></label>
+                        <label>Golden Character<select id="lab-golden-character"><option value="">Choose a fixed regression character</option>${goldenCharacters.map(({id,label})=>`<option value="${id}">${label}</option>`).join('')}</select></label>
                         <details><summary>Contract and equipped module metadata</summary><pre id="lab-fit-metadata"></pre></details>
                     </details>
                     <div class="lab-panel" aria-label="Appearance size ratios"><h2>Appearance size</h2>
@@ -98,6 +101,7 @@ export class CharacterLabUI {
         });
         root.addEventListener('change',event=>{
             if((event.target as HTMLElement).id==='lab-fit-preset'){const select=event.target as HTMLSelectElement;if(select.value)this.onAction(`preset-${select.value}` as LabAction);select.value='';}
+            if((event.target as HTMLElement).id==='lab-golden-character'){const select=event.target as HTMLSelectElement;if(select.value)this.onAction(`golden-${select.value}`);select.value='';}
             if((event.target as HTMLElement).id==='lab-seed'&&!(event.target as HTMLInputElement).value){(event.target as HTMLInputElement).value=String(this.dna.seed);}
         });
     }
@@ -124,7 +128,7 @@ export class CharacterLabUI {
         text('lab-fit-summary',`${scores[0].label} currently fits best${comparison?' · dark ticks show the pinned character':''}.`);
         for(const {key,fit} of scores){text(`fit-value-${key}`,`${(fit*100).toFixed(1)}%`);document.getElementById(`fit-bar-${key}`)!.style.width=`${fit*100}%`;
             const marker=document.getElementById(`fit-reference-${key}`)!;marker.hidden=!comparison;if(comparison){const value=occupationFit(comparison,key);marker.style.left=`${value*100}%`;marker.title=`Pinned: ${(value*100).toFixed(1)}%`;}}
-        input('lab-json',JSON.stringify(dna,null,2));text('lab-phenotype',JSON.stringify({...phenotype,universalHuman:body},null,2));
+        input('lab-json',serializeCharacterDNA(dna));text('lab-phenotype',JSON.stringify({...phenotype,universalHuman:body},null,2));
     }
     getJSON(){return (document.getElementById('lab-json') as HTMLTextAreaElement).value;}
     selectJSON(){(document.querySelector('.lab-json') as HTMLDetailsElement).open=true;const area=document.getElementById('lab-json') as HTMLTextAreaElement;area.focus();area.select();}

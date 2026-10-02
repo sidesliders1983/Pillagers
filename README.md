@@ -82,19 +82,21 @@ The kit is kept in its original folder. The asset manager normalizes each model 
 ```sh
 npm test
 npm run build
+npm run validate:characters
 ```
 
 Tests exercise deterministic randomness, coast/hill heights, shoreline continuity, level building footprints, connected paths and ten minutes of simulated movement for all ten villagers. Optional browser smoke testing requires Playwright and Chromium installed separately; run `node scripts/browser-smoke.cjs` while the dev server is running. `PLAYWRIGHT_MODULE` can point to a preinstalled Playwright package, and `PROTOTYPE_URL` can target a production preview. It checks rendering/asset loading, keyboard pan, zoom, home and debug controls, and saves `artifacts/world-prototype.png`. `node scripts/mobile-smoke.cjs` exercises native touch events in a mobile browser context, checks terrain taps, centered swipes, conventional pinch zoom and responsive controls, and saves `artifacts/mobile-lan.png`. Set `PROTOTYPE_URL` to the LAN preview address for this check.
 
+Character Lab and World share the [Canonical Character Contract](docs/characters/character-contract.md): versioned nested CharacterDNA, Universal Human rig, #15 fit system and the [central asset registry](docs/characters/asset-registry.md). Lab JSON imports migrate legacy records to v1; exports include `schemaVersion`. Load permanent Golden Characters under Attachment & Fit debug to reproduce known morphology extremes. `npm run validate:characters` checks the registered GLBs and all Golden Characters without Blender. After publishing reviewed assets, `npm run assets:registry` regenerates measured counts, hashes and the tooling manifest. CI performs build, validation and tests; its character build works without the separately licensed scenery kit.
+
 ## Decisions and limitations
 
-- The downloaded kit contains scenery only; villagers use shared primitive geometry with four coat materials. A `Villager` can receive another visual object later.
+- The downloaded kit contains scenery only; villagers use the shared Universal Human rig at fixed LOD2. Character Lab additionally loads reviewed reference hair/beard modules.
 - Movement uses local steering and destination retries, not pathfinding. It keeps villagers on dry ground and outside major structures; it may pause or change direction near obstacles and does not handle every small prop.
 - Terrain is a deterministic faceted height field, not an infinite terrain generator. Building footprints are locally leveled and feathered into the landscape; foundations are not excavated or simulated.
 - Water is a matte, gently bobbing plane with instanced subtle ripple marks, with no reflections, shoreline shader or wave simulation. Fog and hemisphere lighting provide simple atmospheric depth; no post-processing stack.
 - Shadows use one directional light and a fixed 2048 map. Pixel ratio is capped at two; actual performance depends on hardware. Browser smoke performance on software rendering is not a hardware benchmark.
 - The production bundle currently triggers Vite's 500 kB chunk advisory; it builds successfully. Three.js and GLTF decoding account for most of the bundle.
-- This directory began with only assets, without a Git checkout. No repository was initialized, no source assets were committed, and nothing was pushed or published.
 
 ## Asset license
 

@@ -1,0 +1,1335 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "body/universal-human",
+      "type": "body",
+      "version": 1,
+      "runtimeLOD": "requested",
+      "lods": {
+        "0": {
+          "file": "/universal-human/UniversalHuman_LOD0.glb",
+          "sha256": "40e9e4cebdcbb796d5cbf509de52d1220635913e5a069d6b56d69afd81af6f55",
+          "triangles": 8559,
+          "materials": 1,
+          "bytes": 3491460,
+          "bounds": {
+            "min": [
+              -0.47737971421052117,
+              6.945921820067239e-8,
+              -0.16829228463259915
+            ],
+            "max": [
+              0.47737971478540553,
+              1.8000000715255737,
+              0.16829239087078543
+            ]
+          }
+        },
+        "1": {
+          "file": "/universal-human/UniversalHuman_LOD1.glb",
+          "sha256": "5b23936dd80c9f443ebf7e144c547c80a4e1980c8d2cee5c818afe7a608829f5",
+          "triangles": 4295,
+          "materials": 1,
+          "bytes": 1931868,
+          "bounds": {
+            "min": [
+              -0.4773316132746601,
+              6.493633869733335e-8,
+              -0.16833256123124102
+            ],
+            "max": [
+              0.4773316139348387,
+              1.8000000715255737,
+              0.16833266860157028
+            ]
+          }
+        },
+        "2": {
+          "file": "/universal-human/UniversalHuman_LOD2.glb",
+          "sha256": "5836bad2b9cc48f2dde153a55cf05395299657b343815e7a9c1833247d0eaf86",
+          "triangles": 1293,
+          "materials": 1,
+          "bytes": 743296,
+          "bounds": {
+            "min": [
+              -0.4773235074358296,
+              7.331167653752605e-8,
+              -0.16790275284424025
+            ],
+            "max": [
+              0.47732350771409515,
+              1.7999999523162842,
+              0.1679028597664567
+            ]
+          }
+        }
+      },
+      "materialVariants": [
+        "profile-skin-tone"
+      ],
+      "tags": [
+        "image-to-3d",
+        "PillagersHumanRig"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 5000,
+          "2": 1600
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "hair/short",
+      "type": "hair",
+      "style": "short",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/short/Hair_short_LOD0.glb",
+          "sha256": "5230753fdd064f2835c5ed69f0e35eaca0057153a71ef27a43bd02086b18375d",
+          "triangles": 1383,
+          "materials": 1,
+          "bytes": 69984,
+          "bounds": {
+            "min": [
+              -0.12394939363002777,
+              -0.07406490296125412,
+              -0.18226344883441925
+            ],
+            "max": [
+              0.13717035949230194,
+              0.19095082581043243,
+              0.14198680222034454
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/short/Hair_short_LOD1.glb",
+          "sha256": "104c60c0888ab65bdc41a372aa06adc57c6d21098d7ab879fa56896d3efb158a",
+          "triangles": 914,
+          "materials": 1,
+          "bytes": 48836,
+          "bounds": {
+            "min": [
+              -0.12411192059516907,
+              -0.07406490296125412,
+              -0.1825013905763626
+            ],
+            "max": [
+              0.13718059659004211,
+              0.19095082581043243,
+              0.14247627556324005
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/short/Hair_short_LOD2.glb",
+          "sha256": "dcfa92c73fd8454d3fce5d72a8971d417966717bb6f359c4df501bdd807a5a54",
+          "triangles": 1383,
+          "materials": 1,
+          "bytes": 69984,
+          "bounds": {
+            "min": [
+              -0.12394939363002777,
+              -0.07406490296125412,
+              -0.18226344883441925
+            ],
+            "max": [
+              0.13717035949230194,
+              0.19095082581043243,
+              0.14198680222034454
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/short",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "short",
+        "projection": "outward",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.45
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.02815541932565583,
+          0.01720726474189635,
+          0.17082390066390302
+        ],
+        "radius": 0.2591093406115932,
+        "up": [
+          -0.05662883558221744,
+          -0.03152466427469221,
+          0.9978974749557041
+        ],
+        "front": [
+          -0.0017860927640848442,
+          0.9995029742538878,
+          0.03147402627993659
+        ],
+        "sourceSha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860",
+        "rms": 0.02284336621583572,
+        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+        "upMethod": "measured neck-to-head axis"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "hair/medium",
+      "type": "hair",
+      "style": "medium",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/medium/Hair_medium_LOD0.glb",
+          "sha256": "cff8f9c1ca2e01a829f6e36e523a58883972b228570f9148de6a2814654db137",
+          "triangles": 1256,
+          "materials": 1,
+          "bytes": 64260,
+          "bounds": {
+            "min": [
+              -0.15456053614616394,
+              -0.11498112231492996,
+              -0.1521022766828537
+            ],
+            "max": [
+              0.15458376705646515,
+              0.18875756859779358,
+              0.1529649794101715
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/medium/Hair_medium_LOD1.glb",
+          "sha256": "c26bbaace906be6ad8eb85bc13990938c657d38bb4b4ba531b944de8a6c52a0e",
+          "triangles": 1000,
+          "materials": 1,
+          "bytes": 62376,
+          "bounds": {
+            "min": [
+              -0.1527082771062851,
+              -0.11953354626893997,
+              -0.1508668065071106
+            ],
+            "max": [
+              0.15458376705646515,
+              0.18875756859779358,
+              0.15669582784175873
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/medium/Hair_medium_LOD2.glb",
+          "sha256": "1dae74e7484a50965da43b3c2af2dbb866a84786fbaaf66471fa1592474bd54a",
+          "triangles": 1256,
+          "materials": 1,
+          "bytes": 64260,
+          "bounds": {
+            "min": [
+              -0.15456053614616394,
+              -0.11498112231492996,
+              -0.1521022766828537
+            ],
+            "max": [
+              0.15458376705646515,
+              0.18875756859779358,
+              0.1529649794101715
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/medium",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "medium",
+        "projection": "outward",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.45
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.016291642528864028,
+          0.022838668014652383,
+          0.1711511984760113
+        ],
+        "radius": 0.2574354888818825,
+        "up": [
+          -0.026146203628686936,
+          -0.12398380816446611,
+          0.9919397115494692
+        ],
+        "front": [
+          -0.0032669126046405523,
+          0.9922842411895075,
+          0.12394075991777997
+        ],
+        "sourceSha256": "6a11a112f44ced668c8047fa3fd0025b5dd7c17bd255a18198501ba713c0ec98",
+        "rms": 0.025287382234138917,
+        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+        "upMethod": "measured neck-to-head axis"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "hair/long",
+      "type": "hair",
+      "style": "long",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/long/Hair_long_LOD0.glb",
+          "sha256": "eb5ad490925616b67007e0beb4bc9f74529608eabca66995eb247810e41bd9ba",
+          "triangles": 1919,
+          "materials": 1,
+          "bytes": 114288,
+          "bounds": {
+            "min": [
+              -0.18551501631736755,
+              -0.26911717653274536,
+              -0.1735357791185379
+            ],
+            "max": [
+              0.1926560401916504,
+              0.19212132692337036,
+              0.19713732600212097
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/long/Hair_long_LOD1.glb",
+          "sha256": "c8f055813531995ea641428693f37b62586b4218c9ef47d5aab254f0105bd1a0",
+          "triangles": 1620,
+          "materials": 1,
+          "bytes": 101100,
+          "bounds": {
+            "min": [
+              -0.18400917947292328,
+              -0.26911717653274536,
+              -0.1735357791185379
+            ],
+            "max": [
+              0.19396889209747314,
+              0.19212132692337036,
+              0.1938304454088211
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/long/Hair_long_LOD2.glb",
+          "sha256": "d0b7416ae395d7261a16a3181145fda9ed19f2e75f5c2a7ce6bc56f489670a8f",
+          "triangles": 1919,
+          "materials": 1,
+          "bytes": 114288,
+          "bounds": {
+            "min": [
+              -0.18551501631736755,
+              -0.26911717653274536,
+              -0.1735357791185379
+            ],
+            "max": [
+              0.1926560401916504,
+              0.19212132692337036,
+              0.19713732600212097
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/long",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "long",
+        "projection": "outward",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.45
+        },
+        "trim": {
+          "min": [
+            -0.24,
+            null,
+            0.16
+          ],
+          "max": [
+            0.24,
+            -0.32,
+            null
+          ]
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.039491580062737515,
+          -0.0029855604656107426,
+          0.11713811375405427
+        ],
+        "radius": 0.2936351341235419,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          0,
+          1,
+          0
+        ],
+        "sourceSha256": "770e782a5daef36a90ef9d904e10bbbef14dac67173ac5e825139b50c9096501",
+        "rms": 0.01694666297909539,
+        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "hair/tied",
+      "type": "hair",
+      "style": "tied",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/tied/Hair_tied_LOD0.glb",
+          "sha256": "fb05756c140289c4ccbffa2355cfc5a2715950e37cdc39e8dbf5f67d76e02b3e",
+          "triangles": 2333,
+          "materials": 1,
+          "bytes": 138084,
+          "bounds": {
+            "min": [
+              -0.18053333461284637,
+              -0.21519601345062256,
+              -0.2563309669494629
+            ],
+            "max": [
+              0.15502512454986572,
+              0.1783037632703781,
+              0.1943923532962799
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/tied/Hair_tied_LOD1.glb",
+          "sha256": "8d4bef31a2817d13e89a4d655425cb25dbd05b9c891ea80785de64064a34594d",
+          "triangles": 2039,
+          "materials": 1,
+          "bytes": 127844,
+          "bounds": {
+            "min": [
+              -0.18053333461284637,
+              -0.21519601345062256,
+              -0.2563309669494629
+            ],
+            "max": [
+              0.15502512454986572,
+              0.1783037632703781,
+              0.1943923532962799
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/tied/Hair_tied_LOD2.glb",
+          "sha256": "4d52a6eaa0e64a52e3e29c0e4d769cbf317d42076ca5d8a1df2df184510e0051",
+          "triangles": 2333,
+          "materials": 1,
+          "bytes": 138084,
+          "bounds": {
+            "min": [
+              -0.18053333461284637,
+              -0.21519601345062256,
+              -0.2563309669494629
+            ],
+            "max": [
+              0.15502512454986572,
+              0.1783037632703781,
+              0.1943923532962799
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/tied",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "tied",
+        "projection": "outward",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.45
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.041196801090267694,
+          0.09814630124304592,
+          0.15814779341695132
+        ],
+        "radius": 0.2520302401745737,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          0,
+          1,
+          0
+        ],
+        "sourceSha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+        "rms": 0.03869199657227534,
+        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "hair/bun",
+      "type": "hair",
+      "style": "bun",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/bun/Hair_bun_LOD0.glb",
+          "sha256": "e2dd078e8eab13a316b6b30a309f0054244cd480917e0f14da278bca4c5223c5",
+          "triangles": 1838,
+          "materials": 1,
+          "bytes": 109636,
+          "bounds": {
+            "min": [
+              -0.1167667880654335,
+              -0.11253012716770172,
+              -0.18549741804599762
+            ],
+            "max": [
+              0.1292445957660675,
+              0.2119535654783249,
+              0.15102238953113556
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/bun/Hair_bun_LOD1.glb",
+          "sha256": "5e51f73090f2664e6f6f1eb0d5251900fe14bc6dd8f4ea8e836b1b8c5e64b0d5",
+          "triangles": 1588,
+          "materials": 1,
+          "bytes": 101804,
+          "bounds": {
+            "min": [
+              -0.11794423311948776,
+              -0.11253012716770172,
+              -0.18549741804599762
+            ],
+            "max": [
+              0.1292445957660675,
+              0.2119535654783249,
+              0.14983324706554413
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/bun/Hair_bun_LOD2.glb",
+          "sha256": "4c004e100563f2060ec71dfe6044356a282a1064e3dd92429e63e9bd17b92372",
+          "triangles": 1838,
+          "materials": 1,
+          "bytes": 109636,
+          "bounds": {
+            "min": [
+              -0.1167667880654335,
+              -0.11253012716770172,
+              -0.18549741804599762
+            ],
+            "max": [
+              0.1292445957660675,
+              0.2119535654783249,
+              0.15102238953113556
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/bun",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "bun",
+        "projection": "outward",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.45
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.03764181036191336,
+          0.061015325082657834,
+          0.11818354012895554
+        ],
+        "radius": 0.22501446368009934,
+        "up": [
+          -0.030936212151970365,
+          -0.05135690254401844,
+          0.998201091633731
+        ],
+        "front": [
+          -0.0015908874255879668,
+          0.9986803635603757,
+          0.05133225609804144
+        ],
+        "sourceSha256": "b2e50d54374cc913b6aef79a0446ebf2f337857045ee10e47f4d7a204122d2d7",
+        "rms": 0.0215771626624886,
+        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+        "upMethod": "measured neck-to-head axis"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "hair/braid",
+      "type": "hair",
+      "style": "braid",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/braid/Hair_braid_LOD0.glb",
+          "sha256": "46f7bce066bfe21775d72facbdb3e0dfe0539bfe82ee21b47eaade27cf52da09",
+          "triangles": 8886,
+          "materials": 1,
+          "bytes": 546084,
+          "bounds": {
+            "min": [
+              -0.12428195774555206,
+              -0.2500231862068176,
+              -0.14922970533370972
+            ],
+            "max": [
+              0.12932083010673523,
+              0.19227240979671478,
+              0.15799397230148315
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/braid/Hair_braid_LOD1.glb",
+          "sha256": "5b27a4a4d084675db04b6d2398bdb0efd8e07c5f15bd90d6a7c2d91e53430cb6",
+          "triangles": 8319,
+          "materials": 1,
+          "bytes": 506528,
+          "bounds": {
+            "min": [
+              -0.12492977827787399,
+              -0.19189970195293427,
+              -0.1492711454629898
+            ],
+            "max": [
+              0.12932083010673523,
+              0.19227240979671478,
+              0.13521979749202728
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/braid/Hair_braid_LOD2.glb",
+          "sha256": "bd0708069f1e0b4be6c2aa1740a3e774315b1152050de88d60bc9123b29c6468",
+          "triangles": 8886,
+          "materials": 1,
+          "bytes": 546084,
+          "bounds": {
+            "min": [
+              -0.12428195774555206,
+              -0.2500231862068176,
+              -0.14922970533370972
+            ],
+            "max": [
+              0.12932083010673523,
+              0.19227240979671478,
+              0.15799397230148315
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/braid",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "braid",
+        "projection": "outward",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.45
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.020764914339377955,
+          -0.021667715072332602,
+          0.205569337111309
+        ],
+        "radius": 0.22455287625226844,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          0,
+          1,
+          0
+        ],
+        "sourceSha256": "53fe572dcce00df5e8f3cfeea3a55aa72140c22ebebf44fb2fd8f52124d4c990",
+        "rms": 0.016953547443991048,
+        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "beard/stubble",
+      "type": "beard",
+      "style": "stubble",
+      "version": 1,
+      "lods": {
+        "2": {
+          "file": "/appearance/beards/stubble/Beard_stubble_LOD2.glb",
+          "sha256": "67842a4d709f490f90732836ced388642aa3e9ebf8bdd4998107131522056528",
+          "triangles": 908,
+          "materials": 1,
+          "bytes": 51904,
+          "bounds": {
+            "min": [
+              -0.07942614704370499,
+              -0.12667138874530792,
+              0.05249515175819397
+            ],
+            "max": [
+              0.10911204665899277,
+              -0.010703650303184986,
+              0.16719834506511688
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "beard/stubble",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitCage": "LOWER_FACE_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.003,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "stubble",
+        "projection": "shell",
+        "subdivisions": 2,
+        "attachmentBand": {
+          "minimumY": null
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.03545390970428604,
+          0.023653222743699784,
+          0.15654082658200036
+        ],
+        "radius": 0.27441483580796094,
+        "up": [
+          -0.1118552034655962,
+          -0.015232261206103223,
+          0.993607765507204
+        ],
+        "front": [
+          -0.3121332926420213,
+          0.9498154436127679,
+          -0.020577431791430123
+        ],
+        "sourceSha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d",
+        "rms": 0.021728821455565827,
+        "frontMethod": "reference beard attachment centroid",
+        "upMethod": "measured neck-to-head axis"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "beard/short",
+      "type": "beard",
+      "style": "short",
+      "version": 1,
+      "lods": {
+        "2": {
+          "file": "/appearance/beards/short/Beard_short_LOD2.glb",
+          "sha256": "f7328ebaeb77fae88af45429873ae1b4cc9017a586dc2e8dd54c8834b1e5ade6",
+          "triangles": 742,
+          "materials": 1,
+          "bytes": 41560,
+          "bounds": {
+            "min": [
+              -0.05191235616803169,
+              -0.157439723610878,
+              -0.02735225483775139
+            ],
+            "max": [
+              0.15845175087451935,
+              0.022870555520057678,
+              0.1667829304933548
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "beard/short",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitCage": "LOWER_FACE_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.003,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "short",
+        "projection": "shell",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.31289111389236546
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.05220867449278337,
+          0.030547382686063412,
+          0.15615379695810103
+        ],
+        "radius": 0.2799449071930391,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          -0.5685245204195363,
+          0.822666317337556,
+          0
+        ],
+        "sourceSha256": "07123cce8412822d312a5f3ea98e7fae3353ee27f05d7a7d360c58adfec766c3",
+        "rms": 0.01410227011021968,
+        "frontMethod": "reference beard attachment centroid",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "beard/medium",
+      "type": "beard",
+      "style": "medium",
+      "version": 1,
+      "lods": {
+        "2": {
+          "file": "/appearance/beards/medium/Beard_medium_LOD2.glb",
+          "sha256": "c230b0c07329b618937e408421dc6b340cedfeb7c58668f02883a1794907557c",
+          "triangles": 1070,
+          "materials": 1,
+          "bytes": 67500,
+          "bounds": {
+            "min": [
+              -0.09762244671583176,
+              -0.2519656717777252,
+              -0.038813091814517975
+            ],
+            "max": [
+              0.17851051688194275,
+              0.005694183055311441,
+              0.19815607368946075
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "beard/medium",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitCage": "LOWER_FACE_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.003,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "medium",
+        "projection": "shell",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.31289111389236546
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.048443718392953465,
+          0.04622197363273289,
+          0.14482084382422505
+        ],
+        "radius": 0.28821719039749594,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          -0.5268313194587741,
+          0.8499698587816671,
+          0
+        ],
+        "sourceSha256": "486ee9a49d721d3f1451e74fe8f157b70b5437aa65a9cbbf84208dd37dae4e94",
+        "rms": 0.01777852071487065,
+        "frontMethod": "reference beard attachment centroid",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "beard/long",
+      "type": "beard",
+      "style": "long",
+      "version": 1,
+      "lods": {
+        "2": {
+          "file": "/appearance/beards/long/Beard_long_LOD2.glb",
+          "sha256": "db0559949ed566d6a7ffcba532971660340a744588232e3d60bc878a900a4081",
+          "triangles": 1189,
+          "materials": 1,
+          "bytes": 59796,
+          "bounds": {
+            "min": [
+              -0.0983322486281395,
+              -0.26295650005340576,
+              -0.05189201608300209
+            ],
+            "max": [
+              0.11561013013124466,
+              0.03069859929382801,
+              0.1313883513212204
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "beard/long",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitCage": "LOWER_FACE_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.003,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "long",
+        "projection": "shell",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.31289111389236546
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          0.026269600904235597,
+          -0.023811118293392233,
+          0.19088374039079098
+        ],
+        "radius": 0.2429522385719495,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          -0.48257912574663164,
+          0.8758523776262851,
+          0
+        ],
+        "sourceSha256": "fa9a86d233babf278715bfa2f4ecfdbd660945fec00dbe846fc703b6dbba8dc6",
+        "rms": 0.011460972565743445,
+        "frontMethod": "reference beard attachment centroid",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "beard/split-braid",
+      "type": "beard",
+      "style": "split-braid",
+      "version": 1,
+      "lods": {
+        "2": {
+          "file": "/appearance/beards/split-braid/Beard_split-braid_LOD2.glb",
+          "sha256": "5ccce2435442e1893bf064616dbf3d22d1d606b0d55a13484ac8bc4bd59ed9cc",
+          "triangles": 1240,
+          "materials": 1,
+          "bytes": 86092,
+          "bounds": {
+            "min": [
+              -0.0749189481139183,
+              -0.2291136234998703,
+              -0.002105206251144409
+            ],
+            "max": [
+              0.13781161606311798,
+              0.009627796709537506,
+              0.16866694390773773
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "beard/split-braid",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitCage": "LOWER_FACE_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.003,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "split-braid",
+        "projection": "shell",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.31289111389236546
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          -0.0027199008233119034,
+          0.006158727347098006,
+          0.1803845662149241
+        ],
+        "radius": 0.25555886721138615,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          -0.3512371847804074,
+          0.9362865159915174,
+          0
+        ],
+        "sourceSha256": "9536c2535ea91dc4008aed7421e80039604ede6f2c7d0cb9b42b541e7daf77d7",
+        "rms": 0.01568945067744052,
+        "frontMethod": "reference beard attachment centroid",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    },
+    {
+      "id": "beard/braid",
+      "type": "beard",
+      "style": "braid",
+      "version": 1,
+      "lods": {
+        "0": {
+          "file": "/appearance/beards/braid/Beard_braid_LOD0.glb",
+          "sha256": "38a8872de6723a077282e95eb91c6e5459137508fc7ef26eb57eb52e6adc1dd1",
+          "triangles": 2475,
+          "materials": 1,
+          "bytes": 253724,
+          "bounds": {
+            "min": [
+              -0.12167009711265564,
+              -0.2407001107931137,
+              -0.12042970210313797
+            ],
+            "max": [
+              0.15322846174240112,
+              0.045822493731975555,
+              0.17157766222953796
+            ]
+          }
+        },
+        "1": {
+          "file": "/appearance/beards/braid/Beard_braid_LOD1.glb",
+          "sha256": "8912f32f9fe7d2c4507530ab4932e6d8718966220cec41a16cc5ec294b0136db",
+          "triangles": 1775,
+          "materials": 1,
+          "bytes": 182328,
+          "bounds": {
+            "min": [
+              -0.12167009711265564,
+              -0.2401488870382309,
+              -0.12042970210313797
+            ],
+            "max": [
+              0.15322846174240112,
+              0.045822493731975555,
+              0.17157766222953796
+            ]
+          }
+        },
+        "2": {
+          "file": "/appearance/beards/braid/Beard_braid_LOD2.glb",
+          "sha256": "852aba0a4ff086990f4b166a58a5b5639ccfd3a6beca4ceebd85697b9586732a",
+          "triangles": 1175,
+          "materials": 1,
+          "bytes": 121128,
+          "bounds": {
+            "min": [
+              -0.12167009711265564,
+              -0.24036061763763428,
+              -0.12042970210313797
+            ],
+            "max": [
+              0.15322846174240112,
+              0.043416209518909454,
+              0.17157766222953796
+            ]
+          }
+        }
+      },
+      "runtimeLOD": "requested",
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "beard/braid",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitCage": "LOWER_FACE_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.003,
+        "authoringFrame": "measured-reference-head",
+        "sourceStyle": "braid",
+        "projection": "shell",
+        "subdivisions": 0,
+        "attachmentBand": {
+          "minimumY": -0.31289111389236546
+        }
+      },
+      "sourceFrame": {
+        "centre": [
+          0.006711467658303006,
+          -0.029386162793995696,
+          0.2079211316665956
+        ],
+        "radius": 0.23809050752187755,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "front": [
+          -0.42637378068011755,
+          0.9045470685091755,
+          0
+        ],
+        "sourceSha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058",
+        "rms": 0.02087199823078251,
+        "frontMethod": "reference beard attachment centroid",
+        "upMethod": "glTF vertical; neck not sufficiently constrained"
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed"
+      ],
+      "budgets": {
+        "triangles": {
+          "0": 10000,
+          "1": 10000,
+          "2": 10000
+        },
+        "materials": 2
+      }
+    }
+  ]
+}

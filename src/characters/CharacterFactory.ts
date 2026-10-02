@@ -1,11 +1,10 @@
 import { Group } from 'three';
 import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { CharacterDNA } from './CharacterDNA';
+import { CharacterDNA, parseCharacterDNA } from './CharacterDNA';
 import { generatePhenotype } from './generatePhenotype';
 import { universalHumanProfile } from './UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
-import { hairAssetPath } from '../character-lab/GeneratedHair';
-import { beardAssetPath } from '../character-lab/GeneratedBeard';
+import { hairAssetPath, beardAssetPath, characterAssetURL, characterAssets } from './CharacterAssets';
 import { ModuleMetadata, validateModule } from './AttachmentContract';
 
 /** Cached immutable sources; every create call owns its skeleton, mixer and materials. */
@@ -13,7 +12,9 @@ export class CharacterFactory {
     private sources=new Map<string,Promise<GLTF>>();
     private ready=new Map<string,GLTF>();
     private modules=new Map<string,{metadata:ModuleMetadata;path:string}>();
-    constructor(private load:(path:string)=>Promise<GLTF>=path=>new GLTFLoader().loadAsync(path)){}
+    constructor(private load:(path:string)=>Promise<GLTF>=path=>new GLTFLoader().loadAsync(path)){
+        for(const asset of characterAssets)if(asset.metadata)this.registerModule(asset.metadata,characterAssetURL(asset.id,2));
+    }
     registerModule(metadata:ModuleMetadata,path:string){validateModule(metadata);if(!path)throw new Error('A module needs an asset path.');this.modules.set(metadata.id,{metadata,path});}
     async equip(character:UniversalHuman,id:string){const module=this.modules.get(id);if(!module)throw new Error(`Unknown registered module: ${id}`);const source=await this.asset(module.path);return character.equip(module.metadata,source.scene);}
     unequip(character:UniversalHuman,id:string){character.unequip(id);}
@@ -23,17 +24,19 @@ export class CharacterFactory {
         return pending;
     }
     async create(dna:CharacterDNA,lod:number,hair=true){
+        dna=parseCharacterDNA(dna);
         const profile=universalHumanProfile(dna),path=hair?hairAssetPath(profile.appearance.hairStyle,lod):null;
         const beardPath=hair?beardAssetPath(profile.appearance.beardStyle,lod):null;
-        const [body,appearance,beard]=await Promise.all([this.asset(`/universal-human/UniversalHuman_LOD${lod}.glb`),path?this.asset(path):null,beardPath?this.asset(beardPath):null]);
+        const [body,appearance,beard]=await Promise.all([this.asset(characterAssetURL('body/universal-human',lod)),path?this.asset(path):null,beardPath?this.asset(beardPath):null]);
         if(appearance)appearance.scene.userData.referenceAsset={style:profile.appearance.hairStyle,path,provenance:path!.replace('.glb','.provenance.json')};
         if(beard)beard.scene.userData.referenceAsset={style:profile.appearance.beardStyle,path:beardPath,provenance:beardPath!.replace('.glb','.provenance.json')};
         return new UniversalHuman(body,profile,generatePhenotype(dna).skinTone,appearance?.scene??null,beard?.scene??null);
     }
-    async createWorld(dna:CharacterDNA){await this.asset('/universal-human/UniversalHuman_LOD2.glb');return this.createWorldReady(dna);}
+    async createWorld(dna:CharacterDNA){await this.asset(characterAssetURL('body/universal-human',2));return this.createWorldReady(dna);}
     /** Annual respawns reuse the already-loaded source, so there is no empty slot while fetching. */
     createWorldReady(dna:CharacterDNA){
-        const source=this.ready.get('/universal-human/UniversalHuman_LOD2.glb');
+        dna=parseCharacterDNA(dna);
+        const source=this.ready.get(characterAssetURL('body/universal-human',2));
         if(!source)throw new Error('Load the world body before synchronous respawn.');
         // Ten mobile prototype inhabitants do not need an additional close-view rig.
         // Fixed LOD2 avoids deferred parsing, skin tinting and GPU uploads on first zoom.
@@ -56,6 +59,7 @@ export class WorldCharacter {
     }
     setMovementSpeed(speed:number){this.setState(movementState(speed));}
     applyDNA(dna:CharacterDNA){
+        dna=parseCharacterDNA(dna);
         // Preserve the reference captured by the close-LOD loader.
         if(this.dna)Object.assign(this.dna,dna);else this.dna=dna;
         this.root.userData.character.seed=dna.seed;

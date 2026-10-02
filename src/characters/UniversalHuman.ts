@@ -6,10 +6,12 @@ import { SoftBodySpring } from '../character-lab/SoftBodySpring';
 import { appearanceModules, clothingLayer, disposeModules } from '../character-lab/AppearanceModules';
 import { skinTexture } from '../character-lab/SkinTint';
 import { CharacterFitSystem } from './CharacterFitSystem';
-import { appearanceMetadata, attachmentVersion, ModuleMetadata, validateModule } from './AttachmentContract';
+import { attachmentVersion, ModuleMetadata, validateModule } from './AttachmentContract';
+import { registeredAppearanceMetadata } from './CharacterAssets';
+import { characterContract } from './CharacterContract';
 import { disposeGarment, fitGarment } from './GarmentFit';
 
-export type HumanAnimation='Idle'|'Walk'|'Run';
+export type HumanAnimation=typeof characterContract.animations[number];
 /** Per-character skeleton and materials; shared immutable source geometry and textures. */
 export class UniversalHuman {
     readonly root=new Group();
@@ -108,7 +110,7 @@ export class UniversalHuman {
                 const appearance=appearanceModules(profile.appearance,size,lod,profile.appearanceFit,this.hairAsset,skull.map(p=>p.sub(bounds.getCenter(new Vector3()))),this.beardAsset,undefined,this.fit.cages);
                 appearance.position.copy(bounds.getCenter(new Vector3()));this.root.add(appearance);this.root.updateMatrixWorld(true);head.attach(appearance);
                 for(const kind of ['hair','beard'] as const){const module=appearance.getObjectByName(kind==='hair'?'GeneratedHair':'GeneratedBeard') as Group|undefined;
-                    if(module)this.fit.attach(appearanceMetadata(kind,kind==='hair'?profile.appearance.hairStyle:profile.appearance.beardStyle),module);
+                    if(module)this.fit.attach(registeredAppearanceMetadata(kind,kind==='hair'?profile.appearance.hairStyle:profile.appearance.beardStyle),module);
                 }
                 this.modules.userData.appearanceObject=appearance;
             }

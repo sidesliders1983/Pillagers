@@ -6,7 +6,10 @@ export type HeritageKey = typeof heritageKeys[number];
 export type HeritageMix = Record<HeritageKey, number>;
 export const appearanceFitLimits = {hair:[1,1.3],beard:[.75,1.5],clothing:[1,1.3]} as const;
 export type AppearanceFit = Record<keyof typeof appearanceFitLimits,number>;
+export const characterDNAVersion=1 as const;
+export const characterRanges={seed:[0,4294967295],age:[0,100],traits:[0,1],masculinity:[0,1],height:[1.16,1.6]} as const;
 export type CharacterDNA = {
+    schemaVersion:typeof characterDNAVersion;
     seed: number;
     sex: 'male' | 'female';
     age: number;
@@ -45,20 +48,30 @@ export function editHeritage(mix: HeritageMix, key: HeritageKey, value: number):
     return Object.fromEntries(heritageKeys.map(k => [k, k === key ? selected : others > 1e-9 ? current[k] / others * (1-selected) : (1-selected) / 5])) as HeritageMix;
 }
 export function defaultDNA(): CharacterDNA {
-    return {seed: 1983, sex: 'male', age: 32,
+    return {schemaVersion:characterDNAVersion,seed: 1983, sex: 'male', age: 32,
         traits: {physicality: .55, agility: .55, intelligence: .55, cunning: .4, temperament: .4},
         heritage: {scandinavian: .5, angloSaxon: .2, gaelic: .15, finnic: .05, sami: .05, baltic: .05}};
 }
-export function cloneDNA(dna: CharacterDNA): CharacterDNA { return {...dna, traits: {...dna.traits}, heritage: {...dna.heritage}, ...(dna.naming ? {naming:{...dna.naming}} : {}), ...(dna.morphology ? {morphology:{...dna.morphology}} : {}), ...(dna.appearanceFit ? {appearanceFit:{...dna.appearanceFit}} : {})}; }
+export function cloneDNA(dna: CharacterDNA): CharacterDNA { const valid=parseCharacterDNA(dna);return {...valid, traits: {...valid.traits}, heritage: {...valid.heritage}, ...(valid.naming ? {naming:{...valid.naming}} : {}), ...(valid.morphology ? {morphology:{...valid.morphology}} : {}), ...(valid.appearanceFit ? {appearanceFit:{...valid.appearanceFit}} : {})}; }
+/** Version zero is the existing unversioned nested DNA, not a different anatomy. */
+const migrations:Record<number,(data:Record<string,unknown>)=>Record<string,unknown>>={0:data=>({...data,schemaVersion:1})};
+export function migrateCharacterDNA(value:unknown):Record<string,unknown>{
+    if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('CharacterDNA: DNA must be a JSON object.');
+    let data={...value as Record<string,unknown>},version=data.schemaVersion===undefined?0:data.schemaVersion;
+    if(typeof version!=='number'||!Number.isInteger(version)||version<0||version>characterDNAVersion)throw new Error(`CharacterDNA: unsupported schemaVersion ${String(version)}; supported versions are 0–${characterDNAVersion}.`);
+    while(version<characterDNAVersion){const migration=migrations[version];if(!migration)throw new Error(`CharacterDNA: missing migration from version ${version}.`);data=migration(data);version++;}
+    return data;
+}
+export function serializeCharacterDNA(dna:unknown){return JSON.stringify(parseCharacterDNA(dna),null,2);}
+export function deserializeCharacterDNA(json:string):CharacterDNA {let value:unknown;try{value=JSON.parse(json);}catch{throw new Error('CharacterDNA: invalid JSON.');}return parseCharacterDNA(value);}
 export function parseCharacterDNA(value: unknown): CharacterDNA {
-    if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('DNA must be a JSON object.');
-    const data = value as Record<string, unknown>;
+    const data=migrateCharacterDNA(value);
     if (data.morphology===undefined&&data.sex !== 'male' && data.sex !== 'female') throw new Error('Sex must be male or female for legacy DNA without morphology.');
-    if (!Number.isInteger(data.seed) || Number(data.seed) < 0 || Number(data.seed) > 4294967295) throw new Error('Seed must be an unsigned 32-bit integer.');
-    if (typeof data.age !== 'number' || !Number.isFinite(data.age) || data.age < 0 || data.age > 100) throw new Error('Age must be between 0 and 100.');
-    if (!data.traits || typeof data.traits !== 'object') throw new Error('All five traits are required.');
+    if (!Number.isInteger(data.seed) || Number(data.seed) < characterRanges.seed[0] || Number(data.seed) > characterRanges.seed[1]) throw new Error('Seed must be an unsigned 32-bit integer.');
+    if (typeof data.age !== 'number' || !Number.isFinite(data.age) || data.age < characterRanges.age[0] || data.age > characterRanges.age[1]) throw new Error('Age must be between 0 and 100.');
+    if (!data.traits || typeof data.traits !== 'object'||Array.isArray(data.traits)) throw new Error('All five traits are required.');
     const traits = data.traits as Record<string, unknown>;
-    for (const key of traitKeys) if (typeof traits[key] !== 'number' || !Number.isFinite(traits[key]) || Number(traits[key]) < 0 || Number(traits[key]) > 1) throw new Error(`${key} must be between 0 and 1.`);
+    for (const key of traitKeys) if (typeof traits[key] !== 'number' || !Number.isFinite(traits[key]) || Number(traits[key]) < characterRanges.traits[0] || Number(traits[key]) > characterRanges.traits[1]) throw new Error(`${key} must be between 0 and 1.`);
     if (!data.heritage || typeof data.heritage !== 'object' || Array.isArray(data.heritage)) throw new Error('Heritage must be a mixed profile object.');
     const heritage = data.heritage as Record<string, unknown>;
     for (const key of Object.keys(heritage)) {
@@ -79,18 +92,18 @@ export function parseCharacterDNA(value: unknown): CharacterDNA {
         if(!data.naming||typeof data.naming!=='object'||Array.isArray(data.naming))throw new Error('Naming must contain a culture and seed.');
         const config=data.naming as Record<string,unknown>;
         if(!heritageKeys.includes(config.culture as HeritageKey))throw new Error('Unknown naming culture.');
-        if(!Number.isInteger(config.seed)||Number(config.seed)<0||Number(config.seed)>4294967295)throw new Error('Name seed must be an unsigned 32-bit integer.');
+        if(!Number.isInteger(config.seed)||Number(config.seed)<characterRanges.seed[0]||Number(config.seed)>characterRanges.seed[1])throw new Error('Name seed must be an unsigned 32-bit integer.');
         naming={culture:dominantHeritage(heritage as Partial<HeritageMix>),seed:Number(config.seed)};
     }
     let morphology: CharacterDNA['morphology'];
     if (data.morphology !== undefined) {
         if (!data.morphology || typeof data.morphology !== 'object' || Array.isArray(data.morphology)) throw new Error('Morphology must contain masculinity and height.');
         const m = data.morphology as Record<string, unknown>;
-        if (typeof m.masculinity !== 'number' || !Number.isFinite(m.masculinity) || m.masculinity < 0 || m.masculinity > 1) throw new Error('Masculinity must be between 0 and 1.');
+        if (typeof m.masculinity !== 'number' || !Number.isFinite(m.masculinity) || m.masculinity < characterRanges.masculinity[0] || m.masculinity > characterRanges.masculinity[1]) throw new Error('Masculinity must be between 0 and 1.');
         sexFromMasculinity(m.masculinity);
-        if (typeof m.height !== 'number' || !Number.isFinite(m.height) || m.height < 1.16 || m.height > 1.6) throw new Error('Adult height must be between 1.16 and 1.60 metres.');
+        if (typeof m.height !== 'number' || !Number.isFinite(m.height) || m.height < characterRanges.height[0] || m.height > characterRanges.height[1]) throw new Error('Adult height must be between 1.16 and 1.60 metres.');
         morphology = {masculinity:m.masculinity,height:m.height};
     }
-    return {seed: Number(data.seed), sex: morphology?sexFromMasculinity(morphology.masculinity):data.sex as CharacterDNA['sex'], age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{}), ...(appearanceFit?{appearanceFit}:{})};
+    return {schemaVersion:characterDNAVersion,seed: Number(data.seed), sex: morphology?sexFromMasculinity(morphology.masculinity):data.sex as CharacterDNA['sex'], age: data.age, traits: Object.fromEntries(traitKeys.map(key => [key, traits[key]])) as CoreTraits, heritage: normalizeHeritage(heritage as Partial<HeritageMix>), ...(naming?{naming}:{}), ...(morphology?{morphology}:{}), ...(appearanceFit?{appearanceFit}:{})};
 }
 

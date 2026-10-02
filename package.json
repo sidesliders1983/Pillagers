@@ -1,6 +1,6 @@
 {
   "name": "pillagers-world", "version": "0.2.0", "private": true, "type": "module",
-  "scripts": { "dev": "vite --host 127.0.0.1", "dev:lan": "vite --host 0.0.0.0 --port 5175 --strictPort", "build": "tsc --noEmit && vite build", "preview": "vite preview --host 127.0.0.1", "preview:lan": "vite preview --host 0.0.0.0 --port 4175 --strictPort", "test": "node --test tests/*.test.mjs", "assets:optimize": "node scripts/asset-pipeline.mjs optimize", "assets:publish": "node scripts/asset-pipeline.mjs publish", "assets:test": "node scripts/asset-pipeline.mjs test" },
+  "scripts": { "dev": "vite --host 127.0.0.1", "dev:lan": "vite --host 0.0.0.0 --port 5175 --strictPort", "build": "tsc --noEmit && vite build", "preview": "vite preview --host 127.0.0.1", "preview:lan": "vite preview --host 0.0.0.0 --port 4175 --strictPort", "test": "node --test tests/*.test.mjs", "validate:characters": "node scripts/validate-characters.mjs", "assets:registry": "node scripts/update-character-registry.mjs", "assets:optimize": "node scripts/asset-pipeline.mjs optimize", "assets:publish": "node scripts/asset-pipeline.mjs publish", "assets:test": "node scripts/asset-pipeline.mjs test" },
   "dependencies": { "three": "^0.180.0" },
   "devDependencies": { "@types/three": "^0.180.0", "@types/node": "^24.0.0", "typescript": "^5.9.2", "vite": "^7.1.7" }
 }
