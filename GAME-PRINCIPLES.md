@@ -30,6 +30,16 @@ Style can use rhythm, repetition and alliteration without adding factual claims.
 
 Implementation task: [GitHub lore issue](https://github.com/sidesliders1983/Pillagers/issues/14).
 
+## GP-003 — Browser-only play and local lore generation
+
+Pillagers is a web-only game. Players must not install a desktop app, local AI server, Ollama or another runtime.
+
+If AI is used for lore, inference runs on the player's device inside the browser. Model/runtime files may be downloaded as web assets and cached; this is not a separate software installation. Do not send game events to an external inference API or silently fall back to a cloud model.
+
+The game must remain playable with factual template-based chronicles when browser AI is unsupported, too slow, unavailable or its model download fails. A model download must not block initial play. Cached files may be evicted; do not promise permanent offline availability or make full offline play a requirement.
+
+Generate at most once per annual summary, while the simulation is paused; validate outputs according to GP-002 and reuse saved results. Run inference away from the UI thread where supported, but account for GPU/memory contention with rendering. Select runtime/model only after measuring download size, device compatibility, Dutch output quality and game performance.
+
 ## Scope and implementation status
 
 The calendar and age wording above are approved design decisions. They do not imply that the current code already implements them.
@@ -51,4 +61,4 @@ These are proposals, not requirements for Codex to implement automatically:
 
 ## Maintaining these principles
 
-When implementing time-related features or lore, check them against GP-001 and GP-002 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features or lore, check them against GP-001, GP-002 and GP-003 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
