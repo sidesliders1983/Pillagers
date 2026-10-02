@@ -1,8 +1,9 @@
-import { Scene, Color, Fog, HemisphereLight, DirectionalLight, PointLight, WebGLRenderer, Mesh, ShaderMaterial, CircleGeometry } from 'three';
+import { Scene, Color, Fog, HemisphereLight, DirectionalLight, PointLight, WebGLRenderer, Mesh, ShaderMaterial, CircleGeometry, MathUtils } from 'three';
 import { lightingConfig as config, LightingMode, fireFlicker } from '../config/lightingConfig';
 import { AssetManager } from './AssetManager';
 import { hearth } from '../world/SettlementLayout';
 import { surfaceHeightAt } from '../world/Terrain';
+import { TimeVisualization, daylight, seasonBlend } from '../config/timeVisualization';
 export class WorldLighting {
     readonly ambient=new HemisphereLight();
     // Reuse one directional source and one shadow map across presets.
@@ -11,6 +12,9 @@ export class WorldLighting {
     readonly fog=new Fog(config.day.sky,config.day.fogNear,config.day.fogFar);
     readonly halo:Mesh<CircleGeometry,ShaderMaterial>;
     mode:LightingMode='day';
+    visualization:TimeVisualization='off';
+    private nightWeight=0;
+    private blendColor=new Color();
     private fogEnabled=true;
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager){
         scene.background=new Color(config.day.sky);scene.add(this.ambient,this.directional,this.campfire);
@@ -39,6 +43,8 @@ export class WorldLighting {
         this.setMode('day');
     }
     setMode(mode:LightingMode){
+        this.visualization='off';
+        this.nightWeight=mode==='night'?1:0;
         this.mode=mode;const night=mode==='night',preset=night?config.night:config.day;
         (this.scene.background as Color).setHex(preset.sky);this.fog.color.setHex(night?config.night.fogColor:config.day.sky);
         this.fog.near=preset.fogNear;this.fog.far=preset.fogFar;this.scene.fog=this.fogEnabled?this.fog:null;
@@ -56,10 +62,39 @@ export class WorldLighting {
         this.update(0);
     }
     setFog(enabled:boolean){this.fogEnabled=enabled;this.scene.fog=enabled?this.fog:null;}
-    update(time:number){
-        if(this.mode!=='night')return;
-        const flicker=fireFlicker(time);this.campfire.intensity=config.fire.intensity*flicker;
-        this.halo.material.uniforms.opacity.value=config.fire.haloOpacity*flicker;
-        for(const material of this.assets.fireMaterials)material.emissiveIntensity=config.fire.emissiveIntensity*flicker;
+    setVisualization(mode:TimeVisualization){
+        this.setMode('day');this.visualization=mode;
+        // Keep the same light set and shadow allocation throughout an animated cycle.
+        if(mode==='day-night'){this.campfire.visible=true;this.halo.visible=true;}
+    }
+    private cycle(progress:number){
+        const blend=(target:Color,a:number,b:number,t:number)=>target.setHex(a).lerp(this.blendColor.setHex(b),t);
+        if(this.visualization==='day-night'){
+            const day=daylight(progress),night=1-MathUtils.smoothstep(day,.12,.65);this.nightWeight=night;
+            this.mode=night>.5?'night':'day';
+            blend(this.scene.background as Color,config.day.sky,config.night.sky,night);
+            blend(this.fog.color,config.day.sky,config.night.fogColor,night);
+            this.fog.near=MathUtils.lerp(config.day.fogNear,config.night.fogNear,night);this.fog.far=MathUtils.lerp(config.day.fogFar,config.night.fogFar,night);
+            blend(this.ambient.color,config.day.ambientSky,config.night.ambientSky,night);
+            blend(this.ambient.groundColor,config.day.ambientGround,config.night.ambientGround,night);
+            this.ambient.intensity=MathUtils.lerp(config.day.ambient,config.night.ambient,night);
+            blend(this.directional.color,config.day.sun,config.night.moon,night);
+            this.directional.intensity=MathUtils.lerp(config.day.sunIntensity,config.night.moonIntensity,night);
+            const angle=progress*Math.PI*2;this.directional.position.set(-28*Math.cos(angle)+35*Math.sin(angle),8+40*Math.abs(Math.cos(angle)),18*Math.cos(angle));
+            this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,config.night.exposure,night);
+        }else if(this.visualization==='seasons'){
+            const {from,to,mix}=seasonBlend(progress);this.nightWeight=0;this.mode='day';
+            blend(this.scene.background as Color,from.sky,to.sky,mix);blend(this.fog.color,from.fog,to.fog,mix);
+            blend(this.directional.color,from.sun,to.sun,mix);
+            this.ambient.intensity=MathUtils.lerp(from.ambient,to.ambient,mix);this.directional.intensity=MathUtils.lerp(from.intensity,to.intensity,mix);
+        }
+    }
+    update(time:number,progress?:number){
+        if(this.visualization!=='off')this.cycle(progress??0);
+        const flicker=fireFlicker(time),night=this.nightWeight;
+        this.campfire.intensity=config.fire.intensity*flicker*night;
+        this.halo.material.uniforms.opacity.value=config.fire.haloOpacity*flicker*night;
+        for(const material of this.assets.windowMaterials)material.emissiveIntensity=config.windows.emissiveIntensity*night;
+        for(const material of this.assets.fireMaterials)material.emissiveIntensity=config.fire.emissiveIntensity*flicker*night;
     }
 }

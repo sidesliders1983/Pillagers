@@ -6,3 +6,5 @@
 .lighting-controls{display:flex;align-items:center;gap:6px;margin:12px 0}.lighting-controls>span{margin-right:auto;color:#73816d}.lighting-controls button{min-height:44px;min-width:52px}.lighting-controls button[aria-pressed=true]{background:#d2ddce;border-color:#82947a}
 
 body[data-lighting=night] .world-heading{color:#e5e9df}body[data-lighting=night] .world-heading #status{color:#c4d0cb}
+
+.world-time{display:flex;gap:12px;margin-top:8px;font-size:11px;font-variant-numeric:tabular-nums;background:#f4f3e9d9;border-radius:5px;padding:6px 9px;color:#35483f;width:max-content}.lighting-controls{flex-wrap:wrap}#debug pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:360px}

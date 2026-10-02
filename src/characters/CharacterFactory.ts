@@ -9,10 +9,11 @@ import { hairAssetPath } from '../character-lab/GeneratedHair';
 /** Cached immutable sources; every create call owns its skeleton, mixer and materials. */
 export class CharacterFactory {
     private sources=new Map<string,Promise<GLTF>>();
+    private ready=new Map<string,GLTF>();
     constructor(private load:(path:string)=>Promise<GLTF>=path=>new GLTFLoader().loadAsync(path)){}
     private asset(path:string){
         let pending=this.sources.get(path);
-        if(!pending){pending=this.load(path).catch(error=>{this.sources.delete(path);throw error;});this.sources.set(path,pending);}
+        if(!pending){pending=this.load(path).then(asset=>{this.ready.set(path,asset);return asset;}).catch(error=>{this.sources.delete(path);throw error;});this.sources.set(path,pending);}
         return pending;
     }
     async create(dna:CharacterDNA,lod:number,hair=true){
@@ -21,7 +22,13 @@ export class CharacterFactory {
         if(appearance)appearance.scene.userData.referenceAsset={style:profile.appearance.hairStyle,path,provenance:path!.replace('.glb','.provenance.json')};
         return new UniversalHuman(body,profile,generatePhenotype(dna).skinTone,appearance?.scene??null);
     }
-    async createWorld(dna:CharacterDNA){return new WorldCharacter(await this.create(dna,2,false),()=>this.create(dna,1,false),dna.seed);}
+    async createWorld(dna:CharacterDNA){await this.asset('/universal-human/UniversalHuman_LOD2.glb');return this.createWorldReady(dna);}
+    /** Annual respawns reuse the already-loaded source, so there is no empty slot while fetching. */
+    createWorldReady(dna:CharacterDNA){
+        const source=this.ready.get('/universal-human/UniversalHuman_LOD2.glb');
+        if(!source)throw new Error('Load the world body before synchronous respawn.');
+        return new WorldCharacter(new UniversalHuman(source,universalHumanProfile(dna),generatePhenotype(dna).skinTone),()=>this.create(dna,1,false),dna.seed,dna);
+    }
 }
 export const characterFactory=new CharacterFactory();
 
@@ -34,15 +41,20 @@ export class WorldCharacter {
     private disposed=false;
     lod=2;
     state:HumanAnimation='Idle';
-    constructor(body:UniversalHuman,private close:()=>Promise<UniversalHuman>,seed:number){
+    constructor(body:UniversalHuman,private close:()=>Promise<UniversalHuman>,seed:number,private dna:CharacterDNA|null=null){
         this.models.set(2,body);this.root.add(body.root);this.root.userData.character={seed,state:this.state,lod:this.lod};
     }
     setMovementSpeed(speed:number){this.setState(movementState(speed));}
+    applyDNA(dna:CharacterDNA){
+        // Preserve the reference captured by the close-LOD loader.
+        if(this.dna)Object.assign(this.dna,dna);else this.dna=dna;
+        for(const model of this.models.values())model.apply(universalHumanProfile(dna),generatePhenotype(dna).skinTone);
+    }
     setState(state:HumanAnimation){if(this.state!==state){this.state=state;this.models.get(this.lod)!.setAnimation(state);}}
     update(delta:number,distance:number){
         const desired=worldLOD(distance,this.lod);
         if(desired===1&&!this.models.has(1)&&!this.pending&&!this.disposed){
-            this.pending=this.close().then(model=>{if(this.disposed){model.dispose();return;}this.models.set(1,model);model.root.visible=false;this.root.add(model.root);}).catch(error=>{console.error('Close character LOD failed',error);}).finally(()=>{this.pending=null;});
+            this.pending=this.close().then(model=>{if(this.disposed){model.dispose();return;}if(this.dna)model.apply(universalHumanProfile(this.dna),generatePhenotype(this.dna).skinTone);this.models.set(1,model);model.root.visible=false;this.root.add(model.root);}).catch(error=>{console.error('Close character LOD failed',error);}).finally(()=>{this.pending=null;});
         }
         if(desired!==this.lod&&this.models.has(desired)){
             this.models.get(this.lod)!.root.visible=false;this.lod=desired;
