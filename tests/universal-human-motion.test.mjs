@@ -156,7 +156,8 @@ test('LOD2 reference surfaces fit the actual skull, including triangle interiors
                 else copies.set(key,i);
             }
             for(let t=0;t<count;t+=3){const vertices=[0,1,2].map(k=>new Vector3().fromBufferAttribute(position,index?index.getX(t+k):t+k));
-                for(const weights of [[1/3,1/3,1/3],[.5,.5,0],[.5,0,.5],[0,.5,.5]]){
+                const samples=[];for(let a=0;a<=7;a++)for(let b=0;b<=7-a;b++)samples.push([a/7,b/7,(7-a-b)/7]);
+                for(const weights of samples){
                     const p=new Vector3();vertices.forEach((v,k)=>p.addScaledVector(v,weights[k]));
                     if(p.y>=-size.y*.45)assert.ok(gap(p)>.002,`${style} triangle ${t/3} cuts through the head: ${gap(p)}`);
                 }
@@ -168,6 +169,9 @@ test('LOD2 reference surfaces fit the actual skull, including triangle interiors
     const group=appearanceModules({hairStyle:'short',beardStyle:'stubble',color:'#986e55',greyAmount:0},size,2,undefined,null,skull,beard.scene);
     group.traverse(mesh=>{if(!mesh.isMesh)return;const p=mesh.geometry.attributes.position;
         for(let i=0;i<p.count;i++)assert.ok(Math.abs(gap(new Vector3().fromBufferAttribute(p,i))-.003)<1e-6,'stubble must stay 3mm from the actual skull');
+        for(let i=0;i<p.count;i+=3){const centre=new Vector3();for(let k=0;k<3;k++)centre.add(new Vector3().fromBufferAttribute(p,i+k));centre.multiplyScalar(1/3);
+            assert.ok(gap(centre)>0,'stubble face must remain outside the skull, not only its corners');
+        }
     });disposeModules(group);
 });
 

@@ -1,4 +1,4 @@
-import { Group, Material, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } from 'three';
+import { BufferGeometry, Float32BufferAttribute, Group, Material, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } from 'three';
 import { ConvexHull } from 'three/addons/math/ConvexHull.js';
 import { CharacterAppearance } from '../characters/CharacterAppearance';
 import { AppearanceFit } from '../characters/CharacterDNA';
@@ -10,6 +10,8 @@ import { referenceHeadFrames } from './ReferenceHeadFrames';
 function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:number){
     const positions=mesh.geometry.attributes.position,index=mesh.geometry.index;
     const count=index?.count??positions.count;
+    const samples:number[][]=[];
+    for(let a=0;a<=6;a++)for(let b=0;b<=6-a;b++)samples.push([a/6,b/6,(6-a-b)/6]);
     // Flat normals/UV seams duplicate vertices in GLB. Move coincident copies
     // together, otherwise the fit operation tears adjacent hair triangles apart.
     const groups=new Map<string,number[]>(),shared:number[][]=[];
@@ -23,7 +25,7 @@ function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:num
             const ids=[0,1,2].map(k=>index?index.getX(triangle+k):triangle+k);
             const points=ids.map(id=>new Vector3().fromBufferAttribute(positions,id));
             let deficit=0;
-            for(const weights of [[1/3,1/3,1/3],[.5,.5,0],[.5,0,.5],[0,.5,.5]]){
+            for(const weights of samples){
                 const p=new Vector3();points.forEach((v,k)=>p.addScaledVector(v,weights[k]));
                 if(p.y<minY||p.length()<1e-8)continue;
                 const direction=p.clone().normalize();let radius=Infinity;
@@ -34,6 +36,22 @@ function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:num
         }
         if(!changed)break;
     }
+}
+
+// Retessellate the reference stubble before wrapping it onto the fixed skull.
+// Large flat source faces otherwise disappear inside the head between vertices.
+function subdivideStubble(mesh:Mesh){
+    let geometry=mesh.geometry.toNonIndexed();
+    for(let pass=0;pass<2;pass++){
+        const p=geometry.attributes.position,vertices:number[]=[];
+        for(let i=0;i<p.count;i+=3){
+            const a=new Vector3().fromBufferAttribute(p,i),b=new Vector3().fromBufferAttribute(p,i+1),c=new Vector3().fromBufferAttribute(p,i+2);
+            const ab=a.clone().add(b).multiplyScalar(.5),bc=b.clone().add(c).multiplyScalar(.5),ca=c.clone().add(a).multiplyScalar(.5);
+            for(const v of [a,ab,ca,ab,b,bc,ca,bc,c,ab,bc,ca])vertices.push(v.x,v.y,v.z);
+        }
+        geometry.dispose();geometry=new BufferGeometry();geometry.setAttribute('position',new Float32BufferAttribute(vertices,3));
+    }
+    mesh.geometry.dispose();mesh.geometry=geometry;
 }
 
 /** Reference-generated geometry only. An unavailable module stays absent. */
@@ -53,6 +71,7 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
             if(!(object as Mesh).isMesh)return;
             const mesh=object as Mesh;mesh.geometry=mesh.geometry.clone();
             mesh.geometry.applyMatrix4(mesh.matrixWorld);mesh.position.set(0,0,0);mesh.quaternion.identity();mesh.scale.set(1,1,1);
+            if(profile.beardStyle==='stubble')subdivideStubble(mesh);
             // Scale around the jaw attachment, keeping the upper edge in place.
             const position=mesh.geometry.attributes.position,anchor=new Vector3(0,-.045,.065).multiplyScalar(scale);
             for(let i=0;i<position.count;i++){
@@ -98,6 +117,18 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
             p.addScaledVector(p.clone().normalize(),clearance);positions.setXYZ(i,p.x,p.y,p.z);
         }
         if(hull)clearSkullTriangles(mesh,hull,-size.y*.45,.004+clearance);
+        if(profile.hairStyle==='long'){
+            // The generated bust left a small central chin fragment in the hair
+            // extraction. Keep the side locks and the back of the hairstyle.
+            const index=mesh.geometry.index,kept:number[]=[],count=index?.count??positions.count;
+            for(let i=0;i<count;i+=3){
+                const ids=[0,1,2].map(k=>index?index.getX(i+k):i+k),centre=new Vector3();
+                for(const id of ids)centre.add(new Vector3().fromBufferAttribute(positions,id));centre.multiplyScalar(1/3);
+                if(Math.abs(centre.x)<size.x*.24&&centre.y<-size.y*.32&&centre.z>size.z*.16)continue;
+                kept.push(...ids);
+            }
+            mesh.geometry.setIndex(kept);
+        }
         mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();mesh.castShadow=true;
     });
     group.add(hair);return group;
