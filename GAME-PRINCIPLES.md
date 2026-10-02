@@ -1,6 +1,6 @@
 # Pillagers — Game principles
 
-This document records lasting game-design decisions for future Codex work. Read it before changing the calendar, persona ages, seasonal presentation or time-related UI. Implementation details and the current prototype belong in the feature documentation.
+This document records lasting game-design decisions for future Codex work. Read it before changing the calendar, persona ages, seasonal presentation, lore or time-related UI. Implementation details and the current prototype belong in the feature documentation.
 
 ## GP-001 — Time is experienced through seasons and winters
 
@@ -15,6 +15,20 @@ Age remains a numeric value internally. “Winters” is the player-facing wordi
 Apply this principle consistently in world HUDs, persona profiles, annual summaries, Character Lab and other player-facing age or date labels. Average ages also use winters.
 
 The world should communicate the recurring seasonal cycle. Regional historical practices may inspire the setting, but do not present a single reconstructed calendar as universal to all Vikings. Any further seasonal mechanics need their own design decision.
+
+## GP-002 — Lore tells only what actually happened
+
+The village's stories must come exclusively from actual, recorded game events. Norse oral storytelling inspires language and rhythm; it never authorizes invented or altered facts. This is an approved design constraint, not yet implemented.
+
+The simulation maintains an authoritative event ledger with stable event and persona IDs, chronological game time, event-time identity snapshots and recorded outcomes. AI cannot create source events, mutate facts or invent dialogue, motives, witnesses, causes or consequences. Unknown details remain unknown. Model replacement is not automatically a birth or death.
+
+Every chronicle entry must reference its source event IDs. Preserve the ledger and stories with the world's save lifecycle and keep separate sessions separate. A quiet year needs no invented drama.
+
+To enforce the strict factual requirement, AI may select recorded events and approved narrative templates; code validates the selection and fills factual fields directly from the ledger. Unrestricted AI prose with a second model checking it does not provide this guarantee. Use deterministic factual fallback when output is invalid or AI is unavailable.
+
+Style can use rhythm, repetition and alliteration without adding factual claims. Embellished legends, invented rumours and personality-based assumptions about motives are outside this principle. Stories do not automatically change reputation, relationships or other gameplay state.
+
+Implementation task: [GitHub lore issue](https://github.com/sidesliders1983/Pillagers/issues/14).
 
 ## Scope and implementation status
 
@@ -34,8 +48,7 @@ These are proposals, not requirements for Codex to implement automatically:
 - Seasonal celebrations, with region-specific historical research before selecting names or dates.
 - Narrative time expressions such as “after the harvest” and “three winters ago”.
 - A visual moon cycle, with day/night timing distinct from the compressed annual cycle.
-- An annual chronicle of supported births, deaths, arrivals and other settlement events.
 
 ## Maintaining these principles
 
-When implementing time-related features, check them against GP-001 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features or lore, check them against GP-001 and GP-002 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
