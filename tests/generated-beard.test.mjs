@@ -12,6 +12,7 @@ test('all reference beards have verified provenance, owned geometry and the prof
   const path=beardAssetPath(style,lod),bytes=readFileSync(new URL(`../public${path}`,import.meta.url));
   const record=JSON.parse(readFileSync(new URL(`../public${path.replace('.glb','.provenance.json')}`,import.meta.url)));
   assert.equal(record.outputSha256,createHash('sha256').update(bytes).digest('hex'));
+  assert.equal(new URL(path,'https://local.test').searchParams.get('v'),record.outputSha256.slice(0,12));
   assert.equal(record.reviewRequired,false);
   assert.ok(record.removedSmallComponentVertices>=0);
   const asset=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
