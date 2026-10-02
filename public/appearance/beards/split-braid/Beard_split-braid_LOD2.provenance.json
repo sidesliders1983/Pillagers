@@ -1,0 +1,117 @@
+{
+  "reviewRequired": false,
+  "style": "split-braid",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\split-braid\\lod2-1400\\Beard_split-braid_LOD2.glb",
+  "sourceSha256": "f82cf584f02c5fed2db003ce48898eca5ef249ad54f455700a06fabd998a7d10",
+  "outputSha256": "5ccce2435442e1893bf064616dbf3d22d1d606b0d55a13484ac8bc4bd59ed9cc",
+  "fit": {
+    "sourceSkullCentre": [
+      0,
+      0,
+      0.075
+    ],
+    "scale": 0.52,
+    "rotateBlenderZ": 180,
+    "headReferenceSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "removedSmallComponentVertices": 225,
+  "fragmentAreaThreshold": 0.015,
+  "sourceProvenance": {
+    "generatedBust": {
+      "reference": {
+        "id": "split-braid",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          860,
+          485,
+          1054,
+          752
+        ],
+        "inputSha256": "169a2a287230e63c90d084821f359414cb26d86aa3839a741a305d062424c39c",
+        "redrawn": false,
+        "reviewRequired": true,
+        "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\split-braid",
+        "jobId": "beards-v03/split-braid"
+      },
+      "reviewRequired": true,
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\split-braid\\reference.png",
+          "sha256": "fc3ac494bfbabf74b78310fdacd91b2eced1700c333f5c8e0019e081f62648f7"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\split-braid\\generated.glb",
+          "sha256": "9536c2535ea91dc4008aed7421e80039604ede6f2c7d0cb9b42b541e7daf77d7"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10.0,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 3113.5
+        }
+      },
+      "outputSha256": "9536c2535ea91dc4008aed7421e80039604ede6f2c7d0cb9b42b541e7daf77d7",
+      "matte": {
+        "model": "birefnet-general-lite",
+        "sourceSha256": "169a2a287230e63c90d084821f359414cb26d86aa3839a741a305d062424c39c",
+        "inputSha256": "fc3ac494bfbabf74b78310fdacd91b2eced1700c333f5c8e0019e081f62648f7",
+        "redrawn": false
+      }
+    },
+    "style": "split-braid",
+    "outputSha256": "de56ec6304b811a147c167f2d3d0d6ded631395ce6738bf6d7e1685265efd0f3",
+    "extraction": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\split-braid\\generated.glb",
+      "selectedFaces": 148029,
+      "fraction": 0.1575446998722861,
+      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+      "reviewRequired": true
+    },
+    "reviewRequired": true
+  },
+  "visualReview": {
+    "ages": [
+      35,
+      70
+    ],
+    "animations": [
+      "Idle",
+      "Walk",
+      "Run"
+    ],
+    "lods": [
+      2
+    ],
+    "fitRatios": [
+      1,
+      1.5
+    ],
+    "screenshots": [
+      "artifacts/generated-beard-split-braid-age35-LOD2.png",
+      "artifacts/generated-beard-split-braid-age70-LOD2.png"
+    ]
+  },
+  "runtimeFit": {
+    "cheekAttachment": "fixed head convex hull",
+    "sizeGrowth": "free beard only; cheek attachment fixed"
+  }
+}
