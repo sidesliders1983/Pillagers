@@ -1,0 +1,89 @@
+{
+  "style": "braid",
+  "lod": 1,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\braid\\lods-retry-20261002\\Hair_braid_LOD1.glb",
+  "sourceSha256": "5659d5dfdb905ead94abefe36b4048dc41498d529ee53ad4e6aaa2df048f3330",
+  "outputSha256": "5b27a4a4d084675db04b6d2398bdb0efd8e07c5f15bd90d6a7c2d91e53430cb6",
+  "fit": {
+    "sourceSkullCentre": [
+      0,
+      0,
+      0.075
+    ],
+    "scale": 0.52,
+    "rotateBlenderZ": 180,
+    "headReferenceSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "removedSmallComponentVertices": 1213,
+  "sourceProvenance": {
+    "generatedBust": {
+      "reference": {
+        "style": "braid",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          1025,
+          30,
+          1249,
+          335
+        ],
+        "matte": "birefnet-general-lite",
+        "input": "scratch\\appearance-v02\\braid\\reference.png",
+        "inputSha256": "7d630a48491b4b51e87dcc7aa818d617f21c58c40be2e0c03c37ce88be2913de",
+        "redrawn": false
+      },
+      "backend": "pixal3d",
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\braid\\reference.png",
+          "sha256": "7d630a48491b4b51e87dcc7aa818d617f21c58c40be2e0c03c37ce88be2913de"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\braid\\generated.glb",
+          "sha256": "53fe572dcce00df5e8f3cfeea3a55aa72140c22ebebf44fb2fd8f52124d4c990"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10.0,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 3687.1
+        }
+      },
+      "reviewRequired": true,
+      "output": {
+        "sha256": "53fe572dcce00df5e8f3cfeea3a55aa72140c22ebebf44fb2fd8f52124d4c990",
+        "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\braid\\generated.glb"
+      }
+    },
+    "backend": "pixal3d",
+    "reviewRequired": true,
+    "extraction": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\braid\\generated.glb",
+      "selectedFaces": 404048,
+      "fraction": 0.4116537140202379,
+      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+      "reviewRequired": true
+    },
+    "output": {
+      "sha256": "09d725174fe31f554de34ddb267a3b2d8e7f994961816c75290c01050ce769cb",
+      "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\braid\\hair-candidate.glb"
+    }
+  }
+}

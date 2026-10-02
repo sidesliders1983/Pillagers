@@ -63,7 +63,7 @@ test('reference hair is owned, tinted and offset for clearance; pending styles h
     const {createHash}=await import('node:crypto');
     const {appearanceModules,disposeModules}=load('../src/character-lab/AppearanceModules.ts');
     const size=new Vector3(.1992,.2397,.2189),delta=.1992*.5*.3;
-    for(const hairStyle of ['short','medium'])for(const lod of [0,1,2]){
+    for(const hairStyle of ['short','medium','long','tied','bun','braid'])for(const lod of [0,1,2]){
         const bytes=readFileSync(new URL(`../public/appearance/${hairStyle}/Hair_${hairStyle}_LOD${lod}.glb`,import.meta.url));
         const provenance=JSON.parse(readFileSync(new URL(`../public/appearance/${hairStyle}/Hair_${hairStyle}_LOD${lod}.provenance.json`,import.meta.url)));
         assert.equal(provenance.outputSha256,createHash('sha256').update(bytes).digest('hex'));
