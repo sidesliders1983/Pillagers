@@ -8,7 +8,8 @@ const {universalHumanProfile}=load('../src/characters/UniversalHumanProfile.ts')
 const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-webgl']});
 const examples=[defaultDNA(),{seed:1885184954,sex:'male',age:20,traits:{physicality:.78,agility:.57,intelligence:.12,cunning:.2,temperament:.71},heritage:{scandinavian:.028440025880589824,angloSaxon:.23439964981313144,gaelic:.1594962292471368,finnic:.17366774106331118,sami:.17360313309252673,baltic:.23039322090330414}},
  {...defaultDNA(),seed:847867552,age:72,morphology:{masculinity:.49,height:1.43}},
- {...defaultDNA(),seed:778694923,age:35,morphology:{masculinity:.51,height:1.43}}];
+ {...defaultDNA(),seed:778694923,age:35,morphology:{masculinity:.51,height:1.43}},
+ {...defaultDNA(),seed:1790970597,sex:'female',age:35,morphology:{masculinity:.04,height:1.34},heritage:{scandinavian:.2,angloSaxon:.15,gaelic:.1,finnic:.37,sami:.08,baltic:.1}}];
 try {
  for(const mobile of [false,true]){
   const page=await browser.newPage({viewport:mobile?{width:390,height:844}:{width:1200,height:1000}});page.setDefaultTimeout(120000);
@@ -21,13 +22,14 @@ try {
   await page.goto('http://127.0.0.1:4175/character-lab');await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true');
   await page.locator('.lab-json > summary').click();
   const profiles=[...examples];
-  if(!mobile)for(const kind of ['hair','beard'])for(const style of kind==='hair'?['short','medium','long','tied','bun','braid']:['stubble','short','medium','long','split-braid','braid']){
+  if(!mobile&&!process.env.APPEARANCE_EXAMPLES_ONLY)for(const kind of ['hair','beard'])for(const style of kind==='hair'?['short','medium','long','tied','bun','braid']:['stubble','short','medium','long','split-braid','braid']){
    for(let seed=0;seed<10000;seed++){
     const dna={...defaultDNA(),seed,age:45,morphology:{masculinity:.77,height:1.5}};
     if(universalHumanProfile(dna).appearance[kind+'Style']===style){profiles.push(dna);break;}
    }
   }
   for(let n=0;n<profiles.length;n++){
+   if(process.env.APPEARANCE_REVIEW_SEEDS&&!process.env.APPEARANCE_REVIEW_SEEDS.split(',').includes(String(profiles[n].seed)))continue;
    if(process.env.APPEARANCE_REVIEW_STYLE&&universalHumanProfile(profiles[n]).appearance.hairStyle!==process.env.APPEARANCE_REVIEW_STYLE)continue;
    await page.locator('#lab-json').fill(JSON.stringify(profiles[n]));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();
    await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true');
