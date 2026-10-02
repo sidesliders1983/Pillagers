@@ -1,30 +1,31 @@
 # Pillagers — Core Gameplay Principles v0.1
 
-> **Status:** Canonical gameplay foundation
+> **Status:** Canonical gameplay foundation  
+> **Last aligned with GAME-PRINCIPLES.md:** 2026-10-02
 >
-> This document defines the core gameplay contract for Pillagers. Individual mechanics may evolve, but new systems should support these principles rather than work around them.
+> This document defines the core gameplay contract for Pillagers. Individual mechanics may evolve, but new systems should reinforce these principles rather than work around them.
 >
-> The intended development approach is to build these systems **layer by layer**, validating each layer before adding the next.
+> `GAME-PRINCIPLES.md` is the authority for approved cross-cutting decisions such as calendar wording, lore constraints, platform direction and settlement terminology. This document explains how those decisions fit together as gameplay.
 
 ---
 
 # 1. Core fantasy
 
-Pillagers is a **living-clan build simulation with RTS elements**.
+Pillagers is a **generational settlement simulation with RTS elements**.
 
 The player begins with a small Viking / North Sea-inspired community and guides it across multiple generations into a powerful regional realm.
 
-The world is not made of disposable RTS units. Every persona is an individual with:
+The world is not made of disposable RTS units. Every resident is an individual with a persistent identity, including some combination of:
 
-- a name;
+- name;
 - age;
 - sex;
 - DNA / inherited traits;
 - appearance;
 - personality traits;
 - family relationships;
-- partner / household relationships;
-- occupation and skills;
+- partner and household relationships;
+- occupation, skills and experience;
 - personal history;
 - loyalties and social connections.
 
@@ -32,90 +33,100 @@ The central fantasy is:
 
 > **Build a people, not an army.**
 
-Characters should matter during their own lifetime and through the generations that follow them.
+Residents should matter during their own lifetime and through the generations that follow them.
 
 Conceptually:
 
 ```text
-people
-→ families
-→ clan
+residents
+→ households and families
+→ community
 → settlement
 → multiple settlements
 → realm
 ```
 
+A **clan** is not the default synonym for settlement or community. If clan/tribe structures are introduced later, they should be modelled explicitly as kinship or political structures.
+
 ---
 
-# 2. Ultimate objective
+# 2. Approved terminology
+
+Use these terms consistently in player-facing design:
+
+| Concept | Dutch | English | Meaning |
+|---|---|---|---|
+| Physical place | Nederzetting | Settlement | Homes, farms, workshops, landing sites and defenses |
+| Social group | Gemeenschap | Community | The people belonging to a social group, whether or not every member is currently resident |
+| Individual | Bewoner | Resident | A person living in a settlement; no automatic implication of combat, kinship or rank |
+| Domestic unit | Huishouden | Household | People sharing a domestic/economic unit |
+| Kinship | Familie / verwantschapsgroep | Family / kin group | A relationship structure distinct from settlement and household |
+
+`Persona` remains useful development vocabulary, but **resident** is the preferred player-facing term.
+
+---
+
+# 3. Ultimate objective
 
 The long-term campaign objective is:
 
-> **Grow a small clan into the dominant realm and ultimately unite the region under its rule.**
+> **Grow a small community into the dominant regional realm and ultimately unite the region under its rule.**
 
 Working end-state concept:
 
 > **Unify the Realm**
 
-The final political expression may eventually be recognition of the player's realm / current chief as the dominant regional authority, for example a High Chief or High King.
+The final political expression may eventually be recognition of the player's current ruler as the dominant regional authority, for example a High Chief or High King.
 
-Control of the region does **not** require every rival community to be destroyed.
-
-A rival clan or settlement may become part of the player's realm through:
+Regional control does not require every rival community to be destroyed. Other communities may become part of the player's realm through combinations of:
 
 - conquest;
 - annexation;
 - submission;
-- tribute / vassalage;
+- tribute or vassalage;
 - alliance;
 - political marriage;
 - gradual integration.
 
-This gives combat, prosperity, diplomacy, lineage and settlement growth a common purpose.
+Prosperity, conquest and influence are therefore **routes toward one shared objective**, not separate victory games.
 
 ---
 
-# 3. Failure condition
+# 4. Failure condition
 
-A chief dying is **not** game over.
+The death of the current chief is **not** game over.
 
-A settlement being lost is **not automatically** game over.
+The loss of the original settlement is **not automatically** game over.
 
-The campaign ends when the player's clan / realm can no longer meaningfully continue: there is no surviving community, successor or recoverable clan structure left under the player's control.
+The campaign ends only when the player's people can no longer meaningfully continue as a recoverable community/realm: there is no surviving controlled community, viable successor structure or path back to continuity.
 
-This allows major setbacks and comeback stories.
-
-A realm may collapse back into a tiny surviving settlement and continue.
+This deliberately allows collapse-and-recovery stories.
 
 ---
 
-# 4. The player's role
+# 5. The player's role
 
-The player is **not an omnipotent god controlling every human action**.
+The player is not an omnipotent god controlling every human action and is not limited to directly controlling one physical character.
 
-The player is best understood as:
+The intended framing is:
 
-> **The enduring will of the clan, expressed through its current chief.**
+> **The player is the enduring will of their people, expressed in-world through the current chief.**
 
-The current chief is a real simulated persona:
+The current chief is a real simulated resident:
 
-- born from the same character system;
+- generated from the same character system;
 - has DNA and traits;
-- has parents, children and relatives;
-- forms relationships;
-- has an occupation / role;
-- ages;
-- can fight;
+- has family and relationships;
+- has age and history;
+- can work and fight;
 - can be injured or killed;
 - eventually dies.
 
-When the chief dies, leadership passes to a successor rather than ending the campaign.
-
-The player therefore persists across generations while the in-world authority of the player is represented by the current leader.
+When the chief dies, leadership passes through succession rather than ending the campaign.
 
 ## What the player controls directly
 
-The player's strongest direct agency should be at **strategic and community level**:
+The player's strongest agency is strategic and communal:
 
 - building placement and upgrades;
 - settlement priorities;
@@ -125,13 +136,14 @@ The player's strongest direct agency should be at **strategic and community leve
 - manual occupation assignment;
 - military mobilization and objectives;
 - important diplomatic decisions;
-- prisoner / defeated-enemy policy;
-- selected high-impact marriage or succession decisions;
-- broad cultural / community policies later.
+- captive / defeated-enemy policy;
+- selected high-impact marriage decisions;
+- succession influence where the culture allows it;
+- broad policies later.
 
 ## What the player normally does not control directly
 
-The player should not need to manually control:
+The player should not need to manually choose:
 
 - every movement;
 - every meal;
@@ -148,111 +160,66 @@ The desired feeling is:
 
 ---
 
-# 5. Core interaction principle
+# 6. Core interaction principle
 
 ## Autonomous by default, controllable by choice
 
-This is the main interaction rule for Pillagers.
+> **The simulation should make sensible decisions on its own, while the player may intervene where a decision matters to them.**
 
-> **The simulation should make sensible decisions on its own, but the player may intervene where the decision matters to them.**
-
-The player should never be forced to micromanage every character simply to keep the settlement functional.
-
-At the same time, autonomy must not make the player feel like a spectator.
+A community must remain functional without constant micromanagement, but autonomy must never make the player a passive observer.
 
 Examples:
 
 ### Occupations
 
-Default:
-
 ```text
 community detects demand
-→ evaluates available people
-→ assigns suitable occupations
+→ evaluates available residents
+→ assigns suitable work automatically
 ```
 
-Player intervention:
-
-```text
-select persona
-→ assign / change occupation manually
-```
+The player can override a specific resident's primary occupation.
 
 ### Relationships
 
-Default:
-
 ```text
-people meet
+residents encounter one another
 → familiarity develops
 → compatibility / attraction develops
-→ relationships form
-→ households emerge
+→ relationships may form
+→ households may emerge
 ```
 
-Player intervention may later include:
+The player normally does not pair every couple, but can later influence important political/dynastic matches.
 
-- arranging strategically important matches;
-- encouraging political marriages;
-- relocating households;
-- influencing social opportunities;
-- defining cultural marriage rules.
+### Economy and construction
 
-### Settlement economy
-
-Default:
-
-```text
-workers perform their occupations
-→ resources flow through the settlement
-→ community demand influences future work allocation
-```
-
-Player intervention:
-
-- choose buildings and projects;
-- establish priorities;
-- change production focus;
-- assign important specialists.
+The player sets intent and priorities; residents carry out the work.
 
 ### War
 
-Default:
+Residents live ordinary lives until mobilized. The player forms warbands, chooses objectives and decides strategic outcomes.
 
-Characters live ordinary lives until mobilized.
-
-Player intervention:
-
-- form a warband;
-- choose participants where desired;
-- choose target;
-- issue strategic / tactical orders;
-- decide what happens after victory.
-
-This rule should scale from a community of 15 people to a realm of hundreds without requiring exponentially more clicks.
+This principle must still work when the population grows from a few dozen residents to hundreds.
 
 ---
 
-# 6. The three core gameplay pillars
+# 7. Three core gameplay pillars
 
 All major mechanics should primarily strengthen one or more of these pillars.
 
 ## A. Sim Life
 
-Individuals are born, grow up, form relationships, contribute to the community, age and die.
+Residents are born, grow up, form relationships, contribute to their community, age and die.
 
-The settlement continually renews itself through generations.
-
-Core systems:
+Core systems include:
 
 - birth and childhood;
 - aging;
 - matchmaking / relationships;
 - households;
 - reproduction;
-- occupation assignment;
-- skills / aptitude;
+- occupation and skill development;
 - social relationships;
 - inheritance / DNA;
 - death;
@@ -260,35 +227,32 @@ Core systems:
 
 ## B. Community Building
 
-The player grows and organizes settlements into a functioning society.
+The player grows settlements into a functioning society.
 
-Core systems:
+Core systems include:
 
 - housing;
-- construction;
-- building upgrades;
+- construction and upgrades;
 - food and resources;
-- occupations;
+- occupations and tasks;
 - production chains;
 - community needs;
 - defense;
 - exploration;
 - expansion;
 - new settlements;
-- trade / exchange.
+- trade and exchange.
 
 ## C. Conflict, Conquest & Integration
 
-Communities compete for land, people and resources.
+Communities compete for people, land and resources.
 
-Core systems:
+Core systems include:
 
 - raids;
-- combat;
-- defense;
+- combat and defense;
 - settlement attacks;
-- destruction;
-- conquest;
+- destruction and conquest;
 - surrender;
 - captives;
 - slavery;
@@ -298,25 +262,13 @@ Core systems:
 - tribute / submission;
 - alliances and diplomacy.
 
-The important principle is that defeated people remain **people**, not simply loot values.
-
-A former enemy may later become:
-
-- a slave;
-- a worker;
-- a spouse;
-- a respected craftsperson;
-- a warrior;
-- a parent of future clan members;
-- a source of resentment or rebellion.
-
-Conflict therefore changes the population itself.
+Defeated people remain **people**, not loot values.
 
 ---
 
-# 7. Persona lifecycle
+# 8. Resident lifecycle
 
-Every person belongs to the same generational simulation.
+Every resident belongs to the same generational simulation.
 
 Conceptual lifecycle:
 
@@ -331,46 +283,51 @@ birth
 → death
 ```
 
-The exact age boundaries can be tuned, but all systems should treat age as meaningful state rather than cosmetic data.
+Player-facing age is expressed in **winters**.
+
+Examples:
+
+```text
+1 winter old
+32 winters old
+```
+
+Internally, age remains numeric.
 
 ---
 
-# 8. Birth and early childhood
+# 9. Birth and early childhood
 
-Characters exist in the simulation from birth.
-
-For performance and asset-scope reasons, very young children do not need to exist as full world agents.
+Residents exist in the simulation from birth even when they are not rendered as independent 3D agents.
 
 Current intended model:
 
 ```text
 Age 0–4/5
 → household child
-→ exists in population / DNA / family simulation
-→ consumes food
+→ exists in family/population data
+→ consumes resources
 → occupies household capacity
 → linked to parents
-→ does not require a visible autonomous 3D persona
+→ no independent world agent required
 
 Age 5+
-→ visible simulated child persona
-→ enters the world using the Character Lab / universal character pipeline
+→ visible simulated child resident
+→ uses the universal Character Lab / world character pipeline
 ```
 
-The Character Lab currently supports approximately age 5–6 and upward. The exact visible-child threshold can remain configurable while that system develops.
-
-Young children should therefore still matter economically and genealogically even while they are not rendered as independent agents.
+The exact visible-child threshold remains configurable while the character system develops.
 
 ---
 
-# 9. Matchmaking, households and reproduction
+# 10. Matchmaking, households and reproduction
 
-Matchmaking should primarily be **emergent**, not manually managed by the player.
+Matchmaking is primarily **emergent**.
 
-Eligible personas naturally encounter one another through:
+Residents can encounter one another through:
 
 - settlement proximity;
-- occupations;
+- work and tasks;
 - family networks;
 - social events;
 - shared activities;
@@ -389,9 +346,7 @@ Compatibility may eventually be influenced by:
 - existing relationships;
 - personal history.
 
-For biological reproduction, compatible male/female adults can form child-bearing partnerships, subject to kinship and fertility rules.
-
-Relationships should develop over time rather than instantly.
+Relationships should develop over time rather than appearing instantly.
 
 Simplified flow:
 
@@ -400,77 +355,86 @@ meet
 → familiarity
 → compatibility / attraction
 → partnership
-→ shared household
+→ household
 → possible children
 ```
 
-Children inherit traits through the DNA system.
+For biological reproduction, compatible male/female adults can form child-bearing partnerships subject to kinship and fertility rules.
 
-The important gameplay outcome is that population growth creates **families and bloodlines**, not anonymous new villagers.
+Children inherit from existing residents through the DNA system. Population growth therefore creates **families and bloodlines**, not anonymous villagers.
 
-## Player influence over matchmaking
+## Player influence
 
-The player should normally **not** choose every couple.
-
-However, high-impact relationships may be influenced or arranged, especially for:
+The player should not choose every match. Intervention is reserved for high-impact cases such as:
 
 - alliances;
 - succession;
 - important families;
-- diplomatic marriages;
-- integration of other clans.
-
-This preserves the autonomy of ordinary life while giving the player control over strategically meaningful relationships.
+- political marriages;
+- integration between communities.
 
 ---
 
-# 10. Households
+# 11. Households, caregiving and work availability
 
-Households are the bridge between family simulation and settlement building.
+Households bridge family simulation and settlement building.
 
-A household can contain some combination of:
+A household may contain:
 
 - partners;
 - young children;
-- visible older children;
+- older children;
 - dependent relatives;
-- possibly servants / slaves later.
+- servants or enslaved people later.
 
-Housing therefore matters because it affects:
+Housing affects population capacity, family formation, childcare and settlement growth.
 
-- population capacity;
-- family formation;
-- reproduction;
-- childcare;
-- settlement expansion;
-- household stability.
+The simulation normally decides who lives together; the player supplies housing capacity and may later override exceptional cases.
 
-The player builds housing capacity, while the simulation normally determines who lives together.
-
-Direct household reassignment may be available as an override later, but should not be required for ordinary play.
+Pregnancy, infancy and caregiving can temporarily reduce a resident's availability for ordinary work. The architecture should therefore model **availability**, not permanent work/non-work categories based purely on sex.
 
 ---
 
-# 11. Family, caregiving and work
+# 12. Occupations, skills, tasks and roles
 
-Family life and occupations should interact.
+Occupations connect individual residents to the settlement economy, but an occupation is **not an immutable class**.
 
-Pregnancy, infancy and caregiving can temporarily reduce a persona's availability for ordinary occupation work.
+The approved model is:
 
-Initial design direction:
+> **A resident has skills, performs tasks and may have a displayed primary occupation that summarizes their main skilled work.**
 
-- a mother with a very young household child may spend more time in household / caregiving state;
-- women without a partner or young-child caregiving responsibility can participate normally in the occupation pool;
-- as children become older and visible, caregiving pressure can reduce;
-- exact labour division should remain tunable and may later be influenced by culture rather than permanently hard-coded.
+A resident can help outside their primary occupation when circumstances require it.
 
-The architecture should therefore model **availability**, not simply classify characters as permanently working or non-working by sex.
+Examples:
 
----
+- a farmer can help with harvest, simple construction or defense;
+- a fisher can repair their own equipment;
+- a woodworker can contribute to building tasks;
+- a smith may be temporarily mobilized as a fighter;
+- seasonal workload can shift without permanently changing identity.
 
-# 12. Occupations
+## Approved initial occupations
 
-Occupations connect the individual simulation to the settlement economy.
+The first ten approved work categories are:
+
+1. **Farmer** — Boer / akkerbouwer
+2. **Livestock keeper / herder** — Veehouder / herder
+3. **Fisher** — Visser
+4. **Hunter** — Jager
+5. **Textile worker** — Textielmaker
+6. **Smith** — Smid
+7. **Woodworker** — Houtbewerker
+8. **Boatbuilder** — Bootbouwer
+9. **Trader** — Handelaar
+10. **Leather and jewellery maker** — Leer- en juwelenmaker
+
+These are approved gameplay categories, not a claim that they were the ten statistically most common historical occupations.
+
+`Warrior`, `raider`, `guard`, `builder`, `gatherer` and similar labels are **not part of the approved starting occupation set**. They may be temporary roles/tasks or become separately approved occupations later if the simulation needs them.
+
+Social status is also separate from occupation.
+
+## Occupation assignment
 
 The community continuously evaluates what work is needed.
 
@@ -478,652 +442,345 @@ Conceptually:
 
 ```text
 community demand
-× persona aptitude
-× DNA / physical traits
-× personality
-× existing skill
+× resident aptitude
+× core traits
+× existing skills / experience
 × age
 × availability
 × local opportunity
 → occupation preference / assignment
 ```
 
-Examples of community demand:
-
-- food shortage → more farmers / fishers / hunters;
-- construction backlog → more builders;
-- military threat → more warriors / guards;
-- resource discovery → miners / gatherers;
-- production bottleneck → specialist craftsperson.
-
-Characters should have different suitability for different jobs because of their traits, skills and experience.
-
-Occupation assignment should therefore not be purely random.
-
-## Automatic assignment
-
-If the player does nothing, the community should remain capable of organizing itself.
-
-Example:
+Examples:
 
 ```text
-Food need rises
-→ settlement evaluates available adults
-→ suitable persona becomes fisher
+food pressure
+→ demand rises for farmer / herder / fisher / hunter work
 ```
-
-## Manual assignment
-
-The player may explicitly override the automatic choice for an individual persona.
-
-Example:
 
 ```text
-community wants another farmer
-but player selects Einar
-→ Assign occupation: Blacksmith
+tool bottleneck
+→ demand rises for smith work
 ```
 
-This may be strategically better or worse depending on Einar's aptitude and the current needs of the settlement.
+```text
+housing or shipbuilding backlog
+→ demand rises for woodworker / boatbuilder capacity
+```
 
-This is a core example of **autonomous by default, controllable by choice**.
+```text
+clothing shortage
+→ demand rises for textile and leather work
+```
+
+```text
+external exchange opportunity
+→ demand rises for trader capacity
+```
+
+If the player does nothing, the community should organize itself. The player can manually override an individual resident's primary occupation.
+
+Poor aptitude must mean **less suitable**, never impossible.
 
 ## Occupation progression
 
-Later versions may allow experience, rank or mastery to accumulate over a lifetime.
+Repeated work should later create skill/mastery. Losing a highly experienced specialist should therefore matter economically and socially.
 
-A persona should ideally become more valuable in a profession through repeated work, creating a cost when a skilled individual dies or is pulled into war.
+Detailed purpose, tasks, inputs, outputs, workplace, tools, seasonal behavior and community demand for each of the ten occupations are intentionally defined in a separate occupation-mechanics layer.
+
+Research and approved terminology: `docs/VIKING-OCCUPATIONS-AND-TERMINOLOGY.md`.
 
 ---
 
 # 13. DNA must affect gameplay
 
-The DNA / character-generation system must not remain purely visual.
+Character DNA and core traits must not remain purely visual.
 
-Inherited traits should eventually influence probability and aptitude across systems such as:
+Inherited traits can influence probabilities and aptitude across systems such as:
 
 - occupation fit;
 - physical work;
-- combat;
+- combat performance;
+- learning;
 - social behavior;
 - leadership;
 - risk tolerance;
 - matchmaking compatibility;
-- skill development;
-- longevity / health where appropriate;
 - descendants.
 
-DNA should influence outcomes without making characters completely deterministic.
+Traits should influence outcomes without making characters deterministic.
 
-A strong persona may be well suited to combat but still become a farmer.
+The simulation combines:
 
-An intelligent persona may be well suited to specialist work but still develop differently because of opportunity, family or player intervention.
-
-The simulation should combine **nature, experience and circumstance**.
+> **nature + experience + opportunity + circumstance**
 
 ---
 
-# 14. Aging and generations
+# 14. Time and annual simulation heartbeat
 
-The simulation is generational by design.
-
-Current core time scale:
+The approved game calendar begins in:
 
 ```text
-1 real-time minute = 1 in-game year
+800 AD / 800 n.Chr.
 ```
 
-Aging therefore happens at a pace the player can observe within a normal play session.
+Every completed game year adds one **winter** to a surviving resident's age.
 
-The target experience is that the player sees:
+The current Fjordside prototype is testing:
 
 ```text
-children
-→ adults
-→ parents
-→ elders
-→ death
-→ descendants taking their place
+1 in-game year = 60 real-time seconds
 ```
 
-within the same campaign.
+This 60-second duration is a **prototype setting, not yet a permanent game principle**.
 
-A full campaign should span multiple generations.
-
-Every system should therefore be evaluated by two questions:
-
-1. What does this mechanic mean to a character now?
-2. What does this mechanic change for the generations that follow?
-
----
-
-# 15. Annual simulation heartbeat
-
-The current prototype rule is:
-
-```text
-1 year = 60 real-time seconds
-```
-
-Current Fjordside prototype start year:
-
-```text
-1200 DC
-```
-
-The annual clock is a central simulation heartbeat.
-
-Long-term systems may use annual or sub-annual events for:
+The annual clock is nevertheless an important simulation seam for systems such as:
 
 - aging;
-- fertility;
-- birth;
+- fertility and family progression;
 - childhood transitions;
 - health;
-- death probability;
+- death;
 - occupation eligibility;
 - settlement needs;
 - household changes;
 - succession;
-- progression milestones.
+- Saga / Legacy milestones;
+- annual historical summaries.
 
-The simulation clock must remain independent from how time is visually represented.
-
-Day/night or seasonal visualizations are presentation layers, not the source of simulation time.
+Simulation time must remain independent from visual presentation. Day/night and seasonal transitions are presentation layers, not the authority for aging or calendar progression.
 
 ---
 
-# 16. Settlement and community building
+# 15. Settlement building, needs and economy
 
-The player's main direct control is strongest at the community level.
+The player's direct control is strongest at the settlement level.
 
-The player should be able to influence:
-
-- what is built;
-- where it is built;
-- what is upgraded;
-- settlement priorities;
-- resource allocation;
-- defenses;
-- exploration targets;
-- expansion locations;
-- new settlements.
-
-Whenever practical, the player specifies **intent**, while people perform the actual work.
+The player decides what should be built, improved, defended or prioritized. Residents execute the work through tasks and skills.
 
 Example:
 
 ```text
-player approves a longhouse project
-→ required resources are identified
-→ builders acquire materials
-→ builders travel to site
-→ construction happens in-world
+player approves a longhouse
+→ resource requirements become demand
+→ suitable residents gather/transport materials
+→ woodwork/construction tasks are performed
+→ building is completed in-world
 ```
 
-This preserves the feeling that the settlement is inhabited by autonomous people rather than controlled drones.
+A separate permanent `Builder` occupation is not assumed by this principle.
 
----
+The economy exists to support people and expansion, not merely abstract counters.
 
-# 17. Needs and economy
-
-The economy exists to support people and expansion, not simply to generate abstract numbers.
-
-Resources should connect to concrete community needs such as:
+Core needs may include:
 
 - food;
 - shelter;
 - warmth;
+- clothing;
 - tools;
 - weapons;
 - building materials;
 - transport;
 - defense.
 
-Economic pressure should feed back into life simulation.
-
-Examples:
-
-```text
-food shortage
-→ community demand for food occupations rises
-→ player can intervene or let the settlement adapt
-→ persistent shortage creates demographic / social consequences
-```
-
-```text
-new housing
-→ greater sustainable population
-→ more households can form
-→ demand for food and jobs rises
-```
-
-The economy should therefore behave as a living system rather than a disconnected RTS resource bar.
+Economic pressure should feed back into resident behavior and occupation demand.
 
 ---
 
-# 18. Exploration and expansion
+# 16. Exploration and expansion
 
 The world is not fully known at the start.
 
-Exploration reveals:
+Exploration can reveal:
 
 - resources;
 - terrain;
 - defensible locations;
 - other settlements;
-- rival clans;
-- opportunities for trade;
-- opportunities for conflict;
-- possible expansion locations.
+- other communities;
+- trade opportunities;
+- conflict opportunities;
+- expansion locations.
 
-Expansion may happen through:
-
-- enlarging the original settlement;
-- founding new settlements;
-- taking over existing settlements;
-- integrating allied or subordinate settlements.
-
-A growing realm should eventually become a network of communities rather than one endlessly expanding village.
+A growing realm should become a network of settlements and communities, not one infinitely expanding village.
 
 ---
 
-# 19. Combat
+# 17. Combat and mobilization
 
 Combat is an RTS layer built on top of the life simulation.
 
-Warriors are not spawned military units. They are existing people who have:
+A fighter is normally an existing resident temporarily mobilized into a military role rather than a separate spawned unit or necessarily a permanent occupation.
 
-- families;
-- occupations;
-- traits;
-- skills;
-- equipment;
-- personal histories.
+Mobilization therefore has an economic cost:
 
-Calling people into a warband therefore has an economic and social cost.
+```text
+resident leaves ordinary work
+→ settlement loses that labour temporarily
+→ resident enters warband
+→ injury/death can permanently remove skills, relationships and family members
+```
 
-A warrior who dies is not simply replaced by spending a resource.
-
-Their death may remove:
-
-- a parent;
-- a partner;
-- a specialist;
-- a future successor;
-- a bloodline member;
-- an experienced fighter.
-
-This is one of the main ways the DNA/life simulation becomes meaningful gameplay.
+The player should be able to choose military objectives and, where useful, warband composition.
 
 ---
 
-# 20. Defeat, surrender and captives
+# 18. Defeat, captives and integration
 
-After conflict, the player may eventually have several possible policies toward defeated enemies.
+After conflict, surrendered or captured enemies remain residents/persons in the simulation.
 
-Examples:
-
-- kill;
-- enslave;
-- ransom;
-- release;
-- integrate;
-- demand tribute;
-- absorb the settlement.
-
-These decisions should have long-term consequences.
-
-Examples:
+Possible later policies include:
 
 ```text
-integrate captives
-→ population grows
-→ new skills / DNA enter the clan
-→ possible loyalty problems
+execute
+enslave
+integrate
+ransom
+release
+tribute / submission
 ```
 
-```text
-execute captives
-→ fewer immediate internal risks
-→ fear / hatred / diplomatic consequences
-```
+An integrated former enemy may later work, form relationships, have children and create a new bloodline inside the realm.
 
-```text
-enslave captives
-→ labour increases
-→ social tension / escape / rebellion risk
-```
-
-The system should allow former enemies and their descendants to become part of the future population.
+Conflict therefore changes the demographic and cultural composition of the player's world.
 
 ---
 
-# 21. Succession and leadership
+# 19. Succession
 
-Leadership is generational.
+The current chief is mortal.
 
-The chief is expected to die eventually.
+When leadership changes, succession should eventually consider factors such as:
 
-A successor must emerge through a succession system.
-
-Possible future factors:
-
-- bloodline;
-- cultural succession rules;
+- kinship;
+- culture / inheritance rules;
 - age;
 - reputation;
-- military prestige;
-- family support;
-- settlement support;
-- player preference.
+- relationships;
+- support from influential families;
+- player influence.
 
-The player may influence succession, but the social simulation should be able to create resistance.
+A contested succession may later produce factions, loss of loyalty or internal conflict.
 
-A succession decision may create:
+The key principle remains:
 
-- loyalty;
-- rival claimants;
-- factions;
-- family conflict;
-- settlement division;
-- civil conflict.
-
-This turns large successful realms into socially more complex systems rather than simply easier versions of small settlements.
+> **Chief death creates a new political situation, not a game-over screen.**
 
 ---
 
-# 22. Growth should create complexity
+# 20. Saga / Legacy progression
 
-A larger population is not purely an upgrade.
+Progress toward realm unification should be visible through a non-linear milestone structure. Working names include **Saga**, **Legacy** or **Renown**.
 
-The desired difficulty curve is:
+Initial branches:
 
-```text
-small clan
-→ easy to understand
-→ limited capacity
+### Prosperity
+Population, settlement growth, production, reserves and trade.
 
-large clan
-→ powerful
-→ economically, socially and politically more complex
-```
+### Conquest
+Raids, military victories, territory, submission and conquest.
 
-Growth may introduce:
+### Influence
+Alliances, integration, dynastic relationships and political connection.
 
-- competing families;
-- settlement leaders;
-- influential specialists;
-- rival claimants;
-- integrated outsiders;
-- social classes / status;
-- conflicting local needs;
-- loyalty problems.
+The branches are not mutually exclusive. Higher milestones should often combine them.
 
-This is preferable to scaling difficulty only through enemies with larger health pools or inflated resource bonuses.
+They converge toward one strategic objective:
+
+> **Unify the Realm**
 
 ---
 
-# 23. Progression: Saga / Legacy tree
+# 21. Event-backed lore and historical memory
 
-Campaign progression should acknowledge **how** the clan grows without forcing one linear route.
+Pillagers may turn simulation history into an annual chronicle, but storytelling is subordinate to recorded facts.
 
-Working branches:
+The authoritative rule from `GAME-PRINCIPLES.md` is:
 
-```text
-Prosperity
-Conquest
-Influence
-```
+> **Lore tells only what actually happened.**
 
-These names are placeholders and can evolve.
+Simulation systems should emit semantic events into an authoritative event ledger. Chronicles may select and stylize those recorded events but must not invent dialogue, motives, witnesses, causes, weather or outcomes that were not modelled.
 
-## Prosperity route
+This means the life, occupation, economy and combat systems should eventually emit meaningful events when actions actually complete.
 
 Examples:
 
-- population milestones;
-- stable food surplus;
-- specialist economy;
-- multiple settlements;
-- trade network;
-- wealth / infrastructure.
-
-## Conquest route
-
-Examples:
-
-- successful raid;
-- rival warband defeated;
-- settlement captured;
-- enemy chief defeated;
-- tributary community established.
-
-## Influence route
-
-Examples:
-
-- alliance created;
-- political marriage;
-- enemy integrated peacefully;
-- another clan submits without destruction;
-- multiple clans tied into the realm.
-
-These routes are **not mutually exclusive classes**.
-
-A successful realm will probably use elements of all three.
-
-Higher progression nodes may require combinations of achievements from several branches.
-
-The tree should describe the emerging history of the clan rather than function as a traditional XP skill tree.
-
----
-
-# 24. Relationship between progression and victory
-
-The Saga / Legacy system provides medium-term objectives.
-
-The ultimate objective remains:
-
-> **Unify the Realm.**
-
-The progression structure should guide the player toward regional dominance through different styles rather than introduce multiple unrelated victory conditions.
-
-Avoid separate disconnected win conditions such as:
-
-- economic victory;
-- military victory;
-- diplomatic victory.
-
-Instead:
-
 ```text
-prosperity
-conquest
-influence
-→ different routes contributing to one larger realm-building objective
+harvest completed
+boat completed
+trade completed
+partnership formed
+child born
+resident died
+settlement founded
+raid resolved
 ```
 
-This keeps the game's scope focused.
+Only events the simulation truly supports may be recorded under those names.
 
 ---
 
-# 25. Core gameplay loop
+# 22. Scope guardrails
 
-The high-level Pillagers loop is:
+Every proposed major mechanic should answer at least one of these questions:
+
+1. Does it deepen **Sim Life**?
+2. Does it deepen **Community Building**?
+3. Does it deepen **Conflict, Conquest & Integration**?
+4. Does it create meaningful interaction between those pillars?
+5. Does it matter within a generation or echo into later generations?
+6. Does it contribute toward the journey from small community to unified realm?
+
+If not, it is probably not core scope.
+
+---
+
+# 23. Development order
+
+The intended gameplay stack can be built and validated layer by layer:
 
 ```text
-SURVIVE
-↓
-GROW
-↓
-SPECIALIZE
-↓
-EXPLORE
-↓
-ENCOUNTER
-↓
-COOPERATE / COMPETE / CONQUER
-↓
-ABSORB PEOPLE, LAND AND RESOURCES
-↓
-NEW GENERATION
-↓
-DEAL WITH INTERNAL CONSEQUENCES
-↓
-REPEAT
+1. annual clock / age / winters
+2. factual event ledger + annual chronicle seam
+3. resident lifecycle
+4. households / matchmaking / reproduction
+5. occupation + skills + task model
+6. community needs and economy
+7. housing / construction / settlement growth
+8. exploration / other communities
+9. combat / mobilization
+10. captives / integration
+11. succession / leadership
+12. diplomacy / influence
+13. Saga / Legacy progression
+14. realm-unification endgame
 ```
 
-Over time:
-
-```text
-people
-→ families
-→ clan
-→ settlement
-→ multiple settlements
-→ realm
-```
+The first ten occupations should be specified before implementing the wider economy so their **purpose, tasks, inputs, outputs and failure consequences** define what the economy actually needs to simulate.
 
 ---
 
-# 26. What makes Pillagers different
-
-Pillagers should not become simply Age of Empires with Viking visuals.
-
-The defining difference is:
-
-> **Every strategic system is connected to a persistent population of individuals and bloodlines.**
-
-A raid does not just produce resources.
-
-It may also:
-
-- kill someone's parent;
-- create widows / widowers;
-- remove a settlement specialist;
-- produce captives;
-- introduce new DNA;
-- create revenge relationships;
-- create future political claims.
-
-A marriage does not just provide a bonus.
-
-It may:
-
-- connect two families;
-- produce heirs;
-- change alliance structures;
-- spread lineage between communities.
-
-A settlement is not just a production base.
-
-It is a home occupied by families who persist across generations.
-
----
-
-# 27. Emergent history
-
-The player's campaign should generate a history unique to that world.
-
-The simulation should make stories like these possible:
-
-- the child of a captured enemy becomes a respected craftsperson;
-- two families become rivals across several generations;
-- a war kills several members of one bloodline and changes succession;
-- a political marriage prevents a war;
-- a small settlement becomes the center of the realm decades later;
-- descendants of the founding population still occupy important roles many generations later.
-
-The game should remember enough of these events that people feel connected to the history that created them.
-
----
-
-# 28. Design filters for future mechanics
-
-Before adding a major mechanic, ask:
-
-## 1. Does it strengthen one of the three gameplay pillars?
-
-- Sim Life;
-- Community Building;
-- Conflict / Integration.
-
-## 2. Does it create meaningful player agency?
-
-The mechanic should create a decision, priority or consequence rather than pure busywork.
-
-## 3. Can the simulation handle the default case autonomously?
-
-If the player ignores the system temporarily, the community should normally remain functional.
-
-## 4. Does the player have a meaningful override when they care?
-
-Important decisions should allow intervention.
-
-## 5. Does it matter across generations?
-
-The strongest Pillagers mechanics create consequences that survive individual characters.
-
-## 6. Does it contribute to the realm-building objective?
-
-If a mechanic does not support survival, growth, specialization, relationships, expansion or control of the region, it should be challenged before being added.
-
----
-
-# 29. Scope principle
-
-Pillagers can become extremely broad very quickly.
-
-Therefore:
-
-> **Depth comes from interaction between a small number of systemic mechanics, not from adding an endless number of isolated features.**
-
-The development strategy should build the game layer by layer.
-
-Suggested sequence:
-
-```text
-1. simulation clock / aging
-2. autonomous persona lifecycle
-3. households / matchmaking / reproduction
-4. occupations / community needs
-5. housing / settlement economy
-6. construction / expansion
-7. relationships between communities
-8. combat / raids
-9. captives / integration
-10. succession / political complexity
-11. Saga progression
-12. full Unify the Realm campaign structure
-```
-
-Each layer should work with the previous layers before the next is added.
-
----
-
-# 30. Canonical design statements
-
-The following statements summarize the current gameplay direction:
+# 24. Core principles summary
 
 > **Build a people, not an army.**
 
 > **Autonomous by default, controllable by choice.**
 
-> **The player is the enduring will of the clan, expressed through its current chief.**
+> **Residents have skills and tasks; occupation is a primary specialization, not an immutable class.**
 
-> **Every persona is an individual, not a disposable RTS unit.**
+> **DNA affects gameplay, not just appearance.**
 
-> **DNA must affect gameplay, not just appearance.**
+> **Growth creates complexity as well as power.**
 
-> **Growth creates power and complexity.**
-
-> **Conflict changes the population, not just the territory map.**
+> **The player persists across generations; the current chief represents that authority in-world.**
 
 > **A chief's death creates succession, not game over.**
 
-> **Every generation inherits the consequences of the generation before it.**
+> **War changes the population because fighters and captives remain real people.**
 
-> **Prosperity, conquest and influence are routes toward one goal: Unify the Realm.**
+> **Lore may stylize recorded history but never invent history.**
 
-> **Depth should emerge from connected systems rather than feature count.**
+> **Prosperity, conquest and influence all lead toward one shared objective: Unify the Realm.**
+
+> **Every important mechanic should matter now or echo into the next generation.**
