@@ -60,6 +60,40 @@ boundary ambiguity must be reviewed before LOD optimization and loose fitting.
 
 ## Validation
 
+### Per-source head calibration
+
+The twelve original reference busts have different head centres and sizes.
+`scripts/calibrate-appearance-heads.py` measures exposed head surfaces and a
+neck-to-head up axis when sufficiently constrained. Otherwise it retains the
+source glTF vertical. Hair uses the reference pipeline's documented Blender +Y
+face direction; skin colour alone cannot distinguish front from back on short
+styles. Beard attachment centroids identify the face side of the beard busts.
+These estimates require visual review, rather than assuming a universal pivot.
+
+The reviewed centres, radii, axes, measurement error and original source hashes
+are stored in `src/character-lab/ReferenceHeadFrames.ts`. The calibration script
+rebuilds this module from existing local originals; it generates or downloads
+nothing. Its intermediate measurements remain under ignored `scratch/`.
+
+`ReferenceHeadFit.ts` undoes the legacy published `.52` scale / `.075` origin
+and maps each source frame to the actual fixed skull dimensions. The common
+runtime origin is the skull bounding-box centre, with +Y up and +Z front, rigidly
+attached to Head. Exported appearance groups retain that frame and source
+measurement metadata. The original generated topology is retained.
+
+Short beard attachments fit the actual skull surface, including the front;
+stubble remains at 3mm clearance throughout. Free long beard sections retain
+their size control. Hair additionally checks triangle interiors and edge
+midpoints against the skull, because valid vertex positions alone do not prevent
+coarse LOD2 triangles from cutting through the head.
+
+`node scripts/appearance-head-fit-smoke.mjs` reviews front, side and back views
+for all six hair and beard styles on LOD2, plus legacy seed 1983 and reported
+seed 1885184954 on desktop and mobile viewports. Screenshots are saved in
+`artifacts/head-fit-*.png`. The actual-geometry surface regression in
+`tests/universal-human-motion.test.mjs` checks triangle penetration and stubble
+contact, in addition to the existing animation attachment tests.
+
 - `node --test tests/generated-beard.test.mjs tests/character-appearance.test.mjs tests/character-factory.test.mjs`
 - `node --test tests/universal-human-motion.test.mjs tests/universal-human-instance.test.mjs`
 - `node node_modules/typescript/bin/tsc --noEmit`

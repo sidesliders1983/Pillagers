@@ -2,16 +2,45 @@ import { Group, Material, Mesh, MeshStandardMaterial, Vector3, SkinnedMesh } fro
 import { ConvexHull } from 'three/addons/math/ConvexHull.js';
 import { CharacterAppearance } from '../characters/CharacterAppearance';
 import { AppearanceFit } from '../characters/CharacterDNA';
+import { referenceHeadMapper } from './ReferenceHeadFit';
+import { referenceHeadFrames } from './ReferenceHeadFrames';
+
+// A triangle can cut through a faceted skull even when its three vertices are
+// outside it. Check its surface too, retaining the generated topology.
+function clearSkullTriangles(mesh:Mesh,hull:ConvexHull,minY:number,clearance:number){
+    const positions=mesh.geometry.attributes.position,index=mesh.geometry.index;
+    const count=index?.count??positions.count;
+    for(let pass=0;pass<12;pass++){
+        let changed=false;
+        for(let triangle=0;triangle<count;triangle+=3){
+            const ids=[0,1,2].map(k=>index?index.getX(triangle+k):triangle+k);
+            const points=ids.map(id=>new Vector3().fromBufferAttribute(positions,id));
+            let deficit=0;
+            for(const weights of [[1/3,1/3,1/3],[.5,.5,0],[.5,0,.5],[0,.5,.5]]){
+                const p=new Vector3();points.forEach((v,k)=>p.addScaledVector(v,weights[k]));
+                if(p.y<minY||p.length()<1e-8)continue;
+                const direction=p.clone().normalize();let radius=Infinity;
+                for(const face of hull.faces){const d=face.normal.dot(direction);if(d>1e-6)radius=Math.min(radius,face.constant/d);}
+                if(Number.isFinite(radius))deficit=Math.max(deficit,radius+clearance-p.length());
+            }
+            if(deficit>.0001){changed=true;points.forEach((p,k)=>{p.addScaledVector(p.clone().normalize(),deficit*1.15);positions.setXYZ(ids[k],p.x,p.y,p.z);});}
+        }
+        if(!changed)break;
+    }
+}
 
 /** Reference-generated geometry only. An unavailable module stays absent. */
 export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:number,fit:AppearanceFit={hair:1,beard:1,clothing:1},source:Group|null=null,skull:Vector3[]=[],beardSource:Group|null=null){
     const group=new Group();group.name='Appearance';group.userData.appearance=profile;group.userData.appearanceFit=fit;
+    group.userData.coordinateFrame={origin:'fixed skull bounding-box centre',front:'+Z',up:'+Y',attachment:'Head'};
     group.userData.hairAsset=source?'reference-generated':'pending';
     group.userData.beardAsset=profile.beardStyle==='none'?'not-applicable':beardSource?'reference-generated':'pending';
     if(beardSource&&profile.beardStyle!=='none'){
         const beard=beardSource.clone(true);beard.name='GeneratedBeard';beard.updateMatrixWorld(true);
+        beard.userData.referenceHeadFrame=referenceHeadFrames[`beard/${profile.beardStyle}`];
         const reference=new Vector3(.1992,.2397,.2189);
         const scale=Math.max(size.x/reference.x,size.y/reference.y,size.z/reference.z);
+        const map=referenceHeadMapper('beard',profile.beardStyle,size);
         const jawHull=skull.length>=4?new ConvexHull().setFromPoints(skull):null;
         beard.traverse(object=>{
             if(!(object as Mesh).isMesh)return;
@@ -20,17 +49,17 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
             // Scale around the jaw attachment, keeping the upper edge in place.
             const position=mesh.geometry.attributes.position,anchor=new Vector3(0,-.045,.065).multiplyScalar(scale);
             for(let i=0;i<position.count;i++){
-                const p=new Vector3().fromBufferAttribute(position,i).multiplyScalar(scale);
+                const p=map(new Vector3().fromBufferAttribute(position,i));
                 // Keep cheek/sideburn attachment against the actual fixed head.
                 // Only fit existing vertices; the generated beard silhouette below
                 // the jaw remains intact.
-                if(jawHull&&p.y>-.075*scale&&Math.abs(p.x)>size.x*.35&&p.z<size.z*.4){
+                if(jawHull&&(profile.beardStyle==='stubble'||p.y>-.075*scale)){
                     const direction=p.clone().normalize();let radius=Infinity;
                     for(const face of jawHull.faces){const denominator=face.normal.dot(direction);if(denominator>1e-6)radius=Math.min(radius,face.constant/denominator);}
-                    if(Number.isFinite(radius)&&p.length()>radius+.003)p.copy(direction.multiplyScalar(radius+.003));
+                    if(Number.isFinite(radius))p.copy(direction.multiplyScalar(radius+.003));
                 }
                 // The size slider grows the free beard, not its cheek attachments.
-                const t=Math.max(0,Math.min(1,(-.045*scale-p.y)/(.10*scale))),growth=1+(fit.beard-1)*t*t*(3-2*t);
+                const t=profile.beardStyle==='stubble'?0:Math.max(0,Math.min(1,(-.045*scale-p.y)/(.10*scale))),growth=1+(fit.beard-1)*t*t*(3-2*t);
                 p.sub(anchor).multiplyScalar(growth).add(anchor);position.setXYZ(i,p.x,p.y,p.z);
             }
             mesh.material=new MeshStandardMaterial({color:profile.color,roughness:1,flatShading:true});
@@ -40,8 +69,8 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
     }
     if(!source)return group;
     const hair=source.clone(true);hair.name='GeneratedHair';hair.updateMatrixWorld(true);
-    const reference=new Vector3(.1992,.2397,.2189);
-    const scale=Math.max(size.x/reference.x,size.y/reference.y,size.z/reference.z);
+    hair.userData.referenceHeadFrame=referenceHeadFrames[`hair/${profile.hairStyle}`];
+    const map=referenceHeadMapper('hair',profile.hairStyle,size);
     const hull=skull.length>=4?new ConvexHull().setFromPoints(skull):null;
     const clearance=Math.min(size.x,size.y,size.z)*.5*(fit.hair-1);
     hair.traverse(object=>{
@@ -53,7 +82,7 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
         mesh.geometry.applyMatrix4(mesh.matrixWorld);mesh.position.set(0,0,0);mesh.quaternion.identity();mesh.scale.set(1,1,1);
         const positions=mesh.geometry.attributes.position;
         for(let i=0;i<positions.count;i++){
-            const p=new Vector3().fromBufferAttribute(positions,i).multiplyScalar(scale),direction=p.clone().normalize();
+            const p=map(new Vector3().fromBufferAttribute(positions,i)),direction=p.clone().normalize();
             if(hull&&p.y>-size.y*.45){
                 let radius=Infinity;
                 for(const face of hull.faces){const denominator=face.normal.dot(direction);if(denominator>1e-6)radius=Math.min(radius,face.constant/denominator);}
@@ -61,6 +90,7 @@ export function appearanceModules(profile:CharacterAppearance,size:Vector3,lod:n
             }
             p.addScaledVector(p.clone().normalize(),clearance);positions.setXYZ(i,p.x,p.y,p.z);
         }
+        if(hull)clearSkullTriangles(mesh,hull,-size.y*.45,.004+clearance);
         mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingSphere();mesh.castShadow=true;
     });
     group.add(hair);return group;
