@@ -10,6 +10,8 @@ const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshade
 try{
  const page=await browser.newPage({viewport:{width:1024,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));page.setDefaultTimeout(120000);
  await page.goto('http://127.0.0.1:4175/character-lab');await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true');
+ assert.match(await page.locator('#lab-status').textContent(),/LOD2/);
+ assert.equal(await page.locator('[data-action="lod2"]').getAttribute('aria-pressed'),'true');
  await page.locator('.lab-json > summary').click();await page.locator('#lab-json').fill(JSON.stringify(dna));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();
  for(const lod of [0,1,2]){
   await page.getByRole('button',{name:`LOD${lod}`,exact:true}).click();

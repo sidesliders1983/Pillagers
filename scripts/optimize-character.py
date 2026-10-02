@@ -20,6 +20,7 @@ def arguments(argv):
     parser.add_argument("--name", default="character")
     parser.add_argument("--targets", type=int, nargs=3, default=[8000, 4000, 1200])
     parser.add_argument("--textures", type=int, nargs=3, default=[1024, 512, 256])
+    parser.add_argument("--lod", type=int, choices=[0, 1, 2], help="Process only this LOD; retain its original label and budget")
     parser.add_argument("--voxel", type=float, default=0.0035, help="Fraction of largest dimension; 0 disables remesh for comparison")
     parser.add_argument("--planar-angle", type=float, default=6)
     args = parser.parse_args(argv)
@@ -75,7 +76,8 @@ def main(args):
     args.output.mkdir(parents=True, exist_ok=True)
     report = {"schemaVersion": 1, "source": {"file": args.source.name, **baseline},
               "blender": bpy.app.version_string, "settings": {"voxelFraction": args.voxel,
-              "planarAngleDegrees": args.planar_angle, "targets": args.targets, "textureSizes": args.textures},
+              "planarAngleDegrees": args.planar_angle, "targets": args.targets, "textureSizes": args.textures,
+              "selectedLOD": args.lod},
               "stages": [], "lods": []}
 
     def stage(label, obj):
@@ -172,6 +174,8 @@ def main(args):
     scene.render.bake.cage_extrusion = span * max(args.voxel * 2, 0.008)
     scene.render.bake.max_ray_distance = span * max(args.voxel * 6, 0.035)
     for index, (target, resolution) in enumerate(zip(args.targets, args.textures)):
+        if args.lod is not None and index != args.lod:
+            continue
         lod_start = time.time()
         name = "%s_LOD%d" % (args.name, index)
         lod = copy(clean, name)

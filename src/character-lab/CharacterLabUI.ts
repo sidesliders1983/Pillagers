@@ -4,6 +4,7 @@ import { heritageLabels } from '../characters/heritageProfiles';
 import { occupations, occupationScores, occupationFit, OccupationKey } from '../characters/occupationFit';
 import { characterName, fullName } from '../characters/naming/generateName';
 import { availableHairStyles } from './GeneratedHair';
+import { availableBeardStyles } from './GeneratedBeard';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 
 const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
@@ -64,6 +65,7 @@ export class CharacterLabUI {
             </div>
         </div>`;
         root.querySelectorAll('.lab-model-tools:not([aria-label="Body presets"])').forEach(row=>row.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button===row.firstElementChild))));
+        root.querySelectorAll('[aria-label="Level of detail"] button').forEach(button=>button.setAttribute('aria-pressed',String((button as HTMLButtonElement).dataset.action==='lod2')));
         root.addEventListener('click',event=>{const button=(event.target as HTMLElement).closest<HTMLButtonElement>('button[data-action]');if(button){if(button.hasAttribute('aria-pressed'))button.parentElement!.querySelectorAll('button').forEach(sibling=>sibling.setAttribute('aria-pressed',String(sibling===button)));this.onAction(button.dataset.action as LabAction);}});
         root.addEventListener('input',event=>{
             const input=event.target as HTMLInputElement;
@@ -98,9 +100,9 @@ export class CharacterLabUI {
         text('lab-sex',dna.sex==='female'?'Female':'Male');input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
         const body=universalHumanProfile(dna);input('lab-masculinity',String(body.masculinity*100));text('lab-masculinity-value',`${Math.round(body.masculinity*100)}% M`);text('lab-femininity-share',`Femininity ${Math.round((1-body.masculinity)*100)}%`);text('lab-masculinity-share',`Masculinity ${Math.round(body.masculinity*100)}%`);input('lab-height',String(body.height*100));text('lab-height-value',`${Math.round(body.height*100)} cm`);
         for(const key of Object.keys(appearanceFitLimits) as (keyof AppearanceFit)[]){const value=body.appearanceFit[key];input(`fit-${key}`,String(value*100));text(`fit-${key}-value`,key==='hair'?`${value.toFixed(2)} × · +${Math.round((value-1)*100)}% head radius`:`${Math.round(value*100)}%`);}
-        (document.getElementById('fit-beard') as HTMLInputElement).disabled=true;
+        (document.getElementById('fit-beard') as HTMLInputElement).disabled=!availableBeardStyles.includes(body.appearance.beardStyle);
         (document.getElementById('fit-hair') as HTMLInputElement).disabled=!availableHairStyles.includes(body.appearance.hairStyle);
-        text('fit-beard-value',body.appearance.beardStyle==='none'?'Not applicable':'Reference asset pending');
+        if(!availableBeardStyles.includes(body.appearance.beardStyle))text('fit-beard-value',body.appearance.beardStyle==='none'?'Not applicable':'Reference asset pending');
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys.filter(key=>key!=='physicality')){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
         for(const key of heritageKeys){input(`heritage-${key}`,String(dna.heritage[key]*100));text(`heritage-value-${key}`,`${(dna.heritage[key]*100).toFixed(1)}%`);}
@@ -109,7 +111,7 @@ export class CharacterLabUI {
         text('lab-current-label',`CURRENT · ${fullName(name)} · Seed ${dna.seed}`);text('lab-comparison-label',comparison?`PINNED · ${fullName(characterName(comparison))} · Seed ${comparison.seed}`:'');
         document.getElementById('lab-comparison-label')!.hidden=!comparison;document.getElementById('lab-unpin')!.hidden=!comparison;
         text('lab-pin',comparison?'Replace comparison':'Pin comparison');
-        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Adult target height</span><strong>${Math.round(body.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>Weight deviation</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${body.appearance.hairStyle}<small>${availableHairStyles.includes(body.appearance.hairStyle)?' · reference asset':' · asset pending'} / ${body.appearance.beardStyle}${body.appearance.beardStyle==='none'?'':' · asset pending'}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
+        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Adult target height</span><strong>${Math.round(body.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>Weight deviation</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${body.appearance.hairStyle}<small>${availableHairStyles.includes(body.appearance.hairStyle)?' · reference asset':' · asset pending'} / ${body.appearance.beardStyle}${body.appearance.beardStyle==='none'?'':availableBeardStyles.includes(body.appearance.beardStyle)?' · reference asset':' · asset pending'}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
         const scores=occupationScores(dna.traits);
         text('lab-fit-summary',`${scores[0].label} currently fits best${comparison?' · dark ticks show the pinned character':''}.`);
         for(const {key,fit} of scores){text(`fit-value-${key}`,`${(fit*100).toFixed(1)}%`);document.getElementById(`fit-bar-${key}`)!.style.width=`${fit*100}%`;
@@ -120,4 +122,3 @@ export class CharacterLabUI {
     selectJSON(){(document.querySelector('.lab-json') as HTMLDetailsElement).open=true;const area=document.getElementById('lab-json') as HTMLTextAreaElement;area.focus();area.select();}
     status(message:string,error=false){const status=document.getElementById('lab-status')!;status.textContent=message;status.classList.toggle('is-error',error);}
 }
-
