@@ -29,6 +29,11 @@ history and the fitting transform. Each character owns its fitted geometry and
 colour material; immutable imported sources are cached. The world keeps its
 existing fixed LOD2 body configuration.
 
+Hair and beard URLs include the geometry hash to invalidate earlier browser
+downloads and factory cache entries. After updating a published GLB and its
+provenance, run `node scripts/update-appearance-versions.mjs` before building.
+An already-open page must be reloaded to receive updated fitting code and URLs.
+
 ## Remaining work
 
 Further processing and fitting now focus on LOD2 only. Use

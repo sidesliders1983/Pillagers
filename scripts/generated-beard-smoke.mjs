@@ -12,6 +12,11 @@ try{
  assert.match(await page.locator('#lab-status').textContent(),/LOD2/);
  assert.equal(await page.locator('[data-action="lod2"]').getAttribute('aria-pressed'),'true');
  await page.locator('.lab-json > summary').click();
+ // Exact desktop report: legacy seed 1983 with no morphology/fit overrides.
+ await page.locator('#lab-json').fill(JSON.stringify(defaultDNA()));await page.getByRole('button',{name:'Apply JSON',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('#lab-preview')?.dataset.ready==='true'&&document.querySelector('#lab-status')?.textContent.includes('reference beard'));
+ for(const clip of ['Walk','Run','Idle']){await page.getByRole('button',{name:clip,exact:true}).click();await page.waitForTimeout(150);}
+ await page.locator('#lab-preview').screenshot({path:'artifacts/generated-beard-seed1983-LOD2.png'});
  for(const style of availableBeardStyles){
   for(const age of [35,70]){
    let dna;for(let seed=0;seed<10000;seed++){const candidate={...defaultDNA(),seed,age,morphology:{masculinity:.77,height:1.5},appearanceFit:{hair:1,beard:age===70?1.5:1,clothing:1}};if(universalHumanProfile(candidate).appearance.beardStyle===style){dna=candidate;break;}}
