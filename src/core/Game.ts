@@ -8,7 +8,8 @@ import { RTSCameraController } from '../camera/RTSCameraController';
 import { worldConfig as config } from '../config/worldConfig';
 import { generateCharacterDNA } from '../characters/generateCharacterDNA';
 import { generatePhenotype } from '../characters/generatePhenotype';
-import { Mannequin } from '../character-lab/Mannequin';
+import { characterFactory } from '../characters/CharacterFactory';
+import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { CharacterProfileCard } from '../ui/CharacterProfileCard';
 import { setupWorldHUD } from '../ui/WorldHUD';
 import { WorldLighting } from './WorldLighting';
@@ -23,11 +24,12 @@ export class Game {
         scene.add(world.root);
         const lighting=new WorldLighting(scene,renderer,assets);
         controller.setNavigationSurface(world.terrain);
-        const characters=Array.from({length:config.villagers},(_,i)=>{
+        const characters=await Promise.all(Array.from({length:config.villagers},async (_,i)=>{
             const dna=generateCharacterDNA((config.seed+Math.imul(i+1,2654435761))>>>0);
-            const phenotype=generatePhenotype(dna),model=new Mannequin(phenotype);
+            const phenotype=generatePhenotype(dna),model=await characterFactory.createWorld(dna);
+            phenotype.height=universalHumanProfile(dna).height;
             return {dna,phenotype,model,villager:new Villager(i,model.root)};
-        });
+        }));
         const villagers = characters.map(character=>character.villager);
         villagers.forEach(v => scene.add(v.visual));
         const movement = new MovementSystem(villagers);
@@ -62,6 +64,7 @@ export class Game {
         });
         document.querySelector('#helpers')!.addEventListener('change', e => helpers.visible = (e.target as HTMLInputElement).checked);
         document.querySelector('#status')!.textContent = `FJORDSIDE · ${villagers.length} inhabitants`;
+        window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();renderer.dispose();},{once:true});
         const clock = new Clock();
         let time = 0, frames = 0, sample = 0;
         renderer.setAnimationLoop(() => {
@@ -73,11 +76,11 @@ export class Game {
             movement.update(dt);
             world.update(time);
             lighting.update(time);
-            characters.forEach(character=>character.model.update(time+character.villager.id));
+            characters.forEach(character=>{character.model.setMovementSpeed(character.villager.speed);character.model.update(dt,camera.position.distanceTo(character.villager.visual.position));});
             profiles.update();
             renderer.render(scene, camera);
             if (sample > .5) {
-                document.querySelector('#metrics')!.textContent = `${Math.round(frames / sample)} FPS\n${renderer.info.render.calls} draw calls\n${renderer.info.render.triangles.toLocaleString()} triangles\n${villagers.length} inhabitants\nCamera ${camera.position.x.toFixed(1)}, ${camera.position.y.toFixed(1)}, ${camera.position.z.toFixed(1)}\nCenter ${controller.focus.x.toFixed(1)}, ${controller.focus.y.toFixed(1)}, ${controller.focus.z.toFixed(1)}\nLighting ${lighting.mode} · ${lighting.mode==='night'?2:1} direct lights\n${renderer.shadowMap.enabled?1:0} shadow source · ${lighting.directional.shadow.mapSize.x}px\n${assets.windowMaterials.length} emissive window materials`;
+                document.querySelector('#metrics')!.textContent = `${Math.round(frames / sample)} FPS\n${renderer.info.render.calls} draw calls\n${renderer.info.render.triangles.toLocaleString()} triangles\n${villagers.length} inhabitants\nRigged humans: ${characters.filter(c=>c.model.lod===1).length} LOD1 / ${characters.filter(c=>c.model.lod===2).length} LOD2\nStates: ${characters.map(c=>`${c.dna.seed}:${c.model.state}`).join(', ')}\nCamera ${camera.position.x.toFixed(1)}, ${camera.position.y.toFixed(1)}, ${camera.position.z.toFixed(1)}\nCenter ${controller.focus.x.toFixed(1)}, ${controller.focus.y.toFixed(1)}, ${controller.focus.z.toFixed(1)}\nLighting ${lighting.mode} · ${lighting.mode==='night'?2:1} direct lights\n${renderer.shadowMap.enabled?1:0} shadow source · ${lighting.directional.shadow.mapSize.x}px\n${assets.windowMaterials.length} emissive window materials`;
                 sample = 0;
                 frames = 0;
             }

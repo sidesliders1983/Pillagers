@@ -7,6 +7,7 @@ export class Villager {
     readonly target = { x: 0, z: 0 };
     phase: number;
     wait = 0;
+    speed = 0;
     constructor(readonly id: number, visual?: Object3D) {
         this.phase = id;
         if (visual) {

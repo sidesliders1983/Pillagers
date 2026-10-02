@@ -24,13 +24,15 @@ export class MovementSystem {
     }
     update(dt: number) {
         for (const unit of this.villagers) {
+            unit.speed=0;
             const p = unit.visual.position;
             const dx = unit.target.x - p.x, dz = unit.target.z - p.z, distance = Math.hypot(dx, dz);
             if (distance < .15) {
+                if(unit.wait===0)unit.wait=1+this.random()*3;
                 unit.wait -= dt;
                 if (unit.wait <= 0) {
                     this.choose(unit);
-                    unit.wait = 1 + this.random() * 3;
+                    unit.wait = 0;
                 }
                 continue;
             }
@@ -40,7 +42,8 @@ export class MovementSystem {
                 continue;
             }
             unit.phase += dt * 5;
-            p.set(x, heightAt(x, z) + Math.sin(unit.phase) * .025, z);
+            unit.speed=dt>0?step/dt:0;
+            p.set(x, heightAt(x, z), z);
             unit.visual.rotation.y = Math.atan2(dx, dz);
         }
     }

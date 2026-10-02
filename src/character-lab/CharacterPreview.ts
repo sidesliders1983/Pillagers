@@ -1,11 +1,9 @@
 import { Scene, Color, PerspectiveCamera, WebGLRenderer, HemisphereLight, DirectionalLight, Mesh, CylinderGeometry, MeshStandardMaterial, ACESFilmicToneMapping, PCFSoftShadowMap, Clock } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Phenotype } from '../characters/Phenotype';
-import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { characterFactory } from '../characters/CharacterFactory';
 import { CharacterDNA } from '../characters/CharacterDNA';
-import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
-import { hairAssetPath } from './GeneratedHair';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 export class CharacterPreview {
     private scene=new Scene();
@@ -14,8 +12,6 @@ export class CharacterPreview {
     private controls:OrbitControls;
     private current:UniversalHuman|null=null;
     private comparison:UniversalHuman|null=null;
-    private assets=new Map<number,Promise<GLTF>>();
-    private hairAssets=new Map<string,Promise<GLTF>>();
     private currentDNA:CharacterDNA|null=null;
     private comparisonDNA:CharacterDNA|null=null;
     private currentPhenotype:Phenotype|null=null;
@@ -44,22 +40,13 @@ export class CharacterPreview {
     private async refresh(){
         const revision=++this.revision;this.canvas.dataset.ready='false';
         try{
-            let promise=this.assets.get(this.lod);
-            if(!promise){promise=new GLTFLoader().loadAsync(`/universal-human/UniversalHuman_LOD${this.lod}.glb`);this.assets.set(this.lod,promise);this.report('Loading Universal Human…');}
-            const profiles=[this.currentDNA,this.comparisonDNA].map(dna=>dna?universalHumanProfile(dna):null);
-            const hair=await Promise.all(profiles.map(async profile=>{
-                const path=profile?hairAssetPath(profile.appearance.hairStyle,this.lod):null;
-                if(!path)return null;
-                let promise=this.hairAssets.get(path);if(!promise){promise=new GLTFLoader().loadAsync(path).then(asset=>{asset.scene.userData.referenceAsset={style:profile?.appearance.hairStyle,path,provenance:path.replace('.glb','.provenance.json')};return asset;});this.hairAssets.set(path,promise);}
-                try{return (await promise).scene;}catch(error){this.hairAssets.delete(path);throw error;}
-            }));
-            const asset=await promise;if(revision!==this.revision)return;
+            const models=await Promise.all([this.currentDNA,this.comparisonDNA].map(dna=>dna?characterFactory.create(dna,this.lod):null));
+            if(revision!==this.revision){for(const model of models)model?.dispose();return;}
             for(const model of [this.current,this.comparison])if(model){this.scene.remove(model.root);model.dispose();}
-            this.current=this.currentDNA&&this.currentPhenotype?new UniversalHuman(asset,universalHumanProfile(this.currentDNA),this.currentPhenotype.skinTone,hair[0]):null;
-            this.comparison=this.comparisonDNA&&this.comparisonPhenotype?new UniversalHuman(asset,universalHumanProfile(this.comparisonDNA),this.comparisonPhenotype.skinTone,hair[1]):null;
+            [this.current,this.comparison]=models;
             for(const model of [this.current,this.comparison])if(model){model.setAnimation(this.animation);this.scene.add(model.root);}
             this.layout();this.canvas.dataset.ready='true';this.reportModel();
-        }catch(error){if(revision!==this.revision)return;this.assets.delete(this.lod);this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
+        }catch(error){if(revision!==this.revision)return;this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
     }
     private reportModel(){
         const appearance=this.current?.root.getObjectByName('Appearance');
