@@ -83,6 +83,11 @@ export function validateAssetRecord(asset,lod,record){
                 check(times[0]>=0&&times.at(-1)>0&&times.every((time,i)=>i===0||time>times[i-1]),'invalid clip times');
             }
         }
+    }else if(asset.type==='garment'){
+        check(!json.skins?.length&&!json.animations?.length,'source garment must bind to the existing runtime rig');
+        const meshes=json.nodes.filter(node=>node.mesh!==undefined);
+        if(asset.metadata.garmentFit==='regional')check(meshes.every(node=>['cloth','skirt','mantle','footwear'].includes(node.extras?.garmentRegion)),'missing/unknown drape region');
+        check(json.images?.length===1,'garment should have one baked reference albedo');
     }else if(asset.type==='hair'||asset.type==='beard'){
         check(!json.skins?.length&&!json.animations?.length,'head module must use the character socket rather than another rig');
         const frame=asset.sourceFrame;check(!!frame,'missing measured orientation/calibration frame');
@@ -107,6 +112,10 @@ export async function validateRegisteredAsset(asset,lod){
         }else{
             const provenance=JSON.parse(readFileSync(publicFile(path.replace('.glb','.provenance.json')),'utf8').replace(/^\uFEFF/,''));
             assert.equal(provenance.outputSha256,record.sha256,'stale generated provenance');
+            if(asset.type==='garment'){
+                assert.equal(provenance.fit.front,'+Z');assert.equal(provenance.fit.up,'+Y');
+                assert.ok(Math.abs(actual.bounds.min[1])<.04&&actual.bounds.max[1]<1.55,'outfit must be grounded and exclude the source head');
+            }
             if(asset.sourceFrame){const bust=provenance.sourceProvenance?.generatedBust;assert.equal(asset.sourceFrame.sourceSha256,bust?.output?.sha256??bust?.outputSha256??bust?.generation?.output?.sha256,'measured frame belongs to another generated source');}
             if(Number(lod)===asset.runtimeLOD||asset.runtimeLOD==='requested')assert.equal(provenance.reviewRequired,false,'runtime source still requires reference review');
         }

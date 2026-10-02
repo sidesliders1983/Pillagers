@@ -1330,6 +1330,221 @@
         },
         "materials": 2
       }
+    },
+    {
+      "id": "garment/cream-tunic",
+      "type": "garment",
+      "style": "cream-tunic",
+      "version": 1,
+      "runtimeLOD": 2,
+      "lods": {
+        "2": {
+          "file": "/clothing/cream-tunic/Clothing_cream-tunic_LOD2.glb",
+          "sha256": "e70aecffd92a74cb99b40e724f43109534b249d1a8746206682d2a910b95650f",
+          "triangles": 3836,
+          "materials": 1,
+          "bytes": 470944,
+          "bounds": {
+            "min": [
+              -0.3874010145664215,
+              0.00009781800326891243,
+              -0.2794952392578125
+            ],
+            "max": [
+              0.3910473883152008,
+              1.4945683479309082,
+              0.1663047820329666
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "garment/cream-tunic",
+        "type": "garment",
+        "anchor": "socket_waist",
+        "fitCage": "TORSO_CAGE",
+        "fitMode": "drape",
+        "slot": "full",
+        "garmentFit": "regional",
+        "authoringFrame": "canonical",
+        "clearance": 0.025,
+        "coverageBands": {
+          "UPPER_ARM_L": {
+            "minY": 1.18
+          },
+          "UPPER_ARM_R": {
+            "minY": 1.18
+          }
+        },
+        "covers": [
+          "TORSO_UPPER",
+          "TORSO_LOWER",
+          "PELVIS",
+          "UPPER_LEG_L",
+          "UPPER_LEG_R",
+          "LOWER_LEG_L",
+          "LOWER_LEG_R",
+          "FEET",
+          "UPPER_ARM_L",
+          "UPPER_ARM_R"
+        ]
+      },
+      "materialVariants": [
+        "reference-colours"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed",
+        "base-outfit",
+        "shared-rig"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 4400
+        },
+        "materials": 1
+      }
+    },
+    {
+      "id": "garment/long-dress",
+      "type": "garment",
+      "style": "long-dress",
+      "version": 1,
+      "runtimeLOD": 2,
+      "lods": {
+        "2": {
+          "file": "/clothing/long-dress/Clothing_long-dress_LOD2.glb",
+          "sha256": "ba8c08e9f38b3171aa29c4714d2df85d44341ff91294c9acb3875efe1b633112",
+          "triangles": 3841,
+          "materials": 1,
+          "bytes": 467064,
+          "bounds": {
+            "min": [
+              -0.37247344851493835,
+              0.0014374158345162868,
+              -0.3699875771999359
+            ],
+            "max": [
+              0.39075833559036255,
+              1.4884393215179443,
+              0.20623818039894104
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "garment/long-dress",
+        "type": "garment",
+        "anchor": "socket_waist",
+        "fitCage": "TORSO_CAGE",
+        "fitMode": "drape",
+        "slot": "full",
+        "garmentFit": "regional",
+        "authoringFrame": "canonical",
+        "clearance": 0.025,
+        "covers": [
+          "TORSO_UPPER",
+          "TORSO_LOWER",
+          "PELVIS",
+          "UPPER_LEG_L",
+          "UPPER_LEG_R",
+          "LOWER_LEG_L",
+          "LOWER_LEG_R",
+          "FEET"
+        ]
+      },
+      "materialVariants": [
+        "reference-colours"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed",
+        "base-outfit",
+        "shared-rig"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 4400
+        },
+        "materials": 1
+      }
+    },
+    {
+      "id": "garment/mantle-tunic",
+      "type": "garment",
+      "style": "mantle-tunic",
+      "version": 1,
+      "runtimeLOD": 2,
+      "lods": {
+        "2": {
+          "file": "/clothing/mantle-tunic/Clothing_mantle-tunic_LOD2.glb",
+          "sha256": "bc0ae0f85734248c038e7ae4b1e156ef39dfa0fb705539ac6d4ae3222143f366",
+          "triangles": 3998,
+          "materials": 1,
+          "bytes": 473564,
+          "bounds": {
+            "min": [
+              -0.4359859526157379,
+              0.0013079345226287842,
+              -0.2780964970588684
+            ],
+            "max": [
+              0.41303911805152893,
+              1.5009708404541016,
+              0.2746049165725708
+            ]
+          }
+        }
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "garment/mantle-tunic",
+        "type": "garment",
+        "anchor": "socket_waist",
+        "fitCage": "TORSO_CAGE",
+        "fitMode": "drape",
+        "slot": "full",
+        "garmentFit": "regional",
+        "authoringFrame": "canonical",
+        "clearance": 0.025,
+        "coverageBands": {
+          "UPPER_ARM_L": {
+            "minY": 1.09
+          },
+          "UPPER_ARM_R": {
+            "minY": 1.09
+          }
+        },
+        "covers": [
+          "TORSO_UPPER",
+          "TORSO_LOWER",
+          "PELVIS",
+          "UPPER_LEG_L",
+          "UPPER_LEG_R",
+          "LOWER_LEG_L",
+          "LOWER_LEG_R",
+          "FEET",
+          "UPPER_ARM_L",
+          "UPPER_ARM_R"
+        ]
+      },
+      "materialVariants": [
+        "reference-colours"
+      ],
+      "tags": [
+        "image-to-3d",
+        "reference-reviewed",
+        "base-outfit",
+        "shared-rig"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 4400
+        },
+        "materials": 1
+      }
     }
   ]
 }

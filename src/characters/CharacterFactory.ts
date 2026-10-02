@@ -4,7 +4,7 @@ import { CharacterDNA, parseCharacterDNA } from './CharacterDNA';
 import { generatePhenotype } from './generatePhenotype';
 import { universalHumanProfile } from './UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
-import { hairAssetPath, beardAssetPath, characterAssetURL, characterAssets } from './CharacterAssets';
+import { hairAssetPath, beardAssetPath, characterAssetURL, characterAssets, characterOutfit } from './CharacterAssets';
 import { ModuleMetadata, validateModule } from './AttachmentContract';
 
 /** Cached immutable sources; every create call owns its skeleton, mixer and materials. */
@@ -23,14 +23,18 @@ export class CharacterFactory {
         if(!pending){pending=this.load(path).then(asset=>{this.ready.set(path,asset);return asset;}).catch(error=>{this.sources.delete(path);throw error;});this.sources.set(path,pending);}
         return pending;
     }
+    /** Legacy third argument disables the full appearance for bare authoring/tests. */
     async create(dna:CharacterDNA,lod:number,hair=true){
         dna=parseCharacterDNA(dna);
         const profile=universalHumanProfile(dna),path=hair?hairAssetPath(profile.appearance.hairStyle,lod):null;
         const beardPath=hair?beardAssetPath(profile.appearance.beardStyle,lod):null;
-        const [body,appearance,beard]=await Promise.all([this.asset(characterAssetURL('body/universal-human',lod)),path?this.asset(path):null,beardPath?this.asset(beardPath):null]);
+        const outfit=hair?this.modules.get(`garment/${characterOutfit(dna.seed).style}`):null;
+        const [body,appearance,beard,clothes]=await Promise.all([this.asset(characterAssetURL('body/universal-human',lod)),path?this.asset(path):null,beardPath?this.asset(beardPath):null,outfit?this.asset(outfit.path):null]);
         if(appearance)appearance.scene.userData.referenceAsset={style:profile.appearance.hairStyle,path,provenance:path!.replace('.glb','.provenance.json')};
         if(beard)beard.scene.userData.referenceAsset={style:profile.appearance.beardStyle,path:beardPath,provenance:beardPath!.replace('.glb','.provenance.json')};
-        return new UniversalHuman(body,profile,generatePhenotype(dna).skinTone,appearance?.scene??null,beard?.scene??null);
+        const character=new UniversalHuman(body,profile,generatePhenotype(dna).skinTone,appearance?.scene??null,beard?.scene??null,clothes&&outfit?[{metadata:outfit.metadata,source:clothes.scene}]:[]);
+        character.root.userData.outfit=outfit?characterOutfit(dna.seed).style:null;
+        return character;
     }
     async createWorld(dna:CharacterDNA){await this.asset(characterAssetURL('body/universal-human',2));return this.createWorldReady(dna);}
     /** Annual respawns reuse the already-loaded source, so there is no empty slot while fetching. */

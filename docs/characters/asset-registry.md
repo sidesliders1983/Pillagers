@@ -26,6 +26,11 @@ triangle budgets (10000/5000/1600). Head modules have a 10000-triangle cap and
 two-material cap to admit the already reviewed braid surface. This is an explicit
 quality exception, not a promise of aggressive reduction at every LOD.
 
+The first [reference clothing batch](base-clothing.md) adds three full outfits.
+Their runtime LOD2 is independent of body LOD, with a 4,400-triangle/one-material
+budget and one 512px baked reference albedo. The registry declares drape regions
+and partial sleeve coverage rather than per-character hand-tuned offsets.
+
 ## Authoring → registry → validator → runtime
 
 1. Generate from the supplied reference and use the existing Blender optimization,

@@ -6,7 +6,7 @@ import {validateAssetRecord,validateLoadedBodyOrientation} from '../scripts/char
 const {characterAssets,characterAsset,characterAssetURL,validateCharacterRegistry,availableHairStyles}=load('../src/characters/CharacterAssets.ts');
 
 test('registry discovery retains reviewed LOD policy and validates module references',()=>{
-    assert.equal(validateCharacterRegistry().length,13);
+    assert.equal(validateCharacterRegistry().length,16);
     for(const style of availableHairStyles)assert.equal(characterAssetURL(`hair/${style}`,0),characterAssetURL(`hair/${style}`,2));
     assert.notEqual(characterAssetURL('body/universal-human',0),characterAssetURL('body/universal-human',2));
     assert.notEqual(characterAssetURL('beard/braid',0),characterAssetURL('beard/braid',2));

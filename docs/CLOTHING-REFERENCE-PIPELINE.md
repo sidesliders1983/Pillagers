@@ -38,3 +38,11 @@ reference garment and will be replaced when accepted modules exist.
 
 The issue remains incomplete until actual generated clothing has passed those
 checks and is integrated; reference preparation alone does not satisfy it.
+
+## First integration batch
+
+`cream-tunic`, `long-dress` and `mantle-tunic` are the first LOD2 runtime batch.
+See [base clothing integration](characters/base-clothing.md) for extraction,
+shared-rig fitting, seed assignment, coverage and verification. The nine remaining
+generated figures are still candidates. Raw generation completion never implies
+automatic acceptance or publication of clothing.
