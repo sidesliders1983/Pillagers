@@ -17,7 +17,7 @@ export class CharacterPreview {
     private currentPhenotype:Phenotype|null=null;
     private comparisonPhenotype:Phenotype|null=null;
     private revision=0;
-    private lod=0;
+    private lod=2;
     private animation:HumanAnimation='Idle';
     private clock=new Clock();
     private observer:ResizeObserver;

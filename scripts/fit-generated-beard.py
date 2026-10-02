@@ -1,13 +1,19 @@
 """Fit original beard LOD surfaces to the same reference skull as generated hair."""
-import bpy, sys, json, hashlib
+import bpy, sys, json, hashlib, argparse
 from pathlib import Path
 from mathutils import Vector
 
-style, source, destination = sys.argv[sys.argv.index('--') + 1:]
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('style')
+parser.add_argument('source')
+parser.add_argument('destination')
+parser.add_argument('--lod', type=int, choices=[0, 1, 2], default=2)
+args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
+style, source, destination = args.style, args.source, args.destination
 source = Path(source).resolve()
 destination = Path(destination).resolve()
 destination.mkdir(parents=True, exist_ok=True)
-for lod in range(3):
+for lod in [args.lod]:
     bpy.ops.object.select_all(action='SELECT')
     bpy.ops.object.delete(use_global=False)
     path = source / f'Beard_{style}_LOD{lod}.glb'

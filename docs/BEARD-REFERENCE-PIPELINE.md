@@ -20,6 +20,12 @@ existing fixed LOD2 body configuration.
 
 ## Remaining work
 
+Further processing and fitting now focus on LOD2 only. Use
+`optimize-character.py ... --lod 2` to skip the LOD0/1 reduction, UV and bake
+stages; existing three-LOD results are reused. The beard fitter defaults to
+LOD2, with explicit `--lod 0` or `--lod 1` available later. Character Lab starts
+in LOD2; existing LOD0/1 assets remain accessible.
+
 `scripts/run-beard-lod-queue.ps1` processes stubble, short, medium, long and
 split-braid serially from the existing extracted reference models. It waits for
 the extraction review renderer when given its process ID, uses two Blender CPU
