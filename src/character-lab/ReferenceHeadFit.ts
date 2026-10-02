@@ -1,10 +1,10 @@
 import { Vector3 } from 'three';
-import { referenceHeadFrames } from './ReferenceHeadFrames';
+import { characterAsset } from '../characters/CharacterAssets';
 
 /** Undo the old common bust frame, then align this source's head to the skull. */
 export function referenceHeadMapper(kind:'hair'|'beard',style:string,size:Vector3){
-    const key=`${kind}/${style}` as keyof typeof referenceHeadFrames;
-    const frame=referenceHeadFrames[key];
+    const key=`${kind}/${style}`;
+    const frame=characterAsset(key).sourceFrame;
     if(!frame)throw new Error(`Missing measured reference head: ${key}`);
     const centre=new Vector3(...frame.centre),up=new Vector3(...frame.up).normalize();
     const front=new Vector3(...frame.front);front.addScaledVector(up,-front.dot(up)).normalize();

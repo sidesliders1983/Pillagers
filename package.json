@@ -12,7 +12,9 @@
     "test": "node --test tests/*.test.mjs",
     "assets:optimize": "node scripts/asset-pipeline.mjs optimize",
     "assets:publish": "node scripts/asset-pipeline.mjs publish",
-    "assets:test": "node scripts/asset-pipeline.mjs test"
+    "assets:test": "node scripts/asset-pipeline.mjs test",
+    "validate:characters": "node scripts/validate-characters.mjs",
+    "assets:registry": "node scripts/update-character-registry.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

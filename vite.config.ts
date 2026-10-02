@@ -21,7 +21,8 @@ export default defineConfig({
             },
             closeBundle() {
                 mkdirSync('dist', { recursive: true });
-                cpSync('Assets', 'dist/assets', { recursive: true });
+                if(existsSync('Assets'))cpSync('Assets', 'dist/assets', { recursive: true });
+                else console.warn('Local scenery kit absent: Character Lab builds normally; supply licensed Assets/ to run the World.');
                 cpSync('node_modules/three/examples/jsm/libs/draco/gltf', 'dist/draco', { recursive: true });
             }
         }] });
