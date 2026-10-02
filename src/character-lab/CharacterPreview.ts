@@ -50,7 +50,7 @@ export class CharacterPreview {
     }
     private reportModel(){
         const appearance=this.current?.root.getObjectByName('Appearance');
-        this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig · ${appearance?.userData.hairAsset==='reference-generated'?'reference hair':'hair asset pending'}${appearance?.userData.beardAsset==='pending'?' · beard asset pending':''}`);
+        this.report(`Universal Human · LOD${this.lod} · ${this.animation} · one shared rig · ${appearance?.userData.hairAsset==='reference-generated'?'reference hair':'hair asset pending'}${appearance?.userData.beardAsset==='pending'?' · beard asset pending':appearance?.userData.beardAsset==='reference-generated'?' · reference beard':''}`);
     }
     private layout(){if(this.current)this.current.root.position.x=this.comparison?-1:0;if(this.comparison)this.comparison.root.position.x=1;}
     resetView(){const comparing=this.comparisonDNA!==null;this.controls.target.set(0,.95,0);this.camera.position.set(comparing?0:1.8,1.75,comparing?4.7:3.2);this.controls.update();}

@@ -5,6 +5,7 @@ import { generatePhenotype } from './generatePhenotype';
 import { universalHumanProfile } from './UniversalHumanProfile';
 import { UniversalHuman, HumanAnimation } from './UniversalHuman';
 import { hairAssetPath } from '../character-lab/GeneratedHair';
+import { beardAssetPath } from '../character-lab/GeneratedBeard';
 
 /** Cached immutable sources; every create call owns its skeleton, mixer and materials. */
 export class CharacterFactory {
@@ -18,9 +19,11 @@ export class CharacterFactory {
     }
     async create(dna:CharacterDNA,lod:number,hair=true){
         const profile=universalHumanProfile(dna),path=hair?hairAssetPath(profile.appearance.hairStyle,lod):null;
-        const [body,appearance]=await Promise.all([this.asset(`/universal-human/UniversalHuman_LOD${lod}.glb`),path?this.asset(path):null]);
+        const beardPath=hair?beardAssetPath(profile.appearance.beardStyle,lod):null;
+        const [body,appearance,beard]=await Promise.all([this.asset(`/universal-human/UniversalHuman_LOD${lod}.glb`),path?this.asset(path):null,beardPath?this.asset(beardPath):null]);
         if(appearance)appearance.scene.userData.referenceAsset={style:profile.appearance.hairStyle,path,provenance:path!.replace('.glb','.provenance.json')};
-        return new UniversalHuman(body,profile,generatePhenotype(dna).skinTone,appearance?.scene??null);
+        if(beard)beard.scene.userData.referenceAsset={style:profile.appearance.beardStyle,path:beardPath,provenance:beardPath!.replace('.glb','.provenance.json')};
+        return new UniversalHuman(body,profile,generatePhenotype(dna).skinTone,appearance?.scene??null,beard?.scene??null);
     }
     async createWorld(dna:CharacterDNA){await this.asset('/universal-human/UniversalHuman_LOD2.glb');return this.createWorldReady(dna);}
     /** Annual respawns reuse the already-loaded source, so there is no empty slot while fetching. */
