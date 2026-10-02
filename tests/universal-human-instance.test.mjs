@@ -6,16 +6,22 @@ const require=createRequire(import.meta.url),THREE=require('three');
 const {UniversalHuman}=load('../src/character-lab/UniversalHuman.ts');
 const {defaultDNA}=load('../src/characters/CharacterDNA.ts');
 const {universalHumanProfile}=load('../src/characters/UniversalHumanProfile.ts');
+const {socketDefinitions}=load('../src/characters/AttachmentContract.ts');
 test('morph bind matrices remain independent of source and pinned instances; owned bone textures are released',()=>{
     const scene=new THREE.Group(),root=new THREE.Bone(),head=new THREE.Bone();
     root.name='Root';head.name='Head';head.position.y=1.5;root.add(head);scene.add(root);
+    const bones=[root,head];for(const name of new Set(Object.values(socketDefinitions).map(socket=>socket.bone)))if(name!=='Head'){const bone=new THREE.Bone();bone.name=name;root.add(bone);bones.push(bone);}
     head.userData.morphTranslations=JSON.stringify({Tall:[0,.3,0]});
-    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute([0,0,0,1,0,0,0,1,0],3));
-    geometry.morphAttributes.position=['BellyJiggle','BreastJiggle'].map(name=>{const a=new THREE.Float32BufferAttribute(Array(9).fill(0),3);a.name=name;return a;});
+    const positions=[0,0,0,1,0,0,0,1,0];
+    // A small non-degenerate surface in each contract region; this remains a
+    // bind-ownership fixture, with the full named socket rig now required.
+    for(const y of [.86,1.08,1.32,1.55,1.58,1.65])positions.push(-.08,y,-.06,.08,y,-.06,0,y,.08,0,y+.06,0);
+    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+    geometry.morphAttributes.position=['BellyJiggle','BreastJiggle'].map(name=>{const a=new THREE.Float32BufferAttribute(Array(positions.length).fill(0),3);a.name=name;return a;});
     const mesh=new THREE.SkinnedMesh(geometry,new THREE.MeshStandardMaterial());scene.add(mesh);scene.updateMatrixWorld(true);
-    geometry.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(Array(12).fill(0),4));
-    geometry.setAttribute('skinWeight',new THREE.Float32BufferAttribute([1,0,0,0,1,0,0,0,1,0,0,0],4));
-    mesh.bind(new THREE.Skeleton([root,head]));
+    geometry.setAttribute('skinIndex',new THREE.Uint16BufferAttribute(Array(positions.length/3*4).fill(0),4));
+    geometry.setAttribute('skinWeight',new THREE.Float32BufferAttribute(Array.from({length:positions.length/3},()=>[1,0,0,0]).flat(),4));
+    mesh.bind(new THREE.Skeleton(bones));
     const source=mesh.skeleton.boneInverses.map(matrix=>matrix.toArray());
     const asset={scene,animations:['Idle','Walk','Run'].map(name=>new THREE.AnimationClip(name,1,[]))};
     const dna=defaultDNA(),a=new UniversalHuman(asset,universalHumanProfile({...dna,morphology:{masculinity:.51,height:1.6}}),'#eeccbb');

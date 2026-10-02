@@ -6,6 +6,7 @@ import { characterName, fullName } from '../characters/naming/generateName';
 import { availableHairStyles } from './GeneratedHair';
 import { availableBeardStyles } from './GeneratedBeard';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
+import { fitPresetLabels } from '../characters/FitPresets';
 
 const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     physicality:{label:'Physicality',low:'Slight / delicate',high:'Powerful / imposing'},
@@ -14,7 +15,7 @@ const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     cunning:{label:'Cunning',low:'Straightforward',high:'Crafty / opportunistic'},
     temperament:{label:'Temperament',low:'Calm / restrained',high:'Fierce / volatile'},
 };
-export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2';
+export type LabAction='reroll-name'|'reroll'|'randomize'|'defaults'|'pin'|'unpin'|'copy'|'export'|'import'|'export-glb'|'reset-view'|'overview'|'idle'|'walk'|'run'|'lod0'|'lod1'|'lod2'|`debug-${'sockets'|'landmarks'|'cages'|'coverage'|'bounds'}`|`preset-${keyof typeof fitPresetLabels}`;
 export class CharacterLabUI {
     private dna:CharacterDNA;
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void){
@@ -45,9 +46,15 @@ export class CharacterLabUI {
                     <div class="lab-character-labels"><span id="lab-current-label"></span><span id="lab-comparison-label" hidden></span></div>
                     <div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button><button data-action="overview">RTS view</button></div></div>
                     <div class="lab-dimensions" id="lab-dimensions"></div>
+                    <details class="lab-panel lab-fit-debug"><summary>Attachment &amp; Fit debug · v0.1</summary>
+                        <div class="lab-button-row">${['sockets','landmarks','cages','coverage','bounds'].map(key=>`<button data-action="debug-${key}" aria-pressed="false">${key}</button>`).join('')}</div>
+                        <p class="lab-note">Blue: sockets · pink: surface landmarks · wireframes: fit cages / coverage. Overlays follow the animated rig. Physicality is retained only for legacy compatibility.</p>
+                        <label>Fit test preset<select id="lab-fit-preset"><option value="">Choose a test profile</option>${Object.entries(fitPresetLabels).map(([key,label])=>`<option value="${key}">${label}</option>`).join('')}</select></label>
+                        <details><summary>Contract and equipped module metadata</summary><pre id="lab-fit-metadata"></pre></details>
+                    </details>
                     <div class="lab-panel" aria-label="Appearance size ratios"><h2>Appearance size</h2>
                     ${Object.entries(appearanceFitLimits).map(([key,[min,max]])=>`<div class="lab-slider"><label for="fit-${key}">${key==='hair'?'Hair clearance':key[0].toUpperCase()+key.slice(1)+' ratio'} <output id="fit-${key}-value">100%</output></label><input id="fit-${key}" data-appearance-fit="${key}" type="range" min="${min*100}" max="${max*100}" value="100" step="1"></div>`).join('')}
-                    <p class="lab-note">Hair: 1.0 is the fitted baseline; higher values add space around the head. Clothing cannot shrink below the safe fit. Styles and colours follow the profile. Only generated reference assets are shown. Short and medium hair are available; other hair and beard assets are pending.</p></div>
+                    <p class="lab-note">Hair: 1.0 uses the shared head fit; higher values add clearance. Clothing cannot shrink below the safe fit. Styles and colours follow the profile. Only accepted generated reference assets are shown.</p></div>
                     <div class="lab-compare"><div><strong>Keep an identity beside you.</strong><p>Pin this character, then change a trait or reroll the seed.</p></div><button id="lab-pin" data-action="pin">Pin comparison</button><button id="lab-unpin" data-action="unpin" hidden>Remove</button></div>
                 </section>
                 <section class="lab-panel lab-results" aria-label="Heritage and occupation fit">
@@ -66,7 +73,7 @@ export class CharacterLabUI {
         </div>`;
         root.querySelectorAll('.lab-model-tools:not([aria-label="Body presets"])').forEach(row=>row.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button===row.firstElementChild))));
         root.querySelectorAll('[aria-label="Level of detail"] button').forEach(button=>button.setAttribute('aria-pressed',String((button as HTMLButtonElement).dataset.action==='lod2')));
-        root.addEventListener('click',event=>{const button=(event.target as HTMLElement).closest<HTMLButtonElement>('button[data-action]');if(button){if(button.hasAttribute('aria-pressed'))button.parentElement!.querySelectorAll('button').forEach(sibling=>sibling.setAttribute('aria-pressed',String(sibling===button)));this.onAction(button.dataset.action as LabAction);}});
+        root.addEventListener('click',event=>{const button=(event.target as HTMLElement).closest<HTMLButtonElement>('button[data-action]');if(button){if(button.dataset.action!.startsWith('debug-'))button.setAttribute('aria-pressed',String(button.getAttribute('aria-pressed')!=='true'));else if(button.hasAttribute('aria-pressed'))button.parentElement!.querySelectorAll('button').forEach(sibling=>sibling.setAttribute('aria-pressed',String(sibling===button)));this.onAction(button.dataset.action as LabAction);}});
         root.addEventListener('input',event=>{
             const input=event.target as HTMLInputElement;
             const next=cloneDNA(this.dna);
@@ -90,6 +97,7 @@ export class CharacterLabUI {
             this.onDNA(next);
         });
         root.addEventListener('change',event=>{
+            if((event.target as HTMLElement).id==='lab-fit-preset'){const select=event.target as HTMLSelectElement;if(select.value)this.onAction(`preset-${select.value}` as LabAction);select.value='';}
             if((event.target as HTMLElement).id==='lab-seed'&&!(event.target as HTMLInputElement).value){(event.target as HTMLInputElement).value=String(this.dna.seed);}
         });
     }
