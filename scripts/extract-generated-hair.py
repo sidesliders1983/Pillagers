@@ -8,6 +8,10 @@ from pathlib import Path
 import bpy,bmesh
 
 p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('output',type=Path)
+p.add_argument('--max-value',type=float,default=.65)
+p.add_argument('--max-saturation',type=float,default=.50)
+p.add_argument('--min-value',type=float,default=.07)
+p.add_argument('--beard-braid',action='store_true',help='Reviewed braid bust ROI: exclude forehead residue and retain its lower front binding')
 args=p.parse_args(sys.argv[sys.argv.index('--')+1:]);assert not args.output.exists()
 bpy.ops.import_scene.gltf(filepath=str(args.source))
 meshes=[o for o in bpy.context.scene.objects if o.type=='MESH'];assert meshes
@@ -28,9 +32,16 @@ def colour(material,loop):
     offset=(y*size[0]+x)*channels;return pixels[offset:offset+3]
 selected=[]
 for polygon in body.data.polygons:
+    if args.beard_braid:
+        centre=polygon.center
+        if centre.z>.20:continue
+        if polygon.material_index in images and -.35<centre.z<-.25 and all(body.data.vertices[i].co.y>.13 and abs(body.data.vertices[i].co.x)<.12 for i in polygon.vertices):
+            binding=[colorsys.rgb_to_hsv(*colour(polygon.material_index,i)) for i in polygon.loop_indices]
+            if sum(.10<h<.22 and s>.12 for h,s,v in binding)>=len(binding)*.67:
+                selected.append(polygon.index);continue
     if polygon.material_index not in images:continue
     samples=[colour(polygon.material_index,i) for i in polygon.loop_indices]
-    hair=sum(.07<max(rgb)<.65 and colorsys.rgb_to_hsv(*rgb)[1]<.50 for rgb in samples)
+    hair=sum(args.min_value<max(rgb)<args.max_value and colorsys.rgb_to_hsv(*rgb)[1]<args.max_saturation for rgb in samples)
     if hair>=len(samples)*.67:selected.append(polygon.index)
 ratio=len(selected)/len(body.data.polygons)
 assert .02<ratio<.85,f'Ambiguous hair extraction ({ratio:.1%}); visual adjustment required.'
@@ -41,5 +52,5 @@ if loose:bmesh.ops.delete(bm,geom=loose,context='VERTS')
 bm.to_mesh(body.data);bm.free();body.data.update()
 body.name='GeneratedHairCandidate';args.output.parent.mkdir(parents=True,exist_ok=True)
 bpy.ops.export_scene.gltf(filepath=str(args.output),export_format='GLB',use_selection=True,export_animations=False)
-args.output.with_suffix('.extraction.json').write_text(json.dumps({'source':str(args.source),'selectedFaces':len(selected),'fraction':ratio,'classification':'value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples','reviewRequired':True},indent=2)+'\n')
+args.output.with_suffix('.extraction.json').write_text(json.dumps({'source':str(args.source),'selectedFaces':len(selected),'fraction':ratio,'classification':f'value {args.min_value}..{args.max_value}, saturation <{args.max_saturation}, at least two thirds of UV corner samples','braidBustROI':{'excludeAboveZ':.20,'bindingZ':[-.35,-.25],'bindingMinY':.13,'bindingMaxAbsX':.12} if args.beard_braid else None,'reviewRequired':True},indent=2)+'\n')
 print('HAIR_EXTRACTION_CANDIDATE',len(selected),flush=True)
