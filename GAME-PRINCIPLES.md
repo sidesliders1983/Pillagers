@@ -30,15 +30,15 @@ Style can use rhythm, repetition and alliteration without adding factual claims.
 
 Implementation task: [GitHub lore issue](https://github.com/sidesliders1983/Pillagers/issues/14).
 
-## GP-003 — Browser-only play and local lore generation
+## GP-003 — Web-only play; lore architecture to be decided
 
 Pillagers is a web-only game. Players must not install a desktop app, local AI server, Ollama or another runtime.
 
-If AI is used for lore, inference runs on the player's device inside the browser. Model/runtime files may be downloaded as web assets and cached; this is not a separate software installation. Do not send game events to an external inference API or silently fall back to a cloud model.
+Lore generation may run entirely on our own backend, avoiding inference workloads on the player's GPU and eliminating the need for a player-side model download. A self-hosted model does not require calls to an external AI provider. Browser inference remains a possible alternative, not a requirement.
 
-The game must remain playable with factual template-based chronicles when browser AI is unsupported, too slow, unavailable or its model download fails. A model download must not block initial play. Cached files may be evicted; do not promise permanent offline availability or make full offline play a requirement.
+The northstar architecture, runtime/model, hosting, event authority, API boundaries, queuing, persistence and operating budgets will be evaluated later. Do not implement or lock these choices merely from this principle. Backend generation is the current preferred direction.
 
-Generate at most once per annual summary, while the simulation is paused; validate outputs according to GP-002 and reuse saved results. Run inference away from the UI thread where supported, but account for GPU/memory contention with rendering. Select runtime/model only after measuring download size, device compatibility, Dutch output quality and game performance.
+Generate at most once per annual summary and reuse saved results. Apply GP-002 regardless of where inference runs. The game and annual summary must remain usable while generation is pending or fails, using factual template-based chronicles as fallback. Avoid continuous inference requests and any automatic external-provider fallback. Full offline play is not required.
 
 ## Scope and implementation status
 
