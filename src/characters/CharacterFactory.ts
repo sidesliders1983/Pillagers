@@ -27,7 +27,9 @@ export class CharacterFactory {
     createWorldReady(dna:CharacterDNA){
         const source=this.ready.get('/universal-human/UniversalHuman_LOD2.glb');
         if(!source)throw new Error('Load the world body before synchronous respawn.');
-        return new WorldCharacter(new UniversalHuman(source,universalHumanProfile(dna),generatePhenotype(dna).skinTone),()=>this.create(dna,1,false),dna.seed,dna);
+        // Ten mobile prototype inhabitants do not need an additional close-view rig.
+        // Fixed LOD2 avoids deferred parsing, skin tinting and GPU uploads on first zoom.
+        return new WorldCharacter(new UniversalHuman(source,universalHumanProfile(dna),generatePhenotype(dna).skinTone),null,dna.seed,dna);
     }
 }
 export const characterFactory=new CharacterFactory();
@@ -41,7 +43,7 @@ export class WorldCharacter {
     private disposed=false;
     lod=2;
     state:HumanAnimation='Idle';
-    constructor(body:UniversalHuman,private close:()=>Promise<UniversalHuman>,seed:number,private dna:CharacterDNA|null=null){
+    constructor(body:UniversalHuman,private close:(()=>Promise<UniversalHuman>)|null,seed:number,private dna:CharacterDNA|null=null){
         this.models.set(2,body);this.root.add(body.root);this.root.userData.character={seed,state:this.state,lod:this.lod};
     }
     setMovementSpeed(speed:number){this.setState(movementState(speed));}
@@ -53,8 +55,8 @@ export class WorldCharacter {
     }
     setState(state:HumanAnimation){if(this.state!==state){this.state=state;this.models.get(this.lod)!.setAnimation(state);}}
     update(delta:number,distance:number){
-        const desired=worldLOD(distance,this.lod);
-        if(desired===1&&!this.models.has(1)&&!this.pending&&!this.disposed){
+        const desired=this.close?worldLOD(distance,this.lod):2;
+        if(desired===1&&this.close&&!this.models.has(1)&&!this.pending&&!this.disposed){
             this.pending=this.close().then(model=>{if(this.disposed){model.dispose();return;}if(this.dna)model.apply(universalHumanProfile(this.dna),generatePhenotype(this.dna).skinTone);this.models.set(1,model);model.root.visible=false;this.root.add(model.root);}).catch(error=>{console.error('Close character LOD failed',error);}).finally(()=>{this.pending=null;});
         }
         if(desired!==this.lod&&this.models.has(desired)){
