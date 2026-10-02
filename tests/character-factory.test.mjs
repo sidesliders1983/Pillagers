@@ -22,4 +22,10 @@ test('asynchronous LOD switch preserves navigation root and state; dispose relea
     character.setMovementSpeed(0);assert.equal(far.states.at(-1),'Idle');
     character.dispose();assert.ok(far.disposed&&near.disposed);
 });
+test('fixed world LOD keeps one rig across repeated close/far camera passes',()=>{
+    let updates=0;const body={root:new Group(),setAnimation(){},update(){updates++;},dispose(){}};
+    const character=new WorldCharacter(body,null,42);
+    for(const distance of [40,20,5,1,40,5]){character.update(.016,distance);assert.equal(character.lod,2);assert.equal(character.root.children.length,1);}
+    assert.equal(updates,6);character.dispose();
+});
 
