@@ -10,22 +10,22 @@ const versions:Record<string,string>={
     "/appearance/beards/stubble/Beard_stubble_LOD2.glb": "67842a4d709f",
     "/appearance/braid/Hair_braid_LOD0.glb": "46f7bce066bf",
     "/appearance/braid/Hair_braid_LOD1.glb": "5b27a4a4d084",
-    "/appearance/braid/Hair_braid_LOD2.glb": "40b3c56e6701",
+    "/appearance/braid/Hair_braid_LOD2.glb": "bd0708069f1e",
     "/appearance/bun/Hair_bun_LOD0.glb": "e2dd078e8eab",
     "/appearance/bun/Hair_bun_LOD1.glb": "5e51f73090f2",
-    "/appearance/bun/Hair_bun_LOD2.glb": "252884e662d3",
+    "/appearance/bun/Hair_bun_LOD2.glb": "4c004e100563",
     "/appearance/long/Hair_long_LOD0.glb": "eb5ad4909256",
     "/appearance/long/Hair_long_LOD1.glb": "c8f055813531",
-    "/appearance/long/Hair_long_LOD2.glb": "195f23397224",
+    "/appearance/long/Hair_long_LOD2.glb": "d0b7416ae395",
     "/appearance/medium/Hair_medium_LOD0.glb": "cff8f9c1ca2e",
     "/appearance/medium/Hair_medium_LOD1.glb": "c26bbaace906",
-    "/appearance/medium/Hair_medium_LOD2.glb": "3ab42c965a49",
+    "/appearance/medium/Hair_medium_LOD2.glb": "1dae74e7484a",
     "/appearance/short/Hair_short_LOD0.glb": "5230753fdd06",
     "/appearance/short/Hair_short_LOD1.glb": "104c60c0888a",
-    "/appearance/short/Hair_short_LOD2.glb": "dd92ecc910f9",
+    "/appearance/short/Hair_short_LOD2.glb": "dcfa92c73fd8",
     "/appearance/tied/Hair_tied_LOD0.glb": "fb05756c1402",
     "/appearance/tied/Hair_tied_LOD1.glb": "8d4bef31a281",
-    "/appearance/tied/Hair_tied_LOD2.glb": "ba4653b41fb6"
+    "/appearance/tied/Hair_tied_LOD2.glb": "4d52a6eaa0e6"
 };
 export function versionedAppearanceAsset(path:string){
     const version=versions[path];

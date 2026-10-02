@@ -148,6 +148,13 @@ test('LOD2 reference surfaces fit the actual skull, including triangle interiors
         const profile={hairStyle:style,beardStyle:'none',color:'#986e55',greyAmount:0};
         const group=appearanceModules(profile,size,2,undefined,hair.scene,skull);
         group.traverse(mesh=>{if(!mesh.isMesh)return;const position=mesh.geometry.attributes.position,index=mesh.geometry.index,count=index?.count??position.count;
+            const original=hair.scene.getObjectByName(mesh.name).geometry.attributes.position,copies=new Map();
+            for(let i=0;i<original.count;i++){
+                const key=[original.getX(i),original.getY(i),original.getZ(i)].join(',');
+                const previous=copies.get(key);
+                if(previous!==undefined)assert.ok(new Vector3().fromBufferAttribute(position,i).distanceTo(new Vector3().fromBufferAttribute(position,previous))<1e-6,`${style}: fit must not tear flat-normal or UV seam copies apart`);
+                else copies.set(key,i);
+            }
             for(let t=0;t<count;t+=3){const vertices=[0,1,2].map(k=>new Vector3().fromBufferAttribute(position,index?index.getX(t+k):t+k));
                 for(const weights of [[1/3,1/3,1/3],[.5,.5,0],[.5,0,.5],[0,.5,.5]]){
                     const p=new Vector3();vertices.forEach((v,k)=>p.addScaledVector(v,weights[k]));

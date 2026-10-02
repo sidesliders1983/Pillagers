@@ -14,3 +14,16 @@ test('every loaded appearance URL invalidates browser caches when published geom
         }
     }
 });
+
+test('body LOD changes retain the reviewed hair surface',()=>{
+    for(const style of availableHairStyles){
+        assert.equal(hairAssetPath(style,0),hairAssetPath(style,2));
+        assert.equal(hairAssetPath(style,1),hairAssetPath(style,2));
+        const path=new URL(hairAssetPath(style,2),'http://local.test').pathname;
+        const record=JSON.parse(readFileSync(new URL(`../public${path.replace('.glb','.provenance.json')}`,import.meta.url)));
+        const source=readFileSync(new URL(`../public/appearance/${style}/Hair_${style}_LOD0.glb`,import.meta.url));
+        assert.equal(record.qualitySource.sha256,createHash('sha256').update(source).digest('hex'));
+        assert.equal(record.reviewRequired,false);
+        assert.ok(record.qualitySource.triangles<10000);
+    }
+});
