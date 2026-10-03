@@ -1,8 +1,12 @@
 # Pillagers — Low-Poly Character Reference Guide
 
-Version: `pillagers-character-style/0.4-draft`  
+Version: `pillagers-character-style/0.4-draft.1`  
 Date: 2026-10-03  
 Scope: canonical visual direction for the Character Lab v0.4 upgrade. This document records requirements; it does not certify that assets have been generated, reviewed or implemented.
+
+Companion documents: [Codex multi-agent implementation brief and acceptance criteria](CHARACTER-LAB-V04.md) · [source-reference manifest](references/character-lab-v04/manifest.json).
+
+This guide owns visual rules. The implementation brief owns delivery scope, agent ownership, validation gates and stop conditions. The existing character/fit/registry contracts continue to own technical semantics. Read them together; do not create a second style guide or parallel character framework.
 
 ## 1. North star
 
@@ -23,7 +27,7 @@ A striking individual hero is not the target. A coherent reusable character lang
 
 ## 2. Reference inventory and precedence
 
-Eight unique illustrations were supplied in the conversation; the repeated adult sheet is one source, not two. The associated local/task reference pack is named `pillagers-character-lab-v04-references.zip` and contains a filename/provenance/hash manifest.
+Eight unique illustrations were supplied in the conversation; the repeated adult sheet is one source, not two. The associated local/task reference pack is named `pillagers-character-lab-v04-references.zip` and contains a filename/provenance/hash manifest. Its `MANIFEST.json` corresponds to the [repository manifest](references/character-lab-v04/manifest.json); verify hashes before visual work.
 
 **The source illustrations are not embedded in this GitHub document or automatically available in Codex.** Attach the reference pack to the Codex task or supply a readable local reference directory. If neither is available, report that limitation before claiming direct image-reference validation. Do not treat a ChatGPT sandbox path as a repository asset path.
 
