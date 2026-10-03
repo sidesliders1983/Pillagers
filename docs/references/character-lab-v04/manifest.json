@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "referenceSet": "pillagers-character-lab-v04",
+  "date": "2026-10-03",
+  "source": "Eight unique user-supplied illustrations in the Pillagers project conversation; duplicated adult sheet included once.",
+  "publicationStatus": "Original illustrations remain task-attached/local. This manifest does not grant production or public redistribution rights.",
+  "files": [
+    {
+      "file": "01-adult-silhouette-sheet.jpeg",
+      "originalFilename": "C9E53543-E36F-4234-9C45-8CD4F45801B9.jpeg",
+      "sha256": "a4b9000d7ad97f794672e9bd27aefe0618590a1af92f7b6b5d23b1efdb678b7f",
+      "bytes": 451928,
+      "width": 1448,
+      "height": 1086,
+      "purpose": "Adult silhouette contrast and large geometric costume masses"
+    },
+    {
+      "file": "02-child-proportions-sheet.jpeg",
+      "originalFilename": "2D741FC8-5CED-40DC-86F9-9B2EA7F8CE7D.jpeg",
+      "sha256": "79e13f9cb8173e5f305a4f191d89b4aa00844368ae6394c6bc59ce29b3b6d849",
+      "bytes": 405686,
+      "width": 1448,
+      "height": 1086,
+      "purpose": "Age-aware proportions; not the adult size standard"
+    },
+    {
+      "file": "03-bearded-archetypes-sheet.jpeg",
+      "originalFilename": "12ECE77F-498D-48C6-A9A7-E07A60CF0621.jpeg",
+      "sha256": "b6728e71bcd5e4d933ddfea04b6db4b5ed5e3950cb36dd4d1a04faa970724f02",
+      "bytes": 440841,
+      "width": 1448,
+      "height": 1086,
+      "purpose": "Compact, broad and lean silhouettes and beard wedges"
+    },
+    {
+      "file": "04-lean-warrior.jpeg",
+      "originalFilename": "IMG_3963.jpeg",
+      "sha256": "2538834def8deadba104c8669f35c784407cd802a8aad7e216f4f48a4523db4d",
+      "bytes": 72773,
+      "width": 800,
+      "height": 600,
+      "purpose": "Lean angular construction and tapered limbs"
+    },
+    {
+      "file": "05-spear-carrier.jpeg",
+      "originalFilename": "IMG_3962.jpeg",
+      "sha256": "74833d9f318ec952c4250c0c7867aca5ac6ad3cebbf5afc99c8d8c85d3b5b3aa",
+      "bytes": 94887,
+      "width": 752,
+      "height": 564,
+      "purpose": "Compact stylized anatomy and readable equipment"
+    },
+    {
+      "file": "06-broad-axe-carrier.jpeg",
+      "originalFilename": "IMG_3961.jpeg",
+      "sha256": "e932cf5164836d2964d52fa50ebd02f6491954c2c9455d4a5fdd3c3d656b2d17",
+      "bytes": 269916,
+      "width": 752,
+      "height": 564,
+      "purpose": "Broad compact mass and simplified equipment"
+    },
+    {
+      "file": "07-rounded-warrior.jpeg",
+      "originalFilename": "IMG_3959.jpeg",
+      "sha256": "6b97e24899daf7ac2a1ec9805b97e101e2bd19a7ae79d5180615d10c9e618dc1",
+      "bytes": 115820,
+      "width": 752,
+      "height": 564,
+      "purpose": "Faceted belly mass and short tapering legs"
+    },
+    {
+      "file": "08-stooped-elder.jpeg",
+      "originalFilename": "IMG_3960.jpeg",
+      "sha256": "f0f719d1706dba357a9aedd349cb9c64af97794a8cf64bce581dad92debc3c73",
+      "bytes": 235841,
+      "width": 752,
+      "height": 564,
+      "purpose": "Posture and long narrow shapes without anatomical microdetail"
+    }
+  ]
+}
