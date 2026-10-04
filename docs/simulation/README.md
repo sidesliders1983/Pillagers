@@ -10,6 +10,7 @@ Purpose:
 Files:
 - `SIMULATION-RUN-001-DEMOGRAPHY.md`
 - `SIMULATION-RUN-002-ECONOMY.md`
+- `GAMEPLAY-MECHANICS-OVERVIEW.md` — current shared gameplay/simulation design baseline for collaborators
 
 Next planned run:
 - Run #003 with CharacterDNA-driven occupation aptitude, family experience, occupation switching, explicit kinship distance, and persistent residence/building state.
