@@ -1,7 +1,9 @@
 # Pillagers Simulation Run #002 — Demography + Food + Materials
 
 Status: design simulation, manually executed in chat.
-Period: 1200–1250.
+Period: legacy notation 1200–1250.
+
+> Canonical calendar note: Pillagers now starts at **Winter 800**, with one simulation year running winter-to-winter and ages expressed as **winters**. This run keeps its original 1200-series labels as historical design-run notation; the equivalent canonical interval would be Winter 800–850.
 Purpose: keep the same demographic foundation as Run #001, add two resources, and observe whether simple resource constraints generate emergent settlement behavior.
 
 ## Same start population
@@ -150,6 +152,7 @@ Next model should separate:
 Tent can be a residence without a permanent building.
 A permanent house should persist independently of household membership.
 Tent households should be able to move into vacant houses before building new ones.
+Vacant permanent houses pay no upkeep but now accumulate one vacancy-maintenance debt step per winter; after 3 consecutive vacant winters they collapse and return 50% salvage of total invested Materials.
 
 ### 2. Occupations should not be permanent
 
