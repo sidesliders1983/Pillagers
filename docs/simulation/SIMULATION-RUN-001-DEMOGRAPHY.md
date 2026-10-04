@@ -1,7 +1,9 @@
 # Pillagers Simulation Run #001 — Demography only
 
 Status: design simulation, manually executed in chat.
-Period: 1200–1220.
+Period: legacy notation 1200–1220.
+
+> Canonical calendar note: Pillagers now starts at **Winter 800**, with one simulation year running winter-to-winter and ages expressed as **winters**. This run keeps its original 1200-series labels as historical design-run notation; the equivalent canonical interval would be Winter 800–820.
 Purpose: test whether a small settlement can generate understandable multi-generational social structure before economy/resources are introduced.
 
 ## Start population
