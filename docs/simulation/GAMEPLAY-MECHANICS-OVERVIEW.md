@@ -3,6 +3,14 @@
 Status: shared design baseline after Simulation Runs #001/#002 and v0.3/v0.5 design exploration.
 Purpose: communicate the current gameplay/simulation decisions to collaborators. This is a design baseline, not a claim that every mechanic is implemented.
 
+## Canonical time model
+
+- Canonical game start: **Winter 800**.
+- One simulation year runs **winter-to-winter**.
+- Player-facing age is expressed in **winters** (for example: `16 winters`).
+- Internal age remains derived from `currentWinter - birthWinter`.
+- Historical examples that use 1200+ in older design-run documents are legacy simulation notation only; future canonical examples should use Winter 800+.
+
 ## Core premise
 
 Pillagers is a living Viking settlement simulation with active player control.
@@ -186,6 +194,8 @@ These are distinct.
 
 A Household can dissolve while its Building remains.
 
+A vacant permanent Building pays no upkeep, but vacancy still creates maintenance debt. Each full unoccupied winter adds one debt step. After **3 consecutive vacant winters**, the Building collapses and returns the normal 50% salvage of total invested Materials. If a Household moves in before collapse, vacancy debt stops; normal occupied upkeep resumes and a paid upkeep year resets maintenance debt.
+
 ### Housing priority
 
 When a household needs residence:
@@ -206,14 +216,18 @@ A tent household:
 
 ### House maintenance and collapse
 
-A base permanent house costs 1 Material/year upkeep.
+A base permanent house costs 1 Material/year upkeep while occupied.
 
-If full upkeep cannot be paid for three consecutive years:
+A permanent building accumulates one maintenance-debt step per winter when either:
+- it is occupied but full upkeep is not paid; or
+- it is vacant (vacant buildings pay no upkeep).
+
+At 3 consecutive debt winters:
 - the building collapses;
-- the Household moves to a tent;
+- an occupying Household, if any, moves to a tent;
 - 50% of all Materials invested in the building are salvaged.
 
-An upkeep payment resets the missed-upkeep streak.
+A paid occupied upkeep year resets maintenance debt to 0. A vacant building reused before collapse stops vacancy decay and returns to normal occupied-upkeep rules.
 
 ## 9. Economic buildings / homesteads
 
