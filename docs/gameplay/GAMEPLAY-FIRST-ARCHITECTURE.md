@@ -61,3 +61,90 @@ Examples:
 - work animations visualize production but do not determine it.
 
 See issue #23 for the implementation brief.
+
+
+## Canonical session-time model
+
+Pillagers is currently designed as a **session-based simulation**, not a persistent/offline world.
+
+> **The clan lives while the player plays. When the player stops, the world freezes.**
+
+### No offline progression
+
+For the canonical v0.1 direction:
+
+- simulation time does **not** advance while the game is closed/offline;
+- Food/Materials production does not continue offline;
+- personas do not age offline;
+- births/deaths do not resolve offline;
+- cattle do not consume/reproduce offline;
+- weather does not resolve offline;
+- buildings do not decay/collapse offline;
+- raids/attacks do not happen while the player is absent.
+
+This is a deliberate gameplay/product decision, not a technical limitation.
+
+The goal is to avoid designing around real-world timers, protection windows, notifications, login pressure or FOMO. Important consequences should happen while the player is present and able to make decisions.
+
+### Canonical time vs presentation speed
+
+Canonical simulation time remains:
+
+- one **Winter** = a fixed number of deterministic integer simulation ticks;
+- age and long-term history are measured in Winters;
+- real-world seconds per Winter are **not canonical**.
+
+The Gameplay Lab should expose Winter duration / simulation speed as a development parameter so different rhythms can be playtested without changing simulation rules.
+
+Initial test range:
+
+- ~1 minute per Winter;
+- ~3 minutes per Winter;
+- ~5 minutes per Winter.
+
+Also support pause/time acceleration where practical.
+
+The correct duration should be determined empirically from gameplay rather than fixed upfront.
+
+### Rhythm design target
+
+The desired rhythm is:
+
+```text
+settlement runs
+      ↓
+player accelerates quiet periods
+      ↓
+meaningful event / risk appears
+      ↓
+slow down or pause
+      ↓
+player decides / intervenes
+      ↓
+simulation continues
+```
+
+Examples of meaningful events:
+- birth / adulthood / death;
+- childcare decision;
+- Severe Winter;
+- Food/Materials pressure;
+- building maintenance/collapse risk;
+- reconnaissance result;
+- raid/attack;
+- cattle crisis;
+- occupation or housing decision.
+
+### Combat implication
+
+Combat does not require a different canonical calendar.
+
+A Winter contains sub-winter ticks. Local reconnaissance, travel and tactical raids can consume a fraction of a Winter, while distant expeditions may span multiple Winters.
+
+This allows tactical actions to take minutes of player-facing time without forcing the demographic simulation to use real-world 24-hour Winters.
+
+### Player-experience principle
+
+> **Pillagers respects the player's absence. Nothing bad happens because the player chose not to play.**
+
+Offline/persistent-world progression is therefore out of scope for the initial game direction. Because presentation speed is decoupled from canonical simulation ticks, this decision is not an architectural point of no return and can be revisited later if playtesting provides a compelling reason.
