@@ -1,3 +1,4 @@
+import {cattleFoodNeed, stepCattleOutput, consumeCattleFood} from './Livestock';
 import {prohibitedKinship, resolvePartnerships, resolveBirths, isCaregiver, isProvidingCare, assignCaregiver, resolveCaregivers} from './FamilyMechanics';
 import {traitKeys} from '../characters/CharacterDNA';
 import type {CoreTraits, TraitKey} from '../characters/CharacterDNA';
@@ -55,7 +56,7 @@ function aptitude(traits:CoreTraits, job:JobPrototype):number {
 }
 export function foodNeed(state:SimulationState):number {
     const config=state.mechanics!.config;
-    return Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0);
+    return cattleFoodNeed(state)+Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0);
 }
 export function stepMechanicsTick(state:SimulationState):void {
     const config=state.mechanics!.config;
@@ -86,12 +87,14 @@ export function stepMechanicsTick(state:SimulationState):void {
     state.time.tick++;
     if(state.time.tick===state.ticksPerWinter){state.time.tick=0;state.time.winter++;}
     for(const output of produced)emit(state,'ResourceProduced',output.id,{resource:output.resource,units:output.units});
+    stepCattleOutput(state);
     if(state.time.tick===0) {
         emit(state,'WinterAdvanced');
-        const need=foodNeed(state), consumed=Math.min(need,state.stocks.food);state.stocks.food-=consumed;
+        consumeCattleFood(state);
+        const need=foodNeed(state)-cattleFoodNeed(state), consumed=Math.min(need,state.stocks.food);state.stocks.food-=consumed;
         emit(state,'FoodConsumed',undefined,{units:consumed,shortfall:need-consumed});
         for(const id of Object.keys(state.buildings).sort()) {
-            const occupied=Object.values(state.households).some(h=>h.memberIds.some(p=>state.personas[p].deathWinter===null)&&h.residenceId!==null&&state.residences[h.residenceId]?.buildingId===id);
+            const occupied=(state.buildings[id].kind==='farmyard'&&Object.values(state.landing?.cattle??{}).some(c=>c.deathWinter===null&&c.farmyardId===id))||Object.values(state.households).some(h=>h.memberIds.some(p=>state.personas[p].deathWinter===null)&&h.residenceId!==null&&state.residences[h.residenceId]?.buildingId===id);
             const building=state.mechanics!.buildings[id];
             const upkeep=config.baseUpkeep+building.upgradeLevel;
             if(occupied&&state.stocks.materials>=upkeep){state.stocks.materials-=upkeep;building.debtWinters=0;emit(state,'BuildingMaintained',undefined,{buildingId:id,units:upkeep});}
@@ -101,6 +104,7 @@ export function stepMechanicsTick(state:SimulationState):void {
                 if(building.debtWinters===config.collapseDebtWinters){
                     const salvage=Math.floor(building.investedMaterials*config.salvageBps/10000);state.stocks.materials+=salvage;
                     for(const residence of Object.values(state.residences))if(residence.buildingId===id){residence.kind='tent';residence.buildingId=null;}
+                    for(const cattle of Object.values(state.landing?.cattle??{}))if(cattle.farmyardId===id)cattle.farmyardId=null;
                     delete state.buildings[id];delete state.mechanics!.buildings[id];
                     emit(state,'BuildingCollapsed',undefined,{buildingId:id,salvage});
                 }
@@ -125,7 +129,7 @@ export function applyMechanicsCommand(state:SimulationState,command:MechanicsCom
         state.mechanics.people[command.personaId].occupationLocked=false;emit(state,'OccupationReleased',command.personaId);return;
     }
     if(command.type==='SpecializeBuilding'||command.type==='UpgradeBuilding') {
-        const building=state.buildings[command.buildingId];if(!building)throw new Error('Unknown building');
+        const building=state.buildings[command.buildingId];if(!building||building.kind!=='house')throw new Error('House required');
         const info=state.mechanics.buildings[building.id];
     if(command.type==='SpecializeBuilding'){
             if(command.occupation!==null&&!occupationIds.includes(command.occupation))throw new Error('Unknown occupation');
@@ -153,6 +157,7 @@ export function applyMechanicsCommand(state:SimulationState,command:MechanicsCom
         state.buildings[id]={id,kind:'house',specialization:null};
         state.mechanics.buildings[id]={debtWinters:0,investedMaterials:cost,upgradeLevel:0};
         state.residences[id]={id,kind:'house',buildingId:id};
+        if(state.landing)state.landing.region.settledByClanId=state.clan.id;
         emit(state,'HouseBuilt',undefined,{buildingId:id,cost});
         applyMechanicsCommand(state,{type:'AssignResidence',householdId:home.id,residenceId:id});return;
     }
