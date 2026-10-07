@@ -157,4 +157,3 @@ function validateState(state: SimulationState): void {
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
 }
-
