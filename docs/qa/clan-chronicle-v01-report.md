@@ -25,3 +25,8 @@ The existing ten-founder, 50-Winter run still ends at Winter 850 tick 321 with 2
 Use node --test tests/*.test.mjs, TypeScript checking and Vite build. Start Vite on port 5180 and run scripts/qa/check-gameplay-lab.mjs with the bundled Playwright directory. Browser evidence/screenshots are generated under artifacts/qa/gameplay-lab/; the long-run script writes artifacts/qa/the-landing/.
 
 Older events are never backfilled from current mutable names: missing historical names are represented by recorded resident IDs. Unsupported events remain available through Raw Events, whose UI shows the latest 100 while exports preserve the complete ledger. This is a deterministic Chronicle slice and leaves #14 open.
+## Integration check after weather and cattle lifecycle
+
+The original Chronicle PR #38 remained open, so newer main-based Gameplay Lab builds did not contain the sidebar. Reapply the Chronicle on main after merged #45/#46, resolving the layout around the existing weather controls and livestock lifecycle. The browser test first failed on the missing Clan Chronicle heading, then passed with the collapsible left timeline, Raw Events toggle, source provenance, live controls, save/load and narrow layout restored. The weather browser check also passes. TypeScript checking and production build pass; the existing Three.js chunk-size warning remains.
+
+The earlier long-run figures above describe the original pre-mortality/pre-weather Chronicle branch. They are historical evidence, not outcomes for the current combined ruleset. Restored historical identity facts add event metadata; archived calibration state hashes remain tied to their recorded source commits.
