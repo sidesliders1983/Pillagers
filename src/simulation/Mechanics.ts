@@ -1,3 +1,5 @@
+import {resolveMortality,defaultMortalityBands} from './Mortality';
+import type {MortalityBand} from './Mortality';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 import {cattleFoodNeed, stepCattleOutput, consumeCattleFood} from './Livestock';
 import {prohibitedKinship, resolvePartnerships, resolveBirths, isCaregiver, isProvidingCare, assignCaregiver, resolveCaregivers} from './FamilyMechanics';
@@ -8,6 +10,7 @@ import {personaAge} from './PersonaAge';
 export const occupationIds: Occupation[] = ['farmer','herder','fisher','hunter','textileWorker','smith','woodworker','boatbuilder','trader','leatherAndJewelleryMaker'];
 export type JobPrototype = {resource:'food'|'materials'|null; unitsPerWinter:number; weights:number[]; preferences:number[]};
 export type PrototypeConfig = {
+    mortalityBands:MortalityBand[];
     foodAdultAge:number; ageFullProductivityThrough:number; agePenaltyBpsPerWinter:number; ageProductivityFloorBps:number; collapseDebtWinters:number; salvageBps:number;
     dominantLegacyChanceBps:number;
     fertilityMinAge:number; fertilityMaxAge:number; birthCooldownWinters:number; childcareWinters:number;
@@ -21,6 +24,7 @@ export type PrototypeConfig = {
 };
 const job = (resource:JobPrototype['resource'], unitsPerWinter:number, weights:number[], preferences:number[]):JobPrototype => ({resource,unitsPerWinter,weights,preferences});
 export const defaultPrototypeConfig: PrototypeConfig = {
+    mortalityBands:defaultMortalityBands,
     foodAdultAge:16,ageFullProductivityThrough:49,agePenaltyBpsPerWinter:200,ageProductivityFloorBps:5000,collapseDebtWinters:3,salvageBps:5000,
     dominantLegacyChanceBps:2500,
     fertilityMinAge:18,fertilityMaxAge:40,birthCooldownWinters:2,childcareWinters:5,
@@ -44,9 +48,9 @@ export const defaultPrototypeConfig: PrototypeConfig = {
     },
 };
 export type PersonaMechanics={dominantLegacy:Partial<Record<TraitKey,string>>; lastBirthWinter:number|null; childcareUntilWinter:number; caregiverId:string|null; caregiverLocked:boolean; caregiverWorkedWinter:number|null; occupationLocked:boolean; switchedUntilTick:number; progress:Partial<Record<Occupation,number>>};
-export type MechanicsState = {version:1; config:PrototypeConfig; people:Record<string,PersonaMechanics>; buildings:Record<string,{debtWinters:number; investedMaterials:number; upgradeLevel:number}>};
+export type MechanicsState = {version:2; config:PrototypeConfig; people:Record<string,PersonaMechanics>; buildings:Record<string,{debtWinters:number; investedMaterials:number; upgradeLevel:number}>};
 export function initializeMechanics(state:SimulationState, overrides:Partial<PrototypeConfig> = {}):MechanicsState {
-    return {version:1,config:structuredClone({...defaultPrototypeConfig,...overrides}), people:Object.fromEntries(Object.keys(state.personas).map(id=>[id,newPersonaMechanics()])), buildings:Object.fromEntries(Object.keys(state.buildings).map(id=>[id,{debtWinters:0,investedMaterials:10,upgradeLevel:0}]))};
+    return {version:2,config:structuredClone({...defaultPrototypeConfig,...overrides}), people:Object.fromEntries(Object.keys(state.personas).map(id=>[id,newPersonaMechanics()])), buildings:Object.fromEntries(Object.keys(state.buildings).map(id=>[id,{debtWinters:0,investedMaterials:10,upgradeLevel:0}]))};
 }
 function emit(state:SimulationState,type:string,personaId?:string,details?:Record<string,unknown>) {
     state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,...(personaId?{personaId}:{}),...(details?{details}:{})});
@@ -91,7 +95,7 @@ export function inspectBuilding(state:SimulationState,id:string) {
 }
 export function stepMechanicsTick(state:SimulationState):void {
     const config=state.mechanics!.config;
-    const previousFarmyards=farmyards(state).map(f=>f.id);
+    let previousFarmyards=farmyards(state).map(f=>f.id);
     for(const id of Object.keys(state.personas))if(isCaregiver(state,id))state.mechanics!.people[id].caregiverWorkedWinter=state.time.winter;
     const unavailable=new Set(Object.keys(state.personas).filter(id=>state.mechanics!.people[id].caregiverWorkedWinter===state.time.winter));
     const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
@@ -113,6 +117,9 @@ export function stepMechanicsTick(state:SimulationState):void {
     stepCattleOutput(state);
     if(state.time.tick===0) {
         emit(state,'WinterAdvanced');
+        if(resolveMortality(state,bps=>chance(state,bps),(type,id,details)=>emit(state,type,id,details))){
+            reconcileFarmyards(state,previousFarmyards);previousFarmyards=farmyards(state).map(f=>f.id);
+        }
         consumeCattleFood(state);
         const need=foodNeed(state)-cattleFoodNeed(state), consumed=Math.min(need,state.stocks.food);state.stocks.food-=consumed;
         emit(state,'FoodConsumed',undefined,{units:consumed,shortfall:need-consumed});
@@ -148,7 +155,7 @@ export function applyMechanicsCommand(state:SimulationState,command:MechanicsCom
     if(!state.mechanics)throw new Error('Mechanics must be initialized');
     if(command.type==='AssignCaregiver'){assignCaregiver(state,command.motherId,command.caregiverId,true,(type,personaId,details)=>emit(state,type,personaId,details));return;}
     if(command.type==='ReleaseOccupation'){
-        if(!state.personas[command.personaId])throw new Error('Unknown persona');
+        if(!state.personas[command.personaId]||state.personas[command.personaId].deathWinter!==null)throw new Error('Persona must be alive');
         state.mechanics.people[command.personaId].occupationLocked=false;emit(state,'OccupationReleased',command.personaId);return;
     }
     if(command.type==='SpecializeBuilding'||command.type==='UpgradeBuilding') {
@@ -248,16 +255,31 @@ function chance(state:SimulationState,bps:number):boolean {if(bps===0)return fal
 
 export function newPersonaMechanics():PersonaMechanics {return {dominantLegacy:{},occupationLocked:false,switchedUntilTick:0,progress:{},lastBirthWinter:null,childcareUntilWinter:0,caregiverId:null,caregiverLocked:false,caregiverWorkedWinter:null};}
 
+/** Legacy economics keeps its saved rules and random stream; only new campaigns enable mortality. */
+export function migrateMechanics(state:SimulationState):void {
+    const mechanics=state.mechanics;
+    if(mechanics&&(mechanics.version as number)===1){
+        if(Object.hasOwn(mechanics.config,'mortalityBands'))throw new Error('Unexpected legacy mortality option');
+        mechanics.config.mortalityBands=[{minAge:0,chanceBps:0}];mechanics.version=2;
+    }
+}
+
 export function validateMechanics(state:SimulationState):void {
     const mechanics=state.mechanics;if(!mechanics)return;
     const fail=(message:string):never=>{throw new Error(message);};
     const uint=(n:number,label:string,max=Number.MAX_SAFE_INTEGER):void=>{if(!Number.isSafeInteger(n)||n<0||n>max)fail(`Invalid ${label}`);};
-    if(mechanics.version!==1)fail('Unknown mechanics version');
+    if(mechanics.version!==2)fail('Unknown mechanics version');
     const config=mechanics.config;
     for(const [key,expected] of Object.entries(defaultPrototypeConfig)){
         const value=config[key as keyof PrototypeConfig];
         if(typeof expected==='number')uint(value as number,key,key.endsWith('Bps')?10000:1000000000000);
     }
+    if(!Array.isArray(config.mortalityBands)||!config.mortalityBands.length||config.mortalityBands[0].minAge!==0)fail('Invalid mortality curve');
+    config.mortalityBands.forEach((band,index)=>{
+        if(!band||Object.keys(band).length!==2)fail('Invalid mortality band');
+        uint(band.minAge,'mortality age',1000000000000);uint(band.chanceBps,'mortality chance',10000);
+        if(index&&band.minAge<=config.mortalityBands[index-1].minAge)fail('Unordered mortality curve');
+    });
     if(!config.workPerUnit||!config.collapseDebtWinters||config.fertilityMaxAge<config.fertilityMinAge)fail('Invalid work/calendar scale');
     for(const key of Object.keys(config))if(!Object.hasOwn(defaultPrototypeConfig,key))fail('Unknown prototype option');
     if(!Array.isArray(config.upgradeCosts)||config.upgradeCosts.length!==3||!Array.isArray(config.upgradeBonusBps)||config.upgradeBonusBps.length!==4)fail('Invalid upgrade prototype');

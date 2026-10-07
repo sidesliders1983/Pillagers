@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Canonical death via public import and AdvanceWinter",
+    "Age at death and Winter visible",
+    "Occupation actions disabled; autonomy absent",
+    "Lineage and closed work history retained",
+    "Save/load preserves death and frozen age"
+  ],
+  "errors": []
+}

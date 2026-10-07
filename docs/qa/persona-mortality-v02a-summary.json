@@ -1,0 +1,541 @@
+{
+  "runs": 100,
+  "winters": 50,
+  "births": 1133,
+  "deaths": 556,
+  "childDeaths": 19,
+  "adultDeaths": 537,
+  "deathsByAgeBand": {
+    "0": 19,
+    "16": 21,
+    "50": 40,
+    "60": 170,
+    "70": 228,
+    "80": 78,
+    "90": 0
+  },
+  "observedAgeAtDeath": {
+    "n": 556,
+    "p10": 53,
+    "median": 70,
+    "p90": 81
+  },
+  "observedFounderAgeAtDeath": {
+    "n": 527,
+    "p10": 60,
+    "median": 71,
+    "p90": 81
+  },
+  "trajectory": [
+    {
+      "winter": 800,
+      "populationP10": 10,
+      "populationMedian": 10,
+      "populationP90": 10,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 1000,
+      "birthsMedian": 0,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 801,
+      "populationP10": 10,
+      "populationMedian": 10,
+      "populationP90": 11,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 999,
+      "birthsMedian": 0,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 802,
+      "populationP10": 10,
+      "populationMedian": 11,
+      "populationP90": 12,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 999,
+      "birthsMedian": 1,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 803,
+      "populationP10": 10,
+      "populationMedian": 12,
+      "populationP90": 13,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 999,
+      "birthsMedian": 2,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 804,
+      "populationP10": 11,
+      "populationMedian": 12,
+      "populationP90": 14,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 999,
+      "birthsMedian": 2,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 805,
+      "populationP10": 11,
+      "populationMedian": 12,
+      "populationP90": 14,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 996,
+      "birthsMedian": 3,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 806,
+      "populationP10": 11,
+      "populationMedian": 13,
+      "populationP90": 15,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 996,
+      "birthsMedian": 3,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 807,
+      "populationP10": 12,
+      "populationMedian": 13,
+      "populationP90": 15,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 996,
+      "birthsMedian": 3,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 808,
+      "populationP10": 12,
+      "populationMedian": 14,
+      "populationP90": 16,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 995,
+      "birthsMedian": 4,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 809,
+      "populationP10": 12,
+      "populationMedian": 14,
+      "populationP90": 16,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 994,
+      "birthsMedian": 4,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 810,
+      "populationP10": 12,
+      "populationMedian": 14,
+      "populationP90": 17,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 993,
+      "birthsMedian": 4,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 811,
+      "populationP10": 12,
+      "populationMedian": 15,
+      "populationP90": 17,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 992,
+      "birthsMedian": 5,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 812,
+      "populationP10": 12,
+      "populationMedian": 15,
+      "populationP90": 17,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 991,
+      "birthsMedian": 5,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 813,
+      "populationP10": 12,
+      "populationMedian": 15,
+      "populationP90": 18,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 989,
+      "birthsMedian": 5,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 814,
+      "populationP10": 12,
+      "populationMedian": 15,
+      "populationP90": 18.10000000000001,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 989,
+      "birthsMedian": 5,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 815,
+      "populationP10": 12,
+      "populationMedian": 15,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 986,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 816,
+      "populationP10": 12.9,
+      "populationMedian": 15.5,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 986,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 817,
+      "populationP10": 12.9,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 984,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 818,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 983,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 819,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 982,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 820,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 978,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 821,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 973,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 822,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 966,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 823,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 959,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 824,
+      "populationP10": 12,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 953,
+      "birthsMedian": 6,
+      "deathsMedian": 0
+    },
+    {
+      "winter": 825,
+      "populationP10": 11.9,
+      "populationMedian": 16,
+      "populationP90": 19,
+      "livingFoundersMedian": 10,
+      "totalLivingFounders": 941,
+      "birthsMedian": 6,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 826,
+      "populationP10": 11.9,
+      "populationMedian": 15.5,
+      "populationP90": 20,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 927,
+      "birthsMedian": 7,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 827,
+      "populationP10": 11.9,
+      "populationMedian": 16,
+      "populationP90": 20,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 921,
+      "birthsMedian": 7,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 828,
+      "populationP10": 11.9,
+      "populationMedian": 16,
+      "populationP90": 20,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 914,
+      "birthsMedian": 7,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 829,
+      "populationP10": 11.9,
+      "populationMedian": 16,
+      "populationP90": 20.10000000000001,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 907,
+      "birthsMedian": 7,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 830,
+      "populationP10": 11,
+      "populationMedian": 16,
+      "populationP90": 20,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 891,
+      "birthsMedian": 7,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 831,
+      "populationP10": 11,
+      "populationMedian": 16,
+      "populationP90": 20,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 881,
+      "birthsMedian": 7.5,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 832,
+      "populationP10": 11,
+      "populationMedian": 16,
+      "populationP90": 21,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 872,
+      "birthsMedian": 8,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 833,
+      "populationP10": 11,
+      "populationMedian": 16,
+      "populationP90": 21,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 863,
+      "birthsMedian": 8,
+      "deathsMedian": 1
+    },
+    {
+      "winter": 834,
+      "populationP10": 11,
+      "populationMedian": 16,
+      "populationP90": 21,
+      "livingFoundersMedian": 9,
+      "totalLivingFounders": 846,
+      "birthsMedian": 8.5,
+      "deathsMedian": 2
+    },
+    {
+      "winter": 835,
+      "populationP10": 11,
+      "populationMedian": 17,
+      "populationP90": 21.10000000000001,
+      "livingFoundersMedian": 8,
+      "totalLivingFounders": 829,
+      "birthsMedian": 9,
+      "deathsMedian": 2
+    },
+    {
+      "winter": 836,
+      "populationP10": 11,
+      "populationMedian": 17,
+      "populationP90": 21.10000000000001,
+      "livingFoundersMedian": 8,
+      "totalLivingFounders": 813,
+      "birthsMedian": 9,
+      "deathsMedian": 2
+    },
+    {
+      "winter": 837,
+      "populationP10": 11,
+      "populationMedian": 16.5,
+      "populationP90": 22.10000000000001,
+      "livingFoundersMedian": 8,
+      "totalLivingFounders": 798,
+      "birthsMedian": 9,
+      "deathsMedian": 2
+    },
+    {
+      "winter": 838,
+      "populationP10": 11,
+      "populationMedian": 17,
+      "populationP90": 22,
+      "livingFoundersMedian": 8,
+      "totalLivingFounders": 770,
+      "birthsMedian": 9,
+      "deathsMedian": 2.5
+    },
+    {
+      "winter": 839,
+      "populationP10": 11,
+      "populationMedian": 17,
+      "populationP90": 23,
+      "livingFoundersMedian": 7.5,
+      "totalLivingFounders": 748,
+      "birthsMedian": 10,
+      "deathsMedian": 3
+    },
+    {
+      "winter": 840,
+      "populationP10": 11,
+      "populationMedian": 17,
+      "populationP90": 22.10000000000001,
+      "livingFoundersMedian": 7,
+      "totalLivingFounders": 723,
+      "birthsMedian": 10,
+      "deathsMedian": 3
+    },
+    {
+      "winter": 841,
+      "populationP10": 10,
+      "populationMedian": 17,
+      "populationP90": 23,
+      "livingFoundersMedian": 7,
+      "totalLivingFounders": 697,
+      "birthsMedian": 10,
+      "deathsMedian": 3
+    },
+    {
+      "winter": 842,
+      "populationP10": 10,
+      "populationMedian": 17,
+      "populationP90": 23,
+      "livingFoundersMedian": 7,
+      "totalLivingFounders": 673,
+      "birthsMedian": 10,
+      "deathsMedian": 3
+    },
+    {
+      "winter": 843,
+      "populationP10": 10,
+      "populationMedian": 17,
+      "populationP90": 22.10000000000001,
+      "livingFoundersMedian": 7,
+      "totalLivingFounders": 648,
+      "birthsMedian": 10,
+      "deathsMedian": 4
+    },
+    {
+      "winter": 844,
+      "populationP10": 9.9,
+      "populationMedian": 16,
+      "populationP90": 23,
+      "livingFoundersMedian": 6,
+      "totalLivingFounders": 617,
+      "birthsMedian": 10.5,
+      "deathsMedian": 4
+    },
+    {
+      "winter": 845,
+      "populationP10": 9,
+      "populationMedian": 16,
+      "populationP90": 23,
+      "livingFoundersMedian": 6,
+      "totalLivingFounders": 596,
+      "birthsMedian": 11,
+      "deathsMedian": 4
+    },
+    {
+      "winter": 846,
+      "populationP10": 9,
+      "populationMedian": 16,
+      "populationP90": 23,
+      "livingFoundersMedian": 6,
+      "totalLivingFounders": 566,
+      "birthsMedian": 11,
+      "deathsMedian": 5
+    },
+    {
+      "winter": 847,
+      "populationP10": 9,
+      "populationMedian": 16,
+      "populationP90": 23,
+      "livingFoundersMedian": 5,
+      "totalLivingFounders": 545,
+      "birthsMedian": 11,
+      "deathsMedian": 5
+    },
+    {
+      "winter": 848,
+      "populationP10": 8.9,
+      "populationMedian": 16,
+      "populationP90": 23,
+      "livingFoundersMedian": 5,
+      "totalLivingFounders": 522,
+      "birthsMedian": 11,
+      "deathsMedian": 5
+    },
+    {
+      "winter": 849,
+      "populationP10": 8,
+      "populationMedian": 16,
+      "populationP90": 22.10000000000001,
+      "livingFoundersMedian": 5,
+      "totalLivingFounders": 502,
+      "birthsMedian": 11,
+      "deathsMedian": 5.5
+    },
+    {
+      "winter": 850,
+      "populationP10": 8,
+      "populationMedian": 16,
+      "populationP90": 23,
+      "livingFoundersMedian": 5,
+      "totalLivingFounders": 473,
+      "birthsMedian": 11,
+      "deathsMedian": 6
+    }
+  ]
+}

@@ -41,3 +41,7 @@ _Avoid_: Family
 **Farmyard**: The function of a permanent household home while at least one living resident has the farmer occupation. Individually assigned cattle gain sheltered output. The function disappears when the last farmer leaves; cattle then become unassigned. Tents never have this function.
 
 **Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased mortality risk when livestock mortality is introduced.
+
+**Natural mortality**: The age-dependent chance that a living persona dies during a Winter transition.
+
+**Deceased persona**: A person whose life has ended but whose identity, kinship and history remain part of the clan.
