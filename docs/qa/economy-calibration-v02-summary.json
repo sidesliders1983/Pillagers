@@ -1,0 +1,647 @@
+[
+  {
+    "baseline": 4,
+    "runs": 100,
+    "shortagePercent": 100,
+    "zeroPercent": 100,
+    "foodMedian": 0,
+    "foodP10": 0,
+    "foodP90": 0,
+    "foodMin": 0,
+    "foodMax": 2,
+    "minimumFoodMedian": 0,
+    "populationMedian": 10,
+    "materialsMedian": 64.5,
+    "foodWorkerShareMedian": 0.7,
+    "meanFoodWorkerShareMedian": 0.6999999999999998,
+    "birthsMedian": 0,
+    "cattleProducedMedian": 97.5,
+    "cattleConsumedMedian": 129,
+    "childcarePersonWintersMedian": 0,
+    "initialFoodCountCorrelation": -0.03457416769714302,
+    "initialMixGroups": [
+      {
+        "foodWorkers": 4,
+        "runs": 4,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 5,
+        "runs": 7,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 6,
+        "runs": 20,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 7,
+        "runs": 29,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 8,
+        "runs": 18,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 9,
+        "runs": 17,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 10,
+        "runs": 5,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      }
+    ],
+    "outliersLow": [
+      {
+        "seed": 0,
+        "food": 0,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 11
+      },
+      {
+        "seed": 1,
+        "food": 0,
+        "initialFoodWorkers": 10,
+        "shortageWinters": 12
+      },
+      {
+        "seed": 2,
+        "food": 0,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 12
+      },
+      {
+        "seed": 3,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 13
+      },
+      {
+        "seed": 4,
+        "food": 0,
+        "initialFoodWorkers": 5,
+        "shortageWinters": 13
+      }
+    ],
+    "outliersHigh": [
+      {
+        "seed": 68,
+        "food": 2,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 7
+      },
+      {
+        "seed": 26,
+        "food": 2,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 10
+      },
+      {
+        "seed": 6,
+        "food": 2,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 8
+      },
+      {
+        "seed": 90,
+        "food": 1,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 6
+      },
+      {
+        "seed": 39,
+        "food": 1,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 12
+      }
+    ]
+  },
+  {
+    "baseline": 5,
+    "runs": 100,
+    "shortagePercent": 98,
+    "zeroPercent": 98,
+    "foodMedian": 0,
+    "foodP10": 0,
+    "foodP90": 5,
+    "foodMin": 0,
+    "foodMax": 29,
+    "minimumFoodMedian": 0,
+    "populationMedian": 10,
+    "materialsMedian": 64.5,
+    "foodWorkerShareMedian": 0.7,
+    "meanFoodWorkerShareMedian": 0.6999999999999998,
+    "birthsMedian": 0,
+    "cattleProducedMedian": 94,
+    "cattleConsumedMedian": 133,
+    "childcarePersonWintersMedian": 0,
+    "initialFoodCountCorrelation": 0.08709999001069281,
+    "initialMixGroups": [
+      {
+        "foodWorkers": 4,
+        "runs": 4,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 5,
+        "runs": 7,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 6,
+        "runs": 20,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 7,
+        "runs": 29,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 8,
+        "runs": 18,
+        "foodMedian": 0,
+        "shortagePercent": 88.88888888888889
+      },
+      {
+        "foodWorkers": 9,
+        "runs": 17,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 10,
+        "runs": 5,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      }
+    ],
+    "outliersLow": [
+      {
+        "seed": 0,
+        "food": 0,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 12
+      },
+      {
+        "seed": 1,
+        "food": 0,
+        "initialFoodWorkers": 10,
+        "shortageWinters": 5
+      },
+      {
+        "seed": 3,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 11
+      },
+      {
+        "seed": 4,
+        "food": 0,
+        "initialFoodWorkers": 5,
+        "shortageWinters": 13
+      },
+      {
+        "seed": 7,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 13
+      }
+    ],
+    "outliersHigh": [
+      {
+        "seed": 90,
+        "food": 29,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 6,
+        "food": 22,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 3
+      },
+      {
+        "seed": 5,
+        "food": 20,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 2
+      },
+      {
+        "seed": 12,
+        "food": 17,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 1
+      },
+      {
+        "seed": 10,
+        "food": 13,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      }
+    ]
+  },
+  {
+    "baseline": 6,
+    "runs": 100,
+    "shortagePercent": 93,
+    "zeroPercent": 93,
+    "foodMedian": 0,
+    "foodP10": 0,
+    "foodP90": 20.10000000000001,
+    "foodMin": 0,
+    "foodMax": 48,
+    "minimumFoodMedian": 0,
+    "populationMedian": 10,
+    "materialsMedian": 63.5,
+    "foodWorkerShareMedian": 0.7,
+    "meanFoodWorkerShareMedian": 0.6999999999999998,
+    "birthsMedian": 1,
+    "cattleProducedMedian": 104,
+    "cattleConsumedMedian": 138.5,
+    "childcarePersonWintersMedian": 3.5,
+    "initialFoodCountCorrelation": 0.179363239805291,
+    "initialMixGroups": [
+      {
+        "foodWorkers": 4,
+        "runs": 4,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 5,
+        "runs": 7,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 6,
+        "runs": 20,
+        "foodMedian": 0,
+        "shortagePercent": 90
+      },
+      {
+        "foodWorkers": 7,
+        "runs": 29,
+        "foodMedian": 0,
+        "shortagePercent": 96.55172413793103
+      },
+      {
+        "foodWorkers": 8,
+        "runs": 18,
+        "foodMedian": 2,
+        "shortagePercent": 83.33333333333333
+      },
+      {
+        "foodWorkers": 9,
+        "runs": 17,
+        "foodMedian": 3,
+        "shortagePercent": 94.11764705882354
+      },
+      {
+        "foodWorkers": 10,
+        "runs": 5,
+        "foodMedian": 3,
+        "shortagePercent": 100
+      }
+    ],
+    "outliersLow": [
+      {
+        "seed": 0,
+        "food": 0,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 2
+      },
+      {
+        "seed": 4,
+        "food": 0,
+        "initialFoodWorkers": 5,
+        "shortageWinters": 12
+      },
+      {
+        "seed": 7,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 6
+      },
+      {
+        "seed": 9,
+        "food": 0,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 11
+      },
+      {
+        "seed": 10,
+        "food": 0,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 10
+      }
+    ],
+    "outliersHigh": [
+      {
+        "seed": 6,
+        "food": 48,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 22,
+        "food": 37,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 1
+      },
+      {
+        "seed": 27,
+        "food": 34,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 2
+      },
+      {
+        "seed": 23,
+        "food": 33,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 33,
+        "food": 31,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 1
+      }
+    ]
+  },
+  {
+    "baseline": 7,
+    "runs": 100,
+    "shortagePercent": 80,
+    "zeroPercent": 81,
+    "foodMedian": 2,
+    "foodP10": 0,
+    "foodP90": 48.10000000000001,
+    "foodMin": 0,
+    "foodMax": 87,
+    "minimumFoodMedian": 0,
+    "populationMedian": 11,
+    "materialsMedian": 62,
+    "foodWorkerShareMedian": 0.7,
+    "meanFoodWorkerShareMedian": 0.6718518518518519,
+    "birthsMedian": 2,
+    "cattleProducedMedian": 97.5,
+    "cattleConsumedMedian": 139.5,
+    "childcarePersonWintersMedian": 8,
+    "initialFoodCountCorrelation": 0.17639901991671283,
+    "initialMixGroups": [
+      {
+        "foodWorkers": 4,
+        "runs": 4,
+        "foodMedian": 0,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 5,
+        "runs": 7,
+        "foodMedian": 0,
+        "shortagePercent": 85.71428571428571
+      },
+      {
+        "foodWorkers": 6,
+        "runs": 20,
+        "foodMedian": 0,
+        "shortagePercent": 90
+      },
+      {
+        "foodWorkers": 7,
+        "runs": 29,
+        "foodMedian": 3,
+        "shortagePercent": 75.86206896551724
+      },
+      {
+        "foodWorkers": 8,
+        "runs": 18,
+        "foodMedian": 8,
+        "shortagePercent": 77.77777777777777
+      },
+      {
+        "foodWorkers": 9,
+        "runs": 17,
+        "foodMedian": 13,
+        "shortagePercent": 70.58823529411765
+      },
+      {
+        "foodWorkers": 10,
+        "runs": 5,
+        "foodMedian": 0,
+        "shortagePercent": 80
+      }
+    ],
+    "outliersLow": [
+      {
+        "seed": 3,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 1
+      },
+      {
+        "seed": 4,
+        "food": 0,
+        "initialFoodWorkers": 5,
+        "shortageWinters": 5
+      },
+      {
+        "seed": 6,
+        "food": 0,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 3
+      },
+      {
+        "seed": 7,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 9
+      },
+      {
+        "seed": 8,
+        "food": 0,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 6
+      }
+    ],
+    "outliersHigh": [
+      {
+        "seed": 17,
+        "food": 87,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 1
+      },
+      {
+        "seed": 16,
+        "food": 71,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 20,
+        "food": 67,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 76,
+        "food": 65,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 90,
+        "food": 59,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      }
+    ]
+  },
+  {
+    "baseline": 10,
+    "runs": 100,
+    "shortagePercent": 40,
+    "zeroPercent": 41,
+    "foodMedian": 42.5,
+    "foodP10": 1,
+    "foodP90": 122.50000000000004,
+    "foodMin": 0,
+    "foodMax": 196,
+    "minimumFoodMedian": 10,
+    "populationMedian": 14,
+    "materialsMedian": 52,
+    "foodWorkerShareMedian": 0.7,
+    "meanFoodWorkerShareMedian": 0.6166666666666665,
+    "birthsMedian": 4,
+    "cattleProducedMedian": 100,
+    "cattleConsumedMedian": 141,
+    "childcarePersonWintersMedian": 19,
+    "initialFoodCountCorrelation": 0.39724264300847917,
+    "initialMixGroups": [
+      {
+        "foodWorkers": 4,
+        "runs": 4,
+        "foodMedian": 7.5,
+        "shortagePercent": 100
+      },
+      {
+        "foodWorkers": 5,
+        "runs": 7,
+        "foodMedian": 16,
+        "shortagePercent": 71.42857142857143
+      },
+      {
+        "foodWorkers": 6,
+        "runs": 20,
+        "foodMedian": 18.5,
+        "shortagePercent": 60
+      },
+      {
+        "foodWorkers": 7,
+        "runs": 29,
+        "foodMedian": 44,
+        "shortagePercent": 41.37931034482759
+      },
+      {
+        "foodWorkers": 8,
+        "runs": 18,
+        "foodMedian": 66,
+        "shortagePercent": 22.22222222222222
+      },
+      {
+        "foodWorkers": 9,
+        "runs": 17,
+        "foodMedian": 62,
+        "shortagePercent": 17.647058823529413
+      },
+      {
+        "foodWorkers": 10,
+        "runs": 5,
+        "foodMedian": 88,
+        "shortagePercent": 0
+      }
+    ],
+    "outliersLow": [
+      {
+        "seed": 8,
+        "food": 0,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 2
+      },
+      {
+        "seed": 11,
+        "food": 0,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 4
+      },
+      {
+        "seed": 15,
+        "food": 0,
+        "initialFoodWorkers": 6,
+        "shortageWinters": 1
+      },
+      {
+        "seed": 36,
+        "food": 0,
+        "initialFoodWorkers": 7,
+        "shortageWinters": 1
+      },
+      {
+        "seed": 41,
+        "food": 0,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 1
+      }
+    ],
+    "outliersHigh": [
+      {
+        "seed": 34,
+        "food": 196,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 90,
+        "food": 187,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 91,
+        "food": 180,
+        "initialFoodWorkers": 9,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 55,
+        "food": 179,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      },
+      {
+        "seed": 5,
+        "food": 165,
+        "initialFoodWorkers": 8,
+        "shortageWinters": 0
+      }
+    ]
+  }
+]
