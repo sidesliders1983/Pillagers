@@ -31,3 +31,13 @@ _Avoid_: Family
 **Maintenance debt**: Consecutive Winters of vacancy or unpaid building upkeep; paid occupied upkeep clears the debt.
 
 **Dominant legacy**: A child's per-trait marker recording a copied parental trait. The marker belongs to one generation; the numeric trait remains available for ordinary inheritance.
+
+**Founding party**: The named personas arriving together to begin a new clan's campaign.
+
+**Longship**: A persistent clan vessel enabling future maritime expeditions. Salvaging it permanently exchanges the vessel for Materials.
+
+**Cattle**: Individually identified living livestock with sex, birth Winter and an origin. Cows supply ongoing Food; cows and bulls both consume Food.
+
+**Farmyard**: Infrastructure that shelters cattle and restores their normal ongoing output. Establishing a Farmyard does not create livestock.
+
+**Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased mortality risk when livestock mortality is introduced.

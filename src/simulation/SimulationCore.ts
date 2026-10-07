@@ -1,3 +1,6 @@
+export {landingSummary} from './Landing';
+import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding} from './Landing';
+import type {LandingState, LandingCommand, LandingConfig} from './Landing';
 export {canPartner} from './FamilyMechanics';
 import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics} from './Mechanics';
 import type {MechanicsState, PrototypeConfig, MechanicsCommand} from './Mechanics';
@@ -17,14 +20,17 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
-    mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
+    landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
     families: Record<string, {id: string; memberIds: string[]}>;
     households: Record<string, {id: string; memberIds: string[]; residenceId: string | null}>;
     residences: Record<string, {id: string; kind: 'house' | 'tent'; buildingId: string | null}>;
-    buildings: Record<string, {id: string; kind: 'house'; specialization: Occupation | null}>;
+    buildings: Record<string, {id: string; kind: 'house' | 'farmyard'; specialization: Occupation | null}>;
     stocks: {food: number; materials: number}; events: SimulationEvent[];
 };
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}):SimulationState {
+    const state=generateCampaign(seed,overrides,mechanicsOverrides);validateState(state);return state;
+}
 export function createFixtureClan(seed: number): SimulationState {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be uint32');
     const person = (id: string, name: string, birthWinter: number, offset: number): Persona => ({
@@ -51,7 +57,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     validateState(state); return state;
 }
-export type SimulationCommand = MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -61,6 +67,7 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand): SimulationState {
     validateState(input);
+    if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);validateState(state);return state;}
     if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
         const occupations: Occupation[] = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
@@ -157,7 +164,7 @@ function validateState(state: SimulationState): void {
         if (residence.id !== id || !['house', 'tent'].includes(residence.kind)) throw new Error('Invalid residence');
         if (residence.buildingId !== null && !Object.hasOwn(state.buildings, residence.buildingId)) throw new Error('Unknown building');
     }
-    for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || building.kind !== 'house') throw new Error('Invalid building');
+    for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || !['house','farmyard'].includes(building.kind)) throw new Error('Invalid building');
     let previousEventTime = 0;
     state.events.forEach((event, index) => {
         const timestamp = timeValue(event.time);
@@ -169,4 +176,5 @@ function validateState(state: SimulationState): void {
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
     validateMechanics(state);
+    validateLanding(state);
 }
