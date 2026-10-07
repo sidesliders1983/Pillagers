@@ -1,3 +1,8 @@
+export {canPartner} from './FamilyMechanics';
+import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics} from './Mechanics';
+import type {MechanicsState, PrototypeConfig, MechanicsCommand} from './Mechanics';
+import {personaAge} from './PersonaAge';
+export {personaAge} from './PersonaAge';
 import {CharacterDNA, parseCharacterDNA} from '../characters/CharacterDNA';
 import {generateCharacterDNA} from '../characters/generateCharacterDNA';
 export const ticksPerWinter = 1000;
@@ -12,7 +17,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
-    schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
+    mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
     families: Record<string, {id: string; memberIds: string[]}>;
     households: Record<string, {id: string; memberIds: string[]; residenceId: string | null}>;
@@ -20,11 +25,6 @@ export type SimulationState = {
     buildings: Record<string, {id: string; kind: 'house'; specialization: Occupation | null}>;
     stocks: {food: number; materials: number}; events: SimulationEvent[];
 };
-export function personaAge(state: SimulationState, personaId: string): number {
-    const person = state.personas[personaId];
-    if (!person) throw new Error('Unknown persona');
-    return (person.deathWinter ?? state.time.winter) - person.birthWinter;
-}
 export function createFixtureClan(seed: number): SimulationState {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be uint32');
     const person = (id: string, name: string, birthWinter: number, offset: number): Persona => ({
@@ -42,7 +42,16 @@ export function createFixtureClan(seed: number): SimulationState {
         buildings: {house: {id: 'house', kind: 'house', specialization: null}},
         stocks: {food: 20, materials: 10}, events: [{id: 'event-1', time: {winter: 800, tick: 0}, type: 'ClanInitialized'}]};
 }
-export type SimulationCommand = {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export function createSettlement(seed:number, overrides:Partial<PrototypeConfig> = {}):SimulationState {
+    const state=createFixtureClan(seed); state.personas.einar.dna.sex='male';state.personas.liv.dna.sex='female';state.personas.astrid.dna.sex='female';
+    state.mechanics=initializeMechanics(state,overrides);
+    for(const child of Object.values(state.personas))for(const parentId of child.parentIds){
+        const parent=state.personas[parentId],info=state.mechanics.people[parentId];
+        if(parent.dna.sex==='female'&&(info.lastBirthWinter===null||child.birthWinter>info.lastBirthWinter)){info.lastBirthWinter=child.birthWinter;info.childcareUntilWinter=child.birthWinter+state.mechanics.config.childcareWinters;}
+    }
+    validateState(state); return state;
+}
+export type SimulationCommand = MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -52,12 +61,15 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand): SimulationState {
     validateState(input);
+    if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
         const occupations: Occupation[] = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
         const person = input.personas[command.personaId];
         if (!person || person.deathWinter !== null) throw new Error('Persona must be alive');
+        if (input.mechanics && command.occupation!==null && personaAge(input,person.id)<input.mechanics.config.workAge)throw new Error('Persona below work age');
         if (command.occupation !== null && !occupations.includes(command.occupation)) throw new Error('Unknown occupation');
         const state = structuredClone(input), target = state.personas[command.personaId];
+        recordOccupationChange(state,target.id,command.occupation);
         if (target.occupation === command.occupation) return state;
         const active = target.occupationHistory.at(-1);
         if (active && active.endedAt === null) active.endedAt = {...state.time};
@@ -72,13 +84,14 @@ export function applyCommand(input: SimulationState, command: SimulationCommand)
     integer(total, 'Total ticks');
     integer(input.time.winter + Math.floor(total / input.ticksPerWinter), 'Winter');
     const state = structuredClone(input);
+    if(state.mechanics){for(let index=0;index<ticks;index++)stepMechanicsTick(state);validateState(state); return state;}
     const winter = state.time.winter + Math.floor(total / state.ticksPerWinter);
     while (state.time.winter < winter) {
         state.time = {winter: state.time.winter + 1, tick: 0};
         emit(state, 'WinterAdvanced');
     }
     state.time.tick = total % state.ticksPerWinter;
-    return state;
+    validateState(state); return state;
 }
 export function advanceWinter(state: SimulationState): SimulationState {
     return applyCommand(state, {type: 'AdvanceWinter'});
@@ -87,8 +100,7 @@ export function advanceWinter(state: SimulationState): SimulationState {
 export function serializeState(state: SimulationState): string {validateState(state); return JSON.stringify(state);}
 export function reconstructState(serialized: string): SimulationState {
     const state = JSON.parse(serialized) as SimulationState;
-    validateState(state);
-    return state;
+    validateState(state); return state;
 }
 
 function validateState(state: SimulationState): void {
@@ -103,7 +115,7 @@ function validateState(state: SimulationState): void {
     const occupations = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
     const timeValue = (time: GameTime) => {
         integer(time.winter, 'History Winter'); integer(time.tick, 'History tick');
-        if (time.winter < 800 || time.tick >= ticksPerWinter || time.winter > state.time.winter || (time.winter === state.time.winter && time.tick > state.time.tick)) throw new Error('Invalid history time');
+        if (time.winter < 0 || time.tick >= ticksPerWinter || time.winter > state.time.winter || (time.winter === state.time.winter && time.tick > state.time.tick)) throw new Error('Invalid history time');
         return time.winter * ticksPerWinter + time.tick;
     };
     for (const [id, person] of Object.entries(state.personas)) {
@@ -156,4 +168,5 @@ function validateState(state: SimulationState): void {
         integer(event.time.winter, 'Event Winter'); integer(event.time.tick, 'Event tick');
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
+    validateMechanics(state);
 }
