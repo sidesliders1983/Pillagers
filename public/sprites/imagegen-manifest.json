@@ -1,0 +1,46 @@
+{
+  "styleGuide": "docs/PILLAGERS-LOW-POLY-STYLE-GUIDE.md",
+  "styleVersion": "pillagers-character-style/0.4-draft.1",
+  "records": [
+    {
+      "id": "male",
+      "source": "imagegen-source/male.png",
+      "prompt": "Use case: stylized-concept. Asset: a single temporary static 2D settlement sprite for Pillagers /play, following docs/PILLAGERS-LOW-POLY-STYLE-GUIDE.md pillagers-character-style/0.4-draft.1. Strongly caricatural Nordic-fantasy silhouette, intentionally sparse broad sculpted planar facets, simplified angular face, tapered sculpted limbs, muted earthy colors. Real facets and angular silhouette, not realistic anatomy with painted triangles. Broad constant color regions: cream, faded rust, muted ochre, sage, earthy brown and charcoal. No realistic skin, tiny cloth wrinkles, strands, ornate armor, equipment, typography, labels, scenery or cast ground shadow. Orthographic camera 45 degrees around, 35.264 degrees downward, full subject seen from front and side, soft neutral upper-left lighting. Isolated actual transparent PNG. One subject only, centered with generous transparent margins, entire subject uncut. This is a raster proxy, not a modular 3D library asset. Adult male generic resident, balanced broad torso and tapered short sturdy legs; bald clean-shaven angular head, simple compact hands and wedge feet. Plain sage belted tunic, charcoal trousers and simple brown boots. Relaxed neutral standing pose arms slightly apart. Avoid oversized bobble head.",
+      "sourceSha256": "3b2e3d7236b30c1880beacbce4696620604107321db4564cde4aa0fef63e2549",
+      "outputSha256": "cc04741dac32ef52c4223924853695a600fc86b61dc4ff547128776a0403e0fa",
+      "tool": "built-in image_gen",
+      "camera": "prompted isometric approximation",
+      "review": "temporary 2D proxy; broad facets and palette inspected; not a Character Lab certified asset"
+    },
+    {
+      "id": "female",
+      "source": "imagegen-source/female.png",
+      "prompt": "Use case: stylized-concept. Asset: a single temporary static 2D settlement sprite for Pillagers /play, following docs/PILLAGERS-LOW-POLY-STYLE-GUIDE.md pillagers-character-style/0.4-draft.1. Strongly caricatural Nordic-fantasy silhouette, intentionally sparse broad sculpted planar facets, simplified angular face, tapered sculpted limbs, muted earthy colors. Real facets and angular silhouette, not realistic anatomy with painted triangles. Broad constant color regions: cream, faded rust, muted ochre, sage, earthy brown and charcoal. No realistic skin, tiny cloth wrinkles, strands, ornate armor, equipment, typography, labels, scenery or cast ground shadow. Orthographic camera 45 degrees around, 35.264 degrees downward, full subject seen from front and side, soft neutral upper-left lighting. Isolated actual transparent PNG. One subject only, centered with generous transparent margins, entire subject uncut. This is a raster proxy, not a modular 3D library asset. Adult female generic resident, angular balanced torso and tapered limbs, same adult angular head size and compact hands as a generic male counterpart. Bald clean-shaven head. Plain faded rust long dress with simple cream apron panels and brown shoes. Relaxed neutral standing pose arms slightly apart; no jewelry.",
+      "sourceSha256": "7f8e443d732ca305950fa28c82d3501860808536301cd174bb2a961e40814782",
+      "outputSha256": "3e5619631fe35e3afc3346237129b29a3f1402eeae51833a7c2db1cd57d31e88",
+      "tool": "built-in image_gen",
+      "camera": "prompted isometric approximation",
+      "review": "temporary 2D proxy; broad facets and palette inspected; not a Character Lab certified asset"
+    },
+    {
+      "id": "child",
+      "source": "imagegen-source/child.png",
+      "prompt": "Use case: stylized-concept. Asset: a single temporary static 2D settlement sprite for Pillagers /play, following docs/PILLAGERS-LOW-POLY-STYLE-GUIDE.md pillagers-character-style/0.4-draft.1. Strongly caricatural Nordic-fantasy silhouette, intentionally sparse broad sculpted planar facets, simplified angular face, tapered sculpted limbs, muted earthy colors. Real facets and angular silhouette, not realistic anatomy with painted triangles. Broad constant color regions: cream, faded rust, muted ochre, sage, earthy brown and charcoal. No realistic skin, tiny cloth wrinkles, strands, ornate armor, equipment, typography, labels, scenery or cast ground shadow. Orthographic camera 45 degrees around, 35.264 degrees downward, full subject seen from front and side, soft neutral upper-left lighting. Isolated actual transparent PNG. One subject only, centered with generous transparent margins, entire subject uncut. This is a raster proxy, not a modular 3D library asset. Young child generic resident, age-aware shorter limbs and modestly larger head relative to body, compact angular construction. Bald head, plain muted ochre short tunic, charcoal leggings and brown shoes. Relaxed neutral standing pose arms slightly apart. Child-friendly simple face.",
+      "sourceSha256": "337a69c4f71c3a2561265126720e5263a8abcef165da0b8b15e75dac1fb29c20",
+      "outputSha256": "599e36871054c2d8fbb48c68ebfd14bf0736633c5fbfa1d99d3852817d760f4c",
+      "tool": "built-in image_gen",
+      "camera": "prompted isometric approximation",
+      "review": "temporary 2D proxy; broad facets and palette inspected; not a Character Lab certified asset"
+    },
+    {
+      "id": "tent",
+      "source": "imagegen-source/tent.png",
+      "prompt": "Single low-poly A-frame tent GAME SPRITE. Plain cream canvas and brown wooden poles. Pillagers style: large sparse angular sculpted planes, muted cream, brown and sage flat color regions. Orthographic isometric view from 45 degrees horizontal and 35 degrees above. Isolated object cutout PNG with genuine transparency. Crisp hard silhouette edges. ABSOLUTELY NO glow, aura, haze, shadow, ambient occlusion outside the object, ground, vignette, backdrop, checkerboard, text or scenery. Fully transparent pixels everywhere outside the exact tent silhouette. Neutral even illumination, no cinematic effects. One complete tent centered, generous empty margins.",
+      "sourceSha256": "79089663c8becc57fd6d01aa5a372be31ba610d86c0652b4272de3b402dc09a0",
+      "outputSha256": "9f381f2ef8cdff466bc1073e0e25bd35ae3d21e7554dabed3038cf4ae0cfed2e",
+      "tool": "built-in image_gen",
+      "camera": "prompted isometric approximation",
+      "review": "temporary 2D proxy; broad facets and palette inspected; not a Character Lab certified asset"
+    }
+  ]
+}
