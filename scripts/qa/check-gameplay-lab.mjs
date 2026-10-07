@@ -70,6 +70,21 @@ try{
   await page.locator('#import-file').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{bad')});
   await page.waitForTimeout(200);
   assert.match(await page.locator('header').innerText(),/WINTER 801/);checks.push('JSON import, caregiver assignment and atomic invalid-import rejection');
+  const child=Object.values(care.personas).find(p=>p.parentIds.length===2);
+  assert.ok(child);
+  assert.equal(await page.locator(`#occupation-${child.id}`).isDisabled(),true);
+  assert.equal(await page.locator(`#person-${child.id}`).getByRole('button',{name:'Beroep toewijzen',exact:true}).isDisabled(),true);
+  for(const age of [15,16]){
+    const birthday=structuredClone(care);birthday.personas[child.id].birthWinter=birthday.time.winter-age;
+    await page.locator('#import-file').setInputFiles({name:`age-${age}.json`,mimeType:'application/json',buffer:Buffer.from(core.serializeState(birthday))});
+    await page.waitForTimeout(200);
+    assert.equal(await page.locator(`#occupation-${child.id}`).isDisabled(),age<16);
+    assert.equal(await page.locator(`#person-${child.id}`).getByRole('button',{name:'Beroep toewijzen',exact:true}).isDisabled(),age<16);
+  }
+  await page.locator(`#occupation-${child.id}`).selectOption('woodworker');
+  await page.locator(`#person-${child.id}`).getByRole('button',{name:'Beroep toewijzen',exact:true}).click();
+  assert.match(await page.locator(`#person-${child.id}`).innerText(),/Beroep: woodworker/);
+  checks.push('Children cannot choose or assign work; controls unlock at age 16');
   assert.deepEqual(errors,[]);assert.equal(requests.some(r=>/\.glb(?:\?|$)|\/core\/Game|\/three(?:\.js|\/)/i.test(r)),false);checks.push('No runtime error or Three.js/GLB requests');
   await page.setViewportSize({width:390,height:844});await page.screenshot({path:new URL('mobile.png',output).pathname.replace(/^\/([A-Z]:)/,'$1'),fullPage:false});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth),true);checks.push('Narrow viewport readable without horizontal overflow');

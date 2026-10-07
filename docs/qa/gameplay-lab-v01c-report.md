@@ -33,4 +33,6 @@ Reproduce with Vite at `http://127.0.0.1:5180` and `node scripts/qa/check-gamepl
 
 Farmyard follow-up: browser proof asserts that no Farmyard build button exists, assigns a farmer in the built home, assigns one cow individually, then changes the last farmer to woodworker and verifies the cow’s assignment/available Farmyards are cleared. Core tests additionally cover tents, pre-existing farmer housing, multiple farmers, soft capacity, collapse and old-save migration without compensation.
 
-Materials follow-up: core commands verify that only woodworker produces Materials with default balance; textileWorker, smith, boatbuilder and leatherAndJewelleryMaker remain inactive. The browser regression first reproduced detached controls, then passed with the in-place view update. Ten browser checks now pass.
+Materials follow-up: core commands verify that only woodworker produces Materials with default balance; textileWorker, smith, boatbuilder and leatherAndJewelleryMaker remain inactive. The browser regression first reproduced detached controls, then passed with the in-place view update. Eleven browser checks now pass.
+
+Work-age follow-up: the core already rejects non-null occupations below configured work age (default 16). The Lab now disables both the occupation selector and assignment button and explains the age requirement. Browser QA covers a young child, age 15, and successful woodworker assignment at age 16; autonomy controls are omitted until work age.
