@@ -58,15 +58,16 @@ export function foodNeed(state:SimulationState):number {
     const config=state.mechanics!.config;
     return cattleFoodNeed(state)+Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0);
 }
-export function stepMechanicsTick(state:SimulationState):void {
-    const config=state.mechanics!.config;
-    for(const id of Object.keys(state.personas))if(isCaregiver(state,id))state.mechanics!.people[id].caregiverWorkedWinter=state.time.winter;
-    const unavailable=new Set(Object.keys(state.personas).filter(id=>state.mechanics!.people[id].caregiverWorkedWinter===state.time.winter));
-    const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
-    for(const id of Object.keys(state.personas).sort()) {
-        const person=state.personas[id], role=person.occupation;
-        if(isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
-        const job=config.occupations[role]; if(job.resource===null)continue;
+export function occupationAptitude(state:SimulationState,id:string,role:Occupation):number {
+    if(!state.mechanics||!Object.hasOwn(state.personas,id)||!occupationIds.includes(role))throw new Error('Unknown persona/occupation');
+    return aptitude(state.personas[id].dna.traits,state.mechanics.config.occupations[role]);
+}
+export function inspectWork(state:SimulationState,id:string) {
+    const person=state.personas[id];if(!person||!state.mechanics)throw new Error('Gameplay persona required');
+    const config=state.mechanics.config,role=person.occupation;
+    const reason=person.deathWinter!==null?'deceased':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':config.occupations[role].resource===null?'inactive-role':null;
+    if(role===null)return {aptitudeBps:0,productivityBps:0,unitsPerWinter:0,resource:null,progress:0,reason};
+    const job=config.occupations[role];
         let efficiency=aptitude(person.dna.traits,job);
         const parentExperience=person.parentIds.some(parent=>occupationExperience(state,parent,role)>=config.apprenticeshipTicks);
         if(parentExperience)efficiency=Math.floor(efficiency*(10000+config.apprenticeshipBonusBps)/10000);
@@ -77,8 +78,28 @@ export function stepMechanicsTick(state:SimulationState):void {
         if(!residence || residence.kind==='tent')efficiency=Math.floor(efficiency*config.tentProductivityBps/10000);
         const building=residence?.buildingId?state.buildings[residence.buildingId]:undefined;
         if(building?.specialization===role)efficiency=Math.floor(efficiency*(10000+config.upgradeBonusBps[state.mechanics!.buildings[building.id].upgradeLevel])/10000);
-        const control=state.mechanics!.people[id];
+    const control=state.mechanics!.people[id];
         if(simulationTick(state)<control.switchedUntilTick)efficiency=Math.floor(efficiency*config.switchProductivityBps/10000);
+
+    return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
+}
+export function inspectBuilding(state:SimulationState,id:string) {
+    const building=state.buildings[id],info=state.mechanics?.buildings[id];if(!building||!info)throw new Error('Unknown gameplay building');
+    const occupied=(building.kind==='farmyard'&&Object.values(state.landing?.cattle??{}).some(c=>c.deathWinter===null&&c.farmyardId===id))||Object.values(state.households).some(h=>h.memberIds.some(p=>state.personas[p].deathWinter===null)&&h.residenceId!==null&&state.residences[h.residenceId]?.buildingId===id);
+    return {occupied,upkeep:state.mechanics!.config.baseUpkeep+info.upgradeLevel,debtWinters:info.debtWinters,upgradeLevel:info.upgradeLevel,investedMaterials:info.investedMaterials};
+}
+export function stepMechanicsTick(state:SimulationState):void {
+    const config=state.mechanics!.config;
+    for(const id of Object.keys(state.personas))if(isCaregiver(state,id))state.mechanics!.people[id].caregiverWorkedWinter=state.time.winter;
+    const unavailable=new Set(Object.keys(state.personas).filter(id=>state.mechanics!.people[id].caregiverWorkedWinter===state.time.winter));
+    const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
+    for(const id of Object.keys(state.personas).sort()) {
+        const person=state.personas[id], role=person.occupation;
+        if(isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
+        const work=inspectWork(state,id),job=config.occupations[role];
+        if(job.resource===null)continue;
+        const efficiency=work.productivityBps;
+        const control=state.mechanics!.people[id];
         person.workProgress+=job.unitsPerWinter*efficiency;
         const units=Math.floor(person.workProgress/config.workPerUnit);
         if(units){person.workProgress%=config.workPerUnit;state.stocks[job.resource]+=units;produced.push({id,resource:job.resource,units});}
@@ -94,9 +115,8 @@ export function stepMechanicsTick(state:SimulationState):void {
         const need=foodNeed(state)-cattleFoodNeed(state), consumed=Math.min(need,state.stocks.food);state.stocks.food-=consumed;
         emit(state,'FoodConsumed',undefined,{units:consumed,shortfall:need-consumed});
         for(const id of Object.keys(state.buildings).sort()) {
-            const occupied=(state.buildings[id].kind==='farmyard'&&Object.values(state.landing?.cattle??{}).some(c=>c.deathWinter===null&&c.farmyardId===id))||Object.values(state.households).some(h=>h.memberIds.some(p=>state.personas[p].deathWinter===null)&&h.residenceId!==null&&state.residences[h.residenceId]?.buildingId===id);
+            const {occupied,upkeep}=inspectBuilding(state,id);
             const building=state.mechanics!.buildings[id];
-            const upkeep=config.baseUpkeep+building.upgradeLevel;
             if(occupied&&state.stocks.materials>=upkeep){state.stocks.materials-=upkeep;building.debtWinters=0;emit(state,'BuildingMaintained',undefined,{buildingId:id,units:upkeep});}
             else {
                 building.debtWinters++;

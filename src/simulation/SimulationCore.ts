@@ -1,3 +1,5 @@
+export {inspectBuilding, inspectWork, occupationAptitude, occupationIds} from './Mechanics';
+export {caregiverEligible} from './FamilyMechanics';
 export {landingSummary} from './Landing';
 import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding} from './Landing';
 import type {LandingState, LandingCommand, LandingConfig} from './Landing';
@@ -177,4 +179,8 @@ function validateState(state: SimulationState): void {
     });
     validateMechanics(state);
     validateLanding(state);
+}
+
+export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {
+    try{applyCommand(state,command);return true;}catch{return false;}
 }
