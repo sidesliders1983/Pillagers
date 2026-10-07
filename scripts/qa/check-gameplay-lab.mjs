@@ -72,6 +72,8 @@ try{
   assert.match(await page.locator('header').innerText(),/WINTER 801/);checks.push('JSON import, caregiver assignment and atomic invalid-import rejection');
   const child=Object.values(care.personas).find(p=>p.parentIds.length===2);
   assert.ok(child);
+  assert.equal(await page.locator(`#person-${child.id} h3`).innerText(),child.name);
+  assert.doesNotMatch(child.name,/^Resident persona-/);
   assert.equal(await page.locator(`#occupation-${child.id}`).isDisabled(),true);
   assert.equal(await page.locator(`#person-${child.id}`).getByRole('button',{name:'Beroep toewijzen',exact:true}).isDisabled(),true);
   for(const age of [15,16]){

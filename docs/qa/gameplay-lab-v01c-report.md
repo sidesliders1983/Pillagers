@@ -2,7 +2,7 @@
 
 Executed 2026-10-07 for issue #28.
 
-- Full regression suite: **69 passed, 0 failed, 0 skipped**.
+- Full regression suite: **70 passed, 0 failed, 0 skipped**.
 - Three new public-boundary tests cover active pacing/pause/speed, command forwarding/stock changes/save-load/new seed, and canonical work inspection.
 - TypeScript and production build passed; the existing Three.js chunk-size warning remains for Fjordside.
 - Gameplay Lab production bundle is independently loaded; no Three.js/GLB request occurred in the browser flow.
@@ -36,3 +36,5 @@ Farmyard follow-up: browser proof asserts that no Farmyard build button exists, 
 Materials follow-up: core commands verify that only woodworker produces Materials with default balance; textileWorker, smith, boatbuilder and leatherAndJewelleryMaker remain inactive. The browser regression first reproduced detached controls, then passed with the in-place view update. Eleven browser checks now pass.
 
 Work-age follow-up: the core already rejects non-null occupations below configured work age (default 16). The Lab now disables both the occupation selector and assignment button and explains the age requirement. Browser QA covers a young child, age 15, and successful woodworker assignment at age 16; autonomy controls are omitted until work age.
+
+Newborn identity follow-up: shared CharacterDNA generation and parental trait/heritage inheritance remain in place. New births now use the Character Lab name generator from the child DNA instead of a Resident placeholder. Core QA verifies valid CharacterDNA, deterministic name, matching birth-event identity and save/reload; browser QA verifies the generated child heading. Existing saved names are retained.
