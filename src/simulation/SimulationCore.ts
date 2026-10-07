@@ -187,3 +187,4 @@ function validateState(state: SimulationState): void {
 export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {
     try{applyCommand(state,command);return true;}catch{return false;}
 }
+export {inspectCattle} from './Livestock';

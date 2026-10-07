@@ -39,7 +39,7 @@ test('keeping the longship preserves capability; salvage is a configurable irrev
   assert.deepEqual(core.reconstructState(core.serializeState(salvaged)),salvaged);
 });
 function idleCampaign(overrides={}){
-  let state=core.createCampaign(32,{foundingCoupleChanceBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0});
+  let state=core.createCampaign(32,{foundingCoupleChanceBps:0,cattleBirthChanceBps:0,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0,cattleMortalityOlderBps:0,cattleMortalityOldBps:0,cattleCrowdingBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0});
   for(const id of Object.keys(state.personas))state=core.applyCommand(state,{type:'AssignOccupation',personaId:id,occupation:null});
   return state;
 }
@@ -177,7 +177,7 @@ test('old standalone-Farmyard saves migrate without compensation and with unassi
   legacy.landing.cattle['cattle-1'].farmyardId='old-farmyard';
   legacy.events.push({id:`event-${legacy.events.length+1}`,time:{...legacy.time},type:'FarmyardEstablished',details:{buildingId:'old-farmyard',cost:10}});
   const serialized=JSON.stringify(legacy),migrated=core.reconstructState(serialized);
-  assert.equal(migrated.landing.version,2);
+  assert.equal(migrated.landing.version,3);
   assert.equal(migrated.landing.config.farmyardCost,undefined);
   assert.equal(migrated.buildings['old-farmyard'],undefined);
   assert.equal(migrated.stocks.materials,legacy.stocks.materials);
@@ -213,6 +213,7 @@ test('founding couples are seeded, eligible, share a tent and record presence ra
   assert.throws(()=>core.createCampaign(32,{foundingCoupleChanceBps:10001}));
   assert.throws(()=>core.createCampaign(32,{foundingCoupleCap:4}));
   const oldSave=core.createCampaign(32,{foundingCoupleChanceBps:0});
+  oldSave.landing.version=2;
   delete oldSave.landing.config.foundingCoupleChanceBps;delete oldSave.landing.config.foundingCoupleCap;
   const restored=core.reconstructState(JSON.stringify(oldSave));
   assert.equal(Object.keys(restored.households).length,10);
