@@ -1,6 +1,7 @@
+import {farmyards} from './Farmyards';
 import type {SimulationState} from './SimulationCore';
 import type {Cattle} from './Landing';
-export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {return cattle.farmyardId!==null&&state.buildings[cattle.farmyardId]?.kind==='farmyard';}
+export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {return cattle.farmyardId!==null&&farmyards(state).some(f=>f.id===cattle.farmyardId);}
 function emit(state:SimulationState,type:string,details:Record<string,unknown>):void {state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details});}
 export function cattleFoodNeed(state:SimulationState):number {
     const landing=state.landing;if(!landing)return 0;

@@ -14,6 +14,7 @@ try{
   assert.match(await page.locator('header').innerText(),/WINTER 800/);
   assert.equal(await page.getByRole('button',{name:'Beroep toewijzen',exact:true}).count(),10);checks.push('Landing and ten person cards');
   await page.screenshot({path:new URL('opening.png',output).pathname.replace(/^\/([A-Z]:)/,'$1'),fullPage:false});
+  assert.equal(await page.getByRole('button',{name:/Farmyard bouwen/}).count(),0);
   await page.getByRole('button',{name:/^Salvage \(/}).click();assert.match(await page.locator('.lab-stocks').innerText(),/Materials 25/);
   await page.getByRole('button',{name:/^Huis bouwen \(/}).first().click();
   await page.locator('select[id^="specialization-"]').first().selectOption('farmer');
@@ -21,6 +22,14 @@ try{
   await page.getByRole('button',{name:/^Upgrade \(/}).first().click();checks.push('Salvage, housing, specialization and upgrade');
   await page.locator('select[id^="occupation-"]').first().selectOption('farmer');
   await page.getByRole('button',{name:'Beroep toewijzen',exact:true}).first().click();
+  await page.locator('#cattle-cattle-1').selectOption('house-1');
+  await page.getByRole('button',{name:'Vee toewijzen',exact:true}).first().click();
+  assert.match(await page.locator('section').filter({has:page.getByRole('heading',{name:'Founding assets',exact:true})}).innerText(),/house-1/);
+  await page.locator('select[id^="occupation-"]').first().selectOption('woodworker');
+  await page.getByRole('button',{name:'Beroep toewijzen',exact:true}).first().click();
+  assert.equal(await page.locator('#cattle-cattle-1').inputValue(),'');
+  assert.equal(await page.locator('#cattle-cattle-1 option').count(),1);
+  checks.push('Automatic home Farmyard, individual cattle assignment and last-farmer deactivation');
   await page.getByRole('button',{name:'Afstamming bekijken',exact:true}).first().click();assert.match(await page.locator('#lineage-view').innerText(),/Ouders:/);checks.push('Occupation and lineage inspection');
   await page.getByRole('button',{name:'Lokaal opslaan',exact:true}).click();
   await page.getByRole('button',{name:'+1 Winter',exact:true}).click();assert.match(await page.locator('header').innerText(),/WINTER 801/);

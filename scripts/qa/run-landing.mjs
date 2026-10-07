@@ -9,7 +9,9 @@ function run(split=false,resume=false,record=false){
   state=core.applyCommand(state,{type:'KeepLongship',longshipId:'founding-longship'});
   state=core.applyCommand(state,{type:'AdvanceTicks',ticks:321});
   state=core.applyCommand(state,{type:'SalvageLongship',longshipId:'founding-longship'});
-  state=core.applyCommand(state,{type:'EstablishFarmyard'});
+  state=core.applyCommand(state,{type:'BuildHouse',householdId:'founder-1'});
+  state=core.applyCommand(state,{type:'AssignOccupation',personaId:'founder-1',occupation:'farmer'});
+  for(const cattleId of Object.keys(state.landing.cattle))state=core.applyCommand(state,{type:'AssignCattle',cattleId,farmyardId:'house-1'});
   for(let n=0;n<50;n++){
     state=split?core.applyCommand(core.applyCommand(state,{type:'AdvanceTicks',ticks:137}),{type:'AdvanceTicks',ticks:863}):core.advanceWinter(state);
     if(n===10)state=core.applyCommand(state,{type:'SlaughterCattle',cattleId:'cattle-3'});

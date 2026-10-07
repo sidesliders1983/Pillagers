@@ -1,3 +1,4 @@
+import {farmyards} from './Farmyards';
 import type {SimulationState, Occupation} from './SimulationCore';
 import {initializeMechanics} from './Mechanics';
 import type {PrototypeConfig} from './Mechanics';
@@ -6,10 +7,10 @@ import {characterName, fullName} from '../characters/naming/generateName';
 import {cattleSheltered} from './Livestock';
 import {seededRandom} from '../characters/seededRandom';
 
-export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCost:number;farmyardCapacity:number;slaughterFood:number};
-export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials:5,longshipSalvage:20,cattleAdultAge:2,adultCattleFood:1,calfFood:0,cowFoodPerWinter:4,exposedProductivityBps:5000,farmyardCost:10,farmyardCapacity:4,slaughterFood:15};
+export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number};
+export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials:5,longshipSalvage:20,cattleAdultAge:2,adultCattleFood:1,calfFood:0,cowFoodPerWinter:4,exposedProductivityBps:5000,farmyardCapacity:4,slaughterFood:15};
 export type Cattle = {id:string;sex:'female'|'male';birthWinter:number;deathWinter:number|null;parentIds:string[];origin:'founding';farmyardId:string|null;foodProgress:number};
-export type LandingState = {version:1;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>};
+export type LandingState = {version:2;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>};
 
 export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}):SimulationState {
     if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw new Error('Seed must be uint32');
@@ -28,14 +29,14 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
         state.residences[`tent-${id}`]={id:`tent-${id}`,kind:'tent',buildingId:null};
     }
     state.mechanics=initializeMechanics(state,mechanicsOverrides);
-    state.landing={version:1,config,region:{id:'landing-region',settledByClanId:null},founderIds:Object.keys(state.personas),longships:{'founding-longship':{id:'founding-longship',acquiredWinter:800,salvagedWinter:null}},cattle:{}};
+    state.landing={version:2,config,region:{id:'landing-region',settledByClanId:null},founderIds:Object.keys(state.personas),longships:{'founding-longship':{id:'founding-longship',acquiredWinter:800,salvagedWinter:null}},cattle:{}};
     for(let i=1;i<=3;i++)state.landing.cattle[`cattle-${i}`]={id:`cattle-${i}`,sex:i===3?'male':'female',birthWinter:797,deathWinter:null,parentIds:[],origin:'founding',farmyardId:null,foodProgress:0};
     state.events.push({id:'event-1',time:{...state.time},type:'FoundingPartyLanded',details:{regionId:'landing-region',founderIds:[...state.landing.founderIds],longshipIds:['founding-longship'],cattleIds:Object.keys(state.landing.cattle),stocks:{...state.stocks}}});
     return state;
 }
 
-export type LandingCommand={type:'KeepLongship'|'SalvageLongship';longshipId:string}|{type:'EstablishFarmyard'}|{type:'SlaughterCattle';cattleId:string};
-export function isLandingCommand(command:{type:string}):boolean {return ['KeepLongship','SalvageLongship','EstablishFarmyard','SlaughterCattle'].includes(command.type);}
+export type LandingCommand={type:'KeepLongship'|'SalvageLongship';longshipId:string}|{type:'AssignCattle';cattleId:string;farmyardId:string|null}|{type:'SlaughterCattle';cattleId:string};
+export function isLandingCommand(command:{type:string}):boolean {return ['KeepLongship','SalvageLongship','AssignCattle','SlaughterCattle'].includes(command.type);}
 function emit(state:SimulationState,type:string,details:Record<string,unknown>):void {
     state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details});
 }
@@ -46,15 +47,11 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
         cattle.deathWinter=state.time.winter;cattle.farmyardId=null;state.stocks.food+=landing.config.slaughterFood;
         emit(state,'CattleSlaughtered',{cattleId:cattle.id,food:landing.config.slaughterFood});return;
     }
-    if(command.type==='EstablishFarmyard'){
-        if(state.stocks.materials<landing.config.farmyardCost)throw new Error('Insufficient Materials');
-        let n=1;while(Object.hasOwn(state.buildings,`farmyard-${n}`)||state.events.some(e=>e.details?.buildingId===`farmyard-${n}`))n++;
-        const id=`farmyard-${n}`;state.stocks.materials-=landing.config.farmyardCost;
-        state.buildings[id]={id,kind:'farmyard',specialization:null};
-        state.mechanics!.buildings[id]={debtWinters:0,investedMaterials:landing.config.farmyardCost,upgradeLevel:0};
-        for(const cattle of Object.values(landing.cattle))if(cattle.deathWinter===null&&!cattleSheltered(state,cattle))cattle.farmyardId=id;
-        landing.region.settledByClanId=state.clan.id;
-        emit(state,'FarmyardEstablished',{buildingId:id,cost:landing.config.farmyardCost,cattleIds:Object.values(landing.cattle).filter(c=>c.farmyardId===id).map(c=>c.id).sort()});return;
+    if(command.type==='AssignCattle'){
+        const cattle=landing.cattle[command.cattleId];if(!cattle||cattle.deathWinter!==null)throw new Error('Living cattle required');
+        if(command.farmyardId!==null&&!farmyards(state).some(f=>f.id===command.farmyardId))throw new Error('Active farmer household in a permanent home required');
+        cattle.farmyardId=command.farmyardId;
+        emit(state,'CattleAssigned',{cattleId:cattle.id,farmyardId:command.farmyardId});return;
     }
     const ship=landing.longships[command.longshipId];
     if(!ship||ship.salvagedWinter!==null)throw new Error('Longship unavailable');
@@ -65,14 +62,14 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
 export function landingSummary(state:SimulationState) {
     const landing=state.landing;if(!landing)throw new Error('No landing assets');
     const longships=Object.values(landing.longships).filter(s=>s.salvagedWinter===null).length;
-    return {winter:state.time.winter,founders:landing.founderIds.length,food:state.stocks.food,materials:state.stocks.materials,longships,maritimeCapable:longships>0,cattle:Object.values(landing.cattle).filter(c=>c.deathWinter===null).length,buildings:Object.keys(state.buildings).length,farmyards:Object.values(state.buildings).filter(b=>b.kind==='farmyard').map(b=>{const occupants=Object.values(landing.cattle).filter(c=>c.deathWinter===null&&c.farmyardId===b.id).length;return {id:b.id,capacity:landing.config.farmyardCapacity,occupants,overcrowding:Math.max(0,occupants-landing.config.farmyardCapacity)};}),unshelteredCattle:Object.values(landing.cattle).filter(c=>c.deathWinter===null&&!cattleSheltered(state,c)).length};
+    return {winter:state.time.winter,founders:landing.founderIds.length,food:state.stocks.food,materials:state.stocks.materials,longships,maritimeCapable:longships>0,cattle:Object.values(landing.cattle).filter(c=>c.deathWinter===null).length,buildings:Object.keys(state.buildings).length,farmyards:farmyards(state),unshelteredCattle:Object.values(landing.cattle).filter(c=>c.deathWinter===null&&!cattleSheltered(state,c)).length};
 }
 
 export function validateLanding(state:SimulationState):void {
     const landing=state.landing;if(!landing)return;
     const fail=(message:string):never=>{throw new Error(message);};
     const uint=(n:number,max=Number.MAX_SAFE_INTEGER):void=>{if(!Number.isSafeInteger(n)||n<0||n>max)fail('Invalid landing integer');};
-    if(landing.version!==1||!state.mechanics)fail('Unsupported landing state');
+    if(landing.version!==2||!state.mechanics)fail('Unsupported landing state');
     if(!landing.config||Object.keys(landing.config).length!==Object.keys(defaultLandingConfig).length)fail('Invalid landing config');
     for(const key of Object.keys(defaultLandingConfig) as (keyof LandingConfig)[])uint(landing.config[key],key==='exposedProductivityBps'?10000:key==='cowFoodPerWinter'?1000000:1000000000);
     if(landing.config.farmyardCapacity===0||landing.config.cattleAdultAge===0||landing.config.calfFood>landing.config.adultCattleFood)fail('Invalid cattle configuration');
@@ -87,9 +84,28 @@ export function validateLanding(state:SimulationState):void {
         if(cattle.id!==id||!['female','male'].includes(cattle.sex)||cattle.origin!=='founding'||!Array.isArray(cattle.parentIds))fail('Invalid cattle identity');
         uint(cattle.birthWinter,state.time.winter);uint(cattle.foodProgress,state.ticksPerWinter*10000-1);
         if(cattle.deathWinter!==null){uint(cattle.deathWinter,state.time.winter);if(cattle.deathWinter<cattle.birthWinter||cattle.farmyardId!==null)fail('Invalid cattle death');}
-        if(cattle.farmyardId!==null&&state.buildings[cattle.farmyardId]?.kind!=='farmyard')fail('Invalid cattle shelter');
+        if(cattle.farmyardId!==null&&!farmyards(state).some(f=>f.id===cattle.farmyardId))fail('Invalid cattle shelter');
         for(const parent of cattle.parentIds)if(!Object.hasOwn(landing.cattle,parent)||landing.cattle[parent].birthWinter>=cattle.birthWinter)fail('Invalid cattle genealogy');
     }
-    for(const building of Object.values(state.buildings))if(building.kind==='farmyard'&&(building.specialization!==null||state.mechanics!.buildings[building.id]?.upgradeLevel!==0))fail('Unsupported Farmyard specialization');
     for(const residence of Object.values(state.residences))if(residence.buildingId!==null&&state.buildings[residence.buildingId]?.kind!=='house')fail('Residence needs a house');
+}
+
+/** Explicit upgrade of the superseded standalone-building prototype, on detached JSON only. */
+export function migrateLanding(state:SimulationState):void {
+    const landing=state.landing;
+    if(!landing||(landing.version as number)!==1)return;
+    if(!state.mechanics||!Array.isArray(state.events))throw new Error('Invalid old landing save');
+    const config=landing.config as LandingConfig&{farmyardCost?:number};
+    if(!Number.isSafeInteger(config.farmyardCost)||config.farmyardCost!<0)throw new Error('Invalid old Farmyard cost');
+    const retiredIds:string[]=[];
+    for(const building of Object.values(state.buildings))if(building.kind==='farmyard'){
+        const info=state.mechanics.buildings[building.id];
+        if(!info||!Number.isSafeInteger(info.investedMaterials)||info.investedMaterials<0)throw new Error('Invalid old Farmyard investment');
+        if(Object.values(state.residences).some(r=>r.buildingId===building.id))throw new Error('Old Farmyard cannot be a residence');
+        retiredIds.push(building.id);
+        delete state.buildings[building.id];delete state.mechanics.buildings[building.id];
+    }
+    for(const cattle of Object.values(landing.cattle))if(cattle.farmyardId!==null&&retiredIds.includes(cattle.farmyardId))cattle.farmyardId=null;
+    delete config.farmyardCost;landing.version=2;
+    emit(state,'FarmyardModelMigrated',{retiredBuildingIds:retiredIds.sort()});
 }

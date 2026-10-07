@@ -5,9 +5,9 @@ Issue #28 adds `/gameplay-lab`, a lightweight playable client of the Simulation 
 ## Playtesting flow
 
 1. Inspect Food/Materials, founder occupations and temporary shelter. Stock trends show the measured difference from the last successful command, not a forecast.
-2. Keep/salvage the ship, slaughter cattle or build a Farmyard through the existing commands. Costs/yields are displayed from saved configuration.
+2. Keep/salvage the ship, slaughter cattle or assign each animal to an active Farmyard home through the existing commands. Costs/yields are displayed from saved configuration.
 3. Assign occupations or return career control to autonomy. Person cards show live age, household, partner/children, CharacterDNA traits, occupation aptitude, productivity, work progress, care state and occupation history.
-4. Build a house for a household or move it to an available residence/tent. Building cards show vacancy, charged upkeep, debt, invested Materials, specialization and upgrade level. Specialize and upgrade through core commands.
+4. Build a house for a household or move it to an available residence/tent. Building cards show vacancy, charged upkeep, debt, invested Materials, specialization, upgrade level and the automatic Farmyard function. Specialize and upgrade through core commands.
 5. For an active childcare group, choose an eligible caregiver or return care to the mother. Eligibility comes from the Simulation Core.
 6. Inspect lineage by selecting a resident's name or Afstamming bekijken. The lineage panel links parents, partner and children and lists family groups.
 7. Advance one Winter manually or press Start. Choose 1, 3 or 5 minutes per Winter and pause freely. Header progress, stocks and event history update during play.
@@ -39,3 +39,5 @@ node node_modules/vite/bin/vite.js build
 Browser proof is reproduced by starting Vite on port 5180, then running `node scripts/qa/check-gameplay-lab.mjs [node-module-directory]`. The optional directory points at a runtime containing Playwright; without it, a normally resolvable Playwright installation is used. The current QA uses the bundled runtime and an isolated headless Edge instance, requiring no project dependency on Playwright. Reports/screenshots are generated under `artifacts/qa/gameplay-lab/`.
 
 This pass exposes existing cattle/ship actions because The Landing supplies them; it adds no new livestock rules. Mortality, reproduction, weather, expeditions, raids, trade, final art and balancing remain outside #28.
+
+Farmyard correction: assigning a farmer in a tent creates no function. In a permanent home the first living farmer activates the Farmyard for free; the last farmer leaving removes it and unassigns cattle. Select each animal’s Farmyard in its livestock card. There is no standalone build button. Old version-1 landing saves migrate on local load/JSON import without compensation and with retained history.

@@ -1,3 +1,4 @@
+import {farmyards,reconcileFarmyards} from './Farmyards';
 import {cattleFoodNeed, stepCattleOutput, consumeCattleFood} from './Livestock';
 import {prohibitedKinship, resolvePartnerships, resolveBirths, isCaregiver, isProvidingCare, assignCaregiver, resolveCaregivers} from './FamilyMechanics';
 import {traitKeys} from '../characters/CharacterDNA';
@@ -90,6 +91,7 @@ export function inspectBuilding(state:SimulationState,id:string) {
 }
 export function stepMechanicsTick(state:SimulationState):void {
     const config=state.mechanics!.config;
+    const previousFarmyards=farmyards(state).map(f=>f.id);
     for(const id of Object.keys(state.personas))if(isCaregiver(state,id))state.mechanics!.people[id].caregiverWorkedWinter=state.time.winter;
     const unavailable=new Set(Object.keys(state.personas).filter(id=>state.mechanics!.people[id].caregiverWorkedWinter===state.time.winter));
     const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
@@ -134,6 +136,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         resolvePartnerships(state,bps=>chance(state,bps),householdId=>applyMechanicsCommand(state,{type:'HouseHousehold',householdId}),(type,personaId,details)=>emit(state,type,personaId,details));
         resolveBirths(state,bps=>chance(state,bps),()=>randomUint(state),()=>foodNeed(state),id=>{state.mechanics!.people[id]=newPersonaMechanics();},(type,personaId,details)=>emit(state,type,personaId,details),unavailable);
         resolveCaregivers(state,(type,personaId,details)=>emit(state,type,personaId,details));
+        reconcileFarmyards(state,previousFarmyards);
     }
 }
 
