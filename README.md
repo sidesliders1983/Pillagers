@@ -109,3 +109,7 @@ The scriptable Blender character optimization benchmark and /asset-lab compariso
 1. Build one production-direction Pillagers Viking, keeping the current placeholders for scale comparison.
 2. Validate that character at close, default and overview RTS camera distances; add a simple walk cycle.
 3. Tune the Character Lab distributions and occupation preferences through comparisons before expanding into VikingGenome.
+
+## UI language
+
+English is the default language for all user-facing UI: labels, buttons, help text, status messages and errors. Apply this rule to new features and edits across the world and all labs. Character names retain their generated cultural spelling.

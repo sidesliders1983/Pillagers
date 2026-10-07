@@ -1,5 +1,8 @@
+import {farmyards,reconcileFarmyards} from './Farmyards';
+export {inspectBuilding, inspectWork, occupationAptitude, occupationIds} from './Mechanics';
+export {caregiverEligible} from './FamilyMechanics';
 export {landingSummary} from './Landing';
-import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding} from './Landing';
+import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding, migrateLanding} from './Landing';
 import type {LandingState, LandingCommand, LandingConfig} from './Landing';
 export {canPartner} from './FamilyMechanics';
 import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics} from './Mechanics';
@@ -67,8 +70,8 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand): SimulationState {
     validateState(input);
-    if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);validateState(state);return state;}
-    if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);validateState(state);return state;}
+    if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
+    if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
         const occupations: Occupation[] = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
         const person = input.personas[command.personaId];
@@ -83,6 +86,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand)
         target.occupation = command.occupation;
         if (command.occupation !== null) target.occupationHistory.push({occupation: command.occupation, startedAt: {...state.time}, endedAt: null});
         emit(state, 'OccupationAssigned', target.id, {occupation: command.occupation, name: target.name, age: personaAge(state, target.id)});
+        reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);
         return state;
     }
     const ticks = command.type === 'AdvanceWinter' ? input.ticksPerWinter : command.type === 'AdvanceTicks' ? command.ticks : NaN;
@@ -107,6 +111,7 @@ export function advanceWinter(state: SimulationState): SimulationState {
 export function serializeState(state: SimulationState): string {validateState(state); return JSON.stringify(state);}
 export function reconstructState(serialized: string): SimulationState {
     const state = JSON.parse(serialized) as SimulationState;
+    migrateLanding(state);
     validateState(state); return state;
 }
 
@@ -164,7 +169,7 @@ function validateState(state: SimulationState): void {
         if (residence.id !== id || !['house', 'tent'].includes(residence.kind)) throw new Error('Invalid residence');
         if (residence.buildingId !== null && !Object.hasOwn(state.buildings, residence.buildingId)) throw new Error('Unknown building');
     }
-    for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || !['house','farmyard'].includes(building.kind)) throw new Error('Invalid building');
+    for (const [id, building] of Object.entries(state.buildings)) if (id !== building.id || building.kind !== 'house') throw new Error('Invalid building');
     let previousEventTime = 0;
     state.events.forEach((event, index) => {
         const timestamp = timeValue(event.time);
@@ -177,4 +182,8 @@ function validateState(state: SimulationState): void {
     });
     validateMechanics(state);
     validateLanding(state);
+}
+
+export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {
+    try{applyCommand(state,command);return true;}catch{return false;}
 }

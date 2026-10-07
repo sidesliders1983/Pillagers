@@ -32,12 +32,12 @@ _Avoid_: Family
 
 **Dominant legacy**: A child's per-trait marker recording a copied parental trait. The marker belongs to one generation; the numeric trait remains available for ordinary inheritance.
 
-**Founding party**: The named personas arriving together to begin a new clan's campaign.
+**Founding party**: The named personas arriving together to begin a new clan's campaign. It may include existing couples sharing temporary households; arrival does not establish when those relationships began.
 
 **Longship**: A persistent clan vessel enabling future maritime expeditions. Salvaging it permanently exchanges the vessel for Materials.
 
 **Cattle**: Individually identified living livestock with sex, birth Winter and an origin. Cows supply ongoing Food; cows and bulls both consume Food.
 
-**Farmyard**: Infrastructure that shelters cattle and restores their normal ongoing output. Establishing a Farmyard does not create livestock.
+**Farmyard**: The function of a permanent household home while at least one living resident has the farmer occupation. Individually assigned cattle gain sheltered output. The function disappears when the last farmer leaves; cattle then become unassigned. Tents never have this function.
 
 **Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased mortality risk when livestock mortality is introduced.

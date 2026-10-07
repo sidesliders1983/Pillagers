@@ -1,3 +1,4 @@
+import {characterName, fullName} from '../characters/naming/generateName';
 import {traitKeys, heritageKeys, normalizeHeritage} from '../characters/CharacterDNA';
 import type {CoreTraits, HeritageMix} from '../characters/CharacterDNA';
 import {generateCharacterDNA} from '../characters/generateCharacterDNA';
@@ -54,7 +55,7 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
         const dna=generateCharacterDNA(random());dna.age=0;dna.sex=roll(5000)?'female':'male';
         dna.traits=Object.fromEntries(traitKeys.map(key=>[key,(mother.dna.traits[key]+father.dna.traits[key])/2])) as CoreTraits;
         dna.heritage=normalizeHeritage(Object.fromEntries(heritageKeys.map(key=>[key,(mother.dna.heritage[key]+father.dna.heritage[key])/2])) as HeritageMix);
-        state.personas[id]={id,name:`Resident ${id}`,birthWinter:state.time.winter,deathWinter:null,originClanId:state.clan.id,dna,parentIds:[father.id,mother.id],partnerId:null,occupation:null,occupationHistory:[],workProgress:0};
+        state.personas[id]={id,name:fullName(characterName(dna)),birthWinter:state.time.winter,deathWinter:null,originClanId:state.clan.id,dna,parentIds:[father.id,mother.id],partnerId:null,occupation:null,occupationHistory:[],workProgress:0};
         register(id);
         for(const key of traitKeys)if(roll(config.dominantLegacyChanceBps)){
             const parent=roll(5000)?mother:father;

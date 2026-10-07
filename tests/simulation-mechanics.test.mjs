@@ -354,3 +354,31 @@ test('loaded prohibited and self partnerships are rejected before simulation', (
     assert.throws(()=>core.reconstructState(JSON.stringify(state)));
   }
 });
+
+
+test('woodworker alone produces Materials among the default prototype occupations',()=>{
+  for(const occupation of ['textileWorker','smith','woodworker','boatbuilder','leatherAndJewelleryMaker']){
+    let state=settlement();
+    for(const id of Object.keys(state.personas))state=core.applyCommand(state,{type:'AssignOccupation',personaId:id,occupation:null});
+    state=core.applyCommand(state,{type:'AssignOccupation',personaId:'einar',occupation});
+    const advanced=core.advanceWinter(core.advanceWinter(state));
+    if(occupation==='woodworker')assert.ok(produced(advanced,'materials')>0);
+    else {assert.equal(produced(advanced,'materials'),0);assert.equal(core.inspectWork(state,'einar').reason,'inactive-role');}
+    assert.deepEqual(core.reconstructState(core.serializeState(advanced)),advanced);
+  }
+});
+
+
+test('newborns receive Character Lab compatible inherited DNA and generated names preserved in birth history and saves',()=>{
+  const naming=loadTypeScript(new URL('../src/characters/naming/generateName.ts',import.meta.url));
+  const characters=loadTypeScript(new URL('../src/characters/CharacterDNA.ts',import.meta.url));
+  const initial=fertile(),state=core.advanceWinter(initial);
+  const birth=state.events.find(e=>e.type==='ChildBorn'),child=state.personas[birth.personaId];
+  assert.doesNotMatch(child.name,/^Resident persona-/);
+  assert.equal(child.name,naming.fullName(naming.characterName(child.dna)));
+  assert.deepEqual(characters.parseCharacterDNA(child.dna),child.dna);
+  assert.equal(child.dna.age,0);
+  assert.deepEqual(birth.details.dna,child.dna);assert.equal(birth.details.name,child.name);
+  assert.deepEqual(core.advanceWinter(initial),state);
+  assert.deepEqual(core.reconstructState(core.serializeState(state)),state);
+});
