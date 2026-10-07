@@ -2,7 +2,7 @@
 
 Executed 2026-10-07 for issue #28.
 
-- Full regression suite: **67 passed, 0 failed, 0 skipped**.
+- Full regression suite: **68 passed, 0 failed, 0 skipped**.
 - Three new public-boundary tests cover active pacing/pause/speed, command forwarding/stock changes/save-load/new seed, and canonical work inspection.
 - TypeScript and production build passed; the existing Three.js chunk-size warning remains for Fjordside.
 - Gameplay Lab production bundle is independently loaded; no Three.js/GLB request occurred in the browser flow.

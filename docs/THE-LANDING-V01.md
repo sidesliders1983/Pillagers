@@ -4,7 +4,7 @@ Issue #32 introduces `createCampaign(seed, landingOverrides?, mechanicsOverrides
 
 ## Founding party
 
-Ten founders are generated with the existing CharacterDNA and naming systems. A named deterministic random stream sets their ages, composition and prior work experience independently of future simulation RNG draws. Every founder is 18–40 Winters old; there are at least four women and four men. Traits, heritage, names, ages, occupations and experience vary with seed. Founders have no preset partners/parents and each initially occupies a separate tent household. Occupations use productive Food/craft roles and carry zero to five complete Winters of prior experience, constrained by adult work age. Initial assignments are autonomous; explicit player assignment sets the existing occupation lock.
+Ten founders are generated with the existing CharacterDNA and naming systems. A named deterministic random stream sets their ages, composition and prior work experience independently of future simulation RNG draws. Every founder is 18–40 Winters old; there are at least four women and four men. Traits, heritage, names, ages, occupations and experience vary with seed. Founders have no registered parents. Seeded existing couples share tent households; singles occupy individual tents. Occupations use productive Food/craft roles and carry zero to five complete Winters of prior experience, constrained by adult work age. Initial assignments are autonomous; explicit player assignment sets the existing occupation lock.
 
 This is a generated party, not a fixed cast. Seed and saved state reproduce it exactly. Food/Materials assignments and house construction use the same simulation mechanics as later play, including the existing tent-productivity modifier.
 
@@ -70,3 +70,9 @@ The landing scenarios prove generation/save identity, keep/salvage exclusivity, 
 ## Correction and save migration
 
 The separately buildable Farmyard prototype is superseded by the confirmed household rule. Landing extension version 2 removes farmyardCost. Loading version-1 saves explicitly retires standalone Farmyard buildings, leaves resource stocks unchanged, unassigns affected cattle and retains all previous events plus a FarmyardModelMigrated event. No original JSON file is overwritten, and migration is applied once. New saves validate that every assigned animal references an active farmer home.
+
+## Existing founding couples
+
+After generating ten adult individuals, an independent seeded stream shuffles candidates and tries each disjoint eligible pair once using the normal adult/sex/kinship partnership rules. Default foundingCoupleChanceBps is 5000 and foundingCoupleCap is 3 (configurable from 0 to 3). This typically produces one or two couples, with zero and three valid outcomes. Founder identities do not change when these settings change.
+
+Couples have reciprocal partnerId, one shared tent household and a family group; singles retain individual tents. FoundingPartnershipPresent records participants and household as relationships already present at arrival. It asserts no meeting/marriage date and does not emit PartnershipFormed. Existing saves receive missing config defaults without generating or changing their relationships.

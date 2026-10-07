@@ -8,10 +8,10 @@ test('seeded landing generates ten viable named founders in tents with founding 
   const founders=Object.values(state.personas);
   assert.equal(founders.length,10);
   for(const sex of ['female','male'])assert.ok(founders.filter(p=>p.dna.sex===sex).length>=4);
-  for(const p of founders){assert.ok(p.name);assert.ok(core.personaAge(state,p.id)>=18&&core.personaAge(state,p.id)<=40);assert.equal(p.partnerId,null);}
+  for(const p of founders){assert.ok(p.name);assert.ok(core.personaAge(state,p.id)>=18&&core.personaAge(state,p.id)<=40);}
   assert.equal(Object.keys(state.buildings).length,0);
   assert.equal(Object.values(state.residences).every(r=>r.kind==='tent'),true);
-  assert.equal(Object.keys(state.households).length,10);
+  assert.equal(Object.keys(state.households).length,10-state.events.filter(e=>e.type==='FoundingPartnershipPresent').length);
   assert.deepEqual(state.stocks,{food:30,materials:5});
   assert.equal(Object.keys(state.landing.longships).length,1);
   assert.deepEqual(Object.values(state.landing.cattle).map(c=>c.sex).sort(),['female','female','male']);
@@ -39,7 +39,7 @@ test('keeping the longship preserves capability; salvage is a configurable irrev
   assert.deepEqual(core.reconstructState(core.serializeState(salvaged)),salvaged);
 });
 function idleCampaign(overrides={}){
-  let state=core.createCampaign(32,overrides,{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0});
+  let state=core.createCampaign(32,{foundingCoupleChanceBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0});
   for(const id of Object.keys(state.personas))state=core.applyCommand(state,{type:'AssignOccupation',personaId:id,occupation:null});
   return state;
 }
@@ -186,4 +186,36 @@ test('old standalone-Farmyard saves migrate without compensation and with unassi
   assert.ok(migrated.events.some(e=>e.type==='FarmyardEstablished'));
   assert.deepEqual(core.reconstructState(core.serializeState(migrated)),migrated);
   assert.equal(JSON.stringify(legacy),serialized);
+});
+
+
+test('founding couples are seeded, eligible, share a tent and record presence rather than formation',()=>{
+  const counts=new Set();let middle=0;
+  for(let seed=0;seed<100;seed++){
+    const state=core.createCampaign(seed),events=state.events.filter(e=>e.type==='FoundingPartnershipPresent');
+    counts.add(events.length);if(events.length===1||events.length===2)middle++;
+    assert.ok(events.length<=3);assert.equal(state.events.some(e=>e.type==='PartnershipFormed'),false);
+    assert.equal(Object.keys(state.households).length,10-events.length);
+    for(const event of events){
+      const [a,b]=event.details.participants;
+      assert.equal(state.personas[a].partnerId,b);assert.equal(state.personas[b].partnerId,a);
+      const unmarried=structuredClone(state);unmarried.personas[a].partnerId=null;unmarried.personas[b].partnerId=null;
+      assert.equal(core.canPartner(unmarried,a,b),true);
+      const home=Object.values(state.households).find(h=>h.memberIds.includes(a));
+      assert.ok(home.memberIds.includes(b));assert.equal(state.residences[home.residenceId].kind,'tent');
+    }
+    assert.deepEqual(core.createCampaign(seed),state);
+    assert.deepEqual(core.reconstructState(core.serializeState(state)),state);
+  }
+  assert.deepEqual([...counts].sort(),[0,1,2,3]);assert.ok(middle>50);
+  assert.equal(core.createCampaign(32,{foundingCoupleChanceBps:0}).events.filter(e=>e.type==='FoundingPartnershipPresent').length,0);
+  assert.equal(core.createCampaign(32,{foundingCoupleChanceBps:10000,foundingCoupleCap:2}).events.filter(e=>e.type==='FoundingPartnershipPresent').length,2);
+  assert.throws(()=>core.createCampaign(32,{foundingCoupleChanceBps:10001}));
+  assert.throws(()=>core.createCampaign(32,{foundingCoupleCap:4}));
+  const oldSave=core.createCampaign(32,{foundingCoupleChanceBps:0});
+  delete oldSave.landing.config.foundingCoupleChanceBps;delete oldSave.landing.config.foundingCoupleCap;
+  const restored=core.reconstructState(JSON.stringify(oldSave));
+  assert.equal(Object.keys(restored.households).length,10);
+  assert.equal(restored.events.some(e=>e.type==='FoundingPartnershipPresent'),false);
+
 });

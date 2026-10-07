@@ -1,3 +1,4 @@
+import {canPartner} from './FamilyMechanics';
 import {farmyards} from './Farmyards';
 import type {SimulationState, Occupation} from './SimulationCore';
 import {initializeMechanics} from './Mechanics';
@@ -7,8 +8,8 @@ import {characterName, fullName} from '../characters/naming/generateName';
 import {cattleSheltered} from './Livestock';
 import {seededRandom} from '../characters/seededRandom';
 
-export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number};
-export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials:5,longshipSalvage:20,cattleAdultAge:2,adultCattleFood:1,calfFood:0,cowFoodPerWinter:4,exposedProductivityBps:5000,farmyardCapacity:4,slaughterFood:15};
+export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number;foundingCoupleChanceBps:number;foundingCoupleCap:number};
+export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials:5,longshipSalvage:20,cattleAdultAge:2,adultCattleFood:1,calfFood:0,cowFoodPerWinter:4,exposedProductivityBps:5000,farmyardCapacity:4,slaughterFood:15,foundingCoupleChanceBps:5000,foundingCoupleCap:3};
 export type Cattle = {id:string;sex:'female'|'male';birthWinter:number;deathWinter:number|null;parentIds:string[];origin:'founding';farmyardId:string|null;foodProgress:number};
 export type LandingState = {version:2;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>};
 
@@ -32,6 +33,25 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
     state.landing={version:2,config,region:{id:'landing-region',settledByClanId:null},founderIds:Object.keys(state.personas),longships:{'founding-longship':{id:'founding-longship',acquiredWinter:800,salvagedWinter:null}},cattle:{}};
     for(let i=1;i<=3;i++)state.landing.cattle[`cattle-${i}`]={id:`cattle-${i}`,sex:i===3?'male':'female',birthWinter:797,deathWinter:null,parentIds:[],origin:'founding',farmyardId:null,foodProgress:0};
     state.events.push({id:'event-1',time:{...state.time},type:'FoundingPartyLanded',details:{regionId:'landing-region',founderIds:[...state.landing.founderIds],longshipIds:['founding-longship'],cattleIds:Object.keys(state.landing.cattle),stocks:{...state.stocks}}});
+    // A separate stream preserves individual founder identities when pairing settings change.
+    const pairRandom=seededRandom(seed,'founding-couples-v1');
+    const available=Object.keys(state.personas);
+    for(let i=available.length-1;i>0;i--){const j=Math.floor(pairRandom()*(i+1));[available[i],available[j]]=[available[j],available[i]];}
+    let couples=0;
+    while(available.length>0&&couples<config.foundingCoupleCap){
+        const aId=available.shift()!;
+        const index=available.findIndex(bId=>canPartner(state,aId,bId));
+        if(index<0)continue;
+        const bId=available.splice(index,1)[0];
+        if(pairRandom()*10000>=config.foundingCoupleChanceBps)continue;
+        state.personas[aId].partnerId=bId;state.personas[bId].partnerId=aId;
+        const [homeId,retiredHomeId]=[aId,bId].sort((a,b)=>Number(a.split('-')[1])-Number(b.split('-')[1]));
+        state.households[homeId].memberIds.push(retiredHomeId);
+        delete state.residences[state.households[retiredHomeId].residenceId!];delete state.households[retiredHomeId];
+        const familyId=`founding-family-${++couples}`;
+        state.families[familyId]={id:familyId,memberIds:[aId,bId]};
+        emit(state,'FoundingPartnershipPresent',{participants:[aId,bId],householdId:homeId});
+    }
     return state;
 }
 
@@ -71,7 +91,7 @@ export function validateLanding(state:SimulationState):void {
     const uint=(n:number,max=Number.MAX_SAFE_INTEGER):void=>{if(!Number.isSafeInteger(n)||n<0||n>max)fail('Invalid landing integer');};
     if(landing.version!==2||!state.mechanics)fail('Unsupported landing state');
     if(!landing.config||Object.keys(landing.config).length!==Object.keys(defaultLandingConfig).length)fail('Invalid landing config');
-    for(const key of Object.keys(defaultLandingConfig) as (keyof LandingConfig)[])uint(landing.config[key],key==='exposedProductivityBps'?10000:key==='cowFoodPerWinter'?1000000:1000000000);
+    for(const key of Object.keys(defaultLandingConfig) as (keyof LandingConfig)[])uint(landing.config[key],(key==='exposedProductivityBps'||key==='foundingCoupleChanceBps')?10000:key==='foundingCoupleCap'?3:key==='cowFoodPerWinter'?1000000:1000000000);
     if(landing.config.farmyardCapacity===0||landing.config.cattleAdultAge===0||landing.config.calfFood>landing.config.adultCattleFood)fail('Invalid cattle configuration');
     if(!landing.region?.id||![null,state.clan.id].includes(landing.region.settledByClanId))fail('Invalid landing region');
     if(!Array.isArray(landing.founderIds)||landing.founderIds.length!==10||new Set(landing.founderIds).size!==10||landing.founderIds.some(id=>!Object.hasOwn(state.personas,id)))fail('Invalid founders');
@@ -93,7 +113,13 @@ export function validateLanding(state:SimulationState):void {
 /** Explicit upgrade of the superseded standalone-building prototype, on detached JSON only. */
 export function migrateLanding(state:SimulationState):void {
     const landing=state.landing;
-    if(!landing||(landing.version as number)!==1)return;
+    if(!landing)return;
+    // Earlier extension-2 saves retain their existing households; no relationships are rerolled.
+    if((landing.version as number)===1||landing.version===2){
+        if(!Object.hasOwn(landing.config,'foundingCoupleChanceBps'))landing.config.foundingCoupleChanceBps=defaultLandingConfig.foundingCoupleChanceBps;
+        if(!Object.hasOwn(landing.config,'foundingCoupleCap'))landing.config.foundingCoupleCap=defaultLandingConfig.foundingCoupleCap;
+    }
+    if((landing.version as number)!==1)return;
     if(!state.mechanics||!Array.isArray(state.events))throw new Error('Invalid old landing save');
     const config=landing.config as LandingConfig&{farmyardCost?:number};
     if(!Number.isSafeInteger(config.farmyardCost)||config.farmyardCost!<0)throw new Error('Invalid old Farmyard cost');

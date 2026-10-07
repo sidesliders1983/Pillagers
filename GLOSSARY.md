@@ -32,7 +32,7 @@ _Avoid_: Family
 
 **Dominant legacy**: A child's per-trait marker recording a copied parental trait. The marker belongs to one generation; the numeric trait remains available for ordinary inheritance.
 
-**Founding party**: The named personas arriving together to begin a new clan's campaign.
+**Founding party**: The named personas arriving together to begin a new clan's campaign. It may include existing couples sharing temporary households; arrival does not establish when those relationships began.
 
 **Longship**: A persistent clan vessel enabling future maritime expeditions. Salvaging it permanently exchanges the vessel for Materials.
 
