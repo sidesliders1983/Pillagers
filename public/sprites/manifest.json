@@ -115,7 +115,7 @@
         0.5
       ],
       "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
-      "outputSha256": "003741334d25b99d2f731ef931b9b3eb7d5e1952842a24a3753b9874485d5028"
+      "outputSha256": "bb5b04cc40f66323da351788a59543cf7601c1848d8d80fc87a14e2f9a603f72"
     },
     {
       "id": "house-1",
@@ -128,7 +128,7 @@
         0.5
       ],
       "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
-      "outputSha256": "2f7d1fdea6cba06c520ff8e44f6b801d1b682afa0f0a705c4b7b5234f5cfcf52"
+      "outputSha256": "bac46b434790b6de8a40353d35d42fc4598da6cba729d88402c991a7c524a330"
     },
     {
       "id": "house-2",
@@ -141,7 +141,7 @@
         0.5
       ],
       "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
-      "outputSha256": "c8cb73d27a1ee69fd9140255ffe474d0712809b0bc881e540f08a13431c0b501"
+      "outputSha256": "107f025cadae10eda48b15b71bcbb7dc2bcc7095d17acf45439dc6e6cef565db"
     },
     {
       "id": "house-3",
@@ -154,7 +154,7 @@
         0.5
       ],
       "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
-      "outputSha256": "d46cdc58b11dd2ecc391eef05f805033f0e091eac1749eee66377af31eb183fa"
+      "outputSha256": "7ca4ce82aaedb9d4112c567e851b72e415fcdcf51a10446e5cb99d22d5a4a4cd"
     },
     {
       "id": "farmyard",
@@ -166,7 +166,7 @@
         0.5
       ],
       "sourceSha256": "1cc484693aba97a18f43f5d9751860a8bfba6a85cb83f700ac907038f88b9303",
-      "outputSha256": "e0385bf98763c6112153dc386891e6f89f94b6544611b66d2c9c19348a6ad8bb"
+      "outputSha256": "c02e77797bc64ee3d21d43e6743da74dced35ed6ad68a260dd5227fec461c018"
     },
     {
       "id": "cow",
@@ -179,7 +179,7 @@
         0.5
       ],
       "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
-      "outputSha256": "6944e98a025d54abbf4c54000f3af5b95852ebb52e27c801229cc91b51bacffa"
+      "outputSha256": "94a3bb71764980d703083ca451e11c597a1ed8bd27b229cc83fa80f14aec88ca"
     },
     {
       "id": "bull",
@@ -192,7 +192,7 @@
         0.5
       ],
       "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
-      "outputSha256": "5e1d959c3f377782319ed035e79740dadb10abb3b4c9c8e3c9cec96c2a95c1c2"
+      "outputSha256": "4e1fb8f4be44443e32568dabce8cbc5619a5860b600a01edf6b09251ff615446"
     },
     {
       "id": "young-cattle",
@@ -205,7 +205,7 @@
         0.5
       ],
       "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
-      "outputSha256": "d58289ceed8b0205767edc82de4e5f3736f73c96f8d1bcf412394e8c94ffaec9"
+      "outputSha256": "60c783418217694a4727d197b5eac5f6e99af4eca4d10a5962c7f97b5d6a9e5b"
     },
     {
       "id": "calf",
@@ -218,7 +218,7 @@
         0.5
       ],
       "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
-      "outputSha256": "a9e1fbab9de02b54d87ec44f598055f5408f89934186dbbeeaea00286f022b42"
+      "outputSha256": "cd1eb3f2a72ec530be2f230eab771b456b40263c4436b1219fd4c9366af62d75"
     },
     {
       "id": "longship",
