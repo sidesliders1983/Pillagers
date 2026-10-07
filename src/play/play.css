@@ -4,3 +4,13 @@
 .settlement-ground{overflow:visible;}
 
 .board-entity.longship{width:420px;height:200px}.board-entity.longship::before{content:"";position:absolute;width:480px;height:190px;bottom:-85px;left:-30px;border-radius:50%;background:#32677a88;z-index:-1;pointer-events:none;}
+/* Keep desktop gameplay in one viewport; only the side panels scroll. */
+@media(min-width:1101px){
+ .play-body{height:100dvh;overflow:hidden;}
+ #play-root{height:100dvh;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:14px;}
+ #play-hud{position:relative;top:0;}
+ .play-layout{min-height:0;margin:0;}
+ #settlement-board{min-height:0;height:100%;}
+ .play-left,.play-right{min-height:0;max-height:none;height:100%;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;}
+ .play-footer details[open]{position:absolute;right:20px;bottom:calc(100% + 8px);max-height:70dvh;max-width:calc(100vw - 40px);overflow:auto;overscroll-behavior:contain;box-shadow:0 12px 30px #08140c80;}
+}
