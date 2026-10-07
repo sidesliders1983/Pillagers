@@ -35,12 +35,12 @@ export const defaultPrototypeConfig: PrototypeConfig = {
         herder:job(null,0,[.2,.2,.2,.1,.3],[.6,.6,.6,.4,.3]),
         fisher:job('food',10,[.25,.35,.15,.05,.2],[.7,.8,.6,.4,.3]),
         hunter:job('food',10,[.2,.35,.15,.25,.05],[.7,.85,.6,.7,.35]),
-        textileWorker:job('materials',5,[.1,.35,.3,.05,.2],[.4,.8,.75,.35,.3]),
-        smith:job('materials',5,[.4,.1,.25,.05,.2],[.85,.5,.8,.3,.55]),
+        textileWorker:job(null,0,[.1,.35,.3,.05,.2],[.4,.8,.75,.35,.3]),
+        smith:job(null,0,[.4,.1,.25,.05,.2],[.85,.5,.8,.3,.55]),
         woodworker:job('materials',5,[.25,.25,.3,.05,.15],[.7,.75,.8,.35,.35]),
-        boatbuilder:job('materials',5,[.25,.2,.4,.05,.1],[.7,.7,.9,.35,.35]),
+        boatbuilder:job(null,0,[.25,.2,.4,.05,.1],[.7,.7,.9,.35,.35]),
         trader:job(null,0,[.05,.1,.3,.35,.2],[.4,.6,.8,.85,.25]),
-        leatherAndJewelleryMaker:job('materials',5,[.1,.35,.3,.1,.15],[.45,.85,.8,.45,.3]),
+        leatherAndJewelleryMaker:job(null,0,[.1,.35,.3,.1,.15],[.45,.85,.8,.45,.3]),
     },
 };
 export type PersonaMechanics={dominantLegacy:Partial<Record<TraitKey,string>>; lastBirthWinter:number|null; childcareUntilWinter:number; caregiverId:string|null; caregiverLocked:boolean; caregiverWorkedWinter:number|null; occupationLocked:boolean; switchedUntilTick:number; progress:Partial<Record<Occupation,number>>};

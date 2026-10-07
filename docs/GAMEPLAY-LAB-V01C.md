@@ -26,7 +26,7 @@ Local save/load uses browser localStorage under `pillagers.gameplay-lab.v1`. It 
 
 The Lab imports only the canonical Simulation Core and its dependency-light character/naming data. Shared public core queries expose work/productivity, occupation aptitude, caregiver eligibility and building status. Tick execution reuses those same work/building calculations. The UI displays saved records and dispatches explicit commands; it does not maintain a second economic/family model.
 
-Buttons check command validity through the core. Invalid inputs are reported in the status notice. Fields and open disclosures are retained during live repaint. CSS is scoped to the separate Lab body/route. Fjordside and its existing renderer remain independently loaded; the new navigation link is its only presentation change.
+Buttons check command validity through the core. Invalid inputs are reported in the status notice. Live updates patch the existing view in place. Native controls remain mounted, preserving focus, unfinished values and open disclosures while the clock/stocks update. CSS is scoped to the separate Lab body/route. Fjordside and its existing renderer remain independently loaded; the new navigation link is its only presentation change.
 
 ## Verification
 
@@ -41,3 +41,5 @@ Browser proof is reproduced by starting Vite on port 5180, then running `node sc
 This pass exposes existing cattle/ship actions because The Landing supplies them; it adds no new livestock rules. Mortality, reproduction, weather, expeditions, raids, trade, final art and balancing remain outside #28.
 
 Farmyard correction: assigning a farmer in a tent creates no function. In a permanent home the first living farmer activates the Farmyard for free; the last farmer leaving removes it and unassigns cattle. Select each animal’s Farmyard in its livestock card. There is no standalone build button. Old version-1 landing saves migrate on local load/JSON import without compensation and with retained history.
+
+Current prototype occupations: farmer, fisher and hunter produce Food; only woodworker produces Materials. Other occupations remain available as inactive roles for later mechanics. New founders use these four productive roles. Existing saves keep their explicitly saved economic configuration; use a new campaign to apply the new default balance.

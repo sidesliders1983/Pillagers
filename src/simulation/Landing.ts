@@ -21,7 +21,7 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
     const random=seededRandom(seed,'founding-party-v1');
     const sexes:('female'|'male')[]=['female','female','female','female','male','male','male','male',random()<.5?'female':'male',random()<.5?'female':'male'];
     for(let i=sexes.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[sexes[i],sexes[j]]=[sexes[j],sexes[i]];}
-    const roles:Occupation[]=['farmer','fisher','hunter','textileWorker','smith','woodworker','boatbuilder','leatherAndJewelleryMaker'];
+    const roles:Occupation[]=['farmer','fisher','hunter','woodworker'];
     for(let i=0;i<10;i++){
         const id=`founder-${i+1}`,age=18+Math.floor(random()*23),dna={...generateCharacterDNA(Math.floor(random()*4294967296)),sex:sexes[i],age};
         const occupation=roles[Math.floor(random()*roles.length)],experience=Math.floor(random()*Math.min(6,age-15));
