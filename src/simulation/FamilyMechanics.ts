@@ -91,6 +91,13 @@ export function resolveCaregivers(state:SimulationState,emit:EventWriter):void {
     for(const motherId of Object.keys(state.mechanics!.people).sort()){
         const info=state.mechanics!.people[motherId];
         if(info.childcareUntilWinter<=state.time.winter){info.caregiverId=null;info.caregiverLocked=false;continue;}
+        // A new birth can renew an expired group after its donor resumed work this boundary.
+        if(info.caregiverId!==null){
+            const donor=state.personas[info.caregiverId];
+            if(!donor||donor.deathWinter!==null||donor.occupation!==null||donor.dna.sex!=='female'||personaAge(state,donor.id)<state.mechanics!.config.adultAge||donor.id===motherId){
+                assignCaregiver(state,motherId,null,false,emit);
+            }
+        }
         if(info.caregiverLocked||info.caregiverId!==null)continue;
         const candidate=Object.keys(state.personas).sort().find(id=>caregiverEligible(state,id));
         if(candidate)assignCaregiver(state,motherId,candidate,false,emit);

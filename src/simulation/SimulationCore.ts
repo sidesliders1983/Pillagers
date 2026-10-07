@@ -5,7 +5,7 @@ export {landingSummary} from './Landing';
 import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding, migrateLanding} from './Landing';
 import type {LandingState, LandingCommand, LandingConfig} from './Landing';
 export {canPartner} from './FamilyMechanics';
-import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics} from './Mechanics';
+import {initializeMechanics, stepMechanicsTick, isMechanicsCommand, applyMechanicsCommand, recordOccupationChange, validateMechanics, migrateMechanics} from './Mechanics';
 import type {MechanicsState, PrototypeConfig, MechanicsCommand} from './Mechanics';
 import {personaAge} from './PersonaAge';
 export {personaAge} from './PersonaAge';
@@ -111,7 +111,7 @@ export function advanceWinter(state: SimulationState): SimulationState {
 export function serializeState(state: SimulationState): string {validateState(state); return JSON.stringify(state);}
 export function reconstructState(serialized: string): SimulationState {
     const state = JSON.parse(serialized) as SimulationState;
-    migrateLanding(state);
+    migrateLanding(state);migrateMechanics(state);
     validateState(state); return state;
 }
 
