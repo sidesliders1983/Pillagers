@@ -39,3 +39,16 @@ test('public work inspection matches canonical productivity and care blocking wi
   assert.equal(core.inspectWork(mother,'liv').reason,'childcare');
   const before=core.serializeState(tent);core.inspectWork(tent,'einar');assert.equal(core.serializeState(tent),before);
 });
+
+
+test('restart resets the campaign with the same founders or a fresh seed, including after loading a save',()=>{
+  const lab=new GameplaySession(32),initial=lab.snapshot();
+  lab.command({type:'SalvageLongship',longshipId:'founding-longship'});lab.command({type:'AdvanceWinter'});
+  lab.setRunning(true);lab.elapse(50);lab.loadJSON(lab.saveJSON());
+  lab.restartCampaign(true,()=>{throw new Error('Same founders must not draw randomness');});
+  assert.deepEqual(lab.snapshot(),initial);assert.equal(lab.running,false);assert.deepEqual(lab.trend,{food:0,materials:0});
+  lab.restartCampaign(false,()=>99);
+  assert.deepEqual(lab.snapshot(),core.createCampaign(99));assert.notDeepEqual(lab.snapshot().personas,initial.personas);
+  lab.restartCampaign(false,()=>99);
+  assert.notEqual(lab.snapshot().seed,99);assert.deepEqual(lab.snapshot().time,{winter:800,tick:0});
+});

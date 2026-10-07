@@ -2,7 +2,7 @@
 
 Executed 2026-10-07 for issue #32 and the corrected household Farmyard model in #28. This run supersedes the standalone Farmyard prototype report.
 
-- Full suite: **70 passed, 0 failed, 0 skipped**, including eleven landing scenarios.
+- Full suite: **71 passed, 0 failed, 0 skipped**, including eleven landing scenarios.
 - TypeScript and production build passed. Existing Three.js chunk-size warning remains.
 - Fifty-Winter run: seed 32; starts at Winter 800 with ten founders, 30 Food, 5 Materials, one longship, two cows/one bull and no permanent buildings.
 - Commands: keep ship, advance 321 ticks, salvage ship, build a home, assign its resident as farmer, assign each animal individually, slaughter bull after eleven Winter advances.

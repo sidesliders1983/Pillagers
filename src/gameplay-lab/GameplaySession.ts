@@ -15,6 +15,11 @@ export class GameplaySession {
     saveJSON():string{return serializeState(this.state);}
     loadJSON(serialized:string):void {const state=reconstructState(serialized);if(!state.mechanics)throw new Error('This save has no gameplay mechanics');this.replace(state);}
     newCampaign(seed:number):void {this.replace(createCampaign(seed));}
+    restartCampaign(sameFounders=false,drawSeed:()=>number=()=>crypto.getRandomValues(new Uint32Array(1))[0]):void {
+        let seed=sameFounders?this.state.seed:drawSeed();
+        if(!sameFounders&&seed===this.state.seed)seed=(seed+1)>>>0;
+        this.replace(createCampaign(seed,this.state.landing?.config,this.state.mechanics?.config));
+    }
     private replace(state:SimulationState):void {this.state=state;this.running=false;this.fractionalTicks=0;this.trend={food:0,materials:0};}
     elapse(milliseconds:number):void {
         if(!Number.isFinite(milliseconds)||milliseconds<0)throw new Error('Invalid active elapsed time');

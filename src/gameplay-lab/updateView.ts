@@ -16,7 +16,10 @@ export function updateView(root:HTMLElement,html:string,preservedFields:Readonly
             children(current,next);
             if(!preservedFields.has(current.id)){
                 if(current instanceof HTMLSelectElement&&next instanceof HTMLSelectElement&&current.value!==next.value)current.value=next.value;
-                if(current instanceof HTMLInputElement&&next instanceof HTMLInputElement&&current.type!=='file'&&current.value!==next.value)current.value=next.value;
+                if(current instanceof HTMLInputElement&&next instanceof HTMLInputElement&&current.type!=='file'){
+                    if(current.value!==next.value)current.value=next.value;
+                    if(current.type==='checkbox'&&current.checked!==next.checked)current.checked=next.checked;
+                }
             }
         }else if(current.nodeValue!==next.nodeValue)current.nodeValue=next.nodeValue;
     };
