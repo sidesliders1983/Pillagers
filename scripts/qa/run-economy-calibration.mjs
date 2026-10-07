@@ -24,18 +24,19 @@ function observe(state){
     longshipAlive:Object.values(state.landing.longships).some(s=>s.salvagedWinter===null)};
 }
 /** Observe canonical core events and annual stocks; never inject player decisions. */
-export function runScenario({seed,baseline,winters=15}){
+export function runScenario({seed,baseline,winters=15,weatherEnabled=true}){
   uint(seed,'seed');uint(baseline,'baseline',1,1000000);uint(winters,'Winters',1,100);
-  const original=core.createCampaign(seed),mechanics=structuredClone(original.mechanics.config);
+  if(typeof weatherEnabled!=='boolean')throw new Error('Invalid weather option');
+  const original=core.createCampaign(seed,{}, {},{enabled:weatherEnabled}),mechanics=structuredClone(original.mechanics.config);
   for(const role of foodRoles)mechanics.occupations[role].unitsPerWinter=baseline;
-  let state=core.createCampaign(seed,{},mechanics);
+  let state=core.createCampaign(seed,{},mechanics,{enabled:weatherEnabled});
   const initialObservation=observe(state);
   const assignedFood=Object.values(state.personas).filter(p=>foodRoles.includes(p.occupation)).length;
   const assignedMaterials=Object.values(state.personas).filter(p=>mechanics.occupations[p.occupation]?.resource==='materials').length;
   const initial={...initialObservation,foodWorkers:assignedFood,materialsWorkers:assignedMaterials,inactiveWorkers:initialObservation.population-assignedFood-assignedMaterials,
     foundingCouples:state.events.filter(e=>e.type==='FoundingPartnershipPresent').length,
     founderFingerprint:hash({personas:state.personas,families:state.families,households:state.households,residences:state.residences,landing:state.landing,stocks:state.stocks})};
-  const configuration={landing:structuredClone(state.landing.config),mechanics:structuredClone(mechanics)};
+  const configuration={landing:structuredClone(state.landing.config),mechanics:structuredClone(mechanics),weather:structuredClone(state.weather.config)};
   const annual=[initialObservation];let minimum=state.stocks.food,childcareActiveWinters=0,childcarePersonWinters=0;
   const food={residentProduced:0,cattleProduced:0,residentConsumed:0,cattleConsumed:0,shortageWinters:0,residentShortfall:0,cattleShortfall:0};
   let births=0;

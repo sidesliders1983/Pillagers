@@ -14,11 +14,11 @@ export class GameplaySession {
     command(command:SimulationCommand):void {const next=applyCommand(this.state,command);this.trend={food:next.stocks.food-this.state.stocks.food,materials:next.stocks.materials-this.state.stocks.materials};this.state=next;}
     saveJSON():string{return serializeState(this.state);}
     loadJSON(serialized:string):void {const state=reconstructState(serialized);if(!state.mechanics)throw new Error('This save has no gameplay mechanics');this.replace(state);}
-    newCampaign(seed:number):void {this.replace(createCampaign(seed));}
-    restartCampaign(sameFounders=false,drawSeed:()=>number=()=>crypto.getRandomValues(new Uint32Array(1))[0]):void {
+    newCampaign(seed:number,weatherEnabled=true):void {this.replace(createCampaign(seed,{}, {},{enabled:weatherEnabled}));}
+    restartCampaign(sameFounders=false,drawSeed:()=>number=()=>crypto.getRandomValues(new Uint32Array(1))[0],weatherEnabled=this.state.weather?.config.enabled??false):void {
         let seed=sameFounders?this.state.seed:drawSeed();
         if(!sameFounders&&seed===this.state.seed)seed=(seed+1)>>>0;
-        this.replace(createCampaign(seed,this.state.landing?.config,this.state.mechanics?.config));
+        this.replace(createCampaign(seed,this.state.landing?.config,this.state.mechanics?.config,{...this.state.weather?.config,enabled:weatherEnabled}));
     }
     private replace(state:SimulationState):void {this.state=state;this.running=false;this.fractionalTicks=0;this.trend={food:0,materials:0};}
     elapse(milliseconds:number):void {
