@@ -52,3 +52,26 @@ test('restart resets the campaign with the same founders or a fresh seed, includ
   lab.restartCampaign(false,()=>99);
   assert.notEqual(lab.snapshot().seed,99);assert.deepEqual(lab.snapshot().time,{winter:800,tick:0});
 });
+
+
+test('one- and five-minute cycles with speed changes and clickable core decisions yield identical state and history',()=>{
+  const fast=new GameplaySession(32),slow=new GameplaySession(32);
+  fast.setMinutesPerWinter(1);slow.setMinutesPerWinter(5);
+  fast.setRunning(true);slow.setRunning(true);
+  fast.elapse(30000);slow.elapse(150000);
+  assert.deepEqual(fast.snapshot().time,{winter:800,tick:500});assert.deepEqual(slow.snapshot(),fast.snapshot());
+  const commands=[
+    {type:'SalvageLongship',longshipId:'founding-longship'},
+    {type:'BuildHouse',householdId:'founder-1'},
+    {type:'AssignOccupation',personaId:'founder-1',occupation:'farmer'},
+    {type:'AssignCattle',cattleId:'cattle-1',farmyardId:'house-1'},
+  ];
+  let expected=fast.snapshot();
+  for(const command of commands){expected=core.applyCommand(expected,command);fast.command(command);slow.command(command);}
+  fast.setMinutesPerWinter(5);slow.setMinutesPerWinter(1);
+  assert.deepEqual(fast.snapshot(),expected);assert.deepEqual(slow.snapshot(),expected);
+  fast.elapse(150000);slow.elapse(30000);
+  expected=core.applyCommand(expected,{type:'AdvanceTicks',ticks:500});
+  assert.deepEqual(fast.snapshot(),expected);assert.deepEqual(slow.snapshot(),expected);
+  assert.deepEqual(core.reconstructState(fast.saveJSON()),expected);
+});

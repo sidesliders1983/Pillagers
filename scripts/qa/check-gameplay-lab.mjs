@@ -12,6 +12,7 @@ try{
   await page.goto('http://127.0.0.1:5180/gameplay-lab');
   await page.getByRole('heading',{name:'Pillagers · Gameplay Lab'}).waitFor();
   assert.match(await page.locator('header').innerText(),/WINTER 800/);
+  assert.match(await page.locator('header').innerText(),/One cycle = one Winter/);
   assert.equal(await page.getByRole('button',{name:'Assign occupation',exact:true}).count(),10);checks.push('Landing and ten person cards');
   await page.screenshot({path:new URL('opening.png',output).pathname.replace(/^\/([A-Z]:)/,'$1'),fullPage:false});
   assert.equal(await page.getByRole('button',{name:/Build Farmyard/}).count(),0);
@@ -34,6 +35,14 @@ try{
   await page.getByRole('button',{name:'Save locally',exact:true}).click();
   await page.getByRole('button',{name:'+1 Winter',exact:true}).click();assert.match(await page.locator('header').innerText(),/WINTER 801/);
   await page.getByRole('button',{name:'Load locally',exact:true}).click();assert.match(await page.locator('header').innerText(),/WINTER 800/);checks.push('Advance and local save/load');
+  assert.equal(await page.getByLabel('Cycle duration').locator('option[value="1"]').count(),1);
+  assert.equal(await page.getByLabel('Cycle duration').locator('option[value="5"]').count(),1);
+  await page.getByLabel('Cycle duration').selectOption('5');
+  await page.getByRole('button',{name:'Start',exact:true}).click();
+  await page.waitForTimeout(1000);
+  await page.getByRole('button',{name:'Pause',exact:true}).click();
+  assert.doesNotMatch(await page.locator('header').innerText(),/Tick 0\/1000/);
+  checks.push('Five-minute cycle runs through the same core and displays tick results');
   await page.locator('#speed').selectOption('1');await page.getByRole('button',{name:'Start',exact:true}).click();
   await page.locator('#occupation-founder-1').selectOption('hunter');
   await page.locator('#occupation-founder-1').focus();
