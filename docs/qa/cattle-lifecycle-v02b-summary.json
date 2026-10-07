@@ -1,0 +1,42 @@
+{
+  "outside": {
+    "runs": 100,
+    "winters": 50,
+    "births": 71666,
+    "deaths": 16888,
+    "slaughters": 0,
+    "finalHerdMedian": 470,
+    "finalHerdP10": 0,
+    "finalHerdP90": 1184.3000000000006,
+    "finalCows": 27554,
+    "finalBulls": 27524,
+    "finalYoung": 6417,
+    "finalYoungAdult": 5622,
+    "finalAdult": 43039,
+    "extinctRuns": 13,
+    "overcrowdedWinters": 0,
+    "foodProduced": 447782,
+    "foodConsumed": 482604,
+    "foodRequired": 488396
+  },
+  "farmyard": {
+    "runs": 100,
+    "winters": 50,
+    "births": 6663,
+    "deaths": 3465,
+    "slaughters": 0,
+    "finalHerdMedian": 0,
+    "finalHerdP10": 0,
+    "finalHerdP90": 46.60000000000005,
+    "finalCows": 1736,
+    "finalBulls": 1762,
+    "finalYoung": 393,
+    "finalYoungAdult": 347,
+    "finalAdult": 2758,
+    "extinctRuns": 58,
+    "overcrowdedWinters": 2465,
+    "foodProduced": 62400,
+    "foodConsumed": 47935,
+    "foodRequired": 48038
+  }
+}

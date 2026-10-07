@@ -1,7 +1,7 @@
 import {resolveMortality,defaultMortalityBands} from './Mortality';
 import type {MortalityBand} from './Mortality';
 import {farmyards,reconcileFarmyards} from './Farmyards';
-import {cattleFoodNeed, stepCattleOutput, consumeCattleFood} from './Livestock';
+import {cattleFoodNeed, stepCattleOutput, consumeCattleFood, resolveCattleBirths, resolveCattleMortality} from './Livestock';
 import {prohibitedKinship, resolvePartnerships, resolveBirths, isCaregiver, isProvidingCare, assignCaregiver, resolveCaregivers} from './FamilyMechanics';
 import {traitKeys} from '../characters/CharacterDNA';
 import type {CoreTraits, TraitKey} from '../characters/CharacterDNA';
@@ -120,6 +120,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         if(resolveMortality(state,bps=>chance(state,bps),(type,id,details)=>emit(state,type,id,details))){
             reconcileFarmyards(state,previousFarmyards);previousFarmyards=farmyards(state).map(f=>f.id);
         }
+        resolveCattleMortality(state,bps=>chance(state,bps));
         consumeCattleFood(state);
         const need=foodNeed(state)-cattleFoodNeed(state), consumed=Math.min(need,state.stocks.food);state.stocks.food-=consumed;
         emit(state,'FoodConsumed',undefined,{units:consumed,shortfall:need-consumed});
@@ -144,6 +145,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         resolveBirths(state,bps=>chance(state,bps),()=>randomUint(state),()=>foodNeed(state),id=>{state.mechanics!.people[id]=newPersonaMechanics();},(type,personaId,details)=>emit(state,type,personaId,details),unavailable);
         resolveCaregivers(state,(type,personaId,details)=>emit(state,type,personaId,details));
         reconcileFarmyards(state,previousFarmyards);
+        resolveCattleBirths(state,bps=>chance(state,bps));
     }
 }
 

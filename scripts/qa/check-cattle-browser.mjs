@@ -1,0 +1,36 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {loadTypeScript} from '../load-typescript.mjs';
+const {chromium}=createRequire(import.meta.url)(process.argv[2]+'/playwright');
+const core=loadTypeScript(new URL('../../src/simulation/SimulationCore.ts',import.meta.url));
+let state=core.createCampaign(32,{cattleBirthChanceBps:10000,cattleMortalityAdultBps:0,cattleMortalityYoungBps:0,cattleMortalityOlderBps:0,cattleMortalityOldBps:0});
+state=core.advanceWinter(state);state=core.applyCommand(state,{type:'SlaughterCattle',cattleId:'cattle-3'});
+const browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+page.on('pageerror',e=>errors.push(e.message));
+try{
+ await page.goto('http://127.0.0.1:5180/gameplay-lab');
+ await page.locator('#import-file').setInputFiles({name:'cattle.json',mimeType:'application/json',buffer:Buffer.from(core.serializeState(state))});
+ const calf=page.locator('#livestock-cattle-4');await calf.waitFor({timeout:5000});
+ assert.match(await calf.innerText(),/Young/);assert.match(await calf.innerText(),/Parents: cattle-1, cattle-3/);
+ const dead=page.locator('#livestock-cattle-3');assert.match(await dead.innerText(),/Slaughtered in Winter 801/);
+ assert.equal(await dead.locator('button').count(),0);
+ await page.getByRole('button',{name:'Save locally',exact:true}).click();
+ await page.getByRole('button',{name:'+1 Winter',exact:true}).click();
+ assert.match(await calf.innerText(),/Young Adult/);assert.match(await dead.innerText(),/Age at death: 4 Winters/);
+ await page.getByRole('button',{name:'Load locally',exact:true}).click();assert.match(await calf.innerText(),/0 Winters/);
+ assert.deepEqual(errors,[]);
+ const out=new URL('../../artifacts/qa/cattle-lifecycle/',import.meta.url);mkdirSync(out,{recursive:true});
+ await calf.scrollIntoViewIfNeeded();await page.screenshot({path:fileURLToPath(new URL('livestock.png',out))});
+ writeFileSync(new URL('browser-report.json',out),JSON.stringify({status:'PASS',checks:['Calf age/stage and real parent IDs','Slaughter retained with frozen age and no actions','Save/load retains lifecycle state'],errors},null,2));
+ const natural=core.createCampaign(32,{cattleBirthChanceBps:10000,cattleMortalityAdultBps:10000});
+ await page.locator('#import-file').setInputFiles({name:'natural.json',mimeType:'application/json',buffer:Buffer.from(core.serializeState(natural))});
+ await page.getByRole('button',{name:'+1 Winter',exact:true}).click();
+ assert.match(await page.locator('#livestock-cattle-1').innerText(),/Died in Winter 801/);
+ assert.equal(await page.locator('#livestock-cattle-1 button').count(),0);
+ assert.equal(await page.locator('#livestock-cattle-4').count(),0);
+ assert.deepEqual(errors,[]);
+ writeFileSync(new URL('browser-report.json',out),JSON.stringify({status:'PASS',checks:['Calf age/stage and real parent IDs','Slaughter retained with frozen age and no actions','Save/load retains lifecycle state','Natural death shown distinctly; no breeding after all adults die'],errors},null,2));
+ console.log('PASS: livestock browser lifecycle');
+}finally{await browser.close();}
