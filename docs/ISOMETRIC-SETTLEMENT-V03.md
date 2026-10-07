@@ -30,3 +30,5 @@ Local preview: http://127.0.0.1:5180/play. LAN preview while the dev server runs
 
 
 Repack retained ImageGen sources: node scripts/sprites/pack-imagegen.mjs public/sprites/imagegen-manifest.json. Adult raster proxies use a 1.60m presentation height as stated by the guide.
+
+Layout follow-up: founding households now occupy three widely spaced columns/rows across the board. Resident and cattle offsets leave more room around homes. The projected ground grows with the entity bounds, and Fit settlement includes that ground so the full plot stays visible. The public projection regression and all 11 browser checks pass.

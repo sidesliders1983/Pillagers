@@ -27,3 +27,13 @@ test('building, Farmyard, upgrade and cattle assignment project real command res
  state=core.applyCommand(state,{type:'SlaughterCattle',cattleId:'cattle-1'});
  assert.equal(projectSettlement(state).entities.some(e=>e.kind==='cattle'&&e.id==='cattle-1'),false);
 });
+
+test('founding homes use the lower settlement area and leave residents room beside their home',()=>{
+ const view=projectSettlement(core.createCampaign(32));
+ const homes=view.entities.filter(e=>e.kind==='household');
+ const verticalSpan=Math.max(...homes.map(e=>e.y))-Math.min(...homes.map(e=>e.y));
+ assert.ok(verticalSpan>850,'homes should fill multiple rows of the settlement, rather than its upper corner');
+ const resident=view.entities.find(e=>e.kind==='persona'&&e.id==='founder-1');
+ const home=homes.find(e=>e.id==='founder-1');
+ assert.ok(Math.hypot(resident.x-home.x,resident.y-home.y)>180,'resident should have clear space beside the home');
+});
