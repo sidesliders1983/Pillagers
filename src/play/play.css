@@ -2,3 +2,5 @@
 .play-body .board-entity{max-width:none;}
 
 .settlement-ground{overflow:visible;}
+
+.board-entity.longship{width:420px;height:200px}.board-entity.longship::before{content:"";position:absolute;width:480px;height:190px;bottom:-85px;left:-30px;border-radius:50%;background:#32677a88;z-index:-1;pointer-events:none;}

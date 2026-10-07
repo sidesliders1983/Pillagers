@@ -1,6 +1,6 @@
 import {personaAge,inspectCattle,inspectWeather,inspectWeatherExposure,landingSummary} from '../simulation/SimulationCore';
 import type {SimulationState} from '../simulation/SimulationCore';
-export type EntityKind='persona'|'household'|'building'|'cattle';
+export type EntityKind='persona'|'household'|'building'|'cattle'|'longship';
 export type BoardEntity={kind:EntityKind;id:string;label:string;sprite:string;x:number;y:number;depth:number;farmyard:boolean;};
 export function projectSettlement(state:SimulationState){
  const entities:BoardEntity[]=[],slots=new Map<string,{x:number;z:number}>();
@@ -8,6 +8,7 @@ export function projectSettlement(state:SimulationState){
  homes.forEach((h,i)=>slots.set(h.id,{x:6+(i%3)*16,z:4+Math.floor(i/3)*16}));
  const farmyards=state.landing?landingSummary(state).farmyards:[];
  const add=(kind:EntityKind,id:string,label:string,sprite:string,x:number,z:number,farmyard=false)=>entities.push({kind,id,label,sprite,x:(x-z)*(48/Math.sqrt(2)),y:(x+z)*(48/Math.sqrt(6)),depth:x+z,farmyard});
+ for(const [i,ship] of Object.values(state.landing?.longships??{}).filter(s=>s.salvagedWinter===null).sort((a,b)=>a.id.localeCompare(b.id)).entries())add('longship',ship.id,'Longship','longship',14+i*14,-3);
  const buildingSlots=new Map<string,{x:number;z:number}>();
  for(const [i,b] of Object.values(state.buildings).sort((a,b)=>a.id.localeCompare(b.id)).entries()){
   const home=homes.find(h=>h.residenceId&&state.residences[h.residenceId]?.buildingId===b.id);

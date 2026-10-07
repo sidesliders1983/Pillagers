@@ -37,3 +37,15 @@ test('founding homes use the lower settlement area and leave residents room besi
  const home=homes.find(e=>e.id==='founder-1');
  assert.ok(Math.hypot(resident.x-home.x,resident.y-home.y)>180,'resident should have clear space beside the home');
 });
+
+test('the founding longship can be kept and disappears from the board only after salvage',()=>{
+ let state=core.createCampaign(32);
+ const ship=projectSettlement(state).entities.find(e=>e.kind==='longship');
+ assert.equal(ship?.id,'founding-longship');assert.equal(ship?.sprite,'longship');
+ state=core.applyCommand(state,{type:'KeepLongship',longshipId:ship.id});
+ assert.ok(projectSettlement(state).entities.some(e=>e.id===ship.id));
+ const materials=state.stocks.materials;
+ state=core.applyCommand(state,{type:'SalvageLongship',longshipId:ship.id});
+ assert.equal(projectSettlement(state).entities.some(e=>e.id===ship.id),false);
+ assert.equal(state.stocks.materials,materials+state.landing.config.longshipSalvage);
+});
