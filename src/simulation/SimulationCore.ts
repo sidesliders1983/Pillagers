@@ -1,6 +1,7 @@
 import {initializeWeather,validateWeather} from './Weather';
 import type {WeatherState,WeatherConfig} from './Weather';
 export {inspectWeather,inspectWeatherExposure,defaultWeatherConfig,weatherClasses} from './Weather';
+import {eventFacts} from './EventFacts';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 export {inspectBuilding, inspectWork, occupationAptitude, occupationIds} from './Mechanics';
 export {caregiverEligible} from './FamilyMechanics';
@@ -69,7 +70,7 @@ function integer(value: number, label: string) {
 }
 function emit(state: SimulationState, type: string, personaId?: string, details?: Record<string, unknown>) {
     state.events.push({id: `event-${state.events.length + 1}`, time: {...state.time}, type,
-        ...(personaId ? {personaId} : {}), ...(details ? {details} : {})});
+        ...(personaId ? {personaId} : {}), ...(details||personaId?{details:eventFacts(state,details,personaId)}:{})});
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand): SimulationState {
     validateState(input);

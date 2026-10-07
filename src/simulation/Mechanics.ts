@@ -2,6 +2,7 @@ import {determineWeather,weatherProfile,weatherFacts} from './Weather';
 import {randomUint} from './Random';
 import {resolveMortality,defaultMortalityBands} from './Mortality';
 import type {MortalityBand} from './Mortality';
+import {eventFacts} from './EventFacts';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 import {cattleFoodNeed, stepCattleOutput, consumeCattleFood, resolveCattleBirths, resolveCattleMortality} from './Livestock';
 import {prohibitedKinship, resolvePartnerships, resolveBirths, isCaregiver, isProvidingCare, assignCaregiver, resolveCaregivers} from './FamilyMechanics';
@@ -55,7 +56,7 @@ export function initializeMechanics(state:SimulationState, overrides:Partial<Pro
     return {version:2,config:structuredClone({...defaultPrototypeConfig,...overrides}), people:Object.fromEntries(Object.keys(state.personas).map(id=>[id,newPersonaMechanics()])), buildings:Object.fromEntries(Object.keys(state.buildings).map(id=>[id,{debtWinters:0,investedMaterials:10,upgradeLevel:0}]))};
 }
 function emit(state:SimulationState,type:string,personaId?:string,details?:Record<string,unknown>) {
-    state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,...(personaId?{personaId}:{}),...(details?{details}:{})});
+    state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,...(personaId?{personaId}:{}),...(details||personaId?{details:eventFacts(state,details,personaId)}:{})});
 }
 function aptitude(traits:CoreTraits, job:JobPrototype):number {
     const fit = traitKeys.reduce((sum,key,index)=>sum+job.weights[index]*(1-Math.abs(traits[key]-job.preferences[index])),0);
@@ -194,7 +195,7 @@ export function applyMechanicsCommand(state:SimulationState,command:MechanicsCom
         state.mechanics.buildings[id]={debtWinters:0,investedMaterials:cost,upgradeLevel:0};
         state.residences[id]={id,kind:'house',buildingId:id};
         if(state.landing)state.landing.region.settledByClanId=state.clan.id;
-        emit(state,'HouseBuilt',undefined,{buildingId:id,cost});
+        emit(state,'HouseBuilt',undefined,{buildingId:id,householdId:home.id,cost});
         applyMechanicsCommand(state,{type:'AssignResidence',householdId:home.id,residenceId:id});return;
     }
     if(command.type!=='AssignResidence')throw new Error('Unknown mechanics command');
@@ -208,7 +209,7 @@ export function applyMechanicsCommand(state:SimulationState,command:MechanicsCom
     const buildingId=state.residences[residenceId].buildingId;
     if(buildingId!==null&&Object.values(state.households).some(h=>h.id!==home.id&&h.residenceId!==null&&state.residences[h.residenceId]?.buildingId===buildingId))throw new Error('Building already occupied');
     home.residenceId=residenceId;
-    emit(state,'ResidenceAssigned',undefined,{householdId:home.id,residenceId});
+    emit(state,'ResidenceAssigned',undefined,{householdId:home.id,residenceId,kind:state.residences[residenceId].kind});
 }
 
 function simulationTick(state:SimulationState):number {return (state.time.winter-800)*state.ticksPerWinter+state.time.tick;}

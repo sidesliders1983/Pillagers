@@ -55,3 +55,6 @@ _Avoid_: Family
 **Winter weather**: A region's annual conditions, classified as Mild, Normal, Harsh or Severe and revealed before that Winter's work and final reckoning.
 
 **Weather exposure**: The effects of a Winter's conditions on residents and cattle that lack effective shelter.
+**Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased mortality risk when livestock mortality is introduced.
+
+**Clan Chronicle**: A readable account of the clan’s recorded history, grouped by Winter. It describes established facts without adding motives, emotions or unrecorded causes.
