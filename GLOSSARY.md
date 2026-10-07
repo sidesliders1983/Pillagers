@@ -21,3 +21,13 @@ _Avoid_: Family
 **Food**: Whole units of the settlement's food stock.
 
 **Materials**: Whole units of the settlement's construction and craft stock.
+
+**Occupation**: A persona's current work role; aptitude is derived from CharacterDNA traits. Work history and accumulated progress remain attached to the persona when the role changes.
+
+**Apprenticeship**: A capped aptitude-related productivity bonus from a parent's completed experience in the same occupation.
+
+**Caregiver**: An eligible adult woman providing childcare for one mother's active child group. She forgoes work and fertility for the Winter in which she provides care.
+
+**Maintenance debt**: Consecutive Winters of vacancy or unpaid building upkeep; paid occupied upkeep clears the debt.
+
+**Dominant legacy**: A child's per-trait marker recording a copied parental trait. The marker belongs to one generation; the numeric trait remains available for ordinary inheritance.
