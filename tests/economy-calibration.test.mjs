@@ -29,3 +29,12 @@ test('batch ordering and results are independent of worker count and report meas
   assert.equal(report[0].foodMedian,(values[0]+values[1])/2);
   assert.throws(()=>runScenario({seed:1,baseline:-1,winters:15}));
 });
+
+test('calibration records and reproduces the selected weather rule with identical founders',()=>{
+ const off=runScenario({seed:32,baseline:10,winters:1,weatherEnabled:false});
+ const on=runScenario({seed:32,baseline:10,winters:1,weatherEnabled:true});
+ assert.equal(off.configuration.weather.enabled,false);
+ assert.equal(on.configuration.weather.enabled,true);
+ assert.equal(off.initial.founderFingerprint,on.initial.founderFingerprint);
+ assert.deepEqual(off,runScenario({seed:32,baseline:10,winters:1,weatherEnabled:false}));
+});

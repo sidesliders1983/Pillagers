@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Calf age/stage and real parent IDs",
+    "Slaughter retained with frozen age and no actions",
+    "Save/load retains lifecycle state",
+    "Natural death shown distinctly; no breeding after all adults die"
+  ],
+  "errors": []
+}

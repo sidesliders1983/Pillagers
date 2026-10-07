@@ -51,3 +51,7 @@ _Avoid_: Family
 **Cattle life stage**: Age-derived presentation: Young before one Winter, Young Adult from one to under two, and Adult from two. Birth and death Winters preserve continuous age independently of presentation.
 
 **Cattle calving interval**: The minimum number of Winters between one cow’s births. Each birth retains its mother and father, including when those parents later die.
+
+**Winter weather**: A region's annual conditions, classified as Mild, Normal, Harsh or Severe and revealed before that Winter's work and final reckoning.
+
+**Weather exposure**: The effects of a Winter's conditions on residents and cattle that lack effective shelter.

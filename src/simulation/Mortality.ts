@@ -1,3 +1,4 @@
+import {personaWeatherExposure,permanentlySheltered,weatherFacts} from './Weather';
 import type {SimulationState} from './SimulationCore';
 import {personaAge} from './PersonaAge';
 
@@ -14,9 +15,10 @@ export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolea
         const person=state.personas[id];if(person.deathWinter!==null)return [];
         const age=personaAge(state,id);
         const band=[...bands].reverse().find(b=>b.minAge<=age);
-        if(!band||!roll(band.chanceBps))return [];
+        const weatherExposureBps=personaWeatherExposure(state,id),risk=Math.min(10000,(band?.chanceBps??0)+weatherExposureBps);
+        if(!roll(risk))return [];
         const home=Object.values(state.households).find(h=>h.memberIds.includes(id));
-        return [{id,age,householdId:home?.id??null,residenceId:home?.residenceId??null,occupation:person.occupation,partnerId:person.partnerId}];
+        return [{id,age,householdId:home?.id??null,residenceId:home?.residenceId??null,occupation:person.occupation,partnerId:person.partnerId,...(state.weather?.config.enabled?{mortalityRiskBps:risk,weatherExposureBps,permanentlySheltered:permanentlySheltered(state,id),...weatherFacts(state)}:{})}];
     });
     for(const death of deaths){
         const person=state.personas[death.id],info=mechanics.people[death.id];

@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "New campaign checkbox default enabled",
+    "Disabled campaign and restart with same founders",
+    "Save/load restores chosen weather rule",
+    "Severe warning with exposed residents and cattle",
+    "New weather shown after annual resolution"
+  ],
+  "errors": []
+}

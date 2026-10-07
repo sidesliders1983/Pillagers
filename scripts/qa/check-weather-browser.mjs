@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {loadTypeScript} from '../load-typescript.mjs';
+const {chromium}=createRequire(import.meta.url)(process.argv[2]+'/playwright');
+const core=loadTypeScript(new URL('../../src/simulation/SimulationCore.ts',import.meta.url));
+const browser=await chromium.launch({channel:'msedge',headless:true});const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+page.on('pageerror',e=>errors.push(e.message));
+try{
+ await page.goto('http://127.0.0.1:5180/gameplay-lab');
+ const checkbox=page.getByLabel('Enable winter weather',{exact:true});await checkbox.waitFor({timeout:5000});
+ assert.equal(await checkbox.isChecked(),true);
+ await checkbox.uncheck();await page.locator('#same-founders').check();
+ await page.getByRole('button',{name:'Restart campaign',exact:true}).click();
+ assert.match(await page.locator('#weather-summary').innerText(),/Weather disabled/);
+ await page.getByRole('button',{name:'Save locally',exact:true}).click();
+ await checkbox.check();await page.getByRole('button',{name:'Restart campaign',exact:true}).click();
+ assert.doesNotMatch(await page.locator('#weather-summary').innerText(),/Weather disabled/);
+ await page.getByRole('button',{name:'Load locally',exact:true}).click();assert.equal(await checkbox.isChecked(),false);
+ const config=structuredClone(core.defaultWeatherConfig);for(const c of core.weatherClasses)config.profiles[c].probabilityBps=c==='Severe'?10000:0;
+ const state=core.createCampaign(32,{}, {},config);
+ await page.locator('#import-file').setInputFiles({name:'severe.json',mimeType:'application/json',buffer:Buffer.from(core.serializeState(state))});
+ const summary=page.locator('#weather-summary');assert.match(await summary.innerText(),/Severe/);assert.match(await summary.innerText(),/Exposed residents: 10/);assert.match(await summary.innerText(),/Exposed livestock: 3/);
+ await page.getByRole('button',{name:'+1 Winter',exact:true}).click();assert.match(await summary.innerText(),/Winter 801/);
+ assert.deepEqual(errors,[]);
+ const out=new URL('../../artifacts/qa/winter-weather/',import.meta.url);mkdirSync(out,{recursive:true});
+ await summary.scrollIntoViewIfNeeded();await page.screenshot({path:fileURLToPath(new URL('weather.png',out))});
+ writeFileSync(new URL('browser-report.json',out),JSON.stringify({status:'PASS',checks:['New campaign checkbox default enabled','Disabled campaign and restart with same founders','Save/load restores chosen weather rule','Severe warning with exposed residents and cattle','New weather shown after annual resolution'],errors},null,2));
+ console.log('PASS: campaign weather browser');
+}finally{await browser.close();}

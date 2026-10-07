@@ -39,7 +39,7 @@ test('keeping the longship preserves capability; salvage is a configurable irrev
   assert.deepEqual(core.reconstructState(core.serializeState(salvaged)),salvaged);
 });
 function idleCampaign(overrides={}){
-  let state=core.createCampaign(32,{foundingCoupleChanceBps:0,cattleBirthChanceBps:0,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0,cattleMortalityOlderBps:0,cattleMortalityOldBps:0,cattleCrowdingBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0});
+  let state=core.createCampaign(32,{foundingCoupleChanceBps:0,cattleBirthChanceBps:0,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0,cattleMortalityOlderBps:0,cattleMortalityOldBps:0,cattleCrowdingBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0},{enabled:false});
   for(const id of Object.keys(state.personas))state=core.applyCommand(state,{type:'AssignOccupation',personaId:id,occupation:null});
   return state;
 }

@@ -1,3 +1,4 @@
+import {weatherProfile,weatherFacts} from './Weather';
 import {farmyards} from './Farmyards';
 import type {SimulationState} from './SimulationCore';
 import type {Cattle} from './Landing';
@@ -5,7 +6,7 @@ export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {re
 function emit(state:SimulationState,type:string,details:Record<string,unknown>):void {state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details});}
 export function cattleFoodNeed(state:SimulationState):number {
     const landing=state.landing;if(!landing)return 0;
-    return Object.values(landing.cattle).reduce((need,c)=>need+(c.deathWinter===null?(state.time.winter-c.birthWinter>=landing.config.cattleAdultAge?landing.config.adultCattleFood:landing.config.calfFood):0),0);
+    return Object.values(landing.cattle).reduce((need,c)=>need+(c.deathWinter===null?(state.time.winter-c.birthWinter>=landing.config.cattleAdultAge?landing.config.adultCattleFood*weatherProfile(state).cattleConsumptionMultiplier:landing.config.calfFood):0),0);
 }
 export function stepCattleOutput(state:SimulationState):void {
     const landing=state.landing;if(!landing)return;
@@ -14,15 +15,15 @@ export function stepCattleOutput(state:SimulationState):void {
     for(const id of Object.keys(landing.cattle).sort()){
         const cow=landing.cattle[id];if(cow.deathWinter!==null||cow.sex!=='female'||winter-cow.birthWinter<landing.config.cattleAdultAge)continue;
         const sheltered=cow.farmyardId!==null&&shelteredIds.has(cow.farmyardId);
-        cow.foodProgress+=landing.config.cowFoodPerWinter*(sheltered?10000:landing.config.exposedProductivityBps);
+        cow.foodProgress+=landing.config.cowFoodPerWinter*Math.floor((sheltered?10000:landing.config.exposedProductivityBps)*weatherProfile(state).foodProductionBps/10000);
         const scale=state.ticksPerWinter*10000,units=Math.floor(cow.foodProgress/scale);
-        if(units){cow.foodProgress%=scale;state.stocks.food+=units;emit(state,'CattleFoodProduced',{cattleId:id,units,sheltered});}
+        if(units){cow.foodProgress%=scale;state.stocks.food+=units;emit(state,'CattleFoodProduced',{cattleId:id,units,sheltered,...weatherFacts(state)});}
     }
 }
 export function consumeCattleFood(state:SimulationState):void {
     if(!state.landing)return;
     const need=cattleFoodNeed(state),units=Math.min(need,state.stocks.food);state.stocks.food-=units;
-    emit(state,'CattleFoodConsumed',{units,required:need,shortfall:need-units,cattleIds:Object.values(state.landing.cattle).filter(c=>c.deathWinter===null).map(c=>c.id).sort()});
+    emit(state,'CattleFoodConsumed',{units,required:need,shortfall:need-units,...weatherFacts(state),cattleIds:Object.values(state.landing.cattle).filter(c=>c.deathWinter===null).map(c=>c.id).sort()});
 }
 export function inspectCattle(state:SimulationState,id:string) {
     const cattle=state.landing?.cattle[id];if(!cattle)throw new Error('Unknown cattle');
@@ -49,14 +50,14 @@ export function cattleMortalityRisk(state:SimulationState,cattle:Cattle):number 
     const config=state.landing!.config,age=state.time.winter-cattle.birthWinter;
     const base=age<2?config.cattleMortalityYoungBps:age<10?config.cattleMortalityAdultBps:age<15?config.cattleMortalityOlderBps:config.cattleMortalityOldBps;
     const crowding=farmyards(state).find(f=>f.id===cattle.farmyardId)?.overcrowding??0;
-    return Math.min(10000,base+crowding*config.cattleCrowdingBps+config.cattleWeatherMortalityBps);
+    return Math.min(10000,base+crowding*config.cattleCrowdingBps+config.cattleWeatherMortalityBps+(cattleSheltered(state,cattle)?0:weatherProfile(state).exposedCattleMortalityBps));
 }
 export function resolveCattleMortality(state:SimulationState,chance:(bps:number)=>boolean):void {
     if(!state.landing)return;
     // Snapshot risks before removing animals: every herd member faces the same occupancy.
-    const deaths=Object.values(state.landing.cattle).filter(c=>c.deathWinter===null).sort((a,b)=>a.id.localeCompare(b.id)).map(c=>({c,risk:cattleMortalityRisk(state,c)})).filter(({risk})=>chance(risk));
-    for(const {c,risk} of deaths){
+    const deaths=Object.values(state.landing.cattle).filter(c=>c.deathWinter===null).sort((a,b)=>a.id.localeCompare(b.id)).map(c=>({c,risk:cattleMortalityRisk(state,c),sheltered:cattleSheltered(state,c),weatherExposureBps:cattleSheltered(state,c)?0:weatherProfile(state).exposedCattleMortalityBps})).filter(({risk})=>chance(risk));
+    for(const {c,risk,sheltered,weatherExposureBps} of deaths){
         const farmyardId=c.farmyardId;c.deathWinter=state.time.winter;c.farmyardId=null;
-        emit(state,'CattleDied',{cattleId:c.id,parentIds:[...c.parentIds],sex:c.sex,age:state.time.winter-c.birthWinter,farmyardId,mortalityRiskBps:risk});
+        emit(state,'CattleDied',{cattleId:c.id,parentIds:[...c.parentIds],sex:c.sex,age:state.time.winter-c.birthWinter,farmyardId,mortalityRiskBps:risk,...(state.weather?.config.enabled?{sheltered,weatherExposureBps,...weatherFacts(state)}:{})});
     }
 }

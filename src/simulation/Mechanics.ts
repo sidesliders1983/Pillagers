@@ -1,3 +1,5 @@
+import {determineWeather,weatherProfile,weatherFacts} from './Weather';
+import {randomUint} from './Random';
 import {resolveMortality,defaultMortalityBands} from './Mortality';
 import type {MortalityBand} from './Mortality';
 import {farmyards,reconcileFarmyards} from './Farmyards';
@@ -86,6 +88,7 @@ export function inspectWork(state:SimulationState,id:string) {
     const control=state.mechanics!.people[id];
         if(simulationTick(state)<control.switchedUntilTick)efficiency=Math.floor(efficiency*config.switchProductivityBps/10000);
 
+    if(job.resource==='food')efficiency=Math.floor(efficiency*weatherProfile(state).foodProductionBps/10000);
     return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
 }
 export function inspectBuilding(state:SimulationState,id:string) {
@@ -113,7 +116,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     }
     state.time.tick++;
     if(state.time.tick===state.ticksPerWinter){state.time.tick=0;state.time.winter++;}
-    for(const output of produced)emit(state,'ResourceProduced',output.id,{resource:output.resource,units:output.units});
+    for(const output of produced)emit(state,'ResourceProduced',output.id,{resource:output.resource,units:output.units,...(output.resource==='food'?weatherFacts(state):{})});
     stepCattleOutput(state);
     if(state.time.tick===0) {
         emit(state,'WinterAdvanced');
@@ -146,6 +149,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         resolveCaregivers(state,(type,personaId,details)=>emit(state,type,personaId,details));
         reconcileFarmyards(state,previousFarmyards);
         resolveCattleBirths(state,bps=>chance(state,bps));
+        determineWeather(state);
     }
 }
 
@@ -252,7 +256,6 @@ function reviewCareers(state:SimulationState):void {
     }
 }
 
-function randomUint(state:SimulationState):number {state.rngState=(Math.imul(state.rngState,1664525)+1013904223)>>>0;return state.rngState;}
 function chance(state:SimulationState,bps:number):boolean {if(bps===0)return false;return randomUint(state)<Math.floor(bps*4294967296/10000);}
 
 export function newPersonaMechanics():PersonaMechanics {return {dominantLegacy:{},occupationLocked:false,switchedUntilTick:0,progress:{},lastBirthWinter:null,childcareUntilWinter:0,caregiverId:null,caregiverLocked:false,caregiverWorkedWinter:null};}

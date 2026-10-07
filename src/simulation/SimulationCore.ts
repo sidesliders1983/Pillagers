@@ -1,3 +1,6 @@
+import {initializeWeather,validateWeather} from './Weather';
+import type {WeatherState,WeatherConfig} from './Weather';
+export {inspectWeather,inspectWeatherExposure,defaultWeatherConfig,weatherClasses} from './Weather';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 export {inspectBuilding, inspectWork, occupationAptitude, occupationIds} from './Mechanics';
 export {caregiverEligible} from './FamilyMechanics';
@@ -23,7 +26,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
-    landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
+    weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
     families: Record<string, {id: string; memberIds: string[]}>;
     households: Record<string, {id: string; memberIds: string[]; residenceId: string | null}>;
@@ -31,8 +34,8 @@ export type SimulationState = {
     buildings: Record<string, {id: string; kind: 'house' | 'farmyard'; specialization: Occupation | null}>;
     stocks: {food: number; materials: number}; events: SimulationEvent[];
 };
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}):SimulationState {
-    const state=generateCampaign(seed,overrides,mechanicsOverrides);validateState(state);return state;
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={},weatherOverrides:Partial<WeatherConfig>={}):SimulationState {
+    const state=generateCampaign(seed,overrides,mechanicsOverrides);initializeWeather(state,weatherOverrides);validateState(state);return state;
 }
 export function createFixtureClan(seed: number): SimulationState {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be uint32');
@@ -181,7 +184,7 @@ function validateState(state: SimulationState): void {
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
     validateMechanics(state);
-    validateLanding(state);
+    validateLanding(state);validateWeather(state);
 }
 
 export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {
