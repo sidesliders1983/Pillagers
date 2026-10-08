@@ -52,4 +52,3 @@ node scripts/qa/audit-pine-comparison.mjs
 The vendored upstream code is used only for authoring exports; the live comparison loads static glTF. The saved review page works from relative PNGs and does not require WebGL. All current gameplay/world/lab tree defaults remain unchanged.
 
 Owner review of the exact source presets remains pending. The next separate experiment is native Three HDR before/after on the unchanged combined environment. Background/coast composition and building/tree water reflections remain later steps; #60 remains unready.
-
