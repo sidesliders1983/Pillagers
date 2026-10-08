@@ -1,0 +1,15 @@
+"""Remove disconnected low-confidence pigment islands without moving a face."""
+import argparse,json,hashlib
+from pathlib import Path
+import numpy as np
+from scipy.sparse import coo_matrix
+from scipy.sparse.csgraph import connected_components
+p=argparse.ArgumentParser();p.add_argument('source',type=Path);p.add_argument('output',type=Path);p.add_argument('--minimum-area-fraction',type=float,default=.01);a=p.parse_args();assert not a.output.exists();a.output.parent.mkdir(parents=True,exist_ok=True)
+d=np.load(a.source);original=d['positions'];complete_faces=d['faces'];whole='pigment' in d;source_ids=np.flatnonzero(d['pigment']) if whole else np.arange(len(complete_faces));faces=complete_faces[source_ids]
+used=np.unique(faces);_,first,inverse=np.unique(np.round(original[used]/1e-6).astype(np.int64),axis=0,return_index=True,return_inverse=True);welded=original[used[first]];lookup=np.full(len(original),-1,dtype=np.int32);lookup[used]=inverse;links=lookup[faces]
+i=np.r_[links[:,0],links[:,1],links[:,2]];j=np.r_[links[:,1],links[:,2],links[:,0]];graph=coo_matrix((np.ones(len(i)),(i,j)),shape=(len(welded),len(welded)));count,labels=connected_components(graph,directed=False);areas=np.linalg.norm(np.cross(original[faces[:,1]]-original[faces[:,0]],original[faces[:,2]]-original[faces[:,0]]),axis=1)/2;face_component=labels[links[:,0]];component_area=np.bincount(face_component,weights=areas,minlength=count);limit=component_area.max()*a.minimum_area_fraction;keep=component_area[face_component]>=limit;selected=faces[keep]
+if whole:
+ cleaned=d['pigment'].copy();cleaned[source_ids[~keep]]=False;np.savez_compressed(a.output,positions=original,faces=complete_faces,pigment=cleaned)
+else:
+ used=np.unique(selected);mapping=np.full(len(original),-1,dtype=np.int32);mapping[used]=np.arange(len(used));np.savez_compressed(a.output,positions=original[used],faces=mapping[selected])
+parent=json.loads(a.source.with_suffix('.provenance.json').read_text());stats={'sourceTriangles':len(faces),'outputTriangles':len(selected),'sourceComponents':count,'retainedComponents':int((component_area>=limit).sum()),'minimumComponentAreaFraction':a.minimum_area_fraction,'minimumComponentAreaSquareMetres':float(limit),'removedSourceTriangles':int((~keep).sum()),'retainedSourceAreaSquareMetres':float(areas[keep].sum()),'removedSourceAreaSquareMetres':float(areas[~keep].sum()),'geometryMoved':False,'pigmentRedrawn':False,'completeNativeGeometryPreserved':whole,'sourceComponentsAreaSquareMetres':component_area.tolist()};record={'reviewRequired':True,'kind':parent['kind'],'style':parent['style'],'source':str(a.source.resolve()),'sourceSha256':hashlib.sha256(a.source.read_bytes()).hexdigest(),'outputSha256':hashlib.sha256(a.output.read_bytes()).hexdigest(),'sourceProvenance':parent,'fit':parent['fit'],'geometryOptimization':stats};a.output.with_suffix('.provenance.json').write_text(json.dumps(record,indent=2));print(json.dumps({k:v for k,v in stats.items() if k!='sourceComponentsAreaSquareMetres'}),flush=True)

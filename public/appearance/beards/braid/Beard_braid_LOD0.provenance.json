@@ -1,26 +1,273 @@
 {
+  "reviewRequired": false,
+  "kind": "beard",
   "style": "braid",
   "lod": 0,
-  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\lods-2500-1800-1200\\Beard_braid_LOD0.glb",
-  "sourceSha256": "390c646e60153c8931b0176ab65c22d07ea2a8c0d18598c628f94c693a721b1c",
-  "outputSha256": "38a8872de6723a077282e95eb91c6e5459137508fc7ef26eb57eb52e6adc1dd1",
-  "fit": {
-    "sourceSkullCentre": [
-      0,
-      0,
-      0.075
-    ],
-    "scale": 0.52,
-    "rotateBlenderZ": 180,
-    "headReferenceSize": [
-      0.1992,
-      0.2397,
-      0.2189
-    ]
-  },
-  "removedSmallComponentVertices": 0,
+  "source": "scratch/appearance-pass/agent-a/true-closed-braid-beard-v3/beard/braid/Beard_braid_LOD2.glb",
+  "sourceSha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce",
+  "outputSha256": "d597c85d352a06b39235cbd87ec07d44dd32ad37602b5dbf89917e9fb15d8571",
   "sourceProvenance": {
-    "style": "braid",
+    "outputSha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce",
+    "qualifiedCandidateAuthoring": {
+      "reviewRequired": true,
+      "style": "braid",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-clean-braid-beard-v3\\beard\\braid\\Beard_braid_LOD2.glb",
+      "sourceSha256": "bb1f94a8dd4573f4b99243613d6387b5bbc094bc389bd4d10a8fe5c6092822a6",
+      "outputSha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce",
+      "sourceProvenance": {
+        "reviewRequired": true,
+        "style": "braid",
+        "lod": 2,
+        "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-outer-braid-beard-v3\\beard\\braid\\Beard_braid_LOD2.glb",
+        "sourceSha256": "70ac52cb618cf6c187b48a35d82e1d97e39ddfdea1ddd93e5d2669c815d0ccbd",
+        "outputSha256": "bb1f94a8dd4573f4b99243613d6387b5bbc094bc389bd4d10a8fe5c6092822a6",
+        "sourceProvenance": {
+          "reviewRequired": true,
+          "kind": "beard",
+          "style": "braid",
+          "lod": 2,
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-braid-beard-v3\\braid-whole-domain.npz",
+          "sourceSha256": "d3044c3c4dcb0b5366b830156a18c5ca3c985bdbcbebe8d776e22ad05c1fa846",
+          "outputSha256": "70ac52cb618cf6c187b48a35d82e1d97e39ddfdea1ddd93e5d2669c815d0ccbd",
+          "sourceProvenance": {
+            "reviewRequired": true,
+            "kind": "beard",
+            "style": "braid",
+            "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\generated.glb",
+            "sourceSha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058",
+            "outputSha256": "d3044c3c4dcb0b5366b830156a18c5ca3c985bdbcbebe8d776e22ad05c1fa846",
+            "sourceProvenance": {
+              "reference": {
+                "id": "braid",
+                "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+                "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+                "crop": [
+                  1070,
+                  485,
+                  1264,
+                  780
+                ],
+                "inputSha256": "0442bdfeaf880010494623488e3c1fbc18451dcbc3d6d6c903a1c3d1d5656e14",
+                "redrawn": false,
+                "reviewRequired": true,
+                "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid",
+                "jobId": "beards-v03/braid"
+              },
+              "reviewRequired": true,
+              "generation": {
+                "backend": "pixal3d",
+                "components": [],
+                "input": {
+                  "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\reference.png",
+                  "sha256": "8f909efc1408532fb7a2ba70c8a2d0adeca67a693fca186fd619cb1cd4b02f38"
+                },
+                "license": {
+                  "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+                  "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+                },
+                "output": {
+                  "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\generated.glb",
+                  "sha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058"
+                },
+                "parameters": {
+                  "fov": 0.3490658503988659,
+                  "gsh": null,
+                  "gss": 10,
+                  "matted": true,
+                  "res": 1024,
+                  "seed": 1983,
+                  "steps": 12
+                },
+                "schema_version": 1,
+                "timings_seconds": {
+                  "total": 2461.9
+                }
+              },
+              "outputSha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058",
+              "matte": {
+                "model": "birefnet-general-lite",
+                "sourceSha256": "0442bdfeaf880010494623488e3c1fbc18451dcbc3d6d6c903a1c3d1d5656e14",
+                "inputSha256": "8f909efc1408532fb7a2ba70c8a2d0adeca67a693fca186fd619cb1cd4b02f38",
+                "redrawn": false
+              }
+            },
+            "geometryOptimization": {
+              "rawTriangles": 960046,
+              "classifiedReferenceTriangles": 212644,
+              "classificationOrder": "original encoded base-colour texture before geometry simplification",
+              "maximumPigmentValue": 0.7,
+              "maximumPigmentRedExcess": null,
+              "maximumGreenBlueDistance": null,
+              "maximumGreenMinusBlue": null,
+              "minimumPigmentSaturation": 0.1,
+              "completeReferenceVolume": true,
+              "textureClosingRadiusPixels": 0,
+              "minimumHeightMeters": -0.45,
+              "sourceAxisSize": [
+                0.4761810150437551,
+                0.4761810150437551,
+                0.4761810150437551
+              ],
+              "sourceAnatomySha256": null,
+              "textureCoordinates": "glTF TEXCOORD_0 native image row v, upper-left; no vertical inversion",
+              "maximumNormalizedRedFraction": null,
+              "maximumHeightMeters": -0.008,
+              "referenceAccentPigment": {
+                "encodedRGBSeed": [
+                  202,
+                  162,
+                  100
+                ],
+                "maximumNormalizedChromaDistance": 0.055,
+                "maximumValue": 0.99,
+                "canonicalHeightRange": [
+                  -0.26,
+                  -0.21
+                ],
+                "additionalOriginalFaces": 11870
+              },
+              "referenceMainPigment": {
+                "encodedRGBSeed": [
+                  119,
+                  65,
+                  47
+                ],
+                "maximumNormalizedChromaDistance": 0.025
+              },
+              "referenceSkinOwnership": null
+            },
+            "fit": {
+              "authoringFrame": "canonical",
+              "up": "+Y",
+              "front": "+Z",
+              "origin": "fixed skull centre",
+              "canonicalHeadSize": [
+                0.1992,
+                0.2397,
+                0.2189
+              ]
+            },
+            "sourceHeadFrame": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\head-frames.json",
+              "sha256": "b6fcacb5bf7a4b03334fb3ea46c2c2baa2992b03379cef3993d90b267cf311fc",
+              "entry": "beard/braid",
+              "measuredFrame": {
+                "centre": [
+                  0.006711467658303006,
+                  -0.029386162793995696,
+                  0.2079211316665956
+                ],
+                "radius": 0.23809050752187755,
+                "up": [
+                  0,
+                  0,
+                  1
+                ],
+                "front": [
+                  -0.42637378068011755,
+                  0.9045470685091755,
+                  0
+                ],
+                "sourceSha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058",
+                "rms": 0.02087199823078251,
+                "frontMethod": "reference beard attachment centroid",
+                "upMethod": "glTF vertical; neck not sufficiently constrained"
+              },
+              "axisScale": [
+                0.4761810150437551,
+                0.4761810150437551,
+                0.4761810150437551
+              ],
+              "canonicalBlenderBasis": "-right, -front, +up",
+              "canonicalGlTFBasis": "-right, +up, +front"
+            }
+          },
+          "geometryOptimization": {
+            "outputTriangles": 2552,
+            "removedMicroscopicFaces": 48,
+            "wholeReferenceVoxelSizeMeters": 0.002,
+            "pigmentTransfer": "nearest original UV-labelled triangle on cleaned external surface, before reduction",
+            "surfaceDomainClosingRadiusMeters": 0.003,
+            "maximumSourcePunctureAreaSquareMetres": 0.000075,
+            "closedSourcePunctures": 4,
+            "closedSourcePunctureAreaSquareMetres": 0.00013055440320997036,
+            "originalClassifiedExternalFaces": 74950,
+            "contourRedrawn": false,
+            "facetedNormals": true,
+            "windingAuthority": "complete reference volume before pigment extraction",
+            "profileMaterialCount": 1,
+            "externalSurfaceCache": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\external-cache\\braid-beard-2mm.npz",
+              "sha256": "918dc643ae63aff50e6be182788dc733fc59743a1631f74e164130db9513f5b4",
+              "canonicalGeometrySha256": "a39654bef785d7634d4121f38213e59ece721a23ee50147de5e8594081c2c3d6",
+              "reused": true
+            }
+          },
+          "fit": {
+            "authoringFrame": "canonical",
+            "up": "+Y",
+            "front": "+Z",
+            "origin": "fixed skull centre",
+            "canonicalHeadSize": [
+              0.1992,
+              0.2397,
+              0.2189
+            ]
+          }
+        },
+        "geometryOptimization": {
+          "sourceTriangles": 2552,
+          "outputTriangles": 2496,
+          "removedBoundaryNeedleFaces": 56,
+          "removedFacesPerPass": [
+            47,
+            6,
+            2,
+            1
+          ],
+          "maximumTerminalAltitudeMetres": 0.002,
+          "minimumTerminalLengthMetres": 0.004,
+          "maximumAltitudeRatio": 0.25,
+          "boundaryEdgesRequired": 2,
+          "existingVerticesUnchanged": true,
+          "facetedNormals": true,
+          "profileMaterialCount": 1
+        },
+        "fit": {
+          "authoringFrame": "canonical",
+          "up": "+Y",
+          "front": "+Z",
+          "origin": "fixed skull centre",
+          "canonicalHeadSize": [
+            0.1992,
+            0.2397,
+            0.2189
+          ]
+        }
+      },
+      "geometryOptimization": {
+        "outputTriangles": 1542,
+        "closedSourceSurfaceTriangles": 187760,
+        "closingRadiusMeters": 0.003,
+        "openingRadiusMeters": 0.002,
+        "volumeUnionVoxelSizeMeters": 0.0015,
+        "removedMicroscopicFaces": 48,
+        "facetedNormals": true,
+        "profileMaterialCount": 1
+      },
+      "fit": {
+        "authoringFrame": "canonical",
+        "up": "+Y",
+        "front": "+Z",
+        "origin": "fixed skull centre",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      }
+    },
     "generatedBust": {
       "reference": {
         "id": "braid",
@@ -57,7 +304,7 @@
         "parameters": {
           "fov": 0.3490658503988659,
           "gsh": null,
-          "gss": 10.0,
+          "gss": 10,
           "matted": true,
           "res": 1024,
           "seed": 1983,
@@ -76,56 +323,325 @@
         "redrawn": false
       }
     },
-    "extraction": {
-      "source": "scratch\\beards-v03\\braid\\generated.glb",
-      "selectedFaces": 214974,
-      "fraction": 0.22391912104760991,
-      "classification": "value 0.07..0.65, saturation <0.98, at least two thirds of UV corner samples",
-      "braidBustROI": {
-        "excludeAboveZ": 0.2,
-        "bindingZ": [
-          -0.35,
-          -0.25
+    "historicalPublishedProvenance": {
+      "style": "braid",
+      "lod": 0,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\lods-2500-1800-1200\\Beard_braid_LOD0.glb",
+      "sourceSha256": "390c646e60153c8931b0176ab65c22d07ea2a8c0d18598c628f94c693a721b1c",
+      "outputSha256": "38a8872de6723a077282e95eb91c6e5459137508fc7ef26eb57eb52e6adc1dd1",
+      "fit": {
+        "sourceSkullCentre": [
+          0,
+          0,
+          0.075
         ],
-        "bindingMinY": 0.13,
-        "bindingMaxAbsX": 0.12,
-        "bindingHue": [
-          0.1,
-          0.22
-        ],
-        "bindingMinSaturation": 0.12
+        "scale": 0.52,
+        "rotateBlenderZ": 180,
+        "headReferenceSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      },
+      "removedSmallComponentVertices": 0,
+      "sourceProvenance": {
+        "style": "braid",
+        "generatedBust": {
+          "reference": {
+            "id": "braid",
+            "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+            "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+            "crop": [
+              1070,
+              485,
+              1264,
+              780
+            ],
+            "inputSha256": "0442bdfeaf880010494623488e3c1fbc18451dcbc3d6d6c903a1c3d1d5656e14",
+            "redrawn": false,
+            "reviewRequired": true,
+            "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid",
+            "jobId": "beards-v03/braid"
+          },
+          "reviewRequired": true,
+          "generation": {
+            "backend": "pixal3d",
+            "components": [],
+            "input": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\reference.png",
+              "sha256": "8f909efc1408532fb7a2ba70c8a2d0adeca67a693fca186fd619cb1cd4b02f38"
+            },
+            "license": {
+              "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+              "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+            },
+            "output": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\braid\\generated.glb",
+              "sha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058"
+            },
+            "parameters": {
+              "fov": 0.3490658503988659,
+              "gsh": null,
+              "gss": 10,
+              "matted": true,
+              "res": 1024,
+              "seed": 1983,
+              "steps": 12
+            },
+            "schema_version": 1,
+            "timings_seconds": {
+              "total": 2461.9
+            }
+          },
+          "outputSha256": "35728514e2a31f8297da9cd6589aa8f08536c8df821d68e824db4c99e6254058",
+          "matte": {
+            "model": "birefnet-general-lite",
+            "sourceSha256": "0442bdfeaf880010494623488e3c1fbc18451dcbc3d6d6c903a1c3d1d5656e14",
+            "inputSha256": "8f909efc1408532fb7a2ba70c8a2d0adeca67a693fca186fd619cb1cd4b02f38",
+            "redrawn": false
+          }
+        },
+        "extraction": {
+          "source": "scratch\\beards-v03\\braid\\generated.glb",
+          "selectedFaces": 214974,
+          "fraction": 0.22391912104760991,
+          "classification": "value 0.07..0.65, saturation <0.98, at least two thirds of UV corner samples",
+          "braidBustROI": {
+            "excludeAboveZ": 0.2,
+            "bindingZ": [
+              -0.35,
+              -0.25
+            ],
+            "bindingMinY": 0.13,
+            "bindingMaxAbsX": 0.12,
+            "bindingHue": [
+              0.1,
+              0.22
+            ],
+            "bindingMinSaturation": 0.12
+          },
+          "reviewRequired": false,
+          "visualReview": [
+            "front",
+            "side",
+            "back",
+            "binding retained",
+            "eye residue removed",
+            "skin residue removed"
+          ]
+        },
+        "outputSha256": "0a3352eac567f52ade12f28cd6cc3909643aae052021bc0caf8439bc79a0b373",
+        "reviewRequired": false
       },
       "reviewRequired": false,
-      "visualReview": [
-        "front",
-        "side",
-        "back",
-        "binding retained",
-        "eye residue removed",
-        "skin residue removed"
+      "visualReview": {
+        "profileSeed": 12,
+        "placement": "existing Head bone; skull-relative fit",
+        "animations": [
+          "Idle",
+          "Walk",
+          "Run"
+        ],
+        "lods": [
+          0,
+          1,
+          2
+        ],
+        "screenshots": [
+          "artifacts/generated-beard-braid-LOD0.png",
+          "artifacts/generated-beard-braid-LOD1.png",
+          "artifacts/generated-beard-braid-LOD2.png"
+        ]
+      }
+    }
+  },
+  "fit": {
+    "authoringFrame": "canonical",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "fixed skull centre",
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "attachmentMetadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "beard/braid",
+    "type": "beard",
+    "anchor": "socket_jaw",
+    "fitCage": "LOWER_FACE_CAGE",
+    "fitMode": "conform",
+    "clearance": 0.003,
+    "authoringFrame": "canonical",
+    "sourceStyle": "braid",
+    "projection": "outward",
+    "subdivisions": 0,
+    "attachmentBand": {
+      "minimumY": -0.65
+    },
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "geometryOptimization": {
+    "outputTriangles": 1542,
+    "profileMaterialCount": 1,
+    "facetedNormals": true,
+    "canonicalAuthoring": true,
+    "prototypeTierPolicy": "same source-qualified canonical surface in every declared tier",
+    "geometryAndMaterialBINUnchanged": true,
+    "aliasNameOnly": true
+  },
+  "referenceReview": {
+    "qualification": "independent pinned private-candidate PASS",
+    "sourceSha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce",
+    "evidence": "artifacts/appearance-pass/agent-c/independent-braid-beard-v3-matrix/AGENT-C-VERDICT.json",
+    "evidenceSha256": "f554f5779ae47721b3c8292fafea2700153c7ce272178f56c6fb1250e0913c60",
+    "candidateVerdict": "PASS for pinned private candidate only",
+    "scope": "Private qualification only. No source, geometry, runtime or public mutation by this reviewer. Final ACTUAL PUBLIC independent Golden/LOD/ratio/motion plus desktop/mobile Character Lab checks without overrides, and npm validation/tests/build remain mandatory.",
+    "testedMetadata": {
+      "version": "pillagers-fit/0.1",
+      "id": "beard/braid",
+      "type": "beard",
+      "anchor": "socket_jaw",
+      "fitCage": "LOWER_FACE_CAGE",
+      "fitMode": "conform",
+      "clearance": 0.003,
+      "authoringFrame": "canonical",
+      "sourceStyle": "braid",
+      "projection": "outward",
+      "subdivisions": 0,
+      "attachmentBand": {
+        "minimumY": -0.65
+      },
+      "canonicalHeadSize": [
+        0.1992,
+        0.2397,
+        0.2189
       ]
     },
-    "outputSha256": "0a3352eac567f52ade12f28cd6cc3909643aae052021bc0caf8439bc79a0b373",
-    "reviewRequired": false
-  },
-  "reviewRequired": false,
-  "visualReview": {
-    "profileSeed": 12,
-    "placement": "existing Head bone; skull-relative fit",
-    "animations": [
-      "Idle",
-      "Walk",
-      "Run"
+    "testedImplementation": [
+      {
+        "url": "http://127.0.0.1:4176/universal-human/UniversalHuman_LOD0.glb?v=40e9e4cebdcb",
+        "sha256": "40e9e4cebdcbb796d5cbf509de52d1220635913e5a069d6b56d69afd81af6f55"
+      },
+      {
+        "url": "http://127.0.0.1:4176/appearance/beards/braid/Beard_braid_LOD0.glb?v=38a8872de672",
+        "sha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce"
+      },
+      {
+        "url": "http://127.0.0.1:4176/universal-human/UniversalHuman_LOD1.glb?v=5b23936dd80c",
+        "sha256": "5b23936dd80c9f443ebf7e144c547c80a4e1980c8d2cee5c818afe7a608829f5"
+      },
+      {
+        "url": "http://127.0.0.1:4176/appearance/beards/braid/Beard_braid_LOD1.glb?v=8912f32f9fe7",
+        "sha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce"
+      },
+      {
+        "url": "http://127.0.0.1:4176/universal-human/UniversalHuman_LOD2.glb?v=5836bad2b9cc",
+        "sha256": "5836bad2b9cc48f2dde153a55cf05395299657b343815e7a9c1833247d0eaf86"
+      },
+      {
+        "url": "http://127.0.0.1:4176/appearance/beards/braid/Beard_braid_LOD2.glb?v=852aba0a4ff0",
+        "sha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce"
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/appearance-review.js?t=1790981141028",
+        "sha256": "c3d5c790e26e9737809fe4dfa4eacf6e14d86cae7a9e0f7bff64489d434782fa"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFactory.ts?t=1790981141028",
+        "sha256": "0c2ca4c2bef482482e197487b010bc93f01a2981c6b86e22b82d6954eee2e772"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GoldenCharacters.ts",
+        "sha256": "6794088ed4ccf477c7f3a9a58262d51c664a8fee60a78b2bfe7ba56f913bba1a"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssets.ts?t=1790958586645",
+        "sha256": "1e37b007f1c5f9f47562ac6391f7f641bff214c4a15c0c717aef2400cac1b762"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHumanProfile.ts?t=1790958586645",
+        "sha256": "1dc276b995d3c7ef0b0bb916c834b87ce1f9fa7ae2bb6d93ad88cf060865e001"
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/fitted-geometry-audit.mjs?t=1790975599126",
+        "sha256": "e842cafb74f52ef098e1458a55b1021e009c26ba09c019e0613a7110123236b1"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterDNA.ts",
+        "sha256": "ffe0633da1dbfcbf2f66eca19c75a6e5fe1ace47cf377dfa5d45d3f8ccd2cf5e"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/generatePhenotype.ts",
+        "sha256": "1f5d86cf38e53f6ab12f37b4d56d4e008171db17da995b49143825a71df7bbe7"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/AttachmentContract.ts?t=1790958586645",
+        "sha256": "af7ae649075f54372dfbb5450cb258a0075e8d9f1d3bc40bdbabe35a8cd2b287"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHuman.ts?t=1790981141028",
+        "sha256": "b7495b820400db1e9e9aa7a6040f60ad3abfe705476736bf45536f9e796fdef4"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/seededRandom.ts",
+        "sha256": "47adc048e465a34962efe4bbcf5c34d57a8074c0c8c9836588f0ab7b2925b652"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssetMeasurements.ts",
+        "sha256": "b93b6589488eeec197265a56d31c209330fd738b5af61d0ad08a262c8ad50d98"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFrames.ts",
+        "sha256": "6c89ab981edc9a9833414bcd181eed3ef59f9620849091484e0acaf35ac2dac1"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAppearance.ts?t=1790958586645",
+        "sha256": "fc47dd2eb0838253573cafee33615c46936b8c1b659d8041abce9a9f856e1ec0"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/ReferenceGarmentFrames.ts",
+        "sha256": "48da0d843405af5a551699374ab2c6501c83ba9996d6913fb6f75f0d0c69b2ac"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/heritageProfiles.ts",
+        "sha256": "7a32de2110ecc6be588d2ddb1db4490c79e65aaf61857c38e10613aec2868552"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SoftBodySpring.ts",
+        "sha256": "e2795000e8e08a62352436909680641c56d84aea6a4c59c45eec9174681809e0"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SkinTint.ts",
+        "sha256": "bcdb38a3df881e6742563848f89b309f444e92852b31f4deb0147ca6d92879e0"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/AppearanceModules.ts?t=1790978392410",
+        "sha256": "9dbbdcd715f141255ff940c5952eb179d806b8edf56627d62f0ce78a1fd3d657"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFitSystem.ts?t=1790958586645",
+        "sha256": "645db274b67ff57a3c752262cfab356063ef016c2fa1e0712aa292e9c3018e55"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GarmentFit.ts?t=1790981141028",
+        "sha256": "e864c3fbe09e02429a0a84b0a1af0643d344c7db7011d632caaaf4d3c2454e07"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFit.ts?t=1790958586645",
+        "sha256": "a5d057b88c4de777f4a4cda2a1e01ac7750e3fe0c80fb77f752602f1c7533ea8"
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/appearance-review.html",
+        "sha256": "ac80131cff8065efbc39f8df12bd52048a5c28d9af3b69feab40d3b0328912bc"
+      }
     ],
-    "lods": [
-      0,
-      1,
-      2
-    ],
-    "screenshots": [
-      "artifacts/generated-beard-braid-LOD0.png",
-      "artifacts/generated-beard-braid-LOD1.png",
-      "artifacts/generated-beard-braid-LOD2.png"
-    ]
+    "finalActualPublicGate": "pending final registry/build and independent actual-public Character Lab review"
   }
 }

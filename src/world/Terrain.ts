@@ -22,8 +22,8 @@ export function createTerrain() {
     const positions: number[] = [], colors: number[] = [];
     const p = worldConfig.palette;
     const ground = new Color(p.ground), moss = new Color(p.moss), earth = new Color(p.earth), sand = new Color(p.sand), color = new Color();
-    for (let x = -44; x < 44; x += 2)
-        for (let z = -18; z < 44; z += 2) {
+    for (let x = -58; x < 58; x += 2)
+        for (let z = -18; z < 62; z += 2) {
             const corners = Math.round((x + z) / 2) % 2 === 0 ? [[0, 0], [0, 2], [2, 0], [2, 0], [0, 2], [2, 2]] : [[0, 0], [0, 2], [2, 2], [0, 0], [2, 2], [2, 0]];
             for (const [dx, dz] of corners) {
                 const px = x + dx, pz = z + dz;

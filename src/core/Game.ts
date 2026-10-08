@@ -9,6 +9,7 @@ import { worldConfig as config } from '../config/worldConfig';
 import { generateCharacterDNA } from '../characters/generateCharacterDNA';
 import { generatePhenotype } from '../characters/generatePhenotype';
 import { characterFactory } from '../characters/CharacterFactory';
+import { meshyHumanFactory, MeshyHuman } from '../characters/MeshyHuman';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { CharacterProfileCard } from '../ui/CharacterProfileCard';
 import { setupWorldHUD } from '../ui/WorldHUD';
@@ -19,6 +20,9 @@ import { SeasonTint } from '../world/SeasonTint';
 export class Game {
     async start(canvas: HTMLCanvasElement) {
         setupWorldHUD();
+        const meshy=new URLSearchParams(location.search).get('characters')!=='published';
+        const population=new URLSearchParams(location.search).get('residents')==='40'?40:config.villagers;
+        canvas.dataset.characterSource=meshy?'meshy':'published';canvas.dataset.instances=String(population);
         const renderer = createRenderer(canvas), scene = new Scene();
         const camera = new PerspectiveCamera(45, 1, .1, 240), controller = new RTSCameraController(camera, canvas);
         const assets = new AssetManager();
@@ -28,12 +32,13 @@ export class Game {
         const lighting=new WorldLighting(scene,renderer,assets);
         controller.setNavigationSurface(world.terrain);
         const seasons=new SeasonTint(world.root,world.terrain);
-        const characters=await Promise.all(Array.from({length:config.villagers},async (_,i)=>{
+        const characters=await Promise.all(Array.from({length:population},async (_,i)=>{
             const dna=generateCharacterDNA((config.seed+Math.imul(i+1,2654435761))>>>0);
-            const phenotype=generatePhenotype(dna),model=await characterFactory.createWorld(dna);
+            const phenotype=generatePhenotype(dna),model=await (meshy?meshyHumanFactory.createWorld(dna):characterFactory.createWorld(dna));
             const profile=universalHumanProfile(dna);phenotype.height=profile.height*(1-.35*profile.weights.Child);
             return {dna,phenotype,model,villager:new Villager(i,model.root)};
         }));
+        characters.forEach(c=>c.villager.socialEnabled=c.model instanceof MeshyHuman);
         const villagers = characters.map(character=>character.villager);
         villagers.forEach(v => scene.add(v.visual));
         const movement = new MovementSystem(villagers);
@@ -87,7 +92,7 @@ export class Game {
                     const previous=character.villager.visual;
                     // Retire the persona, retaining the slot's GPU geometry and rig.
                     const model=character.model;model.applyDNA(result.dna);
-                    const villager=new Villager(index,model.root);
+                    const villager=new Villager(index,model.root);villager.socialEnabled=model instanceof MeshyHuman;
                     scene.remove(previous);
                     Object.assign(character,{dna:result.dna,model,villager});villagers[index]=villager;
                     movement.spawn(villager);scene.add(villager.visual);replacements++;
@@ -125,13 +130,14 @@ export class Game {
             lighting.update(time,cycle.progress);
             seasons.update(lighting.visualization==='seasons'?cycle.progress:null);
             document.body.dataset.lighting=lighting.mode;
-            characters.forEach(character=>{if(!cycle.paused)character.model.setMovementSpeed(character.villager.speed);character.model.update(cycle.paused?0:dt,camera.position.distanceTo(character.villager.visual.position));});
+            characters.forEach(character=>{if(!cycle.paused){const state=character.villager.interactionState;if(character.model instanceof MeshyHuman&&(state==='talking'||state==='listening'))character.model.setAnimation(state==='talking'?'Talk':'Listen');else character.model.setMovementSpeed(character.villager.speed);}character.model.update(cycle.paused?0:dt,camera.position.distanceTo(character.villager.visual.position));});
             profiles.update();
             renderer.render(scene, camera);
             if (sample > .5) {
+                canvas.dataset.interactions=JSON.stringify(movement.snapshot());
                 for(const option of ['day','night'])document.querySelector(`#lighting-${option}`)!.setAttribute('aria-pressed',String(lighting.visualization==='off'&&lighting.mode===option));
                 document.querySelector('#world-fps')!.textContent=`FPS: ${Math.round(frames/sample)}`;
-                document.querySelector('#metrics')!.textContent = `${Math.round(frames / sample)} FPS\n${renderer.info.render.calls} draw calls\n${renderer.info.render.triangles.toLocaleString()} triangles\n${villagers.length} inhabitants\nYear ${cycle.year} DC · ${(cycle.progress*60).toFixed(1)} / 60s\nVisualization ${lighting.visualization}${lighting.visualization==='seasons'?` · ${seasonBlend(cycle.progress).from.name}`:''}\nRespawns ${replacements}\nAges ${characters.map(c=>c.dna.age).join(', ')}\nRigged humans: ${characters.filter(c=>c.model.lod===1).length} LOD1 / ${characters.filter(c=>c.model.lod===2).length} LOD2\nStates: ${characters.map(c=>`${c.dna.seed}:${c.model.state}`).join(', ')}\nCamera ${camera.position.x.toFixed(1)}, ${camera.position.y.toFixed(1)}, ${camera.position.z.toFixed(1)}\nCenter ${controller.focus.x.toFixed(1)}, ${controller.focus.y.toFixed(1)}, ${controller.focus.z.toFixed(1)}\nLighting ${lighting.mode} · ${lighting.mode==='night'?2:1} direct lights\n${renderer.shadowMap.enabled?1:0} shadow source · ${lighting.directional.shadow.mapSize.x}px\n${assets.windowMaterials.length} emissive window materials`;
+                document.querySelector('#metrics')!.textContent = `${Math.round(frames / sample)} FPS\n${renderer.info.render.calls} draw calls\n${renderer.info.render.triangles.toLocaleString()} triangles\n${villagers.length} inhabitants\nYear ${cycle.year} DC · ${(cycle.progress*60).toFixed(1)} / 60s\nVisualization ${lighting.visualization}${lighting.visualization==='seasons'?` · ${seasonBlend(cycle.progress).from.name}`:''}\nRespawns ${replacements}\nAges ${characters.map(c=>c.dna.age).join(', ')}\nRigged humans: ${characters.filter(c=>c.model.lod===1).length} LOD1 / ${characters.filter(c=>c.model.lod===2).length} LOD2\nSocial: ${movement.snapshot().map(u=>`${u.id}:${u.state}${u.partnerId===null?'':'→'+u.partnerId}${u.cooldown>0?' ('+u.cooldown.toFixed(1)+'s)':''}`).join(', ')}\nStates: ${characters.map(c=>`${c.dna.seed}:${c.model.state}`).join(', ')}\nCamera ${camera.position.x.toFixed(1)}, ${camera.position.y.toFixed(1)}, ${camera.position.z.toFixed(1)}\nCenter ${controller.focus.x.toFixed(1)}, ${controller.focus.y.toFixed(1)}, ${controller.focus.z.toFixed(1)}\nLighting ${lighting.mode} · ${lighting.mode==='night'?2:1} direct lights\n${renderer.shadowMap.enabled?1:0} shadow source · ${lighting.directional.shadow.mapSize.x}px\n${assets.windowMaterials.length} emissive window materials`;
                 sample = 0;
                 frames = 0;
             }

@@ -1,25 +1,483 @@
 {
+  "reviewRequired": false,
+  "kind": "hair",
   "style": "tied",
   "lod": 1,
-  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\lods-2800-2500-2300\\Hair_tied_LOD1.glb",
-  "sourceSha256": "8d1103609fda37a2cda70161dcc004e3a0ae9eef25c7b49fc85c788aab90116d",
-  "outputSha256": "8d4bef31a2817d13e89a4d655425cb25dbd05b9c891ea80785de64064a34594d",
-  "fit": {
-    "sourceSkullCentre": [
-      0,
-      0,
-      0.075
-    ],
-    "scale": 0.52,
-    "rotateBlenderZ": 180,
-    "headReferenceSize": [
-      0.1992,
-      0.2397,
-      0.2189
-    ]
-  },
-  "removedSmallComponentVertices": 446,
+  "source": "scratch/appearance-pass/agent-a/true-contact-alpha-v11/hair/tied/Hair_tied_LOD2.glb",
+  "sourceSha256": "d4c191df7d9d1b6fac229ed4e559c77d67b862353fc5b673fda70c61e1522364",
+  "outputSha256": "cc43319a2566a4bad37f37ddf2a1db96f7676ed05da332b86434c36a92ca37e5",
   "sourceProvenance": {
+    "outputSha256": "d4c191df7d9d1b6fac229ed4e559c77d67b862353fc5b673fda70c61e1522364",
+    "qualifiedCandidateAuthoring": {
+      "reviewRequired": true,
+      "style": "tied",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-outer-v5\\hair\\tied\\Hair_tied_LOD2.glb",
+      "sourceSha256": "f9e81e14793b04fa2940b83d36cc0a0b9ca413b03a384414f1a9e89c679a9ec7",
+      "outputSha256": "d4c191df7d9d1b6fac229ed4e559c77d67b862353fc5b673fda70c61e1522364",
+      "sourceProvenance": {
+        "reviewRequired": true,
+        "kind": "hair",
+        "style": "tied",
+        "lod": 2,
+        "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-tied-v5\\tied-whole-domain.npz",
+        "sourceSha256": "158d989466d78fc011deef5e8c4ee4d9805b9bc2a3525af0442ed20d7317fbbc",
+        "outputSha256": "f9e81e14793b04fa2940b83d36cc0a0b9ca413b03a384414f1a9e89c679a9ec7",
+        "sourceProvenance": {
+          "reviewRequired": true,
+          "kind": "hair",
+          "style": "tied",
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
+          "sourceSha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+          "outputSha256": "158d989466d78fc011deef5e8c4ee4d9805b9bc2a3525af0442ed20d7317fbbc",
+          "sourceProvenance": {
+            "reference": {
+              "style": "tied",
+              "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+              "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+              "crop": [
+                628,
+                30,
+                824,
+                316
+              ],
+              "matte": "birefnet-general-lite",
+              "input": "scratch\\appearance-v02\\tied\\reference.png",
+              "inputSha256": "d8acf4f36c6000f04f968e9756094fdb942ad9415a01265e8668e744cf2c8aeb",
+              "redrawn": false
+            },
+            "backend": "pixal3d",
+            "generation": {
+              "backend": "pixal3d",
+              "components": [],
+              "input": {
+                "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\reference.png",
+                "sha256": "d8acf4f36c6000f04f968e9756094fdb942ad9415a01265e8668e744cf2c8aeb"
+              },
+              "license": {
+                "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+                "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+              },
+              "output": {
+                "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
+                "sha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4"
+              },
+              "parameters": {
+                "fov": 0.3490658503988659,
+                "gsh": null,
+                "gss": 10,
+                "matted": true,
+                "res": 1024,
+                "seed": 1983,
+                "steps": 12
+              },
+              "schema_version": 1,
+              "timings_seconds": {
+                "total": 5536.2
+              }
+            },
+            "reviewRequired": true,
+            "output": {
+              "sha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb"
+            }
+          },
+          "geometryOptimization": {
+            "rawTriangles": 994952,
+            "classifiedReferenceTriangles": 410432,
+            "classificationOrder": "original encoded base-colour texture before geometry simplification",
+            "maximumPigmentValue": 0.8,
+            "maximumPigmentRedExcess": null,
+            "maximumGreenBlueDistance": null,
+            "maximumGreenMinusBlue": -0.005,
+            "minimumPigmentSaturation": 0.15,
+            "completeReferenceVolume": true,
+            "textureClosingRadiusPixels": 0,
+            "minimumHeightMeters": -0.4,
+            "sourceAxisSize": [
+              0.5040604803491474,
+              0.5040604803491474,
+              0.5040604803491474
+            ],
+            "sourceAnatomySha256": null,
+            "textureCoordinates": "glTF TEXCOORD_0 native image row v, upper-left; no vertical inversion",
+            "maximumNormalizedRedFraction": null
+          },
+          "fit": {
+            "authoringFrame": "canonical",
+            "up": "+Y",
+            "front": "+Z",
+            "origin": "fixed skull centre",
+            "canonicalHeadSize": [
+              0.1992,
+              0.2397,
+              0.2189
+            ]
+          },
+          "sourceHeadFrame": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\head-frames.json",
+            "sha256": "b6fcacb5bf7a4b03334fb3ea46c2c2baa2992b03379cef3993d90b267cf311fc",
+            "entry": "hair/tied",
+            "measuredFrame": {
+              "centre": [
+                -0.041196801090267694,
+                0.09814630124304592,
+                0.15814779341695132
+              ],
+              "radius": 0.2520302401745737,
+              "up": [
+                0,
+                0,
+                1
+              ],
+              "front": [
+                0,
+                1,
+                0
+              ],
+              "sourceSha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+              "rms": 0.03869199657227534,
+              "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+              "upMethod": "glTF vertical; neck not sufficiently constrained"
+            },
+            "axisScale": [
+              0.5040604803491474,
+              0.5040604803491474,
+              0.5040604803491474
+            ],
+            "canonicalBlenderBasis": "-right, -front, +up",
+            "canonicalGlTFBasis": "-right, +up, +front"
+          }
+        },
+        "geometryOptimization": {
+          "outputTriangles": 3596,
+          "removedMicroscopicFaces": 404,
+          "wholeReferenceVoxelSizeMeters": 0.002,
+          "pigmentTransfer": "nearest original UV-labelled triangle on cleaned external surface, before reduction",
+          "surfaceDomainClosingRadiusMeters": 0.003,
+          "maximumSourcePunctureAreaSquareMetres": 0.000075,
+          "closedSourcePunctures": 77,
+          "closedSourcePunctureAreaSquareMetres": 0.00245390665946843,
+          "originalClassifiedExternalFaces": 290970,
+          "contourRedrawn": false,
+          "facetedNormals": true,
+          "windingAuthority": "complete reference volume before pigment extraction",
+          "profileMaterialCount": 1,
+          "externalSurfaceCache": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\source-caches\\tied-external-2mm.npz",
+            "sha256": "16d4ab3300aee2c41d00ebfeb763c095c2b1d3cb0619b977d69a0c0959e450eb",
+            "canonicalGeometrySha256": "673db4d61e90518a559c166c0a9f9482bd2e16fae6857f3f5f8ca8889ec7444b",
+            "reused": false
+          }
+        },
+        "fit": {
+          "authoringFrame": "canonical",
+          "up": "+Y",
+          "front": "+Z",
+          "origin": "fixed skull centre",
+          "canonicalHeadSize": [
+            0.1992,
+            0.2397,
+            0.2189
+          ]
+        }
+      },
+      "geometryOptimization": {
+        "outputTriangles": 2772,
+        "sourceFreeHairFacesPreserved": 892,
+        "removedAnatomicalAndDamagedContactFaces": 2704,
+        "freeHairSourceBoundaryEdges": 358,
+        "removedMicroscopicFaces": 28,
+        "unionSurfaceTriangles": 289824,
+        "contactRepair": "reference envelope bounded by actual canonical HEAD_CAGE",
+        "headCageSha256": "802a852d0436623461fc8f8fc544a683e688176572f499fb87a30b6ab2140bb2",
+        "scalpShellThicknessMeters": 0.006,
+        "volumeUnionVoxelSizeMeters": 0.002,
+        "hairlinePlane": {
+          "point": [
+            0,
+            0,
+            -0.025
+          ],
+          "normal": [
+            0,
+            0.5,
+            1
+          ]
+        },
+        "freeHairDomain": {
+          "minimumStandOffMeters": 0.01,
+          "maximumHeightMeters": 0.08,
+          "facialAnatomyExclusion": {
+            "sample": "any triangle corner",
+            "maximumHalfWidth": 0.06,
+            "heightRange": [
+              -0.15,
+              0.025
+            ],
+            "maximumPosteriorDepth": 0.055,
+            "maximumHeadStandOff": 0.03
+          },
+          "neckAnatomyExclusion": {
+            "maximumHalfWidth": 0.055,
+            "posteriorRange": [
+              -0.02,
+              0.085
+            ],
+            "maximumHeight": -0.1
+          },
+          "referenceSemanticRegion": {
+            "minimumX": null,
+            "maximumX": null,
+            "minimumAbsoluteX": null,
+            "minimumPosterior": 0.02,
+            "regionAppliedAboveHeight": -0.15
+          },
+          "extractionPerimeterClosure": "existing volume boundary hole fill; no sheet extrusion",
+          "outwardClosedVolumesCorrected": 4,
+          "referenceOuterVertexEnvelope": false,
+          "repairedReferenceSource": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-alpha-free-v11\\hair\\tied\\Hair_tied_LOD2.glb",
+            "sha256": "4e23fe86d595a68d4233521ef2b4860b716c1b3e7e3d9df5b8818a37e4da190e",
+            "provenance": {
+              "reviewRequired": true,
+              "style": "tied",
+              "lod": 2,
+              "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-alpha-tied-v11\\tied-free.npz",
+              "sourceSha256": "bd3b10548aa52a039f0614dfb4d4dbd14234e090185dc75af5792244aad8437e",
+              "outputSha256": "4e23fe86d595a68d4233521ef2b4860b716c1b3e7e3d9df5b8818a37e4da190e",
+              "sourceProvenance": {
+                "reviewRequired": true,
+                "kind": "hair",
+                "style": "tied",
+                "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-outer-v5\\hair\\tied\\Hair_tied_LOD2.glb",
+                "sourceSha256": "f9e81e14793b04fa2940b83d36cc0a0b9ca413b03a384414f1a9e89c679a9ec7",
+                "outputSha256": "bd3b10548aa52a039f0614dfb4d4dbd14234e090185dc75af5792244aad8437e",
+                "sourceProvenance": {
+                  "reviewRequired": true,
+                  "kind": "hair",
+                  "style": "tied",
+                  "lod": 2,
+                  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\true-tied-v5\\tied-whole-domain.npz",
+                  "sourceSha256": "158d989466d78fc011deef5e8c4ee4d9805b9bc2a3525af0442ed20d7317fbbc",
+                  "outputSha256": "f9e81e14793b04fa2940b83d36cc0a0b9ca413b03a384414f1a9e89c679a9ec7",
+                  "sourceProvenance": {
+                    "reviewRequired": true,
+                    "kind": "hair",
+                    "style": "tied",
+                    "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
+                    "sourceSha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+                    "outputSha256": "158d989466d78fc011deef5e8c4ee4d9805b9bc2a3525af0442ed20d7317fbbc",
+                    "sourceProvenance": {
+                      "reference": {
+                        "style": "tied",
+                        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+                        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+                        "crop": [
+                          628,
+                          30,
+                          824,
+                          316
+                        ],
+                        "matte": "birefnet-general-lite",
+                        "input": "scratch\\appearance-v02\\tied\\reference.png",
+                        "inputSha256": "d8acf4f36c6000f04f968e9756094fdb942ad9415a01265e8668e744cf2c8aeb",
+                        "redrawn": false
+                      },
+                      "backend": "pixal3d",
+                      "generation": {
+                        "backend": "pixal3d",
+                        "components": [],
+                        "input": {
+                          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\reference.png",
+                          "sha256": "d8acf4f36c6000f04f968e9756094fdb942ad9415a01265e8668e744cf2c8aeb"
+                        },
+                        "license": {
+                          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+                          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+                        },
+                        "output": {
+                          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
+                          "sha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4"
+                        },
+                        "parameters": {
+                          "fov": 0.3490658503988659,
+                          "gsh": null,
+                          "gss": 10,
+                          "matted": true,
+                          "res": 1024,
+                          "seed": 1983,
+                          "steps": 12
+                        },
+                        "schema_version": 1,
+                        "timings_seconds": {
+                          "total": 5536.2
+                        }
+                      },
+                      "reviewRequired": true,
+                      "output": {
+                        "sha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+                        "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb"
+                      }
+                    },
+                    "geometryOptimization": {
+                      "rawTriangles": 994952,
+                      "classifiedReferenceTriangles": 410432,
+                      "classificationOrder": "original encoded base-colour texture before geometry simplification",
+                      "maximumPigmentValue": 0.8,
+                      "maximumPigmentRedExcess": null,
+                      "maximumGreenBlueDistance": null,
+                      "maximumGreenMinusBlue": -0.005,
+                      "minimumPigmentSaturation": 0.15,
+                      "completeReferenceVolume": true,
+                      "textureClosingRadiusPixels": 0,
+                      "minimumHeightMeters": -0.4,
+                      "sourceAxisSize": [
+                        0.5040604803491474,
+                        0.5040604803491474,
+                        0.5040604803491474
+                      ],
+                      "sourceAnatomySha256": null,
+                      "textureCoordinates": "glTF TEXCOORD_0 native image row v, upper-left; no vertical inversion",
+                      "maximumNormalizedRedFraction": null
+                    },
+                    "fit": {
+                      "authoringFrame": "canonical",
+                      "up": "+Y",
+                      "front": "+Z",
+                      "origin": "fixed skull centre",
+                      "canonicalHeadSize": [
+                        0.1992,
+                        0.2397,
+                        0.2189
+                      ]
+                    },
+                    "sourceHeadFrame": {
+                      "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\head-frames.json",
+                      "sha256": "b6fcacb5bf7a4b03334fb3ea46c2c2baa2992b03379cef3993d90b267cf311fc",
+                      "entry": "hair/tied",
+                      "measuredFrame": {
+                        "centre": [
+                          -0.041196801090267694,
+                          0.09814630124304592,
+                          0.15814779341695132
+                        ],
+                        "radius": 0.2520302401745737,
+                        "up": [
+                          0,
+                          0,
+                          1
+                        ],
+                        "front": [
+                          0,
+                          1,
+                          0
+                        ],
+                        "sourceSha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+                        "rms": 0.03869199657227534,
+                        "frontMethod": "source pipeline +Y, projected perpendicular to measured up",
+                        "upMethod": "glTF vertical; neck not sufficiently constrained"
+                      },
+                      "axisScale": [
+                        0.5040604803491474,
+                        0.5040604803491474,
+                        0.5040604803491474
+                      ],
+                      "canonicalBlenderBasis": "-right, -front, +up",
+                      "canonicalGlTFBasis": "-right, +up, +front"
+                    }
+                  },
+                  "geometryOptimization": {
+                    "outputTriangles": 3596,
+                    "removedMicroscopicFaces": 404,
+                    "wholeReferenceVoxelSizeMeters": 0.002,
+                    "pigmentTransfer": "nearest original UV-labelled triangle on cleaned external surface, before reduction",
+                    "surfaceDomainClosingRadiusMeters": 0.003,
+                    "maximumSourcePunctureAreaSquareMetres": 0.000075,
+                    "closedSourcePunctures": 77,
+                    "closedSourcePunctureAreaSquareMetres": 0.00245390665946843,
+                    "originalClassifiedExternalFaces": 290970,
+                    "contourRedrawn": false,
+                    "facetedNormals": true,
+                    "windingAuthority": "complete reference volume before pigment extraction",
+                    "profileMaterialCount": 1,
+                    "externalSurfaceCache": {
+                      "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\source-caches\\tied-external-2mm.npz",
+                      "sha256": "16d4ab3300aee2c41d00ebfeb763c095c2b1d3cb0619b977d69a0c0959e450eb",
+                      "canonicalGeometrySha256": "673db4d61e90518a559c166c0a9f9482bd2e16fae6857f3f5f8ca8889ec7444b",
+                      "reused": false
+                    }
+                  },
+                  "fit": {
+                    "authoringFrame": "canonical",
+                    "up": "+Y",
+                    "front": "+Z",
+                    "origin": "fixed skull centre",
+                    "canonicalHeadSize": [
+                      0.1992,
+                      0.2397,
+                      0.2189
+                    ]
+                  }
+                },
+                "fit": {
+                  "authoringFrame": "canonical",
+                  "up": "+Y",
+                  "front": "+Z",
+                  "origin": "fixed skull centre",
+                  "canonicalHeadSize": [
+                    0.1992,
+                    0.2397,
+                    0.2189
+                  ]
+                },
+                "geometryOptimization": {
+                  "sourceTriangles": 3596,
+                  "retainedOriginalFreeFaces": 892,
+                  "sourceSurfaceSamples": 26125,
+                  "sampleSpacingMeters": 0.006,
+                  "maximumAlphaCircumradiusMeters": 0.014,
+                  "selectedSourceTetrahedra": 117197,
+                  "outputTriangles": 32362,
+                  "outlineExtremaSourceDerived": true,
+                  "unreviewedExperiment": true
+                }
+              },
+              "geometryOptimization": {
+                "outputTriangles": 2000,
+                "removedMicroscopicFaces": 0,
+                "minimumComponentAreaRatio": 0.015,
+                "volumeUnionVoxelSizeMeters": null,
+                "facetedNormals": true,
+                "profileMaterialCount": 1
+              },
+              "fit": {
+                "authoringFrame": "canonical",
+                "up": "+Y",
+                "front": "+Z",
+                "origin": "fixed skull centre",
+                "canonicalHeadSize": [
+                  0.1992,
+                  0.2397,
+                  0.2189
+                ]
+              }
+            }
+          }
+        }
+      },
+      "fit": {
+        "authoringFrame": "canonical",
+        "up": "+Y",
+        "front": "+Z",
+        "origin": "fixed skull centre",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      }
+    },
     "generatedBust": {
       "reference": {
         "style": "tied",
@@ -55,7 +513,7 @@
         "parameters": {
           "fov": 0.3490658503988659,
           "gsh": null,
-          "gss": 10.0,
+          "gss": 10,
           "matted": true,
           "res": 1024,
           "seed": 1983,
@@ -72,18 +530,277 @@
         "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb"
       }
     },
-    "backend": "pixal3d",
-    "reviewRequired": true,
-    "extraction": {
-      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
-      "selectedFaces": 547702,
-      "fraction": 0.5504775075932854,
-      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
-      "reviewRequired": true
-    },
-    "output": {
-      "sha256": "16743ae257ae31481edd98f97c22c467a63917b94a60b65c68849faeb99f28a4",
-      "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\hair-candidate.glb"
+    "historicalPublishedProvenance": {
+      "style": "tied",
+      "lod": 1,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\lods-2800-2500-2300\\Hair_tied_LOD1.glb",
+      "sourceSha256": "8d1103609fda37a2cda70161dcc004e3a0ae9eef25c7b49fc85c788aab90116d",
+      "outputSha256": "8d4bef31a2817d13e89a4d655425cb25dbd05b9c891ea80785de64064a34594d",
+      "fit": {
+        "sourceSkullCentre": [
+          0,
+          0,
+          0.075
+        ],
+        "scale": 0.52,
+        "rotateBlenderZ": 180,
+        "headReferenceSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      },
+      "removedSmallComponentVertices": 446,
+      "sourceProvenance": {
+        "generatedBust": {
+          "reference": {
+            "style": "tied",
+            "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+            "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+            "crop": [
+              628,
+              30,
+              824,
+              316
+            ],
+            "matte": "birefnet-general-lite",
+            "input": "scratch\\appearance-v02\\tied\\reference.png",
+            "inputSha256": "d8acf4f36c6000f04f968e9756094fdb942ad9415a01265e8668e744cf2c8aeb",
+            "redrawn": false
+          },
+          "backend": "pixal3d",
+          "generation": {
+            "backend": "pixal3d",
+            "components": [],
+            "input": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\reference.png",
+              "sha256": "d8acf4f36c6000f04f968e9756094fdb942ad9415a01265e8668e744cf2c8aeb"
+            },
+            "license": {
+              "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+              "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+            },
+            "output": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
+              "sha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4"
+            },
+            "parameters": {
+              "fov": 0.3490658503988659,
+              "gsh": null,
+              "gss": 10,
+              "matted": true,
+              "res": 1024,
+              "seed": 1983,
+              "steps": 12
+            },
+            "schema_version": 1,
+            "timings_seconds": {
+              "total": 5536.2
+            }
+          },
+          "reviewRequired": true,
+          "output": {
+            "sha256": "431b73378f24067ed11c5c6067d4133d031edb7ad539b9ec359c9c0c0c4256d4",
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb"
+          }
+        },
+        "backend": "pixal3d",
+        "reviewRequired": true,
+        "extraction": {
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\generated.glb",
+          "selectedFaces": 547702,
+          "fraction": 0.5504775075932854,
+          "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+          "reviewRequired": true
+        },
+        "output": {
+          "sha256": "16743ae257ae31481edd98f97c22c467a63917b94a60b65c68849faeb99f28a4",
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\tied\\hair-candidate.glb"
+        }
+      }
     }
+  },
+  "fit": {
+    "authoringFrame": "canonical",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "fixed skull centre",
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "attachmentMetadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "hair/tied",
+    "type": "hair",
+    "anchor": "socket_head_top",
+    "fitCage": "HEAD_CAGE",
+    "fitMode": "conform",
+    "clearance": 0.004,
+    "authoringFrame": "canonical",
+    "sourceStyle": "tied",
+    "projection": "outward",
+    "subdivisions": 0,
+    "attachmentBand": {
+      "minimumY": -0.45
+    },
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "geometryOptimization": {
+    "outputTriangles": 2772,
+    "profileMaterialCount": 1,
+    "facetedNormals": true,
+    "canonicalAuthoring": true,
+    "prototypeTierPolicy": "same source-qualified canonical surface in every declared tier",
+    "geometryAndMaterialBINUnchanged": true,
+    "aliasNameOnly": true
+  },
+  "referenceReview": {
+    "qualification": "independent pinned private-candidate PASS",
+    "sourceSha256": "d4c191df7d9d1b6fac229ed4e559c77d67b862353fc5b673fda70c61e1522364",
+    "evidence": "artifacts/appearance-pass/agent-d/tied-alpha-v11-matrix/verdict.json",
+    "evidenceSha256": "b5b426eb3390bfb6dc14eabbc1ee9ea6a3e40bbcfb841520484162d256bf1dc3",
+    "candidateVerdict": "PASS",
+    "scope": "Immutable candidate only; public publication/build/production UI validation pending",
+    "testedMetadata": {
+      "version": "pillagers-fit/0.1",
+      "id": "hair/tied",
+      "type": "hair",
+      "anchor": "socket_head_top",
+      "fitCage": "HEAD_CAGE",
+      "fitMode": "conform",
+      "clearance": 0.004,
+      "authoringFrame": "canonical",
+      "sourceStyle": "tied",
+      "projection": "outward",
+      "subdivisions": 0,
+      "attachmentBand": {
+        "minimumY": -0.45
+      },
+      "canonicalHeadSize": [
+        0.1992,
+        0.2397,
+        0.2189
+      ]
+    },
+    "testedImplementation": [
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/appearance-review.js?t=1790981141028",
+        "sha256": "c3d5c790e26e9737809fe4dfa4eacf6e14d86cae7a9e0f7bff64489d434782fa",
+        "bytes": 49312
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFactory.ts?t=1790981141028",
+        "sha256": "0c2ca4c2bef482482e197487b010bc93f01a2981c6b86e22b82d6954eee2e772",
+        "bytes": 21184
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GoldenCharacters.ts",
+        "sha256": "6794088ed4ccf477c7f3a9a58262d51c664a8fee60a78b2bfe7ba56f913bba1a",
+        "bytes": 8921
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssets.ts?t=1790958586645",
+        "sha256": "1e37b007f1c5f9f47562ac6391f7f641bff214c4a15c0c717aef2400cac1b762",
+        "bytes": 24199
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHumanProfile.ts?t=1790958586645",
+        "sha256": "1dc276b995d3c7ef0b0bb916c834b87ce1f9fa7ae2bb6d93ad88cf060865e001",
+        "bytes": 12936
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/fitted-geometry-audit.mjs?t=1790975599126",
+        "sha256": "e842cafb74f52ef098e1458a55b1021e009c26ba09c019e0613a7110123236b1",
+        "bytes": 15201
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterDNA.ts",
+        "sha256": "ffe0633da1dbfcbf2f66eca19c75a6e5fe1ace47cf377dfa5d45d3f8ccd2cf5e",
+        "bytes": 28757
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/generatePhenotype.ts",
+        "sha256": "1f5d86cf38e53f6ab12f37b4d56d4e008171db17da995b49143825a71df7bbe7",
+        "bytes": 11472
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHuman.ts?t=1790981141028",
+        "sha256": "b7495b820400db1e9e9aa7a6040f60ad3abfe705476736bf45536f9e796fdef4",
+        "bytes": 49503
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/AttachmentContract.ts?t=1790958586645",
+        "sha256": "af7ae649075f54372dfbb5450cb258a0075e8d9f1d3bc40bdbabe35a8cd2b287",
+        "bytes": 24988
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/seededRandom.ts",
+        "sha256": "47adc048e465a34962efe4bbcf5c34d57a8074c0c8c9836588f0ab7b2925b652",
+        "bytes": 2097
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/ReferenceGarmentFrames.ts",
+        "sha256": "48da0d843405af5a551699374ab2c6501c83ba9996d6913fb6f75f0d0c69b2ac",
+        "bytes": 20068
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssetMeasurements.ts",
+        "sha256": "b93b6589488eeec197265a56d31c209330fd738b5af61d0ad08a262c8ad50d98",
+        "bytes": 48951
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAppearance.ts?t=1790958586645",
+        "sha256": "fc47dd2eb0838253573cafee33615c46936b8c1b659d8041abce9a9f856e1ec0",
+        "bytes": 6768
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/heritageProfiles.ts",
+        "sha256": "7a32de2110ecc6be588d2ddb1db4490c79e65aaf61857c38e10613aec2868552",
+        "bytes": 5971
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFrames.ts",
+        "sha256": "6c89ab981edc9a9833414bcd181eed3ef59f9620849091484e0acaf35ac2dac1",
+        "bytes": 21913
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SoftBodySpring.ts",
+        "sha256": "e2795000e8e08a62352436909680641c56d84aea6a4c59c45eec9174681809e0",
+        "bytes": 2850
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SkinTint.ts",
+        "sha256": "bcdb38a3df881e6742563848f89b309f444e92852b31f4deb0147ca6d92879e0",
+        "bytes": 5109
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFitSystem.ts?t=1790958586645",
+        "sha256": "645db274b67ff57a3c752262cfab356063ef016c2fa1e0712aa292e9c3018e55",
+        "bytes": 50296
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/AppearanceModules.ts?t=1790978392410",
+        "sha256": "9dbbdcd715f141255ff940c5952eb179d806b8edf56627d62f0ce78a1fd3d657",
+        "bytes": 46470
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GarmentFit.ts?t=1790981141028",
+        "sha256": "e864c3fbe09e02429a0a84b0a1af0643d344c7db7011d632caaaf4d3c2454e07",
+        "bytes": 142737
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFit.ts?t=1790958586645",
+        "sha256": "a5d057b88c4de777f4a4cda2a1e01ac7750e3fe0c80fb77f752602f1c7533ea8",
+        "bytes": 3330
+      }
+    ],
+    "finalActualPublicGate": "pending final registry/build and independent actual-public Character Lab review"
   }
 }

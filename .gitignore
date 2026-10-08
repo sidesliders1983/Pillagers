@@ -11,3 +11,6 @@ trellis-test-error.png
 __pycache__/
 scripts/sprites/imagegen-input.local.json
 public/sprites/imagegen-drafts/
+
+# Meshy server-side credentials: never commit or expose through Vite.
+.env.meshy.local

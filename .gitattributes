@@ -1,0 +1,5 @@
+# Published authoring evidence contains exact-byte SHA256 references.
+# Preserve generated metadata bytes across Windows and CI checkouts.
+public/appearance/**/*.provenance.json -text
+public/clothing/**/*.provenance.json -text
+public/clothing/**/garment-bind.json -text

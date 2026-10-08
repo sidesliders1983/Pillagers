@@ -22,7 +22,11 @@ changes. Animation continues through the existing PillagersHumanRig.
   the canonical head frame before fitting. This is a one-time asset import
   calibration, not a per-character adjustment. Future assets should be
   exported directly in the canonical frame.
-- Garments use canonical full-body bind coordinates. Equipment uses the
+- Garments use canonical full-body bind coordinates. `garmentBind.joints` records
+  measured generated-source neutral joint positions in that same frame. The fit
+  system maps the source stance to `fit.canonicalJoints`, captured from the rig
+  before morphology. This is asset calibration, never a per-DNA offset.
+  Equipment uses the
   selected socket's local origin and neutral +Y/+Z orientation.
 
 ## Stable sockets
@@ -74,13 +78,42 @@ These are fitting data, not additional body render meshes. Debug triangulates
 them only when requested. Cage debug vertices follow their source skin anchors
 without recalculating convex hulls or fitting modules in the frame loop.
 
-Head module fitting uses the HEAD_CAGE collision surface and normalized
-attachment bands. Beard attachment bands define the lower-face contact;
-free beard lengths remain outside that band. Stubble retessellates existing
+Head module fitting uses the HEAD_CAGE collision surface and a separate
+authored skull frame for dimensions/origin. Legacy bodies alias that frame to
+their unchanged HEAD_CAGE. A calibrated source may include lower-chin collision
+vertices without enlarging its module authoring frame. Beard attachment bands define the lower-face contact;
+the contact band includes the measured chin and under-chin at every body LOD
+(the lowest under-chin anchor is approximately -0.54 skull heights). Free beard
+lengths remain outside that band. Automatic and explicitly equipped head modules
+use the same skull-frame dimensions/origin while LOWER_FACE_CAGE resolves jaw fit.
+Stubble retessellates existing
 source triangles before shell fitting. Hair triangle interiors also receive
 clearance checks; UV/flat-shading copies move together. Imported extraction
 cleanup is declared in module metadata (`trim`), not a character preset rule.
 Only existing reference geometry is used, with no generated replacement styles.
+
+### Source-authored body surface calibration
+
+pillagers-body-surface/1 is optional, versioned body-source metadata; the module
+contract remains pillagers-fit/0.1. It declares ordered neutral positions and
+indices, semantic coverage, immutable common-part memberships, cage regions,
+landmark indices and the skull module-frame subset. The trusted source catalog
+binds it to an exact GLB SHA-256. CharacterFactory validates correspondence to
+the loaded source, and CharacterFitSystem rechecks each cloned body neutral
+topology before using it. Unknown fields, stale source identity, malformed or
+split-copy memberships, incompatible cage zones and overlapping immutable cores
+are rejected. Validation owns a frozen defensive copy. Direct array comparison
+works on ordinary LAN HTTP without WebCrypto.
+
+Calibrated landmarks and cages follow the same morphed/skinned source vertices
+as the render body. Metadata is loaded lazily for that selected body source;
+World and uncalibrated legacy bodies keep their existing classification and
+frames. This is a deliberate topology migration, never a per-DNA fitting offset
+or a runtime heuristic that expands every body head region. The r2 Golden
+preview complete head collision region has 877 corner records, while its
+859-record module frame remains exactly the previous frame. This establishes
+source correspondence, not acceptance of the complete morphology range or of
+any hair/beard/garment on the new body.
 
 ## Module metadata and extension API
 
@@ -101,9 +134,14 @@ factory.unequip(character, 'tunic_basic_01');
 Hair/beard slots replace their previous same-type modules, garment slots
 replace a previously equipped garment in that slot, and equipment can coexist.
 Changing DNA refits equipped modules from their immutable source geometry.
-Adult male eligibility also applies to registered beard modules. The Lab
-keeps automatic profile assignment; no manual hairstyle/beard selectors were
-added. Contract metadata is available from `character.fit.snapshot()`.
+Adult male eligibility also applies to registered beard modules. Automatic profile
+assignment remains the default. Issue #18 deliberately supersedes the earlier
+profile-only Lab UI: registry-based Auto/None/manual choices are presentation
+inspection tools, and they use this same factory/socket/cage path. Manual choices
+do not change DNA or approve an asset. Beard eligibility still uses the real
+derived sex and age 18+. Contract metadata is available from
+`character.fit.snapshot()`; Lab diagnostics also report the selected presentation
+and the separately resolved body override.
 
 Canonical hair and masks use the skull-centred cage frame; rigid equipment
 uses its socket directly. Generated reference hair/beards share the existing
@@ -112,30 +150,54 @@ fitting implementation, with rules selected by metadata.
 ## Clothing and coverage
 
 Garments are separate owned SkinnedMeshes sharing the existing body's
-skeleton and bind matrix. The source's loose silhouette and open hem are
-retained. Cage axis deformation handles morphology, and convex-envelope
-clearance expands intersecting vertices outward rather than copying body
-facets. Four nearest canonical body vertices transfer and normalize weights
-using a k-d tree. Full/over garment hems below the torso attach to Hips rather
-than independently pulling apart with each leg. Material regions are retained.
+skeleton and bind matrix. Measured reference garments bake their native pose
+into the canonical 17-joint frame during authoring. Transverse source-cage
+calibration also accounts for the actual source torso depth and width; joint
+locations alone cannot measure those dimensions. This is recorded source
+calibration, not a style or DNA adjustment in the runtime fitter.
 
-The initial fitting uses simple envelopes, not cloth simulation. Real sleeve,
-hem and belt authoring still need asset review; v0.1 does not promise a perfect
-fit for arbitrary uncalibrated garments.
+Runtime morphology transports each measured source point through an exact
+canonical body-triangle anchor and its barycentric coordinates, retaining a
+bounded source stand-off vector. A continuous waist field joins torso transport
+to the pelvis-owned free drape. Collision clearance is applied once when the
+module is equipped. Measured regional garments transfer and normalize the
+existing skin weights through actual body-triangle barycentric coordinates;
+the legacy unmeasured path uses four nearest canonical body vertices. Free
+hems follow Hips, rather than separate leg poses. The
+original facets, UVs, material regions and loose silhouette remain the authority.
+Legacy unmeasured garments retain the simpler cage/envelope path.
+
+Coincident copies at genuine sewn seams share fitted positions and weights.
+UV copies retain the interpolation of their own source face, including when
+a geometric edge support is shared across two atlas tiles. Sharing a support
+position never authorizes copying a neighbouring face's texture coordinates.
+Physically separate wear layers must be separated in source authoring; a free
+cloth hem welded to trousers cannot be corrected by averaging both layers'
+animation weights. Open collars, cuffs and free hems are intentional boundaries,
+but disconnected seam fans and accidental gaps are not. This fitting and
+skinning path is not cloth simulation and still requires native-source and
+animated browser review.
 
 Coverage zones: HEAD, NECK, TORSO_UPPER, TORSO_LOWER, PELVIS,
 UPPER_ARM_L/R, LOWER_ARM_L/R, UPPER_LEG_L/R, LOWER_LEG_L/R, FEET.
-Zones are derived from canonical position and dominant animation weights,
-so morphology does not change their meaning. `maskBody(covers)` hides fully
+Uncalibrated legacy zones are derived from canonical position and dominant animation weights;
+calibrated bodies use validated authored source memberships. In both paths,
+morphology does not change their meaning. `maskBody(covers)` hides fully
 covered triangles using an owned index copy. Removing coverage restores the
 immutable body geometry; base positions, morphs and cached assets never change.
 Boundary triangles are retained to avoid holes at garment edges.
 
-The existing brown waist wrap is still the technical shared-rig demonstrator,
-not finished reference clothing. Issue #10's generated clothing candidates
-are unreviewed/unrigged and are not published by this issue. Upper and long
-garment contract validation uses explicitly technical in-memory test fixtures;
-these never appear as replacement artwork in Character Lab.
+Published reference outfits deliberately use `covers: []`: the full character
+remains underneath clothing. Broad-zone hiding can expose a hollow torso through
+open cuffs/hems and must not substitute for correcting garment fit.
+
+The brown waist wrap is a technical shared-rig demonstrator and is omitted when
+a reference outfit is equipped. The current registry contains three generated
+full ensembles: cream tunic, long dress and mantle tunic. Their replacement
+optimization candidates remain unqualified until source, fit, motion and
+independent visual checks pass. Upper and long garment contract tests also use
+explicitly technical in-memory fixtures; these never appear as replacement
+artwork in Character Lab.
 
 ## Character Lab validation
 
@@ -163,3 +225,16 @@ Validation:
 
 No hair/cloth physics, new asset generation or wardrobe content belongs to
 this contract milestone. Actual reference clothing acceptance remains #10.
+
+### Optional source contact zones
+
+A fitted module may declare a unique nonempty fitContactZones list. CharacterFitSystem.contactVolume derives the exact authored cage-member intersection with validated coverage, retaining complete cages for collision. Explicit selectors fail closed without source calibration, on stale neutral correspondence or insufficient/nonfinite regions. Absent selectors retain the legacy path. Current fitting consumption is beard width only; other consumers reject explicit selectors. A beard with fitContactZones HEAD therefore follows the fixed jaw without widening from neck/body girth. Fit runs in neutral bind pose after refit; points stay in canonical root metres and the existing root0.8 scale is not duplicated.
+
+
+### v0.4 source compatibility and measured rigid carry
+
+New Lab modules declare the exact Golden body asset ID and GLB SHA-256 in the canonical registry. Auto and manual selections filter by that identity; legacy modules remain available for their original body. A registered v0.4 source cannot be replaced by a privately overridden path or metadata object.
+
+Rigid equipment now requires an item-local measured grip frame and an explicit subset of canonical hand/hip/back socket carry frames. Each frame has a metre position and unit quaternion. The shared attachment transform is socket-local carry multiplied by inverse item-local grip; changing supported carry leaves item geometry untouched. Unsupported carry is rejected before fetching an asset. This is Lab presentation/snapshot state, independent of CharacterDNA.
+
+Mapless v0.4 garments preserve absent UVs and their COLOR_0 attribute through shared regional refinement. Source footwear surfaces are aggregated before calibrating each side, preventing separate boots from overwriting the opposite side with empty bounds. The 26 targeted consumer/presentation/candidate checks passed on 2026-10-03; those checks do not qualify pending module visual fit.

@@ -1,0 +1,88 @@
+{
+  "schema": "pillagers-v04-module-provenance/1",
+  "outputSha256": "128826eefc475d915d227579656db86e5e2c96f02682f41e2626ebd05dbab0a3",
+  "reviewRequired": true,
+  "scope": "lab-v04-prototype",
+  "sourceSha256": "542609505565ea119fa74f17b1bd01b5a597f483daa65bb91adcadcf7d2dd08a",
+  "sourceProvenance": {
+    "generation": {
+      "backend": "meshy",
+      "model": "meshy-t2",
+      "taskId": "01a1038e-367a-753b-98d0-6daba89ffdb6",
+      "input": {
+        "file": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/hair-short-isolated-r2.png",
+        "sha256": "3edc5379484fa98402cca3d7af8569d565b6ca1693da12669ec170f8f1a828f8"
+      },
+      "parameters": {
+        "model_type": "smart-topology",
+        "ai_model": "meshy-t2",
+        "target_polycount": 320,
+        "should_texture": false,
+        "enable_pbr": false,
+        "pose_mode": "",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "output": {
+        "sha256": "542609505565ea119fa74f17b1bd01b5a597f483daa65bb91adcadcf7d2dd08a"
+      },
+      "workflowAuthorizationSHA256": "a89911b75b91a0f41f4551a97dd6b4bfec69156a44b3a852c29d028c97d6cd97"
+    }
+  },
+  "imageGeneration": {
+    "schema": "pillagers-imagegen-reference/1",
+    "candidate": 2,
+    "tool": "image_gen.imagegen",
+    "original": "C:/Users/Devoteam/.codex/generated_images/01a0f2c0-b540-78d1-8a04-060b16cf5c0c/exec-677c5b74-48c0-4ad1-881e-0a62f7011fe0.png",
+    "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/hair-short-concept-r2.png",
+    "sha256": "7eaf3ceb8d08b0807db281f1e190b61979cbb7aadf458c2d2d7d30c3a3c8a3ff",
+    "prompt": "scratch/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/concept-r2.prompt.txt",
+    "promptSHA256": "e026f4f7154f6d6c00197b69711f8fb9e3dbb0490258d58389bc1aa14b06bc7d",
+    "references": [
+      {
+        "path": "artifacts/character-lab-v04/beard-v04-pilot/head-reference/r3-neutral-head-front.png",
+        "sha256": "73a33c74c7ced716912c940216190e5084ea67b08517d8643ad67e43762879d9"
+      },
+      {
+        "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/hair-short-only-r1.png",
+        "sha256": "f3d025fff89aeb6d90f4dc40f00770deefd6c8d750cdeb654b35eb2148e4cafe"
+      }
+    ],
+    "reason": "First source repair exhausted: intersection/topology and scalp reveal HOLD; coherent short scalp shell replacement",
+    "providerJobs": 0,
+    "status": "PENDING_INDEPENDENT_2D_REVIEW",
+    "isolation": {
+      "original": "C:/Users/Devoteam/.codex/generated_images/01a0f2c0-b540-78d1-8a04-060b16cf5c0c/exec-2c92c09f-98f6-48ba-8a95-3f4ffbd20caa.png",
+      "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/hair-short-isolated-r2.png",
+      "sha256": "3edc5379484fa98402cca3d7af8569d565b6ca1693da12669ec170f8f1a828f8",
+      "conceptSHA256": "7eaf3ceb8d08b0807db281f1e190b61979cbb7aadf458c2d2d7d30c3a3c8a3ff",
+      "status": "INDEPENDENT_INPUT_REVIEW_PASS",
+      "prompt": "scratch/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/isolation-r2.prompt.txt",
+      "promptSHA256": "42ce62b1368aa9d327410a030a216374211b06e9ce2acc19f128c0a4e1a8f27a"
+    }
+  },
+  "v04Canonicalization": {
+    "authoringReceiptSHA256": "f862d6117b8b33a64c43a8ce3c99ecbc6343cf673d679335302fae84df2ad388",
+    "frame": "canonical",
+    "noPreV04Reuse": true,
+    "schema": "pillagers-v04-canonical-source/1",
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "body": {
+      "id": "lab-body/golden-v04-candidate-002-r3",
+      "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+    },
+    "inputMeshSHA256": "542609505565ea119fa74f17b1bd01b5a597f483daa65bb91adcadcf7d2dd08a",
+    "authoringReceipt": "/character-lab/modules/v04/hair/short/short.authoring.json"
+  },
+  "review": {
+    "status": "pending-independent-browser",
+    "accepted": false,
+    "neutralArt": {
+      "path": "artifacts/character-lab-v04/vertical-slice-qa/short-affine001-A-independent-review/REVIEW.json",
+      "sha256": "05195fa7a25fca0ad86419cb1557a62b8ef8fb5817aa16562cb2218b1f28f283"
+    }
+  }
+}

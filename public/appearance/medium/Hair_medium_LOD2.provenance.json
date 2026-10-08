@@ -1,25 +1,148 @@
 {
+  "reviewRequired": false,
+  "kind": "hair",
   "style": "medium",
   "lod": 2,
-  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\lods-1600-1100-800\\Hair_medium_LOD0.glb",
-  "sourceSha256": "59191c9be57c78604d1676cc1a534d35aa090d41e3de2538271f1bc683c6c41e",
-  "outputSha256": "1dae74e7484a50965da43b3c2af2dbb866a84786fbaaf66471fa1592474bd54a",
-  "fit": {
-    "sourceSkullCentre": [
-      0,
-      0,
-      0.075
-    ],
-    "scale": 0.52,
-    "rotateBlenderZ": 180,
-    "headReferenceSize": [
-      0.1992,
-      0.2397,
-      0.2189
-    ]
-  },
-  "removedSmallComponentVertices": 250,
+  "source": "scratch/appearance-pass/agent-a/cage-clean-v8/hair/medium/Hair_medium_LOD2.glb",
+  "sourceSha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a",
+  "outputSha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a",
   "sourceProvenance": {
+    "outputSha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a",
+    "qualifiedCandidateAuthoring": {
+      "reviewRequired": true,
+      "style": "medium",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\final\\hair\\medium\\Hair_medium_LOD2.glb",
+      "sourceSha256": "92f1c62b5969d86c0e13109c3f0f236f5cbb7c0af74f079bbec2eef8a7c779b6",
+      "outputSha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a",
+      "sourceProvenance": {
+        "reviewRequired": true,
+        "style": "medium",
+        "lod": 2,
+        "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\raw-first-v4\\hair\\medium\\Hair_medium_LOD2.glb",
+        "sourceSha256": "3ca0753f2482d6b18a0df46a6266cd2a8f6031d0b27451265b466dac7a155af3",
+        "outputSha256": "92f1c62b5969d86c0e13109c3f0f236f5cbb7c0af74f079bbec2eef8a7c779b6",
+        "sourceProvenance": {
+          "reviewRequired": true,
+          "style": "medium",
+          "lod": 2,
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb",
+          "sourceSha256": "6a11a112f44ced668c8047fa3fd0025b5dd7c17bd255a18198501ba713c0ec98",
+          "outputSha256": "3ca0753f2482d6b18a0df46a6266cd2a8f6031d0b27451265b466dac7a155af3",
+          "sourceProvenance": {
+            "reference": {
+              "style": "medium",
+              "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+              "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+              "crop": [
+                235,
+                30,
+                430,
+                316
+              ],
+              "matte": "birefnet-general-lite",
+              "input": "scratch\\appearance-v02\\medium\\reference.png",
+              "inputSha256": "28e42a2ed5fecafa3bb23c21eb4c2715d46df881f868f78edbebe2afa0ca3ea1",
+              "redrawn": false
+            },
+            "backend": "pixal3d",
+            "generation": {
+              "backend": "pixal3d",
+              "components": [],
+              "input": {
+                "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\reference.png",
+                "sha256": "28e42a2ed5fecafa3bb23c21eb4c2715d46df881f868f78edbebe2afa0ca3ea1"
+              },
+              "license": {
+                "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+                "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+              },
+              "output": {
+                "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb",
+                "sha256": "6a11a112f44ced668c8047fa3fd0025b5dd7c17bd255a18198501ba713c0ec98"
+              },
+              "parameters": {
+                "fov": 0.3490658503988659,
+                "gsh": null,
+                "gss": 10,
+                "matted": true,
+                "res": 1024,
+                "seed": 1983,
+                "steps": 12
+              },
+              "schema_version": 1,
+              "timings_seconds": {
+                "total": 3922.8
+              }
+            },
+            "reviewRequired": true,
+            "output": {
+              "sha256": "6a11a112f44ced668c8047fa3fd0025b5dd7c17bd255a18198501ba713c0ec98",
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb"
+            }
+          },
+          "geometryOptimization": {
+            "rawTriangles": 966626,
+            "fullBustTriangleBudget": 4500,
+            "outputTriangles": 1720,
+            "extractionOrder": "optimize closed reference bust, then classify reduced source surfaces",
+            "classification": {
+              "minValue": 0.03,
+              "maxValue": 0.69,
+              "maxSaturation": 0.65
+            },
+            "microIslandArea": 0.015
+          },
+          "fit": {
+            "authoringFrame": "canonical",
+            "up": "+Y",
+            "front": "+Z",
+            "origin": "fixed skull centre",
+            "canonicalHeadSize": [
+              0.1992,
+              0.2397,
+              0.2189
+            ]
+          }
+        },
+        "geometryOptimization": {
+          "outputTriangles": 1720,
+          "removedUnrelatedIslandFaces": 0,
+          "facetedNormals": true,
+          "profileMaterialCount": 1
+        },
+        "fit": {
+          "authoringFrame": "canonical",
+          "up": "+Y",
+          "front": "+Z",
+          "origin": "fixed skull centre",
+          "canonicalHeadSize": [
+            0.1992,
+            0.2397,
+            0.2189
+          ]
+        }
+      },
+      "geometryOptimization": {
+        "outputTriangles": 867,
+        "removedUnrelatedIslandFaces": 3,
+        "removedAnatomicalFaces": 850,
+        "repairedEnclosedHoleFaces": 0,
+        "facetedNormals": true,
+        "profileMaterialCount": 1
+      },
+      "fit": {
+        "authoringFrame": "canonical",
+        "up": "+Y",
+        "front": "+Z",
+        "origin": "fixed skull centre",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      }
+    },
     "generatedBust": {
       "reference": {
         "style": "medium",
@@ -55,7 +178,7 @@
         "parameters": {
           "fov": 0.3490658503988659,
           "gsh": null,
-          "gss": 10.0,
+          "gss": 10,
           "matted": true,
           "res": 1024,
           "seed": 1983,
@@ -72,33 +195,187 @@
         "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb"
       }
     },
-    "backend": "pixal3d",
-    "reviewRequired": true,
-    "extraction": {
-      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb",
-      "selectedFaces": 448258,
-      "fraction": 0.4637318027956865,
-      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
-      "reviewRequired": true
-    },
-    "output": {
-      "sha256": "93f10a2d282e15105bfd5251b1e7cec402ad87ec43efd3c4b5c20d086657557e",
-      "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\hair-candidate.glb"
+    "historicalPublishedProvenance": {
+      "style": "medium",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\lods-1600-1100-800\\Hair_medium_LOD0.glb",
+      "sourceSha256": "59191c9be57c78604d1676cc1a534d35aa090d41e3de2538271f1bc683c6c41e",
+      "outputSha256": "1dae74e7484a50965da43b3c2af2dbb866a84786fbaaf66471fa1592474bd54a",
+      "fit": {
+        "sourceSkullCentre": [
+          0,
+          0,
+          0.075
+        ],
+        "scale": 0.52,
+        "rotateBlenderZ": 180,
+        "headReferenceSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      },
+      "removedSmallComponentVertices": 250,
+      "sourceProvenance": {
+        "generatedBust": {
+          "reference": {
+            "style": "medium",
+            "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+            "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+            "crop": [
+              235,
+              30,
+              430,
+              316
+            ],
+            "matte": "birefnet-general-lite",
+            "input": "scratch\\appearance-v02\\medium\\reference.png",
+            "inputSha256": "28e42a2ed5fecafa3bb23c21eb4c2715d46df881f868f78edbebe2afa0ca3ea1",
+            "redrawn": false
+          },
+          "backend": "pixal3d",
+          "generation": {
+            "backend": "pixal3d",
+            "components": [],
+            "input": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\reference.png",
+              "sha256": "28e42a2ed5fecafa3bb23c21eb4c2715d46df881f868f78edbebe2afa0ca3ea1"
+            },
+            "license": {
+              "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+              "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+            },
+            "output": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb",
+              "sha256": "6a11a112f44ced668c8047fa3fd0025b5dd7c17bd255a18198501ba713c0ec98"
+            },
+            "parameters": {
+              "fov": 0.3490658503988659,
+              "gsh": null,
+              "gss": 10,
+              "matted": true,
+              "res": 1024,
+              "seed": 1983,
+              "steps": 12
+            },
+            "schema_version": 1,
+            "timings_seconds": {
+              "total": 3922.8
+            }
+          },
+          "reviewRequired": true,
+          "output": {
+            "sha256": "6a11a112f44ced668c8047fa3fd0025b5dd7c17bd255a18198501ba713c0ec98",
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb"
+          }
+        },
+        "backend": "pixal3d",
+        "reviewRequired": true,
+        "extraction": {
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\generated.glb",
+          "selectedFaces": 448258,
+          "fraction": 0.4637318027956865,
+          "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+          "reviewRequired": true
+        },
+        "output": {
+          "sha256": "93f10a2d282e15105bfd5251b1e7cec402ad87ec43efd3c4b5c20d086657557e",
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\medium\\hair-candidate.glb"
+        }
+      },
+      "qualitySource": {
+        "publishedLOD": 0,
+        "sha256": "cff8f9c1ca2e01a829f6e36e523a58883972b228570f9148de6a2814654db137",
+        "triangles": 1256,
+        "reason": "Preserve the already generated reference surface at Character Lab viewing distances; no additional reduction"
+      },
+      "reviewRequired": false,
+      "fitReview": {
+        "date": "2026-10-02",
+        "checks": [
+          "front/side/back at Character Lab distances",
+          "shared seam vertices during skull fit",
+          "reported long and tied seeds"
+        ]
+      }
     }
   },
-  "qualitySource": {
-    "publishedLOD": 0,
-    "sha256": "cff8f9c1ca2e01a829f6e36e523a58883972b228570f9148de6a2814654db137",
-    "triangles": 1256,
-    "reason": "Preserve the already generated reference surface at Character Lab viewing distances; no additional reduction"
-  },
-  "reviewRequired": false,
-  "fitReview": {
-    "date": "2026-10-02",
-    "checks": [
-      "front/side/back at Character Lab distances",
-      "shared seam vertices during skull fit",
-      "reported long and tied seeds"
+  "fit": {
+    "authoringFrame": "canonical",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "fixed skull centre",
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
     ]
+  },
+  "attachmentMetadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "hair/medium",
+    "type": "hair",
+    "anchor": "socket_head_top",
+    "fitCage": "HEAD_CAGE",
+    "fitMode": "conform",
+    "clearance": 0.004,
+    "authoringFrame": "canonical",
+    "sourceStyle": "medium",
+    "projection": "outward",
+    "subdivisions": 0,
+    "attachmentBand": {
+      "minimumY": -0.45
+    },
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "geometryOptimization": {
+    "outputTriangles": 867,
+    "profileMaterialCount": 1,
+    "facetedNormals": true,
+    "canonicalAuthoring": true,
+    "prototypeTierPolicy": "same source-qualified canonical surface in every declared tier",
+    "geometryAndMaterialBINUnchanged": true,
+    "aliasNameOnly": false
+  },
+  "referenceReview": {
+    "qualification": "independent pinned private-candidate PASS",
+    "sourceSha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a",
+    "evidence": "artifacts/appearance-pass/agent-d/cage-pair-matrix/verdict.json",
+    "evidenceSha256": "9165e8806799f4d5870897c58271a96a5680434f2a7b52cb234aa9d7462d30a7",
+    "candidateVerdict": "PASS tested candidate/source graph. Continuous faceted crown across morphology extremes, no visible scalp pinholes, prior anatomy cheek/chin ring removed. Nape tips are continuous authored locks. Ratio1.3 intentionally increases hair/head clearance; that spacing is not a detached seam. Idle/Walk/Run preserve attachment with no unacceptable head/neck intersections in inspected views.",
+    "scope": "Reuse this qualification only if public GLB SHA, effective canonical metadata and relevant hair fit behavior remain unchanged; then run final public registry validation/build and real Character Lab desktop/mobile UI smoke. This is not overall library acceptance.",
+    "testedMetadata": {
+      "version": "pillagers-fit/0.1",
+      "id": "hair/medium",
+      "type": "hair",
+      "anchor": "socket_head_top",
+      "fitCage": "HEAD_CAGE",
+      "fitMode": "conform",
+      "clearance": 0.004,
+      "authoringFrame": "canonical",
+      "sourceStyle": "medium",
+      "projection": "outward",
+      "subdivisions": 0,
+      "attachmentBand": {
+        "minimumY": -0.45
+      },
+      "canonicalHeadSize": [
+        0.1992,
+        0.2397,
+        0.2189
+      ]
+    },
+    "testedImplementation": {
+      "AppearanceModules_transformedResponseSHA256": "8c8dc58e3970f88e2a97e94d8ab2370794fc9fc551744c3ea78511dc43f24ba0",
+      "AttachmentContract_transformedResponseSHA256": "af7ae649075f54372dfbb5450cb258a0075e8d9f1d3bc40bdbabe35a8cd2b287",
+      "ReferenceHeadFit_transformedResponseSHA256": "a5d057b88c4de777f4a4cda2a1e01ac7750e3fe0c80fb77f752602f1c7533ea8",
+      "remainingHashesAndEffectiveMetadata": "report.json",
+      "HMR": "Blocked during capture to pin the loaded source graph"
+    },
+    "finalActualPublicGate": "pending final registry/build and independent actual-public Character Lab review"
   }
 }

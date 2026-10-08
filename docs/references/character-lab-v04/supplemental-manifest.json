@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "referenceSet": "pillagers-character-lab-v04-supplemental",
+  "date": "2026-10-03",
+  "additiveTo": "manifest.json",
+  "publicationStatus": "Source image remains private/task-attached. Only source metadata is recorded; no public image copy or publication permission.",
+  "files": [
+    {
+      "id": "body-extremes-2026-10-03",
+      "originalFilename": "1-Foto-1.jpg",
+      "attachmentId": "B34980C8-77EE-4E71-A1D5-8400D9A66E8B",
+      "sha256": "7b5f890c3e0c4d31af7b7d5035136bde967c6a63e52897f0b9907305a203b766",
+      "bytes": 149602,
+      "width": 1280,
+      "height": 960,
+      "purpose": "Latest adult body proportion and extreme-silhouette authority for Giant, Raven, Bear, Fox, Elder and Jarl",
+      "authority": "Explicit latest human body-extremes reference; higher than older generated body experiments, subordinate to explicit shared-part/presentation constraints",
+      "imageLocationPolicy": "Use the original readable task attachment; do not copy to public or publish source pixels",
+      "humanInstruction": "Bijgevoegd zijn referenties voor de uiterste deformaties als onderdeel van de character lab",
+      "instructionEvidence": "Trusted coordinator relay and independent Art Guardian morphology authority addendum",
+      "preservedConstraints": {
+        "adultCommonHeadHandsFeet": true,
+        "adultCommonPartShapeLock": true,
+        "adultBoundsTolerance": 0.05,
+        "centralBodyShapeStrength": 0.6,
+        "maximumAdultHeightMetres": 1.6,
+        "fullAbdomenOpaqueWhite": true
+      },
+      "notAuthorized": [
+        "Enlarged common head/hands/feet per body mass",
+        "Individual toes",
+        "Painted folds or anatomical microdetail",
+        "Exposed Fox abdomen",
+        "Invented universal big-head ratio",
+        "Six unrelated generated body meshes",
+        "3D asset acceptance or rig migration",
+        "Additional provider spending"
+      ]
+    }
+  ]
+}

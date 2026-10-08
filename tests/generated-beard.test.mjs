@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {Vector3} from 'three';
 import {load} from './load-source.mjs';
+import {readGLB,geometryGLTF} from '../scripts/characters/glb-inspection.mjs';
 const {beardAssetPath}=load('../src/character-lab/GeneratedBeard.ts');
 const {appearanceModules,disposeModules}=load('../src/character-lab/AppearanceModules.ts');
 test('all reference beards have verified provenance, owned geometry and the profile hair colour',async()=>{
@@ -14,8 +14,17 @@ test('all reference beards have verified provenance, owned geometry and the prof
   assert.equal(record.outputSha256,createHash('sha256').update(bytes).digest('hex'));
   assert.equal(new URL(path,'https://local.test').searchParams.get('v'),record.outputSha256.slice(0,12));
   assert.equal(record.reviewRequired,false);
-  assert.ok(record.removedSmallComponentVertices>=0);
-  const asset=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+  const cleanup=[];
+  const inspect=value=>{if(!value||typeof value!=='object')return;for(const [key,child]of Object.entries(value)){
+   if(/^removed.*(?:Faces|Vertices)$/i.test(key))cleanup.push(child);
+   if(child&&typeof child==='object')inspect(child);
+  }};
+  inspect(record);
+  assert.ok(cleanup.length>0&&cleanup.every(value=>Number.isFinite(value)&&value>=0),'reference cleanup metrics must remain in the authoring chain');
+  // This test owns geometry/profile tint and size semantics. Embedded MASK
+  // textures are decoded by the independent browser pass; Node has no image
+  // decoder. Geometry inspection retains the exact source accessors/BIN.
+  const asset=await geometryGLTF(readGLB(path.split('?')[0]));
   const profile={hairStyle:'short',beardStyle:style,color:'#9b958d',greyAmount:.7};
   const group=appearanceModules(profile,new Vector3(.1992,.2397,.2189),lod,undefined,null,[],asset.scene);
   assert.equal(group.userData.beardAsset,'reference-generated');

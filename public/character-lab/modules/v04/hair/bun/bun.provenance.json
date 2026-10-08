@@ -1,0 +1,205 @@
+{
+  "schema": "pillagers-v04-module-provenance/1",
+  "outputSha256": "3b1b2885c6bc6192b84b2418ecfcb163a3a2ac3ffc41860bc237ef07b383e7c1",
+  "reviewRequired": true,
+  "scope": "lab-v04-prototype",
+  "sourceSha256": "9eeeeb663fbe1bcf38163e048635e2109308edf2c0fb1ac21e4d496e0020d10a",
+  "sourceProvenance": {
+    "outputSha256": "9eeeeb663fbe1bcf38163e048635e2109308edf2c0fb1ac21e4d496e0020d10a",
+    "generation": {
+      "backend": "meshy",
+      "model": "meshy-t2",
+      "taskId": "01a103ec-0460-7247-a1a0-e2a3b5023b1c",
+      "input": {
+        "file": "artifacts/character-lab-v04/head-v04-pipeline/hair-bun/concept/hair-bun-isolated-r1.png",
+        "sha256": "4eb522cc4b3501f43fdf8692fd31f684a4e8878858922d9f1c3a5f45ab14f466"
+      },
+      "output": {
+        "sha256": "9eeeeb663fbe1bcf38163e048635e2109308edf2c0fb1ac21e4d496e0020d10a"
+      },
+      "parameters": {
+        "model_type": "smart-topology",
+        "ai_model": "meshy-t2",
+        "target_polycount": 400,
+        "should_texture": false,
+        "enable_pbr": false,
+        "pose_mode": "",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "workflowAuthorizationSHA256": "a89911b75b91a0f41f4551a97dd6b4bfec69156a44b3a852c29d028c97d6cd97"
+    }
+  },
+  "imageGeneration": {
+    "historicalConceptRecord": {
+      "schema": "pillagers-imagegen-reference/1",
+      "at": "2026-10-03T22:22:22.133Z",
+      "family": "hair-bun",
+      "designCandidate": 1,
+      "status": "INDEPENDENT_CONCEPT_PASS_ISOLATION_PENDING",
+      "tool": "image_gen.imagegen",
+      "mode": "builtin-reference-guided-concept",
+      "original": "C:/Users/Devoteam/.codex/generated_images/01a1027d-0c2c-7481-a438-01b36924e7fd/exec-3c3a6321-2522-41d5-836d-4ae1c5987479.png",
+      "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-bun/concept/hair-bun-concept-r1.png",
+      "sha256": "520e74c7e646c57d7d48ecafa12f84b1b9f55050ac79e3fd33d040a4d420357f",
+      "prompt": "scratch/character-lab-v04/head-v04-pipeline/hair-bun/concept/concept-r1.prompt.txt",
+      "promptSHA256": "86fec049dd20149fcf6540273ec041f12e2696f370a381bad00d8919658da7e5",
+      "references": [
+        {
+          "path": "artifacts/character-lab-v04/beard-v04-pilot/head-reference/r3-neutral-head-front.png",
+          "sha256": "73a33c74c7ced716912c940216190e5084ea67b08517d8643ad67e43762879d9",
+          "role": "actual r3 front identity"
+        },
+        {
+          "path": "artifacts/character-lab-v04/beard-v04-pilot/head-reference/r3-neutral-head-side.png",
+          "sha256": "c4f2af82e9ab16aa179a8a6ab667149965bdbdf3c15a2e2d365f31efdd605c49",
+          "role": "actual r3 side identity"
+        },
+        {
+          "path": "C:/Users/Devoteam/.codex/codex-remote-attachments/01a0f2c0-b540-78d1-8a04-060b16cf5c0c/134035E6-C89B-45A0-864B-B813DF643C1C/1-Foto-1.jpg",
+          "sha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+          "role": "human supplied top-row fifth bun style only"
+        }
+      ],
+      "actualBody": {
+        "id": "lab-body/golden-v04-candidate-002-r3",
+        "path": "/character-lab/candidates/golden-v04/body-r3.glb",
+        "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+      },
+      "providerJobs": 0,
+      "preV04MeshReuse": false,
+      "isolationRun": true,
+      "authorReview": {
+        "status": "CONCEPT_READY_FOR_INDEPENDENT_REVIEW",
+        "observations": [
+          "Coherent warm-brown faceted scalp cap without wisps or strands.",
+          "Compact knot visibly connects to posterior crown, smaller than main scalp mass.",
+          "Hairline above brow; ears/face clear; clean-shaven faceted r3-like head retained."
+        ],
+        "limitations": [
+          "Qualitative raster preservation, not measured identity/topology/cavity/skin-fit proof.",
+          "Large upper-back knot and fuller cap volume require independent art-direction review before isolation."
+        ]
+      },
+      "independentConceptReview": {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/hair-bun-concept-r1.root-review.json",
+        "sha256": "69c7e805b2f8c24706b87755c5efdec4feda2a6101981d0563848716805ffe6b"
+      },
+      "isolation": {
+        "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-bun/concept/hair-bun-isolated-r1.png",
+        "sha256": "4eb522cc4b3501f43fdf8692fd31f684a4e8878858922d9f1c3a5f45ab14f466",
+        "prompt": "scratch/character-lab-v04/head-v04-pipeline/hair-bun/concept/isolation-r1.prompt.txt",
+        "promptSHA256": "e0b54767e14f4fa4d61431c04aa6f37ba661b617c0ac5fef249d1d1cc9d244bd",
+        "provenance": "artifacts/character-lab-v04/head-v04-pipeline/hair-bun/concept/ISOLATION-PROVENANCE.json",
+        "provenanceSHA256": "d231edfbedceced0c0a28800fb797ad383373d67a1e48109a33f26628d336f0c",
+        "status": "PENDING_ROOT_INDEPENDENT_ISOLATED_REFERENCE_REVIEW"
+      }
+    },
+    "historicalIsolationRecord": {
+      "schema": "pillagers-imagegen-isolation/1",
+      "at": "2026-10-03T22:26:16.564Z",
+      "family": "hair-bun",
+      "designCandidate": 1,
+      "isolationCandidate": 1,
+      "status": "PENDING_ROOT_INDEPENDENT_ISOLATED_REFERENCE_REVIEW",
+      "tool": "image_gen.imagegen",
+      "transparentBackgroundRequested": true,
+      "actualAlpha": {
+        "width": 1254,
+        "height": 1254,
+        "bitDepth": 8,
+        "colorType": 6,
+        "min": 0,
+        "max": 255,
+        "transparentPixels": 922198,
+        "opaquePixels": 1299,
+        "partialAlphaPixels": 649019,
+        "pixels": 1572516,
+        "actualAlphaReadOnly": true
+      },
+      "original": "C:/Users/Devoteam/.codex/generated_images/01a1027d-0c2c-7481-a438-01b36924e7fd/exec-7c8edfa2-4593-499d-9ab2-113271377b42.png",
+      "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-bun/concept/hair-bun-isolated-r1.png",
+      "sha256": "4eb522cc4b3501f43fdf8692fd31f684a4e8878858922d9f1c3a5f45ab14f466",
+      "prompt": "scratch/character-lab-v04/head-v04-pipeline/hair-bun/concept/isolation-r1.prompt.txt",
+      "promptSHA256": "e0b54767e14f4fa4d61431c04aa6f37ba661b617c0ac5fef249d1d1cc9d244bd",
+      "references": [
+        {
+          "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-bun/concept/hair-bun-concept-r1.png",
+          "sha256": "520e74c7e646c57d7d48ecafa12f84b1b9f55050ac79e3fd33d040a4d420357f",
+          "role": "Only approved design authority; faithful cap+connected bun isolation"
+        }
+      ],
+      "independentConceptReview": {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/hair-bun-concept-r1.root-review.json",
+        "sha256": "69c7e805b2f8c24706b87755c5efdec4feda2a6101981d0563848716805ffe6b"
+      },
+      "mode": "builtin-faithful-isolation",
+      "generatedOrEditedManually": false,
+      "preV04MeshReuse": false,
+      "providerJobs": 0,
+      "authorReview": {
+        "observations": [
+          "Approved coherent cap and connected compact knot remain readable.",
+          "Hair only: no skin/head/ears/face/mannequin visible.",
+          "Broad concave scalp cavity and thin continuous rim are visible."
+        ],
+        "limitations": [
+          "Single 2D view cannot prove rear/underside thickness, no support floor in actual mesh, topology or r3 fit.",
+          "Actual Meshy output must independently prove open cavity without skull/support and retain approved outer silhouette."
+        ]
+      }
+    }
+  },
+  "v04Canonicalization": {
+    "schema": "pillagers-v04-canonical-source/1",
+    "noPreV04Reuse": true,
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "body": {
+      "id": "lab-body/golden-v04-candidate-002-r3",
+      "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+    },
+    "inputMeshSHA256": "9eeeeb663fbe1bcf38163e048635e2109308edf2c0fb1ac21e4d496e0020d10a",
+    "authoringReceipt": "/character-lab/modules/v04/hair/bun/bun.authoring.json",
+    "authoringReceiptSHA256": "4afc31102af0249243e2524e7ab5fc79cb563d4e4133bceff652084f8885d0b3"
+  },
+  "review": {
+    "status": "pending-independent-browser",
+    "reason": "Same492 source-cage calibrated candidate, independently neutral-art reviewed; genuine CharacterLab motion/extremes still required.",
+    "accepted": false,
+    "reviewed2D": [
+      {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/hair-bun-concept-r1.root-review.json",
+        "sha256": "69c7e805b2f8c24706b87755c5efdec4feda2a6101981d0563848716805ffe6b"
+      },
+      {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/hair-bun-isolation-r1.root-review.json",
+        "sha256": "a43cee82149865867e7d4300b99b5d788ee261eb0ef0267a1364ee93aed49528"
+      }
+    ],
+    "neutralArt": {
+      "path": "artifacts/character-lab-v04/vertical-slice-qa/bun-inner-panel-repair-review/neutral-affine001/REVIEW.json",
+      "sha256": "ceaffdfdd6ca6123cbf9dbbe0702701cec77ddcd4272b7f03767adfbb9f8e65d"
+    }
+  },
+  "historicalReview": {
+    "status": "hold-fit-and-style",
+    "review": "artifacts/character-lab-v04/vertical-slice-qa/bun-browser-qa-coherent/VISUAL-REVIEW.json",
+    "reviewSHA256": "f2a5f6fe2da671e852de155ea54da5bc190980417d751bdd5be5a19c1dbe4ef8",
+    "reason": "Independent actual Character Lab crown/bun flattened and posterior scalp exposed; numerical body/self zero does not certify fit.",
+    "accepted": false,
+    "reviewed2D": [
+      {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/hair-bun-concept-r1.root-review.json",
+        "sha256": "69c7e805b2f8c24706b87755c5efdec4feda2a6101981d0563848716805ffe6b"
+      },
+      {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/hair-bun-isolation-r1.root-review.json",
+        "sha256": "a43cee82149865867e7d4300b99b5d788ee261eb0ef0267a1364ee93aed49528"
+      }
+    ],
+    "outputSha256": "d28a5de05fc4afe2f1e9e16ec2d40c8d9c70afd9c37b2c0f38e7353076f04e26"
+  }
+}

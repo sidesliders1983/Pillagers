@@ -1,0 +1,20 @@
+{
+  "schema": "pillagers-lab-candidate/1",
+  "id": "lab-body/golden-v04-candidate-002",
+  "status": "preview-not-accepted",
+  "source": "scratch/character-lab-v04/golden-rig/candidate-002/morph-calibrated/source-morph-calibrated.glb",
+  "sha256": "1e958ad5a5fe4fb5b08999cee79d5a5177e189ed6b3f78f308a2bd320f62d647",
+  "bytes": 3023016,
+  "triangles": 1322,
+  "materials": 1,
+  "colors": 2,
+  "sourceImageSHA256": "2c185ca7b5aec2fb1f3554dea8478c8ef0eaeff6bc3da3d7cc78edd79361595a",
+  "providerTask": "01a10162-6671-70df-9787-95ba7f0e37ba",
+  "sourceFamilyHold": [
+    "feminine-chest-construction",
+    "wrist-face-proper-crossings",
+    "chin-cage-migration"
+  ],
+  "implementation": "existing CharacterFactory/UniversalHuman/AttachmentFit; Lab-only LOD2",
+  "rawProvenance": "scratch/meshy-api/golden-human-v04-candidate-02/provenance.json"
+}

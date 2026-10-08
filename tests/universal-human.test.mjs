@@ -31,7 +31,7 @@ test('physicality and agility compose independently; explicit morphology survive
     const dna={...defaultDNA(),morphology:{masculinity:.95,height:1.6},traits:{...defaultDNA().traits,physicality:1,agility:1}};
     assert.deepEqual(parseCharacterDNA(JSON.parse(JSON.stringify(dna))),dna);
     const profile=universalHumanProfile(dna);
-    assert.equal(profile.weights.Powerful,0);assert.equal(profile.weights.Agile,1);assert.ok(Math.abs(profile.weights.Tall-2/3)<1e-10);
+    assert.equal(profile.weights.Powerful,0);assert.equal(profile.weights.Agile,.6);assert.ok(Math.abs(profile.weights.Tall-2/3)<1e-10);
     const clone=cloneDNA(dna);clone.morphology.height=1.5;assert.equal(dna.morphology.height,1.6);
     assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:NaN,height:1.44}}));
     assert.throws(()=>parseCharacterDNA({...dna,morphology:{masculinity:.5,height:0}}));

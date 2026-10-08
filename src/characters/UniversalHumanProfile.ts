@@ -4,6 +4,19 @@ import { identitySample } from './seededRandom';
 
 export const humanMorphNames = ['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Tall','Short','Overweight','Underweight','Age','HeadWidth','HeadLength','Jaw','Nose','LegRatio','ShoulderSlope','Asymmetry','BellyJiggle','BreastJiggle','Child','ChildPower','ChildAgility','FemininePower','MasculineAgility','TallSlight','ElderHeavy'] as const;
 export type HumanMorph = typeof humanMorphNames[number];
+export const humanBodyShapeStrength=.6;
+const bodyBuildMorphs=['Masculine','Feminine','Breasts','Powerful','Slight','Agile','Grounded','Overweight','Underweight','ChildPower','ChildAgility','FemininePower','MasculineAgility','TallSlight','ElderHeavy'] as const satisfies readonly HumanMorph[];
+/** The same pre-strength composition feeds identity profiles and explicit Lab-only overrides. */
+export function composeHumanBodyWeights(raw:Record<HumanMorph,number>):Record<HumanMorph,number> {
+    const Child=raw.Child,maturity=1-Child*.85;
+    const weights={...raw,Masculine:raw.Masculine*maturity,Feminine:raw.Feminine*maturity,Breasts:raw.Breasts*(1-Child)**2,
+        Powerful:raw.Powerful*maturity,Slight:raw.Slight*maturity,Agile:raw.Agile*maturity,Grounded:raw.Grounded*maturity,
+        Overweight:raw.Overweight*(1-Child*.5),Underweight:raw.Underweight*(1-Child*.5),
+        ChildPower:Child*raw.Powerful,ChildAgility:Child*raw.Agile,FemininePower:raw.Feminine*raw.Powerful*maturity,
+        MasculineAgility:raw.Masculine*raw.Agile*maturity,TallSlight:raw.Tall*raw.Slight,ElderHeavy:raw.Age*raw.Overweight};
+    for(const morph of bodyBuildMorphs)weights[morph]*=humanBodyShapeStrength;
+    return weights;
+}
 /** Artistic growth landmarks, not a clinical prediction of an individual. */
 export function childGrowthWeight(age:number):number {
     const landmarks=[[6,1],[9,.72],[12,.43],[15,.16],[18,0]];
@@ -22,7 +35,7 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const masculinity=dna.morphology?.masculinity??(dna.sex==='male'?.51:.49);
     const height=dna.morphology?.height??((1.65+sample('height')*.25)*.8);
     const adultAge=Math.max(18,dna.age);
-    const Child=childGrowthWeight(dna.age),maturity=1-Child*.85;
+    const Child=childGrowthWeight(dna.age);
     // Fictional caricature rule: intelligence reduces susceptibility; a stable
     // seed sample chooses the direction, biased toward a large belly.
     const tendency=sample('weightTendency');
@@ -35,9 +48,9 @@ export function universalHumanProfile(input:CharacterDNA):HumanProfile {
     const Powerful=0,Slight=0;
     const [Agile,Grounded]=signed((dna.traits.agility-.5)*2);
     const [Tall,Short]=signed((height-1.44)/(height>=1.44?.24:.28));
-    return {seed:dna.seed,height,adultAge,masculinity,weightDeviation,age:dna.age,stage:dna.age<13?"child":dna.age<18?"teen":dna.age>50?"elder":"adult",appearance:characterAppearance(dna),appearanceFit:dna.appearanceFit??{hair:1,beard:1,clothing:1},motion:{cadence:(1+Child*.2-Math.max(0,dna.age-50)/50*.25)*(1+(dna.traits.agility-.5)*.12),stride:1-Child*.55-Math.max(0,dna.age-50)/50*.3,footfall:(.7+dna.traits.physicality*.6)*(1-Child*.45)},weights:{Masculine:Masculine*maturity,Feminine:Feminine*maturity,Breasts:Feminine*(1-Child)**2,Powerful:Powerful*maturity,Slight:Slight*maturity,Agile:Agile*maturity,Grounded:Grounded*maturity,Tall,Short,Overweight:Overweight*(1-Child*.5),Underweight:Underweight*(1-Child*.5),Age:Math.max(0,(adultAge-50)/50),
+    return {seed:dna.seed,height,adultAge,masculinity,weightDeviation,age:dna.age,stage:dna.age<13?"child":dna.age<18?"teen":dna.age>50?"elder":"adult",appearance:characterAppearance(dna),appearanceFit:dna.appearanceFit??{hair:1,beard:1,clothing:1},motion:{cadence:(1+Child*.2-Math.max(0,dna.age-50)/50*.25)*(1+(dna.traits.agility-.5)*.12),stride:1-Child*.55-Math.max(0,dna.age-50)/50*.3,footfall:(.7+dna.traits.physicality*.6)*(1-Child*.45)},weights:composeHumanBodyWeights({Masculine,Feminine,Breasts:Feminine,Powerful,Slight,Agile,Grounded,Tall,Short,Overweight,Underweight,Age:Math.max(0,(adultAge-50)/50),
         HeadWidth:(sample('headWidth')-.5)*.6,HeadLength:(sample('headLength')-.5)*.6,Jaw:(sample('jaw')-.5)*.6,Nose:(sample('nose')-.5)*.6,
-        LegRatio:(sample('legRatio')-.5)*.5,ShoulderSlope:(sample('shoulderSlope')-.5)*.4,Asymmetry:(sample('asymmetry')-.5)*.35,BellyJiggle:0,BreastJiggle:0,Child,ChildPower:Child*Powerful,ChildAgility:Child*Agile,FemininePower:Feminine*Powerful*maturity,MasculineAgility:Masculine*Agile*maturity,TallSlight:Tall*Slight,ElderHeavy:Math.max(0,(adultAge-50)/50)*Overweight}};
+        LegRatio:(sample('legRatio')-.5)*.5,ShoulderSlope:(sample('shoulderSlope')-.5)*.4,Asymmetry:(sample('asymmetry')-.5)*.35,BellyJiggle:0,BreastJiggle:0,Child,ChildPower:0,ChildAgility:0,FemininePower:0,MasculineAgility:0,TallSlight:0,ElderHeavy:0})};
 }
 
 

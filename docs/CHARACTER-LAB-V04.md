@@ -1,9 +1,9 @@
 # Character Lab v0.4 — modular caricature upgrade
 
-Status: **implementation brief, not implemented or visually accepted**.  
+Status: **active implementation; Golden body preview integrated, full v0.4 not accepted**.  
 Approved task scope: 2026-10-03.  
 Visual authority: [Pillagers Low-Poly Character Reference Guide](PILLAGERS-LOW-POLY-STYLE-GUIDE.md).  
-Source inventory: [reference manifest](references/character-lab-v04/manifest.json).
+Source inventory: [original eight-image reference manifest](references/character-lab-v04/manifest.json) · [additive supplemental metadata](references/character-lab-v04/supplemental-manifest.json).
 
 This document is the executable multi-agent brief for Codex. The associated GitHub issue tracks its acceptance criteria. Creating this document or issue does not start an asset job, approve provider spending, publish new assets, merge code or certify successful tests.
 
@@ -21,7 +21,7 @@ Deliver one coherent library:
 | Clothing | Three masculine-presenting and three feminine-presenting complete outfit definitions, composed from reusable garment modules |
 | Equipment | Three item types: one sword, one spear and one axe |
 
-This means 19 selected appearance/equipment entries plus the Golden body system, not 20 unrelated character models. Outfit entries may share individual garments. Recolors and none-options do not count as new designs. Existing reviewed assets may count only after passing the new style and compatibility review; generating redundant replacements is not a goal. Do not delete older registry entries merely to make the selectable v0.4 subset contain exactly five styles.
+This means 19 selected appearance/equipment entries plus the Golden body system, not 20 unrelated character models. Outfit entries may share individual garments. Recolors and none-options do not count as new designs. The human clarified on 2026-10-03 that no asset generated before v0.4 may be reused or count toward this library. All v0.4 modules must follow the same actual Imagegen → visually reviewed reference → Meshy Low Poly → source-preserving planar/colour cleanup → canonical Attachment & Fit route as the new Golden body. Keep older registry entries and dated evidence for legacy inspection; they are not migration candidates for this milestone.
 
 Identity must emerge through composition:
 
@@ -57,6 +57,8 @@ Document conflicts and a minimal migration proposal before changing contracts. A
 ## 3. Reference access and generation capability
 
 Use the actual eight unique supplied illustrations. The duplicated adult sheet is one source. Verify the local/task `pillagers-character-lab-v04-references.zip` against the repository manifest before visual work. The ZIP and original images are task attachments, not files automatically available through a GitHub issue. A sandbox path in a chat is not a Codex repository path.
+
+The later user-supplied six-build sheet (original `1-Foto-1.jpg`, SHA-256 `7b5f890c3e0c4d31af7b7d5035136bde967c6a63e52897f0b9907305a203b766`, 1280×960, 149,602 bytes) is **adult body proportion and extreme-silhouette authority**, additive to the original eight verified ZIP files. Its image remains task-local/private; only supplemental metadata is recorded in the repository. Apply Giant/Raven/Bear/Fox/Elder/Jarl torso/limb masses and posture direction without copying larger hands/feet, individual toes, painted folds or the exposed Fox abdomen. Preserve shared adult head/hand/foot construction, the adopted <=5% bounds tolerance and shape lock, central shape strength 0.6, maximum adult height 1.60m and full opaque white abdomen coverage. Do not invent a universal big-head ratio. This reference decision is not a new 3D approval, rig migration, six independent bodies or provider budget.
 
 If the source images are absent, report the missing reference pack and pause reference-dependent generation/review. Repository inspection and nonvisual contract work may proceed. Do not claim to have inspected images from filenames alone.
 
@@ -116,9 +118,19 @@ Separate body-shape fitting from animation. When proportions change, adapt rest/
 
 ## 6. Module requirements
 
+### Facet-colour policy and source authority
+
+Apply the [style guide's palette/vertex-colour rules](PILLAGERS-LOW-POLY-STYLE-GUIDE.md#10-palette-and-materials): one RGB(A) value per exported `COLOR_0` vertex; default identical colours on all corners of each deliberate polygon/facet. Optional deliberate vertex gradients need a named region/purpose and visual review. Split colour attributes at borders while preserving coincident positions, weights and morphs; no geometric seams, intraface painted garment edges or high-frequency diffuse facets used as fake geometry.
+
+All new hair, beard/face-covering, clothing and accessory concepts require actual Imagegen → visual review → 3D-provider conversion → source-preserving optimization/canonical fit and colour quantization/bake. Record palette, facet-region and gradient decisions with actual source/output hashes. Prompt-only or directly invented mesh designs cannot satisfy that lineage. Pre-v0.4 assets stay legacy-inspection-only and are excluded from the v0.4 library, including the old cream tunic and its later cleanup candidates. No reuse, migration or bulk conversion of these older assets is part of v0.4. This new-only decision does not authorize provider spending.
+
+The next accepted colour-pipeline proof must export mapless linear RGB(A) `COLOR_0` with neutral white base-colour factor and no albedo dependency. Attribute, topology and budget checks are technical gates; reference silhouette, purposeful broad facets and actual fixed-RTS readability require separate independent visual acceptance. Generic runtime palette support does not publish or approve any candidate.
+
+Keep current Lab inspection labels, draft1 snapshots and dated historical evidence honest. Freeze an explicit next accepted-asset style revision and its colour proof/migration plan before publishing accepted assets; this policy-only clarification does not change runtime/registry versions or invalidate current fixtures.
+
 ### Hair and beard
 
-Implement the five-plus-five vocabulary from the style guide, refining against currently accepted assets. Use chunky planar masses, not strands, wispy alpha or high-frequency detail. Base body and exported head modules must contain no baked replacement head.
+Implement the five-plus-five vocabulary from the style guide using new v0.4 Imagegen concepts and reviewed conversions; pre-v0.4 meshes are not source candidates. Use chunky planar masses, not strands, wispy alpha or high-frequency detail. Base body and exported head modules must contain no baked replacement head.
 
 Use existing `socket_head_top`, `socket_jaw`, `HEAD_CAGE` and `LOWER_FACE_CAGE` semantics and canonical authoring frames. Do not introduce parallel names such as `HEAD_HAIR` in the runtime when the current contract already provides a socket.
 
@@ -237,7 +249,7 @@ The World smoke check may need the authorized local scenery assets. If unavailab
 Every checkbox requires an artifact path, test result or named visual-review record. 'Prepared', 'generated' or 'should work' is not acceptance.
 
 - [ ] **AC01 — Baseline:** actual branch/commit, existing contracts, reference hashes, tools and initial test state are recorded; no parallel modular framework is introduced.
-- [ ] **AC02 — Style:** actual generated concepts and rendered assets pass the reference-guide rubric; body silhouettes remain caricatural at a fixed RTS camera.
+- [ ] **AC02 — Style:** actual generated concepts and rendered assets pass the reference-guide rubric, including default flat facet vertex colours and reviewed deliberate gradients; body silhouettes remain caricatural at a fixed RTS camera.
 - [ ] **AC03 — Golden system:** one adjustable human source and canonical rig definition generate neutral plus all six visual presets; no independently generated incompatible body families.
 - [ ] **AC04 — Shared parts:** adult head/face, hands and feet preserve common shape/topology and the explicitly adopted near-equal absolute-size tolerance; no automatic scaling with body mass.
 - [ ] **AC05 — Base presentation:** bald, clean-shaven, barefoot, opaque white full-length undershirt and fitted briefs; no baked hair, equipment or outer costume.
@@ -261,8 +273,35 @@ Every checkbox requires an artifact path, test result or named visual-review rec
 - [ ] **AC23 — Extension docs:** document how to add a body control, hairstyle, beard, garment/outfit and socketed item, including fitting, validation and publication.
 - [ ] **AC24 — Promotion:** final report links every criterion to evidence, names remaining defects, preserves rollback/backward compatibility and does not label partial work as fully accepted.
 
+### Source cleanup boundary
+
+The human's style instructions permit rebuilding/cleaning topology and re-authoring an unsuitable candidate while retaining the actual Imagegen design route. Source preservation protects approved construction and silhouette; it does not impose an absolute ban on all cleanup facets or vertex changes. Generator orientation alone must not decide material versus cavity. Exact arrangement failures are retained as evidence, then a coordinator-reviewed finite source-panel repair may declare truthful new-facet lineage, source landmarks, measured deviations and unchanged principal exterior. Independent art, actual geometry/contact, canonical fit and browser gates remain mandatory. This clarification approves no individual repair or public asset; see the dated coordinator decision in the #18 evidence tree and each concrete candidate plan.
+
 ## 12. Out of scope
 
 No replacement game architecture, new occupation/combat/genetics mechanics, historical-authenticity research project, separate gender/child rig families, facial/finger animation expansion, cloth/hair physics, final crowd renderer, provider subscription purchase, cloud deployment or automatic merge to main.
 
 Prefer a simpler reusable approved asset over a spectacular one-off. When blocked, deliver the saved work and a specific bounded next step rather than an unbounded autonomous repair loop.
+
+
+## 11. Integrated technical style validation boundary
+
+F integrated the generic style utility and portable binary negative tests without publishing a body/module. New v0.4 candidates must record the trusted family style command before promotion; the current Golden body proof command is `npm run validate:style -- --family body-proof <local-candidate.glb>`, with 1,600 triangles / 4,800 render vertices / one material / sixteen colours and coplanar-region policy. Authored and actual active-scene instance counts are separately measured and must both fit budgets. Other families require their own reviewed repository profile; generic ceilings or a diagnostic triangle profile do not grant budget/style approval.
+
+Profiles and tolerances are typed and bounded; exact external source/profile-bound gradient review cannot be replaced by GLB extras or a global boolean. Technical style validation is additive to current character, provenance, attachment and budget validation. It does not replace independent silhouette/facet/fixed-RTS review or certify any source. The historical smooth-normal proof fails hard normals, the painted source fails map policy, and the separate corrected-normal proof passes only this technical gate. No rig, common-part, fit or asset acceptance follows from those results.
+
+## Human prototype progression decision — 2026-10-03
+
+The human is satisfied with the current r3 body for now and explicitly requests proceeding with facial hair to test the model instead of further fine-tuning extreme combinations. Treat r3 as sufficient and frozen for one new beard prototype slice. Defer the documented compound silhouette refinements; do not mark all body/Gate1/issue18 checks fully accepted. Existing common-part, source, canonical fit, eligibility, flat-colour and no-pre-v0.4-reuse requirements remain. This explicit decision permits the facial-hair slice before final body polish; it is not blanket library expansion or fresh provider-budget authorization.
+
+## Human full-workflow continuation — 2026-10-03
+
+The human explicitly states: "Deze pipeline mag door tot #18 is vervuld en geintegreerd in the character lab" in response to the reviewed beard references and pending Meshy conversion. This supersedes the previous one-prototype-only continuation/budget boundary. Continue the actual new-source Imagegen → independently reviewed input → Meshy T2 → source-preserving cleanup → canonical Attachment & Fit → browser QA route through all issue18 deliverables. Do not repeatedly request per-asset provider permission within this scope. Coordinator working ceiling is310 existing credits (max2 candidates per19 new modules, mesh-only5 credits for13 head/item modules and temporary-colour15 credits for6 outfits); no purchases/subscriptions. Retain bounded attempts, one initial provider/heavy local job and Gate2 before expansion. This does not certify generated assets, waive validation, authorize old-asset reuse or automatically merge/publish externally.
+
+## Source sculpture and calibration review — 2026-10-04
+
+The independent genuine bun browser review rejected the current import even though its actual body/self crossings were zero. Native source and source-preserving cleanup retain a dome and round knot; the frozen authoring affine uses axis scales [0.24, 0.127034, 0.24], compressing native height to 52.93% of lateral scale. The consumer does not repeat this affine, and the inherited whole-character Y presentation scale remains unchanged. See the preserved negative evidence in artifacts/character-lab-v04/vertical-slice-qa/bun-browser-qa-coherent and scratch/head-shell-consumer-transform-audit. No acceptance follows from an intersection-only result.
+
+For subsequent source calibration, default to one measured positive similarity: semantic orientation, one native-to-metre scale, and canonical placement. Determine front/up/contact origin from actual source views and native contact contours, not bounding-box extrema alone or camera-axis filenames. A fit to selected planes that substantially changes source aspect ratios cannot be treated as sculpture preservation. Any necessary nonuniform authoring transform must be explicitly reported and independently compared against the approved concept and source before/after views; do not bury it in a runtime ratio or offset. Preserve source topology/planes at authoring, and separately disclose deformation performed by the shared fitter.
+
+Compatible unaccepted preview entries stay available through explicit manual Lab selection for inspection. New-library Auto composition selects independently accepted registry entries only. Legacy body selection remains unchanged. This gate applies generically by review status, without an asset/seed exception.

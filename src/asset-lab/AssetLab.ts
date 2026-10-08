@@ -1,6 +1,7 @@
 import './asset-lab.css';
 import {Box3, Group, Scene, Color, PerspectiveCamera, HemisphereLight, DirectionalLight, Mesh, Vector3} from 'three';
-import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {meshyHumanFactory} from '../characters/MeshyHuman';
+import {generateCharacterDNA} from '../characters/generateCharacterDNA';
 import {createRenderer} from '../core/Renderer';
 import {worldConfig} from '../config/worldConfig';
 
@@ -15,17 +16,18 @@ export class AssetLab {
     private manifest!:Manifest;
     async start(){
         document.title='Asset Lab · Pillagers';document.body.className='asset-lab';
-        document.body.innerHTML=`<main><header><div><a href="/character-lab">← Character Lab</a><h1>Asset optimization lab</h1><p>Same scale, lighting and camera for every LOD.</p></div><nav aria-label="Comparison controls"><label>Distance <select id="asset-distance"><option value="lab">Close inspection</option><option value="near">Gameplay · zoom 15</option><option value="game">Gameplay · zoom 40</option><option value="rts">RTS · zoom 65</option></select></label><label>Angle <select id="asset-angle"><option value="0">Front</option><option value="90">Side</option><option value="180">Back</option><option value="45">Three-quarter</option></select></label></nav></header><p id="asset-status" role="status">Loading benchmark…</p><section id="asset-grid" aria-label="LOD comparison"></section><footer>Gameplay views retain the pixel scale of the full-window world camera. Frame times include this comparison page and depend on this device. Load times include network and decoding. Generated characters are static, without a rig.</footer></main>`;
+        document.body.innerHTML=`<main><header><div><a href="/character-lab">← Character Lab</a><h1>Asset optimization lab</h1><p>Same scale, lighting and camera for every LOD.</p></div><nav aria-label="Comparison controls"><label>Distance <select id="asset-distance"><option value="lab">Close inspection</option><option value="near">Gameplay · zoom 15</option><option value="game">Gameplay · zoom 40</option><option value="rts">RTS · zoom 65</option></select></label><label>Angle <select id="asset-angle"><option value="0">Front</option><option value="90">Side</option><option value="180">Back</option><option value="45">Three-quarter</option></select></label></nav></header><p id="asset-status" role="status">Loading benchmark…</p><section id="asset-grid" aria-label="LOD comparison"></section><footer>Gameplay views retain the pixel scale of the full-window world camera. Frame times include this comparison page and depend on this device. Load times include network and decoding. Meshy Human · 10 animated characters per LOD.</footer></main>`;
         document.querySelector('#asset-distance')!.addEventListener('change',event=>{this.distance=(event.target as HTMLSelectElement).value as Distance;this.layout();});
         document.querySelector('#asset-angle')!.addEventListener('change',event=>{this.angle=Number((event.target as HTMLSelectElement).value)*Math.PI/180;this.layout();});
         try{
-            const response=await fetch('/game-assets/characters/benchmark.json');
+            const response=await fetch('/game-assets/human/manifest.json');
             if(!response.ok)throw new Error('Benchmark files are unavailable. Run npm run assets:publish after optimization.');
-            this.manifest=await response.json() as Manifest;
+            const prepared=await response.json();
+            this.manifest={name:'Meshy Human',height:1.5,assets:prepared.lods.map((lod:{level:number;file:string;triangles:number;bytes:number})=>({label:'LOD'+lod.level,file:lod.file,triangles:lod.triangles,vertices:0,bytes:lod.bytes}))};
             if(!this.manifest.assets?.length||!Number.isFinite(this.manifest.height)||this.manifest.height<=0)throw new Error('Invalid benchmark manifest');
             for(const asset of this.manifest.assets)await this.load(asset);
             this.layout();
-            document.querySelector('#asset-status')!.textContent=`${this.manifest.name} · ${this.previews.length} versions · display height ${this.manifest.height} m · geometry statistics are per character`;
+            document.querySelector('#asset-status')!.textContent=`${this.manifest.name} · ${this.previews.length} versions · display height ${this.manifest.height} m · 10 characters per version · geometry statistics are per character`;
         }catch(error){document.querySelector('#asset-status')!.textContent=(error as Error).message;}
     }
     private async load(asset:Asset){
@@ -36,13 +38,16 @@ export class AssetLab {
         const canvas=document.createElement('canvas');canvas.setAttribute('aria-label',`${asset.label} character preview`);
         const metric=document.createElement('p');metric.className='asset-metric';metric.textContent='Loading…';
         card.append(heading,stats,canvas,metric);document.querySelector('#asset-grid')!.append(card);
-        const start=performance.now(),gltf=await new GLTFLoader().loadAsync('/game-assets/characters/'+asset.file);
-        const root=new Group();root.add(gltf.scene);
+        const start=performance.now(),level=Number(asset.file.match(/LOD(\d)/)?.[1]??0);
+        const models=await Promise.all(Array.from({length:10},(_,i)=>meshyHumanFactory.create(generateCharacterDNA(1983+i),level)));
+        const root=new Group();models.forEach((model,i)=>{model.root.position.set((i%5-2)*1.5,0,Math.floor(i/5)*1.8);root.add(model.root);});
+        canvas.dataset.instances='10';canvas.dataset.characterSource='meshy';
+        const gltf={scene:root};
         // One transform from the source, shared by all LODs. Do not fit each LOD independently.
         if(!this.previews.length){const box=new Box3().setFromObject(root),size=box.getSize(new Vector3()),center=box.getCenter(new Vector3());root.userData.sharedScale=this.manifest.height/size.y;root.userData.sharedOffset=[-center.x,-box.min.y,-center.z];root.userData.sharedWidth=Math.hypot(size.x,size.z)*root.userData.sharedScale;}
         const reference=this.previews[0]?.root??root;
         root.userData.sharedScale=reference.userData.sharedScale;root.userData.sharedOffset=reference.userData.sharedOffset;root.userData.sharedWidth=reference.userData.sharedWidth;
-        gltf.scene.position.fromArray(root.userData.sharedOffset);root.scale.setScalar(root.userData.sharedScale);
+        root.position.fromArray(root.userData.sharedOffset);root.scale.setScalar(root.userData.sharedScale);
         gltf.scene.traverse(object=>{if(object instanceof Mesh){object.castShadow=false;object.receiveShadow=false;}});
         const scene=new Scene();scene.background=new Color(worldConfig.lighting.sky);scene.add(root);
         const light=worldConfig.lighting;
@@ -55,7 +60,7 @@ export class AssetLab {
         new ResizeObserver(()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/Math.max(1,rect.height);camera.updateProjectionMatrix();this.layout();}).observe(canvas);
         renderer.setAnimationLoop(()=>{
             const now=performance.now(),delta=now-preview.last;preview.last=now;preview.elapsed+=delta;preview.frames++;
-            renderer.render(scene,camera);
+            models.forEach(model=>model.update(Math.min(delta/1000,.05)));renderer.render(scene,camera);
             if(preview.elapsed>=1000){
                 const pixels=this.manifest.height/(2*Math.tan(camera.fov*Math.PI/360)*camera.position.distanceTo(new Vector3(0,this.manifest.height*.5,0)))*canvas.clientHeight;
                 metric.textContent=`${(preview.elapsed/preview.frames).toFixed(1)} ms/frame · ${renderer.info.render.calls} draw calls · ${renderer.info.render.triangles.toLocaleString()} rendered tris · ~${Math.round(pixels)}px tall · load ${Math.round(preview.loadMs)} ms`;

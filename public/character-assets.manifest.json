@@ -89,58 +89,58 @@
       "lods": {
         "0": {
           "file": "/appearance/short/Hair_short_LOD0.glb",
-          "sha256": "5230753fdd064f2835c5ed69f0e35eaca0057153a71ef27a43bd02086b18375d",
-          "triangles": 1383,
+          "sha256": "c2f5446acc30e2e1d2eeda0a11b874ac9ea14853c511f19476615a4e90da9cfd",
+          "triangles": 1750,
           "materials": 1,
-          "bytes": 69984,
+          "bytes": 137472,
           "bounds": {
             "min": [
-              -0.12394939363002777,
-              -0.07406490296125412,
-              -0.18226344883441925
+              -0.1013844832777977,
+              0.02510077692568302,
+              -0.1541961431503296
             ],
             "max": [
-              0.13717035949230194,
-              0.19095082581043243,
-              0.14198680222034454
+              0.08941517770290375,
+              0.12735483050346375,
+              0.11093919724225998
             ]
           }
         },
         "1": {
           "file": "/appearance/short/Hair_short_LOD1.glb",
-          "sha256": "104c60c0888ab65bdc41a372aa06adc57c6d21098d7ab879fa56896d3efb158a",
-          "triangles": 914,
+          "sha256": "f9a517851537ffae6b3e93eefc2928c58aed204db681cd3a0da66dcb8b4b7078",
+          "triangles": 1750,
           "materials": 1,
-          "bytes": 48836,
+          "bytes": 137472,
           "bounds": {
             "min": [
-              -0.12411192059516907,
-              -0.07406490296125412,
-              -0.1825013905763626
+              -0.1013844832777977,
+              0.02510077692568302,
+              -0.1541961431503296
             ],
             "max": [
-              0.13718059659004211,
-              0.19095082581043243,
-              0.14247627556324005
+              0.08941517770290375,
+              0.12735483050346375,
+              0.11093919724225998
             ]
           }
         },
         "2": {
           "file": "/appearance/short/Hair_short_LOD2.glb",
-          "sha256": "dcfa92c73fd8454d3fce5d72a8971d417966717bb6f359c4df501bdd807a5a54",
-          "triangles": 1383,
+          "sha256": "cbde631ced7ed2f0df2ff0f7a3bbd221432b257ed085074a8402b5367e7f845b",
+          "triangles": 1750,
           "materials": 1,
-          "bytes": 69984,
+          "bytes": 137472,
           "bounds": {
             "min": [
-              -0.12394939363002777,
-              -0.07406490296125412,
-              -0.18226344883441925
+              -0.1013844832777977,
+              0.02510077692568302,
+              -0.1541961431503296
             ],
             "max": [
-              0.13717035949230194,
-              0.19095082581043243,
-              0.14198680222034454
+              0.08941517770290375,
+              0.12735483050346375,
+              0.11093919724225998
             ]
           }
         }
@@ -154,8 +154,13 @@
         "fitCage": "HEAD_CAGE",
         "fitMode": "conform",
         "clearance": 0.004,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "short",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
@@ -193,11 +198,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 3000,
+          "1": 3000,
+          "2": 3000
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 3000
       }
     },
     {
@@ -208,58 +214,58 @@
       "lods": {
         "0": {
           "file": "/appearance/medium/Hair_medium_LOD0.glb",
-          "sha256": "cff8f9c1ca2e01a829f6e36e523a58883972b228570f9148de6a2814654db137",
-          "triangles": 1256,
+          "sha256": "21fc719d7f2e422427e6a10af1ab4e52e23aa005bab867f4ee61b56dc7455963",
+          "triangles": 867,
           "materials": 1,
-          "bytes": 64260,
+          "bytes": 68748,
           "bounds": {
             "min": [
-              -0.15456053614616394,
-              -0.11498112231492996,
-              -0.1521022766828537
+              -0.12174195796251297,
+              -0.1274750977754593,
+              -0.13396118581295013
             ],
             "max": [
-              0.15458376705646515,
-              0.18875756859779358,
-              0.1529649794101715
+              0.10828764736652374,
+              0.12191808968782425,
+              0.119914211332798
             ]
           }
         },
         "1": {
           "file": "/appearance/medium/Hair_medium_LOD1.glb",
-          "sha256": "c26bbaace906be6ad8eb85bc13990938c657d38bb4b4ba531b944de8a6c52a0e",
-          "triangles": 1000,
+          "sha256": "37f6f207af3545dee3b0a447ad4044d7e1c940632585863fa1d1ffb1a18d75c5",
+          "triangles": 867,
           "materials": 1,
-          "bytes": 62376,
+          "bytes": 68748,
           "bounds": {
             "min": [
-              -0.1527082771062851,
-              -0.11953354626893997,
-              -0.1508668065071106
+              -0.12174195796251297,
+              -0.1274750977754593,
+              -0.13396118581295013
             ],
             "max": [
-              0.15458376705646515,
-              0.18875756859779358,
-              0.15669582784175873
+              0.10828764736652374,
+              0.12191808968782425,
+              0.119914211332798
             ]
           }
         },
         "2": {
           "file": "/appearance/medium/Hair_medium_LOD2.glb",
-          "sha256": "1dae74e7484a50965da43b3c2af2dbb866a84786fbaaf66471fa1592474bd54a",
-          "triangles": 1256,
+          "sha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a",
+          "triangles": 867,
           "materials": 1,
-          "bytes": 64260,
+          "bytes": 68748,
           "bounds": {
             "min": [
-              -0.15456053614616394,
-              -0.11498112231492996,
-              -0.1521022766828537
+              -0.12174195796251297,
+              -0.1274750977754593,
+              -0.13396118581295013
             ],
             "max": [
-              0.15458376705646515,
-              0.18875756859779358,
-              0.1529649794101715
+              0.10828764736652374,
+              0.12191808968782425,
+              0.119914211332798
             ]
           }
         }
@@ -273,8 +279,13 @@
         "fitCage": "HEAD_CAGE",
         "fitMode": "conform",
         "clearance": 0.004,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "medium",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
@@ -312,11 +323,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 3000,
+          "1": 3000,
+          "2": 3000
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 3000
       }
     },
     {
@@ -327,58 +339,58 @@
       "lods": {
         "0": {
           "file": "/appearance/long/Hair_long_LOD0.glb",
-          "sha256": "eb5ad490925616b67007e0beb4bc9f74529608eabca66995eb247810e41bd9ba",
-          "triangles": 1919,
+          "sha256": "d1f3b20003da5cbe70d95138e818f3f1d42148ffc85ee09836794b821fe612d1",
+          "triangles": 2800,
           "materials": 1,
-          "bytes": 114288,
+          "bytes": 219524,
           "bounds": {
             "min": [
-              -0.18551501631736755,
-              -0.26911717653274536,
-              -0.1735357791185379
+              -0.13384711742401123,
+              -0.22377628087997437,
+              -0.12318819016218185
             ],
             "max": [
-              0.1926560401916504,
-              0.19212132692337036,
-              0.19713732600212097
+              0.11373885720968246,
+              0.12945687770843506,
+              0.12188445776700974
             ]
           }
         },
         "1": {
           "file": "/appearance/long/Hair_long_LOD1.glb",
-          "sha256": "c8f055813531995ea641428693f37b62586b4218c9ef47d5aab254f0105bd1a0",
-          "triangles": 1620,
+          "sha256": "d5bbf0f1b70f8d796ac111c194057af1a369d07e47b6adc78405928cffe77cc6",
+          "triangles": 2800,
           "materials": 1,
-          "bytes": 101100,
+          "bytes": 219524,
           "bounds": {
             "min": [
-              -0.18400917947292328,
-              -0.26911717653274536,
-              -0.1735357791185379
+              -0.13384711742401123,
+              -0.22377628087997437,
+              -0.12318819016218185
             ],
             "max": [
-              0.19396889209747314,
-              0.19212132692337036,
-              0.1938304454088211
+              0.11373885720968246,
+              0.12945687770843506,
+              0.12188445776700974
             ]
           }
         },
         "2": {
           "file": "/appearance/long/Hair_long_LOD2.glb",
-          "sha256": "d0b7416ae395d7261a16a3181145fda9ed19f2e75f5c2a7ce6bc56f489670a8f",
-          "triangles": 1919,
+          "sha256": "bf764d2ee6a20df9c6b1f14e3df95215c229b9b5c1d2b0d6ca57baf4d38ccbe4",
+          "triangles": 2800,
           "materials": 1,
-          "bytes": 114288,
+          "bytes": 219524,
           "bounds": {
             "min": [
-              -0.18551501631736755,
-              -0.26911717653274536,
-              -0.1735357791185379
+              -0.13384711742401123,
+              -0.22377628087997437,
+              -0.12318819016218185
             ],
             "max": [
-              0.1926560401916504,
-              0.19212132692337036,
-              0.19713732600212097
+              0.11373885720968246,
+              0.12945687770843506,
+              0.12188445776700974
             ]
           }
         }
@@ -392,24 +404,17 @@
         "fitCage": "HEAD_CAGE",
         "fitMode": "conform",
         "clearance": 0.004,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "long",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
           "minimumY": -0.45
-        },
-        "trim": {
-          "min": [
-            -0.24,
-            null,
-            0.16
-          ],
-          "max": [
-            0.24,
-            -0.32,
-            null
-          ]
         }
       },
       "sourceFrame": {
@@ -443,11 +448,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 3000,
+          "1": 3000,
+          "2": 3000
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 3000
       }
     },
     {
@@ -458,58 +464,58 @@
       "lods": {
         "0": {
           "file": "/appearance/tied/Hair_tied_LOD0.glb",
-          "sha256": "fb05756c140289c4ccbffa2355cfc5a2715950e37cdc39e8dbf5f67d76e02b3e",
-          "triangles": 2333,
+          "sha256": "febc9aae2de144a6e8471e852a08b2d1e82a3e47680c82d70356b241c54f4d0c",
+          "triangles": 2772,
           "materials": 1,
-          "bytes": 138084,
+          "bytes": 217304,
           "bounds": {
             "min": [
-              -0.18053333461284637,
-              -0.21519601345062256,
-              -0.2563309669494629
+              -0.1531798392534256,
+              -0.23574765026569366,
+              -0.21953843533992767
             ],
             "max": [
-              0.15502512454986572,
-              0.1783037632703781,
-              0.1943923532962799
+              0.10607383400201797,
+              0.12690767645835876,
+              0.116059310734272
             ]
           }
         },
         "1": {
           "file": "/appearance/tied/Hair_tied_LOD1.glb",
-          "sha256": "8d4bef31a2817d13e89a4d655425cb25dbd05b9c891ea80785de64064a34594d",
-          "triangles": 2039,
+          "sha256": "cc43319a2566a4bad37f37ddf2a1db96f7676ed05da332b86434c36a92ca37e5",
+          "triangles": 2772,
           "materials": 1,
-          "bytes": 127844,
+          "bytes": 217304,
           "bounds": {
             "min": [
-              -0.18053333461284637,
-              -0.21519601345062256,
-              -0.2563309669494629
+              -0.1531798392534256,
+              -0.23574765026569366,
+              -0.21953843533992767
             ],
             "max": [
-              0.15502512454986572,
-              0.1783037632703781,
-              0.1943923532962799
+              0.10607383400201797,
+              0.12690767645835876,
+              0.116059310734272
             ]
           }
         },
         "2": {
           "file": "/appearance/tied/Hair_tied_LOD2.glb",
-          "sha256": "4d52a6eaa0e64a52e3e29c0e4d769cbf317d42076ca5d8a1df2df184510e0051",
-          "triangles": 2333,
+          "sha256": "d4c191df7d9d1b6fac229ed4e559c77d67b862353fc5b673fda70c61e1522364",
+          "triangles": 2772,
           "materials": 1,
-          "bytes": 138084,
+          "bytes": 217304,
           "bounds": {
             "min": [
-              -0.18053333461284637,
-              -0.21519601345062256,
-              -0.2563309669494629
+              -0.1531798392534256,
+              -0.23574765026569366,
+              -0.21953843533992767
             ],
             "max": [
-              0.15502512454986572,
-              0.1783037632703781,
-              0.1943923532962799
+              0.10607383400201797,
+              0.12690767645835876,
+              0.116059310734272
             ]
           }
         }
@@ -523,8 +529,13 @@
         "fitCage": "HEAD_CAGE",
         "fitMode": "conform",
         "clearance": 0.004,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "tied",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
@@ -562,11 +573,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 3000,
+          "1": 3000,
+          "2": 3000
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 3000
       }
     },
     {
@@ -577,58 +589,58 @@
       "lods": {
         "0": {
           "file": "/appearance/bun/Hair_bun_LOD0.glb",
-          "sha256": "e2dd078e8eab13a316b6b30a309f0054244cd480917e0f14da278bca4c5223c5",
-          "triangles": 1838,
+          "sha256": "6cff53fdad67fdcd3a77c2b350e613ec17775e5faec76f67bb7823edb0d66f8b",
+          "triangles": 944,
           "materials": 1,
-          "bytes": 109636,
+          "bytes": 67688,
           "bounds": {
             "min": [
-              -0.1167667880654335,
-              -0.11253012716770172,
-              -0.18549741804599762
+              -0.10770214349031448,
+              -0.07714761793613434,
+              -0.17600642144680023
             ],
             "max": [
-              0.1292445957660675,
-              0.2119535654783249,
-              0.15102238953113556
+              0.10557599365711212,
+              0.178287073969841,
+              0.11018715053796768
             ]
           }
         },
         "1": {
           "file": "/appearance/bun/Hair_bun_LOD1.glb",
-          "sha256": "5e51f73090f2664e6f6f1eb0d5251900fe14bc6dd8f4ea8e836b1b8c5e64b0d5",
-          "triangles": 1588,
+          "sha256": "7ec063e4fe69a089c2cb772eb468992942dc18e74cbaccd5694826a458a99bd2",
+          "triangles": 944,
           "materials": 1,
-          "bytes": 101804,
+          "bytes": 67688,
           "bounds": {
             "min": [
-              -0.11794423311948776,
-              -0.11253012716770172,
-              -0.18549741804599762
+              -0.10770214349031448,
+              -0.07714761793613434,
+              -0.17600642144680023
             ],
             "max": [
-              0.1292445957660675,
-              0.2119535654783249,
-              0.14983324706554413
+              0.10557599365711212,
+              0.178287073969841,
+              0.11018715053796768
             ]
           }
         },
         "2": {
           "file": "/appearance/bun/Hair_bun_LOD2.glb",
-          "sha256": "4c004e100563f2060ec71dfe6044356a282a1064e3dd92429e63e9bd17b92372",
-          "triangles": 1838,
+          "sha256": "c47491e6446f70908fb85273a4fbe37389765626512212941eefb5eb79e95acd",
+          "triangles": 944,
           "materials": 1,
-          "bytes": 109636,
+          "bytes": 67692,
           "bounds": {
             "min": [
-              -0.1167667880654335,
-              -0.11253012716770172,
-              -0.18549741804599762
+              -0.10770214349031448,
+              -0.07714761793613434,
+              -0.17600642144680023
             ],
             "max": [
-              0.1292445957660675,
-              0.2119535654783249,
-              0.15102238953113556
+              0.10557599365711212,
+              0.178287073969841,
+              0.11018715053796768
             ]
           }
         }
@@ -642,8 +654,13 @@
         "fitCage": "HEAD_CAGE",
         "fitMode": "conform",
         "clearance": 0.004,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "bun",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
@@ -681,11 +698,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 3000,
+          "1": 3000,
+          "2": 3000
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 3000
       }
     },
     {
@@ -696,58 +714,58 @@
       "lods": {
         "0": {
           "file": "/appearance/braid/Hair_braid_LOD0.glb",
-          "sha256": "46f7bce066bfe21775d72facbdb3e0dfe0539bfe82ee21b47eaade27cf52da09",
-          "triangles": 8886,
+          "sha256": "ce4d68d17a8c468c3ec9b149b821cc6900857ce3e80457a084c4bf021bfd3de3",
+          "triangles": 3490,
           "materials": 1,
-          "bytes": 546084,
+          "bytes": 273364,
           "bounds": {
             "min": [
-              -0.12428195774555206,
-              -0.2500231862068176,
-              -0.14922970533370972
+              -0.1158444955945015,
+              -0.3264067471027374,
+              -0.12964394688606262
             ],
             "max": [
-              0.12932083010673523,
-              0.19227240979671478,
-              0.15799397230148315
+              0.10553868860006332,
+              0.12698616087436676,
+              0.15864992141723633
             ]
           }
         },
         "1": {
           "file": "/appearance/braid/Hair_braid_LOD1.glb",
-          "sha256": "5b27a4a4d084675db04b6d2398bdb0efd8e07c5f15bd90d6a7c2d91e53430cb6",
-          "triangles": 8319,
+          "sha256": "1fe4ee2ac30ba34929b93553c0ce9566209b233ec2702d2e5f393bd2ff35d3c9",
+          "triangles": 3490,
           "materials": 1,
-          "bytes": 506528,
+          "bytes": 273364,
           "bounds": {
             "min": [
-              -0.12492977827787399,
-              -0.19189970195293427,
-              -0.1492711454629898
+              -0.1158444955945015,
+              -0.3264067471027374,
+              -0.12964394688606262
             ],
             "max": [
-              0.12932083010673523,
-              0.19227240979671478,
-              0.13521979749202728
+              0.10553868860006332,
+              0.12698616087436676,
+              0.15864992141723633
             ]
           }
         },
         "2": {
           "file": "/appearance/braid/Hair_braid_LOD2.glb",
-          "sha256": "bd0708069f1e0b4be6c2aa1740a3e774315b1152050de88d60bc9123b29c6468",
-          "triangles": 8886,
+          "sha256": "ae921bb86772a0ec6827e3961ef68a1a401c80909c942148f019f303784a9d39",
+          "triangles": 3490,
           "materials": 1,
-          "bytes": 546084,
+          "bytes": 273364,
           "bounds": {
             "min": [
-              -0.12428195774555206,
-              -0.2500231862068176,
-              -0.14922970533370972
+              -0.1158444955945015,
+              -0.3264067471027374,
+              -0.12964394688606262
             ],
             "max": [
-              0.12932083010673523,
-              0.19227240979671478,
-              0.15799397230148315
+              0.10553868860006332,
+              0.12698616087436676,
+              0.15864992141723633
             ]
           }
         }
@@ -761,8 +779,13 @@
         "fitCage": "HEAD_CAGE",
         "fitMode": "conform",
         "clearance": 0.004,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "braid",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
@@ -800,11 +823,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 4000,
+          "1": 4000,
+          "2": 4000
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 4000
       }
     },
     {
@@ -815,20 +839,20 @@
       "lods": {
         "2": {
           "file": "/appearance/beards/stubble/Beard_stubble_LOD2.glb",
-          "sha256": "67842a4d709f490f90732836ced388642aa3e9ebf8bdd4998107131522056528",
-          "triangles": 908,
+          "sha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5",
+          "triangles": 723,
           "materials": 1,
-          "bytes": 51904,
+          "bytes": 85928,
           "bounds": {
             "min": [
-              -0.07942614704370499,
-              -0.12667138874530792,
-              0.05249515175819397
+              -0.10347696393728256,
+              -0.12312881648540497,
+              -0.07720013707876205
             ],
             "max": [
-              0.10911204665899277,
-              -0.010703650303184986,
-              0.16719834506511688
+              0.10300732403993607,
+              -0.0003701265377458185,
+              0.11218294501304626
             ]
           }
         }
@@ -842,12 +866,18 @@
         "fitCage": "LOWER_FACE_CAGE",
         "fitMode": "conform",
         "clearance": 0.003,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "stubble",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
         "projection": "shell",
-        "subdivisions": 2,
+        "subdivisions": 0,
         "attachmentBand": {
-          "minimumY": null
+          "minimumY": null,
+          "maximumY": null
         }
       },
       "sourceFrame": {
@@ -881,11 +911,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 1600,
+          "1": 2000,
+          "2": 1600
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 2000
       }
     },
     {
@@ -896,20 +927,20 @@
       "lods": {
         "2": {
           "file": "/appearance/beards/short/Beard_short_LOD2.glb",
-          "sha256": "f7328ebaeb77fae88af45429873ae1b4cc9017a586dc2e8dd54c8834b1e5ade6",
-          "triangles": 742,
+          "sha256": "226a11f9898b8228ed10dc2e4cda536a1a55ca04899412f1c07e9128cf1d7bc3",
+          "triangles": 1500,
           "materials": 1,
-          "bytes": 41560,
+          "bytes": 118124,
           "bounds": {
             "min": [
-              -0.05191235616803169,
-              -0.157439723610878,
-              -0.02735225483775139
+              -0.089634470641613,
+              -0.17119187116622925,
+              -0.0030734294559806585
             ],
             "max": [
-              0.15845175087451935,
-              0.022870555520057678,
-              0.1667829304933548
+              0.08369594067335129,
+              -0.019787799566984177,
+              0.13093513250350952
             ]
           }
         }
@@ -923,12 +954,17 @@
         "fitCage": "LOWER_FACE_CAGE",
         "fitMode": "conform",
         "clearance": 0.003,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "short",
-        "projection": "shell",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
+        "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
-          "minimumY": -0.31289111389236546
+          "minimumY": -0.65
         }
       },
       "sourceFrame": {
@@ -962,11 +998,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 1600,
+          "1": 2000,
+          "2": 1600
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 2000
       }
     },
     {
@@ -977,20 +1014,20 @@
       "lods": {
         "2": {
           "file": "/appearance/beards/medium/Beard_medium_LOD2.glb",
-          "sha256": "c230b0c07329b618937e408421dc6b340cedfeb7c58668f02883a1794907557c",
-          "triangles": 1070,
+          "sha256": "9ee762b232bf9e15a764b6bf2618511c7fecb9b4060ccaf8e4383e502466c657",
+          "triangles": 1498,
           "materials": 1,
-          "bytes": 67500,
+          "bytes": 117964,
           "bounds": {
             "min": [
-              -0.09762244671583176,
-              -0.2519656717777252,
-              -0.038813091814517975
+              -0.0890619233250618,
+              -0.2085869461297989,
+              0.0043572629801929
             ],
             "max": [
-              0.17851051688194275,
-              0.005694183055311441,
-              0.19815607368946075
+              0.08268779516220093,
+              -0.02120230160653591,
+              0.1505260318517685
             ]
           }
         }
@@ -1004,12 +1041,17 @@
         "fitCage": "LOWER_FACE_CAGE",
         "fitMode": "conform",
         "clearance": 0.003,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "medium",
-        "projection": "shell",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
+        "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
-          "minimumY": -0.31289111389236546
+          "minimumY": -0.65
         }
       },
       "sourceFrame": {
@@ -1043,11 +1085,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 1600,
+          "1": 2000,
+          "2": 1600
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 2000
       }
     },
     {
@@ -1058,20 +1101,20 @@
       "lods": {
         "2": {
           "file": "/appearance/beards/long/Beard_long_LOD2.glb",
-          "sha256": "db0559949ed566d6a7ffcba532971660340a744588232e3d60bc878a900a4081",
-          "triangles": 1189,
+          "sha256": "e6380a143e7325ed064b762fedb788a5512d202938bfc3dda7321f2073fa7c46",
+          "triangles": 1498,
           "materials": 1,
-          "bytes": 59796,
+          "bytes": 117964,
           "bounds": {
             "min": [
-              -0.0983322486281395,
-              -0.26295650005340576,
-              -0.05189201608300209
+              -0.09220888465642929,
+              -0.3059619963169098,
+              0.004941554740071297
             ],
             "max": [
-              0.11561013013124466,
-              0.03069859929382801,
-              0.1313883513212204
+              0.09101483225822449,
+              -0.02270764857530594,
+              0.14105229079723358
             ]
           }
         }
@@ -1085,12 +1128,17 @@
         "fitCage": "LOWER_FACE_CAGE",
         "fitMode": "conform",
         "clearance": 0.003,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "long",
-        "projection": "shell",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
+        "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
-          "minimumY": -0.31289111389236546
+          "minimumY": -0.65
         }
       },
       "sourceFrame": {
@@ -1124,11 +1172,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 1600,
+          "1": 2000,
+          "2": 1600
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 2000
       }
     },
     {
@@ -1139,20 +1188,20 @@
       "lods": {
         "2": {
           "file": "/appearance/beards/split-braid/Beard_split-braid_LOD2.glb",
-          "sha256": "5ccce2435442e1893bf064616dbf3d22d1d606b0d55a13484ac8bc4bd59ed9cc",
-          "triangles": 1240,
+          "sha256": "dbb68b8e3767e634fa621ced353960229640f64d1ce7d468b82987b85fa067fc",
+          "triangles": 1458,
           "materials": 1,
-          "bytes": 86092,
+          "bytes": 114856,
           "bounds": {
             "min": [
-              -0.0749189481139183,
-              -0.2291136234998703,
-              -0.002105206251144409
+              -0.07353191822767258,
+              -0.26719632744789124,
+              -0.0051305112428963184
             ],
             "max": [
-              0.13781161606311798,
-              0.009627796709537506,
-              0.16866694390773773
+              0.07627171277999878,
+              -0.029042931273579597,
+              0.1489826887845993
             ]
           }
         }
@@ -1166,12 +1215,17 @@
         "fitCage": "LOWER_FACE_CAGE",
         "fitMode": "conform",
         "clearance": 0.003,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "split-braid",
-        "projection": "shell",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
+        "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
-          "minimumY": -0.31289111389236546
+          "minimumY": -0.65
         }
       },
       "sourceFrame": {
@@ -1205,11 +1259,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 1600,
+          "1": 2000,
+          "2": 1600
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 2000
       }
     },
     {
@@ -1220,58 +1275,58 @@
       "lods": {
         "0": {
           "file": "/appearance/beards/braid/Beard_braid_LOD0.glb",
-          "sha256": "38a8872de6723a077282e95eb91c6e5459137508fc7ef26eb57eb52e6adc1dd1",
-          "triangles": 2475,
+          "sha256": "d597c85d352a06b39235cbd87ec07d44dd32ad37602b5dbf89917e9fb15d8571",
+          "triangles": 1542,
           "materials": 1,
-          "bytes": 253724,
+          "bytes": 121400,
           "bounds": {
             "min": [
-              -0.12167009711265564,
-              -0.2407001107931137,
-              -0.12042970210313797
+              -0.07469377666711807,
+              -0.2955496609210968,
+              -0.0017717445734888315
             ],
             "max": [
-              0.15322846174240112,
-              0.045822493731975555,
-              0.17157766222953796
+              0.07549579441547394,
+              -0.02308853156864643,
+              0.17145514488220215
             ]
           }
         },
         "1": {
           "file": "/appearance/beards/braid/Beard_braid_LOD1.glb",
-          "sha256": "8912f32f9fe7d2c4507530ab4932e6d8718966220cec41a16cc5ec294b0136db",
-          "triangles": 1775,
+          "sha256": "b208d71746adc3c0ff580b8d10f92fda924e6e710c410293271399b8faf51502",
+          "triangles": 1542,
           "materials": 1,
-          "bytes": 182328,
+          "bytes": 121400,
           "bounds": {
             "min": [
-              -0.12167009711265564,
-              -0.2401488870382309,
-              -0.12042970210313797
+              -0.07469377666711807,
+              -0.2955496609210968,
+              -0.0017717445734888315
             ],
             "max": [
-              0.15322846174240112,
-              0.045822493731975555,
-              0.17157766222953796
+              0.07549579441547394,
+              -0.02308853156864643,
+              0.17145514488220215
             ]
           }
         },
         "2": {
           "file": "/appearance/beards/braid/Beard_braid_LOD2.glb",
-          "sha256": "852aba0a4ff086990f4b166a58a5b5639ccfd3a6beca4ceebd85697b9586732a",
-          "triangles": 1175,
+          "sha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce",
+          "triangles": 1542,
           "materials": 1,
-          "bytes": 121128,
+          "bytes": 121400,
           "bounds": {
             "min": [
-              -0.12167009711265564,
-              -0.24036061763763428,
-              -0.12042970210313797
+              -0.07469377666711807,
+              -0.2955496609210968,
+              -0.0017717445734888315
             ],
             "max": [
-              0.15322846174240112,
-              0.043416209518909454,
-              0.17157766222953796
+              0.07549579441547394,
+              -0.02308853156864643,
+              0.17145514488220215
             ]
           }
         }
@@ -1285,12 +1340,17 @@
         "fitCage": "LOWER_FACE_CAGE",
         "fitMode": "conform",
         "clearance": 0.003,
-        "authoringFrame": "measured-reference-head",
+        "authoringFrame": "canonical",
         "sourceStyle": "braid",
-        "projection": "shell",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
+        "projection": "outward",
         "subdivisions": 0,
         "attachmentBand": {
-          "minimumY": -0.31289111389236546
+          "minimumY": -0.65
         }
       },
       "sourceFrame": {
@@ -1324,11 +1384,12 @@
       ],
       "budgets": {
         "triangles": {
-          "0": 10000,
-          "1": 10000,
-          "2": 10000
+          "0": 2800,
+          "1": 2000,
+          "2": 1600
         },
-        "materials": 2
+        "materials": 1,
+        "runtimeTriangles": 2000
       }
     },
     {
@@ -1369,26 +1430,96 @@
         "garmentFit": "regional",
         "authoringFrame": "canonical",
         "clearance": 0.025,
-        "coverageBands": {
-          "UPPER_ARM_L": {
-            "minY": 1.18
-          },
-          "UPPER_ARM_R": {
-            "minY": 1.18
+        "garmentBind": {
+          "joints": {
+            "Hips": [
+              0.000004716217517852783,
+              0.9,
+              -0.012205839157104492
+            ],
+            "Chest": [
+              0.00003281235694885254,
+              1.29,
+              -0.062470465898513794
+            ],
+            "Neck": [
+              -0.000008769333362579346,
+              1.43,
+              -0.07345718145370483
+            ],
+            "UpperArm_L": [
+              0.21209441125392914,
+              1.4,
+              -0.13885741867125034
+            ],
+            "LowerArm_L": [
+              0.3113473951816559,
+              1.1,
+              -0.19208771735429764
+            ],
+            "Hand_L": [
+              0.36442068219184875,
+              0.91,
+              -0.1820245385169983
+            ],
+            "Foot_L": [
+              0.1802506297826767,
+              0.105,
+              -0.18673284351825714
+            ],
+            "Toe_L": [
+              0.2884458282538298,
+              0.05,
+              -0.11466482684103906
+            ],
+            "LowerLeg_L": [
+              0.14924559742212296,
+              0.49,
+              -0.07966508716344833
+            ],
+            "UpperLeg_L": [
+              0.11175539046525955,
+              0.9,
+              -0.012205839157104492
+            ],
+            "UpperArm_R": [
+              -0.2489216923713684,
+              1.4,
+              -0.038437023758888245
+            ],
+            "LowerArm_R": [
+              -0.34587250649929047,
+              1.1,
+              0.0391182005405426
+            ],
+            "Hand_R": [
+              -0.40422913432121277,
+              0.91,
+              0.11021037213504314
+            ],
+            "Foot_R": [
+              -0.28753453493118286,
+              0.105,
+              -0.08352511748671532
+            ],
+            "Toe_R": [
+              -0.2791577447285953,
+              0.05,
+              0.046204714802939
+            ],
+            "LowerLeg_R": [
+              -0.18878816813230515,
+              0.49,
+              -0.016908276826143265
+            ],
+            "UpperLeg_R": [
+              -0.17827141165733337,
+              0.9,
+              -0.012205839157104492
+            ]
           }
         },
-        "covers": [
-          "TORSO_UPPER",
-          "TORSO_LOWER",
-          "PELVIS",
-          "UPPER_LEG_L",
-          "UPPER_LEG_R",
-          "LOWER_LEG_L",
-          "LOWER_LEG_R",
-          "FEET",
-          "UPPER_ARM_L",
-          "UPPER_ARM_R"
-        ]
+        "covers": []
       },
       "materialVariants": [
         "reference-colours"
@@ -1403,7 +1534,8 @@
         "triangles": {
           "2": 4400
         },
-        "materials": 1
+        "materials": 1,
+        "runtimeTriangles": 4400
       }
     },
     {
@@ -1444,16 +1576,96 @@
         "garmentFit": "regional",
         "authoringFrame": "canonical",
         "clearance": 0.025,
-        "covers": [
-          "TORSO_UPPER",
-          "TORSO_LOWER",
-          "PELVIS",
-          "UPPER_LEG_L",
-          "UPPER_LEG_R",
-          "LOWER_LEG_L",
-          "LOWER_LEG_R",
-          "FEET"
-        ]
+        "garmentBind": {
+          "joints": {
+            "Hips": [
+              0.000006996095180511475,
+              0.9,
+              -0.021408669650554657
+            ],
+            "Chest": [
+              0.000021964311599731445,
+              1.29,
+              0.006449282169342041
+            ],
+            "Neck": [
+              0.000011235475540161133,
+              1.43,
+              -0.03970365971326828
+            ],
+            "UpperArm_L": [
+              0.19671039283275604,
+              1.4,
+              -0.10769260302186012
+            ],
+            "LowerArm_L": [
+              0.30923010408878326,
+              1.1,
+              -0.17587073147296906
+            ],
+            "Hand_L": [
+              0.37526851892471313,
+              0.91,
+              -0.17889723926782608
+            ],
+            "Foot_L": [
+              0.19655270129442215,
+              0.105,
+              -0.1907181367278099
+            ],
+            "Toe_L": [
+              0.3013521996153938,
+              0.05,
+              -0.11379567478285742
+            ],
+            "LowerLeg_L": [
+              0.17483296335558407,
+              0.49,
+              -0.08817579597234726
+            ],
+            "UpperLeg_L": [
+              0.12186267480254173,
+              0.9,
+              -0.021408669650554657
+            ],
+            "UpperArm_R": [
+              -0.20986024290323257,
+              1.4,
+              0.007026202976703644
+            ],
+            "LowerArm_R": [
+              -0.3180694580078125,
+              1.1,
+              0.04845789819955826
+            ],
+            "Hand_R": [
+              -0.37254685163497925,
+              0.91,
+              0.10791864804923534
+            ],
+            "Foot_R": [
+              -0.24246200919151306,
+              0.105,
+              -0.044722351245582104
+            ],
+            "Toe_R": [
+              -0.2541655254321404,
+              0.05,
+              0.08474976045267274
+            ],
+            "LowerLeg_R": [
+              -0.1699889278097544,
+              0.49,
+              -0.05814152956008911
+            ],
+            "UpperLeg_R": [
+              -0.1503264456987381,
+              0.9,
+              -0.021408669650554657
+            ]
+          }
+        },
+        "covers": []
       },
       "materialVariants": [
         "reference-colours"
@@ -1468,7 +1680,8 @@
         "triangles": {
           "2": 4400
         },
-        "materials": 1
+        "materials": 1,
+        "runtimeTriangles": 4400
       }
     },
     {
@@ -1509,26 +1722,96 @@
         "garmentFit": "regional",
         "authoringFrame": "canonical",
         "clearance": 0.025,
-        "coverageBands": {
-          "UPPER_ARM_L": {
-            "minY": 1.09
-          },
-          "UPPER_ARM_R": {
-            "minY": 1.09
+        "garmentBind": {
+          "joints": {
+            "Hips": [
+              -0.00007347017526626587,
+              0.9,
+              -0.026270724833011627
+            ],
+            "Chest": [
+              0.000007353723049163818,
+              1.29,
+              -0.024680644273757935
+            ],
+            "Neck": [
+              0.00007963180541992188,
+              1.43,
+              -0.03449765592813492
+            ],
+            "UpperArm_L": [
+              0.21808577328920364,
+              1.4,
+              -0.08349263295531273
+            ],
+            "LowerArm_L": [
+              0.3244871348142624,
+              1.1,
+              -0.15439901314675808
+            ],
+            "Hand_L": [
+              0.36968670785427094,
+              0.91,
+              -0.16895881667733192
+            ],
+            "Foot_L": [
+              0.20094706118106842,
+              0.105,
+              -0.16431740671396255
+            ],
+            "Toe_L": [
+              0.2913846054907589,
+              0.05,
+              -0.07093084141020606
+            ],
+            "LowerLeg_L": [
+              0.16141658648848534,
+              0.49,
+              -0.07626454159617424
+            ],
+            "UpperLeg_L": [
+              0.12458717793226241,
+              0.9,
+              -0.026270724833011627
+            ],
+            "UpperArm_R": [
+              -0.2621006965637207,
+              1.4,
+              -0.008781932294368744
+            ],
+            "LowerArm_R": [
+              -0.3532029837369919,
+              1.1,
+              -0.004483655095100403
+            ],
+            "Hand_R": [
+              -0.3904046267271042,
+              0.91,
+              0.024275027215480804
+            ],
+            "Foot_R": [
+              -0.2785947471857071,
+              0.105,
+              0.0036183632910251617
+            ],
+            "Toe_R": [
+              -0.288337588078693,
+              0.05,
+              0.13325276093044017
+            ],
+            "LowerLeg_R": [
+              -0.19954592362046242,
+              0.49,
+              0.03185400366783142
+            ],
+            "UpperLeg_R": [
+              -0.1727287432551384,
+              0.9,
+              -0.026270724833011627
+            ]
           }
         },
-        "covers": [
-          "TORSO_UPPER",
-          "TORSO_LOWER",
-          "PELVIS",
-          "UPPER_LEG_L",
-          "UPPER_LEG_R",
-          "LOWER_LEG_L",
-          "LOWER_LEG_R",
-          "FEET",
-          "UPPER_ARM_L",
-          "UPPER_ARM_R"
-        ]
+        "covers": []
       },
       "materialVariants": [
         "reference-colours"
@@ -1543,7 +1826,304 @@
         "triangles": {
           "2": 4400
         },
-        "materials": 1
+        "materials": 1,
+        "runtimeTriangles": 4400
+      }
+    },
+    {
+      "id": "equipment/v04-sword",
+      "type": "equipment",
+      "version": 1,
+      "style": "v04-sword",
+      "scope": "lab-v04",
+      "reviewStatus": "accepted",
+      "compatibleBodies": [
+        {
+          "id": "lab-body/golden-v04-candidate-002-r3",
+          "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/v04/equipment/sword/sword.glb",
+          "sha256": "08b65df552cd58efd9fc44ff45f562d45a9b73baeea6ab291c56ddb799ab8ff5",
+          "triangles": 288,
+          "materials": 1,
+          "bytes": 33584,
+          "bounds": {
+            "min": [
+              -0.12788887321949005,
+              -0.14419999718666077,
+              -0.060244858264923096
+            ],
+            "max": [
+              0.1295863837003708,
+              0.8858000040054321,
+              0.06103011220693588
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "equipment/v04-sword",
+        "type": "equipment",
+        "anchor": "socket_hand_R",
+        "fitMode": "rigid",
+        "clearance": 0.006,
+        "authoringFrame": "canonical",
+        "equipmentBindings": {
+          "grip": {
+            "position": [
+              0,
+              -0.04,
+              0
+            ],
+            "quaternion": [
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "sockets": {
+            "socket_hand_R": {
+              "position": [
+                0.04,
+                -0.045,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.8134155047893737,
+                0.5816830894638835
+              ]
+            },
+            "socket_hand_L": {
+              "position": [
+                -0.04,
+                -0.045,
+                0
+              ],
+              "quaternion": [
+                0,
+                0,
+                -0.8134155047893737,
+                0.5816830894638835
+              ]
+            },
+            "socket_hip_L": {
+              "position": [
+                0.08,
+                0.025,
+                0.07
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.955336489125606,
+                -0.29552020666133955
+              ]
+            },
+            "socket_hip_R": {
+              "position": [
+                -0.08,
+                0.025,
+                0.1
+              ],
+              "quaternion": [
+                0,
+                0,
+                0.9800665778412416,
+                0.19866933079506124
+              ]
+            },
+            "socket_back": {
+              "position": [
+                0,
+                0.05,
+                -0.065
+              ],
+              "quaternion": [
+                0,
+                0,
+                1,
+                6.123233995736766e-17
+              ]
+            }
+          },
+          "proportions": {
+            "bodyCore": "hand_R",
+            "referenceRadius": 0.07847847822748248,
+            "sourceSHA256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+          }
+        }
+      },
+      "materialVariants": [
+        "flat-item-palette"
+      ],
+      "tags": [
+        "image-to-3d",
+        "v04-prototype-accepted",
+        "source-2d-reviewed",
+        "rigid-canonical-grip"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 800
+        },
+        "materials": 1,
+        "runtimeTriangles": 800
+      }
+    },
+    {
+      "id": "hair/v04-bun",
+      "type": "hair",
+      "version": 1,
+      "style": "v04-bun",
+      "scope": "lab-v04",
+      "reviewStatus": "preview",
+      "compatibleBodies": [
+        {
+          "id": "lab-body/golden-v04-candidate-002-r3",
+          "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/v04/hair/bun/bun.glb",
+          "sha256": "3b1b2885c6bc6192b84b2418ecfcb163a3a2ac3ffc41860bc237ef07b383e7c1",
+          "triangles": 492,
+          "materials": 1,
+          "bytes": 61560,
+          "bounds": {
+            "min": [
+              -0.06838985532522202,
+              -0.015874091535806656,
+              -0.10278132557868958
+            ],
+            "max": [
+              0.07037639617919922,
+              0.1844988763332367,
+              0.09187266230583191
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/v04-bun",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "canonical",
+        "sourceStyle": "v04-bun",
+        "canonicalHeadSize": [
+          0.15981943905353546,
+          0.23388516902923584,
+          0.1831979900598526
+        ],
+        "attachmentBand": {
+          "minimumY": -0.45
+        },
+        "projection": "outward",
+        "subdivisions": 0
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "v04-preview-pending-independent-browser",
+        "source-2d-reviewed",
+        "canonical-measured-source-cavity",
+        "canonical-actual-body-contact"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 1000
+        },
+        "materials": 1,
+        "runtimeTriangles": 1000
+      }
+    },
+    {
+      "id": "hair/v04-short",
+      "type": "hair",
+      "version": 1,
+      "style": "v04-short",
+      "scope": "lab-v04",
+      "reviewStatus": "preview",
+      "compatibleBodies": [
+        {
+          "id": "lab-body/golden-v04-candidate-002-r3",
+          "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/v04/hair/short/short.glb",
+          "sha256": "128826eefc475d915d227579656db86e5e2c96f02682f41e2626ebd05dbab0a3",
+          "triangles": 338,
+          "materials": 1,
+          "bytes": 42564,
+          "bounds": {
+            "min": [
+              -0.06443795561790466,
+              -0.003989906050264835,
+              -0.10519354045391083
+            ],
+            "max": [
+              0.06469328701496124,
+              0.12926490604877472,
+              0.09536313265562057
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "metadata": {
+        "version": "pillagers-fit/0.1",
+        "id": "hair/v04-short",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitCage": "HEAD_CAGE",
+        "fitMode": "conform",
+        "clearance": 0.004,
+        "authoringFrame": "canonical",
+        "sourceStyle": "v04-short",
+        "canonicalHeadSize": [
+          0.15981943905353546,
+          0.23388516902923584,
+          0.1831979900598526
+        ],
+        "attachmentBand": {
+          "minimumY": -0.45
+        },
+        "projection": "outward",
+        "subdivisions": 0
+      },
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "image-to-3d",
+        "v04-preview-pending-independent-browser",
+        "source-2d-reviewed",
+        "canonical-measured-source-cavity",
+        "canonical-actual-body-contact"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 1000
+        },
+        "materials": 1,
+        "runtimeTriangles": 1000
       }
     }
   ]

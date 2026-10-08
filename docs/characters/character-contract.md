@@ -11,11 +11,14 @@ Extend it deliberately; do not create a separate world rig, DNA format or fit pa
 | Attachment & Fit | Sockets, landmarks, cages, coverage and conform/drape/rigid fitting | [Attachment & Fit Contract](../CHARACTER-ATTACHMENT-FIT-CONTRACT.md) |
 | Appearance modules | Registry metadata and reviewed reference geometry | [Asset registry](asset-registry.md) |
 | CharacterInstance | Independently owned bones, inverse binds, mixer, materials and equipped modules | `UniversalHuman.ts`, constructed by `CharacterFactory.ts` |
+| Lab presentation | Registry module choices, optional colour, technical body override and reproducible camera/pose; separate from DNA and World policy | `CharacterPresentation.ts`, `LabBodyPresentation.ts`, `LabSnapshot.ts` |
 
 Geometry uses metres, +Y up and +Z front. The body origin is on the ground between
 the feet. The neutral authored rig is approximately 1.8m; runtime morphology and
-the caricature presentation determine actual height. Head modules use their
-recorded measured source frame, then the #15 canonical cages. Socket names and
+the caricature presentation determine actual height. The twelve current head
+modules bake their measured native frame during authoring and use canonical
+skull-centred geometry with the #15 sockets and cages. Original measured frames
+remain in the provenance as source history, not runtime offsets. Socket names and
 bone/morph names are compatibility contracts and must not be casually renamed.
 The World intentionally renders one body at LOD2, without head modules; Lab uses
 the same factory/rig with appearance. Different rendering budgets do not change DNA.
@@ -50,7 +53,9 @@ Keep the existing nested shape; issue #16 does not change its meaning:
 `characterRanges` and `appearanceFitLimits` own these ranges. Do not add a second
 `heightScale` DNA field. Growth and rendered scale are derived values. Shape of
 head/hands/feet remains rigid; child growth may uniformly scale hands/feet.
-Hair and beard are assigned by profile, with beard restricted to males aged 18+.
+Auto assigns hair and beard by profile, with beard restricted to males aged 18+.
+Issue #18 adds explicit manual inspection choices in the Lab presentation layer,
+without changing this DNA schema or eligibility. See [Lab review tools](../CHARACTER-LAB-V04-TOOLS.md).
 
 Call `deserializeCharacterDNA` for JSON, `parseCharacterDNA` for objects and
 `serializeCharacterDNA` for every DNA JSON export. Import validates before assigning

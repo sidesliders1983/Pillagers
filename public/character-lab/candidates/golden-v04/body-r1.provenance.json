@@ -1,0 +1,55 @@
+{
+  "schema": "pillagers-lab-candidate/1",
+  "id": "lab-body/golden-v04-candidate-002-r1",
+  "status": "preview-not-accepted",
+  "source": "scratch/character-lab-v04/body-correction/combined/body-corrected.glb",
+  "sha256": "b5631dc884c0b1dc10969e1fd72f2b46aa5aca99e0caea10952333f1504ec2d8",
+  "bytes": 3023020,
+  "triangles": 1322,
+  "materials": 1,
+  "colors": 2,
+  "sourceImageSHA256": "2c185ca7b5aec2fb1f3554dea8478c8ef0eaeff6bc3da3d7cc78edd79361595a",
+  "providerTask": "01a10162-6671-70df-9787-95ba7f0e37ba",
+  "sourceFamilyHold": [
+    "giant-inner-thigh-crotch-crossings",
+    "chin-cage-migration"
+  ],
+  "implementation": "existing CharacterFactory/UniversalHuman/AttachmentFit; Lab-only LOD2",
+  "rawProvenance": "scratch/meshy-api/golden-human-v04-candidate-02/provenance.json",
+  "parentSourceSHA256": "1e958ad5a5fe4fb5b08999cee79d5a5177e189ed6b3f78f308a2bd320f62d647",
+  "sourceCorrections": {
+    "handWrist": "Minimal 12 existing hand-vertex corrections; all split copies coherent; Child hand-scale deltas retained",
+    "face": "Existing lip source vertex moved0.5mm forward to remove tiny source crossing",
+    "chest": "Breasts/BreastJiggle upper-chest cap field; no base/rig/arm/abdomen redesign",
+    "patches": [
+      {
+        "path": "artifacts/character-lab-v04/body-correction/hands/HAND-PATCH.json",
+        "sha256": "173985055aa036a265ace6e562ec4edb3cfc384e0d11c723a45425542fd82c15"
+      },
+      {
+        "path": "scratch/character-lab-v04/body-correction/chest/chest-patch.json",
+        "sha256": "77d661db0365567fcef5fc44f3649262866f3bb35d387de21da1a754e1b902e4"
+      }
+    ],
+    "topologySkinBindNodesPaletteClipsUnchanged": true,
+    "sourceGuidedConceptUnchanged": true
+  },
+  "previousPreviewRetained": {
+    "path": "/character-lab/candidates/golden-v04/body.glb",
+    "sha256": "1e958ad5a5fe4fb5b08999cee79d5a5177e189ed6b3f78f308a2bd320f62d647"
+  },
+  "independentNumeric": "artifacts/character-lab-v04/body-correction/qa/combined-native-crossing-summary.json",
+  "visualReview": {
+    "status": "PASS_BOUNDED_CHEST_HAND_CORRECTION; FULL_SOURCE_GATE_HOLD",
+    "verdict": "artifacts/character-lab-v04/body-correction/qa/VERDICT.md",
+    "receipt": "artifacts/character-lab-v04/body-correction/qa/FINAL-QA-RECEIPT.json",
+    "sourceSHA256": "b5631dc884c0b1dc10969e1fd72f2b46aa5aca99e0caea10952333f1504ec2d8",
+    "capturedImages": 33,
+    "uniqueOriginalImages": 29,
+    "validCorrectionImages": 27,
+    "auditedActualExports": 11,
+    "errors": 0,
+    "scope": "Sampled actual served chest/hand correction only; complete body gate remains HOLD",
+    "routeInterception": false
+  }
+}

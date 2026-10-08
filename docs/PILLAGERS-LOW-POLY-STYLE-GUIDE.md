@@ -4,7 +4,7 @@ Version: `pillagers-character-style/0.4-draft.1`
 Date: 2026-10-03  
 Scope: canonical visual direction for the Character Lab v0.4 upgrade. This document records requirements; it does not certify that assets have been generated, reviewed or implemented.
 
-Companion documents: [Codex multi-agent implementation brief and acceptance criteria](CHARACTER-LAB-V04.md) · [source-reference manifest](references/character-lab-v04/manifest.json).
+Companion documents: [Codex multi-agent implementation brief and acceptance criteria](CHARACTER-LAB-V04.md) · [original source-reference manifest](references/character-lab-v04/manifest.json) · [supplemental reference metadata](references/character-lab-v04/supplemental-manifest.json).
 
 This guide owns visual rules. The implementation brief owns delivery scope, agent ownership, validation gates and stop conditions. The existing character/fit/registry contracts continue to own technical semantics. Read them together; do not create a second style guide or parallel character framework.
 
@@ -12,7 +12,7 @@ This guide owns visual rules. The implementation brief owns delivery scope, agen
 
 **Caricature through silhouette and large sculpted planes — not realistic anatomy with a polygon filter.**
 
-Return to the exaggerated proportions of the supplied illustrations. The recent base-body sheets are useful composition experiments, but are not authority for normalizing anatomy or enlarging hands/feet with body mass. The latest user requirement takes precedence: a bald, clean-shaven base with substantially different bodies and nearly identical low-poly head/face, hands and feet.
+Return to the exaggerated proportions of the supplied illustrations. The latest user-supplied six-build body sheet (original `1-Foto-1.jpg`, SHA-256 `7b5f890c3e0c4d31af7b7d5035136bde967c6a63e52897f0b9907305a203b766`) **is authority for adult body proportions and extreme silhouettes**, supplementing the original eight-image pack. Preserve the still-authoritative bald, clean-shaven base and shared adult low-poly head/face, hands and feet. The new sheet does not authorize enlarging those common parts with body mass, individual toes, painted anatomical detail or an exposed abdomen.
 
 The four independent asset families are:
 
@@ -42,11 +42,13 @@ Eight unique illustrations were supplied in the conversation; the repeated adult
 | `07-rounded-warrior.jpeg` | `IMG_3959.jpeg` | Rounded belly represented by large angular planes; short tapering legs |
 | `08-stooped-elder.jpeg` | `IMG_3960.jpeg` | Posture, long narrow shapes and asymmetry without fine anatomical detail |
 
+The additional 1280×960, 149,602-byte six-build sheet is recorded separately in the supplemental metadata; the original ZIP and its eight verified files remain unchanged. Its body masses, torso/limb relationships and posture direction govern Giant, Raven, Bear, Fox, Elder and Jarl. Keep the adopted adult common-part shape lock and <=5% bounds tolerance, central body-shape strength 0.6, maximum adult height 1.60m, and opaque white coverage over the full abdomen. The image remains task-local/private; metadata is not permission to publish it.
+
 Reference precedence:
 
 1. Explicit user decisions in this guide and the v0.4 implementation brief.
 2. Approved Golden Human proportions and the existing technical contracts.
-3. The supplied illustrations for shape language, silhouette, simplification and palette.
+3. The latest supplemental six-build sheet for adult body proportions/extreme silhouettes, and the original eight illustrations for shape language, simplification, palette and module direction; explicit shared-part/presentation constraints remain higher priority.
 4. Generated concepts, which remain candidates until reviewed.
 
 Do not reproduce individual reference characters. Do not infer that a cloak, fur mantle or beard represents underlying body volume. Extract the design language, then author independent modules. Fantasy motifs in the illustrations are not a historical-authenticity requirement or an instruction to add helmets/armor to this milestone.
@@ -72,6 +74,8 @@ Use these as visual test presets, not species, occupations, ranks or fixed gamep
 
 The presets must be reproducible configurations of one adjustable system. Do not independently generate six incompatible body meshes or six skeletons.
 
+Do not invent a universal big-head ratio or reject ordinary adult height relationships solely because the latest sheet depicts them. Geometric plane language and anatomical microdetail are reviewed separately from those approved body ratios.
+
 There is deliberately no universal head-to-height ratio for all bodies: the same adult head size against varying torso/limb proportions produces the intended caricature. Measure each approved preset at the same camera scale; do not auto-fit each portrait to identical height and thereby hide proportion differences.
 
 ## 4. Shared head, hands and feet — non-negotiable
@@ -95,6 +99,12 @@ Use intentionally placed broad facets, not random triangulation noise. Torso, li
 Flat/faceted surface treatment must survive neutral material and lighting tests. Painted triangles on a smooth silhouette are insufficient. Preserve deformation-friendly topology at shoulders, elbows, hips, knees and neck; low-poly does not mean broken animation.
 
 Spend geometry on silhouette and articulation. Inherit the registry's measured budgets and establish family-specific targets at the first planning gate. Existing high-detail quality exceptions are not automatic budgets for every new hairstyle. Do not claim a triangle count from a concept image: measure exported meshes.
+
+### Source geometry and bounded topology repair
+
+Preserve the approved generated design, major planes, principal silhouette and intended openings. This does not require retaining generator folds, inverted inner walls or every noisy triangle. A negative winding sign is not evidence that a generated component represents intended air; bind material/cavity roles to the actual reviewed reference and source views before cleanup.
+
+Exact native-plane arrangements are useful when they preserve both style and valid topology. If they create false windows or nonmanifold wall contacts, freeze that failure and propose one bounded source-landmark panel repair. Record every removed/changed/new facet and vertex, the source boundary correspondence, actual two-way surface deviation, silhouette/extrema changes and cavity controls. New repair facets must be labelled as authored cleanup, never falsely certified as unchanged native planes. Preserve the approved outer construction and use intentional broad inner panels; no new hairstyle design, body cutter, floating hole cover or per-seed/runtime workaround. Technical checks and independent neutral/silhouette visual review precede canonical fit and acceptance. The dated coordinator clarification and candidate-specific limits remain discoverable in the #18 evidence tree.
 
 ## 6. Golden-body presentation
 
@@ -153,7 +163,20 @@ These are equipment/attachment validation assets, not a combat-system milestone.
 
 Favor warm cream, faded rust/red, muted ochre, earthy brown, sage/olive and charcoal/dusty blue-grey. Use broad value regions and restrained accent colors. Skin uses simple consistent shading, not pores or photographic texture.
 
-Keep geometry reusable under material changes. Do not bake dramatic directional lighting, cast shadows, names or sheet labels into albedo. A texture may carry intentional flat color regions; it must not be the only source of the low-poly impression.
+Keep geometry reusable under material changes. Do not bake dramatic directional lighting, cast shadows, names or sheet labels into albedo. The user clarified on 2026-10-03 that vertices have one colour each, with a deliberate gradient allowed when needed. The default flat-facet rule below is the technical implementation of that intent, not a verbatim user requirement.
+
+- Each exported vertex carries one RGB or RGBA colour value in `COLOR_0`. Default: all corners of a triangle, and all triangles/corners belonging to one intended polygon/facet, use the same facet colour. White underlayer regions are assigned to the source geometry's vertices/facets rather than painted as garment outlines inside a face.
+- Deliberate vertex-colour gradients are optional. Declare their region/purpose and review the interpolated result; accidental sampling noise or baked illumination is not an intentional gradient.
+- At a colour border, split colour attributes/vertex records as needed while keeping corresponding positions, skin weights and morph data coincident. Attribute separation must not create geometric gaps, loose seams or detached pieces. Place design-region borders on deliberate facet edges, not high-frequency subdivisions.
+- No garment edge painted across the interior of a face. No dense diffuse-texture triangles, intraface colour noise or painted facets masquerading as geometric planes. Facet construction must still read under neutral material and lighting.
+
+New hair, beard/face-covering, clothing and accessory designs follow actual Imagegen concept output → visual review → 3D-provider conversion → source-preserving optimization/canonical fit and colour quantization/bake → validation. Bake approved broad flat regions to `COLOR_0` by default; preserve only declared gradients. Retain the input/output hashes, palette/region/gradient decisions and conversion lineage. A prompt file, invented mesh design or texture-only polygon effect does not replace that source chain.
+
+For the next accepted colour-pipeline proof, mapless base colour is an explicit export gate: linear RGB(A) `COLOR_0`, a neutral white material base-colour factor, and no albedo/base-colour texture dependency. Remove unused albedo images at export. Measure and record these properties; a valid attribute or a manifold mesh alone does not prove the reference style. Independently inspect neutral-material silhouettes and rendered flat-facet colours at matching front/side/back and fixed RTS cameras before acceptance. Generic runtime support or a passing structural report cannot replace that visual decision.
+
+Current assets using legacy diffuse maps remain inspection-only until individually re-reviewed and migrated against these rules. Do not bulk recolour or convert them automatically. Dated screenshots, provenance and current Lab `pillagers-character-style/0.4-draft.1` labels describe the existing inspection state and are not retroactively reapproved or invalidated. Plan a separate next accepted-asset style revision with an explicit identifier, colour-pipeline proof, compatibility/snapshot handling and visual review before publication; this clarification alone changes no runtime style/version or fixture.
+
+Proposed next candidate identifier: `pillagers-character-style/0.4-draft.2`. This is a plan, not an active runtime or accepted-asset version. Freeze it only with the first sourced colour-pipeline proof and Art Guardian review; then deliberately update accepted asset metadata and snapshot compatibility, retaining draft1 inspection history. No fixture/hash rewrite or automatic old-library migration accompanies this proposal.
 
 Use soft neutral review lighting and a second flatter diagnostic mode. The parchment backgrounds and cinematic poses in the illustrations are presentation, not part of any exported asset.
 
@@ -161,7 +184,7 @@ Use soft neutral review lighting and a second flatter diagnostic mode. The parch
 
 The implementation agent generates its own concepts through an actually available image-generation capability. A written prompt or a procedural placeholder is not evidence that image generation ran. Check capability, references and any required authorized budget first; record a blocker if unavailable.
 
-Use this shared prompt prefix, followed by a narrowly scoped asset-family instruction:
+Use this shared prompt prefix, followed by a narrowly scoped asset-family instruction and the flat-facet colour requirements from section 10:
 
 > Pillagers modular character design. Strongly caricatural Nordic-fantasy silhouettes, intentionally sparse broad planar facets, simplified angular facial construction, tapered sculpted limbs and muted earthy colors. Match the supplied reference shape language, not realistic human anatomy. Preserve the approved Golden Human head, hands, feet, scale and technical pose. Design only the requested module. No realistic skin, tiny cloth wrinkles, strands, ornate armor, baked lighting, integrated equipment or background scenery.
 
@@ -177,7 +200,7 @@ A candidate is accepted only with recorded reference/render evidence for all app
 
 - **Silhouette:** deliberate caricature, distinct body or module, recognizable without decorative color and at an actual fixed RTS camera.
 - **Shared construction:** adult head/hands/feet remain standardized; modules do not redesign the underlying person.
-- **Facet language:** broad purposeful planes, no realistic anatomy or random dense tessellation.
+- **Facet language:** broad purposeful planes, no realistic anatomy or random dense tessellation; default constant facet vertex colours, declared gradients only, with coincident colour borders and no intraface painted garment edges.
 - **Separation:** body, head modules, garments and equipment remain independent; no unintended source-body remnants.
 - **Fit and motion:** no major floating, embedding, collapsed hems, disconnected sockets or severe clipping across the supported range and Idle/Walk/Run.
 - **Presentation:** correct scale/views, inspectable alpha when required, no background or typography baked into exports.
@@ -194,3 +217,25 @@ Reuse the current system; do not create parallel skeleton, socket or registry de
 - [Asset registry and validation at the inspected commit](https://github.com/sidesliders1983/Pillagers/blob/85d831174b9f9ddd81c7c442b19b44525deec6dd/docs/characters/asset-registry.md)
 
 This new brief specifies the intended v0.4 visual upgrade; conflicts with older artistic assumptions must be identified explicitly. It does not silently authorize changes to DNA semantics, world scale, age progression, beard eligibility or gameplay rules.
+
+
+## 13. Mandatory candidate technical style gate
+
+Before promoting any new v0.4 vertex-palette candidate, run the repository-controlled style policy and retain the exact source hash, profile hash and named diagnostics. For the current body proof use:
+
+```text
+npm run validate:style -- --family body-proof <local-candidate.glb>
+```
+
+The body-proof policy uses coplanar-region facets, at most 1,600 authored/rendered triangles, 4,800 authored/render vertices, one material and sixteen palette colours. It requires real authored and active-scene geometry, mapless linear COLOR_0, neutral white base RGB, separately opaque alpha, unit geometric-face-aligned corner normals and the selected topology checks. The generic utility ceiling remains 10,000 triangles / 30,000 vertices / two materials / sixteen colours; that ceiling is not a new family budget approval. Add another family profile only through a reviewed repository change with its actual budget and open/closed topology policy.
+
+Profiles are strict typed declarations. Colour tolerance cannot exceed 1e-6, normal-length tolerance 1e-4, and hard-normal dot alignment cannot fall below .99999. Coplanar detection uses fixed .1-degree and 1e-6-metre tolerances. Unknown fields, weakened tolerances, empty scenes and malformed booleans cannot bypass the rules. The CLI accepts no untrusted profile, arbitrary budget/tolerance or GLB self-approval flags.
+
+`--family diagnostic-triangle` is conditional diagnostic output only, including coplanar-boundary warnings; it cannot replace the body-proof policy. Optional mathematical gradients require an external trusted review bound to the exact source/profile hashes and exact declared scopes/stops. No gradient approvals are read from GLB extras, and the current CLI has no gradient-profile approval input.
+
+Technical PASS is required but never sufficient: retain independent reference silhouette/facet, shared-core, morphology, attachment, animation and actual browser/fixed-RTS visual evidence. A corrected attribute-only proof may pass this utility while its source design or white garment boundary still fails visual acceptance. Legacy inspection assets are not automatically certified, converted or republished.
+
+
+### Geometric self-intersection evidence
+
+Manifold topology and constant facet colors do not prove that a surface is free of self-intersection. Before candidate acceptance, retain an exact-source geometric crossing audit in neutral rest and the supported morphology/motion samples, alongside actual grey/silhouette views. Distinguish nonadjacent triangle interior crossings from shared vertices/edges, tangencies and numerical near-zero contacts. Record the method, exclusions, source hash, region/pair IDs and measured overlap; disclose unsupported cases such as coplanar overlaps. Significant wrist/hand or face crossings block body acceptance even when the style CLI reports technical PASS. The current CLI does not perform this crossing audit; no style/profile flag can waive that limitation.

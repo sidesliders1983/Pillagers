@@ -1,0 +1,343 @@
+{
+  "at": "2026-10-03T23:53:16.269Z",
+  "status": "ACCEPTED_PROTOTYPE_SAMPLED_CANONICAL_BROWSER",
+  "input": {
+    "path": "scratch/meshy-api/v04-sword-1/model.glb",
+    "sha256": "5d3701ce77dedf2b5a5fc1bd6cf53575484cbf428009e212047383dacfbbdb6c"
+  },
+  "output": {
+    "path": "public/character-lab/modules/v04/equipment/sword/sword.glb",
+    "sha256": "08b65df552cd58efd9fc44ff45f562d45a9b73baeea6ab291c56ddb799ab8ff5",
+    "triangles": 288,
+    "renderCorners": 864,
+    "geometricVertices": 146
+  },
+  "cleanup": {
+    "unionOriginalComponents": 2,
+    "removedInternalJunction": true,
+    "rawProperJunctionPairs": 14,
+    "actualProperPairs": 0,
+    "maximumExteriorPointDistanceSourceUnits": 2.1602537945697216e-9,
+    "RMSExteriorPointDistanceSourceUnits": 2.6000054067884367e-10,
+    "newDesignGeometry": false,
+    "sourcePolicy": "One exact union of actual generated closed blade and hilt components. Preserve native exterior planes, dissolve coplanar redundant edges only, no invented exterior or discarded component."
+  },
+  "calibration": {
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "frontSign": "Blade/hilt generated source is bilaterally near symmetric; +Z chosen as reviewed front, no anatomical import guess.",
+    "origin": "measured source grip midpoint",
+    "sourceGrip": [
+      -0.0005592452994886803,
+      -0.36,
+      -0.0004771458199801029
+    ],
+    "metresPerSourceUnit": 1.03,
+    "totalLengthMetres": 1.030000001192093,
+    "sourceGripSectionMetres": {
+      "width": 0.07084050443734001,
+      "depth": 0.0743005363130653
+    }
+  },
+  "topology": {
+    "vertices": 864,
+    "triangles": 288,
+    "unusedVertices": 0,
+    "degenerateTriangles": 0,
+    "duplicateTriangles": 0,
+    "invalidNormals": 0,
+    "opposedNormals": 0,
+    "boundaryEdges": 0,
+    "nonManifoldEdges": 0,
+    "nonManifoldVertices": 0,
+    "vertexLinkDetails": [],
+    "components": 1,
+    "componentDetails": [
+      {
+        "vertices": 146,
+        "triangles": 288,
+        "area": 0.2849219203080247,
+        "bounds": {
+          "min": [
+            -0.12788887321949005,
+            -0.14419999718666077,
+            -0.060244858264923096
+          ],
+          "max": [
+            0.1295863837003708,
+            0.8858000040054321,
+            0.06103011220693588
+          ]
+        },
+        "meshes": [
+          "Sword_v04"
+        ],
+        "regions": [],
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "nonManifoldVertices": 0
+      }
+    ]
+  },
+  "style": {
+    "valid": true,
+    "issues": [],
+    "warnings": [],
+    "diagnostics": {
+      "profileId": "v04-equipment-source-vertex-palette/1",
+      "profileHash": "951685a0a09fc09176d4eecd4e2ac529e194ca6aa4d9ed0148229754a4f130f2",
+      "triangles": 288,
+      "authoredTriangles": 288,
+      "renderedTriangles": 288,
+      "authoredVertices": 864,
+      "renderVertices": 864,
+      "materials": 1,
+      "uniqueColors": 3,
+      "coplanarColorDiscontinuities": 0,
+      "coplanarExamples": [],
+      "gradientRegions": 0,
+      "technicalPassIsVisualAcceptance": false,
+      "issueCounts": {},
+      "geometryQuality": {
+        "vertices": 864,
+        "triangles": 288,
+        "unusedVertices": 0,
+        "degenerateTriangles": 0,
+        "duplicateTriangles": 0,
+        "invalidNormals": 0,
+        "opposedNormals": 0,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "nonManifoldVertices": 0,
+        "vertexLinkDetails": [],
+        "components": 1,
+        "componentDetails": [
+          {
+            "vertices": 146,
+            "triangles": 288,
+            "area": 0.2849219203080247,
+            "bounds": {
+              "min": [
+                -0.12788887321949005,
+                -0.14419999718666077,
+                -0.060244858264923096
+              ],
+              "max": [
+                0.1295863837003708,
+                0.8858000040054321,
+                0.06103011220693588
+              ]
+            },
+            "meshes": [
+              "Sword_v04"
+            ],
+            "regions": [],
+            "boundaryEdges": 0,
+            "nonManifoldEdges": 0,
+            "nonManifoldVertices": 0
+          }
+        ]
+      }
+    },
+    "qualification": "technical-only",
+    "scope": "technical vertex-palette policy only; intentional planes, silhouette, morphology, sockets, fit, animation and visual acceptability require independent validation"
+  },
+  "metadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "equipment/v04-sword",
+    "type": "equipment",
+    "anchor": "socket_hand_R",
+    "fitMode": "rigid",
+    "clearance": 0.006,
+    "authoringFrame": "canonical",
+    "equipmentBindings": {
+      "grip": {
+        "position": [
+          0,
+          -0.04,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "sockets": {
+        "socket_hand_R": {
+          "position": [
+            0.04,
+            -0.045,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.8134155047893737,
+            0.5816830894638835
+          ]
+        },
+        "socket_hand_L": {
+          "position": [
+            -0.04,
+            -0.045,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.8134155047893737,
+            0.5816830894638835
+          ]
+        },
+        "socket_hip_L": {
+          "position": [
+            0.08,
+            0.025,
+            0.07
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.955336489125606,
+            -0.29552020666133955
+          ]
+        },
+        "socket_hip_R": {
+          "position": [
+            -0.08,
+            0.025,
+            0.1
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.9800665778412416,
+            0.19866933079506124
+          ]
+        },
+        "socket_back": {
+          "position": [
+            0,
+            0.05,
+            -0.065
+          ],
+          "quaternion": [
+            0,
+            0,
+            1,
+            6.123233995736766e-17
+          ]
+        }
+      },
+      "proportions": {
+        "bodyCore": "hand_R",
+        "referenceRadius": 0.07847847822748248,
+        "sourceSHA256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+      }
+    }
+  },
+  "qualification": "Accepted for the genuine independent sampled sword R2b browser matrix. Source geometry/BIN, normals, palette and canonical fit metadata unchanged. Whole-library, mobile and continuous motion approval remain outstanding; canonical ancestor affine scale is inherited.",
+  "carryBindingAmendment": {
+    "at": "2026-10-03T22:58:29.967Z",
+    "previousGLBSHA256": "a9ef8d192f46d6545bb20bebb1b722acf668403ee3ce79e63c5f8a677503c450",
+    "newGLBSHA256": "08b65df552cd58efd9fc44ff45f562d45a9b73baeea6ab291c56ddb799ab8ff5",
+    "unchangedBinarySHA256": "dc9fe4ebbdaed651f84c0dd03d2ef38068d874f5de9dd966772db9a6d1d70b87",
+    "geometryNormalsColorsIndicesUnchanged": true,
+    "sourceOriginUnchanged": true,
+    "previousMetadataSHA256": "7ebc67043c7cbf66fdf7b9e30ed4b3461c33c2965f8842397741aa2302d4d7bf",
+    "reviewTrigger": "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r1/VERDICT.json",
+    "replayReceipt": "artifacts/character-lab-v04/equipment-v04-pipeline/sword/carry-correction/CARRY-REPLAY-PALM-PROPORTIONS.json",
+    "replayReceiptSHA256": "531c0b2d7cbaa635bf2dda612f8bdb7dfed14aa71f4d40765a580263b8008993",
+    "selectedFrames": [
+      {
+        "socket": "socket_hand_R",
+        "frame": {
+          "position": [
+            0.04,
+            -0.045,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            0.8134155047893737,
+            0.5816830894638835
+          ]
+        },
+        "cases": 12,
+        "bladeProperPairs": 0,
+        "guardProperPairs": 0,
+        "intentionalHandGripPairs": 684,
+        "floorMm": 0
+      },
+      {
+        "socket": "socket_hand_L",
+        "frame": {
+          "position": [
+            -0.04,
+            -0.045,
+            0
+          ],
+          "quaternion": [
+            0,
+            0,
+            -0.8134155047893737,
+            0.5816830894638835
+          ]
+        },
+        "cases": 2,
+        "bladeProperPairs": 0,
+        "guardProperPairs": 0,
+        "intentionalHandGripPairs": 116,
+        "floorMm": 0
+      }
+    ],
+    "equipmentProportions": {
+      "bodyCore": "hand_R",
+      "referenceRadius": 0.07847847822748248,
+      "sourceSHA256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+    },
+    "qualification": "Canonical source-bound whole-item proportion and measured palm binding only; no geometry change. Actual factory RMS scales child hand core. Independent browser grip/carry/motion approval remains required; numerical proper crossing exclusions do not certify all contacts."
+  },
+  "previousCarryBindingAmendment": {
+    "previousGLBSHA256": "d00cb177967af5e9f4781271fb02cf41ff39a3b8acac4974db4b228606891d63",
+    "newGLBSHA256": "a9ef8d192f46d6545bb20bebb1b722acf668403ee3ce79e63c5f8a677503c450",
+    "unchangedBinarySHA256": "dc9fe4ebbdaed651f84c0dd03d2ef38068d874f5de9dd966772db9a6d1d70b87",
+    "geometryNormalsColorsIndicesUnchanged": true,
+    "sourceOriginUnchanged": true,
+    "gripSection": {
+      "y": -0.04,
+      "min": [
+        -0.030608746771525294,
+        -0.0316937321148713
+      ],
+      "max": [
+        0.030516456795318975,
+        0.03174636427692875
+      ],
+      "edgeHits": 32
+    },
+    "previousMetadataSHA256": "674fe6835e5e3ee600632b4e8597a566fa8fc1305c8cd7ef2d52e47a8951abdd",
+    "reviewTrigger": "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa/VERDICT.json",
+    "replayReceipt": "artifacts/character-lab-v04/equipment-v04-pipeline/sword/carry-correction/CARRY-REPLAY-GRIP-DEPTH.json",
+    "replayReceiptSHA256": "9a072cb6db77c94c58a91de883ce202609d18351c6423c313640a3bfa67e554e",
+    "qualification": "Existing canonical equipmentBindings only. Lower grip is inside actual measured generated handle section. Metadata-only GLB JSON amendment; identical source geometry, normals, palette and BIN. Verified affine replay from21 genuine UI snapshots shows zero blade/guard/grip proper surface pairs and zero floor intersections for chosen frames; this is not visual grip-contact acceptance, coplanar/solid-volume or full motion-domain proof."
+  },
+  "visualReview": {
+    "path": "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r2b/VERDICT.json",
+    "sha256": "fb10ca28e990b3113e8c1d1df3995ba2720c967eeeca351606e8cec4e502a65e",
+    "status": "PASS_SAMPLED_SWORD_BINDING_CLEARANCE_AND_UI",
+    "scope": "Independent sword R2b production-preview browser approval for sampled canonical body-only equipment cases. Not full issue18/Gate2, clothing/head integration, mobile or continuous whole-motion certification.",
+    "reviewer": "/root/agent_d_visual_qa",
+    "caseCount": 21,
+    "gripCloseups": 4,
+    "evidence": [
+      "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r2b/ALL-21-GENUINE-LAB-MONTAGE.png",
+      "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r2b/ADULT-CHILD-REAL-GRIP-MONTAGE.png"
+    ],
+    "worldShapeQualification": "Metadata applies a uniform local hand-core item proportion, but socket ancestor affine transforms are inherited. Actual source/world edge-ratio spread is measured, not certified isotropic. No source mesh/BIN/palette mutation occurred."
+  }
+}

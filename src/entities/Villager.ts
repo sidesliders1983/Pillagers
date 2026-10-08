@@ -8,6 +8,9 @@ export class Villager {
     phase: number;
     wait = 0;
     speed = 0;
+    busy=false;socialEnabled=true;
+    interactionState:'none'|'talking'|'listening'|'resume'='none';
+    partnerId:number|null=null;socialCooldownUntil=0;
     constructor(readonly id: number, visual?: Object3D) {
         this.phase = id;
         if (visual) {

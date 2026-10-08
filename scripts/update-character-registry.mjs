@@ -1,6 +1,8 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {loadTypeScript} from './load-typescript.mjs';
 import {readGLB,geometryGLTF,measureGLB,publicFile} from './characters/glb-inspection.mjs';
+import {validateModuleProvenance} from './characters/provenance-validation.mjs';
+import {validateGarmentBindProvenance} from './characters/garment-bind-validation.mjs';
 const {characterAssets,validateCharacterRegistry}=loadTypeScript(new URL('../src/characters/CharacterAssets.ts',import.meta.url));
 validateCharacterRegistry();
 const measurements={},manifest={schemaVersion:1,assets:[]};
@@ -11,7 +13,11 @@ for(const asset of characterAssets){
             const record=readGLB(path);
             if(asset.type!=='body'){
                 const provenance=JSON.parse(readFileSync(publicFile(path.replace('.glb','.provenance.json')),'utf8').replace(/^\uFEFF/,''));
-                if(provenance.outputSha256!==record.sha256)throw new Error('stale output provenance');
+                validateModuleProvenance(asset,lod,provenance,record.sha256,{allowLabPreview:asset.scope==='lab-v04'&&asset.reviewStatus==='preview',record,authoringReceiptBytes:asset.scope==='lab-v04'?readFileSync(publicFile(provenance.v04Canonicalization?.authoringReceipt)):undefined});
+                if(asset.type==='garment'&&asset.metadata?.garmentBind){
+                    const bindPath=path.slice(0,path.lastIndexOf('/')+1)+'garment-bind.json';
+                    validateGarmentBindProvenance(asset,lod,provenance,{sidecarBytes:readFileSync(publicFile(bindPath))});
+                }
             }
             const measured=measureGLB(record,await geometryGLTF(record));
             measurements[path]=measured;lods[lod]={file:path,...measured};

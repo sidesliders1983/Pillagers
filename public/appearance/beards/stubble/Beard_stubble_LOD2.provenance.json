@@ -1,27 +1,6667 @@
 {
   "reviewRequired": false,
+  "kind": "beard",
   "style": "stubble",
   "lod": 2,
-  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\lods-2500-1800-1200\\Beard_stubble_LOD2.glb",
-  "sourceSha256": "8e24d928187868c6401a8e526225fe3b7730b6262d188f4cca617dae57c552f2",
-  "outputSha256": "67842a4d709f490f90732836ced388642aa3e9ebf8bdd4998107131522056528",
-  "fit": {
-    "sourceSkullCentre": [
-      0,
-      0,
-      0.075
-    ],
-    "scale": 0.52,
-    "rotateBlenderZ": 180,
-    "headReferenceSize": [
-      0.1992,
-      0.2397,
-      0.2189
-    ]
-  },
-  "removedSmallComponentVertices": 201,
-  "fragmentAreaThreshold": 0.015,
+  "source": "scratch/appearance-pass/lead-stubble/mask-v19-metric/Beard_stubble_LOD2.glb",
+  "sourceSha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5",
+  "outputSha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5",
   "sourceProvenance": {
+    "outputSha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5",
+    "qualifiedCandidateAuthoring": {
+      "reviewRequired": true,
+      "style": "stubble",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\pigment-source-v15\\beard\\stubble\\Beard_stubble_LOD2.glb",
+      "sourceSha256": "b89ea54b9ab2727200ed472c7cc6ab6b49f12d91c9b0f51b5bd8b7b4a75200de",
+      "sourceProvenance": {
+        "reviewRequired": true,
+        "style": "stubble",
+        "lod": 2,
+        "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\pigment-v15\\stubble-domain.npz",
+        "sourceSha256": "8f369a34f7fd4225b89369b5597f3dc579f2dfa0146f92ce2df5dfb86d759b92",
+        "outputSha256": "b89ea54b9ab2727200ed472c7cc6ab6b49f12d91c9b0f51b5bd8b7b4a75200de",
+        "sourceProvenance": {
+          "reviewRequired": true,
+          "kind": "beard",
+          "style": "stubble",
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\pigment-v14\\stubble-domain.npz",
+          "sourceSha256": "7e374cbe64bd0d9e1ac780d7735ca217e93dbf9d541a0d3b2d89b437a648686b",
+          "outputSha256": "8f369a34f7fd4225b89369b5597f3dc579f2dfa0146f92ce2df5dfb86d759b92",
+          "sourceProvenance": {
+            "reviewRequired": true,
+            "kind": "beard",
+            "style": "stubble",
+            "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
+            "sourceSha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d",
+            "outputSha256": "7e374cbe64bd0d9e1ac780d7735ca217e93dbf9d541a0d3b2d89b437a648686b",
+            "sourceProvenance": {
+              "reference": {
+                "id": "stubble",
+                "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+                "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+                "crop": [
+                  20,
+                  485,
+                  214,
+                  752
+                ],
+                "inputSha256": "a766ddabcbbdb9cb5262a47e525e4271dbae8a321800c8540405ee96cf7ca0d2",
+                "redrawn": false,
+                "reviewRequired": true,
+                "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble",
+                "jobId": "beards-v03/stubble"
+              },
+              "reviewRequired": true,
+              "generation": {
+                "backend": "pixal3d",
+                "components": [],
+                "input": {
+                  "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\reference.png",
+                  "sha256": "beed9e1c370d026c048ed20b6feed8bd476894bb0931e970dc2b6694be7816b5"
+                },
+                "license": {
+                  "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+                  "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+                },
+                "output": {
+                  "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
+                  "sha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d"
+                },
+                "parameters": {
+                  "fov": 0.3490658503988659,
+                  "gsh": null,
+                  "gss": 10,
+                  "matted": true,
+                  "res": 1024,
+                  "seed": 1983,
+                  "steps": 12
+                },
+                "schema_version": 1,
+                "timings_seconds": {
+                  "total": 3254.4
+                }
+              },
+              "outputSha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d",
+              "matte": {
+                "model": "birefnet-general-lite",
+                "sourceSha256": "a766ddabcbbdb9cb5262a47e525e4271dbae8a321800c8540405ee96cf7ca0d2",
+                "inputSha256": "beed9e1c370d026c048ed20b6feed8bd476894bb0931e970dc2b6694be7816b5",
+                "redrawn": false
+              }
+            },
+            "geometryOptimization": {
+              "rawTriangles": 939476,
+              "classifiedReferenceTriangles": 58806,
+              "classificationOrder": "original encoded base-colour texture before geometry simplification",
+              "maximumPigmentValue": 0.76,
+              "maximumPigmentRedExcess": null,
+              "maximumGreenBlueDistance": null,
+              "maximumGreenMinusBlue": null,
+              "minimumPigmentSaturation": 0.15,
+              "completeReferenceVolume": false,
+              "textureClosingRadiusPixels": 0,
+              "minimumHeightMeters": -0.125,
+              "sourceAxisSize": [
+                0.4891818146969743,
+                0.620956335478041,
+                0.6429550013249521
+              ],
+              "sourceAnatomySha256": "30ef36713c4354ec249d9f56b8cfb6e17889bbe40b017108359b0e672a3ac207",
+              "textureCoordinates": "glTF TEXCOORD_0 native image row v, upper-left; no vertical inversion",
+              "maximumNormalizedRedFraction": 0.45,
+              "maximumHeightMeters": -0.04
+            },
+            "fit": {
+              "authoringFrame": "canonical",
+              "up": "+Y",
+              "front": "+Z",
+              "origin": "fixed skull centre",
+              "canonicalHeadSize": [
+                0.1992,
+                0.2397,
+                0.2189
+              ]
+            },
+            "sourceHeadFrame": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\lead-stubble\\source-anatomy\\measured-landmarks.json",
+              "sha256": "30ef36713c4354ec249d9f56b8cfb6e17889bbe40b017108359b0e672a3ac207",
+              "entry": "beard/stubble",
+              "measuredFrame": {
+                "centre": [
+                  -0.03663738853844881,
+                  0.04176678390279381,
+                  0.12116073789924342
+                ],
+                "up": [
+                  -0.11896585764829547,
+                  -0.022695914206422134,
+                  0.9926389173271115
+                ],
+                "front": [
+                  -0.4655097833217133,
+                  0.8843276239408018,
+                  -0.0355709877145332
+                ],
+                "right": [
+                  0.8770106991056478,
+                  0.4663148603825002,
+                  0.11576996432871656
+                ],
+                "canonicalXAxis": [
+                  -0.8770106991056478,
+                  -0.4663148603825002,
+                  -0.11576996432871656
+                ],
+                "headBoundsInFrame": {
+                  "min": [
+                    -0.24321904277510367,
+                    -0.18679864104282717,
+                    -0.27179672421336054
+                  ],
+                  "max": [
+                    0.24596277192187066,
+                    0.43415769443521385,
+                    0.3711582771115916
+                  ],
+                  "size": [
+                    0.4891818146969743,
+                    0.620956335478041,
+                    0.6429550013249521
+                  ]
+                },
+                "yawDegrees": -28,
+                "method": "measured neck/head axis, geometric sagittal symmetry, axis-specific head bounds"
+              },
+              "axisScale": [
+                0.4891818146969743,
+                0.620956335478041,
+                0.6429550013249521
+              ],
+              "canonicalBlenderBasis": "-right, -front, +up",
+              "canonicalGlTFBasis": "-right, +up, +front"
+            }
+          },
+          "fit": {
+            "authoringFrame": "canonical",
+            "up": "+Y",
+            "front": "+Z",
+            "origin": "fixed skull centre",
+            "canonicalHeadSize": [
+              0.1992,
+              0.2397,
+              0.2189
+            ]
+          },
+          "geometryOptimization": {
+            "sourceTriangles": 58806,
+            "outputTriangles": 57920,
+            "sourceComponents": 142,
+            "retainedComponents": 2,
+            "minimumComponentAreaFraction": 0.01,
+            "minimumComponentAreaSquareMetres": 0.00016665227614047652,
+            "removedSourceTriangles": 886,
+            "retainedSourceAreaSquareMetres": 0.033024489879608154,
+            "removedSourceAreaSquareMetres": 0.0006153988651931286,
+            "geometryMoved": false,
+            "pigmentRedrawn": false,
+            "sourceComponentsAreaSquareMetres": [
+              0.01666522761404765,
+              0.016359266544264894,
+              0.000003342178686693842,
+              0.0000013363453206238773,
+              0.0000018136163362214575,
+              0.0000012115298204662395,
+              0.0000016616370430710958,
+              0.0000013267869007904665,
+              4.0295478243024263e-7,
+              0.0000023022079744805524,
+              7.526554668402241e-7,
+              5.260438911136589e-7,
+              0.0000012540137390715245,
+              7.401239088267175e-7,
+              0.000016541163319061525,
+              5.520187755791994e-7,
+              0.000001260964609173243,
+              0.0000020426211904123193,
+              0.000004535639561709104,
+              8.371059720957419e-7,
+              8.117283982755907e-7,
+              0.00004598827118229565,
+              0.00001210538866303068,
+              9.811730024011922e-7,
+              7.262376584549202e-7,
+              9.530260740575613e-7,
+              0.000003901583966126054,
+              4.6875501880094816e-7,
+              0.00004810430419865952,
+              0.0000010770008884719573,
+              0.000007376679604931269,
+              0.000008687381111371906,
+              0.000023192053873799523,
+              0.0000011093960665675695,
+              0.0000013489410548572778,
+              3.8829412574159505e-7,
+              7.721738484178786e-7,
+              0.0000010798812581924722,
+              0.000021121788506661687,
+              6.106658929638797e-7,
+              0.0000010638959793141112,
+              0.0000018043611191842501,
+              7.486838171644195e-7,
+              0.0000018483646826439326,
+              0.0000035203423038865367,
+              8.745653587993729e-7,
+              4.807153572983225e-7,
+              3.2805897376420035e-7,
+              7.768547760633737e-7,
+              5.907157287765585e-7,
+              0.0000017540099293000821,
+              0.0000010415312772238394,
+              0.000001083867573470343,
+              8.668345969908842e-7,
+              5.259878435026621e-7,
+              0.0000017763336472853553,
+              1.8777610932829703e-7,
+              5.862840168902039e-7,
+              0.000001977015188003861,
+              0.0000016725034015507845,
+              4.975369733983825e-7,
+              2.3348340505435772e-7,
+              0.00000271287524356012,
+              0.0000017473451521254901,
+              2.979110149681219e-7,
+              0.000002385336728139009,
+              0.0000031242972227119026,
+              4.783127565133327e-7,
+              0.000001511541512400072,
+              3.846850802347035e-7,
+              0.000002008229841976572,
+              2.68033574002402e-7,
+              2.789119548651797e-7,
+              0.0000011759032361169375,
+              4.894494622931234e-7,
+              0.0000024312166431172955,
+              7.268445187946782e-7,
+              1.8314466387892026e-7,
+              6.84956091845379e-7,
+              3.781657653689763e-7,
+              0.0000017202525270931801,
+              2.5433129735574767e-7,
+              1.9441039000867022e-7,
+              0.0000012630712831196433,
+              0.0000034929456091958855,
+              0.000006399130384693308,
+              4.900342105429445e-7,
+              0.0000010131175542937854,
+              0.0000013622647632161033,
+              0.0000052862720849589095,
+              0.000002704905881500963,
+              0.000015709917917661187,
+              0.0000014147385059004591,
+              1.2551653050252298e-8,
+              7.767292231619649e-7,
+              5.216971601385012e-7,
+              0.0000031151813004726137,
+              4.891656999461702e-7,
+              0.000006868060296483236,
+              9.274086210098176e-7,
+              2.509255523364118e-7,
+              0.0000019523724859027425,
+              4.5332322429203487e-7,
+              6.372378038577153e-7,
+              0.0000023439571776862067,
+              4.1460737065790454e-7,
+              7.371078254436725e-7,
+              3.9846337074322946e-7,
+              0.0000013253817030545179,
+              0.0000032903610218681933,
+              9.125720339397958e-7,
+              3.145966616102669e-7,
+              0.0000023385134326758816,
+              4.879970560978109e-7,
+              8.325827707267308e-7,
+              3.8584056483159657e-7,
+              5.702530643247883e-7,
+              7.143585776248074e-7,
+              4.2682351164557986e-7,
+              7.87962960657751e-7,
+              0.000001408964863003348,
+              0.0000011051968158426462,
+              0.000002209213562309742,
+              0.00013739951499402991,
+              0.00011407276133468258,
+              0.000002894251224461186,
+              6.65337239524888e-7,
+              4.969226097273349e-7,
+              9.311186772720248e-7,
+              2.8096491178075667e-7,
+              0.0000010711187314882409,
+              2.6896597660197585e-7,
+              0.000001921966799045549,
+              2.245179047122292e-7,
+              0.000005159743068361422,
+              8.867621659192082e-7,
+              4.616603632712213e-7,
+              5.849539519431346e-9,
+              5.059044383415312e-7,
+              9.038925163906697e-10,
+              3.9588002209711703e-7,
+              6.886817800477729e-7
+            ]
+          }
+        },
+        "geometryOptimization": {
+          "outputTriangles": 19999,
+          "removedMicroscopicFaces": 0,
+          "minimumComponentAreaRatio": 0,
+          "volumeUnionVoxelSizeMeters": null,
+          "facetedNormals": true,
+          "profileMaterialCount": 1,
+          "planarDissolveAngleDegrees": 1.5,
+          "pigmentBoundaryDissolved": false
+        },
+        "fit": {
+          "authoringFrame": "canonical",
+          "up": "+Y",
+          "front": "+Z",
+          "origin": "fixed skull centre",
+          "canonicalHeadSize": [
+            0.1992,
+            0.2397,
+            0.2189
+          ]
+        }
+      },
+      "outputSha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5",
+      "bodyContactAuthority": {
+        "path": "C:\\CodexWorkspaces\\Pillagers\\public\\universal-human\\UniversalHuman_LOD0.glb",
+        "sha256": "40e9e4cebdcbb796d5cbf509de52d1220635913e5a069d6b56d69afd81af6f55",
+        "selection": "actual CharacterFitSystem HEAD_CAGE, Golden neutral bind, LOD0",
+        "originalBounds": {
+          "min": [
+            -0.09817365757928799,
+            1.6371778144793554,
+            -0.13033567368984222
+          ],
+          "max": [
+            0.10107407517923404,
+            1.8768507137255712,
+            0.08856720477342606
+          ]
+        }
+      },
+      "fit": {
+        "authoringFrame": "canonical",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ],
+        "projection": "shell",
+        "attachmentBand": {
+          "minimumY": null,
+          "maximumY": null
+        },
+        "subdivisions": 0,
+        "clearance": 0.003
+      },
+      "geometryOptimization": {
+        "method": "Rasterize original source triangle angular coverage onto the actual closed faceted HEAD_CAGE, preserving source mask instead of tessellating colour pixels",
+        "sourceTriangles": 19999,
+        "outputTriangles": 723,
+        "materials": 1,
+        "contactRadialOffsetMetres": 0.004,
+        "atlasSize": 1024,
+        "samplesPerTexel": 4,
+        "maskRGB": "white; DNA material supplies profile colour",
+        "alphaMode": "MASK",
+        "alphaCutoff": 0.5,
+        "contourRedrawn": false,
+        "interiorMaskDilationPixels": 0,
+        "chartPaddingPixels": 5,
+        "maximumMetresPerTexel": 0.001,
+        "facets": [
+          {
+            "id": 0,
+            "sourcePolygons": 937,
+            "commonCells": 23,
+            "emittedTriangles": 38,
+            "maximumEdgeMetres": 0.07552479597202634,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 111,
+              "y": 305,
+              "width": 87,
+              "height": 42,
+              "triangle": [
+                [
+                  111,
+                  305
+                ],
+                [
+                  186.5247959720263,
+                  305
+                ],
+                [
+                  151.34063154584965,
+                  335.6066747753579
+                ]
+              ]
+            }
+          },
+          {
+            "id": 1,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.08299598539629523,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 511,
+              "y": 624,
+              "width": 94,
+              "height": 13,
+              "triangle": [
+                [
+                  511,
+                  624
+                ],
+                [
+                  593.9959853962953,
+                  624
+                ],
+                [
+                  563.5143424845261,
+                  625.112850625707
+                ]
+              ]
+            }
+          },
+          {
+            "id": 2,
+            "sourcePolygons": 0,
+            "commonCells": 16,
+            "emittedTriangles": 28,
+            "maximumEdgeMetres": 0.07035829831452567,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 538,
+              "y": 209,
+              "width": 82,
+              "height": 49,
+              "triangle": [
+                [
+                  538,
+                  209
+                ],
+                [
+                  608.3582983145257,
+                  209
+                ],
+                [
+                  585.6180305298327,
+                  246.77748949872995
+                ]
+              ]
+            }
+          },
+          {
+            "id": 3,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.07035829831452567,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 424,
+              "y": 477,
+              "width": 82,
+              "height": 24,
+              "triangle": [
+                [
+                  424,
+                  477
+                ],
+                [
+                  494.3582983145257,
+                  477
+                ],
+                [
+                  442.2680590013795,
+                  489.5909943520524
+                ]
+              ]
+            }
+          },
+          {
+            "id": 4,
+            "sourcePolygons": 212,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.04663361413372082,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 845,
+              "y": 544,
+              "width": 58,
+              "height": 17,
+              "triangle": [
+                [
+                  845,
+                  544
+                ],
+                [
+                  891.6336141337208,
+                  544
+                ],
+                [
+                  884.6063741614388,
+                  549.4794899670846
+                ]
+              ]
+            }
+          },
+          {
+            "id": 5,
+            "sourcePolygons": 2113,
+            "commonCells": 14,
+            "emittedTriangles": 27,
+            "maximumEdgeMetres": 0.17245282910476453,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 369,
+              "y": 5,
+              "width": 184,
+              "height": 77,
+              "triangle": [
+                [
+                  369,
+                  5
+                ],
+                [
+                  541.4528291047645,
+                  5.000000000000014
+                ],
+                [
+                  504.3344292270233,
+                  70.77400092082212
+                ]
+              ]
+            }
+          },
+          {
+            "id": 6,
+            "sourcePolygons": 1115,
+            "commonCells": 11,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.14575630986795876,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 212,
+              "y": 5,
+              "width": 157,
+              "height": 79,
+              "triangle": [
+                [
+                  212,
+                  5
+                ],
+                [
+                  357.75630986795875,
+                  5.000000000000002
+                ],
+                [
+                  302.78723846266035,
+                  72.511147705943
+                ]
+              ]
+            }
+          },
+          {
+            "id": 7,
+            "sourcePolygons": 1288,
+            "commonCells": 12,
+            "emittedTriangles": 23,
+            "maximumEdgeMetres": 0.14575630986795876,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 853,
+              "y": 259,
+              "width": 157,
+              "height": 42,
+              "triangle": [
+                [
+                  853,
+                  259
+                ],
+                [
+                  998.7563098679587,
+                  259
+                ],
+                [
+                  973.1800281944687,
+                  289.7334264323646
+                ]
+              ]
+            }
+          },
+          {
+            "id": 8,
+            "sourcePolygons": 76,
+            "commonCells": 12,
+            "emittedTriangles": 23,
+            "maximumEdgeMetres": 0.12611879089924907,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 588,
+              "y": 579,
+              "width": 138,
+              "height": 15,
+              "triangle": [
+                [
+                  588,
+                  579
+                ],
+                [
+                  714.1187908992491,
+                  579
+                ],
+                [
+                  712.0104086616311,
+                  582.0333513927844
+                ]
+              ]
+            }
+          },
+          {
+            "id": 9,
+            "sourcePolygons": 118,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.05063728956334973,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 475,
+              "y": 595,
+              "width": 62,
+              "height": 15,
+              "triangle": [
+                [
+                  475,
+                  595
+                ],
+                [
+                  525.6372895633498,
+                  595
+                ],
+                [
+                  518.2969213947331,
+                  598.2172500344577
+                ]
+              ]
+            }
+          },
+          {
+            "id": 10,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.05284825072831828,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 579,
+              "width": 64,
+              "height": 16,
+              "triangle": [
+                [
+                  5,
+                  579
+                ],
+                [
+                  57.84825072831828,
+                  579
+                ],
+                [
+                  52.85654141029323,
+                  583.2299500818318
+                ]
+              ]
+            }
+          },
+          {
+            "id": 11,
+            "sourcePolygons": 170,
+            "commonCells": 21,
+            "emittedTriangles": 33,
+            "maximumEdgeMetres": 0.1129947424706313,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 187,
+              "y": 524,
+              "width": 124,
+              "height": 19,
+              "triangle": [
+                [
+                  187,
+                  524
+                ],
+                [
+                  299.9947424706313,
+                  524
+                ],
+                [
+                  187.72448447892296,
+                  531.981655522187
+                ]
+              ]
+            }
+          },
+          {
+            "id": 12,
+            "sourcePolygons": 80,
+            "commonCells": 16,
+            "emittedTriangles": 30,
+            "maximumEdgeMetres": 0.11313742852058113,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 726,
+              "y": 579,
+              "width": 125,
+              "height": 15,
+              "triangle": [
+                [
+                  726,
+                  579
+                ],
+                [
+                  839.1374285205811,
+                  579
+                ],
+                [
+                  838.932560008655,
+                  582.7481616688499
+                ]
+              ]
+            }
+          },
+          {
+            "id": 13,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.04200773518577677,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 598,
+              "y": 595,
+              "width": 54,
+              "height": 15,
+              "triangle": [
+                [
+                  598,
+                  595
+                ],
+                [
+                  640.0077351857767,
+                  595
+                ],
+                [
+                  601.9765906399401,
+                  598.181522598713
+                ]
+              ]
+            }
+          },
+          {
+            "id": 14,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.05359035520011275,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 433,
+              "y": 385,
+              "width": 65,
+              "height": 34,
+              "triangle": [
+                [
+                  433,
+                  385
+                ],
+                [
+                  486.59035520011275,
+                  385
+                ],
+                [
+                  463.72524795991495,
+                  407.63734037633793
+                ]
+              ]
+            }
+          },
+          {
+            "id": 15,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.03530796561987258,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 705,
+              "y": 595,
+              "width": 47,
+              "height": 15,
+              "triangle": [
+                [
+                  705,
+                  595
+                ],
+                [
+                  740.3079656198726,
+                  595
+                ],
+                [
+                  736.9471731925628,
+                  598.8262819321527
+                ]
+              ]
+            }
+          },
+          {
+            "id": 16,
+            "sourcePolygons": 0,
+            "commonCells": 17,
+            "emittedTriangles": 29,
+            "maximumEdgeMetres": 0.006052539033692764,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 275,
+              "y": 624,
+              "width": 18,
+              "height": 14,
+              "triangle": [
+                [
+                  275,
+                  624
+                ],
+                [
+                  281.05253903369277,
+                  624
+                ],
+                [
+                  279.3837203717963,
+                  626.8635043932348
+                ]
+              ]
+            }
+          },
+          {
+            "id": 17,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.11072695705713222,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 477,
+              "width": 122,
+              "height": 24,
+              "triangle": [
+                [
+                  5,
+                  477
+                ],
+                [
+                  115.7269570571322,
+                  477
+                ],
+                [
+                  105.91183825184252,
+                  489.15806257203855
+                ]
+              ]
+            }
+          },
+          {
+            "id": 18,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.10164161345074975,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 404,
+              "y": 152,
+              "width": 113,
+              "height": 54,
+              "triangle": [
+                [
+                  404,
+                  152
+                ],
+                [
+                  505.6416134507498,
+                  152
+                ],
+                [
+                  473.82968573991207,
+                  194.9991184676022
+                ]
+              ]
+            }
+          },
+          {
+            "id": 19,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.08200676313284024,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 333,
+              "y": 610,
+              "width": 94,
+              "height": 14,
+              "triangle": [
+                [
+                  333,
+                  610
+                ],
+                [
+                  415.00676313284026,
+                  610
+                ],
+                [
+                  362.5234004714122,
+                  612.1192562011848
+                ]
+              ]
+            }
+          },
+          {
+            "id": 20,
+            "sourcePolygons": 0,
+            "commonCells": 17,
+            "emittedTriangles": 27,
+            "maximumEdgeMetres": 0.030501950611653388,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 406,
+              "y": 579,
+              "width": 42,
+              "height": 16,
+              "triangle": [
+                [
+                  406,
+                  579
+                ],
+                [
+                  436.5019506116534,
+                  579
+                ],
+                [
+                  435.1786619835069,
+                  583.9727363788853
+                ]
+              ]
+            }
+          },
+          {
+            "id": 21,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.04465702387205002,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 738,
+              "y": 477,
+              "width": 56,
+              "height": 24,
+              "triangle": [
+                [
+                  738,
+                  477
+                ],
+                [
+                  782.65702387205,
+                  477
+                ],
+                [
+                  742.1944947063536,
+                  489.67076332027807
+                ]
+              ]
+            }
+          },
+          {
+            "id": 22,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.046611933530607635,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 132,
+              "y": 579,
+              "width": 58,
+              "height": 16,
+              "triangle": [
+                [
+                  132,
+                  579
+                ],
+                [
+                  178.61193353060764,
+                  579
+                ],
+                [
+                  176.41396556305642,
+                  583.6528963100938
+                ]
+              ]
+            }
+          },
+          {
+            "id": 23,
+            "sourcePolygons": 0,
+            "commonCells": 12,
+            "emittedTriangles": 23,
+            "maximumEdgeMetres": 0.08479839707190018,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 826,
+              "y": 152,
+              "width": 96,
+              "height": 52,
+              "triangle": [
+                [
+                  826,
+                  152
+                ],
+                [
+                  910.7983970719002,
+                  152
+                ],
+                [
+                  888.1837394623127,
+                  192.75842990919685
+                ]
+              ]
+            }
+          },
+          {
+            "id": 24,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.08479839707190018,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 356,
+              "y": 209,
+              "width": 96,
+              "height": 49,
+              "triangle": [
+                [
+                  356,
+                  209
+                ],
+                [
+                  440.7983970719002,
+                  209
+                ],
+                [
+                  417.9377937258535,
+                  246.70479155758477
+                ]
+              ]
+            }
+          },
+          {
+            "id": 25,
+            "sourcePolygons": 82,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.10710343325807875,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 501,
+              "y": 524,
+              "width": 119,
+              "height": 18,
+              "triangle": [
+                [
+                  501,
+                  524
+                ],
+                [
+                  608.1034332580788,
+                  524
+                ],
+                [
+                  530.5991755502519,
+                  530.6113235290882
+                ]
+              ]
+            }
+          },
+          {
+            "id": 26,
+            "sourcePolygons": 0,
+            "commonCells": 23,
+            "emittedTriangles": 37,
+            "maximumEdgeMetres": 0.02603487515746213,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 201,
+              "y": 501,
+              "width": 38,
+              "height": 23,
+              "triangle": [
+                [
+                  201,
+                  501
+                ],
+                [
+                  227.03487515746212,
+                  501
+                ],
+                [
+                  216.68845916390407,
+                  512.7092578225864
+                ]
+              ]
+            }
+          },
+          {
+            "id": 27,
+            "sourcePolygons": 67,
+            "commonCells": 14,
+            "emittedTriangles": 27,
+            "maximumEdgeMetres": 0.12611879089924907,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 93,
+              "y": 562,
+              "width": 138,
+              "height": 16,
+              "triangle": [
+                [
+                  93,
+                  562
+                ],
+                [
+                  219.11879089924906,
+                  562
+                ],
+                [
+                  112.1011919697319,
+                  566.2870660163727
+                ]
+              ]
+            }
+          },
+          {
+            "id": 28,
+            "sourcePolygons": 147,
+            "commonCells": 7,
+            "emittedTriangles": 14,
+            "maximumEdgeMetres": 0.07726670725352282,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 744,
+              "y": 562,
+              "width": 89,
+              "height": 16,
+              "triangle": [
+                [
+                  744,
+                  562
+                ],
+                [
+                  821.2667072535228,
+                  562
+                ],
+                [
+                  750.9872050800844,
+                  566.63650210202
+                ]
+              ]
+            }
+          },
+          {
+            "id": 29,
+            "sourcePolygons": 138,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.0777857285216737,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 99,
+              "y": 595,
+              "width": 89,
+              "height": 15,
+              "triangle": [
+                [
+                  99,
+                  595
+                ],
+                [
+                  176.78572852167372,
+                  595
+                ],
+                [
+                  169.34705868300313,
+                  598.4636558920422
+                ]
+              ]
+            }
+          },
+          {
+            "id": 30,
+            "sourcePolygons": 23,
+            "commonCells": 1,
+            "emittedTriangles": 1,
+            "maximumEdgeMetres": 0.008911055601185476,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 432,
+              "y": 544,
+              "width": 20,
+              "height": 18,
+              "triangle": [
+                [
+                  432,
+                  544
+                ],
+                [
+                  440.91105560118547,
+                  544
+                ],
+                [
+                  436.2879008886043,
+                  550.9960436731579
+                ]
+              ]
+            }
+          },
+          {
+            "id": 31,
+            "sourcePolygons": 497,
+            "commonCells": 12,
+            "emittedTriangles": 23,
+            "maximumEdgeMetres": 0.15047134920421396,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 365,
+              "y": 259,
+              "width": 162,
+              "height": 44,
+              "triangle": [
+                [
+                  365,
+                  259
+                ],
+                [
+                  515.471349204214,
+                  259
+                ],
+                [
+                  413.67080594131005,
+                  291.64530000350356
+                ]
+              ]
+            }
+          },
+          {
+            "id": 32,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.035265881771387876,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 958,
+              "y": 544,
+              "width": 47,
+              "height": 17,
+              "triangle": [
+                [
+                  958,
+                  544
+                ],
+                [
+                  993.2658817713879,
+                  544
+                ],
+                [
+                  992.0806548633285,
+                  549.1001861617581
+                ]
+              ]
+            }
+          },
+          {
+            "id": 33,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.05547480726318487,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 778,
+              "y": 544,
+              "width": 67,
+              "height": 17,
+              "triangle": [
+                [
+                  778,
+                  544
+                ],
+                [
+                  833.4748072631849,
+                  544
+                ],
+                [
+                  781.4521785166738,
+                  549.5194908281741
+                ]
+              ]
+            }
+          },
+          {
+            "id": 34,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.11072695705713222,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 509,
+              "y": 501,
+              "width": 122,
+              "height": 21,
+              "triangle": [
+                [
+                  509,
+                  501
+                ],
+                [
+                  619.7269570571322,
+                  501
+                ],
+                [
+                  563.6848573837455,
+                  510.38698068572967
+                ]
+              ]
+            }
+          },
+          {
+            "id": 35,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 16,
+            "maximumEdgeMetres": 0.05682281533148526,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 394,
+              "y": 501,
+              "width": 68,
+              "height": 22,
+              "triangle": [
+                [
+                  394,
+                  501
+                ],
+                [
+                  450.82281533148523,
+                  501
+                ],
+                [
+                  421.9793391282795,
+                  511.46868513989904
+                ]
+              ]
+            }
+          },
+          {
+            "id": 36,
+            "sourcePolygons": 0,
+            "commonCells": 19,
+            "emittedTriangles": 34,
+            "maximumEdgeMetres": 0.019136272100201055,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 43,
+              "y": 562,
+              "width": 31,
+              "height": 17,
+              "triangle": [
+                [
+                  43,
+                  562
+                ],
+                [
+                  62.136272100201055,
+                  562
+                ],
+                [
+                  58.890123538650194,
+                  567.643122808306
+                ]
+              ]
+            }
+          },
+          {
+            "id": 37,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.08202256989237593,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 595,
+              "width": 94,
+              "height": 15,
+              "triangle": [
+                [
+                  5,
+                  595
+                ],
+                [
+                  87.02256989237593,
+                  595
+                ],
+                [
+                  5.926175661927824,
+                  598.5761284897585
+                ]
+              ]
+            }
+          },
+          {
+            "id": 38,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.10087284175058696,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 865,
+              "y": 595,
+              "width": 112,
+              "height": 14,
+              "triangle": [
+                [
+                  865,
+                  595
+                ],
+                [
+                  965.872841750587,
+                  595
+                ],
+                [
+                  946.9687191205729,
+                  597.9717095218616
+                ]
+              ]
+            }
+          },
+          {
+            "id": 39,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.1048755436032867,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 553,
+              "y": 5,
+              "width": 116,
+              "height": 77,
+              "triangle": [
+                [
+                  553,
+                  5
+                ],
+                [
+                  657.8755436032867,
+                  5
+                ],
+                [
+                  606.5528973014569,
+                  70.22514521623798
+                ]
+              ]
+            }
+          },
+          {
+            "id": 40,
+            "sourcePolygons": 654,
+            "commonCells": 13,
+            "emittedTriangles": 24,
+            "maximumEdgeMetres": 0.11551026242747904,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 469,
+              "y": 419,
+              "width": 127,
+              "height": 28,
+              "triangle": [
+                [
+                  469,
+                  419
+                ],
+                [
+                  584.510262427479,
+                  419
+                ],
+                [
+                  578.2870668688621,
+                  435.92617834404746
+                ]
+              ]
+            }
+          },
+          {
+            "id": 41,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.09861691439609732,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 546,
+              "y": 88,
+              "width": 110,
+              "height": 59,
+              "triangle": [
+                [
+                  546,
+                  88
+                ],
+                [
+                  644.6169143960973,
+                  88
+                ],
+                [
+                  586.3681495764602,
+                  135.81119775355506
+                ]
+              ]
+            }
+          },
+          {
+            "id": 42,
+            "sourcePolygons": 0,
+            "commonCells": 20,
+            "emittedTriangles": 33,
+            "maximumEdgeMetres": 0.09610110087872263,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 438,
+              "y": 88,
+              "width": 108,
+              "height": 60,
+              "triangle": [
+                [
+                  438,
+                  88
+                ],
+                [
+                  534.1011008787226,
+                  88.00000000000001
+                ],
+                [
+                  479.75853782051854,
+                  136.2429003989056
+                ]
+              ]
+            }
+          },
+          {
+            "id": 43,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.09861691439609732,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 117,
+              "y": 88,
+              "width": 110,
+              "height": 61,
+              "triangle": [
+                [
+                  117,
+                  88
+                ],
+                [
+                  215.61691439609731,
+                  88.00000000000001
+                ],
+                [
+                  157.02560383120982,
+                  137.6463546964556
+                ]
+              ]
+            }
+          },
+          {
+            "id": 44,
+            "sourcePolygons": 0,
+            "commonCells": 31,
+            "emittedTriangles": 52,
+            "maximumEdgeMetres": 0.026610246375448506,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 562,
+              "width": 38,
+              "height": 17,
+              "triangle": [
+                [
+                  5,
+                  562
+                ],
+                [
+                  31.61024637544851,
+                  562
+                ],
+                [
+                  5.8000609069781275,
+                  567.932655711315
+                ]
+              ]
+            }
+          },
+          {
+            "id": 45,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.10580019456534356,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 316,
+              "y": 385,
+              "width": 117,
+              "height": 34,
+              "triangle": [
+                [
+                  316,
+                  385
+                ],
+                [
+                  421.80019456534353,
+                  385
+                ],
+                [
+                  330.59455313322974,
+                  407.25093775559594
+                ]
+              ]
+            }
+          },
+          {
+            "id": 46,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 16,
+            "maximumEdgeMetres": 0.07038712500651878,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 506,
+              "y": 477,
+              "width": 82,
+              "height": 24,
+              "triangle": [
+                [
+                  506,
+                  477
+                ],
+                [
+                  576.3871250065188,
+                  477
+                ],
+                [
+                  575.133014442804,
+                  489.61291705820736
+                ]
+              ]
+            }
+          },
+          {
+            "id": 47,
+            "sourcePolygons": 0,
+            "commonCells": 16,
+            "emittedTriangles": 28,
+            "maximumEdgeMetres": 0.02218682308153423,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 153,
+              "y": 524,
+              "width": 34,
+              "height": 20,
+              "triangle": [
+                [
+                  153,
+                  524
+                ],
+                [
+                  175.18682308153421,
+                  524
+                ],
+                [
+                  156.9539773257542,
+                  532.5837434560453
+                ]
+              ]
+            }
+          },
+          {
+            "id": 48,
+            "sourcePolygons": 0,
+            "commonCells": 2,
+            "emittedTriangles": 3,
+            "maximumEdgeMetres": 0.045472479970420907,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 412,
+              "y": 419,
+              "width": 57,
+              "height": 29,
+              "triangle": [
+                [
+                  412,
+                  419
+                ],
+                [
+                  457.4724799704209,
+                  419
+                ],
+                [
+                  421.1884806657263,
+                  436.9356945538454
+                ]
+              ]
+            }
+          },
+          {
+            "id": 49,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07251166525482156,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 818,
+              "y": 501,
+              "width": 84,
+              "height": 21,
+              "triangle": [
+                [
+                  818,
+                  501
+                ],
+                [
+                  890.5116652548215,
+                  501
+                ],
+                [
+                  889.7689164358158,
+                  510.4214071456256
+                ]
+              ]
+            }
+          },
+          {
+            "id": 50,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.1048755436032867,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 212,
+              "y": 419,
+              "width": 116,
+              "height": 29,
+              "triangle": [
+                [
+                  212,
+                  419
+                ],
+                [
+                  316.8755436032867,
+                  419
+                ],
+                [
+                  231.37781012230806,
+                  436.94570199032654
+                ]
+              ]
+            }
+          },
+          {
+            "id": 51,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.08736080728971124,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 738,
+              "y": 305,
+              "width": 99,
+              "height": 40,
+              "triangle": [
+                [
+                  738,
+                  305
+                ],
+                [
+                  825.3608072897113,
+                  305
+                ],
+                [
+                  759.4293482653337,
+                  333.7560607178328
+                ]
+              ]
+            }
+          },
+          {
+            "id": 52,
+            "sourcePolygons": 0,
+            "commonCells": 2,
+            "emittedTriangles": 3,
+            "maximumEdgeMetres": 0.057554218403273176,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 276,
+              "y": 305,
+              "width": 69,
+              "height": 42,
+              "triangle": [
+                [
+                  276,
+                  305
+                ],
+                [
+                  333.5542184032732,
+                  305
+                ],
+                [
+                  313.9972437728316,
+                  335.06081732736004
+                ]
+              ]
+            }
+          },
+          {
+            "id": 53,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.07559352045752504,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 925,
+              "y": 419,
+              "width": 87,
+              "height": 28,
+              "triangle": [
+                [
+                  925,
+                  419
+                ],
+                [
+                  1000.5935204575251,
+                  419
+                ],
+                [
+                  980.092821419742,
+                  435.6513988608789
+                ]
+              ]
+            }
+          },
+          {
+            "id": 54,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.07957336769221968,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 653,
+              "y": 562,
+              "width": 91,
+              "height": 16,
+              "triangle": [
+                [
+                  653,
+                  562
+                ],
+                [
+                  732.5733676922197,
+                  562
+                ],
+                [
+                  657.1138237106784,
+                  566.3489028181062
+                ]
+              ]
+            }
+          },
+          {
+            "id": 55,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.07957336769221968,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 97,
+              "y": 209,
+              "width": 91,
+              "height": 50,
+              "triangle": [
+                [
+                  97,
+                  209
+                ],
+                [
+                  176.57336769221968,
+                  209
+                ],
+                [
+                  129.74401729974318,
+                  247.75083852235196
+                ]
+              ]
+            }
+          },
+          {
+            "id": 56,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.05125229515760397,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 69,
+              "y": 579,
+              "width": 63,
+              "height": 16,
+              "triangle": [
+                [
+                  69,
+                  579
+                ],
+                [
+                  120.25229515760395,
+                  579
+                ],
+                [
+                  119.55316521117322,
+                  583.2632900725965
+                ]
+              ]
+            }
+          },
+          {
+            "id": 57,
+            "sourcePolygons": 0,
+            "commonCells": 17,
+            "emittedTriangles": 28,
+            "maximumEdgeMetres": 0.04592210108082036,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 190,
+              "y": 579,
+              "width": 57,
+              "height": 16,
+              "triangle": [
+                [
+                  190,
+                  579
+                ],
+                [
+                  235.92210108082037,
+                  579
+                ],
+                [
+                  190.8456780868043,
+                  583.2366559334687
+                ]
+              ]
+            }
+          },
+          {
+            "id": 58,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.0494712723491344,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 537,
+              "y": 595,
+              "width": 61,
+              "height": 15,
+              "triangle": [
+                [
+                  537,
+                  595
+                ],
+                [
+                  586.4712723491344,
+                  595
+                ],
+                [
+                  550.6447850580169,
+                  598.1423272322173
+                ]
+              ]
+            }
+          },
+          {
+            "id": 59,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.07435097216701135,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 833,
+              "y": 449,
+              "width": 86,
+              "height": 25,
+              "triangle": [
+                [
+                  833,
+                  449
+                ],
+                [
+                  907.3509721670114,
+                  449
+                ],
+                [
+                  903.7152999083154,
+                  462.521696156221
+                ]
+              ]
+            }
+          },
+          {
+            "id": 60,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.06377154143267384,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 833,
+              "y": 524,
+              "width": 75,
+              "height": 18,
+              "triangle": [
+                [
+                  833,
+                  524
+                ],
+                [
+                  896.7715414326739,
+                  524
+                ],
+                [
+                  834.2496867681716,
+                  530.2019715557265
+                ]
+              ]
+            }
+          },
+          {
+            "id": 61,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.07463245580362605,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 188,
+              "y": 209,
+              "width": 86,
+              "height": 50,
+              "triangle": [
+                [
+                  188,
+                  209
+                ],
+                [
+                  262.63245580362604,
+                  209
+                ],
+                [
+                  212.99848105566969,
+                  247.52162136497378
+                ]
+              ]
+            }
+          },
+          {
+            "id": 62,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 14,
+            "maximumEdgeMetres": 0.03532483312699135,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 462,
+              "y": 501,
+              "width": 47,
+              "height": 22,
+              "triangle": [
+                [
+                  462,
+                  501
+                ],
+                [
+                  497.32483312699134,
+                  501
+                ],
+                [
+                  490.8973680569163,
+                  511.3189925586925
+                ]
+              ]
+            }
+          },
+          {
+            "id": 63,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.058049610888304494,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 295,
+              "y": 259,
+              "width": 70,
+              "height": 45,
+              "triangle": [
+                [
+                  295,
+                  259
+                ],
+                [
+                  353.04961088830447,
+                  259
+                ],
+                [
+                  319.34487873372376,
+                  292.514958972256
+                ]
+              ]
+            }
+          },
+          {
+            "id": 64,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.10087284175058696,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 88,
+              "width": 112,
+              "height": 64,
+              "triangle": [
+                [
+                  5,
+                  88
+                ],
+                [
+                  105.87284175058697,
+                  88
+                ],
+                [
+                  30.602901141043557,
+                  140.09845273561885
+                ]
+              ]
+            }
+          },
+          {
+            "id": 65,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.09154131710222276,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 311,
+              "y": 524,
+              "width": 103,
+              "height": 19,
+              "triangle": [
+                [
+                  311,
+                  524
+                ],
+                [
+                  402.54131710222276,
+                  524
+                ],
+                [
+                  347.50149771462543,
+                  531.0119409050212
+                ]
+              ]
+            }
+          },
+          {
+            "id": 66,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.037168893589483096,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 104,
+              "y": 524,
+              "width": 49,
+              "height": 20,
+              "triangle": [
+                [
+                  104,
+                  524
+                ],
+                [
+                  141.1688935894831,
+                  524
+                ],
+                [
+                  112.5674298748335,
+                  532.6251411578708
+                ]
+              ]
+            }
+          },
+          {
+            "id": 67,
+            "sourcePolygons": 0,
+            "commonCells": 1,
+            "emittedTriangles": 1,
+            "maximumEdgeMetres": 0.04753168884569568,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 135,
+              "y": 624,
+              "width": 59,
+              "height": 14,
+              "triangle": [
+                [
+                  135,
+                  624
+                ],
+                [
+                  182.53168884569567,
+                  624
+                ],
+                [
+                  158.14250937179497,
+                  626.7312162770942
+                ]
+              ]
+            }
+          },
+          {
+            "id": 68,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.05027426294547734,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 313,
+              "y": 449,
+              "width": 62,
+              "height": 27,
+              "triangle": [
+                [
+                  313,
+                  449
+                ],
+                [
+                  363.27426294547735,
+                  449
+                ],
+                [
+                  344.55743661363636,
+                  464.87362686427105
+                ]
+              ]
+            }
+          },
+          {
+            "id": 69,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.0691943149353258,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 120,
+              "y": 501,
+              "width": 81,
+              "height": 23,
+              "triangle": [
+                [
+                  120,
+                  501
+                ],
+                [
+                  189.1943149353258,
+                  501
+                ],
+                [
+                  168.98183100292297,
+                  512.326153200098
+                ]
+              ]
+            }
+          },
+          {
+            "id": 70,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.023303117439001222,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 331,
+              "y": 544,
+              "width": 35,
+              "height": 18,
+              "triangle": [
+                [
+                  331,
+                  544
+                ],
+                [
+                  354.3031174390012,
+                  544
+                ],
+                [
+                  331.9293069671825,
+                  550.0198719256201
+                ]
+              ]
+            }
+          },
+          {
+            "id": 71,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.07559352045752504,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 337,
+              "y": 477,
+              "width": 87,
+              "height": 24,
+              "triangle": [
+                [
+                  337,
+                  477
+                ],
+                [
+                  412.5935204575251,
+                  477
+                ],
+                [
+                  349.6838791348355,
+                  489.69664168468194
+                ]
+              ]
+            }
+          },
+          {
+            "id": 72,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.06417809346980208,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 719,
+              "y": 259,
+              "width": 76,
+              "height": 43,
+              "triangle": [
+                [
+                  719,
+                  259
+                ],
+                [
+                  783.1780934698021,
+                  259
+                ],
+                [
+                  745.3366497510972,
+                  290.86584260813316
+                ]
+              ]
+            }
+          },
+          {
+            "id": 73,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.041340670594927235,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 652,
+              "y": 595,
+              "width": 53,
+              "height": 15,
+              "triangle": [
+                [
+                  652,
+                  595
+                ],
+                [
+                  693.3406705949272,
+                  595
+                ],
+                [
+                  680.345637948876,
+                  598.0448572196728
+                ]
+              ]
+            }
+          },
+          {
+            "id": 74,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.05802230169957646,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 839,
+              "y": 385,
+              "width": 70,
+              "height": 31,
+              "triangle": [
+                [
+                  839,
+                  385
+                ],
+                [
+                  897.0223016995765,
+                  385
+                ],
+                [
+                  876.499422898065,
+                  404.78781928145247
+                ]
+              ]
+            }
+          },
+          {
+            "id": 75,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.0691943149353258,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 919,
+              "y": 449,
+              "width": 81,
+              "height": 25,
+              "triangle": [
+                [
+                  919,
+                  449
+                ],
+                [
+                  988.1943149353258,
+                  449
+                ],
+                [
+                  975.4000205525308,
+                  462.6244330594259
+                ]
+              ]
+            }
+          },
+          {
+            "id": 76,
+            "sourcePolygons": 0,
+            "commonCells": 12,
+            "emittedTriangles": 23,
+            "maximumEdgeMetres": 0.018690081459009127,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 519,
+              "y": 579,
+              "width": 30,
+              "height": 16,
+              "triangle": [
+                [
+                  519,
+                  579
+                ],
+                [
+                  537.6900814590091,
+                  579
+                ],
+                [
+                  536.2531469819403,
+                  583.9410949389667
+                ]
+              ]
+            }
+          },
+          {
+            "id": 77,
+            "sourcePolygons": 516,
+            "commonCells": 11,
+            "emittedTriangles": 18,
+            "maximumEdgeMetres": 0.06347637119816554,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 588,
+              "y": 477,
+              "width": 75,
+              "height": 24,
+              "triangle": [
+                [
+                  588,
+                  477
+                ],
+                [
+                  651.4763711981656,
+                  477
+                ],
+                [
+                  631.2937875245898,
+                  489.23294338510215
+                ]
+              ]
+            }
+          },
+          {
+            "id": 78,
+            "sourcePolygons": 139,
+            "commonCells": 15,
+            "emittedTriangles": 27,
+            "maximumEdgeMetres": 0.02360045736005982,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 902,
+              "y": 501,
+              "width": 35,
+              "height": 21,
+              "triangle": [
+                [
+                  902,
+                  501
+                ],
+                [
+                  925.6004573600599,
+                  501
+                ],
+                [
+                  910.2972207951336,
+                  510.54120678599924
+                ]
+              ]
+            }
+          },
+          {
+            "id": 79,
+            "sourcePolygons": 101,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.057625341003098796,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 192,
+              "y": 638,
+              "width": 69,
+              "height": 12,
+              "triangle": [
+                [
+                  192,
+                  638
+                ],
+                [
+                  249.62534100309878,
+                  638
+                ],
+                [
+                  204.6382027258984,
+                  638.3928507547281
+                ]
+              ]
+            }
+          },
+          {
+            "id": 80,
+            "sourcePolygons": 0,
+            "commonCells": 23,
+            "emittedTriangles": 40,
+            "maximumEdgeMetres": 0.09610110087872263,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 685,
+              "y": 347,
+              "width": 108,
+              "height": 35,
+              "triangle": [
+                [
+                  685,
+                  347
+                ],
+                [
+                  781.1011008787226,
+                  347
+                ],
+                [
+                  706.6529914400656,
+                  370.3402789191159
+                ]
+              ]
+            }
+          },
+          {
+            "id": 81,
+            "sourcePolygons": 0,
+            "commonCells": 14,
+            "emittedTriangles": 26,
+            "maximumEdgeMetres": 0.09542682720282486,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 297,
+              "y": 152,
+              "width": 107,
+              "height": 55,
+              "triangle": [
+                [
+                  297,
+                  152
+                ],
+                [
+                  392.4268272028248,
+                  152
+                ],
+                [
+                  327.4522716849616,
+                  195.19255438462145
+                ]
+              ]
+            }
+          },
+          {
+            "id": 82,
+            "sourcePolygons": 0,
+            "commonCells": 21,
+            "emittedTriangles": 36,
+            "maximumEdgeMetres": 0.09720628536773117,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 231,
+              "y": 562,
+              "width": 109,
+              "height": 16,
+              "triangle": [
+                [
+                  231,
+                  562
+                ],
+                [
+                  328.2062853677312,
+                  562
+                ],
+                [
+                  232.87274931583744,
+                  566.2185606360548
+                ]
+              ]
+            }
+          },
+          {
+            "id": 83,
+            "sourcePolygons": 0,
+            "commonCells": 2,
+            "emittedTriangles": 3,
+            "maximumEdgeMetres": 0.07310308371100144,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 693,
+              "y": 624,
+              "width": 85,
+              "height": 13,
+              "triangle": [
+                [
+                  693,
+                  624
+                ],
+                [
+                  766.1030837110014,
+                  624
+                ],
+                [
+                  730.8891674908441,
+                  625.9137715520017
+                ]
+              ]
+            }
+          },
+          {
+            "id": 84,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.07237920794055536,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 108,
+              "y": 638,
+              "width": 84,
+              "height": 12,
+              "triangle": [
+                [
+                  108,
+                  638
+                ],
+                [
+                  180.37920794055535,
+                  638
+                ],
+                [
+                  142.45050922837783,
+                  638.8156890972394
+                ]
+              ]
+            }
+          },
+          {
+            "id": 85,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.09963667017006221,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 610,
+              "width": 111,
+              "height": 14,
+              "triangle": [
+                [
+                  5,
+                  610
+                ],
+                [
+                  104.63667017006223,
+                  610
+                ],
+                [
+                  77.34624357934196,
+                  612.1842119999386
+                ]
+              ]
+            }
+          },
+          {
+            "id": 86,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 16,
+            "maximumEdgeMetres": 0.028366853429652093,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 752,
+              "y": 595,
+              "width": 40,
+              "height": 15,
+              "triangle": [
+                [
+                  752,
+                  595
+                ],
+                [
+                  780.3668534296521,
+                  595
+                ],
+                [
+                  753.2202780105644,
+                  598.5498744456596
+                ]
+              ]
+            }
+          },
+          {
+            "id": 87,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.08705948469715662,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 524,
+              "width": 99,
+              "height": 20,
+              "triangle": [
+                [
+                  5,
+                  524
+                ],
+                [
+                  92.05948469715662,
+                  524
+                ],
+                [
+                  8.328818197466914,
+                  532.0646637878585
+                ]
+              ]
+            }
+          },
+          {
+            "id": 88,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.08486167949185808,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 116,
+              "y": 5,
+              "width": 96,
+              "height": 82,
+              "triangle": [
+                [
+                  116,
+                  5
+                ],
+                [
+                  200.86167949185807,
+                  5
+                ],
+                [
+                  155.5647082643773,
+                  75.8805171546472
+                ]
+              ]
+            }
+          },
+          {
+            "id": 89,
+            "sourcePolygons": 0,
+            "commonCells": 2,
+            "emittedTriangles": 3,
+            "maximumEdgeMetres": 0.09362888430866677,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 333,
+              "y": 88,
+              "width": 105,
+              "height": 61,
+              "triangle": [
+                [
+                  333,
+                  88
+                ],
+                [
+                  426.6288843086668,
+                  88
+                ],
+                [
+                  349.9766801850885,
+                  137.4834417820026
+                ]
+              ]
+            }
+          },
+          {
+            "id": 90,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.09362888430866677,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 446,
+              "y": 562,
+              "width": 105,
+              "height": 16,
+              "triangle": [
+                [
+                  446,
+                  562
+                ],
+                [
+                  539.6288843086668,
+                  562
+                ],
+                [
+                  466.69696385559143,
+                  566.9995826909827
+                ]
+              ]
+            }
+          },
+          {
+            "id": 91,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.028366853429652093,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 448,
+              "y": 579,
+              "width": 40,
+              "height": 16,
+              "triangle": [
+                [
+                  448,
+                  579
+                ],
+                [
+                  476.3668534296521,
+                  579
+                ],
+                [
+                  468.83274205493205,
+                  583.3996588954484
+                ]
+              ]
+            }
+          },
+          {
+            "id": 92,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.05588770965501829,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 907,
+              "y": 562,
+              "width": 67,
+              "height": 16,
+              "triangle": [
+                [
+                  907,
+                  562
+                ],
+                [
+                  962.8877096550183,
+                  562
+                ],
+                [
+                  961.9896727227579,
+                  566.5273583366393
+                ]
+              ]
+            }
+          },
+          {
+            "id": 93,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 14,
+            "maximumEdgeMetres": 0.07033979467351856,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 620,
+              "y": 209,
+              "width": 82,
+              "height": 49,
+              "triangle": [
+                [
+                  620,
+                  209
+                ],
+                [
+                  690.3397946735186,
+                  209
+                ],
+                [
+                  649.9365863096826,
+                  246.5758144765063
+                ]
+              ]
+            }
+          },
+          {
+            "id": 94,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.08968628286026795,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 907,
+              "y": 305,
+              "width": 101,
+              "height": 38,
+              "triangle": [
+                [
+                  907,
+                  305
+                ],
+                [
+                  996.686282860268,
+                  305
+                ],
+                [
+                  973.7559190636789,
+                  331.78648142355416
+                ]
+              ]
+            }
+          },
+          {
+            "id": 95,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.09065774793799988,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 551,
+              "y": 562,
+              "width": 102,
+              "height": 16,
+              "triangle": [
+                [
+                  551,
+                  562
+                ],
+                [
+                  641.6577479379998,
+                  562
+                ],
+                [
+                  640.5615296299414,
+                  566.7288205334013
+                ]
+              ]
+            }
+          },
+          {
+            "id": 96,
+            "sourcePolygons": 0,
+            "commonCells": 16,
+            "emittedTriangles": 27,
+            "maximumEdgeMetres": 0.006326623759682882,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 570,
+              "y": 579,
+              "width": 18,
+              "height": 16,
+              "triangle": [
+                [
+                  570,
+                  579
+                ],
+                [
+                  576.3266237596829,
+                  579
+                ],
+                [
+                  572.2929441395274,
+                  583.27853308846
+                ]
+              ]
+            }
+          },
+          {
+            "id": 97,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.04399058225018003,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 903,
+              "y": 544,
+              "width": 55,
+              "height": 17,
+              "triangle": [
+                [
+                  903,
+                  544
+                ],
+                [
+                  946.9905822501801,
+                  544
+                ],
+                [
+                  944.1471010703924,
+                  549.1469438939334
+                ]
+              ]
+            }
+          },
+          {
+            "id": 98,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.04845042076928642,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 345,
+              "y": 305,
+              "width": 60,
+              "height": 42,
+              "triangle": [
+                [
+                  345,
+                  305
+                ],
+                [
+                  393.45042076928644,
+                  305
+                ],
+                [
+                  376.3650261470906,
+                  335.8448773948313
+                ]
+              ]
+            }
+          },
+          {
+            "id": 99,
+            "sourcePolygons": 0,
+            "commonCells": 18,
+            "emittedTriangles": 31,
+            "maximumEdgeMetres": 0.05082441573573827,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 207,
+              "y": 544,
+              "width": 62,
+              "height": 18,
+              "triangle": [
+                [
+                  207,
+                  544
+                ],
+                [
+                  257.8244157357383,
+                  544
+                ],
+                [
+                  207.78351004323764,
+                  550.8906919076393
+                ]
+              ]
+            }
+          },
+          {
+            "id": 100,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.07033979467351856,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 274,
+              "y": 209,
+              "width": 82,
+              "height": 50,
+              "triangle": [
+                [
+                  274,
+                  209
+                ],
+                [
+                  344.33979467351855,
+                  209
+                ],
+                [
+                  306.99074513140295,
+                  247.66176367619528
+                ]
+              ]
+            }
+          },
+          {
+            "id": 101,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.09065774793799988,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 604,
+              "y": 152,
+              "width": 102,
+              "height": 53,
+              "triangle": [
+                [
+                  604,
+                  152
+                ],
+                [
+                  694.6577479379998,
+                  152
+                ],
+                [
+                  666.3062845008426,
+                  193.8063200779891
+                ]
+              ]
+            }
+          },
+          {
+            "id": 102,
+            "sourcePolygons": 0,
+            "commonCells": 18,
+            "emittedTriangles": 30,
+            "maximumEdgeMetres": 0.07663349222357604,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 903,
+              "y": 5,
+              "width": 88,
+              "height": 65,
+              "triangle": [
+                [
+                  903,
+                  5.0000000000000036
+                ],
+                [
+                  979.633492223576,
+                  5
+                ],
+                [
+                  926.4789694504146,
+                  58.696377502043006
+                ]
+              ]
+            }
+          },
+          {
+            "id": 103,
+            "sourcePolygons": 0,
+            "commonCells": 12,
+            "emittedTriangles": 23,
+            "maximumEdgeMetres": 0.07663349222357604,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 405,
+              "y": 305,
+              "width": 88,
+              "height": 41,
+              "triangle": [
+                [
+                  405,
+                  305
+                ],
+                [
+                  481.633492223576,
+                  305
+                ],
+                [
+                  425.35124260436044,
+                  334.69960868853866
+                ]
+              ]
+            }
+          },
+          {
+            "id": 104,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.09474070197710366,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 649,
+              "y": 385,
+              "width": 106,
+              "height": 32,
+              "triangle": [
+                [
+                  649,
+                  385
+                ],
+                [
+                  743.7407019771036,
+                  385
+                ],
+                [
+                  714.2787478307184,
+                  405.6937935060286
+                ]
+              ]
+            }
+          },
+          {
+            "id": 105,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.09474070197710366,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 227,
+              "y": 88,
+              "width": 106,
+              "height": 61,
+              "triangle": [
+                [
+                  227,
+                  88
+                ],
+                [
+                  321.74070197710364,
+                  88
+                ],
+                [
+                  257.09153416712445,
+                  137.8737128113944
+                ]
+              ]
+            }
+          },
+          {
+            "id": 106,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.056288758251276445,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 74,
+              "y": 544,
+              "width": 68,
+              "height": 18,
+              "triangle": [
+                [
+                  74,
+                  544
+                ],
+                [
+                  130.28875825127645,
+                  544
+                ],
+                [
+                  74.47042287356884,
+                  550.7095902262009
+                ]
+              ]
+            }
+          },
+          {
+            "id": 107,
+            "sourcePolygons": 0,
+            "commonCells": 12,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.05083418072415553,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 269,
+              "y": 544,
+              "width": 62,
+              "height": 18,
+              "triangle": [
+                [
+                  269,
+                  544
+                ],
+                [
+                  319.83418072415554,
+                  544
+                ],
+                [
+                  270.3173297572928,
+                  550.9315834169046
+                ]
+              ]
+            }
+          },
+          {
+            "id": 108,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.05375577617571322,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 142,
+              "y": 544,
+              "width": 65,
+              "height": 18,
+              "triangle": [
+                [
+                  142,
+                  544
+                ],
+                [
+                  195.75577617571324,
+                  544
+                ],
+                [
+                  192.4469737172558,
+                  550.2623296517039
+                ]
+              ]
+            }
+          },
+          {
+            "id": 109,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 18,
+            "maximumEdgeMetres": 0.007082721678543062,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 74,
+              "y": 562,
+              "width": 19,
+              "height": 17,
+              "triangle": [
+                [
+                  74,
+                  562
+                ],
+                [
+                  81.08272167854307,
+                  562
+                ],
+                [
+                  77.9332659746104,
+                  567.7350299370983
+                ]
+              ]
+            }
+          },
+          {
+            "id": 110,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.06386563282503484,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 908,
+              "y": 524,
+              "width": 75,
+              "height": 18,
+              "triangle": [
+                [
+                  908,
+                  524
+                ],
+                [
+                  971.8656328250348,
+                  524
+                ],
+                [
+                  971.4269987470191,
+                  530.9403710096827
+                ]
+              ]
+            }
+          },
+          {
+            "id": 111,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.08023469321717469,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 205,
+              "y": 152,
+              "width": 92,
+              "height": 56,
+              "triangle": [
+                [
+                  205,
+                  152
+                ],
+                [
+                  285.2346932171747,
+                  152
+                ],
+                [
+                  239.4440230488691,
+                  196.520035733135
+                ]
+              ]
+            }
+          },
+          {
+            "id": 112,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.08023469321717469,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 209,
+              "width": 92,
+              "height": 50,
+              "triangle": [
+                [
+                  5,
+                  209
+                ],
+                [
+                  85.2346932171747,
+                  209
+                ],
+                [
+                  36.2961453566207,
+                  247.99380289427114
+                ]
+              ]
+            }
+          },
+          {
+            "id": 113,
+            "sourcePolygons": 0,
+            "commonCells": 2,
+            "emittedTriangles": 3,
+            "maximumEdgeMetres": 0.04577247352861324,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 841,
+              "y": 624,
+              "width": 57,
+              "height": 13,
+              "triangle": [
+                [
+                  841,
+                  624
+                ],
+                [
+                  886.7724735286132,
+                  624
+                ],
+                [
+                  850.4623690598673,
+                  625.8684702420738
+                ]
+              ]
+            }
+          },
+          {
+            "id": 114,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.09388063304029602,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 527,
+              "y": 259,
+              "width": 105,
+              "height": 43,
+              "triangle": [
+                [
+                  527,
+                  259
+                ],
+                [
+                  620.8806330402961,
+                  259
+                ],
+                [
+                  545.6846538070458,
+                  290.1897191344776
+                ]
+              ]
+            }
+          },
+          {
+            "id": 115,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 14,
+            "maximumEdgeMetres": 0.08165109998105535,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 556,
+              "y": 385,
+              "width": 93,
+              "height": 33,
+              "triangle": [
+                [
+                  556,
+                  385
+                ],
+                [
+                  637.6510999810554,
+                  385
+                ],
+                [
+                  634.468743368117,
+                  406.67695058728475
+                ]
+              ]
+            }
+          },
+          {
+            "id": 116,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.021909303511875915,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 242,
+              "y": 624,
+              "width": 33,
+              "height": 14,
+              "triangle": [
+                [
+                  242,
+                  624
+                ],
+                [
+                  263.9093035118759,
+                  624
+                ],
+                [
+                  251.41122385290285,
+                  626.1110364424148
+                ]
+              ]
+            }
+          },
+          {
+            "id": 117,
+            "sourcePolygons": 0,
+            "commonCells": 1,
+            "emittedTriangles": 1,
+            "maximumEdgeMetres": 0.09963667017006221,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 5,
+              "width": 111,
+              "height": 83,
+              "triangle": [
+                [
+                  5,
+                  5
+                ],
+                [
+                  104.63667017006223,
+                  5.000000000000002
+                ],
+                [
+                  42.80139556220834,
+                  76.9443282914394
+                ]
+              ]
+            }
+          },
+          {
+            "id": 118,
+            "sourcePolygons": 121,
+            "commonCells": 13,
+            "emittedTriangles": 25,
+            "maximumEdgeMetres": 0.14304386730695964,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 452,
+              "y": 544,
+              "width": 155,
+              "height": 17,
+              "triangle": [
+                [
+                  452,
+                  544
+                ],
+                [
+                  595.0438673069596,
+                  544
+                ],
+                [
+                  453.84859934477794,
+                  549.7734008984089
+                ]
+              ]
+            }
+          },
+          {
+            "id": 119,
+            "sourcePolygons": 301,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.141313254342422,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 669,
+              "y": 5,
+              "width": 153,
+              "height": 76,
+              "triangle": [
+                [
+                  669,
+                  5
+                ],
+                [
+                  810.3132543424219,
+                  5
+                ],
+                [
+                  718.2029220574989,
+                  69.68388006884442
+                ]
+              ]
+            }
+          },
+          {
+            "id": 120,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.10927702462252088,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 91,
+              "y": 419,
+              "width": 121,
+              "height": 29,
+              "triangle": [
+                [
+                  91,
+                  419
+                ],
+                [
+                  200.27702462252086,
+                  419
+                ],
+                [
+                  180.44219238414928,
+                  436.548262243923
+                ]
+              ]
+            }
+          },
+          {
+            "id": 121,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.09114739319511374,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 192,
+              "y": 259,
+              "width": 103,
+              "height": 45,
+              "triangle": [
+                [
+                  192,
+                  259
+                ],
+                [
+                  283.14739319511375,
+                  259
+                ],
+                [
+                  252.16794205745828,
+                  292.69559229539107
+                ]
+              ]
+            }
+          },
+          {
+            "id": 122,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.07038712500651878,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 188,
+              "y": 595,
+              "width": 82,
+              "height": 15,
+              "triangle": [
+                [
+                  188,
+                  595
+                ],
+                [
+                  258.3871250065188,
+                  595
+                ],
+                [
+                  256.8561205540378,
+                  598.795899605455
+                ]
+              ]
+            }
+          },
+          {
+            "id": 123,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.006201931120274607,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 847,
+              "y": 595,
+              "width": 18,
+              "height": 15,
+              "triangle": [
+                [
+                  847,
+                  595
+                ],
+                [
+                  853.2019311202746,
+                  595
+                ],
+                [
+                  851.7130964138387,
+                  598.8126368388719
+                ]
+              ]
+            }
+          },
+          {
+            "id": 124,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.09541285441858376,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 620,
+              "y": 524,
+              "width": 107,
+              "height": 18,
+              "triangle": [
+                [
+                  620,
+                  524
+                ],
+                [
+                  715.4128544185837,
+                  524
+                ],
+                [
+                  714.6661563994559,
+                  530.1568166846887
+                ]
+              ]
+            }
+          },
+          {
+            "id": 125,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.0969681460607446,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 225,
+              "y": 610,
+              "width": 108,
+              "height": 14,
+              "triangle": [
+                [
+                  225,
+                  610
+                ],
+                [
+                  321.9681460607446,
+                  610
+                ],
+                [
+                  226.59945914144885,
+                  612.9028164928574
+                ]
+              ]
+            }
+          },
+          {
+            "id": 126,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.10862353543041857,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 706,
+              "y": 152,
+              "width": 120,
+              "height": 52,
+              "triangle": [
+                [
+                  706,
+                  152
+                ],
+                [
+                  814.6235354304185,
+                  152
+                ],
+                [
+                  726.5480217335835,
+                  192.56507410934327
+                ]
+              ]
+            }
+          },
+          {
+            "id": 127,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.10862353543041857,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 565,
+              "y": 347,
+              "width": 120,
+              "height": 36,
+              "triangle": [
+                [
+                  565,
+                  347
+                ],
+                [
+                  673.6235354304185,
+                  347
+                ],
+                [
+                  639.3895815970742,
+                  371.3451477788654
+                ]
+              ]
+            }
+          },
+          {
+            "id": 128,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.10927702462252088,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 375,
+              "y": 449,
+              "width": 121,
+              "height": 26,
+              "triangle": [
+                [
+                  375,
+                  449
+                ],
+                [
+                  484.27702462252086,
+                  449
+                ],
+                [
+                  407.31065496336385,
+                  463.23636231811184
+                ]
+              ]
+            }
+          },
+          {
+            "id": 129,
+            "sourcePolygons": 592,
+            "commonCells": 5,
+            "emittedTriangles": 10,
+            "maximumEdgeMetres": 0.046595820783531215,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 498,
+              "y": 385,
+              "width": 58,
+              "height": 34,
+              "triangle": [
+                [
+                  498,
+                  385
+                ],
+                [
+                  544.5958207835312,
+                  385
+                ],
+                [
+                  534.9758082042503,
+                  407.7544217172929
+                ]
+              ]
+            }
+          },
+          {
+            "id": 130,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.04047490265179054,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 951,
+              "y": 624,
+              "width": 52,
+              "height": 13,
+              "triangle": [
+                [
+                  951,
+                  624
+                ],
+                [
+                  991.4749026517906,
+                  624
+                ],
+                [
+                  974.9473537766229,
+                  625.5039605342046
+                ]
+              ]
+            }
+          },
+          {
+            "id": 131,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.019509674501824413,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 488,
+              "y": 579,
+              "width": 31,
+              "height": 16,
+              "triangle": [
+                [
+                  488,
+                  579
+                ],
+                [
+                  507.5096745018244,
+                  579
+                ],
+                [
+                  491.63509034450436,
+                  583.8393539797855
+                ]
+              ]
+            }
+          },
+          {
+            "id": 132,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.07558475860663641,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 496,
+              "y": 449,
+              "width": 87,
+              "height": 26,
+              "triangle": [
+                [
+                  496,
+                  449
+                ],
+                [
+                  571.5847586066363,
+                  449
+                ],
+                [
+                  514.6991912264667,
+                  463.6802174589435
+                ]
+              ]
+            }
+          },
+          {
+            "id": 133,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.08073973028022297,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 741,
+              "y": 449,
+              "width": 92,
+              "height": 25,
+              "triangle": [
+                [
+                  741,
+                  449
+                ],
+                [
+                  821.739730280223,
+                  449
+                ],
+                [
+                  801.91111689805,
+                  462.1146722607219
+                ]
+              ]
+            }
+          },
+          {
+            "id": 134,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.04527508325154196,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 247,
+              "y": 579,
+              "width": 57,
+              "height": 16,
+              "triangle": [
+                [
+                  247,
+                  579
+                ],
+                [
+                  292.27508325154196,
+                  579
+                ],
+                [
+                  289.4255549796045,
+                  583.5393741755043
+                ]
+              ]
+            }
+          },
+          {
+            "id": 135,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.07199645760774727,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 449,
+              "width": 83,
+              "height": 28,
+              "triangle": [
+                [
+                  5,
+                  449
+                ],
+                [
+                  76.99645760774729,
+                  449
+                ],
+                [
+                  14.023563794444325,
+                  465.49295554327796
+                ]
+              ]
+            }
+          },
+          {
+            "id": 136,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.05125229515760397,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 412,
+              "y": 595,
+              "width": 63,
+              "height": 15,
+              "triangle": [
+                [
+                  412,
+                  595
+                ],
+                [
+                  463.25229515760395,
+                  595
+                ],
+                [
+                  444.83701806402007,
+                  598.7841585156376
+                ]
+              ]
+            }
+          },
+          {
+            "id": 137,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.0699330195516113,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 579,
+              "y": 305,
+              "width": 81,
+              "height": 41,
+              "triangle": [
+                [
+                  579,
+                  305
+                ],
+                [
+                  648.9330195516113,
+                  305
+                ],
+                [
+                  594.3264502679598,
+                  334.2863369712227
+                ]
+              ]
+            }
+          },
+          {
+            "id": 138,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.0699330195516113,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 879,
+              "y": 209,
+              "width": 81,
+              "height": 46,
+              "triangle": [
+                [
+                  879,
+                  209
+                ],
+                [
+                  948.9330195516113,
+                  209
+                ],
+                [
+                  893.50474945676,
+                  243.13663445722634
+                ]
+              ]
+            }
+          },
+          {
+            "id": 139,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.037090397259528944,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 357,
+              "y": 579,
+              "width": 49,
+              "height": 16,
+              "triangle": [
+                [
+                  357,
+                  579
+                ],
+                [
+                  394.0903972595289,
+                  579
+                ],
+                [
+                  358.40008709631525,
+                  583.4286761575609
+                ]
+              ]
+            }
+          },
+          {
+            "id": 140,
+            "sourcePolygons": 0,
+            "commonCells": 15,
+            "emittedTriangles": 26,
+            "maximumEdgeMetres": 0.04146775805302703,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 304,
+              "y": 579,
+              "width": 53,
+              "height": 16,
+              "triangle": [
+                [
+                  304,
+                  579
+                ],
+                [
+                  345.467758053027,
+                  579
+                ],
+                [
+                  304.42281808739756,
+                  583.6254341688955
+                ]
+              ]
+            }
+          },
+          {
+            "id": 141,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.07463245580362605,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 793,
+              "y": 209,
+              "width": 86,
+              "height": 46,
+              "triangle": [
+                [
+                  793,
+                  209
+                ],
+                [
+                  867.632455803626,
+                  209
+                ],
+                [
+                  816.0229477121394,
+                  243.29322989566612
+                ]
+              ]
+            }
+          },
+          {
+            "id": 142,
+            "sourcePolygons": 368,
+            "commonCells": 14,
+            "emittedTriangles": 26,
+            "maximumEdgeMetres": 0.17245282910476453,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 385,
+              "width": 184,
+              "height": 34,
+              "triangle": [
+                [
+                  5,
+                  385
+                ],
+                [
+                  177.4528291047645,
+                  385
+                ],
+                [
+                  53.66002845689638,
+                  407.48540646937397
+                ]
+              ]
+            }
+          },
+          {
+            "id": 143,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.12581832535976542,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 88,
+              "y": 347,
+              "width": 137,
+              "height": 37,
+              "triangle": [
+                [
+                  88,
+                  347
+                ],
+                [
+                  213.81832535976542,
+                  347
+                ],
+                [
+                  194.68535836082302,
+                  372.4470083142019
+                ]
+              ]
+            }
+          },
+          {
+            "id": 144,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 12,
+            "maximumEdgeMetres": 0.10967823813647032,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 596,
+              "y": 419,
+              "width": 121,
+              "height": 28,
+              "triangle": [
+                [
+                  596,
+                  419
+                ],
+                [
+                  705.6782381364703,
+                  419
+                ],
+                [
+                  598.6776523980868,
+                  435.6191577773659
+                ]
+              ]
+            }
+          },
+          {
+            "id": 145,
+            "sourcePolygons": 365,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.06347637119816554,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 663,
+              "y": 477,
+              "width": 75,
+              "height": 24,
+              "triangle": [
+                [
+                  663,
+                  477
+                ],
+                [
+                  726.4763711981656,
+                  477
+                ],
+                [
+                  674.3366913340813,
+                  489.4436994977269
+                ]
+              ]
+            }
+          },
+          {
+            "id": 146,
+            "sourcePolygons": 12,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.10828352484836343,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 864,
+              "y": 88,
+              "width": 120,
+              "height": 57,
+              "triangle": [
+                [
+                  864,
+                  88
+                ],
+                [
+                  972.2835248483634,
+                  88
+                ],
+                [
+                  915.2285476832457,
+                  133.6285959414556
+                ]
+              ]
+            }
+          },
+          {
+            "id": 147,
+            "sourcePolygons": 576,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.10311549624058167,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 501,
+              "width": 115,
+              "height": 23,
+              "triangle": [
+                [
+                  5,
+                  501
+                ],
+                [
+                  108.11549624058168,
+                  501
+                ],
+                [
+                  47.11256127715018,
+                  512.0980536770048
+                ]
+              ]
+            }
+          },
+          {
+            "id": 148,
+            "sourcePolygons": 692,
+            "commonCells": 29,
+            "emittedTriangles": 51,
+            "maximumEdgeMetres": 0.10690681091932881,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 909,
+              "y": 385,
+              "width": 118,
+              "height": 30,
+              "triangle": [
+                [
+                  909,
+                  385
+                ],
+                [
+                  1015.9068109193288,
+                  385
+                ],
+                [
+                  976.3890423494488,
+                  403.3024746959752
+                ]
+              ]
+            }
+          },
+          {
+            "id": 149,
+            "sourcePolygons": 540,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07455577372790981,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 452,
+              "y": 209,
+              "width": 86,
+              "height": 49,
+              "triangle": [
+                [
+                  452,
+                  209
+                ],
+                [
+                  526.5557737279098,
+                  209
+                ],
+                [
+                  503.1080517540487,
+                  246.91734991211138
+                ]
+              ]
+            }
+          },
+          {
+            "id": 150,
+            "sourcePolygons": 28,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.07933726512562803,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 727,
+              "y": 501,
+              "width": 91,
+              "height": 21,
+              "triangle": [
+                [
+                  727,
+                  501
+                ],
+                [
+                  806.337265125628,
+                  501
+                ],
+                [
+                  805.7602210461407,
+                  510.0022079259045
+                ]
+              ]
+            }
+          },
+          {
+            "id": 151,
+            "sourcePolygons": 1,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.07933726512562803,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 773,
+              "y": 88,
+              "width": 91,
+              "height": 58,
+              "triangle": [
+                [
+                  773,
+                  88
+                ],
+                [
+                  852.337265125628,
+                  88
+                ],
+                [
+                  799.310027009712,
+                  134.1147631509055
+                ]
+              ]
+            }
+          },
+          {
+            "id": 152,
+            "sourcePolygons": 395,
+            "commonCells": 9,
+            "emittedTriangles": 16,
+            "maximumEdgeMetres": 0.06848027459069275,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 259,
+              "width": 80,
+              "height": 46,
+              "triangle": [
+                [
+                  5,
+                  259
+                ],
+                [
+                  73.48027459069276,
+                  259
+                ],
+                [
+                  45.30953331166935,
+                  293.55329833621255
+                ]
+              ]
+            }
+          },
+          {
+            "id": 153,
+            "sourcePolygons": 2184,
+            "commonCells": 14,
+            "emittedTriangles": 26,
+            "maximumEdgeMetres": 0.10311549624058167,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 90,
+              "y": 152,
+              "width": 115,
+              "height": 56,
+              "triangle": [
+                [
+                  90,
+                  152
+                ],
+                [
+                  193.11549624058168,
+                  152
+                ],
+                [
+                  131.5257203666515,
+                  196.5274800879519
+                ]
+              ]
+            }
+          },
+          {
+            "id": 154,
+            "sourcePolygons": 482,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.09798822684927429,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 632,
+              "y": 449,
+              "width": 109,
+              "height": 25,
+              "triangle": [
+                [
+                  632,
+                  449
+                ],
+                [
+                  729.9882268492743,
+                  449
+                ],
+                [
+                  676.7156008777656,
+                  462.102883370897
+                ]
+              ]
+            }
+          },
+          {
+            "id": 155,
+            "sourcePolygons": 0,
+            "commonCells": 2,
+            "emittedTriangles": 3,
+            "maximumEdgeMetres": 0.09123689718307798,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 638,
+              "width": 103,
+              "height": 12,
+              "triangle": [
+                [
+                  5,
+                  638
+                ],
+                [
+                  96.23689718307799,
+                  638
+                ],
+                [
+                  42.52756250778888,
+                  638.3729058922164
+                ]
+              ]
+            }
+          },
+          {
+            "id": 156,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.08486167949185808,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 631,
+              "y": 501,
+              "width": 96,
+              "height": 21,
+              "triangle": [
+                [
+                  631,
+                  501
+                ],
+                [
+                  715.861679491858,
+                  501
+                ],
+                [
+                  683.9276577163942,
+                  510.1375455524379
+                ]
+              ]
+            }
+          },
+          {
+            "id": 157,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.03752941521767227,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 583,
+              "y": 449,
+              "width": 49,
+              "height": 26,
+              "triangle": [
+                [
+                  583,
+                  449
+                ],
+                [
+                  620.5294152176723,
+                  449
+                ],
+                [
+                  590.8541242753945,
+                  463.9215814500289
+                ]
+              ]
+            }
+          },
+          {
+            "id": 158,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.07531400096894372,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 517,
+              "y": 152,
+              "width": 87,
+              "height": 54,
+              "triangle": [
+                [
+                  517,
+                  152
+                ],
+                [
+                  592.3140009689437,
+                  152
+                ],
+                [
+                  556.0120769898641,
+                  194.49242763011728
+                ]
+              ]
+            }
+          },
+          {
+            "id": 159,
+            "sourcePolygons": 0,
+            "commonCells": 12,
+            "emittedTriangles": 20,
+            "maximumEdgeMetres": 0.057684907531899914,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 544,
+              "width": 69,
+              "height": 18,
+              "triangle": [
+                [
+                  5,
+                  544
+                ],
+                [
+                  62.68490753189991,
+                  544
+                ],
+                [
+                  61.942714171688756,
+                  550.895264459752
+                ]
+              ]
+            }
+          },
+          {
+            "id": 160,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.08439331950966095,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 415,
+              "y": 624,
+              "width": 96,
+              "height": 13,
+              "triangle": [
+                [
+                  415,
+                  624
+                ],
+                [
+                  499.39331950966096,
+                  624
+                ],
+                [
+                  472.32508550301276,
+                  625.9626363088558
+                ]
+              ]
+            }
+          },
+          {
+            "id": 161,
+            "sourcePolygons": 0,
+            "commonCells": 12,
+            "emittedTriangles": 20,
+            "maximumEdgeMetres": 0.09554292441903627,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 206,
+              "y": 449,
+              "width": 107,
+              "height": 27,
+              "triangle": [
+                [
+                  206,
+                  449
+                ],
+                [
+                  301.54292441903624,
+                  449
+                ],
+                [
+                  227.94193302960977,
+                  464.9716251034021
+                ]
+              ]
+            }
+          },
+          {
+            "id": 162,
+            "sourcePolygons": 389,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07315118018818484,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 329,
+              "y": 347,
+              "width": 85,
+              "height": 37,
+              "triangle": [
+                [
+                  329,
+                  347
+                ],
+                [
+                  402.15118018818487,
+                  347
+                ],
+                [
+                  396.0440075160962,
+                  372.3084406160856
+                ]
+              ]
+            }
+          },
+          {
+            "id": 163,
+            "sourcePolygons": 388,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.07166181765931068,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 347,
+              "width": 83,
+              "height": 38,
+              "triangle": [
+                [
+                  5,
+                  347
+                ],
+                [
+                  76.66181765931069,
+                  347
+                ],
+                [
+                  62.36535717349111,
+                  373.7475608166109
+                ]
+              ]
+            }
+          },
+          {
+            "id": 164,
+            "sourcePolygons": 1024,
+            "commonCells": 12,
+            "emittedTriangles": 22,
+            "maximumEdgeMetres": 0.10535704521524701,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 656,
+              "y": 88,
+              "width": 117,
+              "height": 58,
+              "triangle": [
+                [
+                  656,
+                  88
+                ],
+                [
+                  761.357045215247,
+                  88
+                ],
+                [
+                  717.9988667407981,
+                  134.11165332818103
+                ]
+              ]
+            }
+          },
+          {
+            "id": 165,
+            "sourcePolygons": 1522,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.10535704521524701,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 717,
+              "y": 419,
+              "width": 117,
+              "height": 28,
+              "triangle": [
+                [
+                  717,
+                  419
+                ],
+                [
+                  822.357045215247,
+                  419
+                ],
+                [
+                  767.0441384971757,
+                  435.16051596086453
+                ]
+              ]
+            }
+          },
+          {
+            "id": 166,
+            "sourcePolygons": 252,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.05575690606346963,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 624,
+              "width": 67,
+              "height": 14,
+              "triangle": [
+                [
+                  5,
+                  624
+                ],
+                [
+                  60.75690606346963,
+                  624
+                ],
+                [
+                  57.52299468919122,
+                  626.6292780235357
+                ]
+              ]
+            }
+          },
+          {
+            "id": 167,
+            "sourcePolygons": 98,
+            "commonCells": 10,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.06465106274915505,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 270,
+              "y": 595,
+              "width": 76,
+              "height": 15,
+              "triangle": [
+                [
+                  270,
+                  595
+                ],
+                [
+                  334.651062749155,
+                  595
+                ],
+                [
+                  332.786143710372,
+                  598.7273801363048
+                ]
+              ]
+            }
+          },
+          {
+            "id": 168,
+            "sourcePolygons": 112,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07315118018818484,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 152,
+              "width": 85,
+              "height": 57,
+              "triangle": [
+                [
+                  5,
+                  152
+                ],
+                [
+                  78.15118018818485,
+                  152
+                ],
+                [
+                  32.56112869010711,
+                  197.84001656847218
+                ]
+              ]
+            }
+          },
+          {
+            "id": 169,
+            "sourcePolygons": 189,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.09554292441903627,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 85,
+              "y": 259,
+              "width": 107,
+              "height": 45,
+              "triangle": [
+                [
+                  85,
+                  259
+                ],
+                [
+                  180.54292441903624,
+                  259
+                ],
+                [
+                  124.32686906259718,
+                  292.1339828672602
+                ]
+              ]
+            }
+          },
+          {
+            "id": 170,
+            "sourcePolygons": 631,
+            "commonCells": 8,
+            "emittedTriangles": 14,
+            "maximumEdgeMetres": 0.06525416232307418,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 414,
+              "y": 347,
+              "width": 77,
+              "height": 37,
+              "triangle": [
+                [
+                  414,
+                  347
+                ],
+                [
+                  479.2541623230742,
+                  347
+                ],
+                [
+                  421.6876918561214,
+                  372.33958726336044
+                ]
+              ]
+            }
+          },
+          {
+            "id": 171,
+            "sourcePolygons": 772,
+            "commonCells": 7,
+            "emittedTriangles": 12,
+            "maximumEdgeMetres": 0.07289620362777292,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 328,
+              "y": 419,
+              "width": 84,
+              "height": 29,
+              "triangle": [
+                [
+                  328,
+                  419
+                ],
+                [
+                  400.89620362777293,
+                  419
+                ],
+                [
+                  380.9622490890482,
+                  436.4307987539352
+                ]
+              ]
+            }
+          },
+          {
+            "id": 172,
+            "sourcePolygons": 670,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.11551026242747904,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 189,
+              "y": 385,
+              "width": 127,
+              "height": 34,
+              "triangle": [
+                [
+                  189,
+                  385
+                ],
+                [
+                  304.510262427479,
+                  385
+                ],
+                [
+                  258.30991862539094,
+                  407.5829954497498
+                ]
+              ]
+            }
+          },
+          {
+            "id": 173,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.07503226963622524,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 603,
+              "y": 610,
+              "width": 87,
+              "height": 14,
+              "triangle": [
+                [
+                  603,
+                  610
+                ],
+                [
+                  678.0322696362252,
+                  610
+                ],
+                [
+                  655.5675659266815,
+                  612.719333445804
+                ]
+              ]
+            }
+          },
+          {
+            "id": 174,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.022883876577629143,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 366,
+              "y": 544,
+              "width": 34,
+              "height": 18,
+              "triangle": [
+                [
+                  366,
+                  544
+                ],
+                [
+                  388.88387657762917,
+                  544
+                ],
+                [
+                  367.34147565032936,
+                  550.926950947894
+                ]
+              ]
+            }
+          },
+          {
+            "id": 175,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.07535800709707598,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 690,
+              "y": 610,
+              "width": 87,
+              "height": 14,
+              "triangle": [
+                [
+                  690,
+                  610
+                ],
+                [
+                  765.358007097076,
+                  610
+                ],
+                [
+                  712.7696923738765,
+                  612.2831812059478
+                ]
+              ]
+            }
+          },
+          {
+            "id": 176,
+            "sourcePolygons": 0,
+            "commonCells": 23,
+            "emittedTriangles": 36,
+            "maximumEdgeMetres": 0.05951346296398791,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 852,
+              "y": 610,
+              "width": 71,
+              "height": 14,
+              "triangle": [
+                [
+                  852,
+                  610
+                ],
+                [
+                  911.5134629639879,
+                  610
+                ],
+                [
+                  853.3343447286267,
+                  612.842157539707
+                ]
+              ]
+            }
+          },
+          {
+            "id": 177,
+            "sourcePolygons": 0,
+            "commonCells": 15,
+            "emittedTriangles": 29,
+            "maximumEdgeMetres": 0.10655412382559991,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 851,
+              "y": 579,
+              "width": 118,
+              "height": 15,
+              "triangle": [
+                [
+                  851,
+                  579
+                ],
+                [
+                  957.5541238255998,
+                  579
+                ],
+                [
+                  956.7566020431946,
+                  582.0368230672722
+                ]
+              ]
+            }
+          },
+          {
+            "id": 178,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.10655412382559991,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 88,
+              "y": 449,
+              "width": 118,
+              "height": 27,
+              "triangle": [
+                [
+                  88,
+                  449
+                ],
+                [
+                  194.5541238255999,
+                  449
+                ],
+                [
+                  115.30264786364977,
+                  464.4307356783659
+                ]
+              ]
+            }
+          },
+          {
+            "id": 179,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.09234126175772052,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 225,
+              "y": 347,
+              "width": 104,
+              "height": 37,
+              "triangle": [
+                [
+                  225,
+                  347
+                ],
+                [
+                  317.34126175772053,
+                  347
+                ],
+                [
+                  247.32488943498993,
+                  372.8349964246825
+                ]
+              ]
+            }
+          },
+          {
+            "id": 180,
+            "sourcePolygons": 0,
+            "commonCells": 20,
+            "emittedTriangles": 33,
+            "maximumEdgeMetres": 0.09463810574329813,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 340,
+              "y": 562,
+              "width": 106,
+              "height": 16,
+              "triangle": [
+                [
+                  340,
+                  562
+                ],
+                [
+                  434.6381057432981,
+                  562
+                ],
+                [
+                  342.4207382499415,
+                  566.781815095032
+                ]
+              ]
+            }
+          },
+          {
+            "id": 181,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.07912725178940945,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 702,
+              "y": 209,
+              "width": 91,
+              "height": 47,
+              "triangle": [
+                [
+                  702,
+                  209
+                ],
+                [
+                  781.1272517894095,
+                  209
+                ],
+                [
+                  745.2249974117443,
+                  244.9486406432353
+                ]
+              ]
+            }
+          },
+          {
+            "id": 182,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.020475209513478913,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 400,
+              "y": 544,
+              "width": 32,
+              "height": 18,
+              "triangle": [
+                [
+                  400,
+                  544
+                ],
+                [
+                  420.4752095134789,
+                  544
+                ],
+                [
+                  401.5066357574938,
+                  550.5551466328184
+                ]
+              ]
+            }
+          },
+          {
+            "id": 183,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07679649867251355,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 427,
+              "y": 610,
+              "width": 88,
+              "height": 14,
+              "triangle": [
+                [
+                  427,
+                  610
+                ],
+                [
+                  503.79649867251356,
+                  610
+                ],
+                [
+                  483.909398765294,
+                  612.6981465850212
+                ]
+              ]
+            }
+          },
+          {
+            "id": 184,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07338949001647709,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 693,
+              "y": 544,
+              "width": 85,
+              "height": 17,
+              "triangle": [
+                [
+                  693,
+                  544
+                ],
+                [
+                  766.3894900164771,
+                  544
+                ],
+                [
+                  765.1632787321983,
+                  549.6569852036057
+                ]
+              ]
+            }
+          },
+          {
+            "id": 185,
+            "sourcePolygons": 0,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07338949001647709,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 793,
+              "y": 347,
+              "width": 85,
+              "height": 35,
+              "triangle": [
+                [
+                  793,
+                  347
+                ],
+                [
+                  866.3894900164771,
+                  347
+                ],
+                [
+                  861.8164649638566,
+                  370.5547254719575
+                ]
+              ]
+            }
+          },
+          {
+            "id": 186,
+            "sourcePolygons": 0,
+            "commonCells": 11,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.0749820749361122,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 419,
+              "width": 86,
+              "height": 30,
+              "triangle": [
+                [
+                  5,
+                  419
+                ],
+                [
+                  79.9820749361122,
+                  419
+                ],
+                [
+                  9.750522170251333,
+                  437.92247178032216
+                ]
+              ]
+            }
+          },
+          {
+            "id": 187,
+            "sourcePolygons": 0,
+            "commonCells": 5,
+            "emittedTriangles": 9,
+            "maximumEdgeMetres": 0.0749820749361122,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 493,
+              "y": 305,
+              "width": 86,
+              "height": 41,
+              "triangle": [
+                [
+                  493,
+                  305
+                ],
+                [
+                  567.9820749361122,
+                  305
+                ],
+                [
+                  520.9412834184863,
+                  334.4043903912794
+                ]
+              ]
+            }
+          },
+          {
+            "id": 188,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.0414237322735617,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 898,
+              "y": 624,
+              "width": 53,
+              "height": 13,
+              "triangle": [
+                [
+                  898,
+                  624
+                ],
+                [
+                  939.4237322735617,
+                  624
+                ],
+                [
+                  938.5141287638859,
+                  625.9846571135134
+                ]
+              ]
+            }
+          },
+          {
+            "id": 189,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.007481291620111314,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 1003,
+              "y": 624,
+              "width": 19,
+              "height": 13,
+              "triangle": [
+                [
+                  1003,
+                  624
+                ],
+                [
+                  1010.4812916201113,
+                  624
+                ],
+                [
+                  1008.9017851345917,
+                  625.5071170044943
+                ]
+              ]
+            }
+          },
+          {
+            "id": 190,
+            "sourcePolygons": 0,
+            "commonCells": 32,
+            "emittedTriangles": 54,
+            "maximumEdgeMetres": 0.007481291620111314,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 828,
+              "y": 595,
+              "width": 19,
+              "height": 15,
+              "triangle": [
+                [
+                  828,
+                  595
+                ],
+                [
+                  835.4812916201113,
+                  595
+                ],
+                [
+                  832.2101214571322,
+                  598.9723989003751
+                ]
+              ]
+            }
+          },
+          {
+            "id": 191,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.04661609212085277,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 795,
+              "y": 259,
+              "width": 58,
+              "height": 43,
+              "triangle": [
+                [
+                  795,
+                  259
+                ],
+                [
+                  841.6160921208527,
+                  259
+                ],
+                [
+                  812.8029098789654,
+                  290.4695751850651
+                ]
+              ]
+            }
+          },
+          {
+            "id": 192,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.036156296304890326,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 194,
+              "y": 624,
+              "width": 48,
+              "height": 14,
+              "triangle": [
+                [
+                  194,
+                  624
+                ],
+                [
+                  230.15629630489033,
+                  624
+                ],
+                [
+                  196.116866569913,
+                  626.6767427716206
+                ]
+              ]
+            }
+          },
+          {
+            "id": 193,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 18,
+            "maximumEdgeMetres": 0.07666049536427805,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 515,
+              "y": 610,
+              "width": 88,
+              "height": 14,
+              "triangle": [
+                [
+                  515,
+                  610
+                ],
+                [
+                  591.6604953642781,
+                  610
+                ],
+                [
+                  589.581600684407,
+                  612.7063393819407
+                ]
+              ]
+            }
+          },
+          {
+            "id": 194,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.07666049536427805,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 605,
+              "y": 624,
+              "width": 88,
+              "height": 13,
+              "triangle": [
+                [
+                  605,
+                  624
+                ],
+                [
+                  681.6604953642781,
+                  624
+                ],
+                [
+                  650.3472275480287,
+                  625.7382297344999
+                ]
+              ]
+            }
+          },
+          {
+            "id": 195,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.06230697224447718,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 491,
+              "y": 347,
+              "width": 74,
+              "height": 37,
+              "triangle": [
+                [
+                  491,
+                  347
+                ],
+                [
+                  553.3069722444772,
+                  347
+                ],
+                [
+                  528.7530244630334,
+                  372.18137472014195
+                ]
+              ]
+            }
+          },
+          {
+            "id": 196,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 12,
+            "maximumEdgeMetres": 0.05874926859804888,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 837,
+              "y": 305,
+              "width": 70,
+              "height": 39,
+              "triangle": [
+                [
+                  837,
+                  305
+                ],
+                [
+                  895.7492685980488,
+                  305
+                ],
+                [
+                  858.4080495013982,
+                  332.9050784087012
+                ]
+              ]
+            }
+          },
+          {
+            "id": 197,
+            "sourcePolygons": 62,
+            "commonCells": 15,
+            "emittedTriangles": 29,
+            "maximumEdgeMetres": 0.11059004701207804,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 293,
+              "y": 624,
+              "width": 122,
+              "height": 13,
+              "triangle": [
+                [
+                  293,
+                  624
+                ],
+                [
+                  403.590047012078,
+                  624
+                ],
+                [
+                  296.37524918435236,
+                  625.6749306949846
+                ]
+              ]
+            }
+          },
+          {
+            "id": 198,
+            "sourcePolygons": 202,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.10722788007823847,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 127,
+              "y": 477,
+              "width": 119,
+              "height": 24,
+              "triangle": [
+                [
+                  127,
+                  477
+                ],
+                [
+                  234.22788007823846,
+                  477
+                ],
+                [
+                  166.72765071043005,
+                  489.2495673644605
+                ]
+              ]
+            }
+          },
+          {
+            "id": 199,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.09422813757479996,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 5,
+              "y": 305,
+              "width": 106,
+              "height": 42,
+              "triangle": [
+                [
+                  5,
+                  305
+                ],
+                [
+                  99.22813757479996,
+                  305
+                ],
+                [
+                  71.26387450466528,
+                  335.762609163247
+                ]
+              ]
+            }
+          },
+          {
+            "id": 200,
+            "sourcePolygons": 0,
+            "commonCells": 20,
+            "emittedTriangles": 35,
+            "maximumEdgeMetres": 0.09720628536773117,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 116,
+              "y": 610,
+              "width": 109,
+              "height": 14,
+              "triangle": [
+                [
+                  116,
+                  610
+                ],
+                [
+                  213.20628536773117,
+                  610
+                ],
+                [
+                  210.20073021326579,
+                  612.2725180093763
+                ]
+              ]
+            }
+          },
+          {
+            "id": 201,
+            "sourcePolygons": 38,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.009339871160999312,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 549,
+              "y": 579,
+              "width": 21,
+              "height": 16,
+              "triangle": [
+                [
+                  549,
+                  579
+                ],
+                [
+                  558.3398711609993,
+                  579
+                ],
+                [
+                  557.0686463139779,
+                  583.0335684041331
+                ]
+              ]
+            }
+          },
+          {
+            "id": 202,
+            "sourcePolygons": 233,
+            "commonCells": 17,
+            "emittedTriangles": 28,
+            "maximumEdgeMetres": 0.07455577372790981,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 607,
+              "y": 544,
+              "width": 86,
+              "height": 17,
+              "triangle": [
+                [
+                  607,
+                  544
+                ],
+                [
+                  681.5557737279098,
+                  544
+                ],
+                [
+                  614.4149142232989,
+                  549.6791055955306
+                ]
+              ]
+            }
+          },
+          {
+            "id": 203,
+            "sourcePolygons": 1435,
+            "commonCells": 14,
+            "emittedTriangles": 28,
+            "maximumEdgeMetres": 0.06983024852291893,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 822,
+              "y": 5,
+              "width": 81,
+              "height": 66,
+              "triangle": [
+                [
+                  822,
+                  5.000000000000001
+                ],
+                [
+                  891.830248522919,
+                  5
+                ],
+                [
+                  861.6071987522072,
+                  59.51070594283519
+                ]
+              ]
+            }
+          },
+          {
+            "id": 204,
+            "sourcePolygons": 240,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.06232856327422576,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 833,
+              "y": 562,
+              "width": 74,
+              "height": 16,
+              "triangle": [
+                [
+                  833,
+                  562
+                ],
+                [
+                  895.3285632742258,
+                  562
+                ],
+                [
+                  833.4669658169821,
+                  566.2032879521008
+                ]
+              ]
+            }
+          },
+          {
+            "id": 205,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.05139933073566615,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 778,
+              "y": 624,
+              "width": 63,
+              "height": 13,
+              "triangle": [
+                [
+                  778,
+                  624
+                ],
+                [
+                  829.3993307356661,
+                  624
+                ],
+                [
+                  807.8998590079395,
+                  625.2974263365942
+                ]
+              ]
+            }
+          },
+          {
+            "id": 206,
+            "sourcePolygons": 152,
+            "commonCells": 6,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.11558620898799153,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 794,
+              "y": 477,
+              "width": 127,
+              "height": 23,
+              "triangle": [
+                [
+                  794,
+                  477
+                ],
+                [
+                  909.5862089879915,
+                  477
+                ],
+                [
+                  891.3210987132022,
+                  488.41474249906634
+                ]
+              ]
+            }
+          },
+          {
+            "id": 207,
+            "sourcePolygons": 150,
+            "commonCells": 11,
+            "emittedTriangles": 21,
+            "maximumEdgeMetres": 0.14304386730695964,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 239,
+              "y": 501,
+              "width": 155,
+              "height": 22,
+              "triangle": [
+                [
+                  239,
+                  501
+                ],
+                [
+                  382.0438673069596,
+                  501
+                ],
+                [
+                  354.09069007445385,
+                  511.6913407204928
+                ]
+              ]
+            }
+          },
+          {
+            "id": 208,
+            "sourcePolygons": 295,
+            "commonCells": 8,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.06673392359254193,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 660,
+              "y": 305,
+              "width": 78,
+              "height": 41,
+              "triangle": [
+                [
+                  660,
+                  305
+                ],
+                [
+                  726.7339235925419,
+                  305
+                ],
+                [
+                  673.7024554390703,
+                  334.9122938010379
+                ]
+              ]
+            }
+          },
+          {
+            "id": 209,
+            "sourcePolygons": 0,
+            "commonCells": 8,
+            "emittedTriangles": 15,
+            "maximumEdgeMetres": 0.05139933073566615,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 72,
+              "y": 624,
+              "width": 63,
+              "height": 14,
+              "triangle": [
+                [
+                  72,
+                  624
+                ],
+                [
+                  123.39933073566615,
+                  624
+                ],
+                [
+                  104.8101162356396,
+                  626.4492607258383
+                ]
+              ]
+            }
+          },
+          {
+            "id": 210,
+            "sourcePolygons": 7,
+            "commonCells": 8,
+            "emittedTriangles": 11,
+            "maximumEdgeMetres": 0.07927302294461941,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 246,
+              "y": 477,
+              "width": 91,
+              "height": 24,
+              "triangle": [
+                [
+                  246,
+                  477
+                ],
+                [
+                  325.2730229446194,
+                  477
+                ],
+                [
+                  259.7647922426187,
+                  489.73138909737173
+                ]
+              ]
+            }
+          },
+          {
+            "id": 211,
+            "sourcePolygons": 41,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.05486035208173196,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 346,
+              "y": 595,
+              "width": 66,
+              "height": 15,
+              "triangle": [
+                [
+                  346,
+                  595
+                ],
+                [
+                  400.86035208173195,
+                  595
+                ],
+                [
+                  346.9142673451103,
+                  598.7226119073418
+                ]
+              ]
+            }
+          },
+          {
+            "id": 212,
+            "sourcePolygons": 350,
+            "commonCells": 11,
+            "emittedTriangles": 20,
+            "maximumEdgeMetres": 0.07599998009989146,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 414,
+              "y": 524,
+              "width": 87,
+              "height": 19,
+              "triangle": [
+                [
+                  414,
+                  524
+                ],
+                [
+                  489.99998009989145,
+                  524
+                ],
+                [
+                  467.6185029326108,
+                  531.0067140008032
+                ]
+              ]
+            }
+          },
+          {
+            "id": 213,
+            "sourcePolygons": 163,
+            "commonCells": 7,
+            "emittedTriangles": 14,
+            "maximumEdgeMetres": 0.0247044196392859,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 792,
+              "y": 595,
+              "width": 36,
+              "height": 15,
+              "triangle": [
+                [
+                  792,
+                  595
+                ],
+                [
+                  816.7044196392859,
+                  595
+                ],
+                [
+                  815.1869277548143,
+                  598.5200770689831
+                ]
+              ]
+            }
+          },
+          {
+            "id": 214,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.06645411331695537,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 198,
+              "y": 305,
+              "width": 78,
+              "height": 42,
+              "triangle": [
+                [
+                  198,
+                  305
+                ],
+                [
+                  264.4541133169554,
+                  305
+                ],
+                [
+                  249.11313392299826,
+                  335.4844192094192
+                ]
+              ]
+            }
+          },
+          {
+            "id": 215,
+            "sourcePolygons": 0,
+            "commonCells": 10,
+            "emittedTriangles": 19,
+            "maximumEdgeMetres": 0.07912725178940945,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 834,
+              "y": 419,
+              "width": 91,
+              "height": 28,
+              "triangle": [
+                [
+                  834,
+                  419
+                ],
+                [
+                  913.1272517894095,
+                  419
+                ],
+                [
+                  898.4048845051402,
+                  435.3755924662984
+                ]
+              ]
+            }
+          },
+          {
+            "id": 216,
+            "sourcePolygons": 0,
+            "commonCells": 17,
+            "emittedTriangles": 31,
+            "maximumEdgeMetres": 0.07266699112137236,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 755,
+              "y": 385,
+              "width": 84,
+              "height": 32,
+              "triangle": [
+                [
+                  755,
+                  385
+                ],
+                [
+                  827.6669911213723,
+                  385
+                ],
+                [
+                  762.084903495577,
+                  405.84975466363016
+                ]
+              ]
+            }
+          },
+          {
+            "id": 217,
+            "sourcePolygons": 0,
+            "commonCells": 14,
+            "emittedTriangles": 25,
+            "maximumEdgeMetres": 0.07555596765368336,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 632,
+              "y": 259,
+              "width": 87,
+              "height": 43,
+              "triangle": [
+                [
+                  632,
+                  259
+                ],
+                [
+                  707.5559676536833,
+                  259
+                ],
+                [
+                  693.4099822942424,
+                  290.0569889318314
+                ]
+              ]
+            }
+          },
+          {
+            "id": 218,
+            "sourcePolygons": 0,
+            "commonCells": 9,
+            "emittedTriangles": 17,
+            "maximumEdgeMetres": 0.09463810574329813,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 727,
+              "y": 524,
+              "width": 106,
+              "height": 18,
+              "triangle": [
+                [
+                  727,
+                  524
+                ],
+                [
+                  821.6381057432981,
+                  524
+                ],
+                [
+                  808.7208401184618,
+                  530.0209270730616
+                ]
+              ]
+            }
+          },
+          {
+            "id": 219,
+            "sourcePolygons": 0,
+            "commonCells": 7,
+            "emittedTriangles": 13,
+            "maximumEdgeMetres": 0.056973324133505705,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 923,
+              "y": 610,
+              "width": 68,
+              "height": 14,
+              "triangle": [
+                [
+                  923,
+                  610
+                ],
+                [
+                  979.9733241335057,
+                  610
+                ],
+                [
+                  937.0437204659993,
+                  612.4251246389774
+                ]
+              ]
+            }
+          },
+          {
+            "id": 220,
+            "sourcePolygons": 0,
+            "commonCells": 4,
+            "emittedTriangles": 7,
+            "maximumEdgeMetres": 0.0631632709548509,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 777,
+              "y": 610,
+              "width": 75,
+              "height": 14,
+              "triangle": [
+                [
+                  777,
+                  610
+                ],
+                [
+                  840.1632709548509,
+                  610
+                ],
+                [
+                  797.264948783312,
+                  612.9267824364994
+                ]
+              ]
+            }
+          },
+          {
+            "id": 221,
+            "sourcePolygons": 0,
+            "commonCells": 3,
+            "emittedTriangles": 5,
+            "maximumEdgeMetres": 0.08194234114599312,
+            "metresPerAtlasPixel": 0.001,
+            "chart": {
+              "x": 922,
+              "y": 152,
+              "width": 93,
+              "height": 51,
+              "triangle": [
+                [
+                  922,
+                  152
+                ],
+                [
+                  1003.9423411459932,
+                  152
+                ],
+                [
+                  954.3777978152441,
+                  191.15296721999772
+                ]
+              ]
+            }
+          }
+        ],
+        "commonAngularRefinement": [
+          {
+            "lod": 1,
+            "path": "C:\\CodexWorkspaces\\Pillagers\\public\\universal-human\\UniversalHuman_LOD1.glb",
+            "sha256": "5b23936dd80c9f443ebf7e144c547c80a4e1980c8d2cee5c818afe7a608829f5",
+            "facets": 120
+          },
+          {
+            "lod": 2,
+            "path": "C:\\CodexWorkspaces\\Pillagers\\public\\universal-human\\UniversalHuman_LOD2.glb",
+            "sha256": "5836bad2b9cc48f2dde153a55cf05395299657b343815e7a9c1833247d0eaf86",
+            "facets": 78
+          }
+        ],
+        "transparentGeometryPruning": {
+          "enabled": true,
+          "fullSubstrateTriangles": 3466,
+          "removedTriangles": 2743,
+          "guardTexels": 2,
+          "policy": "omit only triangles whose projected atlas neighborhood has no positive source alpha"
+        }
+      }
+    },
     "generatedBust": {
       "reference": {
         "id": "stubble",
@@ -58,7 +6698,7 @@
         "parameters": {
           "fov": 0.3490658503988659,
           "gsh": null,
-          "gss": 10.0,
+          "gss": 10,
           "matted": true,
           "res": 1024,
           "seed": 1983,
@@ -77,41 +6717,309 @@
         "redrawn": false
       }
     },
-    "style": "stubble",
-    "outputSha256": "fd4ee00bd4f617c40e4e9a5df9060b313e94c2f1d8ec3b03197594fe72492058",
-    "extraction": {
-      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
-      "selectedFaces": 33364,
-      "fraction": 0.0355131870541426,
-      "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
-      "reviewRequired": true
-    },
-    "reviewRequired": true
+    "historicalPublishedProvenance": {
+      "reviewRequired": false,
+      "style": "stubble",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\lods-2500-1800-1200\\Beard_stubble_LOD2.glb",
+      "sourceSha256": "8e24d928187868c6401a8e526225fe3b7730b6262d188f4cca617dae57c552f2",
+      "outputSha256": "67842a4d709f490f90732836ced388642aa3e9ebf8bdd4998107131522056528",
+      "fit": {
+        "sourceSkullCentre": [
+          0,
+          0,
+          0.075
+        ],
+        "scale": 0.52,
+        "rotateBlenderZ": 180,
+        "headReferenceSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      },
+      "removedSmallComponentVertices": 201,
+      "fragmentAreaThreshold": 0.015,
+      "sourceProvenance": {
+        "generatedBust": {
+          "reference": {
+            "id": "stubble",
+            "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\FBD1AB9F-66EA-45AC-BEED-6DA3824F1085\\1-Foto-1.jpg",
+            "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+            "crop": [
+              20,
+              485,
+              214,
+              752
+            ],
+            "inputSha256": "a766ddabcbbdb9cb5262a47e525e4271dbae8a321800c8540405ee96cf7ca0d2",
+            "redrawn": false,
+            "reviewRequired": true,
+            "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble",
+            "jobId": "beards-v03/stubble"
+          },
+          "reviewRequired": true,
+          "generation": {
+            "backend": "pixal3d",
+            "components": [],
+            "input": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\reference.png",
+              "sha256": "beed9e1c370d026c048ed20b6feed8bd476894bb0931e970dc2b6694be7816b5"
+            },
+            "license": {
+              "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+              "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+            },
+            "output": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
+              "sha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d"
+            },
+            "parameters": {
+              "fov": 0.3490658503988659,
+              "gsh": null,
+              "gss": 10,
+              "matted": true,
+              "res": 1024,
+              "seed": 1983,
+              "steps": 12
+            },
+            "schema_version": 1,
+            "timings_seconds": {
+              "total": 3254.4
+            }
+          },
+          "outputSha256": "12c91a82dee12f706c22104fa9dbd9a1579b3c5a58c1c6a6b52c0d34960e820d",
+          "matte": {
+            "model": "birefnet-general-lite",
+            "sourceSha256": "a766ddabcbbdb9cb5262a47e525e4271dbae8a321800c8540405ee96cf7ca0d2",
+            "inputSha256": "beed9e1c370d026c048ed20b6feed8bd476894bb0931e970dc2b6694be7816b5",
+            "redrawn": false
+          }
+        },
+        "style": "stubble",
+        "outputSha256": "fd4ee00bd4f617c40e4e9a5df9060b313e94c2f1d8ec3b03197594fe72492058",
+        "extraction": {
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\beards-v03\\stubble\\generated.glb",
+          "selectedFaces": 33364,
+          "fraction": 0.0355131870541426,
+          "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+          "reviewRequired": true
+        },
+        "reviewRequired": true
+      },
+      "visualReview": {
+        "ages": [
+          35,
+          70
+        ],
+        "animations": [
+          "Idle",
+          "Walk",
+          "Run"
+        ],
+        "lods": [
+          2
+        ],
+        "fitRatios": [
+          1,
+          1.5
+        ],
+        "screenshots": [
+          "artifacts/generated-beard-stubble-age35-LOD2.png",
+          "artifacts/generated-beard-stubble-age70-LOD2.png"
+        ]
+      },
+      "runtimeFit": {
+        "cheekAttachment": "fixed head convex hull",
+        "sizeGrowth": "free beard only; cheek attachment fixed"
+      }
+    }
   },
-  "visualReview": {
-    "ages": [
-      35,
-      70
+  "fit": {
+    "authoringFrame": "canonical",
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
     ],
-    "animations": [
-      "Idle",
-      "Walk",
-      "Run"
-    ],
-    "lods": [
-      2
-    ],
-    "fitRatios": [
-      1,
-      1.5
-    ],
-    "screenshots": [
-      "artifacts/generated-beard-stubble-age35-LOD2.png",
-      "artifacts/generated-beard-stubble-age70-LOD2.png"
+    "projection": "shell",
+    "attachmentBand": {
+      "minimumY": null,
+      "maximumY": null
+    },
+    "subdivisions": 0,
+    "clearance": 0.003
+  },
+  "attachmentMetadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "beard/stubble",
+    "type": "beard",
+    "anchor": "socket_jaw",
+    "fitCage": "LOWER_FACE_CAGE",
+    "fitMode": "conform",
+    "clearance": 0.003,
+    "authoringFrame": "canonical",
+    "sourceStyle": "stubble",
+    "projection": "shell",
+    "subdivisions": 0,
+    "attachmentBand": {
+      "minimumY": null,
+      "maximumY": null
+    },
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
     ]
   },
-  "runtimeFit": {
-    "cheekAttachment": "fixed head convex hull",
-    "sizeGrowth": "free beard only; cheek attachment fixed"
+  "geometryOptimization": {
+    "outputTriangles": 723,
+    "profileMaterialCount": 1,
+    "facetedNormals": true,
+    "canonicalAuthoring": true,
+    "prototypeTierPolicy": "same source-qualified canonical surface in every declared tier",
+    "geometryAndMaterialBINUnchanged": true,
+    "aliasNameOnly": false
+  },
+  "referenceReview": {
+    "qualification": "independent pinned private-candidate PASS",
+    "sourceSha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5",
+    "evidence": "artifacts/appearance-pass/agent-c/temporary-visual-stubble19-matrix/AGENT-C-VERDICT.json",
+    "evidenceSha256": "09c8db286e1e3eafc335d24b1658a7c4f5f3a1ae1033c1fb6cf70f990b9b2f5a",
+    "candidateVerdict": "PASS for this immutable private candidate and exact metadata/runtime pins",
+    "scope": "Private candidate qualification only. No public assets/registry/runtime were changed. Native Agent D must still review the actual published assets in Character Lab desktop/mobile after final integration. npm run validate:characters and npm run build remain required final public gates.",
+    "testedMetadata": {
+      "version": "pillagers-fit/0.1",
+      "id": "beard/stubble",
+      "type": "beard",
+      "anchor": "socket_jaw",
+      "fitCage": "LOWER_FACE_CAGE",
+      "fitMode": "conform",
+      "clearance": 0.003,
+      "authoringFrame": "canonical",
+      "sourceStyle": "stubble",
+      "projection": "shell",
+      "subdivisions": 0,
+      "attachmentBand": {
+        "minimumY": null,
+        "maximumY": null
+      },
+      "canonicalHeadSize": [
+        0.1992,
+        0.2397,
+        0.2189
+      ]
+    },
+    "testedImplementation": [
+      {
+        "url": "http://127.0.0.1:4176/universal-human/UniversalHuman_LOD0.glb?v=40e9e4cebdcb",
+        "sha256": "40e9e4cebdcbb796d5cbf509de52d1220635913e5a069d6b56d69afd81af6f55"
+      },
+      {
+        "url": "http://127.0.0.1:4176/appearance/beards/stubble/Beard_stubble_LOD2.glb?v=67842a4d709f",
+        "sha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5"
+      },
+      {
+        "url": "http://127.0.0.1:4176/universal-human/UniversalHuman_LOD1.glb?v=5b23936dd80c",
+        "sha256": "5b23936dd80c9f443ebf7e144c547c80a4e1980c8d2cee5c818afe7a608829f5"
+      },
+      {
+        "url": "http://127.0.0.1:4176/universal-human/UniversalHuman_LOD2.glb?v=5836bad2b9cc",
+        "sha256": "5836bad2b9cc48f2dde153a55cf05395299657b343815e7a9c1833247d0eaf86"
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/appearance-review.js?t=1790981141028",
+        "sha256": "c3d5c790e26e9737809fe4dfa4eacf6e14d86cae7a9e0f7bff64489d434782fa"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFactory.ts?t=1790981141028",
+        "sha256": "0c2ca4c2bef482482e197487b010bc93f01a2981c6b86e22b82d6954eee2e772"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GoldenCharacters.ts",
+        "sha256": "6794088ed4ccf477c7f3a9a58262d51c664a8fee60a78b2bfe7ba56f913bba1a"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHumanProfile.ts?t=1790958586645",
+        "sha256": "1dc276b995d3c7ef0b0bb916c834b87ce1f9fa7ae2bb6d93ad88cf060865e001"
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/fitted-geometry-audit.mjs?t=1790975599126",
+        "sha256": "e842cafb74f52ef098e1458a55b1021e009c26ba09c019e0613a7110123236b1"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssets.ts?t=1790958586645",
+        "sha256": "1e37b007f1c5f9f47562ac6391f7f641bff214c4a15c0c717aef2400cac1b762"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/generatePhenotype.ts",
+        "sha256": "1f5d86cf38e53f6ab12f37b4d56d4e008171db17da995b49143825a71df7bbe7"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/AttachmentContract.ts?t=1790958586645",
+        "sha256": "af7ae649075f54372dfbb5450cb258a0075e8d9f1d3bc40bdbabe35a8cd2b287"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHuman.ts?t=1790981141028",
+        "sha256": "b7495b820400db1e9e9aa7a6040f60ad3abfe705476736bf45536f9e796fdef4"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterDNA.ts",
+        "sha256": "ffe0633da1dbfcbf2f66eca19c75a6e5fe1ace47cf377dfa5d45d3f8ccd2cf5e"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/seededRandom.ts",
+        "sha256": "47adc048e465a34962efe4bbcf5c34d57a8074c0c8c9836588f0ab7b2925b652"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFrames.ts",
+        "sha256": "6c89ab981edc9a9833414bcd181eed3ef59f9620849091484e0acaf35ac2dac1"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/ReferenceGarmentFrames.ts",
+        "sha256": "48da0d843405af5a551699374ab2c6501c83ba9996d6913fb6f75f0d0c69b2ac"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAppearance.ts?t=1790958586645",
+        "sha256": "fc47dd2eb0838253573cafee33615c46936b8c1b659d8041abce9a9f856e1ec0"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssetMeasurements.ts",
+        "sha256": "b93b6589488eeec197265a56d31c209330fd738b5af61d0ad08a262c8ad50d98"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SoftBodySpring.ts",
+        "sha256": "e2795000e8e08a62352436909680641c56d84aea6a4c59c45eec9174681809e0"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/heritageProfiles.ts",
+        "sha256": "7a32de2110ecc6be588d2ddb1db4490c79e65aaf61857c38e10613aec2868552"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SkinTint.ts",
+        "sha256": "bcdb38a3df881e6742563848f89b309f444e92852b31f4deb0147ca6d92879e0"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/AppearanceModules.ts?t=1790978392410",
+        "sha256": "9dbbdcd715f141255ff940c5952eb179d806b8edf56627d62f0ce78a1fd3d657"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFitSystem.ts?t=1790958586645",
+        "sha256": "645db274b67ff57a3c752262cfab356063ef016c2fa1e0712aa292e9c3018e55"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GarmentFit.ts?t=1790981141028",
+        "sha256": "e864c3fbe09e02429a0a84b0a1af0643d344c7db7011d632caaaf4d3c2454e07"
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFit.ts?t=1790958586645",
+        "sha256": "a5d057b88c4de777f4a4cda2a1e01ac7750e3fe0c80fb77f752602f1c7533ea8"
+      },
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/appearance-review.html",
+        "sha256": "ac80131cff8065efbc39f8df12bd52048a5c28d9af3b69feab40d3b0328912bc"
+      }
+    ],
+    "finalActualPublicGate": "pending final registry/build and independent actual-public Character Lab review"
   }
 }

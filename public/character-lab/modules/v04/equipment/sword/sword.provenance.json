@@ -1,0 +1,121 @@
+{
+  "schema": "pillagers-v04-module-provenance/1",
+  "outputSha256": "08b65df552cd58efd9fc44ff45f562d45a9b73baeea6ab291c56ddb799ab8ff5",
+  "reviewRequired": false,
+  "scope": "lab-v04-prototype",
+  "sourceSha256": "5d3701ce77dedf2b5a5fc1bd6cf53575484cbf428009e212047383dacfbbdb6c",
+  "sourceProvenance": {
+    "outputSha256": "5d3701ce77dedf2b5a5fc1bd6cf53575484cbf428009e212047383dacfbbdb6c",
+    "generation": {
+      "backend": "meshy",
+      "model": "meshy-t2",
+      "taskId": "01a10362-77bf-70ca-b41a-9f5308639515",
+      "input": {
+        "file": "artifacts/character-lab-v04/equipment-v04-pipeline/sword/sword-concept-r1.png",
+        "sha256": "817a1fdae414a08ea0c8d794753cc82fad120a64b55c07f94879a5b16c79b024"
+      },
+      "output": {
+        "sha256": "5d3701ce77dedf2b5a5fc1bd6cf53575484cbf428009e212047383dacfbbdb6c"
+      },
+      "parameters": {
+        "model_type": "smart-topology",
+        "ai_model": "meshy-t2",
+        "target_polycount": 260,
+        "should_texture": false,
+        "enable_pbr": false,
+        "pose_mode": "",
+        "target_formats": [
+          "glb"
+        ]
+      },
+      "workflowAuthorizationSHA256": "a89911b75b91a0f41f4551a97dd6b4bfec69156a44b3a852c29d028c97d6cd97"
+    }
+  },
+  "imageGeneration": {
+    "schema": "pillagers-imagegen-reference/1",
+    "module": "equipment/sword",
+    "candidate": 1,
+    "generator": "built-in image_gen.imagegen",
+    "generatedAt": "2026-10-03T20:00:06.216Z",
+    "conceptIsConversionInput": true,
+    "noPreV04Reuse": true,
+    "sourceBodySHA256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e",
+    "prompt": {
+      "path": "scratch/character-lab-v04/equipment-v04-pipeline/sword/sword-concept-r1.prompt.txt",
+      "sha256": "868337680c16c363c281dee2ba5220a7743a95757b13663a0f3bb084600da683"
+    },
+    "inputs": [
+      {
+        "path": "scratch/character-lab-v04/references/07-rounded-warrior.jpeg",
+        "role": "human broad sword visual language",
+        "sha256": "6b97e24899daf7ac2a1ec9805b97e101e2bd19a7ae79d5180615d10c9e618dc1"
+      },
+      {
+        "path": "scratch/character-lab-v04/references/03-bearded-archetypes-sheet.jpeg",
+        "role": "human faceted Jarl sword construction/palette",
+        "sha256": "b6728e71bcd5e4d933ddfea04b6db4b5ed5e3950cb36dd4d1a04faa970724f02"
+      },
+      {
+        "path": "artifacts/character-lab-v04/clothing-v04-pipeline/M01/r3-neutral-body-front.png",
+        "role": "actual r3 body/hand scale guide only; no body output",
+        "sha256": "b3ce6896cdfef60b7d2b09d4b7644e737882aac4a0578f8c1962d385b9fab82b"
+      }
+    ],
+    "output": {
+      "path": "artifacts/character-lab-v04/equipment-v04-pipeline/sword/sword-concept-r1.png",
+      "originalGeneratedPath": "C:/Users/Devoteam/.codex/generated_images/01a0f2c0-b540-78d1-8a04-060b16cf5c0c/exec-66e72dd7-a75c-4767-9940-c80fe064543c.png",
+      "sha256": "817a1fdae414a08ea0c8d794753cc82fad120a64b55c07f94879a5b16c79b024",
+      "bytes": 1029821
+    },
+    "plannedDimensionsMetres": {
+      "total": 1.03,
+      "blade": 0.86,
+      "bladeWidth": 0.13,
+      "bladeThickness": 0.022,
+      "guardWidth": 0.27,
+      "gripLength": 0.12,
+      "gripWidth": 0.038
+    },
+    "dimensionsAreDesignIntentNot3DMeasurements": true,
+    "status": "independent-input-review-pending"
+  },
+  "v04Canonicalization": {
+    "schema": "pillagers-v04-canonical-source/1",
+    "noPreV04Reuse": true,
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "body": {
+      "id": "lab-body/golden-v04-candidate-002-r3",
+      "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+    },
+    "inputMeshSHA256": "5d3701ce77dedf2b5a5fc1bd6cf53575484cbf428009e212047383dacfbbdb6c",
+    "authoringReceipt": "/character-lab/modules/v04/equipment/sword/sword.authoring.json",
+    "authoringReceiptSHA256": "7448c07e3e9e253ba728589b1a064b768b5ec764ec498aa009ddec167f040115"
+  },
+  "review": {
+    "status": "accepted",
+    "reason": "Accepted for the genuine independent sampled sword R2b browser matrix. Source geometry/BIN, normals, palette and canonical fit metadata unchanged. Whole-library, mobile and continuous motion approval remain outstanding; canonical ancestor affine scale is inherited.",
+    "reviewed2D": [
+      {
+        "path": "artifacts/character-lab-v04/vertical-slice-qa/reference-reviews/sword-concept-r1.review.json",
+        "sha256": "a099d72e1a1addc43ee24785a0c505f501ea142d54dcea00093e1dbb5f34879c"
+      }
+    ],
+    "acceptedAt": "2026-10-03T23:53:16.269Z",
+    "visualReview": {
+      "path": "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r2b/VERDICT.json",
+      "sha256": "fb10ca28e990b3113e8c1d1df3995ba2720c967eeeca351606e8cec4e502a65e",
+      "status": "PASS_SAMPLED_SWORD_BINDING_CLEARANCE_AND_UI",
+      "scope": "Independent sword R2b production-preview browser approval for sampled canonical body-only equipment cases. Not full issue18/Gate2, clothing/head integration, mobile or continuous whole-motion certification.",
+      "reviewer": "/root/agent_d_visual_qa",
+      "caseCount": 21,
+      "gripCloseups": 4,
+      "evidence": [
+        "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r2b/ALL-21-GENUINE-LAB-MONTAGE.png",
+        "artifacts/character-lab-v04/vertical-slice-qa/sword-browser-qa-r2b/ADULT-CHILD-REAL-GRIP-MONTAGE.png"
+      ],
+      "worldShapeQualification": "Metadata applies a uniform local hand-core item proportion, but socket ancestor affine transforms are inherited. Actual source/world edge-ratio spread is measured, not certified isotropic. No source mesh/BIN/palette mutation occurred."
+    }
+  }
+}

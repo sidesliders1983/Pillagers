@@ -14,7 +14,7 @@ function load(path) {
 }
 const {seededRandom}=load('../src/config/worldConfig.ts');
 const {heightAt,shoreAt,surfaceHeightAt,createTerrain}=load('../src/world/Terrain.ts');
-const {buildings,pathWeight}=load('../src/world/SettlementLayout.ts');
+const {buildings,pathWeight,routes}=load('../src/world/SettlementLayout.ts');
 const {MovementSystem,walkable}=load('../src/systems/MovementSystem.ts');
 const {Villager}=load('../src/entities/Villager.ts');
 test('world seed reproduces scenery randomness',()=>{const a=seededRandom(1983),b=seededRandom(1983);for(let i=0;i<100;i++)assert.equal(a(),b());});
@@ -27,7 +27,7 @@ test('shoreline height is continuous and building footprints are level',()=>{
   }}
 });
 test('desire paths connect the harbor and building entrances, with clear space away from paths',()=>{
-  for(const [x,z] of [[-4.8,-10],[-1.2,-1.6],[.3,6.4],[-8.2,3.7],[9.3,5.5],[6,-4.2]])assert.ok(pathWeight(x,z)>.99);
+  for(const [x,z] of routes.flatMap(route=>[route.points[0],route.points[2]]))assert.ok(pathWeight(x,z)>.99);
   assert.ok(pathWeight(15,-6)<.01);
 });
 test('path grounding matches the rendered terrain triangles',()=>{

@@ -178,7 +178,7 @@
           "parameters": {
             "fov": 0.3490658503988659,
             "gsh": null,
-            "gss": 10.0,
+            "gss": 10,
             "matted": true,
             "res": 1024,
             "seed": 1983,
@@ -208,5 +208,108 @@
       "back"
     ],
     "date": "2026-10-02"
+  },
+  "outputGarmentBind": {
+    "frame": "universal-human-neutral-v1",
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "ground",
+    "metadataSha256": "4ffd2f3b813adae6a01ea3a79aea03ab5ddec79ed57e350270cc5dd860d0f8d8",
+    "joints": {
+      "Hips": [
+        0.000006996095180511475,
+        0.9,
+        -0.021408669650554657
+      ],
+      "Chest": [
+        0.000021964311599731445,
+        1.29,
+        0.006449282169342041
+      ],
+      "Neck": [
+        0.000011235475540161133,
+        1.43,
+        -0.03970365971326828
+      ],
+      "UpperArm_L": [
+        0.19671039283275604,
+        1.4,
+        -0.10769260302186012
+      ],
+      "LowerArm_L": [
+        0.30923010408878326,
+        1.1,
+        -0.17587073147296906
+      ],
+      "Hand_L": [
+        0.37526851892471313,
+        0.91,
+        -0.17889723926782608
+      ],
+      "Foot_L": [
+        0.19655270129442215,
+        0.105,
+        -0.1907181367278099
+      ],
+      "Toe_L": [
+        0.3013521996153938,
+        0.05,
+        -0.11379567478285742
+      ],
+      "LowerLeg_L": [
+        0.17483296335558407,
+        0.49,
+        -0.08817579597234726
+      ],
+      "UpperLeg_L": [
+        0.12186267480254173,
+        0.9,
+        -0.021408669650554657
+      ],
+      "UpperArm_R": [
+        -0.20986024290323257,
+        1.4,
+        0.007026202976703644
+      ],
+      "LowerArm_R": [
+        -0.3180694580078125,
+        1.1,
+        0.04845789819955826
+      ],
+      "Hand_R": [
+        -0.37254685163497925,
+        0.91,
+        0.10791864804923534
+      ],
+      "Foot_R": [
+        -0.24246200919151306,
+        0.105,
+        -0.044722351245582104
+      ],
+      "Toe_R": [
+        -0.2541655254321404,
+        0.05,
+        0.08474976045267274
+      ],
+      "LowerLeg_R": [
+        -0.1699889278097544,
+        0.49,
+        -0.05814152956008911
+      ],
+      "UpperLeg_R": [
+        -0.1503264456987381,
+        0.9,
+        -0.021408669650554657
+      ]
+    },
+    "authority": "Existing registered measured reference-figure neutral import joints; emitted unchanged as the final published source pose. Not provider bones, newly inferred points or a claim of canonical skeleton equality."
+  },
+  "finalBindMetadataMigration": {
+    "at": "2026-10-03T21:08:01.571Z",
+    "inputProvenanceSHA256": "c1b37551fb168f079368715bcb2f8c8c1df5196e88eb14a2e5709df82d261c1d",
+    "outputMeshUnchanged": true,
+    "scope": "Legacy published reference import pose receipt only. No pre-v0.4 asset is reused as new v0.4 source.",
+    "registryAuthority": "src/characters/ReferenceGarmentFrames.ts"
   }
 }

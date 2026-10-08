@@ -3,8 +3,8 @@ import { pathWeight } from './SettlementLayout';
 import { surfaceHeightAt } from './Terrain';
 import { worldConfig } from '../config/worldConfig';
 // One conforming mesh with feathered vertex alpha replaces overlapping circular decals.
-export function createPaths() { const positions: number[] = [], colors: number[] = []; for (let x = -15; x < 16; x += .5)
-    for (let z = -11; z < 18; z += .5) {
+export function createPaths() { const positions: number[] = [], colors: number[] = []; for (let x = -38; x < 38; x += .5)
+    for (let z = -11; z < 48; z += .5) {
         if (pathWeight(x + .25, z + .25) < .035)
             continue;
         for (const [dx, dz] of [[0, 0], [0, .5], [.5, 0], [.5, 0], [0, .5], [.5, .5]]) {
