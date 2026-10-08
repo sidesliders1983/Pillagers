@@ -49,3 +49,24 @@ test('the founding longship can be kept and disappears from the board only after
  assert.equal(projectSettlement(state).entities.some(e=>e.id===ship.id),false);
  assert.equal(state.stocks.materials,materials+state.landing.config.longshipSalvage);
 });
+
+test('salvaging an upgraded house refunds half the investment once and releases residents and cattle',()=>{
+ let state=core.createCampaign(32,{initialMaterials:100,foundingCoupleChanceBps:0});
+ state=core.applyCommand(state,{type:'AssignOccupation',personaId:'founder-1',occupation:'farmer'});
+ state=core.applyCommand(state,{type:'BuildHouse',householdId:'founder-1'});
+ state=core.applyCommand(state,{type:'SpecializeBuilding',buildingId:'house-1',occupation:'farmer'});
+ state=core.applyCommand(state,{type:'UpgradeBuilding',buildingId:'house-1'});
+ state=core.applyCommand(state,{type:'AssignCattle',cattleId:'cattle-1',farmyardId:'house-1'});
+ const before=state.stocks.materials,investment=core.inspectBuilding(state,'house-1').investedMaterials;
+ const saved=core.serializeState(state);
+ state=core.applyCommand(core.reconstructState(saved),{type:'SalvageBuilding',buildingId:'house-1'});
+ assert.equal(state.stocks.materials,before+Math.floor(investment/2));
+ assert.equal(state.buildings['house-1'],undefined);
+ assert.equal(state.residences[state.households['founder-1'].residenceId].kind,'tent');
+ assert.equal(state.landing.cattle['cattle-1'].farmyardId,null);
+ assert.ok(projectSettlement(state).entities.some(e=>e.kind==='household'&&e.id==='founder-1'));
+ assert.equal(projectSettlement(state).entities.some(e=>e.kind==='building'&&e.id==='house-1'),false);
+ assert.deepEqual(core.reconstructState(core.serializeState(state)),state);
+ assert.throws(()=>core.applyCommand(state,{type:'SalvageBuilding',buildingId:'house-1'}));
+ assert.equal(state.events.filter(e=>e.type==='BuildingSalvaged').length,1);
+});

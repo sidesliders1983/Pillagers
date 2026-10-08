@@ -34,6 +34,7 @@ const templates:Record<string,Template>={
     BuildingSpecialized:(_e,d)=>{const role=str(d,'occupation');return str(d,'buildingId')&&(d.occupation===null||role&&occupationLabels[role])?d.occupation===null?`Home ${d.buildingId} no longer had a specialization.`:`Home ${d.buildingId} was specialized for ${occupationLabels[role!]} work.`:null;},
     BuildingUpgraded:(_e,d)=>str(d,'buildingId')&&number(d,'level')!==null&&number(d,'cost')!==null?`Home ${d.buildingId} reached upgrade level ${d.level} for ${d.cost} Materials.`:null,
     MaintenanceDebtIncreased:(_e,d)=>str(d,'buildingId')&&number(d,'debtWinters')!==null&&['unpaid','vacant'].includes(String(d.reason))?`Home ${d.buildingId} accumulated ${d.debtWinters} Winters of maintenance debt (${d.reason==='unpaid'?'unpaid upkeep':'vacant'}).`:null,
+    BuildingSalvaged:(_e,d)=>str(d,'buildingId')&&number(d,'salvage')!==null?`Home ${d.buildingId} was salvaged for ${d.salvage} Materials.`:null,
     BuildingCollapsed:(_e,d)=>str(d,'buildingId')&&number(d,'salvage')!==null?`Home ${d.buildingId} collapsed; ${d.salvage} Materials were salvaged.`:null,
     CaregiverAssigned:(e,d)=>{const mother=person(e,e.personaId);return mother&&(d.caregiverId===null||str(d,'caregiverId'))?d.caregiverId===null?`The mother was assigned to childcare for ${mother}.`:`${person(e,d.caregiverId as string)} was assigned as caregiver for ${mother}.`:null;},
     FoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`Residents consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,

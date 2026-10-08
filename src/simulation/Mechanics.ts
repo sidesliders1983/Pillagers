@@ -156,10 +156,20 @@ export function stepMechanicsTick(state:SimulationState):void {
 
 export type MechanicsCommand = {type:'AssignResidence'; householdId:string; residenceId:string|null}
     | {type:'SpecializeBuilding';buildingId:string;occupation:Occupation|null}
-    | {type:'AssignCaregiver';motherId:string;caregiverId:string|null} | {type:'ReleaseOccupation';personaId:string} | {type:'UpgradeBuilding';buildingId:string} | {type:'BuildHouse'|'HouseHousehold';householdId:string};
-export function isMechanicsCommand(command:{type:string}):boolean {return ['AssignResidence','SpecializeBuilding','UpgradeBuilding','BuildHouse','HouseHousehold','ReleaseOccupation','AssignCaregiver'].includes(command.type);}
+    | {type:'AssignCaregiver';motherId:string;caregiverId:string|null} | {type:'ReleaseOccupation';personaId:string} | {type:'UpgradeBuilding';buildingId:string} | {type:'SalvageBuilding';buildingId:string} | {type:'BuildHouse'|'HouseHousehold';householdId:string};
+export function isMechanicsCommand(command:{type:string}):boolean {return ['SalvageBuilding','AssignResidence','SpecializeBuilding','UpgradeBuilding','BuildHouse','HouseHousehold','ReleaseOccupation','AssignCaregiver'].includes(command.type);}
 export function applyMechanicsCommand(state:SimulationState,command:MechanicsCommand):void {
     if(!state.mechanics)throw new Error('Mechanics must be initialized');
+    if(command.type==='SalvageBuilding'){
+        const building=state.buildings[command.buildingId];if(!building||building.kind!=='house')throw new Error('House required');
+        const investedMaterials=state.mechanics.buildings[building.id].investedMaterials;
+        const salvage=Math.floor(investedMaterials/2);
+        for(const home of Object.values(state.households))if(home.residenceId&&state.residences[home.residenceId]?.buildingId===building.id)applyMechanicsCommand(state,{type:'AssignResidence',householdId:home.id,residenceId:null});
+        for(const residence of Object.values(state.residences))if(residence.buildingId===building.id)delete state.residences[residence.id];
+        for(const cattle of Object.values(state.landing?.cattle??{}))if(cattle.farmyardId===building.id)cattle.farmyardId=null;
+        delete state.buildings[building.id];delete state.mechanics.buildings[building.id];state.stocks.materials+=salvage;
+        emit(state,'BuildingSalvaged',undefined,{buildingId:building.id,investedMaterials,salvage});return;
+    }
     if(command.type==='AssignCaregiver'){assignCaregiver(state,command.motherId,command.caregiverId,true,(type,personaId,details)=>emit(state,type,personaId,details));return;}
     if(command.type==='ReleaseOccupation'){
         if(!state.personas[command.personaId]||state.personas[command.personaId].deathWinter!==null)throw new Error('Persona must be alive');
