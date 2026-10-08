@@ -1,0 +1,189 @@
+{
+  "sourceParentCommit": "986154c73ab4da22302ad295bd9de31020bc6b97",
+  "runtimeSources": [
+    {
+      "file": "src/environment-lab/EnvironmentLab.ts",
+      "sha256": "11c538fb82075fb39ecd20c0ea195034379d37bcd7caa4afaf7f02036afbe69b"
+    },
+    {
+      "file": "src/core/WorldLighting.ts",
+      "sha256": "afaf829a481eb0f7368a027f7b7af223ef24bab9db6eaa295de9dc7c583d8eb3"
+    },
+    {
+      "file": "src/config/worldConfig.ts",
+      "sha256": "6659240967e0b57b0cc6433e8f3fd1cf9723cc19213fb1130c964cf0e576e673"
+    },
+    {
+      "file": "src/world/FjordWater.ts",
+      "sha256": "e6a1e8b82cb81bf8f36bc269cae7317c425b3bd9d304ac20c6e3b1d2bc084b6a"
+    }
+  ],
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "captures": [
+    {
+      "file": "baseline-kaykit-village-day.png",
+      "sha256": "a5e148537f74143f7af320635927cd99e9b563b4d8e5bc9f5393727856df3bf6",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 62.72499999962747,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "baseline-kaykit-shore-day.png",
+      "sha256": "59f7c98ba94052ffb6acc610467d2145372d9b866de35d529927fb0a1f8f3800",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 1005.7000000029803,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "baseline-ez-tree-village-day.png",
+      "sha256": "86c318942eaed688d9115dda7bea077db28675ba88f12d3db2add905422ac4d3",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 83.89999999975163,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "baseline-ez-tree-shore-day.png",
+      "sha256": "39b15928ef3565a32d648bfceaf64f0b0eda4cb3e3368d38c27665b3ea98eb0e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 502.1000000014901,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      }
+    }
+  ],
+  "errors": []
+}

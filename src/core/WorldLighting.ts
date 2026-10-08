@@ -4,6 +4,7 @@ import { AssetManager } from './AssetManager';
 import { hearth } from '../world/SettlementLayout';
 import { surfaceHeightAt } from '../world/Terrain';
 import { TimeVisualization, daylight, seasonBlend } from '../config/timeVisualization';
+type DayLightingSettings = {[K in keyof typeof config.day]: K extends 'sunPosition' ? readonly number[] : number};
 export class WorldLighting {
     readonly ambient=new HemisphereLight();
     // Reuse one directional source and one shadow map across presets.
@@ -42,17 +43,21 @@ export class WorldLighting {
         for(const material of assets.fireMaterials)material.emissive.setHex(config.fire.emissive);
         this.setMode('day');
     }
-    setMode(mode:LightingMode){
+    setMode(mode:LightingMode,day:DayLightingSettings=config.day){
         this.visualization='off';
         this.nightWeight=mode==='night'?1:0;
-        this.mode=mode;const night=mode==='night',preset=night?config.night:config.day;
-        (this.scene.background as Color).setHex(preset.sky);this.fog.color.setHex(night?config.night.fogColor:config.day.sky);
+        this.mode=mode;const night=mode==='night',preset=night?config.night:day;
+        (this.scene.background as Color).setHex(preset.sky);this.fog.color.setHex(night?config.night.fogColor:day.sky);
         this.fog.near=preset.fogNear;this.fog.far=preset.fogFar;this.scene.fog=this.fogEnabled?this.fog:null;
         this.ambient.color.setHex(preset.ambientSky);this.ambient.groundColor.setHex(preset.ambientGround);this.ambient.intensity=preset.ambient;
-        this.directional.color.setHex(night?config.night.moon:config.day.sun);
-        this.directional.intensity=night?config.night.moonIntensity:config.day.sunIntensity;
-        this.directional.position.fromArray(night?config.night.moonPosition:config.day.sunPosition);
+        this.directional.color.setHex(night?config.night.moon:day.sun);
+        this.directional.intensity=night?config.night.moonIntensity:day.sunIntensity;
+        this.directional.position.fromArray(night?config.night.moonPosition:day.sunPosition);
         this.directional.name=night?'Moonlight':'Sunlight';
+        this.directional.target.position.set(0,0,0);this.directional.target.updateMatrixWorld(true);
+        Object.assign(this.directional.shadow.camera,{left:-50,right:50,top:50,bottom:-50,near:1,far:110});
+        this.directional.shadow.camera.updateProjectionMatrix();
+        this.directional.shadow.bias=0;this.directional.shadow.normalBias=day.shadowNormalBias;this.directional.shadow.radius=day.shadowRadius;
         const size=preset.shadowMapSize;
         if(this.directional.shadow.mapSize.x!==size){this.directional.shadow.map?.dispose();this.directional.shadow.map=null;this.directional.shadow.mapSize.set(size,size);}
         this.renderer.shadowMap.needsUpdate=true;this.renderer.toneMappingExposure=preset.exposure;

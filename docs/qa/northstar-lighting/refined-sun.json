@@ -1,0 +1,6409 @@
+{
+  "sourceParentCommit": "986154c73ab4da22302ad295bd9de31020bc6b97",
+  "runtimeSources": [
+    {
+      "file": "src/environment-lab/EnvironmentLab.ts",
+      "sha256": "89cdddbd23edccb1786abb64aebb8ab1a4e418e4974fd20e845c70054da480a5"
+    },
+    {
+      "file": "src/core/WorldLighting.ts",
+      "sha256": "052a40ca38df921302acf23b652ba218668f6d419480f373c39e98cc25498b79"
+    },
+    {
+      "file": "src/config/worldConfig.ts",
+      "sha256": "6659240967e0b57b0cc6433e8f3fd1cf9723cc19213fb1130c964cf0e576e673"
+    },
+    {
+      "file": "src/world/FjordWater.ts",
+      "sha256": "2c20aced392fe3edecc28cc0e3ec4baa2348ccc41c4880c50068569a90ba2da8"
+    }
+  ],
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "captures": [
+    {
+      "file": "refined-kaykit-village-fill0.65.png",
+      "sha256": "f278f5c4aef8af6a806b68d0e2d078829f2c46cac0505b22c6bae8d04f37bdb4",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535659108752,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.190254673582416,
+              "bottom": -52.19025467358241,
+              "near": 75.3372401779474,
+              "far": 324.66275982205264
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 100.4375,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-kaykit-village-fill1.png",
+      "sha256": "a7a490ec182dce567bb3de5aeb74cce9c7a3afdb7e71e178560d34468a6795ea",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535659108752,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 1
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.190254673582416,
+              "bottom": -52.19025467358241,
+              "near": 75.3372401779474,
+              "far": 324.66275982205264
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 71.47222222222221,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-kaykit-shore-fill0.65.png",
+      "sha256": "94a6ec671a05e4fe664db5c53ec0e2c3b1d6f5371f83b9af4512e15b4b1e627d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535659108752,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.190254673582416,
+              "bottom": -52.19025467358241,
+              "near": 75.3372401779474,
+              "far": 324.66275982205264
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 168.4714285710028,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-kaykit-shore-fill1.png",
+      "sha256": "3f50bc96b40e7be71c71cc5026843ff5f0de0d41f573d6e667024d461c2d89ee",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535659108752,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 1
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.190254673582416,
+              "bottom": -52.19025467358241,
+              "near": 75.3372401779474,
+              "far": 324.66275982205264
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 513.6499999985099,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-ez-tree-village-fill0.65.png",
+      "sha256": "2a98762adc0c7f438fa9e0f97a1d442abde20c5be5543dfe794a46b882c97f72",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535645731687,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.19025454787912,
+              "bottom": -52.19025454787913,
+              "near": 75.33724022369965,
+              "far": 324.6627597763004
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 574.6000000014901,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              24
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              25
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "branches",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-614ef034a298fef1.png",
+            "normalMap": "texture-00e12de668fe6669.png",
+            "roughnessMap": "texture-be24b5c0a3104eba.png",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "leaves",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-713a5cc87d11921a.png",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-ez-tree-village-fill1.png",
+      "sha256": "ae2025b3d038846a12b9ee677ab14922c5a78dda6c980101208727c29d615a75",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535645731687,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 1
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.19025454787912,
+              "bottom": -52.19025454787913,
+              "near": 75.33724022369965,
+              "far": 324.6627597763004
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 166.5625,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              24
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              25
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "branches",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-614ef034a298fef1.png",
+            "normalMap": "texture-00e12de668fe6669.png",
+            "roughnessMap": "texture-be24b5c0a3104eba.png",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "leaves",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-713a5cc87d11921a.png",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-ez-tree-shore-fill0.65.png",
+      "sha256": "35115320407e6dc543ee59d45bcd2306ca7cb7dff11ab46fc22e1feaf14f3d2c",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535645731687,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.19025454787912,
+              "bottom": -52.19025454787913,
+              "near": 75.33724022369965,
+              "far": 324.6627597763004
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 196.8833333340784,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              24
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              25
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "branches",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-614ef034a298fef1.png",
+            "normalMap": "texture-00e12de668fe6669.png",
+            "roughnessMap": "texture-be24b5c0a3104eba.png",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "leaves",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-713a5cc87d11921a.png",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    },
+    {
+      "file": "refined-ez-tree-shore-fill1.png",
+      "sha256": "171fb33d1e78f1fa183319abbe8bea53f926894cb05d107f6ee1f88f1e7baa8a",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": 135,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            132.89260487773495,
+            73.77535645731687,
+            -132.89260487773493
+          ],
+          "direction": [
+            0.6644630243886748,
+            0.3420201433256687,
+            -0.6644630243886747
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 1
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -130.27922061357856,
+              "right": 130.27922061357856,
+              "top": 52.19025454787912,
+              "bottom": -52.19025454787913,
+              "near": 75.33724022369965,
+              "far": 324.6627597763004
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 216.10000000000002,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      },
+      "sceneAudit": {
+        "meshes": [
+          {
+            "name": "Ground region 0-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              0
+            ]
+          },
+          {
+            "name": "Ground region 0-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              1
+            ]
+          },
+          {
+            "name": "Ground region 0-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              2
+            ]
+          },
+          {
+            "name": "Ground region 1-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              3
+            ]
+          },
+          {
+            "name": "Ground region 1-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              4
+            ]
+          },
+          {
+            "name": "Ground region 1-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              5
+            ]
+          },
+          {
+            "name": "Ground region 2-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              6
+            ]
+          },
+          {
+            "name": "Ground region 2-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              7
+            ]
+          },
+          {
+            "name": "Ground region 2-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              8
+            ]
+          },
+          {
+            "name": "Ground region 3-0",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              9
+            ]
+          },
+          {
+            "name": "Ground region 3-1",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              10
+            ]
+          },
+          {
+            "name": "Ground region 3-2",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              11
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              12
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "instances": 24,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              13
+            ]
+          },
+          {
+            "name": "kaykit-deciduous-a",
+            "instances": 8,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-small-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-a",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-boulder-b",
+            "instances": 16,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-a",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-rock-cluster-b",
+            "instances": 6,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              15
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-bush-b",
+            "instances": 36,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "instances": 80,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              14
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              16
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              17
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              18
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              19
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              20
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              21
+            ]
+          },
+          {
+            "name": "Mesh_0001",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              22
+            ]
+          },
+          {
+            "name": "output_unwrapped",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              23
+            ]
+          },
+          {
+            "name": "Mesh_0",
+            "instances": 1,
+            "castShadow": true,
+            "receiveShadow": true,
+            "materials": [
+              24
+            ]
+          },
+          {
+            "name": "Sourced fjord water (boona13)",
+            "instances": 1,
+            "castShadow": false,
+            "receiveShadow": true,
+            "materials": [
+              25
+            ]
+          }
+        ],
+        "materials": [
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "map": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+            "normalMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+            "roughnessMap": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "branches",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-614ef034a298fef1.png",
+            "normalMap": "texture-00e12de668fe6669.png",
+            "roughnessMap": "texture-be24b5c0a3104eba.png",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "leaves",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture-713a5cc87d11921a.png",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "forest",
+            "type": "MeshStandardMaterial",
+            "roughness": 0.6000000238418579,
+            "metalness": 0,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "forest_texture",
+            "normalMap": false,
+            "roughnessMap": false,
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.002",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": "normal",
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0.001",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "Image_2",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "BakedMaterial",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "texture_0",
+            "normalMap": false,
+            "roughnessMap": "texture_0_metallic_roughness",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "Material_0",
+            "type": "MeshStandardMaterial",
+            "roughness": 1,
+            "metalness": 1,
+            "normalScale": [
+              1,
+              -1
+            ],
+            "map": "Image_0",
+            "normalMap": "normal",
+            "roughnessMap": "Image_1",
+            "explicitEnvMap": false,
+            "consumesSceneEnvironment": true
+          },
+          {
+            "name": "",
+            "type": "ShaderMaterial"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": []
+}

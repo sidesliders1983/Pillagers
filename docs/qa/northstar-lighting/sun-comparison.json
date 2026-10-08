@@ -1,0 +1,1829 @@
+{
+  "sourceParentCommit": "986154c73ab4da22302ad295bd9de31020bc6b97",
+  "runtimeSources": [
+    {
+      "file": "src/environment-lab/EnvironmentLab.ts",
+      "sha256": "65d779faf015f8cfb089ccd90a2203556f3c49b845a49a20d5ac061fa3878b9a"
+    },
+    {
+      "file": "src/core/WorldLighting.ts",
+      "sha256": "052a40ca38df921302acf23b652ba218668f6d419480f373c39e98cc25498b79"
+    },
+    {
+      "file": "src/config/worldConfig.ts",
+      "sha256": "6659240967e0b57b0cc6433e8f3fd1cf9723cc19213fb1130c964cf0e576e673"
+    },
+    {
+      "file": "src/world/FjordWater.ts",
+      "sha256": "2c20aced392fe3edecc28cc0e3ec4baa2348ccc41c4880c50068569a90ba2da8"
+    }
+  ],
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "captures": [
+    {
+      "file": "kaykit-village-day.png",
+      "sha256": "2f15f0e0c3bacb8f4ea734ddbfc46351e60d78702073099bff1223986597463d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.25979290321754,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "position": [
+            -28,
+            48,
+            18
+          ],
+          "direction": [
+            -0.4793508701785305,
+            0.8217443488774808,
+            0.3081541308290553
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -50,
+              "right": 50,
+              "top": 50,
+              "bottom": -50,
+              "near": 1,
+              "far": 110
+            },
+            "bias": 0,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 43.43500000014902,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-village-sun10.png",
+      "sha256": "4aef42c9e3db786f65e13f24986f8135ee0659c33cd9c089d6ff8d6027621349",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            40.100963459339845,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.3742460021047,
+              "right": 127.3742460021047,
+              "top": 30.527211568392534,
+              "bottom": -30.527211568392534,
+              "near": 73.46968564474284,
+              "far": 326.530314355257
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 56.99999999999999,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-village-sun20.png",
+      "sha256": "e85df5ff487b69bd051c43329dbbda045df123a4886a35fcb3152d440482966a",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20",
+          "elevation": 20,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -158.08984121505767,
+            73.77535659108752,
+            101.62918363825135
+          ],
+          "direction": [
+            -0.7904492060752883,
+            0.3420201433256687,
+            0.5081459181912568
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.37424600210467,
+              "right": 127.3742460021047,
+              "top": 51.19669484060868,
+              "bottom": -51.19669484060868,
+              "near": 78.06702338391979,
+              "far": 321.9329766160802
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 63.33750000037253,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-village-sun30.png",
+      "sha256": "fc19aaaa80196c7998f8cd57f6747023915c9559eed3f935a4cefd3393fdac6d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun30",
+          "elevation": 29.999999999999996,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -145.69638575855166,
+            105.37132792595376,
+            93.66196227335463
+          ],
+          "direction": [
+            -0.7284819287927583,
+            0.49999999999999994,
+            0.4683098113667732
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.3742460021047,
+              "right": 127.37424600210478,
+              "top": 70.40174592879733,
+              "bottom": -70.40174592879733,
+              "near": 86.2780794345862,
+              "far": 313.7219205654138
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 63.887500000186265,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-village-sun20-front.png",
+      "sha256": "bc447ba4941198eb635f918a62b9fdb59929e92eeb59dbef13cef31852ff0585",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": -119.99999999999999,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -162.75953626987476,
+            73.77535659108752,
+            -93.9692620785908
+          ],
+          "direction": [
+            -0.8137976813493738,
+            0.3420201433256687,
+            -0.469846310392954
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -125.94228634059947,
+              "right": 125.94228634059944,
+              "top": 50.70693579194407,
+              "bottom": -50.70693579194411,
+              "near": 79.4126253110993,
+              "far": 320.5873746889006
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 67.61333333353203,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-shore-day.png",
+      "sha256": "9c01245ca5b4484dc4286166d122313c812380f07660d3a48a890c51ba32a9ac",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.25979290321754,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "position": [
+            -28,
+            48,
+            18
+          ],
+          "direction": [
+            -0.4793508701785305,
+            0.8217443488774808,
+            0.3081541308290553
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -50,
+              "right": 50,
+              "top": 50,
+              "bottom": -50,
+              "near": 1,
+              "far": 110
+            },
+            "bias": 0,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 51.882352941176464,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-shore-sun10.png",
+      "sha256": "678b1f8e06f8b2480071baa90f0a30dccd33e3bcd59e14ea3b4d331e00ad270c",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            40.100963459339845,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.3742460021047,
+              "right": 127.3742460021047,
+              "top": 30.527211568392534,
+              "bottom": -30.527211568392534,
+              "near": 73.46968564474284,
+              "far": 326.530314355257
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 58.549999999813735,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-shore-sun20.png",
+      "sha256": "1692f86788100e928dd1f6d3e1c7cb9dd60c28f69451ce97a70955e3465407de",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20",
+          "elevation": 20,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -158.08984121505767,
+            73.77535659108752,
+            101.62918363825135
+          ],
+          "direction": [
+            -0.7904492060752883,
+            0.3420201433256687,
+            0.5081459181912568
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.37424600210467,
+              "right": 127.3742460021047,
+              "top": 51.19669484060868,
+              "bottom": -51.19669484060868,
+              "near": 78.06702338391979,
+              "far": 321.9329766160802
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 61.568750000093125,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-shore-sun30.png",
+      "sha256": "f75f9e2f1aa97693a5276d5ab9c6c757fba9a718f99b24bba30f17a9ece9e88f",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun30",
+          "elevation": 29.999999999999996,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -145.69638575855166,
+            105.37132792595376,
+            93.66196227335463
+          ],
+          "direction": [
+            -0.7284819287927583,
+            0.49999999999999994,
+            0.4683098113667732
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.3742460021047,
+              "right": 127.37424600210478,
+              "top": 70.40174592879733,
+              "bottom": -70.40174592879733,
+              "near": 86.2780794345862,
+              "far": 313.7219205654138
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 57.10000000009313,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "kaykit-shore-sun20-front.png",
+      "sha256": "090b94fb7e0eb1bdc072270e078295632def2312047b115864cad36b8a0564ce",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "kaykit",
+          "preset": null,
+          "count": 72,
+          "minHeight": 3.538210752367434,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": -119.99999999999999,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.3713279259537785,
+            0
+          ],
+          "position": [
+            -162.75953626987476,
+            73.77535659108752,
+            -93.9692620785908
+          ],
+          "direction": [
+            -0.8137976813493738,
+            0.3420201433256687,
+            -0.469846310392954
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -125.94228634059947,
+              "right": 125.94228634059944,
+              "top": 50.70693579194407,
+              "bottom": -50.70693579194411,
+              "near": 79.4126253110993,
+              "far": 320.5873746889006
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 57.36874999990687,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-village-day.png",
+      "sha256": "b79f86cff7ffc0a653c0345f2c679014b3e1382f81473031c5489f1c347f1cbc",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.25979290321754,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "position": [
+            -28,
+            48,
+            18
+          ],
+          "direction": [
+            -0.4793508701785305,
+            0.8217443488774808,
+            0.3081541308290553
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -50,
+              "right": 50,
+              "top": 50,
+              "bottom": -50,
+              "near": 1,
+              "far": 110
+            },
+            "bias": 0,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 141.01250000018626,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-village-sun10.png",
+      "sha256": "8cc85e13ba62c3862f36e465a966cc252aac8925d63c01f87d72218b9b73e395",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            40.100963325569204,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.37424600210471,
+              "right": 127.37424600210468,
+              "top": 30.527211436654166,
+              "bottom": -30.527211436654174,
+              "near": 73.46968566797187,
+              "far": 326.530314332028
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 130.88888888888889,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-village-sun20.png",
+      "sha256": "e4d8b32e1a89c02c59693db3e052269a03ff41ebeb46c73bcb52cd2c192f94a2",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20",
+          "elevation": 20,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -158.08984121505767,
+            73.77535645731687,
+            101.62918363825135
+          ],
+          "direction": [
+            -0.7904492060752883,
+            0.3420201433256687,
+            0.5081459181912568
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.37424600210467,
+              "right": 127.3742460021047,
+              "top": 51.196694714905405,
+              "bottom": -51.19669471490539,
+              "near": 78.06702342967206,
+              "far": 321.932976570328
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 159.61666666716337,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-village-sun30.png",
+      "sha256": "5448c63d5ae826b72f9e81d78f72983089a7271566210686fbf233f3737910b5",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun30",
+          "elevation": 29.999999999999996,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -145.69638575855166,
+            105.37132779218312,
+            93.66196227335463
+          ],
+          "direction": [
+            -0.7284819287927583,
+            0.49999999999999994,
+            0.4683098113667732
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.3742460021047,
+              "right": 127.37424600210478,
+              "top": 70.40174581294853,
+              "bottom": -70.40174581294856,
+              "near": 86.27807950147152,
+              "far": 313.72192049852856
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 178.27499999944118,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-village-sun20-front.png",
+      "sha256": "4cd17d6c5a6a7d7da9831016189a55db03bdfe02663806eab7bf109daa7d4394",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": -119.99999999999999,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -162.75953626987476,
+            73.77535645731687,
+            -93.9692620785908
+          ],
+          "direction": [
+            -0.8137976813493738,
+            0.3420201433256687,
+            -0.469846310392954
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -125.94228634059948,
+              "right": 125.94228634059942,
+              "top": 50.706935666240796,
+              "bottom": -50.70693566624082,
+              "near": 79.41262535685155,
+              "far": 320.58737464314834
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 195.26666666691503,
+        "calls": 36,
+        "triangles": 1704954,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-shore-day.png",
+      "sha256": "f8e6df574ddf8ac2e20a678e4f65945bada7a3cbc0f68c85352e313698679de8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.25979290321754,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            0,
+            0
+          ],
+          "position": [
+            -28,
+            48,
+            18
+          ],
+          "direction": [
+            -0.4793508701785305,
+            0.8217443488774808,
+            0.3081541308290553
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -50,
+              "right": 50,
+              "top": 50,
+              "bottom": -50,
+              "near": 1,
+              "far": 110
+            },
+            "bias": 0,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 183.62857142835855,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-shore-sun10.png",
+      "sha256": "9b6da2dd5b8e7451c0f23d19adb2fbdfbc188444b4b8e46983d15432ce0cbd1e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            40.100963325569204,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.37424600210471,
+              "right": 127.37424600210468,
+              "top": 30.527211436654166,
+              "bottom": -30.527211436654174,
+              "near": 73.46968566797187,
+              "far": 326.530314332028
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 342.1000000014902,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-shore-sun20.png",
+      "sha256": "2a1171332461fb4e0ac91453ec46bdfa00df47f0484a48aa2a3a3476ade2de54",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20",
+          "elevation": 20,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -158.08984121505767,
+            73.77535645731687,
+            101.62918363825135
+          ],
+          "direction": [
+            -0.7904492060752883,
+            0.3420201433256687,
+            0.5081459181912568
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.37424600210467,
+              "right": 127.3742460021047,
+              "top": 51.196694714905405,
+              "bottom": -51.19669471490539,
+              "near": 78.06702342967206,
+              "far": 321.932976570328
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 171.0249999994412,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-shore-sun30.png",
+      "sha256": "c507e01d77c194fe1b27df2f73888f6bc1591fe7aeb3ff470671f2272f8c634e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun30",
+          "elevation": 29.999999999999996,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -145.69638575855166,
+            105.37132779218312,
+            93.66196227335463
+          ],
+          "direction": [
+            -0.7284819287927583,
+            0.49999999999999994,
+            0.4683098113667732
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -127.3742460021047,
+              "right": 127.37424600210478,
+              "top": 70.40174581294853,
+              "bottom": -70.40174581294856,
+              "near": 86.27807950147152,
+              "far": 313.72192049852856
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 215.51428571343422,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      }
+    },
+    {
+      "file": "ez-tree-shore-sun20-front.png",
+      "sha256": "9ae88686fdb8870bf69c0a1a08c11bcce180209b3fe8fb6e11232f1b64c8741c",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 72,
+          "minHeight": 3.538210752367435,
+          "maxHeight": 10.166981864548374
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun20-front",
+          "elevation": 20,
+          "azimuth": -119.99999999999999,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            5.371327792183138,
+            0
+          ],
+          "position": [
+            -162.75953626987476,
+            73.77535645731687,
+            -93.9692620785908
+          ],
+          "direction": [
+            -0.8137976813493738,
+            0.3420201433256687,
+            -0.469846310392954
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -125.94228634059948,
+              "right": 125.94228634059942,
+              "top": 50.706935666240796,
+              "bottom": -50.70693566624082,
+              "near": 79.41262535685155,
+              "far": 320.58737464314834
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        }
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 175.3374999994412,
+        "calls": 39,
+        "triangles": 1705994,
+        "geometries": 38,
+        "textures": 72
+      }
+    }
+  ],
+  "errors": []
+}

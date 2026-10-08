@@ -10,6 +10,7 @@ import {heightAt,shoreAt,surfaceHeightAt} from './Terrain';
 /** Uses published GrassField geometry/shaders; only adapts placement and uniforms. */
 export class SettlementGrass{
  private readonly source:GrassField;
+ private readonly sunDirection=new Vector3();
  readonly mesh;
  constructor(scene:Scene,quality='standard'){
   this.source=new GrassField(scene,{
@@ -44,7 +45,7 @@ export class SettlementGrass{
  }
  update(time:number,lighting:WorldLighting){
   this.source.update(time);
-  this.source.setSunDirection(lighting.directional.position);
+  this.source.setSunDirection(this.sunDirection.copy(lighting.directional.position).sub(lighting.directional.target.position));
   const gain=lighting.mode==='night'?.3:1;
   this.source.setLightColors(
    lighting.directional.color.clone().convertLinearToSRGB().multiplyScalar(.34*gain),
