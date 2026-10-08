@@ -1,0 +1,1463 @@
+{
+  "version": "ground-v04",
+  "seed": 1983,
+  "config": {
+    "version": "ground-v04",
+    "seed": 1983,
+    "bounds": {
+      "minX": -58,
+      "maxX": 58,
+      "minZ": -18,
+      "maxZ": 62
+    },
+    "regionWidth": 30,
+    "regionDepth": 28,
+    "tiers": {
+      "standard": {
+        "size": 1024,
+        "gutter": 32
+      },
+      "low": {
+        "size": 512,
+        "gutter": 16
+      }
+    },
+    "fieldSpacing": 0.2,
+    "normalScale": 0.45,
+    "anisotropy": 4,
+    "sources": {
+      "Ground037": {
+        "repeatMeters": 3,
+        "saturation": 0.8,
+        "tint": [
+          0.72,
+          0.95,
+          0.66
+        ]
+      },
+      "Ground054": {
+        "repeatMeters": 3,
+        "saturation": 0.8,
+        "tint": [
+          1.03,
+          1.02,
+          0.96
+        ]
+      },
+      "mossy_rock": {
+        "repeatMeters": 4,
+        "saturation": 0.65,
+        "tint": [
+          0.95,
+          0.97,
+          0.95
+        ]
+      },
+      "grass_path_2": {
+        "repeatMeters": 3,
+        "saturation": 0.65,
+        "tint": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "pathCandidate": true
+  },
+  "configSha256": "3de951cbe163706e284b39117c591144b779e68bdbb35c226bc644403c99cfc6",
+  "generatedWith": "sharp 0.35.5; scripts/prepare-regional-ground.mjs",
+  "normalConvention": "OpenGL, normalized after weighted blend",
+  "geometry": "Unchanged canonical 2m alternating triangles",
+  "regions": [
+    {
+      "id": "0-0",
+      "minX": -58,
+      "minZ": -18,
+      "maxX": -28,
+      "maxZ": 10
+    },
+    {
+      "id": "0-1",
+      "minX": -58,
+      "minZ": 10,
+      "maxX": -28,
+      "maxZ": 38
+    },
+    {
+      "id": "0-2",
+      "minX": -58,
+      "minZ": 38,
+      "maxX": -28,
+      "maxZ": 62
+    },
+    {
+      "id": "1-0",
+      "minX": -28,
+      "minZ": -18,
+      "maxX": 2,
+      "maxZ": 10
+    },
+    {
+      "id": "1-1",
+      "minX": -28,
+      "minZ": 10,
+      "maxX": 2,
+      "maxZ": 38
+    },
+    {
+      "id": "1-2",
+      "minX": -28,
+      "minZ": 38,
+      "maxX": 2,
+      "maxZ": 62
+    },
+    {
+      "id": "2-0",
+      "minX": 2,
+      "minZ": -18,
+      "maxX": 32,
+      "maxZ": 10
+    },
+    {
+      "id": "2-1",
+      "minX": 2,
+      "minZ": 10,
+      "maxX": 32,
+      "maxZ": 38
+    },
+    {
+      "id": "2-2",
+      "minX": 2,
+      "minZ": 38,
+      "maxX": 32,
+      "maxZ": 62
+    },
+    {
+      "id": "3-0",
+      "minX": 32,
+      "minZ": -18,
+      "maxX": 58,
+      "maxZ": 10
+    },
+    {
+      "id": "3-1",
+      "minX": 32,
+      "minZ": 10,
+      "maxX": 58,
+      "maxZ": 38
+    },
+    {
+      "id": "3-2",
+      "minX": 32,
+      "minZ": 38,
+      "maxX": 58,
+      "maxZ": 62
+    }
+  ],
+  "sourceAssets": [
+    {
+      "id": "Ground037",
+      "url": "https://ambientcg.com/view?id=Ground037",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "Ground037/Ground037_1K-PNG_Color.png",
+          "sha256": "d428f7b2ca3c724bb6534ef6313574b4c07712e41bab84be69ba41a0d32e947d",
+          "bytes": 2623699,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour",
+          "download": "https://ambientcg.com/get?file=Ground037_1K-PNG.zip"
+        },
+        {
+          "file": "Ground037/Ground037_1K-PNG_NormalGL.png",
+          "sha256": "163837046d8ea7c15a29f12367b7af90e6509e2e3d6168ecf55824746660b9a7",
+          "bytes": 6073011,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal",
+          "download": "https://ambientcg.com/get?file=Ground037_1K-PNG.zip"
+        },
+        {
+          "file": "Ground037/Ground037_1K-PNG_Roughness.png",
+          "sha256": "4cd4057af73842857b529d29ae4a61fa67de8813333eda0c82bbee4d3fc357b7",
+          "bytes": 655735,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness",
+          "download": "https://ambientcg.com/get?file=Ground037_1K-PNG.zip"
+        }
+      ]
+    },
+    {
+      "id": "Ground054",
+      "url": "https://ambientcg.com/view?id=Ground054",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "Ground054/Ground054_1K-PNG_Color.png",
+          "sha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+          "bytes": 2088335,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour",
+          "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip"
+        },
+        {
+          "file": "Ground054/Ground054_1K-PNG_NormalGL.png",
+          "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+          "bytes": 5766891,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal",
+          "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip"
+        },
+        {
+          "file": "Ground054/Ground054_1K-PNG_Roughness.png",
+          "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+          "bytes": 630483,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness",
+          "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip"
+        }
+      ]
+    },
+    {
+      "id": "mossy_rock",
+      "url": "https://polyhaven.com/a/mossy_rock",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 4,
+      "maps": [
+        {
+          "file": "mossy_rock_diff_1k.jpg",
+          "sha256": "4dbf37f1b0465c9c8914213163923be159716f5b97fb6946437b6c5e143ef540",
+          "bytes": 1124438,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour",
+          "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/mossy_rock/mossy_rock_diff_1k.jpg"
+        },
+        {
+          "file": "mossy_rock_nor_gl_1k.png",
+          "sha256": "08b01ee4387e4bb3433f901c62acc40d4be8d6d4a481e5fb508400cb4664d82e",
+          "bytes": 2154481,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal",
+          "download": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/mossy_rock/mossy_rock_nor_gl_1k.png"
+        },
+        {
+          "file": "mossy_rock_rough_1k.png",
+          "sha256": "ed620db809bf72088bc4b5d6dbc48298256a4997a51aca929a54c1824301e9c5",
+          "bytes": 740983,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness",
+          "download": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/mossy_rock/mossy_rock_rough_1k.png"
+        }
+      ]
+    },
+    {
+      "id": "grass_path_2",
+      "url": "https://polyhaven.com/a/grass_path_2",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "grass_path_2_diff_1k.jpg",
+          "sha256": "7f30b163739435c11f500f3818c7bb4922bab5f2734cc9ba6dd36817f0c9a8ab",
+          "bytes": 716010,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour",
+          "download": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/grass_path_2/grass_path_2_diff_1k.jpg"
+        },
+        {
+          "file": "grass_path_2_nor_gl_1k.png",
+          "sha256": "cf7864e1ecb3359bd0cbc42106bdb6149a0d828cb7c91221ceb771d819b1d0bc",
+          "bytes": 2199966,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal",
+          "download": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/grass_path_2/grass_path_2_nor_gl_1k.png"
+        },
+        {
+          "file": "grass_path_2_rough_1k.png",
+          "sha256": "e8b3a1ce4bbc818861a4e7aeef80ad4e6a87536ff349ee7de9fee7e09aaad629",
+          "bytes": 599520,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness",
+          "download": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/grass_path_2/grass_path_2_rough_1k.png"
+        }
+      ]
+    }
+  ],
+  "delivery": [
+    {
+      "tier": "standard",
+      "region": "0-0",
+      "role": "colour",
+      "file": "standard/0-0-colour.webp",
+      "bytes": 441702,
+      "sha256": "720531d188b1002927b4cfb4c355d272c5c2305cb42ae3d994bad9e6798edf66",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-0",
+      "role": "normal",
+      "file": "standard/0-0-normal.webp",
+      "bytes": 2227436,
+      "sha256": "5aac5979c8d5fa663dd4d0cd5210155f5f1c66be89f1af74b08e94001da26a80",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-0",
+      "role": "roughness",
+      "file": "standard/0-0-roughness.webp",
+      "bytes": 60110,
+      "sha256": "745f9296505fd4ebe46b85542c8204ddae7ce0b425793e5c0af5d4134b3e67db",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-1",
+      "role": "colour",
+      "file": "standard/0-1-colour.webp",
+      "bytes": 564556,
+      "sha256": "d25fc736b7877bf966238ddf0cb99c9bd66e6602d56366c6a141af2c05dbcda1",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-1",
+      "role": "normal",
+      "file": "standard/0-1-normal.webp",
+      "bytes": 2278208,
+      "sha256": "f33f90718e9c87e0056ea561951c9331737a5e5b43c02d239d17a47e477c588f",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-1",
+      "role": "roughness",
+      "file": "standard/0-1-roughness.webp",
+      "bytes": 87536,
+      "sha256": "a50ea99dbe1873bd5d8e9ff6b6fba931deef6d9325191e94f59fb04fb6eca7b7",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-2",
+      "role": "colour",
+      "file": "standard/0-2-colour.webp",
+      "bytes": 570010,
+      "sha256": "645d0578740f644f3eda31273225ca464ba92d6242e9e673e665d12c4dc4acf2",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-2",
+      "role": "normal",
+      "file": "standard/0-2-normal.webp",
+      "bytes": 2308246,
+      "sha256": "c064bfb7c301294dd7356ce994f614479bc8a2df9e3b1d45c2e5d7ed29a6c003",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "0-2",
+      "role": "roughness",
+      "file": "standard/0-2-roughness.webp",
+      "bytes": 93260,
+      "sha256": "60d5d551c75f4090e3d4bf401a7976f833eba13e2ea3e5a93c2a887fb383e4cd",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-0",
+      "role": "colour",
+      "file": "standard/1-0-colour.webp",
+      "bytes": 430604,
+      "sha256": "5b445d7e253e90083833dbb9824817ce7c877bfb46fd7095b0a229c294da7f2b",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-0",
+      "role": "normal",
+      "file": "standard/1-0-normal.webp",
+      "bytes": 2121818,
+      "sha256": "be77ca2a9b0c1a78ec8863ab70bdb72438ef9071648c7cd6e46b3a09b6f5f5a9",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-0",
+      "role": "roughness",
+      "file": "standard/1-0-roughness.webp",
+      "bytes": 39360,
+      "sha256": "bca6a48924961b1ebd6dceed62718e12953b1eef55408bd2aed4dcbec3652adc",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-1",
+      "role": "colour",
+      "file": "standard/1-1-colour.webp",
+      "bytes": 512008,
+      "sha256": "c522c89da6589985cb024f89d11561ec3a1c42eb89a69e939a281750d933cd5f",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-1",
+      "role": "normal",
+      "file": "standard/1-1-normal.webp",
+      "bytes": 2055654,
+      "sha256": "e7b109e207d67dd1d5ad7b4e3c1450a03f59a3951cfc8deea7626c9f215b232c",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-1",
+      "role": "roughness",
+      "file": "standard/1-1-roughness.webp",
+      "bytes": 49328,
+      "sha256": "5714cf1e507667542c06ecb4e01088d1038d0793bc8001f07113e9bc245d3843",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-2",
+      "role": "colour",
+      "file": "standard/1-2-colour.webp",
+      "bytes": 565680,
+      "sha256": "b4eb4ef598eb4cce32f8e8264ca9408384b19aae60a321f721f127b7f9da29af",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-2",
+      "role": "normal",
+      "file": "standard/1-2-normal.webp",
+      "bytes": 2291182,
+      "sha256": "90760b5587cba98923eba274cfe0d1ddb9429e8f93f5826d7112341ad5743d92",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-2",
+      "role": "roughness",
+      "file": "standard/1-2-roughness.webp",
+      "bytes": 87998,
+      "sha256": "756bb97c238e1816d0c321eb4a7f68e777622620a4df3efc3442eb0f4c532414",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-0",
+      "role": "colour",
+      "file": "standard/2-0-colour.webp",
+      "bytes": 428486,
+      "sha256": "10275efdcdb020bf6bbf75eae07ca19f3d686ae7c97625e1524b17f2d438f7cd",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-0",
+      "role": "normal",
+      "file": "standard/2-0-normal.webp",
+      "bytes": 2174794,
+      "sha256": "08e7202eca8ad2854328f71f40fa44307d71d3da018bc9d6e1151aa387a65b5d",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-0",
+      "role": "roughness",
+      "file": "standard/2-0-roughness.webp",
+      "bytes": 44508,
+      "sha256": "20cdfda9c0c3cbe9c726e8fba9025a7775016e103fca6e643a86b93949bffcd4",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-1",
+      "role": "colour",
+      "file": "standard/2-1-colour.webp",
+      "bytes": 535058,
+      "sha256": "5ee7f5719275f89bab357c4de40f14cacc4c4b18ec14310f1f1a7d6b74746a8a",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-1",
+      "role": "normal",
+      "file": "standard/2-1-normal.webp",
+      "bytes": 2190176,
+      "sha256": "a15d35570e661d2971ad0678adfbb51ccdfe775055c1a7d9d8be9104001e99ef",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-1",
+      "role": "roughness",
+      "file": "standard/2-1-roughness.webp",
+      "bytes": 67236,
+      "sha256": "5cb9c47c6dc7413840cae33f2e1b5098522950ba0a0dbce3787aeec1fe2fd708",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-2",
+      "role": "colour",
+      "file": "standard/2-2-colour.webp",
+      "bytes": 566574,
+      "sha256": "bfd31018115d35dd9baa91f6b4d5aa9f3da0868fafcc30a5c4acd0d02aff4cf6",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-2",
+      "role": "normal",
+      "file": "standard/2-2-normal.webp",
+      "bytes": 2297246,
+      "sha256": "7ab5c8325c7bba77697d997809e60f8b7baa0dd13d260fce2bf5b231ac416cb4",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "2-2",
+      "role": "roughness",
+      "file": "standard/2-2-roughness.webp",
+      "bytes": 91302,
+      "sha256": "23dd4fb9de3a34129f49154b64ecea5d413c38304340c3246d803b8781da4219",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-0",
+      "role": "colour",
+      "file": "standard/3-0-colour.webp",
+      "bytes": 470160,
+      "sha256": "feff84bc025a2dacf949f161ca530bbfcf7a6fe21c9823700cceaaeca3638a4a",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-0",
+      "role": "normal",
+      "file": "standard/3-0-normal.webp",
+      "bytes": 2267600,
+      "sha256": "e3dbe7074fc1cc738310b5dff1ae2134e3a43da34c11a1357338561d56bdd3f5",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-0",
+      "role": "roughness",
+      "file": "standard/3-0-roughness.webp",
+      "bytes": 53224,
+      "sha256": "25416103102f2e8c912cf81ac6e688f9a737576f954d48534aec7535fd44ef5a",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-1",
+      "role": "colour",
+      "file": "standard/3-1-colour.webp",
+      "bytes": 566008,
+      "sha256": "2166e858b735f5ecca55b7d246ccc063b1b03624cc2c8399f19859cc483a3a4e",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-1",
+      "role": "normal",
+      "file": "standard/3-1-normal.webp",
+      "bytes": 2296510,
+      "sha256": "87665c3e93b09f6183071027dc87a1864c4d3f4623f37efe7cd520e23412f5a6",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-1",
+      "role": "roughness",
+      "file": "standard/3-1-roughness.webp",
+      "bytes": 90500,
+      "sha256": "7ab8229bbf065d10ac31a26da9dc93d1cd7e056039f56cf6b523602cd7dc4c5f",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-2",
+      "role": "colour",
+      "file": "standard/3-2-colour.webp",
+      "bytes": 568226,
+      "sha256": "331200d9a0ea42e97d77b9c7fdf74b490a0430d9352cba8a2435650799abe1ce",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-2",
+      "role": "normal",
+      "file": "standard/3-2-normal.webp",
+      "bytes": 2308258,
+      "sha256": "a56a01ed417206124ee0e851ed91cee33781a7706c67625ee16b148091abd466",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "3-2",
+      "role": "roughness",
+      "file": "standard/3-2-roughness.webp",
+      "bytes": 93402,
+      "sha256": "c156594e1f6518e87a72906636c7e9eb12b0e3de510d566e0f116293275e5d83",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-0",
+      "role": "colour",
+      "file": "low/0-0-colour.webp",
+      "bytes": 112046,
+      "sha256": "a9ad1716170b73648e0d5998571a20af1db2540b3b9c81a8c82d7c3fda9dda7f",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-0",
+      "role": "normal",
+      "file": "low/0-0-normal.webp",
+      "bytes": 557960,
+      "sha256": "c736b40e095378223d89414123af77138098160a1f0b037f887367fc01d2abcc",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-0",
+      "role": "roughness",
+      "file": "low/0-0-roughness.webp",
+      "bytes": 16328,
+      "sha256": "de29b10f933385f71eb964000ca6f45fea629926bf74d2491236ea0241ba8296",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-1",
+      "role": "colour",
+      "file": "low/0-1-colour.webp",
+      "bytes": 141512,
+      "sha256": "40a61e0029a5b93b2c92be10e1cb531589cff679c070697c8651a373e5d252d5",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-1",
+      "role": "normal",
+      "file": "low/0-1-normal.webp",
+      "bytes": 570282,
+      "sha256": "bbe174f77bb0485e0034ac403c1d9e7fe60ed7ec8553b119f29195f51efaf98b",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-1",
+      "role": "roughness",
+      "file": "low/0-1-roughness.webp",
+      "bytes": 22690,
+      "sha256": "08fa546d1b922ca9eee99ce8a836b49d75b9c6283fd4bbc21f28e32c5f4a9c2a",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-2",
+      "role": "colour",
+      "file": "low/0-2-colour.webp",
+      "bytes": 143018,
+      "sha256": "16c93c8eb31fac689520503a1402c2781d8dbda2362c7ba9445cfacbc2b9f393",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-2",
+      "role": "normal",
+      "file": "low/0-2-normal.webp",
+      "bytes": 577460,
+      "sha256": "72f882156f48adb87d8caf094335f04f0fb057a3671930cdcd06de0c830d680e",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "0-2",
+      "role": "roughness",
+      "file": "low/0-2-roughness.webp",
+      "bytes": 24410,
+      "sha256": "7f0c6f84fe8654b910ffe5264e71d3293e5f5d719c44055571893bd90eb91176",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-0",
+      "role": "colour",
+      "file": "low/1-0-colour.webp",
+      "bytes": 108850,
+      "sha256": "baf9552da71b896e73fb798e56e11eb9650b0e8a3481a4cda33df11a6972b504",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-0",
+      "role": "normal",
+      "file": "low/1-0-normal.webp",
+      "bytes": 531326,
+      "sha256": "1a834b1a6025f5610071cab5bc0209b1752b23b273de9de2fad1206fa4fc3f32",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-0",
+      "role": "roughness",
+      "file": "low/1-0-roughness.webp",
+      "bytes": 11300,
+      "sha256": "9e0f97dc7bfe5f7a9e526ff1113d2a23936800937ed6f17ca53af3493626da6d",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-1",
+      "role": "colour",
+      "file": "low/1-1-colour.webp",
+      "bytes": 129560,
+      "sha256": "8b994b68fc68717c6b04d3a8c543ea985138526155df71d6427dbf6c12f975ac",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-1",
+      "role": "normal",
+      "file": "low/1-1-normal.webp",
+      "bytes": 515308,
+      "sha256": "b6da12e6d4f82ebc85baaf0b06cfad1cd82a859109ac37a0281ec53ff181e079",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-1",
+      "role": "roughness",
+      "file": "low/1-1-roughness.webp",
+      "bytes": 14222,
+      "sha256": "026edb5447c44827cec9dec490efb02763b9dd94f5b1cb7149c0c37252fbf8a4",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-2",
+      "role": "colour",
+      "file": "low/1-2-colour.webp",
+      "bytes": 142642,
+      "sha256": "a27ec5cda28b9672d3f93c152d600663a71d4d64943fbaf5cc3692e1568520ef",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-2",
+      "role": "normal",
+      "file": "low/1-2-normal.webp",
+      "bytes": 572978,
+      "sha256": "a93680149a0ccf512f4b9f41ce523eea2f536f8beb8d8a680cdb7281cad75f0b",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "1-2",
+      "role": "roughness",
+      "file": "low/1-2-roughness.webp",
+      "bytes": 23084,
+      "sha256": "578deda610370ff0f8b80720fd029375356d31f3863c5e8b1049d01f2066edd5",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-0",
+      "role": "colour",
+      "file": "low/2-0-colour.webp",
+      "bytes": 109256,
+      "sha256": "22e3c76072619c9274d7404e22a77a635008e20aa65c9eee372cb513c57fc070",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-0",
+      "role": "normal",
+      "file": "low/2-0-normal.webp",
+      "bytes": 544484,
+      "sha256": "0863cbd5622a2b40ab7f66b6bdba1e825cf02f63c99819a289df04dd754a7f81",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-0",
+      "role": "roughness",
+      "file": "low/2-0-roughness.webp",
+      "bytes": 12594,
+      "sha256": "45ef22a80722c3c209c4bd63955912a34d42ef4c1536adc4a3b2ce927c58f1a4",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-1",
+      "role": "colour",
+      "file": "low/2-1-colour.webp",
+      "bytes": 135422,
+      "sha256": "98f24aec0dac04749eb0d1e8ff642dffa67b0f245b6416556f9f2654bdf6394d",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-1",
+      "role": "normal",
+      "file": "low/2-1-normal.webp",
+      "bytes": 548102,
+      "sha256": "1d315ed0fae93b99aea9b8d33df52149d6eca8ea29c9f0cf108b940def4a4f5a",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-1",
+      "role": "roughness",
+      "file": "low/2-1-roughness.webp",
+      "bytes": 18148,
+      "sha256": "415122bedc040103c6f4b2122c2137901bfac4ccca539357d13796d0c6b6044f",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-2",
+      "role": "colour",
+      "file": "low/2-2-colour.webp",
+      "bytes": 142628,
+      "sha256": "e874a6b688bf90efdafc8c82334be0d5312a364df2a00704e9a5a320dce976d7",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-2",
+      "role": "normal",
+      "file": "low/2-2-normal.webp",
+      "bytes": 575044,
+      "sha256": "611386ae1fc61f9bb83b7db45d4d309788fe8d5061975d77d42ac8f7792eec41",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "2-2",
+      "role": "roughness",
+      "file": "low/2-2-roughness.webp",
+      "bytes": 23892,
+      "sha256": "46ea14540ecf8bc738a09d0d2884062430bec325a6afd4be2a0aa9c4c3eedf78",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-0",
+      "role": "colour",
+      "file": "low/3-0-colour.webp",
+      "bytes": 117658,
+      "sha256": "729948e60a9f7f56a70f66cf87adc665f9582425138aa1bd313aac787d878832",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-0",
+      "role": "normal",
+      "file": "low/3-0-normal.webp",
+      "bytes": 567758,
+      "sha256": "78d423e390f0c36a0b33bc64446372fefd65a7d666d86f25c66c493c780a0740",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-0",
+      "role": "roughness",
+      "file": "low/3-0-roughness.webp",
+      "bytes": 18082,
+      "sha256": "90c8a5da62549bcccef2ec37ff9eeb1d695514ee6b21b8702a76b15cd57eb57a",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-1",
+      "role": "colour",
+      "file": "low/3-1-colour.webp",
+      "bytes": 142922,
+      "sha256": "357cbb9dda85ab29eba33cd14c11acd359e702d236ecbec5a17a0518f5a074dd",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-1",
+      "role": "normal",
+      "file": "low/3-1-normal.webp",
+      "bytes": 574280,
+      "sha256": "695374757134da6f0317c322832c6bcb75160086f863072daae57eb4b817fad4",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-1",
+      "role": "roughness",
+      "file": "low/3-1-roughness.webp",
+      "bytes": 23704,
+      "sha256": "c90adcb63b81d2869398f601924022bed5a98fc600c34f52293e9adb16278ea0",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-2",
+      "role": "colour",
+      "file": "low/3-2-colour.webp",
+      "bytes": 142838,
+      "sha256": "eabadcd736481716aaf9043c76efdf3a20588b3d90692372777ac8349adb1d25",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-2",
+      "role": "normal",
+      "file": "low/3-2-normal.webp",
+      "bytes": 577248,
+      "sha256": "0e652011253d8653228d0b3a8a96abc247a33f7feefe0d4230202618a8fb75b1",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "low",
+      "region": "3-2",
+      "role": "roughness",
+      "file": "low/3-2-roughness.webp",
+      "bytes": 24408,
+      "sha256": "83a72f1047bc6b82577f7b96282eab6e7f703bc9f1ab5c52f6225505e59fc54d",
+      "width": 512,
+      "height": 512,
+      "gutter": 16,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ],
+      "colorSpace": "NoColorSpace"
+    }
+  ],
+  "totalBytes": 42407408
+}
