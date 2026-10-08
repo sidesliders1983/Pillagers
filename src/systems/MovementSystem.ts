@@ -10,12 +10,17 @@ export function randomWalkablePosition(random:()=>number){
 }
 export const residentMovementConfig={radius:.48,speed:.65,conversationDistance:1.35,conversationSeconds:5,cooldownSeconds:3,separationDistance:1.8,predictionSeconds:1.5,turnSpeed:4,walkAlignment:.85};
 type Encounter={a:Villager;b:Villager;endsAt:number};
+export interface MovementTerrain {
+    walkable(x: number, z: number): boolean;
+    heightAt(x: number, z: number): number;
+    randomPosition(random: () => number): { x: number; z: number };
+}
 export class MovementSystem {
     private random=seededRandom(724);private time=0;
     private detours=new Map<Villager,{x:number;z:number}[]>();
     private placed=new Set<Villager>();private encounters:Encounter[]=[];
     private released=new Map<string,{a:Villager;b:Villager;until:number}>();
-    constructor(readonly villagers:Villager[],readonly config={...residentMovementConfig}){for(const unit of villagers)this.spawn(unit);}
+    constructor(readonly villagers:Villager[],readonly config={...residentMovementConfig}, readonly terrain:MovementTerrain={walkable,heightAt,randomPosition:randomWalkablePosition}){for(const unit of villagers)this.spawn(unit);}
     private key(a:Villager,b:Villager){return [a.id,b.id].sort((x,y)=>x-y).join(':');}
     private distance(a:Villager,b:Villager){return Math.hypot(a.visual.position.x-b.visual.position.x,a.visual.position.z-b.visual.position.z);}
     spawn(unit:Villager){
@@ -24,11 +29,11 @@ export class MovementSystem {
         this.encounters=this.encounters.filter(e=>e.a.id!==unit.id&&e.b.id!==unit.id);
         for(const old of this.placed)if(old.id===unit.id)this.placed.delete(old);
         let found=false;
-        for(let attempt=0;attempt<1000;attempt++){const p=randomWalkablePosition(this.random);if([...this.placed].every(other=>Math.hypot(p.x-other.visual.position.x,p.z-other.visual.position.z)>=2*this.config.radius)){unit.visual.position.set(p.x,heightAt(p.x,p.z),p.z);found=true;break;}}
+        for(let attempt=0;attempt<1000;attempt++){const p=this.terrain.randomPosition(this.random);if([...this.placed].every(other=>Math.hypot(p.x-other.visual.position.x,p.z-other.visual.position.z)>=2*this.config.radius)){unit.visual.position.set(p.x,this.terrain.heightAt(p.x,p.z),p.z);found=true;break;}}
         if(!found)throw new Error('No unoccupied resident spawn location.');
         this.detours.delete(unit);this.placed.add(unit);unit.interactionState='none';unit.partnerId=null;unit.wait=0;unit.speed=0;this.choose(unit);
     }
-    private choose(unit:Villager){Object.assign(unit.target,randomWalkablePosition(this.random));}
+    private choose(unit:Villager){Object.assign(unit.target,this.terrain.randomPosition(this.random));}
     private intent(unit:Villager){const p=unit.visual.position,dx=unit.target.x-p.x,dz=unit.target.z-p.z,d=Math.hypot(dx,dz);return d>.15&&unit.wait<=0?{x:dx/d*this.config.speed,z:dz/d*this.config.speed}:{x:0,z:0};}
     private face(unit:Villager,angle:number,dt:number){const difference=Math.atan2(Math.sin(angle-unit.visual.rotation.y),Math.cos(angle-unit.visual.rotation.y));unit.visual.rotation.y+=Math.max(-this.config.turnSpeed*dt,Math.min(this.config.turnSpeed*dt,difference));}
     private finish(e:Encounter){for(const unit of [e.a,e.b]){unit.interactionState='resume';unit.partnerId=null;unit.socialCooldownUntil=this.time+this.config.cooldownSeconds;}this.released.set(this.key(e.a,e.b),{a:e.a,b:e.b,until:this.time+this.config.cooldownSeconds});}
@@ -46,7 +51,7 @@ export class MovementSystem {
         }
     }
     private clearStep(unit:Villager,x:number,z:number){
-        if(!walkable(x,z))return false;const p=unit.visual.position,dx=x-p.x,dz=z-p.z,length2=dx*dx+dz*dz;
+        if(!this.terrain.walkable(x,z))return false;const p=unit.visual.position,dx=x-p.x,dz=z-p.z,length2=dx*dx+dz*dz;
         return this.villagers.every(other=>{if(other===unit)return true;const q=other.visual.position,t=length2?Math.max(0,Math.min(1,((q.x-p.x)*dx+(q.z-p.z)*dz)/length2)):0;return Math.hypot(p.x+dx*t-q.x,p.z+dz*t-q.z)>=2*this.config.radius-1e-7;});
     }
     private avoidConversation(unit:Villager){
@@ -63,7 +68,7 @@ export class MovementSystem {
             for(const side of [preferred,-preferred]){
                 const nx=uz*side,nz=-ux*side;
                 const points=[{x:cx+nx*radius-ux*.5,z:cz+nz*radius-uz*.5},{x:cx+nx*radius+ux*radius,z:cz+nz*radius+uz*radius}];
-                if(points.every(point=>walkable(point.x,point.z))){this.detours.set(unit,points);return;}
+                if(points.every(point=>this.terrain.walkable(point.x,point.z))){this.detours.set(unit,points);return;}
             }
         }
     }
@@ -95,10 +100,12 @@ export class MovementSystem {
                 // Turn in place before locomotion; translation must never run against the facing direction.
                 moved=true;if(alignment<this.config.walkAlignment)break;
                 const advance=step*alignment,nx=p.x+Math.sin(heading)*advance,nz=p.z+Math.cos(heading)*advance;
-                p.set(nx,heightAt(nx,nz),nz);unit.phase+=dt*5;unit.speed=advance/dt;break;
+                // Alignment shortens the proposed step. Its actual endpoint needs the same clearance test.
+                if(!this.clearStep(unit,nx,nz)){moved=false;continue;}
+                p.set(nx,this.terrain.heightAt(nx,nz),nz);unit.phase+=dt*5;unit.speed=advance/dt;break;
             }
             // Only static terrain can change a route; neighbours never replace its destination.
-            if(!moved&&!this.detours.has(unit)&&!walkable(p.x+dx/distance*step,p.z+dz/distance*step))this.choose(unit);
+            if(!moved&&!this.detours.has(unit)&&!this.terrain.walkable(p.x+dx/distance*step,p.z+dz/distance*step))this.choose(unit);
         }
     }
     snapshot(){return this.villagers.map(unit=>({id:unit.id,radius:this.config.radius,state:unit.interactionState,detouring:this.detours.has(unit),partnerId:unit.partnerId,cooldown:Math.max(0,unit.socialCooldownUntil-this.time)}));}

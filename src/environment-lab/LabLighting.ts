@@ -7,17 +7,17 @@ export type LabLight='day'|'sun10'|'sun20'|'sun30'|'sun20-front'|'night';
 export class LabLighting {
  private choice:LabLight='day';
  constructor(private scene:Scene,private renderer:WebGLRenderer,readonly world:WorldLighting,private person:import('three').Object3D){}
- select(choice:LabLight,low=false,fill=.65,exposure=lightingConfig.day.exposure,radius=lightingConfig.day.shadowRadius){
+ select(choice:LabLight,low=false,fill=.65,exposure=lightingConfig.day.exposure,radius=lightingConfig.day.shadowRadius,fitScene=false){
   this.choice=choice;
   const pilot=choice.startsWith('sun');
   // The standalone Lab person was not a caster in the recorded baseline.
   this.person.traverse(node=>{if(node instanceof Mesh){node.castShadow=pilot;node.receiveShadow=pilot;}});
-  if(!pilot){this.world.setMode(choice==='night'?'night':'day');return;}
+  if(!pilot){this.world.setMode(choice==='night'?'night':'day');if(!fitScene)return;}
   const elevation=choice==='sun10'?10:choice==='sun30'?30:20;
   const azimuth=choice==='sun20-front'?135:Math.atan2(-28,18)*180/Math.PI;
   const alt=elevation*Math.PI/180,az=azimuth*Math.PI/180;
-  const direction=new Vector3(Math.sin(az)*Math.cos(alt),Math.sin(alt),Math.cos(az)*Math.cos(alt));
-  this.world.setMode('day',{...lightingConfig.day,sun:0xffecd6,sunIntensity:2.8,ambientSky:0xbfd4ee,ambientGround:0x716c65,ambient:fill,exposure,sunPosition:direction.toArray(),shadowMapSize:low?1024:2048,shadowNormalBias:.02,shadowRadius:radius});
+  const direction=pilot?new Vector3(Math.sin(az)*Math.cos(alt),Math.sin(alt),Math.cos(az)*Math.cos(alt)):this.world.directional.position.clone().sub(this.world.directional.target.position).normalize();
+  if(pilot)this.world.setMode('day',{...lightingConfig.day,sun:0xffecd6,sunIntensity:2.8,ambientSky:0xbfd4ee,ambientGround:0x716c65,ambient:fill,exposure,sunPosition:direction.toArray(),shadowMapSize:low?1024:2048,shadowNormalBias:.02,shadowRadius:radius});
   const bounds=new Box3();this.scene.updateMatrixWorld(true);
   this.scene.traverseVisible(node=>{if(node instanceof Mesh&&(node.castShadow||node.receiveShadow))bounds.union(new Box3().setFromObject(node));});
   // No visible casters/receivers: retain the valid native fallback frustum.

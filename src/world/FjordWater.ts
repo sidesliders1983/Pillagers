@@ -1,3 +1,5 @@
+import type { TerrainSurface } from '../world-generation/TerrainQueries';
+import type { CoastSegment } from '../world-generation/WorldBlueprint';
 import {Color,Group,Vector3} from 'three';
 import {FjordWaterConfig,fjordWaterConfig} from '../config/FjordWaterConfig';
 import type {WorldLighting} from '../core/WorldLighting';
@@ -5,9 +7,9 @@ import {WaterPlane} from '../vendor/boona13-water/WaterPlane';
 import {WaterMask} from '../vendor/boona13-water/WaterMask';
 import {shoreAt,surfaceHeightAt} from './Terrain';
 /** Actual rendered terrain height, shared with movement and shoreline rendering. */
-export function waterDepthAt(x:number,z:number,level=fjordWaterConfig.level){
+export function waterDepthAt(x:number,z:number,level=fjordWaterConfig.level,height=surfaceHeightAt){
  if(![x,z,level].every(Number.isFinite))throw new RangeError('Water depth requires finite coordinates and water level.');
- return level-surfaceHeightAt(x,z);
+ return level-height(x,z);
 }
 /** Pillagers adapter for the pinned MIT water source. Its GLSL is unchanged. */
 export class FjordWater {
@@ -19,14 +21,16 @@ export class FjordWater {
  private readonly sky=new Color();
  private readonly skyHigh=new Color();
  private readonly sunDirection=new Vector3();
- constructor(readonly config:FjordWaterConfig={...fjordWaterConfig}){
+ constructor(readonly config:FjordWaterConfig={...fjordWaterConfig},
+  surface?:TerrainSurface,coast?:readonly CoastSegment[]){
+  const height=surface?.surfaceHeightAt??surfaceHeightAt;
   const low=config.quality==='low';
   this.mask=new WaterMask(low?256:512,config.size);
   // The source height texture adds to surface elevation, rather than representing
   // bathymetry. Keep its flat default for a level fjord; encode real depth in its mask.
   const texture=this.mask.getTexture(),data=texture.image.data as Float32Array,res=this.mask.resolution;
   for(let z=0;z<res;z++)for(let x=0;x<res;x++){
-   const depth=waterDepthAt((x+.5)/res*config.size-config.size/2,(z+.5)/res*config.size-config.size/2,config.level);
+   const depth=waterDepthAt((x+.5)/res*config.size-config.size/2,(z+.5)/res*config.size-config.size/2,config.level,height);
    const v=Math.max(0,Math.min(1,(depth+.03)/(config.shallowDepth+.03)));
    const i=(z*res+x)*4;data[i]=data[i+1]=data[i+2]=v;data[i+3]=1;
   }
@@ -43,6 +47,15 @@ export class FjordWater {
   // low-strength fringe of each existing foam field touches water.
   const count=48,spacing=116/(count-1),radius=spacing+config.foamWidth,foam=new Float32Array(count*3);
   for(let i=0;i<count;i++){
+   if(coast?.length){
+    const segment=coast[Math.floor(i*(coast.length-1)/(count-1))];
+    const x=(segment.a.x+segment.b.x)/2,z=(segment.a.z+segment.b.z)/2;
+    const dx=segment.b.x-segment.a.x,dz=segment.b.z-segment.a.z;
+    const length=Math.hypot(dx,dz)||1;let nx=-dz/length,nz=dx/length;
+    if(height(x+nx*.5,z+nz*.5)<config.level){nx=-nx;nz=-nz;}
+    foam.set([x+nx*(radius-config.foamWidth),z+nz*(radius-config.foamWidth),radius],i*3);
+    continue;
+   }
    const x=-58+i*spacing;let wet=shoreAt(x)-2,dry=shoreAt(x)+4;
    for(let j=0;j<20;j++){const z=(wet+dry)/2;if(waterDepthAt(x,z,config.level)>0)wet=z;else dry=z;}
    foam.set([x,(wet+dry)/2+radius-config.foamWidth,radius],i*3);

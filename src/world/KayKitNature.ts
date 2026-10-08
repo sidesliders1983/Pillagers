@@ -1,3 +1,4 @@
+import type { AssetPlacement } from '../world-generation/WorldBlueprint';
 import {Box3,Group,InstancedMesh,Matrix4,Mesh,Object3D,Vector3} from 'three';
 import {AssetManager} from '../core/AssetManager';
 import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
@@ -29,13 +30,47 @@ export function createNature(assets:AssetManager,seed=1983,resolveModel:(id:Natu
    // Failed placement is skipped; never leak the last rejected point into a route/footprint.
    if(!placed)continue;
   }
-  const model=resolveModel(id);model.updateMatrixWorld(true);
-  if(tree){const height=new Box3().setFromObject(model).getSize(new Vector3()).y;for(const transform of transforms)heights.push(height*Math.abs(transform.elements[5]));}
-  model.traverse(child=>{if(!(child instanceof Mesh))return;
-   const instances=new InstancedMesh(child.geometry,child.material,transforms.length);instances.name=id;
-   transforms.forEach((transform,i)=>instances.setMatrixAt(i,matrix.multiplyMatrices(transform,child.matrixWorld)));
-   instances.castShadow=tree||deciduous||rock;instances.receiveShadow=true;instances.computeBoundingSphere();group.add(instances);
-  });
+  appendNatureModel(group, resolveModel(id), id, transforms, heights);
  }
  group.userData.seed=seed;group.userData.coniferHeights=heights;return group;
+}
+
+function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
+    transforms: readonly Matrix4[], heights: number[]) {
+    model.updateMatrixWorld(true);
+    if (id.includes('conifer')) {
+        const height = new Box3().setFromObject(model).getSize(new Vector3()).y;
+        for (const transform of transforms) heights.push(height*Math.abs(transform.elements[5]));
+    }
+    const matrix = new Matrix4();
+    model.traverse(child => {
+        if (!(child instanceof Mesh)) return;
+        const instances = new InstancedMesh(child.geometry, child.material, transforms.length);
+        instances.name = id;
+        transforms.forEach((transform, i) => instances.setMatrixAt(i,
+            matrix.multiplyMatrices(transform, child.matrixWorld)));
+        instances.castShadow = !id.includes('grass') && !id.includes('bush');
+        instances.receiveShadow = true;
+        instances.computeBoundingSphere();
+        group.add(instances);
+    });
+}
+
+/** Same authored primitives and instancing path for reference and generated scenery. */
+export function createNatureFromPlan(assets: AssetManager, plan: readonly AssetPlacement[], seed: number) {
+    const group = new Group(), dummy = new Object3D(), heights: number[] = [];
+    group.name = 'Seeded KayKit FREE placement';
+    for (const id of natureAssetIds) {
+        const transforms = plan.filter(p => p.assetId === id).map(p => {
+            dummy.position.set(p.x, p.y, p.z);
+            dummy.rotation.y = p.rotation;
+            dummy.scale.setScalar(p.scale);
+            dummy.updateMatrix();
+            return dummy.matrix.clone();
+        });
+        appendNatureModel(group, assets.get(id), id, transforms, heights);
+    }
+    group.userData.seed = seed;
+    group.userData.coniferHeights = heights;
+    return group;
 }
