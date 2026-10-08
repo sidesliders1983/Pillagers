@@ -1,0 +1,982 @@
+{
+  "renderCommit": "f6a19b224a614e5307a5c33f6bae7f0f08dfccfe",
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "canvas": [
+    1024,
+    768
+  ],
+  "pixelRatio": 1,
+  "phase": 0,
+  "grass": false,
+  "warmupMs": 10000,
+  "sampleMs": 30000,
+  "baseline": "Previous Ground v0.2 with identical KayKit/Meshy/water/lighting; isolates ground change, not whole historical release",
+  "method": "Whole composed-scene rAF presentation intervals, not isolated GPU/CPU execution time",
+  "samples": [
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "baseline",
+      "run": 1,
+      "durationMs": 30015.800000001487,
+      "frames": 1800,
+      "medianFrameMs": 16.69999999999709,
+      "p95FrameMs": 16.80000000000291,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333326,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "regional",
+      "run": 1,
+      "durationMs": 30001.499999998516,
+      "frames": 1799,
+      "medianFrameMs": 16.69999999999709,
+      "p95FrameMs": 16.80000000000291,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333323,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 33,
+        "textures": 61
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "regional",
+      "run": 2,
+      "durationMs": 30001.599999997008,
+      "frames": 1799,
+      "medianFrameMs": 16.69999999999709,
+      "p95FrameMs": 16.80000000000291,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333326,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 33,
+        "textures": 61
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "baseline",
+      "run": 2,
+      "durationMs": 30013.70000000298,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999982538,
+      "p95FrameMs": 16.800000000017462,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333326,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "baseline",
+      "run": 3,
+      "durationMs": 30007.6999999985,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999982538,
+      "p95FrameMs": 16.800000000017462,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68333333333333,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "regional",
+      "run": 3,
+      "durationMs": 30013.100000000006,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999982538,
+      "p95FrameMs": 16.800000000017462,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.679999999950326,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 33,
+        "textures": 61
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "baseline",
+      "run": 1,
+      "durationMs": 30002.799999998533,
+      "frames": 1799,
+      "medianFrameMs": 16.70000000001164,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333326,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "regional",
+      "run": 1,
+      "durationMs": 30003.699999997043,
+      "frames": 1799,
+      "medianFrameMs": 16.70000000001164,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.69333333348234,
+        "calls": 33,
+        "triangles": 305922,
+        "geometries": 33,
+        "textures": 52
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "regional",
+      "run": 2,
+      "durationMs": 30004.099999999977,
+      "frames": 1799,
+      "medianFrameMs": 16.70000000001164,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333323,
+        "calls": 33,
+        "triangles": 305922,
+        "geometries": 33,
+        "textures": 52
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "baseline",
+      "run": 2,
+      "durationMs": 30004.3000000015,
+      "frames": 1799,
+      "medianFrameMs": 16.70000000001164,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.686666666716334,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "baseline",
+      "run": 3,
+      "durationMs": 30009.400000002992,
+      "frames": 1799,
+      "medianFrameMs": 16.70000000001164,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.679999999950326,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "regional",
+      "run": 3,
+      "durationMs": 30005.29999999702,
+      "frames": 1799,
+      "medianFrameMs": 16.70000000001164,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333334,
+        "calls": 33,
+        "triangles": 305922,
+        "geometries": 33,
+        "textures": 52
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "baseline",
+      "run": 1,
+      "durationMs": 30005.299999998533,
+      "frames": 1793,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68666666671633,
+        "calls": 23,
+        "triangles": 338916,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "regional",
+      "run": 1,
+      "durationMs": 30004.699999999953,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333326,
+        "calls": 31,
+        "triangles": 334492,
+        "geometries": 34,
+        "textures": 64
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "regional",
+      "run": 2,
+      "durationMs": 30007.400000001537,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68666666671633,
+        "calls": 31,
+        "triangles": 334492,
+        "geometries": 34,
+        "textures": 64
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "baseline",
+      "run": 2,
+      "durationMs": 30013.39999999851,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68333333333333,
+        "calls": 23,
+        "triangles": 338916,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "baseline",
+      "run": 3,
+      "durationMs": 30010.400000002934,
+      "frames": 1624,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 17,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.67999999995033,
+        "calls": 23,
+        "triangles": 338916,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "regional",
+      "run": 3,
+      "durationMs": 30009.199999997043,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68666666671633,
+        "calls": 31,
+        "triangles": 334492,
+        "geometries": 34,
+        "textures": 64
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "baseline",
+      "run": 1,
+      "durationMs": 30004.39999999851,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.690000000099342,
+        "calls": 23,
+        "triangles": 290316,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "regional",
+      "run": 1,
+      "durationMs": 30002.899999996996,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.689999999850986,
+        "calls": 31,
+        "triangles": 285892,
+        "geometries": 34,
+        "textures": 54
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "regional",
+      "run": 2,
+      "durationMs": 30008.000000003027,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.67999999995033,
+        "calls": 31,
+        "triangles": 285892,
+        "geometries": 34,
+        "textures": 54
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "baseline",
+      "run": 2,
+      "durationMs": 30001.300000000047,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333334,
+        "calls": 23,
+        "triangles": 290316,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "baseline",
+      "run": 3,
+      "durationMs": 30008.599999999977,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333326,
+        "calls": 23,
+        "triangles": 290316,
+        "geometries": 26,
+        "textures": 34
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "regional",
+      "run": 3,
+      "durationMs": 30012.39999999851,
+      "frames": 1799,
+      "medianFrameMs": 16.699999999953434,
+      "p95FrameMs": 16.800000000046566,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68333333333333,
+        "calls": 31,
+        "triangles": 285892,
+        "geometries": 34,
+        "textures": 54
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "visibility": "visible"
+    }
+  ],
+  "errors": []
+}

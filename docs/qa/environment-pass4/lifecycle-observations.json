@@ -1,0 +1,534 @@
+{
+  "renderCommit": "612da515c176c8cf59c38721043da82da6b990ff",
+  "reloads": [
+    {
+      "run": 1,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 26.968421052553154,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "d9632d61e691f38eadb0480164f4f24ea42794672e92632c4526c6830d59dcbe"
+    },
+    {
+      "run": 2,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.74482758625828,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 3,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.3607142857675,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 4,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.971428571268916,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 5,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.596551724292084,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 6,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.610344827432055,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 7,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.342857142644274,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 8,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.91666666666667,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 9,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.52592592576036,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    },
+    {
+      "run": 10,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.540740740519986,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 36,
+        "textures": 68
+      },
+      "pixels": "0541de069b498e34118dbaaa05bf97ee584b0ec0725804654be2d405dd0b15ac"
+    }
+  ],
+  "cycles": [
+    {
+      "run": 1,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.232258064612257,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 35,
+        "textures": 54
+      }
+    },
+    {
+      "run": 1,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.46774193548387,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 1,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.726666666815678,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 2,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.26451612888805,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 2,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.68666666671633,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 2,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.296551724189314,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 3,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.686666666716327,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 3,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.679999999950326,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 3,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.899999999840343,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 4,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.18387096759773,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 4,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.68333333333333,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 4,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.21935483861354,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 5,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.683333333333323,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 5,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.68666666671633,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 5,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.19032258059709,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 6,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.25806451612903,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 6,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.679999999950326,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 6,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.283870967886145,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 7,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.690000000099342,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 7,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.686666666716334,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 7,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.36551724143069,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 8,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.412903225710313,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 8,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.676666666815667,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 8,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.509677419258693,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 9,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.267741935387736,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 9,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.676666666815667,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 9,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.079999999950324,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    },
+    {
+      "run": 10,
+      "quality": "low",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.68333333333333,
+        "calls": 35,
+        "triangles": 306650,
+        "geometries": 37,
+        "textures": 54
+      }
+    },
+    {
+      "run": 10,
+      "quality": "legacy",
+      "metrics": {
+        "variant": "legacy",
+        "ms": 16.680000000198685,
+        "calls": 36,
+        "triangles": 290562,
+        "geometries": 36,
+        "textures": 51
+      }
+    },
+    {
+      "run": 10,
+      "quality": "standard",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.187096774097405,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 65
+      }
+    }
+  ],
+  "reloadCountsStable": true,
+  "reloadPixelsIdentical": false,
+  "qualityCountsStable": {
+    "low": false,
+    "legacy": true,
+    "standard": true
+  },
+  "controlObservations": [
+    {
+      "id": "water",
+      "changed": true,
+      "restored": true
+    },
+    {
+      "id": "grass",
+      "changed": true,
+      "restored": true
+    },
+    {
+      "id": "nature",
+      "changed": true,
+      "restored": true
+    },
+    {
+      "id": "ground",
+      "changed": true,
+      "restored": true
+    },
+    {
+      "id": "village",
+      "changed": true,
+      "restored": true
+    }
+  ],
+  "lightingChanged": true,
+  "zoomChangesPixels": true,
+  "panChangesPixels": true,
+  "wavesResume": true,
+  "wavesRemainPaused": true,
+  "resize": {
+    "x": 110,
+    "y": 203.46875,
+    "width": 900,
+    "height": 500
+  },
+  "errors": [],
+  "note": "Public-control/rendered-pixel and renderer-info observations. Ten page navigations exercise teardown, but stable counts are not measured VRAM or leak proof. Physical mobile/tab-visibility/10 production residents remain untested."
+}
