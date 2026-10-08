@@ -14,3 +14,8 @@ test('regional ground retains every canonical triangle and raycast height with c
   for(const [x,z] of [[-28,-8],[2,10],[32,38],[-28.0001,10.0001],[1.9999,37.9999],[57.9,61.9]]){ray.set(new Vector3(x,20,z),new Vector3(0,-1,0));const hit=ray.intersectObject(regional,true)[0];assert.ok(hit);assert.ok(Math.abs(hit.point.y-surfaceHeightAt(x,z))<1e-6);}
  }finally{dispose(original);if(regional)dispose(regional);}
 });
+
+test('Low ground retains sourced colour and roughness while omitting the per-pixel normal layer',async()=>{
+ const {Texture}=await import('three'),map=new Texture(),normalMap=new Texture(),roughnessMap=new Texture(),terrain=createRegionalTerrain(new Map([['1-1',{map,normalMap,roughnessMap}]]),'low');
+ try{const material=terrain.children.find(m=>m.name==='Ground region 1-1').material;assert.equal(material.map,map);assert.equal(material.roughnessMap,roughnessMap);assert.equal(material.normalMap,null,'Low should avoid the extra per-pixel normal layer');}finally{dispose(terrain);map.dispose();normalMap.dispose();roughnessMap.dispose();}
+});
