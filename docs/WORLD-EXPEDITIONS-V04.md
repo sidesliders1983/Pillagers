@@ -8,7 +8,7 @@ Open **World** at the board's bottom-left. Create recon group, enter a name and 
 
 Four touch-sized arrows select North, East, South and West neighbours. North is the founding longship's coastal connection; its mission requires and reserves an available unsalvaged ship. An away ship cannot be salvaged or used by another group. Each other neighbour is seeded terrain with a possible settlement; at least one land neighbour has a settlement.
 
-The context panel uses button pickers for group, mission and ordered pillage priorities. It shows canonical costs, duration, success chance, death risk and blocking reasons before **Send expedition**. New/restart, save/load and import/export moved into top-right **Settings**. Time controls stay on the HUD. World and Settings panels scroll independently; board arrows and controls do not pan with sprites.
+The context panel uses button pickers for group, mission and ordered pillage priorities. It shows canonical costs, duration, success chance, death risk and blocking reasons before **Send expedition**. New/restart, save/load and import/export moved into top-right **Settings**. Time controls stay on the HUD. World and Settings panels scroll independently; board arrows and controls do not pan with sprites. Confirming a group or selecting a resident dismisses the World overlay so destination arrows remain reachable.
 
 ## Saved prototype rules
 
@@ -18,7 +18,7 @@ The context panel uses button pickers for group, mission and ordered pillage pri
 | Surveillance | 400 ticks | 4 | 90% | 3% |
 | Pillage | 500 ticks | 5 | 60% | 10% |
 
-A Winter has 1,000 ticks. These are game values, configurable through the saved expedition configuration. Dispatch snapshots the current weather duration and risk modifiers, so a later forecast cannot change an already planned mission. Duration rounds up to whole ticks. Food per member is the base ration scaled by final/base duration and rounded up; total provisions are deducted at departure. Provisions are not refunded after failure or casualties. No additional annual home Food consumption is charged while away.
+A Winter has 1,000 ticks. These are game values, configurable through the saved expedition configuration. Dispatch snapshots the current weather duration and risk modifiers, so a later forecast cannot change an already planned mission. Duration rounds up to whole ticks. Food per member is the base ration scaled by final/base duration and rounded up; total provisions are deducted at departure. Provisions are not refunded after failure or casualties. Annual home Food consumption is assessed at the Winter boundary: members still away are excluded. Shorter missions that return before the boundary do not prorate the existing annual home charge.
 
 Away residents keep their identity, occupation and work remainders, but stop home production and are hidden from home sprites. Membership, occupation changes and career autonomy commands are blocked during the mission. They cannot form new partnerships, produce births or be assigned as caregivers while absent. Natural age mortality still applies at the Winter boundary; home shelter weather exposure does not apply while traveling. Mission-specific death risk resolves at the scheduled return, before the success roll and cargo allocation. Deaths use the existing cleanup for household, work, partnerships and childcare. There is no separate injury state or tactical combat in this prototype.
 

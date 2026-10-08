@@ -8,7 +8,7 @@ export class WorldControls {
  reset(){this.open=false;this.editor=false;this.editingId=null;this.regionId=null;this.groupId=null;this.members.clear();}
  handle(button:HTMLButtonElement,state:SimulationState,command:(c:SimulationCommand)=>void):boolean {
   const d=button.dataset;
-  if(d.direction){this.regionId=d.direction;this.groupId??=Object.keys(state.world?.groups??{})[0]??null;return true;}
+  if(d.direction){this.open=false;this.regionId=d.direction;this.groupId??=Object.keys(state.world?.groups??{})[0]??null;return true;}
   if(d.worldGroup){this.groupId=d.worldGroup;return true;}
   if(d.missionType){this.mission=d.missionType as MissionType;return true;}
   if(d.cargo){const c=d.cargo as Cargo;this.priorities=this.priorities.includes(c)?this.priorities.filter(x=>x!==c):[...this.priorities,c];return true;}
@@ -19,7 +19,7 @@ export class WorldControls {
   if(d.action==='world-cancel'){this.editor=false;return true;}
   if(d.action==='world-confirm'){
    const name=(document.getElementById('expedition-name') as HTMLInputElement).value,memberIds=[...this.members];
-   command(this.editingId?{type:'EditExpeditionGroup',groupId:this.editingId,name,memberIds}:{type:'CreateExpeditionGroup',name,memberIds});this.editor=false;this.groupId??=Object.keys(state.world?.groups??{}).at(-1)??'group-1';return true;
+   command(this.editingId?{type:'EditExpeditionGroup',groupId:this.editingId,name,memberIds}:{type:'CreateExpeditionGroup',name,memberIds});this.editor=false;this.open=false;this.groupId??=Object.keys(state.world?.groups??{}).at(-1)??'group-1';return true;
   }
   if(d.action==='world-dispatch'){command({type:'DispatchExpedition',groupId:this.groupId!,regionId:this.regionId!,mission:this.mission,priorities:this.mission==='Pillage'?this.priorities:[]});return true;}
   if(d.action==='world-close-region'){this.regionId=null;return true;}

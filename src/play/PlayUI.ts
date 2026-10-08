@@ -21,7 +21,7 @@ export class PlayUI {
   this.root.addEventListener('click',e=>this.click(e));
   this.root.addEventListener('input',e=>this.world.change(e.target as HTMLInputElement));
   window.addEventListener('keydown',e=>{if(e.key==='Escape'){this.world.open=false;this.world.regionId=null;document.getElementById('play-settings')?.removeAttribute('open');this.render();}});
-  this.root.addEventListener('change',e=>{const t=e.target as HTMLInputElement;this.world.change(t);if(t.id==='weather-enabled')this.weatherEnabled=t.checked;if(t.id==='same-founders')this.sameFounders=t.checked;if(t.id==='cycle')this.session.setMinutesPerWinter(Number(t.value));if(t.id==='import-file'&&t.files?.[0])void this.importSave(t.files[0]);if(t.id==='entity-picker'&&t.value){this.world.regionId=null;const [kind,...id]=t.value.split(':');this.selection={kind:kind as EntityKind,id:id.join(':')};this.render();}});
+  this.root.addEventListener('change',e=>{const t=e.target as HTMLInputElement;this.world.change(t);if(t.id==='weather-enabled')this.weatherEnabled=t.checked;if(t.id==='same-founders')this.sameFounders=t.checked;if(t.id==='cycle')this.session.setMinutesPerWinter(Number(t.value));if(t.id==='import-file'&&t.files?.[0])void this.importSave(t.files[0]);if(t.id==='entity-picker'&&t.value){this.world.open=false;this.world.regionId=null;const [kind,...id]=t.value.split(':');this.selection={kind:kind as EntityKind,id:id.join(':')};this.render();}});
   this.root.addEventListener('pointerdown',e=>{if((e.target as Element).closest('#settlement-board')&&!(e.target as Element).closest('.board-ui')){this.drag={x:e.clientX,y:e.clientY,px:this.pan.x,py:this.pan.y};this.dragged=false;}});
   window.addEventListener('pointermove',e=>{if(!this.drag)return;const dx=e.clientX-this.drag.x,dy=e.clientY-this.drag.y;if(Math.hypot(dx,dy)>6)this.dragged=true;if(this.dragged){this.pan={x:this.drag.px+dx,y:this.drag.py+dy};this.transform();}});
   window.addEventListener('pointerup',()=>{this.drag=null;});
@@ -37,7 +37,7 @@ export class PlayUI {
   const button=(e.target as Element).closest<HTMLButtonElement>('button');
   try{
    if(button&&this.world.handle(button,this.session.snapshot(),c=>this.session.command(c))){this.notice='World updated.';}
-   else if(button?.dataset.select){this.world.regionId=null;this.selection={kind:button.dataset.kind as EntityKind,id:button.dataset.select};}
+   else if(button?.dataset.select){this.world.open=false;this.world.regionId=null;this.selection={kind:button.dataset.kind as EntityKind,id:button.dataset.select};}
    else if(button?.dataset.command){this.session.command(JSON.parse(button.dataset.command));this.notice='Action completed.';}
    else if(button){const id=this.selection?.id,action=button.dataset.action;
     if(action==='run'){this.session.setRunning(!this.session.running);this.last=null;}
