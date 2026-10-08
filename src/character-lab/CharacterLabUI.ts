@@ -29,7 +29,7 @@ export class CharacterLabUI {
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void,private onPresentation:(value:CharacterPresentation)=>void=()=>{},private onBody:(value:LabBodyPresentation)=>void=()=>{}){
         this.dna=cloneDNA(dna);
         root.innerHTML=`<div class="lab">
-            <nav class="lab-nav"><div><span class="lab-eyebrow">PILLAGERS / DEVELOPMENT</span><h1>Character Lab <small>v0.4</small></h1></div><a href="/meshy-preview">All Meshy animations</a><a href="/environment-lab">Environment Lab</a><a href="/asset-lab">Asset optimization lab</a><a href="/">Back to the fjord <span aria-hidden="true">↗</span></a></nav>
+            <nav class="lab-nav"><div><span class="lab-eyebrow">PILLAGERS / DEVELOPMENT</span><h1>Character Lab <small>v0.4</small></h1></div><label>Character<select id="lab-character-type"><option value="human">Human</option><option value="cow">Cow</option></select></label><a href="/meshy-preview">All Meshy animations</a><a href="/environment-lab">Environment Lab</a><a href="/asset-lab">Asset optimization lab</a><a href="/">Back to the fjord <span aria-hidden="true">↗</span></a></nav>
             <div class="lab-layout">
                 <section class="lab-panel lab-controls" aria-label="Character controls">
                     <div class="lab-section-heading"><h2>01 <span>Identity</span></h2><span class="lab-badge">DNA</span></div>
@@ -115,6 +115,7 @@ export class CharacterLabUI {
         });
         root.addEventListener('change',event=>{
             const choice=event.target as HTMLInputElement;
+            if(choice.id==='lab-character-type'){const url=new URL(location.href);if(choice.value==='cow')url.searchParams.set('model','cow');else{url.searchParams.delete('model');url.searchParams.delete('variant');url.searchParams.delete('animation');}location.href=url.pathname+url.search+url.hash;return;}
             if(choice.id==='lab-animation'){this.onAction(`animation-${choice.value}`);return;}
             if(choice.id==='lab-body-source'){this.onBody(choice.value==='meshy'?{version:1,preset:'auto',source:'meshy'}:choice.value===goldenLabBody.source?{...previewLabBodyPresentation}:{...defaultLabBodyPresentation});return;}
             if(choice.id==='lab-body-preset'){this.onBody({version:1,preset:choice.value as LabBodyPreset,...(this.body.source?{source:this.body.source}:{})});return;}

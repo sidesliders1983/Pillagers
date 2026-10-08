@@ -20,7 +20,8 @@ export class CharacterLab {
     private body:LabBodyPresentation={version:1,preset:'auto',source:'meshy'};
     private preview!:CharacterPreview;
     private ui!:CharacterLabUI;
-    start(){
+    async start(){
+        if(new URLSearchParams(location.search).get('model')==='cow'){const {CowCharacterPreview}=await import('./CowCharacterPreview');await new CowCharacterPreview().start();return;}
         document.body.className='character-lab';document.title='Character Lab · Pillagers';
         document.body.replaceChildren();const root=document.createElement('main');document.body.append(root);
         this.ui=new CharacterLabUI(root,this.dna,dna=>{this.dna=parseCharacterDNA(dna);this.update();},action=>{void this.action(action).catch(error=>this.ui.status(error.message,true));},presentation=>{try{this.presentation=parseCharacterPresentation(presentation);this.update();}catch(error){this.ui.status((error as Error).message,true);}},body=>{try{const next=parseLabBodyPresentation(body);if((next.source??'published')!==(this.body.source??'published'))this.presentation=next.source===goldenLabBody.source||next.source==='meshy'?{...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'}:{...defaultCharacterPresentation};this.body=next;this.update();}catch(error){this.ui.status((error as Error).message,true);}});
@@ -71,4 +72,3 @@ export class CharacterLab {
         }
     }
 }
-

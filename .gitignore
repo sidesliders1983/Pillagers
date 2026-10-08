@@ -5,7 +5,9 @@ Assets/
 artifacts/
 tools/
 scratch/
-public/game-assets/
+public/game-assets/*
+# Keep the prepared cattle models available in fresh checkouts.
+!public/game-assets/cattle/
 public/model-preview/
 trellis-test-error.png
 __pycache__/

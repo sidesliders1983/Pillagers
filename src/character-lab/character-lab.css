@@ -14,3 +14,4 @@
 .lab-module-controls{display:grid;gap:12px}.lab-module-controls h2{font-size:14px;margin:0}.lab input[type=color]{display:block;width:100%;height:35px;margin-top:7px;border:1px solid #dce2d2;background:#fffef6;border-radius:4px;padding:4px}.lab-checkbox{display:flex;align-items:center;gap:7px}.lab-pose-controls{display:flex;align-items:end;gap:8px;padding:0 18px 16px}.lab-pose-controls label{max-width:165px}
 
 .lab-source-controls{padding:8px 18px 16px;border-top:1px solid #c9d3c1}.lab-source-controls label{display:block}.lab-source-controls .lab-note{margin-bottom:0}.lab button:disabled,.lab select:disabled,.lab input:disabled{opacity:.55;cursor:default}
+.lab .lab-cattle-layout{grid-template-columns:260px minmax(300px,1fr)}.lab-nav label{font-size:11px;min-width:150px}.lab-nav{flex-wrap:wrap}.lab-cattle-layout [hidden]{display:none!important}@media(max-width:700px){.lab-cattle-layout{display:flex}.lab-nav label{width:100%}}

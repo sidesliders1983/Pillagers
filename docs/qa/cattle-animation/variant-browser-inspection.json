@@ -1,0 +1,11 @@
+{
+  "lan": true,
+  "updatedBullWalk": true,
+  "mobile": true,
+  "layout": {
+    "width": 390,
+    "scrollWidth": 390
+  },
+  "variantSwitch": true,
+  "errors": []
+}
