@@ -1,0 +1,30 @@
+[
+  {
+    "variant": "adult-female",
+    "measuredWithersM": 1.1000410991151581,
+    "targetWithersM": 1.1,
+    "maxLoopDelta": 0,
+    "bytes": 912644
+  },
+  {
+    "variant": "baby",
+    "measuredWithersM": 0.6000031151667264,
+    "targetWithersM": 0.6,
+    "maxLoopDelta": 0,
+    "bytes": 925360
+  },
+  {
+    "variant": "young-adult",
+    "measuredWithersM": 0.9499963944272588,
+    "targetWithersM": 0.95,
+    "maxLoopDelta": 0,
+    "bytes": 785824
+  },
+  {
+    "variant": "adult-male",
+    "measuredWithersM": 1.1999601007676368,
+    "targetWithersM": 1.2,
+    "maxLoopDelta": 0,
+    "bytes": 761356
+  }
+]

@@ -1,0 +1,301 @@
+{
+  "adult-female": {
+    "source": "Adult female/cow-female-adult-textured.glb",
+    "stem": "cow-female-adult",
+    "label": "Adult female cow",
+    "withers": 1.1,
+    "bones": 67,
+    "triangles": 5250,
+    "root": "Bone_000",
+    "spine": "Bone_030",
+    "shoulder": "Bone_028",
+    "head": "Bone_031",
+    "neck": [
+      [
+        "Bone_036",
+        0.82
+      ],
+      [
+        "Bone_035",
+        0.09
+      ],
+      [
+        "Bone_034",
+        0.16
+      ],
+      [
+        "Bone_033",
+        0.14
+      ],
+      [
+        "Bone_032",
+        0.11
+      ]
+    ],
+    "tail": [
+      "Bone_009",
+      "Bone_008"
+    ],
+    "ears": [
+      "Bone_063",
+      "Bone_066"
+    ],
+    "shoulderBand": [
+      -0.48,
+      -0.15
+    ],
+    "muzzleY": -1.24,
+    "pollBand": [
+      -1.05,
+      -0.95,
+      1.54
+    ],
+    "legs": {
+      "hind_left": [
+        "Bone_022",
+        "Bone_021",
+        4,
+        0,
+        0.64
+      ],
+      "front_left": [
+        "Bone_050",
+        "Bone_049",
+        5,
+        0.25,
+        0.68
+      ],
+      "hind_right": [
+        "Bone_014",
+        "Bone_013",
+        4,
+        0.5,
+        0.64
+      ],
+      "front_right": [
+        "Bone_041",
+        "Bone_040",
+        5,
+        0.75,
+        0.68
+      ]
+    }
+  },
+  "baby": {
+    "source": "Baby/cow-baby-textured.glb",
+    "stem": "cow-baby",
+    "label": "Baby calf",
+    "withers": 0.6,
+    "bones": 50,
+    "triangles": 6800,
+    "root": "Bone_000",
+    "spine": "Bone_016",
+    "shoulder": "Bone_014",
+    "head": "Bone_028",
+    "neck": [
+      [
+        "Bone_031",
+        0.82
+      ],
+      [
+        "Bone_030",
+        0.2
+      ],
+      [
+        "Bone_029",
+        0.3
+      ]
+    ],
+    "tail": [
+      "Bone_013",
+      "Bone_012"
+    ],
+    "ears": [
+      "Bone_049",
+      "Bone_046"
+    ],
+    "shoulderBand": [
+      -0.3,
+      -0.08
+    ],
+    "muzzleY": -1.1,
+    "pollBand": [
+      -0.88,
+      -0.74,
+      1.52
+    ],
+    "legs": {
+      "hind_left": [
+        "Bone_019",
+        "Bone_018",
+        3,
+        0,
+        0.64
+      ],
+      "front_left": [
+        "Bone_034",
+        "Bone_033",
+        4,
+        0.25,
+        0.68
+      ],
+      "hind_right": [
+        "Bone_024",
+        "Bone_023",
+        3,
+        0.5,
+        0.64
+      ],
+      "front_right": [
+        "Bone_040",
+        "Bone_039",
+        4,
+        0.75,
+        0.68
+      ]
+    }
+  },
+  "young-adult": {
+    "source": "Young Adult/Cow-young-adult.glb",
+    "stem": "cow-young-adult",
+    "label": "Young adult cow",
+    "withers": 0.95,
+    "bones": 46,
+    "triangles": 4388,
+    "root": "Bone_000",
+    "spine": "Bone_011",
+    "shoulder": "Bone_010",
+    "head": "Bone_024",
+    "neck": [
+      [
+        "Bone_027",
+        1.18
+      ],
+      [
+        "Bone_026",
+        0.3
+      ],
+      [
+        "Bone_025",
+        0.2
+      ]
+    ],
+    "tail": [
+      "Bone_007",
+      "Bone_006"
+    ],
+    "ears": [],
+    "shoulderBand": [
+      -0.48,
+      -0.2
+    ],
+    "muzzleY": -1.18,
+    "pollBand": [
+      -1,
+      -0.86,
+      1.55
+    ],
+    "legs": {
+      "hind_left": [
+        "Bone_021",
+        "Bone_020",
+        3,
+        0,
+        0.64
+      ],
+      "front_left": [
+        "Bone_031",
+        "Bone_030",
+        4,
+        0.25,
+        0.68
+      ],
+      "hind_right": [
+        "Bone_015",
+        "Bone_014",
+        3,
+        0.5,
+        0.64
+      ],
+      "front_right": [
+        "Bone_038",
+        "Bone_037",
+        4,
+        0.75,
+        0.68
+      ]
+    }
+  },
+  "adult-male": {
+    "source": "Adult Male/cow-male-adult-textured.glb",
+    "stem": "cow-male-adult",
+    "label": "Adult bull",
+    "withers": 1.2,
+    "bones": 39,
+    "triangles": 5664,
+    "root": "Bone_000",
+    "spine": "Bone_004",
+    "shoulder": "Bone_002",
+    "head": "Bone_022",
+    "neck": [
+      [
+        "Bone_024",
+        1.03
+      ],
+      [
+        "Bone_023",
+        0.28
+      ]
+    ],
+    "tail": [
+      "Bone_010",
+      "Bone_009"
+    ],
+    "ears": [
+      "Bone_038",
+      "Bone_036"
+    ],
+    "shoulderBand": [
+      -0.42,
+      -0.2
+    ],
+    "muzzleY": -1.27,
+    "pollBand": [
+      -1.05,
+      -0.9,
+      1.43
+    ],
+    "legs": {
+      "hind_left": [
+        "Bone_013",
+        "Bone_012",
+        3,
+        0,
+        0.64
+      ],
+      "front_left": [
+        "Bone_027",
+        "Bone_026",
+        3,
+        0.25,
+        0.68
+      ],
+      "hind_right": [
+        "Bone_018",
+        "Bone_017",
+        3,
+        0.5,
+        0.64
+      ],
+      "front_right": [
+        "Bone_032",
+        "Bone_031",
+        3,
+        0.75,
+        0.68
+      ]
+    },
+    "walkSpeed": 0.35,
+    "walkBodyLowering": 0.04
+  }
+}

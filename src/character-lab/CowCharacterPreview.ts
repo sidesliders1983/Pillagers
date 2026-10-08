@@ -9,7 +9,16 @@ import {meshyHumanFactory,MeshyHuman} from '../characters/MeshyHuman';
 import {CharacterLabUI,LabAction} from './CharacterLabUI';
 
 type Clip='Idle'|'Graze'|'Walk'|'HumanInteraction';
-interface Manifest {file:string;bytes:number;triangles:number;joints:number;walkSpeedMps:number;withersHeightM:number;blenderVersion:string;sha256:string}
+const COWS={
+ 'adult-female':{label:'Adult female cow',withers:1.10,humanDistance:1.60},
+ baby:{label:'Baby calf',withers:0.60,humanDistance:0.95},
+ 'young-adult':{label:'Young adult cow',withers:0.95,humanDistance:1.40},
+ 'adult-male':{label:'Adult bull',withers:1.20,humanDistance:1.75},
+} as const;
+type Variant=keyof typeof COWS;
+const requestedVariant=new URLSearchParams(location.search).get('variant');
+const initialVariant:Variant=requestedVariant&&Object.hasOwn(COWS,requestedVariant)?requestedVariant as Variant:'adult-female';
+interface Manifest {variant:Variant;file:string;bytes:number;triangles:number;joints:number;walkSpeedMps:number;withersHeightM:number;blenderVersion:string;sha256:string}
 /** Cattle mode uses the existing Character Lab controls and route. */
 export class CowCharacterPreview {
  private renderer!:ReturnType<typeof createRenderer>;
@@ -21,6 +30,9 @@ export class CowCharacterPreview {
  private action!:AnimationAction;
  private actions=new Map<Clip,AnimationAction>();
  private clip:Clip='Idle';
+ private variant=initialVariant;
+ private cow=COWS[this.variant];
+ private view='side';
  private paused=false;
  private speed=1;
  private ground=new Group();
@@ -32,7 +44,7 @@ export class CowCharacterPreview {
  private canvas!:HTMLCanvasElement;
  private manifest!:Manifest;
  async start(){
-  document.title='Character Lab · Adult female cow';
+  document.title='Character Lab · '+this.cow.label;
   document.body.className='character-lab';
   document.body.replaceChildren();
   const root=document.createElement('main');document.body.append(root);
@@ -40,21 +52,24 @@ export class CowCharacterPreview {
   (document.querySelector('#lab-character-type') as HTMLSelectElement).value='cow';
   const sidebar=document.querySelector<HTMLElement>('.lab-controls')!;
   const status=document.querySelector('#lab-status')!;
-  sidebar.innerHTML='<div class="lab-section-heading"><h2>01 <span>Adult female cow</span></h2><span class="lab-badge">PROTOTYPE</span></div><p class="lab-note">Four authored animations on the original textured cow. Select an animation below the preview.</p><div class="lab-slider"><label for="lab-cow-speed">Playback speed <output id="lab-cow-speed-value">1.00×</output></label><input id="lab-cow-speed" type="range" min="0.25" max="2" step="0.05" value="1"></div><label class="lab-checkbox"><input id="lab-cow-ground" type="checkbox" checked>Moving ground while walking</label><p class="lab-note">The ground follows the authored walking pace so hoof contact can be inspected. Cow withers: 1.10 m. Reference human: 1.65 m.</p><label class="lab-checkbox"><input id="lab-cow-human" type="checkbox" checked>Show human during interaction</label><p class="lab-note" id="lab-cow-description"></p>';
+  sidebar.innerHTML='<div class="lab-section-heading"><h2>01 <span>'+this.cow.label+'</span></h2><span class="lab-badge">PROTOTYPE</span></div><label class="lab-note" for="lab-cow-variant">Cow variant</label><select id="lab-cow-variant">'+Object.entries(COWS).map(([id,cow])=>'<option value="'+id+'">'+cow.label+'</option>').join('')+'</select><p class="lab-note">Four authored animations on each original textured cow. Select an animation below the preview.</p><div class="lab-slider"><label for="lab-cow-speed">Playback speed <output id="lab-cow-speed-value">1.00×</output></label><input id="lab-cow-speed" type="range" min="0.25" max="2" step="0.05" value="1"></div><label class="lab-checkbox"><input id="lab-cow-ground" type="checkbox" checked>Moving ground while walking</label><p class="lab-note">The ground follows the authored walking pace so hoof contact can be inspected. Cow withers: '+this.cow.withers.toFixed(2)+' m. Reference human: 1.65 m.</p><label class="lab-checkbox"><input id="lab-cow-human" type="checkbox" checked>Show human during interaction</label><p class="lab-note" id="lab-cow-description"></p>';
+  const variantChoice=document.querySelector<HTMLSelectElement>('#lab-cow-variant')!;variantChoice.value=this.variant;
+  variantChoice.addEventListener('change',()=>{const url=new URL(location.href);url.searchParams.set('variant',variantChoice.value);url.searchParams.set('animation',this.clip);location.href=url.pathname+url.search+url.hash;});
   sidebar.append(status);
-  this.ui.status('Loading adult female cow…');
+  this.ui.status('Loading '+this.cow.label.toLowerCase()+'…');
   for(const selector of ['.lab-results','.lab-fit-debug','.lab-body-controls','.lab-module-controls','.lab-compare','[aria-label="Appearance size ratios"]','[aria-label="Level of detail"]']){
    const section=document.querySelector<HTMLElement>(selector);if(section)section.hidden=true;
   }
   // Keep the same two visible panels and the lab's existing responsive layout.
   document.querySelector<HTMLElement>('.lab-layout')!.classList.add('lab-cattle-layout');
   document.querySelector<HTMLElement>('.lab-stage-heading .lab-eyebrow')!.textContent='LIVE PREVIEW';
-  document.querySelector('#lab-current-label')!.textContent='ADULT FEMALE COW';
+  document.querySelector('#lab-current-label')!.textContent=this.cow.label.toUpperCase();
   const source=document.querySelector<HTMLSelectElement>('#lab-body-source')!;
-  source.replaceChildren(new Option('Meshy Cow · adult female · textured','cow'));source.disabled=true;
+  source.replaceChildren(new Option('Meshy · '+this.cow.label+' · textured','cow'));source.disabled=true;
   document.querySelector('#lab-source-status')!.textContent='Original geometry and skin weights. Four authored bone animations.';
   this.canvas=document.querySelector<HTMLCanvasElement>('#lab-preview')!;
-  this.canvas.setAttribute('aria-label','Animated adult female cow. Right drag to rotate, scroll to zoom.');
+  this.canvas.setAttribute('aria-label','Animated '+this.cow.label.toLowerCase()+'. Right drag to rotate, scroll to zoom.');
+  this.canvas.dataset.variant=this.variant;
   this.time=document.querySelector<HTMLInputElement>('#lab-pose-time')!;
   document.querySelector('.lab-preview-tools>span')!.textContent='Right drag to rotate · Left drag to pan · Scroll to zoom';
   this.renderer=createRenderer(this.canvas);this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
@@ -70,18 +85,19 @@ export class CowCharacterPreview {
   this.ground.add(grid);this.scene.add(this.ground);
   this.controls=new OrbitControls(this.camera,this.canvas);
   this.controls.target.set(0,.80,0);this.controls.mouseButtons={LEFT:MOUSE.PAN,MIDDLE:MOUSE.DOLLY,RIGHT:MOUSE.ROTATE};
-  this.controls.minDistance=2;this.controls.maxDistance=15;this.controls.maxPolarAngle=Math.PI/2-0.02;
+  this.controls.minDistance=1.2;this.controls.maxDistance=15;this.controls.maxPolarAngle=Math.PI/2-0.02;
   this.canvas.addEventListener('contextmenu',event=>event.preventDefault());
   this.setCamera('side');
   const resize=()=>{const r=this.canvas.getBoundingClientRect();this.renderer.setSize(r.width,r.height,false);this.camera.aspect=r.width/Math.max(1,r.height);this.camera.updateProjectionMatrix();};
   new ResizeObserver(resize).observe(this.canvas);resize();
   document.querySelector('#lab-cow-speed')!.addEventListener('input',event=>{this.speed=Number((event.target as HTMLInputElement).value);document.querySelector('#lab-cow-speed-value')!.textContent=this.speed.toFixed(2)+'×';});
-  document.querySelector('#lab-cow-human')!.addEventListener('change',()=>{if(this.clip==='HumanInteraction')void this.ensureHuman();if(this.human)this.human.root.visible=this.showHuman();});
+  document.querySelector('#lab-cow-human')!.addEventListener('change',()=>{if(this.clip==='HumanInteraction')void this.ensureHuman();if(this.human)this.human.root.visible=this.showHuman();this.setCamera(this.view);});
   try{
-   const response=await fetch('/game-assets/cattle/adult-female/manifest.json');
+   const response=await fetch('/game-assets/cattle/'+this.variant+'/manifest.json');
    if(!response.ok)throw new Error('Prepared cow assets are unavailable. Run assets:cow first.');
    this.manifest=await response.json();
-   const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('/game-assets/cattle/adult-female/'+this.manifest.file+'?v='+this.manifest.sha256.slice(0,12));
+   if(this.manifest.variant!==this.variant)throw new Error('Cow asset does not match the selected variant.');
+   const gltf=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync('/game-assets/cattle/'+this.variant+'/'+this.manifest.file+'?v='+this.manifest.sha256.slice(0,12));
    gltf.scene.traverse(object=>{if(object instanceof Mesh){object.castShadow=true;object.receiveShadow=true;}});
    this.scene.add(gltf.scene);this.mixer=new AnimationMixer(gltf.scene);
    for(const clip of gltf.animations)this.actions.set(clip.name as Clip,this.mixer.clipAction(clip));
@@ -89,7 +105,8 @@ export class CowCharacterPreview {
    for(const [name] of choices)if(!this.actions.has(name))throw new Error('Missing animation: '+name);
    document.querySelector<HTMLSelectElement>('#lab-animation')!.replaceChildren(...choices.map(([name,label])=>new Option(label,name)));
    document.querySelector('#lab-dimensions')!.innerHTML='<div><span>COW TRIANGLES</span><strong>'+this.manifest.triangles.toLocaleString()+'</strong></div><div><span>BONES</span><strong>'+this.manifest.joints+'</strong></div><div><span>ANIMATIONS</span><strong>4</strong></div><div><span>RUNTIME ASSET</span><strong>'+(this.manifest.bytes/1048576).toFixed(2)+' <small>MiB</small></strong></div>';
-   this.play('Idle');this.canvas.dataset.ready='true';this.canvas.dataset.bodySource='cow';this.canvas.dataset.withersHeight=String(this.manifest.withersHeightM);
+   const requestedClip=new URLSearchParams(location.search).get('animation');
+   this.play(this.actions.has(requestedClip as Clip)?requestedClip as Clip:'Idle');this.canvas.dataset.ready='true';this.canvas.dataset.bodySource='cow';this.canvas.dataset.withersHeight=String(this.manifest.withersHeightM);
   }catch(error){this.ui.status((error as Error).message,true);console.error(error);}
   this.last=performance.now();
   this.renderer.setAnimationLoop(()=>{
@@ -116,25 +133,26 @@ export class CowCharacterPreview {
  }
  private setCamera(view:string){
   const positions:Record<string,[number,number,number]>={side:[4.6,1.65,0],front:[0,1.6,5.2],back:[0,1.6,-5.2],rts:[4.2,3.2,3.8]};
-  this.camera.position.set(...(positions[view]??positions.side));this.controls.target.set(0,.8,0);this.controls.update();
+  this.view=view;const scale=this.showHuman()?Math.max(1,this.cow.withers/1.1):Math.max(.65,this.cow.withers/1.1);
+  this.camera.position.set(...(positions[view]??positions.side)).multiplyScalar(scale);this.controls.target.set(0,.8*scale,0);this.controls.update();
  }
  private play(clip:Clip){
   if(!this.mixer||!this.actions.has(clip))return;
   this.mixer.stopAllAction();this.clip=clip;this.action=this.actions.get(clip)!;this.action.reset().play();this.mixer.update(0);this.walkDistance=0;this.paused=false;
   this.time.max=String(this.action.getClip().duration);
-  (document.querySelector('#lab-animation') as HTMLSelectElement).value=clip;this.canvas.dataset.animation=clip;
-  const descriptions:Record<Clip,string>={Idle:'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to a gentle grazing pose with subtle shoulder and head turns, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
+  (document.querySelector('#lab-animation') as HTMLSelectElement).value=clip;this.canvas.dataset.animation=clip;this.setCamera(this.view);
+  const descriptions:Record<Clip,string>={Idle:this.variant==='young-adult'?'Quiet standing with subtle breathing and tail movement.':'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to a gentle grazing pose with subtle shoulder and head turns, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
   document.querySelector('#lab-cow-description')!.textContent=descriptions[clip];this.report();
   if(this.human)this.human.root.visible=this.showHuman();
   if(clip==='HumanInteraction')void this.ensureHuman();
  }
  private sample(time:number){if(!this.action)return;this.action.time=Math.max(0,Math.min(time,this.action.getClip().duration));this.mixer.update(0);this.walkDistance=this.action.time*this.manifest.walkSpeedMps;}
- private report(){this.canvas.dataset.paused=String(this.paused);this.ui.status('Adult female cow · '+this.clip+(this.paused?' · frozen pose':'')+' · Blender '+this.manifest.blenderVersion);}
+ private report(){this.canvas.dataset.paused=String(this.paused);this.ui.status(this.cow.label+' · '+this.clip+(this.paused?' · frozen pose':'')+' · Blender '+this.manifest.blenderVersion);}
  private showHuman(){return this.clip==='HumanInteraction'&&(document.querySelector('#lab-cow-human') as HTMLInputElement).checked;}
  private ensureHuman(){
   if(!this.showHuman())return Promise.resolve();
   if(!this.humanLoading)this.humanLoading=meshyHumanFactory.create(defaultDNA(),2).then(human=>{
-   this.human=human;human.root.scale.setScalar(1.65/human.root.userData.character.height);human.root.position.set(0,0,1.60);this.canvas.dataset.humanHeight='1.65';human.root.rotation.y=Math.PI;human.setAnimation('Listen');human.root.visible=this.showHuman();this.scene.add(human.root);this.canvas.dataset.humanReady='true';
+   this.human=human;human.root.scale.setScalar(1.65/human.root.userData.character.height);human.root.position.set(0,0,this.cow.humanDistance);this.canvas.dataset.humanHeight='1.65';human.root.rotation.y=Math.PI;human.setAnimation('Listen');human.root.visible=this.showHuman();this.scene.add(human.root);this.canvas.dataset.humanReady='true';
   }).catch(error=>{console.warn('Human preview unavailable',error);(document.querySelector('#lab-cow-human') as HTMLInputElement).checked=false;this.humanLoading=undefined;this.ui.status('Cow loaded. The optional human preview is unavailable.',true);});
   return this.humanLoading;
  }
