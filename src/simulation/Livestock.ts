@@ -6,6 +6,11 @@ export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {re
 function emit(state:SimulationState,type:string,details:Record<string,unknown>):void {state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details});}
 export function cattleFoodNeed(state:SimulationState):number {
     const landing=state.landing;if(!landing)return 0;
+    const modifiers=weatherProfile(state);
+    if(modifiers.cattleConsumptionBps!==undefined){
+        const base=Object.values(landing.cattle).reduce((need,c)=>need+(c.deathWinter===null?(state.time.winter-c.birthWinter>=landing.config.cattleAdultAge?landing.config.adultCattleFood:landing.config.calfFood):0),0);
+        return Math.ceil(base*modifiers.cattleConsumptionBps/10000);
+    }
     return Object.values(landing.cattle).reduce((need,c)=>need+(c.deathWinter===null?(state.time.winter-c.birthWinter>=landing.config.cattleAdultAge?landing.config.adultCattleFood*weatherProfile(state).cattleConsumptionMultiplier:landing.config.calfFood):0),0);
 }
 export function stepCattleOutput(state:SimulationState):void {

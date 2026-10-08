@@ -3,11 +3,11 @@ import type {SimulationState} from './SimulationCore';
 import {randomUint} from './Random';
 export const weatherClasses=['Mild','Normal','Harsh','Severe'] as const;
 export type WeatherClass=typeof weatherClasses[number];
-export type WeatherProfile={probabilityBps:number;foodProductionBps:number;cattleConsumptionMultiplier:number;tentMortalityBps:number;exposedCattleMortalityBps:number;travelDurationBps:number;travelRiskBps:number};
+export type WeatherProfile={probabilityBps:number;foodProductionBps:number;materialsProductionBps?:number;residentConsumptionBps?:number;cattleConsumptionBps?:number;cattleConsumptionMultiplier:number;tentMortalityBps:number;exposedCattleMortalityBps:number;travelDurationBps:number;travelRiskBps:number};
 export type WeatherConfig={enabled:boolean;profiles:Record<WeatherClass,WeatherProfile>};
 export type WeatherState={version:1;config:WeatherConfig;regions:Record<string,{winter:number;class:WeatherClass}>};
 const profile=(probabilityBps:number,foodProductionBps:number,cattleConsumptionMultiplier:number,tentMortalityBps:number,exposedCattleMortalityBps:number,travelDurationBps:number,travelRiskBps:number):WeatherProfile=>({probabilityBps,foodProductionBps,cattleConsumptionMultiplier,tentMortalityBps,exposedCattleMortalityBps,travelDurationBps,travelRiskBps});
-export const defaultWeatherConfig:WeatherConfig={enabled:true,profiles:{Mild:profile(2000,11000,1,0,0,10000,0),Normal:profile(5500,10000,1,0,0,10000,0),Harsh:profile(2000,7500,2,50,500,12500,500),Severe:profile(500,5000,3,200,1500,15000,1500)}};
+export const defaultWeatherConfig:WeatherConfig={enabled:true,profiles:{Mild:profile(2000,11000,1,0,0,10000,0),Normal:profile(5500,10000,1,0,0,10000,0),Harsh:{...profile(2000,0,1,50,500,12500,500),materialsProductionBps:0,residentConsumptionBps:15000,cattleConsumptionBps:15000},Severe:profile(500,5000,3,200,1500,15000,1500)}};
 export function initializeWeather(state:SimulationState,overrides:Partial<WeatherConfig>={}):void {
     state.weather={version:1,config:structuredClone({...defaultWeatherConfig,...overrides}),regions:{}};
     validateWeather(state,false);determineWeather(state);
@@ -32,7 +32,7 @@ export function validateWeather(state:SimulationState,requireCurrent=true):void 
     let total=0;
     for(const kind of weatherClasses){
         const p=weather.config.profiles[kind];
-        if(!p||Object.keys(p).sort().join(',')!==Object.keys(defaultWeatherConfig.profiles.Normal).sort().join(','))throw new Error('Invalid weather profile');
+        if(!p||Object.keys(defaultWeatherConfig.profiles.Normal).some(key=>!Object.hasOwn(p,key))||Object.keys(p).some(key=>!Object.hasOwn(defaultWeatherConfig.profiles.Normal,key)&&!['materialsProductionBps','residentConsumptionBps','cattleConsumptionBps'].includes(key)))throw new Error('Invalid weather profile');
         for(const [key,value] of Object.entries(p))if(!Number.isSafeInteger(value)||value<0||value>(['probabilityBps','tentMortalityBps','exposedCattleMortalityBps','travelRiskBps'].includes(key)?10000:key==='cattleConsumptionMultiplier'?100:100000))throw new Error('Invalid weather modifier');
         total+=p.probabilityBps;
     }

@@ -133,3 +133,7 @@ Possible responses:
 Severe weather increases risk; it does not deterministically kill exposed personas/cattle.
 
 This reinforces the canonical language that a persona has survived **X winters**.
+
+## Current Harsh Winter economy
+
+New campaigns stop all Food and Materials production during Harsh Winters, including cow output. Resident and livestock Food consumption is 150% of baseline. Round each category total upward to whole Food units: three adult cattle require 5 instead of 3 Food. Calves with a zero baseline still consume zero. Work progress is preserved. The announced Winter rules apply through annual resolution. Existing saves retain their stored weather profiles; disabling weather preserves baseline rules.
