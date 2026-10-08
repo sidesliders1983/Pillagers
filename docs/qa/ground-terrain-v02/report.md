@@ -40,3 +40,5 @@ Software timings vary materially; Standard and Compatibility are slower in this 
 ## Reproduction and limitations
 
 See [implementation/source instructions](../../GROUND-TERRAIN-V02.md) and [source/license manifest](../../../public/ground-materials/v02/manifest.json). The atlases precompute transitions for the fixed height/layout; changed layouts require rebaking. Dynamic independently tiled material layers are outside this native static treatment. Source water GLSL remains unchanged.
+
+This is the initial native-ground record at d94ee55. The user rejected its visible result as too flat. See [the sourced GrassField follow-up](sourced-grass/report.md) for the current implementation and review images.

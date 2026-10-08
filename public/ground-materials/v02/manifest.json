@@ -1,7 +1,7 @@
 {
   "version": "ground-v02",
   "seed": 1983,
-  "configSha256": "54b3e79222490b4cd400736b7ae16dde15f003c3701ed769b3fc796c9619487f",
+  "configSha256": "ee973178d2029c7d13430b0bd28328f95cc9166d110f02de4341fe9b2a52c069",
   "generatedWith": "sharp 0.35.5; scripts/prepare-ground-materials.mjs",
   "license": "CC0-1.0",
   "licenseUrl": "https://docs.ambientcg.com/license/",
@@ -66,16 +66,16 @@
   "delivery": [
     {
       "file": "normal.png",
-      "bytes": 1578890,
-      "sha256": "cc84eeb2833c91fc236682aa01abfff599c4732dcfcf90dde0561f5a904d4a6f",
+      "bytes": 1286924,
+      "sha256": "8ee0bc368564bade5e2206410f7614ebdad0aa0b23f201438754a4035f64be12",
       "width": 1024,
       "height": 1024,
       "colorSpace": "NoColorSpace"
     },
     {
       "file": "roughness.png",
-      "bytes": 452477,
-      "sha256": "db2a124fa48cbf7569028af231bf9b559b9838c369897cce57289380e33b8275",
+      "bytes": 380082,
+      "sha256": "3d55a9fb3f74c5ce94266070ec1eb0a622d7f18d822df4382f55712057a9e450",
       "width": 1024,
       "height": 1024,
       "colorSpace": "NoColorSpace"

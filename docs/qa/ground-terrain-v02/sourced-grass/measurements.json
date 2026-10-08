@@ -1,0 +1,111 @@
+{
+  "renderer": "Edge headless / SwiftShader software; whole scene, not isolated GPU terrain time",
+  "viewport": [
+    1024,
+    768
+  ],
+  "seed": 1983,
+  "captureWavePhase": 0,
+  "samples": {
+    "standard": {
+      "durationMs": 10328.70000000074,
+      "frames": 11,
+      "medianFrameMs": 949.8999999999942,
+      "p95FrameMs": 1049.8999999999942,
+      "renderer": {
+        "variant": "candidate",
+        "ms": 934.6999999992549,
+        "calls": 17,
+        "triangles": 360144,
+        "geometries": 7,
+        "textures": 10
+      }
+    },
+    "low": {
+      "durationMs": 10099.400000002235,
+      "frames": 17,
+      "medianFrameMs": 599.9000000000233,
+      "p95FrameMs": 600.1000000000058,
+      "renderer": {
+        "variant": "candidate",
+        "ms": 599.4000000022352,
+        "calls": 17,
+        "triangles": 70408,
+        "geometries": 8,
+        "textures": 10
+      }
+    },
+    "legacy": {
+      "durationMs": 10210.200000002224,
+      "frames": 46,
+      "medianFrameMs": 216.70000000001164,
+      "p95FrameMs": 233.39999999999418,
+      "renderer": {
+        "variant": "legacy",
+        "ms": 222.39999999975166,
+        "calls": 18,
+        "triangles": 54320,
+        "geometries": 9,
+        "textures": 7
+      }
+    }
+  },
+  "pass1": {
+    "standard": {
+      "durationMs": 10071.29999999702,
+      "frames": 16,
+      "medianFrameMs": 667.5,
+      "p95FrameMs": 684.2000000000116,
+      "renderer": {
+        "variant": "candidate",
+        "ms": 651.1999999992549,
+        "calls": 15,
+        "triangles": 75656,
+        "geometries": 5,
+        "textures": 7
+      }
+    },
+    "low": {
+      "durationMs": 10288.599999997008,
+      "frames": 20,
+      "medianFrameMs": 517.2000000000116,
+      "p95FrameMs": 533.9000000000087,
+      "renderer": {
+        "variant": "candidate",
+        "ms": 499.04999999888247,
+        "calls": 15,
+        "triangles": 27056,
+        "geometries": 6,
+        "textures": 7
+      }
+    },
+    "fallback": {
+      "durationMs": 10064.899999999994,
+      "frames": 94,
+      "medianFrameMs": 100.20000000001164,
+      "p95FrameMs": 116.89999999999418,
+      "renderer": {
+        "variant": "legacy",
+        "ms": 106.47999999970196,
+        "calls": 16,
+        "triangles": 10968,
+        "geometries": 7,
+        "textures": 4
+      }
+    }
+  },
+  "checks": [
+    "published normal and roughness maps load",
+    "sourced grass defaults on and changes visible pixels",
+    "no comparison UI",
+    "repeatable paused pixels",
+    "day/night",
+    "near/far presets",
+    "Low triangle budget",
+    "compatibility fallback",
+    "water visibility",
+    "grass wind with water hidden",
+    "waves resume"
+  ],
+  "errors": []
+}
