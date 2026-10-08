@@ -1,0 +1,237 @@
+{
+  "contract": {
+    "version": 1,
+    "pixelsPerMeter": 48,
+    "camera": {
+      "azimuthDegrees": 45,
+      "downwardDegrees": 35.26438968
+    },
+    "groundAnchor": [
+      0.5,
+      0.5
+    ],
+    "sprites": [
+      {
+        "id": "house-0",
+        "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+        "height": 4,
+        "size": 512
+      },
+      {
+        "id": "house-1",
+        "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+        "height": 4,
+        "size": 512,
+        "upgrade": 1
+      },
+      {
+        "id": "house-2",
+        "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+        "height": 4,
+        "size": 512,
+        "upgrade": 2
+      },
+      {
+        "id": "house-3",
+        "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+        "height": 4,
+        "size": 512,
+        "upgrade": 3
+      },
+      {
+        "id": "farmyard",
+        "source": "Assets/Houses/Farmyard/Hut/farm-hut.glb",
+        "height": 4,
+        "size": 512
+      },
+      {
+        "id": "cow",
+        "source": "Assets/3D/Cow/Cow_output.glb",
+        "height": 1.3,
+        "size": 256,
+        "material": "cattle"
+      },
+      {
+        "id": "bull",
+        "source": "Assets/3D/Cow/Cow_output.glb",
+        "height": 1.45,
+        "size": 256,
+        "material": "cattle"
+      },
+      {
+        "id": "young-cattle",
+        "source": "Assets/3D/Cow/Cow_output.glb",
+        "height": 0.95,
+        "size": 256,
+        "material": "cattle"
+      },
+      {
+        "id": "calf",
+        "source": "Assets/3D/Cow/Cow_output.glb",
+        "height": 0.6,
+        "size": 192,
+        "material": "cattle"
+      },
+      {
+        "id": "male",
+        "placeholder": "generic mannequin",
+        "height": 1.6,
+        "size": 192
+      },
+      {
+        "id": "female",
+        "placeholder": "generic mannequin",
+        "height": 1.6,
+        "size": 192
+      },
+      {
+        "id": "child",
+        "placeholder": "generic mannequin",
+        "height": 0.95,
+        "size": 128
+      },
+      {
+        "id": "tent",
+        "placeholder": "canvas tent",
+        "height": 2,
+        "size": 256
+      },
+      {
+        "id": "longship",
+        "source": "Assets/Terrain/longship-drakkar.glb",
+        "height": 2.8,
+        "size": 768
+      }
+    ]
+  },
+  "sprites": [
+    {
+      "id": "house-0",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
+      "outputSha256": "bb5b04cc40f66323da351788a59543cf7601c1848d8d80fc87a14e2f9a603f72"
+    },
+    {
+      "id": "house-1",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "upgrade": 1,
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
+      "outputSha256": "bac46b434790b6de8a40353d35d42fc4598da6cba729d88402c991a7c524a330"
+    },
+    {
+      "id": "house-2",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "upgrade": 2,
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
+      "outputSha256": "107f025cadae10eda48b15b71bcbb7dc2bcc7095d17acf45439dc6e6cef565db"
+    },
+    {
+      "id": "house-3",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "upgrade": 3,
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
+      "outputSha256": "7ca4ce82aaedb9d4112c567e851b72e415fcdcf51a10446e5cb99d22d5a4a4cd"
+    },
+    {
+      "id": "farmyard",
+      "source": "Assets/Houses/Farmyard/Hut/farm-hut.glb",
+      "height": 4,
+      "size": 512,
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "1cc484693aba97a18f43f5d9751860a8bfba6a85cb83f700ac907038f88b9303",
+      "outputSha256": "c02e77797bc64ee3d21d43e6743da74dced35ed6ad68a260dd5227fec461c018"
+    },
+    {
+      "id": "cow",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 1.3,
+      "size": 256,
+      "material": "cattle",
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
+      "outputSha256": "94a3bb71764980d703083ca451e11c597a1ed8bd27b229cc83fa80f14aec88ca"
+    },
+    {
+      "id": "bull",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 1.45,
+      "size": 256,
+      "material": "cattle",
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
+      "outputSha256": "4e1fb8f4be44443e32568dabce8cbc5619a5860b600a01edf6b09251ff615446"
+    },
+    {
+      "id": "young-cattle",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 0.95,
+      "size": 256,
+      "material": "cattle",
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
+      "outputSha256": "60c783418217694a4727d197b5eac5f6e99af4eca4d10a5962c7f97b5d6a9e5b"
+    },
+    {
+      "id": "calf",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 0.6,
+      "size": 192,
+      "material": "cattle",
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "b370265c30d743ec1d4454ff996924c1cb0ed3d9e794b7225659efa74b0e8bf7",
+      "outputSha256": "cd1eb3f2a72ec530be2f230eab771b456b40263c4436b1219fd4c9366af62d75"
+    },
+    {
+      "id": "longship",
+      "source": "Assets/Terrain/longship-drakkar.glb",
+      "height": 2.8,
+      "size": 768,
+      "groundAnchor": [
+        0.5,
+        0.5
+      ],
+      "sourceSha256": "65a6e64e463ce78b50dfe266fae2c7e9a8578a57b7a6da80ff1cc8bc1d18dc35",
+      "outputSha256": "47f0f9286e3c55620c5621ea7666b016449653a0dc58c457bea36c63eec2b82f"
+    }
+  ],
+  "blender": "5.2.2 LTS"
+}

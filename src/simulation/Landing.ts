@@ -1,3 +1,4 @@
+import {eventFacts} from './EventFacts';
 import {canPartner} from './FamilyMechanics';
 import {farmyards} from './Farmyards';
 import type {SimulationState, Occupation} from './SimulationCore';
@@ -58,7 +59,7 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
 export type LandingCommand={type:'KeepLongship'|'SalvageLongship';longshipId:string}|{type:'AssignCattle';cattleId:string;farmyardId:string|null}|{type:'SlaughterCattle';cattleId:string};
 export function isLandingCommand(command:{type:string}):boolean {return ['KeepLongship','SalvageLongship','AssignCattle','SlaughterCattle'].includes(command.type);}
 function emit(state:SimulationState,type:string,details:Record<string,unknown>):void {
-    state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details});
+    state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details:eventFacts(state,details)});
 }
 export function applyLandingCommand(state:SimulationState,command:LandingCommand):void {
     const landing=state.landing;if(!landing)throw new Error('No landing assets');

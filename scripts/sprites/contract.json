@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "pixelsPerMeter": 48,
+  "camera": {
+    "azimuthDegrees": 45,
+    "downwardDegrees": 35.26438968
+  },
+  "groundAnchor": [
+    0.5,
+    0.5
+  ],
+  "sprites": [
+    {
+      "id": "house-0",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512
+    },
+    {
+      "id": "house-1",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "upgrade": 1
+    },
+    {
+      "id": "house-2",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "upgrade": 2
+    },
+    {
+      "id": "house-3",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "height": 4,
+      "size": 512,
+      "upgrade": 3
+    },
+    {
+      "id": "farmyard",
+      "source": "Assets/Houses/Farmyard/Hut/farm-hut.glb",
+      "height": 4,
+      "size": 512
+    },
+    {
+      "id": "cow",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 1.3,
+      "size": 256,
+      "material": "cattle"
+    },
+    {
+      "id": "bull",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 1.45,
+      "size": 256,
+      "material": "cattle"
+    },
+    {
+      "id": "young-cattle",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 0.95,
+      "size": 256,
+      "material": "cattle"
+    },
+    {
+      "id": "calf",
+      "source": "Assets/3D/Cow/Cow_output.glb",
+      "height": 0.6,
+      "size": 192,
+      "material": "cattle"
+    },
+    {
+      "id": "male",
+      "placeholder": "generic mannequin",
+      "height": 1.6,
+      "size": 192
+    },
+    {
+      "id": "female",
+      "placeholder": "generic mannequin",
+      "height": 1.6,
+      "size": 192
+    },
+    {
+      "id": "child",
+      "placeholder": "generic mannequin",
+      "height": 0.95,
+      "size": 128
+    },
+    {
+      "id": "tent",
+      "placeholder": "canvas tent",
+      "height": 2,
+      "size": 256
+    },
+    {
+      "id": "longship",
+      "source": "Assets/Terrain/longship-drakkar.glb",
+      "height": 2.8,
+      "size": 768
+    }
+  ]
+}

@@ -9,3 +9,5 @@ public/game-assets/
 public/model-preview/
 trellis-test-error.png
 __pycache__/
+scripts/sprites/imagegen-input.local.json
+public/sprites/imagegen-drafts/
