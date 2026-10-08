@@ -4,7 +4,7 @@ Date: 2026-10-08. Scope: issue #54, Simulation Core, player-visible world projec
 
 ## Result
 
-PASS: full existing/new suite (133 tests at the full-suite checkpoint), then all 13 focused expedition tests including final eligibility coverage. TypeScript and production build pass. The existing Vite chunk-size advisory remains.
+PASS after rebasing onto main with #53 merged: all 134 tests pass, including all 13 expedition tests. TypeScript and production build pass. The 13 expedition browser checks, 13 settlement browser checks, scroll/zoom regression and both route clocks were rerun successfully. The existing Vite chunk-size advisory remains.
 
 The first graph/group/cargo/casualty/transfer/save-validation tests failed before implementation. The first browser World-menu check failed before UI wiring. No mission outcome, RNG, target inventory or transfer is mocked.
 
