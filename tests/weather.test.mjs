@@ -105,3 +105,25 @@ test('Severe weather leaves calves free until the saved Adult age threshold',()=
  state=core.advanceWinter(state);assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,9);
  state=core.advanceWinter(state);assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,15);
 });
+
+test('Harsh Winters stop Food, Materials and cattle production without losing saved progress',()=>{
+ const config=forced('Harsh');config.profiles.Harsh.tentMortalityBps=0;config.profiles.Harsh.exposedCattleMortalityBps=0;
+ const initial=core.createCampaign(32,{}, {},config);
+ const food=Object.values(initial.personas).find(p=>core.inspectWork(initial,p.id).resource==='food');
+ const wood=Object.values(initial.personas).find(p=>p.occupation==='woodworker');
+ assert.equal(core.inspectWork(initial,food.id).productivityBps,0);
+ assert.equal(core.inspectWork(initial,wood.id).productivityBps,0);
+ const next=core.applyCommand(core.reconstructState(core.serializeState(initial)),{type:'AdvanceTicks',ticks:999});
+ assert.equal(next.stocks.food,initial.stocks.food);assert.equal(next.stocks.materials,initial.stocks.materials);
+ assert.equal(next.events.some(e=>e.type==='ResourceProduced'||e.type==='CattleFoodProduced'),false);
+});
+
+test('Harsh consumption adds 50% for residents and cattle after save/load, rounding each total up',()=>{
+ const config=forced('Harsh');config.profiles.Harsh.tentMortalityBps=0;config.profiles.Harsh.exposedCattleMortalityBps=0;
+ const initial=core.createCampaign(32,{...staticCattle,initialFood:100,foundingCoupleChanceBps:0},{mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:0,partnershipChanceBps:0},config);
+ const next=core.advanceWinter(core.reconstructState(core.serializeState(initial)));
+ assert.equal(next.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,5);
+ assert.equal(next.events.filter(e=>e.type==='FoodConsumed').at(-1).details.units,30);
+ assert.equal(next.stocks.food,65);
+ assert.deepEqual(next,core.advanceWinter(initial));
+});

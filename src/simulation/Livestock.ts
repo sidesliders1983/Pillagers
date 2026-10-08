@@ -6,6 +6,11 @@ export function cattleSheltered(state:SimulationState,cattle:Cattle):boolean {re
 function emit(state:SimulationState,type:string,details:Record<string,unknown>):void {state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type,details});}
 export function cattleFoodNeed(state:SimulationState):number {
     const landing=state.landing;if(!landing)return 0;
+    const modifiers=weatherProfile(state);
+    if(modifiers.cattleConsumptionBps!==undefined){
+        const base=Object.values(landing.cattle).reduce((need,c)=>need+(c.deathWinter===null?(state.time.winter-c.birthWinter>=landing.config.cattleAdultAge?landing.config.adultCattleFood:landing.config.calfFood):0),0);
+        return Math.ceil(base*modifiers.cattleConsumptionBps/10000);
+    }
     return Object.values(landing.cattle).reduce((need,c)=>need+(c.deathWinter===null?(state.time.winter-c.birthWinter>=landing.config.cattleAdultAge?landing.config.adultCattleFood*weatherProfile(state).cattleConsumptionMultiplier:landing.config.calfFood):0),0);
 }
 export function stepCattleOutput(state:SimulationState):void {
@@ -28,7 +33,8 @@ export function consumeCattleFood(state:SimulationState):void {
 export function inspectCattle(state:SimulationState,id:string) {
     const cattle=state.landing?.cattle[id];if(!cattle)throw new Error('Unknown cattle');
     const age=(cattle.deathWinter??state.time.winter)-cattle.birthWinter;
-    return {...cattle,age,stage:age<state.landing!.config.cattleYoungAdultAge?'Young':age<state.landing!.config.cattleAdultAge?'Young Adult':'Adult',sheltered:cattle.deathWinter===null&&cattleSheltered(state,cattle),overcrowding:farmyards(state).find(f=>f.id===cattle.farmyardId)?.overcrowding??0,mortalityRiskBps:cattle.deathWinter===null?cattleMortalityRisk(state,cattle):0};
+    const slaughterFood=age<state.landing!.config.cattleYoungAdultAge?5:age<state.landing!.config.cattleAdultAge?10:state.landing!.config.slaughterFood;
+    return {...cattle,age,slaughterFood,stage:age<state.landing!.config.cattleYoungAdultAge?'Young':age<state.landing!.config.cattleAdultAge?'Young Adult':'Adult',sheltered:cattle.deathWinter===null&&cattleSheltered(state,cattle),overcrowding:farmyards(state).find(f=>f.id===cattle.farmyardId)?.overcrowding??0,mortalityRiskBps:cattle.deathWinter===null?cattleMortalityRisk(state,cattle):0};
 }
 
 export function resolveCattleBirths(state:SimulationState,chance:(bps:number)=>boolean):void {

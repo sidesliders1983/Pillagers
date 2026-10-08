@@ -64,7 +64,7 @@ function aptitude(traits:CoreTraits, job:JobPrototype):number {
 }
 export function foodNeed(state:SimulationState):number {
     const config=state.mechanics!.config;
-    return cattleFoodNeed(state)+Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0);
+    return cattleFoodNeed(state)+Math.ceil((weatherProfile(state).residentConsumptionBps??10000)/10000*Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0));
 }
 export function occupationAptitude(state:SimulationState,id:string,role:Occupation):number {
     if(!state.mechanics||!Object.hasOwn(state.personas,id)||!occupationIds.includes(role))throw new Error('Unknown persona/occupation');
@@ -90,6 +90,7 @@ export function inspectWork(state:SimulationState,id:string) {
         if(simulationTick(state)<control.switchedUntilTick)efficiency=Math.floor(efficiency*config.switchProductivityBps/10000);
 
     if(job.resource==='food')efficiency=Math.floor(efficiency*weatherProfile(state).foodProductionBps/10000);
+    if(job.resource==='materials')efficiency=Math.floor(efficiency*(weatherProfile(state).materialsProductionBps??10000)/10000);
     return {aptitudeBps:aptitude(person.dna.traits,job),productivityBps:reason===null?efficiency:0,unitsPerWinter:job.unitsPerWinter,resource:job.resource,progress:person.workProgress/config.workPerUnit,reason};
 }
 export function inspectBuilding(state:SimulationState,id:string) {

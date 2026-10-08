@@ -68,7 +68,7 @@ Cattle:
 - calves consume less than adults;
 - adult cows provide modest ongoing Food;
 - cow + bull allow reproduction up to Pen capacity;
-- slaughter produces a large one-off integer Food yield and removes the animal;
+- slaughter produces a one-off Food yield by life stage: Young 5, Young Adult 10, Adult 15 (adult yield configurable); the stage follows the saved age thresholds (defaults: under 1, 1–under 2, 2+ Winters) and the animal leaves the living herd;
 - losing/slaughtering the only bull stops reproduction until another bull is acquired.
 
 Core choice:
@@ -133,3 +133,7 @@ Possible responses:
 Severe weather increases risk; it does not deterministically kill exposed personas/cattle.
 
 This reinforces the canonical language that a persona has survived **X winters**.
+
+## Current Harsh Winter economy
+
+New campaigns stop all Food and Materials production during Harsh Winters, including cow output. Resident and livestock Food consumption is 150% of baseline. Round each category total upward to whole Food units: three adult cattle require 5 instead of 3 Food. Calves with a zero baseline still consume zero. Work progress is preserved. The announced Winter rules apply through annual resolution. Existing saves retain their stored weather profiles; disabling weather preserves baseline rules.

@@ -16,7 +16,7 @@ Rules:
 **Status:** Canonical direction; values Open
 
 Initially weather affects only:
-1. Farm/Food production;
+1. Food and Materials production;
 2. cattle Food consumption/exposure;
 3. mortality risk for personas in tents;
 4. expedition/travel duration or risk.
@@ -46,3 +46,12 @@ Sequence:
 3. resolve Winter with modifiers.
 
 Possible response: housing priority, slaughter cattle, postpone raid, preserve Food/resources.
+
+## Implemented Harsh Winter production
+
+New campaigns stop all Food and Materials production during Harsh Winters, including cattle Food output. Work progress is retained. Slaughter and salvage remain explicit player commands. Existing saves preserve their stored weather profiles; a missing Materials production modifier means normal Materials output.
+
+
+## Current Harsh Winter economy
+
+New campaigns stop all Food and Materials production during Harsh Winters, including cow output. Resident and livestock Food consumption is 150% of baseline. Round each category total upward to whole Food units: three adult cattle require 5 instead of 3 Food. Calves with a zero baseline still consume zero. Work progress is preserved. The announced Winter rules apply through annual resolution. Existing saves retain their stored weather profiles; disabling weather preserves baseline rules.

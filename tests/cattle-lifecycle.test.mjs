@@ -112,3 +112,18 @@ test('legacy saves preserve custom Adult ages even when the new stage and fertil
   assert.equal(restored.landing.config.cattleBirthChanceBps,0);
  }
 });
+
+test('slaughter yields follow Young, Young Adult and Adult stages and survive save/load',()=>{
+ let state=core.createCampaign(32,{cattleBirthChanceBps:10000,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0},{mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:0});
+ state=core.advanceWinter(state);
+ const calf=Object.values(state.landing.cattle).find(c=>c.origin==='reproduction');
+ for(const [expectedStage,expectedFood] of [['Young',5],['Young Adult',10],['Adult',15]]){
+  const loaded=core.reconstructState(core.serializeState(state));
+  assert.equal(core.inspectCattle(loaded,calf.id).stage,expectedStage);
+  const slaughtered=core.applyCommand(loaded,{type:'SlaughterCattle',cattleId:calf.id});
+  assert.equal(slaughtered.stocks.food-loaded.stocks.food,expectedFood);
+  assert.equal(slaughtered.events.at(-1).details.food,expectedFood);
+  assert.throws(()=>core.applyCommand(slaughtered,{type:'SlaughterCattle',cattleId:calf.id}));
+  state=core.advanceWinter(state);
+ }
+});
