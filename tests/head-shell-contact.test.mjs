@@ -1,0 +1,66 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {BufferGeometry,Float32BufferAttribute,Mesh,MeshStandardMaterial,Vector3,Group} from 'three';
+import {loadTypeScript} from '../scripts/load-typescript.mjs';
+import {readGLB,geometryGLTF} from '../scripts/characters/glb-inspection.mjs';
+import {auditSurfaceIntersections} from '../scripts/characters/surface-intersections.mjs';
+const {headSurfaceFitter}=loadTypeScript(new URL('../src/character-lab/HeadSurfaceContactFit.ts',import.meta.url));
+const {CharacterFactory}=loadTypeScript(new URL('../src/characters/CharacterFactory.ts',import.meta.url));
+const {goldenCharacterDNA}=loadTypeScript(new URL('../src/characters/GoldenCharacters.ts',import.meta.url));
+const {goldenLabBody}=loadTypeScript(new URL('../src/characters/LabBodySources.ts',import.meta.url));
+async function fixture(){const factory=new CharacterFactory(async url=>geometryGLTF(readGLB(url.split('?')[0]))),human=await factory.create(goldenCharacterDNA('golden_masculine_01'),2,{hair:'none',beard:'none',outfit:'none',equipment:'none',technicalWaistWrap:false},{version:1,preset:'neutral',source:goldenLabBody.source}),surface=human.fit.bodyContactSurface,centre=human.fit.headFrame.bounds.getCenter(new Vector3()),size=human.fit.headFrame.bounds.getSize(new Vector3()),hit=surface.raycast([-.004663094412535429,1.6256082653999329,2],[0,0,-1],{contactZones:['HEAD']}).nearest,facet=surface.evidence().facets.find(f=>f.mesh===hit.mesh&&f.triangle===hit.triangle);return{human,surface,centre,size,hit,facet,fitter:headSurfaceFitter(surface,centre,size)};}
+function mesh(points,index=[0,1,2]){const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(points.flatMap(p=>p.toArray()),3));g.setAttribute('color',new Float32BufferAttribute(points.flatMap(()=>[1,.5,.25]),3));g.setIndex(index);return new Mesh(g,new MeshStandardMaterial());}
+function snapshot(m){return{position:Array.from(m.geometry.attributes.position.array),index:Array.from(m.geometry.index.array),color:Array.from(m.geometry.attributes.color.array)};}
+function combinedCrossings(f,meshes){const bp=f.surface.evidence().facets.flatMap(f=>f.points),bt=f.surface.evidence().facets.map((_,i)=>[i*3,i*3+1,i*3+2]),bodyCount=bt.length,points=[...bp],triangles=[...bt];for(const m of meshes){const offset=points.length,p=m.geometry.attributes.position,ix=m.geometry.index;for(let i=0;i<p.count;i++)points.push(new Vector3().fromBufferAttribute(p,i).add(f.centre).toArray());for(let t=0;t<ix.count;t+=3)triangles.push([0,1,2].map(k=>offset+ix.getX(t+k)));}const a=auditSurfaceIntersections({positions:points,triangles});return{body:a.properPairs.filter(p=>p.triangles[0]<bodyCount&&p.triangles[1]>=bodyCount).length,self:a.properPairs.filter(p=>p.triangles.every(t=>t>=bodyCount)).length};}
+test('one source map across separate inner/outer meshes preserves radial thickness, index/colors and actual body/self clearance',async()=>{
+ const f=await fixture(),anchor=new Vector3(...f.hit.point),normal=new Vector3(...f.hit.normal),base=f.facet.points.map(p=>new Vector3(...p).sub(anchor).multiplyScalar(.03).add(anchor).sub(f.centre)),inner=mesh(base.map(p=>p.clone().addScaledVector(normal,-.003))),outer=mesh(base.map(p=>p.clone().addScaledVector(normal,.0015))),before=[inner,outer].map(snapshot),radii=before.map(s=>Array.from({length:3},(_,i)=>Math.hypot(...s.position.slice(i*3,i*3+3))));
+ try{f.fitter.clearMeshes([inner,outer],-Infinity,Infinity,.001);assert.ok(inner.userData.headContactFit.radialOffsetMetres>0);assert.equal(inner.userData.headContactFit.radialOffsetMetres,outer.userData.headContactFit.radialOffsetMetres);
+  const final=[inner,outer].map(snapshot);for(let mi=0;mi<2;mi++){assert.deepEqual(final[mi].index,before[mi].index);assert.deepEqual(final[mi].color,before[mi].color);for(let i=0;i<3;i++){const p=new Vector3().fromBufferAttribute([inner,outer][mi].geometry.attributes.position,i),original=new Vector3(...before[mi].position.slice(i*3,i*3+3));assert.ok(p.clone().normalize().distanceTo(original.clone().normalize())<1e-6);assert.ok(Math.abs(p.length()-original.length()-inner.userData.headContactFit.radialOffsetMetres)<1e-7);assert.equal(f.surface.query(p.clone().add(f.centre).toArray()).classification,'outside');}}
+  for(let i=0;i<3;i++){const radius=mi=>Math.hypot(...final[mi].position.slice(i*3,i*3+3));assert.ok(Math.abs((radius(1)-radius(0))-(radii[1][i]-radii[0][i]))<1e-7);}assert.deepEqual(combinedCrossings(f,[inner,outer]),{body:0,self:0});
+ }finally{inner.geometry.dispose();outer.geometry.dispose();inner.material.dispose();outer.material.dispose();f.human.dispose();}
+});
+test('proper intermesh self crossing rejects atomically instead of repairing source topology',async()=>{
+ const f=await fixture(),anchor=new Vector3(...f.hit.point).addScaledVector(new Vector3(...f.hit.normal),.02).sub(f.centre),points=[[-.01,-.01,0],[.01,-.01,0],[0,.01,0],[-.005,0,-.01],[.005,0,.01],[.005,.008,-.01]].map(p=>new Vector3(...p).add(anchor)),a=mesh(points.slice(0,3)),b=mesh(points.slice(3)),before=[snapshot(a),snapshot(b)];
+ try{assert.ok(combinedCrossings(f,[a,b]).self>0);assert.throws(()=>f.fitter.clearMeshes([a,b],-Infinity,Infinity,.001),/source shell has proper self crossings/);assert.deepEqual([snapshot(a),snapshot(b)],before);}finally{a.geometry.dispose();b.geometry.dispose();a.material.dispose();b.material.dispose();f.human.dispose();}
+});
+test('coplanar overlapping source faces and zero-origin penetration fail before atomic mutation',async()=>{
+ const f=await fixture(),anchor=new Vector3(...f.hit.point).addScaledVector(new Vector3(...f.hit.normal),.02).sub(f.centre),a=mesh([[-.01,-.01,0],[.01,-.01,0],[0,.01,0]].map(p=>new Vector3(...p).add(anchor))),b=mesh([[-.006,-.006,0],[.006,-.006,0],[0,.006,0]].map(p=>new Vector3(...p).add(anchor))),zero=mesh([new Vector3(),new Vector3(.01,0,0),new Vector3(0,.01,0)]),before=[a,b,zero].map(snapshot);
+ try{assert.throws(()=>f.fitter.clearMeshes([a,b],-Infinity,Infinity,.001),/source shell has proper self crossings/);assert.throws(()=>f.fitter.clearMeshes([zero],-Infinity,Infinity,.001),/excessive actual-surface correction/);assert.deepEqual([a,b,zero].map(snapshot),before);}finally{for(const m of[a,b,zero]){m.geometry.dispose();m.material.dispose();}f.human.dispose();}
+});
+
+
+test('closed nested source meshes use one map and retain shell topology, orientation and radial ordering',async()=>{
+ const f=await fixture(),anchor=new Vector3(...f.hit.point),normal=new Vector3(...f.hit.normal),makePrism=(scale,low,high,reverse)=>{const base=f.facet.points.map(p=>new Vector3(...p).sub(anchor).multiplyScalar(scale).add(anchor).sub(f.centre)),points=[...base.map(p=>p.clone().addScaledVector(normal,low)),...base.map(p=>p.clone().addScaledVector(normal,high))],faces=[[0,2,1],[3,4,5],[0,1,4],[0,4,3],[1,2,5],[1,5,4],[2,0,3],[2,3,5]];return mesh(points,faces.flatMap(t=>reverse?[...t].reverse():t));},outer=makePrism(.06,-.004,.002,false),inner=makePrism(.02,-.002,0,true),meshes=[outer,inner],before=meshes.map(snapshot);
+ const volume=s=>{let value=0;for(let t=0;t<s.index.length;t+=3){const p=s.index.slice(t,t+3).map(i=>new Vector3(...s.position.slice(i*3,i*3+3)));value+=p[0].dot(p[1].clone().cross(p[2]))/6;}return value;};
+ try{for(const s of before){const edges=new Map();for(let t=0;t<s.index.length;t+=3)for(let k=0;k<3;k++){const a=s.index[t+k],b=s.index[t+(k+1)%3],key=[a,b].sort().join(',');edges.set(key,(edges.get(key)??0)+1);}assert.ok([...edges.values()].every(n=>n===2));}assert.deepEqual(combinedCrossings(f,meshes).self,0);
+  f.fitter.clearMeshes(meshes,-Infinity,Infinity,.001);const after=meshes.map(snapshot),delta=outer.userData.headContactFit.radialOffsetMetres;assert.equal(inner.userData.headContactFit.radialOffsetMetres,delta);assert.ok(delta>0);
+  for(let mi=0;mi<2;mi++){assert.deepEqual(after[mi].index,before[mi].index);assert.deepEqual(after[mi].color,before[mi].color);assert.equal(Math.sign(volume(after[mi])),Math.sign(volume(before[mi])));for(let i=0;i<6;i++){const old=new Vector3(...before[mi].position.slice(i*3,i*3+3)),p=new Vector3(...after[mi].position.slice(i*3,i*3+3));assert.ok(Math.abs(p.length()-old.length()-delta)<1e-7);assert.ok(p.clone().normalize().distanceTo(old.clone().normalize())<1e-6);}}
+  assert.deepEqual(combinedCrossings(f,meshes),{body:0,self:0});
+ }finally{for(const m of meshes){m.geometry.dispose();m.material.dispose();}f.human.dispose();}
+});
+
+
+test('actual hair and beard reject declared shell projection explicitly before cloning or source/body mutation',async()=>{
+ const f=await fixture(),{appearanceModules,disposeModules}=loadTypeScript(new URL('../src/character-lab/AppearanceModules.ts',import.meta.url)),anchor=new Vector3(...f.hit.point),normal=new Vector3(...f.hit.normal),m=mesh(f.facet.points.map(p=>new Vector3(...p).sub(anchor).multiplyScalar(.03).add(anchor).addScaledVector(normal,.0015).sub(f.centre))),source=new Group();source.add(m);
+ const before=snapshot(m),bodyBefore=JSON.stringify(f.surface.evidence()),profile={hairStyle:'short',beardStyle:'short',color:'#654832',greyAmount:0},skull=f.human.fit.cages.get('HEAD_CAGE').points.map(p=>p.clone().sub(f.centre));
+ try{for(const type of['hair','beard']){const metadata={version:'pillagers-fit/0.1',id:type+'/independent-shell-mode-fixture',type,anchor:type==='hair'?'socket_head_top':'socket_jaw',fitCage:type==='hair'?'HEAD_CAGE':'LOWER_FACE_CAGE',fitMode:'conform',clearance:.001,authoringFrame:'canonical',canonicalHeadSize:f.size.toArray(),projection:'shell',attachmentBand:{minimumY:null,maximumY:null}};
+  const render=authority=>appearanceModules(profile,f.size,2,{hair:1,beard:1,clothing:1},type==='hair'?source:null,skull,type==='beard'?source:null,metadata,f.human.fit.cages,undefined,authority);
+  assert.throws(()=>render({kind:'body-triangles',surface:f.surface,centre:f.centre}),/Declared shell projection is unsupported for coherent actual-body contact fitting/);
+  assert.deepEqual(snapshot(m),before);assert.equal(JSON.stringify(f.surface.evidence()),bodyBefore);
+  const legacy=render({kind:'legacy-convex'});disposeModules(legacy);assert.deepEqual(snapshot(m),before);
+ }}finally{m.geometry.dispose();m.material.dispose();f.human.dispose();}
+});
+test('hair and beard bake nested imported transforms once, including explicit matrices, while source clones stay immutable',async()=>{
+ const f=await fixture(),{appearanceModules,disposeModules}=loadTypeScript(new URL('../src/character-lab/AppearanceModules.ts',import.meta.url)),anchor=new Vector3(...f.hit.point),normal=new Vector3(...f.hit.normal),points=f.facet.points.map(p=>new Vector3(...p).sub(anchor).multiplyScalar(.03).add(anchor).addScaledVector(normal,.0015).sub(f.centre)),m=mesh(points),source=new Group(),nested=new Group();source.add(nested);nested.add(m);
+ source.position.set(.014,-.006,.007);source.rotation.set(.04,-.09,.07);source.scale.set(1.03,.98,1.02);source.updateMatrix();source.matrixAutoUpdate=false;
+ nested.position.set(-.008,.003,.006);nested.rotation.set(-.06,.02,.05);nested.updateMatrix();nested.matrixAutoUpdate=false;
+ m.position.set(.002,-.001,.003);m.rotation.set(.02,.03,-.04);m.updateMatrix();m.matrixAutoUpdate=false;
+ source.updateMatrixWorld(true);m.geometry.applyMatrix4(m.matrixWorld.clone().invert());
+ const treeSnapshot=g=>{const rows=[];g.traverse(o=>rows.push({name:o.name,matrix:o.matrix.toArray(),matrixWorld:o.matrixWorld.toArray(),matrixAutoUpdate:o.matrixAutoUpdate,position:o.position.toArray(),quaternion:o.quaternion.toArray(),scale:o.scale.toArray(),geometry:o.isMesh?snapshot(o):null}));return rows;},before=treeSnapshot(source),profile={hairStyle:'short',beardStyle:'short',color:'#654832',greyAmount:0},skull=f.human.fit.cages.get('HEAD_CAGE').points.map(p=>p.clone().sub(f.centre));
+ try{for(const type of['hair','beard']){const metadata={version:'pillagers-fit/0.1',id:type+'/nested-transform-fixture',type,anchor:type==='hair'?'socket_head_top':'socket_jaw',fitCage:type==='hair'?'HEAD_CAGE':'LOWER_FACE_CAGE',fitMode:'conform',clearance:.001,authoringFrame:'canonical',canonicalHeadSize:f.size.toArray(),projection:'outward',attachmentBand:{minimumY:null,maximumY:null}},result=appearanceModules(profile,f.size,2,{hair:1,beard:1,clothing:1},type==='hair'?source:null,skull,type==='beard'?source:null,metadata,f.human.fit.cages,undefined,{kind:'body-triangles',surface:f.surface,centre:f.centre});
+  try{let fitted;result.updateMatrixWorld(true);result.traverse(o=>{if(o.isMesh)fitted=o;});assert.ok(fitted);assert.equal(fitted.matrixAutoUpdate,false);assert.equal(fitted.userData.headContactFit.radialOffsetMetres,0);
+   for(let i=0;i<3;i++)assert.ok(new Vector3().fromBufferAttribute(fitted.geometry.attributes.position,i).applyMatrix4(fitted.matrixWorld).distanceTo(points[i])<3e-8);
+   result.traverse(o=>{assert.ok(o.matrix.equals(new Group().matrix));});assert.deepEqual(treeSnapshot(source),before);assert.deepEqual(combinedCrossings(f,[fitted]),{body:0,self:0});
+  }finally{disposeModules(result);}
+ }}finally{m.geometry.dispose();m.material.dispose();f.human.dispose();}
+});

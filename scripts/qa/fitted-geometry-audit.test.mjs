@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {inspectFittedGeometry, runtimeTriangleBudget} from './fitted-geometry-audit.mjs';
+const positions=[[0,0,0],[.1,0,0],[0,.1,0],[1,1,1]];
+const geometry=(rows,indices,uvRows=rows)=>({attributes:{position:{count:rows,getX:i=>positions[i][0],getY:i=>positions[i][1],getZ:i=>positions[i][2]},normal:{count:rows},uv:{count:uvRows}},
+  index:indices?{count:indices.length,getX:i=>indices[i]}:null});
+const stale=inspectFittedGeometry(geometry(4,[0,1,2]));
+assert.equal(stale.unusedPositionRows,1);
+assert.equal(stale.unusedAttributeRows,3,'Compaction must remove stale position, normal and UV rows');
+assert.equal(inspectFittedGeometry(geometry(3,[0,1,2])).unusedAttributeRows,0);
+assert.equal(inspectFittedGeometry(geometry(3,null)).unusedAttributeRows,0);
+const malformed=inspectFittedGeometry(geometry(3,[0,1,2,7],2));
+assert.equal(malformed.invalidIndexEntries,1);
+assert.equal(malformed.missingAttributeRows,1);
+assert.equal(inspectFittedGeometry(geometry(3,[0,1,2])).degenerateTriangles,0);
+assert.equal(inspectFittedGeometry(geometry(3,[0,1,2]),i=>[i*.1,0,0]).degenerateTriangles,1,'A source triangle can collapse only after posing');
+const invalidPose=inspectFittedGeometry(geometry(3,[0,1,2]),i=>i===2?[NaN,0,0]:positions[i]);
+assert.equal(invalidPose.nonFinitePositionRows,1);assert.equal(invalidPose.degenerateTriangles,0,'Invalid positions are reported without pretending to measure their area');
+assert.equal(inspectFittedGeometry(geometry(4,[0,1,2]),i=>i===3?[NaN,0,0]:positions[i]).nonFinitePositionRows,0,'Unreferenced rows remain a buffer-compaction finding');
+assert.equal(runtimeTriangleBudget({type:'garment',budgets:{runtimeTriangles:5000}}),4400);
+assert.equal(runtimeTriangleBudget({type:'garment',budgets:{runtimeTriangles:4000}}),4000);
+console.log('Fitted buffer/pose audit: compact/stale/missing/invalid rows, collapsed/non-finite posed faces and hard 4400 garment ceiling pass.');

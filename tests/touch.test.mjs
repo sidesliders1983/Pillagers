@@ -1,4 +1,5 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {PerspectiveCamera,Mesh,PlaneGeometry,MeshBasicMaterial} from 'three';import {load} from './load-source.mjs';
+const {worldConfig}=load('../src/config/worldConfig.ts');
 const {TouchGestures}=load('../src/camera/TouchGestures.ts');
 const {RTSCameraController}=load('../src/camera/RTSCameraController.ts');
 function events(){const result=[];const gesture=new TouchGestures({navigate:(...v)=>result.push(['tap',...v]),rotate:(...v)=>result.push(['rotate',...v]),zoom:r=>result.push(['zoom',r])});return {gesture,result};}
@@ -25,7 +26,7 @@ send('pointerdown',2,300,300);send('pointermove',2,400,300);send('pointerup',2,4
 assert.ok(controller.focus.distanceTo(center)<.001);assert.ok(camera.position.distanceTo(before)>5);assert.ok(Math.abs(camera.position.distanceTo(center)-radius)<.001);
 send('pointerdown',3,300,300);send('pointerdown',4,500,300);send('pointermove',4,400,300);controller.update(2);assert.ok(camera.position.distanceTo(center)>radius*1.5);
 send('pointermove',4,10000,300);controller.update(2);assert.ok(camera.position.distanceTo(center)>15&&camera.position.distanceTo(center)<16.1);
-send('pointermove',4,320,300);controller.update(2);assert.ok(camera.position.distanceTo(center)>68.8&&camera.position.distanceTo(center)<70);
+send('pointermove',4,320,300);controller.update(2);assert.ok(Math.abs(camera.position.distanceTo(center)-worldConfig.camera.maxZoom*Math.hypot(.8,.7))<.01);
 send('pointerup',4,320,300);send('pointerup',3,300,300);controller.update(2);assert.ok(controller.focus.distanceTo(center)<.001);
 plane.geometry.dispose();plane.material.dispose();delete globalThis.window;
 });
@@ -41,4 +42,19 @@ test('resident selection consumes taps and clicks while drags and pinch never se
  send('pointerdown','touch',4,300,300);send('pointermove','touch',4,360,300);send('pointerup','touch',4,360,300);assert.equal(selected.length,2);
  send('pointerdown','touch',5,300,300);send('pointerdown','touch',6,500,300);send('pointermove','touch',6,400,300);send('pointerup','touch',6,400,300);send('pointerup','touch',5,300,300);assert.equal(selected.length,2);
  delete globalThis.window;
+});
+
+test('right mouse drag orbits horizontally and vertically without panning or selecting, and stops on release',()=>{
+ const handlers=new Map(),windowHandlers=new Map();globalThis.window={addEventListener:(name,fn)=>windowHandlers.set(name,fn)};
+ const canvas={addEventListener:(name,fn)=>handlers.set(name,fn),setPointerCapture(){},getBoundingClientRect:()=>({left:0,top:0,width:800,height:600})};
+ const camera=new PerspectiveCamera(45,800/600,.1,240),controller=new RTSCameraController(camera,canvas);let selections=0;
+ controller.setSelectionHandler(()=>{selections++;return true;});const center=controller.focus.clone(),before=camera.position.clone(),radius=camera.position.distanceTo(center);
+ const send=(name,dx=0,dy=0)=>handlers.get(name)({pointerId:1,pointerType:'mouse',button:2,clientX:300,clientY:300,movementX:dx,movementY:dy,preventDefault(){}});
+ send('pointerdown');send('pointermove',90,60);controller.update(3);
+ assert.ok(controller.focus.distanceTo(center)<1e-6);assert.ok(camera.position.distanceTo(before)>5);assert.ok(camera.position.y>before.y);assert.ok(Math.abs(camera.position.distanceTo(center)-radius)<1e-5);
+ send('pointermove',0,10000);controller.update(3);assert.ok(Math.abs(Math.asin((camera.position.y-center.y)/radius)-worldConfig.camera.touch.maxElevation)<1e-5);
+ send('pointermove',0,-10000);controller.update(3);assert.ok(Math.abs(Math.asin((camera.position.y-center.y)/radius)-worldConfig.camera.touch.minElevation)<1e-5);
+ send('pointerup');const stopped=camera.position.clone();send('pointermove',80,80);controller.update(3);assert.ok(camera.position.distanceTo(stopped)<1e-5);assert.equal(selections,0);
+ send('pointerdown');windowHandlers.get('blur')();send('pointermove',80,80);controller.update(3);assert.ok(camera.position.distanceTo(stopped)<1e-5);
+ let prevented=false;handlers.get('contextmenu')({preventDefault(){prevented=true;}});assert.ok(prevented);delete globalThis.window;
 });

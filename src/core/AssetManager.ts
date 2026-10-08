@@ -1,19 +1,26 @@
 import { Box3, Color, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { generatedHouseFiles } from '../config/HousingAssets';
 import { worldConfig } from '../config/worldConfig';
 import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 const registry = { spruce: 'spruce-tree', birch: 'birch-tree', boulder: 'boulder', cliff: 'fjord-cliff-rock', greatHall: 'great-hall', hut: 'turf-dwelling', storehouse: 'stabbur-storehouse', hearth: 'cooking-hearth', well: 'village-well', logs: 'log-pile', barrel: 'barrel', crate: 'storage-crate', boat: 'faering-rowboat', jetty: 'jetty-pier', heather: 'heather-shrub', grass: 'grass-tuft', fish: 'fish-drying-rack', rune: 'runestone' };
-export type AssetKey = keyof typeof registry;
+export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles;
 export class AssetManager {
     readonly windowMaterials:MeshStandardMaterial[]=[];
     readonly fireMaterials:MeshStandardMaterial[]=[];
     private models = new Map<AssetKey, Group>();
     private draco = new DRACOLoader().setDecoderPath(`${import.meta.env.BASE_URL}draco/`);
-    private loader = new GLTFLoader().setDRACOLoader(this.draco);
+    private loader = new GLTFLoader().setDRACOLoader(this.draco).setMeshoptDecoder(MeshoptDecoder);
     async load() {
-        await Promise.all((Object.keys(registry) as AssetKey[]).map(async (key) => {
-            const { scene } = await this.loader.loadAsync(`${import.meta.env.BASE_URL}assets/Terrain/${registry[key]}.glb`);
+        const response=await fetch(import.meta.env.BASE_URL+'game-assets/houses/manifest.json');
+        if(!response.ok)throw new Error('Generated house assets missing; run pnpm assets:houses');
+        const manifest=await response.json() as {assets:Partial<Record<keyof typeof generatedHouseFiles,{file:string}>>};
+        const generated=Object.entries(manifest.assets).map(([key,entry])=>({key:key as AssetKey,url:import.meta.env.BASE_URL+'game-assets/houses/'+entry!.file,authored:true}));
+        const scenery=(Object.keys(registry) as (keyof typeof registry)[]).filter(key=>key!=='hut'&&key!=='greatHall').map(key=>({key:key as AssetKey,url:import.meta.env.BASE_URL+'assets/Terrain/'+registry[key]+'.glb',authored:false}));
+        await Promise.all([...scenery,...generated].map(async ({key,url,authored}) => {
+            const { scene } = await this.loader.loadAsync(url);
             // Pack nodes have centered translations: normalize actual world bounds to a grounded pivot.
             scene.updateMatrixWorld(true);
             const bounds = new Box3().setFromObject(scene), center = bounds.getCenter(new Vector3());
@@ -25,7 +32,7 @@ export class AssetManager {
                 if (node instanceof Mesh) {
                     // Apply the illustrative palette once at load time; source GLBs stay untouched.
                     const colors = node.geometry.getAttribute('color');
-                    if (colors) {
+                    if (colors && !authored) {
                         const windows=key==='greatHall'||key==='hut'||key==='storehouse';
                         const position=node.geometry.getAttribute('position'),point=new Vector3();
                         const emissive=(windows||key==='hearth')?splitEmissiveSurfaces(node,i=>{
@@ -60,17 +67,19 @@ export class AssetManager {
                     node.castShadow = true;
                     node.receiveShadow = true;
                     for (const material of Array.isArray(node.material) ? node.material : [node.material])
-                        if (material instanceof MeshStandardMaterial) {
+                        if (material instanceof MeshStandardMaterial && !authored) {
                             material.roughness = 1;
                             material.metalness = 0;
                         }
                 }
             });
             root.updateMatrixWorld(true);
+            root.name=key;root.userData.authoredHousing=authored;
             this.models.set(key, root);
         }));
         this.draco.dispose();
     }
+    has(key: AssetKey){return this.models.has(key);}
     get(key: AssetKey): Object3D {
         const model = this.models.get(key);
         if (!model)

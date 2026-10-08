@@ -19,10 +19,10 @@ export function createEnvironment(assets: AssetManager) {
             const tree = key === 'spruce' || key === 'birch';
             let x = 0, z = 0;
             for (let attempt = 0; attempt < 200; attempt++) {
-                x = random() * 76 - 38;
-                z = random() * 48 - 5;
+                x = random() * 104 - 52;
+                z = random() * 64 - 5;
                 const clear = obstacles.every(o => Math.hypot(x - o.x, z - o.z) > o.r + (tree ? 2 : .9));
-                const clearing = x * x / 350 + (z - 5) * (z - 5) / 240;
+                const clearing = x * x / 1200 + (z - 18) * (z - 18) / 1050;
                 const forestEdge = 1 + .14 * Math.sin(x * .35 + z * .22);
                 if (clear && pathWeight(x, z) < .08 && (tree ? clearing > forestEdge : clearing > .18))
                     break;
@@ -37,6 +37,7 @@ export function createEnvironment(assets: AssetManager) {
             if (!(child instanceof Mesh))
                 return;
             const instances = new InstancedMesh(child.geometry, child.material, count);
+            instances.userData.seasonalFoliage=key!=='boulder';
             transforms.forEach((transform, i) => instances.setMatrixAt(i, matrix.multiplyMatrices(transform, child.matrixWorld)));
             instances.castShadow = key === 'spruce' || key === 'birch' || key === 'boulder';
             instances.receiveShadow = true;

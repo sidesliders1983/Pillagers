@@ -1,0 +1,466 @@
+{
+  "reviewRequired": false,
+  "kind": "hair",
+  "style": "short",
+  "lod": 0,
+  "source": "scratch/appearance-pass/agent-a/clean-v12/hair/short/Hair_short_LOD2.glb",
+  "sourceSha256": "cbde631ced7ed2f0df2ff0f7a3bbd221432b257ed085074a8402b5367e7f845b",
+  "outputSha256": "c2f5446acc30e2e1d2eeda0a11b874ac9ea14853c511f19476615a4e90da9cfd",
+  "sourceProvenance": {
+    "outputSha256": "cbde631ced7ed2f0df2ff0f7a3bbd221432b257ed085074a8402b5367e7f845b",
+    "qualifiedCandidateAuthoring": {
+      "reviewRequired": true,
+      "style": "short",
+      "lod": 2,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\final-v2\\hair\\short\\Hair_short_LOD2.glb",
+      "sourceSha256": "c10f72c122a729870b59e9c1ed53a4030d0ae2864ff87934e5edf7b8d9f971e3",
+      "outputSha256": "cbde631ced7ed2f0df2ff0f7a3bbd221432b257ed085074a8402b5367e7f845b",
+      "sourceProvenance": {
+        "reviewRequired": true,
+        "style": "short",
+        "lod": 2,
+        "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-pass\\agent-a\\direct-short\\hair\\short\\Hair_short_LOD2.glb",
+        "sourceSha256": "48a0a1de12b4d74914b52d472f2b47660386f9ff820b10f08d1b08679f9f4009",
+        "outputSha256": "c10f72c122a729870b59e9c1ed53a4030d0ae2864ff87934e5edf7b8d9f971e3",
+        "sourceProvenance": {
+          "reviewRequired": true,
+          "style": "short",
+          "lod": 2,
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb",
+          "sourceSha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860",
+          "outputSha256": "48a0a1de12b4d74914b52d472f2b47660386f9ff820b10f08d1b08679f9f4009",
+          "sourceProvenance": {
+            "reference": {
+              "style": "short",
+              "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+              "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+              "crop": [
+                34,
+                30,
+                232,
+                316
+              ],
+              "matte": "birefnet-general-lite",
+              "input": "scratch\\appearance-v02\\short\\reference.png",
+              "inputSha256": "c0b46a50bdf8c3148f360b4cab4045178d58cd530a09b4a0b84dd7e2cff6b169",
+              "redrawn": false
+            },
+            "backend": "pixal3d",
+            "generation": {
+              "backend": "pixal3d",
+              "components": [],
+              "input": {
+                "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\reference.png",
+                "sha256": "c0b46a50bdf8c3148f360b4cab4045178d58cd530a09b4a0b84dd7e2cff6b169"
+              },
+              "license": {
+                "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+                "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+              },
+              "output": {
+                "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb",
+                "sha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860"
+              },
+              "parameters": {
+                "fov": 0.3490658503988659,
+                "gsh": null,
+                "gss": 10,
+                "matted": true,
+                "res": 1024,
+                "seed": 1983,
+                "steps": 12
+              },
+              "schema_version": 1,
+              "timings_seconds": {
+                "total": 3090.2
+              }
+            },
+            "reviewRequired": true,
+            "output": {
+              "sha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860",
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb"
+            }
+          },
+          "geometryOptimization": {
+            "rawTriangles": 990908,
+            "fullBustTriangleBudget": 4500,
+            "outputTriangles": 2149,
+            "extractionOrder": "optimize closed reference bust, then classify reduced source surfaces",
+            "classification": {
+              "minValue": 0.03,
+              "maxValue": 0.69,
+              "maxSaturation": 0.65
+            },
+            "microIslandArea": 0.015
+          },
+          "fit": {
+            "authoringFrame": "canonical",
+            "up": "+Y",
+            "front": "+Z",
+            "origin": "fixed skull centre",
+            "canonicalHeadSize": [
+              0.1992,
+              0.2397,
+              0.2189
+            ]
+          }
+        },
+        "geometryOptimization": {
+          "outputTriangles": 2149,
+          "removedUnrelatedIslandFaces": 0,
+          "facetedNormals": true,
+          "profileMaterialCount": 1
+        },
+        "fit": {
+          "authoringFrame": "canonical",
+          "up": "+Y",
+          "front": "+Z",
+          "origin": "fixed skull centre",
+          "canonicalHeadSize": [
+            0.1992,
+            0.2397,
+            0.2189
+          ]
+        }
+      },
+      "geometryOptimization": {
+        "outputTriangles": 1750,
+        "removedUnrelatedIslandFaces": 0,
+        "removedAnatomicalFaces": 399,
+        "repairedEnclosedHoleFaces": 0,
+        "facetedNormals": true,
+        "profileMaterialCount": 1
+      },
+      "fit": {
+        "authoringFrame": "canonical",
+        "up": "+Y",
+        "front": "+Z",
+        "origin": "fixed skull centre",
+        "canonicalHeadSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      }
+    },
+    "generatedBust": {
+      "reference": {
+        "style": "short",
+        "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+        "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+        "crop": [
+          34,
+          30,
+          232,
+          316
+        ],
+        "matte": "birefnet-general-lite",
+        "input": "scratch\\appearance-v02\\short\\reference.png",
+        "inputSha256": "c0b46a50bdf8c3148f360b4cab4045178d58cd530a09b4a0b84dd7e2cff6b169",
+        "redrawn": false
+      },
+      "backend": "pixal3d",
+      "generation": {
+        "backend": "pixal3d",
+        "components": [],
+        "input": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\reference.png",
+          "sha256": "c0b46a50bdf8c3148f360b4cab4045178d58cd530a09b4a0b84dd7e2cff6b169"
+        },
+        "license": {
+          "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+          "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+        },
+        "output": {
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb",
+          "sha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860"
+        },
+        "parameters": {
+          "fov": 0.3490658503988659,
+          "gsh": null,
+          "gss": 10,
+          "matted": true,
+          "res": 1024,
+          "seed": 1983,
+          "steps": 12
+        },
+        "schema_version": 1,
+        "timings_seconds": {
+          "total": 3090.2
+        }
+      },
+      "reviewRequired": true,
+      "output": {
+        "sha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860",
+        "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb"
+      }
+    },
+    "historicalPublishedProvenance": {
+      "style": "short",
+      "lod": 0,
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\lods-1600-1100-800\\Hair_short_LOD0.glb",
+      "sourceSha256": "b4e634a95190214b7fc60a5f3c9393cdd93286760950cab601d534ace7a02edb",
+      "outputSha256": "5230753fdd064f2835c5ed69f0e35eaca0057153a71ef27a43bd02086b18375d",
+      "fit": {
+        "sourceSkullCentre": [
+          0,
+          0,
+          0.075
+        ],
+        "scale": 0.52,
+        "rotateBlenderZ": 180,
+        "headReferenceSize": [
+          0.1992,
+          0.2397,
+          0.2189
+        ]
+      },
+      "removedSmallComponentVertices": 159,
+      "sourceProvenance": {
+        "generatedBust": {
+          "reference": {
+            "style": "short",
+            "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\B0486BFE-A730-4235-9B56-A992B6B500D2\\2-Foto-2.jpg",
+            "referenceSha256": "1335476373ff094d9576a2dd327b7a4ae6615471986567b28a11f54153860486",
+            "crop": [
+              34,
+              30,
+              232,
+              316
+            ],
+            "matte": "birefnet-general-lite",
+            "input": "scratch\\appearance-v02\\short\\reference.png",
+            "inputSha256": "c0b46a50bdf8c3148f360b4cab4045178d58cd530a09b4a0b84dd7e2cff6b169",
+            "redrawn": false
+          },
+          "backend": "pixal3d",
+          "generation": {
+            "backend": "pixal3d",
+            "components": [],
+            "input": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\reference.png",
+              "sha256": "c0b46a50bdf8c3148f360b4cab4045178d58cd530a09b4a0b84dd7e2cff6b169"
+            },
+            "license": {
+              "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+              "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+            },
+            "output": {
+              "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb",
+              "sha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860"
+            },
+            "parameters": {
+              "fov": 0.3490658503988659,
+              "gsh": null,
+              "gss": 10,
+              "matted": true,
+              "res": 1024,
+              "seed": 1983,
+              "steps": 12
+            },
+            "schema_version": 1,
+            "timings_seconds": {
+              "total": 3090.2
+            }
+          },
+          "reviewRequired": true,
+          "output": {
+            "sha256": "5d0714aafa514553758217d2412001423c42d3d7d7c82199560b3d99ffda8860",
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb"
+          }
+        },
+        "backend": "pixal3d",
+        "reviewRequired": true,
+        "extraction": {
+          "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\generated.glb",
+          "selectedFaces": 355893,
+          "fraction": 0.35915629408808436,
+          "classification": "value 0.07..0.65, saturation <0.50, at least two thirds of UV corner samples",
+          "reviewRequired": true
+        },
+        "output": {
+          "sha256": "f709f0dc0dd86b875647585cb0e647fdb4770d4bb7cad478b41563da46a16ace",
+          "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\appearance-v02\\short\\hair-candidate.glb"
+        }
+      }
+    }
+  },
+  "fit": {
+    "authoringFrame": "canonical",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "fixed skull centre",
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "attachmentMetadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "hair/short",
+    "type": "hair",
+    "anchor": "socket_head_top",
+    "fitCage": "HEAD_CAGE",
+    "fitMode": "conform",
+    "clearance": 0.004,
+    "authoringFrame": "canonical",
+    "sourceStyle": "short",
+    "projection": "outward",
+    "subdivisions": 0,
+    "attachmentBand": {
+      "minimumY": -0.45
+    },
+    "canonicalHeadSize": [
+      0.1992,
+      0.2397,
+      0.2189
+    ]
+  },
+  "geometryOptimization": {
+    "outputTriangles": 1750,
+    "profileMaterialCount": 1,
+    "facetedNormals": true,
+    "canonicalAuthoring": true,
+    "prototypeTierPolicy": "same source-qualified canonical surface in every declared tier",
+    "geometryAndMaterialBINUnchanged": true,
+    "aliasNameOnly": true
+  },
+  "referenceReview": {
+    "qualification": "independent pinned private-candidate PASS",
+    "sourceSha256": "cbde631ced7ed2f0df2ff0f7a3bbd221432b257ed085074a8402b5367e7f845b",
+    "evidence": "artifacts/appearance-pass/agent-d/short-bun-matrix/verdict.json",
+    "evidenceSha256": "0be961ec63cc5b7c19bbba27f561bde461312ec6fc00454f821cab4c78d7dacc",
+    "candidateVerdict": "PASS candidate v12. Continuous covered crown across inspected 12 Golden endpoints, anatomy ear/neck ribbon removed, retained small connected angular hair tips are intentional. No unacceptable head intersections, floating anatomy or detached seams in inspected motion poses. Ratio1.3 creates intended extra clearance.",
+    "scope": "Reuse only for identical public GLB SHA, effective canonical metadata and relevant hair fitting behavior. Final registry/build and actual Character Lab desktop/mobile smoke remain required.",
+    "testedMetadata": {
+      "version": "pillagers-fit/0.1",
+      "id": "hair/short",
+      "type": "hair",
+      "anchor": "socket_head_top",
+      "fitCage": "HEAD_CAGE",
+      "fitMode": "conform",
+      "clearance": 0.004,
+      "authoringFrame": "canonical",
+      "sourceStyle": "short",
+      "projection": "outward",
+      "subdivisions": 0,
+      "attachmentBand": {
+        "minimumY": -0.45
+      },
+      "canonicalHeadSize": [
+        0.1992,
+        0.2397,
+        0.2189
+      ]
+    },
+    "testedImplementation": [
+      {
+        "url": "http://127.0.0.1:4176/scripts/qa/appearance-review.js?t=1790962585593",
+        "sha256": "ce05c75403b3876d35d72835b14bf5f1bd1f62d724a9e349b98ab44170eb3f7c",
+        "bytes": 42680
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFactory.ts?t=1790962585593",
+        "sha256": "4586779ee863ddf9d141ece165cb75f9b3dda6588959c327d948cb0202808b25",
+        "bytes": 21184
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHumanProfile.ts?t=1790958586645",
+        "sha256": "1dc276b995d3c7ef0b0bb916c834b87ce1f9fa7ae2bb6d93ad88cf060865e001",
+        "bytes": 12936
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GoldenCharacters.ts",
+        "sha256": "6794088ed4ccf477c7f3a9a58262d51c664a8fee60a78b2bfe7ba56f913bba1a",
+        "bytes": 8921
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssets.ts?t=1790958586645",
+        "sha256": "1e37b007f1c5f9f47562ac6391f7f641bff214c4a15c0c717aef2400cac1b762",
+        "bytes": 24199
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterDNA.ts",
+        "sha256": "ffe0633da1dbfcbf2f66eca19c75a6e5fe1ace47cf377dfa5d45d3f8ccd2cf5e",
+        "bytes": 28757
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/generatePhenotype.ts",
+        "sha256": "1f5d86cf38e53f6ab12f37b4d56d4e008171db17da995b49143825a71df7bbe7",
+        "bytes": 11472
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/AttachmentContract.ts?t=1790958586645",
+        "sha256": "af7ae649075f54372dfbb5450cb258a0075e8d9f1d3bc40bdbabe35a8cd2b287",
+        "bytes": 24988
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/UniversalHuman.ts?t=1790962585593",
+        "sha256": "122f3d92f5bd43e0369b7833dbdf6cf9f78fcfcd7885c19b19a43904045c6ba2",
+        "bytes": 49503
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/seededRandom.ts",
+        "sha256": "47adc048e465a34962efe4bbcf5c34d57a8074c0c8c9836588f0ab7b2925b652",
+        "bytes": 2097
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAppearance.ts?t=1790958586645",
+        "sha256": "fc47dd2eb0838253573cafee33615c46936b8c1b659d8041abce9a9f856e1ec0",
+        "bytes": 6768
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterAssetMeasurements.ts",
+        "sha256": "b93b6589488eeec197265a56d31c209330fd738b5af61d0ad08a262c8ad50d98",
+        "bytes": 48951
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFrames.ts",
+        "sha256": "6c89ab981edc9a9833414bcd181eed3ef59f9620849091484e0acaf35ac2dac1",
+        "bytes": 21913
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/ReferenceGarmentFrames.ts",
+        "sha256": "48da0d843405af5a551699374ab2c6501c83ba9996d6913fb6f75f0d0c69b2ac",
+        "bytes": 20068
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/heritageProfiles.ts",
+        "sha256": "7a32de2110ecc6be588d2ddb1db4490c79e65aaf61857c38e10613aec2868552",
+        "bytes": 5971
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SoftBodySpring.ts",
+        "sha256": "e2795000e8e08a62352436909680641c56d84aea6a4c59c45eec9174681809e0",
+        "bytes": 2850
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/SkinTint.ts",
+        "sha256": "bcdb38a3df881e6742563848f89b309f444e92852b31f4deb0147ca6d92879e0",
+        "bytes": 5109
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/CharacterFitSystem.ts?t=1790958586645",
+        "sha256": "645db274b67ff57a3c752262cfab356063ef016c2fa1e0712aa292e9c3018e55",
+        "bytes": 50296
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/AppearanceModules.ts?t=1790958586645",
+        "sha256": "8c8dc58e3970f88e2a97e94d8ab2370794fc9fc551744c3ea78511dc43f24ba0",
+        "bytes": 43387
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/characters/GarmentFit.ts?t=1790962585593",
+        "sha256": "91bd40dec9f6869bcf28e473fd31972b897b71fafc2db04d89751a48e0a8fe0e",
+        "bytes": 113678
+      },
+      {
+        "url": "http://127.0.0.1:4176/src/character-lab/ReferenceHeadFit.ts?t=1790958586645",
+        "sha256": "a5d057b88c4de777f4a4cda2a1e01ac7750e3fe0c80fb77f752602f1c7533ea8",
+        "bytes": 3330
+      }
+    ],
+    "finalActualPublicGate": "pending final registry/build and independent actual-public Character Lab review"
+  }
+}

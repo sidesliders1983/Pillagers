@@ -39,13 +39,13 @@ Use `http://<computer-Wi-Fi-IP>:5175/` (development) or `http://<computer-Wi-Fi-
 
 Mobile controls: tap a location to move the camera center there; swipe horizontally to rotate around that center, vertically to adjust the orbit elevation. Pinch fingers together to zoom out; spread them apart to zoom in. A pinch never turns into an accidental tap when one finger lifts. Mouse/keyboard controls remain available. Gesture settings and zoom/elevation limits live in `worldConfig.camera.touch`.
 
-## Character Lab v0.2
+## Character Lab v0.4
 
-Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Edit sex, age, seed, five traits and six normalized heritage shares; preview the derived low-poly mannequin and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
+Open `/character-lab` or use Character Lab in the world's ⋯ menu. The same route works in the LAN preview, including mobile. Derive sex with the Femininity ↔ Masculinity slider (50% is skipped); edit age, seed, five traits and six normalized heritage shares; preview the image-generated Universal Human and live occupation-fit scores. Pin a comparison to inspect one-trait changes or seed variation, and use DNA JSON to import, copy or export a character.
 
 Personal names now derive deterministically from heritage, sex, local culture and seed. The dominant heritage automatically chooses the naming culture; reroll only the name while preserving appearance. Naming configuration travels with DNA JSON and pinned comparisons. See [Naming v0.2](docs/CHARACTER-NAMING-V02.md) for curated patterns, patronymics and the historical/art-direction boundaries.
 
-The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. See [Character Lab design and limitations](docs/CHARACTER-LAB-V01.md) for the generation model, occupation formulas and the boundary for replacing the mannequin with a real mesh. Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
+The model is independent of Three.js. Physicality/Agility influence build, while Intelligence/Cunning affect tendencies and fit without changing facial anatomy. In Character Lab, Intelligence also reduces a seeded caricature weight deviation: low values allow an exaggerated belly or underweight; high values approach balanced body weight. Heritage uses overlapping illustrative art probabilities. The ten world residents use the same DNA generator and phenotype mannequins. The Lab has one shared child/teen/adult/elder rig with continuous masculinity, height, physicality/agility and seed variation, three LODs, Idle/Walk/Run and exaggerated muscle, breast and rounded hanging belly forms with damped belly/breast secondary motion, a 1.60m maximum height, and progressive slouch after 50. Hands have one bone each and attachment sockets, without finger rigging. See [Universal Human pipeline and validation](docs/UNIVERSAL-HUMAN-V01.md) and [DNA design](docs/CHARACTER-LAB-V01.md). Hair and beards are automatically derived from the profile and seed; male beards become eligible at 18, and hair/beard colours use the blended heritage palette with progressive greying only after 45. The age slider starts at 6, and Character GLB export includes modules and the shared rig. See [Universal Human v0.2](docs/UNIVERSAL-HUMAN-V02.md). Optional UI verification: `node scripts/character-lab-smoke.cjs` with Playwright installed and `PROTOTYPE_URL` set to the running server origin.
 
 ## Explore
 
@@ -82,19 +82,21 @@ The kit is kept in its original folder. The asset manager normalizes each model 
 ```sh
 npm test
 npm run build
+npm run validate:characters
 ```
 
 Tests exercise deterministic randomness, coast/hill heights, shoreline continuity, level building footprints, connected paths and ten minutes of simulated movement for all ten villagers. Optional browser smoke testing requires Playwright and Chromium installed separately; run `node scripts/browser-smoke.cjs` while the dev server is running. `PLAYWRIGHT_MODULE` can point to a preinstalled Playwright package, and `PROTOTYPE_URL` can target a production preview. It checks rendering/asset loading, keyboard pan, zoom, home and debug controls, and saves `artifacts/world-prototype.png`. `node scripts/mobile-smoke.cjs` exercises native touch events in a mobile browser context, checks terrain taps, centered swipes, conventional pinch zoom and responsive controls, and saves `artifacts/mobile-lan.png`. Set `PROTOTYPE_URL` to the LAN preview address for this check.
 
+Character Lab and World share the [Canonical Character Contract](docs/characters/character-contract.md): versioned nested CharacterDNA, Universal Human rig, #15 fit system and the [central asset registry](docs/characters/asset-registry.md). Lab JSON imports migrate legacy records to v1; exports include `schemaVersion`. Load permanent Golden Characters under Attachment & Fit debug to reproduce known morphology extremes. `npm run validate:characters` checks the registered GLBs and all Golden Characters without Blender. After publishing reviewed assets, `npm run assets:registry` regenerates measured counts, hashes and the tooling manifest. CI performs build, validation and tests; its character build works without the separately licensed scenery kit.
+
 ## Decisions and limitations
 
-- The downloaded kit contains scenery only; villagers use shared primitive geometry with four coat materials. A `Villager` can receive another visual object later.
+- The downloaded kit contains scenery only; villagers use the shared Universal Human rig at fixed LOD2. Character Lab additionally loads reviewed reference hair/beard modules.
 - Movement uses local steering and destination retries, not pathfinding. It keeps villagers on dry ground and outside major structures; it may pause or change direction near obstacles and does not handle every small prop.
 - Terrain is a deterministic faceted height field, not an infinite terrain generator. Building footprints are locally leveled and feathered into the landscape; foundations are not excavated or simulated.
 - Water is a matte, gently bobbing plane with instanced subtle ripple marks, with no reflections, shoreline shader or wave simulation. Fog and hemisphere lighting provide simple atmospheric depth; no post-processing stack.
 - Shadows use one directional light and a fixed 2048 map. Pixel ratio is capped at two; actual performance depends on hardware. Browser smoke performance on software rendering is not a hardware benchmark.
 - The production bundle currently triggers Vite's 500 kB chunk advisory; it builds successfully. Three.js and GLTF decoding account for most of the bundle.
-- This directory began with only assets, without a Git checkout. No repository was initialized, no source assets were committed, and nothing was pushed or published.
 
 ## Asset license
 
@@ -113,3 +115,6 @@ The scriptable Blender character optimization benchmark and /asset-lab compariso
 ## UI language
 
 English is the default language for all user-facing UI: labels, buttons, help text, status messages and errors. Apply this rule to new features and edits across the world and all labs. Character names retain their generated cultural spelling.
+
+
+

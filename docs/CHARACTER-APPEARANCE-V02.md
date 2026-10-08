@@ -129,3 +129,26 @@ Issue #8 should align the implementation with this document: **greying starts on
 ## Design principle
 
 > **Heritage shifts the probability of the natural base shade; seed creates the individual; age changes how that same colour presents over the character's lifetime.**
+# Character Lab hair quality — 2026-10-02
+
+The lab uses one reviewed hair surface across all body LOD choices. The previous
+coarse LOD2 hair reduction created wide, sharp planes around the face. Its close
+fit also moved duplicated flat-normal/UV vertices independently, tearing seams.
+The fitting pass now moves coincident copies together.
+
+The six published Hair_*_LOD2 modules preserve the already generated, finer
+reference geometry from the existing LOD0 files. Only their node/mesh LOD label
+changes; no new style, generation, remesh, or reduction is performed.
+`scripts/prepare-hair-quality-lod2.py` prepares these files in a new scratch
+review directory and verifies source provenance. Publication follows visual
+review; `qualitySource` records the source hash and triangle budget.
+
+Budgets are 1,383 (short), 1,256 (medium), 1,919 (long), 2,333 (tied), 1,838
+(bun), and 8,886 (braid). This increases each GLB by roughly 16–48KB over the
+previous LOD2. The world prototype still loads body geometry only.
+
+Body LOD buttons remain available, with the same reviewed hair asset retained.
+Screenshots for reported seeds 847867552 (long) and 778694923 (tied), plus the
+earlier reports, are included in `scripts/appearance-head-fit-smoke.mjs` on
+desktop and mobile viewports. Actual-skull tests check triangle clearance and
+that fitting preserves coincident seam vertices.

@@ -1,0 +1,315 @@
+{
+  "reviewRequired": false,
+  "style": "cream-tunic",
+  "lod": 2,
+  "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\cream-tunic\\lod2-final\\Clothing_cream-tunic_LOD2.glb",
+  "sourceSha256": "f2fd3796944fa0f8126a07e0985001183d02faa353e0bff7a040e1116dc1ca40",
+  "outputSha256": "e70aecffd92a74cb99b40e724f43109534b249d1a8746206682d2a910b95650f",
+  "fit": {
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "ground / source skull axis",
+    "sourceUp": "+Y",
+    "sourceFront": "-Z",
+    "sourceCentreBlender": [
+      -0.013200957328081131,
+      0.02682100050151348,
+      -0.45404869318008423
+    ],
+    "scale": 1.9928522048678432,
+    "rotateBlenderZ": 180,
+    "frontMeasurement": "toe extension relative to ankle cross-section"
+  },
+  "geometryPolicy": "existing reference surfaces only; tagged drape regions; skirt underside reopened",
+  "removedFloatingFragmentFaces": 2,
+  "fragmentAreaThresholdMetresSquared": 0.004,
+  "sourceProvenance": {
+    "schemaVersion": 1,
+    "source": {
+      "file": "clothing-reviewed.glb",
+      "vertices": 577427,
+      "triangles": 754615,
+      "materials": 1,
+      "textures": 2,
+      "objects": 1,
+      "primitives": 1,
+      "bytes": 29631588,
+      "sha256": "f86d584f78a03fb7720bc5dde51b19ed446abf694ed8f7be183dd2b9bac29568",
+      "boundsBlender": {
+        "min": [
+          -0.2106960415840149,
+          -0.1135212779045105,
+          -0.45404869318008423
+        ],
+        "max": [
+          0.18161219358444214,
+          0.1113479733467102,
+          0.29827621579170227
+        ]
+      }
+    },
+    "blender": "4.5.9 LTS",
+    "settings": {
+      "voxelFraction": 0.0025,
+      "planarAngleDegrees": 6,
+      "targets": [
+        10000,
+        6000,
+        4000
+      ],
+      "textureSizes": [
+        1024,
+        512,
+        512
+      ],
+      "weldFraction": 0.0003,
+      "minimumIslandArea": 0.0002,
+      "colourTransfer": "closest",
+      "selectedLOD": 2
+    },
+    "stages": [
+      {
+        "stage": "cleanup",
+        "vertices": 372815,
+        "triangles": 753416
+      },
+      {
+        "stage": "voxel-remesh",
+        "vertices": 457252,
+        "triangles": 914384
+      },
+      {
+        "stage": "planar",
+        "vertices": 90518,
+        "triangles": 180914
+      },
+      {
+        "stage": "remove-extraction-specks",
+        "vertices": 90086,
+        "triangles": 180224
+      },
+      {
+        "stage": "Clothing_cream-tunic_LOD2",
+        "vertices": 2016,
+        "triangles": 3997
+      }
+    ],
+    "lods": [
+      {
+        "label": "LOD2",
+        "file": "Clothing_cream-tunic_LOD2.glb",
+        "target": 4000,
+        "textureSize": 512,
+        "boundsBlender": {
+          "min": [
+            -0.2094259411096573,
+            -0.11342785507440567,
+            -0.4539996087551117
+          ],
+          "max": [
+            0.18119430541992188,
+            0.1102716252207756,
+            0.29591578245162964
+          ]
+        },
+        "vertices": 11991,
+        "triangles": 3997,
+        "materials": 1,
+        "textures": 1,
+        "objects": 1,
+        "primitives": 1,
+        "bytes": 485624,
+        "sha256": "f2fd3796944fa0f8126a07e0985001183d02faa353e0bff7a040e1116dc1ca40",
+        "reductionPercent": 99.470325927791,
+        "seconds": 8.16
+      }
+    ],
+    "seconds": 58.97,
+    "sourceProvenance": {
+      "source": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\cream-tunic\\generated.glb",
+      "sourceSha256": "a09a723fd843b0ec825c996d64995c4f13d11591940df6df7888eb3bedc5e81b",
+      "outputSha256": "f86d584f78a03fb7720bc5dde51b19ed446abf694ed8f7be183dd2b9bac29568",
+      "selectedFaces": 754615,
+      "skinReferenceLinearRGB": [
+        0.7686275243759155,
+        0.5372549295425415,
+        0.46274513006210327
+      ],
+      "skinDistanceThreshold": 0.18,
+      "headCutoffHeightFraction": 0.83,
+      "reviewLayout": "cream-tunic",
+      "reviewRequired": true,
+      "rigged": false,
+      "published": false,
+      "sourceProvenance": {
+        "reference": {
+          "id": "cream-tunic",
+          "reference": "C:\\Users\\Devoteam\\.codex\\codex-remote-attachments\\01a0f2c0-b540-78d1-8a04-060b16cf5c0c\\9A79D6BF-A177-40C0-A0ED-30AE044A6380\\1-Foto-1.jpg",
+          "referenceSha256": "689092042b9a28c248d804d9bcbb007df6758497c4b518d525c1040b61a2c959",
+          "crop": [
+            20,
+            510,
+            214,
+            809
+          ],
+          "inputSha256": "6b49574c0fb0eb930c7332fb24f9cbea84ac7cd3f1b50fd565ef6808cd11367f",
+          "redrawn": false,
+          "stage": "cropped",
+          "reviewRequired": true,
+          "folder": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\cream-tunic",
+          "jobId": "clothing-v03/cream-tunic"
+        },
+        "reviewRequired": true,
+        "generation": {
+          "backend": "pixal3d",
+          "components": [],
+          "input": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\cream-tunic\\reference.png",
+            "sha256": "91fcd9ed253ddb2970629d7dc6e3aa6ef16bed87bcf2bf7ecb9765fc57f6b7f4"
+          },
+          "license": {
+            "name": "MIT (code + flow weights); DINOv3 License (bundled encoder)",
+            "url": "https://huggingface.co/raven38/pixal3d-sv-q8_0-v1"
+          },
+          "output": {
+            "path": "C:\\CodexWorkspaces\\Pillagers\\scratch\\clothing-v03\\cream-tunic\\generated.glb",
+            "sha256": "a09a723fd843b0ec825c996d64995c4f13d11591940df6df7888eb3bedc5e81b"
+          },
+          "parameters": {
+            "fov": 0.3490658503988659,
+            "gsh": null,
+            "gss": 10,
+            "matted": true,
+            "res": 1024,
+            "seed": 1983,
+            "steps": 12
+          },
+          "schema_version": 1,
+          "timings_seconds": {
+            "total": 1794.3
+          }
+        },
+        "outputSha256": "a09a723fd843b0ec825c996d64995c4f13d11591940df6df7888eb3bedc5e81b",
+        "matte": {
+          "model": "birefnet-general-lite",
+          "sourceSha256": "6b49574c0fb0eb930c7332fb24f9cbea84ac7cd3f1b50fd565ef6808cd11367f",
+          "inputSha256": "91fcd9ed253ddb2970629d7dc6e3aa6ef16bed87bcf2bf7ecb9765fc57f6b7f4",
+          "redrawn": false
+        }
+      }
+    }
+  },
+  "review": {
+    "scope": "First three reference outfits on LOD2; static fitting, no cloth simulation",
+    "runtime": "Character Lab desktop/mobile; Golden profile extremes; Idle/Walk/Run; shared-rig GLB export",
+    "views": [
+      "front",
+      "side",
+      "back"
+    ],
+    "date": "2026-10-02"
+  },
+  "outputGarmentBind": {
+    "frame": "universal-human-neutral-v1",
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z",
+    "origin": "ground",
+    "metadataSha256": "0f05a0ff9086d740506041682330d9ade88a5e708c5884236d871e4e2594d7a5",
+    "joints": {
+      "Hips": [
+        0.000004716217517852783,
+        0.9,
+        -0.012205839157104492
+      ],
+      "Chest": [
+        0.00003281235694885254,
+        1.29,
+        -0.062470465898513794
+      ],
+      "Neck": [
+        -0.000008769333362579346,
+        1.43,
+        -0.07345718145370483
+      ],
+      "UpperArm_L": [
+        0.21209441125392914,
+        1.4,
+        -0.13885741867125034
+      ],
+      "LowerArm_L": [
+        0.3113473951816559,
+        1.1,
+        -0.19208771735429764
+      ],
+      "Hand_L": [
+        0.36442068219184875,
+        0.91,
+        -0.1820245385169983
+      ],
+      "Foot_L": [
+        0.1802506297826767,
+        0.105,
+        -0.18673284351825714
+      ],
+      "Toe_L": [
+        0.2884458282538298,
+        0.05,
+        -0.11466482684103906
+      ],
+      "LowerLeg_L": [
+        0.14924559742212296,
+        0.49,
+        -0.07966508716344833
+      ],
+      "UpperLeg_L": [
+        0.11175539046525955,
+        0.9,
+        -0.012205839157104492
+      ],
+      "UpperArm_R": [
+        -0.2489216923713684,
+        1.4,
+        -0.038437023758888245
+      ],
+      "LowerArm_R": [
+        -0.34587250649929047,
+        1.1,
+        0.0391182005405426
+      ],
+      "Hand_R": [
+        -0.40422913432121277,
+        0.91,
+        0.11021037213504314
+      ],
+      "Foot_R": [
+        -0.28753453493118286,
+        0.105,
+        -0.08352511748671532
+      ],
+      "Toe_R": [
+        -0.2791577447285953,
+        0.05,
+        0.046204714802939
+      ],
+      "LowerLeg_R": [
+        -0.18878816813230515,
+        0.49,
+        -0.016908276826143265
+      ],
+      "UpperLeg_R": [
+        -0.17827141165733337,
+        0.9,
+        -0.012205839157104492
+      ]
+    },
+    "authority": "Existing registered measured reference-figure neutral import joints; emitted unchanged as the final published source pose. Not provider bones, newly inferred points or a claim of canonical skeleton equality."
+  },
+  "finalBindMetadataMigration": {
+    "at": "2026-10-03T21:08:01.558Z",
+    "inputProvenanceSHA256": "b5a3063a5cc7b4d73177f0b13bce64a66911dfb71ac3c81377e328f97121b69c",
+    "outputMeshUnchanged": true,
+    "scope": "Legacy published reference import pose receipt only. No pre-v0.4 asset is reused as new v0.4 source.",
+    "registryAuthority": "src/characters/ReferenceGarmentFrames.ts"
+  }
+}

@@ -10,21 +10,32 @@ export class CharacterProfileCard {
     private selected:Character|null=null;
     private ray=new Raycaster();private pointer=new Vector2();private anchor=new Vector3();
     private charactersByRoot=new Map<Object3D,Character>();
+    private geometry=new BoxGeometry(1,1,1);
+    private material=new MeshBasicMaterial({visible:false});
     constructor(private camera:PerspectiveCamera,private canvas:HTMLCanvasElement,private scene:Scene,characters:Character[]){
         this.card.id='character-profile';this.card.className='character-profile';this.card.hidden=true;
         for(const edge of ['top','right','bottom','left'])this.card.style.setProperty(`--safe-${edge}`,`env(safe-area-inset-${edge}, 0px)`);
         this.card.setAttribute('aria-label','Selected character profile');this.card.setAttribute('aria-live','polite');
         document.body.append(this.card);
         // A generous invisible silhouette makes small RTS characters touchable.
-        const geometry=new BoxGeometry(1,1,1),material=new MeshBasicMaterial({visible:false});
-        for(const character of characters){
-            const root=character.villager.visual,pick=new Mesh(geometry,material);
-            pick.name='character-hit-area';pick.scale.set(Math.max(.75,character.phenotype.shoulderWidth*1.5),character.phenotype.height,.75);
-            pick.position.y=character.phenotype.height/2;root.add(pick);this.charactersByRoot.set(root,character);
-        }
+        for(const character of characters)this.attach(character);
         this.card.addEventListener('click',event=>{if((event.target as HTMLElement).closest('button'))this.clear();});
         window.addEventListener('keydown',event=>{if(event.key==='Escape')this.clear();});
     }
+    private attach(character:Character){
+        const root=character.villager.visual,pick=new Mesh(this.geometry,this.material);
+        pick.name='character-hit-area';root.add(pick);this.charactersByRoot.set(root,character);this.refresh(character);
+    }
+    replace(previous:Object3D,character:Character){
+        previous.getObjectByName('character-hit-area')?.removeFromParent();
+        this.charactersByRoot.delete(previous);if(this.selected===character)this.clear();this.attach(character);
+    }
+    refresh(character:Character){
+        const pick=character.villager.visual.getObjectByName('character-hit-area');
+        if(pick){pick.scale.set(Math.max(.75,character.phenotype.shoulderWidth*1.5),character.phenotype.height,.75);pick.position.y=character.phenotype.height/2;}
+        if(this.selected===character)this.renderCard(character);
+    }
+    dispose(){this.geometry.dispose();this.material.dispose();this.card.remove();this.charactersByRoot.clear();}
     select(x:number,y:number):boolean {
         const rect=this.canvas.getBoundingClientRect();this.pointer.set((x-rect.left)/rect.width*2-1,-(y-rect.top)/rect.height*2+1);
         this.scene.updateMatrixWorld(true);this.camera.updateMatrixWorld();this.ray.setFromCamera(this.pointer,this.camera);
@@ -33,7 +44,9 @@ export class CharacterProfileCard {
         let node:Object3D|null=hit?.object??null,character:Character|undefined;
         while(node&&!character){character=this.charactersByRoot.get(node);node=node.parent;}
         if(!character){this.clear();return false;}
-        this.selected=character;
+        this.selected=character;this.renderCard(character);this.update();return true;
+    }
+    private renderCard(character:Character){
         const {dna}=character,name=characterName(dna);
         this.card.innerHTML='<button class="profile-close" aria-label="Close character profile">×</button><span class="profile-eyebrow">FJORDSIDE / INHABITANT</span><h2></h2><p class="profile-identity"></p><h3>Character traits</h3><dl class="profile-traits"></dl><h3>Heritage profile</h3><div class="profile-heritage"></div>';
         this.card.querySelector('h2')!.textContent=fullName(name);
@@ -49,7 +62,7 @@ export class CharacterProfileCard {
             label.textContent=heritageLabels[key];value.textContent=`${(dna.heritage[key]*100).toFixed(1)}%`;row.append(label,value);(index<3?heritage:minor).append(row);
         }
         if(sorted.length>3)heritage.append(minor);
-        this.card.dataset.characterId=String(character.villager.id);this.card.hidden=false;this.update();return true;
+        this.card.dataset.characterId=String(character.villager.id);this.card.hidden=false;
     }
     private clear(){this.selected=null;this.card.hidden=true;delete this.card.dataset.characterId;}
     update(){

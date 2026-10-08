@@ -1,0 +1,11 @@
+import {load} from '../tests/load-source.mjs';
+import {geometryAsset} from '../tests/glb-fixture.mjs';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {garmentAuthoringMetadata} from './characters/garment-authoring.mjs';
+const {CharacterFitSystem}=load('../src/characters/CharacterFitSystem.ts'),{calibrateGarmentSource}=load('../src/characters/GarmentFit.ts'),{characterAssets}=load('../src/characters/CharacterAssets.ts');
+const [style,folder,destination]=process.argv.slice(2);if(!style||!folder||!destination)throw new Error('Usage: canonicalize-clothing STYLE SOURCE_FOLDER DESTINATION_FOLDER');
+const asset=await geometryAsset('universal-human/UniversalHuman_LOD2.glb'),body=asset.scene.getObjectByName('UniversalHuman');asset.scene.updateMatrixWorld(true);body.skeleton.update();
+const fit=new CharacterFitSystem(asset.scene,[body],body.skeleton.bones);fit.refit();
+const source=await geometryAsset(`../scratch/agent-b/${folder}/${style}/Clothing_${style}_LOD2.glb`),registered=characterAssets.find(a=>a.id===`garment/${style}`).metadata,metadata=garmentAuthoringMetadata(registered),object=calibrateGarmentSource(source.scene,metadata,fit),meshes=[];
+object.traverse(mesh=>{if(!mesh.isMesh)return;const g=mesh.geometry;meshes.push({name:mesh.name,region:mesh.userData.garmentRegion,bindDomain:mesh.userData.garmentBindDomain,surface:mesh.userData.garmentSurface,position:Array.from(g.attributes.position.array),uv:Array.from(g.attributes.uv.array),index:Array.from(g.index.array)});});
+const directory=`scratch/agent-b/${destination}/${style}`;mkdirSync(directory,{recursive:true});writeFileSync(`${directory}/canonical-surfaces.json`,JSON.stringify({authoringCalibration:{clearance:metadata.clearance,productionClearance:registered.clearance,policy:'measured source pose coordinates only; morphology, cage collision and wear clearance are applied once at runtime equip'},garmentBind:{joints:Object.fromEntries(Object.keys(metadata.garmentBind.joints).map(name=>[name,fit.canonicalJoints.get(name).toArray()]))},meshes}));console.log(style,meshes.map(mesh=>[mesh.region,mesh.surface,mesh.index.length/3]));

@@ -1,0 +1,503 @@
+{
+  "schema": "pillagers-v04-module-authoring/1",
+  "at": "2026-10-04T04:36:27.330Z",
+  "status": "MANUAL_PREVIEW_PENDING_INDEPENDENT_LAB_MATRIX",
+  "input": {
+    "path": "scratch/meshy-api/v04-hair-short-2/model.glb",
+    "sha256": "542609505565ea119fa74f17b1bd01b5a597f483daa65bb91adcadcf7d2dd08a"
+  },
+  "output": {
+    "path": "public/character-lab/modules/v04/hair/short/short.glb",
+    "sha256": "128826eefc475d915d227579656db86e5e2c96f02682f41e2626ebd05dbab0a3",
+    "triangles": 338,
+    "renderCorners": 1014,
+    "geometricVertices": 171
+  },
+  "cleanup": {
+    "policy": "Original320 principal faces preserved; only frozen14 inner contact faces reauthored into18 intentional inner planes, removing false windows. Material maps removed, one uniform COLOR_0 region and face normals.",
+    "innerOnlyDeviationAllowanceMetres": 0.0111,
+    "originalFiveMillimetreGuidePassed": false,
+    "actualRestrictedDeviation": {
+      "actualFinitePatchMetric": {
+        "oldToNew": {
+          "lowerMetres": 0.008979502430121054,
+          "upperMetres": 0.00901167711720268,
+          "completeTerminalCellCertificate": true,
+          "cells": 210,
+          "maxWitness": {
+            "point": [
+              -0.029410956694007603,
+              1.7801367066292992,
+              0.08442916480040341
+            ],
+            "sourcePatchFace": 13,
+            "nearestTargetPatchFace": 17,
+            "distanceMetres": 0.008979502430121054
+          },
+          "maxDepth": 8,
+          "toleranceMetres": 0.000025,
+          "method": "Lower nearest-to-finite-target-triangle samples; conservative upper min over target convex triangles of max source-cell vertex distance. Convexity proves every point in each terminal source triangle is covered; no infinite plane surrogate."
+        },
+        "newToOld": {
+          "lowerMetres": 0.01106736788430011,
+          "upperMetres": 0.011094888086052222,
+          "completeTerminalCellCertificate": true,
+          "cells": 730,
+          "maxWitness": {
+            "point": [
+              -0.025499167416537336,
+              1.7733898488973612,
+              0.07428807146339933
+            ],
+            "sourcePatchFace": 14,
+            "nearestTargetPatchFace": 12,
+            "distanceMetres": 0.01106736788430011
+          },
+          "maxDepth": 8,
+          "toleranceMetres": 0.000025,
+          "method": "Lower nearest-to-finite-target-triangle samples; conservative upper min over target convex triangles of max source-cell vertex distance. Convexity proves every point in each terminal source triangle is covered; no infinite plane surrogate."
+        },
+        "maximumLowerMetres": 0.01106736788430011,
+        "maximumUpperMetres": 0.011094888086052222,
+        "restricted14To18PatchMetricNotWholeModelLowerBound": true,
+        "original5mmBudgetNotRelabeledPass": true,
+        "pending9point2mmAllowanceNotAssumed": true
+      },
+      "original5mmGuideStatus": "ORIGINAL_GUIDE_HOLD_PRESERVED_NOT_RELABELLED_PASS",
+      "coordinatorException": {
+        "authority": "/root direct task authorization2026-10-04",
+        "limitMetres": 0.011095,
+        "scope": "Inner-only old14/new18 authored source patch of frozen338. Principal320/exterior source geometry unchanged before one measured affine authoring transform. Requires actual ordinary fit and independent worn/source art; no contact/body/self/maximum-displacement tolerance change.",
+        "sourceOnlyAllowance": true,
+        "notAcceptance": true
+      },
+      "noOriginalNegativeOverwrite": true
+    },
+    "sourceAudit": {
+      "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/material-domain-004/affine-neutral-fit-001/CANONICAL-SOURCE-AUDIT.json",
+      "sha256": "93039b5b98cb104e0aeee61f9ba47032d70544c3d9267560acfcc6fd664374ce"
+    }
+  },
+  "calibration": {
+    "schema": "pillagers/short338-one-frozen-cavity-affine-neutral-diagnostic/1",
+    "status": "EXECUTED_FROZEN_AFFINE_WITH_ACTUAL_SOURCE_AND_NEUTRAL_PROOFS",
+    "diagnosticOnly": true,
+    "sourceNativeGLBPath": "scratch/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/material-domain-004/diagnostic-white-hold.glb",
+    "sourceNativeSHA256": "e809e7159612df2aea0ad1b33427a79789ae0d8afbcd428f377e5348f6628653",
+    "sourceGeometryPath": "scratch/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/material-domain-004/CANDIDATE-GEOMETRY-NEGATIVE-OR-PASS.json",
+    "sourceGeometrySHA256": "1fda2fc7058a5fc3a1dc24e11fe05ea3657fbf8ec6de18d4473220f4820a166f",
+    "bodyPath": "public/character-lab/candidates/golden-v04/body-r3.glb",
+    "bodySHA256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e",
+    "proposalPath": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/material-domain-004/cage-registration-proposal-001/POSITIVE-AFFINE-PROPOSAL.json",
+    "proposalSHA256": "84059dbc2037ef6a8de65ec19fe08ae1c9178033b6b13949506c94a76a7d5f70",
+    "affine": {
+      "nativeToBodyAuthoringWorldMatrix": [
+        0.12913762804368828,
+        0.00035593119005072893,
+        -0.00009183694657200826,
+        0,
+        -0.00035634393965641026,
+        0.17803934986694614,
+        0.009015891029370865,
+        0,
+        -0.0009831896143575186,
+        -0.039573301395929406,
+        0.19932367813515672,
+        0,
+        -0.003865495072471663,
+        1.7495285044781073,
+        0.011211602978611245,
+        1
+      ],
+      "nativeToCanonicalHeadLocalMatrix": [
+        0.12913762804368828,
+        0.00035593119005072893,
+        -0.00009183694657200826,
+        0,
+        -0.00035634393965641026,
+        0.17803934986694614,
+        0.009015891029370865,
+        0,
+        -0.0009831896143575186,
+        -0.039573301395929406,
+        0.19932367813515672,
+        0,
+        0.00011900092495723122,
+        0.066471136676441,
+        -0.0045974189115521764,
+        1
+      ],
+      "canonicalHeadOrigin": [
+        -0.003984495997428894,
+        1.6830573678016663,
+        0.01580902189016342
+      ],
+      "canonicalHeadSize": [
+        0.15981943905353546,
+        0.23388516902923584,
+        0.1831979900598526
+      ],
+      "determinant": 0.004628845745398384,
+      "singularScalesMetresPerNativeUnit": [
+        0.20886232796373577,
+        0.17162151966610356,
+        0.12913407345264444
+      ],
+      "conditionNumber": 1.6174067957387637,
+      "axisColumnLengthsMetresPerNativeUnit": [
+        0.1291381512094191,
+        0.1782678416683774,
+        0.20321648926826386
+      ],
+      "positiveOrientation": true,
+      "RMSPointResidualMetres": 0.003219015818568926,
+      "maximumPointResidualMetres": 0.0038475319413868725,
+      "clearanceBakedAgainstDeclaredFiniteTargetsMetres": 0.004,
+      "runtimeRootScaleNotBaked": [
+        1,
+        0.8,
+        1
+      ],
+      "oneTimeAuthoringFrameOnly": true
+    },
+    "centre": [
+      -0.003984495997428894,
+      1.6830573678016663,
+      0.01580902189016342
+    ],
+    "size": [
+      0.15981943905353546,
+      0.23388516902923584,
+      0.1831979900598526
+    ],
+    "landmarks": [
+      {
+        "role": "inner_crown",
+        "candidateTriangle": 7,
+        "sourceParent": 7,
+        "newInnerParents": null,
+        "point": [
+          0,
+          0.303568158465354,
+          0
+        ],
+        "barycentric": [
+          0.8691059104111594,
+          0.061480022171869375,
+          0.06941406741697131
+        ]
+      },
+      {
+        "role": "front_lower_inner_rim",
+        "candidateTriangle": 102,
+        "sourceParent": 109,
+        "newInnerParents": null,
+        "point": [
+          0,
+          -0.0070518839322315716,
+          0.46884051330887055
+        ],
+        "barycentric": [
+          0.37314251598363884,
+          3.5065333514908346e-13,
+          0.6268574840160105
+        ]
+      },
+      {
+        "role": "lower_posterior_nape_inner_rim",
+        "candidateTriangle": 152,
+        "sourceParent": 160,
+        "newInnerParents": null,
+        "point": [
+          0,
+          -0.36077980846784785,
+          -0.3376458542312278
+        ],
+        "barycentric": [
+          0.031011718964631948,
+          4.256818878209879e-12,
+          0.9689882810311112
+        ]
+      },
+      {
+        "role": "left_inner_temple_wall",
+        "candidateTriangle": 208,
+        "sourceParent": 218,
+        "newInnerParents": null,
+        "point": [
+          0.48827887476998777,
+          -0.13183529618789672,
+          0.0439450987292989
+        ],
+        "barycentric": [
+          0.006780717842167189,
+          0.004648576718420422,
+          0.9885707054394124
+        ]
+      },
+      {
+        "role": "right_inner_temple_wall",
+        "candidateTriangle": 33,
+        "sourceParent": 37,
+        "newInnerParents": null,
+        "point": [
+          -0.4745341914781305,
+          -0.12812423169909523,
+          0.04270807723303174
+        ],
+        "barycentric": [
+          0.025763352683554723,
+          0.048761622819906765,
+          0.9254750244965385
+        ]
+      }
+    ],
+    "innerRepairBudget": {
+      "actualFinitePatchMetric": {
+        "oldToNew": {
+          "lowerMetres": 0.008979502430121054,
+          "upperMetres": 0.00901167711720268,
+          "completeTerminalCellCertificate": true,
+          "cells": 210,
+          "maxWitness": {
+            "point": [
+              -0.029410956694007603,
+              1.7801367066292992,
+              0.08442916480040341
+            ],
+            "sourcePatchFace": 13,
+            "nearestTargetPatchFace": 17,
+            "distanceMetres": 0.008979502430121054
+          },
+          "maxDepth": 8,
+          "toleranceMetres": 0.000025,
+          "method": "Lower nearest-to-finite-target-triangle samples; conservative upper min over target convex triangles of max source-cell vertex distance. Convexity proves every point in each terminal source triangle is covered; no infinite plane surrogate."
+        },
+        "newToOld": {
+          "lowerMetres": 0.01106736788430011,
+          "upperMetres": 0.011094888086052222,
+          "completeTerminalCellCertificate": true,
+          "cells": 730,
+          "maxWitness": {
+            "point": [
+              -0.025499167416537336,
+              1.7733898488973612,
+              0.07428807146339933
+            ],
+            "sourcePatchFace": 14,
+            "nearestTargetPatchFace": 12,
+            "distanceMetres": 0.01106736788430011
+          },
+          "maxDepth": 8,
+          "toleranceMetres": 0.000025,
+          "method": "Lower nearest-to-finite-target-triangle samples; conservative upper min over target convex triangles of max source-cell vertex distance. Convexity proves every point in each terminal source triangle is covered; no infinite plane surrogate."
+        },
+        "maximumLowerMetres": 0.01106736788430011,
+        "maximumUpperMetres": 0.011094888086052222,
+        "restricted14To18PatchMetricNotWholeModelLowerBound": true,
+        "original5mmBudgetNotRelabeledPass": true,
+        "pending9point2mmAllowanceNotAssumed": true
+      },
+      "original5mmGuideStatus": "ORIGINAL_GUIDE_HOLD_PRESERVED_NOT_RELABELLED_PASS",
+      "coordinatorException": {
+        "authority": "/root direct task authorization2026-10-04",
+        "limitMetres": 0.011095,
+        "scope": "Inner-only old14/new18 authored source patch of frozen338. Principal320/exterior source geometry unchanged before one measured affine authoring transform. Requires actual ordinary fit and independent worn/source art; no contact/body/self/maximum-displacement tolerance change.",
+        "sourceOnlyAllowance": true,
+        "notAcceptance": true
+      },
+      "noOriginalNegativeOverwrite": true
+    },
+    "codeFiles": [
+      {
+        "path": "src/character-lab/HeadSurfaceContactFit.ts",
+        "sha256": "98ab929474432d487f8aeca2db8e9a62faa246a74084fc5c1b8aaa39176396cf"
+      },
+      {
+        "path": "src/character-lab/AppearanceModules.ts",
+        "sha256": "651795910f247ba7e8b979be627a961db0daa4ca0d824655b5c1a23557441718"
+      }
+    ],
+    "metadata": {
+      "version": "pillagers-fit/0.1",
+      "id": "hair/v04-short",
+      "type": "hair",
+      "anchor": "socket_head_top",
+      "fitCage": "HEAD_CAGE",
+      "fitMode": "conform",
+      "clearance": 0.004,
+      "authoringFrame": "canonical",
+      "sourceStyle": "v04-short",
+      "canonicalHeadSize": [
+        0.15981943905353546,
+        0.23388516902923584,
+        0.1831979900598526
+      ],
+      "attachmentBand": {
+        "minimumY": -0.45
+      },
+      "projection": "outward",
+      "subdivisions": 0
+    },
+    "noBodySourceEdit": true,
+    "noSecondRootScale": true,
+    "noPerSeedCorrection": true,
+    "noSecondAffineSolve": true,
+    "noFrameSweep": true,
+    "noAcceptance": true,
+    "units": "metres",
+    "up": "+Y",
+    "front": "+Z"
+  },
+  "topology": {
+    "vertices": 1014,
+    "triangles": 338,
+    "unusedVertices": 0,
+    "degenerateTriangles": 0,
+    "duplicateTriangles": 0,
+    "invalidNormals": 0,
+    "opposedNormals": 0,
+    "boundaryEdges": 0,
+    "nonManifoldEdges": 0,
+    "nonManifoldVertices": 0,
+    "vertexLinkDetails": [],
+    "components": 1,
+    "componentDetails": [
+      {
+        "vertices": 171,
+        "triangles": 338,
+        "area": 0.10682245396854052,
+        "bounds": {
+          "min": [
+            -0.06443795561790466,
+            -0.003989906050264835,
+            -0.10519354045391083
+          ],
+          "max": [
+            0.06469328701496124,
+            0.12926490604877472,
+            0.09536313265562057
+          ]
+        },
+        "meshes": [
+          "Hair_v04_short_338_affine_diagnostic"
+        ],
+        "regions": [],
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "nonManifoldVertices": 0
+      }
+    ]
+  },
+  "style": {
+    "valid": true,
+    "issues": [],
+    "warnings": [],
+    "diagnostics": {
+      "profileId": "v04-head-source-vertex-palette/1",
+      "profileHash": "acc2a544b32e2d4dbc5bdd7a740cc1824d866ff8259034baab15ac23bd8ee7f0",
+      "triangles": 338,
+      "authoredTriangles": 338,
+      "renderedTriangles": 338,
+      "authoredVertices": 1014,
+      "renderVertices": 1014,
+      "materials": 1,
+      "uniqueColors": 1,
+      "coplanarColorDiscontinuities": 0,
+      "coplanarExamples": [],
+      "gradientRegions": 0,
+      "technicalPassIsVisualAcceptance": false,
+      "issueCounts": {},
+      "geometryQuality": {
+        "vertices": 1014,
+        "triangles": 338,
+        "unusedVertices": 0,
+        "degenerateTriangles": 0,
+        "duplicateTriangles": 0,
+        "invalidNormals": 0,
+        "opposedNormals": 0,
+        "boundaryEdges": 0,
+        "nonManifoldEdges": 0,
+        "nonManifoldVertices": 0,
+        "vertexLinkDetails": [],
+        "components": 1,
+        "componentDetails": [
+          {
+            "vertices": 171,
+            "triangles": 338,
+            "area": 0.10682245396854052,
+            "bounds": {
+              "min": [
+                -0.06443795561790466,
+                -0.003989906050264835,
+                -0.10519354045391083
+              ],
+              "max": [
+                0.06469328701496124,
+                0.12926490604877472,
+                0.09536313265562057
+              ]
+            },
+            "meshes": [
+              "Hair_v04_short_338_affine_diagnostic"
+            ],
+            "regions": [],
+            "boundaryEdges": 0,
+            "nonManifoldEdges": 0,
+            "nonManifoldVertices": 0
+          }
+        ]
+      }
+    },
+    "qualification": "technical-only",
+    "scope": "technical vertex-palette policy only; intentional planes, silhouette, morphology, sockets, fit, animation and visual acceptability require independent validation"
+  },
+  "metadata": {
+    "version": "pillagers-fit/0.1",
+    "id": "hair/v04-short",
+    "type": "hair",
+    "anchor": "socket_head_top",
+    "fitCage": "HEAD_CAGE",
+    "fitMode": "conform",
+    "clearance": 0.004,
+    "authoringFrame": "canonical",
+    "sourceStyle": "v04-short",
+    "canonicalHeadSize": [
+      0.15981943905353546,
+      0.23388516902923584,
+      0.1831979900598526
+    ],
+    "attachmentBand": {
+      "minimumY": -0.45
+    },
+    "projection": "outward",
+    "subdivisions": 0
+  },
+  "body": {
+    "id": "lab-body/golden-v04-candidate-002-r3",
+    "sha256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e"
+  },
+  "review": {
+    "status": "conditional-neutral-source-art-to-browser",
+    "path": "artifacts/character-lab-v04/vertical-slice-qa/short-affine001-A-independent-review/REVIEW.json",
+    "sha256": "05195fa7a25fca0ad86419cb1557a62b8ef8fb5817aa16562cb2218b1f28f283",
+    "qualification": "Six useful neutral head views inspected; original top/bottom misframed. Genuine interactive crown/underside, motion and morphology checks required."
+  },
+  "neutralProof": {
+    "path": "artifacts/character-lab-v04/head-v04-pipeline/hair-short/candidate-002/material-domain-004/affine-neutral-fit-001/ACTUAL-NEUTRAL-FIT.json",
+    "sha256": "45bdde8ca6178930478f4ecdd42812a1bd91c1634c5fe35193aae306cdfd6d83",
+    "properBodyCrossings": 0,
+    "properSelfCrossings": 0,
+    "fit": {
+      "method": "coherent-source-radial-offset",
+      "sourceTriangles": 338,
+      "properBodyCrossings": 0,
+      "properSelfCrossings": 0,
+      "coplanarOverlapTested": true,
+      "radialOffsetMetres": 0.024971787352114916,
+      "maximumCorrectionMetres": 0.039954859763383865,
+      "visualAcceptance": false
+    },
+    "noBodyMaskOrProxy": true
+  }
+}

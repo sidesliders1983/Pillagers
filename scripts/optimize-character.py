@@ -20,9 +20,17 @@ def arguments(argv):
     parser.add_argument("--name", default="character")
     parser.add_argument("--targets", type=int, nargs=3, default=[8000, 4000, 1200])
     parser.add_argument("--textures", type=int, nargs=3, default=[1024, 512, 256])
+    parser.add_argument("--lod", type=int, choices=[0, 1, 2], help="Process only this LOD; retain its original label and budget")
     parser.add_argument("--voxel", type=float, default=0.0035, help="Fraction of largest dimension; 0 disables remesh for comparison")
     parser.add_argument("--planar-angle", type=float, default=6)
+    parser.add_argument("--weld-fraction", type=float, default=1e-6, help="Merge coincident source samples within this fraction of its span")
+    parser.add_argument("--minimum-island-area", type=float, default=0, help="Discard floating extraction specks smaller than this fraction of span squared")
+    parser.add_argument("--colour-transfer", choices=['ray','closest'], default='ray', help="Closest surface transfer avoids black ray misses on thin garments")
     args = parser.parse_args(argv)
+    if not 0 < args.weld_fraction <= .001:
+        parser.error("weld fraction must be in (0, .001]")
+    if not 0 <= args.minimum_island_area <= .001:
+        parser.error("minimum island area must be in [0, .001]")
     if not args.source.is_file() or args.source.suffix.lower() != ".glb":
         parser.error("source must be an existing GLB")
     if not args.name or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-" for c in args.name):
@@ -75,7 +83,11 @@ def main(args):
     args.output.mkdir(parents=True, exist_ok=True)
     report = {"schemaVersion": 1, "source": {"file": args.source.name, **baseline},
               "blender": bpy.app.version_string, "settings": {"voxelFraction": args.voxel,
-              "planarAngleDegrees": args.planar_angle, "targets": args.targets, "textureSizes": args.textures},
+              "planarAngleDegrees": args.planar_angle, "targets": args.targets, "textureSizes": args.textures,
+              "weldFraction": args.weld_fraction,
+              "minimumIslandArea": args.minimum_island_area,
+              "colourTransfer": args.colour_transfer,
+              "selectedLOD": args.lod},
               "stages": [], "lods": []}
 
     def stage(label, obj):
@@ -124,7 +136,7 @@ def main(args):
     activate(clean)
     bm = bmesh.new()
     bm.from_mesh(clean.data)
-    bmesh.ops.remove_doubles(bm, verts=list(bm.verts), dist=span * 1e-6)
+    bmesh.ops.remove_doubles(bm, verts=list(bm.verts), dist=span * args.weld_fraction)
     bmesh.ops.dissolve_degenerate(bm, edges=list(bm.edges), dist=span * 1e-7)
     bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
     bm.to_mesh(clean.data)
@@ -142,7 +154,30 @@ def main(args):
         modifier.angle_limit = math.radians(args.planar_angle)
         modifier.use_dissolve_boundaries = False
         bpy.ops.object.modifier_apply(modifier=modifier.name)
-        stage("planar", clean)
+    stage("planar", clean)
+    if args.minimum_island_area:
+        bm = bmesh.new()
+        bm.from_mesh(clean.data)
+        unseen = set(bm.faces)
+        removed = []
+        while unseen:
+            first = unseen.pop()
+            component, pending = [first], [first]
+            while pending:
+                face = pending.pop()
+                for edge in face.edges:
+                    for neighbour in edge.link_faces:
+                        if neighbour in unseen:
+                            unseen.remove(neighbour)
+                            component.append(neighbour)
+                            pending.append(neighbour)
+            if sum(face.calc_area() for face in component) < span * span * args.minimum_island_area:
+                removed.extend(component)
+        bmesh.ops.delete(bm, geom=removed, context='FACES')
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context='VERTS')
+        bm.to_mesh(clean.data)
+        bm.free()
+        stage("remove-extraction-specks", clean)
     clean.hide_render = True
 
     # Bake albedo only, not lighting, metallic maps or normal-map micro-detail.
@@ -171,7 +206,68 @@ def main(args):
     scene.render.bake.margin = 4
     scene.render.bake.cage_extrusion = span * max(args.voxel * 2, 0.008)
     scene.render.bake.max_ray_distance = span * max(args.voxel * 6, 0.035)
+    closest = None
+    if args.colour_transfer == 'closest':
+        from array import array
+        from mathutils.bvhtree import BVHTree
+        source.data.calc_loop_triangles()
+        triangles = list(source.data.loop_triangles)
+        closest = BVHTree.FromPolygons([v.co for v in source.data.vertices], [t.vertices for t in triangles], all_triangles=True)
+        originals = {}
+        for i,mat in enumerate(source.data.materials):
+            node = next(n for n in mat.node_tree.nodes if n.type == 'TEX_IMAGE' and n.image)
+            colours = array('f', [0]) * len(node.image.pixels)
+            node.image.pixels.foreach_get(colours)
+            originals[i] = (tuple(node.image.size), colours, node.image.channels)
+        original_uv = source.data.uv_layers.active.data
+
+        def transfer(target, image, resolution):
+            pixels = array('f', [0]) * (resolution * resolution * 4)
+            valid = bytearray(resolution * resolution)
+            target.data.calc_loop_triangles()
+            uv = target.data.uv_layers.active.data
+            for tri in target.data.loop_triangles:
+                coords = [uv[i].uv * resolution for i in tri.loops]
+                pa,pb,pc = coords
+                denominator = (pb.y-pc.y)*(pa.x-pc.x)+(pc.x-pb.x)*(pa.y-pc.y)
+                if abs(denominator)<1e-9:continue
+                vertices = [target.data.vertices[i].co for i in tri.vertices]
+                for y in range(max(0,int(min(p.y for p in coords))),min(resolution,int(max(p.y for p in coords))+1)):
+                    for x in range(max(0,int(min(p.x for p in coords))),min(resolution,int(max(p.x for p in coords))+1)):
+                        u=((pb.y-pc.y)*(x+.5-pc.x)+(pc.x-pb.x)*(y+.5-pc.y))/denominator
+                        v=((pc.y-pa.y)*(x+.5-pc.x)+(pa.x-pc.x)*(y+.5-pc.y))/denominator
+                        w=1-u-v
+                        if min(u,v,w)<0:continue
+                        position=vertices[0]*u+vertices[1]*v+vertices[2]*w
+                        hit,normal,index,distance=closest.find_nearest(position)
+                        if hit is None:continue
+                        original=triangles[index]
+                        a,b,c=[source.data.vertices[i].co for i in original.vertices]
+                        ab,ac,ap=b-a,c-a,hit-a
+                        d00,d01,d11,d20,d21=ab.dot(ab),ab.dot(ac),ac.dot(ac),ap.dot(ab),ap.dot(ac)
+                        denom=d00*d11-d01*d01
+                        if abs(denom)<1e-20:continue
+                        bv=(d11*d20-d01*d21)/denom;bw=(d00*d21-d01*d20)/denom
+                        texuv=sum((original_uv[loop].uv*factor for loop,factor in zip(original.loops,[1-bv-bw,bv,bw])),Vector((0,0)))
+                        size,colours,channels=originals[original.material_index]
+                        tx=max(0,min(size[0]-1,int(texuv.x*size[0])));ty=max(0,min(size[1]-1,int(texuv.y*size[1])))
+                        offset=(ty*size[0]+tx)*channels;destination=(y*resolution+x)*4
+                        pixels[destination:destination+4]=array('f',[*colours[offset:offset+3],1])
+                        valid[y*resolution+x]=1
+            # Small UV padding preserves boundaries under bilinear filtering.
+            for iteration in range(6):
+                updates=[]
+                for i,filled in enumerate(valid):
+                    if filled:continue
+                    x,y=i%resolution,i//resolution
+                    neighbours=[j for j in (i-1 if x else -1,i+1 if x<resolution-1 else -1,i-resolution if y else -1,i+resolution if y<resolution-1 else -1) if j>=0 and valid[j]]
+                    if neighbours:updates.append((i,neighbours[0]))
+                for i,j in updates:pixels[i*4:i*4+4]=pixels[j*4:j*4+4];valid[i]=1
+            image.pixels[:]=pixels
+            image.update()
     for index, (target, resolution) in enumerate(zip(args.targets, args.textures)):
+        if args.lod is not None and index != args.lod:
+            continue
         lod_start = time.time()
         name = "%s_LOD%d" % (args.name, index)
         lod = copy(clean, name)
@@ -211,7 +307,8 @@ def main(args):
         activate(lod)
         source.select_set(True)
         print("PIPELINE::bake " + name, flush=True)
-        bpy.ops.object.bake(type="EMIT")
+        if closest is not None:transfer(lod,image,resolution)
+        else:bpy.ops.object.bake(type="EMIT")
         source.hide_render = True
         bsdf = next(n for n in nodes if n.type == "BSDF_PRINCIPLED")
         links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])

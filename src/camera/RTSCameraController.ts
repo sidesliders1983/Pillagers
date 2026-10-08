@@ -3,13 +3,13 @@ import {worldConfig} from '../config/worldConfig';
 import {TouchGestures} from './TouchGestures';
 const initialElevation=Math.atan2(.8,.7),orbitScale=Math.hypot(.8,.7);
 export class RTSCameraController {
-    readonly focus=new Vector3(0,0,2);
-    private desired=new Vector3(0,0,2);
+    readonly focus=new Vector3(0,0,16);
+    private desired=new Vector3(0,0,16);
     private distance=worldConfig.camera.initialZoom;
     private zoom=worldConfig.camera.initialZoom;
     private angle=.45;private yaw=.45;
     private elevation=initialElevation;private targetElevation=initialElevation;
-    private keys=new Set<string>();private drag=false;
+    private keys=new Set<string>();private drag=false;private rotateDrag=false;
     private surface:Object3D|null=null;
     private ray=new Raycaster();private pointer=new Vector2();
     private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
@@ -29,15 +29,17 @@ export class RTSCameraController {
             this.keys.add(e.key.toLowerCase());
         });
         window.addEventListener('keyup',e=>this.keys.delete(e.key.toLowerCase()));
-        window.addEventListener('blur',()=>{this.keys.clear();this.drag=false;this.touch.reset();});
+        window.addEventListener('blur',()=>{this.keys.clear();this.drag=false;this.rotateDrag=false;this.mouseStart=null;this.touch.reset();});
         canvas.addEventListener('wheel',e=>{e.preventDefault();this.setZoom(this.zoom+e.deltaY*.025);},{passive:false});
         canvas.addEventListener('pointerdown',e=>{
             canvas.setPointerCapture(e.pointerId);
             if(e.pointerType==='touch'){e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
-            else if(e.button===0){this.drag=true;this.mouseStart={x:e.clientX,y:e.clientY,distance:0};}
+            else if(e.button===2){e.preventDefault();this.rotateDrag=true;this.drag=false;this.mouseStart=null;}
+            else if(e.button===0){this.rotateDrag=false;this.drag=true;this.mouseStart={x:e.clientX,y:e.clientY,distance:0};}
         });
         canvas.addEventListener('pointermove',e=>{
             if(e.pointerType==='touch'){e.preventDefault();this.touch.move(e.pointerId,e.clientX,e.clientY);}
+            else if(this.rotateDrag){e.preventDefault();this.yaw-=e.movementX*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+e.movementY*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);}
             else if(this.drag){if(this.mouseStart)this.mouseStart.distance=Math.max(this.mouseStart.distance,Math.hypot(e.clientX-this.mouseStart.x,e.clientY-this.mouseStart.y));this.pan(-e.movementX*this.distance*.0015,-e.movementY*this.distance*.0015);}
         });
         const release=(e:PointerEvent,cancelled:boolean)=>{
@@ -45,7 +47,7 @@ export class RTSCameraController {
                 if(!cancelled)this.touch.move(e.pointerId,e.clientX,e.clientY);
                 this.touch.up(e.pointerId,cancelled);
             }
-            else {if(!cancelled&&this.mouseStart&&this.mouseStart.distance<settings.tapThreshold)this.select?.(e.clientX,e.clientY);this.mouseStart=null;this.drag=false;}
+            else {if(!cancelled&&this.mouseStart&&this.mouseStart.distance<settings.tapThreshold)this.select?.(e.clientX,e.clientY);this.mouseStart=null;this.drag=false;this.rotateDrag=false;}
         };
         canvas.addEventListener('pointerup',e=>release(e,false));
         canvas.addEventListener('pointercancel',e=>release(e,true));
@@ -55,7 +57,7 @@ export class RTSCameraController {
     }
     setNavigationSurface(surface:Object3D){this.surface=surface;}
     setSelectionHandler(select:(x:number,y:number)=>boolean){this.select=select;}
-    home(){this.desired.set(0,0,2);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
+    home(){this.desired.set(0,0,16);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
     private setZoom(value:number){this.zoom=MathUtils.clamp(value,worldConfig.camera.minZoom,worldConfig.camera.maxZoom);}
     private navigate(x:number,y:number){
         if(this.select?.(x,y))return;
