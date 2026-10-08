@@ -27,11 +27,11 @@ export class SettlementGrass{
   for(let i=0;i<this.source.count;i++){
    this.mesh.getMatrixAt(i,matrix);matrix.decompose(position,rotation,scale);
    const {x,z}=position;
-   if(z<-18||z>62||z-shoreAt(x)<3||surfaceHeightAt(x,z)<.55)continue;
+   if(Math.abs(x)>12||z>8||z<-6||z-shoreAt(x)<3||surfaceHeightAt(x,z)<.55)continue;
    const fields=sample(x,z);
    if(fields.worn>.35||fields.rock>.65)continue;
    const coverage=(1-fields.shore)*(1-fields.worn)*(1-fields.rock);
-   if(random()>coverage)continue;
+   if(random()>coverage*.18)continue;
    // Canonical triangle interpolation is the placement authority, not another heightmap.
    position.y=surfaceHeightAt(x,z)-.01;
    matrix.compose(position,rotation,scale);this.mesh.setMatrixAt(accepted,matrix);

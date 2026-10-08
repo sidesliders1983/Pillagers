@@ -14,3 +14,10 @@ ambient occlusion and demo files are not included. The offline bake is
 scripts/prepare-ground-materials.mjs; implementation and reproduction instructions
 are in docs/GROUND-TERRAIN-V02.md. These are ordinary data textures for Three.js
 MeshStandardMaterial, not a terrain shader.
+
+Revision 2026-10-08 adds Poly Haven mossy_rock (CC0):
+https://polyhaven.com/a/mossy_rock
+https://polyhaven.com/license
+https://api.polyhaven.com/files/mossy_rock
+Individual 1K nor_gl and rough maps (no downloaded archive) are blended through
+the shared CPU slope/rock mask. manifest.json records their exact source hashes.

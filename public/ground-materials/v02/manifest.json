@@ -16,6 +16,7 @@
       "id": "Ground037",
       "url": "https://ambientcg.com/view?id=Ground037",
       "download": "https://ambientcg.com/get?file=Ground037_1K-PNG.zip",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
       "archiveSha256": "cbd75f0660870b3299a68c4fe7fd54efb3951cf992d4295961209619eb284c47",
       "maps": [
         {
@@ -41,6 +42,7 @@
       "id": "Ground054",
       "url": "https://ambientcg.com/view?id=Ground054",
       "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
       "archiveSha256": "19aafb7d257cff80eca5374b097abacb714149aa899891be82572e82fbac1326",
       "maps": [
         {
@@ -61,21 +63,47 @@
         "displacement",
         "ambient occlusion"
       ]
+    },
+    {
+      "id": "mossy_rock",
+      "url": "https://polyhaven.com/a/mossy_rock",
+      "download": "https://api.polyhaven.com/files/mossy_rock",
+      "licenseUrl": "https://polyhaven.com/license",
+      "archiveSha256": null,
+      "maps": [
+        {
+          "file": "mossy_rock_nor_gl_1k.png",
+          "sha256": "08b01ee4387e4bb3433f901c62acc40d4be8d6d4a481e5fb508400cb4664d82e"
+        },
+        {
+          "file": "mossy_rock_rough_1k.png",
+          "sha256": "ed620db809bf72088bc4b5d6dbc48298256a4997a51aca929a54c1824301e9c5"
+        }
+      ],
+      "used": [
+        "OpenGL normals",
+        "roughness"
+      ],
+      "notUsed": [
+        "albedo",
+        "displacement",
+        "ambient occlusion"
+      ]
     }
   ],
   "delivery": [
     {
       "file": "normal.png",
-      "bytes": 1286924,
-      "sha256": "8ee0bc368564bade5e2206410f7614ebdad0aa0b23f201438754a4035f64be12",
+      "bytes": 1314919,
+      "sha256": "63c119f4d7675f4f8c166b68731ac935d96d92784042516250a3a61ef4816286",
       "width": 1024,
       "height": 1024,
       "colorSpace": "NoColorSpace"
     },
     {
       "file": "roughness.png",
-      "bytes": 380082,
-      "sha256": "3d55a9fb3f74c5ce94266070ec1eb0a622d7f18d822df4382f55712057a9e450",
+      "bytes": 392474,
+      "sha256": "57cc58e9411fb632737634b28474a4c241c519f3062a0dfc88bcbfd95ec1a9e8",
       "width": 1024,
       "height": 1024,
       "colorSpace": "NoColorSpace"

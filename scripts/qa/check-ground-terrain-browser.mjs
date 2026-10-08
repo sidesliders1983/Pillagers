@@ -18,7 +18,7 @@ try{
  await page.locator('#environment-canvas[data-ready=true]').waitFor();
  assert.match(await page.locator('#environment-status').innerText(),/Ground v0.2/,'the lab renders the ground pass directly');
  assert.equal(await page.locator('#environment-grass').count(),1,'the lab exposes sourced grass structure');
- assert.equal(await page.locator('#environment-grass').isChecked(),true,'sourced grass is visible by default');
+ assert.equal(await page.locator('#environment-grass').isChecked(),false,'ground QA starts without optional GrassField');
  assert.equal(await page.locator('#environment-variant').count(),0,'no comparison UI');
  assert.equal(await page.locator('#environment-quality').inputValue(),'standard');
  for(const name of ['normal.png','roughness.png'])assert.ok(requests.some(url=>url.endsWith(name)),'the published '+name+' loads');
@@ -28,9 +28,8 @@ try{
  const pixels=async()=>page.screenshot({clip:await canvas.boundingBox()});
  await settle();const day=await pixels();await page.waitForTimeout(400);assert.ok(day.equals(await pixels()),'paused preview is repeatable');
  await page.screenshot({path:report+'/ground-day.png'});
- const grassOn=await pixels();await page.locator('#environment-grass').uncheck();await settle();
+ await page.locator('#environment-grass').check();await settle();const grassOn=await pixels();await page.locator('#environment-grass').uncheck();await settle();
  assert.ok(!grassOn.equals(await pixels()),'sourced grass contributes visible structure');
- await page.locator('#environment-grass').check();await settle();
  const samples={standard:await sample()};console.log('Standard sample complete');
  await page.selectOption('#environment-light','night');await settle();assert.ok(!day.equals(await pixels()),'night changes visible ground and water');await page.screenshot({path:report+'/ground-night.png'});
  await page.selectOption('#environment-light','day');
@@ -49,13 +48,13 @@ try{
  await page.selectOption('#environment-quality','standard');await settle();
  const waterOn=await pixels();await page.locator('#environment-water').uncheck();await settle();
  assert.ok(!waterOn.equals(await pixels()),'water visibility control works with the ground pass');
- const windPaused=await pixels();await page.locator('#environment-pause').uncheck();await page.waitForTimeout(600);
+ await page.locator('#environment-grass').check();await settle();const windPaused=await pixels();await page.locator('#environment-pause').uncheck();await page.waitForTimeout(600);
  assert.ok(!windPaused.equals(await pixels()),'published grass wind moves while water is hidden');
  await page.locator('#environment-pause').check();await page.locator('#environment-water').check();await settle();
  const beforeMotion=await pixels();await page.locator('#environment-pause').uncheck();await page.waitForTimeout(600);
  assert.ok(!beforeMotion.equals(await pixels()),'waves resume');await page.locator('#environment-pause').check();
  assert.deepEqual(errors,[]);
  const baseline=JSON.parse(await readFile('docs/qa/environment-lab/source-baseline.json','utf8'));
- await writeFile(report+'/measurements.json',JSON.stringify({renderer:'Edge headless / SwiftShader software; whole scene, not isolated GPU terrain time',viewport:[1024,768],seed:1983,captureWavePhase:0,samples,pass1:baseline.samples,checks:['published normal and roughness maps load','sourced grass defaults on and changes visible pixels','no comparison UI','repeatable paused pixels','day/night','near/far presets','Low triangle budget','compatibility fallback','water visibility','grass wind with water hidden','waves resume'],errors},null,2)+'\n');
+ await writeFile(report+'/measurements.json',JSON.stringify({renderer:'Edge headless / SwiftShader software; whole scene, not isolated GPU terrain time',viewport:[1024,768],seed:1983,captureWavePhase:0,samples,pass1:baseline.samples,checks:['published normal and roughness maps load','optional GrassField defaults off; enabling changes visible pixels','no comparison UI','repeatable paused pixels','day/night','near/far presets','Low triangle budget','compatibility fallback','water visibility','grass wind with water hidden','waves resume'],errors},null,2)+'\n');
  console.log('Ground Terrain browser QA passed');
 }finally{await browser.close();}

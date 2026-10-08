@@ -67,3 +67,15 @@ Run:
 The browser harness uses Edge/Chromium with SwiftShader, seed 1983, 1024 x 768 viewport and the visible Pause waves control selected before loading completes (phase zero). It captures day/night, overview and water-level views, and checks quality, water visibility and motion. Ten-second whole-scene samples are compared with the saved Pass 1 sample. See [current sourced-grass QA report](qa/ground-terrain-v02/sourced-grass/report.md) for results and before/after captures.
 
 Visual acceptance and hardware profiling remain required before #60. Historical reports are retained as records of their original passes.
+
+## Owner reference revision — 2026-10-08
+
+The unmodified owner references and exact KayKit FREE source lock are in [references/environment](references/environment/README.md). Earlier colour-only and dense-GrassField captures are historical, unaccepted iterations.
+
+The native ground atlas now blends a third source, Poly Haven **mossy_rock**, CC0, using its 1K OpenGL normal and roughness PNGs. Its weight is the same CPU `rock` field already used for terrain colour. Normals are normalized after blending; roughness remains 0.84–1.0. No new shaders, displacement or terrain positions are introduced. Ground037/Ground054 remain the earth/shore sources. Individual source maps are downloaded from the official Poly Haven file API; no rock archive was used. Exact source/output SHA-256 hashes are in `public/ground-materials/v02/manifest.json`.
+
+Reproduce with the original ambientCG archives/extracted maps and `mossy_rock_nor_gl_1k.png`, `mossy_rock_rough_1k.png` in `scratch/ground-source`, then run `node scripts/prepare-ground-materials.mjs`. Sources: https://polyhaven.com/a/mossy_rock ; https://api.polyhaven.com/files/mossy_rock ; https://polyhaven.com/license .
+
+GrassField is optional and **OFF by default**. Its secondary placement is restricted to a sparse 24m-wide close-detail region; it does not replace authored KayKit clumps. Ground assessment is with it off. The old spruce/boulder diagnostic props remain explicitly unaccepted until #58 replaces them. Ground normal maps provide surface response, not rock silhouettes or distant cliffs.
+
+#57 remains open for the #59 owner visual gate. Technical delivery in PR #62 must not auto-close it or integrate #60.
