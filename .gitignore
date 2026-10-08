@@ -8,6 +8,8 @@ scratch/
 public/game-assets/*
 # Keep the prepared cattle models available in fresh checkouts.
 !public/game-assets/cattle/
+# Frozen Meshy body LODs are the shared fitting authority and CI fixtures.
+!public/game-assets/human/
 public/model-preview/
 trellis-test-error.png
 __pycache__/

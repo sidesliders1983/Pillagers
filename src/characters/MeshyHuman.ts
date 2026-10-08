@@ -2,6 +2,12 @@ import {AnimationAction, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat
 import {GLTF, GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
+import {assetDigest} from './AssetDigest';
+import {MeshyModuleRuntime,NativeModuleSource} from './MeshyModuleRuntime';
+import {ModuleBindingV2} from './BodyFitAdapter';
+import {resolveCharacterPresentation,parseCharacterPresentation,CharacterPresentation} from './CharacterPresentation';
+import {characterAsset,characterAssetURL,assetMeasurement} from './CharacterAssets';
+import {MeshyBodyFitAdapter} from './MeshyBodyFitAdapter';
 import {CharacterDNA, parseCharacterDNA} from './CharacterDNA';
 import {generatePhenotype} from './generatePhenotype';
 import {SoftBodySpring} from '../character-lab/SoftBodySpring';
@@ -18,18 +24,35 @@ export const meshyOneShotClips=new Set<string>(['Attack','Fall_Dead_from_Abdomin
 /** Cached source geometry and clips; each resident owns bones, materials and mixer. */
 export class MeshyHumanFactory {
  private sources=new Map<number,Promise<GLTF>>();
+ private modules=new Map<string,Promise<NativeModuleSource>>();
  private loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
- constructor(private load:(url:string)=>Promise<GLTF>=url=>this.loader.loadAsync(url)){}
- async create(input:CharacterDNA,lod=0,profile?:HumanProfile){
+ constructor(private load:(url:string)=>Promise<GLTF>=url=>this.loadVerified(url),private loadBinding:(url:string)=>Promise<ArrayBuffer>=async url=>{const response=await fetch(url);if(!response.ok)throw new Error('Could not load module binding: '+url);return response.arrayBuffer();}){}
+ private async loadVerified(url:string){const path=url.split('?')[0],expected=meshyHumanAssetIdentity.find(a=>a.path===path)?.sha256??assetMeasurement(path).sha256;
+  const response=await fetch(url);if(!response.ok)throw new Error('Could not load Meshy asset: '+path);const bytes=await response.arrayBuffer();if(await assetDigest(bytes)!==expected)throw new Error('Meshy asset bytes differ from the frozen identity: '+path);return this.loader.parseAsync(bytes,'');}
+ async create(input:CharacterDNA,lod=0,profile?:HumanProfile,presentation:unknown={hair:'none',beard:'none',outfit:'none',equipment:'none'}){
   if(![0,1,2].includes(lod))throw new Error('Invalid Meshy human LOD');
   const dna=parseCharacterDNA(input);let source=this.sources.get(lod);
   if(!source){source=this.load('/game-assets/human/Human_LOD'+lod+'.glb?v='+meshyHumanAssetIdentity[lod].sha256.slice(0,12)).catch(error=>{this.sources.delete(lod);throw error;});this.sources.set(lod,source);}
-  return new MeshyHuman(await source,dna,lod,profile);
+  const selected=resolveCharacterPresentation(dna,presentation,{id:'body/meshy-human',sha256:meshyHumanAssetIdentity[lod].sha256});
+  const model=new MeshyHuman(await source,dna,lod,{...(profile??selected.profile),appearance:selected.profile.appearance});
+  try{await this.equip(model,selected.presentation);return model;}catch(error){model.dispose();throw error;}
+ }
+ async equip(model:MeshyHuman,value:unknown){
+  const request=++model.equipRevision,selected=resolveCharacterPresentation(model.dna,value,model.fit.body),ids=[selected.hairId,selected.beardId,selected.outfitId,selected.equipmentId].filter((id):id is string=>!!id);
+  const sources=await Promise.all(ids.map(id=>{let promise=this.modules.get(id);if(!promise){const asset=characterAsset(id),binding=asset.metadata?.nativeBinding;if(!binding)throw new Error('This module has no native Meshy binding');
+   promise=Promise.all([this.load(characterAssetURL(id,model.lod)),this.loadBinding(binding.path+'?v='+binding.sha256.slice(0,12))]).then(async([source,bytes])=>{
+    const sha=await assetDigest(bytes);if(sha!==binding.sha256)throw new Error('Stale native module binding bytes: '+id);
+    return {asset,source,binding:JSON.parse(new TextDecoder().decode(bytes)) as ModuleBindingV2};}).catch(error=>{this.modules.delete(id);throw error;});this.modules.set(id,promise);}return promise;}));
+  if(request!==model.equipRevision||model.isDisposed)return;
+  model.setNativeModules(sources,selected.presentation,selected.profile.appearance);
  }
  async createWorld(dna:CharacterDNA){return this.create(dna,2);}
 }
 export class MeshyHuman {
- readonly fit=undefined;
+ readonly fit:MeshyBodyFitAdapter;readonly modules:MeshyModuleRuntime;dna!:CharacterDNA;equipRevision=0;
+ get isDisposed(){return this.disposed;}
+ setNativeModules(sources:NativeModuleSource[],presentation:CharacterPresentation,appearance:HumanProfile['appearance']){this.profile={...this.profile,appearance};const pose=this.bones.map(bone=>({bone,position:bone.position.clone(),rotation:bone.quaternion.clone(),scale:bone.scale.clone()}));
+  try{for(const bone of this.bones){const rest=this.rest.get(bone)!;bone.position.copy(rest.position);bone.quaternion.copy(rest.rotation);bone.scale.copy(rest.scale);}applyMeshyProportions(this.bones,this.scales,this.profile);this.fit.refit();this.modules.install(sources,this.profile);}finally{for(const p of pose){p.bone.position.copy(p.position);p.bone.quaternion.copy(p.rotation);p.bone.scale.copy(p.scale);}this.root.updateMatrixWorld(true);this.fit.nativeSkeleton.update();}this.root.userData.presentation=presentation;this.root.userData.selectedAssets={hair:sources.find(s=>s.asset.type==='hair')?.asset.id??null,beard:sources.find(s=>s.asset.type==='beard')?.asset.id??null,outfit:sources.find(s=>s.asset.type==='garment')?.asset.id??null,equipment:sources.find(s=>s.asset.type==='equipment')?.asset.id??null};}
  readonly root=new Group();readonly clips:GLTF['animations'];
  private belly=new SoftBodySpring(55,9);private elapsed=0;
  private bones:Bone[]=[];private rest=new Map<Bone,{position:Vector3;rotation:import('three').Quaternion;scale:Vector3}>();private scales=new Map<Bone,Vector3>();private profile!:HumanProfile;private basePosition=new Vector3();
@@ -72,12 +95,19 @@ export class MeshyHuman {
    }
   });
   this.mixer=new AnimationMixer(this.body);
-  this.root.userData.bodySource={id:'body/meshy-human',source:'meshy',lod};
-  this.root.userData.capabilities={morphology:true,appearance:false};
+  let skin:SkinnedMesh|undefined;this.body.traverse(node=>{if((node as SkinnedMesh).isSkinnedMesh)skin=node as SkinnedMesh;});
+  if(!skin)throw new Error('Meshy Human is missing its native skin');
+  // Capture bind surfaces before height normalization and DNA proportions.
+  const offset=this.body.position.clone();this.body.position.set(0,0,0);
+  this.fit=new MeshyBodyFitAdapter(skin,this.root,this.body as Group,lod);this.body.position.copy(offset);
+  this.modules=new MeshyModuleRuntime(this.fit);this.fit.moduleSnapshot=()=>this.modules.snapshot();
+  this.root.userData.bodySource={...this.fit.body,source:'meshy'};
+  this.root.userData.capabilities={morphology:true,appearance:true,fitSizes:false,garmentSockets:true};
   this.applyDNA(dna,profile);this.setAnimation('Idle');
  }
  applyDNA(input:CharacterDNA,override?:HumanProfile){
-  const dna=parseCharacterDNA(input),profile=override??universalHumanProfile(dna);
+  const dna=parseCharacterDNA(input);this.dna=dna;this.equipRevision++;
+  const presentation=this.root.userData.presentation,appearance=presentation?resolveCharacterPresentation(dna,presentation,this.fit.body).profile.appearance:undefined,profile={...(override??universalHumanProfile(dna)),...(appearance?{appearance}:{})};
   const height=profile.height*(1-.35*profile.weights.Child);
   const skinTone=generatePhenotype(dna).skinTone;this.skinUniform.value.set(skinTone);this.root.userData.skinTint={tone:skinTone,strength:.2};
   this.profile=profile;this.belly.reset();this.elapsed=0;this.root.userData.universalHumanProfile=profile;this.mixer.timeScale=profile.motion.cadence;
@@ -89,9 +119,10 @@ export class MeshyHuman {
   const parent=this.root.parent,position=this.root.position.clone(),rotation=this.root.quaternion.clone();
   this.root.removeFromParent();this.root.position.set(0,0,0);this.root.quaternion.identity();
   this.body.position.copy(this.basePosition);this.body.scale.setScalar(1);this.root.updateMatrixWorld(true);
-  const bounds=new Box3().setFromObject(this.body,true),neutralHeight=bounds.max.y-bounds.min.y;
+  const bounds=new Box3().setFromObject(this.fit.mesh,true),neutralHeight=bounds.max.y-bounds.min.y;
   this.body.scale.setScalar(height/neutralHeight);this.body.position.y-=bounds.min.y*height/neutralHeight;
   this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
+  this.fit.refit();this.modules.refit(profile);
   if(clip){this.action=this.mixer.clipAction(clip);this.action.reset().play();this.action.time=time;this.mixer.update(0);this.shapePose();}
 
   this.root.userData.character={seed:dna.seed,state:this.state,lod:this.lod,height};
@@ -131,6 +162,7 @@ export class MeshyHuman {
   const waist=this.bones.find(bone=>bone.name.endsWith('Spine'));if(waist)waist.scale.z*=1+bounce*.025;}}
  dispose(){
   if(this.disposed)return;this.disposed=true;this.mixer.stopAllAction();this.mixer.uncacheRoot(this.body);
+  this.modules.clear();this.fit.dispose();
   for(const material of this.materials)material.dispose();
   this.body.traverse(node=>{if((node as SkinnedMesh).isSkinnedMesh)(node as SkinnedMesh).skeleton.dispose();});this.root.clear();
  }

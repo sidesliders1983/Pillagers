@@ -61,16 +61,16 @@ export class CharacterPreview {
     captureSnapshot():LabTestSnapshot {
         if(!this.current||!this.currentDNA||this.canvas.dataset.ready!=='true')throw new Error('Wait until the character has loaded.');
         this.setPose(this.current.animationState.time);
-        return parseLabSnapshot({version:labSnapshotVersion,styleVersion:labBodyAsset(this.bodyPresentation.source??'published',this.lod).styleVersion,contractVersion:1,fitVersion:characterContract.attachmentVersion,
+        return parseLabSnapshot({version:labSnapshotVersion,styleVersion:labBodyAsset(this.bodyPresentation.source??'published',this.lod).styleVersion,contractVersion:1,fitVersion:this.bodyPresentation.source==='meshy'?'pillagers-fit/0.2':characterContract.attachmentVersion,
             dna:this.currentDNA,presentation:this.presentation,body:this.bodyPresentation,lod:this.lod,pose:{animation:this.animation,time:this.current.animationState.time,paused:true},
             camera:{type:this.camera===this.orthographicCamera?'orthographic':'perspective',scale:this.camera===this.orthographicCamera?this.orthographicScale/this.orthographicCamera.zoom:null,fov:38,position:this.camera.position.toArray(),target:this.controls.target.toArray()},lighting:'lab-neutral/1',modules:snapshotModules(this.currentDNA,this.presentation,this.lod,this.bodyPresentation)});
     }
     private async createPreview(dna:CharacterDNA,lod:number,presentation:CharacterPresentation,body:LabBodyPresentation){
         if(body.source!=='meshy')return characterFactory.create(dna,lod,presentation,body);
-        const resolved=resolveLabBodyProfile(dna,body),model=await meshyHumanFactory.create(dna,lod,resolved.profile);
+        const resolved=resolveLabBodyProfile(dna,body),model=await meshyHumanFactory.create(dna,lod,resolved.profile,presentation);
         model.root.userData.bodySource=labBodyAsset('meshy',lod);model.root.userData.presentation={...presentation};
         model.root.userData.bodyPresentation=resolved.body;model.root.userData.bodyPresentationStatus=resolved.status;
-        model.root.userData.selectedAssets={hair:null,beard:null,outfit:null,equipment:null};return model;
+        return model;
     }
     private async refresh(){
         const revision=++this.revision;this.canvas.dataset.ready='false';

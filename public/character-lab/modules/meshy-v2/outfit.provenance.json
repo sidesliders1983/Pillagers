@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 2,
+  "route": "authored-template",
+  "moduleId": "garment/meshy-tunic-trousers",
+  "moduleSha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
+  "bindingSha256": "5deca084f0779131ede0427d6fac5cc98dbaf696a879612dea9c174fcd089834",
+  "sourceBodySha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "path": "scripts/characters/templates/meshy_modules_v2.py",
+    "sha256": "f3eccd8774259fb21502c87dc4948621623702fee3cae9f10adeae80ac29e6fa",
+    "version": 1,
+    "blender": "4.5.9"
+  },
+  "editableSource": "Assets/Characters/Human/Modules-v2/MeshyHuman_modules-v2.blend",
+  "editableSourceSha256": "e20a7aea8fbcb7b157eff51523fc3c499582d80532802d38212052e6ee6982bc",
+  "pipeline": {
+    "path": "scripts/prepare-meshy-modules.mjs",
+    "sha256": "086a423ce3815ed1a90e2f305cf5b7cf2b9c7b2b5424b141f81b7723c184e837",
+    "weightAuthority": "authored-four-native-with-surface-rims"
+  },
+  "provider": null,
+  "concept": null,
+  "reviewStatus": "preview",
+  "visualApproval": null,
+  "openings": {
+    "schema": "pillagers-intentional-openings/1",
+    "outputSha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
+    "weldTolerance": 0.000001,
+    "boundaryEdges": 216,
+    "loops": [
+      {
+        "edgeHashSHA256": "07bcccc8276144f5debc8b8bf60044716d3971fc4f964449f7b9f98b6afd6c05",
+        "vertices": 16,
+        "edges": 16,
+        "bounds": {
+          "min": [
+            -0.078,
+            1.3639999999999999,
+            -0.102
+          ],
+          "max": [
+            0.078,
+            1.405,
+            0.04
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "331573733948397f62c0882e9d105fa4cff87c9677d8d60651cde703f783d3d1",
+        "vertices": 16,
+        "edges": 16,
+        "bounds": {
+          "min": [
+            -0.174,
+            1.031,
+            -0.161
+          ],
+          "max": [
+            0.174,
+            1.031,
+            0.131
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "40fffcefdc4ecd64fe8b91f0e97a6dd1827dcf4d312c3a8c6e5dd4ab2d215b97",
+        "vertices": 12,
+        "edges": 12,
+        "bounds": {
+          "min": [
+            0.081,
+            0.425,
+            -0.13399999999999998
+          ],
+          "max": [
+            0.22899999999999998,
+            0.425,
+            0.026
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "62f21eea62cc4006ad4a5971b74d71a16b2b3d01d5b835bfefe4eb78b370fc4d",
+        "vertices": 38,
+        "edges": 38,
+        "bounds": {
+          "min": [
+            0.30815899999999996,
+            0.852363,
+            -0.084621
+          ],
+          "max": [
+            0.37001799999999996,
+            0.8806609999999999,
+            0.022116
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "80cbf6808736ddb6d450b4eebe5362fe068aa5963e7cee42c567264c0d941cf8",
+        "vertices": 16,
+        "edges": 16,
+        "bounds": {
+          "min": [
+            -0.186,
+            0.86,
+            -0.161
+          ],
+          "max": [
+            0.186,
+            0.885,
+            0.141
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "9c52694e2cd0738bba5e5fbd48b9422415afb417c39ba7e883948a417672508c",
+        "vertices": 12,
+        "edges": 12,
+        "bounds": {
+          "min": [
+            0.094,
+            0.36,
+            -0.133
+          ],
+          "max": [
+            0.22399999999999998,
+            0.36,
+            0.003
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "a3b996c9b0d16f7818206f37618229bc473bafb92c4cf6928948a96332b3b007",
+        "vertices": 50,
+        "edges": 50,
+        "bounds": {
+          "min": [
+            -0.370953,
+            0.852899,
+            -0.084622
+          ],
+          "max": [
+            -0.309127,
+            0.8807729999999999,
+            0.020649999999999998
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "bedf8828db94ebf8518f82437ab4eaedb9d53db3a0b541ddbcb7f4cb6074f8db",
+        "vertices": 16,
+        "edges": 16,
+        "bounds": {
+          "min": [
+            -0.16799999999999998,
+            1.005,
+            -0.144
+          ],
+          "max": [
+            0.16799999999999998,
+            1.005,
+            0.122
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "d99c9a2c5976d9160e1eb4c6e5471b71a654ee18495a76178cd885385bec7a91",
+        "vertices": 12,
+        "edges": 12,
+        "bounds": {
+          "min": [
+            -0.22899999999999998,
+            0.425,
+            -0.13399999999999998
+          ],
+          "max": [
+            -0.081,
+            0.425,
+            0.026
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "dfea04e6d1625ea264431e88329481ba14c8bee1c360e43f61a3b01ff0afea8c",
+        "vertices": 16,
+        "edges": 16,
+        "bounds": {
+          "min": [
+            -0.174,
+            1.001,
+            -0.161
+          ],
+          "max": [
+            0.174,
+            1.001,
+            0.131
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "f43e36daddbb1de9ac87c54e4ba63d3257a598c10f52be3e2d12524ff9adb608",
+        "vertices": 12,
+        "edges": 12,
+        "bounds": {
+          "min": [
+            -0.22399999999999998,
+            0.36,
+            -0.133
+          ],
+          "max": [
+            -0.094,
+            0.36,
+            0.003
+          ]
+        }
+      }
+    ]
+  },
+  "technicalViews": "Character Lab fixed front/back/side/RTS; all from this GLB",
+  "conditions": [
+    "Body-free export and linear broad material regions",
+    "Bounded source-derived contacts and deliberate free volumes",
+    "Bilateral construction except one-sided pouch",
+    "Native skin motion at all declared LODs",
+    "Garment dependency and exact snapshot binding identity"
+  ]
+}

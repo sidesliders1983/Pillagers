@@ -576,5 +576,77 @@ export const characterAssetMeasurements:Record<string,AssetMeasurement>={
                 0.09536313265562057
             ]
         }
+    },
+    "/character-lab/modules/meshy-v2/hair.glb": {
+        "sha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+        "triangles": 212,
+        "materials": 1,
+        "bytes": 39372,
+        "bounds": {
+            "min": [
+                -0.09464292973279953,
+                1.5007350444793701,
+                -0.0949999988079071
+            ],
+            "max": [
+                0.09464292973279953,
+                1.6699999570846558,
+                0.11242615431547165
+            ]
+        }
+    },
+    "/character-lab/modules/meshy-v2/beard.glb": {
+        "sha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+        "triangles": 106,
+        "materials": 1,
+        "bytes": 20292,
+        "bounds": {
+            "min": [
+                -0.0668468028306961,
+                1.428908348083496,
+                0.016433419659733772
+            ],
+            "max": [
+                0.0668468028306961,
+                1.4899989366531372,
+                0.11999999731779099
+            ]
+        }
+    },
+    "/character-lab/modules/meshy-v2/outfit.glb": {
+        "sha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
+        "triangles": 824,
+        "materials": 1,
+        "bytes": 149560,
+        "bounds": {
+            "min": [
+                -0.3731599450111389,
+                0.014999999664723873,
+                -0.1899999976158142
+            ],
+            "max": [
+                0.371593177318573,
+                1.4049999713897705,
+                0.18515461683273315
+            ]
+        }
+    },
+    "/character-lab/modules/meshy-v2/pouch.glb": {
+        "sha256": "d8fb4dfbb94e7c7d7e44be621247f276cac91052c104e103b18e6e2a67148012",
+        "triangles": 24,
+        "materials": 1,
+        "bytes": 3564,
+        "bounds": {
+            "min": [
+                -0.05000000074505806,
+                -0.06499999761581421,
+                -0.017500000074505806
+            ],
+            "max": [
+                0.05000000074505806,
+                0.06499999761581421,
+                0.035999998450279236
+            ]
+        }
     }
 };

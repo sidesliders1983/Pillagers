@@ -121,6 +121,11 @@ export function validateAssetRecord(asset,lod,record){
         check(result.valid,'v0.4 strict mapless constant planar palette: '+result.issues.map(i=>i.code).join(', '));
         check(asset.metadata?.authoringFrame==='canonical','v0.4 modules require an authored canonical frame');
     }
+    if(asset.scope==='body-bound'){
+        const key=asset.type==='garment'?'meshy-v2-clothing':asset.type==='equipment'?'meshy-v2-accessory':'meshy-v2-head';
+        const result=validateVertexPaletteStyle(record,STYLE_FAMILY_PROFILES[key]);check(result.valid,'native module palette/style: '+result.issues.map(i=>i.code).join(', '));
+        check(asset.metadata.version==='pillagers-fit/0.2'&&asset.metadata.authoringFrame==='meshy-native','native module requires its own bind contract');return triangles;
+    }
     if(asset.type==='body'){
         check(json.skins?.length===1,'expected exactly one shared armature');
         const names=json.nodes.map(node=>node.name),expected=[...contract.bones,...contract.legacySockets],skin=json.skins[0];
@@ -173,7 +178,7 @@ export async function validateRegisteredAsset(asset,lod,{allowLabPreview=false}=
         }else{
             const provenance=JSON.parse(readFileSync(publicFile(path.replace('.glb','.provenance.json')),'utf8').replace(/^\uFEFF/,''));
             validateModuleProvenance(asset,lod,provenance,record.sha256,{allowLabPreview,record,authoringReceiptBytes:asset.scope==='lab-v04'?readFileSync(publicFile(provenance.v04Canonicalization?.authoringReceipt)):undefined});
-            if(asset.type==='garment'){
+            if(asset.type==='garment'&&asset.scope!=='body-bound'){
                 if(asset.metadata?.garmentBind){
                     const bindPath=path.slice(0,path.lastIndexOf('/')+1)+'garment-bind.json';
                     validateGarmentBindProvenance(asset,lod,provenance,{sidecarBytes:readFileSync(publicFile(bindPath))});
@@ -192,6 +197,10 @@ export function runtimeValidationPlan(assets=registry.characterAssets,{allowLabP
     const {labBodyAsset,goldenLabBody}=loadTypeScript(new URL('../../src/characters/LabBodySources.ts',import.meta.url));
     const v04Body=labBodyAsset(goldenLabBody.source,2),legacyBody=labBodyAsset('published',2);
     return assets.filter(asset=>asset.metadata).map(asset=>{
+        if(asset.scope==='body-bound'){
+            assert.ok(asset.reviewStatus==='accepted'||allowLabPreview&&asset.reviewStatus==='preview',asset.id+': unreviewed native module');
+            return {asset,body:labBodyAsset('meshy',2),bodyPresentation:{version:1,preset:'auto',source:'meshy'},carries:[undefined],adapter:'meshy'};
+        }
         if(asset.scope==='lab-v04'){
             assert.ok(asset.reviewStatus==='accepted'||allowLabPreview===true&&asset.reviewStatus==='preview',asset.id+': unreviewed v0.4 runtime module');
             assert.ok(asset.compatibleBodies?.some(body=>body.id===v04Body.id&&body.sha256===v04Body.sha256),asset.id+': no exact registered v0.4 runtime body');
@@ -253,7 +262,8 @@ export async function validateGoldenRuntime({allowLabPreview=false}={}){
     const plan=runtimeValidationPlan(registry.characterAssets,{allowLabPreview});let moduleCases=0,motionSamples=0;
     const {labCandidatePresetNames}=loadTypeScript(new URL('../../src/characters/LabBodySources.ts',import.meta.url));
     const bare={hair:'none',beard:'none',outfit:'none',equipment:'none',equipmentSocket:'auto',hairColor:null,technicalWaistWrap:false};
-    for(const {asset,body,bodyPresentation,carries}of plan){
+    for(const {asset,body,bodyPresentation,carries,adapter}of plan){
+        if(adapter==='meshy')continue; // Audited through the native factory below; no Golden substitution.
         const cases=goldenCharacters.map(fixture=>({id:fixture.id,dna:goldenCharacterDNA(fixture.id),bodyPresentation:{...bodyPresentation,preset:'auto'}}));
         if(asset.scope==='lab-v04')for(const preset of ['neutral',...labCandidatePresetNames])cases.push({id:'v04-'+preset,dna:goldenCharacterDNA('golden_masculine_01'),bodyPresentation:{...bodyPresentation,preset}});
         for(const entry of cases){
@@ -296,5 +306,7 @@ export async function validateCharacters({assetsOnly=false,allowLabPreview=false
     for(const asset of registry.characterAssets){const lods={};for(const [lod,path] of Object.entries(asset.lods)){const {measurement}=await validateRegisteredAsset(asset,lod,{allowLabPreview});lods[lod]={file:path,...measurement};files++;}manifest.assets.push({...asset,lods});}
     const published=JSON.parse(readFileSync(publicFile('/character-assets.manifest.json'),'utf8'));
     assert.deepEqual(published,JSON.parse(JSON.stringify(manifest)),'published character manifest is stale; run assets:registry');
-    const runtime=assetsOnly?null:await validateGoldenRuntime({allowLabPreview});return {assets:registry.characterAssets.length,files,runtime};
+    const runtime=assetsOnly?null:await validateGoldenRuntime({allowLabPreview});
+    if(!assetsOnly){const {validateMeshyRuntime}=await import('./meshy-runtime-validation.mjs');runtime.native=await validateMeshyRuntime({allowLabPreview});}
+    return {assets:registry.characterAssets.length,files,runtime};
 }

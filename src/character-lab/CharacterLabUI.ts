@@ -134,7 +134,7 @@ export class CharacterLabUI {
         text('lab-sex',dna.sex==='female'?'Female':'Male');input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
         const selected=resolveCharacterPresentation(dna,presentation,labBodyAsset(bodyPresentation.source??'published',2)),body=selected.profile,displayed=resolveLabBodyProfile(dna,bodyPresentation),candidate=bodyPresentation.source===goldenLabBody.source;
         input('lab-body-source',bodyPresentation.source??'published');
-        text('lab-source-status',bodyPresentation.source==='meshy'?'Meshy Human · original textures, age/DNA proportions and all three LODs.':candidate?'New body preview · LOD2. Sampled joints and motion pass; compound shape review remains open. New v0.4 modules use the Imagegen → Meshy pipeline; older modules are unavailable.':'Published body with hair and beard modules. Legacy clothing has been retired.');
+        text('lab-source-status',bodyPresentation.source==='meshy'?'Meshy Human · native rig and body-bound fitting previews. Inspect the outfit across body shapes and LODs.':candidate?'New body preview · LOD2. Sampled joints and motion pass; compound shape review remains open. New v0.4 modules use the Imagegen → Meshy pipeline; older modules are unavailable.':'Published body with hair and beard modules. Legacy clothing has been retired.');
         document.querySelectorAll<HTMLButtonElement>('[aria-label="Level of detail"] button').forEach(button=>button.disabled=candidate&&button.dataset.action!=='lod2');
         document.querySelectorAll<HTMLOptionElement>('#lab-body-preset option').forEach(option=>{if(labCandidatePresetNames.includes(option.value as typeof labCandidatePresetNames[number]))option.disabled=!candidate;});
         input('lab-body-preset',bodyPresentation.preset);input('lab-body-height',String(displayed.profile.height));text('lab-body-height-value',`${Math.round(displayed.profile.height*100)} cm`);
@@ -167,11 +167,12 @@ export class CharacterLabUI {
         (document.getElementById('fit-hair') as HTMLInputElement).disabled=!selected.hairId;
         (document.getElementById('fit-beard') as HTMLInputElement).disabled=!selected.beardId;
         if(bodyPresentation.source==='meshy'){
-            for(const id of ['lab-module-hair','lab-module-beard','lab-module-outfit','lab-module-equipment','lab-hair-color-mode','lab-hair-color','fit-hair','fit-beard','fit-clothing','lab-equipment-socket'])(document.getElementById(id) as HTMLInputElement).disabled=true;
+            for(const id of ['fit-hair','fit-beard','fit-clothing','lab-equipment-socket'])(document.getElementById(id) as HTMLInputElement).disabled=true;
+            for(const id of ['lab-module-outfit','lab-module-equipment'])(document.getElementById(id) as HTMLSelectElement).disabled=dna.age<18;
         }
-        document.querySelectorAll<HTMLButtonElement>('[data-action^="debug-"]').forEach(button=>button.disabled=bodyPresentation.source==='meshy');
+        document.querySelectorAll<HTMLButtonElement>('[data-action^="debug-"]').forEach(button=>button.disabled=false);
         const breasts=document.getElementById('lab-body-Breasts') as HTMLInputElement;breasts.disabled=dna.age<18||bodyPresentation.source==='meshy';
-        text('lab-module-status',bodyPresentation.source==='meshy'?'This body uses its authored shirt and underwear. Additional appearance modules need Meshy-specific fitting.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
+        text('lab-module-status',bodyPresentation.source==='meshy'?'Tunic, trousers and boots · fitting test fixture. Check neutral, narrow and broad adults during Idle, Walk and Run. Artwork refinement is deferred.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
         (document.querySelector('[data-action="reset-presentation"]') as HTMLButtonElement).disabled=false;
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys.filter(key=>key!=='physicality')){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}

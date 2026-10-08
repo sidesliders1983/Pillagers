@@ -85,3 +85,19 @@ _Avoid_: Recon unit, disposable raid party
 **Environment Lab**: A development preview of Pillagers' landscape and environmental appearance before it is introduced into Fjordside.
 
 **Fjord water**: The calm water bordering Fjordside's shore, with shallow edges and deeper stretches.
+
+## Character appearance
+
+**Character module**: A replaceable visible part of a character's appearance, compatible with a declared body.
+
+**Outfit**: A coordinated clothing assembly, such as tunic, trousers and boots, equipped together.
+
+**Wardrobe slot**: The clothing position that determines which modules can coexist.
+
+**Attachment socket**: A named moving frame for attaching a character module or carried item.
+
+**Surface binding**: The declared correspondence that makes a character module's contact regions follow its compatible body.
+
+**Contact rim**: A designed module opening whose boundary remains fixed to its declared body contact.
+
+**Preview asset**: A selectable inspection candidate awaiting appearance approval; it is not automatically assigned to residents.

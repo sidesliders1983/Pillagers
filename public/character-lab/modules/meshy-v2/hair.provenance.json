@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "route": "authored-template",
+  "moduleId": "hair/meshy-short-angular",
+  "moduleSha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+  "bindingSha256": "433a25d07ea948286df92ded2d0d2744e7dea9f3cae3ea7fb330f62cab5b97cf",
+  "sourceBodySha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "path": "scripts/characters/templates/meshy_modules_v2.py",
+    "sha256": "f3eccd8774259fb21502c87dc4948621623702fee3cae9f10adeae80ac29e6fa",
+    "version": 1,
+    "blender": "4.5.9"
+  },
+  "editableSource": "Assets/Characters/Human/Modules-v2/MeshyHuman_modules-v2.blend",
+  "editableSourceSha256": "e20a7aea8fbcb7b157eff51523fc3c499582d80532802d38212052e6ee6982bc",
+  "pipeline": {
+    "path": "scripts/prepare-meshy-modules.mjs",
+    "sha256": "086a423ce3815ed1a90e2f305cf5b7cf2b9c7b2b5424b141f81b7723c184e837",
+    "weightAuthority": "native-head"
+  },
+  "provider": null,
+  "concept": null,
+  "reviewStatus": "preview",
+  "visualApproval": null,
+  "openings": {
+    "schema": "pillagers-intentional-openings/1",
+    "outputSha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+    "weldTolerance": 0.000001,
+    "boundaryEdges": 38,
+    "loops": [
+      {
+        "edgeHashSHA256": "b4c6b0533db992b6314b93150bf962ca539f79454a8eab61a2456285e26dd708",
+        "vertices": 38,
+        "edges": 38,
+        "bounds": {
+          "min": [
+            -0.087556,
+            1.500735,
+            -0.07195
+          ],
+          "max": [
+            0.087556,
+            1.584508,
+            0.112426
+          ]
+        }
+      }
+    ]
+  },
+  "technicalViews": "Character Lab fixed front/back/side/RTS; all from this GLB",
+  "conditions": [
+    "Body-free export and linear broad material regions",
+    "Bounded source-derived contacts and deliberate free volumes",
+    "Bilateral construction except one-sided pouch",
+    "Native skin motion at all declared LODs",
+    "Garment dependency and exact snapshot binding identity"
+  ]
+}

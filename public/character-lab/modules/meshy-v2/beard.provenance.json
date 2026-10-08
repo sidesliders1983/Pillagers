@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "route": "authored-template",
+  "moduleId": "beard/meshy-compact-wedge",
+  "moduleSha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+  "bindingSha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+  "sourceBodySha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "path": "scripts/characters/templates/meshy_modules_v2.py",
+    "sha256": "f3eccd8774259fb21502c87dc4948621623702fee3cae9f10adeae80ac29e6fa",
+    "version": 1,
+    "blender": "4.5.9"
+  },
+  "editableSource": "Assets/Characters/Human/Modules-v2/MeshyHuman_modules-v2.blend",
+  "editableSourceSha256": "e20a7aea8fbcb7b157eff51523fc3c499582d80532802d38212052e6ee6982bc",
+  "pipeline": {
+    "path": "scripts/prepare-meshy-modules.mjs",
+    "sha256": "086a423ce3815ed1a90e2f305cf5b7cf2b9c7b2b5424b141f81b7723c184e837",
+    "weightAuthority": "native-head"
+  },
+  "provider": null,
+  "concept": null,
+  "reviewStatus": "preview",
+  "visualApproval": null,
+  "openings": {
+    "schema": "pillagers-intentional-openings/1",
+    "outputSha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+    "weldTolerance": 0.000001,
+    "boundaryEdges": 44,
+    "loops": [
+      {
+        "edgeHashSHA256": "7b4efeaef8351036dc853e8be00620781bf9410474f311fea9d9f3a0b9aab56c",
+        "vertices": 44,
+        "edges": 44,
+        "bounds": {
+          "min": [
+            -0.066847,
+            1.4289079999999998,
+            0.016433
+          ],
+          "max": [
+            0.066847,
+            1.4899989999999999,
+            0.10727199999999999
+          ]
+        }
+      }
+    ]
+  },
+  "technicalViews": "Character Lab fixed front/back/side/RTS; all from this GLB",
+  "conditions": [
+    "Body-free export and linear broad material regions",
+    "Bounded source-derived contacts and deliberate free volumes",
+    "Bilateral construction except one-sided pouch",
+    "Native skin motion at all declared LODs",
+    "Garment dependency and exact snapshot binding identity"
+  ]
+}

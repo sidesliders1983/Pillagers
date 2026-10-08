@@ -3,7 +3,7 @@ import { CharacterDNA, parseCharacterDNA } from '../characters/CharacterDNA';
 import { CharacterPresentation, parseCharacterPresentation, resolveCharacterPresentation } from '../characters/CharacterPresentation';
 import { characterContract } from '../characters/CharacterContract';
 import { publishedLabBodyStyle, validateLabBodyUsage, labBodyAsset } from '../characters/LabBodySources';
-import { assetMeasurement, characterAssetURL } from '../characters/CharacterAssets';
+import { assetMeasurement, characterAsset, characterAssetURL } from '../characters/CharacterAssets';
 
 import { meshyHumanAvailableClips } from '../characters/MeshyHumanAssetIdentity';
 
@@ -27,7 +27,7 @@ export function snapshotModules(dna:CharacterDNA,presentation:CharacterPresentat
     const selected=resolveCharacterPresentation(dna,presentation,labBodyAsset(body.source??'published',lod)),source=validateLabBodyUsage(parseLabBodyPresentation(body).source??'published',lod,selected.presentation);
     if(source.source!=='published')return [{id:source.id,path:source.path,sha256:source.sha256},...[selected.hairId,selected.beardId,selected.outfitId,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
         const path=new URL(characterAssetURL(id,lod),'http://local.test').pathname;
-        return {id,path,sha256:assetMeasurement(path).sha256};
+        return {id,path,sha256:assetMeasurement(path).sha256,...(characterAsset(id).metadata?.nativeBinding?{binding:{...characterAsset(id).metadata!.nativeBinding}}:{})};
     })];
     return ['body/universal-human',selected.hairId,selected.beardId,selected.outfitId,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
         const path=new URL(characterAssetURL(id,lod),'http://local.test').pathname;
@@ -37,7 +37,7 @@ export function snapshotModules(dna:CharacterDNA,presentation:CharacterPresentat
 export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('Lab snapshot must be an object.');
     const s=value as LabTestSnapshot;
-    if(s.version!==labSnapshotVersion||s.contractVersion!==characterContract.version||s.fitVersion!==characterContract.attachmentVersion||s.lighting!=='lab-neutral/1')throw new Error('Unsupported Lab snapshot style, contract or version.');
+    if(s.version!==labSnapshotVersion||s.contractVersion!==characterContract.version||!(s.fitVersion===characterContract.attachmentVersion||(s.body?.source==='meshy'&&s.fitVersion==='pillagers-fit/0.2'))||s.lighting!=='lab-neutral/1')throw new Error('Unsupported Lab snapshot style, contract or version.');
     const dna=parseCharacterDNA(s.dna),presentation=parseCharacterPresentation(s.presentation),body=parseLabBodyPresentation(s.body??defaultLabBodyPresentation);
     if(!Number.isInteger(s.lod)||s.lod<0||s.lod>2)throw new Error('Snapshot LOD must be 0, 1 or 2.');
     const source=validateLabBodyUsage(body.source??'published',s.lod,presentation);
@@ -48,5 +48,5 @@ export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     if(!s.camera||!point(s.camera.position)||!point(s.camera.target)||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))<2-1e-6||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))>14+1e-6||s.camera.position[1]<s.camera.target[1]-1e-6)throw new Error('Invalid snapshot camera.');
     const modules=snapshotModules(dna,presentation,s.lod,body);
     if(!Array.isArray(s.modules)||JSON.stringify(s.modules)!==JSON.stringify(modules))throw new Error('Snapshot assets differ from the current registry. Capture a new snapshot deliberately.');
-    return {version:labSnapshotVersion,styleVersion:source.styleVersion,contractVersion:1,fitVersion:characterContract.attachmentVersion,dna,presentation,body,lod:s.lod,pose:{...s.pose},camera:{type:s.camera.type,scale:s.camera.scale,fov:38,position:[...s.camera.position],target:[...s.camera.target]},lighting:'lab-neutral/1',modules};
+    return {version:labSnapshotVersion,styleVersion:source.styleVersion,contractVersion:1,fitVersion:s.fitVersion,dna,presentation,body,lod:s.lod,pose:{...s.pose},camera:{type:s.camera.type,scale:s.camera.scale,fov:38,position:[...s.camera.position],target:[...s.camera.target]},lighting:'lab-neutral/1',modules};
 }
