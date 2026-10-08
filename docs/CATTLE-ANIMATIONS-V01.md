@@ -31,8 +31,9 @@ follows that pace. World playback must match movement speed to playback rate
 and model scale. Cattle gameplay rules and balances are unchanged.
 
 Graze keeps a raised feeding pose: the muzzle-to-poll head axis stays near
-15 degrees downward relative to the ground during 2.4–9.6 s. The muzzle is
-approximately 0.41 m above the ground in this artistic pose. Gentle Blender
+75 degrees downward from horizontal (15 degrees away from vertical
+downward) during 2.4–9.6 s. The muzzle stays approximately 0.16 m above
+the ground. Gentle Blender
 Z-axis turns originate in the body (1 degree), shoulders (1.25 degrees), neck
 (1.5 degrees) and head (3 degrees). Head turns use the world vertical axis
 after pitch correction. IK holds all four hoof targets during these turns.
@@ -90,7 +91,9 @@ camera, Human/Cow switching and mobile layout were checked through the UI.
 The exported skinned mesh measured 1.10001 m at the shoulder. All four clips
 had matching opening/closing keys. The preview reports a 1.65 m reference
 human. Grazing head tilt was sampled across the feeding interval and the
-revised loop was visually checked in the browser. The original .glb retained its SHA-256; browser inspection had no page errors.
+revised loop was visually checked in the browser from side, front and RTS
+views, including lowering and raising. The corrected reference angle is
+15 degrees off downward vertical, not 15 degrees off horizontal. The original .glb retained its SHA-256; browser inspection had no page errors.
 `authoring.json` reports IK target residuals, not a guarantee of zero visible
 hoof sliding on every future terrain.
 
