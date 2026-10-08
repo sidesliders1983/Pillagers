@@ -1,0 +1,66 @@
+{
+  "renderer": "Chromium headless / SwiftShader software rendering; frame times are not a hardware benchmark",
+  "viewport": [
+    1024,
+    768
+  ],
+  "standard": "Fjord water · standard · seed 1983\n1.4 FPS · 691.0 ms/frame\n15 draw calls · 75.656 triangles\n5 geometries · 7 textures",
+  "low": "Fjord water · low · seed 1983\n1.9 FPS · 520.1 ms/frame\n15 draw calls · 27.056 triangles\n6 geometries · 7 textures",
+  "fallback": "Fjord water · compatibility fallback · seed 1983\n9.1 FPS · 110.4 ms/frame\n16 draw calls · 10.968 triangles\n7 geometries · 4 textures",
+  "samples": {
+    "standard": {
+      "durationMs": 10071.29999999702,
+      "frames": 16,
+      "medianFrameMs": 667.5,
+      "p95FrameMs": 684.2000000000116,
+      "renderer": {
+        "variant": "candidate",
+        "ms": 651.1999999992549,
+        "calls": 15,
+        "triangles": 75656,
+        "geometries": 5,
+        "textures": 7
+      }
+    },
+    "low": {
+      "durationMs": 10288.599999997008,
+      "frames": 20,
+      "medianFrameMs": 517.2000000000116,
+      "p95FrameMs": 533.9000000000087,
+      "renderer": {
+        "variant": "candidate",
+        "ms": 499.04999999888247,
+        "calls": 15,
+        "triangles": 27056,
+        "geometries": 6,
+        "textures": 7
+      }
+    },
+    "fallback": {
+      "durationMs": 10064.899999999994,
+      "frames": 94,
+      "medianFrameMs": 100.20000000001164,
+      "p95FrameMs": 116.89999999999418,
+      "renderer": {
+        "variant": "legacy",
+        "ms": 106.47999999970196,
+        "calls": 16,
+        "triangles": 10968,
+        "geometries": 7,
+        "textures": 4
+      }
+    }
+  },
+  "checks": [
+    "no comparison control",
+    "visible wave pause/resume",
+    "day/night",
+    "three camera presets",
+    "lower triangle count at Low quality",
+    "compatibility fallback",
+    "water visibility",
+    "latest main settlement route",
+    "Meshy Fjordside"
+  ],
+  "errors": []
+}

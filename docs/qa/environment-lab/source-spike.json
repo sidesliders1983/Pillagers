@@ -1,0 +1,15 @@
+{
+  "upstream": "97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159",
+  "info": {
+    "three": "180",
+    "calls": 2,
+    "triangles": 69440,
+    "programs": 2
+  },
+  "errors": [],
+  "typecheck": {
+    "original": "Two TS2345 errors: BufferSource casts do not match DataTexture TypedArray in @types/three 0.180",
+    "adaptation": "Remove casts, pass actual Float32Array/Uint8Array; current project typecheck passes"
+  },
+  "glslAdaptations": []
+}

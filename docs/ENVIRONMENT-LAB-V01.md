@@ -1,21 +1,27 @@
-# Environment Lab v0.1 — Water (#56)
+# Environment Lab v0.1 — sourced water (#56)
 
-Open `/environment-lab`. The lab opens calm, matte fjord water directly with the existing Terrain height field, authored house/scenery, seed 1983, WorldLighting and orbit camera. The live World continues to instantiate the unchanged legacy Water. This pass adds no gameplay or placement changes.
+Open `/environment-lab`. The default water is the MIT implementation from [boona13/threejs-grass-water-shaders](https://github.com/boona13/threejs-grass-water-shaders), pinned to `97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159`. Its water GLSL is unchanged. [Source provenance and local adaptations](../src/vendor/boona13-water/README.md) include the original license.
 
-Controls: fixed seed readout, shore/overview/water-level camera, day/night, water visibility, pause waves and Standard/Low/Compatibility fallback. There is no comparison control. Quality changes preserve the camera and scene. The renderer readout shows indicative frame time, draw calls, triangles and geometry/texture counts; counts are not VRAM measurements.
+The lab reuses Terrain, authored house/scenery, seed 1983, WorldLighting and orbit camera. Live Fjordside continues using the existing legacy Water. The Meshy character/housing integration in #61 remains intact.
 
-All candidate parameters are in `src/config/FjordWaterConfig.ts`: water level -0.12 m, wave amplitude 0.025 m, wavelength 9 m, slow animation speed 0.18, foam width 0.45 m and intensity 0.18. Muted deep and shallow colors are configurable. Standard uses a 180-segment grid; Low uses 90. Legacy is an explicit fallback.
+Controls: fixed seed, shore/overview/water-level camera, day/night, water visibility, pause waves and Standard/Low/Compatibility fallback. There is no Legacy/Candidate comparison control. Quality changes preserve the camera and scene. Renderer counts indicate draw calls, triangles, geometries and textures; they do not measure VRAM.
 
-`FjordWater` samples `surfaceHeightAt` (the rendered terrain triangle interpolation) into a depth attribute once. The lit standard-material shader uses this depth for shallow colors and restrained shoreline foam. Displacement fades out near shore. The surface is opaque, depth tested and below the land; no separate foam strip or reflection/refraction render pass is used. Time is accumulated from bounded frame deltas; pausing retains the current wave phase.
+## Integration
 
-Validation includes shared terrain-depth sampling, finite depth attributes, cheaper low-quality geometry and shader-time updates, plus navigation, social encounters, settlement projection, Chronicle and simulation tests. Historical prototype before/after captures and the current software-renderer indicative baseline are in `docs/qa/environment-lab/`.
+The former in-house `onBeforeCompile` water shader is replaced by a small adapter around the selected WaterPlane, WaterMask and WaterNoiseLUT. The shared `surfaceHeightAt` depth determines the source mask, including its shallow/deep transition and edge opacity. Upstream foam fields are placed at the actual rendered shoreline, found near `shoreAt`; their centres lie inland so only a restrained fringe reaches the water.
 
-The prerequisite rebase preserved the latest main simulation and `/play` and `/gameplay-lab` routes together with local Meshy/Fjordside integration. Backup branch: `codex/pre-main-rebase-backup`. Work branch: `codex/environment-lab`.
+The upstream terrain-height texture **adds surface displacement**. It is kept flat: binding sea-floor heights there would lower the water into the floor. The mask carries bathymetry instead. The source surface remains level at -0.12 m, below land. Existing noise normals provide visible motion without geometry waves, extra reflection/refraction passes or rewritten shader mathematics.
 
-## Confirmed review and validation
+Typed parameters live in `src/config/FjordWaterConfig.ts`: 180 m coverage, Standard 180 segments / Low 90, flow speed 0.18, normal strength 3, shallow depth 0.53 m, foam fringe 0.3 m, specular intensity 0.045, reflection strength 0.08 and opacity 0.97. Colors follow the muted palette and existing WorldLighting; night tint is 0.27. The source has fixed internal octave scales and foam math; the adapter does not invent unsupported amplitude/wavelength/intensity controls.
 
-The user approved tests through the visible lab controls and the public `waterDepthAt` query. Existing prototype tests on shader text were replaced with public-depth behavior checks. Removing the comparison control followed a red/green browser-test cycle; rejecting non-finite depth queries followed a separate red/green cycle. The design choices and test boundaries are recorded in `docs/qa/environment-lab/decisions.md`; the glossary now defines Environment Lab and Fjord water.
+The original shader directly outputs display color, so the adapter supplies display-space colors and adjusts the existing sky, body colors and sun direction for day/night. No water shader color-transform patch is added. Phase comes from bounded accumulated delta time; pause preserves it across quality switches.
 
-Run `node --test tests/fjord-water.test.mjs` for the depth-query seam. Run `node scripts/qa/check-environment-lab.mjs` with a local Playwright installation, or set `PLAYWRIGHT_MODULE` to its absolute module path. `PROTOTYPE_URL` selects the running server (default `http://127.0.0.1:5181`). The browser check observes the rendered surface and visible controls: direct opening, pause/resume, day/night, camera presets, quality/fallback and water visibility. It also checks that the main settlement route and Meshy Fjordside load after the rebase.
+## Validation and captures
 
-The current captures are `fjord-water-day.png`, `fjord-water-night.png` and the three camera presets. The earlier `legacy.png`, `candidate.png` and `candidate-night.png` remain historical prototype captures from before the user removed comparison mode. `baseline.json` contains warmed software-renderer samples; it is not a GPU hardware performance guarantee.
+The original code first rendered against pinned Three.js 0.180 with the shared shore/terrain and directional shadows. Only two obsolete DataTexture TypeScript casts needed correction. Texture identity/disposal fixes are recorded in provenance. The GLSL remains identical to the pinned upstream file.
+
+User-confirmed TDD boundaries remain visible lab controls and public `waterDepthAt`. The sourced implementation's visible status check first failed against the experiment, before the adapter was installed. Public depth behavior is unchanged.
+
+Run `node --test tests/fjord-water.test.mjs`. Run `node scripts/qa/check-environment-lab.mjs` with `PLAYWRIGHT_MODULE` pointing to Playwright; `PROTOTYPE_URL` defaults to `http://127.0.0.1:5181`. Browser checks observe actual pixels for pause/resume, day/night, camera presets, water visibility and quality fallback, then check Settlement and Meshy Fjordside. Ten-second warmed samples for each quality tier are software-renderer observations, not hardware frame-budget approval.
+
+See [QA report](qa/environment-lab/source-report.md), saved before/after images and source performance sample. Final visual approval remains with the user before #60 integration.
