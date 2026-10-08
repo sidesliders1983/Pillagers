@@ -1,0 +1,64 @@
+{
+  "ownerSupplied": true,
+  "unmodified": true,
+  "coordinates": "pixels from original top-left; crops can contain HUD overlays",
+  "references": [
+    {
+      "id": "REF-A",
+      "original": "1E7F7A6E-596B-42E9-B189-8E2047A215E7.PNG",
+      "file": "REF-A.png",
+      "sha256": "ccece95f3364da7fb406ff137805e2873e8460d80141917531429006f758ed09",
+      "bytes": 2605740,
+      "width": 1536,
+      "height": 1024,
+      "crops": [
+        {
+          "name": "spring sawmill panel",
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 512
+        },
+        {
+          "name": "winter overview panel",
+          "x": 768,
+          "y": 512,
+          "width": 768,
+          "height": 512
+        }
+      ]
+    },
+    {
+      "id": "REF-B",
+      "original": "58D20D05-7F0B-4ADD-B636-0C8C705C4E8D.PNG",
+      "file": "REF-B.png",
+      "sha256": "4f2bd114deec56e650daeae791a846c1e1426372f1d8a68fe173c5ae69b46acd",
+      "bytes": 2301863,
+      "width": 1536,
+      "height": 1024,
+      "crops": [
+        {
+          "name": "village ground",
+          "x": 280,
+          "y": 360,
+          "width": 850,
+          "height": 510
+        },
+        {
+          "name": "shore and dock",
+          "x": 870,
+          "y": 130,
+          "width": 385,
+          "height": 400
+        },
+        {
+          "name": "forest and backdrop",
+          "x": 285,
+          "y": 75,
+          "width": 790,
+          "height": 285
+        }
+      ]
+    }
+  ]
+}

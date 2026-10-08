@@ -25,3 +25,5 @@ User-confirmed TDD boundaries remain visible lab controls and public `waterDepth
 Run `node --test tests/fjord-water.test.mjs`. Run `node scripts/qa/check-environment-lab.mjs` with `PLAYWRIGHT_MODULE` pointing to Playwright; `PROTOTYPE_URL` defaults to `http://127.0.0.1:5181`. Browser checks observe actual pixels for pause/resume, day/night, camera presets, water visibility and quality fallback, then check Settlement and Meshy Fjordside. Ten-second warmed samples for each quality tier are software-renderer observations, not hardware frame-budget approval.
 
 See [QA report](qa/environment-lab/source-report.md), saved before/after images and source performance sample. Final visual approval remains with the user before #60 integration.
+
+The current lab also previews [Ground v0.2 (#57)](GROUND-TERRAIN-V02.md). The water source, controls and historical measurements above remain the Pass 1 record.

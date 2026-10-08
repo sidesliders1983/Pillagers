@@ -1,0 +1,53 @@
+{
+  "retired": "2026-10-08",
+  "reason": "Owner withdrew all three legacy outfits ahead of complete clothing redevelopment",
+  "sourceCommit": "afcd31976d2a1004f0ef75e86c443e3707108f37",
+  "runtimeAvailable": false,
+  "files": [
+    {
+      "file": "cream-tunic/Clothing_cream-tunic_LOD2.glb",
+      "sha256": "e70aecffd92a74cb99b40e724f43109534b249d1a8746206682d2a910b95650f",
+      "bytes": 470944
+    },
+    {
+      "file": "cream-tunic/Clothing_cream-tunic_LOD2.provenance.json",
+      "sha256": "6bd8e4069e01582f946643219802c021e836b8318fb84d156dfc757ebd9c59bf",
+      "bytes": 9178
+    },
+    {
+      "file": "cream-tunic/garment-bind.json",
+      "sha256": "0f05a0ff9086d740506041682330d9ade88a5e708c5884236d871e4e2594d7a5",
+      "bytes": 1931
+    },
+    {
+      "file": "long-dress/Clothing_long-dress_LOD2.glb",
+      "sha256": "ba8c08e9f38b3171aa29c4714d2df85d44341ff91294c9acb3875efe1b633112",
+      "bytes": 467064
+    },
+    {
+      "file": "long-dress/Clothing_long-dress_LOD2.provenance.json",
+      "sha256": "a933d333894e1fdd94d5be4556c2c03010c19a158d7e664c399b3b1f2973e178",
+      "bytes": 9181
+    },
+    {
+      "file": "long-dress/garment-bind.json",
+      "sha256": "4ffd2f3b813adae6a01ea3a79aea03ab5ddec79ed57e350270cc5dd860d0f8d8",
+      "bytes": 1932
+    },
+    {
+      "file": "mantle-tunic/Clothing_mantle-tunic_LOD2.glb",
+      "sha256": "bc0ae0f85734248c038e7ae4b1e156ef39dfa0fb705539ac6d4ae3222143f366",
+      "bytes": 473564
+    },
+    {
+      "file": "mantle-tunic/Clothing_mantle-tunic_LOD2.provenance.json",
+      "sha256": "ae865ba38c156eb3ecd33aa362a1c42087f62a7d965d2873cc3ef048cfcf98bd",
+      "bytes": 9197
+    },
+    {
+      "file": "mantle-tunic/garment-bind.json",
+      "sha256": "3433c7856aec4ffafd72b8d2f0d8706f65bed7e048db76ac8faaa661fb996205",
+      "bytes": 1932
+    }
+  ]
+}

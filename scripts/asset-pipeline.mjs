@@ -5,7 +5,9 @@ import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const [action,...args]=process.argv.slice(2);
-if(action==='optimize'||action==='test'){
+if(action==='nature'){
+ await (await import('./prepare-nature-assets.mjs')).prepareNature(args[0]);
+}else if(action==='optimize'||action==='test'){
     const blender=process.env.BLENDER_PATH||[
         join(root,'tools/blender-4.5.9-windows-x64/blender.exe'),
         'C:/Program Files/Blender Foundation/Blender 4.5/blender.exe',

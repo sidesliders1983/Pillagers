@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import ts from 'typescript';
 import { BufferGeometry, Float32BufferAttribute, Group, Mesh, MeshStandardMaterial, Triangle, Vector3 } from 'three';
@@ -98,6 +98,7 @@ test('actual r3 facial recess remains exactly unchanged in helper, hair and bear
         assert.deepEqual(geometrySnapshot(p.mesh.geometry), before);
         assert.deepEqual(bodySnapshot(f.human), bodyBefore);
         assert.equal(digest(readFileSync(file)), sourceHash);
+        mkdirSync('scratch/facial-surface-review', { recursive: true });
         writeFileSync('scratch/facial-surface-review/EXTERIOR-CONSUMER-PROOF.json', JSON.stringify({ schema: 'pillagers-head-contact-consumer-review/1', bodySHA256: sourceHash, actualTriangle: f.contact.triangle, proof: 'Actual on-triangle facial patch+1.5mm is outside full body but inside HEAD convex hull; helper/hair/beard/public install preserve exact positions and index.', evidence, sourceBodyAndCagesUnchanged: true, visualAcceptance: false }, null, 2) + '\n');
     } finally { p.mesh.geometry.dispose(); p.mesh.material.dispose(); f.human.dispose(); }
 });

@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-03T22:37:22.811Z",
+  "method": "Actual source calibrated complete hand_R core RMS radius; current factory morphed/skinned neutral authoring-root radius, no world height double scale",
+  "bodySHA256": "8e01bc03d4d663bb9c3298cfbf8a5703089a696a51be71b1c7ab39c9f5ebd47e",
+  "referenceRadius": 0.07847847822748248,
+  "rows": [
+    {
+      "id": "golden_masculine_01",
+      "age": 32,
+      "ratio": 1.0000000000000004,
+      "corePoints": 234
+    },
+    {
+      "id": "golden_feminine_01",
+      "age": 32,
+      "ratio": 1.0000000000000004,
+      "corePoints": 234
+    },
+    {
+      "id": "golden_child_01",
+      "age": 6,
+      "ratio": 0.6499999709233687,
+      "corePoints": 234
+    }
+  ]
+}

@@ -7,14 +7,23 @@ function fixture(load=staged,{calibrated=true,planar=false}={}){
  const {landmarkNames,socketDefinitions}=load('src/characters/AttachmentContract.ts');
  const {validateBodySurfaceCalibration}=load('src/characters/BodySurfaceCalibration.ts');
  const {CharacterFitSystem}=load('src/characters/CharacterFitSystem.ts');
- const root=new Group(),coordinates=[],coverage=[],sets={head:[],neck:[],torso:[],pelvis:[],handL:[],handR:[],footL:[],footR:[]};
+ const root=new Group(),coordinates=[],indices=[],coverage=[],sets={head:[],neck:[],torso:[],pelvis:[],handL:[],handR:[],footL:[],footR:[]};
  const tetra=(key,zone,x,y,z,scale=.1,copies=1)=>{
-  for(let k=0;k<4;k++)for(let c=0;c<copies;c++){sets[key].push(coordinates.length/3);coordinates.push(x+(k===1?scale:0),y+(k===2&&(key!=='head'||!planar)?scale:0),z+(k===3?scale:0));coverage.push(zone);}
+  if(key==='head'&&planar){
+   // Contact HEAD is a planar patch of a valid closed box, never a degenerate body.
+   const start=coordinates.length/3,points=[[x,y,z],[x+scale,y,z],[x+scale,y,z+scale],[x,y,z+scale],[x,y-scale,z],[x+scale,y-scale,z],[x+scale,y-scale,z+scale],[x,y-scale,z+scale]];
+   for(let k=0;k<8;k++){sets[k<4?'head':'neck'].push(coordinates.length/3);coordinates.push(...points[k]);coverage.push(k<4?'HEAD':'NECK');}
+   for(const face of [[0,3,2],[0,2,1],[4,5,6],[4,6,7],[0,1,5],[0,5,4],[1,2,6],[1,6,5],[2,3,7],[2,7,6],[3,0,4],[3,4,7]])indices.push(...face.map(k=>start+k));
+   return;
+  }
+  const start=coordinates.length/3;
+  for(let k=0;k<4;k++)for(let c=0;c<copies;c++){sets[key].push(coordinates.length/3);coordinates.push(x+(k===1?scale:0),y+(k===2?scale:0),z+(k===3?scale:0));coverage.push(zone);}
+  for(const [f,face] of [[0,2,1],[0,1,3],[0,3,2],[1,2,3]].entries())indices.push(...face.map(k=>start+k*copies+f%copies));
  };
  tetra('head','HEAD',-.04,1.58,.02,.08,2);tetra('neck','NECK',-.09,1.48,-.01,.18);tetra('torso','TORSO_UPPER',-.1,1.2,0);tetra('pelvis','PELVIS',-.1,.9,0);
  tetra('handL','LOWER_ARM_L',.3,.8,0);tetra('handR','LOWER_ARM_R',-.4,.8,0);tetra('footL','FEET',.1,0,0);tetra('footR','FEET',-.2,0,0);
  const geometry=new BufferGeometry();geometry.setAttribute('position',new Float32BufferAttribute(coordinates,3));
- const indices=[];for(let i=0;i<coordinates.length/3-2;i+=3)indices.push(i,i+1,i+2);geometry.setIndex(indices);
+ geometry.setIndex(indices);
  geometry.setAttribute('skinIndex',new Uint16BufferAttribute(Array(coordinates.length/3*4).fill(0),4));
  geometry.setAttribute('skinWeight',new Float32BufferAttribute(Array.from({length:coordinates.length/3*4},(_,i)=>i%4===0?1:0),4));
  const deltas=Array(coordinates.length).fill(0);for(const id of sets.neck)deltas[id*3]=coordinates[id*3]*2;

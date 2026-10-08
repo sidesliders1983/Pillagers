@@ -1,0 +1,1121 @@
+{
+  "baseCommit": "96b4d65784b46120c38b26eb70721adc20ae5680",
+  "workingTree": "render implementation pinned to baseCommit; capture-script revisions are recorded separately",
+  "renderer": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "canvas": [
+    1536,
+    1024
+  ],
+  "phase": 0,
+  "grassDefault": false,
+  "dusk": "blocked: no existing dusk preset; not fabricated",
+  "captures": [
+    {
+      "file": "shore-standard-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 101.19999999987581,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "file": "shore-standard-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 28.223809523774044,
+        "calls": 27,
+        "triangles": 359234,
+        "geometries": 27,
+        "textures": 34
+      }
+    },
+    {
+      "file": "shore-low-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 175.23333333308497,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 27,
+        "textures": 34
+      }
+    },
+    {
+      "file": "shore-low-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 98.30000000021288,
+        "calls": 27,
+        "triangles": 310634,
+        "geometries": 27,
+        "textures": 34
+      }
+    },
+    {
+      "file": "shore-legacy-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "legacy",
+        "ms": 47.868749999906875,
+        "calls": 27,
+        "triangles": 294514,
+        "geometries": 28,
+        "textures": 31
+      }
+    },
+    {
+      "file": "shore-legacy-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "legacy",
+        "ms": 39.21000000014901,
+        "calls": 28,
+        "triangles": 294546,
+        "geometries": 28,
+        "textures": 31
+      }
+    },
+    {
+      "file": "village-standard-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 266.4500000011176,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "village-standard-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 125.04999999981375,
+        "calls": 27,
+        "triangles": 359234,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "village-low-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 117.739999999851,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "village-low-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 138.65000000037253,
+        "calls": 27,
+        "triangles": 310634,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "village-legacy-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "legacy",
+        "ms": 178.23333333308497,
+        "calls": 26,
+        "triangles": 294404,
+        "geometries": 28,
+        "textures": 31
+      }
+    },
+    {
+      "file": "village-legacy-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "legacy",
+        "ms": 31.46470588248442,
+        "calls": 27,
+        "triangles": 294436,
+        "geometries": 28,
+        "textures": 31
+      }
+    },
+    {
+      "file": "forest-standard-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 97.08571428539496,
+        "calls": 24,
+        "triangles": 342135,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "forest-standard-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 88.76666666691501,
+        "calls": 24,
+        "triangles": 342135,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "forest-low-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 32.625,
+        "calls": 24,
+        "triangles": 293535,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "forest-low-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 134.85999999940395,
+        "calls": 24,
+        "triangles": 293535,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "forest-legacy-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "legacy",
+        "ms": 151.09999999962747,
+        "calls": 24,
+        "triangles": 277337,
+        "geometries": 28,
+        "textures": 31
+      }
+    },
+    {
+      "file": "forest-legacy-night.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "legacy",
+        "ms": 108.91666666666666,
+        "calls": 24,
+        "triangles": 277337,
+        "geometries": 28,
+        "textures": 31
+      }
+    },
+    {
+      "file": "shore-standard-day-near.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            19.902612938671872,
+            10.634204312890622,
+            -17.844180701874983
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 52.29444444448583,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "shore-standard-day-far.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            45.220193085866164,
+            19.07339769528872,
+            -58.35230893738583
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 73.11428571385996,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "village-standard-day-near.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            17.248931213515622,
+            8.97078388160156,
+            4.731591374218755
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 58.543750000186265,
+        "calls": 24,
+        "triangles": 344797,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "village-standard-day-far.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            39.19083400775068,
+            16.56605792575985,
+            -12.146795390577434
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 97.7571428572493,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "forest-standard-day-near.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -31.922090350937495,
+            12.634204312890624,
+            12.077909649062507
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 71.94285714280392,
+        "calls": 21,
+        "triangles": 330467,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "forest-standard-day-far.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -52.17615446869293,
+            21.073397695288723,
+            -8.176154468692921
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 95.83636363663457,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "overview-standard-day.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            40.00000000000001,
+            36.00000000000001,
+            -39.999999999999986
+          ],
+          "target": [
+            0,
+            5,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 129.85000000024834,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "ground-only.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 19.846153846153847,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "nature-only.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.912500000093132,
+        "calls": 14,
+        "triangles": 196950,
+        "geometries": 29,
+        "textures": 34
+      }
+    },
+    {
+      "file": "optional-grass-on.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 266.9500000011176,
+        "calls": 27,
+        "triangles": 360066,
+        "geometries": 30,
+        "textures": 35
+      }
+    },
+    {
+      "file": "optional-grass-off.png",
+      "canvas": {
+        "x": 32,
+        "y": 112.46875,
+        "width": 1536,
+        "height": 1024
+      },
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 103.55000000012417,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 30,
+        "textures": 35
+      }
+    }
+  ],
+  "errors": []
+}

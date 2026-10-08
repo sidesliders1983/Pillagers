@@ -4,7 +4,7 @@ Upstream: https://github.com/boona13/threejs-grass-water-shaders
 Pinned revision: `97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159` (reviewed 2026-10-08).
 License: MIT, copyright (c) 2026 boona13. Original notice: [LICENSE](LICENSE).
 
-Only WaterPlane.ts, WaterMask.ts, WaterNoiseLUT.ts and waterShader.glsl.ts are vendored. No grass, demo dependencies or downloaded texture assets are included. This repository is a small demo and is not treated as a production compatibility guarantee.
+Only WaterPlane.ts, WaterMask.ts, WaterNoiseLUT.ts and waterShader.glsl.ts are vendored. This water bundle contains no grass, demo dependencies or downloaded texture assets. The grass renderer is separately vendored in [boona13-grass](../boona13-grass/README.md). This repository is a small demo and is not treated as a production compatibility guarantee.
 
 ## Local changes
 

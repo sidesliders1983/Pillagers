@@ -1,0 +1,112 @@
+{
+  "version": "ground-v02",
+  "seed": 1983,
+  "configSha256": "ee973178d2029c7d13430b0bd28328f95cc9166d110f02de4341fe9b2a52c069",
+  "generatedWith": "sharp 0.35.5; scripts/prepare-ground-materials.mjs",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://docs.ambientcg.com/license/",
+  "terrainBounds": {
+    "minX": -58,
+    "maxX": 58,
+    "minZ": -18,
+    "maxZ": 62
+  },
+  "sourceAssets": [
+    {
+      "id": "Ground037",
+      "url": "https://ambientcg.com/view?id=Ground037",
+      "download": "https://ambientcg.com/get?file=Ground037_1K-PNG.zip",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "archiveSha256": "cbd75f0660870b3299a68c4fe7fd54efb3951cf992d4295961209619eb284c47",
+      "maps": [
+        {
+          "file": "Ground037_1K-PNG_NormalGL.png",
+          "sha256": "163837046d8ea7c15a29f12367b7af90e6509e2e3d6168ecf55824746660b9a7"
+        },
+        {
+          "file": "Ground037_1K-PNG_Roughness.png",
+          "sha256": "4cd4057af73842857b529d29ae4a61fa67de8813333eda0c82bbee4d3fc357b7"
+        }
+      ],
+      "used": [
+        "OpenGL normals",
+        "roughness"
+      ],
+      "notUsed": [
+        "albedo",
+        "displacement",
+        "ambient occlusion"
+      ]
+    },
+    {
+      "id": "Ground054",
+      "url": "https://ambientcg.com/view?id=Ground054",
+      "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "archiveSha256": "19aafb7d257cff80eca5374b097abacb714149aa899891be82572e82fbac1326",
+      "maps": [
+        {
+          "file": "Ground054_1K-PNG_NormalGL.png",
+          "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f"
+        },
+        {
+          "file": "Ground054_1K-PNG_Roughness.png",
+          "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8"
+        }
+      ],
+      "used": [
+        "OpenGL normals",
+        "roughness"
+      ],
+      "notUsed": [
+        "albedo",
+        "displacement",
+        "ambient occlusion"
+      ]
+    },
+    {
+      "id": "mossy_rock",
+      "url": "https://polyhaven.com/a/mossy_rock",
+      "download": "https://api.polyhaven.com/files/mossy_rock",
+      "licenseUrl": "https://polyhaven.com/license",
+      "archiveSha256": null,
+      "maps": [
+        {
+          "file": "mossy_rock_nor_gl_1k.png",
+          "sha256": "08b01ee4387e4bb3433f901c62acc40d4be8d6d4a481e5fb508400cb4664d82e"
+        },
+        {
+          "file": "mossy_rock_rough_1k.png",
+          "sha256": "ed620db809bf72088bc4b5d6dbc48298256a4997a51aca929a54c1824301e9c5"
+        }
+      ],
+      "used": [
+        "OpenGL normals",
+        "roughness"
+      ],
+      "notUsed": [
+        "albedo",
+        "displacement",
+        "ambient occlusion"
+      ]
+    }
+  ],
+  "delivery": [
+    {
+      "file": "normal.png",
+      "bytes": 1314919,
+      "sha256": "63c119f4d7675f4f8c166b68731ac935d96d92784042516250a3a61ef4816286",
+      "width": 1024,
+      "height": 1024,
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "file": "roughness.png",
+      "bytes": 392474,
+      "sha256": "57cc58e9411fb632737634b28474a4c241c519f3062a0dfc88bcbfd95ec1a9e8",
+      "width": 1024,
+      "height": 1024,
+      "colorSpace": "NoColorSpace"
+    }
+  ]
+}

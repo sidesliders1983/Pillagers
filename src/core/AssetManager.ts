@@ -3,10 +3,11 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { generatedHouseFiles } from '../config/HousingAssets';
+import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
 import { worldConfig } from '../config/worldConfig';
 import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 const registry = { spruce: 'spruce-tree', birch: 'birch-tree', boulder: 'boulder', cliff: 'fjord-cliff-rock', greatHall: 'great-hall', hut: 'turf-dwelling', storehouse: 'stabbur-storehouse', hearth: 'cooking-hearth', well: 'village-well', logs: 'log-pile', barrel: 'barrel', crate: 'storage-crate', boat: 'faering-rowboat', jetty: 'jetty-pier', heather: 'heather-shrub', grass: 'grass-tuft', fish: 'fish-drying-rack', rune: 'runestone' };
-export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles;
+export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey;
 export class AssetManager {
     readonly windowMaterials:MeshStandardMaterial[]=[];
     readonly fireMaterials:MeshStandardMaterial[]=[];
@@ -78,6 +79,34 @@ export class AssetManager {
             this.models.set(key, root);
         }));
         this.draco.dispose();
+    }
+    async loadNature(){
+        const response=await fetch(import.meta.env.BASE_URL+'nature/kaykit-v1/manifest.json');
+        if(!response.ok)throw new Error('Required KayKit FREE assets missing; run asset-pipeline nature');
+        const manifest=await response.json() as {assets:Record<NatureAssetKey,{file:string}>};
+        let sharedMaterial:MeshStandardMaterial|undefined;
+        let foliageMaterial:MeshStandardMaterial|undefined;
+        for(const key of natureAssetIds){
+            const entry=manifest.assets[key];if(!entry)throw new Error('Missing required KayKit role: '+key);
+            const {scene}=await this.loader.loadAsync(import.meta.env.BASE_URL+'nature/kaykit-v1/'+entry.file);
+            scene.updateMatrixWorld(true);const bounds=new Box3().setFromObject(scene),center=bounds.getCenter(new Vector3());
+            scene.position.set(-center.x,-bounds.min.y,-center.z);const root=new Group();root.add(scene);root.name=key;
+            root.traverse(node=>{if(node instanceof Mesh){
+                const materials=Array.isArray(node.material)?node.material:[node.material];
+                for(const material of materials)if(material instanceof MeshStandardMaterial){
+                    // All locked selections use the identical original forest atlas/material.
+                    if(!sharedMaterial)sharedMaterial=material;
+                    else if(material!==sharedMaterial){material.map?.dispose();material.dispose();}
+                }
+                if(!foliageMaterial&&sharedMaterial){foliageMaterial=sharedMaterial.clone();foliageMaterial.color.set(0xb7c9b8);}
+                node.material=key.includes('rock')||key.includes('boulder')?sharedMaterial!:foliageMaterial!;node.castShadow=true;node.receiveShadow=true;
+            }});root.updateMatrixWorld(true);this.models.set(key,root);
+        }
+    }
+    dispose(){
+        const geometries=new Set<import('three').BufferGeometry>(),materials=new Set<import('three').Material>(),textures=new Set<import('three').Texture>();
+        for(const model of this.models.values())model.traverse(node=>{if(node instanceof Mesh){geometries.add(node.geometry);for(const m of Array.isArray(node.material)?node.material:[node.material]){materials.add(m);for(const value of Object.values(m))if(value&&typeof value==='object'&&'isTexture' in value)textures.add(value as import('three').Texture);}}});
+        for(const resource of [...geometries,...materials,...textures])resource.dispose();this.models.clear();this.draco.dispose();
     }
     has(key: AssetKey){return this.models.has(key);}
     get(key: AssetKey): Object3D {
