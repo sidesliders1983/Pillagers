@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "variant": "adult-male",
+  "label": "Adult bull",
+  "file": "cow-male-adult.glb",
+  "source": "Assets/Characters/Cow/Adult Male/cow-male-adult-textured.glb",
+  "sourceSha256": "ae948be2dc240ff8dffca20fb3961dfd3963a2479e18f5cf9708a9b872f013f4",
+  "authoringSha256": "677cf4bdb2816e0e333afd98c0d22d61303a73a45307bfac7f81b8c871c95e2e",
+  "sha256": "dda6ee2a327e07a36848ad7cb3e66f519b0cfa4bd74e78f589a807f3fccbbac4",
+  "authoringBytes": 5711668,
+  "bytes": 761356,
+  "triangles": 5664,
+  "joints": 39,
+  "height": 1.3503702380713365,
+  "withersHeightM": 1.2,
+  "sourceWithersHeightM": 1.5106936413526455,
+  "physicalScale": 0.7943370959882663,
+  "walkSpeedMps": 0.2780179835958932,
+  "walkCycleSeconds": 1.5,
+  "clips": {
+    "Idle": {
+      "maxPlantedTargetErrorM": 6.462580198267961e-7,
+      "duration": 6
+    },
+    "Graze": {
+      "maxPlantedTargetErrorM": 9.064042607843737e-7,
+      "duration": 12
+    },
+    "Walk": {
+      "maxPlantedTargetErrorM": 8.146604821767487e-7,
+      "duration": 1.5
+    },
+    "HumanInteraction": {
+      "maxPlantedTargetErrorM": 6.462580198267961e-7,
+      "duration": 6
+    }
+  },
+  "grazing": {
+    "headTiltDegrees": 75,
+    "headTiltReference": "horizontal ground",
+    "verticalDeviationDegrees": 15,
+    "neckPose": "distributed forward-and-down curve",
+    "yawDegrees": {
+      "body": 1,
+      "shoulders": 1.25,
+      "neck": 1.5,
+      "head": 3
+    }
+  },
+  "textures": [
+    {
+      "name": "normal",
+      "width": 512,
+      "height": 512,
+      "bytes": 305282,
+      "lossless": true
+    },
+    {
+      "name": "Image_0",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 55754,
+      "lossless": false
+    },
+    {
+      "name": "Image_1",
+      "width": 256,
+      "height": 256,
+      "bytes": 35394,
+      "lossless": true
+    }
+  ],
+  "blenderVersion": "5.2.2 LTS",
+  "referenceMethod": "Authored keys with cattle gait literature and user grazing reference; not video motion capture"
+}

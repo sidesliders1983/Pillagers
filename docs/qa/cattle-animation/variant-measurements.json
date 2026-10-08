@@ -1,0 +1,152 @@
+{
+  "baby": [
+    {
+      "time": 2.4,
+      "neckDownwardDeg": 49.059393809259255,
+      "muzzleAheadOfHoofM": 0.21279579401016235,
+      "headTiltDeg": 74.70877337459797,
+      "muzzleHeightM": 0.11054246872663498,
+      "minimumSurfaceHeightM": -0.0012659156927838922
+    },
+    {
+      "time": 4.0,
+      "neckDownwardDeg": 47.96657644028152,
+      "muzzleAheadOfHoofM": 0.21631240844726562,
+      "headTiltDeg": 74.99032491998851,
+      "muzzleHeightM": 0.1139943078160286,
+      "minimumSurfaceHeightM": -0.0014963047578930855
+    },
+    {
+      "time": 5.0,
+      "neckDownwardDeg": 47.98772585214939,
+      "muzzleAheadOfHoofM": 0.2162737399339676,
+      "headTiltDeg": 74.89403762975317,
+      "muzzleHeightM": 0.11280413717031479,
+      "minimumSurfaceHeightM": -0.001448513357900083
+    },
+    {
+      "time": 6.856,
+      "neckDownwardDeg": 49.023502310361486,
+      "muzzleAheadOfHoofM": 0.21254433691501617,
+      "headTiltDeg": 74.358305902166,
+      "muzzleHeightM": 0.10911187529563904,
+      "minimumSurfaceHeightM": -0.0013186753494665027
+    },
+    {
+      "time": 8.4,
+      "neckDownwardDeg": 49.058693000292905,
+      "muzzleAheadOfHoofM": 0.2128150314092636,
+      "headTiltDeg": 74.58318483958446,
+      "muzzleHeightM": 0.11066935211420059,
+      "minimumSurfaceHeightM": -0.0011623294558376074
+    },
+    {
+      "time": 9.6,
+      "neckDownwardDeg": 47.89689723978248,
+      "muzzleAheadOfHoofM": 0.21686474978923798,
+      "headTiltDeg": 74.95468228781367,
+      "muzzleHeightM": 0.11461970955133438,
+      "minimumSurfaceHeightM": -0.0013845599023625255
+    }
+  ],
+  "young-adult": [
+    {
+      "time": 2.4,
+      "neckDownwardDeg": 50.28297679128104,
+      "muzzleAheadOfHoofM": 0.45071232318878174,
+      "headTiltDeg": 74.9874415456113,
+      "muzzleHeightM": 0.2751539945602417,
+      "minimumSurfaceHeightM": -1.899019298434723e-05
+    },
+    {
+      "time": 4.0,
+      "neckDownwardDeg": 49.257200291247315,
+      "muzzleAheadOfHoofM": 0.4543554186820984,
+      "headTiltDeg": 74.88673035637619,
+      "muzzleHeightM": 0.2780227065086365,
+      "minimumSurfaceHeightM": -2.409701437500189e-06
+    },
+    {
+      "time": 5.0,
+      "neckDownwardDeg": 49.279755890487586,
+      "muzzleAheadOfHoofM": 0.4541521668434143,
+      "headTiltDeg": 74.98801942599238,
+      "muzzleHeightM": 0.27607735991477966,
+      "minimumSurfaceHeightM": -6.527208711304411e-07
+    },
+    {
+      "time": 6.856,
+      "neckDownwardDeg": 50.28195717258388,
+      "muzzleAheadOfHoofM": 0.45042215287685394,
+      "headTiltDeg": 74.85522463389454,
+      "muzzleHeightM": 0.2727785110473633,
+      "minimumSurfaceHeightM": -1.828574386308901e-05
+    },
+    {
+      "time": 8.4,
+      "neckDownwardDeg": 50.28226292966333,
+      "muzzleAheadOfHoofM": 0.45066435635089874,
+      "headTiltDeg": 74.95125978937858,
+      "muzzleHeightM": 0.2752182185649872,
+      "minimumSurfaceHeightM": -1.899019298434723e-05
+    },
+    {
+      "time": 9.6,
+      "neckDownwardDeg": 49.256218665762376,
+      "muzzleAheadOfHoofM": 0.45474760234355927,
+      "headTiltDeg": 74.9505053855045,
+      "muzzleHeightM": 0.27832192182540894,
+      "minimumSurfaceHeightM": -5.634743047266966e-06
+    }
+  ],
+  "adult-male": [
+    {
+      "time": 2.4,
+      "neckDownwardDeg": 48.15965879813308,
+      "muzzleAheadOfHoofM": 0.5941133201122284,
+      "headTiltDeg": 74.91956471285769,
+      "muzzleHeightM": 0.25946497917175293,
+      "minimumSurfaceHeightM": 3.4092192890966544e-06
+    },
+    {
+      "time": 4.0,
+      "neckDownwardDeg": 46.859087455057455,
+      "muzzleAheadOfHoofM": 0.5997102856636047,
+      "headTiltDeg": 74.96471121253623,
+      "muzzleHeightM": 0.2641969323158264,
+      "minimumSurfaceHeightM": 3.305899326733197e-06
+    },
+    {
+      "time": 5.0,
+      "neckDownwardDeg": 46.88065741139609,
+      "muzzleAheadOfHoofM": 0.5989518463611603,
+      "headTiltDeg": 74.9952250649668,
+      "muzzleHeightM": 0.2624203562736511,
+      "minimumSurfaceHeightM": 2.694409431569511e-06
+    },
+    {
+      "time": 6.856,
+      "neckDownwardDeg": 48.010596088003766,
+      "muzzleAheadOfHoofM": 0.5945430099964142,
+      "headTiltDeg": 74.66378049016257,
+      "muzzleHeightM": 0.25619104504585266,
+      "minimumSurfaceHeightM": 2.224561740149511e-06
+    },
+    {
+      "time": 8.4,
+      "neckDownwardDeg": 48.158991990679944,
+      "muzzleAheadOfHoofM": 0.5941949188709259,
+      "headTiltDeg": 74.84626816098256,
+      "muzzleHeightM": 0.2595686614513397,
+      "minimumSurfaceHeightM": 3.4092192890966544e-06
+    },
+    {
+      "time": 9.6,
+      "neckDownwardDeg": 46.582224387271204,
+      "muzzleAheadOfHoofM": 0.6018201112747192,
+      "headTiltDeg": 74.98708124229017,
+      "muzzleHeightM": 0.26605674624443054,
+      "minimumSurfaceHeightM": 2.817122322085197e-06
+    }
+  ]
+}
