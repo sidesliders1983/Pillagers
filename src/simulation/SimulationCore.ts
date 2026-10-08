@@ -1,3 +1,7 @@
+import {personaIdentity} from './Identity';
+import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway} from './WorldExpeditions';
+import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
+export {inspectWorld,missionOffer,defaultExpeditionConfig,missionTypes,personaAway} from './WorldExpeditions';
 import {initializeWeather,validateWeather} from './Weather';
 import type {WeatherState,WeatherConfig} from './Weather';
 export {inspectWeather,inspectWeatherExposure,defaultWeatherConfig,weatherClasses} from './Weather';
@@ -27,7 +31,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
-    weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
+    entityPrefix?:string;personaArchive?:Record<string,Persona>;world?:WorldState; weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
     families: Record<string, {id: string; memberIds: string[]}>;
     households: Record<string, {id: string; memberIds: string[]; residenceId: string | null}>;
@@ -35,8 +39,8 @@ export type SimulationState = {
     buildings: Record<string, {id: string; kind: 'house' | 'farmyard'; specialization: Occupation | null}>;
     stocks: {food: number; materials: number}; events: SimulationEvent[];
 };
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={},weatherOverrides:Partial<WeatherConfig>={}):SimulationState {
-    const state=generateCampaign(seed,overrides,mechanicsOverrides);initializeWeather(state,weatherOverrides);validateState(state);return state;
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={},weatherOverrides:Partial<WeatherConfig>={},expeditionOverrides:Partial<ExpeditionConfig>={}):SimulationState {
+    const state=generateCampaign(seed,overrides,mechanicsOverrides);initializeWeather(state,weatherOverrides);initializeWorld(state,targetSeed=>{const target=generateCampaign(targetSeed,overrides,mechanicsOverrides);initializeWeather(target,weatherOverrides);return target;},expeditionOverrides);validateState(state);return state;
 }
 export function createFixtureClan(seed: number): SimulationState {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be uint32');
@@ -64,7 +68,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     validateState(state); return state;
 }
-export type SimulationCommand = LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -74,10 +78,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand): SimulationState {
     validateState(input);
+    if(['CreateExpeditionGroup','EditExpeditionGroup','DispatchExpedition'].includes(command.type)){const state=structuredClone(input);applyExpeditionCommand(state,command as ExpeditionCommand);validateState(state);return state;}
     if(isLandingCommand(command)){const state=structuredClone(input);applyLandingCommand(state,command as LandingCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if(isMechanicsCommand(command)){const state=structuredClone(input);applyMechanicsCommand(state,command as MechanicsCommand);reconcileFarmyards(state,farmyards(input).map(f=>f.id));validateState(state);return state;}
     if (command.type === 'AssignOccupation') {
         const occupations: Occupation[] = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];
+        if(personaAway(input,command.personaId))throw new Error('Persona away on expedition');
         const person = input.personas[command.personaId];
         if (!person || person.deathWinter !== null) throw new Error('Persona must be alive');
         if (input.mechanics && command.occupation!==null && personaAge(input,person.id)<input.mechanics.config.workAge)throw new Error('Persona below work age');
@@ -159,11 +165,11 @@ function validateState(state: SimulationState): void {
             }
         });
         if (person.occupation !== null && person.occupationHistory.at(-1)?.endedAt !== null) throw new Error('Missing active occupation');
-        for (const parent of person.parentIds) if (parent === id || !Object.hasOwn(state.personas, parent)) throw new Error('Unknown parent');
-        if (person.partnerId !== null && !Object.hasOwn(state.personas, person.partnerId)) throw new Error('Unknown partner');
+        for (const parent of person.parentIds) if (parent === id || !personaIdentity(state,parent)) throw new Error('Unknown parent');
+        if (person.partnerId !== null && !personaIdentity(state,person.partnerId)) throw new Error('Unknown partner');
     }
     for (const [id, family] of Object.entries(state.families)) {
-        if (family.id !== id || !Array.isArray(family.memberIds) || family.memberIds.some(member => !Object.hasOwn(state.personas, member))) throw new Error('Invalid family');
+        if (family.id !== id || !Array.isArray(family.memberIds) || family.memberIds.some(member => !personaIdentity(state,member))) throw new Error('Invalid family');
     }
     for (const [id, household] of Object.entries(state.households)) {
         if (household.id !== id || !Array.isArray(household.memberIds) || household.memberIds.some(member => !Object.hasOwn(state.personas, member))) throw new Error('Invalid household');
@@ -179,13 +185,14 @@ function validateState(state: SimulationState): void {
         const timestamp = timeValue(event.time);
         if (timestamp < previousEventTime) throw new Error('Backwards events');
         previousEventTime = timestamp;
-        if (event.personaId && !Object.hasOwn(state.personas, event.personaId)) throw new Error('Unknown event persona');
+        if (event.personaId && !personaIdentity(state,event.personaId)) throw new Error('Unknown event persona');
         if (event.id !== `event-${index + 1}` || !event.type) throw new Error('Invalid event identity');
         integer(event.time.winter, 'Event Winter'); integer(event.time.tick, 'Event tick');
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
+    for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');}
     validateMechanics(state);
-    validateLanding(state);validateWeather(state);
+    validateLanding(state);validateWeather(state);validateWorld(state,validateState);
 }
 
 export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {

@@ -14,6 +14,7 @@ try{
  const watch=page.locator('.play-left');await watch.hover();await page.mouse.wheel(0,600);await page.waitForTimeout(100);
  assert.ok(await watch.evaluate(e=>e.scrollTop)>0,'long Winter watch remains independently scrollable');
  assert.equal(await page.evaluate(()=>scrollY),0);
+ await page.locator('#play-settings > summary').click();
  await page.locator('#campaign-settings summary').click();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight),true,'campaign settings should not push the board outside the viewport');
  await page.setViewportSize({width:390,height:844});

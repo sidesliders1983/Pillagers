@@ -1,3 +1,5 @@
+import {personaIdentity} from './Identity';
+import {personaAway,stepWorld} from './WorldExpeditions';
 import {determineWeather,weatherProfile,weatherFacts} from './Weather';
 import {randomUint} from './Random';
 import {resolveMortality,defaultMortalityBands} from './Mortality';
@@ -64,7 +66,7 @@ function aptitude(traits:CoreTraits, job:JobPrototype):number {
 }
 export function foodNeed(state:SimulationState):number {
     const config=state.mechanics!.config;
-    return cattleFoodNeed(state)+Math.ceil((weatherProfile(state).residentConsumptionBps??10000)/10000*Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0));
+    return cattleFoodNeed(state)+Math.ceil((weatherProfile(state).residentConsumptionBps??10000)/10000*Object.keys(state.personas).sort().reduce((total,id)=>total+(state.personas[id].deathWinter===null&&!personaAway(state,id)?(personaAge(state,id)<config.foodAdultAge?config.childFood:config.adultFood):0),0));
 }
 export function occupationAptitude(state:SimulationState,id:string,role:Occupation):number {
     if(!state.mechanics||!Object.hasOwn(state.personas,id)||!occupationIds.includes(role))throw new Error('Unknown persona/occupation');
@@ -73,7 +75,7 @@ export function occupationAptitude(state:SimulationState,id:string,role:Occupati
 export function inspectWork(state:SimulationState,id:string) {
     const person=state.personas[id];if(!person||!state.mechanics)throw new Error('Gameplay persona required');
     const config=state.mechanics.config,role=person.occupation;
-    const reason=person.deathWinter!==null?'deceased':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':config.occupations[role].resource===null?'inactive-role':null;
+    const reason=person.deathWinter!==null?'deceased':personaAway(state,id)?'expedition':isProvidingCare(state,id)?'childcare':personaAge(state,id)<config.workAge?'underage':role===null?'unassigned':config.occupations[role].resource===null?'inactive-role':null;
     if(role===null)return {aptitudeBps:0,productivityBps:0,unitsPerWinter:0,resource:null,progress:0,reason};
     const job=config.occupations[role];
         let efficiency=aptitude(person.dna.traits,job);
@@ -106,7 +108,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
     for(const id of Object.keys(state.personas).sort()) {
         const person=state.personas[id], role=person.occupation;
-        if(isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
+        if(personaAway(state,id) || isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
         const work=inspectWork(state,id),job=config.occupations[role];
         if(job.resource===null)continue;
         const efficiency=work.productivityBps;
@@ -153,6 +155,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         resolveCattleBirths(state,bps=>chance(state,bps));
         determineWeather(state);
     }
+    stepWorld(state);
 }
 
 export type MechanicsCommand = {type:'AssignResidence'; householdId:string; residenceId:string|null}
@@ -160,6 +163,8 @@ export type MechanicsCommand = {type:'AssignResidence'; householdId:string; resi
     | {type:'AssignCaregiver';motherId:string;caregiverId:string|null} | {type:'ReleaseOccupation';personaId:string} | {type:'UpgradeBuilding';buildingId:string} | {type:'SalvageBuilding';buildingId:string} | {type:'BuildHouse'|'HouseHousehold';householdId:string};
 export function isMechanicsCommand(command:{type:string}):boolean {return ['SalvageBuilding','AssignResidence','SpecializeBuilding','UpgradeBuilding','BuildHouse','HouseHousehold','ReleaseOccupation','AssignCaregiver'].includes(command.type);}
 export function applyMechanicsCommand(state:SimulationState,command:MechanicsCommand):void {
+    if('personaId' in command&&personaAway(state,command.personaId))throw new Error('Persona away on expedition');
+    if('motherId' in command&&personaAway(state,command.motherId))throw new Error('Persona away on expedition');
     if(!state.mechanics)throw new Error('Mechanics must be initialized');
     if(command.type==='SalvageBuilding'){
         const building=state.buildings[command.buildingId];if(!building||building.kind!=='house')throw new Error('House required');
@@ -236,7 +241,7 @@ export function recordOccupationChange(state:SimulationState,id:string,next:Occu
 }
 
 function occupationExperience(state:SimulationState,id:string,role:Occupation):number {
-    return state.personas[id].occupationHistory.filter(entry=>entry.occupation===role).reduce((ticks,entry)=>{
+    return (personaIdentity(state,id)?.occupationHistory??[]).filter(entry=>entry.occupation===role).reduce((ticks,entry)=>{
         const end=entry.endedAt??state.time;
         return ticks+(end.winter-entry.startedAt.winter)*state.ticksPerWinter+end.tick-entry.startedAt.tick;
     },0);
@@ -253,7 +258,7 @@ function reviewCareers(state:SimulationState):void {
     const resource=foodShort?'food':state.stocks.materials<materialNeed?'materials':null;if(resource===null)return;
     for(const id of Object.keys(state.personas).sort()){
         const person=state.personas[id],info=state.mechanics!.people[id];
-        if(isProvidingCare(state,id)||person.deathWinter!==null||personaAge(state,id)<config.workAge||info.occupationLocked)continue;
+        if(personaAway(state,id)||isProvidingCare(state,id)||person.deathWinter!==null||personaAge(state,id)<config.workAge||info.occupationLocked)continue;
         const candidates=occupationIds.filter(role=>config.occupations[role].resource===resource).map(role=>({role,fit:aptitude(person.dna.traits,config.occupations[role])})).sort((a,b)=>b.fit-a.fit||occupationIds.indexOf(a.role)-occupationIds.indexOf(b.role));
         const best=candidates[0];if(!best||best.role===person.occupation)continue;
         if(person.occupation!==null){
@@ -337,7 +342,7 @@ export function validateMechanics(state:SimulationState):void {
             if(!donor||donor.deathWinter!==null||donor.dna.sex!=='female'||donor.occupation!==null||personaAge(state,donor.id)<config.adultAge||donor.id===id||info.childcareUntilWinter<=state.time.winter)fail('Invalid caregiver');
             if(carers.has(donor.id))fail('Caregiver serves multiple groups');carers.add(donor.id);
         }
-        for(const parent of person.parentIds)if(state.personas[parent].birthWinter>=person.birthWinter)fail('Invalid genealogy chronology');
+        for(const parent of person.parentIds)if(personaIdentity(state,parent)!.birthWinter>=person.birthWinter)fail('Invalid genealogy chronology');
         if(person.partnerId!==null&&(state.personas[person.partnerId].partnerId!==id||prohibitedKinship(state,id,person.partnerId)))fail('Invalid partnership');
     }
     if(!mechanics.buildings||Object.keys(mechanics.buildings).length!==Object.keys(state.buildings).length)fail('Missing building mechanics');

@@ -18,7 +18,7 @@ export class GameplaySession {
     restartCampaign(sameFounders=false,drawSeed:()=>number=()=>crypto.getRandomValues(new Uint32Array(1))[0],weatherEnabled=this.state.weather?.config.enabled??false):void {
         let seed=sameFounders?this.state.seed:drawSeed();
         if(!sameFounders&&seed===this.state.seed)seed=(seed+1)>>>0;
-        this.replace(createCampaign(seed,this.state.landing?.config,this.state.mechanics?.config,{...this.state.weather?.config,enabled:weatherEnabled}));
+        this.replace(createCampaign(seed,this.state.landing?.config,this.state.mechanics?.config,{...this.state.weather?.config,enabled:weatherEnabled},this.state.world?.config));
     }
     private replace(state:SimulationState):void {this.state=state;this.running=false;this.fractionalTicks=0;this.trend={food:0,materials:0};}
     elapse(milliseconds:number):void {

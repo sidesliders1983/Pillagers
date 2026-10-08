@@ -37,6 +37,11 @@ const templates:Record<string,Template>={
     BuildingSalvaged:(_e,d)=>str(d,'buildingId')&&number(d,'salvage')!==null?`Home ${d.buildingId} was salvaged for ${d.salvage} Materials.`:null,
     BuildingCollapsed:(_e,d)=>str(d,'buildingId')&&number(d,'salvage')!==null?`Home ${d.buildingId} collapsed; ${d.salvage} Materials were salvaged.`:null,
     CaregiverAssigned:(e,d)=>{const mother=person(e,e.personaId);return mother&&(d.caregiverId===null||str(d,'caregiverId'))?d.caregiverId===null?`The mother was assigned to childcare for ${mother}.`:`${person(e,d.caregiverId as string)} was assigned as caregiver for ${mother}.`:null;},
+    ExpeditionGroupCreated:(_e,d)=>str(d,'groupName')?`Expedition group ${d.groupName} was formed.`:null,
+    ExpeditionDeparted:(_e,d)=>str(d,'groupName')&&str(d,'mission')&&str(d,'regionId')?`${d.groupName} departed for ${d.mission} towards ${d.regionId}, carrying ${d.foodCost} Food.`:null,
+    ExpeditionReturned:(_e,d)=>str(d,'mission')&&str(d,'regionId')&&typeof d.success==='boolean'?`${d.mission} towards ${d.regionId} returned: ${d.success?'completed':'failed'}, ${d.food??0} Food, ${d.materials??0} Materials, ${ids(d,'cattleIds')?.length??0} cattle and ${ids(d,'personaIds')?.length??0} people recovered; ${ids(d,'casualtyIds')?.length??0} casualties.`:null,
+    PersonaTransferredIn:(e,d)=>str(d,'name')?`${d.name} arrived from ${d.originClanId}.`:null,
+    PersonaTransferredOut:(_e,d)=>str(d,'name')?`${d.name} was transferred to ${d.destinationClanId}.`:null,
     FoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`Residents consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,
     CattleFoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`The herd consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,
 };

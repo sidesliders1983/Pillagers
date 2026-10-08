@@ -1,3 +1,4 @@
+import {personaAway} from './WorldExpeditions';
 import {farmyards} from './Farmyards';
 import type {SimulationState} from './SimulationCore';
 import {randomUint} from './Random';
@@ -58,7 +59,7 @@ export function permanentlySheltered(state:SimulationState,id:string):boolean {
 export function personaWeatherExposure(state:SimulationState,id:string):number {return permanentlySheltered(state,id)?0:weatherProfile(state).tentMortalityBps;}
 
 export function inspectWeatherExposure(state:SimulationState) {
-    const residents=Object.values(state.personas).filter(p=>p.deathWinter===null);
+    const residents=Object.values(state.personas).filter(p=>p.deathWinter===null&&!personaAway(state,p.id));
     const cattle=Object.values(state.landing?.cattle??{}).filter(c=>c.deathWinter===null);
     const active=new Set(farmyards(state).map(f=>f.id));
     return {residentIds:residents.filter(p=>!permanentlySheltered(state,p.id)).map(p=>p.id).sort(),cattleIds:cattle.filter(c=>c.farmyardId===null||!active.has(c.farmyardId)).map(c=>c.id).sort()};

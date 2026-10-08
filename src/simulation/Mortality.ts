@@ -1,3 +1,4 @@
+import {personaAway} from './WorldExpeditions';
 import {personaWeatherExposure,permanentlySheltered,weatherFacts} from './Weather';
 import type {SimulationState} from './SimulationCore';
 import {personaAge} from './PersonaAge';
@@ -9,13 +10,13 @@ export const defaultMortalityBands:MortalityBand[] = [
 ];
 type EventWriter=(type:string,personaId?:string,details?:Record<string,unknown>)=>void;
 /** Resolve all rolls before cleanup so simultaneous deaths retain factual relationship context. */
-export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolean,emit:EventWriter):number {
+export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolean,emit:EventWriter,eligibleIds?:Set<string>):number {
     const mechanics=state.mechanics!,bands=mechanics.config.mortalityBands;
     const deaths=Object.keys(state.personas).sort().flatMap(id=>{
-        const person=state.personas[id];if(person.deathWinter!==null)return [];
+        const person=state.personas[id];if(person.deathWinter!==null||(eligibleIds&&!eligibleIds.has(id)))return [];
         const age=personaAge(state,id);
         const band=[...bands].reverse().find(b=>b.minAge<=age);
-        const weatherExposureBps=personaWeatherExposure(state,id),risk=Math.min(10000,(band?.chanceBps??0)+weatherExposureBps);
+        const weatherExposureBps=personaAway(state,id)?0:personaWeatherExposure(state,id),risk=Math.min(10000,(band?.chanceBps??0)+weatherExposureBps);
         if(!roll(risk))return [];
         const home=Object.values(state.households).find(h=>h.memberIds.includes(id));
         return [{id,age,householdId:home?.id??null,residenceId:home?.residenceId??null,occupation:person.occupation,partnerId:person.partnerId,...(state.weather?.config.enabled?{mortalityRiskBps:risk,weatherExposureBps,permanentlySheltered:permanentlySheltered(state,id),...weatherFacts(state)}:{})}];

@@ -45,8 +45,8 @@ export function resolveCattleBirths(state:SimulationState,chance:(bps:number)=>b
         if(mother.lastCalvingWinter!==null&&winter-mother.lastCalvingWinter<config.cattleBirthInterval)continue;
         const father=eligible.find(c=>c.sex==='male'&&c.farmyardId===mother.farmyardId);
         if(!father||!chance(config.cattleBirthChanceBps))continue;
-        let n=Object.keys(landing.cattle).length+1;while(landing.cattle[`cattle-${n}`])n++;
-        const calf:Cattle={id:`cattle-${n}`,sex:chance(5000)?'female':'male',birthWinter:winter,deathWinter:null,parentIds:[mother.id,father.id],origin:'reproduction',lastCalvingWinter:null,farmyardId:mother.farmyardId,foodProgress:0};
+        let n=Object.keys(landing.cattle).length+1;while(landing.cattle[`${state.entityPrefix??''}cattle-${n}`]||landing.cattleArchive?.[`${state.entityPrefix??''}cattle-${n}`])n++;
+        const calf:Cattle={id:`${state.entityPrefix??''}cattle-${n}`,sex:chance(5000)?'female':'male',birthWinter:winter,deathWinter:null,parentIds:[mother.id,father.id],origin:'reproduction',lastCalvingWinter:null,farmyardId:mother.farmyardId,foodProgress:0};
         landing.cattle[calf.id]=calf;mother.lastCalvingWinter=winter;
         emit(state,'CattleBorn',{cattleId:calf.id,parentIds:[...calf.parentIds],sex:calf.sex,age:0,farmyardId:calf.farmyardId});
     }

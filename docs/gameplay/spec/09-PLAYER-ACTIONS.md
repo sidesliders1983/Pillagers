@@ -48,3 +48,7 @@ Player generally does not directly:
 
 Acceptance:
 - no adverse or beneficial canonical progression occurs purely because wall-clock time passed while offline.
+
+## Implemented v0.4 slice
+
+[World Expeditions v0.4](../../WORLD-EXPEDITIONS-V04.md) records the implemented region graph, reusable groups, optional Surveillance, mission provisions/risk and one-category carrying capacity. Named residents and actual target assets move through Simulation Core commands; the player UI is /play and Gameplay Lab retains shared-save debugging.
