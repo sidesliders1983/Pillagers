@@ -1,6 +1,6 @@
 import {createRequire} from 'node:module';import {readFile,writeFile,mkdir} from 'node:fs/promises';import {createHash} from 'node:crypto';import {execFileSync} from 'node:child_process';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const before=false,out='docs/qa/northstar-lighting';await mkdir(out,{recursive:true});
+const before=false,out=process.env.QA_OUTPUT||'scratch/northstar-lighting/replay';await mkdir(out,{recursive:true});
 const runtimeSources=[];for(const file of ['src/environment-lab/EnvironmentLab.ts','src/core/WorldLighting.ts','src/config/worldConfig.ts','src/world/FjordWater.ts']){const bytes=await readFile(file);runtimeSources.push({file,sha256:createHash('sha256').update(bytes).digest('hex')});}
 const b=await chromium.launch({channel:'msedge',headless:true}),p=await b.newPage({viewport:{width:1640,height:1400},deviceScaleFactor:1}),errors=[],captures=[];p.setDefaultTimeout(90000);p.on('pageerror',e=>errors.push(e.message));p.on('response',r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url());});
 await p.addInitScript(()=>{const o=new MutationObserver(()=>{const el=document.querySelector('#environment-pause');if(el){el.checked=true;o.disconnect();}});o.observe(document,{subtree:true,childList:true});});

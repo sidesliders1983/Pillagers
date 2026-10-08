@@ -1,0 +1,28 @@
+{
+  "asset": "lonely_road_afternoon_puresky",
+  "file": "lonely_road_afternoon_puresky_1k.hdr",
+  "downloaded": "2026-10-08",
+  "publisher": "Poly Haven",
+  "authors": [
+    "Dimitrios Savva",
+    "Jarod Guest"
+  ],
+  "license": "CC0-1.0",
+  "licenseUrl": "https://polyhaven.com/license",
+  "assetUrl": "https://polyhaven.com/a/lonely_road_afternoon_puresky",
+  "apiUrl": "https://api.polyhaven.com/files/lonely_road_afternoon_puresky",
+  "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/lonely_road_afternoon_puresky_1k.hdr",
+  "bytes": 1198770,
+  "sha256": "162e8a4a42db3b26c8a5e4558db5355df156212a55127577725692f683106fa4",
+  "publisherMd5": "9784e6c65a10cec7d9abc29263e9ea0b",
+  "width": 1024,
+  "height": 512,
+  "peakPixel": {
+    "x": 614,
+    "y": 230,
+    "luminance": 107107.8249640625,
+    "equirectangularLongitudeDegrees": 36.03515625,
+    "elevationDegrees": 8.96484375
+  },
+  "notes": "Original unmodified HDR. Native Three r180 HDRLoader, Scene.environment and PMREM only; source texture disposed after prefilter. No background replacement."
+}
