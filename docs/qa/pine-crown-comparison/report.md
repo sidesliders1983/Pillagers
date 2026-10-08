@@ -52,3 +52,6 @@ node scripts/qa/audit-pine-comparison.mjs
 The vendored upstream code is used only for authoring exports; the live comparison loads static glTF. The saved review page works from relative PNGs and does not require WebGL. All current gameplay/world/lab tree defaults remain unchanged.
 
 Owner review of the exact source presets remains pending. The next separate experiment is native Three HDR before/after on the unchanged combined environment. Background/coast composition and building/tree water reflections remain later steps; #60 remains unready.
+
+## Owner-directed Lab extension — 2026-10-08
+The owner accepted the visual improvement in this comparison and requested varied heights in Environment Lab before merging #69. That separately recorded implementation and current validation are in [Lab integration evidence](lab-integration.md); the original paired captures above remain unchanged. The Lab now uses static Large crowns at the existing role/seeded height range, with a KayKit selector. This is not final acceptance of the full environment or #60 integration.
