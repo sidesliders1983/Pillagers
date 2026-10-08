@@ -68,7 +68,7 @@ Cattle:
 - calves consume less than adults;
 - adult cows provide modest ongoing Food;
 - cow + bull allow reproduction up to Pen capacity;
-- slaughter produces a large one-off integer Food yield and removes the animal;
+- slaughter produces a one-off Food yield by life stage: Young 5, Young Adult 10, Adult 15 (adult yield configurable); the stage follows the saved age thresholds (defaults: under 1, 1–under 2, 2+ Winters) and the animal leaves the living herd;
 - losing/slaughtering the only bull stops reproduction until another bull is acquired.
 
 Core choice:

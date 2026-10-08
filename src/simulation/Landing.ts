@@ -6,7 +6,7 @@ import {initializeMechanics} from './Mechanics';
 import type {PrototypeConfig} from './Mechanics';
 import {generateCharacterDNA} from '../characters/generateCharacterDNA';
 import {characterName, fullName} from '../characters/naming/generateName';
-import {cattleSheltered} from './Livestock';
+import {cattleSheltered,inspectCattle} from './Livestock';
 import {seededRandom} from '../characters/seededRandom';
 
 export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;cattleYoungAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number;foundingCoupleChanceBps:number;foundingCoupleCap:number;cattleBirthChanceBps:number;cattleFertileMinAge:number;cattleFertileMaxAge:number;cattleBirthInterval:number;cattleMortalityYoungBps:number;cattleMortalityAdultBps:number;cattleMortalityOlderBps:number;cattleMortalityOldBps:number;cattleCrowdingBps:number;cattleWeatherMortalityBps:number;};
@@ -65,8 +65,8 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
     const landing=state.landing;if(!landing)throw new Error('No landing assets');
     if(command.type==='SlaughterCattle'){
         const cattle=landing.cattle[command.cattleId];if(!cattle||cattle.deathWinter!==null)throw new Error('Living cattle required');
-        const farmyardId=cattle.farmyardId;cattle.deathWinter=state.time.winter;cattle.farmyardId=null;state.stocks.food+=landing.config.slaughterFood;
-        emit(state,'CattleSlaughtered',{cattleId:cattle.id,food:landing.config.slaughterFood,parentIds:[...cattle.parentIds],sex:cattle.sex,age:state.time.winter-cattle.birthWinter,farmyardId});return;
+        const food=inspectCattle(state,cattle.id).slaughterFood;const farmyardId=cattle.farmyardId;cattle.deathWinter=state.time.winter;cattle.farmyardId=null;state.stocks.food+=food;
+        emit(state,'CattleSlaughtered',{cattleId:cattle.id,food,parentIds:[...cattle.parentIds],sex:cattle.sex,age:state.time.winter-cattle.birthWinter,farmyardId});return;
     }
     if(command.type==='AssignCattle'){
         const cattle=landing.cattle[command.cattleId];if(!cattle||cattle.deathWinter!==null)throw new Error('Living cattle required');

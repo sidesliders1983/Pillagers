@@ -39,7 +39,7 @@ All commands go through `applyCommand` and return detached, validated state:
 
 - `KeepLongship {longshipId}`: preserve the vessel and gain no Materials. Keeping it does not prevent a later salvage decision.
 - `SalvageLongship {longshipId}`: gain the saved configured Materials once, mark the vessel permanently salvaged, disable maritime capability while no live ships exist. No replacement is created.
-- `SlaughterCattle {cattleId}`: gain the saved configured Food once; the animal stops output/consumption and releases shelter occupancy.
+- `SlaughterCattle {cattleId}`: gain 5 Food for Young, 10 for Young Adult, or the saved configured adult yield (default 15 Food), once; the animal stops output/consumption and releases shelter occupancy.
 - `AssignCattle {cattleId, farmyardId}`: assign one living animal to an active Farmyard home, or use null to unassign. Capacity is a soft cap.
 - A permanent home automatically gains the Farmyard function when its first living farmer is assigned or moves in, including when a house is built for an existing farmer. There is no standalone Farmyard build command or additional conversion cost. A tent never gains the function. When the last farmer changes occupation or leaves, the function is lost and all assigned cattle are unassigned. The house and upgrades remain.
 - Existing occupation, household housing and other Simulation Core commands remain available.

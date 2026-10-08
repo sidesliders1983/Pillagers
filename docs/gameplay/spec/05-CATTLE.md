@@ -27,8 +27,8 @@ Minimum state: id, sex, birthWinter/age, parents where applicable, calf/adult/ol
 Cattle consume integer Food; calves less than adults; adult cows provide modest ongoing Food. Exact rates open.
 
 ## CATTLE-004 — Slaughter
-**Status:** Canonical direction; yield Open
+**Status:** Canonical direction; prototype yields implemented
 
 > **As a player, I want to slaughter cattle for immediate Food, so that I can sacrifice future production/breeding for survival now.**
 
-Slaughter gives large one-off integer Food and permanently removes animal. Losing/slaughtering last bull stops reproduction.
+Slaughter gives one-off integer Food by the saved age thresholds: Young (default under 1 Winter) = **5 Food**; Young Adult (default 1 to under 2 Winters) = **10 Food**; Adult (default 2+ Winters) = **15 Food**. The adult yield retains the saved configurable slaughterFood value. Young yields are fixed prototype values. The animal is permanently removed from the living herd. Losing/slaughtering last bull stops reproduction.
