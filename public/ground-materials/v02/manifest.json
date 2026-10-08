@@ -1,0 +1,84 @@
+{
+  "version": "ground-v02",
+  "seed": 1983,
+  "configSha256": "54b3e79222490b4cd400736b7ae16dde15f003c3701ed769b3fc796c9619487f",
+  "generatedWith": "sharp 0.35.5; scripts/prepare-ground-materials.mjs",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://docs.ambientcg.com/license/",
+  "terrainBounds": {
+    "minX": -58,
+    "maxX": 58,
+    "minZ": -18,
+    "maxZ": 62
+  },
+  "sourceAssets": [
+    {
+      "id": "Ground037",
+      "url": "https://ambientcg.com/view?id=Ground037",
+      "download": "https://ambientcg.com/get?file=Ground037_1K-PNG.zip",
+      "archiveSha256": "cbd75f0660870b3299a68c4fe7fd54efb3951cf992d4295961209619eb284c47",
+      "maps": [
+        {
+          "file": "Ground037_1K-PNG_NormalGL.png",
+          "sha256": "163837046d8ea7c15a29f12367b7af90e6509e2e3d6168ecf55824746660b9a7"
+        },
+        {
+          "file": "Ground037_1K-PNG_Roughness.png",
+          "sha256": "4cd4057af73842857b529d29ae4a61fa67de8813333eda0c82bbee4d3fc357b7"
+        }
+      ],
+      "used": [
+        "OpenGL normals",
+        "roughness"
+      ],
+      "notUsed": [
+        "albedo",
+        "displacement",
+        "ambient occlusion"
+      ]
+    },
+    {
+      "id": "Ground054",
+      "url": "https://ambientcg.com/view?id=Ground054",
+      "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+      "archiveSha256": "19aafb7d257cff80eca5374b097abacb714149aa899891be82572e82fbac1326",
+      "maps": [
+        {
+          "file": "Ground054_1K-PNG_NormalGL.png",
+          "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f"
+        },
+        {
+          "file": "Ground054_1K-PNG_Roughness.png",
+          "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8"
+        }
+      ],
+      "used": [
+        "OpenGL normals",
+        "roughness"
+      ],
+      "notUsed": [
+        "albedo",
+        "displacement",
+        "ambient occlusion"
+      ]
+    }
+  ],
+  "delivery": [
+    {
+      "file": "normal.png",
+      "bytes": 1578890,
+      "sha256": "cc84eeb2833c91fc236682aa01abfff599c4732dcfcf90dde0561f5a904d4a6f",
+      "width": 1024,
+      "height": 1024,
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "file": "roughness.png",
+      "bytes": 452477,
+      "sha256": "db2a124fa48cbf7569028af231bf9b559b9838c369897cce57289380e33b8275",
+      "width": 1024,
+      "height": 1024,
+      "colorSpace": "NoColorSpace"
+    }
+  ]
+}
