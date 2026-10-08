@@ -123,7 +123,7 @@ export class CowCharacterPreview {
   this.mixer.stopAllAction();this.clip=clip;this.action=this.actions.get(clip)!;this.action.reset().play();this.mixer.update(0);this.walkDistance=0;this.paused=false;
   this.time.max=String(this.action.getClip().duration);
   (document.querySelector('#lab-animation') as HTMLSelectElement).value=clip;this.canvas.dataset.animation=clip;
-  const descriptions:Record<Clip,string>={Idle:'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to graze, moves gently over the grass, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
+  const descriptions:Record<Clip,string>={Idle:'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to a gentle grazing pose with subtle shoulder and head turns, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
   document.querySelector('#lab-cow-description')!.textContent=descriptions[clip];this.report();
   if(this.human)this.human.root.visible=this.showHuman();
   if(clip==='HumanInteraction')void this.ensureHuman();

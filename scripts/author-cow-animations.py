@@ -49,6 +49,14 @@ def author(source, output):
     scene.render.fps = FPS
     scene.frame_start = 1
     rest = {b.name: b.matrix_local.copy() for b in arm.data.bones}
+    # A muzzle-to-poll surface axis gives an anatomical tilt, not bone Euler angles.
+    muzzle = [v for v in vertices if v.y < -1.24 and abs(v.x) < 0.12]
+    poll = [v for v in vertices if -1.05 < v.y < -0.95 and v.z > 1.54 and abs(v.x) < 0.12]
+    if not muzzle or not poll:
+        raise ValueError("Cannot identify adult female head landmarks")
+    axis = (sum(muzzle, Vector()) / len(muzzle) - sum(poll, Vector()) / len(poll)).normalized()
+    neutral_head_pitch = math.atan2(-axis.z, -axis.y)
+    head_axis_local = rest["Bone_031"].to_3x3().inverted() @ (arm.matrix_world.to_3x3().inverted() @ axis)
     constraints, feet = [], {}
     for name, (end, hoof, count, phase, duty) in LEGS.items():
         target = bpy.data.objects.new("HoofTarget_"+name, None)
@@ -107,12 +115,28 @@ def author(source, output):
                     target.location.z += 0.085*math.sin(math.pi*u)**1.2
         elif clip == "Graze":
             down = smooth(t/2.4)*(1-smooth((t-9.6)/2.4))
-            rotate("Bone_000", (1,0,0), 0.095*down)
-            rotate("Bone_036", (1,0,0), 1.52*down)
-            rotate("Bone_034", (1,0,0), 0.16*down)
-            rotate("Bone_032", (1,0,0), -0.04*down+0.025*down*wave(t,2))
-            rotate("Bone_031", (1,0,0), -0.72*down)
-            rotate("Bone_031", (0,0,1), 0.055*down*wave(t,3))
+            rotate("Bone_000", (1,0,0), 0.065*down)
+            # Z is Blender's vertical axis: gentle body, shoulder and head yaw.
+            rotate("Bone_000", (0,0,1), math.radians(1.0)*down*wave(t,6))
+            rotate("Bone_028", (0,0,1), math.radians(1.25)*down*wave(t,4))
+            rotate("Bone_036", (1,0,0), 1.48*down)
+            rotate("Bone_036", (0,0,1), math.radians(1.5)*down*wave(t,6,0.6))
+            rotate("Bone_034", (1,0,0), 0.14*down)
+            rotate("Bone_032", (1,0,0), -0.04*down+0.015*down*wave(t,2))
+            desired_pitch = neutral_head_pitch*(1-down) + math.radians(15)*down
+            # Counter-rotate the skull as the neck lowers. Correct in evaluated
+            # armature space so the tilt stays near 15 degrees through the sway.
+            for _ in range(2):
+                bpy.context.view_layer.update()
+                evaluated = arm.evaluated_get(bpy.context.evaluated_depsgraph_get())
+                direction = arm.matrix_world.to_3x3() @ (evaluated.pose.bones["Bone_031"].matrix.to_3x3() @ head_axis_local)
+                pitch = math.atan2(-direction.z, -direction.y)
+                rotate("Bone_031", (1,0,0), desired_pitch-pitch)
+            bpy.context.view_layer.update()
+            evaluated = arm.evaluated_get(bpy.context.evaluated_depsgraph_get())
+            head = arm.pose.bones["Bone_031"]
+            axis_local = evaluated.pose.bones["Bone_031"].matrix.to_3x3().inverted() @ (arm.matrix_world.to_3x3().inverted() @ Vector((0,0,1)))
+            head.rotation_quaternion = head.rotation_quaternion @ Quaternion(axis_local.normalized(), math.radians(3.0)*down*wave(t,3,0.8))
             # This mesh has no anatomically separate jaw: no invented chewing bone.
         elif clip == "HumanInteraction":
             attention = math.sin(math.pi*t/6)**2
@@ -202,6 +226,7 @@ def author(source, output):
         "withersHeightM":TARGET_WITHERS_HEIGHT,"sourceWithersHeightM":source_withers,
         "physicalScale":physical_scale,"height":source_height*physical_scale,
         "variant":"adult-female","boneCount":len(arm.data.bones),
+        "grazing":{"headTiltDegrees":15,"yawDegrees":{"body":1,"shoulders":1.25,"neck":1.5,"head":3}},
         "referenceMethod":"Authored keys with cattle gait literature; not video motion capture",
         "proposedVideo":"https://youtu.be/sObyVL3oU6g",
         "references":[
@@ -216,4 +241,3 @@ if __name__ == "__main__":
     p.add_argument("--output",type=Path,required=True)
     a = p.parse_args(sys.argv[sys.argv.index("--")+1:])
     author(a.source.resolve(),a.output.resolve())
-

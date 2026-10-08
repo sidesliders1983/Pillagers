@@ -57,6 +57,6 @@ const manifest={schemaVersion:1,variant:'adult-female',file:'cow-female-adult.gl
  authoringBytes:original.length,bytes:bytes.length,triangles:triangles(checked),joints:67,
  height:authoring.height,withersHeightM:authoring.withersHeightM,sourceWithersHeightM:authoring.sourceWithersHeightM,physicalScale:authoring.physicalScale,
  walkSpeedMps:authoring.walkSpeedMps,walkCycleSeconds:authoring.walkCycleSeconds,
- clips:authoring.clips,textures,blenderVersion:authoring.blenderVersion,referenceMethod:authoring.referenceMethod};
+ clips:authoring.clips,grazing:authoring.grazing,textures,blenderVersion:authoring.blenderVersion,referenceMethod:authoring.referenceMethod};
 await writeFile(resolve(output,'manifest.json'),JSON.stringify(manifest,null,2)+'\n');
 console.log(JSON.stringify(manifest,null,2));

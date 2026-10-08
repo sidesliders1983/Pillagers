@@ -30,8 +30,12 @@ Walk is in place at approximately 0.37 m/s after physical scaling, with HL → F
 follows that pace. World playback must match movement speed to playback rate
 and model scale. Cattle gameplay rules and balances are unchanged.
 
-Graze shifts weight forward while IK holds the hoof targets. The muzzle
-approaches about 6 cm above authoring ground after physical scaling, leaving room for grass.
+Graze keeps a raised feeding pose: the muzzle-to-poll head axis stays near
+15 degrees downward relative to the ground during 2.4–9.6 s. The muzzle is
+approximately 0.41 m above the ground in this artistic pose. Gentle Blender
+Z-axis turns originate in the body (1 degree), shoulders (1.25 degrees), neck
+(1.5 degrees) and head (3 degrees). Head turns use the world vertical axis
+after pitch correction. IK holds all four hoof targets during these turns.
 The optional Meshy Human faces the cow as a visual reference.
 
 ## Editable source
@@ -42,8 +46,8 @@ Original, unchanged:
 Outputs in its `Animations/` directory:
 
 - `cow-female-adult-animations.blend`: editable Blender 5.2.2 file, four Actions.
-- `cow-female-adult-animated.glb`: full texture export, about 6.58 MB.
-- `cow-female-adult-runtime.glb`: optimized browser version, about 0.88 MB.
+- `cow-female-adult-animated.glb`: full texture export, about 6.59 MB.
+- `cow-female-adult-runtime.glb`: optimized browser version, about 0.91 MB.
 - `authoring.json` and `runtime-manifest.json`: source identity and measurements.
 
 In Blender select SmartRigArmature, open Dope Sheet → Action Editor, choose
@@ -85,7 +89,8 @@ All four clips were inspected in the existing lab. Its freeze/playback,
 camera, Human/Cow switching and mobile layout were checked through the UI.
 The exported skinned mesh measured 1.10001 m at the shoulder. All four clips
 had matching opening/closing keys. The preview reports a 1.65 m reference
-human. The original .glb retained its SHA-256; browser inspection had no page errors.
+human. Grazing head tilt was sampled across the feeding interval and the
+revised loop was visually checked in the browser. The original .glb retained its SHA-256; browser inspection had no page errors.
 `authoring.json` reports IK target residuals, not a guarantee of zero visible
 hoof sliding on every future terrain.
 
