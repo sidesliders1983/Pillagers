@@ -1,0 +1,4 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const root='docs/qa/ground-v04',m=JSON.parse(await readFile(root+'/capture-manifest.json','utf8')),pairs=[];
+for(const a of m.captures.filter(c=>c.file.startsWith('baseline-'))){const b=m.captures.find(c=>c.file===a.file.replace('baseline-','regional-'));if(!b)throw Error('Missing pair '+a.file);for(const field of ['camera','lighting','pixelRatio','toneMapping','time'])if(JSON.stringify(a.fixture[field])!==JSON.stringify(b.fixture[field]))throw Error('Fixture mismatch '+field+' '+a.file);pairs.push([a.file,b.file]);}
+if(m.errors.length)throw Error('Capture errors');await writeFile(root+'/paired-fixture-proof.json',JSON.stringify({pairedCaptures:pairs.length,phase:0,grass:false,matched:['camera','lighting','pixelRatio','toneMapping','time'],pairs},null,2)+'\n');console.log('Exact paired fixtures '+pairs.length);

@@ -7,15 +7,15 @@ const captures=[];try{
  const settle=()=>p.waitForTimeout(650);
  const capture=async name=>{await settle();const c=p.locator('canvas'),bytes=await sharp(await c.screenshot()).webp({quality:92}).toBuffer();await writeFile(output+'/'+name+'.webp',bytes);captures.push({file:name+'.webp',sha256:createHash('sha256').update(bytes).digest('hex'),fixture:JSON.parse(await c.getAttribute('data-fixture')),metrics:JSON.parse(await c.getAttribute('data-metrics')),ground:JSON.parse(await c.getAttribute('data-ground'))});console.log(name);};
  for(const material of ['baseline','regional']){
-  await p.selectOption('#environment-material',material, {force:true});await p.waitForFunction(v=>document.querySelector('canvas').dataset.groundTier===(v==='baseline'?'baseline':'standard'),material,{timeout:90000});
+  await p.selectOption('#environment-material',material, {force:true});await p.waitForFunction(v=>!document.querySelector('#environment-status').textContent.startsWith('Loading')&&document.querySelector('canvas').dataset.groundTier===(v==='baseline'?'baseline':'standard'),material,{timeout:90000});
   for(const tier of ['standard','low']){
-   await p.selectOption('#environment-quality',tier, {force:true});await p.waitForFunction(([m,t])=>document.querySelector('canvas').dataset.groundTier===(m==='baseline'?'baseline':t),[material,tier],{timeout:90000});
+   await p.selectOption('#environment-quality',tier, {force:true});await p.waitForFunction(([m,t])=>!document.querySelector('#environment-status').textContent.startsWith('Loading')&&document.querySelector('canvas').dataset.groundTier===(m==='baseline'?'baseline':t),[material,tier],{timeout:90000});
    for(const camera of ['village','shore','forest'])for(const light of ['day','night']){
     await p.selectOption('#environment-camera',camera, {force:true});await p.selectOption('#environment-light',light, {force:true});
     for(const composed of [true,false]){await p.locator('#environment-nature').setChecked(composed);await p.locator('#environment-village').setChecked(composed);await capture(`${material}-${camera}-${tier}-${light}-${composed?'composed':'ground'}`);}
    }
   }
-  await p.selectOption('#environment-quality','standard', {force:true});await p.waitForFunction(m=>document.querySelector('canvas').dataset.groundTier===(m==='baseline'?'baseline':'standard'),material,{timeout:90000});await p.selectOption('#environment-light','day', {force:true});
+  await p.selectOption('#environment-quality','standard', {force:true});await p.waitForFunction(m=>!document.querySelector('#environment-status').textContent.startsWith('Loading')&&document.querySelector('canvas').dataset.groundTier===(m==='baseline'?'baseline':'standard'),material,{timeout:90000});await p.selectOption('#environment-light','day', {force:true});
   for(const camera of ['village','shore','forest'])for(const [distance,delta] of [['near',-800],['far',800]]){
    await p.selectOption('#environment-camera',camera, {force:true});await p.locator('canvas').hover();await p.mouse.wheel(0,delta);await settle();
    for(const composed of [true,false]){await p.locator('#environment-nature').setChecked(composed);await p.locator('#environment-village').setChecked(composed);await capture(`${material}-${camera}-standard-day-${distance}-${composed?'composed':'ground'}`);}

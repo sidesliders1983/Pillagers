@@ -6,6 +6,7 @@ export const regionalGroundConfig = {
  fieldSpacing: .2, normalScale: .45, anisotropy: 4,
  sources: { Ground037: { repeatMeters: 3, saturation: .8, tint: [.72,.95,.66] }, Ground054: { repeatMeters: 3, saturation: .8, tint: [1.03,1.02,.96] }, mossy_rock: { repeatMeters: 4, saturation: .65, tint: [.95,.97,.95] }, grass_path_2: { repeatMeters: 3, saturation: .65, tint: [1,1,1] } },
  pathCandidate: true,
+ sampling: { filterOversampling: 2, secondaryAngle: .71, secondaryBlend: .35, warpMeters: .65 },
 };
 export type GroundTier = keyof typeof regionalGroundConfig.tiers;
 export function groundRegions() {
