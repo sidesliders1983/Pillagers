@@ -3,3 +3,6 @@
 public/appearance/**/*.provenance.json -text
 public/clothing/**/*.provenance.json -text
 public/clothing/**/garment-bind.json -text
+
+public/character-lab/modules/**/*.json -text
+docs/archive/legacy-clothing/**/*.json -text

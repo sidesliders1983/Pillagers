@@ -1,5 +1,5 @@
 import { CharacterDNA } from './CharacterDNA';
-import { BodyAssetIdentity, characterAsset, characterAssets, characterOutfit, characterAssetFitsBody } from './CharacterAssets';
+import { BodyAssetIdentity, characterAsset, characterAssets, characterAssetFitsBody } from './CharacterAssets';
 import { universalHumanProfile } from './UniversalHumanProfile';
 import { EquipmentSocket, equipmentSocketNames, moduleAtEquipmentSocket } from './AttachmentContract';
 import { identitySample } from './seededRandom';
@@ -52,7 +52,7 @@ export function resolveCharacterPresentation(dna:CharacterDNA,value:unknown=defa
     const hairId=select(presentation.hair,automatic('hair','hair/'+base.appearance.hairStyle));
     const beardEligible=base.age>=18&&base.masculinity>.5;
     const beardId=beardEligible?select(presentation.beard,automatic('beard',base.appearance.beardStyle==='none'?'':'beard/'+base.appearance.beardStyle)):null;
-    const outfitId=select(presentation.outfit,automatic('garment','garment/'+characterOutfit(dna.seed).style));
+    const outfitId=select(presentation.outfit,automatic('garment',''));
     const equipmentId=select(presentation.equipment,automatic('equipment',''));
     const equipmentSocket=equipmentId?(presentation.equipmentSocket==='auto'?moduleAtEquipmentSocket(characterAsset(equipmentId).metadata!).anchor:moduleAtEquipmentSocket(characterAsset(equipmentId).metadata!,presentation.equipmentSocket).anchor):null;
     const profile={...base,appearance:{...base.appearance,

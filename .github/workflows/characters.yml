@@ -16,5 +16,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
-      - run: pnpm run validate:characters
+      - name: Validate all character assets and explicit Lab previews
+        run: pnpm run validate:characters --lab-previews
       - run: pnpm test

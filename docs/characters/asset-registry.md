@@ -1,5 +1,7 @@
 # Character Asset Registry and Validation
 
+Current status (2026-10-08): the owner retired all three legacy outfits for complete clothing redevelopment. They are archived outside public/ at docs/archive/legacy-clothing and removed from discovery, choices and automatic assignment. The older sections below describe historical implementation, not currently available outfits.
+
 `src/characters/CharacterAssets.ts` is the sole published character asset discovery
 source. UI availability, Lab and World URLs, factory module registration, manifest
 generation and validation use it. Compatibility imports in `GeneratedHair.ts`,
@@ -190,3 +192,7 @@ with a conservative sampling guard. It never redraws or dilates visible source
 contours. The output records source and body hashes and remains `reviewRequired`
 until independent reference/fit/motion review; the utility never publishes assets
 or changes runtime attachment policy.
+
+## Lab preview validation context
+
+The strict validator and runtime plan continue to reject unreviewed modules by default. CI explicitly passes --lab-previews to audit the existing Lab-only preview entries as well as accepted assets. This opt-in still runs topology, exact source/hash/receipt checks, compatible-body identity, Golden fits, supported carries, motion, budgets, removal and source immutability. It never promotes preview status or makes a preview eligible for automatic appearance. The CLI output identifies this preview audit; visual approval remains pending. Exact public authoring receipt bytes are preserved with Git attributes on Windows and Linux.

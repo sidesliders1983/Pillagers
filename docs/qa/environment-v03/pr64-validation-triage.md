@@ -14,3 +14,8 @@ The affected public clothes, bind-frame module, validator and contact test are b
 Existing ignored legacy diagnostics show that this is a substantive source repair: cream has a bounded candidate face ledger; long-dress and mantle-tunic still have unresolved source panel ownership/contacts. Passing topology alone would not certify source preservation, atlas ownership, binding, worn motion or fit budgets. Blind face deletion, epsilon separation, fabricated bind tables, increased budgets or skipped legacy assets are not appropriate repairs.
 
 Release decision: HOLD. Owner has been asked whether to prioritize this separate character repair before merging #64, or proceed with #63 independently while #64 remains draft. #63 is Ground Materials v0.4 and explicitly permits sourced albedo with native per-region baking; it does not repair character assets. No merge has occurred.
+## Owner-directed resolution
+
+Owner chose character validation first, then explicitly withdrew the old clothing for complete redevelopment. The three exports were archived byte-for-byte outside public/ and removed from actual runtime discovery and default assignment. Generic garment contracts remain tested with declared technical fixtures; no geometry/fit budget or topology threshold was relaxed. Contact fixture topology was corrected. Source receipt hashes now survive Windows checkout. Existing Lab previews are explicitly audited in CI, remain previews, and strict no-preview validation still rejects them.
+
+Local build passed. Complete suite: 417 tests, 416 passed, zero failures, one existing optional fixture skip. Full character audit passed: 16 active assets / 32 GLBs, 12 Golden Characters, 15 modules, Idle/Walk/Run and World. Remote current-head CI must pass before ready/merge.

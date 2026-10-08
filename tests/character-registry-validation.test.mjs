@@ -1,3 +1,4 @@
+import {technicalGarmentRecord} from './technical-garment-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {load} from './load-source.mjs';
@@ -6,8 +7,8 @@ import {validateAssetRecord,validateLoadedBodyOrientation} from '../scripts/char
 const {characterAssets,characterAsset,characterAssetURL,validateCharacterRegistry,availableHairStyles}=load('../src/characters/CharacterAssets.ts');
 
 test('registry discovery retains reviewed LOD policy and validates module references',()=>{
-    assert.equal(characterAssets.filter(asset=>asset.scope!=='lab-v04').length,16,'legacy inventory remains explicit');
-    assert.equal(validateCharacterRegistry().length,16+load('../src/characters/V04ModuleCatalog.ts').v04CharacterModules.length);
+    assert.equal(characterAssets.filter(asset=>asset.scope!=='lab-v04').length,13,'retired outfits are not active inventory');
+    assert.equal(validateCharacterRegistry().length,13+load('../src/characters/V04ModuleCatalog.ts').v04CharacterModules.length);
     for(const style of availableHairStyles)assert.equal(characterAssetURL(`hair/${style}`,0),characterAssetURL(`hair/${style}`,2));
     assert.notEqual(characterAssetURL('body/universal-human',0),characterAssetURL('body/universal-human',2));
     assert.notEqual(characterAssetURL('beard/braid',0),characterAssetURL('beard/braid',2));
@@ -31,8 +32,8 @@ test('module metadata rejects unknown policies, reversed contact bands and incom
     for(const patch of [{fitMode:'invented'},{authoringFrame:'unknown'},{projection:'invented'},{subdivisions:3},{attachmentBand:{minimumY:1,maximumY:0}},{canonicalHeadSize:[.2,.2]}]){
         const hair=structuredClone(characterAsset('hair/short'));Object.assign(hair.metadata,patch);assert.throws(()=>validateCharacterRegistry([hair]),/hair\/short:/);
     }
-    const garment=structuredClone(characterAsset('garment/cream-tunic'));garment.metadata.garmentBind={joints:{Hips:[0,1,0]}};
-    assert.throws(()=>validateCharacterRegistry([garment]),/garment\/cream-tunic: Invalid measured garment bind joints/);
+    const garment=technicalGarmentRecord().asset;garment.metadata.garmentBind={joints:{Hips:[0,1,0]}};
+    assert.throws(()=>validateCharacterRegistry([garment]),/garment\/technical-contract: Invalid measured garment bind joints/);
 });
 test('asset validation rejects real rig regressions, broken textures, indices and budgets with asset ids',()=>{
     const body=characterAsset('body/universal-human'),source=readGLB(body.lods[2]);
@@ -55,18 +56,18 @@ test('body orientation validation includes scene transforms, not only local mesh
 });
 
 test('measured garments require VEC2 UVs before runtime surface refinement',()=>{
-    const asset=characterAsset('garment/cream-tunic'),source=readGLB(asset.lods[2]);
+    const {asset,record:source}=technicalGarmentRecord();
     assert.ok(asset.metadata.garmentBind);
     for(const substitute of [undefined,'POSITION']){
         const record={...source,json:structuredClone(source.json)},primitive=record.json.meshes[0].primitives[0];
         if(substitute===undefined)delete primitive.attributes.TEXCOORD_0;
         else primitive.attributes.TEXCOORD_0=primitive.attributes[substitute];
-        assert.throws(()=>validateAssetRecord(asset,2,record),/garment\/cream-tunic LOD2: measured garment requires TEXCOORD_0\/VEC2/);
+        assert.throws(()=>validateAssetRecord(asset,2,record),/garment\/technical-contract LOD2: measured garment requires TEXCOORD_0\/VEC2/);
     }
 });
 
 test('garment bind domains validate canonical torso and limb source ownership',()=>{
-    const asset=characterAsset('garment/cream-tunic'),source=readGLB(asset.lods[2]);
+    const {asset,record:source}=technicalGarmentRecord();
     const fixture=()=>({...source,json:structuredClone(source.json)});
     for(const domain of ['torso','limb',undefined]){
         const record=fixture(),node=record.json.nodes.find(n=>n.mesh!==undefined);
@@ -76,7 +77,7 @@ test('garment bind domains validate canonical torso and limb source ownership',(
     for(const location of ['node','mesh'])for(const domain of ['invented',null]){
         const record=fixture(),node=record.json.nodes.find(n=>n.mesh!==undefined),target=location==='node'?node:record.json.meshes[node.mesh];
         target.extras={...target.extras,garmentBindDomain:domain};
-        assert.throws(()=>validateAssetRecord(asset,2,record),/garment\/cream-tunic LOD2: unknown garment bind domain/);
+        assert.throws(()=>validateAssetRecord(asset,2,record),/garment\/technical-contract LOD2: unknown garment bind domain/);
     }
     const conflict=fixture(),node=conflict.json.nodes.find(n=>n.mesh!==undefined);
     node.extras={...node.extras,garmentBindDomain:'torso'};
@@ -87,7 +88,7 @@ test('garment bind domains validate canonical torso and limb source ownership',(
 });
 
 test('source accessory surfaces require measured garments and mesh ownership',()=>{
-    const asset=characterAsset('garment/cream-tunic'),source=readGLB(asset.lods[2]);
+    const {asset,record:source}=technicalGarmentRecord();
     const fixture=()=>({...source,json:structuredClone(source.json)});
     for(const location of ['node','mesh']){
         const record=fixture(),node=record.json.nodes.find(n=>n.mesh!==undefined),target=location==='node'?node:record.json.meshes[node.mesh];
@@ -95,7 +96,7 @@ test('source accessory surfaces require measured garments and mesh ownership',()
         assert.ok(validateAssetRecord(asset,2,record)>0);
         for(const value of ['cloth','invented',null]){
             target.extras.garmentSurface=value;
-            assert.throws(()=>validateAssetRecord(asset,2,record),/garment\/cream-tunic LOD2: unknown garment surface/);
+            assert.throws(()=>validateAssetRecord(asset,2,record),/garment\/technical-contract LOD2: unknown garment surface/);
         }
     }
     const group=fixture();group.json.nodes.push({extras:{garmentSurface:'accessory'}});
@@ -147,4 +148,10 @@ test('material texture coordinates resolve secondary UVs and texture-transform o
     assert.throws(()=>validateAssetRecord(asset,2,wrong.record),/baseColorTexture: requires TEXCOORD_1\/VEC2/);
     const unused=fixture(),extra=structuredClone(unused.record.json.materials[unused.primitive.material]);extra.pbrMetallicRoughness.baseColorTexture.texCoord=99;unused.record.json.materials.push(extra);
     assert.equal(validateAssetRecord({...asset,budgets:{...asset.budgets,materials:2}},2,unused.record),1293,'unused material UVs must not impose an unrelated primitive requirement');
+});
+import {validateRegisteredAsset} from '../scripts/characters/validation.mjs';
+test('registry validation checks declared Lab previews without promoting them to accepted assets',async()=>{
+ const previews=characterAssets.filter(asset=>asset.scope==='lab-v04'&&asset.reviewStatus==='preview');
+ assert.ok(previews.length);
+ for(const asset of previews){await assert.rejects(()=>validateRegisteredAsset(asset,2),/runtime source still requires reference review|unreviewed/);const result=await validateRegisteredAsset(asset,2,{allowLabPreview:true});assert.ok(result.measurement.triangles>0);assert.equal(asset.reviewStatus,'preview');}
 });
