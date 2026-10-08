@@ -97,9 +97,11 @@ node scripts/prepare-meshy-cow.mjs
 Preparation writes `public/game-assets/cattle/<variant>/` and copies optimized
 outputs into the source's `Animations/` directory. To prepare only one,
 use `node scripts/prepare-meshy-cow.mjs --variant baby` (or another ID).
-The source asset and runtime directories follow the repository's existing
-ignore policy; keep the local originals and editable outputs when moving
-checkouts. The scripts and documentation are tracked.
+The four prepared runtime GLBs and their manifests are tracked in Git, so
+Cow mode can load in a fresh checkout without Blender. Original sources and
+editable outputs under `Assets/` remain local and ignored; preserve those
+when moving workspaces. Regeneration requires these originals. The scripts
+and documentation are tracked.
 
 Preparation checks the source hash, four clips, finite keys, durations,
 matching loop endpoints, one cow mesh, one skin, variant-specific joint count
