@@ -1,0 +1,395 @@
+{
+  "version": "ground-v04",
+  "seed": 1983,
+  "config": {
+    "version": "ground-v04",
+    "seed": 1983,
+    "bounds": {
+      "minX": -58,
+      "maxX": 58,
+      "minZ": -18,
+      "maxZ": 62
+    },
+    "regionWidth": 30,
+    "regionDepth": 28,
+    "tiers": {
+      "standard": {
+        "size": 1024,
+        "gutter": 32
+      },
+      "low": {
+        "size": 512,
+        "gutter": 16
+      }
+    },
+    "fieldSpacing": 0.2,
+    "normalScale": 0.45,
+    "anisotropy": 4,
+    "sources": {
+      "Ground037": {
+        "repeatMeters": 3,
+        "saturation": 0.65,
+        "tint": [
+          0.76,
+          0.85,
+          0.73
+        ]
+      },
+      "Ground054": {
+        "repeatMeters": 3,
+        "saturation": 0.8,
+        "tint": [
+          1.03,
+          1.02,
+          0.96
+        ]
+      },
+      "mossy_rock": {
+        "repeatMeters": 4,
+        "saturation": 0.65,
+        "tint": [
+          0.95,
+          0.97,
+          0.95
+        ]
+      },
+      "grass_path_2": {
+        "repeatMeters": 3,
+        "saturation": 0.65,
+        "tint": [
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    "pathCandidate": true
+  },
+  "configSha256": "63d066227f27e48539c9f7340cf5a00193a5e5a2586480bc52057b2ea2a48f7e",
+  "generatedWith": "sharp 0.35.5; scripts/prepare-regional-ground.mjs",
+  "normalConvention": "OpenGL, normalized after weighted blend",
+  "geometry": "Unchanged canonical 2m alternating triangles",
+  "regions": [
+    {
+      "id": "0-0",
+      "minX": -58,
+      "minZ": -18,
+      "maxX": -28,
+      "maxZ": 10
+    },
+    {
+      "id": "0-1",
+      "minX": -58,
+      "minZ": 10,
+      "maxX": -28,
+      "maxZ": 38
+    },
+    {
+      "id": "0-2",
+      "minX": -58,
+      "minZ": 38,
+      "maxX": -28,
+      "maxZ": 62
+    },
+    {
+      "id": "1-0",
+      "minX": -28,
+      "minZ": -18,
+      "maxX": 2,
+      "maxZ": 10
+    },
+    {
+      "id": "1-1",
+      "minX": -28,
+      "minZ": 10,
+      "maxX": 2,
+      "maxZ": 38
+    },
+    {
+      "id": "1-2",
+      "minX": -28,
+      "minZ": 38,
+      "maxX": 2,
+      "maxZ": 62
+    },
+    {
+      "id": "2-0",
+      "minX": 2,
+      "minZ": -18,
+      "maxX": 32,
+      "maxZ": 10
+    },
+    {
+      "id": "2-1",
+      "minX": 2,
+      "minZ": 10,
+      "maxX": 32,
+      "maxZ": 38
+    },
+    {
+      "id": "2-2",
+      "minX": 2,
+      "minZ": 38,
+      "maxX": 32,
+      "maxZ": 62
+    },
+    {
+      "id": "3-0",
+      "minX": 32,
+      "minZ": -18,
+      "maxX": 58,
+      "maxZ": 10
+    },
+    {
+      "id": "3-1",
+      "minX": 32,
+      "minZ": 10,
+      "maxX": 58,
+      "maxZ": 38
+    },
+    {
+      "id": "3-2",
+      "minX": 32,
+      "minZ": 38,
+      "maxX": 58,
+      "maxZ": 62
+    }
+  ],
+  "sourceAssets": [
+    {
+      "id": "Ground037",
+      "url": "https://ambientcg.com/view?id=Ground037",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "Ground037/Ground037_1K-PNG_Color.png",
+          "sha256": "d428f7b2ca3c724bb6534ef6313574b4c07712e41bab84be69ba41a0d32e947d",
+          "bytes": 2623699,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour"
+        },
+        {
+          "file": "Ground037/Ground037_1K-PNG_NormalGL.png",
+          "sha256": "163837046d8ea7c15a29f12367b7af90e6509e2e3d6168ecf55824746660b9a7",
+          "bytes": 6073011,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal"
+        },
+        {
+          "file": "Ground037/Ground037_1K-PNG_Roughness.png",
+          "sha256": "4cd4057af73842857b529d29ae4a61fa67de8813333eda0c82bbee4d3fc357b7",
+          "bytes": 655735,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness"
+        }
+      ]
+    },
+    {
+      "id": "Ground054",
+      "url": "https://ambientcg.com/view?id=Ground054",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "Ground054/Ground054_1K-PNG_Color.png",
+          "sha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+          "bytes": 2088335,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour"
+        },
+        {
+          "file": "Ground054/Ground054_1K-PNG_NormalGL.png",
+          "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+          "bytes": 5766891,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal"
+        },
+        {
+          "file": "Ground054/Ground054_1K-PNG_Roughness.png",
+          "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+          "bytes": 630483,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness"
+        }
+      ]
+    },
+    {
+      "id": "mossy_rock",
+      "url": "https://polyhaven.com/a/mossy_rock",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 4,
+      "maps": [
+        {
+          "file": "mossy_rock_diff_1k.jpg",
+          "sha256": "4dbf37f1b0465c9c8914213163923be159716f5b97fb6946437b6c5e143ef540",
+          "bytes": 1124438,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour"
+        },
+        {
+          "file": "mossy_rock_nor_gl_1k.png",
+          "sha256": "08b01ee4387e4bb3433f901c62acc40d4be8d6d4a481e5fb508400cb4664d82e",
+          "bytes": 2154481,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal"
+        },
+        {
+          "file": "mossy_rock_rough_1k.png",
+          "sha256": "ed620db809bf72088bc4b5d6dbc48298256a4997a51aca929a54c1824301e9c5",
+          "bytes": 740983,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness"
+        }
+      ]
+    },
+    {
+      "id": "grass_path_2",
+      "url": "https://polyhaven.com/a/grass_path_2",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://polyhaven.com/license",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "grass_path_2_diff_1k.jpg",
+          "sha256": "7f30b163739435c11f500f3818c7bb4922bab5f2734cc9ba6dd36817f0c9a8ab",
+          "bytes": 716010,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour"
+        },
+        {
+          "file": "grass_path_2_nor_gl_1k.png",
+          "sha256": "cf7864e1ecb3359bd0cbc42106bdb6149a0d828cb7c91221ceb771d819b1d0bc",
+          "bytes": 2199966,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal"
+        },
+        {
+          "file": "grass_path_2_rough_1k.png",
+          "sha256": "e8b3a1ce4bbc818861a4e7aeef80ad4e6a87536ff349ee7de9fee7e09aaad629",
+          "bytes": 599520,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness"
+        }
+      ]
+    }
+  ],
+  "delivery": [
+    {
+      "tier": "standard",
+      "region": "1-0",
+      "role": "colour",
+      "file": "standard/1-0-colour.webp",
+      "bytes": 419620,
+      "sha256": "ef8ca248652ffe26d530709850521f017c0f430fa6adf3e18a7501cce29a0710",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-0",
+      "role": "normal",
+      "file": "standard/1-0-normal.webp",
+      "bytes": 2121306,
+      "sha256": "aafe284a8ae2663724b45c8967e3dcbeed7b121990f444ec9df649aafddd76d7",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-0",
+      "role": "roughness",
+      "file": "standard/1-0-roughness.webp",
+      "bytes": 39432,
+      "sha256": "6dc113455f0e1b4b909d10a3b41523a650f463bb14ecffc043ef21d3d2490d31",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-1",
+      "role": "colour",
+      "file": "standard/1-1-colour.webp",
+      "bytes": 499180,
+      "sha256": "007fa90473ce65d122e9805e5cd7e1be56e65f62bf83d4906c4f6bec10467ac2",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "SRGBColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-1",
+      "role": "normal",
+      "file": "standard/1-1-normal.webp",
+      "bytes": 2057776,
+      "sha256": "005b4adc5b504bb40054bf7a1bbbf034cc46cc90264cbff1728888746d370b23",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    },
+    {
+      "tier": "standard",
+      "region": "1-1",
+      "role": "roughness",
+      "file": "standard/1-1-roughness.webp",
+      "bytes": 46966,
+      "sha256": "0453d66c2c55ab362bdc7fefafd9379b689e7e67eb926cf1d832e98f5d0f2424",
+      "width": 1024,
+      "height": 1024,
+      "gutter": 32,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ],
+      "colorSpace": "NoColorSpace"
+    }
+  ],
+  "totalBytes": 5184280
+}

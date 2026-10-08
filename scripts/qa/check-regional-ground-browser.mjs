@@ -1,0 +1,7 @@
+import assert from 'node:assert/strict';import {createRequire} from 'node:module';
+const {chromium}=createRequire(import.meta.url)('C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const b=await chromium.launch({channel:'msedge',headless:true}),p=await b.newPage({viewport:{width:1280,height:1000}}),errors=[];p.on('pageerror',e=>errors.push(e.message));
+try{await p.goto('http://127.0.0.1:5181/environment-lab');await p.locator('canvas[data-ready=true]').waitFor({timeout:60000});assert.equal(await p.locator('#environment-material').count(),1,'Material comparison must be available');assert.equal(await p.inputValue('#environment-material'),'regional');assert.equal(await p.isChecked('#environment-grass'),false);
+ await p.selectOption('#environment-quality','low');await p.waitForFunction(()=>document.querySelector('canvas').dataset.groundTier==='low');assert.equal(JSON.parse(await p.locator('canvas').getAttribute('data-ground')).regions,12);
+ await p.selectOption('#environment-material','baseline');await p.waitForFunction(()=>document.querySelector('canvas').dataset.groundTier==='baseline');
+ await p.selectOption('#environment-material','regional');await p.waitForFunction(()=>document.querySelector('canvas').dataset.groundTier==='low');assert.deepEqual(errors,[]);console.log('Regional materials / quality / baseline controls PASS');}finally{await b.close();}

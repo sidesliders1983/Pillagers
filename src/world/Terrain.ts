@@ -1,4 +1,5 @@
-import { BufferGeometry, Float32BufferAttribute, Mesh, MeshStandardMaterial, Color, MathUtils, Texture, Vector2 } from 'three';
+import {regionalGroundConfig,groundRegions,GroundTier} from '../config/RegionalGroundConfig';
+import { BufferGeometry, Float32BufferAttribute, Mesh, MeshStandardMaterial, Color, MathUtils, Texture, Vector2, Group } from 'three';
 import { worldConfig } from '../config/worldConfig';
 import { buildings, buildingDistance, pathWeight } from './SettlementLayout';
 import {groundTreatment} from './GroundTreatment';
@@ -48,4 +49,21 @@ export function createTerrain(options:TerrainOptions={}) {
         normalMap:maps?.normalMap??null,roughnessMap:maps?.roughnessMap??null,normalScale:new Vector2(maps?.normalScale??1,maps?.normalScale??1) }));
     mesh.receiveShadow = true;
     return mesh;
+}
+
+/** Partition rendering only: triangles, normals and height authority stay canonical. */
+export function createRegionalTerrain(maps:ReadonlyMap<string,{map:Texture;normalMap:Texture|null;roughnessMap:Texture}>=new Map(),tier:GroundTier='standard') {
+ const source=createTerrain(),group=new Group(),p=source.geometry.getAttribute('position'),n=source.geometry.getAttribute('normal');
+ const config=regionalGroundConfig,{size,gutter}=config.tiers[tier],inset=gutter/size,coverage=1-2*inset;
+ for(const region of groundRegions()){
+  const positions:number[]=[],normals:number[]=[],uvs:number[]=[];
+  for(let i=0;i<p.count;i+=3){const cx=(p.getX(i)+p.getX(i+1)+p.getX(i+2))/3,cz=(p.getZ(i)+p.getZ(i+1)+p.getZ(i+2))/3;
+   if(cx<region.minX||cx>=region.maxX||cz<region.minZ||cz>=region.maxZ)continue;
+   for(let j=i;j<i+3;j++){positions.push(p.getX(j),p.getY(j),p.getZ(j));normals.push(n.getX(j),n.getY(j),n.getZ(j));uvs.push(inset+(p.getX(j)-region.minX)/config.regionWidth*coverage,inset+(p.getZ(j)-region.minZ)/config.regionDepth*coverage);}
+  }
+  const geometry=new BufferGeometry();geometry.setAttribute('position',new Float32BufferAttribute(positions,3));geometry.setAttribute('normal',new Float32BufferAttribute(normals,3));geometry.setAttribute('uv',new Float32BufferAttribute(uvs,2));
+  const texture=maps.get(region.id),material=new MeshStandardMaterial({map:texture?.map??null,normalMap:tier==='low'?null:texture?.normalMap??null,roughnessMap:texture?.roughnessMap??null,roughness:1,flatShading:true,vertexColors:false,normalScale:new Vector2(config.normalScale,config.normalScale)});
+  const mesh=new Mesh(geometry,material);mesh.name='Ground region '+region.id;mesh.receiveShadow=true;group.add(mesh);
+ }
+ source.geometry.dispose();source.material.dispose();return group;
 }
