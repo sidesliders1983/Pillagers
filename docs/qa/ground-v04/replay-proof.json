@@ -1,0 +1,6 @@
+{
+  "configSha256": "f5d21b31bf2953d7d5238ccde9775d8fd3277b4b805f9f4f6e2adbfa5ce1c0db",
+  "filesCompared": 72,
+  "differences": 0,
+  "method": "Second complete offline bake from the exact pinned source bytes, compare every output SHA-256"
+}

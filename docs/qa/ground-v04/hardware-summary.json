@@ -1,0 +1,196 @@
+{
+  "renderCommit": "5dfd1324f6d5a96923b8168fd77494160554e3dc",
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "summaries": [
+    {
+      "camera": "village",
+      "material": "baseline",
+      "tier": "standard",
+      "runs": 3,
+      "medianRange": [
+        18,
+        18,
+        18
+      ],
+      "p95Range": [
+        18.100000000002183,
+        18.100000000002183,
+        18.099999999998545
+      ],
+      "calls": [
+        26
+      ],
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "camera": "village",
+      "material": "regional",
+      "tier": "standard",
+      "runs": 3,
+      "medianRange": [
+        18,
+        35.89999999999418,
+        35.70000000001164
+      ],
+      "p95Range": [
+        18.099999999998545,
+        36.19999999999709,
+        36.10000000000582
+      ],
+      "calls": [
+        33
+      ],
+      "geometries": [
+        33
+      ],
+      "textures": [
+        61
+      ]
+    },
+    {
+      "camera": "village",
+      "material": "regional",
+      "tier": "low",
+      "runs": 3,
+      "medianRange": [
+        18,
+        18.10000000000582,
+        35.90000000000873
+      ],
+      "p95Range": [
+        36,
+        36.10000000000582,
+        36.30000000000291
+      ],
+      "calls": [
+        33
+      ],
+      "geometries": [
+        33
+      ],
+      "textures": [
+        52
+      ]
+    },
+    {
+      "camera": "shore",
+      "material": "baseline",
+      "tier": "standard",
+      "runs": 3,
+      "medianRange": [
+        36,
+        36,
+        36
+      ],
+      "p95Range": [
+        37.09999999997672,
+        36.19999999998254,
+        54
+      ],
+      "calls": [
+        26
+      ],
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "camera": "shore",
+      "material": "regional",
+      "tier": "standard",
+      "runs": 3,
+      "medianRange": [
+        36,
+        49.10000000000582,
+        33.60000000000582
+      ],
+      "p95Range": [
+        54,
+        66.70000000001164,
+        67.10000000000582
+      ],
+      "calls": [
+        35
+      ],
+      "geometries": [
+        35
+      ],
+      "textures": [
+        67
+      ]
+    },
+    {
+      "camera": "shore",
+      "material": "regional",
+      "tier": "low",
+      "runs": 3,
+      "medianRange": [
+        33.29999999998836,
+        19.60000000000582,
+        16.800000000046566
+      ],
+      "p95Range": [
+        50.79999999998836,
+        34.10000000000582,
+        34.40000000002328
+      ],
+      "calls": [
+        35
+      ],
+      "geometries": [
+        35
+      ],
+      "textures": [
+        56
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "material": "regional",
+      "tier": "low",
+      "cycles": 10,
+      "geometries": [
+        35
+      ],
+      "textures": [
+        56
+      ]
+    },
+    {
+      "material": "baseline",
+      "tier": "standard",
+      "cycles": 10,
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "material": "regional",
+      "tier": "standard",
+      "cycles": 10,
+      "geometries": [
+        35
+      ],
+      "textures": [
+        67
+      ]
+    }
+  ],
+  "gate": "Owner budgets/visual acceptance and actual mobile hardware remain unconfirmed. Frame interval samples are not GPU-exclusive timings."
+}

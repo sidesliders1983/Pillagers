@@ -1,0 +1,3189 @@
+{
+  "head": "5dfd1324f6d5a96923b8168fd77494160554e3dc",
+  "workingTree": "ground-v04 candidate; pin final implementation in PR",
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+    "maxAnisotropy": 16
+  },
+  "canvas": [
+    1280,
+    800
+  ],
+  "pixelRatio": 1,
+  "phase": 0,
+  "grass": false,
+  "dusk": "Unavailable: no preset",
+  "captures": [
+    {
+      "file": "baseline-village-standard-day-composed.webp",
+      "sha256": "2c0dc87ca24e8a55d9934d2f9130822e11b394b85ab11585c459d1e6a52cf421",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 25.875999999940394,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-day-ground.webp",
+      "sha256": "c86993bb05025464877b32c2354a1e7bd1aef93d186a67b096ddd2cc8290311d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 26,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-night-composed.webp",
+      "sha256": "96ca3e4b40df7d4dd15b0e2e63c64b6061dd58e9fe36187f722169ed030194e3",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 31.115789473841065,
+        "calls": 27,
+        "triangles": 359234,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-night-ground.webp",
+      "sha256": "324842c82f0ebc3e6254a3f126c99b1eeb4a376b86e4132de8d809f5a9cc9550",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.94285714293697,
+        "calls": 4,
+        "triangles": 73112,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-day-composed.webp",
+      "sha256": "6b33dd040f50e41d4eb08f2c9030441069db833a5724838b7765d99d9e03bc9e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 26.489473684053667,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-day-ground.webp",
+      "sha256": "8086c269e8425f9f6a24ec1cd9a062bac942e6e96c55db5d763795eab427a0fc",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-night-composed.webp",
+      "sha256": "71dac185597b6ed24f0f45635021d43a64dd1c46f4bf7b7384590a933fb32887",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 25.155000000074498,
+        "calls": 27,
+        "triangles": 359234,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-night-ground.webp",
+      "sha256": "527f0abf93230eea27642be047c9d2bef310262acfbb3d3be33ec033cf8c93af",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.975000000026604,
+        "calls": 4,
+        "triangles": 73112,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-day-composed.webp",
+      "sha256": "81b27277ffa3eaacbd67cdfd96cd860e422ff2d5d76080e3e3c0c7a5be3a71c0",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 26.510526315750262,
+        "calls": 24,
+        "triangles": 342135,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-day-ground.webp",
+      "sha256": "fd775149c90e43a24e748a1405dfd2800d3c2472e318d0bc157aa1c1f7de673d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.62962962962963,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-night-composed.webp",
+      "sha256": "c97410ffcd66dba44a05ca82a2d7446128f99b641f016d9345fac75a2756f6b8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.000000000000007,
+        "calls": 24,
+        "triangles": 342135,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-night-ground.webp",
+      "sha256": "d2cde1b1751f4306da5c302d3cad125adacd00c0b8a2330f1a0f3589f0c2c685",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.818181818181824,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-low-day-composed.webp",
+      "sha256": "2c0dc87ca24e8a55d9934d2f9130822e11b394b85ab11585c459d1e6a52cf421",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.967857142910354,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-low-day-ground.webp",
+      "sha256": "c86993bb05025464877b32c2354a1e7bd1aef93d186a67b096ddd2cc8290311d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 24.852380952487387,
+        "calls": 3,
+        "triangles": 24480,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-low-night-composed.webp",
+      "sha256": "96ca3e4b40df7d4dd15b0e2e63c64b6061dd58e9fe36187f722169ed030194e3",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.007142857116246,
+        "calls": 27,
+        "triangles": 310634,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-low-night-ground.webp",
+      "sha256": "324842c82f0ebc3e6254a3f126c99b1eeb4a376b86e4132de8d809f5a9cc9550",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 24.169565217326518,
+        "calls": 4,
+        "triangles": 24512,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-low-day-composed.webp",
+      "sha256": "1deb9484023e89556b7e59ffb1381a27ba258b2cc4733a63852951136e0fbf03",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 29.59411764714648,
+        "calls": 26,
+        "triangles": 310602,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-low-day-ground.webp",
+      "sha256": "4da84b4be74a4e78a30b77140d1ca5a077b795dd15735a4ad070e509af4de4fd",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 23.764000000059607,
+        "calls": 3,
+        "triangles": 24480,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-low-night-composed.webp",
+      "sha256": "42bf848cac2e122337d59613afe0b025eb2ed04a8430e1c8f776e1dab654f52f",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.010714285740892,
+        "calls": 27,
+        "triangles": 310634,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-low-night-ground.webp",
+      "sha256": "e452148331b61ded6eba6a768e172045728c0970a47550144c3f4985a8f34cc1",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 20.912499999937907,
+        "calls": 4,
+        "triangles": 24512,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-low-day-composed.webp",
+      "sha256": "81b27277ffa3eaacbd67cdfd96cd860e422ff2d5d76080e3e3c0c7a5be3a71c0",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.957142857169472,
+        "calls": 24,
+        "triangles": 293535,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-low-day-ground.webp",
+      "sha256": "fd775149c90e43a24e748a1405dfd2800d3c2472e318d0bc157aa1c1f7de673d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 25.2,
+        "calls": 3,
+        "triangles": 24480,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-low-night-composed.webp",
+      "sha256": "c97410ffcd66dba44a05ca82a2d7446128f99b641f016d9345fac75a2756f6b8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.042857142830528,
+        "calls": 24,
+        "triangles": 293535,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-low-night-ground.webp",
+      "sha256": "d2cde1b1751f4306da5c302d3cad125adacd00c0b8a2330f1a0f3589f0c2c685",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 20.97916666666667,
+        "calls": 3,
+        "triangles": 24480,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-day-near-composed.webp",
+      "sha256": "c7e203ca88dd6fcf915afbbb991a87f9e83a64ed516d9622b5f3add2c2a02413",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            17.248931213515622,
+            8.97078388160156,
+            4.731591374218755
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 28.00555555563834,
+        "calls": 24,
+        "triangles": 344797,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-day-near-ground.webp",
+      "sha256": "e014def2a51291fd893e7f39687f6e17785be429f4f73fac2f2f217e3ac428f0",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            17.248931213515622,
+            8.97078388160156,
+            4.731591374218755
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.96785714277732,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-day-far-composed.webp",
+      "sha256": "136aeb92ff006c3d18a0fbbf170e9a7015b24750bba60bf3df6db5a4c8897392",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            39.19083400775068,
+            16.56605792575985,
+            -12.146795390577434
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.982142857142858,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-village-standard-day-far-ground.webp",
+      "sha256": "93590b2b43efce6b1b63378eae7f913976fc09c8e1d9e375fc2ab6c240340d27",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            39.19083400775068,
+            16.56605792575985,
+            -12.146795390577434
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 26.15909090909091,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-day-near-composed.webp",
+      "sha256": "3a88c072325aacb2d97e6693ee61e946322ede931428d3e0090b1208b4f07547",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            19.902612938671872,
+            10.634204312890622,
+            -17.844180701874983
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 27.478947368499473,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-day-near-ground.webp",
+      "sha256": "def7c6fdbcd70501a91966c1b78ecadfa443f9272fa6f82af897509a2c19050d",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            19.902612938671872,
+            10.634204312890622,
+            -17.844180701874983
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.996428571375354,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-day-far-composed.webp",
+      "sha256": "2c4e2a6d8a49a3099d4b55a2cc204d256dca1c48bdfa00a630a3c5098f72ea5b",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            45.22019308586618,
+            19.073397695288726,
+            -58.35230893738586
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.99285714288375,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-shore-standard-day-far-ground.webp",
+      "sha256": "afe37ca3e9655830e89f36a73be834ab522f0683aace6af60c8ef6d42c4ee539",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            45.22019308586618,
+            19.073397695288726,
+            -58.35230893738586
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 23.93809523805976,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-day-near-composed.webp",
+      "sha256": "a1fb5f62b7a49581d82f7df6350618ed269f235aa0d68c03dc3b9dcd0ebf7b0f",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -31.922090350937495,
+            12.634204312890624,
+            12.077909649062507
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 27.000000000000004,
+        "calls": 22,
+        "triangles": 333195,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-day-near-ground.webp",
+      "sha256": "4b01cb49332eed9088b097c522a7d9b510e973b8ae0c485073cd055a9018d4e1",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -31.922090350937495,
+            12.634204312890624,
+            12.077909649062507
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.971428571535007,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-day-far-composed.webp",
+      "sha256": "18a3b764644888726cf7164b680ddcc1fd32736c906d26671660c9db6ea25d41",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -52.176154468692935,
+            21.073397695288726,
+            -8.176154468692928
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 29.582352941088818,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "baseline-forest-standard-day-far-ground.webp",
+      "sha256": "2197ddd9983095bdb9c625500da100d1a69cfe64194dce3d3a3051b8dc89ab2e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -52.176154468692935,
+            21.073397695288726,
+            -8.176154468692928
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 25.499999999999996,
+        "calls": 3,
+        "triangles": 73080,
+        "geometries": 27,
+        "textures": 34
+      },
+      "ground": {
+        "regions": 1,
+        "density": [
+          8.827586206896552,
+          12.8
+        ],
+        "colourSpace": "vertex colour",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-day-composed.webp",
+      "sha256": "b3dd78eb142d0c9bef0011d49b2e0bcf17e054bac7ffa4868171aa4fc2f25ee6",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 28.315384615355953,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-day-ground.webp",
+      "sha256": "2f8565ba66755b653ef997e0bd030cc6453041f1a27408d2cbd83d46816ec6d7",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 35.99999999999999,
+        "calls": 10,
+        "triangles": 68400,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-night-composed.webp",
+      "sha256": "3ceb68a3fd33019216b87188a562d235b5f3a33fbd1a429e6c6a85d7a00da5de",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.32666666681568,
+        "calls": 34,
+        "triangles": 354554,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-night-ground.webp",
+      "sha256": "b9e258eb8c89057573fbeaca82d517a643a2e9e7c99b3ccf0a626d41091ae5e7",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 42.025000000062086,
+        "calls": 11,
+        "triangles": 68432,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-day-composed.webp",
+      "sha256": "ded84a6f661757ddb6fbf96bc438782ca5e590439c7aeba9ccf9213afca08ef8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 27.972222222222218,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-day-ground.webp",
+      "sha256": "9b323a771fd7631bb555d62d13e319a60a7cc8e377283ca5055144158ca9e2d7",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 24.230769230769237,
+        "calls": 13,
+        "triangles": 69440,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-night-composed.webp",
+      "sha256": "4120085983c11808494fd88cd90420a165d0739c13540ff3d7ce5351a5f03471",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 35.7857142857143,
+        "calls": 37,
+        "triangles": 355594,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-night-ground.webp",
+      "sha256": "2e52bfad0655620aa123f6d472deee91910ec833f9bdea50816499ff62ea3181",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 17.974999999893566,
+        "calls": 14,
+        "triangles": 69472,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-day-composed.webp",
+      "sha256": "721e528244946c04acf73e5ea93075df379e74bfbbae99b5e624dbeb5fe98516",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 28.52083333333334,
+        "calls": 33,
+        "triangles": 338131,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-day-ground.webp",
+      "sha256": "dbbd0b14d858f7912c5f34d8584bd7357cb305d8fa6b1475f1d53d570395d95f",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 36.014285714498584,
+        "calls": 12,
+        "triangles": 69076,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-night-composed.webp",
+      "sha256": "977f2a74e87a2b1a6a1bd014495bb58a86173a5ca74dd8fdf60545a3d8a0b87e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.81538461521267,
+        "calls": 33,
+        "triangles": 338131,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-night-ground.webp",
+      "sha256": "cae0fec7881219aa56bd1f24342c4e680d16ee7efd13fd1f5f8958ac900b47a6",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 35.9928571427507,
+        "calls": 12,
+        "triangles": 69076,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-low-day-composed.webp",
+      "sha256": "4ee082d079ec93d0455c597ea352f75c9317b3c083382bf5adf45c625d1141c1",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.784615384558066,
+        "calls": 33,
+        "triangles": 305922,
+        "geometries": 36,
+        "textures": 56
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-low-day-ground.webp",
+      "sha256": "14f32e31fb5a9aa4f0e8f8b09b38d3a5f33e3d928366882e96e50f89608236fa",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.246666666616996,
+        "calls": 10,
+        "triangles": 19800,
+        "geometries": 36,
+        "textures": 56
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-low-night-composed.webp",
+      "sha256": "6dddba8a90d112d8501820b524f45a19b68a9a27a97ae486673729de814382b7",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 50.41999999992549,
+        "calls": 34,
+        "triangles": 305954,
+        "geometries": 36,
+        "textures": 56
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-low-night-ground.webp",
+      "sha256": "2bb4433319b5c611df25c34471fbdc86c283ba1fb9d03676955abf8422853f0b",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            26.000000000000007,
+            12,
+            -1.9999999999999964
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 41.98333333339543,
+        "calls": 11,
+        "triangles": 19832,
+        "geometries": 36,
+        "textures": 56
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-low-day-composed.webp",
+      "sha256": "040264224b59cf00305e3c71c2a32f664cad1d72b8c1d135fae74bf631477d72",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 26.325000000053222,
+        "calls": 36,
+        "triangles": 306962,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-low-day-ground.webp",
+      "sha256": "14cd57d1b9bdc43de57f177f6279f271546f4fa342827dbb7a68c0b64d6a66da",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.73076923076923,
+        "calls": 13,
+        "triangles": 20840,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-low-night-composed.webp",
+      "sha256": "2b46b25b3031cc44379c01a75040bf2c9396936f053a6180c2035d180ab7f002",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.769230769230774,
+        "calls": 37,
+        "triangles": 306994,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-low-night-ground.webp",
+      "sha256": "db54b936d060033a55cad1df512c7200258d48a4541726f698e06a1d3ca84e7c",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            30.00000000000001,
+            14.000000000000002,
+            -33.99999999999999
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 41.93333333327124,
+        "calls": 14,
+        "triangles": 20872,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-low-day-composed.webp",
+      "sha256": "3a86d07435cba1c39dc65d95349eb76a07506e5237cb23c289744fb290df6373",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 55.43333333327124,
+        "calls": 33,
+        "triangles": 289531,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-low-day-ground.webp",
+      "sha256": "49ec473bc583edf889a3d75c14009d720aa8bc56f07ed4b1161e413a579bcfb8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 38.592592592592595,
+        "calls": 12,
+        "triangles": 20476,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-low-night-composed.webp",
+      "sha256": "7639c648ceb39df04a29c8e4b942ee5744413a701fa2b1d00c7fe35e71cfc11b",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.68888888894408,
+        "calls": 33,
+        "triangles": 289531,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-low-night-ground.webp",
+      "sha256": "811d14424828e2153f37d5c032ad5e78e9b45e0a48126f81f4e217136d5f95e8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -40,
+            16,
+            4.0000000000000036
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "night",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 49.670588235206466,
+        "calls": 12,
+        "triangles": 20476,
+        "geometries": 37,
+        "textures": 58
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          16,
+          17.142857142857142
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-day-near-composed.webp",
+      "sha256": "32912e7f1413fc5e0468f82790b89c2395bb4624d184f052dcff0b6ad29695a6",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            17.248931213515622,
+            8.97078388160156,
+            4.731591374218755
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 30.158823529587067,
+        "calls": 31,
+        "triangles": 340117,
+        "geometries": 36,
+        "textures": 67
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-day-near-ground.webp",
+      "sha256": "0aa1bc036a235fa23fdd9b7afd25920592b907dd66b17f85230a7b0879b11f24",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            17.248931213515622,
+            8.97078388160156,
+            4.731591374218755
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 31.468750000000004,
+        "calls": 10,
+        "triangles": 68400,
+        "geometries": 36,
+        "textures": 67
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-day-far-composed.webp",
+      "sha256": "6240c010189ac09a788ec71762d7da881c83ffeb11d3af69d87a75804dcac76f",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            39.19083400775068,
+            16.56605792575985,
+            -12.146795390577434
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 33.63999999985099,
+        "calls": 35,
+        "triangles": 355250,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-village-standard-day-far-ground.webp",
+      "sha256": "ee55eb59930593d6d82dea76d2f48b013d00a290a2ec67344d39b01687eaee8e",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            39.19083400775068,
+            16.56605792575985,
+            -12.146795390577434
+          ],
+          "target": [
+            0,
+            3,
+            18
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.822727272795007,
+        "calls": 12,
+        "triangles": 69128,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-day-near-composed.webp",
+      "sha256": "cb7994f8878ae275c4620a5af65803ea5ea42835becdbf76831624891caf5468",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            19.902612938671872,
+            10.634204312890622,
+            -17.844180701874983
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 26.978947368499483,
+        "calls": 33,
+        "triangles": 354522,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-day-near-ground.webp",
+      "sha256": "b1f8db932d3f6a1345bf4ba0272baca9d83be857aafbdd5ddef8e96cc96cacef",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            19.902612938671872,
+            10.634204312890622,
+            -17.844180701874983
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 21.21666666679084,
+        "calls": 10,
+        "triangles": 68400,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-day-far-composed.webp",
+      "sha256": "4a57fbfb28cb23b43872d7f5fc2286d8873de6efc8c109af9365167577f8dbfe",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            45.22019308586618,
+            19.073397695288726,
+            -58.35230893738586
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 34.77999999995033,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-shore-standard-day-far-ground.webp",
+      "sha256": "b135483d06333b3fa7098bd24cd072dd78cbf2d4519669c6bf0b8b5cbc4ac3f8",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            45.22019308586618,
+            19.073397695288726,
+            -58.35230893738586
+          ],
+          "target": [
+            0,
+            4,
+            14.000000000000002
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 68.66470588239677,
+        "calls": 13,
+        "triangles": 69440,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-day-near-composed.webp",
+      "sha256": "b6486296214b968004e441a8a7fe37570bdd128394e1dc2b2dde91f8e83be767",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -31.922090350937495,
+            12.634204312890624,
+            12.077909649062507
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 33.1312499998603,
+        "calls": 29,
+        "triangles": 328351,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-day-near-ground.webp",
+      "sha256": "69fecf5859ee374ec668431b80c35ad258b399df4a5ba7400b6d64407aace641",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -31.922090350937495,
+            12.634204312890624,
+            12.077909649062507
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 20.2679999999702,
+        "calls": 10,
+        "triangles": 68236,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-day-far-composed.webp",
+      "sha256": "14914c881cfe24b165fac2ecb3d16b993192f96846f8a2bba61f7897fddb3826",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -52.176154468692935,
+            21.073397695288726,
+            -8.176154468692928
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 33.35333333313465,
+        "calls": 36,
+        "triangles": 355562,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    },
+    {
+      "file": "regional-forest-standard-day-far-ground.webp",
+      "sha256": "e875b1584ab8c5f0fd4f1702a7ca8f423954f2599ceb947af4ef09e71cb2cb25",
+      "fixture": {
+        "seed": 1983,
+        "time": 0,
+        "camera": {
+          "position": [
+            -52.176154468692935,
+            21.073397695288726,
+            -8.176154468692928
+          ],
+          "target": [
+            -16,
+            6,
+            28
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)"
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 21.986956521706738,
+        "calls": 13,
+        "triangles": 69440,
+        "geometries": 37,
+        "textures": 70
+      },
+      "ground": {
+        "regions": 12,
+        "density": [
+          32,
+          34.285714285714285
+        ],
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "mipmaps": true,
+        "anisotropy": 4
+      }
+    }
+  ],
+  "errors": []
+}

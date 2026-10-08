@@ -1,0 +1,79 @@
+{
+  "verifiedDeliveryFiles": 72,
+  "verifiedSources": 12,
+  "configSha256": "f5d21b31bf2953d7d5238ccde9775d8fd3277b4b805f9f4f6e2adbfa5ce1c0db",
+  "tiers": {
+    "standard": {
+      "deliveryBytes": 18864090,
+      "runtimeDeliveryBytes": 18864090,
+      "runtimeLayers": [
+        "colour",
+        "normal",
+        "roughness"
+      ],
+      "textureRGBA8WithMipUpperBoundBytes": 201326592,
+      "texelsPerMeter": [
+        32,
+        34.285714285714285
+      ]
+    },
+    "low": {
+      "deliveryBytes": 3938488,
+      "runtimeDeliveryBytes": 598386,
+      "runtimeLayers": [
+        "colour",
+        "roughness"
+      ],
+      "textureRGBA8WithMipUpperBoundBytes": 33554432,
+      "texelsPerMeter": [
+        16,
+        17.142857142857142
+      ]
+    }
+  },
+  "seams": [
+    {
+      "tier": "standard",
+      "role": "colour",
+      "samples": 48960,
+      "maxCodeDifference": 10,
+      "rmsCodeDifference": 1.6734054941084717
+    },
+    {
+      "tier": "standard",
+      "role": "normal",
+      "samples": 48960,
+      "maxCodeDifference": 0,
+      "rmsCodeDifference": 0
+    },
+    {
+      "tier": "standard",
+      "role": "roughness",
+      "samples": 48960,
+      "maxCodeDifference": 2,
+      "rmsCodeDifference": 0.18416145410066295
+    },
+    {
+      "tier": "low",
+      "role": "colour",
+      "samples": 24480,
+      "maxCodeDifference": 9.5,
+      "rmsCodeDifference": 1.6486557457437427
+    },
+    {
+      "tier": "low",
+      "role": "normal",
+      "samples": 24480,
+      "maxCodeDifference": 0,
+      "rmsCodeDifference": 0
+    },
+    {
+      "tier": "low",
+      "role": "roughness",
+      "samples": 24480,
+      "maxCodeDifference": 2.5,
+      "rmsCodeDifference": 0.3145277349907816
+    }
+  ],
+  "note": "Boundary bilinear samples in encoded maps; hardware mip/anisotropic appearance still requires capture inspection. Memory is an RGBA8 + mip upper bound, not measured VRAM."
+}
