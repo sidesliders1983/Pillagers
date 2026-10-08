@@ -79,3 +79,9 @@ _Avoid_: Recon unit, disposable raid party
 **Carrying slot**: One returning member's capacity for one category of recovered cargo.
 
 **Historical identity**: A retained record of a person or animal formerly present in a clan, preserving the meaning of kinship and history after transfer.
+
+## Environment authoring
+
+**Environment Lab**: A development preview of Pillagers' landscape and environmental appearance before it is introduced into Fjordside.
+
+**Fjord water**: The calm water bordering Fjordside's shore, with shallow edges and deeper stretches.

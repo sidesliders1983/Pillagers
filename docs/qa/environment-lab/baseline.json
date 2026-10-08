@@ -1,0 +1,22 @@
+{
+  "renderer": "Chromium headless / SwiftShader software rendering; frame times are not a hardware benchmark",
+  "viewport": [
+    1440,
+    1000
+  ],
+  "standard": "Fjord water · standard · seed 1983\n0.9 FPS · 1099.2 ms/frame\n15 draw calls · 75,656 triangles\n5 geometries · 4 textures",
+  "low": "Fjord water · low · seed 1983\n6.0 FPS · 167.2 ms/frame\n15 draw calls · 27,056 triangles\n6 geometries · 4 textures",
+  "fallback": "Fjord water · compatibility fallback · seed 1983\n3.7 FPS · 267.9 ms/frame\n16 draw calls · 10,968 triangles\n7 geometries · 4 textures",
+  "checks": [
+    "no comparison control",
+    "visible wave pause/resume",
+    "day/night",
+    "three camera presets",
+    "lower triangle count at Low quality",
+    "compatibility fallback",
+    "water visibility",
+    "latest main settlement route",
+    "Meshy Fjordside"
+  ],
+  "errors": []
+}

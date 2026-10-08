@@ -1,6 +1,8 @@
 import './style.css';
 const route=location.pathname.replace(/\/+$/, '');
-if(route==='/play'){
+if(route==='/environment-lab'){
+    import('./environment-lab/EnvironmentLab').then(({EnvironmentLab})=>new EnvironmentLab().start()).catch(error=>{console.error(error);document.body.textContent='Could not open Environment Lab. '+error.message;});
+}else if(route==='/play'){
     import('./play/PlayUI').then(({PlayUI})=>new PlayUI().start()).catch(error=>{console.error(error);document.body.textContent='Could not open settlement. '+error.message;});
 }else if(route==='/gameplay-lab'){
     import('./gameplay-lab/GameplayLab').then(({GameplayLab})=>new GameplayLab().start()).catch(error=>{console.error(error);document.body.textContent="Could not open Gameplay Lab. "+error.message;});

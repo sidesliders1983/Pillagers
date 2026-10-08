@@ -3,7 +3,7 @@ import { readFileSync, existsSync, cpSync, mkdirSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 // Serve the original local kit without relocating or tracking third-party files.
 export default defineConfig({
-    optimizeDeps: { entries: ['index.html','src/core/Game.ts','src/character-lab/CharacterLab.ts','src/character-lab/MeshyCharacterLab.ts','src/asset-lab/AssetLab.ts'], include: ['three', 'three/addons/loaders/GLTFLoader.js', 'three/addons/controls/OrbitControls.js'] },
+    optimizeDeps: { entries: ['index.html','src/core/Game.ts','src/environment-lab/EnvironmentLab.ts','src/play/PlayUI.ts','src/gameplay-lab/GameplayLab.ts','src/character-lab/CharacterLab.ts','src/character-lab/MeshyCharacterLab.ts','src/asset-lab/AssetLab.ts'], include: ['three', 'three/addons/loaders/GLTFLoader.js', 'three/addons/controls/OrbitControls.js'] },
     server: { watch: { ignored: ['**/tools/**', '**/scratch/**', '**/artifacts/**'] } },
     plugins: [{ name: 'local-world-assets',
             configureServer(server) {
