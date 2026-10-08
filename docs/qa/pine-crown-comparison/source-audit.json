@@ -1,0 +1,349 @@
+{
+  "sourceRevision": "dcf309bd86bd521083d9c70f01f2de45fdc7c457",
+  "originalFiles": [
+    {
+      "path": "LICENSE",
+      "sha256": "20e4afadfb10c67952b3d73cd2982d21d165ab4ae82b0dd9e4d6f2166ee349b6",
+      "bytes": 1073
+    },
+    {
+      "path": "src/app/public/textures/LICENSE.md",
+      "sha256": "c4c67cf955536e61d9ac3fdf13830114edcd4c19c9aa0356ed0862cedf64140a",
+      "bytes": 1378
+    },
+    {
+      "path": "src/lib/branch.js",
+      "sha256": "f71a5e0df6b74ae521942f1722e5a0dd17707add05f12691da96231fdeff8571",
+      "bytes": 787
+    },
+    {
+      "path": "src/lib/enums.js",
+      "sha256": "d83df789447a421baaecfd18cc8187bf3f80f6cf6e7ba7866812ed527f104092",
+      "bytes": 151
+    },
+    {
+      "path": "src/lib/index.js",
+      "sha256": "a0a92be6d68505522f9d218710f7fd8bff197c77a188999757a9fdb802459546",
+      "bytes": 161
+    },
+    {
+      "path": "src/lib/options.js",
+      "sha256": "092e20ee9073d7402e2fa04d570c17ff150276b5f8c941b3da629edf4ecfe0b9",
+      "bytes": 5186
+    },
+    {
+      "path": "src/lib/presets/ash_large.json",
+      "sha256": "fb630c9f4ae0e344c884f0380d23b35bd93af8924dc0244190b83811634d4f50",
+      "bytes": 1461
+    },
+    {
+      "path": "src/lib/presets/ash_medium.json",
+      "sha256": "4fbda008f54a1421c67bdff3022d64aba1d497253bc45dc7f186e3a4f78a9edd",
+      "bytes": 1414
+    },
+    {
+      "path": "src/lib/presets/ash_small.json",
+      "sha256": "aa912b8789d348e751aea05c8bf7fd3e91919f7d2429a43150d0b171a57c7a1d",
+      "bytes": 1416
+    },
+    {
+      "path": "src/lib/presets/aspen_large.json",
+      "sha256": "91d66898f9a2edb0ac29482c137c295e8fefd2f39b9c328f690c4656e3edbf89",
+      "bytes": 1528
+    },
+    {
+      "path": "src/lib/presets/aspen_medium.json",
+      "sha256": "0ccedf06c8777fc7e21f04852f43a52fbe454d71521f2abeaa1cbb5af656ed3f",
+      "bytes": 1408
+    },
+    {
+      "path": "src/lib/presets/aspen_small.json",
+      "sha256": "342fd45bf5243c927c56e499d1083e6d527ec875366b6d763a529069e7255473",
+      "bytes": 1497
+    },
+    {
+      "path": "src/lib/presets/bush_1.json",
+      "sha256": "c15a079777169edbc8e7d99ddfde1f70b332049a1ca4b2469fb2987dfc195a4b",
+      "bytes": 1500
+    },
+    {
+      "path": "src/lib/presets/bush_2.json",
+      "sha256": "fee591915db8ee450151d30330c22ec9a980eaffe93bf58977d1113b749685ec",
+      "bytes": 1602
+    },
+    {
+      "path": "src/lib/presets/bush_3.json",
+      "sha256": "7b5fdf2bd190f8f61b792b32ac3a0eade9e09db6471bf422c6936c5855399926",
+      "bytes": 1673
+    },
+    {
+      "path": "src/lib/presets/index.js",
+      "sha256": "66f5c90aa49e18467bad26c21158a184fb33a6c019d9cc0efd403b514fb7dc5f",
+      "bytes": 1360
+    },
+    {
+      "path": "src/lib/presets/oak_large.json",
+      "sha256": "da60d7104796e5dc099effe778f22e055a8365549e2eb6cfa6fb0bb6a8190d6b",
+      "bytes": 1422
+    },
+    {
+      "path": "src/lib/presets/oak_medium.json",
+      "sha256": "b71da9eeebbe88e7e216af549427f4ec368c4939bf4d4e47d5325f79364fc1ea",
+      "bytes": 1421
+    },
+    {
+      "path": "src/lib/presets/oak_small.json",
+      "sha256": "56351f70c8d9432db4c2e80ad9e4f9a08cfb02cb511b5005bb451ddd76a384b4",
+      "bytes": 1422
+    },
+    {
+      "path": "src/lib/presets/pine_large.json",
+      "sha256": "80d3e4b0c8d283d995e9af515c54e1622750b620959fbfab06fb4fcf7de29189",
+      "bytes": 1544
+    },
+    {
+      "path": "src/lib/presets/pine_medium.json",
+      "sha256": "001254eff844a6d41aff3c409b78effe2a2995c8dd7a21ae301b1e7fb9da0118",
+      "bytes": 1408
+    },
+    {
+      "path": "src/lib/presets/pine_small.json",
+      "sha256": "3e389bbcec2fb8965a6a77c014409394aa8e8b81f32b6d3b4d9de86eb02f0c17",
+      "bytes": 1397
+    },
+    {
+      "path": "src/lib/presets/trellis.json",
+      "sha256": "015e40156baa5f7778d5fb9f9a5e601001e632d40e6fdd34644db4f47d1abc1c",
+      "bytes": 1701
+    },
+    {
+      "path": "src/lib/rng.js",
+      "sha256": "e4f2bfff79a0a6af3f909f106876e9208be1bb88cc7f7d1541a6858cbaa0c3c8",
+      "bytes": 586
+    },
+    {
+      "path": "src/lib/tree.js",
+      "sha256": "a1b7bd933cb2078e9373c9c853c620be8a3edc84a9edda6a4073c8ad2a31f934",
+      "bytes": 40609
+    },
+    {
+      "path": "src/lib/trellis.js",
+      "sha256": "ca623b4fbbee1a11aa14be213f5132928ecbe37f91db7424081fe9d681fc765b",
+      "bytes": 3805
+    },
+    {
+      "path": "textures/bark/Bark003_1K-JPG/Bark003_1K-JPG_Color.jpg",
+      "sha256": "9b0a65088b63ce2d5d2e5b7c33275dbc928e6e6674270f07ccc635d9eb742e73",
+      "bytes": 1261332
+    },
+    {
+      "path": "textures/bark/Bark003_1K-JPG/Bark003_1K-JPG_NormalGL.jpg",
+      "sha256": "22dbd485bc158140decf00e53a73390af74566990a29ad866ce18a396dc0345f",
+      "bytes": 2568702
+    },
+    {
+      "path": "textures/bark/Bark003_1K-JPG/Bark003_1K-JPG_Roughness.jpg",
+      "sha256": "57f63ad973b506ed16a84eaa0e1c386aafb7f79100d748a59aad7d27074ef284",
+      "bytes": 656514
+    },
+    {
+      "path": "textures/leaves/pine.png",
+      "sha256": "88be36a2387554ac4b7c7d1549eae454a37ad896e8e33a7d6ae5956bd169ab08",
+      "bytes": 303684
+    }
+  ],
+  "exports": [
+    {
+      "size": "small",
+      "triangles": 18756,
+      "textures": [
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        }
+      ]
+    },
+    {
+      "size": "medium",
+      "triangles": 19872,
+      "textures": [
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        }
+      ]
+    },
+    {
+      "size": "large",
+      "triangles": 19392,
+      "textures": [
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        },
+        {
+          "size": [
+            1024,
+            1024
+          ],
+          "mimeType": "image/png"
+        }
+      ]
+    }
+  ],
+  "kaykit": [
+    {
+      "key": "c",
+      "triangles": 404
+    },
+    {
+      "key": "b",
+      "triangles": 522
+    },
+    {
+      "key": "a",
+      "triangles": 982
+    }
+  ],
+  "browser": [
+    {
+      "size": "small",
+      "distance": "near",
+      "material": "source",
+      "image": "small-near-source.png"
+    },
+    {
+      "size": "small",
+      "distance": "near",
+      "material": "neutral",
+      "image": "small-near-neutral.png"
+    },
+    {
+      "size": "small",
+      "distance": "far",
+      "material": "source",
+      "image": "small-far-source.png"
+    },
+    {
+      "size": "small",
+      "distance": "far",
+      "material": "neutral",
+      "image": "small-far-neutral.png"
+    },
+    {
+      "size": "medium",
+      "distance": "near",
+      "material": "source",
+      "image": "medium-near-source.png"
+    },
+    {
+      "size": "medium",
+      "distance": "near",
+      "material": "neutral",
+      "image": "medium-near-neutral.png"
+    },
+    {
+      "size": "medium",
+      "distance": "far",
+      "material": "source",
+      "image": "medium-far-source.png"
+    },
+    {
+      "size": "medium",
+      "distance": "far",
+      "material": "neutral",
+      "image": "medium-far-neutral.png"
+    },
+    {
+      "size": "large",
+      "distance": "near",
+      "material": "source",
+      "image": "large-near-source.png"
+    },
+    {
+      "size": "large",
+      "distance": "near",
+      "material": "neutral",
+      "image": "large-near-neutral.png"
+    },
+    {
+      "size": "large",
+      "distance": "far",
+      "material": "source",
+      "image": "large-far-source.png"
+    },
+    {
+      "size": "large",
+      "distance": "far",
+      "material": "neutral",
+      "image": "large-far-neutral.png"
+    }
+  ],
+  "referenceVisible": true,
+  "browserErrors": []
+}

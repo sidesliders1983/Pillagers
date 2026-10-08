@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "experimental": true,
+  "sourceRevision": "dcf309bd86bd521083d9c70f01f2de45fdc7c457",
+  "sourceLock": "/scripts/qa/vendor/ez-tree/source-lock.json",
+  "geometry": "Unmodified existing pine presets, original preset seeds, full detail only; no runtime LOD policy",
+  "materials": "Static native MeshStandardMaterial: source tint, pine alpha-test/double-side and Bark003 colour/normal/roughness. Upstream wind GLSL and rounded-normal shader override excluded.",
+  "three": "0.180.0",
+  "assets": [
+    {
+      "size": "small",
+      "presetSeed": 11744,
+      "options": {
+        "seed": 11744,
+        "type": "evergreen",
+        "bark": {
+          "type": "Bark003",
+          "tint": 16777215,
+          "flatShading": false,
+          "textured": true,
+          "textureScale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "branch": {
+          "levels": 1,
+          "angle": {
+            "1": 117,
+            "2": 60,
+            "3": 60
+          },
+          "children": {
+            "0": 91,
+            "1": 7,
+            "2": 5
+          },
+          "force": {
+            "direction": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "strength": 0
+          },
+          "gnarliness": {
+            "0": 0.05,
+            "1": 0.08,
+            "2": 0,
+            "3": 0
+          },
+          "length": {
+            "0": 39.55,
+            "1": 12.12,
+            "2": 10,
+            "3": 1
+          },
+          "radius": {
+            "0": 0.55,
+            "1": 0.41,
+            "2": 0.7,
+            "3": 0.7
+          },
+          "sections": {
+            "0": 12,
+            "1": 10,
+            "2": 8,
+            "3": 6
+          },
+          "segments": {
+            "0": 8,
+            "1": 6,
+            "2": 4,
+            "3": 3
+          },
+          "start": {
+            "1": 0.16,
+            "2": 0.3,
+            "3": 0.3
+          },
+          "taper": {
+            "0": 0.7,
+            "1": 0.7,
+            "2": 0.7,
+            "3": 0.7
+          },
+          "twist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0
+          }
+        },
+        "leaves": {
+          "type": "pine",
+          "billboard": "double",
+          "angle": 10,
+          "count": 21,
+          "start": 0,
+          "size": 0.965,
+          "sizeVariance": 0.7,
+          "tint": 16777215,
+          "alphaTest": 0.3
+        },
+        "trellis": {
+          "enabled": false
+        }
+      },
+      "bounds": {
+        "min": [
+          -8.340940475463867,
+          0,
+          -8.239294052124023
+        ],
+        "max": [
+          8.650520324707031,
+          40.37445068359375,
+          9.497613906860352
+        ],
+        "size": [
+          16.9914608001709,
+          40.37445068359375,
+          17.736907958984375
+        ]
+      },
+      "meshes": [
+        {
+          "name": "branches",
+          "vertices": 7124,
+          "triangles": 11112
+        },
+        {
+          "name": "leaves",
+          "vertices": 15288,
+          "triangles": 7644
+        }
+      ],
+      "file": "pine-small.gltf",
+      "bytes": 2455,
+      "sha256": "0b5f0e4858e7aa293329364cdaa019189b58215b79239f61c5046adea56f8aa6",
+      "resources": [
+        {
+          "file": "texture-be24b5c0a3104eba.png",
+          "bytes": 1215172,
+          "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+        },
+        {
+          "file": "texture-614ef034a298fef1.png",
+          "bytes": 2421052,
+          "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+        },
+        {
+          "file": "texture-00e12de668fe6669.png",
+          "bytes": 3188072,
+          "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+        },
+        {
+          "file": "texture-713a5cc87d11921a.png",
+          "bytes": 982844,
+          "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+        },
+        {
+          "file": "pine-small.bin",
+          "bytes": 829720,
+          "sha256": "c4394262e7c5699b3ac70d4f60406662ea4b1c10b86036530eba34c9a9dae538"
+        }
+      ]
+    },
+    {
+      "size": "medium",
+      "presetSeed": 13977,
+      "options": {
+        "seed": 13977,
+        "type": "evergreen",
+        "bark": {
+          "type": "Bark003",
+          "tint": 16777215,
+          "flatShading": false,
+          "textured": true,
+          "textureScale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "branch": {
+          "levels": 1,
+          "angle": {
+            "1": 110,
+            "2": 16,
+            "3": 60
+          },
+          "children": {
+            "0": 82,
+            "1": 3,
+            "2": 5
+          },
+          "force": {
+            "direction": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "strength": -0.003
+          },
+          "gnarliness": {
+            "0": 0.05,
+            "1": 0.08,
+            "2": 0,
+            "3": 0
+          },
+          "length": {
+            "0": 50,
+            "1": 23.87,
+            "2": 14.08,
+            "3": 1
+          },
+          "radius": {
+            "0": 1.05,
+            "1": 0.36,
+            "2": 0.7,
+            "3": 0.7
+          },
+          "sections": {
+            "0": 12,
+            "1": 10,
+            "2": 8,
+            "3": 6
+          },
+          "segments": {
+            "0": 8,
+            "1": 6,
+            "2": 4,
+            "3": 3
+          },
+          "start": {
+            "1": 0.27,
+            "2": 0.14,
+            "3": 0.3
+          },
+          "taper": {
+            "0": 0.7,
+            "1": 0.7,
+            "2": 0.7,
+            "3": 0.7
+          },
+          "twist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0
+          }
+        },
+        "leaves": {
+          "type": "pine",
+          "billboard": "double",
+          "angle": 39,
+          "count": 30,
+          "start": 0.09,
+          "size": 1.435,
+          "sizeVariance": 0.201,
+          "tint": 16777215,
+          "alphaTest": 0.3
+        },
+        "trellis": {
+          "enabled": false
+        }
+      },
+      "bounds": {
+        "min": [
+          -14.879291534423828,
+          0,
+          -16.68399429321289
+        ],
+        "max": [
+          14.011940002441406,
+          51.10086441040039,
+          13.283170700073242
+        ],
+        "size": [
+          28.891231536865234,
+          51.10086441040039,
+          29.967164993286133
+        ]
+      },
+      "meshes": [
+        {
+          "name": "branches",
+          "vertices": 6431,
+          "triangles": 10032
+        },
+        {
+          "name": "leaves",
+          "vertices": 19680,
+          "triangles": 9840
+        }
+      ],
+      "file": "pine-medium.gltf",
+      "bytes": 2463,
+      "sha256": "e0c6f3d83e1851ae7f6acae4251dc9e0b85eb2b84c35a33ab5123ce5f0af47ee",
+      "resources": [
+        {
+          "file": "texture-be24b5c0a3104eba.png",
+          "bytes": 1215172,
+          "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+        },
+        {
+          "file": "texture-614ef034a298fef1.png",
+          "bytes": 2421052,
+          "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+        },
+        {
+          "file": "texture-00e12de668fe6669.png",
+          "bytes": 3188072,
+          "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+        },
+        {
+          "file": "texture-713a5cc87d11921a.png",
+          "bytes": 982844,
+          "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+        },
+        {
+          "file": "pine-medium.bin",
+          "bytes": 954784,
+          "sha256": "c73ec01b073524308ef60b6dd445650079fec15aa1a900d8fbe76526fcf9a0cf"
+        }
+      ]
+    },
+    {
+      "size": "large",
+      "presetSeed": 44166,
+      "options": {
+        "seed": 44166,
+        "type": "evergreen",
+        "bark": {
+          "type": "Bark003",
+          "tint": 16777215,
+          "flatShading": false,
+          "textured": true,
+          "textureScale": {
+            "x": 1,
+            "y": 1
+          }
+        },
+        "branch": {
+          "levels": 1,
+          "angle": {
+            "1": 129.1304347826087,
+            "2": 16,
+            "3": 60
+          },
+          "children": {
+            "0": 100,
+            "1": 3,
+            "2": 0
+          },
+          "force": {
+            "direction": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            },
+            "strength": 0.009000000000000001
+          },
+          "gnarliness": {
+            "0": 0.05,
+            "1": 0.08,
+            "2": 0,
+            "3": 0
+          },
+          "length": {
+            "0": 65.25217391304348,
+            "1": 34.84782608695652,
+            "2": 27.246739130434783,
+            "3": 1
+          },
+          "radius": {
+            "0": 1.271739130434783,
+            "1": 0.366304347826087,
+            "2": 0.7,
+            "3": 0.7
+          },
+          "sections": {
+            "0": 12,
+            "1": 10,
+            "2": 8,
+            "3": 6
+          },
+          "segments": {
+            "0": 8,
+            "1": 6,
+            "2": 4,
+            "3": 3
+          },
+          "start": {
+            "1": 0.29347826086956524,
+            "2": 0.14,
+            "3": 0.3
+          },
+          "taper": {
+            "0": 0.7,
+            "1": 0.7,
+            "2": 0.7,
+            "3": 0.7
+          },
+          "twist": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0
+          }
+        },
+        "leaves": {
+          "type": "pine",
+          "billboard": "double",
+          "angle": 17,
+          "count": 18,
+          "start": 0.07608695652173914,
+          "size": 2.608695652173913,
+          "sizeVariance": 0.201,
+          "tint": 16777215,
+          "alphaTest": 0.3
+        },
+        "trellis": {
+          "enabled": false
+        }
+      },
+      "bounds": {
+        "min": [
+          -23.13638687133789,
+          0,
+          -20.71443748474121
+        ],
+        "max": [
+          18.894521713256836,
+          68.51585388183594,
+          23.563398361206055
+        ],
+        "size": [
+          42.03090858459473,
+          68.51585388183594,
+          44.277835845947266
+        ]
+      },
+      "meshes": [
+        {
+          "name": "branches",
+          "vertices": 7817,
+          "triangles": 12192
+        },
+        {
+          "name": "leaves",
+          "vertices": 14400,
+          "triangles": 7200
+        }
+      ],
+      "file": "pine-large.gltf",
+      "bytes": 2459,
+      "sha256": "ba3e7e52d6fccb55d9847b02d999861597cc87d41f8548e5f59ebb21a1c85fef",
+      "resources": [
+        {
+          "file": "texture-be24b5c0a3104eba.png",
+          "bytes": 1215172,
+          "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+        },
+        {
+          "file": "texture-614ef034a298fef1.png",
+          "bytes": 2421052,
+          "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+        },
+        {
+          "file": "texture-00e12de668fe6669.png",
+          "bytes": 3188072,
+          "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+        },
+        {
+          "file": "texture-713a5cc87d11921a.png",
+          "bytes": 982844,
+          "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+        },
+        {
+          "file": "pine-large.bin",
+          "bytes": 827296,
+          "sha256": "6e83f31aa83daf0b63574125467aca38a251621640d8b6bf2d4b9631e950957e"
+        }
+      ]
+    }
+  ]
+}

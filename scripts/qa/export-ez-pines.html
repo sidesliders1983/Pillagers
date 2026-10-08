@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Export pinned EZ-Tree pine presets</title><body><p id="status">Generating static source presets…</p><script type="module">
+import * as T from 'three';
+import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
+import {Tree} from './vendor/ez-tree/src/lib/tree.js';
+const texture=new T.TextureLoader(),base='./vendor/ez-tree/textures/';
+const [color,normal,roughness,pine]=await Promise.all(['bark/Bark003_1K-JPG/Bark003_1K-JPG_Color.jpg','bark/Bark003_1K-JPG/Bark003_1K-JPG_NormalGL.jpg','bark/Bark003_1K-JPG/Bark003_1K-JPG_Roughness.jpg','leaves/pine.png'].map(f=>texture.loadAsync(base+f)));
+color.colorSpace=pine.colorSpace=T.SRGBColorSpace;
+window.exportPreset=async size=>{
+ const preset=await(await fetch('./vendor/ez-tree/src/lib/presets/pine_'+size+'.json')).json();
+ const tree=new Tree();tree.loadFromJson(preset);
+ // The generated geometry is unchanged. Static native materials exclude the upstream
+ // animated leaf shader and rounded-normal override; no shader is compiled here.
+ for(const m of [color,normal,roughness]){m.wrapS=m.wrapT=T.RepeatWrapping;m.repeat.set(1,1/tree.options.bark.textureScale.y);}
+ tree.branchesMesh.material.dispose();tree.leavesMesh.material.dispose();
+ tree.branchesMesh.material=new T.MeshStandardMaterial({name:'branches',color:tree.options.bark.tint,flatShading:tree.options.bark.flatShading,map:color,normalMap:normal,roughnessMap:roughness,roughness:1,metalness:0});
+ tree.leavesMesh.material=new T.MeshStandardMaterial({name:'leaves',color:tree.options.leaves.tint,map:pine,side:T.DoubleSide,alphaTest:tree.options.leaves.alphaTest,roughness:1,metalness:0});
+ tree.updateMatrixWorld(true);const bounds=new T.Box3().setFromObject(tree);
+ const meshes=[];tree.traverse(m=>{if(m.isMesh)meshes.push({name:m.material.name,vertices:m.geometry.attributes.position.count,triangles:m.geometry.index.count/3});});
+ const bytes=new Uint8Array(await new GLTFExporter().parseAsync(tree,{binary:true}));
+ const binary=Array.from(bytes,byte=>String.fromCharCode(byte)).join('');
+ const result={size,presetSeed:preset.seed,options:JSON.parse(JSON.stringify(preset)),bounds:{min:bounds.min.toArray(),max:bounds.max.toArray(),size:bounds.getSize(new T.Vector3()).toArray()},meshes,base64:btoa(binary)};
+ tree.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();}});
+ return result;
+};
+document.querySelector('#status').textContent='Ready';document.body.dataset.ready='true';
+</script></body></html>

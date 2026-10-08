@@ -1,0 +1,903 @@
+{
+  "baseCommit": "d4cf5b065562a2a12418ef5abb7ee0bea17c20b7",
+  "scope": "Small paired crown study, current Day preset, static full detail, no production replacement or frame timing claims",
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "captures": [
+    {
+      "file": "small-near-source.png",
+      "sha256": "0f2b80e3995cd3c328530024ff2230d47887dd3afcfffe562ed67f1d9cf6b145",
+      "fixture": {
+        "size": "small",
+        "distance": "near",
+        "material": "source",
+        "height": 4.219515991210938,
+        "scales": {
+          "0": {
+            "rawHeight": 5.274394989013672,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 40.37445068359375,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.10450955789537336
+          }
+        },
+        "camera": {
+          "position": [
+            12,
+            9,
+            16
+          ],
+          "target": [
+            0,
+            1.898782196044922,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 11744,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6353
+          },
+          {
+            "calls": 5,
+            "triangles": 24705
+          }
+        ],
+        "resources": {
+          "geometries": 7,
+          "textures": 14
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "small-near-neutral.png",
+      "sha256": "98b87ccf053b11a7a76b8fb645a3ba01914bf6055d5cc5a407d9082fa561822c",
+      "fixture": {
+        "size": "small",
+        "distance": "near",
+        "material": "neutral",
+        "height": 4.219515991210938,
+        "scales": {
+          "0": {
+            "rawHeight": 5.274394989013672,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 40.37445068359375,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.10450955789537336
+          }
+        },
+        "camera": {
+          "position": [
+            12,
+            9,
+            16
+          ],
+          "target": [
+            0,
+            1.898782196044922,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 11744,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6353
+          },
+          {
+            "calls": 5,
+            "triangles": 24705
+          }
+        ],
+        "resources": {
+          "geometries": 7,
+          "textures": 15
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "small-far-source.png",
+      "sha256": "9b50532eb07ad55b7a6bbe7ead22c7aa1b228c7ab5573e18836badbf86c35e95",
+      "fixture": {
+        "size": "small",
+        "distance": "far",
+        "material": "source",
+        "height": 4.219515991210938,
+        "scales": {
+          "0": {
+            "rawHeight": 5.274394989013672,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 40.37445068359375,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.10450955789537336
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            1.898782196044922,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 11744,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6353
+          },
+          {
+            "calls": 5,
+            "triangles": 24705
+          }
+        ],
+        "resources": {
+          "geometries": 7,
+          "textures": 15
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "small-far-neutral.png",
+      "sha256": "78fc1de64fe082591c6b388943aec3f71730bd436c31ed844529159347d836bc",
+      "fixture": {
+        "size": "small",
+        "distance": "far",
+        "material": "neutral",
+        "height": 4.219515991210938,
+        "scales": {
+          "0": {
+            "rawHeight": 5.274394989013672,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 40.37445068359375,
+            "targetHeight": 4.219515991210938,
+            "scale": 0.10450955789537336
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            1.898782196044922,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 11744,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6353
+          },
+          {
+            "calls": 5,
+            "triangles": 24705
+          }
+        ],
+        "resources": {
+          "geometries": 7,
+          "textures": 15
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "medium-near-source.png",
+      "sha256": "60c5813398ace629e2977f1782585c6b396163029bb99ecbc653428877c635d2",
+      "fixture": {
+        "size": "medium",
+        "distance": "near",
+        "material": "source",
+        "height": 5.554072761535645,
+        "scales": {
+          "0": {
+            "rawHeight": 6.942590951919556,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 51.10086441040039,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.10868843072653078
+          }
+        },
+        "camera": {
+          "position": [
+            12,
+            9,
+            16
+          ],
+          "target": [
+            0,
+            2.49933274269104,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 13977,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6471
+          },
+          {
+            "calls": 5,
+            "triangles": 25821
+          }
+        ],
+        "resources": {
+          "geometries": 10,
+          "textures": 21
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "medium-near-neutral.png",
+      "sha256": "2144315b88c60b84dacd655653e01e9855de83022b1a0bd0f466b9fa5e8579e0",
+      "fixture": {
+        "size": "medium",
+        "distance": "near",
+        "material": "neutral",
+        "height": 5.554072761535645,
+        "scales": {
+          "0": {
+            "rawHeight": 6.942590951919556,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 51.10086441040039,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.10868843072653078
+          }
+        },
+        "camera": {
+          "position": [
+            12,
+            9,
+            16
+          ],
+          "target": [
+            0,
+            2.49933274269104,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 13977,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6471
+          },
+          {
+            "calls": 5,
+            "triangles": 25821
+          }
+        ],
+        "resources": {
+          "geometries": 10,
+          "textures": 21
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "medium-far-source.png",
+      "sha256": "d455be9e650b93cb2a12f80fd37ff679ba1fe4040d0fbcef3205ca1d97d4d627",
+      "fixture": {
+        "size": "medium",
+        "distance": "far",
+        "material": "source",
+        "height": 5.554072761535645,
+        "scales": {
+          "0": {
+            "rawHeight": 6.942590951919556,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 51.10086441040039,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.10868843072653078
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            2.49933274269104,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 13977,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6471
+          },
+          {
+            "calls": 5,
+            "triangles": 25821
+          }
+        ],
+        "resources": {
+          "geometries": 10,
+          "textures": 21
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "medium-far-neutral.png",
+      "sha256": "5bfb6c8454d1fd08b64f4ee9cfecf8f20f8432c12e2d91256cb8cd8434a611c3",
+      "fixture": {
+        "size": "medium",
+        "distance": "far",
+        "material": "neutral",
+        "height": 5.554072761535645,
+        "scales": {
+          "0": {
+            "rawHeight": 6.942590951919556,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 51.10086441040039,
+            "targetHeight": 5.554072761535645,
+            "scale": 0.10868843072653078
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            2.49933274269104,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 13977,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6471
+          },
+          {
+            "calls": 5,
+            "triangles": 25821
+          }
+        ],
+        "resources": {
+          "geometries": 10,
+          "textures": 21
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "large-near-source.png",
+      "sha256": "03973cc1ff47ff0edf9ad1473eb5060ac15ad6fc46a6a6615f70e9d6b2d3c5c2",
+      "fixture": {
+        "size": "large",
+        "distance": "near",
+        "material": "source",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            12,
+            9,
+            16
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "large-near-neutral.png",
+      "sha256": "7781c931f5c0981431727d76ff321a5c4bdb9da3c2567ab4ff0b01f8512b63bd",
+      "fixture": {
+        "size": "large",
+        "distance": "near",
+        "material": "neutral",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            12,
+            9,
+            16
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "large-far-source.png",
+      "sha256": "bd09a02c35bfca8cee04326f5e192da30a2653e7e1da83690fc07ffd5bafdde6",
+      "fixture": {
+        "size": "large",
+        "distance": "far",
+        "material": "source",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "file": "large-far-neutral.png",
+      "sha256": "36ecebdb8121209163b6cb4f7681042219923ab574f31c4f0728e9eae1e2052c",
+      "fixture": {
+        "size": "large",
+        "distance": "far",
+        "material": "neutral",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    }
+  ],
+  "observations": [
+    {
+      "cycle": 1,
+      "fixture": {
+        "size": "large",
+        "distance": "far",
+        "material": "source",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "cycle": 2,
+      "fixture": {
+        "size": "large",
+        "distance": "far",
+        "material": "source",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    },
+    {
+      "cycle": 3,
+      "fixture": {
+        "size": "large",
+        "distance": "far",
+        "material": "source",
+        "height": 8.619224977493287,
+        "scales": {
+          "0": {
+            "rawHeight": 10.774031221866608,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.8
+          },
+          "1": {
+            "rawHeight": 68.51585388183594,
+            "targetHeight": 8.619224977493287,
+            "scale": 0.12579898649965315
+          }
+        },
+        "camera": {
+          "position": [
+            37,
+            23,
+            46
+          ],
+          "target": [
+            0,
+            3.8786512398719792,
+            0
+          ],
+          "fov": 45,
+          "aspect": 1
+        },
+        "lighting": "current Day",
+        "exposure": 1.05,
+        "sourceSeed": 44166,
+        "metrics": [
+          {
+            "calls": 4,
+            "triangles": 6931
+          },
+          {
+            "calls": 5,
+            "triangles": 25341
+          }
+        ],
+        "resources": {
+          "geometries": 13,
+          "textures": 27
+        },
+        "pixelRatio": 1
+      }
+    }
+  ],
+  "resized": {
+    "size": "large",
+    "distance": "far",
+    "material": "source",
+    "height": 8.619224977493287,
+    "scales": {
+      "0": {
+        "rawHeight": 10.774031221866608,
+        "targetHeight": 8.619224977493287,
+        "scale": 0.8
+      },
+      "1": {
+        "rawHeight": 68.51585388183594,
+        "targetHeight": 8.619224977493287,
+        "scale": 0.12579898649965315
+      }
+    },
+    "camera": {
+      "position": [
+        37,
+        23,
+        46
+      ],
+      "target": [
+        0,
+        3.8786512398719792,
+        0
+      ],
+      "fov": 45,
+      "aspect": 1
+    },
+    "lighting": "current Day",
+    "exposure": 1.05,
+    "sourceSeed": 44166,
+    "metrics": [
+      {
+        "calls": 4,
+        "triangles": 6931
+      },
+      {
+        "calls": 5,
+        "triangles": 25341
+      }
+    ],
+    "resources": {
+      "geometries": 13,
+      "textures": 27
+    },
+    "pixelRatio": 1
+  },
+  "sourceFiles": [
+    {
+      "file": "public/game-assets/houses/house-hut.glb",
+      "bytes": 2242716,
+      "sha256": "52c7736abf90942b2e2ecef86d5ad112b2021de7b44577bf0e2f534cb4a4071e"
+    },
+    {
+      "file": "public/game-assets/human/Human_LOD2.glb",
+      "bytes": 6118512,
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    },
+    {
+      "file": "public/nature/kaykit-v1/manifest.json",
+      "bytes": 18646,
+      "sha256": "6bfe32216e57e7e8a7d15e118f60925104b13f6e2c48f1d2512cdc3cbd153520"
+    },
+    {
+      "file": "src/config/lightingConfig.ts",
+      "bytes": 836,
+      "sha256": "228cb2c93ea6fe7898963cf6ab0b2b81b4668d19ec00fef8bbdf6387a08f8128"
+    },
+    {
+      "file": "src/config/worldConfig.ts",
+      "bytes": 1132,
+      "sha256": "6659240967e0b57b0cc6433e8f3fd1cf9723cc19213fb1130c964cf0e576e673"
+    },
+    {
+      "file": "scripts/qa/pine-comparison.html",
+      "bytes": 9306,
+      "sha256": "e73c286ec75361a95e56cb312f3a657d53219d803fd9fbcb32e05ff5a770931e"
+    }
+  ],
+  "errors": []
+}
