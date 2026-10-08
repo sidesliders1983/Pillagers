@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { Group, Matrix4, Quaternion, Vector3 } from 'three';
 import { loadTypeScript } from '../scripts/load-typescript.mjs';
@@ -94,7 +94,7 @@ function verifyCarry(human, object, metadata, ratio) {
 
 test('complete actual source hand_R core determines an independently measured RMS reference', async () => {
     const f = await fixture();
-    const receipt = JSON.parse(readFileSync('artifacts/character-lab-v04/equipment-v04-pipeline/sword/carry-correction/MEASURED-HAND-PROPORTIONS.json', 'utf8'));
+    const receipt = JSON.parse(readFileSync('docs/qa/character-validation/MEASURED-HAND-PROPORTIONS.json', 'utf8'));
     assert.equal(receipt.bodySHA256, goldenLabBody.sha256);
     approx(receipt.referenceRadius, f.referenceRadius, 1e-12);
 });
@@ -124,6 +124,7 @@ test('actual adult/child factory clones preserve source and pin; all five carrie
                 }
             } finally { h.dispose(); }
         }
+        mkdirSync('scratch/equipment-proportions', { recursive: true });
         writeFileSync('scratch/equipment-proportions/ACTUAL-FACTORY-CARRIES.json', JSON.stringify({ schema: 'pillagers-equipment-proportions-independent/1', at: new Date().toISOString(), bodySHA256: goldenLabBody.sha256, swordSHA256: f.records.get(sword.lods[2]).sha256, referenceMethod: 'Pairwise squared distance identity over all234 source hand_R core points', referenceRadius: f.referenceRadius, rows, sourceAndPinUnchanged: true, visualAcceptance: false }, null, 2) + '\n');
     } finally { pin.dispose(); }
 });
