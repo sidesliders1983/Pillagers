@@ -1,5 +1,5 @@
 import './environment-lab.css';
-import {Clock,Group,Mesh,PerspectiveCamera,Scene,Box3,Vector3} from 'three';
+import {Clock,Group,Mesh,PerspectiveCamera,Scene,Box3,Vector3,Raycaster} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -27,7 +27,11 @@ export class EnvironmentLab {
   const ground=await loadGroundMaterials(),terrain=new Group();terrain.add(createTerrain({treatment:'ground-v02',maps:ground}),createPaths());scene.add(terrain);
   const nature=createNature(assets,worldConfig.seed);scene.add(nature);
   const village=new Group();
-  for(const b of buildings){if(b.key==='storehouse')continue;const house=assets.get(b.key);house.position.set(b.x,surfaceHeightAt(b.x,b.z),b.z);house.rotation.y=b.rotation;village.add(house);}
+  for(const b of buildings){
+   if(b.key==='storehouse')continue;const parcel=new Group();parcel.position.set(b.x,surfaceHeightAt(b.x,b.z),b.z);parcel.rotation.y=b.rotation;
+   let floor=0;if('terrainKey' in b){const yard=assets.get(b.terrainKey);yard.updateMatrixWorld(true);floor=new Raycaster(new Vector3(0,20,0),new Vector3(0,-1,0)).intersectObject(yard,true)[0]?.point.y??0;parcel.add(yard);}
+   const house=assets.get(b.key);house.position.y=floor;parcel.add(house);village.add(parcel);
+  }
   // Unchanged approved Meshy body at real 1.8m height, rather than a substitute figure.
   const {scene:person}=await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(import.meta.env.BASE_URL+'game-assets/human/Human_LOD2.glb');
   person.updateMatrixWorld(true);const box=new Box3().setFromObject(person),center=box.getCenter(new Vector3()),size=box.getSize(new Vector3());
