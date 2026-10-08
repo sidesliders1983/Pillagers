@@ -1,0 +1,235 @@
+{
+  "renderCommit": "f6a19b224a614e5307a5c33f6bae7f0f08dfccfe",
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0"
+  },
+  "canvas": [
+    1024,
+    768
+  ],
+  "pixelRatio": 1,
+  "warmupMs": 10000,
+  "sampleMs": 30000,
+  "summaries": [
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "baseline",
+      "medianMs": [
+        16.69999999999709,
+        16.699999999982538,
+        16.699999999982538
+      ],
+      "p95Ms": [
+        16.80000000000291,
+        16.800000000017462,
+        16.800000000017462
+      ],
+      "calls": [
+        26
+      ],
+      "triangles": [
+        359202
+      ],
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "camera": "village",
+      "tier": "standard",
+      "material": "regional",
+      "medianMs": [
+        16.69999999999709,
+        16.69999999999709,
+        16.699999999982538
+      ],
+      "p95Ms": [
+        16.80000000000291,
+        16.80000000000291,
+        16.800000000017462
+      ],
+      "calls": [
+        33
+      ],
+      "triangles": [
+        354522
+      ],
+      "geometries": [
+        33
+      ],
+      "textures": [
+        61
+      ]
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "baseline",
+      "medianMs": [
+        16.70000000001164,
+        16.70000000001164,
+        16.70000000001164
+      ],
+      "p95Ms": [
+        16.800000000046566,
+        16.800000000046566,
+        16.800000000046566
+      ],
+      "calls": [
+        26
+      ],
+      "triangles": [
+        310602
+      ],
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "camera": "village",
+      "tier": "low",
+      "material": "regional",
+      "medianMs": [
+        16.70000000001164,
+        16.70000000001164,
+        16.70000000001164
+      ],
+      "p95Ms": [
+        16.800000000046566,
+        16.800000000046566,
+        16.800000000046566
+      ],
+      "calls": [
+        33
+      ],
+      "triangles": [
+        305922
+      ],
+      "geometries": [
+        33
+      ],
+      "textures": [
+        52
+      ]
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "baseline",
+      "medianMs": [
+        16.699999999953434,
+        16.699999999953434,
+        16.699999999953434
+      ],
+      "p95Ms": [
+        16.800000000046566,
+        16.800000000046566,
+        17
+      ],
+      "calls": [
+        23
+      ],
+      "triangles": [
+        338916
+      ],
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "camera": "forest",
+      "tier": "standard",
+      "material": "regional",
+      "medianMs": [
+        16.699999999953434,
+        16.699999999953434,
+        16.699999999953434
+      ],
+      "p95Ms": [
+        16.800000000046566,
+        16.800000000046566,
+        16.800000000046566
+      ],
+      "calls": [
+        31
+      ],
+      "triangles": [
+        334492
+      ],
+      "geometries": [
+        34
+      ],
+      "textures": [
+        64
+      ]
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "baseline",
+      "medianMs": [
+        16.699999999953434,
+        16.699999999953434,
+        16.699999999953434
+      ],
+      "p95Ms": [
+        16.800000000046566,
+        16.800000000046566,
+        16.800000000046566
+      ],
+      "calls": [
+        23
+      ],
+      "triangles": [
+        290316
+      ],
+      "geometries": [
+        26
+      ],
+      "textures": [
+        34
+      ]
+    },
+    {
+      "camera": "forest",
+      "tier": "low",
+      "material": "regional",
+      "medianMs": [
+        16.699999999953434,
+        16.699999999953434,
+        16.699999999953434
+      ],
+      "p95Ms": [
+        16.800000000046566,
+        16.800000000046566,
+        16.800000000046566
+      ],
+      "calls": [
+        31
+      ],
+      "triangles": [
+        285892
+      ],
+      "geometries": [
+        34
+      ],
+      "textures": [
+        54
+      ]
+    }
+  ],
+  "policy": "Old development laptop is diagnostic; owner declined a small millisecond merge blocker. No agreed production-device guarantee or physical-mobile/VRAM pass.",
+  "errors": []
+}

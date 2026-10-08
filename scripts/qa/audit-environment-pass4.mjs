@@ -1,0 +1,14 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+const out='docs/qa/environment-pass4',verified=[],hash=b=>createHash('sha256').update(b).digest('hex');
+async function verify(file,expected){const b=await readFile(file),actual=hash(b);if(expected&&actual!==expected)throw Error('Hash mismatch '+file);verified.push({file,sha256:actual,bytes:b.length});}
+const refs=JSON.parse(await readFile('docs/references/environment/references.json','utf8'));for(const r of refs.references)await verify('docs/references/environment/'+r.file,r.sha256);
+const natureRoot='public/nature/kaykit-v1',nature=JSON.parse(await readFile(natureRoot+'/manifest.json','utf8'));for(const a of Object.values(nature.assets)){await verify(natureRoot+'/'+a.file,a.sha256);await verify(natureRoot+'/'+a.binary.file,a.binary.sha256);}await verify(natureRoot+'/forest_texture.png',nature.atlas.sha256);
+for(const version of ['v02','v04']){const root='public/ground-materials/'+version,m=JSON.parse(await readFile(root+'/manifest.json','utf8'));for(const d of m.delivery)await verify(root+'/'+d.file,d.sha256);await verify(root+'/manifest.json');}
+for(const f of ['README.md','LICENSE','WaterPlane.ts','WaterMask.ts','WaterNoiseLUT.ts','waterShader.glsl.ts'])await verify('src/vendor/boona13-water/'+f);
+for(const f of ['README.md','LICENSE','GrassField.ts','grassShader.glsl.ts','windNoise.glsl.ts'])await verify('src/vendor/boona13-grass/'+f);
+await verify('docs/references/environment/kaykit-source-lock.json');await verify('docs/references/environment/KayKit-License.txt');await verify('docs/qa/environment-v03/source-runtime-contact-sheet.png');
+const manifest=JSON.parse(await readFile(out+'/capture-manifest.json','utf8'));for(const c of manifest.captures)await verify(out+'/'+c.file,c.sha256);
+const waterShaderGitBlob=execFileSync('git',['hash-object','src/vendor/boona13-water/waterShader.glsl.ts'],{encoding:'utf8'}).trim();if(waterShaderGitBlob!=='b9a67d471a2d7b76bdc08ffc47926929fc32f4c8')throw Error('Water shader differs from pinned upstream Git blob');
+await writeFile(out+'/source-and-capture-audit.json',JSON.stringify({verified,waterShaderGitBlob,waterShaderUpstreamPath:'src/water/waterShader.glsl.ts',waterRevision:'97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159',waterLicense:'MIT',natureLicense:'CC0-1.0',natureSelectedFiles:Object.keys(nature.assets).length,sourceCompliance:'Selected sources retained; no new shader or model imported in Pass 4',contactSheet:'Historical source/runtime sheet reused because exact locked runtime files are unchanged; not a new tree comparison',mobile:'No physical mobile device result',errors:manifest.errors},null,2)+'\n');console.log({verified:verified.length,captures:manifest.captures.length,errors:manifest.errors});

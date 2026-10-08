@@ -1,0 +1,162 @@
+{
+  "rows": [
+    {
+      "view": "village",
+      "quality": "standard",
+      "light": "day",
+      "src": "village-standard-day.webp",
+      "distanceDisabled": false
+    },
+    {
+      "view": "village",
+      "quality": "standard",
+      "light": "night",
+      "src": "village-standard-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "village",
+      "quality": "low",
+      "light": "day",
+      "src": "village-low-day.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "village",
+      "quality": "low",
+      "light": "night",
+      "src": "village-low-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "village",
+      "quality": "legacy",
+      "light": "day",
+      "src": "village-legacy-day.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "village",
+      "quality": "legacy",
+      "light": "night",
+      "src": "village-legacy-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "shore",
+      "quality": "standard",
+      "light": "day",
+      "src": "shore-standard-day.webp",
+      "distanceDisabled": false
+    },
+    {
+      "view": "shore",
+      "quality": "standard",
+      "light": "night",
+      "src": "shore-standard-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "shore",
+      "quality": "low",
+      "light": "day",
+      "src": "shore-low-day.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "shore",
+      "quality": "low",
+      "light": "night",
+      "src": "shore-low-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "shore",
+      "quality": "legacy",
+      "light": "day",
+      "src": "shore-legacy-day.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "shore",
+      "quality": "legacy",
+      "light": "night",
+      "src": "shore-legacy-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "forest",
+      "quality": "standard",
+      "light": "day",
+      "src": "forest-standard-day.webp",
+      "distanceDisabled": false
+    },
+    {
+      "view": "forest",
+      "quality": "standard",
+      "light": "night",
+      "src": "forest-standard-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "forest",
+      "quality": "low",
+      "light": "day",
+      "src": "forest-low-day.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "forest",
+      "quality": "low",
+      "light": "night",
+      "src": "forest-low-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "forest",
+      "quality": "legacy",
+      "light": "day",
+      "src": "forest-legacy-day.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "forest",
+      "quality": "legacy",
+      "light": "night",
+      "src": "forest-legacy-night.webp",
+      "distanceDisabled": true
+    },
+    {
+      "view": "village",
+      "distance": "near",
+      "src": "village-standard-day-near.webp"
+    },
+    {
+      "view": "village",
+      "distance": "far",
+      "src": "village-standard-day-far.webp"
+    },
+    {
+      "view": "shore",
+      "distance": "near",
+      "src": "shore-standard-day-near.webp"
+    },
+    {
+      "view": "shore",
+      "distance": "far",
+      "src": "shore-standard-day-far.webp"
+    },
+    {
+      "view": "forest",
+      "distance": "near",
+      "src": "forest-standard-day-near.webp"
+    },
+    {
+      "view": "forest",
+      "distance": "far",
+      "src": "forest-standard-day-far.webp"
+    }
+  ],
+  "errors": [],
+  "note": "Static evidence viewer browser navigation/image availability; not a physical mobile or gameplay simulation test."
+}

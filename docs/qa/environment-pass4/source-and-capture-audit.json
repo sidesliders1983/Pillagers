@@ -1,0 +1,799 @@
+{
+  "verified": [
+    {
+      "file": "docs/references/environment/REF-A.png",
+      "sha256": "ccece95f3364da7fb406ff137805e2873e8460d80141917531429006f758ed09",
+      "bytes": 2605740
+    },
+    {
+      "file": "docs/references/environment/REF-B.png",
+      "sha256": "4f2bd114deec56e650daeae791a846c1e1426372f1d8a68fe173c5ae69b46acd",
+      "bytes": 2301863
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-conifer-a.gltf",
+      "sha256": "25a51b8b2aa5504cf5d4808f99e6e192c7f6687309500d7ec1ebb52c2c38e7ce",
+      "bytes": 1336
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-conifer-a.bin",
+      "sha256": "7c10b090f868008918b96b17d44e7e2d640cd599103db21f22f97c64ce296fb2",
+      "bytes": 31140
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-conifer-b.gltf",
+      "sha256": "607d38637aea2865ed6d8f402abf4b683e4695e40e0393e1c5c7ccc48828fb70",
+      "bytes": 1335
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-conifer-b.bin",
+      "sha256": "31df42ca75d33b220357b2f3aa5b2ff617f3b6b8b6dde533cc0334f7eeb2ce41",
+      "bytes": 16092
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-conifer-c.gltf",
+      "sha256": "31d18049a3f3386e304cabecbac66c35e505e3c0fc10d5dfa8d99ac23cf01a68",
+      "bytes": 1337
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-conifer-c.bin",
+      "sha256": "1d62dcef4443a5c3d81372f6cb44c31c92ede216731d4ad482ad9d5a64479f1e",
+      "bytes": 12568
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-deciduous-a.gltf",
+      "sha256": "3c2590aa95981ad38df8377cf91432587209bd091e50cde45e5d24f085debc56",
+      "bytes": 1336
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-deciduous-a.bin",
+      "sha256": "87c4423664ca9f5a75693cd8d6632d51709a619ad40d325c7123f4812893e783",
+      "bytes": 19016
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-small-a.gltf",
+      "sha256": "2dabaa63b90a7becb8d45ade7c0595ae884bb6562bdc26d1c2d2b8ce1bce2c3a",
+      "bytes": 1335
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-small-a.bin",
+      "sha256": "99bd5a67b779838c51eaa7d2fa399d6a980d94d0899c07ae93a495da2eb6f5ef",
+      "bytes": 4440
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-small-b.gltf",
+      "sha256": "4d486e26c79866c0ec61df4c25ba47fdf958a2446996a108cbc94ff953069f5f",
+      "bytes": 1338
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-small-b.bin",
+      "sha256": "0b6193e4482bd780e213b6f0a4cf1b563d552a4f4140b6715c1f786180467f65",
+      "bytes": 4568
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-boulder-a.gltf",
+      "sha256": "f311ea1f18f59610025edca458943b82e485a784b5b156ef35d6f689e08e8252",
+      "bytes": 1332
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-boulder-a.bin",
+      "sha256": "ecb9b56ca967f0a2aabdde56b33b8542399b21f6e92a145a06049d7c2013242d",
+      "bytes": 6704
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-boulder-b.gltf",
+      "sha256": "c0a2053bf3f6a88d5d678d912ab760612e132463c6fcfa6bed0efb25b81316cd",
+      "bytes": 1329
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-boulder-b.bin",
+      "sha256": "17dffc577e314341480a983361e2cc94f3fbb08389299bfcf484df261af1661d",
+      "bytes": 6352
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-cluster-a.gltf",
+      "sha256": "2f2e65f7ffa258b27ad8f0ae70843e32a95f98a0dd5a8cfd4b123fd67df2f387",
+      "bytes": 1342
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-cluster-a.bin",
+      "sha256": "1ff2c398996ec9e0cc866865c6a17e514b04a108aaf14e4dc3800099f2fd1e55",
+      "bytes": 10704
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-cluster-b.gltf",
+      "sha256": "b1d6bdc7f7c096df91d735d15bc8c06529185f1cc64537849d9887af2a4b131c",
+      "bytes": 1346
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-rock-cluster-b.bin",
+      "sha256": "019d3a2def1b97451c9f4c9a9869289cb7f978b276954ad264f539e28c00f88b",
+      "bytes": 30024
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-bush-a.gltf",
+      "sha256": "163be65e4e85db1b287e63a764e645a88794219058c6396ad7f932b27d9960c8",
+      "bytes": 1333
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-bush-a.bin",
+      "sha256": "0c3caa2aec006ce4a8f59d8bc7b2550fc44803a2f932df2d9c18a3a2c795c074",
+      "bytes": 27984
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-bush-b.gltf",
+      "sha256": "5d507a379b369e33a821a304d1761a9b28751c7a5c8bdf959fbc7b1fbab31c57",
+      "bytes": 1312
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-bush-b.bin",
+      "sha256": "4892db1b18c9e63751e0f1933324473ffbeaf3392564d5fdb97b1db83b733a82",
+      "bytes": 8352
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-grass-cluster-a.gltf",
+      "sha256": "9ceb7e4a2c0ef005695752ac65dae7f9eb66dc3553be9204de275022048ad3e8",
+      "bytes": 1346
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-grass-cluster-a.bin",
+      "sha256": "05193593c8efd7497015dd7357c442fa8cb72e520c4500ad43dbce142d1ba6fe",
+      "bytes": 24672
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-grass-cluster-b.gltf",
+      "sha256": "9ddfd6dcadc2d1a3fbc8381d8e0545d57ddbdadad9cfcc62ac0dfb3b9b10f83a",
+      "bytes": 1346
+    },
+    {
+      "file": "public/nature/kaykit-v1/kaykit-grass-cluster-b.bin",
+      "sha256": "148a0046b5da3d6ae48eac9f2c25768e5df3da5e5f7fc9c4f0e946337a63d0e0",
+      "bytes": 24672
+    },
+    {
+      "file": "public/nature/kaykit-v1/forest_texture.png",
+      "sha256": "406c01e0ac1d3368fc7b26ff5fb0d3335ba5e48bd19a703540ed92ee3971ea39",
+      "bytes": 48679
+    },
+    {
+      "file": "public/ground-materials/v02/normal.png",
+      "sha256": "63c119f4d7675f4f8c166b68731ac935d96d92784042516250a3a61ef4816286",
+      "bytes": 1314919
+    },
+    {
+      "file": "public/ground-materials/v02/roughness.png",
+      "sha256": "57cc58e9411fb632737634b28474a4c241c519f3062a0dfc88bcbfd95ec1a9e8",
+      "bytes": 392474
+    },
+    {
+      "file": "public/ground-materials/v02/manifest.json",
+      "sha256": "59aa65b944442c68a35a20caa57300c7a19f1b7d04fdcb384ecb728b9d63c55c",
+      "bytes": 3266
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-0-colour.webp",
+      "sha256": "bb6dec4452c2040db67465aa2ce3f53fee40ddd61ea5fbaec40f0a702bd68214",
+      "bytes": 181154
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-0-normal.webp",
+      "sha256": "da0dffc4995be89f4d42d3614e08e1d4b4e9f81004bfe9d93bc786ffc99a89e2",
+      "bytes": 1492854
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-0-roughness.webp",
+      "sha256": "068088709f23901c8cae00236fbe698e1dfe5c58e84e9e7faacd63582684ed12",
+      "bytes": 8590
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-1-colour.webp",
+      "sha256": "4f9e324bf0500e147e3e7386ae1e4c0634907d689d87ffa2e0f8cc88e9431e35",
+      "bytes": 269120
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-1-normal.webp",
+      "sha256": "43d9ad0576850979d66e7dcc3f360438128fd0d1b9121aab191597cfa66a769d",
+      "bytes": 1228302
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-1-roughness.webp",
+      "sha256": "dff74efa2b337265bf7cfb134d46ca0548fb43ac38b09befa145e0b9ce9c01d8",
+      "bytes": 9044
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-2-colour.webp",
+      "sha256": "4965f29214ea09352c69cc3773289aa5393cca035d010aceb6e0f316f9c73b4c",
+      "bytes": 276404
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-2-normal.webp",
+      "sha256": "d356767372a981d3f7e24946037fc0d5611b32e1bb6a5d8f7b124400ac186064",
+      "bytes": 1219836
+    },
+    {
+      "file": "public/ground-materials/v04/standard/0-2-roughness.webp",
+      "sha256": "5258628f5d4eed9c94f8ab01125eb951e4ed98a8762c4fbd84991dccb7e6fc90",
+      "bytes": 9310
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-0-colour.webp",
+      "sha256": "5201944fbea5ab4b1ab0aa9bf05a9e0b5d66dee6c7fdf7d424a64707db35500f",
+      "bytes": 200866
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-0-normal.webp",
+      "sha256": "55ac768763c7ea7ca84959eabcd7c832e9b25d95a3d30712784a4d43581ef354",
+      "bytes": 1476038
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-0-roughness.webp",
+      "sha256": "e5a33e3866bbce14477e4462b0ae208a200d3b1b7dc755950b4ab9c167e1f654",
+      "bytes": 8560
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-1-colour.webp",
+      "sha256": "0620ffe9b3fcc62fd16b8a6d12816331267376c669997cc6439f0b3e6dc4f104",
+      "bytes": 290274
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-1-normal.webp",
+      "sha256": "b2a4832f42755f5963517139585a56616eca40bd24d2e613a37ead353342484c",
+      "bytes": 1314164
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-1-roughness.webp",
+      "sha256": "a9fed943b585fa77cec3252bf242f132c6f0cd1c93d9c8ee79bfecb54d6d0ee8",
+      "bytes": 11434
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-2-colour.webp",
+      "sha256": "6641f4faa32e2643e6023626543f62860b458352538736240259445b00ef2501",
+      "bytes": 271040
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-2-normal.webp",
+      "sha256": "af4e5b225e4f8d10369534ee3922c7ee4736d10ad827579850498a026103544e",
+      "bytes": 1225678
+    },
+    {
+      "file": "public/ground-materials/v04/standard/1-2-roughness.webp",
+      "sha256": "b74e3e645aaee6049f685e7c38acb51f06e7c19fb84d3ee96d092549bc0a6a68",
+      "bytes": 9088
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-0-colour.webp",
+      "sha256": "024fa6694440f3dae3df0bf9f03b582a3be40f5c395f9e66d4af761711c58f3c",
+      "bytes": 187386
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-0-normal.webp",
+      "sha256": "71cf843b7fc0aa065d4370385ac83ab40392a976233f9203fc324f84998759e4",
+      "bytes": 1489116
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-0-roughness.webp",
+      "sha256": "a32503ada8bb9d99ce4ab86b17c4b1a332dc03f14cc18016e3d67c28a9f5fbed",
+      "bytes": 7810
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-1-colour.webp",
+      "sha256": "abb3bb9a6b1924b24b6bcff08b0654e41ab898526a2151022c5bc745d9daf9a5",
+      "bytes": 288164
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-1-normal.webp",
+      "sha256": "ef9b96b513a484d45ac811b70e218f61d0233fdb69615ec158a23bdbb1d1cba7",
+      "bytes": 1244876
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-1-roughness.webp",
+      "sha256": "a8e2b5cddcb2e019818a6d8ca8f1e317df7447683238ba6a0c33ab0ed041bbad",
+      "bytes": 9948
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-2-colour.webp",
+      "sha256": "b5d361e576f019151f82f5a93fcbc982d007c72015636546be8515db29c212cd",
+      "bytes": 273410
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-2-normal.webp",
+      "sha256": "520329d9094ce112f5505ee41e61ca1dd11cd0345ddd9f946e95fc2a52da32ff",
+      "bytes": 1223116
+    },
+    {
+      "file": "public/ground-materials/v04/standard/2-2-roughness.webp",
+      "sha256": "ffe13be00eda5cddd4ad60ee79f1af8760fc2eca88fa61be00f85035d5a8345d",
+      "bytes": 9226
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-0-colour.webp",
+      "sha256": "2c8547cbc5d813f7591c2ebc82699bb8ae014afb221254fcb65c33da6f1611fa",
+      "bytes": 182258
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-0-normal.webp",
+      "sha256": "fad182b4ece561a64d027eb93163b2e417f785cdf70510f4b78d365dc9a0673e",
+      "bytes": 1432818
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-0-roughness.webp",
+      "sha256": "22a1c3f3de8b4c6b864777aef9eacaab1823b26e022a85cd69b6537eec803827",
+      "bytes": 8502
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-1-colour.webp",
+      "sha256": "f9be7c320fbde86d4884ac1cf69cd2521ce5b8257b6d543164566f0c1d381c54",
+      "bytes": 267508
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-1-normal.webp",
+      "sha256": "247061ccf3837538fb1cb8957f28e378d960e17979d7b33087ed64ba3fb5e082",
+      "bytes": 1221694
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-1-roughness.webp",
+      "sha256": "fe78174d9ae8a7fb9aa8f9129a655827ef0e3762dc6cd176d6b1e45982ce073c",
+      "bytes": 9202
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-2-colour.webp",
+      "sha256": "920ab472bbc5f822d00c6623050b2b2f835f88cb7ba1708d534dad3be8c3c6cf",
+      "bytes": 277208
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-2-normal.webp",
+      "sha256": "5db46b66ab11912aed4086ecc745e671dbc720cb5d0c0cac8032b026b2208649",
+      "bytes": 1220836
+    },
+    {
+      "file": "public/ground-materials/v04/standard/3-2-roughness.webp",
+      "sha256": "ac294907bdbf81678df3ccfe46de1cb07b30600dc2b81fcc95a8420311568973",
+      "bytes": 9256
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-0-colour.webp",
+      "sha256": "d7506f83a05ef0328588d61e09b92499e9d44ad877ebcaa20f172f6196472e2a",
+      "bytes": 33694
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-0-normal.webp",
+      "sha256": "5953140bab479a186ecd89ff74d9a04970ce98c97ead14c3957ff277c41f283d",
+      "bytes": 328808
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-0-roughness.webp",
+      "sha256": "253d793020b62a02ab8e13397a634d4fb275fc03ad87b346ff503bf01ded4e86",
+      "bytes": 1980
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-1-colour.webp",
+      "sha256": "d75ef1793f6d6ef37998759c0925af786c7973e4c5537a3a3138846b78c7b64f",
+      "bytes": 53116
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-1-normal.webp",
+      "sha256": "b05c9e106151e5f4c687aec4556d85230ddac070dcdcd918d5eb46031a805d25",
+      "bytes": 254340
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-1-roughness.webp",
+      "sha256": "53c8617a10cb329056f874777a42f56c8e4c34007e651e6e62f95caf724f6689",
+      "bytes": 1686
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-2-colour.webp",
+      "sha256": "b98db9c82ba7c6283f0f8edac48d6960dca7fbc233d791845c7c32ada9838613",
+      "bytes": 50584
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-2-normal.webp",
+      "sha256": "0f8eb55ed3e684cd90e7f4d77f276023b335ea54a214b5bae62cf2752025d6b0",
+      "bytes": 249760
+    },
+    {
+      "file": "public/ground-materials/v04/low/0-2-roughness.webp",
+      "sha256": "7eef3243e697460751881b60a5bd7caf1bef468837b4fcab77b35d6694db0141",
+      "bytes": 1646
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-0-colour.webp",
+      "sha256": "3db86f768146ec010cc3ed491cd57dd6f550ce0a4e845f21accc14e3e2025d9f",
+      "bytes": 41068
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-0-normal.webp",
+      "sha256": "0b6d0df856bb8a3719374e1dd7a8cc8cc60e29d22f647a9cbb6653ef95651348",
+      "bytes": 325044
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-0-roughness.webp",
+      "sha256": "8745c4aae94564b226d5ed9f6b10635667e4247027079b37786d23f00b385ab0",
+      "bytes": 2782
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-1-colour.webp",
+      "sha256": "838cb5ec2b9abc5b9e89a0dcdb596a79ecbe1fd47676fc7427f54a7cdfc3ba4c",
+      "bytes": 62338
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-1-normal.webp",
+      "sha256": "7d0a3f76fa19e2d5a2de61bbe1ae2393054e5100b602cc4dc6b84bce36c26d83",
+      "bytes": 283702
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-1-roughness.webp",
+      "sha256": "363d8dafe8902812391771529247adcb520c6725783569d93e30a1a11c2dbf31",
+      "bytes": 3528
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-2-colour.webp",
+      "sha256": "2d31d6fb18ef83aa159894883aa4f33c2dcbf95f5a28bf0294f4a11a583e30f5",
+      "bytes": 52698
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-2-normal.webp",
+      "sha256": "8498c32502301ac00e98408ae67dfe3904dfb906b8ff458b56bddc32ade3de8c",
+      "bytes": 251552
+    },
+    {
+      "file": "public/ground-materials/v04/low/1-2-roughness.webp",
+      "sha256": "eed5f3bd3d8d7c86c73ed3c2e8d8e7815969e8c40b7204c9423d3307b0ea337d",
+      "bytes": 1670
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-0-colour.webp",
+      "sha256": "1bf6b3d09e6124f4ab9167c56019a17f1e77f7df4fa08d20cb74422d86b7be84",
+      "bytes": 35348
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-0-normal.webp",
+      "sha256": "4f7ce988c9e49885d6b64b4d1c7c9c7c4b6a0e8763b7c6357889c4857d5cfa03",
+      "bytes": 327098
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-0-roughness.webp",
+      "sha256": "3f1cb8ae6a0f0495eeab57168b9c4bd8c4b61d121f81a5e0420da7d801b80034",
+      "bytes": 2466
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-1-colour.webp",
+      "sha256": "e5724bfdbb8b689986b8e89be5d2a77c31dfda8e714602962ce3ff9e14161f10",
+      "bytes": 56956
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-1-normal.webp",
+      "sha256": "738d3696aaf30b66fbdcb98e39c5d21a0c8e80682e7728e45a7c0a622cd83731",
+      "bytes": 257370
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-1-roughness.webp",
+      "sha256": "1995dbbd6cd2b52fad2c8a44ad0dbdb36dd7b6cffc98a01ef1bfe02b8c0df8fa",
+      "bytes": 3054
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-2-colour.webp",
+      "sha256": "ce4692d67877ca23bae1b306b07f5b3da20023ed4d355e1e280b0c194c8264d9",
+      "bytes": 52126
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-2-normal.webp",
+      "sha256": "5d119d818ee51d4b1531aa1b7c9bd4fdd3ab85e8bc29c1c18ac6e6a4f7f26958",
+      "bytes": 250770
+    },
+    {
+      "file": "public/ground-materials/v04/low/2-2-roughness.webp",
+      "sha256": "fae8c2595e7cc0ddc25d4630a7bbf5748aaa9f624fa28570ac7984fae20c51e9",
+      "bytes": 1640
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-0-colour.webp",
+      "sha256": "bacafbc6ae8984470f8885aca30811c165198ba2db54ea98126c6c41f040f90a",
+      "bytes": 32898
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-0-normal.webp",
+      "sha256": "494b05ff44a58d97be44054754813b5ea17d32f42392ea64be97725304cb3e92",
+      "bytes": 310750
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-0-roughness.webp",
+      "sha256": "4a654062cc2eddd68690256ea74f67515d2353fb6d2985421ec33c03966df59d",
+      "bytes": 1736
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-1-colour.webp",
+      "sha256": "b5a02ed23419f4c5ff718657aeb7e37a2afa4604e49141c892bc3fa8cde74c79",
+      "bytes": 51192
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-1-normal.webp",
+      "sha256": "787d237822f11e91f518f7be70640580c39ed59caadede7941a69b8824de8fd4",
+      "bytes": 250848
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-1-roughness.webp",
+      "sha256": "1f8711f0f760a1b55335c15e891091e9df1dfae4c32b07e74958b3276522caab",
+      "bytes": 1646
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-2-colour.webp",
+      "sha256": "083d8a2379ff9b26392c1fab9202a7133bde1136c3bc7a8a4a2a602238687eac",
+      "bytes": 50932
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-2-normal.webp",
+      "sha256": "455cc7356e075c60b3506c478c74dece66ef5273372728cc0d450f468484f56f",
+      "bytes": 250060
+    },
+    {
+      "file": "public/ground-materials/v04/low/3-2-roughness.webp",
+      "sha256": "0edf118ce46b471c3b4f76ae4c860fe75f80b1a48d01d4d712d4ebd86670b4ad",
+      "bytes": 1602
+    },
+    {
+      "file": "public/ground-materials/v04/manifest.json",
+      "sha256": "9a9b780b428ecf2a2bd1eb1507e94d4814432bdf90cb1fff3fd6d616c26027c8",
+      "bytes": 37648
+    },
+    {
+      "file": "src/vendor/boona13-water/README.md",
+      "sha256": "959abdfcdbb3ff058bcc1c00c17bdd01a80f4dc3fac40e9f9e8cd0f537ef2567",
+      "bytes": 2311
+    },
+    {
+      "file": "src/vendor/boona13-water/LICENSE",
+      "sha256": "e565f0498840ae9113a7ceeb896976a0d042764269439dcf32334f0de55a4575",
+      "bytes": 1085
+    },
+    {
+      "file": "src/vendor/boona13-water/WaterPlane.ts",
+      "sha256": "2bb8f0d4d0dca01b3b512053ceffd09904363d745ae24e906e8533e6f31c5393",
+      "bytes": 9081
+    },
+    {
+      "file": "src/vendor/boona13-water/WaterMask.ts",
+      "sha256": "cbb4835515d591991ebb9b570f867970c6e501bcecc329ccd7bce6e75505da75",
+      "bytes": 4783
+    },
+    {
+      "file": "src/vendor/boona13-water/WaterNoiseLUT.ts",
+      "sha256": "c5363984998c6d3356d7bb1038654022031863b62d785e32403ae9404a8bad35",
+      "bytes": 3465
+    },
+    {
+      "file": "src/vendor/boona13-water/waterShader.glsl.ts",
+      "sha256": "7e8ea802196be785e787157f86d603e1a6640157c4af3c30101d443120618bb3",
+      "bytes": 10446
+    },
+    {
+      "file": "src/vendor/boona13-grass/README.md",
+      "sha256": "12235cf1fe5a258fcf60d26f08b7fc044f1fc4cd5712865d845e25cfa975f006",
+      "bytes": 1829
+    },
+    {
+      "file": "src/vendor/boona13-grass/LICENSE",
+      "sha256": "e565f0498840ae9113a7ceeb896976a0d042764269439dcf32334f0de55a4575",
+      "bytes": 1085
+    },
+    {
+      "file": "src/vendor/boona13-grass/GrassField.ts",
+      "sha256": "db529e9b30666ba1c12c48c3be01fe4290abdc54fb9d03b8604d9bea3434f488",
+      "bytes": 12470
+    },
+    {
+      "file": "src/vendor/boona13-grass/grassShader.glsl.ts",
+      "sha256": "505a993e29504b49b5433086c7e11835fe7def0fecbab7a23d54fd51c6716228",
+      "bytes": 7374
+    },
+    {
+      "file": "src/vendor/boona13-grass/windNoise.glsl.ts",
+      "sha256": "e926349534786f2e62fa8d440571d71878a37daec7a4db1b0805be49b30b6b56",
+      "bytes": 1339
+    },
+    {
+      "file": "docs/references/environment/kaykit-source-lock.json",
+      "sha256": "bb32a0e5cb0f3badcee6564abba5b58b48f2fe2ec4405277db76b50af7662714",
+      "bytes": 10492
+    },
+    {
+      "file": "docs/references/environment/KayKit-License.txt",
+      "sha256": "987811fa42c7548ad487324531813b0210ee6d1ebd410089e881820630e3be54",
+      "bytes": 1469
+    },
+    {
+      "file": "docs/qa/environment-v03/source-runtime-contact-sheet.png",
+      "sha256": "57bfb835127644222530a6ce889924639d6dc5cf5160dc81f4ab327200b99342",
+      "bytes": 143561
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-standard-day.webp",
+      "sha256": "5ef247b8df5d348a0c6813d994075485302af16e98fceb30300cc402152bbb1c",
+      "bytes": 226622
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-standard-night.webp",
+      "sha256": "37001c77df069fda54f5b3d5881b77d1555a31a194dbd1714f4c4426c7407836",
+      "bytes": 134424
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-standard-day.webp",
+      "sha256": "85c06b7f7e29e8c7476d5defe3fe73c3076af3a6c355c271e6bd0c842b17a525",
+      "bytes": 329758
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-standard-night.webp",
+      "sha256": "d2e815acf77e1b3bc68d9e549a6820b4230693da9d4d2b0a1dba5c06589eceac",
+      "bytes": 236270
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-standard-day.webp",
+      "sha256": "8b4d0a5c0c5cc70d52b96bfe05ea8322a7b08f6e1119acdf615356b6cb7bbe82",
+      "bytes": 303068
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-standard-night.webp",
+      "sha256": "b3a9a96eb116e84efdf16707e95e8c9146bbf4585dc629f29c29760723de40d5",
+      "bytes": 195402
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-low-day.webp",
+      "sha256": "09b293f512259d98381d5c453aa387c3f5a553cdaacc1fc838e8aef270aa9e98",
+      "bytes": 213854
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-low-night.webp",
+      "sha256": "024c0da6122ac914e98339a113172ee86bf5e39bf5fc6d0e1a129ff8b3ef28ed",
+      "bytes": 125862
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-low-day.webp",
+      "sha256": "db8b902593cc8e9f0bfcf6a6410fccf41adad26b5dabaf04c1f2d4ecd8b91ab0",
+      "bytes": 274410
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-low-night.webp",
+      "sha256": "0baad63ef81890df72b2be75647124ee59b47b11af8ea014a4d7ef55efec661f",
+      "bytes": 191070
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-low-day.webp",
+      "sha256": "2a3e22ea19f2addfed53361111bb6e3ca387974aef3556fddd246b6bf00ed253",
+      "bytes": 267784
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-low-night.webp",
+      "sha256": "6ce7333ee33d27f629a8e0bc555d26eba62ccec8e44964537058bc0211f16433",
+      "bytes": 176068
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-legacy-day.webp",
+      "sha256": "a75a0089cfc28d6f18063cf750add7d0d160150b62a551b8dbce7568a51060fd",
+      "bytes": 210288
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-legacy-night.webp",
+      "sha256": "d032bd0f9870935883d130b93a4ab51bcd7b90f0d0a31755e206fa4378459c95",
+      "bytes": 123932
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-legacy-day.webp",
+      "sha256": "1df82aeeb97cfef19ea03f9ef8e94697602f6b6f6b03ca713dc3cd8c5eddee1a",
+      "bytes": 274518
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-legacy-night.webp",
+      "sha256": "c1a32180ef51e0a18d25c42f8dc96737da2b18dae06944ca5e18cc2c7e25790c",
+      "bytes": 192208
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-legacy-day.webp",
+      "sha256": "8efa02b6a7fba3d3540e7f84d4b355f97db5a619c9e42cfb440a170df4538963",
+      "bytes": 268420
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-legacy-night.webp",
+      "sha256": "3fc196fd59bc64e817183c4a21b2986a63728a5ea7cd171ce2aafe94113e4998",
+      "bytes": 176274
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-standard-day-near.webp",
+      "sha256": "9f5b809b9013622db24618d7e7ebdd4d7b3d6c71797737b3f22368ff4e71f317",
+      "bytes": 302314
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-standard-day-far.webp",
+      "sha256": "162c8239e5ed5693faa579396015d842f5b7f2339335e2ea80a3de1255ffecf9",
+      "bytes": 140438
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-standard-day-near.webp",
+      "sha256": "823175bdbbba025aad6e364cd8d23622c7727bf50b29081be5182c52550ddb6e",
+      "bytes": 325768
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-standard-day-far.webp",
+      "sha256": "6dd561f58b4c1e7dc9732cf60805941ad86ccf64315f153d81d73841c9fbb773",
+      "bytes": 313102
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-standard-day-near.webp",
+      "sha256": "e33ad8dee362b46156d3a098a4665cd21be409f3903654268a52877d21dd3ef6",
+      "bytes": 286492
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-standard-day-far.webp",
+      "sha256": "9cbea9f6d84cdf2a47cb85258d60947422f03c5a923d789985b037448b4a5da8",
+      "bytes": 311860
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-ground-only.webp",
+      "sha256": "1ce4d787d88a68beca08fa4aac1c9d5c54851a9d62d3b82d11e12b196d355869",
+      "bytes": 128666
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-kaykit-only.webp",
+      "sha256": "0c3263263507a836f7998105f12749fa983645ba61db19dc6f332eb98df6f446",
+      "bytes": 113308
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-combined.webp",
+      "sha256": "5ef247b8df5d348a0c6813d994075485302af16e98fceb30300cc402152bbb1c",
+      "bytes": 226622
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-ground-only.webp",
+      "sha256": "bc94469dfbcbf05784fb5bea0542596943f3442b260a5601200c6fbe0fba56a6",
+      "bytes": 247072
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-kaykit-only.webp",
+      "sha256": "d95089a1a972d93b12ef54bc53c405983ad62669697bf358e8942619c2924214",
+      "bytes": 92410
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-combined.webp",
+      "sha256": "85c06b7f7e29e8c7476d5defe3fe73c3076af3a6c355c271e6bd0c842b17a525",
+      "bytes": 329758
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-grass-on.webp",
+      "sha256": "e0b78d7928e379efa771a9c3775c78781accadcb1481b16f3bc2224612d0ef4b",
+      "bytes": 330024
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-grass-off.webp",
+      "sha256": "85c06b7f7e29e8c7476d5defe3fe73c3076af3a6c355c271e6bd0c842b17a525",
+      "bytes": 329758
+    },
+    {
+      "file": "docs/qa/environment-pass4/overview-standard-day.webp",
+      "sha256": "d9efdaf891b0272c29030c265786e84c30631fab99671705062618f7b273ef50",
+      "bytes": 257154
+    },
+    {
+      "file": "docs/qa/environment-pass4/shore-standard-day-1024.webp",
+      "sha256": "a44e0d8a857bf85de679379e337d7c152937ebd8a97f1a13d3e0d7c11af238cc",
+      "bytes": 126556
+    },
+    {
+      "file": "docs/qa/environment-pass4/village-standard-day-1024.webp",
+      "sha256": "9b8c2ade065a4a8ee4c725c855f2b54194f30099c9f58b24096d5092121ab800",
+      "bytes": 184992
+    },
+    {
+      "file": "docs/qa/environment-pass4/forest-standard-day-1024.webp",
+      "sha256": "d4db6ab53b919f2eed39a59cf1d194dab31409207cb90d0688155b398b269e2a",
+      "bytes": 178844
+    }
+  ],
+  "waterShaderGitBlob": "b9a67d471a2d7b76bdc08ffc47926929fc32f4c8",
+  "waterShaderUpstreamPath": "src/water/waterShader.glsl.ts",
+  "waterRevision": "97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159",
+  "waterLicense": "MIT",
+  "natureLicense": "CC0-1.0",
+  "natureSelectedFiles": 14,
+  "sourceCompliance": "Selected sources retained; no new shader or model imported in Pass 4",
+  "contactSheet": "Historical source/runtime sheet reused because exact locked runtime files are unchanged; not a new tree comparison",
+  "mobile": "No physical mobile device result",
+  "errors": []
+}

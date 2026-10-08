@@ -1,0 +1,1035 @@
+{
+  "requests": [
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/manifest.json",
+      "encodedBodySize": 4827,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/spruce-tree.glb",
+      "encodedBodySize": 3556,
+      "transferSize": 3856
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/birch-tree.glb",
+      "encodedBodySize": 5660,
+      "transferSize": 5960
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/boulder.glb",
+      "encodedBodySize": 5004,
+      "transferSize": 5304
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/fjord-cliff-rock.glb",
+      "encodedBodySize": 5468,
+      "transferSize": 5768
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/stabbur-storehouse.glb",
+      "encodedBodySize": 12412,
+      "transferSize": 12712
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/cooking-hearth.glb",
+      "encodedBodySize": 5492,
+      "transferSize": 5792
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/village-well.glb",
+      "encodedBodySize": 5568,
+      "transferSize": 5868
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/log-pile.glb",
+      "encodedBodySize": 4792,
+      "transferSize": 5092
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/barrel.glb",
+      "encodedBodySize": 6088,
+      "transferSize": 6388
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/storage-crate.glb",
+      "encodedBodySize": 4640,
+      "transferSize": 4940
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/faering-rowboat.glb",
+      "encodedBodySize": 7112,
+      "transferSize": 7412
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/jetty-pier.glb",
+      "encodedBodySize": 6108,
+      "transferSize": 6408
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/heather-shrub.glb",
+      "encodedBodySize": 5208,
+      "transferSize": 5508
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/grass-tuft.glb",
+      "encodedBodySize": 4100,
+      "transferSize": 4400
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/fish-drying-rack.glb",
+      "encodedBodySize": 13556,
+      "transferSize": 13856
+    },
+    {
+      "url": "http://127.0.0.1:5181/assets/Terrain/runestone.glb",
+      "encodedBodySize": 6500,
+      "transferSize": 6800
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/house-greathouse.glb",
+      "encodedBodySize": 2634544,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/house-hut.glb",
+      "encodedBodySize": 2242716,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/house-homestead.glb",
+      "encodedBodySize": 2369656,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/house-longhouse.glb",
+      "encodedBodySize": 2400340,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/farm-hut.glb",
+      "encodedBodySize": 2653744,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/farm-homestead.glb",
+      "encodedBodySize": 1252884,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/farm-hut-terrain.glb",
+      "encodedBodySize": 2760368,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/houses/farm-homestead-terrain.glb",
+      "encodedBodySize": 2842728,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/manifest.json",
+      "encodedBodySize": 18646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-conifer-a.gltf",
+      "encodedBodySize": 1336,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-conifer-a.bin",
+      "encodedBodySize": 31140,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-conifer-b.gltf",
+      "encodedBodySize": 1335,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-conifer-b.bin",
+      "encodedBodySize": 16092,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-conifer-c.gltf",
+      "encodedBodySize": 1337,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-conifer-c.bin",
+      "encodedBodySize": 12568,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-deciduous-a.gltf",
+      "encodedBodySize": 1336,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-deciduous-a.bin",
+      "encodedBodySize": 19016,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-small-a.gltf",
+      "encodedBodySize": 1335,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-small-a.bin",
+      "encodedBodySize": 4440,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-small-b.gltf",
+      "encodedBodySize": 1338,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-small-b.bin",
+      "encodedBodySize": 4568,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-boulder-a.gltf",
+      "encodedBodySize": 1332,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-boulder-a.bin",
+      "encodedBodySize": 6704,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-boulder-b.gltf",
+      "encodedBodySize": 1329,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-boulder-b.bin",
+      "encodedBodySize": 6352,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-cluster-a.gltf",
+      "encodedBodySize": 1342,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-cluster-a.bin",
+      "encodedBodySize": 10704,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-cluster-b.gltf",
+      "encodedBodySize": 1346,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-rock-cluster-b.bin",
+      "encodedBodySize": 30024,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-bush-a.gltf",
+      "encodedBodySize": 1333,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-bush-a.bin",
+      "encodedBodySize": 27984,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-bush-b.gltf",
+      "encodedBodySize": 1312,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-bush-b.bin",
+      "encodedBodySize": 8352,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-grass-cluster-a.gltf",
+      "encodedBodySize": 1346,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-grass-cluster-a.bin",
+      "encodedBodySize": 24672,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-grass-cluster-b.gltf",
+      "encodedBodySize": 1346,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/kaykit-grass-cluster-b.bin",
+      "encodedBodySize": 24672,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/nature/kaykit-v1/forest_texture.png",
+      "encodedBodySize": 48679,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v02/normal.png",
+      "encodedBodySize": 1314919,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v02/roughness.png",
+      "encodedBodySize": 392474,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-colour.webp",
+      "encodedBodySize": 181154,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-normal.webp",
+      "encodedBodySize": 1492854,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-0-roughness.webp",
+      "encodedBodySize": 8590,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-colour.webp",
+      "encodedBodySize": 269120,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-normal.webp",
+      "encodedBodySize": 1228302,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-1-roughness.webp",
+      "encodedBodySize": 9044,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-colour.webp",
+      "encodedBodySize": 276404,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-normal.webp",
+      "encodedBodySize": 1219836,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/0-2-roughness.webp",
+      "encodedBodySize": 9310,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-colour.webp",
+      "encodedBodySize": 200866,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-normal.webp",
+      "encodedBodySize": 1476038,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-0-roughness.webp",
+      "encodedBodySize": 8560,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-colour.webp",
+      "encodedBodySize": 290274,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-normal.webp",
+      "encodedBodySize": 1314164,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-1-roughness.webp",
+      "encodedBodySize": 11434,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-colour.webp",
+      "encodedBodySize": 271040,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-normal.webp",
+      "encodedBodySize": 1225678,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/1-2-roughness.webp",
+      "encodedBodySize": 9088,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-colour.webp",
+      "encodedBodySize": 187386,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-normal.webp",
+      "encodedBodySize": 1489116,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-0-roughness.webp",
+      "encodedBodySize": 7810,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-colour.webp",
+      "encodedBodySize": 288164,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-normal.webp",
+      "encodedBodySize": 1244876,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-1-roughness.webp",
+      "encodedBodySize": 9948,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-colour.webp",
+      "encodedBodySize": 273410,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-normal.webp",
+      "encodedBodySize": 1223116,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/2-2-roughness.webp",
+      "encodedBodySize": 9226,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-colour.webp",
+      "encodedBodySize": 182258,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-normal.webp",
+      "encodedBodySize": 1432818,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-0-roughness.webp",
+      "encodedBodySize": 8502,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-colour.webp",
+      "encodedBodySize": 267508,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-normal.webp",
+      "encodedBodySize": 1221694,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-1-roughness.webp",
+      "encodedBodySize": 9202,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-colour.webp",
+      "encodedBodySize": 277208,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-normal.webp",
+      "encodedBodySize": 1220836,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/standard/3-2-roughness.webp",
+      "encodedBodySize": 9256,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/game-assets/human/Human_LOD2.glb",
+      "encodedBodySize": 6118512,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-colour.webp",
+      "encodedBodySize": 33694,
+      "transferSize": 33994
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-roughness.webp",
+      "encodedBodySize": 1980,
+      "transferSize": 2280
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-colour.webp",
+      "encodedBodySize": 53116,
+      "transferSize": 53416
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-roughness.webp",
+      "encodedBodySize": 1686,
+      "transferSize": 1986
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-colour.webp",
+      "encodedBodySize": 50584,
+      "transferSize": 50884
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 1946
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-colour.webp",
+      "encodedBodySize": 41068,
+      "transferSize": 41368
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-roughness.webp",
+      "encodedBodySize": 2782,
+      "transferSize": 3082
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-colour.webp",
+      "encodedBodySize": 62338,
+      "transferSize": 62638
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-roughness.webp",
+      "encodedBodySize": 3528,
+      "transferSize": 3828
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-colour.webp",
+      "encodedBodySize": 52698,
+      "transferSize": 52998
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-roughness.webp",
+      "encodedBodySize": 1670,
+      "transferSize": 1970
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-colour.webp",
+      "encodedBodySize": 35348,
+      "transferSize": 35648
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-roughness.webp",
+      "encodedBodySize": 2466,
+      "transferSize": 2766
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-colour.webp",
+      "encodedBodySize": 56956,
+      "transferSize": 57256
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-roughness.webp",
+      "encodedBodySize": 3054,
+      "transferSize": 3354
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-colour.webp",
+      "encodedBodySize": 52126,
+      "transferSize": 52426
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-roughness.webp",
+      "encodedBodySize": 1640,
+      "transferSize": 1940
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-colour.webp",
+      "encodedBodySize": 32898,
+      "transferSize": 33198
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-roughness.webp",
+      "encodedBodySize": 1736,
+      "transferSize": 2036
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-colour.webp",
+      "encodedBodySize": 51192,
+      "transferSize": 51492
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 1946
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-colour.webp",
+      "encodedBodySize": 50932,
+      "transferSize": 51232
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-roughness.webp",
+      "encodedBodySize": 1602,
+      "transferSize": 1902
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-colour.webp",
+      "encodedBodySize": 33694,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-roughness.webp",
+      "encodedBodySize": 1980,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-colour.webp",
+      "encodedBodySize": 53116,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-roughness.webp",
+      "encodedBodySize": 1686,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-colour.webp",
+      "encodedBodySize": 50584,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-colour.webp",
+      "encodedBodySize": 41068,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-roughness.webp",
+      "encodedBodySize": 2782,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-colour.webp",
+      "encodedBodySize": 62338,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-roughness.webp",
+      "encodedBodySize": 3528,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-colour.webp",
+      "encodedBodySize": 52698,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-roughness.webp",
+      "encodedBodySize": 1670,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-colour.webp",
+      "encodedBodySize": 35348,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-roughness.webp",
+      "encodedBodySize": 2466,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-colour.webp",
+      "encodedBodySize": 56956,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-roughness.webp",
+      "encodedBodySize": 3054,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-colour.webp",
+      "encodedBodySize": 52126,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-roughness.webp",
+      "encodedBodySize": 1640,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-colour.webp",
+      "encodedBodySize": 32898,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-roughness.webp",
+      "encodedBodySize": 1736,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-colour.webp",
+      "encodedBodySize": 51192,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-colour.webp",
+      "encodedBodySize": 50932,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-roughness.webp",
+      "encodedBodySize": 1602,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-colour.webp",
+      "encodedBodySize": 33694,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-roughness.webp",
+      "encodedBodySize": 1980,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-colour.webp",
+      "encodedBodySize": 53116,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-roughness.webp",
+      "encodedBodySize": 1686,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-colour.webp",
+      "encodedBodySize": 50584,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-colour.webp",
+      "encodedBodySize": 41068,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-roughness.webp",
+      "encodedBodySize": 2782,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-colour.webp",
+      "encodedBodySize": 62338,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-roughness.webp",
+      "encodedBodySize": 3528,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-colour.webp",
+      "encodedBodySize": 52698,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-roughness.webp",
+      "encodedBodySize": 1670,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-colour.webp",
+      "encodedBodySize": 35348,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-roughness.webp",
+      "encodedBodySize": 2466,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-colour.webp",
+      "encodedBodySize": 56956,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-roughness.webp",
+      "encodedBodySize": 3054,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-colour.webp",
+      "encodedBodySize": 52126,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-roughness.webp",
+      "encodedBodySize": 1640,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-colour.webp",
+      "encodedBodySize": 32898,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-roughness.webp",
+      "encodedBodySize": 1736,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-colour.webp",
+      "encodedBodySize": 51192,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-colour.webp",
+      "encodedBodySize": 50932,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-roughness.webp",
+      "encodedBodySize": 1602,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-colour.webp",
+      "encodedBodySize": 33694,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-roughness.webp",
+      "encodedBodySize": 1980,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-colour.webp",
+      "encodedBodySize": 53116,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-roughness.webp",
+      "encodedBodySize": 1686,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-colour.webp",
+      "encodedBodySize": 50584,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-2-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-colour.webp",
+      "encodedBodySize": 41068,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-0-roughness.webp",
+      "encodedBodySize": 2782,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-colour.webp",
+      "encodedBodySize": 62338,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-1-roughness.webp",
+      "encodedBodySize": 3528,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-colour.webp",
+      "encodedBodySize": 52698,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/1-2-roughness.webp",
+      "encodedBodySize": 1670,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-colour.webp",
+      "encodedBodySize": 35348,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-0-roughness.webp",
+      "encodedBodySize": 2466,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-colour.webp",
+      "encodedBodySize": 56956,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-1-roughness.webp",
+      "encodedBodySize": 3054,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-colour.webp",
+      "encodedBodySize": 52126,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/2-2-roughness.webp",
+      "encodedBodySize": 1640,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-colour.webp",
+      "encodedBodySize": 32898,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-0-roughness.webp",
+      "encodedBodySize": 1736,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-colour.webp",
+      "encodedBodySize": 51192,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-1-roughness.webp",
+      "encodedBodySize": 1646,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-colour.webp",
+      "encodedBodySize": 50932,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/3-2-roughness.webp",
+      "encodedBodySize": 1602,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-colour.webp",
+      "encodedBodySize": 33694,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-0-roughness.webp",
+      "encodedBodySize": 1980,
+      "transferSize": 300
+    },
+    {
+      "url": "http://127.0.0.1:5181/ground-materials/v04/low/0-1-colour.webp",
+      "encodedBodySize": 53116,
+      "transferSize": 300
+    }
+  ],
+  "note": "Browser encoded/transfer observations after final reload and repeated toggles; cache and repeated requests affect totals. Regional manifest is the authoritative per-tier delivery cost. Source files loaded by a developer Lab are not a minimal production preload promise."
+}
