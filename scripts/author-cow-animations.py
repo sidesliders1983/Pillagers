@@ -115,14 +115,18 @@ def author(source, output):
                     target.location.z += 0.085*math.sin(math.pi*u)**1.2
         elif clip == "Graze":
             down = smooth(t/2.4)*(1-smooth((t-9.6)/2.4))
-            rotate("Bone_000", (1,0,0), 0.065*down)
+            rotate("Bone_000", (1,0,0), 0.025*down)
+            rotate("Bone_030", (1,0,0), 0.05*down)
+            rotate("Bone_028", (1,0,0), 0.08*down)
             # Z is Blender's vertical axis: gentle body, shoulder and head yaw.
             rotate("Bone_000", (0,0,1), math.radians(1.0)*down*wave(t,6))
             rotate("Bone_028", (0,0,1), math.radians(1.25)*down*wave(t,4))
-            rotate("Bone_036", (1,0,0), 1.48*down)
+            rotate("Bone_036", (1,0,0), 0.82*down)
+            rotate("Bone_035", (1,0,0), 0.09*down)
             rotate("Bone_036", (0,0,1), math.radians(1.5)*down*wave(t,6,0.6))
-            rotate("Bone_034", (1,0,0), 0.14*down)
-            rotate("Bone_032", (1,0,0), -0.04*down+0.015*down*wave(t,2))
+            rotate("Bone_034", (1,0,0), 0.16*down)
+            rotate("Bone_033", (1,0,0), 0.14*down)
+            rotate("Bone_032", (1,0,0), 0.11*down+0.015*down*wave(t,2))
             desired_pitch = neutral_head_pitch*(1-down) + math.radians(75)*down
             # Counter-rotate the skull as the neck lowers. Correct in evaluated
             # armature space so the tilt stays 15 degrees off vertical through the sway.
@@ -226,7 +230,7 @@ def author(source, output):
         "withersHeightM":TARGET_WITHERS_HEIGHT,"sourceWithersHeightM":source_withers,
         "physicalScale":physical_scale,"height":source_height*physical_scale,
         "variant":"adult-female","boneCount":len(arm.data.bones),
-        "grazing":{"headTiltDegrees":75,"headTiltReference":"horizontal ground","verticalDeviationDegrees":15,"yawDegrees":{"body":1,"shoulders":1.25,"neck":1.5,"head":3}},
+        "grazing":{"headTiltDegrees":75,"headTiltReference":"horizontal ground","verticalDeviationDegrees":15,"neckPose":"distributed forward-and-down curve","yawDegrees":{"body":1,"shoulders":1.25,"neck":1.5,"head":3}},
         "referenceMethod":"Authored keys with cattle gait literature; not video motion capture",
         "proposedVideo":"https://youtu.be/sObyVL3oU6g",
         "references":[

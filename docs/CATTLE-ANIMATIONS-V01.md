@@ -30,9 +30,12 @@ Walk is in place at approximately 0.37 m/s after physical scaling, with HL → F
 follows that pace. World playback must match movement speed to playback rate
 and model scale. Cattle gameplay rules and balances are unchanged.
 
-Graze keeps a raised feeding pose: the muzzle-to-poll head axis stays near
+Graze distributes the bend across the shoulder and five neck joints. The
+neck extends forward and down rather than folding vertically at its base;
+the neck-root-to-head chord is approximately 48–49 degrees downward and the
+muzzle is about 0.45 m ahead of the fore-hoof plane. The muzzle-to-poll head axis stays near
 75 degrees downward from horizontal (15 degrees away from vertical
-downward) during 2.4–9.6 s. The muzzle stays approximately 0.16 m above
+downward) during 2.4–9.6 s. The muzzle stays approximately 0.23 m above
 the ground. Gentle Blender
 Z-axis turns originate in the body (1 degree), shoulders (1.25 degrees), neck
 (1.5 degrees) and head (3 degrees). Head turns use the world vertical axis
@@ -47,7 +50,7 @@ Original, unchanged:
 Outputs in its `Animations/` directory:
 
 - `cow-female-adult-animations.blend`: editable Blender 5.2.2 file, four Actions.
-- `cow-female-adult-animated.glb`: full texture export, about 6.59 MB.
+- `cow-female-adult-animated.glb`: full texture export, about 6.61 MB.
 - `cow-female-adult-runtime.glb`: optimized browser version, about 0.91 MB.
 - `authoring.json` and `runtime-manifest.json`: source identity and measurements.
 
@@ -93,7 +96,9 @@ had matching opening/closing keys. The preview reports a 1.65 m reference
 human. Grazing head tilt was sampled across the feeding interval and the
 revised loop was visually checked in the browser from side, front and RTS
 views, including lowering and raising. The corrected reference angle is
-15 degrees off downward vertical, not 15 degrees off horizontal. The original .glb retained its SHA-256; browser inspection had no page errors.
+15 degrees off downward vertical, not 15 degrees off horizontal. The neck
+curve was reviewed alongside the user-supplied grazing-cow reference image;
+these are authored poses, not motion capture from that image. The original .glb retained its SHA-256; browser inspection had no page errors.
 `authoring.json` reports IK target residuals, not a guarantee of zero visible
 hoof sliding on every future terrain.
 
