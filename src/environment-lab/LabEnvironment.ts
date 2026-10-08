@@ -34,6 +34,6 @@ export class LabEnvironment {
   const generator=new PMREMGenerator(this.renderer);
   try{this.target=generator.fromEquirectangular(source);this.failure='';}finally{source.dispose();generator.dispose();}
  }
- describe(){return{requested:this.enabled,active:!!this.scene.environment,loaded:!!this.target,source:'lonely_road_afternoon_puresky_1k.hdr',intensity:this.scene.environmentIntensity,rotation:this.scene.environmentRotation.toArray(),alignment:'HDR peak aligned to the native directional light using Scene.environmentRotation',background:'Unchanged Color',sourceTexture:'disposed after PMREM',failure:this.failure};}
+ describe(){return{requested:this.enabled,active:!!this.scene.environment,loaded:!!this.target,pmrem:this.target?{width:this.target.width,height:this.target.height,textureType:this.target.texture.type}:null,source:'lonely_road_afternoon_puresky_1k.hdr',intensity:this.scene.environmentIntensity,rotation:this.scene.environmentRotation.toArray(),alignment:'HDR peak aligned to the native directional light using Scene.environmentRotation',background:'Unchanged Color',sourceTexture:'disposed after PMREM',failure:this.failure};}
  dispose(){this.alive=false;this.scene.environment=null;this.target?.dispose();this.target=null;}
 }
