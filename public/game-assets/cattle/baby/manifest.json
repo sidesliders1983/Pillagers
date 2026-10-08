@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "variant": "baby",
+  "label": "Baby calf",
+  "file": "cow-baby.glb",
+  "source": "Assets/Characters/Cow/Baby/cow-baby-textured.glb",
+  "sourceSha256": "3eaadfd4a6958c4bb6bb02f73ea1febfb59af287334fc0cf4d1c0a2d9181fb85",
+  "authoringSha256": "c881fdcb03a6ceb1df504b9ad49edf1472fa488acf12dd99bd752124e36f1d7f",
+  "sha256": "8365eb31f3988dca607dace82ddbc252e9a72e616bb4df682fbd2c97b086057f",
+  "authoringBytes": 13082300,
+  "bytes": 925360,
+  "triangles": 6800,
+  "joints": 50,
+  "height": 0.720049889125749,
+  "withersHeightM": 0.6,
+  "sourceWithersHeightM": 1.4165681260693361,
+  "physicalScale": 0.42355887370194295,
+  "walkSpeedMps": 0.21177943685097148,
+  "walkCycleSeconds": 1.5,
+  "clips": {
+    "Idle": {
+      "maxPlantedTargetErrorM": 3.2825967278340836e-7,
+      "duration": 6
+    },
+    "Graze": {
+      "maxPlantedTargetErrorM": 4.5722588658890694e-7,
+      "duration": 12
+    },
+    "Walk": {
+      "maxPlantedTargetErrorM": 3.847439064121828e-7,
+      "duration": 1.5
+    },
+    "HumanInteraction": {
+      "maxPlantedTargetErrorM": 3.2825967278340836e-7,
+      "duration": 6
+    }
+  },
+  "grazing": {
+    "headTiltDegrees": 75,
+    "headTiltReference": "horizontal ground",
+    "verticalDeviationDegrees": 15,
+    "neckPose": "distributed forward-and-down curve",
+    "yawDegrees": {
+      "body": 1,
+      "shoulders": 1.25,
+      "neck": 1.5,
+      "head": 3
+    }
+  },
+  "textures": [
+    {
+      "name": "normal",
+      "width": 512,
+      "height": 512,
+      "bytes": 336538,
+      "lossless": true
+    },
+    {
+      "name": "texture_0",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 126762,
+      "lossless": false
+    },
+    {
+      "name": "texture_0_metallic_roughness",
+      "width": 256,
+      "height": 256,
+      "bytes": 43180,
+      "lossless": true
+    }
+  ],
+  "blenderVersion": "5.2.2 LTS",
+  "referenceMethod": "Authored keys with cattle gait literature and user grazing reference; not video motion capture"
+}
