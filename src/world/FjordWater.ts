@@ -1,4 +1,4 @@
-import {Color,Group} from 'three';
+import {Color,Group,Vector3} from 'three';
 import {FjordWaterConfig,fjordWaterConfig} from '../config/FjordWaterConfig';
 import type {WorldLighting} from '../core/WorldLighting';
 import {WaterPlane} from '../vendor/boona13-water/WaterPlane';
@@ -18,6 +18,7 @@ export class FjordWater {
  private readonly shallow:Color;
  private readonly sky=new Color();
  private readonly skyHigh=new Color();
+ private readonly sunDirection=new Vector3();
  constructor(readonly config:FjordWaterConfig={...fjordWaterConfig}){
   const low=config.quality==='low';
   this.mask=new WaterMask(low?256:512,config.size);
@@ -56,7 +57,9 @@ export class FjordWater {
    this.sky.copy(lighting.fog.color).convertLinearToSRGB().multiplyScalar(lighting.mode==='night'?.65:.55);
    this.skyHigh.copy(this.sky).multiplyScalar(1.25);
    this.source.setSkyColors(this.sky,this.skyHigh);
-   this.source.setSunDirection(lighting.directional.position);
+   // Upstream expects surface-to-light direction, not an absolute position.
+   this.sunDirection.copy(lighting.directional.position).sub(lighting.directional.target.position);
+   this.source.setSunDirection(this.sunDirection);
   }
  }
  dispose(){this.source.dispose();this.mask.dispose();}

@@ -1,0 +1,17 @@
+# Low northern sun and native shadows — first stage
+
+Owner-requested #59 lighting study, 2026-10-08. Parent main: 986154c73ab4da22302ad295bd9de31020bc6b97. Runtime hashes, camera, tier, DPR and all native light/shadow settings accompany each capture in baseline.json, sun-comparison.json and refined-sun.json. The original reference is docs/references/environment/REF-B.png, unchanged.
+
+The baseline was captured before any runtime edits. The first sweep is 10°, 20°, 30° with azimuth −57.3° (atan2(x,z), +Z=0°), direct intensity 2.8 / #ffecd6, hemisphere .65 / sky #bfd4ee / ground #716c65. ACESFilmic and exposure 1.05 are unchanged. The original day is 55.3°, direct 1.55 and hemisphere 2.45. Intensities of different light types are not a measured lighting ratio.
+
+The sweep shows coherent long building/tree shadows instead of the pale baseline's faint shadows, and markedly stronger roof/wall/facet separation. Ten degrees makes roof/wall readability poorest and shadows dominate the clearing. At the original back-light azimuth, even twenty degrees leaves several visible walls dark. These are diagnostic alternatives, not accepted defaults.
+
+A separately captured refinement turns the source toward the visible house fronts: elevation 20°, azimuth +135°. Sky fill .65 versus 1.0 is isolated with direct intensity and exposure fixed. Fill 1.0 retains more shaded-wall detail; this is the preferred review candidate, not owner approval. It still has overly vivid undergrowth, a pale empty background and an open village composition. These are unresolved source/composition gaps, not grounds for substituting scenery in this lighting change.
+
+Native DirectionalLight shadow bounds include the visible receiver/caster world bounds transformed into the light camera, with 3m padding and depth fit. Target is the actual bounds centre, source is 200m away. The map is 2048px Standard / 1024px Low; PCF, bias −.00005, normalBias .02. Baseline/night restore the original fixed ±50 bounds, target origin, bias 0 and normalBias .045. PCF radius is inherited; VSM blurSamples is not an active PCF blur tuning. No GLSL change. The standalone Meshy person gains cast/receive only in the pilot; baseline remains the recorded original.
+
+Actual authored material inventories and cast/receive flags are recorded in refined-sun.json. Native ground has albedo/normal/roughness maps (Low omits normal), KayKit atlas has roughness .6, source EZ-Tree bark has normal/roughness textures, pine leaves retain source material. Meshy materials retain authored map stacks: factor metalness=1 with metallic/roughness maps is not evidence of uniformly metallic wood. No roughness or palette edit is used to fake highlights. Material-specific highlight/contact close inspection and orbit checks follow in the functional evidence stage.
+
+The upstream boona13 shader expects surface-to-light direction. The adapter now supplies light.position − light.target.position. Previously an absolute position happened to work with target at origin. Upstream GLSL is unchanged; sky-gradient water is not a reflection of buildings or trees.
+
+Functional: browser tracer failed for missing low-sun control, then passed selection of 20°, Night and Current day. Build passes. Sun evidence is saved before adding the separately labelled native HDR stage. Screenshot-window frame estimates are NOT performance benchmarks. Desktop repeated cost/lifecycle evidence and full checks follow. Physical mobile and GPU VRAM remain untested. #60 and owner visual acceptance remain pending.
