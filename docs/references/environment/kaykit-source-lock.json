@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "pack": "KayKit Forest Nature Pack 1.0 FREE",
+  "author": "Kay Lousberg",
+  "sourceUrl": "https://kaylousberg.itch.io/kaykit-forest",
+  "originalArchive": "KayKit_Forest_Nature_Pack_1.0_FREE.zip",
+  "archiveSha256": "2ee83e63bb7695f2d884ec27ddf6fce020789a452e7d5c5b0bbdfc4f6ea1fc8c",
+  "license": "CC0-1.0",
+  "licenseFile": {
+    "path": "License.txt",
+    "bytes": 1469,
+    "sha256": "987811fa42c7548ad487324531813b0210ee6d1ebd410089e881820630e3be54"
+  },
+  "atlas": {
+    "path": "Assets/gltf/forest_texture.png",
+    "bytes": 48679,
+    "sha256": "406c01e0ac1d3368fc7b26ff5fb0d3335ba5e48bd19a703540ed92ee3971ea39"
+  },
+  "assets": [
+    {
+      "id": "kaykit-conifer-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Tree_4_C_Color1.gltf",
+          "bytes": 3061,
+          "sha256": "b0ad5efa06e081126366879cca48cf26563ef712899170023c95558b13ef058a"
+        },
+        {
+          "path": "Assets/gltf/Tree_4_C_Color1.bin",
+          "bytes": 31140,
+          "sha256": "e1cb6ef336e47ab073aedf0267a81cba500499b9edb0fb514c1b58a3a5d11f4f"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-conifer-b",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Tree_4_B_Color1.gltf",
+          "bytes": 3059,
+          "sha256": "7dad365ccc9e9da3e1cbcdbd5ec16b67f0058a3c76aaa06a1bfaa17c706f1ce5"
+        },
+        {
+          "path": "Assets/gltf/Tree_4_B_Color1.bin",
+          "bytes": 16092,
+          "sha256": "155be76b0ec5d12a246c6b686156a2fa0d8ca086a67ef156633b7df681143d54"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-conifer-c",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Tree_4_A_Color1.gltf",
+          "bytes": 3061,
+          "sha256": "14f8f50af9f9cf8d2bb488cae15613f9e2ed6ce0002d2aa11721a2efc2ba3010"
+        },
+        {
+          "path": "Assets/gltf/Tree_4_A_Color1.bin",
+          "bytes": 12568,
+          "sha256": "eeb22bdc0ece9941865139476afcaf5dadd8285751321770886d1a065b8512d6"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-deciduous-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Tree_1_B_Color1.gltf",
+          "bytes": 3058,
+          "sha256": "03f4773b06adf252ac8ca0a9bfdc77f315c1f4036b6151796f110b4897e586c5"
+        },
+        {
+          "path": "Assets/gltf/Tree_1_B_Color1.bin",
+          "bytes": 19016,
+          "sha256": "5d4129bdc6f13a24e076f7fa870c6695dc20491f4820c54153fe9d1d90b40522"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-rock-small-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Rock_3_A_Color1.gltf",
+          "bytes": 3056,
+          "sha256": "65484de298f09f7ed5bcf781d7febde1a2df4f0f76b8a6396591240963152c88"
+        },
+        {
+          "path": "Assets/gltf/Rock_3_A_Color1.bin",
+          "bytes": 4440,
+          "sha256": "8659daf4bc724f414eda02193bc6a48132b595eef7c62009b7c0a3d93a8aa9b2"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-rock-small-b",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Rock_3_B_Color1.gltf",
+          "bytes": 3060,
+          "sha256": "ab3aafc815c562c4b96fc4ca4bb9cd359a8f0fedeb9775caa19cf116f031fe74"
+        },
+        {
+          "path": "Assets/gltf/Rock_3_B_Color1.bin",
+          "bytes": 4568,
+          "sha256": "fc36ba2b662b90cd61f9ca6a7ca65dbd6176f2984102433053df7d786b6b707d"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-boulder-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Rock_3_H_Color1.gltf",
+          "bytes": 3057,
+          "sha256": "0605b9ccb31940363ebf13b66a562c94de809efd01a7498e8b330a0198171237"
+        },
+        {
+          "path": "Assets/gltf/Rock_3_H_Color1.bin",
+          "bytes": 6704,
+          "sha256": "cf347e34f8839cf99db7d2cfdb38a07ac823c1bd578107f33b2a46edab26b3a0"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-boulder-b",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Rock_3_I_Color1.gltf",
+          "bytes": 3054,
+          "sha256": "9a9a3c09c0b395968bb79ba344087ec0802b27345eb297699a7000a79d255376"
+        },
+        {
+          "path": "Assets/gltf/Rock_3_I_Color1.bin",
+          "bytes": 6352,
+          "sha256": "5176add3826445aa4ff8bf7cb282554f31af10e9e6ea5ca7923df039beba2e44"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-rock-cluster-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Rock_2_H_Color1.gltf",
+          "bytes": 3060,
+          "sha256": "3b60e5b844a146ff41a9e31fba2d628018876b1ced246bc2a7dc5e00ea10fbda"
+        },
+        {
+          "path": "Assets/gltf/Rock_2_H_Color1.bin",
+          "bytes": 10704,
+          "sha256": "380dd8485a8a47e04601856dc19fd96498e0c8d10d78d8555a2c1186f6fe325d"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-rock-cluster-b",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Rock_1_Q_Color1.gltf",
+          "bytes": 3067,
+          "sha256": "108a419dcbd0223cef117d3136c28a0d738e06be9b63783e3e8c9197d219be4c"
+        },
+        {
+          "path": "Assets/gltf/Rock_1_Q_Color1.bin",
+          "bytes": 30024,
+          "sha256": "0f79ea568c8de7dc347ac3a05fb137ab2d4330924651a691f7938ae32024e8e4"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-bush-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Bush_1_G_Color1.gltf",
+          "bytes": 3061,
+          "sha256": "4979a6a515beb25a0a5e1987fccc6f47ac5d15baf7148a8fb63a3f10a17074be"
+        },
+        {
+          "path": "Assets/gltf/Bush_1_G_Color1.bin",
+          "bytes": 27984,
+          "sha256": "0d92a1b580872bd8df4159bec725f0cf0881c7c56e6f2cf74ba7c212034cef69"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-bush-b",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Bush_2_F_Color1.gltf",
+          "bytes": 3040,
+          "sha256": "6337258963e1f97007950e81315350fc4be8ac4d5bcc4f142fc67e851a4f977e"
+        },
+        {
+          "path": "Assets/gltf/Bush_2_F_Color1.bin",
+          "bytes": 8352,
+          "sha256": "91f641083c48a6660a2d30e73448597ee9d11426c3f3063af283dd66bd312178"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-grass-cluster-a",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Grass_1_D_Color1.gltf",
+          "bytes": 3066,
+          "sha256": "a661f646f59852becd6ec7d3a16501a1d264d5d3d1732d247038357cbff248ba"
+        },
+        {
+          "path": "Assets/gltf/Grass_1_D_Color1.bin",
+          "bytes": 24672,
+          "sha256": "bdbb905d1333227aae787294b14e3e89895e451bb9fcd02eac7a7a66f9241a0d"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    },
+    {
+      "id": "kaykit-grass-cluster-b",
+      "sourceFiles": [
+        {
+          "path": "Assets/gltf/Grass_2_D_Color1.gltf",
+          "bytes": 3066,
+          "sha256": "4dc6242c70bcdf5e040b9e039679dc518f76d29dc9d770692bf72b3e6b4c1d2f"
+        },
+        {
+          "path": "Assets/gltf/Grass_2_D_Color1.bin",
+          "bytes": 24672,
+          "sha256": "6094b2b84e46f47695444a16bd81f6537cec7b2935fdb94bd4d1f2ae0ce0e7fc"
+        }
+      ],
+      "sourceAtlas": "Assets/gltf/forest_texture.png",
+      "transforms": "Runtime root grounds world bounds at minY and centers X/Z; authored primitive transforms, geometry and UVs retained. Placement scale/rotation recorded by the scene fixture."
+    }
+  ]
+}
