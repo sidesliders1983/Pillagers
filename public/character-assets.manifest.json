@@ -1756,7 +1756,7 @@
         "authoringFrame": "meshy-native",
         "nativeBinding": {
           "path": "/character-lab/modules/meshy-v2/hair.binding.json",
-          "sha256": "433a25d07ea948286df92ded2d0d2744e7dea9f3cae3ea7fb330f62cab5b97cf",
+          "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
           "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
         },
         "clearance": 0.007
@@ -1861,10 +1861,10 @@
       "lods": {
         "2": {
           "file": "/character-lab/modules/meshy-v2/outfit.glb",
-          "sha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
-          "triangles": 824,
+          "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+          "triangles": 1045,
           "materials": 1,
-          "bytes": 149560,
+          "bytes": 189340,
           "bounds": {
             "min": [
               -0.3731599450111389,
@@ -1873,7 +1873,7 @@
             ],
             "max": [
               0.371593177318573,
-              1.4049999713897705,
+              1.4446271657943726,
               0.18515461683273315
             ]
           }
@@ -1890,10 +1890,10 @@
       ],
       "budgets": {
         "triangles": {
-          "2": 824
+          "2": 1045
         },
         "materials": 1,
-        "runtimeTriangles": 824
+        "runtimeTriangles": 1045
       },
       "metadata": {
         "version": "pillagers-fit/0.2",
@@ -1904,7 +1904,7 @@
         "authoringFrame": "meshy-native",
         "nativeBinding": {
           "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
-          "sha256": "5deca084f0779131ede0427d6fac5cc98dbaf696a879612dea9c174fcd089834",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
           "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
         },
         "clearance": 0.016,

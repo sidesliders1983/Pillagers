@@ -110,3 +110,5 @@ Run the focused native tests and `node scripts/validate-characters.mjs --lab-pre
 Fitting-first clarification (2026-10-08): the user now treats this outfit as a technical fitting fixture. Prioritize source-bound contact rims, native skinning, coverage and swaps across neutral/narrow/broad Idle/Walk/Run. Further artwork polishing is deferred; more detailed Meshy models will follow the fitting proof. Existing preview status is retained.
 
 Current fitting evidence: [Meshy outfit fitting proof](qa/meshy-modules-v2/REPORT.md). The fixture remains a preview; clothing artwork is deferred.
+
+Neck coverage follow-up (2026-10-08): protect geometrically exposed neck skin before dominant-bone region selection. The outfit now has a source-derived, densely sampled neckline and a matching partial body cut at every LOD. Opening corners share exact bind positions and four native influences; recursive cuts retain the full source mixture until final reduction. See [neck fitting follow-up](qa/meshy-neck-fit/REPORT.md) for the new frozen export, regression and actual Lab views. Earlier fitting evidence is retained as its original measurement record.

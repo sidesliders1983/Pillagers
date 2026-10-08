@@ -25,7 +25,7 @@ export interface ModuleBindingV2 {
  regions:Record<string,{contact:number[];free:number[];boundary:number[]}>;
  seams:number[][];
  coverageRimContacts?:number[];
- coverageClipPlanes?:{regions:string[];normal:number[];constant:number}[];
+ coverageClipPlanes?:{regions:string[];regionMatch?:'all'|'any';normal:number[];constant:number}[];
  garmentFrames:Record<string,{vertex:number;quaternion:readonly [number,number,number,number]}>;
  dependency?:{module:string;frame:string};
 }

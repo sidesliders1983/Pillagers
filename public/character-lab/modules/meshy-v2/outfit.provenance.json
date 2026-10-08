@@ -2,21 +2,21 @@
   "schemaVersion": 2,
   "route": "authored-template",
   "moduleId": "garment/meshy-tunic-trousers",
-  "moduleSha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
-  "bindingSha256": "5deca084f0779131ede0427d6fac5cc98dbaf696a879612dea9c174fcd089834",
+  "moduleSha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+  "bindingSha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
   "sourceBodySha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe",
   "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
   "recipe": {
     "path": "scripts/characters/templates/meshy_modules_v2.py",
-    "sha256": "f3eccd8774259fb21502c87dc4948621623702fee3cae9f10adeae80ac29e6fa",
+    "sha256": "f533df79197f5e0cb28528a5807429d6322b52cee4a26d3522ca2bc2a2571f70",
     "version": 1,
     "blender": "4.5.9"
   },
   "editableSource": "Assets/Characters/Human/Modules-v2/MeshyHuman_modules-v2.blend",
-  "editableSourceSha256": "e20a7aea8fbcb7b157eff51523fc3c499582d80532802d38212052e6ee6982bc",
+  "editableSourceSha256": "91c27d448c6e0c5ddc6cd1c21e842fb4fa57de313cfaf4e28784837b8d40df08",
   "pipeline": {
     "path": "scripts/prepare-meshy-modules.mjs",
-    "sha256": "086a423ce3815ed1a90e2f305cf5b7cf2b9c7b2b5424b141f81b7723c184e837",
+    "sha256": "9bc2b9be1d73929c9f482ce65527494c6be2e6c2234f4da9cea964c21338c72f",
     "weightAuthority": "authored-four-native-with-surface-rims"
   },
   "provider": null,
@@ -25,27 +25,10 @@
   "visualApproval": null,
   "openings": {
     "schema": "pillagers-intentional-openings/1",
-    "outputSha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
+    "outputSha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
     "weldTolerance": 0.000001,
-    "boundaryEdges": 216,
+    "boundaryEdges": 279,
     "loops": [
-      {
-        "edgeHashSHA256": "07bcccc8276144f5debc8b8bf60044716d3971fc4f964449f7b9f98b6afd6c05",
-        "vertices": 16,
-        "edges": 16,
-        "bounds": {
-          "min": [
-            -0.078,
-            1.3639999999999999,
-            -0.102
-          ],
-          "max": [
-            0.078,
-            1.405,
-            0.04
-          ]
-        }
-      },
       {
         "edgeHashSHA256": "331573733948397f62c0882e9d105fa4cff87c9677d8d60651cde703f783d3d1",
         "vertices": 16,
@@ -196,6 +179,23 @@
             0.174,
             1.001,
             0.131
+          ]
+        }
+      },
+      {
+        "edgeHashSHA256": "f396ba74a34dbb216d233a3db2dae4e3a65deca0895c6726e41b4fae70f09110",
+        "vertices": 79,
+        "edges": 79,
+        "bounds": {
+          "min": [
+            -0.11068499999999999,
+            1.404164,
+            -0.098757
+          ],
+          "max": [
+            0.110245,
+            1.4446269999999999,
+            0.03612
           ]
         }
       },

@@ -3,7 +3,7 @@ import type {GLTF} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshyBodyFitAdapter,anchorPoint} from './MeshyBodyFitAdapter';
 import {ModuleBindingV2} from './BodyFitAdapter';
 import {maskedBodyGeometry} from './BodyCoverage';
-import {sewModuleOpenings} from './ModuleRims';
+import {sewModuleOpenings, weldModuleOpeningCorners} from './ModuleRims';
 import {CharacterAsset,assetMeasurement} from './CharacterAssets';
 import {HumanProfile} from './UniversalHumanProfile';
 export interface NativeModuleSource {asset:CharacterAsset;source:GLTF;binding:ModuleBindingV2;}
@@ -26,7 +26,7 @@ export function validateNativeModule(source:NativeModuleSource,fit:MeshyBodyFitA
  fail(binding.seams?.every(seam=>seam.length>=2&&seam.every(v=>Number.isInteger(v)&&v>=0&&v<count)),'Invalid sewn seam');
  fail(lod.coverageTriangles.every(t=>Number.isInteger(t)&&t>=0&&t<fit.source.triangles)&&new Set(lod.coverageTriangles).size===lod.coverageTriangles.length,'Invalid source coverage mask');
  if(binding.dependency)fail(metadata.dependency?.module===binding.dependency.module&&metadata.dependency.frame===binding.dependency.frame,'Garment dependency differs from the registry');
- fail((binding.coverageClipPlanes??[]).every(p=>p.regions.length>0&&p.regions.every(r=>typeof r==='string')&&p.normal.length===3&&p.normal.every(Number.isFinite)&&Math.hypot(...p.normal)>.9&&Math.hypot(...p.normal)<1.1&&Number.isFinite(p.constant)),'Invalid body opening cut planes');
+ fail((binding.coverageClipPlanes??[]).every(p=>p.regions.length>0&&p.regions.every(r=>typeof r==='string')&&(!p.regionMatch||['all','any'].includes(p.regionMatch))&&p.normal.length===3&&p.normal.every(Number.isFinite)&&Math.hypot(...p.normal)>.9&&Math.hypot(...p.normal)<1.1&&Number.isFinite(p.constant)),'Invalid body opening cut planes');
  fail((binding.coverageRimContacts??[]).every(v=>Number.isInteger(v)&&v>=0&&v<count&&groups.some(r=>r.contact.includes(v))&&Math.hypot(...lod.anchors[lod.vertexAnchors[v]].offset)<.000001),'Invalid shared body/garment rim contact');
  return source;
 }
@@ -76,6 +76,11 @@ export class MeshyModuleRuntime {
   this.restoreMask();const covered=new Set<number>();for(const record of this.records.values())for(const t of record.source.binding.lods[this.fit.body.lod].coverageTriangles)covered.add(t);
   const planes=[...this.records.values()].flatMap(r=>r.source.binding.coverageClipPlanes??[]);
   if(covered.size||planes.length){const rims=[...this.records.values()].flatMap(r=>(r.source.binding.coverageRimContacts??[]).map(v=>{const lod=r.source.binding.lods[this.fit.body.lod];return lod.anchors[lod.vertexAnchors[v]];}));this.mask=maskedBodyGeometry(this.fit.sourceGeometry,this.fit.source,covered,planes,rims);this.fit.mesh.geometry=this.mask;}
+  if (this.mask) {
+      for (const record of this.records.values()) {
+          weldModuleOpeningCorners(this.mask, record.mesh.geometry, this.fit.encoding);
+      }
+  }
   this.fitRuns++;this.lastFitMilliseconds=performance.now()-started;
  }
  private restoreMask(){this.fit.mesh.geometry=this.fit.sourceGeometry;if(this.mask){this.mask.dispose();this.mask=null;}}

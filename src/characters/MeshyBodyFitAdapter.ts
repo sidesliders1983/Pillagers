@@ -7,13 +7,35 @@ import type {FitDebugOptions} from './CharacterFitSystem';
 const parents:Record<SocketName,string>={socket_head_top:'Head',socket_face:'Head',socket_jaw:'Head',socket_neck:'Neck',socket_back_head:'Head',socket_chest:'Spine2',socket_back:'Spine2',socket_shoulder_L:'LeftShoulder',socket_shoulder_R:'RightShoulder',socket_waist:'Hips',socket_hip_L:'Hips',socket_hip_R:'Hips',socket_hand_L:'LeftHand',socket_hand_R:'RightHand',socket_forearm_L:'LeftForeArm',socket_forearm_R:'RightForeArm'};
 /** A topology fingerprint supplements the exact GLB identity, including split render corners. */
 export function surfaceTopology(surface:BodySurface){let h=2166136261;for(const value of [...surface.positions,...surface.indices]){const word=Math.round(value*1e7);h=Math.imul(h^word,16777619);}return (h>>>0).toString(16).padStart(8,'0');}
-export function nativeRegion(mesh:SkinnedMesh,vertex:number,p:Vector3):CoverageZone {
- const indices=mesh.geometry.getAttribute('skinIndex'),weights=mesh.geometry.getAttribute('skinWeight');let name='',largest=-1;
- for(let k=0;k<4;k++){const w=weights.getComponent(vertex,k);if(w>largest){largest=w;name=mesh.skeleton.bones[indices.getComponent(vertex,k)].name;}}
- const side=p.x>=0?'L':'R';
- if(/Foot|Toe/.test(name))return 'FEET';if(/Hand|ForeArm/.test(name))return `LOWER_ARM_${side}`;if(/Arm|Shoulder/.test(name))return `UPPER_ARM_${side}`;
- if(/UpLeg/.test(name))return `UPPER_LEG_${side}`;if(/Leg/.test(name))return `LOWER_LEG_${side}`;
- if(p.y>1.45&&Math.abs(p.x)<.16)return 'HEAD';if(p.y>1.365&&p.y<=1.45&&Math.abs(p.x)<.13)return 'NECK';if(/Head|headfront/.test(name))return 'HEAD';if(/Neck/.test(name))return 'NECK';if(/Spine2|Spine1/.test(name))return 'TORSO_UPPER';if(/Spine/.test(name))return 'TORSO_LOWER';return 'PELVIS';
+export function nativeRegion(mesh: SkinnedMesh, vertex: number, point: Vector3): CoverageZone {
+    // Some original neck vertices are weighted to an arm. Their geometric region
+    // must still protect exposed neck skin from the sleeve coverage planes.
+    if (point.y > 1.45 && Math.abs(point.x) < 0.16) return 'HEAD';
+    if (point.y > 1.365 && point.y <= 1.45 && Math.abs(point.x) < 0.13) return 'NECK';
+
+    const indices = mesh.geometry.getAttribute('skinIndex');
+    const weights = mesh.geometry.getAttribute('skinWeight');
+    let name = '';
+    let largestWeight = -1;
+    for (let influence = 0; influence < 4; influence++) {
+        const weight = weights.getComponent(vertex, influence);
+        if (weight > largestWeight) {
+            largestWeight = weight;
+            name = mesh.skeleton.bones[indices.getComponent(vertex, influence)].name;
+        }
+    }
+
+    const side = point.x >= 0 ? 'L' : 'R';
+    if (/Foot|Toe/.test(name)) return 'FEET';
+    if (/Hand|ForeArm/.test(name)) return `LOWER_ARM_${side}`;
+    if (/Arm|Shoulder/.test(name)) return `UPPER_ARM_${side}`;
+    if (/UpLeg/.test(name)) return `UPPER_LEG_${side}`;
+    if (/Leg/.test(name)) return `LOWER_LEG_${side}`;
+    if (/Head|headfront/.test(name)) return 'HEAD';
+    if (/Neck/.test(name)) return 'NECK';
+    if (/Spine2|Spine1/.test(name)) return 'TORSO_UPPER';
+    if (/Spine/.test(name)) return 'TORSO_LOWER';
+    return 'PELVIS';
 }
 const sourceSurfaces=new WeakMap<BufferGeometry,BodySurface>();
 const surfaceFacets=new WeakMap<BodySurface,{triangle:Triangle;ids:number[];min:Vector3;max:Vector3}[]>();

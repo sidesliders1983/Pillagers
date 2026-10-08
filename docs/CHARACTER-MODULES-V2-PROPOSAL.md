@@ -19,6 +19,8 @@ Milestone evidence:
 - Neutral/narrow/broad Idle/Walk/Run samples plus front, side, back and RTS browser views.
 - Exact editable Blender source, recipes, exports and per-LOD binding identities; no asset promotion.
 
+Neck coverage follow-up (2026-10-08): protect geometrically exposed neck skin before dominant-bone region selection. The outfit now has a source-derived, densely sampled neckline and a matching partial body cut at every LOD. Opening corners share exact bind positions and four native influences; recursive cuts retain the full source mixture until final reduction. See [neck fitting follow-up](qa/meshy-neck-fit/REPORT.md) for the new frozen export, regression and actual Lab views. Earlier fitting evidence is retained as its original measurement record.
+
 The architecture below remains the retained foundation and later roadmap. This priority supersedes the earlier art-first milestone.
 
 Build reliable contact geometry from the actual Meshy Human and produce modules through editable Blender templates and recipes. Approved concepts determine the outer design; the body supplies the fitting surfaces, scale, symmetry frame and rig. Render every technical view from one resulting 3D source. The main investment is a small set of templates that pass fit, animation and visual review before producing controlled variants.

@@ -117,6 +117,92 @@ def cuff_weights(p,side):
     top=sorted(((j,w) for j,w in sums.items() if w>0),key=lambda x:(-x[1],x[0]))[:4];total=sum(w for j,w in top)
     return {'joints':[j for j,w in top]+[0]*(4-len(top)),'weights':[w/total for j,w in top]+[0]*(4-len(top))}
 
+def neckline_ring(count):
+    """Sample the actual closed native neck section in its topological order."""
+    normal = Vector((0, 1, .3))
+    points = []
+    edges = set()
+
+    def register(point):
+        for index, existing in enumerate(points):
+            if (point - existing).length_squared < 1e-12:
+                return index
+        points.append(point)
+        return len(points) - 1
+
+    for triangle in range(len(reference['indices']) // 3):
+        indices = reference['indices'][triangle * 3:triangle * 3 + 3]
+        if not any(reference['regions'][vertex] == 'NECK' for vertex in indices):
+            continue
+        corners = [Vector(reference_vertices[vertex]) for vertex in indices]
+        distances = [corner.dot(normal) - 1.415 for corner in corners]
+        cuts = []
+        for k in range(3):
+            next_corner = (k + 1) % 3
+            if (distances[k] >= 0) == (distances[next_corner] >= 0):
+                continue
+            fraction = distances[k] / (distances[k] - distances[next_corner])
+            cuts.append(register(corners[k].lerp(corners[next_corner], fraction)))
+        if len(cuts) == 2 and cuts[0] != cuts[1]:
+            edges.add(tuple(sorted(cuts)))
+    neighbours = {index: [] for index in range(len(points))}
+    for a, b in sorted(edges):
+        neighbours[a].append(b)
+        neighbours[b].append(a)
+    if any(len(values) != 2 for values in neighbours.values()):
+        raise RuntimeError('Native neck section is not a closed manifold loop')
+    ordered = []
+    previous, current = -1, 0
+    while True:
+        ordered.append(points[current])
+        next_point = next(vertex for vertex in neighbours[current] if vertex != previous)
+        previous, current = current, next_point
+        if current == 0:
+            break
+    if len(ordered) != len(points):
+        raise RuntimeError('Native neck section has more than one component')
+    axis = normal.normalized()
+    front = Vector((0, 0, 1))
+    front = (front - axis * front.dot(axis)).normalized()
+    right = axis.cross(front)
+    area = sum(a.dot(front) * b.dot(right) - a.dot(right) * b.dot(front)
+               for a, b in zip(ordered, ordered[1:] + ordered[:1]))
+    if area < 0:
+        ordered.reverse()
+    distances = [0]
+    for a, b in zip(ordered, ordered[1:] + ordered[:1]):
+        distances.append(distances[-1] + (b - a).length)
+    start, frontmost = None, -float('inf')
+    for k, (a, b) in enumerate(zip(ordered, ordered[1:] + ordered[:1])):
+        if (a.x >= 0) == (b.x >= 0):
+            continue
+        fraction = a.x / (a.x - b.x)
+        point = a.lerp(b, fraction)
+        if point.dot(front) > frontmost:
+            frontmost = point.dot(front)
+            start = distances[k] + (b - a).length * fraction
+    if start is None:
+        raise RuntimeError('Native neck section has no central front contact')
+    if count is None:
+        front_point = None
+        for k, (a, b) in enumerate(zip(ordered, ordered[1:] + ordered[:1])):
+            if distances[k] <= start <= distances[k + 1]:
+                front_point = a.lerp(b, (start - distances[k]) / (distances[k + 1] - distances[k]))
+                break
+        remainder = sorted(((distances[k] - start + distances[-1]) % distances[-1], point)
+                           for k, point in enumerate(ordered)
+                           if (point - front_point).length_squared >= 1e-12)
+        return [tuple(front_point)] + [tuple(point) for distance, point in remainder]
+    ring = []
+    for corner in range(count):
+        target = (start + distances[-1] * corner / count) % distances[-1]
+        for k, (a, b) in enumerate(zip(ordered, ordered[1:] + ordered[:1])):
+            if distances[k] <= target <= distances[k + 1]:
+                fraction = (target - distances[k]) / (distances[k + 1] - distances[k])
+                ring.append(tuple(a.lerp(b, fraction)))
+                break
+    return ring
+
 def designed_outfit():
     """Panel construction, not decimated anatomy. Fixed authored opening loops."""
     def finish(name,v,f,contact,color_indices=None):
@@ -126,23 +212,53 @@ def designed_outfit():
         if color_indices:obj['trimFaces']=color_indices
         return obj
     n=16;v=[];f=[];contact=[];trim=[]
+    neck_contacts = neckline_ring(None)
     # Broad front/back panels flare below the belt; neck and sleeves have fixed rims.
-    specs=[(.86,.186,.151,-.010),(.955,.181,.155,-.014),(1.015,.164,.137,-.015),(1.20,.189,.154,-.030),(1.355,.192,.145,-.045),(1.405,.078,.071,-.031)]
+    specs=[(.86,.186,.151,-.010),(.955,.181,.155,-.014),(1.015,.164,.137,-.015),(1.20,.189,.154,-.030),(1.355,.192,.145,-.045)]
     for row,(y,rx,rz,cz) in enumerate(specs):
         for k in range(n):
             a=math.tau*k/n
             height=y
             if row==0:height+=.025*abs(math.cos(a))
             if row==4:height-=.04*abs(math.cos(a))
-            if row==5:height-=.041*max(0,math.cos(a))**5 # Front neckline notch.
-            v.append((rx*math.sin(a),height,rz*math.cos(a)+cz))
-            if row==5:contact.append(len(v)-1)
+            v.append((rx * math.sin(a), height, rz * math.cos(a) + cz))
     for row in range(len(specs)-1):
         for k in range(n):
             # Branch sleeve openings between upper panel loops, not intersecting tubes.
             if row==3 and k in [2,3,4,5,10,11,12,13]:continue
             f.append((row*n+k,row*n+(k+1)%n,(row+1)*n+(k+1)%n,(row+1)*n+k))
             if row==4:trim.append(len(f)-1)
+    def bridge(previous, current):
+        a = b = 0
+        while a < len(previous) or b < len(current):
+            ta = (a + 1) / len(previous) if a < len(previous) else 2
+            tb = (b + 1) / len(current) if b < len(current) else 2
+            if abs(ta - tb) < 1e-8:
+                f.append((previous[a % len(previous)], previous[(a + 1) % len(previous)],
+                          current[(b + 1) % len(current)], current[b % len(current)]))
+                a += 1
+                b += 1
+            elif ta < tb:
+                f.append((previous[a % len(previous)], previous[(a + 1) % len(previous)],
+                          current[b % len(current)]))
+                a += 1
+            else:
+                f.append((previous[a % len(previous)], current[(b + 1) % len(current)],
+                          current[b % len(current)]))
+                b += 1
+
+    band_start = len(v)
+    axis = Vector((0, 1, .3)).normalized()
+    for k, point in enumerate(neck_contacts):
+        tangent = Vector(neck_contacts[(k + 1) % len(neck_contacts)]) - Vector(neck_contacts[k - 1])
+        outward = tangent.cross(axis).normalized()
+        v.append(tuple(Vector(point) - axis * .015 + outward * .004))
+    neck_start = len(v)
+    v.extend(neck_contacts)
+    contact.extend(range(neck_start, neck_start + len(neck_contacts)))
+    bridge(list(range(4 * n, 5 * n)), list(range(band_start, neck_start)))
+    bridge(list(range(band_start, neck_start)), list(range(neck_start, len(v))))
+    sleeve_start = len(v)
     for side,start in [(1,2),(-1,10)]:
         hole=[3*n+k for k in range(start,start+5)]+[4*n+k for k in range(start+4,start-1,-1)]
         # Articulated test sleeve covers the elbow, ending at a fixed wrist section.
@@ -178,7 +294,7 @@ def designed_outfit():
                 elif ta<tb:f.append((previous[a%na],previous[(a+1)%na],offset+b%nb));a+=1
                 else:f.append((previous[a%na],offset+(b+1)%nb,offset+b%nb));b+=1
             previous=list(range(offset,offset+len(ring)))
-    tunic=finish('Module_tunic_panels',v,f,contact,trim);tunic['sleeveStart']=n*len(specs)
+    tunic=finish('Module_tunic_panels',v,f,contact,trim);tunic['sleeveStart']=sleeve_start;tunic['rimWeightPairs']=[[band_start+k,neck_start+k] for k in range(len(neck_contacts))]
     # Trouser waist forks into two independent, tapered leg loops at a sewn crotch.
     v=[];f=[]
     for k in range(16):
@@ -300,7 +416,7 @@ for name,objects in module_objects.items():
         if contacts:contact.add(contacts,1,'REPLACE')
         frees=[i for i in ids if i not in contacts]
         if frees:free.add(frees,1,'REPLACE')
-        offset=len(vertices);vertices.extend([(v.co.x,v.co.z,-v.co.y) for v in obj.data.vertices]);faces.extend([tuple(offset+i for i in p.vertices) for p in obj.data.polygons]);colors.extend([color]*len(obj.data.vertices));parts.append({'name':obj.name,'start':offset,'count':len(obj.data.vertices),'contactIndices':[offset+i for i in contacts],'contact':part==0,'boundary':[offset+i for i in rim]})
+        offset=len(vertices);vertices.extend([(v.co.x,v.co.z,-v.co.y) for v in obj.data.vertices]);faces.extend([tuple(offset+i for i in p.vertices) for p in obj.data.polygons]);colors.extend([color]*len(obj.data.vertices));parts.append({'name':obj.name,'start':offset,'count':len(obj.data.vertices),'contactIndices':[offset+i for i in contacts],'rimWeightPairs':[[offset+a,offset+b] for a,b in obj.get('rimWeightPairs',[])],'contact':part==0,'boundary':[offset+i for i in rim]})
         # Native vertex groups keep the editable template bound to the imported rig.
         joint_names=data['nativeJointNames']
         groups=[]

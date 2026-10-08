@@ -614,10 +614,10 @@ export const characterAssetMeasurements:Record<string,AssetMeasurement>={
         }
     },
     "/character-lab/modules/meshy-v2/outfit.glb": {
-        "sha256": "8bdc3b76b7c13ff18d836c52fc15635c6e51b4c34161a2f90694ba4f2e3baf40",
-        "triangles": 824,
+        "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+        "triangles": 1045,
         "materials": 1,
-        "bytes": 149560,
+        "bytes": 189340,
         "bounds": {
             "min": [
                 -0.3731599450111389,
@@ -626,7 +626,7 @@ export const characterAssetMeasurements:Record<string,AssetMeasurement>={
             ],
             "max": [
                 0.371593177318573,
-                1.4049999713897705,
+                1.4446271657943726,
                 0.18515461683273315
             ]
         }
