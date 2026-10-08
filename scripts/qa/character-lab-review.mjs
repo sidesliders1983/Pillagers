@@ -10,12 +10,12 @@ const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE??'
 const {goldenCharacterDNA}=loadTypeScript(new URL('../../src/characters/GoldenCharacters.ts',import.meta.url));
 const {defaultDNA,parseCharacterDNA}=loadTypeScript(new URL('../../src/characters/CharacterDNA.ts',import.meta.url));
 const {universalHumanProfile}=loadTypeScript(new URL('../../src/characters/UniversalHumanProfile.ts',import.meta.url));
-const {characterAssets,characterOutfit}=loadTypeScript(new URL('../../src/characters/CharacterAssets.ts',import.meta.url));
+const {characterAssets}=loadTypeScript(new URL('../../src/characters/CharacterAssets.ts',import.meta.url));
 const output=process.env.REVIEW_OUTPUT??'artifacts/appearance-pass/independent-production-ui';mkdirSync(output,{recursive:true});
 const reported={seed:1885184954,sex:'male',age:20,traits:{physicality:.78,agility:.57,intelligence:.12,cunning:.2,temperament:.71},heritage:{scandinavian:.028440025880589824,angloSaxon:.23439964981313144,gaelic:.1594962292471368,finnic:.17366774106331118,sami:.17360313309252673,baltic:.23039322090330414}};
 const cases=[{id:'default-1983',dna:defaultDNA()},{id:'reported-20yo',dna:reported},...['child','mixed','older','overweight'].map(id=>({id:`golden-${id}`,dna:goldenCharacterDNA(`golden_${id}_01`)}))];
-for(const asset of characterAssets.filter(a=>['hair','beard','garment'].includes(a.type))){
- let found=false;for(let seed=0;seed<10000;seed++){const dna=parseCharacterDNA({...defaultDNA(),seed,age:32,morphology:{masculinity:.77,height:1.5}}),style=asset.type==='garment'?characterOutfit(dna.seed).style:universalHumanProfile(dna).appearance[`${asset.type}Style`];if(style===asset.style){cases.push({id:`style-${asset.id.replace('/','-')}`,dna,expectedAssignedModule:asset.id});found=true;break;}}if(!found)throw new Error(`No profile assignment found for ${asset.id}`);
+for(const asset of characterAssets.filter(a=>!a.scope&&['hair','beard'].includes(a.type))){
+ let found=false;for(let seed=0;seed<10000;seed++){const dna=parseCharacterDNA({...defaultDNA(),seed,age:32,morphology:{masculinity:.77,height:1.5}}),style=universalHumanProfile(dna).appearance[`${asset.type}Style`];if(style===asset.style){cases.push({id:`style-${asset.id.replace('/','-')}`,dna,expectedAssignedModule:asset.id});found=true;break;}}if(!found)throw new Error(`No profile assignment found for ${asset.id}`);
 }
 const report={timestamp:new Date().toISOString(),authority:'actual production UI without candidate or metadata overrides',plannedCases:cases,checks:[],errors:[],loadedAssets:[],loadedImplementation:[],visualApproval:'pending independent inspection'},loaded=new Map(),implementation=new Map();
 if(process.argv.includes('--plan')){console.log(JSON.stringify({authority:report.authority,cases,devices:['desktop','mobile'],expectedCaptures:2*(cases.length+2)*3},null,2));process.exit(0);}
@@ -41,7 +41,7 @@ try{
   await page.locator('.lab-json > summary').click();
   for(const entry of cases){
    await page.locator('#lab-json').fill(JSON.stringify(entry.dna));await page.locator('[data-action="import"]').click();await ready();
-   const dna=parseCharacterDNA(entry.dna),phenotype=universalHumanProfile(dna),expectedGarment=`garment/${characterOutfit(dna.seed).style}`;
+   const dna=parseCharacterDNA(entry.dna),phenotype=universalHumanProfile(dna);
    for(const lod of entry.id==='default-1983'?[0,1,2]:[2]){
     await page.locator(`[data-action="lod${lod}"]`).click();await ready();await page.locator('[data-action="reset-view"]').click();
     await page.locator('#lab-preview').scrollIntoViewIfNeeded();
@@ -49,7 +49,7 @@ try{
      await page.locator(`[data-action="${clip}"]`).click();await page.waitForTimeout(350);
      const snapshot=JSON.parse(await page.locator('#lab-fit-metadata').textContent());
      const ids=snapshot.modules.map(module=>module.id);
-     if(!ids.includes(expectedGarment))report.errors.push(`${entry.id}: missing assigned clothing ${expectedGarment}`);
+     if(ids.some(id=>id.startsWith('garment/')))report.errors.push(`${entry.id}: retired clothing was assigned`);
      if(entry.expectedAssignedModule&&!ids.includes(entry.expectedAssignedModule))report.errors.push(`${entry.id}: missing profile-assigned module ${entry.expectedAssignedModule}`);
      if(phenotype.appearance.hairStyle!=='bald'&&!ids.includes(`hair/${phenotype.appearance.hairStyle}`))report.errors.push(`${entry.id}: missing hair ${phenotype.appearance.hairStyle}`);
      if(phenotype.appearance.beardStyle!=='none'&&!ids.includes(`beard/${phenotype.appearance.beardStyle}`))report.errors.push(`${entry.id}: missing beard ${phenotype.appearance.beardStyle}`);

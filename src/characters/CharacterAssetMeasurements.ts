@@ -523,60 +523,6 @@ export const characterAssetMeasurements:Record<string,AssetMeasurement>={
             ]
         }
     },
-    "/clothing/cream-tunic/Clothing_cream-tunic_LOD2.glb": {
-        "sha256": "e70aecffd92a74cb99b40e724f43109534b249d1a8746206682d2a910b95650f",
-        "triangles": 3836,
-        "materials": 1,
-        "bytes": 470944,
-        "bounds": {
-            "min": [
-                -0.3874010145664215,
-                0.00009781800326891243,
-                -0.2794952392578125
-            ],
-            "max": [
-                0.3910473883152008,
-                1.4945683479309082,
-                0.1663047820329666
-            ]
-        }
-    },
-    "/clothing/long-dress/Clothing_long-dress_LOD2.glb": {
-        "sha256": "ba8c08e9f38b3171aa29c4714d2df85d44341ff91294c9acb3875efe1b633112",
-        "triangles": 3841,
-        "materials": 1,
-        "bytes": 467064,
-        "bounds": {
-            "min": [
-                -0.37247344851493835,
-                0.0014374158345162868,
-                -0.3699875771999359
-            ],
-            "max": [
-                0.39075833559036255,
-                1.4884393215179443,
-                0.20623818039894104
-            ]
-        }
-    },
-    "/clothing/mantle-tunic/Clothing_mantle-tunic_LOD2.glb": {
-        "sha256": "bc0ae0f85734248c038e7ae4b1e156ef39dfa0fb705539ac6d4ae3222143f366",
-        "triangles": 3998,
-        "materials": 1,
-        "bytes": 473564,
-        "bounds": {
-            "min": [
-                -0.4359859526157379,
-                0.0013079345226287842,
-                -0.2780964970588684
-            ],
-            "max": [
-                0.41303911805152893,
-                1.5009708404541016,
-                0.2746049165725708
-            ]
-        }
-    },
     "/character-lab/modules/v04/equipment/sword/sword.glb": {
         "sha256": "08b65df552cd58efd9fc44ff45f562d45a9b73baeea6ab291c56ddb799ab8ff5",
         "triangles": 288,

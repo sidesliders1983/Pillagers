@@ -20,6 +20,7 @@ test('final garment output frames match the actual neutral body, rather than onl
         const body=await geometryAsset(`universal-human/UniversalHuman_LOD${bodyLOD}.glb`);
         const human=new UniversalHuman(body,universalHumanProfile(goldenCharacterDNA('golden_neutral_01')),'#ffffff');
         try{
+            for(const name of garmentBindBones)assert.ok(human.fit.canonicalJoints.get(name)?.toArray().every(Number.isFinite),`body LOD${bodyLOD}: missing canonical ${name}`);
             for(const asset of characterAssets.filter(entry=>entry.type==='garment')){
                 for(const [lod,path] of Object.entries(asset.lods)){
                     const provenance=JSON.parse(readFileSync(publicFile(path.replace(/\.glb$/,'.provenance.json')),'utf8').replace(/^\uFEFF/,''));

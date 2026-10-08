@@ -1,5 +1,7 @@
 # Reference clothing — first integration batch
 
+Current status (2026-10-08): the owner retired all three legacy outfits for complete clothing redevelopment. They are archived outside public/ at docs/archive/legacy-clothing and removed from discovery, choices and automatic assignment. The older sections below describe historical implementation, not currently available outfits.
+
 Issue #10 starts with three generated outfits: `cream-tunic`, `long-dress`, and
 `mantle-tunic`. The nine other generated clothing candidates remain unpublished.
 This batch is in Character Lab; the World keeps its existing lightweight body

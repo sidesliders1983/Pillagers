@@ -157,7 +157,7 @@ export function validateAssetRecord(asset,lod,record){
     }
     return triangles;
 }
-export async function validateRegisteredAsset(asset,lod){
+export async function validateRegisteredAsset(asset,lod,{allowLabPreview=false}={}){
     const path=asset.lods[lod];
     try{
         const record=readGLB(path);validateAssetRecord(asset,lod,record);
@@ -172,7 +172,7 @@ export async function validateRegisteredAsset(asset,lod){
             assert.equal(bodyManifest.lods.find(item=>item.file===path.split('/').at(-1))?.sha256,record.sha256,'stale body authoring manifest');
         }else{
             const provenance=JSON.parse(readFileSync(publicFile(path.replace('.glb','.provenance.json')),'utf8').replace(/^\uFEFF/,''));
-            validateModuleProvenance(asset,lod,provenance,record.sha256,{record,authoringReceiptBytes:asset.scope==='lab-v04'?readFileSync(publicFile(provenance.v04Canonicalization?.authoringReceipt)):undefined});
+            validateModuleProvenance(asset,lod,provenance,record.sha256,{allowLabPreview,record,authoringReceiptBytes:asset.scope==='lab-v04'?readFileSync(publicFile(provenance.v04Canonicalization?.authoringReceipt)):undefined});
             if(asset.type==='garment'){
                 if(asset.metadata?.garmentBind){
                     const bindPath=path.slice(0,path.lastIndexOf('/')+1)+'garment-bind.json';
@@ -290,11 +290,11 @@ export async function validateGoldenRuntime({allowLabPreview=false}={}){
     return {characters:goldenCharacters.length,modules:plan.length,moduleCases,motionSamples,bodySources:[...new Set(plan.map(item=>item.body.id))]};
 }
 
-export async function validateCharacters({assetsOnly=false}={}){
+export async function validateCharacters({assetsOnly=false,allowLabPreview=false}={}){
     registry.validateCharacterRegistry();let files=0;
     const manifest={schemaVersion:1,assets:[]};
-    for(const asset of registry.characterAssets){const lods={};for(const [lod,path] of Object.entries(asset.lods)){const {measurement}=await validateRegisteredAsset(asset,lod);lods[lod]={file:path,...measurement};files++;}manifest.assets.push({...asset,lods});}
+    for(const asset of registry.characterAssets){const lods={};for(const [lod,path] of Object.entries(asset.lods)){const {measurement}=await validateRegisteredAsset(asset,lod,{allowLabPreview});lods[lod]={file:path,...measurement};files++;}manifest.assets.push({...asset,lods});}
     const published=JSON.parse(readFileSync(publicFile('/character-assets.manifest.json'),'utf8'));
     assert.deepEqual(published,JSON.parse(JSON.stringify(manifest)),'published character manifest is stale; run assets:registry');
-    const runtime=assetsOnly?null:await validateGoldenRuntime();return {assets:registry.characterAssets.length,files,runtime};
+    const runtime=assetsOnly?null:await validateGoldenRuntime({allowLabPreview});return {assets:registry.characterAssets.length,files,runtime};
 }

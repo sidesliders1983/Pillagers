@@ -1,0 +1,220 @@
+{
+  "observations": [
+    {
+      "reload": 1,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.52500000006209,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 2,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.981481481481485,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 3,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 18.4964285715084,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 4,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 20.933333333426464,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 5,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.078260869597607,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 6,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 22.745454545386814,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 7,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 33.78,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 8,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 90.78571428571428,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 9,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 24.4333333334043,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    },
+    {
+      "reload": 10,
+      "pixelSha256": "7fe03cd629f86345b3063201275bacb31315ae7c7e4b1625cd46902e02b9e92e",
+      "metrics": {
+        "variant": "candidate",
+        "ms": 27.731999999880788,
+        "calls": 26,
+        "triangles": 359202,
+        "geometries": 26,
+        "textures": 34
+      }
+    }
+  ],
+  "toggles": [
+    {
+      "variant": "candidate",
+      "ms": 20.340000000000003,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 19.484615384672697,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 19.28148148153667,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 19.292592592537403,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 22.021739130434778,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 29.288888888847495,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 24.299999999858084,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 27.17368421056553,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 24.242857142928095,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    },
+    {
+      "variant": "candidate",
+      "ms": 28.022222222139433,
+      "calls": 26,
+      "triangles": 359202,
+      "geometries": 28,
+      "textures": 34
+    }
+  ],
+  "reloadPixelsIdentical": true,
+  "reloadCountsStable": true,
+  "toggleCountsStable": true,
+  "zoomChangesPixels": true,
+  "panChangesPixels": true,
+  "resumeChangesPixels": true,
+  "canvasAfterResize": {
+    "x": 0,
+    "y": 150.46875,
+    "width": 900,
+    "height": 500
+  },
+  "errors": [],
+  "note": "Browser observations at public controls/rendered pixels and published renderer metrics; stable counts are not a VRAM leak proof. Full page disposal exercised by ten navigations. Visibility/real iPad testing remains pending."
+}

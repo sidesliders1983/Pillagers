@@ -1,3 +1,4 @@
+import {technicalGarmentMetadata} from './technical-garment-fixture.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {Vector3} from 'three';
@@ -9,8 +10,8 @@ const {goldenCharacterDNA}=load('../src/characters/GoldenCharacters.ts');
 const {garmentBindBones,validateModule}=load('../src/characters/AttachmentContract.ts');
 const {characterAssets}=load('../src/characters/CharacterAssets.ts');
 
-test('measured reference garment joints obey the canonical frame and retain the whole body',()=>{
-    for(const asset of characterAssets.filter(asset=>asset.type==='garment')){
+test('technical measured garment joints obey the canonical frame and retain the whole body',()=>{
+    for(const asset of [{metadata:technicalGarmentMetadata},...characterAssets.filter(asset=>asset.type==='garment')]){
         assert.deepEqual(Object.keys(asset.metadata.garmentBind.joints).sort(),[...garmentBindBones].sort());
         assert.deepEqual(asset.metadata.covers,[]);validateModule(asset.metadata);
         const reversed=structuredClone(asset.metadata);reversed.garmentBind.joints.Neck[1]=0;

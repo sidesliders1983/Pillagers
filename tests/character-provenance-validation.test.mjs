@@ -20,7 +20,7 @@ test('rejects wrong direct parents, stale frames, corrupt hashes, redrawn refere
  assert.throws(()=>validateModuleProvenance(asset,2,{outputSha256:output,reviewRequired:false},output),/missing image-to-3d source history/);
 });
 test('legacy optimization wrappers retain honest unverified links while preserving their original generated source',()=>{
- for(const [id,path]of [['hair/short','public/appearance/short/Hair_short_LOD2.provenance.json'],['beard/stubble','public/appearance/beards/stubble/Beard_stubble_LOD2.provenance.json'],['garment/cream-tunic','public/clothing/cream-tunic/Clothing_cream-tunic_LOD2.provenance.json']]){
+ for(const [id,path]of [['hair/short','public/appearance/short/Hair_short_LOD2.provenance.json'],['beard/stubble','public/appearance/beards/stubble/Beard_stubble_LOD2.provenance.json'],['garment/cream-tunic','docs/archive/legacy-clothing/cream-tunic/Clothing_cream-tunic_LOD2.provenance.json']]){
   const provenance=JSON.parse(readFileSync(new URL(`../${path}`,import.meta.url),'utf8')),result=validateModuleProvenance({id,runtimeLOD:2,tags:['image-to-3d']},2,provenance,provenance.outputSha256);
   assert.equal(result.generationSources.length,1);assert.ok(result.sourceLinks.some(link=>!link.verified));
  }

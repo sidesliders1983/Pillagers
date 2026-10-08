@@ -1,0 +1,78 @@
+{
+  "runtimeBytes": 313316,
+  "embeddedAuditGLBBytes": 928052,
+  "atlasBytes": 48679,
+  "note": "Runtime glTF/BIN + shared atlas + manifest; embedded GLB audit files are not requested by the lab. Counts are compressed file bytes, not GPU memory.",
+  "rows": [
+    {
+      "id": "kaykit-conifer-a",
+      "runtimeBytes": 32476,
+      "auditGLBBytes": 81200
+    },
+    {
+      "id": "kaykit-conifer-b",
+      "runtimeBytes": 17427,
+      "auditGLBBytes": 66152
+    },
+    {
+      "id": "kaykit-conifer-c",
+      "runtimeBytes": 13905,
+      "auditGLBBytes": 62624
+    },
+    {
+      "id": "kaykit-deciduous-a",
+      "runtimeBytes": 20352,
+      "auditGLBBytes": 69068
+    },
+    {
+      "id": "kaykit-rock-small-a",
+      "runtimeBytes": 5775,
+      "auditGLBBytes": 54492
+    },
+    {
+      "id": "kaykit-rock-small-b",
+      "runtimeBytes": 5906,
+      "auditGLBBytes": 54624
+    },
+    {
+      "id": "kaykit-boulder-a",
+      "runtimeBytes": 8036,
+      "auditGLBBytes": 56756
+    },
+    {
+      "id": "kaykit-boulder-b",
+      "runtimeBytes": 7681,
+      "auditGLBBytes": 56400
+    },
+    {
+      "id": "kaykit-rock-cluster-a",
+      "runtimeBytes": 12046,
+      "auditGLBBytes": 60760
+    },
+    {
+      "id": "kaykit-rock-cluster-b",
+      "runtimeBytes": 31370,
+      "auditGLBBytes": 80084
+    },
+    {
+      "id": "kaykit-bush-a",
+      "runtimeBytes": 29317,
+      "auditGLBBytes": 78040
+    },
+    {
+      "id": "kaykit-bush-b",
+      "runtimeBytes": 9664,
+      "auditGLBBytes": 58388
+    },
+    {
+      "id": "kaykit-grass-cluster-a",
+      "runtimeBytes": 26018,
+      "auditGLBBytes": 74732
+    },
+    {
+      "id": "kaykit-grass-cluster-b",
+      "runtimeBytes": 26018,
+      "auditGLBBytes": 74732
+    }
+  ]
+}
