@@ -1,3 +1,5 @@
+import {personaIdentity} from './Identity';
+import {personaAway} from './WorldExpeditions';
 import {characterName, fullName} from '../characters/naming/generateName';
 import {traitKeys, heritageKeys, normalizeHeritage} from '../characters/CharacterDNA';
 import type {CoreTraits, HeritageMix} from '../characters/CharacterDNA';
@@ -6,7 +8,7 @@ import type {SimulationState} from './SimulationCore';
 import {personaAge} from './PersonaAge';
 export function canPartner(state:SimulationState,aId:string,bId:string):boolean {
     const a=state.personas[aId],b=state.personas[bId];
-    if(!a||!b||aId===bId||a.deathWinter!==null||b.deathWinter!==null||a.partnerId!==null||b.partnerId!==null||a.dna.sex===b.dna.sex)return false;
+    if(!a||!b||aId===bId||a.deathWinter!==null||b.deathWinter!==null||a.partnerId!==null||b.partnerId!==null||personaAway(state,aId)||personaAway(state,bId)||a.dna.sex===b.dna.sex)return false;
     const adultAge=state.mechanics?.config.adultAge??18;
     if(personaAge(state,aId)<adultAge||personaAge(state,bId)<adultAge)return false;
     return !prohibitedKinship(state,aId,bId);
@@ -14,8 +16,8 @@ export function canPartner(state:SimulationState,aId:string,bId:string):boolean 
 export function prohibitedKinship(state:SimulationState,aId:string,bId:string):boolean {
     const a=state.personas[aId],b=state.personas[bId];
     if(aId===bId)return true;
-    const siblings=(x:string,y:string)=>state.personas[x].parentIds.some(parent=>state.personas[y].parentIds.includes(parent));
-    const parentsAndGrandparents=(id:string)=>state.personas[id].parentIds.flatMap(parent=>[parent,...state.personas[parent].parentIds]);
+    const siblings=(x:string,y:string)=>personaIdentity(state,x)!.parentIds.some(parent=>personaIdentity(state,y)!.parentIds.includes(parent));
+    const parentsAndGrandparents=(id:string)=>personaIdentity(state,id)!.parentIds.flatMap(parent=>[parent,...personaIdentity(state,parent)!.parentIds]);
     if(parentsAndGrandparents(aId).includes(bId)||parentsAndGrandparents(bId).includes(aId)||siblings(aId,bId))return true;
     if(a.parentIds.some(parent=>siblings(parent,bId))||b.parentIds.some(parent=>siblings(parent,aId)))return true;
     return false;
@@ -46,12 +48,12 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
     for(const motherId of Object.keys(state.personas).sort()){
         const mother=state.personas[motherId],info=state.mechanics!.people[motherId];
         const age=personaAge(state,motherId);
-        if(unavailable.has(motherId)||isCaregiver(state,motherId)||mother.deathWinter!==null||mother.dna.sex!=='female'||age<config.fertilityMinAge||age>config.fertilityMaxAge||mother.partnerId===null)continue;
-        const father=state.personas[mother.partnerId];if(father.deathWinter!==null||father.dna.sex!=='male')continue;
+        if(personaAway(state,motherId)||unavailable.has(motherId)||isCaregiver(state,motherId)||mother.deathWinter!==null||mother.dna.sex!=='female'||age<config.fertilityMinAge||age>config.fertilityMaxAge||mother.partnerId===null)continue;
+        const father=state.personas[mother.partnerId];if(personaAway(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male')continue;
         if(info.lastBirthWinter!==null&&state.time.winter-info.lastBirthWinter<=config.birthCooldownWinters)continue;
         if(state.stocks.food<foodNeed()||!roll(config.fertilityChanceBps))continue;
         const home=Object.values(state.households).find(h=>h.memberIds.includes(motherId));if(!home)continue;
-        let n=1;while(Object.hasOwn(state.personas,`persona-${n}`))n++;const id=`persona-${n}`;
+        let n=1;while(Object.hasOwn(state.personas,`${state.entityPrefix??''}persona-${n}`)||Object.hasOwn(state.personaArchive??{},`${state.entityPrefix??''}persona-${n}`))n++;const id=`${state.entityPrefix??''}persona-${n}`;
         const dna=generateCharacterDNA(random());dna.age=0;dna.sex=roll(5000)?'female':'male';
         dna.traits=Object.fromEntries(traitKeys.map(key=>[key,(mother.dna.traits[key]+father.dna.traits[key])/2])) as CoreTraits;
         dna.heritage=normalizeHeritage(Object.fromEntries(heritageKeys.map(key=>[key,(mother.dna.heritage[key]+father.dna.heritage[key])/2])) as HeritageMix);
@@ -78,7 +80,7 @@ export function isProvidingCare(state:SimulationState,id:string):boolean {
 }
 export function caregiverEligible(state:SimulationState,id:string):boolean {
     const person=state.personas[id];
-    return !!person&&person.deathWinter===null&&person.dna.sex==='female'&&personaAge(state,id)>=state.mechanics!.config.adultAge&&person.occupation===null&&!isProvidingCare(state,id);
+    return !!person&&!personaAway(state,id)&&person.deathWinter===null&&person.dna.sex==='female'&&personaAge(state,id)>=state.mechanics!.config.adultAge&&person.occupation===null&&!isProvidingCare(state,id);
 }
 export function assignCaregiver(state:SimulationState,motherId:string,caregiverId:string|null,locked:boolean,emit:EventWriter):void {
     const mother=state.personas[motherId],info=state.mechanics!.people[motherId];

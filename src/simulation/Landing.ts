@@ -12,7 +12,7 @@ import {seededRandom} from '../characters/seededRandom';
 export type LandingConfig = {initialFood:number;initialMaterials:number;longshipSalvage:number;cattleAdultAge:number;cattleYoungAdultAge:number;adultCattleFood:number;calfFood:number;cowFoodPerWinter:number;exposedProductivityBps:number;farmyardCapacity:number;slaughterFood:number;foundingCoupleChanceBps:number;foundingCoupleCap:number;cattleBirthChanceBps:number;cattleFertileMinAge:number;cattleFertileMaxAge:number;cattleBirthInterval:number;cattleMortalityYoungBps:number;cattleMortalityAdultBps:number;cattleMortalityOlderBps:number;cattleMortalityOldBps:number;cattleCrowdingBps:number;cattleWeatherMortalityBps:number;};
 export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials:5,longshipSalvage:20,cattleAdultAge:2,cattleYoungAdultAge:1,adultCattleFood:1,calfFood:0,cowFoodPerWinter:4,exposedProductivityBps:5000,farmyardCapacity:4,slaughterFood:15,foundingCoupleChanceBps:5000,foundingCoupleCap:3,cattleBirthChanceBps:5000,cattleFertileMinAge:2,cattleFertileMaxAge:12,cattleBirthInterval:2,cattleMortalityYoungBps:200,cattleMortalityAdultBps:50,cattleMortalityOlderBps:500,cattleMortalityOldBps:1500,cattleCrowdingBps:200,cattleWeatherMortalityBps:0};
 export type Cattle = {id:string;sex:'female'|'male';birthWinter:number;deathWinter:number|null;parentIds:string[];origin:'founding'|'reproduction';lastCalvingWinter:number|null;farmyardId:string|null;foodProgress:number};
-export type LandingState = {version:3;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>};
+export type LandingState = {version:3;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>;cattleArchive?:Record<string,Cattle>};
 
 export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}):SimulationState {
     if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw new Error('Seed must be uint32');
@@ -77,6 +77,7 @@ export function applyLandingCommand(state:SimulationState,command:LandingCommand
     const ship=landing.longships[command.longshipId];
     if(!ship||ship.salvagedWinter!==null)throw new Error('Longship unavailable');
     if(command.type==='KeepLongship'){emit(state,'FoundingLongshipKept',{longshipId:ship.id});return;}
+    if(Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.shipId===ship.id))throw new Error('Longship is away on an expedition');
     ship.salvagedWinter=state.time.winter;state.stocks.materials+=landing.config.longshipSalvage;
     emit(state,'FoundingLongshipSalvaged',{longshipId:ship.id,materials:landing.config.longshipSalvage});
 }
@@ -96,7 +97,7 @@ export function validateLanding(state:SimulationState):void {
     if(landing.config.cattleFertileMinAge<landing.config.cattleAdultAge||landing.config.cattleFertileMaxAge<landing.config.cattleFertileMinAge||landing.config.cattleBirthInterval<1)fail('Invalid cattle fertility configuration');
     if(landing.config.farmyardCapacity===0||landing.config.cattleYoungAdultAge===0||landing.config.cattleYoungAdultAge>landing.config.cattleAdultAge||landing.config.calfFood>landing.config.adultCattleFood)fail('Invalid cattle configuration');
     if(!landing.region?.id||![null,state.clan.id].includes(landing.region.settledByClanId))fail('Invalid landing region');
-    if(!Array.isArray(landing.founderIds)||landing.founderIds.length!==10||new Set(landing.founderIds).size!==10||landing.founderIds.some(id=>!Object.hasOwn(state.personas,id)))fail('Invalid founders');
+    if(!Array.isArray(landing.founderIds)||landing.founderIds.length!==10||new Set(landing.founderIds).size!==10||landing.founderIds.some(id=>!Object.hasOwn(state.personas,id)&&!Object.hasOwn(state.personaArchive??{},id)))fail('Invalid founders');
     if(!landing.longships||!landing.cattle)fail('Missing founding assets');
     for(const [id,ship] of Object.entries(landing.longships)){
         if(ship.id!==id)fail('Invalid longship identity');uint(ship.acquiredWinter,state.time.winter);
@@ -109,8 +110,8 @@ export function validateLanding(state:SimulationState):void {
         if(cattle.deathWinter!==null){uint(cattle.deathWinter,state.time.winter);if(cattle.deathWinter<cattle.birthWinter||cattle.farmyardId!==null)fail('Invalid cattle death');}
         if(cattle.farmyardId!==null&&!farmyards(state).some(f=>f.id===cattle.farmyardId))fail('Invalid cattle shelter');
         if(new Set(cattle.parentIds).size!==cattle.parentIds.length||(cattle.origin==='founding'?cattle.parentIds.length!==0:cattle.parentIds.length!==2))fail('Invalid cattle genealogy');
-        if(cattle.origin==='reproduction'&&(landing.cattle[cattle.parentIds[0]]?.sex!=='female'||landing.cattle[cattle.parentIds[1]]?.sex!=='male'))fail('Invalid cattle genealogy');
-        for(const parent of cattle.parentIds)if(!Object.hasOwn(landing.cattle,parent)||landing.cattle[parent].birthWinter>=cattle.birthWinter)fail('Invalid cattle genealogy');
+        if(cattle.origin==='reproduction'&&((landing.cattle[cattle.parentIds[0]]??landing.cattleArchive?.[cattle.parentIds[0]])?.sex!=='female'||(landing.cattle[cattle.parentIds[1]]??landing.cattleArchive?.[cattle.parentIds[1]])?.sex!=='male'))fail('Invalid cattle genealogy');
+        for(const parent of cattle.parentIds)if(!(landing.cattle[parent]??landing.cattleArchive?.[parent])||(landing.cattle[parent]??landing.cattleArchive?.[parent])!.birthWinter>=cattle.birthWinter)fail('Invalid cattle genealogy');
     }
     for(const residence of Object.values(state.residences))if(residence.buildingId!==null&&state.buildings[residence.buildingId]?.kind!=='house')fail('Residence needs a house');
 }

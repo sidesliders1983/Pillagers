@@ -40,3 +40,7 @@ Longship follow-up: the unsalvaged founding ship is a selectable board entity, r
 Desktop scroll follow-up: above 1100px, /play uses one viewport with fixed HUD/footer rows and a flexible board row. Winter watch and context panels scroll independently and contain scroll chaining. Campaign settings open above the footer rather than increasing page height. Mobile retains normal page scrolling. scripts/qa/check-play-scroll-browser.mjs verifies a long expanded Chronicle, page height, board wheel zoom without page movement, sidebar scrolling, open settings and mobile overflow. This check and the 12 existing browser checks pass.
 
 House salvage: both gameplay screens expose SalvageBuilding for houses. It refunds floor(investedMaterials / 2), including paid upgrades and excluding free Farmyard conversion. Occupants move to their household tent, assigned livestock becomes unassigned, and the building/residence are removed with a factual BuildingSalvaged Chronicle event. Repeated salvage is rejected. /play keeps ship actions only in the ship context panel, removing duplicate footer controls. Validation: 118 tests, TypeScript and production build pass; all 13 player browser checks and the scroll regression pass.
+
+## v0.4 follow-up
+
+World Expeditions adds bottom-left World group management, four persistent destination arrows and a knowledge-based mission context. Utility actions now live in top-right Settings instead of the wide bottom bar. See [World Expeditions v0.4](WORLD-EXPEDITIONS-V04.md).

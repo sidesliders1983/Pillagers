@@ -1,4 +1,4 @@
-import {personaAge,inspectCattle,inspectWeather,inspectWeatherExposure,landingSummary} from '../simulation/SimulationCore';
+import {personaAway,personaAge,inspectCattle,inspectWeather,inspectWeatherExposure,landingSummary} from '../simulation/SimulationCore';
 import type {SimulationState} from '../simulation/SimulationCore';
 export type EntityKind='persona'|'household'|'building'|'cattle'|'longship';
 export type BoardEntity={kind:EntityKind;id:string;label:string;sprite:string;x:number;y:number;depth:number;farmyard:boolean;};
@@ -19,7 +19,7 @@ export function projectSettlement(state:SimulationState){
  for(const home of homes){
   const slot=slots.get(home.id)!,residence=home.residenceId?state.residences[home.residenceId]:null;
   if(home.memberIds.length&&residence?.kind!=='house')add('household',home.id,`Household ${home.id}`,'tent',slot.x,slot.z);
-  home.memberIds.forEach((id,i)=>{const p=state.personas[id];if(p.deathWinter!==null)return;const age=personaAge(state,id);add('persona',id,p.name,age<16?'child':p.dna.sex==='female'?'female':'male',slot.x-3+(i%4)*3,slot.z+5+Math.floor(i/4)*3);});
+  home.memberIds.forEach((id,i)=>{const p=state.personas[id];if(p.deathWinter!==null||personaAway(state,id))return;const age=personaAge(state,id);add('persona',id,p.name,age<16?'child':p.dna.sex==='female'?'female':'male',slot.x-3+(i%4)*3,slot.z+5+Math.floor(i/4)*3);});
  }
  const counts=new Map<string,number>();
  for(const c of Object.values(state.landing?.cattle??{}).filter(c=>c.deathWinter===null).sort((a,b)=>a.id.localeCompare(b.id))){

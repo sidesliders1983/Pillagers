@@ -58,3 +58,24 @@ _Avoid_: Family
 **Overcrowding**: The number of living cattle above a Farmyard's shelter capacity. Capacity is a soft cap: excess cattle remain allowed, with increased mortality risk when livestock mortality is introduced.
 
 **Clan Chronicle**: A readable account of the clan’s recorded history, grouped by Winter. It describes established facts without adding motives, emotions or unrecorded causes.
+
+## World expeditions
+
+**Region**: A persistent neighbouring area whose terrain, connections and possible settlement exist before the clan discovers it.
+
+**Region knowledge**: A clan's dated observations of a Region, progressing from Unknown to Scouted to Surveyed. Observations can become stale.
+
+**Expedition group**: A reusable group of named residents who travel together for Recon, Surveillance or Pillage.
+_Avoid_: Recon unit, disposable raid party
+
+**Expedition**: A group's time-bound mission to a Region, with provisions, risk and a recorded return or loss.
+
+**Recon**: A mission that discovers terrain and possible opportunities in a neighbouring Region.
+
+**Surveillance**: An optional mission that refines or refreshes a clan's observations of a known Region.
+
+**Pillage**: A mission that recovers actual assets or people from a known opportunity, at risk to its participants.
+
+**Carrying slot**: One returning member's capacity for one category of recovered cargo.
+
+**Historical identity**: A retained record of a person or animal formerly present in a clan, preserving the meaning of kinship and history after transfer.

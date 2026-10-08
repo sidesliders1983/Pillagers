@@ -1,0 +1,19 @@
+{
+  "checks": [
+    "four destination arrows and World menu",
+    "named reusable group created through real commands",
+    "unknown destinations cannot be pillaged",
+    "Recon spends carried Food and reserves real residents",
+    "mission progress and mid-expedition save/load return deterministically",
+    "Recon permits Pillage without Surveillance; real loot and return replay match core",
+    "optional Surveillance refreshes saved knowledge",
+    "factual reports show participants, timing, provisions, loot and casualties",
+    "membership editing reuses stable group ID and historical reports keep original group name",
+    "salvaged longship blocks coastal mission",
+    "iPad viewport retains four touch-size arrows, World controls and region panel without horizontal overflow",
+    "top-right Settings preserve save/load, import/export and campaign restart",
+    "Gameplay Lab loads and advances the shared world save"
+  ],
+  "errors": [],
+  "fixture": "Public core: seed 32, weather off, no natural or mission casualties, success 100%; production rules otherwise unchanged."
+}

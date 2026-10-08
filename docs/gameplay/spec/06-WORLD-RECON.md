@@ -31,3 +31,7 @@ Player does not automatically know exact remote clan state.
 > **As a player, I want reconnaissance to provide imperfect information, so that raids involve judgment and risk rather than omniscient optimization.**
 
 Recon may reveal estimates such as population, defenses, resource abundance, livestock and observed specialists. Information can become stale. This is player knowledge/fog-of-war state, not a Knowledge resource.
+
+## Implemented v0.4 slice
+
+[World Expeditions v0.4](../../WORLD-EXPEDITIONS-V04.md) records the implemented region graph, reusable groups, optional Surveillance, mission provisions/risk and one-category carrying capacity. Named residents and actual target assets move through Simulation Core commands; the player UI is /play and Gameplay Lab retains shared-save debugging.
