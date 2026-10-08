@@ -1,0 +1,2 @@
+# Preserve exact upstream bytes on every platform; source-lock.json contains raw SHA-256 hashes.
+* -text

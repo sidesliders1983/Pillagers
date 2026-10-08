@@ -25,3 +25,7 @@ Evidence justifying the comparison: simple layered crowns, bare thin trunks and 
 Tidewater remains a separately credited visual reference with a different WebGPU/WGSL engine. No engine migration, ocean replacement or copied performance claim is proposed by this QA pass.
 
 The reviewed [EZ-Tree texture notice](https://github.com/dgreenheck/ez-tree/blob/dcf309bd86bd521083d9c70f01f2de45fdc7c457/src/app/public/textures/LICENSE.md) separately attributes bark maps to ambientCG CC0 and bundled leaves to the project license. That notice improves provenance availability; an actual chosen export still needs its own file/texture lock and hashes. The README says GLB export of a generated LOD tree includes every level: the integration must preserve an explicit runtime LOD policy rather than rendering all exported levels together.
+
+## Follow-up evidence — pine comparison, 2026-10-08
+
+The separately authorized first experiment is now recorded in [the pine comparison report](../pine-crown-comparison/report.md) and [matched review viewer](../pine-crown-comparison/review.html). It uses the unchanged Small/Medium/Large source presets and seeds from the pinned EZ-Tree revision, static native materials and real locked texture bytes. Neutral and source-material views separate shape from palette. This does not revise the historical Pass 4 capture record or activate a production replacement. HDR remains a separate unperformed next step.

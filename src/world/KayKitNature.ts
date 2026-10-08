@@ -1,14 +1,14 @@
-import {Group,InstancedMesh,Matrix4,Mesh,Object3D} from 'three';
+import {Box3,Group,InstancedMesh,Matrix4,Mesh,Object3D,Vector3} from 'three';
 import {AssetManager} from '../core/AssetManager';
 import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
 import {seededRandom} from '../config/worldConfig';
 import {shoreAt,surfaceHeightAt} from './Terrain';
 import {buildings,buildingDistance,pathWeight} from './SettlementLayout';
 /** Static authored primitives, instanced with each source node's world transform intact. */
-export function createNature(assets:AssetManager,seed=1983){
+export function createNature(assets:AssetManager,seed=1983,resolveModel:(id:NatureAssetKey)=>Object3D=id=>assets.get(id)){
  const group=new Group();group.name='KayKit Forest Nature Pack 1.0 FREE';
  const random=seededRandom(seed),dummy=new Object3D(),matrix=new Matrix4();
- const centers=[[-32,24],[32,35],[-12,49],[18,52]];
+ const centers=[[-32,24],[32,35],[-12,49],[18,52]],heights:number[]=[];
  for(const id of natureAssetIds){
   const tree=id.includes('conifer'),deciduous=id.includes('deciduous'),rock=id.includes('rock')||id.includes('boulder'),grass=id.includes('grass'),cluster=id.includes('rock-cluster');
   const requested=tree?24:deciduous?8:grass?80:cluster?6:rock?16:36,transforms:Matrix4[]=[];
@@ -29,12 +29,13 @@ export function createNature(assets:AssetManager,seed=1983){
    // Failed placement is skipped; never leak the last rejected point into a route/footprint.
    if(!placed)continue;
   }
-  const model=assets.get(id as NatureAssetKey);model.updateMatrixWorld(true);
+  const model=resolveModel(id);model.updateMatrixWorld(true);
+  if(tree){const height=new Box3().setFromObject(model).getSize(new Vector3()).y;for(const transform of transforms)heights.push(height*Math.abs(transform.elements[5]));}
   model.traverse(child=>{if(!(child instanceof Mesh))return;
    const instances=new InstancedMesh(child.geometry,child.material,transforms.length);instances.name=id;
    transforms.forEach((transform,i)=>instances.setMatrixAt(i,matrix.multiplyMatrices(transform,child.matrixWorld)));
    instances.castShadow=tree||deciduous||rock;instances.receiveShadow=true;instances.computeBoundingSphere();group.add(instances);
   });
  }
- group.userData.seed=seed;return group;
+ group.userData.seed=seed;group.userData.coniferHeights=heights;return group;
 }

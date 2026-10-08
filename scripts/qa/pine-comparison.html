@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Pine crown comparison · Pillagers</title>
+<style>body{margin:0;background:#e7ebdf;color:#173940;font:16px system-ui}main{max-width:1536px;margin:24px auto;padding:0 16px}h1{font-size:24px}label{display:inline-block;margin:0 16px 12px 0}select,button{font:inherit;padding:8px}canvas{display:block;width:100%;aspect-ratio:2/1}pre{white-space:pre-wrap;font-size:13px}a{color:inherit}.titles{display:grid;grid-template-columns:1fr 1fr;text-align:center}p{line-height:1.5}</style></head>
+<body><main><a href="/environment-lab">Environment Lab</a> · <a href="/docs/qa/pine-crown-comparison/review.html">Recorded comparison</a>
+<h1>Pine crown comparison · existing source presets</h1>
+<p>Left: current KayKit runtime treatment. Right: static EZ-Tree preset. Identical tree height, house, resident, camera and lighting on both sides. No production substitution.</p>
+<label>Preset <select id="pine-size"><option value="small">Small · KayKit C / EZ-Tree Small</option><option value="medium">Medium · KayKit B / EZ-Tree Medium</option><option value="large">Large · KayKit A / EZ-Tree Large</option></select></label>
+<label>Distance <select id="pine-distance"><option value="near">Near</option><option value="far">Far</option></select></label>
+<label>Material <select id="pine-material"><option value="source">Current / source materials</option><option value="neutral">Identical neutral crown study</option></select></label>
+<div class="titles"><strong>KayKit FREE conifer · current runtime</strong><strong>EZ-Tree · existing pine preset</strong></div>
+<canvas id="pine-canvas" aria-label="Matched pine crown comparison"></canvas><pre id="pine-status" role="status">Loading pinned assets…</pre>
+<p>The neutral study removes texture and tint from both trees, retaining the EZ-Tree leaf alpha mask. Tree placement scale is 0.8 on the KayKit side; EZ-Tree is normalized to that same height. Houses retain their current authored dimensions; the same Meshy resident is 1.8 m tall. Source seed and geometry are unchanged. Static native leaf materials omit upstream wind and custom rounded normals. Lighting is the current Day preset; HDR is a separate future experiment.</p>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
+import {lightingConfig} from '/src/config/lightingConfig.ts';
+const loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder),canvas=document.querySelector('canvas'),status=document.querySelector('#pine-status');
+try{
+ const manifest=await(await fetch('/nature/ez-tree-pilot/manifest.json')).json();
+ const models={};for(const [size,key] of [['small','c'],['medium','b'],['large','a']]){
+  const [kay,ez]=await Promise.all([loader.loadAsync('/nature/kaykit-v1/kaykit-conifer-'+key+'.gltf'),loader.loadAsync('/nature/ez-tree-pilot/pine-'+size+'.gltf')]);
+  models[size]=[kay.scene,ez.scene];kay.scene.traverse(m=>{if(m.isMesh)m.material.color.setHex(0xb7c9b8);});
+ }
+ const [house,person]=await Promise.all([loader.loadAsync('/game-assets/houses/house-hut.glb'),loader.loadAsync('/game-assets/human/Human_LOD2.glb')]);
+ const renderer=new T.WebGLRenderer({canvas,antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(1);renderer.setScissorTest(true);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=lightingConfig.day.exposure;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFShadowMap;
+ const cameras=[0,1].map(()=>new T.PerspectiveCamera(45,1,.1,300)),groups=[],scenes=[];
+ const ground=(model,height)=>{model.updateMatrixWorld(true);const box=new T.Box3().setFromObject(model),center=box.getCenter(new T.Vector3()),scale=height/box.getSize(new T.Vector3()).y;model.scale.multiplyScalar(scale);model.position.set(-center.x*scale,-box.min.y*scale,-center.z*scale);const root=new T.Group();root.add(model);return root;};
+ const shadow=root=>root.traverse(m=>{if(m.isMesh){m.castShadow=true;m.receiveShadow=true;}});
+ for(let side=0;side<2;side++){
+  const scene=new T.Scene();scene.background=new T.Color(lightingConfig.day.sky);scene.add(new T.HemisphereLight(lightingConfig.day.ambientSky,lightingConfig.day.ambientGround,lightingConfig.day.ambient));
+  const sun=new T.DirectionalLight(lightingConfig.day.sun,lightingConfig.day.sunIntensity);sun.position.fromArray(lightingConfig.day.sunPosition);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-25,right:25,top:25,bottom:-25,near:1,far:110});sun.shadow.normalBias=lightingConfig.day.shadowNormalBias;scene.add(sun);
+  const floor=new T.Mesh(new T.PlaneGeometry(50,50),new T.MeshStandardMaterial({color:0xa6a38e,roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.025;floor.receiveShadow=true;scene.add(floor);
+  const h=house.scene.clone(true);h.updateMatrixWorld(true);const hb=new T.Box3().setFromObject(h);const hr=ground(h,hb.getSize(new T.Vector3()).y);hr.position.set(5,0,-1);shadow(hr);scene.add(hr);
+  const pr=ground(person.scene.clone(true),1.8);pr.position.set(1,0,4);shadow(pr);scene.add(pr);const g=new T.Group();scene.add(g);groups.push(g);scenes.push(scene);
+ }
+ let revision=0;const scales={};let materialCopies=[];const neutralMaps=new Map();
+ const neutralLeafMap=original=>{if(neutralMaps.has(original))return neutralMaps.get(original);const image=original.image,mask=document.createElement('canvas');mask.width=image.width;mask.height=image.height;const ctx=mask.getContext('2d');ctx.drawImage(image,0,0);const pixels=ctx.getImageData(0,0,mask.width,mask.height);for(let i=0;i<pixels.data.length;i+=4)pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=255;ctx.putImageData(pixels,0,0);const texture=new T.CanvasTexture(mask);texture.flipY=original.flipY;texture.colorSpace=T.SRGBColorSpace;neutralMaps.set(original,texture);return texture;};
+ const render=()=>{
+  const rect=canvas.getBoundingClientRect();renderer.setSize(Math.round(rect.width),Math.round(rect.width/2),false);const half=Math.floor(canvas.width/2),metrics=[];
+  const size=document.querySelector('#pine-size').value,neutral=document.querySelector('#pine-material').value==='neutral';
+  for(const m of materialCopies)m.dispose();materialCopies=[];
+  const kay=models[size][0];kay.updateMatrixWorld(true);const height=new T.Box3().setFromObject(kay).getSize(new T.Vector3()).y*.8;
+  for(let side=0;side<2;side++){
+   groups[side].clear();const source=models[size][side],model=source.clone(true);source.updateMatrixWorld(true);const rawHeight=new T.Box3().setFromObject(source).getSize(new T.Vector3()).y;
+   if(neutral)model.traverse(m=>{if(m.isMesh){const old=m.material;const n=new T.MeshStandardMaterial({color:0x7a8872,roughness:1,side:old.side,alphaTest:old.alphaTest,map:old.name==='leaves'?neutralLeafMap(old.map):null});materialCopies.push(n);m.material=n;}});
+   const tree=ground(model,height);tree.position.x=-4;shadow(tree);groups[side].add(tree);scales[side]={rawHeight,targetHeight:height,scale:height/rawHeight};
+   const camera=cameras[side];camera.position.fromArray(document.querySelector('#pine-distance').value==='near'?[12,9,16]:[37,23,46]);camera.lookAt(0,height*.45,0);camera.aspect=half/canvas.height;camera.updateProjectionMatrix();renderer.setViewport(side*half,0,half,canvas.height);renderer.setScissor(side*half,0,half,canvas.height);renderer.render(scenes[side],camera);
+   metrics.push({calls:renderer.info.render.calls,triangles:renderer.info.render.triangles});
+  }
+  const data={size,distance:document.querySelector('#pine-distance').value,material:neutral?'neutral':'source',height,scales,camera:{position:cameras[0].position.toArray(),target:[0,height*.45,0],fov:45,aspect:cameras[0].aspect},lighting:'current Day',exposure:renderer.toneMappingExposure,sourceSeed:manifest.assets.find(a=>a.size===size).presetSeed,metrics,resources:{geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures},pixelRatio:1};
+  status.textContent=JSON.stringify(data,null,2);canvas.dataset.fixture=JSON.stringify(data);canvas.dataset.revision=String(++revision);canvas.dataset.ready='true';
+ };
+ for(const id of ['pine-size','pine-distance','pine-material'])document.querySelector('#'+id).addEventListener('change',render);
+ const observer=new ResizeObserver(render);observer.observe(canvas);render();
+ window.addEventListener('pagehide',()=>{observer.disconnect();const resources=new Set();for(const s of scenes)s.traverse(m=>{if(m.isMesh){resources.add(m.geometry);for(const material of Array.isArray(m.material)?m.material:[m.material]){resources.add(material);for(const x of Object.values(material))if(x?.isTexture)resources.add(x);}}});for(const list of Object.values(models))for(const model of list)model.traverse(m=>{if(m.isMesh){resources.add(m.geometry);resources.add(m.material);for(const x of Object.values(m.material))if(x?.isTexture)resources.add(x);}});for(const r of neutralMaps.values())resources.add(r);for(const r of resources)r.dispose();renderer.dispose();},{once:true});
+}catch(error){status.textContent='Comparison failed: '+error.message;throw error;}
+</script></main></body></html>
