@@ -1,0 +1,911 @@
+{
+  "version": 1,
+  "baseRevision": "9fbf85074053160611a15077030c9b98bb25cc23",
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "seeds": {
+    "start": 0,
+    "count": 100
+  },
+  "winters": 25,
+  "models": {
+    "control": {
+      "description": "Canonical 15% floor + 85% weighted closeness",
+      "maximumBps": 10000
+    },
+    "expanded": {
+      "description": "Common 2.5x expansion around 75%, bounded to 15–125%",
+      "centerBps": 7500,
+      "gain": 2.5,
+      "minimumBps": 1500,
+      "maximumBps": 12500
+    },
+    "quadratic": {
+      "description": "Squared per-trait closeness, gain 1.7; centered at canonical expected role mean",
+      "gain": 1.7,
+      "minimumBps": 1500,
+      "maximumBps": 12500
+    },
+    "contrast": {
+      "description": "Squared normalized weights; preferences stretched 2x around 0.5; centered at canonical expected role mean",
+      "preferenceGain": 2,
+      "minimumBps": 1500,
+      "maximumBps": 12500
+    }
+  },
+  "policies": [
+    "default (control only)",
+    "random",
+    "aware"
+  ],
+  "verificationSeeds": [
+    0,
+    7,
+    32,
+    99
+  ],
+  "productionRulesChanged": false,
+  "engineIdentity": {
+    "kind": "aptitude-experiment",
+    "version": 1,
+    "model": "control",
+    "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+    "mappingHash": "f7fe3f4807242100b996223e1f7a75339f8214b279f2bb813f3c3e841fa26b98"
+  },
+  "harnessHashes": {
+    "run-aptitude-calibration.mjs": "f1dedbaff4f55d3d7919976be89bf61534961fba959028c31a6c33fed6d00fd2",
+    "aptitude-study.mjs": "24899ed7caa53388a4d4e70656e43e6ae802500c1dac70d0de7c4ff3c5d85fa0",
+    "aptitude-worker.mjs": "bc18b56342e64024d7b79bceb6e6cbf7f8da69159887e17101da2e2ae8bee3b6",
+    "aptitude-sampling.mjs": "43f1b98650b337ea82ddaf7ad67da3199b7aaf4c7d65662d47643e1f63162598",
+    "aptitude-economy.mjs": "160a7728f7db297b763fc1b7c405e66cf431dce21f75538a53ba45d0086b8265",
+    "aptitude-models.mjs": "f7fe3f4807242100b996223e1f7a75339f8214b279f2bb813f3c3e841fa26b98",
+    "aptitude-engine.mjs": "2d1137252d999b5b14708018c4083c0443af1ea810cd10a89bceca310910130a",
+    "aptitude-statistics.mjs": "07148917d0cea73f02a8abd99d39723713a6bfa3531a58c6ae438c3cde07f985"
+  },
+  "ruleConfiguration": {
+    "mechanics": {
+      "mortalityBands": [
+        {
+          "minAge": 0,
+          "chanceBps": 10
+        },
+        {
+          "minAge": 16,
+          "chanceBps": 5
+        },
+        {
+          "minAge": 50,
+          "chanceBps": 50
+        },
+        {
+          "minAge": 60,
+          "chanceBps": 200
+        },
+        {
+          "minAge": 70,
+          "chanceBps": 500
+        },
+        {
+          "minAge": 80,
+          "chanceBps": 1000
+        },
+        {
+          "minAge": 90,
+          "chanceBps": 2000
+        }
+      ],
+      "foodAdultAge": 16,
+      "ageFullProductivityThrough": 49,
+      "agePenaltyBpsPerWinter": 200,
+      "ageProductivityFloorBps": 5000,
+      "collapseDebtWinters": 3,
+      "salvageBps": 5000,
+      "dominantLegacyChanceBps": 2500,
+      "fertilityMinAge": 18,
+      "fertilityMaxAge": 40,
+      "birthCooldownWinters": 2,
+      "childcareWinters": 5,
+      "careerMinimumGainBps": 1000,
+      "experienceRetentionBpsPerWinter": 100,
+      "apprenticeshipBonusBps": 1000,
+      "apprenticeshipTicks": 1000,
+      "switchProductivityBps": 7500,
+      "switchTicks": 1000,
+      "houseCost": 10,
+      "baseUpkeep": 1,
+      "upgradeCosts": [
+        5,
+        10,
+        20
+      ],
+      "upgradeBonusBps": [
+        0,
+        2500,
+        5000,
+        7500
+      ],
+      "tentProductivityBps": 5000,
+      "workAge": 16,
+      "adultAge": 18,
+      "childFood": 1,
+      "adultFood": 2,
+      "workPerUnit": 10000000,
+      "fertilityChanceBps": 2500,
+      "partnershipChanceBps": 1000,
+      "careerReviewWinters": 5,
+      "occupations": {
+        "farmer": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.3,
+            0.2,
+            0.2,
+            0.05,
+            0.25
+          ],
+          "preferences": [
+            0.7,
+            0.6,
+            0.6,
+            0.35,
+            0.25
+          ]
+        },
+        "herder": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.2,
+            0.2,
+            0.2,
+            0.1,
+            0.3
+          ],
+          "preferences": [
+            0.6,
+            0.6,
+            0.6,
+            0.4,
+            0.3
+          ]
+        },
+        "fisher": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.25,
+            0.35,
+            0.15,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.7,
+            0.8,
+            0.6,
+            0.4,
+            0.3
+          ]
+        },
+        "hunter": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.2,
+            0.35,
+            0.15,
+            0.25,
+            0.05
+          ],
+          "preferences": [
+            0.7,
+            0.85,
+            0.6,
+            0.7,
+            0.35
+          ]
+        },
+        "textileWorker": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.1,
+            0.35,
+            0.3,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.4,
+            0.8,
+            0.75,
+            0.35,
+            0.3
+          ]
+        },
+        "smith": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.4,
+            0.1,
+            0.25,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.85,
+            0.5,
+            0.8,
+            0.3,
+            0.55
+          ]
+        },
+        "woodworker": {
+          "resource": "materials",
+          "unitsPerWinter": 5,
+          "weights": [
+            0.25,
+            0.25,
+            0.3,
+            0.05,
+            0.15
+          ],
+          "preferences": [
+            0.7,
+            0.75,
+            0.8,
+            0.35,
+            0.35
+          ]
+        },
+        "boatbuilder": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.25,
+            0.2,
+            0.4,
+            0.05,
+            0.1
+          ],
+          "preferences": [
+            0.7,
+            0.7,
+            0.9,
+            0.35,
+            0.35
+          ]
+        },
+        "trader": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.05,
+            0.1,
+            0.3,
+            0.35,
+            0.2
+          ],
+          "preferences": [
+            0.4,
+            0.6,
+            0.8,
+            0.85,
+            0.25
+          ]
+        },
+        "leatherAndJewelleryMaker": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.1,
+            0.35,
+            0.3,
+            0.1,
+            0.15
+          ],
+          "preferences": [
+            0.45,
+            0.85,
+            0.8,
+            0.45,
+            0.3
+          ]
+        }
+      }
+    },
+    "landing": {
+      "initialFood": 30,
+      "initialMaterials": 5,
+      "longshipSalvage": 20,
+      "cattleAdultAge": 2,
+      "cattleYoungAdultAge": 1,
+      "adultCattleFood": 1,
+      "calfFood": 0,
+      "cowFoodPerWinter": 4,
+      "exposedProductivityBps": 5000,
+      "farmyardCapacity": 4,
+      "slaughterFood": 15,
+      "foundingCoupleChanceBps": 5000,
+      "foundingCoupleCap": 3,
+      "cattleBirthChanceBps": 5000,
+      "cattleFertileMinAge": 2,
+      "cattleFertileMaxAge": 12,
+      "cattleBirthInterval": 2,
+      "cattleMortalityYoungBps": 200,
+      "cattleMortalityAdultBps": 50,
+      "cattleMortalityOlderBps": 500,
+      "cattleMortalityOldBps": 1500,
+      "cattleCrowdingBps": 200,
+      "cattleWeatherMortalityBps": 0
+    },
+    "weather": {
+      "enabled": true,
+      "profiles": {
+        "Mild": {
+          "probabilityBps": 2000,
+          "foodProductionBps": 11000,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 0,
+          "exposedCattleMortalityBps": 0,
+          "travelDurationBps": 10000,
+          "travelRiskBps": 0
+        },
+        "Normal": {
+          "probabilityBps": 5500,
+          "foodProductionBps": 10000,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 0,
+          "exposedCattleMortalityBps": 0,
+          "travelDurationBps": 10000,
+          "travelRiskBps": 0
+        },
+        "Harsh": {
+          "probabilityBps": 2000,
+          "foodProductionBps": 0,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 50,
+          "exposedCattleMortalityBps": 500,
+          "travelDurationBps": 12500,
+          "travelRiskBps": 500,
+          "materialsProductionBps": 0,
+          "residentConsumptionBps": 15000,
+          "cattleConsumptionBps": 15000
+        },
+        "Severe": {
+          "probabilityBps": 500,
+          "foodProductionBps": 5000,
+          "cattleConsumptionMultiplier": 3,
+          "tentMortalityBps": 200,
+          "exposedCattleMortalityBps": 1500,
+          "travelDurationBps": 15000,
+          "travelRiskBps": 1500
+        }
+      }
+    }
+  },
+  "domesticOnly": true,
+  "artifacts": [
+    {
+      "path": "descendants.json.gz",
+      "bytes": 131253,
+      "sha256": "fc549ac9f84fa8fb7e95febc607c767b6bf4d288e96e92425561070959725a78"
+    },
+    {
+      "path": "founders.json.gz",
+      "bytes": 205812,
+      "sha256": "ab8d57a61911dd9d07d13a79338c09399540ad9a304a2bc1354b0f4e4261ceba"
+    },
+    {
+      "path": "runs/seed-0.json.gz",
+      "bytes": 46587,
+      "sha256": "13d09fa7ca8508fcb2d008bf6af06a83a3ad861d9a6e4b45b06f3f6faadc3b36"
+    },
+    {
+      "path": "runs/seed-1.json.gz",
+      "bytes": 46749,
+      "sha256": "0144ebfee9033161fe0e785407ccbe297abd30840be76a7aab096a697f78e7bf"
+    },
+    {
+      "path": "runs/seed-10.json.gz",
+      "bytes": 46904,
+      "sha256": "276a5a7e52b68a7f6b6b3aa2b7729cda9376f66363896070031bd3c98ddcc378"
+    },
+    {
+      "path": "runs/seed-11.json.gz",
+      "bytes": 46035,
+      "sha256": "85c1f818cc1b1a0b16703795f3339f2ae9ae11530d7090f3ea7ac746e84f017c"
+    },
+    {
+      "path": "runs/seed-12.json.gz",
+      "bytes": 47115,
+      "sha256": "d1e5e164e6e79c900b20fbdf7365b8c7a7a524d27e1e4d83f5c4e5d41a7d0478"
+    },
+    {
+      "path": "runs/seed-13.json.gz",
+      "bytes": 48087,
+      "sha256": "98c9fd2ccfce0a26317adefa37730e82c312cbcfafdea5ff946785ffd1ec2cb9"
+    },
+    {
+      "path": "runs/seed-14.json.gz",
+      "bytes": 49560,
+      "sha256": "7292d4267a4aa6e0a58b4eb900eda4946a5d4ee8ce3d8dd885390feaa5de1f36"
+    },
+    {
+      "path": "runs/seed-15.json.gz",
+      "bytes": 45791,
+      "sha256": "d4b05515862c5da40ab0488eb7529a405f993174e148c58e3bb079ab59571271"
+    },
+    {
+      "path": "runs/seed-16.json.gz",
+      "bytes": 45485,
+      "sha256": "4de6e4071ef4ace6953a6d8b2090a2a0edc8cdd48690c7a3e3218600ed6318b2"
+    },
+    {
+      "path": "runs/seed-17.json.gz",
+      "bytes": 48237,
+      "sha256": "ed19ed34e47a98de3b0de095108fbd1422c612676afa7bc3f7b8d9ca58b42b55"
+    },
+    {
+      "path": "runs/seed-18.json.gz",
+      "bytes": 47912,
+      "sha256": "08eb9543055e445ec58b48fff7aa69838b47d6193b34114a7076d71be736ce7b"
+    },
+    {
+      "path": "runs/seed-19.json.gz",
+      "bytes": 47886,
+      "sha256": "ac16df0ba6a3bbe1780ab9bf81e4d6621cc8a0cbf35fe30f40562f36141d084d"
+    },
+    {
+      "path": "runs/seed-2.json.gz",
+      "bytes": 44433,
+      "sha256": "5adab1b7cb0feb4513321aee892b40b2d9acc81564a084d22b36d6bc4b4d43a9"
+    },
+    {
+      "path": "runs/seed-20.json.gz",
+      "bytes": 44997,
+      "sha256": "46c8ee9a4372eeb67dbc5c61cbca2de88f4de5eadc8944040c27bb9f987bc481"
+    },
+    {
+      "path": "runs/seed-21.json.gz",
+      "bytes": 45173,
+      "sha256": "85b4f4a8fae15f53a7c3af37cdf6af3efe6cfe54fb040d1e289a456ff9a05d63"
+    },
+    {
+      "path": "runs/seed-22.json.gz",
+      "bytes": 51563,
+      "sha256": "300076f2df431c0305039e0d0c9453872eab5032c4a7e1f4d5a0fd451582b4ac"
+    },
+    {
+      "path": "runs/seed-23.json.gz",
+      "bytes": 44212,
+      "sha256": "8d7e47434ebb2f5609207a8b538ed1a0bf5e83a16ecff341d7080bc331e20c33"
+    },
+    {
+      "path": "runs/seed-24.json.gz",
+      "bytes": 49488,
+      "sha256": "e627b4be2bf533f75b76b5bbf19ea560d67018bb77af2e172d00ecee8deee59f"
+    },
+    {
+      "path": "runs/seed-25.json.gz",
+      "bytes": 48904,
+      "sha256": "7fcd2f18c5fbde2f7f0632145fa4c653bd277b17679bbf08c1079a5dc80d1fe0"
+    },
+    {
+      "path": "runs/seed-26.json.gz",
+      "bytes": 47669,
+      "sha256": "138740005712ea43a57ed8ea9bdf3fa7aa9f080345e1e04df6533c64f09b7151"
+    },
+    {
+      "path": "runs/seed-27.json.gz",
+      "bytes": 47918,
+      "sha256": "4147d37773e1b9820d6aee81756e3b8f7c4687b1b9990a0bfcd386f759d50fd2"
+    },
+    {
+      "path": "runs/seed-28.json.gz",
+      "bytes": 46373,
+      "sha256": "f61d7a94454c4c70d687adfac3e7808aa2990786a1e8ddc59980605e59ede359"
+    },
+    {
+      "path": "runs/seed-29.json.gz",
+      "bytes": 50450,
+      "sha256": "752f232616e74b7c20f6a68c1f7b7b5cdbc924560865b0f1a14ccb86d6575013"
+    },
+    {
+      "path": "runs/seed-3.json.gz",
+      "bytes": 46753,
+      "sha256": "931d769d583f0c349fff6c43fdc46e17a85f208a3f8b38ae491e13bc9cb4be56"
+    },
+    {
+      "path": "runs/seed-30.json.gz",
+      "bytes": 43868,
+      "sha256": "7657e81fcd6c9eafbe24ff7212fc32526b6cb27f93cc28bc02652a4ee33d87ce"
+    },
+    {
+      "path": "runs/seed-31.json.gz",
+      "bytes": 49113,
+      "sha256": "9c958d487595cd25a57418020e14ca829434bb092537aae247dc841088618b19"
+    },
+    {
+      "path": "runs/seed-32.json.gz",
+      "bytes": 49247,
+      "sha256": "79a46a66a0840a81c2cc0284c2a956b5434bdb9ac136cab019fe8f4d9a042c4d"
+    },
+    {
+      "path": "runs/seed-33.json.gz",
+      "bytes": 47114,
+      "sha256": "1b7888c2d9207eda0f9afa006010b26a61204fa2a1035f42039976195b6fe006"
+    },
+    {
+      "path": "runs/seed-34.json.gz",
+      "bytes": 47937,
+      "sha256": "2fd85405107be5490d5d82dc8ed49a8b8eda7dd51511b54057299fb1f43e8728"
+    },
+    {
+      "path": "runs/seed-35.json.gz",
+      "bytes": 49322,
+      "sha256": "cdcad313f077dda120b3e467870d22f337a407feecd1862792c5b7c4aabb6b54"
+    },
+    {
+      "path": "runs/seed-36.json.gz",
+      "bytes": 41417,
+      "sha256": "0b06f5f8268649243cf48919d3c9a8572eaf9868570a5a5b414adb3b527069c7"
+    },
+    {
+      "path": "runs/seed-37.json.gz",
+      "bytes": 48079,
+      "sha256": "a578d92f8c93fd1c64ba148a62ec56a2f5bf647c7543d3615e5c0b0436be5def"
+    },
+    {
+      "path": "runs/seed-38.json.gz",
+      "bytes": 46212,
+      "sha256": "891b8652288bde9a61d94f8060ab9b0f0dcf8c2cafdfa37f291a723126c4ae3c"
+    },
+    {
+      "path": "runs/seed-39.json.gz",
+      "bytes": 49060,
+      "sha256": "e8df50f4ce8c7a9e09a69a85c70602996418540027c965edc28aca170dfe25c9"
+    },
+    {
+      "path": "runs/seed-4.json.gz",
+      "bytes": 46535,
+      "sha256": "c221829edd14b75116383802895d6c4660c08f619795882692749fddaf52f0a0"
+    },
+    {
+      "path": "runs/seed-40.json.gz",
+      "bytes": 46648,
+      "sha256": "1c71ffa4af6f75c6d2df8460d1ff9226cf70518e32ff7dc8e39039da61ff2f3f"
+    },
+    {
+      "path": "runs/seed-41.json.gz",
+      "bytes": 47184,
+      "sha256": "b4acaf5f872bdb839ec12a8bcacf6cec1cea5d00bea5c6dd5c26bdc7dafc5f4f"
+    },
+    {
+      "path": "runs/seed-42.json.gz",
+      "bytes": 50083,
+      "sha256": "0329285356955d9a412437e118928c9d98c24bc73e512898deba39006f06d22c"
+    },
+    {
+      "path": "runs/seed-43.json.gz",
+      "bytes": 45848,
+      "sha256": "5647b7439bee9424c810fa77c2ea8432d160ef934c70639a32a52535067b56e2"
+    },
+    {
+      "path": "runs/seed-44.json.gz",
+      "bytes": 44779,
+      "sha256": "5cb0530170d35ebf04d4c05b78c0cec03bb68cf8bda4ffc2e44001d04f29f9a1"
+    },
+    {
+      "path": "runs/seed-45.json.gz",
+      "bytes": 47900,
+      "sha256": "f8f21b6b219fb731fa0a8258b07faa4db327a67ce88d2a349aad473379661690"
+    },
+    {
+      "path": "runs/seed-46.json.gz",
+      "bytes": 43484,
+      "sha256": "4f90c41b7e7377d69846dc628b7df76a91c36c0fa08b551eb15c5e11558e7089"
+    },
+    {
+      "path": "runs/seed-47.json.gz",
+      "bytes": 46518,
+      "sha256": "cf374ab0335fee81ac83267be46e45afee3838532506a5bc6b34c10687b5bf86"
+    },
+    {
+      "path": "runs/seed-48.json.gz",
+      "bytes": 47571,
+      "sha256": "5deb257465a5b9a540402e8205d2e2d3bfaf08be2454907adb8cef851236ade4"
+    },
+    {
+      "path": "runs/seed-49.json.gz",
+      "bytes": 50163,
+      "sha256": "c6b405b99581f9c0dd5693a59164a17952539e5ee8254a1885fd83744ca0f6fb"
+    },
+    {
+      "path": "runs/seed-5.json.gz",
+      "bytes": 46055,
+      "sha256": "18aee7b96fa2df081b6abc6442c8cfb97d539dc3bc960b077ee0076ae16316ea"
+    },
+    {
+      "path": "runs/seed-50.json.gz",
+      "bytes": 49662,
+      "sha256": "591193d03424445f4ba66cb84e71734b789ce6f7f5a72aca5d0998f8d36c62f4"
+    },
+    {
+      "path": "runs/seed-51.json.gz",
+      "bytes": 47776,
+      "sha256": "e60d9425317786cb1ee130547669477bc3df8c2e14e96c9035eda9484a6ba188"
+    },
+    {
+      "path": "runs/seed-52.json.gz",
+      "bytes": 46555,
+      "sha256": "773660c7ab5d8b3e7ad3cd3f01863fe5298165952bf1898ff6856d8ad6fd1fe9"
+    },
+    {
+      "path": "runs/seed-53.json.gz",
+      "bytes": 48694,
+      "sha256": "9081f7b15a41639b1370736392a6fa9100bb54da63a24c0f5808035af733e538"
+    },
+    {
+      "path": "runs/seed-54.json.gz",
+      "bytes": 48934,
+      "sha256": "3a1e183ff322a00efc94a25432b66d2e7305e979a4b1e27f94be90e60729f0d6"
+    },
+    {
+      "path": "runs/seed-55.json.gz",
+      "bytes": 48032,
+      "sha256": "26dfae184e4d553ba1dda194eb01fd294aace7fbb346ac1fb0eb3e354ff322da"
+    },
+    {
+      "path": "runs/seed-56.json.gz",
+      "bytes": 48397,
+      "sha256": "1ca86c4772050ae997d5b4266399659897cc156d2b1381a2a09e5ce2d1b6b1e1"
+    },
+    {
+      "path": "runs/seed-57.json.gz",
+      "bytes": 46549,
+      "sha256": "ddf75a87d1150bbf9c7a45229b542f5514b08f5a0fd2496f6600631fbe5c9d56"
+    },
+    {
+      "path": "runs/seed-58.json.gz",
+      "bytes": 52573,
+      "sha256": "16420889d7d756df8afd7225b52dd048ccf8ecef074be4691ca1149156a6caea"
+    },
+    {
+      "path": "runs/seed-59.json.gz",
+      "bytes": 49616,
+      "sha256": "2e0ab58d29b37ba5bc1d3d0d679e3ab6680837e9be6587d9c23086bfc9bb1f75"
+    },
+    {
+      "path": "runs/seed-6.json.gz",
+      "bytes": 44435,
+      "sha256": "2573d6cd9b884dce546d49232dc6e819e3a9834ac59ed25e61eb25e0c273398e"
+    },
+    {
+      "path": "runs/seed-60.json.gz",
+      "bytes": 51066,
+      "sha256": "81125ab33957c91331370952472a02a970b3a368a597aa81618be30246facb3b"
+    },
+    {
+      "path": "runs/seed-61.json.gz",
+      "bytes": 44732,
+      "sha256": "a4576de99b8130ababff9d98569b530647c11948b71b3cc27f2e7b8b17b963f6"
+    },
+    {
+      "path": "runs/seed-62.json.gz",
+      "bytes": 47606,
+      "sha256": "b384010483f8093af46de637faa1a7604a1d498b0fb3a3050052f975c4afc219"
+    },
+    {
+      "path": "runs/seed-63.json.gz",
+      "bytes": 48486,
+      "sha256": "bc3f5557fd6fca5fc651e9df5af9b27bea42e407a392144d9d8c5e448caa4d9e"
+    },
+    {
+      "path": "runs/seed-64.json.gz",
+      "bytes": 46248,
+      "sha256": "70b7bd5c9dffca8751d1e85fdf0e057ac533d683ccbc0d426aa42cad98b7ed5e"
+    },
+    {
+      "path": "runs/seed-65.json.gz",
+      "bytes": 48770,
+      "sha256": "8ae78a3e535be7ed07deb7edfa048ebc80cbf1f232d4bc7096c1866d2f495c12"
+    },
+    {
+      "path": "runs/seed-66.json.gz",
+      "bytes": 46363,
+      "sha256": "912292cbe436abaa972928904378233e037b869d8eeef7e965a829fd1e586b15"
+    },
+    {
+      "path": "runs/seed-67.json.gz",
+      "bytes": 43245,
+      "sha256": "1caf2cb18b1f2aa1b14d3bfb61756f941f4d65a3a1a96eeff219da3d849bcfbe"
+    },
+    {
+      "path": "runs/seed-68.json.gz",
+      "bytes": 44634,
+      "sha256": "33f4fc74ea440f66cefed3512f5d871b91d84bbc52748e7adeec8d9bbc5f617e"
+    },
+    {
+      "path": "runs/seed-69.json.gz",
+      "bytes": 47498,
+      "sha256": "fa5c17b7c50e3874c270627609aa993422c18881a276e5707bfe85150f88eca2"
+    },
+    {
+      "path": "runs/seed-7.json.gz",
+      "bytes": 45126,
+      "sha256": "0a8cf289adae57ea186bad43f0d3838778c6765088fb0b56240690c74efb7d0e"
+    },
+    {
+      "path": "runs/seed-70.json.gz",
+      "bytes": 48428,
+      "sha256": "f22488a69ad476b32bd95421a05a2bd33a0c121459e6eaa7cf31ecd52b7ec60f"
+    },
+    {
+      "path": "runs/seed-71.json.gz",
+      "bytes": 45156,
+      "sha256": "164f5a1eddab6aa527cee2e5980ee6eb79e3e5bed6f208436822389c1b3a2299"
+    },
+    {
+      "path": "runs/seed-72.json.gz",
+      "bytes": 52148,
+      "sha256": "ca365e40662d108160054897aa947567ba9d4ac24ba04d72b306726927654eea"
+    },
+    {
+      "path": "runs/seed-73.json.gz",
+      "bytes": 46600,
+      "sha256": "770a736bf44b3dd2065cb10ef84522e6dc730ef75b15ca6a9cb2531c9146e9d1"
+    },
+    {
+      "path": "runs/seed-74.json.gz",
+      "bytes": 45857,
+      "sha256": "d6bc3a9407b930fb0a232493ffc9d85a59a321f84aa62470a9757a56053b44d0"
+    },
+    {
+      "path": "runs/seed-75.json.gz",
+      "bytes": 43073,
+      "sha256": "8e00e802805f44d93effd28bfde3aa5f35f35d77db98e337e43d7ff19829f9d1"
+    },
+    {
+      "path": "runs/seed-76.json.gz",
+      "bytes": 47245,
+      "sha256": "da58bbfd2d5d9c43c4f01612f1b139ea7977d749e037b8c1fff2dab92e7d8c4b"
+    },
+    {
+      "path": "runs/seed-77.json.gz",
+      "bytes": 46874,
+      "sha256": "1c04ca85bb9686e24ede15d87e56b012ba1b4ea48cdad36adb55aaf3565e43be"
+    },
+    {
+      "path": "runs/seed-78.json.gz",
+      "bytes": 45973,
+      "sha256": "53bd1f3b5628a105e176fa671861af4e169cd8adfc2bd4911c497721fe1d664f"
+    },
+    {
+      "path": "runs/seed-79.json.gz",
+      "bytes": 48142,
+      "sha256": "ffbf6833651aa289d5c59dcbb991de2099583bacbf34f74cfae1d0c366a868b8"
+    },
+    {
+      "path": "runs/seed-8.json.gz",
+      "bytes": 47994,
+      "sha256": "575b0b4e63bdde35be779a2965f26a1a935a08023b68bc0589ac89a84b5f937c"
+    },
+    {
+      "path": "runs/seed-80.json.gz",
+      "bytes": 45896,
+      "sha256": "dd7b2a0dfd86d7d37e247cd9a482c3b196378b1706929b429be64ab0eb1cb813"
+    },
+    {
+      "path": "runs/seed-81.json.gz",
+      "bytes": 48372,
+      "sha256": "8ef3f8393f4f97a4c2ef1e807faceeafa4a9408913ce834f14483baf8e9ac8bb"
+    },
+    {
+      "path": "runs/seed-82.json.gz",
+      "bytes": 44474,
+      "sha256": "2df444699f7e9f7089e95ccf9af41f375df5d1c724477a03533da682bc5dce49"
+    },
+    {
+      "path": "runs/seed-83.json.gz",
+      "bytes": 48167,
+      "sha256": "c30f66a45a9ef30d1f5103b0180c822fbdadcb246ce5c156ff460d525fe88f54"
+    },
+    {
+      "path": "runs/seed-84.json.gz",
+      "bytes": 46507,
+      "sha256": "29c4d0c1a5b472343bb2f6bdc9435fa6385b8563c0825f0896a6a68656b93568"
+    },
+    {
+      "path": "runs/seed-85.json.gz",
+      "bytes": 48883,
+      "sha256": "360ca9a0d9ba68ec1adb2cdb95050e495dfc03c97ad7c544674f33a3a9701ec1"
+    },
+    {
+      "path": "runs/seed-86.json.gz",
+      "bytes": 49323,
+      "sha256": "a659d4e2efa670cf776b69af384ca77402321e18df9c737ef222e40b6333cc9a"
+    },
+    {
+      "path": "runs/seed-87.json.gz",
+      "bytes": 54228,
+      "sha256": "a90fb2b011a28cce1fe3947bdc397b249aaac828300bbdf5386929cb26ff1a5c"
+    },
+    {
+      "path": "runs/seed-88.json.gz",
+      "bytes": 47936,
+      "sha256": "4d189e717e23bb0298cd88aeea6e4f718f24b783f28e4f912910a267e0d36100"
+    },
+    {
+      "path": "runs/seed-89.json.gz",
+      "bytes": 48302,
+      "sha256": "f3bf2f6e845c03d220d36dbdabc6a9822198da2e3334cf5032997418f332b7a8"
+    },
+    {
+      "path": "runs/seed-9.json.gz",
+      "bytes": 48871,
+      "sha256": "048d7675efd8e391dd9017dbb9da04e08fcb120d64f6439310841260a8efdbb7"
+    },
+    {
+      "path": "runs/seed-90.json.gz",
+      "bytes": 45983,
+      "sha256": "ce420b50b09d9e017bbb7cc3c25c8c6588e7750c599790826cc88334041a0c6c"
+    },
+    {
+      "path": "runs/seed-91.json.gz",
+      "bytes": 49103,
+      "sha256": "9c4f62dcd7a99b41ecfa98168dfe5101d8a37d570d9549a7e1868862b48dac4d"
+    },
+    {
+      "path": "runs/seed-92.json.gz",
+      "bytes": 51251,
+      "sha256": "30312e6ebde4dbf8d8b5f7f46fbdcf0022c71f7da2f0d67c24d5a0831ea6fbde"
+    },
+    {
+      "path": "runs/seed-93.json.gz",
+      "bytes": 45540,
+      "sha256": "0813c3f9284d1cb873014b6eeed36e09db58a3617a98e88b64b844d95034ece4"
+    },
+    {
+      "path": "runs/seed-94.json.gz",
+      "bytes": 42390,
+      "sha256": "5814d66712b786f8a793ca7e2f8e27e99cc60cb2e99c7532ca0ec86ae359fe2c"
+    },
+    {
+      "path": "runs/seed-95.json.gz",
+      "bytes": 49107,
+      "sha256": "9555e34d8066a233d39bc1cd888fd0a99a97f0a6180caeb00c150a4bf9a62ed1"
+    },
+    {
+      "path": "runs/seed-96.json.gz",
+      "bytes": 47549,
+      "sha256": "579cabc89f35663cd4de9800c91c958d25336f16584ebba106eff9eb97a42812"
+    },
+    {
+      "path": "runs/seed-97.json.gz",
+      "bytes": 48196,
+      "sha256": "4bf825f1754b4bc2b06425501b771e3438790c5c2b9d52330e624f9767e13504"
+    },
+    {
+      "path": "runs/seed-98.json.gz",
+      "bytes": 47009,
+      "sha256": "e4f673ec15089b2e53860904cf73ce233685081b76c408ea0b1874f4cc0eadbe"
+    },
+    {
+      "path": "runs/seed-99.json.gz",
+      "bytes": 49750,
+      "sha256": "31591f7212111c9c93a6ee046213d3504170bb38126771b61fa2facfadbbbcef"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 4013183,
+      "sha256": "cc107386c3388184dc2338361f249d57622b781543cb9cc81a59781dfd96aa16"
+    }
+  ],
+  "finalization": "Trailing whitespace normalized in sampler; the complete founder sample was rerun and matched raw records. Economic engine and policy sources unchanged."
+}

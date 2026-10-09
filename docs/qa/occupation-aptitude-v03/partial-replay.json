@@ -1,0 +1,37 @@
+{
+  "harnessHash": "af2ac35a33cc291aa7503c4fa43435cb8cfcc7bceb779e327984e5d2cd9a196d",
+  "proofs": [
+    {
+      "seed": 32,
+      "model": "control",
+      "savedAtTick": 500,
+      "savedWorkProgress": 7500000,
+      "continuousHash": "8967425ad54b7e37cf3096e8279c7ecaa02408cd394e01c22068b7fc1863c8e5",
+      "resumedHash": "8967425ad54b7e37cf3096e8279c7ecaa02408cd394e01c22068b7fc1863c8e5"
+    },
+    {
+      "seed": 32,
+      "model": "expanded",
+      "savedAtTick": 500,
+      "savedWorkProgress": 8210000,
+      "continuousHash": "3f99dc114bcb1c04c07d206581d314abc766caf9d83dd350d40c56623faefc31",
+      "resumedHash": "3f99dc114bcb1c04c07d206581d314abc766caf9d83dd350d40c56623faefc31"
+    },
+    {
+      "seed": 32,
+      "model": "quadratic",
+      "savedAtTick": 500,
+      "savedWorkProgress": 8317500,
+      "continuousHash": "b607790181bd8ede0849287a0cbea2abced26574f638c7665c603c23a22c8eef",
+      "resumedHash": "b607790181bd8ede0849287a0cbea2abced26574f638c7665c603c23a22c8eef"
+    },
+    {
+      "seed": 32,
+      "model": "contrast",
+      "savedAtTick": 500,
+      "savedWorkProgress": 7282500,
+      "continuousHash": "74d4485508cc8e818e486732c2d01fae6c430e922b58e9e84386ba4d328f3c97",
+      "resumedHash": "74d4485508cc8e818e486732c2d01fae6c430e922b58e9e84386ba4d328f3c97"
+    }
+  ]
+}
