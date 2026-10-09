@@ -18,7 +18,7 @@ These saves do not add persistence for the existing Fjordside character preview 
 - Ground prop placement measures rotated source boxes including overhangs and reserves routes, Meshy footprints and nature. Foundations sample nine dry/flat support points. Resident movement excludes actual prop boxes. Harbor decorations use the validated coast approach and shared water level; cliff roots embed 0.15m.
 - Attachment version `authored-props-v1` and placements are saved. A mismatch rejects activation instead of silently changing stored locations. This stays separate from the existing generator schema.
 - Camera bounds/home and lighting/hearth anchors follow the selected world. Existing lighting defaults remain; low-sun/HDR pilots are not silently promoted. Generated shadow coverage follows larger geography; Low caps shadows at 1024 and DPR at 1.
-- Existing seasonal treatment supports all four native ground layers and composes with sourced leaf wind. Annual aging and Continue remain. Manual Pause holds residents, time, water, wind and animated lighting without resetting the year.
+- Existing seasonal treatment supports all four native ground layers and composes with sourced leaf wind. Annual aging continues automatically without a summary popup or automatic pause. Manual Pause holds residents, time, water, wind and animated lighting without resetting the year.
 - World-owned masks/materials, textures, wind clones, pine source, water and instancing have teardown; camera listeners are aborted. Original AssetManager resources remain shared until final disposal.
 
 ## Water and wind pass

@@ -34,10 +34,18 @@ export class MovementSystem {
         this.detours.delete(unit);this.placed.add(unit);unit.interactionState='none';unit.partnerId=null;unit.wait=0;unit.speed=0;this.choose(unit);
     }
     private choose(unit:Villager){Object.assign(unit.target,this.terrain.randomPosition(this.random));}
-    private intent(unit:Villager){const p=unit.visual.position,dx=unit.target.x-p.x,dz=unit.target.z-p.z,d=Math.hypot(dx,dz);return d>.15&&unit.wait<=0?{x:dx/d*this.config.speed,z:dz/d*this.config.speed}:{x:0,z:0};}
+    private intent(unit: Villager) {
+        const position = unit.visual.position;
+        const goal = this.detours.get(unit)?.[0] ?? unit.target;
+        const dx = goal.x - position.x, dz = goal.z - position.z;
+        const distance = Math.hypot(dx, dz);
+        return distance > .15 && unit.wait <= 0 ?
+            { x: dx / distance * this.config.speed, z: dz / distance * this.config.speed } :
+            { x: 0, z: 0 };
+    }
     private face(unit:Villager,angle:number,dt:number){const difference=Math.atan2(Math.sin(angle-unit.visual.rotation.y),Math.cos(angle-unit.visual.rotation.y));unit.visual.rotation.y+=Math.max(-this.config.turnSpeed*dt,Math.min(this.config.turnSpeed*dt,difference));}
     private finish(e:Encounter){for(const unit of [e.a,e.b]){unit.interactionState='resume';unit.partnerId=null;unit.socialCooldownUntil=this.time+this.config.cooldownSeconds;}this.released.set(this.key(e.a,e.b),{a:e.a,b:e.b,until:this.time+this.config.cooldownSeconds});}
-    private eligible(unit:Villager){const v=this.intent(unit);return !this.detours.has(unit)&&!unit.busy&&unit.socialEnabled&&unit.interactionState==='none'&&this.time>=unit.socialCooldownUntil&&Math.hypot(v.x,v.z)>0;}
+    private eligible(unit:Villager){const v=this.intent(unit);return !unit.busy&&unit.socialEnabled&&unit.interactionState==='none'&&this.time>=unit.socialCooldownUntil&&Math.hypot(v.x,v.z)>0;}
     private startEncounters(){
         for(let i=0;i<this.villagers.length;i++)for(let j=i+1;j<this.villagers.length;j++){
             const a=this.villagers[i],b=this.villagers[j];if(!this.eligible(a)||!this.eligible(b)||this.released.has(this.key(a,b)))continue;
@@ -72,6 +80,100 @@ export class MovementSystem {
             }
         }
     }
+    private clearTerrainRoute(start: { x: number; z: number }, points: { x: number; z: number }[]) {
+        for (const end of points) {
+            const length = Math.hypot(end.x - start.x, end.z - start.z);
+            const samples = Math.max(1, Math.ceil(length / .1));
+            for (let sample = 1; sample <= samples; sample++) {
+                const fraction = sample / samples;
+                if (!this.terrain.walkable(start.x + (end.x - start.x) * fraction,
+                    start.z + (end.z - start.z) * fraction)) return false;
+            }
+            start = end;
+        }
+        return true;
+    }
+    private avoidNeighbours(unit: Villager) {
+        if (this.detours.has(unit)) return;
+        const position = unit.visual.position;
+        const dx = unit.target.x - position.x, dz = unit.target.z - position.z;
+        const distance = Math.hypot(dx, dz);
+        if (distance < .15) return;
+        const forwardX = dx / distance, forwardZ = dz / distance;
+        const clearance = 2 * this.config.radius + .2;
+        const lookAhead = clearance + this.config.speed * this.config.predictionSeconds;
+        let needsPass = false;
+        for (const neighbour of this.villagers) {
+            if (neighbour === unit) continue;
+            // Let eligible pairs reach the encounter distance before planning a pass.
+            if (this.eligible(unit) && this.eligible(neighbour) &&
+                !this.released.has(this.key(unit, neighbour))) continue;
+            const center = neighbour.visual.position;
+            const along = (center.x - position.x) * forwardX +
+                (center.z - position.z) * forwardZ;
+            const cross = (center.x - position.x) * forwardZ -
+                (center.z - position.z) * forwardX;
+            if (along <= 0 || along > Math.min(distance, lookAhead) ||
+                Math.abs(cross) >= clearance) continue;
+            needsPass = true;
+            const preferred = cross > 0 ? -1 : 1;
+            for (const side of [preferred, -preferred]) {
+                const lateralX = forwardZ * side * clearance;
+                const lateralZ = -forwardX * side * clearance;
+                const points = [
+                    { x: center.x + lateralX - forwardX * clearance,
+                        z: center.z + lateralZ - forwardZ * clearance },
+                    { x: center.x + lateralX + forwardX * clearance,
+                        z: center.z + lateralZ + forwardZ * clearance },
+                ];
+                // Check the whole corridor before committing, including the building corner.
+                if (this.clearTerrainRoute(position, points) &&
+                    this.clearStep(unit, points[0].x, points[0].z)) {
+                    this.detours.set(unit, points);
+                    return;
+                }
+            }
+        }
+        if (!needsPass) return;
+        // A crowded corner can leave only the rear corridor open. Commit to leaving it
+        // before reconsidering the destination, rather than alternating forward/backward.
+        const angle = Math.atan2(dx, dz);
+        for (const offset of [0, Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4,
+            -Math.PI / 4, -Math.PI / 2, -3 * Math.PI / 4, Math.PI]) {
+            const exit = { x: position.x + Math.sin(angle + offset) * clearance,
+                z: position.z + Math.cos(angle + offset) * clearance };
+            if (this.clearTerrainRoute(position, [exit]) && this.clearStep(unit, exit.x, exit.z)) {
+                this.detours.set(unit, [exit]);
+                return;
+            }
+        }
+    }
+    private avoidTerrain(unit: Villager) {
+        if (this.detours.has(unit)) return;
+        const position = unit.visual.position;
+        const dx = unit.target.x - position.x, dz = unit.target.z - position.z;
+        const distance = Math.hypot(dx, dz);
+        const length = Math.min(distance, this.config.speed * this.config.predictionSeconds);
+        if (length < .15) return;
+        const angle = Math.atan2(dx, dz);
+        const endpoint = (heading: number) => ({
+            x: position.x + Math.sin(heading) * length,
+            z: position.z + Math.cos(heading) * length,
+        });
+        if (this.clearTerrainRoute(position, [endpoint(angle)])) return;
+        // Small turns win when a forward corridor is available; retain the waypoint
+        // long enough to finish the turn instead of changing steering every frame.
+        for (let turn = 1; turn <= 8; turn++) {
+            for (const side of [1, -1]) {
+                const exit = endpoint(angle + side * turn * Math.PI / 8);
+                if (this.clearTerrainRoute(position, [exit]) &&
+                    this.clearStep(unit, exit.x, exit.z)) {
+                    this.detours.set(unit, [exit]);
+                    return;
+                }
+            }
+        }
+    }
     update(dt:number){
         if(!Number.isFinite(dt)||dt<0)throw new Error('Invalid movement timestep');if(dt===0)return;
         // Bound steps for continuous personal-space checks and stable steering.
@@ -85,6 +187,8 @@ export class MovementSystem {
         for(const unit of this.villagers){
             if(unit.partnerId!==null)continue;
             this.avoidConversation(unit);
+            this.avoidNeighbours(unit);
+            this.avoidTerrain(unit);
             const p=unit.visual.position,points=this.detours.get(unit);
             if(points&&Math.hypot(points[0].x-p.x,points[0].z-p.z)<.15){points.shift();if(!points.length)this.detours.delete(unit);}
             const goal=this.detours.get(unit)?.[0]??unit.target,dx=goal.x-p.x,dz=goal.z-p.z,distance=Math.hypot(dx,dz);
@@ -107,6 +211,19 @@ export class MovementSystem {
             // Only static terrain can change a route; neighbours never replace its destination.
             if(!moved&&!this.detours.has(unit)&&!this.terrain.walkable(p.x+dx/distance*step,p.z+dz/distance*step))this.choose(unit);
         }
+    }
+    navigationProbes() {
+        const length = this.config.speed * this.config.predictionSeconds;
+        return this.villagers.filter(unit => unit.partnerId === null && unit.wait <= 0).map(unit => {
+            const position = unit.visual.position;
+            const end = { x: position.x + Math.sin(unit.visual.rotation.y) * length,
+                z: position.z + Math.cos(unit.visual.rotation.y) * length };
+            const elevated = (point: { x: number; z: number }) => ({ ...point,
+                y: this.terrain.heightAt(point.x, point.z) + .06 });
+            return { id: unit.id, start: elevated(position), end: elevated(end),
+                clear: this.clearTerrainRoute(position, [end]) && this.clearStep(unit, end.x, end.z),
+                route: (this.detours.get(unit) ?? []).map(elevated) };
+        });
     }
     snapshot(){return this.villagers.map(unit=>({id:unit.id,radius:this.config.radius,state:unit.interactionState,detouring:this.detours.has(unit),partnerId:unit.partnerId,cooldown:Math.max(0,unit.socialCooldownUntil-this.time)}));}
 }

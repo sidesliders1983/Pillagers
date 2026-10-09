@@ -15,9 +15,10 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   await page.waitForFunction(()=>document.querySelector('#world')?.dataset.population,null,{timeout:60000});
   const population=()=>page.locator('#world').evaluate(el=>JSON.parse(el.dataset.population));
   const step=async(ms,year,progress)=>{
-   if(await page.locator('#year-summary').isVisible())await page.getByRole('button',{name:'Continue',exact:true}).click();
    await page.evaluate(ms=>window.simulationTestTime=1000+ms,ms);
    await page.waitForFunction(({year,progress})=>document.querySelector('#world-year').textContent===`Year: ${year} DC`&&Math.abs(Number(document.querySelector('#world').dataset.yearProgress)-progress)<.00001,{year,progress},{timeout:60000});
+   assert.equal(await page.locator('dialog[open]').count(),0);
+   assert.equal(await page.locator('#world').getAttribute('data-paused'),'false');
   };
   let expected=Array.from({length:10},(_,i)=>generateCharacterDNA((1983+Math.imul(i+1,2654435761))>>>0));
   assert.deepEqual((await population()).map(p=>p.age),expected.map(p=>p.age));
@@ -38,7 +39,6 @@ const assert=require('node:assert/strict'),fs=require('node:fs');
   const endYear=process.env.SKIP_CATCHUP?1202:1260;
   for(let year=1203;year<=endYear;year++){expected=expected.map((dna,i)=>agePersona(dna,year,i).dna);await step((year-1200)*60000,year,0);}
   const later=await population();
-  if(await page.locator('#year-summary').isVisible())await page.getByRole('button',{name:'Continue',exact:true}).click();
   assert.equal(later.length,10);assert.deepEqual(later.map(p=>p.age),expected.map(p=>p.age));assert.deepEqual(later.map(p=>p.seed),expected.map(p=>p.seed));assert.ok(later.every(p=>walkable(p.x,p.z)));
   assert.equal(bodies.length,1,'Respawns reuse the cached GLB');
   await page.click('#time-off');assert.equal(await page.locator('#world-year').textContent(),`Year: ${endYear} DC`);
