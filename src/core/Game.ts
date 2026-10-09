@@ -1,7 +1,8 @@
 import { Scene, PerspectiveCamera, GridHelper, AxesHelper, Clock, Mesh } from 'three';
 import { AssetManager } from './AssetManager';
 import { createRenderer } from './Renderer';
-import { World } from '../world/World';
+import { createWorld } from '../world/WorldFactory';
+import { FjordsideControls } from '../ui/FjordsideControls';
 import { Villager } from '../entities/Villager';
 import { MovementSystem } from '../systems/MovementSystem';
 import { RTSCameraController } from '../camera/RTSCameraController';
@@ -20,17 +21,35 @@ import { SeasonTint } from '../world/SeasonTint';
 export class Game {
     async start(canvas: HTMLCanvasElement) {
         setupWorldHUD();
+        const worldControls = new FjordsideControls();
         const meshy=new URLSearchParams(location.search).get('characters')!=='published';
         const population=new URLSearchParams(location.search).get('residents')==='40'?40:config.villagers;
         canvas.dataset.characterSource=meshy?'meshy':'published';canvas.dataset.instances=String(population);
         const renderer = createRenderer(canvas), scene = new Scene();
-        const camera = new PerspectiveCamera(45, 1, .1, 240), controller = new RTSCameraController(camera, canvas);
+        const camera = new PerspectiveCamera(45, 1, .1, 400), controller = new RTSCameraController(camera, canvas);
         const assets = new AssetManager();
         await assets.load();
-        const world = new World(assets);
+        const world = await createWorld(assets,{ ...worldControls.selection,
+            anisotropy: renderer.capabilities.getMaxAnisotropy() }).catch(error => {
+                document.querySelector<HTMLElement>('#debug')!.hidden = false;
+                controller.dispose();
+                assets.dispose();
+                renderer.dispose();
+                throw error;
+            });
+        worldControls.bind(() => world.exportSave(),async selection => {
+            const proposal = await createWorld(assets,selection);
+            const saved = proposal.exportSave();
+            proposal.dispose();
+            return saved;
+        });
+        const windControl = document.querySelector<HTMLInputElement>('#fjordside-wind-motion');
+        if (windControl) windControl.disabled = world.describe().source !== 'ez-tree';
+        canvas.dataset.world = JSON.stringify(world.describe());
+        renderer.setPixelRatio(Math.min(devicePixelRatio,world.quality === 'low' ? 1 : 1.5));
         scene.add(world.root);
-        const lighting=new WorldLighting(scene,renderer,assets);
-        controller.setNavigationSurface(world.terrain);
+        const lighting=new WorldLighting(scene,renderer,assets,world.hearth,world.blueprint?world.center:undefined,world.quality);
+        controller.setNavigationSurface(world.terrain,world.center,world.blueprint?.terrain.bounds,world.movement.heightAt);
         const seasons=new SeasonTint(world.root,world.terrain);
         const characters=await Promise.all(Array.from({length:population},async (_,i)=>{
             const dna=generateCharacterDNA((config.seed+Math.imul(i+1,2654435761))>>>0);
@@ -41,7 +60,7 @@ export class Game {
         characters.forEach(c=>c.villager.socialEnabled=c.model instanceof MeshyHuman);
         const villagers = characters.map(character=>character.villager);
         villagers.forEach(v => scene.add(v.visual));
-        const movement = new MovementSystem(villagers);
+        const movement = new MovementSystem(villagers,undefined,world.movement);
         const profiles=new CharacterProfileCard(camera,canvas,scene,characters);
         controller.setSelectionHandler((x,y)=>profiles.select(x,y));
         const helpers = new GridHelper(80, 20, 0x6d7874, 0xadb9a3);
@@ -77,13 +96,43 @@ export class Game {
         });
         document.querySelector('#helpers')!.addEventListener('change', e => helpers.visible = (e.target as HTMLInputElement).checked);
         document.querySelector('#status')!.textContent = `FJORDSIDE · ${villagers.length} inhabitants`;
-        window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();profiles.dispose();seasons.dispose();renderer.dispose();},{once:true});
+        window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();profiles.dispose();seasons.dispose();controller.dispose();lighting.dispose();world.dispose();assets.dispose();renderer.dispose();window.removeEventListener('resize',resize);summary.remove();},{once:true});
         const cycle=new AnnualCycle(performance.now());let replacements=0;
+        let manuallyPaused = false,heldAt = 0,heldMs = 0;
+        const cycleNow = () => performance.now()-heldMs;
+        const pauseButton = document.querySelector<HTMLButtonElement>('#fjordside-pause');
+        pauseButton?.addEventListener('click',() => {
+            if (cycle.paused) return;
+            manuallyPaused = !manuallyPaused;
+            if (manuallyPaused) heldAt = performance.now();
+            else heldMs += performance.now()-heldAt;
+            pauseButton.textContent = manuallyPaused ? 'Resume world' : 'Pause world';
+        });
+        for (const id of ['water','wind']) document.querySelector('#fjordside-'+id+'-motion')?.addEventListener('change',() => {
+            world.setMotion({ water: (document.querySelector('#fjordside-water-motion') as HTMLInputElement).checked,
+                wind: (document.querySelector('#fjordside-wind-motion') as HTMLInputElement).checked });
+            canvas.dataset.world = JSON.stringify(world.describe());
+        });
+        document.querySelector('#fjordside-camera')?.addEventListener('change',event => {
+            const view = (event.target as HTMLSelectElement).value;
+            const site = world.describe().site;
+            const poses = { village: { position: [site.x+34,15,site.z-20],target: [site.x,3,site.z+18] },
+                shore: { position: [site.x+46,20,site.z-50],target: [site.x-25,7,site.z+20] },
+                overlook: { position: [88,78,-78],target: [0,5,16] } };
+            controller.setView(poses[view as keyof typeof poses]);
+        });
         const summary=document.createElement('dialog');summary.id='year-summary';summary.setAttribute('aria-labelledby','year-summary-title');
         summary.innerHTML='<h2 id="year-summary-title"></h2><p id="year-summary-count"></p><p id="year-summary-age"></p><button id="year-continue">Continue</button>';
         document.body.append(summary);summary.addEventListener('cancel',event=>event.preventDefault());
-        summary.querySelector('button')!.addEventListener('click',()=>{summary.close();cycle.resume(performance.now());});
-        const populationSnapshot=()=>{canvas.dataset.population=JSON.stringify(characters.map(c=>({seed:c.dna.seed,age:c.dna.age,x:c.villager.visual.position.x,z:c.villager.visual.position.z})));};
+        summary.querySelector('button')!.addEventListener('click',()=>{summary.close();cycle.resume(cycleNow());});
+        const populationSnapshot=()=>{canvas.dataset.population=JSON.stringify(characters.map(c=>({
+            id:c.villager.id,seed:c.dna.seed,age:c.dna.age,x:c.villager.visual.position.x,
+            y:c.villager.visual.position.y,z:c.villager.visual.position.z,
+            safe:world.movement.walkable(c.villager.visual.position.x,c.villager.visual.position.z),
+            ground:world.movement.heightAt(c.villager.visual.position.x,c.villager.visual.position.z),
+            speed:c.villager.speed,animation:c.model.state,
+            screen:c.villager.visual.position.clone().addScaledVector(camera.up,c.phenotype.height/2).project(camera).toArray(),
+        })));};
         populationSnapshot();
         const annualTick=(year:number)=>{
             for(const [index,character] of characters.entries()){
@@ -114,26 +163,37 @@ export class Game {
             summary.querySelector('#year-summary-age')!.textContent=`Average age: ${average.toFixed(1)} years`;
             summary.showModal();
         };
+        canvas.dataset.ready = 'true';
         const clock = new Clock();
         let time = 0, frames = 0, sample = 0;
         renderer.setAnimationLoop(() => {
             const elapsed = clock.getDelta(), dt = Math.min(elapsed, .05);
-            cycle.update(performance.now(),annualTick);
+            if (!manuallyPaused) cycle.update(cycleNow(),annualTick);
+            const paused = manuallyPaused || cycle.paused;
+            canvas.dataset.paused = String(paused);
             canvas.dataset.yearProgress=String(cycle.progress);
             document.querySelector('#world-year')!.textContent=`Year: ${cycle.year} DC`;
-            if(!cycle.paused)time += dt;
+            if(!paused)time += dt;
             sample += elapsed;
             frames++;
             controller.update(dt);
-            if(!cycle.paused)movement.update(dt);
-            world.update(time);
+            if(!paused)movement.update(dt);
             lighting.update(time,cycle.progress);
+            world.update(time,lighting);
             seasons.update(lighting.visualization==='seasons'?cycle.progress:null);
             document.body.dataset.lighting=lighting.mode;
-            characters.forEach(character=>{if(!cycle.paused){const state=character.villager.interactionState;if(character.model instanceof MeshyHuman&&(state==='talking'||state==='listening'))character.model.setAnimation(state==='talking'?'Talk':'Listen');else character.model.setMovementSpeed(character.villager.speed);}character.model.update(cycle.paused?0:dt,camera.position.distanceTo(character.villager.visual.position));});
+            characters.forEach(character=>{if(!paused){const state=character.villager.interactionState;if(character.model instanceof MeshyHuman&&(state==='talking'||state==='listening'))character.model.setAnimation(state==='talking'?'Talk':'Listen');else character.model.setMovementSpeed(character.villager.speed);}character.model.update(paused?0:dt,camera.position.distanceTo(character.villager.visual.position));});
             profiles.update();
             renderer.render(scene, camera);
             if (sample > .5) {
+                populationSnapshot();
+                canvas.dataset.fixture = JSON.stringify({ time,paused,year:cycle.year,progress:cycle.progress,
+                    camera: { position:camera.position.toArray(),target:controller.focus.toArray(),fov:camera.fov },
+                    lighting:lighting.mode,visualization:lighting.visualization,quality:world.quality,
+                    pixelRatio:renderer.getPixelRatio(),world:world.describe() });
+                canvas.dataset.metrics = JSON.stringify({ ms:sample/frames*1000,calls:renderer.info.render.calls,
+                    triangles:renderer.info.render.triangles,geometries:renderer.info.memory.geometries,
+                    textures:renderer.info.memory.textures,population:characters.length });
                 canvas.dataset.interactions=JSON.stringify(movement.snapshot());
                 for(const option of ['day','night'])document.querySelector(`#lighting-${option}`)!.setAttribute('aria-pressed',String(lighting.visualization==='off'&&lighting.mode===option));
                 document.querySelector('#world-fps')!.textContent=`FPS: ${Math.round(frames/sample)}`;

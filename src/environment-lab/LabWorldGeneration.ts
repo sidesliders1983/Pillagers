@@ -8,6 +8,7 @@ import { changeWorldConifers, generateWorld } from '../world-generation/Generate
 import { createBlueprintSurface, createBlueprintTerrain, disposeBlueprintTerrain } from '../world/BlueprintTerrain';
 import { loadWorldGroundMaterials } from '../world/WorldGroundMaterials';
 import { createNatureFromPlan } from '../world/KayKitNature';
+import { NatureWind } from '../world/NatureWind';
 import { placeSettlement } from '../world/PlaceSettlement';
 import { FjordWater } from '../world/FjordWater';
 import { fjordWaterConfig } from '../config/FjordWaterConfig';
@@ -27,6 +28,7 @@ type Preview = {
     nature: Group;
     village: Group;
     water: FjordWater;
+    wind: NatureWind;
     actors: { model: MeshyHuman; unit: Villager }[];
     movement: MovementSystem | null;
 };
@@ -161,7 +163,8 @@ export class LabWorldGeneration {
             const root = new Group();
             root.name = 'Generated Fjordside proposal';
             root.add(terrain, nature, village, water.mesh);
-            next = { root, terrain, nature, village, water, actors: [], movement: null };
+            next = { root, terrain, nature, village, water,
+                wind: new NatureWind(nature, conifers === 'ez-tree'), actors: [], movement: null };
             if (world.validation.accepted) {
                 for (let i = 0; i < 10; i++) {
                     // Same ten reference identities for every landscape, not a generated population.
@@ -302,6 +305,7 @@ export class LabWorldGeneration {
         const preview = this.preview;
         if (!preview) return;
         preview.water.update(time, lighting);
+        preview.wind.update(time);
         preview.movement?.update(dt);
         for (const actor of preview.actors) {
             const state = actor.unit.interactionState;
@@ -346,6 +350,7 @@ export class LabWorldGeneration {
         if (!preview) return;
         this.scene.remove(preview.root);
         preview.water.dispose();
+        preview.wind.dispose();
         disposeBlueprintTerrain(preview.terrain);
         preview.nature.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); });
         for (const actor of preview.actors) actor.model.dispose();

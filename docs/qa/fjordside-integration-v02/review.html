@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fjordside integration v0.2 — review</title>
+<style>
+body { margin: 0; padding: 24px; color: #e8e4d6; background: #162b2a; font: 16px/1.5 system-ui; }
+main { max-width: 1600px; margin: auto; }
+h1 { margin-bottom: 8px; }
+a { color: #e4c989; }
+.controls { display: flex; flex-wrap: wrap; gap: 18px; margin: 24px 0; }
+label { display: grid; gap: 4px; }
+select { padding: 8px; background: #294442; color: inherit; border: 1px solid #71847a; font: inherit; }
+.images { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+figure { margin: 0; }
+img { display: block; width: 100%; background: #213d3a; }
+figcaption { padding: 10px 0; }
+pre { overflow: auto; font-size: 12px; max-height: 200px; }
+.note { max-width: 1000px; }
+section { margin-top: 32px; }
+@media(max-width: 850px) { .images { grid-template-columns: 1fr; } body { padding: 14px; } }
+</style>
+</head>
+<body><main>
+<h1>Fjordside integration v0.2</h1>
+<p class="note">Reference and Generated with the same ten resident identities. This is a staged integration review. Reference remains the default; Northstar visual approval is pending.</p>
+<p><a href="report.md">Report and limitations</a> · <a href="results.json">Raw frame intervals and fixtures</a> · <a href="provenance.json">Source/build hashes</a> · <a href="/?worldDev=1">Open development controls</a></p>
+<div class="controls">
+<label>Generated seed<select id="seed"><option>17</option><option>91</option></select></label>
+<label>Quality<select id="quality"><option value="standard">Standard</option><option value="low">Low</option></select></label>
+<label>Lighting<select id="lighting"><option value="day">Day</option><option value="night">Night</option></select></label>
+<label>Camera<select id="view"><option value="village">Village</option><option value="shore">Shore</option><option value="overlook">High overlook</option></select></label>
+</div>
+<div class="images">
+<figure><img id="reference" alt="Original Reference Fjordside"><figcaption>Reference · original production scene</figcaption><pre id="reference-fixture"></pre></figure>
+<figure><img id="generated" alt="Generated Fjordside"><figcaption id="generated-label"></figcaption><pre id="generated-fixture"></pre></figure>
+</div>
+<p class="note">Village and Shore use the same offsets relative to each settlement. High overlook has the same absolute camera. Native production lighting is unchanged. Resident walking positions and elapsed phase vary slightly across reloads; exact fixtures are recorded. Greens remain too vivid in places, and actual house/tree water reflections are absent.</p>
+<section>
+<h2>Visible effects — two-second pairs</h2>
+<p>These are isolated Environment Lab views. Each pair is two seconds apart. Both paused pairs have zero channel change. <a href="motion.json">Measured image differences</a>. Source wind moves leaves; roots and branches remain fixed. No isolated FPS gain is claimed.</p>
+<div class="images">
+<figure><img src="trees-moving-t0.png" alt="Leaf wind at first frame"><figcaption>Wind · first frame</figcaption></figure>
+<figure><img src="trees-moving-t2.png" alt="Leaf wind two seconds later"><figcaption>Wind · two seconds later</figcaption></figure>
+<figure><img src="water-moving-t0.png" alt="Water at first frame"><figcaption>Water · first frame</figcaption></figure>
+<figure><img src="water-moving-t2.png" alt="Water two seconds later"><figcaption>Water · two seconds later</figcaption></figure>
+</div>
+<details><summary>Baseline images before the visibility pass</summary><div class="images"><figure><img src="trees-before.png" alt="Baseline trees"><figcaption>Baseline trees</figcaption></figure><figure><img src="water-before.png" alt="Baseline water"><figcaption>Baseline water</figcaption></figure></div></details>
+</section>
+<script>
+const fields = ['seed', 'quality', 'lighting', 'view'];
+const elements = Object.fromEntries(fields.map(id => [id, document.getElementById(id)]));
+let records = [];
+function update() {
+    const suffix = [elements.quality.value, elements.lighting.value, elements.view.value].join('-');
+    const referenceId = 'reference-' + suffix;
+    const generatedId = elements.seed.value + '-' + suffix;
+    document.getElementById('reference').src = referenceId + '.webp';
+    document.getElementById('generated').src = generatedId + '.webp';
+    document.getElementById('generated-label').textContent = 'Generated · seed ' + elements.seed.value;
+    for (const [prefix, id] of [['reference', referenceId], ['generated', generatedId]]) {
+        const shot = records.find(record => record.id === id);
+        document.getElementById(prefix + '-fixture').textContent = shot ?
+            JSON.stringify({camera: shot.fixture.camera, world: shot.fixture.world}, null, 2) : '';
+    }
+}
+for (const element of Object.values(elements)) element.addEventListener('change', update);
+update();
+fetch('results.json').then(response => response.json()).then(data => {
+    records = data.shots;
+    update();
+});
+</script>
+</main></body></html>

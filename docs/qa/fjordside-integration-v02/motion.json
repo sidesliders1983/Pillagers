@@ -1,0 +1,33 @@
+{
+  "before": {
+    "trees": {
+      "changedChannelsAbove3": 0,
+      "channelCount": 2656080,
+      "meanChannelDelta": 0
+    },
+    "water": {
+      "changedChannelsAbove3": 31964,
+      "channelCount": 2656080,
+      "meanChannelDelta": 0.15599228938887383
+    }
+  },
+  "after": {
+    "movingTrees": {
+      "changedChannelsAbove3": 252518,
+      "meanChannelDelta": 2.6835577241649347
+    },
+    "pausedTrees": {
+      "changedChannelsAbove3": 0,
+      "meanChannelDelta": 0
+    },
+    "movingWater": {
+      "changedChannelsAbove3": 110416,
+      "meanChannelDelta": 0.46958337098280173
+    },
+    "pausedWater": {
+      "changedChannelsAbove3": 0,
+      "meanChannelDelta": 0
+    },
+    "errors": []
+  }
+}

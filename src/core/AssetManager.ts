@@ -81,6 +81,7 @@ export class AssetManager {
         this.draco.dispose();
     }
     async loadNature(){
+        if(natureAssetIds.every(id=>this.models.has(id)))return;
         const response=await fetch(import.meta.env.BASE_URL+'nature/kaykit-v1/manifest.json');
         if(!response.ok)throw new Error('Required KayKit FREE assets missing; run asset-pipeline nature');
         const manifest=await response.json() as {assets:Record<NatureAssetKey,{file:string}>};
