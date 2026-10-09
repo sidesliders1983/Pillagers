@@ -1,9 +1,11 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import {createRequire} from 'node:module';import {mkdir,writeFile} from 'node:fs/promises';import {execFileSync} from 'node:child_process';import {createHash} from 'node:crypto';import sharp from 'sharp';
 const {chromium}=createRequire(import.meta.url)('C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'),output='docs/qa/ground-v04';await mkdir(output,{recursive:true});
 const b=await chromium.launch({channel:'msedge',headless:true}),p=await b.newPage({viewport:{width:1360,height:1200},deviceScaleFactor:1}),errors=[];p.setDefaultTimeout(60000);p.on('pageerror',e=>errors.push(e.message));
 await p.addInitScript(()=>{const o=new MutationObserver(()=>{const c=document.querySelector('#environment-pause');if(c){c.checked=true;o.disconnect();}});o.observe(document,{subtree:true,childList:true});});
 const captures=[];try{
- await p.goto('http://127.0.0.1:5181/environment-lab');await p.locator('canvas[data-ready=true]').waitFor({timeout:90000});await p.addStyleTag({content:'.environment-lab main{max-width:none;width:1280px;padding:0}.environment-lab canvas{width:1280px!important;height:800px!important;min-height:0!important}'});
+ await p.goto('http://127.0.0.1:5181/environment-lab');await p.locator('canvas[data-ready=true]').waitFor({timeout:90000});
+ await openEnvironmentSettings(p);await p.addStyleTag({content:'.environment-lab main{max-width:none;width:1280px;padding:0}.environment-lab canvas{width:1280px!important;height:800px!important;min-height:0!important}'});
  const settle=()=>p.waitForTimeout(650);
  const capture=async name=>{await settle();const c=p.locator('canvas'),bytes=await sharp(await c.screenshot()).webp({quality:92}).toBuffer();await writeFile(output+'/'+name+'.webp',bytes);captures.push({file:name+'.webp',sha256:createHash('sha256').update(bytes).digest('hex'),fixture:JSON.parse(await c.getAttribute('data-fixture')),metrics:JSON.parse(await c.getAttribute('data-metrics')),ground:JSON.parse(await c.getAttribute('data-ground'))});console.log(name);};
  for(const material of ['baseline','regional']){

@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
@@ -16,10 +17,11 @@ const triangles=text=>Number(text.match(/([\d.,]+) triangles/)[1].replace(/[.,]/
 try{
  await mkdir(reportPath,{recursive:true});
  console.log('Opening lab');await page.goto(url+'/environment-lab');await page.waitForSelector('#environment-canvas[data-ready="true"]',{timeout:60000});
+ await openEnvironmentSettings(page);
  assert.equal(await page.locator('#environment-variant').count(),0,'the lab must open the new water without a comparison control');
  assert.equal(await page.locator('#environment-quality').inputValue(),'standard');
  assert.match(await page.locator('#environment-status').innerText(),/boona13\/threejs-grass-water-shaders/, 'the lab identifies the selected sourced water implementation');
- console.log('Lab ready');const canvas=page.locator('#environment-canvas');const capture=async()=>page.screenshot({clip:await canvas.boundingBox()});
+ console.log('Lab ready');const canvas=page.locator('#environment-canvas');const capture=async()=>canvas.screenshot();
  await page.locator('#environment-pause').check();await settle();const paused=await capture();await page.waitForTimeout(400);assert.ok(paused.equals(await capture()),'paused water must hold its visible phase');
  await page.locator('#environment-pause').uncheck();await page.waitForTimeout(600);assert.ok(!paused.equals(await capture()),'water must visibly move after resume');await page.locator('#environment-pause').check();await settle();
  await page.screenshot({path:reportPath+'/source-water-day.png'});const day=await capture();await page.waitForFunction(()=>document.querySelector('#environment-metrics').textContent.includes('triangles'));const standard=await settledMetrics();console.log('Standard capture');const standardSample=await sample();

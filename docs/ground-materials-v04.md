@@ -24,3 +24,7 @@ See `docs/qa/ground-v04` for same-frame captures, source/output verification, se
 ## Delivery decision — 2026-10-08
 
 PR #67 was merged after both current-head CI runs passed. The owner clarified that the very old development laptop is a diagnostic reference; a few milliseconds over the earlier proposed, unapproved threshold do not block this developer-Lab delivery. Historical measurement reports remain unchanged. Combined visual review and representative-device evidence continue in Environment Pass 4 (#59), before production integration (#60). See `docs/qa/environment-pass4/report.md`; the Lab merge does not assert a final mock-up match or physical-mobile pass.
+
+## Generated-world sand study — 2026-10-09
+
+The focused #63/#74 follow-up compares generated-world Ground054 source tiles at Standard 256px and 512px, with unchanged Low 128px delivery. It does not rebake or replace the regional v0.4 atlases described above. The explicit Lab study uses the accepted ReferenceWater implementation for both resolutions; production activation is a separate decision. See [Generated sand resolution](GENERATED-SAND-RESOLUTION.md) for the processing, costs, controls and review evidence. Historical regional measurements remain records of their original material delivery.

@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Advanced settings can be collapsed
+
+0 !== 1
+
+    at file:///C:/CodexWorkspaces/Pillagers/scripts/qa/check-environment-controls.mjs:21:16 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 0,
+  expected: 1,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

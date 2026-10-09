@@ -1,0 +1,19 @@
+{
+  "movingTrees": {
+    "changedChannelsAbove3": 271477,
+    "meanChannelDelta": 2.9083792656847685
+  },
+  "pausedTrees": {
+    "changedChannelsAbove3": 0,
+    "meanChannelDelta": 0
+  },
+  "movingWater": {
+    "changedChannelsAbove3": 110017,
+    "meanChannelDelta": 0.46913195385681156
+  },
+  "pausedWater": {
+    "changedChannelsAbove3": 0,
+    "meanChannelDelta": 0
+  },
+  "errors": []
+}

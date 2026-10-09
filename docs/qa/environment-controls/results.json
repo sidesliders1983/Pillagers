@@ -1,0 +1,40 @@
+[
+  {
+    "viewport": {
+      "width": 1366,
+      "height": 768
+    },
+    "visibleHeight": 499.1875,
+    "canvas": {
+      "x": 20,
+      "y": 167,
+      "width": 1326,
+      "height": 499.1875
+    },
+    "keyboardToggle": true,
+    "selectionPreserved": true,
+    "pageScroll": true,
+    "canvasZoom": true,
+    "horizontalOverflow": false,
+    "errors": []
+  },
+  {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "visibleHeight": 543,
+    "canvas": {
+      "x": 12,
+      "y": 301,
+      "width": 366,
+      "height": 548.59375
+    },
+    "keyboardToggle": true,
+    "selectionPreserved": true,
+    "pageScroll": true,
+    "canvasZoom": true,
+    "horizontalOverflow": false,
+    "errors": []
+  }
+]

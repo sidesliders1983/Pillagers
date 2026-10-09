@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import {createRequire} from 'node:module';
 import {writeFile,mkdir} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
@@ -12,6 +13,7 @@ await p.addInitScript(()=>{const o=new MutationObserver(()=>{const c=document.qu
 const captures=[];
 try {
  await p.goto('http://127.0.0.1:5181/environment-lab');await p.locator('canvas[data-ready=true]').waitFor();
+ await openEnvironmentSettings(p);
  const css=await p.addStyleTag({content:'.environment-lab main{max-width:none;width:1536px;padding:0}.environment-lab canvas{width:1536px!important;height:1024px!important;min-height:0!important}'});
  const tier=async value=>{if(await p.inputValue('#environment-quality')!==value)await p.selectOption('#environment-quality',value,{force:true});await p.waitForFunction(t=>document.querySelector('canvas').dataset.groundTier===(t==='standard'?'standard':'low')&&!document.querySelector('#environment-status').textContent.startsWith('Loading'),value);};
  const capture=async(name,layer='combined')=>{await p.waitForTimeout(800);const c=p.locator('canvas'),bytes=await sharp(await c.screenshot()).webp({quality:94}).toBuffer();await writeFile(out+'/'+name+'.webp',bytes);captures.push({file:name+'.webp',sha256:createHash('sha256').update(bytes).digest('hex'),canvas:await c.boundingBox(),fixture:JSON.parse(await c.getAttribute('data-fixture')),metrics:JSON.parse(await c.getAttribute('data-metrics')),ground:JSON.parse(await c.getAttribute('data-ground')),layer,quality:await p.inputValue('#environment-quality'),historicalFallback:await p.inputValue('#environment-quality')==='legacy'});console.log(name);};

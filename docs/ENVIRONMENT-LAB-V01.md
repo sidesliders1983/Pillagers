@@ -3,6 +3,12 @@
 Current #75 note: Compatibility fallback now shares the approved ReferenceWater
 with Fjordside and follows current Lab lighting/camera. See
 [the fallback regression evidence](qa/environment-fallback-water/report.md).
+Current controls: Camera, Lighting, Quality and Pause waves & wind stay visible.
+**Settings** starts collapsed and groups world generation/sand studies, lighting studies,
+and scenery/material controls. **Diagnostics & sources** also starts collapsed.
+Collapsing keeps entered values and preview state. The page scrolls outside the orbit
+canvas; wheel input over the canvas still zooms. See [controls QA](qa/environment-controls/report.md).
+
 The original sourced-water description and Pass 1 measurements below remain historical.
 
 Open `/environment-lab`. The default water is the MIT implementation from [boona13/threejs-grass-water-shaders](https://github.com/boona13/threejs-grass-water-shaders), pinned to `97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159`. Its water GLSL is unchanged. [Source provenance and local adaptations](../src/vendor/boona13-water/README.md) include the original license.

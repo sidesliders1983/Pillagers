@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 const {chromium}=createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE||'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
@@ -6,6 +7,7 @@ const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console'
 try {
  await page.goto((process.env.QA_ORIGIN||'http://127.0.0.1:5181')+'/environment-lab');
  await page.locator('canvas[data-ready=true]').waitFor();
+ await openEnvironmentSettings(page);
  const lighting=page.locator('#environment-light');
  await lighting.waitFor();
  assert.ok((await lighting.locator('option').allTextContents()).includes('Low sun · 20°'),'User can choose a static low northern sun');
