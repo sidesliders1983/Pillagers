@@ -1,6 +1,6 @@
 # Fjordside social encounters (#48)
 
-Meshy residents reserve exclusive pairs when their approaching routes predict a personal-space conflict. They stop before contact, turn toward each other and play Talk_Passionately / Listening_Gesture for five simulation seconds. The annual pause freezes both movement and encounter time. Destinations remain unchanged. A three-second cooldown and pair separation requirement prevent immediate repeat encounters.
+Meshy residents reserve exclusive pairs when their approaching routes predict a personal-space conflict. They stop before contact, turn toward each other and play Talk_Passionately / Listening_Gesture for five simulation seconds. Manual Pause freezes both movement and encounter time. Annual aging continues without a popup or automatic pause. Destinations remain unchanged. A three-second cooldown and pair separation requirement prevent immediate repeat encounters.
 
 MovementSystem owns navigation and pair reservations. MeshyHuman owns animation playback and existing crossfades. Legacy bodies without social clips use avoidance only. Busy residents and third parties sidestep or yield. Continuous segment checks prevent stepping across another resident's configured radius. Spawn and persona replacement also respect personal space and release old encounters.
 

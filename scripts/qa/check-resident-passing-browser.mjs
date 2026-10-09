@@ -13,9 +13,6 @@ const browser = await chromium.launch({ channel: 'msedge', headless: true,
         ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] : [] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.setDefaultTimeout(120000);
-await page.addLocatorHandler(page.locator('#year-summary[open]'), async () => {
-    await page.click('#year-continue');
-});
 const errors = [], samples = [], captures = [];
 page.on('pageerror', error => errors.push(error.message));
 page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -68,9 +65,10 @@ try {
     let previous = first, sawEncounter = false, sawResume = false, middle = false;
     while (previous.fixture.time - start < duration) {
         assert.ok(Date.now() - wallStart < 240000, 'World does not advance');
-        if (await page.locator('#year-summary').isVisible()) await page.click('#year-continue');
         await page.waitForTimeout(500);
         const sample = await read();
+        assert.equal(sample.fixture.paused, false, 'Annual aging must not pause movement');
+        assert.equal(await page.locator('dialog[open]').count(), 0);
         const dt = sample.fixture.time - previous.fixture.time;
         if (dt <= 0) continue;
         for (let i = 0; i < sample.population.length; i++) {

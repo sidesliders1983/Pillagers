@@ -53,7 +53,7 @@ The boat borrows AssetManager geometry/materials and does not dispose them.
 Open `/?worldDev=1` → Development tools → Debug. Boat close-up and Water low angle
 are additional review cameras. Set effects time and pause scrubs water/boat/wind
 together without advancing the annual simulation. Resume continues from that time.
-Normal annual Continue and manual Pause retain their previous behavior.
+Annual aging no longer opens a summary or pauses the world. Manual Pause still holds the annual clock and environmental motion.
 
 Changing Standard/Low switches the live water mesh, DPR cap and shadow budget
 without reloading, resetting time or changing geography. The ground-map tier is the

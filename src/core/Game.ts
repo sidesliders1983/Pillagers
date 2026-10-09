@@ -107,13 +107,24 @@ export class Game {
             helpers.visible = movementDebug.root.visible = visible;
         });
         document.querySelector('#status')!.textContent = `FJORDSIDE · ${villagers.length} inhabitants`;
-        window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();profiles.dispose();seasons.dispose();controller.dispose();lighting.dispose();movementDebug.dispose();world.dispose();assets.dispose();renderer.dispose();window.removeEventListener('resize',resize);summary.remove();},{once:true});
+        window.addEventListener('pagehide', () => {
+            renderer.setAnimationLoop(null);
+            for (const character of characters) character.model.dispose();
+            profiles.dispose();
+            seasons.dispose();
+            controller.dispose();
+            lighting.dispose();
+            movementDebug.dispose();
+            world.dispose();
+            assets.dispose();
+            renderer.dispose();
+            window.removeEventListener('resize', resize);
+        }, { once: true });
         const cycle=new AnnualCycle(performance.now());let replacements=0;
         let manuallyPaused = false,heldAt = 0,heldMs = 0;
         const cycleNow = () => performance.now()-heldMs;
         const pauseButton = document.querySelector<HTMLButtonElement>('#fjordside-pause');
         pauseButton?.addEventListener('click',() => {
-            if (cycle.paused) return;
             manuallyPaused = !manuallyPaused;
             if (manuallyPaused) heldAt = performance.now();
             else heldMs += performance.now()-heldAt;
@@ -141,10 +152,6 @@ export class Game {
                 boat: boatView(4,2.5), grazing: boatView(6,1.2) };
             controller.setView(poses[view as keyof typeof poses]);
         });
-        const summary=document.createElement('dialog');summary.id='year-summary';summary.setAttribute('aria-labelledby','year-summary-title');
-        summary.innerHTML='<h2 id="year-summary-title"></h2><p id="year-summary-count"></p><p id="year-summary-age"></p><button id="year-continue">Continue</button>';
-        document.body.append(summary);summary.addEventListener('cancel',event=>event.preventDefault());
-        summary.querySelector('button')!.addEventListener('click',()=>{summary.close();cycle.resume(cycleNow());});
         const populationSnapshot=()=>{canvas.dataset.population=JSON.stringify(characters.map(c=>({
             id:c.villager.id,seed:c.dna.seed,age:c.dna.age,x:c.villager.visual.position.x,
             y:c.villager.visual.position.y,z:c.villager.visual.position.z,
@@ -176,19 +183,13 @@ export class Game {
                 }
             }
             populationSnapshot();
-            cycle.pause();
-            summary.querySelector('h2')!.textContent=`Year ${year-1} complete`;
-            summary.querySelector('#year-summary-count')!.textContent=`Community: ${characters.length} persons`;
-            const average=characters.reduce((sum,c)=>sum+c.dna.age,0)/characters.length;
-            summary.querySelector('#year-summary-age')!.textContent=`Average age: ${average.toFixed(1)} years`;
-            summary.showModal();
         };
         canvas.dataset.ready = 'true';
         document.querySelector('#fjordside-effects-scrub')?.addEventListener('click',() => {
             const input = document.querySelector<HTMLInputElement>('#fjordside-effects-time')!;
             const value = Number(input.value);
             if (!Number.isFinite(value) || value < 0 || value > 120) return;
-            if (!manuallyPaused && !cycle.paused) {
+            if (!manuallyPaused) {
                 manuallyPaused = true;
                 heldAt = performance.now();
                 if (pauseButton) pauseButton.textContent = 'Resume world';
@@ -200,7 +201,7 @@ export class Game {
         renderer.setAnimationLoop(() => {
             const elapsed = clock.getDelta(), dt = Math.min(elapsed, .05);
             if (!manuallyPaused) cycle.update(cycleNow(),annualTick);
-            const paused = manuallyPaused || cycle.paused;
+            const paused = manuallyPaused;
             canvas.dataset.paused = String(paused);
             canvas.dataset.yearProgress=String(cycle.progress);
             document.querySelector('#world-year')!.textContent=`Year: ${cycle.year} DC`;

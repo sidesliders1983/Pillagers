@@ -9,6 +9,5 @@ body[data-lighting=night] .world-heading{color:#e5e9df}body[data-lighting=night]
 
 .world-time{display:flex;gap:12px;margin-top:8px;font-size:11px;font-variant-numeric:tabular-nums;background:#f4f3e9d9;border-radius:5px;padding:6px 9px;color:#35483f;width:max-content}.lighting-controls{flex-wrap:wrap}#debug pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:360px}
 
-#year-summary{width:320px;max-width:calc(100vw - 32px);padding:28px;background:#f4f3e9;color:#35483f;border:1px solid #bbc6b3;border-radius:12px;box-shadow:0 12px 48px #0003}#year-summary::backdrop{background:#25382c55}#year-summary h2{font:400 24px Georgia,serif;margin-top:0}#year-summary button{width:100%;min-height:44px;margin-top:12px;background:#536c55;color:white}
 
 .fjordside-world-controls{max-width:360px;margin-bottom:16px;border-bottom:1px solid #bbc6b3;padding-bottom:12px}.fjordside-world-controls input[type=number],.fjordside-world-controls select{display:block;width:100%;padding:6px;font:inherit}.fjordside-world-controls button{margin:3px;min-height:36px}.fjordside-world-controls p{line-height:1.6}
