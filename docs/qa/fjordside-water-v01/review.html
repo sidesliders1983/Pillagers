@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fjordside water and boat — review</title>
+<style>
+body { margin: 0; padding: 24px; background: #152b2e; color: #e8e4d6; font: 16px/1.5 system-ui; }
+main { max-width: 1400px; margin: auto; }
+a { color: #e6cc91; }
+.controls { display: flex; flex-wrap: wrap; gap: 18px; margin: 24px 0; }
+label { display: grid; gap: 4px; }
+select { padding: 8px; font: inherit; background: #2e494b; color: inherit; border: 1px solid #708a85; }
+img { display: block; width: 100%; }
+pre { overflow: auto; max-height: 220px; font-size: 12px; }
+.note { max-width: 1000px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+figure { margin: 0; }
+figcaption { margin: 8px 0; }
+@media(max-width: 800px) { body { padding: 12px; } .pair { grid-template-columns: 1fr; } }
+</style></head>
+<body><main>
+<h1>Fjordside water and boat</h1>
+<p class="note">Approved ReferenceWater defaults, the original faering, and native production lighting.
+Use the three boat times to inspect heave, pitch and roll beside the pier. These are still frames;
+open the preview to assess motion. Source placement and heading are preserved.</p>
+<p><a href="report.md">QA report and limits</a> · <a href="results.json">Capture settings and costs</a> ·
+<a href="provenance.json">Source hashes</a> · <a href="boat-clearance.json">Geometric clearance</a></p>
+<div class="controls">
+<label>World<select id="world"><option value="reference">Reference</option><option>17</option><option>91</option></select></label>
+<label>Water quality<select id="quality"><option value="standard">Standard / Medium</option><option value="low">Low</option></select></label>
+<label>View<select id="view">
+<option value="day-boat-t0">Boat · Day · 0 seconds</option>
+<option value="day-boat-t2">Boat · Day · 2.5 seconds</option>
+<option value="day-boat-t8">Boat · Day · 8.1 seconds</option>
+<option value="day-grazing">Low angle · Day</option>
+<option value="day-shore">Shore · Day</option>
+<option value="day-overlook">Far overview · Day</option>
+<option value="night-boat">Boat · Night</option>
+</select></label>
+</div>
+<img id="image" alt="Original faering on the selected ReferenceWater surface">
+<pre id="fixture"></pre>
+<p class="note">One opaque water draw, with no actual house/tree/boat reflections, seabed refraction,
+depth mask or shoreline foam. Near-water geometric waves fade into a sparse horizon skirt.
+Quality changes preserve the live clock and geography; ground maps retain their scene-load tier.</p>
+<h2>Mobile layout</h2>
+<div class="pair">
+<figure><img src="mobile-portrait.webp" alt="390 by 844 portrait layout"><figcaption>Portrait · desktop emulation</figcaption></figure>
+<figure><img src="mobile-landscape.webp" alt="844 by 390 landscape layout"><figcaption>Landscape · desktop emulation</figcaption></figure>
+</div>
+<p>Touch drag, pinch, Pause and live quality were tested. These images and host readouts are not phone performance evidence.</p>
+<script>
+const controls = ['world', 'quality', 'view'].map(id => document.getElementById(id));
+let shots = [];
+function update() {
+    const id = controls.map(control => control.value).join('-');
+    document.getElementById('image').src = id + '.webp';
+    const shot = shots.find(item => item.id === id);
+    document.getElementById('fixture').textContent = shot ? JSON.stringify({
+        camera: shot.fixture.camera, lighting: shot.fixture.lighting,
+        water: shot.fixture.world.water, groundTier: shot.fixture.world.groundTier,
+        visibleMainPass: shot.metrics,
+    }, null, 2) : '';
+}
+controls.forEach(control => control.addEventListener('change', update));
+update();
+fetch('results.json').then(response => response.json()).then(data => { shots = data.shots; update(); });
+</script>
+</main></body></html>

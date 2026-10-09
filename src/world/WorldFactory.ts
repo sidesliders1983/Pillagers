@@ -1,4 +1,4 @@
-import { Group, InstancedMesh, Mesh, Vector3 } from 'three';
+import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
 import type { AssetManager } from '../core/AssetManager';
 import type { WorldLighting } from '../core/WorldLighting';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -11,8 +11,8 @@ import { loadWorldGroundMaterials } from './WorldGroundMaterials';
 import { loadPineModels } from './PineModels';
 import { createNatureFromPlan } from './KayKitNature';
 import { NatureWind } from './NatureWind';
-import { FjordWater } from './FjordWater';
-import { fjordWaterConfig } from '../config/FjordWaterConfig';
+import { FjordsideWater } from './FjordsideWater';
+import { BoatFloat } from './BoatFloat';
 import { placeSettlement } from './PlaceSettlement';
 import { blueprintMovement } from './BlueprintMovement';
 import { planWorldAttachments, attachmentClearance, WorldAttachment } from './WorldAttachments';
@@ -54,11 +54,13 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
     let classic: World | undefined;
     let grounds: Awaited<ReturnType<typeof loadWorldGroundMaterials>> | undefined;
     let pines: Awaited<ReturnType<typeof loadPineModels>> | undefined;
-    let water: FjordWater | undefined;
+    let water: FjordsideWater | undefined;
     let wind: NatureWind | undefined;
+    let floatingBoat: BoatFloat | undefined;
     let terrain: Mesh | undefined;
     let movement: MovementTerrain;
     let motion = { water: true, wind: true };
+    let quality = selection.quality;
     let waterTime = 0,windTime = 0;
     const dispose = () => {
         water?.dispose();
@@ -81,9 +83,9 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             const nature = createNatureFromPlan(assets,blueprint.placementPlan,
                 blueprint.config.seed,pines?.resolve);
             wind = new NatureWind(nature,!!pines);
-            water = new FjordWater({ ...fjordWaterConfig,quality: selection.quality,
-                level: blueprint.waterLevel },surface,blueprint.coast);
             attachments.push(...planWorldAttachments(assets,blueprint));
+            const mooring = attachments.find(item => item.key === 'boat')!;
+            water = new FjordsideWater(blueprint.waterLevel, mooring, selection.quality);
             if (selection.attachments && JSON.stringify(selection.attachments) !== JSON.stringify(attachments))
                 throw new Error('Saved production attachments no longer match the locked source contract.');
             root.add(terrain,nature,water.mesh,
@@ -107,11 +109,13 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 throw new Error('No safe production resident position.');
             } };
         } else {
-            classic = new World(assets);
+            classic = new World(assets, selection.quality);
             terrain = classic.terrain;
             root.add(classic.root);
             movement = { heightAt: surfaceHeightAt,walkable,randomPosition: randomWalkablePosition };
         }
+        floatingBoat = new BoatFloat(root.getObjectByName('boat')!);
+        floatingBoat.update((water ?? classic!.water).surface, 0);
         root.name = blueprint ? 'Integrated generated Fjordside' : 'Reference Fjordside';
         const fire = attachments.find(p => p.key === 'hearth') ??
             { ...hearth,y: surfaceHeightAt(hearth.x,hearth.z) };
@@ -120,26 +124,32 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             root,terrain,movement,blueprint,attachments,
             hearth: new Vector3(fire.x,fire.y,fire.z),
             center: new Vector3(center.x,movement.heightAt(center.x,center.z),center.z+16),
-            quality: selection.quality,
+            get quality() { return quality; },
+            setQuality(value: 'standard' | 'low') {
+                quality = value;
+                (water ?? classic!.water).surface.setQuality(value === 'low' ? 'low' : 'medium');
+                floatingBoat!.update((water ?? classic!.water).surface,waterTime);
+            },
             setMotion(value: typeof motion) { motion = { ...value }; },
-            update(time: number,lighting?: WorldLighting) {
+            update(time: number,lighting?: WorldLighting,camera?: Camera) {
                 if (motion.water) waterTime = time;
                 if (motion.wind) windTime = time;
-                classic?.update(waterTime);
-                water?.update(waterTime,lighting);
+                classic?.update(waterTime,lighting,camera);
+                water?.update(waterTime,lighting,camera);
                 wind?.update(windTime);
+                floatingBoat!.update((water ?? classic!.water).surface,waterTime);
             },
             exportSave() {
                 return JSON.stringify({ fjordsideVersion: 1,mode: selection.mode,
-                    quality: selection.quality,blueprint,
+                    quality,blueprint,
                     attachmentVersion: 'authored-props-v1',attachments });
             },
             describe() {
                 return { mode: selection.mode,seed: blueprint?.config.seed ?? 1983,
-                    quality: selection.quality,buildings: blueprint ? 6 : 7,
-                    populationSource: 'existing-fjordside',source: blueprint?.config.conifers ?? 'reference',
+                    quality,buildings: blueprint ? 6 : 7,
+                    populationSource: 'existing-fjordside',groundTier: grounds?.tier ?? 'reference',source: blueprint?.config.conifers ?? 'reference',
                     site: { x: center.x,z: center.z },attachments: attachments.length,
-                    validation: blueprint?.validation ?? null,motion };
+                    validation: blueprint?.validation ?? null,motion,water: { ...(water ?? classic!.water).describe(), boat: floatingBoat!.describe() } };
             },
             dispose,
         };

@@ -1,0 +1,498 @@
+{
+  "reference": {
+    "file": "1-ScreenRecording_10-09-2026-08-26-03_1.mov",
+    "durationSeconds": 7.72,
+    "sourceWidth": 1180,
+    "sourceHeight": 1750,
+    "codec": "HEVC Main",
+    "color": "BT.709, full-range YUV 4:2:0 as reported by FFmpeg",
+    "nominalRate": "60 tbr; approximately 60.18 fps container average",
+    "decodedFrames": 465,
+    "firstPresentationTimestamp": 0.0,
+    "lastPresentationTimestamp": 7.71,
+    "presentationIntervalRangeSeconds": [
+      0.005,
+      0.016667
+    ],
+    "timeline": "frame-timeline.csv",
+    "sourceSha256": "2ece792cead61b4f843864de80bcd1ce8d2fc47ae4e65ce805965ee9a3e276f3"
+  },
+  "coverage": {
+    "decodedEveryFrame": true,
+    "visuallyReviewedEveryLowerHalfCrop": true,
+    "cropReviewResolution": "256 x 190 pixels per crop, assembled into eight 64-frame contact sheets",
+    "reviewedFrames": [
+      1,
+      465
+    ],
+    "reviewedSheets": [
+      "all-frames-water-01.jpg",
+      "all-frames-water-02.jpg",
+      "all-frames-water-03.jpg",
+      "all-frames-water-04.jpg",
+      "all-frames-water-05.jpg",
+      "all-frames-water-06.jpg",
+      "all-frames-water-07.jpg",
+      "all-frames-water-08.jpg"
+    ],
+    "fullFrameOverview": "overview-01.jpg; one frame at or after each whole second",
+    "limitation": "All frame crops were visually inspected at contact-sheet scale. This is not native-resolution scrutiny of every source pixel. Camera motion prevents reliable recovery of a unique wave speed, wavelength or simulation algorithm.",
+    "fullResolutionSamplesVisuallyReviewed": [
+      {
+        "frame": 1,
+        "seconds": 0.0,
+        "path": "full-resolution/sample-01.png"
+      },
+      {
+        "frame": 62,
+        "seconds": 1.003333,
+        "path": "full-resolution/sample-02.png"
+      },
+      {
+        "frame": 182,
+        "seconds": 3.0,
+        "path": "full-resolution/sample-03.png"
+      },
+      {
+        "frame": 302,
+        "seconds": 4.996667,
+        "path": "full-resolution/sample-04.png"
+      },
+      {
+        "frame": 362,
+        "seconds": 5.995,
+        "path": "full-resolution/sample-05.png"
+      },
+      {
+        "frame": 422,
+        "seconds": 6.993333,
+        "path": "full-resolution/sample-06.png"
+      }
+    ],
+    "fullResolutionWaterCrops": [
+      {
+        "sourceFrame": 1,
+        "seconds": 0.0,
+        "sourceBounds": [
+          730,
+          1500,
+          1180,
+          1750
+        ],
+        "path": "full-resolution/water-crop-01.png",
+        "nativePixels": true
+      },
+      {
+        "sourceFrame": 62,
+        "seconds": 1.003333,
+        "sourceBounds": [
+          0,
+          1310,
+          1180,
+          1750
+        ],
+        "path": "full-resolution/water-crop-02.png",
+        "nativePixels": true
+      },
+      {
+        "sourceFrame": 182,
+        "seconds": 3.0,
+        "sourceBounds": [
+          0,
+          1300,
+          1180,
+          1750
+        ],
+        "path": "full-resolution/water-crop-03.png",
+        "nativePixels": true
+      },
+      {
+        "sourceFrame": 302,
+        "seconds": 4.996667,
+        "sourceBounds": [
+          0,
+          1520,
+          1180,
+          1750
+        ],
+        "path": "full-resolution/water-crop-04.png",
+        "nativePixels": true
+      },
+      {
+        "sourceFrame": 362,
+        "seconds": 5.995,
+        "sourceBounds": [
+          0,
+          1550,
+          1180,
+          1750
+        ],
+        "path": "full-resolution/water-crop-05.png",
+        "nativePixels": true
+      },
+      {
+        "sourceFrame": 422,
+        "seconds": 6.993333,
+        "sourceBounds": [
+          0,
+          1580,
+          1180,
+          1750
+        ],
+        "path": "full-resolution/water-crop-06.png",
+        "nativePixels": true
+      }
+    ]
+  },
+  "timelineObservations": [
+    {
+      "frames": [
+        1,
+        64
+      ],
+      "seconds": [
+        0.0,
+        1.037
+      ],
+      "visible": "Camera descends and orbits. Clear turquoise foreground with distorted dark underlying features gives way smoothly to a bluer, more reflective low-angle surface. Broad crests and smaller irregular ripples coexist. No visible abrupt material switch at reviewed scale."
+    },
+    {
+      "frames": [
+        65,
+        128
+      ],
+      "seconds": [
+        1.053,
+        2.102
+      ],
+      "visible": "Low grazing view emphasizes rounded rolling crests and compressed distant detail. Soft grey-blue reflection streaks deform between frames. Water does not behave as a static flat color or isolated circular ripples."
+    },
+    {
+      "frames": [
+        129,
+        192
+      ],
+      "seconds": [
+        2.118,
+        3.167
+      ],
+      "visible": "Orbit continues; larger wave shapes and finer bright broken streaks coexist. Foreground retains subtle cyan below the blue reflective surface. No obvious grid seam or discrete LOD ring at reviewed scale."
+    },
+    {
+      "frames": [
+        193,
+        256
+      ],
+      "seconds": [
+        3.183,
+        4.232
+      ],
+      "visible": "Blue surface dominates with fine pale reflection patches. Foam is mainly a thin hull-contact line, rather than a uniform open-water white layer. No visible focus-plane transition."
+    },
+    {
+      "frames": [
+        257,
+        320
+      ],
+      "seconds": [
+        4.248,
+        5.297
+      ],
+      "visible": "View gradually becomes more elevated. Turquoise foreground and underwater-looking dark features become easier to see. Surface still carries pale moving highlights over the visible underlying detail."
+    },
+    {
+      "frames": [
+        321,
+        384
+      ],
+      "seconds": [
+        5.313,
+        6.362
+      ],
+      "visible": "Clearer elevated view. Fine highlights begin concentrating toward the foreground/right while darker distorted patches remain visible. The transition is gradual across successive frames."
+    },
+    {
+      "frames": [
+        385,
+        448
+      ],
+      "seconds": [
+        6.378,
+        7.427
+      ],
+      "visible": "Strong broken silvery glints cover portions of the turquoise foreground. Highlights trace irregular surface slopes and are not a single smooth uniform white patch. Distorted underlying features remain visible between glints."
+    },
+    {
+      "frames": [
+        449,
+        465
+      ],
+      "seconds": [
+        7.443,
+        7.71
+      ],
+      "visible": "The elevated orbit continues through the last frame with turquoise water, irregular bright glints and dark distorted detail. No visible animation reset at the end, but the recording does not prove seamless looping."
+    }
+  ],
+  "dimensions": {
+    "shaders": {
+      "visibleEvidence": [
+        "View-dependent blue-to-turquoise appearance",
+        "Multiple apparent spatial scales of surface variation",
+        "Broken bright patches that follow surface orientation",
+        "Distortion of underlying-looking features"
+      ],
+      "implementationInference": [
+        "Analytic displacement plus layered normals can approximate the shape",
+        "Fresnel-like view weighting can reproduce the angle-dependent balance",
+        "Depth attenuation and optional refraction sampling would reproduce more of the clear-water appearance"
+      ],
+      "notRecoverable": [
+        "Exact GLSL",
+        "FFT versus Gerstner versus other displacement",
+        "Reflection pass type",
+        "Whether dark features are exclusively refraction, reflection or shadow"
+      ]
+    },
+    "animationsMotion": {
+      "visibleEvidence": [
+        "Continuous evolution throughout all 465 reviewed crops",
+        "Broad surface movement with smaller-scale shimmer",
+        "Large camera orbit strongly changes projected texture motion"
+      ],
+      "implementationInference": [
+        "Use elapsed seconds for independent wave phases and normal flow",
+        "Use multiple directions and scales rather than one translating ripple pattern"
+      ],
+      "notRecoverable": [
+        "Physical wavelength",
+        "Absolute travel speed",
+        "World-scale amplitude",
+        "Long-period loop duration"
+      ]
+    },
+    "texturing": {
+      "visibleEvidence": [
+        "Fine nonuniform ripples over broad wave shapes",
+        "Clear turquoise regions retain underlying-looking detail",
+        "No obvious repeated tile boundary in the scaled sequence"
+      ],
+      "implementationInference": [
+        "Two differently oriented scrolling normal layers are a practical approximation",
+        "A world-space shallow-depth input should remain stable while the camera moves",
+        "Normal mip filtering or distance attenuation should suppress distant shimmer"
+      ],
+      "notRecoverable": [
+        "Source texture assets",
+        "Texture resolution",
+        "Whether small detail is procedural or sampled"
+      ]
+    },
+    "lighting": {
+      "visibleEvidence": [
+        "Soft blue-grey surface reflections at grazing angles",
+        "Stronger broken silver glints around 6.4 to 7.4 seconds",
+        "Base turquoise remains visible between highlights"
+      ],
+      "implementationInference": [
+        "Directional sun specular plus a broad sky term can approximate the open-water look",
+        "Anti-aliased specular should avoid isolated unstable subpixel flashes"
+      ],
+      "notRecoverable": [
+        "Sun intensity",
+        "Exposure",
+        "Tone mapping",
+        "Environment-map content",
+        "Use of screen-space or planar reflection"
+      ]
+    },
+    "lodDof": {
+      "visibleEvidence": [
+        "Distant wave detail compresses toward the horizon",
+        "No obvious ring boundary or mesh-density step at contact-sheet scale",
+        "No conspicuous focus band or bokeh in the supplied clip"
+      ],
+      "implementationInference": [
+        "Continuous normal-detail attenuation with distance is appropriate",
+        "Depth of field is not required to reproduce the visible material character"
+      ],
+      "notRecoverable": [
+        "Actual LOD scheme",
+        "True absence of DOF",
+        "Whether distant softness comes from mipmaps, atmospheric appearance, movement, scaling or video compression"
+      ]
+    },
+    "performanceRenderingOptimization": {
+      "visibleEvidence": [
+        "Source overlay reads about 60 to 61 FPS in overview frames",
+        "Recording itself contains 465 frames over about 7.72 seconds"
+      ],
+      "implementationInference": [
+        "Begin with one water mesh/material and no mandatory reflection or postprocessing pass",
+        "Provide mobile quality tiers and bounded pixel ratio",
+        "Measure the implemented effect on the target device before claiming mobile performance"
+      ],
+      "notRecoverable": [
+        "GPU model",
+        "Device thermals",
+        "Render resolution before capture",
+        "GPU timing",
+        "Draw calls",
+        "Texture memory",
+        "Performance headroom"
+      ]
+    },
+    "qa": {
+      "visibleEvidence": [
+        "Source provides grazing, elevated, low-glint and strong-glint views within one short orbit",
+        "No abrupt visual reset, obvious grid seam or discrete LOD pop observed in the reviewed water crops"
+      ],
+      "implementationInference": [
+        "Capture fixed elevated, grazing and highlight-facing views at deterministic times",
+        "Compare water-only crops by material properties rather than boat silhouettes",
+        "Keep visual acceptance separate from shader-compilation and frame-rate checks"
+      ],
+      "notRecoverable": [
+        "Exact source camera transform",
+        "Ground-truth world units",
+        "Source reference rendered without the boat and environment"
+      ]
+    }
+  },
+  "exclusions": [
+    "Boat geometry, sails and animation",
+    "Environment reconstruction and underwater prop creation",
+    "Hull-contact foam and wakes that require the excluded boat",
+    "Claims to reproduce the original unknown rendering algorithm exactly"
+  ],
+  "qaAcceptanceCriteria": [
+    {
+      "id": "layered-motion",
+      "requirement": "Broad rolling surface shapes and finer irregular detail coexist and evolve continuously; avoid uniform parallel stripe motion."
+    },
+    {
+      "id": "angle-response",
+      "requirement": "Elevated views retain cyan/turquoise base color while grazing views become more reflective blue-grey; orbiting must not cause abrupt color changes."
+    },
+    {
+      "id": "highlight-character",
+      "requirement": "Highlight-facing views produce broken irregular silver patches with base water visible between them; avoid a white sheet or detached glitter sprites."
+    },
+    {
+      "id": "clarity-honesty",
+      "requirement": "If the implementation lacks sampled scene refraction or submerged-object visibility, classify reference clarity as partial rather than matched."
+    },
+    {
+      "id": "world-stability",
+      "requirement": "Water patterns and shallow-depth inputs remain attached to water/world coordinates during camera movement, without screen-space swimming or snapped reposition seams."
+    },
+    {
+      "id": "time-stability",
+      "requirement": "The same elapsed time yields the same state at 30 and 60 update rates; pause/resume and quality changes do not reset phases."
+    },
+    {
+      "id": "distance-quality",
+      "requirement": "Grazing distant detail fades without visible rings, mesh gaps, sudden normal changes or excessive sparkling."
+    },
+    {
+      "id": "render-correctness",
+      "requirement": "All quality tiers compile without shader or WebGL errors and render finite bounds under supported camera views."
+    },
+    {
+      "id": "resource-lifetime",
+      "requirement": "Repeated creation and disposal release owned geometry, textures and materials without increasing retained renderer resources."
+    },
+    {
+      "id": "device-performance",
+      "requirement": "Report tested device, browser, canvas resolution, pixel ratio, tier and timing percentiles; headless software rendering is not mobile-device validation."
+    }
+  ],
+  "implementationVisualQa": {
+    "status": "Final visual review complete; reference-inspired approximation accepted within stated scope",
+    "initialCapture": "scratch/reference-water-qa/reference-phase-0.png",
+    "tunedCapture": "scratch/reference-water-preview/reference-phase-0.png",
+    "initialFindings": [
+      "Broad pale white-grey patches covered too much surface compared with all six source crops.",
+      "Source has darker blue or turquoise body between narrower silver reflections.",
+      "Visible finite-plane edge at reference view was absent from the reference material target."
+    ],
+    "tunedFindings": [
+      {
+        "feature": "Blue-teal base and broken silver glint character",
+        "classification": "Qualitatively matched",
+        "detail": "Substantially closer to native reference crops 03 and 06 after contrast and highlight tuning."
+      },
+      {
+        "feature": "Layered wave shape and fine surface detail",
+        "classification": "Partial",
+        "detail": "Candidate retains broad paint-like reflection bands and larger foreground glints than the recorded comparison view."
+      },
+      {
+        "feature": "Surface continuity",
+        "classification": "Matched in inspected static preview",
+        "detail": "No finite-plane edge visible; temporal and all-view checks remain separate."
+      },
+      {
+        "feature": "Clear-water refraction and object reflection",
+        "classification": "Missing by design",
+        "detail": "Opaque approximation cannot show the source submerged detail or actual reflected geometry."
+      },
+      {
+        "feature": "Exact motion speed and scale",
+        "classification": "Not established",
+        "detail": "Source camera transform and world units are unknown; two static captures cannot establish temporal equivalence."
+      }
+    ],
+    "recommendation": "Use as a lightweight reference-inspired water component. Report the fidelity limits explicitly; obtain target-phone timing before assigning a mobile FPS guarantee.",
+    "finalCaptureDirectory": "scratch/reference-water-final-v2",
+    "finalReviewedCaptures": [
+      "grazing-low.png",
+      "grazing-medium.png",
+      "grazing-high.png",
+      "reference-medium.png",
+      "close-medium.png",
+      "reference-phase-0.png",
+      "reference-phase-1-2.png"
+    ],
+    "finalFindings": [
+      {
+        "feature": "Blue-teal color and broken silver highlights",
+        "classification": "Qualitatively matched",
+        "detail": "Final reference view preserves saturated body color between fine irregular glints, closer to native video water crops than the pale initial render."
+      },
+      {
+        "feature": "Fine-detail screen scale",
+        "classification": "Improved; partial fidelity",
+        "detail": "Farther reference camera reduces oversized glints. Close stress view still shows broader, softer normal-map bands than parts of the source."
+      },
+      {
+        "feature": "Horizon continuity",
+        "classification": "Passed inspected presets",
+        "detail": "Radial fan regression is absent in final low, medium and high grazing views and in the reference view."
+      },
+      {
+        "feature": "Temporal evolution",
+        "classification": "Observed between sampled times",
+        "detail": "Final phase0 and phase1.2 show changing ripple and glint patterns. This establishes animation presence, not exact source speed or seamless long-duration looping."
+      },
+      {
+        "feature": "Clear-water refraction and object reflection",
+        "classification": "Missing by design",
+        "detail": "The one-pass opaque approximation cannot reproduce true visibility of underwater geometry or actual reflected scene objects."
+      },
+      {
+        "feature": "Physical mobile performance",
+        "classification": "Not established by this visual review",
+        "detail": "Emulated viewport screenshots and software-rendered timing must not be presented as phone hardware validation."
+      }
+    ],
+    "horizonRegression": {
+      "before": "implementation-qa/before-horizon-grazing-medium.png",
+      "after": "implementation-qa/after-horizon-grazing-medium.png",
+      "samePresetComparison": "implementation-qa/horizon-before-after.png",
+      "failure": "Stretched skirt cells produced radial light-dark fan bands near the horizon.",
+      "resolution": "Zero analytic displacement and slope on all stretched-triangle corners, with a smooth fade toward the detailed interior.",
+      "verification": "Independent visual comparison of low, medium and high grazing captures plus medium reference capture."
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "baseCommit": "b6f4f57da1db522127ba881ae80bf5ad28b50910",
+  "capturedAt": "2026-10-09T09:15:51.763Z",
+  "captureOrigin": "http://127.0.0.1:5188",
+  "sourceDescription": "Existing owner-approved ReferenceWater component; native fog/lighting adapter and actual faering flotation.",
+  "sources": [
+    {
+      "path": "src/water/ReferenceWater.ts",
+      "sha256": "d8d7acbc14594a31d7b7a225f139abb4c366729be4d0be3e3b33f381438b5e87",
+      "gitLfSha256": "d8d7acbc14594a31d7b7a225f139abb4c366729be4d0be3e3b33f381438b5e87"
+    },
+    {
+      "path": "src/water/ReferenceWaterShaders.ts",
+      "sha256": "d6899ad2f8d479281013c020669fbd7489b1d1fba1872df4bceeb12709880ec8",
+      "gitLfSha256": "d6899ad2f8d479281013c020669fbd7489b1d1fba1872df4bceeb12709880ec8"
+    },
+    {
+      "path": "src/water/ReferenceWaterWaves.ts",
+      "sha256": "038d4e167bbd8a4890ee0e13b9feb2b12f74e6f38a6938b2df42f8a0bf66cc64",
+      "gitLfSha256": "038d4e167bbd8a4890ee0e13b9feb2b12f74e6f38a6938b2df42f8a0bf66cc64"
+    },
+    {
+      "path": "src/water/ReferenceWaterTexture.ts",
+      "sha256": "42d6b1ff3501db2c9345b9ed9400968b5ea8dd40e466200f848ddbba8a438cc6",
+      "gitLfSha256": "42d6b1ff3501db2c9345b9ed9400968b5ea8dd40e466200f848ddbba8a438cc6"
+    },
+    {
+      "path": "src/world/FjordsideWater.ts",
+      "sha256": "c0c6fbf3e6989a6cd7c1ad938e7f0763e1f30a47dc4e90490ab96a98c147092d",
+      "gitLfSha256": "699ab1c41cafa53c43aacf71b48b464fcaa7b846ec356901cde0a87340011f4e"
+    },
+    {
+      "path": "src/world/BoatFloat.ts",
+      "sha256": "974d7032d7f64254b5b365f42abb45ed10a0caaa45ae3123a599307c63626ae7",
+      "gitLfSha256": "adfbba74274caebe5a223640d223c46cd678c99298ee2312733df75e256d84c0"
+    },
+    {
+      "path": "src/world/WorldFactory.ts",
+      "sha256": "d42fee8d2040dbbf200ad80f561a6b739afcaaa39d6998e94e7a92acb49acef4",
+      "gitLfSha256": "d42fee8d2040dbbf200ad80f561a6b739afcaaa39d6998e94e7a92acb49acef4"
+    },
+    {
+      "path": "src/world/World.ts",
+      "sha256": "2b400592f5047564dcb8ef5a37ee546f2ca2d9245b89051c2f801c4cec215a74",
+      "gitLfSha256": "2b400592f5047564dcb8ef5a37ee546f2ca2d9245b89051c2f801c4cec215a74"
+    },
+    {
+      "path": "src/world/Water.ts",
+      "sha256": "0af0f8795a62747401b652c9ed099eab49d3036ca6152f51f23671192fa27881",
+      "gitLfSha256": "99da1728bad58c61b5b8adbd5bb8d5360d594569bdcd4fc548446d33c7e2d183"
+    },
+    {
+      "path": "src/core/Game.ts",
+      "sha256": "5c4ffa395573e1175e0bb09d5164348492bab1ab021b5c7de5382f8db97de05d",
+      "gitLfSha256": "5c4ffa395573e1175e0bb09d5164348492bab1ab021b5c7de5382f8db97de05d"
+    },
+    {
+      "path": "src/core/WorldLighting.ts",
+      "sha256": "d1e0805c8aff028c6e0333f3eaf5b42c22e4a200bec7091fdc82556471fc502c",
+      "gitLfSha256": "d1e0805c8aff028c6e0333f3eaf5b42c22e4a200bec7091fdc82556471fc502c"
+    },
+    {
+      "path": "src/camera/RTSCameraController.ts",
+      "sha256": "9406d8eaf6b70ecbf1c2d4c9eaa38d7081b5b59e42327ad08d473e58c7550b60",
+      "gitLfSha256": "9406d8eaf6b70ecbf1c2d4c9eaa38d7081b5b59e42327ad08d473e58c7550b60"
+    },
+    {
+      "path": "src/ui/FjordsideControls.ts",
+      "sha256": "4b16e3f69f82fe883e391e9a6fe48885d76396cba8f2105fd98e99f4715db265",
+      "gitLfSha256": "09beedec0a34eff214b114ef38fe85f9c4203197243752d3c61a954ee86f524f"
+    },
+    {
+      "path": "scripts/qa/check-fjordside-water.mjs",
+      "sha256": "ec5f02e987e63950882b05955c60b59b6cfbce197f456a706f2e48782e6d6bdf",
+      "gitLfSha256": "44a04bafc2e85eb71f25a38a5e17469baa89233a46095a6328378dfe19957d86"
+    },
+    {
+      "path": "scripts/qa/check-fjordside-water-browser.mjs",
+      "sha256": "ce9bdf5e5669428a80cf3965ff122ac129d22e8cf2e604b60d3ab5a536ab5b3e",
+      "gitLfSha256": "033b3068bdde94038aaffb8f4d8d5969373204265eb0c2d895a16be774b7c776"
+    },
+    {
+      "path": "scripts/qa/check-fjordside-water-touch.mjs",
+      "sha256": "a213a704511acbbde11d357bb97bf8dc6a021e594815ef6b70b4054778f25aa0",
+      "gitLfSha256": "8d419db4e210242f200ece7d9e890c8ae1394dd84d214ff842c94a0c795d7e9d"
+    },
+    {
+      "path": "scripts/qa/check-fjordside-boat-clearance.mjs",
+      "sha256": "099728536a1ccd68f4df9c6748d783ca71a657cda594111c030c67f78cf18c8d",
+      "gitLfSha256": "97208aa773a926959bfff5c8e6e75fe03c0e51c2f89c696943b85c26aec1d2e6"
+    }
+  ],
+  "productionEntries": [
+    {
+      "path": "/assets/index-B6vCfT3N.js",
+      "sha256": "ec9cc1dac34158b76538c036c4619587eaf80d632f1324a776eee28ef544d558"
+    },
+    {
+      "path": "/assets/index-DLNPttDf.css",
+      "sha256": "a3cbd66c12101b737fcbf271c458f70748a2d9a3dac6aa56c28377277a22395f"
+    }
+  ],
+  "originalBoat": {
+    "path": "Assets/Terrain/faering-rowboat.glb",
+    "sha256": "0ba8c8e764c2d08ed8052f67db136032958c60c6108439a1c34576f1eed931ce",
+    "includedInCommit": false
+  }
+}

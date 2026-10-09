@@ -58,3 +58,7 @@ The final images show usable staged integration, not full visual parity with the
 ## Review and rollback
 
 Open the development URL, enter Debug, choose a seed and Generate World. Toggle water/wind and Pause, try Day/Night and camera presets, export, reload and load the same geography. Ordinary URLs always open Reference. Use Reference fallback in Debug to clear the active generated preview while retaining an explicit local save. These geography saves do not change Simulation Core campaign identity, economy, expeditions, or the existing Fjordside character/clock initialization on reload.
+
+## Measurement clarification — 9 October 2026
+
+The timing harness held the world in manual pause during the three render-cadence runs. The ten resident assets were present, but residents, water and wind were frozen. The earlier phrase “ten active residents, water and wind enabled” meant present actors and checked motion controls; it did not establish animated-world performance. The raw intervals, table and capture/source hashes above are unchanged. Do not use that table as an animated-world or mobile benchmark.

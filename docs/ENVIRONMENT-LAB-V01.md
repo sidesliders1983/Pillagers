@@ -1,5 +1,10 @@
 # Environment Lab v0.1 — sourced water (#56)
 
+Current #75 note: Compatibility fallback now shares the approved ReferenceWater
+with Fjordside and follows current Lab lighting/camera. See
+[the fallback regression evidence](qa/environment-fallback-water/report.md).
+The original sourced-water description and Pass 1 measurements below remain historical.
+
 Open `/environment-lab`. The default water is the MIT implementation from [boona13/threejs-grass-water-shaders](https://github.com/boona13/threejs-grass-water-shaders), pinned to `97fb7ea3135362dbb1ba80cdfa8fb27ec8d0b159`. Its water GLSL is unchanged. [Source provenance and local adaptations](../src/vendor/boona13-water/README.md) include the original license.
 
 The lab reuses Terrain, authored house/scenery, seed 1983, WorldLighting and orbit camera. Live Fjordside continues using the existing legacy Water. The Meshy character/housing integration in #61 remains intact.

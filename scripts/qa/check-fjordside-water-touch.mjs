@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { writeFile } from 'node:fs/promises';
+const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
+    'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+try {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 }, hasTouch: true });
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5188') + '/?worldDev=1&world=reference');
+    await page.locator('canvas[data-ready=true]').waitFor();
+    await page.locator('#world-dev > summary').tap();
+    await page.locator('#debug-toggle').tap();
+    await page.selectOption('#fjordside-camera', 'boat');
+    await page.locator('#fjordside-pause').tap();
+    await page.selectOption('#fjordside-quality', 'low');
+    await page.waitForTimeout(1000);
+    const state = async () => JSON.parse(await page.locator('canvas').getAttribute('data-fixture'));
+    const before = await state();
+    assert.equal(before.world.water.quality, 'low');
+    await page.locator('#debug-close').tap();
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 460, id: 1 }] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 250, y: 500, id: 1 }] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForTimeout(1200);
+    const rotated = await state();
+    assert.notDeepEqual(rotated.camera.position, before.camera.position, 'Touch drag rotates the camera');
+    assert.deepEqual(rotated.world.water.boat, before.world.water.boat, 'Touch controls preserve the paused float');
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 150, y: 480, id: 1 }, { x: 240, y: 480, id: 2 }] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 110, y: 480, id: 1 }, { x: 280, y: 480, id: 2 }] });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForTimeout(1200);
+    const pinched = await state();
+    const distance = camera => Math.hypot(...camera.position.map((value, index) => value - camera.target[index]));
+    assert.ok(distance(pinched.camera) < distance(rotated.camera), 'Spreading fingers zooms closer at the boat');
+    assert.deepEqual(pinched.world.water.boat, before.world.water.boat);
+    assert.deepEqual(errors, []);
+    await writeFile(process.env.QA_OUTPUT || 'scratch/fjordside-water-touch.json', JSON.stringify({ before, rotated, pinched, errors }, null, 2));
+    console.log('PASS: mobile touch controls, live quality, rotation and pinch preserve paused water/boat.');
+} finally { await browser.close(); }

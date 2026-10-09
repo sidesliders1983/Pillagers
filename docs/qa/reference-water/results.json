@@ -1,0 +1,1634 @@
+{
+  "commit": "25e96740bf7805572e894343ead41bf23c0cf510",
+  "workingTree": "Current local files; commit alone does not identify uncommitted changes.",
+  "origin": "http://127.0.0.1:5192",
+  "sourceHashes": {
+    "src/water/ReferenceWater.ts": "9fb84539538b5e94f9bd4502c54f8995afb449a1db01e35ec8f7a96d3e6b2dad",
+    "src/water/ReferenceWaterShaders.ts": "65b61b86a93d5505f156db188a9923a53a0e626d9d36dbf20b4d34697e2bee24",
+    "src/water/ReferenceWaterTexture.ts": "42d6b1ff3501db2c9345b9ed9400968b5ea8dd40e466200f848ddbba8a438cc6",
+    "src/water-lab/WaterLab.ts": "b3776b7cd620412603bd96e156fafe8f9725233bdee1f446762e6b7accec84de",
+    "src/water-lab/water-lab.css": "05720e5c0356856057311d0ec215b901dab425a525002ec0d7242059f7a6b5ae"
+  },
+  "method": "Canvas pixel checks, public lab controls, renderer counts and optional rAF intervals.",
+  "limitations": "Phone-sized emulation is not a physical mobile GPU test. rAF intervals include display and host scheduling; renderer texture counts are not measured VRAM.",
+  "softwareRequested": false,
+  "screenshots": [
+    {
+      "name": "reference-phase-0",
+      "file": "reference-phase-0.png",
+      "sha256": "b0fbda1841e81c8bd851ea0ba16b4d1925e9d39b3b4f0b91db029d9404c48210",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 139,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.57613931085585,
+          "p95FrameMs": 18.09999999999991
+        }
+      }
+    },
+    {
+      "name": "reference-frozen",
+      "file": "reference-frozen.png",
+      "sha256": "b0fbda1841e81c8bd851ea0ba16b4d1925e9d39b3b4f0b91db029d9404c48210",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 230,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.93362543115503,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "reference-phase-1-2",
+      "file": "reference-phase-1-2.png",
+      "sha256": "5bce2e0290490ac263864f04397f8da8031d6824f46a6876005e25b718d8f217",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 1.2,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 291,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 54.76701200310347,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "reference-low",
+      "file": "reference-low.png",
+      "sha256": "ca52a3857e50edd3ff498107db65ead21b60a57bdc6feef89e2909770dd21e97",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 413,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 54.20543861234079,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "reference-medium",
+      "file": "reference-medium.png",
+      "sha256": "b0fbda1841e81c8bd851ea0ba16b4d1925e9d39b3b4f0b91db029d9404c48210",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 495,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.5401277422938,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "reference-high",
+      "file": "reference-high.png",
+      "sha256": "1135451331f5a2f6c19950a314e82eebae0368c51f15a0ba8ef89fc637e87271",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 574,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 34.03675970047651,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "close-low",
+      "file": "close-low.png",
+      "sha256": "cf115605f7ae99d1159f3e4f9d194804f72db63388d8728ed79bc04e63c20804",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 625,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.82953382339259,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "close-medium",
+      "file": "close-medium.png",
+      "sha256": "390a9f365883f13b65f5e879a34978d7075b8dd3b5b89d9b5e4abcf81c204b0d",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 688,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.84512285927031,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "close-high",
+      "file": "close-high.png",
+      "sha256": "3a299e29f39da14d66962c549fa5e609de4e1c781c44a5d560dd47de2046f9c1",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 756,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.8373272532688,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "grazing-low",
+      "file": "grazing-low.png",
+      "sha256": "f960b9744d877468a2178711d5097fea9693ba129de11b47e6a911319e9be1b2",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 797,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.022408963585384,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "grazing-medium",
+      "file": "grazing-medium.png",
+      "sha256": "158a4a612c3881a56cdf5e194f85949d10cf693b12d79f84fc6e0e8d07711b8b",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 841,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.01194921583272,
+          "p95FrameMs": 18.100000000000364
+        }
+      }
+    },
+    {
+      "name": "grazing-high",
+      "file": "grazing-high.png",
+      "sha256": "37e8fb0e6dcb8021a8ba2240275db84ae29d8ef5e711c9ade916f376aabd05b5",
+      "width": 1200,
+      "height": 900,
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 900,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.15348619560131,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "name": "mobile-low-portrait",
+      "file": "mobile-low-portrait.png",
+      "sha256": "e8c1bbe82589fa0b4c70baf8d10f594e73f656985f966aa5aa24cf29e452e441",
+      "width": 1170,
+      "height": 2532,
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 92,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "cadence": {
+          "samples": 89,
+          "fps": 20.847426818504648,
+          "p95FrameMs": 36
+        }
+      }
+    },
+    {
+      "name": "mobile-low-landscape",
+      "file": "mobile-low-landscape.png",
+      "sha256": "48c2549e06cd105a566418822daf374b86d2861512dd4a924d49b19e7131e20a",
+      "width": 2532,
+      "height": 1170,
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 213,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 14.490478548054051,
+          "p95FrameMs": 286.6999999999989
+        }
+      }
+    }
+  ],
+  "lifecycle": [
+    {
+      "cycle": 0,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 903,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.12722170252572,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 0,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 911,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.074766355140184,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 0,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 918,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.01456378658444,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 1,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 925,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.064287049149655,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 1,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 930,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.02764030254918,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 1,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 936,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.03025633842273,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 2,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 941,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.04595768530189,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 2,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 950,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.03810591202023,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 2,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 956,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.01979366042672,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 3,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 962,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 56.00410696784429,
+          "p95FrameMs": 18.099999999998545
+        }
+      }
+    },
+    {
+      "cycle": 3,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 981,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.94405594405595,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 3,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 985,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.91538138949717,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 4,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 988,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.88673621460514,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 4,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 995,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.89454562392283,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 4,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 999,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.91798695246971,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 5,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1004,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.88413356307914,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 5,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1008,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.90496156533892,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 5,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1013,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.89194224499301,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 6,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1017,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.87892898719441,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 6,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1020,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.87892898719441,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 6,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1024,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.88413356307923,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 7,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1028,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.88413356307914,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 7,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1033,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.88153115395358,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 7,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1037,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.865921787709496,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 8,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1040,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.8555203872649,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 8,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1046,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.82953382339254,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 8,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1054,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.87112394077663,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 9,
+      "quality": "low",
+      "stats": {
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1057,
+          "calls": 1,
+          "triangles": 2048,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.923198806971776,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 9,
+      "quality": "medium",
+      "stats": {
+        "quality": "medium",
+        "triangles": 8192,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1063,
+          "calls": 1,
+          "triangles": 8192,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.936232694727934,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    },
+    {
+      "cycle": 9,
+      "quality": "high",
+      "stats": {
+        "quality": "high",
+        "triangles": 18432,
+        "normalSamples": 3,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "elapsedSeconds": 0,
+        "paused": true,
+        "pixelRatio": 1,
+        "render": {
+          "frame": 1069,
+          "calls": 1,
+          "triangles": 18432,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 1,
+          "textures": 1
+        },
+        "viewport": {
+          "width": 1200,
+          "height": 900
+        },
+        "cadence": {
+          "samples": 120,
+          "fps": 55.94927265945535,
+          "p95FrameMs": 18.100000000002183
+        }
+      }
+    }
+  ],
+  "timings": [],
+  "errors": [],
+  "hardware": {
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (Intel)",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+    "devicePixelRatio": 1,
+    "hardwareConcurrency": 8
+  },
+  "motion": {
+    "frozenDifference": {
+      "meanAbsoluteChannelDifference": 0,
+      "changedChannelFraction": 0
+    },
+    "motionDifference": {
+      "meanAbsoluteChannelDifference": 14.823753086419753,
+      "changedChannelFraction": 0.5300419753086419
+    }
+  },
+  "lifecycleCountsStable": true,
+  "mobile": {
+    "emulated": true,
+    "hardware": {
+      "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "vendor": "Google Inc. (Intel)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+      "devicePixelRatio": 3,
+      "hardwareConcurrency": 8
+    },
+    "dimensions": {
+      "viewport": 390,
+      "document": 390,
+      "canvas": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 844,
+        "top": 0,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      }
+    },
+    "stats": {
+      "quality": "low",
+      "triangles": 2048,
+      "normalSamples": 2,
+      "textureBytes": 87380,
+      "drawCalls": 1,
+      "elapsedSeconds": 0,
+      "paused": true,
+      "pixelRatio": 1,
+      "render": {
+        "frame": 242,
+        "calls": 1,
+        "triangles": 2048,
+        "points": 0,
+        "lines": 0
+      },
+      "memory": {
+        "geometries": 1,
+        "textures": 1
+      },
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "cadence": {
+        "samples": 120,
+        "fps": 13.130395772012564,
+        "p95FrameMs": 539.9999999999982
+      }
+    }
+  },
+  "passed": true,
+  "controlled": false,
+  "performanceContext": "Noncontrolled shared host: the user reports other Codex threads running concurrently. Frame cadence is diagnostic only and does not establish sustained device performance. Physical phone measurement is left to the user."
+}

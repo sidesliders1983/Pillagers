@@ -1,0 +1,614 @@
+[
+  {
+    "mode": "reference",
+    "quality": "standard",
+    "time": "baseline",
+    "boat": [
+      -8.2,
+      -0.2,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.45
+  },
+  {
+    "mode": "reference",
+    "quality": "standard",
+    "time": 0,
+    "boat": [
+      -8.2,
+      -0.33510388090727844,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.28587011634124676
+  },
+  {
+    "mode": "reference",
+    "quality": "standard",
+    "time": 2.5,
+    "boat": [
+      -8.2,
+      -0.33728584536435635,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.29975674648029743
+  },
+  {
+    "mode": "reference",
+    "quality": "standard",
+    "time": 8.1,
+    "boat": [
+      -8.2,
+      -0.3705117936436618,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.24179837068025967
+  },
+  {
+    "mode": "reference",
+    "quality": "standard",
+    "time": 6.5,
+    "boat": [
+      -8.2,
+      -0.4533981505522035,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.17499479407113155
+  },
+  {
+    "mode": "reference",
+    "quality": "standard",
+    "time": 14.5,
+    "boat": [
+      -8.2,
+      -0.2631154435598433,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.37707022940542806
+  },
+  {
+    "mode": "reference",
+    "quality": "low",
+    "time": "baseline",
+    "boat": [
+      -8.2,
+      -0.2,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.45
+  },
+  {
+    "mode": "reference",
+    "quality": "low",
+    "time": 0,
+    "boat": [
+      -8.2,
+      -0.3561438581935357,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.2718245097081782
+  },
+  {
+    "mode": "reference",
+    "quality": "low",
+    "time": 2.5,
+    "boat": [
+      -8.2,
+      -0.33180899445454765,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.29896729945652784
+  },
+  {
+    "mode": "reference",
+    "quality": "low",
+    "time": 8.1,
+    "boat": [
+      -8.2,
+      -0.35335594905247736,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.2747068250106393
+  },
+  {
+    "mode": "reference",
+    "quality": "low",
+    "time": 1.75,
+    "boat": [
+      -8.2,
+      -0.4169724578017837,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.2315875563901697
+  },
+  {
+    "mode": "reference",
+    "quality": "low",
+    "time": 12.25,
+    "boat": [
+      -8.2,
+      -0.30303536819939664,
+      -15
+    ],
+    "pier": [
+      -5,
+      -0.6,
+      -11
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 0.34551725873315525
+  },
+  {
+    "mode": 17,
+    "quality": "standard",
+    "time": "baseline",
+    "boat": [
+      36.1282916701127,
+      0.03,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.8604341584079285
+  },
+  {
+    "mode": 17,
+    "quality": "standard",
+    "time": 0,
+    "boat": [
+      36.1282916701127,
+      -0.3353716093133315,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.4625313939012545
+  },
+  {
+    "mode": 17,
+    "quality": "standard",
+    "time": 2.5,
+    "boat": [
+      36.1282916701127,
+      -0.3202978722248181,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5189686395259974
+  },
+  {
+    "mode": 17,
+    "quality": "standard",
+    "time": 8.1,
+    "boat": [
+      36.1282916701127,
+      -0.36418415617998146,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5078764613557882
+  },
+  {
+    "mode": 17,
+    "quality": "standard",
+    "time": 15.75,
+    "boat": [
+      36.1282916701127,
+      -0.4558614607840584,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.360925631496309
+  },
+  {
+    "mode": 17,
+    "quality": "standard",
+    "time": 7.5,
+    "boat": [
+      36.1282916701127,
+      -0.26457196195315913,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5711106761333093
+  },
+  {
+    "mode": 17,
+    "quality": "low",
+    "time": "baseline",
+    "boat": [
+      36.1282916701127,
+      0.03,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.8604341584079285
+  },
+  {
+    "mode": 17,
+    "quality": "low",
+    "time": 0,
+    "boat": [
+      36.1282916701127,
+      -0.3527585781357473,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.4627895615323354
+  },
+  {
+    "mode": 17,
+    "quality": "low",
+    "time": 2.5,
+    "boat": [
+      36.1282916701127,
+      -0.32787806188871077,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.489928241604409
+  },
+  {
+    "mode": 17,
+    "quality": "low",
+    "time": 8.1,
+    "boat": [
+      36.1282916701127,
+      -0.35626369327930124,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.4891959201685476
+  },
+  {
+    "mode": 17,
+    "quality": "low",
+    "time": 11,
+    "boat": [
+      36.1282916701127,
+      -0.4191391007311198,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.4128593951366377
+  },
+  {
+    "mode": 17,
+    "quality": "low",
+    "time": 14.5,
+    "boat": [
+      36.1282916701127,
+      -0.30086010255693496,
+      -37.63663388263755
+    ],
+    "pier": [
+      36.63864461453119,
+      -0.37,
+      -33.16566755843834
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.528002683753309
+  },
+  {
+    "mode": 91,
+    "quality": "standard",
+    "time": "baseline",
+    "boat": [
+      35.17337794152268,
+      0.03,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.9973184823422414
+  },
+  {
+    "mode": 91,
+    "quality": "standard",
+    "time": 0,
+    "boat": [
+      35.17337794152268,
+      -0.3888768905474464,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5952604028979132
+  },
+  {
+    "mode": 91,
+    "quality": "standard",
+    "time": 2.5,
+    "boat": [
+      35.17337794152268,
+      -0.35110945579210084,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.6223280111375673
+  },
+  {
+    "mode": 91,
+    "quality": "standard",
+    "time": 8.1,
+    "boat": [
+      35.17337794152268,
+      -0.3171770509941495,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.6419655315045287
+  },
+  {
+    "mode": 91,
+    "quality": "standard",
+    "time": 13.5,
+    "boat": [
+      35.17337794152268,
+      -0.45258529677951864,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5152579071784888
+  },
+  {
+    "mode": 91,
+    "quality": "standard",
+    "time": 3,
+    "boat": [
+      35.17337794152268,
+      -0.2695916543048458,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.6701737849726062
+  },
+  {
+    "mode": 91,
+    "quality": "low",
+    "time": "baseline",
+    "boat": [
+      35.17337794152268,
+      0.03,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.9973184823422414
+  },
+  {
+    "mode": 91,
+    "quality": "low",
+    "time": 0,
+    "boat": [
+      35.17337794152268,
+      -0.38110999717715066,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5857818133063641
+  },
+  {
+    "mode": 91,
+    "quality": "low",
+    "time": 2.5,
+    "boat": [
+      35.17337794152268,
+      -0.3523184281463671,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.614552076310147
+  },
+  {
+    "mode": 91,
+    "quality": "low",
+    "time": 8.1,
+    "boat": [
+      35.17337794152268,
+      -0.3277951916402493,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.6398171323754098
+  },
+  {
+    "mode": 91,
+    "quality": "low",
+    "time": 13.5,
+    "boat": [
+      35.17337794152268,
+      -0.4248508738859671,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.5425167922875938
+  },
+  {
+    "mode": 91,
+    "quality": "low",
+    "time": 3,
+    "boat": [
+      35.17337794152268,
+      -0.29519807897031325,
+      -33.21717931268622
+    ],
+    "pier": [
+      33.3746494098338,
+      -0.37,
+      -29.092306506248622
+    ],
+    "contact": null,
+    "minimumTerrainClearance": 1.6720725886145709
+  }
+]
