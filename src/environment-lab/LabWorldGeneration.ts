@@ -57,7 +57,7 @@ export class LabWorldGeneration {
         private reference: { terrain: Group; nature: Group; village: Group },
         private resolvePineModel: (id: NatureAssetKey) => Object3D,
         private changed: () => void) {
-        document.querySelector('nav')!.insertAdjacentHTML('beforebegin', `
+        document.querySelector('#environment-world-settings')!.insertAdjacentHTML('beforeend', `
             <section class="world-generation" aria-label="Procedural world preview">
                 <label>Review seed<select id="world-review-seed">
                     <option value="">Custom seed</option>

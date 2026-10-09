@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -32,6 +33,7 @@ try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181') + '/environment-lab');
     const canvas = page.locator('canvas[data-ready=true]');
     await canvas.waitFor();
+    await openEnvironmentSettings(page);
     const conifers = page.getByRole('combobox', { name: 'Conifers', exact: true });
     const generate = page.getByRole('button', { name: 'Generate World', exact: true });
     const state = async () => JSON.parse(await canvas.getAttribute('data-world') || 'null');

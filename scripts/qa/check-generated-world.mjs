@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
@@ -12,6 +13,7 @@ try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181') + '/environment-lab');
     const canvas = page.locator('canvas[data-ready=true]');
     await canvas.waitFor();
+    await openEnvironmentSettings(page);
     const generate = page.getByRole('button', { name: 'Generate World', exact: true });
     assert.equal(await generate.count(), 1, 'The existing Environment Lab can generate a new landscape');
     await page.getByRole('spinbutton', { name: 'World seed', exact: true }).fill('17');

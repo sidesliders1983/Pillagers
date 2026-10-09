@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import { createRequire } from 'node:module';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -24,6 +25,7 @@ try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181') + '/environment-lab');
     const canvas = page.locator('canvas[data-ready=true]');
     await canvas.waitFor();
+    await openEnvironmentSettings(page);
     await page.addStyleTag({ content: '.environment-lab main{max-width:none;width:1536px;padding:0}' +
         '.environment-lab canvas{width:1536px!important;height:1024px!important;min-height:0!important}' });
     await page.selectOption('#environment-conifers', 'kaykit');

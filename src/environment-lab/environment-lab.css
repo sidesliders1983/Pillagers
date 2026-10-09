@@ -1,3 +1,149 @@
-.environment-lab{margin:0;background:#e8ebe0;color:#293e37;font:15px system-ui}.environment-lab main{max-width:1600px;margin:auto;padding:20px}.environment-lab header,.environment-lab nav{display:flex;flex-wrap:wrap;align-items:center;gap:18px}.environment-lab h1{font-size:22px;margin-right:auto}.environment-lab a{color:#37584d}.environment-lab label{display:flex;align-items:center;gap:8px}.environment-lab select,.environment-lab input{padding:8px;border:1px solid #a6b6a7;border-radius:5px}.environment-lab input[readonly]{width:65px}.environment-lab canvas{display:block;width:100%;height:65vh;min-height:360px;margin-top:18px}.environment-lab pre{padding:12px;background:#f5f6f0;line-height:1.5}
+.environment-lab {
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+    background: #e8ebe0;
+    color: #293e37;
+    font: 15px system-ui;
+}
 
-.world-generation{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:16px 0}.world-generation p{flex-basis:100%;margin:0}.world-generation button{padding:8px 14px}.world-generation input{width:125px}
+.environment-lab main {
+    max-width: 1600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.environment-lab header,
+.environment-lab nav,
+.environment-control-group,
+.world-generation {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+}
+
+.environment-lab h1 {
+    font-size: 22px;
+    margin: 0 auto 0 0;
+}
+
+.environment-lab header {
+    margin-bottom: 16px;
+}
+
+.environment-lab a {
+    color: #37584d;
+}
+
+.environment-lab label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100%;
+}
+
+.environment-lab select,
+.environment-lab input,
+.environment-lab button {
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 8px;
+    border: 1px solid #a6b6a7;
+    border-radius: 5px;
+}
+
+.environment-lab input[type='checkbox'] {
+    width: auto;
+}
+
+.environment-lab input[type='number'] {
+    width: 100px;
+}
+
+.environment-lab input[readonly] {
+    width: 65px;
+}
+
+.environment-lab details {
+    margin-top: 12px;
+    border: 1px solid #a6b6a7;
+    border-radius: 5px;
+    background: #f5f6f0;
+}
+
+.environment-lab summary {
+    padding: 10px 12px;
+    cursor: pointer;
+}
+
+.environment-lab summary:focus-visible {
+    outline: 2px solid #37584d;
+    outline-offset: 2px;
+}
+
+.environment-settings-content {
+    padding: 0 12px 12px;
+}
+
+.environment-lab fieldset {
+    min-width: 0;
+    margin: 12px 0 0;
+    padding: 12px;
+    border: 1px solid #a6b6a7;
+    border-radius: 5px;
+}
+
+.environment-lab canvas {
+    display: block;
+    width: 100%;
+    height: 65vh;
+    min-height: 360px;
+    margin-top: 12px;
+}
+
+.environment-lab pre {
+    padding: 12px;
+    background: #f5f6f0;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.environment-lab p {
+    overflow-wrap: anywhere;
+}
+
+.environment-diagnostics > p {
+    padding: 0 12px;
+}
+
+.world-generation p {
+    flex-basis: 100%;
+    margin: 0;
+}
+
+.world-generation button {
+    padding: 8px 14px;
+}
+
+@media (max-width: 600px) {
+    .environment-lab main {
+        padding: 12px;
+    }
+
+    .environment-lab header,
+    .environment-lab nav {
+        gap: 8px 12px;
+    }
+
+    .environment-lab h1 {
+        flex-basis: 100%;
+    }
+
+    .environment-lab nav select {
+        max-width: 225px;
+    }
+}

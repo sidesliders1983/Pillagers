@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
@@ -38,6 +39,7 @@ try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181') + '/environment-lab');
     const canvas = page.locator('canvas[data-ready=true]');
     await canvas.waitFor();
+    await openEnvironmentSettings(page);
     await page.locator('#environment-pause').check();
     await page.locator('#environment-fog').uncheck();
     await page.addStyleTag({ content: '.environment-lab main{max-width:none;width:1536px;padding:0}' +

@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { readFile } from 'node:fs/promises';
@@ -20,6 +21,7 @@ try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181') + '/environment-lab');
     const canvas = page.locator('canvas[data-ready=true]');
     await canvas.waitFor();
+    await openEnvironmentSettings(page);
     const study = page.getByRole('checkbox', { name: 'Sand study · approved ReferenceWater', exact: true });
     assert.equal(await study.count(), 1, 'The sand experiment is explicitly opt-in in Environment Lab');
     assert.equal(await study.isChecked(), false);

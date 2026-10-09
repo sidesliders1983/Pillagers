@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -18,6 +19,7 @@ try {
     await page.goto(origin + '/environment-lab');
     const canvas = page.locator('#environment-canvas');
     await page.locator('canvas[data-ready=true]').waitFor();
+    await openEnvironmentSettings(page);
     await page.locator('#environment-pause').check();
     await page.locator('#environment-quality').selectOption('legacy');
     await page.locator('#environment-camera').selectOption('water');
@@ -32,11 +34,13 @@ try {
             return fixture.lightSettings?.preset === preset;
         }, preset);
         await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-        const box = await canvas.boundingBox();
-        const image = await page.screenshot({ clip: {
-            x: box.x, y: box.y + Math.floor(box.height * .65),
-            width: box.width, height: Math.floor(box.height * .3),
-        } });
+        // Element capture scrolls the canvas into view, including with Settings expanded.
+        const fullImage = await canvas.screenshot();
+        const { width, height } = await sharp(fullImage).metadata();
+        const image = await sharp(fullImage).extract({
+            left: 0, top: Math.floor(height * .65),
+            width, height: Math.floor(height * .3),
+        }).png().toBuffer();
         const { data } = await sharp(image).removeAlpha().raw().toBuffer({ resolveWithObject: true });
         let luminance = 0;
         for (let index = 0; index < data.length; index += 3) {

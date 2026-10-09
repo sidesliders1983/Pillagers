@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
@@ -28,6 +29,7 @@ export async function openStudy(page, seed = 17) {
     });
     await page.goto(origin + '/environment-lab');
     await page.locator('canvas[data-ready=true]').waitFor();
+    await openEnvironmentSettings(page);
     await page.addStyleTag({ content: '.environment-lab main{max-width:none;width:1536px;padding:0}' +
         '.environment-lab canvas{width:1536px!important;height:1024px!important;min-height:0!important}' });
     await page.locator('#world-sand-study').check();

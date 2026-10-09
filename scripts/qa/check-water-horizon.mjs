@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import sharp from 'sharp';
@@ -9,6 +10,7 @@ try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181')+'/environment-lab');
     const canvas=page.locator('canvas[data-ready=true]');
     await canvas.waitFor();
+    await openEnvironmentSettings(page);
     for(const id of ['ground','nature','village'])await page.locator('#environment-'+id).uncheck();
     await page.locator('#environment-pause').check();
     await page.selectOption('#environment-camera','landscape');

@@ -1,3 +1,4 @@
+import { openEnvironmentSettings } from './environment-settings.mjs';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
@@ -16,6 +17,7 @@ try{
  await mkdir(report,{recursive:true});
  await page.goto((process.env.PROTOTYPE_URL||'http://127.0.0.1:5181')+'/environment-lab');
  await page.locator('#environment-canvas[data-ready=true]').waitFor();
+ await openEnvironmentSettings(page);
  assert.match(await page.locator('#environment-status').innerText(),/Ground v0.2/,'the lab renders the ground pass directly');
  assert.equal(await page.locator('#environment-grass').count(),1,'the lab exposes sourced grass structure');
  assert.equal(await page.locator('#environment-grass').isChecked(),false,'ground QA starts without optional GrassField');
@@ -25,7 +27,7 @@ try{
  console.log('Ground material and public controls ready');
  const canvas=page.locator('#environment-canvas');
 
- const pixels=async()=>page.screenshot({clip:await canvas.boundingBox()});
+ const pixels=async()=>canvas.screenshot();
  await settle();const day=await pixels();await page.waitForTimeout(400);assert.ok(day.equals(await pixels()),'paused preview is repeatable');
  await page.screenshot({path:report+'/ground-day.png'});
  await page.locator('#environment-grass').check();await settle();const grassOn=await pixels();await page.locator('#environment-grass').uncheck();await settle();
