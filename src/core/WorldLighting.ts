@@ -85,6 +85,17 @@ export class WorldLighting {
         for (const object of [this.halo,this.ambient,this.directional,this.directional.target,this.campfire])
             object.removeFromParent();
     }
+    setQuality(quality: 'standard' | 'low') {
+        this.quality = quality;
+        const size = quality === 'low' ? 1024 :
+            (this.mode === 'night' ? config.night.shadowMapSize : config.day.shadowMapSize);
+        if (this.directional.shadow.mapSize.x === size) return;
+        this.directional.shadow.map?.dispose();
+        this.directional.shadow.map = null;
+        this.directional.shadow.mapSize.set(size, size);
+        this.renderer.shadowMap.needsUpdate = true;
+    }
+    get skyColor() { return this.scene.background as Color; }
     setFog(enabled:boolean){this.fogEnabled=enabled;this.scene.fog=enabled?this.fog:null;}
     setVisualization(mode:TimeVisualization){
         this.setMode('day');this.visualization=mode;

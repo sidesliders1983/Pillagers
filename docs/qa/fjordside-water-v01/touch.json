@@ -1,0 +1,312 @@
+{
+  "before": {
+    "time": 0.4774000000208616,
+    "paused": true,
+    "year": 1200,
+    "progress": 0.038578333333383,
+    "camera": {
+      "position": [
+        -6.033567200801077,
+        2.2120833590512747,
+        -21.53196516574875
+      ],
+      "target": [
+        -8.2,
+        0.06208335905127499,
+        -15
+      ],
+      "fov": 45
+    },
+    "lighting": "day",
+    "visualization": "off",
+    "quality": "low",
+    "pixelRatio": 1,
+    "world": {
+      "mode": "reference",
+      "seed": 1983,
+      "quality": "low",
+      "buildings": 7,
+      "populationSource": "existing-fjordside",
+      "groundTier": "reference",
+      "source": "reference",
+      "site": {
+        "x": 0,
+        "z": 0
+      },
+      "attachments": 0,
+      "validation": null,
+      "motion": {
+        "water": true,
+        "wind": true
+      },
+      "water": {
+        "source": "reference-water",
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "time": 0.4774000000208616,
+        "level": -0.12,
+        "center": {
+          "x": -8.2,
+          "z": -15
+        },
+        "denseSize": 80,
+        "extent": 2000,
+        "parameters": {
+          "waveAmplitude": 0.18,
+          "waveSpeed": 1,
+          "detailStrength": 0.65
+        },
+        "boat": {
+          "time": 0.4774000000208616,
+          "waterline": 0.24,
+          "heading": 0.3,
+          "supportWidth": 0.76,
+          "supportLength": 2.5,
+          "supports": [
+            {
+              "x": -8.932428124194404,
+              "z": -16.081872932875697,
+              "height": -0.06719737349297947
+            },
+            {
+              "x": -8.206372392458944,
+              "z": -16.306468289938316,
+              "height": -0.04691145602437555
+            },
+            {
+              "x": -8.193627607541055,
+              "z": -13.693531710061684,
+              "height": -0.05734683991269015
+            },
+            {
+              "x": -7.467571875805595,
+              "z": -13.918127067124301,
+              "height": -0.08570111006040262
+            }
+          ],
+          "position": [
+            -8.2,
+            -0.3042817942008456,
+            -15
+          ],
+          "quaternion": [
+            0.0024647412535879886,
+            0.14943698044565054,
+            -0.003056651228492363,
+            0.9887634554377028
+          ]
+        }
+      }
+    }
+  },
+  "rotated": {
+    "time": 0.4774000000208616,
+    "paused": true,
+    "year": 1200,
+    "progress": 0.038578333333383,
+    "camera": {
+      "position": [
+        -4.336860095367191,
+        3.4070370305334152,
+        -20.08624960190431
+      ],
+      "target": [
+        -8.2,
+        0.06208335905127499,
+        -15
+      ],
+      "fov": 45
+    },
+    "lighting": "day",
+    "visualization": "off",
+    "quality": "low",
+    "pixelRatio": 1,
+    "world": {
+      "mode": "reference",
+      "seed": 1983,
+      "quality": "low",
+      "buildings": 7,
+      "populationSource": "existing-fjordside",
+      "groundTier": "reference",
+      "source": "reference",
+      "site": {
+        "x": 0,
+        "z": 0
+      },
+      "attachments": 0,
+      "validation": null,
+      "motion": {
+        "water": true,
+        "wind": true
+      },
+      "water": {
+        "source": "reference-water",
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "time": 0.4774000000208616,
+        "level": -0.12,
+        "center": {
+          "x": -8.2,
+          "z": -15
+        },
+        "denseSize": 80,
+        "extent": 2000,
+        "parameters": {
+          "waveAmplitude": 0.18,
+          "waveSpeed": 1,
+          "detailStrength": 0.65
+        },
+        "boat": {
+          "time": 0.4774000000208616,
+          "waterline": 0.24,
+          "heading": 0.3,
+          "supportWidth": 0.76,
+          "supportLength": 2.5,
+          "supports": [
+            {
+              "x": -8.932428124194404,
+              "z": -16.081872932875697,
+              "height": -0.06719737349297947
+            },
+            {
+              "x": -8.206372392458944,
+              "z": -16.306468289938316,
+              "height": -0.04691145602437555
+            },
+            {
+              "x": -8.193627607541055,
+              "z": -13.693531710061684,
+              "height": -0.05734683991269015
+            },
+            {
+              "x": -7.467571875805595,
+              "z": -13.918127067124301,
+              "height": -0.08570111006040262
+            }
+          ],
+          "position": [
+            -8.2,
+            -0.3042817942008456,
+            -15
+          ],
+          "quaternion": [
+            0.0024647412535879886,
+            0.14943698044565054,
+            -0.003056651228492363,
+            0.9887634554377028
+          ]
+        }
+      }
+    }
+  },
+  "pinched": {
+    "time": 0.4774000000208616,
+    "paused": true,
+    "year": 1200,
+    "progress": 0.038578333333383,
+    "camera": {
+      "position": [
+        -6.152482152588975,
+        1.8349687348683983,
+        -17.69198378899376
+      ],
+      "target": [
+        -8.2,
+        0.06208335905127499,
+        -15
+      ],
+      "fov": 45
+    },
+    "lighting": "day",
+    "visualization": "off",
+    "quality": "low",
+    "pixelRatio": 1,
+    "world": {
+      "mode": "reference",
+      "seed": 1983,
+      "quality": "low",
+      "buildings": 7,
+      "populationSource": "existing-fjordside",
+      "groundTier": "reference",
+      "source": "reference",
+      "site": {
+        "x": 0,
+        "z": 0
+      },
+      "attachments": 0,
+      "validation": null,
+      "motion": {
+        "water": true,
+        "wind": true
+      },
+      "water": {
+        "source": "reference-water",
+        "quality": "low",
+        "triangles": 2048,
+        "normalSamples": 2,
+        "textureBytes": 87380,
+        "drawCalls": 1,
+        "time": 0.4774000000208616,
+        "level": -0.12,
+        "center": {
+          "x": -8.2,
+          "z": -15
+        },
+        "denseSize": 80,
+        "extent": 2000,
+        "parameters": {
+          "waveAmplitude": 0.18,
+          "waveSpeed": 1,
+          "detailStrength": 0.65
+        },
+        "boat": {
+          "time": 0.4774000000208616,
+          "waterline": 0.24,
+          "heading": 0.3,
+          "supportWidth": 0.76,
+          "supportLength": 2.5,
+          "supports": [
+            {
+              "x": -8.932428124194404,
+              "z": -16.081872932875697,
+              "height": -0.06719737349297947
+            },
+            {
+              "x": -8.206372392458944,
+              "z": -16.306468289938316,
+              "height": -0.04691145602437555
+            },
+            {
+              "x": -8.193627607541055,
+              "z": -13.693531710061684,
+              "height": -0.05734683991269015
+            },
+            {
+              "x": -7.467571875805595,
+              "z": -13.918127067124301,
+              "height": -0.08570111006040262
+            }
+          ],
+          "position": [
+            -8.2,
+            -0.3042817942008456,
+            -15
+          ],
+          "quaternion": [
+            0.0024647412535879886,
+            0.14943698044565054,
+            -0.003056651228492363,
+            0.9887634554377028
+          ]
+        }
+      }
+    }
+  },
+  "errors": []
+}

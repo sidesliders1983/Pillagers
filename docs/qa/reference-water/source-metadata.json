@@ -1,0 +1,43 @@
+{
+  "sourceName": "1-ScreenRecording_10-09-2026-08-26-03_1.mov",
+  "sourceSha256": "2ece792cead61b4f843864de80bcd1ce8d2fc47ae4e65ce805965ee9a3e276f3",
+  "bytes": 17311488,
+  "decodedFrames": 465,
+  "firstTimestamp": 0.0,
+  "lastTimestamp": 7.71,
+  "reviewFrameWidth": 512,
+  "waterSheetCrop": "Lower half of each decoded frame; may include scene objects.",
+  "fullResolutionSamples": [
+    {
+      "frame": 1,
+      "seconds": 0.0,
+      "path": "full-resolution/sample-01.png"
+    },
+    {
+      "frame": 62,
+      "seconds": 1.003333,
+      "path": "full-resolution/sample-02.png"
+    },
+    {
+      "frame": 182,
+      "seconds": 3.0,
+      "path": "full-resolution/sample-03.png"
+    },
+    {
+      "frame": 302,
+      "seconds": 4.996667,
+      "path": "full-resolution/sample-04.png"
+    },
+    {
+      "frame": 362,
+      "seconds": 5.995,
+      "path": "full-resolution/sample-05.png"
+    },
+    {
+      "frame": 422,
+      "seconds": 6.993333,
+      "path": "full-resolution/sample-06.png"
+    }
+  ],
+  "visualReviewStatus": "Not reviewed; extraction does not establish visual acceptance."
+}

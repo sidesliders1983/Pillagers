@@ -1,16 +1,18 @@
-import { Group, Raycaster, Vector3, Mesh, InstancedMesh } from 'three';
+import { Camera, Group, Raycaster, Vector3, Mesh, InstancedMesh } from 'three';
 import { AssetManager, AssetKey } from '../core/AssetManager';
 import { createTerrain, heightAt } from './Terrain';
 import { createEnvironment } from './Environment';
 import { createPaths } from './Paths';
 import { buildings, hearth, well } from './SettlementLayout';
 import { Water } from './Water';
+import type { WorldLighting } from '../core/WorldLighting';
 export { obstacles } from './SettlementLayout';
 export class World {
     readonly root = new Group();
-    readonly water = new Water();
+    readonly water: Water;
     readonly terrain = createTerrain();
-    constructor(assets: AssetManager) {
+    constructor(assets: AssetManager, quality: 'standard' | 'low' = 'standard') {
+        this.water = new Water(quality);
         this.root.name = 'Fjordside';
         const paths = createPaths();
         paths.name = 'Settlement paths';
@@ -60,5 +62,5 @@ export class World {
         });
         this.root.clear();
     }
-    update(time: number) { this.water.update(time); }
+    update(time: number, lighting?: WorldLighting, camera?: Camera) { this.water.update(time, lighting, camera); }
 }

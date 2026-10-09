@@ -48,7 +48,8 @@ try {
         }
         for(const quality of ['standard','low']) {
             if(await page.locator('#fjordside-quality').inputValue()!==quality)
-                await reloadBy(() => page.selectOption('#fjordside-quality',quality));
+                await page.selectOption('#fjordside-quality',quality);
+            await page.waitForTimeout(900);
             await page.click('#fjordside-pause');
             for(const lighting of ['day','night']) {
                 await page.click('#lighting-'+lighting);
@@ -61,6 +62,8 @@ try {
             await page.click('#lighting-day');
             await page.selectOption('#fjordside-camera','overlook');
             await page.waitForTimeout(700);
+            // Future measurements include animated residents/effects rather than the paused capture fixture.
+            await page.click('#fjordside-pause');
             const hardware = await page.evaluate(() => {
                 const gl=document.querySelector('canvas').getContext('webgl2');
                 const extension=gl.getExtension('WEBGL_debug_renderer_info');
@@ -82,7 +85,6 @@ try {
                 })));
             }
             measurements.push({mode,quality,hardware,runs,metrics:JSON.parse(await page.locator('canvas').getAttribute('data-metrics'))});
-            await page.click('#fjordside-pause');
         }
     }
     assert.deepEqual(errors,[]);

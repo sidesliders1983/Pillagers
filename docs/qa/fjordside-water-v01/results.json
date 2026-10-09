@@ -1,0 +1,5309 @@
+{
+  "shots": [
+    {
+      "id": "reference-standard-day-boat-t0",
+      "file": "reference-standard-day-boat-t0.webp",
+      "fixture": {
+        "time": 0,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801077,
+            2.162714154635643,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.012714154635643626,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 0,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.026137150436402936
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.07903105662860954
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.1300285302767304
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.14678858943673626
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33510388090727844,
+                -15
+              ],
+              "quaternion": [
+                0.013531527300464585,
+                0.1493770292390095,
+                -0.025189354415663626,
+                0.9883667827930919
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.996428571109263,
+        "calls": 35,
+        "triangles": 215949,
+        "geometries": 29,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-standard-day-boat-t2",
+      "file": "reference-standard-day-boat-t2.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801077,
+            2.162714154635643,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.012714154635643626,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.07472913991707718
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.0858013159617762
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.08041347081681331
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.14962822437766715
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33728584536435635,
+                -15
+              ],
+              "quaternion": [
+                0.002923115670961161,
+                0.14938251986960716,
+                -0.027122061802030008,
+                0.9884031120528646
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.992857142750708,
+        "calls": 35,
+        "triangles": 215949,
+        "geometries": 29,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-standard-day-boat-t8",
+      "file": "reference-standard-day-boat-t8.webp",
+      "fixture": {
+        "time": 8.1,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801077,
+            2.162714154635643,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.012714154635643626,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 8.1,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 8.1,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.21249480786141234
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.16342534557213723
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.07622446016444123
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.07149958872874065
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.3705117936436618,
+                -15
+              ],
+              "quaternion": [
+                -0.01989412657918649,
+                0.14937596932431702,
+                0.02088082889147787,
+                0.988359769770541
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.992857143282894,
+        "calls": 35,
+        "triangles": 215949,
+        "geometries": 29,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-standard-day-grazing",
+      "file": "reference-standard-day-grazing.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -4.950350801201614,
+            0.8627141546356438,
+            -24.79794774862313
+          ],
+          "target": [
+            -8.2,
+            0.012714154635643626,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.07472913991707718
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.0858013159617762
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.08041347081681331
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.14962822437766715
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33728584536435635,
+                -15
+              ],
+              "quaternion": [
+                0.002923115670961161,
+                0.14938251986960716,
+                -0.027122061802030008,
+                0.9884031120528646
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.99642857164145,
+        "calls": 36,
+        "triangles": 216465,
+        "geometries": 29,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-standard-day-shore",
+      "file": "reference-standard-day-shore.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            46,
+            20,
+            -50
+          ],
+          "target": [
+            -25,
+            7,
+            20
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.07472913991707718
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.0858013159617762
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.08041347081681331
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.14962822437766715
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33728584536435635,
+                -15
+              ],
+              "quaternion": [
+                0.002923115670961161,
+                0.14938251986960716,
+                -0.027122061802030008,
+                0.9884031120528646
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.98928571439215,
+        "calls": 47,
+        "triangles": 250982,
+        "geometries": 29,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-standard-day-overlook",
+      "file": "reference-standard-day-overlook.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            87.99999999999997,
+            78,
+            -77.99999999999999
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.07472913991707718
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.0858013159617762
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.08041347081681331
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.14962822437766715
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33728584536435635,
+                -15
+              ],
+              "quaternion": [
+                0.002923115670961161,
+                0.14938251986960716,
+                -0.027122061802030008,
+                0.9884031120528646
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18,
+        "calls": 48,
+        "triangles": 251419,
+        "geometries": 29,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-standard-night-boat",
+      "file": "reference-standard-night-boat.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801077,
+            2.162714154635643,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.012714154635643626,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "standard",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.07472913991707718
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.0858013159617762
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.08041347081681331
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.14962822437766715
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33728584536435635,
+                -15
+              ],
+              "quaternion": [
+                0.002923115670961161,
+                0.14938251986960716,
+                -0.027122061802030008,
+                0.9884031120528646
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18.035714285714285,
+        "calls": 36,
+        "triangles": 215981,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-day-boat-t0",
+      "file": "reference-low-day-boat-t0.webp",
+      "fixture": {
+        "time": 0,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801075,
+            2.1681910055454523,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.018191005545452332,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 0,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.07493451159443293
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.09137759449005675
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.13957325552849353
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.15929865451651187
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.3561438581935357,
+                -15
+              ],
+              "quaternion": [
+                0.011323798580959771,
+                0.14941444685693628,
+                -0.013738343541967686,
+                0.9886143598860256
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.99642857164145,
+        "calls": 35,
+        "triangles": 209805,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-day-boat-t2",
+      "file": "reference-low-day-boat-t2.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801075,
+            2.1681910055454523,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.018191005545452332,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.06122573905998515
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.06480691433518725
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.106803636925466
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.13486408647984838
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33180899445454765,
+                -15
+              ],
+              "quaternion": [
+                0.009874660753269251,
+                0.14942005874609893,
+                -0.012015221385966394,
+                0.9886514914641895
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.93571428528854,
+        "calls": 35,
+        "triangles": 209805,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-day-boat-t8",
+      "file": "reference-low-day-boat-t8.webp",
+      "fixture": {
+        "time": 8.1,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801075,
+            2.1681910055454523,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.018191005545452332,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 8.1,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 8.1,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.15690213710722997
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.13611601896955097
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.08808528134396768
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.07292286541879706
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.35335594905247736,
+                -15
+              ],
+              "quaternion": [
+                -0.011280322813989978,
+                0.14941468337719088,
+                0.013658691499588038,
+                0.988615924843933
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.985714285501416,
+        "calls": 35,
+        "triangles": 209805,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-day-grazing",
+      "file": "reference-low-day-grazing.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -4.950350801201614,
+            0.8681910055454523,
+            -24.79794774862313
+          ],
+          "target": [
+            -8.2,
+            0.018191005545452332,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.06122573905998515
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.06480691433518725
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.106803636925466
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.13486408647984838
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33180899445454765,
+                -15
+              ],
+              "quaternion": [
+                0.009874660753269251,
+                0.14942005874609893,
+                -0.012015221385966394,
+                0.9886514914641895
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18,
+        "calls": 36,
+        "triangles": 210321,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-day-shore",
+      "file": "reference-low-day-shore.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            46,
+            20,
+            -50
+          ],
+          "target": [
+            -25,
+            7,
+            20
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.06122573905998515
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.06480691433518725
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.106803636925466
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.13486408647984838
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33180899445454765,
+                -15
+              ],
+              "quaternion": [
+                0.009874660753269251,
+                0.14942005874609893,
+                -0.012015221385966394,
+                0.9886514914641895
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.99642857110927,
+        "calls": 47,
+        "triangles": 244838,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-day-overlook",
+      "file": "reference-low-day-overlook.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            87.99999999999997,
+            78,
+            -77.99999999999999
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.06122573905998515
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.06480691433518725
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.106803636925466
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.13486408647984838
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33180899445454765,
+                -15
+              ],
+              "quaternion": [
+                0.009874660753269251,
+                0.14942005874609893,
+                -0.012015221385966394,
+                0.9886514914641895
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.97857142825212,
+        "calls": 48,
+        "triangles": 245275,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "reference-low-night-boat",
+      "file": "reference-low-night-boat.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.040031666666517654,
+        "camera": {
+          "position": [
+            -6.033567200801077,
+            2.168191005545452,
+            -21.53196516574875
+          ],
+          "target": [
+            -8.2,
+            0.018191005545452332,
+            -15
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "reference",
+          "seed": 1983,
+          "quality": "low",
+          "buildings": 7,
+          "populationSource": "existing-fjordside",
+          "groundTier": "reference",
+          "source": "reference",
+          "site": {
+            "x": 0,
+            "z": 0
+          },
+          "attachments": 0,
+          "validation": null,
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": -8.2,
+              "z": -15
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 0.3,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": -8.932428124194404,
+                  "z": -16.081872932875697,
+                  "height": -0.06122573905998515
+                },
+                {
+                  "x": -8.206372392458944,
+                  "z": -16.306468289938316,
+                  "height": -0.06480691433518725
+                },
+                {
+                  "x": -8.193627607541055,
+                  "z": -13.693531710061684,
+                  "height": -0.106803636925466
+                },
+                {
+                  "x": -7.467571875805595,
+                  "z": -13.918127067124301,
+                  "height": -0.13486408647984838
+                }
+              ],
+              "position": [
+                -8.2,
+                -0.33180899445454765,
+                -15
+              ],
+              "quaternion": [
+                0.009874660753269251,
+                0.14942005874609893,
+                -0.012015221385966394,
+                0.9886514914641895
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.939285714711463,
+        "calls": 36,
+        "triangles": 209837,
+        "geometries": 30,
+        "textures": 38,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-day-boat-t0",
+      "file": "17-standard-day-boat-t0.webp",
+      "fixture": {
+        "time": 0,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.179702127775182,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.029702127775181886,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 0,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.1596582410188665
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.1395751215502919
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.06775294880185602
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.016441053769963708
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3353716093133315,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.024631239554093166,
+                -0.9978809534245282,
+                -0.020104775042618,
+                0.0567688545865534
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.96428571428572,
+        "calls": 22,
+        "triangles": 674652,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-day-boat-t2",
+      "file": "17-standard-day-boat-t2.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.179702127775182,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.029702127775181886,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.09989040805514549
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.03998588424353661
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.10354456230039003
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.0792745263941663
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3202978722248181,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.02736819365279801,
+                -0.9979946321066431,
+                0.0058531280916202365,
+                0.05677532169924096
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.996428571641445,
+        "calls": 22,
+        "triangles": 674652,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-day-boat-t8",
+      "file": "17-standard-day-boat-t8.webp",
+      "fixture": {
+        "time": 8.1,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.179702127775182,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.029702127775181886,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 8.1,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 8.1,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.04895874611981638
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.06629884900386142
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.1677867103104883
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.21596000889578704
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.36418415617998146,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                0.022999785785784134,
+                -0.9977959499978004,
+                0.025536213352099275,
+                0.05676401879210847
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.8821428572493,
+        "calls": 22,
+        "triangles": 674652,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-day-grazing",
+      "file": "17-standard-day-grazing.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            31.119662067428262,
+            0.8797021277751818,
+            -28.61035948490771
+          ],
+          "target": [
+            36.1282916701127,
+            0.029702127775181886,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.09989040805514549
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.03998588424353661
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.10354456230039003
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.0792745263941663
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3202978722248181,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.02736819365279801,
+                -0.9979946321066431,
+                0.0058531280916202365,
+                0.05677532169924096
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.967857143176452,
+        "calls": 24,
+        "triangles": 732828,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-day-shore",
+      "file": "17-standard-day-shore.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            84,
+            20,
+            -44
+          ],
+          "target": [
+            13,
+            7,
+            26
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.09989040805514549
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.03998588424353661
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.10354456230039003
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.0792745263941663
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3202978722248181,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.02736819365279801,
+                -0.9979946321066431,
+                0.0058531280916202365,
+                0.05677532169924096
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 24.857142857142858,
+        "calls": 59,
+        "triangles": 857870,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-day-overlook",
+      "file": "17-standard-day-overlook.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            87.99999999999997,
+            78,
+            -77.99999999999999
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.09989040805514549
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.03998588424353661
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.10354456230039003
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.0792745263941663
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3202978722248181,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.02736819365279801,
+                -0.9979946321066431,
+                0.0058531280916202365,
+                0.05677532169924096
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 31.264705882352946,
+        "calls": 61,
+        "triangles": 861447,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-standard-night-boat",
+      "file": "17-standard-night-boat.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.1797021277751822,
+            -31.61911761748432
+          ],
+          "target": [
+            36.1282916701127,
+            0.029702127775181886,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.09989040805514549
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.03998588424353661
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.10354456230039003
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.0792745263941663
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3202978722248181,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.02736819365279801,
+                -0.9979946321066431,
+                0.0058531280916202365,
+                0.05677532169924096
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 19.607692307577693,
+        "calls": 22,
+        "triangles": 674652,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-day-boat-t0",
+      "file": "17-low-day-boat-t0.webp",
+      "fixture": {
+        "time": 0,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.1721219381112893,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.022121938111289208,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 0,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.15150536196967296
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.12461623940114792
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.09936411300726306
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.07626094635771785
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.3527585781357473,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.016979625014692745,
+                -0.9982004899910552,
+                -0.009094339894514625,
+                0.05678703283198237
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.96428571428572,
+        "calls": 22,
+        "triangles": 668508,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-day-boat-t2",
+      "file": "17-low-day-boat-t2.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.1721219381112893,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.022121938111289208,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.12414517739550121
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.09448126436542874
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.0731202950015268
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.06027989246317787
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.32787806188871077,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.014437371955830298,
+                -0.9982519687737407,
+                -0.007711641278800008,
+                0.05678996142934516
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.896428571747887,
+        "calls": 22,
+        "triangles": 668508,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-day-boat-t8",
+      "file": "17-low-day-boat-t8.webp",
+      "fixture": {
+        "time": 8.1,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.1721219381112893,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.022121938111289208,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 8.1,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 8.1,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.07907476384845288
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.10328538496682389
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.12869064135120187
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.1547237079094436
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.35626369327930124,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                0.017065209591360486,
+                -0.9981985717016292,
+                0.00914523760952791,
+                0.05678692370163661
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.960714285927164,
+        "calls": 22,
+        "triangles": 668508,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-day-grazing",
+      "file": "17-low-day-grazing.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            31.119662067428262,
+            0.872121938111289,
+            -28.61035948490771
+          ],
+          "target": [
+            36.1282916701127,
+            0.022121938111289208,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.12414517739550121
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.09448126436542874
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.0731202950015268
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.06027989246317787
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.32787806188871077,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.014437371955830298,
+                -0.9982519687737407,
+                -0.007711641278800008,
+                0.05678996142934516
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.914285714605025,
+        "calls": 24,
+        "triangles": 726684,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-day-shore",
+      "file": "17-low-day-shore.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            84,
+            20,
+            -44
+          ],
+          "target": [
+            13,
+            7,
+            26
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.12414517739550121
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.09448126436542874
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.0731202950015268
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.06027989246317787
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.32787806188871077,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.014437371955830298,
+                -0.9982519687737407,
+                -0.007711641278800008,
+                0.05678996142934516
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 26.60500000044704,
+        "calls": 59,
+        "triangles": 851726,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-day-overlook",
+      "file": "17-low-day-overlook.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            87.99999999999997,
+            78,
+            -77.99999999999999
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.12414517739550121
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.09448126436542874
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.0731202950015268
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.06027989246317787
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.32787806188871077,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.014437371955830298,
+                -0.9982519687737407,
+                -0.007711641278800008,
+                0.05678996142934516
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 32.637500000186265,
+        "calls": 61,
+        "triangles": 855303,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "17-low-night-boat",
+      "file": "17-low-night-boat.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.024888333333283663,
+        "camera": {
+          "position": [
+            32.78920526832308,
+            2.1721219381112893,
+            -31.619117617484324
+          ],
+          "target": [
+            36.1282916701127,
+            0.022121938111289208,
+            -37.63663388263755
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 17,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2785,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 93
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 36.1282916701127,
+              "z": -37.63663388263755
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": -3.027936348766743,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 36.647604644272434,
+                  "z": -36.437795263444215,
+                  "height": -0.12414517739550121
+                },
+                {
+                  "x": 35.89250810951879,
+                  "z": -36.35160232172021,
+                  "height": -0.09448126436542874
+                },
+                {
+                  "x": 36.36407523070661,
+                  "z": -38.921665443554886,
+                  "height": -0.0731202950015268
+                },
+                {
+                  "x": 35.60897869595297,
+                  "z": -38.83547250183088,
+                  "height": -0.06027989246317787
+                }
+              ],
+              "position": [
+                36.1282916701127,
+                -0.32787806188871077,
+                -37.63663388263755
+              ],
+              "quaternion": [
+                -0.014437371955830298,
+                -0.9982519687737407,
+                -0.007711641278800008,
+                0.05678996142934516
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.939285714179274,
+        "calls": 22,
+        "triangles": 668508,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-day-boat-t0",
+      "file": "91-standard-day-boat-t0.webp",
+      "fixture": {
+        "time": 0,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.148890544207899,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.0011094557921008663,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 0,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.13843544990841739
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.10135113042900196
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.20464682746722823
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.15297184125191385
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3888768905474464,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.030941868609095556,
+                0.9784538918865339,
+                -0.005565909038346247,
+                0.204057841985182
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 24.504761904478077,
+        "calls": 24,
+        "triangles": 911185,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-day-boat-t2",
+      "file": "91-standard-day-boat-t2.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.1488905442078994,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.0011094557921008663,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.1291372002303207
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.06772009776631797
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.14476140874390142
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.10499256768933844
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.35110945579210084,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.0336065411492822,
+                0.9783835534999552,
+                0.0016143907002797026,
+                0.20404317282244172
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 23.39999999986454,
+        "calls": 24,
+        "triangles": 911185,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-day-boat-t8",
+      "file": "91-standard-day-boat-t8.webp",
+      "fixture": {
+        "time": 8.1,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.1488905442078994,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.0011094557921008663,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 8.1,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 8.1,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.074313092639383
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.10930371425195247
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.03690814472225576
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.08984729071766306
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3171770509941495,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                -0.02943759803079057,
+                0.9785134839460568,
+                -0.0003383271017110166,
+                0.20407026998732555
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 22.673913043478258,
+        "calls": 24,
+        "triangles": 911185,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-day-grazing",
+      "file": "91-standard-day-grazing.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            26.31592094045331,
+            0.8488905442078989,
+            -27.915721449587885
+          ],
+          "target": [
+            35.17337794152268,
+            -0.0011094557921008663,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.1291372002303207
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.06772009776631797
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.14476140874390142
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.10499256768933844
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.35110945579210084,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.0336065411492822,
+                0.9783835534999552,
+                0.0016143907002797026,
+                0.20404317282244172
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 21.95217391330263,
+        "calls": 24,
+        "triangles": 911185,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-day-shore",
+      "file": "91-standard-day-shore.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            84,
+            20,
+            -44
+          ],
+          "target": [
+            13,
+            7,
+            26
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.1291372002303207
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.06772009776631797
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.14476140874390142
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.10499256768933844
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.35110945579210084,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.0336065411492822,
+                0.9783835534999552,
+                0.0016143907002797026,
+                0.20404317282244172
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 42.24166666716337,
+        "calls": 61,
+        "triangles": 1174595,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-day-overlook",
+      "file": "91-standard-day-overlook.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            87.99999999999997,
+            78,
+            -77.99999999999999
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.1291372002303207
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.06772009776631797
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.14476140874390142
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.10499256768933844
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.35110945579210084,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.0336065411492822,
+                0.9783835534999552,
+                0.0016143907002797026,
+                0.20404317282244172
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 42.64999999975164,
+        "calls": 62,
+        "triangles": 1175032,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-standard-night-boat",
+      "file": "91-standard-night-boat.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.1488905442078985,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.0011094557921008663,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "standard",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "standard",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.1291372002303207
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.06772009776631797
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.14476140874390142
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.10499256768933844
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.35110945579210084,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.0336065411492822,
+                0.9783835534999552,
+                0.0016143907002797026,
+                0.20404317282244172
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18.257142857249296,
+        "calls": 24,
+        "triangles": 911185,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-day-boat-t0",
+      "file": "91-low-day-boat-t0.webp",
+      "fixture": {
+        "time": 0,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.1476815718536333,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 0,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.15824562564121142
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.12071493525900547
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.16002375114493272
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.12650384913601948
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.38110999717715066,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.023015262608882432,
+                0.9786705431687757,
+                0.0040275116187562495,
+                0.20410302489414092
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 19.07037037059113,
+        "calls": 24,
+        "triangles": 905041,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-day-boat-t2",
+      "file": "91-low-day-boat-t2.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.147681571853633,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 19.47692307715232,
+        "calls": 24,
+        "triangles": 905041,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-day-boat-t8",
+      "file": "91-low-day-boat-t8.webp",
+      "fixture": {
+        "time": 8.1,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.147681571853633,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 8.1,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 8.1,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.07188008649309569
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.10765203000761894
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.07136615499582424
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.10117573122321814
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3277951916402493,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                -0.02124636795779746,
+                0.9787100513376761,
+                -0.003717393525383859,
+                0.2041112643745635
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18.829629629850384,
+        "calls": 24,
+        "triangles": 905041,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-day-grazing",
+      "file": "91-low-day-grazing.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            26.31592094045331,
+            0.8476815718536326,
+            -27.915721449587885
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18.66666666666666,
+        "calls": 24,
+        "triangles": 905041,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-day-shore",
+      "file": "91-low-day-shore.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            84,
+            20,
+            -44
+          ],
+          "target": [
+            13,
+            7,
+            26
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 24.540909091180023,
+        "calls": 61,
+        "triangles": 1168451,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-day-overlook",
+      "file": "91-low-day-overlook.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            87.99999999999997,
+            78,
+            -77.99999999999999
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45
+        },
+        "lighting": "day",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 40.99230769161995,
+        "calls": 62,
+        "triangles": 1168888,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "91-low-night-boat",
+      "file": "91-low-night-boat.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.0161,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.147681571853633,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 18.99629629596516,
+        "calls": 24,
+        "triangles": 905041,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "mobile-portrait",
+      "file": "mobile-portrait.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.04071833333323399,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.147681571853633,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 21.379166666418314,
+        "calls": 22,
+        "triangles": 904009,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    },
+    {
+      "id": "mobile-landscape",
+      "file": "mobile-landscape.webp",
+      "fixture": {
+        "time": 2.5,
+        "paused": true,
+        "year": 1200,
+        "progress": 0.04071833333323399,
+        "camera": {
+          "position": [
+            29.268406607476432,
+            2.147681571853633,
+            -29.682874070620667
+          ],
+          "target": [
+            35.17337794152268,
+            -0.002318428146367124,
+            -33.21717931268622
+          ],
+          "fov": 45
+        },
+        "lighting": "night",
+        "visualization": "off",
+        "quality": "low",
+        "pixelRatio": 1,
+        "world": {
+          "mode": "generated",
+          "seed": 91,
+          "quality": "low",
+          "buildings": 6,
+          "populationSource": "existing-fjordside",
+          "groundTier": "standard",
+          "source": "ez-tree",
+          "site": {
+            "x": 38,
+            "z": 6
+          },
+          "attachments": 20,
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 6,
+            "connectedArea": 2719,
+            "maximumFoundationSlope": 4.440892098500626e-16,
+            "minimumFoundationElevation": 2.7199999046325685,
+            "score": 91
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 2.5,
+            "level": -0.12,
+            "center": {
+              "x": 35.17337794152268,
+              "z": -33.21717931268622
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": {
+              "time": 2.5,
+              "waterline": 0.24,
+              "heading": 2.7303840724931483,
+              "supportWidth": 0.76,
+              "supportLength": 2.5,
+              "supports": [
+                {
+                  "x": 35.022053719708275,
+                  "z": -31.91948867933316,
+                  "height": -0.12894413452513734
+                },
+                {
+                  "x": 34.32540853462104,
+                  "z": -32.22327394246284,
+                  "height": -0.09228576728722125
+                },
+                {
+                  "x": 36.02134734842432,
+                  "z": -34.2110846829096,
+                  "height": -0.1336822686445434
+                },
+                {
+                  "x": 35.324702163337086,
+                  "z": -34.51486994603928,
+                  "height": -0.09552358468032708
+                }
+              ],
+              "position": [
+                35.17337794152268,
+                -0.3523184281463671,
+                -33.21717931268622
+              ],
+              "quaternion": [
+                0.024233323166471706,
+                0.9786415057161598,
+                0.0042398754719833506,
+                0.20409696909532743
+              ]
+            }
+          }
+        }
+      },
+      "metrics": {
+        "ms": 17.992857142750708,
+        "calls": 24,
+        "triangles": 905041,
+        "geometries": 36,
+        "textures": 58,
+        "population": 10
+      }
+    }
+  ],
+  "errors": [],
+  "viewport": [
+    1400,
+    900
+  ]
+}

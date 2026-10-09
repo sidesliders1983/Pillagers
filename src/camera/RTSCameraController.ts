@@ -18,6 +18,7 @@ export class RTSCameraController {
     private height: ((x:number,z:number)=>number) | undefined;
     private ray=new Raycaster();private pointer=new Vector2();
     private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
+    private minimumZoom = worldConfig.camera.minZoom;
     private touch:TouchGestures;
     private select:((x:number,y:number)=>boolean)|null=null;
     private mouseStart:{x:number;y:number;distance:number}|null=null;
@@ -80,13 +81,15 @@ export class RTSCameraController {
         this.desired.copy(this.focus);
         const offset=position.sub(this.focus);
         this.distance=this.zoom=offset.length()/orbitScale;
+        // Close review poses need a matching zoom floor; preserve the normal RTS floor at Home.
+        this.minimumZoom=Math.min(worldConfig.camera.minZoom,this.zoom/2);
         this.angle=this.yaw=Math.atan2(offset.x,offset.z);
         this.elevation=this.targetElevation=Math.atan2(offset.y,Math.hypot(offset.x,offset.z));
         this.update(0);
     }
     setSelectionHandler(select:(x:number,y:number)=>boolean){this.select=select;}
-    home(){this.desired.copy(this.homeFocus);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
-    private setZoom(value:number){this.zoom=MathUtils.clamp(value,worldConfig.camera.minZoom,worldConfig.camera.maxZoom);}
+    home(){this.minimumZoom=worldConfig.camera.minZoom;this.desired.copy(this.homeFocus);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
+    private setZoom(value:number){this.zoom=MathUtils.clamp(value,this.minimumZoom,worldConfig.camera.maxZoom);}
     private navigate(x:number,y:number){
         if(this.select?.(x,y))return;
         const rect=this.canvas.getBoundingClientRect();

@@ -16,3 +16,6 @@ public/sprites/imagegen-drafts/
 
 # Meshy server-side credentials: never commit or expose through Vite.
 .env.meshy.local
+
+# Local decoded video frames and extraction runtime.
+/output/water-reference/

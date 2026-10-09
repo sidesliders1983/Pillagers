@@ -42,6 +42,11 @@ export class Game {
             const saved = proposal.exportSave();
             proposal.dispose();
             return saved;
+        },quality => {
+            world.setQuality(quality);
+            lighting.setQuality(quality);
+            renderer.setPixelRatio(Math.min(devicePixelRatio,quality === 'low' ? 1 : 1.5));
+            canvas.dataset.world = JSON.stringify(world.describe());
         });
         const windControl = document.querySelector<HTMLInputElement>('#fjordside-wind-motion');
         if (windControl) windControl.disabled = world.describe().source !== 'ez-tree';
@@ -115,10 +120,19 @@ export class Game {
         });
         document.querySelector('#fjordside-camera')?.addEventListener('change',event => {
             const view = (event.target as HTMLSelectElement).value;
-            const site = world.describe().site;
+            const state = world.describe();
+            const site = state.site;
+            const boat = state.water.boat;
+            const boatView = (distance: number, height: number) => {
+                const [x, y, z] = boat.position;
+                const yaw = boat.heading;
+                return { position: [x + distance*Math.cos(yaw)-distance*1.4*Math.sin(yaw),
+                    y+height, z-distance*Math.sin(yaw)-distance*1.4*Math.cos(yaw)], target: [x,y+.35,z] };
+            };
             const poses = { village: { position: [site.x+34,15,site.z-20],target: [site.x,3,site.z+18] },
                 shore: { position: [site.x+46,20,site.z-50],target: [site.x-25,7,site.z+20] },
-                overlook: { position: [88,78,-78],target: [0,5,16] } };
+                overlook: { position: [88,78,-78],target: [0,5,16] },
+                boat: boatView(4,2.5), grazing: boatView(6,1.2) };
             controller.setView(poses[view as keyof typeof poses]);
         });
         const summary=document.createElement('dialog');summary.id='year-summary';summary.setAttribute('aria-labelledby','year-summary-title');
@@ -164,6 +178,17 @@ export class Game {
             summary.showModal();
         };
         canvas.dataset.ready = 'true';
+        document.querySelector('#fjordside-effects-scrub')?.addEventListener('click',() => {
+            const input = document.querySelector<HTMLInputElement>('#fjordside-effects-time')!;
+            const value = Number(input.value);
+            if (!Number.isFinite(value) || value < 0 || value > 120) return;
+            if (!manuallyPaused && !cycle.paused) {
+                manuallyPaused = true;
+                heldAt = performance.now();
+                if (pauseButton) pauseButton.textContent = 'Resume world';
+            }
+            time = value;
+        });
         const clock = new Clock();
         let time = 0, frames = 0, sample = 0;
         renderer.setAnimationLoop(() => {
@@ -179,7 +204,7 @@ export class Game {
             controller.update(dt);
             if(!paused)movement.update(dt);
             lighting.update(time,cycle.progress);
-            world.update(time,lighting);
+            world.update(time,lighting,camera);
             seasons.update(lighting.visualization==='seasons'?cycle.progress:null);
             document.body.dataset.lighting=lighting.mode;
             characters.forEach(character=>{if(!paused){const state=character.villager.interactionState;if(character.model instanceof MeshyHuman&&(state==='talking'||state==='listening'))character.model.setAnimation(state==='talking'?'Talk':'Listen');else character.model.setMovementSpeed(character.villager.speed);}character.model.update(paused?0:dt,camera.position.distanceTo(character.villager.visual.position));});

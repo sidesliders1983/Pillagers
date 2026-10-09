@@ -1,0 +1,142 @@
+{
+  "errors": [],
+  "observations": [
+    {
+      "quality": "low",
+      "triangles": 2048,
+      "normalSamples": 2,
+      "textureBytes": 87380,
+      "drawCalls": 1,
+      "elapsedSeconds": 2.1,
+      "paused": true,
+      "pixelRatio": 1,
+      "render": {
+        "frame": 152,
+        "calls": 2,
+        "triangles": 2180,
+        "points": 0,
+        "lines": 0
+      },
+      "memory": {
+        "geometries": 2,
+        "textures": 1
+      },
+      "viewport": {
+        "width": 1200,
+        "height": 900
+      },
+      "cadence": {
+        "samples": 120,
+        "fps": 48.2586664521837,
+        "p95FrameMs": 36
+      },
+      "floatingSample": {
+        "visible": true,
+        "position": [
+          0,
+          0.10445043167513313,
+          0
+        ],
+        "quaternion": [
+          -0.004271600047679706,
+          0,
+          0.014497968795520786,
+          0.9998857746432025
+        ],
+        "triangles": 132
+      }
+    },
+    {
+      "quality": "medium",
+      "triangles": 8192,
+      "normalSamples": 2,
+      "textureBytes": 87380,
+      "drawCalls": 1,
+      "elapsedSeconds": 2.1,
+      "paused": true,
+      "pixelRatio": 1,
+      "render": {
+        "frame": 157,
+        "calls": 2,
+        "triangles": 8324,
+        "points": 0,
+        "lines": 0
+      },
+      "memory": {
+        "geometries": 2,
+        "textures": 1
+      },
+      "viewport": {
+        "width": 1200,
+        "height": 900
+      },
+      "cadence": {
+        "samples": 120,
+        "fps": 48.27031375703942,
+        "p95FrameMs": 36
+      },
+      "floatingSample": {
+        "visible": true,
+        "position": [
+          0,
+          0.10496493975449382,
+          0
+        ],
+        "quaternion": [
+          -0.013934866948030115,
+          0,
+          0.01937247333224609,
+          0.9997152228310481
+        ],
+        "triangles": 132
+      }
+    },
+    {
+      "quality": "high",
+      "triangles": 18432,
+      "normalSamples": 3,
+      "textureBytes": 87380,
+      "drawCalls": 1,
+      "elapsedSeconds": 2.1,
+      "paused": true,
+      "pixelRatio": 1,
+      "render": {
+        "frame": 160,
+        "calls": 2,
+        "triangles": 18564,
+        "points": 0,
+        "lines": 0
+      },
+      "memory": {
+        "geometries": 2,
+        "textures": 1
+      },
+      "viewport": {
+        "width": 1200,
+        "height": 900
+      },
+      "cadence": {
+        "samples": 120,
+        "fps": 48.612517723313736,
+        "p95FrameMs": 36
+      },
+      "floatingSample": {
+        "visible": true,
+        "position": [
+          0,
+          0.10024193771490875,
+          0
+        ],
+        "quaternion": [
+          -0.017726862664488943,
+          0,
+          0.019623332169894748,
+          0.9996502804354253
+        ],
+        "triangles": 132
+      }
+    }
+  ],
+  "performanceMeasured": false,
+  "passed": true
+}

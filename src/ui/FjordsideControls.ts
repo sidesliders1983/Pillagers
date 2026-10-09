@@ -11,6 +11,8 @@ export class FjordsideControls {
     readonly selection: WorldSelection;
     private status: HTMLElement | undefined;
     private activating = false;
+    private changeQuality: ((quality: 'standard' | 'low') => void) | undefined;
+    private exportCurrent: (() => string) | undefined;
     private validate: ((selection: WorldSelection) => Promise<string>) | undefined;
     constructor() {
         const stored = this.enabled ? sessionStorage.getItem(activeKey) : null;
@@ -44,7 +46,10 @@ export class FjordsideControls {
             <label><input id="fjordside-wind-motion" type="checkbox" checked>EZ-Tree wind</label>
             <button id="fjordside-pause">Pause world</button>
             <label>Review camera<select id="fjordside-camera"><option value="village">Village</option>
-                <option value="shore">Shore</option><option value="overlook">High overlook</option></select></label>
+                <option value="shore">Shore</option><option value="overlook">High overlook</option>
+                <option value="boat">Boat close-up</option><option value="grazing">Water low angle</option></select></label>
+            <label>Review effects time (seconds)<input id="fjordside-effects-time" type="number" min="0" max="120" step="0.1" value="0"></label>
+            <button id="fjordside-effects-scrub">Set effects time and pause</button>
             <p id="fjordside-world-status" role="status"></p>
         `;
         document.querySelector('#debug')!.prepend(panel);
@@ -86,9 +91,14 @@ export class FjordsideControls {
             if (file) await this.activate(() => file.text().then(parseFjordsideSave));
             input.value = '';
         });
-        quality.addEventListener('change',() => void this.activate(() => ({
-            ...this.selection,quality: quality.value as 'standard' | 'low',
-        })));
+        quality.addEventListener('change',() => {
+            const value = quality.value as 'standard' | 'low';
+            if (!this.changeQuality || !this.exportCurrent || this.activating) return;
+            this.changeQuality(value);
+            this.selection.quality = value;
+            sessionStorage.setItem(activeKey, this.exportCurrent());
+            this.status!.textContent = 'Render quality updated. World clock and geography preserved.';
+        });
     }
     private async activate(proposal: () => WorldSelection | Promise<WorldSelection>) {
         if (!this.validate || this.activating) return;
@@ -103,9 +113,12 @@ export class FjordsideControls {
             this.status!.textContent = 'World was not changed: ' + (error instanceof Error ? error.message : String(error));
         }
     }
-    bind(exportSave: () => string,validate: (selection: WorldSelection) => Promise<string>) {
+    bind(exportSave: () => string,validate: (selection: WorldSelection) => Promise<string>,
+        changeQuality: (quality: 'standard' | 'low') => void) {
         if (!this.enabled) return;
         this.validate = validate;
+        this.changeQuality = changeQuality;
+        this.exportCurrent = exportSave;
         this.status!.textContent = this.selection.mode === 'generated' ?
             'Generated · validated stored blueprint · seed '+this.selection.blueprint!.config.seed :
             'Reference Fjordside · explicit fallback · seed 1983';
