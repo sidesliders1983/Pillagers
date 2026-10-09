@@ -53,7 +53,16 @@ export class CharacterLabUI {
                     <label class="lab-source-controls">Animation<select id="lab-animation" aria-label="Available animations"></select></label>
                     <div class="lab-button-row lab-model-tools" aria-label="Level of detail"><button data-action="lod0">LOD0</button><button data-action="lod1">LOD1</button><button data-action="lod2">LOD2</button></div>
                     <div class="lab-character-labels"><span id="lab-current-label"></span><span id="lab-comparison-label" hidden></span></div>
-                    <div class="lab-button-row lab-model-tools" aria-label="Fixed views"><button data-action="view-front">Front</button><button data-action="view-side">Side</button><button data-action="view-back">Back</button><button data-action="overview">RTS</button></div><div class="lab-pose-controls"><label>Clip time (seconds)<input id="lab-pose-time" type="number" min="0" max="60" step="0.05" value="0"></label><button data-action="freeze-pose">Freeze pose</button><button data-action="play">Play</button></div><div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button></div></div>
+                    <div class="lab-button-row lab-model-tools" aria-label="Fixed views"><button data-action="view-front">Front</button><button data-action="view-side">Side</button><button data-action="view-back">Back</button><button data-action="overview">RTS</button></div>
+                    <output id="lab-clip-duration" class="lab-clip-duration" aria-label="Animation clip duration"></output>
+                    <div class="lab-pose-controls">
+                        <label>Clip time (seconds)
+                            <input id="lab-pose-time" type="number" min="0" max="60" step="0.001" value="0">
+                        </label>
+                        <button data-action="freeze-pose">Freeze pose</button>
+                        <button data-action="play">Play</button>
+                    </div>
+                    <div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button></div></div>
                     <div class="lab-dimensions" id="lab-dimensions"></div>
                     <details class="lab-panel lab-fit-debug"><summary>Attachment &amp; Fit debug · v0.1</summary>
                         <div class="lab-button-row">${['sockets','landmarks','cages','coverage','bounds'].map(key=>`<button data-action="debug-${key}" aria-pressed="false">${key}</button>`).join('')}</div>
@@ -114,6 +123,11 @@ export class CharacterLabUI {
             this.onDNA(next);
         });
         root.addEventListener('change',event=>{
+            // Commit an edited time before blur allows the live clock to update the field.
+            if ((event.target as HTMLElement).id === 'lab-pose-time') {
+                this.onAction('freeze-pose');
+                return;
+            }
             const choice=event.target as HTMLInputElement;
             if(choice.id==='lab-character-type'){const url=new URL(location.href);if(choice.value==='cow')url.searchParams.set('model','cow');else{url.searchParams.delete('model');url.searchParams.delete('variant');url.searchParams.delete('animation');}location.href=url.pathname+url.search+url.hash;return;}
             if(choice.id==='lab-animation'){this.onAction(`animation-${choice.value}`);return;}

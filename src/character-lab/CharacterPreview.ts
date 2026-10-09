@@ -47,7 +47,19 @@ export class CharacterPreview {
         this.controls=new OrbitControls(this.camera,canvas);this.controls.enableDamping=true;this.controls.enablePan=false;this.controls.minDistance=2;this.controls.maxDistance=14;this.controls.minZoom=.24;this.controls.maxZoom=4;this.controls.maxPolarAngle=Math.PI*.5;
         this.resetView();
         this.observer=new ResizeObserver(()=>{const rect=canvas.getBoundingClientRect();this.renderer.setSize(rect.width,rect.height,false);this.resizeCameras(rect.width/Math.max(1,rect.height));});this.observer.observe(canvas);
-        this.renderer.setAnimationLoop(()=>{const delta=Math.min(this.clock.getDelta(),.05);if(!this.paused)this.current?.update(delta);if(this.comparisonSnapshot&&!this.comparisonSnapshot.pose.paused)this.comparison?.update(delta);this.controls.update();this.renderer.render(this.scene,this.camera);});
+        this.renderer.setAnimationLoop(() => {
+            const delta = this.clock.getDelta();
+            // Native animations consume elapsed time; their spring has its own bounded substeps.
+            if (!this.paused && this.current) {
+                this.current.update(this.current instanceof MeshyHuman ? delta : Math.min(delta, .05));
+            }
+            if (this.comparisonSnapshot && !this.comparisonSnapshot.pose.paused && this.comparison) {
+                this.comparison.update(this.comparison instanceof MeshyHuman ? delta : Math.min(delta, .05));
+            }
+            this.syncClipTime();
+            this.controls.update();
+            this.renderer.render(this.scene, this.camera);
+        });
     }
     setCharacter(_phenotype:Phenotype,dna:CharacterDNA,presentation:CharacterPresentation=this.presentation,body:LabBodyPresentation=this.bodyPresentation){this.currentDNA=dna;this.presentation=parseCharacterPresentation(presentation);this.bodyPresentation=parseLabBodyPresentation(body);if(this.bodyPresentation.source===goldenLabBody.source)this.lod=2;void this.refresh();}
     setComparison(snapshot:LabTestSnapshot|null){this.comparisonSnapshot=snapshot?parseLabSnapshot(snapshot):null;void this.refresh();}
@@ -68,6 +80,7 @@ export class CharacterPreview {
     private async createPreview(dna:CharacterDNA,lod:number,presentation:CharacterPresentation,body:LabBodyPresentation){
         if(body.source!=='meshy')return characterFactory.create(dna,lod,presentation,body);
         const resolved=resolveLabBodyProfile(dna,body),model=await meshyHumanFactory.create(dna,lod,resolved.profile,presentation);
+        model.setPlaybackRate(1);
         model.root.userData.bodySource=labBodyAsset('meshy',lod);model.root.userData.presentation={...presentation};
         model.root.userData.bodyPresentation=resolved.body;model.root.userData.bodyPresentationStatus=resolved.status;
         return model;
@@ -92,6 +105,13 @@ export class CharacterPreview {
     private sampleModel(model:UniversalHuman|MeshyHuman,animation:string,time:number){
         if(model instanceof MeshyHuman)model.sampleAnimation(animation,time);else model.sampleAnimation(animation as HumanAnimation,time);
     }
+    private syncClipTime() {
+        const input = document.getElementById('lab-pose-time') as HTMLInputElement | null;
+        if (!input || document.activeElement === input) return;
+        const time = this.current?.animationState.time ?? this.poseTime;
+        const rounded = this.paused ? time : Number(time.toFixed(3));
+        input.value = String(this.current instanceof MeshyHuman ? Math.min(rounded, this.current.duration) : rounded);
+    }
     private reportModel(){
         const select=document.getElementById('lab-animation') as HTMLSelectElement|null;
         if(select&&this.current){
@@ -103,7 +123,15 @@ export class CharacterPreview {
         }
 
         const metadata=document.getElementById('lab-fit-metadata');if(metadata)metadata.textContent=JSON.stringify({...this.current?.fit?.snapshot(),bodySource:this.current?.root.userData.bodySource,presentation:this.current?.root.userData.presentation,selectedAssets:this.current?.root.userData.selectedAssets,bodyPresentation:this.current?.root.userData.bodyPresentation,bodyPresentationStatus:this.current?.root.userData.bodyPresentationStatus,displayedBodyHeight:this.current?.root.userData.universalHumanProfile.height,comparison:this.comparison?{bodySource:this.comparison.root.userData.bodySource,presentation:this.comparison.root.userData.presentation,selectedAssets:this.comparison.root.userData.selectedAssets,bodyPresentation:this.comparison.root.userData.bodyPresentation,bodyPresentationStatus:this.comparison.root.userData.bodyPresentationStatus,pose:this.comparison.animationState}:null},null,2);
-        const pose=document.getElementById('lab-pose-time') as HTMLInputElement|null;if(pose&&document.activeElement!==pose)pose.value=String(Number((this.current?.animationState.time??this.poseTime).toFixed(3)));
+        const duration = this.current instanceof MeshyHuman
+            ? this.current.duration
+            : this.current?.clips.find(clip => clip.name === this.animation)?.duration;
+        const pose = document.getElementById('lab-pose-time') as HTMLInputElement | null;
+        if (pose) pose.max = String(duration ?? 60);
+        const durationLabel = document.getElementById('lab-clip-duration');
+        if (durationLabel) durationLabel.textContent = duration === undefined ? ''
+            : 'Clip duration: ' + duration.toFixed(3) + ' s' + (this.current instanceof MeshyHuman ? ' · 1× speed' : '');
+        this.syncClipTime();
         this.canvas.dataset.paused=String(this.paused);this.canvas.dataset.animation=this.animation;this.canvas.dataset.lod=String(this.lod);this.canvas.dataset.bodySource=this.bodyPresentation.source??'published';
         document.querySelectorAll<HTMLButtonElement>('[aria-label="Level of detail"] button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.action==='lod'+this.lod)));
         this.report(`${this.bodyPresentation.source==='meshy'?'Meshy Human':this.bodyPresentation.source===goldenLabBody.source?'v0.4 body preview':'Published body'} · LOD${this.lod} · ${this.animation}${this.paused?' · frozen pose':''}`);

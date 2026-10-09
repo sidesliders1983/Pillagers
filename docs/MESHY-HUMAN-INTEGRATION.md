@@ -41,7 +41,7 @@ geometry and clips remain shared. Disposal releases instance skeleton resources 
 materials, retaining cached source geometry. Height uses existing CharacterDNA and
 universalHumanProfile calculations; no new persisted DNA field is introduced.
 
-MeshyHumanDynamics adapts the existing age/DNA curves to the Mixamo rig with absolute per-bone proportions. Child head share increases while torso and limbs become smaller. Parent compensation avoids accumulated scaling. Geometry and textures remain shared; no source files are modified. Neutral bounds normalize height and grounding independently of world placement. Age/traits change cadence and walking stride; older profiles gain a restrained stoop and overweight profiles use a bounded waist spring. This is a rig-specific approximation, not a transfer of the legacy authored morph targets. The Meshy Lab exposes age, masculinity, intelligence and agility.
+MeshyHumanDynamics adapts the existing age/DNA curves to the Mixamo rig with absolute per-bone proportions. Child head share increases while torso and limbs become smaller. Parent compensation avoids accumulated scaling. Geometry and textures remain shared; no source files are modified. Neutral bounds normalize height and grounding independently of world placement. In the world, age/traits change cadence and walking stride; older profiles gain a restrained stoop and overweight profiles use a bounded waist spring. This is a rig-specific approximation, not a transfer of the legacy authored morph targets. The Meshy Lab exposes age, masculinity, intelligence and agility.
 
 Idle/Walk/Run map to Idle_02/Walking/Running. The semantic map also exposes Talk,
 Listen, Farm, Attack, InjuredWalk and Death. Talk maps to Talk_Passionately.
@@ -49,6 +49,16 @@ Two UUID-named clips remain selectable with their source names. Attacks and Deat
 one-shot clips that hold the last frame; other clips repeat. Restart in the lab
 replays a completed one-shot. The other idle clips are presented with source names
 until their intended roles are reviewed.
+
+Both Human Lab views use 1× source playback speed, independent of age/agility cadence.
+The clip time control updates during playback and uses the loaded GLB clip's actual
+endpoint as its maximum. The duration label shows seconds rounded to three decimals;
+sampling retains the full timestamp. Editing clip time freezes the entered pose when
+the field commits, so the live clock cannot overwrite it before Freeze is clicked.
+Native playback consumes the full elapsed frame time; bounded spring substeps remain
+separate, avoiding slow motion below 20 FPS. Running is 0.6666666865 s and Unsteady_Walk is
+3 s in the current source. DNA changes preserve this Lab playback setting. World
+residents keep their DNA cadence. Clip data and source/prepared GLBs are unchanged.
 
 Fjord still drives Idle/Walk/Run from its existing movement system. Adding the
 clips does not implement occupation tasks, conversations, combat or health-state
@@ -80,6 +90,15 @@ check animated LOD0 silhouette bounds within 5 mm at sampled frames, verify
 independent instance skeletons/materials with shared geometry across 40 residents,
 verify decreasing triangle counts with all clips/joints on each LOD, compare all texture image hashes, check child head-to-height ratios and reversible growth, and exercise every clip with changing DNA.
 Source-to-export comparisons skip if the ignored original is unavailable; the tracked body LODs and new native-module tests do not need that original.
+
+The source-rate regression test is `tests/meshy-animation-timing.test.mjs`: every
+clip at all three LODs reaches the last authored timestamp before repeating, and
+one-shots hold the endpoint. The same checks run after changing to a child profile.
+`scripts/meshy-animation-timing-smoke.mjs` checks visible duration/time controls,
+endpoint snapshots and observed Running/Unsteady Walk loops in both Lab routes,
+including their wall-clock period within measured render-frame tolerance.
+Set `PROTOTYPE_URL`, `PLAYWRIGHT_MODULE` and optional `BROWSER_CHANNEL` to run it.
+See [animation timing follow-up](qa/meshy-animation-timing/REPORT.md).
 
 Browser evidence is in `artifacts/meshy-human-integration/`.
 The browser check exercises every clip, 40 lab instances, LOD selection and the

@@ -15,3 +15,8 @@
 
 .lab-source-controls{padding:8px 18px 16px;border-top:1px solid #c9d3c1}.lab-source-controls label{display:block}.lab-source-controls .lab-note{margin-bottom:0}.lab button:disabled,.lab select:disabled,.lab input:disabled{opacity:.55;cursor:default}
 .lab .lab-cattle-layout{grid-template-columns:260px minmax(300px,1fr)}.lab-nav label{font-size:11px;min-width:150px}.lab-nav{flex-wrap:wrap}.lab-cattle-layout [hidden]{display:none!important}@media(max-width:700px){.lab-cattle-layout{display:flex}.lab-nav label{width:100%}}
+
+.lab-clip-duration {
+    display: block;
+    padding: 0 18px 12px;
+}

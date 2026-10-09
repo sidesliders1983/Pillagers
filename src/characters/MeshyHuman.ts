@@ -58,6 +58,7 @@ export class MeshyHuman {
  private bones:Bone[]=[];private rest=new Map<Bone,{position:Vector3;rotation:import('three').Quaternion;scale:Vector3}>();private scales=new Map<Bone,Vector3>();private profile!:HumanProfile;private basePosition=new Vector3();
  state:MeshyAnimation='Idle';private body:Object3D;private mixer:AnimationMixer;
  private skinUniform={value:new Color()};
+ private playbackRateOverride: number | null = null;
  private action:AnimationAction|null=null;private materials:Material[]=[];private baseHeight:number;private disposed=false;
  constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile){
   this.body=clone(source.scene);this.root.add(this.body);this.clips=source.animations;
@@ -110,7 +111,11 @@ export class MeshyHuman {
   const presentation=this.root.userData.presentation,appearance=presentation?resolveCharacterPresentation(dna,presentation,this.fit.body).profile.appearance:undefined,profile={...(override??universalHumanProfile(dna)),...(appearance?{appearance}:{})};
   const height=profile.height*(1-.35*profile.weights.Child);
   const skinTone=generatePhenotype(dna).skinTone;this.skinUniform.value.set(skinTone);this.root.userData.skinTint={tone:skinTone,strength:.2};
-  this.profile=profile;this.belly.reset();this.elapsed=0;this.root.userData.universalHumanProfile=profile;this.mixer.timeScale=profile.motion.cadence;
+  this.profile = profile;
+  this.belly.reset();
+  this.elapsed = 0;
+  this.root.userData.universalHumanProfile = profile;
+  this.mixer.timeScale = this.playbackRateOverride ?? profile.motion.cadence;
   const clip=this.action?.getClip(),time=this.action?.time??0;
   this.mixer.stopAllAction();
   for(const bone of this.bones){const rest=this.rest.get(bone)!;bone.position.copy(rest.position);bone.quaternion.copy(rest.rotation);bone.scale.copy(rest.scale);}
@@ -126,6 +131,14 @@ export class MeshyHuman {
   if(clip){this.action=this.mixer.clipAction(clip);this.action.reset().play();this.action.time=time;this.mixer.update(0);this.shapePose();}
 
   this.root.userData.character={seed:dna.seed,state:this.state,lod:this.lod,height};
+ }
+ /** Labs use the original GLB speed; world residents use DNA cadence by default. */
+ setPlaybackRate(rate: number | null) {
+  if (rate !== null && (!Number.isFinite(rate) || rate <= 0)) {
+   throw new Error('Playback rate must be positive or null for DNA cadence.');
+  }
+  this.playbackRateOverride = rate;
+  this.mixer.timeScale = rate ?? this.profile.motion.cadence;
  }
  setMovementSpeed(speed:number){this.setAnimation(speed<.03?'Idle':speed<1.4?'Walk':'Run');}
  setAnimation(state:MeshyAnimation){this.playClip(meshyAnimationClips[state],state);}
