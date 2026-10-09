@@ -64,3 +64,7 @@ Values are milliseconds; each cell lists repeat 1 / 2 / 3 rather than pooling aw
 | village | 128 | 36.2 / 72.0 / 36.0 | 54.1 / 108.0 / 54.1 | 70–71 |
 
 All measured runs retain 38 geometries. Standard retains 101 textures at either sand resolution; Low retains 97. The timings overlap and vary substantially, including within the same variant. This run does not establish a stable sand-only penalty or gain. It also does not demonstrate a playable frame-rate target on this old development laptop. The bounded Lab delivery has no hard timing gate.
+
+## Main reconciliation
+
+During delivery, main advanced to 80a862a00c3ee7b3c3cdf5a103ad78a3b71eefa2 (#71 character modules/timing). The branch incorporates that main revision. Sand, terrain, water and Lab runtime sources are unchanged by this merge. The original 76 comparison frames, lifecycle observations and 18 timing runs remain the frozen #80-baseline record, rather than silently being relabeled as measurements of the newer actor runtime. The latter has separate [post-main71 production evidence](post-main71/evidence.json) and the final current-head CI suite. The comparison does not establish its frame-time cost.

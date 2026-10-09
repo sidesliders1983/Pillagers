@@ -484,13 +484,38 @@
     },
     {
       "file": "report.md",
-      "sha256": "1e37627bb4fa95e3334f6a5754770bc002807491e10c0b36b0390a2f5f09af30",
-      "bytes": 8597
+      "sha256": "cadf24f13e459b4c3c10b1a987f412e304bc7534d3f7caa827a00421479fec70",
+      "bytes": 9221
     },
     {
       "file": "review.html",
-      "sha256": "6a9dcc46268ae6eb8e0d3f4f038e25f2a916610ea390534f3d6288db4b68ede4",
-      "bytes": 24596
+      "sha256": "523b110be7c9044b7ee0c3a40e805c93971775281a9a6e42b49dbb02f48591d7",
+      "bytes": 24949
+    },
+    {
+      "file": "post-main71/17-256.webp",
+      "sha256": "cca198cde71615259418636a51a759909023775e5496c445358069d62f017ae6",
+      "bytes": 376372
+    },
+    {
+      "file": "post-main71/17-512.webp",
+      "sha256": "a5c6ed52675ef52d29605fd6d92584ab1268bad6475fb077ff5f347ef0770214",
+      "bytes": 376220
+    },
+    {
+      "file": "post-main71/91-256.webp",
+      "sha256": "d2850a91c134377303114d2303c4f78626e2ca4ef943c0e82bdff7883ec9c118",
+      "bytes": 363224
+    },
+    {
+      "file": "post-main71/91-512.webp",
+      "sha256": "3265637ba635bd5bb8b68d023577703619696505ae1e123008b18a5b3d81f52c",
+      "bytes": 363174
+    },
+    {
+      "file": "post-main71/evidence.json",
+      "sha256": "781c295c51ffdc1e1f9d767fb1af67257ab325ab067dc1c9de6842d8ad3616f3",
+      "bytes": 51540
     }
   ],
   "notes": "Runtime source hashes are LF-normalized to match Git. Captures use the frozen production build containing these sources; hashes tie the corrected actual-512 image set to its matching metadata. Final hardware-runs.json retains its own runtime source hashes.",
@@ -643,5 +668,154 @@
       "file": "assets/WaterLab-D60omCDJ.js",
       "sha256": "493b2f16a9b248110668de1ee09568a0fe5e07a1088eb6e9a8e1f67e92ffc7c8"
     }
-  ]
+  ],
+  "integration": {
+    "main": "80a862a00c3ee7b3c3cdf5a103ad78a3b71eefa2",
+    "testedRuntimeCommit": "18c7acb7a70f143cc77904c35d6d69c928bed1de",
+    "runtimeSources": [
+      {
+        "file": "src/environment-lab/LabWorldGeneration.ts",
+        "lfSha256": "48710fb0e6bc045ae41ea5e2872d58ac752bc7e27b86b11a839475532d3c2a85"
+      },
+      {
+        "file": "src/world/WorldGroundMaterials.ts",
+        "lfSha256": "b60529d16877c6b5d5de63fbd7e03db5ad4716a642c4e8d549efa6822dbf2b3b"
+      },
+      {
+        "file": "src/characters/MeshyHuman.ts",
+        "lfSha256": "6ebbe9742e586c1ffece82e05d6c5f750a8fda22041987e12bd534a95f1a5f7d"
+      }
+    ],
+    "productionSnapshot": "scratch/sand-study-integration",
+    "buildFiles": [
+      {
+        "file": "index.html",
+        "sha256": "ebef0fee5b14e2d4fd70f69b5c9c6fb02a5fb33696f49e068799785c3929afab"
+      },
+      {
+        "file": "assets/AssetLab-COIwBxtY.js",
+        "sha256": "dc4376bf7a9b6f4e6a4f9c1bfe693612c4ddef5d33ed44f01bc1aee11f8e4694"
+      },
+      {
+        "file": "assets/AssetLab-HQ7TMumO.css",
+        "sha256": "2a19721cbc094f45bc4c280f8c70e88c806ddc396d407eb108f464a3ae8c0eed"
+      },
+      {
+        "file": "assets/CharacterFactory-B2CrUmhZ.js",
+        "sha256": "cd7c901da8ed3d94faa4ce0c4d91d3262387fb42bd3b806ab12db09cf1ad3801"
+      },
+      {
+        "file": "assets/CharacterLab-C4vvwHvW.js",
+        "sha256": "aa0f39d88419109782b8cd97344cedca7f54a35dad9a214f3b560dfa8c8bb6e6"
+      },
+      {
+        "file": "assets/CharacterLab-D6v7iLwL.css",
+        "sha256": "d0ad140e83df0d872654e65d7aa393f4ac8f5cf91ae9634fd68a473ffba6c4aa"
+      },
+      {
+        "file": "assets/Chronicle-BAq5w2FD.js",
+        "sha256": "58060bd1ec2d713225a769e3466096355f8a2d2bdf58898135e358fc5aea0902"
+      },
+      {
+        "file": "assets/CowCharacterPreview-vIsqqtbx.js",
+        "sha256": "76aa4d2d3efe0d8d344948788c67ad91cb66d7eb1faa7cf9eeae6efb6544fbf2"
+      },
+      {
+        "file": "assets/EnvironmentLab-BBvkiLrz.css",
+        "sha256": "6fc1b900e9c9623adea23b2cb28913eaa6127fd96d9ec762f57ad59a7fdc9462"
+      },
+      {
+        "file": "assets/EnvironmentLab-gSUM-RrQ.js",
+        "sha256": "fb4d8d4917eb46d3d2969d776b3afa752f758712ec500ff2f3fcb9a00f35c598"
+      },
+      {
+        "file": "assets/Game-B4GkEdlP.js",
+        "sha256": "dfffa45ca4d1019b2db22c0bcd5d45e4b7cb8da7881dd76cf7638e478aa77bf8"
+      },
+      {
+        "file": "assets/GameplayLab-DqiXgJwy.js",
+        "sha256": "2a8c69a650af16cae2285f183eb3095c25c8c986dedfacf9697adc294469f40f"
+      },
+      {
+        "file": "assets/GameplayLab-JhEYIz1p.css",
+        "sha256": "965a8f3795e872de000d8f1364ea99b5f04e81e7cdd2517d5865ca2aa3a5cca3"
+      },
+      {
+        "file": "assets/generateCharacterDNA-Cdq_oL7s.js",
+        "sha256": "d3b20db069cc70f30654b441adea9f5e9620ff70ba294f72ca64e7d4cc784b7a"
+      },
+      {
+        "file": "assets/generateName-DOQ4o1iH.js",
+        "sha256": "70b99a28d55e022e600c740647966a7fff0dff055b74310ddfa6bf5d67faf697"
+      },
+      {
+        "file": "assets/GoldenBodySurfaceCalibration-C_5LNdMz.js",
+        "sha256": "a2ff5fceea792468e74a51cac31d81df6ecb880c429862bf3ebbebff4ab7dce6"
+      },
+      {
+        "file": "assets/HumanPreviewPace-BO2hWq-D.css",
+        "sha256": "082a2579df549ad08afd7c30f8621751574ba29a9feb55c833c2312c1435afc2"
+      },
+      {
+        "file": "assets/HumanPreviewPace-BqOOUG1y.js",
+        "sha256": "87f2da7659e2a1b4cb5200d03db0f6f0d386d31d084beff021e842247dd2c9e8"
+      },
+      {
+        "file": "assets/index-D9urMOOo.js",
+        "sha256": "5852757fe40625a89263a605fd7c524af51278ddd782d699585e2e4a63562f18"
+      },
+      {
+        "file": "assets/index-DLNPttDf.css",
+        "sha256": "a3cbd66c12101b737fcbf271c458f70748a2d9a3dac6aa56c28377277a22395f"
+      },
+      {
+        "file": "assets/MeshyCharacterLab-BMts2Wzr.js",
+        "sha256": "5cfac4ed09fddf2a8e9ae2c4117a6b0fcedb903e51c6370255403a2b749e1209"
+      },
+      {
+        "file": "assets/MeshyCharacterLab-CqNdCCub.css",
+        "sha256": "78bdfb33709ec67931a8f23c2a53ea26dbad16497f8b52b0bd10be555669b9a0"
+      },
+      {
+        "file": "assets/MeshyHuman-d4SJOrbt.js",
+        "sha256": "b9a5e34c3082a90055d16af879d4ca67f4fd8fc75ae2d2ddbda98ed14bcfd2de"
+      },
+      {
+        "file": "assets/OrbitControls-B2mnIgTu.js",
+        "sha256": "49ddc9da281f7a58c1216ff92acd95de5fb99e5b60bcd67b757bdce1df5669ed"
+      },
+      {
+        "file": "assets/PlayUI-BqzHz75C.css",
+        "sha256": "2fde5f29ca54155b2b648d74d86550e81903735195330fed666404df4839287d"
+      },
+      {
+        "file": "assets/PlayUI-Dgb2D_n9.js",
+        "sha256": "35a85439911f960e778332eb81701cc996dc50c6e171bf18b723e7c37c793d17"
+      },
+      {
+        "file": "assets/ReferenceWater-CQUvovqT.js",
+        "sha256": "8741dc8fde8bfa21b4953cef6668c9402828ffee8da7cc10f650a7d65f2c052c"
+      },
+      {
+        "file": "assets/Renderer-YSpEwgzH.js",
+        "sha256": "8d7bfc1af06cbf6372cf1a880fee5b4a7f3661d57d0b4171bdace437757c31b4"
+      },
+      {
+        "file": "assets/three.module-CYnqEk4p.js",
+        "sha256": "4e30ff9e0158ed05d7e60e2f3f77b7d32e1665655ac81def2b5c29dad635e68e"
+      },
+      {
+        "file": "assets/Water-CMwSLAeI.js",
+        "sha256": "6b0f3065274408bdab4a285dd94cdb684acae52d6b96a0a1cf4ad588fcec9d87"
+      },
+      {
+        "file": "assets/WaterLab-B-exA8-b.js",
+        "sha256": "ceb5ccb5f6e9b61a0ebedb697da3f87bd24b0daf632e7a7ade107f78d4fb8bb7"
+      },
+      {
+        "file": "assets/WaterLab-CamFp8SX.css",
+        "sha256": "eede4a6202ed719d9804e46e191f5233d7923b89c80bc709df9edd62c141485d"
+      }
+    ]
+  }
 }

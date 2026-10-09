@@ -1,0 +1,1655 @@
+{
+  "testedRuntimeCommit": "18c7acb7a70f143cc77904c35d6d69c928bed1de",
+  "integrationMain": "80a862a00c3ee7b3c3cdf5a103ad78a3b71eefa2",
+  "origin": "http://127.0.0.1:5192",
+  "runtimeSources": [
+    {
+      "file": "src/environment-lab/LabWorldGeneration.ts",
+      "lfSha256": "48710fb0e6bc045ae41ea5e2872d58ac752bc7e27b86b11a839475532d3c2a85"
+    },
+    {
+      "file": "src/world/WorldGroundMaterials.ts",
+      "lfSha256": "b60529d16877c6b5d5de63fbd7e03db5ad4716a642c4e8d549efa6822dbf2b3b"
+    },
+    {
+      "file": "src/characters/MeshyHuman.ts",
+      "lfSha256": "6ebbe9742e586c1ffece82e05d6c5f750a8fda22041987e12bd534a95f1a5f7d"
+    }
+  ],
+  "pairs": [
+    {
+      "seed": 17,
+      "blueprintSha256": "0e04888db2d3fbb7c4c09df65da43ab389e792d6b63ae85e1fdcc61577fbc3ca",
+      "shots": [
+        {
+          "file": "17-256.webp",
+          "fixture": {
+            "seed": 17,
+            "time": 0,
+            "camera": {
+              "position": [
+                53.000000000000014,
+                11.947129607200623,
+                -45
+              ],
+              "target": [
+                36.00000000000001,
+                1.9471296072006226,
+                -28
+              ],
+              "fov": 45,
+              "zoom": 1
+            },
+            "lighting": "day",
+            "fog": {
+              "near": 65,
+              "far": 155
+            },
+            "conifers": {
+              "source": "ez-tree",
+              "preset": "Large",
+              "count": 26,
+              "minHeight": 3.713767295006524,
+              "maxHeight": 10.681532656373037
+            },
+            "pixelRatio": 1,
+            "toneMapping": "ACESFilmic (shared renderer)",
+            "lightSettings": {
+              "preset": "sun20-front",
+              "elevation": 20,
+              "azimuth": 135,
+              "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+              "target": [
+                0,
+                14.19103193283081,
+                0
+              ],
+              "position": [
+                132.89260487773495,
+                82.59506059796455,
+                -132.89260487773493
+              ],
+              "direction": [
+                0.6644630243886748,
+                0.3420201433256687,
+                -0.6644630243886747
+              ],
+              "sun": {
+                "colour": "ffecd6",
+                "intensity": 2.8
+              },
+              "fill": {
+                "sky": "bfd4ee",
+                "ground": "716c65",
+                "intensity": 1
+              },
+              "exposure": 1.05,
+              "shadow": {
+                "map": [
+                  2048,
+                  2048
+                ],
+                "frustum": {
+                  "left": -130.27922061357856,
+                  "right": 130.27922061357856,
+                  "top": 66.55787661771024,
+                  "bottom": -66.55787661771022,
+                  "near": 70.10785345309495,
+                  "far": 329.892146546905
+                },
+                "bias": -0.00005,
+                "normalBias": 0.02,
+                "radius": 4,
+                "type": "native PCF"
+              },
+              "materialTreatment": "Unchanged source maps and parameters"
+            },
+            "environment": {
+              "requested": false,
+              "active": false,
+              "loaded": false,
+              "pmrem": null,
+              "source": "lonely_road_afternoon_puresky_1k.hdr",
+              "intensity": 0.15,
+              "rotation": [
+                -0.6604753109436082,
+                1.285881523694997,
+                -0.22134807741986934,
+                "XYZ"
+              ],
+              "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+              "background": "Unchanged Color",
+              "sourceTexture": "disposed after PMREM",
+              "failure": ""
+            }
+          },
+          "ground": {
+            "source": "world-ground-v0.1",
+            "nativeLayers": 4,
+            "masks": "Native alphaMap on independent world UV channel",
+            "colourSpace": "sRGB",
+            "dataSpace": "NoColorSpace",
+            "sourcePixels": 256,
+            "sandPixels": 256,
+            "sandStudy": true,
+            "waterSource": "reference-water",
+            "maps": [
+              {
+                "id": "Ground037",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/Ground037-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "Ground054",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/Ground054-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground054-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground054-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "mossy_rock",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/mossy_rock-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "grass_path_2",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/grass_path_2-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              }
+            ]
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 37,
+              "z": -30
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            }
+          },
+          "metrics": {
+            "variant": "candidate",
+            "ms": 38.66153846107997,
+            "calls": 62,
+            "triangles": 1464617,
+            "geometries": 38,
+            "textures": 101,
+            "callsIncludeShadows": true
+          },
+          "world": {
+            "seed": 17,
+            "generatorVersion": "fjordside-v0.1",
+            "preset": "fjord",
+            "conifers": "ez-tree",
+            "validation": {
+              "accepted": true,
+              "reasons": [],
+              "connectedBuildings": 6,
+              "connectedArea": 2785,
+              "maximumFoundationSlope": 4.440892098500626e-16,
+              "minimumFoundationElevation": 2.7199999046325685,
+              "score": 93
+            },
+            "biomeCoverage": {
+              "water": 3881,
+              "shore": 231,
+              "clearing": 1036,
+              "grass": 1291,
+              "forest": 236,
+              "rock": 1606
+            },
+            "naturePlacements": 383,
+            "referenceResidents": 10,
+            "bounds": {
+              "minX": -90,
+              "maxX": 90,
+              "minZ": -90,
+              "maxZ": 90
+            },
+            "site": {
+              "x": 38,
+              "z": 6
+            },
+            "waterLevel": -0.12,
+            "generationMs": 458.20000000298023,
+            "previewPreparationMs": 1139.5999999940395,
+            "terrainBytes": 2527200,
+            "terrainVertices": 48600,
+            "generations": 1
+          },
+          "actors": [
+            {
+              "id": 0,
+              "x": 56.3553650630638,
+              "y": 2.5999999046325684,
+              "z": 24.03426664019935,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 1,
+              "x": 40.51432143524289,
+              "y": 2.5999999046325684,
+              "z": 14.381644031498581,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 2,
+              "x": 68.56637748656794,
+              "y": 2.5999999046325684,
+              "z": 33.168279197532684,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 3,
+              "x": 6.698506756685674,
+              "y": 2.5999999046325684,
+              "z": 38.5907408031635,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 4,
+              "x": 22.271629991941154,
+              "y": 2.5999999046325684,
+              "z": 1.9764946792274714,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 5,
+              "x": 51.04155281139538,
+              "y": 2.5999999046325684,
+              "z": 45.15479400823824,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 6,
+              "x": 36.96217049146071,
+              "y": 2.6314471977635048,
+              "z": 52.799383686622605,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 7,
+              "x": 10.879338834434748,
+              "y": 2.5999999046325684,
+              "z": 2.70219862065278,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 8,
+              "x": 3.8245033170096576,
+              "y": 2.5999999046325684,
+              "z": 18.065512856235728,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 9,
+              "x": 63.75928013911471,
+              "y": 2.5999999046325684,
+              "z": 5.112595380749553,
+              "speed": 0,
+              "animation": "Idle"
+            }
+          ]
+        },
+        {
+          "file": "17-512.webp",
+          "fixture": {
+            "seed": 17,
+            "time": 0,
+            "camera": {
+              "position": [
+                53.000000000000014,
+                11.947129607200623,
+                -45
+              ],
+              "target": [
+                36.00000000000001,
+                1.9471296072006226,
+                -28
+              ],
+              "fov": 45,
+              "zoom": 1
+            },
+            "lighting": "day",
+            "fog": {
+              "near": 65,
+              "far": 155
+            },
+            "conifers": {
+              "source": "ez-tree",
+              "preset": "Large",
+              "count": 26,
+              "minHeight": 3.713767295006524,
+              "maxHeight": 10.681532656373037
+            },
+            "pixelRatio": 1,
+            "toneMapping": "ACESFilmic (shared renderer)",
+            "lightSettings": {
+              "preset": "sun20-front",
+              "elevation": 20,
+              "azimuth": 135,
+              "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+              "target": [
+                0,
+                14.19103193283081,
+                0
+              ],
+              "position": [
+                132.89260487773495,
+                82.59506059796455,
+                -132.89260487773493
+              ],
+              "direction": [
+                0.6644630243886748,
+                0.3420201433256687,
+                -0.6644630243886747
+              ],
+              "sun": {
+                "colour": "ffecd6",
+                "intensity": 2.8
+              },
+              "fill": {
+                "sky": "bfd4ee",
+                "ground": "716c65",
+                "intensity": 1
+              },
+              "exposure": 1.05,
+              "shadow": {
+                "map": [
+                  2048,
+                  2048
+                ],
+                "frustum": {
+                  "left": -130.27922061357856,
+                  "right": 130.27922061357856,
+                  "top": 66.55787661771024,
+                  "bottom": -66.55787661771022,
+                  "near": 70.10785345309495,
+                  "far": 329.892146546905
+                },
+                "bias": -0.00005,
+                "normalBias": 0.02,
+                "radius": 4,
+                "type": "native PCF"
+              },
+              "materialTreatment": "Unchanged source maps and parameters"
+            },
+            "environment": {
+              "requested": false,
+              "active": false,
+              "loaded": false,
+              "pmrem": null,
+              "source": "lonely_road_afternoon_puresky_1k.hdr",
+              "intensity": 0.15,
+              "rotation": [
+                -0.6604753109436082,
+                1.285881523694997,
+                -0.22134807741986934,
+                "XYZ"
+              ],
+              "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+              "background": "Unchanged Color",
+              "sourceTexture": "disposed after PMREM",
+              "failure": ""
+            }
+          },
+          "ground": {
+            "source": "world-ground-v0.1",
+            "nativeLayers": 4,
+            "masks": "Native alphaMap on independent world UV channel",
+            "colourSpace": "sRGB",
+            "dataSpace": "NoColorSpace",
+            "sourcePixels": 256,
+            "sandPixels": 512,
+            "sandStudy": true,
+            "waterSource": "reference-water",
+            "maps": [
+              {
+                "id": "Ground037",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/Ground037-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "Ground054",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/sand-standard-512/Ground054-colour.webp",
+                    "width": 512,
+                    "height": 512,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/sand-standard-512/Ground054-normal.webp",
+                    "width": 512,
+                    "height": 512,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/sand-standard-512/Ground054-roughness.webp",
+                    "width": 512,
+                    "height": 512,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "mossy_rock",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/mossy_rock-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "grass_path_2",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/grass_path_2-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              }
+            ]
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 37,
+              "z": -30
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            }
+          },
+          "metrics": {
+            "variant": "candidate",
+            "ms": 33.75625000055879,
+            "calls": 62,
+            "triangles": 1464617,
+            "geometries": 38,
+            "textures": 101,
+            "callsIncludeShadows": true
+          },
+          "world": {
+            "seed": 17,
+            "generatorVersion": "fjordside-v0.1",
+            "preset": "fjord",
+            "conifers": "ez-tree",
+            "validation": {
+              "accepted": true,
+              "reasons": [],
+              "connectedBuildings": 6,
+              "connectedArea": 2785,
+              "maximumFoundationSlope": 4.440892098500626e-16,
+              "minimumFoundationElevation": 2.7199999046325685,
+              "score": 93
+            },
+            "biomeCoverage": {
+              "water": 3881,
+              "shore": 231,
+              "clearing": 1036,
+              "grass": 1291,
+              "forest": 236,
+              "rock": 1606
+            },
+            "naturePlacements": 383,
+            "referenceResidents": 10,
+            "bounds": {
+              "minX": -90,
+              "maxX": 90,
+              "minZ": -90,
+              "maxZ": 90
+            },
+            "site": {
+              "x": 38,
+              "z": 6
+            },
+            "waterLevel": -0.12,
+            "generationMs": 458.20000000298023,
+            "previewPreparationMs": 1139.5999999940395,
+            "terrainBytes": 2527200,
+            "terrainVertices": 48600,
+            "generations": 1
+          },
+          "actors": [
+            {
+              "id": 0,
+              "x": 56.3553650630638,
+              "y": 2.5999999046325684,
+              "z": 24.03426664019935,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 1,
+              "x": 40.51432143524289,
+              "y": 2.5999999046325684,
+              "z": 14.381644031498581,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 2,
+              "x": 68.56637748656794,
+              "y": 2.5999999046325684,
+              "z": 33.168279197532684,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 3,
+              "x": 6.698506756685674,
+              "y": 2.5999999046325684,
+              "z": 38.5907408031635,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 4,
+              "x": 22.271629991941154,
+              "y": 2.5999999046325684,
+              "z": 1.9764946792274714,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 5,
+              "x": 51.04155281139538,
+              "y": 2.5999999046325684,
+              "z": 45.15479400823824,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 6,
+              "x": 36.96217049146071,
+              "y": 2.6314471977635048,
+              "z": 52.799383686622605,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 7,
+              "x": 10.879338834434748,
+              "y": 2.5999999046325684,
+              "z": 2.70219862065278,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 8,
+              "x": 3.8245033170096576,
+              "y": 2.5999999046325684,
+              "z": 18.065512856235728,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 9,
+              "x": 63.75928013911471,
+              "y": 2.5999999046325684,
+              "z": 5.112595380749553,
+              "speed": 0,
+              "animation": "Idle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 91,
+      "blueprintSha256": "3634229cee7bb88b43a26be2f86f8a91a5e7f362d7cf0bd58a466d64a1afe779",
+      "shots": [
+        {
+          "file": "91-256.webp",
+          "fixture": {
+            "seed": 91,
+            "time": 0,
+            "camera": {
+              "position": [
+                45,
+                10.687064230442045,
+                -45
+              ],
+              "target": [
+                28,
+                0.6870642304420471,
+                -28
+              ],
+              "fov": 45,
+              "zoom": 1
+            },
+            "lighting": "day",
+            "fog": {
+              "near": 65,
+              "far": 155
+            },
+            "conifers": {
+              "source": "ez-tree",
+              "preset": "Large",
+              "count": 42,
+              "minHeight": 3.442393944477204,
+              "maxHeight": 10.67842555663378
+            },
+            "pixelRatio": 1,
+            "toneMapping": "ACESFilmic (shared renderer)",
+            "lightSettings": {
+              "preset": "sun20-front",
+              "elevation": 20,
+              "azimuth": 135,
+              "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+              "target": [
+                0,
+                16.22816801071167,
+                0
+              ],
+              "position": [
+                132.89260487773495,
+                84.6321966758454,
+                -132.89260487773493
+              ],
+              "direction": [
+                0.6644630243886748,
+                0.3420201433256687,
+                -0.6644630243886747
+              ],
+              "sun": {
+                "colour": "ffecd6",
+                "intensity": 2.8
+              },
+              "fill": {
+                "sky": "bfd4ee",
+                "ground": "716c65",
+                "intensity": 1
+              },
+              "exposure": 1.05,
+              "shadow": {
+                "map": [
+                  2048,
+                  2048
+                ],
+                "frustum": {
+                  "left": -130.27922061357856,
+                  "right": 130.27922061357856,
+                  "top": 68.47215835763163,
+                  "bottom": -68.47215835763163,
+                  "near": 69.41111187976426,
+                  "far": 330.58888812023577
+                },
+                "bias": -0.00005,
+                "normalBias": 0.02,
+                "radius": 4,
+                "type": "native PCF"
+              },
+              "materialTreatment": "Unchanged source maps and parameters"
+            },
+            "environment": {
+              "requested": false,
+              "active": false,
+              "loaded": false,
+              "pmrem": null,
+              "source": "lonely_road_afternoon_puresky_1k.hdr",
+              "intensity": 0.15,
+              "rotation": [
+                -0.6604753109436082,
+                1.285881523694997,
+                -0.22134807741986934,
+                "XYZ"
+              ],
+              "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+              "background": "Unchanged Color",
+              "sourceTexture": "disposed after PMREM",
+              "failure": ""
+            }
+          },
+          "ground": {
+            "source": "world-ground-v0.1",
+            "nativeLayers": 4,
+            "masks": "Native alphaMap on independent world UV channel",
+            "colourSpace": "sRGB",
+            "dataSpace": "NoColorSpace",
+            "sourcePixels": 256,
+            "sandPixels": 256,
+            "sandStudy": true,
+            "waterSource": "reference-water",
+            "maps": [
+              {
+                "id": "Ground037",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/Ground037-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "Ground054",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/Ground054-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground054-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground054-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "mossy_rock",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/mossy_rock-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "grass_path_2",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/grass_path_2-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              }
+            ]
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 30,
+              "z": -28
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            }
+          },
+          "metrics": {
+            "variant": "candidate",
+            "ms": 39.32307692330617,
+            "calls": 61,
+            "triangles": 2086426,
+            "geometries": 38,
+            "textures": 101,
+            "callsIncludeShadows": true
+          },
+          "world": {
+            "seed": 91,
+            "generatorVersion": "fjordside-v0.1",
+            "preset": "fjord",
+            "conifers": "ez-tree",
+            "validation": {
+              "accepted": true,
+              "reasons": [],
+              "connectedBuildings": 6,
+              "connectedArea": 2719,
+              "maximumFoundationSlope": 4.440892098500626e-16,
+              "minimumFoundationElevation": 2.7199999046325685,
+              "score": 91
+            },
+            "biomeCoverage": {
+              "water": 4056,
+              "shore": 186,
+              "clearing": 1036,
+              "grass": 967,
+              "forest": 398,
+              "rock": 1638
+            },
+            "naturePlacements": 405,
+            "referenceResidents": 10,
+            "bounds": {
+              "minX": -90,
+              "maxX": 90,
+              "minZ": -90,
+              "maxZ": 90
+            },
+            "site": {
+              "x": 38,
+              "z": 6
+            },
+            "waterLevel": -0.12,
+            "generationMs": 424.3999999910593,
+            "previewPreparationMs": 663,
+            "terrainBytes": 2527200,
+            "terrainVertices": 48600,
+            "generations": 2
+          },
+          "actors": [
+            {
+              "id": 0,
+              "x": 56.50745391566306,
+              "y": 2.5999999046325684,
+              "z": 20.662335181375965,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 1,
+              "x": 40.51432143524289,
+              "y": 2.5999999046325684,
+              "z": 14.381644031498581,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 2,
+              "x": 68.56637748656794,
+              "y": 2.5999999046325684,
+              "z": 33.168279197532684,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 3,
+              "x": 6.698506756685674,
+              "y": 2.5999999046325684,
+              "z": 38.5907408031635,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 4,
+              "x": 2.059924009256065,
+              "y": 2.5999999046325684,
+              "z": 40.91022461140528,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 5,
+              "x": 30.03778402879834,
+              "y": 2.5999999046325684,
+              "z": 50.15249506291002,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 6,
+              "x": 6.5630552638322115,
+              "y": 2.5999999046325684,
+              "z": 35.36313506611623,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 7,
+              "x": 10.879338834434748,
+              "y": 2.5999999046325684,
+              "z": 2.70219862065278,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 8,
+              "x": 6.89219481498003,
+              "y": 2.5999999046325684,
+              "z": 36.318191611906514,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 9,
+              "x": 36.777123441919684,
+              "y": 2.5999999046325684,
+              "z": 5.614463304635137,
+              "speed": 0,
+              "animation": "Idle"
+            }
+          ]
+        },
+        {
+          "file": "91-512.webp",
+          "fixture": {
+            "seed": 91,
+            "time": 0,
+            "camera": {
+              "position": [
+                45,
+                10.687064230442045,
+                -45
+              ],
+              "target": [
+                28,
+                0.6870642304420471,
+                -28
+              ],
+              "fov": 45,
+              "zoom": 1
+            },
+            "lighting": "day",
+            "fog": {
+              "near": 65,
+              "far": 155
+            },
+            "conifers": {
+              "source": "ez-tree",
+              "preset": "Large",
+              "count": 42,
+              "minHeight": 3.442393944477204,
+              "maxHeight": 10.67842555663378
+            },
+            "pixelRatio": 1,
+            "toneMapping": "ACESFilmic (shared renderer)",
+            "lightSettings": {
+              "preset": "sun20-front",
+              "elevation": 20,
+              "azimuth": 135,
+              "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+              "target": [
+                0,
+                16.22816801071167,
+                0
+              ],
+              "position": [
+                132.89260487773495,
+                84.6321966758454,
+                -132.89260487773493
+              ],
+              "direction": [
+                0.6644630243886748,
+                0.3420201433256687,
+                -0.6644630243886747
+              ],
+              "sun": {
+                "colour": "ffecd6",
+                "intensity": 2.8
+              },
+              "fill": {
+                "sky": "bfd4ee",
+                "ground": "716c65",
+                "intensity": 1
+              },
+              "exposure": 1.05,
+              "shadow": {
+                "map": [
+                  2048,
+                  2048
+                ],
+                "frustum": {
+                  "left": -130.27922061357856,
+                  "right": 130.27922061357856,
+                  "top": 68.47215835763163,
+                  "bottom": -68.47215835763163,
+                  "near": 69.41111187976426,
+                  "far": 330.58888812023577
+                },
+                "bias": -0.00005,
+                "normalBias": 0.02,
+                "radius": 4,
+                "type": "native PCF"
+              },
+              "materialTreatment": "Unchanged source maps and parameters"
+            },
+            "environment": {
+              "requested": false,
+              "active": false,
+              "loaded": false,
+              "pmrem": null,
+              "source": "lonely_road_afternoon_puresky_1k.hdr",
+              "intensity": 0.15,
+              "rotation": [
+                -0.6604753109436082,
+                1.285881523694997,
+                -0.22134807741986934,
+                "XYZ"
+              ],
+              "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+              "background": "Unchanged Color",
+              "sourceTexture": "disposed after PMREM",
+              "failure": ""
+            }
+          },
+          "ground": {
+            "source": "world-ground-v0.1",
+            "nativeLayers": 4,
+            "masks": "Native alphaMap on independent world UV channel",
+            "colourSpace": "sRGB",
+            "dataSpace": "NoColorSpace",
+            "sourcePixels": 256,
+            "sandPixels": 512,
+            "sandStudy": true,
+            "waterSource": "reference-water",
+            "maps": [
+              {
+                "id": "Ground037",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/Ground037-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/Ground037-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "Ground054",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/sand-standard-512/Ground054-colour.webp",
+                    "width": 512,
+                    "height": 512,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/sand-standard-512/Ground054-normal.webp",
+                    "width": 512,
+                    "height": 512,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/sand-standard-512/Ground054-roughness.webp",
+                    "width": 512,
+                    "height": 512,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "mossy_rock",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/mossy_rock-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/mossy_rock-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              },
+              {
+                "id": "grass_path_2",
+                "normalScale": [
+                  0.45,
+                  0.45
+                ],
+                "roughness": 1,
+                "textures": [
+                  {
+                    "file": "world-v01/standard/grass_path_2-colour.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "srgb",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-normal.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  },
+                  {
+                    "file": "world-v01/standard/grass_path_2-roughness.webp",
+                    "width": 256,
+                    "height": 256,
+                    "colourSpace": "",
+                    "mipmaps": true,
+                    "anisotropy": 4
+                  }
+                ]
+              }
+            ]
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "medium",
+            "triangles": 8192,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 0,
+            "level": -0.12,
+            "center": {
+              "x": 30,
+              "z": -28
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            }
+          },
+          "metrics": {
+            "variant": "candidate",
+            "ms": 51.79999999972907,
+            "calls": 61,
+            "triangles": 2086426,
+            "geometries": 38,
+            "textures": 101,
+            "callsIncludeShadows": true
+          },
+          "world": {
+            "seed": 91,
+            "generatorVersion": "fjordside-v0.1",
+            "preset": "fjord",
+            "conifers": "ez-tree",
+            "validation": {
+              "accepted": true,
+              "reasons": [],
+              "connectedBuildings": 6,
+              "connectedArea": 2719,
+              "maximumFoundationSlope": 4.440892098500626e-16,
+              "minimumFoundationElevation": 2.7199999046325685,
+              "score": 91
+            },
+            "biomeCoverage": {
+              "water": 4056,
+              "shore": 186,
+              "clearing": 1036,
+              "grass": 967,
+              "forest": 398,
+              "rock": 1638
+            },
+            "naturePlacements": 405,
+            "referenceResidents": 10,
+            "bounds": {
+              "minX": -90,
+              "maxX": 90,
+              "minZ": -90,
+              "maxZ": 90
+            },
+            "site": {
+              "x": 38,
+              "z": 6
+            },
+            "waterLevel": -0.12,
+            "generationMs": 424.3999999910593,
+            "previewPreparationMs": 663,
+            "terrainBytes": 2527200,
+            "terrainVertices": 48600,
+            "generations": 2
+          },
+          "actors": [
+            {
+              "id": 0,
+              "x": 56.50745391566306,
+              "y": 2.5999999046325684,
+              "z": 20.662335181375965,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 1,
+              "x": 40.51432143524289,
+              "y": 2.5999999046325684,
+              "z": 14.381644031498581,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 2,
+              "x": 68.56637748656794,
+              "y": 2.5999999046325684,
+              "z": 33.168279197532684,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 3,
+              "x": 6.698506756685674,
+              "y": 2.5999999046325684,
+              "z": 38.5907408031635,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 4,
+              "x": 2.059924009256065,
+              "y": 2.5999999046325684,
+              "z": 40.91022461140528,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 5,
+              "x": 30.03778402879834,
+              "y": 2.5999999046325684,
+              "z": 50.15249506291002,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 6,
+              "x": 6.5630552638322115,
+              "y": 2.5999999046325684,
+              "z": 35.36313506611623,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 7,
+              "x": 10.879338834434748,
+              "y": 2.5999999046325684,
+              "z": 2.70219862065278,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 8,
+              "x": 6.89219481498003,
+              "y": 2.5999999046325684,
+              "z": 36.318191611906514,
+              "speed": 0,
+              "animation": "Idle"
+            },
+            {
+              "id": 9,
+              "x": 36.777123441919684,
+              "y": 2.5999999046325684,
+              "z": 5.614463304635137,
+              "speed": 0,
+              "animation": "Idle"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "notes": "Post-main71 production A/B smoke. Earlier 76 images and timing remain historical controlled #80-baseline evidence; the newer actor runtime is not represented by those timing numbers."
+}
