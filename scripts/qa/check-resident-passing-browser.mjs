@@ -44,6 +44,12 @@ try {
     await controls();
     await page.selectOption('#fjordside-camera', 'village');
     await page.click('#debug-close');
+    // Review the rear of the first house, where the seeded encounter occurs.
+    // Use the same right-drag orbit controls available to the player.
+    await page.mouse.move(960, 400);
+    await page.mouse.down({ button: 'right' });
+    await page.mouse.move(440, 470, { steps: 20 });
+    await page.mouse.up({ button: 'right' });
     await page.waitForFunction(() => document.querySelector('canvas')?.dataset.interactions);
     assert.equal(await page.locator('canvas').getAttribute('data-character-source'), 'meshy');
     const first = await read();
@@ -70,12 +76,14 @@ try {
         for (let i = 0; i < sample.population.length; i++) {
             const resident = sample.population[i], before = previous.population[i];
             assert.ok(resident.safe && Math.abs(resident.y - resident.ground) < .00001);
-            // Annual persona replacement is a spawn, not locomotion.
-            if (resident.seed === before.seed)
-                travel[i] += Math.hypot(resident.x - before.x, resident.z - before.z);
+            const distance = Math.hypot(resident.x - before.x, resident.z - before.z);
+            const samePersona = resident.seed === before.seed;
+            // Annual replacement is a spawn, not locomotion. Measure a stop from
+            // positions across the interval; one zero-speed frame may still follow a turn.
+            if (samePersona) travel[i] += distance;
             const state = sample.interactions[i].state;
-            stopped[i] = resident.speed === 0 && state !== 'talking' && state !== 'listening' ?
-                stopped[i] + dt : 0;
+            stopped[i] = samePersona && distance < 1e-6 &&
+                state !== 'talking' && state !== 'listening' ? stopped[i] + dt : 0;
             longestStop[i] = Math.max(longestStop[i], stopped[i]);
             for (let j = i + 1; j < sample.population.length; j++) {
                 const other = sample.population[j];
