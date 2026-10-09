@@ -1,0 +1,15 @@
+{
+  "parentCommit": "d32caadf6f7cf666187dcad6b5c413b304adb133",
+  "capturedAt": "2026-10-09T09:41:39.519Z",
+  "productionOrigin": "http://127.0.0.1:5184",
+  "sources": [
+    {
+      "path": "src/environment-lab/EnvironmentLab.ts",
+      "lfSha256": "f069bf64e7e7d6a75f98f8f91f9f7cad28a7099355fae7723c9911fa715f7898"
+    },
+    {
+      "path": "scripts/qa/check-environment-fallback-water.mjs",
+      "lfSha256": "8e76ef3ff1f8e64e1e753236d79803c1e6dd1f612c58897c12f5abeaae36d1f0"
+    }
+  ]
+}

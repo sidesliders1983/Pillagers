@@ -65,3 +65,11 @@ switch/reload; shared boat resources remain owned by AssetManager.
 See [integration evidence](qa/fjordside-water-v01/report.md). Host frame readouts are
 uncontrolled diagnostics; this change does not require another local timing campaign.
 The owner will assess performance on the phone and review the integrated water/boat.
+
+## Environment Lab compatibility fallback
+
+The Lab's default/generated water remains its boona13 adapter. Compatibility
+fallback uses the shared ReferenceWater wrapper and receives the current native
+lighting and camera after they update. Day, Night and Low sun therefore apply
+to its own sun, sky and gain, including while waves are paused. See the
+[regression evidence](qa/environment-fallback-water/report.md).
