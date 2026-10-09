@@ -13,3 +13,5 @@ scripts/prepare-meshy-modules.mjs text eol=lf
 
 # Measurement artifact fingerprints require identical JSON bytes across checkouts.
 docs/qa/occupation-aptitude-v03/*.json text eol=lf
+docs/qa/food-resilience-v03/*.json text eol=lf
+docs/qa/food-resilience-v03/report.md text eol=lf

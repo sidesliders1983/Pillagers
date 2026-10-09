@@ -41,3 +41,11 @@ Food/Materials stocks are integers. Productivity changes work/time per unit.
 > **As a simulation, I need deterministic sub-Winter work progress, so that production supports fast Winter stepping and later continuous presentation.**
 
 Rules: fixed integer ticks/Winter; integer/fixed-point work progress; when required work is reached create one integer resource unit; preserve valid excess progress.
+
+## ECON-003 — Food reserve calibration
+
+**Status:** Research only; production rules unchanged
+
+[Food resilience v0.3 measurement (#77)](../../qa/food-resilience-v03/report.md) compares passive and prepared campaigns, annual Food spoilage of 5%, 10% and 15%, a protected reserve of two normal Winters, and separate regional farmer/fisher/hunter diminishing returns. All candidate storage and capacity rules are isolated QA experiments, not regular campaign options. No Storage building or starvation-death rule is introduced.
+
+The experiment retains the merged weather rules: Harsh stops Food and Materials production and increases resident/adult cattle consumption by 50%; Severe halves Food production and triples adult cattle consumption while retaining normal resident consumption and Materials output. Exact saved configurations, work-equivalent capacity losses, Food ledgers and replay coverage are recorded with the results.

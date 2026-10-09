@@ -1,0 +1,1173 @@
+{
+  "version": 1,
+  "sourceRevision": "4ca2db7aadeff39116ec7e5cfc0ed56a81450567",
+  "seeds": {
+    "start": 0,
+    "count": 100
+  },
+  "winters": 25,
+  "extendedSeeds": [
+    0,
+    7,
+    8,
+    11,
+    15,
+    32,
+    34,
+    41,
+    55,
+    90
+  ],
+  "extendedWinters": 50,
+  "campaigns": 1430,
+  "recipes": {
+    "A": {
+      "policy": "default",
+      "spoilageBps": 0,
+      "protectedWinters": 0,
+      "capacity": null
+    },
+    "B": {
+      "policy": "aware",
+      "spoilageBps": 0,
+      "protectedWinters": 0,
+      "capacity": null
+    },
+    "C05": {
+      "policy": "aware",
+      "spoilageBps": 500,
+      "protectedWinters": 0,
+      "capacity": null
+    },
+    "C10": {
+      "policy": "aware",
+      "spoilageBps": 1000,
+      "protectedWinters": 0,
+      "capacity": null
+    },
+    "C15": {
+      "policy": "aware",
+      "spoilageBps": 1500,
+      "protectedWinters": 0,
+      "capacity": null
+    },
+    "D2": {
+      "policy": "aware",
+      "spoilageBps": 0,
+      "protectedWinters": 0,
+      "capacity": {
+        "fullWorkers": 2,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    },
+    "D4": {
+      "policy": "aware",
+      "spoilageBps": 0,
+      "protectedWinters": 0,
+      "capacity": {
+        "fullWorkers": 4,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    },
+    "E05": {
+      "policy": "aware",
+      "spoilageBps": 500,
+      "protectedWinters": 0,
+      "capacity": {
+        "fullWorkers": 2,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    },
+    "E10": {
+      "policy": "aware",
+      "spoilageBps": 1000,
+      "protectedWinters": 0,
+      "capacity": {
+        "fullWorkers": 2,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    },
+    "E15": {
+      "policy": "aware",
+      "spoilageBps": 1500,
+      "protectedWinters": 0,
+      "capacity": {
+        "fullWorkers": 2,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    },
+    "C10-safe": {
+      "policy": "aware",
+      "spoilageBps": 1000,
+      "protectedWinters": 2,
+      "capacity": null
+    },
+    "E10-safe": {
+      "policy": "aware",
+      "spoilageBps": 1000,
+      "protectedWinters": 2,
+      "capacity": {
+        "fullWorkers": 2,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    },
+    "E10-N4": {
+      "policy": "aware",
+      "spoilageBps": 1000,
+      "protectedWinters": 0,
+      "capacity": {
+        "fullWorkers": 4,
+        "marginalBps": [
+          7500,
+          5000,
+          2500
+        ],
+        "floorBps": 1000
+      }
+    }
+  },
+  "ruleConfiguration": {
+    "mechanics": {
+      "mortalityBands": [
+        {
+          "minAge": 0,
+          "chanceBps": 10
+        },
+        {
+          "minAge": 16,
+          "chanceBps": 5
+        },
+        {
+          "minAge": 50,
+          "chanceBps": 50
+        },
+        {
+          "minAge": 60,
+          "chanceBps": 200
+        },
+        {
+          "minAge": 70,
+          "chanceBps": 500
+        },
+        {
+          "minAge": 80,
+          "chanceBps": 1000
+        },
+        {
+          "minAge": 90,
+          "chanceBps": 2000
+        }
+      ],
+      "foodAdultAge": 16,
+      "ageFullProductivityThrough": 49,
+      "agePenaltyBpsPerWinter": 200,
+      "ageProductivityFloorBps": 5000,
+      "collapseDebtWinters": 3,
+      "salvageBps": 5000,
+      "dominantLegacyChanceBps": 2500,
+      "fertilityMinAge": 18,
+      "fertilityMaxAge": 40,
+      "birthCooldownWinters": 2,
+      "childcareWinters": 5,
+      "careerMinimumGainBps": 1000,
+      "experienceRetentionBpsPerWinter": 100,
+      "apprenticeshipBonusBps": 1000,
+      "apprenticeshipTicks": 1000,
+      "switchProductivityBps": 7500,
+      "switchTicks": 1000,
+      "houseCost": 10,
+      "baseUpkeep": 1,
+      "upgradeCosts": [
+        5,
+        10,
+        20
+      ],
+      "upgradeBonusBps": [
+        0,
+        2500,
+        5000,
+        7500
+      ],
+      "tentProductivityBps": 5000,
+      "workAge": 16,
+      "adultAge": 18,
+      "childFood": 1,
+      "adultFood": 2,
+      "workPerUnit": 10000000,
+      "fertilityChanceBps": 2500,
+      "partnershipChanceBps": 1000,
+      "careerReviewWinters": 5,
+      "occupations": {
+        "farmer": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.3,
+            0.2,
+            0.2,
+            0.05,
+            0.25
+          ],
+          "preferences": [
+            0.7,
+            0.6,
+            0.6,
+            0.35,
+            0.25
+          ]
+        },
+        "herder": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.2,
+            0.2,
+            0.2,
+            0.1,
+            0.3
+          ],
+          "preferences": [
+            0.6,
+            0.6,
+            0.6,
+            0.4,
+            0.3
+          ]
+        },
+        "fisher": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.25,
+            0.35,
+            0.15,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.7,
+            0.8,
+            0.6,
+            0.4,
+            0.3
+          ]
+        },
+        "hunter": {
+          "resource": "food",
+          "unitsPerWinter": 10,
+          "weights": [
+            0.2,
+            0.35,
+            0.15,
+            0.25,
+            0.05
+          ],
+          "preferences": [
+            0.7,
+            0.85,
+            0.6,
+            0.7,
+            0.35
+          ]
+        },
+        "textileWorker": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.1,
+            0.35,
+            0.3,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.4,
+            0.8,
+            0.75,
+            0.35,
+            0.3
+          ]
+        },
+        "smith": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.4,
+            0.1,
+            0.25,
+            0.05,
+            0.2
+          ],
+          "preferences": [
+            0.85,
+            0.5,
+            0.8,
+            0.3,
+            0.55
+          ]
+        },
+        "woodworker": {
+          "resource": "materials",
+          "unitsPerWinter": 5,
+          "weights": [
+            0.25,
+            0.25,
+            0.3,
+            0.05,
+            0.15
+          ],
+          "preferences": [
+            0.7,
+            0.75,
+            0.8,
+            0.35,
+            0.35
+          ]
+        },
+        "boatbuilder": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.25,
+            0.2,
+            0.4,
+            0.05,
+            0.1
+          ],
+          "preferences": [
+            0.7,
+            0.7,
+            0.9,
+            0.35,
+            0.35
+          ]
+        },
+        "trader": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.05,
+            0.1,
+            0.3,
+            0.35,
+            0.2
+          ],
+          "preferences": [
+            0.4,
+            0.6,
+            0.8,
+            0.85,
+            0.25
+          ]
+        },
+        "leatherAndJewelleryMaker": {
+          "resource": null,
+          "unitsPerWinter": 0,
+          "weights": [
+            0.1,
+            0.35,
+            0.3,
+            0.1,
+            0.15
+          ],
+          "preferences": [
+            0.45,
+            0.85,
+            0.8,
+            0.45,
+            0.3
+          ]
+        }
+      }
+    },
+    "landing": {
+      "initialFood": 30,
+      "initialMaterials": 5,
+      "longshipSalvage": 20,
+      "cattleAdultAge": 2,
+      "cattleYoungAdultAge": 1,
+      "adultCattleFood": 1,
+      "calfFood": 0,
+      "cowFoodPerWinter": 4,
+      "exposedProductivityBps": 5000,
+      "farmyardCapacity": 4,
+      "slaughterFood": 15,
+      "foundingCoupleChanceBps": 5000,
+      "foundingCoupleCap": 3,
+      "cattleBirthChanceBps": 5000,
+      "cattleFertileMinAge": 2,
+      "cattleFertileMaxAge": 12,
+      "cattleBirthInterval": 2,
+      "cattleMortalityYoungBps": 200,
+      "cattleMortalityAdultBps": 50,
+      "cattleMortalityOlderBps": 500,
+      "cattleMortalityOldBps": 1500,
+      "cattleCrowdingBps": 200,
+      "cattleWeatherMortalityBps": 0
+    },
+    "weather": {
+      "enabled": true,
+      "profiles": {
+        "Mild": {
+          "probabilityBps": 2000,
+          "foodProductionBps": 11000,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 0,
+          "exposedCattleMortalityBps": 0,
+          "travelDurationBps": 10000,
+          "travelRiskBps": 0
+        },
+        "Normal": {
+          "probabilityBps": 5500,
+          "foodProductionBps": 10000,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 0,
+          "exposedCattleMortalityBps": 0,
+          "travelDurationBps": 10000,
+          "travelRiskBps": 0
+        },
+        "Harsh": {
+          "probabilityBps": 2000,
+          "foodProductionBps": 0,
+          "cattleConsumptionMultiplier": 1,
+          "tentMortalityBps": 50,
+          "exposedCattleMortalityBps": 500,
+          "travelDurationBps": 12500,
+          "travelRiskBps": 500,
+          "materialsProductionBps": 0,
+          "residentConsumptionBps": 15000,
+          "cattleConsumptionBps": 15000
+        },
+        "Severe": {
+          "probabilityBps": 500,
+          "foodProductionBps": 5000,
+          "cattleConsumptionMultiplier": 3,
+          "tentMortalityBps": 200,
+          "exposedCattleMortalityBps": 1500,
+          "travelDurationBps": 15000,
+          "travelRiskBps": 1500
+        }
+      }
+    }
+  },
+  "identities": {
+    "A": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "A",
+      "recipeHash": "4022d3cdbc16f410c58c49a8dd508c432a2338fc068e4c8d6c1e0e52769d5f50",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "B": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "B",
+      "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "C05": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "C05",
+      "recipeHash": "71762ae9b9bc3047012708e45e430588057632df1f3651659ac84f301ff7202d",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "C10": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "C10",
+      "recipeHash": "53cd2d8a10c2a2a0429985445661a3aab906be46db07a0ab70052fdc95c56714",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "C15": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "C15",
+      "recipeHash": "274a3b7fd9ede481cccd183cc26bf32f6f68d7dd140f32cd6151690adab8f317",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "D2": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "D2",
+      "recipeHash": "080bdb9f7ef7192f04512d831a289488744b43b50886ace942510bf133520e46",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "D4": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "D4",
+      "recipeHash": "9427af43a90fe4c8f2cd6d9de9b74fc24912804ce4326b63ce58af96a44ccb3b",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "E05": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "E05",
+      "recipeHash": "190963629c51173495a550313c6334aac45df1f22c30ba8d51c407e6839671b4",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "E10": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "E10",
+      "recipeHash": "8a5b0dbf0d5220c4d6bba8af4d716c4ec463115417d16ff72b59d552dda12676",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "E15": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "E15",
+      "recipeHash": "992265a96ada004f55ce8016920ec4fc7573b5e555d62f94006450a4c0fa44e6",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "C10-safe": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "C10-safe",
+      "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "E10-safe": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "E10-safe",
+      "recipeHash": "4545f193f8046c343a0da0da7933a5317c0887458637995bc5fda216deffa7cc",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    },
+    "E10-N4": {
+      "kind": "food-calibration",
+      "version": 1,
+      "scenario": "E10-N4",
+      "recipeHash": "f563286e03734c15a4fcc6694a13dcdefb53c7b548391379c6054ca617e6fa09",
+      "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+      "hookHash": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531"
+    }
+  },
+  "verificationSeeds": [
+    0,
+    7,
+    32,
+    99
+  ],
+  "productionDefaultsChanged": false,
+  "domesticOnly": true,
+  "harnessHashes": {
+    "run-food-resilience.mjs": "5ad2c67b0aec97e1b709ad831a8595de63043391cdd4a0fcad686139e0e95605",
+    "food-study.mjs": "66bf28480a87f93aae264eda5efc8d1cad519db6caa8d6cdc29c6b2a7d0594d1",
+    "food-worker.mjs": "f6ce36d8b5cbf0510d34af9cad5c8caf0021ee33b8dddb0e0530f8e948ab8d09",
+    "food-scenario.mjs": "44a5ab09087620ba76dfaf001b016520e9e2b6d8fd333b91d7f343f4c8287860",
+    "food-engine.mjs": "cc4273c1041edc053268019b9d40a5258539db07d453bd4164160589f0991531",
+    "food-recipes.mjs": "82a0676bfe4675249ebb91906b516f307d3fcc6ec91c35da197bad651e3497c6",
+    "food-policy.mjs": "fd698b01610f23cc1628933ff0c8783f17260b51145fbd0ce5fa036667b6c757",
+    "food-statistics.mjs": "4051d5812f7425d192fdc4f3a241b819e22351f9ff47b138b8258f5c99693a92",
+    "aptitude-statistics.mjs": "07148917d0cea73f02a8abd99d39723713a6bfa3531a58c6ae438c3cde07f985",
+    "aptitude-engine.mjs": "2d1137252d999b5b14708018c4083c0443af1ea810cd10a89bceca310910130a",
+    "aptitude-economy.mjs": "160a7728f7db297b763fc1b7c405e66cf431dce21f75538a53ba45d0086b8265",
+    "../load-typescript.mjs": "91a2a71a2f3534671016fac158b38ce44aa5eaec6b72c7de97e2676caa5b7b14"
+  },
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "artifacts": [
+    {
+      "path": "runs25/seed-0.json.gz",
+      "bytes": 108490,
+      "sha256": "b9252579e677127c86f8d0e9740a932958d534c4c1fa61222e9d313931cffc80"
+    },
+    {
+      "path": "runs25/seed-1.json.gz",
+      "bytes": 107658,
+      "sha256": "d70602c2beb906234dac8bef6306b710a55dfc1857ef68c84b6241bb642d82fc"
+    },
+    {
+      "path": "runs25/seed-10.json.gz",
+      "bytes": 110545,
+      "sha256": "05bce72d1be0cbe7955a06912b57a427a09b44a30d49f11913ad9d2aa0f3ed42"
+    },
+    {
+      "path": "runs25/seed-11.json.gz",
+      "bytes": 108089,
+      "sha256": "f5b6d00d11ef0c59bceaaab47294a543a2d790279c3143b2765626a172c7b431"
+    },
+    {
+      "path": "runs25/seed-12.json.gz",
+      "bytes": 109266,
+      "sha256": "dc98e1a6195287719dfc8047c7e480fea81ba95f290181b57a09af38465a95f5"
+    },
+    {
+      "path": "runs25/seed-13.json.gz",
+      "bytes": 108103,
+      "sha256": "01c993002d776498d6433383eb09d6721991d5bc4a3ec29fde6fededed1c4b4a"
+    },
+    {
+      "path": "runs25/seed-14.json.gz",
+      "bytes": 113090,
+      "sha256": "c8fda26093457bcc87782910a517ecb5f43defeb39cf6c3d9cf1ac9f3ec34bba"
+    },
+    {
+      "path": "runs25/seed-15.json.gz",
+      "bytes": 104511,
+      "sha256": "68fc520729f96ad789812d069826540613df54651e802f9181e63de4f6babe1d"
+    },
+    {
+      "path": "runs25/seed-16.json.gz",
+      "bytes": 107529,
+      "sha256": "a46a8165b6636e82989501fbc18a42a870a0b3c1bdb00e478615a8e220fc681d"
+    },
+    {
+      "path": "runs25/seed-17.json.gz",
+      "bytes": 110906,
+      "sha256": "1e93866d0a50c2c3f3dcd74da013704e2969e8016326830a2421d31ef227d4af"
+    },
+    {
+      "path": "runs25/seed-18.json.gz",
+      "bytes": 111252,
+      "sha256": "17e12d20b23f9e9e9d30a9894405867d04489b41a76244de31743dbfa7daa438"
+    },
+    {
+      "path": "runs25/seed-19.json.gz",
+      "bytes": 99650,
+      "sha256": "6068d3d0afd5b0f1722094de887928f9fc011a104614ed14d8963c98048abdb5"
+    },
+    {
+      "path": "runs25/seed-2.json.gz",
+      "bytes": 106862,
+      "sha256": "e8e42a34f6c3d86e8f42760d1ca4c9358aace81e420fd4650df3e9320553bf63"
+    },
+    {
+      "path": "runs25/seed-20.json.gz",
+      "bytes": 96117,
+      "sha256": "6f1c9c4c10069587a0ac1eb9eb1d545d021ac7d33153f54aa42b57217a343876"
+    },
+    {
+      "path": "runs25/seed-21.json.gz",
+      "bytes": 106812,
+      "sha256": "7fc57353508357411574006f597340948f0e0f118033a2dd2e7a3c380969f07e"
+    },
+    {
+      "path": "runs25/seed-22.json.gz",
+      "bytes": 112225,
+      "sha256": "8b161a6d9a9bbc03e36aa26dbdbbb553f888bd051fca3f4aa078d08d57faa9b2"
+    },
+    {
+      "path": "runs25/seed-23.json.gz",
+      "bytes": 99045,
+      "sha256": "48b2de23ef35e2f4e6cf1f44f28bfecac560bb17e6cbf84fcefc5c6359260436"
+    },
+    {
+      "path": "runs25/seed-24.json.gz",
+      "bytes": 111897,
+      "sha256": "9d7d72a42c71d766242d84e944fda0c10a7948b3c83aa2cc4fe9616b335b7ab9"
+    },
+    {
+      "path": "runs25/seed-25.json.gz",
+      "bytes": 112396,
+      "sha256": "62b0b883e5892d13279f5f83468439615a34a79011b06f97afe28ffd44cb282b"
+    },
+    {
+      "path": "runs25/seed-26.json.gz",
+      "bytes": 113475,
+      "sha256": "3104a453d48163456e90c55564bcf63d0741bb42f996b26fa13d9a66d8bf3453"
+    },
+    {
+      "path": "runs25/seed-27.json.gz",
+      "bytes": 112339,
+      "sha256": "d689b16ed0b405d0ac705bfc3c92dbe1356c19a6de8c5b0c6b67c2c805694824"
+    },
+    {
+      "path": "runs25/seed-28.json.gz",
+      "bytes": 106630,
+      "sha256": "18cfc5dd910a7fc5c1dc4cfda6b859a7546141ad5aa62372a363a0d87e9273c3"
+    },
+    {
+      "path": "runs25/seed-29.json.gz",
+      "bytes": 116699,
+      "sha256": "8bf2c4626a0ea16867ad21c9739a4dba4f9132f03ce5268c013c250d956d223d"
+    },
+    {
+      "path": "runs25/seed-3.json.gz",
+      "bytes": 107161,
+      "sha256": "971515ee5cfe2190eb4d30a5365b106890ce695baafe00c1dac9b707cfa25231"
+    },
+    {
+      "path": "runs25/seed-30.json.gz",
+      "bytes": 98061,
+      "sha256": "94fedb9a32d027e9379e59193841fad340d068f200415d996191d9445e1ba569"
+    },
+    {
+      "path": "runs25/seed-31.json.gz",
+      "bytes": 114070,
+      "sha256": "b3d4e42b8993367a56433735df62ea2831f7c06c239eeb34e2786ec75d8a48d1"
+    },
+    {
+      "path": "runs25/seed-32.json.gz",
+      "bytes": 112986,
+      "sha256": "5c6be0f4218c5ef76bc819c5466a73ff3a35da647a98cff0b0b20bfca9a491ad"
+    },
+    {
+      "path": "runs25/seed-33.json.gz",
+      "bytes": 102260,
+      "sha256": "ac2360ec3109b8ea87a9d33157390725a51afe6693034538f738ed571f38665e"
+    },
+    {
+      "path": "runs25/seed-34.json.gz",
+      "bytes": 107483,
+      "sha256": "a7e06f05048d84a4e5ef67e544facdd49beb515d7bff38c5051e8bf0e7165147"
+    },
+    {
+      "path": "runs25/seed-35.json.gz",
+      "bytes": 105301,
+      "sha256": "fbaee783621c3fc8713242ceae5cbcc58f522eae3fe680aa92cd299ec80f12a9"
+    },
+    {
+      "path": "runs25/seed-36.json.gz",
+      "bytes": 97337,
+      "sha256": "4409b5d0aaabccf4d4555b3bd6cc9a134c01a0a53ff740411c555be886c1a52e"
+    },
+    {
+      "path": "runs25/seed-37.json.gz",
+      "bytes": 111917,
+      "sha256": "7349683e4b47292ef96aef602038a3036c88c1b861c14eac82b5a9bb560273da"
+    },
+    {
+      "path": "runs25/seed-38.json.gz",
+      "bytes": 95233,
+      "sha256": "21ff090b7f928ad8eeaefffbc245bb5eaa79ac51f7b17262f18e01d186c1598c"
+    },
+    {
+      "path": "runs25/seed-39.json.gz",
+      "bytes": 102966,
+      "sha256": "aec1c7d44cc5b6928d479050be4807c9e5b6699a243bd6932f6edf3fe71f2fe8"
+    },
+    {
+      "path": "runs25/seed-4.json.gz",
+      "bytes": 111781,
+      "sha256": "41f1d95cd8368783fef2de0a6f1db7594919ec94f1db9083ad8c061840e2baba"
+    },
+    {
+      "path": "runs25/seed-40.json.gz",
+      "bytes": 110461,
+      "sha256": "325c16c154acf8dbf8971c2bab8f456676fb19037b0723e9ec13d99c8d3a2f9a"
+    },
+    {
+      "path": "runs25/seed-41.json.gz",
+      "bytes": 108844,
+      "sha256": "b4fc4a62645e21f2b3aa184bb95dc41c5e424f62045593e80ab93a9c5902ddf1"
+    },
+    {
+      "path": "runs25/seed-42.json.gz",
+      "bytes": 114324,
+      "sha256": "b14227b648228789e296594467feed6d49284d43d7740ed1d4b07b933fc29ea8"
+    },
+    {
+      "path": "runs25/seed-43.json.gz",
+      "bytes": 102720,
+      "sha256": "67b43530ed4b72ef73f334e7c308cae4d43a76b3715b2dd6b9391fbd17a79a2c"
+    },
+    {
+      "path": "runs25/seed-44.json.gz",
+      "bytes": 103302,
+      "sha256": "1d8fc6186211a3957e50f1d18941c38893ef304a091472b80cf7e3bde1451389"
+    },
+    {
+      "path": "runs25/seed-45.json.gz",
+      "bytes": 105936,
+      "sha256": "2742ef2cfe9de95b28e6d9b91dab60786506d7f43ec947a02178c2d2fab8c57d"
+    },
+    {
+      "path": "runs25/seed-46.json.gz",
+      "bytes": 103846,
+      "sha256": "4365d57d562275df8b4055af39b76cd993285255180487ac7b00784d78c0fbd0"
+    },
+    {
+      "path": "runs25/seed-47.json.gz",
+      "bytes": 105943,
+      "sha256": "b17f976a2e22eeb940281ae96535d042d1e16ac17369e912faa800fdce56b1e4"
+    },
+    {
+      "path": "runs25/seed-48.json.gz",
+      "bytes": 110031,
+      "sha256": "b1f1fd97877d60b12e418cf8a819c5192f9483d0ea527663a81b3c0a9d25087c"
+    },
+    {
+      "path": "runs25/seed-49.json.gz",
+      "bytes": 116373,
+      "sha256": "2b50d8b85fb4b88230abc3458d4be83f058f2f7d0e2f86100e1646b6f067fbf4"
+    },
+    {
+      "path": "runs25/seed-5.json.gz",
+      "bytes": 106718,
+      "sha256": "3ce132a8bb4f68534ec3b4ff5eb81938309d61e6057a2869077aa297c7fcfc6d"
+    },
+    {
+      "path": "runs25/seed-50.json.gz",
+      "bytes": 115981,
+      "sha256": "d650fc9fdac6b055d01307f4f9ce25c682027f3446b1908a65006dd7e287fabd"
+    },
+    {
+      "path": "runs25/seed-51.json.gz",
+      "bytes": 109034,
+      "sha256": "d16b5057448951124db4e5f7d195f4df396b20e1295de8d7b786f5bfa1d85de5"
+    },
+    {
+      "path": "runs25/seed-52.json.gz",
+      "bytes": 109820,
+      "sha256": "39b973fa354450a2abdbd1cdaecc79d0e1675fede9a011781caffacc5d40f6c5"
+    },
+    {
+      "path": "runs25/seed-53.json.gz",
+      "bytes": 112604,
+      "sha256": "45680712e74ffd03ab2d6bff8824850ad713191827084192777c4b2fd2b5ebd9"
+    },
+    {
+      "path": "runs25/seed-54.json.gz",
+      "bytes": 113535,
+      "sha256": "3b19e907401c8d7e19c3e570ae525e5c5cbe73549d056c690bfbdfa5df0afc7b"
+    },
+    {
+      "path": "runs25/seed-55.json.gz",
+      "bytes": 110157,
+      "sha256": "b05eaf032f0ffd436a94089f44e36d012eaaf3b0099d2b97297e0be0752b955b"
+    },
+    {
+      "path": "runs25/seed-56.json.gz",
+      "bytes": 115175,
+      "sha256": "9114e479cae078d48bf85fbd578bf495e76423aec70b27ede0cf28eda8c729c7"
+    },
+    {
+      "path": "runs25/seed-57.json.gz",
+      "bytes": 111977,
+      "sha256": "690f0eec8433afe0bde38c3919b6ed084c7ab7f38c5117de22bc54e3c707e2e5"
+    },
+    {
+      "path": "runs25/seed-58.json.gz",
+      "bytes": 117871,
+      "sha256": "56f639ee1ce51d928d0835708f800e7668f11304d21d6816bbd0673fdd7da295"
+    },
+    {
+      "path": "runs25/seed-59.json.gz",
+      "bytes": 108285,
+      "sha256": "afe8d9228cc7e0b5bf4f49c481323436e7259dd855cc01e80fef909112619837"
+    },
+    {
+      "path": "runs25/seed-6.json.gz",
+      "bytes": 103760,
+      "sha256": "82b86adc3db88dfb92f20b7bf090ba28f3508f90aea29b7c34877dc1355d69c4"
+    },
+    {
+      "path": "runs25/seed-60.json.gz",
+      "bytes": 113775,
+      "sha256": "7fa052f79b71d55af81cfada1f89327c3b82da4fbd96a92863309fc7d4e83a4c"
+    },
+    {
+      "path": "runs25/seed-61.json.gz",
+      "bytes": 99930,
+      "sha256": "63510589161c743b87028fed2e3ef82b6e01c63efe40ee8d17be03c11c2e64d1"
+    },
+    {
+      "path": "runs25/seed-62.json.gz",
+      "bytes": 110695,
+      "sha256": "c88198908a3db2b41a7bac1ccdf1bc0e4dc7c21dac0cb4416e1b76c0ded82e78"
+    },
+    {
+      "path": "runs25/seed-63.json.gz",
+      "bytes": 112554,
+      "sha256": "25bde5688a7c3053dbeb1a5e33ec581e47330af251bc572599a2e59bcff38065"
+    },
+    {
+      "path": "runs25/seed-64.json.gz",
+      "bytes": 108474,
+      "sha256": "756ef67291ab80a24abbe80fa47ce7b67d638933dfed3cf58bb90437bb3a29ba"
+    },
+    {
+      "path": "runs25/seed-65.json.gz",
+      "bytes": 111839,
+      "sha256": "0b6b0b0dd726e1474e7bde582781c4ac12534306ac4218ae074b7a81a6b707f7"
+    },
+    {
+      "path": "runs25/seed-66.json.gz",
+      "bytes": 104290,
+      "sha256": "c3e0cc1d432e03d309f9fdf9cdca8478ee117b45ee682cc4e2201a7f1710498c"
+    },
+    {
+      "path": "runs25/seed-67.json.gz",
+      "bytes": 96618,
+      "sha256": "7e5412ce7b7c17b731be4d68b6c970d09a7eb575037c51005141dd25675c6e41"
+    },
+    {
+      "path": "runs25/seed-68.json.gz",
+      "bytes": 103237,
+      "sha256": "b7d7504bbf987ab6a063391bda73d76a6b07f27154e13808332181674f9ac0c2"
+    },
+    {
+      "path": "runs25/seed-69.json.gz",
+      "bytes": 110754,
+      "sha256": "2920eba45277df1fc938535db0582951874a7506b6641168c04ed935c4733e11"
+    },
+    {
+      "path": "runs25/seed-7.json.gz",
+      "bytes": 102421,
+      "sha256": "0a06d701d5983be75f540be89175bd29dd3f9ef655383ecaaafefc8e3a51ead4"
+    },
+    {
+      "path": "runs25/seed-70.json.gz",
+      "bytes": 99588,
+      "sha256": "5c0cfa8459c0d888ea48226a2b0c984a52c63051ea3a292aef3a2629a036b122"
+    },
+    {
+      "path": "runs25/seed-71.json.gz",
+      "bytes": 104394,
+      "sha256": "8f1ca978c7f456fcdb2c8c8feb7ad01d03c9d0f991eb39a1e74834e25ca1d646"
+    },
+    {
+      "path": "runs25/seed-72.json.gz",
+      "bytes": 120372,
+      "sha256": "1cf869781459ff57563d8f1c9782e2f02bc9b02a5311c380ab9d40262e9b7086"
+    },
+    {
+      "path": "runs25/seed-73.json.gz",
+      "bytes": 106448,
+      "sha256": "2d76bf34f28e82e9f916c5b56e467370f95de9d841205a0b5c0f657ce236f545"
+    },
+    {
+      "path": "runs25/seed-74.json.gz",
+      "bytes": 104657,
+      "sha256": "f1d11f860f57212dcef9c36f295d8215b475e2b00891da67e5eb706dc04d6475"
+    },
+    {
+      "path": "runs25/seed-75.json.gz",
+      "bytes": 96997,
+      "sha256": "0d7f94ea264e7eeaf9993a1281d1a937f40e6765c9037961039896478f6c6425"
+    },
+    {
+      "path": "runs25/seed-76.json.gz",
+      "bytes": 114214,
+      "sha256": "33ad32b097bda5f9b1981db3f45e387b4a1d03d91990c46b8054006ebbf994ed"
+    },
+    {
+      "path": "runs25/seed-77.json.gz",
+      "bytes": 106520,
+      "sha256": "93dbddfc06f5740828c9352c52d405b9e2606160411d71e71c01940220706e21"
+    },
+    {
+      "path": "runs25/seed-78.json.gz",
+      "bytes": 111914,
+      "sha256": "c4d9aa46a085807d45e40e3b4cd86c8a50332b381cd6320888225ada5f02f271"
+    },
+    {
+      "path": "runs25/seed-79.json.gz",
+      "bytes": 105721,
+      "sha256": "befd565e688fd42307e48afc1e0dda67f4d84db2ada05d1b465e23d489747b37"
+    },
+    {
+      "path": "runs25/seed-8.json.gz",
+      "bytes": 111939,
+      "sha256": "79fea3c46c9546a048a9f3615a7646f863a03a68a854bfa4304b483c568f7205"
+    },
+    {
+      "path": "runs25/seed-80.json.gz",
+      "bytes": 104008,
+      "sha256": "a79341f44a8fadb270d902967af048862ec017535ef36e26dd39c2118dbd25c8"
+    },
+    {
+      "path": "runs25/seed-81.json.gz",
+      "bytes": 112047,
+      "sha256": "92ca1b40dcd74a448877d977d692c7862cf82a5289386a3293760bc6286b710f"
+    },
+    {
+      "path": "runs25/seed-82.json.gz",
+      "bytes": 98709,
+      "sha256": "89a78b49fec282625168984effce0949f2da8ba037ab3fb91b00dc68e286e680"
+    },
+    {
+      "path": "runs25/seed-83.json.gz",
+      "bytes": 110751,
+      "sha256": "23b8b1ac39d228b7ddeca96159eb0548ded8a07928404a385427bf2dae62c08b"
+    },
+    {
+      "path": "runs25/seed-84.json.gz",
+      "bytes": 109917,
+      "sha256": "19a4fcfdd2925998189a457d2175635e9b075b4b41bdd1a7b161d1df0526e40c"
+    },
+    {
+      "path": "runs25/seed-85.json.gz",
+      "bytes": 108798,
+      "sha256": "4836116f0f7f219460dba8727d68e25d0eec2aea5417d0785d5c8b45748873ad"
+    },
+    {
+      "path": "runs25/seed-86.json.gz",
+      "bytes": 108117,
+      "sha256": "98ab1791491a08ff4e477f60538e2c7f2d759ad4b109f419a80fc1312f116c64"
+    },
+    {
+      "path": "runs25/seed-87.json.gz",
+      "bytes": 123541,
+      "sha256": "49e87518770c58c985092cf1d5f53de9f16f38f2e14d3660fe9f2686fa2c9343"
+    },
+    {
+      "path": "runs25/seed-88.json.gz",
+      "bytes": 106659,
+      "sha256": "6e9e894f2e1bba4279684d189f9b9ead7a469bac224e3dab35a75cbd687c83a6"
+    },
+    {
+      "path": "runs25/seed-89.json.gz",
+      "bytes": 111896,
+      "sha256": "d97069776b02605d3405e11997d1fdc9ffa23e90c8104299f85c1d230b3f621f"
+    },
+    {
+      "path": "runs25/seed-9.json.gz",
+      "bytes": 114863,
+      "sha256": "5093e3ec8066a7e8cf6d5e3fec3dae3c4cff9ef6e901563db755fae90cc61f5e"
+    },
+    {
+      "path": "runs25/seed-90.json.gz",
+      "bytes": 103199,
+      "sha256": "73ce5fd79ece4401c2324bd353d555f91281f7cbdbb819a313503a1659e8cdfa"
+    },
+    {
+      "path": "runs25/seed-91.json.gz",
+      "bytes": 115469,
+      "sha256": "494648cb00b18f6863aec40ee47a709692a2254322df6f24b8fdece114243afc"
+    },
+    {
+      "path": "runs25/seed-92.json.gz",
+      "bytes": 117835,
+      "sha256": "028912eb552225cf195effbad4465b0863299a871d55ad2fd6e55386b39e3fc0"
+    },
+    {
+      "path": "runs25/seed-93.json.gz",
+      "bytes": 106525,
+      "sha256": "7b09b160b6277dd04e8f8542a542c48e1e778d7b6b5ac993494bf7426e815b2e"
+    },
+    {
+      "path": "runs25/seed-94.json.gz",
+      "bytes": 97068,
+      "sha256": "29345765de49cea8242e5fe648103fd6ca21d07ee63f36442b271e97b04736a9"
+    },
+    {
+      "path": "runs25/seed-95.json.gz",
+      "bytes": 107480,
+      "sha256": "90a0b87b7e857e229db0516c675e33cdb241d53d739c0e0b039a1f688259760b"
+    },
+    {
+      "path": "runs25/seed-96.json.gz",
+      "bytes": 113222,
+      "sha256": "13a55e9ce3d02c4285c34d1150751a0c80d8370b9d1f95f1a05b6c0db9ef403a"
+    },
+    {
+      "path": "runs25/seed-97.json.gz",
+      "bytes": 112182,
+      "sha256": "b168c85948275c4e02ea09df4ed582a145bf4fc221355e11fc0a21f02164ca72"
+    },
+    {
+      "path": "runs25/seed-98.json.gz",
+      "bytes": 107046,
+      "sha256": "a8a9bb9875ba31cdf8869e720431179c5fb6e21e0a8ff13deef99fbb45308d4c"
+    },
+    {
+      "path": "runs25/seed-99.json.gz",
+      "bytes": 109017,
+      "sha256": "740cc902c66f25b90e1159a3b348ebae35b8caf22b288e148b22bb9419f769e5"
+    },
+    {
+      "path": "runs50/seed-0.json.gz",
+      "bytes": 223120,
+      "sha256": "01792d9c7f9fa24b72348add6b7ced67e17871030c153ff0c57c06400fb0ce76"
+    },
+    {
+      "path": "runs50/seed-11.json.gz",
+      "bytes": 202874,
+      "sha256": "caaf560656c49222a96bac398bf9df3081e80396d71a04d9e333274b35c67ef8"
+    },
+    {
+      "path": "runs50/seed-15.json.gz",
+      "bytes": 178524,
+      "sha256": "be8fc378715e126db1709002ab9e6ad82a2ed1330abfec30bcabc025b641365c"
+    },
+    {
+      "path": "runs50/seed-32.json.gz",
+      "bytes": 219970,
+      "sha256": "168e3d2a4c74bc3534304aa896f1432e41e4742f1b4e061a28bceaf8e21eb15d"
+    },
+    {
+      "path": "runs50/seed-34.json.gz",
+      "bytes": 222510,
+      "sha256": "5b2e8c4a88c43845277b9fe317240a64b80cc1f85ad1c42d4b985baa63462357"
+    },
+    {
+      "path": "runs50/seed-41.json.gz",
+      "bytes": 220626,
+      "sha256": "3bdc547a82ae1744b3cd72fde0e0eccbd5ec2fe2034724d5bb8eb3683e224b6b"
+    },
+    {
+      "path": "runs50/seed-55.json.gz",
+      "bytes": 215367,
+      "sha256": "2ec758bb5e82f126e82c59821c4adcb3d5027ec27313a866f69e3e6577b0e2e7"
+    },
+    {
+      "path": "runs50/seed-7.json.gz",
+      "bytes": 208928,
+      "sha256": "72c3536a7ffe067dad68ad2f220b2ce3bd5229d5b9a038c90527b780cb4da142"
+    },
+    {
+      "path": "runs50/seed-8.json.gz",
+      "bytes": 212761,
+      "sha256": "3d1172c1ce92d6451e0b5fbe545064507d325bb170ebb50ed80023bf73b3184e"
+    },
+    {
+      "path": "runs50/seed-90.json.gz",
+      "bytes": 169238,
+      "sha256": "649c6a6c19b72d2ee7a004e47d9473c54b26530692050f1b1ffd1290d78577c9"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 2030970,
+      "sha256": "7a0b238e50f3534490751c21175108ab9501ec93692b8596a6bef3902f93ec3a"
+    }
+  ]
+}

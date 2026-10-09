@@ -1,0 +1,12 @@
+{
+  "manifestSha256": "ffbd93387a3b788bd99c394627963d89d0501f90b58191a36c60c305828ce33d",
+  "scripts": {
+    "render-food-report.mjs": "45684113c264284aacbdee41838d4f5c05741ce5d9d1fe18652077035dcb5dcf",
+    "verify-food-study.mjs": "8fc4a020bc11547ed68a5396a646dfaf77e1a4efb457a44626802d19377518a5"
+  },
+  "files": {
+    "report.md": "2d7cecba9fd04aced40b22a1c6917b0c3ae17deb6207c744d8074f5b77aec453",
+    "audit.json": "6d310f6f9501b8fbbddd0d05f86aa918d962045e25ae5cedb29a5c529c5fc7e1",
+    "resilience-details.json": "f1a77852bdd5209ea4096d3a3cfa7202b85a23abdba78a28922ae26dd4d28ac2"
+  }
+}
