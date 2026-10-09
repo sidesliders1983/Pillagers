@@ -7,7 +7,7 @@
 
 Rules: reuse canonical CharacterDNA traits; heritage/appearance do not currently modify fit; aptitude affects effectiveness but does not prohibit player assignment.
 
-Research evidence: [occupation aptitude v0.3 measurement (#78)](../../qa/occupation-aptitude-v03/report.md) compares 1,000 founders, inherited descendants and matched economies. Its candidate mappings are QA experiments; the canonical formula and gameplay balance remain unchanged.
+Research evidence: [occupation aptitude v0.3 measurement (#78)](../../qa/occupation-aptitude-v03/report.md) compares 1,000 founders, inherited descendants and matched economies. Its candidate mappings are QA experiments; the canonical formula and gameplay balance remain unchanged. [Occupation profile calibration v0.3B (#85)](../../qa/occupation-profiles-v03b/report.md) follows up with differentiated weights and preferences, a limited mean-aware contrast, and paired base/protected-spoilage economy runs. Those profiles remain experimental pending a separate implementation decision.
 
 ## WORK-002 — Cultural occupation legacy
 **Status:** Canonical

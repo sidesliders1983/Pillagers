@@ -24,12 +24,18 @@ function cleanState(state) {
 }
 
 /** A separate QA compartment: only the declared experiment hooks change real engine execution. */
-export function foodEngine(scenario) {
+export function foodEngine(scenario, scoring = null) {
+    if (scoring !== null && (typeof scoring.score !== 'function' || typeof scoring.id !== 'string' ||
+        typeof scoring.hash !== 'string' || !/^[a-f0-9]{64}$/.test(scoring.hash))) {
+        throw new Error('Invalid experiment scoring adapter');
+    }
+    const cacheKey = scenario + (scoring ? '/' + scoring.id + '/' + scoring.hash : '');
+
     if (!Object.hasOwn(foodScenarios, scenario)) throw new Error('Unknown Food scenario');
-    if (engines.has(scenario)) return engines.get(scenario);
+    if (engines.has(cacheKey)) return engines.get(cacheKey);
     const recipe = foodScenarios[scenario];
     const control = studyEngine('control');
-    const enabled = recipe.spoilageBps !== 0 || recipe.capacity !== null;
+    const enabled = recipe.spoilageBps !== 0 || recipe.capacity !== null || scoring !== null;
     const cache = new Map();
     const sources = new Map();
     const groupCache = new WeakMap();
@@ -81,6 +87,17 @@ export function foodEngine(scenario) {
         let source = text(url);
         sources.set(url.pathname.split('/src/').at(-1), hash(source));
         if (url.pathname.endsWith('/simulation/Mechanics.ts')) {
+            if (scoring) {
+                const aptitude = `function aptitude(traits:CoreTraits, job:JobPrototype):number {
+    const fit = traitKeys.reduce((sum,key,index)=>sum+job.weights[index]*(1-Math.abs(traits[key]-job.preferences[index])),0);
+    return Math.round((.15+.85*fit)*10000);
+}`;
+                if (source.split(aptitude).length !== 2) throw new Error('Scoring boundary changed; review profile experiment');
+                source = source.replace(aptitude, `function aptitude(traits:CoreTraits, job:JobPrototype):number {
+    return studyScoring(traits,job);
+}`);
+            }
+
             const work = '        const efficiency=work.productivityBps;\n';
             if (source.split(work).length !== 2) throw new Error('Work boundary changed; review Food experiment');
             source = source.replace(work, '        const efficiency=studyCapacity(state,id,work.productivityBps,job.unitsPerWinter);\n');
@@ -91,9 +108,9 @@ export function foodEngine(scenario) {
         const compiled = ts.transpileModule(source, { compilerOptions: {
             module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022,
         } }).outputText;
-        new Function('require', 'module', 'exports', 'studySpoilage', 'studyCapacity', compiled)(
+        new Function('require', 'module', 'exports', 'studySpoilage', 'studyCapacity', 'studyScoring', compiled)(
             name => name.startsWith('.') ? load(new URL(name + '.ts', url)) : nativeRequire(name),
-            module, module.exports, spoil, limitWork);
+            module, module.exports, spoil, limitWork, scoring?.score);
         return module.exports;
     }
     const root = new URL('../../src/simulation/', import.meta.url);
@@ -102,7 +119,8 @@ export function foodEngine(scenario) {
     const weather = enabled ? load(new URL('Weather.ts', root)) : control.weather;
     const identity = { kind: 'food-calibration', version: 1, scenario, recipeHash: hash(JSON.stringify(recipe)),
         sourceHash: enabled ? hash(JSON.stringify([...sources].sort(([a], [b]) => a.localeCompare(b, 'en')))) : control.identity.sourceHash,
-        hookHash: hash(text(new URL('./food-engine.mjs', import.meta.url))) };
+        hookHash: hash(text(new URL('./food-engine.mjs', import.meta.url))),
+        ...(scoring ? { scoringId: scoring.id, scoringHash: scoring.hash } : {}) };
     const engine = {
         core, recipe, identity,
         create(seed, fullWorld = false) {
@@ -137,6 +155,6 @@ export function foodEngine(scenario) {
             return state;
         },
     };
-    engines.set(scenario, engine);
+    engines.set(cacheKey, engine);
     return engine;
 }

@@ -3,10 +3,10 @@ import { foodEngine, normalFoodNeed } from './food-engine.mjs';
 import { prepareFoodPolicy } from './food-policy.mjs';
 import { hash } from './aptitude-economy.mjs';
 
-export function runFoodScenario({ seed, scenario = 'B', winters = 25, resumeAt = null, fullWorld = false } = {}) {
+export function runFoodScenario({ seed, scenario = 'B', winters = 25, resumeAt = null, fullWorld = false,
+    experiment = foodEngine(scenario) } = {}) {
     if (!Number.isSafeInteger(winters) || winters < 1 || winters > 100) throw new Error('Invalid Winters');
     if (resumeAt !== null && (!Number.isSafeInteger(resumeAt) || resumeAt < 1 || resumeAt >= winters)) throw new Error('Invalid resume boundary');
-    const experiment = foodEngine(scenario);
     const core = experiment.core;
     let state = experiment.create(seed, fullWorld);
     const ruleConfiguration = { mechanics: structuredClone(state.mechanics.config),

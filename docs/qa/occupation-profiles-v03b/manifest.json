@@ -1,0 +1,7312 @@
+{
+  "version": 1,
+  "productionRulesChanged": false,
+  "baseRevision": "5c8a4af936901ef3d26464f93d6f3070e201be74",
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "seeds": {
+    "start": 0,
+    "count": 100
+  },
+  "winters": 25,
+  "campaigns": 1800,
+  "cohorts": {
+    "founders": 1000,
+    "descendants": 655,
+    "source": "#83 frozen control cohort"
+  },
+  "models": {
+    "A": {
+      "description": "Current profiles and canonical linear scoring"
+    },
+    "B": {
+      "description": "Differentiated profiles and canonical linear scoring"
+    },
+    "C": {
+      "description": "Differentiated profiles; 1.5x deviations from candidate expected role mean, centered at legacy expected role mean",
+      "gain": 1.5,
+      "minimumBps": 1500,
+      "maximumBps": 10000
+    }
+  },
+  "profiles": {
+    "A": {
+      "farmer": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.3,
+          0.2,
+          0.2,
+          0.05,
+          0.25
+        ],
+        "preferences": [
+          0.7,
+          0.6,
+          0.6,
+          0.35,
+          0.25
+        ]
+      },
+      "herder": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.2,
+          0.2,
+          0.2,
+          0.1,
+          0.3
+        ],
+        "preferences": [
+          0.6,
+          0.6,
+          0.6,
+          0.4,
+          0.3
+        ]
+      },
+      "fisher": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.25,
+          0.35,
+          0.15,
+          0.05,
+          0.2
+        ],
+        "preferences": [
+          0.7,
+          0.8,
+          0.6,
+          0.4,
+          0.3
+        ]
+      },
+      "hunter": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.2,
+          0.35,
+          0.15,
+          0.25,
+          0.05
+        ],
+        "preferences": [
+          0.7,
+          0.85,
+          0.6,
+          0.7,
+          0.35
+        ]
+      },
+      "textileWorker": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.1,
+          0.35,
+          0.3,
+          0.05,
+          0.2
+        ],
+        "preferences": [
+          0.4,
+          0.8,
+          0.75,
+          0.35,
+          0.3
+        ]
+      },
+      "smith": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.4,
+          0.1,
+          0.25,
+          0.05,
+          0.2
+        ],
+        "preferences": [
+          0.85,
+          0.5,
+          0.8,
+          0.3,
+          0.55
+        ]
+      },
+      "woodworker": {
+        "resource": "materials",
+        "unitsPerWinter": 5,
+        "weights": [
+          0.25,
+          0.25,
+          0.3,
+          0.05,
+          0.15
+        ],
+        "preferences": [
+          0.7,
+          0.75,
+          0.8,
+          0.35,
+          0.35
+        ]
+      },
+      "boatbuilder": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.25,
+          0.2,
+          0.4,
+          0.05,
+          0.1
+        ],
+        "preferences": [
+          0.7,
+          0.7,
+          0.9,
+          0.35,
+          0.35
+        ]
+      },
+      "trader": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.1,
+          0.3,
+          0.35,
+          0.2
+        ],
+        "preferences": [
+          0.4,
+          0.6,
+          0.8,
+          0.85,
+          0.25
+        ]
+      },
+      "leatherAndJewelleryMaker": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.1,
+          0.35,
+          0.3,
+          0.1,
+          0.15
+        ],
+        "preferences": [
+          0.45,
+          0.85,
+          0.8,
+          0.45,
+          0.3
+        ]
+      }
+    },
+    "B": {
+      "farmer": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.3,
+          0.1,
+          0.15,
+          0.05,
+          0.4
+        ],
+        "preferences": [
+          0.75,
+          0.35,
+          0.45,
+          0.2,
+          0.1
+        ]
+      },
+      "herder": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.1,
+          0.1,
+          0.15,
+          0.15,
+          0.5
+        ],
+        "preferences": [
+          0.35,
+          0.55,
+          0.4,
+          0.7,
+          0.05
+        ]
+      },
+      "fisher": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.15,
+          0.4,
+          0.1,
+          0.25,
+          0.1
+        ],
+        "preferences": [
+          0.5,
+          0.9,
+          0.35,
+          0.8,
+          0.35
+        ]
+      },
+      "hunter": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.25,
+          0.35,
+          0.05,
+          0.3,
+          0.05
+        ],
+        "preferences": [
+          0.85,
+          0.8,
+          0.3,
+          0.9,
+          0.6
+        ]
+      },
+      "textileWorker": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.45,
+          0.2,
+          0.05,
+          0.25
+        ],
+        "preferences": [
+          0.2,
+          0.9,
+          0.55,
+          0.15,
+          0.15
+        ]
+      },
+      "smith": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.4,
+          0.1,
+          0.35,
+          0.05,
+          0.1
+        ],
+        "preferences": [
+          0.95,
+          0.35,
+          0.9,
+          0.15,
+          0.45
+        ]
+      },
+      "woodworker": {
+        "resource": "materials",
+        "unitsPerWinter": 5,
+        "weights": [
+          0.3,
+          0.2,
+          0.35,
+          0.05,
+          0.1
+        ],
+        "preferences": [
+          0.8,
+          0.65,
+          0.65,
+          0.2,
+          0.2
+        ]
+      },
+      "boatbuilder": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.15,
+          0.15,
+          0.5,
+          0.1,
+          0.1
+        ],
+        "preferences": [
+          0.45,
+          0.55,
+          0.95,
+          0.65,
+          0.35
+        ]
+      },
+      "trader": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.1,
+          0.25,
+          0.45,
+          0.15
+        ],
+        "preferences": [
+          0.2,
+          0.4,
+          0.75,
+          0.95,
+          0.3
+        ]
+      },
+      "leatherAndJewelleryMaker": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.35,
+          0.35,
+          0.15,
+          0.1
+        ],
+        "preferences": [
+          0.25,
+          0.6,
+          0.9,
+          0.7,
+          0.5
+        ]
+      }
+    },
+    "C": {
+      "farmer": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.3,
+          0.1,
+          0.15,
+          0.05,
+          0.4
+        ],
+        "preferences": [
+          0.75,
+          0.35,
+          0.45,
+          0.2,
+          0.1
+        ]
+      },
+      "herder": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.1,
+          0.1,
+          0.15,
+          0.15,
+          0.5
+        ],
+        "preferences": [
+          0.35,
+          0.55,
+          0.4,
+          0.7,
+          0.05
+        ]
+      },
+      "fisher": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.15,
+          0.4,
+          0.1,
+          0.25,
+          0.1
+        ],
+        "preferences": [
+          0.5,
+          0.9,
+          0.35,
+          0.8,
+          0.35
+        ]
+      },
+      "hunter": {
+        "resource": "food",
+        "unitsPerWinter": 10,
+        "weights": [
+          0.25,
+          0.35,
+          0.05,
+          0.3,
+          0.05
+        ],
+        "preferences": [
+          0.85,
+          0.8,
+          0.3,
+          0.9,
+          0.6
+        ]
+      },
+      "textileWorker": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.45,
+          0.2,
+          0.05,
+          0.25
+        ],
+        "preferences": [
+          0.2,
+          0.9,
+          0.55,
+          0.15,
+          0.15
+        ]
+      },
+      "smith": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.4,
+          0.1,
+          0.35,
+          0.05,
+          0.1
+        ],
+        "preferences": [
+          0.95,
+          0.35,
+          0.9,
+          0.15,
+          0.45
+        ]
+      },
+      "woodworker": {
+        "resource": "materials",
+        "unitsPerWinter": 5,
+        "weights": [
+          0.3,
+          0.2,
+          0.35,
+          0.05,
+          0.1
+        ],
+        "preferences": [
+          0.8,
+          0.65,
+          0.65,
+          0.2,
+          0.2
+        ]
+      },
+      "boatbuilder": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.15,
+          0.15,
+          0.5,
+          0.1,
+          0.1
+        ],
+        "preferences": [
+          0.45,
+          0.55,
+          0.95,
+          0.65,
+          0.35
+        ]
+      },
+      "trader": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.1,
+          0.25,
+          0.45,
+          0.15
+        ],
+        "preferences": [
+          0.2,
+          0.4,
+          0.75,
+          0.95,
+          0.3
+        ]
+      },
+      "leatherAndJewelleryMaker": {
+        "resource": null,
+        "unitsPerWinter": 0,
+        "weights": [
+          0.05,
+          0.35,
+          0.35,
+          0.15,
+          0.1
+        ],
+        "preferences": [
+          0.25,
+          0.6,
+          0.9,
+          0.7,
+          0.5
+        ]
+      }
+    }
+  },
+  "policies": [
+    "default",
+    "random",
+    "aware"
+  ],
+  "economies": [
+    "base",
+    "protected"
+  ],
+  "domesticOnly": true,
+  "verificationSeeds": [
+    0,
+    7,
+    32,
+    99
+  ],
+  "identities": {
+    "A/default/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "A",
+      "policy": "default",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "dd59526b83556f4d1cc9690a5cafe78227f8e87dd57923d77b487982e564b020",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "A/default/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "A",
+      "policy": "default",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "dd59526b83556f4d1cc9690a5cafe78227f8e87dd57923d77b487982e564b020",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "A/random/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "A",
+      "policy": "random",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "dd59526b83556f4d1cc9690a5cafe78227f8e87dd57923d77b487982e564b020",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "A/random/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "A",
+      "policy": "random",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "dd59526b83556f4d1cc9690a5cafe78227f8e87dd57923d77b487982e564b020",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "A/aware/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "A",
+      "policy": "aware",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "dd59526b83556f4d1cc9690a5cafe78227f8e87dd57923d77b487982e564b020",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "A/aware/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "A",
+      "policy": "aware",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "dd59526b83556f4d1cc9690a5cafe78227f8e87dd57923d77b487982e564b020",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "B/default/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "B",
+      "policy": "default",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "B/default/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "B",
+      "policy": "default",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "B/random/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "B",
+      "policy": "random",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "B/random/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "B",
+      "policy": "random",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "B/aware/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "B",
+      "policy": "aware",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "B/aware/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "B",
+      "policy": "aware",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "C/default/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "C",
+      "policy": "default",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+        "scoringId": "profile-C-v1",
+        "scoringHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "C/default/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "C",
+      "policy": "default",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+        "scoringId": "profile-C-v1",
+        "scoringHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "C/random/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "C",
+      "policy": "random",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+        "scoringId": "profile-C-v1",
+        "scoringHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "C/random/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "C",
+      "policy": "random",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+        "scoringId": "profile-C-v1",
+        "scoringHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "C/aware/base": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "C",
+      "policy": "aware",
+      "economy": "base",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "B",
+        "recipeHash": "1c09eefa2d85f22b9ed9a7a02d0255c7a9b50794c9bba032f1f3c5fc800270da",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+        "scoringId": "profile-C-v1",
+        "scoringHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    },
+    "C/aware/protected": {
+      "kind": "occupation-profiles",
+      "version": 1,
+      "model": "C",
+      "policy": "aware",
+      "economy": "protected",
+      "modelHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+      "profileHash": "47c055366bae34d850f2bd34ae3fd8a657f7d330f2eeb8e2c7cb0005948b2b50",
+      "engine": {
+        "kind": "food-calibration",
+        "version": 1,
+        "scenario": "C10-safe",
+        "recipeHash": "951e85694fe14f2b44a8c3716cc3e47825196528beb918d871e8fdade813dd58",
+        "sourceHash": "e066f6d178ee10b1bb28168969e92656e90ea8b772aaf89a15a29acf9b5aee6b",
+        "hookHash": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+        "scoringId": "profile-C-v1",
+        "scoringHash": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9"
+      },
+      "adapterHash": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd"
+    }
+  },
+  "ruleConfigurations": {
+    "A/default/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "A/default/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "A/random/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "A/random/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "A/aware/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "A/aware/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.2,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.7,
+              0.6,
+              0.6,
+              0.35,
+              0.25
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.2,
+              0.2,
+              0.2,
+              0.1,
+              0.3
+            ],
+            "preferences": [
+              0.6,
+              0.6,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.15,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.7,
+              0.8,
+              0.6,
+              0.4,
+              0.3
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.2,
+              0.35,
+              0.15,
+              0.25,
+              0.05
+            ],
+            "preferences": [
+              0.7,
+              0.85,
+              0.6,
+              0.7,
+              0.35
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.8,
+              0.75,
+              0.35,
+              0.3
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.25,
+              0.05,
+              0.2
+            ],
+            "preferences": [
+              0.85,
+              0.5,
+              0.8,
+              0.3,
+              0.55
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.25,
+              0.25,
+              0.3,
+              0.05,
+              0.15
+            ],
+            "preferences": [
+              0.7,
+              0.75,
+              0.8,
+              0.35,
+              0.35
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.25,
+              0.2,
+              0.4,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.7,
+              0.7,
+              0.9,
+              0.35,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.3,
+              0.35,
+              0.2
+            ],
+            "preferences": [
+              0.4,
+              0.6,
+              0.8,
+              0.85,
+              0.25
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.35,
+              0.3,
+              0.1,
+              0.15
+            ],
+            "preferences": [
+              0.45,
+              0.85,
+              0.8,
+              0.45,
+              0.3
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "B/default/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "B/default/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "B/random/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "B/random/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "B/aware/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "B/aware/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "C/default/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "C/default/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "C/random/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "C/random/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "C/aware/base": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    },
+    "C/aware/protected": {
+      "mechanics": {
+        "mortalityBands": [
+          {
+            "minAge": 0,
+            "chanceBps": 10
+          },
+          {
+            "minAge": 16,
+            "chanceBps": 5
+          },
+          {
+            "minAge": 50,
+            "chanceBps": 50
+          },
+          {
+            "minAge": 60,
+            "chanceBps": 200
+          },
+          {
+            "minAge": 70,
+            "chanceBps": 500
+          },
+          {
+            "minAge": 80,
+            "chanceBps": 1000
+          },
+          {
+            "minAge": 90,
+            "chanceBps": 2000
+          }
+        ],
+        "foodAdultAge": 16,
+        "ageFullProductivityThrough": 49,
+        "agePenaltyBpsPerWinter": 200,
+        "ageProductivityFloorBps": 5000,
+        "collapseDebtWinters": 3,
+        "salvageBps": 5000,
+        "dominantLegacyChanceBps": 2500,
+        "fertilityMinAge": 18,
+        "fertilityMaxAge": 40,
+        "birthCooldownWinters": 2,
+        "childcareWinters": 5,
+        "careerMinimumGainBps": 1000,
+        "experienceRetentionBpsPerWinter": 100,
+        "apprenticeshipBonusBps": 1000,
+        "apprenticeshipTicks": 1000,
+        "switchProductivityBps": 7500,
+        "switchTicks": 1000,
+        "houseCost": 10,
+        "baseUpkeep": 1,
+        "upgradeCosts": [
+          5,
+          10,
+          20
+        ],
+        "upgradeBonusBps": [
+          0,
+          2500,
+          5000,
+          7500
+        ],
+        "tentProductivityBps": 5000,
+        "workAge": 16,
+        "adultAge": 18,
+        "childFood": 1,
+        "adultFood": 2,
+        "workPerUnit": 10000000,
+        "fertilityChanceBps": 2500,
+        "partnershipChanceBps": 1000,
+        "careerReviewWinters": 5,
+        "occupations": {
+          "farmer": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.3,
+              0.1,
+              0.15,
+              0.05,
+              0.4
+            ],
+            "preferences": [
+              0.75,
+              0.35,
+              0.45,
+              0.2,
+              0.1
+            ]
+          },
+          "herder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.1,
+              0.1,
+              0.15,
+              0.15,
+              0.5
+            ],
+            "preferences": [
+              0.35,
+              0.55,
+              0.4,
+              0.7,
+              0.05
+            ]
+          },
+          "fisher": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.15,
+              0.4,
+              0.1,
+              0.25,
+              0.1
+            ],
+            "preferences": [
+              0.5,
+              0.9,
+              0.35,
+              0.8,
+              0.35
+            ]
+          },
+          "hunter": {
+            "resource": "food",
+            "unitsPerWinter": 10,
+            "weights": [
+              0.25,
+              0.35,
+              0.05,
+              0.3,
+              0.05
+            ],
+            "preferences": [
+              0.85,
+              0.8,
+              0.3,
+              0.9,
+              0.6
+            ]
+          },
+          "textileWorker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.45,
+              0.2,
+              0.05,
+              0.25
+            ],
+            "preferences": [
+              0.2,
+              0.9,
+              0.55,
+              0.15,
+              0.15
+            ]
+          },
+          "smith": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.4,
+              0.1,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.95,
+              0.35,
+              0.9,
+              0.15,
+              0.45
+            ]
+          },
+          "woodworker": {
+            "resource": "materials",
+            "unitsPerWinter": 5,
+            "weights": [
+              0.3,
+              0.2,
+              0.35,
+              0.05,
+              0.1
+            ],
+            "preferences": [
+              0.8,
+              0.65,
+              0.65,
+              0.2,
+              0.2
+            ]
+          },
+          "boatbuilder": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.15,
+              0.15,
+              0.5,
+              0.1,
+              0.1
+            ],
+            "preferences": [
+              0.45,
+              0.55,
+              0.95,
+              0.65,
+              0.35
+            ]
+          },
+          "trader": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.1,
+              0.25,
+              0.45,
+              0.15
+            ],
+            "preferences": [
+              0.2,
+              0.4,
+              0.75,
+              0.95,
+              0.3
+            ]
+          },
+          "leatherAndJewelleryMaker": {
+            "resource": null,
+            "unitsPerWinter": 0,
+            "weights": [
+              0.05,
+              0.35,
+              0.35,
+              0.15,
+              0.1
+            ],
+            "preferences": [
+              0.25,
+              0.6,
+              0.9,
+              0.7,
+              0.5
+            ]
+          }
+        }
+      },
+      "landing": {
+        "initialFood": 30,
+        "initialMaterials": 5,
+        "longshipSalvage": 20,
+        "cattleAdultAge": 2,
+        "cattleYoungAdultAge": 1,
+        "adultCattleFood": 1,
+        "calfFood": 0,
+        "cowFoodPerWinter": 4,
+        "exposedProductivityBps": 5000,
+        "farmyardCapacity": 4,
+        "slaughterFood": 15,
+        "foundingCoupleChanceBps": 5000,
+        "foundingCoupleCap": 3,
+        "cattleBirthChanceBps": 5000,
+        "cattleFertileMinAge": 2,
+        "cattleFertileMaxAge": 12,
+        "cattleBirthInterval": 2,
+        "cattleMortalityYoungBps": 200,
+        "cattleMortalityAdultBps": 50,
+        "cattleMortalityOlderBps": 500,
+        "cattleMortalityOldBps": 1500,
+        "cattleCrowdingBps": 200,
+        "cattleWeatherMortalityBps": 0
+      },
+      "weather": {
+        "enabled": true,
+        "profiles": {
+          "Mild": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 11000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Normal": {
+            "probabilityBps": 5500,
+            "foodProductionBps": 10000,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 0,
+            "exposedCattleMortalityBps": 0,
+            "travelDurationBps": 10000,
+            "travelRiskBps": 0
+          },
+          "Harsh": {
+            "probabilityBps": 2000,
+            "foodProductionBps": 0,
+            "cattleConsumptionMultiplier": 1,
+            "tentMortalityBps": 50,
+            "exposedCattleMortalityBps": 500,
+            "travelDurationBps": 12500,
+            "travelRiskBps": 500,
+            "materialsProductionBps": 0,
+            "residentConsumptionBps": 15000,
+            "cattleConsumptionBps": 15000
+          },
+          "Severe": {
+            "probabilityBps": 500,
+            "foodProductionBps": 5000,
+            "cattleConsumptionMultiplier": 3,
+            "tentMortalityBps": 200,
+            "exposedCattleMortalityBps": 1500,
+            "travelDurationBps": 15000,
+            "travelRiskBps": 1500
+          }
+        }
+      }
+    }
+  },
+  "cohortSources": {
+    "founders": "ab8d57a61911dd9d07d13a79338c09399540ad9a304a2bc1354b0f4e4261ceba",
+    "descendants": "fc549ac9f84fa8fb7e95febc607c767b6bf4d288e96e92425561070959725a78"
+  },
+  "harnessHashes": {
+    "run-occupation-profiles.mjs": "8b10dc336ba569af5b9174bcbb83da3702e76c83ad7a7fff8a9195fd47d0e657",
+    "profile-models.mjs": "81a8c72e7cc1be9493e591ec3960aa2b13064336b4185a4a0b680a613289e1a9",
+    "profile-engine.mjs": "d8db87ee9ec4cd565d442c12784258ba14652bbc61fec145231ede162ce26edd",
+    "verify-profile-study.mjs": "7f4e7423621d9f7e21be095504c4d72cc3104dae3859cb770db390e0ac1d627e",
+    "profile-scenario.mjs": "2049f860b2f03b40180a8a46c58c9f49f8f6462582110781ea8c977b12947dc1",
+    "profile-worker.mjs": "23807f13bcc597e6ddffc67abeddb888b16ef7b7116975e7b2cc7abcd37bdbc5",
+    "profile-statistics.mjs": "62eb4d2343d4bc51fc3dbb1e5bf60a53de112e09a66e7f07261b5d0f1b110297",
+    "profile-study.mjs": "6db14d546b93eab66e89adc436b6ed15a6145319a463425a7e0e0dd674e6e52f",
+    "food-engine.mjs": "4054e97ebd3f5d0463560313f288ac486c292da0a2a486d1cf351a0c66cb8e75",
+    "food-scenario.mjs": "277fb76734e8a675805168ea7469b5a07844e7f1b70ab4485c315c4c443fe5e5",
+    "food-policy.mjs": "fd698b01610f23cc1628933ff0c8783f17260b51145fbd0ce5fa036667b6c757",
+    "food-recipes.mjs": "82a0676bfe4675249ebb91906b516f307d3fcc6ec91c35da197bad651e3497c6",
+    "aptitude-engine.mjs": "2d1137252d999b5b14708018c4083c0443af1ea810cd10a89bceca310910130a",
+    "aptitude-models.mjs": "f7fe3f4807242100b996223e1f7a75339f8214b279f2bb813f3c3e841fa26b98",
+    "aptitude-economy.mjs": "160a7728f7db297b763fc1b7c405e66cf431dce21f75538a53ba45d0086b8265",
+    "aptitude-statistics.mjs": "07148917d0cea73f02a8abd99d39723713a6bfa3531a58c6ae438c3cde07f985",
+    "aptitude-sampling.mjs": "43f1b98650b337ea82ddaf7ad67da3199b7aaf4c7d65662d47643e1f63162598",
+    "../load-typescript.mjs": "91a2a71a2f3534671016fac158b38ce44aa5eaec6b72c7de97e2676caa5b7b14"
+  },
+  "artifacts": [
+    {
+      "path": "descendants.json.gz",
+      "bytes": 101357,
+      "sha256": "1c4a7492b8ededae5d31a88d8d6a295cf8a86a57ebdb6ff6ca1b0da33141ae5d"
+    },
+    {
+      "path": "founders.json.gz",
+      "bytes": 157727,
+      "sha256": "c5ef2490124e45aba81bdebb59d021e209845d156d498a09588306e16254b1fe"
+    },
+    {
+      "path": "runs/seed-0.json.gz",
+      "bytes": 147138,
+      "sha256": "974707a081c6a8825825074f5e51e887addc959a5042ce077f01843a5155f27d"
+    },
+    {
+      "path": "runs/seed-1.json.gz",
+      "bytes": 148331,
+      "sha256": "58d5b4e36db8d33985d564f5bf41708ef2b8bfcbed7ede34bb1a996192d4db91"
+    },
+    {
+      "path": "runs/seed-10.json.gz",
+      "bytes": 147960,
+      "sha256": "3fa8ac32ef73fc159951e0deaceaeea5059be872b8cd4105be0ad7fa3bee0fb2"
+    },
+    {
+      "path": "runs/seed-11.json.gz",
+      "bytes": 148588,
+      "sha256": "005c2dacd6d4db1d9e65e7c72b794bf34c644d648c50ffa97e33e299da789ad3"
+    },
+    {
+      "path": "runs/seed-12.json.gz",
+      "bytes": 148806,
+      "sha256": "15488d24e488ccaa83e10934b02effd880720e37b7c3377b6f9a487acbc11b07"
+    },
+    {
+      "path": "runs/seed-13.json.gz",
+      "bytes": 145251,
+      "sha256": "c7398d9c90ba7f11fbdc044d780df73b952ae4d2ca6d724c77e31cc3dc1f0601"
+    },
+    {
+      "path": "runs/seed-14.json.gz",
+      "bytes": 149816,
+      "sha256": "509f24210b2a7737b064f2eeea9b929d78dfa3f63f6e6f501b1a4db7e1fdb2c8"
+    },
+    {
+      "path": "runs/seed-15.json.gz",
+      "bytes": 144638,
+      "sha256": "bae734e994e125041648e2b14a968f550ee43f218ee7e3df4d11e5512403c881"
+    },
+    {
+      "path": "runs/seed-16.json.gz",
+      "bytes": 144064,
+      "sha256": "8e70fd9925ae4582a45ceda8b783d6eb1b30d314807576a88ba334c74d97bbbb"
+    },
+    {
+      "path": "runs/seed-17.json.gz",
+      "bytes": 153451,
+      "sha256": "7d9a506d50bfd49d1112b50363324e8e8f67304f99a971b1854267ba2f0fe661"
+    },
+    {
+      "path": "runs/seed-18.json.gz",
+      "bytes": 152700,
+      "sha256": "ca5ed8c6e73039eac1c58d2c1553d4f485a86cc11ea807cd56096a60f15ae720"
+    },
+    {
+      "path": "runs/seed-19.json.gz",
+      "bytes": 146924,
+      "sha256": "2e592abd70f6acabdddcf8ad52cb15659181b9f6f3197d5e6f8b5a83d32bbf3a"
+    },
+    {
+      "path": "runs/seed-2.json.gz",
+      "bytes": 140083,
+      "sha256": "dceeb8ac96e8145c9f2ad6321b576298540b1b260c4338935716d51eeda9f99e"
+    },
+    {
+      "path": "runs/seed-20.json.gz",
+      "bytes": 140609,
+      "sha256": "810db9d94b47afe406057c5d33609bd1e94af1ced3f3ca5c597354720f076c8f"
+    },
+    {
+      "path": "runs/seed-21.json.gz",
+      "bytes": 141622,
+      "sha256": "9a3c6f21e4c5b7c46cf8d9c00cbd56d30acdff4a464690c449850582ef995333"
+    },
+    {
+      "path": "runs/seed-22.json.gz",
+      "bytes": 156506,
+      "sha256": "db9a0327854941d762449b1cee467a9ca261335d085d868e551c1fbe0a79a81b"
+    },
+    {
+      "path": "runs/seed-23.json.gz",
+      "bytes": 141200,
+      "sha256": "3267118d7c2b0b086717e939879896d3da4682ff55c3d18bc0c75ce65fd43020"
+    },
+    {
+      "path": "runs/seed-24.json.gz",
+      "bytes": 151774,
+      "sha256": "391350b772284023699b7b866a66a7a1259cc38eb65a4fde709e39bb13f3955e"
+    },
+    {
+      "path": "runs/seed-25.json.gz",
+      "bytes": 149666,
+      "sha256": "ef79bff28905e06a709ea3f172673343d7fdcdbb48504cf445826c77968772f4"
+    },
+    {
+      "path": "runs/seed-26.json.gz",
+      "bytes": 151257,
+      "sha256": "6bcc8e24136e0b787d4aef07cccb4133bae96673be01ff01bbe55b63b1d4b2b0"
+    },
+    {
+      "path": "runs/seed-27.json.gz",
+      "bytes": 152312,
+      "sha256": "9d0b925cabc5a26e45beca459449bfadc9afb06e4d7b77a2d02ae41d82eeec82"
+    },
+    {
+      "path": "runs/seed-28.json.gz",
+      "bytes": 147517,
+      "sha256": "d6389720cd18d614019f13c96cc069d828e641c44622b39297b0f84f8120c3fd"
+    },
+    {
+      "path": "runs/seed-29.json.gz",
+      "bytes": 153438,
+      "sha256": "369e97499998830f1197432577da01de85ee20594794f386e0b7d6c3b4e7922b"
+    },
+    {
+      "path": "runs/seed-3.json.gz",
+      "bytes": 146829,
+      "sha256": "44fdfec26789bb6e12e694868fb3595b4f98d3c6f23bef8a12a9a713c91c9d07"
+    },
+    {
+      "path": "runs/seed-30.json.gz",
+      "bytes": 139358,
+      "sha256": "a97d8fa99f84a5b74ea61976917360d81ddadd8d1b480190686fc78ae6818388"
+    },
+    {
+      "path": "runs/seed-31.json.gz",
+      "bytes": 151468,
+      "sha256": "570a418b62fd006497955174f74087f924faf10d30161dd77a053df9218ba849"
+    },
+    {
+      "path": "runs/seed-32.json.gz",
+      "bytes": 152889,
+      "sha256": "5157da553810184d01a41670baa45bfb628be7a796c74b73dee11beacfd10551"
+    },
+    {
+      "path": "runs/seed-33.json.gz",
+      "bytes": 150880,
+      "sha256": "5c2233668afcc54b5d128f62a94726a7e8a99a9353cc1d23f178aa84577ffff1"
+    },
+    {
+      "path": "runs/seed-34.json.gz",
+      "bytes": 154431,
+      "sha256": "88ea4d788978dc1a1ec17a1525544c9de708152a0a96aae10c5cba968d0c9770"
+    },
+    {
+      "path": "runs/seed-35.json.gz",
+      "bytes": 153718,
+      "sha256": "f58c8ebdf2b0a24c5bbd6bc3c7f37a12ce8b432f34585974870d04b08b047640"
+    },
+    {
+      "path": "runs/seed-36.json.gz",
+      "bytes": 133432,
+      "sha256": "fed8b23f44878af1f43842bb349c3e7b2ee7770647f78422d11249cd6a324fb0"
+    },
+    {
+      "path": "runs/seed-37.json.gz",
+      "bytes": 151539,
+      "sha256": "0d0146265682cda13f51dab42eb168d5821e3c0bac3f252aaddee7ee97b4536a"
+    },
+    {
+      "path": "runs/seed-38.json.gz",
+      "bytes": 139584,
+      "sha256": "a5daaa38b85490da0e799ca7265396e264ed9dc539f97032d225e88a078eab42"
+    },
+    {
+      "path": "runs/seed-39.json.gz",
+      "bytes": 152112,
+      "sha256": "fc341b94b3ede39b564c5e4fe7fc595d731e22803d5e178c1e7b382f03737220"
+    },
+    {
+      "path": "runs/seed-4.json.gz",
+      "bytes": 143739,
+      "sha256": "0ee298745b05104d6fc8fa22b52c86a2bfb12e871c1ba06c3ab299d284a7a000"
+    },
+    {
+      "path": "runs/seed-40.json.gz",
+      "bytes": 143583,
+      "sha256": "0a34258ec697d309866e83aefd45122fd7c9f4ca556adb2041a149045c7c570c"
+    },
+    {
+      "path": "runs/seed-41.json.gz",
+      "bytes": 154505,
+      "sha256": "56dccfdccd5fc5278920558a0bc97018a637b63a077a7da377ef8abbccbdf63f"
+    },
+    {
+      "path": "runs/seed-42.json.gz",
+      "bytes": 153164,
+      "sha256": "35a1f8cc4a84b65b44d3be2c59c94e32d7150fa2d10243d58ff9348181f8afbb"
+    },
+    {
+      "path": "runs/seed-43.json.gz",
+      "bytes": 145958,
+      "sha256": "7b99ec9b2048a9d4099c756a319ab0fbe176592727533ee30997f5471d130e26"
+    },
+    {
+      "path": "runs/seed-44.json.gz",
+      "bytes": 144796,
+      "sha256": "81b38f21ba360f0b4c5c5e99a52d4032443f01c48f3e7294658be6ce3a4c493a"
+    },
+    {
+      "path": "runs/seed-45.json.gz",
+      "bytes": 153849,
+      "sha256": "847f105d630f677454d84f9be5a4f71bb27300a07a9cfe058b3ba12b0972d40e"
+    },
+    {
+      "path": "runs/seed-46.json.gz",
+      "bytes": 141220,
+      "sha256": "8c2ade0c03f58ac595e2d00b4892f5bfb498f03d45827b856582ef522f536ce2"
+    },
+    {
+      "path": "runs/seed-47.json.gz",
+      "bytes": 147816,
+      "sha256": "ac6e020be241444530a41762c815c441fe52ae494892649039d92035d70b846b"
+    },
+    {
+      "path": "runs/seed-48.json.gz",
+      "bytes": 149092,
+      "sha256": "f1146af25e0d5deeac7695ce17616d5da4094a18916fee2f31fd427ba0fc1457"
+    },
+    {
+      "path": "runs/seed-49.json.gz",
+      "bytes": 154424,
+      "sha256": "99443f3aac8816ff80ed558fb62d54f326f59f1f6690bfed5153836e58d9de49"
+    },
+    {
+      "path": "runs/seed-5.json.gz",
+      "bytes": 147919,
+      "sha256": "99dce299facc9c835d76fa76f5e25bba9d4151ac370301ad6962b195abc02c80"
+    },
+    {
+      "path": "runs/seed-50.json.gz",
+      "bytes": 151617,
+      "sha256": "ca53ade440bdc7a96512cfaffd8d2044483b7c1951061d0a3c663794af510e47"
+    },
+    {
+      "path": "runs/seed-51.json.gz",
+      "bytes": 152453,
+      "sha256": "263332e842b314909c10c70de6c07a7472bc4901dc48eb0e67b396591ce1b23b"
+    },
+    {
+      "path": "runs/seed-52.json.gz",
+      "bytes": 153524,
+      "sha256": "0eb6515c503390a6901614cfbeb80a5c6a8d3afc5b00a73bbfaf9cc944ad2b3f"
+    },
+    {
+      "path": "runs/seed-53.json.gz",
+      "bytes": 150040,
+      "sha256": "0feb2a30fe103c782741ef2a14f699f3df8688f4a32b93e6177dda9cead7d699"
+    },
+    {
+      "path": "runs/seed-54.json.gz",
+      "bytes": 153327,
+      "sha256": "3fcef312b11412a81801df3953ca9715c842441f76c94f103b5a683a40d7c8b2"
+    },
+    {
+      "path": "runs/seed-55.json.gz",
+      "bytes": 153662,
+      "sha256": "329f5d984ded00d54b851083a57360ffaf836d5b811cf6d0b9ab87f408b7975e"
+    },
+    {
+      "path": "runs/seed-56.json.gz",
+      "bytes": 149762,
+      "sha256": "26bcbbac703cb9327da462b001fe0b3f4e2422d2e4c9427bf0f708df39a947b7"
+    },
+    {
+      "path": "runs/seed-57.json.gz",
+      "bytes": 143215,
+      "sha256": "8f06d1bf27f6fb9e38d1c80e6124628926899b76c5ebff5f41bae529a72b96c4"
+    },
+    {
+      "path": "runs/seed-58.json.gz",
+      "bytes": 156594,
+      "sha256": "e0d5f3628d3f8bb85eb5884e4416eaf921cabad22e2640973cc9796330ef4bdd"
+    },
+    {
+      "path": "runs/seed-59.json.gz",
+      "bytes": 153008,
+      "sha256": "2157d330e5157da1044c71b67353159e6de46f0cf499a19e8b65a42094363d16"
+    },
+    {
+      "path": "runs/seed-6.json.gz",
+      "bytes": 146871,
+      "sha256": "d6e8655862fe5458dc6831ab235663a6336b9c08e8c9fbe50ece47b5742435cc"
+    },
+    {
+      "path": "runs/seed-60.json.gz",
+      "bytes": 156140,
+      "sha256": "1e0af0416c078340e9fc2c2c69944730b17221834f8f17ffeda1689b5a2744c2"
+    },
+    {
+      "path": "runs/seed-61.json.gz",
+      "bytes": 142558,
+      "sha256": "e7bd8f01c9aa80913b53164149ba08f4d46aff980fc8bd176b25ac0ccd39b9be"
+    },
+    {
+      "path": "runs/seed-62.json.gz",
+      "bytes": 149317,
+      "sha256": "44a42360e657f81c125e9699d0ad6e7df99727e6a462950e1d2f86dedf8f61b5"
+    },
+    {
+      "path": "runs/seed-63.json.gz",
+      "bytes": 153299,
+      "sha256": "8eadd3936ce3977a82d44972ff4159681670ce11206dc10a1b962ddbf1360605"
+    },
+    {
+      "path": "runs/seed-64.json.gz",
+      "bytes": 146081,
+      "sha256": "03cda91e887d15c03da8e0d5fc5f09b6aecfccc9b974c9723d64ef2d31c68e83"
+    },
+    {
+      "path": "runs/seed-65.json.gz",
+      "bytes": 153278,
+      "sha256": "caa3da50be133a3eb3542841c32dd49935216bbdff520f7b6329891a91d9da71"
+    },
+    {
+      "path": "runs/seed-66.json.gz",
+      "bytes": 144222,
+      "sha256": "b59df96393aa0f123f5572a9bceaea962cb4260ca457601e0e1a09085836fbc6"
+    },
+    {
+      "path": "runs/seed-67.json.gz",
+      "bytes": 135192,
+      "sha256": "f34e5a36a4647e44c264a33bee23d4a5dce6de88b053ddaad3dd1cba75deb045"
+    },
+    {
+      "path": "runs/seed-68.json.gz",
+      "bytes": 142377,
+      "sha256": "d1e9cfccdde93a367ef60fcd6978a428d730686d73e36ce95a7c5bec6c48a644"
+    },
+    {
+      "path": "runs/seed-69.json.gz",
+      "bytes": 153151,
+      "sha256": "2f98f3674e9e3de739d01a6ed276628ab99aaba3b504ad265f1eb4f0be83a838"
+    },
+    {
+      "path": "runs/seed-7.json.gz",
+      "bytes": 139772,
+      "sha256": "5f7d36d60215e0c94badd20094dbfbe025c30709dfd6983c3e9cbead268f7122"
+    },
+    {
+      "path": "runs/seed-70.json.gz",
+      "bytes": 146114,
+      "sha256": "a3e4daa533b2f449b20a1ab3cdb138817c1b7bb1f6dce4893c1fabf5560d79c5"
+    },
+    {
+      "path": "runs/seed-71.json.gz",
+      "bytes": 145304,
+      "sha256": "4546ec2a52749464c1d1f81ceed97085de07e032368e53877546f04803fb3568"
+    },
+    {
+      "path": "runs/seed-72.json.gz",
+      "bytes": 161592,
+      "sha256": "33744259bceef52ce5608338f53d6d744b3089a3c905a37a3d6e29cdca2c0e90"
+    },
+    {
+      "path": "runs/seed-73.json.gz",
+      "bytes": 144744,
+      "sha256": "ff349c5e2b48523b658430dfd524dfe8f18ac26ed6c1305c4c4fa9942676cb1f"
+    },
+    {
+      "path": "runs/seed-74.json.gz",
+      "bytes": 144257,
+      "sha256": "c89c842e81ee660c5ea0411560aa7e51be5de7573131cc45647991cb6570a5dc"
+    },
+    {
+      "path": "runs/seed-75.json.gz",
+      "bytes": 136067,
+      "sha256": "3d56e6b25479f9b1f09de5ef04b4c569de009e695c34a80e90c17035d7424457"
+    },
+    {
+      "path": "runs/seed-76.json.gz",
+      "bytes": 150260,
+      "sha256": "249ff7f88ecd815da4620156e5f9cc4ed594ba762ed105fb65b9fde9adbc61bd"
+    },
+    {
+      "path": "runs/seed-77.json.gz",
+      "bytes": 149028,
+      "sha256": "d807dbde8e283fb2c905a30bf34bc5f950fdc4c8edd017b9ae2ff69c9a502258"
+    },
+    {
+      "path": "runs/seed-78.json.gz",
+      "bytes": 146030,
+      "sha256": "e01fc70256013039a0ea85cf033fd8b818ef301b29415dd4db4d4a51dda67dc0"
+    },
+    {
+      "path": "runs/seed-79.json.gz",
+      "bytes": 148406,
+      "sha256": "e24a919dfbb8deffa70f8cfd9491e3b61d6e8adc2cb7d3a9a27b6f986804cb2f"
+    },
+    {
+      "path": "runs/seed-8.json.gz",
+      "bytes": 142764,
+      "sha256": "b3d28d68f907230c8624a9f9d5f796b7f2e3994fcb76d88ed30c2b7945985998"
+    },
+    {
+      "path": "runs/seed-80.json.gz",
+      "bytes": 147149,
+      "sha256": "d492ea3d086b97c18da25d5e6bb9b05d80ca5bf7bbeec01b1d11b411359a3f10"
+    },
+    {
+      "path": "runs/seed-81.json.gz",
+      "bytes": 150016,
+      "sha256": "95968141b798a01e79ec537d6dc328117545cf5d2c0efe32dc72b6ddc102276e"
+    },
+    {
+      "path": "runs/seed-82.json.gz",
+      "bytes": 144755,
+      "sha256": "e74e47faebcbd00d1c7dac54671f8721ac25045df8747a58e9311b86d291eacf"
+    },
+    {
+      "path": "runs/seed-83.json.gz",
+      "bytes": 151310,
+      "sha256": "b6d0d7cd133d21065163162e7f15b3a598c74adba667959824f6139605359b25"
+    },
+    {
+      "path": "runs/seed-84.json.gz",
+      "bytes": 148235,
+      "sha256": "7db8714ce7e9674fe2c87e007a49a32e04d082d95fe652d472d4c401458226ad"
+    },
+    {
+      "path": "runs/seed-85.json.gz",
+      "bytes": 150744,
+      "sha256": "0f82950a4ecb6d91d8e42cecfb85ac659881a7877eacf9ac4fc596e0644fac07"
+    },
+    {
+      "path": "runs/seed-86.json.gz",
+      "bytes": 145686,
+      "sha256": "b3b4ea90bf34b8a8d11b391b85dabeffa3e462509ac345ad5b6533683ad87386"
+    },
+    {
+      "path": "runs/seed-87.json.gz",
+      "bytes": 164810,
+      "sha256": "a55c2c93f5ab04a629d711b5d859efa9074b1a4fb6adae363aaa527f9ef75875"
+    },
+    {
+      "path": "runs/seed-88.json.gz",
+      "bytes": 144678,
+      "sha256": "6cd38903a166e8102edf1331cc073fe5953c74f3add0ddda316cfdbd06ba7f24"
+    },
+    {
+      "path": "runs/seed-89.json.gz",
+      "bytes": 153933,
+      "sha256": "8b8eb57ecc4c4d8f7d5ed18e9a1e8aeb18652de83acc5cac31b704aad03bf553"
+    },
+    {
+      "path": "runs/seed-9.json.gz",
+      "bytes": 145439,
+      "sha256": "87731e3fdf439f10cbb30bda20d4bf8b03b3c98ff008615804512d2ffb4f0c67"
+    },
+    {
+      "path": "runs/seed-90.json.gz",
+      "bytes": 144033,
+      "sha256": "a8290010e01aebd4f1fba2457b8f212a9f5101f664d06736f820e86fa8a95022"
+    },
+    {
+      "path": "runs/seed-91.json.gz",
+      "bytes": 155782,
+      "sha256": "9d8097727492bd64fd0ba539cad1b04acb043df2d0103770b84a1bb902ae0dc0"
+    },
+    {
+      "path": "runs/seed-92.json.gz",
+      "bytes": 154974,
+      "sha256": "f80b305490b804caf227dfd9541bf6111c23614854b0ffb22f7e6b3066651f87"
+    },
+    {
+      "path": "runs/seed-93.json.gz",
+      "bytes": 145466,
+      "sha256": "a62a7107031ffe0ff72a0b23c1c819ea2e77bd81d8fbdd04d02247e5c8373f58"
+    },
+    {
+      "path": "runs/seed-94.json.gz",
+      "bytes": 133567,
+      "sha256": "7383110ce8e4a030a45a72da963cfda5aab371b1dba26881d9927d759ae064c6"
+    },
+    {
+      "path": "runs/seed-95.json.gz",
+      "bytes": 153988,
+      "sha256": "669c2fec9cee8175afde899853bd9f990c9adbdb639da4387b85039ee5d96599"
+    },
+    {
+      "path": "runs/seed-96.json.gz",
+      "bytes": 146841,
+      "sha256": "e8010a383b58e14168fa149b0a7ac2731498f748d05a4789512931223dc20009"
+    },
+    {
+      "path": "runs/seed-97.json.gz",
+      "bytes": 151163,
+      "sha256": "a40170f2838337eca417446b27ae896a68adc60798f775e64175533a4291ea8f"
+    },
+    {
+      "path": "runs/seed-98.json.gz",
+      "bytes": 148235,
+      "sha256": "2958dde00b0a2fe496ecc2210a7ef0c21858af9256f89c37fcd539365ec699d8"
+    },
+    {
+      "path": "runs/seed-99.json.gz",
+      "bytes": 155549,
+      "sha256": "76dc0d9de7b0ac2824880918997f51faf908dade0c941f4ef090e93b5e9bbefb"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 3704375,
+      "sha256": "6fb7de050bed9b58a5e0d6cdfa3ab3993ae6ed9f9b0af8f4a1702e7009529c66"
+    }
+  ]
+}

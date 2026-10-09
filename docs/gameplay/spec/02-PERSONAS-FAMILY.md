@@ -33,6 +33,21 @@ Rules:
 - Dominant marker lasts one generation only.
 - Numeric trait remains ordinary inheritable DNA afterward.
 
+## PERSON-004 — CharacterDNA trait meanings
+**Status:** Canonical semantics; occupation profiles remain Prototype values
+
+The five existing traits describe tendencies, not assigned jobs or moral worth. They apply equally to all sexes and cultural heritages.
+
+| Trait | Lower values | Higher values |
+|---|---|---|
+| Physicality | Less physical strength and force | Greater physical strength and force |
+| Agility | Less dexterity and nimbleness | Greater dexterity and nimbleness |
+| Intelligence | Less analytical and technical facility | Greater analytical and technical facility |
+| Cunning | Less tactical and opportunistic tendency | Greater tactical and opportunistic tendency |
+| Temperament | Calm, restrained, patient and steady | Impulsive, fiery, intense and quick to react |
+
+High temperament never means calmness, discipline or generic “good temperament.” Each occupation has its own preferred values; higher trait values are not universally better. Aptitude is weighted closeness to that preference profile. Neither these definitions nor the #85 research changes current scoring, role vectors or campaign defaults.
+
 ## FAMILY-001 — Separate family, household, residence and building
 **Status:** Canonical
 

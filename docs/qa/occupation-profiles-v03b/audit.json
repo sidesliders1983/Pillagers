@@ -1,0 +1,13 @@
+{
+  "campaigns": 1800,
+  "winterRows": 45000,
+  "founders": 1000,
+  "descendants": 655,
+  "artifacts": 103,
+  "historicalControls": 300,
+  "spoilageControls": 100,
+  "divergentRngPairs": 728,
+  "repeatAndSave": 72,
+  "fullWorld": 24,
+  "partialReplay": 6
+}
