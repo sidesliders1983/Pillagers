@@ -5,6 +5,7 @@ import { createWorld } from '../world/WorldFactory';
 import { FjordsideControls } from '../ui/FjordsideControls';
 import { Villager } from '../entities/Villager';
 import { MovementSystem } from '../systems/MovementSystem';
+import { MovementDebug } from '../ui/MovementDebug';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { worldConfig as config } from '../config/worldConfig';
 import { generateCharacterDNA } from '../characters/generateCharacterDNA';
@@ -74,6 +75,8 @@ export class Game {
         const axes = new AxesHelper(5);
         helpers.add(axes);
         scene.add(helpers);
+        const movementDebug = new MovementDebug(movement);
+        scene.add(movementDebug.root);
         const resize = () => { renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); };
         window.addEventListener('resize', resize);
         resize();
@@ -99,9 +102,12 @@ export class Game {
                         material.needsUpdate = true;
             });
         });
-        document.querySelector('#helpers')!.addEventListener('change', e => helpers.visible = (e.target as HTMLInputElement).checked);
+        document.querySelector('#helpers')!.addEventListener('change', event => {
+            const visible = (event.target as HTMLInputElement).checked;
+            helpers.visible = movementDebug.root.visible = visible;
+        });
         document.querySelector('#status')!.textContent = `FJORDSIDE · ${villagers.length} inhabitants`;
-        window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();profiles.dispose();seasons.dispose();controller.dispose();lighting.dispose();world.dispose();assets.dispose();renderer.dispose();window.removeEventListener('resize',resize);summary.remove();},{once:true});
+        window.addEventListener('pagehide',()=>{renderer.setAnimationLoop(null);for(const character of characters)character.model.dispose();profiles.dispose();seasons.dispose();controller.dispose();lighting.dispose();movementDebug.dispose();world.dispose();assets.dispose();renderer.dispose();window.removeEventListener('resize',resize);summary.remove();},{once:true});
         const cycle=new AnnualCycle(performance.now());let replacements=0;
         let manuallyPaused = false,heldAt = 0,heldMs = 0;
         const cycleNow = () => performance.now()-heldMs;
@@ -203,6 +209,7 @@ export class Game {
             frames++;
             controller.update(dt);
             if(!paused)movement.update(dt);
+            if (movementDebug.root.visible) movementDebug.update();
             lighting.update(time,cycle.progress);
             world.update(time,lighting,camera);
             seasons.update(lighting.visualization==='seasons'?cycle.progress:null);
