@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-09",
+  "assets": [
+    {
+      "path": "Assets/Characters/Human/Human-textured.glb",
+      "sha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD0.glb",
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD1.glb",
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD2.glb",
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    }
+  ],
+  "clips": [
+    {
+      "name": "Running",
+      "sourceSeconds": 0.6666666865348816,
+      "lastAuthoredKeySeconds": 0.6666666865348816,
+      "preparedLODSeconds": [
+        0.6666666865348816,
+        0.6666666865348816,
+        0.6666666865348816
+      ]
+    },
+    {
+      "name": "Walking",
+      "sourceSeconds": 1.0416666269302368,
+      "lastAuthoredKeySeconds": 1.0416666269302368,
+      "preparedLODSeconds": [
+        1.0416666269302368,
+        1.0416666269302368,
+        1.0416666269302368
+      ]
+    },
+    {
+      "name": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "sourceSeconds": 4.041666507720947,
+      "lastAuthoredKeySeconds": 4.041666507720947,
+      "preparedLODSeconds": [
+        4.041666507720947,
+        4.041666507720947,
+        4.041666507720947
+      ]
+    },
+    {
+      "name": "Attack",
+      "sourceSeconds": 2.8333332538604736,
+      "lastAuthoredKeySeconds": 2.8333332538604736,
+      "preparedLODSeconds": [
+        2.8333332538604736,
+        2.8333332538604736,
+        2.8333332538604736
+      ]
+    },
+    {
+      "name": "Fall_Dead_from_Abdominal_Injury",
+      "sourceSeconds": 3.5,
+      "lastAuthoredKeySeconds": 3.5,
+      "preparedLODSeconds": [
+        3.5,
+        3.5,
+        3.5
+      ]
+    },
+    {
+      "name": "Idle_02",
+      "sourceSeconds": 1.875,
+      "lastAuthoredKeySeconds": 1.875,
+      "preparedLODSeconds": [
+        1.875,
+        1.875,
+        1.875
+      ]
+    },
+    {
+      "name": "Idle_03",
+      "sourceSeconds": 4.291666507720947,
+      "lastAuthoredKeySeconds": 4.291666507720947,
+      "preparedLODSeconds": [
+        4.291666507720947,
+        4.291666507720947,
+        4.291666507720947
+      ]
+    },
+    {
+      "name": "Idle_11",
+      "sourceSeconds": 1.875,
+      "lastAuthoredKeySeconds": 1.875,
+      "preparedLODSeconds": [
+        1.875,
+        1.875,
+        1.875
+      ]
+    },
+    {
+      "name": "Idle_7",
+      "sourceSeconds": 8.75,
+      "lastAuthoredKeySeconds": 8.75,
+      "preparedLODSeconds": [
+        8.75,
+        8.75,
+        8.75
+      ]
+    },
+    {
+      "name": "Listening_Gesture",
+      "sourceSeconds": 9.333333015441895,
+      "lastAuthoredKeySeconds": 9.333333015441895,
+      "preparedLODSeconds": [
+        9.333333015441895,
+        9.333333015441895,
+        9.333333015441895
+      ]
+    },
+    {
+      "name": "Pull_Radish",
+      "sourceSeconds": 4.708333492279053,
+      "lastAuthoredKeySeconds": 4.708333492279053,
+      "preparedLODSeconds": [
+        4.708333492279053,
+        4.708333492279053,
+        4.708333492279053
+      ]
+    },
+    {
+      "name": "Talk_Passionately",
+      "sourceSeconds": 10.291666984558105,
+      "lastAuthoredKeySeconds": 10.291666984558105,
+      "preparedLODSeconds": [
+        10.291666984558105,
+        10.291666984558105,
+        10.291666984558105
+      ]
+    },
+    {
+      "name": "Unsteady_Walk",
+      "sourceSeconds": 3,
+      "lastAuthoredKeySeconds": 3,
+      "preparedLODSeconds": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "name": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "sourceSeconds": 0.0833333358168602,
+      "lastAuthoredKeySeconds": 0.0833333358168602,
+      "preparedLODSeconds": [
+        0.0833333358168602,
+        0.0833333358168602,
+        0.0833333358168602
+      ]
+    }
+  ]
+}

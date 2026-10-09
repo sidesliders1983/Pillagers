@@ -51,9 +51,19 @@ export class CharacterLabUI {
                     <canvas id="lab-preview" aria-label="Universal Human. Drag to rotate, scroll or pinch to zoom."></canvas>
                     <div class="lab-source-controls"><label>Body source<select id="lab-body-source"><option value="meshy">Meshy Human · textured</option><option value="golden-v04-preview">v0.4 · new body preview</option><option value="published">Published body · existing modules</option></select></label><p class="lab-note" id="lab-source-status"></p></div>
                     <label class="lab-source-controls">Animation<select id="lab-animation" aria-label="Available animations"></select></label>
+                    <div id="lab-ground-controls" class="lab-ground-controls"></div>
                     <div class="lab-button-row lab-model-tools" aria-label="Level of detail"><button data-action="lod0">LOD0</button><button data-action="lod1">LOD1</button><button data-action="lod2">LOD2</button></div>
                     <div class="lab-character-labels"><span id="lab-current-label"></span><span id="lab-comparison-label" hidden></span></div>
-                    <div class="lab-button-row lab-model-tools" aria-label="Fixed views"><button data-action="view-front">Front</button><button data-action="view-side">Side</button><button data-action="view-back">Back</button><button data-action="overview">RTS</button></div><div class="lab-pose-controls"><label>Clip time (seconds)<input id="lab-pose-time" type="number" min="0" max="60" step="0.05" value="0"></label><button data-action="freeze-pose">Freeze pose</button><button data-action="play">Play</button></div><div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button></div></div>
+                    <div class="lab-button-row lab-model-tools" aria-label="Fixed views"><button data-action="view-front">Front</button><button data-action="view-side">Side</button><button data-action="view-back">Back</button><button data-action="overview">RTS</button></div>
+                    <output id="lab-clip-duration" class="lab-clip-duration" aria-label="Animation clip duration"></output>
+                    <div class="lab-pose-controls">
+                        <label>Clip time (seconds)
+                            <input id="lab-pose-time" type="number" min="0" max="60" step="0.001" value="0">
+                        </label>
+                        <button data-action="freeze-pose">Freeze pose</button>
+                        <button data-action="play">Play</button>
+                    </div>
+                    <div class="lab-preview-tools"><span>Drag to rotate · Pinch / scroll to zoom</span><div><button data-action="reset-view">Reset view</button></div></div>
                     <div class="lab-dimensions" id="lab-dimensions"></div>
                     <details class="lab-panel lab-fit-debug"><summary>Attachment &amp; Fit debug · v0.1</summary>
                         <div class="lab-button-row">${['sockets','landmarks','cages','coverage','bounds'].map(key=>`<button data-action="debug-${key}" aria-pressed="false">${key}</button>`).join('')}</div>
@@ -114,6 +124,11 @@ export class CharacterLabUI {
             this.onDNA(next);
         });
         root.addEventListener('change',event=>{
+            // Commit an edited time before blur allows the live clock to update the field.
+            if ((event.target as HTMLElement).id === 'lab-pose-time') {
+                this.onAction('freeze-pose');
+                return;
+            }
             const choice=event.target as HTMLInputElement;
             if(choice.id==='lab-character-type'){const url=new URL(location.href);if(choice.value==='cow')url.searchParams.set('model','cow');else{url.searchParams.delete('model');url.searchParams.delete('variant');url.searchParams.delete('animation');}location.href=url.pathname+url.search+url.hash;return;}
             if(choice.id==='lab-animation'){this.onAction(`animation-${choice.value}`);return;}
@@ -134,7 +149,7 @@ export class CharacterLabUI {
         text('lab-sex',dna.sex==='female'?'Female':'Male');input('lab-seed',String(dna.seed));input('lab-age',String(dna.age));text('lab-age-value',`${dna.age} years`);
         const selected=resolveCharacterPresentation(dna,presentation,labBodyAsset(bodyPresentation.source??'published',2)),body=selected.profile,displayed=resolveLabBodyProfile(dna,bodyPresentation),candidate=bodyPresentation.source===goldenLabBody.source;
         input('lab-body-source',bodyPresentation.source??'published');
-        text('lab-source-status',bodyPresentation.source==='meshy'?'Meshy Human · original textures, age/DNA proportions and all three LODs.':candidate?'New body preview · LOD2. Sampled joints and motion pass; compound shape review remains open. New v0.4 modules use the Imagegen → Meshy pipeline; older modules are unavailable.':'Published body with hair and beard modules. Legacy clothing has been retired.');
+        text('lab-source-status',bodyPresentation.source==='meshy'?'Meshy Human · native rig and body-bound fitting previews. Inspect the outfit across body shapes and LODs.':candidate?'New body preview · LOD2. Sampled joints and motion pass; compound shape review remains open. New v0.4 modules use the Imagegen → Meshy pipeline; older modules are unavailable.':'Published body with hair and beard modules. Legacy clothing has been retired.');
         document.querySelectorAll<HTMLButtonElement>('[aria-label="Level of detail"] button').forEach(button=>button.disabled=candidate&&button.dataset.action!=='lod2');
         document.querySelectorAll<HTMLOptionElement>('#lab-body-preset option').forEach(option=>{if(labCandidatePresetNames.includes(option.value as typeof labCandidatePresetNames[number]))option.disabled=!candidate;});
         input('lab-body-preset',bodyPresentation.preset);input('lab-body-height',String(displayed.profile.height));text('lab-body-height-value',`${Math.round(displayed.profile.height*100)} cm`);
@@ -167,11 +182,12 @@ export class CharacterLabUI {
         (document.getElementById('fit-hair') as HTMLInputElement).disabled=!selected.hairId;
         (document.getElementById('fit-beard') as HTMLInputElement).disabled=!selected.beardId;
         if(bodyPresentation.source==='meshy'){
-            for(const id of ['lab-module-hair','lab-module-beard','lab-module-outfit','lab-module-equipment','lab-hair-color-mode','lab-hair-color','fit-hair','fit-beard','fit-clothing','lab-equipment-socket'])(document.getElementById(id) as HTMLInputElement).disabled=true;
+            for(const id of ['fit-hair','fit-beard','fit-clothing','lab-equipment-socket'])(document.getElementById(id) as HTMLInputElement).disabled=true;
+            for(const id of ['lab-module-outfit','lab-module-equipment'])(document.getElementById(id) as HTMLSelectElement).disabled=dna.age<18;
         }
-        document.querySelectorAll<HTMLButtonElement>('[data-action^="debug-"]').forEach(button=>button.disabled=bodyPresentation.source==='meshy');
+        document.querySelectorAll<HTMLButtonElement>('[data-action^="debug-"]').forEach(button=>button.disabled=false);
         const breasts=document.getElementById('lab-body-Breasts') as HTMLInputElement;breasts.disabled=dna.age<18||bodyPresentation.source==='meshy';
-        text('lab-module-status',bodyPresentation.source==='meshy'?'This body uses its authored shirt and underwear. Additional appearance modules need Meshy-specific fitting.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
+        text('lab-module-status',bodyPresentation.source==='meshy'?'Tunic, trousers and boots · fitting test fixture. Check neutral, narrow and broad adults during Idle, Walk and Run. Artwork refinement is deferred.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
         (document.querySelector('[data-action="reset-presentation"]') as HTMLButtonElement).disabled=false;
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys.filter(key=>key!=='physicality')){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}

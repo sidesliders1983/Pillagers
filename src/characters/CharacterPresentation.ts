@@ -28,7 +28,7 @@ export function parseCharacterPresentation(value:unknown=defaultCharacterPresent
     return result;
 }
 export function presentationChoices(type:'hair'|'beard'|'garment'|'equipment',body?:BodyAssetIdentity){
-    return characterAssets.filter(asset=>asset.type===type&&characterAssetFitsBody(asset,body)).map(asset=>({id:asset.id,label:(asset.style??asset.id).replaceAll('-',' ')+(asset.reviewStatus==='preview'?' (preview)':'')}));
+    return characterAssets.filter(asset=>asset.type===type&&characterAssetFitsBody(asset,body)).map(asset=>({id:asset.id,label:(asset.label??asset.style??asset.id).replaceAll('-',' ')+(asset.reviewStatus==='preview'?' (preview)':'')}));
 }
 export function resolveCharacterPresentation(dna:CharacterDNA,value:unknown=defaultCharacterPresentation,body?:BodyAssetIdentity){
     const presentation=parseCharacterPresentation(value),base=universalHumanProfile(dna),v04=!!body&&body.id!=='body/universal-human';
@@ -53,7 +53,8 @@ export function resolveCharacterPresentation(dna:CharacterDNA,value:unknown=defa
     const beardEligible=base.age>=18&&base.masculinity>.5;
     const beardId=beardEligible?select(presentation.beard,automatic('beard',base.appearance.beardStyle==='none'?'':'beard/'+base.appearance.beardStyle)):null;
     const outfitId=select(presentation.outfit,automatic('garment',''));
-    const equipmentId=select(presentation.equipment,automatic('equipment',''));
+    let equipmentId=select(presentation.equipment,automatic('equipment',''));
+    if(equipmentId&&characterAsset(equipmentId).metadata?.dependency?.module!==undefined&&characterAsset(equipmentId).metadata!.dependency!.module!==outfitId)equipmentId=null;
     const equipmentSocket=equipmentId?(presentation.equipmentSocket==='auto'?moduleAtEquipmentSocket(characterAsset(equipmentId).metadata!).anchor:moduleAtEquipmentSocket(characterAsset(equipmentId).metadata!,presentation.equipmentSocket).anchor):null;
     const profile={...base,appearance:{...base.appearance,
         hairStyle:hairId?characterAsset(hairId).style as HairStyle:base.appearance.hairStyle,

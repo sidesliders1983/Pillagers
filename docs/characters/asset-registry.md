@@ -196,3 +196,9 @@ or changes runtime attachment policy.
 ## Lab preview validation context
 
 The strict validator and runtime plan continue to reject unreviewed modules by default. CI explicitly passes --lab-previews to audit the existing Lab-only preview entries as well as accepted assets. This opt-in still runs topology, exact source/hash/receipt checks, compatible-body identity, Golden fits, supported carries, motion, budgets, removal and source immutability. It never promotes preview status or makes a preview eligible for automatic appearance. The CLI output identifies this preview audit; visual approval remains pending. Exact public authoring receipt bytes are preserved with Git attributes on Windows and Linux.
+
+## Body-bound Meshy previews
+
+The body-bound scope admits exact body/LOD SHA identities under the existing registry. One body ID may have multiple distinct compatible LOD hashes; compatibility must match ID **and** hash. A native module carries a pillagers-fit/0.2 binding path/SHA/rig signature. Authored-template provenance verifies source body, recipe, pipeline, native weight authority and exact GLB/binding bytes. Providers/concepts are null unless actually used.
+
+Preview modules require an explicit Lab choice and never become automatic World clothing. The outfit is a single full-slot assembly of tunic, trousers and boots, with an adult-only review scope. Its garment-attached pouch depends on the outfit's declared belt frame. Swaps/removal restore owned coverage geometry, including partial cuff cuts and common body/clothing rims, and remove dependencies. Snapshots reject changed module or sidecar identities. Strict validation still rejects unapproved previews; the lab-previews option performs their technical audits while leaving visual approval pending.

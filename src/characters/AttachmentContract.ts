@@ -32,7 +32,7 @@ export interface EquipmentBindings {grip:RigidFrame;sockets:Partial<Record<Equip
 export const garmentBindBones=['Hips','Chest','Neck','UpperArm_L','UpperArm_R','LowerArm_L','LowerArm_R','Hand_L','Hand_R','UpperLeg_L','UpperLeg_R','LowerLeg_L','LowerLeg_R','Foot_L','Foot_R','Toe_L','Toe_R'] as const;
 export type GarmentBindBone=typeof garmentBindBones[number];
 export interface ModuleMetadata {
-    version:typeof attachmentVersion;
+    version:typeof attachmentVersion|'pillagers-fit/0.2';
     id:string;
     type:'hair'|'beard'|'mask'|'garment'|'equipment';
     anchor:SocketName;
@@ -47,7 +47,10 @@ export interface ModuleMetadata {
     coverageBands?:Partial<Record<CoverageZone,{minY?:number;maxY?:number}>>;
     clearance:number;
     /** All imported geometry must first be calibrated to +Y up, +Z front. */
-    authoringFrame:'canonical'|'measured-reference-head';
+    authoringFrame:'canonical'|'measured-reference-head'|'meshy-native';
+    nativeBinding?:{path:string;sha256:string;rigSignature:string};
+    dependency?:{module:string;frame:string};
+    accessorySlot?:'belt';
     sourceStyle?:string;
     canonicalHeadSize?:readonly [number,number,number];
     attachmentBand?:{minimumY:number|null;maximumY?:number|null};
@@ -59,6 +62,14 @@ export interface ModuleMetadata {
     trim?:{min:readonly (number|null)[];max:readonly (number|null)[]};
 }
 export function validateModule(metadata:ModuleMetadata){
+    if(metadata.version==='pillagers-fit/0.2'){
+        const binding=metadata.nativeBinding;
+        if(!metadata.id||!['hair','beard','garment','equipment'].includes(metadata.type)||metadata.authoringFrame!=='meshy-native'||!Object.hasOwn(socketDefinitions,metadata.anchor)||!binding||!/^\/[\w/-]+\.binding\.json$/.test(binding.path)||![/^[a-f0-9]{64}$/.test(binding.sha256),/^[a-f0-9]{64}$/.test(binding.rigSignature)].every(Boolean)||!Number.isFinite(metadata.clearance)||metadata.clearance<0)throw new Error('Invalid native body-bound module contract');
+        if(metadata.type==='garment'&&(metadata.fitMode!=='drape'||!['upper','lower','full','over'].includes(metadata.slot??'')))throw new Error('Native garments require wardrobe occupancy');
+        if((metadata.type==='hair'||metadata.type==='beard')&&metadata.fitMode!=='conform')throw new Error('Native head modules require conform bindings');
+        if(metadata.type==='equipment'&&(metadata.fitMode!=='rigid'||metadata.accessorySlot!=='belt'||!metadata.dependency?.module||!metadata.dependency.frame))throw new Error('Native accessories require a declared garment frame');
+        return metadata;
+    }
     if(!['hair','beard','mask','garment','equipment'].includes(metadata.type)||!['conform','drape','rigid'].includes(metadata.fitMode)||!['canonical','measured-reference-head'].includes(metadata.authoringFrame))throw new Error('Unknown module type, fit mode or authoring frame.');
     if(metadata.version!==attachmentVersion||!metadata.id||!Object.hasOwn(socketDefinitions,metadata.anchor))throw new Error('Invalid attachment contract or socket.');
     if(metadata.fitMode!=='rigid'&&(!metadata.fitCage||!cageNames.includes(metadata.fitCage)))throw new Error('A fitted module needs a known cage.');
@@ -107,6 +118,7 @@ export function validateModule(metadata:ModuleMetadata){
 export function moduleAtEquipmentSocket(metadata:ModuleMetadata,socket?:EquipmentSocket):ModuleMetadata {
     validateModule(metadata);
     if(socket===undefined)return metadata;
+    if(metadata.version==='pillagers-fit/0.2')throw new Error('This accessory uses its garment frame; a body carry override is unsupported');
     if(metadata.type!=='equipment'||!metadata.equipmentBindings||!Object.hasOwn(metadata.equipmentBindings.sockets,socket))throw new Error('Unsupported equipment carry socket.');
     return validateModule({...metadata,anchor:socket});
 }

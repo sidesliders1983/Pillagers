@@ -126,5 +126,8 @@ export const STYLE_FAMILY_PROFILES=Object.freeze({
  'v04-outfit-source':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'v04-outfit-source-vertex-palette/1',maxTriangles:2400,maxRenderVertices:7200,maxMaterials:1,maxColors:8,closedTopology:false,facetUnit:'coplanar-region'}),
  'v04-outfit-runtime':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'v04-outfit-runtime-vertex-palette/1',maxTriangles:4400,maxRenderVertices:13200,maxMaterials:1,maxColors:8,closedTopology:false,facetUnit:'coplanar-region'}),
  'v04-equipment-source':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'v04-equipment-source-vertex-palette/1',maxTriangles:1000,maxRenderVertices:3000,maxMaterials:1,maxColors:4,closedTopology:true,facetUnit:'coplanar-region'}),
+ 'meshy-v2-head':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'meshy-v2-head/1',maxTriangles:600,maxRenderVertices:1800,maxMaterials:1,maxColors:4,closedTopology:false,facetUnit:'coplanar-region'}),
+ 'meshy-v2-clothing':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'meshy-v2-clothing/1',maxTriangles:1700,maxRenderVertices:5100,maxMaterials:1,maxColors:4,closedTopology:false,facetUnit:'coplanar-region'}),
+ 'meshy-v2-accessory':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'meshy-v2-accessory/1',maxTriangles:300,maxRenderVertices:900,maxMaterials:1,maxColors:4,closedTopology:true,facetUnit:'coplanar-region'}),
  'diagnostic-triangle':Object.freeze({...DEFAULT_VERTEX_PALETTE_PROFILE,id:'diagnostic-triangle-vertex-palette/1',facetUnit:'triangle'}),
 });

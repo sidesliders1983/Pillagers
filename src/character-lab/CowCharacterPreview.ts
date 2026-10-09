@@ -1,4 +1,4 @@
-import {AnimationAction,AnimationMixer,Color,DirectionalLight,GridHelper,Group,HemisphereLight,Mesh,MeshStandardMaterial,MOUSE,PerspectiveCamera,PlaneGeometry,Scene} from 'three';
+import {AnimationAction,AnimationMixer,Color,DirectionalLight,HemisphereLight,Mesh,MOUSE,PerspectiveCamera,Scene} from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
@@ -7,6 +7,7 @@ import {defaultDNA} from '../characters/CharacterDNA';
 import {meshyHumanFactory,MeshyHuman} from '../characters/MeshyHuman';
 
 import {CharacterLabUI,LabAction} from './CharacterLabUI';
+import {PreviewGround} from './PreviewGround';
 
 type Clip='Idle'|'Graze'|'Walk'|'HumanInteraction';
 const COWS={
@@ -35,8 +36,7 @@ export class CowCharacterPreview {
  private view='side';
  private paused=false;
  private speed=1;
- private ground=new Group();
- private walkDistance=0;
+ private ground = new PreviewGround({color: '#a1a583', floorHeight: -.009});
  private human?:MeshyHuman;
  private humanLoading?:Promise<void>;
  private last=performance.now();
@@ -52,7 +52,7 @@ export class CowCharacterPreview {
   (document.querySelector('#lab-character-type') as HTMLSelectElement).value='cow';
   const sidebar=document.querySelector<HTMLElement>('.lab-controls')!;
   const status=document.querySelector('#lab-status')!;
-  sidebar.innerHTML='<div class="lab-section-heading"><h2>01 <span>'+this.cow.label+'</span></h2><span class="lab-badge">PROTOTYPE</span></div><label class="lab-note" for="lab-cow-variant">Cow variant</label><select id="lab-cow-variant">'+Object.entries(COWS).map(([id,cow])=>'<option value="'+id+'">'+cow.label+'</option>').join('')+'</select><p class="lab-note">Four authored animations on each original textured cow. Select an animation below the preview.</p><div class="lab-slider"><label for="lab-cow-speed">Playback speed <output id="lab-cow-speed-value">1.00×</output></label><input id="lab-cow-speed" type="range" min="0.25" max="2" step="0.05" value="1"></div><label class="lab-checkbox"><input id="lab-cow-ground" type="checkbox" checked>Moving ground while walking</label><p class="lab-note">The ground follows the authored walking pace so hoof contact can be inspected. Cow withers: '+this.cow.withers.toFixed(2)+' m. Reference human: 1.65 m.</p><label class="lab-checkbox"><input id="lab-cow-human" type="checkbox" checked>Show human during interaction</label><p class="lab-note" id="lab-cow-description"></p>';
+  sidebar.innerHTML='<div class="lab-section-heading"><h2>01 <span>'+this.cow.label+'</span></h2><span class="lab-badge">PROTOTYPE</span></div><label class="lab-note" for="lab-cow-variant">Cow variant</label><select id="lab-cow-variant">'+Object.entries(COWS).map(([id,cow])=>'<option value="'+id+'">'+cow.label+'</option>').join('')+'</select><p class="lab-note">Four authored animations on each original textured cow. Select an animation below the preview.</p><div class="lab-slider"><label for="lab-cow-speed">Playback speed <output id="lab-cow-speed-value">1.00×</output></label><input id="lab-cow-speed" type="range" min="0.25" max="2" step="0.05" value="1"></div><p class="lab-note">The ground follows the authored walking pace so hoof contact can be inspected. Cow withers: '+this.cow.withers.toFixed(2)+' m. Reference human: 1.65 m.</p><label class="lab-checkbox"><input id="lab-cow-human" type="checkbox" checked>Show human during interaction</label><p class="lab-note" id="lab-cow-description"></p>';
   const variantChoice=document.querySelector<HTMLSelectElement>('#lab-cow-variant')!;variantChoice.value=this.variant;
   variantChoice.addEventListener('change',()=>{const url=new URL(location.href);url.searchParams.set('variant',variantChoice.value);url.searchParams.set('animation',this.clip);location.href=url.pathname+url.search+url.hash;});
   sidebar.append(status);
@@ -79,10 +79,8 @@ export class CowCharacterPreview {
   sun.position.set(3,6,4);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);
   sun.shadow.camera.left=-4;sun.shadow.camera.right=4;sun.shadow.camera.top=4;sun.shadow.camera.bottom=-4;sun.shadow.bias=-0.00015;
   this.scene.add(sun);
-  const floor=new Mesh(new PlaneGeometry(20,20),new MeshStandardMaterial({color:'#a1a583',roughness:1}));
-  floor.rotation.x=-Math.PI/2;floor.position.y=-0.009;floor.receiveShadow=true;this.scene.add(floor);
-  const grid=new GridHelper(20,20,'#828767','#969b79');grid.position.y=-0.006;
-  this.ground.add(grid);this.scene.add(this.ground);
+  this.scene.add(this.ground.root);
+  this.ground.bindControls(document.getElementById('lab-ground-controls')!);
   this.controls=new OrbitControls(this.camera,this.canvas);
   this.controls.target.set(0,.80,0);this.controls.mouseButtons={LEFT:MOUSE.PAN,MIDDLE:MOUSE.DOLLY,RIGHT:MOUSE.ROTATE};
   this.controls.minDistance=1.2;this.controls.maxDistance=15;this.controls.maxPolarAngle=Math.PI/2-0.02;
@@ -90,7 +88,11 @@ export class CowCharacterPreview {
   this.setCamera('side');
   const resize=()=>{const r=this.canvas.getBoundingClientRect();this.renderer.setSize(r.width,r.height,false);this.camera.aspect=r.width/Math.max(1,r.height);this.camera.updateProjectionMatrix();};
   new ResizeObserver(resize).observe(this.canvas);resize();
-  document.querySelector('#lab-cow-speed')!.addEventListener('input',event=>{this.speed=Number((event.target as HTMLInputElement).value);document.querySelector('#lab-cow-speed-value')!.textContent=this.speed.toFixed(2)+'×';});
+  document.querySelector('#lab-cow-speed')!.addEventListener('input', event => {
+   this.speed = Number((event.target as HTMLInputElement).value);
+   document.querySelector('#lab-cow-speed-value')!.textContent = this.speed.toFixed(2) + '×';
+   this.syncGroundPlayback();
+  });
   document.querySelector('#lab-cow-human')!.addEventListener('change',()=>{if(this.clip==='HumanInteraction')void this.ensureHuman();if(this.human)this.human.root.visible=this.showHuman();this.setCamera(this.view);});
   try{
    const response=await fetch('/game-assets/cattle/'+this.variant+'/manifest.json');
@@ -111,10 +113,10 @@ export class CowCharacterPreview {
   this.last=performance.now();
   this.renderer.setAnimationLoop(()=>{
    const now=performance.now(),dt=Math.min((now-this.last)/1000,.05);this.last=now;
-   if(this.mixer&&this.action&&!this.paused){this.mixer.update(dt*this.speed);if(this.clip==='Walk')this.walkDistance+=dt*this.speed*this.manifest.walkSpeedMps;}
+   if(this.mixer&&this.action&&!this.paused){this.mixer.update(dt*this.speed);}
    if(this.human&&!this.paused)this.human.update(dt*this.speed);
-   const move=(document.querySelector('#lab-cow-ground') as HTMLInputElement).checked;
-   this.ground.position.z=this.clip==='Walk'&&move?-(this.walkDistance%1):0;
+   this.syncGroundPlayback();
+   this.ground.advance(dt);
    if(this.action){if(document.activeElement!==this.time)this.time.value=this.action.time.toFixed(3);this.canvas.dataset.time=this.action.time.toFixed(3);}
    this.renderer.render(this.scene,this.camera);
   });
@@ -138,7 +140,7 @@ export class CowCharacterPreview {
  }
  private play(clip:Clip){
   if(!this.mixer||!this.actions.has(clip))return;
-  this.mixer.stopAllAction();this.clip=clip;this.action=this.actions.get(clip)!;this.action.reset().play();this.mixer.update(0);this.walkDistance=0;this.paused=false;
+  this.mixer.stopAllAction();this.clip=clip;this.action=this.actions.get(clip)!;this.action.reset().play();this.mixer.update(0);this.ground.sample(0);this.paused=false;
   this.time.max=String(this.action.getClip().duration);
   (document.querySelector('#lab-animation') as HTMLSelectElement).value=clip;this.canvas.dataset.animation=clip;this.setCamera(this.view);
   const descriptions:Record<Clip,string>={Idle:this.variant==='young-adult'?'Quiet standing with subtle breathing and tail movement.':'Quiet standing with subtle breathing, ears and tail.',Graze:'Head lowers to a gentle grazing pose with subtle shoulder and head turns, then lifts.',Walk:'Four-beat walk. The moving ground follows the authored '+this.manifest.walkSpeedMps.toFixed(2)+' m/s pace.',HumanInteraction:'Attentive head lift with gentle up-and-down movement toward a human.'};
@@ -146,8 +148,22 @@ export class CowCharacterPreview {
   if(this.human)this.human.root.visible=this.showHuman();
   if(clip==='HumanInteraction')void this.ensureHuman();
  }
- private sample(time:number){if(!this.action)return;this.action.time=Math.max(0,Math.min(time,this.action.getClip().duration));this.mixer.update(0);this.walkDistance=this.action.time*this.manifest.walkSpeedMps;}
- private report(){this.canvas.dataset.paused=String(this.paused);this.ui.status(this.cow.label+' · '+this.clip+(this.paused?' · frozen pose':'')+' · Blender '+this.manifest.blenderVersion);}
+ private sample(time: number) {
+  if (!this.action) return;
+  this.action.time = Math.max(0, Math.min(time, this.action.getClip().duration));
+  this.mixer.update(0);
+  this.ground.sample(this.action.time * this.manifest.walkSpeedMps);
+ }
+ private syncGroundPlayback() {
+  this.ground.setPlayback(this.clip === 'Walk' ? this.manifest.walkSpeedMps : 0,
+   this.speed, this.paused || !this.action);
+ }
+ private report() {
+  this.syncGroundPlayback();
+  this.canvas.dataset.paused = String(this.paused);
+  this.ui.status(this.cow.label + ' · ' + this.clip + (this.paused ? ' · frozen pose' : '')
+   + ' · Blender ' + this.manifest.blenderVersion);
+ }
  private showHuman(){return this.clip==='HumanInteraction'&&(document.querySelector('#lab-cow-human') as HTMLInputElement).checked;}
  private ensureHuman(){
   if(!this.showHuman())return Promise.resolve();

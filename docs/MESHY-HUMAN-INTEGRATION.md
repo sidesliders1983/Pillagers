@@ -6,7 +6,7 @@ they do not rename or convert the source skeleton to PillagersHumanRig.
 
 ## Open locally
 
-The original `/character-lab` now defaults to Meshy Human and uses its existing DNA, body overrides, pin/comparison, fixed views, pose sampling, LOD and snapshot controls. `/character-lab?source=meshy` opens that same original Lab. Published and v0.4 bodies remain selectable. Meshy snapshots record the exact prepared LOD hash. Incompatible appearance, breast-shape and fit-debug controls are disabled for Meshy; existing source bodies retain their tools. Vite scans every application entry before route loading to avoid stale dependency modules when changing routes.
+The original `/character-lab` now defaults to Meshy Human and uses its existing DNA, body overrides, pin/comparison, fixed views, pose sampling, LOD and snapshot controls. `/character-lab?source=meshy` opens that same original Lab. Published and v0.4 bodies remain selectable. Meshy snapshots record the exact prepared LOD hash. Source-specific module previews, hair colour and native socket/coverage debug are enabled. Breast morphs, generic appearance-size fitting and legacy equipment carry overrides remain unsupported. Existing source bodies retain their tools. Vite scans every application entry before route loading to avoid stale dependency modules when changing routes.
 
 - `/meshy-preview`: all 14 source clips, exact time sampling, pause/restart,
   height, three detail levels and a 40-instance inspection scene.
@@ -15,13 +15,35 @@ The original `/character-lab` now defaults to Meshy Human and uses its existing 
 - The existing Character Lab navigation links to the new Meshy preview.
   The published body and morphology/attachment tools remain selectable in the original Lab.
 
+## Shared preview ground
+
+Human, Cow and the focused Meshy preview use the same `PreviewGround` component
+in `src/character-lab/`. It owns the floor, one-metre grid with quarter-metre
+subdivisions, continuous movement phase, **Moving ground** control and **Ground pace**
+readout. The original Lab places this control below Animation for both characters.
+Unchecking the control leaves a stationary grid visible. Freezing the pose also
+freezes the grid; Play resumes it. The preview holds while a new body/LOD loads.
+
+Walking, Running and Unsteady Walk on Human supply a reference pace estimated from
+backward travel of low stance feet over the selected source clip. This is measured
+again for the displayed body after body/LOD changes, without changing clip data,
+duration or playback speed. Idle and other stationary clips leave the grid still.
+Cow supplies its existing authored manifest pace multiplied by its playback rate.
+Only the pace provider differs; floor rendering, movement and controls are shared.
+
+The Human estimate is a visual gait reference, not a gameplay movement speed or a
+certification of perfectly planted feet. Preview changes do not modify source GLBs,
+prepared assets, world locomotion or cattle balance.
+
+Run `scripts/character-lab-ground-smoke.mjs` with `PROTOTYPE_URL`,
+`PLAYWRIGHT_MODULE` and optional `BROWSER_CHANNEL`. See
+[shared ground verification](qa/character-lab-moving-ground/REPORT.md).
+
 ## Rebuild after replacing the source
 
 Run `pnpm assets:human`, then `pnpm build`.
 The preparation script writes three self-contained GLBs and a provenance manifest to
-`public/game-assets/human/`. These local generated assets are ignored by Git, as is
-the Assets source directory; a new checkout needs the licensed/user-authored source
-and this preparation step before opening the Meshy routes.
+`public/game-assets/human/`. The three frozen runtime LODs and manifest are now tracked as the exact fitting authority and CI fixtures. The Assets master remains ignored; rebuilding needs that user-authored source. A fresh checkout can load the prepared human without rebuilding it.
 
 The current optimized sizes are approximately 6.17 MB (7,644 triangles),
 6.12 MB (3,221 triangles), and 6.12 MB (3,219 triangles).
@@ -43,7 +65,7 @@ geometry and clips remain shared. Disposal releases instance skeleton resources 
 materials, retaining cached source geometry. Height uses existing CharacterDNA and
 universalHumanProfile calculations; no new persisted DNA field is introduced.
 
-MeshyHumanDynamics adapts the existing age/DNA curves to the Mixamo rig with absolute per-bone proportions. Child head share increases while torso and limbs become smaller. Parent compensation avoids accumulated scaling. Geometry and textures remain shared; no source files are modified. Neutral bounds normalize height and grounding independently of world placement. Age/traits change cadence and walking stride; older profiles gain a restrained stoop and overweight profiles use a bounded waist spring. This is a rig-specific approximation, not a transfer of the legacy authored morph targets. The Meshy Lab exposes age, masculinity, intelligence and agility.
+MeshyHumanDynamics adapts the existing age/DNA curves to the Mixamo rig with absolute per-bone proportions. Child head share increases while torso and limbs become smaller. Parent compensation avoids accumulated scaling. Geometry and textures remain shared; no source files are modified. Neutral bounds normalize height and grounding independently of world placement. In the world, age/traits change cadence and walking stride; older profiles gain a restrained stoop and overweight profiles use a bounded waist spring. This is a rig-specific approximation, not a transfer of the legacy authored morph targets. The Meshy Lab exposes age, masculinity, intelligence and agility.
 
 Idle/Walk/Run map to Idle_02/Walking/Running. The semantic map also exposes Talk,
 Listen, Farm, Attack, InjuredWalk and Death. Talk maps to Talk_Passionately.
@@ -51,6 +73,23 @@ Two UUID-named clips remain selectable with their source names. Attacks and Deat
 one-shot clips that hold the last frame; other clips repeat. Restart in the lab
 replays a completed one-shot. The other idle clips are presented with source names
 until their intended roles are reviewed.
+
+Both Human Lab views use 1× source playback speed, independent of age/agility cadence.
+The clip time control updates during playback and uses the loaded GLB clip's actual
+endpoint as its maximum. The duration label shows seconds rounded to three decimals;
+sampling retains the full timestamp. Editing clip time freezes the entered pose when
+the field commits, so the live clock cannot overwrite it before Freeze is clicked.
+Native playback consumes the full elapsed frame time; bounded spring substeps remain
+separate, avoiding slow motion below 20 FPS. Running is 0.6666666865 s and Unsteady_Walk is
+3 s in the current source. DNA changes preserve this Lab playback setting. World
+residents keep their DNA cadence. Clip data and source/prepared GLBs are unchanged.
+
+Continuous playback also preserves the last unmodified mixer rotations before applying
+DNA pose adjustments. Unchanged/held tracks retain their authored pose rather than
+falling back to the rest pose. Sampling and DNA changes refresh this animation pose
+before further playback. Running's source duration and held end keys are retained.
+See [Running pose follow-up](qa/meshy-running-pose/REPORT.md) for the per-frame
+regression and visually reviewed before/after replay.
 
 Fjord still drives Idle/Walk/Run from its existing movement system. Adding the
 clips does not implement occupation tasks, conversations, combat or health-state
@@ -62,12 +101,10 @@ This source has authored Meshy base-colour, normal and material textures.
 The preparation preserves all three image payloads unchanged, and runtime materials
 preserve authored values. The earlier procedural garment colouring is no longer used.
 The source has no authored body morph targets. Source-specific rig proportions are supported; detailed anatomical morphs,
-skin palette, hair, beard and clothing selection are not supported in the new
-preview yet. Existing modules are calibrated for different source bodies and are
+detailed anatomy is not authored. Skin tone keeps the existing selective 20% adjustment. Native body-bound hair, beard and outfit previews are selectable through the original Character Lab. Existing modules are calibrated for different source bodies and are
 not automatically attached. Age and DNA now affect rig proportions and movement; detailed facial anatomy and heritage-specific anatomy are not authored for this source.
 
-A future attachment pass must calibrate head/hand/waist sockets, compatible
-clothing skinning and source-specific fit surfaces on the unchanged Meshy rig.
+The native BodyFitAdapter now calibrates 16 semantic sockets and supplies exact source/posed surfaces, native bind state and body/LOD identities. Clothes share each instance's actual skeleton; source geometry is cached and never modified.
 A future morphology pass must author actual deformation data and validate it
 under all relevant clips. This body is an animation/runtime preview, not a
 replacement certified for all existing character-contract capabilities.
@@ -83,7 +120,16 @@ The eight integration tests compare the decoded source/export animation poses,
 check animated LOD0 silhouette bounds within 5 mm at sampled frames, verify
 independent instance skeletons/materials with shared geometry across 40 residents,
 verify decreasing triangle counts with all clips/joints on each LOD, compare all texture image hashes, check child head-to-height ratios and reversible growth, and exercise every clip with changing DNA.
-These tests skip if the ignored source or prepared files are unavailable.
+Source-to-export comparisons skip if the ignored original is unavailable; the tracked body LODs and new native-module tests do not need that original.
+
+The source-rate regression test is `tests/meshy-animation-timing.test.mjs`: every
+clip at all three LODs reaches the last authored timestamp before repeating, and
+one-shots hold the endpoint. The same checks run after changing to a child profile.
+`scripts/meshy-animation-timing-smoke.mjs` checks visible duration/time controls,
+endpoint snapshots and observed Running/Unsteady Walk loops in both Lab routes,
+including their wall-clock period within measured render-frame tolerance.
+Set `PROTOTYPE_URL`, `PLAYWRIGHT_MODULE` and optional `BROWSER_CHANNEL` to run it.
+See [animation timing follow-up](qa/meshy-animation-timing/REPORT.md).
 
 Browser evidence is in `artifacts/meshy-human-integration/`.
 The browser check exercises every clip, 40 lab instances, LOD selection and the
@@ -98,3 +144,21 @@ LOD2 correction: all simplification levels lock borders and use relative error .
 
 
 The original Character Lab now lists every clip embedded in the loaded Human asset in its Animation selector (14 in the current export). Freeze, pin, snapshot restore and LOD changes preserve the selected clip. Switching to a body without that clip resets to Idle. UUID-only clips are labelled Unnamed clip 1/2; their original names are retained in snapshots. Prepared clip names are regenerated with assets:human.
+
+## Issue #65 — outfit milestone
+
+Retain the adapter, sockets, binding checks, swaps, coverage restoration and exact snapshot identities. The current fitting fixture is one designed **tunic, trousers and boots**, selected as **Tunic, trousers and boots · outfit preview** in the existing Character Lab. The four earlier proof entries remain previews; hair/beard/pouch expansion and general fitting are deferred.
+
+The outfit is designed from panel loops, a sewn trouser crotch and boot shaft/instep/sole loops. It is not a decimated body shell. Neck/sleeve/boot opening rims are locked contact groups; the remaining panels have authored free volume and native weights. Covered torso, legs and feet use a per-LOD source-triangle mask. Wrist openings use source-derived contact loops, partial body cuts and common boundary subdivisions at each LOD. Free sleeves bind to arm regions, avoiding accidental torso weights on inner elbow points. Removal restores the exact original body geometry and removes dependent pouches.
+
+Qualification is limited to neutral, narrow and broad adults during Idle/Walk/Run. Use the neutral Lab build preset, then Slight + Underweight = 1 for narrow, or Powerful + Overweight = 1 for broad. Existing 60% body-build strength stays unchanged. Below 18 the outfit is excluded and its selectors are disabled. Child/older and further clips await separate qualification. **All assets stay previews until the user approves the exact appearance.**
+
+Authoring: `pnpm assets:human-modules` with Blender 4.5.9 and the original master available. Editable source: `Assets/Characters/Human/Modules-v2/MeshyHuman_modules-v2.blend`; recipe: `scripts/characters/templates/meshy_modules_v2.py`. Runtime GLBs, exact per-LOD binding sidecars and truthful authored-template receipts live in `public/character-lab/modules/meshy-v2/`. Module exports carry no body textures, animations or second skeleton.
+
+Run the focused native tests and `node scripts/validate-characters.mjs --lab-previews`. The native audit uses the real Meshy factory at all three body LODs; it reports fixed-rim transport separately from the legacy Golden audit. Normal playback never refits. These samples are not general fitting or crowd-performance certification.
+
+Fitting-first clarification (2026-10-08): the user now treats this outfit as a technical fitting fixture. Prioritize source-bound contact rims, native skinning, coverage and swaps across neutral/narrow/broad Idle/Walk/Run. Further artwork polishing is deferred; more detailed Meshy models will follow the fitting proof. Existing preview status is retained.
+
+Current fitting evidence: [Meshy outfit fitting proof](qa/meshy-modules-v2/REPORT.md). The fixture remains a preview; clothing artwork is deferred.
+
+Neck coverage follow-up (2026-10-08): protect geometrically exposed neck skin before dominant-bone region selection. The outfit now has a source-derived, densely sampled neckline and a matching partial body cut at every LOD. Opening corners share exact bind positions and four native influences; recursive cuts retain the full source mixture until final reduction. See [neck fitting follow-up](qa/meshy-neck-fit/REPORT.md) for the new frozen export, regression and actual Lab views. Earlier fitting evidence is retained as its original measurement record.

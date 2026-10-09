@@ -1,0 +1,95 @@
+{
+  "url": "http://127.0.0.1:5182/character-lab",
+  "records": [
+    {
+      "shape": "neutral",
+      "body": {
+        "version": 1,
+        "preset": "neutral",
+        "source": "meshy"
+      },
+      "source": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "5deca084f0779131ede0427d6fac5cc98dbaf696a879612dea9c174fcd089834",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "shape": "narrow",
+      "body": {
+        "version": 1,
+        "preset": "neutral",
+        "source": "meshy",
+        "morphology": {},
+        "morphs": {
+          "Slight": 1,
+          "Powerful": 0,
+          "Underweight": 1,
+          "Overweight": 0
+        }
+      },
+      "source": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "5deca084f0779131ede0427d6fac5cc98dbaf696a879612dea9c174fcd089834",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "shape": "broad",
+      "body": {
+        "version": 1,
+        "preset": "neutral",
+        "source": "meshy",
+        "morphology": {},
+        "morphs": {
+          "Powerful": 1,
+          "Slight": 0,
+          "Overweight": 1,
+          "Underweight": 0
+        }
+      },
+      "source": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "5deca084f0779131ede0427d6fac5cc98dbaf696a879612dea9c174fcd089834",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

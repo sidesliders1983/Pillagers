@@ -1,4 +1,4 @@
-import { Scene, Color, PerspectiveCamera, OrthographicCamera, WebGLRenderer, HemisphereLight, DirectionalLight, Mesh, CylinderGeometry, MeshStandardMaterial, ACESFilmicToneMapping, PCFSoftShadowMap, Clock } from 'three';
+import { Scene, Color, PerspectiveCamera, OrthographicCamera, WebGLRenderer, HemisphereLight, DirectionalLight, ACESFilmicToneMapping, PCFSoftShadowMap, Clock } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Phenotype } from '../characters/Phenotype';
 import {meshyHumanFactory,MeshyHuman} from '../characters/MeshyHuman';
@@ -15,6 +15,9 @@ import { fixedLabViews, LabTestSnapshot, labSnapshotVersion, labStyleVersion, pa
 import { characterContract } from '../characters/CharacterContract';
 import { goldenLabBody, labBodyAsset } from '../characters/LabBodySources';
 import { LabBodyPresentation, defaultLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
+import {PreviewGround} from './PreviewGround';
+import {humanPreviewGroundSpeed} from './HumanPreviewPace';
+
 export class CharacterPreview {
     private scene=new Scene();
     private perspectiveCamera=new PerspectiveCamera(38,1,.05,60);
@@ -34,6 +37,8 @@ export class CharacterPreview {
     private animation:string='Idle';
     private poseTime=0;
     private paused=false;
+    private ground = new PreviewGround();
+    private groundSpeed = 0;
     private clock=new Clock();
     private observer:ResizeObserver;
     private fitDebug={...noFitDebug};
@@ -43,37 +48,74 @@ export class CharacterPreview {
         this.renderer.toneMapping=ACESFilmicToneMapping;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=PCFSoftShadowMap;
         this.scene.add(new HemisphereLight(0xfff3e3,0x9caa9a,2.2));
         const sun=new DirectionalLight(0xffead5,1.7);sun.position.set(-3,6,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-4,right:4,top:4,bottom:-4,near:.1,far:15});sun.shadow.normalBias=.025;this.scene.add(sun);
-        const stage=new Mesh(new CylinderGeometry(3.1,3.15,.06,64),new MeshStandardMaterial({color:0xd3d7cc,roughness:1}));stage.position.y=-.045;stage.receiveShadow=true;this.scene.add(stage);
+        this.scene.add(this.ground.root);
+        this.ground.bindControls(document.getElementById('lab-ground-controls')!);
         this.controls=new OrbitControls(this.camera,canvas);this.controls.enableDamping=true;this.controls.enablePan=false;this.controls.minDistance=2;this.controls.maxDistance=14;this.controls.minZoom=.24;this.controls.maxZoom=4;this.controls.maxPolarAngle=Math.PI*.5;
         this.resetView();
         this.observer=new ResizeObserver(()=>{const rect=canvas.getBoundingClientRect();this.renderer.setSize(rect.width,rect.height,false);this.resizeCameras(rect.width/Math.max(1,rect.height));});this.observer.observe(canvas);
-        this.renderer.setAnimationLoop(()=>{const delta=Math.min(this.clock.getDelta(),.05);if(!this.paused)this.current?.update(delta);if(this.comparisonSnapshot&&!this.comparisonSnapshot.pose.paused)this.comparison?.update(delta);this.controls.update();this.renderer.render(this.scene,this.camera);});
+        this.renderer.setAnimationLoop(() => {
+            const delta = this.clock.getDelta();
+            // Native animations consume elapsed time; their spring has its own bounded substeps.
+            const ready = this.canvas.dataset.ready === 'true';
+            // Keep the last frame while source assets load, without spending GPU time on it.
+            if (!ready) return;
+            if (ready && !this.paused && this.current) {
+                this.current.update(this.current instanceof MeshyHuman ? delta : Math.min(delta, .05));
+            }
+            if (ready && this.comparisonSnapshot && !this.comparisonSnapshot.pose.paused && this.comparison) {
+                this.comparison.update(this.comparison instanceof MeshyHuman ? delta : Math.min(delta, .05));
+            }
+            const groundDelta = this.current instanceof MeshyHuman ? delta : Math.min(delta, .05);
+            this.syncGroundPlayback();
+            this.ground.advance(groundDelta);
+            this.syncClipTime();
+            this.controls.update();
+            this.renderer.render(this.scene, this.camera);
+        });
     }
     setCharacter(_phenotype:Phenotype,dna:CharacterDNA,presentation:CharacterPresentation=this.presentation,body:LabBodyPresentation=this.bodyPresentation){this.currentDNA=dna;this.presentation=parseCharacterPresentation(presentation);this.bodyPresentation=parseLabBodyPresentation(body);if(this.bodyPresentation.source===goldenLabBody.source)this.lod=2;void this.refresh();}
     setComparison(snapshot:LabTestSnapshot|null){this.comparisonSnapshot=snapshot?parseLabSnapshot(snapshot):null;void this.refresh();}
     setLOD(lod:number){if(!Number.isInteger(lod)||lod<0||lod>2)throw new Error('Invalid body LOD.');labBodyAsset(this.bodyPresentation.source??'published',lod);this.lod=lod;void this.refresh();}
     toggleFitDebug(key:keyof FitDebugOptions){this.fitDebug[key]=!this.fitDebug[key];for(const model of [this.current,this.comparison])model?.fit?.setDebug(this.fitDebug);this.reportModel();}
-    setAnimation(animation:string){this.animation=animation;this.paused=false;this.poseTime=0;if(this.current)this.playModel(this.current,animation);this.reportModel();}
-    setPose(time:number){if(!Number.isFinite(time)||time<0||time>60)throw new Error('Clip time must be between 0 and 60 seconds.');this.poseTime=time;this.paused=true;if(this.current)this.sampleModel(this.current,this.animation,time);this.reportModel();}
+    setAnimation(animation: string) {
+        this.animation = animation;
+        this.paused = false;
+        this.poseTime = 0;
+        if (this.current) this.playModel(this.current, animation);
+        this.refreshGroundPace();
+        this.reportModel();
+    }
+    setPose(time: number) {
+        if (!Number.isFinite(time) || time < 0 || time > 60) {
+            throw new Error('Clip time must be between 0 and 60 seconds.');
+        }
+        this.poseTime = time;
+        this.paused = true;
+        if (this.current) this.sampleModel(this.current, this.animation, time);
+        this.ground.sample(time * this.groundSpeed);
+        this.reportModel();
+    }
     resume(){this.paused=false;this.reportModel();}
     /** Restore camera/clock before the controller issues its single character refresh. */
     restoreReviewState(snapshot:LabTestSnapshot){const s=parseLabSnapshot(snapshot);this.lod=s.lod;this.animation=s.pose.animation;this.poseTime=s.pose.time;this.paused=s.pose.paused;this.setCamera(s.camera.position,s.camera.target,s.camera.type,s.camera.scale??2.4);}
     captureSnapshot():LabTestSnapshot {
         if(!this.current||!this.currentDNA||this.canvas.dataset.ready!=='true')throw new Error('Wait until the character has loaded.');
         this.setPose(this.current.animationState.time);
-        return parseLabSnapshot({version:labSnapshotVersion,styleVersion:labBodyAsset(this.bodyPresentation.source??'published',this.lod).styleVersion,contractVersion:1,fitVersion:characterContract.attachmentVersion,
+        return parseLabSnapshot({version:labSnapshotVersion,styleVersion:labBodyAsset(this.bodyPresentation.source??'published',this.lod).styleVersion,contractVersion:1,fitVersion:this.bodyPresentation.source==='meshy'?'pillagers-fit/0.2':characterContract.attachmentVersion,
             dna:this.currentDNA,presentation:this.presentation,body:this.bodyPresentation,lod:this.lod,pose:{animation:this.animation,time:this.current.animationState.time,paused:true},
             camera:{type:this.camera===this.orthographicCamera?'orthographic':'perspective',scale:this.camera===this.orthographicCamera?this.orthographicScale/this.orthographicCamera.zoom:null,fov:38,position:this.camera.position.toArray(),target:this.controls.target.toArray()},lighting:'lab-neutral/1',modules:snapshotModules(this.currentDNA,this.presentation,this.lod,this.bodyPresentation)});
     }
     private async createPreview(dna:CharacterDNA,lod:number,presentation:CharacterPresentation,body:LabBodyPresentation){
         if(body.source!=='meshy')return characterFactory.create(dna,lod,presentation,body);
-        const resolved=resolveLabBodyProfile(dna,body),model=await meshyHumanFactory.create(dna,lod,resolved.profile);
+        const resolved=resolveLabBodyProfile(dna,body),model=await meshyHumanFactory.create(dna,lod,resolved.profile,presentation);
+        model.setPlaybackRate(1);
         model.root.userData.bodySource=labBodyAsset('meshy',lod);model.root.userData.presentation={...presentation};
         model.root.userData.bodyPresentation=resolved.body;model.root.userData.bodyPresentationStatus=resolved.status;
-        model.root.userData.selectedAssets={hair:null,beard:null,outfit:null,equipment:null};return model;
+        return model;
     }
     private async refresh(){
         const revision=++this.revision;this.canvas.dataset.ready='false';
+        this.syncGroundPlayback();
         try{
             const pinned=this.comparisonSnapshot;
             const models=await Promise.all([this.currentDNA?this.createPreview(this.currentDNA,this.lod,this.presentation,this.bodyPresentation):null,pinned?this.createPreview(pinned.dna,pinned.lod,pinned.presentation,pinned.body):null]);
@@ -83,7 +125,10 @@ export class CharacterPreview {
             if(this.current){if(!(this.current instanceof MeshyHuman)&&!['Idle','Walk','Run'].includes(this.animation)){this.animation='Idle';this.poseTime=0;}this.sampleModel(this.current,this.animation,this.poseTime);}
             if(this.comparison&&pinned)this.sampleModel(this.comparison,pinned.pose.animation,pinned.pose.time);
             for(const model of [this.current,this.comparison])if(model){this.scene.add(model.root);model.fit?.setDebug(this.fitDebug);}
-            this.layout();this.canvas.dataset.ready='true';this.reportModel();
+            this.layout();
+            this.refreshGroundPace();
+            this.canvas.dataset.ready = 'true';
+            this.reportModel();
         }catch(error){if(revision!==this.revision)return;this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
     }
     private playModel(model:UniversalHuman|MeshyHuman,animation:string){
@@ -92,7 +137,25 @@ export class CharacterPreview {
     private sampleModel(model:UniversalHuman|MeshyHuman,animation:string,time:number){
         if(model instanceof MeshyHuman)model.sampleAnimation(animation,time);else model.sampleAnimation(animation as HumanAnimation,time);
     }
+    private refreshGroundPace() {
+        this.groundSpeed = this.current ? humanPreviewGroundSpeed(this.current, this.animation) : 0;
+        this.ground.sample(this.poseTime * this.groundSpeed);
+    }
+    private syncGroundPlayback() {
+        const rate = this.current instanceof MeshyHuman ? 1
+            : this.current?.root.userData.universalHumanProfile.motion.cadence ?? 1;
+        this.ground.setPlayback(this.groundSpeed, rate,
+            this.paused || this.canvas.dataset.ready !== 'true');
+    }
+    private syncClipTime() {
+        const input = document.getElementById('lab-pose-time') as HTMLInputElement | null;
+        if (!input || document.activeElement === input) return;
+        const time = this.current?.animationState.time ?? this.poseTime;
+        const rounded = this.paused ? time : Number(time.toFixed(3));
+        input.value = String(this.current instanceof MeshyHuman ? Math.min(rounded, this.current.duration) : rounded);
+    }
     private reportModel(){
+        this.syncGroundPlayback();
         const select=document.getElementById('lab-animation') as HTMLSelectElement|null;
         if(select&&this.current){
             const aliases:Record<string,string>={Idle:'Idle_02',Walk:'Walking',Run:'Running'};
@@ -103,7 +166,15 @@ export class CharacterPreview {
         }
 
         const metadata=document.getElementById('lab-fit-metadata');if(metadata)metadata.textContent=JSON.stringify({...this.current?.fit?.snapshot(),bodySource:this.current?.root.userData.bodySource,presentation:this.current?.root.userData.presentation,selectedAssets:this.current?.root.userData.selectedAssets,bodyPresentation:this.current?.root.userData.bodyPresentation,bodyPresentationStatus:this.current?.root.userData.bodyPresentationStatus,displayedBodyHeight:this.current?.root.userData.universalHumanProfile.height,comparison:this.comparison?{bodySource:this.comparison.root.userData.bodySource,presentation:this.comparison.root.userData.presentation,selectedAssets:this.comparison.root.userData.selectedAssets,bodyPresentation:this.comparison.root.userData.bodyPresentation,bodyPresentationStatus:this.comparison.root.userData.bodyPresentationStatus,pose:this.comparison.animationState}:null},null,2);
-        const pose=document.getElementById('lab-pose-time') as HTMLInputElement|null;if(pose&&document.activeElement!==pose)pose.value=String(Number((this.current?.animationState.time??this.poseTime).toFixed(3)));
+        const duration = this.current instanceof MeshyHuman
+            ? this.current.duration
+            : this.current?.clips.find(clip => clip.name === this.animation)?.duration;
+        const pose = document.getElementById('lab-pose-time') as HTMLInputElement | null;
+        if (pose) pose.max = String(duration ?? 60);
+        const durationLabel = document.getElementById('lab-clip-duration');
+        if (durationLabel) durationLabel.textContent = duration === undefined ? ''
+            : 'Clip duration: ' + duration.toFixed(3) + ' s' + (this.current instanceof MeshyHuman ? ' · 1× speed' : '');
+        this.syncClipTime();
         this.canvas.dataset.paused=String(this.paused);this.canvas.dataset.animation=this.animation;this.canvas.dataset.lod=String(this.lod);this.canvas.dataset.bodySource=this.bodyPresentation.source??'published';
         document.querySelectorAll<HTMLButtonElement>('[aria-label="Level of detail"] button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.action==='lod'+this.lod)));
         this.report(`${this.bodyPresentation.source==='meshy'?'Meshy Human':this.bodyPresentation.source===goldenLabBody.source?'v0.4 body preview':'Published body'} · LOD${this.lod} · ${this.animation}${this.paused?' · frozen pose':''}`);
