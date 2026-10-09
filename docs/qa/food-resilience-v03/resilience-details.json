@@ -1,0 +1,314 @@
+[
+  {
+    "scenario": "A",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 89,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 58.3,
+        "meanCapacityLostEquivalent": 0
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 50.62,
+        "meanCapacityLostEquivalent": 0
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 59.17,
+        "meanCapacityLostEquivalent": 0
+      }
+    }
+  },
+  {
+    "scenario": "B",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 36,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.22,
+        "meanCapacityLostEquivalent": 0
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.11,
+        "meanCapacityLostEquivalent": 0
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.45,
+        "meanCapacityLostEquivalent": 0
+      }
+    }
+  },
+  {
+    "scenario": "C05",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 40,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.29,
+        "meanCapacityLostEquivalent": 0
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.51,
+        "meanCapacityLostEquivalent": 0
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.33,
+        "meanCapacityLostEquivalent": 0
+      }
+    }
+  },
+  {
+    "scenario": "C10",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 55,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.25,
+        "meanCapacityLostEquivalent": 0
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.09,
+        "meanCapacityLostEquivalent": 0
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.67,
+        "meanCapacityLostEquivalent": 0
+      }
+    }
+  },
+  {
+    "scenario": "C15",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 70,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.64,
+        "meanCapacityLostEquivalent": 0
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.37,
+        "meanCapacityLostEquivalent": 0
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.43,
+        "meanCapacityLostEquivalent": 0
+      }
+    }
+  },
+  {
+    "scenario": "D2",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 47,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.58,
+        "meanCapacityLostEquivalent": 139.6
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.1,
+        "meanCapacityLostEquivalent": 3.46
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 47.8,
+        "meanCapacityLostEquivalent": 19.74
+      }
+    }
+  },
+  {
+    "scenario": "D4",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 34,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.09,
+        "meanCapacityLostEquivalent": 32.35
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.18,
+        "meanCapacityLostEquivalent": 0.18
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.59,
+        "meanCapacityLostEquivalent": 1.98
+      }
+    }
+  },
+  {
+    "scenario": "E05",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 55,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.95,
+        "meanCapacityLostEquivalent": 140.18
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.11,
+        "meanCapacityLostEquivalent": 3.73
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.41,
+        "meanCapacityLostEquivalent": 20.48
+      }
+    }
+  },
+  {
+    "scenario": "E10",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 71,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 98.03,
+        "meanCapacityLostEquivalent": 140.82
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.29,
+        "meanCapacityLostEquivalent": 3.81
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.61,
+        "meanCapacityLostEquivalent": 20.82
+      }
+    }
+  },
+  {
+    "scenario": "E15",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 81,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.85,
+        "meanCapacityLostEquivalent": 141.49
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.95,
+        "meanCapacityLostEquivalent": 4.5
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.13,
+        "meanCapacityLostEquivalent": 19.74
+      }
+    }
+  },
+  {
+    "scenario": "C10-safe",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 40,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.2,
+        "meanCapacityLostEquivalent": 0
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.11,
+        "meanCapacityLostEquivalent": 0
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.46,
+        "meanCapacityLostEquivalent": 0
+      }
+    }
+  },
+  {
+    "scenario": "E10-safe",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 55,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.76,
+        "meanCapacityLostEquivalent": 140.25
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 24.05,
+        "meanCapacityLostEquivalent": 3.39
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.14,
+        "meanCapacityLostEquivalent": 20.06
+      }
+    }
+  },
+  {
+    "scenario": "E10-N4",
+    "arrivalShortageCampaigns": 0,
+    "laterShortageCampaigns": 61,
+    "healthyEntryShortageCampaigns": {
+      "Normal": 0,
+      "Harsh": 0,
+      "Severe": 0
+    },
+    "roles": {
+      "farmer": {
+        "meanAvailableWorkerWinters": 97.36,
+        "meanCapacityLostEquivalent": 33.61
+      },
+      "fisher": {
+        "meanAvailableWorkerWinters": 23.97,
+        "meanCapacityLostEquivalent": 0.15
+      },
+      "hunter": {
+        "meanAvailableWorkerWinters": 48.49,
+        "meanCapacityLostEquivalent": 1.4
+      }
+    }
+  }
+]
