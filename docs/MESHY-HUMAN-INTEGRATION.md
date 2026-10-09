@@ -60,6 +60,13 @@ separate, avoiding slow motion below 20 FPS. Running is 0.6666666865 s and Unste
 3 s in the current source. DNA changes preserve this Lab playback setting. World
 residents keep their DNA cadence. Clip data and source/prepared GLBs are unchanged.
 
+Continuous playback also preserves the last unmodified mixer rotations before applying
+DNA pose adjustments. Unchanged/held tracks retain their authored pose rather than
+falling back to the rest pose. Sampling and DNA changes refresh this animation pose
+before further playback. Running's source duration and held end keys are retained.
+See [Running pose follow-up](qa/meshy-running-pose/REPORT.md) for the per-frame
+regression and visually reviewed before/after replay.
+
 Fjord still drives Idle/Walk/Run from its existing movement system. Adding the
 clips does not implement occupation tasks, conversations, combat or health-state
 transitions. Those systems must request the corresponding semantic states later.

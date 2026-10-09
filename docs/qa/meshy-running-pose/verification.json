@@ -1,0 +1,56 @@
+{
+  "baseline": "3663f4ea2a7e1b8f93cc1d865a7420c9eab1d938",
+  "clip": "Running",
+  "durationSeconds": 0.6666666865348816,
+  "lastRotationKeySeconds": 0.6333330273628235,
+  "regression": {
+    "lods": [
+      0,
+      1,
+      2
+    ],
+    "fps": [
+      30,
+      60,
+      120
+    ],
+    "cyclesPerCase": 3,
+    "frames": 1269,
+    "jointsPerFrame": 44,
+    "maximumAngleRadians": 0.000001,
+    "passed": true
+  },
+  "diagnostic": {
+    "lod": 2,
+    "fps": 60,
+    "frames": 180,
+    "maximumDifferenceDegrees": 0.000003818191820832845
+  },
+  "localChecks": {
+    "tests": 431,
+    "passed": 429,
+    "failed": 0,
+    "skipped": 2,
+    "typescript": "passed",
+    "productionBuild": "passed",
+    "characterValidation": "passed"
+  },
+  "assets": [
+    {
+      "path": "Assets/Characters/Human/Human-textured.glb",
+      "sha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD0.glb",
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD1.glb",
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD2.glb",
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    }
+  ]
+}

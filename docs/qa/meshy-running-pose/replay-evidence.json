@@ -1,0 +1,62 @@
+[
+  {
+    "version": "before",
+    "frame": 1,
+    "clipSeconds": 0.6166666666666667
+  },
+  {
+    "version": "before",
+    "frame": 2,
+    "clipSeconds": 0.6333333333333334
+  },
+  {
+    "version": "before",
+    "frame": 3,
+    "clipSeconds": 0.6500000000000001
+  },
+  {
+    "version": "before",
+    "frame": 4,
+    "clipSeconds": 0.6666666666666669
+  },
+  {
+    "version": "before",
+    "frame": 5,
+    "clipSeconds": 0.01666664679845198
+  },
+  {
+    "version": "before",
+    "frame": 6,
+    "clipSeconds": 0.03333331346511864
+  },
+  {
+    "version": "after",
+    "frame": 1,
+    "clipSeconds": 0.6166666666666667
+  },
+  {
+    "version": "after",
+    "frame": 2,
+    "clipSeconds": 0.6333333333333334
+  },
+  {
+    "version": "after",
+    "frame": 3,
+    "clipSeconds": 0.6500000000000001
+  },
+  {
+    "version": "after",
+    "frame": 4,
+    "clipSeconds": 0.6666666666666669
+  },
+  {
+    "version": "after",
+    "frame": 5,
+    "clipSeconds": 0.01666664679845198
+  },
+  {
+    "version": "after",
+    "frame": 6,
+    "clipSeconds": 0.03333331346511864
+  }
+]

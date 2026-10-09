@@ -50,3 +50,39 @@ test('source-rate Human previews reach every GLB clip endpoint before repeating 
         }
     }
 });
+
+test('Running playback keeps the authored pose through held keys and loop boundaries', async () => {
+    const factory = new MeshyHumanFactory(asset);
+    const dna = defaultDNA();
+    const joints = root => {
+        const result = new Map();
+        root.traverse(node => { if (node.isBone) result.set(node.name, node); });
+        return result;
+    };
+    for (const lod of [0, 1, 2]) {
+        for (const fps of [30, 60, 120]) {
+            const playing = await factory.create(dna, lod);
+            const frozen = await factory.create(dna, lod);
+            try {
+                playing.setPlaybackRate(1);
+                playing.sampleAnimation('Running', .6);
+                const actual = joints(playing.root);
+                const expected = joints(frozen.root);
+                for (let frame = 1; frame <= Math.ceil(playing.duration * fps * 3); frame++) {
+                    playing.update(1 / fps);
+                    frozen.sampleAnimation('Running', playing.animationState.time);
+                    for (const [name, bone] of actual) {
+                        const rotation = bone.quaternion.clone().normalize();
+                        const reference = expected.get(name).quaternion.clone().normalize();
+                        assert.ok(rotation.angleTo(reference) < 1e-6,
+                            'LOD' + lod + '/' + fps + ' FPS/frame ' + frame + '/' + name
+                            + ': playback differs from the frozen GLB pose at ' + playing.animationState.time);
+                    }
+                }
+            } finally {
+                playing.dispose();
+                frozen.dispose();
+            }
+        }
+    }
+});

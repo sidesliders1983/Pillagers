@@ -1,4 +1,7 @@
-import {AnimationAction, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat, Material, Mesh, MeshStandardMaterial, Color, Object3D, SkinnedMesh, Vector3} from 'three';
+import {
+ AnimationAction, AnimationMixer, Bone, Box3, Group, LoopOnce, LoopRepeat, Material,
+ Mesh, MeshStandardMaterial, Color, Object3D, SkinnedMesh, Vector3, Quaternion,
+} from 'three';
 import {GLTF, GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
@@ -59,6 +62,7 @@ export class MeshyHuman {
  state:MeshyAnimation='Idle';private body:Object3D;private mixer:AnimationMixer;
  private skinUniform={value:new Color()};
  private playbackRateOverride: number | null = null;
+ private animationRotations = new Map<Bone, Quaternion>();
  private action:AnimationAction|null=null;private materials:Material[]=[];private baseHeight:number;private disposed=false;
  constructor(source:GLTF,dna:CharacterDNA,readonly lod:number,profile?:HumanProfile){
   this.body=clone(source.scene);this.root.add(this.body);this.clips=source.animations;
@@ -70,7 +74,15 @@ export class MeshyHuman {
   this.body.position.add(frame?new Vector3().fromArray(frame.offset):new Vector3(-centre.x,-bounds.min.y,-centre.z));
   this.basePosition.copy(this.body.position);
   this.body.traverse(node=>{
-   if((node as Bone).isBone){const bone=node as Bone;this.bones.push(bone);this.rest.set(bone,{position:bone.position.clone(),rotation:bone.quaternion.clone(),scale:bone.scale.clone()});this.scales.set(bone,bone.scale.clone());}
+   if ((node as Bone).isBone) {
+    const bone = node as Bone;
+    this.bones.push(bone);
+    this.rest.set(bone, {
+     position: bone.position.clone(), rotation: bone.quaternion.clone(), scale: bone.scale.clone(),
+    });
+    this.scales.set(bone, bone.scale.clone());
+    this.animationRotations.set(bone, bone.quaternion.clone());
+   }
    if((node as Mesh).isMesh){
     const mesh=node as Mesh;mesh.castShadow=true;mesh.receiveShadow=true;
     const copy=(material:Material)=>{const result=material.clone();this.materials.push(result);
@@ -128,7 +140,14 @@ export class MeshyHuman {
   this.body.scale.setScalar(height/neutralHeight);this.body.position.y-=bounds.min.y*height/neutralHeight;
   this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
   this.fit.refit();this.modules.refit(profile);
-  if(clip){this.action=this.mixer.clipAction(clip);this.action.reset().play();this.action.time=time;this.mixer.update(0);this.shapePose();}
+  if (clip) {
+   this.action = this.mixer.clipAction(clip);
+   this.action.reset().play();
+   this.action.time = time;
+   this.mixer.update(0);
+   this.captureAnimationRotations();
+   this.shapePose();
+  }
 
   this.root.userData.character={seed:dna.seed,state:this.state,lod:this.lod,height};
  }
@@ -151,10 +170,17 @@ export class MeshyHuman {
   next.play();if(this.action)this.action.crossFadeTo(next,.15,false);
   this.action=next;this.state=state;this.root.userData.character.state=state;this.root.userData.clip=name;
  }
- sample(time:number){
-  if(!this.action||!Number.isFinite(time)||time<0)throw new Error('Invalid animation sample');
-  this.mixer.stopAllAction();for(const bone of this.bones)bone.quaternion.copy(this.rest.get(bone)!.rotation);this.action.reset().play();
-  this.action.time=Math.min(time,this.action.getClip().duration);this.mixer.update(0);this.shapePose();
+ sample(time: number) {
+  if (!this.action || !Number.isFinite(time) || time < 0) {
+   throw new Error('Invalid animation sample');
+  }
+  this.mixer.stopAllAction();
+  for (const bone of this.bones) bone.quaternion.copy(this.rest.get(bone)!.rotation);
+  this.action.reset().play();
+  this.action.time = Math.min(time, this.action.getClip().duration);
+  this.mixer.update(0);
+  this.captureAnimationRotations();
+  this.shapePose();
  }
  get animationState(){return {animation:this.state,time:this.action?.time??0};}
  sampleAnimation(animation:string,time:number){this.playClip(meshyAnimationClips[animation as MeshyAnimation]??animation);this.sample(time);}
@@ -169,10 +195,26 @@ export class MeshyHuman {
    if(bone.name.endsWith('Spine2'))bone.rotateX(this.profile.weights.Age*.10);
   }
  }
- update(delta:number,_distance?:number){if(!this.disposed){for(const bone of this.bones)bone.quaternion.copy(this.rest.get(bone)!.rotation);this.mixer.update(delta);this.shapePose();
-  this.elapsed+=Math.max(0,delta);const moving=this.state==='Walk'||this.state==='Run';
-  const bounce=this.belly.step(delta,moving?Math.sin(this.elapsed*this.profile.motion.cadence*8)*this.profile.motion.footfall:0)*this.profile.weights.Overweight;
-  const waist=this.bones.find(bone=>bone.name.endsWith('Spine'));if(waist)waist.scale.z*=1+bounce*.025;}}
+ private captureAnimationRotations() {
+  for (const bone of this.bones) this.animationRotations.get(bone)!.copy(bone.quaternion);
+ }
+ update(delta: number, _distance?: number) {
+  if (this.disposed) return;
+  // The mixer skips unchanged tracks. Restore its last output, then apply DNA shaping once.
+  for (const bone of this.bones) bone.quaternion.copy(this.animationRotations.get(bone)!);
+  this.mixer.update(delta);
+  this.captureAnimationRotations();
+  this.shapePose();
+
+  this.elapsed += Math.max(0, delta);
+  const moving = this.state === 'Walk' || this.state === 'Run';
+  const target = moving
+   ? Math.sin(this.elapsed * this.profile.motion.cadence * 8) * this.profile.motion.footfall
+   : 0;
+  const bounce = this.belly.step(delta, target) * this.profile.weights.Overweight;
+  const waist = this.bones.find(bone => bone.name.endsWith('Spine'));
+  if (waist) waist.scale.z *= 1 + bounce * .025;
+ }
  dispose(){
   if(this.disposed)return;this.disposed=true;this.mixer.stopAllAction();this.mixer.uncacheRoot(this.body);
   this.modules.clear();this.fit.dispose();
