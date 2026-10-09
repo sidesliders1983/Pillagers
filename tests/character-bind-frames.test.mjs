@@ -11,7 +11,7 @@ const {garmentBindBones,validateModule}=load('../src/characters/AttachmentContra
 const {characterAssets}=load('../src/characters/CharacterAssets.ts');
 
 test('technical measured garment joints obey the canonical frame and retain the whole body',()=>{
-    for(const asset of [{metadata:technicalGarmentMetadata},...characterAssets.filter(asset=>asset.type==='garment')]){
+    for(const asset of [{metadata:technicalGarmentMetadata},...characterAssets.filter(asset=>asset.type==='garment'&&asset.metadata.version==='pillagers-fit/0.1')]){
         assert.deepEqual(Object.keys(asset.metadata.garmentBind.joints).sort(),[...garmentBindBones].sort());
         assert.deepEqual(asset.metadata.covers,[]);validateModule(asset.metadata);
         const reversed=structuredClone(asset.metadata);reversed.garmentBind.joints.Neck[1]=0;
@@ -37,4 +37,9 @@ test('neutral rig joint calibration stays independent of morphology, animation a
             human.dispose();
         }
     }
+});
+
+test('native garments preserve their own bind authority alongside the legacy canonical reader',()=>{
+ const garments=characterAssets.filter(asset=>asset.type==='garment'&&asset.metadata.version==='pillagers-fit/0.2');assert.equal(garments.length,1);
+ for(const asset of garments){assert.equal(asset.metadata.authoringFrame,'meshy-native');assert.equal(asset.metadata.garmentBind,undefined);validateModule(asset.metadata);const invalid=structuredClone(asset.metadata);invalid.nativeBinding.rigSignature='wrong';assert.throws(()=>validateModule(invalid),/Invalid native body-bound module contract/);}
 });

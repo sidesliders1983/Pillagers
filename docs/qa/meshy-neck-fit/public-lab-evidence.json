@@ -1,0 +1,3618 @@
+{
+  "url": "http://192.168.68.104:5182/character-lab",
+  "records": [
+    {
+      "name": "lod0-neutral-idle-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-neutral-idle-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-neutral-walk-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-neutral-walk-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-neutral-run-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-neutral-run-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-narrow-idle-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Slight": 1,
+            "Powerful": 0,
+            "Underweight": 1,
+            "Overweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-narrow-idle-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Slight": 1,
+            "Powerful": 0,
+            "Underweight": 1,
+            "Overweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-narrow-walk-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Slight": 1,
+            "Powerful": 0,
+            "Underweight": 1,
+            "Overweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-narrow-walk-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Slight": 1,
+            "Powerful": 0,
+            "Underweight": 1,
+            "Overweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-narrow-run-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Slight": 1,
+            "Powerful": 0,
+            "Underweight": 1,
+            "Overweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-narrow-run-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Slight": 1,
+            "Powerful": 0,
+            "Underweight": 1,
+            "Overweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-broad-idle-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Powerful": 1,
+            "Slight": 0,
+            "Overweight": 1,
+            "Underweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-broad-idle-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Powerful": 1,
+            "Slight": 0,
+            "Overweight": 1,
+            "Underweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-broad-walk-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Powerful": 1,
+            "Slight": 0,
+            "Overweight": 1,
+            "Underweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-broad-walk-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Powerful": 1,
+            "Slight": 0,
+            "Overweight": 1,
+            "Underweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-broad-run-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Powerful": 1,
+            "Slight": 0,
+            "Overweight": 1,
+            "Underweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod0-broad-run-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy",
+          "morphology": {},
+          "morphs": {
+            "Powerful": 1,
+            "Slight": 0,
+            "Overweight": 1,
+            "Underweight": 0
+          }
+        },
+        "lod": 0,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD0.glb",
+            "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD0.glb",
+        "url": "/game-assets/human/Human_LOD0.glb",
+        "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod1-neutral-idle-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 1,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD1.glb",
+            "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD1.glb",
+        "url": "/game-assets/human/Human_LOD1.glb",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod1-neutral-idle-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 1,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD1.glb",
+            "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD1.glb",
+        "url": "/game-assets/human/Human_LOD1.glb",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod1-neutral-walk-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 1,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD1.glb",
+            "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD1.glb",
+        "url": "/game-assets/human/Human_LOD1.glb",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod1-neutral-walk-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 1,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD1.glb",
+            "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD1.glb",
+        "url": "/game-assets/human/Human_LOD1.glb",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod1-neutral-run-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 1,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD1.glb",
+            "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD1.glb",
+        "url": "/game-assets/human/Human_LOD1.glb",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod1-neutral-run-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 1,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD1.glb",
+            "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD1.glb",
+        "url": "/game-assets/human/Human_LOD1.glb",
+        "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-idle-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-idle-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-walk-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-walk-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-run-front-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-run-back-top",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "none",
+          "beard": "none",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            0,
+            2.85,
+            -2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-idle-hair-beard",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "hair/meshy-short-angular",
+          "beard": "beard/meshy-compact-wedge",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Idle_02",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            1,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "hair/meshy-short-angular",
+            "path": "/character-lab/modules/meshy-v2/hair.glb",
+            "sha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+              "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          },
+          {
+            "id": "beard/meshy-compact-wedge",
+            "path": "/character-lab/modules/meshy-v2/beard.glb",
+            "sha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+              "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "hair/meshy-short-angular",
+          "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+          "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        {
+          "id": "beard/meshy-compact-wedge",
+          "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+          "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-walk-hair-beard",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "hair/meshy-short-angular",
+          "beard": "beard/meshy-compact-wedge",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Walking",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            1,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "hair/meshy-short-angular",
+            "path": "/character-lab/modules/meshy-v2/hair.glb",
+            "sha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+              "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          },
+          {
+            "id": "beard/meshy-compact-wedge",
+            "path": "/character-lab/modules/meshy-v2/beard.glb",
+            "sha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+              "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "hair/meshy-short-angular",
+          "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+          "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        {
+          "id": "beard/meshy-compact-wedge",
+          "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+          "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    },
+    {
+      "name": "lod2-neutral-run-hair-beard",
+      "snapshot": {
+        "version": "pillagers-lab-snapshot/1",
+        "styleVersion": "pillagers-meshy-human/1",
+        "contractVersion": 1,
+        "fitVersion": "pillagers-fit/0.2",
+        "dna": {
+          "schemaVersion": 1,
+          "seed": 1983,
+          "sex": "male",
+          "age": 32,
+          "traits": {
+            "physicality": 0.55,
+            "agility": 0.55,
+            "intelligence": 0.55,
+            "cunning": 0.4,
+            "temperament": 0.4
+          },
+          "heritage": {
+            "scandinavian": 0.5,
+            "angloSaxon": 0.2,
+            "gaelic": 0.15,
+            "finnic": 0.05,
+            "sami": 0.05,
+            "baltic": 0.05
+          },
+          "morphology": {
+            "masculinity": 1,
+            "height": 1.5056687145773322
+          }
+        },
+        "presentation": {
+          "hair": "hair/meshy-short-angular",
+          "beard": "beard/meshy-compact-wedge",
+          "outfit": "garment/meshy-tunic-trousers",
+          "equipment": "none",
+          "equipmentSocket": "auto",
+          "hairColor": null,
+          "technicalWaistWrap": false
+        },
+        "body": {
+          "version": 1,
+          "preset": "neutral",
+          "source": "meshy"
+        },
+        "lod": 2,
+        "pose": {
+          "animation": "Running",
+          "time": 0.6,
+          "paused": true
+        },
+        "camera": {
+          "type": "orthographic",
+          "fov": 38,
+          "scale": 1,
+          "position": [
+            1,
+            2.85,
+            2.05
+          ],
+          "target": [
+            0,
+            1.2,
+            0
+          ]
+        },
+        "lighting": "lab-neutral/1",
+        "modules": [
+          {
+            "id": "body/meshy-human",
+            "path": "/game-assets/human/Human_LOD2.glb",
+            "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+          },
+          {
+            "id": "hair/meshy-short-angular",
+            "path": "/character-lab/modules/meshy-v2/hair.glb",
+            "sha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+              "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          },
+          {
+            "id": "beard/meshy-compact-wedge",
+            "path": "/character-lab/modules/meshy-v2/beard.glb",
+            "sha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+              "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          },
+          {
+            "id": "garment/meshy-tunic-trousers",
+            "path": "/character-lab/modules/meshy-v2/outfit.glb",
+            "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+            "binding": {
+              "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+              "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+              "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+            }
+          }
+        ]
+      },
+      "bodySource": {
+        "source": "meshy",
+        "id": "body/meshy-human",
+        "path": "/game-assets/human/Human_LOD2.glb",
+        "url": "/game-assets/human/Human_LOD2.glb",
+        "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "styleVersion": "pillagers-meshy-human/1",
+        "status": "preview"
+      },
+      "bindings": [
+        {
+          "id": "hair/meshy-short-angular",
+          "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+          "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        {
+          "id": "beard/meshy-compact-wedge",
+          "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+          "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        {
+          "id": "garment/meshy-tunic-trousers",
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

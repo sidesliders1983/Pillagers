@@ -1,0 +1,14 @@
+.preview-ground-controls {
+    display: grid;
+    gap: 8px;
+}
+.preview-ground-controls label.preview-ground-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+.preview-ground-controls .preview-ground-toggle input {
+    width: auto;
+    margin: 0;
+}

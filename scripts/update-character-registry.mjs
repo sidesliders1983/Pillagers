@@ -13,7 +13,7 @@ for(const asset of characterAssets){
             const record=readGLB(path);
             if(asset.type!=='body'){
                 const provenance=JSON.parse(readFileSync(publicFile(path.replace('.glb','.provenance.json')),'utf8').replace(/^\uFEFF/,''));
-                validateModuleProvenance(asset,lod,provenance,record.sha256,{allowLabPreview:asset.scope==='lab-v04'&&asset.reviewStatus==='preview',record,authoringReceiptBytes:asset.scope==='lab-v04'?readFileSync(publicFile(provenance.v04Canonicalization?.authoringReceipt)):undefined});
+                validateModuleProvenance(asset,lod,provenance,record.sha256,{allowLabPreview:['lab-v04','body-bound'].includes(asset.scope)&&asset.reviewStatus==='preview',record,authoringReceiptBytes:asset.scope==='lab-v04'?readFileSync(publicFile(provenance.v04Canonicalization?.authoringReceipt)):undefined});
                 if(asset.type==='garment'&&asset.metadata?.garmentBind){
                     const bindPath=path.slice(0,path.lastIndexOf('/')+1)+'garment-bind.json';
                     validateGarmentBindProvenance(asset,lod,provenance,{sidecarBytes:readFileSync(publicFile(bindPath))});

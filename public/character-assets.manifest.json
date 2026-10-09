@@ -1687,6 +1687,308 @@
         "materials": 1,
         "runtimeTriangles": 1000
       }
+    },
+    {
+      "id": "hair/meshy-short-angular",
+      "type": "hair",
+      "version": 1,
+      "scope": "body-bound",
+      "reviewStatus": "preview",
+      "label": "Short angular hair",
+      "style": "short",
+      "compatibleBodies": [
+        {
+          "id": "body/meshy-human",
+          "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/meshy-v2/hair.glb",
+          "sha256": "2f3c0b26ae8c790a042dfa97fb66e0f560911e6f18c18128fd97024a9278fd4d",
+          "triangles": 212,
+          "materials": 1,
+          "bytes": 39372,
+          "bounds": {
+            "min": [
+              -0.09464292973279953,
+              1.5007350444793701,
+              -0.0949999988079071
+            ],
+            "max": [
+              0.09464292973279953,
+              1.6699999570846558,
+              0.11242615431547165
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "authored-template",
+        "native-meshy-rig",
+        "proof-v2"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 212
+        },
+        "materials": 1,
+        "runtimeTriangles": 212
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.2",
+        "id": "hair/meshy-short-angular",
+        "type": "hair",
+        "anchor": "socket_head_top",
+        "fitMode": "conform",
+        "authoringFrame": "meshy-native",
+        "nativeBinding": {
+          "path": "/character-lab/modules/meshy-v2/hair.binding.json",
+          "sha256": "cbba913fbd3e4fecddbdfe8880b5afef42e04a658e09c6edbe101f4c036642c9",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        "clearance": 0.007
+      }
+    },
+    {
+      "id": "beard/meshy-compact-wedge",
+      "type": "beard",
+      "version": 1,
+      "scope": "body-bound",
+      "reviewStatus": "preview",
+      "label": "Compact wedge beard",
+      "style": "short",
+      "compatibleBodies": [
+        {
+          "id": "body/meshy-human",
+          "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/meshy-v2/beard.glb",
+          "sha256": "cb9102b6802a6603cc13d2b4de43bc1f3abac6dc049d1c5ca0cc89be6d496c72",
+          "triangles": 106,
+          "materials": 1,
+          "bytes": 20292,
+          "bounds": {
+            "min": [
+              -0.0668468028306961,
+              1.428908348083496,
+              0.016433419659733772
+            ],
+            "max": [
+              0.0668468028306961,
+              1.4899989366531372,
+              0.11999999731779099
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "materialVariants": [
+        "profile-hair-colour"
+      ],
+      "tags": [
+        "authored-template",
+        "native-meshy-rig",
+        "proof-v2"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 106
+        },
+        "materials": 1,
+        "runtimeTriangles": 106
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.2",
+        "id": "beard/meshy-compact-wedge",
+        "type": "beard",
+        "anchor": "socket_jaw",
+        "fitMode": "conform",
+        "authoringFrame": "meshy-native",
+        "nativeBinding": {
+          "path": "/character-lab/modules/meshy-v2/beard.binding.json",
+          "sha256": "08dab140907191c15b6c71bdace8262d754edbab50546056c388fb858a5be4a3",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        "clearance": 0.007
+      }
+    },
+    {
+      "id": "garment/meshy-tunic-trousers",
+      "type": "garment",
+      "version": 1,
+      "scope": "body-bound",
+      "reviewStatus": "preview",
+      "label": "Tunic, trousers and boots · outfit preview",
+      "style": "outfit",
+      "compatibleBodies": [
+        {
+          "id": "body/meshy-human",
+          "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/meshy-v2/outfit.glb",
+          "sha256": "08d9a96b14293f9566c66f30eb5120bf98effbdc34f5f9b3a0e1b68239c594a7",
+          "triangles": 1045,
+          "materials": 1,
+          "bytes": 189340,
+          "bounds": {
+            "min": [
+              -0.3731599450111389,
+              0.014999999664723873,
+              -0.1899999976158142
+            ],
+            "max": [
+              0.371593177318573,
+              1.4446271657943726,
+              0.18515461683273315
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "materialVariants": [
+        "authored-linear-palette"
+      ],
+      "tags": [
+        "authored-template",
+        "native-meshy-rig",
+        "proof-v2"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 1045
+        },
+        "materials": 1,
+        "runtimeTriangles": 1045
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.2",
+        "id": "garment/meshy-tunic-trousers",
+        "type": "garment",
+        "anchor": "socket_chest",
+        "fitMode": "drape",
+        "authoringFrame": "meshy-native",
+        "nativeBinding": {
+          "path": "/character-lab/modules/meshy-v2/outfit.binding.json",
+          "sha256": "ef466f4f94c2c27273e394ef7b75987f696f708de293d61887c508d9a91b23fe",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        "clearance": 0.016,
+        "slot": "full"
+      }
+    },
+    {
+      "id": "equipment/meshy-belt-pouch",
+      "type": "equipment",
+      "version": 1,
+      "scope": "body-bound",
+      "reviewStatus": "preview",
+      "label": "Belt pouch",
+      "style": "pouch",
+      "compatibleBodies": [
+        {
+          "id": "body/meshy-human",
+          "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+        },
+        {
+          "id": "body/meshy-human",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ],
+      "lods": {
+        "2": {
+          "file": "/character-lab/modules/meshy-v2/pouch.glb",
+          "sha256": "d8fb4dfbb94e7c7d7e44be621247f276cac91052c104e103b18e6e2a67148012",
+          "triangles": 24,
+          "materials": 1,
+          "bytes": 3564,
+          "bounds": {
+            "min": [
+              -0.05000000074505806,
+              -0.06499999761581421,
+              -0.017500000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.06499999761581421,
+              0.035999998450279236
+            ]
+          }
+        }
+      },
+      "runtimeLOD": 2,
+      "materialVariants": [
+        "authored-linear-palette"
+      ],
+      "tags": [
+        "authored-template",
+        "native-meshy-rig",
+        "proof-v2"
+      ],
+      "budgets": {
+        "triangles": {
+          "2": 24
+        },
+        "materials": 1,
+        "runtimeTriangles": 24
+      },
+      "metadata": {
+        "version": "pillagers-fit/0.2",
+        "id": "equipment/meshy-belt-pouch",
+        "type": "equipment",
+        "anchor": "socket_waist",
+        "fitMode": "rigid",
+        "authoringFrame": "meshy-native",
+        "nativeBinding": {
+          "path": "/character-lab/modules/meshy-v2/pouch.binding.json",
+          "sha256": "a93916bb750a9ef65eef35884b1e9c8529c353dfa5fc05f640ab78c06ace3a02",
+          "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+        },
+        "clearance": 0.007,
+        "accessorySlot": "belt",
+        "dependency": {
+          "module": "garment/meshy-tunic-trousers",
+          "frame": "belt_side_L"
+        }
+      }
     }
   ]
 }

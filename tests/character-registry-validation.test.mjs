@@ -7,8 +7,9 @@ import {validateAssetRecord,validateLoadedBodyOrientation} from '../scripts/char
 const {characterAssets,characterAsset,characterAssetURL,validateCharacterRegistry,availableHairStyles}=load('../src/characters/CharacterAssets.ts');
 
 test('registry discovery retains reviewed LOD policy and validates module references',()=>{
-    assert.equal(characterAssets.filter(asset=>asset.scope!=='lab-v04').length,13,'retired outfits are not active inventory');
-    assert.equal(validateCharacterRegistry().length,13+load('../src/characters/V04ModuleCatalog.ts').v04CharacterModules.length);
+    assert.equal(characterAssets.filter(asset=>asset.scope!=='lab-v04'&&asset.scope!=='body-bound').length,13,'retired outfits are not active inventory');
+    assert.equal(validateCharacterRegistry().length,17+load('../src/characters/V04ModuleCatalog.ts').v04CharacterModules.length);
+    assert.deepEqual(characterAssets.filter(a=>a.scope==='body-bound').map(a=>a.id).sort(),['beard/meshy-compact-wedge','equipment/meshy-belt-pouch','garment/meshy-tunic-trousers','hair/meshy-short-angular']);
     for(const style of availableHairStyles)assert.equal(characterAssetURL(`hair/${style}`,0),characterAssetURL(`hair/${style}`,2));
     assert.notEqual(characterAssetURL('body/universal-human',0),characterAssetURL('body/universal-human',2));
     assert.notEqual(characterAssetURL('beard/braid',0),characterAssetURL('beard/braid',2));

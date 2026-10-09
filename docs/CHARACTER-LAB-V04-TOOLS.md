@@ -183,3 +183,9 @@ Five actual source roundtrips and eight portable helper tests pass. Build and st
 Human new-only rule: no pre-v0.4 asset is reused or counts toward the new library. New hair, facial hair, clothing and items follow actual Imagegen → reviewed reference → Meshy Low Poly → source-preserving planar/flat COLOR_0 cleanup → canonical fit/rig → independent runtime QA. No new v0.4 tunic has been generated or integrated; candidate mode stays body-only. Earlier reuse/migration allowances are superseded. No new paid generation is authorized by this policy.
 
 Current report and exact evidence: artifacts/character-lab-v04/body-r3/REPORT.md; body QA under body-r3/qa, static export under export-proof and body-r3/static-export-qa. Full issue #18 and module vertical slice remain incomplete.
+
+## Meshy v2 authored outfit preview
+
+The existing Character Lab also supports the native Meshy adapter and explicit body-bound previews from #65. This is a separate truthful authored-template route defined in the current visual guide; it does not rewrite the v0.4 Imagegen/provider receipts or their acceptance state. The current technical review uses the existing tunic/trousers/boots as a fitting fixture on neutral/narrow/broad adults during Idle/Walk/Run. Artwork polishing is deferred. Module selectors, source-bound socket/coverage debug and exact binding snapshots operate through the native factory. Appearance-size fitting and legacy carry overrides remain disabled for this source. All candidates remain previews until user approval. Additional library and general fitting work is postponed.
+
+Fitting-first clarification (2026-10-08): the user now treats this outfit as a technical fitting fixture. Prioritize source-bound contact rims, native skinning, coverage and swaps across neutral/narrow/broad Idle/Walk/Run. Further artwork polishing is deferred; more detailed Meshy models will follow the fitting proof. Existing preview status is retained.

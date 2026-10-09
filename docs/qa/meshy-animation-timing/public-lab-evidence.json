@@ -1,0 +1,837 @@
+{
+  "baseURL": "http://192.168.68.104:5182",
+  "records": [
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "sampledEndpoint": 0.6666666865348816
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Walking",
+      "duration": 1.0416666269302368,
+      "sampledEndpoint": 1.0416666269302368
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "duration": 4.041666507720947,
+      "sampledEndpoint": 4.041666507720947
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Attack",
+      "duration": 2.8333332538604736,
+      "sampledEndpoint": 2.8333332538604736
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Fall_Dead_from_Abdominal_Injury",
+      "duration": 3.5,
+      "sampledEndpoint": 3.5
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Idle_02",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Idle_03",
+      "duration": 4.291666507720947,
+      "sampledEndpoint": 4.291666507720947
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Idle_11",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Idle_7",
+      "duration": 8.75,
+      "sampledEndpoint": 8.75
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Listening_Gesture",
+      "duration": 9.333333015441895,
+      "sampledEndpoint": 9.333333015441895
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Pull_Radish",
+      "duration": 4.708333492279053,
+      "sampledEndpoint": 4.708333492279053
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Talk_Passionately",
+      "duration": 10.291666984558105,
+      "sampledEndpoint": 10.291666984558105
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "sampledEndpoint": 3
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "duration": 0.0833333358168602,
+      "sampledEndpoint": 0.0833333358168602
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "sampledEndpoint": 0.6666666865348816
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Walking",
+      "duration": 1.0416666269302368,
+      "sampledEndpoint": 1.0416666269302368
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "duration": 4.041666507720947,
+      "sampledEndpoint": 4.041666507720947
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Attack",
+      "duration": 2.8333332538604736,
+      "sampledEndpoint": 2.8333332538604736
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Fall_Dead_from_Abdominal_Injury",
+      "duration": 3.5,
+      "sampledEndpoint": 3.5
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Idle_02",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Idle_03",
+      "duration": 4.291666507720947,
+      "sampledEndpoint": 4.291666507720947
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Idle_11",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Idle_7",
+      "duration": 8.75,
+      "sampledEndpoint": 8.75
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Listening_Gesture",
+      "duration": 9.333333015441895,
+      "sampledEndpoint": 9.333333015441895
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Pull_Radish",
+      "duration": 4.708333492279053,
+      "sampledEndpoint": 4.708333492279053
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Talk_Passionately",
+      "duration": 10.291666984558105,
+      "sampledEndpoint": 10.291666984558105
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "sampledEndpoint": 3
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "duration": 0.0833333358168602,
+      "sampledEndpoint": 0.0833333358168602
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "sampledEndpoint": 0.6666666865348816
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Walking",
+      "duration": 1.0416666269302368,
+      "sampledEndpoint": 1.0416666269302368
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "duration": 4.041666507720947,
+      "sampledEndpoint": 4.041666507720947
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Attack",
+      "duration": 2.8333332538604736,
+      "sampledEndpoint": 2.8333332538604736
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Fall_Dead_from_Abdominal_Injury",
+      "duration": 3.5,
+      "sampledEndpoint": 3.5
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Idle_02",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Idle_03",
+      "duration": 4.291666507720947,
+      "sampledEndpoint": 4.291666507720947
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Idle_11",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Idle_7",
+      "duration": 8.75,
+      "sampledEndpoint": 8.75
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Listening_Gesture",
+      "duration": 9.333333015441895,
+      "sampledEndpoint": 9.333333015441895
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Pull_Radish",
+      "duration": 4.708333492279053,
+      "sampledEndpoint": 4.708333492279053
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Talk_Passionately",
+      "duration": 10.291666984558105,
+      "sampledEndpoint": 10.291666984558105
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "sampledEndpoint": 3
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "duration": 0.0833333358168602,
+      "sampledEndpoint": 0.0833333358168602
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "sampledEndpoint": 0.666666686534882
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Walking",
+      "duration": 1.0416666269302368,
+      "sampledEndpoint": 1.04166662693024
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "duration": 4.041666507720947,
+      "sampledEndpoint": 4.04166650772095
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Attack",
+      "duration": 2.8333332538604736,
+      "sampledEndpoint": 2.83333325386047
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Fall_Dead_from_Abdominal_Injury",
+      "duration": 3.5,
+      "sampledEndpoint": 3.5
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Idle_02",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Idle_03",
+      "duration": 4.291666507720947,
+      "sampledEndpoint": 4.29166650772095
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Idle_11",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Idle_7",
+      "duration": 8.75,
+      "sampledEndpoint": 8.75
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Listening_Gesture",
+      "duration": 9.333333015441895,
+      "sampledEndpoint": 9.3333330154419
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Pull_Radish",
+      "duration": 4.708333492279053,
+      "sampledEndpoint": 4.70833349227905
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Talk_Passionately",
+      "duration": 10.291666984558105,
+      "sampledEndpoint": 10.2916669845581
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "sampledEndpoint": 3
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 0,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "duration": 0.0833333358168602,
+      "sampledEndpoint": 0.0833333358168602
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "sampledEndpoint": 0.666666686534882
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Walking",
+      "duration": 1.0416666269302368,
+      "sampledEndpoint": 1.04166662693024
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "duration": 4.041666507720947,
+      "sampledEndpoint": 4.04166650772095
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Attack",
+      "duration": 2.8333332538604736,
+      "sampledEndpoint": 2.83333325386047
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Fall_Dead_from_Abdominal_Injury",
+      "duration": 3.5,
+      "sampledEndpoint": 3.5
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Idle_02",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Idle_03",
+      "duration": 4.291666507720947,
+      "sampledEndpoint": 4.29166650772095
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Idle_11",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Idle_7",
+      "duration": 8.75,
+      "sampledEndpoint": 8.75
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Listening_Gesture",
+      "duration": 9.333333015441895,
+      "sampledEndpoint": 9.3333330154419
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Pull_Radish",
+      "duration": 4.708333492279053,
+      "sampledEndpoint": 4.70833349227905
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Talk_Passionately",
+      "duration": 10.291666984558105,
+      "sampledEndpoint": 10.2916669845581
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "sampledEndpoint": 3
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 1,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "duration": 0.0833333358168602,
+      "sampledEndpoint": 0.0833333358168602
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "sampledEndpoint": 0.666666686534882
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Walking",
+      "duration": 1.0416666269302368,
+      "sampledEndpoint": 1.04166662693024
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa",
+      "duration": 4.041666507720947,
+      "sampledEndpoint": 4.04166650772095
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Attack",
+      "duration": 2.8333332538604736,
+      "sampledEndpoint": 2.83333325386047
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Fall_Dead_from_Abdominal_Injury",
+      "duration": 3.5,
+      "sampledEndpoint": 3.5
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Idle_02",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Idle_03",
+      "duration": 4.291666507720947,
+      "sampledEndpoint": 4.29166650772095
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Idle_11",
+      "duration": 1.875,
+      "sampledEndpoint": 1.875
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Idle_7",
+      "duration": 8.75,
+      "sampledEndpoint": 8.75
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Listening_Gesture",
+      "duration": 9.333333015441895,
+      "sampledEndpoint": 9.3333330154419
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Pull_Radish",
+      "duration": 4.708333492279053,
+      "sampledEndpoint": 4.70833349227905
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Talk_Passionately",
+      "duration": 10.291666984558105,
+      "sampledEndpoint": 10.2916669845581
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "sampledEndpoint": 3
+    },
+    {
+      "route": "/meshy-preview",
+      "lod": 2,
+      "clip": "01a11653-99cc-7579-b58e-8682f15317fa.001",
+      "duration": 0.0833333358168602,
+      "sampledEndpoint": 0.0833333358168602
+    }
+  ],
+  "playback": [
+    {
+      "route": "/character-lab",
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "wallLoopSeconds": 0.6380999999940397,
+      "samples": [
+        0.088,
+        0.168,
+        0.252,
+        0.357,
+        0.447,
+        0.533,
+        0.629,
+        0.042,
+        0.117,
+        0.187,
+        0.255,
+        0.324,
+        0.394,
+        0.474,
+        0.541,
+        0.611,
+        0.013
+      ],
+      "wraps": 2,
+      "wrapTimes": [
+        0.6959000000059604,
+        1.334
+      ],
+      "maximumFrameGap": 105.29999999701977
+    },
+    {
+      "route": "/character-lab",
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "wallLoopSeconds": 2.9659000000059605,
+      "samples": [
+        0.17,
+        0.247,
+        0.3,
+        0.366,
+        0.424,
+        0.478,
+        0.531,
+        0.589,
+        0.64,
+        0.695,
+        0.75,
+        0.805,
+        0.859,
+        0.913,
+        0.967,
+        1.022,
+        1.079,
+        1.132,
+        1.195,
+        1.295,
+        1.311,
+        1.374,
+        1.423,
+        1.476,
+        1.53,
+        1.584,
+        1.64,
+        1.693,
+        1.747,
+        1.803,
+        1.858,
+        1.912,
+        1.965,
+        2.018,
+        2.072,
+        2.125,
+        2.178,
+        2.233,
+        2.289,
+        2.342,
+        2.395,
+        2.445,
+        2.498,
+        2.553,
+        2.604,
+        2.657,
+        2.709,
+        2.761,
+        2.823,
+        2.884,
+        2.943,
+        2.999,
+        0.057,
+        0.11,
+        0.163,
+        0.218,
+        0.271,
+        0.327,
+        0.384,
+        0.439,
+        0.492,
+        0.543,
+        0.597,
+        0.651,
+        0.703,
+        0.754,
+        0.807,
+        0.862,
+        0.912,
+        0.963,
+        1.014,
+        1.064,
+        1.115,
+        1.171,
+        1.225,
+        1.281,
+        1.33,
+        1.383,
+        1.439,
+        1.487,
+        1.539,
+        1.591,
+        1.643,
+        1.692,
+        1.742,
+        1.795,
+        1.847,
+        1.898,
+        1.949,
+        2,
+        2.054,
+        2.108,
+        2.162,
+        2.213,
+        2.266,
+        2.319,
+        2.373,
+        2.427,
+        2.482,
+        2.537,
+        2.594,
+        2.649,
+        2.703,
+        2.755,
+        2.812,
+        2.867,
+        2.92,
+        2.973,
+        0.023
+      ],
+      "wraps": 2,
+      "wrapTimes": [
+        2.9882000000029803,
+        5.954100000008941
+      ],
+      "maximumFrameGap": 100.59999999403954
+    },
+    {
+      "route": "/meshy-preview",
+      "clip": "Running",
+      "duration": 0.6666666865348816,
+      "wallLoopSeconds": 0.645199999988079,
+      "samples": [
+        0.077933313459158,
+        0.211333313465118,
+        0.335233313456178,
+        0.468133313462138,
+        0.611833313465119,
+        0.0737666269242765,
+        0.199166626930237,
+        0.324366626933217,
+        0.456766626924277,
+        0.587666626930237,
+        0.0525999403893949
+      ],
+      "wraps": 2,
+      "wrapTimes": [
+        0.9425,
+        1.587699999988079
+      ],
+      "maximumFrameGap": 278.69999998807907
+    },
+    {
+      "route": "/meshy-preview",
+      "clip": "Unsteady_Walk",
+      "duration": 3,
+      "wallLoopSeconds": 3.0014000000059604,
+      "samples": [
+        0.233399999991059,
+        0.3625,
+        0.40109999999404,
+        0.49109999999404,
+        0.6185,
+        0.75909999999404,
+        0.88770000000298,
+        1.019,
+        1.14679999999702,
+        1.274,
+        1.39579999999702,
+        1.517,
+        1.64379999999702,
+        1.77129999999702,
+        1.90129999999702,
+        2.02870000000298,
+        2.1575,
+        2.287,
+        2.4165,
+        2.53670000000298,
+        2.66120000000298,
+        2.78579999999702,
+        2.91520000000298,
+        0.0332000000029802,
+        0.1545,
+        0.281099999994039,
+        0.4105,
+        0.5275,
+        0.65259999999404,
+        0.77470000000298,
+        0.89479999999702,
+        1.01689999999106,
+        1.13559999999404,
+        1.258,
+        1.37259999999404,
+        1.5005,
+        1.643,
+        1.77579999999702,
+        1.91470000000298,
+        2.03959999999404,
+        2.16879999999702,
+        2.29570000000298,
+        2.43270000000298,
+        2.55720000000298,
+        2.67909999999404,
+        2.80220000000298,
+        2.91959999999404,
+        0.0347000000029802
+      ],
+      "wraps": 2,
+      "wrapTimes": [
+        2.9735,
+        5.97490000000596
+      ],
+      "maximumFrameGap": 173.70000000298023
+    }
+  ],
+  "errors": []
+}

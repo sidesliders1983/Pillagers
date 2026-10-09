@@ -1,0 +1,612 @@
+{
+  "width": 414,
+  "height": 380,
+  "frames": [
+    {
+      "wallSeconds": 0.021900000005960464,
+      "clipSeconds": 0.113
+    },
+    {
+      "wallSeconds": 0.05870000000298023,
+      "clipSeconds": 0.148
+    },
+    {
+      "wallSeconds": 0.12330000001192093,
+      "clipSeconds": 0.214
+    },
+    {
+      "wallSeconds": 0.16380000001192094,
+      "clipSeconds": 0.254
+    },
+    {
+      "wallSeconds": 0.20230000001192092,
+      "clipSeconds": 0.293
+    },
+    {
+      "wallSeconds": 0.24180000001192092,
+      "clipSeconds": 0.332
+    },
+    {
+      "wallSeconds": 0.2799000000059605,
+      "clipSeconds": 0.369
+    },
+    {
+      "wallSeconds": 0.3177000000029802,
+      "clipSeconds": 0.408
+    },
+    {
+      "wallSeconds": 0.3538000000119209,
+      "clipSeconds": 0.445
+    },
+    {
+      "wallSeconds": 0.3911000000089407,
+      "clipSeconds": 0.482
+    },
+    {
+      "wallSeconds": 0.4321000000089407,
+      "clipSeconds": 0.522
+    },
+    {
+      "wallSeconds": 0.4721000000089407,
+      "clipSeconds": 0.562
+    },
+    {
+      "wallSeconds": 0.5133000000119209,
+      "clipSeconds": 0.605
+    },
+    {
+      "wallSeconds": 0.558,
+      "clipSeconds": 0.648
+    },
+    {
+      "wallSeconds": 0.8007000000029803,
+      "clipSeconds": 0.225
+    },
+    {
+      "wallSeconds": 0.8158000000119209,
+      "clipSeconds": 0.24
+    },
+    {
+      "wallSeconds": 0.8529000000059604,
+      "clipSeconds": 0.278
+    },
+    {
+      "wallSeconds": 0.8582000000029802,
+      "clipSeconds": 0.283
+    },
+    {
+      "wallSeconds": 0.892800000011921,
+      "clipSeconds": 0.318
+    },
+    {
+      "wallSeconds": 0.9292000000029802,
+      "clipSeconds": 0.352
+    },
+    {
+      "wallSeconds": 0.968300000011921,
+      "clipSeconds": 0.392
+    },
+    {
+      "wallSeconds": 1.0045,
+      "clipSeconds": 0.429
+    },
+    {
+      "wallSeconds": 1.0454000000059605,
+      "clipSeconds": 0.469
+    },
+    {
+      "wallSeconds": 1.0835,
+      "clipSeconds": 0.508
+    },
+    {
+      "wallSeconds": 1.1225,
+      "clipSeconds": 0.547
+    },
+    {
+      "wallSeconds": 1.1598000000119209,
+      "clipSeconds": 0.584
+    },
+    {
+      "wallSeconds": 1.1977000000029803,
+      "clipSeconds": 0.622
+    },
+    {
+      "wallSeconds": 1.2396000000089407,
+      "clipSeconds": 0.662
+    },
+    {
+      "wallSeconds": 1.3819000000059605,
+      "clipSeconds": 0.14
+    },
+    {
+      "wallSeconds": 1.395300000011921,
+      "clipSeconds": 0.153
+    },
+    {
+      "wallSeconds": 1.4089000000059604,
+      "clipSeconds": 0.167
+    },
+    {
+      "wallSeconds": 1.4358000000119209,
+      "clipSeconds": 0.194
+    },
+    {
+      "wallSeconds": 1.4761000000089406,
+      "clipSeconds": 0.234
+    },
+    {
+      "wallSeconds": 1.5196000000089407,
+      "clipSeconds": 0.277
+    },
+    {
+      "wallSeconds": 1.5616000000089407,
+      "clipSeconds": 0.319
+    },
+    {
+      "wallSeconds": 1.6061000000089407,
+      "clipSeconds": 0.364
+    },
+    {
+      "wallSeconds": 1.648300000011921,
+      "clipSeconds": 0.405
+    },
+    {
+      "wallSeconds": 1.6936000000089406,
+      "clipSeconds": 0.452
+    },
+    {
+      "wallSeconds": 1.7311000000089407,
+      "clipSeconds": 0.489
+    },
+    {
+      "wallSeconds": 1.7751000000089407,
+      "clipSeconds": 0.533
+    },
+    {
+      "wallSeconds": 1.8145,
+      "clipSeconds": 0.571
+    },
+    {
+      "wallSeconds": 1.8565,
+      "clipSeconds": 0.613
+    },
+    {
+      "wallSeconds": 1.8992000000029803,
+      "clipSeconds": 0.657
+    },
+    {
+      "wallSeconds": 2.021,
+      "clipSeconds": 0.112
+    },
+    {
+      "wallSeconds": 2.025,
+      "clipSeconds": 0.116
+    },
+    {
+      "wallSeconds": 2.0369000000059603,
+      "clipSeconds": 0.128
+    },
+    {
+      "wallSeconds": 2.1067000000029803,
+      "clipSeconds": 0.198
+    },
+    {
+      "wallSeconds": 2.1185,
+      "clipSeconds": 0.21
+    },
+    {
+      "wallSeconds": 2.1956000000089406,
+      "clipSeconds": 0.287
+    },
+    {
+      "wallSeconds": 2.23670000000298,
+      "clipSeconds": 0.328
+    },
+    {
+      "wallSeconds": 2.245600000008941,
+      "clipSeconds": 0.337
+    },
+    {
+      "wallSeconds": 2.293,
+      "clipSeconds": 0.382
+    },
+    {
+      "wallSeconds": 2.334800000011921,
+      "clipSeconds": 0.425
+    },
+    {
+      "wallSeconds": 2.3781000000089407,
+      "clipSeconds": 0.468
+    },
+    {
+      "wallSeconds": 2.4161000000089405,
+      "clipSeconds": 0.507
+    },
+    {
+      "wallSeconds": 2.456800000011921,
+      "clipSeconds": 0.545
+    },
+    {
+      "wallSeconds": 2.5007000000029804,
+      "clipSeconds": 0.591
+    },
+    {
+      "wallSeconds": 2.545,
+      "clipSeconds": 0.636
+    },
+    {
+      "wallSeconds": 2.5872000000029804,
+      "clipSeconds": 0.01
+    },
+    {
+      "wallSeconds": 2.630800000011921,
+      "clipSeconds": 0.054
+    },
+    {
+      "wallSeconds": 2.6679000000059605,
+      "clipSeconds": 0.092
+    },
+    {
+      "wallSeconds": 2.7091000000089407,
+      "clipSeconds": 0.134
+    },
+    {
+      "wallSeconds": 2.7498000000119207,
+      "clipSeconds": 0.174
+    },
+    {
+      "wallSeconds": 2.7932000000029804,
+      "clipSeconds": 0.216
+    },
+    {
+      "wallSeconds": 2.83120000000298,
+      "clipSeconds": 0.256
+    },
+    {
+      "wallSeconds": 2.8735,
+      "clipSeconds": 0.297
+    },
+    {
+      "wallSeconds": 2.9139000000059605,
+      "clipSeconds": 0.337
+    },
+    {
+      "wallSeconds": 2.95570000000298,
+      "clipSeconds": 0.378
+    },
+    {
+      "wallSeconds": 2.9954000000059606,
+      "clipSeconds": 0.42
+    },
+    {
+      "wallSeconds": 3.036300000011921,
+      "clipSeconds": 0.46
+    },
+    {
+      "wallSeconds": 3.0761000000089407,
+      "clipSeconds": 0.499
+    },
+    {
+      "wallSeconds": 3.1171000000089406,
+      "clipSeconds": 0.541
+    },
+    {
+      "wallSeconds": 3.1571000000089406,
+      "clipSeconds": 0.58
+    },
+    {
+      "wallSeconds": 3.19670000000298,
+      "clipSeconds": 0.621
+    },
+    {
+      "wallSeconds": 3.240300000011921,
+      "clipSeconds": 0.665
+    },
+    {
+      "wallSeconds": 3.2782000000029803,
+      "clipSeconds": 0.035
+    },
+    {
+      "wallSeconds": 3.3214000000059603,
+      "clipSeconds": 0.079
+    },
+    {
+      "wallSeconds": 3.3585,
+      "clipSeconds": 0.117
+    },
+    {
+      "wallSeconds": 3.4041000000089405,
+      "clipSeconds": 0.161
+    },
+    {
+      "wallSeconds": 3.445100000008941,
+      "clipSeconds": 0.202
+    },
+    {
+      "wallSeconds": 3.4854000000059604,
+      "clipSeconds": 0.243
+    },
+    {
+      "wallSeconds": 3.524,
+      "clipSeconds": 0.282
+    },
+    {
+      "wallSeconds": 3.5703000000119207,
+      "clipSeconds": 0.328
+    },
+    {
+      "wallSeconds": 3.6119000000059605,
+      "clipSeconds": 0.368
+    },
+    {
+      "wallSeconds": 3.652,
+      "clipSeconds": 0.41
+    },
+    {
+      "wallSeconds": 3.6965,
+      "clipSeconds": 0.454
+    },
+    {
+      "wallSeconds": 3.7326000000089405,
+      "clipSeconds": 0.491
+    },
+    {
+      "wallSeconds": 3.771800000011921,
+      "clipSeconds": 0.529
+    },
+    {
+      "wallSeconds": 3.8084000000059604,
+      "clipSeconds": 0.566
+    },
+    {
+      "wallSeconds": 3.843800000011921,
+      "clipSeconds": 0.602
+    },
+    {
+      "wallSeconds": 3.8824000000059606,
+      "clipSeconds": 0.64
+    },
+    {
+      "wallSeconds": 3.9241000000089405,
+      "clipSeconds": 0.015
+    },
+    {
+      "wallSeconds": 3.9687000000029804,
+      "clipSeconds": 0.058
+    },
+    {
+      "wallSeconds": 4.007800000011921,
+      "clipSeconds": 0.099
+    },
+    {
+      "wallSeconds": 4.050800000011921,
+      "clipSeconds": 0.141
+    },
+    {
+      "wallSeconds": 4.08820000000298,
+      "clipSeconds": 0.179
+    },
+    {
+      "wallSeconds": 4.12570000000298,
+      "clipSeconds": 0.217
+    },
+    {
+      "wallSeconds": 4.164800000011921,
+      "clipSeconds": 0.255
+    },
+    {
+      "wallSeconds": 4.2017000000029805,
+      "clipSeconds": 0.292
+    },
+    {
+      "wallSeconds": 4.24160000000894,
+      "clipSeconds": 0.332
+    },
+    {
+      "wallSeconds": 4.27820000000298,
+      "clipSeconds": 0.368
+    },
+    {
+      "wallSeconds": 4.31490000000596,
+      "clipSeconds": 0.405
+    },
+    {
+      "wallSeconds": 4.35270000000298,
+      "clipSeconds": 0.443
+    },
+    {
+      "wallSeconds": 4.38910000000894,
+      "clipSeconds": 0.479
+    },
+    {
+      "wallSeconds": 4.429400000005961,
+      "clipSeconds": 0.521
+    },
+    {
+      "wallSeconds": 4.466800000011921,
+      "clipSeconds": 0.557
+    },
+    {
+      "wallSeconds": 4.5091000000089405,
+      "clipSeconds": 0.6
+    },
+    {
+      "wallSeconds": 4.547300000011921,
+      "clipSeconds": 0.638
+    },
+    {
+      "wallSeconds": 4.58890000000596,
+      "clipSeconds": 0.014
+    },
+    {
+      "wallSeconds": 4.62790000000596,
+      "clipSeconds": 0.052
+    },
+    {
+      "wallSeconds": 4.666300000011921,
+      "clipSeconds": 0.09
+    },
+    {
+      "wallSeconds": 4.701900000005961,
+      "clipSeconds": 0.126
+    },
+    {
+      "wallSeconds": 4.7453000000119205,
+      "clipSeconds": 0.169
+    },
+    {
+      "wallSeconds": 4.77690000000596,
+      "clipSeconds": 0.202
+    },
+    {
+      "wallSeconds": 4.815,
+      "clipSeconds": 0.239
+    },
+    {
+      "wallSeconds": 4.853300000011921,
+      "clipSeconds": 0.277
+    },
+    {
+      "wallSeconds": 4.890800000011921,
+      "clipSeconds": 0.316
+    },
+    {
+      "wallSeconds": 4.93190000000596,
+      "clipSeconds": 0.355
+    },
+    {
+      "wallSeconds": 4.968600000008941,
+      "clipSeconds": 0.393
+    },
+    {
+      "wallSeconds": 5.00470000000298,
+      "clipSeconds": 0.429
+    },
+    {
+      "wallSeconds": 5.044900000005961,
+      "clipSeconds": 0.47
+    },
+    {
+      "wallSeconds": 5.0796000000089405,
+      "clipSeconds": 0.504
+    },
+    {
+      "wallSeconds": 5.11720000000298,
+      "clipSeconds": 0.541
+    },
+    {
+      "wallSeconds": 5.1565,
+      "clipSeconds": 0.58
+    },
+    {
+      "wallSeconds": 5.19140000000596,
+      "clipSeconds": 0.616
+    },
+    {
+      "wallSeconds": 5.228100000008941,
+      "clipSeconds": 0.652
+    },
+    {
+      "wallSeconds": 5.26620000000298,
+      "clipSeconds": 0.023
+    },
+    {
+      "wallSeconds": 5.300800000011921,
+      "clipSeconds": 0.058
+    },
+    {
+      "wallSeconds": 5.337900000005961,
+      "clipSeconds": 0.095
+    },
+    {
+      "wallSeconds": 5.37520000000298,
+      "clipSeconds": 0.132
+    },
+    {
+      "wallSeconds": 5.410400000005961,
+      "clipSeconds": 0.168
+    },
+    {
+      "wallSeconds": 5.449800000011921,
+      "clipSeconds": 0.207
+    },
+    {
+      "wallSeconds": 5.491900000005961,
+      "clipSeconds": 0.248
+    },
+    {
+      "wallSeconds": 5.527,
+      "clipSeconds": 0.285
+    },
+    {
+      "wallSeconds": 5.566600000008941,
+      "clipSeconds": 0.325
+    },
+    {
+      "wallSeconds": 5.60540000000596,
+      "clipSeconds": 0.363
+    },
+    {
+      "wallSeconds": 5.6465,
+      "clipSeconds": 0.402
+    },
+    {
+      "wallSeconds": 5.687600000008941,
+      "clipSeconds": 0.445
+    },
+    {
+      "wallSeconds": 5.722800000011921,
+      "clipSeconds": 0.481
+    },
+    {
+      "wallSeconds": 5.759300000011921,
+      "clipSeconds": 0.517
+    },
+    {
+      "wallSeconds": 5.794,
+      "clipSeconds": 0.552
+    },
+    {
+      "wallSeconds": 5.8289000000059605,
+      "clipSeconds": 0.587
+    },
+    {
+      "wallSeconds": 5.866300000011921,
+      "clipSeconds": 0.623
+    },
+    {
+      "wallSeconds": 5.90190000000596,
+      "clipSeconds": 0.66
+    },
+    {
+      "wallSeconds": 5.93990000000596,
+      "clipSeconds": 0.031
+    },
+    {
+      "wallSeconds": 5.976300000011921,
+      "clipSeconds": 0.068
+    },
+    {
+      "wallSeconds": 6.05070000000298,
+      "clipSeconds": 0.106
+    }
+  ],
+  "held": [
+    {
+      "wallSeconds": 0.558,
+      "clipSeconds": 0.648,
+      "image": "held-frame-0.png"
+    },
+    {
+      "wallSeconds": 1.2396000000089407,
+      "clipSeconds": 0.662,
+      "image": "held-frame-1.png"
+    },
+    {
+      "wallSeconds": 1.8992000000029803,
+      "clipSeconds": 0.657,
+      "image": "held-frame-2.png"
+    }
+  ],
+  "errors": []
+}

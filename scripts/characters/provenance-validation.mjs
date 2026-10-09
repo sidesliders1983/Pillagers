@@ -1,3 +1,4 @@
+import {validateTemplateProvenance} from './template-provenance.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {Matrix4,Quaternion,Vector3} from 'three';
@@ -64,6 +65,7 @@ function validateV04AuthoringReceipt(asset,canonical,outputSha256,{authoringRece
  * missing historical links remain unverified, rather than being invented.
  */
 export function validateModuleProvenance(asset,lod,provenance,outputSha256,{allowLabPreview=false,authoringReceiptBytes,record}={}){
+ if(asset.scope==='body-bound')return validateTemplateProvenance(asset,provenance,outputSha256,{allowLabPreview,record});
  const fail=(condition,message)=>assert.ok(condition,`${asset.id} LOD${lod}: ${message}`),sha=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
  fail(provenance&&typeof provenance==='object','missing module provenance');
  fail(provenance.outputSha256===outputSha256,'stale generated provenance');

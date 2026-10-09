@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "route": "authored-template",
+  "moduleId": "equipment/meshy-belt-pouch",
+  "moduleSha256": "d8fb4dfbb94e7c7d7e44be621247f276cac91052c104e103b18e6e2a67148012",
+  "bindingSha256": "a93916bb750a9ef65eef35884b1e9c8529c353dfa5fc05f640ab78c06ace3a02",
+  "sourceBodySha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "path": "scripts/characters/templates/meshy_modules_v2.py",
+    "sha256": "f533df79197f5e0cb28528a5807429d6322b52cee4a26d3522ca2bc2a2571f70",
+    "version": 1,
+    "blender": "4.5.9"
+  },
+  "editableSource": "Assets/Characters/Human/Modules-v2/MeshyHuman_modules-v2.blend",
+  "editableSourceSha256": "91c27d448c6e0c5ddc6cd1c21e842fb4fa57de313cfaf4e28784837b8d40df08",
+  "pipeline": {
+    "path": "scripts/prepare-meshy-modules.mjs",
+    "sha256": "9bc2b9be1d73929c9f482ce65527494c6be2e6c2234f4da9cea964c21338c72f",
+    "weightAuthority": "native-head"
+  },
+  "provider": null,
+  "concept": null,
+  "reviewStatus": "preview",
+  "visualApproval": null,
+  "openings": {
+    "schema": "pillagers-intentional-openings/1",
+    "outputSha256": "d8fb4dfbb94e7c7d7e44be621247f276cac91052c104e103b18e6e2a67148012",
+    "weldTolerance": 0.000001,
+    "boundaryEdges": 0,
+    "loops": []
+  },
+  "technicalViews": "Character Lab fixed front/back/side/RTS; all from this GLB",
+  "conditions": [
+    "Body-free export and linear broad material regions",
+    "Bounded source-derived contacts and deliberate free volumes",
+    "Bilateral construction except one-sided pouch",
+    "Native skin motion at all declared LODs",
+    "Garment dependency and exact snapshot binding identity"
+  ]
+}

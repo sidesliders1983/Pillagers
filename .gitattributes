@@ -6,3 +6,7 @@ public/clothing/**/garment-bind.json -text
 
 public/character-lab/modules/**/*.json -text
 docs/archive/legacy-clothing/**/*.json -text
+
+# Authored-template receipts hash the recipe and export pipeline bytes.
+scripts/characters/templates/meshy_modules_v2.py text eol=lf
+scripts/prepare-meshy-modules.mjs text eol=lf
