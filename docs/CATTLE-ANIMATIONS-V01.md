@@ -68,6 +68,17 @@ The generated source neck lengths limit ground reach. The chosen poses preserve
 the accepted neck curve and head angle rather than stretching the meshes to
 put every muzzle on the floor. There is no measured video motion capture.
 
+## Shared Character Lab ground
+
+Cow and Human share `src/character-lab/PreviewGround.ts` for the floor, grid,
+movement phase, **Moving ground** toggle and **Ground pace** readout. Both use the
+same control below Animation. The one-metre major grid has quarter-metre subdivisions.
+Cow retains its authored pace above, multiplied by Playback speed. The grid stops
+when disabled or frozen, resumes with Play and stays still for Standing, Grazing and
+Human interaction. Human supplies a source-clip gait estimate to the same component.
+
+This preview refactor does not modify cattle assets, authored clips or gameplay rules.
+
 ## Editable files and preparation
 
 Original source GLBs remain unchanged. Each source's sibling `Animations/`

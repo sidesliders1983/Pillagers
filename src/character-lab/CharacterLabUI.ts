@@ -51,6 +51,7 @@ export class CharacterLabUI {
                     <canvas id="lab-preview" aria-label="Universal Human. Drag to rotate, scroll or pinch to zoom."></canvas>
                     <div class="lab-source-controls"><label>Body source<select id="lab-body-source"><option value="meshy">Meshy Human · textured</option><option value="golden-v04-preview">v0.4 · new body preview</option><option value="published">Published body · existing modules</option></select></label><p class="lab-note" id="lab-source-status"></p></div>
                     <label class="lab-source-controls">Animation<select id="lab-animation" aria-label="Available animations"></select></label>
+                    <div id="lab-ground-controls" class="lab-ground-controls"></div>
                     <div class="lab-button-row lab-model-tools" aria-label="Level of detail"><button data-action="lod0">LOD0</button><button data-action="lod1">LOD1</button><button data-action="lod2">LOD2</button></div>
                     <div class="lab-character-labels"><span id="lab-current-label"></span><span id="lab-comparison-label" hidden></span></div>
                     <div class="lab-button-row lab-model-tools" aria-label="Fixed views"><button data-action="view-front">Front</button><button data-action="view-side">Side</button><button data-action="view-back">Back</button><button data-action="overview">RTS</button></div>

@@ -1,4 +1,4 @@
-import { Scene, Color, PerspectiveCamera, OrthographicCamera, WebGLRenderer, HemisphereLight, DirectionalLight, Mesh, CylinderGeometry, MeshStandardMaterial, ACESFilmicToneMapping, PCFSoftShadowMap, Clock } from 'three';
+import { Scene, Color, PerspectiveCamera, OrthographicCamera, WebGLRenderer, HemisphereLight, DirectionalLight, ACESFilmicToneMapping, PCFSoftShadowMap, Clock } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { Phenotype } from '../characters/Phenotype';
 import {meshyHumanFactory,MeshyHuman} from '../characters/MeshyHuman';
@@ -15,6 +15,9 @@ import { fixedLabViews, LabTestSnapshot, labSnapshotVersion, labStyleVersion, pa
 import { characterContract } from '../characters/CharacterContract';
 import { goldenLabBody, labBodyAsset } from '../characters/LabBodySources';
 import { LabBodyPresentation, defaultLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
+import {PreviewGround} from './PreviewGround';
+import {humanPreviewGroundSpeed} from './HumanPreviewPace';
+
 export class CharacterPreview {
     private scene=new Scene();
     private perspectiveCamera=new PerspectiveCamera(38,1,.05,60);
@@ -34,6 +37,8 @@ export class CharacterPreview {
     private animation:string='Idle';
     private poseTime=0;
     private paused=false;
+    private ground = new PreviewGround();
+    private groundSpeed = 0;
     private clock=new Clock();
     private observer:ResizeObserver;
     private fitDebug={...noFitDebug};
@@ -43,19 +48,26 @@ export class CharacterPreview {
         this.renderer.toneMapping=ACESFilmicToneMapping;this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=PCFSoftShadowMap;
         this.scene.add(new HemisphereLight(0xfff3e3,0x9caa9a,2.2));
         const sun=new DirectionalLight(0xffead5,1.7);sun.position.set(-3,6,5);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-4,right:4,top:4,bottom:-4,near:.1,far:15});sun.shadow.normalBias=.025;this.scene.add(sun);
-        const stage=new Mesh(new CylinderGeometry(3.1,3.15,.06,64),new MeshStandardMaterial({color:0xd3d7cc,roughness:1}));stage.position.y=-.045;stage.receiveShadow=true;this.scene.add(stage);
+        this.scene.add(this.ground.root);
+        this.ground.bindControls(document.getElementById('lab-ground-controls')!);
         this.controls=new OrbitControls(this.camera,canvas);this.controls.enableDamping=true;this.controls.enablePan=false;this.controls.minDistance=2;this.controls.maxDistance=14;this.controls.minZoom=.24;this.controls.maxZoom=4;this.controls.maxPolarAngle=Math.PI*.5;
         this.resetView();
         this.observer=new ResizeObserver(()=>{const rect=canvas.getBoundingClientRect();this.renderer.setSize(rect.width,rect.height,false);this.resizeCameras(rect.width/Math.max(1,rect.height));});this.observer.observe(canvas);
         this.renderer.setAnimationLoop(() => {
             const delta = this.clock.getDelta();
             // Native animations consume elapsed time; their spring has its own bounded substeps.
-            if (!this.paused && this.current) {
+            const ready = this.canvas.dataset.ready === 'true';
+            // Keep the last frame while source assets load, without spending GPU time on it.
+            if (!ready) return;
+            if (ready && !this.paused && this.current) {
                 this.current.update(this.current instanceof MeshyHuman ? delta : Math.min(delta, .05));
             }
-            if (this.comparisonSnapshot && !this.comparisonSnapshot.pose.paused && this.comparison) {
+            if (ready && this.comparisonSnapshot && !this.comparisonSnapshot.pose.paused && this.comparison) {
                 this.comparison.update(this.comparison instanceof MeshyHuman ? delta : Math.min(delta, .05));
             }
+            const groundDelta = this.current instanceof MeshyHuman ? delta : Math.min(delta, .05);
+            this.syncGroundPlayback();
+            this.ground.advance(groundDelta);
             this.syncClipTime();
             this.controls.update();
             this.renderer.render(this.scene, this.camera);
@@ -65,8 +77,24 @@ export class CharacterPreview {
     setComparison(snapshot:LabTestSnapshot|null){this.comparisonSnapshot=snapshot?parseLabSnapshot(snapshot):null;void this.refresh();}
     setLOD(lod:number){if(!Number.isInteger(lod)||lod<0||lod>2)throw new Error('Invalid body LOD.');labBodyAsset(this.bodyPresentation.source??'published',lod);this.lod=lod;void this.refresh();}
     toggleFitDebug(key:keyof FitDebugOptions){this.fitDebug[key]=!this.fitDebug[key];for(const model of [this.current,this.comparison])model?.fit?.setDebug(this.fitDebug);this.reportModel();}
-    setAnimation(animation:string){this.animation=animation;this.paused=false;this.poseTime=0;if(this.current)this.playModel(this.current,animation);this.reportModel();}
-    setPose(time:number){if(!Number.isFinite(time)||time<0||time>60)throw new Error('Clip time must be between 0 and 60 seconds.');this.poseTime=time;this.paused=true;if(this.current)this.sampleModel(this.current,this.animation,time);this.reportModel();}
+    setAnimation(animation: string) {
+        this.animation = animation;
+        this.paused = false;
+        this.poseTime = 0;
+        if (this.current) this.playModel(this.current, animation);
+        this.refreshGroundPace();
+        this.reportModel();
+    }
+    setPose(time: number) {
+        if (!Number.isFinite(time) || time < 0 || time > 60) {
+            throw new Error('Clip time must be between 0 and 60 seconds.');
+        }
+        this.poseTime = time;
+        this.paused = true;
+        if (this.current) this.sampleModel(this.current, this.animation, time);
+        this.ground.sample(time * this.groundSpeed);
+        this.reportModel();
+    }
     resume(){this.paused=false;this.reportModel();}
     /** Restore camera/clock before the controller issues its single character refresh. */
     restoreReviewState(snapshot:LabTestSnapshot){const s=parseLabSnapshot(snapshot);this.lod=s.lod;this.animation=s.pose.animation;this.poseTime=s.pose.time;this.paused=s.pose.paused;this.setCamera(s.camera.position,s.camera.target,s.camera.type,s.camera.scale??2.4);}
@@ -87,6 +115,7 @@ export class CharacterPreview {
     }
     private async refresh(){
         const revision=++this.revision;this.canvas.dataset.ready='false';
+        this.syncGroundPlayback();
         try{
             const pinned=this.comparisonSnapshot;
             const models=await Promise.all([this.currentDNA?this.createPreview(this.currentDNA,this.lod,this.presentation,this.bodyPresentation):null,pinned?this.createPreview(pinned.dna,pinned.lod,pinned.presentation,pinned.body):null]);
@@ -96,7 +125,10 @@ export class CharacterPreview {
             if(this.current){if(!(this.current instanceof MeshyHuman)&&!['Idle','Walk','Run'].includes(this.animation)){this.animation='Idle';this.poseTime=0;}this.sampleModel(this.current,this.animation,this.poseTime);}
             if(this.comparison&&pinned)this.sampleModel(this.comparison,pinned.pose.animation,pinned.pose.time);
             for(const model of [this.current,this.comparison])if(model){this.scene.add(model.root);model.fit?.setDebug(this.fitDebug);}
-            this.layout();this.canvas.dataset.ready='true';this.reportModel();
+            this.layout();
+            this.refreshGroundPace();
+            this.canvas.dataset.ready = 'true';
+            this.reportModel();
         }catch(error){if(revision!==this.revision)return;this.report(`Universal Human could not load: ${error instanceof Error?error.message:String(error)}`,true);}
     }
     private playModel(model:UniversalHuman|MeshyHuman,animation:string){
@@ -104,6 +136,16 @@ export class CharacterPreview {
     }
     private sampleModel(model:UniversalHuman|MeshyHuman,animation:string,time:number){
         if(model instanceof MeshyHuman)model.sampleAnimation(animation,time);else model.sampleAnimation(animation as HumanAnimation,time);
+    }
+    private refreshGroundPace() {
+        this.groundSpeed = this.current ? humanPreviewGroundSpeed(this.current, this.animation) : 0;
+        this.ground.sample(this.poseTime * this.groundSpeed);
+    }
+    private syncGroundPlayback() {
+        const rate = this.current instanceof MeshyHuman ? 1
+            : this.current?.root.userData.universalHumanProfile.motion.cadence ?? 1;
+        this.ground.setPlayback(this.groundSpeed, rate,
+            this.paused || this.canvas.dataset.ready !== 'true');
     }
     private syncClipTime() {
         const input = document.getElementById('lab-pose-time') as HTMLInputElement | null;
@@ -113,6 +155,7 @@ export class CharacterPreview {
         input.value = String(this.current instanceof MeshyHuman ? Math.min(rounded, this.current.duration) : rounded);
     }
     private reportModel(){
+        this.syncGroundPlayback();
         const select=document.getElementById('lab-animation') as HTMLSelectElement|null;
         if(select&&this.current){
             const aliases:Record<string,string>={Idle:'Idle_02',Walk:'Walking',Run:'Running'};

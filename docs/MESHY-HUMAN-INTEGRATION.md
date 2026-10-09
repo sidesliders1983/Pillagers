@@ -15,6 +15,30 @@ The original `/character-lab` now defaults to Meshy Human and uses its existing 
 - The existing Character Lab navigation links to the new Meshy preview.
   The published body and morphology/attachment tools remain selectable in the original Lab.
 
+## Shared preview ground
+
+Human, Cow and the focused Meshy preview use the same `PreviewGround` component
+in `src/character-lab/`. It owns the floor, one-metre grid with quarter-metre
+subdivisions, continuous movement phase, **Moving ground** control and **Ground pace**
+readout. The original Lab places this control below Animation for both characters.
+Unchecking the control leaves a stationary grid visible. Freezing the pose also
+freezes the grid; Play resumes it. The preview holds while a new body/LOD loads.
+
+Walking, Running and Unsteady Walk on Human supply a reference pace estimated from
+backward travel of low stance feet over the selected source clip. This is measured
+again for the displayed body after body/LOD changes, without changing clip data,
+duration or playback speed. Idle and other stationary clips leave the grid still.
+Cow supplies its existing authored manifest pace multiplied by its playback rate.
+Only the pace provider differs; floor rendering, movement and controls are shared.
+
+The Human estimate is a visual gait reference, not a gameplay movement speed or a
+certification of perfectly planted feet. Preview changes do not modify source GLBs,
+prepared assets, world locomotion or cattle balance.
+
+Run `scripts/character-lab-ground-smoke.mjs` with `PROTOTYPE_URL`,
+`PLAYWRIGHT_MODULE` and optional `BROWSER_CHANNEL`. See
+[shared ground verification](qa/character-lab-moving-ground/REPORT.md).
+
 ## Rebuild after replacing the source
 
 Run `pnpm assets:human`, then `pnpm build`.

@@ -1,0 +1,65 @@
+{
+  "results": [
+    {
+      "route": "/character-lab",
+      "clip": "Running",
+      "speed": 3.8
+    },
+    {
+      "route": "/character-lab",
+      "clip": "Unsteady_Walk",
+      "speed": 0.6
+    },
+    {
+      "route": "/character-lab",
+      "clip": "Idle_02",
+      "speed": 0
+    },
+    {
+      "route": "/character-lab",
+      "clip": "Walking",
+      "speed": 1.21,
+      "changedChannels": 12618
+    },
+    {
+      "route": "/character-lab",
+      "lod": 0,
+      "clip": "Walking",
+      "speed": 1.21
+    },
+    {
+      "route": "/character-lab",
+      "lod": 1,
+      "clip": "Walking",
+      "speed": 1.21
+    },
+    {
+      "route": "/character-lab",
+      "lod": 2,
+      "clip": "Walking",
+      "speed": 1.21
+    },
+    {
+      "route": "/character-lab",
+      "heights": [
+        1.2,
+        1.6
+      ],
+      "speeds": [
+        0.96,
+        1.28
+      ]
+    },
+    {
+      "route": "/meshy-preview",
+      "walking": 1.16,
+      "running": 3.63
+    },
+    {
+      "route": "/character-lab?model=cow",
+      "walking": 0.37,
+      "halfRate": 0.185
+    }
+  ],
+  "errors": []
+}
