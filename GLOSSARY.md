@@ -24,6 +24,8 @@ _Avoid_: Family
 
 **Occupation**: A persona's current work role; aptitude is derived from CharacterDNA traits. Work history and accumulated progress remain attached to the persona when the role changes.
 
+**Temperament**: A persona’s tendency toward impulsive, fiery and reactive behaviour. Low temperament means calm, restrained, patient and steady; a high value does not mean calmness or universally better character.
+
 **Apprenticeship**: A capped aptitude-related productivity bonus from a parent's completed experience in the same occupation.
 
 **Caregiver**: An eligible adult woman providing childcare for one mother's active child group. She forgoes work and fertility for the Winter in which she provides care.

@@ -1,0 +1,16 @@
+{
+  "compiler": {
+    "typescript": "5.9.3"
+  },
+  "dependencyLockHash": "501d4b6bf835e59742c858b61995620332381d2c6f3e2240447a4ca7be198ed0",
+  "generatorHash": "82e2d4507f90368fd2810292c863bad33e95aefb19c17b35e4889b27f4605494",
+  "files": {
+    "manifest.json": "51d1d8f74c1325e6e12b37135a53405c2c5d20ff5bd20425deb3b9ef5458419a",
+    "summary.json": "6fb7de050bed9b58a5e0d6cdfa3ab3993ae6ed9f9b0af8f4a1702e7009529c66",
+    "audit.json": "b3a367a082d6af53a8b1778986296a39443d620b059180b56a708629b4a2aaa8",
+    "diagnostics.json": "2e0ad5469391b66b9caa5dfe055c5b63e04a4216117a87e5a58023cc106652f8",
+    "design.md": "b69bab8925c81fa6a6946f4b2025555c6adbc96ea3e8a85cf2cda5b8bb805731",
+    "implementation-plan.md": "7e283e68ef3c3f18f7d3ad354b500bc6b003cae30b116e83c16ef4f17a33eb3b",
+    "report.md": "8a57dea644909da2ceec49e8a314b4e10011a59d93943705d89825a616cdf6d9"
+  }
+}

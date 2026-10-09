@@ -15,3 +15,7 @@ scripts/prepare-meshy-modules.mjs text eol=lf
 docs/qa/occupation-aptitude-v03/*.json text eol=lf
 docs/qa/food-resilience-v03/*.json text eol=lf
 docs/qa/food-resilience-v03/report.md text eol=lf
+
+# Exact-byte receipts for occupation profile comparison.
+docs/qa/occupation-profiles-v03b/*.json text eol=lf
+docs/qa/occupation-profiles-v03b/*.md text eol=lf
