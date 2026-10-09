@@ -57,7 +57,8 @@ function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
 }
 
 /** Same authored primitives and instancing path for reference and generated scenery. */
-export function createNatureFromPlan(assets: AssetManager, plan: readonly AssetPlacement[], seed: number) {
+export function createNatureFromPlan(assets: AssetManager, plan: readonly AssetPlacement[],
+    seed: number, resolveModel: (id: NatureAssetKey) => Object3D = id => assets.get(id)) {
     const group = new Group(), dummy = new Object3D(), heights: number[] = [];
     group.name = 'Seeded KayKit FREE placement';
     for (const id of natureAssetIds) {
@@ -68,7 +69,7 @@ export function createNatureFromPlan(assets: AssetManager, plan: readonly AssetP
             dummy.updateMatrix();
             return dummy.matrix.clone();
         });
-        appendNatureModel(group, assets.get(id), id, transforms, heights);
+        appendNatureModel(group, resolveModel(id), id, transforms, heights);
     }
     group.userData.seed = seed;
     group.userData.coniferHeights = heights;

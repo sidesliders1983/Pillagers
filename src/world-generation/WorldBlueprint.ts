@@ -2,6 +2,7 @@ import type { NatureAssetKey } from '../config/NatureAssets';
 
 /** A versioned geographical proposal. It contains no Simulation Core inhabitants or resources. */
 export const generatorVersion = 'fjordside-v0.1' as const;
+export type ConiferSource = 'kaykit' | 'ez-tree';
 export type WorldPreset = 'fjord' | 'coastal-valley' | 'rocky-inlet';
 export type Point2 = Readonly<{ x: number; z: number }>;
 export type Bounds2 = Readonly<{ minX: number; maxX: number; minZ: number; maxZ: number }>;
@@ -12,6 +13,7 @@ export interface GenerationRequest {
     generatorVersion?: string;
     relief?: number;
     forestDensity?: number;
+    conifers?: ConiferSource;
 }
 
 export interface WorldGenerationConfig {
@@ -22,6 +24,8 @@ export interface WorldGenerationConfig {
     readonly depth: number;
     readonly relief: number;
     readonly forestDensity: number;
+    /** Missing in original v0.1 blueprints means KayKit; old saves remain unchanged. */
+    readonly conifers?: ConiferSource;
 }
 
 export interface TerrainField {

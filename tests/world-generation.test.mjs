@@ -162,3 +162,40 @@ test('nature clearance covers source geometry relative to its authored ground an
         }
     }
 });
+
+
+test('EZ-Tree conifers preserve geography and use their normalized source footprint in saved worlds', async () => {
+    const { changeWorldConifers } = load('../src/world-generation/GenerateWorld.ts');
+    const { parseWorld, serializeWorld } = load('../src/world-generation/WorldSave.ts');
+    const { NodeIO, getBounds } = await import('@gltf-transform/core');
+    const io = new NodeIO();
+    const pine = await io.read('public/nature/ez-tree-pilot/pine-large.gltf');
+    const { min, max } = getBounds(pine.getRoot().listScenes()[0]);
+    const sourceRadius = Math.hypot((max[0]-min[0])/2, (max[2]-min[2])/2);
+    const sourceHeight = max[1]-min[1];
+    const { natureFootprints } = load('../src/world-generation/NatureFootprints.ts');
+    const kaykit = generateWorld({ seed: 17 });
+    const world = generateWorld({ seed: 17, conifers: 'ez-tree' });
+    assert.equal(world.config.conifers, 'ez-tree');
+    assert.deepEqual(world.terrain, kaykit.terrain);
+    assert.deepEqual(world.settlement, kaykit.settlement);
+    assert.equal(world.validation.accepted, true);
+    const pines = world.placementPlan.filter(p => p.assetId.includes('conifer'));
+    for (const id of ['kaykit-conifer-a', 'kaykit-conifer-b', 'kaykit-conifer-c']) {
+        assert.ok(pines.some(p => p.assetId === id), 'Each approved height role must be represented');
+    }
+    for (const p of pines) {
+        const radius = sourceRadius * natureFootprints[p.assetId].height / sourceHeight;
+        assert.ok(p.clearance >= radius*p.scale+.24999, p.assetId + ' must cover the EZ-Tree crown');
+        for (const path of world.settlement.accessPaths) for (const point of path) {
+            assert.ok(Math.hypot(point.x-p.x, point.z-p.z) > p.clearance+.65);
+        }
+    }
+    assert.deepEqual(parseWorld(serializeWorld(world)), world);
+    assert.deepEqual(parseWorld(serializeWorld(kaykit)), kaykit, 'old source-free saves retain their geometry');
+    assert.deepEqual(generateWorld({ seed: 17, conifers: 'ez-tree' }), world);
+    const switched = changeWorldConifers(kaykit, 'ez-tree');
+    assert.deepEqual(switched, world);
+    assert.deepEqual(changeWorldConifers(switched, 'kaykit').placementPlan, kaykit.placementPlan);
+    assert.throws(() => generateWorld({ seed: 17, conifers: 'unknown' }), /conifer/i);
+});

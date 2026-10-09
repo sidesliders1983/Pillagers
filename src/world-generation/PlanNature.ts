@@ -3,6 +3,7 @@ import { seededRandom } from '../config/worldConfig';
 import { natureAssetIds } from '../config/NatureAssets';
 import { buildingDistance } from '../world/SettlementLayout';
 import { natureFootprints } from './NatureFootprints';
+import { pineFootprints } from './PineFootprints';
 import { createBlueprintSurface } from './TerrainQueries';
 import type { AssetPlacement, Biome, WorldBlueprint, Point2 } from './WorldBlueprint';
 
@@ -66,7 +67,9 @@ export function planNature(world: Landscape) {
             if (!rock && random() > patch*.85) continue;
             const scale = tree ? .65+random()*.35 : deciduous ? .65 :
                 grass ? .35+random()*.3 : rock ? .6+random()*.45 : .65+random()*.35;
-            const clearance = natureFootprints[assetId].radius*scale+.25;
+            const footprint = world.config.conifers === 'ez-tree' && assetId in pineFootprints ?
+                pineFootprints[assetId as keyof typeof pineFootprints] : natureFootprints[assetId];
+            const clearance = footprint.radius*scale+.25;
             if (Math.abs(x)+clearance >= 90 || Math.abs(z)+clearance >= 90) continue;
             const y = surface.surfaceHeightAt(x, z);
             if (y < world.waterLevel+.15 || surface.slopeAt(x, z) > (rock ? .55 : .4)) continue;

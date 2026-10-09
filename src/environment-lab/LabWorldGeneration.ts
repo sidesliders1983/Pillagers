@@ -1,10 +1,10 @@
-import { Group, InstancedMesh, Mesh, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import { Group, Object3D, InstancedMesh, Mesh, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import type { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { AssetManager } from '../core/AssetManager';
-import type { WorldBlueprint, WorldPreset } from '../world-generation/WorldBlueprint';
+import type { ConiferSource, WorldBlueprint, WorldPreset } from '../world-generation/WorldBlueprint';
 import { reviewSeeds } from '../world-generation/ReviewSeeds';
 import { parseWorld, serializeWorld } from '../world-generation/WorldSave';
-import { generateWorld } from '../world-generation/GenerateWorld';
+import { changeWorldConifers, generateWorld } from '../world-generation/GenerateWorld';
 import { createBlueprintSurface, createBlueprintTerrain, disposeBlueprintTerrain } from '../world/BlueprintTerrain';
 import { loadWorldGroundMaterials } from '../world/WorldGroundMaterials';
 import { createNatureFromPlan } from '../world/KayKitNature';
@@ -18,6 +18,7 @@ import { Villager } from '../entities/Villager';
 import { MovementSystem } from '../systems/MovementSystem';
 import { blueprintMovement } from '../world/BlueprintMovement';
 import type { WorldLighting } from '../core/WorldLighting';
+import type { NatureAssetKey } from '../config/NatureAssets';
 
 type Grounds = Awaited<ReturnType<typeof loadWorldGroundMaterials>>;
 type Preview = {
@@ -49,6 +50,7 @@ export class LabWorldGeneration {
         private renderer: WebGLRenderer, private canvas: HTMLCanvasElement,
         private camera: PerspectiveCamera, private controls: OrbitControls,
         private reference: { terrain: Group; nature: Group; village: Group },
+        private resolvePineModel: (id: NatureAssetKey) => Object3D,
         private changed: () => void) {
         document.querySelector('nav')!.insertAdjacentHTML('beforebegin', `
             <section class="world-generation" aria-label="Procedural world preview">
@@ -113,12 +115,21 @@ export class LabWorldGeneration {
         });
         document.querySelector('#world-overlay')!.addEventListener('change', () => this.applyOverlay());
         document.querySelector('#world-reference')!.addEventListener('click', () => this.restore());
+        document.querySelector('#environment-conifers')!.addEventListener('change', () => {
+            if (!this.blueprint) return;
+            void this.regenerate(changeWorldConifers(this.blueprint, this.coniferSource()));
+        });
         document.querySelector('#environment-quality')!.addEventListener('change', () => {
             if (this.blueprint) void this.regenerate(this.blueprint);
         });
     }
 
     get active() { return this.preview !== null; }
+    private coniferSource(): ConiferSource {
+        return (document.querySelector('#environment-conifers') as HTMLSelectElement).value === 'ez-tree' ?
+            'ez-tree' : 'kaykit';
+    }
+
     private quality() {
         return (document.querySelector('#environment-quality') as HTMLSelectElement).value === 'low' ?
             'low' : 'standard';
@@ -132,14 +143,18 @@ export class LabWorldGeneration {
         let next: Preview | null = null, grounds: Grounds | null = null;
         try {
             const world = saved ?? generateWorld({ seed: Number(this.seed.value),
-                preset: this.preset.value as WorldPreset });
+                preset: this.preset.value as WorldPreset, conifers: this.coniferSource() });
             const generationMs = performance.now()-start;
             const tier = this.quality();
             grounds = this.grounds?.tier === tier ? this.grounds :
                 await loadWorldGroundMaterials(tier, this.renderer.capabilities.getMaxAnisotropy());
             const surface = createBlueprintSurface(world);
             const terrain = createBlueprintTerrain(world, grounds.materials);
-            const nature = createNatureFromPlan(this.assets, world.placementPlan, world.config.seed);
+            const conifers = world.config.conifers ?? 'kaykit';
+            const nature = createNatureFromPlan(this.assets, world.placementPlan, world.config.seed,
+                conifers === 'ez-tree' ? this.resolvePineModel : undefined);
+            nature.name = conifers === 'ez-tree' ? 'EZ-Tree Large + KayKit FREE undergrowth' :
+                'Seeded KayKit FREE placement';
             const village = world.validation.accepted ?
                 placeSettlement(this.assets, world.settlement.buildings, surface.surfaceHeightAt) : new Group();
             const water = new FjordWater({ ...fjordWaterConfig, quality: tier }, surface, world.coast);
@@ -174,13 +189,13 @@ export class LabWorldGeneration {
             this.scene.add(root);
             this.applyOverlay();
             (document.querySelector('#world-export') as HTMLButtonElement).disabled = false;
-            for (const id of ['conifers','material','grass']) {
+            for (const id of ['material','grass']) {
                 (document.querySelector('#environment-'+id) as HTMLInputElement).disabled = true;
             }
             const grass = document.querySelector('#environment-grass') as HTMLInputElement;
             grass.checked = false;
             (document.querySelector('#environment-quality') as HTMLSelectElement).value = tier;
-            (document.querySelector('#environment-conifers') as HTMLSelectElement).value = 'kaykit';
+            (document.querySelector('#environment-conifers') as HTMLSelectElement).value = conifers;
             (document.querySelector('#environment-quality option[value=legacy]') as HTMLOptionElement).disabled = true;
             this.status.textContent = (world.validation.accepted ? 'PASS' : 'REJECTED') +
                 ' · seed ' + world.config.seed + ' · ' + world.config.preset +
@@ -188,11 +203,11 @@ export class LabWorldGeneration {
                 'm · site score ' + world.validation.score + ' · connected buildings ' +
                 world.validation.connectedBuildings + '/6 · connected clearing ' +
                 world.validation.connectedArea + 'm²\nBiomes: ' + JSON.stringify(world.biomes.coverage) +
-                '\n' + world.placementPlan.length + ' KayKit placements · ' + next.actors.length +
+                '\n' + world.placementPlan.length + ' source placements · ' + next.actors.length +
                 ' reference residents · generation ' + generationMs.toFixed(1) + 'ms' +
                 (world.validation.reasons.length ? '\n' + world.validation.reasons.join('\n') : '');
             this.canvas.dataset.world = JSON.stringify({ seed: world.config.seed,
-                generatorVersion: world.config.generatorVersion, preset: world.config.preset,
+                generatorVersion: world.config.generatorVersion, preset: world.config.preset, conifers,
                 validation: world.validation, biomeCoverage: world.biomes.coverage,
                 naturePlacements: world.placementPlan.length, referenceResidents: next.actors.length,
                 bounds: world.terrain.bounds, site: world.settlement.center, waterLevel: world.waterLevel,
@@ -207,7 +222,8 @@ export class LabWorldGeneration {
                 sourcePixels: tier === 'standard' ? 256 : 128 });
             document.querySelector('#environment-status')!.textContent =
                 'Generated world · approved CC0 ground sources with native alpha masks · ' + tier +
-                ' · KayKit FREE scenery · unchanged Meshy models and boona13 water';
+                ' · ' + (conifers === 'ez-tree' ? 'EZ-Tree Large + KayKit FREE undergrowth' : 'KayKit FREE scenery') +
+                ' · unchanged Meshy models and boona13 water';
             this.changed();
             this.setCamera((document.querySelector('#environment-camera') as HTMLSelectElement).value);
         } catch (error) {
@@ -249,10 +265,12 @@ export class LabWorldGeneration {
         }
         if (this.preview) {
             const heights = this.preview.nature.userData.coniferHeights as number[];
-            this.canvas.dataset.conifers = JSON.stringify({ source: 'kaykit', preset: null,
+            const source = this.blueprint?.config.conifers ?? 'kaykit';
+            this.canvas.dataset.conifers = JSON.stringify({ source, preset: source === 'ez-tree' ? 'Large' : null,
                 count: heights.length, minHeight: Math.min(...heights), maxHeight: Math.max(...heights) });
             document.querySelector('#environment-conifers-status')!.textContent =
-                'Generated KayKit FREE scenery · ' + heights.length + ' varied conifers';
+                'Generated ' + (source === 'ez-tree' ? 'EZ-Tree Large' : 'KayKit FREE') +
+                ' scenery · ' + heights.length + ' varied conifers';
         }
         if (this.preview) this.preview.water.mesh.visible =
             (document.querySelector('#environment-water') as HTMLInputElement).checked;

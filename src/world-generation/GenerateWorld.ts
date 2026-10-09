@@ -7,7 +7,7 @@ import { planSettlement, settlementBoundsAt } from './PlanSettlement';
 import { fjordWaterConfig } from '../config/FjordWaterConfig';
 import {
     freezeBlueprint, generatorVersion, GenerationRequest, WorldBlueprint,
-    WorldGenerationConfig, Point2,
+    WorldGenerationConfig, Point2, ConiferSource,
 } from './WorldBlueprint';
 
 export function normalizeWorldConfig(request: GenerationRequest): WorldGenerationConfig {
@@ -21,6 +21,9 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
     if (!['fjord', 'coastal-valley', 'rocky-inlet'].includes(preset)) {
         throw new Error('Unknown world preset.');
     }
+    if (request.conifers !== undefined && !['kaykit', 'ez-tree'].includes(request.conifers)) {
+        throw new Error('Unknown conifer source.');
+    }
     const relief = request.relief ?? 1;
     const forestDensity = request.forestDensity ?? 1;
     if (!Number.isFinite(relief) || relief < .5 || relief > 1.5 ||
@@ -28,7 +31,8 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
         throw new RangeError('Relief must be 0.5–1.5 and forest density 0.3–1.3.');
     }
     return { seed: request.seed, preset, generatorVersion, width: 180, depth: 180,
-        relief, forestDensity };
+        relief, forestDensity,
+        ...(request.conifers === undefined ? {} : { conifers: request.conifers }) };
 }
 
 function segmentDistance(x: number, z: number, a: Point2, b: Point2) {
@@ -107,4 +111,16 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
     const planned = { ...landscape, ...planSettlement(landscape, center, candidateDry) };
     const world = { ...planned, ...planNature(planned) };
     return freezeBlueprint({ ...world, validation: validateNavigation(world) });
+}
+
+/** Replan scenery and its navigation while retaining the stored geography and settlement. */
+export function changeWorldConifers(world: WorldBlueprint, conifers: ConiferSource): WorldBlueprint {
+    const config = normalizeWorldConfig({ ...world.config, conifers });
+    const candidateDry = !world.validation.reasons.some(reason =>
+        reason.startsWith('No naturally dry settlement candidate'));
+    const foundation = planSettlement(world, world.settlement.center, candidateDry);
+    const landscape = { ...world, config, navigation: foundation.navigation,
+        validation: foundation.validation };
+    const planned = { ...landscape, ...planNature(landscape) };
+    return freezeBlueprint({ ...planned, validation: validateNavigation(planned) });
 }

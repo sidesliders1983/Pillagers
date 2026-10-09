@@ -33,7 +33,10 @@ export class EnvironmentLab {
   const ground=await loadGroundMaterials(),terrain=new Group();
   let regional=await loadRegionalGroundMaterials('standard',renderer.capabilities.getMaxAnisotropy());terrain.add(createRegionalTerrain(regional.regions));scene.add(terrain);
   canvas.dataset.groundTier='standard';canvas.dataset.ground=JSON.stringify({regions:12,colourSpace:'sRGB',dataSpace:'NoColorSpace',density:[32,960/28],mipmaps:true,anisotropy:Math.min(4,renderer.capabilities.getMaxAnisotropy())});
-  const nature=new Group(),kaykitNature=createNature(assets,worldConfig.seed),pineNature=createNature(assets,worldConfig.seed,await loadLabPines(assets));
+  const resolvePineModel = await loadLabPines(assets);
+  const nature = new Group();
+  const kaykitNature = createNature(assets, worldConfig.seed);
+  const pineNature = createNature(assets, worldConfig.seed, resolvePineModel);
   pineNature.name='EZ-Tree Large + KayKit FREE undergrowth';nature.add(kaykitNature,pineNature);scene.add(nature);
   const conifers=document.querySelector<HTMLSelectElement>('#environment-conifers')!;
   const syncConifers=()=>{
@@ -91,7 +94,8 @@ export class EnvironmentLab {
   const syncLighting=()=>{generation?.syncVisibility();const pilot=lightControl.value.startsWith('sun');fill.disabled=exposure.disabled=radius.disabled=!pilot;study.select(lightControl.value as LabLight,quality.value!=='standard',Math.max(0,Math.min(3,Number(fill.value))),Math.max(.5,Math.min(2,Number(exposure.value))),Math.max(.5,Math.min(4,Number(radius.value))),generation?.active??false);document.querySelector('#environment-lighting-status')!.textContent=study.label();canvas.dataset.sceneAudit=JSON.stringify(auditLabScene(scene));void environment.set(hdr.checked,lighting.mode==='night',lighting.directional.position.clone().sub(lighting.directional.target.position));};
   radius.addEventListener('change',syncLighting);hdr.addEventListener('change',syncLighting);fill.addEventListener('change',syncLighting);exposure.addEventListener('change',syncLighting);lightControl.addEventListener('change',syncLighting);conifers.addEventListener('change',syncLighting);quality.addEventListener('change',syncLighting);syncLighting();
   const resize=()=>{const rect=canvas.getBoundingClientRect();renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/Math.max(1,rect.height);camera.updateProjectionMatrix();};const observer=new ResizeObserver(resize);observer.observe(canvas);resize();setCamera('shore');sync();
-  generation=new LabWorldGeneration(scene,assets,renderer,canvas,camera,controls,{terrain,nature,village},()=>{
+  generation = new LabWorldGeneration(scene, assets, renderer, canvas, camera, controls,
+   { terrain, nature, village }, resolvePineModel, () => {
    syncConifers();sync();grass.mesh.visible=grassControl.checked&&!generation!.active;
    syncLighting();setCamera((document.querySelector('#environment-camera') as HTMLSelectElement).value as keyof typeof presets);
   });
