@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seeded Fjordside · v0.1 review</title>
+<style>
+body{margin:0;background:#172322;color:#ede5d3;font:16px/1.6 system-ui;padding:24px}main{max-width:1600px;margin:auto}
+a{color:#d7bd86}h1,h2{font-family:Georgia,serif}label{display:inline-block;margin:8px 16px 12px 0}
+select,button{font:inherit;padding:8px;background:#30453e;color:inherit;border:1px solid #718575;border-radius:5px}
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:18px}figure{margin:0}img{width:100%;height:auto;display:block;background:#243331}
+pre{white-space:pre-wrap;background:#233530;padding:16px;overflow:auto}table{border-collapse:collapse;width:100%}td,th{padding:8px;border-bottom:1px solid #53635b;text-align:left}
+.notice{padding:16px;background:#473b2b;border-left:4px solid #c49c56}details{margin:18px 0}@media(max-width:900px){.comparison{grid-template-columns:1fr}}
+</style><main>
+<h1>Procedural Fjordside Generator v0.1</h1>
+<p class="notice">Environment Lab proposal awaiting independent visual review. These are actual browser captures, not generated concept art. Live Fjordside adoption is a separate decision.</p>
+<p><a href="/environment-lab">Open Environment Lab</a> · <a href="report.md">QA report</a> · <a href="browser-review.json">Raw browser measurements</a> · <a href="batch-validation.json">Seed validation / replay hashes</a> · <a href="proof.md">Initial two-seed proof</a></p>
+<label>Review seed <select id="seed"></select></label>
+<label>View <select id="view"><option value="landscape">High overlook</option><option value="village">Village</option></select></label>
+<div class="comparison"><figure><img src="reference-landscape.png" alt="Original reference Environment Lab high overlook"><figcaption>Reference seed 1983 · original authored Environment Lab. High overlook shares fixed world-space camera/settings. Village views are settlement-relative.</figcaption></figure><figure><img id="generated" alt="Selected generated Fjordside"><figcaption id="caption"></figcaption></figure></div>
+<pre id="validation"></pre>
+<details><summary>Original owner references: REF-A and REF-B</summary><div class="comparison"><figure><img src="../../references/environment/REF-A.png" alt="Owner Northstar reference A"><figcaption>REF-A · art direction, not an implementation screenshot.</figcaption></figure><figure><img src="../../references/environment/REF-B.png" alt="Owner Northstar reference B"><figcaption>REF-B · owner supplied composition and atmosphere target.</figcaption></figure></div></details>
+<details><summary>Native biome / walkability overlays and night</summary><div class="comparison"><img src="seed-17-biomes.png" alt="Seed 17 native biome overlay"><img src="seed-17-walkability.png" alt="Seed 17 final walkability overlay"></div><img src="seed-17-night.png" alt="Seed 17 native night lighting"></details>
+<h2>Measured costs</h2><p>Same device, viewport, DPR, high-overlook camera, fog-off, low-sun settings and paused animations. Reference Lab has one resident; generated proposals have ten. This is total proposal cost, not an isolated terrain benchmark. Each row averages the medians/P95 values of three four-second rAF samples; individual intervals remain in browser-review.json. Timings are diagnostic, not a fixed performance gate.</p>
+<table><thead><tr><th>Fixture / tier</th><th>Median ms</th><th>P95 ms</th><th>Draw calls incl. shadows</th><th>Triangles incl. shadows</th></tr></thead><tbody id="costs"></tbody></table>
+<h2>Review focus</h2><p>Assess the changed coastline and mountain silhouette, the reserved six-parcel clearing, source fidelity, forest clustering and shoreline transitions. Native source masks soften the ground layers. The KayKit crown shapes, bright foliage, bounded height-field edge, sparse forests and missing scene-geometry reflections remain visible limitations. The source water implementation is retained; it does not reflect trees/buildings.</p>
+<pre id="lifetime"></pre>
+<script>
+Promise.all([fetch('batch-validation.json').then(r=>r.json()),fetch('browser-review.json').then(r=>r.json())]).then(([batch,browser])=>{
+ const seed=document.querySelector('#seed'),view=document.querySelector('#view');
+ for(const entry of batch.results){const option=document.createElement('option');option.value=entry.config.seed;option.textContent=entry.config.seed+' · '+entry.config.preset;seed.append(option);}
+ const show=()=>{const entry=batch.results.find(r=>String(r.config.seed)===seed.value);document.querySelector('#generated').src='seed-'+seed.value+'-'+view.value+'.png';document.querySelector('#caption').textContent='Seed '+seed.value+' · '+entry.config.preset+' · '+view.value;document.querySelector('#validation').textContent=JSON.stringify({config:entry.config,validation:entry.validation,biomes:entry.biomeCoverage,placements:entry.naturePlacements,replayIdentical:entry.replayIdentical},null,2);};
+ seed.addEventListener('change',show);view.addEventListener('change',show);show();
+ const groups=new Map();for(const run of browser.runs){const key=run.label+' / '+run.tier;if(!groups.has(key))groups.set(key,[]);groups.get(key).push(run);}
+ for(const [label,runs] of groups){const row=document.createElement('tr');const mean=key=>runs.reduce((n,r)=>n+r[key],0)/runs.length;for(const value of [label,mean('medianMs').toFixed(1),mean('p95Ms').toFixed(1),runs.at(-1).metrics.calls,runs.at(-1).metrics.triangles]){const cell=document.createElement('td');cell.textContent=value;row.append(cell);}document.querySelector('#costs').append(row);}
+ document.querySelector('#lifetime').textContent='Native Edge '+browser.browser+'\n'+browser.hardware+'\nSettled regeneration observations:\n'+JSON.stringify(browser.regeneration,null,2)+'\nBrowser errors: '+browser.errors.length;
+}).catch(error=>{document.querySelector('#validation').textContent='Review data unavailable: '+error.message;});
+</script></main></html>

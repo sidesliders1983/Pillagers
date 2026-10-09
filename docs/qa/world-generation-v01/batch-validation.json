@@ -1,0 +1,444 @@
+{
+  "results": [
+    {
+      "config": {
+        "seed": 17,
+        "preset": "fjord",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2829,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 94
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 319.39879999999994,
+      "heightRange": [
+        -7.119999885559082,
+        35.5020637512207
+      ],
+      "biomeCoverage": {
+        "water": 3881,
+        "shore": 231,
+        "clearing": 1036,
+        "grass": 1291,
+        "forest": 236,
+        "rock": 1606
+      },
+      "naturePlacements": 406,
+      "terrainSha256": "98455cbf521dc0d80bfc270bda4cc886d6a34ca595782dd3180d6784e06f8158",
+      "placementSha256": "7546b628f49d783b0c0251809ae017a40debbe85288346b0f840ae76e3ebd8ed",
+      "blueprintSha256": "bf769ce150758f20dfc03c365996fe12558edf8066d4d29f4864a577843524bd",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 91,
+        "preset": "fjord",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2777,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 93
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 315.29179999999997,
+      "heightRange": [
+        -7.119999885559082,
+        39.57633590698242
+      ],
+      "biomeCoverage": {
+        "water": 4056,
+        "shore": 186,
+        "clearing": 1036,
+        "grass": 967,
+        "forest": 398,
+        "rock": 1638
+      },
+      "naturePlacements": 426,
+      "terrainSha256": "74a61b090eb83613e89203b317312b1cf9ae760a17714743aa20df70dbcc59b4",
+      "placementSha256": "d8604484ad1b19afc185adfc6b72f1a1ab3a7a7f1fe8eb16bb09b344bb4dec3b",
+      "blueprintSha256": "4608c2564f516e95b04da274eb01b5fe515255451c863960e0b9a1ba0de11a59",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 1983,
+        "preset": "coastal-valley",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2870,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 96
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 277.7493999999997,
+      "heightRange": [
+        -7.119999885559082,
+        27.00269317626953
+      ],
+      "biomeCoverage": {
+        "water": 3452,
+        "shore": 275,
+        "clearing": 1036,
+        "grass": 1483,
+        "forest": 733,
+        "rock": 1302
+      },
+      "naturePlacements": 460,
+      "terrainSha256": "9aae73faf6cb42beaa9a5683b541903718d7c119d8f457ae0fcb77697d051465",
+      "placementSha256": "1bb1dce7292cc966ff5c3f9da3d1d897c68220a6ba8f1655f5af763f1dcbe8c0",
+      "blueprintSha256": "ae4dabd2a74f580e647d0b321f0337420232d1dc4343e2314265ece3010fe4d2",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 42,
+        "preset": "rocky-inlet",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2755,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.719999904632568,
+        "score": 92
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 281.73109999999997,
+      "heightRange": [
+        -7.119999885559082,
+        44.14759063720703
+      ],
+      "biomeCoverage": {
+        "water": 3749,
+        "shore": 174,
+        "clearing": 1036,
+        "grass": 960,
+        "forest": 352,
+        "rock": 2010
+      },
+      "naturePlacements": 446,
+      "terrainSha256": "e0991b7c45820f296a99b09f62bcdd5842bf23da796cc9196304f67eed211a55",
+      "placementSha256": "f4ba92973e6bbf9d1bc38af6af385885bb746f5b58da3a590534eb9ee87aa59a",
+      "blueprintSha256": "a28f1d5075823abce83d579d674099ade290b03c7502429d62c491a5895f488d",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 73,
+        "preset": "fjord",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2810,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 94
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 203.6478000000002,
+      "heightRange": [
+        -7.119999885559082,
+        36.42677307128906
+      ],
+      "biomeCoverage": {
+        "water": 4105,
+        "shore": 182,
+        "clearing": 1031,
+        "grass": 908,
+        "forest": 342,
+        "rock": 1713
+      },
+      "naturePlacements": 431,
+      "terrainSha256": "953096bf54b83b1c4a442933a0853a7d9c5960cec2f439c990133ffcf46f81dc",
+      "placementSha256": "33c01da559ad6dbd5674cbc3b32c1fca03ca46da597462531d986fe8133366c9",
+      "blueprintSha256": "bbc2a962a2c66b6c4782c152bdbcfb40d19f7169d2ccad874dd48fec44280bc3",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 104,
+        "preset": "coastal-valley",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2894,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.719999904632568,
+        "score": 96
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 203.83030000000008,
+      "heightRange": [
+        -7.119999885559082,
+        29.85511589050293
+      ],
+      "biomeCoverage": {
+        "water": 3522,
+        "shore": 266,
+        "clearing": 1036,
+        "grass": 1334,
+        "forest": 716,
+        "rock": 1407
+      },
+      "naturePlacements": 456,
+      "terrainSha256": "6eccc2f44c647b7fbe59d878c0117d8ceb719eba24affaab8330e3ef3074fda8",
+      "placementSha256": "037dfb4276bd390f9a2e8b4603fc4576647dba63c3cc5f740612c62f6e9206d6",
+      "blueprintSha256": "16d89a9c433a7e292911bc2b5870e4f7a038d4aef33cb4821df35b66dc18666a",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 211,
+        "preset": "rocky-inlet",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2792,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 93
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 401.34220000000005,
+      "heightRange": [
+        -7.119999885559082,
+        42.18695068359375
+      ],
+      "biomeCoverage": {
+        "water": 3790,
+        "shore": 215,
+        "clearing": 1036,
+        "grass": 974,
+        "forest": 246,
+        "rock": 2020
+      },
+      "naturePlacements": 415,
+      "terrainSha256": "48b7035bad0cd7545c876b69e1ea07bd98219594ccaa4221bc0057f16a1c328e",
+      "placementSha256": "7504587ee185071eb8d3b0eed8c73da62f46471ebd6cff66d529447f475ae0f7",
+      "blueprintSha256": "36f5d5c11544199e3019ab61bfab7c55eb098c64d608624650b0ffafad1e8ce2",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 512,
+        "preset": "fjord",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2883,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 96
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 206.8820999999998,
+      "heightRange": [
+        -7.119999885559082,
+        41.23179626464844
+      ],
+      "biomeCoverage": {
+        "water": 3930,
+        "shore": 224,
+        "clearing": 1036,
+        "grass": 1177,
+        "forest": 359,
+        "rock": 1555
+      },
+      "naturePlacements": 433,
+      "terrainSha256": "7a5687e9d2504a6d77a805fd04f04b05d52939ada5ad1138bfa6b5ea1ee711d6",
+      "placementSha256": "f61c4777b7087e2671ca1455718453b39e32e3ab1cba5f1f95415182d64c4afe",
+      "blueprintSha256": "ae2eef66902432b0678cb54fa2817ce2f1a212299c1440bb417b194fca7cce85",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 819,
+        "preset": "coastal-valley",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2885,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 96
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 221.63850000000002,
+      "heightRange": [
+        -7.119999885559082,
+        28.868043899536133
+      ],
+      "biomeCoverage": {
+        "water": 3537,
+        "shore": 296,
+        "clearing": 1036,
+        "grass": 1268,
+        "forest": 657,
+        "rock": 1487
+      },
+      "naturePlacements": 460,
+      "terrainSha256": "97a0d6778d2dbab795a84aa1ddf6df3dc9d6473a9535436a92bc913f38230175",
+      "placementSha256": "ac8f0895c66186b2d7d61f6c4ef2e13cddb01be29ffae865d4ed8023e6f4fe08",
+      "blueprintSha256": "5cff5fd4d4b3c21abbd2c08d2a76d1c97556278f7ba51138a73fbbd38cc768cb",
+      "replayIdentical": true
+    },
+    {
+      "config": {
+        "seed": 1337,
+        "preset": "rocky-inlet",
+        "generatorVersion": "fjordside-v0.1",
+        "width": 180,
+        "depth": 180,
+        "relief": 1,
+        "forestDensity": 1
+      },
+      "validation": {
+        "accepted": true,
+        "reasons": [],
+        "connectedBuildings": 6,
+        "connectedArea": 2662,
+        "maximumFoundationSlope": 4.440892098500626e-16,
+        "minimumFoundationElevation": 2.7199999046325685,
+        "score": 89
+      },
+      "bounds": {
+        "minX": -90,
+        "maxX": 90,
+        "minZ": -90,
+        "maxZ": 90
+      },
+      "generationMs": 235.08809999999994,
+      "heightRange": [
+        -7.119999885559082,
+        46.84075927734375
+      ],
+      "biomeCoverage": {
+        "water": 3833,
+        "shore": 170,
+        "clearing": 1036,
+        "grass": 959,
+        "forest": 237,
+        "rock": 2046
+      },
+      "naturePlacements": 413,
+      "terrainSha256": "db5dab2e847b357e60cf81395933ebdefbea5c1d8b78d266942e43e17da1a606",
+      "placementSha256": "d87daf7b96daf1dd3889840100e9c2bdb00047dac6c65664e73ce033f6cb25fd",
+      "blueprintSha256": "43d558151ba40a88c485699ed263b79fc3b54d029254a2ca139277056fd07e42",
+      "replayIdentical": true
+    }
+  ]
+}

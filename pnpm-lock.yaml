@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      simplex-noise:
+        specifier: 4.0.3
+        version: 4.0.3
       three:
         specifier: ^0.180.0
         version: 0.180.0
@@ -635,6 +638,9 @@ packages:
       '@types/node':
         optional: true
 
+  simplex-noise@4.0.3:
+    resolution: {integrity: sha512-qSE2I4AngLQG7BXqoZj51jokT4WUXe8mOBrvfOXpci8+6Yu44+/dD5zqDpOx3Ux792eamTd2lLcI8jqFntk/lg==}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -1172,6 +1178,8 @@ snapshots:
       '@img/sharp-win32-ia32': 0.35.5
       '@img/sharp-win32-x64': 0.35.5
       '@types/node': 24.19.0
+
+  simplex-noise@4.0.3: {}
 
   source-map-js@1.2.1: {}
 
