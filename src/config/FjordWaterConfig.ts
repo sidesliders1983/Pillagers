@@ -8,7 +8,7 @@ export interface FjordWaterConfig {
 }
 export const fjordWaterConfig: FjordWaterConfig = {
  level: -.12, size: 180, standardSegments: 180, lowSegments: 90,
- speed: .18, normalStrength: 3, shallowDepth: .53, foamWidth: .3,
- specularPower: 128, specularIntensity: .045, reflectionStrength: .08, shoreGlow: .015,
+ speed: 1.5, normalStrength: 6, shallowDepth: .53, foamWidth: .3,
+ specularPower: 64, specularIntensity: .3, reflectionStrength: .12, shoreGlow: .025,
  opacity: .97, deep: '#355962', shallow: '#749c97', nightTint: .27, quality: 'standard',
 };

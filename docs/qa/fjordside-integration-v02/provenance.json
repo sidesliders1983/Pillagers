@@ -1,0 +1,141 @@
+{
+  "baseCommit": "25e96740bf7805572e894343ead41bf23c0cf510",
+  "date": "2026-10-09",
+  "origin": "http://127.0.0.1:5186",
+  "source": [
+    {
+      "file": "src/world/WorldFactory.ts",
+      "sha256": "e12934ec423f6cb60e5235d486a542d0ba3f8750442a108ae445bd03c27a0393"
+    },
+    {
+      "file": "src/world/WorldAttachments.ts",
+      "sha256": "661c4398ec309ef2f9d64b50eeb22b5c326650c0190f3a7d8921c94f22427625"
+    },
+    {
+      "file": "src/world/BlueprintMovement.ts",
+      "sha256": "a71b6d3a151ba27548a39aafc6ee6f07bee90e71c3da016046fdbe62ebc42170"
+    },
+    {
+      "file": "src/world/NatureWind.ts",
+      "sha256": "a5d000654720f09ad530d3ec968ef51ae0e72726d9b9a57b10b337f8951a37bf"
+    },
+    {
+      "file": "src/world/FjordWater.ts",
+      "sha256": "1e4970c940d5f7457318f17bdf9b3d6163a9dafdc5b2348a9338f2f2e0c20a75"
+    },
+    {
+      "file": "src/world/PineModels.ts",
+      "sha256": "9a5da60862d3332216e97cccb1417001637353c913dbcc3889fa28a681d0c9b7"
+    },
+    {
+      "file": "src/vendor/ez-tree/LeafWind.ts",
+      "sha256": "acc51240504d73cf449d3fc731ca32f9ab61899afe10931d7c8fb738b8cb7487"
+    },
+    {
+      "file": "src/config/FjordWaterConfig.ts",
+      "sha256": "84ac55e55e074e21924d421cd38a87b190132ad2d828255d075720519e51dbb0"
+    },
+    {
+      "file": "src/core/Game.ts",
+      "sha256": "4771454683fd666ea98948d805a6eb1fff2f92db56d8c8ee1b9d356c02b1e53a"
+    },
+    {
+      "file": "src/ui/FjordsideControls.ts",
+      "sha256": "a5ebd0ec9bc877ea1ad9b9a3d8ba7a410bbbfdf79950452ac825b31644a400b7"
+    },
+    {
+      "file": "src/core/WorldLighting.ts",
+      "sha256": "981332e1db6bcb6712299f00badcb25aad370d48f2b56a15f3a06cbb4d1f4e76"
+    },
+    {
+      "file": "src/world/SeasonTint.ts",
+      "sha256": "d8f16ebd64ff32839865db07ad94f04422d1d999ee7374305358812dbbc2e90d"
+    },
+    {
+      "file": "scripts/qa/capture-fjordside-integration.mjs",
+      "sha256": "c5f0e64556e8e1edeb481a60666b7dd1c12f156859202acc934c51da6871ccd5"
+    }
+  ],
+  "frozenBundles": [
+    {
+      "file": "assets/AssetLab-C9rRy2bF.js",
+      "sha256": "5ad7e791f5ed57439e00e728c52be65b38d67799ede4b54e4ec45188106cf81a"
+    },
+    {
+      "file": "assets/CharacterFactory-BN6GA721.js",
+      "sha256": "6a63a8f1449a07c9b9a1cfb3811cf2bc5aa620cdf99ddbbb718e69b5af053c23"
+    },
+    {
+      "file": "assets/CharacterLab-BMagdkOQ.js",
+      "sha256": "b7dd56bed8773336a112a69a552a5057cef97ee399fb001d40160991dbca5493"
+    },
+    {
+      "file": "assets/Chronicle-BAq5w2FD.js",
+      "sha256": "58060bd1ec2d713225a769e3466096355f8a2d2bdf58898135e358fc5aea0902"
+    },
+    {
+      "file": "assets/CowCharacterPreview-DMKrzFDP.js",
+      "sha256": "6f4176db87385a0ee86b721157b8115f42bdf55a7c191e8a9a01706eeb2a8b51"
+    },
+    {
+      "file": "assets/EnvironmentLab-DQo6zNyv.js",
+      "sha256": "95f3195f83aa1bf9b7373786f886ebb7f31c24547dfa871781fb7762d057a66d"
+    },
+    {
+      "file": "assets/Game-D9e5vVD1.js",
+      "sha256": "2b9d22e23e7b08cd22029a2002a29d732e62ff26fe69313545a1fc0e73411274"
+    },
+    {
+      "file": "assets/GameplayLab-DqiXgJwy.js",
+      "sha256": "2a8c69a650af16cae2285f183eb3095c25c8c986dedfacf9697adc294469f40f"
+    },
+    {
+      "file": "assets/generateCharacterDNA-Cdq_oL7s.js",
+      "sha256": "d3b20db069cc70f30654b441adea9f5e9620ff70ba294f72ca64e7d4cc784b7a"
+    },
+    {
+      "file": "assets/generateName-DOQ4o1iH.js",
+      "sha256": "70b99a28d55e022e600c740647966a7fff0dff055b74310ddfa6bf5d67faf697"
+    },
+    {
+      "file": "assets/GoldenBodySurfaceCalibration-C_5LNdMz.js",
+      "sha256": "a2ff5fceea792468e74a51cac31d81df6ecb880c429862bf3ebbebff4ab7dce6"
+    },
+    {
+      "file": "assets/index-CPAi03Aq.js",
+      "sha256": "c2676040c8e68f2af762e661aeeebef1c47f09dc550622d5a73585745a2f8538"
+    },
+    {
+      "file": "assets/MeshyCharacterLab-Li9L40SV.js",
+      "sha256": "2681f156a80ea475f05585e965fb5142d66d7e4f1e9b1135c66ab48001d0faf0"
+    },
+    {
+      "file": "assets/MeshyHuman-NIoNaClK.js",
+      "sha256": "e5c2e065a0c95f04c5b381372df0e790cbe57b3d2d27587b4731d8ac482064a0"
+    },
+    {
+      "file": "assets/OrbitControls-Cu8AkVa_.js",
+      "sha256": "fec4cda9d1ccdeac6b6d2dbec5929b465018ee5d9cc0de18070d197c859cd5c7"
+    },
+    {
+      "file": "assets/PlayUI-Dgb2D_n9.js",
+      "sha256": "35a85439911f960e778332eb81701cc996dc50c6e171bf18b723e7c37c793d17"
+    },
+    {
+      "file": "assets/Renderer-C2hA2OmF.js",
+      "sha256": "f907e731d71fca819e7a467d46dd2d955f444f2f9bd74fc4770d1fb170c5e693"
+    },
+    {
+      "file": "assets/three.module-gjtICJq7.js",
+      "sha256": "bb6058c13cdcb394bf2c40e1d8e36e86ba1b61f8b8fe90b2dcd0d2082909a619"
+    },
+    {
+      "file": "assets/Water-CzaT83Rm.js",
+      "sha256": "6be3ae8b23b61704e76a48376753957362ce0ab4d91763f652e4ea9339ec6e4f"
+    },
+    {
+      "file": "assets/WaterLab-DRg3QV5H.js",
+      "sha256": "6fd9fe25a8bb0cca36886982c4d83776b665c65ba87e93babfef1c453f46f18f"
+    }
+  ]
+}

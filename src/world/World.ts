@@ -1,4 +1,4 @@
-import { Group, Raycaster, Vector3 } from 'three';
+import { Group, Raycaster, Vector3, Mesh, InstancedMesh } from 'three';
 import { AssetManager, AssetKey } from '../core/AssetManager';
 import { createTerrain, heightAt } from './Terrain';
 import { createEnvironment } from './Environment';
@@ -12,7 +12,9 @@ export class World {
     readonly terrain = createTerrain();
     constructor(assets: AssetManager) {
         this.root.name = 'Fjordside';
-        this.root.add(this.terrain, createPaths(), this.water.mesh, createEnvironment(assets));
+        const paths = createPaths();
+        paths.name = 'Settlement paths';
+        this.root.add(this.terrain, paths, this.water.mesh, createEnvironment(assets));
         const place = (key: AssetKey, x: number, z: number, rotation = 0, y = heightAt(x, z), scale = 1) => { const model = assets.get(key); model.position.set(x, y, z); model.rotation.y = rotation; model.scale.setScalar(scale); this.root.add(model); };
         const housing=new Group();housing.name='Generated housing';this.root.add(housing);
         for (const b of buildings){
@@ -46,6 +48,17 @@ export class World {
         place('boat', -8.2, -15, .3, -.2);
         for (const [x, z, rotation, scale] of [[-30, -8, .4, 1.15], [-27, -6.7, 1.2, .85], [-23, -8.6, 2.1, .95], [-19.5, -7.7, .7, .65]])
             place('cliff', x, z, rotation, undefined, scale);
+    }
+    dispose() {
+        this.water.dispose();
+        this.root.traverse(node => {
+            if (node instanceof InstancedMesh) node.dispose();
+            if (node instanceof Mesh && (node === this.terrain || node.name === 'Settlement paths')) {
+                node.geometry.dispose();
+                for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.dispose();
+            }
+        });
+        this.root.clear();
     }
     update(time: number) { this.water.update(time); }
 }

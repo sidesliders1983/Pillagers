@@ -10,5 +10,14 @@ export class Water {
         dummy.updateMatrix();
         ripples.setMatrixAt(i, dummy.matrix);
     } ripples.computeBoundingSphere(); this.mesh.add(ripples); }
+    dispose() {
+        this.mesh.traverse(node => {
+            if (!(node instanceof Mesh)) return;
+            if (node instanceof InstancedMesh) node.dispose();
+            node.geometry.dispose();
+            for (const material of Array.isArray(node.material) ? node.material : [node.material]) material.dispose();
+        });
+        this.mesh.clear();
+    }
     update(time: number) { this.mesh.position.y = -.12 + Math.sin(time * .7) * .025; }
 }

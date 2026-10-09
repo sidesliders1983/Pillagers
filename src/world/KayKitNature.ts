@@ -51,6 +51,8 @@ function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
             matrix.multiplyMatrices(transform, child.matrixWorld)));
         instances.castShadow = !id.includes('grass') && !id.includes('bush');
         instances.receiveShadow = true;
+        instances.userData.seasonalFoliage = !id.includes('rock') && !id.includes('boulder') &&
+            (child.material as import('three').Material).name !== 'branches';
         instances.computeBoundingSphere();
         group.add(instances);
     });

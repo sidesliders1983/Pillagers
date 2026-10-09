@@ -1,6 +1,6 @@
 import type { TerrainSurface } from '../world-generation/TerrainQueries';
 import type { CoastSegment } from '../world-generation/WorldBlueprint';
-import {Color,Group,Vector3} from 'three';
+import {Color,Group,Vector3,UniformsLib,UniformsUtils} from 'three';
 import {FjordWaterConfig,fjordWaterConfig} from '../config/FjordWaterConfig';
 import type {WorldLighting} from '../core/WorldLighting';
 import {WaterPlane} from '../vendor/boona13-water/WaterPlane';
@@ -18,6 +18,8 @@ export class FjordWater {
  private readonly mask:WaterMask;
  private readonly deep:Color;
  private readonly shallow:Color;
+ private readonly tintedDeep=new Color();
+ private readonly tintedShallow=new Color();
  private readonly sky=new Color();
  private readonly skyHigh=new Color();
  private readonly sunDirection=new Vector3();
@@ -38,6 +40,20 @@ export class FjordWater {
   this.deep=new Color(config.deep).convertLinearToSRGB();this.shallow=new Color(config.shallow).convertLinearToSRGB();
   this.source=new WaterPlane({size:config.size,segments:low?config.lowSegments:config.standardSegments,
    mask:this.mask,surfaceOffset:0,deepColor:this.deep,shallowColor:this.shallow});
+  // Native renderer compatibility: the source has no atmospheric fog bridge.
+  // Reuse Three's stock chunks/uniforms; no water/noise/foam algorithm changes.
+  const material=this.source.material;
+  material.fog=true;
+  Object.assign(material.uniforms,UniformsUtils.clone(UniformsLib.fog));
+  material.vertexShader='#include <fog_pars_vertex>\n'+material.vertexShader;
+  material.vertexShader=material.vertexShader.replace(
+   'gl_Position = projectionMatrix * viewMatrix * worldPosition;',
+   'vec4 mvPosition = viewMatrix * worldPosition;\n'+
+   'gl_Position = projectionMatrix * mvPosition;\n#include <fog_vertex>');
+  material.fragmentShader='#include <fog_pars_fragment>\n'+material.fragmentShader;
+  material.fragmentShader=material.fragmentShader.replace(
+   'gl_FragColor = vec4(color, alpha * waterOpacity);',
+   'gl_FragColor = vec4(color, alpha * waterOpacity);\n#include <fog_fragment>');
   this.source.mesh.position.y=config.level;
   this.source.mesh.name='Sourced fjord water (boona13)';this.mesh.add(this.source.mesh);
   this.source.setFlowSpeed(config.speed);this.source.setRippleBoost(config.normalStrength);
@@ -66,7 +82,7 @@ export class FjordWater {
   this.source.update(time);
   if(lighting){
    const gain=lighting.mode==='night'?this.config.nightTint:1;
-   this.source.setColors(this.deep.clone().multiplyScalar(gain),this.shallow.clone().multiplyScalar(gain));
+   this.source.setColors(this.tintedDeep.copy(this.deep).multiplyScalar(gain),this.tintedShallow.copy(this.shallow).multiplyScalar(gain));
    this.sky.copy(lighting.fog.color).convertLinearToSRGB().multiplyScalar(lighting.mode==='night'?.65:.55);
    this.skyHigh.copy(this.sky).multiplyScalar(1.25);
    this.source.setSkyColors(this.sky,this.skyHigh);

@@ -1,4 +1,4 @@
-import { Scene, Color, Fog, HemisphereLight, DirectionalLight, PointLight, WebGLRenderer, Mesh, ShaderMaterial, CircleGeometry, MathUtils } from 'three';
+import { Scene, Color, Fog, HemisphereLight, DirectionalLight, PointLight, WebGLRenderer, Mesh, ShaderMaterial, CircleGeometry, MathUtils, Vector3 } from 'three';
 import { lightingConfig as config, LightingMode, fireFlicker } from '../config/lightingConfig';
 import { AssetManager } from './AssetManager';
 import { hearth } from '../world/SettlementLayout';
@@ -17,15 +17,17 @@ export class WorldLighting {
     private nightWeight=0;
     private blendColor=new Color();
     private fogEnabled=true;
-    constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager){
+    constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
+        private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard'){
         scene.background=new Color(config.day.sky);scene.add(this.ambient,this.directional,this.campfire);
         this.directional.castShadow=true;
         const sun=config.day;
         this.directional.shadow.mapSize.set(sun.shadowMapSize,sun.shadowMapSize);
         Object.assign(this.directional.shadow.camera,{left:-50,right:50,top:50,bottom:-50,near:1,far:110});
         Object.assign(this.directional.shadow,{radius:sun.shadowRadius,blurSamples:sun.shadowBlurSamples,normalBias:sun.shadowNormalBias});
-        const ground=surfaceHeightAt(hearth.x,hearth.z);
-        this.campfire.position.set(hearth.x,ground+config.fire.height,hearth.z);
+        const ground=fireAnchor?.y??surfaceHeightAt(hearth.x,hearth.z);
+        const fireX=fireAnchor?.x??hearth.x,fireZ=fireAnchor?.z??hearth.z;
+        this.campfire.position.set(fireX,ground+config.fire.height,fireZ);
         // No point-light cube shadow maps: one warm light + cheap surface halo.
         this.campfire.castShadow=false;
         const material=new ShaderMaterial({transparent:true,depthWrite:false,uniforms:{color:{value:new Color(config.fire.color)},opacity:{value:0}},
@@ -36,7 +38,7 @@ export class WorldLighting {
                 #include <colorspace_fragment>
                 }`});
         this.halo=new Mesh(new CircleGeometry(config.fire.haloRadius,32),material);this.halo.name='fire-ground-glow';
-        this.halo.rotation.x=-Math.PI/2;this.halo.position.set(hearth.x,ground+.035,hearth.z);scene.add(this.halo);
+        this.halo.rotation.x=-Math.PI/2;this.halo.position.set(fireX,ground+.035,fireZ);scene.add(this.halo);
         // Decorative light-spill geometry must not intercept resident selection.
         this.halo.raycast=()=>{};
         for(const material of assets.windowMaterials)material.emissive.setHex(config.windows.color);
@@ -58,13 +60,30 @@ export class WorldLighting {
         Object.assign(this.directional.shadow.camera,{left:-50,right:50,top:50,bottom:-50,near:1,far:110});
         this.directional.shadow.camera.updateProjectionMatrix();
         this.directional.shadow.bias=0;this.directional.shadow.normalBias=day.shadowNormalBias;this.directional.shadow.radius=day.shadowRadius;
-        const size=preset.shadowMapSize;
+        const size=this.quality==='low'?Math.min(1024,preset.shadowMapSize):preset.shadowMapSize;
         if(this.directional.shadow.mapSize.x!==size){this.directional.shadow.map?.dispose();this.directional.shadow.map=null;this.directional.shadow.mapSize.set(size,size);}
+        this.placeWorldLight();
         this.renderer.shadowMap.needsUpdate=true;this.renderer.toneMappingExposure=preset.exposure;
         this.campfire.visible=night;this.halo.visible=night;
         for(const material of this.assets.windowMaterials)material.emissiveIntensity=night?config.windows.emissiveIntensity:0;
         for(const material of this.assets.fireMaterials)material.emissiveIntensity=night?config.fire.emissiveIntensity:0;
         this.update(0);
+    }
+    private placeWorldLight() {
+        if (!this.worldAnchor) return;
+        const direction=this.directional.position.clone().sub(this.directional.target.position).normalize();
+        this.directional.target.position.copy(this.worldAnchor);
+        this.directional.target.updateMatrixWorld(true);
+        this.directional.position.copy(this.worldAnchor).addScaledVector(direction,200);
+        Object.assign(this.directional.shadow.camera,{left:-130,right:130,top:130,bottom:-130,near:.1,far:400});
+        this.directional.shadow.camera.updateProjectionMatrix();
+    }
+    dispose() {
+        this.directional.shadow.dispose();
+        this.halo.geometry.dispose();
+        this.halo.material.dispose();
+        for (const object of [this.halo,this.ambient,this.directional,this.directional.target,this.campfire])
+            object.removeFromParent();
     }
     setFog(enabled:boolean){this.fogEnabled=enabled;this.scene.fog=enabled?this.fog:null;}
     setVisualization(mode:TimeVisualization){
@@ -85,7 +104,7 @@ export class WorldLighting {
             this.ambient.intensity=MathUtils.lerp(config.day.ambient,config.night.ambient,night);
             blend(this.directional.color,config.day.sun,config.night.moon,night);
             this.directional.intensity=MathUtils.lerp(config.day.sunIntensity,config.night.moonIntensity,night);
-            const angle=progress*Math.PI*2+Math.PI;this.directional.position.set(-28*Math.cos(angle)+35*Math.sin(angle),8+40*Math.abs(Math.cos(angle)),18*Math.cos(angle));
+            const angle=progress*Math.PI*2+Math.PI;this.directional.target.position.set(0,0,0);this.directional.position.set(-28*Math.cos(angle)+35*Math.sin(angle),8+40*Math.abs(Math.cos(angle)),18*Math.cos(angle));
             this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,config.night.exposure,night);
         }else if(this.visualization==='seasons'){
             const {from,to,mix}=seasonBlend(progress);this.nightWeight=0;this.mode='day';
@@ -96,6 +115,7 @@ export class WorldLighting {
     }
     update(time:number,progress?:number){
         if(this.visualization!=='off')this.cycle(progress??0);
+        if(this.visualization==='day-night')this.placeWorldLight();
         const flicker=fireFlicker(time),night=this.nightWeight;
         this.campfire.intensity=config.fire.intensity*flicker*night;
         this.halo.material.uniforms.opacity.value=config.fire.haloOpacity*flicker*night;

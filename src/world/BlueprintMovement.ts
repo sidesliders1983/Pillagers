@@ -7,7 +7,7 @@ import { buildingDistance } from './SettlementLayout';
 export function blueprintMovement(world: WorldBlueprint): MovementTerrain {
     const surface = createBlueprintSurface(world), nav = world.navigation;
     const walkable = (x: number, z: number) => {
-        const { bounds } = world.settlement;
+        const { bounds } = world.navigation;
         if (x < bounds.minX || x > bounds.maxX || z < bounds.minZ || z > bounds.maxZ) return false;
         const index = Math.round(z-nav.bounds.minZ)*nav.columns + Math.round(x-nav.bounds.minX);
         return nav.cells[index] && surface.surfaceHeightAt(x,z) > world.waterLevel+.2 &&

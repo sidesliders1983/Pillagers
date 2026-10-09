@@ -11,6 +11,11 @@ export class RTSCameraController {
     private elevation=initialElevation;private targetElevation=initialElevation;
     private keys=new Set<string>();private drag=false;private rotateDrag=false;
     private surface:Object3D|null=null;
+    private readonly listeners = new AbortController();
+    private homeFocus = new Vector3(0,0,16);
+    private bounds = { minX:-worldConfig.camera.bounds,maxX:worldConfig.camera.bounds,
+        minZ:-20,maxZ:worldConfig.camera.bounds };
+    private height: ((x:number,z:number)=>number) | undefined;
     private ray=new Raycaster();private pointer=new Vector2();
     private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
     private touch:TouchGestures;
@@ -23,21 +28,21 @@ export class RTSCameraController {
             rotate:(dx,dy)=>{this.yaw-=dx*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+dy*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);},
             zoom:ratio=>this.setZoom(this.zoom/ratio),
         },settings.tapThreshold);
-        window.addEventListener('keydown',e=>{
-            if(e.target instanceof HTMLInputElement)return;
+        this.listen(window,'keydown',e=>{
+            if(e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement || e.target instanceof HTMLTextAreaElement)return;
             if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
             this.keys.add(e.key.toLowerCase());
         });
-        window.addEventListener('keyup',e=>this.keys.delete(e.key.toLowerCase()));
-        window.addEventListener('blur',()=>{this.keys.clear();this.drag=false;this.rotateDrag=false;this.mouseStart=null;this.touch.reset();});
-        canvas.addEventListener('wheel',e=>{e.preventDefault();this.setZoom(this.zoom+e.deltaY*.025);},{passive:false});
-        canvas.addEventListener('pointerdown',e=>{
+        this.listen(window,'keyup',e=>this.keys.delete(e.key.toLowerCase()));
+        this.listen(window,'blur',()=>{this.keys.clear();this.drag=false;this.rotateDrag=false;this.mouseStart=null;this.touch.reset();});
+        this.listen(canvas,'wheel',e=>{e.preventDefault();this.setZoom(this.zoom+e.deltaY*.025);},{passive:false});
+        this.listen(canvas,'pointerdown',e=>{
             canvas.setPointerCapture(e.pointerId);
             if(e.pointerType==='touch'){e.preventDefault();this.touch.down(e.pointerId,e.clientX,e.clientY);}
             else if(e.button===2){e.preventDefault();this.rotateDrag=true;this.drag=false;this.mouseStart=null;}
             else if(e.button===0){this.rotateDrag=false;this.drag=true;this.mouseStart={x:e.clientX,y:e.clientY,distance:0};}
         });
-        canvas.addEventListener('pointermove',e=>{
+        this.listen(canvas,'pointermove',e=>{
             if(e.pointerType==='touch'){e.preventDefault();this.touch.move(e.pointerId,e.clientX,e.clientY);}
             else if(this.rotateDrag){e.preventDefault();this.yaw-=e.movementX*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+e.movementY*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);}
             else if(this.drag){if(this.mouseStart)this.mouseStart.distance=Math.max(this.mouseStart.distance,Math.hypot(e.clientX-this.mouseStart.x,e.clientY-this.mouseStart.y));this.pan(-e.movementX*this.distance*.0015,-e.movementY*this.distance*.0015);}
@@ -49,15 +54,38 @@ export class RTSCameraController {
             }
             else {if(!cancelled&&this.mouseStart&&this.mouseStart.distance<settings.tapThreshold)this.select?.(e.clientX,e.clientY);this.mouseStart=null;this.drag=false;this.rotateDrag=false;}
         };
-        canvas.addEventListener('pointerup',e=>release(e,false));
-        canvas.addEventListener('pointercancel',e=>release(e,true));
-        canvas.addEventListener('lostpointercapture',e=>release(e,true));
-        canvas.addEventListener('contextmenu',e=>e.preventDefault());
+        this.listen(canvas,'pointerup',e=>release(e,false));
+        this.listen(canvas,'pointercancel',e=>release(e,true));
+        this.listen(canvas,'lostpointercapture',e=>release(e,true));
+        this.listen(canvas,'contextmenu',e=>e.preventDefault());
         this.update(1);
     }
-    setNavigationSurface(surface:Object3D){this.surface=surface;}
+    private listen<K extends keyof WindowEventMap>(target: Window | HTMLCanvasElement,
+        type: K,handler: (event: WindowEventMap[K])=>void,options: AddEventListenerOptions = {}) {
+        target.addEventListener(type,handler as EventListener,{ ...options,signal:this.listeners.signal });
+    }
+    dispose() { this.listeners.abort();this.touch.reset();this.keys.clear(); }
+    setNavigationSurface(surface:Object3D,center = this.homeFocus,
+        bounds?:typeof this.bounds,height?:typeof this.height) {
+        this.surface=surface;
+        this.homeFocus.copy(center);
+        this.height=height;
+        if(bounds)this.bounds={...bounds};
+        this.home();
+        this.focus.copy(this.desired);
+    }
+    setView(pose:{position:number[];target:number[]}) {
+        const position=new Vector3().fromArray(pose.position);
+        this.focus.fromArray(pose.target);
+        this.desired.copy(this.focus);
+        const offset=position.sub(this.focus);
+        this.distance=this.zoom=offset.length()/orbitScale;
+        this.angle=this.yaw=Math.atan2(offset.x,offset.z);
+        this.elevation=this.targetElevation=Math.atan2(offset.y,Math.hypot(offset.x,offset.z));
+        this.update(0);
+    }
     setSelectionHandler(select:(x:number,y:number)=>boolean){this.select=select;}
-    home(){this.desired.set(0,0,16);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
+    home(){this.desired.copy(this.homeFocus);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
     private setZoom(value:number){this.zoom=MathUtils.clamp(value,worldConfig.camera.minZoom,worldConfig.camera.maxZoom);}
     private navigate(x:number,y:number){
         if(this.select?.(x,y))return;
@@ -69,8 +97,8 @@ export class RTSCameraController {
         if(!point)return;
         this.desired.set(point.x,Math.max(0,point.y),point.z);this.clampFocus();
     }
-    private clampFocus(){const b=worldConfig.camera.bounds;this.desired.x=MathUtils.clamp(this.desired.x,-b,b);this.desired.z=MathUtils.clamp(this.desired.z,-20,b);}
-    private pan(x:number,z:number){this.desired.x+=x*Math.cos(this.angle)+z*Math.sin(this.angle);this.desired.z+=-x*Math.sin(this.angle)+z*Math.cos(this.angle);this.clampFocus();}
+    private clampFocus(){const b=this.bounds;this.desired.x=MathUtils.clamp(this.desired.x,b.minX,b.maxX);this.desired.z=MathUtils.clamp(this.desired.z,b.minZ,b.maxZ);}
+    private pan(x:number,z:number){if(x===0&&z===0)return;this.desired.x+=x*Math.cos(this.angle)+z*Math.sin(this.angle);this.desired.z+=-x*Math.sin(this.angle)+z*Math.cos(this.angle);this.clampFocus();if(this.height)this.desired.y=Math.max(0,this.height(this.desired.x,this.desired.z));}
     update(dt:number){
         const k=this.keys;
         this.pan((Number(k.has('d')||k.has('arrowright'))-Number(k.has('a')||k.has('arrowleft')))*dt*worldConfig.camera.speed,(Number(k.has('s')||k.has('arrowdown'))-Number(k.has('w')||k.has('arrowup')))*dt*worldConfig.camera.speed);
