@@ -34,10 +34,18 @@ export class MovementSystem {
         this.detours.delete(unit);this.placed.add(unit);unit.interactionState='none';unit.partnerId=null;unit.wait=0;unit.speed=0;this.choose(unit);
     }
     private choose(unit:Villager){Object.assign(unit.target,this.terrain.randomPosition(this.random));}
-    private intent(unit:Villager){const p=unit.visual.position,dx=unit.target.x-p.x,dz=unit.target.z-p.z,d=Math.hypot(dx,dz);return d>.15&&unit.wait<=0?{x:dx/d*this.config.speed,z:dz/d*this.config.speed}:{x:0,z:0};}
+    private intent(unit: Villager) {
+        const position = unit.visual.position;
+        const goal = this.detours.get(unit)?.[0] ?? unit.target;
+        const dx = goal.x - position.x, dz = goal.z - position.z;
+        const distance = Math.hypot(dx, dz);
+        return distance > .15 && unit.wait <= 0 ?
+            { x: dx / distance * this.config.speed, z: dz / distance * this.config.speed } :
+            { x: 0, z: 0 };
+    }
     private face(unit:Villager,angle:number,dt:number){const difference=Math.atan2(Math.sin(angle-unit.visual.rotation.y),Math.cos(angle-unit.visual.rotation.y));unit.visual.rotation.y+=Math.max(-this.config.turnSpeed*dt,Math.min(this.config.turnSpeed*dt,difference));}
     private finish(e:Encounter){for(const unit of [e.a,e.b]){unit.interactionState='resume';unit.partnerId=null;unit.socialCooldownUntil=this.time+this.config.cooldownSeconds;}this.released.set(this.key(e.a,e.b),{a:e.a,b:e.b,until:this.time+this.config.cooldownSeconds});}
-    private eligible(unit:Villager){const v=this.intent(unit);return !this.detours.has(unit)&&!unit.busy&&unit.socialEnabled&&unit.interactionState==='none'&&this.time>=unit.socialCooldownUntil&&Math.hypot(v.x,v.z)>0;}
+    private eligible(unit:Villager){const v=this.intent(unit);return !unit.busy&&unit.socialEnabled&&unit.interactionState==='none'&&this.time>=unit.socialCooldownUntil&&Math.hypot(v.x,v.z)>0;}
     private startEncounters(){
         for(let i=0;i<this.villagers.length;i++)for(let j=i+1;j<this.villagers.length;j++){
             const a=this.villagers[i],b=this.villagers[j];if(!this.eligible(a)||!this.eligible(b)||this.released.has(this.key(a,b)))continue;

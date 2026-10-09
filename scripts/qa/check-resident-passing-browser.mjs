@@ -6,12 +6,16 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5182';
 const output = process.env.QA_OUTPUT || 'scratch/resident-passing-review';
-const duration = Number(process.env.QA_SECONDS || 20);
+const duration = Number(process.env.QA_SECONDS || 60);
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true,
-    args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+    args: process.env.QA_SOFTWARE === '1' ?
+        ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] : [] });
 const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
 page.setDefaultTimeout(120000);
+await page.addLocatorHandler(page.locator('#year-summary[open]'), async () => {
+    await page.click('#year-continue');
+});
 const errors = [], samples = [], captures = [];
 page.on('pageerror', error => errors.push(error.message));
 page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
@@ -25,6 +29,7 @@ const controls = async () => {
     await page.click('#debug-toggle');
 };
 const capture = async (name, sample) => {
+    await page.waitForTimeout(750);
     await page.locator('canvas').screenshot({ path: output + '/' + name + '.png' });
     captures.push({ name, time: sample.fixture.time });
 };
@@ -65,7 +70,9 @@ try {
         for (let i = 0; i < sample.population.length; i++) {
             const resident = sample.population[i], before = previous.population[i];
             assert.ok(resident.safe && Math.abs(resident.y - resident.ground) < .00001);
-            travel[i] += Math.hypot(resident.x - before.x, resident.z - before.z);
+            // Annual persona replacement is a spawn, not locomotion.
+            if (resident.seed === before.seed)
+                travel[i] += Math.hypot(resident.x - before.x, resident.z - before.z);
             const state = sample.interactions[i].state;
             stopped[i] = resident.speed === 0 && state !== 'talking' && state !== 'listening' ?
                 stopped[i] + dt : 0;
@@ -106,8 +113,9 @@ try {
     assert.ok(sawEncounter && sawResume, 'Observe both a conversation and route resumption');
     assert.deepEqual(errors, []);
 } catch (error) {
-    console.error('World status:', await page.locator('#status').textContent());
+    console.error('World status:', await page.locator('#status').textContent({ timeout: 2000 }).catch(() => 'Page unavailable'));
     console.error('Page errors:', errors);
+    await writeFile(output + '/failure.json', JSON.stringify({ errors, message: error.message }, null, 2));
     await page.screenshot({ path: output + '/failure.png' }).catch(() => {});
     throw error;
 } finally {

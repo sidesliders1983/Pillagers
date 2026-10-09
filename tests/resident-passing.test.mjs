@@ -119,3 +119,26 @@ test('resident starts steering before reaching a building on its route', () => {
     assert.ok(turnedEarly, 'resident waits until the building is immediately in front of it');
     assert.deepEqual(resident.target, { x: 0, z: 5 });
 });
+test('terrain steering does not prevent an approaching social encounter', () => {
+    const terrain = {
+        walkable: (x, z) => Math.abs(x) < 8 && Math.abs(z) < 8 &&
+            !(Math.abs(x) < .8 && z >= .8 && z <= 2.8),
+        heightAt: () => 0,
+        randomPosition: random => ({ x: random() * 12 - 6, z: -2 }),
+    };
+    const residents = [new Villager(0, new Group()), new Villager(1, new Group())];
+    const movement = new MovementSystem(residents, undefined, terrain);
+    residents[0].visual.position.set(0, 0, 0);
+    Object.assign(residents[0].target, { x: 0, z: 5 });
+    residents[1].visual.position.set(-5, 0, -5);
+    Object.assign(residents[1].target, { x: -5, z: -5 });
+    residents[1].wait = 60;
+    movement.update(.05);
+    assert.ok(residents[0].visual.rotation.y > .1, 'resident has begun steering around the building');
+    residents[1].visual.position.set(.9, 0, .5);
+    Object.assign(residents[1].target, { x: 0, z: -5 });
+    residents[1].wait = 0;
+    movement.update(.05);
+    assert.equal(residents[0].partnerId, residents[1].id);
+    assert.equal(residents[1].partnerId, residents[0].id);
+});
