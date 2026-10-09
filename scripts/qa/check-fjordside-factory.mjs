@@ -7,7 +7,8 @@ const page = await browser.newPage();
 page.setDefaultTimeout(120000);
 try {
     await page.goto((process.env.QA_ORIGIN || 'http://127.0.0.1:5181') + '/package.json');
-    for (const seed of [17,91]) {
+    const seeds = process.env.QA_SEEDS ? process.env.QA_SEEDS.split(',').map(Number) : [17, 91];
+    for (const seed of seeds) {
     const result = await page.evaluate(async seed => {
         const { createWorld, parseFjordsideSave } = await import('/src/world/WorldFactory.ts');
         const { AssetManager } = await import('/src/core/AssetManager.ts');

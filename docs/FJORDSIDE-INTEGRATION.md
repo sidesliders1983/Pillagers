@@ -1,12 +1,12 @@
 # Fjordside integration v0.2
 
-Ordinary Fjordside remains the original Reference scene. Open `/?worldDev=1` and choose Development tools → Debug for the staged integration controls. Generated is an explicit geography choice. This does not grant Northstar visual approval or switch the default.
+Ordinary Fjordside now generates a fresh Fjord world with a random seed immediately on each load. This startup change was approved on 9 October 2026. Use `/?world=reference` for the original Reference scene. Open `/?worldDev=1` and choose Development tools → Debug for explicit generation and geography save/load. Promoting generated startup does not imply full Northstar visual parity.
 
 ## Creation, save/load and rollback
 
-Generate World runs the pinned generator only on that explicit action. The production World factory consumes a complete validated WorldBlueprint; it never invokes generateWorld. Reload reads the stored blueprint and attachment plan, preserving terrain, biomes, nature, settlement and routes. Quality changes rebuild render resources from that same blueprint.
+Ordinary startup and Generate World run the pinned generator. The production World factory consumes a complete validated WorldBlueprint; it never invokes generateWorld. In development mode, reload reads the stored blueprint and attachment plan, preserving terrain, biomes, nature, settlement and routes. An ordinary reload creates a fresh world. Quality changes rebuild render resources from that same blueprint.
 
-The active preview uses sessionStorage key `pillagers-fjordside-active-v02`. Save/Load uses localStorage key `pillagers-fjordside-geography-v02`, separate from Simulation Core campaign saves. Export/Import stores complete geography and original source attachment placements. Existing Environment Lab world files are importable. Invalid files or changed source bounds visibly reject activation. Reference fallback clears the active preview and retains the explicit local save. Ordinary URLs ignore preview selection.
+The active preview uses sessionStorage key `pillagers-fjordside-active-v02`. Save/Load uses localStorage key `pillagers-fjordside-geography-v02`, separate from Simulation Core campaign saves. Export/Import stores complete geography and original source attachment placements. Existing Environment Lab world files are importable. Invalid files or changed source bounds visibly reject activation. Reference fallback stores an explicit Reference selection and retains the local save. Ordinary URLs ignore preview selection and generate a fresh world; `?world=reference` is the explicit rollback.
 
 These saves do not add persistence for the existing Fjordside character preview or annual clock: reload retains its previous initialization behavior. Headless simulation economy, mortality, cattle, weather and expeditions are unchanged.
 

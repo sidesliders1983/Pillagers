@@ -5,7 +5,7 @@ import { parseFjordsideSave, WorldSelection } from '../world/WorldFactory';
 const activeKey = 'pillagers-fjordside-active-v02';
 const savedKey = 'pillagers-fjordside-geography-v02';
 
-/** Explicit development rollout; ordinary Fjordside URLs always retain Reference. */
+/** Fresh generated worlds on ordinary loads; development controls retain explicit saved selections. */
 export class FjordsideControls {
     readonly enabled = new URLSearchParams(location.search).get('worldDev') === '1';
     readonly selection: WorldSelection;
@@ -13,14 +13,24 @@ export class FjordsideControls {
     private activating = false;
     private validate: ((selection: WorldSelection) => Promise<string>) | undefined;
     constructor() {
-        this.selection = { mode: 'reference',quality: 'standard' };
+        const stored = this.enabled ? sessionStorage.getItem(activeKey) : null;
+        const reference = new URLSearchParams(location.search).get('world') === 'reference';
+        if (stored || reference) this.selection = { mode: 'reference', quality: 'standard' };
+        else {
+            const seed = crypto.getRandomValues(new Uint32Array(1))[0];
+            this.selection = {
+                mode: 'generated',
+                quality: 'standard',
+                blueprint: generateWorld({ seed, preset: 'fjord', conifers: 'ez-tree' }),
+            };
+        }
         if (!this.enabled) return;
         const panel = document.createElement('section');
         panel.className = 'fjordside-world-controls';
         panel.setAttribute('aria-label','World integration preview');
         panel.innerHTML = `
             <h3>World integration preview</h3>
-            <p>Reference remains the default. Geography saves are separate from campaign saves.</p>
+            <p>New visits generate a fresh world. Explicit geography saves are separate from campaign saves.</p>
             <label>World seed<input id="fjordside-seed" type="number" min="0" max="4294967295" value="17"></label>
             <label>Landscape<select id="fjordside-preset"><option value="fjord">Fjord</option>
                 <option value="coastal-valley">Coastal Valley</option><option value="rocky-inlet">Rocky Inlet</option></select></label>
@@ -40,10 +50,12 @@ export class FjordsideControls {
         document.querySelector('#debug')!.prepend(panel);
         this.status = panel.querySelector<HTMLElement>('#fjordside-world-status')!;
         panel.querySelector('#fjordside-reference')!.addEventListener('click',() => {
-            sessionStorage.removeItem(activeKey);
+            sessionStorage.setItem(activeKey, JSON.stringify({
+                fjordsideVersion: 1, mode: 'reference', quality: this.selection.quality,
+            }));
             location.reload();
         });
-        const saved = sessionStorage.getItem(activeKey);
+        const saved = stored;
         if (saved) {
             try { this.selection = parseFjordsideSave(saved); }
             catch (error) {
