@@ -1,0 +1,647 @@
+{
+  "sourceParentCommit": "a51b844dba1baafaec571ac479d9adaf5b617bc8",
+  "productionSnapshot": "scratch/sand-study-production",
+  "source": [
+    {
+      "file": "src/environment-lab/LabWorldGeneration.ts",
+      "lfSha256": "48710fb0e6bc045ae41ea5e2872d58ac752bc7e27b86b11a839475532d3c2a85"
+    },
+    {
+      "file": "src/environment-lab/EnvironmentLab.ts",
+      "lfSha256": "f069bf64e7e7d6a75f98f8f91f9f7cad28a7099355fae7723c9911fa715f7898"
+    },
+    {
+      "file": "src/world/WorldGroundMaterials.ts",
+      "lfSha256": "b60529d16877c6b5d5de63fbd7e03db5ad4716a642c4e8d549efa6822dbf2b3b"
+    },
+    {
+      "file": "src/world/BlueprintTerrain.ts",
+      "lfSha256": "fd8c61297a8ae236088ff26aea75d42506a889d31192e48f8f558de6290e3344"
+    },
+    {
+      "file": "src/world/FjordsideWater.ts",
+      "lfSha256": "699ab1c41cafa53c43aacf71b48b464fcaa7b846ec356901cde0a87340011f4e"
+    },
+    {
+      "file": "src/water/ReferenceWater.ts",
+      "lfSha256": "d8d7acbc14594a31d7b7a225f139abb4c366729be4d0be3e3b33f381438b5e87"
+    },
+    {
+      "file": "src/environment-lab/LabLighting.ts",
+      "lfSha256": "7badb7f5dd534fde1b90a284c51a12aaaa9594119a7ec9a2aded8792f425410d"
+    },
+    {
+      "file": "src/config/RegionalGroundConfig.ts",
+      "lfSha256": "17b9cee346311a45aa8bfc14970dbfffa3c19759122b3345c6dd4b2bc8c894d1"
+    },
+    {
+      "file": "scripts/prepare-world-sources.mjs",
+      "lfSha256": "c4ea4942933a6fefbdb5db514b5b1e2acfecfad0e6beb219b9863d18a6cee752"
+    },
+    {
+      "file": "scripts/encode-world-ground-map.mjs",
+      "lfSha256": "7bb7da14b7c6d4a59112d9fceec762f9c634db289fcc8bb2b5a2f52221639e1b"
+    },
+    {
+      "file": "scripts/prepare-world-sand.mjs",
+      "lfSha256": "4eecf158d15df5d6090d11be260c85ccfefc16dee6fe207958a66f084c0c84e4"
+    },
+    {
+      "file": "scripts/qa/audit-sand-delivery.mjs",
+      "lfSha256": "45bb66048308ba492a644c2e2137b02d31241e917605ed5e20b33adb34f16772"
+    },
+    {
+      "file": "scripts/qa/capture-sand-study.mjs",
+      "lfSha256": "b5d0f55a3eccd4bdf3e4e3ff1441b87c2b322d8f874844785c210f06fee01e19"
+    },
+    {
+      "file": "scripts/qa/check-sand-lifecycle.mjs",
+      "lfSha256": "416cf0af6904b27712556f55756c9c8b820c114181e99f8e5f6a54fb3d507366"
+    },
+    {
+      "file": "scripts/qa/check-sand-study.mjs",
+      "lfSha256": "d8d82dbbf7977191676f215b006ffa8cb95f4d350b3f84e44fdca1d69ed8d20d"
+    },
+    {
+      "file": "scripts/qa/measure-sand-study.mjs",
+      "lfSha256": "9c914befa2798ea35c418d567dd7ac54a3a443d3458232c3f6db7897bda15e72"
+    },
+    {
+      "file": "scripts/qa/sand-study-browser.mjs",
+      "lfSha256": "e9e3c7876d71f2563acd5af6a12566e91a3f9abc2849e74689bd461a33a2da0c"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "blueprint-17.json",
+      "sha256": "0e04888db2d3fbb7c4c09df65da43ab389e792d6b63ae85e1fdcc61577fbc3ca",
+      "bytes": 857360
+    },
+    {
+      "file": "blueprint-91.json",
+      "sha256": "3634229cee7bb88b43a26be2f86f8a91a5e7f362d7cf0bd58a466d64a1afe779",
+      "bytes": 864331
+    },
+    {
+      "file": "captures.json",
+      "sha256": "eefb51680ca508b9275dee5d4b541b3eecdf2f0a32f7efe2ca1836693ef94f2b",
+      "bytes": 819188
+    },
+    {
+      "file": "delivery-audit.json",
+      "sha256": "6e0caaee54765b18f48cb877a8385728309bf35e89b3541fa3c1bd21634c3f20",
+      "bytes": 9710
+    },
+    {
+      "file": "lifecycle.json",
+      "sha256": "501b72b1779428da1824f12db86b2d2123278d29ce8739cdd3d6863470eed0ef",
+      "bytes": 429084
+    },
+    {
+      "file": "17-128-day-overview.webp",
+      "sha256": "66ec963bd5cde5381acd2b373cace8830021662c766166ca88c57a33041301a5",
+      "bytes": 131214
+    },
+    {
+      "file": "17-128-day-sand-close.webp",
+      "sha256": "172ba37b1a0c3fea590d04eb050a47b189f0c3075656e4c831db477c8edac3c8",
+      "bytes": 209846
+    },
+    {
+      "file": "17-128-day-sand-shore.webp",
+      "sha256": "47759249c198b77751f2d87df88a605bcee0182f3ddc7b02513887ce6c244781",
+      "bytes": 380174
+    },
+    {
+      "file": "17-128-day-village.webp",
+      "sha256": "86499b9819d53fce4293f02aa9909a4f7cda4db0e9987e2739289120d98a7129",
+      "bytes": 422300
+    },
+    {
+      "file": "17-128-low-sun-overview.webp",
+      "sha256": "fd363ebebdb47cb7467d1aea3eaf5db8cd1a432303485ecd2abb15025654200f",
+      "bytes": 72314
+    },
+    {
+      "file": "17-128-low-sun-sand-close.webp",
+      "sha256": "1207c23a6b51bab9238a0f8474163d852fcb9f508b8fd94923937c445f08b635",
+      "bytes": 218586
+    },
+    {
+      "file": "17-128-low-sun-sand-shore.webp",
+      "sha256": "aea4f58f77d2748facfa2b4eff69f5ad05377c79019990a426407b214f205c6a",
+      "bytes": 331486
+    },
+    {
+      "file": "17-128-low-sun-village.webp",
+      "sha256": "85777b4f8d6af193dd9d22445729d43e2e824d3348aa908b671d8d6543acd3f1",
+      "bytes": 423948
+    },
+    {
+      "file": "17-128-night-overview.webp",
+      "sha256": "8ccebe37052acf8f8dfc019e69cd134cc170e88d99dfbb2d858d6f48706c9084",
+      "bytes": 6224
+    },
+    {
+      "file": "17-128-night-sand-close.webp",
+      "sha256": "4c4f41af8b01755474bdfea6a970d0687bbe5e644f6b08defe601eabb52dc3a8",
+      "bytes": 160872
+    },
+    {
+      "file": "17-128-night-sand-shore.webp",
+      "sha256": "2225377797b29548bd84348a9ac10ef8170fbe1ed3c63519c62b93c2bdda5db9",
+      "bytes": 200666
+    },
+    {
+      "file": "17-128-night-village.webp",
+      "sha256": "5e545fa4acbdd64061c7cc97e89836011173b2d0dd10cedcb3bcbe5f8e80896d",
+      "bytes": 225608
+    },
+    {
+      "file": "17-256-day-overview.webp",
+      "sha256": "41f3077e4b3b0ecef87a83fe3f9662ccedb4417ba614ac31695898879d5405a3",
+      "bytes": 129688
+    },
+    {
+      "file": "17-256-day-sand-close.webp",
+      "sha256": "87d4fccd643c924645500193ec0795f4cf6a9fdab8650a0a41de41c203a82c12",
+      "bytes": 335584
+    },
+    {
+      "file": "17-256-day-sand-shore.webp",
+      "sha256": "3a319279e0e569a30cd666842a87384081305123349f197ae68688af41eefb13",
+      "bytes": 413378
+    },
+    {
+      "file": "17-256-day-village.webp",
+      "sha256": "206b23046b714bdbaf05df19e754b62d81c36f73318a1b1d555c60fa02dffb5b",
+      "bytes": 435454
+    },
+    {
+      "file": "17-256-ground-only.webp",
+      "sha256": "591938bd09677ead1c201a2c05d2c5185fe0632cf31288eb92fa42c615768c93",
+      "bytes": 348368
+    },
+    {
+      "file": "17-256-low-sun-overview.webp",
+      "sha256": "adeef1f1651c51b94afde657cc2116cbd79ca90a59a642c8f0ca59b6475d90ee",
+      "bytes": 73624
+    },
+    {
+      "file": "17-256-low-sun-sand-close.webp",
+      "sha256": "c964c23c8207962b9c11bbdce46b2ccf4a4da42361a8c715e15855ce08234082",
+      "bytes": 348914
+    },
+    {
+      "file": "17-256-low-sun-sand-shore.webp",
+      "sha256": "86716ebbec6bbd6454f814ec21ec9cef221ad5cd59eaedb72f4565be9e21e49e",
+      "bytes": 376188
+    },
+    {
+      "file": "17-256-low-sun-village.webp",
+      "sha256": "099e6494e71cba0a5749cae20ec4dd650e18f6a9b80c6bd069a63edd18c84ff8",
+      "bytes": 442464
+    },
+    {
+      "file": "17-256-night-overview.webp",
+      "sha256": "5d5feabaf1d75c4d49cbecfd33619fb07d88c0fca1c564d4000ef5b5bed5fafb",
+      "bytes": 6254
+    },
+    {
+      "file": "17-256-night-sand-close.webp",
+      "sha256": "7d193772d66c6a85e035b51db84c2da3947bf05ac3e061ecdc90dd9bbfc438d8",
+      "bytes": 253046
+    },
+    {
+      "file": "17-256-night-sand-shore.webp",
+      "sha256": "a893d29f266147e6bd9f44fd9c12ec159338557da1bae6656def8871bf88f0e3",
+      "bytes": 224686
+    },
+    {
+      "file": "17-256-night-village.webp",
+      "sha256": "3d5ca7c93e5ee9321bd0cbb0a28994936a9bc2cd00bf4da92455209c1a04026c",
+      "bytes": 238064
+    },
+    {
+      "file": "17-512-day-overview.webp",
+      "sha256": "a7548c55b055a86dbaaae387ad5d5e4796ef9cbd61f49e3eaa6ad706188c2117",
+      "bytes": 129626
+    },
+    {
+      "file": "17-512-day-sand-close.webp",
+      "sha256": "ea7292511191e32b0b8cb40cff899c38a311807e04ae362a21effc40345f335e",
+      "bytes": 352472
+    },
+    {
+      "file": "17-512-day-sand-shore.webp",
+      "sha256": "75e2e55c710f7e013b21affee5376e3f0e3579a632dec9fb985d1f16acf80287",
+      "bytes": 413282
+    },
+    {
+      "file": "17-512-day-village.webp",
+      "sha256": "5e4e1d8c70b87495a9334fd83ed06a94e5bca617c46c66b145c7e877f0fb6a60",
+      "bytes": 435240
+    },
+    {
+      "file": "17-512-ground-only.webp",
+      "sha256": "8504773e5f321d300296781cf30ba43f4e353cc904922b2f57e09ca86458d29e",
+      "bytes": 372350
+    },
+    {
+      "file": "17-512-low-sun-overview.webp",
+      "sha256": "350e75650f3d990b7db44a55930b530dffee183f67087376dbae7291940cc9f0",
+      "bytes": 73716
+    },
+    {
+      "file": "17-512-low-sun-sand-close.webp",
+      "sha256": "9d3f338881a9a8d18ce01ed36f472c36188dc45a05eafc659aef426aa4cb145a",
+      "bytes": 370408
+    },
+    {
+      "file": "17-512-low-sun-sand-shore.webp",
+      "sha256": "17468128dd2b9e92e24e63df98578d16701b8854314d6bbd1a5c7d11b355c5d0",
+      "bytes": 376230
+    },
+    {
+      "file": "17-512-low-sun-village.webp",
+      "sha256": "603166971ae5a2b8b4e0144fe0cf75ec9a5e8418cf0dcc21efc6cb7b89112c05",
+      "bytes": 442350
+    },
+    {
+      "file": "17-512-night-overview.webp",
+      "sha256": "a1067ad90267d81ecbc3f0549af7c9746e2e9d8dd59261be0e3fc582ed18adf3",
+      "bytes": 6260
+    },
+    {
+      "file": "17-512-night-sand-close.webp",
+      "sha256": "23f0181a2cadb7ba483a228e4a1618234a47c263de7ff518f40c71365d24aa7e",
+      "bytes": 264310
+    },
+    {
+      "file": "17-512-night-sand-shore.webp",
+      "sha256": "e08f851db978562dd35a5920e5a46bba97b5f708ff0a17cff6fdb8579fcf7661",
+      "bytes": 224212
+    },
+    {
+      "file": "17-512-night-village.webp",
+      "sha256": "3d5ca7c93e5ee9321bd0cbb0a28994936a9bc2cd00bf4da92455209c1a04026c",
+      "bytes": 238064
+    },
+    {
+      "file": "91-128-day-overview.webp",
+      "sha256": "85babfc7b67d0b9d3631c535705bcbfa85ecc5305b23f2e5661ceb969c0d55ce",
+      "bytes": 141022
+    },
+    {
+      "file": "91-128-day-sand-close.webp",
+      "sha256": "36e2648c39217216baab9b79409b42a1f0384bd1241b8e76fa14920f28712e17",
+      "bytes": 154518
+    },
+    {
+      "file": "91-128-day-sand-shore.webp",
+      "sha256": "e66e198f954939ea06e85258b3bbda44217b72d3f83837983787847e444997be",
+      "bytes": 382978
+    },
+    {
+      "file": "91-128-day-village.webp",
+      "sha256": "9c3641922508ef5cc26fd5ff3e0cbbe538cce038596613a3cf6362a641db6c2d",
+      "bytes": 424306
+    },
+    {
+      "file": "91-128-low-sun-overview.webp",
+      "sha256": "5ae8636ddf59fc3b10e894ebc6f382fe44d1bc30b80e9ebcf69475348f00433d",
+      "bytes": 78548
+    },
+    {
+      "file": "91-128-low-sun-sand-close.webp",
+      "sha256": "307b8e4f67b9ef13480d456e5aabc5d38afe666a3cea2963f78377bd286b31bc",
+      "bytes": 129556
+    },
+    {
+      "file": "91-128-low-sun-sand-shore.webp",
+      "sha256": "58076c36b0422bd64bfd49613fbaa4a228a519dfa739e6fe8436f9a37742c394",
+      "bytes": 339244
+    },
+    {
+      "file": "91-128-low-sun-village.webp",
+      "sha256": "a633c1aa8216d310b1eef7b9da13fe1d71727fcaf0b93d93fc40b05f50e0d465",
+      "bytes": 434198
+    },
+    {
+      "file": "91-128-night-overview.webp",
+      "sha256": "14a2f0ef8ebbd33a698772d370668834a14457117637f9cacbd2d667e0821b6c",
+      "bytes": 6844
+    },
+    {
+      "file": "91-128-night-sand-close.webp",
+      "sha256": "56f0c52510f905955f40fd4e7aa962518db245f5797d166f361da8d76202bfd5",
+      "bytes": 93530
+    },
+    {
+      "file": "91-128-night-sand-shore.webp",
+      "sha256": "668f05bd7ac4bb78a13acb33ee5a5a210dcfa18676649469d1c51b6b3365330d",
+      "bytes": 196306
+    },
+    {
+      "file": "91-128-night-village.webp",
+      "sha256": "eb11f681e1eb4966aea8c77bbe389ba4901c60f1d1900d1874d29ade81e9f531",
+      "bytes": 228560
+    },
+    {
+      "file": "91-256-day-overview.webp",
+      "sha256": "9e0313c17e80df8b7ed1dd1da8a9eb9e5039fc6d7175d440c69c27a8bda4d083",
+      "bytes": 139788
+    },
+    {
+      "file": "91-256-day-sand-close.webp",
+      "sha256": "452d28be6e724f96da7cf4b8698d2203f65a3d7e40d8fe0a2f61e534bd058f1f",
+      "bytes": 232366
+    },
+    {
+      "file": "91-256-day-sand-shore.webp",
+      "sha256": "ddf8aa7c3d9326362c5f39b86540ec9dfc22b09612553ef9e992a85eb15ecfeb",
+      "bytes": 410552
+    },
+    {
+      "file": "91-256-day-village.webp",
+      "sha256": "960c304ff96508cc5436662fc7978192a02aa84b4c963adffbce52a6eb723b20",
+      "bytes": 442954
+    },
+    {
+      "file": "91-256-ground-only.webp",
+      "sha256": "9b984106e0844650a376f30fb1242d860deedfb7fadb1d064dd7c5159db2c091",
+      "bytes": 256774
+    },
+    {
+      "file": "91-256-low-sun-overview.webp",
+      "sha256": "33792d47a0bdf509da985eead0aef7642b2e437b9b7bf8082e176a71fba459bc",
+      "bytes": 83854
+    },
+    {
+      "file": "91-256-low-sun-sand-close.webp",
+      "sha256": "6deede0b9c371bb19d0c00b3567ab649f9611a938e8220369b5bbb86a25f4aa2",
+      "bytes": 223050
+    },
+    {
+      "file": "91-256-low-sun-sand-shore.webp",
+      "sha256": "ce51b87c8472eb394f3058fe8cde07f493efbe627e88897358884c3b2cc7e896",
+      "bytes": 363430
+    },
+    {
+      "file": "91-256-low-sun-village.webp",
+      "sha256": "a701fdce731627bcdd6cbc7307fe1a5ccb7a527702d0e66e88ff1d444c3cf3bf",
+      "bytes": 448998
+    },
+    {
+      "file": "91-256-night-overview.webp",
+      "sha256": "381ec7b1a1bf225f0ea8b3721d48cb13407ffe3032ef695922b418d8f6e60b72",
+      "bytes": 6852
+    },
+    {
+      "file": "91-256-night-sand-close.webp",
+      "sha256": "942affb5eccd966007745c537fc173ea2370881bd78981cee693add059e4c790",
+      "bytes": 141020
+    },
+    {
+      "file": "91-256-night-sand-shore.webp",
+      "sha256": "97f84f9ae3f8e43005109bf409be4ad57450c4097f8b59e590ce24a8dc567ac5",
+      "bytes": 217614
+    },
+    {
+      "file": "91-256-night-village.webp",
+      "sha256": "5fdaffcc57e2f4f997fe762083ca5838c8e631081b9dc401bca5a7dc629bd237",
+      "bytes": 242002
+    },
+    {
+      "file": "91-512-day-overview.webp",
+      "sha256": "82e3c0053b0043c523bec3a976cb937b1b55d39865c827dc797ac732d7c5dee6",
+      "bytes": 139690
+    },
+    {
+      "file": "91-512-day-sand-close.webp",
+      "sha256": "d7a8d3d2bec5a02a73bebca26bc19965d4c89dd382982183d5f47dbc60759a35",
+      "bytes": 247696
+    },
+    {
+      "file": "91-512-day-sand-shore.webp",
+      "sha256": "a2643838b61bce0d3038c5fa7e16c610fa6afa8510cdaf8e40865f7aeda6141b",
+      "bytes": 410810
+    },
+    {
+      "file": "91-512-day-village.webp",
+      "sha256": "b7bcb8df4d9dd802f4da6e69142a848ea7b9970141dda7a792433636c20977cf",
+      "bytes": 443012
+    },
+    {
+      "file": "91-512-ground-only.webp",
+      "sha256": "96d4338312c473800173e81da8d66cf5f2d2e69cea6dc68204ab2afad14200e3",
+      "bytes": 271350
+    },
+    {
+      "file": "91-512-low-sun-overview.webp",
+      "sha256": "034de39b2fec07fa99b999f6120dd2d6cdd21341bbb987368592aae5564aae45",
+      "bytes": 83866
+    },
+    {
+      "file": "91-512-low-sun-sand-close.webp",
+      "sha256": "b3c0a3cae78022ec4330a8bfddd8afb163625bd4182f19bc955098538efcdf4a",
+      "bytes": 238248
+    },
+    {
+      "file": "91-512-low-sun-sand-shore.webp",
+      "sha256": "137cca79520af497a38fd7f3c634d6cb33beebd598428a07a86c860378e674bf",
+      "bytes": 363234
+    },
+    {
+      "file": "91-512-low-sun-village.webp",
+      "sha256": "14e8318cd99f31336915b604afd6b5ce67b632d749a9901a584d3ca06a9e0585",
+      "bytes": 449040
+    },
+    {
+      "file": "91-512-night-overview.webp",
+      "sha256": "c22ffd8ad1b973bd4f512149415dc9b548a1161c276444c4f609a3a34ab73296",
+      "bytes": 6848
+    },
+    {
+      "file": "91-512-night-sand-close.webp",
+      "sha256": "37b94a88c9c5ca5b2f3e2522fc3ca234180af472e668ee23e9bf7b53222e96a4",
+      "bytes": 151006
+    },
+    {
+      "file": "91-512-night-sand-shore.webp",
+      "sha256": "4c193e42fdda69db9719072ef3f98cb4c1be6c76dbc7e06409a8ed8c81020245",
+      "bytes": 217490
+    },
+    {
+      "file": "91-512-night-village.webp",
+      "sha256": "5fdaffcc57e2f4f997fe762083ca5838c8e631081b9dc401bca5a7dc629bd237",
+      "bytes": 242002
+    },
+    {
+      "file": "hardware-runs.json",
+      "sha256": "da3ba07eeefe88b9a65c7fc7effeeead0a81f44779023171586d1fe02a2b3b2f",
+      "bytes": 619802
+    },
+    {
+      "file": "report.md",
+      "sha256": "1e37627bb4fa95e3334f6a5754770bc002807491e10c0b36b0390a2f5f09af30",
+      "bytes": 8597
+    },
+    {
+      "file": "review.html",
+      "sha256": "6a9dcc46268ae6eb8e0d3f4f038e25f2a916610ea390534f3d6288db4b68ede4",
+      "bytes": 24596
+    }
+  ],
+  "notes": "Runtime source hashes are LF-normalized to match Git. Captures use the frozen production build containing these sources; hashes tie the corrected actual-512 image set to its matching metadata. Final hardware-runs.json retains its own runtime source hashes.",
+  "buildFiles": [
+    {
+      "file": "index.html",
+      "sha256": "f47f7aecc07ac694a5852436491fed4fd3acd9e9abd8d35ec981b8655db20ec8"
+    },
+    {
+      "file": "assets/AssetLab-CVWYbzJU.js",
+      "sha256": "1797c0b3a5e3a3a94213cb1e8a3bfbec49b1cbc59dae17d9ef687b03903b5259"
+    },
+    {
+      "file": "assets/AssetLab-HQ7TMumO.css",
+      "sha256": "2a19721cbc094f45bc4c280f8c70e88c806ddc396d407eb108f464a3ae8c0eed"
+    },
+    {
+      "file": "assets/CharacterFactory-Dc88Zc8M.js",
+      "sha256": "c4789043ff7a801cb768ed9ceb4b9cecd1374048d38059b3b34f77ac0039d22d"
+    },
+    {
+      "file": "assets/CharacterFactory-nrfqmBxx.js",
+      "sha256": "46990eda0c53077a18d52105fa404785d4a66e51b67f74781c60e82f07d6b95d"
+    },
+    {
+      "file": "assets/CharacterLab-D-6w5L5W.js",
+      "sha256": "f872c3f4283b466cba7fe2c5214adc5e465e928699e7d037f9c365942cdb10bd"
+    },
+    {
+      "file": "assets/CharacterLab-DLC3N2pF.css",
+      "sha256": "b773e752eee46933e6f4b6d8bc1f38b2e7f5ff597216b1aec1683f21d7a41782"
+    },
+    {
+      "file": "assets/CharacterLab-rHg-tFFI.js",
+      "sha256": "8162d1ed40bd661f7db9f7770d25254b510e8e6b780619e83dadee58db0c3b4e"
+    },
+    {
+      "file": "assets/Chronicle-BAq5w2FD.js",
+      "sha256": "58060bd1ec2d713225a769e3466096355f8a2d2bdf58898135e358fc5aea0902"
+    },
+    {
+      "file": "assets/CowCharacterPreview-B3DT9pqm.js",
+      "sha256": "41e87db1f4a1b7392760839861d238c36b9a6c43e733ed44926157bad551e3e3"
+    },
+    {
+      "file": "assets/CowCharacterPreview-C9vy-ATm.js",
+      "sha256": "8becbd9583ab5c33eeb3ab0a36cd42dd6a7b2d50884393e805153a664b317135"
+    },
+    {
+      "file": "assets/EnvironmentLab-BBvkiLrz.css",
+      "sha256": "6fc1b900e9c9623adea23b2cb28913eaa6127fd96d9ec762f57ad59a7fdc9462"
+    },
+    {
+      "file": "assets/EnvironmentLab-BmEtLhCM.js",
+      "sha256": "d158b07a09774d5a8c352ce486f073c9f9da76a2762f689c806a69135a1e53d0"
+    },
+    {
+      "file": "assets/EnvironmentLab-CmI-J4PA.js",
+      "sha256": "8d04af0062dfcc6850788166ba7a8d222308b8430dd0c8a02d00ec9f6aefe751"
+    },
+    {
+      "file": "assets/Game-D83CwODv.js",
+      "sha256": "e1619c2891a2ec3f926607904b3162686747a035975b85a84a4018f1ebb77946"
+    },
+    {
+      "file": "assets/Game-t54s7yxt.js",
+      "sha256": "44d245ace95679d76ade0c86a888e8cb5a6dda95b01fb9fc5c5c21314af6ffdb"
+    },
+    {
+      "file": "assets/GameplayLab-DqiXgJwy.js",
+      "sha256": "2a8c69a650af16cae2285f183eb3095c25c8c986dedfacf9697adc294469f40f"
+    },
+    {
+      "file": "assets/GameplayLab-JhEYIz1p.css",
+      "sha256": "965a8f3795e872de000d8f1364ea99b5f04e81e7cdd2517d5865ca2aa3a5cca3"
+    },
+    {
+      "file": "assets/generateCharacterDNA-Cdq_oL7s.js",
+      "sha256": "d3b20db069cc70f30654b441adea9f5e9620ff70ba294f72ca64e7d4cc784b7a"
+    },
+    {
+      "file": "assets/generateName-DOQ4o1iH.js",
+      "sha256": "70b99a28d55e022e600c740647966a7fff0dff055b74310ddfa6bf5d67faf697"
+    },
+    {
+      "file": "assets/GoldenBodySurfaceCalibration-C_5LNdMz.js",
+      "sha256": "a2ff5fceea792468e74a51cac31d81df6ecb880c429862bf3ebbebff4ab7dce6"
+    },
+    {
+      "file": "assets/index-2I3lPC59.js",
+      "sha256": "14027d892d910d118af3e2784f21cc51e0610c9b54ca77744debfd25473cde9f"
+    },
+    {
+      "file": "assets/index-CFsPs_le.js",
+      "sha256": "39a02f1bb55edd3e24df2716d6a0eeb2630094c18075a6d75d2e7e09225cc2cc"
+    },
+    {
+      "file": "assets/index-DLNPttDf.css",
+      "sha256": "a3cbd66c12101b737fcbf271c458f70748a2d9a3dac6aa56c28377277a22395f"
+    },
+    {
+      "file": "assets/MeshyCharacterLab-CqNdCCub.css",
+      "sha256": "78bdfb33709ec67931a8f23c2a53ea26dbad16497f8b52b0bd10be555669b9a0"
+    },
+    {
+      "file": "assets/MeshyCharacterLab-DewCXPDh.js",
+      "sha256": "9852be6e1a54ffd13e68d22378fbda18547f2c24a016506d91b0af643536fa1c"
+    },
+    {
+      "file": "assets/MeshyHuman-BsA7WVp4.js",
+      "sha256": "841a91e71d9935191b367698c19c7d1dfb98919e7f89fa36226c969630ae97f1"
+    },
+    {
+      "file": "assets/OrbitControls-CJq5HAed.js",
+      "sha256": "01ac18157ad63afed2d5f620a0c1735d278c41f4de9251986ea0ab954aa1ca2e"
+    },
+    {
+      "file": "assets/PlayUI-BqzHz75C.css",
+      "sha256": "2fde5f29ca54155b2b648d74d86550e81903735195330fed666404df4839287d"
+    },
+    {
+      "file": "assets/PlayUI-Dgb2D_n9.js",
+      "sha256": "35a85439911f960e778332eb81701cc996dc50c6e171bf18b723e7c37c793d17"
+    },
+    {
+      "file": "assets/ReferenceWater-D5MftIAj.js",
+      "sha256": "206f41611f88448cabdf387757dc6217e3a6f8820bacf0e59834b5f177d90b8c"
+    },
+    {
+      "file": "assets/Renderer-DwJWB92U.js",
+      "sha256": "a03995d599bb737efceef3f207b190da7341b8c41c492127d9e657ffdf7d24bc"
+    },
+    {
+      "file": "assets/three.module-BSb8zgiW.js",
+      "sha256": "b77d7c48cb0b9078b609ad14703beceecf3930bcaa465a158136ec78906a761e"
+    },
+    {
+      "file": "assets/Water-Brwq2X5E.js",
+      "sha256": "fed3008c0f913de74b66d0475af1022b6c755d33308d71b7661deeeab0ae9a6a"
+    },
+    {
+      "file": "assets/Water-DEvQUy7B.js",
+      "sha256": "9e746edc39c186f61d5d28b6c429a63141999ca7875a2a182bed15a5d42aa706"
+    },
+    {
+      "file": "assets/WaterLab-CamFp8SX.css",
+      "sha256": "eede4a6202ed719d9804e46e191f5233d7923b89c80bc709df9edd62c141485d"
+    },
+    {
+      "file": "assets/WaterLab-D60omCDJ.js",
+      "sha256": "493b2f16a9b248110668de1ee09568a0fe5e07a1088eb6e9a8e1f67e92ffc7c8"
+    }
+  ]
+}

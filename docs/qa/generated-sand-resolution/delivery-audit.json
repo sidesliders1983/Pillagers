@@ -1,0 +1,299 @@
+{
+  "preserved": [
+    {
+      "file": "standard/Ground037-colour.webp",
+      "sha256": "1615234012ab5f67a43fc493b2245a022ad0d54327ee34bb8aaca14ac6ee1b27",
+      "bytes": 30010
+    },
+    {
+      "file": "standard/Ground037-normal.webp",
+      "sha256": "4320bd8159a2b5396819a2f91ad9882a159e26e0235e54d971a5a9bbcb9b25ed",
+      "bytes": 128060
+    },
+    {
+      "file": "standard/Ground037-roughness.webp",
+      "sha256": "6b88101f50dc49de24268c97a3424213a3741110b47457f31062604813fbc2c4",
+      "bytes": 19762
+    },
+    {
+      "file": "standard/Ground054-colour.webp",
+      "sha256": "e538bb9a910fdcc7e277416aa6b1f128930c34ff580218f1aad1802494862f69",
+      "bytes": 11184
+    },
+    {
+      "file": "standard/Ground054-normal.webp",
+      "sha256": "6aa539e70b0cecfcae21129eaff260f7e0ab0779c8b86a67eaba98954357543b",
+      "bytes": 118080
+    },
+    {
+      "file": "standard/Ground054-roughness.webp",
+      "sha256": "6e0d1e269274f328ef9bad3ed5f61f01b480847ed03005ff6600eee16823960a",
+      "bytes": 14106
+    },
+    {
+      "file": "standard/mossy_rock-colour.webp",
+      "sha256": "9cf3af9132c2f807ad37eb8d45f2b75b95445cd6af4668fcae97ee8e599ea27d",
+      "bytes": 31790
+    },
+    {
+      "file": "standard/mossy_rock-normal.webp",
+      "sha256": "42bea26c10079d2b56967ea541f256fbf23041b51ff073270f129a8181542f6d",
+      "bytes": 111928
+    },
+    {
+      "file": "standard/mossy_rock-roughness.webp",
+      "sha256": "762b9c5ba73276a517409c400a64e08fc4651adb02d1487988c103c1f9524357",
+      "bytes": 23400
+    },
+    {
+      "file": "standard/grass_path_2-colour.webp",
+      "sha256": "5bdac7448b90166f7c34f721b83d64465ce6008653006e8274d52d44e9ee07f2",
+      "bytes": 31644
+    },
+    {
+      "file": "standard/grass_path_2-normal.webp",
+      "sha256": "51c1f36222b2f0b3aa3edb3596be093087309eaabea66e64a1353c1290799abb",
+      "bytes": 129908
+    },
+    {
+      "file": "standard/grass_path_2-roughness.webp",
+      "sha256": "1d73e1c484192b08d6541bedbeb618884d72627a94ef562dd6309e743fde2a1b",
+      "bytes": 10660
+    },
+    {
+      "file": "low/Ground037-colour.webp",
+      "sha256": "2e65b5ef268b069fd8e74a49284a4fe854763b41da8e9cbc1d31d984a0938952",
+      "bytes": 5856
+    },
+    {
+      "file": "low/Ground037-roughness.webp",
+      "sha256": "4a20944140f2ded83f16af0cbaf0e3f9939119c2ef5ccbfa39847bd21d5c8e86",
+      "bytes": 4876
+    },
+    {
+      "file": "low/Ground054-colour.webp",
+      "sha256": "158d30336f75d465f342c371121ebd59b6884c6acdf4639e326c0f1d296f3d9b",
+      "bytes": 1806
+    },
+    {
+      "file": "low/Ground054-roughness.webp",
+      "sha256": "568850b2221dd6d92c9f97851ea4c05603cd89d653c2ae9247517cd85e6416f1",
+      "bytes": 3096
+    },
+    {
+      "file": "low/mossy_rock-colour.webp",
+      "sha256": "55f40ed9d1cfd9c68306ad779f1d74359248756538f37a9288cdbd13bb5415cd",
+      "bytes": 8090
+    },
+    {
+      "file": "low/mossy_rock-roughness.webp",
+      "sha256": "7582a64444bf214105c4f8d49e25ffcbeb0f3308df83a9139562facd6534bd39",
+      "bytes": 6002
+    },
+    {
+      "file": "low/grass_path_2-colour.webp",
+      "sha256": "333de7f9e184b6ef0f0ab4f657ed28ccb41dc15f9cfc12fa66c80179d9c827ed",
+      "bytes": 7376
+    },
+    {
+      "file": "low/grass_path_2-roughness.webp",
+      "sha256": "6cd26cb5e5ee4062337e09c4b149c7158685cc25d4ec79bd8e8be55e5477d32e",
+      "bytes": 2698
+    }
+  ],
+  "deterministicReplays": [
+    {
+      "run": 1,
+      "files": [
+        {
+          "file": "manifest.json",
+          "sha256": "4f4907e193bfd62374836bfaa2026660ad8549019ba367cfe21f7338a9df6167"
+        },
+        {
+          "file": "Ground054-colour.webp",
+          "sha256": "9084ce8c8163a7d17043f02fffa91cf69703837238fc9dd6ed06d76562912c54"
+        },
+        {
+          "file": "Ground054-normal.webp",
+          "sha256": "888036bb081d76e1fb2e4268bc2b14b2e5d95eb409aacaeffda411b1d43a12ed"
+        },
+        {
+          "file": "Ground054-roughness.webp",
+          "sha256": "41f6cdef6fe73a66bcb80c27062fb46857cee6ca874f9f82f68f5ba3f12983cf"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "files": [
+        {
+          "file": "manifest.json",
+          "sha256": "4f4907e193bfd62374836bfaa2026660ad8549019ba367cfe21f7338a9df6167"
+        },
+        {
+          "file": "Ground054-colour.webp",
+          "sha256": "9084ce8c8163a7d17043f02fffa91cf69703837238fc9dd6ed06d76562912c54"
+        },
+        {
+          "file": "Ground054-normal.webp",
+          "sha256": "888036bb081d76e1fb2e4268bc2b14b2e5d95eb409aacaeffda411b1d43a12ed"
+        },
+        {
+          "file": "Ground054-roughness.webp",
+          "sha256": "41f6cdef6fe73a66bcb80c27062fb46857cee6ca874f9f82f68f5ba3f12983cf"
+        }
+      ]
+    }
+  ],
+  "source": {
+    "id": "Ground054",
+    "url": "https://ambientcg.com/view?id=Ground054",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://docs.ambientcg.com/license/",
+    "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+    "repeatMeters": 3,
+    "maps": [
+      {
+        "file": "Ground054/Ground054_1K-PNG_Color.png",
+        "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+        "sha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+        "bytes": 2088335,
+        "width": 1024,
+        "height": 1024,
+        "role": "sRGB colour"
+      },
+      {
+        "file": "Ground054/Ground054_1K-PNG_NormalGL.png",
+        "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+        "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+        "bytes": 5766891,
+        "width": 1024,
+        "height": 1024,
+        "role": "OpenGL normal"
+      },
+      {
+        "file": "Ground054/Ground054_1K-PNG_Roughness.png",
+        "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+        "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+        "bytes": 630483,
+        "width": 1024,
+        "height": 1024,
+        "role": "roughness"
+      }
+    ]
+  },
+  "manifest": {
+    "version": "generated-sand-resolution-v0.1",
+    "source": {
+      "id": "Ground054",
+      "url": "https://ambientcg.com/view?id=Ground054",
+      "license": "CC0-1.0",
+      "licenseUrl": "https://docs.ambientcg.com/license/",
+      "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+      "repeatMeters": 3,
+      "maps": [
+        {
+          "file": "Ground054/Ground054_1K-PNG_Color.png",
+          "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+          "sha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+          "bytes": 2088335,
+          "width": 1024,
+          "height": 1024,
+          "role": "sRGB colour"
+        },
+        {
+          "file": "Ground054/Ground054_1K-PNG_NormalGL.png",
+          "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+          "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+          "bytes": 5766891,
+          "width": 1024,
+          "height": 1024,
+          "role": "OpenGL normal"
+        },
+        {
+          "file": "Ground054/Ground054_1K-PNG_Roughness.png",
+          "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+          "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+          "bytes": 630483,
+          "width": 1024,
+          "height": 1024,
+          "role": "roughness"
+        }
+      ]
+    },
+    "generatedWith": "sharp 0.35.5; scripts/prepare-world-sand.mjs",
+    "recipe": {
+      "size": 512,
+      "kernel": "lanczos3",
+      "gamma": {
+        "colour": 2.2,
+        "data": false
+      },
+      "treatment": {
+        "repeatMeters": 3,
+        "saturation": 0.8,
+        "tint": [
+          1.03,
+          1.02,
+          0.96
+        ]
+      },
+      "normalScale": 0.45,
+      "encoding": {
+        "colour": "WebP quality 92",
+        "normal": "WebP lossless",
+        "roughness": "WebP quality 92"
+      }
+    },
+    "runtime": {
+      "mipmaps": true,
+      "minFilter": "LinearMipmapLinearFilter",
+      "magFilter": "LinearFilter",
+      "wrap": "RepeatWrapping",
+      "anisotropyCap": 4
+    },
+    "delivery": [
+      {
+        "file": "Ground054-colour.webp",
+        "width": 512,
+        "height": 512,
+        "sourceSha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+        "sha256": "9084ce8c8163a7d17043f02fffa91cf69703837238fc9dd6ed06d76562912c54",
+        "bytes": 69866,
+        "colourSpace": "sRGB",
+        "orientation": null
+      },
+      {
+        "file": "Ground054-normal.webp",
+        "width": 512,
+        "height": 512,
+        "sourceSha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+        "sha256": "888036bb081d76e1fb2e4268bc2b14b2e5d95eb409aacaeffda411b1d43a12ed",
+        "bytes": 472050,
+        "colourSpace": "NoColorSpace",
+        "orientation": "OpenGL +Y; source orientation unchanged"
+      },
+      {
+        "file": "Ground054-roughness.webp",
+        "width": 512,
+        "height": 512,
+        "sourceSha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+        "sha256": "41f6cdef6fe73a66bcb80c27062fb46857cee6ca874f9f82f68f5ba3f12983cf",
+        "bytes": 69080,
+        "colourSpace": "NoColorSpace",
+        "orientation": null
+      }
+    ]
+  },
+  "deliveryBytes": {
+    "low128": 4902,
+    "standard256": 143370,
+    "standard512": 610996
+  },
+  "estimates": {
+    "method": "RGBA8 full mip-chain estimate; driver format/allocation may differ. Not measured VRAM.",
+    "low128TwoMaps": 174762.66666666666,
+    "standard256ThreeMaps": 1048576,
+    "standard512ThreeMaps": 4194304
+  }
+}

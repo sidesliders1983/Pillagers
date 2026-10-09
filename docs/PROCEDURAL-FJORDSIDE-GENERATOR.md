@@ -54,3 +54,7 @@ The review batch fixes ten requested seeds across three presets, records replay 
 2. Adopt the shared canonical terrain/placement adapters in a separate Fjordside PR; migrate all ground/click/nav/shore callers together.
 3. Keep existing campaign geography or require an explicit world migration. Bump generatorVersion for changed generation and continue loading stored blueprints unchanged.
 4. Map presentation coast direction to existing Simulation Core region facts through an explicit integration contract. The generator must not override the region graph.
+
+## Sand study follow-up — 2026-10-09
+
+The focused #63/#74 comparison adds an opt-in Environment Lab sand resolution selector, two shore inspection cameras and a fixed accepted ReferenceWater adapter for both A/B resolutions. Standard can compare the original 256px with a source-derived 512px Ground054 candidate; Low remains 128px without normals. Geography, navigation, saves and other material layers are unchanged. The default loader used by production Fjordside still selects 256px. See [Generated sand resolution](GENERATED-SAND-RESOLUTION.md) and [the review report](qa/generated-sand-resolution/report.md). This Lab delivery does not approve production promotion.

@@ -1,7 +1,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { NodeIO, getBounds } from '@gltf-transform/core';
-import sharp from 'sharp';
+import { encodeWorldGroundMap } from './encode-world-ground-map.mjs';
 import { loadTypeScript } from './load-typescript.mjs';
 
 const { regionalGroundConfig } = loadTypeScript(new URL('../src/config/RegionalGroundConfig.ts', import.meta.url));
@@ -25,8 +25,6 @@ await writeFile('src/world-generation/NatureFootprints.ts',
 
 const original = JSON.parse(await readFile('public/ground-materials/v04/manifest.json', 'utf8'));
 const delivery = [];
-const linear = x => x <= .04045 ? x/12.92 : ((x+.055)/1.055)**2.4;
-const srgb = x => x <= .0031308 ? x*12.92 : 1.055*x**(1/2.4)-.055;
 for (const tier of ['standard', 'low']) {
     const size = tier === 'standard' ? 256 : 128;
     await mkdir('public/ground-materials/world-v01/' + tier, { recursive: true });
@@ -35,23 +33,9 @@ for (const tier of ['standard', 'low']) {
             if (tier === 'low' && role === 1) continue;
             const bytes = await readFile('scratch/ground-source/' + map.file);
             if (hash(bytes) !== map.sha256) throw Error('Changed approved ground source: ' + map.file);
-            let operation = sharp(bytes).removeAlpha();
-            if (role === 0) operation = operation.gamma(2.2);
-            const { data, info } = await operation.resize(size, size).toColourspace('srgb').raw()
-                .toBuffer({ resolveWithObject: true });
-            if (role === 0) {
-                const { saturation, tint } = regionalGroundConfig.sources[source.id];
-                for (let i = 0; i < data.length; i += info.channels) {
-                    const rgb = [0,1,2].map(c => linear(data[i+c]/255));
-                    const luminance = rgb[0]*.2126 + rgb[1]*.7152 + rgb[2]*.0722;
-                    for (let c = 0; c < 3; c++) data[i+c] = Math.round(255*Math.max(0, Math.min(1,
-                        srgb((luminance+(rgb[c]-luminance)*saturation)*tint[c]))));
-                }
-            }
+            const encoded = await encodeWorldGroundMap(bytes, source.id, role, size);
             const name = ['colour','normal','roughness'][role];
             const file = tier + '/' + source.id + '-' + name + '.webp';
-            const encoded = await sharp(data, { raw: { width: size, height: size, channels: info.channels } })
-                .webp(role === 1 ? { lossless: true } : { quality: 92 }).toBuffer();
             await writeFile('public/ground-materials/world-v01/' + file, encoded);
             delivery.push({ file, size, sourceSha256: map.sha256, sha256: hash(encoded), bytes: encoded.length });
         }

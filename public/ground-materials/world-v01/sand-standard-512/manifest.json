@@ -1,0 +1,103 @@
+{
+  "version": "generated-sand-resolution-v0.1",
+  "source": {
+    "id": "Ground054",
+    "url": "https://ambientcg.com/view?id=Ground054",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://docs.ambientcg.com/license/",
+    "publisherPhysicalScale": "Not asserted; authored repeat scale recorded separately",
+    "repeatMeters": 3,
+    "maps": [
+      {
+        "file": "Ground054/Ground054_1K-PNG_Color.png",
+        "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+        "sha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+        "bytes": 2088335,
+        "width": 1024,
+        "height": 1024,
+        "role": "sRGB colour"
+      },
+      {
+        "file": "Ground054/Ground054_1K-PNG_NormalGL.png",
+        "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+        "sha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+        "bytes": 5766891,
+        "width": 1024,
+        "height": 1024,
+        "role": "OpenGL normal"
+      },
+      {
+        "file": "Ground054/Ground054_1K-PNG_Roughness.png",
+        "download": "https://ambientcg.com/get?file=Ground054_1K-PNG.zip",
+        "sha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+        "bytes": 630483,
+        "width": 1024,
+        "height": 1024,
+        "role": "roughness"
+      }
+    ]
+  },
+  "generatedWith": "sharp 0.35.5; scripts/prepare-world-sand.mjs",
+  "recipe": {
+    "size": 512,
+    "kernel": "lanczos3",
+    "gamma": {
+      "colour": 2.2,
+      "data": false
+    },
+    "treatment": {
+      "repeatMeters": 3,
+      "saturation": 0.8,
+      "tint": [
+        1.03,
+        1.02,
+        0.96
+      ]
+    },
+    "normalScale": 0.45,
+    "encoding": {
+      "colour": "WebP quality 92",
+      "normal": "WebP lossless",
+      "roughness": "WebP quality 92"
+    }
+  },
+  "runtime": {
+    "mipmaps": true,
+    "minFilter": "LinearMipmapLinearFilter",
+    "magFilter": "LinearFilter",
+    "wrap": "RepeatWrapping",
+    "anisotropyCap": 4
+  },
+  "delivery": [
+    {
+      "file": "Ground054-colour.webp",
+      "width": 512,
+      "height": 512,
+      "sourceSha256": "bb3b8b28e2a03f6a448a042880532da732e0b00bb3978b912be98001e85c2151",
+      "sha256": "9084ce8c8163a7d17043f02fffa91cf69703837238fc9dd6ed06d76562912c54",
+      "bytes": 69866,
+      "colourSpace": "sRGB",
+      "orientation": null
+    },
+    {
+      "file": "Ground054-normal.webp",
+      "width": 512,
+      "height": 512,
+      "sourceSha256": "331258541860948a77d1b47f6a2435344fcd0100e6b789208f5637e77b3bc53f",
+      "sha256": "888036bb081d76e1fb2e4268bc2b14b2e5d95eb409aacaeffda411b1d43a12ed",
+      "bytes": 472050,
+      "colourSpace": "NoColorSpace",
+      "orientation": "OpenGL +Y; source orientation unchanged"
+    },
+    {
+      "file": "Ground054-roughness.webp",
+      "width": 512,
+      "height": 512,
+      "sourceSha256": "c4a9057826c1f723cc029159c750fd592fe980f406299a61d179ec40f49c1de8",
+      "sha256": "41f6cdef6fe73a66bcb80c27062fb46857cee6ca874f9f82f68f5ba3f12983cf",
+      "bytes": 69080,
+      "colourSpace": "NoColorSpace",
+      "orientation": null
+    }
+  ]
+}
