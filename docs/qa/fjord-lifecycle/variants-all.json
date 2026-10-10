@@ -1,0 +1,143 @@
+{
+  "checks": [
+    "Real births, child growth with stable model ID, baby/young-adult/cow/bull sources, stable building upgrades, slaughter history and salvage-to-tent/unassigned cattle.",
+    "Controlled natural mortality removes all live residents, retains selected history and eventually collapses the vacant house.",
+    "All four canonical weather classes reach actual native lights/fog/exposure, factual forecast and existing snow treatment; quality preserves the class and disabled weather restores baseline.",
+    "Gameplay Lab, 2D Settlement and the original 3D Fjord prototype still open without browser errors."
+  ],
+  "weatherSamples": [
+    {
+      "class": "Mild",
+      "lighting": {
+        "sky": 14738131,
+        "sun": 16768944,
+        "sunIntensity": 1.8,
+        "ambientSky": 15986403,
+        "ambientGround": 12038560,
+        "ambient": 2.45,
+        "sunPosition": [
+          -28,
+          48,
+          18
+        ],
+        "shadowMapSize": 2048,
+        "shadowRadius": 4,
+        "shadowBlurSamples": 8,
+        "shadowNormalBias": 0.045,
+        "exposure": 1.05,
+        "fogNear": 80,
+        "fogFar": 180
+      },
+      "snow": 0,
+      "observed": {
+        "sky": 14738131,
+        "fogNear": 80,
+        "fogFar": 180,
+        "sunIntensity": 1.8,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "sceneDetail": 31.696480054746285
+    },
+    {
+      "class": "Normal",
+      "lighting": {
+        "sky": 13950687,
+        "sun": 16771797,
+        "sunIntensity": 1.55,
+        "ambientSky": 15986403,
+        "ambientGround": 12038560,
+        "ambient": 2.45,
+        "sunPosition": [
+          -28,
+          48,
+          18
+        ],
+        "shadowMapSize": 2048,
+        "shadowRadius": 4,
+        "shadowBlurSamples": 8,
+        "shadowNormalBias": 0.045,
+        "exposure": 1.05,
+        "fogNear": 65,
+        "fogFar": 155
+      },
+      "snow": 0,
+      "observed": {
+        "sky": 13950687,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.55,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "sceneDetail": 24.04417651822067
+    },
+    {
+      "class": "Harsh",
+      "lighting": {
+        "sky": 10926021,
+        "sun": 14543615,
+        "sunIntensity": 0.9,
+        "ambientSky": 12899557,
+        "ambientGround": 12038560,
+        "ambient": 2.1,
+        "sunPosition": [
+          -28,
+          48,
+          18
+        ],
+        "shadowMapSize": 2048,
+        "shadowRadius": 4,
+        "shadowBlurSamples": 8,
+        "shadowNormalBias": 0.045,
+        "exposure": 0.95,
+        "fogNear": 35,
+        "fogFar": 185
+      },
+      "snow": 0.35,
+      "observed": {
+        "sky": 10926021,
+        "fogNear": 35,
+        "fogFar": 185,
+        "sunIntensity": 0.9,
+        "ambient": 2.1,
+        "exposure": 0.95
+      },
+      "sceneDetail": 14.527374921695868
+    },
+    {
+      "class": "Severe",
+      "lighting": {
+        "sky": 8360870,
+        "sun": 13031405,
+        "sunIntensity": 0.55,
+        "ambientSky": 11124693,
+        "ambientGround": 12038560,
+        "ambient": 1.75,
+        "sunPosition": [
+          -28,
+          48,
+          18
+        ],
+        "shadowMapSize": 2048,
+        "shadowRadius": 4,
+        "shadowBlurSamples": 8,
+        "shadowNormalBias": 0.045,
+        "exposure": 0.85,
+        "fogNear": 10,
+        "fogFar": 175
+      },
+      "snow": 1,
+      "observed": {
+        "sky": 8360870,
+        "fogNear": 10,
+        "fogFar": 175,
+        "sunIntensity": 0.55,
+        "ambient": 1.75,
+        "exposure": 0.85
+      },
+      "sceneDetail": 8.613905219986071
+    }
+  ],
+  "browserErrors": []
+}

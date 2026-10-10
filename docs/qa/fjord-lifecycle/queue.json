@@ -1,0 +1,137 @@
+{
+  "observed": {
+    "awards": {
+      "persona:founder-7:food": 3,
+      "persona:founder-5:food": 3,
+      "persona:founder-1:food": 2,
+      "persona:founder-3:food": 2,
+      "persona:founder-9:food": 2,
+      "cattle:cattle-1:food": 2,
+      "cattle:cattle-2:food": 2,
+      "persona:founder-10:materials": 1,
+      "persona:founder-6:materials": 1,
+      "persona:founder-8:materials": 1,
+      "persona:founder-4:materials": 1,
+      "persona:founder-2:materials": 1
+    },
+    "peak": 6,
+    "pending": 6,
+    "anchors": {
+      "persona:founder-7:food": "world",
+      "persona:founder-5:food": "world",
+      "persona:founder-1:food": "world",
+      "persona:founder-3:food": "world",
+      "persona:founder-9:food": "world",
+      "cattle:cattle-1:food": "world",
+      "cattle:cattle-2:food": "world",
+      "persona:founder-10:materials": "world",
+      "persona:founder-6:materials": "world",
+      "persona:founder-8:materials": "world",
+      "persona:founder-4:materials": "world",
+      "persona:founder-2:materials": "world"
+    },
+    "boxes": [
+      {
+        "key": "persona:founder-7:food",
+        "text": "+3 Food",
+        "x": 523.4990844726562,
+        "y": 352.5373840332031,
+        "width": 65.71875,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-5:food",
+        "text": "+3 Food",
+        "x": 325.5291442871094,
+        "y": 384.569580078125,
+        "width": 65.71875,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-1:food",
+        "text": "+2 Food",
+        "x": 400.26190185546875,
+        "y": 349.83001708984375,
+        "width": 65.71875,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-3:food",
+        "text": "+2 Food",
+        "x": 449.6282653808594,
+        "y": 391.9969177246094,
+        "width": 65.71878051757812,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-9:food",
+        "text": "+2 Food",
+        "x": 380.9945373535156,
+        "y": 428.658935546875,
+        "width": 65.71875,
+        "height": 28.1875
+      },
+      {
+        "key": "cattle:cattle-1:food",
+        "text": "+2 Food",
+        "x": 537.8449096679688,
+        "y": 415.3228454589844,
+        "width": 65.71875,
+        "height": 28.1875
+      },
+      {
+        "key": "cattle:cattle-2:food",
+        "text": "+2 Food",
+        "x": 538.9371948242188,
+        "y": 426.79803466796875,
+        "width": 65.71875,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-10:materials",
+        "text": "+1 Materials",
+        "x": 381.38299560546875,
+        "y": 353.4925231933594,
+        "width": 88.15625,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-6:materials",
+        "text": "+1 Materials",
+        "x": 339.9792785644531,
+        "y": 317.31549072265625,
+        "width": 88.15625,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-8:materials",
+        "text": "+1 Materials",
+        "x": 505.561279296875,
+        "y": 356.24334716796875,
+        "width": 88.15625,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-4:materials",
+        "text": "+1 Materials",
+        "x": 454.18084716796875,
+        "y": 319.6523742675781,
+        "width": 88.15625,
+        "height": 28.1875
+      },
+      {
+        "key": "persona:founder-2:materials",
+        "text": "+1 Materials",
+        "x": 446.66656494140625,
+        "y": 285.6523742675781,
+        "width": 88.15625,
+        "height": 28.1875
+      }
+    ]
+  },
+  "browserErrors": [],
+  "checks": [
+    "All queued producers reach actual labels with exact awarded units; maximum six active.",
+    "Tablet labels retain world anchors and visible bounds; restart clears ephemeral effects."
+  ]
+}

@@ -52,7 +52,9 @@ feedback. A short world-anchored English label shows only +N Food or +N Material
 a name. Food and Materials have distinct muted colors. Work progress alone, consumption,
 loot and slaughter/salvage never create a production popup.
 
-Batches aggregate by producer kind, identity and resource. At most six labels display concurrently; additional
+Normal ticking displays +1 when one integer unit is awarded. A Winter jump displays the
+exact +N awarded during that batch. Batches aggregate by producer kind, identity and resource.
+At most six labels display concurrently; additional
 awards queue or merge without losing attribution or units. Labels drift upward by 36 screen
 pixels and gradually fade from full opacity to zero over 2.8 seconds of real time. Each label
 retains its actual resident/cow identity and world anchor; nearby labels separate vertically. The latest known producer anchor remains

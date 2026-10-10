@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "Real resident and cow +1 Food and resident +1 Materials match producer IDs, exact Core replay and stock deltas; pause allows only visual fading.",
+    "Batched output totals remain exact; partial-Winter load and 2D/3D handoff never replay history, while new post-load output still appears."
+  ],
+  "browserErrors": []
+}
