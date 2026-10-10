@@ -43,3 +43,12 @@ body.fjord-play { margin: 0; background: #152b28; color: #ece7d2; overflow: hidd
 #fjord-selection-labels [hidden] { display: none; }
 
 #fjord-selection-leaders { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; stroke-width: 1; opacity: .65; }
+
+#fjord-production-labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+#fjord-production-labels span { position: absolute; top: 0; left: 0; font: 600 13px/1.4 system-ui,sans-serif; padding: 4px 7px; border: 1px solid; border-radius: 5px; background: #12271fec; white-space: nowrap; box-shadow: 0 1px 4px #0008; }
+#fjord-production-labels .food { color: #cbe9a0; border-color: #8eb96e; }
+#fjord-production-labels .materials { color: #f0d6ae; border-color: #bfa482; }
+#fjord-production-labels [hidden] { display: none; }
+
+#fjord-weather-information { border-bottom: 1px solid #546652; margin-bottom: 10px; padding-bottom: 6px; font: 12px/1.4 system-ui,sans-serif; }
+#fjord-weather-information .weather-warning { color: #f0c78b; }

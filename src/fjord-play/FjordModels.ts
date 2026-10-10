@@ -44,7 +44,6 @@ export class FjordModels {
         }
         if (entity.kind === 'household')
             return this.assets.get('tent');
-        const child = entity.kind === 'persona' && entity.status.age! < 16;
         const cacheKey = entity.asset;
         let template = this.templates.get(cacheKey);
         if (!template) {
@@ -52,8 +51,6 @@ export class FjordModels {
             this.templates.set(cacheKey, template);
         }
         const root = clone(await template);
-        if (child)
-            root.scale.multiplyScalar(.6);
         return root;
     }
     private async load(entity: FjordEntity) {

@@ -69,3 +69,6 @@ Physical iPad Safari/WebGL validation remains separate from Chromium touch emula
 Evidence and reproduction commands: [interactive Fjord report](qa/interactive-fjord/report.md).
 
 Navigation and construction regression evidence: [controls follow-up](qa/interactive-fjord-controls/report.md).
+
+The subsequent visual lifecycle, annual weather and personal resource popups are documented
+in [Fjord v0.5C](FJORD-VISUAL-LIFECYCLE-V05C.md).

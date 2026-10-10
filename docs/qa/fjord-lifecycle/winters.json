@@ -1,0 +1,7408 @@
+{
+  "seed": 17,
+  "scenario": "Default lifecycle/weather rates; initial reserves 10000 Food / 1000 Materials, founding pairing 100%",
+  "checks": [
+    "All 26 checkpoints (founding + 25 Winters) match actual GLB identities, stages, ancestry, shelter, weather and exactly attributed production."
+  ],
+  "events": {
+    "ResourceProduced": 868,
+    "CattleFoodProduced": 157,
+    "WinterAdvanced": 25,
+    "CattleFoodConsumed": 25,
+    "FoodConsumed": 25,
+    "BuildingMaintained": 140,
+    "CattleBorn": 17,
+    "WinterWeatherDetermined": 25,
+    "ChildBorn": 4,
+    "PartnershipFormed": 3,
+    "ResidenceAssigned": 3,
+    "MaintenanceDebtIncreased": 6,
+    "CattleDied": 15,
+    "PersonaDied": 2,
+    "BuildingCollapsed": 2,
+    "FarmyardFunctionChanged": 1
+  },
+  "checkpoints": [
+    {
+      "winter": 800,
+      "residents": 10,
+      "cattle": 3,
+      "weather": "Normal",
+      "personalProduction": 0,
+      "cowProduction": 0,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 26,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 25,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 28,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 29,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 27,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 21,
+          "position": [
+            51,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 801,
+      "residents": 10,
+      "cattle": 5,
+      "weather": "Harsh",
+      "personalProduction": 59,
+      "cowProduction": 8,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 27,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 26,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 29,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 28,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 22,
+          "position": [
+            51,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "8f3b89ac-47ec-4320-a44f-74abc0faa8ee",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "7e72fc80-9b70-4355-832e-dd8f66e97a90",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 802,
+      "residents": 11,
+      "cattle": 5,
+      "weather": "Normal",
+      "personalProduction": 59,
+      "cowProduction": 8,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 28,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 27,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 29,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 23,
+          "position": [
+            51,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 5,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 5,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 5,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "9edbc29c-44cd-4907-93a3-4c3a689f1f75",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "5e16cd1c-7a34-44db-a495-aced50610dd1",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 0,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 803,
+      "residents": 11,
+      "cattle": 6,
+      "weather": "Harsh",
+      "personalProduction": 116,
+      "cowProduction": 16,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 29,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 28,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 24,
+          "position": [
+            51,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 6,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 6,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 6,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "0f0ddf4d-e813-46f4-b620-86fe14c00bff",
+          "asset": "adult-female",
+          "age": 2,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 1,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-6",
+          "renderId": "390abf57-464f-4d12-8e3d-4f98800befb1",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            32.31801948466054,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 804,
+      "residents": 11,
+      "cattle": 7,
+      "weather": "Normal",
+      "personalProduction": 116,
+      "cowProduction": 16,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 29,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 34,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 25,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 7,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 7,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 7,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "0f0ddf4d-e813-46f4-b620-86fe14c00bff",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 2,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-6",
+          "renderId": "89586854-5ac5-4a2e-b94c-9a3236462db5",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            32.31801948466054,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-7",
+          "renderId": "25879eb2-903b-48ec-9326-58d17ef464bc",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            42,
+            3.4813760590044334,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 805,
+      "residents": 11,
+      "cattle": 9,
+      "weather": "Mild",
+      "personalProduction": 172,
+      "cowProduction": 28,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 34,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 35,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 26,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 8,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 8,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 8,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "0f0ddf4d-e813-46f4-b620-86fe14c00bff",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 3,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-6",
+          "renderId": "a150b5ab-661c-4434-884f-f3b75f4ac3cf",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            32.31801948466054,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-7",
+          "renderId": "399ee9fa-a6dd-44b1-8b8f-8bc36933d0c4",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            42,
+            3.4813760590044334,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "67b4a901-16c9-46a8-a23b-65e45c8ac969",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "60acb9e2-e778-452f-83b5-67bbbf2abc1f",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 806,
+      "residents": 13,
+      "cattle": 8,
+      "weather": "Mild",
+      "personalProduction": 234,
+      "cowProduction": 40,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-7",
+          "renderId": "d076c8f6-da6c-48f8-bda7-57a96737af13",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 34,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 35,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-9",
+          "renderId": "db569dc2-68b7-4ad9-a79b-f37c268690f8",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 27,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-1",
+          "renderId": "b21d8a26-715e-41ec-9e95-26cf63849887",
+          "asset": "adult-female",
+          "age": 9,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 9,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 9,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 5,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "0f0ddf4d-e813-46f4-b620-86fe14c00bff",
+          "asset": "adult-female",
+          "age": 5,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 4,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-6",
+          "renderId": "a150b5ab-661c-4434-884f-f3b75f4ac3cf",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            32.31801948466054,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "8e763bc1-ecab-4ddd-8c8c-d85e90ff5f90",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "7f91f062-32e7-4246-a727-60a27aa03ef5",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 0,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 0,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 807,
+      "residents": 12,
+      "cattle": 8,
+      "weather": "Normal",
+      "personalProduction": 290,
+      "cowProduction": 52,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 35,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 28,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 10,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 10,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 6,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "0f0ddf4d-e813-46f4-b620-86fe14c00bff",
+          "asset": "adult-female",
+          "age": 6,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 5,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-6",
+          "renderId": "a150b5ab-661c-4434-884f-f3b75f4ac3cf",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            32.31801948466054,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "5766ec9a-42fc-4884-b9be-5bb50f57a092",
+          "asset": "adult-female",
+          "age": 2,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 2,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 1,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 1,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "5ccea675-96aa-424b-9c7f-15878e17c68e",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 808,
+      "residents": 12,
+      "cattle": 11,
+      "weather": "Harsh",
+      "personalProduction": 345,
+      "cowProduction": 68,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 34,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 29,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 11,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-3",
+          "renderId": "cf2ed3ba-c4f2-4b98-a0d7-fd44ebf56440",
+          "asset": "adult-male",
+          "age": 11,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 7,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-5",
+          "renderId": "0f0ddf4d-e813-46f4-b620-86fe14c00bff",
+          "asset": "adult-female",
+          "age": 7,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 6,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-6",
+          "renderId": "a150b5ab-661c-4434-884f-f3b75f4ac3cf",
+          "asset": "adult-male",
+          "age": 5,
+          "position": [
+            32.31801948466054,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "5766ec9a-42fc-4884-b9be-5bb50f57a092",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 2,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 2,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "7e225d0a-34fe-41d4-b103-ce02a56a3726",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-11",
+          "renderId": "cdbcd8eb-5b8c-47c8-9b9d-c743f4f4ac2c",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            41.5,
+            3.994739884435507,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-12",
+          "renderId": "742675c7-d8ab-408b-81b4-0f69e7ca6eca",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            40.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-13",
+          "renderId": "9e6fad2e-0f8c-4948-ad67-226905d165e8",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 809,
+      "residents": 12,
+      "cattle": 7,
+      "weather": "Mild",
+      "personalProduction": 345,
+      "cowProduction": 68,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 35,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 34,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 30,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 12,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 8,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 7,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "5766ec9a-42fc-4884-b9be-5bb50f57a092",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 3,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 3,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "4e28c044-d4ba-4ed0-ae61-b3623305cf69",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-11",
+          "renderId": "e8b27a22-96dd-46b9-bf3c-0aa0709f959b",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            41.5,
+            3.994739884435507,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-14",
+          "renderId": "119d360f-3724-45cc-88f1-72261c19727a",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 810,
+      "residents": 12,
+      "cattle": 9,
+      "weather": "Mild",
+      "personalProduction": 406,
+      "cowProduction": 81,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 35,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            35,
+            2.5999999046325684,
+            50
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 31,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 13,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 9,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 8,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "5766ec9a-42fc-4884-b9be-5bb50f57a092",
+          "asset": "adult-female",
+          "age": 5,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 5,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 4,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 4,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "4e28c044-d4ba-4ed0-ae61-b3623305cf69",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-11",
+          "renderId": "22c832d5-9bd0-4b18-93e0-8f3198b8a766",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            41.5,
+            3.994739884435507,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-14",
+          "renderId": "7aa1bb63-3856-459d-a5a8-e27fbe41efc4",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "8c519aba-cfdb-40c5-9db4-d551353fd964",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "4e740a1b-de36-4885-aed7-1d946bc5687e",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 811,
+      "residents": 12,
+      "cattle": 9,
+      "weather": "Normal",
+      "personalProduction": 470,
+      "cowProduction": 93,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 32,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 14,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 10,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 9,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-8",
+          "renderId": "5766ec9a-42fc-4884-b9be-5bb50f57a092",
+          "asset": "adult-female",
+          "age": 6,
+          "position": [
+            41.621320343559645,
+            3.1847967170891494,
+            23.621320343559642
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 6,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 5,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 5,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "4e28c044-d4ba-4ed0-ae61-b3623305cf69",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-11",
+          "renderId": "22c832d5-9bd0-4b18-93e0-8f3198b8a766",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            41.5,
+            3.994739884435507,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-14",
+          "renderId": "f983c5cb-be2e-4e2e-a08d-d0473d137a39",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "66459894-e943-4384-b6ba-fe42068cffd3",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8468efb1-2918-45e9-bee7-80788eb96b6c",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 812,
+      "residents": 12,
+      "cattle": 7,
+      "weather": "Harsh",
+      "personalProduction": 530,
+      "cowProduction": 105,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 33,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 15,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 11,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 10,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 7,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 6,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 6,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "4e28c044-d4ba-4ed0-ae61-b3623305cf69",
+          "asset": "adult-male",
+          "age": 5,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-14",
+          "renderId": "f983c5cb-be2e-4e2e-a08d-d0473d137a39",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 813,
+      "residents": 12,
+      "cattle": 8,
+      "weather": "Harsh",
+      "personalProduction": 530,
+      "cowProduction": 105,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-5",
+          "renderId": "29a1c241-5ffd-4cae-b0b9-33814f1ab122",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            42
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 52,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 52,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 34,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 16,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 12,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 11,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 8,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 7,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 7,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "4e28c044-d4ba-4ed0-ae61-b3623305cf69",
+          "asset": "adult-male",
+          "age": 6,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-14",
+          "renderId": "f983c5cb-be2e-4e2e-a08d-d0473d137a39",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            37.5,
+            2.697197373500358,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 3,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "86036903-85fa-4122-a412-5edc73aa6780",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 814,
+      "residents": 13,
+      "cattle": 7,
+      "weather": "Harsh",
+      "personalProduction": 530,
+      "cowProduction": 105,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 53,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 53,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 35,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 17,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 13,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 12,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "cattle:cattle-9",
+          "renderId": "31c0d5ba-8fdf-4a47-86fa-e0637d3a2d94",
+          "asset": "adult-female",
+          "age": 9,
+          "position": [
+            30.5,
+            2.5999999046325684,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 8,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 8,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-10",
+          "renderId": "4e28c044-d4ba-4ed0-ae61-b3623305cf69",
+          "asset": "adult-male",
+          "age": 7,
+          "position": [
+            33.5,
+            2.7004004401649793,
+            21.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 4,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "6ec6deae-835a-4c71-96e2-3d6afb4019b7",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 0,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 815,
+      "residents": 13,
+      "cattle": 6,
+      "weather": "Severe",
+      "personalProduction": 530,
+      "cowProduction": 105,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 54,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 54,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 36,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 18,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 14,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 13,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 9,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 9,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 5,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 5,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 2,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 1,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-18",
+          "renderId": "ad3e158d-9f7a-4bc2-980c-7f5cab78c6c9",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 816,
+      "residents": 13,
+      "cattle": 5,
+      "weather": "Harsh",
+      "personalProduction": 558,
+      "cowProduction": 109,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 52,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 55,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 55,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 37,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 19,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 15,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 14,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 10,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 10,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 6,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 6,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 2,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 817,
+      "residents": 13,
+      "cattle": 5,
+      "weather": "Harsh",
+      "personalProduction": 558,
+      "cowProduction": 109,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 53,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 56,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 56,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 38,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 20,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 16,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 15,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 11,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 11,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 7,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 7,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 3,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 818,
+      "residents": 13,
+      "cattle": 6,
+      "weather": "Normal",
+      "personalProduction": 558,
+      "cowProduction": 109,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 54,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 57,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 57,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 39,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 21,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 17,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 16,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 12,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 12,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 8,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 8,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 5,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 4,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-19",
+          "renderId": "a7b398a9-32b5-42f6-9290-7a69841694cc",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 819,
+      "residents": 13,
+      "cattle": 6,
+      "weather": "Normal",
+      "personalProduction": 613,
+      "cowProduction": 117,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 55,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 58,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 58,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 40,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 22,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 18,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 17,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 13,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 13,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 9,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 9,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 6,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 5,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-19",
+          "renderId": "57cf7849-49f2-4c3c-af3c-70de09cd7bc1",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 820,
+      "residents": 13,
+      "cattle": 6,
+      "weather": "Normal",
+      "personalProduction": 670,
+      "cowProduction": 125,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 56,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 59,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 59,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 41,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 23,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 19,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 18,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 14,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 14,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-15",
+          "renderId": "3baf97e0-27b7-4b51-a979-c512cc10464d",
+          "asset": "adult-male",
+          "age": 10,
+          "position": [
+            42.68198051533946,
+            2.5999999046325684,
+            18.318019484660535
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 10,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 7,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 6,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-19",
+          "renderId": "0c7fc68a-7253-4020-ad88-dc0e8654fa97",
+          "asset": "adult-male",
+          "age": 2,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 821,
+      "residents": 13,
+      "cattle": 5,
+      "weather": "Severe",
+      "personalProduction": 727,
+      "cowProduction": 133,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 57,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 60,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 60,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 42,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 24,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 20,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 19,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 15,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 15,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 11,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 8,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 7,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-20",
+          "renderId": "634eca71-10d9-4005-a0fd-b88d8167ee00",
+          "asset": "baby",
+          "age": 0,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 822,
+      "residents": 13,
+      "cattle": 5,
+      "weather": "Normal",
+      "personalProduction": 759,
+      "cowProduction": 137,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 58,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 61,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 47,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 61,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 52,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 43,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 25,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 21,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 20,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 16,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 16,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 12,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 9,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 8,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-20",
+          "renderId": "d79a5fd6-b50f-44e9-83a7-a9a679185bb8",
+          "asset": "young-adult",
+          "age": 1,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 823,
+      "residents": 13,
+      "cattle": 5,
+      "weather": "Normal",
+      "personalProduction": 813,
+      "cowProduction": 145,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 59,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 62,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 48,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 62,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 52,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 53,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 44,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 26,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 22,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 21,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 17,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 17,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 13,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 10,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 9,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-20",
+          "renderId": "2cb6a174-7256-4799-820e-d13b291a6cd9",
+          "asset": "adult-female",
+          "age": 2,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 824,
+      "residents": 13,
+      "cattle": 5,
+      "weather": "Harsh",
+      "personalProduction": 868,
+      "cowProduction": 157,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "279a0134-6b50-45f5-8628-99d6d3f174d7",
+          "asset": "farmHut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-1",
+          "renderId": "30c81697-0bd0-43fa-af04-8e7dd50c748d",
+          "asset": "human",
+          "age": 60,
+          "position": [
+            35,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 63,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 49,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 52,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 63,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 53,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 54,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 45,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 27,
+          "position": [
+            35.5,
+            3.5694784900824117,
+            21.5
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 23,
+          "position": [
+            39.5,
+            3.190366975652675,
+            21.5
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 22,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 18,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 18,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 14,
+          "position": [
+            33.5,
+            3.0884519277662577,
+            24.5
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 11,
+          "position": [
+            33.5,
+            2.5999999046325684,
+            18.5
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 10,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-20",
+          "renderId": "2cb6a174-7256-4799-820e-d13b291a6cd9",
+          "asset": "adult-female",
+          "age": 3,
+          "position": [
+            42.5,
+            4.506422730170533,
+            21.5
+          ]
+        }
+      ]
+    },
+    {
+      "winter": 825,
+      "residents": 12,
+      "cattle": 5,
+      "weather": "Harsh",
+      "personalProduction": 868,
+      "cowProduction": 157,
+      "placeholders": [],
+      "instances": [
+        {
+          "key": "building:house-1",
+          "renderId": "cdd38805-9b43-4ccb-ae49-52e3d652260e",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-2",
+          "renderId": "1af0c2bf-73ee-4e56-a5a6-cec8442df9ab",
+          "asset": "hut",
+          "position": [
+            38,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "building:house-3",
+          "renderId": "73667933-7c49-4ee2-8dd2-87774c91fad6",
+          "asset": "farmHut",
+          "position": [
+            22,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-4",
+          "renderId": "a460ffb5-f5db-4b97-aed3-50e0ac52b14d",
+          "asset": "hut",
+          "position": [
+            54,
+            2.5999999046325684,
+            26
+          ]
+        },
+        {
+          "key": "building:house-6",
+          "renderId": "7644cb61-9a6c-4236-98b2-dc0f628b9eac",
+          "asset": "hut",
+          "position": [
+            22,
+            2.5999999046325684,
+            10
+          ]
+        },
+        {
+          "key": "persona:founder-4",
+          "renderId": "a7806c52-3acb-4fd7-8d4a-c601f33d4088",
+          "asset": "human",
+          "age": 64,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-2",
+          "renderId": "d4136fbb-1093-4455-88da-eca30efb19dd",
+          "asset": "human",
+          "age": 51,
+          "position": [
+            35,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-3",
+          "renderId": "db84a400-4fd0-4cec-8fc2-297e4e5ac5b8",
+          "asset": "human",
+          "age": 50,
+          "position": [
+            19,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-10",
+          "renderId": "913779ce-5701-47ad-aa71-5face25c0cab",
+          "asset": "human",
+          "age": 53,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-5",
+          "renderId": "7a157ef4-1483-45d5-a388-c55374230703",
+          "asset": "human",
+          "age": 64,
+          "position": [
+            51,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-6",
+          "renderId": "dc0956a7-ca4c-4df9-ba15-74716a497450",
+          "asset": "human",
+          "age": 54,
+          "position": [
+            52.8,
+            2.5999999046325684,
+            34
+          ]
+        },
+        {
+          "key": "persona:founder-7",
+          "renderId": "46112c9c-8bda-4947-b726-f6cefb3b823d",
+          "asset": "human",
+          "age": 55,
+          "position": [
+            19,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:founder-8",
+          "renderId": "cc8d02f4-70ab-4457-954f-418ad4651d8e",
+          "asset": "human",
+          "age": 46,
+          "position": [
+            36.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-2",
+          "renderId": "ea252161-98fe-4706-b52f-acab7cf19ff1",
+          "asset": "adult-female",
+          "age": 28,
+          "position": [
+            33.93933982822018,
+            2.5999999046325684,
+            1.9393398282201788
+          ]
+        },
+        {
+          "key": "longship:founding-longship",
+          "renderId": "6ba0a2ad-36a6-479e-869e-46b72bfea48f",
+          "asset": "longship",
+          "position": [
+            36.1282916701127,
+            0.03,
+            -37.63663388263755
+          ]
+        },
+        {
+          "key": "cattle:cattle-4",
+          "renderId": "d4cbb828-2a4a-47d6-a75e-c5b79be0f6bb",
+          "asset": "adult-male",
+          "age": 24,
+          "position": [
+            37.93933982822018,
+            2.5999999046325684,
+            1.9393398282201788
+          ]
+        },
+        {
+          "key": "persona:persona-1",
+          "renderId": "a5824455-0fad-48e3-85f5-5001e8c0d995",
+          "asset": "human",
+          "age": 23,
+          "position": [
+            20.8,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-3",
+          "renderId": "949d9f7a-3925-4663-836e-7117dc96a754",
+          "asset": "human",
+          "age": 19,
+          "position": [
+            22.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "persona:persona-2",
+          "renderId": "f6a0a76e-46c2-4c6b-8675-127a7b5dd8e1",
+          "asset": "human",
+          "age": 19,
+          "position": [
+            38.6,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-16",
+          "renderId": "8a713b46-e7ff-4227-a137-85e78db4b5b4",
+          "asset": "adult-male",
+          "age": 15,
+          "position": [
+            29.939339828220177,
+            2.5999999046325684,
+            4.060660171779821
+          ]
+        },
+        {
+          "key": "cattle:cattle-17",
+          "renderId": "d89bc6d8-f4a8-422d-af56-22707a156aa8",
+          "asset": "adult-female",
+          "age": 12,
+          "position": [
+            31.939339828220177,
+            2.5999999046325684,
+            1.9393398282201788
+          ]
+        },
+        {
+          "key": "persona:persona-4",
+          "renderId": "aa89b253-59e9-4f98-a807-fb1bb1c1b62d",
+          "asset": "human",
+          "age": 11,
+          "position": [
+            40.4,
+            2.5999999046325684,
+            18
+          ]
+        },
+        {
+          "key": "cattle:cattle-20",
+          "renderId": "2cb6a174-7256-4799-820e-d13b291a6cd9",
+          "asset": "adult-female",
+          "age": 4,
+          "position": [
+            35.93933982822018,
+            2.5999999046325684,
+            1.9393398282201788
+          ]
+        }
+      ]
+    }
+  ],
+  "browserErrors": []
+}

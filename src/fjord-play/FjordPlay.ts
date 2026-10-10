@@ -1,4 +1,6 @@
 import { SelectionLabels } from './SelectionLabels';
+import { ProductionLabels } from './ProductionLabels';
+import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
 import { Clock, Object3D, PerspectiveCamera, Raycaster, Scene, Vector2 } from 'three';
@@ -9,9 +11,11 @@ import type { EntityKind } from '../play/SettlementView';
 import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
+import { SeasonTint } from '../world/SeasonTint';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { projectChronicle } from '../lore/Chronicle';
+import { inspectWeatherExposure } from '../simulation/SimulationCore';
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
@@ -43,8 +47,8 @@ export class FjordPlay {
             <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
             <button id="fjord-new">New campaign from seed</button><button id="fjord-restart">Restart with same founders</button>
             <p>New and loaded campaigns start paused. Switching 2D/3D retains this campaign and its clock.</p>
-            </div></details></div></header><section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div>
-            <aside><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
+            </div></details></div></header><section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
+            <aside><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
@@ -81,6 +85,12 @@ export class FjordPlay {
         let sceneWork: Promise<void> | undefined;
         const selectionLabels = new SelectionLabels(document.querySelector<HTMLElement>('#fjord-selection-labels')!,
             document.querySelector<SVGSVGElement>('#fjord-selection-leaders')!);
+        const production = new FjordProduction(this.session.snapshot().events);
+        const productionLabels = new ProductionLabels(document.querySelector<HTMLElement>('#fjord-production-labels')!);
+        const resetProduction = () => {
+            production.reset(this.session.snapshot().events);
+            productionLabels.reset();
+        };
         const highlight = () => {
             layer?.select(this.shared.selectionPresentation());
             canvas.dataset.highlight = JSON.stringify(layer?.root.userData.selection ?? null);
@@ -92,6 +102,7 @@ export class FjordPlay {
             const view = this.campaign.project();
             document.querySelector('#fjord-winter')!.textContent = 'Winter ' + view.time.winter + ' · tick ' + view.time.tick;
             const state = this.session.snapshot();
+            productionLabels.enqueue(production.read(state.events));
             document.querySelector('#fjord-stocks')!.textContent = 'Food ' + view.stocks.food + ' · Materials ' +
                 view.stocks.materials + ' · ' + Object.values(state.personas).filter(p => p.deathWinter === null).length +
                 ' residents · ' + view.entities.filter(e => e.kind === 'cattle').length + ' cattle · ' +
@@ -99,6 +110,19 @@ export class FjordPlay {
             document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
                 .slice(0, 10).map(w => '<h3>Winter ' + w.winter + '</h3>' +
                 w.entries.map(e => '<p>' + escape(e.text) + '</p>').join('')).join('');
+            const profile = view.weather.enabled ? view.weather.modifiers : null;
+            const exposure = inspectWeatherExposure(state);
+            const forecast = profile ? '<strong>Winter ' + view.time.winter + ' · ' + view.weather.class + '</strong>' +
+                '<p>Food output ' + profile.foodProductionBps / 100 + '% · Materials output ' +
+                (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
+                (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
+                (profile.cattleConsumptionBps ?? profile.cattleConsumptionMultiplier * 10000) / 10000 + '</p>' +
+                '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed cattle</p>' +
+                (profile.tentMortalityBps || profile.exposedCattleMortalityBps ?
+                    '<p class="weather-warning">Shelter exposed residents and cattle before the Winter reckoning.</p>' : '') :
+                '<strong>Winter weather disabled</strong>';
+            const weatherInfo = document.querySelector('#fjord-weather-information')!;
+            if (weatherInfo.innerHTML !== forecast) weatherInfo.innerHTML = forecast;
             canvas.dataset.selected = this.shared.selection ? this.shared.selection.kind + ':' + this.shared.selection.id : '';
             document.querySelector('#fjord-run')!.textContent = this.session.running ? 'Pause' : 'Start';
             const identities = view.entities.map(e => `<li><button data-kind="${e.kind}" data-id="${escape(e.id)}">${escape(e.label)}</button> · ${e.status.level !== undefined ? 'level ' + e.status.level : e.status.stage ?? e.kind}</li>`).join('');
@@ -148,6 +172,7 @@ export class FjordPlay {
         document.querySelector('#fjord-load')!.addEventListener('click', () => action(async () => {
             say('Loading shared campaign…');
             this.shared.loadLocal(localStorage);
+            resetProduction();
             campaignFields();
             if (world)
                 await rebuildWorld();
@@ -169,6 +194,7 @@ export class FjordPlay {
             if (!file)
                 return;
             this.shared.importJSON(await file.text());
+            resetProduction();
             campaignFields();
             input.value = '';
             if (world)
@@ -178,6 +204,7 @@ export class FjordPlay {
         document.querySelector('#fjord-restart')!.addEventListener('click', () => action(async () => {
             say('Restarting campaign…');
             this.shared.restart(sameFounders.checked, weatherField.checked);
+            resetProduction();
             campaignFields();
             if (world)
                 await rebuildWorld();
@@ -186,6 +213,7 @@ export class FjordPlay {
         document.querySelector('#fjord-new')!.addEventListener('click', () => action(async () => {
             say('Creating campaign…');
             this.shared.newCampaign(Number(seedField.value), weatherField.checked);
+            resetProduction();
             campaignFields();
             if (world)
                 await rebuildWorld();
@@ -249,6 +277,8 @@ export class FjordPlay {
         const controller = new RTSCameraController(camera, canvas, 'rotate');
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
+        let weatherTint: SeasonTint | undefined;
+        let weatherSignature = "";
         window.addEventListener('pagehide', () => {
             this.stopped = true;
             clearInterval(timer);
@@ -257,6 +287,7 @@ export class FjordPlay {
             controller.dispose();
             layer?.dispose();
             models?.dispose();
+            weatherTint?.dispose();
             world?.dispose();
             assets?.dispose();
             lighting?.dispose();
@@ -289,8 +320,11 @@ export class FjordPlay {
             }
             const anchor = next.attachments.find(item => item.key === 'boat')!;
             this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
+            weatherTint?.dispose();
             world?.dispose();
             world = next;
+            weatherTint = new SeasonTint(next.root, next.terrain);
+            weatherSignature = "";
             scene.add(next.root);
             cleared.clear();
             groundSignature = "";
@@ -321,6 +355,17 @@ export class FjordPlay {
                 do {
                     this.queued = false;
                     const view = this.campaign.project();
+                    const nextWeather = JSON.stringify(view.weatherVisual);
+                    if (nextWeather !== weatherSignature) {
+                        lighting!.setMode('day', view.weatherVisual.lighting);
+                        weatherTint!.setWinter(view.weatherVisual.snow);
+                        weatherSignature = nextWeather;
+                        canvas.dataset.weather = JSON.stringify({ ...view.weatherVisual, observed: {
+                            sky: lighting!.skyColor.getHex(), fogNear: lighting!.fog.near, fogFar: lighting!.fog.far,
+                            sunIntensity: lighting!.directional.intensity, ambient: lighting!.ambient.intensity,
+                            exposure: renderer.toneMappingExposure
+                        } });
+                    }
                     const grassPlots = view.entities.filter(e => e.kind === 'household' && e.plot).map(e => e.plot!);
                     const signature = JSON.stringify([view.ground, grassPlots]);
                     if (signature !== groundSignature) {
@@ -351,7 +396,9 @@ export class FjordPlay {
                     if (this.stopped || this.shared.transferring)
                         return;
                     highlight();
-                    canvas.dataset.rendered = JSON.stringify(layer!.describe());
+                    const rendered = layer!.describe();
+                    productionLabels.setAnchors(rendered);
+                    canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                         ...assets!.diagnostics, ...models!.diagnostics,
@@ -412,6 +459,7 @@ export class FjordPlay {
             controller.update(delta);
             camera.updateMatrixWorld();
             selectionLabels.update(camera, canvas.clientWidth, canvas.clientHeight);
+            productionLabels.update(camera, canvas.clientWidth, canvas.clientHeight);
             const signature = JSON.stringify({ world: camera.matrixWorld.toArray(),
                 projection: camera.projectionMatrix.toArray() });
             if (signature !== cameraSignature) {

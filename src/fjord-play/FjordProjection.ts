@@ -6,6 +6,7 @@ import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { fitsBuildingFoundation } from '../world/BuildingPlot';
 import { suitability } from '../world-generation/PlanSettlement';
 import { projectFjordGround } from './FjordGround';
+import { projectFjordWeather } from './FjordWeather';
 export type FjordTransform = {
     x: number;
     y: number;
@@ -43,6 +44,9 @@ export interface FjordEntity {
         level?: number;
         farmyard?: boolean;
         assignment?: string | null;
+        sheltered?: boolean;
+        overcrowding?: number;
+        parentIds?: string[];
     };
 }
 const geographyIds = new WeakMap<WorldBlueprint, string>();
@@ -76,6 +80,35 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         previous.geographyId !== geographyIdentity(world) || previous.version !== 'fjord-layout-v1')
         throw new Error('Campaign, geography and presentation identities do not match.');
     const layout = structuredClone(previous);
+    // Historical identities remain in Core, but no longer reserve outdoor render space.
+    for (const key of Object.keys(layout.points)) {
+        const identity = key.split('@')[0];
+        const separator = identity.indexOf(':');
+        const kind = identity.slice(0, separator), id = identity.slice(separator + 1);
+        const living = kind === 'persona' ? state.personas[id]?.deathWinter === null && !personaAway(state, id) :
+            kind === 'cattle' ? state.landing?.cattle[id]?.deathWinter === null : false;
+        if (!living) delete layout.points[key];
+    }
+    // Transfer tent parcels before removing obsolete reservations so construction stays in place.
+    for (const building of Object.values(state.buildings)) {
+        const key = 'building:' + building.id;
+        if (!layout.plots[key]) {
+            const birth = state.events.find(e => e.type === 'HouseBuilt' && e.details?.buildingId === building.id);
+            const homeKey = 'household:' + birth?.details?.householdId;
+            if (layout.plots[homeKey]) {
+                layout.plots[key] = layout.plots[homeKey];
+                delete layout.plots[homeKey];
+            }
+        }
+    }
+    const activePlots = new Set(Object.keys(state.buildings).map(id => 'building:' + id));
+    for (const home of Object.values(state.households)) {
+        const residence = home.residenceId ? state.residences[home.residenceId] : undefined;
+        if (residence?.kind !== 'house' && home.memberIds.some(id => state.personas[id]?.deathWinter === null))
+            activePlots.add('household:' + home.id);
+    }
+    for (const key of Object.keys(layout.plots)) if (!activePlots.has(key)) delete layout.plots[key];
+    const usedPoints = new Set<string>();
     const surface = createBlueprintSurface(world);
     const entities: FjordEntity[] = [];
     const diagnostics: string[] = [];
@@ -114,6 +147,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         x: number;
         z: number;
     }, yard?: FjordPlot, obstacle = { halfWidth: 3.5, halfDepth: 4 }) => {
+        usedPoints.add(key);
         if (layout.points[key])
             return layout.points[key];
         const points = Object.values(layout.points);
@@ -146,14 +180,6 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const buildingPlots = new Map<string, FjordPlot>();
     for (const building of Object.values(state.buildings).sort((a, b) => a.id.localeCompare(b.id))) {
         const key = 'building:' + building.id;
-        if (!layout.plots[key]) {
-            const birth = state.events.find(e => e.type === 'HouseBuilt' && e.details?.buildingId === building.id);
-            const homeKey = 'household:' + birth?.details?.householdId;
-            if (layout.plots[homeKey]) {
-                layout.plots[key] = layout.plots[homeKey];
-                delete layout.plots[homeKey];
-            }
-        }
         const plot = allocatePlot(key);
         if (plot)
             buildingPlots.set(building.id, plot);
@@ -198,7 +224,10 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const point = plot ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + 8 + Math.floor(index / 5) * 1.8 }) : undefined;
-            add('persona', id, p.name, 'human', point, { living: true, sex: p.dna.sex, age: personaAge(state, id) });
+            const age = personaAge(state, id);
+            const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
+            add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
+                { living: true, sex: p.dna.sex, age });
         }
     }
     for (const [index, c] of Object.values(state.landing?.cattle ?? {}).filter(c => c.deathWinter === null).sort((a, b) => a.id.localeCompare(b.id)).entries()) {
@@ -213,14 +242,17 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             halfWidth: widths[Math.min(level, 3)] + 1.5, halfDepth: depths[Math.min(level, 3)] + 1.5
         });
         add('cattle', c.id, c.id, view.stage === 'Young' ? 'baby' :
-            view.stage === 'Young Adult' ? 'young-adult' : c.sex === 'female' ? 'adult-female' : 'adult-male', point, { living: true, sex: c.sex, stage: view.stage, assignment: c.farmyardId });
+            view.stage === 'Young Adult' ? 'young-adult' : c.sex === 'female' ? 'adult-female' : 'adult-male', point, { living: true, sex: c.sex, age: view.age, stage: view.stage, assignment: c.farmyardId,
+                sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds] });
     }
     for (const ship of Object.values(state.landing?.longships ?? {}))
         if (ship.salvagedWinter === null)
             add('longship', ship.id, 'Founding longship', 'longship', layout.mooring, { living: true });
+    for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
     const ground = projectFjordGround(world, entities);
     if (ground.plots.length > 1 && ground.paths.length < ground.plots.length - 1)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
     return { entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
-        weather: inspectWeather(state) };
+        weather: inspectWeather(state),
+        weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
 }
