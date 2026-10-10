@@ -8,6 +8,7 @@ Status:
 - **Canonical** — behaviour is decided.
 - **Prototype value** — mechanic is decided but numbers remain balancing parameters.
 - **Open** — unresolved; implementation must not silently invent a canonical answer.
+- **Canonical northstar** — the product direction and boundaries are approved; detailed rules, numerical balance and implementation remain explicitly open where stated.
 
 Files:
 - 00 Core Principles
@@ -20,5 +21,6 @@ Files:
 - 07 Raiding & Combat
 - 08 Weather
 - 09 Player Actions
+- [10 Cultural Life & Social Cohesion](10-CULTURAL-LIFE-COHESION.md)
 
 These requirements describe design intent, not implementation status.

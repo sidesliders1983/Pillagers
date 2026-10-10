@@ -41,3 +41,18 @@ Rules:
 - Environment: Region/Site modifiers.
 - Weather: Winter-level risk.
 - Crops, fish populations and individual trees stay abstract unless later gameplay justifies more depth.
+
+## CORE-004 — Autonomous life, voluntary cultural investment
+**Status:** Canonical northstar; future implementation and numeric balance remain open
+
+> **As a player, I want the community to live autonomously while I choose to invest resources in shared cultural moments, so that social cohesion helps residents defend their settlement and withstand harsh conditions together.**
+
+Rules:
+- Cultural investment strengthens collective resilience rather than serving as a generic production upgrade.
+- Weddings, storytelling/music gatherings, religious ceremonies and possible remembrance events use a shared future cultural-event system.
+- Ordinary relationships and life events do not depend on buying a celebration.
+- Cohesion primarily provides bounded positive settlement-defence and harsh-weather-resilience modifiers, not guaranteed outcomes or magical weather changes.
+- Cultural support remains optional; no mandatory festival cycle or offline penalty is introduced.
+- Rendering and AI narration cannot generate cohesion or gameplay consequences.
+
+Detailed contract: [10 — Cultural Life & Social Cohesion](10-CULTURAL-LIFE-COHESION.md), under [GP-005](../../../GAME-PRINCIPLES.md#gp-005--autonomous-cultural-life-cohesion-strengthens-collective-resilience).
