@@ -37,6 +37,7 @@ export function createEnvironment(assets: AssetManager) {
             if (!(child instanceof Mesh))
                 return;
             const instances = new InstancedMesh(child.geometry, child.material, count);
+            instances.name = key;
             instances.userData.seasonalFoliage=key!=='boulder';
             transforms.forEach((transform, i) => instances.setMatrixAt(i, matrix.multiplyMatrices(transform, child.matrixWorld)));
             instances.castShadow = key === 'spruce' || key === 'birch' || key === 'boulder';

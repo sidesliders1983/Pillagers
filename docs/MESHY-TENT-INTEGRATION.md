@@ -17,16 +17,20 @@ This is an actual hollow mesh: rays through the doorway reach the rear wall, the
 
 ## World placement and navigation
 
-Fresh generated worlds append this tent after the existing twenty scenery attachments. The same dry, flat support, measured rotated bounds, nature clearance and route reservation rules determine its location. Reference fallback places it beside the central working area at x=9, z=17, facing toward the clearing. Residents keep at least 0.65m clearance outside the complete source box, including poles and base beams. The tent is scenery at this stage; no housing capacity or campaign rules are added.
+Fresh generated worlds append this tent after the existing twenty scenery attachments. Placement now reserves a **building plot of at least 6m by 6m** for a future Hut, rather than just the compact tent. The plot also contains the measured Hut overhangs plus at least 0.75m working space on every side. Measured house/farmyard boxes, existing props, routes and non-grass nature keep the plot clear. Nine dry, flat support samples cover the whole generated plot. Reference fallback searches the existing village for the nearest dry, clear gap without relocating its houses or props.
 
-New saves use `authored-props-v3`. Initial `authored-props-v2` tent previews are validated against their original measured footprint and original plan before migration. Their tent is resized at its saved location and exported as v3; the blueprint and first twenty prop placements remain unchanged. Loading a previous `authored-props-v1` file preserves its original placements and version. Regenerating an old development preview through Generate World creates a new world with the tent. The ordinary Fjord URL always creates a fresh world.
+The same rendered-instance filter clears grass and other nature from the entire plot in both generated and Reference scenes. It measures every source primitive with its actual instance transform: blades rooted just outside a plot are also removed if they extend into it. All primitives of one source instance are removed together. This runs once at scene creation, keeps the stored blueprint and RNG sequence unchanged, and shares the original geometry/materials. Ground textures remain the original terrain treatment.
+
+The plot is separate from the tent's physical bounds. Residents continue using the compact source collision box plus 0.65m; they can pass through the working space around the tent. The model remains approximately 1.50m tall, 1.88m wide and at most 2m deep. The tent is scenery at this stage; building upgrades and housing capacity remain outside this asset integration.
+
+New saves use `authored-props-v4`. Initial v2 tent previews and compact v3 previews first validate against their original source bounds and deterministic plan. Only the tent then moves to the new house-sized plot and exports as v4. The stored blueprint and first twenty prop placements stay unchanged; v4 reload reproduces the same plot and placement. Previous v1 files preserve their original placements and version. Changed or arbitrary attachment locations still reject activation. The ordinary Fjord URL always creates a fresh world.
 
 Development tools > Debug > Review camera offers **Tent close-up** and **Tent interior** in the existing Fjord view. These options are disabled for preserved old worlds that have no tent. Right-mouse rotation and normal camera controls remain available.
 
 ## Verification
 
 - `node --test tests/meshy-tent.test.mjs`: open doorway, empty volume, usable floor/headroom and visible inner side walls through the exported GLB.
-- `node scripts/qa/check-meshy-tent.mjs`: existing visible Fjord controls, reference and generated seeds 17/91, ten moving residents, source-box clearance, screenshots and save/reload; v1 imports preserve their original twenty placements and v2 tent previews resize at their original location.
-- Existing Fjord browser regression covers fresh startup, generation, pause, quality and geography persistence.
+- `node scripts/qa/check-meshy-tent.mjs`: existing visible Fjord controls, reference and generated seeds 17/91, ten moving residents, source-box clearance, screenshots and save/reload; v1 imports preserve their original twenty placements; v2/v3 tent previews migrate to a clear building plot without changing geography or the other props.
+- Existing Fjord browser regression covers fresh startup, generation, pause and geography persistence.
 
-See [the visual and runtime review](qa/meshy-tent-compact/REPORT.md) for recorded evidence and its limits.
+See [the building-plot review](qa/meshy-tent-plot/REPORT.md) for current evidence. The [initial integration](qa/meshy-tent/REPORT.md) and [compact-scale review](qa/meshy-tent-compact/REPORT.md) preserve their original measurements.
