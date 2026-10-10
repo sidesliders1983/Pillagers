@@ -145,6 +145,7 @@ export class Game {
             const site = state.site;
             const boat = state.water.boat;
             const boatView = (distance: number, height: number) => {
+                if (!boat) return { position: [site.x+34,15,site.z-20], target: [site.x,3,site.z+18] };
                 const [x, y, z] = boat.position;
                 const yaw = boat.heading;
                 return { position: [x + distance*Math.cos(yaw)-distance*1.4*Math.sin(yaw),

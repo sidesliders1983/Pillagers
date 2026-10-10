@@ -3,7 +3,7 @@ import type { AssetManager, AssetKey } from '../core/AssetManager';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from './BlueprintTerrain';
 import { buildingDistance, pathWeight, settlementBounds } from './SettlementLayout';
-import { tentBuildingPlot, overlapsBuildingPlot } from './BuildingPlot';
+import { fitsBuildingFoundation, tentBuildingPlot, overlapsBuildingPlot } from './BuildingPlot';
 import { surfaceHeightAt } from './Terrain';
 import type { World } from './World';
 
@@ -82,14 +82,7 @@ export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint
             distance(q.x,q.z,p) < .8))) return false;
         if (world.placementPlan.some(q => !q.assetId.includes('grass') &&
             distance(q.x,q.z,p) < q.clearance + .25)) return false;
-        const heights: number[] = [];
-        for (const u of [-1,0,1]) for (const v of [-1,0,1]) {
-            const x = p.x+u*p.halfWidth, z = p.z+v*p.halfDepth;
-            heights.push(surface.surfaceHeightAt(x,z));
-            if (surface.slopeAt(x,z) > .12) return false;
-        }
-        return Math.min(...heights) > world.waterLevel + .25 &&
-            Math.max(...heights)-Math.min(...heights) < .15;
+        return fitsBuildingFoundation(surface,p);
     };
     const placeGround = (key: AssetKey, dx: number, dz: number, rotation: number) => {
         const bounds = key === 'tent' && previousTentFootprint ?

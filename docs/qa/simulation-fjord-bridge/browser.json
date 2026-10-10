@@ -1,0 +1,1213 @@
+{
+  "origin": "http://127.0.0.1:5180",
+  "checks": [
+    "Actual rendered founding IDs: 10 source humans, 7 household tents, 3 source cattle and 1 real longship; no prototype gameplay homes",
+    "Canonical identity list selection displays the selected resident and is persisted with the campaign",
+    "Exact refresh/export round trip and persisted coastal mooring",
+    "Winter updates preserve surviving founding transforms",
+    "Founding tents have grass only; canonical construction adds soil and a dry path connecting the two permanent homes",
+    "Canonical construction, level-1 home, active authored Farmyard, cattle assignment, source footprint fit and exact local save/load",
+    "Household transfer retains physical building; last-farmer departure deactivates Farmyard and unassigns cattle",
+    "Salvage and slaughter remove actual rendered identities",
+    "iPad-sized viewport retains canvas area and collapsible diagnostics without horizontal overflow (Chromium emulation, not physical Safari)",
+    "All GLB/images/manifests unavailable: explicit metric placeholders remain visible and Winter commands still work, no unhandled errors",
+    "Existing /play and /gameplay-lab load the shared plain canonical save and advance the same campaign"
+  ],
+  "errors": [],
+  "evidence": {
+    "readyMilliseconds": 3827,
+    "founding": [
+      {
+        "key": "household:founder-1",
+        "renderId": "617bcc9f-dc6f-4b94-a3bf-d023661673a1",
+        "kind": "household",
+        "id": "founder-1",
+        "living": true,
+        "position": [
+          50,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            49.06066181341771,
+            2.5999999046325684,
+            19.0001
+          ],
+          "max": [
+            50.93933818658229,
+            4.100073286892706,
+            20.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-1",
+        "renderId": "61f85441-8ad2-47a2-9dfc-3e72f7290b8e",
+        "kind": "persona",
+        "id": "founder-1",
+        "living": true,
+        "sex": "male",
+        "age": 40,
+        "position": [
+          47,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            46.51649247805876,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            47.48350752194125,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-10",
+        "renderId": "436cad14-08b3-4a62-a025-6e745cfb0894",
+        "kind": "persona",
+        "id": "founder-10",
+        "living": true,
+        "sex": "female",
+        "age": 19,
+        "position": [
+          48.8,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            48.316492478058755,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            49.283507521941246,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-2",
+        "renderId": "fb1038e7-689a-459d-ba92-69357ddcf1ec",
+        "kind": "household",
+        "id": "founder-2",
+        "living": true,
+        "position": [
+          50,
+          2.5999999046325684,
+          4
+        ],
+        "bounds": {
+          "min": [
+            49.06066181341771,
+            2.5999999046325684,
+            3.0000999999999998
+          ],
+          "max": [
+            50.93933818658229,
+            4.100073286892706,
+            4.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-2",
+        "renderId": "b9707e23-f676-4186-8359-090723b2ff03",
+        "kind": "persona",
+        "id": "founder-2",
+        "living": true,
+        "sex": "male",
+        "age": 22,
+        "position": [
+          47,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            46.51649247805876,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            47.48350752194125,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-3",
+        "renderId": "3837490f-c35e-47e5-b513-073a64502a57",
+        "kind": "persona",
+        "id": "founder-3",
+        "living": true,
+        "sex": "female",
+        "age": 21,
+        "position": [
+          48.8,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            48.316492478058755,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            49.283507521941246,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-4",
+        "renderId": "20aad6e5-9404-40dd-be64-49a797f9de0f",
+        "kind": "household",
+        "id": "founder-4",
+        "living": true,
+        "position": [
+          34,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            33.06066181341771,
+            2.5999999046325684,
+            19.0001
+          ],
+          "max": [
+            34.93933818658229,
+            4.100073286892706,
+            20.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-4",
+        "renderId": "fc751dd8-62c0-40be-b00b-a1eb9dd5ff1c",
+        "kind": "persona",
+        "id": "founder-4",
+        "living": true,
+        "sex": "male",
+        "age": 20,
+        "position": [
+          31,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            30.51649247805875,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            31.48350752194125,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-5",
+        "renderId": "8595388f-6236-4f54-8ea2-ab8726b390e1",
+        "kind": "household",
+        "id": "founder-5",
+        "living": true,
+        "position": [
+          66,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            65.06066181341771,
+            2.5999999046325684,
+            19.0001
+          ],
+          "max": [
+            66.93933818658229,
+            4.100073286892706,
+            20.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-5",
+        "renderId": "80ed0e49-ae9b-46bf-90fc-7534431db8ac",
+        "kind": "persona",
+        "id": "founder-5",
+        "living": true,
+        "sex": "male",
+        "age": 25,
+        "position": [
+          63,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            62.51649247805876,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            63.48350752194125,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-6",
+        "renderId": "241cef94-790c-45fd-b78f-d04e3ffe538e",
+        "kind": "household",
+        "id": "founder-6",
+        "living": true,
+        "position": [
+          50,
+          2.5999999046325684,
+          36
+        ],
+        "bounds": {
+          "min": [
+            49.06066181341771,
+            2.5999999046325684,
+            35.0001
+          ],
+          "max": [
+            50.93933818658229,
+            4.100073286892706,
+            36.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-6",
+        "renderId": "0e401947-9018-4adb-8abc-c67a94674347",
+        "kind": "persona",
+        "id": "founder-6",
+        "living": true,
+        "sex": "female",
+        "age": 35,
+        "position": [
+          47,
+          2.5999999046325684,
+          44
+        ],
+        "bounds": {
+          "min": [
+            46.51649247805876,
+            2.5999999046325684,
+            43.61606513786415
+          ],
+          "max": [
+            47.48350752194125,
+            4.399999904632568,
+            44.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-7",
+        "renderId": "132098e1-9bb9-4b9f-8d31-acb33b6c62de",
+        "kind": "household",
+        "id": "founder-7",
+        "living": true,
+        "position": [
+          34,
+          2.5999999046325684,
+          4
+        ],
+        "bounds": {
+          "min": [
+            33.06066181341771,
+            2.5999999046325684,
+            3.0000999999999998
+          ],
+          "max": [
+            34.93933818658229,
+            4.100073286892706,
+            4.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-7",
+        "renderId": "443e200b-0d0b-4835-a15c-e48f139ba973",
+        "kind": "persona",
+        "id": "founder-7",
+        "living": true,
+        "sex": "female",
+        "age": 36,
+        "position": [
+          31,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            30.51649247805875,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            31.48350752194125,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-8",
+        "renderId": "bea34a43-acb0-4394-848a-173205a2f545",
+        "kind": "persona",
+        "id": "founder-8",
+        "living": true,
+        "sex": "male",
+        "age": 36,
+        "position": [
+          32.8,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            32.316492478058755,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            33.283507521941246,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-9",
+        "renderId": "97c87bd7-255c-4258-8800-56c50d9043da",
+        "kind": "household",
+        "id": "founder-9",
+        "living": true,
+        "position": [
+          66,
+          2.5999999046325684,
+          4
+        ],
+        "bounds": {
+          "min": [
+            65.06066181341771,
+            2.5999999046325684,
+            3.0000999999999998
+          ],
+          "max": [
+            66.93933818658229,
+            4.100073286892706,
+            4.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-9",
+        "renderId": "04c82370-f753-44cc-8d44-005ac3420a89",
+        "kind": "persona",
+        "id": "founder-9",
+        "living": true,
+        "sex": "female",
+        "age": 28,
+        "position": [
+          63,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            62.51649247805876,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            63.48350752194125,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:cattle-1",
+        "renderId": "2d348b4a-74b9-480e-b193-13ab25e30a6a",
+        "kind": "cattle",
+        "id": "cattle-1",
+        "living": true,
+        "sex": "female",
+        "stage": "Adult",
+        "assignment": null,
+        "position": [
+          41.93933982822018,
+          2.5999999046325684,
+          -1.9393398282201786
+        ],
+        "bounds": {
+          "min": [
+            41.21327041679801,
+            2.5999999046325684,
+            -2.935566481436331
+          ],
+          "max": [
+            42.665409239642344,
+            3.8438653061657657,
+            -0.9431131750040264
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:cattle-2",
+        "renderId": "1e3817e1-1a7c-4222-86cc-4071e9675461",
+        "kind": "cattle",
+        "id": "cattle-2",
+        "living": true,
+        "sex": "female",
+        "stage": "Adult",
+        "assignment": null,
+        "position": [
+          43.93933982822018,
+          2.5999999046325684,
+          -4.060660171779821
+        ],
+        "bounds": {
+          "min": [
+            43.21327041679801,
+            2.5999999046325684,
+            -5.056886824995973
+          ],
+          "max": [
+            44.665409239642344,
+            3.8438653061657657,
+            -3.0644335185636686
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:cattle-3",
+        "renderId": "9804c553-fb22-48d5-afbd-b53d37c37b82",
+        "kind": "cattle",
+        "id": "cattle-3",
+        "living": true,
+        "sex": "male",
+        "stage": "Adult",
+        "assignment": null,
+        "position": [
+          45.93933982822018,
+          2.5999999046325684,
+          -4.060660171779821
+        ],
+        "bounds": {
+          "min": [
+            45.10198146137603,
+            2.5999999046325684,
+            -5.187184311943931
+          ],
+          "max": [
+            46.77669819506432,
+            3.950370142703905,
+            -2.9341360316157106
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "longship:founding-longship",
+        "renderId": "c438a650-63f8-4ea9-adb7-3004e5590e21",
+        "kind": "longship",
+        "id": "founding-longship",
+        "living": true,
+        "position": [
+          57.22227166658211,
+          0.03,
+          -33.93460446727957
+        ],
+        "bounds": {
+          "min": [
+            52.195231580571246,
+            0.029999999999999805,
+            -41.104870926862716
+          ],
+          "max": [
+            62.24931175259297,
+            5.230000211596488,
+            -26.764338007696427
+          ]
+        },
+        "placeholder": false
+      }
+    ],
+    "houseScene": [
+      {
+        "key": "persona:founder-1",
+        "renderId": "c71119e4-c8dc-4f97-8904-cccfa89e6853",
+        "kind": "persona",
+        "id": "founder-1",
+        "living": true,
+        "sex": "male",
+        "age": 40,
+        "position": [
+          47,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            46.51649247805876,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            47.48350752194125,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-10",
+        "renderId": "55992877-880a-4d7f-9163-cb62c3a40021",
+        "kind": "persona",
+        "id": "founder-10",
+        "living": true,
+        "sex": "female",
+        "age": 19,
+        "position": [
+          31,
+          2.5999999046325684,
+          44
+        ],
+        "bounds": {
+          "min": [
+            30.51649247805875,
+            2.5999999046325684,
+            43.61606513786415
+          ],
+          "max": [
+            31.48350752194125,
+            4.399999904632568,
+            44.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-2",
+        "renderId": "5008d6e4-121b-42ae-a45c-31847aa9a34c",
+        "kind": "persona",
+        "id": "founder-2",
+        "living": true,
+        "sex": "male",
+        "age": 22,
+        "position": [
+          47,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            46.51649247805876,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            47.48350752194125,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-3",
+        "renderId": "6cceb6d4-41b6-4104-a064-87f879fed0e2",
+        "kind": "persona",
+        "id": "founder-3",
+        "living": true,
+        "sex": "female",
+        "age": 21,
+        "position": [
+          63,
+          2.5999999046325684,
+          44
+        ],
+        "bounds": {
+          "min": [
+            62.51649247805876,
+            2.5999999046325684,
+            43.61606513786415
+          ],
+          "max": [
+            63.48350752194125,
+            4.399999904632568,
+            44.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-4",
+        "renderId": "d5e2f173-aa99-4914-8244-6ae582f7251c",
+        "kind": "household",
+        "id": "founder-4",
+        "living": true,
+        "position": [
+          34,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            33.06066181341771,
+            2.5999999046325684,
+            19.0001
+          ],
+          "max": [
+            34.93933818658229,
+            4.100073286892706,
+            20.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-4",
+        "renderId": "784f5cda-d247-4b5a-984f-b53323ef37e9",
+        "kind": "persona",
+        "id": "founder-4",
+        "living": true,
+        "sex": "male",
+        "age": 20,
+        "position": [
+          31,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            30.51649247805875,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            31.48350752194125,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-5",
+        "renderId": "eb72da5b-7fd5-4adb-aca6-3402a2d11b66",
+        "kind": "household",
+        "id": "founder-5",
+        "living": true,
+        "position": [
+          66,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            65.06066181341771,
+            2.5999999046325684,
+            19.0001
+          ],
+          "max": [
+            66.93933818658229,
+            4.100073286892706,
+            20.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-5",
+        "renderId": "b70b1ab4-0dcf-461c-a6e5-3e44c14d94a8",
+        "kind": "persona",
+        "id": "founder-5",
+        "living": true,
+        "sex": "male",
+        "age": 25,
+        "position": [
+          63,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            62.51649247805876,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            63.48350752194125,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-6",
+        "renderId": "02bfd941-86d1-4f93-9b9e-9dd03cb02d19",
+        "kind": "household",
+        "id": "founder-6",
+        "living": true,
+        "position": [
+          50,
+          2.5999999046325684,
+          36
+        ],
+        "bounds": {
+          "min": [
+            49.06066181341771,
+            2.5999999046325684,
+            35.0001
+          ],
+          "max": [
+            50.93933818658229,
+            4.100073286892706,
+            36.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-6",
+        "renderId": "74ac55d2-3414-456c-8545-35e8092d9992",
+        "kind": "persona",
+        "id": "founder-6",
+        "living": true,
+        "sex": "female",
+        "age": 35,
+        "position": [
+          47,
+          2.5999999046325684,
+          44
+        ],
+        "bounds": {
+          "min": [
+            46.51649247805876,
+            2.5999999046325684,
+            43.61606513786415
+          ],
+          "max": [
+            47.48350752194125,
+            4.399999904632568,
+            44.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-7",
+        "renderId": "e4767d7e-65c9-4b4d-8972-b13f1c7de1be",
+        "kind": "household",
+        "id": "founder-7",
+        "living": true,
+        "position": [
+          34,
+          2.5999999046325684,
+          4
+        ],
+        "bounds": {
+          "min": [
+            33.06066181341771,
+            2.5999999046325684,
+            3.0000999999999998
+          ],
+          "max": [
+            34.93933818658229,
+            4.100073286892706,
+            4.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-7",
+        "renderId": "05b3139d-3f21-4fd8-bb3d-efbdc2837ac5",
+        "kind": "persona",
+        "id": "founder-7",
+        "living": true,
+        "sex": "female",
+        "age": 36,
+        "position": [
+          31,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            30.51649247805875,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            31.48350752194125,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-8",
+        "renderId": "8624426c-3d37-4b77-a5c2-e3c70f9083c1",
+        "kind": "persona",
+        "id": "founder-8",
+        "living": true,
+        "sex": "male",
+        "age": 36,
+        "position": [
+          15,
+          2.5999999046325684,
+          28
+        ],
+        "bounds": {
+          "min": [
+            14.516492478058751,
+            2.5999999046325684,
+            27.616065137864148
+          ],
+          "max": [
+            15.483507521941249,
+            4.399999904632568,
+            28.38393486213585
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-9",
+        "renderId": "4175a7b3-27a0-464d-907a-4e3aaa994d41",
+        "kind": "household",
+        "id": "founder-9",
+        "living": true,
+        "position": [
+          66,
+          2.5999999046325684,
+          4
+        ],
+        "bounds": {
+          "min": [
+            65.06066181341771,
+            2.5999999046325684,
+            3.0000999999999998
+          ],
+          "max": [
+            66.93933818658229,
+            4.100073286892706,
+            4.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:founder-9",
+        "renderId": "93efdb07-bea6-47d9-bd92-ad9b48f29b61",
+        "kind": "persona",
+        "id": "founder-9",
+        "living": true,
+        "sex": "female",
+        "age": 28,
+        "position": [
+          63,
+          2.5999999046325684,
+          12
+        ],
+        "bounds": {
+          "min": [
+            62.51649247805876,
+            2.5999999046325684,
+            11.61606513786415
+          ],
+          "max": [
+            63.48350752194125,
+            4.399999904632568,
+            12.383934862135852
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:cattle-1",
+        "renderId": "02e0418f-45d0-4240-ae84-bdb0b3c7114d",
+        "kind": "cattle",
+        "id": "cattle-1",
+        "living": true,
+        "sex": "female",
+        "stage": "Adult",
+        "assignment": "house-1",
+        "position": [
+          45.5,
+          2.700400440164974,
+          15.5
+        ],
+        "bounds": {
+          "min": [
+            44.773930588577834,
+            2.700400440164974,
+            14.503773346783849
+          ],
+          "max": [
+            46.226069411422166,
+            3.9442658416981713,
+            16.49622665321615
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:cattle-2",
+        "renderId": "e1f9da56-212e-4369-917d-6343ccfe68c9",
+        "kind": "cattle",
+        "id": "cattle-2",
+        "living": true,
+        "sex": "female",
+        "stage": "Adult",
+        "assignment": null,
+        "position": [
+          43.93933982822018,
+          2.5999999046325684,
+          -4.060660171779821
+        ],
+        "bounds": {
+          "min": [
+            43.21327041679801,
+            2.5999999046325684,
+            -5.056886824995973
+          ],
+          "max": [
+            44.665409239642344,
+            3.8438653061657657,
+            -3.0644335185636686
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:cattle-3",
+        "renderId": "3d4ea582-4899-4c7c-ad4c-90dc33cbe203",
+        "kind": "cattle",
+        "id": "cattle-3",
+        "living": true,
+        "sex": "male",
+        "stage": "Adult",
+        "assignment": null,
+        "position": [
+          45.93933982822018,
+          2.5999999046325684,
+          -4.060660171779821
+        ],
+        "bounds": {
+          "min": [
+            45.10198146137603,
+            2.5999999046325684,
+            -5.187184311943931
+          ],
+          "max": [
+            46.77669819506432,
+            3.950370142703905,
+            -2.9341360316157106
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "longship:founding-longship",
+        "renderId": "83ce1195-d4b9-41a2-8bf5-2f4fbdbc09a7",
+        "kind": "longship",
+        "id": "founding-longship",
+        "living": true,
+        "position": [
+          57.22227166658211,
+          0.03,
+          -33.93460446727957
+        ],
+        "bounds": {
+          "min": [
+            52.195231580571246,
+            0.029999999999999805,
+            -41.104870926862716
+          ],
+          "max": [
+            62.24931175259297,
+            5.230000211596488,
+            -26.764338007696427
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "building:house-1",
+        "renderId": "c5f0a154-885a-4ee7-a073-64ef2a77e142",
+        "kind": "building",
+        "id": "house-1",
+        "living": true,
+        "level": 0,
+        "farmyard": true,
+        "position": [
+          50,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            44.29071791411341,
+            2.5999999046325684,
+            14.175533294677734
+          ],
+          "max": [
+            55.70928208588659,
+            6.700022666167577,
+            25.824466705322266
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "building:house-2",
+        "renderId": "2abc71e8-9fc1-41ab-90ac-ca97dd2720bc",
+        "kind": "building",
+        "id": "house-2",
+        "living": true,
+        "level": 1,
+        "farmyard": false,
+        "position": [
+          50,
+          2.5999999046325684,
+          4
+        ],
+        "bounds": {
+          "min": [
+            45.26382088661194,
+            2.5999999046325684,
+            0.8140244753166397
+          ],
+          "max": [
+            54.73617911338806,
+            7.600544739581553,
+            7.185975524683361
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-10",
+        "renderId": "1609df63-d01a-4642-b142-944b7dd92781",
+        "kind": "household",
+        "id": "founder-10",
+        "living": true,
+        "position": [
+          34,
+          2.5999999046325684,
+          36
+        ],
+        "bounds": {
+          "min": [
+            33.06066181341771,
+            2.5999999046325684,
+            35.0001
+          ],
+          "max": [
+            34.93933818658229,
+            4.100073286892706,
+            36.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-3",
+        "renderId": "b744db3b-3946-411b-aac4-7b3b377e8b79",
+        "kind": "household",
+        "id": "founder-3",
+        "living": true,
+        "position": [
+          66,
+          2.5999999046325684,
+          36
+        ],
+        "bounds": {
+          "min": [
+            65.06066181341771,
+            2.5999999046325684,
+            35.0001
+          ],
+          "max": [
+            66.93933818658229,
+            4.100073286892706,
+            36.9999
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:founder-8",
+        "renderId": "5eb449b8-bf54-4f68-aea4-ffe0d8c946d8",
+        "kind": "household",
+        "id": "founder-8",
+        "living": true,
+        "position": [
+          18,
+          2.5999999046325684,
+          20
+        ],
+        "bounds": {
+          "min": [
+            17.060661813417706,
+            2.5999999046325684,
+            19.0001
+          ],
+          "max": [
+            18.939338186582294,
+            4.100073286892706,
+            20.9999
+          ]
+        },
+        "placeholder": false
+      }
+    ]
+  },
+  "renderer": "Chromium / SwiftShader / Low / DPR 1",
+  "physicalIPadVerified": false
+}

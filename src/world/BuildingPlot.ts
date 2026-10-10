@@ -1,4 +1,6 @@
 import { Box3, InstancedMesh, Matrix4, Object3D } from 'three';
+import type { TerrainSurface } from '../world-generation/TerrainQueries';
+import { suitability } from '../world-generation/PlanSettlement';
 import type { AssetManager } from '../core/AssetManager';
 
 /** Space for the first permanent home, distinct from the tent's physical collision box. */
@@ -73,4 +75,16 @@ export function clearBuildingPlotNature(root: Object3D, plot: BuildingPlot) {
             if (intersecting(meshes,i)) overlappingNature++;
     }
     return { removed,removedAssets,overlappingNature };
+}
+
+/** Shared nine-point production foundation fit, including visible height variation. */
+export function fitsBuildingFoundation(surface: TerrainSurface, plot: Omit<BuildingPlot,'futureAsset'>) {
+    const heights: number[]=[];
+    for (const u of [-1,0,1]) for (const v of [-1,0,1]) {
+        const x=plot.x+u*plot.halfWidth,z=plot.z+v*plot.halfDepth;
+        const height=surface.surfaceHeightAt(x,z); heights.push(height);
+        if (height<=surface.waterLevel+suitability.foundationElevation ||
+            surface.slopeAt(x,z)>suitability.foundationSlope) return false;
+    }
+    return Math.max(...heights)-Math.min(...heights)<.15;
 }
