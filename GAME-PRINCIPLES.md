@@ -1,6 +1,6 @@
 # Pillagers — Game principles
 
-This document records lasting game-design decisions for future Codex work. Read it before changing the calendar, persona ages, seasonal presentation, lore or time-related UI. Implementation details and the current prototype belong in the feature documentation.
+This document records lasting game-design decisions for future Codex work. Read it before changing the calendar, persona ages, seasonal presentation, lore, cultural life, social cohesion or related UI. Implementation details and the current prototype belong in the feature documentation.
 
 ## GP-001 — Time is experienced through seasons and winters
 
@@ -50,6 +50,22 @@ Leather and jewellery making is a combined game role spanning distinct crafts. D
 
 Research, evidence limits and approved terms: [Viking occupations and terminology](docs/VIKING-OCCUPATIONS-AND-TERMINOLOGY.md). This decision does not implement jobs or rename code/save schemas.
 
+## GP-005 — Autonomous cultural life; cohesion strengthens collective resilience
+
+**Status: Approved gameplay northstar, 2026-10-10. Future gameplay layer; no implementation or numeric balance is enabled by this document.**
+
+> The clan lives autonomously. The player may invest resources in shared cultural moments to strengthen social cohesion: residents stand by one another when defending their settlement and facing harsh conditions.
+
+Cultural investment is a distinct alternative to productive infrastructure or keeping reserves. Weddings, community storytelling/music gatherings, religious ceremonies and possible funerals/remembrances provide occasions for that choice. The player chooses whether and how much to support a gathering; they do not buy love, force births, author deaths or gate ordinary community life behind a celebration button.
+
+Social cohesion represents collective solidarity and mutual support, not a CharacterDNA trait, generic happiness meter or automatic Food/Materials multiplier. Its primary gameplay benefits are **positive modifiers to settlement defence and resilience during harsh weather**. Cohesion helps a community withstand adversity; it does not change the weather, create Food, replace shelter, guarantee victory or make residents invulnerable. Other applications require a separate design decision; a universal offensive raid bonus is not approved here.
+
+These investments are optional opportunities, not recurring mandatory upkeep, missed-festival punishments or offline obligations. Do not introduce a festival-maintenance treadmill. Exact costs, participation rules, cohesion representation, persistence/decay, stacking limits and modifier values remain open for later calibration.
+
+Cultural events and their approved effects belong to Simulation Core. Ambient meetings/animations do not award cohesion. AI/Lore may narrate recorded gatherings but never create their outcomes; GP-002 continues to apply. No new mandatory 3D assets, animations or religious subsystem are implied.
+
+Detailed northstar and future acceptance principles: [Cultural Life & Social Cohesion](docs/gameplay/spec/10-CULTURAL-LIFE-COHESION.md).
+
 ## Scope and implementation status
 
 The calendar and age wording above are approved design decisions. They do not imply that the current code already implements them.
@@ -59,16 +75,18 @@ Current prototype: [Fjordside year cycle](docs/FJORDSIDE-YEAR-CYCLE.md).
 
 The existing 60-second year and pause/Continue summary are prototype settings, not permanent game principles. Issue #13 preserves them while applying the approved calendar and wording changes.
 
+GP-005 records an approved future direction only. It does not activate cultural events, social-cohesion modifiers, settlement-defence mechanics or new weather rules, and it does not block the current Fjord/lifecycle/movement slices.
+
 ## Ideas awaiting a separate decision
 
 These are proposals, not requirements for Codex to implement automatically:
 
 - Summer and winter as the main halves of the year, with spring and autumn transitions.
 - Seasonal activities: sowing, travel and trade, harvest, winter preparation and crafts.
-- Seasonal celebrations, with region-specific historical research before selecting names or dates.
+- Specific names, dates and regional forms for celebrations and religious ceremonies; cultural investment itself is now governed by GP-005.
 - Narrative time expressions such as “after the harvest” and “three winters ago”.
 - A visual moon cycle, with day/night timing distinct from the compressed annual cycle.
 
 ## Maintaining these principles
 
-When implementing time-related features or lore, check them against GP-001 through GP-004 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features, lore, cultural life or cohesion, check them against GP-001 through GP-005 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.

@@ -49,6 +49,20 @@ Player generally does not directly:
 Acceptance:
 - no adverse or beneficial canonical progression occurs purely because wall-clock time passed while offline.
 
+## PLAYER-008 — Support culture and social cohesion
+**Status:** Canonical northstar; not implemented by this documentation change
+
+> **As a player, I want to choose when and how much to invest in shared cultural events, so that my settlement gains solidarity and resilience without my having to control residents' private lives.**
+
+Rules:
+- The player may support weddings, storytelling/music gatherings, religious ceremonies and possible funerals/remembrances through deliberate resource spending.
+- Timing, scale and participation are future choices to specify, not a command to force love, a birth or a death.
+- The intended benefit is social cohesion, primarily aiding settlement defence and survival through harsh conditions; no automatic Food/Materials production buff.
+- Declining an optional celebration does not block autonomous clan life or create a missed-event punishment.
+- Exact costs, cooldowns, participation, gain and modifier formulas require separate design/calibration.
+
+See [Cultural Life & Social Cohesion](10-CULTURAL-LIFE-COHESION.md) and CORE-004.
+
 ## Implemented v0.4 slice
 
 [World Expeditions v0.4](../../WORLD-EXPEDITIONS-V04.md) records the implemented region graph, reusable groups, optional Surveillance, mission provisions/risk and one-category carrying capacity. Named residents and actual target assets move through Simulation Core commands; the player UI is /play and Gameplay Lab retains shared-save debugging.
