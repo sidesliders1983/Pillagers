@@ -47,6 +47,7 @@ export class FjordsideControls {
             <button id="fjordside-pause">Pause world</button>
             <label>Review camera<select id="fjordside-camera"><option value="village">Village</option>
                 <option value="shore">Shore</option><option value="overlook">High overlook</option>
+                <option value="tent">Tent close-up</option><option value="tent-interior">Tent interior</option>
                 <option value="boat">Boat close-up</option><option value="grazing">Water low angle</option></select></label>
             <label>Review effects time (seconds)<input id="fjordside-effects-time" type="number" min="0" max="120" step="0.1" value="0"></label>
             <button id="fjordside-effects-scrub">Set effects time and pause</button>

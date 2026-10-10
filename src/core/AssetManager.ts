@@ -7,7 +7,7 @@ import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
 import { worldConfig } from '../config/worldConfig';
 import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 const registry = { spruce: 'spruce-tree', birch: 'birch-tree', boulder: 'boulder', cliff: 'fjord-cliff-rock', greatHall: 'great-hall', hut: 'turf-dwelling', storehouse: 'stabbur-storehouse', hearth: 'cooking-hearth', well: 'village-well', logs: 'log-pile', barrel: 'barrel', crate: 'storage-crate', boat: 'faering-rowboat', jetty: 'jetty-pier', heather: 'heather-shrub', grass: 'grass-tuft', fish: 'fish-drying-rack', rune: 'runestone' };
-export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey;
+export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey | 'tent';
 export class AssetManager {
     readonly windowMaterials:MeshStandardMaterial[]=[];
     readonly fireMaterials:MeshStandardMaterial[]=[];
@@ -20,7 +20,9 @@ export class AssetManager {
         const manifest=await response.json() as {assets:Partial<Record<keyof typeof generatedHouseFiles,{file:string}>>};
         const generated=Object.entries(manifest.assets).map(([key,entry])=>({key:key as AssetKey,url:import.meta.env.BASE_URL+'game-assets/houses/'+entry!.file,authored:true}));
         const scenery=(Object.keys(registry) as (keyof typeof registry)[]).filter(key=>key!=='hut'&&key!=='greatHall').map(key=>({key:key as AssetKey,url:import.meta.env.BASE_URL+'assets/Terrain/'+registry[key]+'.glb',authored:false}));
-        await Promise.all([...scenery,...generated].map(async ({key,url,authored}) => {
+        const tent = { key: 'tent' as const,
+            url: import.meta.env.BASE_URL + 'scenery/meshy-tent-v1/tent.glb', authored: true };
+        await Promise.all([...scenery,...generated,tent].map(async ({key,url,authored}) => {
             const { scene } = await this.loader.loadAsync(url);
             // Pack nodes have centered translations: normalize actual world bounds to a grounded pivot.
             scene.updateMatrixWorld(true);
@@ -75,7 +77,8 @@ export class AssetManager {
                 }
             });
             root.updateMatrixWorld(true);
-            root.name=key;root.userData.authoredHousing=authored;
+            root.name=key;root.userData.authoredHousing=authored && key !== 'tent';
+            root.userData.authoredScenery=key === 'tent';
             this.models.set(key, root);
         }));
         this.draco.dispose();
