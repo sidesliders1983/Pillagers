@@ -6,7 +6,7 @@ import { parseWorld, serializeWorld } from '../world-generation/WorldSave';
 import { World } from './World';
 import { surfaceHeightAt } from './Terrain';
 import { walkable, randomWalkablePosition, MovementTerrain } from '../systems/MovementSystem';
-import { createBlueprintSurface, createBlueprintTerrain, disposeBlueprintTerrain } from './BlueprintTerrain';
+import { createBlueprintSurface, createBlueprintTerrain, disposeBlueprintTerrain, updateBlueprintWear } from './BlueprintTerrain';
 import { loadWorldGroundMaterials } from './WorldGroundMaterials';
 import { loadPineModels } from './PineModels';
 import { createNatureFromPlan } from './KayKitNature';
@@ -21,6 +21,7 @@ import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './Build
 
 export interface WorldSelection {
     mode: 'reference' | 'generated';
+    settlement?: 'prototype' | 'canonical';
     blueprint?: WorldBlueprint;
     quality: 'standard' | 'low';
     anisotropy?: number;
@@ -64,7 +65,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
         throw new Error('Only a validated WorldBlueprint can be activated in Fjordside.');
     const attachmentVersion = selection.attachmentVersion === 'authored-props-v1' ?
         'authored-props-v1' : 'authored-props-v4';
-    const includeTent = attachmentVersion !== 'authored-props-v1';
+    const canonical = selection.settlement === 'canonical';
+    const includeTent = !canonical && attachmentVersion !== 'authored-props-v1';
     const root = new Group();
     const attachments: WorldAttachment[] = [];
     let tentPlot: (BuildingPlot & ReturnType<typeof clearBuildingPlotNature>) | null = null;
@@ -99,14 +101,34 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
     try {
         if (blueprint) {
             await assets.loadNature();
-            grounds = await loadWorldGroundMaterials(selection.quality,selection.anisotropy);
+            try { grounds = await loadWorldGroundMaterials(selection.quality,selection.anisotropy); }
+            catch (error) {
+                if (!canonical) throw error;
+                assets.diagnostics.push('Ground maps unavailable; native terrain material fallback.');
+            }
             const surface = createBlueprintSurface(blueprint);
-            terrain = createBlueprintTerrain(blueprint,grounds.materials);
-            if (blueprint.config.conifers === 'ez-tree') pines = await loadPineModels(assets);
+            terrain = createBlueprintTerrain(blueprint,grounds?.materials,'none',
+                canonical ? blueprint.terrain.heights.map(() => 0) : undefined);
+            if (blueprint.config.conifers === 'ez-tree') {
+                try { pines = await loadPineModels(assets); }
+                catch (error) { if (!canonical) throw error;
+                    assets.diagnostics.push('EZ-Tree unavailable; existing KayKit conifer fallback.'); }
+            }
             const nature = createNatureFromPlan(assets,blueprint.placementPlan,
                 blueprint.config.seed,pines?.resolve);
             root.add(nature); // Own instance buffers even if a required plot cannot be placed.
-            attachments.push(...planWorldAttachments(assets,blueprint,includeTent));
+            try { attachments.push(...planWorldAttachments(assets,blueprint,includeTent)); }
+            catch (error) {
+                if (!canonical) throw error;
+                assets.diagnostics.push('Source attachment fit unavailable; only the coastal mooring placeholder remains. '+String(error));
+                const harbor=blueprint.settlement.harbor!;
+                const shore=blueprint.coast.map(s=>({x:(s.a.x+s.b.x)/2,z:(s.a.z+s.b.z)/2})).sort((a,b)=>
+                    Math.hypot(a.x-harbor.x,a.z-harbor.z)-Math.hypot(b.x-harbor.x,b.z-harbor.z))[0];
+                const direction=new Vector3(shore.x-harbor.x,0,shore.z-harbor.z).normalize();
+                attachments.push({id:'boat',key:'boat',x:shore.x+direction.x*6,z:shore.z+direction.z*6,
+                    y:blueprint.waterLevel+.15,rotation:Math.atan2(direction.x,direction.z),
+                    scale:1,halfWidth:.75,halfDepth:2,support:'marine'});
+            }
             const mooring = attachments.find(item => item.key === 'boat')!;
             water = new FjordsideWater(blueprint.waterLevel, mooring, selection.quality);
             if (selection.attachmentVersion === 'authored-props-v2') {
@@ -124,9 +146,10 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 tentPlot = { ...plot,...clearBuildingPlotNature(nature,plot) };
             }
             wind = new NatureWind(nature,!!pines);
-            root.add(terrain,nature,water.mesh,
-                placeSettlement(assets,blueprint.settlement.buildings,surface.surfaceHeightAt));
+            root.add(terrain,nature,water.mesh);
+            if (!canonical) root.add(placeSettlement(assets,blueprint.settlement.buildings,surface.surfaceHeightAt));
             for (const item of attachments) {
+                if (canonical && item.key !== 'jetty' && item.key !== 'cliff') continue;
                 const model = assets.get(item.key);
                 model.name = item.id;
                 model.position.set(item.x,item.y,item.z);
@@ -167,21 +190,27 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             }
             throw new Error('No safe production resident position.');
         } };
-        floatingBoat = new BoatFloat(root.getObjectByName('boat')!);
-        floatingBoat.update((water ?? classic!.water).surface, 0);
+        if (!canonical) {
+            floatingBoat = new BoatFloat(root.getObjectByName('boat')!);
+            floatingBoat.update((water ?? classic!.water).surface, 0);
+        }
         root.name = blueprint ? 'Integrated generated Fjordside' : 'Reference Fjordside';
         const fire = attachments.find(p => p.key === 'hearth') ??
             { ...hearth,y: surfaceHeightAt(hearth.x,hearth.z) };
         const center = blueprint?.settlement.center ?? { x: 0,z: 0 };
         return {
             root,terrain,movement,blueprint,attachments,
+            setGroundWeights(weights: readonly number[]) {
+                if (canonical && terrain) updateBlueprintWear(terrain,weights);
+            },
+            clearPlot: (plot: BuildingPlot) => clearBuildingPlotNature(root,plot),
             hearth: new Vector3(fire.x,fire.y,fire.z),
             center: new Vector3(center.x,movement.heightAt(center.x,center.z),center.z+16),
             get quality() { return quality; },
             setQuality(value: 'standard' | 'low') {
                 quality = value;
                 (water ?? classic!.water).surface.setQuality(value === 'low' ? 'low' : 'medium');
-                floatingBoat!.update((water ?? classic!.water).surface,waterTime);
+                floatingBoat?.update((water ?? classic!.water).surface,waterTime);
             },
             setMotion(value: typeof motion) { motion = { ...value }; },
             update(time: number,lighting?: WorldLighting,camera?: Camera) {
@@ -190,7 +219,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 classic?.update(waterTime,lighting,camera);
                 water?.update(waterTime,lighting,camera);
                 wind?.update(windTime);
-                floatingBoat!.update((water ?? classic!.water).surface,waterTime);
+                floatingBoat?.update((water ?? classic!.water).surface,waterTime);
             },
             exportSave() {
                 return JSON.stringify({ fjordsideVersion: 1,mode: selection.mode,
@@ -199,11 +228,11 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             },
             describe() {
                 return { mode: selection.mode,seed: blueprint?.config.seed ?? 1983,
-                    quality,buildings: blueprint ? 6 : 7,
+                    quality,buildings: canonical ? 0 : blueprint ? 6 : 7,
                     populationSource: 'existing-fjordside',groundTier: grounds?.tier ?? 'reference',source: blueprint?.config.conifers ?? 'reference',
                     site: { x: center.x,z: center.z },attachments: attachments.length,
                     tent: attachments.find(item => item.key === 'tent') ?? null,tentPlot,attachmentVersion,
-                    validation: blueprint?.validation ?? null,motion,water: { ...(water ?? classic!.water).describe(), boat: floatingBoat!.describe() } };
+                    validation: blueprint?.validation ?? null,motion,water: { ...(water ?? classic!.water).describe(), boat: floatingBoat?.describe() ?? null } };
             },
             dispose,
         };

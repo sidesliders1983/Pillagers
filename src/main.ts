@@ -1,6 +1,12 @@
 import './style.css';
 const route=location.pathname.replace(/\/+$/, '');
-if(route === '/water-lab') {
+if (route === '/fjord-play') {
+    import('./fjord-play/FjordPlay').then(({ FjordPlay }) => new FjordPlay().start()).catch(error => {
+        console.error(error);
+        const status = document.querySelector('#fjord-notice');
+        if (status) status.textContent = 'Fjord rendering unavailable. Simulation controls remain available. ' + error.message;
+    });
+} else if(route === '/water-lab') {
     import('./water-lab/WaterLab').then(({ WaterLab }) => new WaterLab().start()).catch(error => {
         console.error(error);
         document.body.textContent = `Could not open Water Lab. ${error.message}`;

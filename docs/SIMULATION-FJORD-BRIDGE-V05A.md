@@ -1,4 +1,4 @@
-# Simulation-to-Fjord bridge v0.5A — architecture inventory
+# Simulation-to-Fjord bridge v0.5A
 
 Issue: #87. Inspected base: `5ca0c0b` (main, including the compact Meshy tent from #90).
 
@@ -20,7 +20,7 @@ Issue: #87. Inspected base: `5ca0c0b` (main, including the compact Meshy tent fr
 | Camera / light | `src/camera/RTSCameraController.ts`, `core/Renderer.ts`, `core/WorldLighting.ts` | Reuse mouse/touch navigation, terrain snapping, low quality and approved lighting; no custom shader work. |
 | Existing saves | `src/gameplay-lab/GameplayLab.ts`, `src/play/PlayUI.ts` | Both use `pillagers.gameplay-lab.v1` for canonical JSON. Keep that contract importable and exportable. Geography/presentation is separate from simulation truth. |
 
-## Proposed integration boundary
+## Implemented integration boundary
 
 A small projection accepts a canonical snapshot plus existing Fjord geography and returns stable render descriptors: canonical kind/ID, asset selection, metric transform, current visual status and a selection identity. It does not issue commands, draw random numbers from the core or edit the snapshot.
 
@@ -28,9 +28,44 @@ Expose `/fjord-play` with a founding campaign, time controls and explicit shared
 
 Placement records belong to a versioned presentation adapter, separate from canonical JSON. Retain occupied/vacant plot identities across incremental changes; building identity keeps its own location when a household moves. Reserve a suitable foundation using existing footprint conventions, and clear source nature through BuildingPlot. Save geography and presentation alongside canonical export without changing Simulation Core schema; also accept plain canonical saves. Any location or asset fallback must be visible in developer diagnostics.
 
-## Verification plan (awaiting seam confirmation)
+## Approved verification boundaries
 
 1. Public projection over real canonical commands: founding household tents, ten residents, three cattle and one ship; building/upgrade/Farmyard mapping; living-only updates; dry collision-free metric placement; stable incremental identities; save/load; renderer removal leaves replay identical.
 2. Browser/visual smoke: new route on desktop and iPad-sized viewports, real asset loading or declared fallbacks, Winter advance, paused load, persistence and screenshots. Retain existing route checks. Physical iPad GPU validation remains an owner check; local timings are diagnostic on this old laptop.
 
-No gameplay rules or balance defaults are changed. No architecture or production implementation has been changed at this inventory stage.
+No gameplay rules or balance defaults are changed. The original inventory was merged in PR #91; the implementation follows the owner's issue #87 comment and approved projection/browser seams.
+
+## Campaign and geography persistence
+
+`FjordCampaign` wraps the existing GameplaySession. The scene never owns a second simulation, RNG or annual scheduler. Canonical commands, time, stocks, partnerships, mortality and expeditions remain authoritative in Simulation Core.
+
+A Fjord envelope contains bridge version 1, the full canonical campaign, the exact validated WorldBlueprint, generator/version/seed identity, metre-based layout version 1, the bound source mooring and selection identity. It is validated before the current campaign is replaced; failed imports are atomic. Refresh restores the envelope paused, without regenerating geography. Restart with the same founders retains that geography and mooring.
+
+`pillagers.gameplay-lab.v1` remains plain canonical JSON shared by both existing gameplay routes.
+`pillagers.fjord-play.v1` is its separate optional presentation sidecar;
+`pillagers.fjord-play.active.v1` is session storage for refresh. Save writes both local records. Load is explicit: updated canonical data is paired with a same-seed sidecar, or imported on the current same-seed geography. A different seed without a sidecar uses the pinned generator. Export canonical JSON remains available before assets finish loading; combined Fjord export waits for the mooring to resolve. Cross-route live switching is reserved for #88.
+
+## Physical plots, grass, soil and paths
+
+Household tents reserve dry, flat, disjoint 13m parcels. Those parcels are presentation reservations and do not create soil: tent-only campaigns have grass, with no example settlement dirt or paths. Building a permanent home replaces the original household tent at its existing plot. The physical building ID then owns that location through household transfers, vacancy, upgrades and Farmyard activation/deactivation.
+
+Only actual permanent buildings add soil around their parcels. Two or more permanent homes gain deterministic connecting paths over authoritative dry terrain, using the existing walking slope/elevation limits and avoiding tent and building parcels. Tent parcels retain grass. Paths are presentation only; they add no movement, production or gameplay rules. Salvage removes that building's soil and its connections. A vacant existing house keeps its soil. Updates change the native material's soil alpha map in place; the saved terrain triangles and biome records remain unchanged. If no safe connection is found, diagnostics report it rather than fabricating a route across water.
+
+People and animals have stable keyed outdoor positions, clear actual nature bounds, and inherit canonical age, stage, sex and assignment. New arrivals do not reshuffle survivors. Dead/away residents and dead/slaughtered animals leave the active scene while canonical history stays intact. No CPU settlement is rendered.
+
+## Source assets and declared fallbacks
+
+| Presentation | Source / mapping |
+| --- | --- |
+| Temporary household | Approved compact Meshy tent at metre scale |
+| House levels 0–3 | Existing Hut, Homestead, Longhouse, Great Hall |
+| Farmyard level 0 | Existing FarmHut plus FarmHutTerrain |
+| Farmyard level 1 | Existing FarmHomestead with nearest safe FarmHutTerrain; the 17m×18.6m FarmHomestead terrain exceeds the reserved plot and is explicitly diagnosed |
+| Farmyard levels 2–3 | Actual Longhouse/Great Hall retained; lightweight yard marker with an explicit missing-source-variant diagnostic |
+| Resident | Existing static Human_LOD2 body normalized to 1.8m; child scale 0.6 below 16 Winters; canonical age/sex metadata. Unique clothing, hair and DNA appearance are outside this slice |
+| Cattle | Existing prepared baby, young-adult, adult-female and adult-male GLBs/manifests |
+| Founding vessel | Real longship-drakkar source at the existing factory's coastal mooring, persisted once |
+
+Unavailable GLBs/manifests receive explicit metric placeholders. Ground maps and EZ-Tree have native/KayKit fallbacks. No safe remaining plot or outdoor position produces a retained selectable identity and diagnostic without a mesh. Rendering or asset failures do not change Simulation Core results or prevent time commands and canonical save/export. Existing prototype routes retain strict source validation; validation rules have not been weakened.
+
+See [the implementation QA report](qa/simulation-fjord-bridge/report.md) for checks, images and limitations.

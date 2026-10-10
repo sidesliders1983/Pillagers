@@ -15,12 +15,12 @@ const biomePalette = {
 };
 
 /** Native alphaMap uses a separate world UV channel; source maps retain their physical repeat. */
-function layerMask(world: WorldBlueprint, layer: number): DataTexture {
+function layerMask(world: WorldBlueprint, layer: number, wear?: readonly number[]): DataTexture {
     const data = new Uint8Array(world.terrain.heights.length * 4);
     for (let index = 0; index < world.terrain.heights.length; index++) {
         const biome = world.biomes.cells[index];
         const weight = layer === 1 ? Number(biome === 'water' || biome === 'shore') :
-            layer === 2 ? Number(biome === 'rock') : world.biomes.worn[index];
+            layer === 2 ? Number(biome === 'rock') : (wear ?? world.biomes.worn)[index];
         const value = Math.round(weight * 255);
         data.set([value, value, value, 255], index * 4);
     }
@@ -35,7 +35,7 @@ function layerMask(world: WorldBlueprint, layer: number): DataTexture {
 }
 
 export function createBlueprintTerrain(world: WorldBlueprint,
-    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none') {
+    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[]) {
     const positions: number[] = [];
     const sourceUvs: number[] = [];
     const maskUvs: number[] = [];
@@ -90,7 +90,7 @@ export function createBlueprintTerrain(world: WorldBlueprint,
             }
         }
         if (layer > 0) {
-            copy.alphaMap = layerMask(world, layer);
+            copy.alphaMap = layerMask(world, layer, wear);
             copy.transparent = true;
             copy.depthWrite = false;
             copy.polygonOffset = true;
@@ -115,4 +115,19 @@ export function disposeBlueprintTerrain(mesh: Mesh) {
         if (material instanceof MeshStandardMaterial) material.alphaMap?.dispose();
         material.dispose();
     }
+}
+
+/** Update only the native soil alpha map; geometry and saved geography stay unchanged. */
+export function updateBlueprintWear(mesh: Mesh, weights: readonly number[]) {
+    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    const material = materials[3];
+    if (!(material instanceof MeshStandardMaterial) || !(material.alphaMap instanceof DataTexture)) return;
+    const texture = material.alphaMap;
+    const data = texture.image.data as Uint8Array;
+    if (data.length !== weights.length * 4) throw new Error('Ground mask does not match the terrain grid.');
+    for (let i = 0; i < weights.length; i++) {
+        const value = Math.round(Math.max(0, Math.min(1, weights[i])) * 255);
+        data.set([value, value, value, 255], i * 4);
+    }
+    texture.needsUpdate = true;
 }
