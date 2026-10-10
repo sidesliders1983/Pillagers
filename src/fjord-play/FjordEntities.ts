@@ -72,11 +72,11 @@ export class FjordEntities {
         for (const entity of visible) {
             if (this.disposed)
                 return;
-            const signature = entity.asset + ':' + (entity.terrainAsset ?? '') + ':' +
-                (entity.kind === 'persona' && entity.status.age! < 16 ? 'child' : 'adult');
+            const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
             if (!entry || entry.signature !== signature) {
                 const model = await this.models.create(entity);
+                model.userData.asset = entity.asset;
                 if (this.disposed) {
                     this.remove(model);
                     return;
@@ -91,6 +91,7 @@ export class FjordEntities {
             entry.model.name = entity.selectionKey;
             entry.model.position.set(p.x, p.y, p.z);
             entry.model.rotation.y = p.rotation;
+            if (entity.kind === 'persona') entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
                 const yard = home?.getObjectByName('farmHutTerrain') ?? home?.getObjectByName('farmyardMarker');
@@ -110,6 +111,7 @@ export class FjordEntities {
         return [...this.entries].map(([key, entry]) => ({
             key, renderId: entry.model.uuid, ...entry.model.userData.canonical,
             position: entry.model.position.toArray(),
+            asset: entry.model.userData.asset, scale: entry.model.scale.toArray(),
             bounds: new Box3().setFromObject(entry.model),
             placeholder: (() => {
                 let result = false;

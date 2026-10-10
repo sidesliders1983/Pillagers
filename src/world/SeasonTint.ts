@@ -1,5 +1,5 @@
 import { Color, Group, Mesh, MeshStandardMaterial } from 'three';
-import { seasonBlend } from '../config/timeVisualization';
+import { seasonBlend, seasonPresets } from '../config/timeVisualization';
 /** Only material uniforms change during the cycle; geometry and instancing stay intact. */
 export class SeasonTint {
     private materials=new Map<MeshStandardMaterial,Color>();
@@ -42,6 +42,16 @@ export class SeasonTint {
         for(const [ground,base] of this.grounds)ground.color.copy(base).multiply(this.tint);
         this.tint.setHex(from.foliage).lerp(this.next.setHex(to.foliage),mix);
         for(const [material,base] of this.materials)material.color.copy(base).multiply(this.tint);
+    }
+    /** Apply a canonical weather severity without inventing a seasonal clock. */
+    setWinter(weight: number) {
+        const amount = Math.max(0, Math.min(1, weight));
+        const winter = seasonPresets.find(p => p.name === 'Winter')!;
+        for (const snow of this.snow.values()) snow.value = amount * .65;
+        this.tint.setHex(0xffffff).lerp(this.next.setHex(winter.ground), amount);
+        for (const [ground, base] of this.grounds) ground.color.copy(base).multiply(this.tint);
+        this.tint.setHex(0xffffff).lerp(this.next.setHex(winter.foliage), amount);
+        for (const [material, base] of this.materials) material.color.copy(base).multiply(this.tint);
     }
     dispose(){for(const material of this.materials.keys())material.dispose();}
 }
