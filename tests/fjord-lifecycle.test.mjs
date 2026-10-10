@@ -11,10 +11,13 @@ test('a child grows from canonical age while household placement and gameplay re
     const world = generateWorld({ seed: 32 });
     let view = projectFjordSettlement(state, world, createFjordLayout(world));
     const child = () => view.entities.find(e => e.id === 'astrid');
-    const position = { x: child().transform.x, y: child().transform.y, z: child().transform.z };
     assert.equal(child().status.age, 0);
-    assert.equal(child().transform.scale, .4);
-    for (let i = 0; i < 8; i++) state = core.applyCommand(state, { type: 'AdvanceWinter' });
+    assert.equal(child().transform, null, 'young children remain canonical but indoors');
+    for (let i = 0; i < 5; i++) state = core.applyCommand(state, { type: 'AdvanceWinter' });
+    view = projectFjordSettlement(state, world, view.layout);
+    const position = { x: child().transform.x, y: child().transform.y, z: child().transform.z };
+    assert.equal(child().transform.scale, .4 + .6 * 5 / 16);
+    for (let i = 0; i < 3; i++) state = core.applyCommand(state, { type: 'AdvanceWinter' });
     const before = core.serializeState(state);
     view = projectFjordSettlement(state, world, view.layout);
     assert.equal(child().status.age, 8);
@@ -114,7 +117,9 @@ test('25 actual Winters retain every present living identity, cattle stage and a
         assert.equal(view.weatherVisual.class, core.inspectWeather(state).class);
         const residents = Object.values(state.personas).filter(p => p.deathWinter === null && !core.personaAway(state, p.id)).map(p => p.id).sort();
         const rendered = view.entities.filter(e => e.kind === 'persona' && e.transform).map(e => e.id).sort();
-        assert.deepEqual(rendered, residents, 'Every resident needs a position in Winter ' + state.time.winter);
+        assert.deepEqual(view.entities.filter(e => e.kind === 'persona').map(e => e.id).sort(), residents, 'Indoor residents keep their canonical identity');
+        const outdoors = residents.filter(id => core.personaAge(state, id) >= 5 && !core.isProvidingCare(state, id));
+        assert.deepEqual(rendered, outdoors, 'Every outdoor resident needs a position in Winter ' + state.time.winter);
         assert.deepEqual(view.entities.filter(e => e.kind === 'cattle' && e.transform).map(e => e.id).sort(),
             Object.values(state.landing.cattle).filter(c => c.deathWinter === null).map(c => c.id).sort());
         for (const entity of view.entities.filter(e => e.kind === 'cattle')) {

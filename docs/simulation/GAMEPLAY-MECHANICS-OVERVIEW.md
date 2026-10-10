@@ -101,9 +101,9 @@ When a partnership forms, the new household seeks a residence.
 
 ## 5. Childcare
 
-After giving birth, the mother normally contributes 0% occupation production for five years while providing childcare.
+After giving birth, the mother normally contributes 0% occupation production for two Winters while providing childcare in a new campaign. Existing saves retain their configured duration.
 
-A later birth resets the five-year childcare period.
+A later birth resets the configured childcare period (two Winters in new campaigns).
 
 If an adult woman without an occupation is available, she may take over childcare:
 - the mother can return to her occupation;

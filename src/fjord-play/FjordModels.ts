@@ -1,4 +1,7 @@
-import { Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
+import { MeshyHumanFactory, type MeshyHuman } from '../characters/MeshyHuman';
+import { universalHumanProfile } from '../characters/UniversalHumanProfile';
+import { humanPreviewGroundSpeed } from '../character-lab/HumanPreviewPace';
+import { AnimationMixer, Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -6,15 +9,82 @@ import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { AssetManager } from '../core/AssetManager';
 import { placeSettlement } from '../world/PlaceSettlement';
 import type { FjordEntity } from './FjordProjection';
-/** Static source reuse; no new character assembly, animation or asset production. */
+/** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
     readonly diagnostics: string[] = [];
+    private humans = new MeshyHumanFactory();
+    private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
+        clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
+        fingerprint?: string; pace: number; groundSpeed: number; state: string }>();
+    reconcile(model: Object3D, entity: FjordEntity) {
+        const actor = this.actors.get(model);
+        if (!actor?.human || !entity.dna) return;
+        const fingerprint = JSON.stringify(entity.dna);
+        if (actor.fingerprint !== fingerprint) {
+            model.scale.setScalar(1);
+            actor.human.applyDNA({ ...entity.dna, age: Math.min(100, entity.dna.age) });
+            actor.fingerprint = fingerprint;
+            const profile = universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) });
+            model.scale.setScalar(entity.transform!.scale / (1 - .35 * profile.weights.Child));
+            const position = model.position.clone(), rotation = model.quaternion.clone();
+            model.position.set(0, 0, 0); model.quaternion.identity();
+            try { actor.groundSpeed = humanPreviewGroundSpeed(actor.human, 'Walk'); }
+            finally { model.position.copy(position); model.quaternion.copy(rotation); }
+            if (!actor.human.clips.some(c => c.name === 'Walking'))
+                this.diagnostics.push(entity.id + ': missing Walking source clip; stable Idle pose fallback.');
+            actor.human.setAnimation('Idle');
+            actor.pace = actor.groundSpeed * profile.motion.cadence;
+            actor.state = 'Idle';
+        }
+        model.userData.appearance = model.userData.universalHumanProfile;
+        model.userData.pace = actor.pace;
+    }
+    pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
+    animate(model: Object3D, state: 'Idle' | 'Walk', speed: number, delta: number) {
+        const actor = this.actors.get(model);
+        if (!actor) return;
+        if (actor.human) {
+            if (actor.human.clips.some(c => c.name === (state === 'Walk' ? 'Walking' : 'Idle_02'))) {
+                actor.human.setAnimation(state);
+                actor.human.setPlaybackRate(state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.groundSpeed)) : null);
+                actor.human.update(delta);
+            }
+        } else if (actor.mixer) {
+            const clip = actor.clips!.find(c => c.name === state);
+            if (clip && actor.state !== state) {
+                const next = actor.mixer.clipAction(clip).reset().play();
+                actor.action?.crossFadeTo(next, .15, false);
+                actor.action = next; actor.state = state;
+            }
+            actor.mixer.timeScale = state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.pace)) : 1;
+            actor.mixer.update(delta);
+        }
+        model.userData.motion = { state, speed, clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
+    }
+    release(model: Object3D) {
+        const actor = this.actors.get(model);
+        if (actor?.human) actor.human.dispose();
+        if (actor?.mixer) { actor.mixer.stopAllAction(); actor.mixer.uncacheRoot(model); }
+        this.actors.delete(model);
+        return Boolean(actor?.human);
+    }
     private templates = new Map<string, Promise<Object3D>>();
     private loaded = new Set<Object3D>();
+    private motionSources = new WeakMap<Object3D, { clips: import('three').AnimationClip[]; pace: number }>();
     private draco = new DRACOLoader().setDecoderPath(import.meta.env.BASE_URL + 'draco/');
     private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).setDRACOLoader(this.draco);
     constructor(private assets: AssetManager) { }
     async create(entity: FjordEntity): Promise<Object3D> {
+        if (entity.kind === 'persona' && entity.dna) {
+            try {
+                const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) });
+                this.actors.set(human.root, { human, pace: 0, groundSpeed: 0, state: 'Idle' });
+                this.reconcile(human.root, entity);
+                return human.root;
+            } catch (error) {
+                this.diagnostics.push(entity.id + ': DNA body unavailable; explicit static fallback — ' + String(error));
+            }
+        }
         if (entity.kind === 'building') {
             const model = placeSettlement(this.assets, [{ id: entity.selectionKey, key: entity.asset,
                     terrainKey: entity.terrainAsset === 'farmyardMarker' ? undefined : entity.terrainAsset, x: 0, z: 0, rotation: 0,
@@ -50,11 +120,23 @@ export class FjordModels {
             template = this.load(entity);
             this.templates.set(cacheKey, template);
         }
-        const root = clone(await template);
+        const source = await template;
+        const root = clone(source);
+        if (entity.kind === 'persona') root.userData.placeholder = true;
+        const sourceMotion = this.motionSources.get(source);
+        if (entity.kind === 'cattle' && sourceMotion) {
+            const clips = sourceMotion.clips;
+            const mixer = new AnimationMixer(root), idle = clips.find(c => c.name === 'Idle');
+            const action = idle ? mixer.clipAction(idle).play() : undefined;
+            const pace = sourceMotion.pace;
+            this.actors.set(root, { mixer, clips, action, pace, groundSpeed: pace, state: 'Idle' });
+            if (!clips.some(c => c.name === 'Walk') || !idle)
+                this.diagnostics.push(entity.id + ': missing Idle/Walk source clip; stable static pose fallback.');
+        }
         return root;
     }
     private async load(entity: FjordEntity) {
-        let url: string, height: number | undefined;
+        let url: string, height: number | undefined, pace = 0;
         try {
             if (entity.kind === 'persona') {
                 url = 'game-assets/human/Human_LOD2.glb';
@@ -70,10 +152,12 @@ export class FjordModels {
                     throw new Error('Invalid cattle source metadata');
                 url = 'game-assets/cattle/' + entity.asset + '/' + manifest.file;
                 height = manifest.height;
+                pace = manifest.walkSpeedMps ?? .28;
             }
             else
                 url = 'assets/Terrain/longship-drakkar.glb';
-            const source = (await this.loader.loadAsync(import.meta.env.BASE_URL + url)).scene;
+            const gltf = await this.loader.loadAsync(import.meta.env.BASE_URL + url);
+            const source = gltf.scene;
             source.updateMatrixWorld(true);
             const bounds = new Box3().setFromObject(source), size = bounds.getSize(new Vector3());
             if (!Number.isFinite(size.y) || size.y <= 0)
@@ -84,6 +168,7 @@ export class FjordModels {
             source.position.set(-center.x * scale, -bounds.min.y * scale, -center.z * scale);
             const root = new Group();
             root.add(source);
+            this.motionSources.set(root, { clips: gltf.animations, pace });
             root.traverse(node => { if (node instanceof Mesh) {
                 node.castShadow = true;
                 node.receiveShadow = true;
@@ -110,6 +195,7 @@ export class FjordModels {
         }
     }
     dispose() {
+        for (const model of this.actors.keys()) this.release(model);
         const geometries = new Set<import('three').BufferGeometry>();
         const materials = new Set<import('three').Material>();
         const textures = new Set<import('three').Texture>();

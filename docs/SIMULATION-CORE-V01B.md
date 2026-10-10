@@ -32,7 +32,7 @@ All balance settings live in the saved `mechanics.config`; these are explicit co
 | Partnerships | Eligible unpartnered adults, opposite sex in this prototype; 10% per eligible pair per Winter |
 | Fertility | Partnered female aged 18–40 inclusive; 25% annual chance; sufficient Food for next Winter |
 | Birth cooldown | Two complete Winters: birth at 801 permits the next birth at 804 |
-| Childcare | Five complete Winters of zero maternal work; later births reset the endpoint |
+| Childcare | New campaigns: two complete Winters of zero work for the actual caregiver; later births reset the endpoint. Existing saves retain their configured duration. |
 | Caregiver | Adult female with no occupation or conflicting childcare; one donor per mother's group; may live elsewhere |
 | Caregiver opportunity cost | Zero work; fertility blocked for any Winter she served, even if replaced before its boundary |
 | Trait inheritance | Parental mean; each trait independently has 25% chance to copy a seeded chosen parent's value |

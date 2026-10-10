@@ -1,3 +1,6 @@
+import { LivingWorldController } from './LivingWorldController';
+import { FjordCharacterProfile } from './FjordCharacterProfile';
+import type { FjordEntity } from './FjordProjection';
 import { SelectionLabels } from './SelectionLabels';
 import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
@@ -81,6 +84,9 @@ export class FjordPlay {
         const persist = () => persistSettlement(this.shared, say);
         let assets: AssetManager | undefined, models: FjordModels | undefined;
         let layer: FjordEntities | undefined, world: Awaited<ReturnType<typeof createWorld>> | undefined;
+        let motion: LivingWorldController | undefined, profile: FjordCharacterProfile | undefined;
+        let liveMarkers: ReturnType<typeof this.shared.selectionPresentation> = [];
+        let sceneEntities: readonly FjordEntity[] = [];
         let syncScene: (() => Promise<void>) | undefined;
         let sceneWork: Promise<void> | undefined;
         const selectionLabels = new SelectionLabels(document.querySelector<HTMLElement>('#fjord-selection-labels')!,
@@ -92,7 +98,10 @@ export class FjordPlay {
             productionLabels.reset();
         };
         const highlight = () => {
-            layer?.select(this.shared.selectionPresentation());
+            liveMarkers = this.shared.selectionPresentation();
+            layer?.select(liveMarkers);
+            const selected = this.shared.selection;
+            profile?.select(sceneEntities.find(e => e.kind === selected?.kind && e.id === selected?.id));
             canvas.dataset.highlight = JSON.stringify(layer?.root.userData.selection ?? null);
             const markers = (layer?.root.userData.markers ?? []) as SelectionLabel[];
             canvas.dataset.markers = JSON.stringify(markers);
@@ -220,6 +229,7 @@ export class FjordPlay {
             say('New campaign, paused.');
         }));
         const select = (kind: string, id: string) => {
+            profile?.reopen();
             this.shared.select({ kind: kind as EntityKind, id });
             const entity = this.campaign.project().entities.find(e => e.kind === kind && e.id === id);
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
@@ -285,6 +295,7 @@ export class FjordPlay {
             renderer.setAnimationLoop(null);
             observer?.disconnect();
             controller.dispose();
+            profile?.dispose();
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
@@ -302,6 +313,7 @@ export class FjordPlay {
         models = new FjordModels(assets);
         layer = new FjordEntities(models);
         scene.add(layer.root);
+        profile = new FjordCharacterProfile(camera, canvas);
         const cleared = new Set<string>();
         let groundSignature = "";
         const rebuildWorld = async (): Promise<void> => {
@@ -327,6 +339,7 @@ export class FjordPlay {
             weatherSignature = "";
             scene.add(next.root);
             cleared.clear();
+            motion = new LivingWorldController(this.campaign.blueprint);
             groundSignature = "";
             lighting?.dispose();
             lighting = new WorldLighting(scene, renderer, assets!, next.hearth, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
@@ -392,7 +405,11 @@ export class FjordPlay {
                                 cleared.add(pointKey);
                             }
                         }
+                    sceneEntities = view.entities;
                     await layer!.sync(view.entities);
+                    motion!.reconcile(view.entities, view.ground);
+                    layer!.configureMotion(motion!);
+                    layer!.advance(motion!, 0, false);
                     if (this.stopped || this.shared.transferring)
                         return;
                     highlight();
@@ -402,7 +419,8 @@ export class FjordPlay {
                     canvas.dataset.environment = JSON.stringify(world!.describe());
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                         ...assets!.diagnostics, ...models!.diagnostics,
-                        'Shared static human body; unique clothing, hair and DNA appearance are outside this slice.',
+                        'Verified Fjordside DNA body and source Idle/Walk clips; clothing and hair remain unequipped.',
+                        'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                         'Geography: ' + view.layout.geographyId].join('\n');
                 } while (this.queued && !this.stopped);
             })().finally(() => {
@@ -452,12 +470,30 @@ export class FjordPlay {
         const clock = new Clock();
         let time = 0;
         let cameraSignature = '';
+        let lastDiagnostics = 0, activeTime = 0;
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
         renderer.setAnimationLoop(() => {
-            const delta = Math.min(clock.getDelta(), .1);
+            const elapsed = clock.getDelta(), delta = Math.min(elapsed, .1);
             time += delta;
             controller.update(delta);
             camera.updateMatrixWorld();
+            const running = this.session.running && !document.hidden && !this.shared.transferring && !this.stopped;
+            const motionDelta = Math.min(elapsed, 1);
+            if (running) activeTime += motionDelta;
+            motion!.advance(motionDelta, running, !document.hidden);
+            layer!.advance(motion!, motionDelta, running);
+            layer!.select(liveMarkers);
+            selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
+            const rendered = layer!.describe();
+            productionLabels.setAnchors(rendered);
+            profile!.update(this.shared.selection?.kind === 'persona' ? layer!.bounds('persona:' + this.shared.selection.id) : undefined);
+            if (performance.now() - lastDiagnostics > 500) {
+                canvas.dataset.rendered = JSON.stringify(rendered);
+                canvas.dataset.motion = JSON.stringify(motion!.inspect());
+                canvas.dataset.motionTime = String(activeTime);
+                canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
+                lastDiagnostics = performance.now();
+            }
             selectionLabels.update(camera, canvas.clientWidth, canvas.clientHeight);
             productionLabels.update(camera, canvas.clientWidth, canvas.clientHeight);
             const signature = JSON.stringify({ world: camera.matrixWorld.toArray(),

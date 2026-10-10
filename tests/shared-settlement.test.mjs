@@ -119,6 +119,12 @@ test('resident selection identifies the canonical partner, child and home; home 
     const shared = new SharedSettlement(32);
     shared.importJSON(core.serializeState(state));
     shared.select({ kind: 'persona', id: fatherId });
+    assert.deepEqual(shared.selectionPresentation().map(m => [m.role, m.kind, m.id]), [
+        ['selected', 'persona', fatherId], ['home', 'building', 'house-1']
+    ], 'indoor newborn and active caregiver have no outdoor markers');
+    for (let i = 0; i < 5; i++) state = core.applyCommand(state, { type: 'AdvanceWinter' });
+    shared.importJSON(core.serializeState(state));
+    shared.select({ kind: 'persona', id: fatherId });
     const before = shared.session.saveJSON();
     assert.deepEqual(shared.selectionPresentation().map(m => [m.role, m.kind, m.id]), [
         ['selected', 'persona', fatherId], ['partner', 'persona', motherId],

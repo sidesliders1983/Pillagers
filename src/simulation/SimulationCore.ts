@@ -8,7 +8,7 @@ export {inspectWeather,inspectWeatherExposure,defaultWeatherConfig,weatherClasse
 import {eventFacts} from './EventFacts';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 export {inspectBuilding, inspectWork, occupationAptitude, occupationIds} from './Mechanics';
-export {caregiverEligible} from './FamilyMechanics';
+export {caregiverEligible, isProvidingCare} from './FamilyMechanics';
 export {landingSummary} from './Landing';
 import {createCampaign as generateCampaign, isLandingCommand, applyLandingCommand, validateLanding, migrateLanding} from './Landing';
 import type {LandingState, LandingCommand, LandingConfig} from './Landing';

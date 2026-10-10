@@ -10,7 +10,9 @@ and commands. Presentation adds no RNG, lifecycle/economy rules or save schema c
 
 ## Residents and cattle
 
-Present living residents receive one static existing Human_LOD2 instance. Canonical age uses
+Current behavior is extended by [Living Fjord v0.6A](LIVING-FJORD-V06A.md): residents use the original Fjordside DNA body adapter and ambient Idle/Walk. Children below five and active caregivers stay indoors.
+
+The original v0.5C slice gave present living residents one static existing Human_LOD2 instance. Canonical age uses
 birthWinter, never the age stored in the original DNA. Presentation scale grows linearly
 from 40% at birth to 100% at 16 Winters (70% at eight). The same model instance and position
 remain during growth. This is uniform scale, not anatomical morphing or an outfit system.
@@ -26,7 +28,7 @@ Residents away on expeditions remain canonical but correctly have no local rende
 Building level mappings and active Farmyard source yards remain those of v0.5A/B. Empty
 physical buildings remain visible while they exist in Core. Salvage/collapse removes them.
 Tents retain grass; permanent homes create soil and safe connecting paths. Source fallback
-limits remain explicit: static shared humans, FarmHut yard at FarmHomestead level, a yard
+limits remain explicit: FarmHut yard at FarmHomestead level, a yard
 marker for higher levels, and metric placeholders when a model is unavailable.
 
 ## Weather presentation

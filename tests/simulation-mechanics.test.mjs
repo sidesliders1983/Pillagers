@@ -204,7 +204,7 @@ test('births preserve lineage, obey two complete cooldown Winters and are blocke
   assert.equal(Object.keys(state.personas).length,4);
   state=core.advanceWinter(state);
   assert.equal(Object.keys(state.personas).length,5);
-  assert.equal(state.mechanics.people.liv.childcareUntilWinter,809);
+  assert.equal(state.mechanics.people.liv.childcareUntilWinter,806);
   const shortage=fertile();shortage.stocks.food=5;
   assert.equal(Object.keys(core.advanceWinter(shortage).personas).length,3);
 });
@@ -235,8 +235,8 @@ test('dominant genetic legacy is rolled per child and its marker lasts only one 
 });
 
 
-test('childcare stops mother output; an eligible player caregiver restores it at work and fertility opportunity cost', () => {
-  let state=perfectFarmer(fertile(),'liv');
+test('configured care stops mother output; an eligible player caregiver restores it at work and fertility opportunity cost', () => {
+  let state=perfectFarmer(fertile({childcareWinters:5}),'liv');
   state=core.advanceWinter(state);
   state.mechanics.config.fertilityChanceBps=0;
   const before=produced(state,'food');
@@ -261,7 +261,7 @@ test('childcare stops mother output; an eligible player caregiver restores it at
 test('initial family births also seed maternal cooldown and childcare state', () => {
   const state=core.createSettlement(27,{...quiet,fertilityChanceBps:10000});
   assert.equal(state.mechanics.people.liv.lastBirthWinter,800);
-  assert.equal(state.mechanics.people.liv.childcareUntilWinter,805);
+  assert.equal(state.mechanics.people.liv.childcareUntilWinter,802);
   assert.equal(state.personas.liv.dna.sex,'female');
   let next=core.advanceWinter(state);next=core.advanceWinter(next);
   assert.equal(next.events.filter(e=>e.type==='ChildBorn').length,0);
@@ -284,8 +284,8 @@ test('save/load rejects fractional prototype economics, invalid genealogy and in
   }
 });
 
-test('autonomous caregiver selection respects player replacement and care ends after five complete Winters', () => {
-  let state=perfectFarmer(fertile(),'liv');
+test('autonomous caregiver selection respects replacement and a saved five-Winter care period', () => {
+  let state=perfectFarmer(fertile({childcareWinters:5}),'liv');
   addPerson(state,'a-donor',[],'female',780);addPerson(state,'b-donor',[],'female',780);
   state.households.donors={id:'donors',memberIds:['a-donor','b-donor'],residenceId:null};
   state=core.advanceWinter(state);

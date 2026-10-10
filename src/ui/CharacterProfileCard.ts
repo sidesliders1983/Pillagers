@@ -1,8 +1,8 @@
+import { renderCharacterProfile } from './CharacterProfileContent';
 import { PerspectiveCamera, Scene, Raycaster, Vector2, Vector3, Mesh, BoxGeometry, MeshBasicMaterial, Object3D } from 'three';
-import { CharacterDNA, traitKeys, heritageKeys } from '../characters/CharacterDNA';
+import { CharacterDNA } from '../characters/CharacterDNA';
 import { Phenotype } from '../characters/Phenotype';
 import { characterName, fullName } from '../characters/naming/generateName';
-import { heritageLabels } from '../characters/heritageProfiles';
 import { Villager } from '../entities/Villager';
 type Character={dna:CharacterDNA;phenotype:Phenotype;villager:Villager};
 export class CharacterProfileCard {
@@ -12,6 +12,7 @@ export class CharacterProfileCard {
     private charactersByRoot=new Map<Object3D,Character>();
     private geometry=new BoxGeometry(1,1,1);
     private material=new MeshBasicMaterial({visible:false});
+    private escape = (event: KeyboardEvent) => { if (event.key === 'Escape') this.clear(); };
     constructor(private camera:PerspectiveCamera,private canvas:HTMLCanvasElement,private scene:Scene,characters:Character[]){
         this.card.id='character-profile';this.card.className='character-profile';this.card.hidden=true;
         for(const edge of ['top','right','bottom','left'])this.card.style.setProperty(`--safe-${edge}`,`env(safe-area-inset-${edge}, 0px)`);
@@ -20,7 +21,7 @@ export class CharacterProfileCard {
         // A generous invisible silhouette makes small RTS characters touchable.
         for(const character of characters)this.attach(character);
         this.card.addEventListener('click',event=>{if((event.target as HTMLElement).closest('button'))this.clear();});
-        window.addEventListener('keydown',event=>{if(event.key==='Escape')this.clear();});
+        window.addEventListener('keydown',this.escape);
     }
     private attach(character:Character){
         const root=character.villager.visual,pick=new Mesh(this.geometry,this.material);
@@ -35,7 +36,7 @@ export class CharacterProfileCard {
         if(pick){pick.scale.set(Math.max(.75,character.phenotype.shoulderWidth*1.5),character.phenotype.height,.75);pick.position.y=character.phenotype.height/2;}
         if(this.selected===character)this.renderCard(character);
     }
-    dispose(){this.geometry.dispose();this.material.dispose();this.card.remove();this.charactersByRoot.clear();}
+    dispose(){window.removeEventListener('keydown',this.escape);this.geometry.dispose();this.material.dispose();this.card.remove();this.charactersByRoot.clear();}
     select(x:number,y:number):boolean {
         const rect=this.canvas.getBoundingClientRect();this.pointer.set((x-rect.left)/rect.width*2-1,-(y-rect.top)/rect.height*2+1);
         this.scene.updateMatrixWorld(true);this.camera.updateMatrixWorld();this.ray.setFromCamera(this.pointer,this.camera);
@@ -48,21 +49,7 @@ export class CharacterProfileCard {
     }
     private renderCard(character:Character){
         const {dna}=character,name=characterName(dna);
-        this.card.innerHTML='<button class="profile-close" aria-label="Close character profile">×</button><span class="profile-eyebrow">FJORDSIDE / INHABITANT</span><h2></h2><p class="profile-identity"></p><h3>Character traits</h3><dl class="profile-traits"></dl><h3>Heritage profile</h3><div class="profile-heritage"></div>';
-        this.card.querySelector('h2')!.textContent=fullName(name);
-        this.card.querySelector('.profile-identity')!.textContent=`${dna.age} years · ${dna.sex==='male'?'Male':'Female'} · ${heritageLabels[name.dominantCulture]}`;
-        const traits=this.card.querySelector('dl')!;
-        for(const key of traitKeys){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=key[0].toUpperCase()+key.slice(1);dd.textContent=`${Math.round(dna.traits[key]*100)}%`;traits.append(dt,dd);}
-        const heritage=this.card.querySelector('.profile-heritage')!;
-        const sorted=[...heritageKeys].filter(key=>dna.heritage[key]>0).sort((a,b)=>dna.heritage[b]-dna.heritage[a]);
-        const minor=document.createElement('details');minor.className='profile-minor';
-        const summary=document.createElement('summary');summary.textContent=`+ ${Math.max(0,sorted.length-3)} minor ancestries`;minor.append(summary);
-        for(const [index,key] of sorted.entries()){
-            const row=document.createElement('div'),label=document.createElement('span'),value=document.createElement('strong');
-            label.textContent=heritageLabels[key];value.textContent=`${(dna.heritage[key]*100).toFixed(1)}%`;row.append(label,value);(index<3?heritage:minor).append(row);
-        }
-        if(sorted.length>3)heritage.append(minor);
-        this.card.dataset.characterId=String(character.villager.id);this.card.hidden=false;
+        renderCharacterProfile(this.card, dna, fullName(name), String(character.villager.id));
     }
     private clear(){this.selected=null;this.card.hidden=true;delete this.card.dataset.characterId;}
     update(){

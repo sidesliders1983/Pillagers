@@ -32,7 +32,7 @@ export const defaultPrototypeConfig: PrototypeConfig = {
     mortalityBands:defaultMortalityBands,
     foodAdultAge:16,ageFullProductivityThrough:49,agePenaltyBpsPerWinter:200,ageProductivityFloorBps:5000,collapseDebtWinters:3,salvageBps:5000,
     dominantLegacyChanceBps:2500,
-    fertilityMinAge:18,fertilityMaxAge:40,birthCooldownWinters:2,childcareWinters:5,
+    fertilityMinAge:18,fertilityMaxAge:40,birthCooldownWinters:2,childcareWinters:2,
     careerMinimumGainBps:1000,experienceRetentionBpsPerWinter:100,
     apprenticeshipBonusBps:1000,apprenticeshipTicks:1000,
     switchProductivityBps:7500,switchTicks:1000,

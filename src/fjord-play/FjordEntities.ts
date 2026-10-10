@@ -1,3 +1,5 @@
+import { createFjordYardSurface } from './FjordYardSurface';
+import type { LivingWorldController } from './LivingWorldController';
 import type { SelectionMarker } from '../play/SelectionPresentation';
 import { Box3, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector3 } from 'three';
 import { FjordModels } from './FjordModels';
@@ -8,8 +10,11 @@ export class FjordEntities {
     private entries = new Map<string, {
         signature: string;
         model: Object3D;
+        localBounds?: Box3;
+        boundsSignature?: string;
     }>();
     private disposed = false;
+    private yardSamplers = new Map<string, { signature: string; sample: (x: number, z: number, clearance: number) => number | null }>();
     private markers = new Map<string, {
         mesh: Mesh<RingGeometry, MeshBasicMaterial>;
         radius: number;
@@ -31,7 +36,7 @@ export class FjordEntities {
             const model = this.entries.get(marker.selectionKey)?.model;
             if (!model)
                 continue;
-            const box = new Box3().setFromObject(model);
+            const box = this.bounds(marker.selectionKey)!;
             const size = box.getSize(new Vector3()), center = box.getCenter(new Vector3());
             const radius = Math.max(.9, Math.max(size.x, size.z) / 2 + .3);
             let entry = this.markers.get(marker.selectionKey);
@@ -91,7 +96,8 @@ export class FjordEntities {
             entry.model.name = entity.selectionKey;
             entry.model.position.set(p.x, p.y, p.z);
             entry.model.rotation.y = p.rotation;
-            if (entity.kind === 'persona') entry.model.scale.setScalar(p.scale);
+            this.models.reconcile(entry.model, entity);
+            if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
                 const yard = home?.getObjectByName('farmHutTerrain') ?? home?.getObjectByName('farmyardMarker');
@@ -104,6 +110,48 @@ export class FjordEntities {
                 }
             }
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
+            entry.model.updateMatrixWorld(true);
+            const boundsSignature = JSON.stringify([entity.asset, entity.dna, entity.transform!.scale]);
+            if (entry.boundsSignature !== boundsSignature) {
+                entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
+                entry.boundsSignature = boundsSignature;
+            }
+        }
+    }
+    bounds(key: string) {
+        const entry = this.entries.get(key);
+        return entry?.localBounds?.clone().translate(entry.model.position);
+    }
+    configureMotion(motion: LivingWorldController) {
+        for (const id of this.yardSamplers.keys())
+            if (!this.entries.get('building:' + id)?.model.userData.canonical.farmyard) this.yardSamplers.delete(id);
+        for (const [key, entry] of this.entries) {
+            motion.setPace(key, this.models.pace(entry.model));
+            const canonical = entry.model.userData.canonical;
+            if (canonical?.grazingZone !== 'yard') continue;
+            const farm = this.entries.get('building:' + canonical.assignment)?.model;
+            const yard = farm?.getObjectByName('farmHutTerrain') ?? farm?.getObjectByName('farmyardMarker');
+            if (!yard || !farm) continue;
+            let sampler = this.yardSamplers.get(canonical.assignment);
+            if (!sampler || sampler.signature !== farm.uuid) {
+                const house = farm.getObjectByName(farm.userData.asset);
+                sampler = { signature: farm.uuid,
+                    sample: createFjordYardSurface(yard, house, farm.position.y) };
+                this.yardSamplers.set(canonical.assignment, sampler);
+            }
+            const clearance = canonical.stage === 'Young' ? .5 :
+                canonical.stage === 'Young Adult' ? .7 : .9;
+            const sample = sampler.sample;
+            motion.setYardSurface(key, (x, z) => sample(x, z, clearance));
+        }
+    }
+    advance(motion: LivingWorldController, delta: number, running: boolean) {
+        for (const agent of motion.inspect()) {
+            const model = this.entries.get(agent.key)?.model;
+            if (!model) continue;
+            model.position.set(agent.x, agent.y, agent.z);
+            model.rotation.y = agent.rotation;
+            if (running) this.models.animate(model, agent.state, agent.speed, delta);
         }
     }
     describe() {
@@ -112,7 +160,8 @@ export class FjordEntities {
             key, renderId: entry.model.uuid, ...entry.model.userData.canonical,
             position: entry.model.position.toArray(),
             asset: entry.model.userData.asset, scale: entry.model.scale.toArray(),
-            bounds: new Box3().setFromObject(entry.model),
+            bounds: this.bounds(key),
+            appearance: entry.model.userData.appearance, motion: entry.model.userData.motion,
             placeholder: (() => {
                 let result = false;
                 entry.model.traverse(n => {
@@ -125,6 +174,7 @@ export class FjordEntities {
     }
     private remove(model: Object3D) {
         model.removeFromParent();
+        if (this.models.release(model)) return;
         model.traverse(node => {
             if (node instanceof SkinnedMesh)
                 node.skeleton.dispose();
@@ -136,6 +186,7 @@ export class FjordEntities {
             this.remove(entry.model);
         this.select([]);
         this.entries.clear();
+        this.yardSamplers.clear();
         this.root.removeFromParent();
     }
 }

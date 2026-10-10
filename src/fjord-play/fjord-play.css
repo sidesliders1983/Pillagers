@@ -52,3 +52,5 @@ body.fjord-play { margin: 0; background: #152b28; color: #ece7d2; overflow: hidd
 
 #fjord-weather-information { border-bottom: 1px solid #546652; margin-bottom: 10px; padding-bottom: 6px; font: 12px/1.4 system-ui,sans-serif; }
 #fjord-weather-information .weather-warning { color: #f0c78b; }
+
+body.fjord-play .character-profile { color: #35483f; }

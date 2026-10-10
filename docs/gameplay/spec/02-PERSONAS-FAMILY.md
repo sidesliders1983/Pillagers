@@ -78,7 +78,7 @@ Rules:
 > **As a player, I want childbirth to create a labor trade-off, so that population growth has an economic cost and caregiver choices matter.**
 
 Rules:
-- mother normally produces 0% occupation output for 5 Winters;
+- mother normally produces 0% occupation output for 2 Winters in new campaigns; existing saves retain their configured period;
 - later birth resets period;
 - eligible adult woman with no occupation may take over;
 - one caregiver per childcare situation;
