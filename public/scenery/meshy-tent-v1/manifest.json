@@ -27,25 +27,31 @@
   "source": "Assets/Houses/Tent/tent-meshy-original.glb",
   "sourceSha256": "76b20c6bb50f61823d67703fc7ed6a0fe3cb1d3127afbcfc0c123b672177ab44",
   "sourceBytes": 7660788,
-  "bytes": 2014820,
-  "sha256": "a482ea367fb2bff80fd85a4f2aff1428f015743007ec88f1831c732bd13c3ee4",
+  "bytes": 2014824,
+  "sha256": "c2769d0fab2dcd0fb23de903a146a524fe7ceedcded517c48de8edfae52f5dd3",
   "triangles": 6754,
   "bounds": {
     "min": [
-      -1.628186190075975,
-      -0.00006359795878596586,
-      -2.2875729735965815
+      -0.9393381865822934,
+      -0.0000366911300688777,
+      -0.9999
     ],
     "max": [
-      1.628186190075975,
-      2.6000635979587856,
-      2.2875729735965815
+      0.9393381865822934,
+      1.5000366911300689,
+      0.9999
     ]
   },
   "units": "metres",
   "up": "+Y",
   "front": "+Z",
-  "height": 2.6,
+  "height": 1.5,
+  "maximumFootprint": 2,
+  "axisScales": [
+    1.3871576612223775,
+    1.3871576612223775,
+    1.0509680783403745
+  ],
   "textureLimit": 1024,
   "doubleSided": true
 }

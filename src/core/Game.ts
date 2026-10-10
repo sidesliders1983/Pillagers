@@ -152,13 +152,13 @@ export class Game {
             };
             const tentView = (interior: boolean) => {
                 const tent = state.tent!;
-                const distance = interior ? 1.5 : 5.5;
-                const side = interior ? 0 : .65;
+                const distance = interior ? .65 : 3.5;
+                const side = interior ? 0 : .4;
                 const yaw = tent.rotation;
                 return { position: [tent.x + distance*Math.sin(yaw) + side*Math.cos(yaw),
-                    tent.y + (interior ? 1.05 : 2),
+                    tent.y + (interior ? .6 : 1.25),
                     tent.z + distance*Math.cos(yaw) - side*Math.sin(yaw)],
-                    target: [tent.x,tent.y + (interior ? 1.05 : 1.15),tent.z] };
+                    target: [tent.x,tent.y + (interior ? .6 : .66),tent.z] };
             };
             if (view.startsWith('tent')) {
                 if (state.tent) controller.setView(tentView(view === 'tent-interior'));

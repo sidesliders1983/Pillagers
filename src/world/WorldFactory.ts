@@ -15,7 +15,7 @@ import { FjordsideWater } from './FjordsideWater';
 import { BoatFloat } from './BoatFloat';
 import { placeSettlement } from './PlaceSettlement';
 import { blueprintMovement } from './BlueprintMovement';
-import { planWorldAttachments, attachmentClearance, WorldAttachment } from './WorldAttachments';
+import { planWorldAttachments, attachmentClearance, initialTentFootprint, WorldAttachment } from './WorldAttachments';
 import { hearth } from './SettlementLayout';
 
 export interface WorldSelection {
@@ -24,7 +24,7 @@ export interface WorldSelection {
     quality: 'standard' | 'low';
     anisotropy?: number;
     attachments?: WorldAttachment[];
-    attachmentVersion?: 'authored-props-v1' | 'authored-props-v2';
+    attachmentVersion?: 'authored-props-v1' | 'authored-props-v2' | 'authored-props-v3';
 }
 
 /** Separate geography save: Simulation Core resources, expeditions and residents are untouched. */
@@ -40,7 +40,7 @@ export function parseFjordsideSave(text: string): WorldSelection {
     const blueprint = saved.mode === 'generated' ?
         parseWorld(JSON.stringify({ schemaVersion: 1,blueprint: saved.blueprint })) : undefined;
     const version = saved.attachmentVersion;
-    if (version !== undefined && !['authored-props-v1','authored-props-v2'].includes(version))
+    if (version !== undefined && !['authored-props-v1','authored-props-v2','authored-props-v3'].includes(version))
         throw new Error('Invalid production attachment version.');
     if (blueprint) {
         const expected = version === 'authored-props-v1' ? 20 : 21;
@@ -61,10 +61,24 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
         parseWorld(serializeWorld(selection.blueprint!)) : undefined;
     if (selection.mode === 'generated' && !blueprint?.validation.accepted)
         throw new Error('Only a validated WorldBlueprint can be activated in Fjordside.');
-    const attachmentVersion = selection.attachmentVersion ?? 'authored-props-v2';
-    const includeTent = attachmentVersion === 'authored-props-v2';
+    const previousTentPreview = selection.attachmentVersion === 'authored-props-v2';
+    const attachmentVersion = previousTentPreview ? 'authored-props-v3' :
+        selection.attachmentVersion ?? 'authored-props-v3';
+    const includeTent = attachmentVersion !== 'authored-props-v1';
     const root = new Group();
     const attachments: WorldAttachment[] = [];
+    const restoreAttachments = (expected: WorldAttachment[]) => {
+        if (!selection.attachments) return;
+        if (JSON.stringify(selection.attachments) !== JSON.stringify(expected))
+            throw new Error('Saved production attachments no longer match the locked source contract.');
+        if (includeTent) {
+            const previous = expected.find(item => item.key === 'tent')!;
+            const resized = attachments.find(item => item.key === 'tent')!;
+            // The smaller source box fits within the already validated old footprint.
+            // Retain its location instead of moving it to a newly available candidate.
+            Object.assign(resized, { x: previous.x,y: previous.y,z: previous.z });
+        }
+    };
     let classic: World | undefined;
     let grounds: Awaited<ReturnType<typeof loadWorldGroundMaterials>> | undefined;
     let pines: Awaited<ReturnType<typeof loadPineModels>> | undefined;
@@ -100,8 +114,18 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             attachments.push(...planWorldAttachments(assets,blueprint,includeTent));
             const mooring = attachments.find(item => item.key === 'boat')!;
             water = new FjordsideWater(blueprint.waterLevel, mooring, selection.quality);
-            if (selection.attachments && JSON.stringify(selection.attachments) !== JSON.stringify(attachments))
-                throw new Error('Saved production attachments no longer match the locked source contract.');
+            let expected = attachments;
+            const savedMatchesCurrentPlan = !selection.attachments ||
+                JSON.stringify(selection.attachments) === JSON.stringify(attachments);
+            if (previousTentPreview || (includeTent && !savedMatchesCurrentPlan)) {
+                const previousPlan = planWorldAttachments(assets,blueprint,true,initialTentFootprint);
+                const compact = attachments.find(item => item.key === 'tent')!;
+                // A migrated v3 save retains the v2 location, with compact source bounds.
+                expected = previousTentPreview ? previousPlan : previousPlan.map(item =>
+                    item.key === 'tent' ? { ...item,halfWidth: compact.halfWidth,
+                        halfDepth: compact.halfDepth } : item);
+            }
+            restoreAttachments(expected);
             root.add(terrain,nature,water.mesh,
                 placeSettlement(assets,blueprint.settlement.buildings,surface.surfaceHeightAt));
             for (const item of attachments) {
@@ -130,8 +154,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 root.add(model);
                 attachments.push(tent);
             }
-            if (selection.attachments && JSON.stringify(selection.attachments) !== JSON.stringify(attachments))
-                throw new Error('Saved reference attachments no longer match the locked source contract.');
+            restoreAttachments(previousTentPreview ? attachments.map(item =>
+                item.key === 'tent' ? { ...item,...initialTentFootprint } : item) : attachments);
         }
         const base = movement;
         const safe = (x: number,z: number) => base.walkable(x,z) && attachments.every(p =>

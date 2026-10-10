@@ -17,6 +17,13 @@ export interface WorldAttachment {
     support: 'ground' | 'marine' | 'coast';
 }
 
+// Measured bounds of the initial 2.6m preview, retained only to validate v2 saves
+// before resizing their tent at its existing location.
+export const initialTentFootprint = {
+    halfWidth: 1.6281861900759753,
+    halfDepth: 2.2875729735965815,
+};
+
 // Original production scenery, including all four authored coastal cliffs.
 const groundProps = [
     ['storehouse',32,24,-Math.PI/2], ['hearth',.5,3,0], ['well',7.2,-3.8,.2],
@@ -27,7 +34,8 @@ const groundProps = [
 ] as const;
 
 /** Actual loaded source bounds, rather than guessed radii, govern production attachments. */
-export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint, includeTent = true): WorldAttachment[] {
+export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint, includeTent = true,
+    previousTentFootprint?: Pick<WorldAttachment, 'halfWidth' | 'halfDepth'>): WorldAttachment[] {
     const surface = createBlueprintSurface(world);
     const attachments: WorldAttachment[] = [];
     const center = world.settlement.center;
@@ -62,7 +70,8 @@ export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint
             Math.max(...heights)-Math.min(...heights) < .15;
     };
     const placeGround = (key: AssetKey, dx: number, dz: number, rotation: number) => {
-        const bounds = measure(key,rotation,1);
+        const bounds = key === 'tent' && previousTentFootprint ?
+            previousTentFootprint : measure(key,rotation,1);
         const preferred = { x: center.x+dx,z: center.z+dz };
         const candidates: { x: number; z: number }[] = [];
         for (let z = Math.ceil(world.settlement.bounds.minZ); z < world.settlement.bounds.maxZ; z++)

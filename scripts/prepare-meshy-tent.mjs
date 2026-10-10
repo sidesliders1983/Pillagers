@@ -21,13 +21,19 @@ const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies(
 const document = await io.readBinary(sourceBytes);
 const scene = document.getRoot().listScenes()[0];
 const sourceBounds = getBounds(scene);
-const scale = 2.6 / (sourceBounds.max[1] - sourceBounds.min[1]);
+const targetHeight = 1.5;
+const maximumFootprint = 2;
+const heightScale = targetHeight / (sourceBounds.max[1] - sourceBounds.min[1]);
+// Keep the front proportions; shorten the depth to meet the owner's footprint cap.
+// Reserve 0.2mm for Meshopt quantization so decoded bounds remain below 2m.
+const scales = [0, 1, 2].map(axis => axis === 1 ? heightScale : Math.min(heightScale,
+    (maximumFootprint - .0002) / (sourceBounds.max[axis] - sourceBounds.min[axis])));
 const frame = document.createNode('Tent · canonical metres · front +Z')
-    .setScale([scale, scale, scale])
+    .setScale(scales)
     .setTranslation([
-        -(sourceBounds.min[0] + sourceBounds.max[0]) / 2 * scale,
-        -sourceBounds.min[1] * scale,
-        -(sourceBounds.min[2] + sourceBounds.max[2]) / 2 * scale,
+        -(sourceBounds.min[0] + sourceBounds.max[0]) / 2 * scales[0],
+        -sourceBounds.min[1] * scales[1],
+        -(sourceBounds.min[2] + sourceBounds.max[2]) / 2 * scales[2],
     ]);
 for (const node of scene.listChildren()) frame.addChild(node);
 scene.addChild(frame);
@@ -56,7 +62,7 @@ const manifest = {
     source: 'Assets/Houses/Tent/' + source.split(/[\\/]/).at(-1),
     sourceSha256, sourceBytes: sourceBytes.length, bytes: bytes.length,
     sha256: createHash('sha256').update(bytes).digest('hex'), triangles,
-    bounds: getBounds(scene), units: 'metres', up: '+Y', front: '+Z', height: 2.6,
+    bounds: getBounds(scene), units: 'metres', up: '+Y', front: '+Z', height: targetHeight, maximumFootprint, axisScales: scales,
     textureLimit: 1024, doubleSided: true,
 };
 await mkdir(output, { recursive: true });

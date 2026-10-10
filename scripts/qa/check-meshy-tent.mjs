@@ -6,7 +6,9 @@ import sharp from 'sharp';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5182';
-const output = process.env.QA_OUTPUT || 'scratch/meshy-tent-review';
+const output = process.env.QA_OUTPUT || 'scratch/meshy-tent-compact-review';
+const previousReview = JSON.parse(await readFile(
+    new URL('../../docs/qa/meshy-tent/results.json', import.meta.url), 'utf8'));
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
@@ -15,7 +17,11 @@ const errors = [];
 const results = [];
 page.on('pageerror', error => errors.push(error.message));
 page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-const ready = () => page.locator('canvas[data-ready=true]').waitFor();
+const ready = () => Promise.race([
+    page.locator('canvas[data-ready=true]').waitFor(),
+    page.locator('#status').filter({ hasText: 'Could not load the world.' }).waitFor()
+        .then(() => { throw new Error('World startup failed'); }),
+]);
 const summary = async () => JSON.parse(await page.locator('canvas').getAttribute('data-world'));
 const openTools = async () => {
     if (!await page.locator('#world-dev').evaluate(element => element.open))
@@ -31,8 +37,11 @@ const exportWorld = async () => {
 };
 const importWorld = async saved => {
     await openTools();
-    await Promise.all([page.waitForEvent('framenavigated'),
-        page.setInputFiles('#fjordside-import', { name: 'world.json',
+    await Promise.all([Promise.race([
+        page.waitForEvent('framenavigated'),
+        page.locator('#fjordside-world-status').filter({ hasText: 'World was not changed:' })
+            .waitFor().then(() => { throw new Error('Previous preview was rejected'); }),
+    ]), page.setInputFiles('#fjordside-import', { name: 'world.json',
             mimeType: 'application/json', buffer: Buffer.from(saved) })]);
     await ready();
 };
@@ -46,10 +55,25 @@ const capture = async (mode, view, lighting = 'day') => {
     await sharp(await page.locator('canvas').screenshot()).webp({ quality: 90 }).toFile(output + '/' + file);
     return file;
 };
+const importPreviousPreview = async mode => {
+    const current = JSON.parse(await exportWorld());
+    const previousTent = previousReview.results.find(item => item.mode === mode).world.tent;
+    const previous = { ...current, attachmentVersion: 'authored-props-v2',
+        attachments: current.attachments.map(item => item.key === 'tent' ? previousTent : item) };
+    await importWorld(JSON.stringify(previous));
+    const migrated = JSON.parse(await exportWorld());
+    assert.equal(migrated.attachmentVersion, 'authored-props-v3');
+    const tent = migrated.attachments.find(item => item.key === 'tent');
+    assert.ok(tent.halfWidth < 1 && tent.halfDepth <= 1);
+    for (const key of ['x', 'y', 'z', 'rotation']) assert.equal(tent[key], previousTent[key]);
+    assert.deepEqual(migrated.blueprint, previous.blueprint);
+    assert.deepEqual(migrated.attachments.filter(item => item.key !== 'tent'),
+        previous.attachments.filter(item => item.key !== 'tent'));
+};
 const inspect = async mode => {
     const world = await summary();
     assert.ok(world.tent, mode + ' contains the authored tent');
-    assert.equal(world.attachmentVersion, 'authored-props-v2');
+    assert.equal(world.attachmentVersion, 'authored-props-v3');
     await openTools();
     await page.click('#fjordside-pause');
     const files = [await capture(mode, 'tent'), await capture(mode, 'tent-interior'),
@@ -83,12 +107,14 @@ try {
     await ready();
     assert.equal(await page.locator('#fjordside-camera option[value=tent]').count(), 1,
         'The existing Fjord review camera can show the new tent');
+    await importPreviousPreview('reference');
     await inspect('reference');
     for (const seed of [17, 91]) {
         await openTools();
         await page.fill('#fjordside-seed', String(seed));
         await Promise.all([page.waitForEvent('framenavigated'), page.click('#fjordside-generate')]);
         await ready();
+        await importPreviousPreview('generated-' + seed);
         const saved = await inspect('generated-' + seed);
         // Previous saves are the same locked blueprint plus the original twenty props.
         const legacy = JSON.parse(saved);
