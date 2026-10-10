@@ -1,0 +1,35 @@
+{
+  "householdPick": {
+    "x": 524.9080688597496,
+    "y": 417.74653525276346
+  },
+  "personaPick": {
+    "x": 510.35574758622533,
+    "y": 386.33399078123506
+  },
+  "farmyardPick": {
+    "x": 524.0439275048191,
+    "y": 410.75694284419353
+  },
+  "cattlePick": {
+    "x": 666.6357322302972,
+    "y": 465.4930053246293
+  },
+  "touchPick": {
+    "x": 398.1917719038688,
+    "y": 398.5114349040484
+  },
+  "checks": [
+    "Real household picking → shared panel → canonical construction → stable house replaces tent",
+    "Real resident picking and aptitude-labelled occupation assignment activate the canonical Farmyard",
+    "Real Farmyard picking, canonical disabled reason, specialization and level-1 source model update",
+    "Real cattle picking/assignment update scene; exported canonical state equals actual Core commands exactly",
+    "2D↔3D handoff preserves campaign, selection, running flag, cycle and exact geography; local load restores paused",
+    "Empty terrain deselects; salvage returns tent and unassigned cattle; refresh restores paused",
+    "3D New campaign, optional weather, Winter advance and same-founder restart work through shared Core session",
+    "Gold selected ring and cyan partner/child/home rings with names; home identifies occupants; children have no occupation command; household move updates the home marker",
+    "Chromium tablet touch: household/Farmyard/cattle/resident taps, readable panel, orbit and pinch without accidental selection/page overflow"
+  ],
+  "browserErrors": [],
+  "physicalIPad": "Not tested; Chromium touch emulation only."
+}

@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Single mouse click on empty ground navigates and deselects.",
+    "Mouse drag rotates without selecting.",
+    "Touch tap navigates, one-finger drag rotates, spreading zooms in and pinching zooms out.",
+    "Unaffordable construction is disabled with the Core reason; affordable construction builds in both views and debits the exact Materials."
+  ],
+  "browserErrors": []
+}

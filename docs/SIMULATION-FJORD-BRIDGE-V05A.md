@@ -69,3 +69,7 @@ People and animals have stable keyed outdoor positions, clear actual nature boun
 Unavailable GLBs/manifests receive explicit metric placeholders. Ground maps and EZ-Tree have native/KayKit fallbacks. No safe remaining plot or outdoor position produces a retained selectable identity and diagnostic without a mesh. Rendering or asset failures do not change Simulation Core results or prevent time commands and canonical save/export. Existing prototype routes retain strict source validation; validation rules have not been weakened.
 
 See [the implementation QA report](qa/simulation-fjord-bridge/report.md) for checks, images and limitations.
+
+## Interactive follow-up
+
+Issue #88 adds the shared management panels, explicit 2D/3D session handoff and relationship selection markers. See [Interactive Fjord settlement v0.5B](INTERACTIVE-FJORD-SETTLEMENT-V05B.md). The v0.5A notes and measurement report above record the original bridge scope.

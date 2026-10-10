@@ -78,8 +78,8 @@ export class FjordCampaign {
         this.selection = extended && saved.selection && typeof saved.selection.kind === 'string' &&
             typeof saved.selection.id === 'string' ? saved.selection : null;
     }
-    restart(sameFounders = true) {
-        this.session.restartCampaign(sameFounders);
+    restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false) {
+        this.session.restartCampaign(sameFounders, undefined, weatherEnabled);
         const seed = this.session.snapshot().seed;
         if (seed !== this.blueprint.config.seed)
             this.blueprint = generateWorld({ seed, conifers: 'ez-tree' });

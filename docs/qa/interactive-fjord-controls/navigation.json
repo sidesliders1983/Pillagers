@@ -1,0 +1,5 @@
+{
+  "checks": [
+    "Single mouse click on empty ground navigates and deselects."
+  ]
+}

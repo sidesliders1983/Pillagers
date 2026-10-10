@@ -27,7 +27,7 @@ export class Game {
         const population=new URLSearchParams(location.search).get('residents')==='40'?40:config.villagers;
         canvas.dataset.characterSource=meshy?'meshy':'published';canvas.dataset.instances=String(population);
         const renderer = createRenderer(canvas), scene = new Scene();
-        const camera = new PerspectiveCamera(45, 1, .1, 400), controller = new RTSCameraController(camera, canvas);
+        const camera = new PerspectiveCamera(45, 1, .1, 400), controller = new RTSCameraController(camera, canvas, 'rotate');
         const assets = new AssetManager();
         await assets.load();
         const world = await createWorld(assets,{ ...worldControls.selection,
