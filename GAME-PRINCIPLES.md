@@ -54,11 +54,15 @@ Research, evidence limits and approved terms: [Viking occupations and terminolog
 
 **Status: Approved gameplay northstar, 2026-10-10. Future gameplay layer; no implementation or numeric balance is enabled by this document.**
 
-> The clan lives autonomously. The player may invest resources in shared cultural moments to strengthen social cohesion: residents stand by one another when defending their settlement and facing harsh conditions.
+> The clan lives autonomously. The player may invest resources in shared cultural moments to strengthen social cohesion: residents stand by one another when defending their settlement, facing harsh conditions, recovering from loss and passing on their skills.
 
 Cultural investment is a distinct alternative to productive infrastructure or keeping reserves. Weddings, community storytelling/music gatherings, religious ceremonies and possible funerals/remembrances provide occasions for that choice. The player chooses whether and how much to support a gathering; they do not buy love, force births, author deaths or gate ordinary community life behind a celebration button.
 
-Social cohesion represents collective solidarity and mutual support, not a CharacterDNA trait, generic happiness meter or automatic Food/Materials multiplier. Its primary gameplay benefits are **positive modifiers to settlement defence and resilience during harsh weather**. Cohesion helps a community withstand adversity; it does not change the weather, create Food, replace shelter, guarantee victory or make residents invulnerable. Other applications require a separate design decision; a universal offensive raid bonus is not approved here.
+Social cohesion represents collective solidarity and mutual support, not a CharacterDNA trait, generic happiness meter or automatic Food/Materials multiplier. Its primary gameplay benefits are **positive modifiers to settlement defence and resilience during harsh weather**. Cohesion helps a community withstand adversity; it does not change the weather, create Food, replace shelter, guarantee victory or make residents invulnerable.
+
+Approved additional directions are **recovery after loss**, **mentorship and transfer of craftsmanship across households/generations**, and **acceptance/integration of newcomers, including captives brought back from pillaging**. Help must use real people and resources; mentoring does not alter DNA or create a Knowledge stock. Acceptance by the settlement and a newcomer's own attachment are distinct: capture or one celebration does not imply immediate loyalty. Exact mechanisms remain to be designed.
+
+A **bounded positive raid-success modifier through better group coordination** is now a candidate for investigation and calibration, not an adopted gameplay modifier. This replaces the earlier blanket exclusion of offensive applications with a narrowly scoped open question; it does not approve extra loot, automatic casualty reductions or recon bonuses. Preserve actual group composition and target resistance. The existing caregiver-proxy system remains unchanged: no duplicate care mechanic or cohesion prerequisite is introduced.
 
 These investments are optional opportunities, not recurring mandatory upkeep, missed-festival punishments or offline obligations. Do not introduce a festival-maintenance treadmill. Exact costs, participation rules, cohesion representation, persistence/decay, stacking limits and modifier values remain open for later calibration.
 
