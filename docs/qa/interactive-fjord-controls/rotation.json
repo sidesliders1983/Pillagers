@@ -1,0 +1,5 @@
+{
+  "checks": [
+    "Mouse drag rotates without selecting."
+  ]
+}

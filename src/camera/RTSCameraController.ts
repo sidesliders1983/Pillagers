@@ -22,7 +22,8 @@ export class RTSCameraController {
     private touch:TouchGestures;
     private select:((x:number,y:number)=>boolean)|null=null;
     private mouseStart:{x:number;y:number;distance:number}|null=null;
-    constructor(readonly camera:PerspectiveCamera,private canvas:HTMLCanvasElement){
+    constructor(readonly camera: PerspectiveCamera, private canvas: HTMLCanvasElement,
+        private dragMode: 'pan' | 'rotate' = 'pan') {
         const settings=worldConfig.camera.touch;
         this.touch=new TouchGestures({
             navigate:(x,y)=>this.navigate(x,y),
@@ -43,17 +44,40 @@ export class RTSCameraController {
             else if(e.button===2){e.preventDefault();this.rotateDrag=true;this.drag=false;this.mouseStart=null;}
             else if(e.button===0){this.rotateDrag=false;this.drag=true;this.mouseStart={x:e.clientX,y:e.clientY,distance:0};}
         });
-        this.listen(canvas,'pointermove',e=>{
-            if(e.pointerType==='touch'){e.preventDefault();this.touch.move(e.pointerId,e.clientX,e.clientY);}
-            else if(this.rotateDrag){e.preventDefault();this.yaw-=e.movementX*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+e.movementY*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);}
-            else if(this.drag){if(this.mouseStart)this.mouseStart.distance=Math.max(this.mouseStart.distance,Math.hypot(e.clientX-this.mouseStart.x,e.clientY-this.mouseStart.y));this.pan(-e.movementX*this.distance*.0015,-e.movementY*this.distance*.0015);}
-        });
-        const release=(e:PointerEvent,cancelled:boolean)=>{
-            if(e.pointerType==='touch'){
-                if(!cancelled)this.touch.move(e.pointerId,e.clientX,e.clientY);
-                this.touch.up(e.pointerId,cancelled);
+        this.listen(canvas, 'pointermove', event => {
+            if (event.pointerType === 'touch') {
+                event.preventDefault();
+                this.touch.move(event.pointerId, event.clientX, event.clientY);
+                return;
             }
-            else {if(!cancelled&&this.mouseStart&&this.mouseStart.distance<settings.tapThreshold)this.select?.(e.clientX,e.clientY);this.mouseStart=null;this.drag=false;this.rotateDrag=false;}
+            if (this.drag && this.mouseStart) {
+                this.mouseStart.distance = Math.max(this.mouseStart.distance,
+                    Math.hypot(event.clientX - this.mouseStart.x, event.clientY - this.mouseStart.y));
+            }
+            const rotating = this.rotateDrag || this.drag && this.dragMode === 'rotate' &&
+                this.mouseStart !== null && this.mouseStart.distance >= settings.tapThreshold;
+            if (rotating) {
+                event.preventDefault();
+                this.yaw -= event.movementX * settings.rotationSensitivity;
+                this.targetElevation = MathUtils.clamp(
+                    this.targetElevation + event.movementY * settings.elevationSensitivity,
+                    settings.minElevation, settings.maxElevation);
+            } else if (this.drag && this.dragMode === 'pan') {
+                this.pan(-event.movementX * this.distance * .0015,
+                    -event.movementY * this.distance * .0015);
+            }
+        });
+        const release = (event: PointerEvent, cancelled: boolean) => {
+            if (event.pointerType === 'touch') {
+                if (!cancelled) this.touch.move(event.pointerId, event.clientX, event.clientY);
+                this.touch.up(event.pointerId, cancelled);
+            } else {
+                if (!cancelled && this.mouseStart && this.mouseStart.distance < settings.tapThreshold)
+                    this.navigate(event.clientX, event.clientY);
+                this.mouseStart = null;
+                this.drag = false;
+                this.rotateDrag = false;
+            }
         };
         this.listen(canvas,'pointerup',e=>release(e,false));
         this.listen(canvas,'pointercancel',e=>release(e,true));

@@ -29,6 +29,9 @@ canonical local-save key and Fjord sidecar; no simulation schema or balance chan
 
 A tap/click selects the nearest canonical model ancestor. Empty terrain clears selection.
 The existing RTS controller distinguishes clicks/taps from drags, rotations and pinches.
+Clicking or tapping empty terrain clears selection and navigates to that point. Dragging with
+one finger or the left mouse button rotates; a pinch zooms out and spreading two fingers zooms
+in. Scroll still zooms and WASD/arrows pan. The Fjord prototype uses the same control mapping.
 Selection highlighting belongs to the renderer; commands are submitted only by explicit
 management buttons. Available forms are shared with the existing 2D settlement.
 
@@ -42,7 +45,10 @@ management history/lineage but have no live model to mark. Markers never partici
 Their colours are unaffected by scene fog or tone mapping.
 
 Construction, upgrades, specialization, household moves, occupation and caregiver assignment,
-livestock assignment/slaughter and salvage use current Core commands. Normal incremental
+livestock assignment/slaughter and salvage use current Core commands. The explicit **Build house**
+button sends BuildHouse: it requires the configured Materials and disables itself with the
+Core reason if construction is unavailable. Automatic HouseHousehold placement, including its
+vacant-house and tent fallback, remains a separate unchanged Core behavior. Normal incremental
 updates reconcile the existing objects and stable layout. Tents retain grass; only permanent
 homes create soil and dry connecting paths. Expeditions remain available in 2D only and are
 outside this 3D slice.
@@ -61,3 +67,5 @@ shared panel actions, immediate scene updates, navigation, save/load and tablet 
 Physical iPad Safari/WebGL validation remains separate from Chromium touch emulation.
 
 Evidence and reproduction commands: [interactive Fjord report](qa/interactive-fjord/report.md).
+
+Navigation and construction regression evidence: [controls follow-up](qa/interactive-fjord-controls/report.md).
