@@ -19,6 +19,7 @@
     "assets:human-modules": "node scripts/prepare-meshy-modules.mjs",
     "assets:human": "node scripts/prepare-meshy-human.mjs",
     "assets:houses": "node scripts/prepare-meshy-houses.mjs",
+    "assets:tent": "node scripts/prepare-meshy-tent.mjs",
     "assets:cow": "node scripts/prepare-meshy-cow.mjs"
   },
   "dependencies": {

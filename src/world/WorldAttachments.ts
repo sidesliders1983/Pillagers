@@ -27,7 +27,7 @@ const groundProps = [
 ] as const;
 
 /** Actual loaded source bounds, rather than guessed radii, govern production attachments. */
-export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint): WorldAttachment[] {
+export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint, includeTent = true): WorldAttachment[] {
     const surface = createBlueprintSurface(world);
     const attachments: WorldAttachment[] = [];
     const center = world.settlement.center;
@@ -61,7 +61,7 @@ export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint
         return Math.min(...heights) > world.waterLevel + .25 &&
             Math.max(...heights)-Math.min(...heights) < .15;
     };
-    for (const [key,dx,dz,rotation] of groundProps) {
+    const placeGround = (key: AssetKey, dx: number, dz: number, rotation: number) => {
         const bounds = measure(key,rotation,1);
         const preferred = { x: center.x+dx,z: center.z+dz };
         const candidates: { x: number; z: number }[] = [];
@@ -75,7 +75,8 @@ export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint
             ...bounds, support: 'ground' as const })).find(fit);
         if (!placed) throw new Error('No safe production attachment location: ' + key);
         attachments.push(placed);
-    }
+    };
+    for (const [key,dx,dz,rotation] of groundProps) placeGround(key,dx,dz,rotation);
     const harbor = world.settlement.harbor;
     if (!harbor) throw new Error('Generated world has no validated harbor.');
     const coast = world.coast.map(segment => ({ x: (segment.a.x+segment.b.x)/2,
@@ -115,6 +116,8 @@ export function planWorldAttachments(assets: AssetManager, world: WorldBlueprint
         attachments.push({ id: 'cliff-'+index,key: 'cliff',...point,
             y: surface.surfaceHeightAt(point.x,point.z)-.15,rotation,scale,...bounds,support: 'coast' });
     }
+    // Append after the locked v1 plan: existing source placements and IDs stay reproducible.
+    if (includeTent) placeGround('tent',9,17,Math.PI);
     return attachments;
 }
 

@@ -1,4 +1,4 @@
-import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
+import { Box3, Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
 import type { AssetManager } from '../core/AssetManager';
 import type { WorldLighting } from '../core/WorldLighting';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -24,6 +24,7 @@ export interface WorldSelection {
     quality: 'standard' | 'low';
     anisotropy?: number;
     attachments?: WorldAttachment[];
+    attachmentVersion?: 'authored-props-v1' | 'authored-props-v2';
 }
 
 /** Separate geography save: Simulation Core resources, expeditions and residents are untouched. */
@@ -38,9 +39,20 @@ export function parseFjordsideSave(text: string): WorldSelection {
         !['standard','low'].includes(saved.quality)) throw new Error('Invalid Fjordside world save.');
     const blueprint = saved.mode === 'generated' ?
         parseWorld(JSON.stringify({ schemaVersion: 1,blueprint: saved.blueprint })) : undefined;
-    if (blueprint && (!Array.isArray(saved.attachments) || saved.attachments.length !== 20 ||
-        saved.attachmentVersion !== 'authored-props-v1')) throw new Error('Invalid production attachment save.');
-    return { mode: saved.mode,quality: saved.quality,blueprint,attachments: saved.attachments };
+    const version = saved.attachmentVersion;
+    if (version !== undefined && !['authored-props-v1','authored-props-v2'].includes(version))
+        throw new Error('Invalid production attachment version.');
+    if (blueprint) {
+        const expected = version === 'authored-props-v1' ? 20 : 21;
+        if (!version || !Array.isArray(saved.attachments) || saved.attachments.length !== expected)
+            throw new Error('Invalid production attachment save.');
+    } else if (saved.attachments !== undefined) {
+        const expected = version === 'authored-props-v1' ? 0 : 1;
+        if (!version || !Array.isArray(saved.attachments) || saved.attachments.length !== expected)
+            throw new Error('Invalid reference attachment save.');
+    }
+    return { mode: saved.mode,quality: saved.quality,blueprint,
+        attachments: saved.attachments,attachmentVersion: version };
 }
 
 /** Production factory: consumes stored geography and never calls the generator. */
@@ -49,6 +61,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
         parseWorld(serializeWorld(selection.blueprint!)) : undefined;
     if (selection.mode === 'generated' && !blueprint?.validation.accepted)
         throw new Error('Only a validated WorldBlueprint can be activated in Fjordside.');
+    const attachmentVersion = selection.attachmentVersion ?? 'authored-props-v2';
+    const includeTent = attachmentVersion === 'authored-props-v2';
     const root = new Group();
     const attachments: WorldAttachment[] = [];
     let classic: World | undefined;
@@ -83,7 +97,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             const nature = createNatureFromPlan(assets,blueprint.placementPlan,
                 blueprint.config.seed,pines?.resolve);
             wind = new NatureWind(nature,!!pines);
-            attachments.push(...planWorldAttachments(assets,blueprint));
+            attachments.push(...planWorldAttachments(assets,blueprint,includeTent));
             const mooring = attachments.find(item => item.key === 'boat')!;
             water = new FjordsideWater(blueprint.waterLevel, mooring, selection.quality);
             if (selection.attachments && JSON.stringify(selection.attachments) !== JSON.stringify(attachments))
@@ -98,22 +112,37 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 model.scale.setScalar(item.scale);
                 root.add(model);
             }
-            const base = blueprintMovement(blueprint);
-            const safe = (x: number,z: number) => base.walkable(x,z) && attachments.every(p =>
-                attachmentClearance(x,z,p) >= .65);
-            movement = { ...base,walkable: safe,randomPosition(random) {
-                for (let i = 0; i < 500; i++) {
-                    const point = base.randomPosition(random);
-                    if (safe(point.x,point.z)) return point;
-                }
-                throw new Error('No safe production resident position.');
-            } };
+            movement = blueprintMovement(blueprint);
         } else {
             classic = new World(assets, selection.quality);
             terrain = classic.terrain;
             root.add(classic.root);
             movement = { heightAt: surfaceHeightAt,walkable,randomPosition: randomWalkablePosition };
+            if (includeTent) {
+                const model = assets.get('tent');
+                model.rotation.y = Math.PI;
+                model.updateMatrixWorld(true);
+                const size = new Box3().setFromObject(model).getSize(new Vector3());
+                const tent: WorldAttachment = { id: 'tent',key: 'tent',x: 9,z: 17,
+                    y: surfaceHeightAt(9,17),rotation: Math.PI,scale: 1,
+                    halfWidth: size.x/2,halfDepth: size.z/2,support: 'ground' };
+                model.position.set(tent.x,tent.y,tent.z);
+                root.add(model);
+                attachments.push(tent);
+            }
+            if (selection.attachments && JSON.stringify(selection.attachments) !== JSON.stringify(attachments))
+                throw new Error('Saved reference attachments no longer match the locked source contract.');
         }
+        const base = movement;
+        const safe = (x: number,z: number) => base.walkable(x,z) && attachments.every(p =>
+            attachmentClearance(x,z,p) >= .65);
+        movement = { ...base,walkable: safe,randomPosition(random) {
+            for (let attempt = 0; attempt < 500; attempt++) {
+                const point = base.randomPosition(random);
+                if (safe(point.x,point.z)) return point;
+            }
+            throw new Error('No safe production resident position.');
+        } };
         floatingBoat = new BoatFloat(root.getObjectByName('boat')!);
         floatingBoat.update((water ?? classic!.water).surface, 0);
         root.name = blueprint ? 'Integrated generated Fjordside' : 'Reference Fjordside';
@@ -142,13 +171,14 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             exportSave() {
                 return JSON.stringify({ fjordsideVersion: 1,mode: selection.mode,
                     quality,blueprint,
-                    attachmentVersion: 'authored-props-v1',attachments });
+                    attachmentVersion,attachments });
             },
             describe() {
                 return { mode: selection.mode,seed: blueprint?.config.seed ?? 1983,
                     quality,buildings: blueprint ? 6 : 7,
                     populationSource: 'existing-fjordside',groundTier: grounds?.tier ?? 'reference',source: blueprint?.config.conifers ?? 'reference',
                     site: { x: center.x,z: center.z },attachments: attachments.length,
+                    tent: attachments.find(item => item.key === 'tent') ?? null,attachmentVersion,
                     validation: blueprint?.validation ?? null,motion,water: { ...(water ?? classic!.water).describe(), boat: floatingBoat!.describe() } };
             },
             dispose,

@@ -16,7 +16,7 @@ try {
     const initial = JSON.parse(await page.locator('canvas').getAttribute('data-world'));
     assert.equal(initial.mode, 'generated', 'Ordinary loading creates a generated world immediately');
     assert.equal(initial.source, 'ez-tree');
-    assert.equal(initial.attachments, 20);
+    assert.equal(initial.attachments, 21);
     await page.reload();
     await page.locator('canvas[data-ready=true]').waitFor();
     const reloaded = JSON.parse(await page.locator('canvas').getAttribute('data-world'));
@@ -36,7 +36,7 @@ try {
     assert.equal(summary.mode,'generated');
     assert.equal(summary.seed,17);
     assert.equal(await page.locator('canvas').getAttribute('data-instances'),'10');
-    assert.equal(summary.attachments,20);
+    assert.equal(summary.attachments,21);
     await page.locator('#world-dev > summary').click();
     await page.click('#debug-toggle');
     await page.click('#fjordside-pause');

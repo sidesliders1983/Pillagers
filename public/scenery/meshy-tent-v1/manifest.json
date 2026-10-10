@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "file": "tent.glb",
+  "provider": "Meshy",
+  "generation": {
+    "taskId": "01a125a3-beb6-72b7-a538-17dc0b472004",
+    "model": "meshy-7.1",
+    "references": [
+      {
+        "file": "1-Foto-1.jpg",
+        "view": "front",
+        "sha256": "7e79534391aec7e0521e67d767aaca763a78377a1f9469fcc551b348b717e5b9"
+      },
+      {
+        "file": "2-Foto-2.jpg",
+        "view": "back",
+        "sha256": "a6df31ceb41150787fe58a7161bb5812f4dfa1a89c542b0d453dc313b38eff81"
+      },
+      {
+        "file": "3-Foto-3.jpg",
+        "view": "side",
+        "sha256": "8658309c464c42636fad4720f2c8df0dc5a2621a8a374abb7ce2cec753a32f02"
+      }
+    ],
+    "symmetricSideReference": true
+  },
+  "source": "Assets/Houses/Tent/tent-meshy-original.glb",
+  "sourceSha256": "76b20c6bb50f61823d67703fc7ed6a0fe3cb1d3127afbcfc0c123b672177ab44",
+  "sourceBytes": 7660788,
+  "bytes": 2014820,
+  "sha256": "a482ea367fb2bff80fd85a4f2aff1428f015743007ec88f1831c732bd13c3ee4",
+  "triangles": 6754,
+  "bounds": {
+    "min": [
+      -1.628186190075975,
+      -0.00006359795878596586,
+      -2.2875729735965815
+    ],
+    "max": [
+      1.628186190075975,
+      2.6000635979587856,
+      2.2875729735965815
+    ]
+  },
+  "units": "metres",
+  "up": "+Y",
+  "front": "+Z",
+  "height": 2.6,
+  "textureLimit": 1024,
+  "doubleSided": true
+}

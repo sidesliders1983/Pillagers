@@ -135,6 +135,10 @@ export class Game {
                 wind: (document.querySelector('#fjordside-wind-motion') as HTMLInputElement).checked });
             canvas.dataset.world = JSON.stringify(world.describe());
         });
+        const reviewCamera = document.querySelector<HTMLSelectElement>('#fjordside-camera');
+        if (!world.describe().tent) for (const option of Array.from(reviewCamera?.options ?? [])) {
+            if (option.value.startsWith('tent')) option.disabled = true;
+        }
         document.querySelector('#fjordside-camera')?.addEventListener('change',event => {
             const view = (event.target as HTMLSelectElement).value;
             const state = world.describe();
@@ -146,6 +150,20 @@ export class Game {
                 return { position: [x + distance*Math.cos(yaw)-distance*1.4*Math.sin(yaw),
                     y+height, z-distance*Math.sin(yaw)-distance*1.4*Math.cos(yaw)], target: [x,y+.35,z] };
             };
+            const tentView = (interior: boolean) => {
+                const tent = state.tent!;
+                const distance = interior ? 1.5 : 5.5;
+                const side = interior ? 0 : .65;
+                const yaw = tent.rotation;
+                return { position: [tent.x + distance*Math.sin(yaw) + side*Math.cos(yaw),
+                    tent.y + (interior ? 1.05 : 2),
+                    tent.z + distance*Math.cos(yaw) - side*Math.sin(yaw)],
+                    target: [tent.x,tent.y + (interior ? 1.05 : 1.15),tent.z] };
+            };
+            if (view.startsWith('tent')) {
+                if (state.tent) controller.setView(tentView(view === 'tent-interior'));
+                return;
+            }
             const poses = { village: { position: [site.x+34,15,site.z-20],target: [site.x,3,site.z+18] },
                 shore: { position: [site.x+46,20,site.z-50],target: [site.x-25,7,site.z+20] },
                 overlook: { position: [88,78,-78],target: [0,5,16] },
