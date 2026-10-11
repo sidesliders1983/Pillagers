@@ -1,6 +1,6 @@
 # Lore v0.2 — the continuing clan book
 
-**Status: Canonical northstar, approved 2026-10-11; implementation pending.** This records the owner's narrative direction and latest pop-up clarification. Exact storage/API schemas, reader pause behavior, final writing corpus and runtime/model choice remain open where stated.
+**Status: Canonical northstar, approved 2026-10-11; implementation pending.** This records the owner's narrative direction and latest pop-up clarification. Exact storage/API schemas, final writing corpus and runtime/model choice remain open where stated. The owner has settled reader timing: opening or reading the book does not pause a running world.
 
 Related: [GP-002/GP-003](../../../GAME-PRINCIPLES.md), [Chronicle v0.1](../../CLAN-CHRONICLE-V01.md), [narrative style](../../lore/PILLAGERS-NARRATIVE-STYLE-V1.md), [cultural life](10-CULTURAL-LIFE-COHESION.md).
 
@@ -25,21 +25,22 @@ Umbrella [#14](https://github.com/sidesliders1983/Pillagers/issues/14). Implemen
 
 ## LORE-002 — Story pop-ups by default; permanent menu reader
 
-**Status:** Canonical direction, latest owner clarification. Supersedes the earlier suggestion of menu-only/non-interrupting notification.
+**Status:** Canonical direction, latest owner clarification. Supersedes the earlier suggestion of menu-only notification. The pop-up is visible by default but does not interrupt the simulation clock.
 
-**Story:** As a player, I want a pop-up at the start and every five subsequent Winters, so that the story is a prominent part of playing the game.
+**Story:** As a player, I want a pop-up at the start and every five subsequent Winters, while the world continues behind it, so that storytelling remains part of the living settlement rather than a pause screen.
 
 **Rules:**
 - Automatically show the new campaign's opening, then each new five-Winter chapter. A badge/menu entry alone is insufficient.
-- Display the story and an accessible factual appendix, with an immediate close/continue action. No minimum reading time, mandatory choice, resource charge or missed-reading penalty.
+- Display the story and an accessible factual appendix, with an immediate close action. No minimum reading time, mandatory choice, resource charge or missed-reading penalty.
 - The same saved book is always available from the game menu in both 2D and Fjord. Closing or reopening does not rewrite a chapter.
 - Distinguish publication, notification and reading where needed. Refresh, save/load and view handoff must not reannounce already-notified chapters as new. Pending/unread chapters remain accessible.
 - Several milestones crossed together use a single ordered reader/notification queue, not stacked dialogs. Preserve every chapter and offer a way back to play without a long mandatory dismissal chain.
 - **Later enhancement:** a setting hides automatic pop-ups until the player asks for the book in the menu. Default automatic display is enabled. Hiding affects presentation only: generation, memory, accumulation and saving continue. Re-enabling does not flood the player with historic pop-ups. The settings UI need not ship with the initial slice.
 - Model generation is asynchronous and optional; do not make the required pop-up depend on an available AI server or an endless loading screen. A controlled readable baseline is always available.
-- Whether the reader itself pauses gameplay is an explicit UX decision still to be settled. Opening/closing must preserve newer manual pause, hidden-tab, load/import and ownership intent. If the implementation pauses for reading, restore only an unchanged valid prior running intent. A late model response must never restart simulation or reopen a dismissed chapter.
+- **Owner decision, 2026-10-11: the world keeps running behind the story.** Opening, reading, changing chapters or closing the pop-up/menu reader must not pause, resume or reset canonical pacing or ambient motion. A previously running visible campaign keeps running; a previously paused campaign stays paused. Existing manual pause, hidden-tab, loading and ownership rules still take precedence. This is not permission for offline/background-tab progression. A late model response must never restart simulation or reopen a dismissed chapter.
+- Keep the displayed chapter and appendix frozen at their publication checkpoint even while new events happen behind the reader. If another chapter becomes due during reading, queue it in order without replacing the passage being read or stacking a new modal over it.
 
-**Acceptance:** New-campaign and 805/810 pop-ups work; repeated refresh/handoff does not duplicate them; all chapters can be reread from the menu. Slow/failed AI does not suppress presentation. Keyboard/touch/focus behavior and pause/loading races have tests. Future notification hiding never disables generation.
+**Acceptance:** New-campaign and 805/810 pop-ups work; repeated refresh/handoff does not duplicate them; all chapters can be reread from the menu. A running visible world continues through opening/reading/closing; manual pause and hidden-tab/load/handoff remain effective. The visible historical chapter stays unchanged while new chapters queue. Slow/failed AI does not suppress presentation. Keyboard/touch/focus behavior and pause/loading races have tests. Future notification hiding never disables generation.
 
 ## LORE-003 — Exact demographic and economic appendices
 
@@ -151,6 +152,6 @@ Primary starting references for #105, to verify before use: [llama.cpp](https://
 
 #103 owns factual packages, storage and **default automatic pop-ups plus menu reader**. #104 owns full-history continuity, controlled composition and style review. #105 is an optional local study against that complete baseline. Future hiding of pop-ups is an additional settings enhancement and cannot gate the initial delivery.
 
-Before UI implementation, explicitly settle modal pause behavior and multi-chapter navigation details. Before model adoption, settle exact candidate/runtime/licence and measured resource limits. Approximate opening length 150–250 words, chapter 250–450 and about ten style examples are initial proposals, not quotas. No compulsory voice generation, new game mechanics or fine-tuning is implied.
+The reader's no-auto-pause policy is decided in LORE-002; detailed multi-chapter navigation remains an implementation UX choice. Before model adoption, settle exact candidate/runtime/licence and measured resource limits. Approximate opening length 150–250 words, chapter 250–450 and about ten style examples are initial proposals, not quotas. No compulsory voice generation, new game mechanics or fine-tuning is implied.
 
 This specification does not claim Lore v0.2 is already implemented and does not rewrite historical QA reports.
