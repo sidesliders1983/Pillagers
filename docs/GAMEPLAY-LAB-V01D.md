@@ -26,3 +26,8 @@ Open /gameplay-lab. Select 1 minute per cycle, press Start, inspect residents an
 ## Verification
 
 Run node --test tests/*.test.mjs, TypeScript checking and the Vite production build. With the development server on port 5180, run scripts/qa/check-gameplay-lab.mjs using a Playwright runtime. Detailed evidence is in docs/qa/gameplay-lab-v01d-report.md.
+
+## Screen awake
+
+The campaign toolbar has an opt-in **Keep screen awake** control, independent of the
+campaign clock. [Usage, LAN compatibility and browser lifecycle](BROWSER-SCREEN-AWAKE.md).

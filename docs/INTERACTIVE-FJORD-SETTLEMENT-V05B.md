@@ -79,3 +79,8 @@ Navigation and construction regression evidence: [controls follow-up](qa/interac
 
 The subsequent visual lifecycle, annual weather and personal resource popups are documented
 in [Fjord v0.5C](FJORD-VISUAL-LIFECYCLE-V05C.md).
+
+## Screen awake
+
+The campaign toolbar has an opt-in **Keep screen awake** control, independent of the
+campaign clock. [Usage, LAN compatibility and browser lifecycle](BROWSER-SCREEN-AWAKE.md).

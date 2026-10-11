@@ -1,3 +1,4 @@
+import { ScreenAwakeControl } from '../ui/ScreenAwakeControl';
 import { LivingWorldController } from './LivingWorldController';
 import { renderCharacterProfile } from '../ui/CharacterProfileContent';
 import type { FjordEntity } from './FjordProjection';
@@ -41,7 +42,7 @@ export class FjordPlay {
             <div class="fjord-controls"><strong id="fjord-winter"></strong><span id="fjord-stocks"></span>
             <button id="fjord-run">Start</button><button id="fjord-next">+1 Winter</button><label>Cycle<select id="fjord-cycle"><option value="1">1 min / Winter</option><option value="3">3 min / Winter</option><option value="5">5 min / Winter</option></select></label>
             <label>Quality<select id="fjord-quality"><option value="low">Low</option><option value="standard">Standard</option></select></label>
-            <details><summary>Campaign</summary><div class="fjord-settings">
+            <span id="screen-awake-slot"></span><details><summary>Campaign</summary><div class="fjord-settings">
             <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
             <button id="fjord-export" disabled>Export Fjord campaign</button><button id="fjord-export-core">Export canonical JSON</button>
             <label>Import campaign<input id="fjord-import" type="file" accept="application/json,.json"></label>
@@ -56,6 +57,8 @@ export class FjordPlay {
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
+        const screenAwake = new ScreenAwakeControl(document.querySelector('#fjord-play')!);
+        document.querySelector('#screen-awake-slot')!.outerHTML = screenAwake.html();
         const canvas = document.querySelector<HTMLCanvasElement>('#fjord-canvas')!;
         const management = document.querySelector<HTMLElement>('#fjord-management')!;
         const managementToggle = document.querySelector<HTMLButtonElement>('#fjord-management-toggle')!;
