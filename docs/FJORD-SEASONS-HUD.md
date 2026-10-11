@@ -7,7 +7,10 @@ Issue: [#109](https://github.com/sidesliders1983/Pillagers/issues/109).
 FjordCalendar projects the existing Simulation Core time; it stores no state. With the
 current 1,000 ticks per year, the date shows Winter at 0–249, Spring at 250–499, Summer
 at 500–749 and Autumn at 750–999. Rollover starts Winter of the next year. Labels change
-exactly at quarter boundaries; the existing palette blends smoothly through each quarter.
+exactly at quarter boundaries. Northern Winter holds its full palette through tick 250.
+Thaw starts after Spring begins: Winter → Spring during ticks 250–375, then Spring →
+Summer during ticks 375–500. Summer/Autumn blends retain their original timing. These
+visual phases are derived from the same saved tick; there is no second clock.
 
 The label **Year length** offers 1, 3 or 5 **min per year**. **+1 Year** submits the existing
 AdvanceWinter command. It advances one full year while preserving a partial tick, so
@@ -38,8 +41,9 @@ Colour deltas are applied in linear space relative to the approved day baseline,
 valid colour channels. Sun/ambient intensity ratios and fog/exposure differences use the
 same weight. This preserves darker Harsh/Severe weather without replacing the season palette.
 
-At the start of Winter, the weather adjustment is fully present. During Winter it fades toward
-Spring; Spring/Summer retain their seasonal baseline; Autumn approaches Winter again. Snow
+Winter and the start of Spring retain the full winter weather adjustment. It fades during
+the first half of Spring; by tick 375 Spring/Summer retain their seasonal baseline.
+Autumn approaches Winter again. Snow
 uses the original seasonal amount: Winter weight × 0.65. Weather severity does not add a
 second snow layer. Disabling annual weather still shows all seasons and winter snow. The
 weather information panel continues to show factual annual modifiers, including during
@@ -81,3 +85,6 @@ Approved seams are the public canonical Fjord projection/shared session and brow
 and interaction. [QA evidence](qa/fjord-seasons-hud/report.md) records exact boundaries,
 weather combinations, layout bounds, save/load/replay, touch and startup regressions.
 Historical reports remain records of the rules and UI they originally measured.
+
+Northern thaw correction evidence: [browser report](qa/fjord-season-thaw/report.md).
+The original seasons/HUD report remains a record of the earlier transition timing.

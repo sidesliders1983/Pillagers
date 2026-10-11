@@ -9,7 +9,7 @@ const { defaultWeatherConfig, weatherClasses } = loadTypeScript(new URL('../../s
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5180';
-const output = process.env.QA_OUTPUT || 'docs/qa/fjord-seasons-hud';
+const output = process.env.QA_OUTPUT || 'docs/qa/fjord-season-thaw';
 const errors = [], matrix = [], layouts = [], resources = [], checks = [];
 const browser = await chromium.launch({ headless: true, channel: 'msedge' });
 await mkdir(output, { recursive: true });
@@ -88,13 +88,13 @@ try {
     for (const kind of [null, ...weatherClasses]) {
         let firstBounds;
         for (const [index, season] of seasons.entries()) {
-            const state = fixture(kind, index * 250);
+            const state = fixture(kind, [0, 375, 500, 750][index]);
             await importState(page, state);
             const visual = await readVisual(page);
             assert.equal(await page.locator('#fjord-season').innerText(), season);
             assert.equal(await page.locator('#fjord-year').innerText(), '800');
             assert.equal(visual.weather.class, kind);
-            assert.equal(visual.calendar.progress, index / 4);
+            assert.equal(visual.calendar.progress, [0, .375, .5, .75][index]);
             assert.deepEqual(await exportCore(page), JSON.parse(core.serializeState(state)), 'Presentation leaves the complete Core unchanged');
             assert.ok(visual.materials.groundColors.length > 1, 'Generated regional ground layers reuse seasonal tint');
             assert.ok(visual.materials.foliageColors.length > 0, 'Existing foliage receives seasonal tint');
@@ -122,6 +122,26 @@ try {
         assert.notDeepEqual(baselines[i].materials.groundColors, baselines[i - 1].materials.groundColors);
         assert.notDeepEqual(baselines[i].materials.foliageColors, baselines[i - 1].materials.foliageColors);
     }
+    for (const tick of [125, 249, 250, 251, 312, 374]) {
+        const state = fixture(null, tick);
+        await importState(page, state);
+        const visual = await readVisual(page);
+        assert.equal(visual.calendar.season, tick < 250 ? 'Winter' : 'Spring');
+        assert.deepEqual(await exportCore(page), JSON.parse(core.serializeState(state)));
+        const snow = visual.materials.snowAmounts[0];
+        if (tick <= 250) {
+            assert.equal(snow, .65, 'Winter remains white through the Spring boundary');
+            assert.deepEqual(visual.materials.groundColors, baselines[0].materials.groundColors);
+            assert.deepEqual(visual.materials.foliageColors, baselines[0].materials.foliageColors);
+            assert.equal(visual.weather.observed.sky, sky[0]);
+        } else {
+            assert.ok(snow > 0 && snow < .65, 'Spring thaw is gradual');
+        }
+        matrix.push({ tick, season: visual.calendar.season, snow, observed: visual.weather.observed });
+        if (tick === 250 || tick === 312)
+            await page.screenshot({ path: output + '/spring-' + tick + '.png' });
+    }
+    checks.push('Winter ground, foliage, sky and snow stay unchanged through tick 250; thaw starts after Spring begins and Core export stays identical');
     for (let repetition = 0; repetition < 3; repetition++) {
         await importState(page, fixture(null, 0));
         await page.waitForTimeout(650);

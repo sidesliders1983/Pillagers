@@ -81,3 +81,8 @@ and cattle stage to Core, plus separate cumulative resident and cow awards again
 
 Evidence and reproduction commands: [visual lifecycle QA](qa/fjord-lifecycle/report.md).
 Physical iPad Safari remains a separate check from Chromium touch/tablet emulation.
+
+Northern visual timing: Winter remains fully white through tick 250. The thaw starts
+after Spring begins and ends at tick 375; weather lighting uses the same visual Winter
+weight. Calendar boundaries, annual accounting and mortality rules are unchanged.
+See docs/FJORD-SEASONS-HUD.md for the current presentation contract.

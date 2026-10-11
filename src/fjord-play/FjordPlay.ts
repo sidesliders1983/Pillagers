@@ -440,10 +440,10 @@ export class FjordPlay {
                 do {
                     this.queued = false;
                     const view = this.campaign.project();
-                    const nextWeather = JSON.stringify([view.calendar.progress, view.weatherVisual]);
+                    const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
                     if (nextWeather !== weatherSignature) {
-                        lighting!.setSeason(view.calendar.progress, view.weatherVisual.lighting);
-                        weatherTint!.update(view.calendar.progress);
+                        lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
+                        weatherTint!.update(view.calendar.visualProgress);
                         weatherSignature = nextWeather;
                         canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
                         canvas.dataset.weather = JSON.stringify({ ...view.weatherVisual, observed: {
@@ -582,7 +582,7 @@ export class FjordPlay {
                 cameraSignature = signature;
                 canvas.dataset.camera = signature;
             }
-            lighting!.update(time, calendar.progress);
+            lighting!.update(time, calendar.visualProgress);
             world!.update(time, lighting, camera);
             renderer.render(scene, camera);
             lastFrameMs = performance.now() - frameStarted;

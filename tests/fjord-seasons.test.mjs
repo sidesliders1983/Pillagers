@@ -40,14 +40,14 @@ test('partial-year save, full-year command, local load and both view handoffs re
     const storage = { getItem: key => records.get(key) ?? null, setItem: (key, value) => records.set(key, value) };
     owner.saveLocal(storage);
     owner.command({ type: 'AdvanceWinter' });
-    assert.deepEqual(owner.fjord.project().calendar, { season: 'Spring', year: 801, progress: .43, winterWeight: 0 });
+    assert.deepEqual(owner.fjord.project().calendar, { season: 'Spring', year: 801, progress: .43, visualProgress: (.43 - .25) * 2, winterWeight: 0 });
     assert.equal(owner.session.saveJSON(), core.serializeState(core.applyCommand(core.reconstructState(saved), { type: 'AdvanceWinter' })));
     owner.loadLocal(storage);
     assert.equal(owner.session.saveJSON(), saved);
     let transferred = owner;
     for (const target of ['board', 'fjord']) {
         transferred = SharedSettlement.restore(transferred.handoff(target), target);
-        assert.deepEqual(transferred.fjord.project().calendar, { season: 'Spring', year: 800, progress: .43, winterWeight: 0 });
+        assert.deepEqual(transferred.fjord.project().calendar, { season: 'Spring', year: 800, progress: .43, visualProgress: (.43 - .25) * 2, winterWeight: 0 });
         assert.equal(transferred.session.saveJSON(), saved);
         assert.equal(transferred.session.running, false);
     }
@@ -111,5 +111,17 @@ test('1, 3 and 5 minute year lengths drive the same saved quarter boundaries wit
         owner.session.setRunning(false);
         owner.session.elapse(minutes * 60000);
         assert.equal(owner.session.saveJSON(), saved);
+    }
+});
+
+test('Fjord keeps Winter snow until Spring and thaws during the first half of Spring', () => {
+    for (const [tick, weight] of [[0, 1], [125, 1], [249, 1], [250, 1], [312, null], [375, 0], [500, 0]]) {
+        const state = core.applyCommand(core.createCampaign(17), { type: 'AdvanceTicks', ticks: tick });
+        const world = generateWorld({ seed: 17 });
+        const before = core.serializeState(state);
+        const view = projectFjordSettlement(state, world, createFjordLayout(world));
+        if (weight === null) assert.ok(view.calendar.winterWeight > .5 && view.calendar.winterWeight < .51);
+        else assert.equal(view.calendar.winterWeight, weight, 'snow weight at ' + tick);
+        assert.equal(core.serializeState(state), before);
     }
 });
