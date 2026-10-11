@@ -30,7 +30,5 @@ export async function toggleFjordCampaign(page) {
         await closeFjordMenu(page);
 }
 export async function advanceFjordYear(page) {
-    await openFjordMenu(page);
     await page.locator('#fjord-next').click();
-    await closeFjordMenu(page);
 }

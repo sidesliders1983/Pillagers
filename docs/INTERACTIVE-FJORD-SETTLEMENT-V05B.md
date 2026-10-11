@@ -88,8 +88,10 @@ campaign clock. [Usage, LAN compatibility and browser lifecycle](BROWSER-SCREEN-
 ## Calendar and header
 
 The [Fjord seasonal header](FJORD-SEASONS-HUD.md) shows the date at left, Food/Materials/
-living residents/cattle at centre and clock controls at right. Menu contains quality,
-+1 Year, campaign/save controls, navigation and screen-awake settings. On narrow phones,
-KPIs occupy an intentional second row and Year length moves into Menu. Exact canonical
+living residents/cattle at centre and clock controls at right. +1 Year is in the top bar,
+between Year length and Menu. Menu contains quality, campaign/save controls, navigation
+and screen-awake settings. On narrow phones,
+KPIs occupy an intentional second row and Year length moves into Menu. At widths up to
+360px, timing occupies a separate row above the KPIs. Exact canonical
 Winter/tick data remain in Developer diagnostics and the public canvas time description.
 The existing ▲/▼ management control remains below the header.
