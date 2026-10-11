@@ -1,0 +1,24 @@
+{
+  "observations": [
+    {
+      "distance": 25,
+      "tested": 183886,
+      "obscured": 0,
+      "legacyObscured": 112
+    },
+    {
+      "distance": 70,
+      "tested": 21030,
+      "obscured": 0,
+      "legacyObscured": 6385
+    },
+    {
+      "distance": 140,
+      "tested": 4932,
+      "obscured": 0,
+      "legacyObscured": 1767
+    }
+  ],
+  "campaignUnchanged": true,
+  "errors": []
+}

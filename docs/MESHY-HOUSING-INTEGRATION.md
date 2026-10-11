@@ -34,3 +34,8 @@ entrance faces an adjacent parcel. Future direction: a central bonfire/plaza sup
 target in place of these temporary grid headings.
 
 Regression evidence: [housing scale and headings](qa/fjord-housing-scale/report.md).
+
+Generated terrain overlays use a zero slope factor and fixed depth-unit offsets. This keeps
+coplanar sand, rock and soil layers separate without pulling them through the authored Farmyard
+floor when the camera zooms out. Terrain geometry and saved world heights remain unchanged.
+Regression evidence: [Farmyard ground visibility](qa/farmyard-ground-occlusion/report.md).

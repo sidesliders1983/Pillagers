@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farmyard ground occlusion review</title>
+<style>
+body{margin:24px;background:#172922;color:#eee6d3;font:16px/1.5 system-ui}
+main{max-width:1280px;margin:auto}a{color:#e2cc9f}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+figure{margin:0}img{width:100%;display:block}figcaption{padding:8px 0}
+</style>
+<main>
+<h1>Farmyard floor at different zoom levels</h1>
+<p>Fixed depth units preserve the authored floor. Source geometry and saved terrain stay unchanged.</p>
+<p><a href="report.md">Report</a> · <a href="result.json">Measurements</a> · <a href="/fjord-play">Open Fjord settlement</a></p>
+<div class="grid">
+<figure><img src="diagnostic-before.png" alt="Original depth offset with red terrain obscuring the green Farmyard"><figcaption>Original offset: 1767 interior pixels obscured at the distant stress view.</figcaption></figure>
+<figure><img src="diagnostic-after.png" alt="Corrected depth offset with the green Farmyard fully visible"><figcaption>Corrected offset: 0 interior pixels obscured at the same view.</figcaption></figure>
+</div>
+<figure><img src="near.png" alt="Source Farmyard floor visible in the close settlement view"><figcaption>Actual /fjord-play, near view.</figcaption></figure>
+<figure><img src="far.png" alt="Source Farmyard floor retained in the zoomed-out settlement view"><figcaption>Actual /fjord-play, fully zoomed out.</figcaption></figure>
+</main>
+</html>
