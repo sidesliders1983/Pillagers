@@ -37,17 +37,14 @@ home. They demonstrate the respective label corrections, not a scenery compariso
   zero failures. No test threshold or provenance assertion was weakened.
 - Build: passed; existing Vite chunk-size advisory remains.
 - Character validation with explicit Lab previews: passed, 20 assets / 36 GLBs.
-- 
-ode scripts/qa/compare-housing-core.mjs`: three seeds (17/32/1983), eight real-command
+- `node scripts/qa/compare-housing-core.mjs`: three seeds (17/32/1983), eight real-command
   checkpoints each and ten Winters. All canonical state, including CPU clans, is identical
   to bbdaaa9 after excluding only the documented `housingNames` event metadata.
-- 
-ode scripts/qa/check-housing-lore.mjs`: native Edge, tablet viewport/touch enabled,
+- `node scripts/qa/check-housing-lore.mjs`: native Edge, tablet viewport/touch enabled,
   visible real UI controls, 2D/Fjord handoff, opening source disclosure, refresh notification
   deduplication, and a running clock while reading. Separate imported-name fixture verifies
   cultural spelling, HTML escaping and no injected markup or script execution.
-- 
-ode scripts/qa/check-housing-lab.mjs`: red-to-green Gameplay Lab regression for
+- `node scripts/qa/check-housing-lab.mjs`: red-to-green Gameplay Lab regression for
   the assigned livestock location, named household heading and Farmyard picker. Its
   canonical option value remains `house-1`. [Lab assertions](lab-browser.json).
 - Formatting and `git diff --check`: manual review; no formatter is configured.
