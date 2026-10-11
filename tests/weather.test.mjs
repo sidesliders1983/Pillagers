@@ -103,6 +103,7 @@ test('Severe weather leaves calves free until the saved Adult age threshold',()=
  let state=core.createCampaign(32,{...staticCattle,cattleBirthChanceBps:10000},{mortalityBands:[{minAge:0,chanceBps:0}]},config);
  state=core.advanceWinter(state);assert.equal(state.events.filter(e=>e.type==='CattleBorn').length,2);
  state=core.advanceWinter(state);assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,9);
+ state=core.advanceWinter(state);assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,9);
  state=core.advanceWinter(state);assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,15);
 });
 

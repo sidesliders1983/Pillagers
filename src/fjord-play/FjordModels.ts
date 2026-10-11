@@ -1,7 +1,7 @@
-import { MeshyHumanFactory, type MeshyHuman } from '../characters/MeshyHuman';
+import { MeshyHumanFactory, meshyAnimationClips, type MeshyHuman } from '../characters/MeshyHuman';
 import { universalHumanProfile } from '../characters/UniversalHumanProfile';
 import { humanPreviewGroundSpeed } from '../character-lab/HumanPreviewPace';
-import { AnimationMixer, Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
+import { AnimationMixer, LoopOnce, LoopRepeat, Box3, BoxGeometry, CapsuleGeometry, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
@@ -15,7 +15,7 @@ export class FjordModels {
     private humans = new MeshyHumanFactory();
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
-        fingerprint?: string; pace: number; groundSpeed: number; state: string }>();
+        fingerprint?: string; resumeGrazeTime?: number; pace: number; groundSpeed: number; state: string }>();
     reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
@@ -40,36 +40,104 @@ export class FjordModels {
         model.userData.pace = actor.pace;
     }
     pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
-    animate(model: Object3D, state: 'Idle' | 'Walk', speed: number, delta: number) {
+    activityClips(model: Object3D) {
+        const actor = this.actors.get(model);
+        const available: { Graze?: number; HumanInteraction?: number } = {};
+        if (!actor?.mixer) return available;
+        for (const name of ['Graze', 'HumanInteraction'] as const) {
+            const clip = actor.clips?.find(clip => clip.name === name);
+            if (clip) available[name] = clip.duration;
+            else {
+                const message = model.name + ': missing ' + name + ' source clip; activity unavailable.';
+                if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
+            }
+        }
+        return available;
+    }
+    occupationClips(model: Object3D) {
+        const actor = this.actors.get(model);
+        const result: { Farm?: number; Attack?: number; Doze?: number } = {};
+        if (!actor?.human) return result;
+        const cadence = model.userData.universalHumanProfile?.motion.cadence ?? 1;
+        for (const state of ['Farm', 'Attack', 'Doze'] as const) {
+            const clip = actor.human.clips.find(clip => clip.name === meshyAnimationClips[state]);
+            if (clip) result[state] = clip.duration / cadence;
+        }
+        if (!result.Doze) {
+            const message = 'Fisher Doze off source binding unavailable; bounded shore visits use Idle.';
+            if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
+        }
+        return result;
+    }
+    socialEnabled(model: Object3D) {
+        const human = this.actors.get(model)?.human;
+        const available = Boolean(human && ['Talk', 'Listen'].every(state =>
+            human.clips.some(clip => clip.name === meshyAnimationClips[state as 'Talk' | 'Listen'])));
+        if (human && !available) {
+            const message = model.name + ': missing Talk/Listen source clips; social encounters disabled.';
+            if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
+        }
+        return available;
+    }
+    animate(model: Object3D, state: 'Idle' | 'Walk' | 'Talk' | 'Listen' | 'Graze' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
         if (!actor) return;
         if (actor.human) {
-            if (actor.human.clips.some(c => c.name === (state === 'Walk' ? 'Walking' : 'Idle_02'))) {
-                actor.human.setAnimation(state);
+            const humanState = state === 'Graze' || state === 'HumanInteraction' ? 'Idle' : state;
+            if (actor.human.clips.some(c => c.name === meshyAnimationClips[humanState])) {
+                actor.human.setAnimation(humanState);
                 actor.human.setPlaybackRate(state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.groundSpeed)) : null);
                 actor.human.update(delta);
             }
         } else if (actor.mixer) {
             const clip = actor.clips!.find(c => c.name === state);
             if (clip && actor.state !== state) {
-                const next = actor.mixer.clipAction(clip).reset().play();
+                if (actor.state === 'Graze' && state === 'HumanInteraction' && actor.action) {
+                    actor.resumeGrazeTime = actor.action.time;
+                    actor.action.paused = true;
+                }
+                const next = actor.mixer.clipAction(clip).reset();
+                next.paused = false;
+                if (state === 'Graze' && actor.resumeGrazeTime !== undefined) {
+                    next.time = actor.resumeGrazeTime;
+                    actor.resumeGrazeTime = undefined;
+                }
+                const once = state === 'Graze' || state === 'HumanInteraction';
+                next.setLoop(once ? LoopOnce : LoopRepeat, once ? 1 : Infinity);
+                next.clampWhenFinished = once;
+                next.play();
                 actor.action?.crossFadeTo(next, .15, false);
                 actor.action = next; actor.state = state;
             }
             actor.mixer.timeScale = state === 'Walk' ? Math.max(.05, speed / Math.max(.01, actor.pace)) : 1;
             actor.mixer.update(delta);
         }
-        model.userData.motion = { state, speed, clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
+        model.userData.motion = { state, speed, clipTime: actor.human?.animationState.time ?? actor.action?.time, sourceClip: actor.human?.root.userData.clip ?? actor.action?.getClip().name ?? 'static-fallback', clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
+    }
+    inspectResources() {
+        return { actors: this.actors.size, sourceTemplates: this.templates.size,
+            ownedInstanceRoots: this.instanceResources.size };
     }
     release(model: Object3D) {
         const actor = this.actors.get(model);
         if (actor?.human) actor.human.dispose();
         if (actor?.mixer) { actor.mixer.stopAllAction(); actor.mixer.uncacheRoot(model); }
         this.actors.delete(model);
+        model.traverse(node => {
+            if (!this.instanceResources.delete(node)) return;
+            this.loaded.delete(node);
+            node.traverse(child => {
+                if (!(child instanceof Mesh)) return;
+                child.geometry.dispose();
+                for (const material of Array.isArray(child.material) ? child.material : [child.material])
+                    material.dispose();
+            });
+        });
         return Boolean(actor?.human);
     }
     private templates = new Map<string, Promise<Object3D>>();
     private loaded = new Set<Object3D>();
+    private instanceResources = new Set<Object3D>();
     private motionSources = new WeakMap<Object3D, { clips: import('three').AnimationClip[]; pace: number }>();
     private draco = new DRACOLoader().setDecoderPath(import.meta.env.BASE_URL + 'draco/');
     private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).setDRACOLoader(this.draco);
@@ -89,6 +157,14 @@ export class FjordModels {
             const model = placeSettlement(this.assets, [{ id: entity.selectionKey, key: entity.asset,
                     terrainKey: entity.terrainAsset === 'farmyardMarker' ? undefined : entity.terrainAsset, x: 0, z: 0, rotation: 0,
                     halfWidth: entity.plot!.halfWidth, halfDepth: entity.plot!.halfDepth, radius: 9 }], () => 0);
+            const sourcedYard = model.getObjectByName('farmHutTerrain');
+            if (sourcedYard) {
+                // The native parcel leaves too little clearance for four mature source bodies.
+                // Use the existing reserved plot while retaining the authored fences/props and house size.
+                const size = new Box3().setFromObject(sourcedYard).getSize(new Vector3());
+                sourcedYard.scale.x *= Math.max(1, (entity.plot!.halfWidth * 2 - .02) / size.x);
+                sourcedYard.scale.z *= Math.max(1, (entity.plot!.halfDepth * 2 - .02) / size.z);
+            }
             if (entity.terrainAsset === 'farmyardMarker') {
                 const yard = new Mesh(new BoxGeometry(12, .03, 12), new MeshStandardMaterial({
                     color: 0x566b38, roughness: 1, transparent: true, opacity: .25, depthWrite: false
@@ -99,15 +175,18 @@ export class FjordModels {
                 model.add(yard);
                 // Marker resources are instance-specific; source house resources stay asset-owned.
                 this.loaded.add(yard);
+                this.instanceResources.add(yard);
             }
             const size = new Box3().setFromObject(model).getSize(new Vector3());
             if (size.x > entity.plot!.halfWidth * 2 || size.z > entity.plot!.halfDepth * 2) {
                 this.diagnostics.push(entity.id + ': source exceeds reserved footprint; explicit house placeholder.');
+                this.release(model);
                 const root = new Group(), mesh = new Mesh(new BoxGeometry(4, 3, 4), new MeshStandardMaterial({ color: 0x9d8465, roughness: 1 }));
                 mesh.position.y = 1.5;
                 root.add(mesh);
                 root.userData.placeholder = true;
                 this.loaded.add(root);
+                this.instanceResources.add(root);
                 return root;
             }
             return model;
@@ -215,6 +294,7 @@ export class FjordModels {
             resource.dispose();
         this.templates.clear();
         this.loaded.clear();
+        this.instanceResources.clear();
         this.draco.dispose();
     }
 }

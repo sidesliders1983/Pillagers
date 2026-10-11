@@ -47,6 +47,9 @@ function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
         if (!(child instanceof Mesh)) return;
         const instances = new InstancedMesh(child.geometry, child.material, transforms.length);
         instances.name = id;
+        // Retain the source root anchors across primitive compaction for presentation targets.
+        instances.userData.sourceAnchors = transforms.map(transform =>
+            ({ x: transform.elements[12], z: transform.elements[14] }));
         transforms.forEach((transform, i) => instances.setMatrixAt(i,
             matrix.multiplyMatrices(transform, child.matrixWorld)));
         instances.castShadow = !id.includes('grass') && !id.includes('bush');

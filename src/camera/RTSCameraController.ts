@@ -20,13 +20,13 @@ export class RTSCameraController {
     private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
     private minimumZoom = worldConfig.camera.minZoom;
     private touch:TouchGestures;
-    private select:((x:number,y:number)=>boolean)|null=null;
+    private select:((x:number,y:number,pointerType:'mouse'|'touch')=>boolean)|null=null;
     private mouseStart:{x:number;y:number;distance:number}|null=null;
     constructor(readonly camera: PerspectiveCamera, private canvas: HTMLCanvasElement,
         private dragMode: 'pan' | 'rotate' = 'pan') {
         const settings=worldConfig.camera.touch;
         this.touch=new TouchGestures({
-            navigate:(x,y)=>this.navigate(x,y),
+            navigate:(x,y)=>this.navigate(x,y,'touch'),
             rotate:(dx,dy)=>{this.yaw-=dx*settings.rotationSensitivity;this.targetElevation=MathUtils.clamp(this.targetElevation+dy*settings.elevationSensitivity,settings.minElevation,settings.maxElevation);},
             zoom:ratio=>this.setZoom(this.zoom/ratio),
         },settings.tapThreshold);
@@ -111,11 +111,11 @@ export class RTSCameraController {
         this.elevation=this.targetElevation=Math.atan2(offset.y,Math.hypot(offset.x,offset.z));
         this.update(0);
     }
-    setSelectionHandler(select:(x:number,y:number)=>boolean){this.select=select;}
+    setSelectionHandler(select:(x:number,y:number,pointerType:'mouse'|'touch')=>boolean){this.select=select;}
     home(){this.minimumZoom=worldConfig.camera.minZoom;this.desired.copy(this.homeFocus);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
     private setZoom(value:number){this.zoom=MathUtils.clamp(value,this.minimumZoom,worldConfig.camera.maxZoom);}
-    private navigate(x:number,y:number){
-        if(this.select?.(x,y))return;
+    private navigate(x:number,y:number,pointerType:'mouse'|'touch'='mouse'){
+        if(this.select?.(x,y,pointerType))return;
         const rect=this.canvas.getBoundingClientRect();
         this.pointer.set((x-rect.left)/rect.width*2-1,-(y-rect.top)/rect.height*2+1);
         this.camera.updateMatrixWorld();this.ray.setFromCamera(this.pointer,this.camera);

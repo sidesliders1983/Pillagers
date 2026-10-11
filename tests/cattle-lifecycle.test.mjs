@@ -20,6 +20,8 @@ test('eligible outside cows produce persistent calves with parents, cooldown and
  assert.equal(Object.values(state.landing.cattle).length,5);
  assert.equal(core.inspectCattle(state,calves[0].id).stage,'Young Adult');
  state=core.applyCommand(state,{type:'AdvanceWinter'});
+ assert.equal(core.inspectCattle(state,calves[0].id).stage,'Young Adult');
+ state=core.applyCommand(state,{type:'AdvanceWinter'});
  assert.equal(core.inspectCattle(state,calves[0].id).stage,'Adult');
  assert.ok(state.events.some(e=>e.type==='CattleBorn'));
 });
@@ -62,11 +64,13 @@ test('Farmyard births inherit shelter above the soft cap; all members share the 
  assert.equal(deaths.length,5);assert.ok(deaths.every(e=>e.details.mortalityRiskBps===10000));
  assert.equal(core.landingSummary(state).farmyards[0].occupants,0);
 });
-test('newborn calves neither produce adult output nor consume Food before age two',()=>{
+test('newborn calves neither produce adult output nor consume Food before age three',()=>{
  let state=core.advanceWinter(herd());const ids=Object.keys(state.landing.cattle).filter(id=>!['cattle-1','cattle-2','cattle-3'].includes(id));
  const before=state.events.length;state=core.advanceWinter(state);
  assert.equal(state.events.slice(before).filter(e=>e.type==='CattleFoodProduced'&&ids.includes(e.details.cattleId)).length,0);
  assert.equal(state.events.slice(before).find(e=>e.type==='CattleFoodConsumed').details.required,3);
+ state=core.advanceWinter(state);
+ assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,3);
  state=core.advanceWinter(state);
  assert.equal(state.events.filter(e=>e.type==='CattleFoodConsumed').at(-1).details.required,5);
 });
@@ -117,7 +121,7 @@ test('slaughter yields follow Young, Young Adult and Adult stages and survive sa
  let state=core.createCampaign(32,{cattleBirthChanceBps:10000,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0},{mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:0});
  state=core.advanceWinter(state);
  const calf=Object.values(state.landing.cattle).find(c=>c.origin==='reproduction');
- for(const [expectedStage,expectedFood] of [['Young',5],['Young Adult',10],['Adult',15]]){
+ for(const [expectedStage,expectedFood] of [['Young',5],['Young Adult',10],['Young Adult',10],['Adult',15]]){
   const loaded=core.reconstructState(core.serializeState(state));
   assert.equal(core.inspectCattle(loaded,calf.id).stage,expectedStage);
   const slaughtered=core.applyCommand(loaded,{type:'SlaughterCattle',cattleId:calf.id});
@@ -126,4 +130,24 @@ test('slaughter yields follow Young, Young Adult and Adult stages and survive sa
   assert.throws(()=>core.applyCommand(slaughtered,{type:'SlaughterCattle',cattleId:calf.id}));
   state=core.advanceWinter(state);
  }
+});
+
+test('new campaigns mature cattle at three Winters, while saved two-Winter rules persist', () => {
+    let state = herd();
+    state = core.advanceWinter(state);
+    const calf = Object.values(state.landing.cattle).find(c => c.origin === 'reproduction');
+    const expected = [['Young', 5], ['Young Adult', 10], ['Young Adult', 10], ['Adult', 15]];
+    for (const [age, [stage, food]] of expected.entries()) {
+        const loaded = core.reconstructState(core.serializeState(state));
+        const facts = core.inspectCattle(loaded, calf.id);
+        assert.equal(facts.age, age);
+        assert.equal(facts.stage, stage);
+        assert.equal(facts.slaughterFood, food);
+        state = core.advanceWinter(state);
+    }
+    assert.equal(state.landing.config.cattleFertileMinAge, 3);
+    const old = herd({ cattleAdultAge: 2, cattleFertileMinAge: 2 });
+    const restored = core.reconstructState(core.serializeState(old));
+    assert.equal(restored.landing.config.cattleAdultAge, 2);
+    assert.deepEqual(core.advanceWinter(restored), core.advanceWinter(old));
 });

@@ -7,11 +7,13 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5182';
 const output = process.env.QA_OUTPUT || 'scratch/resident-passing-review';
 const duration = Number(process.env.QA_SECONDS || 60);
+const wallLimit = Number(process.env.QA_WALL_SECONDS || 900) * 1000;
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true,
     args: process.env.QA_SOFTWARE === '1' ?
         ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] : [] });
-const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+const width = Number(process.env.QA_WIDTH || 1280), height = Math.round(width / 1.6);
+const page = await browser.newPage({ viewport: { width, height } });
 page.setDefaultTimeout(120000);
 const errors = [], samples = [], captures = [];
 page.on('pageerror', error => errors.push(error.message));
@@ -43,9 +45,9 @@ try {
     await page.click('#debug-close');
     // Review the rear of the first house, where the seeded encounter occurs.
     // Use the same right-drag orbit controls available to the player.
-    await page.mouse.move(960, 400);
+    await page.mouse.move(width * .75, height * .5);
     await page.mouse.down({ button: 'right' });
-    await page.mouse.move(440, 470, { steps: 20 });
+    await page.mouse.move(width * .34375, height * .5875, { steps: 20 });
     await page.mouse.up({ button: 'right' });
     await page.waitForFunction(() => document.querySelector('canvas')?.dataset.interactions);
     assert.equal(await page.locator('canvas').getAttribute('data-character-source'), 'meshy');
@@ -63,12 +65,17 @@ try {
     const start = first.fixture.time, wallStart = Date.now();
     const travel = first.population.map(() => 0), stopped = [...travel], longestStop = [...travel];
     let previous = first, sawEncounter = false, sawResume = false, middle = false;
+    let progressAt = 5;
     while (previous.fixture.time - start < duration) {
-        assert.ok(Date.now() - wallStart < 240000, 'World does not advance');
+        assert.ok(Date.now() - wallStart < wallLimit, 'World does not advance');
         await page.waitForTimeout(500);
         const sample = await read();
         assert.equal(sample.fixture.paused, false, 'Annual aging must not pause movement');
         assert.equal(await page.locator('dialog[open]').count(), 0);
+        if (sample.fixture.time - start >= progressAt) {
+            console.log('Active seconds:', (sample.fixture.time - start).toFixed(1));
+            progressAt += 5;
+        }
         const dt = sample.fixture.time - previous.fixture.time;
         if (dt <= 0) continue;
         for (let i = 0; i < sample.population.length; i++) {

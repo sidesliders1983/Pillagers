@@ -86,3 +86,25 @@ test('Running playback keeps the authored pose through held keys and loop bounda
         }
     }
 });
+
+
+test('verified Human assets expose the added Doze clip on the existing native body', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async url => {
+        if (String(url).startsWith('blob:')) return originalFetch(url);
+        const bytes = await readFile(new URL('../public' + String(url).split('?')[0], import.meta.url));
+        return new Response(bytes);
+    };
+    const factory = new MeshyHumanFactory();
+    try {
+        const human = await factory.create(defaultDNA(), 2);
+        try {
+            assert.ok(human.clips.some(clip => clip.name === 'Sit_and_Doze_Off'),
+                'The supplied v2 animation must be available on the verified existing body');
+            human.sampleAnimation('Doze', 0);
+            human.update(.5);
+            assert.equal(human.root.userData.clip, 'Sit_and_Doze_Off');
+            assert.ok(human.animationState.time > 0);
+        } finally { human.dispose(); }
+    } finally { globalThis.fetch = originalFetch; }
+});

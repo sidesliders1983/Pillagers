@@ -18,6 +18,8 @@ async function readAsset(path){const bytes=await readFile(new URL(path,import.me
 const hasAssets=existsSync(new URL('../Assets/Characters/Human/Human-textured.glb',import.meta.url))&&existsSync(new URL('../public/game-assets/human/Human_LOD0.glb',import.meta.url));
 const source=hasAssets?await readAsset('../Assets/Characters/Human/Human-textured.glb'):null;
 const optimized=hasAssets?await readAsset('../public/game-assets/human/Human_LOD0.glb'):null;
+const additions=hasAssets?await readAsset('../public/game-assets/human/Human_ExtraAnimations.glb'):null;
+const completeRuntime=hasAssets?{...optimized,animations:[...optimized.animations,...additions.animations]}:null;
 const dna=generateCharacterDNA(1983);
 
 test('runtime export preserves all source clips and sampled bone motion',{skip:!hasAssets},()=>{
@@ -35,7 +37,7 @@ test('runtime export preserves all source clips and sampled bone motion',{skip:!
  a.stopAllAction();b.stopAllAction();
 });
 test('40 residents share source geometry but own independent skeletons and mixers',{skip:!hasAssets},async()=>{
- let calls=0;const factory=new MeshyHumanFactory(async()=>{calls++;return optimized;});
+ let calls=0;const factory=new MeshyHumanFactory(async()=>{calls++;return completeRuntime;});
  const models=await Promise.all(Array.from({length:40},(_,i)=>factory.create(generateCharacterDNA(i),0)));
  assert.equal(calls,1);
  const meshes=models.map(model=>{let mesh;model.root.traverse(node=>{if(node.isSkinnedMesh)mesh=node;});return mesh;});

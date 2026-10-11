@@ -18,13 +18,13 @@ This is a generated party, not a fixed cast. Seed and saved state reproduce it e
 | Longship salvage Materials | 20 |
 | Founding cattle | 2 cows + 1 bull |
 | Founding cattle age | 3 Winters (adult founding stock) |
-| Cattle adult age | 2 Winters |
+| Cattle adult age | 3 Winters |
 | Adult cattle consumption | 1 Food per animal per Winter |
 | Calf consumption | 0 Food per Winter (prototype, below adult consumption) |
 | Adult cow output | 4 Food per Winter |
 | Bull output | 0 |
 | Exposed output | 50%; consumption remains 100% |
-| Slaughter yield | 15 Food per animal |
+| Slaughter yield | Young 5; Young Adult 10; Adult 15 Food |
 | Farmyard conversion | Free; automatic in a permanent home with a farmer |
 | Farmyard capacity | 4 living cattle, soft cap |
 | Farmyard upkeep/debt/salvage | Existing base-building rules: 1 Materials upkeep; collapse at debt 3; 50% invested Materials salvage |
@@ -76,3 +76,5 @@ The separately buildable Farmyard prototype is superseded by the confirmed house
 After generating ten adult individuals, an independent seeded stream shuffles candidates and tries each disjoint eligible pair once using the normal adult/sex/kinship partnership rules. Default foundingCoupleChanceBps is 5000 and foundingCoupleCap is 3 (configurable from 0 to 3). This typically produces one or two couples, with zero and three valid outcomes. Founder identities do not change when these settings change.
 
 Couples have reciprocal partnerId, one shared tent household and a family group; singles retain individual tents. FoundingPartnershipPresent records participants and household as relationships already present at arrival. It asserts no meeting/marriage date and does not emit PartnershipFormed. Existing saves receive missing config defaults without generating or changing their relationships.
+
+Current cattle defaults (2026-10-11): Young below 1 Winter, Young Adult from 1 to below 3, Adult from 3. Adult output/consumption and breeding eligibility begin at 3. Slaughter yields remain 5 / 10 / 15 Food by stage. Saved campaigns retain their configured thresholds.

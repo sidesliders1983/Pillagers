@@ -1,0 +1,22 @@
+{
+  "seam": "Public LivingWorldController",
+  "cases": [
+    {
+      "name": "First shore trip blocked by passing neighbour",
+      "red": "Failed to reach Doze before first trip expiry",
+      "green": "Reached Doze with the same native paces and standing-tree fixture",
+      "fixture": "tests/fixtures/fjord-mixed-standing-trees.json"
+    },
+    {
+      "name": "Founding herd blocked by herd mates",
+      "red": "Only 1 of 3 animals resumed Graze after 60 active seconds",
+      "green": "All 3 resumed Graze during the 60–180 active-second window; safe ground and 1.8 m adult spacing retained"
+    }
+  ],
+  "tests": {
+    "controller": 18,
+    "passed": 18,
+    "failed": 0
+  },
+  "method": "Tests fail before the corresponding controller correction; behavior assertions are retained."
+}

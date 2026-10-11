@@ -1,0 +1,318 @@
+{
+  "browser": "155.0.4283.45",
+  "cpu": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+  "os": "10.0.19045",
+  "memoryBytes": 17024413696,
+  "quality": "Low, DPR 1; native Edge GPU, no software flags",
+  "physicalIPad": "Owner confirmed movement, selection, drag and pinch/spread in Safari on a physical iPad on 2026-10-11. A duplicate persona popup was reported and is covered by the separate browser regression.",
+  "results": [
+    {
+      "label": "10-desktop",
+      "activeSeconds": 121.38959999999383,
+      "moving": 11,
+      "states": [
+        "Idle",
+        "Graze",
+        "Walk",
+        "Talk",
+        "Listen",
+        "Attack",
+        "Farm"
+      ],
+      "visitPhases": [
+        "approach",
+        "activity",
+        "home"
+      ],
+      "frameIntervalsMs": {
+        "samples": 4755,
+        "median": 16.700000000004366,
+        "p95": 66.59999999999127,
+        "max": 166.70000000000073
+      },
+      "controllerMs": {
+        "samples": 236,
+        "median": 0.30000001192092896,
+        "p95": 4.0999999940395355,
+        "max": 148
+      },
+      "renderCpuMs": {
+        "samples": 236,
+        "median": 6.5999999940395355,
+        "p95": 12.900000005960464,
+        "max": 146.89999997615814
+      },
+      "worstUpdateMs": 148.2000000178814,
+      "lastCounters": {
+        "seconds": 121.38959999999383,
+        "routeAttempts": 65,
+        "rejectedRoutes": 6,
+        "targetAttempts": 16,
+        "rejectedTargets": 5,
+        "routeNodes": 19851,
+        "maxRouteNodes": 2000,
+        "updates": 4742,
+        "lastUpdateMs": 0.30000001192092896,
+        "maxUpdateMs": 148.2000000178814,
+        "totalUpdateMs": 5424.500000864267,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "agents": 13,
+        "reservations": 0,
+        "occupationVisits": 5,
+        "outOfZone": 0,
+        "bodyOverlaps": 0,
+        "actors": 13,
+        "sourceTemplates": 3,
+        "ownedInstanceRoots": 0,
+        "lastFrameMs": 8.200000017881393,
+        "drawCalls": 53,
+        "triangles": 830797,
+        "geometries": 24,
+        "textures": 49
+      },
+      "touchEmulation": false,
+      "graphics": {
+        "vendor": "Google Inc. (Intel)",
+        "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "coreTicks": 333,
+      "coreEqualToReplay": true,
+      "hiddenNoCatchup": true,
+      "pausedHandoff": true
+    },
+    {
+      "label": "25-desktop",
+      "activeSeconds": 121.79940000000575,
+      "moving": 33,
+      "states": [
+        "Idle",
+        "Graze",
+        "Walk",
+        "Talk",
+        "Listen",
+        "Farm",
+        "HumanInteraction",
+        "Attack"
+      ],
+      "visitPhases": [
+        "approach",
+        "activity",
+        "home"
+      ],
+      "frameIntervalsMs": {
+        "samples": 4093,
+        "median": 16.700000000000728,
+        "p95": 116.59999999999127,
+        "max": 600
+      },
+      "controllerMs": {
+        "samples": 234,
+        "median": 1.5,
+        "p95": 15.400000005960464,
+        "max": 485.30000001192093
+      },
+      "renderCpuMs": {
+        "samples": 234,
+        "median": 13.700000017881393,
+        "p95": 24.600000023841858,
+        "max": 87.30000001192093
+      },
+      "worstUpdateMs": 485.30000001192093,
+      "lastCounters": {
+        "seconds": 121.79940000000575,
+        "routeAttempts": 294,
+        "rejectedRoutes": 144,
+        "targetAttempts": 149,
+        "rejectedTargets": 125,
+        "routeNodes": 96807,
+        "maxRouteNodes": 2001,
+        "updates": 4088,
+        "lastUpdateMs": 2.800000011920929,
+        "maxUpdateMs": 485.30000001192093,
+        "totalUpdateMs": 13569.400000274181,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "agents": 37,
+        "reservations": 2,
+        "occupationVisits": 11,
+        "outOfZone": 0,
+        "bodyOverlaps": 0,
+        "actors": 37,
+        "sourceTemplates": 5,
+        "ownedInstanceRoots": 0,
+        "lastFrameMs": 12.099999994039536,
+        "drawCalls": 77,
+        "triangles": 927894,
+        "geometries": 26,
+        "textures": 79
+      },
+      "touchEmulation": false,
+      "graphics": {
+        "vendor": "Google Inc. (Intel)",
+        "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "coreTicks": 301,
+      "coreEqualToReplay": true,
+      "hiddenNoCatchup": true,
+      "pausedHandoff": true
+    },
+    {
+      "label": "50-desktop",
+      "activeSeconds": 120.5231999999883,
+      "moving": 58,
+      "states": [
+        "Idle",
+        "Graze",
+        "Walk",
+        "Talk",
+        "Listen",
+        "Farm",
+        "HumanInteraction",
+        "Attack"
+      ],
+      "visitPhases": [
+        "approach",
+        "activity",
+        "home"
+      ],
+      "frameIntervalsMs": {
+        "samples": 3510,
+        "median": 16.80000000000291,
+        "p95": 166.39999999999418,
+        "max": 649.9000000000015
+      },
+      "controllerMs": {
+        "samples": 228,
+        "median": 3.300000011920929,
+        "p95": 38.29999998211861,
+        "max": 491.09999999403954
+      },
+      "renderCpuMs": {
+        "samples": 228,
+        "median": 21.400000005960464,
+        "p95": 36.70000001788139,
+        "max": 149
+      },
+      "worstUpdateMs": 491.09999999403954,
+      "lastCounters": {
+        "seconds": 120.5231999999883,
+        "routeAttempts": 586,
+        "rejectedRoutes": 398,
+        "targetAttempts": 411,
+        "rejectedTargets": 381,
+        "routeNodes": 86322,
+        "maxRouteNodes": 2001,
+        "updates": 3502,
+        "lastUpdateMs": 2,
+        "maxUpdateMs": 491.09999999403954,
+        "totalUpdateMs": 15248.899999588728,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "agents": 62,
+        "reservations": 7,
+        "occupationVisits": 16,
+        "outOfZone": 0,
+        "bodyOverlaps": 0,
+        "actors": 62,
+        "sourceTemplates": 5,
+        "ownedInstanceRoots": 0,
+        "lastFrameMs": 25.80000001192093,
+        "drawCalls": 102,
+        "triangles": 1006489,
+        "geometries": 26,
+        "textures": 104
+      },
+      "touchEmulation": false,
+      "graphics": {
+        "vendor": "Google Inc. (Intel)",
+        "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "coreTicks": 284,
+      "coreEqualToReplay": true,
+      "hiddenNoCatchup": true,
+      "pausedHandoff": true
+    },
+    {
+      "label": "50-tablet",
+      "activeSeconds": 120.9264000000062,
+      "moving": 57,
+      "states": [
+        "Idle",
+        "Graze",
+        "Walk",
+        "Talk",
+        "Listen",
+        "HumanInteraction",
+        "Farm",
+        "Attack"
+      ],
+      "visitPhases": [
+        "approach",
+        "activity",
+        "home"
+      ],
+      "frameIntervalsMs": {
+        "samples": 2903,
+        "median": 33.299999999995634,
+        "p95": 150.09999999999854,
+        "max": 716.6000000000022
+      },
+      "controllerMs": {
+        "samples": 227,
+        "median": 3.300000011920929,
+        "p95": 22.700000017881393,
+        "max": 509.80000001192093
+      },
+      "renderCpuMs": {
+        "samples": 227,
+        "median": 22.80000001192093,
+        "p95": 41.30000001192093,
+        "max": 184.59999999403954
+      },
+      "worstUpdateMs": 509.80000001192093,
+      "lastCounters": {
+        "seconds": 120.9264000000062,
+        "routeAttempts": 573,
+        "rejectedRoutes": 383,
+        "targetAttempts": 395,
+        "rejectedTargets": 364,
+        "routeNodes": 80245,
+        "maxRouteNodes": 2001,
+        "updates": 2894,
+        "lastUpdateMs": 3.2000000178813934,
+        "maxUpdateMs": 509.80000001192093,
+        "totalUpdateMs": 14377.099999517202,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "agents": 62,
+        "reservations": 9,
+        "occupationVisits": 12,
+        "outOfZone": 0,
+        "bodyOverlaps": 0,
+        "actors": 62,
+        "sourceTemplates": 5,
+        "ownedInstanceRoots": 0,
+        "lastFrameMs": 20.19999998807907,
+        "drawCalls": 102,
+        "triangles": 1006489,
+        "geometries": 26,
+        "textures": 104
+      },
+      "touchEmulation": true,
+      "graphics": {
+        "vendor": "Google Inc. (Intel)",
+        "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "coreTicks": 277,
+      "coreEqualToReplay": true,
+      "hiddenNoCatchup": true,
+      "pausedHandoff": true
+    }
+  ],
+  "errors": []
+}

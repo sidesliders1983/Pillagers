@@ -1,0 +1,114 @@
+{
+  "checks": [
+    "All four additive clips: real authored duration, frozen pose and snapshot export/import",
+    "Original Cow Character Lab: all four variants, Graze 12 seconds, HumanInteraction 6 seconds and Listen human"
+  ],
+  "errors": [],
+  "records": [
+    {
+      "clip": "Archery_Shot_1",
+      "duration": 1,
+      "pose": {
+        "animation": "Archery_Shot_1",
+        "time": 1,
+        "paused": true
+      },
+      "modules": [
+        {
+          "id": "body/meshy-human",
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ]
+    },
+    {
+      "clip": "Archery_Shot_2",
+      "duration": 3.75,
+      "pose": {
+        "animation": "Archery_Shot_2",
+        "time": 2,
+        "paused": true
+      },
+      "modules": [
+        {
+          "id": "body/meshy-human",
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ]
+    },
+    {
+      "clip": "Heavy_Hammer_Swing",
+      "duration": 1.8333333730697632,
+      "pose": {
+        "animation": "Heavy_Hammer_Swing",
+        "time": 1.8333333730697632,
+        "paused": true
+      },
+      "modules": [
+        {
+          "id": "body/meshy-human",
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ]
+    },
+    {
+      "clip": "Sit_and_Doze_Off",
+      "duration": 17.33333396911621,
+      "pose": {
+        "animation": "Sit_and_Doze_Off",
+        "time": 6,
+        "paused": true
+      },
+      "modules": [
+        {
+          "id": "body/meshy-human",
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+        }
+      ]
+    },
+    {
+      "variant": "adult-female",
+      "clip": "Graze",
+      "frozenTime": 3
+    },
+    {
+      "variant": "adult-female",
+      "clip": "HumanInteraction",
+      "frozenTime": 3
+    },
+    {
+      "variant": "baby",
+      "clip": "Graze",
+      "frozenTime": 3
+    },
+    {
+      "variant": "baby",
+      "clip": "HumanInteraction",
+      "frozenTime": 3
+    },
+    {
+      "variant": "young-adult",
+      "clip": "Graze",
+      "frozenTime": 3
+    },
+    {
+      "variant": "young-adult",
+      "clip": "HumanInteraction",
+      "frozenTime": 3
+    },
+    {
+      "variant": "adult-male",
+      "clip": "Graze",
+      "frozenTime": 3
+    },
+    {
+      "variant": "adult-male",
+      "clip": "HumanInteraction",
+      "frozenTime": 3
+    }
+  ],
+  "device": "Headless Chromium / SwiftShader"
+}

@@ -1,0 +1,55 @@
+{
+  "observations": [
+    {
+      "key": "persona:founder-1",
+      "kind": "persona",
+      "x": 393.95666807481456,
+      "y": 393.0772511732263,
+      "dx": -18,
+      "tapX": 375.95666807481456,
+      "tapY": 393.0772511732263,
+      "actual": "persona:founder-1"
+    },
+    {
+      "key": "persona:founder-10",
+      "kind": "persona",
+      "x": 456.17670048837056,
+      "y": 363.9369554862517,
+      "dx": -18,
+      "tapX": 438.17670048837056,
+      "tapY": 363.9369554862517,
+      "actual": "persona:founder-10"
+    },
+    {
+      "key": "persona:founder-10",
+      "kind": "persona",
+      "x": 456.17670048837056,
+      "y": 363.9369554862517,
+      "dx": 18,
+      "tapX": 474.17670048837056,
+      "tapY": 363.9369554862517,
+      "actual": "persona:founder-10"
+    },
+    {
+      "liveProbe": {
+        "key": "persona:founder-10",
+        "kind": "persona",
+        "x": 455.96065539024954,
+        "y": 364.03762037199954,
+        "tapX": 439.96065539024954,
+        "tapY": 364.03762037199954
+      },
+      "heldTouchMs": 250,
+      "touchDrift": [
+        3,
+        2
+      ],
+      "moving": true,
+      "dragPreservesSelection": true,
+      "pinchPreservesSelection": true,
+      "coreEqualToReplay": true
+    }
+  ],
+  "errors": [],
+  "coreEqualToReplay": true
+}
