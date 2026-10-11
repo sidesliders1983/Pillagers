@@ -1,3 +1,4 @@
+import { ClanBookReader } from '../lore/ClanBookReader';
 import type { FjordCalendar } from './FjordCalendar';
 import { FjordHeader, fjordHeaderHTML } from './FjordHeader';
 import { ScreenAwakeControl } from '../ui/ScreenAwakeControl';
@@ -85,6 +86,7 @@ export class FjordPlay {
         });
         bindViewSwitch(document.querySelector('#fjord-play')!, this.shared, say);
         const persist = () => persistSettlement(this.shared, say);
+        const bookReader = new ClanBookReader(this.shared, persist);
         let clockIntent = 0;
         let previous = performance.now();
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
@@ -132,6 +134,7 @@ export class FjordPlay {
         let calendar: FjordCalendar;
         let canonicalTime = '';
         const refresh = () => {
+            bookReader.update();
             const view = this.campaign.project();
             const state = this.session.snapshot();
             calendar = view.calendar;
@@ -357,6 +360,7 @@ export class FjordPlay {
         window.addEventListener('pagehide', () => {
             this.stopped = true;
             header.dispose();
+            bookReader.dispose();
             setPlayback(false);
             clearInterval(timer);
             renderer.setAnimationLoop(null);

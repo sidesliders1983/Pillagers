@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "errors": [],
+  "checks": [
+    "opening popup",
+    "no automatic pause/resume",
+    "ordered chapters",
+    "frozen passage",
+    "refresh deduplication",
+    "menu reread",
+    "keyboard dismissal",
+    "tablet/phone touch layout",
+    "2D/Fjord shared reader",
+    "same-book rollback",
+    "hidden-tab guard",
+    "real Core ticks behind reader"
+  ]
+}

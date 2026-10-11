@@ -132,8 +132,8 @@ Future hide-automatic-popup settings are explicitly outside this slice.
 
 ## First TDD delivery sequence
 
-Await confirmation of the new Clan Book/session and browser seams before adding tests,
-as requested by the TDD skill. Then implement vertical slices:
+The owner confirmed the Clan Book/session and browser seams on 11 October 2026.
+The implementation follows these vertical slices:
 
 1. Frozen new-campaign opening, stable text and separate narrative identity; exact Core unchanged.
 2. One complete five-Winter package, boundary transactions and ledger reconciliation.
@@ -148,3 +148,6 @@ The browser must verify visible clock progression behind the reader, manual paus
 hidden catch-up, touch layout, keyboard focus and persistence across 2D/Fjord.
 
 Implementation and final acceptance remain pending; this audit does not close #103.
+
+Runtime implementation: [CLAN-BOOK-V02A.md](CLAN-BOOK-V02A.md). This inventory records
+the design groundwork; executed acceptance evidence is maintained in the linked QA report.

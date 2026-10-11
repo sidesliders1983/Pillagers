@@ -1,3 +1,4 @@
+import { historyIdentity } from '../lore/ClanBook';
 import { projectSelection } from './SelectionPresentation';
 import { applyCommand } from '../simulation/SimulationCore';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
@@ -65,7 +66,8 @@ export class SharedSettlement {
         const sidecar = storage.getItem(fjordCampaignKey);
         const saved = sidecar ? JSON.parse(sidecar) : null;
         this.importJSON(saved && saved.campaign.seed === JSON.parse(canonical).seed ?
-            JSON.stringify({ ...saved, campaign: JSON.parse(canonical) }) : canonical);
+            JSON.stringify({ ...saved, campaign: JSON.parse(canonical),
+                narrative: saved.narrative?.canonicalIdentity === historyIdentity(canonical) ? saved.narrative : undefined }) : canonical);
     }
     persist() {
         return JSON.stringify({ sharedVersion: 1, fjord: JSON.parse(this.fjord.exportJSON()),

@@ -33,7 +33,8 @@ export class FjordCampaign {
     exportJSON() {
         this.project();
         return JSON.stringify({ bridgeVersion: 1, campaign: JSON.parse(this.session.saveJSON()),
-            blueprint: this.blueprint, layout: this.layout, selection: this.selection });
+            blueprint: this.blueprint, layout: this.layout, selection: this.selection,
+            narrative: this.session.book.save(this.session.snapshot()) });
     }
     importJSON(text: string) {
         if (text.length > 24000000)
@@ -44,6 +45,7 @@ export class FjordCampaign {
         if (extended && saved.bridgeVersion !== 1)
             throw new Error('Unsupported Fjord campaign version.');
         proposal.loadJSON(extended ? JSON.stringify(saved.campaign) : text);
+        if (saved.narrative) proposal.book.restore(saved.narrative, proposal.snapshot());
         const seed = proposal.snapshot().seed;
         const blueprint = extended ? parseWorld(JSON.stringify({ schemaVersion: 1, blueprint: saved.blueprint })) :
             seed === this.blueprint.config.seed ? this.blueprint : generateWorld({ seed, conifers: 'ez-tree' });
@@ -73,6 +75,7 @@ export class FjordCampaign {
             throw new Error('Invalid outdoor support in presentation layout.');
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
         this.session.loadJSON(proposal.saveJSON());
+        this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
         this.blueprint = blueprint;
         this.layout = view.layout;
         this.selection = extended && saved.selection && typeof saved.selection.kind === 'string' &&
