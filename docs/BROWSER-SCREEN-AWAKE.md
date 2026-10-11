@@ -1,7 +1,7 @@
 # Keeping the campaign screen awake
 
-The campaign toolbars on `/fjord-play`, `/play` and `/gameplay-lab` have a **Keep screen awake**
-button. Tap it once after opening the page. When enabled, the button becomes **Allow screen
+The campaign toolbars on `/play` and `/gameplay-lab`, and **Menu** on `/fjord-play`, have a
+**Keep screen awake** button. Tap it once after opening the page. When enabled, the button becomes **Allow screen
 sleep**, and the status reads **Screen awake**. Tap again to release it. Starting or pausing
 simulation time is independent of this setting. Advancing a Winter and normal UI refreshes
 retain it. Reloading or navigating to another route starts with the setting off again.
@@ -20,7 +20,7 @@ system restrictions are not overridden. Real media playback is not proof that a 
 physical iPad will suppress automatic lock; that still needs testing on that device.
 
 This is a transient browser preference. It changes no Simulation Core commands, time,
-resources, RNG, saves or campaign rules. The control uses the existing toolbars and a 44px
+resources, RNG, saves or campaign rules. The control uses the existing toolbars/Fjord menu and a 44px
 minimum touch target.
 
 ## Sources and license

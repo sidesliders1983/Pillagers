@@ -1,0 +1,32 @@
+[
+  {
+    "key": "persona:founder-1",
+    "kind": "persona",
+    "x": 384.5078257783334,
+    "y": 370.6936098072218,
+    "dx": -18,
+    "tapX": 366.5078257783334,
+    "tapY": 370.6936098072218,
+    "actual": "persona:founder-1"
+  },
+  {
+    "key": "persona:founder-10",
+    "kind": "persona",
+    "x": 449.16025694794774,
+    "y": 340.52922672563034,
+    "dx": -18,
+    "tapX": 431.16025694794774,
+    "tapY": 340.52922672563034,
+    "actual": "persona:founder-10"
+  },
+  {
+    "key": "persona:founder-10",
+    "kind": "persona",
+    "x": 449.16025694794774,
+    "y": 340.52922672563034,
+    "dx": 18,
+    "tapX": 467.16025694794774,
+    "tapY": 340.52922672563034,
+    "actual": "persona:founder-10"
+  }
+]

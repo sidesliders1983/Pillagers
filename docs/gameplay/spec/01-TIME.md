@@ -45,3 +45,22 @@ Rules:
 
 Acceptance:
 - Presentation speed cannot change deterministic outcomes.
+
+## TIME-004 — Fjord calendar seasons
+**Status:** Canonical presentation; no new simulation rules
+
+The /fjord-play header shows the season and year derived from the saved within-year tick.
+The current 1,000-tick year displays Winter at ticks 0–249, Spring at 250–499,
+Summer at 500–749 and Autumn at 750–999. The next tick starts Winter of the next year.
+Existing smooth seasonal palettes use the same normalized canonical progress.
+
+The Fjord calls pacing **Year length**, with 1/3/5 **min per year**, and the advance
+command **+1 Year**. It still sends AdvanceWinter, preserving any partial-year tick:
+Spring 800 / tick 430 becomes Spring 801 / tick 430. Core field/command names, age in
+Winters, annual weather/economy/maintenance, fertility, mortality and Chronicle years
+remain unchanged. A season transition creates no new gameplay event.
+
+Save/load, import, pause, hidden tabs and view handoff retain canonical season progress.
+Weather-off still shows seasons. Seasonal weather composition is visual only; the
+configured annual weather modifiers continue to apply across all four quarters.
+See [Fjord calendar and header](../../FJORD-SEASONS-HUD.md).

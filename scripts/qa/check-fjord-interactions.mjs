@@ -1,3 +1,4 @@
+import { openFjordCampaign, selectFjordQuality, toggleFjordCampaign } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -24,7 +25,7 @@ try {
         core.serializeState(state));
     await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded' });
     const canvas = page.locator('#fjord-canvas');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
     const read = () => canvas.evaluate(c => ({
         time: Number(c.dataset.motionTime), motion: JSON.parse(c.dataset.motion), rendered: JSON.parse(c.dataset.rendered),
@@ -36,13 +37,12 @@ try {
     };
     const start = () => page.locator('#fjord-run').click();
     const save = async (canonical = false) => {
-        const campaign = page.getByText('Campaign', { exact: true });
         const button = page.locator(canonical ? '#fjord-export-core' : '#fjord-export');
-        if (!await button.isVisible()) await campaign.click();
+        await openFjordCampaign(page);
         const [download] = await Promise.all([page.waitForEvent('download'), button.click()]);
         const result = JSON.parse(await readFile(await download.path(), 'utf8'));
         await download.delete();
-        await campaign.click();
+        await toggleFjordCampaign(page);
         return result;
     };
     const observe = async (predicate, label, seconds = 120) => {

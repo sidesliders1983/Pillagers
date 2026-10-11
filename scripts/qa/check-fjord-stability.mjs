@@ -1,3 +1,4 @@
+import { openFjordCampaign, selectFjordQuality, toggleFjordCampaign, selectFjordPace } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
@@ -17,12 +18,11 @@ const summarize = values => {
         p95: sorted[Math.floor(sorted.length * .95)], max: sorted.at(-1) };
 };
 async function exportCore(page) {
-    const summary = page.getByText('Campaign', { exact: true });
-    if (!await page.locator('#fjord-export-core').isVisible()) await summary.click();
+    await openFjordCampaign(page);
     const [download] = await Promise.all([page.waitForEvent('download'), page.locator('#fjord-export-core').click()]);
     const state = JSON.parse(await readFile(await download.path(), 'utf8'));
     await download.delete();
-    if (await page.locator('#fjord-export-core').isVisible()) await summary.click();
+    await toggleFjordCampaign(page);
     return state;
 }
 try {
@@ -41,8 +41,8 @@ try {
             Object.defineProperty(document, 'hidden', { configurable: true, get: () => window.qaHidden });
         }, pausedCheckpoint(state));
         await page.goto(origin + '/fjord-play');
-        await page.selectOption('#fjord-quality', 'low');
-        await page.selectOption('#fjord-cycle', '5');
+        await selectFjordQuality(page, 'low');
+        await selectFjordPace(page, '5');
         const canvas = page.locator('#fjord-canvas[data-ready="true"]');
         await canvas.waitFor();
         await page.waitForTimeout(600);
@@ -107,9 +107,9 @@ try {
         const saved = await exportCore(page);
         const ticks = (saved.time.winter - state.time.winter) * 1000 + saved.time.tick;
         assert.deepEqual(saved, core.applyCommand(state, { type: 'AdvanceTicks', ticks }));
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         await page.locator('#fjord-save').click();
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         const before = await canvas.getAttribute('data-motion');
         await page.waitForTimeout(1200);
         assert.equal(await canvas.getAttribute('data-motion'), before, 'Pause freezes controller and source activities');
@@ -132,9 +132,9 @@ try {
             const zoomed = await pose();
             assert.ok(Math.hypot(...[12, 13, 14].map(i => zoomed[i] - rotated[i])) > 1);
         }
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         await page.locator('#fjord-load').click();
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         await canvas.waitFor();
         assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
         assert.deepEqual(await exportCore(page), saved, 'Explicit local save/load retains complete canonical state');

@@ -33,13 +33,17 @@ marker for higher levels, and metric placeholders when a model is unavailable.
 
 ## Weather presentation
 
-Mild uses warmer/clearer lighting; Normal retains the existing day baseline. Harsh uses
-cooler lighting, closer fog and 35% of the existing winter material treatment. Severe uses
-darker lighting, closer-starting fog and the full winter treatment. The outer mist cutoff
-leaves silhouettes visible from the starting camera, with deliberately strong mist during bad
-weather. Weather disabled restores the Normal baseline with no snow treatment. These are presentation presets, not weather rolls
-or a new seasonal clock. WorldLighting and SeasonTint are reused, including the existing
-snow uniform; water receives the same actual lighting and camera as the environment.
+Current presentation uses the [canonical Fjord seasons](FJORD-SEASONS-HUD.md) from #109.
+The existing season palettes tint ground/foliage and supply the existing snow uniform.
+The annual weather lighting adjusts the seasonal baseline in proportion to its Winter
+blend weight: Mild is warmer/clearer; Harsh and Severe are darker with closer fog.
+Spring and Summer retain their seasonal baseline even during an annual Harsh/Severe
+forecast. Autumn smoothly approaches the winter treatment. Weather disabled still
+shows seasonal tint and winter snow; it disables only annual weather adjustments.
+
+WorldLighting and SeasonTint are reused; water receives the same actual lighting and
+camera as the environment. No renderer clock advances the season, and the seasonal
+composition changes no annual weather rolls, production or consumption.
 
 The Winter forecast displays the actual production/consumption modifiers and exposed
 resident/cattle counts. Shelter warnings follow configured exposure mortality. Visual

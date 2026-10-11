@@ -1,0 +1,16 @@
+{
+  "branch": "codex/fjord-seasons-hud",
+  "base": "53aff06975a60ed18e264194367d86196927dc41",
+  "normalization": "UTF-8 text, LF, no BOM",
+  "sha256": {
+    "src/core/WorldLighting.ts": "2af862748e0b9f78dd954109b95550200fde4f5f1656478bb878db912a6d587e",
+    "src/world/SeasonTint.ts": "8df69bd41a3e0d4ea07d8bf374f0a5a1ab133bdce2cb90ba4d766f435c0014f7",
+    "src/fjord-play/FjordCalendar.ts": "24a582ce86324e07f91f4d53031cc1514d61f9608f77e8bde1d668c302ae358a",
+    "src/fjord-play/FjordHeader.ts": "bd4cc802e042c59b10c65be1469e7b5c9209de6d0cb9f867eebec6cea99c7ad8",
+    "src/fjord-play/FjordPlay.ts": "dc3a34b1b7eb03114bc51c7ec710a45313e591b03ea45c341e84412572831044",
+    "src/fjord-play/FjordProjection.ts": "355fde025e931e6e4808e027b3fdf6ea0c56dfb83d0ce0ec65d756b02967583c",
+    "src/fjord-play/fjord-play.css": "6ea4d5f21965bef44900af59cc53d495dcda7e25ca751eb5a32e1df2472c0068",
+    "tests/fjord-seasons.test.mjs": "43df9972ffa7962cfd496b273e66e909b69b769702798242129c311ee8a297b1",
+    "scripts/qa/check-fjord-seasons.mjs": "1431a9e5e1e98843233c3b40b735688b51c8ca58a8695266d9bf0fb17acea1c8"
+  }
+}

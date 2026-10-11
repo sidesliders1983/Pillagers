@@ -1,3 +1,4 @@
+import { selectFjordQuality, toggleFjordCampaign } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -28,7 +29,7 @@ try {
     await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json),
         pausedCheckpoint(state));
     await page.goto(process.env.QA_ORIGIN || 'http://127.0.0.1:5180/fjord-play');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const canvas = page.locator('#fjord-canvas[data-ready="true"]');
     await canvas.waitFor();
     await page.getByRole('button', { name: 'Collapse management panel', exact: true }).tap();
@@ -83,7 +84,7 @@ try {
     assert.ok(Math.abs(size(upgraded)[1] - dimensions.homestead[1]) < .01);
     await page.getByRole('button', { name: 'Collapse management panel', exact: true }).tap();
     await page.screenshot({ path: output + '/upgraded.png' });
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     const [download] = await Promise.all([page.waitForEvent('download'),
         page.getByRole('button', { name: 'Export canonical JSON', exact: true }).click()]);
     const saved = JSON.parse(await readFile(await download.path(), 'utf8'));

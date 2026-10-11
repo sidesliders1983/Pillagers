@@ -1,3 +1,4 @@
+import { projectFjordCalendar } from './FjordCalendar';
 import type { CharacterDNA } from '../characters/CharacterDNA';
 import { inspectWork, inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -309,7 +310,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const ground = projectFjordGround(world, entities);
     if (ground.plots.length > 1 && ground.paths.length < ground.plots.length - 1)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
-    return { entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
+    return { calendar: projectFjordCalendar(state.time, state.ticksPerWinter),
+        entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
 }

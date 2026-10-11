@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pillagers · Canonical seasons and HUD review</title>
+<style>
+body{margin:0;padding:24px;background:#132923;color:#eee7cf;font:16px/1.6 system-ui,sans-serif}a{color:#d5bd88}h1{margin:0;font-size:28px}p{max-width:900px}main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}figure{margin:0;background:#1d342c;border:1px solid #637858;border-radius:8px;padding:12px}img{width:100%;display:block}figcaption{margin-top:8px}.devices img{max-height:700px;object-fit:contain}summary{cursor:pointer;padding:16px 0}@media(max-width:800px){main{grid-template-columns:1fr}body{padding:12px}}</style>
+<h1>Canonical Fjord seasons and stable HUD</h1>
+<p>One saved Core year: Winter → Spring → Summer → Autumn. These controlled weather-off captures reuse the existing seasonal tint, light and snow. They share the same seed, camera, viewport and Low quality. Water animation phase can vary between captures; stocks reflect real within-year production.</p>
+<p>The date has fixed season/year slots. KPIs stay centred on desktop and move to a deliberate second row on tablets/phones. Timing and Menu are separate. <a href="report.md">QA report</a> · <a href="observations.json">Measured observations</a> · <a href="/fjord-play">Playtest</a></p>
+<main>
+<figure><a href="winter.png"><img src="winter.png" alt="Winter with existing snow treatment and compact header"></a><figcaption>Winter · tick 0</figcaption></figure>
+<figure><a href="spring.png"><img src="spring.png" alt="Spring ground and foliage palette"></a><figcaption>Spring · tick 250</figcaption></figure>
+<figure><a href="summer.png"><img src="summer.png" alt="Summer ground and foliage palette"></a><figcaption>Summer · tick 500</figcaption></figure>
+<figure><a href="autumn.png"><img src="autumn.png" alt="Autumn ground and foliage palette"></a><figcaption>Autumn · tick 750</figcaption></figure>
+</main>
+<details><summary>Phone, tablet and desktop · large counter fixtures</summary><main class="devices">
+<figure><img src="hud-320.png" alt="320 pixel phone HUD"><figcaption>320 × 740</figcaption></figure>
+<figure><img src="hud-390.png" alt="390 pixel phone HUD"><figcaption>390 × 844</figcaption></figure>
+<figure><img src="hud-768.png" alt="Portrait tablet HUD"><figcaption>768 × 1024</figcaption></figure>
+<figure><img src="hud-1024.png" alt="Landscape tablet HUD"><figcaption>1024 × 768</figcaption></figure>
+<figure><img src="hud-1600.png" alt="Desktop HUD"><figcaption>1600 × 900</figcaption></figure>
+</main></details>
+<p>Touch viewports use Edge/WebGL emulation. New physical iPad/Safari verification remains separate. Scene composition, background geometry, water reflection work and gameplay balance are outside this presentation slice.</p>
+</html>

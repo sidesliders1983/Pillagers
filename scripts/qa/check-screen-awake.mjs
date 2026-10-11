@@ -1,3 +1,4 @@
+import { openFjordMenu, openFjordCampaign, selectFjordQuality, toggleFjordCampaign, advanceFjordYear } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -6,7 +7,7 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const lanOrigin = process.env.QA_LAN_ORIGIN || 'http://192.168.68.104:5180';
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5180';
-const output = 'docs/qa/screen-awake';
+const output = process.env.QA_OUTPUT || 'docs/qa/screen-awake';
 const browser = await chromium.launch({ headless: true, channel: 'msedge' });
 const errors = [];
 const results = [];
@@ -34,12 +35,16 @@ try {
         await page.goto(lanOrigin + route);
         assert.equal(await page.evaluate(() => window.isSecureContext), false);
         assert.equal(await page.evaluate(() => 'wakeLock' in navigator), false);
+        if (route === '/fjord-play') await openFjordMenu(page);
         await awake(page).tap({ timeout: 10000 });
         await sleep(page).waitFor();
         await page.waitForFunction(() => window.mediaCalls.media && !window.mediaCalls.media.paused);
         await page.waitForFunction(() => document.querySelector('[data-screen-awake]')?.getAttribute('aria-pressed') === 'true');
         // Normal campaign repaint must retain the browser setting.
-        await page.getByRole('button', { name: '+1 Winter', exact: true }).tap();
+        if (route === '/fjord-play') {
+            await advanceFjordYear(page);
+            await openFjordMenu(page);
+        } else await page.getByRole('button', { name: '+1 Winter', exact: true }).tap();
         await sleep(page).waitFor();
         assert.equal(await page.evaluate(() => window.mediaCalls.plays), 1);
         await page.locator('#screen-awake-control').screenshot({ path: output + route + '.png' });

@@ -1,0 +1,1374 @@
+{
+  "matrix": [
+    {
+      "weather": "Off",
+      "season": "Winter",
+      "observed": {
+        "sky": 13359588,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.1,
+        "ambient": 2.05,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        16119023,
+        16119023,
+        16119023,
+        16119023
+      ],
+      "snow": 0.65
+    },
+    {
+      "weather": "Off",
+      "season": "Spring",
+      "observed": {
+        "sky": 13360852,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.55,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14280894,
+        14280894,
+        14280894,
+        14280894
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Off",
+      "season": "Summer",
+      "observed": {
+        "sky": 12244963,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.8,
+        "ambient": 2.65,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        15917748,
+        15917748,
+        15917748,
+        15917748
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Off",
+      "season": "Autumn",
+      "observed": {
+        "sky": 14075060,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.35,
+        "ambient": 2.15,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14861215,
+        14861215,
+        14861215,
+        14861215
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Mild",
+      "season": "Winter",
+      "observed": {
+        "sky": 14212568,
+        "fogNear": 80,
+        "fogFar": 180,
+        "sunIntensity": 1.2774193548387098,
+        "ambient": 2.05,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        16119023,
+        16119023,
+        16119023,
+        16119023
+      ],
+      "snow": 0.65
+    },
+    {
+      "weather": "Mild",
+      "season": "Spring",
+      "observed": {
+        "sky": 13360852,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.55,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14280894,
+        14280894,
+        14280894,
+        14280894
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Mild",
+      "season": "Summer",
+      "observed": {
+        "sky": 12244963,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.8,
+        "ambient": 2.65,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        15917748,
+        15917748,
+        15917748,
+        15917748
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Mild",
+      "season": "Autumn",
+      "observed": {
+        "sky": 14075060,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.35,
+        "ambient": 2.15,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14861215,
+        14861215,
+        14861215,
+        14861215
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Normal",
+      "season": "Winter",
+      "observed": {
+        "sky": 13359588,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.1,
+        "ambient": 2.05,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        16119023,
+        16119023,
+        16119023,
+        16119023
+      ],
+      "snow": 0.65
+    },
+    {
+      "weather": "Normal",
+      "season": "Spring",
+      "observed": {
+        "sky": 13360852,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.55,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14280894,
+        14280894,
+        14280894,
+        14280894
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Normal",
+      "season": "Summer",
+      "observed": {
+        "sky": 12244963,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.8,
+        "ambient": 2.65,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        15917748,
+        15917748,
+        15917748,
+        15917748
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Normal",
+      "season": "Autumn",
+      "observed": {
+        "sky": 14075060,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.35,
+        "ambient": 2.15,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14861215,
+        14861215,
+        14861215,
+        14861215
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Harsh",
+      "season": "Winter",
+      "observed": {
+        "sky": 10072523,
+        "fogNear": 35,
+        "fogFar": 185,
+        "sunIntensity": 0.6387096774193549,
+        "ambient": 1.757142857142857,
+        "exposure": 0.95
+      },
+      "groundColors": [
+        16119023,
+        16119023,
+        16119023,
+        16119023
+      ],
+      "snow": 0.65
+    },
+    {
+      "weather": "Harsh",
+      "season": "Spring",
+      "observed": {
+        "sky": 13360852,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.55,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14280894,
+        14280894,
+        14280894,
+        14280894
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Harsh",
+      "season": "Summer",
+      "observed": {
+        "sky": 12244963,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.8,
+        "ambient": 2.65,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        15917748,
+        15917748,
+        15917748,
+        15917748
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Harsh",
+      "season": "Autumn",
+      "observed": {
+        "sky": 14075060,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.35,
+        "ambient": 2.15,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14861215,
+        14861215,
+        14861215,
+        14861215
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Severe",
+      "season": "Winter",
+      "observed": {
+        "sky": 7113389,
+        "fogNear": 10,
+        "fogFar": 175,
+        "sunIntensity": 0.39032258064516134,
+        "ambient": 1.464285714285714,
+        "exposure": 0.85
+      },
+      "groundColors": [
+        16119023,
+        16119023,
+        16119023,
+        16119023
+      ],
+      "snow": 0.65
+    },
+    {
+      "weather": "Severe",
+      "season": "Spring",
+      "observed": {
+        "sky": 13360852,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.55,
+        "ambient": 2.45,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14280894,
+        14280894,
+        14280894,
+        14280894
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Severe",
+      "season": "Summer",
+      "observed": {
+        "sky": 12244963,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.8,
+        "ambient": 2.65,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        15917748,
+        15917748,
+        15917748,
+        15917748
+      ],
+      "snow": 0
+    },
+    {
+      "weather": "Severe",
+      "season": "Autumn",
+      "observed": {
+        "sky": 14075060,
+        "fogNear": 65,
+        "fogFar": 155,
+        "sunIntensity": 1.35,
+        "ambient": 2.15,
+        "exposure": 1.05
+      },
+      "groundColors": [
+        14861215,
+        14861215,
+        14861215,
+        14861215
+      ],
+      "snow": 0
+    }
+  ],
+  "layouts": [
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "season": "Winter",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 162.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 278,
+          "height": 33.03125
+        },
+        "controls": {
+          "x": 191.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 119.03125,
+          "width": 304,
+          "height": 522.96875
+        },
+        "viewport": 320,
+        "scrollWidth": 320,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "season": "Spring",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 162.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 278,
+          "height": 33.03125
+        },
+        "controls": {
+          "x": 191.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 119.03125,
+          "width": 304,
+          "height": 570.96875
+        },
+        "viewport": 320,
+        "scrollWidth": 320,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "season": "Summer",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 162.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 278,
+          "height": 33.03125
+        },
+        "controls": {
+          "x": 191.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 119.03125,
+          "width": 304,
+          "height": 570.96875
+        },
+        "viewport": 320,
+        "scrollWidth": 320,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 740
+      },
+      "season": "Autumn",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 162.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 278,
+          "height": 33.03125
+        },
+        "controls": {
+          "x": 191.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 119.03125,
+          "width": 304,
+          "height": 570.96875
+        },
+        "viewport": 320,
+        "scrollWidth": 320,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "season": "Winter",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 232.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 348,
+          "height": 35.734375
+        },
+        "controls": {
+          "x": 261.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 121.734375,
+          "width": 374,
+          "height": 640.265625
+        },
+        "viewport": 390,
+        "scrollWidth": 390,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "season": "Spring",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 232.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 348,
+          "height": 35.734375
+        },
+        "controls": {
+          "x": 261.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 121.734375,
+          "width": 374,
+          "height": 672.265625
+        },
+        "viewport": 390,
+        "scrollWidth": 390,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "season": "Summer",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 232.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 348,
+          "height": 35.734375
+        },
+        "controls": {
+          "x": 261.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 121.734375,
+          "width": 374,
+          "height": 672.265625
+        },
+        "viewport": 390,
+        "scrollWidth": 390,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "season": "Autumn",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 232.78125,
+          "height": 21.59375
+        },
+        "season": {
+          "x": 21,
+          "y": 28.203125,
+          "width": 60.375,
+          "height": 21.59375
+        },
+        "year": {
+          "x": 85.375,
+          "y": 28.203125,
+          "width": 43.125,
+          "height": 21.59375
+        },
+        "kpis": {
+          "x": 21,
+          "y": 69,
+          "width": 348,
+          "height": 35.734375
+        },
+        "controls": {
+          "x": 261.78125,
+          "y": 17,
+          "width": 107.21875,
+          "height": 44
+        },
+        "canvas": {
+          "x": 8,
+          "y": 121.734375,
+          "width": 374,
+          "height": 672.265625
+        },
+        "viewport": 390,
+        "scrollWidth": 390,
+        "pacingParent": "fjord-menu-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "season": "Winter",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 477.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 506.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 752,
+          "height": 816.71875
+        },
+        "viewport": 768,
+        "scrollWidth": 768,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "season": "Spring",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 477.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 506.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 752,
+          "height": 832.71875
+        },
+        "viewport": 768,
+        "scrollWidth": 768,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "season": "Summer",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 477.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 506.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 752,
+          "height": 832.71875
+        },
+        "viewport": 768,
+        "scrollWidth": 768,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "season": "Autumn",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 477.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 506.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 752,
+          "height": 832.71875
+        },
+        "viewport": 768,
+        "scrollWidth": 768,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "season": "Winter",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 733.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 762.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 1008,
+          "height": 576.71875
+        },
+        "viewport": 1024,
+        "scrollWidth": 1024,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "season": "Spring",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 733.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 762.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 1008,
+          "height": 576.71875
+        },
+        "viewport": 1024,
+        "scrollWidth": 1024,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "season": "Summer",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 733.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 762.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 1008,
+          "height": 576.71875
+        },
+        "viewport": 1024,
+        "scrollWidth": 1024,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "season": "Autumn",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 733.78125,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 21,
+          "y": 85.84375,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 762.78125,
+          "y": 17,
+          "width": 240.21875,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 141.28125,
+          "width": 1008,
+          "height": 576.71875
+        },
+        "viewport": 1024,
+        "scrollWidth": 1024,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "season": "Winter",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 575,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 608,
+          "y": 28.203125,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 1004,
+          "y": 17,
+          "width": 575,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 94.84375,
+          "width": 1584,
+          "height": 755.15625
+        },
+        "viewport": 1600,
+        "scrollWidth": 1600,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "season": "Spring",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 575,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 608,
+          "y": 28.203125,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 1004,
+          "y": 17,
+          "width": 575,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 94.84375,
+          "width": 1584,
+          "height": 755.15625
+        },
+        "viewport": 1600,
+        "scrollWidth": 1600,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "season": "Summer",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 575,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 608,
+          "y": 28.203125,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 1004,
+          "y": 17,
+          "width": 575,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 94.84375,
+          "width": 1584,
+          "height": 755.15625
+        },
+        "viewport": 1600,
+        "scrollWidth": 1600,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "season": "Autumn",
+      "bounds": {
+        "date": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 575,
+          "height": 24.296875
+        },
+        "season": {
+          "x": 21,
+          "y": 35.265625,
+          "width": 67.921875,
+          "height": 24.296875
+        },
+        "year": {
+          "x": 96.921875,
+          "y": 35.265625,
+          "width": 48.515625,
+          "height": 24.296875
+        },
+        "kpis": {
+          "x": 608,
+          "y": 28.203125,
+          "width": 384,
+          "height": 38.4375
+        },
+        "controls": {
+          "x": 1004,
+          "y": 17,
+          "width": 575,
+          "height": 60.84375
+        },
+        "canvas": {
+          "x": 8,
+          "y": 94.84375,
+          "width": 1584,
+          "height": 755.15625
+        },
+        "viewport": 1600,
+        "scrollWidth": 1600,
+        "pacingParent": "fjord-pacing-slot"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "repetition": 0,
+      "geometries": 22,
+      "textures": 43
+    },
+    {
+      "repetition": 1,
+      "geometries": 22,
+      "textures": 43
+    },
+    {
+      "repetition": 2,
+      "geometries": 22,
+      "textures": 43
+    }
+  ],
+  "checks": [
+    "Repeated world rebuilds restore original seasonal colours; quality changes retain materials; renderer resource counts stay bounded",
+    "Partial-year import/local load and +1 Year preserve 430 ticks, Spring and exact Core replay",
+    "Paused 3D → 2D → 3D handoff restores the exact canonical season",
+    "Real running clock crosses Winter → Spring without rebuilding materials or agents; menu edits survive refresh; pause freezes season",
+    "Real clock wraps Autumn 800 → Winter 801 and continues running",
+    "Menu keyboard input stays out of world navigation; Escape returns focus",
+    "Controlled hidden-tab guard freezes Core and seasons with no catch-up"
+  ],
+  "errors": [],
+  "scope": "Real Edge/WebGL, controlled canonical fixtures and touch viewports. Physical Safari/iPad and device screen sleep are not tested."
+}

@@ -1,3 +1,4 @@
+import { selectFjordQuality } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -14,7 +15,7 @@ try {
     page.setDefaultTimeout(120000);
     await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json), pausedCheckpoint(state));
     await page.goto(process.env.QA_ORIGIN || 'http://127.0.0.1:5180/fjord-play');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
     await page.getByText('Settlement identities', { exact: true }).click();
     await page.locator('#fjord-identities button[data-kind="persona"][data-id="founder-1"]').click();
