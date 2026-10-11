@@ -1,3 +1,4 @@
+import { selectFjordQuality } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -19,7 +20,7 @@ try {
     await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json),
         pausedCheckpoint(state));
     await page.goto(process.env.QA_ORIGIN || 'http://127.0.0.1:5180/fjord-play');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const canvas = page.locator('#fjord-canvas[data-ready="true"]');
     await canvas.waitFor({ timeout: 120000 });
     await page.getByRole('button', { name: 'Collapse management panel', exact: true }).tap();

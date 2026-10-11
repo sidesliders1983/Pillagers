@@ -1,3 +1,4 @@
+import { toggleFjordCampaign, advanceFjordYear } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -53,7 +54,7 @@ try {
             }
         }).observe(root, { childList: true, subtree: true, attributes: true });
     });
-    await page.getByRole('button', { name: '+1 Winter', exact: true }).click();
+    await advanceFjordYear(page);
     await mkdir(output, { recursive: true });
     await page.screenshot({ path: output + '/tablet.png' });
     await page.waitForFunction(count => Object.keys(window.qaQueue.awards).length === count &&
@@ -69,7 +70,7 @@ try {
         assert.match(box.text, /^\+\d+ (Food|Materials)$/);
     }
     console.log('All ' + expected.size + ' producers displayed with exact awards; six-label cap and queue verified.');
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     await page.getByRole('button', { name: 'Restart with same founders', exact: true }).click();
     await page.locator('#fjord-notice').filter({ hasText: 'Campaign restarted, paused.' }).waitFor();
     assert.equal(await page.locator('#fjord-production-labels span').count(), 0);

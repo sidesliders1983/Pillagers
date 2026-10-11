@@ -82,5 +82,14 @@ in [Fjord v0.5C](FJORD-VISUAL-LIFECYCLE-V05C.md).
 
 ## Screen awake
 
-The campaign toolbar has an opt-in **Keep screen awake** control, independent of the
+The **Menu** dropdown has an opt-in **Keep screen awake** control, independent of the
 campaign clock. [Usage, LAN compatibility and browser lifecycle](BROWSER-SCREEN-AWAKE.md).
+
+## Calendar and header
+
+The [Fjord seasonal header](FJORD-SEASONS-HUD.md) shows the date at left, Food/Materials/
+living residents/cattle at centre and clock controls at right. Menu contains quality,
++1 Year, campaign/save controls, navigation and screen-awake settings. On narrow phones,
+KPIs occupy an intentional second row and Year length moves into Menu. Exact canonical
+Winter/tick data remain in Developer diagnostics and the public canvas time description.
+The existing ▲/▼ management control remains below the header.

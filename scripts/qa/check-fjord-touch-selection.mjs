@@ -1,10 +1,11 @@
+import { selectFjordQuality, toggleFjordCampaign } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { core, createCrowdScenario, pausedCheckpoint } from './fjord-stability-scenario.mjs';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const output = 'docs/qa/fjord-touch-selection';
+const output = process.env.QA_OUTPUT || 'docs/qa/fjord-touch-selection';
 const state = createCrowdScenario(10);
 const browser = await chromium.launch({ headless: true, channel: 'msedge' });
 const observations = [], errors = [];
@@ -17,7 +18,7 @@ try {
     await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json),
         pausedCheckpoint(state));
     await page.goto(process.env.QA_ORIGIN || 'http://127.0.0.1:5180/fjord-play');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const canvas = page.locator('#fjord-canvas[data-ready="true"]');
     await canvas.waitFor();
     await page.waitForTimeout(650);
@@ -102,7 +103,7 @@ try {
     await page.waitForTimeout(650);
     assert.equal(await canvas.getAttribute('data-selected'), selected, 'Pinch/spread never turns into selection');
     await page.locator('#fjord-run').click();
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     const [download] = await Promise.all([page.waitForEvent('download'),
         page.getByRole('button', { name: 'Export canonical JSON', exact: true }).click()]);
     const saved = JSON.parse(await readFile(await download.path(), 'utf8'));
@@ -110,7 +111,7 @@ try {
     assert.equal(saved.time.winter, state.time.winter);
     assert.deepEqual(saved, JSON.parse(core.serializeState(core.applyCommand(state,
         { type: 'AdvanceTicks', ticks: saved.time.tick }))));
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     observations.push({ liveProbe, heldTouchMs: 250, touchDrift: [3, 2], moving: true,
         dragPreservesSelection: true, pinchPreservesSelection: true, coreEqualToReplay: true });
     assert.deepEqual(errors, []);

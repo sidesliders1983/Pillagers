@@ -1,3 +1,4 @@
+import { openFjordCampaign, selectFjordQuality } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
@@ -12,7 +13,7 @@ const observations = [], errors = [];
 const output = process.env.QA_OUTPUT || 'docs/qa/living-fjord';
 async function exportCore(page) {
     const campaign = page.getByText('Campaign', { exact: true });
-    if (!await page.locator('#fjord-export-core').isVisible()) await campaign.click();
+    await openFjordCampaign(page);
     const [download] = await Promise.all([
         page.waitForEvent('download', { timeout: 90000 }), page.locator('#fjord-export-core').click(),
     ]);
@@ -57,7 +58,7 @@ try {
     const delayed = await delayAsset(page, '**/game-assets/houses/manifest.json');
     await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded', timeout: 120000 });
     await delayed.requested;
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const before = await exportCore(page);
     await hide(page);
     delayed.release();
@@ -77,7 +78,7 @@ try {
         const assets = await delayAsset(initial, '**/game-assets/houses/manifest.json');
         await initial.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded', timeout: 120000 });
         await assets.requested;
-        await initial.selectOption('#fjord-quality', 'low');
+        await selectFjordQuality(initial, 'low');
         const original = await exportCore(initial);
         let expected = original;
         if (operation === 'pause') {
@@ -142,7 +143,7 @@ try {
     await handoff.locator('button[data-action="run"]').filter({ hasText: 'Start' }).waitFor();
     await handoff.locator('a[data-settlement-view="fjord"]').click();
     await assets.requested;
-    await handoff.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(handoff, 'low');
     const transferred = await exportCore(handoff);
     assets.release();
     await handoff.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });

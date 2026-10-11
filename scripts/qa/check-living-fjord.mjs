@@ -1,3 +1,4 @@
+import { selectFjordQuality, toggleFjordCampaign, openFjordCampaign } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -27,7 +28,7 @@ try {
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 120000 });
     assert.equal(await page.locator('#fjord-run').innerText(), 'Pause');
     await page.locator('#fjord-run').click();
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     await page.waitForTimeout(1500);
     const rendered = () => canvas.getAttribute('data-rendered').then(JSON.parse);
     const motion = () => canvas.getAttribute('data-motion').then(JSON.parse);
@@ -41,7 +42,7 @@ try {
     const exported = async () => {
         const summary = page.getByText('Campaign', { exact: true });
         if (!await page.locator('#fjord-export-core').isVisible())
-            await summary.click();
+            await toggleFjordCampaign(page);
         const [download] = await Promise.all([page.waitForEvent('download', { timeout: 90000 }), page.locator('#fjord-export-core').click()]);
         const json = JSON.parse(await readFile(await download.path(), 'utf8'));
         await download.delete();
@@ -132,10 +133,10 @@ try {
     for (const id of Object.keys(state.landing.cattle))
         state = core.applyCommand(state, { type: 'AssignCattle', cattleId: id, farmyardId: farm });
     state = core.applyCommand(state, { type: 'AdvanceWinter' });
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     await page.locator('#fjord-import').setInputFiles({ name: 'herd.json', mimeType: 'application/json', buffer: Buffer.from(core.serializeState(state)) });
     await page.locator('#fjord-notice').filter({ hasText: 'Campaign imported, paused.' }).waitFor();
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     await page.waitForTimeout(1200);
     const animals = (await rendered()).filter(e => e.kind === 'cattle');
     assert.equal(animals.filter(e => e.grazingZone === 'yard').length, 4);
@@ -160,10 +161,10 @@ try {
         grown = core.applyCommand(grown, { type: 'BuildHouse', householdId: home.id });
     for (let i = 0; i < 6; i++)
         grown = core.applyCommand(grown, { type: 'AdvanceWinter' });
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     await page.locator('#fjord-import').setInputFiles({ name: 'grown.json', mimeType: 'application/json', buffer: Buffer.from(core.serializeState(grown)) });
     await page.locator('#fjord-notice').filter({ hasText: 'Campaign imported, paused.' }).waitFor();
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     await page.waitForTimeout(1500);
     const people = Object.values(grown.personas).filter(p => p.deathWinter === null && !core.personaAway(grown, p.id));
     const visible = people.filter(p => core.personaAge(grown, p.id) >= 5 && !core.isProvidingCare(grown, p.id));

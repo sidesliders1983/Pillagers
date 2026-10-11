@@ -1,3 +1,4 @@
+import { selectFjordQuality, toggleFjordCampaign } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -18,7 +19,7 @@ try {
     await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json),
         pausedCheckpoint(state));
     await page.goto(process.env.QA_ORIGIN || 'http://127.0.0.1:5180/fjord-play');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const canvas = page.locator('#fjord-canvas[data-ready="true"]');
     await canvas.waitFor();
     const collapse = page.getByRole('button', { name: 'Collapse management panel', exact: true });
@@ -80,7 +81,7 @@ try {
     await page.screenshot({ path: output + '/selection-reopens.png' });
     await page.getByRole('button', { name: 'Clear selection', exact: true }).click();
     await collapse.tap();
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     const [download] = await Promise.all([page.waitForEvent('download'),
         page.getByRole('button', { name: 'Export canonical JSON', exact: true }).click()]);
     const saved = JSON.parse(await readFile(await download.path(), 'utf8'));
@@ -91,7 +92,7 @@ try {
         page.getByRole('button', { name: 'Export Fjord campaign', exact: true }).click()]);
     const envelope = JSON.parse(await readFile(await fjordDownload.path(), 'utf8'));
     await fjordDownload.delete();
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     const ship = JSON.parse(await canvas.getAttribute('data-entities')).find(e => e.kind === 'longship');
     const anchor = envelope.layout.mooring;
     assert.equal(ship.transform.rotation, anchor.rotation, 'Both sourced hulls and the pier run along local Z');

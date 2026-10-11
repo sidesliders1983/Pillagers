@@ -1,0 +1,55 @@
+$ tsc --noEmit && vite build
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 214 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                         2.79 kB │ gzip:   1.15 kB
+dist/assets/PreviewGround-BO2hWq-D.css                  0.22 kB │ gzip:   0.13 kB
+dist/assets/Chronicle-rxpOnXDJ.css                      0.27 kB │ gzip:   0.18 kB
+dist/assets/MeshyCharacterLab-CqNdCCub.css              1.14 kB │ gzip:   0.49 kB
+dist/assets/AssetLab-HQ7TMumO.css                       1.43 kB │ gzip:   0.58 kB
+dist/assets/EnvironmentLab-CqiAP2SL.css                 1.86 kB │ gzip:   0.69 kB
+dist/assets/WaterLab-CamFp8SX.css                       2.60 kB │ gzip:   1.02 kB
+dist/assets/GameplayLab-JhEYIz1p.css                    3.55 kB │ gzip:   1.24 kB
+dist/assets/index-BPHQuCGE.css                          5.14 kB │ gzip:   1.71 kB
+dist/assets/FjordPlay-DFLuW_5y.css                      6.11 kB │ gzip:   1.83 kB
+dist/assets/CharacterLab-D6v7iLwL.css                   8.43 kB │ gzip:   2.50 kB
+dist/assets/PlayUI-BqzHz75C.css                         8.75 kB │ gzip:   2.75 kB
+dist/assets/CattlePresentation-BsbnPLU9.js              0.29 kB │ gzip:   0.18 kB
+dist/assets/Renderer-PhfSAdC1.js                        0.36 kB │ gzip:   0.27 kB
+dist/assets/Villager-DFyEAVnx.js                        0.76 kB │ gzip:   0.50 kB
+dist/assets/worldConfig-Cbdzbz_P.js                     0.90 kB │ gzip:   0.60 kB
+dist/assets/HumanPreviewPace-C-jA8bK3.js                0.92 kB │ gzip:   0.56 kB
+dist/assets/BuildingPlot-0y-qhOkh.js                    1.73 kB │ gzip:   0.88 kB
+dist/assets/PreviewGround-D6OEsN3R.js                   1.80 kB │ gzip:   0.88 kB
+dist/assets/generateName-DOQ4o1iH.js                    4.36 kB │ gzip:   1.79 kB
+dist/assets/generateCharacterDNA-Cdq_oL7s.js            5.67 kB │ gzip:   2.17 kB
+dist/assets/AssetLab-D0bYOaSl.js                        6.03 kB │ gzip:   2.65 kB
+dist/assets/index-DZMeBwDS.js                           6.09 kB │ gzip:   2.27 kB
+dist/assets/MeshyCharacterLab-7FFhgRMU.js               7.10 kB │ gzip:   3.02 kB
+dist/assets/CowCharacterPreview-CfxtPS59.js            10.66 kB │ gzip:   4.14 kB
+dist/assets/WaterLab-BodvI5x2.js                       11.37 kB │ gzip:   3.92 kB
+dist/assets/ReferenceWater-BoFca5F4.js                 12.29 kB │ gzip:   4.54 kB
+dist/assets/GameplayLab-CO1OfHwO.js                    18.45 kB │ gzip:   6.30 kB
+dist/assets/OrbitControls-BTMbxYU0.js                  19.11 kB │ gzip:   4.34 kB
+dist/assets/Game-DDqV9Gxh.js                           20.75 kB │ gzip:   7.40 kB
+dist/assets/lightingConfig-BeWTauKR.js                 21.45 kB │ gzip:   9.37 kB
+dist/assets/PlayUI--Y7vYESR.js                         24.14 kB │ gzip:   8.67 kB
+dist/assets/SettlementBrowser-CFlZ3Q0Y.js              25.49 kB │ gzip:   9.59 kB
+dist/assets/RTSCameraController-C5SCD22Q.js            26.55 kB │ gzip:  10.05 kB
+dist/assets/BlueprintMovement-CS1RNVHT.js              49.99 kB │ gzip:  18.30 kB
+dist/assets/FjordPlay-DFT2lNxR.js                      62.12 kB │ gzip:  20.90 kB
+dist/assets/EnvironmentLab-4g_On5AV.js                 73.90 kB │ gzip:  23.97 kB
+dist/assets/Chronicle-BiVo-LEG.js                      91.24 kB │ gzip:  28.85 kB
+dist/assets/CharacterLab-9CmWVhbo.js                   94.07 kB │ gzip:  28.49 kB
+dist/assets/CharacterFactory-DOnpACn0.js               94.52 kB │ gzip:  31.65 kB
+dist/assets/MeshyHuman-CKu6sk1I.js                    162.37 kB │ gzip:  54.75 kB
+dist/assets/GoldenBodySurfaceCalibration-C_5LNdMz.js  314.91 kB │ gzip:  64.61 kB
+dist/assets/three.module-BX45jnGX.js                  560.02 kB │ gzip: 143.03 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 10.19s

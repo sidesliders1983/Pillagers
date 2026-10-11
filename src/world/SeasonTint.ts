@@ -9,11 +9,15 @@ export class SeasonTint {
     private snow=new Map<MeshStandardMaterial,{value:number}>();
     private snowTone=new Color('#edf2f3');
     constructor(root:Group,terrain:Mesh){
-        for(const material of Array.isArray(terrain.material)?terrain.material:[terrain.material]){
-            if(!(material instanceof MeshStandardMaterial))continue;
-            this.grounds.set(material,material.color.clone());
-            this.addSnow(material,false);
-        }
+        // Generated terrain has child sand, rock and path layers. Tint their existing materials too.
+        terrain.traverse(node=>{
+            if(!(node instanceof Mesh))return;
+            for(const material of Array.isArray(node.material)?node.material:[node.material]){
+                if(!(material instanceof MeshStandardMaterial)||this.grounds.has(material))continue;
+                this.grounds.set(material,material.color.clone());
+                this.addSnow(material,false);
+            }
+        });
         const clones=new Map<MeshStandardMaterial,MeshStandardMaterial>();
         root.traverse(node=>{if(!(node instanceof Mesh)||!node.userData.seasonalFoliage)return;
             const copy=(source:MeshStandardMaterial)=>{let material=clones.get(source);if(!material){material=source.clone();material.onBeforeCompile=source.onBeforeCompile;material.customProgramCacheKey=source.customProgramCacheKey;clones.set(source,material);this.materials.set(material,source.color.clone());this.addSnow(material,true);}return material;};
@@ -52,6 +56,14 @@ export class SeasonTint {
         for (const [ground, base] of this.grounds) ground.color.copy(base).multiply(this.tint);
         this.tint.setHex(0xffffff).lerp(this.next.setHex(winter.foliage), amount);
         for (const [material, base] of this.materials) material.color.copy(base).multiply(this.tint);
+    }
+    inspect() {
+        return {
+            groundColors:[...this.grounds.keys()].map(material=>material.color.getHex()),
+            foliageColors:[...this.materials.keys()].map(material=>material.color.getHex()),
+            snowAmounts:[...this.snow.values()].map(amount=>amount.value),
+            materials:[...this.snow.keys()].map(material=>material.uuid)
+        };
     }
     dispose(){for(const material of this.materials.keys())material.dispose();}
 }

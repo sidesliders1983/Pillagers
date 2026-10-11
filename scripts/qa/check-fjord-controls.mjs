@@ -1,3 +1,4 @@
+import { toggleFjordCampaign } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
@@ -89,11 +90,11 @@ try {
         assert.match(await page.locator('#entity-panel').innerText(), /Insufficient Materials/);
         console.log('Unaffordable house is disabled with its reason.');
         let expected = core.createCampaign(32, { initialMaterials: 100, foundingCoupleChanceBps: 0 }, {}, { enabled: false });
-        await page.locator('summary').filter({ hasText: /^Campaign$/ }).click();
+        await toggleFjordCampaign(page);
         await page.locator('#fjord-import').setInputFiles({ name: 'buildable.json', mimeType: 'application/json',
             buffer: Buffer.from(core.serializeState(expected)) });
         await page.locator('#fjord-notice').filter({ hasText: 'Campaign imported, paused.' }).waitFor();
-        await page.locator('summary').filter({ hasText: /^Campaign$/ }).click();
+        await toggleFjordCampaign(page);
         await page.getByText('Settlement identities', { exact: true }).click();
         await page.locator('#fjord-identities button[data-kind="household"][data-id="founder-1"]').click();
         await page.getByText('Settlement identities', { exact: true }).click();
@@ -102,7 +103,7 @@ try {
             .some(entity => entity.key === 'building:house-1'));
         console.log('Affordable house is visible in 3D.');
         expected = core.applyCommand(expected, { type: 'BuildHouse', householdId: 'founder-1' });
-        await page.locator('summary').filter({ hasText: /^Campaign$/ }).click();
+        await toggleFjordCampaign(page);
         const [download] = await Promise.all([page.waitForEvent('download'),
             page.getByRole('button', { name: 'Export canonical JSON', exact: true }).click()]);
         try {

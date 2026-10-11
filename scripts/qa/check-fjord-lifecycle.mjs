@@ -1,7 +1,9 @@
+import { openFjordCampaign, toggleFjordCampaign, advanceFjordYear, selectFjordPace } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { loadTypeScript } from '../load-typescript.mjs';
+import { pausedCheckpoint } from './fjord-stability-scenario.mjs';
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
@@ -23,9 +25,9 @@ for (const id of ['founder-1', 'founder-2']) {
 }
 for (const cow of Object.values(state.landing.cattle).filter(c => c.sex === 'female'))
     cow.foodProgress = state.ticksPerWinter * 10000 - 1;
-const fixture = core.serializeState(state);
-const browser = await chromium.launch({ headless: true,
-    args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+const browser = await chromium.launch(process.env.QA_NATIVE === '1' ?
+    { headless: true, channel: 'msedge' } :
+    { headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 try {
     const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, hasTouch: true });
     const page = await context.newPage();
@@ -35,7 +37,7 @@ try {
     await page.addInitScript(json => {
         if (!sessionStorage.getItem('pillagers.fjord-play.active.v1'))
             sessionStorage.setItem('pillagers.fjord-play.active.v1', json);
-    }, fixture);
+    }, pausedCheckpoint(state));
     await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded' });
     const canvas = page.locator('#fjord-canvas');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
@@ -66,7 +68,7 @@ try {
             }
         }).observe(root, { childList: true, subtree: true, attributes: true });
     });
-    await page.selectOption('#fjord-cycle', '1');
+    await selectFjordPace(page, '1');
     await page.getByRole('button', { name: 'Start', exact: true }).click();
     await page.waitForFunction(() => window.qaProduction.some(item => item.personaId === 'founder-1' && item.resource === 'food') &&
         window.qaProduction.some(item => item.personaId === 'founder-2' && item.resource === 'materials') &&
@@ -80,8 +82,9 @@ try {
     assert.match(labels.find(item => item.cattleId === 'cattle-1').text, /^\+1 Food$/);
     assert.ok(labels.every(item => /^\+\d+ (Food|Materials)$/.test(item.text)), 'Labels omit names.');
     await mkdir(output, { recursive: true });
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     const exported = async () => {
+        await openFjordCampaign(page);
         const [download] = await Promise.all([page.waitForEvent('download'),
             page.getByRole('button', { name: 'Export canonical JSON', exact: true }).click()]);
         try { return JSON.parse(await readFile(await download.path(), 'utf8')); }
@@ -103,13 +106,14 @@ try {
     console.log('Paused fade preserves canonical state.');
     await page.getByRole('button', { name: 'Save locally', exact: true }).click();
     const saved = actual;
-    await page.getByRole('button', { name: '+1 Winter', exact: true }).click();
+    await advanceFjordYear(page);
     await page.waitForFunction(() => document.querySelector('#fjord-winter').textContent.includes('Winter 801'));
     const batch = await exported();
     assert.deepEqual(batch, JSON.parse(core.serializeState(core.applyCommand(saved, { type: 'AdvanceWinter' }))));
     const totals = JSON.parse(await page.locator('#fjord-production-labels').getAttribute('data-totals'));
     assert.equal(totals.reduce((sum, item) => sum + item.units, 0), batch.events.filter(e => e.type === 'ResourceProduced' || e.type === 'CattleFoodProduced').reduce((sum, e) => sum + e.details.units, 0));
     console.log('Batched output matched.');
+    await openFjordCampaign(page);
     await page.getByRole('button', { name: 'Load locally', exact: true }).click();
     await page.locator('#fjord-notice').filter({ hasText: 'Shared campaign loaded, paused.' }).waitFor();
     assert.deepEqual(await exported(), saved, 'A partial Winter is restored exactly.');
@@ -123,9 +127,9 @@ try {
         page.getByRole('link', { name: '3D Fjord', exact: true }).click({ noWaitAfter: true })]);
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
     assert.equal(await page.locator('#fjord-production-labels span').count(), 0, 'View handoff never replays effects.');
-    await page.getByText('Campaign', { exact: true }).click();
+    await toggleFjordCampaign(page);
     assert.deepEqual(await exported(), saved);
-    await page.getByRole('button', { name: '+1 Winter', exact: true }).click();
+    await advanceFjordYear(page);
     await page.waitForFunction(() => document.querySelector('#fjord-winter').textContent.includes('Winter 801'));
     const afterLoad = await exported();
     const newTotals = JSON.parse(await page.locator('#fjord-production-labels').getAttribute('data-totals'));
