@@ -139,11 +139,12 @@ export function stepMechanicsTick(state:SimulationState):void {
                 building.debtWinters++;
                 emit(state,'MaintenanceDebtIncreased',undefined,{buildingId:id,debtWinters:building.debtWinters,reason:occupied?'unpaid':'vacant'});
                 if(building.debtWinters===config.collapseDebtWinters){
+                    const housingFacts=eventFacts(state,{buildingId:id});
                     const salvage=Math.floor(building.investedMaterials*config.salvageBps/10000);state.stocks.materials+=salvage;
                     for(const residence of Object.values(state.residences))if(residence.buildingId===id){residence.kind='tent';residence.buildingId=null;}
                     for(const cattle of Object.values(state.landing?.cattle??{}))if(cattle.farmyardId===id)cattle.farmyardId=null;
                     delete state.buildings[id];delete state.mechanics!.buildings[id];
-                    emit(state,'BuildingCollapsed',undefined,{buildingId:id,salvage});
+                    emit(state,'BuildingCollapsed',undefined,{...housingFacts,buildingId:id,salvage});
                 }
             }
         }
@@ -168,13 +169,14 @@ export function applyMechanicsCommand(state:SimulationState,command:MechanicsCom
     if(!state.mechanics)throw new Error('Mechanics must be initialized');
     if(command.type==='SalvageBuilding'){
         const building=state.buildings[command.buildingId];if(!building||building.kind!=='house')throw new Error('House required');
+        const housingFacts=eventFacts(state,{buildingId:building.id});
         const investedMaterials=state.mechanics.buildings[building.id].investedMaterials;
         const salvage=Math.floor(investedMaterials/2);
         for(const home of Object.values(state.households))if(home.residenceId&&state.residences[home.residenceId]?.buildingId===building.id)applyMechanicsCommand(state,{type:'AssignResidence',householdId:home.id,residenceId:null});
         for(const residence of Object.values(state.residences))if(residence.buildingId===building.id)delete state.residences[residence.id];
         for(const cattle of Object.values(state.landing?.cattle??{}))if(cattle.farmyardId===building.id)cattle.farmyardId=null;
         delete state.buildings[building.id];delete state.mechanics.buildings[building.id];state.stocks.materials+=salvage;
-        emit(state,'BuildingSalvaged',undefined,{buildingId:building.id,investedMaterials,salvage});return;
+        emit(state,'BuildingSalvaged',undefined,{...housingFacts,buildingId:building.id,investedMaterials,salvage});return;
     }
     if(command.type==='AssignCaregiver'){assignCaregiver(state,command.motherId,command.caregiverId,true,(type,personaId,details)=>emit(state,type,personaId,details));return;}
     if(command.type==='ReleaseOccupation'){

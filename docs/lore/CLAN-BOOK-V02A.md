@@ -87,3 +87,16 @@ The identity fingerprint is a non-security consistency check, not authentication
 user-edited save files. Reader text is escaped, including names and recorded fields.
 
 [Executed QA and limitations](../qa/clan-book/report.md).
+
+## Housing reference correction (#112)
+
+The settlement, management panels and new Lore use the shared resident-based housing
+labels described in [the source map](HOUSING-NAMES-112-AUDIT.md). New Core events add
+version-1 `housingNames` reference snapshots; they do not change simulation rules or IDs.
+Fresh opening facts also freeze optional household `displayName` and `residenceName`.
+Source identities remain available in a separate factual disclosure.
+
+Composition never resolves an old event against today's occupants. Missing historical
+labels have neutral fallbacks. Imports without optional opening labels remain valid.
+Published text, checkpoint identity, notification state and reading state are preserved;
+this fix does not rewrite already published chapters. The reader still leaves pacing alone.

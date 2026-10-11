@@ -34,4 +34,4 @@ The factual timeline now supports recorded resident/cattle deaths and cattle bir
 The persistent opening and five-Winter Clan Book are documented separately in
 [lore/CLAN-BOOK-V02A.md](lore/CLAN-BOOK-V02A.md). Raw Events remain available.
 
-Housing events without a recorded historical designation use neutral home/household terms. Canonical IDs remain in source events. See [the #112 investigation](lore/HOUSING-NAMES-112-AUDIT.md) for the pending named-entity integration; existing published Clan Book text is retained.
+Housing references now share resident-based display names with the settlement. New events freeze the designation when recorded; salvage/collapse capture it before removal. Events without a usable historical snapshot use neutral home/household terms. Canonical IDs remain in source events. See [the #112 source map](lore/HOUSING-NAMES-112-AUDIT.md). Existing published Clan Book text is retained.

@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "errors": [],
+  "checks": [
+    "resident household/home names",
+    "canonical picker values",
+    "historical chapter labels",
+    "2D/Fjord names and saved text",
+    "refresh notification deduplication",
+    "tablet touch layout",
+    "clock continues while reading",
+    "cultural spelling and HTML escaping"
+  ]
+}

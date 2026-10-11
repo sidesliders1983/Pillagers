@@ -1,58 +1,64 @@
-# Housing names in Lore — #112 investigation
+# Housing names in Lore — #112 source map
 
-Status: partial fix; the accepted resident-based house/household naming source is still unresolved.
-This does not close #112 and must not be released as the complete naming repair.
+Implemented after the owner's 11 October screenshot clarification: the affected labels
+are `house-2`, `Household: founder-9` and `Residence: house-2` in the management panel.
+The screenshot shows Daugirdė as its resident. These references now use Daugirdė's stored
+character name consistently in the settlement and in newly recorded Lore.
 
-Inspected integration: `codex/lore-clan-book`, bbdaaa9729f63ac59dd76ec2fcce7664f7dad8d3,
-with the active LAN worktree in occupation-aptitude-study. Also inspected the current
-primary checkout and tracked remote branches; this is not based solely on older main.
-The owner confirms a resident-based naming convention exists. That remains the intended
-source to reuse; the paths below do not yet identify its implementation.
+## Naming source and clarification
 
-## Current source map
+The inspected integration is `codex/lore-clan-book` at bbdaaa9, also the base of this fix.
+Both its 2D/Fjord projections and management panel used raw housing IDs; their resident
+lists already used stored persona names. The audit did not find a separate accepted house
+name field or formatter. The supplied screenshot clarified that these raw panel labels
+are themselves the target. This fix shares their resident-based display resolution rather
+than claiming to have found an existing named-house registry.
 
-- `src/play/SettlementView.ts`, `projectSettlement`: building labels use `b.id`;
-  tent labels use `Household ${home.id}`. Named persona labels use `p.name`.
-- `src/fjord-play/FjordProjection.ts`, `projectFjord`: building labels use `building.id`;
-  tents use `Household ` plus `home.id`.
-- `src/play/SelectionPresentation.ts`, `projectSelection`: forwards the entity label;
-  `src/fjord-play/SelectionLabels.ts` escapes and renders it without resolving another name.
-- `src/play/SettlementPanel.ts`, `render`: house/household headings use IDs. Its resident
-  list uses stored persona names. This list is not proof of a separate house-name convention.
-- `src/gameplay-lab/GameplayLab.ts`: household/building headings use IDs; resident lists
-  use stored persona names.
-- `src/simulation/SimulationCore.ts`: household records contain id/memberIds/residenceId;
-  buildings contain id/kind/specialization. There is no declared display-name field here.
-- `src/simulation/EventFacts.ts`, `eventFacts`: captures persona names/ages from participants,
-  but currently captures no historical home/household designation.
-- `src/lore/Chronicle.ts`, housing templates: previously interpolated those IDs directly.
-- `src/lore/ClanBook.ts`, `closeCheckpoint`: freezes text composed from Chronicle at each
-  milestone. `src/lore/ClanBookReader.ts` renders saved text; its opening household rows
-  also currently disclose raw household/residence IDs as ordinary labels.
+`src/simulation/HousingNames.ts`, `housingName`, reads existing active household membership
+and stored cultural character names. A single resident gives `Daugirdė’s home` and
+`Daugirdė’s household`; multiple residents give `Daugirdė and Sigrid’s home`. All living
+members are included in existing membership order. There is no selected household head,
+new surname, dynasty, place generator, extra identity field, or random draw. A vacant
+home has the neutral label `A home`. Tents use the same residents with the noun `tent`.
 
-## Completed independent repair
+## Shared consumers and history
 
-Public projection tests reproduce the exact construction/move sentences reported in #112.
-Events without a recorded designation now say a home/a household/a tent rather than using
-an internal identifier as a name. The same fallback covers upgrade, specialization, paid
-salvage, collapse, maintenance debt and Farmyard-function events. Canonical events/IDs,
-ordering, monetary quantities and source links are unchanged.
+- `src/play/SettlementView.ts` and `src/fjord-play/FjordProjection.ts` call the shared
+  helper for housing entity labels. Selection keys and canonical IDs stay unchanged.
+- `src/play/SettlementPanel.ts`, `src/play/PlayUI.ts` and
+  `src/gameplay-lab/GameplayLab.ts` use it for headings, household/residence links and
+  house/Farmyard picker text. Option values, commands and selection attributes retain IDs.
+- `src/simulation/EventFacts.ts`, `eventFacts`, adds `details.housingNames` only when a
+  recorded reference can be resolved: `{ version: 1, building?, household?, residence? }`.
+  Each entry contains its canonical `id` and the contemporaneous `name`.
+- `src/simulation/Mechanics.ts` captures salvage/collapse names before deleting homes or
+  returning their residents to tents. Build events use their explicit household reference.
+- `src/simulation/Farmyards.ts` uses the existing fact-capture path for function transitions.
+  A transition emitted after removal cannot resolve the deleted home and uses a neutral
+  historical fallback; no current resident is invented as its former owner.
+- `src/lore/Chronicle.ts`, `housingReference`, accepts only matching IDs in version-1
+  snapshots. Construction, move, specialization, upgrade, debt, salvage, collapse,
+  Farmyard function and cattle assignment templates retain quantities and source IDs.
+- `src/lore/ClanBook.ts` freezes optional opening household `displayName` and
+  `residenceName` fields. `src/lore/ClanBookReader.ts` escapes these factual labels;
+  explicit Housing source identities retain household, residence and membership IDs.
 
-Published Clan Book text stays frozen: this patch does not regenerate existing saved
-chapters. The on-demand Chronicle and future chapter composition use the corrected fallback.
-No repair migration or new naming policy has been introduced. Historical QA is unchanged.
+## Compatibility and gameplay
 
-## Required next work
+New events carry additive presentation metadata; rules, canonical entities, event order,
+relationships, RNG, resource quantities and command outcomes are unchanged. A comparison
+against bbdaaa9 checks three seeds at eight command checkpoints each, including nested CPU
+clans and ten Winters. After excluding only `housingNames`, states are deeply identical.
 
-Identify the accepted readable-name helper/consumer or an actual route/example from the
-owner. Reuse it with minimal event-time snapshots, including capturing a designation before
-moves/deletion. New chapter prose and factual rows must match that convention. Cover changed
-membership/occupants, same-name distinct IDs, cultural spelling/escaping and published text.
-Supply focused browser before/after evidence. The current neutral fallback is not a substitute
-for that missing named-entity path and its acceptance checks.
+Legacy events without a usable recorded designation use `a home`, `a household` or
+`a tent`; they retain provenance and are not backfilled from present-day residents.
+The on-demand Chronicle and future chapter composition use the corrected references.
+Already published chapter text remains byte-for-byte stored text, including old raw-ID
+sentences. No automatic repair migration is included. Old opening facts lacking optional
+labels render neutral rows and retain their IDs in the source disclosure.
 
-## Executed checks
+## Evidence
 
-14 Chronicle/Clan Book public tests pass (including two red-to-green housing regressions).
-Build passes. Formatting/diff checked manually; no formatter is configured.
-No final browser naming acceptance or physical iPad verification is claimed yet.
+[Focused browser evidence and regression results](../qa/housing-lore/report.md).
+Historical measurement/QA reports are preserved. Formatting was reviewed manually;
+there is no configured formatter command.
