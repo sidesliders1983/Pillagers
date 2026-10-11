@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pillagers · Local Lore comparison</title>
+<style>
+*{box-sizing:border-box}body{overflow-wrap:anywhere;margin:0;background:#182c26;color:#ede5cd;font:17px/1.6 system-ui}main{max-width:1440px;margin:auto;padding:24px}label,select{display:block}select{width:100%;padding:12px;background:#2d4239;color:inherit;border:1px solid #8e8969;font:inherit}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}article{background:#233931;padding:20px;border:1px solid #777a61;border-radius:8px}h1,h2{font-family:Georgia,serif}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}small{color:#bdc4af}@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+<main>
+<h1>Local Lore comparison · developer experiment</h1>
+<p>Identical frozen campaigns; controlled composer A, optional Qwen arrangement B and C. Model answers can choose approved paragraphs only. No generated prose is published to the game.</p>
+<p id="status">Loading recorded outcomes…</p>
+<label for="sample">Recorded chapter</label><select id="sample"></select>
+<p id="facts"></p>
+<div class="grid">
+<article><h2>A · Controlled composer</h2><pre id="a"></pre></article>
+<article><h2>B · Qwen3-4B-Instruct-2507</h2><small id="b-state"></small><pre id="b"></pre></article>
+<article><h2>C · Qwen3.5-4B</h2><small id="c-state"></small><pre id="c"></pre></article>
+</div>
+<p>Compare readability, continuity and recurring wording. A fallback shows the original composer, not a successful model result. Exact resource values remain in the game’s factual overview. Technical results do not establish reader preference.</p>
+<p><a href="report.md" style="color:#dac491">Measurement report</a> · <a href="manifest.json" style="color:#dac491">Pinned settings</a></p>
+</main>
+<script type="module">
+async function records(label){try{const response=await fetch('candidate-'+label+'.jsonl');if(!response.ok)return [];return (await response.text()).trim().split('\n').filter(Boolean).map(line=>JSON.parse(line));}catch{return [];}}
+const [b,c]=await Promise.all([records('B'),records('C')]);
+const select=document.querySelector('#sample');
+for(const [index,row] of b.entries()){const option=document.createElement('option');option.value=String(index);option.textContent=row.campaign+' · chapter '+row.chapter;select.append(option);}
+document.querySelector('#status').textContent='Recorded outcomes: B '+b.length+', C '+c.length+'. The planned cohort contains 60 chapters per candidate; incomplete data stays explicitly incomplete.';
+function render(){const first=b[Number(select.value)];if(!first)return;const other=c.find(row=>row.campaign===first.campaign&&row.chapter===first.chapter);document.querySelector('#a').textContent=first.baseline;for(const [label,row] of [['b',first],['c',other]]){document.querySelector('#'+label).textContent=row?.result.text??'Not measured yet.';document.querySelector('#'+label+'-state').textContent=row?row.result.status+' · '+row.result.reason+' · '+Math.round(row.result.milliseconds??0)+' ms':'Pending measurement';}document.querySelector('#facts').textContent='Seed '+first.seed+' · narrative seed '+first.narrativeSeed+' · exact frozen input key '+first.inputKey;}
+select.addEventListener('change',render);render();
+</script>
+</html>

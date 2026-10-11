@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-11T21:02:29.0113716Z",
+  "candidate": "C",
+  "status": "not-run",
+  "reason": "Concurrent 3D probe not started: only about 1 GB disk reserve remained; the B probe already caused paging pressure. No clean C frame-impact claim.",
+  "workingSetBytes": 3157692416,
+  "privateBytes": 3743420416,
+  "freeRAMBytes": 3305742336,
+  "freeDiskBytes": 1036636160
+}

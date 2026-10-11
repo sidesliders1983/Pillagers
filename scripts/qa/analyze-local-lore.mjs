@@ -39,7 +39,7 @@ for (const folder of [root, root + '/edge-cases']) {
         let rows;
         try { rows = (await readFile(folder + '/candidate-' + label + '.jsonl', 'utf8')).trim().split('\n').filter(Boolean).map(JSON.parse); }
         catch (error) { if (error.code === 'ENOENT') continue; throw error; }
-        let acceptedAudited = 0, changedAccepted = 0;
+        let acceptedAudited = 0, changedAccepted = 0, acceptedWithOlderSources = 0;
         const failures = [];
         for (const campaign of corpus) {
             const history = [];
@@ -58,13 +58,17 @@ for (const folder of [root, root + '/edge-cases']) {
                     const checkpoint = JSON.parse(campaign.snapshots[request.chapterIndex]).fjord.campaign;
                     const events = checkpoint.events.slice(0, request.checkpoint.eventEnd);
                     assert.ok(sources.every(id => events.some(event => event.id === id)));
+                    const from = request.context.facts.period?.from;
+                    if (from && sources.some(id => events.some(event => event.id === id &&
+                        (event.time.winter < from.winter || event.time.winter === from.winter && event.time.tick < from.tick))))
+                        acceptedWithOlderSources++;
                     acceptedAudited++;
                     if (row.result.text !== row.baseline) changedAccepted++;
                 } else failures.push({ campaign: row.campaign, chapter: row.chapter, reason: row.result.reason, raw: row.result.raw });
                 history.push(row.result.text);
             }
         }
-        cohort.candidates[label] = { ...summarizeLoreComparison(rows), acceptedAudited, changedAccepted,
+        cohort.candidates[label] = { ...summarizeLoreComparison(rows), acceptedAudited, changedAccepted, acceptedWithOlderSources,
             acceptedSameAsBaseline: acceptedAudited - changedAccepted, baselineParagraphs: normalizedParagraphs(rows, false), comparisonParagraphs: normalizedParagraphs(rows, true), failures };
     }
     all[folder === root ? 'defaultCohort' : 'controlledFixtures'] = cohort;

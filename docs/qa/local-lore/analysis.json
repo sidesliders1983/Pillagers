@@ -1,0 +1,378 @@
+{
+  "generatedAt": "2026-10-11T21:08:54.247Z",
+  "sources": [
+    {
+      "file": "src/lore/LocalLoreAdapter.ts",
+      "sha256": "6456c153146b134932fd6ce605b49cab7f894f6a412d27270324ca69aa32d781"
+    },
+    {
+      "file": "src/lore/LoreExperimentQueue.ts",
+      "sha256": "268cce293831199e26de08ed7b2d1701586a54c028bc9eddb1409cc05cd85edf"
+    },
+    {
+      "file": "src/lore/LoreBenchmark.ts",
+      "sha256": "504037fa5c69478e498592845d124f8d1ba64cb24feb263211dd60b82dd96f9d"
+    },
+    {
+      "file": "src/lore/NarrativeComposer.ts",
+      "sha256": "85e24dd78a72a44bfc014cbde6fc1034830fc1d64ae1453ef91c76e98563c147"
+    },
+    {
+      "file": "src/lore/NarrativePlan.ts",
+      "sha256": "db6adabbf25acc670129cba220a5e43071e8416eb990cee8037ec35bd8988311"
+    },
+    {
+      "file": "src/lore/ClanBook.ts",
+      "sha256": "c29d8b1b142cecc6e5b4011a9680ebb2b8101e6badf22683699027656f5eb911"
+    }
+  ],
+  "defaultCohort": {
+    "corpusHash": "684b8601f55bdba61d624f96702a734d829d7c375023bb6a0ce11b45b49bb3fb",
+    "campaigns": 20,
+    "eventTypes": [
+      "FoundingPartyLanded",
+      "FoundingPartnershipPresent",
+      "WinterWeatherDetermined",
+      "FoundingLongshipSalvaged",
+      "ResourceProduced",
+      "CattleFoodProduced",
+      "WinterAdvanced",
+      "CattleFoodConsumed",
+      "FoodConsumed",
+      "CattleBorn",
+      "CattleDied",
+      "PartnershipFormed",
+      "HouseBuilt",
+      "ResidenceAssigned",
+      "ChildBorn",
+      "FarmyardFunctionChanged",
+      "BuildingMaintained",
+      "MaintenanceDebtIncreased",
+      "OccupationAssigned",
+      "PersonaDied",
+      "BuildingCollapsed"
+    ],
+    "candidates": {
+      "B": {
+        "chapters": 60,
+        "accepted": 53,
+        "fallbacks": 7,
+        "stale": 0,
+        "reasons": {
+          "validated-catalogue": 53,
+          "http-400": 6,
+          "unsupported-selection": 1
+        },
+        "latencyMs": {
+          "samples": 60,
+          "minimum": 198.94599999999627,
+          "median": 13984.085100000026,
+          "p95": 30324.77489999996,
+          "maximum": 31513.907800000045
+        },
+        "baseline": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "comparison": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "readerPreference": "not-measured",
+        "factuality": "Accepted output is drawn from the approved catalogue; no semantic truth claim for unrestricted prose.",
+        "acceptedAudited": 53,
+        "changedAccepted": 51,
+        "acceptedWithOlderSources": 5,
+        "acceptedSameAsBaseline": 2,
+        "baselineParagraphs": {
+          "instances": 221,
+          "repeatedAfterNamesAndNumbers": 93,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "comparisonParagraphs": {
+          "instances": 221,
+          "repeatedAfterNamesAndNumbers": 97,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "failures": [
+          {
+            "campaign": "Default Core rules, seed 1",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4319 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4319,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 6",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4583 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4583,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 7",
+            "chapter": 1,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4501 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4501,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 7",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4099 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4099,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 11",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4826 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4826,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 15",
+            "chapter": 1,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\":[\\\"p8\\\",\\\"p9\\\",\\\"p13\\\",\\\"p15\\\"]}\"}}],\"created\":1791749678,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":18,\"prompt_tokens\":3538,\"total_tokens\":3556,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-ThRVGSFcb8pMbhgG3zalUyhJUDK5QfSH\",\"timings\":{\"cache_n\":0,\"prompt_n\":3538,\"prompt_ms\":25568.455,\"prompt_per_token_ms\":7.226810344827586,\"prompt_per_second\":138.3736326657203,\"predicted_n\":18,\"predicted_ms\":2508.278,\"predicted_per_token_ms\":147.54576470588233,\"predicted_per_second\":6.7775581494555235}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 18",
+            "chapter": 1,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4173 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4173,\"n_ctx\":4096}}"
+          }
+        ]
+      },
+      "C": {
+        "chapters": 60,
+        "accepted": 48,
+        "fallbacks": 12,
+        "stale": 0,
+        "reasons": {
+          "validated-catalogue": 48,
+          "http-400": 5,
+          "unsupported-selection": 6,
+          "unavailable-or-invalid-response": 1
+        },
+        "latencyMs": {
+          "samples": 60,
+          "minimum": 32.14549999999872,
+          "median": 15269.718400000012,
+          "p95": 28245.72139999998,
+          "maximum": 32768.70609999998
+        },
+        "baseline": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "comparison": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "readerPreference": "not-measured",
+        "factuality": "Accepted output is drawn from the approved catalogue; no semantic truth claim for unrestricted prose.",
+        "acceptedAudited": 48,
+        "changedAccepted": 17,
+        "acceptedWithOlderSources": 4,
+        "acceptedSameAsBaseline": 31,
+        "baselineParagraphs": {
+          "instances": 221,
+          "repeatedAfterNamesAndNumbers": 93,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "comparisonParagraphs": {
+          "instances": 221,
+          "repeatedAfterNamesAndNumbers": 93,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "failures": [
+          {
+            "campaign": "Default Core rules, seed 1",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4267 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4267,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 3",
+            "chapter": 2,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p1\\\", \\\"p9\\\", \\\"p2\\\"]}\"}}],\"created\":1791751435,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":16,\"prompt_tokens\":3173,\"total_tokens\":3189,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-rer6fI5A7Lzipwun8EMwVLci1QTJNrbW\",\"timings\":{\"cache_n\":0,\"prompt_n\":3173,\"prompt_ms\":15571.111,\"prompt_per_token_ms\":4.9073781909864485,\"prompt_per_second\":203.77479808601967,\"predicted_n\":16,\"predicted_ms\":1581.827,\"predicted_per_token_ms\":105.45513333333334,\"predicted_per_second\":9.482705757329974}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 6",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4586 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4586,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 7",
+            "chapter": 1,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4451 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4451,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 7",
+            "chapter": 2,
+            "reason": "unavailable-or-invalid-response",
+            "raw": "{\"choices\":[{\"finish_reason\":\"length\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p12\\\", \\\"p1\\\", \\\"p2\\\", \\\"p7\"}}],\"created\":1791751621,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":19,\"prompt_tokens\":4077,\"total_tokens\":4096,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-ZLxbNpo6UJf7VVTSGglOkEqfd8Z5gAW8\",\"timings\":{\"cache_n\":0,\"prompt_n\":4077,\"prompt_ms\":27076.36,\"prompt_per_token_ms\":6.641246014226147,\"prompt_per_second\":150.57415398524765,\"predicted_n\":19,\"predicted_ms\":5578.053,\"predicted_per_token_ms\":309.89183333333335,\"predicted_per_second\":3.226932408135957}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 9",
+            "chapter": 1,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p12\\\", \\\"p13\\\", \\\"p11\\\", \\\"p14\\\"]}\"}}],\"created\":1791751728,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":24,\"prompt_tokens\":3641,\"total_tokens\":3665,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-sEZDBmwsPRcWYOoXfsdw1qJnPxi4sAUc\",\"timings\":{\"cache_n\":0,\"prompt_n\":3641,\"prompt_ms\":23396.017,\"prompt_per_token_ms\":6.42571189233727,\"prompt_per_second\":155.62478006405962,\"predicted_n\":24,\"predicted_ms\":4627.717,\"predicted_per_token_ms\":201.2050869565217,\"predicted_per_second\":4.970053268166572}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 11",
+            "chapter": 2,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4732 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4732,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 17",
+            "chapter": 1,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p10\\\", \\\"p5\\\", \\\"p3\\\", \\\"p13\\\"]}\"}}],\"created\":1791752204,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":23,\"prompt_tokens\":3589,\"total_tokens\":3612,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-OSTEMQfAmaR8TSVjcfLxzDbWs7rJvJvN\",\"timings\":{\"cache_n\":0,\"prompt_n\":3589,\"prompt_ms\":23388.451,\"prompt_per_token_ms\":6.516704095848426,\"prompt_per_second\":153.4518040549158,\"predicted_n\":23,\"predicted_ms\":4614.047,\"predicted_per_token_ms\":209.72940909090906,\"predicted_per_second\":4.76804852659715}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 18",
+            "chapter": 1,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4148 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4148,\"n_ctx\":4096}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 19",
+            "chapter": 1,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p0\\\", \\\"p1\\\", \\\"p3\\\", \\\"p14\\\"]}\"}}],\"created\":1791752302,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":21,\"prompt_tokens\":3497,\"total_tokens\":3518,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-edIHwwDErIbQlpqGQfHucQ3nWzOceWcp\",\"timings\":{\"cache_n\":0,\"prompt_n\":3497,\"prompt_ms\":22349.811,\"prompt_per_token_ms\":6.3911384043465835,\"prompt_per_second\":156.46664752556518,\"predicted_n\":21,\"predicted_ms\":3283.099,\"predicted_per_token_ms\":164.15495,\"predicted_per_second\":6.091805333923832}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 20",
+            "chapter": 1,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p1\\\", \\\"p2\\\", \\\"p3\\\", \\\"p14\\\"]}\"}}],\"created\":1791752373,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":21,\"prompt_tokens\":3776,\"total_tokens\":3797,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-BXxd09RdWZED5Fm6b40nbpC8DgKA31lO\",\"timings\":{\"cache_n\":0,\"prompt_n\":3776,\"prompt_ms\":24175.036,\"prompt_per_token_ms\":6.402287076271186,\"prompt_per_second\":156.19418312345016,\"predicted_n\":21,\"predicted_ms\":5209.11,\"predicted_per_token_ms\":260.4555,\"predicted_per_second\":3.8394274645764828}}"
+          },
+          {
+            "campaign": "Default Core rules, seed 20",
+            "chapter": 2,
+            "reason": "unsupported-selection",
+            "raw": "{\"choices\":[{\"finish_reason\":\"stop\",\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"choices\\\": [\\\"p0\\\", \\\"p5\\\", \\\"p10\\\", \\\"p4\\\"]}\"}}],\"created\":1791752399,\"model\":\"C:\\\\CodexWorkspaces\\\\Pillagers\\\\tools\\\\local-lore\\\\Qwen3.5-4B-Q4_K_M.gguf\",\"system_fingerprint\":\"b11429-d81235049\",\"object\":\"chat.completion\",\"usage\":{\"completion_tokens\":21,\"prompt_tokens\":3435,\"total_tokens\":3456,\"prompt_tokens_details\":{\"cached_tokens\":0}},\"id\":\"chatcmpl-o4MaFYY2Vma9qaAfeqb40xRgH5myEmbY\",\"timings\":{\"cache_n\":0,\"prompt_n\":3435,\"prompt_ms\":22396.01,\"prompt_per_token_ms\":6.519944687045124,\"prompt_per_second\":153.37553430276196,\"predicted_n\":21,\"predicted_ms\":3715.27,\"predicted_per_token_ms\":185.7635,\"predicted_per_second\":5.383188839572898}}"
+          }
+        ]
+      }
+    }
+  },
+  "controlledFixtures": {
+    "corpusHash": "53f7532bd6a7d4c2cd71d8c24f382985ea4552ca69a83aca9c5d670296e5026e",
+    "campaigns": 3,
+    "eventTypes": [
+      "FoundingPartyLanded",
+      "ResourceProduced",
+      "CattleFoodProduced",
+      "WinterAdvanced",
+      "CattleFoodConsumed",
+      "FoodConsumed",
+      "WinterWeatherDetermined",
+      "FoundingPartnershipPresent",
+      "ChildBorn",
+      "OccupationAssigned",
+      "CaregiverAssigned"
+    ],
+    "candidates": {
+      "B": {
+        "chapters": 9,
+        "accepted": 8,
+        "fallbacks": 1,
+        "stale": 0,
+        "reasons": {
+          "validated-catalogue": 8,
+          "http-400": 1
+        },
+        "latencyMs": {
+          "samples": 9,
+          "minimum": 227.42379999999685,
+          "median": 5929.583900000005,
+          "p95": 12607.241399999999,
+          "maximum": 12607.241399999999
+        },
+        "baseline": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "comparison": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 2
+        },
+        "readerPreference": "not-measured",
+        "factuality": "Accepted output is drawn from the approved catalogue; no semantic truth claim for unrestricted prose.",
+        "acceptedAudited": 8,
+        "changedAccepted": 7,
+        "acceptedWithOlderSources": 1,
+        "acceptedSameAsBaseline": 1,
+        "baselineParagraphs": {
+          "instances": 25,
+          "repeatedAfterNamesAndNumbers": 11,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "comparisonParagraphs": {
+          "instances": 25,
+          "repeatedAfterNamesAndNumbers": 12,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "failures": [
+          {
+            "campaign": "Occupation and childcare changes",
+            "chapter": 1,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4475 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4475,\"n_ctx\":4096}}"
+          }
+        ]
+      },
+      "C": {
+        "chapters": 9,
+        "accepted": 8,
+        "fallbacks": 1,
+        "stale": 0,
+        "reasons": {
+          "validated-catalogue": 8,
+          "http-400": 1
+        },
+        "latencyMs": {
+          "samples": 9,
+          "minimum": 104.44190000000526,
+          "median": 8304.307199999996,
+          "p95": 17259.32650000001,
+          "maximum": 17259.32650000001
+        },
+        "baseline": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "comparison": {
+          "exactRepeatedBodies": 0,
+          "normalizedRepeatedBodies": 0
+        },
+        "readerPreference": "not-measured",
+        "factuality": "Accepted output is drawn from the approved catalogue; no semantic truth claim for unrestricted prose.",
+        "acceptedAudited": 8,
+        "changedAccepted": 0,
+        "acceptedWithOlderSources": 1,
+        "acceptedSameAsBaseline": 8,
+        "baselineParagraphs": {
+          "instances": 25,
+          "repeatedAfterNamesAndNumbers": 11,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "comparisonParagraphs": {
+          "instances": 25,
+          "repeatedAfterNamesAndNumbers": 11,
+          "note": "Exact paragraph bodies after substituting known names and numbers; a repetition diagnostic, not reader preference or a semantic quality score."
+        },
+        "failures": [
+          {
+            "campaign": "Occupation and childcare changes",
+            "chapter": 1,
+            "reason": "http-400",
+            "raw": "{\"error\":{\"code\":400,\"message\":\"request (4467 tokens) exceeds the available context size (4096 tokens), try increasing it\",\"type\":\"exceed_context_size_error\",\"n_prompt_tokens\":4467,\"n_ctx\":4096}}"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-11T20:35:26.5858417Z",
+  "phase": "Startup overlapped local validation; stopped before cohort inference to preserve disk reserve. Not an isolated model-fit measurement.",
+  "workingSetBytes": 3163680768,
+  "privateBytes": 3706650624,
+  "freeRAMBytes": 1415434240,
+  "freeDiskBytes": 202104832
+}
