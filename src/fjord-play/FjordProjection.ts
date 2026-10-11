@@ -1,3 +1,4 @@
+import { projectFjordCalendar } from './FjordCalendar';
 import type { CharacterDNA } from '../characters/CharacterDNA';
 import { inspectWork, inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -77,6 +78,29 @@ export function createFjordLayout(world: WorldBlueprint, mooring?: FjordTransfor
         plots: {}, points: {}, mooringResolved: Boolean(mooring), mooring: mooring ??
             { x: harbor.x, y: world.waterLevel + .15, z: harbor.z - 6, rotation: 0, scale: 1 } };
 }
+/** The stored anchor belongs to the 5m faering. Keep it stable for existing campaign saves.
+ * Both source hull and pier run along local Z. The 14.47m longship needs a lateral
+ * berth: 2m pier half-width + 1.74m hull half-width + .76m gap, and extra seaward room.
+ */
+function longshipBerth(anchor: FjordTransform): FjordTransform {
+    const forward = 3.5 * anchor.scale;
+    const lateral = 4.5 * anchor.scale;
+    const sine = Math.sin(anchor.rotation), cosine = Math.cos(anchor.rotation);
+    return {
+        ...anchor,
+        x: anchor.x + sine * forward + cosine * lateral,
+        z: anchor.z + cosine * forward - sine * lateral
+    };
+}
+
+/** Independent presentation hash: grid headings never consume the campaign RNG. */
+function dwellingRotation(seed: number, buildingId: string) {
+    let hash = 2166136261;
+    for (const char of seed + ':' + buildingId)
+        hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
+    return (hash >>> 0) % 4 * Math.PI / 2;
+}
+
 export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
     const surface = createBlueprintSurface(world);
     return fitsBuildingFoundation(surface, p) &&
@@ -199,8 +223,13 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         let asset = ['hut', 'homestead', 'longhouse', 'greatHall'][Math.min(level, 3)];
         if (yard && level <= 1)
             asset = level === 0 ? 'farmHut' : 'farmHomestead';
+        const orientedPlot = plot ? {
+            ...plot,
+            rotation: yard ? Math.PI : dwellingRotation(state.seed, building.id)
+        } : undefined;
         const entity: FjordEntity = { kind: 'building', id: building.id, label: building.id,
-            selectionKey: key, asset, transform: plot ? { ...plot } : null, ...(plot ? { plot: { ...plot } } : {}),
+            selectionKey: key, asset, transform: orientedPlot ? { ...orientedPlot } : null,
+            ...(orientedPlot ? { plot: { ...orientedPlot } } : {}),
             status: { living: true, level, farmyard: yard } };
         if (yard) {
             entity.terrainAsset = level <= 1 ? 'farmHutTerrain' : 'farmyardMarker';
@@ -276,12 +305,13 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     }
     for (const ship of Object.values(state.landing?.longships ?? {}))
         if (ship.salvagedWinter === null)
-            add('longship', ship.id, 'Founding longship', 'longship', layout.mooring, { living: true });
+            add('longship', ship.id, 'Founding longship', 'longship', longshipBerth(layout.mooring), { living: true });
     for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
     const ground = projectFjordGround(world, entities);
     if (ground.plots.length > 1 && ground.paths.length < ground.plots.length - 1)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
-    return { entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
+    return { calendar: projectFjordCalendar(state.time, state.ticksPerWinter),
+        entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
 }

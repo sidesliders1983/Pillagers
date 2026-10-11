@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Fjord mooring and management regression review</title>
+    <style>
+        body { margin: 24px; background: #152b28; color: #eee7ce; font: 16px/1.5 system-ui; }
+        main { max-width: 1200px; margin: auto; }
+        img { max-width: 100%; border: 1px solid #7e906c; }
+        a { color: #e2cc9f; }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Fjord mooring and collapsible management</h1>
+        <p>Touch emulation at 1024×768. <a href="report.md">Report</a> ·
+            <a href="result.json">Observations</a> · <a href="/fjord-play">Open settlement</a></p>
+        <h2>Collapsed management</h2>
+        <p>The ▼ button stays at the original panel corner. The canvas retains its size and
+            receives gestures underneath.</p>
+        <img src="collapsed.png" alt="Collapsed management with the small expand control at the upper-right corner">
+        <h2>Selecting a resident reopens management</h2>
+        <img src="selection-reopens.png" alt="Resident selected through an actual touch tap and the management panel reopened">
+        <h2>Longship beside the pier</h2>
+        <p>The larger hull retains the source pier heading and clears its footprint.</p>
+        <img src="mooring.png" alt="Longship parallel beside the pier with clear lateral separation">
+    </main>
+</body>
+</html>

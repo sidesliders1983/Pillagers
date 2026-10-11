@@ -1,3 +1,4 @@
+import { openFjordCampaign, selectFjordQuality } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -60,7 +61,7 @@ try {
         requestAnimationFrame(observe);
     }, core.serializeState(state));
     await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded' });
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
     console.log('Ready; observing occupation visits on every rendered frame.');
     const started = Date.now();
@@ -91,8 +92,7 @@ try {
     checks.push('Four real roles: approach, authored activity (including Sit_and_Doze_Off), departure toward home; exclusive ownership');
     await page.locator('#fjord-run').click();
     await page.screenshot({ path: output + '/working-settlement.png', timeout: 120000 });
-    const summary = page.getByText('Campaign', { exact: true });
-    await summary.click();
+    await openFjordCampaign(page);
     const [download] = await Promise.all([page.waitForEvent('download'), page.locator('#fjord-export-core').click()]);
     const saved = JSON.parse(await readFile(await download.path(), 'utf8'));
     await download.delete();

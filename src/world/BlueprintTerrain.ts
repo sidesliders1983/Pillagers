@@ -94,7 +94,9 @@ export function createBlueprintTerrain(world: WorldBlueprint,
             copy.transparent = true;
             copy.depthWrite = false;
             copy.polygonOffset = true;
-            copy.polygonOffsetFactor = -layer;
+            // Slope-scaled bias grows with camera distance and can pull ground through
+            // authored yard floors. Fixed depth units separate coplanar layers without that drift.
+            copy.polygonOffsetFactor = 0;
             copy.polygonOffsetUnits = -layer;
         }
         geometry.addGroup(0, positions.length / 3, layer);

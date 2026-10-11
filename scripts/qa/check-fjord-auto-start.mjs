@@ -1,3 +1,4 @@
+import { selectFjordQuality } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -14,7 +15,7 @@ try {
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 120000 });
     assert.equal(await page.locator('#fjord-run').innerText(), 'Pause', 'Opening the Fjord starts the clock without pressing Start');
     console.log('Default clock is running.');
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const before = JSON.parse(await canvas.getAttribute('data-motion'));
     await page.waitForFunction(before => JSON.parse(document.querySelector('#fjord-canvas').dataset.motion).some(actor => {
         const previous = before.find(row => row.key === actor.key);

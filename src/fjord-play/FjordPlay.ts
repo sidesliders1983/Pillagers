@@ -1,3 +1,6 @@
+import type { FjordCalendar } from './FjordCalendar';
+import { FjordHeader, fjordHeaderHTML } from './FjordHeader';
+import { ScreenAwakeControl } from '../ui/ScreenAwakeControl';
 import { LivingWorldController } from './LivingWorldController';
 import { renderCharacterProfile } from '../ui/CharacterProfileContent';
 import type { FjordEntity } from './FjordProjection';
@@ -36,26 +39,26 @@ export class FjordPlay {
     async start() {
         document.title = 'Pillagers · Fjord settlement';
         document.body.className = 'fjord-play';
-        document.body.innerHTML = `<main id="fjord-play"><header><h1>Pillagers · Fjord settlement</h1>
-            <nav><a href="/play" data-settlement-view="board">2D Settlement</a> · <a href="/gameplay-lab">Gameplay Lab</a> · <a href="/">Fjord prototype</a></nav>
-            <div class="fjord-controls"><strong id="fjord-winter"></strong><span id="fjord-stocks"></span>
-            <button id="fjord-run">Start</button><button id="fjord-next">+1 Winter</button><label>Cycle<select id="fjord-cycle"><option value="1">1 min / Winter</option><option value="3">3 min / Winter</option><option value="5">5 min / Winter</option></select></label>
-            <label>Quality<select id="fjord-quality"><option value="low">Low</option><option value="standard">Standard</option></select></label>
-            <details><summary>Campaign</summary><div class="fjord-settings">
-            <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
-            <button id="fjord-export" disabled>Export Fjord campaign</button><button id="fjord-export-core">Export canonical JSON</button>
-            <label>Import campaign<input id="fjord-import" type="file" accept="application/json,.json"></label>
-            <label>Seed<input id="fjord-seed" type="number" min="0" max="4294967295"></label>
-            <label class="check"><input id="fjord-weather" type="checkbox"> Enable winter weather</label>
-            <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
-            <button id="fjord-new">New campaign from seed</button><button id="fjord-restart">Restart with same founders</button>
-            <p>The clock starts when opening or restarting the Fjord. Explicit load/import pauses it. Switching 2D/3D retains your clock setting.</p>
-            </div></details></div></header><section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
-            <aside><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
+        document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
+            <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
+            <aside id="fjord-management"><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
+        const header = new FjordHeader(document.querySelector('#fjord-header')!);
+        const screenAwake = new ScreenAwakeControl(document.querySelector('#fjord-play')!);
+        document.querySelector('#screen-awake-slot')!.outerHTML = screenAwake.html();
         const canvas = document.querySelector<HTMLCanvasElement>('#fjord-canvas')!;
+        const management = document.querySelector<HTMLElement>('#fjord-management')!;
+        const managementToggle = document.querySelector<HTMLButtonElement>('#fjord-management-toggle')!;
+        const showManagement = (visible: boolean) => {
+            management.hidden = !visible;
+            managementToggle.textContent = visible ? '▲' : '▼';
+            managementToggle.setAttribute('aria-expanded', String(visible));
+            managementToggle.setAttribute('aria-label',
+                visible ? 'Collapse management panel' : 'Expand management panel');
+        };
+        managementToggle.addEventListener('click', () => showManagement(management.hidden));
         const notice = document.querySelector<HTMLElement>('#fjord-notice')!;
         const say = (message: string) => {
             notice.textContent = message;
@@ -126,15 +129,19 @@ export class FjordPlay {
             canvas.dataset.markers = JSON.stringify(markers);
             selectionLabels.sync(markers);
         };
+        let calendar: FjordCalendar;
+        let canonicalTime = '';
         const refresh = () => {
             const view = this.campaign.project();
-            document.querySelector('#fjord-winter')!.textContent = 'Winter ' + view.time.winter + ' · tick ' + view.time.tick;
             const state = this.session.snapshot();
+            calendar = view.calendar;
+            canonicalTime = 'Canonical time: Winter ' + view.time.winter + ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
             productionLabels.enqueue(production.read(state.events));
-            document.querySelector('#fjord-stocks')!.textContent = 'Food ' + view.stocks.food + ' · Materials ' +
-                view.stocks.materials + ' · ' + Object.values(state.personas).filter(p => p.deathWinter === null).length +
-                ' residents · ' + view.entities.filter(e => e.kind === 'cattle').length + ' cattle · ' +
-                (view.weather.class ?? 'Weather disabled');
+            header.update(view.calendar, view.stocks,
+                Object.values(state.personas).filter(p => p.deathWinter === null).length,
+                view.entities.filter(e => e.kind === 'cattle').length);
+            canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
+            canvas.dataset.calendar = JSON.stringify(view.calendar);
             document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
                 .slice(0, 10).map(w => '<h3>Winter ' + w.winter + '</h3>' +
                 w.entries.map(e => '<p>' + escape(e.text) + '</p>').join('')).join('');
@@ -160,6 +167,7 @@ export class FjordPlay {
             document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                 ...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? []),
                 'Residents reuse Fjordside DNA height, build and age; movement remains presentation only.',
+                canonicalTime,
                 'Geography: ' + view.layout.geographyId].join('\n');
             canvas.dataset.entities = JSON.stringify(view.entities);
             canvas.dataset.layoutIdentity = view.layout.geographyId;
@@ -169,6 +177,9 @@ export class FjordPlay {
             const panel = document.querySelector<HTMLElement>('#entity-panel')!;
             const selectionKey = this.shared.selection ? this.shared.selection.kind + ':' + this.shared.selection.id : '';
             const sameSelection = selectionKey === this.lastPanelSelection;
+            // Ticks retain the user's panel preference; a new selection brings its actions back.
+            if (selectionKey && !sameSelection)
+                showManagement(true);
             const preserved = new Set(Array.from(panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select'))
                 .filter(field => sameSelection && (this.session.running || field === document.activeElement)).map(field => field.id));
             const resident = this.shared.selection?.kind === 'persona' ?
@@ -278,6 +289,7 @@ export class FjordPlay {
             });
         });
         const select = (kind: string, id: string) => {
+            showManagement(true);
             this.shared.select({ kind: kind as EntityKind, id });
             const entity = this.campaign.project().entities.find(e => e.kind === kind && e.id === id);
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
@@ -344,6 +356,7 @@ export class FjordPlay {
         let weatherSignature = "";
         window.addEventListener('pagehide', () => {
             this.stopped = true;
+            header.dispose();
             setPlayback(false);
             clearInterval(timer);
             renderer.setAnimationLoop(null);
@@ -427,11 +440,12 @@ export class FjordPlay {
                 do {
                     this.queued = false;
                     const view = this.campaign.project();
-                    const nextWeather = JSON.stringify(view.weatherVisual);
+                    const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
                     if (nextWeather !== weatherSignature) {
-                        lighting!.setMode('day', view.weatherVisual.lighting);
-                        weatherTint!.setWinter(view.weatherVisual.snow);
+                        lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
+                        weatherTint!.update(view.calendar.visualProgress);
                         weatherSignature = nextWeather;
+                        canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
                         canvas.dataset.weather = JSON.stringify({ ...view.weatherVisual, observed: {
                             sky: lighting!.skyColor.getHex(), fogNear: lighting!.fog.near, fogFar: lighting!.fog.far,
                             sunIntensity: lighting!.directional.intensity, ambient: lighting!.ambient.intensity,
@@ -479,6 +493,7 @@ export class FjordPlay {
                     canvas.dataset.environment = JSON.stringify(world!.describe());
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                         ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
+                        canonicalTime,
                         'Reused Fjordside DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
                         'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                         'Geography: ' + view.layout.geographyId].join('\n');
@@ -567,7 +582,7 @@ export class FjordPlay {
                 cameraSignature = signature;
                 canvas.dataset.camera = signature;
             }
-            lighting!.update(time);
+            lighting!.update(time, calendar.visualProgress);
             world!.update(time, lighting, camera);
             renderer.render(scene, camera);
             lastFrameMs = performance.now() - frameStarted;

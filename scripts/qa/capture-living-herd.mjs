@@ -1,3 +1,4 @@
+import { selectFjordQuality } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -41,7 +42,7 @@ try {
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 120000 });
     assert.equal(await page.locator('#fjord-run').innerText(), 'Pause');
     await page.locator('#fjord-run').click();
-    await page.selectOption('#fjord-quality', 'low');
+    await selectFjordQuality(page, 'low');
     const rendered = () => canvas.getAttribute('data-rendered').then(JSON.parse);
     const farm = (await rendered()).find(e => e.kind === 'building' && e.id === farmId);
     const screen = await page.evaluate(point => {

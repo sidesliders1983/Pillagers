@@ -1,0 +1,17 @@
+.screen-awake-control {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+.screen-awake-control button {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+.screen-awake-control small {
+    max-width: 210px;
+    font-size: 11px;
+}
+.screen-awake-control small:empty {
+    display: none;
+}

@@ -58,13 +58,13 @@ People and animals have stable keyed outdoor positions, clear actual nature boun
 | Presentation | Source / mapping |
 | --- | --- |
 | Temporary household | Approved compact Meshy tent at metre scale |
-| House levels 0–3 | Existing Hut, Homestead, Longhouse, Great Hall |
+| House levels 0–3 | Existing Hut, Homestead, Longhouse, Great Hall; canonical Longhouse clones match standard Homestead height and retain the resulting broader footprint |
 | Farmyard level 0 | Existing FarmHut plus FarmHutTerrain |
 | Farmyard level 1 | Existing FarmHomestead with nearest safe FarmHutTerrain; the 17m×18.6m FarmHomestead terrain exceeds the reserved plot and is explicitly diagnosed |
 | Farmyard levels 2–3 | Actual Longhouse/Great Hall retained; lightweight yard marker with an explicit missing-source-variant diagnostic |
 | Resident | Existing static Human_LOD2 body normalized to 1.8m; child scale 0.6 below 16 Winters; canonical age/sex metadata. Unique clothing, hair and DNA appearance are outside this slice |
 | Cattle | Existing prepared baby, young-adult, adult-female and adult-male GLBs/manifests |
-| Founding vessel | Real longship-drakkar source at the existing factory's coastal mooring, persisted once |
+| Founding vessel | Real longship-drakkar source, parallel beside the existing factory's pier. The saved faering anchor remains unchanged; the renderer projects a berth 4.5m laterally and 3.5m farther seaward to clear the larger hull |
 
 Unavailable GLBs/manifests receive explicit metric placeholders. Ground maps and EZ-Tree have native/KayKit fallbacks. No safe remaining plot or outdoor position produces a retained selectable identity and diagnostic without a mesh. Rendering or asset failures do not change Simulation Core results or prevent time commands and canonical save/export. Existing prototype routes retain strict source validation; validation rules have not been weakened.
 

@@ -1,3 +1,4 @@
+import { toggleFjordCampaign, advanceFjordYear } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile, readFile } from 'node:fs/promises';
@@ -26,17 +27,17 @@ try {
     const canvas = page.locator('#fjord-canvas');
     const rendered = async () => JSON.parse(await canvas.getAttribute('data-rendered'));
     const exportCore = async () => {
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         const [download] = await Promise.all([page.waitForEvent('download'),
             page.getByRole('button', { name: 'Export canonical JSON', exact: true }).click()]);
         try { return JSON.parse(await readFile(await download.path(), 'utf8')); }
-        finally { await download.delete(); await page.getByText('Campaign', { exact: true }).click(); }
+        finally { await download.delete(); await toggleFjordCampaign(page); }
     };
     const checkpoint = async () => {
         await page.waitForFunction(winter => {
             const projected = JSON.parse(document.querySelector('#fjord-canvas').dataset.entities);
             const actual = JSON.parse(document.querySelector('#fjord-canvas').dataset.rendered);
-            return document.querySelector('#fjord-winter').textContent.includes('Winter ' + winter + ' · tick 0') &&
+            return JSON.parse(document.querySelector('#fjord-canvas').dataset.time).winter === winter && JSON.parse(document.querySelector('#fjord-canvas').dataset.time).tick === 0 &&
                 projected.length === actual.length && projected.every(entity => actual.some(item => item.key === entity.selectionKey &&
                     item.asset === entity.asset && item.age === entity.status.age));
         }, state.time.winter);
@@ -82,7 +83,7 @@ try {
     await checkpoint();
     await mkdir(output, { recursive: true });
     for (let year = 1; year <= 25; year++) {
-        await page.getByRole('button', { name: '+1 Winter', exact: true }).click();
+        await advanceFjordYear(page);
         state = core.applyCommand(state, { type: 'AdvanceWinter' });
         await checkpoint();
         if ([1, 8, 16, 25].includes(year)) await page.screenshot({ path: output + '/winter-' + year + '.png' });

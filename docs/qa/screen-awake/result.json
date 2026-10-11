@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "route": "/gameplay-lab",
+      "insecureLAN": true,
+      "realMediaPlayback": true,
+      "repaintRetainsLock": true,
+      "disablePausesMedia": true
+    },
+    {
+      "route": "/play",
+      "insecureLAN": true,
+      "realMediaPlayback": true,
+      "repaintRetainsLock": true,
+      "disablePausesMedia": true
+    },
+    {
+      "route": "/fjord-play",
+      "insecureLAN": true,
+      "realMediaPlayback": true,
+      "repaintRetainsLock": true,
+      "disablePausesMedia": true
+    },
+    {
+      "nativeAPI": true,
+      "disableReleases": true,
+      "rejectedRequestCanRetry": true,
+      "visibilityReacquires": true,
+      "revokedLockCanRetry": true,
+      "lateRequestReleased": true,
+      "cachedPageReturnReacquires": true,
+      "pagehideReleasesAndDisposes": true
+    }
+  ],
+  "errors": [],
+  "physicalIPadAutoLockVerified": false
+}

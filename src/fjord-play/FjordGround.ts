@@ -42,8 +42,22 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
                 parcels.every(e => Math.abs(p.x - e.plot!.x) > e.plot!.halfWidth + .65 ||
                     Math.abs(p.z - e.plot!.z) > e.plot!.halfDepth + .65);
         });
-        const door = (plot: FjordPlot) => index({ x: plot.x + Math.sin(plot.rotation) * (plot.halfDepth + 2),
-            z: plot.z + Math.cos(plot.rotation) * (plot.halfDepth + 2) });
+        const door = (plot: FjordPlot) => {
+            const preferred = { x: plot.x + Math.sin(plot.rotation) * (plot.halfDepth + 2),
+                z: plot.z + Math.cos(plot.rotation) * (plot.halfDepth + 2) };
+            // A rotated entrance may face a neighbouring parcel. Start from its nearest
+            // safe exterior approach instead of drawing a path through that neighbour.
+            const approaches = [preferred,
+                { x: plot.x, z: plot.z - plot.halfDepth - 2 },
+                { x: plot.x, z: plot.z + plot.halfDepth + 2 },
+                { x: plot.x - plot.halfWidth - 2, z: plot.z },
+                { x: plot.x + plot.halfWidth + 2, z: plot.z }];
+            approaches.sort((a, b) => Math.hypot(a.x - preferred.x, a.z - preferred.z) -
+                Math.hypot(b.x - preferred.x, b.z - preferred.z));
+            const approach = approaches.find(p => p.x >= bounds.minX && p.x <= bounds.maxX &&
+                p.z >= bounds.minZ && p.z <= bounds.maxZ && cells[index(p)]);
+            return index(approach ?? preferred);
+        };
         const connected = new Map<number, string>();
         connected.set(door(plots[0].plot), plots[0].id);
         for (const home of plots.slice(1)) {

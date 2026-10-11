@@ -1,3 +1,4 @@
+import { selectFjordQuality, toggleFjordCampaign, advanceFjordYear } from './fjord-header-controls.mjs';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -43,14 +44,14 @@ try {
     };
     const advance = async () => {
         state = core.applyCommand(state, { type: 'AdvanceWinter' });
-        await page.getByRole('button', { name: '+1 Winter', exact: true }).click();
-        await page.waitForFunction(winter => document.querySelector('#fjord-winter').textContent.includes('Winter ' + winter + ' · tick 0'), state.time.winter);
+        await advanceFjordYear(page);
+        await page.waitForFunction(winter => JSON.parse(document.querySelector('#fjord-canvas').dataset.time).winter === winter && JSON.parse(document.querySelector('#fjord-canvas').dataset.time).tick === 0, state.time.winter);
     };
     const importState = async next => {
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         await page.locator('#fjord-import').setInputFiles({ name: 'fixture.json', mimeType: 'application/json', buffer: Buffer.from(core.serializeState(next)) });
         await page.locator('#fjord-notice').filter({ hasText: 'Campaign imported, paused.' }).waitFor();
-        await page.getByText('Campaign', { exact: true }).click();
+        await toggleFjordCampaign(page);
         assert.equal(await page.locator('#fjord-production-labels span').count(), 0);
         state = next;
     };
@@ -132,7 +133,7 @@ try {
             weatherSamples.push({ ...observed, sceneDetail });
             console.log('Checked weather ' + kind);
         }
-        await page.selectOption('#fjord-quality', 'standard');
+        await selectFjordQuality(page, 'standard');
         assert.equal(JSON.parse(await canvas.getAttribute('data-weather')).class, 'Severe');
         await page.screenshot({ path: output + '/weather-severe-standard.png' });
         await importState(core.createCampaign(17, {}, {}, { enabled: false }));

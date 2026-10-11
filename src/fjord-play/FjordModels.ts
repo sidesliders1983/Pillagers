@@ -157,6 +157,17 @@ export class FjordModels {
             const model = placeSettlement(this.assets, [{ id: entity.selectionKey, key: entity.asset,
                     terrainKey: entity.terrainAsset === 'farmyardMarker' ? undefined : entity.terrainAsset, x: 0, z: 0, rotation: 0,
                     halfWidth: entity.plot!.halfWidth, halfDepth: entity.plot!.halfDepth, radius: 9 }], () => 0);
+            if (entity.asset === 'longhouse') {
+                const house = model.getObjectByName('longhouse')!;
+                const homestead = this.assets.get('homestead');
+                if (!house.userData.placeholder && !homestead.userData.placeholder) {
+                    // Meshy's Longhouse is only 4m high. Match the actual 5m Homestead
+                    // uniformly, preserving proportions while giving the upgrade its wider footprint.
+                    const sourceHeight = new Box3().setFromObject(house).getSize(new Vector3()).y;
+                    const targetHeight = new Box3().setFromObject(homestead).getSize(new Vector3()).y;
+                    house.scale.multiplyScalar(targetHeight / sourceHeight);
+                }
+            }
             const sourcedYard = model.getObjectByName('farmHutTerrain');
             if (sourcedYard) {
                 // The native parcel leaves too little clearance for four mature source bodies.

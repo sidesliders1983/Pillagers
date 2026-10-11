@@ -15,3 +15,27 @@ SettlementLayout defines separated parcels and generous collision exclusions for
 The production build copies only the existing scenery kit from `Assets/Terrain`, alongside generated assets from public, so unused high-resolution housing sources and reference images are excluded from deployment.
 
 Validation: `node --test tests/meshy-housing.test.mjs tests/navigation.test.mjs tests/touch.test.mjs`, then `pnpm build`. Housing tests check variant selection, separated parcels, all eight decodable GLBs, texture limits, retained colour maps, compact output size, footprint containment and bounds within 5 mm for unchanged housing or 75 mm for the simplified yard. Browser evidence in `artifacts/meshy-housing/` covers all models with 40 Meshy residents and records console errors. Software-rendered browser FPS is not a hardware performance measurement.
+
+## Canonical settlement calibration and headings
+
+In /fjord-play, each Longhouse clone is uniformly scaled to the actual loaded standard Homestead
+height. Current source dimensions are approximately 9.425 × 4.000 × 5.787m (width, height, depth),
+compared with the Homestead's 9.472 × 5.001 × 6.372m. The calibrated Longhouse is approximately
+11.784 × 5.001 × 7.235m: equal height and about 24% wider. Calibration preserves proportions,
+materials and the grounded pivot; it leaves source GLBs and preparation metadata intact.
+The corrected clone fits the existing 13m canonical parcel in each permitted grid direction.
+
+Ordinary permanent homes use deterministic 0°, 90°, 180° or 270° headings from campaign seed
+and building identity. Upgrades and save/load retain the same heading; no Core RNG is consumed.
+Active Farmyards retain the fixed 180° source-yard orientation. Removing the Farmyard function
+restores that building's ordinary heading at the same physical location. Tents retain their
+existing heading. Paths share the rendered heading, with a safe exterior approach when the
+entrance faces an adjacent parcel. Future direction: a central bonfire/plaza supplies a facing
+target in place of these temporary grid headings.
+
+Regression evidence: [housing scale and headings](qa/fjord-housing-scale/report.md).
+
+Generated terrain overlays use a zero slope factor and fixed depth-unit offsets. This keeps
+coplanar sand, rock and soil layers separate without pulling them through the authored Farmyard
+floor when the camera zooms out. Terrain geometry and saved world heights remain unchanged.
+Regression evidence: [Farmyard ground visibility](qa/farmyard-ground-occlusion/report.md).

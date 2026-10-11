@@ -1,0 +1,40 @@
+{
+  "viewport": {
+    "x": 10,
+    "y": 177,
+    "width": 1004,
+    "height": 539
+  },
+  "initialCorner": {
+    "x": 960,
+    "y": 187,
+    "width": 44,
+    "height": 44
+  },
+  "target": {
+    "key": "persona:founder-1",
+    "x": 440.4487007779432,
+    "y": 368.96968587771505
+  },
+  "ship": {
+    "x": 31.26038416692134,
+    "y": 0.03,
+    "z": -40.603699190374,
+    "rotation": -3.027936348766743,
+    "scale": 1
+  },
+  "sourceAnchor": {
+    "x": 36.1282916701127,
+    "y": 0.03,
+    "z": -37.63663388263755,
+    "rotation": -3.027936348766743,
+    "scale": 1
+  },
+  "lateralClearance": 0.7599999999999991,
+  "touchDragUnobstructed": true,
+  "clockPreservesCollapse": true,
+  "touchSelectionReopens": true,
+  "reselectionReopens": true,
+  "coreEqualToReplay": true,
+  "errors": []
+}

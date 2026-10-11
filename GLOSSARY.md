@@ -6,7 +6,9 @@ Pillagers models named residents and the domestic groups and shelter around them
 
 **Persona**: A persistent person whose identity and history survive changes of work, household and residence. Resident is the player-facing term for a persona living in a settlement.
 
-**Winter**: The calendar year from one winter to the next. A person's age in winters is the elapsed number since their birth Winter.
+**Winter**: In Simulation Core and annual records, the calendar year from one winter to the next. A person's age in winters is the elapsed number since their birth Winter. The Fjord date also uses Winter as the name of the first calendar season.
+
+**Calendar season**: A presentation of the current quarter of the existing canonical year: Winter, Spring, Summer or Autumn. Seasons add no separate clock, ageing or economic resolution.
 
 **Family**: A kin group connected through parentage and partnership.
 _Avoid_: Household

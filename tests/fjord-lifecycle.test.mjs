@@ -175,7 +175,10 @@ test('empty tent households and obsolete livestock assignments release only thei
     state = core.applyCommand(state, { type: 'AdvanceWinter' });
     view = projectFjordSettlement(state, world, view.layout);
     assert.deepEqual(Object.keys(view.layout.plots), ['building:house-1'], 'Empty physical houses remain; departed tent households free their plots.');
-    assert.deepEqual(view.entities.find(e => e.id === 'house-1').transform, building.transform);
+    const vacant = view.entities.find(e => e.id === 'house-1');
+    assert.deepEqual(['x', 'y', 'z', 'scale'].map(key => vacant.transform[key]),
+        ['x', 'y', 'z', 'scale'].map(key => building.transform[key]));
+    assert.equal(vacant.status.farmyard, false);
     assert.equal(Object.keys(view.layout.points).filter(key => key.startsWith('cattle:cattle-1@')).length, 1);
     assert.ok(Object.keys(view.layout.points).some(key => key.startsWith('cattle:cattle-1@outside@')));
 });

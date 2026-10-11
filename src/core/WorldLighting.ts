@@ -16,6 +16,9 @@ export class WorldLighting {
     visualization:TimeVisualization='off';
     private nightWeight=0;
     private blendColor=new Color();
+    private weatherColor=new Color();
+    private dayColor=new Color();
+    private seasonWeather:DayLightingSettings|null=null;
     private fogEnabled=true;
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
         private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard'){
@@ -47,6 +50,7 @@ export class WorldLighting {
     }
     setMode(mode:LightingMode,day:DayLightingSettings=config.day){
         this.visualization='off';
+        this.seasonWeather=null;
         this.nightWeight=mode==='night'?1:0;
         this.mode=mode;const night=mode==='night',preset=night?config.night:day;
         (this.scene.background as Color).setHex(preset.sky);this.fog.color.setHex(night?config.night.fogColor:day.sky);
@@ -102,6 +106,24 @@ export class WorldLighting {
         // Keep the same light set and shadow allocation throughout an animated cycle.
         if(mode==='day-night'){this.campfire.visible=true;this.halo.visible=true;}
     }
+    /** Compose the existing season palette with annual weather, without resetting day/shadow settings. */
+    setSeason(progress:number,weather:DayLightingSettings=config.day) {
+        this.visualization='seasons';
+        this.seasonWeather=weather;
+        this.mode='day';
+        this.nightWeight=0;
+        this.campfire.visible=false;
+        this.halo.visible=false;
+        this.update(0,progress);
+    }
+    private weatherColorDelta(target:Color,value:number,baseline:number,weight:number) {
+        this.weatherColor.setHex(value);
+        this.dayColor.setHex(baseline);
+        // Color.sub clamps negative channels; signed deltas must also preserve darker weather.
+        target.r=MathUtils.clamp(target.r+(this.weatherColor.r-this.dayColor.r)*weight,0,1);
+        target.g=MathUtils.clamp(target.g+(this.weatherColor.g-this.dayColor.g)*weight,0,1);
+        target.b=MathUtils.clamp(target.b+(this.weatherColor.b-this.dayColor.b)*weight,0,1);
+    }
     private cycle(progress:number){
         const blend=(target:Color,a:number,b:number,t:number)=>target.setHex(a).lerp(this.blendColor.setHex(b),t);
         if(this.visualization==='day-night'){
@@ -121,7 +143,22 @@ export class WorldLighting {
             const {from,to,mix}=seasonBlend(progress);this.nightWeight=0;this.mode='day';
             blend(this.scene.background as Color,from.sky,to.sky,mix);blend(this.fog.color,from.fog,to.fog,mix);
             blend(this.directional.color,from.sun,to.sun,mix);
-            this.ambient.intensity=MathUtils.lerp(from.ambient,to.ambient,mix);this.directional.intensity=MathUtils.lerp(from.intensity,to.intensity,mix);
+            const winter=from.name==='Winter'?1-mix:to.name==='Winter'?mix:0;
+            const weather=this.seasonWeather??config.day;
+            this.weatherColorDelta(this.scene.background as Color,weather.sky,config.day.sky,winter);
+            this.weatherColorDelta(this.fog.color,weather.sky,config.day.sky,winter);
+            this.weatherColorDelta(this.directional.color,weather.sun,config.day.sun,winter);
+            this.ambient.color.setHex(config.day.ambientSky);
+            this.ambient.groundColor.setHex(config.day.ambientGround);
+            this.weatherColorDelta(this.ambient.color,weather.ambientSky,config.day.ambientSky,winter);
+            this.weatherColorDelta(this.ambient.groundColor,weather.ambientGround,config.day.ambientGround,winter);
+            this.ambient.intensity=MathUtils.lerp(from.ambient,to.ambient,mix)*
+                MathUtils.lerp(1,weather.ambient/config.day.ambient,winter);
+            this.directional.intensity=MathUtils.lerp(from.intensity,to.intensity,mix)*
+                MathUtils.lerp(1,weather.sunIntensity/config.day.sunIntensity,winter);
+            this.fog.near=MathUtils.lerp(config.day.fogNear,weather.fogNear,winter);
+            this.fog.far=MathUtils.lerp(config.day.fogFar,weather.fogFar,winter);
+            this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,weather.exposure,winter);
         }
     }
     update(time:number,progress?:number){
