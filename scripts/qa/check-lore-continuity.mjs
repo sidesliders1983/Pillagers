@@ -7,7 +7,7 @@ const runtime = process.env.QA_PLAYWRIGHT ??
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright';
 const { chromium } = createRequire(import.meta.url)(runtime);
 const base = process.env.QA_BASE_URL ?? 'http://127.0.0.1:5180';
-const output = 'docs/qa/lore-continuity';
+const output = process.env.QA_OUTPUT ?? 'docs/qa/lore-continuity';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, channel: process.env.QA_BROWSER ?? 'msedge' });
 const errors = [], checks = [];
