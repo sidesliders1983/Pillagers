@@ -24,6 +24,7 @@ type Agent = {
     grazeSeconds: number;
     grazeRemaining: number;
     grazeNext: boolean;
+    blockedSeconds: number;
     socialEnabled: boolean;
     speed: number;
     anchor: Point2;
@@ -71,9 +72,16 @@ export class LivingWorldController {
                 let seed = this.world.config.seed >>> 0;
                 for (const c of entity.selectionKey)
                     seed = Math.imul(seed ^ c.charCodeAt(0), 16777619) >>> 0;
-                agent = { key: entity.selectionKey, kind: entity.kind, x: p.x, y: p.y, z: p.z, rotation: p.rotation,
-                    anchor: { x: p.x, z: p.z }, entity, random: seed || 1, wait: 1 + seed % 40 / 10,
-                    path: [], detour: [], signature, visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {}, state: 'Idle', interactionSeconds: 0, grazeSeconds: 0, grazeRemaining: 0, grazeNext: true, socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28 };
+                agent = {
+                    key: entity.selectionKey, kind: entity.kind,
+                    x: p.x, y: p.y, z: p.z, rotation: p.rotation,
+                    anchor: { x: p.x, z: p.z }, entity, random: seed || 1,
+                    wait: 1 + seed % 40 / 10, path: [], detour: [], signature,
+                    visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {},
+                    state: 'Idle', interactionSeconds: 0, grazeSeconds: 0,
+                    grazeRemaining: 0, grazeNext: true, blockedSeconds: 0,
+                    socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
+                };
                 this.agents.set(agent.key, agent);
             }
             if (agent.entity.status.occupation !== entity.status.occupation ||
@@ -595,13 +603,25 @@ export class LivingWorldController {
                 continue;
             }
             if (!this.bodyClearance(a, p)) {
-                // A temporary neighbour cannot discard the retained destination.
+                if (a.kind === 'cattle') {
+                    // Herd mates can obstruct a narrow wander indefinitely. Stay on
+                    // the safe current support and take the next grazing/rest turn.
+                    a.blockedSeconds += dt;
+                    if (a.blockedSeconds >= 3) {
+                        a.path = [];
+                        a.wait = 0;
+                        a.grazeNext = true;
+                        a.blockedSeconds = 0;
+                    }
+                }
+                // A temporary neighbour cannot discard a resident's retained destination.
                 // Re-plan a passing detour if another actor enters its previously clear route.
                 a.detour = [];
                 a.speed = 0;
                 a.state = 'Idle';
                 continue;
             }
+            a.blockedSeconds = 0;
             if (a.kind !== 'persona') {
                 const angle = Math.atan2(Math.sin(heading - a.rotation), Math.cos(heading - a.rotation));
                 a.rotation += angle * Math.min(1, dt * 8);

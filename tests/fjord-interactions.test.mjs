@@ -472,3 +472,23 @@ test('a busy settlement does not spend the whole first shore trip circling a pas
     assert.ok(reached, 'Replan a stalled passing detour while retaining the valid shore target');
     assert.ok(fisher().walkable);
 });
+
+test('founding cattle blocked by their herd resume grazing without losing body clearance', () => {
+    const state = core.createCampaign(17, {}, { fertilityChanceBps: 0 }, { enabled: false });
+    const world = generateWorld({ seed: 17 });
+    const view = projectFjordSettlement(state, world, createFjordLayout(world));
+    const motion = new LivingWorldController(world);
+    const cattle = view.entities.filter(e => e.kind === 'cattle');
+    motion.reconcile(cattle, view.ground);
+    for (const cow of cattle) motion.setActivityClips(cow.selectionKey, { Graze: 12 });
+    const grazing = new Set();
+    for (let frame = 0; frame < 1800; frame++) {
+        motion.advance(.1, true, true);
+        const herd = motion.inspect();
+        if (frame > 600) for (const cow of herd) if (cow.state === 'Graze') grazing.add(cow.key);
+        assert.ok(herd.every(cow => cow.walkable));
+        for (let i = 0; i < herd.length; i++) for (let j = i + 1; j < herd.length; j++)
+            assert.ok(Math.hypot(herd[i].x - herd[j].x, herd[i].z - herd[j].z) >= 1.8 - 1e-6);
+    }
+    assert.equal(grazing.size, cattle.length, 'A herd obstruction must not leave cattle stuck in Idle forever');
+});

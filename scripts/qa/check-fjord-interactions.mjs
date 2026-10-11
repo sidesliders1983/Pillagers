@@ -16,7 +16,7 @@ const browser = await chromium.launch({ headless: true,
     args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 await mkdir(output, { recursive: true });
 try {
-    const context = await browser.newContext({ viewport: { width: 960, height: 640 }, hasTouch: true });
+    const context = await browser.newContext({ viewport: { width: 800, height: 600 }, hasTouch: true });
     const page = await context.newPage();
     page.setDefaultTimeout(90000);
     page.on('pageerror', error => errors.push(error.message));
@@ -27,7 +27,7 @@ try {
     await page.selectOption('#fjord-quality', 'low');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
     const read = () => canvas.evaluate(c => ({
-        motion: JSON.parse(c.dataset.motion), rendered: JSON.parse(c.dataset.rendered),
+        time: Number(c.dataset.motionTime), motion: JSON.parse(c.dataset.motion), rendered: JSON.parse(c.dataset.rendered),
     }));
     const capture = name => page.screenshot({ path: output + '/' + name + '.png', timeout: 120000 });
     const pause = async () => {
@@ -47,10 +47,13 @@ try {
     };
     const observe = async (predicate, label, seconds = 120) => {
         console.log('Observing:', label);
-        const limit = Date.now() + seconds * 1000;
-        while (Date.now() < limit) {
+        const started = (await read()).time;
+        const limit = Date.now() + 900000;
+        let activeTime = started;
+        while (Date.now() < limit && activeTime - started < seconds) {
             const sample = await read();
-            samples.push({ label, motion: sample.motion, clips: sample.rendered
+            activeTime = sample.time;
+            samples.push({ label, time: sample.time, motion: sample.motion, clips: sample.rendered
                 .filter(e => e.motion).map(e => ({ key: e.kind + ':' + e.id, ...e.motion })) });
             assert.ok(sample.motion.every(a => a.walkable), 'Actors remain on safe support');
             for (const actor of sample.motion.filter(a => a.partnerKey)) {
@@ -60,7 +63,7 @@ try {
             if (predicate(sample)) return sample;
             await page.waitForTimeout(150);
         }
-        throw new Error('Timed out: ' + label);
+        throw new Error('Timed out: ' + label + ' after ' + (activeTime - started) + ' active seconds');
     };
     const choose = async (kind, id) => {
         const summary = page.getByText('Settlement identities', { exact: true });

@@ -1,0 +1,4406 @@
+{
+  "checks": [
+    "Four real roles: approach, authored activity (including Sit_and_Doze_Off), departure toward home; exclusive ownership",
+    "Canonical state exactly matches identical commands without presentation"
+  ],
+  "errors": [],
+  "sequences": [
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 0,
+      "position": [
+        35,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 0,
+      "position": [
+        35,
+        2.5999999046325684,
+        18
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 0,
+      "position": [
+        51,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 0,
+      "position": [
+        35,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 2,
+      "position": [
+        50.84931755091665,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7534122454167438,
+        "clipTime": 0.6345600000000001,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 4,
+      "position": [
+        35.743734999202935,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.875284311185131,
+        "clipTime": 0.7893289893909884,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 4,
+      "position": [
+        35.34212546454892,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1404182151630784,
+        "clipTime": 1.024,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 6,
+      "position": [
+        34.2639935238102,
+        2.5999999046325684,
+        18
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8787178208513845,
+        "clipTime": 0.7826011235046461,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 9,
+      "position": [
+        38.20909852033791,
+        2.5999999046325684,
+        34.2944906032894
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "approach",
+        "clip": "Farm",
+        "remaining": 4.685841453303198,
+        "travelRemaining": 29.099999999999987,
+        "checkpoint": {
+          "x": 38.50873226160155,
+          "z": 34
+        },
+        "checkpointSeconds": 0.8999999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.9273602620121724,
+        "clipTime": 0.17164177374773049,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 10,
+      "position": [
+        38,
+        2.5999999046325684,
+        34.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "approach",
+        "clip": "Farm",
+        "remaining": 4.685841453303198,
+        "travelRemaining": 28.099999999999973,
+        "checkpoint": {
+          "x": 38.50873226160155,
+          "z": 34
+        },
+        "checkpointSeconds": 1.9000000000000006
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "activity",
+      "state": "Farm",
+      "time": 11,
+      "position": [
+        38,
+        2.5999999046325684,
+        34.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "activity",
+        "clip": "Farm",
+        "remaining": 3.8858414533031995,
+        "travelRemaining": 27.89999999999997,
+        "checkpoint": {
+          "x": 38.50873226160155,
+          "z": 34
+        },
+        "checkpointSeconds": 2.1000000000000005
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Farm",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Pull_Radish",
+        "clip": "Farm"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 11,
+      "position": [
+        44.35337868340248,
+        2.5999999046325684,
+        34
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 37.26785286156297,
+        "checkpoint": {
+          "x": 44.32826494188859,
+          "z": 34
+        },
+        "checkpointSeconds": 0.6
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.2511374151389146,
+        "clipTime": 0.867899314803451,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 12,
+      "position": [
+        41,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 13,
+      "position": [
+        41,
+        2.5999999046325684,
+        50.754025549109585
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8716914935779305,
+        "clipTime": 0.7827059209994803,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 14,
+      "position": [
+        41,
+        2.5999999046325684,
+        51
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Idle",
+      "time": 15,
+      "position": [
+        38,
+        2.5999999046325684,
+        34.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 29.9,
+        "checkpoint": {
+          "x": 38,
+          "z": 34.5
+        },
+        "checkpointSeconds": 0.1
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Walk",
+      "time": 16,
+      "position": [
+        37.18069576944248,
+        2.5999999046325684,
+        34.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 28.899999999999984,
+        "checkpoint": {
+          "x": 38,
+          "z": 34.5
+        },
+        "checkpointSeconds": 1.0999999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.755692313545849,
+        "clipTime": 0.6814812541699032,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 16,
+      "position": [
+        41,
+        2.5999999046325684,
+        51.45616728606523
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 29.499999999999993,
+        "checkpoint": {
+          "x": 41,
+          "z": 51
+        },
+        "checkpointSeconds": 0.5
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1404182151630784,
+        "clipTime": 1.024,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 19,
+      "position": [
+        30,
+        2.5999999046325684,
+        22.510276848859284
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 239.8,
+        "checkpoint": {
+          "x": 30,
+          "z": 22.510276848859284
+        },
+        "checkpointSeconds": 0.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Talk",
+      "time": 20,
+      "position": [
+        35,
+        2.5999999046325684,
+        34.366293671556534
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 25.09999999999993,
+        "checkpoint": {
+          "x": 38,
+          "z": 34.5
+        },
+        "checkpointSeconds": 4.899999999999999
+      },
+      "partnerKey": "persona:founder-10",
+      "clip": {
+        "state": "Talk",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Talk_Passionately",
+        "clip": "Talk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 20,
+      "position": [
+        30,
+        2.5999999046325684,
+        21.96166847816681
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 238.80000000000007,
+        "checkpoint": {
+          "x": 30,
+          "z": 22.510276848859284
+        },
+        "checkpointSeconds": 1.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.0972167413849556,
+        "clipTime": 0.9772,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 23,
+      "position": [
+        40,
+        3.002828598022461,
+        55
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 22.499999999999893,
+        "checkpoint": {
+          "x": 41,
+          "z": 51
+        },
+        "checkpointSeconds": 7.499999999999989
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "activity",
+      "state": "Attack",
+      "time": 24,
+      "position": [
+        40.18617211725213,
+        3.0150654376841715,
+        55.04311438649893
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "activity",
+        "clip": "Attack",
+        "remaining": 2.5669270057231186,
+        "travelRemaining": 21.699999999999882,
+        "checkpoint": {
+          "x": 40.15705848048824,
+          "z": 55.03637214922756
+        },
+        "checkpointSeconds": 0.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Attack",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Attack",
+        "clip": "Attack"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Walk",
+      "time": 25,
+      "position": [
+        35,
+        2.5999999046325684,
+        34.34400928348262
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 34.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 24.899999999999928,
+        "checkpoint": {
+          "x": 38,
+          "z": 34.5
+        },
+        "checkpointSeconds": 5.099999999999998
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.22284388073910524,
+        "clipTime": 0.20095999999999997,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 26,
+      "position": [
+        35,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Idle",
+      "time": 27,
+      "position": [
+        40.18617211725213,
+        3.0150654376841715,
+        55.04311438649893
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 29.599999999999994,
+        "checkpoint": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "checkpointSeconds": 0.4
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Walk",
+      "time": 28,
+      "position": [
+        39.43214656814254,
+        3.0180306099303866,
+        55.04311438649893
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 28.59999999999998,
+        "checkpoint": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "checkpointSeconds": 1.4000000000000001
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8716914935779305,
+        "clipTime": 0.7827059209994803,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 30,
+      "position": [
+        35.02228438807391,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.22284388073910524,
+        "clipTime": 0.20095999999999997,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 35,
+      "position": [
+        38,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "activity",
+      "state": "Idle",
+      "time": 35,
+      "position": [
+        44.93109470466152,
+        2.5999999046325684,
+        50.29819179908954
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "activity",
+        "clip": "Idle",
+        "remaining": 2.4999999999999996,
+        "travelRemaining": 13.767852861562679,
+        "checkpoint": {
+          "x": 45.32826494188859,
+          "z": 44.839411397967645
+        },
+        "checkpointSeconds": 7.899999999999988
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Idle",
+      "time": 35,
+      "position": [
+        37.18617211725213,
+        2.6411301593673,
+        53.04311438649893
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 21.59999999999988,
+        "checkpoint": {
+          "x": 37.29477970510521,
+          "z": 53.04311438649893
+        },
+        "checkpointSeconds": 0.30000000000000004
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Walk",
+      "time": 36,
+      "position": [
+        37.18617211725213,
+        2.6113724927431337,
+        52.28908883738934
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 20.599999999999866,
+        "checkpoint": {
+          "x": 37.29477970510521,
+          "z": 53.04311438649893
+        },
+        "checkpointSeconds": 1.3
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8716914935779305,
+        "clipTime": 0.7827059209994803,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 38,
+      "position": [
+        38.133706328443466,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.6685316422173158,
+        "clipTime": 0.60288,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "home",
+      "state": "Idle",
+      "time": 38,
+      "position": [
+        44.93109470466152,
+        2.5999999046325684,
+        50.29819179908954
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Idle",
+        "remaining": -1.5265566588595902e-15,
+        "travelRemaining": 45.02803866379542,
+        "checkpoint": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "checkpointSeconds": 0.5
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.4804000000000004,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "home",
+      "state": "Walk",
+      "time": 39,
+      "position": [
+        44.93109470466152,
+        2.5999999046325684,
+        49.429632589452474
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Idle",
+        "remaining": -1.5265566588595902e-15,
+        "travelRemaining": 44.02803866379541,
+        "checkpoint": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "checkpointSeconds": 1.5000000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.713671167755008,
+        "clipTime": 0.6010881545469416,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Idle",
+      "time": 43,
+      "position": [
+        35.18617211725213,
+        2.5999999046325684,
+        50.04311438649893
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 13.599999999999811,
+        "checkpoint": {
+          "x": 35.18617211725213,
+          "z": 50.10195088405
+        },
+        "checkpointSeconds": 0.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 44,
+      "position": [
+        35,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.17300000000000004,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 46,
+      "position": [
+        35.34212546454892,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1404182151630784,
+        "clipTime": 1.024,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 47,
+      "position": [
+        45.29500761299112,
+        2.5999999046325684,
+        18.76003094128237
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 211.8000000000016,
+        "checkpoint": {
+          "x": 42.785040929276825,
+          "z": 18.510276848859284
+        },
+        "checkpointSeconds": 3.900000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 48,
+      "position": [
+        44.43311675031936,
+        2.5999999046325684,
+        18.593807385517213
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 210.80000000000166,
+        "checkpoint": {
+          "x": 42.785040929276825,
+          "z": 18.510276848859284
+        },
+        "checkpointSeconds": 4.899999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.0972167413849556,
+        "clipTime": 0.9772,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Talk",
+      "time": 49,
+      "position": [
+        44.43311675031936,
+        2.5999999046325684,
+        18.593807385517213
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 210.80000000000166,
+        "checkpoint": {
+          "x": 42.785040929276825,
+          "z": 18.510276848859284
+        },
+        "checkpointSeconds": 4.899999999999999
+      },
+      "partnerKey": "persona:founder-7",
+      "clip": {
+        "state": "Talk",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Talk_Passionately",
+        "clip": "Talk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 54,
+      "position": [
+        44.57765361856538,
+        2.5999999046325684,
+        17.84436483216194
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 209.80000000000172,
+        "checkpoint": {
+          "x": 42.785040929276825,
+          "z": 18.510276848859284
+        },
+        "checkpointSeconds": 5.899999999999995
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.0492289297015236,
+        "clipTime": 0.9344612339856768,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 55,
+      "position": [
+        44.63492796830532,
+        2.5999999046325684,
+        17.547389842792427
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 208.80000000000177,
+        "checkpoint": {
+          "x": 42.785040929276825,
+          "z": 18.510276848859284
+        },
+        "checkpointSeconds": 6.8999999999999915
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 56,
+      "position": [
+        44.7883899343224,
+        2.5999999046325684,
+        18.295055859171548
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 207.80000000000183,
+        "checkpoint": {
+          "x": 42.785040929276825,
+          "z": 18.510276848859284
+        },
+        "checkpointSeconds": 7.899999999999988
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.0492289297015125,
+        "clipTime": 0.9344612339856669,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 58,
+      "position": [
+        44.43002567917706,
+        2.5999999046325684,
+        18.083694590631072
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 205.80000000000194,
+        "checkpoint": {
+          "x": 44.80715069068339,
+          "z": 18.386458180780803
+        },
+        "checkpointSeconds": 1.8000000000000005
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 59,
+      "position": [
+        44.00950510138329,
+        2.5999999046325684,
+        18.50084785936142
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 204.800000000002,
+        "checkpoint": {
+          "x": 44.80715069068339,
+          "z": 18.386458180780803
+        },
+        "checkpointSeconds": 2.800000000000001
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.31323847733930577,
+        "clipTime": 0.2789755464992275,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "home",
+      "state": "Idle",
+      "time": 59,
+      "position": [
+        46.93109470466152,
+        2.5999999046325684,
+        37.29819179908954
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Idle",
+        "remaining": -1.5265566588595902e-15,
+        "travelRemaining": 24.028038663795122,
+        "checkpoint": {
+          "x": 45.93109470466152,
+          "z": 39.73143181897125
+        },
+        "checkpointSeconds": 5.299999999999997
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "home",
+      "state": "Walk",
+      "time": 60,
+      "position": [
+        47.79965391429858,
+        2.5999999046325684,
+        37.29819179908954
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Idle",
+        "remaining": -1.5265566588595902e-15,
+        "travelRemaining": 23.028038663795108,
+        "checkpoint": {
+          "x": 45.93109470466152,
+          "z": 39.73143181897125
+        },
+        "checkpointSeconds": 6.299999999999994
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.713671167755008,
+        "clipTime": 0.6010881545469416,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 61,
+      "position": [
+        46,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 62,
+      "position": [
+        46,
+        2.5999999046325684,
+        49.245974450890415
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8716914935779305,
+        "clipTime": 0.7827059209994803,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 65,
+      "position": [
+        46,
+        2.5999999046325684,
+        23
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "home",
+      "state": "Idle",
+      "time": 67,
+      "position": [
+        49.93109470466152,
+        2.5999999046325684,
+        35.29819179908954
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Idle",
+        "remaining": -1.5265566588595902e-15,
+        "travelRemaining": 16.02803866379501,
+        "checkpoint": {
+          "x": 47.93109470466152,
+          "z": 36.37217852054908
+        },
+        "checkpointSeconds": 5.1999999999999975
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Talk",
+      "time": 68,
+      "position": [
+        46,
+        2.5999999046325684,
+        23
+      ],
+      "visit": null,
+      "partnerKey": "persona:founder-2",
+      "clip": {
+        "state": "Talk",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Talk_Passionately",
+        "clip": "Talk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Listen",
+      "time": 68,
+      "position": [
+        46.64211996508453,
+        2.5999999046325684,
+        22.152396813943813
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 195.9000000000025,
+        "checkpoint": {
+          "x": 46,
+          "z": 19.547034804050586
+        },
+        "checkpointSeconds": 3.600000000000002
+      },
+      "partnerKey": "persona:founder-1",
+      "clip": {
+        "state": "Listen",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Listening_Gesture",
+        "clip": "Listen"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "home",
+      "state": "Walk",
+      "time": 68,
+      "position": [
+        49.93109470466152,
+        2.5999999046325684,
+        34.429632589452474
+      ],
+      "visit": {
+        "target": {
+          "x": 44.93109470466152,
+          "z": 50.29819179908954
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "home",
+        "clip": "Idle",
+        "remaining": -1.5265566588595902e-15,
+        "travelRemaining": 15.028038663795012,
+        "checkpoint": {
+          "x": 47.93109470466152,
+          "z": 36.37217852054908
+        },
+        "checkpointSeconds": 6.199999999999994
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.713671167755008,
+        "clipTime": 0.6010881545469416,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 71,
+      "position": [
+        51,
+        2.5999999046325684,
+        34
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 73,
+      "position": [
+        46,
+        2.5999999046325684,
+        23
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 73,
+      "position": [
+        46.64211996508453,
+        2.5999999046325684,
+        22.152396813943813
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 195.8000000000025,
+        "checkpoint": {
+          "x": 46,
+          "z": 19.547034804050586
+        },
+        "checkpointSeconds": 3.700000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 73,
+      "position": [
+        46,
+        2.5999999046325684,
+        42
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 74,
+      "position": [
+        45.66138522036739,
+        2.5999999046325684,
+        23.20426000459504
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.803484155129421,
+        "clipTime": 0.7245798057333578,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 74,
+      "position": [
+        46.7139775415946,
+        2.5999999046325684,
+        22.234835046772904
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 194.80000000000257,
+        "checkpoint": {
+          "x": 46,
+          "z": 19.547034804050586
+        },
+        "checkpointSeconds": 4.699999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.21944334827699113,
+        "clipTime": 0.19544,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 77,
+      "position": [
+        46.47659944986297,
+        2.5999999046325684,
+        23.270165023176332
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 77,
+      "position": [
+        51,
+        2.5999999046325684,
+        34.075341224541674
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.5022748302778292,
+        "clipTime": 0.42304,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 78,
+      "position": [
+        45.86793575988428,
+        2.5999999046325684,
+        22.99364545940679
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1142194036955262,
+        "clipTime": 1.0048,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 78,
+      "position": [
+        46.13685018581957,
+        2.5999999046325684,
+        42
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.6842509290978471,
+        "clipTime": 0.6144000000000001,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 79,
+      "position": [
+        45.551705053680244,
+        2.5999999046325684,
+        22.849979953529253
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 79,
+      "position": [
+        46.891392412146914,
+        2.5999999046325684,
+        42
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 40.70802675630937,
+        "checkpoint": {
+          "x": 46.891392412146914,
+          "z": 42
+        },
+        "checkpointSeconds": 0.1
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 80,
+      "position": [
+        46.317720259280335,
+        2.5999999046325684,
+        23.25399035877323
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.9284375359781292,
+        "clipTime": 0.8372624216170521,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 80,
+      "position": [
+        46.891392412146914,
+        2.5999999046325684,
+        42.82892731734775
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 39.70802675630936,
+        "checkpoint": {
+          "x": 46.891392412146914,
+          "z": 42
+        },
+        "checkpointSeconds": 1.0999999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7490176823816185,
+        "clipTime": 0.6725551175531672,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 81,
+      "position": [
+        46.717029692767795,
+        2.5999999046325684,
+        22.278485691989776
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 187.80000000000297,
+        "checkpoint": {
+          "x": 46.71702979358255,
+          "z": 22.27848549485959
+        },
+        "checkpointSeconds": 3.600000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 82,
+      "position": [
+        46.42396550451649,
+        2.5999999046325684,
+        22.12860909759828
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 186.80000000000302,
+        "checkpoint": {
+          "x": 46.71702979358255,
+          "z": 22.27848549485959
+        },
+        "checkpointSeconds": 4.6
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.0972167413849556,
+        "clipTime": 0.9772,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 83,
+      "position": [
+        45.76820884313049,
+        2.5999999046325684,
+        21.793247156091486
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 185.80000000000308,
+        "checkpoint": {
+          "x": 46.71702979358255,
+          "z": 22.27848549485959
+        },
+        "checkpointSeconds": 5.599999999999996
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 84,
+      "position": [
+        46.15896109413223,
+        2.5999999046325684,
+        21.993082615280148
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 184.80000000000314,
+        "checkpoint": {
+          "x": 46.71702979358255,
+          "z": 22.27848549485959
+        },
+        "checkpointSeconds": 6.5999999999999925
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.0972167413849556,
+        "clipTime": 0.9772,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 85,
+      "position": [
+        46.717029692767795,
+        2.5999999046325684,
+        22.278485691989772
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 183.8000000000032,
+        "checkpoint": {
+          "x": 46.71702979358255,
+          "z": 22.27848549485959
+        },
+        "checkpointSeconds": 7.599999999999989
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 86,
+      "position": [
+        45.46661666794913,
+        2.5999999046325684,
+        22.799570177702975
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 86,
+      "position": [
+        46.69749208021771,
+        2.5999999046325684,
+        22.049050570753348
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 182.80000000000325,
+        "checkpoint": {
+          "x": 46.69749208021771,
+          "z": 22.268493919030337
+        },
+        "checkpointSeconds": 0.5
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8777733931079645,
+        "clipTime": 0.78176,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 87,
+      "position": [
+        45.29702211168743,
+        2.5999999046325684,
+        21.950310859683835
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.9284375359781382,
+        "clipTime": 0.8372624216170602,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 88,
+      "position": [
+        48,
+        2.5999999046325684,
+        39
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 89,
+      "position": [
+        46.24879605854585,
+        2.5999999046325684,
+        22.066801366214307
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 89,
+      "position": [
+        46.891392412146914,
+        2.5999999046325684,
+        49
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 30.70802675630923,
+        "checkpoint": {
+          "x": 46.891392412146914,
+          "z": 47.79518352498994
+        },
+        "checkpointSeconds": 2.0000000000000004
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 90,
+      "position": [
+        46,
+        2.5999999046325684,
+        22
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.1492795634837888,
+        "clipTime": 0.1346199006147439,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 90,
+      "position": [
+        47.72031972949466,
+        2.5999999046325684,
+        49
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 29.708026756309216,
+        "checkpoint": {
+          "x": 46.891392412146914,
+          "z": 47.79518352498994
+        },
+        "checkpointSeconds": 3.0000000000000013
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7490176823816185,
+        "clipTime": 0.6725551175531672,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 94,
+      "position": [
+        47.38632754136665,
+        2.5999999046325684,
+        39
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1185342163755678,
+        "clipTime": 0.9420832706942175,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 100,
+      "position": [
+        50.891392412146914,
+        2.5999999046325684,
+        52
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 19.708026756309074,
+        "checkpoint": {
+          "x": 48.891392412146914,
+          "z": 50.94116350244893
+        },
+        "checkpointSeconds": 4.899999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 101,
+      "position": [
+        51.72031972949466,
+        2.5999999046325684,
+        52
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 18.70802675630906,
+        "checkpoint": {
+          "x": 48.891392412146914,
+          "z": 50.94116350244893
+        },
+        "checkpointSeconds": 5.899999999999995
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7490176823816185,
+        "clipTime": 0.6725551175531672,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Listen",
+      "time": 105,
+      "position": [
+        46,
+        2.5999999046325684,
+        32.43248225068654
+      ],
+      "visit": null,
+      "partnerKey": "persona:founder-10",
+      "clip": {
+        "state": "Listen",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Listening_Gesture",
+        "clip": "Listen"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 106,
+      "position": [
+        52.40101746338459,
+        2.6507683120207735,
+        53.751421867636964
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 13.70802675630903,
+        "checkpoint": {
+          "x": 51.891392412146914,
+          "z": 53.04531234899397
+        },
+        "checkpointSeconds": 2.800000000000001
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 107,
+      "position": [
+        46,
+        2.5999999046325684,
+        10.086548110673544
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "approach",
+        "clip": "Farm",
+        "remaining": 4.685841453303198,
+        "travelRemaining": 39.5724991247882,
+        "checkpoint": {
+          "x": 46,
+          "z": 10.086548110673544
+        },
+        "checkpointSeconds": 0.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "activity",
+      "state": "Attack",
+      "time": 107,
+      "position": [
+        52.40101746338459,
+        2.6507683120207735,
+        53.751421867636964
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "activity",
+        "clip": "Attack",
+        "remaining": 2.2669270057231183,
+        "travelRemaining": 13.208026756309032,
+        "checkpoint": {
+          "x": 51.891392412146914,
+          "z": 53.04531234899397
+        },
+        "checkpointSeconds": 3.3000000000000016
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Attack",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Attack",
+        "clip": "Attack"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 108,
+      "position": [
+        46,
+        2.5999999046325684,
+        10.643377714125592
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "approach",
+        "clip": "Farm",
+        "remaining": 4.685841453303198,
+        "travelRemaining": 38.57249912478819,
+        "checkpoint": {
+          "x": 46,
+          "z": 10.086548110673544
+        },
+        "checkpointSeconds": 1.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1114184197383823,
+        "clipTime": 1.0022740803554455,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 110,
+      "position": [
+        46,
+        2.5999999046325684,
+        32.43248225068654
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Walk",
+      "time": 110,
+      "position": [
+        52.40101746338459,
+        2.637517103250808,
+        53.29525458157173
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 46.95603042277433,
+        "checkpoint": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "checkpointSeconds": 0.7
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1404182151630784,
+        "clipTime": 1.024,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 111,
+      "position": [
+        45.4019799331184,
+        2.5999999046325684,
+        33.03050231756814
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.022798808337315,
+        "clipTime": 0.8614503092653115,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Idle",
+      "time": 111,
+      "position": [
+        52.40101746338459,
+        2.6217649258533506,
+        52.751421867636964
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 45.95603042277432,
+        "checkpoint": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "checkpointSeconds": 1.7000000000000004
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "home",
+      "state": "Walk",
+      "time": 112,
+      "position": [
+        51.57209014603684,
+        2.621764925853351,
+        52.751421867636964
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "home",
+        "clip": "Attack",
+        "remaining": -0.03307299427688257,
+        "travelRemaining": 44.956030422774305,
+        "checkpoint": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "checkpointSeconds": 2.700000000000001
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7490176823816185,
+        "clipTime": 0.6725551175531672,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 113,
+      "position": [
+        44.19678063414221,
+        2.5999999046325684,
+        33.422192110903964
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 114,
+      "position": [
+        45.01747657540362,
+        2.5999999046325684,
+        33.34032753200473
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.2556870756945728,
+        "clipTime": 0.01593337306976328,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Listen",
+      "time": 115,
+      "position": [
+        45.32208302895357,
+        2.5999999046325684,
+        33.37631157983042
+      ],
+      "visit": null,
+      "partnerKey": "persona:founder-10",
+      "clip": {
+        "state": "Listen",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Listening_Gesture",
+        "clip": "Listen"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 120,
+      "position": [
+        45.45787496469067,
+        2.5999999046325684,
+        33.39235307682749
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 121,
+      "position": [
+        44.99805273047853,
+        2.5999999046325684,
+        33.59445087012268
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.2556870756945728,
+        "clipTime": 0.01593337306976328,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 122,
+      "position": [
+        44.477189925914246,
+        2.5999999046325684,
+        33.82337678013732
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 123,
+      "position": [
+        45.22093757563574,
+        2.5999999046325684,
+        33.53424293508299
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 158.99920898184322,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 0.30000000000000004
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.2556870756945728,
+        "clipTime": 0.01593337306976328,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Listen",
+      "time": 124,
+      "position": [
+        45.564390834513134,
+        2.5999999046325684,
+        33.53424293508299
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 158.69920898184324,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 0.6
+      },
+      "partnerKey": "persona:founder-10",
+      "clip": {
+        "state": "Listen",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Listening_Gesture",
+        "clip": "Listen"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 129,
+      "position": [
+        45.77916964431277,
+        2.5999999046325684,
+        33.53424293508299
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 157.99920898184328,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 1.3
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 130,
+      "position": [
+        45.71866274535791,
+        2.5999999046325684,
+        33.45890171054132
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 156.99920898184334,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 2.3000000000000007
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.5022748302778292,
+        "clipTime": 0.42304,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 132,
+      "position": [
+        38,
+        2.5999999046325684,
+        17.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "approach",
+        "clip": "Farm",
+        "remaining": 4.685841453303198,
+        "travelRemaining": 14.572499124787873,
+        "checkpoint": {
+          "x": 38,
+          "z": 17.629564091041942
+        },
+        "checkpointSeconds": 0.8999999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "activity",
+      "state": "Farm",
+      "time": 133,
+      "position": [
+        38,
+        2.5999999046325684,
+        17.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "activity",
+        "clip": "Farm",
+        "remaining": 3.8858414533031995,
+        "travelRemaining": 14.372499124787874,
+        "checkpoint": {
+          "x": 38,
+          "z": 17.629564091041942
+        },
+        "checkpointSeconds": 1.0999999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Farm",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Pull_Radish",
+        "clip": "Farm"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 134,
+      "position": [
+        44.90891997433908,
+        2.5999999046325684,
+        33.689809112720916
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 152.99920898184357,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 6.299999999999994
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 135,
+      "position": [
+        45.400636510644034,
+        2.5999999046325684,
+        33.29942166935107
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 151.99920898184362,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 7.29999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.2556870756945728,
+        "clipTime": 0.01593337306976328,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Listen",
+      "time": 136,
+      "position": [
+        45.597323125166014,
+        2.5999999046325684,
+        33.14326669200313
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 151.79920898184363,
+        "checkpoint": {
+          "x": 44.71866274535791,
+          "z": 33.53424293508299
+        },
+        "checkpointSeconds": 7.499999999999989
+      },
+      "partnerKey": "persona:founder-10",
+      "clip": {
+        "state": "Listen",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Listening_Gesture",
+        "clip": "Listen"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Idle",
+      "time": 137,
+      "position": [
+        38,
+        2.5999999046325684,
+        17.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 140.03594945401167,
+        "checkpoint": {
+          "x": 38,
+          "z": 17.5
+        },
+        "checkpointSeconds": 0.1
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Walk",
+      "time": 138,
+      "position": [
+        38.81930423055752,
+        2.5999999046325684,
+        17.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 139.03594945401173,
+        "checkpoint": {
+          "x": 38,
+          "z": 17.5
+        },
+        "checkpointSeconds": 1.0999999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.755692313545849,
+        "clipTime": 0.6814812541699032,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 140,
+      "position": [
+        44.69749208021771,
+        2.403451445882597,
+        -13.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 128.80000000000632,
+        "checkpoint": {
+          "x": 45.69749208021771,
+          "z": -10.770797696405449
+        },
+        "checkpointSeconds": 5.899999999999995
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 141,
+      "position": [
+        44.69749208021771,
+        2.5287534168611683,
+        -14.543625383140595
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 127.80000000000638,
+        "checkpoint": {
+          "x": 45.69749208021771,
+          "z": -10.770797696405449
+        },
+        "checkpointSeconds": 6.8999999999999915
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7611282598114025,
+        "clipTime": 0.6778738488339846,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 141,
+      "position": [
+        45.68091313657582,
+        2.5999999046325684,
+        32.98255558139768
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 150.99920898184368,
+        "checkpoint": {
+          "x": 45.715335093879204,
+          "z": 33.04957370559437
+        },
+        "checkpointSeconds": 0.2
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.5022748302778292,
+        "clipTime": 0.42304,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 141,
+      "position": [
+        35,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 145,
+      "position": [
+        43.69749208021771,
+        2.4169208712656656,
+        -15.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 123.8000000000066,
+        "checkpoint": {
+          "x": 44.47804873194072,
+          "z": -14.731506080969663
+        },
+        "checkpointSeconds": 2.800000000000001
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 146,
+      "position": [
+        42.96148560402791,
+        2.3051789174261934,
+        -15.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 122.80000000000666,
+        "checkpoint": {
+          "x": 44.47804873194072,
+          "z": -14.731506080969663
+        },
+        "checkpointSeconds": 3.800000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8787178208513845,
+        "clipTime": 0.7826011235046461,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 149,
+      "position": [
+        34.54383271393477,
+        2.5999999046325684,
+        50
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1404182151630784,
+        "clipTime": 1.024,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Idle",
+      "time": 160,
+      "position": [
+        30,
+        2.5999999046325684,
+        47
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 163,
+      "position": [
+        46.71866274535791,
+        2.5999999046325684,
+        18.534242935082993
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 128.99920898184493,
+        "checkpoint": {
+          "x": 46.71866274535791,
+          "z": 22.96748295496471
+        },
+        "checkpointSeconds": 5.999999999999995
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 164,
+      "position": [
+        39.69749208021771,
+        2.8668413706763918,
+        -23.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 104.80000000000769,
+        "checkpoint": {
+          "x": 40.69749208021771,
+          "z": -21.017131913005908
+        },
+        "checkpointSeconds": 5.599999999999996
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 164,
+      "position": [
+        47.58722195499497,
+        2.5999999046325684,
+        18.534242935082993
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 127.99920898184499,
+        "checkpoint": {
+          "x": 46.71866274535791,
+          "z": 22.96748295496471
+        },
+        "checkpointSeconds": 6.999999999999991
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.713671167755008,
+        "clipTime": 0.6010881545469416,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 165,
+      "position": [
+        39.69749208021771,
+        2.7660449686593607,
+        -24.543625383140593
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 103.80000000000774,
+        "checkpoint": {
+          "x": 40.69749208021771,
+          "z": -21.017131913005908
+        },
+        "checkpointSeconds": 6.5999999999999925
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7611282598114076,
+        "clipTime": 0.677873848833989,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 167,
+      "position": [
+        39.69749208021771,
+        2.556026523106848,
+        -25.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 101.80000000000786,
+        "checkpoint": {
+          "x": 39.69749208021771,
+          "z": -25.509538974970432
+        },
+        "checkpointSeconds": 0.5
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 167,
+      "position": [
+        30,
+        2.5999999046325684,
+        47.754025549109585
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8716914935779305,
+        "clipTime": 0.7827059209994803,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Idle",
+      "time": 168,
+      "position": [
+        60,
+        2.5999999046325684,
+        17.5
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 109.03594945401343,
+        "checkpoint": {
+          "x": 55.09928818749605,
+          "z": 17.5
+        },
+        "checkpointSeconds": 6.799999999999992
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0048,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 168,
+      "position": [
+        38.96148560402791,
+        2.5837471611578557,
+        -25.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 100.80000000000791,
+        "checkpoint": {
+          "x": 39.69749208021771,
+          "z": -25.509538974970432
+        },
+        "checkpointSeconds": 1.5000000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8787178208513845,
+        "clipTime": 0.7826011235046461,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-1",
+      "phase": "home",
+      "state": "Walk",
+      "time": 169,
+      "position": [
+        60,
+        2.5999999046325684,
+        18.243734999202932
+      ],
+      "visit": {
+        "target": {
+          "x": 38,
+          "z": 17.5
+        },
+        "face": {
+          "x": 38,
+          "z": 26
+        },
+        "source": "building:house-1",
+        "phase": "home",
+        "clip": "Farm",
+        "remaining": -0.014158546696802804,
+        "travelRemaining": 108.03594945401349,
+        "checkpoint": {
+          "x": 55.09928818749605,
+          "z": 17.5
+        },
+        "checkpointSeconds": 7.799999999999988
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.8752843111851354,
+        "clipTime": 0.7893289893909925,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Talk",
+      "time": 171,
+      "position": [
+        30.4826440613247,
+        2.5999999046325684,
+        49.05487178620934
+      ],
+      "visit": null,
+      "partnerKey": "persona:founder-9",
+      "clip": {
+        "state": "Talk",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Talk_Passionately",
+        "clip": "Talk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 174,
+      "position": [
+        37.69749208021771,
+        1.9436918357498574,
+        -27.731506080969663
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "approach",
+        "clip": "Doze",
+        "remaining": 17.737754778055887,
+        "travelRemaining": 94.80000000000825,
+        "checkpoint": {
+          "x": 39.69749208021771,
+          "z": -25.509538974970432
+        },
+        "checkpointSeconds": 7.499999999999989
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "activity",
+      "state": "Doze",
+      "time": 176,
+      "position": [
+        37.466491073973785,
+        1.9968778690969795,
+        -27.615771094969613
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "activity",
+        "clip": "Doze",
+        "remaining": 16.937754778055876,
+        "travelRemaining": 93.60000000000832,
+        "checkpoint": {
+          "x": 37.497036695636076,
+          "z": -27.63107491183574
+        },
+        "checkpointSeconds": 0.6
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Doze",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Sit_and_Doze_Off",
+        "clip": "Doze"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 176,
+      "position": [
+        30.72600181753377,
+        2.5999999046325684,
+        49.69438436346186
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 1.1404182151630784,
+        "clipTime": 1.024,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Talk",
+      "time": 181,
+      "position": [
+        28.804341663644337,
+        2.5999999046325684,
+        50.45556775112248
+      ],
+      "visit": null,
+      "partnerKey": "persona:founder-9",
+      "clip": {
+        "state": "Talk",
+        "speed": 0,
+        "clipTime": 1.024,
+        "sourceClip": "Talk_Passionately",
+        "clip": "Talk"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Idle",
+      "time": 185,
+      "position": [
+        60.71866274535791,
+        2.5999999046325684,
+        18.534242935082993
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 106.99920898184618,
+        "checkpoint": {
+          "x": 59.277338482389176,
+          "z": 17.534242935082993
+        },
+        "checkpointSeconds": 3.700000000000002
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 1.0576,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-4",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 186,
+      "position": [
+        61.58722195499497,
+        2.5999999046325684,
+        18.534242935082993
+      ],
+      "visit": {
+        "target": {
+          "x": 40.18617211725213,
+          "z": 55.04311438649893
+        },
+        "face": {
+          "x": 44.93109470466152,
+          "z": 55.04311438649893
+        },
+        "source": "kaykit-conifer-a@44.93109470466152,55.04311438649893",
+        "phase": "approach",
+        "clip": "Idle",
+        "remaining": 3,
+        "travelRemaining": 105.99920898184624,
+        "checkpoint": {
+          "x": 59.277338482389176,
+          "z": 17.534242935082993
+        },
+        "checkpointSeconds": 4.699999999999999
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.713671167755008,
+        "clipTime": 0.6010881545469416,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "wander",
+      "state": "Walk",
+      "time": 186,
+      "position": [
+        28.699709391616313,
+        2.5999999046325684,
+        50.16771286105921
+      ],
+      "visit": null,
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.7860206317499149,
+        "clipTime": 0.7057806655576921,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    },
+    {
+      "key": "persona:founder-2",
+      "phase": "home",
+      "state": "Idle",
+      "time": 193,
+      "position": [
+        37.466491073973785,
+        1.9968778690969795,
+        -27.615771094969613
+      ],
+      "visit": {
+        "target": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "face": {
+          "x": 37.80876226267068,
+          "z": -31.601100495833236
+        },
+        "source": "shore:41",
+        "phase": "home",
+        "clip": "Doze",
+        "remaining": -0.062245221944096985,
+        "travelRemaining": 186.08983170664402,
+        "checkpoint": {
+          "x": 37.466491073973785,
+          "z": -27.615771094969613
+        },
+        "checkpointSeconds": 0
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0.9772,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      }
+    },
+    {
+      "key": "persona:founder-5",
+      "phase": "approach",
+      "state": "Walk",
+      "time": 193,
+      "position": [
+        30.808730565843362,
+        2.5999999046325684,
+        49.989990956252484
+      ],
+      "visit": {
+        "target": {
+          "x": 52.40101746338459,
+          "z": 53.751421867636964
+        },
+        "face": {
+          "x": 49.12588444305584,
+          "z": 53.751421867636964
+        },
+        "source": "kaykit-deciduous-a@49.12588444305584,53.751421867636964",
+        "phase": "approach",
+        "clip": "Attack",
+        "remaining": 2.766927005723119,
+        "travelRemaining": 55.63031363651117,
+        "checkpoint": {
+          "x": 30.671880380023794,
+          "z": 49.989990956252484
+        },
+        "checkpointSeconds": 0.6
+      },
+      "partnerKey": null,
+      "clip": {
+        "state": "Walk",
+        "speed": 0.6842509290978471,
+        "clipTime": 0.8901027815701672,
+        "sourceClip": "Walking",
+        "clip": "Walk"
+      }
+    }
+  ],
+  "device": "Headless Chromium / default renderer, touch emulation",
+  "activeSeconds": 193
+}
