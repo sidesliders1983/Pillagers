@@ -16,7 +16,7 @@ export class GameplayLab {
     private renderCattle(state:SimulationState,id:string):string {
         const c=inspectCattle(state,id),dead=c.deathWinter!==null;
         const slaughtered=state.events.some(e=>e.type==='CattleSlaughtered'&&e.details?.cattleId===id);
-        const status=dead?`${slaughtered?'Slaughtered':'Died'} in Winter ${c.deathWinter} · Age at death: ${c.age} Winters`:c.sheltered?esc(c.farmyardId):'exposed';
+        const status=dead?`${slaughtered?'Slaughtered':'Died'} in Winter ${c.deathWinter} · Age at death: ${c.age} Winters`:c.sheltered?esc(housingName(state,'building',c.farmyardId!)):'exposed';
         const actions=dead?'':`${this.button(state,{type:'SlaughterCattle',cattleId:id},`Slaughter (${c.slaughterFood} Food)`)}<div class="lab-actions"><label>Farmyard<select id="cattle-${esc(id)}">${option('','Exposed / unassigned',c.farmyardId===null)}${landingSummary(state).farmyards.map(f=>option(f.id,housingName(state,'building',f.id),c.farmyardId===f.id)).join('')}</select></label><button data-action="cattle" data-id="${esc(id)}">Assign livestock</button></div>`;
         return `<div id="livestock-${esc(id)}"><p>${esc(id)} · ${c.sex==='female'?'cow':'bull'} · ${c.age} Winters · ${c.stage} · ${status}</p><p>Parents: ${c.parentIds.length?c.parentIds.map(esc).join(', '):'Founding animal'} · Origin: ${c.origin}</p>${dead?'':`<p>Overcrowding: ${c.overcrowding} · Annual mortality risk: ${pct(c.mortalityRiskBps)}</p>`}${actions}</div>`;
     }
