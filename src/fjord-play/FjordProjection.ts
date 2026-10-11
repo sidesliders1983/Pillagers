@@ -1,3 +1,4 @@
+import { housingName } from '../simulation/HousingNames';
 import { projectFjordCalendar } from './FjordCalendar';
 import type { CharacterDNA } from '../characters/CharacterDNA';
 import { inspectWork, inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
@@ -227,7 +228,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             ...plot,
             rotation: yard ? Math.PI : dwellingRotation(state.seed, building.id)
         } : undefined;
-        const entity: FjordEntity = { kind: 'building', id: building.id, label: building.id,
+        const entity: FjordEntity = { kind: 'building', id: building.id, label: housingName(state, 'building', building.id),
             selectionKey: key, asset, transform: orientedPlot ? { ...orientedPlot } : null,
             ...(orientedPlot ? { plot: { ...orientedPlot } } : {}),
             status: { living: true, level, farmyard: yard } };
@@ -256,7 +257,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const residence = home.residenceId ? state.residences[home.residenceId] : null;
         const plot = homePlots.get(home.id);
         if (residence?.kind !== 'house')
-            add('household', home.id, 'Household ' + home.id, 'tent', plot, { living: true }, plot);
+            add('household', home.id, housingName(state, 'household', home.id), 'tent', plot, { living: true }, plot);
         for (const [index, id] of home.memberIds.entries()) {
             const p = state.personas[id];
             if (!p || p.deathWinter !== null || personaAway(state, id))

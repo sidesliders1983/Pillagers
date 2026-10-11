@@ -15,10 +15,13 @@ function appendix(facts: OpeningFacts): string {
             ' · ' + escape(p.occupation ?? 'No occupation') +
             (p.partnerId ? ' · partner: ' + escape(facts.founders.find(q => q.id === p.partnerId)?.name ?? p.partnerId) : '') +
             '</li>').join('') + '</ul>';
-        const homes = facts.households as { id: string; memberIds: string[]; residenceId: string | null }[];
-        html += '<h3>Founding households</h3><ul>' + homes.map(h => '<li>' + escape(h.id) + ': ' +
+        const homes = facts.households;
+        html += '<h3>Founding households</h3><ul>' + homes.map(h => '<li>' + escape(h.displayName ?? 'A household') + ': ' +
             h.memberIds.map(id => escape(facts.founders.find(p => p.id === id)?.name ?? id)).join(', ') +
-            ' · ' + escape(h.residenceId ?? 'No residence') + '</li>').join('') + '</ul>';
+            ' · ' + escape(h.residenceId ? h.residenceName ?? 'A recorded residence' : 'No residence') + '</li>').join('') + '</ul>';
+        html += '<details><summary>Housing source identities</summary><ul>' + homes.map(h =>
+            '<li>Household: ' + escape(h.id) + ' · Residence: ' + escape(h.residenceId ?? 'none') +
+            ' · Members: ' + h.memberIds.map(escape).join(', ') + '</li>').join('') + '</ul></details>';
     }
     if (facts.cattle.length) html += '<h3>Founding cattle</h3><ul>' +
         (facts.cattle as { id: string; sex: string }[]).map(c => '<li>' + escape(c.id) +

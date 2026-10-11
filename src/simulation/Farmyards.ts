@@ -1,3 +1,4 @@
+import {eventFacts} from './EventFacts';
 import type {SimulationState} from './SimulationCore';
 /** Farmyard is a live function of an occupied permanent home, not another building. */
 export function farmyards(state:SimulationState) {
@@ -14,5 +15,5 @@ export function farmyards(state:SimulationState) {
 export function reconcileFarmyards(state:SimulationState,previousIds:string[]):void {
     const current=farmyards(state),ids=new Set(current.map(f=>f.id));
     for(const cattle of Object.values(state.landing?.cattle??{}))if(cattle.farmyardId!==null&&!ids.has(cattle.farmyardId))cattle.farmyardId=null;
-    for(const id of [...new Set([...previousIds,...ids])].sort())if(previousIds.includes(id)!==ids.has(id))state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type:'FarmyardFunctionChanged',details:{buildingId:id,active:ids.has(id)}});
+    for(const id of [...new Set([...previousIds,...ids])].sort())if(previousIds.includes(id)!==ids.has(id))state.events.push({id:`event-${state.events.length+1}`,time:{...state.time},type:'FarmyardFunctionChanged',details:eventFacts(state,{buildingId:id,active:ids.has(id)})});
 }

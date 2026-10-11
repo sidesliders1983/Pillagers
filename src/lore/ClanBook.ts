@@ -1,3 +1,4 @@
+import { housingName } from '../simulation/HousingNames';
 import { bookLedger } from './BookLedger';
 import { projectChronicle } from './Chronicle';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -8,7 +9,7 @@ export type OpeningFacts = {
     period?: { from: { winter: number; tick: number }; through: { winter: number; tick: number } };
     demographics?: { eventId: string; type: string; time: { winter: number; tick: number }; details: Record<string, unknown>; personaId?: string }[];
     founders: { id: string; name: string; occupation: string | null; partnerId: string | null }[];
-    households: SimulationState['households'][string][];
+    households: (SimulationState['households'][string] & { displayName?: string; residenceName?: string })[];
     cattle: NonNullable<SimulationState['landing']>['cattle'][string][];
     longships: NonNullable<SimulationState['landing']>['longships'][string][];
     stocks: { food: number; materials: number } | null;
@@ -60,7 +61,9 @@ function validFacts(facts: OpeningFacts): boolean {
         !Array.isArray(facts.cattle) || !Array.isArray(facts.longships)) return false;
     if (facts.founders.some(p => !p || typeof p.id !== 'string' || typeof p.name !== 'string')) return false;
     if (facts.households.some(h => !h || typeof (h as { id?: unknown }).id !== 'string' ||
-        !Array.isArray((h as { memberIds?: unknown }).memberIds))) return false;
+        !Array.isArray((h as { memberIds?: unknown }).memberIds) ||
+        h.displayName !== undefined && typeof h.displayName !== 'string' ||
+        h.residenceName !== undefined && typeof h.residenceName !== 'string')) return false;
     if ([...facts.cattle, ...facts.longships].some(a => !a || typeof (a as { id?: unknown }).id !== 'string')) return false;
     if (facts.stocks !== null && (!facts.stocks ||
         ![facts.stocks.food, facts.stocks.materials].every(n => Number.isSafeInteger(n) && n >= 0))) return false;
@@ -96,7 +99,11 @@ export class ClanBook {
             founders: Object.values(state.personas).map(p => ({
                 id: p.id, name: p.name, occupation: p.occupation, partnerId: p.partnerId
             })),
-            households: structuredClone(Object.values(state.households)),
+            households: Object.values(state.households).map(home => ({
+                ...structuredClone(home),
+                displayName: housingName(state, 'household', home.id),
+                ...(home.residenceId ? { residenceName: housingName(state, 'residence', home.residenceId) } : {})
+            })),
             cattle: structuredClone(Object.values(state.landing?.cattle ?? {})),
             longships: structuredClone(Object.values(state.landing?.longships ?? {})),
             stocks: { ...state.stocks }

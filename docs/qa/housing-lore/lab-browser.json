@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "checks": [
+    "household heading",
+    "assigned cattle home name",
+    "Farmyard picker label and canonical value"
+  ]
+}
