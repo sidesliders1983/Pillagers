@@ -117,3 +117,23 @@ test('legacy upgrades, specialization, salvage and collapse use neutral homes wi
     ]);
     assert.deepEqual(entries.map(entry => entry.sourceEventIds), events.map(event => [event.id]));
 });
+
+
+test('longship decisions use an unnamed vessel while preserving recorded salvage and provenance', () => {
+    const { projectChronicle } = loadTypeScript(new URL('../src/lore/Chronicle.ts', import.meta.url));
+    let state = core.createCampaign(32);
+    state = core.applyCommand(state, { type: 'KeepLongship', longshipId: 'founding-longship' });
+    state = core.applyCommand(state, { type: 'SalvageLongship', longshipId: 'founding-longship' });
+    const recorded = core.serializeState(state);
+    const entries = projectChronicle(state.events).flatMap(group => group.entries)
+        .filter(entry => entry.templateId.startsWith('FoundingLongship'));
+    assert.deepEqual(entries.map(entry => entry.text), [
+        'Our longship was retained.',
+        'Our longship was salvaged for 20 Materials.',
+    ]);
+    assert.deepEqual(entries.map(entry => entry.sourceEventIds), state.events
+        .filter(event => event.type.startsWith('FoundingLongship')).map(event => [event.id]));
+    assert.ok(entries.every(entry => entry.templateVersion === 2));
+    assert.equal(core.serializeState(state), recorded);
+    assert.deepEqual(projectChronicle(core.reconstructState(recorded).events), projectChronicle(state.events));
+});

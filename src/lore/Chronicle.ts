@@ -39,8 +39,8 @@ const templates:Record<string,Template>={
     OccupationReleased:(e)=>{const name=person(e,e.personaId);return name?`Career decisions for ${name} returned to autonomy.`:null;},
     PartnershipFormed:(e,d)=>{const p=ids(d,'participants');return p&&p.length>=2?`${person(e,p[0])} and ${person(e,p[1])} became partners.`:null;},
     ChildBorn:(e,d)=>{const parents=ids(d,'parentIds'),name=person(e,e.personaId);return name&&parents?.length===2?`${name} was born to ${person(e,parents[0])} and ${person(e,parents[1])}.`:null;},
-    FoundingLongshipKept:(_e,d)=>str(d,'longshipId')?`Longship ${d.longshipId} was retained.`:null,
-    FoundingLongshipSalvaged:(_e,d)=>str(d,'longshipId')&&number(d,'materials')!==null?`Longship ${d.longshipId} was salvaged for ${d.materials} Materials.`:null,
+    FoundingLongshipKept:(_e,d)=>str(d,'longshipId')?'Our longship was retained.':null,
+    FoundingLongshipSalvaged:(_e,d)=>str(d,'longshipId')&&number(d,'materials')!==null?`Our longship was salvaged for ${d.materials} Materials.`:null,
     CattleSlaughtered:(_e,d)=>str(d,'cattleId')&&number(d,'food')!==null?`Animal ${d.cattleId} was slaughtered for ${d.food} Food.`:null,
     CattleAssigned: (_e, d) => {
         if (!str(d, 'cattleId') || !(d.farmyardId === null || str(d, 'farmyardId'))) return null;
@@ -125,7 +125,11 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
                 if(event.type==='CattleFoodProduced'){const total=aggregate.reduce((n,e)=>n+Number(e.details!.units),0);if(Number.isSafeInteger(total))text=`The herd produced ${total} Food this Winter.`;}
                 else {const total=(resource:string)=>aggregate.filter(e=>e.details!.resource===resource).reduce((n,e)=>n+Number(e.details!.units),0);const food=total('food'),materials=total('materials');if(Number.isSafeInteger(food)&&Number.isSafeInteger(materials)){const parts=[];if(aggregate.some(e=>e.details!.resource==='food'))parts.push(`${food} Food`);if(aggregate.some(e=>e.details!.resource==='materials'))parts.push(`${materials} Materials`);text=`The settlement produced ${parts.join(' and ')} this Winter.`;}}
             }else {text=Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed'].includes(event.type);}
-            if(text)entries.push({winter,text,sourceEventIds,templateId,templateVersion:1,routine});
+            if (text) {
+                const templateVersion = ['FoundingLongshipKept', 'FoundingLongshipSalvaged']
+                    .includes(event.type) ? 2 : 1;
+                entries.push({ winter, text, sourceEventIds, templateId, templateVersion, routine });
+            }
         }
         return {winter,entries};
     });
