@@ -27,7 +27,7 @@ function appendix(facts: OpeningFacts): string {
         (facts.cattle as { id: string; sex: string }[]).map(c => '<li>' + escape(c.id) +
             ' · ' + escape(c.sex) + '</li>').join('') + '</ul>';
     if (facts.longships.length) html += '<h3>Founding longships</h3><ul>' +
-        (facts.longships as { id: string }[]).map(s => '<li>' + escape(s.id) + '</li>').join('') + '</ul>';
+        facts.longships.map(() => '<li>Our longship</li>').join('') + '</ul>';
     if (facts.ledger) {
         html += '<h3>Resource ledger</h3><p>Quantities below are recorded subtotals. Incomplete accounting does not treat missing transactions as zero.</p><div class="book-table-scroll"><table><caption>Actual stock transactions</caption>' +
             '<thead><tr><th>Category</th><th>Food</th><th>Materials</th></tr></thead><tbody>';

@@ -100,3 +100,8 @@ Composition never resolves an old event against today's occupants. Missing histo
 labels have neutral fallbacks. Imports without optional opening labels remain valid.
 Published text, checkpoint identity, notification state and reading state are preserved;
 this fix does not rewrite already published chapters. The reader still leaves pacing alone.
+
+
+## Unnamed longship presentation
+
+Longships do not need a narrative name. New Chronicle entries and new Clan Book chapters use “Our longship was retained” or “Our longship was salvaged for N Materials”; the founding appendix labels the vessel “Our longship”. Technical vessel IDs remain in canonical events and the frozen facts for provenance and commands. Longship Chronicle templates use version 2. Previously published chapter text remains saved verbatim; loading does not rewrite the published past.
