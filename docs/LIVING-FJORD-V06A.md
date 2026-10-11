@@ -6,6 +6,8 @@ Issue #94 adds ambient resident and cattle locomotion to /fjord-play. It also re
 
 The Living World Controller receives the canonical presentation projection, never Simulation State. Its own seeded random streams choose bounded dry waypoints. Positions, headings, Idle/Walk state and idle delays are ephemeral and absent from saves, resource events and canonical replay. Reloading recomputes movement from canonical anchors.
 
+Opening or refreshing `/fjord-play`, creating a new campaign, and restarting a campaign automatically start the clock after scene loading. Explicit save loading/import remains paused. A 2D/3D handoff preserves the chosen running or paused state; leaving the tab still pauses it, with no offline catch-up. `/play` and Gameplay Lab retain their own startup defaults.
+
 Movement advances in real seconds while the campaign runs and the tab is visible. Campaign pause, hidden tabs, route transfer and disposal stop it, without catch-up. Changing minutes per Winter changes the simulation clock only. Slow rendered frames use movement substeps up to 0.1 seconds, with a one-second maximum frame interval to avoid large jumps after stalls. The explicit +1 Winter button does not start ambient motion on a paused campaign.
 
 ## Visibility and care

@@ -2,6 +2,12 @@
 
 Issue #94 adds presentation-only movement and restores canonical residents' original Fjordside DNA bodies and heritage cards. These runs use seed 17, the real Simulation Core, existing source assets and Low rendering quality. Weather is disabled to isolate movement. Test-only ample reserves and fixed fertility/mortality choices make the fixtures reproducible; production defaults remain unchanged except the approved two-Winter childcare duration.
 
+## Automatic startup follow-up
+
+The default seed-32 campaign now starts running after `/fjord-play` finishes loading. The browser run [auto-start.json](auto-start.json) observes displacement over 0.5m without pressing Start, verifies that Pause freezes movement, and checks that refreshing starts active time again. It uses normal campaign defaults, with no fixture reserves or disabled weather. It does not measure GPU performance. The original visual evidence below remains the seed-17 fixture run.
+
+Reproduce: `node scripts/qa/check-fjord-auto-start.mjs`. Explicit load/import stays paused; 2D/3D handoff retains the chosen clock state.
+
 ## Evidence
 
 - [Resident heritage card](resident-profile.png): stored name, current age, traits and three primary ancestries with expandable minor ancestries. The card follows the moving resident, remains inside the canvas/viewport and meets the script's 4.5:1 text-contrast assertion.

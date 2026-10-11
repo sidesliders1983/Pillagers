@@ -49,7 +49,7 @@ export class FjordPlay {
             <label class="check"><input id="fjord-weather" type="checkbox"> Enable winter weather</label>
             <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
             <button id="fjord-new">New campaign from seed</button><button id="fjord-restart">Restart with same founders</button>
-            <p>New and loaded campaigns start paused. Switching 2D/3D retains this campaign and its clock.</p>
+            <p>The clock starts when opening or restarting the Fjord. Explicit load/import pauses it. Switching 2D/3D retains your clock setting.</p>
             </div></details></div></header><section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
             <aside><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
@@ -217,7 +217,8 @@ export class FjordPlay {
             campaignFields();
             if (world)
                 await rebuildWorld();
-            say('Campaign restarted, paused.');
+            this.session.setRunning(true);
+            say('Campaign restarted.');
         }));
         document.querySelector('#fjord-new')!.addEventListener('click', () => action(async () => {
             say('Creating campaign…');
@@ -226,7 +227,8 @@ export class FjordPlay {
             campaignFields();
             if (world)
                 await rebuildWorld();
-            say('New campaign, paused.');
+            this.session.setRunning(true);
+            say('New campaign started.');
         }));
         const select = (kind: string, id: string) => {
             profile?.reopen();
@@ -431,6 +433,9 @@ export class FjordPlay {
         await syncScene();
         if (this.stopped || this.shared.transferring)
             return;
+        // Start only after assets are ready; scene loading contributes no campaign time.
+        if (this.opened.autoStart)
+            this.session.setRunning(true);
         refresh();
         canvas.dataset.ready = 'true';
         previous = performance.now();

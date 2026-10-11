@@ -1,0 +1,441 @@
+{
+  "checks": [
+    "Fresh default campaign starts automatically, residents/cattle move, Pause freezes motion, reload starts again."
+  ],
+  "before": [
+    {
+      "key": "persona:founder-1",
+      "kind": "persona",
+      "x": 47,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-10",
+      "kind": "persona",
+      "x": 48.8,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-2",
+      "kind": "persona",
+      "x": 47,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-3",
+      "kind": "persona",
+      "x": 48.8,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-4",
+      "kind": "persona",
+      "x": 31,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-5",
+      "kind": "persona",
+      "x": 63,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-6",
+      "kind": "persona",
+      "x": 47,
+      "y": 2.5999999046325684,
+      "z": 44,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-7",
+      "kind": "persona",
+      "x": 31,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-8",
+      "kind": "persona",
+      "x": 32.8,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-9",
+      "kind": "persona",
+      "x": 63,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-1",
+      "kind": "cattle",
+      "x": 41.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -1.9393398282201786,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-2",
+      "kind": "cattle",
+      "x": 43.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -4.060660171779821,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-3",
+      "kind": "cattle",
+      "x": 45.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -4.060660171779821,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    }
+  ],
+  "after": [
+    {
+      "key": "persona:founder-1",
+      "kind": "persona",
+      "x": 47,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-10",
+      "kind": "persona",
+      "x": 48.8,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-2",
+      "kind": "persona",
+      "x": 46.152821812821664,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": -1.5707961714443472,
+      "state": "Walk",
+      "speed": 0.7137960810693883,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-3",
+      "kind": "persona",
+      "x": 48.8,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-4",
+      "kind": "persona",
+      "x": 31.230910248121074,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 1.5690830526720247,
+      "state": "Walk",
+      "speed": 0.9236409924843022,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-5",
+      "kind": "persona",
+      "x": 63,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-6",
+      "kind": "persona",
+      "x": 46.532899849408324,
+      "y": 2.5999999046325684,
+      "z": 44,
+      "rotation": -1.5706637958299816,
+      "state": "Walk",
+      "speed": 1.1677503764791857,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-7",
+      "kind": "persona",
+      "x": 31,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-8",
+      "kind": "persona",
+      "x": 32.8,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-9",
+      "kind": "persona",
+      "x": 63,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-1",
+      "kind": "cattle",
+      "x": 41.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -1.9393398282201786,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-2",
+      "kind": "cattle",
+      "x": 43.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -4.060660171779821,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-3",
+      "kind": "cattle",
+      "x": 45.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -4.060660171779821,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    }
+  ],
+  "paused": [
+    {
+      "key": "persona:founder-1",
+      "kind": "persona",
+      "x": 47,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-10",
+      "kind": "persona",
+      "x": 48.8,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-2",
+      "kind": "persona",
+      "x": 45.380188324188246,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": -1.5707963267948941,
+      "state": "Walk",
+      "speed": 1.0500565285675636,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-3",
+      "kind": "persona",
+      "x": 48.7360243875993,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": -1.4879644737231008,
+      "state": "Walk",
+      "speed": 0.4265040826712985,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-4",
+      "kind": "persona",
+      "x": 32.03828675605878,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 1.5707963267678828,
+      "state": "Walk",
+      "speed": 0.3828675605877928,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-5",
+      "kind": "persona",
+      "x": 63,
+      "y": 2.5999999046325684,
+      "z": 28,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-6",
+      "kind": "persona",
+      "x": 45.814022919175,
+      "y": 2.5999999046325684,
+      "z": 44,
+      "rotation": -1.570796326792807,
+      "state": "Walk",
+      "speed": 0.853473678045823,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-7",
+      "kind": "persona",
+      "x": 31,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-8",
+      "kind": "persona",
+      "x": 33.73742897929742,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 1.5707963099113054,
+      "state": "Walk",
+      "speed": 0.5302641716123013,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-9",
+      "kind": "persona",
+      "x": 63,
+      "y": 2.5999999046325684,
+      "z": 12,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-1",
+      "kind": "cattle",
+      "x": 41.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -2.0490925959085526,
+      "rotation": 3.1407473439406446,
+      "state": "Walk",
+      "speed": 0.3658425589612468,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-2",
+      "kind": "cattle",
+      "x": 43.93933982822018,
+      "y": 2.5999999046325684,
+      "z": -4.060660171779821,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-3",
+      "kind": "cattle",
+      "x": 45.93933982822018,
+      "y": 2.599999904632568,
+      "z": -4.094022329811328,
+      "rotation": 3.120459912361075,
+      "state": "Walk",
+      "speed": 0.16681079015753592,
+      "walkable": true
+    }
+  ],
+  "errors": []
+}

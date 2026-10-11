@@ -25,6 +25,8 @@ try {
     await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded' });
     const canvas = page.locator('#fjord-canvas');
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 120000 });
+    assert.equal(await page.locator('#fjord-run').innerText(), 'Pause');
+    await page.locator('#fjord-run').click();
     await page.selectOption('#fjord-quality', 'low');
     await page.waitForTimeout(1500);
     const rendered = () => canvas.getAttribute('data-rendered').then(JSON.parse);
