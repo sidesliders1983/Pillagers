@@ -92,6 +92,14 @@ function longshipBerth(anchor: FjordTransform): FjordTransform {
     };
 }
 
+/** Independent presentation hash: grid headings never consume the campaign RNG. */
+function dwellingRotation(seed: number, buildingId: string) {
+    let hash = 2166136261;
+    for (const char of seed + ':' + buildingId)
+        hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
+    return (hash >>> 0) % 4 * Math.PI / 2;
+}
+
 export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
     const surface = createBlueprintSurface(world);
     return fitsBuildingFoundation(surface, p) &&
@@ -214,8 +222,13 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         let asset = ['hut', 'homestead', 'longhouse', 'greatHall'][Math.min(level, 3)];
         if (yard && level <= 1)
             asset = level === 0 ? 'farmHut' : 'farmHomestead';
+        const orientedPlot = plot ? {
+            ...plot,
+            rotation: yard ? Math.PI : dwellingRotation(state.seed, building.id)
+        } : undefined;
         const entity: FjordEntity = { kind: 'building', id: building.id, label: building.id,
-            selectionKey: key, asset, transform: plot ? { ...plot } : null, ...(plot ? { plot: { ...plot } } : {}),
+            selectionKey: key, asset, transform: orientedPlot ? { ...orientedPlot } : null,
+            ...(orientedPlot ? { plot: { ...orientedPlot } } : {}),
             status: { living: true, level, farmyard: yard } };
         if (yard) {
             entity.terrainAsset = level <= 1 ? 'farmHutTerrain' : 'farmyardMarker';

@@ -35,7 +35,12 @@ test('shared commands use Core availability and update both projections without 
     assert.equal(shared.availability(build).allowed, true);
     shared.command(build);
     assert.equal(projectSettlement(shared.session.snapshot()).entities.filter(e => e.kind === 'building').length, 1);
-    assert.deepEqual(shared.fjord.project().entities.find(e => e.kind === 'building').transform, plot);
+    const projected = shared.fjord.project();
+    assert.deepEqual(projected.layout.plots['building:house-1'], plot, 'the physical parcel is retained');
+    const house = projected.entities.find(e => e.kind === 'building');
+    for (const key of ['x', 'y', 'z', 'scale', 'halfWidth', 'halfDepth'])
+        assert.equal(house.transform[key], plot[key], key + ' is retained');
+    assert.ok([0, Math.PI / 2, Math.PI, 3 * Math.PI / 2].includes(house.transform.rotation));
     const unavailable = { type: 'AssignOccupation', personaId: 'missing', occupation: 'farmer' };
     assert.equal(shared.availability(unavailable).allowed, false);
     assert.ok(shared.availability(unavailable).reason.length);

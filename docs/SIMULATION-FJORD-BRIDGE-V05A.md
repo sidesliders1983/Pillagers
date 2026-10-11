@@ -58,7 +58,7 @@ People and animals have stable keyed outdoor positions, clear actual nature boun
 | Presentation | Source / mapping |
 | --- | --- |
 | Temporary household | Approved compact Meshy tent at metre scale |
-| House levels 0–3 | Existing Hut, Homestead, Longhouse, Great Hall |
+| House levels 0–3 | Existing Hut, Homestead, Longhouse, Great Hall; canonical Longhouse clones match standard Homestead height and retain the resulting broader footprint |
 | Farmyard level 0 | Existing FarmHut plus FarmHutTerrain |
 | Farmyard level 1 | Existing FarmHomestead with nearest safe FarmHutTerrain; the 17m×18.6m FarmHomestead terrain exceeds the reserved plot and is explicitly diagnosed |
 | Farmyard levels 2–3 | Actual Longhouse/Great Hall retained; lightweight yard marker with an explicit missing-source-variant diagnostic |

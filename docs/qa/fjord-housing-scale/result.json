@@ -1,0 +1,40 @@
+{
+  "dimensions": {
+    "homestead": [
+      6.371951049366714,
+      5.000544834948984,
+      9.472358226776123
+    ],
+    "longhouse": [
+      11.783736253633464,
+      5.000544834948984,
+      7.234876734232554
+    ]
+  },
+  "rotations": [
+    {
+      "id": "house-1",
+      "farmyard": false,
+      "rotation": 1.5707963267948966
+    },
+    {
+      "id": "house-2",
+      "farmyard": false,
+      "rotation": 0
+    },
+    {
+      "id": "house-3",
+      "farmyard": false,
+      "rotation": 4.71238898038469
+    },
+    {
+      "id": "house-4",
+      "farmyard": true,
+      "rotation": 3.141592653589793
+    }
+  ],
+  "plotsContainModels": true,
+  "upgradeRetainsPositionAndHeight": true,
+  "coreEqualToReplay": true,
+  "errors": []
+}

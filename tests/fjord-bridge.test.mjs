@@ -48,7 +48,8 @@ test('physical building placement survives household moves, vacancy, upgrades an
     state = core.applyCommand(state, { type: 'AssignResidence', householdId: 'founder-2', residenceId: 'house-1' });
     view = projectFjordSettlement(state, world, view.layout);
     const moved = view.entities.find(e => e.kind === 'building' && e.id === 'house-1');
-    assert.deepEqual(moved.transform, original.transform);
+    assert.deepEqual(['x', 'y', 'z', 'scale'].map(key => moved.transform[key]),
+        ['x', 'y', 'z', 'scale'].map(key => original.transform[key]));
     assert.equal(moved.status.farmyard, false);
     assert.equal(view.entities.find(e => e.id === 'cattle-1').status.assignment, null);
     assert.deepEqual(projectFjordSettlement(core.reconstructState(core.serializeState(state)), world, view.layout), view);
@@ -130,7 +131,7 @@ test('Fjord parcels are dry, flat and disjoint; incremental building changes nev
         }
         state=core.applyCommand(state,{type:'BuildHouse',householdId:'founder-1'});
         const after=projectFjordSettlement(state,world,before.layout);
-        assert.deepEqual(after.entities.find(e=>e.id==='house-1').transform, before.layout.plots['household:founder-1']);
+        assert.deepEqual(after.layout.plots['building:house-1'], before.layout.plots['household:founder-1']);
         for (const [key,p] of Object.entries(before.layout.plots)) if (key!=='household:founder-1')
             assert.deepEqual(after.layout.plots[key],p);
     }
@@ -259,4 +260,39 @@ test('canonical longship berths parallel beside the pier for saved rowboat ancho
     assert.ok(Math.abs(turned.transform.z - 21.5) < 1e-9);
     assert.equal(turned.transform.rotation, Math.PI / 2);
     assert.equal(core.serializeState(state), before);
+});
+
+test('ordinary homes use varied seeded grid headings while farmyards stay fixed without consuming Core RNG', () => {
+    const { createFjordLayout, projectFjordSettlement } = load('../src/fjord-play/FjordProjection.ts');
+    let state = core.createCampaign(32, { initialMaterials: 1000, foundingCoupleChanceBps: 0 });
+    const world = generateWorld({ seed: 32 });
+    for (let i = 1; i <= 6; i++) {
+        state = core.applyCommand(state, { type: 'AssignOccupation', personaId: 'founder-' + i,
+            occupation: i === 6 ? 'farmer' : 'woodworker' });
+        state = core.applyCommand(state, { type: 'BuildHouse', householdId: 'founder-' + i });
+    }
+    const before = core.serializeState(state);
+    const view = projectFjordSettlement(state, world, createFjordLayout(world));
+    const homes = view.entities.filter(e => e.kind === 'building');
+    const ordinary = homes.filter(e => !e.status.farmyard);
+    const headings = ordinary.map(e => e.transform.rotation);
+    assert.ok(new Set(headings).size >= 3, 'Ordinary houses visibly use several grid directions');
+    for (const home of ordinary) {
+        assert.ok([0, Math.PI / 2, Math.PI, Math.PI * 1.5].includes(home.transform.rotation));
+        assert.equal(home.plot.rotation, home.transform.rotation, 'Paths and models share the doorway heading');
+    }
+    const farm = homes.find(e => e.status.farmyard);
+    assert.equal(farm.transform.rotation, Math.PI);
+    assert.deepEqual(projectFjordSettlement(core.reconstructState(before), world, view.layout), view);
+    assert.equal(core.serializeState(state), before);
+    state = core.applyCommand(state, { type: 'SpecializeBuilding', buildingId: ordinary[0].id, occupation: 'woodworker' });
+    state = core.applyCommand(state, { type: 'UpgradeBuilding', buildingId: ordinary[0].id });
+    const upgraded = projectFjordSettlement(state, world, view.layout);
+    assert.deepEqual(upgraded.entities.find(e => e.id === ordinary[0].id).transform, ordinary[0].transform);
+    state = core.applyCommand(state, { type: 'AssignOccupation', personaId: 'founder-1', occupation: 'farmer' });
+    const activeFarm = projectFjordSettlement(state, world, upgraded.layout);
+    assert.equal(activeFarm.entities.find(e => e.id === ordinary[0].id).transform.rotation, Math.PI);
+    state = core.applyCommand(state, { type: 'AssignOccupation', personaId: 'founder-1', occupation: 'woodworker' });
+    assert.deepEqual(projectFjordSettlement(state, world, activeFarm.layout).entities
+        .find(e => e.id === ordinary[0].id).transform, ordinary[0].transform);
 });
