@@ -12,7 +12,8 @@ Food and Materials amounts have moved out of new narrative prose, including slau
 - Repeating the same assignment preserves both source records but still describes one cow, not two.
 - Five births at the same Winter are all counted and referenced in a single passage. The regression first showed only four calves despite five factual birth records.
 - Founding prose identifies two adult cows and one adult bull. A configured adult threshold of five correctly describes a three-Winter female as a heifer at slaughter, even though the checkpoint occurs later.
-- Focused public book/session/housing suite: 37 passed, zero failures/skips. Production build passed; the inherited bundle-size advisory remains. A plain Core import also leaves its 20 Materials ship-salvage receipt in the factual overview instead of the partial opening prose. No formatter is configured; source formatting and the diff were reviewed manually.
+- Collapse salvage remains qualitative in prose, with its exact 5 Materials receipt preserved in the ledger.
+- Focused public book/session/housing suite: 38 passed, zero failures/skips. Production build passed; the inherited bundle-size advisory remains. A plain Core import also leaves its 20 Materials ship-salvage receipt in the factual overview instead of the partial opening prose. No formatter is configured; source formatting and the diff were reviewed manually.
 
 ## Browser and review
 
@@ -21,3 +22,5 @@ Food and Materials amounts have moved out of new narrative prose, including slau
 [Actual runtime review](runtime-review.html) now contains thirteen regenerated passages, including calves and the calf/heifer/bull slaughter case. `node scripts/qa/sample-lore-continuity.mjs` recreates them using real Core campaigns or explicitly disclosed configured Core fixtures. Prior saved wording remains frozen. The original 20×50-Winter metrics have not been recomputed for this wording correction; they are not presented as measurements of the new prose.
 
 Required CI is rerun on the amended PR head before the PR is released. No validation or conditional skip was introduced or weakened.
+
+All thirteen LAN runtime-review selections were checked at 390 px: rendered paragraph text exactly matches its saved sample, no livestock IDs or exact Food/Materials amounts appear in the narrative, and no page errors occurred.

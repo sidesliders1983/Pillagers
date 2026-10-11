@@ -359,3 +359,18 @@ test('repeated assignment records never turn one cow into two livestock in a pas
     assert.match(chapter.text, /[Oo]ne adult cow was assigned to the Farmyard/);
     assert.doesNotMatch(chapter.text, /two adult cows/);
 });
+
+test('collapse salvage is qualitative in the passage and exact in its factual ledger', () => {
+    const owner = quietCampaign();
+    const state = owner.session.snapshot();
+    state.mechanics.config.collapseDebtWinters = 1;
+    owner.importJSON(core.serializeState(state));
+    owner.command({ type: 'BuildHouse', householdId: 'founder-9' });
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    owner.command({ type: 'AssignResidence', householdId: 'founder-9', residenceId: null });
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = owner.session.book.snapshot().chapters.at(-1);
+    assert.match(chapter.text, /collapsed; some Materials were salvaged/);
+    assert.doesNotMatch(chapter.text, /\d+ (?:Food|Materials)/);
+    assert.equal(chapter.facts.ledger.materials.otherReceipts, 5);
+});

@@ -57,6 +57,8 @@ export function composeChapter(
             return sentences.join(' ');
         }
         const animal = event.details?.cattleId;
+        if (event.type === 'BuildingCollapsed') text = text.replace(/; \d+ Materials were salvaged/,
+            Number(details.salvage) > 0 ? '; some Materials were salvaged' : '; no Materials were salvaged');
         text = text.replace(/ for \d+ (Food|Materials)/g, '');
         return typeof animal === 'string' ? text.replace('Animal ' + animal,
             event.type === 'CattleBorn' ? 'A calf' : 'An animal') : text;
