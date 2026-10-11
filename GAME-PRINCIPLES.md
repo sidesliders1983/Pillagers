@@ -18,7 +18,7 @@ The world should communicate the recurring seasonal cycle. Regional historical p
 
 ## GP-002 — Lore tells only what actually happened
 
-The village's stories must come exclusively from actual, recorded game events. Norse oral storytelling inspires language and rhythm; it never authorizes invented or altered facts. This is an approved design constraint, not yet implemented.
+The village's stories must come exclusively from actual, recorded game events. Norse oral storytelling inspires language and rhythm; it never authorizes invented or altered facts. This is an approved design constraint; the Lore v0.2 direction below does not itself implement it.
 
 The simulation maintains an authoritative event ledger with stable event and persona IDs, chronological game time, event-time identity snapshots and recorded outcomes. AI cannot create source events, mutate facts or invent dialogue, motives, witnesses, causes or consequences. Unknown details remain unknown. Model replacement is not automatically a birth or death.
 
@@ -28,17 +28,23 @@ To enforce the strict factual requirement, AI may select recorded events and app
 
 Style can use rhythm, repetition and alliteration without adding factual claims. Embellished legends, invented rumours and personality-based assumptions about motives are outside this principle. Stories do not automatically change reputation, relationships or other gameplay state.
 
-Implementation task: [GitHub lore issue](https://github.com/sidesliders1983/Pillagers/issues/14).
+**Lore v0.2 direction, approved 2026-10-11:** each new campaign has a distinctive opening based on frozen founding facts, then a chapter every **five completed Winters** that draws on the whole recorded history. A factual appendix lists births, deaths, Food produced/used and Materials produced/used; code calculates these figures. Keep factual memory, narrative planning memory and published text distinct. Separate narrative variation from simulation RNG, and preserve published chapters exactly through save/load. Avoid repeated passages without promising globally unique arbitrary text.
 
-## GP-003 — Web-only play; lore architecture to be decided
+**Automatic story pop-ups are the default:** show the opening at campaign start and each five-Winter chapter (800 opening, then 805, 810, etc.). The complete book is also available in the menu. Later, a setting may hide automatic pop-ups until the player requests the book; generation and accumulation continue regardless. This supersedes the earlier menu-only notification suggestion. Pop-ups are dismissible, with no reading penalty. **The world continues behind the story:** opening, reading or closing the pop-up/menu reader never pauses or resumes the campaign. Preserve the existing running/paused state, manual pause, hidden-tab, loading and ownership rules; this does not authorize offline/background progression. The displayed chapter remains frozen while later events or chapters accumulate.
+
+Implementation umbrella: [GitHub lore issue #14](https://github.com/sidesliders1983/Pillagers/issues/14). Detailed requirements and slice ownership: [Lore v0.2 clan book](docs/gameplay/spec/11-LORE-CLAN-BOOK.md).
+
+## GP-003 — Web-only play; no paid Lore service required
 
 Pillagers is a web-only game. Players must not install a desktop app, local AI server, Ollama or another runtime.
 
-Lore generation may run entirely on our own backend, avoiding inference workloads on the player's GPU and eliminating the need for a player-side model download. A self-hosted model does not require calls to an external AI provider. Browser inference remains a possible alternative, not a requirement.
+**Lore v0.2 budget decision, 2026-10-11:** no paid API, subscription, metered trial dependency, paid hosting deployment or automatic external-provider fallback for now. Build a complete controlled, model-free book first. Any local/self-hosted model is optional and replaceable, not the owner of campaign memory.
 
-The northstar architecture, runtime/model, hosting, event authority, API boundaries, queuing, persistence and operating budgets will be evaluated later. Do not implement or lock these choices merely from this principle. Backend generation is the current preferred direction.
+An optional model may run on an existing developer/owner computer or our own backend through an application-owned endpoint, avoiding inference on the player's GPU. A local llama.cpp comparison is the initial experiment; Ollama with cloud disabled is an alternative. Exact model/runtime, licence, hardware budget and any later deployment require separate measured review. Browser inference remains an optional alternative, not a compulsory download or iPad workload. Free software does not imply unlimited free hosting or hardware.
 
-Generate at most once per annual summary and reuse saved results. Apply GP-002 regardless of where inference runs. The game and annual summary must remain usable while generation is pending or fails, using factual template-based chronicles as fallback. Avoid continuous inference requests and any automatic external-provider fallback. Full offline play is not required.
+Generate one opening and at most one published result per **five-Winter chapter/version**, replacing the earlier annual-story generation cadence. Save and reuse results. The existing factual event timeline may still group events annually; that is not an annual model request. Apply GP-002 everywhere. Story pop-ups and the menu reader must remain usable when AI is absent, pending or invalid, using controlled factual text. A late result must not rewrite a published chapter, repeat its pop-up or advance/resume simulation. Full offline play is not required.
+
+Evaluation and integration tasks are separated into [#103](https://github.com/sidesliders1983/Pillagers/issues/103), [#104](https://github.com/sidesliders1983/Pillagers/issues/104) and [#105](https://github.com/sidesliders1983/Pillagers/issues/105). Recording this direction does not authorize installing a dependency or deploying infrastructure.
 
 ## GP-004 — Settlement, residents and skilled work
 

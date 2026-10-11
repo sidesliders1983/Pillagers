@@ -22,5 +22,6 @@ Files:
 - 08 Weather
 - 09 Player Actions
 - [10 Cultural Life & Social Cohesion](10-CULTURAL-LIFE-COHESION.md)
+- [11 Lore & the Continuing Clan Book](11-LORE-CLAN-BOOK.md)
 
 These requirements describe design intent, not implementation status.
