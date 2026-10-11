@@ -172,8 +172,10 @@ test('a bound source mooring survives subsequent asset resolution and exact save
     campaign.setMooring(source);
     campaign.setMooring({x:99,y:0,z:99,rotation:0,scale:1});
     const saved=campaign.exportJSON();
+    const berth=campaign.project().entities.find(e=>e.kind==='longship').transform;
     const restored=new FjordCampaign(new GameplaySession(17));restored.importJSON(saved);
-    assert.deepEqual(restored.project().entities.find(e=>e.kind==='longship').transform,source);
+    assert.deepEqual(restored.project().layout.mooring,source);
+    assert.deepEqual(restored.project().entities.find(e=>e.kind==='longship').transform,berth);
     assert.equal(restored.exportJSON(),saved);
 });
 
@@ -235,4 +237,26 @@ test('presentation consumers cannot overwrite the next canonical ground projecti
     view.ground.plots[0].plot.x = 1000;
     view.ground.plots.push({ id: 'not-a-canonical-house', plot: view.ground.plots[0].plot });
     assert.deepEqual(projectFjordSettlement(state, world, view.layout).ground, original);
+});
+
+test('canonical longship berths parallel beside the pier for saved rowboat anchors without moving gameplay', () => {
+    const { createFjordLayout, projectFjordSettlement } = load('../src/fjord-play/FjordProjection.ts');
+    const state = core.createCampaign(32);
+    const before = core.serializeState(state);
+    const world = generateWorld({ seed: 32 });
+    // The source pier is at (10, 21.5), pointing along +Z; its old faering anchor is (10, 26).
+    const layout = createFjordLayout(world, { x: 10, y: .05, z: 26, rotation: 0, scale: 1 });
+    const saved = structuredClone(layout);
+    const view = projectFjordSettlement(state, world, layout);
+    const ship = view.entities.find(entity => entity.kind === 'longship');
+    assert.deepEqual(ship.transform, { x: 14.5, y: .05, z: 29.5, rotation: 0, scale: 1 });
+    assert.ok(ship.transform.x - 3.48 / 2 > 12, 'The actual 3.48m hull clears the 4m source pier');
+    assert.deepEqual(view.layout.mooring, saved.mooring, 'Keep the saved source anchor, never accumulate offsets');
+    assert.deepEqual(projectFjordSettlement(state, world, view.layout), view);
+    const rotated = createFjordLayout(world, { ...saved.mooring, rotation: Math.PI / 2 });
+    const turned = projectFjordSettlement(state, world, rotated).entities.find(e => e.kind === 'longship');
+    assert.ok(Math.abs(turned.transform.x - 13.5) < 1e-9);
+    assert.ok(Math.abs(turned.transform.z - 21.5) < 1e-9);
+    assert.equal(turned.transform.rotation, Math.PI / 2);
+    assert.equal(core.serializeState(state), before);
 });

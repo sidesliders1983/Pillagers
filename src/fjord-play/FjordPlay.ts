@@ -51,11 +51,22 @@ export class FjordPlay {
             <button id="fjord-new">New campaign from seed</button><button id="fjord-restart">Restart with same founders</button>
             <p>The clock starts when opening or restarting the Fjord. Explicit load/import pauses it. Switching 2D/3D retains your clock setting.</p>
             </div></details></div></header><section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
-            <aside><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
+            <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
+            <aside id="fjord-management"><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         const canvas = document.querySelector<HTMLCanvasElement>('#fjord-canvas')!;
+        const management = document.querySelector<HTMLElement>('#fjord-management')!;
+        const managementToggle = document.querySelector<HTMLButtonElement>('#fjord-management-toggle')!;
+        const showManagement = (visible: boolean) => {
+            management.hidden = !visible;
+            managementToggle.textContent = visible ? '▲' : '▼';
+            managementToggle.setAttribute('aria-expanded', String(visible));
+            managementToggle.setAttribute('aria-label',
+                visible ? 'Collapse management panel' : 'Expand management panel');
+        };
+        managementToggle.addEventListener('click', () => showManagement(management.hidden));
         const notice = document.querySelector<HTMLElement>('#fjord-notice')!;
         const say = (message: string) => {
             notice.textContent = message;
@@ -169,6 +180,9 @@ export class FjordPlay {
             const panel = document.querySelector<HTMLElement>('#entity-panel')!;
             const selectionKey = this.shared.selection ? this.shared.selection.kind + ':' + this.shared.selection.id : '';
             const sameSelection = selectionKey === this.lastPanelSelection;
+            // Ticks retain the user's panel preference; a new selection brings its actions back.
+            if (selectionKey && !sameSelection)
+                showManagement(true);
             const preserved = new Set(Array.from(panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select'))
                 .filter(field => sameSelection && (this.session.running || field === document.activeElement)).map(field => field.id));
             const resident = this.shared.selection?.kind === 'persona' ?
@@ -278,6 +292,7 @@ export class FjordPlay {
             });
         });
         const select = (kind: string, id: string) => {
+            showManagement(true);
             this.shared.select({ kind: kind as EntityKind, id });
             const entity = this.campaign.project().entities.find(e => e.kind === kind && e.id === id);
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';

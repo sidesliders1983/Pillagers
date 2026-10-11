@@ -36,6 +36,12 @@ in. Scroll still zooms and WASD/arrows pan. The Fjord prototype uses the same co
 Selection highlighting belongs to the renderer; commands are submitted only by explicit
 management buttons. Available forms are shared with the existing 2D settlement.
 
+The right management panel has a **▲** collapse button at its upper-right corner. Collapsing
+leaves a **▼** button in the same position beneath the header; both have a 44px touch target.
+The canvas keeps its viewport and receives gestures in the uncovered area. Clock updates retain
+this UI preference, and selecting an entity reopens management automatically, including a repeated
+tap on the current selection. The button can also reopen it manually. This transient preference changes no campaign or save rules.
+
 The selected object has a gold ring with a transparent centre. Selecting a resident also
 marks their visible partner, children and current home in cyan. Selecting a home marks its
 visible residents in cyan. Floating English role/name labels identify each connection. Labels are spaced to prevent

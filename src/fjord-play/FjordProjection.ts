@@ -77,6 +77,21 @@ export function createFjordLayout(world: WorldBlueprint, mooring?: FjordTransfor
         plots: {}, points: {}, mooringResolved: Boolean(mooring), mooring: mooring ??
             { x: harbor.x, y: world.waterLevel + .15, z: harbor.z - 6, rotation: 0, scale: 1 } };
 }
+/** The stored anchor belongs to the 5m faering. Keep it stable for existing campaign saves.
+ * Both source hull and pier run along local Z. The 14.47m longship needs a lateral
+ * berth: 2m pier half-width + 1.74m hull half-width + .76m gap, and extra seaward room.
+ */
+function longshipBerth(anchor: FjordTransform): FjordTransform {
+    const forward = 3.5 * anchor.scale;
+    const lateral = 4.5 * anchor.scale;
+    const sine = Math.sin(anchor.rotation), cosine = Math.cos(anchor.rotation);
+    return {
+        ...anchor,
+        x: anchor.x + sine * forward + cosine * lateral,
+        z: anchor.z + cosine * forward - sine * lateral
+    };
+}
+
 export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
     const surface = createBlueprintSurface(world);
     return fitsBuildingFoundation(surface, p) &&
@@ -276,7 +291,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     }
     for (const ship of Object.values(state.landing?.longships ?? {}))
         if (ship.salvagedWinter === null)
-            add('longship', ship.id, 'Founding longship', 'longship', layout.mooring, { living: true });
+            add('longship', ship.id, 'Founding longship', 'longship', longshipBerth(layout.mooring), { living: true });
     for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
     const ground = projectFjordGround(world, entities);
     if (ground.plots.length > 1 && ground.paths.length < ground.plots.length - 1)
