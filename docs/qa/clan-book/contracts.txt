@@ -1,0 +1,26 @@
+✔ family and founding events record historical names and ages at the public campaign boundary (457.2742ms)
+✔ Chronicle groups Winters newest first, aggregates production at first occurrence and retains ordered provenance (62.6909ms)
+✔ Chronicle uses historical snapshots, supports actual decisions and roundtrips without duplicates or current-person lookups (259.8562ms)
+✔ supported debt, collapse and childcare facts have neutral templates; missing or unknown facts remain raw-only (0.4986ms)
+✔ a new campaign freezes its factual opening and saves the same book across view handoff (2514.0833ms)
+✔ five completed Winters close one reconciled appendix including final-tick production and annual use (1660.7045ms)
+✔ fifteen-Winter fast-forward freezes disjoint intermediate packages and rejects a rolled-back future (5973.7129ms)
+✔ notification and reading are distinct and do not alter clock intent or Core state (1071.0346ms)
+✔ lifecycle identities remain historical and legacy event data stays explicitly partial (1440.3288ms)
+✔ corrupt narrative facts are rejected before replacing the active campaign (428.5159ms)
+✔ paid upkeep, upgrades and expedition provisions reconcile separately from recovered cargo and refunds (1426.368ms)
+✔ unmet Food need is recorded without counting it as consumption or spending (1077.4422ms)
+✔ canonical Fjord calendar starts in Winter and changes at exact quarter boundaries (1144.4049ms)
+✔ partial-year save, full-year command, local load and both view handoffs retain the canonical season (3248.782ms)
+✔ all annual weather classes and weather-off retain seasons and do not reroll at quarter boundaries (3320.5376ms)
+✔ quarter projections and save/load leave mortality, cattle, production and RNG replay identical (4516.6974ms)
+✔ 1, 3 and 5 minute year lengths drive the same saved quarter boundaries without a second clock (1880.7591ms)
+✔ Fjord keeps Winter snow until Spring and thaws during the first half of Spring (3115.6436ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20462.1094

@@ -18,6 +18,9 @@ const occupationLabels:Record<string,string>={farmer:'farmer',herder:'herder',fi
 type Template=(e:SimulationEvent,d:Facts)=>string|null;
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    PersonaDied:(e,d)=>{const name=person(e,e.personaId);return name?name+' died'+(str(d,'cause')?' ('+d.cause+')':'')+'.':null;},
+    CattleBorn:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' was born.':null,
+    CattleDied:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' died.':null,
     FoundingPartyLanded:(_e,d)=>{const founders=ids(d,'founderIds');return founders?`The founding party of ${founders.length} residents arrived.`:null;},
     FoundingPartnershipPresent:(e,d)=>{const p=ids(d,'participants');return p?.length===2?`${person(e,p[0])} and ${person(e,p[1])} were already partners at arrival.`:null;},
     OccupationAssigned:(e,d)=>{const name=person(e,e.personaId),role=str(d,'occupation');return name&&(d.occupation===null||role&&occupationLabels[role])?d.occupation===null?`${name} no longer had an assigned occupation.`:`${name} became a ${occupationLabels[role!]}.`:null;},
