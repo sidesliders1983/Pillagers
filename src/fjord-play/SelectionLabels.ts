@@ -28,6 +28,10 @@ export class SelectionLabels {
         }));
     }
 
+    setAnchors(markers: readonly SelectionLabel[]) {
+        markers.forEach((marker, index) => this.items[index]?.anchor.fromArray(marker.anchor));
+    }
+
     update(camera: Camera, width: number, height: number) {
         const placed: LabelBox[] = [];
         for (const item of this.items) {

@@ -1,4 +1,5 @@
-import { inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, } from '../simulation/SimulationCore';
+import type { CharacterDNA } from '../characters/CharacterDNA';
+import { inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
 import type { SimulationState } from '../simulation/SimulationCore';
 import type { EntityKind } from '../play/SettlementView';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -34,6 +35,7 @@ export interface FjordEntity {
     label: string;
     asset: string;
     terrainAsset?: string;
+    dna?: CharacterDNA;
     transform: FjordTransform | null;
     plot?: FjordPlot;
     status: {
@@ -47,6 +49,8 @@ export interface FjordEntity {
         sheltered?: boolean;
         overcrowding?: number;
         parentIds?: string[];
+        indoorReason?: 'young-child' | 'childcare' | null;
+        grazingZone?: 'yard' | 'overflow' | 'exposed';
     };
 }
 const geographyIds = new WeakMap<WorldBlueprint, string>();
@@ -146,10 +150,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const allocatePoint = (key: string, preferred: {
         x: number;
         z: number;
-    }, yard?: FjordPlot, obstacle = { halfWidth: 3.5, halfDepth: 4 }) => {
+    }, yard?: FjordPlot, obstacle = { halfWidth: 3.5, halfDepth: 4 },
+        permitted: (p: { x: number; z: number }) => boolean = () => true) => {
         usedPoints.add(key);
-        if (layout.points[key])
+        if (layout.points[key] && permitted(layout.points[key]))
             return layout.points[key];
+        delete layout.points[key];
         const points = Object.values(layout.points);
         const options: {
             x: number;
@@ -161,7 +167,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                     x: preferred.x + Math.cos(angle * Math.PI / 4) * radius,
                     z: preferred.z + Math.sin(angle * Math.PI / 4) * radius
                 });
-        const point = options.find(p => surface.surfaceHeightAt(p.x, p.z) > world.waterLevel + .25 &&
+        const point = options.find(p => permitted(p) && surface.surfaceHeightAt(p.x, p.z) > world.waterLevel + .25 &&
             surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
             points.every(q => Math.hypot(p.x - q.x, p.z - q.z) > 1.5) &&
             Object.values(layout.plots).every(q => q === yard ?
@@ -221,29 +227,45 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             const p = state.personas[id];
             if (!p || p.deathWinter !== null || personaAway(state, id))
                 continue;
-            const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
-            const point = plot ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
-                z: plot.z + 8 + Math.floor(index / 5) * 1.8 }) : undefined;
             const age = personaAge(state, id);
+            const indoorReason = age < 5 ? 'young-child' :
+                state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
+            const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
+            const point = plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
+                z: plot.z + 8 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, sex: p.dna.sex, age });
+                { living: true, sex: p.dna.sex, age, indoorReason });
+            entities[entities.length - 1].dna = { ...structuredClone(p.dna), age };
         }
     }
-    for (const [index, c] of Object.values(state.landing?.cattle ?? {}).filter(c => c.deathWinter === null).sort((a, b) => a.id.localeCompare(b.id)).entries()) {
+    const livingCattle = Object.values(state.landing?.cattle ?? {})
+        .filter(c => c.deathWinter === null).sort((a, b) => a.id.localeCompare(b.id));
+    for (const [index, c] of livingCattle.entries()) {
         const view = inspectCattle(state, c.id);
         const assigned = c.farmyardId ? buildingPlots.get(c.farmyardId) : null;
         const level = c.farmyardId ? state.mechanics?.buildings[c.farmyardId]?.upgradeLevel ?? 0 : 0;
-        const key = 'cattle:' + c.id + '@' + (c.farmyardId ?? 'outside') + '@' + level;
-        const x = assigned ? assigned.x - 4.5 + index % 4 * 2 : center.x - 7 + index * 2;
-        const z = assigned ? assigned.z - 4.5 : center.z - 3;
+        const herd = livingCattle.filter(member => member.farmyardId === c.farmyardId);
+        const rank = herd.findIndex(member => member.id === c.id);
+        const capacity = state.landing!.config.farmyardCapacity;
+        const grazingZone = assigned ? rank < capacity ? 'yard' : 'overflow' : 'exposed';
+        const key = 'cattle:' + c.id + '@' + (c.farmyardId ?? 'outside') + '@' + level + '@' + grazingZone;
+        const x = assigned ? assigned.x - (grazingZone === 'yard' ? 4.8 : 10) : center.x - 7 + index * 2;
+        const z = assigned ? assigned.z - 3.9 + rank % 4 * 2.6 : center.z - 3;
         const widths = [2.05, 3.06, 4.72, 5.58], depths = [2.42, 2.71, 2.92, 4.38];
+        const permitted = (p: { x: number; z: number }) => !assigned ||
+            (grazingZone === 'yard' ? Math.abs(p.x - assigned.x) < assigned.halfWidth - 1 &&
+                Math.abs(p.z - assigned.z) < assigned.halfDepth - 1 :
+                Math.hypot(p.x - assigned.x, p.z - assigned.z) <= 20 &&
+                (Math.abs(p.x - assigned.x) > assigned.halfWidth + .8 ||
+                    Math.abs(p.z - assigned.z) > assigned.halfDepth + .8));
         const point = allocatePoint(key, { x, z }, assigned ?? undefined, {
-            halfWidth: widths[Math.min(level, 3)] + 1.5, halfDepth: depths[Math.min(level, 3)] + 1.5
-        });
+            halfWidth: widths[Math.min(level, 3)] + .7, halfDepth: depths[Math.min(level, 3)] + .7
+        }, permitted);
         add('cattle', c.id, c.id, view.stage === 'Young' ? 'baby' :
-            view.stage === 'Young Adult' ? 'young-adult' : c.sex === 'female' ? 'adult-female' : 'adult-male', point, { living: true, sex: c.sex, age: view.age, stage: view.stage, assignment: c.farmyardId,
-                sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds] });
+            view.stage === 'Young Adult' ? 'young-adult' : c.sex === 'female' ? 'adult-female' : 'adult-male', point,
+            { living: true, sex: c.sex, age: view.age, stage: view.stage, assignment: c.farmyardId,
+                sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds], grazingZone });
     }
     for (const ship of Object.values(state.landing?.longships ?? {}))
         if (ship.salvagedWinter === null)

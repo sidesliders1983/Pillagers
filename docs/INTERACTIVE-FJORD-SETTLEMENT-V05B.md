@@ -17,9 +17,10 @@ The existing routes replace the document. A shared session checkpoint explicitly
 ownership when the player chooses **2D Settlement** or **3D Fjord**. It carries canonical state,
 selection, exact Fjord geography/layout and browser pacing, including fractional ticks.
 The outgoing clock stops; the receiving view resumes the saved running flag and cycle speed.
-Navigation/loading time never advances the simulation. Refresh and explicit save/load remain
-paused. Direct visits restore the current tab's campaign paused; independent tabs do not run
-one shared clock. The developer Gameplay Lab retains explicit local save/load.
+Navigation/loading time never advances the simulation. In `/fjord-play`, direct visits and
+refresh start the clock after the scene is ready; new campaigns and restarts also start it.
+Explicit save/load and import remain paused. `/play` still opens paused. Independent tabs do
+not run one shared clock. The developer Gameplay Lab retains explicit local save/load.
 
 Plain canonical JSON remains compatible with the developer lab. The Fjord envelope retains
 its existing version and exact metre-based geography. Both player views use the existing

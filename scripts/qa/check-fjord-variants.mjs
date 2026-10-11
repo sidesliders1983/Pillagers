@@ -60,15 +60,10 @@ try {
         const child = Object.values(state.personas).find(p => p.parentIds.length === 2);
         assert.ok(baby && child);
         await page.waitForFunction(id => JSON.parse(document.querySelector('#fjord-canvas').dataset.rendered).some(e => e.id === id && e.asset === 'baby'), baby.id);
-        let childModel = (await actual()).find(e => e.id === child.id);
-        const childRenderId = childModel.renderId;
-        assert.equal(childModel.scale[0], .4);
-        const heightAtBirth = childModel.bounds.max[1] - childModel.bounds.min[1];
+        assert.equal((await actual()).some(e => e.id === child.id), false, 'newborn stays indoors');
         await advance();
         await page.waitForFunction(id => JSON.parse(document.querySelector('#fjord-canvas').dataset.rendered).some(e => e.id === id && e.asset === 'young-adult'), baby.id);
-        childModel = (await actual()).find(e => e.id === child.id);
-        assert.equal(childModel.renderId, childRenderId);
-        assert.ok(childModel.bounds.max[1] - childModel.bounds.min[1] > heightAtBirth);
+        assert.equal((await actual()).some(e => e.id === child.id), false, 'age one stays indoors');
         await advance();
         await page.waitForFunction(id => JSON.parse(document.querySelector('#fjord-canvas').dataset.rendered).some(e => e.id === id && e.stage === 'Adult'), baby.id);
         const animals = (await actual()).filter(e => e.kind === 'cattle');

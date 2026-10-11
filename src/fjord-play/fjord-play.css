@@ -52,3 +52,12 @@ body.fjord-play { margin: 0; background: #152b28; color: #ece7d2; overflow: hidd
 
 #fjord-weather-information { border-bottom: 1px solid #546652; margin-bottom: 10px; padding-bottom: 6px; font: 12px/1.4 system-ui,sans-serif; }
 #fjord-weather-information .weather-warning { color: #f0c78b; }
+
+body.fjord-play .character-profile { color: #35483f; width: max-content; max-width: min(282px,calc(100vw - 16px)); padding: 4px 6px; box-sizing: border-box; }
+body.fjord-play .profile-header { display: flex; align-items: center; gap: 4px; }
+body.fjord-play .profile-header h2 { font: 600 14px/1.3 system-ui,sans-serif; margin: 0; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body.fjord-play .profile-toggle { flex: 0 0 44px; width: 44px; height: 44px; border: 0; border-radius: 4px; background: transparent; color: #35483f; cursor: pointer; }
+body.fjord-play .profile-toggle:focus-visible { outline: 2px solid #35684f; outline-offset: -2px; }
+body.fjord-play .character-profile.profile-expanded { width: 282px; padding: 8px; }
+body.fjord-play .profile-details { position: relative; max-height: min(300px,45dvh); overflow: auto; padding: 4px 4px 4px 0; }
+body.fjord-play .profile-details[hidden] { display: none; }

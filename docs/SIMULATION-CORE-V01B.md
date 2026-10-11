@@ -32,7 +32,7 @@ All balance settings live in the saved `mechanics.config`; these are explicit co
 | Partnerships | Eligible unpartnered adults, opposite sex in this prototype; 10% per eligible pair per Winter |
 | Fertility | Partnered female aged 18–40 inclusive; 25% annual chance; sufficient Food for next Winter |
 | Birth cooldown | Two complete Winters: birth at 801 permits the next birth at 804 |
-| Childcare | Five complete Winters of zero maternal work; later births reset the endpoint |
+| Childcare | New campaigns: five complete Winters of zero work for the actual caregiver; later births reset the endpoint. Existing saves retain their configured duration. |
 | Caregiver | Adult female with no occupation or conflicting childcare; one donor per mother's group; may live elsewhere |
 | Caregiver opportunity cost | Zero work; fertility blocked for any Winter she served, even if replaced before its boundary |
 | Trait inheritance | Parental mean; each trait independently has 25% chance to copy a seeded chosen parent's value |
@@ -49,6 +49,8 @@ Close-kin restrictions exclude parent/child, grandparent/grandchild, siblings in
 `AssignOccupation` sets a persistent player lock, including explicit unemployment (`occupation: null`). `ReleaseOccupation` restores career autonomy. `AssignCaregiver` replaces autonomous choice; `caregiverId: null` locks care back to the mother. `AssignResidence` moves a household; a null residence selects its tent. `HouseHousehold` performs housing priority; `BuildHouse` explicitly builds. `SpecializeBuilding` and `UpgradeBuilding` control specialization/upgrades. Invalid commands fail atomically without changing the supplied state.
 
 Automatic caregiver selection chooses the first eligible persona in sorted ID order. A care group expires at its endpoint and clears its caregiver lock. Caregiver participation is persisted so save/load cannot restore fertility within a Winter already spent caring.
+
+Birth cooldown and care are independent: a birth at Winter 801 blocks birth opportunities at 802 and 803, with the next opportunity at 804 subject to existing fertility rules. Care lasts until 806 unless a younger child renews the group. Transferring care preserves both endpoints and assigns only the remaining care period. Explicit saved care settings/endpoints, including two-Winter playtest saves, are preserved on load and saved-rule restarts.
 
 ## Save compatibility and scope
 

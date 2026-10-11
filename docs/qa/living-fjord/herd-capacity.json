@@ -1,0 +1,581 @@
+{
+  "origin": "http://127.0.0.1:5180",
+  "farmId": "house-1",
+  "aboveCapacity": [
+    {
+      "key": "cattle:cattle-1",
+      "renderId": "317331bd-0390-492d-9fba-6d295edd20fd",
+      "kind": "cattle",
+      "id": "cattle-1",
+      "living": true,
+      "sex": "female",
+      "age": 4,
+      "stage": "Adult",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 1,
+      "parentIds": [],
+      "grazingZone": "yard",
+      "position": [
+        35.10000000000004,
+        2.7022438630124723,
+        25.099999999999984
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          34.50531170196903,
+          2.7022438630124728,
+          24.225131100560674
+        ],
+        "max": [
+          35.62516292953001,
+          3.9461092645456692,
+          25.969299522428717
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-2",
+      "renderId": "1782f56f-96ac-4cdb-8deb-7e77bb2a2b30",
+      "kind": "cattle",
+      "id": "cattle-2",
+      "living": true,
+      "sex": "female",
+      "age": 4,
+      "stage": "Adult",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 1,
+      "parentIds": [],
+      "grazingZone": "yard",
+      "position": [
+        37.90000000000008,
+        2.7017933779019367,
+        22.37970521292003
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          37.30531170196907,
+          2.701793377901937,
+          21.504836313480723
+        ],
+        "max": [
+          38.42516292953005,
+          3.945658779435136,
+          23.249004735348766
+        ]
+      },
+      "motion": {
+        "state": "Walk",
+        "speed": 0.31415944933611384,
+        "clip": "Walk"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-3",
+      "renderId": "88757430-71ad-43e2-904b-c8655eea923a",
+      "kind": "cattle",
+      "id": "cattle-3",
+      "living": true,
+      "sex": "male",
+      "age": 4,
+      "stage": "Adult",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 1,
+      "parentIds": [],
+      "grazingZone": "yard",
+      "position": [
+        40.90000000000012,
+        2.6997842521317654,
+        25.499999999999982
+      ],
+      "asset": "adult-male",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          40.23731901135995,
+          2.699784252131766,
+          24.543819431362664
+        ],
+        "max": [
+          41.656041061613266,
+          4.050154490203104,
+          26.50420933321633
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-4",
+      "renderId": "55322952-9efd-4d4d-a66e-684e91257bcd",
+      "kind": "cattle",
+      "id": "cattle-4",
+      "living": true,
+      "sex": "female",
+      "age": 0,
+      "stage": "Young",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 1,
+      "parentIds": [
+        "cattle-1",
+        "cattle-3"
+      ],
+      "grazingZone": "yard",
+      "position": [
+        35.10000000000004,
+        2.7007985305946627,
+        26.899999999999977
+      ],
+      "asset": "baby",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          34.813448928564675,
+          2.7007985305946627,
+          26.45305308491246
+        ],
+        "max": [
+          35.37566082314562,
+          3.420848419720411,
+          27.3501185221089
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-5",
+      "renderId": "22b27bd9-1dc2-4c94-8791-89c503244b1d",
+      "kind": "cattle",
+      "id": "cattle-5",
+      "living": true,
+      "sex": "female",
+      "age": 0,
+      "stage": "Young",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 1,
+      "parentIds": [
+        "cattle-2",
+        "cattle-3"
+      ],
+      "grazingZone": "overflow",
+      "position": [
+        29.5,
+        2.5999999046325684,
+        22.1
+      ],
+      "asset": "baby",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          29.21344892856465,
+          2.599999904632569,
+          21.65305308491249
+        ],
+        "max": [
+          29.775660823145603,
+          3.3200497937583178,
+          22.550118522108924
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    }
+  ],
+  "atCapacity": [
+    {
+      "key": "cattle:cattle-1",
+      "renderId": "317331bd-0390-492d-9fba-6d295edd20fd",
+      "kind": "cattle",
+      "id": "cattle-1",
+      "living": true,
+      "sex": "female",
+      "age": 4,
+      "stage": "Adult",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 0,
+      "parentIds": [],
+      "grazingZone": "yard",
+      "position": [
+        35.10000000000004,
+        2.700164187938252,
+        25.48836883862499
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          34.50531170196903,
+          2.7001641879382525,
+          24.61349993918568
+        ],
+        "max": [
+          35.62516292953001,
+          3.944029589471449,
+          26.357668361053722
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-2",
+      "renderId": "1782f56f-96ac-4cdb-8deb-7e77bb2a2b30",
+      "kind": "cattle",
+      "id": "cattle-2",
+      "living": true,
+      "sex": "female",
+      "age": 4,
+      "stage": "Adult",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 0,
+      "parentIds": [],
+      "grazingZone": "yard",
+      "position": [
+        37.90000000000008,
+        2.701993718685425,
+        22.249999999999993
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          37.30531170196907,
+          2.7019937186854253,
+          21.375131100560687
+        ],
+        "max": [
+          38.42516292953005,
+          3.945859120218624,
+          23.11929952242873
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-3",
+      "renderId": "88757430-71ad-43e2-904b-c8655eea923a",
+      "kind": "cattle",
+      "id": "cattle-3",
+      "living": true,
+      "sex": "male",
+      "age": 4,
+      "stage": "Adult",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 0,
+      "parentIds": [],
+      "grazingZone": "yard",
+      "position": [
+        40.90000000000012,
+        2.698303043585526,
+        25.194267496184988
+      ],
+      "asset": "adult-male",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          40.23731901135995,
+          2.6983030435855264,
+          24.23808692754767
+        ],
+        "max": [
+          41.656041061613266,
+          4.048673281656864,
+          26.198476829401336
+        ]
+      },
+      "motion": {
+        "state": "Walk",
+        "speed": 0.2413786094358135,
+        "clip": "Walk"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:cattle-4",
+      "renderId": "55322952-9efd-4d4d-a66e-684e91257bcd",
+      "kind": "cattle",
+      "id": "cattle-4",
+      "living": true,
+      "sex": "female",
+      "age": 0,
+      "stage": "Young",
+      "assignment": "house-1",
+      "sheltered": true,
+      "overcrowding": 0,
+      "parentIds": [
+        "cattle-1",
+        "cattle-3"
+      ],
+      "grazingZone": "yard",
+      "position": [
+        35.10000000000004,
+        2.7007985305946627,
+        26.899999999999977
+      ],
+      "asset": "baby",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          34.813448928564675,
+          2.7007985305946627,
+          26.45305308491246
+        ],
+        "max": [
+          35.37566082314562,
+          3.420848419720411,
+          27.3501185221089
+        ]
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clip": "Idle"
+      },
+      "placeholder": false
+    }
+  ],
+  "poses": [
+    {
+      "key": "persona:founder-1",
+      "kind": "persona",
+      "x": 35,
+      "y": 2.5999999046325684,
+      "z": 34,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-4",
+      "kind": "persona",
+      "x": 36.65274382493932,
+      "y": 2.5999999046325684,
+      "z": 34,
+      "rotation": -1.4925644793772217,
+      "state": "Walk",
+      "speed": 0.8031374536441866,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-2",
+      "kind": "persona",
+      "x": 35,
+      "y": 2.5999999046325684,
+      "z": 18,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-3",
+      "kind": "persona",
+      "x": 19,
+      "y": 2.5999999046325684,
+      "z": 34,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-10",
+      "kind": "persona",
+      "x": 20.732550439089763,
+      "y": 2.5999999046325684,
+      "z": 34,
+      "rotation": -1.373198564730961,
+      "state": "Walk",
+      "speed": 0.49249060959581303,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-5",
+      "kind": "persona",
+      "x": 51,
+      "y": 2.5999999046325684,
+      "z": 34,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-6",
+      "kind": "persona",
+      "x": 34.720616479956796,
+      "y": 2.5999999046325684,
+      "z": 50,
+      "rotation": -1.5586759230019853,
+      "state": "Walk",
+      "speed": 1.0762848442578135,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-7",
+      "kind": "persona",
+      "x": 19,
+      "y": 2.5999999046325684,
+      "z": 18,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-9",
+      "kind": "persona",
+      "x": 20.8,
+      "y": 2.5999999046325684,
+      "z": 18,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "persona:founder-8",
+      "kind": "persona",
+      "x": 51,
+      "y": 2.5999999046325684,
+      "z": 18,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-1",
+      "kind": "cattle",
+      "x": 35.10000000000004,
+      "y": 2.7022438630124723,
+      "z": 25.099999999999984,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-2",
+      "kind": "cattle",
+      "x": 37.90000000000008,
+      "y": 2.7017933779019367,
+      "z": 22.37970521292003,
+      "rotation": 3.1375789043271523,
+      "state": "Walk",
+      "speed": 0.31415944933611384,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-3",
+      "kind": "cattle",
+      "x": 40.90000000000012,
+      "y": 2.6997842521317654,
+      "z": 25.499999999999982,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-4",
+      "kind": "cattle",
+      "x": 35.10000000000004,
+      "y": 2.7007985305946627,
+      "z": 26.899999999999977,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    },
+    {
+      "key": "cattle:cattle-5",
+      "kind": "cattle",
+      "x": 29.5,
+      "y": 2.5999999046325684,
+      "z": 22.1,
+      "rotation": 0.5,
+      "state": "Idle",
+      "speed": 0,
+      "walkable": true
+    }
+  ],
+  "errors": []
+}

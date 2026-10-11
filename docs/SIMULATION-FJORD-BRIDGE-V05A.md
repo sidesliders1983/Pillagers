@@ -7,7 +7,7 @@ Issue: #87. Inspected base: `5ca0c0b` (main, including the compact Meshy tent fr
 | Responsibility | Exact source paths | Reuse / constraint |
 | --- | --- | --- |
 | Canonical campaign, commands, replay, save | `src/simulation/SimulationCore.ts`, `Landing.ts`, `Mechanics.ts`, `Farmyards.ts`, `Livestock.ts`, `Weather.ts`, `WorldExpeditions.ts` | Only the core owns residents, households, building levels, cattle, resources, time and RNG. Use public inspection APIs. Do not render CPU settlements. |
-| Browser campaign pacing | `src/gameplay-lab/GameplaySession.ts` | Reuse paused startup, canonical commands, pacing and import/export. No second annual clock. |
+| Browser campaign pacing | `src/gameplay-lab/GameplaySession.ts` | Reuse canonical commands, pacing and import/export; Fjord startup now runs after scene readiness (v0.6A). No second annual clock. |
 | 2D identity / presentation | `src/play/SettlementView.ts`, `PlayUI.ts` | Reuse EntityKind, household membership, living/away filtering and canonical inspections. Its isometric coordinates are unsuitable for a metric terrain; do not copy them. |
 | Geography / validation | `src/world-generation/GenerateWorld.ts`, `WorldBlueprint.ts`, `TerrainQueries.ts`, `PlanSettlement.ts`, `WorldSave.ts` | Use the pinned generator and stored validated triangles. No parallel terrain generator. |
 | Production environment | `src/world/WorldFactory.ts`, `BlueprintTerrain.ts`, `WorldGroundMaterials.ts`, `KayKitNature.ts`, `PineModels.ts`, `NatureWind.ts` | Add an explicit canonical-settlement option to the existing factory; suppress prototype houses, tent and decorative boat on this route only. Preserve standalone prototype and debug modes. |
@@ -39,7 +39,7 @@ No gameplay rules or balance defaults are changed. The original inventory was me
 
 `FjordCampaign` wraps the existing GameplaySession. The scene never owns a second simulation, RNG or annual scheduler. Canonical commands, time, stocks, partnerships, mortality and expeditions remain authoritative in Simulation Core.
 
-A Fjord envelope contains bridge version 1, the full canonical campaign, the exact validated WorldBlueprint, generator/version/seed identity, metre-based layout version 1, the bound source mooring and selection identity. It is validated before the current campaign is replaced; failed imports are atomic. Refresh restores the envelope paused, without regenerating geography. Restart with the same founders retains that geography and mooring.
+A Fjord envelope contains bridge version 1, the full canonical campaign, the exact validated WorldBlueprint, generator/version/seed identity, metre-based layout version 1, the bound source mooring and selection identity. It is validated before the current campaign is replaced; failed imports are atomic. Refresh restores the envelope without regenerating geography and starts the clock after scene readiness; explicit load/import remains paused. Restart with the same founders retains that geography and mooring.
 
 `pillagers.gameplay-lab.v1` remains plain canonical JSON shared by both existing gameplay routes.
 `pillagers.fjord-play.v1` is its separate optional presentation sidecar;

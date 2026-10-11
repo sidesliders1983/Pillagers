@@ -5,12 +5,13 @@ export function openSettlement(view: SettlementView, seed = 32) {
     try {
         const stored = sessionStorage.getItem(activeSettlementKey);
         if (stored)
-            return { campaign: SharedSettlement.restore(stored, view), warning };
+            return { campaign: SharedSettlement.restore(stored, view), warning,
+                autoStart: view === 'fjord' && JSON.parse(stored).target !== view };
     }
     catch (error) {
         warning = 'Stored campaign could not be restored: ' + String(error);
     }
-    return { campaign: new SharedSettlement(seed), warning };
+    return { campaign: new SharedSettlement(seed), warning, autoStart: view === 'fjord' };
 }
 export function persistSettlement(campaign: SharedSettlement, say: (message: string) => void) {
     if (campaign.transferring)
