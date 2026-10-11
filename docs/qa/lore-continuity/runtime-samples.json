@@ -1,12 +1,34 @@
 [
   {
-    "scenario": "Default rules, seed 1",
+    "scenario": "Default Core seed 1, checkpoint 0",
+    "narrativeSeed": 1001,
     "index": 0,
     "milestoneIndex": 0,
     "title": "The founding",
-    "text": "Mieppi, Leofgifu, Beornhild, Halldis Sigurdardóttir, Helmikki, Leofweard, Aodhín, Áilu, Mieppi and Tautmantė were among the founding party in Winter 800.\n\nMieppi and Leofweard worked as fishers. Leofgifu, Helmikki, Aodhín, Mieppi and Tautmantė worked as hunters. Beornhild, Halldis Sigurdardóttir and Áilu worked as farmers.\n\nThey began with 30 Food and 5 Materials. The founding party had 3 cattle and 1 longship.\n\nMieppi and Halldis Sigurdardóttir were already partners. Leofgifu and Mieppi were already partners. Leofweard and Aodhín were already partners. Their first households lived in tents.",
+    "text": "Mieppi, Leofgifu, Beornhild, Halldis Sigurdardóttir, Helmikki, Leofweard, Aodhín, Áilu, Mieppi and Tautmantė were among the founding party in Winter 800.\n\nMieppi and Leofweard worked as fishers. Leofgifu, Helmikki, Aodhín, Mieppi and Tautmantė worked as hunters. Beornhild, Halldis Sigurdardóttir and Áilu worked as farmers.\n\nThe founding party had two adult cows and one adult bull and 1 longship.\n\nMieppi and Halldis Sigurdardóttir were already partners. Leofgifu and Mieppi were already partners. Leofweard and Aodhín were already partners. Their first households lived in tents.",
     "facts": {
       "complete": true,
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
+      },
       "residences": [
         {
           "id": "tent-founder-1",
@@ -263,7 +285,7 @@
       {
         "templateId": "clan-book.arrival.reserves",
         "templateVersion": 2,
-        "text": "They began with 30 Food and 5 Materials. The founding party had 3 cattle and 1 longship.",
+        "text": "The founding party had two adult cows and one adult bull and 1 longship.",
         "sourceEventIds": [
           "event-1",
           "event-2",
@@ -273,6 +295,7 @@
         "factRefs": [
           "stocks",
           "cattle",
+          "livestock",
           "longships"
         ]
       },
@@ -304,9 +327,10 @@
     }
   },
   {
-    "scenario": "Default rules, seed 1",
+    "scenario": "Default Core seed 1, checkpoint 1",
+    "narrativeSeed": 1001,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "expeditions",
         "herd"
@@ -327,21 +351,12 @@
           "subjectIds": [
             "cattle-1",
             "cattle-3",
-            "cattle-4"
-          ],
-          "sourceEventIds": [
-            "event-48"
-          ],
-          "callbackEventIds": []
-        },
-        {
-          "theme": "herd",
-          "subjectIds": [
+            "cattle-4",
             "cattle-2",
-            "cattle-3",
             "cattle-5"
           ],
           "sourceEventIds": [
+            "event-48",
             "event-49"
           ],
           "callbackEventIds": []
@@ -369,6 +384,18 @@
             "event-151"
           ],
           "callbackEventIds": []
+        },
+        {
+          "theme": "herd",
+          "subjectIds": [
+            "cattle-5",
+            "cattle-3",
+            "cattle-7"
+          ],
+          "sourceEventIds": [
+            "event-154"
+          ],
+          "callbackEventIds": []
         }
       ],
       "sourceEventIds": [
@@ -376,14 +403,15 @@
         "event-48",
         "event-49",
         "event-148",
-        "event-151"
+        "event-151",
+        "event-154"
       ],
       "callbackEventIds": []
     },
     "index": 1,
     "milestoneIndex": 1,
     "title": "Records ending Winter 805",
-    "text": "During Winter 800, our longship was salvaged for 20 Materials.\n\nDuring Winter 801, A calf was born. During Winter 801, A calf was born. During Winter 803, A calf was born. During Winter 804, an animal died.\n\nThere were 72 Food and 25 Materials left when the interval closed at Winter 805. The complete account recorded no unmet Food need for these winters.",
+    "text": "During Winter 800, our longship was salvaged.\n\nDuring Winter 801, two calves were born. During Winter 803, one calf was born. During Winter 804, one adult cow died. During Winter 804, one calf was born.\n\nWhen the interval ended at Winter 805, food remained in stock. The complete account recorded no unmet Food need for these winters.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -607,6 +635,47 @@
           "winter": 805,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-4",
+            "sex": "female",
+            "birthWinter": 801
+          },
+          {
+            "id": "cattle-5",
+            "sex": "female",
+            "birthWinter": 801
+          },
+          {
+            "id": "cattle-6",
+            "sex": "female",
+            "birthWinter": 803
+          },
+          {
+            "id": "cattle-7",
+            "sex": "female",
+            "birthWinter": 804
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -2031,7 +2100,7 @@
       {
         "templateId": "clan-book.thread.expeditions.2",
         "templateVersion": 2,
-        "text": "During Winter 800, our longship was salvaged for 20 Materials.",
+        "text": "During Winter 800, our longship was salvaged.",
         "sourceEventIds": [
           "event-6"
         ],
@@ -2040,19 +2109,22 @@
       {
         "templateId": "clan-book.thread.herd.2",
         "templateVersion": 2,
-        "text": "During Winter 801, A calf was born. During Winter 801, A calf was born. During Winter 803, A calf was born. During Winter 804, an animal died.",
+        "text": "During Winter 801, two calves were born. During Winter 803, one calf was born. During Winter 804, one adult cow died. During Winter 804, one calf was born.",
         "sourceEventIds": [
           "event-48",
           "event-49",
           "event-148",
-          "event-151"
+          "event-151",
+          "event-154"
         ],
-        "factRefs": []
+        "factRefs": [
+          "livestock"
+        ]
       },
       {
         "templateId": "clan-book.reserves.2",
         "templateVersion": 2,
-        "text": "There were 72 Food and 25 Materials left when the interval closed at Winter 805. The complete account recorded no unmet Food need for these winters.",
+        "text": "When the interval ended at Winter 805, food remained in stock. The complete account recorded no unmet Food need for these winters.",
         "sourceEventIds": [
           "event-6",
           "event-7",
@@ -2246,9 +2318,10 @@
     ]
   },
   {
-    "scenario": "Default rules, seed 1",
+    "scenario": "Default Core seed 1, checkpoint 5",
+    "narrativeSeed": 1001,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "homes",
         "work",
@@ -2326,21 +2399,12 @@
           "subjectIds": [
             "cattle-5",
             "cattle-13",
-            "cattle-19"
-          ],
-          "sourceEventIds": [
-            "event-946"
-          ],
-          "callbackEventIds": []
-        },
-        {
-          "theme": "herd",
-          "subjectIds": [
+            "cattle-19",
             "cattle-14",
-            "cattle-13",
             "cattle-26"
           ],
           "sourceEventIds": [
+            "event-946",
             "event-947"
           ],
           "callbackEventIds": []
@@ -2350,22 +2414,38 @@
           "subjectIds": [
             "cattle-12",
             "cattle-13",
-            "cattle-27"
+            "cattle-27",
+            "cattle-14",
+            "cattle-28"
           ],
           "sourceEventIds": [
-            "event-951"
+            "event-951",
+            "event-952"
           ],
           "callbackEventIds": []
         },
         {
           "theme": "herd",
           "subjectIds": [
-            "cattle-14",
-            "cattle-13",
-            "cattle-28"
+            "cattle-1"
           ],
           "sourceEventIds": [
-            "event-952"
+            "event-1012"
+          ],
+          "callbackEventIds": []
+        },
+        {
+          "theme": "herd",
+          "subjectIds": [
+            "cattle-16",
+            "cattle-13",
+            "cattle-29",
+            "cattle-23",
+            "cattle-30"
+          ],
+          "sourceEventIds": [
+            "event-1016",
+            "event-1017"
           ],
           "callbackEventIds": []
         }
@@ -2380,7 +2460,10 @@
         "event-946",
         "event-947",
         "event-951",
-        "event-952"
+        "event-952",
+        "event-1012",
+        "event-1016",
+        "event-1017"
       ],
       "callbackEventIds": [
         "event-308",
@@ -2391,7 +2474,7 @@
     "index": 5,
     "milestoneIndex": 5,
     "title": "Records ending Winter 825",
-    "text": "During Winter 823, Helmikki, Áilu, Máhte and Biret’s home accumulated 1 Winters of maintenance debt (unpaid upkeep). During Winter 824, Helmikki, Áilu, Máhte and Biret’s home accumulated 2 Winters of maintenance debt (unpaid upkeep). During Winter 825, Helmikki, Áilu, Máhte and Biret’s home accumulated 3 Winters of maintenance debt (unpaid upkeep). During Winter 807, Helmikki and Áilu’s home was completed for Helmikki and Áilu’s household for 10 Materials. During Winter 825, Helmikki, Áilu, Máhte and Biret’s home collapsed; 5 Materials were salvaged. The same home appeared again, 18 winters after its construction.\n\nDuring Winter 807, Máhte was born to Áilu and Helmikki. During Winter 825, Máhte became a woodworker. 18 winters lay between the birth and the new occupation. During Winter 808, Aodhín was born to Leofweard and Aodhín. During Winter 825, Aodhín became a woodworker. 17 winters lay between the birth and the new occupation.\n\nDuring Winter 821, an animal died. During Winter 821, an animal died. During Winter 821, A calf was born. During Winter 821, A calf was born.\n\nThere were 158 Food and 5 Materials left when the interval closed at Winter 825. The complete account recorded no unmet Food need for these winters.",
+    "text": "During Winter 823, Helmikki, Áilu, Máhte and Biret’s home accumulated 1 Winters of maintenance debt (unpaid upkeep). During Winter 824, Helmikki, Áilu, Máhte and Biret’s home accumulated 2 Winters of maintenance debt (unpaid upkeep). During Winter 825, Helmikki, Áilu, Máhte and Biret’s home accumulated 3 Winters of maintenance debt (unpaid upkeep). During Winter 807, Helmikki and Áilu’s home was completed for Helmikki and Áilu’s household. During Winter 825, Helmikki, Áilu, Máhte and Biret’s home collapsed; 5 Materials were salvaged. The same home appeared again, 18 winters after its construction.\n\nDuring Winter 807, Máhte was born to Áilu and Helmikki. During Winter 825, Máhte became a woodworker. 18 winters lay between the birth and the new occupation. During Winter 808, Aodhín was born to Leofweard and Aodhín. During Winter 825, Aodhín became a woodworker. 17 winters lay between the birth and the new occupation.\n\nDuring Winter 821, one adult bull and one heifer died. During Winter 821, two calves were born. During Winter 822, one adult cow died. During Winter 822, two calves were born.\n\nWhen the interval ended at Winter 825, food remained in stock. The complete account recorded no unmet Food need for these winters.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -2723,6 +2806,177 @@
           "winter": 825,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-4",
+            "sex": "female",
+            "birthWinter": 801
+          },
+          {
+            "id": "cattle-5",
+            "sex": "female",
+            "birthWinter": 801
+          },
+          {
+            "id": "cattle-6",
+            "sex": "female",
+            "birthWinter": 803
+          },
+          {
+            "id": "cattle-7",
+            "sex": "female",
+            "birthWinter": 804
+          },
+          {
+            "id": "cattle-8",
+            "sex": "male",
+            "birthWinter": 806
+          },
+          {
+            "id": "cattle-9",
+            "sex": "male",
+            "birthWinter": 808
+          },
+          {
+            "id": "cattle-10",
+            "sex": "female",
+            "birthWinter": 808
+          },
+          {
+            "id": "cattle-11",
+            "sex": "female",
+            "birthWinter": 808
+          },
+          {
+            "id": "cattle-12",
+            "sex": "female",
+            "birthWinter": 809
+          },
+          {
+            "id": "cattle-13",
+            "sex": "male",
+            "birthWinter": 810
+          },
+          {
+            "id": "cattle-14",
+            "sex": "female",
+            "birthWinter": 811
+          },
+          {
+            "id": "cattle-15",
+            "sex": "male",
+            "birthWinter": 811
+          },
+          {
+            "id": "cattle-16",
+            "sex": "female",
+            "birthWinter": 812
+          },
+          {
+            "id": "cattle-17",
+            "sex": "female",
+            "birthWinter": 813
+          },
+          {
+            "id": "cattle-18",
+            "sex": "male",
+            "birthWinter": 813
+          },
+          {
+            "id": "cattle-19",
+            "sex": "male",
+            "birthWinter": 813
+          },
+          {
+            "id": "cattle-20",
+            "sex": "male",
+            "birthWinter": 814
+          },
+          {
+            "id": "cattle-21",
+            "sex": "male",
+            "birthWinter": 816
+          },
+          {
+            "id": "cattle-22",
+            "sex": "female",
+            "birthWinter": 817
+          },
+          {
+            "id": "cattle-23",
+            "sex": "female",
+            "birthWinter": 817
+          },
+          {
+            "id": "cattle-24",
+            "sex": "male",
+            "birthWinter": 817
+          },
+          {
+            "id": "cattle-25",
+            "sex": "male",
+            "birthWinter": 818
+          },
+          {
+            "id": "cattle-26",
+            "sex": "female",
+            "birthWinter": 819
+          },
+          {
+            "id": "cattle-27",
+            "sex": "male",
+            "birthWinter": 821
+          },
+          {
+            "id": "cattle-28",
+            "sex": "male",
+            "birthWinter": 821
+          },
+          {
+            "id": "cattle-29",
+            "sex": "male",
+            "birthWinter": 822
+          },
+          {
+            "id": "cattle-30",
+            "sex": "female",
+            "birthWinter": 822
+          },
+          {
+            "id": "cattle-31",
+            "sex": "male",
+            "birthWinter": 823
+          },
+          {
+            "id": "cattle-32",
+            "sex": "male",
+            "birthWinter": 824
+          },
+          {
+            "id": "cattle-33",
+            "sex": "male",
+            "birthWinter": 824
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -5007,7 +5261,7 @@
       {
         "templateId": "clan-book.thread.homes.2",
         "templateVersion": 2,
-        "text": "During Winter 823, Helmikki, Áilu, Máhte and Biret’s home accumulated 1 Winters of maintenance debt (unpaid upkeep). During Winter 824, Helmikki, Áilu, Máhte and Biret’s home accumulated 2 Winters of maintenance debt (unpaid upkeep). During Winter 825, Helmikki, Áilu, Máhte and Biret’s home accumulated 3 Winters of maintenance debt (unpaid upkeep). During Winter 807, Helmikki and Áilu’s home was completed for Helmikki and Áilu’s household for 10 Materials. During Winter 825, Helmikki, Áilu, Máhte and Biret’s home collapsed; 5 Materials were salvaged. The same home appeared again, 18 winters after its construction.",
+        "text": "During Winter 823, Helmikki, Áilu, Máhte and Biret’s home accumulated 1 Winters of maintenance debt (unpaid upkeep). During Winter 824, Helmikki, Áilu, Máhte and Biret’s home accumulated 2 Winters of maintenance debt (unpaid upkeep). During Winter 825, Helmikki, Áilu, Máhte and Biret’s home accumulated 3 Winters of maintenance debt (unpaid upkeep). During Winter 807, Helmikki and Áilu’s home was completed for Helmikki and Áilu’s household. During Winter 825, Helmikki, Áilu, Máhte and Biret’s home collapsed; 5 Materials were salvaged. The same home appeared again, 18 winters after its construction.",
         "sourceEventIds": [
           "event-1077",
           "event-1133",
@@ -5032,19 +5286,24 @@
       {
         "templateId": "clan-book.thread.herd.2",
         "templateVersion": 2,
-        "text": "During Winter 821, an animal died. During Winter 821, an animal died. During Winter 821, A calf was born. During Winter 821, A calf was born.",
+        "text": "During Winter 821, one adult bull and one heifer died. During Winter 821, two calves were born. During Winter 822, one adult cow died. During Winter 822, two calves were born.",
         "sourceEventIds": [
           "event-946",
           "event-947",
           "event-951",
-          "event-952"
+          "event-952",
+          "event-1012",
+          "event-1016",
+          "event-1017"
         ],
-        "factRefs": []
+        "factRefs": [
+          "livestock"
+        ]
       },
       {
         "templateId": "clan-book.reserves.2",
         "templateVersion": 2,
-        "text": "There were 158 Food and 5 Materials left when the interval closed at Winter 825. The complete account recorded no unmet Food need for these winters.",
+        "text": "When the interval ended at Winter 825, food remained in stock. The complete account recorded no unmet Food need for these winters.",
         "sourceEventIds": [
           "event-891",
           "event-892",
@@ -5333,7 +5592,7 @@
     "scenario": "Controlled Core QA: construction recalled twenty Winters later",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "homes"
       ],
@@ -5361,7 +5620,7 @@
     "index": 5,
     "milestoneIndex": 5,
     "title": "Records ending Winter 825",
-    "text": "In Winter 820, Daugirdė’s home reached upgrade level 1 for 5 Materials. In Winter 800, Daugirdė’s home was completed for Daugirdė’s household for 10 Materials. The same home appeared again, 20 winters after its construction.\n\nAt Winter 825, 1327 Food and 1043 Materials remained. No Food need had gone unmet in this interval.",
+    "text": "In Winter 820, Daugirdė’s home reached upgrade level 1. In Winter 800, Daugirdė’s home was completed for Daugirdė’s household. The same home appeared again, 20 winters after its construction.\n\nAt Winter 825, food remained in stock. No Food need had gone unmet in this interval.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -5602,6 +5861,27 @@
           "winter": 825,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -7118,7 +7398,7 @@
       {
         "templateId": "clan-book.thread.homes.0",
         "templateVersion": 2,
-        "text": "In Winter 820, Daugirdė’s home reached upgrade level 1 for 5 Materials. In Winter 800, Daugirdė’s home was completed for Daugirdė’s household for 10 Materials. The same home appeared again, 20 winters after its construction.",
+        "text": "In Winter 820, Daugirdė’s home reached upgrade level 1. In Winter 800, Daugirdė’s home was completed for Daugirdė’s household. The same home appeared again, 20 winters after its construction.",
         "sourceEventIds": [
           "event-5",
           "event-885"
@@ -7128,7 +7408,7 @@
       {
         "templateId": "clan-book.reserves.0",
         "templateVersion": 2,
-        "text": "At Winter 825, 1327 Food and 1043 Materials remained. No Food need had gone unmet in this interval.",
+        "text": "At Winter 825, food remained in stock. No Food need had gone unmet in this interval.",
         "sourceEventIds": [
           "event-885",
           "event-886",
@@ -7352,7 +7632,7 @@
     "scenario": "Controlled Core QA: birth recalled when the same child took up work",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "family",
         "work"
@@ -7443,7 +7723,7 @@
     "index": 4,
     "milestoneIndex": 4,
     "title": "Records ending Winter 820",
-    "text": "Arnvald Ketilsson was born to MaelColuim and Inghild Sigurdardóttir during Winter 801. Arnvald Ketilsson became a smith during Winter 819. 18 winters lay between the birth and the new occupation.\n\nInghild Sigurdardóttir and MaelColuim were already partners at arrival during Winter 800. Ragnfrid Ketilsdóttir was born to MaelColuim and Inghild Sigurdardóttir during Winter 816. Dervla and Kauppi were already partners at arrival during Winter 800. Fionnín was born to Kauppi and Dervla during Winter 816. Ragnvald Eiriksson was born to MaelColuim and Inghild Sigurdardóttir during Winter 819. Dervorgilla was born to Kauppi and Dervla during Winter 819.\n\nAt the completed Winter 820 boundary, the reserves stood at 918 Food and 1033 Materials. No Food shortfall was recorded for the observed interval.",
+    "text": "Arnvald Ketilsson was born to MaelColuim and Inghild Sigurdardóttir during Winter 801. Arnvald Ketilsson became a smith during Winter 819. 18 winters lay between the birth and the new occupation.\n\nInghild Sigurdardóttir and MaelColuim were already partners at arrival during Winter 800. Ragnfrid Ketilsdóttir was born to MaelColuim and Inghild Sigurdardóttir during Winter 816. Dervla and Kauppi were already partners at arrival during Winter 800. Fionnín was born to Kauppi and Dervla during Winter 816. Ragnvald Eiriksson was born to MaelColuim and Inghild Sigurdardóttir during Winter 819. Dervorgilla was born to Kauppi and Dervla during Winter 819.\n\nThe interval ended at Winter 820. Food remained in stock. No Food shortfall was recorded for the observed interval.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -7646,6 +7926,27 @@
           "winter": 820,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -9115,7 +9416,7 @@
       {
         "templateId": "clan-book.reserves.3",
         "templateVersion": 2,
-        "text": "At the completed Winter 820 boundary, the reserves stood at 918 Food and 1033 Materials. No Food shortfall was recorded for the observed interval.",
+        "text": "The interval ended at Winter 820. Food remained in stock. No Food shortfall was recorded for the observed interval.",
         "sourceEventIds": [
           "event-508",
           "event-509",
@@ -9295,7 +9596,7 @@
     "scenario": "Controlled Core QA: founder deaths with recorded arrival links",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "family"
       ],
@@ -9362,7 +9663,7 @@
     "index": 1,
     "milestoneIndex": 1,
     "title": "Records ending Winter 805",
-    "text": "In Winter 801, MaelColuim died. The same resident had been among the founding party in Winter 800, 1 winters earlier. In Winter 801, Inghild Sigurdardóttir died. The same resident had been among the founding party in Winter 800, 1 winters earlier. In Winter 801, Kauppi died. The same resident had been among the founding party in Winter 800, 1 winters earlier. In Winter 801, Dervla died. The same resident had been among the founding party in Winter 800, 1 winters earlier.\n\nAt Winter 805, 1033 Food and 1001 Materials remained. No Food need had gone unmet in this interval.",
+    "text": "In Winter 801, MaelColuim died. The same resident had been among the founding party in Winter 800, 1 winters earlier. In Winter 801, Inghild Sigurdardóttir died. The same resident had been among the founding party in Winter 800, 1 winters earlier. In Winter 801, Kauppi died. The same resident had been among the founding party in Winter 800, 1 winters earlier. In Winter 801, Dervla died. The same resident had been among the founding party in Winter 800, 1 winters earlier.\n\nAt Winter 805, food remained in stock. No Food need had gone unmet in this interval.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -9463,6 +9764,27 @@
           "winter": 805,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -10333,7 +10655,7 @@
       {
         "templateId": "clan-book.reserves.0",
         "templateVersion": 2,
-        "text": "At Winter 805, 1033 Food and 1001 Materials remained. No Food need had gone unmet in this interval.",
+        "text": "At Winter 805, food remained in stock. No Food need had gone unmet in this interval.",
         "sourceEventIds": [
           "event-5",
           "event-6",
@@ -10407,7 +10729,7 @@
     "scenario": "Controlled Core QA: calves and their own mothers at the Farmyard",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "herd"
       ],
@@ -10417,26 +10739,16 @@
           "subjectIds": [
             "cattle-1",
             "cattle-3",
-            "cattle-6"
-          ],
-          "sourceEventIds": [
-            "event-375"
-          ],
-          "callbackEventIds": [
-            "event-9"
-          ]
-        },
-        {
-          "theme": "herd",
-          "subjectIds": [
+            "cattle-6",
             "cattle-2",
-            "cattle-3",
             "cattle-7"
           ],
           "sourceEventIds": [
+            "event-375",
             "event-376"
           ],
           "callbackEventIds": [
+            "event-9",
             "event-10"
           ]
         },
@@ -10445,26 +10757,16 @@
           "subjectIds": [
             "cattle-1",
             "cattle-3",
-            "cattle-8"
-          ],
-          "sourceEventIds": [
-            "event-487"
-          ],
-          "callbackEventIds": [
-            "event-9"
-          ]
-        },
-        {
-          "theme": "herd",
-          "subjectIds": [
+            "cattle-8",
             "cattle-2",
-            "cattle-3",
             "cattle-9"
           ],
           "sourceEventIds": [
+            "event-487",
             "event-488"
           ],
           "callbackEventIds": [
+            "event-9",
             "event-10"
           ]
         }
@@ -10483,7 +10785,7 @@
     "index": 2,
     "milestoneIndex": 2,
     "title": "Records ending Winter 810",
-    "text": "A calf was born in Winter 807. The calf’s mother was assigned to the Farmyard at Daugirdė’s home in Winter 800. The calf was assigned to the same Farmyard as its mother. A calf was born in Winter 807. The calf’s mother was assigned to the Farmyard at Daugirdė’s home in Winter 800. The calf was assigned to the same Farmyard as its mother. A calf was born in Winter 809. The calf was assigned to the same Farmyard as its mother. A calf was born in Winter 809. The calf was assigned to the same Farmyard as its mother.\n\nThe interval closed with 1249 Food and 980 Materials in stock, at Winter 810. All recorded Food need in this interval had been met.",
+    "text": "Two calves were born in Winter 807. Two calves were born in Winter 809. Two adult cows were assigned to the Farmyard at Daugirdė’s home in Winter 800. A recorded calf was assigned to the same Farmyard as its mother.\n\nFood remained in stock when the interval closed at Winter 810. All recorded Food need in this interval had been met.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -10785,6 +11087,57 @@
           "winter": 810,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-4",
+            "sex": "female",
+            "birthWinter": 805
+          },
+          {
+            "id": "cattle-5",
+            "sex": "male",
+            "birthWinter": 805
+          },
+          {
+            "id": "cattle-6",
+            "sex": "male",
+            "birthWinter": 807
+          },
+          {
+            "id": "cattle-7",
+            "sex": "male",
+            "birthWinter": 807
+          },
+          {
+            "id": "cattle-8",
+            "sex": "female",
+            "birthWinter": 809
+          },
+          {
+            "id": "cattle-9",
+            "sex": "male",
+            "birthWinter": 809
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -12773,21 +13126,23 @@
       {
         "templateId": "clan-book.thread.herd.1",
         "templateVersion": 2,
-        "text": "A calf was born in Winter 807. The calf’s mother was assigned to the Farmyard at Daugirdė’s home in Winter 800. The calf was assigned to the same Farmyard as its mother. A calf was born in Winter 807. The calf’s mother was assigned to the Farmyard at Daugirdė’s home in Winter 800. The calf was assigned to the same Farmyard as its mother. A calf was born in Winter 809. The calf was assigned to the same Farmyard as its mother. A calf was born in Winter 809. The calf was assigned to the same Farmyard as its mother.",
+        "text": "Two calves were born in Winter 807. Two calves were born in Winter 809. Two adult cows were assigned to the Farmyard at Daugirdė’s home in Winter 800. A recorded calf was assigned to the same Farmyard as its mother.",
         "sourceEventIds": [
           "event-9",
-          "event-375",
           "event-10",
+          "event-375",
           "event-376",
           "event-487",
           "event-488"
         ],
-        "factRefs": []
+        "factRefs": [
+          "livestock"
+        ]
       },
       {
         "templateId": "clan-book.reserves.1",
         "templateVersion": 2,
-        "text": "The interval closed with 1249 Food and 980 Materials in stock, at Winter 810. All recorded Food need in this interval had been met.",
+        "text": "Food remained in stock when the interval closed at Winter 810. All recorded Food need in this interval had been met.",
         "sourceEventIds": [
           "event-270",
           "event-271",
@@ -13065,10 +13420,1861 @@
     ]
   },
   {
+    "scenario": "Controlled Core QA: one calf, one heifer and one adult bull; exact receipts only in facts",
+    "narrativeSeed": 7,
+    "plan": {
+      "version": 2,
+      "focus": [
+        "herd"
+      ],
+      "threads": [
+        {
+          "theme": "herd",
+          "subjectIds": [
+            "cattle-1",
+            "cattle-2",
+            "cattle-3"
+          ],
+          "sourceEventIds": [
+            "event-5",
+            "event-6",
+            "event-7"
+          ],
+          "callbackEventIds": []
+        }
+      ],
+      "sourceEventIds": [
+        "event-5",
+        "event-6",
+        "event-7"
+      ],
+      "callbackEventIds": []
+    },
+    "index": 1,
+    "milestoneIndex": 1,
+    "title": "Records ending Winter 805",
+    "text": "In Winter 800, one calf, one heifer and one adult bull were slaughtered.\n\nAt Winter 805, food remained in stock. No Food need had gone unmet in this interval.",
+    "templateVersion": 2,
+    "templateId": "clan-book.checkpoint.v2",
+    "notified": false,
+    "read": false,
+    "sourceEventIds": [
+      "event-5",
+      "event-6",
+      "event-7",
+      "event-8",
+      "event-9",
+      "event-10",
+      "event-11",
+      "event-12",
+      "event-13",
+      "event-14",
+      "event-15",
+      "event-16",
+      "event-17",
+      "event-18",
+      "event-19",
+      "event-20",
+      "event-21",
+      "event-22",
+      "event-23",
+      "event-24",
+      "event-25",
+      "event-26",
+      "event-27",
+      "event-28",
+      "event-29",
+      "event-30",
+      "event-31",
+      "event-32",
+      "event-33",
+      "event-34",
+      "event-35",
+      "event-36",
+      "event-37",
+      "event-38",
+      "event-39",
+      "event-40",
+      "event-41",
+      "event-42",
+      "event-43",
+      "event-44",
+      "event-45",
+      "event-46",
+      "event-47",
+      "event-48",
+      "event-49",
+      "event-50",
+      "event-51",
+      "event-52",
+      "event-53",
+      "event-54",
+      "event-55",
+      "event-56",
+      "event-57",
+      "event-58",
+      "event-59",
+      "event-60",
+      "event-61",
+      "event-62",
+      "event-63",
+      "event-64",
+      "event-65",
+      "event-66",
+      "event-67",
+      "event-68",
+      "event-69",
+      "event-70",
+      "event-71",
+      "event-72",
+      "event-73",
+      "event-74",
+      "event-75",
+      "event-76",
+      "event-77",
+      "event-78",
+      "event-79",
+      "event-80",
+      "event-81",
+      "event-82",
+      "event-83",
+      "event-84",
+      "event-85",
+      "event-86",
+      "event-87",
+      "event-88",
+      "event-89",
+      "event-90",
+      "event-91",
+      "event-92",
+      "event-93",
+      "event-94",
+      "event-95",
+      "event-96",
+      "event-97",
+      "event-98",
+      "event-99",
+      "event-100",
+      "event-101",
+      "event-102",
+      "event-103",
+      "event-104",
+      "event-105",
+      "event-106",
+      "event-107",
+      "event-108",
+      "event-109",
+      "event-110",
+      "event-111",
+      "event-112",
+      "event-113",
+      "event-114",
+      "event-115",
+      "event-116",
+      "event-117",
+      "event-118",
+      "event-119",
+      "event-120",
+      "event-121",
+      "event-122",
+      "event-123",
+      "event-124",
+      "event-125",
+      "event-126",
+      "event-127",
+      "event-128",
+      "event-129",
+      "event-130",
+      "event-131",
+      "event-132",
+      "event-133",
+      "event-134",
+      "event-135",
+      "event-136",
+      "event-137",
+      "event-138",
+      "event-139",
+      "event-140",
+      "event-141",
+      "event-142",
+      "event-143",
+      "event-144",
+      "event-145",
+      "event-146",
+      "event-147",
+      "event-148",
+      "event-149",
+      "event-150",
+      "event-151",
+      "event-152",
+      "event-153",
+      "event-154",
+      "event-155",
+      "event-156",
+      "event-157",
+      "event-158",
+      "event-159",
+      "event-160",
+      "event-161",
+      "event-162",
+      "event-163",
+      "event-164",
+      "event-165",
+      "event-166",
+      "event-167",
+      "event-168",
+      "event-169",
+      "event-170",
+      "event-171",
+      "event-172",
+      "event-173",
+      "event-174",
+      "event-175",
+      "event-176",
+      "event-177",
+      "event-178",
+      "event-179",
+      "event-180",
+      "event-181",
+      "event-182",
+      "event-183",
+      "event-184",
+      "event-185",
+      "event-186",
+      "event-187",
+      "event-188",
+      "event-189",
+      "event-190",
+      "event-191"
+    ],
+    "checkpoint": {
+      "version": 1,
+      "time": {
+        "winter": 805,
+        "tick": 0
+      },
+      "eventEnd": 191,
+      "identity": "170123:46d75dbb:5a1a51f"
+    },
+    "facts": {
+      "complete": true,
+      "period": {
+        "from": {
+          "winter": 800,
+          "tick": 0
+        },
+        "through": {
+          "winter": 805,
+          "tick": 0
+        }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 800
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 799
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
+      },
+      "founders": [],
+      "households": [],
+      "cattle": [],
+      "longships": [],
+      "stocks": {
+        "food": 1091,
+        "materials": 1008
+      },
+      "ledger": {
+        "food": {
+          "opening": 1000,
+          "closing": 1091,
+          "production": 161,
+          "residentProduction": 161,
+          "cattleProduction": 0,
+          "otherReceipts": 30,
+          "consumption": 100,
+          "otherSpending": 0,
+          "spending": 100,
+          "losses": 0,
+          "unmetNeed": 0,
+          "residual": 0,
+          "complete": true
+        },
+        "materials": {
+          "opening": 1000,
+          "closing": 1008,
+          "production": 8,
+          "residentProduction": 8,
+          "cattleProduction": 0,
+          "otherReceipts": 0,
+          "consumption": 0,
+          "otherSpending": 0,
+          "spending": 0,
+          "losses": 0,
+          "unmetNeed": 0,
+          "residual": 0,
+          "complete": true
+        },
+        "transactions": [
+          {
+            "eventId": "event-5",
+            "resource": "food",
+            "category": "otherReceipts",
+            "purpose": "CattleSlaughtered",
+            "units": 5
+          },
+          {
+            "eventId": "event-6",
+            "resource": "food",
+            "category": "otherReceipts",
+            "purpose": "CattleSlaughtered",
+            "units": 10
+          },
+          {
+            "eventId": "event-7",
+            "resource": "food",
+            "category": "otherReceipts",
+            "purpose": "CattleSlaughtered",
+            "units": 15
+          },
+          {
+            "eventId": "event-8",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-9",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-10",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-11",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-12",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-13",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-14",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-15",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-16",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-17",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-18",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-19",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-20",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-21",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-22",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-23",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-24",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-25",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-26",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-27",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-28",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-29",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-30",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-31",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-32",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-33",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-34",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-35",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-36",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-38",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "CattleFoodConsumed",
+            "units": 0
+          },
+          {
+            "eventId": "event-39",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "FoodConsumed",
+            "units": 20
+          },
+          {
+            "eventId": "event-40",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-41",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-42",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-43",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-44",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-45",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-46",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-47",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-48",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-49",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-50",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-51",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-52",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-53",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-54",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-55",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-56",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-57",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-58",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-59",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-60",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-61",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-62",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-63",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-64",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-65",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-66",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-67",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-68",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-69",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-70",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-71",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-72",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-73",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-74",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-75",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-77",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "CattleFoodConsumed",
+            "units": 0
+          },
+          {
+            "eventId": "event-78",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "FoodConsumed",
+            "units": 20
+          },
+          {
+            "eventId": "event-79",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-80",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-81",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-82",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-83",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-84",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-85",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-86",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-87",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-88",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-89",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-90",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-91",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-92",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-93",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-94",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-95",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-96",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-97",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-98",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-99",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-100",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-101",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-102",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-103",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-104",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-105",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-106",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-107",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-108",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-109",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-110",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-111",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-112",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-113",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-115",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "CattleFoodConsumed",
+            "units": 0
+          },
+          {
+            "eventId": "event-116",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "FoodConsumed",
+            "units": 20
+          },
+          {
+            "eventId": "event-117",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-118",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-119",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-120",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-121",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-122",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-123",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-124",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-125",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-126",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-127",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-128",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-129",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-130",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-131",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-132",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-133",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-134",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-135",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-136",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-137",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-138",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-139",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-140",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-141",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-142",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-143",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-144",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-145",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-146",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-147",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-148",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-149",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-150",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-152",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "CattleFoodConsumed",
+            "units": 0
+          },
+          {
+            "eventId": "event-153",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "FoodConsumed",
+            "units": 20
+          },
+          {
+            "eventId": "event-154",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-155",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-156",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-157",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-158",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-159",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-160",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-161",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-162",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-163",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-164",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-165",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-166",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-167",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-168",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-169",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-170",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-171",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-172",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-173",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-174",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-175",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-176",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-177",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-178",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-179",
+            "resource": "materials",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-180",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-181",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-182",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-183",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-184",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-185",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-186",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-187",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-188",
+            "resource": "food",
+            "category": "production",
+            "purpose": "ResourceProduced",
+            "units": 1
+          },
+          {
+            "eventId": "event-190",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "CattleFoodConsumed",
+            "units": 0
+          },
+          {
+            "eventId": "event-191",
+            "resource": "food",
+            "category": "spending",
+            "purpose": "FoodConsumed",
+            "units": 20
+          }
+        ]
+      },
+      "demographics": [
+        {
+          "eventId": "event-5",
+          "type": "CattleSlaughtered",
+          "time": {
+            "winter": 800,
+            "tick": 0
+          },
+          "details": {
+            "cattleId": "cattle-1",
+            "food": 5,
+            "parentIds": [],
+            "sex": "female",
+            "age": 0,
+            "farmyardId": null
+          }
+        },
+        {
+          "eventId": "event-6",
+          "type": "CattleSlaughtered",
+          "time": {
+            "winter": 800,
+            "tick": 0
+          },
+          "details": {
+            "cattleId": "cattle-2",
+            "food": 10,
+            "parentIds": [],
+            "sex": "female",
+            "age": 1,
+            "farmyardId": null
+          }
+        },
+        {
+          "eventId": "event-7",
+          "type": "CattleSlaughtered",
+          "time": {
+            "winter": 800,
+            "tick": 0
+          },
+          "details": {
+            "cattleId": "cattle-3",
+            "food": 15,
+            "parentIds": [],
+            "sex": "male",
+            "age": 3,
+            "farmyardId": null
+          }
+        }
+      ]
+    },
+    "composition": {
+      "rejectedDuplicateBodies": 0,
+      "usedFallback": false
+    },
+    "paragraphs": [
+      {
+        "templateId": "clan-book.thread.herd.0",
+        "templateVersion": 2,
+        "text": "In Winter 800, one calf, one heifer and one adult bull were slaughtered.",
+        "sourceEventIds": [
+          "event-5",
+          "event-6",
+          "event-7"
+        ],
+        "factRefs": [
+          "livestock"
+        ]
+      },
+      {
+        "templateId": "clan-book.reserves.0",
+        "templateVersion": 2,
+        "text": "At Winter 805, food remained in stock. No Food need had gone unmet in this interval.",
+        "sourceEventIds": [
+          "event-5",
+          "event-6",
+          "event-7",
+          "event-8",
+          "event-9",
+          "event-10",
+          "event-11",
+          "event-12",
+          "event-13",
+          "event-14",
+          "event-15",
+          "event-16",
+          "event-17",
+          "event-18",
+          "event-19",
+          "event-20",
+          "event-21",
+          "event-22",
+          "event-23",
+          "event-24",
+          "event-25",
+          "event-26",
+          "event-27",
+          "event-28",
+          "event-29",
+          "event-30",
+          "event-31",
+          "event-32",
+          "event-33",
+          "event-34",
+          "event-35",
+          "event-36",
+          "event-38",
+          "event-39",
+          "event-40",
+          "event-41",
+          "event-42",
+          "event-43",
+          "event-44",
+          "event-45",
+          "event-46",
+          "event-47",
+          "event-48",
+          "event-49",
+          "event-50",
+          "event-51",
+          "event-52",
+          "event-53",
+          "event-54",
+          "event-55",
+          "event-56",
+          "event-57",
+          "event-58",
+          "event-59",
+          "event-60",
+          "event-61",
+          "event-62",
+          "event-63",
+          "event-64",
+          "event-65",
+          "event-66",
+          "event-67",
+          "event-68",
+          "event-69",
+          "event-70",
+          "event-71",
+          "event-72",
+          "event-73",
+          "event-74",
+          "event-75",
+          "event-77",
+          "event-78",
+          "event-79",
+          "event-80",
+          "event-81",
+          "event-82",
+          "event-83",
+          "event-84",
+          "event-85",
+          "event-86",
+          "event-87",
+          "event-88",
+          "event-89",
+          "event-90",
+          "event-91",
+          "event-92",
+          "event-93",
+          "event-94",
+          "event-95",
+          "event-96",
+          "event-97",
+          "event-98",
+          "event-99",
+          "event-100",
+          "event-101",
+          "event-102",
+          "event-103",
+          "event-104",
+          "event-105",
+          "event-106",
+          "event-107",
+          "event-108",
+          "event-109",
+          "event-110",
+          "event-111",
+          "event-112",
+          "event-113",
+          "event-115",
+          "event-116",
+          "event-117",
+          "event-118",
+          "event-119",
+          "event-120",
+          "event-121",
+          "event-122",
+          "event-123",
+          "event-124",
+          "event-125",
+          "event-126",
+          "event-127",
+          "event-128",
+          "event-129",
+          "event-130",
+          "event-131",
+          "event-132",
+          "event-133",
+          "event-134",
+          "event-135",
+          "event-136",
+          "event-137",
+          "event-138",
+          "event-139",
+          "event-140",
+          "event-141",
+          "event-142",
+          "event-143",
+          "event-144",
+          "event-145",
+          "event-146",
+          "event-147",
+          "event-148",
+          "event-149",
+          "event-150",
+          "event-152",
+          "event-153",
+          "event-154",
+          "event-155",
+          "event-156",
+          "event-157",
+          "event-158",
+          "event-159",
+          "event-160",
+          "event-161",
+          "event-162",
+          "event-163",
+          "event-164",
+          "event-165",
+          "event-166",
+          "event-167",
+          "event-168",
+          "event-169",
+          "event-170",
+          "event-171",
+          "event-172",
+          "event-173",
+          "event-174",
+          "event-175",
+          "event-176",
+          "event-177",
+          "event-178",
+          "event-179",
+          "event-180",
+          "event-181",
+          "event-182",
+          "event-183",
+          "event-184",
+          "event-185",
+          "event-186",
+          "event-187",
+          "event-188",
+          "event-190",
+          "event-191"
+        ],
+        "factRefs": [
+          "ledger",
+          "stocks",
+          "period"
+        ]
+      }
+    ]
+  },
+  {
     "scenario": "Controlled Core QA: return linked to the same earlier expedition",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "expeditions"
       ],
@@ -13097,7 +15303,7 @@
     "index": 2,
     "milestoneIndex": 2,
     "title": "Records ending Winter 810",
-    "text": "The reconnaissance expedition was completed. It recovered 0 Food, 0 Materials, 0 cattle and 0 people. No casualties were recorded for that expedition in Winter 805. The Western Crew departed on a reconnaissance expedition, carrying 2 Food in Winter 804.\n\nThe interval closed with 1136 Food and 1016 Materials in stock, at Winter 810. All recorded Food need in this interval had been met.",
+    "text": "The reconnaissance expedition was completed. It recovered 0 cattle and 0 people. No casualties were recorded for that expedition in Winter 805. The Western Crew departed on a reconnaissance expedition, carrying Food for the journey in Winter 804.\n\nFood remained in stock when the interval closed at Winter 810. All recorded Food need in this interval had been met.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -13333,6 +15539,27 @@
           "winter": 810,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -14821,7 +17048,7 @@
       {
         "templateId": "clan-book.thread.expeditions.1",
         "templateVersion": 2,
-        "text": "The reconnaissance expedition was completed. It recovered 0 Food, 0 Materials, 0 cattle and 0 people. No casualties were recorded for that expedition in Winter 805. The Western Crew departed on a reconnaissance expedition, carrying 2 Food in Winter 804.",
+        "text": "The reconnaissance expedition was completed. It recovered 0 cattle and 0 people. No casualties were recorded for that expedition in Winter 805. The Western Crew departed on a reconnaissance expedition, carrying Food for the journey in Winter 804.",
         "sourceEventIds": [
           "event-204",
           "event-216"
@@ -14831,7 +17058,7 @@
       {
         "templateId": "clan-book.reserves.1",
         "templateVersion": 2,
-        "text": "The interval closed with 1136 Food and 1016 Materials in stock, at Winter 810. All recorded Food need in this interval had been met.",
+        "text": "Food remained in stock when the interval closed at Winter 810. All recorded Food need in this interval had been met.",
         "sourceEventIds": [
           "event-211",
           "event-212",
@@ -15050,7 +17277,7 @@
     "scenario": "Controlled Core QA: complete shortage account",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "work"
       ],
@@ -15107,7 +17334,7 @@
     "index": 1,
     "milestoneIndex": 1,
     "title": "Records ending Winter 805",
-    "text": "In Winter 800, MaelColuim became a woodworker. In Winter 800, Kauppi became a woodworker. In Winter 800, Dervla became a woodworker. In Winter 800, Áilu became a woodworker.\n\nAt Winter 805, 0 Food and 1082 Materials remained. 95 Food of need had gone unmet in this interval.",
+    "text": "In Winter 800, MaelColuim became a woodworker. In Winter 800, Kauppi became a woodworker. In Winter 800, Dervla became a woodworker. In Winter 800, Áilu became a woodworker.\n\nAt Winter 805, no Food remained in stock. Some recorded Food need had gone unmet in this interval.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -15260,6 +17487,27 @@
           "winter": 805,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -16109,7 +18357,7 @@
       {
         "templateId": "clan-book.reserves.0",
         "templateVersion": 2,
-        "text": "At Winter 805, 0 Food and 1082 Materials remained. 95 Food of need had gone unmet in this interval.",
+        "text": "At Winter 805, no Food remained in stock. Some recorded Food need had gone unmet in this interval.",
         "sourceEventIds": [
           "event-14",
           "event-15",
@@ -16236,7 +18484,7 @@
     "scenario": "Controlled Core QA: later reserves with an older shortage callback",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [
         "work"
       ],
@@ -16293,7 +18541,7 @@
     "index": 2,
     "milestoneIndex": 2,
     "title": "Records ending Winter 810",
-    "text": "MaelColuim became a farmer in Winter 805. Kauppi became a farmer in Winter 805. Dervla became a farmer in Winter 805. Áilu became a farmer in Winter 805.\n\nAt Winter 805, no Food had remained in stock; 95 Food of need had gone unmet in that earlier interval. The interval closed with 80 Food and 1082 Materials in stock, at Winter 810. All recorded Food need in this interval had been met.",
+    "text": "MaelColuim became a farmer in Winter 805. Kauppi became a farmer in Winter 805. Dervla became a farmer in Winter 805. Áilu became a farmer in Winter 805.\n\nAt Winter 805, no Food had remained in stock and some recorded need had gone unmet in that earlier interval. Food remained in stock when the interval closed at Winter 810. All recorded Food need in this interval had been met.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -16540,6 +18788,27 @@
           "winter": 810,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -18040,7 +20309,7 @@
       {
         "templateId": "clan-book.reserves.1",
         "templateVersion": 2,
-        "text": "At Winter 805, no Food had remained in stock; 95 Food of need had gone unmet in that earlier interval. The interval closed with 80 Food and 1082 Materials in stock, at Winter 810. All recorded Food need in this interval had been met.",
+        "text": "At Winter 805, no Food had remained in stock and some recorded need had gone unmet in that earlier interval. Food remained in stock when the interval closed at Winter 810. All recorded Food need in this interval had been met.",
         "sourceEventIds": [
           "event-141",
           "event-142",
@@ -18291,7 +20560,7 @@
     "scenario": "Controlled Core QA: fully observed quiet interval",
     "narrativeSeed": 7,
     "plan": {
-      "version": 1,
+      "version": 2,
       "focus": [],
       "threads": [],
       "sourceEventIds": [],
@@ -18300,7 +20569,7 @@
     "index": 1,
     "milestoneIndex": 1,
     "title": "Records ending Winter 805",
-    "text": "No births or deaths were recorded between Winter 800 and the completed boundary at Winter 805.\n\nAt Winter 805, 1066 Food and 1008 Materials remained. No Food need had gone unmet in this interval.",
+    "text": "No births or deaths were recorded between Winter 800 and the completed boundary at Winter 805.\n\nAt Winter 805, food remained in stock. No Food need had gone unmet in this interval.",
     "templateVersion": 2,
     "templateId": "clan-book.checkpoint.v2",
     "notified": false,
@@ -18531,6 +20800,27 @@
           "winter": 805,
           "tick": 0
         }
+      },
+      "livestock": {
+        "youngAdultAge": 1,
+        "adultAge": 3,
+        "animals": [
+          {
+            "id": "cattle-1",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-2",
+            "sex": "female",
+            "birthWinter": 797
+          },
+          {
+            "id": "cattle-3",
+            "sex": "male",
+            "birthWinter": 797
+          }
+        ]
       },
       "founders": [],
       "households": [],
@@ -19987,7 +22277,7 @@
       {
         "templateId": "clan-book.reserves.0",
         "templateVersion": 2,
-        "text": "At Winter 805, 1066 Food and 1008 Materials remained. No Food need had gone unmet in this interval.",
+        "text": "At Winter 805, food remained in stock. No Food need had gone unmet in this interval.",
         "sourceEventIds": [
           "event-2",
           "event-3",
@@ -20210,6 +22500,7 @@
       "households": [],
       "cattle": [],
       "longships": [],
+      "recordedReceipts": [],
       "stocks": {
         "food": 1000,
         "materials": 1000

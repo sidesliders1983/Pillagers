@@ -1,10 +1,13 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { loadTypeScript } from '../load-typescript.mjs';
 const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
 const { SharedSettlement } = loadTypeScript(new URL('../../src/play/SharedSettlement.ts', import.meta.url));
 const output = 'docs/qa/lore-continuity/runtime-samples.json';
-const measured = JSON.parse(await readFile(output, 'utf8'));
-const samples = measured.slice(0, 3);
+const defaults = new SharedSettlement(1, 1001);
+defaults.command({ type: 'SalvageLongship', longshipId: 'founding-longship' });
+defaults.command({ type: 'AdvanceTicks', ticks: 25000 });
+const samples = [0, 1, 5].map(index => ({ scenario: 'Default Core seed 1, checkpoint ' + index,
+    narrativeSeed: 1001, ...defaults.session.book.snapshot().chapters[index] }));
 function observed(landing = {}, mechanics = {}) {
     const owner = new SharedSettlement(32, 7);
     const state = core.createCampaign(32, { initialFood: 1000, initialMaterials: 1000,
@@ -44,6 +47,18 @@ for (const cattleId of ['cattle-1', 'cattle-2', 'cattle-3'])
     herd.command({ type: 'AssignCattle', cattleId, farmyardId: 'house-1' });
 herd.command({ type: 'AdvanceTicks', ticks: 10000 });
 sample(herd, 'calves and their own mothers at the Farmyard');
+const slaughter = observed();
+const cattleState = slaughter.session.snapshot();
+cattleState.landing.cattle['cattle-1'].birthWinter = 800;
+cattleState.landing.cattle['cattle-2'].birthWinter = 799;
+slaughter.importJSON(core.serializeState(cattleState));
+const slaughterSave = JSON.parse(slaughter.fjord.exportJSON());
+slaughterSave.narrative.narrativeSeed = 7;
+slaughter.importJSON(JSON.stringify(slaughterSave));
+for (const cattleId of ['cattle-1', 'cattle-2', 'cattle-3'])
+    slaughter.command({ type: 'SlaughterCattle', cattleId });
+slaughter.command({ type: 'AdvanceTicks', ticks: 5000 });
+sample(slaughter, 'one calf, one heifer and one adult bull; exact receipts only in facts');
 const voyage = observed();
 voyage.command({ type: 'AdvanceTicks', ticks: 4900 });
 const region = Object.values(voyage.session.snapshot().world.regions).find(region => region.targetClanId && !region.requiresShip);

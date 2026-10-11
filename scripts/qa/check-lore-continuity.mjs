@@ -1,3 +1,5 @@
+import { loadTypeScript } from '../load-typescript.mjs';
+const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -17,6 +19,7 @@ try {
     assert.ok(opening.includes('already partners'));
     assert.doesNotMatch(opening, /founder-\d|founding-longship|textileWorker/);
     await page.locator('#clan-book-appendix > summary').click();
+    assert.match(await page.locator('[data-livestock-summary]').innerText(), /[Tt]wo adult cows and one adult bull/);
     await page.locator('#clan-book-reader').evaluate(element => element.scrollTop = element.scrollHeight);
     await page.screenshot({ path: output + '/tablet-reader.png' });
     await page.locator('#clan-book-close').click({ timeout: 5000 });
@@ -68,6 +71,37 @@ try {
     assert.equal(await phone.locator('#clan-book-reader').isVisible(), false);
     checks.push('Expanded appendix remains dismissible on a 390x844 touch viewport');
     await phone.close();
+    const livestockPage = await browser.newPage({ viewport: { width: 1024, height: 768 }, hasTouch: true });
+    livestockPage.on('pageerror', error => errors.push(error.message));
+    await livestockPage.goto(base + '/play?seed=32');
+    await livestockPage.locator('#clan-book-close').click();
+    const fixture = core.createCampaign(32, { initialFood: 1000, initialMaterials: 1000,
+        foundingCoupleChanceBps: 0, cattleBirthChanceBps: 0, cattleMortalityYoungBps: 0,
+        cattleMortalityAdultBps: 0, cattleMortalityOlderBps: 0, cattleMortalityOldBps: 0 },
+        { fertilityChanceBps: 0, partnershipChanceBps: 0, careerReviewWinters: 0,
+            mortalityBands: [{ minAge: 0, chanceBps: 0 }] }, { enabled: false });
+    fixture.landing.cattle['cattle-1'].birthWinter = 800;
+    fixture.landing.cattle['cattle-2'].birthWinter = 799;
+    await livestockPage.locator('#import-file').setInputFiles({ name: 'livestock-qa.json',
+        mimeType: 'application/json', buffer: Buffer.from(core.serializeState(fixture)) });
+    for (const [cattleId, food] of [['cattle-1', 5], ['cattle-2', 10], ['cattle-3', 15]]) {
+        await livestockPage.selectOption('#entity-picker', 'cattle:' + cattleId);
+        await livestockPage.getByRole('button', { name: 'Slaughter (' + food + ' Food)', exact: true }).click();
+    }
+    for (let index = 0; index < 5; index++)
+        await livestockPage.getByRole('button', { name: '+1 Winter', exact: true }).click();
+    await livestockPage.locator('#clan-book-reader:not([hidden])').waitFor();
+    const herdText = await livestockPage.locator('#clan-book-story').innerText();
+    assert.match(herdText, /[Oo]ne calf, one heifer and one adult bull were slaughtered/);
+    assert.doesNotMatch(herdText, /cattle-\d|\d+ (?:Food|Materials)/);
+    await livestockPage.locator('#clan-book-appendix > summary').click();
+    const summary = await livestockPage.locator('[data-livestock-summary]').innerText();
+    assert.match(summary, /[Oo]ne calf, one heifer and one adult bull were slaughtered/);
+    assert.match(summary, /30 Food/);
+    assert.doesNotMatch(summary, /cattle-\d/);
+    await livestockPage.screenshot({ path: output + '/livestock-tablet.png' });
+    checks.push('Controlled Core fixture: stage/count grouping; exact 30 Food receipt stays in the factual overview');
+    await livestockPage.close();
     assert.deepEqual(errors, []);
     await writeFile(output + '/browser.json', JSON.stringify({ generatedAt: new Date().toISOString(),
         passed: true, errors, checks, limitation: 'Edge touch emulation; no physical iPad Safari run in this pass.' }, null, 2) + '\n');

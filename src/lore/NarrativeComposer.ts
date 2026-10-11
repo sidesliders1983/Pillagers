@@ -1,3 +1,4 @@
+import { livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
 import { projectChronicle } from './Chronicle';
 import type { SimulationEvent } from '../simulation/SimulationCore';
 import type { NarrativePlan } from './NarrativePlan';
@@ -28,7 +29,7 @@ export function composeChapter(
         return base % 4;
     };
     const date = (winter: number, sentence: string, variant: number): string => {
-        const lower = sentence.replace(/^(Our longship|The founding party|A permanent home|A home|A household|An animal)\b/, word => word[0].toLowerCase() + word.slice(1));
+        const lower = sentence.replace(/^(Our longship|The founding party|A permanent home|A home|A household|An animal|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\b/, word => word[0].toLowerCase() + word.slice(1));
         const action = sentence.replace(/\.$/, '');
         return ['In Winter ' + winter + ', ' + lower, action + ' in Winter ' + winter + '.',
             'During Winter ' + winter + ', ' + lower, action + ' during Winter ' + winter + '.'][variant];
@@ -37,14 +38,14 @@ export function composeChapter(
         const details = event.details ?? {};
         const mission = ({ Recon: 'reconnaissance', Surveillance: 'surveillance', Pillage: 'pillage' } as Record<string, string>)[String(details.mission)];
         if (event.type === 'ExpeditionDeparted' && mission && typeof details.groupName === 'string') {
-            const provisions = Number.isSafeInteger(details.foodCost) ? ', carrying ' + details.foodCost + ' Food' : '';
+            const provisions = Number(details.foodCost) > 0 ? ', carrying Food for the journey' : '';
             return details.groupName + ' departed on a ' + mission + ' expedition' + provisions + '.';
         }
         if (event.type === 'ExpeditionReturned' && mission && typeof details.success === 'boolean') {
             const sentences = ['The ' + mission + ' expedition ' +
                 (details.success ? 'was completed.' : 'ended without success.')];
             const recovered = ['food', 'materials'].flatMap(resource =>
-                Number.isSafeInteger(details[resource]) ? [details[resource] + ' ' +
+                Number.isSafeInteger(details[resource]) && Number(details[resource]) > 0 ? [
                     (resource === 'food' ? 'Food' : 'Materials')] : []);
             for (const [key, label] of [['cattleIds', 'cattle'], ['personaIds', 'people']]) {
                 if (Array.isArray(details[key])) recovered.push(details[key].length + ' ' + label);
@@ -56,6 +57,7 @@ export function composeChapter(
             return sentences.join(' ');
         }
         const animal = event.details?.cattleId;
+        text = text.replace(/ for \d+ (Food|Materials)/g, '');
         return typeof animal === 'string' ? text.replace('Animal ' + animal,
             event.type === 'CattleBorn' ? 'A calf' : 'An animal') : text;
     };
@@ -66,6 +68,22 @@ export function composeChapter(
         const threads = plan.threads.filter(thread => thread.theme === theme);
         const sources = [...new Set(threads.flatMap(thread => [...thread.callbackEventIds, ...thread.sourceEventIds]))];
         const variant = choose('clan-book.thread.' + theme);
+        if (theme === 'herd') {
+            const current = threads.flatMap(thread => thread.sourceEventIds)
+                .flatMap(id => eventsById.has(id) ? [eventsById.get(id)!] : []);
+            const lines = livestockGroups(current).map(group =>
+                date(group[0].time.winter, livestockAction(group, facts), variant));
+            const callbacks = [...new Set(threads.flatMap(thread => thread.callbackEventIds))]
+                .flatMap(id => eventsById.has(id) ? [eventsById.get(id)!] : []);
+            if (callbacks.length) {
+                for (const group of livestockGroups(callbacks))
+                    lines.push(date(group[0].time.winter, livestockAction(group, facts), variant));
+                lines.push('A recorded calf was assigned to the same Farmyard as its mother.');
+            }
+            paragraphs.push({ templateId: 'clan-book.thread.herd.' + variant, templateVersion: 2,
+                text: lines.join(' '), sourceEventIds: sources, factRefs: ['livestock'] });
+            continue;
+        }
         const recalled = new Set<string>();
         const lines = threads.flatMap(thread => {
             const current = eventsById.get(thread.sourceEventIds[0]);
@@ -121,24 +139,24 @@ export function composeChapter(
         const complete = ledger.food.complete && ledger.materials.complete;
         const variant = choose(complete ? 'clan-book.reserves' : 'clan-book.partial-account');
         const winter = facts.period!.through.winter;
+        const foodStatus = stocks.food > 0 ? 'Food remained in stock' : 'No Food remained in stock';
         const accounts = [
-            'At Winter ' + winter + ', ' + stocks.food + ' Food and ' + stocks.materials + ' Materials remained.',
-            'The interval closed with ' + stocks.food + ' Food and ' + stocks.materials + ' Materials in stock, at Winter ' + winter + '.',
-            'There were ' + stocks.food + ' Food and ' + stocks.materials + ' Materials left when the interval closed at Winter ' + winter + '.',
-            'At the completed Winter ' + winter + ' boundary, the reserves stood at ' + stocks.food + ' Food and ' + stocks.materials + ' Materials.',
+            'At Winter ' + winter + ', ' + foodStatus[0].toLowerCase() + foodStatus.slice(1) + '.',
+            foodStatus + ' when the interval closed at Winter ' + winter + '.',
+            'When the interval ended at Winter ' + winter + ', ' + foodStatus[0].toLowerCase() + foodStatus.slice(1) + '.',
+            'The interval ended at Winter ' + winter + '. ' + foodStatus + '.',
         ];
         const shortage = complete && stocks.food > 0 && ledger.food.unmetNeed === 0 ?
             [...previousChapters].reverse().find(chapter => chapter.facts.ledger?.food.complete &&
                 chapter.facts.ledger.food.closing === 0 && (chapter.facts.ledger.food.unmetNeed ?? 0) > 0) : undefined;
         const callback = shortage ? 'At Winter ' + shortage.checkpoint.time.winter +
-            ', no Food had remained in stock; ' + shortage.facts.ledger!.food.unmetNeed +
-            ' Food of need had gone unmet in that earlier interval. ' : '';
+            ', no Food had remained in stock and some recorded need had gone unmet in that earlier interval. ' : '';
         const shortfall = ledger.food.unmetNeed;
         const need = shortfall ? [
-            shortfall + ' Food of need had gone unmet in this interval.',
-            shortfall + ' Food of recorded need remained unmet over these winters.',
-            'The completed interval left ' + shortfall + ' Food of need unmet.',
-            'Unmet Food need amounted to ' + shortfall + ' in the observed interval.'
+            'Some recorded Food need had gone unmet in this interval.',
+            'Part of the recorded Food need remained unmet over these winters.',
+            'The completed interval left some recorded Food need unmet.',
+            'The observed interval recorded unmet Food need.'
         ][variant] : [
             'No Food need had gone unmet in this interval.',
             'All recorded Food need in this interval had been met.',
@@ -194,10 +212,13 @@ export function composeOpening(
         return label ? named + (people.length === 1 ? ' worked as a ' + label : ' worked as ' + label + 's') + '.' :
             named + ' had no assigned occupation.';
     }).join(' '), ['founders']);
+    const foundingCattle = facts.cattle.map(animal => ({
+        id: animal.id, type: 'CattleAssigned', time: { winter, tick: 0 }, details: { cattleId: animal.id }
+    }));
     const assets = paragraph('clan-book.arrival.reserves',
-        'They began with ' + facts.stocks!.food + ' Food and ' + facts.stocks!.materials + ' Materials. ' +
-        'The founding party had ' + facts.cattle.length + ' cattle and ' + facts.longships.length +
-        (facts.longships.length === 1 ? ' longship.' : ' longships.'), ['stocks', 'cattle', 'longships']);
+        'The founding party had ' + (foundingCattle.length ? livestockQuantity(foundingCattle, facts) : 'no cattle') +
+        ' and ' + facts.longships.length +
+        (facts.longships.length === 1 ? ' longship.' : ' longships.'), ['stocks', 'cattle', 'livestock', 'longships']);
     const structures = [[homes, work, assets], [work, homes, assets], [homes, assets, work],
         [work, assets, homes], [assets, homes, work], [assets, work, homes]];
     return [arrival, ...structures[Math.floor(narrativeSeed / 3) % structures.length]

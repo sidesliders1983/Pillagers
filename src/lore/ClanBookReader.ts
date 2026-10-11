@@ -1,10 +1,13 @@
+import { livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
+import type { SimulationEvent } from '../simulation/SimulationCore';
 import type { SharedSettlement } from '../play/SharedSettlement';
-import type { BookChapter, OpeningFacts } from './ClanBook';
+import type { BookChapter } from './ClanBook';
 import './clan-book.css';
 
 const escape = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
-function appendix(facts: OpeningFacts): string {
+function appendix(chapter: BookChapter): string {
+    const facts = chapter.facts;
     let html = facts.complete ? '<p>Complete observed checkpoint.</p>' :
         '<p>Partial history: some founding facts or interval coverage are unavailable.</p>';
     if (facts.period) html += '<p>Observed interval: Winter ' + facts.period.from.winter +
@@ -23,9 +26,18 @@ function appendix(facts: OpeningFacts): string {
             '<li>Household: ' + escape(h.id) + ' · Residence: ' + escape(h.residenceId ?? 'none') +
             ' · Members: ' + h.memberIds.map(escape).join(', ') + '</li>').join('') + '</ul></details>';
     }
-    if (facts.cattle.length) html += '<h3>Founding cattle</h3><ul>' +
-        (facts.cattle as { id: string; sex: string }[]).map(c => '<li>' + escape(c.id) +
-            ' · ' + escape(c.sex) + '</li>').join('') + '</ul>';
+    if (facts.cattle.length) {
+        const animals: SimulationEvent[] = facts.cattle.map(animal => ({
+            id: animal.id, type: 'CattleAssigned', time: chapter.checkpoint.time,
+            details: { cattleId: animal.id }
+        }));
+        const quantity = livestockQuantity(animals, facts);
+        html += '<h3>Founding cattle</h3><p data-livestock-summary>' +
+            escape(quantity[0].toUpperCase() + quantity.slice(1)) + '.</p>';
+        html += '<details><summary>Livestock source identities</summary><ul>' +
+            facts.cattle.map(animal => '<li>' + escape(animal.id) + ' · ' + escape(animal.sex) +
+                '</li>').join('') + '</ul></details>';
+    }
     if (facts.longships.length) html += '<h3>Founding longships</h3><ul>' +
         facts.longships.map(() => '<li>Our longship</li>').join('') + '</ul>';
     if (facts.ledger) {
@@ -45,8 +57,13 @@ function appendix(facts: OpeningFacts): string {
             ' · ' + t.units + '</li>').join('') + '</ul></details>';
     } else if (facts.stocks) html += '<p>Starting stocks: ' + facts.stocks.food + ' Food · ' +
         facts.stocks.materials + ' Materials.</p>';
+    if (facts.recordedReceipts?.length) {
+        html += '<h3>Recorded founding asset receipts</h3><ul>' + facts.recordedReceipts.map(receipt =>
+            '<li>Winter ' + receipt.winter + ': Our longship was salvaged for ' + receipt.units +
+            ' Materials. Source: ' + escape(receipt.eventId) + '</li>').join('') + '</ul>';
+    }
     if (facts.demographics) {
-        html += '<h3>Births and deaths</h3><ul>' + facts.demographics.map(e => {
+        html += '<h3>Births and deaths</h3><ul>' + facts.demographics.filter(e => !e.type.startsWith('Cattle')).map(e => {
             const details = e.details;
             const people = (details.people ?? []) as { id: string; name: string }[];
             const parents = (details.parentIds ?? []) as string[];
@@ -56,6 +73,22 @@ function appendix(facts: OpeningFacts): string {
                 (e.type.includes('Died') ? ' · ' + escape(details.cause ?? 'Cause not recorded') : '') +
                 ' · source: ' + escape(e.eventId) + '</li>';
         }).join('') + '</ul>';
+        const livestock = facts.demographics.filter(event => event.type.startsWith('Cattle'))
+            .map(event => ({ ...event, id: event.eventId }));
+        if (livestock.length) {
+            html += '<h3>Livestock</h3><ul data-livestock-summary>' + livestockGroups(livestock).map(group => {
+                const recordedFood = group.every(event => Number.isSafeInteger(event.details?.food)) ?
+                    group.reduce((sum, event) => sum + Number(event.details?.food), 0) : null;
+                return '<li>Winter ' + group[0].time.winter + ': ' + escape(livestockAction(group, facts)) +
+                    (group[0].type === 'CattleSlaughtered' && recordedFood !== null ?
+                        ' Recorded receipt: ' + recordedFood + ' Food.' : '') + '</li>';
+            }).join('') + '</ul>';
+            html += '<details><summary>Livestock source identities</summary><ul>' + livestock.map(event =>
+                '<li>' + escape(event.details.cattleId) + ' · ' + escape(event.type) +
+                ' · Winter ' + event.time.winter + ' · source: ' + escape(event.id) +
+                (event.type === 'CattleSlaughtered' ? ' · Food: ' + escape(event.details.food) : '') +
+                '</li>').join('') + '</ul></details>';
+        }
         if (!facts.demographics.length) html += '<p>No births or deaths were recorded in this interval.</p>';
     }
     return html;
@@ -139,7 +172,7 @@ export class ClanBookReader {
         if (signature === this.renderedChapter) return;
         this.panel.querySelector('#clan-book-story')!.innerHTML = '<h3>' + escape(chapter.title) + '</h3>' +
             chapter.text.split('\n\n').map(p => '<p>' + escape(p) + '</p>').join('');
-        this.panel.querySelector('#clan-book-appendix > div')!.innerHTML = appendix(chapter.facts);
+        this.panel.querySelector('#clan-book-appendix > div')!.innerHTML = appendix(chapter);
         this.owner.session.book.markRead(chapter.index);
         this.renderedChapter = signature;
         this.persist();

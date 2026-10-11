@@ -11,3 +11,5 @@ The owner's twelve scenes are illustrative and explicitly not canon or new mecha
 Keep facts, narrative planning memory and published paragraphs separate. Match every callback by stable identity and event-time designation. Store exact published text, versions and references; never reconstruct truth from earlier prose. A separate saved narrative seed chooses bounded variations, without consuming Core RNG.
 
 The owner approved the revised English direction and conditional formulations on 2026-10-11. Runtime examples are retained separately for review; fictional scenes remain illustrative. No runtime model, external service, download, gameplay or balance change is introduced by #104.
+
+Owner correction, 2026-10-11: refer to livestock by species, recorded life stage and quantity, never generated names or internal IDs. Group related events into readable passages. Keep exact resource values in the factual overview. Never invent motives, traits or ownership unsupported by the simulation. This correction applies to newly composed passages and supersedes resource amounts shown in earlier draft examples.

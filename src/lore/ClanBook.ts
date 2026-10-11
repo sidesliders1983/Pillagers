@@ -11,6 +11,12 @@ import type { SimulationState } from '../simulation/SimulationCore';
 
 export type OpeningFacts = {
     complete: boolean;
+    livestock?: {
+        youngAdultAge: number;
+        adultAge: number;
+        animals: { id: string; sex: 'female' | 'male'; birthWinter: number }[];
+    };
+    recordedReceipts?: { eventId: string; winter: number; resource: 'materials'; units: number }[];
     residences?: { id: string; kind: 'house' | 'tent' }[];
     ledger?: ReturnType<typeof bookLedger>;
     period?: { from: { winter: number; tick: number }; through: { winter: number; tick: number } };
@@ -66,10 +72,28 @@ function validTime(time: { winter: number; tick: number }, state: SimulationStat
         Number.isSafeInteger(time.tick) && time.tick >= 0 && time.tick < state.ticksPerWinter &&
         time.winter * state.ticksPerWinter + time.tick <= state.time.winter * state.ticksPerWinter + state.time.tick;
 }
+function livestockFacts(state: SimulationState): OpeningFacts['livestock'] {
+    if (!state.landing) return undefined;
+    return {
+        youngAdultAge: state.landing.config.cattleYoungAdultAge,
+        adultAge: state.landing.config.cattleAdultAge,
+        animals: Object.values({ ...state.landing.cattleArchive, ...state.landing.cattle })
+            .map(animal => ({ id: animal.id, sex: animal.sex, birthWinter: animal.birthWinter }))
+    };
+}
 function validFacts(facts: OpeningFacts): boolean {
     if (!facts || typeof facts.complete !== 'boolean' ||
         !Array.isArray(facts.founders) || !Array.isArray(facts.households) ||
         !Array.isArray(facts.cattle) || !Array.isArray(facts.longships)) return false;
+    if (facts.livestock && (!Number.isSafeInteger(facts.livestock.youngAdultAge) ||
+        facts.livestock.youngAdultAge < 0 || !Number.isSafeInteger(facts.livestock.adultAge) ||
+        facts.livestock.adultAge < facts.livestock.youngAdultAge || !Array.isArray(facts.livestock.animals) ||
+        facts.livestock.animals.some(animal => !animal || typeof animal.id !== 'string' ||
+            !['female', 'male'].includes(animal.sex) || !Number.isSafeInteger(animal.birthWinter)))) return false;
+    if (facts.recordedReceipts && (!Array.isArray(facts.recordedReceipts) ||
+        facts.recordedReceipts.some(receipt => !receipt || typeof receipt.eventId !== 'string' ||
+            !Number.isSafeInteger(receipt.winter) || receipt.resource !== 'materials' ||
+            !Number.isSafeInteger(receipt.units) || receipt.units < 0))) return false;
     if (facts.residences !== undefined && (!Array.isArray(facts.residences) || facts.residences.some(residence =>
         !residence || typeof residence.id !== 'string' || !['house', 'tent'].includes(residence.kind)))) return false;
     if (facts.founders.some(p => !p || typeof p.id !== 'string' || typeof p.name !== 'string')) return false;
@@ -108,7 +132,7 @@ export class ClanBook {
         const arrival = state.events.find(e => e.type === 'FoundingPartyLanded');
         const originWinter = arrival?.time.winter ?? state.events.find(e => e.type === 'ClanInitialized')?.time.winter ?? state.time.winter;
         const facts: OpeningFacts = fresh ? {
-            complete: true,
+            complete: true, livestock: livestockFacts(state),
             residences: structuredClone(Object.values(state.residences)),
             founders: Object.values(state.personas).map(p => ({
                 id: p.id, name: p.name, occupation: p.occupation, partnerId: p.partnerId
@@ -123,6 +147,11 @@ export class ClanBook {
             stocks: { ...state.stocks }
         } : {
             complete: false, founders: [], households: [], cattle: [], longships: [],
+            recordedReceipts: state.events.filter(event => event.type === 'FoundingLongshipSalvaged' &&
+                Number.isSafeInteger(event.details?.materials)).map(event => ({
+                    eventId: event.id, winter: event.time.winter, resource: 'materials',
+                    units: Number(event.details!.materials)
+                })),
             stocks: arrival?.details?.stocks as OpeningFacts['stocks'] ?? null
         };
         const narrativeSeed = suppliedSeed ?? crypto.getRandomValues(new Uint32Array(1))[0];
@@ -133,7 +162,7 @@ export class ClanBook {
         const text = paragraphs ? paragraphs.map(paragraph => paragraph.text).join('\n\n') :
             'This book began from an imported campaign. Its founding details were incomplete.\n\n' +
             projectChronicle(state.events.filter(event => event.type.startsWith('Founding')))
-                .reverse().flatMap(group => group.entries).map(entry => entry.text).join(' ');
+                .reverse().flatMap(group => group.entries).map(entry => entry.text.replace(/ for \d+ (Food|Materials)/g, '')).join(' ');
         this.data = {
             version: 1, id: Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(16).padStart(8, '0')).join('-'), narrativeSeed,
             generatorVersion: 2, styleVersion: 2,
@@ -176,6 +205,7 @@ export class ClanBook {
             facts: { complete: cursor.time.tick === 0 &&
                 cursor.time.winter === this.data.nextWinter - 5 && ledger.food.complete && ledger.materials.complete,
                 period: { from: { ...cursor.time }, through: { ...state.time } },
+                livestock: livestockFacts(state),
                 founders: [], households: [], cattle: [], longships: [], stocks: { ...state.stocks }, ledger,
                 demographics: events.filter(e => ['ChildBorn', 'PersonaDied', 'CattleBorn', 'CattleDied', 'CattleSlaughtered'].includes(e.type))
                     .map(e => ({ eventId: e.id, type: e.type, time: { ...e.time }, details: structuredClone(e.details ?? {}),
@@ -222,7 +252,7 @@ export class ClanBook {
         const validReference = (reference: unknown, chapterIndex: number): boolean => {
             if (typeof reference !== 'string') return false;
             if (['founders', 'households', 'residences', 'stocks', 'cattle', 'longships',
-                'period', 'demographics', 'ledger', 'chapter.index'].includes(reference)) return true;
+                'period', 'demographics', 'ledger', 'livestock', 'chapter.index'].includes(reference)) return true;
             const callback = /^chapters\.(\d+)\.ledger\.food$/.exec(reference);
             const index = callback ? Number(callback[1]) : -1;
             return index >= 0 && index < chapterIndex && !!saved.chapters[index]?.facts.ledger?.food.complete;
@@ -242,6 +272,12 @@ export class ClanBook {
                 !Number.isSafeInteger(c.checkpoint.eventEnd) || c.checkpoint.eventEnd < 0 ||
                 c.checkpoint.eventEnd > state.events.length || !validTime(c.checkpoint.time, state) || !Array.isArray(c.sourceEventIds) ||
                 c.sourceEventIds.some(id => !eventIds.has(id)) ||
+                c.facts.recordedReceipts?.some(receipt => {
+                    const event = state.events[eventPositions.get(receipt.eventId) ?? -1];
+                    return !event || event.type !== 'FoundingLongshipSalvaged' ||
+                        event.details?.materials !== receipt.units || event.time.winter !== receipt.winter ||
+                        (eventPositions.get(receipt.eventId) ?? Infinity) >= c.checkpoint.eventEnd;
+                }) ||
                 typeof c.notified !== 'boolean' || typeof c.read !== 'boolean' ||
                 c.paragraphs !== undefined && (!Array.isArray(c.paragraphs) || c.paragraphs.some(paragraph =>
                     !paragraph || typeof paragraph.text !== 'string' || typeof paragraph.templateId !== 'string' ||
@@ -249,10 +285,10 @@ export class ClanBook {
                     !paragraph.factRefs.every(reference => validReference(reference, i)) ||
                     !Array.isArray(paragraph.sourceEventIds) || paragraph.sourceEventIds.some(id =>
                         (eventPositions.get(id) ?? Infinity) >= c.checkpoint.eventEnd))) ||
-                c.plan !== undefined && JSON.stringify(c.plan) !== JSON.stringify(planNarrative(
+                c.plan !== undefined && (![1, 2].includes(c.plan.version) || JSON.stringify(c.plan) !== JSON.stringify(planNarrative(
                     state.events.slice(0, c.checkpoint.eventEnd),
-                    i > 0 ? saved.chapters[i - 1].checkpoint.eventEnd : 0
-                ))))
+                    i > 0 ? saved.chapters[i - 1].checkpoint.eventEnd : 0, c.plan.version
+                )))))
             throw new Error('Clan Book does not match this campaign history.');
         if (saved.memory !== undefined && JSON.stringify(saved.memory) !==
             JSON.stringify(narrativeMemory(saved.chapters, state.events.slice(0, saved.cursor.eventEnd))))

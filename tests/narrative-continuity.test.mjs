@@ -271,3 +271,91 @@ test('recent opening avoidance compares actual wording, not just paragraph ident
         endings.push(ending);
     }
 });
+
+test('livestock passages group slaughter by stage and quantity while preserving exact factual receipts', () => {
+    const owner = quietCampaign();
+    const state = owner.session.snapshot();
+    state.landing.cattle['cattle-1'].birthWinter = 800;
+    state.landing.cattle['cattle-2'].birthWinter = 799;
+    owner.importJSON(core.serializeState(state));
+    const before = owner.session.saveJSON();
+    const commands = ['cattle-1', 'cattle-2', 'cattle-3'].map(cattleId => ({ type: 'SlaughterCattle', cattleId }));
+    for (const command of commands) owner.command(command);
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = owner.session.book.snapshot().chapters.at(-1);
+    assert.match(chapter.text, /[Oo]ne calf, one heifer and one adult bull were slaughtered/);
+    assert.doesNotMatch(chapter.text, /cattle-\d|Animal|\d+ (?:Food|Materials)|healthy|happy|beloved/);
+    assert.equal(chapter.facts.ledger.food.otherReceipts, 30);
+    assert.deepEqual(chapter.facts.demographics.filter(event => event.type === 'CattleSlaughtered')
+        .map(event => event.details.food), [5, 10, 15]);
+    let expected = core.reconstructState(before);
+    for (const command of [...commands, { type: 'AdvanceTicks', ticks: 5000 }]) expected = core.applyCommand(expected, command);
+    assert.equal(owner.session.saveJSON(), core.serializeState(expected));
+    assert.deepEqual(SharedSettlement.restore(owner.persist(), 'fjord').session.book.snapshot(), owner.session.book.snapshot());
+});
+
+test('a grouped birth passage counts every calf even when more than four cattle events occur', () => {
+    const owner = quietCampaign();
+    const state = owner.session.snapshot();
+    state.landing.config.cattleBirthChanceBps = 10000;
+    state.landing.config.cattleBirthInterval = 10;
+    state.landing.config.cattleFertileMinAge = 8;
+    for (const animal of Object.values(state.landing.cattle)) animal.birthWinter = 792;
+    for (let index = 4; index <= 6; index++) state.landing.cattle['cattle-' + index] = {
+        ...structuredClone(state.landing.cattle['cattle-1']), id: 'cattle-' + index
+    };
+    owner.importJSON(core.serializeState(state));
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = owner.session.book.snapshot().chapters.at(-1);
+    const births = chapter.facts.demographics.filter(event => event.type === 'CattleBorn');
+    assert.equal(births.length, 5);
+    assert.match(chapter.text, /[Ff]ive calves were born/);
+    assert.equal((chapter.text.match(/were born/g) ?? []).length, 1);
+    assert.ok(births.every(event => chapter.paragraphs.some(paragraph => paragraph.sourceEventIds.includes(event.eventId))));
+    assert.doesNotMatch(chapter.text, /cattle-\d|mother|owned|healthy|\d+ (?:Food|Materials)/);
+    assert.deepEqual(SharedSettlement.restore(owner.persist(), 'fjord').session.book.snapshot(), owner.session.book.snapshot());
+});
+
+test('livestock wording uses event-time ages and the saved lifecycle thresholds, including the opening', () => {
+    const fresh = new SharedSettlement(32, 7);
+    assert.match(fresh.session.book.snapshot().chapters[0].text, /two adult cows and one adult bull/);
+    assert.doesNotMatch(fresh.session.book.snapshot().chapters[0].text, /\d+ (?:Food|Materials)/);
+    const owner = quietCampaign();
+    const state = owner.session.snapshot();
+    state.landing.config.cattleAdultAge = 5;
+    state.landing.config.cattleFertileMinAge = 5;
+    owner.importJSON(core.serializeState(state));
+    owner.command({ type: 'SlaughterCattle', cattleId: 'cattle-1' });
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = owner.session.book.snapshot().chapters.at(-1);
+    assert.match(chapter.text, /[Oo]ne heifer was slaughtered/);
+    assert.doesNotMatch(chapter.text, /adult cow/);
+    assert.equal(chapter.facts.ledger.food.otherReceipts, 10);
+});
+
+test('a plain imported founding account leaves exact salvage amounts in factual sources', () => {
+    const state = core.applyCommand(core.createCampaign(32), { type: 'SalvageLongship', longshipId: 'founding-longship' });
+    const owner = new SharedSettlement(32);
+    owner.importJSON(core.serializeState(state));
+    const chapter = owner.session.book.snapshot().chapters[0];
+    assert.match(chapter.text, /[Oo]ur longship was salvaged/);
+    assert.doesNotMatch(chapter.text, /\d+ (?:Food|Materials)/);
+    assert.equal(owner.session.snapshot().events.find(event => event.type === 'FoundingLongshipSalvaged').details.materials, 20);
+    assert.equal(chapter.facts.recordedReceipts[0].units, 20);
+    assert.deepEqual(SharedSettlement.restore(owner.persist(), 'fjord').session.book.snapshot(), owner.session.book.snapshot());
+});
+
+test('repeated assignment records never turn one cow into two livestock in a passage', () => {
+    const owner = quietCampaign();
+    owner.command({ type: 'AssignOccupation', personaId: 'founder-9', occupation: 'farmer' });
+    owner.command({ type: 'BuildHouse', householdId: 'founder-9' });
+    owner.command({ type: 'AssignCattle', cattleId: 'cattle-1', farmyardId: 'house-1' });
+    owner.command({ type: 'AssignCattle', cattleId: 'cattle-1', farmyardId: 'house-1' });
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = owner.session.book.snapshot().chapters.at(-1);
+    const assignments = chapter.plan.sourceEventIds.filter(id =>
+        owner.session.snapshot().events.find(event => event.id === id)?.type === 'CattleAssigned');
+    assert.equal(assignments.length, 2);
+    assert.match(chapter.text, /[Oo]ne adult cow was assigned to the Farmyard/);
+    assert.doesNotMatch(chapter.text, /two adult cows/);
+});

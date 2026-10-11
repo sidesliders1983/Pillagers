@@ -1,3 +1,4 @@
+import { livestockGroups } from './LivestockNarrative';
 import { projectChronicle } from './Chronicle';
 import type { ChronicleEntry } from './Chronicle';
 import type { SimulationEvent } from '../simulation/SimulationCore';
@@ -10,7 +11,7 @@ export type NarrativeThread = {
     callbackEventIds: string[];
 };
 export type NarrativePlan = {
-    version: 1;
+    version: 1 | 2;
     focus: NarrativeTheme[];
     threads: NarrativeThread[];
     sourceEventIds: string[];
@@ -81,19 +82,30 @@ function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]
             fact.event.details?.householdId === details.householdId);
     return undefined;
 }
-export function planNarrative(events: readonly SimulationEvent[], intervalStart: number): NarrativePlan {
+export function planNarrative(events: readonly SimulationEvent[], intervalStart: number, version: 1 | 2 = 2): NarrativePlan {
     const currentIds = new Set(events.slice(intervalStart).map(event => event.id));
     const index = historyIndex(events);
     const older = index.filter(fact => !currentIds.has(fact.event.id));
     const current = index.filter(fact => currentIds.has(fact.event.id));
     const priority: NarrativeTheme[] = ['family', 'homes', 'work', 'expeditions', 'herd'];
     const focus = priority.filter(theme => current.some(fact => fact.theme === theme)).slice(0, 3);
-    const threads = focus.flatMap(theme => current.filter(fact => fact.theme === theme).slice(0, 4).map(fact => {
-        const previous = relevantOlder(fact.event, older);
-        return { theme, subjectIds: subjects(fact.event), sourceEventIds: fact.entry.sourceEventIds,
-            callbackEventIds: previous?.entry.sourceEventIds ?? [] };
-    }));
-    return { version: 1, focus, threads,
+    const threads = focus.flatMap(theme => {
+        const selected = current.filter(fact => fact.theme === theme);
+        const groups = theme === 'herd' && version === 2 ?
+            livestockGroups(selected.map(fact => fact.event)).map(group =>
+                group.map(event => selected.find(fact => fact.event.id === event.id)!)) :
+            selected.map(fact => [fact]);
+        return groups.slice(0, 4).map(group => {
+            const callbacks = group.flatMap(fact => relevantOlder(fact.event, older)?.entry.sourceEventIds ?? []);
+            return {
+                theme,
+                subjectIds: [...new Set(group.flatMap(fact => subjects(fact.event)))],
+                sourceEventIds: group.flatMap(fact => fact.entry.sourceEventIds),
+                callbackEventIds: [...new Set(callbacks)]
+            };
+        });
+    });
+    return { version, focus, threads,
         sourceEventIds: [...new Set(threads.flatMap(thread => thread.sourceEventIds))],
         callbackEventIds: [...new Set(threads.flatMap(thread => thread.callbackEventIds))] };
 }

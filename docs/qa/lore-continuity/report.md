@@ -2,6 +2,8 @@
 
 Owner direction and conditional English wording were approved on 11 October 2026. [Twelve actual composed passages](runtime-review.html) are available for the final runtime wording review. These are recorded Core campaigns or explicitly configured Core QA fixtures, not the fictional scenes in the owner's document. [Approved direction](wording-review.html), [current implementation](../../lore/CLAN-BOOK-V02B.md).
 
+The cohort below records the initial composer at commit `6913322`, before the owner's livestock/resource wording correction. Its saved metrics remain a historical record. The [subsequent livestock validation](livestock-review.md) documents the revised wording, current browser results and refreshed runtime samples.
+
 ## Reproducible campaign cohort
 
 Command: `node scripts/qa/measure-lore-continuity.mjs`. Seeds 1–20, 50 Winters each; narrative seeds 1001–1020. Default rules include weather, human mortality and cattle lifecycle. Each campaign salvages its founding longship, then advances 50,000 ticks. The session closes all ten intermediate five-Winter chapters. An independent direct Core run applies the same two commands. No expeditions are dispatched in this cohort; expedition wording is covered separately below.
