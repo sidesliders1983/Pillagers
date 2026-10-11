@@ -33,3 +33,5 @@ Full checks and evidence are recorded in docs/qa/clan-chronicle-v01-report.md. F
 The factual timeline now supports recorded resident/cattle deaths and cattle births.
 The persistent opening and five-Winter Clan Book are documented separately in
 [lore/CLAN-BOOK-V02A.md](lore/CLAN-BOOK-V02A.md). Raw Events remain available.
+
+Housing events without a recorded historical designation use neutral home/household terms. Canonical IDs remain in source events. See [the #112 investigation](lore/HOUSING-NAMES-112-AUDIT.md) for the pending named-entity integration; existing published Clan Book text is retained.
