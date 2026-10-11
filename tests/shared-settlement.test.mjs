@@ -122,6 +122,8 @@ test('resident selection identifies the canonical partner, child and home; home 
     assert.deepEqual(shared.selectionPresentation().map(m => [m.role, m.kind, m.id]), [
         ['selected', 'persona', fatherId], ['home', 'building', 'house-1']
     ], 'indoor newborn and active caregiver have no outdoor markers');
+    // Isolate this family's selection markers from additional births that renew care.
+    state.mechanics.config.fertilityChanceBps = 0;
     for (let i = 0; i < 5; i++) state = core.applyCommand(state, { type: 'AdvanceWinter' });
     shared.importJSON(core.serializeState(state));
     shared.select({ kind: 'persona', id: fatherId });

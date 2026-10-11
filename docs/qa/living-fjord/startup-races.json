@@ -1,0 +1,158 @@
+{
+  "observations": [
+    {
+      "case": "hidden-before-ready",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 5,
+      "beforeHash": "3db611b41a1e8d71773c74ced94fbd2ab44a38e7874d2d64f6eee005a0f80ce3",
+      "afterHash": "3db611b41a1e8d71773c74ced94fbd2ab44a38e7874d2d64f6eee005a0f80ce3",
+      "eventCount": 5,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "import-before-ready",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 2,
+      "beforeHash": "bbd54149edcd760fac8bec841c8bd0e68e262c46cafe9479b20181bd7a052124",
+      "afterHash": "bbd54149edcd760fac8bec841c8bd0e68e262c46cafe9479b20181bd7a052124",
+      "eventCount": 5,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "pause-before-ready",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 5,
+      "beforeHash": "3db611b41a1e8d71773c74ced94fbd2ab44a38e7874d2d64f6eee005a0f80ce3",
+      "afterHash": "3db611b41a1e8d71773c74ced94fbd2ab44a38e7874d2d64f6eee005a0f80ce3",
+      "eventCount": 5,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "load-before-ready",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 2,
+      "beforeHash": "bbd54149edcd760fac8bec841c8bd0e68e262c46cafe9479b20181bd7a052124",
+      "afterHash": "bbd54149edcd760fac8bec841c8bd0e68e262c46cafe9479b20181bd7a052124",
+      "eventCount": 5,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "restart-hidden",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 2,
+      "beforeHash": "a5f70862b92a587d2797307219f1c8c934f9806df15a63018ef429a24453e69a",
+      "afterHash": "a5f70862b92a587d2797307219f1c8c934f9806df15a63018ef429a24453e69a",
+      "eventCount": 5,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "new-hidden",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 5,
+      "beforeHash": "bc559ab941e38f508101aac698c2871dafa547522c3723444488c47cabc4a3c6",
+      "afterHash": "bc559ab941e38f508101aac698c2871dafa547522c3723444488c47cabc4a3c6",
+      "eventCount": 4,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "new-paused",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 5,
+      "beforeHash": "bc559ab941e38f508101aac698c2871dafa547522c3723444488c47cabc4a3c6",
+      "afterHash": "bc559ab941e38f508101aac698c2871dafa547522c3723444488c47cabc4a3c6",
+      "eventCount": 4,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    },
+    {
+      "case": "paused-2D-to-3D-handoff",
+      "before": {
+        "winter": 800,
+        "tick": 0
+      },
+      "after": {
+        "winter": 800,
+        "tick": 0
+      },
+      "careWinters": 5,
+      "beforeHash": "3db611b41a1e8d71773c74ced94fbd2ab44a38e7874d2d64f6eee005a0f80ce3",
+      "afterHash": "3db611b41a1e8d71773c74ced94fbd2ab44a38e7874d2d64f6eee005a0f80ce3",
+      "eventCount": 5,
+      "stocks": {
+        "food": 30,
+        "materials": 5
+      }
+    }
+  ],
+  "errors": [],
+  "visibility": "Controlled document.hidden with real visibilitychange handler; actual HTTP asset requests held and released."
+}

@@ -142,8 +142,7 @@ test('documented CLI creates a complete small study and rejects unknown options'
 });
 
 test('published annual rows distinguish unmet events and effective work from structural eligibility', () => {
-    // Seed 2 has an actual unmet event with current two-Winter care defaults. Historical reports are unchanged.
-    const run = runFoodScenario({ seed: 2, scenario: 'E10', winters: 25 });
+    const run = runFoodScenario({ seed: 1, scenario: 'E10', winters: 25 });
     assert.ok(run.annual.some(row => row.shortfall > 0));
     for (const row of run.annual.slice(1)) {
         assert.ok(Number.isSafeInteger(row.unmetConsumptionEvents));

@@ -6,7 +6,7 @@ export function renderCharacterProfile(card: HTMLElement, dna: CharacterDNA, dis
     const name = characterName({ ...dna, age: Math.min(100, dna.age) });
     card.innerHTML = '<button class="profile-close" aria-label="Close character profile">×</button><span class="profile-eyebrow">FJORDSIDE / INHABITANT</span><h2></h2><p class="profile-identity"></p><h3>Character traits</h3><dl class="profile-traits"></dl><h3>Heritage profile</h3><div class="profile-heritage"></div>';
     card.querySelector('h2')!.textContent = displayName;
-    card.querySelector('.profile-identity')!.textContent = `${dna.age} years · ${dna.sex === 'male' ? 'Male' : 'Female'} · ${heritageLabels[name.dominantCulture]}`;
+    card.querySelector('.profile-identity')!.textContent = `${dna.age} ${dna.age === 1 ? 'Winter' : 'Winters'} · ${dna.sex === 'male' ? 'Male' : 'Female'} · ${heritageLabels[name.dominantCulture]}`;
     const traits = card.querySelector('dl')!;
     for (const key of traitKeys) {
         const dt = document.createElement('dt'), dd = document.createElement('dd');

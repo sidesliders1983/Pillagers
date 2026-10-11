@@ -82,6 +82,27 @@ export class FjordPlay {
         });
         bindViewSwitch(document.querySelector('#fjord-play')!, this.shared, say);
         const persist = () => persistSettlement(this.shared, say);
+        let clockIntent = 0;
+        let previous = performance.now();
+        let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
+        const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring;
+        const canAdvance = () => ownsClock() && sceneLoads === 0;
+        const setPlayback = (running: boolean) => {
+            clockIntent++;
+            previous = performance.now();
+            this.session.setRunning(running && ownsClock());
+            document.querySelector('#fjord-run')!.textContent = this.session.running ? 'Pause' : 'Start';
+            persist();
+        };
+        const beginAutoStart = () => {
+            setPlayback(false);
+            const intent = clockIntent;
+            return () => {
+                if (intent === clockIntent && ownsClock())
+                    setPlayback(true);
+            };
+        };
+        const initialAutoStart = this.opened.autoStart ? beginAutoStart() : undefined;
         let assets: AssetManager | undefined, models: FjordModels | undefined;
         let layer: FjordEntities | undefined, world: Awaited<ReturnType<typeof createWorld>> | undefined;
         let motion: LivingWorldController | undefined, profile: FjordCharacterProfile | undefined;
@@ -172,21 +193,28 @@ export class FjordPlay {
                     refresh();
             }).catch(error => say(String(error)));
         };
-        document.querySelector('#fjord-run')!.addEventListener('click', () => action(() => this.session.setRunning(!this.session.running)));
+        document.querySelector('#fjord-run')!.addEventListener('click', () => {
+            // Record intent immediately, even while a queued command is awaiting scene assets.
+            setPlayback(!this.session.running);
+            action(() => {});
+        });
         document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => this.session.command({ type: 'AdvanceWinter' })));
         document.querySelector('#fjord-save')!.addEventListener('click', () => action(() => {
             this.shared.saveLocal(localStorage);
             say('Campaign and exact Fjord saved locally.');
         }));
-        document.querySelector('#fjord-load')!.addEventListener('click', () => action(async () => {
-            say('Loading shared campaign…');
-            this.shared.loadLocal(localStorage);
-            resetProduction();
-            campaignFields();
-            if (world)
-                await rebuildWorld();
-            say('Shared campaign loaded, paused.');
-        }));
+        document.querySelector('#fjord-load')!.addEventListener('click', () => {
+            setPlayback(false);
+            action(async () => {
+                say('Loading shared campaign…');
+                this.shared.loadLocal(localStorage);
+                resetProduction();
+                campaignFields();
+                if (world)
+                    await rebuildWorld();
+                say('Shared campaign loaded, paused.');
+            });
+        });
         const download = (text: string, name: string) => {
             const url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
             const link = document.createElement('a');
@@ -197,39 +225,48 @@ export class FjordPlay {
         };
         document.querySelector('#fjord-export')!.addEventListener('click', () => download(this.campaign.exportJSON(), 'pillagers-fjord.json'));
         document.querySelector('#fjord-export-core')!.addEventListener('click', () => download(this.session.saveJSON(), 'pillagers-campaign.json'));
-        document.querySelector('#fjord-import')!.addEventListener('change', event => action(async () => {
-            say('Importing campaign…');
+        document.querySelector('#fjord-import')!.addEventListener('change', event => {
             const input = event.target as HTMLInputElement, file = input.files?.[0];
             if (!file)
                 return;
-            this.shared.importJSON(await file.text());
-            resetProduction();
-            campaignFields();
-            input.value = '';
-            if (world)
-                await rebuildWorld();
-            say('Campaign imported, paused.');
-        }));
-        document.querySelector('#fjord-restart')!.addEventListener('click', () => action(async () => {
-            say('Restarting campaign…');
-            this.shared.restart(sameFounders.checked, weatherField.checked);
-            resetProduction();
-            campaignFields();
-            if (world)
-                await rebuildWorld();
-            this.session.setRunning(true);
-            say('Campaign restarted.');
-        }));
-        document.querySelector('#fjord-new')!.addEventListener('click', () => action(async () => {
-            say('Creating campaign…');
-            this.shared.newCampaign(Number(seedField.value), weatherField.checked);
-            resetProduction();
-            campaignFields();
-            if (world)
-                await rebuildWorld();
-            this.session.setRunning(true);
-            say('New campaign started.');
-        }));
+            setPlayback(false);
+            action(async () => {
+                say('Importing campaign…');
+                this.shared.importJSON(await file.text());
+                resetProduction();
+                campaignFields();
+                input.value = '';
+                if (world)
+                    await rebuildWorld();
+                say('Campaign imported, paused.');
+            });
+        });
+        document.querySelector('#fjord-restart')!.addEventListener('click', () => {
+            const completeAutoStart = beginAutoStart();
+            action(async () => {
+                say('Restarting campaign…');
+                this.shared.restart(sameFounders.checked, weatherField.checked);
+                resetProduction();
+                campaignFields();
+                if (world)
+                    await rebuildWorld();
+                completeAutoStart();
+                say('Campaign restarted.');
+            });
+        });
+        document.querySelector('#fjord-new')!.addEventListener('click', () => {
+            const completeAutoStart = beginAutoStart();
+            action(async () => {
+                say('Creating campaign…');
+                this.shared.newCampaign(Number(seedField.value), weatherField.checked);
+                resetProduction();
+                campaignFields();
+                if (world)
+                    await rebuildWorld();
+                completeAutoStart();
+                say('New campaign created.');
+            });
+        });
         const select = (kind: string, id: string) => {
             profile?.reopen();
             this.shared.select({ kind: kind as EntityKind, id });
@@ -268,17 +305,22 @@ export class FjordPlay {
                 select(button.dataset.kind!, button.dataset.id!);
         });
         refresh();
-        let previous = performance.now();
         let timer: number | undefined;
         const tickClock = () => {
             const now = performance.now(), elapsed = Math.min(now - previous, 1000);
             previous = now;
-            if (this.session.running)
-                action(() => this.session.elapse(elapsed));
+            if (!this.session.running || !canAdvance())
+                return;
+            const intent = clockIntent;
+            action(() => {
+                // Recheck at execution: this work may have waited behind an asynchronous command.
+                if (intent === clockIntent && this.session.running && canAdvance())
+                    this.session.elapse(elapsed);
+            });
         };
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                this.session.setRunning(false);
+                setPlayback(false);
                 refresh();
             }
             previous = performance.now();
@@ -293,6 +335,7 @@ export class FjordPlay {
         let weatherSignature = "";
         window.addEventListener('pagehide', () => {
             this.stopped = true;
+            setPlayback(false);
             clearInterval(timer);
             renderer.setAnimationLoop(null);
             observer?.disconnect();
@@ -319,43 +362,49 @@ export class FjordPlay {
         const cleared = new Set<string>();
         let groundSignature = "";
         const rebuildWorld = async (): Promise<void> => {
-            const blueprint = this.campaign.blueprint;
-            const revision = ++this.worldRevision;
-            const next = await createWorld(assets!, { mode: 'generated', blueprint,
-                settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
-                anisotropy: renderer.capabilities.getMaxAnisotropy() });
-            if (this.stopped || this.shared.transferring || revision !== this.worldRevision) {
-                next.dispose();
-                return;
+            sceneLoads++;
+            try {
+                const blueprint = this.campaign.blueprint;
+                const revision = ++this.worldRevision;
+                const next = await createWorld(assets!, { mode: 'generated', blueprint,
+                    settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
+                    anisotropy: renderer.capabilities.getMaxAnisotropy() });
+                if (this.stopped || this.shared.transferring || revision !== this.worldRevision) {
+                    next.dispose();
+                    return;
+                }
+                if (blueprint !== this.campaign.blueprint) {
+                    next.dispose();
+                    return rebuildWorld();
+                }
+                const anchor = next.attachments.find(item => item.key === 'boat')!;
+                this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
+                weatherTint?.dispose();
+                world?.dispose();
+                world = next;
+                weatherTint = new SeasonTint(next.root, next.terrain);
+                weatherSignature = "";
+                scene.add(next.root);
+                cleared.clear();
+                motion = new LivingWorldController(this.campaign.blueprint);
+                groundSignature = "";
+                lighting?.dispose();
+                lighting = new WorldLighting(scene, renderer, assets!, next.hearth, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
+                if (syncScene)
+                    await syncScene();
+                controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
+                const view = this.campaign.project(), positions = view.entities.map(e => e.transform).filter(p => p !== null);
+                if (!positions.length)
+                    positions.push({ x: next.center.x, y: next.center.y, z: next.center.z, rotation: 0, scale: 1 });
+                const minX = Math.min(...positions.map(p => p.x)), maxX = Math.max(...positions.map(p => p.x));
+                const minZ = Math.min(...positions.map(p => p.z)), maxZ = Math.max(...positions.map(p => p.z));
+                const x = (minX + maxX) / 2, z = (minZ + maxZ) / 2;
+                const span = Math.max(maxX - minX, maxZ - minZ, 40) + 16;
+                controller.setView({ position: [x + span * .6, span * .75, z - span * .65], target: [x, 2.6, z] });
+            } finally {
+                sceneLoads--;
+                previous = performance.now();
             }
-            if (blueprint !== this.campaign.blueprint) {
-                next.dispose();
-                return rebuildWorld();
-            }
-            const anchor = next.attachments.find(item => item.key === 'boat')!;
-            this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
-            weatherTint?.dispose();
-            world?.dispose();
-            world = next;
-            weatherTint = new SeasonTint(next.root, next.terrain);
-            weatherSignature = "";
-            scene.add(next.root);
-            cleared.clear();
-            motion = new LivingWorldController(this.campaign.blueprint);
-            groundSignature = "";
-            lighting?.dispose();
-            lighting = new WorldLighting(scene, renderer, assets!, next.hearth, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
-            if (syncScene)
-                await syncScene();
-            controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
-            const view = this.campaign.project(), positions = view.entities.map(e => e.transform).filter(p => p !== null);
-            if (!positions.length)
-                positions.push({ x: next.center.x, y: next.center.y, z: next.center.z, rotation: 0, scale: 1 });
-            const minX = Math.min(...positions.map(p => p.x)), maxX = Math.max(...positions.map(p => p.x));
-            const minZ = Math.min(...positions.map(p => p.z)), maxZ = Math.max(...positions.map(p => p.z));
-            const x = (minX + maxX) / 2, z = (minZ + maxZ) / 2;
-            const span = Math.max(maxX - minX, maxZ - minZ, 40) + 16;
-            controller.setView({ position: [x + span * .6, span * .75, z - span * .65], target: [x, 2.6, z] });
         };
         await rebuildWorld();
         if (this.stopped || this.shared.transferring)
@@ -434,8 +483,8 @@ export class FjordPlay {
         if (this.stopped || this.shared.transferring)
             return;
         // Start only after assets are ready; scene loading contributes no campaign time.
-        if (this.opened.autoStart)
-            this.session.setRunning(true);
+        sceneLoads--;
+        initialAutoStart?.();
         refresh();
         canvas.dataset.ready = 'true';
         previous = performance.now();
@@ -482,7 +531,7 @@ export class FjordPlay {
             time += delta;
             controller.update(delta);
             camera.updateMatrixWorld();
-            const running = this.session.running && !document.hidden && !this.shared.transferring && !this.stopped;
+            const running = this.session.running && canAdvance();
             const motionDelta = Math.min(elapsed, 1);
             if (running) activeTime += motionDelta;
             motion!.advance(motionDelta, running, !document.hidden);

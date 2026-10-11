@@ -105,9 +105,9 @@ test('maternal death ends the care group and releases its surviving donor',()=>{
  assert.deepEqual(core.reconstructState(core.serializeState(state)),state);
 });
 
-test('child death shortens configured five-Winter childcare to surviving siblings and ends an empty child group',()=>{
+test('child death shortens childcare to surviving siblings and ends an empty child group',()=>{
  const childCurve=[{minAge:0,chanceBps:10000},{minAge:2,chanceBps:0}];
- let input=core.createSettlement(41,{...quiet,childcareWinters:5,mortalityBands:childCurve});
+ let input=core.createSettlement(41,{...quiet,mortalityBands:childCurve});
  addResident(input,'sibling',1,['einar','liv']);
  const state=core.advanceWinter(input);
  assert.equal(state.personas.astrid.deathWinter,801);assert.equal(state.personas.sibling.deathWinter,null);
@@ -135,7 +135,7 @@ test('last farmer death removes the Farmyard function and exposes assigned cattl
 });
 
 test('a new birth cannot retain a former caregiver who resumed an occupation on the same boundary',()=>{
- let state=core.createSettlement(41,{...quiet,childcareWinters:5,mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:10000,birthCooldownWinters:4,careerReviewWinters:5});
+ let state=core.createSettlement(41,{...quiet,mortalityBands:[{minAge:0,chanceBps:0}],fertilityChanceBps:10000,birthCooldownWinters:4,careerReviewWinters:5});
  state.time.winter=804;state.stocks.food=1000;state.stocks.materials=0;
  addResident(state,'donor',20);
  state=core.applyCommand(state,{type:'AssignCaregiver',motherId:'liv',caregiverId:'donor'});

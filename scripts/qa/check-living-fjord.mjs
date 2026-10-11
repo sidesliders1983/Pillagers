@@ -80,7 +80,7 @@ try {
         return (Math.max(a, b) + .05) / (Math.min(a, b) + .05);
     });
     assert.ok(contrast >= 4.5, 'The restored profile must remain legible on the settlement theme');
-    assert.match(await page.locator('#character-profile .profile-identity').innerText(), new RegExp('^' + core.personaAge(state, 'founder-1') + ' years'));
+    assert.match(await page.locator('#character-profile .profile-identity').innerText(), new RegExp('^' + core.personaAge(state, 'founder-1') + ' Winters'));
     await page.locator('#character-profile details summary').click();
     assert.equal(await page.locator('#character-profile .profile-heritage strong').count(), 6);
     const positionBefore = await page.locator('#character-profile').evaluate(e => [e.style.left, e.style.top]);
@@ -178,7 +178,7 @@ try {
     assert.equal(await expandProfile.count(), 1, 'Selecting a different resident resets the popup to compact');
     await expandProfile.click();
     await page.locator('#character-profile .profile-identity').waitFor();
-    assert.match(await page.locator('#character-profile .profile-identity').innerText(), /^5 years/);
+    assert.match(await page.locator('#character-profile .profile-identity').innerText(), /^5 Winters/);
     await page.locator('#character-profile .profile-close').click();
     const grownBefore = await motion();
     await page.locator('#fjord-run').click();

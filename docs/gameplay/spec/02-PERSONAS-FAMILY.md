@@ -78,9 +78,11 @@ Rules:
 > **As a player, I want childbirth to create a labor trade-off, so that population growth has an economic cost and caregiver choices matter.**
 
 Rules:
-- mother normally produces 0% occupation output for 2 Winters in new campaigns; existing saves retain their configured period;
+- mother normally produces 0% occupation output for 5 Winters in new campaigns; existing saves retain their configured period;
 - later birth resets period;
 - eligible adult woman with no occupation may take over;
 - one caregiver per childcare situation;
 - caregiver produces no occupation output and is not fertility-eligible that Winter;
 - player may assign/replace caregiver.
+
+Birth cooldown and care are independent: a birth at Winter 801 blocks birth opportunities at 802 and 803, with the next opportunity at 804 subject to existing fertility rules. Care lasts until 806 unless a younger child renews the group. Transferring care preserves both endpoints and assigns only the remaining care period. Explicit saved care settings/endpoints, including two-Winter playtest saves, are preserved on load and saved-rule restarts.

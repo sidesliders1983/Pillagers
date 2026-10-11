@@ -8,13 +8,15 @@ The Living World Controller receives the canonical presentation projection, neve
 
 Opening or refreshing `/fjord-play`, creating a new campaign, and restarting a campaign automatically start the clock after scene loading. Explicit save loading/import remains paused. A 2D/3D handoff preserves the chosen running or paused state; leaving the tab still pauses it, with no offline catch-up. `/play` and Gameplay Lab retain their own startup defaults.
 
+Pending automatic starts are cancelled by the latest explicit clock/load/import intent, hidden-tab suspension or loss of route ownership. New/restart follows the same rule. Asset loading contributes no active time. Timer work rechecks visibility, ownership, scene readiness and the intent revision when it actually executes, so stale queued intervals are discarded. Returning to a suspended tab remains paused, with a reset time baseline.
+
 Movement advances in real seconds while the campaign runs and the tab is visible. Campaign pause, hidden tabs, route transfer and disposal stop it, without catch-up. Changing minutes per Winter changes the simulation clock only. Slow rendered frames use movement substeps up to 0.1 seconds, with a one-second maximum frame interval to avoid large jumps after stalls. The explicit +1 Winter button does not start ambient motion on a paused campaign.
 
 ## Visibility and care
 
 Children younger than five Winters stay indoors visually and remain selectable in the management list. Outdoor bodies appear at five, using current canonical age derived from birthWinter. This visibility rule changes no consumption, lineage or production rule. The actual active caregiver stays indoors; transferring care exchanges the donor/mother presentation immediately. Death and expeditions remove outdoor agents.
 
-New campaigns use two Winters of canonical childcare. Existing saves keep their configured duration and existing care endpoints; restarting such a campaign also retains its saved rules. Use New campaign from seed for fresh defaults. This is the sole simulation-default change in this slice.
+New campaigns use five Winters of canonical childcare and a separate two-complete-Winter birth cooldown. Existing saves keep their configured duration and existing care endpoints; restarting such a campaign also retains its saved rules. Use New campaign from seed for fresh defaults. The earlier two-Winter-care branch instruction was corrected on 11 October 2026; no silent conversion of explicit two-Winter playtest saves is performed. Care transfer preserves both endpoints; a younger child can renew care beyond an older child’s fifth birthday.
 
 ## Body and profile reuse
 
@@ -35,3 +37,5 @@ Residents reuse Walking/Idle_02, cattle Walk/Idle. Human pace is measured from t
 ## Verification
 
 Run node --test tests/living-fjord.test.mjs for the public projection/controller and Core save/replay seams. Run node scripts/qa/check-living-fjord.mjs against the LAN/dev server for actual DNA bodies, movement, heritage popup, touch, pause, replay and five-animal Farmyard reconciliation. Run node scripts/qa/capture-living-herd.mjs for close views at capacity plus one, actual within-yard movement, and return to capacity through the real Slaughter command. Browser evidence is in docs/qa/living-fjord. Existing character validation, build and the complete test suite remain required.
+
+Selection framing uses cached asset/body bounds translated to the live position. Exact heading/pose framing remains approximate; turning cattle and extreme DNA builds should be checked in the later polish/performance pass. Existing Fjordside Talk/Listen and prepared cattle Graze/HumanInteraction integration remains #95, with one movement/animation owner per actor; no new interaction system is introduced here.

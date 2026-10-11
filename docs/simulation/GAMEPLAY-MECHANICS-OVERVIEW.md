@@ -101,9 +101,9 @@ When a partnership forms, the new household seeks a residence.
 
 ## 5. Childcare
 
-After giving birth, the mother normally contributes 0% occupation production for two Winters while providing childcare in a new campaign. Existing saves retain their configured duration.
+After giving birth, the mother normally contributes 0% occupation production for five Winters while providing childcare in a new campaign. Existing saves retain their configured duration.
 
-A later birth resets the configured childcare period (two Winters in new campaigns).
+A later birth resets the configured childcare period (five Winters in new campaigns).
 
 If an adult woman without an occupation is available, she may take over childcare:
 - the mother can return to her occupation;
@@ -112,6 +112,8 @@ If an adult woman without an occupation is available, she may take over childcar
 - an active caregiver is not fertility-eligible that year.
 
 This creates an economic role for otherwise unoccupied adults and can make care allocation a direct player decision.
+
+Birth cooldown and care are independent: a birth at Winter 801 blocks birth opportunities at 802 and 803, with the next opportunity at 804 subject to existing fertility rules. Care lasts until 806 unless a younger child renews the group. Transferring care preserves both endpoints and assigns only the remaining care period. Explicit saved care settings/endpoints, including two-Winter playtest saves, are preserved on load and saved-rule restarts.
 
 ## 6. Occupations
 

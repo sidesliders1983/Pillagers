@@ -8,24 +8,31 @@ const quiet = {
     mortalityBands: [{ minAge: 0, chanceBps: 0 }],
     careerReviewWinters: 0,
 };
-test('new campaigns release actual childcare after two Winters while saved five-Winter rules remain canonical', () => {
+test('default care lasts five Winters while explicit two-Winter saves and restarts retain their rules', () => {
     let current = core.createSettlement(32, quiet);
     current = core.applyCommand(current, { type: 'AssignOccupation', personaId: 'liv', occupation: 'farmer' });
-    assert.equal(current.mechanics.config.childcareWinters, 2);
-    assert.equal(core.inspectWork(current, 'liv').reason, 'childcare');
-    current = core.applyCommand(current, { type: 'AdvanceWinter' });
-    assert.equal(core.inspectWork(current, 'liv').reason, 'childcare');
-    const save = core.serializeState(current);
-    current = core.applyCommand(current, { type: 'AdvanceWinter' });
+    assert.equal(current.mechanics.config.childcareWinters, 5);
+    assert.equal(current.mechanics.config.birthCooldownWinters, 2);
+    for (let winter = 0; winter < 5; winter++) {
+        assert.equal(core.inspectWork(current, 'liv').reason, 'childcare');
+        const save = core.serializeState(current);
+        current = core.applyCommand(current, { type: 'AdvanceWinter' });
+        assert.equal(core.serializeState(core.applyCommand(core.reconstructState(save), { type: 'AdvanceWinter' })), core.serializeState(current));
+    }
     assert.equal(core.inspectWork(current, 'liv').reason, null);
-    assert.equal(core.serializeState(core.applyCommand(core.reconstructState(save), { type: 'AdvanceWinter' })), core.serializeState(current));
-    let legacy = core.createSettlement(32, { ...quiet, childcareWinters: 5 });
-    legacy = core.applyCommand(legacy, { type: 'AssignOccupation', personaId: 'liv', occupation: 'farmer' });
-    legacy = core.reconstructState(core.serializeState(legacy));
+    let savedTwo = core.createSettlement(32, { ...quiet, childcareWinters: 2 });
+    savedTwo = core.applyCommand(savedTwo, { type: 'AssignOccupation', personaId: 'liv', occupation: 'farmer' });
+    const { GameplaySession } = load('../src/gameplay-lab/GameplaySession.ts');
+    const session = new GameplaySession();
+    session.loadJSON(core.serializeState(savedTwo));
+    assert.equal(session.snapshot().mechanics.people.liv.childcareUntilWinter, 802);
+    session.restartCampaign(true);
+    assert.equal(session.snapshot().mechanics.config.childcareWinters, 2);
+    assert.equal(session.snapshot().mechanics.config.birthCooldownWinters, 2);
     for (let winter = 0; winter < 2; winter++)
-        legacy = core.applyCommand(legacy, { type: 'AdvanceWinter' });
-    assert.equal(legacy.mechanics.config.childcareWinters, 5);
-    assert.equal(core.inspectWork(legacy, 'liv').reason, 'childcare');
+        savedTwo = core.applyCommand(core.reconstructState(core.serializeState(savedTwo)), { type: 'AdvanceWinter' });
+    assert.equal(savedTwo.mechanics.config.childcareWinters, 2);
+    assert.equal(core.inspectWork(savedTwo, 'liv').reason, null);
 });
 test('outdoor projection hides young children and the actual caregiver without removing canonical identity', () => {
     const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
@@ -49,7 +56,7 @@ test('outdoor projection hides young children and the actual caregiver without r
     state = core.applyCommand(state, { type: 'AdvanceWinter' });
     assert.equal(project().entities.find(e => e.id === 'liv').transform, null);
     state = core.applyCommand(state, { type: 'AdvanceWinter' });
-    assert.ok(project().entities.find(e => e.id === 'liv').transform);
+    assert.equal(project().entities.find(e => e.id === 'liv').transform, null, 'Cooldown expiry does not end five-Winter care.');
     for (let winter = 0; winter < 2; winter++)
         state = core.applyCommand(state, { type: 'AdvanceWinter' });
     assert.equal(project().entities.find(e => e.id === 'astrid').transform, null, 'Age four remains indoors.');
@@ -70,6 +77,9 @@ test('transferring canonical care immediately exchanges indoor visibility betwee
     const birth = state.events.find(e => e.type === 'ChildBorn');
     assert.ok(birth);
     const mother = birth.details.parentIds.find(id => state.personas[id].dna.sex === 'female');
+    const birthWinter = state.mechanics.people[mother].lastBirthWinter;
+    const careEnd = state.mechanics.people[mother].childcareUntilWinter;
+    assert.equal(careEnd, birthWinter + 5);
     const donor = Object.values(state.personas).find(p => p.id !== mother && p.dna.sex === 'female' && !core.isProvidingCare(state, p.id) && core.personaAge(state, p.id) >= 16).id;
     state = core.applyCommand(state, { type: 'AssignOccupation', personaId: donor, occupation: null });
     const world = generateWorld({ seed: 32 });
@@ -81,12 +91,40 @@ test('transferring canonical care immediately exchanges indoor visibility betwee
     };
     assert.equal(project().find(e => e.kind === 'persona' && e.id === mother).transform, null);
     state = core.applyCommand(state, { type: 'AssignCaregiver', motherId: mother, caregiverId: donor });
+    assert.equal(state.mechanics.people[mother].lastBirthWinter, birthWinter);
+    assert.equal(state.mechanics.people[mother].childcareUntilWinter, careEnd);
     assert.ok(project().find(e => e.kind === 'persona' && e.id === mother).transform);
     assert.equal(project().find(e => e.kind === 'persona' && e.id === donor).transform, null);
     state = core.reconstructState(core.serializeState(state));
     assert.equal(project().find(e => e.kind === 'persona' && e.id === donor).status.indoorReason, 'childcare');
     state = core.applyCommand(state, { type: 'AssignCaregiver', motherId: mother, caregiverId: null });
     assert.equal(project().find(e => e.kind === 'persona' && e.id === mother).transform, null);
+    assert.ok(project().find(e => e.kind === 'persona' && e.id === donor).transform);
+    state = core.applyCommand(state, { type: 'AssignCaregiver', motherId: mother, caregiverId: donor });
+    const birthsFor = id => state.events.filter(e => e.type === 'ChildBorn' && e.details.parentIds.includes(id)).length;
+    const originalBirths = birthsFor(mother);
+    for (let winter = 0; winter < 2; winter++) {
+        state = core.applyCommand(state, { type: 'AdvanceWinter' });
+        assert.equal(birthsFor(mother), originalBirths, 'Care transfer cannot bypass two complete cooldown Winters.');
+        assert.equal(birthsFor(donor), 0, 'An active caregiver cannot give birth.');
+        assert.equal(state.mechanics.people[mother].childcareUntilWinter, careEnd);
+        assert.equal(core.inspectWork(state, donor).reason, 'childcare');
+        assert.equal(project().find(e => e.kind === 'persona' && e.id === donor).transform, null);
+    }
+    assert.equal(core.inspectWork(state, mother).reason, null, 'The proxy releases the mother to ordinary work.');
+    state = core.applyCommand(core.reconstructState(core.serializeState(state)), { type: 'AdvanceWinter' });
+    assert.equal(birthsFor(mother), originalBirths + 1, 'A new birth opportunity starts only after the complete cooldown.');
+    assert.equal(state.mechanics.people[mother].lastBirthWinter, birthWinter + 3);
+    assert.equal(state.mechanics.people[mother].childcareUntilWinter, birthWinter + 8);
+    state.mechanics.config.fertilityChanceBps = 0;
+    for (let winter = 0; winter < 2; winter++)
+        state = core.applyCommand(state, { type: 'AdvanceWinter' });
+    assert.equal(core.personaAge(state, birth.personaId), 5);
+    assert.equal(core.inspectWork(state, donor).reason, 'childcare', 'The older fifth birthday cannot end a younger sibling care group.');
+    assert.equal(project().find(e => e.kind === 'persona' && e.id === donor).transform, null);
+    for (let winter = 0; winter < 3; winter++)
+        state = core.applyCommand(state, { type: 'AdvanceWinter' });
+    assert.equal(core.isProvidingCare(state, donor), false);
     assert.ok(project().find(e => e.kind === 'persona' && e.id === donor).transform);
 });
 test('Farmyard capacity splits stable assigned identities into an inner herd and nearby overflow', () => {

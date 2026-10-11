@@ -23,7 +23,7 @@
     "initial": [
       {
         "key": "household:founder-1",
-        "renderId": "b2a67ecb-5ae8-4441-a58c-0f98346014a9",
+        "renderId": "e1bd9be5-1605-4d09-8ddc-dc367ad968b9",
         "kind": "household",
         "id": "founder-1",
         "living": true,
@@ -54,7 +54,7 @@
       },
       {
         "key": "persona:founder-1",
-        "renderId": "f3ffa892-885e-45c2-b7cb-1536dacf79be",
+        "renderId": "d4939249-8b07-42ec-be7e-79f98a969642",
         "kind": "persona",
         "id": "founder-1",
         "living": true,
@@ -148,7 +148,7 @@
       },
       {
         "key": "persona:founder-4",
-        "renderId": "2fe68175-b188-484a-8575-e8eb1bcc3940",
+        "renderId": "3432fc48-e78f-4a70-87bb-772d07d52531",
         "kind": "persona",
         "id": "founder-4",
         "living": true,
@@ -242,7 +242,7 @@
       },
       {
         "key": "household:founder-2",
-        "renderId": "7e0d1201-7fc2-4f8b-93e9-44c99a36347e",
+        "renderId": "f1e0f74a-9cdf-49ef-8d42-088c8df5b4e5",
         "kind": "household",
         "id": "founder-2",
         "living": true,
@@ -273,7 +273,7 @@
       },
       {
         "key": "persona:founder-2",
-        "renderId": "8c7caaf7-047b-475c-a64b-c4e2e5144604",
+        "renderId": "145a5d1e-f049-4ce4-9d01-b9b839992dcd",
         "kind": "persona",
         "id": "founder-2",
         "living": true,
@@ -367,7 +367,7 @@
       },
       {
         "key": "household:founder-3",
-        "renderId": "a9c92692-4ae3-4ec7-a751-b7c029f58753",
+        "renderId": "c4ab1bf2-0135-4c73-b285-34a0ea1ac5ab",
         "kind": "household",
         "id": "founder-3",
         "living": true,
@@ -398,7 +398,7 @@
       },
       {
         "key": "persona:founder-3",
-        "renderId": "c8bceb27-f1d8-4305-a561-177aaafdadff",
+        "renderId": "88b50d01-c44c-4ed2-b7da-c398ac8060a3",
         "kind": "persona",
         "id": "founder-3",
         "living": true,
@@ -492,7 +492,7 @@
       },
       {
         "key": "persona:founder-10",
-        "renderId": "bfb3db12-552b-446a-8dce-8e37ced4e5c1",
+        "renderId": "883bbdcc-050f-4e5c-b3ad-12d2feacd4f9",
         "kind": "persona",
         "id": "founder-10",
         "living": true,
@@ -586,7 +586,7 @@
       },
       {
         "key": "household:founder-5",
-        "renderId": "e3f20938-1afe-40e4-8c1a-90fdf361450c",
+        "renderId": "8fb51679-6420-46ef-befd-42ae4b5307ec",
         "kind": "household",
         "id": "founder-5",
         "living": true,
@@ -617,7 +617,7 @@
       },
       {
         "key": "persona:founder-5",
-        "renderId": "79f33000-f59d-4e89-81f9-6548de17aac3",
+        "renderId": "14f9f09b-ef3a-42cd-aa5c-3dfdedcb68b8",
         "kind": "persona",
         "id": "founder-5",
         "living": true,
@@ -711,7 +711,7 @@
       },
       {
         "key": "household:founder-6",
-        "renderId": "b47b4738-c904-4bcf-a9fd-873ca0d476d2",
+        "renderId": "d4d706ef-c096-4345-a506-7245dc7a815f",
         "kind": "household",
         "id": "founder-6",
         "living": true,
@@ -742,7 +742,7 @@
       },
       {
         "key": "persona:founder-6",
-        "renderId": "030d4ee3-ec00-4754-b4dd-3ff7ee0d7d99",
+        "renderId": "d7f89632-7b7d-4473-9d81-b5f041a4dae0",
         "kind": "persona",
         "id": "founder-6",
         "living": true,
@@ -836,7 +836,7 @@
       },
       {
         "key": "household:founder-7",
-        "renderId": "99be515a-a76b-46fc-a428-9e5d3d83b38d",
+        "renderId": "5234d3f5-78b1-4db6-9067-fc0ab213c789",
         "kind": "household",
         "id": "founder-7",
         "living": true,
@@ -867,7 +867,7 @@
       },
       {
         "key": "persona:founder-7",
-        "renderId": "10758372-d25b-4c3d-bd73-d8413d3e6c0b",
+        "renderId": "cab8ce7e-e20f-43ae-9e43-d9ec79b7380c",
         "kind": "persona",
         "id": "founder-7",
         "living": true,
@@ -961,7 +961,7 @@
       },
       {
         "key": "persona:founder-9",
-        "renderId": "36d2a739-edec-4aa2-8135-448442692075",
+        "renderId": "f74f471e-5015-4ef6-afdd-bfcbe01ef6cc",
         "kind": "persona",
         "id": "founder-9",
         "living": true,
@@ -1055,7 +1055,7 @@
       },
       {
         "key": "household:founder-8",
-        "renderId": "5158e9ec-025a-4809-b0ed-93130f0fa807",
+        "renderId": "df37b6e4-2012-4aa8-aec9-b2b3a2cffd7b",
         "kind": "household",
         "id": "founder-8",
         "living": true,
@@ -1086,7 +1086,7 @@
       },
       {
         "key": "persona:founder-8",
-        "renderId": "fc5a866e-8678-4089-83ba-07a2c8797755",
+        "renderId": "12adc617-0951-45ca-8822-3e4b72a21114",
         "kind": "persona",
         "id": "founder-8",
         "living": true,
@@ -1180,7 +1180,7 @@
       },
       {
         "key": "cattle:cattle-1",
-        "renderId": "ed3af233-bf38-4876-9a02-f3c880771875",
+        "renderId": "667bee82-859d-41bf-bb0b-660955bb7f8a",
         "kind": "cattle",
         "id": "cattle-1",
         "living": true,
@@ -1224,7 +1224,7 @@
       },
       {
         "key": "cattle:cattle-2",
-        "renderId": "47d93deb-6471-4bc2-af05-bd3b424d22c7",
+        "renderId": "bf5ef432-f827-4ad1-9368-71bed37de7e7",
         "kind": "cattle",
         "id": "cattle-2",
         "living": true,
@@ -1268,7 +1268,7 @@
       },
       {
         "key": "cattle:cattle-3",
-        "renderId": "e4e48dda-fdbf-4552-8a1c-b7e496985292",
+        "renderId": "01cf2736-a2b9-4ae1-9ae7-532e841c7e16",
         "kind": "cattle",
         "id": "cattle-3",
         "living": true,
@@ -1312,7 +1312,7 @@
       },
       {
         "key": "longship:founding-longship",
-        "renderId": "2f43bcd2-315a-43a9-a81b-e46e39f6c76f",
+        "renderId": "17dc6542-9b85-48a9-874d-ca72686cdaf3",
         "kind": "longship",
         "id": "founding-longship",
         "living": true,
@@ -1491,34 +1491,34 @@
       {
         "key": "persona:founder-1",
         "kind": "persona",
-        "x": 33.8215098025114,
+        "x": 34.256265000797065,
         "y": 2.5999999046325684,
         "z": 34,
-        "rotation": -1.5707963267943537,
+        "rotation": -1.5707952665471772,
         "state": "Walk",
-        "speed": 0.8178112057011044,
+        "speed": 0.875284311185131,
         "walkable": true
       },
       {
         "key": "persona:founder-4",
         "kind": "persona",
-        "x": 36.60022474606937,
+        "x": 35.80303265320781,
         "y": 2.5999999046325684,
         "z": 34,
-        "rotation": 1.5707947182994588,
-        "state": "Walk",
-        "speed": 0.8502024329821434,
+        "rotation": -1.5707963250985002,
+        "state": "Idle",
+        "speed": 0,
         "walkable": true
       },
       {
         "key": "persona:founder-2",
         "kind": "persona",
-        "x": 34.9780556651723,
+        "x": 35,
         "y": 2.5999999046325684,
         "z": 18,
-        "rotation": -1.1566370614359174,
-        "state": "Walk",
-        "speed": 0.21944334827699113,
+        "rotation": 0.5,
+        "state": "Idle",
+        "speed": 0,
         "walkable": true
       },
       {
@@ -1546,56 +1546,56 @@
       {
         "key": "persona:founder-5",
         "kind": "persona",
-        "x": 50,
+        "x": 50.65787453545108,
         "y": 2.5999999046325684,
         "z": 34,
-        "rotation": -1.5707963264556173,
+        "rotation": -1.5701336719703223,
         "state": "Walk",
-        "speed": 0.2250398469070489,
+        "speed": 1.1404182151630784,
         "walkable": true
       },
       {
         "key": "persona:founder-6",
         "kind": "persona",
-        "x": 32.19607357758535,
+        "x": 33,
         "y": 2.5999999046325684,
         "z": 50,
         "rotation": -1.5707963267948966,
         "state": "Walk",
-        "speed": 0.8015372277685172,
+        "speed": 0.15250721793957708,
         "walkable": true
       },
       {
         "key": "persona:founder-7",
         "kind": "persona",
-        "x": 17.891160660541598,
+        "x": 18.41872478551109,
         "y": 2.5999999046325684,
         "z": 18,
-        "rotation": -1.5707963267813254,
+        "rotation": -1.5707698206019136,
         "state": "Walk",
-        "speed": 0.6616160972441648,
+        "speed": 1.1159761468029556,
         "walkable": true
       },
       {
         "key": "persona:founder-9",
         "kind": "persona",
-        "x": 18.882503598537042,
+        "x": 19.70180297819773,
         "y": 2.5999999046325684,
         "z": 18,
-        "rotation": -1.5707963267948966,
+        "rotation": -1.5707963267921823,
         "state": "Walk",
-        "speed": 0.5607462306709005,
+        "speed": 0.6044359570493179,
         "walkable": true
       },
       {
         "key": "persona:founder-8",
         "kind": "persona",
-        "x": 50.42369590162597,
+        "x": 51,
         "y": 2.5999999046325684,
         "z": 18,
-        "rotation": -1.5707698206019136,
-        "state": "Walk",
-        "speed": 1.1152565665184095,
+        "rotation": 0.5,
+        "state": "Idle",
+        "speed": 0,
         "walkable": true
       },
       {
@@ -1603,30 +1603,30 @@
         "kind": "cattle",
         "x": 29.939339828220177,
         "y": 2.5999999046325684,
-        "z": 3.475312077441826,
-        "rotation": 3.141592653589101,
-        "state": "Idle",
-        "speed": 0,
+        "z": 3.694817612818574,
+        "rotation": 3.1415926427698295,
+        "state": "Walk",
+        "speed": 0.3658425589612468,
         "walkable": true
       },
       {
         "key": "cattle:cattle-2",
         "kind": "cattle",
-        "x": 30.90028155574721,
+        "x": 30.98507480080348,
         "y": 2.5999999046325684,
         "z": 1.9393398282201788,
         "rotation": -1.5707963267948966,
-        "state": "Idle",
-        "speed": 0,
+        "state": "Walk",
+        "speed": 0.2231372150987855,
         "walkable": true
       },
       {
         "key": "cattle:cattle-3",
         "kind": "cattle",
-        "x": 33.466709256107144,
+        "x": 33.716925441343456,
         "y": 2.5999999046325684,
         "z": 1.9393398282201788,
-        "rotation": -1.570796326794788,
+        "rotation": -1.5707961147453526,
         "state": "Walk",
         "speed": 0.2780179835958932,
         "walkable": true
@@ -1635,7 +1635,7 @@
     "herd": [
       {
         "key": "persona:founder-1",
-        "renderId": "f3ffa892-885e-45c2-b7cb-1536dacf79be",
+        "renderId": "d4939249-8b07-42ec-be7e-79f98a969642",
         "kind": "persona",
         "id": "founder-1",
         "living": true,
@@ -1643,7 +1643,7 @@
         "age": 37,
         "indoorReason": null,
         "position": [
-          31.386636954540815,
+          32.960737576724135,
           2.5999999046325684,
           34
         ],
@@ -1655,14 +1655,14 @@
         ],
         "bounds": {
           "min": [
-            31.02682648090087,
-            2.589612257177698,
-            33.80418983439992
+            32.59147881442028,
+            2.5666492538012635,
+            33.603374364560224
           ],
           "max": [
-            31.771326455354316,
-            4.002767704771351,
-            34.307751187956775
+            33.349401463275385,
+            3.9662790900010476,
+            34.4584038668418
           ]
         },
         "appearance": {
@@ -1722,14 +1722,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 1.046307838576366,
+          "speed": 0.39262423275864,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "persona:founder-4",
-        "renderId": "2fe68175-b188-484a-8575-e8eb1bcc3940",
+        "renderId": "3432fc48-e78f-4a70-87bb-772d07d52531",
         "kind": "persona",
         "id": "founder-4",
         "living": true,
@@ -1737,7 +1737,7 @@
         "age": 40,
         "indoorReason": null,
         "position": [
-          37.80303265320781,
+          37.36170839023907,
           2.5999999046325684,
           34
         ],
@@ -1749,14 +1749,14 @@
         ],
         "bounds": {
           "min": [
-            37.415606661086514,
-            2.6047534641870547,
-            33.655675115655086
+            37.093056042268245,
+            2.6016627561090773,
+            33.55418480115468
           ],
           "max": [
-            38.20327956993631,
-            4.085517162368655,
-            34.54972267723268
+            37.72888366821187,
+            4.07712515844498,
+            34.525067964408855
           ]
         },
         "appearance": {
@@ -1815,15 +1815,15 @@
           }
         },
         "motion": {
-          "state": "Idle",
-          "speed": 0,
-          "clip": "Idle"
+          "state": "Walk",
+          "speed": 1.1858035149216846,
+          "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "household:founder-2",
-        "renderId": "7e0d1201-7fc2-4f8b-93e9-44c99a36347e",
+        "renderId": "f1e0f74a-9cdf-49ef-8d42-088c8df5b4e5",
         "kind": "household",
         "id": "founder-2",
         "living": true,
@@ -1854,7 +1854,7 @@
       },
       {
         "key": "persona:founder-2",
-        "renderId": "8c7caaf7-047b-475c-a64b-c4e2e5144604",
+        "renderId": "145a5d1e-f049-4ce4-9d01-b9b839992dcd",
         "kind": "persona",
         "id": "founder-2",
         "living": true,
@@ -1862,7 +1862,7 @@
         "age": 27,
         "indoorReason": null,
         "position": [
-          32.81189850646069,
+          34.071575912902816,
           2.5999999046325684,
           18
         ],
@@ -1874,14 +1874,14 @@
         ],
         "bounds": {
           "min": [
-            32.56787576667379,
-            2.6226078652189533,
-            17.62223745842683
+            33.80825958634404,
+            2.626233174226235,
+            17.653370718462448
           ],
           "max": [
-            33.1947050817212,
-            4.01851248389041,
-            18.46034529270977
+            34.427668369100914,
+            4.0375682641754995,
+            18.422652379821965
           ]
         },
         "appearance": {
@@ -1941,14 +1941,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 0.8464483267413383,
+          "speed": 0.5209484067441416,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "household:founder-3",
-        "renderId": "a9c92692-4ae3-4ec7-a751-b7c029f58753",
+        "renderId": "c4ab1bf2-0135-4c73-b285-34a0ea1ac5ab",
         "kind": "household",
         "id": "founder-3",
         "living": true,
@@ -1979,7 +1979,7 @@
       },
       {
         "key": "persona:founder-3",
-        "renderId": "c8bceb27-f1d8-4305-a561-177aaafdadff",
+        "renderId": "88b50d01-c44c-4ed2-b7da-c398ac8060a3",
         "kind": "persona",
         "id": "founder-3",
         "living": true,
@@ -1989,7 +1989,7 @@
         "position": [
           19,
           2.5999999046325684,
-          35.78192043342872
+          34.22138068678357
         ],
         "asset": "human",
         "scale": [
@@ -1999,14 +1999,14 @@
         ],
         "bounds": {
           "min": [
-            18.742966722552016,
-            2.6084222113112294,
-            35.51089744252487
+            18.768153077658447,
+            2.595607527270289,
+            33.95458267695815
           ],
           "max": [
-            19.268201532225582,
-            3.9409935517677983,
-            36.11353392651014
+            19.299085720418628,
+            3.917854375958274,
+            34.5500451735183
           ]
         },
         "appearance": {
@@ -2066,14 +2066,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 0.8142799924986434,
+          "speed": 0.8855227471342841,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "persona:founder-10",
-        "renderId": "bfb3db12-552b-446a-8dce-8e37ced4e5c1",
+        "renderId": "883bbdcc-050f-4e5c-b3ad-12d2feacd4f9",
         "kind": "persona",
         "id": "founder-10",
         "living": true,
@@ -2081,7 +2081,7 @@
         "age": 29,
         "indoorReason": null,
         "position": [
-          18.513376843623025,
+          19.8,
           2.5999999046325684,
           34
         ],
@@ -2093,14 +2093,14 @@
         ],
         "bounds": {
           "min": [
-            18.24156028274836,
-            2.592707768823217,
-            33.68037134349198
+            19.499260332223635,
+            2.6307371426919097,
+            33.65635029239265
           ],
           "max": [
-            18.774447311044703,
-            4.077056703200031,
-            34.364279970068
+            20.15254530817531,
+            4.048283904489702,
+            34.279530603953276
           ]
         },
         "appearance": {
@@ -2159,15 +2159,15 @@
           }
         },
         "motion": {
-          "state": "Walk",
-          "speed": 1.0562065872154007,
-          "clip": "Walk"
+          "state": "Idle",
+          "speed": 0,
+          "clip": "Idle"
         },
         "placeholder": false
       },
       {
         "key": "household:founder-5",
-        "renderId": "e3f20938-1afe-40e4-8c1a-90fdf361450c",
+        "renderId": "8fb51679-6420-46ef-befd-42ae4b5307ec",
         "kind": "household",
         "id": "founder-5",
         "living": true,
@@ -2198,7 +2198,7 @@
       },
       {
         "key": "persona:founder-5",
-        "renderId": "79f33000-f59d-4e89-81f9-6548de17aac3",
+        "renderId": "14f9f09b-ef3a-42cd-aa5c-3dfdedcb68b8",
         "kind": "persona",
         "id": "founder-5",
         "living": true,
@@ -2206,7 +2206,7 @@
         "age": 40,
         "indoorReason": null,
         "position": [
-          47.711506603710795,
+          49.0285304345913,
           2.5999999046325684,
           34
         ],
@@ -2218,14 +2218,14 @@
         ],
         "bounds": {
           "min": [
-            47.34094799932294,
-            2.6107195794329217,
-            33.767628641039494
+            48.65970803395008,
+            2.609241518582483,
+            33.76216313959062
           ],
           "max": [
-            48.10154177487292,
-            3.9840759088352966,
-            34.3132695373767
+            49.41618067122377,
+            3.984669020909018,
+            34.31554562851303
           ]
         },
         "appearance": {
@@ -2285,14 +2285,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 1.0633589552719327,
+          "speed": 0.39346764645675103,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "household:founder-6",
-        "renderId": "b47b4738-c904-4bcf-a9fd-873ca0d476d2",
+        "renderId": "d4d706ef-c096-4345-a506-7245dc7a815f",
         "kind": "household",
         "id": "founder-6",
         "living": true,
@@ -2323,7 +2323,7 @@
       },
       {
         "key": "persona:founder-6",
-        "renderId": "030d4ee3-ec00-4754-b4dd-3ff7ee0d7d99",
+        "renderId": "d7f89632-7b7d-4473-9d81-b5f041a4dae0",
         "kind": "persona",
         "id": "founder-6",
         "living": true,
@@ -2331,7 +2331,7 @@
         "age": 30,
         "indoorReason": null,
         "position": [
-          30.032416277103046,
+          31.473828082350778,
           2.5999999046325684,
           50
         ],
@@ -2343,14 +2343,14 @@
         ],
         "bounds": {
           "min": [
-            29.654081526199434,
-            2.6138777405661195,
-            49.7593600406414
+            31.09612141790022,
+            2.602284853840175,
+            49.65399411625514
           ],
           "max": [
-            30.41857895833521,
-            4.075371051103367,
-            50.37245843995211
+            31.875469889449406,
+            4.051366481926537,
+            50.32912260559782
           ]
         },
         "appearance": {
@@ -2410,14 +2410,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 0.41448536642516604,
+          "speed": 1.162922576183483,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "household:founder-7",
-        "renderId": "99be515a-a76b-46fc-a428-9e5d3d83b38d",
+        "renderId": "5234d3f5-78b1-4db6-9067-fc0ab213c789",
         "kind": "household",
         "id": "founder-7",
         "living": true,
@@ -2448,7 +2448,7 @@
       },
       {
         "key": "persona:founder-7",
-        "renderId": "10758372-d25b-4c3d-bd73-d8413d3e6c0b",
+        "renderId": "cab8ce7e-e20f-43ae-9e43-d9ec79b7380c",
         "kind": "persona",
         "id": "founder-7",
         "living": true,
@@ -2456,7 +2456,7 @@
         "age": 31,
         "indoorReason": null,
         "position": [
-          15.469089914550285,
+          17,
           2.5999999046325684,
           18
         ],
@@ -2468,14 +2468,14 @@
         ],
         "bounds": {
           "min": [
-            15.183771792611171,
-            2.628941810216863,
-            17.78897714226161
+            16.68210164165004,
+            2.591798692654517,
+            17.649939860888736
           ],
           "max": [
-            15.813889740488278,
-            4.0835492098891955,
-            18.252144618664627
+            17.349275986364002,
+            4.066045313266899,
+            18.305969432296735
           ]
         },
         "appearance": {
@@ -2535,14 +2535,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 1.1735408140363304,
+          "speed": 0.15324451047404888,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "persona:founder-9",
-        "renderId": "36d2a739-edec-4aa2-8135-448442692075",
+        "renderId": "f74f471e-5015-4ef6-afdd-bfcbe01ef6cc",
         "kind": "persona",
         "id": "founder-9",
         "living": true,
@@ -2550,7 +2550,7 @@
         "age": 28,
         "indoorReason": null,
         "position": [
-          16.76224657390266,
+          18.007134094737765,
           2.5999999046325684,
           18
         ],
@@ -2562,14 +2562,14 @@
         ],
         "bounds": {
           "min": [
-            16.42972980002215,
-            2.5849513125121883,
-            17.60245653416426
+            17.720002174943968,
+            2.6040416200174388,
+            17.75267926037155
           ],
           "max": [
-            17.105471259824615,
-            4.003835769794678,
-            18.46569484280288
+            18.3447733700044,
+            4.028491672737416,
+            18.233219108756707
           ]
         },
         "appearance": {
@@ -2629,14 +2629,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 0.3775342609733966,
+          "speed": 0.808333477718701,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "household:founder-8",
-        "renderId": "5158e9ec-025a-4809-b0ed-93130f0fa807",
+        "renderId": "df37b6e4-2012-4aa8-aec9-b2b3a2cffd7b",
         "kind": "household",
         "id": "founder-8",
         "living": true,
@@ -2667,7 +2667,7 @@
       },
       {
         "key": "persona:founder-8",
-        "renderId": "fc5a866e-8678-4089-83ba-07a2c8797755",
+        "renderId": "12adc617-0951-45ca-8822-3e4b72a21114",
         "kind": "persona",
         "id": "founder-8",
         "living": true,
@@ -2675,7 +2675,7 @@
         "age": 22,
         "indoorReason": null,
         "position": [
-          48.07415569434563,
+          49.56967715115489,
           2.5999999046325684,
           18
         ],
@@ -2687,14 +2687,14 @@
         ],
         "bounds": {
           "min": [
-            47.63608236032151,
-            2.596091901296818,
-            17.638200936769284
+            49.25712221581481,
+            2.600722330243223,
+            17.687166849739153
           ],
           "max": [
-            48.5394520481475,
-            4.0697088749283346,
-            18.311912599714677
+            49.90491322697827,
+            4.093897511713976,
+            18.398659417133786
           ]
         },
         "appearance": {
@@ -2754,14 +2754,14 @@
         },
         "motion": {
           "state": "Walk",
-          "speed": 0.5472758415309676,
+          "speed": 1.1619461043054884,
           "clip": "Walk"
         },
         "placeholder": false
       },
       {
         "key": "cattle:cattle-1",
-        "renderId": "ed3af233-bf38-4876-9a02-f3c880771875",
+        "renderId": "667bee82-859d-41bf-bb0b-660955bb7f8a",
         "kind": "cattle",
         "id": "cattle-1",
         "living": true,
@@ -2774,9 +2774,9 @@
         "parentIds": [],
         "grazingZone": "yard",
         "position": [
-          35.07804944646236,
-          2.7003996596929127,
-          25.495685689804215
+          35.10000000000004,
+          2.700164187938252,
+          25.48836883862499
         ],
         "asset": "adult-female",
         "scale": [
@@ -2786,26 +2786,26 @@
         ],
         "bounds": {
           "min": [
-            34.48336114843136,
-            2.7003996596929127,
-            24.620816790364906
+            34.505311701969035,
+            2.700164187938252,
+            24.61349993918568
           ],
           "max": [
-            35.60321237599233,
-            3.94426506122611,
-            26.364985212232952
+            35.625162929530006,
+            3.9440295894714494,
+            26.357668361053726
           ]
         },
         "motion": {
-          "state": "Walk",
-          "speed": 0.1463370235844987,
-          "clip": "Walk"
+          "state": "Idle",
+          "speed": 0,
+          "clip": "Idle"
         },
         "placeholder": false
       },
       {
         "key": "cattle:cattle-2",
-        "renderId": "47d93deb-6471-4bc2-af05-bd3b424d22c7",
+        "renderId": "bf5ef432-f827-4ad1-9368-71bed37de7e7",
         "kind": "cattle",
         "id": "cattle-2",
         "living": true,
@@ -2818,8 +2818,8 @@
         "parentIds": [],
         "grazingZone": "yard",
         "position": [
-          38.15000000000008,
-          2.700279717695617,
+          37.90000000000008,
+          2.701993718685425,
           22.249999999999993
         ],
         "asset": "adult-female",
@@ -2830,13 +2830,13 @@
         ],
         "bounds": {
           "min": [
-            37.55531170196907,
-            2.700279717695617,
+            37.30531170196907,
+            2.701993718685425,
             21.375131100560687
           ],
           "max": [
-            38.675162929530046,
-            3.944145119228814,
+            38.425162929530046,
+            3.945859120218622,
             23.119299522428733
           ]
         },
@@ -2849,7 +2849,7 @@
       },
       {
         "key": "cattle:cattle-3",
-        "renderId": "e4e48dda-fdbf-4552-8a1c-b7e496985292",
+        "renderId": "01cf2736-a2b9-4ae1-9ae7-532e841c7e16",
         "kind": "cattle",
         "id": "cattle-3",
         "living": true,
@@ -2893,7 +2893,7 @@
       },
       {
         "key": "longship:founding-longship",
-        "renderId": "2f43bcd2-315a-43a9-a81b-e46e39f6c76f",
+        "renderId": "17dc6542-9b85-48a9-874d-ca72686cdaf3",
         "kind": "longship",
         "id": "founding-longship",
         "living": true,
@@ -2924,7 +2924,7 @@
       },
       {
         "key": "building:house-1",
-        "renderId": "8a4d2bf7-5931-4bc8-babc-898b55564400",
+        "renderId": "8ec279c8-307e-4de4-9b34-504dd9265db1",
         "kind": "building",
         "id": "house-1",
         "living": true,
@@ -2957,7 +2957,7 @@
       },
       {
         "key": "cattle:cattle-4",
-        "renderId": "8ba2036e-7dc1-4466-851a-27c2a43b871a",
+        "renderId": "beb60d52-3dce-46e1-bdad-3eee92fbdfad",
         "kind": "cattle",
         "id": "cattle-4",
         "living": true,
@@ -3004,7 +3004,7 @@
       },
       {
         "key": "cattle:cattle-5",
-        "renderId": "83b0644c-b6c5-4d96-80a5-e50b14931aa9",
+        "renderId": "aea84bdd-5a29-4b7f-bd01-da48a7b86377",
         "kind": "cattle",
         "id": "cattle-5",
         "living": true,
@@ -3020,9 +3020,9 @@
         ],
         "grazingZone": "overflow",
         "position": [
-          30.5,
+          30.241228028978362,
           2.5999999046325684,
-          22.166115896363184
+          22.1
         ],
         "asset": "baby",
         "scale": [
@@ -3032,14 +3032,14 @@
         ],
         "bounds": {
           "min": [
-            30.21344892856465,
+            29.95467695754301,
             2.599999904632569,
-            21.719168981275672
+            21.65305308491249
           ],
           "max": [
-            30.775660823145603,
+            30.516888852123966,
             3.3200497937583178,
-            22.616234418472107
+            22.550118522108924
           ]
         },
         "motion": {
@@ -3221,34 +3221,34 @@
       {
         "key": "persona:founder-1",
         "kind": "persona",
-        "x": 31.386636954540815,
+        "x": 32.960737576724135,
         "y": 2.5999999046325684,
         "z": 34,
         "rotation": -1.5707963267948966,
         "state": "Walk",
-        "speed": 1.046307838576366,
+        "speed": 0.39262423275864,
         "walkable": true
       },
       {
         "key": "persona:founder-4",
         "kind": "persona",
-        "x": 37.80303265320781,
+        "x": 37.36170839023907,
         "y": 2.5999999046325684,
         "z": 34,
-        "rotation": 1.5707963267948966,
-        "state": "Idle",
-        "speed": 0,
+        "rotation": 1.5707963267948637,
+        "state": "Walk",
+        "speed": 1.1858035149216846,
         "walkable": true
       },
       {
         "key": "persona:founder-2",
         "kind": "persona",
-        "x": 32.81189850646069,
+        "x": 34.071575912902816,
         "y": 2.5999999046325684,
         "z": 18,
-        "rotation": -1.5707963267948966,
+        "rotation": -1.5707963183129148,
         "state": "Walk",
-        "speed": 0.8464483267413383,
+        "speed": 0.5209484067441416,
         "walkable": true
       },
       {
@@ -3256,96 +3256,96 @@
         "kind": "persona",
         "x": 19,
         "y": 2.5999999046325684,
-        "z": 35.78192043342872,
-        "rotation": 8.388607999999976e-18,
+        "z": 34.22138068678357,
+        "rotation": 0.0007999999999999999,
         "state": "Walk",
-        "speed": 0.8142799924986434,
+        "speed": 0.8855227471342841,
         "walkable": true
       },
       {
         "key": "persona:founder-10",
         "kind": "persona",
-        "x": 18.513376843623025,
+        "x": 19.8,
         "y": 2.5999999046325684,
         "z": 34,
-        "rotation": -1.5707963267948966,
-        "state": "Walk",
-        "speed": 1.0562065872154007,
+        "rotation": -1.5707963267270406,
+        "state": "Idle",
+        "speed": 0,
         "walkable": true
       },
       {
         "key": "persona:founder-5",
         "kind": "persona",
-        "x": 47.711506603710795,
+        "x": 49.0285304345913,
         "y": 2.5999999046325684,
         "z": 34,
         "rotation": -1.5707963267948966,
         "state": "Walk",
-        "speed": 1.0633589552719327,
+        "speed": 0.39346764645675103,
         "walkable": true
       },
       {
         "key": "persona:founder-6",
         "kind": "persona",
-        "x": 30.032416277103046,
+        "x": 31.473828082350778,
         "y": 2.5999999046325684,
         "z": 50,
         "rotation": -1.5707963267948966,
         "state": "Walk",
-        "speed": 0.41448536642516604,
+        "speed": 1.162922576183483,
         "walkable": true
       },
       {
         "key": "persona:founder-7",
         "kind": "persona",
-        "x": 15.469089914550285,
+        "x": 17,
         "y": 2.5999999046325684,
         "z": 18,
         "rotation": -1.5707963267948966,
         "state": "Walk",
-        "speed": 1.1735408140363304,
+        "speed": 0.15324451047404888,
         "walkable": true
       },
       {
         "key": "persona:founder-9",
         "kind": "persona",
-        "x": 16.76224657390266,
+        "x": 18.007134094737765,
         "y": 2.5999999046325684,
         "z": 18,
         "rotation": -1.5707963267948966,
         "state": "Walk",
-        "speed": 0.3775342609733966,
+        "speed": 0.808333477718701,
         "walkable": true
       },
       {
         "key": "persona:founder-8",
         "kind": "persona",
-        "x": 48.07415569434563,
+        "x": 49.56967715115489,
         "y": 2.5999999046325684,
         "z": 18,
-        "rotation": -1.5707963267948966,
+        "rotation": -1.570796326794788,
         "state": "Walk",
-        "speed": 0.5472758415309676,
+        "speed": 1.1619461043054884,
         "walkable": true
       },
       {
         "key": "cattle:cattle-1",
         "kind": "cattle",
-        "x": 35.07804944646236,
-        "y": 2.7003996596929127,
-        "z": 25.495685689804215,
-        "rotation": -1.5079644737230955,
-        "state": "Walk",
-        "speed": 0.1463370235844987,
+        "x": 35.10000000000004,
+        "y": 2.700164187938252,
+        "z": 25.48836883862499,
+        "rotation": 6.553599999999993e-13,
+        "state": "Idle",
+        "speed": 0,
         "walkable": true
       },
       {
         "key": "cattle:cattle-2",
         "kind": "cattle",
-        "x": 38.15000000000008,
-        "y": 2.700279717695617,
+        "x": 37.90000000000008,
+        "y": 2.701993718685425,
         "z": 22.249999999999993,
-        "rotation": 1.5707963332288783,
+        "rotation": 3.1415926427698295,
         "state": "Idle",
         "speed": 0,
         "walkable": true
@@ -3375,10 +3375,10 @@
       {
         "key": "cattle:cattle-5",
         "kind": "cattle",
-        "x": 30.5,
+        "x": 30.241228028978362,
         "y": 2.5999999046325684,
-        "z": 22.166115896363184,
-        "rotation": 0.0025132741228718336,
+        "z": 22.1,
+        "rotation": 1.5707963267948966,
         "state": "Walk",
         "speed": 0.21177943685097148,
         "walkable": true
@@ -3387,11 +3387,11 @@
     "quality": "low",
     "grown": {
       "population": 15,
-      "outdoors": 13,
+      "outdoors": 11,
       "rendered": [
         {
           "key": "persona:founder-1",
-          "renderId": "f3ffa892-885e-45c2-b7cb-1536dacf79be",
+          "renderId": "d4939249-8b07-42ec-be7e-79f98a969642",
           "kind": "persona",
           "id": "founder-1",
           "living": true,
@@ -3411,14 +3411,14 @@
           ],
           "bounds": {
             "min": [
-              34.72303077251056,
-              2.5836253269727814,
-              33.64062646230218
+              34.68362153112861,
+              2.620628727493017,
+              33.75127332551222
             ],
             "max": [
-              35.306121572413325,
-              3.970182294393596,
-              34.417395709125195
+              35.35295844346876,
+              3.9978040028722304,
+              34.31017173790972
             ]
           },
           "appearance": {
@@ -3485,7 +3485,7 @@
         },
         {
           "key": "persona:founder-4",
-          "renderId": "2fe68175-b188-484a-8575-e8eb1bcc3940",
+          "renderId": "3432fc48-e78f-4a70-87bb-772d07d52531",
           "kind": "persona",
           "id": "founder-4",
           "living": true,
@@ -3493,7 +3493,7 @@
           "age": 45,
           "indoorReason": null,
           "position": [
-            35.879243898180434,
+            36.2981809630042,
             2.5999999046325684,
             34
           ],
@@ -3505,14 +3505,14 @@
           ],
           "bounds": {
             "min": [
-              35.610591550209605,
-              2.6016627561090773,
-              33.55418480115468
+              35.91787824594975,
+              2.605417457542168,
+              33.828118556373255
             ],
             "max": [
-              36.24641917615323,
-              4.07712515844498,
-              34.525067964408855
+              36.70761028171455,
+              4.109879457730684,
+              34.27723985556677
             ]
           },
           "appearance": {
@@ -3572,14 +3572,14 @@
           },
           "motion": {
             "state": "Walk",
-            "speed": 0.5890108052109345,
+            "speed": 1.2511291428742746,
             "clip": "Walk"
           },
           "placeholder": false
         },
         {
           "key": "persona:founder-2",
-          "renderId": "8c7caaf7-047b-475c-a64b-c4e2e5144604",
+          "renderId": "145a5d1e-f049-4ce4-9d01-b9b839992dcd",
           "kind": "persona",
           "id": "founder-2",
           "living": true,
@@ -3599,14 +3599,14 @@
           ],
           "bounds": {
             "min": [
-              34.68303631908127,
-              2.5905548935992715,
-              17.7389162712102
+              34.61429086064232,
+              2.5973303022924106,
+              17.578642356611727
             ],
             "max": [
-              35.383991973244925,
-              4.026728592291585,
-              18.26746297143254
+              35.435873249123226,
+              4.002642651607586,
+              18.3828441431244
             ]
           },
           "appearance": {
@@ -3673,7 +3673,7 @@
         },
         {
           "key": "persona:founder-3",
-          "renderId": "c8bceb27-f1d8-4305-a561-177aaafdadff",
+          "renderId": "88b50d01-c44c-4ed2-b7da-c398ac8060a3",
           "kind": "persona",
           "id": "founder-3",
           "living": true,
@@ -3693,14 +3693,14 @@
           ],
           "bounds": {
             "min": [
-              18.689165098910205,
-              2.5753105350341867,
-              33.607267639560376
+              18.688798111830497,
+              2.592316676967551,
+              33.60564517165883
             ],
             "max": [
-              19.329696268553064,
-              3.898664277508097,
-              34.414959316674015
+              19.338657827111078,
+              3.8987607900062833,
+              34.39414718775357
             ]
           },
           "appearance": {
@@ -3766,102 +3766,8 @@
           "placeholder": false
         },
         {
-          "key": "persona:founder-10",
-          "renderId": "bfb3db12-552b-446a-8dce-8e37ced4e5c1",
-          "kind": "persona",
-          "id": "founder-10",
-          "living": true,
-          "sex": "female",
-          "age": 34,
-          "indoorReason": null,
-          "position": [
-            19.97408274560712,
-            2.5999999046325684,
-            34
-          ],
-          "asset": "human",
-          "scale": [
-            1,
-            1,
-            1
-          ],
-          "bounds": {
-            "min": [
-              19.667208290856756,
-              2.588973231414128,
-              33.806007054511994
-            ],
-            "max": [
-              20.329634502957507,
-              4.06875004184153,
-              34.29400591685998
-            ]
-          },
-          "appearance": {
-            "seed": 2478385007,
-            "height": 1.45502016258426,
-            "adultAge": 34,
-            "masculinity": 0.49,
-            "weightDeviation": 0.2576652766401049,
-            "age": 34,
-            "stage": "adult",
-            "appearance": {
-              "hairStyle": "medium",
-              "beardStyle": "none",
-              "color": "#986e55",
-              "greyAmount": 0
-            },
-            "appearanceFit": {
-              "hair": 1,
-              "beard": 1,
-              "clothing": 1
-            },
-            "motion": {
-              "cadence": 0.952,
-              "stride": 1,
-              "footfall": 0.8739999999999999
-            },
-            "weights": {
-              "Masculine": 0,
-              "Feminine": 0.01200000000000001,
-              "Breasts": 0.01200000000000001,
-              "Powerful": 0,
-              "Slight": 0,
-              "Agile": 0,
-              "Grounded": 0.48,
-              "Tall": 0.06258401076775037,
-              "Short": 0,
-              "Overweight": 0.15459916598406295,
-              "Underweight": 0,
-              "Age": 0,
-              "HeadWidth": -0.045102309621870514,
-              "HeadLength": 0.19795917528681456,
-              "Jaw": 0.22488077539019286,
-              "Nose": 0.057439178880304094,
-              "LegRatio": 0.15903852845076472,
-              "ShoulderSlope": 0.011595318838953973,
-              "Asymmetry": 0.17390785918105392,
-              "BellyJiggle": 0,
-              "BreastJiggle": 0,
-              "Child": 0,
-              "ChildPower": 0,
-              "ChildAgility": 0,
-              "FemininePower": 0,
-              "MasculineAgility": 0,
-              "TallSlight": 0,
-              "ElderHeavy": 0
-            }
-          },
-          "motion": {
-            "state": "Walk",
-            "speed": 0.7511799973651154,
-            "clip": "Walk"
-          },
-          "placeholder": false
-        },
-        {
           "key": "persona:founder-5",
-          "renderId": "79f33000-f59d-4e89-81f9-6548de17aac3",
+          "renderId": "14f9f09b-ef3a-42cd-aa5c-3dfdedcb68b8",
           "kind": "persona",
           "id": "founder-5",
           "living": true,
@@ -3881,14 +3787,14 @@
           ],
           "bounds": {
             "min": [
-              50.584633427610875,
-              2.596630846594185,
-              33.7428747462482
+              50.58434348268119,
+              2.620841406095189,
+              33.67176480782975
             ],
             "max": [
-              51.42281745795958,
-              3.975873591680197,
-              34.45012532295431
+              51.44361750315681,
+              3.96359241271265,
+              34.273992647907775
             ]
           },
           "appearance": {
@@ -3955,7 +3861,7 @@
         },
         {
           "key": "persona:founder-6",
-          "renderId": "030d4ee3-ec00-4754-b4dd-3ff7ee0d7d99",
+          "renderId": "d7f89632-7b7d-4473-9d81-b5f041a4dae0",
           "kind": "persona",
           "id": "founder-6",
           "living": true,
@@ -3963,7 +3869,7 @@
           "age": 35,
           "indoorReason": null,
           "position": [
-            51.82656021268083,
+            52.12407577782592,
             2.5999999046325684,
             34
           ],
@@ -3975,14 +3881,14 @@
           ],
           "bounds": {
             "min": [
-              51.511862416927215,
-              2.5836834311679047,
-              33.59957070792394
+              51.71398832450329,
+              2.609952517589238,
+              33.71881117618398
             ],
             "max": [
-              52.168980312738846,
-              4.039491075465539,
-              34.48852055039613
+              52.57749635123149,
+              4.058293072239066,
+              34.32127671467887
             ]
           },
           "appearance": {
@@ -4042,14 +3948,14 @@
           },
           "motion": {
             "state": "Walk",
-            "speed": 0.39069858242069916,
+            "speed": 0.9922340171194852,
             "clip": "Walk"
           },
           "placeholder": false
         },
         {
           "key": "persona:founder-7",
-          "renderId": "10758372-d25b-4c3d-bd73-d8413d3e6c0b",
+          "renderId": "cab8ce7e-e20f-43ae-9e43-d9ec79b7380c",
           "kind": "persona",
           "id": "founder-7",
           "living": true,
@@ -4069,14 +3975,14 @@
           ],
           "bounds": {
             "min": [
-              18.690112080080212,
-              2.6104313750716424,
-              17.586493683334933
+              18.656645322582655,
+              2.5889789861661416,
+              17.58276140649358
             ],
             "max": [
-              19.276679485325538,
-              4.054601755289585,
-              18.408832048382365
+              19.370738141347616,
+              4.052047399192652,
+              18.378383797690965
             ]
           },
           "appearance": {
@@ -4142,102 +4048,8 @@
           "placeholder": false
         },
         {
-          "key": "persona:founder-9",
-          "renderId": "36d2a739-edec-4aa2-8135-448442692075",
-          "kind": "persona",
-          "id": "founder-9",
-          "living": true,
-          "sex": "female",
-          "age": 33,
-          "indoorReason": null,
-          "position": [
-            20.731929491177223,
-            2.5999999046325684,
-            18
-          ],
-          "asset": "human",
-          "scale": [
-            1,
-            1,
-            1
-          ],
-          "bounds": {
-            "min": [
-              20.39769188309332,
-              2.581931991555434,
-              17.594035958645062
-            ],
-            "max": [
-              21.073996955248283,
-              4.00289926244135,
-              18.453766399739425
-            ]
-          },
-          "appearance": {
-            "seed": 1303375225,
-            "height": 1.4275201279949397,
-            "adultAge": 33,
-            "masculinity": 0.49,
-            "weightDeviation": 0.9150479812685259,
-            "age": 33,
-            "stage": "adult",
-            "appearance": {
-              "hairStyle": "long",
-              "beardStyle": "none",
-              "color": "#786052",
-              "greyAmount": 0
-            },
-            "appearanceFit": {
-              "hair": 1,
-              "beard": 1,
-              "clothing": 1
-            },
-            "motion": {
-              "cadence": 1.0012,
-              "stride": 1,
-              "footfall": 1.186
-            },
-            "weights": {
-              "Masculine": 0,
-              "Feminine": 0.01200000000000001,
-              "Breasts": 0.01200000000000001,
-              "Powerful": 0,
-              "Slight": 0,
-              "Agile": 0.01200000000000001,
-              "Grounded": 0,
-              "Tall": 0,
-              "Short": 0.04457097144664388,
-              "Overweight": 0.5490287887611155,
-              "Underweight": 0,
-              "Age": 0,
-              "HeadWidth": -0.2137914472259581,
-              "HeadLength": 0.1841816314961761,
-              "Jaw": -0.12080474901013076,
-              "Nose": -0.09026322662830352,
-              "LegRatio": 0.0418203161098063,
-              "ShoulderSlope": -0.14386117178946733,
-              "Asymmetry": 0.009808247652836144,
-              "BellyJiggle": 0,
-              "BreastJiggle": 0,
-              "Child": 0,
-              "ChildPower": 0,
-              "ChildAgility": 0,
-              "FemininePower": 0,
-              "MasculineAgility": 0,
-              "TallSlight": 0,
-              "ElderHeavy": 0
-            }
-          },
-          "motion": {
-            "state": "Walk",
-            "speed": 0.4538033921518425,
-            "clip": "Walk"
-          },
-          "placeholder": false
-        },
-        {
           "key": "persona:founder-8",
-          "renderId": "fc5a866e-8678-4089-83ba-07a2c8797755",
+          "renderId": "12adc617-0951-45ca-8822-3e4b72a21114",
           "kind": "persona",
           "id": "founder-8",
           "living": true,
@@ -4257,14 +4069,14 @@
           ],
           "bounds": {
             "min": [
-              50.655694861294734,
-              2.622942515587347,
-              17.629286032229647
+              50.56436835002923,
+              2.6277525891251616,
+              17.723476891226902
             ],
             "max": [
-              51.41034195301607,
-              4.065262878659427,
-              18.33595923136993
+              51.44161395648339,
+              4.084895146804434,
+              18.512674796404024
             ]
           },
           "appearance": {
@@ -4331,7 +4143,7 @@
         },
         {
           "key": "cattle:cattle-1",
-          "renderId": "ed3af233-bf38-4876-9a02-f3c880771875",
+          "renderId": "667bee82-859d-41bf-bb0b-660955bb7f8a",
           "kind": "cattle",
           "id": "cattle-1",
           "living": true,
@@ -4375,7 +4187,7 @@
         },
         {
           "key": "cattle:cattle-2",
-          "renderId": "47d93deb-6471-4bc2-af05-bd3b424d22c7",
+          "renderId": "bf5ef432-f827-4ad1-9368-71bed37de7e7",
           "kind": "cattle",
           "id": "cattle-2",
           "living": true,
@@ -4388,7 +4200,7 @@
           "parentIds": [],
           "grazingZone": "exposed",
           "position": [
-            31.514824364506616,
+            31.68325003694731,
             2.5999999046325684,
             1.9393398282201788
           ],
@@ -4400,12 +4212,12 @@
           ],
           "bounds": {
             "min": [
-              30.920136066475607,
+              31.0885617389163,
               2.5999999046325684,
               1.0644709287808733
             ],
             "max": [
-              32.039987294036585,
+              32.20841296647728,
               3.8438653061657657,
               2.808639350648918
             ]
@@ -4419,7 +4231,7 @@
         },
         {
           "key": "cattle:cattle-3",
-          "renderId": "e4e48dda-fdbf-4552-8a1c-b7e496985292",
+          "renderId": "01cf2736-a2b9-4ae1-9ae7-532e841c7e16",
           "kind": "cattle",
           "id": "cattle-3",
           "living": true,
@@ -4463,7 +4275,7 @@
         },
         {
           "key": "longship:founding-longship",
-          "renderId": "2f43bcd2-315a-43a9-a81b-e46e39f6c76f",
+          "renderId": "17dc6542-9b85-48a9-874d-ca72686cdaf3",
           "kind": "longship",
           "id": "founding-longship",
           "living": true,
@@ -4494,7 +4306,7 @@
         },
         {
           "key": "building:house-1",
-          "renderId": "ff8f2b1c-4d9a-4801-93db-71e515a08e8a",
+          "renderId": "c3effec3-c014-4473-9219-b7cc2934273a",
           "kind": "building",
           "id": "house-1",
           "living": true,
@@ -4527,7 +4339,7 @@
         },
         {
           "key": "building:house-2",
-          "renderId": "28f52e0e-0323-4e21-89f6-91b7a9d17313",
+          "renderId": "6845c355-1713-42a4-8437-4a818de1b950",
           "kind": "building",
           "id": "house-2",
           "living": true,
@@ -4560,7 +4372,7 @@
         },
         {
           "key": "building:house-3",
-          "renderId": "06c397f0-107e-4a82-bfe8-890d1e1b5ca5",
+          "renderId": "8f0b77d1-33ea-45f2-add9-7d69e3fc8280",
           "kind": "building",
           "id": "house-3",
           "living": true,
@@ -4593,7 +4405,7 @@
         },
         {
           "key": "building:house-4",
-          "renderId": "1692a99a-e98d-42a9-b803-f711b2510060",
+          "renderId": "45bef887-1795-479e-bcb7-68b621b16d8b",
           "kind": "building",
           "id": "house-4",
           "living": true,
@@ -4626,7 +4438,7 @@
         },
         {
           "key": "building:house-6",
-          "renderId": "f2adf766-3f5b-4f29-9fab-0fbdbda81273",
+          "renderId": "7d9905bc-2022-480f-812f-a594d7e59394",
           "kind": "building",
           "id": "house-6",
           "living": true,
@@ -4659,7 +4471,7 @@
         },
         {
           "key": "building:house-7",
-          "renderId": "16d1120d-eb4f-4121-8769-73a1ff577975",
+          "renderId": "cf361df7-af63-4463-b81b-8c44a5063b88",
           "kind": "building",
           "id": "house-7",
           "living": true,
@@ -4692,7 +4504,7 @@
         },
         {
           "key": "persona:persona-2",
-          "renderId": "cbad0eec-dde7-4662-806a-cf8ca2268d3c",
+          "renderId": "9f8810f1-98f2-4542-82d0-4181c2b226f3",
           "kind": "persona",
           "id": "persona-2",
           "living": true,
@@ -4700,7 +4512,7 @@
           "age": 5,
           "indoorReason": null,
           "position": [
-            38.64973736020454,
+            38.6,
             2.5999999046325684,
             34
           ],
@@ -4712,12 +4524,12 @@
           ],
           "bounds": {
             "min": [
-              38.348878702628404,
+              38.299141342423866,
               2.57928229653163,
               33.73433920987574
             ],
             "max": [
-              38.91452173291473,
+              38.86478437271019,
               3.4311340963118253,
               34.18518981128954
             ]
@@ -4778,15 +4590,15 @@
             }
           },
           "motion": {
-            "state": "Walk",
-            "speed": 0.19894944081816573,
-            "clip": "Walk"
+            "state": "Idle",
+            "speed": 0,
+            "clip": "Idle"
           },
           "placeholder": false
         },
         {
           "key": "persona:persona-1",
-          "renderId": "0c21d79f-edda-4015-a207-b0f3f4231370",
+          "renderId": "14ff653c-7423-4d3b-8757-456db0f9766b",
           "kind": "persona",
           "id": "persona-1",
           "living": true,
@@ -4880,7 +4692,7 @@
         },
         {
           "key": "persona:persona-3",
-          "renderId": "70020f9a-1533-44e8-9526-e005b99fc828",
+          "renderId": "435085f4-f3ce-47c9-91b7-7a3653ad7def",
           "kind": "persona",
           "id": "persona-3",
           "living": true,
@@ -4988,23 +4800,23 @@
         {
           "key": "persona:founder-4",
           "kind": "persona",
-          "x": 35.879243898180434,
+          "x": 36.2981809630042,
           "y": 2.5999999046325684,
           "z": 34,
-          "rotation": -1.570796269863835,
+          "rotation": -1.5706637958299816,
           "state": "Walk",
-          "speed": 0.5890108052109345,
+          "speed": 1.2511291428742746,
           "walkable": true
         },
         {
           "key": "persona:persona-2",
           "kind": "persona",
-          "x": 38.64973736020454,
+          "x": 38.6,
           "y": 2.5999999046325684,
           "z": 34,
-          "rotation": 1.5690830526720247,
-          "state": "Walk",
-          "speed": 0.19894944081816573,
+          "rotation": 0.5,
+          "state": "Idle",
+          "speed": 0,
           "walkable": true
         },
         {
@@ -5030,17 +4842,6 @@
           "walkable": true
         },
         {
-          "key": "persona:founder-10",
-          "kind": "persona",
-          "x": 19.97408274560712,
-          "y": 2.5999999046325684,
-          "z": 34,
-          "rotation": -1.5707961147453526,
-          "state": "Walk",
-          "speed": 0.7511799973651154,
-          "walkable": true
-        },
-        {
           "key": "persona:persona-1",
           "kind": "persona",
           "x": 22.6,
@@ -5060,17 +4861,6 @@
           "rotation": 0.5,
           "state": "Idle",
           "speed": 0,
-          "walkable": true
-        },
-        {
-          "key": "persona:founder-9",
-          "kind": "persona",
-          "x": 20.731929491177223,
-          "y": 2.5999999046325684,
-          "z": 18,
-          "rotation": -1.4879644737231008,
-          "state": "Walk",
-          "speed": 0.4538033921518425,
           "walkable": true
         },
         {
@@ -5109,12 +4899,12 @@
         {
           "key": "persona:founder-6",
           "kind": "persona",
-          "x": 51.82656021268083,
+          "x": 52.12407577782592,
           "y": 2.5999999046325684,
           "z": 34,
-          "rotation": -1.5707963226912196,
+          "rotation": -1.5707910255563,
           "state": "Walk",
-          "speed": 0.39069858242069916,
+          "speed": 0.9922340171194852,
           "walkable": true
         },
         {
@@ -5131,10 +4921,10 @@
         {
           "key": "cattle:cattle-2",
           "kind": "cattle",
-          "x": 31.514824364506616,
+          "x": 31.68325003694731,
           "y": 2.5999999046325684,
           "z": 1.9393398282201788,
-          "rotation": -1.5707963256931414,
+          "rotation": -1.5707952665471772,
           "state": "Walk",
           "speed": 0.3658425589612468,
           "walkable": true
