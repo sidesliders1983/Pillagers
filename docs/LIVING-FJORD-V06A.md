@@ -22,7 +22,7 @@ Residents use the verified Human_LOD2 through the same MeshyHumanFactory as Fjor
 
 The previously approved growth curve remains 40% at birth to 100% at sixteen. The body adapter's internal childhood height factor is compensated once by the outer scale, avoiding double shrinkage; its child anatomical proportions remain. Ages below five have no outdoor body. Body refits happen only when DNA/current age changes.
 
-Selecting an outdoor resident opens the shared Fjordside character profile content: name, current age, sex, five traits and heritage percentages. The three largest ancestries are visible; minor ancestries expand. The viewport-clamped profile follows the actor, hides offscreen or indoors, closes independently of management selection and cleans up its Escape listener on disposal.
+Selecting an outdoor resident opens a compact popup with only their stored name and a touch-sized ▲ button. ▲ expands the shared Fjordside character profile content; ▼ collapses it again: name, current age, sex, five traits and heritage percentages. Each different resident selection starts collapsed; expansion survives clock updates for the same resident. Expanded details scroll within a limited-height body so the scene stays visible. The three largest ancestries are visible; minor ancestries expand. The viewport-clamped profile follows the actor, hides offscreen or indoors, closes independently of management selection and cleans up its Escape listener on disposal.
 
 ## Routes and livestock
 

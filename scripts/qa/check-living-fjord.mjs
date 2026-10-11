@@ -61,6 +61,16 @@ try {
     await choose('persona', 'founder-1');
     await page.locator('#character-profile:not([hidden])').waitFor();
     assert.equal(await page.locator('#character-profile h2').innerText(), state.personas['founder-1'].name);
+    const expandProfile = page.getByRole('button', { name: 'Expand character profile', exact: true });
+    assert.equal(await expandProfile.count(), 1, 'A selected resident starts with a compact name popup');
+    assert.doesNotMatch(await page.locator('#character-profile').innerText(), /Character traits|Heritage profile/i);
+    assert.ok((await page.locator('#character-profile').boundingBox()).height <= 60);
+    await page.screenshot({ path: output + '/resident-name-popup.png', timeout: 120000 });
+    await expandProfile.click();
+    assert.match(await page.locator('#character-profile').innerText(), /Heritage profile/i);
+    await page.getByRole('button', { name: 'Collapse character profile', exact: true }).click();
+    assert.doesNotMatch(await page.locator('#character-profile').innerText(), /Character traits|Heritage profile/i);
+    await expandProfile.click();
     assert.match(await page.locator('#character-profile').innerText(), /Heritage profile/i);
     const contrast = await page.locator('#character-profile').evaluate(card => {
         const rgb = value => value.match(/[\d.]+/g).slice(0, 3).map(Number);
@@ -165,6 +175,9 @@ try {
     await choose('persona', five.id);
     await page.locator('#character-profile:not([hidden])').waitFor();
     assert.equal(await page.locator('#character-profile h2').innerText(), grown.personas[five.id].name);
+    assert.equal(await expandProfile.count(), 1, 'Selecting a different resident resets the popup to compact');
+    await expandProfile.click();
+    await page.locator('#character-profile .profile-identity').waitFor();
     assert.match(await page.locator('#character-profile .profile-identity').innerText(), /^5 years/);
     await page.locator('#character-profile .profile-close').click();
     const grownBefore = await motion();

@@ -7,6 +7,7 @@ export class FjordCharacterProfile {
     private identity = '';
     private signature = '';
     private dismissed = false;
+    private expanded = false;
     private escape = (event: KeyboardEvent) => { if (event.key === 'Escape')
         this.close(); };
     constructor(private camera: PerspectiveCamera, private canvas: HTMLCanvasElement) {
@@ -17,8 +18,15 @@ export class FjordCharacterProfile {
         for (const edge of ['top', 'right', 'bottom', 'left'])
             this.card.style.setProperty('--safe-' + edge, 'env(safe-area-inset-' + edge + ', 0px)');
         document.body.append(this.card);
-        this.card.addEventListener('click', event => { if ((event.target as HTMLElement).closest('.profile-close'))
-            this.close(); });
+        this.card.addEventListener('click', event => {
+            const target = event.target as HTMLElement;
+            if (target.closest('.profile-toggle')) {
+                this.expanded = !this.expanded;
+                this.updateExpansion();
+            }
+            else if (target.closest('.profile-close'))
+                this.close();
+        });
         window.addEventListener('keydown', this.escape);
     }
     select(entity: FjordEntity | undefined) {
@@ -26,6 +34,7 @@ export class FjordCharacterProfile {
         if (identity !== this.identity) {
             this.identity = identity;
             this.dismissed = false;
+            this.expanded = false;
             this.signature = '';
         }
         if (!entity?.dna || entity.kind !== 'persona' || !entity.transform || this.dismissed) {
@@ -34,9 +43,32 @@ export class FjordCharacterProfile {
         }
         const signature = JSON.stringify([entity.label, entity.dna]);
         if (signature !== this.signature) {
-            renderCharacterProfile(this.card, entity.dna, entity.label, entity.id);
+            const details = document.createElement('div');
+            details.id = 'fjord-profile-details';
+            details.className = 'profile-details';
+            renderCharacterProfile(details, entity.dna, entity.label, entity.id);
+            const name = details.querySelector('h2')!;
+            name.title = entity.label;
+            const header = document.createElement('div');
+            header.className = 'profile-header';
+            const toggle = document.createElement('button');
+            toggle.className = 'profile-toggle';
+            toggle.setAttribute('aria-controls', details.id);
+            header.append(name, toggle);
+            this.card.replaceChildren(header, details);
+            this.card.dataset.characterId = entity.id;
+            this.updateExpansion();
             this.signature = signature;
         }
+    }
+    private updateExpansion() {
+        this.card.classList.toggle('profile-expanded', this.expanded);
+        const details = this.card.querySelector<HTMLElement>('.profile-details')!;
+        const toggle = this.card.querySelector<HTMLButtonElement>('.profile-toggle')!;
+        details.hidden = !this.expanded;
+        toggle.textContent = this.expanded ? '▼' : '▲';
+        toggle.setAttribute('aria-expanded', String(this.expanded));
+        toggle.setAttribute('aria-label', this.expanded ? 'Collapse character profile' : 'Expand character profile');
     }
     update(bounds: Box3 | undefined) {
         if (!bounds || !this.identity || this.dismissed || !this.signature) {

@@ -8,6 +8,13 @@ The default seed-32 campaign now starts running after `/fjord-play` finishes loa
 
 Reproduce: `node scripts/qa/check-fjord-auto-start.mjs`. Explicit load/import stays paused; 2D/3D handoff retains the chosen clock state.
 
+## Compact resident popup follow-up
+
+The rerun of `check-living-fjord.mjs` verifies the new compact default: only the stored name and ▲ are visible, with a popup height at most 60 CSS pixels. ▲ opens the details, ▼ hides them, and a different resident selection starts compact again. Expanded heritage, moving anchors, touch selection, exact replay, sourced Farmyard and grown-population checks all passed with no page errors. Expanded details have an independently scrolling, limited-height body.
+
+- [Compact name popup](resident-name-popup.png)
+- [Expanded profile](resident-profile.png)
+
 ## Evidence
 
 - [Resident heritage card](resident-profile.png): stored name, current age, traits and three primary ancestries with expandable minor ancestries. The card follows the moving resident, remains inside the canvas/viewport and meets the script's 4.5:1 text-contrast assertion.
