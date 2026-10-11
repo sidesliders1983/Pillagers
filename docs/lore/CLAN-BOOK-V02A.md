@@ -1,6 +1,6 @@
 # Clan Book v0.2A
 
-Implementation for #103. The controlled baseline works without a model, paid service,
+Implementation for #103. The current continuity/composer layer is documented in [Clan Book v0.2B](CLAN-BOOK-V02B.md). The controlled baseline works without a model, paid service,
 external endpoint or player installation. The original Chronicle and Raw Events remain.
 Full narrative continuity/style work belongs to #104; optional model evaluation to #105.
 

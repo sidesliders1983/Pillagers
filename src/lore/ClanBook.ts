@@ -1,10 +1,17 @@
 import { housingName } from '../simulation/HousingNames';
 import { bookLedger } from './BookLedger';
 import { projectChronicle } from './Chronicle';
+import { planNarrative } from './NarrativePlan';
+import type { NarrativePlan } from './NarrativePlan';
+import { composeChapter, composeOpening } from './NarrativeComposer';
+import type { NarrativeParagraph } from './NarrativeComposer';
+import { narrativeMemory } from './NarrativeMemory';
+import type { NarrativeMemory } from './NarrativeMemory';
 import type { SimulationState } from '../simulation/SimulationCore';
 
 export type OpeningFacts = {
     complete: boolean;
+    residences?: { id: string; kind: 'house' | 'tent' }[];
     ledger?: ReturnType<typeof bookLedger>;
     period?: { from: { winter: number; tick: number }; through: { winter: number; tick: number } };
     demographics?: { eventId: string; type: string; time: { winter: number; tick: number }; details: Record<string, unknown>; personaId?: string }[];
@@ -25,14 +32,18 @@ export type BookChapter = {
     read: boolean;
     templateVersion: number;
     templateId: string;
+    plan?: NarrativePlan;
+    paragraphs?: NarrativeParagraph[];
+    composition?: { rejectedDuplicateBodies: number; usedFallback: boolean };
     checkpoint: { version: 1; time: { winter: number; tick: number }; eventEnd: number; identity: string };
 };
 export type BookData = {
     version: 1;
     id: string;
     narrativeSeed: number;
-    generatorVersion: 1;
-    styleVersion: 1;
+    memory?: NarrativeMemory;
+    generatorVersion: 1 | 2;
+    styleVersion: 1 | 2;
     originWinter: number;
     chapters: BookChapter[];
     cursor: { eventEnd: number; stocks: { food: number; materials: number }; time: { winter: number; tick: number } };
@@ -59,6 +70,8 @@ function validFacts(facts: OpeningFacts): boolean {
     if (!facts || typeof facts.complete !== 'boolean' ||
         !Array.isArray(facts.founders) || !Array.isArray(facts.households) ||
         !Array.isArray(facts.cattle) || !Array.isArray(facts.longships)) return false;
+    if (facts.residences !== undefined && (!Array.isArray(facts.residences) || facts.residences.some(residence =>
+        !residence || typeof residence.id !== 'string' || !['house', 'tent'].includes(residence.kind)))) return false;
     if (facts.founders.some(p => !p || typeof p.id !== 'string' || typeof p.name !== 'string')) return false;
     if (facts.households.some(h => !h || typeof (h as { id?: unknown }).id !== 'string' ||
         !Array.isArray((h as { memberIds?: unknown }).memberIds) ||
@@ -91,11 +104,12 @@ function validFacts(facts: OpeningFacts): boolean {
 
 export class ClanBook {
     private data: BookData;
-    constructor(state: SimulationState, fresh = true) {
+    constructor(state: SimulationState, fresh = true, suppliedSeed?: number) {
         const arrival = state.events.find(e => e.type === 'FoundingPartyLanded');
         const originWinter = arrival?.time.winter ?? state.events.find(e => e.type === 'ClanInitialized')?.time.winter ?? state.time.winter;
         const facts: OpeningFacts = fresh ? {
             complete: true,
+            residences: structuredClone(Object.values(state.residences)),
             founders: Object.values(state.personas).map(p => ({
                 id: p.id, name: p.name, occupation: p.occupation, partnerId: p.partnerId
             })),
@@ -111,62 +125,51 @@ export class ClanBook {
             complete: false, founders: [], households: [], cattle: [], longships: [],
             stocks: arrival?.details?.stocks as OpeningFacts['stocks'] ?? null
         };
-        const narrativeSeed = crypto.getRandomValues(new Uint32Array(1))[0];
-        const names = facts.founders.map(p => p.name).join(', ');
-        const recordedOpening = projectChronicle(state.events.filter(e => e.type.startsWith('Founding')))
-            .reverse().flatMap(w => w.entries).map(e => e.text).join(' ');
-        const openingLead = [
-            'In Winter ' + state.time.winter + ', the founding party arrived: ',
-            'The founding record of Winter ' + state.time.winter + ' named the arrivals: ',
-            'The party that arrived in Winter ' + state.time.winter + ' included '
-        ][narrativeSeed % 3];
-        const text = fresh ?
-            openingLead + names + '.\n\n' +
-            facts.founders.map(p => p.name + ' was a ' + (p.occupation ?? 'resident without an assigned occupation') + '.').join(' ') +
-            '\n\nThe party began with ' + facts.stocks!.food + ' Food, ' + facts.stocks!.materials +
-            ' Materials, ' + facts.cattle.length + ' cattle and ' + facts.longships.length + ' longship(s).' :
-            'This book begins from an imported campaign. The complete founding identities and households were not frozen in this save. Only recorded historical facts can be used; founding coverage is incomplete.\n\n' + recordedOpening;
+        const narrativeSeed = suppliedSeed ?? crypto.getRandomValues(new Uint32Array(1))[0];
+        if (!Number.isInteger(narrativeSeed) || narrativeSeed < 0 || narrativeSeed > 0xffffffff)
+            throw new Error('Narrative seed must be uint32.');
+        const openingSources = state.events.filter(event => event.type.startsWith('Founding')).map(event => event.id);
+        const paragraphs = fresh ? composeOpening(facts, state.time.winter, narrativeSeed, openingSources) : undefined;
+        const text = paragraphs ? paragraphs.map(paragraph => paragraph.text).join('\n\n') :
+            'This book began from an imported campaign. Its founding details were incomplete.\n\n' +
+            projectChronicle(state.events.filter(event => event.type.startsWith('Founding')))
+                .reverse().flatMap(group => group.entries).map(entry => entry.text).join(' ');
         this.data = {
             version: 1, id: Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(16).padStart(8, '0')).join('-'), narrativeSeed,
-            generatorVersion: 1, styleVersion: 1,
+            generatorVersion: 2, styleVersion: 2,
             originWinter,
             cursor: { eventEnd: state.events.length, stocks: { ...state.stocks }, time: { ...state.time } },
             nextWinter: originWinter + (Math.floor((state.time.winter - originWinter) / 5) + 1) * 5,
             chapters: [{ index: 0, milestoneIndex: 0, title: 'The founding', text, facts,
                 sourceEventIds: state.events.filter(e => e.type.startsWith('Founding')).map(e => e.id),
-                notified: !fresh, read: false, templateVersion: 1, templateId: 'clan-book.opening.v1',
+                notified: !fresh, read: false, templateVersion: fresh ? 2 : 1,
+                templateId: fresh ? 'clan-book.opening.v2' : 'clan-book.partial-opening.v1',
+                ...(paragraphs ? { paragraphs } : {}),
                 checkpoint: { version: 1, time: { ...state.time }, eventEnd: state.events.length,
                     identity: historyIdentity(JSON.stringify(state)) } }]
         };
+        this.data.memory = narrativeMemory(this.data.chapters, state.events);
     }
     get nextWinter(): number { return this.data.nextWinter; }
     fork(state: SimulationState): ClanBook {
-        const next = new ClanBook(state, false);
+        const next = new ClanBook(state, false, this.data.narrativeSeed);
         next.data = this.snapshot();
         return next;
     }
     closeCheckpoint(state: SimulationState): void {
         if (state.time.winter !== this.data.nextWinter || state.time.tick !== 0)
             throw new Error('Clan Book requires a closed five-Winter checkpoint.');
+        this.data.generatorVersion = 2;
+        this.data.styleVersion = 2;
         const cursor = this.data.cursor;
         const events = state.events.slice(cursor.eventEnd);
         const ledger = bookLedger(events, cursor.stocks, state.stocks);
-        const completeAccounting = ledger.food.complete && ledger.materials.complete;
-        const text = 'The records closed at Winter ' + state.time.winter + '.\n\n' +
-            projectChronicle(events).reverse().flatMap(w => w.entries).filter(e => !e.routine)
-                .slice(0, 10).map(e => e.text).join(' ') + '\n\n' +
-            (completeAccounting ? 'Residents produced ' + ledger.food.residentProduction + ' Food and the herd produced ' +
-            ledger.food.cattleProduction + ' Food. ' + ledger.food.spending +
-            ' Food was consumed or spent; ' + ledger.food.unmetNeed + ' Food of need went unmet. ' +
-            ledger.materials.production + ' Materials were produced and ' + ledger.materials.spending +
-            ' Materials were spent. The remaining stocks were ' + state.stocks.food +
-            ' Food and ' + state.stocks.materials + ' Materials.' :
-            'Resource accounting for this observed interval is incomplete. The factual overview shows known recorded quantities; missing quantities are not assumed to be zero.');
         this.data.chapters.push({
+            plan: planNarrative(state.events, cursor.eventEnd),
             index: this.data.chapters.length,
             milestoneIndex: (state.time.winter - this.data.originWinter) / 5,
             title: 'Records ending Winter ' + state.time.winter,
-            text, templateVersion: 1, templateId: 'clan-book.checkpoint.v1', notified: false, read: false,
+            text: '', templateVersion: 2, templateId: 'clan-book.checkpoint.v2', notified: false, read: false,
             sourceEventIds: events.map(e => e.id),
             checkpoint: { version: 1, time: { ...state.time }, eventEnd: state.events.length,
                 identity: historyIdentity(JSON.stringify(state)) },
@@ -178,6 +181,27 @@ export class ClanBook {
                     .map(e => ({ eventId: e.id, type: e.type, time: { ...e.time }, details: structuredClone(e.details ?? {}),
                         ...(e.personaId ? { personaId: e.personaId } : {}) })) }
         });
+        const chapter = this.data.chapters.at(-1)!;
+        const previous = this.data.chapters.slice(0, -1);
+        const publishedBodies = new Set(previous.map(published => published.text));
+        chapter.composition = { rejectedDuplicateBodies: 0, usedFallback: false };
+        for (let attempt = 0; attempt < 24; attempt++) {
+            chapter.paragraphs = composeChapter(state.events, chapter.plan!, chapter.facts, previous,
+                (this.data.narrativeSeed + attempt) >>> 0);
+            chapter.text = chapter.paragraphs.map(paragraph => paragraph.text).join('\n\n');
+            if (!publishedBodies.has(chapter.text)) break;
+            chapter.composition.rejectedDuplicateBodies++;
+        }
+        if (publishedBodies.has(chapter.text)) {
+            chapter.composition.usedFallback = true;
+            const paragraph: NarrativeParagraph = { templateId: 'clan-book.bounded-fallback', templateVersion: 2,
+                text: 'Chapter ' + chapter.index + ' covered the observed interval from Winter ' +
+                    chapter.facts.period!.from.winter + ' to Winter ' + chapter.facts.period!.through.winter + '.',
+                sourceEventIds: [], factRefs: ['period', 'chapter.index'] };
+            chapter.paragraphs!.push(paragraph);
+            chapter.text += '\n\n' + paragraph.text;
+        }
+        this.data.memory = narrativeMemory(this.data.chapters, state.events);
         this.data.cursor = { eventEnd: state.events.length, stocks: { ...state.stocks }, time: { ...state.time } };
         this.data.nextWinter += 5;
     }
@@ -194,8 +218,17 @@ export class ClanBook {
     }
     restore(saved: BookSave, state: SimulationState): void {
         const eventIds = new Set(state.events.map(e => e.id));
-        if (saved.version !== 1 || saved.generatorVersion !== 1 || saved.styleVersion !== 1 || saved.canonicalIdentity !== historyIdentity(JSON.stringify(state)) ||
-            typeof saved.id !== 'string' || !Number.isSafeInteger(saved.narrativeSeed) ||
+        const eventPositions = new Map(state.events.map((event, index) => [event.id, index]));
+        const validReference = (reference: unknown, chapterIndex: number): boolean => {
+            if (typeof reference !== 'string') return false;
+            if (['founders', 'households', 'residences', 'stocks', 'cattle', 'longships',
+                'period', 'demographics', 'ledger', 'chapter.index'].includes(reference)) return true;
+            const callback = /^chapters\.(\d+)\.ledger\.food$/.exec(reference);
+            const index = callback ? Number(callback[1]) : -1;
+            return index >= 0 && index < chapterIndex && !!saved.chapters[index]?.facts.ledger?.food.complete;
+        };
+        if (saved.version !== 1 || ![1, 2].includes(saved.generatorVersion) || ![1, 2].includes(saved.styleVersion) || saved.canonicalIdentity !== historyIdentity(JSON.stringify(state)) ||
+            typeof saved.id !== 'string' || !Number.isSafeInteger(saved.narrativeSeed) || saved.narrativeSeed < 0 || saved.narrativeSeed > 0xffffffff ||
             !Number.isSafeInteger(saved.originWinter) || saved.originWinter > state.time.winter || !Number.isSafeInteger(saved.nextWinter) ||
             saved.nextWinter <= state.time.winter || !saved.cursor ||
             !Number.isSafeInteger(saved.cursor.eventEnd) || saved.cursor.eventEnd < 0 ||
@@ -209,8 +242,21 @@ export class ClanBook {
                 !Number.isSafeInteger(c.checkpoint.eventEnd) || c.checkpoint.eventEnd < 0 ||
                 c.checkpoint.eventEnd > state.events.length || !validTime(c.checkpoint.time, state) || !Array.isArray(c.sourceEventIds) ||
                 c.sourceEventIds.some(id => !eventIds.has(id)) ||
-                typeof c.notified !== 'boolean' || typeof c.read !== 'boolean'))
+                typeof c.notified !== 'boolean' || typeof c.read !== 'boolean' ||
+                c.paragraphs !== undefined && (!Array.isArray(c.paragraphs) || c.paragraphs.some(paragraph =>
+                    !paragraph || typeof paragraph.text !== 'string' || typeof paragraph.templateId !== 'string' ||
+                    paragraph.templateVersion !== 2 || !Array.isArray(paragraph.factRefs) ||
+                    !paragraph.factRefs.every(reference => validReference(reference, i)) ||
+                    !Array.isArray(paragraph.sourceEventIds) || paragraph.sourceEventIds.some(id =>
+                        (eventPositions.get(id) ?? Infinity) >= c.checkpoint.eventEnd))) ||
+                c.plan !== undefined && JSON.stringify(c.plan) !== JSON.stringify(planNarrative(
+                    state.events.slice(0, c.checkpoint.eventEnd),
+                    i > 0 ? saved.chapters[i - 1].checkpoint.eventEnd : 0
+                ))))
             throw new Error('Clan Book does not match this campaign history.');
+        if (saved.memory !== undefined && JSON.stringify(saved.memory) !==
+            JSON.stringify(narrativeMemory(saved.chapters, state.events.slice(0, saved.cursor.eventEnd))))
+            throw new Error('Clan Book planning memory does not match this campaign history.');
         const { canonicalIdentity: _identity, ...data } = saved;
         this.data = structuredClone(data);
     }

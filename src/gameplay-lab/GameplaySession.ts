@@ -9,9 +9,9 @@ export class GameplaySession {
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32) {
+    constructor(seed = 32, narrativeSeed?: number) {
         this.state = createCampaign(seed);
-        this.book = new ClanBook(this.state);
+        this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     snapshot(): SimulationState {
         return structuredClone(this.state);

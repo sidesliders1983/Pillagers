@@ -87,7 +87,13 @@ export class ClanBookReader {
             if (event.key === 'Escape') { event.preventDefault(); this.close(); }
         });
         document.addEventListener('click', this.menuClick);
+        window.addEventListener('resize', this.measureBounds);
     }
+    private measureBounds = (): void => {
+        const hud = document.querySelector('#fjord-header, #play-hud');
+        const top = Math.max(12, hud?.getBoundingClientRect().bottom ?? 168) + 12;
+        this.panel.style.setProperty('--book-top', top + 'px');
+    };
     private menuClick = (event: MouseEvent): void => {
         if ((event.target as Element).closest('#clan-book-open')) this.open();
     };
@@ -118,6 +124,7 @@ export class ClanBookReader {
         this.owner.session.book.notifyPending();
         this.panel.hidden = false;
         this.paint();
+        this.measureBounds();
         this.panel.querySelector<HTMLElement>('#clan-book-close')!.focus();
     }
     private paint(): void {
@@ -146,6 +153,7 @@ export class ClanBookReader {
     }
     dispose(): void {
         document.removeEventListener('click', this.menuClick);
+        window.removeEventListener('resize', this.measureBounds);
         this.panel.remove();
     }
 }

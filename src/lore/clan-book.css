@@ -2,10 +2,10 @@
     position: fixed;
     right: max(12px, env(safe-area-inset-right));
     bottom: max(12px, env(safe-area-inset-bottom));
-    z-index: 30;
+    z-index: 400;
     box-sizing: border-box;
     width: min(560px, calc(100vw - 24px));
-    max-height: calc(100dvh - 180px);
+    max-height: calc(100dvh - var(--book-top, 180px) - 24px);
     overflow: auto;
     overscroll-behavior: contain;
     padding: 18px;
@@ -17,7 +17,19 @@
     font: 15px/1.5 system-ui, sans-serif;
 }
 #clan-book-reader[hidden] { display: none; }
-#clan-book-reader header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+#clan-book-reader header {
+    position: sticky;
+    top: -18px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: -18px -18px 12px;
+    padding: 12px 18px;
+    background: #192c26;
+    border-bottom: 1px solid #506154;
+}
 #clan-book-reader h2 { margin: 0 0 8px; }
 #clan-book-reader button, #clan-book-reader select {
     min-height: 44px;
