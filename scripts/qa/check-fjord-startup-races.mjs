@@ -7,6 +7,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/Devoteam
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5180';
 const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 const observations = [], errors = [];
+const output = process.env.QA_OUTPUT || 'docs/qa/living-fjord';
 async function exportCore(page) {
     const campaign = page.getByText('Campaign', { exact: true });
     if (!await page.locator('#fjord-export-core').isVisible()) await campaign.click();
@@ -149,8 +150,8 @@ try {
     record('paused-2D-to-3D-handoff', transferred, await exportCore(handoff));
     await handoff.close();
     assert.deepEqual(errors, []);
-    await mkdir('docs/qa/living-fjord', { recursive: true });
-    await writeFile('docs/qa/living-fjord/startup-races.json', JSON.stringify({ observations, errors, visibility: 'Controlled document.hidden with real visibilitychange handler; actual HTTP asset requests held and released.' }, null, 2) + '\n');
+    await mkdir(output, { recursive: true });
+    await writeFile(output + '/startup-races.json', JSON.stringify({ observations, errors, visibility: 'Controlled document.hidden with real visibilitychange handler; actual HTTP asset requests held and released.' }, null, 2) + '\n');
     console.log('PASS: all eight delayed-loading and paused-handoff scenarios preserve canonical state.');
 } finally {
     await browser.close();

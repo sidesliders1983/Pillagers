@@ -65,6 +65,8 @@ export function clearBuildingPlotNature(root: Object3D, plot: BuildingPlot) {
                 mesh.getMatrixAt(source,instance);
                 mesh.setMatrixAt(index,instance);
             });
+            if (mesh.userData.sourceAnchors)
+                mesh.userData.sourceAnchors = kept.map(index => mesh.userData.sourceAnchors[index]);
             mesh.count = kept.length;
             mesh.instanceMatrix.needsUpdate = true;
             mesh.computeBoundingBox();

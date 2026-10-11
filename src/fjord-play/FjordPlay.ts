@@ -415,6 +415,7 @@ export class FjordPlay {
             this.queued = true;
             if (sceneWork)
                 return sceneWork;
+            sceneLoads++;
             sceneWork = (async () => {
                 do {
                     this.queued = false;
@@ -459,6 +460,7 @@ export class FjordPlay {
                     sceneEntities = view.entities;
                     await layer!.sync(view.entities);
                     motion!.reconcile(view.entities, view.ground);
+                    motion!.setStandingTrees(world!.standingTrees());
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
                     if (this.stopped || this.shared.transferring)
@@ -469,12 +471,14 @@ export class FjordPlay {
                     canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
-                        ...assets!.diagnostics, ...models!.diagnostics,
-                        'Verified Fjordside DNA body and source Idle/Walk clips; clothing and hair remain unequipped.',
+                        ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
+                        'Reused Fjordside DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
                         'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                         'Geography: ' + view.layout.geographyId].join('\n');
                 } while (this.queued && !this.stopped);
             })().finally(() => {
+                sceneLoads--;
+                previous = performance.now();
                 sceneWork = undefined;
             });
             return sceneWork;

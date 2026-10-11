@@ -1,7 +1,14 @@
+import { cattleVariants } from '../characters/CattlePresentation';
+import { passConversation, passNeighbours } from '../systems/ResidentPassing';
+import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
 import type { FjordEntity } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+type OccupationClip = 'Farm' | 'Attack' | 'Doze';
+type Visit = { target: Point2; face: Point2; source: string; phase: 'approach' | 'activity' | 'home';
+    clip: OccupationClip | 'Idle'; remaining: number; travelRemaining?: number;
+    checkpoint?: Point2; checkpointSeconds?: number };
 type Agent = {
     key: string;
     kind: string;
@@ -9,21 +16,33 @@ type Agent = {
     y: number;
     z: number;
     rotation: number;
-    state: 'Idle' | 'Walk';
+    state: 'Idle' | 'Walk' | 'Talk' | 'Listen' | 'Graze' | 'HumanInteraction' | OccupationClip;
+    visit: Visit | null;
+    visitDelay: number;
+    occupationClips: Partial<Record<OccupationClip, number>>;
+    interactionSeconds: number;
+    grazeSeconds: number;
+    grazeRemaining: number;
+    grazeNext: boolean;
+    socialEnabled: boolean;
     speed: number;
     anchor: Point2;
     entity: FjordEntity;
     random: number;
     wait: number;
     path: Point2[];
+    detour: Point2[];
     signature: string;
     pace: number;
 };
 /** Ephemeral presentation only. Neither simulation state nor its random stream enters this controller. */
 export class LivingWorldController {
+    readonly diagnostics: string[] = [];
     private agents = new Map<string, Agent>();
+    private social = new SocialEncounters();
     private surface;
     private yardSurfaces = new Map<string, (x: number, z: number) => number | null>();
+    private trees: { key: string; x: number; z: number; clearance: number }[] = [];
     private parcels: FjordEntity[] = [];
     private nature: WorldBlueprint['placementPlan'] = [];
     private ground: FjordGround = { plots: [], paths: [] };
@@ -39,6 +58,7 @@ export class LivingWorldController {
         const wanted = new Set(active.map(e => e.selectionKey));
         for (const key of this.agents.keys())
             if (!wanted.has(key)) {
+                this.social.remove(key);
                 this.agents.delete(key);
                 this.yardSurfaces.delete(key);
             }
@@ -46,30 +66,202 @@ export class LivingWorldController {
             const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.asset, entity.status.assignment, entity.status.grazingZone]);
             let agent = this.agents.get(entity.selectionKey);
             if (!agent || agent.signature !== signature) {
+                this.social.remove(entity.selectionKey);
                 this.yardSurfaces.delete(entity.selectionKey);
                 let seed = this.world.config.seed >>> 0;
                 for (const c of entity.selectionKey)
                     seed = Math.imul(seed ^ c.charCodeAt(0), 16777619) >>> 0;
                 agent = { key: entity.selectionKey, kind: entity.kind, x: p.x, y: p.y, z: p.z, rotation: p.rotation,
                     anchor: { x: p.x, z: p.z }, entity, random: seed || 1, wait: 1 + seed % 40 / 10,
-                    path: [], signature, state: 'Idle', speed: 0, pace: entity.kind === 'persona' ? .8 : .28 };
+                    path: [], detour: [], signature, visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {}, state: 'Idle', interactionSeconds: 0, grazeSeconds: 0, grazeRemaining: 0, grazeNext: true, socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28 };
                 this.agents.set(agent.key, agent);
+            }
+            if (agent.entity.status.occupation !== entity.status.occupation ||
+                agent.entity.status.workEligible !== entity.status.workEligible ||
+                agent.entity.status.workHomeId !== entity.status.workHomeId) {
+                this.social.remove(agent.key);
+                this.cancelVisit(agent);
             }
             agent.entity = entity;
             if (!this.safe(agent, agent)) {
+                this.social.remove(agent.key);
                 agent.x = p.x;
                 agent.z = p.z;
                 agent.path = [];
+                agent.detour = [];
                 agent.speed = 0;
             }
             agent.y = this.surface.surfaceHeightAt(agent.x, agent.z);
         }
+        this.clearReleasedPoses();
+    }
+    private clearReleasedPoses() {
+        for (const actor of this.agents.values())
+            if ((actor.state === 'Talk' || actor.state === 'Listen' || actor.state === 'HumanInteraction') &&
+                this.social.inspect(actor.key).partnerKey === null) {
+                actor.state = actor.kind === 'cattle' && actor.grazeRemaining > 0 ? 'Graze' : 'Idle';
+                actor.speed = 0;
+            }
+    }
+    setOccupationClips(key: string, clips: Partial<Record<OccupationClip, number>>) {
+        const actor = this.agents.get(key);
+        if (!actor) return;
+        for (const seconds of Object.values(clips))
+            if (!Number.isFinite(seconds) || seconds <= 0) throw new Error('Invalid occupation clip duration');
+        actor.occupationClips = { ...clips };
+        if (actor.visit && actor.visit.clip !== 'Idle' && !clips[actor.visit.clip]) this.cancelVisit(actor);
+    }
+    private cancelVisit(a: Agent) {
+        a.visit = null;
+        a.path = [];
+        a.detour = [];
+        if (this.social.inspect(a.key).partnerKey === null) a.state = 'Idle';
+        a.speed = 0;
+        a.visitDelay = 20;
+    }
+    setStandingTrees(trees: readonly { key: string; x: number; z: number; clearance: number }[]) {
+        this.trees = trees.map(tree => ({ ...tree }));
+        const sources = new Set(trees.map(tree => tree.key));
+        for (const a of this.agents.values())
+            if (a.visit && (a.entity.status.occupation === 'woodworker' ||
+                a.entity.status.occupation === 'hunter') && !sources.has(a.visit.source)) { this.cancelVisit(a); }
+    }
+    private visitTargets(a: Agent): Visit[] {
+        if (!a.entity.status.workEligible) return [];
+        if (a.entity.status.occupation === 'fisher') {
+            const targets: Visit[] = [];
+            if (!a.occupationClips.Doze) {
+                const reason = a.key + ': Doze off binding unavailable; shore visit uses bounded Idle.';
+                if (!this.diagnostics.includes(reason)) this.diagnostics.push(reason);
+            }
+            for (const [index, coast] of this.world.coast.entries()) {
+                const middle = { x: (coast.a.x + coast.b.x) / 2, z: (coast.a.z + coast.b.z) / 2 };
+                if (Math.hypot(middle.x - a.anchor.x, middle.z - a.anchor.z) > 70) continue;
+                const dx = coast.b.x - coast.a.x, dz = coast.b.z - coast.a.z;
+                const length = Math.hypot(dx, dz);
+                if (!length) continue;
+                for (const side of [-1, 1]) for (const distance of [2, 3, 4]) {
+                    const target = { x: middle.x + dz / length * side * distance,
+                        z: middle.z - dx / length * side * distance };
+                    if (this.safe(a, target)) targets.push({ target, face: middle, source: 'shore:' + index,
+                        phase: 'approach', clip: a.occupationClips.Doze ? 'Doze' : 'Idle',
+                        remaining: a.occupationClips.Doze ?? 8 });
+                }
+            }
+            return targets;
+        }
+        if (a.entity.status.occupation === 'woodworker' || a.entity.status.occupation === 'hunter') {
+            const chopping = a.entity.status.occupation === 'woodworker';
+            if (chopping && !a.occupationClips.Attack) return [];
+            const targets: Visit[] = [];
+            for (const tree of this.trees) {
+                if (Math.hypot(tree.x - a.anchor.x, tree.z - a.anchor.z) > 26) continue;
+                for (let side = 0; side < 8; side++) {
+                    const distance = tree.clearance + 1.2;
+                    const target = { x: tree.x + Math.cos(side * Math.PI / 4) * distance,
+                        z: tree.z + Math.sin(side * Math.PI / 4) * distance };
+                    targets.push({ target, face: { x: tree.x, z: tree.z }, source: tree.key,
+                        phase: 'approach', clip: chopping ? 'Attack' : 'Idle',
+                        remaining: chopping ? a.occupationClips.Attack! : 3 });
+                }
+            }
+            return targets.filter(v => this.safe(a, v.target));
+        }
+        if (a.entity.status.occupation !== 'farmer' || !a.occupationClips.Farm) return [];
+        const farm = this.parcels.find(e => e.kind === 'building' && e.id === a.entity.status.workHomeId);
+        if (!farm?.plot || !farm.status.farmyard) return [];
+        const p = farm.plot;
+        const targets: Visit[] = [];
+        for (const side of [-1, 1]) for (const offset of [-3, 0, 3]) {
+            const target = { x: p.x + offset, z: p.z + side * (p.halfDepth + 2) };
+            targets.push({ target, face: { x: p.x, z: p.z }, source: farm.selectionKey,
+                phase: 'approach', clip: 'Farm', remaining: a.occupationClips.Farm });
+        }
+        return targets.filter(v => this.safe(a, v.target));
+    }
+    private visitBudget(a: Agent, path: readonly Point2[]) {
+        let previous: Point2 = a, distance = 0;
+        for (const point of path) {
+            distance += Math.hypot(point.x - previous.x, point.z - previous.z);
+            previous = point;
+        }
+        // Finite presentation travel, with room for passing and turns; never a Core timer.
+        return Math.min(240, Math.max(30, distance / Math.max(.01, a.pace) * 2 + 10));
+    }
+    private refreshStalledVisit(a: Agent, seconds: number) {
+        const visit = a.visit!;
+        visit.checkpointSeconds = (visit.checkpointSeconds ?? 0) + seconds;
+        if (visit.checkpointSeconds < 8) return;
+        const checkpoint = visit.checkpoint ?? a;
+        if (Math.hypot(a.x - checkpoint.x, a.z - checkpoint.z) < 1) {
+            // Passing can circle a body in a narrow corridor. Retry the same goal
+            // against current occupancy without extending the finite travel budget.
+            const goal = visit.phase === 'home' ? a.anchor : visit.target;
+            const route = this.route(a, goal);
+            if (route.length) {
+                a.path = route;
+                a.detour = [];
+                a.speed = 0;
+            }
+        }
+        visit.checkpoint = { x: a.x, z: a.z };
+        visit.checkpointSeconds = 0;
+    }
+    private beginVisit(a: Agent) {
+        const targets = this.visitTargets(a).filter(v => ![...this.agents.values()].some(other =>
+            other !== a && other.visit && Math.hypot(other.visit.target.x - v.target.x,
+                other.visit.target.z - v.target.z) < 2));
+        targets.sort((left, right) => Math.hypot(left.target.x - a.x, left.target.z - a.z) -
+            Math.hypot(right.target.x - a.x, right.target.z - a.z));
+        targets.splice(24);
+        const offset = Math.floor(this.random(a) * Math.max(1, targets.length));
+        for (let i = 0; i < Math.min(8, targets.length); i++) {
+            const visit = targets[(i + offset) % targets.length];
+            const path = this.route(a, visit.target);
+            if (!path.length) continue;
+            visit.travelRemaining = this.visitBudget(a, path);
+            visit.checkpoint = { x: a.x, z: a.z };
+            visit.checkpointSeconds = 0;
+            a.visit = visit;
+            a.path = path;
+            a.detour = [];
+            return;
+        }
+        const reason = a.key + ': no reachable ' + (a.entity.status.occupation ?? 'occupation') +
+            ' target; ordinary wandering retained.';
+        if (a.entity.status.workEligible && !this.diagnostics.includes(reason)) this.diagnostics.push(reason);
+        a.visitDelay = 20 + this.random(a) * 20;
+    }
+    setActivityClips(key: string, clips: { Graze?: number; HumanInteraction?: number }) {
+        const actor = this.agents.get(key);
+        if (!actor) return;
+        if (clips.Graze !== undefined && (!Number.isFinite(clips.Graze) || clips.Graze <= 0))
+            throw new Error('Invalid grazing clip duration');
+        if (clips.HumanInteraction !== undefined &&
+            (!Number.isFinite(clips.HumanInteraction) || clips.HumanInteraction <= 0))
+            throw new Error('Invalid cattle interaction clip duration');
+        actor.interactionSeconds = clips.HumanInteraction ?? 0;
+        if (!actor.interactionSeconds && actor.state === 'HumanInteraction') this.social.remove(key);
+        this.clearReleasedPoses();
+        actor.grazeSeconds = clips.Graze ?? 0;
+        if (!actor.grazeSeconds && actor.state === 'Graze') {
+            actor.state = 'Idle';
+            actor.grazeRemaining = 0;
+        }
+    }
+    setSocialEnabled(key: string, enabled: boolean) {
+        const actor = this.agents.get(key);
+        if (!actor || actor.socialEnabled === enabled) return;
+        actor.socialEnabled = enabled;
+        if (!enabled) this.social.remove(key);
+        this.clearReleasedPoses();
     }
     setYardSurface(key: string, sample: (x: number, z: number) => number | null) {
         this.yardSurfaces.set(key, sample);
         const agent = this.agents.get(key);
         if (agent) {
             if (!this.safe(agent, agent)) {
+                this.social.remove(agent.key);
                 const farm = this.parcels.find(e => e.kind === 'building' &&
                     e.id === agent.entity.status.assignment)?.plot;
                 const candidates: Point2[] = [];
@@ -100,9 +292,10 @@ export class LivingWorldController {
             }
             agent.y = this.height(agent);
         }
+        this.clearReleasedPoses();
     }
     private radius(a: Agent) {
-        return a.kind === 'persona' ? .4 : a.entity.status.stage === 'Young' ? .5 : a.entity.status.stage === 'Young Adult' ? .7 : .9;
+        return a.kind === 'persona' ? residentMovementConfig.radius : a.entity.status.stage === 'Young' ? .5 : a.entity.status.stage === 'Young Adult' ? .7 : .9;
     }
     private height(a: Agent) { return this.yardSurfaces.get(a.key)?.(a.x, a.z) ?? this.surface.surfaceHeightAt(a.x, a.z); }
     setPace(key: string, pace: number) {
@@ -119,7 +312,7 @@ export class LivingWorldController {
     private safe(a: Agent, p: Point2) {
         if (this.yardSurfaces.has(a.key) && this.yardSurfaces.get(a.key)!(p.x, p.z) === null)
             return false;
-        if (a.kind === 'persona' && Math.hypot(p.x - a.anchor.x, p.z - a.anchor.z) > 28)
+        if (a.kind === 'persona' && Math.hypot(p.x - a.anchor.x, p.z - a.anchor.z) > 75)
             return false;
         const b = this.world.terrain.bounds;
         if (p.x < b.minX + 1 || p.x > b.maxX - 1 || p.z < b.minZ + 1 || p.z > b.maxZ - 1 ||
@@ -152,26 +345,43 @@ export class LivingWorldController {
                 return false;
         return true;
     }
-    private route(a: Agent) {
+    private route(a: Agent, goal?: Point2) {
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
         const spacing = a.entity.status.grazingZone === 'yard' ? .25 : 1;
         const nodes: Point2[] = [{ x: a.x, z: a.z }], parents = [-1], seen = new Set(['0,0']);
-        for (let i = 0; i < nodes.length && nodes.length < 500; i++) {
-            const from = nodes[i];
+        const open = [0], depth = [0];
+        const maximumNodes = goal ? 2000 : 500;
+        while (open.length && nodes.length < maximumNodes) {
+            if (goal) open.sort((left, right) =>
+                depth[left] + Math.hypot(nodes[left].x - goal.x, nodes[left].z - goal.z) -
+                depth[right] - Math.hypot(nodes[right].x - goal.x, nodes[right].z - goal.z));
+            const i = open.shift()!, from = nodes[i];
+            if (goal && Math.hypot(from.x - goal.x, from.z - goal.z) <= .75 &&
+                this.segment(a, from, goal) && this.bodyClearance(a, goal, from)) {
+                const path: Point2[] = [goal];
+                let end = i;
+                while (end > 0) { path.unshift(nodes[end]); end = parents[end]; }
+                return path;
+            }
             for (const [dx, dz] of [[1, 0], [0, 1], [-1, 0], [0, -1]]) {
                 const to = { x: from.x + dx * spacing, z: from.z + dz * spacing };
                 const key = Math.round((to.x - a.x) / spacing) + ',' + Math.round((to.z - a.z) / spacing);
                 if (seen.has(key))
                     continue;
                 seen.add(key);
-                if (Math.hypot(to.x - a.x, to.z - a.z) > (a.kind === 'persona' ? 14 : 5))
+                if (Math.hypot(to.x - a.x, to.z - a.z) > (a.kind === 'persona' ? (goal ? 75 : 14) : 5))
                     continue;
-                if (!this.segment(a, from, to))
+                if (!goal && a.kind === 'persona' &&
+                    Math.hypot(to.x - a.anchor.x, to.z - a.anchor.z) > 28) continue;
+                if (!this.segment(a, from, to) || goal && !this.bodyClearance(a, to, from))
                     continue;
                 parents.push(i);
+                depth.push(depth[i] + spacing);
+                open.push(nodes.length);
                 nodes.push(to);
             }
         }
+        if (goal) return [];
         if (nodes.length < 2)
             return [];
         let end = 1 + Math.floor(this.random(a) * (nodes.length - 1));
@@ -201,41 +411,218 @@ export class LivingWorldController {
         for (let i = 0; i < steps; i++)
             this.step(elapsed / steps);
     }
+    private encounterActor(a: Agent) {
+        const next = a.detour[0] ?? a.path[0];
+        const distance = next ? Math.hypot(next.x - a.x, next.z - a.z) : 0;
+        return { key: a.key, x: a.x, z: a.z, radius: this.radius(a),
+            velocity: distance > .15 ? { x: (next.x - a.x) / distance * a.pace,
+                z: (next.z - a.z) / distance * a.pace } : { x: 0, z: 0 },
+            enabled: a.kind === 'persona' && a.socialEnabled, busy: a.visit?.phase === 'activity' };
+    }
+    private bodyClearance(a: Agent, point: Point2, from: Point2 = a) {
+        const dx = point.x - from.x, dz = point.z - from.z;
+        const lengthSquared = dx * dx + dz * dz;
+        return [...this.agents.values()].every(other => {
+            if (other === a) return true;
+            const fraction = lengthSquared ? Math.max(0, Math.min(1,
+                ((other.x - from.x) * dx + (other.z - from.z) * dz) / lengthSquared)) : 0;
+            const closest = Math.hypot(from.x + dx * fraction - other.x,
+                from.z + dz * fraction - other.z);
+            return closest >= this.radius(a) + this.radius(other) - 1e-7;
+        });
+    }
+    private planPassing(a: Agent) {
+        if (a.kind !== 'persona' || a.detour.length || !a.path.length) return;
+        const clearRoute = (points: Point2[]) => {
+            let from: Point2 = a;
+            for (const point of points) {
+                if (!this.segment(a, from, point)) return false;
+                from = point;
+            }
+            return true;
+        };
+        const pairs = this.social.activePairs().map(pair => ({
+            a: this.agents.get(pair.a)!, b: this.agents.get(pair.b)!,
+            clearance: this.radius(this.agents.get(pair.a)!) + this.radius(this.agents.get(pair.b)!),
+        }));
+        a.detour = passConversation(a, a.path[0], pairs, residentMovementConfig, clearRoute) ??
+            passNeighbours(a, a.path[0], [...this.agents.values()].filter(other => other !== a).map(other => ({
+                x: other.x, z: other.z, radius: this.radius(other),
+                encounterEligible: this.social.eligible(this.encounterActor(a)) &&
+                    this.social.eligible(this.encounterActor(other)) && !this.social.blocked(a.key, other.key) &&
+                    this.social.approaching(this.encounterActor(a), this.encounterActor(other)),
+            })), residentMovementConfig, clearRoute,
+                point => this.bodyClearance(a, point)) ?? [];
+    }
+    private cattleEncounters() {
+        const people = [...this.agents.values()].filter(a => a.kind === 'persona' && a.socialEnabled && a.visit?.phase !== 'activity');
+        for (const cow of this.agents.values()) {
+            if (cow.kind !== 'cattle' || !cow.interactionSeconds || !this.social.available(cow.key)) continue;
+            const reference = cattleVariants[cow.entity.asset as keyof typeof cattleVariants];
+            if (!reference) continue;
+            const nearby = people.filter(person => this.social.available(person.key))
+                .sort((a, b) => Math.hypot(a.x - cow.x, a.z - cow.z) - Math.hypot(b.x - cow.x, b.z - cow.z) ||
+                    a.key.localeCompare(b.key));
+            for (const person of nearby) {
+                const distance = Math.hypot(cow.x - person.x, cow.z - person.z);
+                const clearance = this.radius(cow) + this.radius(person);
+                // Preview spacing is retained, with only the stage-body clearance required by the world.
+                const reach = Math.max(reference.humanDistance, clearance + .1);
+                if (distance < clearance || distance > reach + .2 ||
+                    !this.segment(cow, cow, person) || !this.segment(person, person, cow)) continue;
+                if (this.social.reserve(cow.key, person.key, cow.interactionSeconds, 'cattleHuman')) break;
+            }
+        }
+    }
     private step(dt: number) {
+        const actors = [...this.agents.values()];
+        this.social.advance(dt, actors.map(a => this.encounterActor(a)), (first, second) => {
+            const a = this.agents.get(first.key)!, b = this.agents.get(second.key)!;
+            return this.segment(a, a, b) && this.segment(b, b, a);
+        });
+        this.cattleEncounters();
+        this.clearReleasedPoses();
         for (const a of this.agents.values()) {
-            if (!a.path.length) {
+            const encounter = this.social.inspect(a.key);
+            if (encounter.partnerKey !== null) {
+                const partner = this.agents.get(encounter.partnerKey)!;
+                a.rotation = turnToward(a.rotation, Math.atan2(partner.x - a.x, partner.z - a.z),
+                    dt, residentMovementConfig.turnSpeed);
+                a.speed = 0;
+                a.state = encounter.kind === 'cattleHuman' && a.kind === 'cattle' ? 'HumanInteraction' :
+                    encounter.state === 'talking' ? 'Talk' : 'Listen';
+                continue;
+            }
+            if (a.visit) {
+                const visit = a.visit;
+                if (visit.phase !== 'activity') {
+                    visit.travelRemaining! -= dt;
+                    this.refreshStalledVisit(a, dt);
+                    if (visit.travelRemaining! <= 0) {
+                        this.cancelVisit(a);
+                        continue;
+                    }
+                }
+                if (visit.phase === 'activity') {
+                    a.speed = 0;
+                    a.rotation = turnToward(a.rotation, Math.atan2(visit.face.x - a.x,
+                        visit.face.z - a.z), dt, residentMovementConfig.turnSpeed);
+                    a.state = visit.clip;
+                    visit.remaining -= dt;
+                    if (visit.remaining > 0) continue;
+                    visit.phase = 'home';
+                    a.path = this.route(a, a.anchor);
+                    visit.travelRemaining = this.visitBudget(a, a.path);
+                    visit.checkpoint = { x: a.x, z: a.z };
+                    visit.checkpointSeconds = 0;
+                    a.detour = [];
+                    a.state = 'Idle';
+                } else if (!a.path.length && !a.detour.length) {
+                    if (visit.phase === 'approach' && Math.hypot(a.x - visit.target.x,
+                        a.z - visit.target.z) < .15) {
+                        a.speed = 0;
+                        const heading = Math.atan2(visit.face.x - a.x, visit.face.z - a.z);
+                        a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
+                        a.state = 'Idle';
+                        if (Math.cos(heading - a.rotation) > .99) visit.phase = 'activity';
+                        continue;
+                    }
+                    a.visit = null;
+                    a.visitDelay = 20 + this.random(a) * 25;
+                }
+            } else if (a.kind === 'persona') {
+                a.visitDelay -= dt;
+                if (Math.hypot(a.x - a.anchor.x, a.z - a.anchor.z) > 28 && !a.path.length)
+                    a.path = this.route(a, a.anchor);
+                // A due work visit may replace an ordinary wander. Encounter owners have already
+                // continued above, so their retained destinations are never replaced mid-pair.
+                if (a.visitDelay <= 0) this.beginVisit(a);
+            }
+            if (a.state === 'Graze') {
+                a.grazeRemaining -= dt;
+                a.speed = 0;
+                if (a.grazeRemaining > 1e-8) continue;
+                a.state = 'Idle';
+                a.wait = 0;
+            }
+            this.planPassing(a);
+            if (a.detour.length && Math.hypot(a.detour[0].x - a.x, a.detour[0].z - a.z) < .15) a.detour.shift();
+            if (!a.path.length && !a.detour.length) {
                 a.speed = 0;
                 a.state = 'Idle';
                 a.wait -= dt;
                 if (a.wait <= 0) {
+                    if (a.kind === 'cattle' && a.grazeNext && a.grazeSeconds > 0) {
+                        a.state = 'Graze';
+                        a.grazeRemaining = a.grazeSeconds;
+                        a.grazeNext = false;
+                        continue;
+                    }
                     a.path = this.route(a);
+                    a.grazeNext = true;
                     a.wait = 3 + this.random(a) * 5;
                 }
                 continue;
             }
-            const target = a.path[0], dx = target.x - a.x, dz = target.z - a.z, distance = Math.hypot(dx, dz);
+            const target = a.detour[0] ?? a.path[0], dx = target.x - a.x, dz = target.z - a.z, distance = Math.hypot(dx, dz);
+            if (distance < 1e-7) {
+                if (a.detour.length) a.detour.shift();
+                else a.path.shift();
+                a.speed = 0;
+                continue;
+            }
+            const heading = Math.atan2(dx, dz);
+            if (a.kind === 'persona') {
+                a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
+                if (Math.cos(heading - a.rotation) < residentMovementConfig.walkAlignment) {
+                    a.speed = 0;
+                    a.state = 'Idle';
+                    continue;
+                }
+            }
             a.speed = Math.min(a.pace, a.speed + dt * a.pace * 2, Math.sqrt(2 * a.pace * Math.max(.01, distance)));
             const step = Math.min(distance, a.speed * dt), p = { x: a.x + dx / distance * step, z: a.z + dz / distance * step };
-            if (!this.segment(a, a, p) || [...this.agents.values()].some(other => other !== a && Math.hypot(other.x - p.x, other.z - p.z) < this.radius(a) + this.radius(other) &&
-                Math.hypot(other.x - p.x, other.z - p.z) <= Math.hypot(other.x - a.x, other.z - a.z))) {
-                a.path = [];
+            if (!this.segment(a, a, p)) {
+                // A passing detour may finish across a parcel from the old waypoint.
+                // Reconnect to the valid trip goal through the same terrain authority.
+                const goal = a.visit ? a.visit.phase === 'home' ? a.anchor : a.visit.target :
+                    a.path[a.path.length - 1];
+                a.path = goal && this.safe(a, goal) ? this.route(a, goal) : [];
+                a.detour = [];
                 a.speed = 0;
                 a.state = 'Idle';
                 a.wait = 1 + this.random(a) * 2;
                 continue;
             }
-            const heading = Math.atan2(dx, dz), angle = Math.atan2(Math.sin(heading - a.rotation), Math.cos(heading - a.rotation));
-            a.rotation += angle * Math.min(1, dt * 8);
+            if (!this.bodyClearance(a, p)) {
+                // A temporary neighbour cannot discard the retained destination.
+                // Re-plan a passing detour if another actor enters its previously clear route.
+                a.detour = [];
+                a.speed = 0;
+                a.state = 'Idle';
+                continue;
+            }
+            if (a.kind !== 'persona') {
+                const angle = Math.atan2(Math.sin(heading - a.rotation), Math.cos(heading - a.rotation));
+                a.rotation += angle * Math.min(1, dt * 8);
+            }
             a.x = p.x;
             a.z = p.z;
             a.y = this.height(a);
             a.state = 'Walk';
-            if (distance <= step + 1e-7)
-                a.path.shift();
+            if (distance <= step + 1e-7) {
+                if (a.detour.length) a.detour.shift();
+                else a.path.shift();
+            }
         }
     }
     inspect() {
         return [...this.agents.values()].map(a => ({ key: a.key, kind: a.kind, x: a.x, y: a.y, z: a.z,
-            rotation: a.rotation, state: a.state, speed: a.speed, walkable: this.safe(a, a) }));
+            rotation: a.rotation, state: a.state, speed: a.speed,
+            visit: a.visit ? structuredClone(a.visit) : null,
+            destination: a.path.length ? { ...a.path[a.path.length - 1] } : null,
+            activity: this.social.inspect(a.key).kind,
+            partnerKey: this.social.inspect(a.key).partnerKey,
+            cooldown: this.social.inspect(a.key).cooldown, walkable: this.safe(a, a) }));
     }
 }

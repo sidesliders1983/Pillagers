@@ -6,6 +6,7 @@ import { publishedLabBodyStyle, validateLabBodyUsage, labBodyAsset } from '../ch
 import { assetMeasurement, characterAsset, characterAssetURL } from '../characters/CharacterAssets';
 
 import { meshyHumanAvailableClips } from '../characters/MeshyHumanAssetIdentity';
+import { humanExtraAnimations } from '../characters/HumanExtraAnimations';
 
 export const labSnapshotVersion='pillagers-lab-snapshot/1' as const;
 export const labStyleVersion=publishedLabBodyStyle;
@@ -42,7 +43,7 @@ export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     if(!Number.isInteger(s.lod)||s.lod<0||s.lod>2)throw new Error('Snapshot LOD must be 0, 1 or 2.');
     const source=validateLabBodyUsage(body.source??'published',s.lod,presentation);
     if(s.styleVersion!==source.styleVersion)throw new Error('Snapshot style differs from the selected body source.');
-    if(!s.pose||!([...characterContract.animations,...(body.source==='meshy'?meshyHumanAvailableClips:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
+    if(!s.pose||!([...characterContract.animations,...(body.source==='meshy'?[...meshyHumanAvailableClips,...humanExtraAnimations.clips]:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
     if(!s.camera||!['perspective','orthographic'].includes(s.camera.type)||s.camera.fov!==38||(s.camera.type==='perspective'?s.camera.scale!==null:!Number.isFinite(s.camera.scale)||s.camera.scale!<.5||s.camera.scale!>10))throw new Error('Invalid snapshot camera type or fixed scale.');
     const point=(v:unknown)=>Array.isArray(v)&&v.length===3&&v.every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=60);
     if(!s.camera||!point(s.camera.position)||!point(s.camera.target)||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))<2-1e-6||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))>14+1e-6||s.camera.position[1]<s.camera.target[1]-1e-6)throw new Error('Invalid snapshot camera.');

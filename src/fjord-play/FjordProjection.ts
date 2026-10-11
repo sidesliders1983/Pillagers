@@ -1,5 +1,5 @@
 import type { CharacterDNA } from '../characters/CharacterDNA';
-import { inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
+import { inspectWork, inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
 import type { SimulationState } from '../simulation/SimulationCore';
 import type { EntityKind } from '../play/SettlementView';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -40,6 +40,9 @@ export interface FjordEntity {
     plot?: FjordPlot;
     status: {
         living: boolean;
+        occupation?: string | null;
+        workEligible?: boolean;
+        workHomeId?: string;
         stage?: string;
         sex?: string;
         age?: number;
@@ -235,7 +238,9 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                 z: plot.z + 8 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, sex: p.dna.sex, age, indoorReason });
+                { living: true, sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
+                    workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,
+                    workHomeId: residence?.buildingId ?? undefined });
             entities[entities.length - 1].dna = { ...structuredClone(p.dna), age };
         }
     }

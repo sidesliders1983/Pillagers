@@ -1,3 +1,4 @@
+import { cattleVariants as COWS } from '../characters/CattlePresentation';
 import {AnimationAction,AnimationMixer,Color,DirectionalLight,HemisphereLight,Mesh,MOUSE,PerspectiveCamera,Scene} from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
@@ -10,12 +11,7 @@ import {CharacterLabUI,LabAction} from './CharacterLabUI';
 import {PreviewGround} from './PreviewGround';
 
 type Clip='Idle'|'Graze'|'Walk'|'HumanInteraction';
-const COWS={
- 'adult-female':{label:'Adult female cow',withers:1.10,humanDistance:1.60},
- baby:{label:'Baby calf',withers:0.60,humanDistance:0.95},
- 'young-adult':{label:'Young adult cow',withers:0.95,humanDistance:1.40},
- 'adult-male':{label:'Adult bull',withers:1.20,humanDistance:1.75},
-} as const;
+
 type Variant=keyof typeof COWS;
 const requestedVariant=new URLSearchParams(location.search).get('variant');
 const initialVariant:Variant=requestedVariant&&Object.hasOwn(COWS,requestedVariant)?requestedVariant as Variant:'adult-female';

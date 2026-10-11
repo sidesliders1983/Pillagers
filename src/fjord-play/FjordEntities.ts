@@ -127,6 +127,9 @@ export class FjordEntities {
             if (!this.entries.get('building:' + id)?.model.userData.canonical.farmyard) this.yardSamplers.delete(id);
         for (const [key, entry] of this.entries) {
             motion.setPace(key, this.models.pace(entry.model));
+            motion.setSocialEnabled(key, this.models.socialEnabled(entry.model));
+            motion.setActivityClips(key, this.models.activityClips(entry.model));
+            motion.setOccupationClips(key, this.models.occupationClips(entry.model));
             const canonical = entry.model.userData.canonical;
             if (canonical?.grazingZone !== 'yard') continue;
             const farm = this.entries.get('building:' + canonical.assignment)?.model;
@@ -151,7 +154,7 @@ export class FjordEntities {
             if (!model) continue;
             model.position.set(agent.x, agent.y, agent.z);
             model.rotation.y = agent.rotation;
-            if (running) this.models.animate(model, agent.state, agent.speed, delta);
+            this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
         }
     }
     describe() {

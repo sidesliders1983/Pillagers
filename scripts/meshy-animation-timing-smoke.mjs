@@ -4,7 +4,13 @@ import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
 import {loadTypeScript} from './load-typescript.mjs';
 
 const {chromium} = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ?? 'playwright');
-const {meshyHumanAvailableClips} = loadTypeScript(new URL('../src/characters/MeshyHumanAssetIdentity.ts', import.meta.url));
+const {meshyHumanAvailableClips: originalClips} = loadTypeScript(new URL('../src/characters/MeshyHumanAssetIdentity.ts', import.meta.url));
+const {humanExtraAnimations} = loadTypeScript(new URL('../src/characters/HumanExtraAnimations.ts', import.meta.url));
+const meshyHumanAvailableClips = [...originalClips, ...humanExtraAnimations.clips];
+const extraBytes = readFileSync(new URL('../public' + humanExtraAnimations.path, import.meta.url));
+const extraJSON = JSON.parse(extraBytes.subarray(20, 20 + extraBytes.readUInt32LE(12)).toString());
+const extraDurations = Object.fromEntries(extraJSON.animations.map(animation => [animation.name,
+    Math.fround(Math.max(...animation.samplers.map(s => extraJSON.accessors[s.input].max[0])))]));
 const baseURL = process.env.PROTOTYPE_URL ?? 'http://127.0.0.1:5182';
 const output = process.env.ANIMATION_QA_OUTPUT ?? 'artifacts/meshy-animation-timing';
 mkdirSync(output, {recursive: true});
@@ -13,8 +19,8 @@ mkdirSync(output, {recursive: true});
 const durations = [0, 1, 2].map(lod => {
     const bytes = readFileSync(new URL('../public/game-assets/human/Human_LOD' + lod + '.glb', import.meta.url));
     const json = JSON.parse(bytes.subarray(20, 20 + bytes.readUInt32LE(12)).toString());
-    return Object.fromEntries(json.animations.map(animation => [animation.name,
-        Math.fround(Math.max(...animation.samplers.map(sampler => json.accessors[sampler.input].max[0])))]));
+    return {...extraDurations, ...Object.fromEntries(json.animations.map(animation => [animation.name,
+        Math.fround(Math.max(...animation.samplers.map(sampler => json.accessors[sampler.input].max[0])))]))};
 });
 const errors = [], records = [], playback = [];
 const browser = await chromium.launch({headless: true, channel: process.env.BROWSER_CHANNEL,

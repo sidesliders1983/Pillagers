@@ -203,6 +203,20 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             setGroundWeights(weights: readonly number[]) {
                 if (canonical && terrain) updateBlueprintWear(terrain,weights);
             },
+            standingTrees() {
+                const trees = new Map<string, { key: string; x: number; z: number; clearance: number }>();
+                root.traverse(node => {
+                    if (!(node instanceof InstancedMesh) || !/conifer|deciduous/.test(node.name)) return;
+                    for (const point of (node.userData.sourceAnchors ?? []).slice(0, node.count)) {
+                        const source = blueprint?.placementPlan.find(p => p.assetId === node.name &&
+                            Math.hypot(p.x - point.x, p.z - point.z) < .001);
+                        if (!source) continue;
+                        const key = source.assetId + '@' + source.x + ',' + source.z;
+                        trees.set(key, { key, x: source.x, z: source.z, clearance: source.clearance });
+                    }
+                });
+                return [...trees.values()];
+            },
             clearPlot: (plot: BuildingPlot) => clearBuildingPlotNature(root,plot),
             hearth: new Vector3(fire.x,fire.y,fire.z),
             center: new Vector3(center.x,movement.heightAt(center.x,center.z),center.z+16),

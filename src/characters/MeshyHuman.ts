@@ -15,12 +15,13 @@ import {CharacterDNA, parseCharacterDNA} from './CharacterDNA';
 import {generatePhenotype} from './generatePhenotype';
 import {SoftBodySpring} from '../character-lab/SoftBodySpring';
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
+import {humanExtraAnimations} from './HumanExtraAnimations';
 import {applyMeshyProportions} from './MeshyHumanDynamics';
 import {HumanProfile, universalHumanProfile} from './UniversalHumanProfile';
 export const meshyAnimationClips={
  Idle:'Idle_02',Walk:'Walking',Run:'Running',Attack:'Attack',
  Death:'Fall_Dead_from_Abdominal_Injury',InjuredWalk:'Unsteady_Walk',Talk:'Talk_Passionately',
- Listen:'Listening_Gesture',Farm:'Pull_Radish',
+ Listen:'Listening_Gesture',Farm:'Pull_Radish',Doze:'Sit_and_Doze_Off',
 } as const;
 export type MeshyAnimation=keyof typeof meshyAnimationClips;
 export const meshyOneShotClips=new Set<string>(['Attack','Fall_Dead_from_Abdominal_Injury']);
@@ -28,10 +29,42 @@ export const meshyOneShotClips=new Set<string>(['Attack','Fall_Dead_from_Abdomin
 export class MeshyHumanFactory {
  private sources=new Map<number,Promise<GLTF>>();
  private modules=new Map<string,Promise<NativeModuleSource>>();
+ private extraAnimations?:Promise<GLTF>;
  private loader=new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
  constructor(private load:(url:string)=>Promise<GLTF>=url=>this.loadVerified(url),private loadBinding:(url:string)=>Promise<ArrayBuffer>=async url=>{const response=await fetch(url);if(!response.ok)throw new Error('Could not load module binding: '+url);return response.arrayBuffer();}){}
- private async loadVerified(url:string){const path=url.split('?')[0],expected=meshyHumanAssetIdentity.find(a=>a.path===path)?.sha256??assetMeasurement(path).sha256;
-  const response=await fetch(url);if(!response.ok)throw new Error('Could not load Meshy asset: '+path);const bytes=await response.arrayBuffer();if(await assetDigest(bytes)!==expected)throw new Error('Meshy asset bytes differ from the frozen identity: '+path);return this.loader.parseAsync(bytes,'');}
+ private async loadVerified(url: string): Promise<GLTF> {
+  const path = url.split('?')[0];
+  const expected = path === humanExtraAnimations.path ? humanExtraAnimations.sha256 :
+   meshyHumanAssetIdentity.find(asset => asset.path === path)?.sha256 ?? assetMeasurement(path).sha256;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error('Could not load Meshy asset: ' + path);
+  const bytes = await response.arrayBuffer();
+  if (await assetDigest(bytes) !== expected)
+   throw new Error('Meshy asset bytes differ from the frozen identity: ' + path);
+  const source = await this.loader.parseAsync(bytes, '');
+  if (meshyHumanAssetIdentity.some(asset => asset.path === path)) {
+   try {
+    this.extraAnimations ??= this.loadVerified(humanExtraAnimations.path +
+     '?v=' + humanExtraAnimations.sha256.slice(0, 12)).catch(error => {
+      this.extraAnimations = undefined;
+      throw error;
+     });
+    const extra = await this.extraAnimations;
+    for (const clip of extra.animations) {
+     for (const track of clip.tracks) {
+      const name = track.name.slice(0, track.name.lastIndexOf('.'));
+      if (!source.scene.getObjectByName(name))
+       throw new Error('Additional animation target absent from native body: ' + name);
+     }
+    }
+    source.animations.push(...extra.animations.map(clip => clip.clone()));
+   } catch (error) {
+    // A missing extension must not discard the verified native body or its original clips.
+    source.scene.userData.animationExtensionError = String(error);
+   }
+  }
+  return source;
+ }
  async create(input:CharacterDNA,lod=0,profile?:HumanProfile,presentation:unknown={hair:'none',beard:'none',outfit:'none',equipment:'none'}){
   if(![0,1,2].includes(lod))throw new Error('Invalid Meshy human LOD');
   const dna=parseCharacterDNA(input);let source=this.sources.get(lod);
