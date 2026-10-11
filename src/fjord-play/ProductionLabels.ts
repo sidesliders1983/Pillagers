@@ -23,6 +23,7 @@ export class ProductionLabels {
     }
 
     setAnchors(entries: { id: string; kind: string; bounds: { min: { x: number; y: number; z: number }; max: { x: number; y: number; z: number } } }[]) {
+        this.anchors.clear();
         for (const entry of entries) {
             if (entry.kind !== 'persona' && entry.kind !== 'cattle') continue;
             const { min, max } = entry.bounds;

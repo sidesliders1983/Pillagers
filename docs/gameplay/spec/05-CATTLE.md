@@ -31,4 +31,6 @@ Cattle consume integer Food; calves less than adults; adult cows provide modest 
 
 > **As a player, I want to slaughter cattle for immediate Food, so that I can sacrifice future production/breeding for survival now.**
 
-Slaughter gives one-off integer Food by the saved age thresholds: Young (default under 1 Winter) = **5 Food**; Young Adult (default 1 to under 2 Winters) = **10 Food**; Adult (default 2+ Winters) = **15 Food**. The adult yield retains the saved configurable slaughterFood value. Young yields are fixed prototype values. The animal is permanently removed from the living herd. Losing/slaughtering last bull stops reproduction.
+Slaughter gives one-off integer Food by the saved age thresholds: Young (default under 1 Winter) = **5 Food**; Young Adult (default 1 to under 3 Winters) = **10 Food**; Adult (default 3+ Winters) = **15 Food**. The adult yield retains the saved configurable slaughterFood value. Young yields are fixed prototype values. The animal is permanently removed from the living herd. Losing/slaughtering last bull stops reproduction.
+
+Current campaign defaults: Young below 1 Winter; Young Adult (heifer for females) from 1 to below 3; Adult from 3. Cow output and adult Food consumption start at 3; reproduction requires a cow and bull aged 3–12 in the same herd. The configured mortality age bands remain unchanged. Existing saves and restarts retain their saved age/fertility thresholds, including the former 2-Winter Adult boundary.

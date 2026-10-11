@@ -57,6 +57,7 @@ export interface FjordEntity {
     };
 }
 const geographyIds = new WeakMap<WorldBlueprint, string>();
+const plotCandidates = new WeakMap<WorldBlueprint, { x: number; z: number }[]>();
 export function geographyIdentity(world: WorldBlueprint) {
     const known = geographyIds.get(world);
     if (known)
@@ -119,16 +120,17 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const surface = createBlueprintSurface(world);
     const entities: FjordEntity[] = [];
     const diagnostics: string[] = [];
-    const candidates: {
-        x: number;
-        z: number;
-    }[] = [];
-    for (let z = world.terrain.bounds.minZ + 8; z <= world.terrain.bounds.maxZ - 8; z += 2)
-        for (let x = world.terrain.bounds.minX + 8; x <= world.terrain.bounds.maxX - 8; x += 2)
-            candidates.push({ x, z });
     const center = world.settlement.center;
-    candidates.sort((a, b) => Math.hypot(a.x - center.x, a.z - center.z - 20) -
-        Math.hypot(b.x - center.x, b.z - center.z - 20) || a.z - b.z || a.x - b.x);
+    let candidates = plotCandidates.get(world);
+    if (!candidates) {
+        candidates = [];
+        for (let z = world.terrain.bounds.minZ + 8; z <= world.terrain.bounds.maxZ - 8; z += 2)
+            for (let x = world.terrain.bounds.minX + 8; x <= world.terrain.bounds.maxX - 8; x += 2)
+                candidates.push({ x, z });
+        candidates.sort((a, b) => Math.hypot(a.x - center.x, a.z - center.z - 20) -
+            Math.hypot(b.x - center.x, b.z - center.z - 20) || a.z - b.z || a.x - b.x);
+        plotCandidates.set(world, candidates);
+    }
     const allocatePlot = (key: string): FjordPlot | undefined => {
         if (layout.plots[key])
             return layout.plots[key];

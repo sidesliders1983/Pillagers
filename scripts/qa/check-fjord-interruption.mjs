@@ -82,12 +82,11 @@ try {
     assert.equal(held.rendered.find(e => (e.kind + ":" + e.id) === talk.key).motion.sourceClip, 'Talk_Passionately');
     assert.equal(held.rendered.find(e => (e.kind + ":" + e.id) === listen.key).motion.sourceClip, 'Listening_Gesture');
     await choose('persona', talk.key.split(':')[1]);
-    await page.locator('#character-profile:not([hidden])').waitFor();
-    assert.ok((await page.locator('#character-profile').boundingBox()).height <= 60);
-    await page.getByRole('button', { name: 'Expand character profile', exact: true }).tap();
-    assert.match(await page.locator('#character-profile').innerText(), /Heritage profile/i);
+    assert.equal(await page.locator('#character-profile').count(), 0);
+    await page.getByText('Character traits & heritage', { exact: true }).click();
+    assert.match(await page.locator('#fjord-resident-profile').innerText(), /Heritage profile/i);
     await capture('resident-talk-listen');
-    await page.getByRole('button', { name: 'Collapse character profile', exact: true }).tap();
+    await page.getByText('Character traits & heritage', { exact: true }).tap();
     const frozen = await read();
     await page.waitForTimeout(1200);
     assert.deepEqual((await read()).motion, frozen.motion);

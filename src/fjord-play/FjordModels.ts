@@ -114,15 +114,30 @@ export class FjordModels {
         }
         model.userData.motion = { state, speed, clipTime: actor.human?.animationState.time ?? actor.action?.time, sourceClip: actor.human?.root.userData.clip ?? actor.action?.getClip().name ?? 'static-fallback', clip: actor.human?.animationState.animation ?? actor.action?.getClip().name ?? 'static-fallback' };
     }
+    inspectResources() {
+        return { actors: this.actors.size, sourceTemplates: this.templates.size,
+            ownedInstanceRoots: this.instanceResources.size };
+    }
     release(model: Object3D) {
         const actor = this.actors.get(model);
         if (actor?.human) actor.human.dispose();
         if (actor?.mixer) { actor.mixer.stopAllAction(); actor.mixer.uncacheRoot(model); }
         this.actors.delete(model);
+        model.traverse(node => {
+            if (!this.instanceResources.delete(node)) return;
+            this.loaded.delete(node);
+            node.traverse(child => {
+                if (!(child instanceof Mesh)) return;
+                child.geometry.dispose();
+                for (const material of Array.isArray(child.material) ? child.material : [child.material])
+                    material.dispose();
+            });
+        });
         return Boolean(actor?.human);
     }
     private templates = new Map<string, Promise<Object3D>>();
     private loaded = new Set<Object3D>();
+    private instanceResources = new Set<Object3D>();
     private motionSources = new WeakMap<Object3D, { clips: import('three').AnimationClip[]; pace: number }>();
     private draco = new DRACOLoader().setDecoderPath(import.meta.env.BASE_URL + 'draco/');
     private loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).setDRACOLoader(this.draco);
@@ -142,6 +157,14 @@ export class FjordModels {
             const model = placeSettlement(this.assets, [{ id: entity.selectionKey, key: entity.asset,
                     terrainKey: entity.terrainAsset === 'farmyardMarker' ? undefined : entity.terrainAsset, x: 0, z: 0, rotation: 0,
                     halfWidth: entity.plot!.halfWidth, halfDepth: entity.plot!.halfDepth, radius: 9 }], () => 0);
+            const sourcedYard = model.getObjectByName('farmHutTerrain');
+            if (sourcedYard) {
+                // The native parcel leaves too little clearance for four mature source bodies.
+                // Use the existing reserved plot while retaining the authored fences/props and house size.
+                const size = new Box3().setFromObject(sourcedYard).getSize(new Vector3());
+                sourcedYard.scale.x *= Math.max(1, (entity.plot!.halfWidth * 2 - .02) / size.x);
+                sourcedYard.scale.z *= Math.max(1, (entity.plot!.halfDepth * 2 - .02) / size.z);
+            }
             if (entity.terrainAsset === 'farmyardMarker') {
                 const yard = new Mesh(new BoxGeometry(12, .03, 12), new MeshStandardMaterial({
                     color: 0x566b38, roughness: 1, transparent: true, opacity: .25, depthWrite: false
@@ -152,15 +175,18 @@ export class FjordModels {
                 model.add(yard);
                 // Marker resources are instance-specific; source house resources stay asset-owned.
                 this.loaded.add(yard);
+                this.instanceResources.add(yard);
             }
             const size = new Box3().setFromObject(model).getSize(new Vector3());
             if (size.x > entity.plot!.halfWidth * 2 || size.z > entity.plot!.halfDepth * 2) {
                 this.diagnostics.push(entity.id + ': source exceeds reserved footprint; explicit house placeholder.');
+                this.release(model);
                 const root = new Group(), mesh = new Mesh(new BoxGeometry(4, 3, 4), new MeshStandardMaterial({ color: 0x9d8465, roughness: 1 }));
                 mesh.position.y = 1.5;
                 root.add(mesh);
                 root.userData.placeholder = true;
                 this.loaded.add(root);
+                this.instanceResources.add(root);
                 return root;
             }
             return model;
@@ -268,6 +294,7 @@ export class FjordModels {
             resource.dispose();
         this.templates.clear();
         this.loaded.clear();
+        this.instanceResources.clear();
         this.draco.dispose();
     }
 }

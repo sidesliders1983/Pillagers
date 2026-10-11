@@ -1,5 +1,5 @@
 import { LivingWorldController } from './LivingWorldController';
-import { FjordCharacterProfile } from './FjordCharacterProfile';
+import { renderCharacterProfile } from '../ui/CharacterProfileContent';
 import type { FjordEntity } from './FjordProjection';
 import { SelectionLabels } from './SelectionLabels';
 import { ProductionLabels } from './ProductionLabels';
@@ -105,7 +105,7 @@ export class FjordPlay {
         const initialAutoStart = this.opened.autoStart ? beginAutoStart() : undefined;
         let assets: AssetManager | undefined, models: FjordModels | undefined;
         let layer: FjordEntities | undefined, world: Awaited<ReturnType<typeof createWorld>> | undefined;
-        let motion: LivingWorldController | undefined, profile: FjordCharacterProfile | undefined;
+        let motion: LivingWorldController | undefined;
         let liveMarkers: ReturnType<typeof this.shared.selectionPresentation> = [];
         let sceneEntities: readonly FjordEntity[] = [];
         let syncScene: (() => Promise<void>) | undefined;
@@ -121,8 +121,6 @@ export class FjordPlay {
         const highlight = () => {
             liveMarkers = this.shared.selectionPresentation();
             layer?.select(liveMarkers);
-            const selected = this.shared.selection;
-            profile?.select(sceneEntities.find(e => e.kind === selected?.kind && e.id === selected?.id));
             canvas.dataset.highlight = JSON.stringify(layer?.root.userData.selection ?? null);
             const markers = (layer?.root.userData.markers ?? []) as SelectionLabel[];
             canvas.dataset.markers = JSON.stringify(markers);
@@ -161,7 +159,7 @@ export class FjordPlay {
                 list.innerHTML = identities;
             document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                 ...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? []),
-                'Shared static human body; unique clothing, hair and DNA appearance are outside this slice.',
+                'Residents reuse Fjordside DNA height, build and age; movement remains presentation only.',
                 'Geography: ' + view.layout.geographyId].join('\n');
             canvas.dataset.entities = JSON.stringify(view.entities);
             canvas.dataset.layoutIdentity = view.layout.geographyId;
@@ -173,8 +171,20 @@ export class FjordPlay {
             const sameSelection = selectionKey === this.lastPanelSelection;
             const preserved = new Set(Array.from(panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select'))
                 .filter(field => sameSelection && (this.session.running || field === document.activeElement)).map(field => field.id));
+            const resident = this.shared.selection?.kind === 'persona' ?
+                view.entities.find(entity => entity.kind === 'persona' && entity.id === this.shared.selection!.id) : undefined;
+            let residentProfile = '';
+            if (resident?.dna) {
+                const content = document.createElement('section');
+                content.id = 'fjord-resident-profile';
+                renderCharacterProfile(content, resident.dna, resident.label, resident.id);
+                content.querySelector('.profile-close')?.remove();
+                content.querySelector('.profile-eyebrow')?.remove();
+                residentProfile = '<details data-view-key="resident-profile"><summary>Character traits &amp; heritage</summary>' +
+                    content.outerHTML + '</details>';
+            }
             updateView(panel, this.panels.render(this.session.snapshot(), this.shared.selection) +
-                '<button data-action="clear">Clear selection</button>', preserved);
+                residentProfile + '<button data-action="clear">Clear selection</button>', preserved);
             this.lastPanelSelection = selectionKey;
             updateManagementAvailability(panel, this.shared);
             highlight();
@@ -268,7 +278,6 @@ export class FjordPlay {
             });
         });
         const select = (kind: string, id: string) => {
-            profile?.reopen();
             this.shared.select({ kind: kind as EntityKind, id });
             const entity = this.campaign.project().entities.find(e => e.kind === kind && e.id === id);
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
@@ -340,7 +349,6 @@ export class FjordPlay {
             renderer.setAnimationLoop(null);
             observer?.disconnect();
             controller.dispose();
-            profile?.dispose();
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
@@ -358,7 +366,6 @@ export class FjordPlay {
         models = new FjordModels(assets);
         layer = new FjordEntities(models);
         scene.add(layer.root);
-        profile = new FjordCharacterProfile(camera, canvas);
         const cleared = new Set<string>();
         let groundSignature = "";
         const rebuildWorld = async (): Promise<void> => {
@@ -528,9 +535,10 @@ export class FjordPlay {
         const clock = new Clock();
         let time = 0;
         let cameraSignature = '';
-        let lastDiagnostics = 0, activeTime = 0;
+        let lastDiagnostics = 0, activeTime = 0, lastFrameMs = 0;
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
         renderer.setAnimationLoop(() => {
+            const frameStarted = performance.now();
             const elapsed = clock.getDelta(), delta = Math.min(elapsed, .1);
             time += delta;
             controller.update(delta);
@@ -542,11 +550,15 @@ export class FjordPlay {
             layer!.advance(motion!, motionDelta, running);
             layer!.select(liveMarkers);
             selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
-            const rendered = layer!.describe();
-            productionLabels.setAnchors(rendered);
-            profile!.update(this.shared.selection?.kind === 'persona' ? layer!.bounds('persona:' + this.shared.selection.id) : undefined);
+            productionLabels.setAnchors(layer!.productionAnchors());
             if (performance.now() - lastDiagnostics > 500) {
-                canvas.dataset.rendered = JSON.stringify(rendered);
+                canvas.dataset.rendered = JSON.stringify(layer!.describe());
+                canvas.dataset.stability = JSON.stringify({
+                    ...motion!.inspectMetrics(), ...models!.inspectResources(),
+                    lastFrameMs, drawCalls: renderer.info.render.calls,
+                    triangles: renderer.info.render.triangles,
+                    geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures
+                });
                 canvas.dataset.motion = JSON.stringify(motion!.inspect());
                 canvas.dataset.motionTime = String(activeTime);
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
@@ -563,6 +575,7 @@ export class FjordPlay {
             lighting!.update(time);
             world!.update(time, lighting, camera);
             renderer.render(scene, camera);
+            lastFrameMs = performance.now() - frameStarted;
         });
     }
 }

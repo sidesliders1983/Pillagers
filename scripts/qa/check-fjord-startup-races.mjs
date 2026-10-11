@@ -5,7 +5,9 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5180';
-const browser = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+const browser = await chromium.launch(process.env.QA_NATIVE === '1' ?
+    { headless: true, channel: 'msedge' } :
+    { headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 const observations = [], errors = [];
 const output = process.env.QA_OUTPUT || 'docs/qa/living-fjord';
 async function exportCore(page) {

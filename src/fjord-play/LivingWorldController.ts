@@ -39,6 +39,10 @@ type Agent = {
 /** Ephemeral presentation only. Neither simulation state nor its random stream enters this controller. */
 export class LivingWorldController {
     readonly diagnostics: string[] = [];
+    private metrics = { routeAttempts: 0, rejectedRoutes: 0, targetAttempts: 0,
+        rejectedTargets: 0, routeNodes: 0, maxRouteNodes: 0,
+        updates: 0, lastUpdateMs: 0, maxUpdateMs: 0, totalUpdateMs: 0,
+        yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0 };
     private agents = new Map<string, Agent>();
     private social = new SocialEncounters();
     private surface;
@@ -46,6 +50,7 @@ export class LivingWorldController {
     private trees: { key: string; x: number; z: number; clearance: number }[] = [];
     private parcels: FjordEntity[] = [];
     private nature: WorldBlueprint['placementPlan'] = [];
+    private natureCells = new Map<string, Array<WorldBlueprint['placementPlan'][number]>>();
     private ground: FjordGround = { plots: [], paths: [] };
     constructor(private world: WorldBlueprint) { this.surface = createBlueprintSurface(world); }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
@@ -56,6 +61,18 @@ export class LivingWorldController {
         const cleared = [...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
             ...ground.paths.flatMap(p => p.points.map(point => ({ ...point, halfWidth: 1.5, halfDepth: 1.5 })))];
         this.nature = this.world.placementPlan.filter(p => !cleared.some(c => Math.abs(p.x - c.x) <= c.halfWidth + p.clearance && Math.abs(p.z - c.z) <= c.halfDepth + p.clearance));
+        this.natureCells.clear();
+        for (const item of this.nature) {
+            const radius = Math.max(.5, item.clearance) + .35;
+            for (let x = Math.floor((item.x - radius) / 8); x <= Math.floor((item.x + radius) / 8); x++)
+                for (let z = Math.floor((item.z - radius) / 8); z <= Math.floor((item.z + radius) / 8); z++) {
+                    const key = x + ',' + z;
+                    let cell = this.natureCells.get(key);
+                    if (!cell) this.natureCells.set(key, cell = []);
+                    cell.push(item);
+                }
+        }
+        const existing = new Set(this.agents.keys());
         const wanted = new Set(active.map(e => e.selectionKey));
         for (const key of this.agents.keys())
             if (!wanted.has(key)) {
@@ -64,8 +81,15 @@ export class LivingWorldController {
                 this.yardSurfaces.delete(key);
             }
         for (const entity of active) {
-            const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.asset, entity.status.assignment, entity.status.grazingZone]);
+            const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.status.assignment, entity.status.grazingZone]);
             let agent = this.agents.get(entity.selectionKey);
+            if (agent && agent.signature !== signature && entity.kind === 'persona') {
+                // A new home changes navigation intent, not an already safe moving body.
+                this.social.remove(agent.key);
+                this.cancelVisit(agent);
+                agent.anchor = { x: p.x, z: p.z };
+                agent.signature = signature;
+            }
             if (!agent || agent.signature !== signature) {
                 this.social.remove(entity.selectionKey);
                 this.yardSurfaces.delete(entity.selectionKey);
@@ -100,6 +124,30 @@ export class LivingWorldController {
                 agent.speed = 0;
             }
             agent.y = this.surface.surfaceHeightAt(agent.x, agent.z);
+        }
+        const actors = [...this.agents.values()].sort((a, b) =>
+            Number(existing.has(a.key)) - Number(existing.has(b.key)));
+        for (const actor of actors) {
+            // Actual fenced yard support is bound afterwards by the loaded source layer.
+            if (actor.entity.status.grazingZone === 'yard' || this.bodyClearance(actor, actor)) continue;
+            let point: Point2 | undefined;
+            for (let radius = .25; radius <= 3 && !point; radius += .25)
+                for (let direction = 0; direction < 32 && !point; direction++) {
+                    const candidate = { x: actor.x + Math.cos(direction * Math.PI / 16) * radius,
+                        z: actor.z + Math.sin(direction * Math.PI / 16) * radius };
+                    if (this.safe(actor, candidate) && this.bodyClearance(actor, candidate, candidate)) point = candidate;
+                }
+            if (point) {
+                this.social.remove(actor.key);
+                this.cancelVisit(actor);
+                actor.x = point.x;
+                actor.z = point.z;
+                actor.y = this.height(actor);
+                actor.path = [];
+                actor.detour = [];
+                actor.speed = 0;
+                actor.state = 'Idle';
+            }
         }
         this.clearReleasedPoses();
     }
@@ -225,8 +273,12 @@ export class LivingWorldController {
         const offset = Math.floor(this.random(a) * Math.max(1, targets.length));
         for (let i = 0; i < Math.min(8, targets.length); i++) {
             const visit = targets[(i + offset) % targets.length];
+            this.metrics.targetAttempts++;
             const path = this.route(a, visit.target);
-            if (!path.length) continue;
+            if (!path.length) {
+                this.metrics.rejectedTargets++;
+                continue;
+            }
             visit.travelRemaining = this.visitBudget(a, path);
             visit.checkpoint = { x: a.x, z: a.z };
             visit.checkpointSeconds = 0;
@@ -268,7 +320,7 @@ export class LivingWorldController {
         this.yardSurfaces.set(key, sample);
         const agent = this.agents.get(key);
         if (agent) {
-            if (!this.safe(agent, agent)) {
+            if (!this.safe(agent, agent) || !this.bodyClearance(agent, agent)) {
                 this.social.remove(agent.key);
                 const farm = this.parcels.find(e => e.kind === 'building' &&
                     e.id === agent.entity.status.assignment)?.plot;
@@ -296,11 +348,70 @@ export class LivingWorldController {
                     agent.path = [];
                     agent.state = 'Idle';
                     agent.speed = 0;
+                } else if (!this.repackYard(agent, candidates)) {
+                    const message = agent.key + ': no free source-yard slot after bounded herd recovery.';
+                    if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
                 }
             }
             agent.y = this.height(agent);
         }
         this.clearReleasedPoses();
+    }
+    /** A larger body can exhaust the free gaps even though the authored yard still fits the herd.
+     * Repack only after local recovery fails, prefer current poses, and never relax source clearance. */
+    private repackYard(changed: Agent, candidates: readonly Point2[]) {
+        this.metrics.yardRepackAttempts++;
+        const herd = [...this.agents.values()].filter(actor => actor.kind === 'cattle' &&
+            actor.entity.status.grazingZone === 'yard' &&
+            actor.entity.status.assignment === changed.entity.status.assignment &&
+            this.yardSurfaces.has(actor.key));
+        const members = new Set(herd);
+        const outside = [...this.agents.values()].filter(actor => !members.has(actor));
+        const options = herd.map(actor => ({ actor, points: [actor, ...candidates]
+            .filter(point => this.safe(actor, point) && outside.every(other =>
+                Math.hypot(other.x - point.x, other.z - point.z) >= this.radius(other) + this.radius(actor)))
+            .sort((a, b) => Math.hypot(a.x - actor.x, a.z - actor.z) -
+                Math.hypot(b.x - actor.x, b.z - actor.z)) }));
+        // Constrained/newly invalid actors reserve their support first; the others retain their pose if possible.
+        options.sort((a, b) => Number(this.safe(a.actor, a.actor)) - Number(this.safe(b.actor, b.actor)) ||
+            a.points.length - b.points.length || a.actor.key.localeCompare(b.actor.key));
+        const assigned = new Map<Agent, Point2>();
+        let attempts = 0;
+        const place = (index: number): boolean => {
+            if (index === options.length) return true;
+            const { actor, points } = options[index];
+            for (const point of points) {
+                if (attempts >= 12000) return false;
+                attempts++;
+                if ([...assigned].some(([other, p]) =>
+                    Math.hypot(p.x - point.x, p.z - point.z) < this.radius(actor) + this.radius(other))) continue;
+                assigned.set(actor, point);
+                if (place(index + 1)) return true;
+                assigned.delete(actor);
+            }
+            return false;
+        };
+        const success = place(0);
+        this.metrics.yardRepackNodes += attempts;
+        if (!success) {
+            this.metrics.yardRepackFailures++;
+            return false;
+        }
+        // Copy coordinates before applying them: an unchanged option may be the live agent itself.
+        const poses = [...assigned].map(([actor, point]) => ({ actor, x: point.x, z: point.z }));
+        for (const { actor, x, z } of poses) {
+            if (actor.x !== x || actor.z !== z) {
+                this.social.remove(actor.key);
+                actor.x = x;
+                actor.z = z;
+                actor.path = [];
+                actor.detour = [];
+                actor.state = 'Idle';
+                actor.speed = 0;
+            }
+            actor.y = this.height(actor);
+        }
+        return true;
     }
     private radius(a: Agent) {
         return a.kind === 'persona' ? residentMovementConfig.radius : a.entity.status.stage === 'Young' ? .5 : a.entity.status.stage === 'Young Adult' ? .7 : .9;
@@ -332,8 +443,10 @@ export class LivingWorldController {
         if (a.entity.status.grazingZone === 'yard' && farm) {
             if (Math.abs(p.x - farm.x) > farm.halfWidth - .8 || Math.abs(p.z - farm.z) > farm.halfDepth - .8)
                 return false;
-            // Source farmhouse occupies the central four metres; cattle use the surrounding yard.
-            if (Math.abs(p.x - farm.x) < 2.8 && Math.abs(p.z - farm.z) < 2.8)
+            // Use the conservative house rectangle until actual source walls/fences are bound.
+            // The authored footprint is irregular and contains usable alcoves within that proxy.
+            if (!this.yardSurfaces.has(a.key) &&
+                Math.abs(p.x - farm.x) < 2.8 && Math.abs(p.z - farm.z) < 2.8)
                 return false;
         }
         else if (a.kind === 'cattle' && Math.hypot(p.x - a.anchor.x, p.z - a.anchor.z) > 8)
@@ -344,7 +457,8 @@ export class LivingWorldController {
             return Math.abs(p.x - e.plot!.x) <= e.plot!.halfWidth + .65 && Math.abs(p.z - e.plot!.z) <= e.plot!.halfDepth + .65;
         }))
             return false;
-        return !this.nature.some(n => Math.hypot(p.x - n.x, p.z - n.z) < Math.max(.5, n.clearance) + .35);
+        const nearby = this.natureCells.get(Math.floor(p.x / 8) + ',' + Math.floor(p.z / 8));
+        return !nearby?.some(n => Math.hypot(p.x - n.x, p.z - n.z) < Math.max(.5, n.clearance) + .35);
     }
     private segment(a: Agent, from: Point2, to: Point2) {
         const steps = Math.max(1, Math.ceil(Math.hypot(to.x - from.x, to.z - from.z) / .2));
@@ -354,6 +468,13 @@ export class LivingWorldController {
         return true;
     }
     private route(a: Agent, goal?: Point2) {
+        this.metrics.routeAttempts++;
+        const measured = (nodes: number, path: Point2[]) => {
+            this.metrics.routeNodes += nodes;
+            this.metrics.maxRouteNodes = Math.max(this.metrics.maxRouteNodes, nodes);
+            if (!path.length) this.metrics.rejectedRoutes++;
+            return path;
+        };
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
         const spacing = a.entity.status.grazingZone === 'yard' ? .25 : 1;
         const nodes: Point2[] = [{ x: a.x, z: a.z }], parents = [-1], seen = new Set(['0,0']);
@@ -369,7 +490,7 @@ export class LivingWorldController {
                 const path: Point2[] = [goal];
                 let end = i;
                 while (end > 0) { path.unshift(nodes[end]); end = parents[end]; }
-                return path;
+                return measured(nodes.length, path);
             }
             for (const [dx, dz] of [[1, 0], [0, 1], [-1, 0], [0, -1]]) {
                 const to = { x: from.x + dx * spacing, z: from.z + dz * spacing };
@@ -389,9 +510,7 @@ export class LivingWorldController {
                 nodes.push(to);
             }
         }
-        if (goal) return [];
-        if (nodes.length < 2)
-            return [];
+        if (goal || nodes.length < 2) return measured(nodes.length, []);
         let end = 1 + Math.floor(this.random(a) * (nodes.length - 1));
         if (a.kind === 'persona' && this.random(a) < .7) {
             const homes = this.parcels.map(e => ({ x: e.plot!.x + Math.sin(e.plot!.rotation) * (e.plot!.halfDepth + 2),
@@ -410,14 +529,20 @@ export class LivingWorldController {
             path.unshift(nodes[end]);
             end = parents[end];
         }
-        return path;
+        return measured(nodes.length, path);
     }
     advance(seconds: number, running: boolean, visible: boolean) {
         if (!running || !visible || !Number.isFinite(seconds) || seconds <= 0)
             return;
+        const started = performance.now();
         const elapsed = Math.min(seconds, 1), steps = Math.ceil(elapsed / .1);
         for (let i = 0; i < steps; i++)
             this.step(elapsed / steps);
+        const cost = performance.now() - started;
+        this.metrics.updates++;
+        this.metrics.lastUpdateMs = cost;
+        this.metrics.maxUpdateMs = Math.max(this.metrics.maxUpdateMs, cost);
+        this.metrics.totalUpdateMs += cost;
     }
     private encounterActor(a: Agent) {
         const next = a.detour[0] ?? a.path[0];
@@ -430,14 +555,15 @@ export class LivingWorldController {
     private bodyClearance(a: Agent, point: Point2, from: Point2 = a) {
         const dx = point.x - from.x, dz = point.z - from.z;
         const lengthSquared = dx * dx + dz * dz;
-        return [...this.agents.values()].every(other => {
-            if (other === a) return true;
+        for (const other of this.agents.values()) {
+            if (other === a) continue;
             const fraction = lengthSquared ? Math.max(0, Math.min(1,
                 ((other.x - from.x) * dx + (other.z - from.z) * dz) / lengthSquared)) : 0;
             const closest = Math.hypot(from.x + dx * fraction - other.x,
                 from.z + dz * fraction - other.z);
-            return closest >= this.radius(a) + this.radius(other) - 1e-7;
-        });
+            if (closest < this.radius(a) + this.radius(other) - 1e-7) return false;
+        }
+        return true;
     }
     private planPassing(a: Agent) {
         if (a.kind !== 'persona' || a.detour.length || !a.path.length) return;
@@ -635,6 +761,19 @@ export class LivingWorldController {
                 else a.path.shift();
             }
         }
+    }
+    /** Read-only counters sampled by QA; timing never affects navigation or random choices. */
+    inspectMetrics() {
+        const actors = [...this.agents.values()];
+        let bodyOverlaps = 0;
+        for (let i = 0; i < actors.length; i++) for (let j = i + 1; j < actors.length; j++) {
+            if (Math.hypot(actors[i].x - actors[j].x, actors[i].z - actors[j].z) <
+                this.radius(actors[i]) + this.radius(actors[j]) - 1e-6) bodyOverlaps++;
+        }
+        return { ...this.metrics, agents: actors.length,
+            reservations: this.social.activePairs().length,
+            occupationVisits: actors.filter(a => a.visit).length,
+            outOfZone: actors.filter(a => !this.safe(a, a)).length, bodyOverlaps };
     }
     inspect() {
         return [...this.agents.values()].map(a => ({ key: a.key, kind: a.kind, x: a.x, y: a.y, z: a.z,

@@ -157,6 +157,14 @@ export class FjordEntities {
             this.models.animate(model, agent.state, agent.speed, running ? delta : 0);
         }
     }
+    /** Only moving producer anchors are needed each frame; full diagnostics are throttled. */
+    productionAnchors() {
+        return [...this.entries].flatMap(([key, entry]) => {
+            const facts = entry.model.userData.canonical;
+            if (facts.kind !== 'persona' && facts.kind !== 'cattle') return [];
+            return [{ id: facts.id, kind: facts.kind, bounds: this.bounds(key)! }];
+        });
+    }
     describe() {
         this.root.updateMatrixWorld(true);
         return [...this.entries].map(([key, entry]) => ({
