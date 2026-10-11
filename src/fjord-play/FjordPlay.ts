@@ -6,7 +6,7 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
-import { Clock, Object3D, PerspectiveCamera, Raycaster, Scene, Vector2 } from 'three';
+import { Clock, PerspectiveCamera, Scene } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import { updateView } from '../gameplay-lab/updateView';
@@ -508,19 +508,14 @@ export class FjordPlay {
             lighting!.setQuality(quality);
             renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.5));
         });
-        controller.setSelectionHandler((x, y) => {
-            const rect = canvas.getBoundingClientRect(), ray = new Raycaster();
-            ray.setFromCamera(new Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), camera);
-            const hit = ray.intersectObject(layer!.root, true)[0];
-            let node: Object3D | null = hit?.object ?? null;
-            while (node && !node.userData.canonical)
-                node = node.parent;
-            if (!node) {
+        controller.setSelectionHandler((x, y, pointerType) => {
+            const selected = layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
+            if (!selected) {
                 this.shared.select(null);
                 refresh();
                 return false;
             }
-            select(node.userData.canonical.kind, node.userData.canonical.id);
+            select(selected.kind, selected.id);
             return true;
         });
         const resize = () => {

@@ -1,7 +1,7 @@
 import { createFjordYardSurface } from './FjordYardSurface';
 import type { LivingWorldController } from './LivingWorldController';
 import type { SelectionMarker } from '../play/SelectionPresentation';
-import { Box3, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector3 } from 'three';
+import { Box3, Camera, DoubleSide, Group, Mesh, MeshBasicMaterial, Object3D, Raycaster, RingGeometry, SkinnedMesh, Vector2, Vector3 } from 'three';
 import { FjordModels } from './FjordModels';
 import type { FjordEntity } from './FjordProjection';
 /** Reconcile canonical identities; unchanged objects and the environment remain alive. */
@@ -121,6 +121,58 @@ export class FjordEntities {
     bounds(key: string) {
         const entry = this.entries.get(key);
         return entry?.localBounds?.clone().translate(entry.model.position);
+    }
+    /** Touch targets use CSS pixels and current moving bodies, independently of render DPR. */
+    pick(camera: Camera, x: number, y: number,
+        viewport: { left: number; top: number; width: number; height: number },
+        pointerType: 'mouse' | 'touch' = 'mouse') {
+        if (viewport.width <= 0 || viewport.height <= 0) return null;
+        this.root.updateMatrixWorld(true);
+        camera.updateMatrixWorld(true);
+        const ray = new Raycaster();
+        ray.setFromCamera(new Vector2((x - viewport.left) / viewport.width * 2 - 1,
+            -(y - viewport.top) / viewport.height * 2 + 1), camera);
+        const canonical = (node: Object3D | null) => {
+            while (node && !node.userData.canonical) node = node.parent;
+            return node?.userData.canonical ?? null;
+        };
+        const exact = canonical(ray.intersectObject(this.root, true)[0]?.object ?? null);
+        if (pointerType !== 'touch' || exact?.kind === 'persona' || exact?.kind === 'cattle')
+            return exact;
+        const candidates: { facts: { kind: string; id: string }; distance: number; depth: number }[] = [];
+        for (const [key, entry] of this.entries) {
+            const facts = entry.model.userData.canonical;
+            if (facts.kind !== 'persona' && facts.kind !== 'cattle') continue;
+            const bounds = this.bounds(key);
+            if (!bounds || !entry.model.visible) continue;
+            const center = bounds.getCenter(new Vector3()), projected = center.clone().project(camera);
+            if (projected.z < -1 || projected.z > 1) continue;
+            const points = [];
+            for (const px of [bounds.min.x, bounds.max.x])
+                for (const py of [bounds.min.y, bounds.max.y])
+                    for (const pz of [bounds.min.z, bounds.max.z]) {
+                        const p = new Vector3(px, py, pz).project(camera);
+                        points.push({ x: viewport.left + (p.x + 1) * viewport.width / 2,
+                            y: viewport.top + (1 - p.y) * viewport.height / 2 });
+                    }
+            const minX = Math.min(...points.map(p => p.x)), maxX = Math.max(...points.map(p => p.x));
+            const minY = Math.min(...points.map(p => p.y)), maxY = Math.max(...points.map(p => p.y));
+            const screenX = (minX + maxX) / 2, screenY = (minY + maxY) / 2;
+            // At least 44 x 44 CSS pixels; small models also get forgiving edge padding.
+            const halfWidth = Math.max(22, (maxX - minX) / 2 + 8);
+            const halfHeight = Math.max(22, (maxY - minY) / 2 + 8);
+            if (Math.abs(x - screenX) > halfWidth || Math.abs(y - screenY) > halfHeight) continue;
+            // Enlarging a target must not make a resident selectable through a nearer home.
+            ray.setFromCamera(new Vector2(projected.x, projected.y), camera);
+            const body = ray.ray.intersectBox(bounds, new Vector3());
+            const foreground = ray.intersectObject(this.root, true)[0];
+            if (body && foreground && canonical(foreground.object)?.id !== facts.id &&
+                foreground.distance + .01 < body.distanceTo(ray.ray.origin)) continue;
+            candidates.push({ facts, distance: Math.hypot(x - screenX, y - screenY), depth: projected.z });
+        }
+        candidates.sort((a, b) => a.distance - b.distance || a.depth - b.depth ||
+            a.facts.id.localeCompare(b.facts.id));
+        return candidates[0]?.facts ?? exact;
     }
     configureMotion(motion: LivingWorldController) {
         for (const id of this.yardSamplers.keys())

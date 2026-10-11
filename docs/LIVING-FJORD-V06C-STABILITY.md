@@ -18,7 +18,9 @@ The public controller diagnostics report agents, route/target attempts and rejec
 
 ## Resident information
 
-The selected resident has one name-and-line selection label above the moving body. Family and home labels/circles remain. Character traits and heritage use the shared profile content renderer in an expandable section of the existing management panel; no second floating Fjordside card covers the scene. Original Fjordside's own character card is unchanged.
+The selected resident has one name-and-line selection label above the moving body. Family and home labels/circles remain. Character traits and heritage use the shared profile content renderer in an expandable section of the existing management panel; no second floating Fjordside card covers the scene. Original Fjordside's own character card is unchanged. Touch selection uses a minimum 44 × 44 CSS-pixel target around the live projected resident/cattle bounds, with 8-pixel edge padding for larger models. Exact actor hits win; overlapping expanded targets use the closest screen center and depth as a tie-breaker. A nearer building can occlude the expanded target. Mouse selection retains exact mesh picking. Drag/pinch never acquire a selection.
+
+See [touch selection regression evidence](qa/fjord-touch-selection/report.md) for finger-sized near taps, a held tap on a walking resident, gestures and unchanged replay.
 
 ## Current cattle defaults
 

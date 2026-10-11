@@ -1,0 +1,9 @@
+# Touch resident selection regression — PR #102
+
+The previous picker required an exact triangle hit on a tiny moving body. A real tablet-view browser test tapping 18 CSS pixels beside a resident failed with an empty selection. Touch now uses current projected actor bounds with a minimum 44 × 44 CSS-pixel target and 8-pixel edge padding for larger bodies. The change applies to residents and cattle, independently of pixel ratio and camera distance. Exact actor hits take precedence; overlapping expanded targets choose the nearest screen center, then depth. A nearer building occludes the expanded target. Mouse mesh picking remains precise.
+
+Native Edge at 1024 × 768 with touch enabled verifies three isolated near taps, then a walking resident with a 250 ms finger contact and 3 × 2 pixel drift while the clock runs. Drag rotation and two-finger spread preserve selection. The complete canonical export equals independently replayed elapsed ticks. The existing moved-body selection and single-label/heritage regression also passes. No new physical iPad test is claimed.
+
+[Observed taps and gesture assertions](result.json) · [Screenshot](touch-selection.png). Reproduce with node scripts/qa/check-fjord-touch-selection.mjs against the worktree server on port 5180. The fixture uses validated public Core crowd data with quiet lifecycle/weather and generous reserves; it is a UI check, not a balance measurement. The seeded visible candidates exclude a nearer resident/cow and the overlay panel when choosing isolated near-tap probes.
+
+The touch gesture classifier is reused: a tap selects on release, while drag, cancellation and pinch never select. There is no movement pause, new gameplay rule, extra floating card or saved-state change. TypeScript/build and the existing touch/movement/interaction suites are checked locally; current-head full CI status is recorded in the PR. Formatting is manually reviewed with git diff --check; no formatter is configured.
