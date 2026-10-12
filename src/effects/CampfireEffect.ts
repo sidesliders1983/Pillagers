@@ -26,7 +26,7 @@ class HearthEmitter extends ConeEmitter {
 }
 
 /** Locally authored soft particle mask, shared by all three systems; no external image/preset. */
-function particleTexture() {
+export function particleTexture() {
     const size = 32, pixels = new Uint8Array(size * size * 4);
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
         const offset = (y * size + x) * 4;

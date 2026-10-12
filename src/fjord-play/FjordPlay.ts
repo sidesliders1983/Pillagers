@@ -1,3 +1,4 @@
+import { PrecipitationEffect } from '../effects/PrecipitationEffect';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
@@ -364,10 +365,13 @@ export class FjordPlay {
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
         let campfireEffect: CampfireEffect | undefined;
+        let precipitationEffect: PrecipitationEffect | undefined;
         const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-        const configureEffects = () => campfireEffect?.configure(
-            document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
-            reducedMotion.matches);
+        const configureEffects = () => {
+            const quality = document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality;
+            campfireEffect?.configure(quality, reducedMotion.matches);
+            precipitationEffect?.configure(quality, reducedMotion.matches);
+        };
         reducedMotion.addEventListener('change', configureEffects);
         document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects);
         let weatherSignature = "";
@@ -386,6 +390,7 @@ export class FjordPlay {
             models?.dispose();
             weatherTint?.dispose();
             campfireEffect?.dispose();
+            precipitationEffect?.dispose();
             world?.dispose();
             assets?.dispose();
             lighting?.dispose();
@@ -422,6 +427,7 @@ export class FjordPlay {
                 this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
                 weatherTint?.dispose();
                 campfireEffect?.dispose();
+                precipitationEffect?.dispose();
                 world?.dispose();
                 world = next;
                 const fire = this.campaign.project().campfire;
@@ -431,6 +437,9 @@ export class FjordPlay {
                 const fireState = inspectCampfire(this.session.snapshot());
                 campfireEffect = new CampfireEffect(fire.id, firePosition.clone().add(new Vector3(0, .9, 0)),
                     this.session.snapshot().seed, fireState.lit);
+                precipitationEffect = new PrecipitationEffect(this.session.snapshot().seed,
+                    (x, z) => Math.max(blueprint.waterLevel, next.movement.heightAt(x, z)));
+                scene.add(precipitationEffect.root);
                 configureEffects();
                 scene.add(campfireEffect.root);
                 layer!.setCampfireHeat(campfireEffect.inspect().heat);
@@ -472,6 +481,8 @@ export class FjordPlay {
                 do {
                     this.queued = false;
                     const view = this.campaign.project();
+                    precipitationEffect!.setWeather(view.precipitation.kind);
+                    canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
                     if (nextWeather !== weatherSignature) {
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
@@ -600,6 +611,7 @@ export class FjordPlay {
             motion!.advance(motionDelta, running, !document.hidden);
             layer!.advance(motion!, motionDelta, running);
             campfireEffect!.update(delta, running && !document.hidden);
+            precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
             const fireVisual = campfireEffect!.inspect();
             layer!.setCampfireHeat(fireVisual.heat);
             lighting!.setCampfire(fireVisual.lit && fireVisual.quality !== 'off', fireVisual.time, fireVisual.reducedMotion);
@@ -616,6 +628,7 @@ export class FjordPlay {
                 });
                 canvas.dataset.motion = JSON.stringify(motion!.inspect());
                 canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
+                canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                 canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                 canvas.dataset.motionTime = String(activeTime);
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);

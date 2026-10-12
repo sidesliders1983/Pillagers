@@ -21,6 +21,9 @@ test('canonical Fjord calendar starts in Winter and changes at exact quarter bou
         const before = core.serializeState(state);
         const view = projectFjordSettlement(state, world, layout);
         assert.equal(view.calendar?.season, season, 'season at elapsed tick ' + ticks);
+        assert.deepEqual(view.precipitation, {
+            kind: season === 'Winter' ? 'snow' : season === 'Autumn' ? 'rain' : 'none'
+        }, 'falling precipitation follows the calendar, not the lingering ground snow');
         assert.equal(view.calendar.year, year);
         assert.equal(view.calendar.progress, (ticks % 1000) / 1000);
         assert.equal(core.serializeState(state), before, 'calendar projection does not mutate Core');
@@ -71,6 +74,7 @@ test('all annual weather classes and weather-off retain seasons and do not rerol
             const before = owner.session.saveJSON();
             const view = owner.fjord.project();
             assert.equal(view.calendar.season, season);
+            assert.equal(view.precipitation.kind, ['snow', 'none', 'none', 'rain'][index]);
             assert.equal(view.weatherVisual.class, kind);
             assert.equal(owner.session.saveJSON(), before, 'presentation cannot write Core');
             assert.deepEqual(owner.session.snapshot().weather, initial.weather, 'no weather reroll within a year');

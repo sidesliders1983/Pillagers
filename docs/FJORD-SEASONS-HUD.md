@@ -107,3 +107,9 @@ Historical reports remain records of the rules and UI they originally measured.
 
 Northern thaw correction evidence: [browser report](qa/fjord-season-thaw/report.md).
 The original seasons/HUD report remains a record of the earlier transition timing.
+
+## Falling precipitation
+
+The Fjord now adds calendar-driven snow in Winter and rain in Autumn through the shared
+Local effects setting. See [seasonal precipitation](FJORD-SEASONAL-PRECIPITATION.md) for
+quality limits, accessibility, transitions and the distinction from economic weather rules.

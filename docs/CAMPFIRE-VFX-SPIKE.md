@@ -50,5 +50,5 @@ Its 2× source scale, clearing, navigation obstacle and house orientations remai
   pause, quality and reduced motion, save/load, +1 Year and no-fuel availability.
 - [Visual review and recorded results](qa/campfire-vfx/review.html).
 
-The physical iPad still needs owner review. Weather particles, chimney smoke, a generalized
+The physical iPad still needs owner review. [Seasonal snow and rain](FJORD-SEASONAL-PRECIPITATION.md) now reuse this library and the Local effects setting. Chimney smoke, a generalized
 multi-settlement effect registry, ceremonies and gameplay warmth are later work in #97.

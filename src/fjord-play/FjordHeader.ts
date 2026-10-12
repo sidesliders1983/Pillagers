@@ -25,9 +25,9 @@ export function fjordHeaderHTML(): string {
                     <button id="clan-book-open" type="button">Clan Book</button>
                     <label>Quality<select id="fjord-quality"><option value="low">Low</option>
                         <option value="standard">Standard</option></select></label>
-                    <label>Fire effects<select id="fjord-effects"><option value="off">Off</option>
+                    <label>Local effects<select id="fjord-effects"><option value="off">Off</option>
                         <option value="low" selected>Low</option><option value="normal">Normal</option></select></label>
-                    <small>Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
+                    <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
                     <span id="screen-awake-slot"></span>
                     <details id="fjord-campaign"><summary>Campaign</summary><div class="fjord-campaign-settings">
                         <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
