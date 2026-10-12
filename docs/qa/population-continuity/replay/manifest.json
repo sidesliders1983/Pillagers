@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "revision": "7bb64f163c882db502c01abd9af2bac5d857a9ef",
+  "dirty": true,
+  "node": "v24.19.0",
+  "platform": "win32",
+  "startedAt": "2026-10-12T17:21:48.487Z",
+  "options": {
+    "seeds": "32",
+    "candidates": "control30,baseline15,human-reserve,mortality,feeding,yard-breeding,combined",
+    "policies": "passive",
+    "winters": 80,
+    "out": "docs/qa/population-continuity/replay",
+    "workers": 2,
+    "timeout": 150000,
+    "maxCattle": 2000,
+    "replay": "true"
+  },
+  "observations": [
+    {
+      "candidate": "baseline15",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "complete",
+      "stopReason": null,
+      "completedWinter": 880,
+      "elapsedMs": 20639,
+      "file": "baseline15-passive-32.json.gz",
+      "bytes": 139477,
+      "sha256": "61691c4650b6e9d00d0081c6bdc1e56995751bc1fb0b5b97ca76d5744cb7fb98",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "baseline15",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    },
+    {
+      "candidate": "combined",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "complete",
+      "stopReason": null,
+      "completedWinter": 880,
+      "elapsedMs": 10539,
+      "file": "combined-passive-32.json.gz",
+      "bytes": 56181,
+      "sha256": "150024e454f06a2d1dbb626e4d3d1fb098ed57fab8ff78272c79214e55fd3586",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "combined",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    },
+    {
+      "candidate": "control30",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "complete",
+      "stopReason": null,
+      "completedWinter": 880,
+      "elapsedMs": 16549,
+      "file": "control30-passive-32.json.gz",
+      "bytes": 164939,
+      "sha256": "99aeadd7038735da671382fc74636626562a83da7576858ddb44fee92b07152d",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "control30",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    },
+    {
+      "candidate": "feeding",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "complete",
+      "stopReason": null,
+      "completedWinter": 880,
+      "elapsedMs": 16427,
+      "file": "feeding-passive-32.json.gz",
+      "bytes": 100412,
+      "sha256": "56a35931b607e58a0a20ef4cd3c3c89b23d87ad762c7447aa4bb0de3ee1b9ded",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "feeding",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    },
+    {
+      "candidate": "human-reserve",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "complete",
+      "stopReason": null,
+      "completedWinter": 880,
+      "elapsedMs": 10644,
+      "file": "human-reserve-passive-32.json.gz",
+      "bytes": 53886,
+      "sha256": "c9cbf502ce2a36f02c304bfd3956886aa3fc6cda04df6f4c581b2a38764fa266",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "human-reserve",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    },
+    {
+      "candidate": "mortality",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "extinct",
+      "stopReason": "no-living-residents",
+      "completedWinter": 880,
+      "elapsedMs": 10467,
+      "file": "mortality-passive-32.json.gz",
+      "bytes": 78357,
+      "sha256": "e90efe0fed86e859be385e311d969424fbcadc9b3870e52aefe4f70691ca2577",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "mortality",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    },
+    {
+      "candidate": "yard-breeding",
+      "policy": "passive",
+      "seed": 32,
+      "winters": 80,
+      "maxCattle": 2000,
+      "maxMilliseconds": 140000,
+      "resumeAt": 40,
+      "status": "complete",
+      "stopReason": null,
+      "completedWinter": 880,
+      "elapsedMs": 9410,
+      "file": "yard-breeding-passive-32.json.gz",
+      "bytes": 23447,
+      "sha256": "537e6b6f4131d6d65aa707b67cfe436c981b085c35ed6c36572a155ee1c45a1c",
+      "identity": {
+        "kind": "population-study",
+        "version": 1,
+        "candidate": "yard-breeding",
+        "sourceHash": "3b7fb4d841ddfc3199699052ccabe43e886f1aa76372e1a6ed58ad7099a1b05c",
+        "hookHash": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426"
+      }
+    }
+  ],
+  "finishedAt": "2026-10-12T17:22:39.555Z"
+}

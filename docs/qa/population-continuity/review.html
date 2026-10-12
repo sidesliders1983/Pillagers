@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Population continuity · Pillagers</title>
+<style>
+:root{font:16px/1.55 system-ui,sans-serif;color:#e8e8db;background:#132c29}body{max-width:1180px;margin:auto;padding:28px}h1{font:40px Georgia,serif;margin:8px 0}h2{font:27px Georgia,serif}p{max-width:85ch}a{color:#dfc69a}.eyebrow{color:#acbea8;text-transform:uppercase;letter-spacing:.15em;font-size:12px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:#203d35;border:1px solid #57715d;border-radius:12px;padding:20px}.card strong{font:34px Georgia,serif;display:block;color:#edcf97}.muted{color:#bbcabb;font-size:14px}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:11px;border-bottom:1px solid #456456;white-space:nowrap}th{color:#edcf97}select{background:#294a3d;color:inherit;padding:10px;border:1px solid #748e71;border-radius:6px;width:min(100%,550px)}details{border:1px solid #57715d;padding:14px;border-radius:8px;margin-top:16px}summary{cursor:pointer;color:#edcf97}.chart{display:flex;align-items:end;gap:4px;height:130px;border-bottom:1px solid #7a977d;margin-top:20px}.bar{background:#b7ca8e;flex:1;min-height:2px;position:relative}.bar span{position:absolute;bottom:100%;font-size:12px}.legend{display:flex;justify-content:space-between;font-size:12px;color:#bbcabb}pre{white-space:pre-wrap;font-size:13px}@media(max-width:650px){body{padding:16px}h1{font-size:32px}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="eyebrow">Issue #127 · research for owner review</div>
+<h1>Population continuity</h1>
+<p>New player campaigns now start with <b>15 Food</b>. The remaining experiments are proposals only. The study follows eight seeded clans for up to eighty years using real Simulation Core commands.</p>
+<div class="cards"><div class="card"><strong>15 Food</strong>Approved opening stock<br><span class="muted">Old saves and saved-rule restarts retain their own rules.</span></div><div class="card"><strong>4 / 8</strong>Clans lost with stronger mortality<br><span class="muted">Current 15-Food baseline: 1 / 8. Small pilot, not a population estimate.</span></div><div class="card"><strong>No birth cap</strong>Third and fourth children verified<br><span class="muted">Food reserves, available partners and care duties remain separate gates.</span></div></div>
+<h2>Compared outcomes</h2>
+<p class="muted">Population medians include extinct clans as zero. Food, cattle and adult-descendant medians cover only campaigns that completed eighty years. Read the report for policy details and censoring.</p>
+<div class="table"><table><thead><tr><th>Rules / policy</th><th>Clans lost</th><th>Residents at 80</th><th>Adult descendants*</th><th>Cattle*</th><th>Births total</th></tr></thead><tbody id="cohorts"></tbody></table></div>
+<h2>Inspect a cohort</h2><label for="cohort">Rules and command policy</label><br><select id="cohort"></select>
+<div id="detail"></div>
+<details><summary>How to interpret these measurements</summary><p>These are different campaigns from the owner's photographed playtest; no export of that run was supplied. All eight seeds are reused across conditions. Changed eligibility changes RNG consumption, so future weather and births can diverge. A smaller opening stock does not guarantee fewer births or more shortage years in every seed.</p><p>The maintained-housing policy chooses one quarter woodworkers and assigns the remainder to suited Food roles, retaining two years of upkeep before construction. The herd policy adds capacity-aware assignment; it does not preserve breeding pairs, trade for replacement bulls or cull animals. That policy's herd losses are an important limitation.</p><p>Mortality outcomes combine natural and exposure risks; a death cannot be attributed exclusively to exposure. The harness does not alter production defaults, cap herds or add logs to ordinary saves.</p></details>
+<p><a href="report.md">Full report and recommendation</a> · <a href="summary.json">Summary data</a> · <a href="browser/results.json">Browser verification</a> · <a href="https://github.com/sidesliders1983/Pillagers/issues/127">Issue #127</a></p>
+<script type="module">
+const labels={'control30':'Old 30 Food','baseline15':'Current 15 Food','human-reserve':'Human-only reserve','mortality':'Stronger mortality','combined':'Reserve + mortality','feeding':'Fed-only breeding','yard-breeding':'Yard-space breeding'};
+const policies={passive:'Autonomy',prepared:'Housing, outside herd',herd:'Housing + assignment'};
+const data=await (await fetch('./summary.json')).json();const cohorts=data.cohorts.filter(c=>!c.key.startsWith('replay/'));
+const label=c=>{const [,rule,policy]=c.key.split('/');return `${labels[rule]} · ${policies[policy]}`};
+const display=n=>n===null?'—':Number.isInteger(n)?n:n.toFixed(1);
+const tbody=document.querySelector('#cohorts'), select=document.querySelector('#cohort');
+for(const [i,c] of cohorts.entries()){
+ const row=document.createElement('tr');
+ for(const value of [label(c),`${c.statuses.extinct??0} / ${c.seeds.length}`,c.populationAt80Median,c.completeFinalMedians.adultDescendants,c.completeFinalMedians.cattle,c.births]){const td=document.createElement('td');td.textContent=typeof value==='number'?display(value):value;row.append(td)}tbody.append(row);
+ const option=document.createElement('option');option.value=String(i);option.textContent=label(c);select.append(option);
+}
+function update(){const c=cohorts[Number(select.value)];const early=c.early;const med=values=>{const s=values.toSorted((a,b)=>a-b);return(s[Math.floor(s.length/2)]+s[Math.ceil(s.length/2)-1])/2};const foods=Array.from({length:11},(_,i)=>med(early.map(r=>r.food[i])));const max=Math.max(...foods,1);
+ document.querySelector('#detail').innerHTML=`<h3>Median Food · first ten years</h3><div class="chart">${foods.map(n=>`<div class="bar" style="height:${n/max*100}%"><span>${display(n)}</span></div>`).join('')}</div><div class="legend"><span>Landing</span><span>Year 10</span></div><p>${c.foodShortfallYears} annual boundaries with unmet Food need; ${c.emptyStockYears} with empty stock. These are different measures.</p><p>${c.childOutcomes.reachedAdulthood} descendants reached adulthood; ${c.childOutcomes.diedBefore16} died below sixteen; ${c.childOutcomes.stillUnder16} were still children at the cutoff.</p><p>Observed cattle deaths: ${c.cattleDeaths}; summed annual mortality probabilities: ${display(c.expectedCattleDeaths)}. Births: ${c.cattleBirths}.</p><details><summary>Fertility gates · living women aged 18–40</summary><pre>${JSON.stringify(c.fertilityBlockers,null,2)}</pre><p>Each row records the first blocking condition, or the outcome of a real birth roll. This is not a count of independent simultaneous causes.</p></details>`;
+}select.addEventListener('change',update);select.value=String(cohorts.findIndex(c=>c.key==='pilot/baseline15/passive'));update();
+</script>
+</body></html>

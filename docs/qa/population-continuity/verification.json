@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "completeCohortRuns": 88,
+  "replayRuns": 7,
+  "openingPairs": 8,
+  "rowsDropped": 0,
+  "studySourceHashes": {
+    "population-engine.mjs": "98370e26268265d4ff880415a661ea31bc5f08691e4d3670dbb49ffb41e82426",
+    "population-scenario.mjs": "32eea56a498eb87350e0cf4bf9707fce7f48ff78b431647e75c5202f22bffd9b",
+    "food-policy.mjs": "fd698b01610f23cc1628933ff0c8783f17260b51145fbd0ce5fa036667b6c757",
+    "run-population-study.mjs": "0dac83656b729999b2433da8403aaf7ccb0c1bb30c8cb348950670b03ce35d91",
+    "summarize-population-study.mjs": "04376e277742fb1cd0b682b7df6639780112172a144e7c8fbba6754114060583"
+  },
+  "replay": [
+    {
+      "candidate": "baseline15",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "8d1ada20cb6ac137e5dcd74fd7b23abc82236a5c39a9f9e9504b16e7b3ccfc5b",
+      "diagnosticHashChanged": true
+    },
+    {
+      "candidate": "combined",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "1aaf4ad77b29e7c9bcf81eac28758ffcb2c7854664742cc2945aac8c683d786d",
+      "diagnosticHashChanged": false
+    },
+    {
+      "candidate": "control30",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "1eb574955a10b792bd0b87af49854536ab97e71064a20ba87be4f75ab5ee0172",
+      "diagnosticHashChanged": true
+    },
+    {
+      "candidate": "feeding",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "b745d9dd72e6bcee5a344df0fce95a930d13b68aa66165ebb45cfe77863b1b39",
+      "diagnosticHashChanged": false
+    },
+    {
+      "candidate": "human-reserve",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "115ee6ddc99786f7f06dff02c7ba40a7d9ef2cec37152fc1198258199eb1637a",
+      "diagnosticHashChanged": true
+    },
+    {
+      "candidate": "mortality",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "c8929c5ec62f09b3ad917b2bc16b3b7e3cb3c4d6c1bedc317a62a670080cc465",
+      "diagnosticHashChanged": true
+    },
+    {
+      "candidate": "yard-breeding",
+      "seed": 32,
+      "saveAt": 40,
+      "passed": true,
+      "finalStateHash": "ae61c488e62242cbea5e96f3208cdd1ed15b00165e61a6f8c702d18e55e8285d",
+      "diagnosticHashChanged": false
+    }
+  ]
+}

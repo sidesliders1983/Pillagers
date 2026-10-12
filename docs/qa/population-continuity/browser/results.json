@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "browser": "Edge Chromium, 1024×768 touch emulation",
+  "physicalIPad": false,
+  "checks": [
+    {
+      "view": "gameplay-lab",
+      "passed": true,
+      "initial": 15,
+      "imported": 47,
+      "restarted": 30,
+      "newAfterImport": 15,
+      "cpuInitial": 30
+    },
+    {
+      "view": "play",
+      "passed": true,
+      "initial": 15,
+      "imported": 47,
+      "restarted": 30,
+      "newAfterImport": 15,
+      "cpuInitial": 30
+    },
+    {
+      "view": "fjord-play",
+      "passed": true,
+      "initial": 15,
+      "imported": 47,
+      "restarted": 30,
+      "newAfterImport": 15,
+      "cpuInitial": 30
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,4800 @@
+{
+  "cohorts": [
+    {
+      "key": "combined/combined/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 7,
+        "extinct": 1
+      },
+      "runtimeSeconds": 140,
+      "observedYears": 639,
+      "populationAt80Median": 2.5,
+      "populationAt80Range": [
+        0,
+        1,
+        1,
+        2,
+        3,
+        4,
+        4,
+        7
+      ],
+      "completeFinalMedians": {
+        "food": 1,
+        "materials": 86,
+        "cattle": 190,
+        "houses": 1,
+        "farmyards": 0,
+        "adultDescendants": 3,
+        "children": 0
+      },
+      "extinctionYears": [
+        {
+          "seed": 78,
+          "year": 79
+        }
+      ],
+      "births": 56,
+      "deaths": 114,
+      "generations": {
+        "1": 39,
+        "2": 14,
+        "3": 3
+      },
+      "childOutcomes": {
+        "born": 56,
+        "reachedAdulthood": 51,
+        "diedBefore16": 4,
+        "stillUnder16": 1
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 38,
+        "1": 19,
+        "2": 11,
+        "3": 1,
+        "4": 3
+      },
+      "birthAgeRange": [
+        21,
+        40
+      ],
+      "firstBirthAgeMedian": 30,
+      "lastBirthAgeMedian": 36,
+      "availablePartnershipRolls": 462,
+      "formedPartnerships": 51,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 64,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 69,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 60,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 30,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 10,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 530,
+        "roll-failed": 173,
+        "born": 56,
+        "cooldown": 95,
+        "food": 199,
+        "outgoing-proxy-care": 18
+      },
+      "birthsDuringOwnCare": 11,
+      "reserveBlocksWithoutShortfall": 121,
+      "herdsLostBy80": 1,
+      "zeroBullYears": 77,
+      "cattleOnlyReserveBlocks": 0,
+      "carePersonYears": 251,
+      "foodShortfallYears": 173,
+      "humanShortfall": 2574,
+      "cattleShortfall": 8841,
+      "emptyStockYears": 178,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 27
+        },
+        {
+          "seed": 17,
+          "year": 3
+        },
+        {
+          "seed": 2,
+          "year": 6
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": 23
+        },
+        {
+          "seed": 41,
+          "year": 8
+        },
+        {
+          "seed": 7,
+          "year": 5
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            30,
+            51,
+            74,
+            38,
+            57,
+            78,
+            102,
+            61,
+            17,
+            29
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            16,
+            20,
+            0,
+            0,
+            21,
+            30,
+            47,
+            60,
+            71,
+            35
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 6
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            16,
+            22,
+            30,
+            11,
+            23,
+            0,
+            9,
+            20,
+            30,
+            38
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            0,
+            7,
+            12,
+            22,
+            30,
+            35,
+            12,
+            13,
+            14
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 16
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            24,
+            20,
+            20,
+            25,
+            31
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 4
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            24,
+            39,
+            56,
+            55,
+            55,
+            28,
+            32,
+            0,
+            5,
+            10
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            18,
+            21,
+            27,
+            29,
+            0,
+            6,
+            18,
+            35,
+            47,
+            11
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 18
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            19,
+            26,
+            28,
+            30,
+            32,
+            32,
+            31,
+            0,
+            0,
+            3
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 13
+        }
+      ],
+      "shelteredResidentYears": 2410,
+      "exposedResidentYears": 3152,
+      "expectedHumanDeaths": 115.77850000000018,
+      "cattleBirths": 3852,
+      "cattleDeaths": 1984,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 1963.4950000000003,
+      "cattleRiskComponents": {
+        "natural": 13479950,
+        "exposure": 6155000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 38109,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 11052,
+      "cattleFoodProduced": 21374,
+      "cattleFoodRequired": 34228,
+      "cattleFoodConsumed": 25387,
+      "breedingBlockers": {
+        "born": 3852,
+        "cooldown": 3316,
+        "roll-failed": 3861,
+        "no-bull": 23
+      },
+      "weather": {
+        "Normal": 345,
+        "Mild": 137,
+        "Harsh": 134,
+        "Severe": 23
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "herd-feedback/feeding/herd",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 8
+      },
+      "runtimeSeconds": 307,
+      "observedYears": 640,
+      "populationAt80Median": 23.5,
+      "populationAt80Range": [
+        10,
+        12,
+        14,
+        20,
+        27,
+        29,
+        31,
+        33
+      ],
+      "completeFinalMedians": {
+        "food": 1910,
+        "materials": 15.5,
+        "cattle": 0,
+        "houses": 7,
+        "farmyards": 6,
+        "adultDescendants": 17.5,
+        "children": 5.5
+      },
+      "extinctionYears": [],
+      "births": 198,
+      "deaths": 102,
+      "generations": {
+        "1": 59,
+        "2": 66,
+        "3": 67,
+        "4": 6
+      },
+      "childOutcomes": {
+        "born": 198,
+        "reachedAdulthood": 145,
+        "diedBefore16": 4,
+        "stillUnder16": 49
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 63,
+        "1": 17,
+        "2": 16,
+        "3": 27,
+        "4": 12,
+        "5": 4
+      },
+      "birthAgeRange": [
+        18,
+        40
+      ],
+      "firstBirthAgeMedian": 27.5,
+      "lastBirthAgeMedian": 38,
+      "availablePartnershipRolls": 1078,
+      "formedPartnerships": 97,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 77,
+      "founderDeaths": 79,
+      "founderCensored": 1,
+      "survival": {
+        "50": {
+          "reached": 76,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 71,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 58,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 38,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 706,
+        "roll-failed": 538,
+        "born": 198,
+        "cooldown": 349,
+        "food": 50
+      },
+      "birthsDuringOwnCare": 58,
+      "reserveBlocksWithoutShortfall": 34,
+      "herdsLostBy80": 8,
+      "zeroBullYears": 437,
+      "cattleOnlyReserveBlocks": 8,
+      "carePersonYears": 863,
+      "foodShortfallYears": 8,
+      "humanShortfall": 152,
+      "cattleShortfall": 1,
+      "emptyStockYears": 9,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": null
+        },
+        {
+          "seed": 17,
+          "year": null
+        },
+        {
+          "seed": 2,
+          "year": 2
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": null
+        },
+        {
+          "seed": 41,
+          "year": null
+        },
+        {
+          "seed": 7,
+          "year": 16
+        },
+        {
+          "seed": 78,
+          "year": 2
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            31,
+            63,
+            92,
+            118,
+            151,
+            145,
+            175,
+            208,
+            169,
+            193
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            30,
+            49,
+            63,
+            79,
+            94,
+            52,
+            66,
+            23,
+            38,
+            46
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 2
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            25,
+            0,
+            19,
+            19,
+            45,
+            63,
+            84,
+            49,
+            66,
+            82
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            25,
+            0,
+            20,
+            42,
+            5,
+            27,
+            40,
+            25,
+            40,
+            67
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            29,
+            49,
+            71,
+            63,
+            79,
+            106,
+            125,
+            139,
+            155,
+            173
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            26,
+            51,
+            72,
+            96,
+            108,
+            122,
+            136,
+            146,
+            161,
+            176
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            25,
+            48,
+            43,
+            36,
+            1,
+            18,
+            41,
+            63,
+            76,
+            37
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 2
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            28,
+            0,
+            26,
+            51,
+            79,
+            107,
+            103,
+            62,
+            87,
+            98
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 4
+        }
+      ],
+      "shelteredResidentYears": 10066,
+      "exposedResidentYears": 1354,
+      "expectedHumanDeaths": 100.12049999999995,
+      "cattleBirths": 48,
+      "cattleDeaths": 72,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 58.66499999999999,
+      "cattleRiskComponents": {
+        "natural": 465250,
+        "exposure": 0,
+        "crowding": 121400,
+        "flat": 0
+      },
+      "exposedCattleYears": 6,
+      "shelteredCattleYears": 935,
+      "overcrowdedCattleYears": 259,
+      "eligibleCowYears": 309,
+      "cattleFoodProduced": 1513,
+      "cattleFoodRequired": 981,
+      "cattleFoodConsumed": 980,
+      "breedingBlockers": {
+        "born": 48,
+        "no-bull": 164,
+        "cooldown": 39,
+        "roll-failed": 54,
+        "feeding-shortfall": 4
+      },
+      "weather": {
+        "Normal": 365,
+        "Mild": 119,
+        "Severe": 37,
+        "Harsh": 119
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "herd-feedback/feeding/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 7,
+        "extinct": 1
+      },
+      "runtimeSeconds": 187,
+      "observedYears": 634,
+      "populationAt80Median": 5,
+      "populationAt80Range": [
+        0,
+        1,
+        3,
+        4,
+        6,
+        7,
+        11,
+        12
+      ],
+      "completeFinalMedians": {
+        "food": 103,
+        "materials": 144,
+        "cattle": 0,
+        "houses": 2,
+        "farmyards": 2,
+        "adultDescendants": 5,
+        "children": 0
+      },
+      "extinctionYears": [
+        {
+          "seed": 2,
+          "year": 74
+        }
+      ],
+      "births": 62,
+      "deaths": 98,
+      "generations": {
+        "1": 34,
+        "2": 23,
+        "3": 5
+      },
+      "childOutcomes": {
+        "born": 62,
+        "reachedAdulthood": 58,
+        "diedBefore16": 0,
+        "stillUnder16": 4
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 35,
+        "1": 20,
+        "2": 13,
+        "3": 4,
+        "4": 1
+      },
+      "birthAgeRange": [
+        19,
+        40
+      ],
+      "firstBirthAgeMedian": 30.5,
+      "lastBirthAgeMedian": 37,
+      "availablePartnershipRolls": 713,
+      "formedPartnerships": 66,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 73,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 76,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 69,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 53,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 29,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 470,
+        "roll-failed": 182,
+        "born": 62,
+        "cooldown": 98,
+        "food": 306,
+        "outgoing-proxy-care": 25
+      },
+      "birthsDuringOwnCare": 8,
+      "reserveBlocksWithoutShortfall": 208,
+      "herdsLostBy80": 4,
+      "zeroBullYears": 236,
+      "cattleOnlyReserveBlocks": 74,
+      "carePersonYears": 286,
+      "foodShortfallYears": 95,
+      "humanShortfall": 2291,
+      "cattleShortfall": 2071,
+      "emptyStockYears": 99,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 27
+        },
+        {
+          "seed": 17,
+          "year": 22
+        },
+        {
+          "seed": 2,
+          "year": 13
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": 30
+        },
+        {
+          "seed": 41,
+          "year": 12
+        },
+        {
+          "seed": 7,
+          "year": 3
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            30,
+            51,
+            74,
+            38,
+            57,
+            78,
+            102,
+            61,
+            17,
+            29
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            16,
+            20,
+            34,
+            23,
+            40,
+            53,
+            63,
+            77,
+            87,
+            96
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 6
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            16,
+            22,
+            36,
+            41,
+            50,
+            55,
+            57,
+            60,
+            16,
+            25
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 7
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            0,
+            9,
+            15,
+            0,
+            13,
+            0,
+            13,
+            25,
+            38
+          ],
+          "shortageYears": 3,
+          "reserveBlocks": 26
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            21,
+            18,
+            19,
+            25,
+            34
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 7
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            24,
+            39,
+            56,
+            55,
+            55,
+            26,
+            25,
+            24,
+            43,
+            43
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 11
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            18,
+            21,
+            0,
+            0,
+            8,
+            16,
+            27,
+            35,
+            46,
+            55
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 16
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            19,
+            26,
+            28,
+            30,
+            32,
+            32,
+            31,
+            0,
+            2,
+            0
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 11
+        }
+      ],
+      "shelteredResidentYears": 3266,
+      "exposedResidentYears": 3669,
+      "expectedHumanDeaths": 92.61100000000009,
+      "cattleBirths": 1258,
+      "cattleDeaths": 803,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 811.1349999999994,
+      "cattleRiskComponents": {
+        "natural": 5694350,
+        "exposure": 2417000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 14303,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 4321,
+      "cattleFoodProduced": 8896,
+      "cattleFoodRequired": 13216,
+      "cattleFoodConsumed": 11145,
+      "breedingBlockers": {
+        "born": 1258,
+        "cooldown": 1104,
+        "roll-failed": 1231,
+        "feeding-shortfall": 689,
+        "no-bull": 39
+      },
+      "weather": {
+        "Normal": 349,
+        "Mild": 130,
+        "Harsh": 131,
+        "Severe": 24
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "herd-feedback/yard-breeding/herd",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 8
+      },
+      "runtimeSeconds": 192,
+      "observedYears": 640,
+      "populationAt80Median": 14.5,
+      "populationAt80Range": [
+        4,
+        8,
+        12,
+        14,
+        15,
+        15,
+        25,
+        28
+      ],
+      "completeFinalMedians": {
+        "food": 1699,
+        "materials": 5.5,
+        "cattle": 0,
+        "houses": 4,
+        "farmyards": 3,
+        "adultDescendants": 10.5,
+        "children": 3
+      },
+      "extinctionYears": [],
+      "births": 145,
+      "deaths": 104,
+      "generations": {
+        "1": 52,
+        "2": 53,
+        "3": 37,
+        "4": 3
+      },
+      "childOutcomes": {
+        "born": 145,
+        "reachedAdulthood": 115,
+        "diedBefore16": 1,
+        "stillUnder16": 29
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 51,
+        "1": 23,
+        "2": 11,
+        "3": 19,
+        "4": 7,
+        "5": 3
+      },
+      "birthAgeRange": [
+        19,
+        40
+      ],
+      "firstBirthAgeMedian": 29,
+      "lastBirthAgeMedian": 36,
+      "availablePartnershipRolls": 844,
+      "formedPartnerships": 83,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 78,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 76,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 71,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 55,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 36,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 689,
+        "roll-failed": 474,
+        "born": 145,
+        "cooldown": 261,
+        "food": 69
+      },
+      "birthsDuringOwnCare": 44,
+      "reserveBlocksWithoutShortfall": 44,
+      "herdsLostBy80": 8,
+      "zeroBullYears": 475,
+      "cattleOnlyReserveBlocks": 11,
+      "carePersonYears": 642,
+      "foodShortfallYears": 12,
+      "humanShortfall": 188,
+      "cattleShortfall": 9,
+      "emptyStockYears": 12,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": null
+        },
+        {
+          "seed": 17,
+          "year": 10
+        },
+        {
+          "seed": 2,
+          "year": 2
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": null
+        },
+        {
+          "seed": 41,
+          "year": 15
+        },
+        {
+          "seed": 7,
+          "year": 9
+        },
+        {
+          "seed": 78,
+          "year": 2
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            31,
+            63,
+            92,
+            118,
+            82,
+            110,
+            142,
+            182,
+            143,
+            174
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            30,
+            49,
+            63,
+            79,
+            94,
+            52,
+            66,
+            23,
+            39,
+            0
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 3
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            25,
+            0,
+            19,
+            19,
+            45,
+            63,
+            84,
+            49,
+            66,
+            82
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            25,
+            0,
+            20,
+            42,
+            5,
+            27,
+            40,
+            25,
+            40,
+            67
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            29,
+            49,
+            71,
+            63,
+            79,
+            106,
+            125,
+            139,
+            155,
+            173
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            26,
+            51,
+            72,
+            96,
+            108,
+            122,
+            78,
+            91,
+            99,
+            106
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            25,
+            48,
+            43,
+            36,
+            1,
+            18,
+            41,
+            4,
+            0,
+            30
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            28,
+            0,
+            26,
+            51,
+            79,
+            107,
+            103,
+            93,
+            117,
+            132
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 4
+        }
+      ],
+      "shelteredResidentYears": 8333,
+      "exposedResidentYears": 1561,
+      "expectedHumanDeaths": 92.34499999999984,
+      "cattleBirths": 18,
+      "cattleDeaths": 42,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 38.889999999999965,
+      "cattleRiskComponents": {
+        "natural": 388900,
+        "exposure": 0,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 4,
+      "shelteredCattleYears": 655,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 226,
+      "cattleFoodProduced": 1108,
+      "cattleFoodRequired": 741,
+      "cattleFoodConsumed": 732,
+      "breedingBlockers": {
+        "born": 18,
+        "no-bull": 127,
+        "cooldown": 17,
+        "no-yard-space": 40,
+        "roll-failed": 24
+      },
+      "weather": {
+        "Normal": 360,
+        "Mild": 114,
+        "Harsh": 134,
+        "Severe": 32
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "herd-feedback/yard-breeding/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 8
+      },
+      "runtimeSeconds": 97,
+      "observedYears": 640,
+      "populationAt80Median": 7,
+      "populationAt80Range": [
+        2,
+        3,
+        5,
+        7,
+        7,
+        7,
+        18,
+        23
+      ],
+      "completeFinalMedians": {
+        "food": 53,
+        "materials": 292,
+        "cattle": 0,
+        "houses": 3.5,
+        "farmyards": 2,
+        "adultDescendants": 6,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 87,
+      "deaths": 95,
+      "generations": {
+        "1": 44,
+        "2": 25,
+        "3": 17,
+        "4": 1
+      },
+      "childOutcomes": {
+        "born": 87,
+        "reachedAdulthood": 75,
+        "diedBefore16": 3,
+        "stillUnder16": 9
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 38,
+        "1": 16,
+        "2": 15,
+        "3": 12,
+        "5": 1
+      },
+      "birthAgeRange": [
+        18,
+        40
+      ],
+      "firstBirthAgeMedian": 30,
+      "lastBirthAgeMedian": 36,
+      "availablePartnershipRolls": 755,
+      "formedPartnerships": 69,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 76,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 77,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 73,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 55,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 32,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 507,
+        "roll-failed": 275,
+        "born": 87,
+        "cooldown": 158,
+        "food": 220,
+        "outgoing-proxy-care": 67
+      },
+      "birthsDuringOwnCare": 16,
+      "reserveBlocksWithoutShortfall": 135,
+      "herdsLostBy80": 8,
+      "zeroBullYears": 537,
+      "cattleOnlyReserveBlocks": 9,
+      "carePersonYears": 384,
+      "foodShortfallYears": 103,
+      "humanShortfall": 1483,
+      "cattleShortfall": 10,
+      "emptyStockYears": 110,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 42
+        },
+        {
+          "seed": 17,
+          "year": 25
+        },
+        {
+          "seed": 2,
+          "year": 7
+        },
+        {
+          "seed": 3,
+          "year": 8
+        },
+        {
+          "seed": 32,
+          "year": 2
+        },
+        {
+          "seed": 41,
+          "year": 39
+        },
+        {
+          "seed": 7,
+          "year": 4
+        },
+        {
+          "seed": 78,
+          "year": 5
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            30,
+            48,
+            68,
+            77,
+            40,
+            50,
+            36,
+            43,
+            51,
+            59
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            16,
+            19,
+            22,
+            29,
+            40,
+            46,
+            62,
+            75,
+            86,
+            94
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            16,
+            24,
+            31,
+            30,
+            28,
+            27,
+            0,
+            0,
+            0,
+            8
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 2
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            29,
+            45,
+            53,
+            15,
+            21,
+            31,
+            0,
+            16,
+            0
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 19
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            0,
+            0,
+            14,
+            23,
+            38,
+            60,
+            70,
+            83,
+            75
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            24,
+            39,
+            54,
+            42,
+            58,
+            68,
+            76,
+            85,
+            97,
+            109
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            18,
+            21,
+            26,
+            0,
+            1,
+            4,
+            0,
+            8,
+            14,
+            21
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 20
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            19,
+            26,
+            31,
+            34,
+            0,
+            7,
+            13,
+            25,
+            33,
+            38
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 13
+        }
+      ],
+      "shelteredResidentYears": 4722,
+      "exposedResidentYears": 3366,
+      "expectedHumanDeaths": 89.30250000000004,
+      "cattleBirths": 0,
+      "cattleDeaths": 24,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 23.10000000000001,
+      "cattleRiskComponents": {
+        "natural": 181500,
+        "exposure": 49500,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 321,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 128,
+      "cattleFoodProduced": 353,
+      "cattleFoodRequired": 349,
+      "cattleFoodConsumed": 339,
+      "breedingBlockers": {
+        "no-yard-space": 128
+      },
+      "weather": {
+        "Normal": 363,
+        "Harsh": 125,
+        "Severe": 37,
+        "Mild": 115
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "management/baseline15/herd",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 8
+      },
+      "runtimeSeconds": 274,
+      "observedYears": 640,
+      "populationAt80Median": 23.5,
+      "populationAt80Range": [
+        10,
+        12,
+        14,
+        20,
+        27,
+        29,
+        31,
+        40
+      ],
+      "completeFinalMedians": {
+        "food": 1910,
+        "materials": 16,
+        "cattle": 0,
+        "houses": 7,
+        "farmyards": 6,
+        "adultDescendants": 17.5,
+        "children": 5.5
+      },
+      "extinctionYears": [],
+      "births": 206,
+      "deaths": 103,
+      "generations": {
+        "1": 60,
+        "2": 71,
+        "3": 71,
+        "4": 4
+      },
+      "childOutcomes": {
+        "born": 206,
+        "reachedAdulthood": 149,
+        "diedBefore16": 3,
+        "stillUnder16": 54
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 67,
+        "1": 18,
+        "2": 16,
+        "3": 30,
+        "4": 10,
+        "5": 4,
+        "6": 1
+      },
+      "birthAgeRange": [
+        18,
+        40
+      ],
+      "firstBirthAgeMedian": 28,
+      "lastBirthAgeMedian": 38,
+      "availablePartnershipRolls": 1063,
+      "formedPartnerships": 100,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 79,
+      "founderDeaths": 79,
+      "founderCensored": 1,
+      "survival": {
+        "50": {
+          "reached": 76,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 71,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 59,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 39,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 721,
+        "roll-failed": 568,
+        "born": 206,
+        "cooldown": 363,
+        "food": 49
+      },
+      "birthsDuringOwnCare": 66,
+      "reserveBlocksWithoutShortfall": 35,
+      "herdsLostBy80": 8,
+      "zeroBullYears": 406,
+      "cattleOnlyReserveBlocks": 8,
+      "carePersonYears": 887,
+      "foodShortfallYears": 7,
+      "humanShortfall": 138,
+      "cattleShortfall": 1,
+      "emptyStockYears": 8,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": null
+        },
+        {
+          "seed": 17,
+          "year": null
+        },
+        {
+          "seed": 2,
+          "year": 2
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": null
+        },
+        {
+          "seed": 41,
+          "year": null
+        },
+        {
+          "seed": 7,
+          "year": 16
+        },
+        {
+          "seed": 78,
+          "year": 2
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            31,
+            63,
+            92,
+            118,
+            151,
+            145,
+            175,
+            208,
+            169,
+            193
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            30,
+            49,
+            63,
+            79,
+            94,
+            52,
+            66,
+            23,
+            38,
+            46
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 2
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            25,
+            0,
+            19,
+            19,
+            45,
+            63,
+            84,
+            49,
+            66,
+            82
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            25,
+            0,
+            20,
+            42,
+            5,
+            27,
+            40,
+            25,
+            40,
+            67
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            29,
+            49,
+            71,
+            63,
+            79,
+            106,
+            125,
+            139,
+            155,
+            173
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            26,
+            51,
+            72,
+            96,
+            108,
+            122,
+            136,
+            146,
+            161,
+            176
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            25,
+            48,
+            43,
+            36,
+            1,
+            18,
+            41,
+            63,
+            76,
+            37
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 2
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            28,
+            0,
+            26,
+            51,
+            79,
+            107,
+            103,
+            62,
+            87,
+            98
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 4
+        }
+      ],
+      "shelteredResidentYears": 10459,
+      "exposedResidentYears": 1275,
+      "expectedHumanDeaths": 106.85849999999992,
+      "cattleBirths": 63,
+      "cattleDeaths": 87,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 77.83999999999999,
+      "cattleRiskComponents": {
+        "natural": 531400,
+        "exposure": 0,
+        "crowding": 247000,
+        "flat": 0
+      },
+      "exposedCattleYears": 12,
+      "shelteredCattleYears": 1113,
+      "overcrowdedCattleYears": 431,
+      "eligibleCowYears": 342,
+      "cattleFoodProduced": 1662,
+      "cattleFoodRequired": 1146,
+      "cattleFoodConsumed": 1145,
+      "breedingBlockers": {
+        "born": 63,
+        "no-bull": 159,
+        "cooldown": 51,
+        "roll-failed": 69
+      },
+      "weather": {
+        "Normal": 361,
+        "Mild": 121,
+        "Severe": 39,
+        "Harsh": 119
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "management/baseline15/prepared",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 7,
+        "extinct": 1
+      },
+      "runtimeSeconds": 279,
+      "observedYears": 639,
+      "populationAt80Median": 11.5,
+      "populationAt80Range": [
+        0,
+        1,
+        8,
+        10,
+        13,
+        24,
+        29,
+        34
+      ],
+      "completeFinalMedians": {
+        "food": 155,
+        "materials": 8,
+        "cattle": 362,
+        "houses": 5,
+        "farmyards": 5,
+        "adultDescendants": 10,
+        "children": 3
+      },
+      "extinctionYears": [
+        {
+          "seed": 2,
+          "year": 79
+        }
+      ],
+      "births": 144,
+      "deaths": 105,
+      "generations": {
+        "1": 51,
+        "2": 56,
+        "3": 35,
+        "4": 2
+      },
+      "childOutcomes": {
+        "born": 144,
+        "reachedAdulthood": 120,
+        "diedBefore16": 3,
+        "stillUnder16": 21
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 64,
+        "1": 22,
+        "2": 20,
+        "3": 16,
+        "4": 3,
+        "5": 2,
+        "6": 2
+      },
+      "birthAgeRange": [
+        18,
+        40
+      ],
+      "firstBirthAgeMedian": 28,
+      "lastBirthAgeMedian": 37,
+      "availablePartnershipRolls": 877,
+      "formedPartnerships": 93,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 79,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 80,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 80,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 64,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 37,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 852,
+        "roll-failed": 426,
+        "born": 144,
+        "cooldown": 251,
+        "food": 234
+      },
+      "birthsDuringOwnCare": 45,
+      "reserveBlocksWithoutShortfall": 150,
+      "herdsLostBy80": 2,
+      "zeroBullYears": 122,
+      "cattleOnlyReserveBlocks": 101,
+      "carePersonYears": 636,
+      "foodShortfallYears": 43,
+      "humanShortfall": 1478,
+      "cattleShortfall": 4301,
+      "emptyStockYears": 43,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 67
+        },
+        {
+          "seed": 17,
+          "year": 53
+        },
+        {
+          "seed": 2,
+          "year": null
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": 15
+        },
+        {
+          "seed": 41,
+          "year": 2
+        },
+        {
+          "seed": 7,
+          "year": 7
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            27,
+            55,
+            80,
+            44,
+            67,
+            90,
+            121,
+            80,
+            36,
+            55
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            26,
+            41,
+            51,
+            66,
+            76,
+            85,
+            95,
+            117,
+            143,
+            162
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            21,
+            41,
+            59,
+            47,
+            77,
+            103,
+            96,
+            119,
+            148,
+            176
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 2
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            0,
+            16,
+            33,
+            56,
+            64,
+            74,
+            82,
+            91,
+            94
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 6
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            25,
+            41,
+            59,
+            71,
+            77,
+            32,
+            30,
+            36,
+            50,
+            64
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 3
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            22,
+            0,
+            21,
+            0,
+            31,
+            16,
+            8,
+            26,
+            50,
+            9
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 20
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            21,
+            39,
+            54,
+            74,
+            39,
+            6,
+            0,
+            22,
+            42,
+            72
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 12
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            24,
+            49,
+            64,
+            69,
+            72,
+            49,
+            48,
+            0,
+            0,
+            0
+          ],
+          "shortageYears": 3,
+          "reserveBlocks": 8
+        }
+      ],
+      "shelteredResidentYears": 8928,
+      "exposedResidentYears": 1376,
+      "expectedHumanDeaths": 106.02750000000006,
+      "cattleBirths": 3856,
+      "cattleDeaths": 2026,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 2022.4600000000005,
+      "cattleRiskComponents": {
+        "natural": 12738600,
+        "exposure": 7486000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 37172,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 11072,
+      "cattleFoodProduced": 20469,
+      "cattleFoodRequired": 34401,
+      "cattleFoodConsumed": 30100,
+      "breedingBlockers": {
+        "born": 3856,
+        "cooldown": 3343,
+        "roll-failed": 3828,
+        "no-bull": 45
+      },
+      "weather": {
+        "Normal": 347,
+        "Mild": 118,
+        "Harsh": 147,
+        "Severe": 27
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "pilot/baseline15/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 7,
+        "extinct": 1
+      },
+      "runtimeSeconds": 169,
+      "observedYears": 638,
+      "populationAt80Median": 5.5,
+      "populationAt80Range": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        9,
+        11,
+        12
+      ],
+      "completeFinalMedians": {
+        "food": 81,
+        "materials": 180,
+        "cattle": 151,
+        "houses": 4,
+        "farmyards": 3,
+        "adultDescendants": 6,
+        "children": 0
+      },
+      "extinctionYears": [
+        {
+          "seed": 3,
+          "year": 78
+        }
+      ],
+      "births": 61,
+      "deaths": 93,
+      "generations": {
+        "1": 34,
+        "2": 23,
+        "3": 4
+      },
+      "childOutcomes": {
+        "born": 61,
+        "reachedAdulthood": 57,
+        "diedBefore16": 1,
+        "stillUnder16": 3
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 39,
+        "1": 20,
+        "2": 11,
+        "3": 5,
+        "4": 1
+      },
+      "birthAgeRange": [
+        19,
+        40
+      ],
+      "firstBirthAgeMedian": 31,
+      "lastBirthAgeMedian": 37,
+      "availablePartnershipRolls": 694,
+      "formedPartnerships": 65,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 73,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 76,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 71,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 52,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 27,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 529,
+        "roll-failed": 163,
+        "born": 61,
+        "cooldown": 96,
+        "food": 336,
+        "outgoing-proxy-care": 24
+      },
+      "birthsDuringOwnCare": 9,
+      "reserveBlocksWithoutShortfall": 227,
+      "herdsLostBy80": 3,
+      "zeroBullYears": 256,
+      "cattleOnlyReserveBlocks": 62,
+      "carePersonYears": 283,
+      "foodShortfallYears": 112,
+      "humanShortfall": 2392,
+      "cattleShortfall": 3250,
+      "emptyStockYears": 117,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 27
+        },
+        {
+          "seed": 17,
+          "year": 22
+        },
+        {
+          "seed": 2,
+          "year": 13
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": 30
+        },
+        {
+          "seed": 41,
+          "year": 12
+        },
+        {
+          "seed": 7,
+          "year": 3
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            30,
+            51,
+            74,
+            38,
+            57,
+            78,
+            102,
+            61,
+            17,
+            29
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            16,
+            20,
+            34,
+            23,
+            40,
+            53,
+            63,
+            77,
+            87,
+            96
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 6
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            16,
+            22,
+            36,
+            41,
+            50,
+            55,
+            57,
+            60,
+            16,
+            25
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 7
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            0,
+            9,
+            15,
+            0,
+            13,
+            4,
+            15,
+            3,
+            12
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 30
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            21,
+            18,
+            19,
+            25,
+            34
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 7
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            24,
+            39,
+            56,
+            55,
+            55,
+            26,
+            25,
+            24,
+            43,
+            43
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 11
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            18,
+            21,
+            0,
+            0,
+            8,
+            16,
+            27,
+            35,
+            46,
+            55
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 16
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            19,
+            26,
+            28,
+            30,
+            32,
+            32,
+            31,
+            0,
+            0,
+            2
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 11
+        }
+      ],
+      "shelteredResidentYears": 3851,
+      "exposedResidentYears": 3056,
+      "expectedHumanDeaths": 79.77250000000014,
+      "cattleBirths": 2078,
+      "cattleDeaths": 1115,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 1033.3949999999995,
+      "cattleRiskComponents": {
+        "natural": 6957950,
+        "exposure": 3376000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 20346,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 6128,
+      "cattleFoodProduced": 11495,
+      "cattleFoodRequired": 18227,
+      "cattleFoodConsumed": 14977,
+      "breedingBlockers": {
+        "born": 2078,
+        "cooldown": 1802,
+        "roll-failed": 2210,
+        "no-bull": 38
+      },
+      "weather": {
+        "Normal": 351,
+        "Mild": 124,
+        "Harsh": 126,
+        "Severe": 37
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "pilot/control30/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 7,
+        "extinct": 1
+      },
+      "runtimeSeconds": 117,
+      "observedYears": 632,
+      "populationAt80Median": 4.5,
+      "populationAt80Range": [
+        0,
+        2,
+        2,
+        4,
+        5,
+        6,
+        9,
+        9
+      ],
+      "completeFinalMedians": {
+        "food": 109,
+        "materials": 98,
+        "cattle": 187,
+        "houses": 3,
+        "farmyards": 2,
+        "adultDescendants": 5,
+        "children": 0
+      },
+      "extinctionYears": [
+        {
+          "seed": 7,
+          "year": 72
+        }
+      ],
+      "births": 48,
+      "deaths": 91,
+      "generations": {
+        "1": 33,
+        "2": 13,
+        "3": 2
+      },
+      "childOutcomes": {
+        "born": 48,
+        "reachedAdulthood": 46,
+        "diedBefore16": 2,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 34,
+        "1": 25,
+        "2": 7,
+        "3": 3
+      },
+      "birthAgeRange": [
+        20,
+        40
+      ],
+      "firstBirthAgeMedian": 29,
+      "lastBirthAgeMedian": 33,
+      "availablePartnershipRolls": 450,
+      "formedPartnerships": 51,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 77,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 77,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 72,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 55,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 34,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 478,
+        "roll-failed": 133,
+        "born": 48,
+        "cooldown": 84,
+        "food": 349,
+        "outgoing-proxy-care": 6
+      },
+      "birthsDuringOwnCare": 5,
+      "reserveBlocksWithoutShortfall": 256,
+      "herdsLostBy80": 2,
+      "zeroBullYears": 149,
+      "cattleOnlyReserveBlocks": 87,
+      "carePersonYears": 232,
+      "foodShortfallYears": 86,
+      "humanShortfall": 1948,
+      "cattleShortfall": 3978,
+      "emptyStockYears": 88,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 33
+        },
+        {
+          "seed": 17,
+          "year": 30
+        },
+        {
+          "seed": 2,
+          "year": 2
+        },
+        {
+          "seed": 3,
+          "year": 14
+        },
+        {
+          "seed": 32,
+          "year": 8
+        },
+        {
+          "seed": 41,
+          "year": 14
+        },
+        {
+          "seed": 7,
+          "year": 3
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            30,
+            45,
+            66,
+            89,
+            53,
+            72,
+            93,
+            117,
+            76,
+            32,
+            44
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            30,
+            31,
+            33,
+            35,
+            45,
+            48,
+            52,
+            59,
+            73,
+            92,
+            104
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 0
+        },
+        {
+          "seed": 2,
+          "food": [
+            30,
+            31,
+            0,
+            5,
+            8,
+            12,
+            16,
+            23,
+            0,
+            0,
+            7
+          ],
+          "shortageYears": 3,
+          "reserveBlocks": 13
+        },
+        {
+          "seed": 3,
+          "food": [
+            30,
+            36,
+            3,
+            10,
+            15,
+            25,
+            33,
+            37,
+            12,
+            12,
+            11
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 16
+        },
+        {
+          "seed": 32,
+          "food": [
+            30,
+            39,
+            53,
+            62,
+            74,
+            81,
+            36,
+            33,
+            0,
+            4,
+            12
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 41,
+          "food": [
+            30,
+            39,
+            54,
+            71,
+            70,
+            70,
+            41,
+            40,
+            39,
+            16,
+            20
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 7,
+          "food": [
+            30,
+            33,
+            36,
+            0,
+            2,
+            5,
+            0,
+            7,
+            0,
+            6,
+            12
+          ],
+          "shortageYears": 3,
+          "reserveBlocks": 22
+        },
+        {
+          "seed": 78,
+          "food": [
+            30,
+            34,
+            43,
+            49,
+            45,
+            41,
+            15,
+            6,
+            0,
+            0,
+            0
+          ],
+          "shortageYears": 3,
+          "reserveBlocks": 18
+        }
+      ],
+      "shelteredResidentYears": 2938,
+      "exposedResidentYears": 3746,
+      "expectedHumanDeaths": 94.43250000000013,
+      "cattleBirths": 4143,
+      "cattleDeaths": 1745,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 1729.3999999999999,
+      "cattleRiskComponents": {
+        "natural": 12952500,
+        "exposure": 4341500,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 38412,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 11834,
+      "cattleFoodProduced": 24248,
+      "cattleFoodRequired": 32843,
+      "cattleFoodConsumed": 28865,
+      "breedingBlockers": {
+        "born": 4143,
+        "cooldown": 3568,
+        "roll-failed": 4093,
+        "no-bull": 30
+      },
+      "weather": {
+        "Normal": 365,
+        "Mild": 131,
+        "Harsh": 108,
+        "Severe": 28
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "pilot/human-reserve/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "complete": 7,
+        "extinct": 1
+      },
+      "runtimeSeconds": 159,
+      "observedYears": 614,
+      "populationAt80Median": 4,
+      "populationAt80Range": [
+        0,
+        2,
+        4,
+        4,
+        4,
+        5,
+        8,
+        13
+      ],
+      "completeFinalMedians": {
+        "food": 14,
+        "materials": 108,
+        "cattle": 360,
+        "houses": 3,
+        "farmyards": 2,
+        "adultDescendants": 4,
+        "children": 0
+      },
+      "extinctionYears": [
+        {
+          "seed": 17,
+          "year": 54
+        }
+      ],
+      "births": 53,
+      "deaths": 93,
+      "generations": {
+        "1": 33,
+        "2": 14,
+        "3": 6
+      },
+      "childOutcomes": {
+        "born": 53,
+        "reachedAdulthood": 49,
+        "diedBefore16": 1,
+        "stillUnder16": 3
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 39,
+        "1": 17,
+        "2": 11,
+        "3": 2,
+        "4": 2
+      },
+      "birthAgeRange": [
+        18,
+        40
+      ],
+      "firstBirthAgeMedian": 31.5,
+      "lastBirthAgeMedian": 36.5,
+      "availablePartnershipRolls": 581,
+      "formedPartnerships": 55,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 74,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 76,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 73,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 58,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 30,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 471,
+        "roll-failed": 197,
+        "born": 53,
+        "cooldown": 88,
+        "food": 299,
+        "outgoing-proxy-care": 8
+      },
+      "birthsDuringOwnCare": 6,
+      "reserveBlocksWithoutShortfall": 169,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 51,
+      "cattleOnlyReserveBlocks": 0,
+      "carePersonYears": 252,
+      "foodShortfallYears": 160,
+      "humanShortfall": 3118,
+      "cattleShortfall": 10203,
+      "emptyStockYears": 168,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 27
+        },
+        {
+          "seed": 17,
+          "year": 3
+        },
+        {
+          "seed": 2,
+          "year": 6
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": 10
+        },
+        {
+          "seed": 41,
+          "year": 8
+        },
+        {
+          "seed": 7,
+          "year": 5
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            30,
+            51,
+            74,
+            38,
+            57,
+            78,
+            102,
+            61,
+            17,
+            29
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            16,
+            20,
+            0,
+            0,
+            16,
+            32,
+            0,
+            0,
+            12,
+            26
+          ],
+          "shortageYears": 3,
+          "reserveBlocks": 14
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            16,
+            22,
+            30,
+            11,
+            23,
+            0,
+            9,
+            20,
+            30,
+            38
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            0,
+            7,
+            12,
+            22,
+            30,
+            35,
+            12,
+            13,
+            14
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 16
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            21,
+            18,
+            19,
+            25,
+            0
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 6
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            24,
+            39,
+            56,
+            55,
+            55,
+            26,
+            28,
+            0,
+            5,
+            7
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 11
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            18,
+            21,
+            27,
+            29,
+            0,
+            6,
+            18,
+            35,
+            47,
+            11
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 18
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            19,
+            26,
+            28,
+            30,
+            32,
+            32,
+            31,
+            0,
+            0,
+            2
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 11
+        }
+      ],
+      "shelteredResidentYears": 2955,
+      "exposedResidentYears": 3655,
+      "expectedHumanDeaths": 88.32899999999992,
+      "cattleBirths": 4655,
+      "cattleDeaths": 2354,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 2325.209999999999,
+      "cattleRiskComponents": {
+        "natural": 15092600,
+        "exposure": 8159500,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 43846,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 13312,
+      "cattleFoodProduced": 25524,
+      "cattleFoodRequired": 39935,
+      "cattleFoodConsumed": 29732,
+      "breedingBlockers": {
+        "born": 4655,
+        "cooldown": 4005,
+        "roll-failed": 4632,
+        "no-bull": 20
+      },
+      "weather": {
+        "Normal": 331,
+        "Mild": 133,
+        "Harsh": 120,
+        "Severe": 30
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "pilot/mortality/passive",
+      "seeds": [
+        1,
+        17,
+        2,
+        3,
+        32,
+        41,
+        7,
+        78
+      ],
+      "statuses": {
+        "extinct": 4,
+        "complete": 4
+      },
+      "runtimeSeconds": 92,
+      "observedYears": 603,
+      "populationAt80Median": 1,
+      "populationAt80Range": [
+        0,
+        0,
+        0,
+        0,
+        2,
+        5,
+        9,
+        16
+      ],
+      "completeFinalMedians": {
+        "food": 2,
+        "materials": 67.5,
+        "cattle": 205.5,
+        "houses": 2.5,
+        "farmyards": 2,
+        "adultDescendants": 5.5,
+        "children": 1.5
+      },
+      "extinctionYears": [
+        {
+          "seed": 1,
+          "year": 72
+        },
+        {
+          "seed": 17,
+          "year": 65
+        },
+        {
+          "seed": 3,
+          "year": 66
+        },
+        {
+          "seed": 32,
+          "year": 80
+        }
+      ],
+      "births": 61,
+      "deaths": 109,
+      "generations": {
+        "1": 33,
+        "2": 17,
+        "3": 11
+      },
+      "childOutcomes": {
+        "born": 61,
+        "reachedAdulthood": 50,
+        "diedBefore16": 3,
+        "stillUnder16": 8
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 37,
+        "1": 18,
+        "2": 11,
+        "3": 4,
+        "4": 1,
+        "5": 1
+      },
+      "birthAgeRange": [
+        18,
+        40
+      ],
+      "firstBirthAgeMedian": 31,
+      "lastBirthAgeMedian": 36,
+      "availablePartnershipRolls": 590,
+      "formedPartnerships": 54,
+      "founderArrivalAgeMedian": 27,
+      "founderArrivalAgeRange": [
+        18,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 62,
+      "founderDeaths": 80,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 65,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 56,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 24,
+          "known": 80,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 3,
+          "known": 80,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "no-partner": 398,
+        "roll-failed": 155,
+        "born": 61,
+        "cooldown": 104,
+        "food": 251,
+        "outgoing-proxy-care": 7
+      },
+      "birthsDuringOwnCare": 12,
+      "reserveBlocksWithoutShortfall": 181,
+      "herdsLostBy80": 1,
+      "zeroBullYears": 180,
+      "cattleOnlyReserveBlocks": 48,
+      "carePersonYears": 272,
+      "foodShortfallYears": 148,
+      "humanShortfall": 1558,
+      "cattleShortfall": 3462,
+      "emptyStockYears": 155,
+      "firstShortfalls": [
+        {
+          "seed": 1,
+          "year": 27
+        },
+        {
+          "seed": 17,
+          "year": 7
+        },
+        {
+          "seed": 2,
+          "year": 10
+        },
+        {
+          "seed": 3,
+          "year": 2
+        },
+        {
+          "seed": 32,
+          "year": 31
+        },
+        {
+          "seed": 41,
+          "year": 11
+        },
+        {
+          "seed": 7,
+          "year": 3
+        },
+        {
+          "seed": 78,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 1,
+          "food": [
+            15,
+            30,
+            51,
+            74,
+            38,
+            57,
+            78,
+            102,
+            61,
+            17,
+            29
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 1
+        },
+        {
+          "seed": 17,
+          "food": [
+            15,
+            16,
+            20,
+            34,
+            25,
+            14,
+            26,
+            0,
+            16,
+            7,
+            35
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 10
+        },
+        {
+          "seed": 2,
+          "food": [
+            15,
+            16,
+            22,
+            36,
+            41,
+            50,
+            55,
+            57,
+            60,
+            19,
+            0
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 8
+        },
+        {
+          "seed": 3,
+          "food": [
+            15,
+            21,
+            0,
+            9,
+            15,
+            0,
+            13,
+            4,
+            15,
+            3,
+            12
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 30
+        },
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            24,
+            20,
+            20,
+            25,
+            35
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 6
+        },
+        {
+          "seed": 41,
+          "food": [
+            15,
+            24,
+            39,
+            56,
+            55,
+            55,
+            28,
+            29,
+            32,
+            6,
+            1
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 4
+        },
+        {
+          "seed": 7,
+          "food": [
+            15,
+            18,
+            21,
+            0,
+            0,
+            8,
+            16,
+            27,
+            35,
+            46,
+            55
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 16
+        },
+        {
+          "seed": 78,
+          "food": [
+            15,
+            19,
+            26,
+            28,
+            30,
+            32,
+            32,
+            31,
+            0,
+            0,
+            3
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 13
+        }
+      ],
+      "shelteredResidentYears": 2738,
+      "exposedResidentYears": 2489,
+      "expectedHumanDeaths": 92.06999999999996,
+      "cattleBirths": 1814,
+      "cattleDeaths": 983,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 995.545000000001,
+      "cattleRiskComponents": {
+        "natural": 6231950,
+        "exposure": 3723500,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 17793,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 5266,
+      "cattleFoodProduced": 10110,
+      "cattleFoodRequired": 16704,
+      "cattleFoodConsumed": 13242,
+      "breedingBlockers": {
+        "born": 1814,
+        "cooldown": 1560,
+        "roll-failed": 1851,
+        "no-bull": 41
+      },
+      "weather": {
+        "Normal": 335,
+        "Mild": 121,
+        "Harsh": 112,
+        "Severe": 35
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/baseline15/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "complete": 1
+      },
+      "runtimeSeconds": 21,
+      "observedYears": 80,
+      "populationAt80Median": 6,
+      "populationAt80Range": [
+        6
+      ],
+      "completeFinalMedians": {
+        "food": 0,
+        "materials": 382,
+        "cattle": 498,
+        "houses": 4,
+        "farmyards": 3,
+        "adultDescendants": 6,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 8,
+      "deaths": 12,
+      "generations": {
+        "1": 7,
+        "2": 1
+      },
+      "childOutcomes": {
+        "born": 8,
+        "reachedAdulthood": 8,
+        "diedBefore16": 0,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 4,
+        "1": 3,
+        "2": 1,
+        "3": 1
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 24,
+      "lastBirthAgeMedian": 37,
+      "availablePartnershipRolls": 114,
+      "formedPartnerships": 9,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 76,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 7,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 4,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 28,
+        "born": 8,
+        "no-partner": 57,
+        "cooldown": 13,
+        "food": 43,
+        "outgoing-proxy-care": 4
+      },
+      "birthsDuringOwnCare": 0,
+      "reserveBlocksWithoutShortfall": 27,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 0,
+      "cattleOnlyReserveBlocks": 6,
+      "carePersonYears": 40,
+      "foodShortfallYears": 20,
+      "humanShortfall": 423,
+      "cattleShortfall": 1678,
+      "emptyStockYears": 22,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 30
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            21,
+            18,
+            19,
+            25,
+            34
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 7
+        }
+      ],
+      "shelteredResidentYears": 500,
+      "exposedResidentYears": 515,
+      "expectedHumanDeaths": 10.544999999999996,
+      "cattleBirths": 916,
+      "cattleDeaths": 421,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 395.86,
+      "cattleRiskComponents": {
+        "natural": 2872600,
+        "exposure": 1086000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 8595,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 2703,
+      "cattleFoodProduced": 5002,
+      "cattleFoodRequired": 7374,
+      "cattleFoodConsumed": 5696,
+      "breedingBlockers": {
+        "roll-failed": 990,
+        "born": 916,
+        "cooldown": 797
+      },
+      "weather": {
+        "Normal": 42,
+        "Mild": 23,
+        "Harsh": 13,
+        "Severe": 2
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/combined/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "complete": 1
+      },
+      "runtimeSeconds": 11,
+      "observedYears": 80,
+      "populationAt80Median": 1,
+      "populationAt80Range": [
+        1
+      ],
+      "completeFinalMedians": {
+        "food": 1,
+        "materials": 5,
+        "cattle": 128,
+        "houses": 0,
+        "farmyards": 0,
+        "adultDescendants": 1,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 7,
+      "deaths": 16,
+      "generations": {
+        "1": 7
+      },
+      "childOutcomes": {
+        "born": 7,
+        "reachedAdulthood": 6,
+        "diedBefore16": 1,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 4,
+        "1": 3,
+        "4": 1
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 31,
+      "lastBirthAgeMedian": 37.5,
+      "availablePartnershipRolls": 52,
+      "formedPartnerships": 7,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 65.5,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 8,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 7,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 4,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 2,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 16,
+        "born": 7,
+        "no-partner": 42,
+        "cooldown": 11,
+        "food": 10
+      },
+      "birthsDuringOwnCare": 2,
+      "reserveBlocksWithoutShortfall": 7,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 0,
+      "cattleOnlyReserveBlocks": 0,
+      "carePersonYears": 32,
+      "foodShortfallYears": 19,
+      "humanShortfall": 257,
+      "cattleShortfall": 400,
+      "emptyStockYears": 20,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 23
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            24,
+            20,
+            20,
+            25,
+            31
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 4
+        }
+      ],
+      "shelteredResidentYears": 99,
+      "exposedResidentYears": 522,
+      "expectedHumanDeaths": 14.899500000000012,
+      "cattleBirths": 238,
+      "cattleDeaths": 113,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 128.545,
+      "cattleRiskComponents": {
+        "natural": 944450,
+        "exposure": 341000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 2459,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 686,
+      "cattleFoodProduced": 1399,
+      "cattleFoodRequired": 2204,
+      "cattleFoodConsumed": 1804,
+      "breedingBlockers": {
+        "roll-failed": 250,
+        "born": 238,
+        "cooldown": 198
+      },
+      "weather": {
+        "Normal": 43,
+        "Mild": 17,
+        "Harsh": 17,
+        "Severe": 3
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/control30/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "complete": 1
+      },
+      "runtimeSeconds": 17,
+      "observedYears": 80,
+      "populationAt80Median": 4,
+      "populationAt80Range": [
+        4
+      ],
+      "completeFinalMedians": {
+        "food": 0,
+        "materials": 61,
+        "cattle": 713,
+        "houses": 1,
+        "farmyards": 0,
+        "adultDescendants": 4,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 6,
+      "deaths": 12,
+      "generations": {
+        "1": 4,
+        "2": 2
+      },
+      "childOutcomes": {
+        "born": 6,
+        "reachedAdulthood": 6,
+        "diedBefore16": 0,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 3,
+        "1": 6
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 27.5,
+      "lastBirthAgeMedian": 27.5,
+      "availablePartnershipRolls": 47,
+      "formedPartnerships": 6,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 75,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 9,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 6,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 4,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 12,
+        "born": 6,
+        "no-partner": 67,
+        "cooldown": 9,
+        "food": 59
+      },
+      "birthsDuringOwnCare": 0,
+      "reserveBlocksWithoutShortfall": 37,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 0,
+      "cattleOnlyReserveBlocks": 12,
+      "carePersonYears": 30,
+      "foodShortfallYears": 23,
+      "humanShortfall": 477,
+      "cattleShortfall": 2379,
+      "emptyStockYears": 23,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 8
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            30,
+            39,
+            53,
+            62,
+            74,
+            81,
+            36,
+            33,
+            0,
+            4,
+            12
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 9
+        }
+      ],
+      "shelteredResidentYears": 245,
+      "exposedResidentYears": 628,
+      "expectedHumanDeaths": 12.970999999999997,
+      "cattleBirths": 1263,
+      "cattleDeaths": 553,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 546.1800000000001,
+      "cattleRiskComponents": {
+        "natural": 3572800,
+        "exposure": 1889000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 11203,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 3555,
+      "cattleFoodProduced": 6825,
+      "cattleFoodRequired": 9935,
+      "cattleFoodConsumed": 7556,
+      "breedingBlockers": {
+        "roll-failed": 1207,
+        "born": 1263,
+        "cooldown": 1085
+      },
+      "weather": {
+        "Normal": 41,
+        "Mild": 16,
+        "Harsh": 17,
+        "Severe": 6
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/feeding/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "complete": 1
+      },
+      "runtimeSeconds": 16,
+      "observedYears": 80,
+      "populationAt80Median": 4,
+      "populationAt80Range": [
+        4
+      ],
+      "completeFinalMedians": {
+        "food": 18,
+        "materials": 389,
+        "cattle": 187,
+        "houses": 2,
+        "farmyards": 1,
+        "adultDescendants": 4,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 9,
+      "deaths": 15,
+      "generations": {
+        "1": 7,
+        "2": 1,
+        "3": 1
+      },
+      "childOutcomes": {
+        "born": 9,
+        "reachedAdulthood": 9,
+        "diedBefore16": 0,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 4,
+        "1": 4,
+        "2": 1,
+        "3": 1
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 31.5,
+      "lastBirthAgeMedian": 38,
+      "availablePartnershipRolls": 68,
+      "formedPartnerships": 6,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 77,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 8,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 4,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 30,
+        "born": 9,
+        "no-partner": 34,
+        "cooldown": 13,
+        "food": 68,
+        "outgoing-proxy-care": 4
+      },
+      "birthsDuringOwnCare": 0,
+      "reserveBlocksWithoutShortfall": 50,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 0,
+      "cattleOnlyReserveBlocks": 24,
+      "carePersonYears": 45,
+      "foodShortfallYears": 12,
+      "humanShortfall": 388,
+      "cattleShortfall": 869,
+      "emptyStockYears": 12,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 30
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            21,
+            18,
+            19,
+            25,
+            34
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 7
+        }
+      ],
+      "shelteredResidentYears": 484,
+      "exposedResidentYears": 578,
+      "expectedHumanDeaths": 13.643499999999998,
+      "cattleBirths": 459,
+      "cattleDeaths": 275,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 296.30499999999995,
+      "cattleRiskComponents": {
+        "natural": 2240050,
+        "exposure": 723000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 5395,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 1511,
+      "cattleFoodProduced": 3429,
+      "cattleFoodRequired": 4893,
+      "cattleFoodConsumed": 4024,
+      "breedingBlockers": {
+        "roll-failed": 397,
+        "born": 459,
+        "cooldown": 409,
+        "feeding-shortfall": 246
+      },
+      "weather": {
+        "Normal": 46,
+        "Mild": 20,
+        "Harsh": 12,
+        "Severe": 2
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/human-reserve/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "complete": 1
+      },
+      "runtimeSeconds": 11,
+      "observedYears": 80,
+      "populationAt80Median": 5,
+      "populationAt80Range": [
+        5
+      ],
+      "completeFinalMedians": {
+        "food": 10,
+        "materials": 519,
+        "cattle": 95,
+        "houses": 4,
+        "farmyards": 1,
+        "adultDescendants": 5,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 6,
+      "deaths": 11,
+      "generations": {
+        "1": 6
+      },
+      "childOutcomes": {
+        "born": 6,
+        "reachedAdulthood": 6,
+        "diedBefore16": 0,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 4,
+        "1": 2,
+        "2": 2
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 31,
+      "lastBirthAgeMedian": 36.5,
+      "availablePartnershipRolls": 72,
+      "formedPartnerships": 6,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 81.5,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 10,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 8,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 6,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 18,
+        "born": 6,
+        "no-partner": 28,
+        "cooldown": 9,
+        "food": 69
+      },
+      "birthsDuringOwnCare": 0,
+      "reserveBlocksWithoutShortfall": 31,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 0,
+      "cattleOnlyReserveBlocks": 0,
+      "carePersonYears": 30,
+      "foodShortfallYears": 43,
+      "humanShortfall": 668,
+      "cattleShortfall": 678,
+      "emptyStockYears": 45,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 10
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            21,
+            18,
+            19,
+            25,
+            0
+          ],
+          "shortageYears": 1,
+          "reserveBlocks": 6
+        }
+      ],
+      "shelteredResidentYears": 388,
+      "exposedResidentYears": 563,
+      "expectedHumanDeaths": 14.445999999999998,
+      "cattleBirths": 218,
+      "cattleDeaths": 126,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 134.08,
+      "cattleRiskComponents": {
+        "natural": 809800,
+        "exposure": 531000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 2137,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 620,
+      "cattleFoodProduced": 1183,
+      "cattleFoodRequired": 2067,
+      "cattleFoodConsumed": 1389,
+      "breedingBlockers": {
+        "roll-failed": 216,
+        "born": 218,
+        "cooldown": 186
+      },
+      "weather": {
+        "Normal": 44,
+        "Mild": 16,
+        "Harsh": 15,
+        "Severe": 5
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/mortality/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "extinct": 1
+      },
+      "runtimeSeconds": 10,
+      "observedYears": 80,
+      "populationAt80Median": 0,
+      "populationAt80Range": [
+        0
+      ],
+      "completeFinalMedians": {
+        "food": null,
+        "materials": null,
+        "cattle": null,
+        "houses": null,
+        "farmyards": null,
+        "adultDescendants": null,
+        "children": null
+      },
+      "extinctionYears": [
+        {
+          "seed": 32,
+          "year": 80
+        }
+      ],
+      "births": 5,
+      "deaths": 15,
+      "generations": {
+        "1": 5
+      },
+      "childOutcomes": {
+        "born": 5,
+        "reachedAdulthood": 5,
+        "diedBefore16": 0,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 3,
+        "1": 3,
+        "2": 1
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 31,
+      "lastBirthAgeMedian": 37,
+      "availablePartnershipRolls": 71,
+      "formedPartnerships": 4,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 61.5,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 9,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 7,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 3,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 0,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 20,
+        "born": 5,
+        "no-partner": 38,
+        "cooldown": 7,
+        "food": 22
+      },
+      "birthsDuringOwnCare": 0,
+      "reserveBlocksWithoutShortfall": 17,
+      "herdsLostBy80": 0,
+      "zeroBullYears": 0,
+      "cattleOnlyReserveBlocks": 4,
+      "carePersonYears": 25,
+      "foodShortfallYears": 39,
+      "humanShortfall": 320,
+      "cattleShortfall": 1321,
+      "emptyStockYears": 39,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 31
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            38,
+            47,
+            59,
+            66,
+            24,
+            20,
+            20,
+            25,
+            35
+          ],
+          "shortageYears": 0,
+          "reserveBlocks": 6
+        }
+      ],
+      "shelteredResidentYears": 269,
+      "exposedResidentYears": 347,
+      "expectedHumanDeaths": 10.132,
+      "cattleBirths": 389,
+      "cattleDeaths": 239,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 224.545,
+      "cattleRiskComponents": {
+        "natural": 1529950,
+        "exposure": 715500,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 4166,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 1151,
+      "cattleFoodProduced": 2174,
+      "cattleFoodRequired": 3797,
+      "cattleFoodConsumed": 2476,
+      "breedingBlockers": {
+        "roll-failed": 425,
+        "born": 389,
+        "cooldown": 337
+      },
+      "weather": {
+        "Normal": 47,
+        "Mild": 16,
+        "Harsh": 14,
+        "Severe": 3
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    },
+    {
+      "key": "replay/yard-breeding/passive",
+      "seeds": [
+        32
+      ],
+      "statuses": {
+        "complete": 1
+      },
+      "runtimeSeconds": 9,
+      "observedYears": 80,
+      "populationAt80Median": 7,
+      "populationAt80Range": [
+        7
+      ],
+      "completeFinalMedians": {
+        "food": 10,
+        "materials": 488,
+        "cattle": 0,
+        "houses": 4,
+        "farmyards": 2,
+        "adultDescendants": 7,
+        "children": 0
+      },
+      "extinctionYears": [],
+      "births": 8,
+      "deaths": 11,
+      "generations": {
+        "1": 6,
+        "2": 2
+      },
+      "childOutcomes": {
+        "born": 8,
+        "reachedAdulthood": 8,
+        "diedBefore16": 0,
+        "stillUnder16": 0
+      },
+      "birthsPerFemaleHistogram": {
+        "0": 2,
+        "1": 3,
+        "2": 1,
+        "3": 1
+      },
+      "birthAgeRange": [
+        22,
+        40
+      ],
+      "firstBirthAgeMedian": 27,
+      "lastBirthAgeMedian": 35,
+      "availablePartnershipRolls": 54,
+      "formedPartnerships": 7,
+      "founderArrivalAgeMedian": 26.5,
+      "founderArrivalAgeRange": [
+        19,
+        40
+      ],
+      "founderObservedDeathAgeMedian": 81,
+      "founderDeaths": 10,
+      "founderCensored": 0,
+      "survival": {
+        "50": {
+          "reached": 9,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "60": {
+          "reached": 9,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "70": {
+          "reached": 7,
+          "known": 10,
+          "censoredBefore": 0
+        },
+        "80": {
+          "reached": 5,
+          "known": 10,
+          "censoredBefore": 0
+        }
+      },
+      "fertilityBlockers": {
+        "roll-failed": 35,
+        "born": 8,
+        "no-partner": 11,
+        "food": 39,
+        "cooldown": 14
+      },
+      "birthsDuringOwnCare": 1,
+      "reserveBlocksWithoutShortfall": 21,
+      "herdsLostBy80": 1,
+      "zeroBullYears": 69,
+      "cattleOnlyReserveBlocks": 2,
+      "carePersonYears": 39,
+      "foodShortfallYears": 14,
+      "humanShortfall": 233,
+      "cattleShortfall": 5,
+      "emptyStockYears": 14,
+      "firstShortfalls": [
+        {
+          "seed": 32,
+          "year": 2
+        }
+      ],
+      "early": [
+        {
+          "seed": 32,
+          "food": [
+            15,
+            24,
+            0,
+            0,
+            14,
+            23,
+            38,
+            60,
+            70,
+            83,
+            75
+          ],
+          "shortageYears": 2,
+          "reserveBlocks": 9
+        }
+      ],
+      "shelteredResidentYears": 527,
+      "exposedResidentYears": 443,
+      "expectedHumanDeaths": 13.04,
+      "cattleBirths": 0,
+      "cattleDeaths": 3,
+      "slaughters": 0,
+      "transfers": 0,
+      "expectedCattleDeaths": 1.7900000000000003,
+      "cattleRiskComponents": {
+        "natural": 11900,
+        "exposure": 6000,
+        "crowding": 0,
+        "flat": 0
+      },
+      "exposedCattleYears": 34,
+      "shelteredCattleYears": 0,
+      "overcrowdedCattleYears": 0,
+      "eligibleCowYears": 17,
+      "cattleFoodProduced": 35,
+      "cattleFoodRequired": 39,
+      "cattleFoodConsumed": 34,
+      "breedingBlockers": {
+        "no-yard-space": 17
+      },
+      "weather": {
+        "Normal": 45,
+        "Harsh": 16,
+        "Mild": 16,
+        "Severe": 3
+      },
+      "traceDropped": 0,
+      "accountingResiduals": 0
+    }
+  ]
+}
