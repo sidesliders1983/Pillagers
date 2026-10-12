@@ -28,9 +28,12 @@ export class FjordEntities {
         this.seasonProgress = progress;
         for (const entry of this.entries.values()) entry.season?.update(progress);
     }
+    setCampfireHeat(heat: number) {
+        this.entries.get('campfire:settlement-campfire')?.season?.setSnowMultiplier(1 - heat);
+    }
     inspectSeason() {
         return [...this.entries].flatMap(([key, entry]) =>
-            entry.season ? [{ key, ...entry.season.inspect() }] : []);
+            entry.season ? [{ key: key === 'campfire:settlement-campfire' ? 'settlement-campfire' : key, ...entry.season.inspect() }] : []);
     }
     select(markers: readonly SelectionMarker[]) {
         const wanted = new Set(markers.filter(marker => this.entries.has(marker.selectionKey)).map(marker => marker.selectionKey));
@@ -102,7 +105,7 @@ export class FjordEntities {
                     entry.season?.dispose();
                     this.remove(entry.model);
                 }
-                const season = entity.kind === 'building' || entity.kind === 'household'
+                const season = entity.kind === 'building' || entity.kind === 'household' || entity.kind === 'campfire'
                     ? new StructureSeasonTint(model) : undefined;
                 season?.update(this.seasonProgress);
                 entry = { signature, model, season };

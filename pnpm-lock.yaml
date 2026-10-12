@@ -11,12 +11,18 @@ importers:
       nosleep.js:
         specifier: 0.12.0
         version: 0.12.0
+      quarks.core:
+        specifier: 0.16.0
+        version: 0.16.0
       simplex-noise:
         specifier: 4.0.3
         version: 4.0.3
       three:
         specifier: ^0.180.0
         version: 0.180.0
+      three.quarks:
+        specifier: 0.16.0
+        version: 0.16.0(three@0.180.0)
     devDependencies:
       '@gltf-transform/core':
         specifier: 4.2.1
@@ -625,6 +631,9 @@ packages:
   property-graph@3.0.0:
     resolution: {integrity: sha512-TnzxUsttmGtw+OiU0LDw+0FlMbJ8vV8pOjyDI7+Kdni4Tj0hW5BFh7TatQu7Y68hcvvFmiFOHilKShsA4R82fA==}
 
+  quarks.core@0.16.0:
+    resolution: {integrity: sha512-F46WeRCmv+HJaFvSOurfTbnR9Ri9SbqyiWKFVplmVmMU+2njI9YZ6oKkflZfwWAFTbHbbReL6LSXj248oNFC7w==}
+
   rollup@4.63.5:
     resolution: {integrity: sha512-KRWwmNLlPw5M7HcdYfm15oBv9n9LPtjzpzCIxS/phwqvPyxHSoKX6Y2YU3pxSPfy0CLquVgsx/j/hBi6OvH1Nw==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -650,6 +659,11 @@ packages:
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
+
+  three.quarks@0.16.0:
+    resolution: {integrity: sha512-j9hDNjTUurbrZltd/XXAw+6SEyQl2uYmNfhRnFkUXEGcqMJoJAfJSDKzIW1GrLljUkAzYK9MIBn53RSyaW1XWQ==}
+    peerDependencies:
+      three: '>=0.165.0'
 
   three@0.180.0:
     resolution: {integrity: sha512-o+qycAMZrh+TsE01GqWUxUIKR1AL0S8pq7zDkYOQw8GqfX8b8VoCKYUoHbhiX5j+7hr8XsuHDVU6+gkQJQKg9w==}
@@ -1120,6 +1134,8 @@ snapshots:
 
   property-graph@3.0.0: {}
 
+  quarks.core@0.16.0: {}
+
   rollup@4.63.5:
     dependencies:
       '@types/estree': 1.0.9
@@ -1190,6 +1206,11 @@ snapshots:
   simplex-noise@4.0.3: {}
 
   source-map-js@1.2.1: {}
+
+  three.quarks@0.16.0(three@0.180.0):
+    dependencies:
+      quarks.core: 0.16.0
+      three: 0.180.0
 
   three@0.180.0: {}
 

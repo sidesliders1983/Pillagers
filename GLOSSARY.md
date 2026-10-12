@@ -22,7 +22,7 @@ _Avoid_: Family
 
 **Residence**: The shelter a household lives in, including a house or a tent.
 
-**Settlement campfire**: The shared visual nucleus of a settlement, present from landing on a reserved middle place. Ordinary permanent homes face it; Farmyards retain their orientation. Ceremonies and settlement information are future uses.
+**Settlement campfire**: The shared visual nucleus of a settlement, present from landing on a reserved middle place. Ordinary permanent homes face it; Farmyards retain their orientation. Its saved burning state purchases 1,000 active ticks for 1 Material; extinguishing preserves unspent fuel. Ceremonies and settlement information are future uses.
 
 **Building**: Persistent physical infrastructure, independent of the household occupying it.
 

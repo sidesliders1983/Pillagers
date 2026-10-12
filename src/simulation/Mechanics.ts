@@ -1,3 +1,4 @@
+import { stepCampfire } from './Campfire';
 import {evaluateSocialYear, pruneSocialIncidents} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
 import {personaAway,stepWorld} from './WorldExpeditions';
@@ -102,6 +103,7 @@ export function inspectBuilding(state:SimulationState,id:string) {
     return {occupied,upkeep:state.mechanics!.config.baseUpkeep+info.upgradeLevel,debtWinters:info.debtWinters,upgradeLevel:info.upgradeLevel,investedMaterials:info.investedMaterials};
 }
 export function stepMechanicsTick(state:SimulationState):void {
+    stepCampfire(state);
     const config=state.mechanics!.config;
     let annualFoodEvent;
     let previousFarmyards=farmyards(state).map(f=>f.id);

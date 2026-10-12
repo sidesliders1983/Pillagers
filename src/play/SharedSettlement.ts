@@ -39,7 +39,7 @@ export class SharedSettlement {
         this.fjord.importJSON(text);
         const selection = this.selection;
         const state = this.session.snapshot();
-        const identities = { persona: { ...state.personas, ...state.personaArchive },
+        const identities: Record<EntityKind, Record<string, unknown>> = { campfire: { 'settlement-campfire': true }, persona: { ...state.personas, ...state.personaArchive },
             household: state.households, building: state.buildings,
             cattle: state.landing?.cattle ?? {}, longship: state.landing?.longships ?? {} };
         if (selection && !(identities[selection.kind]?.[selection.id]))
