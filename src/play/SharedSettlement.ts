@@ -16,8 +16,8 @@ export class SharedSettlement {
     transferring = false;
     readonly session: GameplaySession;
     readonly fjord: FjordCampaign;
-    constructor(seed = 32, narrativeSeed?: number) {
-        this.session = new GameplaySession(seed, narrativeSeed);
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true) {
+        this.session = new GameplaySession(seed, narrativeSeed, socialEnabled);
         this.fjord = new FjordCampaign(this.session);
     }
     get selection(): SettlementSelection {
@@ -45,9 +45,9 @@ export class SharedSettlement {
         if (selection && !(identities[selection.kind]?.[selection.id]))
             this.select(null);
     }
-    newCampaign(seed: number, weatherEnabled: boolean) {
+    newCampaign(seed: number, weatherEnabled: boolean, socialEnabled = true) {
         const proposal = new GameplaySession();
-        proposal.newCampaign(seed, weatherEnabled);
+        proposal.newCampaign(seed, weatherEnabled, socialEnabled);
         this.importJSON(proposal.saveJSON());
         // New campaigns reset all presentation plots, even when their seed repeats.
         this.fjord.restart(true, weatherEnabled);

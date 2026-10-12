@@ -2,7 +2,7 @@
 
 Implementation issue: [#120](https://github.com/sidesliders1983/Pillagers/issues/120). Northstar [#121](https://github.com/sidesliders1983/Pillagers/pull/121) is already merged. The accepted Lore/composer stack was delivered through [#118](https://github.com/sidesliders1983/Pillagers/pull/118); this pilot starts from that integration on a separate branch.
 
-Owner-approved test boundaries: public Simulation Core/save-load, paired measurement output, and Gameplay Lab/Chronicle browser behavior. The experiment remains explicitly opt-in for new test campaigns; ordinary and legacy campaigns stay disabled. No economy, fertility, combat, care or cohesion modifiers and no new animations/model calls.
+Owner-approved test boundaries: public Simulation Core/save-load, paired measurement output, and Gameplay Lab/Chronicle browser behavior. The owner superseded the initial opt-in rollout on 12 October 2026: new player campaigns now default on; existing/legacy saves retain their saved behavior and CPU neighbours stay disabled. No economy, fertility, combat, care or cohesion modifiers and no new animations/model calls.
 
 ## Verified reuse
 
@@ -21,7 +21,7 @@ Owner-approved test boundaries: public Simulation Core/save-load, paired measure
 | Shared play views | SharedSettlement/FjordCampaign sidecar save and GameplaySession checkpoint splitting | Reuse existing 2D/3D transfer and five-Winter book boundaries; reading and route switches cannot create extra annual rolls. |
 | Measurements | Existing worker-pool study orchestration and per-seed gzip evidence | Adapt orchestration with real Core commands. Normalize event sequence IDs for enabled/disabled semantic comparisons; retain exact social replay for enabled split/resume checks. |
 
-Actual inherited discrepancy: `defaultPrototypeConfig.childcareWinters` is currently 5, despite an earlier owner direction of 2. The social pilot will reuse the saved care rules and report that discrepancy rather than silently change baseline care behavior.
+Settled family rules: two complete Winters of birth cooldown and five Winters of childcare. Five-Winter care is correct; the earlier reuse-map discrepancy statement was mistaken. No simulation recalibration is required.
 
 ## Owner-approved experimental settings
 

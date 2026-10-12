@@ -1,10 +1,10 @@
-# Personality Life Events v0.1 · opt-in pilot
+# Personality Life Events v0.1 · player campaign rollout
 
 Issue [#120](https://github.com/sidesliders1983/Pillagers/issues/120), following the [#121 northstar](https://github.com/sidesliders1983/Pillagers/pull/121). Approved public test boundaries: Simulation Core/save-load, paired measurement output, Gameplay Lab/Chronicle browser behavior. [Reuse map](PERSONALITY-LIFE-EVENTS-REUSE.md).
 
 ## Campaign scope
 
-Ordinary and old saves have no social extension and retain their previous behavior. Gameplay Lab's **Experimental personality life events** checkbox applies only to the next new/restarted test campaign. Loading a save restores its actual setting. The experiment is saved and follows the campaign through 2D/3D handoff; readers/rendering never sample it. CPU neighbours remain ordinary unless a labelled QA fixture explicitly enables them.
+Owner decision, 12 October 2026: newly created player campaigns enable the existing social behavior by default through Gameplay Lab and the shared 2D/Fjord session. The low-level Core factory remains explicit-off for development/baseline comparisons and CPU neighbours. Gameplay Lab can explicitly opt a new campaign out. Loading/importing an existing or legacy save retains its recorded enabled/disabled behavior, including a missing social extension; it creates no retrospective events. Restart preserves saved social rules unless an explicit Lab setting overrides them for the restarted campaign. A genuinely new campaign uses the new default, independently of the last imported save. The experiment is saved and follows the campaign through 2D/3D handoff; readers/rendering never sample it. CPU neighbours remain ordinary unless a labelled QA fixture explicitly enables them.
 
 No economic, production, care, fertility, mortality, combat, cohesion or family-tree-admission effects. DNA is not rewritten. No new model calls, motives, dialogue, animations or intervention controls.
 
@@ -48,4 +48,4 @@ The Gameplay Lab has a readonly, stable diagnostic disclosure and existing Chron
 
 [QA report](../qa/personality-life-events/report.md): paired 100-seed × 25-year default domestic cohort, 100 separately labelled controlled shortage/kin/helper fixtures, plus four full-world checks. Enabled and disabled non-social outcomes are compared at every boundary, normalizing sequential event IDs independently per clan. Enabled replay is compared exactly across repeated, batched and saved/restored runs on verification seeds.
 
-Timings are descriptive CPU wall times from this development laptop; no millisecond gate. Physical iPad behavior is not certified by desktop touch emulation. Default childcare currently remains 5 years in the saved mechanics configuration; this inherited discrepancy with an earlier two-year direction is not silently changed by this pilot. Historical measurement reports are preserved.
+Timings are descriptive CPU wall times from this development laptop; no millisecond gate. Physical iPad behavior is not certified by desktop touch emulation. The settled family rules are two complete Winters of birth cooldown and five Winters of childcare. These are independent rules; five-Winter care is correct, not an inherited discrepancy. Saved-rule compatibility is preserved. Historical measurement reports are preserved.

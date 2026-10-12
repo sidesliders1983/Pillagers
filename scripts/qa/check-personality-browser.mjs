@@ -6,7 +6,7 @@ import {studyInitial} from './personality-scenario.mjs';
 const {chromium} = createRequire(import.meta.url)(process.env.QA_PLAYWRIGHT ??
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
-const output = 'docs/qa/personality-life-events/browser'; mkdirSync(output, {recursive: true});
+const output = 'docs/qa/personality-rollout/browser'; mkdirSync(output, {recursive: true});
 const input = studyInitial(41, true).enabled;
 Object.assign(input.social.config, {quarrelMinBps: 10000, quarrelMaxBps: 10000,
     mediationMinBps: 10000, mediationMaxBps: 10000, mediationSuccessBps: 10000});
@@ -22,8 +22,21 @@ try {
         });
         await page.goto((process.env.QA_ORIGIN ?? 'http://127.0.0.1:5180') + '/gameplay-lab');
         const setting = page.locator('#social-enabled');
-        assert.equal(await setting.isChecked(), false);
+        assert.equal(await setting.isChecked(), true);
+        await setting.uncheck();
+        assert.match(await page.locator('#social-diagnostics summary').innerText(), /experimental/);
+        await page.locator('[data-action="new"]').click();
+        assert.match(await page.locator('#social-diagnostics summary').innerText(), /disabled/);
         await setting.check();
+        assert.match(await page.locator('#social-diagnostics summary').innerText(), /disabled/);
+        await page.locator('[data-action="new"]').click();
+        assert.match(await page.locator('#social-diagnostics summary').innerText(), /experimental/);
+        await page.locator('#import-file').setInputFiles({name: 'legacy.json', mimeType: 'application/json',
+            buffer: Buffer.from(core.serializeState(core.createCampaign(32)))});
+        await page.waitForFunction(() => document.querySelector('#social-diagnostics summary')?.textContent.includes('disabled'));
+        assert.equal(await setting.isChecked(), true, 'Loading old rules must not opt out the next genuine new campaign');
+        await page.locator('#same-founders').check();
+        await page.locator('[data-action="restart"]').click();
         assert.match(await page.locator('#social-diagnostics summary').innerText(), /disabled/);
         await page.locator('[data-action="new"]').click();
         assert.match(await page.locator('#social-diagnostics summary').innerText(), /experimental/);
@@ -64,7 +77,7 @@ try {
         assert.equal(await page.locator('[data-action="run"]').innerText(), 'Start');
         await page.locator('#social-diagnostics').scrollIntoViewIfNeeded();
         await page.screenshot({path: output + '/lab-' + width + '.png'});
-        checks.push({width, passed: true, checks: ['opt-in only at creation', 'Core fixture import',
+        checks.push({width, passed: true, checks: ['default-on new creation, explicit opt-out, legacy import/restart and fresh defaults', 'Core fixture import',
             'real annual quarrel/mediation/reconciliation', 'stable disclosure', 'rendering does not reroll', 'save/load rollback', 'hidden-tab and no-offline guard']});
         await page.close();
     }

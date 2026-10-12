@@ -27,4 +27,4 @@ Files:
 
 These requirements describe design intent, not implementation status.
 
-- [Personality Life Events v0.1 opt-in pilot](../PERSONALITY-LIFE-EVENTS-PILOT.md): approved experimental values, availability, source events and paired evidence.
+- [Personality Life Events v0.1 rollout](../PERSONALITY-LIFE-EVENTS-PILOT.md): approved experimental values, availability, source events and paired evidence.

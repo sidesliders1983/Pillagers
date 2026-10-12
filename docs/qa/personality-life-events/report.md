@@ -63,3 +63,9 @@ Inherited rule discrepancy: current default childcare remains five years, despit
 ## Delivery checks
 
 Local build and unchanged asset validation passed. The full suite reports 630 tests (629 passed, zero failed, one inherited conditional GLB portability skip); the final targeted social/harness suite passes 18 tests, including three additional restore/memory/name checks. No formatter is configured; changed code was inspected manually and git diff --check passed. [Verification](verification.json). Required GitHub checks remain authoritative for the delivered head revision.
+
+## Clarification · 12 October 2026
+
+The earlier childcare discrepancy statement above was mistaken. The settled rules are **two complete Winters of birth cooldown and five Winters of childcare**; five-Winter care is correct. No measured configurations, results, raw records or hashes have changed.
+
+After reviewing this pilot, the owner superseded the opt-in-only rollout recommendation: the existing behavior now defaults on for genuinely new player campaigns in Gameplay Lab, 2D and Fjord, with an explicit development opt-out. Existing/legacy saves and saved-rule restarts retain their behavior; CPU neighbours remain disabled. This rollout decision does not change the measured coefficients, prerequisites, limits or consequences, and requires no new social-balance study before #122. The measurements and original recommendation above remain a record of the earlier pilot.

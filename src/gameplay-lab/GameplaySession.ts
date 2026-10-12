@@ -9,8 +9,8 @@ export class GameplaySession {
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32, narrativeSeed?: number) {
-        this.state = createCampaign(seed);
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled});
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     snapshot(): SimulationState {
@@ -69,7 +69,7 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true, socialEnabled = false): void {
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true): void {
         this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }));
     }
     restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false, socialEnabled = this.state.social?.config.enabled ?? false): void {

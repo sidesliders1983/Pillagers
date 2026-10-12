@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "width": 1440,
+      "passed": true,
+      "checks": [
+        "default-on new creation, explicit opt-out, legacy import/restart and fresh defaults",
+        "Core fixture import",
+        "real annual quarrel/mediation/reconciliation",
+        "stable disclosure",
+        "rendering does not reroll",
+        "save/load rollback",
+        "hidden-tab and no-offline guard"
+      ]
+    },
+    {
+      "width": 390,
+      "passed": true,
+      "checks": [
+        "default-on new creation, explicit opt-out, legacy import/restart and fresh defaults",
+        "Core fixture import",
+        "real annual quarrel/mediation/reconciliation",
+        "stable disclosure",
+        "rendering does not reroll",
+        "save/load rollback",
+        "hidden-tab and no-offline guard"
+      ]
+    },
+    {
+      "width": 1024,
+      "passed": true,
+      "checks": [
+        "existing Clan Book reader uses real sources",
+        "relative time",
+        "no invented motive"
+      ]
+    }
+  ],
+  "errors": [],
+  "deviceLimit": "Desktop Edge with touch emulation; no physical iPad certification."
+}

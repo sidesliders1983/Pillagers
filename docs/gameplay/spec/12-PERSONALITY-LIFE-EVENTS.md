@@ -92,14 +92,14 @@ Related: [GP-006](../../../GAME-PRINCIPLES.md#gp-006--personality-is-expressed-t
 
 [#120](https://github.com/sidesliders1983/Pillagers/issues/120) implements **quarrel → possible mediation/help → possible reconciliation**, using a real shortage context and known social ties as the first narrow trigger. One annual evaluation is a prototype cadence, not a rule that future events may happen only once per year. Coefficients, eligibility restrictions, cooldowns and budgets are recorded experimental settings.
 
-The pilot is disabled for ordinary/legacy campaigns and explicitly enabled in saved test-campaign configuration. Reuse Gameplay Lab/QA and the existing event reader. No independent life-sim UI or event-editor product. Test new semantic event mappings without making the family tree, text-model research or speech backlog wait for this experiment.
+Rollout decision 2026-10-12 supersedes the initial opt-in-only pilot: new player campaigns default on through the shared 2D/Fjord/Gameplay Lab session. Explicit-off development configuration remains supported; CPU neighbours stay disabled. Existing and legacy saves retain recorded rules, and restart preserves those rules. Loading never activates missing social state or rewrites history. Reuse Gameplay Lab/QA and the existing event reader. No independent life-sim UI or event-editor product. Test new semantic event mappings without making the family tree, text-model research or speech backlog wait for this experiment.
 
 **Acceptance:**
 - Public probability and state-transition tests isolate traits, pressure and history; check no-event, attempt/failure/success and cooldown/expiry cases.
 - Seeded multi-year cohorts report eligible opportunities, per-person/pair incidence, aid/resolution and recurrence, not only a cherry-picked dramatic story. Starting proposal: 100 seeds × 25 Winters plus controlled public-Core fixtures; report actual configuration and uneventful runs.
 - Fixed-context comparisons separate social probability from the existing effects of DNA on work/economy. A single resident's outcome is not statistical proof of a trait effect.
 - Save/restore, old saves, availability changes, split/batched time, duplicate callbacks, renderer/reader independence and baseline isolation are verified without weakening existing checks.
-- Deliver one source-linked readable episode and a keep/adjust/defer assessment of frequency, fairness, recognizability and cost before enabling default play or adding wider consequences.
+- Deliver one source-linked readable episode and a keep/adjust/defer assessment of frequency, fairness, recognizability and cost before adding wider consequences; default-on new player playtesting is separately owner-approved.
 
 ## Open decisions and scope
 
