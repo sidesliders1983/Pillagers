@@ -2,9 +2,21 @@
 
 ## Player behavior
 
-`/fjord-play` now renders falling snow in **Winter** and rain in **Autumn**. Spring and
-Summer have no falling precipitation. The existing northern snow cover remains through the
-start of Spring and follows its original thaw curve; falling flakes do not change that curve.
+`/fjord-play` uses the same saved visual-season blend for environment colours and precipitation.
+Rain starts building after **Summer** begins; snowfall starts building after **Autumn** begins.
+Both can be present while Autumn colours blend into Winter. Calendar labels keep their existing
+quarter boundaries. With the current 1,000 ticks per year:
+
+| Saved tick | Precipitation |
+| --- | --- |
+| 0–250 | Full Winter snowfall |
+| After 250–375 | Snowfall fades with the northern Spring thaw |
+| 375–500 | Dry |
+| After 500–750 | Rain builds with the Summer → Autumn colour transition |
+| After 750–1,000 | Rain fades as snow builds with the Autumn → Winter colour transition |
+
+These weights reuse the existing smooth environment curve; there is no separate date offset.
+The ground and structure snow-cover curve is unchanged.
 
 The existing menu setting is now **Local effects**, covering snow, rain and campfire particles.
 It defaults to Low. Off and the device's reduced-motion preference hide precipitation and clear
@@ -38,9 +50,12 @@ roof accumulation, puddle, splash or wind simulation in this step.
 | Normal | 700 | 600 | 140 | 400 |
 | Off / reduced motion | 0 | 0 | 0 | 0 |
 
-The emission guard includes fractional emission headroom. During a season transition the old
-effect fades out as the new one fades in over two active seconds; both caps can coexist briefly.
-A camera zoom never increases these caps; a bounded size multiplier keeps particles readable at overview distance. Quality changes reuse resources and clear particles.
+The emission guard includes fractional emission headroom. Emission and opacity follow separate
+snow/rain weights from the environment blend. Both caps can coexist during the Autumn transition.
+A full-strength jump takes up to two active seconds to settle; regular ticking tracks the
+gradual palette blend rather than waiting for the next calendar label.
+A camera zoom never increases these caps; a bounded size multiplier keeps particles readable at
+overview distance. Quality changes reuse resources and clear particles.
 Frame deltas are clamped to 0.1 seconds, preventing catch-up storms. A local seeded stream is
 independent of canonical RNG. World rebuild and route disposal release emitters, batches,
 materials and textures.
@@ -51,7 +66,9 @@ materials and textures.
   disabled economic weather, and unchanged canonical state/save/replay.
 - The browser check exercises actual `/fjord-play` rendering and menu controls, Low/Normal/Off,
   reduced motion, seasonal imports, live transitions, pause/hidden tab, and touch selection.
-- [Review and recorded observations](qa/seasonal-precipitation/review.html).
+- [Review](qa/seasonal-precipitation/review.html) and
+  [palette-timing observations](qa/seasonal-precipitation/palette-timing/report.md).
+  The original report remains a historical record of the earlier label-based timing.
 - Run `node --test tests/fjord-seasons.test.mjs`, then
   `node scripts/qa/check-seasonal-precipitation.mjs` against a local Vite server on port 5190.
   `QA_ORIGIN`, `QA_OUTPUT` and `PLAYWRIGHT_MODULE` override the local environment.

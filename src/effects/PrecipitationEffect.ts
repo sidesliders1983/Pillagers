@@ -3,9 +3,9 @@ import { BatchedRenderer, ColorOverLife, ConstantColor, ConstantValue, Gradient,
     IntervalValue, ParticleSystem, RectangleEmitter, RenderMode } from 'three.quarks';
 import { Vector3 as ColorVector, Vector4, type Particle } from 'quarks.core';
 import { particleTexture, type EffectQuality } from './CampfireEffect';
-import type { PrecipitationKind } from '../fjord-play/FjordProjection';
+import type { FjordPrecipitation } from '../fjord-play/FjordProjection';
 
-type FallingKind = Exclude<PrecipitationKind, 'none'>;
+type FallingKind = keyof FjordPrecipitation;
 type Coverage = { center: Vector3; radius: number; height: number; sizeScale: number };
 type EffectEntry = { kind: FallingKind; system: ParticleSystem; weight: number };
 
@@ -56,7 +56,7 @@ export class PrecipitationEffect {
         depthTest: true, depthWrite: false, blending: NormalBlending, toneMapped: false });
     private coverage: Coverage = { center: new Vector3(), radius: 25, height: 18, sizeScale: 1 };
     private entries: EffectEntry[] = [];
-    private kind: PrecipitationKind = 'none';
+    private precipitation: FjordPrecipitation = { snow: 0, rain: 0 };
     private quality: EffectQuality = 'low';
     private reducedMotion = false;
     private time = 0;
@@ -98,7 +98,9 @@ export class PrecipitationEffect {
         for (const batch of this.renderer.batches) batch.raycast = () => { };
     }
 
-    setWeather(kind: PrecipitationKind) { this.kind = kind; }
+    setWeather(precipitation: FjordPrecipitation) {
+        this.precipitation = { ...precipitation };
+    }
 
     configure(quality: EffectQuality, reducedMotion: boolean) {
         if (quality !== this.quality || reducedMotion !== this.reducedMotion) {
@@ -125,7 +127,7 @@ export class PrecipitationEffect {
         // Preserve readability at the settlement overview without increasing particle count.
         this.coverage.sizeScale = Math.max(1, Math.min(4, distance / 35));
         for (const entry of this.entries) {
-            const target = entry.kind === this.kind ? 1 : 0;
+            const target = this.precipitation[entry.kind];
             entry.weight += Math.sign(target - entry.weight) * Math.min(Math.abs(target - entry.weight), step / 2);
             const snow = entry.kind === 'snow';
             const low = this.quality === 'low';
@@ -140,7 +142,8 @@ export class PrecipitationEffect {
     }
 
     inspect() {
-        return { kind: this.kind, quality: this.quality, reducedMotion: this.reducedMotion,
+        return { targetSnow: this.precipitation.snow, targetRain: this.precipitation.rain,
+            quality: this.quality, reducedMotion: this.reducedMotion,
             enabled: this.enabled, time: this.time,
             snow: this.entries[0]?.system.particleNum ?? 0,
             rain: this.entries[1]?.system.particleNum ?? 0,

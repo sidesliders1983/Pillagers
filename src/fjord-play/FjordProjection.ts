@@ -2,6 +2,7 @@ import { settlementCampfire } from './SettlementCampfire';
 export { settlementCampfire } from './SettlementCampfire';
 import { housingName } from '../simulation/HousingNames';
 import { projectFjordCalendar } from './FjordCalendar';
+import { seasonBlend } from '../config/timeVisualization';
 import type { CharacterDNA } from '../characters/CharacterDNA';
 import { inspectWork, inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
 import type { SimulationState } from '../simulation/SimulationCore';
@@ -12,7 +13,7 @@ import { fitsBuildingFoundation } from '../world/BuildingPlot';
 import { suitability } from '../world-generation/PlanSettlement';
 import { projectFjordGround } from './FjordGround';
 import { projectFjordWeather } from './FjordWeather';
-export type PrecipitationKind = 'snow' | 'rain' | 'none';
+export type FjordPrecipitation = { snow: number; rain: number };
 export type FjordTransform = {
     x: number;
     y: number;
@@ -321,9 +322,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
     const calendar = projectFjordCalendar(state.time, state.ticksPerWinter);
-    const kind: PrecipitationKind = calendar.season === 'Winter' ? 'snow'
-        : calendar.season === 'Autumn' ? 'rain' : 'none';
-    return { calendar, precipitation: { kind },
+    const { from, to, mix } = seasonBlend(calendar.visualProgress);
+    const precipitation: FjordPrecipitation = {
+        snow: calendar.winterWeight,
+        rain: from.name === 'Autumn' ? 1 - mix : to.name === 'Autumn' ? mix : 0
+    };
+    return { calendar, precipitation,
         campfire, entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
