@@ -593,7 +593,7 @@ export class FjordPlay {
                 do {
                     this.queued = false;
                     const view = this.campaign.project();
-                    precipitationEffect!.setWeather(view.precipitation.kind);
+                    precipitationEffect!.setWeather(view.precipitation);
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
                     if (nextWeather !== weatherSignature) {

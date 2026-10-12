@@ -3,10 +3,10 @@ import sharp from 'sharp';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { core, pausedCheckpoint } from './fjord-stability-scenario.mjs';
-import { openFjordMenu, closeFjordMenu, openFjordCampaign } from './fjord-header-controls.mjs';
+import { openFjordMenu, closeFjordMenu, openFjordCampaign, selectFjordPace } from './fjord-header-controls.mjs';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const output = process.env.QA_OUTPUT || 'docs/qa/seasonal-precipitation';
+const output = process.env.QA_OUTPUT || 'docs/qa/seasonal-precipitation/palette-timing';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ headless: true, channel: 'msedge' });
 const results = { browser: 'Edge Chromium, 1180×820 touch emulation', physicalIPad: false, checks: [], errors: [] };
@@ -86,7 +86,7 @@ try {
     await page.keyboard.down('ArrowLeft');
     await page.waitForTimeout(450);
     await page.keyboard.up('ArrowLeft');
-    assert.equal((await read())?.kind, 'snow', 'Winter projects snowfall even when economic weather is off');
+    assert.equal((await read())?.targetSnow, 1, 'Winter projects snowfall even when economic weather is off');
     assert.deepEqual(await exportCore(), state);
     await run();
     await page.waitForFunction(() => JSON.parse(document.querySelector('#fjord-canvas').dataset.precipitation).snow > 100);
@@ -149,43 +149,72 @@ try {
     results.checks.push({ check: 'Off, Normal, reduced motion and touch selection', passed: true });
 
     const seasonal = [];
-    for (const [tick, kind, label] of [[250, 'none', 'spring'], [500, 'none', 'summer'], [750, 'rain', 'autumn']]) {
+    const seasons = [
+        [312, 'spring', true, false], [450, 'dry-spring', false, false],
+        [625, 'summer', false, true], [875, 'autumn', true, true]
+    ];
+    for (const [tick, label, snowy, rainy] of seasons) {
         await importCore(core.applyCommand(state, { type: 'AdvanceTicks', ticks: tick }));
-        await waitFor('kind', kind);
+        await page.waitForTimeout(650);
         assert.equal((await read()).snow, 0, 'Import does not replay old weather particles');
         await run();
         await page.waitForTimeout(4500);
         await pause();
         const effect = await read();
-        assert.equal(effect.snow, 0);
-        if (kind === 'rain') assert.ok(effect.rain > 20 && effect.rain <= 250);
-        else assert.equal(effect.rain, 0);
+        assert.equal(effect.snow > 0, snowy, 'falling snow in ' + label);
+        assert.equal(effect.rain > 0, rainy, 'rain in ' + label);
+        assert.ok(effect.snow <= 300 && effect.rain <= 250);
+        const calendar = await canvas.evaluate(el => JSON.parse(el.dataset.calendar));
+        assert.equal(effect.targetSnow, calendar.winterWeight, 'snow follows the visible environment palette');
+        if (label === 'summer') assert.ok(effect.targetRain > .5 && effect.targetRain < .85);
+        if (label === 'autumn') {
+            assert.ok(effect.targetSnow > .5 && effect.targetSnow < .85);
+            assert.ok(Math.abs(effect.targetSnow + effect.targetRain - 1) < 1e-9);
+        }
         const exported = await exportCore();
         assert.deepEqual(exported, core.applyCommand(state, { type: 'AdvanceTicks', ticks: exported.time.tick }));
         await page.screenshot({ path: output + '/' + label + '.png' });
-        seasonal.push({ label, effect, resources: (await frameSample()).diagnostics, structureSnow: await canvas.evaluate(el => JSON.parse(el.dataset.structureSnow)) });
+        seasonal.push({ label, effect, calendar, resources: (await frameSample()).diagnostics });
     }
-    results.checks.push({ check: 'Spring/Summer dry, Autumn rain, import and Core equivalence', passed: true, seasonal });
+    results.checks.push({ check: 'Summer rain, Autumn snow and Spring thaw follow the palette; imports preserve Core',
+        passed: true, seasonal });
 
-    // Cross a real quarter boundary; imports above intentionally reset effect instances.
+    // Cross the real quarter boundaries while running, before the label reaches the next season.
     await importCore(core.applyCommand(state, { type: 'AdvanceTicks', ticks: 230 }));
+    // Scene work is excluded from the game clock; choose the public fast pace for this long transition.
+    await selectFjordPace(page, '1');
     await run();
     await page.waitForFunction(() => {
         const p = JSON.parse(document.querySelector('#fjord-canvas').dataset.precipitation);
-        return p.kind === 'none' && p.snowWeight > 0 && p.snowWeight < 1;
+        return p.targetSnow > 0 && p.targetSnow < 1;
     });
     results.springTransition = await read();
-    await waitFor('snowWeight', 0);
+    try {
+        await waitFor('snowWeight', 0);
+    } catch (error) {
+        console.error('Spring transition state', await read(),
+            await canvas.evaluate(el => JSON.parse(el.dataset.calendar)));
+        throw error;
+    }
     assert.equal((await read()).snow, 0);
     await pause();
-    await importCore(core.applyCommand(state, { type: 'AdvanceTicks', ticks: 977 }));
+    await importCore(core.applyCommand(state, { type: 'AdvanceTicks', ticks: 497 }));
     await run();
     await page.waitForFunction(() => {
-        const p = JSON.parse(document.querySelector('#fjord-canvas').dataset.precipitation);
-        return p.kind === 'snow' && p.rainWeight > 0 && p.snowWeight > 0;
+        const el = document.querySelector('#fjord-canvas');
+        const p = JSON.parse(el.dataset.precipitation);
+        return JSON.parse(el.dataset.calendar).season === 'Summer' && p.rain > 0;
     });
-    results.winterTransition = await read();
-    await waitFor('rainWeight', 0);
+    results.summerTransition = await read();
+    await pause();
+    await importCore(core.applyCommand(state, { type: 'AdvanceTicks', ticks: 747 }));
+    await run();
+    await page.waitForFunction(() => {
+        const el = document.querySelector('#fjord-canvas');
+        const p = JSON.parse(el.dataset.precipitation);
+        return JSON.parse(el.dataset.calendar).season === 'Autumn' && p.snow > 0 && p.rain > 0;
+    });
+    results.autumnTransition = await read();
     await page.evaluate(() => { window.qaHidden = true; document.dispatchEvent(new Event('visibilitychange')); });
     await page.waitForTimeout(700);
     const hidden = await read();

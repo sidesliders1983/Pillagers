@@ -21,9 +21,6 @@ test('canonical Fjord calendar starts in Winter and changes at exact quarter bou
         const before = core.serializeState(state);
         const view = projectFjordSettlement(state, world, layout);
         assert.equal(view.calendar?.season, season, 'season at elapsed tick ' + ticks);
-        assert.deepEqual(view.precipitation, {
-            kind: season === 'Winter' ? 'snow' : season === 'Autumn' ? 'rain' : 'none'
-        }, 'falling precipitation follows the calendar, not the lingering ground snow');
         assert.equal(view.calendar.year, year);
         assert.equal(view.calendar.progress, (ticks % 1000) / 1000);
         assert.equal(core.serializeState(state), before, 'calendar projection does not mutate Core');
@@ -74,7 +71,9 @@ test('all annual weather classes and weather-off retain seasons and do not rerol
             const before = owner.session.saveJSON();
             const view = owner.fjord.project();
             assert.equal(view.calendar.season, season);
-            assert.equal(view.precipitation.kind, ['snow', 'none', 'none', 'rain'][index]);
+            assert.deepEqual(view.precipitation, {
+                snow: [1, 1, 0, 0][index], rain: [0, 0, 0, 1][index]
+            });
             assert.equal(view.weatherVisual.class, kind);
             assert.equal(owner.session.saveJSON(), before, 'presentation cannot write Core');
             assert.deepEqual(owner.session.snapshot().weather, initial.weather, 'no weather reroll within a year');
@@ -127,5 +126,27 @@ test('Fjord keeps Winter snow until Spring and thaws during the first half of Sp
         if (weight === null) assert.ok(view.calendar.winterWeight > .5 && view.calendar.winterWeight < .51);
         else assert.equal(view.calendar.winterWeight, weight, 'snow weight at ' + tick);
         assert.equal(core.serializeState(state), before);
+    }
+});
+
+test('precipitation follows the environment palette: Summer rain, Autumn snow and Spring thaw', () => {
+    let state = core.createCampaign(17, undefined, undefined, { enabled: false });
+    const world = generateWorld({ seed: 17 });
+    const layout = createFjordLayout(world);
+    const cases = [
+        [0, 1, 0], [250, 1, 0], [312, .505999872, 0], [375, 0, 0],
+        [500, 0, 0], [501, 0, .000047872], [625, 0, .5], [750, 0, 1],
+        [751, .000047872, .999952128], [875, .5, .5], [1000, 1, 0]
+    ];
+    let elapsed = 0;
+    for (const [tick, snow, rain] of cases) {
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: tick - elapsed });
+        const saved = core.serializeState(state);
+        const view = projectFjordSettlement(state, world, layout);
+        assert.ok(Math.abs(view.precipitation.snow - snow) < 1e-9, 'snow intensity at tick ' + tick);
+        assert.ok(Math.abs(view.precipitation.rain - rain) < 1e-9, 'rain intensity at tick ' + tick);
+        assert.equal(view.precipitation.snow, view.calendar.winterWeight, 'snow matches the environment');
+        assert.equal(core.serializeState(state), saved, 'visual weights do not alter the campaign');
+        elapsed = tick;
     }
 });

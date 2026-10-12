@@ -110,6 +110,7 @@ The original seasons/HUD report remains a record of the earlier transition timin
 
 ## Falling precipitation
 
-The Fjord now adds calendar-driven snow in Winter and rain in Autumn through the shared
-Local effects setting. See [seasonal precipitation](FJORD-SEASONAL-PRECIPITATION.md) for
+The Fjord adds precipitation through the shared Local effects setting. Rain builds after
+Summer starts; snowfall builds after Autumn starts, using the same environment colour blend.
+Winter snowfall then fades with the northern Spring thaw. See [seasonal precipitation](FJORD-SEASONAL-PRECIPITATION.md) for
 quality limits, accessibility, transitions and the distinction from economic weather rules.
