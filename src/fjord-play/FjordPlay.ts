@@ -1,3 +1,4 @@
+import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
 import type { FjordCalendar } from './FjordCalendar';
@@ -11,7 +12,7 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
-import { Box3, Clock, PerspectiveCamera, Scene } from 'three';
+import { Vector3, Clock, PerspectiveCamera, Scene } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import { updateView } from '../gameplay-lab/updateView';
@@ -20,11 +21,10 @@ import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
 import { SeasonTint } from '../world/SeasonTint';
-import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { projectChronicle } from '../lore/Chronicle';
-import { inspectWeatherExposure } from '../simulation/SimulationCore';
+import { inspectCampfire, inspectWeatherExposure } from '../simulation/SimulationCore';
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
@@ -363,7 +363,13 @@ export class FjordPlay {
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
-        let campfireTint: StructureSeasonTint | undefined;
+        let campfireEffect: CampfireEffect | undefined;
+        const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+        const configureEffects = () => campfireEffect?.configure(
+            document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
+            reducedMotion.matches);
+        reducedMotion.addEventListener('change', configureEffects);
+        document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects);
         let weatherSignature = "";
         window.addEventListener('pagehide', () => {
             this.stopped = true;
@@ -375,10 +381,11 @@ export class FjordPlay {
             renderer.setAnimationLoop(null);
             observer?.disconnect();
             controller.dispose();
+            reducedMotion.removeEventListener('change', configureEffects);
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
-            campfireTint?.dispose();
+            campfireEffect?.dispose();
             world?.dispose();
             assets?.dispose();
             lighting?.dispose();
@@ -414,30 +421,27 @@ export class FjordPlay {
                 const anchor = next.attachments.find(item => item.key === 'boat')!;
                 this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
                 weatherTint?.dispose();
-                campfireTint?.dispose();
+                campfireEffect?.dispose();
                 world?.dispose();
                 world = next;
                 const fire = this.campaign.project().campfire;
-                const campfire = assets!.get('stoneCampfire');
-                campfire.name = fire.id;
-                campfire.scale.setScalar(fire.transform.scale);
-                campfire.position.set(fire.transform.x, fire.transform.y, fire.transform.z);
-                next.root.add(campfire);
+                const firePosition = new Vector3(fire.transform.x, fire.transform.y, fire.transform.z);
                 next.clearPlot({ ...fire.transform, halfWidth: fire.clearingRadius,
                     halfDepth: fire.clearingRadius, futureAsset: 'hut' });
-                const fireBounds = new Box3().setFromObject(campfire);
-                canvas.dataset.campfire = JSON.stringify({ ...fire,
-                    placeholder: Boolean(campfire.userData.placeholder),
-                    width: fireBounds.max.x - fireBounds.min.x, bounds: fireBounds });
+                const fireState = inspectCampfire(this.session.snapshot());
+                campfireEffect = new CampfireEffect(fire.id, firePosition.clone().add(new Vector3(0, .9, 0)),
+                    this.session.snapshot().seed, fireState.lit);
+                configureEffects();
+                scene.add(campfireEffect.root);
+                layer!.setCampfireHeat(campfireEffect.inspect().heat);
                 weatherTint = new SeasonTint(next.root, next.terrain);
-                campfireTint = new StructureSeasonTint(campfire);
                 weatherSignature = "";
                 scene.add(next.root);
                 cleared.clear();
                 motion = new LivingWorldController(this.campaign.blueprint);
                 groundSignature = "";
                 lighting?.dispose();
-                lighting = new WorldLighting(scene, renderer, assets!, campfire.position, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
+                lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
@@ -472,7 +476,6 @@ export class FjordPlay {
                     if (nextWeather !== weatherSignature) {
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
                         weatherTint!.update(view.calendar.visualProgress);
-                        campfireTint!.update(view.calendar.visualProgress);
                         layer!.setSeason(view.calendar.visualProgress);
                         weatherSignature = nextWeather;
                         canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
@@ -510,10 +513,14 @@ export class FjordPlay {
                         }
                     sceneEntities = view.entities;
                     await layer!.sync(view.entities);
-                    canvas.dataset.structureSnow = JSON.stringify([
-                        { key: 'settlement-campfire', ...campfireTint!.inspect() },
-                        ...layer!.inspectSeason()
-                    ]);
+                    campfireEffect!.setLit(inspectCampfire(this.session.snapshot()).lit);
+                    layer!.setCampfireHeat(campfireEffect!.inspect().heat);
+                    const fireBounds = layer!.bounds('campfire:settlement-campfire')!;
+                    canvas.dataset.campfire = JSON.stringify({ ...view.campfire,
+                        placeholder: layer!.describe().find(e => e.kind === 'campfire')!.placeholder,
+                        width: fireBounds.max.x - fireBounds.min.x, bounds: fireBounds });
+                    canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
+                    canvas.dataset.campfireEffect = JSON.stringify(campfireEffect!.inspect());
                     motion!.reconcile(view.entities, view.ground);
                     motion!.setStandingTrees(world!.standingTrees());
                     layer!.configureMotion(motion!);
@@ -592,6 +599,10 @@ export class FjordPlay {
             if (running) activeTime += motionDelta;
             motion!.advance(motionDelta, running, !document.hidden);
             layer!.advance(motion!, motionDelta, running);
+            campfireEffect!.update(delta, running && !document.hidden);
+            const fireVisual = campfireEffect!.inspect();
+            layer!.setCampfireHeat(fireVisual.heat);
+            lighting!.setCampfire(fireVisual.lit && fireVisual.quality !== 'off', fireVisual.time, fireVisual.reducedMotion);
             layer!.select(liveMarkers);
             selectionLabels.setAnchors(layer!.root.userData.markers ?? []);
             productionLabels.setAnchors(layer!.productionAnchors());
@@ -604,6 +615,8 @@ export class FjordPlay {
                     geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures
                 });
                 canvas.dataset.motion = JSON.stringify(motion!.inspect());
+                canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
+                canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                 canvas.dataset.motionTime = String(activeTime);
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
                 lastDiagnostics = performance.now();

@@ -3,6 +3,8 @@ import { seasonBlend } from '../config/timeVisualization';
 
 /** Instance-owned seasonal snow on static, authored structures; source assets stay untouched. */
 export class StructureSeasonTint {
+    private seasonalAmount = 0;
+    private snowMultiplier = 1;
     private amount = { value: 0 };
     private snowTone = new Color('#edf2f3');
     private materials = new Map<MeshStandardMaterial, MeshStandardMaterial>();
@@ -55,14 +57,19 @@ export class StructureSeasonTint {
         return material;
     }
 
+    setSnowMultiplier(value: number) {
+        this.snowMultiplier = Math.max(0, Math.min(1, value));
+        this.amount.value = this.seasonalAmount * this.snowMultiplier;
+    }
     update(progress: number | null) {
         if (progress === null) {
-            this.amount.value = 0;
+            this.seasonalAmount = this.amount.value = 0;
             return;
         }
         const { from, to, mix } = seasonBlend(progress);
         const winter = from.name === 'Winter' ? 1 - mix : to.name === 'Winter' ? mix : 0;
-        this.amount.value = winter * .65;
+        this.seasonalAmount = winter * .65;
+        this.amount.value = this.seasonalAmount * this.snowMultiplier;
     }
 
     inspect() {

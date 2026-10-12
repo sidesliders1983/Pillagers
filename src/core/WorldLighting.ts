@@ -161,12 +161,20 @@ export class WorldLighting {
             this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,weather.exposure,winter);
         }
     }
+    private fireOverride: { lit: boolean; time: number; reducedMotion: boolean } | null = null;
+    setCampfire(lit: boolean, time: number, reducedMotion = false) {
+        this.fireOverride = { lit, time, reducedMotion };
+    }
     update(time:number,progress?:number){
         if(this.visualization!=='off')this.cycle(progress??0);
         if(this.visualization==='day-night')this.placeWorldLight();
         const flicker=fireFlicker(time),night=this.nightWeight;
-        this.campfire.intensity=config.fire.intensity*flicker*night;
-        this.halo.material.uniforms.opacity.value=config.fire.haloOpacity*flicker*night;
+        const fire = this.fireOverride;
+        const fireWeight = fire ? (fire.lit ? 1 : 0) : night;
+        const fireFlickerValue = fire ? (fire.reducedMotion ? 1 : fireFlicker(fire.time)) : flicker;
+        if (fire) { this.campfire.visible = fire.lit; this.halo.visible = fire.lit; }
+        this.campfire.intensity=config.fire.intensity*fireFlickerValue*fireWeight;
+        this.halo.material.uniforms.opacity.value=config.fire.haloOpacity*fireFlickerValue*fireWeight;
         for(const material of this.assets.windowMaterials)material.emissiveIntensity=config.windows.emissiveIntensity*night;
         for(const material of this.assets.fireMaterials)material.emissiveIntensity=config.fire.emissiveIntensity*flicker*night;
     }

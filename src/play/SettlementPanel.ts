@@ -1,3 +1,4 @@
+import { inspectCampfire } from '../simulation/SimulationCore';
 import { housingName } from '../simulation/HousingNames';
 import { commandAvailability } from './SharedSettlement';
 import { canApplyCommand, personaAge, occupationAptitude, inspectWork, inspectBuilding, inspectCattle, landingSummary, occupationIds, caregiverEligible } from '../simulation/SimulationCore';
@@ -25,6 +26,16 @@ export class SettlementPanel {
             return '<h2>Settlement</h2><p>Select a home, resident or animal on the board.</p><p class="muted">Drag the board to pan. Scroll or use the controls to zoom. Select an entity below if sprites overlap.</p>';
         const { kind, id } = selection;
         const personLink = (id: string) => this.select('persona', id, state.personas[id]?.name ?? state.personaArchive?.[id]?.name ?? id);
+        if (kind === 'campfire') {
+            const fire = inspectCampfire(state);
+            const label = fire.lit ? 'Extinguish campfire' : fire.fuelTicks > 0
+                ? 'Relight campfire' : 'Light campfire (1 Material)';
+            return '<h2>Settlement campfire</h2><p>' + (fire.lit ? 'Burning' : 'Unlit') + '</p>' +
+                '<p>Fuel remaining: ' + Math.round(fire.fuelTicks / state.ticksPerWinter * 100) + '% of a year.</p>' +
+                this.button(state, { type: 'SetCampfire', lit: !fire.lit }, label) +
+                '<p class="muted">1 Material per burning year. Unused fuel is kept when extinguished. ' +
+                'The fire goes out when fuel and Materials run out.</p>';
+        }
         if (kind === 'longship') {
             const ship = state.landing?.longships[id];
             if (!ship)

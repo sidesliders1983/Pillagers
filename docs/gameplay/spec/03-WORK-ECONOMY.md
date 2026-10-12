@@ -49,3 +49,11 @@ Rules: fixed integer ticks/Winter; integer/fixed-point work progress; when requi
 [Food resilience v0.3 measurement (#77)](../../qa/food-resilience-v03/report.md) compares passive and prepared campaigns, annual Food spoilage of 5%, 10% and 15%, a protected reserve of two normal Winters, and separate regional farmer/fisher/hunter diminishing returns. All candidate storage and capacity rules are isolated QA experiments, not regular campaign options. No Storage building or starvation-death rule is introduced.
 
 The experiment retains the merged weather rules: Harsh stops Food and Materials production and increases resident/adult cattle consumption by 50%; Severe halves Food production and triples adult cattle consumption while retaining normal resident consumption and Materials output. Exact saved configurations, work-equivalent capacity losses, Food ledgers and replay coverage are recorded with the results.
+
+## ECON-004 — Campfire fuel (implemented #97 spike)
+
+One Material prepays one complete burning year (1,000 simulation ticks). The fire starts off.
+Extinguishing banks unused fuel. Refuelling occurs before the next unpaid burning tick,
+then work and annual maintenance follow. Empty stock extinguishes the fire instead of
+creating debt. There is no production or shelter bonus. Purchases are recorded in the
+Clan Book Materials ledger. See [the precise timing and save contract](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike).

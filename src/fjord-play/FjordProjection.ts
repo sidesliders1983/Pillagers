@@ -180,6 +180,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         entities.push({ kind, id, label, asset, transform: transform ? { ...transform } : null, status,
             selectionKey: kind + ':' + id, ...(plot ? { plot: { ...plot } } : {}) });
     };
+    add('campfire', campfire.id, 'Settlement campfire', 'stoneCampfire', campfire.transform, { living: false });
     // Cache positions by resident/animal and assignment. New arrivals never move survivors.
     const allocatePoint = (key: string, preferred: {
         x: number;

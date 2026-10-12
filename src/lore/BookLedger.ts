@@ -38,7 +38,7 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
                 else rows.food.complete = false;
                 break;
             case 'HouseBuilt': case 'BuildingUpgraded': add(e, 'materials', 'spending', 'cost'); break;
-            case 'BuildingMaintained': add(e, 'materials', 'spending', 'units'); break;
+            case 'CampfireFuelConsumed': case 'BuildingMaintained': add(e, 'materials', 'spending', 'units'); break;
             case 'BuildingSalvaged': case 'BuildingCollapsed': add(e, 'materials', 'otherReceipts', 'salvage'); break;
             case 'FoundingLongshipSalvaged': add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'CattleSlaughtered': add(e, 'food', 'otherReceipts', 'food'); break;

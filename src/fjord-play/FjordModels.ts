@@ -202,6 +202,11 @@ export class FjordModels {
             }
             return model;
         }
+        if (entity.kind === 'campfire') {
+            const model = this.assets.get('stoneCampfire');
+            model.scale.setScalar(entity.transform!.scale);
+            return model;
+        }
         if (entity.kind === 'household')
             return this.assets.get('tent');
         const cacheKey = entity.asset;

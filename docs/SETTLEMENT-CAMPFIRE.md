@@ -1,14 +1,19 @@
 # Settlement campfire
 
 The canonical `/fjord-play` settlement has one StoneCampFire from landing. Its stable location
-is the midpoint of the saved settlement bounds. It is a presentation landmark, not a Core
-building, inventory item or household. This slice adds no cost, production, ceremonies or
-settlement information panel.
+is the midpoint of the saved settlement bounds. Its location remains a presentation landmark,
+independent of Core buildings and households.
+The #97 spike adds a canonical burning state and fuel reserve, controlled by selecting the
+campfire in `/fjord-play`. Ceremonies, production bonuses and settlement information remain future work.
 
 The owner-supplied Meshy stone circle is displayed at **twice its source size**: approximately
 6.40 × 1.50 × 6.46 metres. All axes use the same scale. The source geometry and its four maps
-are retained. The supplied model has no flame animation; none is fabricated in this slice. Its upper stone
-and log surfaces receive the same seasonal snow and Spring thaw as homes and tents.
+are retained. The supplied model has no flame animation. The #97 spike layers flames,
+smoke and sparks
+from three.quarks onto the logs. Upper stone and log surfaces receive seasonal snow and
+Spring thaw; while burning, this local snow layer fades out over three active seconds.
+After extinguishing it returns over six active seconds, multiplied by the current season.
+Homes, tents and the surrounding terrain keep their seasonal treatment.
 A 7m-radius middle place excludes dwellings and clears nearby nature. A 4.4m obstacle radius,
 plus each actor's body clearance, keeps residents and cattle outside the stone ring.
 
@@ -52,3 +57,27 @@ Public projection and save/load regressions: `tests/fjord-bridge.test.mjs`.
 Browser rendering, source bounds, touch selection and movement:
 `scripts/qa/check-settlement-campfire.mjs`.
 Visual evidence: [review](qa/settlement-campfire/review.html).
+
+## Campfire fuel — #97 spike
+
+The settlement campfire starts unlit. Select it in `/fjord-play` and use **Light campfire**
+or **Extinguish campfire** in the contextual action panel. One Material purchases exactly
+1,000 burning simulation ticks (one full year/Winter), regardless of calendar season or
+chosen real-time year length. Lighting with prepaid ticks costs nothing. Extinguishing
+preserves the remaining ticks; there is no refund. At zero prepaid ticks the next attempted
+burning tick purchases one more Material, or extinguishes the fire if none is available.
+Finishing a purchased year does not charge the next one early.
+
+Fuel is paid before that tick's work output and before annual building upkeep. Materials
+produced later in the same tick do not revive an extinguished fire; the player can relight it.
+The normal clock, `+1 Year`, 2D/3D handoff and save/load all use this same canonical rule.
+Pausing, a hidden tab or being offline consumes no fuel. Fire-effects Off/Low/Normal and
+reduced-motion preferences are presentation settings and never change fuel consumption.
+
+The optional version-1 `campfire` save extension stores `lit` and integer `fuelTicks`.
+Absent state means off with no fuel; old saves acquire no invented costs. CPU settlements
+remain unlit unless explicitly commanded. `CampfireFuelConsumed` records each Material
+purchase; the Clan Book factual ledger includes these under Materials spending. This spike
+adds no warmth, shelter, productivity, health or ceremony bonuses.
+
+See [VFX implementation and evidence](CAMPFIRE-VFX-SPIKE.md).

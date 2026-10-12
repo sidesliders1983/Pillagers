@@ -1,7 +1,7 @@
 import { housingName } from '../simulation/HousingNames';
 import {personaAway,personaAge,inspectCattle,inspectWeather,inspectWeatherExposure,landingSummary} from '../simulation/SimulationCore';
 import type {SimulationState} from '../simulation/SimulationCore';
-export type EntityKind='persona'|'household'|'building'|'cattle'|'longship';
+export type EntityKind='campfire'|'persona'|'household'|'building'|'cattle'|'longship';
 export type BoardEntity={kind:EntityKind;id:string;label:string;sprite:string;x:number;y:number;depth:number;farmyard:boolean;};
 export function projectSettlement(state:SimulationState){
  const entities:BoardEntity[]=[],slots=new Map<string,{x:number;z:number}>();

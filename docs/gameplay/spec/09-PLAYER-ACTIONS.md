@@ -68,3 +68,11 @@ See [Cultural Life & Social Cohesion](10-CULTURAL-LIFE-COHESION.md) and CORE-004
 ## Implemented v0.4 slice
 
 [World Expeditions v0.4](../../WORLD-EXPEDITIONS-V04.md) records the implemented region graph, reusable groups, optional Surveillance, mission provisions/risk and one-category carrying capacity. Named residents and actual target assets move through Simulation Core commands; the player UI is /play and Gameplay Lab retains shared-save debugging.
+
+## PLAYER-009 — Settlement campfire (implemented #97 spike)
+
+Select the stone campfire in `/fjord-play` to light or extinguish it in the contextual panel.
+The panel shows whether it is burning, remaining prepaid fuel, and the cost to relight.
+Lighting without prepaid fuel requires one Material; an unavailable action explains why.
+[Fuel rules](../../SETTLEMENT-CAMPFIRE.md#campfire-fuel--97-spike) apply throughout the year.
+Ceremonies and the future settlement information panel remain outside this spike.
