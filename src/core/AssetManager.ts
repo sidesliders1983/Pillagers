@@ -7,7 +7,7 @@ import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
 import { worldConfig } from '../config/worldConfig';
 import { splitEmissiveSurfaces } from './EmissiveSurfaces';
 const registry = { spruce: 'spruce-tree', birch: 'birch-tree', boulder: 'boulder', cliff: 'fjord-cliff-rock', greatHall: 'great-hall', hut: 'turf-dwelling', storehouse: 'stabbur-storehouse', hearth: 'cooking-hearth', well: 'village-well', logs: 'log-pile', barrel: 'barrel', crate: 'storage-crate', boat: 'faering-rowboat', jetty: 'jetty-pier', heather: 'heather-shrub', grass: 'grass-tuft', fish: 'fish-drying-rack', rune: 'runestone' };
-export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey | 'tent';
+export type AssetKey = keyof typeof registry | keyof typeof generatedHouseFiles | NatureAssetKey | 'tent' | 'stoneCampfire';
 export class AssetManager {
     readonly windowMaterials:MeshStandardMaterial[]=[];
     readonly fireMaterials:MeshStandardMaterial[]=[];
@@ -43,7 +43,9 @@ export class AssetManager {
         const scenery=(Object.keys(registry) as (keyof typeof registry)[]).filter(key=>key!=='hut'&&key!=='greatHall').map(key=>({key:key as AssetKey,url:import.meta.env.BASE_URL+'assets/Terrain/'+registry[key]+'.glb',authored:false}));
         const tent = { key: 'tent' as const,
             url: import.meta.env.BASE_URL + 'scenery/meshy-tent-v1/tent.glb', authored: true };
-        await Promise.all([...scenery,...generated,tent].map(async ({key,url,authored}) => {
+        const campfire = { key: 'stoneCampfire' as const,
+            url: import.meta.env.BASE_URL + 'scenery/meshy-campfire-v1/campfire.glb', authored: true };
+        await Promise.all([...scenery,...generated,tent,campfire].map(async ({key,url,authored}) => {
             try {
                 const { scene } = await this.loader.loadAsync(url);
                 // Pack nodes have centered translations: normalize actual world bounds to a grounded pivot.
@@ -99,8 +101,8 @@ export class AssetManager {
                     }
                 });
                 root.updateMatrixWorld(true);
-                root.name=key;root.userData.authoredHousing=authored && key !== 'tent';
-                root.userData.authoredScenery=key === 'tent';
+                root.name=key;root.userData.authoredHousing=authored && key !== 'tent' && key !== 'stoneCampfire';
+                root.userData.authoredScenery=key === 'tent' || key === 'stoneCampfire';
                 this.models.set(key, root);
             } catch (error) {
                 if (!this.tolerant) throw error;

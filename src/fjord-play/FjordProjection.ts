@@ -1,3 +1,5 @@
+import { settlementCampfire } from './SettlementCampfire';
+export { settlementCampfire } from './SettlementCampfire';
 import { housingName } from '../simulation/HousingNames';
 import { projectFjordCalendar } from './FjordCalendar';
 import type { CharacterDNA } from '../characters/CharacterDNA';
@@ -22,7 +24,7 @@ export type FjordPlot = FjordTransform & {
     halfDepth: number;
 };
 export interface FjordLayout {
-    version: 'fjord-layout-v1';
+    version: 'fjord-layout-v2';
     seed: number;
     geographyId: string;
     plots: Record<string, FjordPlot>;
@@ -75,7 +77,7 @@ export function createFjordLayout(world: WorldBlueprint, mooring?: FjordTransfor
     if (!world.validation.accepted)
         throw new Error('Fjord geography must be validated.');
     const harbor = world.settlement.harbor!;
-    return { version: 'fjord-layout-v1', seed: world.config.seed, geographyId: geographyIdentity(world),
+    return { version: 'fjord-layout-v2', seed: world.config.seed, geographyId: geographyIdentity(world),
         plots: {}, points: {}, mooringResolved: Boolean(mooring), mooring: mooring ??
             { x: harbor.x, y: world.waterLevel + .15, z: harbor.z - 6, rotation: 0, scale: 1 } };
 }
@@ -94,14 +96,6 @@ function longshipBerth(anchor: FjordTransform): FjordTransform {
     };
 }
 
-/** Independent presentation hash: grid headings never consume the campaign RNG. */
-function dwellingRotation(seed: number, buildingId: string) {
-    let hash = 2166136261;
-    for (const char of seed + ':' + buildingId)
-        hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
-    return (hash >>> 0) % 4 * Math.PI / 2;
-}
-
 export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
     const surface = createBlueprintSurface(world);
     return fitsBuildingFoundation(surface, p) &&
@@ -110,7 +104,7 @@ export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
 /** Pure presentation: all gameplay facts come from canonical public inspection. */
 export function projectFjordSettlement(state: SimulationState, world: WorldBlueprint, previous: FjordLayout) {
     if (state.seed !== world.config.seed || previous.seed !== state.seed ||
-        previous.geographyId !== geographyIdentity(world) || previous.version !== 'fjord-layout-v1')
+        previous.geographyId !== geographyIdentity(world) || previous.version !== 'fjord-layout-v2')
         throw new Error('Campaign, geography and presentation identities do not match.');
     const layout = structuredClone(previous);
     // Historical identities remain in Core, but no longer reserve outdoor render space.
@@ -145,22 +139,32 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const surface = createBlueprintSurface(world);
     const entities: FjordEntity[] = [];
     const diagnostics: string[] = [];
-    const center = world.settlement.center;
+    const campfire = settlementCampfire(world);
+    const center = campfire.transform;
     let candidates = plotCandidates.get(world);
     if (!candidates) {
         candidates = [];
-        for (let z = world.terrain.bounds.minZ + 8; z <= world.terrain.bounds.maxZ - 8; z += 2)
-            for (let x = world.terrain.bounds.minX + 8; x <= world.terrain.bounds.maxX - 8; x += 2)
-                candidates.push({ x, z });
-        candidates.sort((a, b) => Math.hypot(a.x - center.x, a.z - center.z - 20) -
-            Math.hypot(b.x - center.x, b.z - center.z - 20) || a.z - b.z || a.x - b.x);
+        // Four columns and three rows around the middle place fit the validated
+        // clearing, including ten separate founding households and future upgrades.
+        for (let row = -10; row <= 10; row++)
+            for (let column = -10; column <= 10; column++) {
+                const x = center.x + 8.5 + column * 17, z = center.z + row * 17;
+                if (x >= world.terrain.bounds.minX + 8 && x <= world.terrain.bounds.maxX - 8 &&
+                    z >= world.terrain.bounds.minZ + 8 && z <= world.terrain.bounds.maxZ - 8)
+                    candidates.push({ x, z });
+            }
+        candidates.sort((a, b) => Math.hypot(a.x - center.x, a.z - center.z) -
+            Math.hypot(b.x - center.x, b.z - center.z) || a.z - b.z || a.x - b.x);
         plotCandidates.set(world, candidates);
     }
     const allocatePlot = (key: string): FjordPlot | undefined => {
         if (layout.plots[key])
             return layout.plots[key];
-        const halfWidth = 6.5, halfDepth = 6.5;
-        const found = candidates.find(p => Object.values(layout.plots).every(q => Math.abs(p.x - q.x) > halfWidth + q.halfWidth + 1 ||
+        const halfWidth = 7.5, halfDepth = 7.5;
+        const found = candidates.find(p => Math.hypot(
+            Math.max(0, Math.abs(p.x - center.x) - halfWidth),
+            Math.max(0, Math.abs(p.z - center.z) - halfDepth)) >= campfire.clearingRadius &&
+            Object.values(layout.plots).every(q => Math.abs(p.x - q.x) > halfWidth + q.halfWidth + 1 ||
             Math.abs(p.z - q.z) > halfDepth + q.halfDepth + 1) &&
             Object.values(layout.points).every(q => Math.abs(p.x - q.x) > halfWidth + .8 || Math.abs(p.z - q.z) > halfDepth + .8) &&
             fjordPlotFits(world, { ...p, y: surface.surfaceHeightAt(p.x, p.z),
@@ -183,7 +187,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     }, yard?: FjordPlot, obstacle = { halfWidth: 3.5, halfDepth: 4 },
         permitted: (p: { x: number; z: number }) => boolean = () => true) => {
         usedPoints.add(key);
-        if (layout.points[key] && permitted(layout.points[key]))
+        if (layout.points[key] && permitted(layout.points[key]) &&
+            Math.hypot(layout.points[key].x - center.x, layout.points[key].z - center.z) > campfire.obstacleRadius + 1)
             return layout.points[key];
         delete layout.points[key];
         const points = Object.values(layout.points);
@@ -197,7 +202,9 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                     x: preferred.x + Math.cos(angle * Math.PI / 4) * radius,
                     z: preferred.z + Math.sin(angle * Math.PI / 4) * radius
                 });
-        const point = options.find(p => permitted(p) && surface.surfaceHeightAt(p.x, p.z) > world.waterLevel + .25 &&
+        const point = options.find(p => permitted(p) &&
+            Math.hypot(p.x - center.x, p.z - center.z) > campfire.obstacleRadius + 1 &&
+            surface.surfaceHeightAt(p.x, p.z) > world.waterLevel + .25 &&
             surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
             points.every(q => Math.hypot(p.x - q.x, p.z - q.z) > 1.5) &&
             Object.values(layout.plots).every(q => q === yard ?
@@ -226,7 +233,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             asset = level === 0 ? 'farmHut' : 'farmHomestead';
         const orientedPlot = plot ? {
             ...plot,
-            rotation: yard ? Math.PI : dwellingRotation(state.seed, building.id)
+            rotation: yard ? Math.PI : Math.atan2(center.x - plot.x, center.z - plot.z)
         } : undefined;
         const entity: FjordEntity = { kind: 'building', id: building.id, label: housingName(state, 'building', building.id),
             selectionKey: key, asset, transform: orientedPlot ? { ...orientedPlot } : null,
@@ -267,7 +274,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                 state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
             const point = plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
-                z: plot.z + 8 + Math.floor(index / 5) * 1.8 }) : undefined;
+                z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
                 { living: true, sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
@@ -309,10 +316,10 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             add('longship', ship.id, 'Founding longship', 'longship', longshipBerth(layout.mooring), { living: true });
     for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
     const ground = projectFjordGround(world, entities);
-    if (ground.plots.length > 1 && ground.paths.length < ground.plots.length - 1)
+    if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
     return { calendar: projectFjordCalendar(state.time, state.ticksPerWinter),
-        entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
+        campfire, entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };
 }

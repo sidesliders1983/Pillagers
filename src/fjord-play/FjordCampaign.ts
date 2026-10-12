@@ -3,7 +3,7 @@ import { generateWorld } from '../world-generation/GenerateWorld';
 import { parseWorld } from '../world-generation/WorldSave';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
-import { createFjordLayout, fjordPlotFits, projectFjordSettlement } from './FjordProjection';
+import { createFjordLayout, fjordPlotFits, geographyIdentity, projectFjordSettlement, settlementCampfire } from './FjordProjection';
 import type { FjordLayout, FjordTransform } from './FjordProjection';
 export const sharedCampaignKey = 'pillagers.gameplay-lab.v1';
 export const fjordCampaignKey = 'pillagers.fjord-play.v1';
@@ -51,15 +51,25 @@ export class FjordCampaign {
             seed === this.blueprint.config.seed ? this.blueprint : generateWorld({ seed, conifers: 'ez-tree' });
         if (blueprint.config.seed !== seed)
             throw new Error('Campaign and geography seed identities do not match.');
-        const layout = extended ? saved.layout as FjordLayout :
+        let layout = extended ? saved.layout as FjordLayout :
             seed === this.layout.seed ? structuredClone(this.layout) : createFjordLayout(blueprint);
+        const legacyLayout = saved.layout?.version === 'fjord-layout-v1';
+        if (!layout || layout.seed !== seed || layout.geographyId !== geographyIdentity(blueprint))
+            throw new Error('Campaign and presentation identities do not match.');
+        const parcelHalfSize = legacyLayout ? 6.5 : 7.5;
         const finiteTransform = (p: FjordTransform) => p &&
             [p.x, p.y, p.z, p.rotation, p.scale].every(Number.isFinite) && p.scale === 1;
         if (!layout || !layout.plots || !layout.points || !finiteTransform(layout.mooring) ||
-            !Object.values(layout.plots).every(p => finiteTransform(p) && p.halfWidth === 6.5 && p.halfDepth === 6.5) ||
+            !Object.values(layout.plots).every(p => finiteTransform(p) &&
+                p.halfWidth === parcelHalfSize && p.halfDepth === parcelHalfSize) ||
             !Object.values(layout.points).every(finiteTransform))
             throw new Error('Invalid presentation layout.');
         const plots = Object.values(layout.plots);
+        const fire = settlementCampfire(blueprint);
+        if (!legacyLayout && plots.some(p => Math.hypot(
+            Math.max(0, Math.abs(p.x - fire.transform.x) - p.halfWidth),
+            Math.max(0, Math.abs(p.z - fire.transform.z) - p.halfDepth)) < fire.clearingRadius))
+            throw new Error('A presentation plot occupies the campfire clearing.');
         if (typeof layout.mooringResolved !== 'boolean' || plots.some(p => !fjordPlotFits(blueprint, p)))
             throw new Error('Invalid plot support in presentation layout.');
         for (let i = 0; i < plots.length; i++)
@@ -73,6 +83,13 @@ export class FjordCampaign {
         if (Object.values(layout.points).some(p => Math.abs(p.y - surface.surfaceHeightAt(p.x, p.z)) > 1e-6 ||
             p.y <= blueprint.waterLevel + .25))
             throw new Error('Invalid outdoor support in presentation layout.');
+        // Old parcels did not reserve a nucleus or the full sweep of upgraded homes.
+        // Rebuild presentation only; retain geography, mooring and every canonical fact.
+        if (legacyLayout) {
+            const resolved = layout.mooringResolved;
+            layout = createFjordLayout(blueprint, layout.mooring);
+            layout.mooringResolved = resolved;
+        }
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
         this.session.loadJSON(proposal.saveJSON());
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());

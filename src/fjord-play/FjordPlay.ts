@@ -11,7 +11,7 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
-import { Clock, PerspectiveCamera, Scene } from 'three';
+import { Box3, Clock, PerspectiveCamera, Scene } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import { updateView } from '../gameplay-lab/updateView';
@@ -20,6 +20,7 @@ import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
 import { SeasonTint } from '../world/SeasonTint';
+import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { projectChronicle } from '../lore/Chronicle';
@@ -362,6 +363,7 @@ export class FjordPlay {
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
+        let campfireTint: StructureSeasonTint | undefined;
         let weatherSignature = "";
         window.addEventListener('pagehide', () => {
             this.stopped = true;
@@ -376,6 +378,7 @@ export class FjordPlay {
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
+            campfireTint?.dispose();
             world?.dispose();
             assets?.dispose();
             lighting?.dispose();
@@ -411,16 +414,30 @@ export class FjordPlay {
                 const anchor = next.attachments.find(item => item.key === 'boat')!;
                 this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
                 weatherTint?.dispose();
+                campfireTint?.dispose();
                 world?.dispose();
                 world = next;
+                const fire = this.campaign.project().campfire;
+                const campfire = assets!.get('stoneCampfire');
+                campfire.name = fire.id;
+                campfire.scale.setScalar(fire.transform.scale);
+                campfire.position.set(fire.transform.x, fire.transform.y, fire.transform.z);
+                next.root.add(campfire);
+                next.clearPlot({ ...fire.transform, halfWidth: fire.clearingRadius,
+                    halfDepth: fire.clearingRadius, futureAsset: 'hut' });
+                const fireBounds = new Box3().setFromObject(campfire);
+                canvas.dataset.campfire = JSON.stringify({ ...fire,
+                    placeholder: Boolean(campfire.userData.placeholder),
+                    width: fireBounds.max.x - fireBounds.min.x, bounds: fireBounds });
                 weatherTint = new SeasonTint(next.root, next.terrain);
+                campfireTint = new StructureSeasonTint(campfire);
                 weatherSignature = "";
                 scene.add(next.root);
                 cleared.clear();
                 motion = new LivingWorldController(this.campaign.blueprint);
                 groundSignature = "";
                 lighting?.dispose();
-                lighting = new WorldLighting(scene, renderer, assets!, next.hearth, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
+                lighting = new WorldLighting(scene, renderer, assets!, campfire.position, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
@@ -455,6 +472,8 @@ export class FjordPlay {
                     if (nextWeather !== weatherSignature) {
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
                         weatherTint!.update(view.calendar.visualProgress);
+                        campfireTint!.update(view.calendar.visualProgress);
+                        layer!.setSeason(view.calendar.visualProgress);
                         weatherSignature = nextWeather;
                         canvas.dataset.seasonMaterials = JSON.stringify(weatherTint!.inspect());
                         canvas.dataset.weather = JSON.stringify({ ...view.weatherVisual, observed: {
@@ -491,6 +510,10 @@ export class FjordPlay {
                         }
                     sceneEntities = view.entities;
                     await layer!.sync(view.entities);
+                    canvas.dataset.structureSnow = JSON.stringify([
+                        { key: 'settlement-campfire', ...campfireTint!.inspect() },
+                        ...layer!.inspectSeason()
+                    ]);
                     motion!.reconcile(view.entities, view.ground);
                     motion!.setStandingTrees(world!.standingTrees());
                     layer!.configureMotion(motion!);

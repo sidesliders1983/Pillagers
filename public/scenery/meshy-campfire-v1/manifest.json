@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "file": "campfire.glb",
+  "provider": "Meshy",
+  "source": "StoneCampFire",
+  "provenance": [
+    {
+      "file": "Meshy_AI_Stone_Circle_Campfire_1012084554_texture.fbx",
+      "bytes": 9115260,
+      "sha256": "ba8a508f7465bf01c3fcb89d4b519c56fb9c06929846d7a416bb09f761967dee"
+    },
+    {
+      "file": "Meshy_AI_Stone_Circle_Campfire_1012084554_texture.png",
+      "bytes": 5869119,
+      "sha256": "9e6e2abb571dced4e18949eec3422359ada99f4489376b40e3cd70dd0b21e2ca"
+    },
+    {
+      "file": "Meshy_AI_Stone_Circle_Campfire_1012084554_texture_metallic.png",
+      "bytes": 18699,
+      "sha256": "3dfada8940c5c118367a9bcdbcac1103dcf77e41c50973e8321fc7a88c0dab22"
+    },
+    {
+      "file": "Meshy_AI_Stone_Circle_Campfire_1012084554_texture_normal.png",
+      "bytes": 4897047,
+      "sha256": "7835b483e4bbb60b5465d750dfbab4e6b7cf208e0107c545622d96ca8b902987"
+    },
+    {
+      "file": "Meshy_AI_Stone_Circle_Campfire_1012084554_texture_roughness.png",
+      "bytes": 1459893,
+      "sha256": "3a79f327a7bc44998cf5115fc416c0b6d4e8de9d5a6eef0b614a0ea2f6e1a7f0"
+    }
+  ],
+  "bytes": 1925060,
+  "sha256": "666150e21cc0faea05c26703e32b41b0cb3d3558e175ed7209a9ea2085a0bf36",
+  "bounds": {
+    "min": [
+      -1.6003028766245309,
+      -0.0000579137547566666,
+      -1.614493191242218
+    ],
+    "max": [
+      1.6003028766245309,
+      0.7500578839524343,
+      1.614493191242218
+    ]
+  },
+  "units": "metres",
+  "up": "+Y",
+  "textureLimit": 1024,
+  "geometry": "Source geometry and proportions preserved; centered and grounded.",
+  "triangles": 13517
+}

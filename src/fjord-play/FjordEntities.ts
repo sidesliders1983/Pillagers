@@ -1,3 +1,4 @@
+import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { createFjordYardSurface } from './FjordYardSurface';
 import type { LivingWorldController } from './LivingWorldController';
 import type { SelectionMarker } from '../play/SelectionPresentation';
@@ -10,16 +11,26 @@ export class FjordEntities {
     private entries = new Map<string, {
         signature: string;
         model: Object3D;
+        season?: StructureSeasonTint;
         localBounds?: Box3;
         boundsSignature?: string;
     }>();
     private disposed = false;
+    private seasonProgress: number | null = null;
     private yardSamplers = new Map<string, { signature: string; sample: (x: number, z: number, clearance: number) => number | null }>();
     private markers = new Map<string, {
         mesh: Mesh<RingGeometry, MeshBasicMaterial>;
         radius: number;
     }>();
     constructor(private models: FjordModels) {
+    }
+    setSeason(progress: number | null) {
+        this.seasonProgress = progress;
+        for (const entry of this.entries.values()) entry.season?.update(progress);
+    }
+    inspectSeason() {
+        return [...this.entries].flatMap(([key, entry]) =>
+            entry.season ? [{ key, ...entry.season.inspect() }] : []);
     }
     select(markers: readonly SelectionMarker[]) {
         const wanted = new Set(markers.filter(marker => this.entries.has(marker.selectionKey)).map(marker => marker.selectionKey));
@@ -71,6 +82,7 @@ export class FjordEntities {
         const wanted = new Set(visible.map(e => e.selectionKey));
         for (const [key, entry] of this.entries)
             if (!wanted.has(key)) {
+                entry.season?.dispose();
                 this.remove(entry.model);
                 this.entries.delete(key);
             }
@@ -86,9 +98,14 @@ export class FjordEntities {
                     this.remove(model);
                     return;
                 }
-                if (entry)
+                if (entry) {
+                    entry.season?.dispose();
                     this.remove(entry.model);
-                entry = { signature, model };
+                }
+                const season = entity.kind === 'building' || entity.kind === 'household'
+                    ? new StructureSeasonTint(model) : undefined;
+                season?.update(this.seasonProgress);
+                entry = { signature, model, season };
                 this.entries.set(entity.selectionKey, entry);
                 this.root.add(model);
             }
@@ -111,7 +128,7 @@ export class FjordEntities {
             }
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
-            const boundsSignature = JSON.stringify([entity.asset, entity.dna, entity.transform!.scale]);
+            const boundsSignature = JSON.stringify([entity.asset, entity.dna, entity.transform!.scale, entity.transform!.rotation]);
             if (entry.boundsSignature !== boundsSignature) {
                 entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
                 entry.boundsSignature = boundsSignature;
@@ -245,8 +262,10 @@ export class FjordEntities {
     }
     dispose() {
         this.disposed = true;
-        for (const entry of this.entries.values())
+        for (const entry of this.entries.values()) {
+            entry.season?.dispose();
             this.remove(entry.model);
+        }
         this.select([]);
         this.entries.clear();
         this.yardSamplers.clear();

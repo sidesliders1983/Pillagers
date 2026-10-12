@@ -49,6 +49,19 @@ second snow layer. Disabling annual weather still shows all seasons and winter s
 weather information panel continues to show factual annual modifiers, including during
 Spring/Summer; only presentation is seasonal. The same composed light reaches water.
 
+Canonical houses (including Farmyard terrain and props), tents and the settlement campfire
+also follow this snow amount. The existing native standard materials receive a world-up
+surface mask: roofs, tent slopes, ground and upper stone/log surfaces gather snow; vertical
+walls and downward faces retain their source texture colours. This is a colour overlay,
+not simulated snow depth, heat or flame animation. Residents, cattle and the longship are
+excluded. Ordinary seasonal lighting continues to reach every model.
+
+Each static instance owns its seasonal material copies while sharing the original textures
+and geometry. Building, upgrading, Farmyard conversion and returning to a tent apply the
+current season immediately, even while paused. Replacement/disposal restores the source
+bindings and releases the seasonal copies. The same northern Spring thaw, weather-off
+behaviour and canonical clock apply; Core state and saved assets are unchanged.
+
 No new assets, dependencies, shader system or shadow allocation is introduced. Tint materials
 and light sources are reused between ticks/quarters. Explicit scene/quality changes retain their
 existing resource ownership and disposal. Environment Lab and the prototype's manual

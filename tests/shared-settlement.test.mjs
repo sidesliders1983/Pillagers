@@ -40,7 +40,11 @@ test('shared commands use Core availability and update both projections without 
     const house = projected.entities.find(e => e.kind === 'building');
     for (const key of ['x', 'y', 'z', 'scale', 'halfWidth', 'halfDepth'])
         assert.equal(house.transform[key], plot[key], key + ' is retained');
-    assert.ok([0, Math.PI / 2, Math.PI, 3 * Math.PI / 2].includes(house.transform.rotation));
+    const toCampfireX = projected.campfire.transform.x - house.transform.x;
+    const toCampfireZ = projected.campfire.transform.z - house.transform.z;
+    const facingCampfire = (Math.sin(house.transform.rotation) * toCampfireX
+        + Math.cos(house.transform.rotation) * toCampfireZ) / Math.hypot(toCampfireX, toCampfireZ);
+    assert.ok(facingCampfire > 0.999999, 'the permanent home faces the settlement campfire');
     const unavailable = { type: 'AssignOccupation', personaId: 'missing', occupation: 'farmer' };
     assert.equal(shared.availability(unavailable).allowed, false);
     assert.ok(shared.availability(unavailable).reason.length);
