@@ -12,7 +12,7 @@ This is a generated party, not a fixed cast. Seed and saved state reproduce it e
 
 | Setting | Default |
 |---|---:|
-| Initial Food | 30 |
+| Initial Food (new player campaign) | 15 |
 | Initial Materials | 5 |
 | Founding longships | 1 |
 | Longship salvage Materials | 20 |
@@ -78,3 +78,13 @@ After generating ten adult individuals, an independent seeded stream shuffles ca
 Couples have reciprocal partnerId, one shared tent household and a family group; singles retain individual tents. FoundingPartnershipPresent records participants and household as relationships already present at arrival. It asserts no meeting/marriage date and does not emit PartnershipFormed. Existing saves receive missing config defaults without generating or changing their relationships.
 
 Current cattle defaults (2026-10-11): Young below 1 Winter, Young Adult from 1 to below 3, Adult from 3. Adult output/consumption and breeding eligibility begin at 3. Slaughter yields remain 5 / 10 / 15 Food by stage. Saved campaigns retain their configured thresholds.
+
+## Starting Food update (#127, 2026-10-12)
+
+The public Simulation Core campaign factory and all three player entry points (Gameplay Lab, 2D Settlement and Fjord) now default to 15 Food. The amount is stored before the founding event and the frozen Clan Book opening are created. Materials, founders, cattle and all production/consumption rules are unchanged.
+
+Explicit landing overrides remain authoritative, including zero. Loading/importing keeps saved configuration, current stocks and recorded history. A saved-rule restart keeps the player's saved starting Food; a genuinely new campaign uses 15 even after an old import. Restart also retains each existing CPU neighbour's saved landing rules. With a new world seed, newly encountered directions inherit the alphabetically first saved CPU configuration.
+
+The lower-level Landing factory retains its 30-Food default for CPU starts and historical QA fixtures. The public player factory injects 15 only for the player; explicit overrides still propagate to newly created CPU clans as before. Historical economy, aptitude and food-resilience harnesses explicitly pin their old 30-Food control. Their published reports are unchanged.
+
+The population-continuity study observes current mortality, weather and cattle lifecycle through annual Core decisions. Additional fertility, mortality or feeding variants are QA proposals only; they do not change production defaults or migrate campaigns.

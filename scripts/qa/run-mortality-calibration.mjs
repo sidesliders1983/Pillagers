@@ -11,7 +11,7 @@ const bands=[0,16,50,60,70,80,90];
 const ageBand=age=>[...bands].reverse().find(min=>min<=age);
 const quantile=(values,q)=>{if(!values.length)return null;const v=[...values].sort((a,b)=>a-b),p=(v.length-1)*q;return v[Math.floor(p)]+(v[Math.ceil(p)]-v[Math.floor(p)])*(p-Math.floor(p));};
 export function runScenario(seed,winters=50){
- let state=core.createCampaign(seed);
+ let state=core.createCampaign(seed, {initialFood:30});
  const founders=new Set(Object.keys(state.personas)),annual=[];
  const configuration={mechanics:structuredClone(state.mechanics.config),landing:structuredClone(state.landing.config)};
  const observe=()=>{

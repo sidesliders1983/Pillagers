@@ -45,8 +45,26 @@ export type SimulationState = {
     buildings: Record<string, {id: string; kind: 'house' | 'farmyard'; specialization: Occupation | null}>;
     stocks: {food: number; materials: number}; events: SimulationEvent[];
 };
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={},weatherOverrides:Partial<WeatherConfig>={},expeditionOverrides:Partial<ExpeditionConfig>={},socialOverrides:Partial<SocialConfig>={}):SimulationState {
-    const state=generateCampaign(seed,overrides,mechanicsOverrides);initializeWeather(state,weatherOverrides);initializeWorld(state,targetSeed=>{const target=generateCampaign(targetSeed,overrides,mechanicsOverrides);initializeWeather(target,weatherOverrides);return target;},expeditionOverrides);initializeSocial(state,socialOverrides);validateState(state);return state;
+export function createCampaign(
+    seed: number, overrides: Partial<LandingConfig> = {},
+    mechanicsOverrides: Partial<PrototypeConfig> = {}, weatherOverrides: Partial<WeatherConfig> = {},
+    expeditionOverrides: Partial<ExpeditionConfig> = {}, socialOverrides: Partial<SocialConfig> = {},
+    targetLandingConfigs: Record<string, LandingConfig> = {},
+): SimulationState {
+    // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
+    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides);
+    initializeWeather(state, weatherOverrides);
+    // A restarted world can contain new neighbours; inherit the first saved CPU rules for those.
+    const savedTargetDefault = Object.keys(targetLandingConfigs).sort().map(id => targetLandingConfigs[id])[0];
+    initializeWorld(state, (targetSeed, clanId) => {
+        const targetConfig = targetLandingConfigs[clanId] ?? savedTargetDefault ?? overrides;
+        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides);
+        initializeWeather(target, weatherOverrides);
+        return target;
+    }, expeditionOverrides);
+    initializeSocial(state, socialOverrides);
+    validateState(state);
+    return state;
 }
 export function createFixtureClan(seed: number): SimulationState {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be uint32');

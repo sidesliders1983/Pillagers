@@ -9,7 +9,7 @@ import {runScenario as economy,summarize} from './run-economy-calibration.mjs';
 const core=loadTypeScript(new URL('../../src/simulation/SimulationCore.ts',import.meta.url));
 const hash=v=>createHash('sha256').update(v).digest('hex');
 export function runWeather({seed,winters=25}){
- let state=core.createCampaign(seed);const policy=seed%2===0?'opening-farmyard':'passive-outside';
+ let state=core.createCampaign(seed, {initialFood:30});const policy=seed%2===0?'opening-farmyard':'passive-outside';
  if(policy==='opening-farmyard'){
   state=core.applyCommand(state,{type:'SalvageLongship',longshipId:'founding-longship'});
   state=core.applyCommand(state,{type:'AssignOccupation',personaId:'founder-1',occupation:'farmer'});

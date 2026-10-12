@@ -24,7 +24,7 @@ export type ExpeditionMission={id:string;groupId:string;groupName:string;regionI
 export type ExpeditionCommand={type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
 export type WorldState={version:1;config:ExpeditionConfig;groups:Record<string,ExpeditionGroup>;missions:Record<string,ExpeditionMission>;regions:Record<string,Region>;knowledge:Record<string,Knowledge>;targetClans:Record<string,SimulationState>};
 /** The graph is seeded independently: discovery never creates geography or changes the domestic RNG stream. */
-export function initializeWorld(state:SimulationState,createTarget:(seed:number)=>SimulationState,overrides:Partial<ExpeditionConfig>={}):void {
+export function initializeWorld(state:SimulationState,createTarget:(seed:number,clanId:string)=>SimulationState,overrides:Partial<ExpeditionConfig>={}):void {
  const random=seededRandom(state.seed,'world-expeditions-v1'),world:WorldState={version:1,config:structuredClone({...defaultExpeditionConfig,...overrides}),groups:{},missions:{},regions:{},knowledge:{},targetClans:{}};
  const settlementDirection=1+Math.floor(random()*3);
  directions.forEach((direction,i)=>{
@@ -32,7 +32,7 @@ export function initializeWorld(state:SimulationState,createTarget:(seed:number)
   const terrain=requiresShip?'Coast':['Forest','Grassland','Hills'][Math.floor(random()*3)];
   const targetClanId=i===settlementDirection||random()<.5?`cpu-${direction.toLowerCase()}`:null;
   world.regions[id]={id,direction,requiresShip,terrain,resources:terrain==='Coast'?['Fishing']:terrain==='Forest'?['Forestry','Hunting']:terrain==='Grassland'?['Farming','Grazing']:['Grazing','Hunting'],targetClanId};
-  if(targetClanId){const target=createTarget(Math.floor(random()*4294967296));const namespaced=namespaceTarget(target,targetClanId);namespaced.clan.name=`${direction} settlement`;world.targetClans[targetClanId]=namespaced;}
+  if(targetClanId){const target=createTarget(Math.floor(random()*4294967296),targetClanId);const namespaced=namespaceTarget(target,targetClanId);namespaced.clan.name=`${direction} settlement`;world.targetClans[targetClanId]=namespaced;}
  });
  state.world=world;
 }

@@ -38,7 +38,7 @@ export function studyInitial(seed, fixture = false, fullWorld = false) {
         enabled.stocks.materials = 100;
         enabled = core.reconstructState(JSON.stringify(enabled));
     } else {
-        enabled = core.createCampaign(seed, {}, {}, {}, {}, {enabled: true});
+        enabled = core.createCampaign(seed, {initialFood:30}, {}, {}, {}, {enabled: true});
         if (!fullWorld) delete enabled.world;
     }
     const disabled = structuredClone(enabled); delete disabled.social;

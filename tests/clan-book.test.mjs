@@ -12,7 +12,7 @@ test('a new campaign freezes its factual opening and saves the same book across 
     assert.equal(opening.index, 0);
     assert.equal(opening.facts.complete, true);
     assert.deepEqual(opening.facts.founders.map(p => p.name), Object.values(owner.session.snapshot().personas).map(p => p.name));
-    assert.equal(opening.facts.stocks.food, 30);
+    assert.equal(opening.facts.stocks.food, 15);
     assert.equal(opening.facts.stocks.materials, 5);
     assert.equal(owner.session.saveJSON(), original, 'Narrative identity does not consume Core RNG');
     const text = opening.text;

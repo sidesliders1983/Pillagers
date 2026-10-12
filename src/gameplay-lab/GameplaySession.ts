@@ -103,7 +103,10 @@ export class GameplaySession {
         let seed = sameFounders ? this.state.seed : drawSeed();
         if (!sameFounders && seed === this.state.seed)
             seed = (seed + 1) >>> 0;
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }));
+        const targetLandingConfigs = Object.fromEntries(Object.entries(this.state.world?.targetClans ?? {})
+            .filter(([, target]) => target.landing)
+            .map(([id, target]) => [id, target.landing!.config]));
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.familyIndex = new FamilyTreeIndex();

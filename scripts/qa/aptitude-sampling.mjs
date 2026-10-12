@@ -11,7 +11,7 @@ export function sampleAptitudes({ seedStart = 0, seedCount = 100, models = ['con
         !Object.hasOwn(modelDefinitions, model))) throw new Error('Unknown aptitude model');
     const rows = [];
     for (let seed = seedStart; seed < seedStart + seedCount; seed++) {
-        const state = core.createCampaign(seed);
+        const state = core.createCampaign(seed, {initialFood:30});
         for (const id of state.landing.founderIds) {
             const person = state.personas[id];
             for (const model of models) rows.push({

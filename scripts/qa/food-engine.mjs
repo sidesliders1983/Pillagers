@@ -124,7 +124,7 @@ export function foodEngine(scenario, scoring = null) {
     const engine = {
         core, recipe, identity,
         create(seed, fullWorld = false) {
-            const state = fullWorld ? core.createCampaign(seed) : landing.createCampaign(seed);
+            const state = fullWorld ? core.createCampaign(seed, { initialFood: 30 }) : landing.createCampaign(seed);
             if (!fullWorld) weather.initializeWeather(state);
             if (enabled) state.qaFood = emptyLedger();
             return state;

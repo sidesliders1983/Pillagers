@@ -17,7 +17,7 @@ test('a reusable named expedition group reserves its members, pays duration-rela
  const group=core.inspectWorld(state).groups[0];assert.equal(group.name,'First scouts');assert.deepEqual(group.members.map(p=>p.id),ids);
  assert.throws(()=>core.applyCommand(state,{type:'CreateExpeditionGroup',name:'Duplicate',memberIds:[ids[0]]}),/group/i);
  state=core.applyCommand(state,{type:'DispatchExpedition',groupId:group.id,regionId:'region-east',mission:'Recon'});
- assert.equal(state.stocks.food,26);assert.equal(core.inspectWork(state,ids[0]).reason,'expedition');
+ assert.equal(state.stocks.food,11);assert.equal(core.inspectWork(state,ids[0]).reason,'expedition');
  assert.throws(()=>core.applyCommand(state,{type:'AssignOccupation',personaId:ids[0],occupation:'woodworker'}),/expedition/i);
  assert.throws(()=>core.applyCommand(state,{type:'EditExpeditionGroup',groupId:group.id,name:'Changed',memberIds:[ids[0]]}),/mission/i);
  const resumed=core.reconstructState(core.serializeState(state));
