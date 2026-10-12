@@ -1,6 +1,6 @@
 # Local Lore benchmark v0.1 — issue #105
 
-This developer investigation builds on the reviewed controlled composer in PR #116. It does not enable a model in player routes, change default pop-ups, or replace published text. PR #115 is merged into its existing stack; #116 remains a separate dependency awaiting owner merge approval.
+This developer investigation builds on the reviewed controlled composer from PR #116. The owner has chosen to retain the model-free composer; see [the recorded decision](LOCAL-LORE-OWNER-DECISION.md). The experiment remains evidence and is not enabled in player routes. It changes neither default pop-ups nor published text.
 
 ## Settled experiment contract
 
