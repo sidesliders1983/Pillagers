@@ -1,0 +1,5249 @@
+{
+  "defaultCohort": {
+    "runs": 100,
+    "totals": {
+      "quarrelOpportunities": 505,
+      "mediationOpportunities": 30,
+      "reconciliationOpportunities": 221,
+      "quarrels": 90,
+      "mediationAttempts": 10,
+      "mediationSuccesses": 6,
+      "reconciliations": 42,
+      "independentReconciliations": 36,
+      "expired": 32,
+      "inactive": 2,
+      "unresolvedAtEnd": 14,
+      "repeatedPairs": 7,
+      "uneventful": 49
+    },
+    "allBaselineParity": true,
+    "verification": [
+      {
+        "seed": 0,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 7,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 32,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 99,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      }
+    ],
+    "perSeed": [
+      {
+        "seed": 0,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 1,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 2,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 3,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 4,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 5,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-2": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-2|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 6,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "founder-6": 1,
+          "founder-8": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-3|founder-6": 1,
+          "founder-8|founder-9": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 7,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 8,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-6": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-6|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 9,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 10,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 11,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 12,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 13,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 14,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 15,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-5": 1,
+          "founder-8": 1,
+          "founder-4": 1,
+          "founder-6": 1
+        },
+        "byPair": {
+          "founder-5|founder-8": 1,
+          "founder-4|founder-6": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 16,
+        "quarrelOpportunities": 2,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-6": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-6|founder-9": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 17,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 18,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 19,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 20,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 2,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-2": 1,
+          "founder-8": 1,
+          "founder-6": 1,
+          "persona-2": 1
+        },
+        "byPair": {
+          "founder-2|founder-8": 1,
+          "founder-6|persona-2": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 21,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-5": 1,
+          "founder-8": 1,
+          "founder-2": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-5|founder-8": 1,
+          "founder-2|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 22,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 23,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 24,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "founder-5": 1,
+          "founder-1": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-3|founder-5": 1,
+          "founder-1|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 25,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 26,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-10|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 27,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-4": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-4|founder-9": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 28,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-7": 1,
+          "founder-9": 1,
+          "founder-2": 1,
+          "founder-3": 1
+        },
+        "byPair": {
+          "founder-7|founder-9": 1,
+          "founder-2|founder-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 29,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 30,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 31,
+        "quarrelOpportunities": 2,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 32,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 6,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 2,
+          "founder-10": 1,
+          "founder-2": 1,
+          "founder-3": 1,
+          "persona-3": 1
+        },
+        "byPair": {
+          "founder-1|founder-10": 1,
+          "founder-2|founder-3": 1,
+          "founder-1|persona-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 33,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 34,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 35,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 36,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 11,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 3,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 2,
+          "founder-8": 2,
+          "founder-10": 1,
+          "founder-6": 1,
+          "founder-7": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-1|founder-8": 2,
+          "founder-10|founder-6": 1,
+          "founder-7|founder-9": 1
+        },
+        "helpers": {
+          "persona-2": 1
+        }
+      },
+      {
+        "seed": 37,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-9": 1,
+          "persona-1": 1
+        },
+        "byPair": {
+          "founder-9|persona-1": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 38,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-6": 1,
+          "founder-1": 1,
+          "founder-4": 1
+        },
+        "byPair": {
+          "founder-10|founder-6": 1,
+          "founder-1|founder-4": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 39,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 40,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 41,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 1,
+          "founder-10": 1
+        },
+        "byPair": {
+          "founder-1|founder-10": 1
+        },
+        "helpers": {
+          "persona-1": 2
+        }
+      },
+      {
+        "seed": 42,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-9": 1,
+          "founder-7": 1,
+          "founder-8": 1
+        },
+        "byPair": {
+          "founder-10|founder-9": 1,
+          "founder-7|founder-8": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 43,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 44,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "founder-5": 1
+        },
+        "byPair": {
+          "founder-3|founder-5": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 45,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 46,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-5": 1,
+          "founder-8": 1,
+          "persona-2": 1
+        },
+        "byPair": {
+          "founder-10|founder-5": 1,
+          "founder-8|persona-2": 1
+        },
+        "helpers": {
+          "persona-3": 1
+        }
+      },
+      {
+        "seed": 47,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 1,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-8": 1,
+          "founder-9": 1,
+          "founder-5": 1,
+          "founder-6": 1
+        },
+        "byPair": {
+          "founder-8|founder-9": 1,
+          "founder-5|founder-6": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 48,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 49,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-7": 1,
+          "founder-8": 1
+        },
+        "byPair": {
+          "founder-7|founder-8": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 50,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "founder-4": 1
+        },
+        "byPair": {
+          "founder-3|founder-4": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 51,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-5": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-5|founder-9": 1
+        },
+        "helpers": {
+          "persona-2": 1
+        }
+      },
+      {
+        "seed": 52,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 53,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-9": 1,
+          "founder-1": 1,
+          "founder-5": 1
+        },
+        "byPair": {
+          "founder-10|founder-9": 1,
+          "founder-1|founder-5": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 54,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-2": 1,
+          "founder-3": 1
+        },
+        "byPair": {
+          "founder-2|founder-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 55,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 56,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 57,
+        "quarrelOpportunities": 11,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 12,
+        "quarrels": 4,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 3,
+        "independentReconciliations": 3,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 1,
+          "founder-7": 1,
+          "founder-2": 2,
+          "founder-6": 2,
+          "founder-5": 1,
+          "founder-8": 1
+        },
+        "byPair": {
+          "founder-1|founder-7": 1,
+          "founder-2|founder-6": 2,
+          "founder-5|founder-8": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 58,
+        "quarrelOpportunities": 13,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-8": 1,
+          "founder-9": 1,
+          "founder-10": 1,
+          "founder-5": 1
+        },
+        "byPair": {
+          "founder-8|founder-9": 1,
+          "founder-10|founder-5": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 59,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 60,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "persona-3": 1
+        },
+        "byPair": {
+          "founder-3|persona-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 61,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-8": 1
+        },
+        "byPair": {
+          "founder-10|founder-8": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 62,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 63,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 8,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 1,
+          "founder-6": 1,
+          "founder-10": 1,
+          "founder-3": 1,
+          "founder-5": 1,
+          "persona-1": 1
+        },
+        "byPair": {
+          "founder-1|founder-6": 1,
+          "founder-10|founder-3": 1,
+          "founder-5|persona-1": 1
+        },
+        "helpers": {
+          "founder-1": 1
+        }
+      },
+      {
+        "seed": 64,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 2,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 2,
+          "founder-4": 2
+        },
+        "byPair": {
+          "founder-1|founder-4": 2
+        },
+        "helpers": {
+          "persona-1": 1
+        }
+      },
+      {
+        "seed": 65,
+        "quarrelOpportunities": 5,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 66,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 67,
+        "quarrelOpportunities": 2,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "persona-1": 1
+        },
+        "byPair": {
+          "founder-3|persona-1": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 68,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-7": 1,
+          "persona-3": 1
+        },
+        "byPair": {
+          "founder-7|persona-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 69,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 70,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "founder-6": 1
+        },
+        "byPair": {
+          "founder-3|founder-6": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 71,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 1,
+          "founder-5": 1,
+          "persona-1": 1,
+          "persona-3": 1
+        },
+        "byPair": {
+          "founder-1|founder-5": 1,
+          "persona-1|persona-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 72,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-3": 1
+        },
+        "byPair": {
+          "founder-10|founder-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 73,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-4": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-4|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 74,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 12,
+        "quarrels": 5,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-9": 1,
+          "founder-2": 1,
+          "founder-3": 2,
+          "founder-1": 2,
+          "founder-4": 2,
+          "founder-5": 1
+        },
+        "byPair": {
+          "founder-10|founder-9": 1,
+          "founder-2|founder-3": 1,
+          "founder-1|founder-4": 2,
+          "founder-3|founder-5": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 75,
+        "quarrelOpportunities": 13,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-10": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-10|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 76,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 3,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-4": 1,
+          "founder-8": 1,
+          "founder-3": 1,
+          "founder-5": 1
+        },
+        "byPair": {
+          "founder-4|founder-8": 1,
+          "founder-3|founder-5": 1
+        },
+        "helpers": {
+          "persona-2": 1
+        }
+      },
+      {
+        "seed": 77,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 3,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-5": 2,
+          "founder-7": 2
+        },
+        "byPair": {
+          "founder-5|founder-7": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 78,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-3": 1,
+          "founder-6": 1
+        },
+        "byPair": {
+          "founder-3|founder-6": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 79,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 80,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-6": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-6|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 81,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-4": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-4|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 82,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-2": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-2|founder-9": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 83,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 84,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 85,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 86,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-5": 1,
+          "founder-7": 1,
+          "founder-10": 2,
+          "founder-9": 2
+        },
+        "byPair": {
+          "founder-5|founder-7": 1,
+          "founder-10|founder-9": 2
+        },
+        "helpers": {
+          "persona-1": 1
+        }
+      },
+      {
+        "seed": 87,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 8,
+        "quarrels": 5,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "founder-4": 1,
+          "founder-9": 1,
+          "founder-1": 2,
+          "founder-7": 2,
+          "founder-10": 1,
+          "founder-6": 1,
+          "founder-3": 1,
+          "founder-5": 1
+        },
+        "byPair": {
+          "founder-4|founder-9": 1,
+          "founder-1|founder-7": 2,
+          "founder-10|founder-6": 1,
+          "founder-3|founder-5": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 88,
+        "quarrelOpportunities": 10,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 1,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 1,
+          "founder-4": 1,
+          "founder-7": 1,
+          "founder-8": 1
+        },
+        "byPair": {
+          "founder-1|founder-4": 1,
+          "founder-7|founder-8": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 89,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 90,
+        "quarrelOpportunities": 0,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 91,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 92,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 93,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 94,
+        "quarrelOpportunities": 4,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 95,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 4,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 1,
+          "founder-10": 1
+        },
+        "byPair": {
+          "founder-1|founder-10": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 96,
+        "quarrelOpportunities": 3,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-4": 1,
+          "founder-7": 1
+        },
+        "byPair": {
+          "founder-4|founder-7": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 97,
+        "quarrelOpportunities": 11,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-2": 1,
+          "founder-4": 1,
+          "founder-7": 1,
+          "founder-8": 1,
+          "founder-6": 1,
+          "founder-9": 1
+        },
+        "byPair": {
+          "founder-2|founder-4": 1,
+          "founder-7|founder-8": 1,
+          "founder-6|founder-9": 1
+        },
+        "helpers": {
+          "persona-3": 1
+        }
+      },
+      {
+        "seed": 98,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 99,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      }
+    ],
+    "annualTimingMs": {
+      "enabledMean": 38.21465903999993,
+      "disabledMean": 37.166699680000086
+    }
+  },
+  "controlledCohort": {
+    "runs": 100,
+    "totals": {
+      "quarrelOpportunities": 1721,
+      "mediationOpportunities": 728,
+      "reconciliationOpportunities": 651,
+      "quarrels": 275,
+      "mediationAttempts": 128,
+      "mediationSuccesses": 70,
+      "reconciliations": 155,
+      "independentReconciliations": 85,
+      "expired": 92,
+      "inactive": 0,
+      "unresolvedAtEnd": 28,
+      "repeatedPairs": 67,
+      "uneventful": 1
+    },
+    "allBaselineParity": true,
+    "verification": [
+      {
+        "seed": 0,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 7,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 32,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 99,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      }
+    ],
+    "perSeed": [
+      {
+        "seed": 0,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 8,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 2,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 1,
+        "quarrelOpportunities": 24,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 0,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 2,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 2,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 13,
+        "reconciliationOpportunities": 12,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 3,
+          "liv": 4,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 3,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 3,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 9,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 3,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 4,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 4,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 5,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 6,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 1,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 7,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 13,
+        "reconciliationOpportunities": 12,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 2,
+          "liv": 3
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 2,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 8,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 9,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 3,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 1,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "liv": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 10,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 3,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 11,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 2,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 12,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 9,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 3,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 2,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 13,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 11,
+        "reconciliationOpportunities": 11,
+        "quarrels": 4,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 3,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 4,
+          "einar": 3,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 3,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 2
+        }
+      },
+      {
+        "seed": 14,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 5,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 1,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "liv": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 15,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 3
+        },
+        "byPair": {
+          "astrid|einar": 3
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 16,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 11,
+        "reconciliationOpportunities": 9,
+        "quarrels": 5,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 4,
+        "independentReconciliations": 2,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "liv": 3,
+          "einar": 4
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "astrid|einar": 2,
+          "einar|liv": 2
+        },
+        "helpers": {
+          "liv": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 17,
+        "quarrelOpportunities": 24,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 0,
+        "quarrels": 1,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 18,
+        "quarrelOpportunities": 21,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "einar|liv": 1
+        },
+        "helpers": {
+          "astrid": 2
+        }
+      },
+      {
+        "seed": 19,
+        "quarrelOpportunities": 21,
+        "mediationOpportunities": 4,
+        "reconciliationOpportunities": 1,
+        "quarrels": 3,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 3,
+        "reconciliations": 3,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 3,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 2
+        }
+      },
+      {
+        "seed": 20,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 21,
+        "quarrelOpportunities": 9,
+        "mediationOpportunities": 16,
+        "reconciliationOpportunities": 15,
+        "quarrels": 5,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "liv": 5,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|liv": 3,
+          "einar|liv": 2
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 22,
+        "quarrelOpportunities": 23,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 23,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 24,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 10,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 3,
+        "independentReconciliations": 3,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 3,
+          "astrid": 3
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 2,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 25,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 26,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 2,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 27,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 8,
+        "quarrels": 3,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 3,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 3
+        }
+      },
+      {
+        "seed": 28,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 4,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 1,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 29,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "einar": 2,
+          "liv": 1
+        }
+      },
+      {
+        "seed": 30,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 4,
+        "reconciliationOpportunities": 2,
+        "quarrels": 3,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 2,
+        "reconciliations": 3,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 3,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "einar|liv": 2
+        },
+        "helpers": {
+          "astrid": 3
+        }
+      },
+      {
+        "seed": 31,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 7,
+        "quarrels": 4,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 2,
+        "reconciliations": 3,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 4,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "einar|liv": 2
+        },
+        "helpers": {
+          "liv": 2,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 32,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "einar|liv": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 33,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 12,
+        "reconciliationOpportunities": 11,
+        "quarrels": 5,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 4,
+        "independentReconciliations": 3,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 5,
+          "liv": 2,
+          "einar": 3
+        },
+        "byPair": {
+          "astrid|liv": 2,
+          "astrid|einar": 3
+        },
+        "helpers": {
+          "einar": 2
+        }
+      },
+      {
+        "seed": 34,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 5,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 35,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 2,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 36,
+        "quarrelOpportunities": 24,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|einar": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 37,
+        "quarrelOpportunities": 24,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 0,
+        "quarrels": 1,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 38,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 4,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 3,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 39,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 2,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 40,
+        "quarrelOpportunities": 23,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 41,
+        "quarrelOpportunities": 21,
+        "mediationOpportunities": 4,
+        "reconciliationOpportunities": 2,
+        "quarrels": 2,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "einar|liv": 2
+        },
+        "helpers": {
+          "astrid": 2
+        }
+      },
+      {
+        "seed": 42,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 43,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 9,
+        "quarrels": 4,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 4,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 2,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 44,
+        "quarrelOpportunities": 11,
+        "mediationOpportunities": 14,
+        "reconciliationOpportunities": 12,
+        "quarrels": 5,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 3,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 4,
+          "einar": 3,
+          "liv": 3
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "einar|liv": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "liv": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 45,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "einar": 3
+        }
+      },
+      {
+        "seed": 46,
+        "quarrelOpportunities": 22,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 3,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 47,
+        "quarrelOpportunities": 23,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 48,
+        "quarrelOpportunities": 23,
+        "mediationOpportunities": 1,
+        "reconciliationOpportunities": 1,
+        "quarrels": 1,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 49,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 4,
+        "quarrels": 2,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|einar": 2
+        },
+        "helpers": {
+          "liv": 2
+        }
+      },
+      {
+        "seed": 50,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|liv": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 51,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 6,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 3,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 2,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 2
+        }
+      },
+      {
+        "seed": 52,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 1,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 53,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 5,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "liv": 3
+        },
+        "byPair": {
+          "astrid|liv": 3
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 54,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 12,
+        "reconciliationOpportunities": 12,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "liv": 3,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|liv": 2,
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 55,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 3,
+        "quarrels": 4,
+        "mediationAttempts": 4,
+        "mediationSuccesses": 4,
+        "reconciliations": 4,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 4,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 3,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "liv": 3,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 56,
+        "quarrelOpportunities": 13,
+        "mediationOpportunities": 11,
+        "reconciliationOpportunities": 10,
+        "quarrels": 5,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 4,
+        "independentReconciliations": 3,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 4,
+          "liv": 3,
+          "astrid": 3
+        },
+        "byPair": {
+          "einar|liv": 2,
+          "astrid|einar": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 57,
+        "quarrelOpportunities": 11,
+        "mediationOpportunities": 12,
+        "reconciliationOpportunities": 12,
+        "quarrels": 5,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 3,
+        "independentReconciliations": 3,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "liv": 5,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|liv": 3,
+          "einar|liv": 2
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 58,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "einar|liv": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 59,
+        "quarrelOpportunities": 21,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 2,
+        "quarrels": 2,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "liv": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 60,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 11,
+        "reconciliationOpportunities": 9,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 3,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 2,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 2
+        }
+      },
+      {
+        "seed": 61,
+        "quarrelOpportunities": 16,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 9,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 1,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 62,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 11,
+        "reconciliationOpportunities": 10,
+        "quarrels": 5,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 1,
+        "reconciliations": 3,
+        "independentReconciliations": 2,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 5,
+          "einar": 1,
+          "liv": 4
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 4
+        },
+        "helpers": {
+          "liv": 1,
+          "einar": 2
+        }
+      },
+      {
+        "seed": 63,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 3,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 64,
+        "quarrelOpportunities": 16,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 9,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 65,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 8,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 3,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 66,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|einar": 2
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 67,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 8,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 68,
+        "quarrelOpportunities": 13,
+        "mediationOpportunities": 12,
+        "reconciliationOpportunities": 12,
+        "quarrels": 4,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 4,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 3,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 69,
+        "quarrelOpportunities": 22,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 2,
+        "quarrels": 1,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 70,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 10,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 3,
+          "liv": 1,
+          "astrid": 2
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 71,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 2,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 72,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 4,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 0,
+        "reconciliations": 3,
+        "independentReconciliations": 3,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 4,
+          "liv": 3,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 3,
+          "astrid|einar": 1
+        },
+        "helpers": {
+          "einar": 2
+        }
+      },
+      {
+        "seed": 73,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 1,
+          "liv": 2,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 74,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 3,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "einar|liv": 2
+        },
+        "helpers": {
+          "einar": 1,
+          "astrid": 2
+        }
+      },
+      {
+        "seed": 75,
+        "quarrelOpportunities": 13,
+        "mediationOpportunities": 11,
+        "reconciliationOpportunities": 11,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 3,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 76,
+        "quarrelOpportunities": 14,
+        "mediationOpportunities": 10,
+        "reconciliationOpportunities": 10,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 4,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 77,
+        "quarrelOpportunities": 16,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 9,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 3,
+          "liv": 2,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 2,
+          "astrid|einar": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 78,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|einar": 2
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 79,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 13,
+        "reconciliationOpportunities": 12,
+        "quarrels": 5,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 3,
+          "liv": 3,
+          "astrid": 4
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 2,
+          "astrid|liv": 2
+        },
+        "helpers": {
+          "liv": 1
+        }
+      },
+      {
+        "seed": 80,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 4,
+        "reconciliationOpportunities": 3,
+        "quarrels": 2,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 2,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 81,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 82,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 3,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 83,
+        "quarrelOpportunities": 23,
+        "mediationOpportunities": 2,
+        "reconciliationOpportunities": 2,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "einar": 2,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 84,
+        "quarrelOpportunities": 16,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 2,
+        "reconciliations": 2,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "liv": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 85,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 6,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2
+        },
+        "byPair": {
+          "astrid|einar": 2
+        },
+        "helpers": {
+          "liv": 2
+        }
+      },
+      {
+        "seed": 86,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 3,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 2,
+          "einar|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 87,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 4,
+        "reconciliationOpportunities": 3,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 3,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 2,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "einar|liv": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 1,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 88,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "liv": 1,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 89,
+        "quarrelOpportunities": 19,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 4,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 3,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "liv": 1,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 90,
+        "quarrelOpportunities": 25,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 91,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 9,
+        "reconciliationOpportunities": 7,
+        "quarrels": 4,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "einar": 3,
+          "liv": 2
+        },
+        "byPair": {
+          "astrid|einar": 2,
+          "astrid|liv": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "liv": 2,
+          "astrid": 1
+        }
+      },
+      {
+        "seed": 92,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 4,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 93,
+        "quarrelOpportunities": 17,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 8,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 1,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 2,
+          "einar": 1,
+          "liv": 1
+        },
+        "byPair": {
+          "astrid|einar": 1,
+          "astrid|liv": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 94,
+        "quarrelOpportunities": 16,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 7,
+        "quarrels": 3,
+        "mediationAttempts": 2,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 3,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 2,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 2
+        }
+      },
+      {
+        "seed": 95,
+        "quarrelOpportunities": 12,
+        "mediationOpportunities": 13,
+        "reconciliationOpportunities": 12,
+        "quarrels": 4,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 2,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 3,
+          "liv": 4,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 3,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 96,
+        "quarrelOpportunities": 8,
+        "mediationOpportunities": 16,
+        "reconciliationOpportunities": 14,
+        "quarrels": 5,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 2,
+        "reconciliations": 3,
+        "independentReconciliations": 1,
+        "expired": 2,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 2,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 5,
+          "liv": 2,
+          "einar": 3
+        },
+        "byPair": {
+          "astrid|liv": 2,
+          "astrid|einar": 3
+        },
+        "helpers": {
+          "liv": 2,
+          "einar": 1
+        }
+      },
+      {
+        "seed": 97,
+        "quarrelOpportunities": 18,
+        "mediationOpportunities": 7,
+        "reconciliationOpportunities": 6,
+        "quarrels": 2,
+        "mediationAttempts": 1,
+        "mediationSuccesses": 1,
+        "reconciliations": 1,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "astrid": 1,
+          "liv": 2,
+          "einar": 1
+        },
+        "byPair": {
+          "astrid|liv": 1,
+          "einar|liv": 1
+        },
+        "helpers": {
+          "einar": 1
+        }
+      },
+      {
+        "seed": 98,
+        "quarrelOpportunities": 20,
+        "mediationOpportunities": 5,
+        "reconciliationOpportunities": 5,
+        "quarrels": 2,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 2,
+          "liv": 1,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 1,
+          "astrid|einar": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 99,
+        "quarrelOpportunities": 15,
+        "mediationOpportunities": 8,
+        "reconciliationOpportunities": 7,
+        "quarrels": 4,
+        "mediationAttempts": 3,
+        "mediationSuccesses": 1,
+        "reconciliations": 3,
+        "independentReconciliations": 2,
+        "expired": 1,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 1,
+        "uneventful": false,
+        "byPerson": {
+          "einar": 3,
+          "liv": 4,
+          "astrid": 1
+        },
+        "byPair": {
+          "einar|liv": 3,
+          "astrid|liv": 1
+        },
+        "helpers": {
+          "astrid": 2,
+          "einar": 1
+        }
+      }
+    ],
+    "annualTimingMs": {
+      "enabledMean": 3.968540200000064,
+      "disabledMean": 3.528149040000286
+    }
+  },
+  "fullWorld": {
+    "runs": 4,
+    "totals": {
+      "quarrelOpportunities": 20,
+      "mediationOpportunities": 3,
+      "reconciliationOpportunities": 6,
+      "quarrels": 3,
+      "mediationAttempts": 0,
+      "mediationSuccesses": 0,
+      "reconciliations": 2,
+      "independentReconciliations": 2,
+      "expired": 0,
+      "inactive": 0,
+      "unresolvedAtEnd": 1,
+      "repeatedPairs": 0,
+      "uneventful": 3
+    },
+    "allBaselineParity": true,
+    "verification": [
+      {
+        "seed": 0,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 7,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 32,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      },
+      {
+        "seed": 99,
+        "batched": true,
+        "repeat": true,
+        "saveLoad": true
+      }
+    ],
+    "perSeed": [
+      {
+        "seed": 0,
+        "quarrelOpportunities": 1,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 7,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      },
+      {
+        "seed": 32,
+        "quarrelOpportunities": 7,
+        "mediationOpportunities": 3,
+        "reconciliationOpportunities": 6,
+        "quarrels": 3,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 2,
+        "independentReconciliations": 2,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 1,
+        "repeatedPairs": 0,
+        "uneventful": false,
+        "byPerson": {
+          "founder-1": 2,
+          "founder-10": 1,
+          "founder-2": 1,
+          "founder-3": 1,
+          "persona-3": 1
+        },
+        "byPair": {
+          "founder-1|founder-10": 1,
+          "founder-2|founder-3": 1,
+          "founder-1|persona-3": 1
+        },
+        "helpers": {}
+      },
+      {
+        "seed": 99,
+        "quarrelOpportunities": 6,
+        "mediationOpportunities": 0,
+        "reconciliationOpportunities": 0,
+        "quarrels": 0,
+        "mediationAttempts": 0,
+        "mediationSuccesses": 0,
+        "reconciliations": 0,
+        "independentReconciliations": 0,
+        "expired": 0,
+        "inactive": 0,
+        "unresolvedAtEnd": 0,
+        "repeatedPairs": 0,
+        "uneventful": true,
+        "byPerson": {},
+        "byPair": {},
+        "helpers": {}
+      }
+    ],
+    "annualTimingMs": {
+      "enabledMean": 272.14911099999995,
+      "disabledMean": 270.27290199999885
+    }
+  }
+}

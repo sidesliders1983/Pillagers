@@ -1,3 +1,6 @@
+import {initializeSocial, validateSocial} from './PersonalityLifeEvents';
+import type {SocialState, SocialConfig} from './PersonalityLifeEvents';
+export {defaultSocialConfig, socialProbabilities} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
 import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway} from './WorldExpeditions';
 import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
@@ -31,7 +34,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
-    entityPrefix?:string;personaArchive?:Record<string,Persona>;world?:WorldState; weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
+    social?: SocialState; entityPrefix?:string;personaArchive?:Record<string,Persona>;world?:WorldState; weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
     families: Record<string, {id: string; memberIds: string[]}>;
     households: Record<string, {id: string; memberIds: string[]; residenceId: string | null}>;
@@ -39,8 +42,8 @@ export type SimulationState = {
     buildings: Record<string, {id: string; kind: 'house' | 'farmyard'; specialization: Occupation | null}>;
     stocks: {food: number; materials: number}; events: SimulationEvent[];
 };
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={},weatherOverrides:Partial<WeatherConfig>={},expeditionOverrides:Partial<ExpeditionConfig>={}):SimulationState {
-    const state=generateCampaign(seed,overrides,mechanicsOverrides);initializeWeather(state,weatherOverrides);initializeWorld(state,targetSeed=>{const target=generateCampaign(targetSeed,overrides,mechanicsOverrides);initializeWeather(target,weatherOverrides);return target;},expeditionOverrides);validateState(state);return state;
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={},weatherOverrides:Partial<WeatherConfig>={},expeditionOverrides:Partial<ExpeditionConfig>={},socialOverrides:Partial<SocialConfig>={}):SimulationState {
+    const state=generateCampaign(seed,overrides,mechanicsOverrides);initializeWeather(state,weatherOverrides);initializeWorld(state,targetSeed=>{const target=generateCampaign(targetSeed,overrides,mechanicsOverrides);initializeWeather(target,weatherOverrides);return target;},expeditionOverrides);initializeSocial(state,socialOverrides);validateState(state);return state;
 }
 export function createFixtureClan(seed: number): SimulationState {
     if (!Number.isInteger(seed) || seed < 0 || seed > 0xffffffff) throw new Error('Seed must be uint32');
@@ -59,14 +62,14 @@ export function createFixtureClan(seed: number): SimulationState {
         buildings: {house: {id: 'house', kind: 'house', specialization: null}},
         stocks: {food: 20, materials: 10}, events: [{id: 'event-1', time: {winter: 800, tick: 0}, type: 'ClanInitialized'}]};
 }
-export function createSettlement(seed:number, overrides:Partial<PrototypeConfig> = {}):SimulationState {
+export function createSettlement(seed:number, overrides:Partial<PrototypeConfig> = {}, socialOverrides:Partial<SocialConfig> = {}):SimulationState {
     const state=createFixtureClan(seed); state.personas.einar.dna.sex='male';state.personas.liv.dna.sex='female';state.personas.astrid.dna.sex='female';
     state.mechanics=initializeMechanics(state,overrides);
     for(const child of Object.values(state.personas))for(const parentId of child.parentIds){
         const parent=state.personas[parentId],info=state.mechanics.people[parentId];
         if(parent.dna.sex==='female'&&(info.lastBirthWinter===null||child.birthWinter>info.lastBirthWinter)){info.lastBirthWinter=child.birthWinter;info.childcareUntilWinter=child.birthWinter+state.mechanics.config.childcareWinters;}
     }
-    validateState(state); return state;
+    initializeSocial(state,socialOverrides);validateState(state); return state;
 }
 export type SimulationCommand = ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
@@ -191,6 +194,7 @@ function validateState(state: SimulationState): void {
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
     for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');}
+    validateSocial(state);
     validateMechanics(state);
     validateLanding(state);validateWeather(state);validateWorld(state,validateState);
 }

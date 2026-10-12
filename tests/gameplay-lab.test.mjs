@@ -24,7 +24,7 @@ test('Lab commands use core state, expose stock changes and save/load resumes pa
   assert.throws(()=>lab.loadJSON('{invalid'));assert.deepEqual(lab.snapshot(),expected);
   assert.throws(()=>lab.loadJSON(core.serializeState(core.createFixtureClan(1))));
   const detached=lab.snapshot();detached.stocks.food=999;assert.deepEqual(lab.snapshot(),expected);
-  lab.newCampaign(99);assert.deepEqual(lab.snapshot(),core.createCampaign(99));assert.equal(lab.running,false);
+  lab.newCampaign(99);assert.deepEqual(lab.snapshot(),core.createCampaign(99,{},{},{},{},{enabled:true}));assert.equal(lab.running,false);
 });
 test('public work inspection matches canonical productivity and care blocking without changing state',()=>{
   const state=core.createSettlement(27,{fertilityChanceBps:0,partnershipChanceBps:0,careerReviewWinters:0});
@@ -48,7 +48,7 @@ test('restart resets the campaign with the same founders or a fresh seed, includ
   lab.restartCampaign(true,()=>{throw new Error('Same founders must not draw randomness');});
   assert.deepEqual(lab.snapshot(),initial);assert.equal(lab.running,false);assert.deepEqual(lab.trend,{food:0,materials:0});
   lab.restartCampaign(false,()=>99);
-  assert.deepEqual(lab.snapshot(),core.createCampaign(99));assert.notDeepEqual(lab.snapshot().personas,initial.personas);
+  assert.deepEqual(lab.snapshot(),core.createCampaign(99,{},{},{},{},{enabled:true}));assert.notDeepEqual(lab.snapshot().personas,initial.personas);
   lab.restartCampaign(false,()=>99);
   assert.notEqual(lab.snapshot().seed,99);assert.deepEqual(lab.snapshot().time,{winter:800,tick:0});
 });

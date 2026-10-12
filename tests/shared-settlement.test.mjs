@@ -77,7 +77,7 @@ test('paired 2D/Fjord ownership transfers retain deterministic replay through Wi
     const { SharedSettlement } = load('../src/play/SharedSettlement.ts');
     const core = load('../src/simulation/SimulationCore.ts');
     let owner = new SharedSettlement(32);
-    let reference = core.createCampaign(32);
+    let reference = core.createCampaign(32, {}, {}, {}, {}, {enabled: true});
     for (const [view, ticks] of [['board', 350], ['fjord', 650], ['board', 1500], ['fjord', 2500]]) {
         owner = SharedSettlement.restore(owner.handoff(view), view);
         owner.command({ type: 'AdvanceTicks', ticks });

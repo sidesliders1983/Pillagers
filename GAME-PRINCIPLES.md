@@ -78,7 +78,7 @@ Detailed northstar and future acceptance principles: [Cultural Life & Social Coh
 
 ## GP-006 — Personality is expressed through contextual life events
 
-**Status: Approved gameplay northstar, 2026-10-12. A small opt-in experiment is planned; no live rules, numerical balance or default activation is enabled by this document.**
+**Status: Approved gameplay northstar, 2026-10-12. The bounded social behavior is implemented; owner rollout decision 2026-10-12 enables it for newly created player campaigns. Existing saves retain their rules; the approved prototype coefficients are unchanged.**
 
 > Traits shape tendencies. Circumstances create opportunities. Relationships and earlier experiences influence the response. Simulation Core resolves what actually happens; the saga tells that history.
 
@@ -103,7 +103,7 @@ The existing 60-second year and pause/Continue summary are prototype settings, n
 
 GP-005 records an approved future direction only. It does not activate cultural events, social-cohesion modifiers, settlement-defence mechanics or new weather rules, and it does not block the current Fjord/lifecycle/movement slices.
 
-GP-006 is a future gameplay direction with a bounded opt-in pilot. It does not activate new social rules in existing campaigns or expand the current Lore, family-tree or animation tasks.
+GP-006 remains a broader gameplay direction; the bounded quarrel/mediation/reconciliation pilot now defaults on for new player campaigns. It does not activate new social rules in existing campaigns or expand the current Lore, family-tree or animation tasks.
 
 ## Ideas awaiting a separate decision
 

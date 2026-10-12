@@ -30,6 +30,31 @@ const occupationLabels:Record<string,string>={farmer:'farmer',herder:'herder',fi
 type Template=(e:SimulationEvent,d:Facts)=>string|null;
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    ResidentQuarrelled: (event, details) => {
+        const participants = ids(details, 'participants');
+        return participants?.length === 2 && str(details, 'incidentId') ?
+            person(event, participants[0]) + ' and ' + person(event, participants[1]) + ' quarrelled.' : null;
+    },
+    MediationAttempted: (event, details) => {
+        const participants = ids(details, 'participants');
+        if (participants?.length !== 3 || typeof details.success !== 'boolean' || details.mediatorId !== participants[2]) return null;
+        return person(event, participants[2]) + ' attempted to mediate the quarrel between ' +
+            person(event, participants[0]) + ' and ' + person(event, participants[1]) +
+            (details.success ? '; the mediation succeeded.' : '; the quarrel remained unresolved.');
+    },
+    ResidentsReconciled: (event, details) => {
+        const participants = ids(details, 'participants');
+        return participants?.length === 2 && str(details, 'openingEventId') ?
+            person(event, participants[0]) + ' and ' + person(event, participants[1]) +
+            (details.method === 'mediated' ? ' reconciled through mediation.' : ' reconciled without mediation.') : null;
+    },
+    SocialIncidentEnded: (event, details) => {
+        const participants = ids(details, 'participants');
+        if (participants?.length !== 2) return null;
+        const pair = person(event, participants[0]) + ' and ' + person(event, participants[1]);
+        return details.reason === 'expired-unresolved' ? 'The quarrel between ' + pair + ' expired unresolved.' :
+            details.reason === 'inactive' ? 'The quarrel between ' + pair + ' became inactive after death or departure.' : null;
+    },
     PersonaDied:(e,d)=>{const name=person(e,e.personaId);return name?name+' died'+(str(d,'cause')?' ('+d.cause+')':'')+'.':null;},
     CattleBorn:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' was born.':null,
     CattleDied:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' died.':null,

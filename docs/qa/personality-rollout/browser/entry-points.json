@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "view": "play",
+      "passed": true,
+      "checks": [
+        "real initial player factory",
+        "CPU neighbours disabled",
+        "legacy import stays off",
+        "real new-campaign button uses default-on"
+      ]
+    },
+    {
+      "view": "fjord-play",
+      "passed": true,
+      "checks": [
+        "real initial player factory",
+        "CPU neighbours disabled",
+        "legacy import stays off",
+        "real new-campaign button uses default-on"
+      ]
+    }
+  ],
+  "errors": []
+}

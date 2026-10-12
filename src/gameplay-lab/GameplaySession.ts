@@ -9,8 +9,8 @@ export class GameplaySession {
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32, narrativeSeed?: number) {
-        this.state = createCampaign(seed);
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled});
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     snapshot(): SimulationState {
@@ -69,14 +69,14 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true): void {
-        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }));
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true): void {
+        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }));
     }
-    restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false): void {
+    restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false, socialEnabled = this.state.social?.config.enabled ?? false): void {
         let seed = sameFounders ? this.state.seed : drawSeed();
         if (!sameFounders && seed === this.state.seed)
             seed = (seed + 1) >>> 0;
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config));
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.state = state;

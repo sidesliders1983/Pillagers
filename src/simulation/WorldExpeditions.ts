@@ -1,3 +1,4 @@
+import {pruneSocialIncidents} from './PersonalityLifeEvents';
 import {resolveMortality} from './Mortality';
 import {farmyards,reconcileFarmyards} from './Farmyards';
 import {personaAge} from './PersonaAge';
@@ -163,6 +164,7 @@ function transferPersona(source:SimulationState,destination:SimulationState,id:s
  reconcileFarmyards(source,previousFarmyards);
  record(source,'PersonaTransferredOut',{missionId,personaId:id,name:p.name,formerPartnerId,destinationClanId:destination.clan.id});
  record(destination,'PersonaTransferredIn',{missionId,personaId:id,name:p.name,formerPartnerId,originClanId:p.originClanId},id);
+ pruneSocialIncidents(source);
 }
 function transferCattle(source:SimulationState,destination:SimulationState,id:string):void {
  const from=source.landing!,to=destination.landing!,c=from.cattle[id];

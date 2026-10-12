@@ -1,0 +1,17 @@
+{
+  "build": "PASS",
+  "testCount": 630,
+  "passed": 629,
+  "failed": 0,
+  "skipped": 1,
+  "skip": "Inherited conditional GLB portability test; existing asset checks are unchanged.",
+  "assetValidation": "PASS: --lab-previews; 20 assets / 36 GLBs, 12 Golden Characters, 19 modules",
+  "browser": "PASS: 1440/390 lab, 1024 existing reader with touch emulation",
+  "formatting": "No formatter configured; manual inspection and git diff --check.",
+  "finalTargetedTests": {
+    "tests": 18,
+    "passed": 18,
+    "failed": 0,
+    "additionalToFullSuite": 3
+  }
+}

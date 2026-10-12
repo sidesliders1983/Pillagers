@@ -195,7 +195,7 @@ export class ClanBook {
         const events = state.events.slice(cursor.eventEnd);
         const ledger = bookLedger(events, cursor.stocks, state.stocks);
         this.data.chapters.push({
-            plan: planNarrative(state.events, cursor.eventEnd),
+            plan: planNarrative(state.events, cursor.eventEnd, state.social ? 3 : 2),
             index: this.data.chapters.length,
             milestoneIndex: (state.time.winter - this.data.originWinter) / 5,
             title: 'Records ending Winter ' + state.time.winter,
@@ -288,7 +288,7 @@ export class ClanBook {
                     !paragraph.factRefs.every(reference => validReference(reference, i)) ||
                     !Array.isArray(paragraph.sourceEventIds) || paragraph.sourceEventIds.some(id =>
                         (eventPositions.get(id) ?? Infinity) >= c.checkpoint.eventEnd))) ||
-                c.plan !== undefined && (![1, 2].includes(c.plan.version) || JSON.stringify(c.plan) !== JSON.stringify(planNarrative(
+                c.plan !== undefined && (![1, 2, 3].includes(c.plan.version) || JSON.stringify(c.plan) !== JSON.stringify(planNarrative(
                     state.events.slice(0, c.checkpoint.eventEnd),
                     i > 0 ? saved.chapters[i - 1].checkpoint.eventEnd : 0, c.plan.version
                 )))))

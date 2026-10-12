@@ -93,7 +93,7 @@ test('quarter projections and save/load leave mortality, cattle, production and 
     }
     assert.equal(owner.fjord.project().calendar.year, 806);
     assert.equal(owner.fjord.project().calendar.season, 'Winter');
-    const single = core.applyCommand(core.createCampaign(32), { type: 'AdvanceTicks', ticks: 6000 });
+    const single = core.applyCommand(core.createCampaign(32, {}, {}, {}, {}, {enabled: true}), { type: 'AdvanceTicks', ticks: 6000 });
     assert.equal(owner.session.saveJSON(), core.serializeState(single));
 });
 

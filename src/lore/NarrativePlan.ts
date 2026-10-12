@@ -3,7 +3,7 @@ import { projectChronicle } from './Chronicle';
 import type { ChronicleEntry } from './Chronicle';
 import type { SimulationEvent } from '../simulation/SimulationCore';
 
-export type NarrativeTheme = 'family' | 'homes' | 'work' | 'herd' | 'expeditions';
+export type NarrativeTheme = 'family' | 'homes' | 'work' | 'herd' | 'expeditions' | 'social';
 export type NarrativeThread = {
     theme: NarrativeTheme;
     subjectIds: string[];
@@ -11,7 +11,7 @@ export type NarrativeThread = {
     callbackEventIds: string[];
 };
 export type NarrativePlan = {
-    version: 1 | 2;
+    version: 1 | 2 | 3;
     focus: NarrativeTheme[];
     threads: NarrativeThread[];
     sourceEventIds: string[];
@@ -44,11 +44,12 @@ function subjects(event: SimulationEvent): string[] {
 }
 
 /** Rebuilt from the complete supported event history, never from previously written prose. */
-function historyIndex(events: readonly SimulationEvent[]): IndexedFact[] {
+function historyIndex(events: readonly SimulationEvent[], version: number): IndexedFact[] {
     const byId = new Map(events.map(event => [event.id, event]));
     return projectChronicle(events).reverse().flatMap(group => group.entries).flatMap(entry => {
         const event = byId.get(entry.sourceEventIds[0]);
-        const theme = event && themes[event.type];
+        const social = event && ['ResidentQuarrelled', 'MediationAttempted', 'ResidentsReconciled', 'SocialIncidentEnded'].includes(event.type);
+        const theme: NarrativeTheme | undefined = event && (version >= 3 && social ? 'social' : themes[event.type]);
         return event && theme ? [{ entry, event, theme }] : [];
     });
 }
@@ -82,21 +83,26 @@ function relevantOlder(current: SimulationEvent, earlier: readonly IndexedFact[]
             fact.event.details?.householdId === details.householdId);
     return undefined;
 }
-export function planNarrative(events: readonly SimulationEvent[], intervalStart: number, version: 1 | 2 = 2): NarrativePlan {
+export function planNarrative(events: readonly SimulationEvent[], intervalStart: number, version: 1 | 2 | 3 = 2): NarrativePlan {
     const currentIds = new Set(events.slice(intervalStart).map(event => event.id));
-    const index = historyIndex(events);
+    const index = historyIndex(events, version);
     const older = index.filter(fact => !currentIds.has(fact.event.id));
     const current = index.filter(fact => currentIds.has(fact.event.id));
-    const priority: NarrativeTheme[] = ['family', 'homes', 'work', 'expeditions', 'herd'];
+    const priority: NarrativeTheme[] = [...(version >= 3 ? ['social' as const] : []), 'family', 'homes', 'work', 'expeditions', 'herd'];
     const focus = priority.filter(theme => current.some(fact => fact.theme === theme)).slice(0, 3);
     const threads = focus.flatMap(theme => {
         const selected = current.filter(fact => fact.theme === theme);
-        const groups = theme === 'herd' && version === 2 ?
+        const groups = theme === 'social' ? [...new Set(selected.map(fact => fact.event.details?.incidentId))].map(id =>
+            selected.filter(fact => fact.event.details?.incidentId === id)) :
+            theme === 'herd' && version >= 2 ?
             livestockGroups(selected.map(fact => fact.event)).map(group =>
                 group.map(event => selected.find(fact => fact.event.id === event.id)!)) :
             selected.map(fact => [fact]);
         return groups.slice(0, 4).map(group => {
-            const callbacks = group.flatMap(fact => relevantOlder(fact.event, older)?.entry.sourceEventIds ?? []);
+            const callbacks = theme === 'social' ? group.flatMap(fact =>
+                older.filter(previous => previous.event.details?.incidentId === fact.event.details?.incidentId)
+                    .flatMap(previous => previous.entry.sourceEventIds)) :
+                group.flatMap(fact => relevantOlder(fact.event, older)?.entry.sourceEventIds ?? []);
             return {
                 theme,
                 subjectIds: [...new Set(group.flatMap(fact => subjects(fact.event)))],
