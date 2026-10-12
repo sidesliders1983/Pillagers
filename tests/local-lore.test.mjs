@@ -49,7 +49,8 @@ test('the optional local writer can arrange only approved, sourced paragraphs fr
         const adapter = new LocalLoreAdapter({ endpoint, model: 'fixture-model', identity: 'fixture-revision' });
         const result = await adapter.generate(request);
         assert.equal(result.status, 'accepted');
-        assert.match(result.text, /Winter 800/);
+        assert.match(result.text, /arrived/);
+        assert.doesNotMatch(result.text, /Winter 800/);
         assert.match(result.text, /already partners/);
         assert.match(result.text, /tents/);
         assert.doesNotMatch(result.text, /cattle-\d|founding-longship|\d+ (?:Food|Materials)/);

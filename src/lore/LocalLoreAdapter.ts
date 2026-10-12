@@ -58,11 +58,11 @@ export async function freezeLoreRequest(
     const validator = new ClanBook(state, false, saved.narrativeSeed);
     validator.restore(saved, state);
     const chapter = saved.chapters[chapterIndex];
-    if (!chapter?.paragraphs || ![2, 3].includes(chapter.templateVersion))
-        throw new Error('Local Lore requires a controlled version-2 or version-3 chapter.');
+    if (!chapter?.paragraphs || ![2, 3, 4].includes(chapter.templateVersion))
+        throw new Error('Local Lore requires a controlled version-2, version-3 or version-4 chapter.');
     const events = state.events.slice(0, chapter.checkpoint.eventEnd);
     const previous = saved.chapters.slice(0, chapterIndex);
-    const chapterVersion = chapter.templateVersion as 2 | 3;
+    const chapterVersion = chapter.templateVersion as 2 | 3 | 4;
     const variants = Array.from({ length: chapterIndex === 0 ? 18 : 4 }, (_, seed) =>
         chapterIndex === 0 ?
             composeOpening(chapter.facts, chapter.checkpoint.time.winter, seed,

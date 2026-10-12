@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lore · ordinal time review</title>
+<style>
+* { box-sizing: border-box; } body { background: #162923; color: #eee6d2; margin: 0; padding: 24px; font: 17px/1.6 Georgia, serif; }
+main { max-width: 1300px; margin: auto; } h1 { font-size: 28px; } a { color: #e0c988; }
+select { max-width: 100%; padding: 12px; color: inherit; background: #263a30; font: inherit; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+article, details { background: #21352c; padding: 20px; border: 1px solid #7a795b; border-radius: 8px; }
+p { white-space: pre-wrap; overflow-wrap: anywhere; } pre { overflow-wrap: anywhere; white-space: pre-wrap; font: 14px/1.5 monospace; }
+@media(max-width: 700px) { body { padding: 12px; } .grid { grid-template-columns: 1fr; } }
+</style>
+<main>
+<h1>Calendar in the interface · ordinal time in the story</h1>
+<p>Separate model-free style-4 preview from the same frozen facts. Published chapters and the historical Qwen measurements remain unchanged. Calendar-year numbers are excluded from new prose. Each paragraph owns its time anchor; exact dates and resource quantities stay in the factual overview.</p>
+<p><a href="../local-lore/review.html">Historical style-2 model comparison</a> · <a href="report.md">Changes and validation</a></p>
+<label for="chapter">Campaign and chapter</label> <select id="chapter"></select>
+<p id="dates"></p>
+<div class="grid"><article><h2>Recorded style 2</h2><p id="old"></p></article><article><h2>New style 4 · no model</h2><p id="new"></p></article></div>
+<details><summary>Factual overview and narrative source dates</summary><pre id="facts"></pre></details>
+<p id="error" role="status"></p>
+</main>
+<script type="module">
+try {
+    const data = await (await fetch('comparison.json')).json();
+    const picker = document.querySelector('#chapter');
+    for (const [index, row] of data.records.entries()) {
+        const option = document.createElement('option');
+        option.value = String(index);
+        option.textContent = row.cohort + ' · ' + row.campaign + ' · ' + row.title;
+        picker.append(option);
+    }
+    function render() {
+        const row = data.records[Number(picker.value)];
+        document.querySelector('#dates').textContent = (row.from ? row.from.winter + '–' : '') + row.through.winter + ' · ' + row.title;
+        document.querySelector('#old').textContent = row.oldText;
+        document.querySelector('#new').textContent = row.newText;
+        document.querySelector('#facts').textContent = JSON.stringify({ period: { from: row.from, through: row.through }, ...row.factual, sourceEvents: row.sourceEvents }, null, 2);
+    }
+    picker.value = String(data.records.findIndex(row => row.chapter === 1));
+    picker.addEventListener('change', render);
+    render();
+} catch (error) { document.querySelector('#error').textContent = 'Could not load the stored comparison: ' + error.message; }
+</script>
+</html>

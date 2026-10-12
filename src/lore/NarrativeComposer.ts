@@ -1,3 +1,5 @@
+import { composeChapter as styleThreeChapter, composeOpening as styleThreeOpening } from './LegacyNarrativeComposerV3';
+import { cardinal, ordinal } from './NarrativeTime';
 import { composeChapter as legacyChapter, composeOpening as legacyOpening } from './LegacyNarrativeComposerV2';
 import { livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
 import { projectChronicle } from './Chronicle';
@@ -7,7 +9,7 @@ import type { BookChapter, OpeningFacts } from './ClanBook';
 
 export type NarrativeParagraph = {
     templateId: string;
-    templateVersion: 2 | 3;
+    templateVersion: 2 | 3 | 4;
     text: string;
     sourceEventIds: string[];
     factRefs: string[];
@@ -15,8 +17,26 @@ export type NarrativeParagraph = {
 type DatedClause = { event: SimulationEvent; text: string };
 
 function elapsedWords(years: number): string {
-    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
-    return words[years] ?? String(years);
+    return cardinal(years);
+}
+type StoryOrigin = { winter: number; action: string; sourceIds: string[]; factRefs: string[] };
+function storyOrigin(events: readonly SimulationEvent[], facts: OpeningFacts,
+    previousChapters: readonly BookChapter[]): StoryOrigin | undefined {
+    const arrival = events.find(event => event.type === 'FoundingPartyLanded');
+    const initialized = events.find(event => event.type === 'ClanInitialized');
+    const event = arrival ?? initialized;
+    if (event) return { winter: event.time.winter,
+        action: arrival ? 'the founding party arrived' : 'the clan began', sourceIds: [event.id], factRefs: [] };
+    const opening = previousChapters[0];
+    if (opening) return { winter: opening.checkpoint.time.winter, action: 'this account began',
+        sourceIds: [], factRefs: ['chapters.0.checkpoint.time'] };
+    return facts.period ? { winter: facts.period.from.winter, action: 'these recorded years began',
+        sourceIds: [], factRefs: ['period'] } : undefined;
+}
+function ordinalTime(winter: number, origin: StoryOrigin, unit = 'winter'): string {
+    const gap = winter - origin.winter;
+    return gap === 0 ? 'the ' + unit + ' ' + origin.action :
+        'the ' + ordinal(Math.abs(gap)) + ' ' + unit + (gap < 0 ? ' before ' : ' after ') + origin.action;
 }
 function lowerSubject(sentence: string): string {
     return sentence.replace(/^(Our longship|The founding party|A permanent home|A home|A household|An animal|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\b/,
@@ -24,11 +44,13 @@ function lowerSubject(sentence: string): string {
 }
 
 /** Each paragraph owns its anchor; independently selected variants cannot inherit a foreign date. */
-function datedPassage(clauses: DatedClause[], events: readonly SimulationEvent[]): { text: string; anchorIds: string[] } {
+function datedPassage(
+    clauses: DatedClause[], events: readonly SimulationEvent[], origin: StoryOrigin | undefined
+): { text: string; anchorIds: string[]; factRefs: string[] } {
     const positions = new Map(events.map((event, index) => [event.id, index]));
     clauses.sort((a, b) => a.event.time.winter - b.event.time.winter ||
         a.event.time.tick - b.event.time.tick || (positions.get(a.event.id) ?? 0) - (positions.get(b.event.id) ?? 0));
-    if (!clauses.length) return { text: '', anchorIds: [] };
+    if (!clauses.length) return { text: '', anchorIds: [], factRefs: [] };
     const first = clauses[0].event;
     const used = new Set(clauses.map(clause => clause.event.id));
     const anchor = events.filter(event => !used.has(event.id) &&
@@ -50,11 +72,12 @@ function datedPassage(clauses: DatedClause[], events: readonly SimulationEvent[]
             const action = anchor.type === 'FoundingLongshipSalvaged' ? 'the longship was salvaged' : 'the founding party arrived';
             prefix = gap === 0 ? 'In the ' + unit + ' ' + action : gap === 1 ? 'In the ' + unit + ' after ' + action :
                 elapsedWords(gap)[0].toUpperCase() + elapsedWords(gap).slice(1) + ' ' + unit + 's after ' + action;
-        } else prefix = 'In Winter ' + event.time.winter;
+        } else prefix = origin ? 'In ' + ordinalTime(event.time.winter, origin, unit) : 'In those years';
         previous = event;
         return prefix + ', ' + lowerSubject(text);
     });
-    return { text: lines.join(' '), anchorIds: anchor ? [anchor.id] : [] };
+    return { text: lines.join(' '), anchorIds: anchor ? [anchor.id] : origin?.sourceIds ?? [],
+        factRefs: anchor ? [] : origin?.factRefs ?? [] };
 }
 
 function narrativeLine(event: SimulationEvent, original: string): string {
@@ -82,9 +105,11 @@ function narrativeLine(event: SimulationEvent, original: string): string {
 
 export function composeChapter(
     events: readonly SimulationEvent[], plan: NarrativePlan, facts: OpeningFacts,
-    previousChapters: readonly BookChapter[], narrativeSeed: number, version: 2 | 3 = 3
+    previousChapters: readonly BookChapter[], narrativeSeed: number, version: 2 | 3 | 4 = 4
 ): NarrativeParagraph[] {
     if (version === 2) return legacyChapter(events, plan, facts, previousChapters, narrativeSeed);
+    if (version === 3) return styleThreeChapter(events, plan, facts, previousChapters, narrativeSeed);
+    const origin = storyOrigin(events, facts, previousChapters);
     const entries = projectChronicle(events).reverse().flatMap(group => group.entries);
     const byId = new Map(entries.flatMap(entry => entry.sourceEventIds.map(id => [id, entry] as const)));
     const eventsById = new Map(events.map(event => [event.id, event]));
@@ -120,19 +145,19 @@ export function composeChapter(
                 const elapsed = current.time.winter - previous.time.winter;
                 if (current.type === 'PersonaDied' && previous.type === 'FoundingPartyLanded')
                     links.push((byId.get(current.id)?.text.split(' died')[0] ?? 'The resident') +
-                        ' had been among the founding party, ' + elapsed + ' winters earlier.');
+                        ' had been among the founding party, ' + cardinal(elapsed) + ' winters earlier.');
                 if (previous.type === 'HouseBuilt')
-                    links.push('The same home appeared again, ' + elapsed + ' winters after its construction.');
+                    links.push('The same home appeared again, ' + cardinal(elapsed) + ' winters after its construction.');
                 if (current.personaId && current.personaId === previous.personaId &&
                     typeof current.details?.name === 'string' && typeof previous.details?.name === 'string' &&
                     current.details.name !== previous.details.name)
                     links.push('The same resident had been recorded as ' + previous.details.name + '.');
             }
         }
-        const passage = datedPassage(clauses, events);
+        const passage = datedPassage(clauses, events, origin);
         if (passage.text) paragraphs.push({ templateId: 'clan-book.thread.' + theme + '.' + variant,
-            templateVersion: 3, text: [passage.text, ...new Set(links)].join(' '),
-            sourceEventIds: [...new Set([...sources, ...passage.anchorIds])], factRefs: theme === 'herd' ? ['livestock'] : [] });
+            templateVersion: 4, text: [passage.text, ...new Set(links)].join(' '),
+            sourceEventIds: [...new Set([...sources, ...passage.anchorIds])], factRefs: [...(theme === 'herd' ? ['livestock'] : []), ...passage.factRefs] });
     }
     if (!plan.focus.length && facts.complete && facts.period && !facts.demographics?.length) {
         const years = facts.period.through.winter - facts.period.from.winter;
@@ -141,7 +166,7 @@ export function composeChapter(
             'No births or deaths were recorded across these ' + elapsedWords(years) + ' years.',
             'These ' + elapsedWords(years) + ' years brought no recorded births or deaths.',
             'No birth or death was recorded over these ' + elapsedWords(years) + ' years.'];
-        paragraphs.push({ templateId: 'clan-book.quiet.' + variant, templateVersion: 3,
+        paragraphs.push({ templateId: 'clan-book.quiet.' + variant, templateVersion: 4,
             text: lines[variant], sourceEventIds: [], factRefs: ['period', 'demographics'] });
     }
     const ledger = facts.ledger;
@@ -160,16 +185,17 @@ export function composeChapter(
             ' years earlier, the Food stores had been empty.' : '';
         const need = (ledger.food.unmetNeed ?? 0) > 0 ?
             ' The Food available had not covered all that was needed over these years.' : '';
-        paragraphs.push({ templateId: 'clan-book.reserves.' + variant, templateVersion: 3,
-            text: 'By Winter ' + facts.period!.through.winter + ', ' +
+        const resourceSources = [...ledger.transactions,
+            ...(shortage?.facts.ledger?.transactions.filter(transaction => transaction.resource === 'food') ?? [])]
+            .map(transaction => transaction.eventId);
+        paragraphs.push({ templateId: 'clan-book.reserves.' + variant, templateVersion: 4,
+            text: (origin ? 'By ' + ordinalTime(facts.period!.through.winter, origin) : 'By then') + ', ' +
                 lines[variant][0].toLowerCase() + lines[variant].slice(1) + callback + need,
-            sourceEventIds: [...new Set([...ledger.transactions,
-                ...(shortage?.facts.ledger?.transactions.filter(transaction => transaction.resource === 'food') ?? [])]
-                .map(transaction => transaction.eventId))],
-            factRefs: ['ledger', 'stocks', 'period', ...(shortage ? ['chapters.' + shortage.index + '.ledger.food'] : [])] });
+            sourceEventIds: [...new Set([...(origin?.sourceIds ?? []), ...resourceSources])],
+            factRefs: ['ledger', 'stocks', 'period', ...(origin?.factRefs ?? []), ...(shortage ? ['chapters.' + shortage.index + '.ledger.food'] : [])] });
     }
     if (!paragraphs.length && facts.period) {
-        paragraphs.push({ templateId: 'clan-book.partial-history', templateVersion: 3,
+        paragraphs.push({ templateId: 'clan-book.partial-history', templateVersion: 4,
             text: 'Only part of the story of these years is known.', sourceEventIds: [], factRefs: ['period'] });
     }
     return paragraphs;
@@ -185,15 +211,16 @@ function namesList(names: string[]): string {
     return names.length < 2 ? names.join('') : names.slice(0, -1).join(', ') + ' and ' + names.at(-1);
 }
 export function composeOpening(
-    facts: OpeningFacts, winter: number, narrativeSeed: number, sourceEventIds: string[], version: 2 | 3 = 3
+    facts: OpeningFacts, winter: number, narrativeSeed: number, sourceEventIds: string[], version: 2 | 3 | 4 = 4
 ): NarrativeParagraph[] {
     if (version === 2) return legacyOpening(facts, winter, narrativeSeed, sourceEventIds);
+    if (version === 3) return styleThreeOpening(facts, winter, narrativeSeed, sourceEventIds);
     const paragraph = (templateId: string, text: string, factRefs: string[]): NarrativeParagraph =>
-        ({ templateId, templateVersion: 3, text, sourceEventIds, factRefs });
+        ({ templateId, templateVersion: 4, text, sourceEventIds, factRefs });
     const names = namesList(facts.founders.map(person => person.name));
-    const leads = [names + ' arrived in Winter ' + winter + '.',
-        'In Winter ' + winter + ', the founding party arrived. It included ' + names + '.',
-        names + ' were among the founding party in Winter ' + winter + '.'];
+    const leads = [names + ' arrived together.',
+        'The founding party arrived. It included ' + names + '.',
+        names + ' were among those who arrived.'];
     const arrival = paragraph('clan-book.arrival.people.' + narrativeSeed % 3,
         leads[narrativeSeed % 3], ['founders']);
     const pairs = facts.founders.filter(person => person.partnerId && person.id < person.partnerId)

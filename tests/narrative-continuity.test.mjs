@@ -32,7 +32,7 @@ test('a later saved chapter retrieves the same home construction beyond four ear
     assert.ok(chapter.text.includes(built.details.housingNames.building.name));
     assert.ok(chapter.plan.sourceEventIds.includes(upgraded.id));
     assert.match(chapter.text, /same home|same building/);
-    assert.match(chapter.text, /20 winters after its construction/);
+    assert.match(chapter.text, /twenty winters after its construction/);
     assert.ok(!chapter.sourceEventIds.includes(built.id), 'Older callbacks are not current accounting sources');
     assert.deepEqual(owner.session.book.snapshot().chapters.slice(0, -1).map(chapter => chapter.text), earlier);
     const canonical = owner.session.saveJSON();
@@ -92,7 +92,7 @@ test('a foreign callback or a future source in a saved chapter is rejected atomi
 test('a fresh opening uses the reviewed voice with frozen shelter, existing couples and English occupation labels', () => {
     const owner = new SharedSettlement(32);
     const opening = owner.session.book.snapshot().chapters[0];
-    assert.equal(opening.templateVersion, 3);
+    assert.equal(opening.templateVersion, 4);
     assert.ok(owner.session.book.snapshot().memory.recent[0].paragraphIds.includes(opening.paragraphs[0].templateId));
     assert.ok(opening.paragraphs.length >= 3);
     assert.ok(opening.text.includes('already partners'));
@@ -101,7 +101,7 @@ test('a fresh opening uses the reviewed voice with frozen shelter, existing coup
     const before = opening.text;
     owner.command({ type: 'SalvageLongship', longshipId: 'founding-longship' });
     assert.equal(owner.session.book.snapshot().chapters[0].text, before);
-    assert.equal(owner.session.book.snapshot().styleVersion, 3);
+    assert.equal(owner.session.book.snapshot().styleVersion, 4);
 });
 
 

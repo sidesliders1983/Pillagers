@@ -45,7 +45,7 @@ test('each herd paragraph anchors itself and keeps same-winter events and a two-
             assert.match(option.text, /[Tt]hat same winter/);
         }
         assert.doesNotMatch(chapter.text, /When the interval ended|complete account recorded|unmet Food need/);
-        assert.equal(chapter.templateVersion, 3);
+        assert.equal(chapter.templateVersion, 4);
     }
 });
 
@@ -59,7 +59,7 @@ test('topic changes re-anchor and never mention a salvage that is absent from th
     assert.ok(herd.sourceEventIds.includes(arrival.id));
 });
 
-test('legacy published chapters and provenance remain exact on load while future text uses style three', async () => {
+test('legacy published chapters and provenance remain exact on load while future text uses style four', async () => {
     const { corpus } = JSON.parse(gunzipSync(readFileSync('docs/qa/local-lore/corpus.json.gz')).toString('utf8'));
     const frozen = corpus[0];
     const owner = SharedSettlement.restore(frozen.snapshots.at(-1), 'fjord');
@@ -72,14 +72,14 @@ test('legacy published chapters and provenance remain exact on load while future
     owner.command({ type: 'AdvanceTicks', ticks: 5000 });
     const book = owner.session.book.snapshot();
     assert.deepEqual(book.chapters.slice(0, -1), earlier);
-    assert.equal(book.chapters.at(-1).templateVersion, 3);
-    assert.equal(book.styleVersion, 3);
-    assert.equal(book.generatorVersion, 3);
+    assert.equal(book.chapters.at(-1).templateVersion, 4);
+    assert.equal(book.styleVersion, 4);
+    assert.equal(book.generatorVersion, 4);
     assert.deepEqual(SharedSettlement.restore(owner.persist(), 'play').session.book.snapshot(), book);
 });
 
 
-test('without a validated arrival or salvage each paragraph uses one exact anchor, never an invented event', () => {
+test('without a validated arrival or salvage each paragraph uses a counted source anchor, never an invented event', () => {
     const initial = core.createCampaign(32);
     initial.events = initial.events.filter(event => !event.type.startsWith('Founding'));
     const book = new ClanBook(initial, true, 0);
@@ -91,6 +91,68 @@ test('without a validated arrival or salvage each paragraph uses one exact ancho
     );
     book.closeCheckpoint(state);
     const text = book.snapshot().chapters[1].paragraphs.find(item => item.templateId.includes('herd')).text;
-    assert.match(text, /^In Winter 801, one calf was born. Two winters later/);
+    assert.match(text, /^In the first winter after this account began, one calf was born. Two winters later/);
     assert.doesNotMatch(text, /arrived|salvaged|Winter 803/);
+    assert.ok(book.snapshot().chapters[1].paragraphs.find(item => item.templateId.includes('herd')).factRefs.includes('chapters.0.checkpoint.time'));
+    const restored = new ClanBook(state, false, 0);
+    restored.restore(book.save(state), state);
+    assert.deepEqual(restored.snapshot(), book.snapshot());
+});
+
+
+test('new prose has no calendar-year numbers and counts the fifth winter after arrival exactly', () => {
+    const owner = new SharedSettlement(32, 7);
+    const opening = owner.session.book.snapshot().chapters[0];
+    assert.doesNotMatch(opening.text, /\b800\b/);
+    owner.command({ type: 'SalvageLongship', longshipId: 'founding-longship' });
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = owner.session.book.snapshot().chapters[1];
+    assert.match(chapter.title, /Winter 805/);
+    assert.equal(chapter.facts.period.through.winter, 805);
+    assert.doesNotMatch(chapter.text, /\b80[0-5]\b/);
+    assert.match(chapter.text, /By the fifth winter after the founding party arrived/);
+    const before = owner.session.saveJSON();
+    const restored = SharedSettlement.restore(owner.persist(), 'fjord');
+    assert.equal(restored.session.saveJSON(), before);
+    assert.deepEqual(restored.session.book.snapshot(), owner.session.book.snapshot());
+});
+
+
+test('an ordinal is counted from the recorded origin, including later chapters and two-digit gaps', () => {
+    const owner = new SharedSettlement(32, 7);
+    owner.command({ type: 'AdvanceTicks', ticks: 25000 });
+    const book = owner.session.book.snapshot();
+    assert.match(book.chapters[1].text, /By the fifth winter after the founding party arrived/);
+    assert.match(book.chapters[2].text, /By the tenth winter after the founding party arrived/);
+    assert.match(book.chapters[5].text, /By the twenty-fifth winter after the founding party arrived/);
+    for (const chapter of book.chapters) assert.doesNotMatch(chapter.text, /\b8[0-2]\d\b/);
+    assert.equal(book.chapters[5].checkpoint.time.winter, 825);
+});
+
+
+test('published style-three text survives and its optional catalogue still uses its recorded version', async () => {
+    const { corpus } = JSON.parse(gunzipSync(readFileSync('docs/qa/local-lore/corpus.json.gz')).toString('utf8'));
+    const previews = JSON.parse(readFileSync('docs/qa/lore-relative-time/comparison.json', 'utf8')).records;
+    const envelope = JSON.parse(corpus[0].snapshots.at(-1));
+    const book = envelope.fjord.narrative;
+    const own = previews.filter(row => row.campaign === corpus[0].scenario);
+    book.generatorVersion = 3;
+    book.styleVersion = 3;
+    for (const chapter of book.chapters) {
+        chapter.templateVersion = 3;
+        chapter.text = own[chapter.index].newText;
+        chapter.paragraphs = own[chapter.index].paragraphs;
+    }
+    delete book.memory;
+    const owner = SharedSettlement.restore(JSON.stringify(envelope), 'fjord');
+    const published = owner.session.book.snapshot().chapters;
+    const request = await freezeLoreRequest(owner.session.snapshot(), owner.session.book.save(owner.session.snapshot()), 2);
+    assert.equal(request.baseline, published[2].text);
+    assert.ok(request.catalogue.every(option => option.templateVersion === 3));
+    assert.ok(request.catalogue.some(option => /By Winter 810/.test(option.text)));
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const updated = owner.session.book.snapshot();
+    assert.deepEqual(updated.chapters.slice(0, -1), published);
+    assert.equal(updated.chapters.at(-1).templateVersion, 4);
+    assert.doesNotMatch(updated.chapters.at(-1).text, /\b815\b/);
 });

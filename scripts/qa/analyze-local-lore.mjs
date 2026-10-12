@@ -48,10 +48,10 @@ for (const folder of [root, root + '/edge-cases']) {
 }
 const sources = [];
 for (const file of ['scripts/qa/local-lore-audit.mjs', 'src/lore/LocalLoreAdapter.ts', 'src/lore/LoreExperimentQueue.ts', 'src/lore/LoreBenchmark.ts',
-    'src/lore/NarrativeComposer.ts', 'src/lore/LegacyNarrativeComposerV2.ts', 'src/lore/NarrativePlan.ts', 'src/lore/ClanBook.ts']) {
+    'src/lore/NarrativeComposer.ts', 'src/lore/LegacyNarrativeComposerV2.ts', 'src/lore/LegacyNarrativeComposerV3.ts', 'src/lore/NarrativeTime.ts', 'src/lore/NarrativePlan.ts', 'src/lore/ClanBook.ts']) {
     sources.push({ file, sha256: createHash('sha256').update(await readFile(file)).digest('hex') });
 }
-await writeFile(root + '/analysis-review-v2.json', JSON.stringify({ generatedAt: new Date().toISOString(), sources, ...all }, null, 2) + '\n');
+await writeFile(root + '/analysis-review-v3.json', JSON.stringify({ generatedAt: new Date().toISOString(), sources, ...all }, null, 2) + '\n');
 console.log(JSON.stringify(Object.fromEntries(Object.entries(all).map(([key, value]) => [key,
     Object.fromEntries(Object.entries(value.candidates).map(([label, result]) => [label,
         { chapters: result.chapters, accepted: result.accepted, changed: result.changedAccepted }]))]))));
