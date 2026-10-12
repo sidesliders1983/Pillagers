@@ -23,5 +23,6 @@ Files:
 - 09 Player Actions
 - [10 Cultural Life & Social Cohesion](10-CULTURAL-LIFE-COHESION.md)
 - [11 Lore & the Continuing Clan Book](11-LORE-CLAN-BOOK.md)
+- [12 Personality-driven Life Events](12-PERSONALITY-LIFE-EVENTS.md)
 
 These requirements describe design intent, not implementation status.
