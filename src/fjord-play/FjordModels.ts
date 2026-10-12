@@ -173,8 +173,8 @@ export class FjordModels {
                 // The native parcel leaves too little clearance for four mature source bodies.
                 // Use the existing reserved plot while retaining the authored fences/props and house size.
                 const size = new Box3().setFromObject(sourcedYard).getSize(new Vector3());
-                sourcedYard.scale.x *= Math.max(1, (entity.plot!.halfWidth * 2 - .02) / size.x);
-                sourcedYard.scale.z *= Math.max(1, (entity.plot!.halfDepth * 2 - .02) / size.z);
+                sourcedYard.scale.x *= Math.max(1, (Math.min(6.5, entity.plot!.halfWidth) * 2 - .02) / size.x);
+                sourcedYard.scale.z *= Math.max(1, (Math.min(6.5, entity.plot!.halfDepth) * 2 - .02) / size.z);
             }
             if (entity.terrainAsset === 'farmyardMarker') {
                 const yard = new Mesh(new BoxGeometry(12, .03, 12), new MeshStandardMaterial({

@@ -1,0 +1,30 @@
+{
+  "campfire": {
+    "id": "settlement-campfire",
+    "transform": {
+      "x": 50,
+      "y": 2.5999999046325684,
+      "z": 19.5,
+      "rotation": 0,
+      "scale": 2
+    },
+    "clearingRadius": 7,
+    "obstacleRadius": 4.4,
+    "placeholder": false,
+    "width": 6.401211506498129,
+    "bounds": {
+      "min": [
+        46.799394246750936,
+        2.5999999046325684,
+        16.271013617515564
+      ],
+      "max": [
+        53.200605753249064,
+        4.1002315000469505,
+        22.728986382484436
+      ]
+    }
+  },
+  "errors": [],
+  "tabletEmulation": true
+}

@@ -22,6 +22,8 @@ _Avoid_: Family
 
 **Residence**: The shelter a household lives in, including a house or a tent.
 
+**Settlement campfire**: The shared visual nucleus of a settlement, present from landing on a reserved middle place. Ordinary permanent homes face it; Farmyards retain their orientation. Ceremonies and settlement information are future uses.
+
 **Building**: Persistent physical infrastructure, independent of the household occupying it.
 
 **Food**: Whole units of the settlement's food stock.

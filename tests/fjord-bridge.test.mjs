@@ -190,7 +190,7 @@ test('tent households retain grass; only canonical permanent houses create soil 
     state = core.applyCommand(state, { type: 'BuildHouse', householdId: 'founder-1' });
     view = projectFjordSettlement(state, world, view.layout);
     assert.deepEqual(view.ground.plots.map(p => p.id), ['house-1']);
-    assert.equal(view.ground.paths.length, 0);
+    assert.equal(view.ground.paths.length, 1, 'Even the first permanent home connects to the middle place');
     assert.deepEqual(view.ground.plots[0].plot, view.entities.find(e => e.kind === 'building').plot);
     state = core.applyCommand(state, { type: 'SalvageBuilding', buildingId: 'house-1' });
     view = projectFjordSettlement(state, world, view.layout);
@@ -210,14 +210,16 @@ test('permanent houses receive connected dry walking paths without routing throu
         state = core.applyCommand(state, { type: 'BuildHouse', householdId: id });
     view = projectFjordSettlement(state, world, view.layout);
     assert.equal(view.ground.plots.length, 3);
-    assert.equal(view.ground.paths.length, 2, 'three houses need two connecting paths');
+    assert.equal(view.ground.paths.length, 3, 'Each home joins the campfire path network');
     const connected = new Set(view.ground.paths.flatMap(p => [p.from, p.to]));
-    assert.deepEqual([...connected].sort(), ['house-1', 'house-2', 'house-3']);
+    assert.deepEqual([...connected].sort(), ['house-1', 'house-2', 'house-3', 'settlement-campfire']);
     for (const path of view.ground.paths) {
         assert.ok(path.points.length >= 2);
         for (const p of path.points) {
             assert.ok(surface.surfaceHeightAt(p.x, p.z) >= world.waterLevel + .2);
             assert.ok(surface.slopeAt(p.x, p.z) <= .55);
+            assert.ok(Math.hypot(p.x - view.campfire.transform.x, p.z - view.campfire.transform.z) >
+                view.campfire.obstacleRadius, 'Paths do not run through the stone fire ring');
             for (const tent of view.entities.filter(e => e.kind === 'household'))
                 assert.ok(Math.abs(p.x-tent.plot.x) > tent.plot.halfWidth ||
                     Math.abs(p.z-tent.plot.z) > tent.plot.halfDepth);
@@ -262,7 +264,7 @@ test('canonical longship berths parallel beside the pier for saved rowboat ancho
     assert.equal(core.serializeState(state), before);
 });
 
-test('ordinary homes use varied seeded grid headings while farmyards stay fixed without consuming Core RNG', () => {
+test('ordinary home entrances face the campfire while farmyards stay fixed without consuming Core RNG', () => {
     const { createFjordLayout, projectFjordSettlement } = load('../src/fjord-play/FjordProjection.ts');
     let state = core.createCampaign(32, { initialMaterials: 1000, foundingCoupleChanceBps: 0 });
     const world = generateWorld({ seed: 32 });
@@ -278,7 +280,12 @@ test('ordinary homes use varied seeded grid headings while farmyards stay fixed 
     const headings = ordinary.map(e => e.transform.rotation);
     assert.ok(new Set(headings).size >= 3, 'Ordinary houses visibly use several grid directions');
     for (const home of ordinary) {
-        assert.ok([0, Math.PI / 2, Math.PI, Math.PI * 1.5].includes(home.transform.rotation));
+        const dx = view.campfire.transform.x - home.transform.x;
+        const dz = view.campfire.transform.z - home.transform.z;
+        const distance = Math.hypot(dx, dz);
+        const forward = { x: Math.sin(home.transform.rotation), z: Math.cos(home.transform.rotation) };
+        assert.ok((forward.x * dx + forward.z * dz) / distance > .999999,
+            'The authored +Z entrance points at the settlement nucleus');
         assert.equal(home.plot.rotation, home.transform.rotation, 'Paths and models share the doorway heading');
     }
     const farm = homes.find(e => e.status.farmyard);
@@ -295,4 +302,67 @@ test('ordinary homes use varied seeded grid headings while farmyards stay fixed 
     state = core.applyCommand(state, { type: 'AssignOccupation', personaId: 'founder-1', occupation: 'woodworker' });
     assert.deepEqual(projectFjordSettlement(state, world, activeFarm.layout).entities
         .find(e => e.id === ordinary[0].id).transform, ordinary[0].transform);
+});
+
+test('the landing reserves one stable campfire clearing without consuming canonical state', () => {
+    const { createFjordLayout, projectFjordSettlement } = load('../src/fjord-play/FjordProjection.ts');
+    const state = core.createCampaign(32);
+    const before = core.serializeState(state);
+    const world = generateWorld({ seed: 32 });
+    const view = projectFjordSettlement(state, world, createFjordLayout(world));
+    assert.ok(view.campfire, 'Every settlement has a campfire from landing');
+    assert.equal(view.campfire.transform.scale, 2, 'The owner requested twice the source size');
+    assert.equal(view.campfire.transform.x, (world.settlement.bounds.minX + world.settlement.bounds.maxX) / 2);
+    assert.equal(view.campfire.transform.z, (world.settlement.bounds.minZ + world.settlement.bounds.maxZ) / 2);
+    for (const plot of Object.values(view.layout.plots)) {
+        const dx = Math.max(0, Math.abs(plot.x - view.campfire.transform.x) - plot.halfWidth);
+        const dz = Math.max(0, Math.abs(plot.z - view.campfire.transform.z) - plot.halfDepth);
+        assert.ok(Math.hypot(dx, dz) >= view.campfire.clearingRadius, 'The middle place stays free of dwellings');
+    }
+    for (const entity of view.entities.filter(e => e.transform && ['persona', 'cattle'].includes(e.kind)))
+        assert.ok(Math.hypot(entity.transform.x - view.campfire.transform.x,
+            entity.transform.z - view.campfire.transform.z) > view.campfire.obstacleRadius);
+    assert.deepEqual(projectFjordSettlement(core.reconstructState(before), world, view.layout), view);
+    assert.equal(core.serializeState(state), before);
+});
+
+test('the stable nucleus survives save/load and houses have space for any facing angle', () => {
+    const { FjordCampaign } = load('../src/fjord-play/FjordCampaign.ts');
+    const { GameplaySession } = load('../src/gameplay-lab/GameplaySession.ts');
+    const campaign = new FjordCampaign(new GameplaySession(32));
+    const view = campaign.project();
+    for (const plot of Object.values(view.layout.plots)) {
+        // Decoded Great Hall is 11.16m by 8.76m: its diagonal sweep needs 7.10m
+        // on each side, plus working clearance, before any future upgrade.
+        assert.ok(plot.halfWidth >= 7.5 && plot.halfDepth >= 7.5);
+    }
+    const saved = campaign.exportJSON();
+    const restored = new FjordCampaign(new GameplaySession(17));
+    restored.importJSON(saved);
+    assert.deepEqual(restored.project(), view);
+    assert.equal(restored.exportJSON(), saved);
+});
+
+test('loading an old layout reserves the new middle place and occupied-center imports fail atomically', () => {
+    const { FjordCampaign } = load('../src/fjord-play/FjordCampaign.ts');
+    const { GameplaySession } = load('../src/gameplay-lab/GameplaySession.ts');
+    const campaign = new FjordCampaign(new GameplaySession(32));
+    const saved = campaign.exportJSON();
+    const view = campaign.project();
+    const key = Object.keys(view.layout.plots)[0];
+    const occupied = JSON.parse(saved);
+    occupied.layout.plots = { [key]: { ...view.layout.plots[key], ...view.campfire.transform, scale: 1 } };
+    assert.throws(() => campaign.importJSON(JSON.stringify(occupied)), /campfire|clearing|middle/i);
+    assert.equal(campaign.exportJSON(), saved);
+    const legacy = structuredClone(occupied);
+    legacy.layout.version = 'fjord-layout-v1';
+    legacy.layout.plots[key].halfWidth = legacy.layout.plots[key].halfDepth = 6.5;
+    legacy.layout.points = {};
+    campaign.importJSON(JSON.stringify(legacy));
+    assert.deepEqual(JSON.parse(campaign.session.saveJSON()), legacy.campaign);
+    assert.deepEqual(campaign.project().campfire, view.campfire);
+    assert.deepEqual(campaign.project().layout.plots, view.layout.plots);
+    const wrongIdentity = structuredClone(legacy);
+    wrongIdentity.layout.geographyId = 'other-geography';
+    assert.throws(() => campaign.importJSON(JSON.stringify(wrongIdentity)), /identit|match/i);
 });

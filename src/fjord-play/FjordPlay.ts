@@ -11,7 +11,7 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
-import { Clock, PerspectiveCamera, Scene } from 'three';
+import { Box3, Clock, PerspectiveCamera, Scene } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import { updateView } from '../gameplay-lab/updateView';
@@ -413,6 +413,18 @@ export class FjordPlay {
                 weatherTint?.dispose();
                 world?.dispose();
                 world = next;
+                const fire = this.campaign.project().campfire;
+                const campfire = assets!.get('stoneCampfire');
+                campfire.name = fire.id;
+                campfire.scale.setScalar(fire.transform.scale);
+                campfire.position.set(fire.transform.x, fire.transform.y, fire.transform.z);
+                next.root.add(campfire);
+                next.clearPlot({ ...fire.transform, halfWidth: fire.clearingRadius,
+                    halfDepth: fire.clearingRadius, futureAsset: 'hut' });
+                const fireBounds = new Box3().setFromObject(campfire);
+                canvas.dataset.campfire = JSON.stringify({ ...fire,
+                    placeholder: Boolean(campfire.userData.placeholder),
+                    width: fireBounds.max.x - fireBounds.min.x, bounds: fireBounds });
                 weatherTint = new SeasonTint(next.root, next.terrain);
                 weatherSignature = "";
                 scene.add(next.root);
@@ -420,7 +432,7 @@ export class FjordPlay {
                 motion = new LivingWorldController(this.campaign.blueprint);
                 groundSignature = "";
                 lighting?.dispose();
-                lighting = new WorldLighting(scene, renderer, assets!, next.hearth, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
+                lighting = new WorldLighting(scene, renderer, assets!, campfire.position, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);

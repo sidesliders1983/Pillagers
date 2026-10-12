@@ -1,3 +1,4 @@
+import { settlementCampfire } from './SettlementCampfire';
 import type { FjordEntity, FjordPlot } from './FjordProjection';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -27,7 +28,8 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
     if (known?.signature === signature)
         return structuredClone(known.ground);
     const ground: FjordGround = { plots, paths: [] };
-    if (plots.length > 1) {
+    if (plots.length > 0) {
+        const campfire = settlementCampfire(world);
         const surface = createBlueprintSurface(world);
         const bounds = world.terrain.bounds;
         const columns = Math.floor(bounds.maxX - bounds.minX) + 1;
@@ -37,7 +39,8 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
         const index = (p: Point2) => Math.round(p.z - bounds.minZ) * columns + Math.round(p.x - bounds.minX);
         const cells = Array.from({ length: columns * rows }, (_, i) => {
             const p = point(i);
-            return surface.surfaceHeightAt(p.x, p.z) >= world.waterLevel + suitability.walkingElevation &&
+            return Math.hypot(p.x - campfire.transform.x, p.z - campfire.transform.z) > campfire.obstacleRadius + .65 &&
+                surface.surfaceHeightAt(p.x, p.z) >= world.waterLevel + suitability.walkingElevation &&
                 surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
                 parcels.every(e => Math.abs(p.x - e.plot!.x) > e.plot!.halfWidth + .65 ||
                     Math.abs(p.z - e.plot!.z) > e.plot!.halfDepth + .65);
@@ -59,8 +62,12 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
             return index(approach ?? preferred);
         };
         const connected = new Map<number, string>();
-        connected.set(door(plots[0].plot), plots[0].id);
-        for (const home of plots.slice(1)) {
+        for (let i = 0; i < cells.length; i++) {
+            const p = point(i);
+            if (cells[i] && Math.hypot(p.x - campfire.transform.x, p.z - campfire.transform.z) <= campfire.clearingRadius - 1)
+                connected.set(i, campfire.id);
+        }
+        for (const home of plots) {
             const start = door(home.plot);
             if (!cells[start])
                 continue;

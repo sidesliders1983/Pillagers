@@ -1,6 +1,7 @@
 import { cattleVariants } from '../characters/CattlePresentation';
 import { passConversation, passNeighbours } from '../systems/ResidentPassing';
 import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
+import { settlementCampfire } from './SettlementCampfire';
 import type { FjordEntity } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -46,19 +47,24 @@ export class LivingWorldController {
     private agents = new Map<string, Agent>();
     private social = new SocialEncounters();
     private surface;
+    private campfire;
     private yardSurfaces = new Map<string, (x: number, z: number) => number | null>();
     private trees: { key: string; x: number; z: number; clearance: number }[] = [];
     private parcels: FjordEntity[] = [];
     private nature: WorldBlueprint['placementPlan'] = [];
     private natureCells = new Map<string, Array<WorldBlueprint['placementPlan'][number]>>();
     private ground: FjordGround = { plots: [], paths: [] };
-    constructor(private world: WorldBlueprint) { this.surface = createBlueprintSurface(world); }
+    constructor(private world: WorldBlueprint) {
+        this.surface = createBlueprintSurface(world);
+        this.campfire = settlementCampfire(world);
+    }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
         this.parcels = entities.filter(e => e.plot);
         this.ground = ground;
         const active = entities.filter(e => e.transform && (e.kind === 'persona' || e.kind === 'cattle'));
         // These are the same plot/anchor/path clearances applied by the scene's nature reconciler.
-        const cleared = [...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
+        const cleared = [{ ...this.campfire.transform, halfWidth: this.campfire.clearingRadius,
+            halfDepth: this.campfire.clearingRadius }, ...this.parcels.map(e => e.plot!), ...active.map(e => ({ ...e.transform!, halfWidth: 1, halfDepth: 1 })),
             ...ground.paths.flatMap(p => p.points.map(point => ({ ...point, halfWidth: 1.5, halfDepth: 1.5 })))];
         this.nature = this.world.placementPlan.filter(p => !cleared.some(c => Math.abs(p.x - c.x) <= c.halfWidth + p.clearance && Math.abs(p.z - c.z) <= c.halfDepth + p.clearance));
         this.natureCells.clear();
@@ -429,6 +435,8 @@ export class LivingWorldController {
         return (a.random >>> 0) / 4294967296;
     }
     private safe(a: Agent, p: Point2) {
+        if (Math.hypot(p.x - this.campfire.transform.x, p.z - this.campfire.transform.z) <=
+            this.campfire.obstacleRadius + this.radius(a)) return false;
         if (this.yardSurfaces.has(a.key) && this.yardSurfaces.get(a.key)!(p.x, p.z) === null)
             return false;
         if (a.kind === 'persona' && Math.hypot(p.x - a.anchor.x, p.z - a.anchor.z) > 75)

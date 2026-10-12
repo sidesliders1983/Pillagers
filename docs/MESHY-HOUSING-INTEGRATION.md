@@ -23,15 +23,22 @@ height. Current source dimensions are approximately 9.425 × 4.000 × 5.787m (wi
 compared with the Homestead's 9.472 × 5.001 × 6.372m. The calibrated Longhouse is approximately
 11.784 × 5.001 × 7.235m: equal height and about 24% wider. Calibration preserves proportions,
 materials and the grounded pivot; it leaves source GLBs and preparation metadata intact.
-The corrected clone fits the existing 13m canonical parcel in each permitted grid direction.
+The corrected clone fits a 15m canonical reservation, including arbitrary headings toward the campfire.
 
-Ordinary permanent homes use deterministic 0°, 90°, 180° or 270° headings from campaign seed
-and building identity. Upgrades and save/load retain the same heading; no Core RNG is consumed.
-Active Farmyards retain the fixed 180° source-yard orientation. Removing the Farmyard function
-restores that building's ordinary heading at the same physical location. Tents retain their
-existing heading. Paths share the rendered heading, with a safe exterior approach when the
-entrance faces an adjacent parcel. Future direction: a central bonfire/plaza supplies a facing
-target in place of these temporary grid headings.
+Ordinary permanent homes face the settlement campfire with their authored +Z entrance.
+The target is the midpoint of the saved settlement bounds, independent of living population
+or current buildings. Upgrades and save/load retain each position and heading; no Core RNG
+is consumed. Active Farmyards retain the fixed 180° source-yard orientation, including their
+terrain and fences. Removing the Farmyard function restores the inward-facing heading at
+the same physical location. Tents retain their existing heading and grass.
+
+The 15m axis-aligned reservations contain the complete rotational sweep of the largest
+source dwelling. A 17m grid surrounds the middle place; it fits ten separate founding
+households in the validated clearing. Farms retain their existing approximately 13m
+physical yard, within that larger reservation. Paths connect permanent homes to the
+campfire clearing, including the first home; they avoid tents, buildings and the fire ring.
+
+See [settlement campfire](SETTLEMENT-CAMPFIRE.md) for the source asset, scale and save treatment.
 
 Regression evidence: [housing scale and headings](qa/fjord-housing-scale/report.md).
 
