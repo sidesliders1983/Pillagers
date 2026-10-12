@@ -91,7 +91,7 @@ export function runEconomyScenario({ seed, model = 'control', policy = 'default'
     if (!['default', 'random', 'aware'].includes(policy)) throw new Error('Unknown allocation policy');
     if (resumeAt !== null && (!Number.isSafeInteger(resumeAt) || resumeAt < 1 || resumeAt >= winters)) throw new Error('Invalid resume boundary');
     if (!Number.isSafeInteger(winters) || winters < 1 || winters > 100) throw new Error('Invalid Winters');
-    let state = fullWorld ? core.createCampaign(seed) : landing.createCampaign(seed);
+    let state = fullWorld ? core.createCampaign(seed, { initialFood: 30 }) : landing.createCampaign(seed);
     if (!fullWorld) weather.initializeWeather(state);
     const configuration = structuredClone(state.mechanics.config);
     const initialFingerprint = hash({ personas: state.personas, households: state.households,

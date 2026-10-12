@@ -12,7 +12,7 @@ test('seeded landing generates ten viable named founders in tents with founding 
   assert.equal(Object.keys(state.buildings).length,0);
   assert.equal(Object.values(state.residences).every(r=>r.kind==='tent'),true);
   assert.equal(Object.keys(state.households).length,10-state.events.filter(e=>e.type==='FoundingPartnershipPresent').length);
-  assert.deepEqual(state.stocks,{food:30,materials:5});
+  assert.deepEqual(state.stocks,{food:15,materials:5});
   assert.equal(Object.keys(state.landing.longships).length,1);
   assert.deepEqual(Object.values(state.landing.cattle).map(c=>c.sex).sort(),['female','female','male']);
   assert.equal(Object.values(state.landing.cattle).every(c=>c.farmyardId===null&&c.deathWinter===null),true);
@@ -39,7 +39,7 @@ test('keeping the longship preserves capability; salvage is a configurable irrev
   assert.deepEqual(core.reconstructState(core.serializeState(salvaged)),salvaged);
 });
 function idleCampaign(overrides={}){
-  let state=core.createCampaign(32,{foundingCoupleChanceBps:0,cattleBirthChanceBps:0,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0,cattleMortalityOlderBps:0,cattleMortalityOldBps:0,cattleCrowdingBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0},{enabled:false});
+  let state=core.createCampaign(32,{initialFood:30,foundingCoupleChanceBps:0,cattleBirthChanceBps:0,cattleMortalityYoungBps:0,cattleMortalityAdultBps:0,cattleMortalityOlderBps:0,cattleMortalityOldBps:0,cattleCrowdingBps:0,...overrides},{partnershipChanceBps:0,fertilityChanceBps:0,careerReviewWinters:0},{enabled:false});
   for(const id of Object.keys(state.personas))state=core.applyCommand(state,{type:'AssignOccupation',personaId:id,occupation:null});
   return state;
 }

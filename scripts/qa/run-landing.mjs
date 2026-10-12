@@ -5,7 +5,7 @@ import {loadTypeScript} from '../load-typescript.mjs';
 const core=loadTypeScript(new URL('../../src/simulation/SimulationCore.ts',import.meta.url));
 const checkpoints=[];
 function run(split=false,resume=false,record=false){
-  let state=core.createCampaign(32);
+  let state=core.createCampaign(32, {initialFood:30});
   state=core.applyCommand(state,{type:'KeepLongship',longshipId:'founding-longship'});
   state=core.applyCommand(state,{type:'AdvanceTicks',ticks:321});
   state=core.applyCommand(state,{type:'SalvageLongship',longshipId:'founding-longship'});
@@ -24,5 +24,5 @@ function run(split=false,resume=false,record=false){
 }
 const final=run(false,false,true);assert.deepEqual(run(),final);assert.deepEqual(run(true),final);assert.deepEqual(run(true,true),final);
 const events={};for(const e of final.events)events[e.type]=(events[e.type]??0)+1;
-const report={seed:32,initial:core.landingSummary(core.createCampaign(32)),final:core.landingSummary(final),finalPersonas:Object.keys(final.personas).length,time:final.time,events,sha256:createHash('sha256').update(core.serializeState(final)).digest('hex'),checks:{repeat:'PASS',splitTicks:'PASS',saveResume:'PASS',integerNonnegativeStocks:'PASS'},checkpoints};
+const report={seed:32,initial:core.landingSummary(core.createCampaign(32, {initialFood:30})),final:core.landingSummary(final),finalPersonas:Object.keys(final.personas).length,time:final.time,events,sha256:createHash('sha256').update(core.serializeState(final)).digest('hex'),checks:{repeat:'PASS',splitTicks:'PASS',saveResume:'PASS',integerNonnegativeStocks:'PASS'},checkpoints};
 const output=new URL('../../artifacts/qa/the-landing/',import.meta.url);mkdirSync(output,{recursive:true});writeFileSync(new URL('report.json',output),JSON.stringify(report,null,2)+'\n');writeFileSync(new URL('final-state.json',output),core.serializeState(final)+'\n');console.log(JSON.stringify({...report,checkpoints:undefined},null,2));

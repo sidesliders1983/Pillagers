@@ -8,7 +8,7 @@ import { hash } from './aptitude-economy.mjs';
 export function proveAptitudeReplay({ seed = 32, model = 'control', readAsModel = model } = {}) {
     const experiment = studyEngine(model);
     const core = experiment.core;
-    let state = core.createCampaign(seed);
+    let state = core.createCampaign(seed, {initialFood:30});
     state = core.applyCommand(state, { type: 'AssignOccupation', personaId: 'founder-1', occupation: 'woodworker' });
     state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 500 });
     const savedWorkProgress = state.personas['founder-1'].workProgress;

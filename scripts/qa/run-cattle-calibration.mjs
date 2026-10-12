@@ -9,7 +9,7 @@ import {loadTypeScript} from '../load-typescript.mjs';
 const core=loadTypeScript(new URL('../../src/simulation/SimulationCore.ts',import.meta.url));
 const hash=value=>createHash('sha256').update(typeof value==='string'?value:JSON.stringify(value)).digest('hex');
 export function runScenario(seed,policy,winters=50){
- let state=core.createCampaign(seed);
+ let state=core.createCampaign(seed, {initialFood:30});
  const configuration={landing:structuredClone(state.landing.config),mechanics:structuredClone(state.mechanics.config)};
  if(policy==='farmyard'){
   const founder=Object.keys(state.personas).sort()[0];

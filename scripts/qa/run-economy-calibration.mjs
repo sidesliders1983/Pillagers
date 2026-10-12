@@ -27,9 +27,9 @@ function observe(state){
 export function runScenario({seed,baseline,winters=15,weatherEnabled=true}){
   uint(seed,'seed');uint(baseline,'baseline',1,1000000);uint(winters,'Winters',1,100);
   if(typeof weatherEnabled!=='boolean')throw new Error('Invalid weather option');
-  const original=core.createCampaign(seed,{}, {},{enabled:weatherEnabled}),mechanics=structuredClone(original.mechanics.config);
+  const original=core.createCampaign(seed,{initialFood:30}, {},{enabled:weatherEnabled}),mechanics=structuredClone(original.mechanics.config);
   for(const role of foodRoles)mechanics.occupations[role].unitsPerWinter=baseline;
-  let state=core.createCampaign(seed,{},mechanics,{enabled:weatherEnabled});
+  let state=core.createCampaign(seed,{initialFood:30},mechanics,{enabled:weatherEnabled});
   const initialObservation=observe(state);
   const assignedFood=Object.values(state.personas).filter(p=>foodRoles.includes(p.occupation)).length;
   const assignedMaterials=Object.values(state.personas).filter(p=>mechanics.occupations[p.occupation]?.resource==='materials').length;
