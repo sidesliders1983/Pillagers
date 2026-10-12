@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "widths": [
+    1440,
+    390
+  ],
+  "checks": [
+    "counts",
+    "source-linked prose",
+    "context disclosure",
+    "no horizontal overflow"
+  ]
+}

@@ -105,3 +105,11 @@ _Avoid_: Recon unit, disposable raid party
 **Contact rim**: A designed module opening whose boundary remains fixed to its declared body contact.
 
 **Preview asset**: A selectable inspection candidate awaiting appearance approval; it is not automatically assigned to residents.
+
+## Personality life events
+
+**Quarrel**: A recorded disagreement between two residents, retained as an incident until resolution or termination.
+
+**Mediation**: A third resident's attempt to resolve an existing quarrel. An attempt is distinct from successful aid.
+
+**Reconciliation**: Resolution of the same recorded quarrel by its participants, independently or through mediation. Expiry, death and departure are not reconciliation.

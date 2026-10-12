@@ -1,0 +1,131 @@
+{
+  "seed": 1,
+  "fixture": true,
+  "checkpoint": 820,
+  "text": "In the eighteenth winter after the clan began, Astrid and Liv quarrelled. The following winter, Einar attempted to mediate the quarrel between Astrid and Liv; the mediation succeeded. That same winter, Astrid and Liv reconciled through mediation.",
+  "sourceEventIds": [
+    "event-56",
+    "event-60",
+    "event-61",
+    "event-1"
+  ],
+  "episode": [
+    {
+      "id": "event-56",
+      "type": "ResidentQuarrelled",
+      "time": {
+        "winter": 818,
+        "tick": 0
+      },
+      "details": {
+        "incidentId": "incident-1",
+        "participants": [
+          "astrid",
+          "liv"
+        ],
+        "contextEventId": "event-54",
+        "context": "resident-food-shortfall",
+        "probabilityBps": 2450,
+        "configVersion": 1,
+        "people": [
+          {
+            "id": "astrid",
+            "name": "Astrid",
+            "age": 38
+          },
+          {
+            "id": "liv",
+            "name": "Liv",
+            "age": 48
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-60",
+      "type": "MediationAttempted",
+      "time": {
+        "winter": 819,
+        "tick": 0
+      },
+      "details": {
+        "incidentId": "incident-1",
+        "participants": [
+          "astrid",
+          "liv",
+          "einar"
+        ],
+        "mediatorId": "einar",
+        "openingEventId": "event-56",
+        "priorEventId": "event-56",
+        "contextEventId": "event-54",
+        "success": true,
+        "configVersion": 1,
+        "initiativeBps": 1200,
+        "successBps": 5000,
+        "people": [
+          {
+            "id": "astrid",
+            "name": "Astrid",
+            "age": 39
+          },
+          {
+            "id": "liv",
+            "name": "Liv",
+            "age": 49
+          },
+          {
+            "id": "einar",
+            "name": "Einar",
+            "age": 51
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-61",
+      "type": "ResidentsReconciled",
+      "time": {
+        "winter": 819,
+        "tick": 0
+      },
+      "details": {
+        "incidentId": "incident-1",
+        "participants": [
+          "astrid",
+          "liv"
+        ],
+        "openingEventId": "event-56",
+        "priorEventId": "event-60",
+        "contextEventId": "event-54",
+        "method": "mediated",
+        "configVersion": 1,
+        "people": [
+          {
+            "id": "astrid",
+            "name": "Astrid",
+            "age": 39
+          },
+          {
+            "id": "liv",
+            "name": "Liv",
+            "age": 49
+          }
+        ]
+      }
+    }
+  ],
+  "context": {
+    "id": "event-54",
+    "time": {
+      "winter": 818,
+      "tick": 0
+    },
+    "type": "FoodConsumed",
+    "details": {
+      "units": 0,
+      "shortfall": 6
+    }
+  },
+  "note": "An explicitly labelled scarcity/kin/helper fixture with approved social probabilities; not a default campaign story."
+}

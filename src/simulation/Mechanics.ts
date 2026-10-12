@@ -1,3 +1,4 @@
+import {evaluateSocialYear, pruneSocialIncidents} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
 import {personaAway,stepWorld} from './WorldExpeditions';
 import {determineWeather,weatherProfile,weatherFacts} from './Weather';
@@ -102,6 +103,7 @@ export function inspectBuilding(state:SimulationState,id:string) {
 }
 export function stepMechanicsTick(state:SimulationState):void {
     const config=state.mechanics!.config;
+    let annualFoodEvent;
     let previousFarmyards=farmyards(state).map(f=>f.id);
     for(const id of Object.keys(state.personas))if(isCaregiver(state,id))state.mechanics!.people[id].caregiverWorkedWinter=state.time.winter;
     const unavailable=new Set(Object.keys(state.personas).filter(id=>state.mechanics!.people[id].caregiverWorkedWinter===state.time.winter));
@@ -131,6 +133,7 @@ export function stepMechanicsTick(state:SimulationState):void {
         consumeCattleFood(state);
         const need=foodNeed(state)-cattleFoodNeed(state), consumed=Math.min(need,state.stocks.food);state.stocks.food-=consumed;
         emit(state,'FoodConsumed',undefined,{units:consumed,shortfall:need-consumed});
+        annualFoodEvent=state.events.at(-1)!;
         for(const id of Object.keys(state.buildings).sort()) {
             const {occupied,upkeep}=inspectBuilding(state,id);
             const building=state.mechanics!.buildings[id];
@@ -157,6 +160,8 @@ export function stepMechanicsTick(state:SimulationState):void {
         determineWeather(state);
     }
     stepWorld(state);
+    pruneSocialIncidents(state);
+    if(annualFoodEvent)evaluateSocialYear(state,annualFoodEvent);
 }
 
 export type MechanicsCommand = {type:'AssignResidence'; householdId:string; residenceId:string|null}

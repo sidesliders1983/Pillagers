@@ -23,9 +23,9 @@ Owner-approved test boundaries: public Simulation Core/save-load, paired measure
 
 Actual inherited discrepancy: `defaultPrototypeConfig.childcareWinters` is currently 5, despite an earlier owner direction of 2. The social pilot will reuse the saved care rules and report that discrepancy rather than silently change baseline care behavior.
 
-## Proposed numerical settings — awaiting owner confirmation
+## Owner-approved experimental settings
 
-The owner was asked to confirm these experimental values; they are not settled balance or implemented defaults:
+The owner confirmed Q2 and Q3 on 12 October 2026. These are configurable experiment settings, not default campaign balance:
 
 - Quarrel at a real shortage with an existing tie: 5–30%, increasing with mean Temperament.
 - Mediation initiative: 10–30%, increasing with the helper's Temperament; success separately 50%.
@@ -35,3 +35,5 @@ The owner was asked to confirm these experimental values; they are not settled b
 - Unresolved incidents expire after five years as explicitly unresolved. Death or transfer out makes an incident inactive; temporary expedition/care commitments block opportunities.
 
 No motive, insult, universal hunger, kindness or moral label is inferred. Fixed-context probability comparisons must separate these social coefficients from existing DNA effects on production. Default-rule cohort: 100 seeds × 25 Winters; controlled public-Core fixtures can supply labelled real shortages/ties/helpers. Uneventful runs remain evidence.
+
+Implementation and exact units: [pilot contract](PERSONALITY-LIFE-EVENTS-PILOT.md).
