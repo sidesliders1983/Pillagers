@@ -1,0 +1,23 @@
+{
+  "candidates": {
+    "B": {
+      "samples": 433,
+      "from": "2026-10-11T20:02:54.4022535Z",
+      "through": "2026-10-11T20:24:42.4080544Z",
+      "peakWorkingSetBytes": 2904739840,
+      "peakCommittedBytes": 3660345344,
+      "minimumFreeRAMBytes": 2583478272,
+      "maximumWholeDeviceGPUUseMiB": 3027
+    },
+    "C": {
+      "samples": 442,
+      "from": "2026-10-11T20:42:03.4112973Z",
+      "through": "2026-10-11T21:02:30.7814506Z",
+      "peakWorkingSetBytes": 3234660352,
+      "peakCommittedBytes": 3793350656,
+      "minimumFreeRAMBytes": 2463772672,
+      "maximumWholeDeviceGPUUseMiB": 2857
+    }
+  },
+  "note": "Nominal two-second sampling plus query cost. Process high-water counters differ from sampled whole-device GPU use. No exact per-process VRAM claim."
+}

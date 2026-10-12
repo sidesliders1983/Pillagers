@@ -1,0 +1,110 @@
+{
+  "candidate": "C",
+  "manifest": {
+    "version": 1,
+    "runtime": {
+      "repository": "ggml-org/llama.cpp",
+      "tag": "b11429",
+      "commit": "d81235049384534c167caea52b85a694f6103d14",
+      "cpuArchiveSHA256": "1283323272b04cd07905816a597a0da810918102de958f4ff6f7bbaa70ed2efe",
+      "cudaArchiveSHA256": "dd6df685c1024e6aa55ca55ad35038692d5e284d4dc895e7a646c3245d3d14ff",
+      "cudaRuntimeArchiveSHA256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6",
+      "cudaVersion": "12.4",
+      "contextTokens": 4096,
+      "parallelSlots": 1,
+      "threads": 4,
+      "batchThreads": 4,
+      "gpuLayers": 99,
+      "batchSize": 256,
+      "microBatchSize": 128,
+      "flashAttention": "on",
+      "contextShift": false,
+      "host": "127.0.0.1",
+      "cacheRAMMiB": 0,
+      "contextCheckpoints": 0,
+      "promptCache": false,
+      "promptCacheInterpretation": "promptCache=false records the requested CLI --no-cache-prompt flag. HTTP requests omit cache_prompt; the server still reuses the active-slot KV prefix, evidenced by cached_tokens/timings.cache_n. These are warm sequential timings, not cold prompt benchmarks."
+    },
+    "deadlineMs": 120000,
+    "retries": 0,
+    "promptVersion": "local-lore.selection.v1",
+    "styleVersion": 2,
+    "decoding": {
+      "temperature": 0,
+      "top_p": 1,
+      "top_k": 1,
+      "min_p": 0,
+      "seed": 105,
+      "max_tokens": 256,
+      "enable_thinking": false
+    },
+    "candidates": {
+      "B": {
+        "model": "Qwen/Qwen3-4B-Instruct-2507",
+        "officialRevisionInspected": "cdbee75f17c01a7cc42f958dc650907174af0554",
+        "officialTokenizerSHA256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "officialLicense": "Apache-2.0",
+        "quantizationRepository": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+        "quantizationRevision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+        "file": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        "bytes": 2497280736,
+        "sha256": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+        "quantization": "Q4_K_M",
+        "tokenizerRun": "Embedded GGUF tokenizer, pinned by whole-file SHA256",
+        "licenseNote": "Community card has no separate license field; upstream weight license is Apache-2.0. Preserve upstream license/attribution for redistribution. No redistribution in this investigation."
+      },
+      "C": {
+        "model": "Qwen/Qwen3.5-4B",
+        "officialRevisionInspected": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+        "officialTokenizerSHA256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "officialLicense": "Apache-2.0",
+        "quantizationRepository": "unsloth/Qwen3.5-4B-GGUF",
+        "quantizationRevision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+        "file": "Qwen3.5-4B-Q4_K_M.gguf",
+        "bytes": 2740937888,
+        "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+        "quantization": "Q4_K_M",
+        "tokenizerRun": "Embedded GGUF tokenizer, pinned by whole-file SHA256",
+        "licenseNote": "Community card and official card declare Apache-2.0. No model redistribution in this investigation."
+      }
+    },
+    "candidateNote": "Original model revisions were inspected; exact community conversion lineage is not asserted. Run only the exact pinned GGUF artifacts. SmolLM3-3B remains unmeasured, not an automatic substitute."
+  },
+  "corpusHash": "53f7532bd6a7d4c2cd71d8c24f382985ea4552ca69a83aca9c5d670296e5026e",
+  "promptVersion": "local-lore.selection.v1",
+  "decoding": {
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 1,
+    "min_p": 0,
+    "seed": 105,
+    "max_tokens": 256
+  },
+  "generatedAt": "2026-10-11T21:01:39.770Z",
+  "totalMilliseconds": 94650.8947,
+  "chapters": 9,
+  "accepted": 8,
+  "fallbacks": 1,
+  "stale": 0,
+  "reasons": {
+    "validated-catalogue": 8,
+    "http-400": 1
+  },
+  "latencyMs": {
+    "samples": 9,
+    "minimum": 104.44190000000526,
+    "median": 8304.307199999996,
+    "p95": 17259.32650000001,
+    "maximum": 17259.32650000001
+  },
+  "baseline": {
+    "exactRepeatedBodies": 0,
+    "normalizedRepeatedBodies": 0
+  },
+  "comparison": {
+    "exactRepeatedBodies": 0,
+    "normalizedRepeatedBodies": 0
+  },
+  "readerPreference": "not-measured",
+  "factuality": "Accepted output is drawn from the approved catalogue; no semantic truth claim for unrestricted prose."
+}

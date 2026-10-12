@@ -66,7 +66,10 @@ up to 600px, the same Year length control moves into Menu; it is not duplicated 
 Long counters wrap inside fixed KPI columns instead of overlapping neighbouring controls.
 The canvas fills the remaining viewport. Safe-area insets are respected.
 
-**Menu** contains Year length on narrow phones, +1 Year, Quality, screen-awake preference,
+**+1 Year** sits in the top timing controls, after Year length and before Menu. At widths
+up to 360px, timing gets its own row so the fixed calendar slots do not overlap the buttons.
+
+**Menu** contains Year length on narrow phones, Quality, screen-awake preference,
 view navigation and the existing Campaign save/load/export/import/new/restart controls.
 It scrolls within the viewport. The main header shows no raw tick fraction; exact canonical
 Winter/tick/scale remain in Developer diagnostics and the public canvas `data-time` description.

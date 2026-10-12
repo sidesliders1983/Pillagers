@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clan Book · Composed chapter review</title>
+    <style>
+        body { margin: 0; background: #eeeade; color: #25342d; font: 17px/1.6 system-ui; }
+        main { max-width: 860px; margin: auto; padding: 24px; }
+        nav { position: sticky; top: 0; background: #eeeade; padding: 8px 0; }
+        a { color: #304e6a; }
+        label { display: grid; gap: 8px; }
+        select { max-width: 100%; padding: 12px; font: inherit; }
+        article { margin-top: 24px; padding: 20px; background: #fffaf0; border-left: 4px solid #987541; }
+        pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 13px/1.6 monospace; }
+        summary { min-height: 44px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<main>
+    <nav><a href="/fjord-play">Return to Fjord</a> · <a href="wording-review.html">Approved direction</a> · <a href="report.md">Validation report</a></nav>
+    <h1>Clan Book · Actual composed chapters</h1>
+    <p>These passages came from recorded Simulation Core campaigns. They are not the fictional scenes in the owner's reference document. Published wording is shown unchanged, with its source package below.</p>
+    <label>Campaign and checkpoint<select id="sample"></select></label>
+    <article id="story"></article>
+    <details><summary>Paragraph sources and factual package</summary><pre id="sources"></pre></details>
+    <p>Older callbacks describe their own dates. They do not enter this checkpoint's resource totals. Gaps in imported history remain explicit. Existing saved chapters retain their previously published wording.</p>
+</main>
+<script type="module">
+    const response = await fetch('runtime-samples.json');
+    if (!response.ok) throw new Error('Could not load the composed chapter samples.');
+    const samples = await response.json();
+    const field = document.querySelector('#sample');
+    for (const [index, sample] of samples.entries()) {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = sample.scenario + ' · ' + sample.title;
+        field.append(option);
+    }
+    function paint() {
+        const sample = samples[Number(field.value)];
+        const article = document.querySelector('#story');
+        article.replaceChildren();
+        const title = document.createElement('h2');
+        title.textContent = sample.title;
+        article.append(title);
+        for (const text of sample.text.split('\n\n')) {
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            article.append(paragraph);
+        }
+        document.querySelector('#sources').textContent = JSON.stringify({
+            checkpoint: sample.checkpoint, templateId: sample.templateId,
+            templateVersion: sample.templateVersion, plan: sample.plan,
+            paragraphs: sample.paragraphs, facts: sample.facts
+        }, null, 2);
+    }
+    field.addEventListener('change', paint);
+    paint();
+</script>
+</body>
+</html>

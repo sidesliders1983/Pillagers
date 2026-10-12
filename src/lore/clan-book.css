@@ -1,0 +1,48 @@
+#clan-book-reader {
+    position: fixed;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+    z-index: 400;
+    box-sizing: border-box;
+    width: min(560px, calc(100vw - 24px));
+    max-height: calc(100dvh - var(--book-top, 180px) - 24px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 18px;
+    background: #192c26;
+    color: #f0ead7;
+    border: 1px solid #bdab75;
+    border-radius: 8px;
+    box-shadow: 0 6px 24px #0006;
+    font: 15px/1.5 system-ui, sans-serif;
+}
+#clan-book-reader[hidden] { display: none; }
+#clan-book-reader header {
+    position: sticky;
+    top: -18px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: -18px -18px 12px;
+    padding: 12px 18px;
+    background: #192c26;
+    border-bottom: 1px solid #506154;
+}
+#clan-book-reader h2 { margin: 0 0 8px; }
+#clan-book-reader button, #clan-book-reader select {
+    min-height: 44px;
+    padding: 8px;
+    background: #31463b;
+    color: inherit;
+    border: 1px solid #95855e;
+    border-radius: 4px;
+}
+#clan-book-reader label { display: flex; gap: 10px; align-items: center; }
+#clan-book-reader select { min-width: 0; flex: 1; }
+#clan-book-reader summary { min-height: 44px; cursor: pointer; }
+#clan-book-reader table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+#clan-book-reader td, #clan-book-reader th { text-align: left; padding: 5px; border-bottom: 1px solid #506154; }
+#clan-book-reader .book-table-scroll { overflow-x: auto; }
+#clan-book-reader :focus-visible { outline: 2px solid #f7d57f; outline-offset: 2px; }

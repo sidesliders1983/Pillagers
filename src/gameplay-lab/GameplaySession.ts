@@ -1,14 +1,17 @@
+import { ClanBook } from '../lore/ClanBook';
 import { createCampaign, applyCommand, serializeState, reconstructState } from '../simulation/SimulationCore';
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
+    book: ClanBook;
     private fractionalTicks = 0;
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32) {
+    constructor(seed = 32, narrativeSeed?: number) {
         this.state = createCampaign(seed);
+        this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     snapshot(): SimulationState {
         return structuredClone(this.state);
@@ -22,9 +25,28 @@ export class GameplaySession {
         this.minutesPerWinter = minutes;
     }
     command(command: SimulationCommand): void {
-        const next = applyCommand(this.state, command);
+        let next: SimulationState;
+        let book = this.book;
+        const ticks = command.type === 'AdvanceWinter' ? this.state.ticksPerWinter :
+            command.type === 'AdvanceTicks' ? command.ticks : 0;
+        const untilChapter = (book.nextWinter - this.state.time.winter) * this.state.ticksPerWinter - this.state.time.tick;
+        if (Number.isSafeInteger(ticks) && Number.isSafeInteger(this.state.time.tick + ticks) &&
+            Number.isSafeInteger(this.state.time.winter + Math.floor((this.state.time.tick + ticks) / this.state.ticksPerWinter)) &&
+            ticks >= untilChapter && untilChapter > 0) {
+            next = this.state;
+            book = this.book.fork(this.state);
+            let remaining = ticks;
+            while (remaining > 0) {
+                const until = (book.nextWinter - next.time.winter) * next.ticksPerWinter - next.time.tick;
+                const step = Math.min(remaining, until);
+                next = applyCommand(next, { type: 'AdvanceTicks', ticks: step });
+                remaining -= step;
+                if (step === until) book.closeCheckpoint(next);
+            }
+        } else next = applyCommand(this.state, command);
         this.trend = { food: next.stocks.food - this.state.stocks.food, materials: next.stocks.materials - this.state.stocks.materials };
         this.state = next;
+        this.book = book;
     }
     pacing() {
         return { running: this.running, minutesPerWinter: this.minutesPerWinter,
@@ -45,7 +67,7 @@ export class GameplaySession {
         const state = reconstructState(serialized);
         if (!state.mechanics)
             throw new Error('This save has no gameplay mechanics');
-        this.replace(state);
+        this.replace(state, false);
     }
     newCampaign(seed: number, weatherEnabled = true): void {
         this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }));
@@ -56,8 +78,9 @@ export class GameplaySession {
             seed = (seed + 1) >>> 0;
         this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config));
     }
-    private replace(state: SimulationState): void {
+    private replace(state: SimulationState, fresh = true): void {
         this.state = state;
+        this.book = new ClanBook(state, fresh);
         this.running = false;
         this.fractionalTicks = 0;
         this.trend = { food: 0, materials: 0 };

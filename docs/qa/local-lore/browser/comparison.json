@@ -1,0 +1,9 @@
+{
+  "generatedAt": "2026-10-11T21:08:02.944Z",
+  "checks": [
+    "Both complete sixty-chapter candidates, including the rejected B selection, render without overflow at 1440px",
+    "Both complete sixty-chapter candidates, including the rejected B selection, render without overflow at 390px"
+  ],
+  "errors": [],
+  "passed": true
+}

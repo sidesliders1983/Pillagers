@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "width": 1440,
+      "records": 69,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "records": 69,
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

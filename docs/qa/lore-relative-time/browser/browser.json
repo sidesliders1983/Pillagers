@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-10-12T05:25:02.316Z",
+  "passed": true,
+  "errors": [],
+  "checks": [
+    "Expanded appendix remains dismissible on a 1024x768 touch viewport",
+    "Five-Winter notification, exact opening/chapter text across 2D-to-Fjord handoff",
+    "Reading leaves the running clock active",
+    "Refresh does not duplicate the notification",
+    "Expanded appendix remains dismissible on a 390x844 touch viewport",
+    "Controlled Core fixture: stage/count grouping; exact 30 Food receipt stays in the factual overview"
+  ],
+  "limitation": "Edge touch emulation; no physical iPad Safari run in this pass."
+}

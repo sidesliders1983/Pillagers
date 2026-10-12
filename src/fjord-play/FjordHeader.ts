@@ -15,13 +15,14 @@ export function fjordHeaderHTML(): string {
                 <select id="fjord-cycle"><option value="1">1 min per year</option>
                     <option value="3">3 min per year</option><option value="5">5 min per year</option></select>
             </label></span>
+            <button id="fjord-next" type="button">+1 Year</button>
             <details id="fjord-menu"><summary aria-label="Game menu">Menu</summary>
                 <div class="fjord-settings">
                     <h1>Pillagers · Fjord settlement</h1>
                     <nav aria-label="Game views"><a href="/play" data-settlement-view="board">2D Settlement</a> ·
                         <a href="/gameplay-lab">Gameplay Lab</a> · <a href="/">Fjord prototype</a></nav>
                     <span id="fjord-menu-pacing-slot"></span>
-                    <button id="fjord-next" type="button">+1 Year</button>
+                    <button id="clan-book-open" type="button">Clan Book</button>
                     <label>Quality<select id="fjord-quality"><option value="low">Low</option>
                         <option value="standard">Standard</option></select></label>
                     <span id="screen-awake-slot"></span>

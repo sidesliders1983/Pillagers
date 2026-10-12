@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clan Book · Narrative wording review</title>
+    <style>
+        body { margin: 0; background: #eeeade; color: #25342d; font: 17px/1.6 system-ui; }
+        main { max-width: 860px; margin: auto; padding: 28px; }
+        h1 { font-size: 28px; }
+        h2 { margin-top: 36px; font-size: 22px; }
+        blockquote { margin: 16px 0; padding: 12px 20px; background: #fffaf0; border-left: 4px solid #987541; }
+        pre { white-space: pre-wrap; font: inherit; }
+        p { margin: 12px 0; }
+        nav { position: sticky; top: 0; background: #eeeade; padding: 8px 0; }
+        a { color: #304e6a; }
+    </style>
+</head>
+<body>
+<main>
+    <nav><a href="/fjord-play">Return to Fjord</a> · <a href="/docs/lore/NARRATIVE-CORPUS-V1-REVIEW.md">Source review document</a></nav>
+    <h1>Clan Book · Approved narrative direction</h1>
+    <p>Twelve synthetic examples. The owner approved this direction and its conditional formulations on 11 October 2026.</p>
+    <p><a href="runtime-review.html">Review actual composed chapters and their sources</a></p>
+    <div id="review"></div>
+</main>
+<script type="module">
+    const response = await fetch('/docs/lore/NARRATIVE-CORPUS-V1-REVIEW.md');
+    const text = await response.text();
+    const root = document.querySelector('#review');
+    for (const block of text.split(/\r?\n\r?\n/)) {
+        const tag = block.startsWith('## ') ? 'h2' : block.startsWith('> ') ? 'blockquote' : 'pre';
+        const element = document.createElement(tag);
+        element.textContent = block.replace(/^## /, '').replace(/^> ?/gm, '');
+        root.append(element);
+    }
+</script>
+</body>
+</html>

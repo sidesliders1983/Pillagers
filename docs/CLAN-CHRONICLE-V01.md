@@ -27,3 +27,11 @@ Chronicle text is reconstructed from the saved ledger. It is not persisted as a 
 The agreed TDD seams are the public event-ledger projection and the browser UI. Tests cover source snapshots, exact chronology/aggregation/provenance, historical names after persona mutations, real core commands and birth facts, save roundtrips, quiet Winters, unknown/incomplete events and neutral debt/collapse/care templates. Browser QA covers sidebar collapse/expand, view switching, source disclosure, immediate salvage text, local-save Chronicle identity, existing gameplay controls and the narrow layout.
 
 Full checks and evidence are recorded in docs/qa/clan-chronicle-v01-report.md. Future #14 work can add approved template variants or narration while retaining this factual deterministic baseline.
+
+## Clan Book extension
+
+The factual timeline now supports recorded resident/cattle deaths and cattle births.
+The persistent opening and five-Winter Clan Book are documented separately in
+[lore/CLAN-BOOK-V02A.md](lore/CLAN-BOOK-V02A.md). Raw Events remain available.
+
+Housing references now share resident-based display names with the settlement. New events freeze the designation when recorded; salvage/collapse capture it before removal. Events without a usable historical snapshot use neutral home/household terms. Canonical IDs remain in source events. See [the #112 source map](lore/HOUSING-NAMES-112-AUDIT.md). Existing published Clan Book text is retained.

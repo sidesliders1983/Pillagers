@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-11T20:24:43.7358235Z",
+  "reason": "Aborted concurrent Fjord startup at under 100 MB free disk; no stable frame sample obtained",
+  "workingSetBytes": 2846396416,
+  "privateBytes": 3630718976,
+  "freeRAMBytes": 2881585152,
+  "freeDiskBytes": 98197504,
+  "gpuMemoryMiB": "3027, 99",
+  "correction": "The profile script completed at 20:24:53 UTC after the server was stopped at 20:24:43 UTC. It preserved two paired raw frame windows. The first active request was accepted; the second request fell back after the runtime was stopped. Treat repeat 2 as interrupted, not a clean performance comparison. The original snapshot reason was written before inspecting the final output."
+}

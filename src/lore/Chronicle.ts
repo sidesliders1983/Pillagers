@@ -14,28 +14,91 @@ function person(e:SimulationEvent,id?:string):string|null {
     if((!id||id===e.personaId)&&str(d,'name'))return str(d,'name');
     return id?`resident ${id}`:null;
 }
+/** Names must match the recorded reference; never recover them from current occupants. */
+function housingReference(
+    details: Facts, kind: 'household' | 'building' | 'residence', id: unknown, fallback: string
+): string {
+    const snapshot = details.housingNames;
+    if (!snapshot || typeof snapshot !== 'object' || (snapshot as Facts).version !== 1)
+        return fallback;
+    const named = (snapshot as Facts)[kind];
+    if (!named || typeof named !== 'object') return fallback;
+    const reference = named as Facts;
+    return reference.id === id && str(reference, 'name') ? reference.name as string : fallback;
+}
 const occupationLabels:Record<string,string>={farmer:'farmer',herder:'herder',fisher:'fisher',hunter:'hunter',woodworker:'woodworker',smith:'smith',textileWorker:'textile worker',boatbuilder:'boatbuilder',trader:'trader',leatherAndJewelleryMaker:'leather and jewellery maker'};
 type Template=(e:SimulationEvent,d:Facts)=>string|null;
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={
+    PersonaDied:(e,d)=>{const name=person(e,e.personaId);return name?name+' died'+(str(d,'cause')?' ('+d.cause+')':'')+'.':null;},
+    CattleBorn:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' was born.':null,
+    CattleDied:(_e,d)=>str(d,'cattleId')?'Animal '+d.cattleId+' died.':null,
     FoundingPartyLanded:(_e,d)=>{const founders=ids(d,'founderIds');return founders?`The founding party of ${founders.length} residents arrived.`:null;},
     FoundingPartnershipPresent:(e,d)=>{const p=ids(d,'participants');return p?.length===2?`${person(e,p[0])} and ${person(e,p[1])} were already partners at arrival.`:null;},
     OccupationAssigned:(e,d)=>{const name=person(e,e.personaId),role=str(d,'occupation');return name&&(d.occupation===null||role&&occupationLabels[role])?d.occupation===null?`${name} no longer had an assigned occupation.`:`${name} became a ${occupationLabels[role!]}.`:null;},
     OccupationReleased:(e)=>{const name=person(e,e.personaId);return name?`Career decisions for ${name} returned to autonomy.`:null;},
     PartnershipFormed:(e,d)=>{const p=ids(d,'participants');return p&&p.length>=2?`${person(e,p[0])} and ${person(e,p[1])} became partners.`:null;},
     ChildBorn:(e,d)=>{const parents=ids(d,'parentIds'),name=person(e,e.personaId);return name&&parents?.length===2?`${name} was born to ${person(e,parents[0])} and ${person(e,parents[1])}.`:null;},
-    FoundingLongshipKept:(_e,d)=>str(d,'longshipId')?`Longship ${d.longshipId} was retained.`:null,
-    FoundingLongshipSalvaged:(_e,d)=>str(d,'longshipId')&&number(d,'materials')!==null?`Longship ${d.longshipId} was salvaged for ${d.materials} Materials.`:null,
+    FoundingLongshipKept:(_e,d)=>str(d,'longshipId')?'Our longship was retained.':null,
+    FoundingLongshipSalvaged:(_e,d)=>str(d,'longshipId')&&number(d,'materials')!==null?`Our longship was salvaged for ${d.materials} Materials.`:null,
     CattleSlaughtered:(_e,d)=>str(d,'cattleId')&&number(d,'food')!==null?`Animal ${d.cattleId} was slaughtered for ${d.food} Food.`:null,
-    CattleAssigned:(_e,d)=>str(d,'cattleId')&&(d.farmyardId===null||str(d,'farmyardId'))?d.farmyardId===null?`Animal ${d.cattleId} was unassigned from its Farmyard.`:`Animal ${d.cattleId} was assigned to Farmyard ${d.farmyardId}.`:null,
-    FarmyardFunctionChanged:(_e,d)=>str(d,'buildingId')&&typeof d.active==='boolean'?d.active?`Home ${d.buildingId} gained the Farmyard function.`:`Home ${d.buildingId} lost the Farmyard function.`:null,
-    HouseBuilt:(_e,d)=>str(d,'buildingId')&&number(d,'cost')!==null?`Permanent home ${d.buildingId} was completed${str(d,'householdId')?` for household ${d.householdId}`:''} for ${d.cost} Materials.`:null,
-    ResidenceAssigned:(_e,d)=>str(d,'householdId')&&str(d,'residenceId')?`Household ${d.householdId} moved to ${d.kind==='tent'?'tent ':''}${d.residenceId}.`:null,
-    BuildingSpecialized:(_e,d)=>{const role=str(d,'occupation');return str(d,'buildingId')&&(d.occupation===null||role&&occupationLabels[role])?d.occupation===null?`Home ${d.buildingId} no longer had a specialization.`:`Home ${d.buildingId} was specialized for ${occupationLabels[role!]} work.`:null;},
-    BuildingUpgraded:(_e,d)=>str(d,'buildingId')&&number(d,'level')!==null&&number(d,'cost')!==null?`Home ${d.buildingId} reached upgrade level ${d.level} for ${d.cost} Materials.`:null,
-    MaintenanceDebtIncreased:(_e,d)=>str(d,'buildingId')&&number(d,'debtWinters')!==null&&['unpaid','vacant'].includes(String(d.reason))?`Home ${d.buildingId} accumulated ${d.debtWinters} Winters of maintenance debt (${d.reason==='unpaid'?'unpaid upkeep':'vacant'}).`:null,
-    BuildingSalvaged:(_e,d)=>str(d,'buildingId')&&number(d,'salvage')!==null?`Home ${d.buildingId} was salvaged for ${d.salvage} Materials.`:null,
-    BuildingCollapsed:(_e,d)=>str(d,'buildingId')&&number(d,'salvage')!==null?`Home ${d.buildingId} collapsed; ${d.salvage} Materials were salvaged.`:null,
+    CattleAssigned: (_e, d) => {
+        if (!str(d, 'cattleId') || !(d.farmyardId === null || str(d, 'farmyardId'))) return null;
+        if (d.farmyardId === null) return `Animal ${d.cattleId} was unassigned from its Farmyard.`;
+        const home = housingReference(d, 'building', d.farmyardId, 'a Farmyard');
+        const destination = home === 'a Farmyard' ? home : 'the Farmyard at ' + home;
+        return `Animal ${d.cattleId} was assigned to ${destination}.`;
+    },
+    FarmyardFunctionChanged: (_e, d) => {
+        if (!str(d, 'buildingId') || typeof d.active !== 'boolean') return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A home');
+        return `${home} ${d.active ? 'gained' : 'lost'} the Farmyard function.`;
+    },
+    HouseBuilt: (_e, d) => {
+        if (!str(d, 'buildingId') || number(d, 'cost') === null) return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A permanent home');
+        const household = str(d, 'householdId') ?
+            ' for ' + housingReference(d, 'household', d.householdId, 'a household') : '';
+        return `${home} was completed${household} for ${d.cost} Materials.`;
+    },
+    ResidenceAssigned: (_e, d) => {
+        if (!str(d, 'householdId') || !str(d, 'residenceId')) return null;
+        const household = housingReference(d, 'household', d.householdId, 'A household');
+        const residence = housingReference(d, 'residence', d.residenceId,
+            d.kind === 'tent' ? 'a tent' : 'a home');
+        return `${household} moved to ${residence}.`;
+    },
+    BuildingSpecialized: (_e, d) => {
+        const role = str(d, 'occupation');
+        if (!str(d, 'buildingId') || !(d.occupation === null || role && occupationLabels[role]))
+            return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A home');
+        return d.occupation === null ? `${home} no longer had a specialization.` :
+            `${home} was specialized for ${occupationLabels[role!]} work.`;
+    },
+    BuildingUpgraded: (_e, d) => {
+        if (!str(d, 'buildingId') || number(d, 'level') === null || number(d, 'cost') === null)
+            return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A home');
+        return `${home} reached upgrade level ${d.level} for ${d.cost} Materials.`;
+    },
+    MaintenanceDebtIncreased: (_e, d) => {
+        if (!str(d, 'buildingId') || number(d, 'debtWinters') === null ||
+            !['unpaid', 'vacant'].includes(String(d.reason))) return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A home');
+        const reason = d.reason === 'unpaid' ? 'unpaid upkeep' : 'vacant';
+        return `${home} accumulated ${d.debtWinters} Winters of maintenance debt (${reason}).`;
+    },
+    BuildingSalvaged: (_e, d) => {
+        if (!str(d, 'buildingId') || number(d, 'salvage') === null) return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A home');
+        return `${home} was salvaged for ${d.salvage} Materials.`;
+    },
+    BuildingCollapsed: (_e, d) => {
+        if (!str(d, 'buildingId') || number(d, 'salvage') === null) return null;
+        const home = housingReference(d, 'building', d.buildingId, 'A home');
+        return `${home} collapsed; ${d.salvage} Materials were salvaged.`;
+    },
     CaregiverAssigned:(e,d)=>{const mother=person(e,e.personaId);return mother&&(d.caregiverId===null||str(d,'caregiverId'))?d.caregiverId===null?`The mother was assigned to childcare for ${mother}.`:`${person(e,d.caregiverId as string)} was assigned as caregiver for ${mother}.`:null;},
     ExpeditionGroupCreated:(_e,d)=>str(d,'groupName')?`Expedition group ${d.groupName} was formed.`:null,
     ExpeditionDeparted:(_e,d)=>str(d,'groupName')&&str(d,'mission')&&str(d,'regionId')?`${d.groupName} departed for ${d.mission} towards ${d.regionId}, carrying ${d.foodCost} Food.`:null,
@@ -62,7 +125,11 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
                 if(event.type==='CattleFoodProduced'){const total=aggregate.reduce((n,e)=>n+Number(e.details!.units),0);if(Number.isSafeInteger(total))text=`The herd produced ${total} Food this Winter.`;}
                 else {const total=(resource:string)=>aggregate.filter(e=>e.details!.resource===resource).reduce((n,e)=>n+Number(e.details!.units),0);const food=total('food'),materials=total('materials');if(Number.isSafeInteger(food)&&Number.isSafeInteger(materials)){const parts=[];if(aggregate.some(e=>e.details!.resource==='food'))parts.push(`${food} Food`);if(aggregate.some(e=>e.details!.resource==='materials'))parts.push(`${materials} Materials`);text=`The settlement produced ${parts.join(' and ')} this Winter.`;}}
             }else {text=Object.hasOwn(templates,event.type)?templates[event.type](event,d):null;routine=['FoodConsumed','CattleFoodConsumed'].includes(event.type);}
-            if(text)entries.push({winter,text,sourceEventIds,templateId,templateVersion:1,routine});
+            if (text) {
+                const templateVersion = ['FoundingLongshipKept', 'FoundingLongshipSalvaged']
+                    .includes(event.type) ? 2 : 1;
+                entries.push({ winter, text, sourceEventIds, templateId, templateVersion, routine });
+            }
         }
         return {winter,entries};
     });

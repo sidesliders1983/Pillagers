@@ -73,9 +73,67 @@ test('supported debt, collapse and childcare facts have neutral templates; missi
     {id:'unknown',type:'Unsupported',details:{story:'invented drama'}},
   ].map(event=>({...event,time:{winter:800,tick:0}}));
   assert.deepEqual(projectChronicle(events)[0].entries.map(e=>e.text),[
-    'Home h accumulated 2 Winters of maintenance debt (vacant).',
-    'Home h collapsed; 5 Materials were salvaged.',
+    'A home accumulated 2 Winters of maintenance debt (vacant).',
+    'A home collapsed; 5 Materials were salvaged.',
     'Astrid was assigned as caregiver for Liv.',
     'The mother was assigned to childcare for Liv.',
   ]);
+});
+
+test('legacy housing events keep their provenance without presenting technical IDs as names', () => {
+    const { projectChronicle } = loadTypeScript(new URL('../src/lore/Chronicle.ts', import.meta.url));
+    const events = [
+        { id: 'built', type: 'HouseBuilt', details: { buildingId: 'house-1', householdId: 'household-1', cost: 10 } },
+        { id: 'moved', type: 'ResidenceAssigned', details: { householdId: 'household-1', residenceId: 'house-1', kind: 'house' } },
+    ].map(event => ({ ...event, time: { winter: 800, tick: 0 } }));
+    const recorded = structuredClone(events);
+    const entries = projectChronicle(events)[0].entries;
+    assert.deepEqual(entries.map(entry => entry.text), [
+        'A permanent home was completed for a household for 10 Materials.',
+        'A household moved to a home.',
+    ]);
+    assert.deepEqual(entries.map(entry => entry.sourceEventIds), [['built'], ['moved']]);
+    assert.deepEqual(events, recorded, 'Canonical IDs and recorded quantities remain unchanged');
+});
+
+test('legacy upgrades, specialization, salvage and collapse use neutral homes without losing facts', () => {
+    const { projectChronicle } = loadTypeScript(new URL('../src/lore/Chronicle.ts', import.meta.url));
+    const events = [
+        { id: 'specialized', type: 'BuildingSpecialized', details: { buildingId: 'house-1', occupation: 'farmer' } },
+        { id: 'upgraded', type: 'BuildingUpgraded', details: { buildingId: 'house-1', level: 1, cost: 5 } },
+        { id: 'debt', type: 'MaintenanceDebtIncreased', details: { buildingId: 'house-1', debtWinters: 2, reason: 'vacant' } },
+        { id: 'salvaged', type: 'BuildingSalvaged', details: { buildingId: 'house-1', salvage: 7 } },
+        { id: 'collapsed', type: 'BuildingCollapsed', details: { buildingId: 'house-2', salvage: 5 } },
+        { id: 'function', type: 'FarmyardFunctionChanged', details: { buildingId: 'house-3', active: true } },
+    ].map(event => ({ ...event, time: { winter: 800, tick: 0 } }));
+    const entries = projectChronicle(events)[0].entries;
+    assert.deepEqual(entries.map(entry => entry.text), [
+        'A home was specialized for farmer work.',
+        'A home reached upgrade level 1 for 5 Materials.',
+        'A home accumulated 2 Winters of maintenance debt (vacant).',
+        'A home was salvaged for 7 Materials.',
+        'A home collapsed; 5 Materials were salvaged.',
+        'A home gained the Farmyard function.',
+    ]);
+    assert.deepEqual(entries.map(entry => entry.sourceEventIds), events.map(event => [event.id]));
+});
+
+
+test('longship decisions use an unnamed vessel while preserving recorded salvage and provenance', () => {
+    const { projectChronicle } = loadTypeScript(new URL('../src/lore/Chronicle.ts', import.meta.url));
+    let state = core.createCampaign(32);
+    state = core.applyCommand(state, { type: 'KeepLongship', longshipId: 'founding-longship' });
+    state = core.applyCommand(state, { type: 'SalvageLongship', longshipId: 'founding-longship' });
+    const recorded = core.serializeState(state);
+    const entries = projectChronicle(state.events).flatMap(group => group.entries)
+        .filter(entry => entry.templateId.startsWith('FoundingLongship'));
+    assert.deepEqual(entries.map(entry => entry.text), [
+        'Our longship was retained.',
+        'Our longship was salvaged for 20 Materials.',
+    ]);
+    assert.deepEqual(entries.map(entry => entry.sourceEventIds), state.events
+        .filter(event => event.type.startsWith('FoundingLongship')).map(event => [event.id]));
+    assert.ok(entries.every(entry => entry.templateVersion === 2));
+    assert.equal(core.serializeState(state), recorded);
+    assert.deepEqual(projectChronicle(core.reconstructState(recorded).events), projectChronicle(state.events));
 });

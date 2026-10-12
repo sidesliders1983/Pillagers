@@ -1,3 +1,4 @@
+import { housingName } from '../simulation/HousingNames';
 import {personaAway,personaAge,inspectCattle,inspectWeather,inspectWeatherExposure,landingSummary} from '../simulation/SimulationCore';
 import type {SimulationState} from '../simulation/SimulationCore';
 export type EntityKind='persona'|'household'|'building'|'cattle'|'longship';
@@ -14,11 +15,11 @@ export function projectSettlement(state:SimulationState){
   const home=homes.find(h=>h.residenceId&&state.residences[h.residenceId]?.buildingId===b.id);
   const slot=home?slots.get(home.id)!:{x:32+(i%4)*8,z:Math.floor(i/4)*8};buildingSlots.set(b.id,slot);
   const level=state.mechanics?.buildings[b.id]?.upgradeLevel??0;
-  add('building',b.id,b.id,`house-${Math.min(level,3)}`,slot.x,slot.z,farmyards.some(f=>f.id===b.id));
+  add('building',b.id,housingName(state,'building',b.id),`house-${Math.min(level,3)}`,slot.x,slot.z,farmyards.some(f=>f.id===b.id));
  }
  for(const home of homes){
   const slot=slots.get(home.id)!,residence=home.residenceId?state.residences[home.residenceId]:null;
-  if(home.memberIds.length&&residence?.kind!=='house')add('household',home.id,`Household ${home.id}`,'tent',slot.x,slot.z);
+  if(home.memberIds.length&&residence?.kind!=='house')add('household',home.id,housingName(state,'household',home.id),'tent',slot.x,slot.z);
   home.memberIds.forEach((id,i)=>{const p=state.personas[id];if(p.deathWinter!==null||personaAway(state,id))return;const age=personaAge(state,id);add('persona',id,p.name,age<16?'child':p.dna.sex==='female'?'female':'male',slot.x-3+(i%4)*3,slot.z+5+Math.floor(i/4)*3);});
  }
  const counts=new Map<string,number>();
