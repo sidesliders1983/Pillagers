@@ -48,8 +48,8 @@ export type BookData = {
     id: string;
     narrativeSeed: number;
     memory?: NarrativeMemory;
-    generatorVersion: 1 | 2;
-    styleVersion: 1 | 2;
+    generatorVersion: 1 | 2 | 3;
+    styleVersion: 1 | 2 | 3;
     originWinter: number;
     chapters: BookChapter[];
     cursor: { eventEnd: number; stocks: { food: number; materials: number }; time: { winter: number; tick: number } };
@@ -165,14 +165,14 @@ export class ClanBook {
                 .reverse().flatMap(group => group.entries).map(entry => entry.text.replace(/ for \d+ (Food|Materials)/g, '')).join(' ');
         this.data = {
             version: 1, id: Array.from(crypto.getRandomValues(new Uint32Array(4)), n => n.toString(16).padStart(8, '0')).join('-'), narrativeSeed,
-            generatorVersion: 2, styleVersion: 2,
+            generatorVersion: 3, styleVersion: 3,
             originWinter,
             cursor: { eventEnd: state.events.length, stocks: { ...state.stocks }, time: { ...state.time } },
             nextWinter: originWinter + (Math.floor((state.time.winter - originWinter) / 5) + 1) * 5,
             chapters: [{ index: 0, milestoneIndex: 0, title: 'The founding', text, facts,
                 sourceEventIds: state.events.filter(e => e.type.startsWith('Founding')).map(e => e.id),
-                notified: !fresh, read: false, templateVersion: fresh ? 2 : 1,
-                templateId: fresh ? 'clan-book.opening.v2' : 'clan-book.partial-opening.v1',
+                notified: !fresh, read: false, templateVersion: fresh ? 3 : 1,
+                templateId: fresh ? 'clan-book.opening.v3' : 'clan-book.partial-opening.v1',
                 ...(paragraphs ? { paragraphs } : {}),
                 checkpoint: { version: 1, time: { ...state.time }, eventEnd: state.events.length,
                     identity: historyIdentity(JSON.stringify(state)) } }]
@@ -188,8 +188,8 @@ export class ClanBook {
     closeCheckpoint(state: SimulationState): void {
         if (state.time.winter !== this.data.nextWinter || state.time.tick !== 0)
             throw new Error('Clan Book requires a closed five-Winter checkpoint.');
-        this.data.generatorVersion = 2;
-        this.data.styleVersion = 2;
+        this.data.generatorVersion = 3;
+        this.data.styleVersion = 3;
         const cursor = this.data.cursor;
         const events = state.events.slice(cursor.eventEnd);
         const ledger = bookLedger(events, cursor.stocks, state.stocks);
@@ -198,7 +198,7 @@ export class ClanBook {
             index: this.data.chapters.length,
             milestoneIndex: (state.time.winter - this.data.originWinter) / 5,
             title: 'Records ending Winter ' + state.time.winter,
-            text: '', templateVersion: 2, templateId: 'clan-book.checkpoint.v2', notified: false, read: false,
+            text: '', templateVersion: 3, templateId: 'clan-book.checkpoint.v3', notified: false, read: false,
             sourceEventIds: events.map(e => e.id),
             checkpoint: { version: 1, time: { ...state.time }, eventEnd: state.events.length,
                 identity: historyIdentity(JSON.stringify(state)) },
@@ -224,8 +224,8 @@ export class ClanBook {
         }
         if (publishedBodies.has(chapter.text)) {
             chapter.composition.usedFallback = true;
-            const paragraph: NarrativeParagraph = { templateId: 'clan-book.bounded-fallback', templateVersion: 2,
-                text: 'Chapter ' + chapter.index + ' covered the observed interval from Winter ' +
+            const paragraph: NarrativeParagraph = { templateId: 'clan-book.bounded-fallback', templateVersion: 3,
+                text: 'Chapter ' + chapter.index + ' carries the story from Winter ' +
                     chapter.facts.period!.from.winter + ' to Winter ' + chapter.facts.period!.through.winter + '.',
                 sourceEventIds: [], factRefs: ['period', 'chapter.index'] };
             chapter.paragraphs!.push(paragraph);
@@ -257,7 +257,7 @@ export class ClanBook {
             const index = callback ? Number(callback[1]) : -1;
             return index >= 0 && index < chapterIndex && !!saved.chapters[index]?.facts.ledger?.food.complete;
         };
-        if (saved.version !== 1 || ![1, 2].includes(saved.generatorVersion) || ![1, 2].includes(saved.styleVersion) || saved.canonicalIdentity !== historyIdentity(JSON.stringify(state)) ||
+        if (saved.version !== 1 || ![1, 2, 3].includes(saved.generatorVersion) || ![1, 2, 3].includes(saved.styleVersion) || saved.canonicalIdentity !== historyIdentity(JSON.stringify(state)) ||
             typeof saved.id !== 'string' || !Number.isSafeInteger(saved.narrativeSeed) || saved.narrativeSeed < 0 || saved.narrativeSeed > 0xffffffff ||
             !Number.isSafeInteger(saved.originWinter) || saved.originWinter > state.time.winter || !Number.isSafeInteger(saved.nextWinter) ||
             saved.nextWinter <= state.time.winter || !saved.cursor ||
@@ -281,7 +281,7 @@ export class ClanBook {
                 typeof c.notified !== 'boolean' || typeof c.read !== 'boolean' ||
                 c.paragraphs !== undefined && (!Array.isArray(c.paragraphs) || c.paragraphs.some(paragraph =>
                     !paragraph || typeof paragraph.text !== 'string' || typeof paragraph.templateId !== 'string' ||
-                    paragraph.templateVersion !== 2 || !Array.isArray(paragraph.factRefs) ||
+                    ![2, 3].includes(paragraph.templateVersion) || !Array.isArray(paragraph.factRefs) ||
                     !paragraph.factRefs.every(reference => validReference(reference, i)) ||
                     !Array.isArray(paragraph.sourceEventIds) || paragraph.sourceEventIds.some(id =>
                         (eventPositions.get(id) ?? Infinity) >= c.checkpoint.eventEnd))) ||

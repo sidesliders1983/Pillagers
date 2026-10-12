@@ -1,5 +1,7 @@
 # Clan Book v0.2B: controlled narrative continuity
 
+New narrative text now follows [relative-time style 3](PILLAGERS-NARRATIVE-STYLE-V3.md). The version-2 behavior below remains the recorded baseline for the original local-model study; published passages keep their recorded version.
+
 Implemented for #104, following the owner-approved [English direction and conditional corpus](NARRATIVE-CORPUS-V1-REVIEW.md) and [style v2](PILLAGERS-NARRATIVE-STYLE-V2.md). The complete attributed owner reference is kept under references/. Its fictional scenes are style examples, not campaign facts.
 
 ## Facts, plans and published paragraphs

@@ -58,13 +58,16 @@ export async function freezeLoreRequest(
     const validator = new ClanBook(state, false, saved.narrativeSeed);
     validator.restore(saved, state);
     const chapter = saved.chapters[chapterIndex];
-    if (!chapter?.paragraphs || chapter.templateVersion !== 2)
-        throw new Error('Local Lore requires a controlled version-2 chapter.');
+    if (!chapter?.paragraphs || ![2, 3].includes(chapter.templateVersion))
+        throw new Error('Local Lore requires a controlled version-2 or version-3 chapter.');
     const events = state.events.slice(0, chapter.checkpoint.eventEnd);
     const previous = saved.chapters.slice(0, chapterIndex);
+    const chapterVersion = chapter.templateVersion as 2 | 3;
     const variants = Array.from({ length: chapterIndex === 0 ? 18 : 4 }, (_, seed) =>
-        chapterIndex === 0 ? composeOpening(chapter.facts, chapter.checkpoint.time.winter, seed,
-            chapter.sourceEventIds) : composeChapter(events, chapter.plan!, chapter.facts, previous, seed));
+        chapterIndex === 0 ?
+            composeOpening(chapter.facts, chapter.checkpoint.time.winter, seed,
+                chapter.sourceEventIds, chapterVersion) :
+            composeChapter(events, chapter.plan!, chapter.facts, previous, seed, chapterVersion));
     const sourceIds = new Set(events.map(event => event.id));
     const slots: Slot[] = [];
     const catalogue: Option[] = [];
@@ -118,7 +121,8 @@ export class LocalLoreAdapter {
         const fallback = (reason: string, raw?: string): LoreResult =>
             ({ key: input.key, status: 'fallback', reason, text: input.baseline, milliseconds: performance.now() - start, ...(raw ? { raw } : {}) });
         const { key, ...body } = input;
-        if (await sha256(JSON.stringify(body)) !== key) return fallback('invalid-frozen-request');
+        if (await sha256(JSON.stringify(body)) !== key)
+            throw new Error('Invalid frozen request: no trusted fallback is available.');
         if (!this.options) return fallback('disabled');
         if (committedText) input.context.previousText = [...committedText];
         const contextKey = await sha256(JSON.stringify({ key, context: input.context,

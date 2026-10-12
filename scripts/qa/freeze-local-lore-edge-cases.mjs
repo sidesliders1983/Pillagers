@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { loadTypeScript } from '../load-typescript.mjs';
@@ -8,7 +8,13 @@ const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', im
 const { SharedSettlement } = loadTypeScript(new URL('../../src/play/SharedSettlement.ts', import.meta.url));
 const { freezeLoreRequest } = loadTypeScript(new URL('../../src/lore/LocalLoreAdapter.ts', import.meta.url));
 const { ClanBook } = loadTypeScript(new URL('../../src/lore/ClanBook.ts', import.meta.url));
-const output = 'docs/qa/local-lore/edge-cases';
+const output = process.env.LORE_OUTPUT ?? 'docs/qa/local-lore/edge-cases';
+try {
+    await access(output + '/corpus.json.gz');
+    throw new Error('Recorded corpus exists; choose a separate LORE_OUTPUT folder for the new version.');
+} catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+}
 await mkdir(output, { recursive: true });
 const corpus = [];
 const stableCattle = { cattleBirthChanceBps: 0, cattleMortalityYoungBps: 0,

@@ -21,7 +21,7 @@ const adapter = new LocalLoreAdapter({ endpoint: process.env.LORE_ENDPOINT ?? 'h
     timeoutMs: manifest.deadlineMs });
 const records = [];
 const file = output + '/candidate-' + label + '.jsonl';
-await writeFile(file, '');
+await writeFile(file, '', { flag: 'wx' });
 const started = performance.now();
 for (const campaign of JSON.parse(rawCorpus).corpus) {
     const queue = new LoreExperimentQueue(adapter, campaign.requests[0].lineage);

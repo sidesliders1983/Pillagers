@@ -1,3 +1,4 @@
+import { composeChapter as legacyChapter, composeOpening as legacyOpening } from './LegacyNarrativeComposerV2';
 import { livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
 import { projectChronicle } from './Chronicle';
 import type { SimulationEvent } from '../simulation/SimulationCore';
@@ -6,15 +7,84 @@ import type { BookChapter, OpeningFacts } from './ClanBook';
 
 export type NarrativeParagraph = {
     templateId: string;
-    templateVersion: 2;
+    templateVersion: 2 | 3;
     text: string;
     sourceEventIds: string[];
     factRefs: string[];
 };
+type DatedClause = { event: SimulationEvent; text: string };
+
+function elapsedWords(years: number): string {
+    const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+    return words[years] ?? String(years);
+}
+function lowerSubject(sentence: string): string {
+    return sentence.replace(/^(Our longship|The founding party|A permanent home|A home|A household|An animal|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\b/,
+        word => word[0].toLowerCase() + word.slice(1));
+}
+
+/** Each paragraph owns its anchor; independently selected variants cannot inherit a foreign date. */
+function datedPassage(clauses: DatedClause[], events: readonly SimulationEvent[]): { text: string; anchorIds: string[] } {
+    const positions = new Map(events.map((event, index) => [event.id, index]));
+    clauses.sort((a, b) => a.event.time.winter - b.event.time.winter ||
+        a.event.time.tick - b.event.time.tick || (positions.get(a.event.id) ?? 0) - (positions.get(b.event.id) ?? 0));
+    if (!clauses.length) return { text: '', anchorIds: [] };
+    const first = clauses[0].event;
+    const used = new Set(clauses.map(clause => clause.event.id));
+    const anchor = events.filter(event => !used.has(event.id) &&
+        ['FoundingPartyLanded', 'FoundingLongshipSalvaged'].includes(event.type) &&
+        (event.time.winter < first.time.winter || event.time.winter === first.time.winter && event.time.tick <= first.time.tick))
+        .sort((a, b) => b.time.winter - a.time.winter || b.time.tick - a.time.tick ||
+            (positions.get(b.id) ?? 0) - (positions.get(a.id) ?? 0))[0];
+    let previous: SimulationEvent | undefined;
+    const lines = clauses.map(({ event, text }) => {
+        const winters = event.time.tick === 0 && (previous?.time.tick ?? anchor?.time.tick ?? 0) === 0;
+        const unit = winters ? 'winter' : 'year';
+        let prefix: string;
+        if (previous) {
+            const gap = event.time.winter - previous.time.winter;
+            prefix = gap === 0 ? 'That same ' + unit : gap === 1 ? 'The following ' + unit :
+                elapsedWords(gap)[0].toUpperCase() + elapsedWords(gap).slice(1) + ' ' + unit + 's later';
+        } else if (anchor) {
+            const gap = event.time.winter - anchor.time.winter;
+            const action = anchor.type === 'FoundingLongshipSalvaged' ? 'the longship was salvaged' : 'the founding party arrived';
+            prefix = gap === 0 ? 'In the ' + unit + ' ' + action : gap === 1 ? 'In the ' + unit + ' after ' + action :
+                elapsedWords(gap)[0].toUpperCase() + elapsedWords(gap).slice(1) + ' ' + unit + 's after ' + action;
+        } else prefix = 'In Winter ' + event.time.winter;
+        previous = event;
+        return prefix + ', ' + lowerSubject(text);
+    });
+    return { text: lines.join(' '), anchorIds: anchor ? [anchor.id] : [] };
+}
+
+function narrativeLine(event: SimulationEvent, original: string): string {
+    const details = event.details ?? {};
+    const mission = ({ Recon: 'reconnaissance', Surveillance: 'surveillance', Pillage: 'pillage' } as Record<string, string>)[String(details.mission)];
+    if (event.type === 'ExpeditionDeparted' && mission && typeof details.groupName === 'string')
+        return details.groupName + ' departed on a ' + mission + ' expedition' +
+            (Number(details.foodCost) > 0 ? ', carrying Food for the journey.' : '.');
+    if (event.type === 'ExpeditionReturned' && mission && typeof details.success === 'boolean') {
+        const lines = ['The ' + mission + ' expedition ' + (details.success ? 'was completed.' : 'ended without success.')];
+        const recovered = ['food', 'materials'].flatMap(resource =>
+            Number.isSafeInteger(details[resource]) && Number(details[resource]) > 0 ?
+                [resource === 'food' ? 'Food' : 'Materials'] : []);
+        for (const [key, label] of [['cattleIds', 'cattle'], ['personaIds', 'people']])
+            if (Array.isArray(details[key]) && details[key].length) recovered.push(details[key].length + ' ' + label);
+        if (recovered.length) lines.push('It recovered ' + namesList(recovered) + '.');
+        if (Array.isArray(details.casualtyIds)) lines.push(details.casualtyIds.length ?
+            details.casualtyIds.length + ' casualties were recorded for that expedition.' : 'No casualties were recorded for that expedition.');
+        return lines.join(' ');
+    }
+    if (event.type === 'BuildingCollapsed') original = original.replace(/; \d+ Materials were salvaged/,
+        Number(details.salvage) > 0 ? '; some Materials were salvaged' : '; no Materials were salvaged');
+    return original.replace(/ for \d+ (Food|Materials)/g, '');
+}
+
 export function composeChapter(
     events: readonly SimulationEvent[], plan: NarrativePlan, facts: OpeningFacts,
-    previousChapters: readonly BookChapter[], narrativeSeed: number
+    previousChapters: readonly BookChapter[], narrativeSeed: number, version: 2 | 3 = 3
 ): NarrativeParagraph[] {
+    if (version === 2) return legacyChapter(events, plan, facts, previousChapters, narrativeSeed);
     const entries = projectChronicle(events).reverse().flatMap(group => group.entries);
     const byId = new Map(entries.flatMap(entry => entry.sourceEventIds.map(id => [id, entry] as const)));
     const eventsById = new Map(events.map(event => [event.id, event]));
@@ -28,151 +98,79 @@ export function composeChapter(
         }
         return base % 4;
     };
-    const date = (winter: number, sentence: string, variant: number): string => {
-        const lower = sentence.replace(/^(Our longship|The founding party|A permanent home|A home|A household|An animal|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\b/, word => word[0].toLowerCase() + word.slice(1));
-        const action = sentence.replace(/\.$/, '');
-        return ['In Winter ' + winter + ', ' + lower, action + ' in Winter ' + winter + '.',
-            'During Winter ' + winter + ', ' + lower, action + ' during Winter ' + winter + '.'][variant];
-    };
-    const narrativeLine = (event: SimulationEvent, text: string): string => {
-        const details = event.details ?? {};
-        const mission = ({ Recon: 'reconnaissance', Surveillance: 'surveillance', Pillage: 'pillage' } as Record<string, string>)[String(details.mission)];
-        if (event.type === 'ExpeditionDeparted' && mission && typeof details.groupName === 'string') {
-            const provisions = Number(details.foodCost) > 0 ? ', carrying Food for the journey' : '';
-            return details.groupName + ' departed on a ' + mission + ' expedition' + provisions + '.';
-        }
-        if (event.type === 'ExpeditionReturned' && mission && typeof details.success === 'boolean') {
-            const sentences = ['The ' + mission + ' expedition ' +
-                (details.success ? 'was completed.' : 'ended without success.')];
-            const recovered = ['food', 'materials'].flatMap(resource =>
-                Number.isSafeInteger(details[resource]) && Number(details[resource]) > 0 ? [
-                    (resource === 'food' ? 'Food' : 'Materials')] : []);
-            for (const [key, label] of [['cattleIds', 'cattle'], ['personaIds', 'people']]) {
-                if (Array.isArray(details[key])) recovered.push(details[key].length + ' ' + label);
-            }
-            if (recovered.length) sentences.push('It recovered ' + namesList(recovered) + '.');
-            if (Array.isArray(details.casualtyIds)) sentences.push(details.casualtyIds.length ?
-                details.casualtyIds.length + ' casualties were recorded for that expedition.' :
-                'No casualties were recorded for that expedition.');
-            return sentences.join(' ');
-        }
-        const animal = event.details?.cattleId;
-        if (event.type === 'BuildingCollapsed') text = text.replace(/; \d+ Materials were salvaged/,
-            Number(details.salvage) > 0 ? '; some Materials were salvaged' : '; no Materials were salvaged');
-        text = text.replace(/ for \d+ (Food|Materials)/g, '');
-        return typeof animal === 'string' ? text.replace('Animal ' + animal,
-            event.type === 'CattleBorn' ? 'A calf' : 'An animal') : text;
-    };
-    // Variant pairs change chronology as well as wording; all clauses retain their own event date.
-    const focus = [...plan.focus];
-    if (base % 2) focus.reverse();
+    const focus = base % 2 ? [...plan.focus].reverse() : [...plan.focus];
     for (const theme of focus) {
         const threads = plan.threads.filter(thread => thread.theme === theme);
         const sources = [...new Set(threads.flatMap(thread => [...thread.callbackEventIds, ...thread.sourceEventIds]))];
+        const selected = sources.flatMap(id => eventsById.has(id) ? [eventsById.get(id)!] : []);
         const variant = choose('clan-book.thread.' + theme);
+        let clauses: DatedClause[];
+        const links: string[] = [];
         if (theme === 'herd') {
-            const current = threads.flatMap(thread => thread.sourceEventIds)
-                .flatMap(id => eventsById.has(id) ? [eventsById.get(id)!] : []);
-            const lines = livestockGroups(current).map(group =>
-                date(group[0].time.winter, livestockAction(group, facts), variant));
-            const callbacks = [...new Set(threads.flatMap(thread => thread.callbackEventIds))]
-                .flatMap(id => eventsById.has(id) ? [eventsById.get(id)!] : []);
-            if (callbacks.length) {
-                for (const group of livestockGroups(callbacks))
-                    lines.push(date(group[0].time.winter, livestockAction(group, facts), variant));
-                lines.push('A recorded calf was assigned to the same Farmyard as its mother.');
+            clauses = livestockGroups(selected).map(group => ({ event: group[0], text: livestockAction(group, facts) }));
+            if (threads.some(thread => thread.callbackEventIds.length))
+                links.push('A calf was assigned to the same Farmyard as its mother.');
+        } else {
+            clauses = selected.filter(event => byId.has(event.id) && event.type !== 'FoundingPartyLanded')
+                .map(event => ({ event, text: narrativeLine(event, byId.get(event.id)!.text) }));
+            for (const thread of threads) {
+                const current = eventsById.get(thread.sourceEventIds[0]);
+                const previous = eventsById.get(thread.callbackEventIds[0]);
+                if (!current || !previous) continue;
+                const elapsed = current.time.winter - previous.time.winter;
+                if (current.type === 'PersonaDied' && previous.type === 'FoundingPartyLanded')
+                    links.push((byId.get(current.id)?.text.split(' died')[0] ?? 'The resident') +
+                        ' had been among the founding party, ' + elapsed + ' winters earlier.');
+                if (previous.type === 'HouseBuilt')
+                    links.push('The same home appeared again, ' + elapsed + ' winters after its construction.');
+                if (current.personaId && current.personaId === previous.personaId &&
+                    typeof current.details?.name === 'string' && typeof previous.details?.name === 'string' &&
+                    current.details.name !== previous.details.name)
+                    links.push('The same resident had been recorded as ' + previous.details.name + '.');
             }
-            paragraphs.push({ templateId: 'clan-book.thread.herd.' + variant, templateVersion: 2,
-                text: lines.join(' '), sourceEventIds: sources, factRefs: ['livestock'] });
-            continue;
         }
-        const recalled = new Set<string>();
-        const lines = threads.flatMap(thread => {
-            const current = eventsById.get(thread.sourceEventIds[0]);
-            const previous = eventsById.get(thread.callbackEventIds[0]);
-            const currentEntry = byId.get(thread.sourceEventIds[0]);
-            const previousEntry = byId.get(thread.callbackEventIds[0]);
-            if (!current || !currentEntry) return [];
-            const action = date(current.time.winter, narrativeLine(current, currentEntry.text), variant);
-            if (!previous || !previousEntry) return [action];
-            const elapsed = current.time.winter - previous.time.winter;
-            const samePerson = !!current.personaId && current.personaId === previous.personaId;
-            let link = '';
-            if (current.type === 'PersonaDied' && previous.type === 'FoundingPartyLanded')
-                return [action + ' The same resident had been among the founding party in Winter ' +
-                    previous.time.winter + ', ' + elapsed + ' winters earlier.'];
-            if (samePerson && current.type === 'OccupationAssigned' &&
-                typeof current.details?.occupation === 'string' && previous.type === 'ChildBorn')
-                link = elapsed + ' winters lay between the birth and the new occupation.';
-            if (current.type === 'CattleBorn' && previous.type === 'CattleAssigned')
-                link = 'The calf was assigned to the same Farmyard as its mother.';
-            if (previous.type === 'HouseBuilt')
-                link = 'The same home appeared again, ' + elapsed + ' winters after its construction.';
-            if (samePerson && typeof current.details?.name === 'string' &&
-                typeof previous.details?.name === 'string' && current.details.name !== previous.details.name)
-                link += (link ? ' ' : '') + 'The same resident had been recorded as ' + previous.details.name +
-                    ' in Winter ' + previous.time.winter + '.';
-            // A callback shared by several current events is told once, but remains on every thread.
-            const callback = recalled.has(previous.id) ? '' : date(previous.time.winter, current.type === 'CattleBorn' ?
-                narrativeLine(previous, previousEntry.text).replace('An animal', 'The calf’s mother') :
-                narrativeLine(previous, previousEntry.text), variant);
-            recalled.add(previous.id);
-            const clauses = variant < 2 ? [action, callback, link] : [callback, action, link];
-            return [clauses.filter(Boolean).join(' ')];
-        });
-        if (lines.length) paragraphs.push({ templateId: 'clan-book.thread.' + theme + '.' + variant,
-            templateVersion: 2, text: lines.join(' '), sourceEventIds: sources, factRefs: [] });
+        const passage = datedPassage(clauses, events);
+        if (passage.text) paragraphs.push({ templateId: 'clan-book.thread.' + theme + '.' + variant,
+            templateVersion: 3, text: [passage.text, ...new Set(links)].join(' '),
+            sourceEventIds: [...new Set([...sources, ...passage.anchorIds])], factRefs: theme === 'herd' ? ['livestock'] : [] });
     }
     if (!plan.focus.length && facts.complete && facts.period && !facts.demographics?.length) {
-        const from = facts.period.from.winter, through = facts.period.through.winter;
+        const years = facts.period.through.winter - facts.period.from.winter;
         const variant = choose('clan-book.quiet');
-        const lines = [
-            'No births or deaths were recorded between Winter ' + from + ' and the completed boundary at Winter ' + through + '.',
-            'Between Winter ' + from + ' and Winter ' + through + ', no births or deaths were recorded.',
-            'The interval from Winter ' + from + ' to Winter ' + through + ' contained no recorded births or deaths.',
-            'No birth or death appeared in the observed interval ending at Winter ' + through + '.',
-        ];
-        paragraphs.push({ templateId: 'clan-book.quiet.' + variant, templateVersion: 2,
+        const lines = ['Over these ' + elapsedWords(years) + ' years, no births or deaths were recorded.',
+            'No births or deaths were recorded across these ' + elapsedWords(years) + ' years.',
+            'These ' + elapsedWords(years) + ' years brought no recorded births or deaths.',
+            'No birth or death was recorded over these ' + elapsedWords(years) + ' years.'];
+        paragraphs.push({ templateId: 'clan-book.quiet.' + variant, templateVersion: 3,
             text: lines[variant], sourceEventIds: [], factRefs: ['period', 'demographics'] });
     }
     const ledger = facts.ledger;
-    const stocks = facts.stocks;
-    if (ledger && stocks) {
-        const complete = ledger.food.complete && ledger.materials.complete;
-        const variant = choose(complete ? 'clan-book.reserves' : 'clan-book.partial-account');
-        const winter = facts.period!.through.winter;
-        const foodStatus = stocks.food > 0 ? 'Food remained in stock' : 'No Food remained in stock';
-        const accounts = [
-            'At Winter ' + winter + ', ' + foodStatus[0].toLowerCase() + foodStatus.slice(1) + '.',
-            foodStatus + ' when the interval closed at Winter ' + winter + '.',
-            'When the interval ended at Winter ' + winter + ', ' + foodStatus[0].toLowerCase() + foodStatus.slice(1) + '.',
-            'The interval ended at Winter ' + winter + '. ' + foodStatus + '.',
-        ];
-        const shortage = complete && stocks.food > 0 && ledger.food.unmetNeed === 0 ?
-            [...previousChapters].reverse().find(chapter => chapter.facts.ledger?.food.complete &&
-                chapter.facts.ledger.food.closing === 0 && (chapter.facts.ledger.food.unmetNeed ?? 0) > 0) : undefined;
-        const callback = shortage ? 'At Winter ' + shortage.checkpoint.time.winter +
-            ', no Food had remained in stock and some recorded need had gone unmet in that earlier interval. ' : '';
-        const shortfall = ledger.food.unmetNeed;
-        const need = shortfall ? [
-            'Some recorded Food need had gone unmet in this interval.',
-            'Part of the recorded Food need remained unmet over these winters.',
-            'The completed interval left some recorded Food need unmet.',
-            'The observed interval recorded unmet Food need.'
-        ][variant] : [
-            'No Food need had gone unmet in this interval.',
-            'All recorded Food need in this interval had been met.',
-            'The complete account recorded no unmet Food need for these winters.',
-            'No Food shortfall was recorded for the observed interval.'
-        ][variant];
-        paragraphs.push({ templateId: complete ? 'clan-book.reserves.' + variant : 'clan-book.partial-account.' + variant,
-            templateVersion: 2, text: complete ? callback + accounts[variant] + ' ' + need :
-                ['The Food and Materials account ending at Winter ' + winter + ' had gaps. Missing quantities were left unstated.',
-                    'At Winter ' + winter + ', the Food and Materials account was incomplete. Missing quantities were left unstated.',
-                    'Missing quantities remained unstated in the incomplete account ending at Winter ' + winter + '.',
-                    'The observed interval ended at Winter ' + winter + ' with gaps in the Food and Materials account.'][variant],
-            sourceEventIds: [...new Set([...ledger.transactions, ...(shortage?.facts.ledger?.transactions.filter(transaction => transaction.resource === 'food') ?? [])].map(transaction => transaction.eventId))],
+    if (ledger && facts.stocks && ledger.food.complete && ledger.materials.complete) {
+        const variant = choose('clan-book.reserves');
+        const foodRemains = facts.stocks.food > 0;
+        const lines = foodRemains ? ['There was still Food in store.', 'Some Food remained in store.',
+            'The stores still held Food.', 'There was Food left in store.'] :
+            ['There was no Food left in store.', 'The Food stores were empty.',
+                'No Food remained in the stores.', 'The stores held no Food.'];
+        const shortage = foodRemains && ledger.food.unmetNeed === 0 ? [...previousChapters].reverse().find(chapter =>
+            chapter.facts.ledger?.food.complete && chapter.facts.ledger.food.closing === 0 &&
+            (chapter.facts.ledger.food.unmetNeed ?? 0) > 0) : undefined;
+        const callback = shortage ? ' ' + elapsedWords(facts.period!.through.winter - shortage.checkpoint.time.winter)[0].toUpperCase() +
+            elapsedWords(facts.period!.through.winter - shortage.checkpoint.time.winter).slice(1) +
+            ' years earlier, the Food stores had been empty.' : '';
+        const need = (ledger.food.unmetNeed ?? 0) > 0 ?
+            ' The Food available had not covered all that was needed over these years.' : '';
+        paragraphs.push({ templateId: 'clan-book.reserves.' + variant, templateVersion: 3,
+            text: 'By Winter ' + facts.period!.through.winter + ', ' +
+                lines[variant][0].toLowerCase() + lines[variant].slice(1) + callback + need,
+            sourceEventIds: [...new Set([...ledger.transactions,
+                ...(shortage?.facts.ledger?.transactions.filter(transaction => transaction.resource === 'food') ?? [])]
+                .map(transaction => transaction.eventId))],
             factRefs: ['ledger', 'stocks', 'period', ...(shortage ? ['chapters.' + shortage.index + '.ledger.food'] : [])] });
+    }
+    if (!paragraphs.length && facts.period) {
+        paragraphs.push({ templateId: 'clan-book.partial-history', templateVersion: 3,
+            text: 'Only part of the story of these years is known.', sourceEventIds: [], factRefs: ['period'] });
     }
     return paragraphs;
 }
@@ -187,10 +185,11 @@ function namesList(names: string[]): string {
     return names.length < 2 ? names.join('') : names.slice(0, -1).join(', ') + ' and ' + names.at(-1);
 }
 export function composeOpening(
-    facts: OpeningFacts, winter: number, narrativeSeed: number, sourceEventIds: string[]
+    facts: OpeningFacts, winter: number, narrativeSeed: number, sourceEventIds: string[], version: 2 | 3 = 3
 ): NarrativeParagraph[] {
+    if (version === 2) return legacyOpening(facts, winter, narrativeSeed, sourceEventIds);
     const paragraph = (templateId: string, text: string, factRefs: string[]): NarrativeParagraph =>
-        ({ templateId, templateVersion: 2, text, sourceEventIds, factRefs });
+        ({ templateId, templateVersion: 3, text, sourceEventIds, factRefs });
     const names = namesList(facts.founders.map(person => person.name));
     const leads = [names + ' arrived in Winter ' + winter + '.',
         'In Winter ' + winter + ', the founding party arrived. It included ' + names + '.',

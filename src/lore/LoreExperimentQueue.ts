@@ -7,6 +7,7 @@ export class LoreExperimentQueue {
     private tail: Promise<void> = Promise.resolve();
     private pending = new Map<string, { fingerprint: string; job: Promise<LoreResult> }>();
     private committed: LoreResult[] = [];
+    private failed = false;
     constructor(private adapter: LocalLoreAdapter, private lineage: string) {}
 
     enqueue(request: FrozenLoreRequest): Promise<LoreResult> {
@@ -25,16 +26,19 @@ export class LoreExperimentQueue {
         this.nextChapter++;
         const epoch = this.epoch;
         const stale = (): LoreResult => ({ key: input.key, status: 'stale',
-            reason: 'save-lineage-invalidated', text: input.baseline });
+            reason: 'save-lineage-invalidated', text: '' });
         const job = this.tail.then(async () => {
             if (epoch !== this.epoch) return stale();
+            if (this.failed) throw new Error('An earlier chapter failed; invalidate the experiment queue before retrying.');
             const result = await this.adapter.generate(input, this.committed.slice(-3).map(result => result.text));
             if (epoch !== this.epoch) return stale();
             this.committed.push(structuredClone(result));
             return result;
         });
         this.pending.set(input.key, { fingerprint, job });
-        this.tail = job.then(() => undefined, () => undefined);
+        this.tail = job.then(() => undefined, () => {
+            if (epoch === this.epoch) this.failed = true;
+        });
         return job;
     }
     invalidate(lineage: string): void {
@@ -43,6 +47,7 @@ export class LoreExperimentQueue {
         this.nextChapter = 0;
         this.pending.clear();
         this.committed = [];
+        this.failed = false;
         this.tail = Promise.resolve();
     }
     results(): LoreResult[] { return structuredClone(this.committed); }

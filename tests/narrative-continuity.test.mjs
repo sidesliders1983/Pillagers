@@ -28,7 +28,7 @@ test('a later saved chapter retrieves the same home construction beyond four ear
     const chapter = owner.session.book.snapshot().chapters.at(-1);
     assert.ok(chapter.plan, 'The saved book exposes its factual chapter plan');
     assert.ok(chapter.plan.callbackEventIds.includes(built.id));
-    assert.match(chapter.text, /Winter 800/);
+    assert.match(chapter.text, /In the winter the founding party arrived/);
     assert.ok(chapter.text.includes(built.details.housingNames.building.name));
     assert.ok(chapter.plan.sourceEventIds.includes(upgraded.id));
     assert.match(chapter.text, /same home|same building/);
@@ -92,7 +92,7 @@ test('a foreign callback or a future source in a saved chapter is rejected atomi
 test('a fresh opening uses the reviewed voice with frozen shelter, existing couples and English occupation labels', () => {
     const owner = new SharedSettlement(32);
     const opening = owner.session.book.snapshot().chapters[0];
-    assert.equal(opening.templateVersion, 2);
+    assert.equal(opening.templateVersion, 3);
     assert.ok(owner.session.book.snapshot().memory.recent[0].paragraphIds.includes(opening.paragraphs[0].templateId));
     assert.ok(opening.paragraphs.length >= 3);
     assert.ok(opening.text.includes('already partners'));
@@ -101,7 +101,7 @@ test('a fresh opening uses the reviewed voice with frozen shelter, existing coup
     const before = opening.text;
     owner.command({ type: 'SalvageLongship', longshipId: 'founding-longship' });
     assert.equal(owner.session.book.snapshot().chapters[0].text, before);
-    assert.equal(owner.session.book.snapshot().styleVersion, 2);
+    assert.equal(owner.session.book.snapshot().styleVersion, 3);
 });
 
 
@@ -198,7 +198,7 @@ test('a later complete Food account recalls an earlier shortage without recounti
     const chapter = owner.session.book.snapshot().chapters.at(-1);
     assert.ok(chapter.facts.ledger.food.closing > 0);
     assert.equal(chapter.facts.ledger.food.unmetNeed, 0);
-    assert.match(chapter.text, /At Winter 805, no Food had remained/);
+    assert.match(chapter.text, /Five years earlier, the Food stores had been empty/);
     const account = chapter.paragraphs.find(paragraph => paragraph.factRefs.includes('chapters.1.ledger.food'));
     assert.ok(account);
     assert.ok(shortage.facts.ledger.transactions.some(transaction => account.sourceEventIds.includes(transaction.eventId)));

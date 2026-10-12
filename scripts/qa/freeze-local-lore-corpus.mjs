@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { access, mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { loadTypeScript } from '../load-typescript.mjs';
@@ -8,6 +8,12 @@ const { SharedSettlement } = loadTypeScript(new URL('../../src/play/SharedSettle
 const { freezeLoreRequest } = loadTypeScript(new URL('../../src/lore/LocalLoreAdapter.ts', import.meta.url));
 const output = process.env.LORE_OUTPUT ?? 'docs/qa/local-lore';
 const corpus = [];
+try {
+    await access(output + '/corpus.json.gz');
+    throw new Error('Recorded corpus exists; choose a separate LORE_OUTPUT folder for the new version.');
+} catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+}
 await mkdir(output, { recursive: true });
 for (let seed = 1; seed <= 20; seed++) {
     const owner = new SharedSettlement(seed, 1000 + seed);

@@ -130,16 +130,11 @@ test('five-Winter requests retain exact ledger totals and callbacks without send
 });
 
 
-test('a modified frozen request falls back instead of accepting unsourced text', async () => {
+test('a modified catalogue is rejected before inference or fallback text is returned', async () => {
     const { request } = await opening();
     const forged = structuredClone(request);
     forged.catalogue[0].text = 'The gods demanded a sacrifice.';
-    await modelServer(context => ({ choices: context.slots.map(slot => slot.options[0].id) }), async endpoint => {
-        const result = await new LocalLoreAdapter({ endpoint, model: 'fixture', identity: 'v1' }).generate(forged);
-        assert.equal(result.status, 'fallback');
-        assert.equal(result.reason, 'invalid-frozen-request');
-        assert.equal(result.text, request.baseline);
-    });
+    await assert.rejects(() => new LocalLoreAdapter().generate(forged), /invalid frozen request/i);
 });
 
 test('the public benchmark summary counts every fallback and separates baseline repetition from accepted model output', () => {
@@ -204,4 +199,28 @@ test('malformed transport output is preserved and cannot replace the controlled 
         assert.equal(result.text, request.baseline);
         assert.equal(result.raw, 'not valid JSON');
     } finally { server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }
+});
+
+
+test('a changed baseline is rejected without prose or committed context, even when inference is disabled', async () => {
+    const { LoreExperimentQueue } = load('../src/lore/LoreExperimentQueue.ts');
+    const { owner, request } = await opening();
+    const forged = structuredClone(request);
+    forged.baseline = 'The gods demanded a sacrifice.';
+    await assert.rejects(() => new LocalLoreAdapter().generate(forged), /invalid frozen request/i);
+    await modelServer(() => { throw new Error('Invalid input must never reach inference'); }, async endpoint => {
+        await assert.rejects(() => new LocalLoreAdapter({ endpoint, model: 'fixture', identity: 'v1' }).generate(forged), /invalid frozen request/i);
+    });
+    const queue = new LoreExperimentQueue(new LocalLoreAdapter(), request.lineage);
+    const invalid = queue.enqueue(forged);
+    owner.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const next = await freezeLoreRequest(owner.session.snapshot(), owner.session.book.save(owner.session.snapshot()), 1);
+    const later = queue.enqueue(next);
+    await assert.rejects(() => invalid, /invalid frozen request/i);
+    await assert.rejects(() => later, /earlier chapter failed/i);
+    assert.deepEqual(queue.results(), []);
+    queue.invalidate(request.lineage);
+    const recovered = await queue.enqueue(request);
+    assert.equal(recovered.text, request.baseline);
+    assert.deepEqual(queue.results(), [recovered]);
 });
