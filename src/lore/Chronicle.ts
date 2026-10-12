@@ -159,3 +159,27 @@ export function projectChronicle(events:readonly SimulationEvent[],currentWinter
         return {winter,entries};
     });
 }
+
+/** Personal formatting reuses the factual registry, with neutral labels for unnamed destinations. */
+export function personalChronicleEntry(event: SimulationEvent): ChronicleEntry | null {
+    const details = {...event.details};
+    const references = [event.personaId, details.personaId, details.caregiverId,
+        ...(Array.isArray(details.participants) ? details.participants : []),
+        ...(Array.isArray(details.parentIds) ? details.parentIds : [])]
+        .filter((id): id is string => typeof id === 'string');
+    const people = Array.isArray(details.people) ? [...details.people] : [];
+    for (const id of new Set(references)) {
+        if (people.some(person => person && typeof person === 'object' &&
+            person.id === id && typeof person.name === 'string' && person.name)) continue;
+        const name = id === event.personaId && typeof details.name === 'string' && details.name ?
+            details.name : 'A resident (name not recorded)';
+        people.push({id, name});
+    }
+    details.people = people;
+    if (['PersonaTransferredIn', 'PersonaTransferredOut'].includes(event.type) && !details.name)
+        details.name = 'A resident (name not recorded)';
+    if (event.type === 'PersonaTransferredIn') details.originClanId = 'another clan';
+    if (event.type === 'PersonaTransferredOut') details.destinationClanId = 'another clan';
+    if (['ExpeditionDeparted', 'ExpeditionReturned'].includes(event.type)) details.regionId = 'a region';
+    return projectChronicle([{...event, details}])[0]?.entries[0] ?? null;
+}

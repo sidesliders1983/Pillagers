@@ -1,3 +1,4 @@
+import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
 import type { FjordCalendar } from './FjordCalendar';
 import { FjordHeader, fjordHeaderHTML } from './FjordHeader';
@@ -87,6 +88,7 @@ export class FjordPlay {
         bindViewSwitch(document.querySelector('#fjord-play')!, this.shared, say);
         const persist = () => persistSettlement(this.shared, say);
         const bookReader = new ClanBookReader(this.shared, persist);
+        const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
         let previous = performance.now();
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
@@ -163,7 +165,11 @@ export class FjordPlay {
             if (weatherInfo.innerHTML !== forecast) weatherInfo.innerHTML = forecast;
             canvas.dataset.selected = this.shared.selection ? this.shared.selection.kind + ':' + this.shared.selection.id : '';
             document.querySelector('#fjord-run')!.textContent = this.session.running ? 'Pause' : 'Start';
-            const identities = view.entities.map(e => `<li><button data-kind="${e.kind}" data-id="${escape(e.id)}">${escape(e.label)}</button> · ${e.status.level !== undefined ? 'level ' + e.status.level : e.status.stage ?? e.kind}</li>`).join('');
+            const historicalPeople = Object.values({...state.personaArchive, ...state.personas})
+                .filter(person => !view.entities.some(entity => entity.kind === 'persona' && entity.id === person.id))
+                .map(person => ({kind:'persona', id:person.id, label:person.name,
+                    status:{level:undefined, stage:!state.personas[person.id]?'archived':person.deathWinter!==null?'deceased':'resident record'}}));
+            const identities = [...view.entities, ...historicalPeople].map(e => `<li><button data-kind="${e.kind}" data-id="${escape(e.id)}">${escape(e.label)}</button> · ${e.status.level !== undefined ? 'level ' + e.status.level : e.status.stage ?? e.kind}</li>`).join('');
             const list = document.querySelector('#fjord-identities')!;
             if (list.innerHTML !== identities)
                 list.innerHTML = identities;
@@ -197,7 +203,7 @@ export class FjordPlay {
                 residentProfile = '<details data-view-key="resident-profile"><summary>Character traits &amp; heritage</summary>' +
                     content.outerHTML + '</details>';
             }
-            updateView(panel, this.panels.render(this.session.snapshot(), this.shared.selection) +
+            updateView(panel, this.panels.render(this.session.snapshot(), this.shared.selection, personalHistory.render()) +
                 residentProfile + '<button data-action="clear">Clear selection</button>', preserved);
             this.lastPanelSelection = selectionKey;
             updateManagementAvailability(panel, this.shared);
@@ -361,6 +367,7 @@ export class FjordPlay {
             this.stopped = true;
             header.dispose();
             bookReader.dispose();
+            personalHistory.dispose();
             setPlayback(false);
             clearInterval(timer);
             renderer.setAnimationLoop(null);

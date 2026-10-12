@@ -1,9 +1,31 @@
+import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
 import { createCampaign, applyCommand, serializeState, reconstructState } from '../simulation/SimulationCore';
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
+    private personalIndex = new PersonalHistoryIndex();
+    private personalBookKey = '';
+    private historyGeneration = 0;
+    get personalHistoryEpoch(): number {
+        return this.historyGeneration;
+    }
+    personalHistory(personaId: string, limit = 10, offset = 0) {
+        if (!this.state.personas[personaId] && !this.state.personaArchive?.[personaId])
+            return {personaId, records:[], totalRecords:0, partialAttribution:false};
+        this.personalIndex.append(this.state.events);
+        if (this.personalBookKey !== this.book.publicationKey) {
+            this.personalIndex.publish(this.book.snapshot().chapters);
+            this.personalBookKey = this.book.publicationKey;
+        }
+        return this.personalIndex.read(personaId, limit, offset);
+    }
+    personalHistoryReference(personaId: string, eventId: string,
+        chapterIndex: number, paragraphIndex: number | null): boolean {
+        this.personalHistory(personaId);
+        return this.personalIndex.hasReference(personaId, eventId, chapterIndex, paragraphIndex);
+    }
     book: ClanBook;
     private fractionalTicks = 0;
     trend = { food: 0, materials: 0 };
@@ -79,6 +101,9 @@ export class GameplaySession {
         this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }));
     }
     private replace(state: SimulationState, fresh = true): void {
+        this.personalIndex = new PersonalHistoryIndex();
+        this.personalBookKey = '';
+        this.historyGeneration++;
         this.state = state;
         this.book = new ClanBook(state, fresh);
         this.running = false;
