@@ -58,6 +58,8 @@ Rules:
 - The player may support weddings, storytelling/music gatherings, religious ceremonies and possible funerals/remembrances through deliberate resource spending.
 - Timing, scale and participation are future choices to specify, not a command to force love, a birth or a death.
 - The intended benefit is social cohesion, primarily aiding settlement defence and survival through harsh conditions; no automatic Food/Materials production buff.
+- Recovery after loss, mentorship across households and the acceptance/integration of newcomers including captives are additional supported directions. Existing caregiver-proxy access is not gated by cultural investment.
+- A possible raid-success advantage through group coordination requires separate evaluation; no new raid modifier is enabled here.
 - Declining an optional celebration does not block autonomous clan life or create a missed-event punishment.
 - Exact costs, cooldowns, participation, gain and modifier formulas require separate design/calibration.
 

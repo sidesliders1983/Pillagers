@@ -52,6 +52,9 @@ Rules:
 - Weddings, storytelling/music gatherings, religious ceremonies and possible remembrance events use a shared future cultural-event system.
 - Ordinary relationships and life events do not depend on buying a celebration.
 - Cohesion primarily provides bounded positive settlement-defence and harsh-weather-resilience modifiers, not guaranteed outcomes or magical weather changes.
+- Additional approved directions are recovery after loss, transfer of craftsmanship through real mentors, and newcomer/captive integration. Exact mechanics remain open.
+- Better raid coordination as a bounded success modifier is an exploratory candidate, not a live rule or a universal combat bonus.
+- The existing caregiver-proxy system remains independent of cohesion; no second care system is required.
 - Cultural support remains optional; no mandatory festival cycle or offline penalty is introduced.
 - Rendering and AI narration cannot generate cohesion or gameplay consequences.
 
