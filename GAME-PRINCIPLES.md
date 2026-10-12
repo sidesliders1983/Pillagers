@@ -1,6 +1,6 @@
 # Pillagers — Game principles
 
-This document records lasting game-design decisions for future Codex work. Read it before changing the calendar, persona ages, seasonal presentation, lore, cultural life, social cohesion or related UI. Implementation details and the current prototype belong in the feature documentation.
+This document records lasting game-design decisions for future Codex work. Read it before changing the calendar, persona ages, seasonal presentation, lore, cultural life, social cohesion, personality-driven life events or related UI. Implementation details and the current prototype belong in the feature documentation.
 
 ## GP-001 — Time is experienced through seasons and winters
 
@@ -76,6 +76,22 @@ Cultural events and their approved effects belong to Simulation Core. Ambient me
 
 Detailed northstar and future acceptance principles: [Cultural Life & Social Cohesion](docs/gameplay/spec/10-CULTURAL-LIFE-COHESION.md).
 
+## GP-006 — Personality is expressed through contextual life events
+
+**Status: Approved gameplay northstar, 2026-10-12. A small opt-in experiment is planned; no live rules, numerical balance or default activation is enabled by this document.**
+
+> Traits shape tendencies. Circumstances create opportunities. Relationships and earlier experiences influence the response. Simulation Core resolves what actually happens; the saga tells that history.
+
+Residents should become recognizable through probabilistic behavior rather than a uniform random drama table or fixed helper/rebel labels. Reuse CharacterDNA and its approved meanings: Temperament remains impulsive/fiery at the high end, affecting rapid conflict but potentially also prompt intervention. Intelligence and Cunning are not moral worth; Physicality and Agility do not determine kindness. No new personality roll, sex/heritage virtue multiplier or automatic assignment of motives is implied.
+
+Eligibility, opportunity, chance and result are separate. Genuine recorded circumstances and sparse, source-linked social history may influence later behavior. No event is a valid outcome. Bounded cooldowns and consequences prevent event spam, endless escalation or mandatory player intervention. Preserve initial DNA while tracking actual lived experiences separately.
+
+These are canonical life events, not visual encounters or generated prose. Core owns their persisted random stream, participants, consequences and semantic records; the renderer and Lore only consume them. Attempts are not successful help, and expiry/departure is not reconciliation. Future work refusal or revolt requires explicit rules and readable consequences, never silently ignored player commands. Preserve the existing caregiver proxy and optional cultural-investment principle; no global cohesion drain or compulsory feast cycle.
+
+Begin with an optional **quarrel, mediation and reconciliation** pilot affecting only social incidents and subsequent social probabilities. Wider recovery, mentoring, integration, refusal or rebellion remain later scope. A social episode does not confer family significance for the Saga Book tree.
+
+Detailed direction: [Personality-driven Life Events](docs/gameplay/spec/12-PERSONALITY-LIFE-EVENTS.md). First test: [#120](https://github.com/sidesliders1983/Pillagers/issues/120). Exact formulas, rates and default adoption require measured review.
+
 ## Scope and implementation status
 
 The calendar and age wording above are approved design decisions. They do not imply that the current code already implements them.
@@ -86,6 +102,8 @@ Current prototype: [Fjordside year cycle](docs/FJORDSIDE-YEAR-CYCLE.md).
 The existing 60-second year and pause/Continue summary are prototype settings, not permanent game principles. Issue #13 preserves them while applying the approved calendar and wording changes.
 
 GP-005 records an approved future direction only. It does not activate cultural events, social-cohesion modifiers, settlement-defence mechanics or new weather rules, and it does not block the current Fjord/lifecycle/movement slices.
+
+GP-006 is a future gameplay direction with a bounded opt-in pilot. It does not activate new social rules in existing campaigns or expand the current Lore, family-tree or animation tasks.
 
 ## Ideas awaiting a separate decision
 
@@ -99,4 +117,4 @@ These are proposals, not requirements for Codex to implement automatically:
 
 ## Maintaining these principles
 
-When implementing time-related features, lore, cultural life or cohesion, check them against GP-001 through GP-005 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features, lore, cultural life, cohesion or personality-driven life events, check them against GP-001 through GP-006 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
