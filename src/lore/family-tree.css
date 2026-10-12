@@ -1,0 +1,21 @@
+#clan-book-reader[data-tab="family"] { width:min(1060px,calc(100vw - 24px)); }
+.book-tabs { display:flex; gap:8px; margin-bottom:12px; }
+.book-tabs [aria-selected="true"] { border-color:#f7d57f; box-shadow:inset 0 -3px #f7d57f; }
+.book-tabs [role="tab"] { flex:1; }
+#clan-book-tree-panel[hidden], #clan-book-story-panel[hidden] { display:none; }
+.family-tree-tools { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px; }
+.family-tree-diagram { overflow:auto; overscroll-behavior:contain; touch-action:pan-x pan-y; max-height:clamp(160px,36dvh,340px); border:1px solid #697562; border-radius:6px; }
+.family-tree-canvas { position:relative; isolation:isolate; }
+.family-tree-canvas svg { position:absolute; inset:0; pointer-events:none; }
+.family-edge { fill:none; stroke:#8fa69a; stroke-width:2; }
+.family-edge.partnership { stroke-dasharray:6 4; stroke:#c5b482; }
+.family-edge[data-selected] { stroke:#f7d57f; stroke-width:4; }
+#clan-book-reader [data-family-node] { position:absolute; box-sizing:border-box; width:176px; height:136px; display:flex; flex-direction:column; justify-content:center; gap:4px; text-align:left; background:#233c32; overflow-wrap:anywhere; font:14px/1.25 system-ui; }
+[data-family-node] strong { font-size:15px; }
+[data-family-node] small { font-size:11px; }
+#clan-book-reader [data-family-node][aria-pressed="true"] { border:3px solid #f7d57f; }
+#clan-book-reader [data-family-node][data-related="true"] { background:#3e5140; }
+#family-person-details { margin-top:14px; border-top:1px solid #697562; padding-top:10px; }
+#family-person-details h4 { margin-bottom:6px; }
+#clan-book-reader .family-person-link { display:inline; text-align:left; padding:6px; margin:2px; }
+#clan-book-new-story { margin-bottom:12px; width:100%; }

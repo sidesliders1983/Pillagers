@@ -1,0 +1,68 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "view": "play",
+      "touch": false,
+      "passed": true,
+      "checks": [
+        "bounded paging",
+        "saved passage navigation",
+        "source details",
+        "selection isolation",
+        "archived childless outsider",
+        "canonical equality and pause intent",
+        "running reader and scroll retention",
+        "rollback",
+        "2D/3D transfer"
+      ]
+    },
+    {
+      "view": "play",
+      "touch": true,
+      "passed": true,
+      "checks": [
+        "bounded paging",
+        "saved passage navigation",
+        "source details",
+        "selection isolation",
+        "archived childless outsider",
+        "canonical equality and pause intent",
+        "running reader and scroll retention",
+        "rollback"
+      ]
+    },
+    {
+      "view": "fjord-play",
+      "touch": false,
+      "passed": true,
+      "checks": [
+        "bounded paging",
+        "saved passage navigation",
+        "source details",
+        "selection isolation",
+        "archived childless outsider",
+        "canonical equality and pause intent",
+        "running reader and scroll retention",
+        "rollback",
+        "2D/3D transfer"
+      ]
+    },
+    {
+      "view": "fjord-play",
+      "touch": true,
+      "passed": true,
+      "checks": [
+        "bounded paging",
+        "saved passage navigation",
+        "source details",
+        "selection isolation",
+        "archived childless outsider",
+        "canonical equality and pause intent",
+        "running reader and scroll retention",
+        "rollback"
+      ]
+    }
+  ],
+  "errors": []
+}

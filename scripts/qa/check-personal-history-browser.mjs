@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { loadTypeScript } from '../load-typescript.mjs';
 const { chromium } = createRequire(import.meta.url)('C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
@@ -20,6 +20,8 @@ for (let i = 0; i < 24; i++)
 owner.command({ type: 'AssignOccupation', personaId: 'liv', occupation: 'fisher' });
 owner.command({ type: 'AdvanceTicks', ticks: 5000 });
 const fixture = owner.fjord.exportJSON();
+const outputRoot=process.env.PILLAGERS_QA_OUTPUT??'docs/qa/personal-history/browser';
+mkdirSync(outputRoot,{recursive:true});
 const browser = await chromium.launch({ headless: true, channel: 'msedge' });
 const checks = [], errors = [];
 async function closeBook(page) {
@@ -91,7 +93,7 @@ try {
             await page.locator('#clan-book-story [data-history-target]').waitFor({ timeout: 3000 });
             assert.equal(await page.locator('#clan-book-chapter').inputValue(), '1');
             assert.equal(await page.locator('#clan-book-story [data-history-target]').getAttribute('data-passage'), paragraph);
-            await page.screenshot({ path: 'docs/qa/personal-history/browser/' + view + '-' + (touch ? 'touch' : 'desktop') + '-passage.png' });
+            await page.screenshot({ path: outputRoot + '/' + view + '-' + (touch ? 'touch' : 'desktop') + '-passage.png' });
             await closeBook(page);
             await history.locator('details').filter({ has: page.locator('summary', { hasText: 'Source record' }) }).first().locator(':scope > summary').click();
             assert.match(await history.textContent(), /event-/);
@@ -108,7 +110,7 @@ try {
             await history.locator('.personal-history-records > li').first().waitFor();
             assert.match(await history.textContent(), /Archived outsider was transferred to another clan/);
             assert.doesNotMatch(await history.textContent(), /Einar became|cpu-east/);
-            await page.screenshot({ path: 'docs/qa/personal-history/browser/' + view + '-' + (touch ? 'touch' : 'desktop') + '-archived.png' });
+            await page.screenshot({ path: outputRoot + '/' + view + '-' + (touch ? 'touch' : 'desktop') + '-archived.png' });
             const after = await exported(page, view);
             assert.deepEqual(after, before, 'Reading, source expansion and links never change canonical state/RNG');
             assert.equal(await page.locator(view === 'play' ? '[data-action="run"]' : '#fjord-run').textContent(), 'Start');
@@ -134,7 +136,7 @@ try {
             assert.equal(await history.locator('.personal-history-records > li').count(), 1);
             assert.doesNotMatch(await history.textContent(), /became a farmer|became a hunter|Archived outsider/);
             await history.locator('nav').scrollIntoViewIfNeeded();
-            await page.screenshot({ path: 'docs/qa/personal-history/browser/' + view + '-' + (touch ? 'touch' : 'desktop') + '-after.png' });
+            await page.screenshot({ path: outputRoot + '/' + view + '-' + (touch ? 'touch' : 'desktop') + '-after.png' });
             if(!touch) {
                 const target=view==='play'?'fjord-play':'play';
                 if(view==='fjord-play')await menu(page,view);
@@ -153,7 +155,7 @@ try {
             await page.close();
         }
     assert.deepEqual(errors, []);
-    writeFileSync('docs/qa/personal-history/browser/results.json', JSON.stringify({ passed: true, checks, errors }, null, 2) + '\n');
+    writeFileSync(outputRoot + '/results.json', JSON.stringify({ passed: true, checks, errors }, null, 2) + '\n');
     console.log(JSON.stringify({ passed: true, checks }));
 }
 finally {

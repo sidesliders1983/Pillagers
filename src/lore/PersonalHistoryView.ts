@@ -1,4 +1,4 @@
-import type { SharedSettlement } from '../play/SharedSettlement';
+import type { SharedSettlement, SettlementSelection } from '../play/SharedSettlement';
 import type { PersonalHistory, PersonalRecord } from './PersonalHistory';
 import { updateView } from '../gameplay-lab/updateView';
 import './personal-history.css';
@@ -11,7 +11,8 @@ export class PersonalHistoryView {
         open: boolean;
         offset: number;
     }>();
-    constructor(private root: HTMLElement, private owner: SharedSettlement) {
+    constructor(private root: HTMLElement, private owner: SharedSettlement,
+        private selected: () => SettlementSelection = () => owner.selection, private surface = 'management') {
         root.addEventListener('toggle', this.toggle, true);
         root.addEventListener('click', this.click);
     }
@@ -20,7 +21,7 @@ export class PersonalHistoryView {
             this.epoch = this.owner.session.personalHistoryEpoch;
             this.pages.clear();
         }
-        const selected = this.owner.selection;
+        const selected = this.selected();
         if (selected?.kind !== 'persona')
             return '';
         const page = this.pages.get(selected.id) ?? { open: false, offset: 0 };
@@ -33,7 +34,7 @@ export class PersonalHistoryView {
     private current(element: HTMLElement): boolean {
         return element.isConnected && !this.owner.transferring &&
             Number(element.dataset.epoch) === this.owner.session.personalHistoryEpoch &&
-            this.owner.selection?.kind === 'persona' && this.owner.selection.id === element.dataset.persona;
+            this.selected()?.kind === 'persona' && this.selected()!.id === element.dataset.persona;
     }
     private toggle = (event: Event): void => {
         const element = event.target;
@@ -63,6 +64,11 @@ export class PersonalHistoryView {
         this.paint(element, offset);
         element.querySelector('.personal-history-records')?.scrollTo(0, 0);
     };
+    refresh(): void {
+        const element = this.root.querySelector<HTMLDetailsElement>('[data-personal-history]');
+        if (element?.open && this.current(element))
+            this.paint(element, this.pages.get(element.dataset.persona!)?.offset ?? 0);
+    }
     private paint(element: HTMLElement, offset: number): void {
         updateView(element.querySelector<HTMLElement>('.personal-history-content')!, this.content(element.dataset.persona!, offset));
     }
@@ -88,7 +94,7 @@ export class PersonalHistoryView {
             return (context ? '' : '<details data-view-key="excerpt:' + reference.chapterIndex + ':' +
                 reference.paragraphIndex + '"><summary>Published passage</summary><blockquote>' +
                 escape(reference.excerpt) + '</blockquote></details>') +
-                '<button type="button" data-history-chapter="' + reference.chapterIndex +
+                '<button type="button" data-history-surface="' + this.surface + '" data-history-chapter="' + reference.chapterIndex +
                 '" data-history-paragraph="' + (reference.paragraphIndex ?? '') +
                 '" data-history-source="' + escape(record.sourceEventId) +
                 '" data-history-persona="' + escape(history.personaId) +

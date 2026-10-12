@@ -1,3 +1,4 @@
+import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
 import { createCampaign, applyCommand, serializeState, reconstructState } from '../simulation/SimulationCore';
@@ -5,6 +6,10 @@ import type { SimulationCommand, SimulationState } from '../simulation/Simulatio
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
+    private familyIndex = new FamilyTreeIndex();
+    familyTree() {
+        return this.familyIndex.read(this.state);
+    }
     private personalIndex = new PersonalHistoryIndex();
     private personalBookKey = '';
     private historyGeneration = 0;
@@ -101,6 +106,7 @@ export class GameplaySession {
         this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }));
     }
     private replace(state: SimulationState, fresh = true): void {
+        this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();
         this.personalBookKey = '';
         this.historyGeneration++;

@@ -1,0 +1,132 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "view": "play",
+      "mode": "desktop",
+      "passed": true,
+      "treeNodes": 57,
+      "founders": 10,
+      "layoutAndStyleFlushMs": 33.89999997615814,
+      "checks": [
+        "three generations",
+        "two parents and navigable children",
+        "outsider omitted",
+        "reused personal history link",
+        "frozen story",
+        "internal scroll and keyboard tabs",
+        "canonical equality",
+        "running/manual pause",
+        "queued chapter and running Close",
+        "queued chapter invalidated on rollback",
+        "rollback and reachable Close"
+      ]
+    },
+    {
+      "view": "play",
+      "mode": "tablet",
+      "passed": true,
+      "treeNodes": 57,
+      "founders": 10,
+      "layoutAndStyleFlushMs": 26.900000005960464,
+      "checks": [
+        "three generations",
+        "two parents and navigable children",
+        "outsider omitted",
+        "reused personal history link",
+        "frozen story",
+        "internal scroll and keyboard tabs",
+        "canonical equality",
+        "running/manual pause",
+        "queued chapter and running Close",
+        "queued chapter invalidated on rollback",
+        "rollback and reachable Close"
+      ]
+    },
+    {
+      "view": "play",
+      "mode": "phone",
+      "passed": true,
+      "treeNodes": 57,
+      "founders": 10,
+      "layoutAndStyleFlushMs": 31.400000005960464,
+      "checks": [
+        "three generations",
+        "two parents and navigable children",
+        "outsider omitted",
+        "reused personal history link",
+        "frozen story",
+        "internal scroll and keyboard tabs",
+        "canonical equality",
+        "running/manual pause",
+        "queued chapter and running Close",
+        "queued chapter invalidated on rollback",
+        "rollback and reachable Close"
+      ]
+    },
+    {
+      "view": "fjord-play",
+      "mode": "desktop",
+      "passed": true,
+      "treeNodes": 57,
+      "founders": 10,
+      "layoutAndStyleFlushMs": 48.19999998807907,
+      "checks": [
+        "three generations",
+        "two parents and navigable children",
+        "outsider omitted",
+        "reused personal history link",
+        "frozen story",
+        "internal scroll and keyboard tabs",
+        "canonical equality",
+        "running/manual pause",
+        "queued chapter and running Close",
+        "queued chapter invalidated on rollback",
+        "rollback and reachable Close"
+      ]
+    },
+    {
+      "view": "fjord-play",
+      "mode": "tablet",
+      "passed": true,
+      "treeNodes": 57,
+      "founders": 10,
+      "layoutAndStyleFlushMs": 39.400000005960464,
+      "checks": [
+        "three generations",
+        "two parents and navigable children",
+        "outsider omitted",
+        "reused personal history link",
+        "frozen story",
+        "internal scroll and keyboard tabs",
+        "canonical equality",
+        "running/manual pause",
+        "queued chapter and running Close",
+        "queued chapter invalidated on rollback",
+        "rollback and reachable Close"
+      ]
+    },
+    {
+      "view": "fjord-play",
+      "mode": "phone",
+      "passed": true,
+      "treeNodes": 57,
+      "founders": 10,
+      "layoutAndStyleFlushMs": 32.19999998807907,
+      "checks": [
+        "three generations",
+        "two parents and navigable children",
+        "outsider omitted",
+        "reused personal history link",
+        "frozen story",
+        "internal scroll and keyboard tabs",
+        "canonical equality",
+        "running/manual pause",
+        "queued chapter and running Close",
+        "queued chapter invalidated on rollback",
+        "rollback and reachable Close"
+      ]
+    }
+  ],
+  "errors": []
+}

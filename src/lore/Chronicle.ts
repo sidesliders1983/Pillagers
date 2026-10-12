@@ -27,6 +27,9 @@ function housingReference(
     return reference.id === id && str(reference, 'name') ? reference.name as string : fallback;
 }
 const occupationLabels:Record<string,string>={farmer:'farmer',herder:'herder',fisher:'fisher',hunter:'hunter',woodworker:'woodworker',smith:'smith',textileWorker:'textile worker',boatbuilder:'boatbuilder',trader:'trader',leatherAndJewelleryMaker:'leather and jewellery maker'};
+export function occupationLabel(id: string | null): string {
+    return id ? occupationLabels[id] ?? 'Occupation not recorded' : 'No occupation';
+}
 type Template=(e:SimulationEvent,d:Facts)=>string|null;
 /** Registry contains only supported recorded facts; unknown types stay in Raw Events. */
 const templates:Record<string,Template>={

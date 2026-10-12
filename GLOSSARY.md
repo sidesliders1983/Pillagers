@@ -13,6 +13,10 @@ Pillagers models named residents and the domestic groups and shelter around them
 **Family**: A kin group connected through parentage and partnership.
 _Avoid_: Household
 
+**Family history**: The known parentage and partnerships connecting people in the community, including relationships and people retained after death or departure.
+
+**Family Tree**: A diagram of the community’s family history. Original founders remain part of that history; a later resident needs a known family connection to enter it. Family significance is distinct from being notable in the clan’s story.
+
 **Household**: A domestic group of residents who live together.
 _Avoid_: Family
 
