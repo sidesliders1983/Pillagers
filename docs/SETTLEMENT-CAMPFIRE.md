@@ -7,7 +7,8 @@ settlement information panel.
 
 The owner-supplied Meshy stone circle is displayed at **twice its source size**: approximately
 6.40 × 1.50 × 6.46 metres. All axes use the same scale. The source geometry and its four maps
-are retained. The supplied model has no flame animation; none is fabricated in this slice.
+are retained. The supplied model has no flame animation; none is fabricated in this slice. Its upper stone
+and log surfaces receive the same seasonal snow and Spring thaw as homes and tents.
 A 7m-radius middle place excludes dwellings and clears nearby nature. A 4.4m obstacle radius,
 plus each actor's body clearance, keeps residents and cattle outside the stone ring.
 
