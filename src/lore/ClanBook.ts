@@ -243,6 +243,11 @@ export class ClanBook {
         if (!this.data.chapters[index]) throw new Error('Unknown Clan Book chapter.');
         this.data.chapters[index].read = true;
     }
+    /** Read/notified flags do not invalidate published passage content. */
+    get publicationKey():string {
+        const latest=this.data.chapters.at(-1)!;
+        return this.data.id+':'+this.data.chapters.length+':'+latest.checkpoint.identity;
+    }
     snapshot(): BookData { return structuredClone(this.data); }
     save(state: SimulationState): BookSave {
         return { ...this.snapshot(), canonicalIdentity: historyIdentity(JSON.stringify(state)) };

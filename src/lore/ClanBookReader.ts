@@ -1,3 +1,4 @@
+import { FamilyTreeView } from './FamilyTreeView';
 import { livestockAction, livestockGroups, livestockQuantity } from './LivestockNarrative';
 import type { SimulationEvent } from '../simulation/SimulationCore';
 import type { SharedSettlement } from '../play/SharedSettlement';
@@ -98,7 +99,11 @@ function appendix(chapter: BookChapter): string {
 export class ClanBookReader {
     private panel = document.createElement('section');
     private bookId = '';
+    private tab: 'story' | 'family' = 'story';
+    private familyTree: FamilyTreeView;
+    private campaignEpoch = -1;
     private chapterIndex = 0;
+    private queuedChapter: number | null = null;
     private renderedChapter = '';
     private opener: HTMLElement | null = null;
     constructor(private owner: SharedSettlement, private persist: () => void) {
@@ -107,9 +112,34 @@ export class ClanBookReader {
         this.panel.setAttribute('role', 'dialog');
         this.panel.setAttribute('aria-labelledby', 'clan-book-title');
         this.panel.innerHTML = '<header><h2 id="clan-book-title">Clan Book</h2><button id="clan-book-close" type="button" aria-label="Close Clan Book">Close</button></header>' +
+            '<div class="book-tabs" role="tablist" aria-label="Book sections">' +
+            '<button type="button" id="clan-book-story-tab" role="tab" aria-selected="true" aria-controls="clan-book-story-panel">Story</button>' +
+            '<button type="button" id="clan-book-family-tab" role="tab" aria-selected="false" aria-controls="clan-book-tree-panel" tabindex="-1">Family Tree</button></div>' +
+            '<button type="button" id="clan-book-new-story" hidden>New story available</button>' +
+            '<section id="clan-book-story-panel" role="tabpanel" aria-labelledby="clan-book-story-tab">' +
             '<label>Chapter<select id="clan-book-chapter"></select></label><article id="clan-book-story"></article>' +
-            '<details id="clan-book-appendix"><summary>Factual overview</summary><div></div></details>';
+            '<details id="clan-book-appendix"><summary>Factual overview</summary><div></div></details></section>' +
+            '<section id="clan-book-tree-panel" role="tabpanel" aria-labelledby="clan-book-family-tab" hidden></section>';
         document.body.append(this.panel);
+        this.familyTree = new FamilyTreeView(this.panel.querySelector<HTMLElement>('#clan-book-tree-panel')!, owner);
+        this.panel.querySelector('#clan-book-story-tab')!.addEventListener('click', () => this.setTab('story'));
+        this.panel.querySelector('#clan-book-family-tab')!.addEventListener('click', () => this.setTab('family'));
+        this.panel.querySelector('#clan-book-new-story')!.addEventListener('click', () => {
+            const chapter = this.owner.session.book.snapshot().chapters.find(chapter => !chapter.notified);
+            if (chapter)
+                this.open(chapter.index);
+        });
+        this.panel.querySelector('.book-tabs')!.addEventListener('keydown', (event) => {
+            const key = (event as KeyboardEvent).key;
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(key))
+                return;
+            event.preventDefault();
+            this.setTab(key === 'Home' ? 'story' : key === 'End' ? 'family' : this.tab === 'story' ? 'family' : 'story');
+            this.panel.querySelector<HTMLElement>(this.tab === 'story' ? '#clan-book-story-tab' : '#clan-book-family-tab')!.focus();
+        });
+        // Internal scrolling/selection must never reach world gesture handlers.
+        for (const type of ['pointerdown', 'pointerup', 'wheel'])
+            this.panel.addEventListener(type, event => event.stopPropagation());
         this.panel.querySelector('#clan-book-close')!.addEventListener('click', () => this.close());
         this.panel.querySelector('#clan-book-chapter')!.addEventListener('change', event => {
             this.chapterIndex = Number((event.target as HTMLSelectElement).value);
@@ -117,7 +147,10 @@ export class ClanBookReader {
         });
         this.panel.addEventListener('keydown', event => {
             event.stopPropagation();
-            if (event.key === 'Escape') { event.preventDefault(); this.close(); }
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                this.close();
+            }
         });
         document.addEventListener('click', this.menuClick);
         window.addEventListener('resize', this.measureBounds);
@@ -128,12 +161,40 @@ export class ClanBookReader {
         this.panel.style.setProperty('--book-top', top + 'px');
     };
     private menuClick = (event: MouseEvent): void => {
-        if ((event.target as Element).closest('#clan-book-open')) this.open();
+        const link = (event.target as Element).closest<HTMLButtonElement>('[data-history-chapter]');
+        if (link) {
+            event.stopPropagation();
+            const selection = link.dataset.historySurface === 'family-tree' ? this.familyTree.selection : this.owner.selection;
+            const chapter = Number(link.dataset.historyChapter);
+            const paragraph = link.dataset.historyParagraph === '' ? null : Number(link.dataset.historyParagraph);
+            if (this.owner.transferring || !link.isConnected || selection?.kind !== 'persona' ||
+                selection.id !== link.dataset.historyPersona ||
+                this.owner.session.personalHistoryEpoch !== Number(link.dataset.historyEpoch) ||
+                !Number.isSafeInteger(chapter) || chapter < 0 ||
+                (paragraph !== null && (!Number.isSafeInteger(paragraph) || paragraph < 0)) ||
+                !this.owner.session.personalHistoryReference(selection.id, link.dataset.historySource!, chapter, paragraph))
+                return;
+            this.open(chapter);
+            this.panel.querySelectorAll('[data-history-target]').forEach(node => node.removeAttribute('data-history-target'));
+            const target = paragraph === null ? this.panel.querySelector<HTMLElement>('#clan-book-story > h3') :
+                this.panel.querySelector<HTMLElement>('[data-passage="' + paragraph + '"]');
+            if (target) {
+                target.setAttribute('data-history-target', '');
+                target.tabIndex = -1;
+                target.focus({ preventScroll: true });
+                target.scrollIntoView({ block: 'nearest' });
+            }
+            return;
+        }
+        if ((event.target as Element).closest('#clan-book-open'))
+            this.open();
     };
     update(): void {
         const book = this.owner.session.book.snapshot();
-        if (this.bookId !== book.id) {
+        if (this.bookId !== book.id || this.campaignEpoch !== this.owner.session.personalHistoryEpoch) {
+            this.campaignEpoch = this.owner.session.personalHistoryEpoch;
             this.bookId = book.id;
+            this.queuedChapter = null;
             this.panel.hidden = true;
             this.renderedChapter = '';
             this.chapterIndex = 0;
@@ -142,23 +203,56 @@ export class ClanBookReader {
             this.chapterIndex = 0;
             this.renderedChapter = '';
         }
-        if (document.hidden || this.owner.transferring) return;
+        if (document.hidden || this.owner.transferring)
+            return;
         const pending = book.chapters.find(c => !c.notified);
-        if (pending) {
+        const familyOpen = !this.panel.hidden && this.tab === 'family';
+        (this.panel.querySelector('#clan-book-new-story') as HTMLElement).hidden = !pending || !familyOpen;
+        if (pending && familyOpen)
+            this.queuedChapter = pending.index;
+        if (pending && !familyOpen && !(this.panel.hidden && this.queuedChapter === pending.index)) {
             this.owner.session.book.notifyPending();
             this.persist();
-            if (this.panel.hidden) this.open(pending.index);
+            if (this.panel.hidden)
+                this.open(pending.index);
         }
-        if (!this.panel.hidden) this.paint();
+        if (!this.panel.hidden) {
+            if (this.tab === 'family')
+                this.familyTree.update();
+            else
+                this.paint();
+        }
     }
-    open(index = this.chapterIndex): void {
+    open(index = this.queuedChapter ?? this.chapterIndex): void {
+        if (this.owner.transferring || document.hidden)
+            return;
         this.opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        if (!Number.isSafeInteger(index) || !this.owner.session.book.snapshot().chapters[index])
+            return;
         this.chapterIndex = index;
+        this.queuedChapter = null;
         this.owner.session.book.notifyPending();
         this.panel.hidden = false;
-        this.paint();
+        this.setTab('story');
         this.measureBounds();
         this.panel.querySelector<HTMLElement>('#clan-book-close')!.focus();
+    }
+    private setTab(tab: 'story' | 'family'): void {
+        if (this.owner.transferring || document.hidden)
+            return;
+        this.tab = tab;
+        this.panel.dataset.tab = tab;
+        for (const value of ['story', 'family'] as const) {
+            const active = value === tab, button = this.panel.querySelector<HTMLElement>('#clan-book-' + value + '-tab')!;
+            button.setAttribute('aria-selected', String(active));
+            button.tabIndex = active ? 0 : -1;
+        }
+        (this.panel.querySelector('#clan-book-story-panel') as HTMLElement).hidden = tab !== 'story';
+        (this.panel.querySelector('#clan-book-tree-panel') as HTMLElement).hidden = tab !== 'family';
+        if (tab === 'family')
+            this.familyTree.update();
+        else
+            this.paint();
     }
     private paint(): void {
         const book = this.owner.session.book.snapshot();
@@ -169,9 +263,10 @@ export class ClanBookReader {
         field.value = String(this.chapterIndex);
         const chapter: BookChapter = book.chapters[this.chapterIndex];
         const signature = book.id + ':' + chapter.index + ':' + chapter.checkpoint.identity;
-        if (signature === this.renderedChapter) return;
+        if (signature === this.renderedChapter)
+            return;
         this.panel.querySelector('#clan-book-story')!.innerHTML = '<h3>' + escape(chapter.title) + '</h3>' +
-            chapter.text.split('\n\n').map(p => '<p>' + escape(p) + '</p>').join('');
+            chapter.text.split('\n\n').map((p, index) => '<p data-passage="' + index + '">' + escape(p) + '</p>').join('');
         this.panel.querySelector('#clan-book-appendix > div')!.innerHTML = appendix(chapter);
         this.owner.session.book.markRead(chapter.index);
         this.renderedChapter = signature;
@@ -181,12 +276,15 @@ export class ClanBookReader {
         this.panel.hidden = true;
         this.persist();
         const fallback = document.querySelector<HTMLElement>('#fjord-menu > summary, #play-settings > summary');
-        if (this.opener?.isConnected && this.opener !== document.body && this.opener.getClientRects().length) this.opener.focus();
-        else fallback?.focus();
+        if (this.opener?.isConnected && this.opener !== document.body && this.opener.getClientRects().length)
+            this.opener.focus();
+        else
+            fallback?.focus();
     }
     dispose(): void {
         document.removeEventListener('click', this.menuClick);
         window.removeEventListener('resize', this.measureBounds);
+        this.familyTree.dispose();
         this.panel.remove();
     }
 }
