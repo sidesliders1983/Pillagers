@@ -45,4 +45,3 @@ await writeFile(output + '/comparison.json', JSON.stringify({
     generatorVersion: 3, styleVersion: 3, sources, records
 }, null, 2) + '\n');
 console.log(JSON.stringify({ previews: records.length, sources }));
-
