@@ -13,6 +13,7 @@ import { fitsBuildingFoundation } from '../world/BuildingPlot';
 import { suitability } from '../world-generation/PlanSettlement';
 import { projectFjordGround } from './FjordGround';
 import { projectFjordWeather } from './FjordWeather';
+export type PrecipitationKind = 'snow' | 'rain' | 'none';
 export type FjordTransform = {
     x: number;
     y: number;
@@ -335,7 +336,10 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const ground = projectFjordGround(world, entities);
     if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
-    return { calendar: projectFjordCalendar(state.time, state.ticksPerWinter),
+    const calendar = projectFjordCalendar(state.time, state.ticksPerWinter);
+    const kind: PrecipitationKind = calendar.season === 'Winter' ? 'snow'
+        : calendar.season === 'Autumn' ? 'rain' : 'none';
+    return { calendar, precipitation: { kind },
         campfire, entities, layout, diagnostics, ground, time: { ...state.time }, stocks: { ...state.stocks },
         weather: inspectWeather(state),
         weatherVisual: projectFjordWeather(inspectWeather(state).enabled ? inspectWeather(state).class : null) };

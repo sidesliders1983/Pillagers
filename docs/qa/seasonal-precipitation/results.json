@@ -1,0 +1,546 @@
+{
+  "browser": "Edge Chromium, 1180×820 touch emulation",
+  "physicalIPad": false,
+  "checks": [
+    {
+      "check": "snow, bounded Low and pause",
+      "passed": true,
+      "observed": {
+        "kind": "snow",
+        "quality": "low",
+        "reducedMotion": false,
+        "enabled": true,
+        "time": 7.004599999964243,
+        "snow": 282,
+        "rain": 0,
+        "snowWeight": 1,
+        "rainWeight": 0,
+        "radius": 12,
+        "center": [
+          50.95400508782353,
+          2.5999999046325684,
+          8.19605454388607
+        ],
+        "batches": 2
+      }
+    },
+    {
+      "check": "Off, Normal, reduced motion and touch selection",
+      "passed": true
+    },
+    {
+      "check": "Spring/Summer dry, Autumn rain, import and Core equivalence",
+      "passed": true,
+      "seasonal": [
+        {
+          "label": "spring",
+          "effect": {
+            "kind": "none",
+            "quality": "low",
+            "reducedMotion": false,
+            "enabled": true,
+            "time": 3.552800000011922,
+            "snow": 0,
+            "rain": 0,
+            "snowWeight": 0,
+            "rainWeight": 0,
+            "radius": 44,
+            "center": [
+              45.5,
+              2.6,
+              3.16158830897205
+            ],
+            "batches": 2
+          },
+          "resources": {
+            "routeAttempts": 10,
+            "rejectedRoutes": 0,
+            "targetAttempts": 0,
+            "rejectedTargets": 0,
+            "routeNodes": 2144,
+            "maxRouteNodes": 325,
+            "updates": 79,
+            "lastUpdateMs": 0.6000000238418579,
+            "maxUpdateMs": 25.19999998807907,
+            "totalUpdateMs": 93.10000020265579,
+            "yardRepackAttempts": 0,
+            "yardRepackNodes": 0,
+            "yardRepackFailures": 0,
+            "agents": 13,
+            "reservations": 0,
+            "occupationVisits": 0,
+            "outOfZone": 0,
+            "bodyOverlaps": 0,
+            "actors": 13,
+            "sourceTemplates": 3,
+            "ownedInstanceRoots": 0,
+            "lastFrameMs": 14.600000023841858,
+            "drawCalls": 49,
+            "triangles": 1008615,
+            "geometries": 28,
+            "textures": 51
+          },
+          "structureSnow": [
+            {
+              "key": "settlement-campfire",
+              "amount": 0.6172028928,
+              "materials": [
+                "9cd84671-ddc0-40f2-be3c-b2cd366ec08b"
+              ]
+            },
+            {
+              "key": "building:house-1",
+              "amount": 0.6172028928,
+              "materials": [
+                "b72c70ee-150b-433f-9b81-c074d993e2bc"
+              ]
+            },
+            {
+              "key": "household:founder-2",
+              "amount": 0.6172028928,
+              "materials": [
+                "c156a809-cf43-4022-97f5-1f7a3a2ed37e"
+              ]
+            },
+            {
+              "key": "household:founder-4",
+              "amount": 0.6172028928,
+              "materials": [
+                "08b5244d-a970-403e-b763-40754b18d50c"
+              ]
+            },
+            {
+              "key": "household:founder-5",
+              "amount": 0.6172028928,
+              "materials": [
+                "120ae1b0-cd73-4ca8-8238-60fd9fded26d"
+              ]
+            },
+            {
+              "key": "household:founder-6",
+              "amount": 0.6172028928,
+              "materials": [
+                "aac1562a-fa62-478f-afd2-884eff2c7d3c"
+              ]
+            },
+            {
+              "key": "household:founder-7",
+              "amount": 0.6172028928,
+              "materials": [
+                "1b0c42f5-9eb0-4711-86eb-d13193dce4f0"
+              ]
+            },
+            {
+              "key": "household:founder-9",
+              "amount": 0.6172028928,
+              "materials": [
+                "923f2f40-6dca-4542-bf2f-7abd6236b14d"
+              ]
+            }
+          ]
+        },
+        {
+          "label": "summer",
+          "effect": {
+            "kind": "none",
+            "quality": "low",
+            "reducedMotion": false,
+            "enabled": true,
+            "time": 3.5586999999880793,
+            "snow": 0,
+            "rain": 0,
+            "snowWeight": 0,
+            "rainWeight": 0,
+            "radius": 44,
+            "center": [
+              45.5,
+              2.6,
+              3.16158830897205
+            ],
+            "batches": 2
+          },
+          "resources": {
+            "routeAttempts": 10,
+            "rejectedRoutes": 0,
+            "targetAttempts": 0,
+            "rejectedTargets": 0,
+            "routeNodes": 2144,
+            "maxRouteNodes": 325,
+            "updates": 71,
+            "lastUpdateMs": 0.5,
+            "maxUpdateMs": 17.69999998807907,
+            "totalUpdateMs": 124.99999964237213,
+            "yardRepackAttempts": 0,
+            "yardRepackNodes": 0,
+            "yardRepackFailures": 0,
+            "agents": 13,
+            "reservations": 0,
+            "occupationVisits": 0,
+            "outOfZone": 0,
+            "bodyOverlaps": 0,
+            "actors": 13,
+            "sourceTemplates": 3,
+            "ownedInstanceRoots": 0,
+            "lastFrameMs": 17.299999952316284,
+            "drawCalls": 49,
+            "triangles": 1008615,
+            "geometries": 28,
+            "textures": 51
+          },
+          "structureSnow": [
+            {
+              "key": "settlement-campfire",
+              "amount": 0,
+              "materials": [
+                "9cd84671-ddc0-40f2-be3c-b2cd366ec08b"
+              ]
+            },
+            {
+              "key": "building:house-1",
+              "amount": 0,
+              "materials": [
+                "b72c70ee-150b-433f-9b81-c074d993e2bc"
+              ]
+            },
+            {
+              "key": "household:founder-2",
+              "amount": 0,
+              "materials": [
+                "c156a809-cf43-4022-97f5-1f7a3a2ed37e"
+              ]
+            },
+            {
+              "key": "household:founder-4",
+              "amount": 0,
+              "materials": [
+                "08b5244d-a970-403e-b763-40754b18d50c"
+              ]
+            },
+            {
+              "key": "household:founder-5",
+              "amount": 0,
+              "materials": [
+                "120ae1b0-cd73-4ca8-8238-60fd9fded26d"
+              ]
+            },
+            {
+              "key": "household:founder-6",
+              "amount": 0,
+              "materials": [
+                "aac1562a-fa62-478f-afd2-884eff2c7d3c"
+              ]
+            },
+            {
+              "key": "household:founder-7",
+              "amount": 0,
+              "materials": [
+                "1b0c42f5-9eb0-4711-86eb-d13193dce4f0"
+              ]
+            },
+            {
+              "key": "household:founder-9",
+              "amount": 0,
+              "materials": [
+                "923f2f40-6dca-4542-bf2f-7abd6236b14d"
+              ]
+            }
+          ]
+        },
+        {
+          "label": "autumn",
+          "effect": {
+            "kind": "rain",
+            "quality": "low",
+            "reducedMotion": false,
+            "enabled": true,
+            "time": 3.5515999999642367,
+            "snow": 0,
+            "rain": 180,
+            "snowWeight": 0,
+            "rainWeight": 1,
+            "radius": 44,
+            "center": [
+              45.5,
+              2.6,
+              3.16158830897205
+            ],
+            "batches": 2
+          },
+          "resources": {
+            "routeAttempts": 10,
+            "rejectedRoutes": 0,
+            "targetAttempts": 0,
+            "rejectedTargets": 0,
+            "routeNodes": 2144,
+            "maxRouteNodes": 325,
+            "updates": 82,
+            "lastUpdateMs": 1.199999988079071,
+            "maxUpdateMs": 10.900000035762787,
+            "totalUpdateMs": 116.3999999165535,
+            "yardRepackAttempts": 0,
+            "yardRepackNodes": 0,
+            "yardRepackFailures": 0,
+            "agents": 13,
+            "reservations": 0,
+            "occupationVisits": 0,
+            "outOfZone": 0,
+            "bodyOverlaps": 0,
+            "actors": 13,
+            "sourceTemplates": 3,
+            "ownedInstanceRoots": 0,
+            "lastFrameMs": 19.899999976158142,
+            "drawCalls": 50,
+            "triangles": 1008975,
+            "geometries": 28,
+            "textures": 51
+          },
+          "structureSnow": [
+            {
+              "key": "settlement-campfire",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "9cd84671-ddc0-40f2-be3c-b2cd366ec08b"
+              ]
+            },
+            {
+              "key": "building:house-1",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "b72c70ee-150b-433f-9b81-c074d993e2bc"
+              ]
+            },
+            {
+              "key": "household:founder-2",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "c156a809-cf43-4022-97f5-1f7a3a2ed37e"
+              ]
+            },
+            {
+              "key": "household:founder-4",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "08b5244d-a970-403e-b763-40754b18d50c"
+              ]
+            },
+            {
+              "key": "household:founder-5",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "120ae1b0-cd73-4ca8-8238-60fd9fded26d"
+              ]
+            },
+            {
+              "key": "household:founder-6",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "aac1562a-fa62-478f-afd2-884eff2c7d3c"
+              ]
+            },
+            {
+              "key": "household:founder-7",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "1b0c42f5-9eb0-4711-86eb-d13193dce4f0"
+              ]
+            },
+            {
+              "key": "household:founder-9",
+              "amount": 0.00673920000000011,
+              "materials": [
+                "923f2f40-6dca-4542-bf2f-7abd6236b14d"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "check": "Gradual live boundaries and hidden-tab pause",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "lowFrames": {
+    "frameIntervalsMs": [
+      -3.799999988077616,
+      16.599999999998545,
+      16.700000000000728,
+      16.799999999999272,
+      49.900000000001455,
+      16.69999999999709,
+      33.30000000000291,
+      33.599999999998545,
+      16.400000000001455,
+      33.29999999999927,
+      16.799999999999272,
+      33.29999999999927,
+      33.29999999999927,
+      16.600000000002183,
+      33.39999999999782,
+      16.700000000000728,
+      33.20000000000073,
+      83.40000000000146,
+      16.69999999999709,
+      16.80000000000291,
+      16.5,
+      16.69999999999709,
+      50.10000000000218,
+      33.099999999998545,
+      66.79999999999927,
+      16.700000000000728,
+      33.29999999999927,
+      33.30000000000291,
+      16.69999999999709,
+      33.30000000000291,
+      16.69999999999709,
+      33.400000000001455,
+      33.099999999998545,
+      100.10000000000218,
+      16.700000000000728,
+      16.599999999998545,
+      16.900000000001455,
+      33.099999999998545,
+      33.400000000001455,
+      16.799999999999272
+    ],
+    "diagnostics": {
+      "routeAttempts": 10,
+      "rejectedRoutes": 0,
+      "targetAttempts": 0,
+      "rejectedTargets": 0,
+      "routeNodes": 2144,
+      "maxRouteNodes": 325,
+      "updates": 216,
+      "lastUpdateMs": 0.3999999761581421,
+      "maxUpdateMs": 6.399999976158142,
+      "totalUpdateMs": 105.50000071525574,
+      "yardRepackAttempts": 0,
+      "yardRepackNodes": 0,
+      "yardRepackFailures": 0,
+      "agents": 13,
+      "reservations": 0,
+      "occupationVisits": 0,
+      "outOfZone": 0,
+      "bodyOverlaps": 0,
+      "actors": 13,
+      "sourceTemplates": 3,
+      "ownedInstanceRoots": 0,
+      "lastFrameMs": 7,
+      "drawCalls": 35,
+      "triangles": 952094,
+      "geometries": 29,
+      "textures": 51
+    }
+  },
+  "normalFrames": {
+    "frameIntervalsMs": [
+      -0.7000000000007276,
+      16.900000000001455,
+      16.5,
+      16.700000000000728,
+      16.599999999998545,
+      16.700000000000728,
+      16.700000000000728,
+      33.29999999999927,
+      16.700000000000728,
+      33.29999999999927,
+      33.5,
+      33.20000000000073,
+      33.39999999999782,
+      150.20000000000073,
+      33.099999999998545,
+      16.600000000002183,
+      16.599999999998545,
+      16.700000000000728,
+      33.29999999999927,
+      16.799999999999272,
+      16.600000000002183,
+      33.29999999999927,
+      33.5,
+      33.29999999999927,
+      33.29999999999927,
+      33.400000000001455,
+      16.5,
+      216.70000000000073,
+      16.700000000000728,
+      16.599999999998545,
+      16.700000000000728,
+      16.799999999999272,
+      16.5,
+      16.700000000000728,
+      16.700000000000728,
+      16.599999999998545,
+      33.400000000001455,
+      16.599999999998545,
+      33.400000000001455,
+      33.29999999999927
+    ],
+    "diagnostics": {
+      "routeAttempts": 12,
+      "rejectedRoutes": 0,
+      "targetAttempts": 2,
+      "rejectedTargets": 0,
+      "routeNodes": 2858,
+      "maxRouteNodes": 464,
+      "updates": 349,
+      "lastUpdateMs": 0.30000001192092896,
+      "maxUpdateMs": 36.69999998807907,
+      "totalUpdateMs": 242.6000007390976,
+      "yardRepackAttempts": 0,
+      "yardRepackNodes": 0,
+      "yardRepackFailures": 0,
+      "agents": 13,
+      "reservations": 0,
+      "occupationVisits": 2,
+      "outOfZone": 0,
+      "bodyOverlaps": 0,
+      "actors": 13,
+      "sourceTemplates": 3,
+      "ownedInstanceRoots": 0,
+      "lastFrameMs": 12.699999988079071,
+      "drawCalls": 35,
+      "triangles": 952296,
+      "geometries": 29,
+      "textures": 51
+    }
+  },
+  "snowVisiblePixels": 1458,
+  "springTransition": {
+    "kind": "none",
+    "quality": "low",
+    "reducedMotion": false,
+    "enabled": true,
+    "time": 4.7836999999880785,
+    "snow": 236,
+    "rain": 0,
+    "snowWeight": 0.95,
+    "rainWeight": 0,
+    "radius": 44,
+    "center": [
+      45.5,
+      2.6,
+      3.16158830897205
+    ],
+    "batches": 2
+  },
+  "winterTransition": {
+    "kind": "snow",
+    "quality": "low",
+    "reducedMotion": false,
+    "enabled": true,
+    "time": 5.600699999988076,
+    "snow": 2,
+    "rain": 116,
+    "snowWeight": 0.15844999998807907,
+    "rainWeight": 0.8415500000119209,
+    "radius": 44,
+    "center": [
+      45.5,
+      2.6,
+      3.16158830897205
+    ],
+    "batches": 2
+  },
+  "passed": true
+}
