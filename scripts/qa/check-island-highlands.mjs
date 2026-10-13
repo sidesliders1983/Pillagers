@@ -9,7 +9,11 @@ await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 1000 }, hasTouch: true });
 page.setDefaultTimeout(120000);
-const evidence = { date: new Date().toISOString(), errors: [], checks: [], captures: [] };
+const bareOnly = process.env.QA_BARE_ONLY === '1';
+const evidence = bareOnly ? JSON.parse(await readFile(output + '/browser.json', 'utf8')) :
+    { date: new Date().toISOString(), errors: [], checks: [], captures: [] };
+evidence.passed = false;
+if (bareOnly) evidence.bareLightingReviewAt = new Date().toISOString();
 page.on('pageerror', e => evidence.errors.push(String(e)));
 page.on('console', m => { if (m.type() === 'error') evidence.errors.push(m.text()); });
 try {
@@ -34,6 +38,7 @@ try {
     await waitReady();
     const capture = async (seed, mode, view, overlay) => {
         await openEnvironmentSettings(page);
+        await page.selectOption('#environment-light', overlay === 'form' ? 'sun10' : 'day');
         await page.selectOption('#world-overlay', overlay);
         await page.selectOption('#environment-camera', view);
         await page.locator('#environment-settings > summary').click();
@@ -41,13 +46,18 @@ try {
         const file = seed + '-' + mode + '-' + view + '-' + overlay + '.jpg';
         await canvas.screenshot({ path: output + '/' + file, type: 'jpeg', quality: 90 });
         const fixture = await canvas.evaluate(e => JSON.parse(e.dataset.fixture));
+        evidence.captures = evidence.captures.filter(c => c.file !== file);
         evidence.captures.push({ seed, mode, view, overlay, file, fixture });
         if (mode === 'after' && view !== 'player-start') {
             const before = evidence.captures.find(c => c.seed === seed && c.mode === 'before' && c.view === view && c.overlay === overlay);
             assert.deepEqual(fixture.camera, before.fixture.camera, 'same camera');
-            for (const key of ['preset', 'direction', 'sun', 'fill', 'exposure']) {
+            for (const key of ['preset', 'sun', 'fill', 'exposure']) {
                 assert.deepEqual(fixture.lightSettings[key], before.fixture.lightSettings[key], 'same light: ' + key);
             }
+            fixture.lightSettings.direction.forEach((value, i) => {
+                assert.ok(Math.abs(value - before.fixture.lightSettings.direction[i]) < 1e-12,
+                    'same sun direction within normalization roundoff');
+            });
             // The directional light's fitted shadow bounds follow the changed terrain.
             // These bounds are recorded, not misreported as identical.
         }
@@ -57,10 +67,11 @@ try {
         for (const mode of ['before', 'after']) {
             await importWorld(seed, mode);
             for (const [view, overlay] of [['island-oblique', 'form'], ['overview', 'form'], ['overview', 'none'], ['island-oblique', 'none']]) {
-                await capture(seed, mode, view, overlay);
+                if (!bareOnly || overlay === 'form') await capture(seed, mode, view, overlay);
             }
         }
     }
+    if (!bareOnly) {
     evidence.checks.push('five fixed seeds: identical cameras and lighting for bare terrain and unchanged material pipeline');
     await importWorld(18, 'after');
     await openEnvironmentSettings(page);
@@ -95,7 +106,9 @@ try {
         JSON.parse(await readFile(output + '/18-before.json', 'utf8')), 'import never upgrades old geography');
     await oldDownload.delete();
     evidence.checks.push('previous version import/export preserves its full stored geography');
+    }
     assert.deepEqual(evidence.errors, []);
+    evidence.passed = true;
 } finally {
     await writeFile(output + '/browser.json', JSON.stringify(evidence, null, 2));
     await browser.close();

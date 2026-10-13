@@ -4,7 +4,7 @@ const source = process.env.QA_OUTPUT ?? 'scratch/island-highlands';
 const output = 'docs/qa/island-highlands';
 const measured = JSON.parse(await readFile(source + '/measurements.json', 'utf8'));
 const browser = JSON.parse(await readFile(source + '/browser.json', 'utf8'));
-if (browser.errors.length || browser.checks.length !== 3 || browser.captures.length !== 41) {
+if (!browser.passed || browser.errors.length || browser.checks.length !== 3 || browser.captures.length !== 41) {
     throw new Error('Complete browser evidence is required before publishing.');
 }
 await mkdir(output, { recursive: true });
@@ -52,7 +52,7 @@ The #134 rules are unchanged: 160m between centres, 40m between construction zon
 
 All five fixed seeds pass. Peaks fall from 58.8–75.8m to 37.3–46.1m. The reported slope statistic is the 90th percentile of physical-query slopes at the same cells that were above 16m in the old world; it is not an average over an expanding lowland region. No acceptance criterion, seed or material recipe was changed to achieve this result. These are five regression examples, not a claim that every seed qualifies.
 
-Before/after views use identical cameras, sun direction, light colour/intensity and exposure. Fog, water, vegetation and village are disabled in the paired captures. Shadow bounds automatically fit each changed terrain and are recorded in browser.json. Material maps and projection settings are unchanged; #135 zoning is recomputed from the new canonical slopes/elevation through its existing classifier. The final settlement image is contextual, not a matched camera pair, because the selected player site can change.
+Each before/after pair uses identical cameras, sun direction, light colour/intensity and exposure. Material views use Day; bare-form views use Low sun to make relief readable. Fog, water, vegetation and village are disabled in the paired captures. Shadow bounds automatically fit each changed terrain and are recorded in browser.json. Material maps and projection settings are unchanged; #135 zoning is recomputed from the new canonical slopes/elevation through its existing classifier. The final settlement image is contextual, not a matched camera pair, because the selected player site can change.
 
 Elevation maps use a fixed 0–80m scale in metres above sea level and show the entire 800×800m heightfield without vegetation or material detail. Bare-form and source-material renders are separate. No new performance benchmark is claimed for this geometry pass. Visual acceptance remains with the owner.`;
 await writeFile(output + '/report.md', '# Gentler island highlands — controlled comparison\n\n' + explanation +
@@ -74,6 +74,6 @@ body{margin:0;padding:24px;background:#152822;color:#eee8d5;font:17px/1.6 system
 </style><main><h1>Lower, gentler island ridges</h1><p>The same five seeds, before and after the height refinement. The accepted ground-material recipe is unchanged. Compare the rock mass first, then the bare terrain and fixed-scale elevation maps.</p>
 <p>Peaks: <b>59–76m → 37–46m</b>. All five seeds retain valid settlement pairs, walkable connections and terrain-hidden rival roofs under the existing #134 rules. Old saved worlds remain unchanged.</p>
 <p>${measured.seeds.map(seed => `<a href="#seed-${seed}">Seed ${seed}</a>`).join(' · ')} · <a href="report.md">Method and limits</a> · <a href="measurements.json">Measurements</a> · <a href="../ground-blending/review.html">Original material review</a></p>
-<p>Identical cameras and sun settings. No vegetation, water, fog or village in paired views. Shadow bounds fit the changed terrain automatically. Slope-driven material weights are recalculated using the existing zoning fields. Elevation legend (metres above sea):</p><div class="legend"><span>0</span><span>16</span><span>32</span><span>48</span><span>80</span></div>
+<p>Identical cameras and sun settings within each pair. Day for materials; Low sun for bare form. No vegetation, water, fog or village in paired views. Shadow bounds fit the changed terrain automatically. Slope-driven material weights are recalculated using the existing zoning fields. Elevation legend (metres above sea):</p><div class="legend"><span>0</span><span>16</span><span>32</span><span>48</span><span>80</span></div>
 ${sections}<section><h2>Seed 18 · newly selected settlement</h2><p>Context only: the planner reruns after the terrain changes. This is the new starting camera with the village, nature and water restored.</p><img class="context" src="18-after-player-start-none.jpg" alt="New settlement starting view"></section></main></html>`);
 console.log('Published ' + output + '/review.html');
