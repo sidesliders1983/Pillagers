@@ -19,6 +19,16 @@ For delivery prioritization, see the [updated active roadmap](gameplay/GAME-SIMU
 
 ---
 
+# Current exploration control and world knowledge policy — GP-008 (2026-10-13)
+
+**Only Expedition Groups receive direct movement/mission orders.** Ordinary residents remain autonomous in everyday work and movement, while existing player-authorized management interventions (occupation, household, housing, caregiving, resource priorities) are not withdrawn. Form reusable groups from named real residents, select an unknown location in the 3D island to explore, and let the group choose and execute its route under canonical Simulation Core ticks.
+
+The player starts with only the founding settlement surroundings known. **Clans own persistent explored geography** and separate current observation and stale/scouted/surveyed opponent intelligence. Camera motion and atmospheric fog settings cannot change discovery. The hidden CPU community is a real independent Simulation Core clan associated with the physical `rivalSite`, evolving before discovery; no separate enemy economy inside the renderer.
+
+Do not use the legacy four-arrow Region Graph as an arbitrary X/Z map for new physical campaigns: add a versioned adapter while retaining existing saves. See [GP-008](../GAME-PRINCIPLES.md#gp-008--exploration-is-strategic-group-level-action-knowledge-belongs-to-communities), [design contract](gameplay/EXPLORATION-FOG-AND-RIVAL-CLANS.md) and [epic #146](https://github.com/sidesliders1983/Pillagers/issues/146).
+
+---
+
 # 1. Core fantasy
 
 Pillagers is a **generational settlement simulation with RTS elements**.
