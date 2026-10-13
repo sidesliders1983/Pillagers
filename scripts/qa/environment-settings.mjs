@@ -2,6 +2,6 @@
 export async function openEnvironmentSettings(page) {
     const settings = page.locator('#environment-settings');
     if (await settings.count() && await settings.getAttribute('open') === null) {
-        await settings.locator('summary').click();
+        await settings.locator(':scope > summary').click();
     }
 }

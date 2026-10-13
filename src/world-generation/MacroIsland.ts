@@ -90,7 +90,8 @@ export function createMacroQueries(world: WorldBlueprint) {
 }
 
 /** Find natural lowland pockets without modifying or reserving the terrain. */
-export function findNaturalSites(world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'coast'>) {
+export function findNaturalSites(world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'coast'>,
+    search = { anchorStride: 10, radius: 55 }) {
     const surface = createBlueprintSurface(world);
     const { bounds, spacing, columns, rows, heights } = world.terrain;
     const { waterLevel } = world;
@@ -102,10 +103,10 @@ export function findNaturalSites(world: Pick<WorldBlueprint, 'terrain' | 'waterL
             surface.slopeAt(p.x, p.z) <= .12;
     });
     const candidates: MacroSiteCandidate[] = [];
-    const radius = 55;
+    const { radius, anchorStride } = search;
     const coastDistance = createCoastDistance(world.coast);
-    for (let row = 25; row < rows - 25; row += 10) {
-        for (let col = 25; col < columns - 25; col += 10) {
+    for (let row = 25; row < rows - 25; row += anchorStride) {
+        for (let col = 25; col < columns - 25; col += anchorStride) {
             const start = row * columns + col, center = pointAt(start);
             if (!usable[start]) continue;
             const shoreDistance = coastDistance(center);

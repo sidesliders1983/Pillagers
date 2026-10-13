@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-13",
+  "build": {
+    "passed": true,
+    "note": "Existing chunk-size advisory remains."
+  },
+  "tests": {
+    "total": 706,
+    "passed": 705,
+    "failed": 0,
+    "skipped": 1,
+    "skip": "Existing opt-in test",
+    "durationMs": 433844.0122
+  },
+  "characters": {
+    "passed": true,
+    "assets": 20,
+    "glbs": 36,
+    "goldenCharacters": 12,
+    "equippedModules": 19
+  },
+  "format": {
+    "configuredFormatter": false,
+    "manualReview": true,
+    "gitDiffCheck": true
+  },
+  "browser": "See browser.json; Edge Chromium with touch/tablet emulation. No physical iPad claim.",
+  "seedBatch": {
+    "accepted": 1,
+    "rejected": 9,
+    "deterministicAndSaveLoad": 10
+  },
+  "ci": "Required GitHub checks are tracked on the pull request head."
+}

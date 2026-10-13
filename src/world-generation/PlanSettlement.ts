@@ -1,7 +1,8 @@
+import type { FoundationReservation } from './SettlementSites';
 import { buildings, buildingDistance, settlementBounds } from '../world/SettlementLayout';
-import { createBlueprintSurface, terrainTriangles } from './TerrainQueries';
+import { createBlueprintSurface } from './TerrainQueries';
 import type {
-    Bounds2, CoastSegment, Point2, SettlementSite, WalkabilityField, WorldBlueprint,
+    Bounds2, BuildingPlacement, CoastSegment, Point2, SettlementSite, WalkabilityField, WorldBlueprint,
 } from './WorldBlueprint';
 
 type Landscape = Pick<WorldBlueprint, 'config' | 'terrain' | 'waterLevel'>;
@@ -25,27 +26,43 @@ export function extractCoast(world: Landscape): CoastSegment[] {
         z: terrain.bounds.minZ + Math.floor(i / terrain.columns) * terrain.spacing,
     });
     const coast: CoastSegment[] = [];
-    for (const triangle of terrainTriangles(terrain)) {
-        const crossings: Point2[] = [];
-        for (let edge = 0; edge < 3; edge++) {
-            const a = triangle[edge], b = triangle[(edge + 1) % 3];
-            const ah = terrain.heights[a], bh = terrain.heights[b];
-            if ((ah <= waterLevel) === (bh <= waterLevel)) continue;
-            const t = (waterLevel - ah) / (bh - ah), p = point(a), q = point(b);
-            crossings.push({ x: p.x + (q.x-p.x)*t, z: p.z + (q.z-p.z)*t });
+    // Most cells are entirely dry or submerged. Avoid allocating and traversing
+    // every triangle for each candidate's navigation rebuild. Crossing cells keep
+    // the exact canonical winding and segment order used by terrainTriangles.
+    for (let row = 0; row < terrain.rows - 1; row++) {
+        for (let col = 0; col < terrain.columns - 1; col++) {
+            const a = row * terrain.columns + col, b = a + terrain.columns;
+            const c = a + 1, d = b + 1;
+            const wet = [a, b, c, d].map(index => terrain.heights[index] <= waterLevel);
+            if (wet.every(value => value === wet[0])) continue;
+            const triangles = (row + col) % 2 === 0 ? [[a, b, c], [c, b, d]] :
+                [[a, b, d], [a, d, c]];
+            for (const triangle of triangles) {
+                const crossings: Point2[] = [];
+                for (let edge = 0; edge < 3; edge++) {
+                    const first = triangle[edge], second = triangle[(edge + 1) % 3];
+                    const ah = terrain.heights[first], bh = terrain.heights[second];
+                    if ((ah <= waterLevel) === (bh <= waterLevel)) continue;
+                    const t = (waterLevel - ah) / (bh - ah), p = point(first), q = point(second);
+                    crossings.push({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t });
+                }
+                if (crossings.length === 2) coast.push({ a: crossings[0], b: crossings[1] });
+            }
         }
-        if (crossings.length === 2) coast.push({ a: crossings[0], b: crossings[1] });
     }
     return coast;
 }
 
 /** Cardinal paths prohibit corner-cutting through footprints or steep terrain. */
-export function planSettlement(world: Landscape, center: Point2, candidateDry: boolean) {
-    const surface = createBlueprintSurface(world), bounds = settlementBoundsAt(center);
+export function planSettlement(world: Landscape, center: Point2, candidateDry: boolean,
+    options?: { placements: readonly BuildingPlacement[]; bounds: Bounds2;
+        obstacles?: readonly BuildingPlacement[] }) {
+    const surface = createBlueprintSurface(world), bounds = options?.bounds ?? settlementBoundsAt(center);
     const island = world.config.preset === 'island';
-    const placements = buildings.filter(b => !island && b.key !== 'storehouse').map((b, i) => ({
+    const placements = options ? [...options.placements] : buildings.filter(b => !island && b.key !== 'storehouse').map((b, i) => ({
         ...b, id: 'reference-building-' + (i+1), x: b.x + center.x, z: b.z + center.z,
     }));
+    const obstacles = [...placements, ...(options?.obstacles ?? [])];
     const gridBounds = world.terrain.bounds;
     const columns = gridBounds.maxX - gridBounds.minX + 1, rows = gridBounds.maxZ - gridBounds.minZ + 1;
     const point = (i: number): Point2 => ({ x: gridBounds.minX + i % columns,
@@ -55,7 +72,7 @@ export function planSettlement(world: Landscape, center: Point2, candidateDry: b
         const p = point(i);
         return surface.surfaceHeightAt(p.x, p.z) >= world.waterLevel + suitability.walkingElevation &&
             surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&
-            placements.every(b => buildingDistance(p.x, p.z, b) >= suitability.residentClearance);
+            obstacles.every(b => buildingDistance(p.x, p.z, b) >= suitability.residentClearance);
     });
     const start = index(center), parent = new Int32Array(cells.length).fill(-1), queue: number[] = [];
     if (cells[start]) { parent[start] = start;
@@ -143,4 +160,186 @@ export function planSettlement(world: Landscape, center: Point2, candidateDry: b
         maximumFoundationSlope, minimumFoundationElevation,
         score: Math.round(100 * connectedBuildings/Math.max(1, placements.length) * Math.min(1, connectedArea/3000)),
     } };
+}
+
+
+export function footprintBounds(building: BuildingPlacement, margin = 0): Bounds2 {
+    const c = Math.abs(Math.cos(building.rotation)), s = Math.abs(Math.sin(building.rotation));
+    const width = building.halfWidth * c + building.halfDepth * s + margin;
+    const depth = building.halfWidth * s + building.halfDepth * c + margin;
+    return { minX: building.x - width, maxX: building.x + width,
+        minZ: building.z - depth, maxZ: building.z + depth };
+}
+
+/** Grid support extends beyond the parcel so all triangles below it become level. */
+function foundationVertices(world: Landscape, building: BuildingPlacement) {
+    const { terrain } = world;
+    const support = terrain.spacing * Math.SQRT2;
+    const bounds = footprintBounds(building, support + 4);
+    const points: { x: number; z: number; index: number; weight: number }[] = [];
+    for (let row = Math.max(0, Math.floor((bounds.minZ - terrain.bounds.minZ) / terrain.spacing));
+        row <= Math.min(terrain.rows - 1, Math.ceil((bounds.maxZ - terrain.bounds.minZ) / terrain.spacing)); row++) {
+        for (let col = Math.max(0, Math.floor((bounds.minX - terrain.bounds.minX) / terrain.spacing));
+            col <= Math.min(terrain.columns - 1, Math.ceil((bounds.maxX - terrain.bounds.minX) / terrain.spacing)); col++) {
+            const x = terrain.bounds.minX + col * terrain.spacing;
+            const z = terrain.bounds.minZ + row * terrain.spacing;
+            const distance = buildingDistance(x, z, building);
+            const weight = Math.max(0, Math.min(1, 1 - (distance - support) / 4));
+            if (weight > 0) points.push({ x, z, index: row * terrain.columns + col, weight });
+        }
+    }
+    return points;
+}
+
+/** Cache physical pose checks across overlapping candidate pockets in one search. */
+export function createFoundationSearch(world: Landscape, maximumAdjustment: number) {
+    const surface = createBlueprintSurface(world);
+    const sources = buildings.filter(b => b.key !== 'storehouse').map((b, i) => ({
+        ...b, id: 'reference-building-' + (i + 1),
+    }));
+    const slopes = new Map<number, number>();
+    const poseBounds = new WeakMap<FoundationReservation, Bounds2>();
+    const poses = sources.map(() => new Map<string, FoundationReservation | null>());
+    const orientations = sources.map(source => [...new Set([source.rotation,
+        ...Array.from({ length: 8 }, (_, i) => i * Math.PI / 4)])]);
+    const pose = (sourceIndex: number, point: Point2, rotation: number) => {
+        const key = `${point.x},${point.z},${rotation}`;
+        const cached = poses[sourceIndex].get(key);
+        if (cached !== undefined) return cached;
+        const building = { ...sources[sourceIndex], ...point, rotation };
+        // Cheap exact surface samples reject steep or excessively uneven poses before
+        // allocating the complete support-vertex list. Passing still needs every vertex.
+        let sampleLow = Infinity, sampleHigh = -Infinity;
+        for (const u of [-1, 0, 1]) for (const v of [-1, 0, 1]) {
+            const dx = u * building.halfWidth, dz = v * building.halfDepth;
+            const x = building.x + dx * Math.cos(rotation) + dz * Math.sin(rotation);
+            const z = building.z - dx * Math.sin(rotation) + dz * Math.cos(rotation);
+            const height = surface.surfaceHeightAt(x, z);
+            sampleLow = Math.min(sampleLow, height);
+            sampleHigh = Math.max(sampleHigh, height);
+            if (height < world.waterLevel + suitability.foundationElevation ||
+                sampleHigh - sampleLow > maximumAdjustment * 2) {
+                poses[sourceIndex].set(key, null);
+                return null;
+            }
+        }
+        const vertices = foundationVertices(world, building);
+        let low = Infinity, high = -Infinity, slope = 0;
+        for (const p of vertices) {
+            const height = world.terrain.heights[p.index];
+            if (height < world.waterLevel + suitability.foundationElevation) {
+                poses[sourceIndex].set(key, null);
+                return null;
+            }
+            if (p.weight !== 1) continue;
+            low = Math.min(low, height);
+            high = Math.max(high, height);
+            let naturalSlope = slopes.get(p.index);
+            if (naturalSlope === undefined) {
+                naturalSlope = surface.slopeAt(p.x, p.z);
+                slopes.set(p.index, naturalSlope);
+            }
+            slope = Math.max(slope, naturalSlope);
+            if (high - low > maximumAdjustment * 2 || slope > suitability.foundationSlope) {
+                poses[sourceIndex].set(key, null);
+                return null;
+            }
+        }
+        const elevation = (low + high) / 2;
+        let adjustment = 0;
+        for (const p of vertices) {
+            adjustment = Math.max(adjustment,
+                Math.abs(elevation - world.terrain.heights[p.index]) * p.weight);
+        }
+        const result = adjustment <= maximumAdjustment ?
+            { ...building, elevation, adjustment, naturalSlope: slope } : null;
+        if (result) poseBounds.set(result, footprintBounds(result, 7));
+        poses[sourceIndex].set(key, result);
+        return result;
+    };
+    return (center: Point2, cells: readonly Point2[]) => {
+        const options = sources.map((_, index) => {
+            const available: FoundationReservation[] = [];
+            for (const point of cells) {
+                if (Math.round(point.x) % 4 || Math.round(point.z) % 4) continue;
+                for (const rotation of orientations[index]) {
+                    const b = { ...sources[index], ...point, rotation };
+                    const bounds = footprintBounds(b, 7);
+                    if (center.x >= bounds.minX - 7 && center.x <= bounds.maxX + 7 &&
+                        center.z >= bounds.minZ - 7 && center.z <= bounds.maxZ + 7) continue;
+                    const candidate = pose(index, point, rotation);
+                    if (candidate) available.push(candidate);
+                }
+            }
+            return available;
+        });
+        let attempts = 0, nodes = 0, maximumPlaced = 0;
+        let result: FoundationReservation[] = [];
+        const overlap = (a: FoundationReservation, b: FoundationReservation) => {
+            const first = poseBounds.get(a)!, second = poseBounds.get(b)!;
+            return first.minX < second.maxX && first.maxX > second.minX &&
+                first.minZ < second.maxZ && first.maxZ > second.minZ;
+        };
+        // Four layout directions, each with three distinct placement orders. The
+        // bounded backtracking can undo a greedy early choice; footprints never shrink.
+        for (let attempt = 0; attempt < 12 && result.length !== 6; attempt++) {
+            attempts++;
+            const angle = Math.floor(attempt / 3) * Math.PI / 2;
+            const ranked = options.map((available, index) => {
+                const source = sources[index];
+                const target = { x: center.x + source.x * Math.cos(angle) + source.z * Math.sin(angle),
+                    z: center.z - source.x * Math.sin(angle) + source.z * Math.cos(angle) };
+                return [...available].sort((a, b) =>
+                    Math.hypot(a.x - target.x, a.z - target.z) - Math.hypot(b.x - target.x, b.z - target.z) ||
+                    a.adjustment - b.adjustment || a.z - b.z || a.x - b.x || a.rotation - b.rotation);
+            });
+            const order = sources.map((_, i) => i).sort((a, b) => {
+                if (attempt % 3 === 1) return options[a].length - options[b].length || a - b;
+                const area = (i: number) => sources[i].halfWidth * sources[i].halfDepth;
+                return (attempt % 3 === 2 ? area(a) - area(b) : area(b) - area(a)) || a - b;
+            });
+            let attemptNodes = 0;
+            const visit = (placed: FoundationReservation[], available: FoundationReservation[][]): boolean => {
+                maximumPlaced = Math.max(maximumPlaced, placed.length);
+                if (placed.length === 6) { result = placed; return true; }
+                if (attemptNodes >= 1000) return false;
+                const index = order[placed.length];
+                let branches = 0;
+                const positions = new Set<string>();
+                for (const option of available[index]) {
+                    // Near-identical orientations at a single point must not exhaust
+                    // the branch budget before testing another location.
+                    const cell = `${option.x},${option.z}`;
+                    if (positions.has(cell)) continue;
+                    positions.add(cell);
+                    attemptNodes++;
+                    nodes++;
+                    const remaining = available.map((poses, other) => order.indexOf(other) <= placed.length ?
+                        poses : poses.filter(p => !overlap(option, p)));
+                    const nextPlaced = [...placed, option];
+                    maximumPlaced = Math.max(maximumPlaced, nextPlaced.length);
+                    if (visit(nextPlaced, remaining)) return true;
+                    if (++branches >= 12 || attemptNodes >= 1000) break;
+                }
+                return false;
+            };
+            visit([], ranked);
+        }
+        return { foundations: result.sort((a, b) => a.id.localeCompare(b.id)),
+            evidence: { attempts, nodes, maximumPlaced, orientationCount: Math.max(...orientations.map(o => o.length)),
+                validPoses: options.map((poses, i) => ({ id: sources[i].id, count: poses.length })) } };
+    };
+}
+
+/** Only player foundations are built in the preview. Rival grading remains a feasibility record. */
+export function gradeSettlementFoundations(world: Landscape,
+    foundations: readonly FoundationReservation[]) {
+    const heights = [...world.terrain.heights];
+    for (const building of foundations) {
+        for (const p of foundationVertices(world, building)) {
+            heights[p.index] = Math.fround(heights[p.index] +
+                (building.elevation - heights[p.index]) * p.weight);
+        }
+    }
+    return { ...world.terrain, heights };
 }

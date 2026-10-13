@@ -1,3 +1,4 @@
+import type { RivalSite, SiteSelection, SiteRules, settlementGeneratorVersion } from './SettlementSites';
 import type { NatureAssetKey } from '../config/NatureAssets';
 
 /** A versioned geographical proposal. It contains no Simulation Core inhabitants or resources. */
@@ -16,11 +17,12 @@ export interface GenerationRequest {
     relief?: number;
     forestDensity?: number;
     conifers?: ConiferSource;
+    siteRules?: Partial<SiteRules>;
 }
 
 export interface WorldGenerationConfig {
     readonly seed: number;
-    readonly generatorVersion: typeof generatorVersion | typeof firstIslandGeneratorVersion | typeof islandGeneratorVersion;
+    readonly generatorVersion: typeof generatorVersion | typeof firstIslandGeneratorVersion | typeof islandGeneratorVersion | typeof settlementGeneratorVersion;
     readonly preset: WorldPreset;
     readonly width: number;
     readonly depth: number;
@@ -28,6 +30,7 @@ export interface WorldGenerationConfig {
     readonly forestDensity: number;
     /** Missing in original v0.1 blueprints means KayKit; old saves remain unchanged. */
     readonly conifers?: ConiferSource;
+    readonly siteRules?: SiteRules;
 }
 
 export interface TerrainField {
@@ -117,6 +120,8 @@ export interface WorldBlueprint {
     readonly terrain: TerrainField;
     readonly coast: readonly CoastSegment[];
     readonly settlement: SettlementSite;
+    readonly rivalSite?: RivalSite;
+    readonly siteSelection?: SiteSelection;
     readonly navigation: WalkabilityField;
     readonly validation: WorldValidation;
     readonly biomes: BiomeField;
