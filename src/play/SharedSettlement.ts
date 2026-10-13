@@ -5,7 +5,7 @@ import { applyCommand } from '../simulation/SimulationCore';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { sharedCampaignKey, fjordCampaignKey, FjordCampaign } from '../fjord-play/FjordCampaign';
 import type { EntityKind } from './SettlementView';
-import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
+import type { FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 export type SettlementView = 'board' | 'fjord';
 export type SettlementSelection = {
     kind: EntityKind;
@@ -17,8 +17,8 @@ export class SharedSettlement {
     transferring = false;
     readonly session: GameplaySession;
     readonly fjord: FjordCampaign;
-    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, geography: CampaignGeography = 'legacy') {
-        this.session = new GameplaySession(seed, narrativeSeed, socialEnabled);
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, geography: CampaignGeography = 'legacy', foundingPhase?: FoundingPhase) {
+        this.session = new GameplaySession(seed, narrativeSeed, socialEnabled, foundingPhase);
         this.fjord = new FjordCampaign(this.session, geography);
     }
     get selection(): SettlementSelection {
@@ -46,13 +46,13 @@ export class SharedSettlement {
         if (selection && !(identities[selection.kind]?.[selection.id]))
             this.select(null);
     }
-    newCampaign(seed: number, weatherEnabled: boolean, socialEnabled = true, geography?: CampaignGeography) {
+    newCampaign(seed: number, weatherEnabled: boolean, socialEnabled = true, geography?: CampaignGeography, foundingPhase = this.session.snapshot().foundingPhase) {
         const proposal = new GameplaySession();
-        proposal.newCampaign(seed, weatherEnabled, socialEnabled);
+        proposal.newCampaign(seed, weatherEnabled, socialEnabled, foundingPhase);
         this.fjord.startCampaign(proposal, geography);
     }
-    restart(sameFounders: boolean, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false) {
-        this.fjord.restart(sameFounders, weatherEnabled);
+    restart(sameFounders: boolean, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false, foundingPhase = this.session.snapshot().foundingPhase) {
+        this.fjord.restart(sameFounders, weatherEnabled, foundingPhase);
     }
     saveLocal(storage: Pick<Storage, 'getItem' | 'setItem'>) {
         storage.setItem(fjordCampaignKey, this.fjord.exportJSON());

@@ -38,3 +38,7 @@ Island campaigns export **bridgeVersion 2** with the pinned island recipe and ex
 Local saves and 2D ↔ 3D handoffs use this same compact format. Import/new/restart prepare and validate a proposal before committing canonical state. Generation and loading occur before the campaign clock starts. Cold preparation is synchronous and can take noticeable time on older hardware; the route shows a preparation message. No hard frame-time acceptance threshold was introduced.
 
 See [browser evidence and QA](qa/fjord-island/report.md). Historical capacity, terrain and material measurement reports retain their original scope and values.
+
+## Summer founding start (#157)
+
+New Fjord 3D campaigns explicitly select `summer-800-v1`: Summer 800, tick 500, initialized directly with 15 Food and 5 Materials. The first full annual reckoning follows after 500 played ticks, with unchanged annual consumption and risk rules. Headless/standalone 2D defaults and existing saves retain their original time. Both Fjord restart choices use the selected phase; no pre-simulation is performed. The owner approved this as the new Fjord default on 2026-10-13. See [Summer founding rules, compatibility and QA](SUMMER-800-START.md).

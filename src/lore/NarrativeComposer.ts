@@ -167,7 +167,8 @@ export function composeChapter(
             'These ' + elapsedWords(years) + ' years brought no recorded births or deaths.',
             'No birth or death was recorded over these ' + elapsedWords(years) + ' years.'];
         paragraphs.push({ templateId: 'clan-book.quiet.' + variant, templateVersion: 4,
-            text: lines[variant], sourceEventIds: [], factRefs: ['period', 'demographics'] });
+            text: facts.period.from.tick === facts.period.through.tick ? lines[variant] :
+                'No births or deaths were recorded across this interval.', sourceEventIds: [], factRefs: ['period', 'demographics'] });
     }
     const ledger = facts.ledger;
     if (ledger && facts.stocks && ledger.food.complete && ledger.materials.complete) {
@@ -218,11 +219,13 @@ export function composeOpening(
     const paragraph = (templateId: string, text: string, factRefs: string[]): NarrativeParagraph =>
         ({ templateId, templateVersion: 4, text, sourceEventIds, factRefs });
     const names = namesList(facts.founders.map(person => person.name));
-    const leads = [names + ' arrived together.',
+    const leads = facts.arrival ? [names + ' arrived together in summer.',
+        'The founding party arrived in summer. It included ' + names + '.',
+        names + ' were among those who arrived in summer.'] : [names + ' arrived together.',
         'The founding party arrived. It included ' + names + '.',
         names + ' were among those who arrived.'];
     const arrival = paragraph('clan-book.arrival.people.' + narrativeSeed % 3,
-        leads[narrativeSeed % 3], ['founders']);
+        leads[narrativeSeed % 3], facts.arrival ? ['founders', 'arrival'] : ['founders']);
     const pairs = facts.founders.filter(person => person.partnerId && person.id < person.partnerId)
         .flatMap(person => {
             const partner = facts.founders.find(other => other.id === person.partnerId && other.partnerId === person.id);

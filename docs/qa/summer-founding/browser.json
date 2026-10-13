@@ -1,0 +1,109 @@
+{
+  "ready": {
+    "time": {
+      "winter": 800,
+      "tick": 500
+    },
+    "season": "Summer",
+    "materials": {
+      "groundColors": [
+        15917748,
+        15917748,
+        15917748,
+        15917748,
+        15917748,
+        15917748
+      ],
+      "foliageColors": [
+        12835734,
+        9153643
+      ],
+      "snowAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "materials": [
+        "d6f07194-621e-4c2e-a066-0c0ec87e5291",
+        "04aa0323-781f-4bd4-a7a4-82b3dc599099",
+        "b0b49260-06ab-4fbe-a7dd-b68439915249",
+        "66c0d69e-6367-48d9-a956-c568fc7abe5d",
+        "d25bf369-fc3f-41b7-820e-8b3418e2817b",
+        "960e05ba-0e0d-4fad-ab6e-f63ea8aaa809",
+        "e5c12ae2-2ced-4f61-b3c9-18909abca477",
+        "1bfc875d-6017-459b-ac31-d8375447666b"
+      ]
+    },
+    "structures": [
+      {
+        "key": "settlement-campfire",
+        "amount": 0,
+        "materials": [
+          "6ab8602e-1497-41d2-bfeb-240e50c48eb2"
+        ]
+      },
+      {
+        "key": "household:founder-1",
+        "amount": 0,
+        "materials": [
+          "7cb90671-6f28-4619-8bc6-693db3e930ec"
+        ]
+      },
+      {
+        "key": "household:founder-2",
+        "amount": 0,
+        "materials": [
+          "a510c6a4-4d55-4d8c-a56a-373ddb397ff7"
+        ]
+      },
+      {
+        "key": "household:founder-4",
+        "amount": 0,
+        "materials": [
+          "151d0cff-da1a-4165-8a36-711c8d4d2821"
+        ]
+      },
+      {
+        "key": "household:founder-5",
+        "amount": 0,
+        "materials": [
+          "227fde81-1326-484b-b9d2-67600c75af0a"
+        ]
+      },
+      {
+        "key": "household:founder-6",
+        "amount": 0,
+        "materials": [
+          "949c0b5c-6f59-455b-9503-0c4654627fc2"
+        ]
+      },
+      {
+        "key": "household:founder-7",
+        "amount": 0,
+        "materials": [
+          "16ce084d-9014-49a5-82eb-2b2450860e8d"
+        ]
+      },
+      {
+        "key": "household:founder-9",
+        "amount": 0,
+        "materials": [
+          "5b4ff7b5-5138-4569-a87c-a00525f7a768"
+        ]
+      }
+    ]
+  },
+  "flows": [
+    "Export and local save/load preserve the Summer checkpoint; +1 Year keeps its full-year behavior (801:500).",
+    "Same founders restart, random founders restart and New campaign from seed start directly at 800:500.",
+    "Default Fjord entry leaves legacy tick 123 and Summer tick 700 imports exactly as saved, paused.",
+    "2D to 3D transfer retains canonical tick 700 and paused playback.",
+    "Tablet viewport and touch taps open the menu and Clan Book. Physical iPad not tested in this run."
+  ],
+  "errors": []
+}

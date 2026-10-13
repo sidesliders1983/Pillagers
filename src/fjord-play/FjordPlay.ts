@@ -43,7 +43,10 @@ export class FjordPlay {
     async start() {
         document.body.innerHTML = '<p role="status">Preparing your island campaign…</p>';
         await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
-        this.opened = openSettlement('fjord', Number(new URLSearchParams(location.search).get('seed') ?? 32));
+        const query = new URLSearchParams(location.search);
+        // New and restarted Fjord campaigns arrive in Summer; stored campaigns remain authoritative.
+        const foundingPhase = 'summer-800-v1';
+        this.opened = openSettlement('fjord', Number(query.get('seed') ?? 32), foundingPhase);
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
@@ -51,7 +54,7 @@ export class FjordPlay {
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
             <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
-            <aside id="fjord-management"><section id="fjord-weather-information" aria-label="Winter forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
+            <aside id="fjord-management"><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
@@ -164,7 +167,7 @@ export class FjordPlay {
                 w.entries.map(e => '<p>' + escape(e.text) + '</p>').join('')).join('');
             const profile = view.weather.enabled ? view.weather.modifiers : null;
             const exposure = inspectWeatherExposure(state);
-            const forecast = profile ? '<strong>Winter ' + view.time.winter + ' · ' + view.weather.class + '</strong>' +
+            const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
                 '<p>Food output ' + profile.foodProductionBps / 100 + '% · Materials output ' +
                 (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
                 (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
@@ -287,7 +290,7 @@ export class FjordPlay {
             const completeAutoStart = beginAutoStart();
             action(async () => {
                 say('Restarting campaign…');
-                this.shared.restart(sameFounders.checked, weatherField.checked);
+                this.shared.restart(sameFounders.checked, weatherField.checked, foundingPhase);
                 resetProduction();
                 campaignFields();
                 if (world)
@@ -301,7 +304,7 @@ export class FjordPlay {
             action(async () => {
                 say('Creating campaign…');
                 await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
-                this.shared.newCampaign(Number(seedField.value), weatherField.checked, true, 'island-pool-v1');
+                this.shared.newCampaign(Number(seedField.value), weatherField.checked, true, 'island-pool-v1', foundingPhase);
                 resetProduction();
                 campaignFields();
                 if (world)

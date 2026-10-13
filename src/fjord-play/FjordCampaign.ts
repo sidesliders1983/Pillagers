@@ -119,10 +119,10 @@ export class FjordCampaign {
         return this.geography === 'island-pool-v1' ? createCampaignIsland(seed) :
             generateWorld({ seed, conifers: 'ez-tree' });
     }
-    restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false) {
+    restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false, foundingPhase = this.session.snapshot().foundingPhase) {
         const proposal = new GameplaySession();
         proposal.loadJSON(this.session.saveJSON());
-        proposal.restartCampaign(sameFounders, undefined, weatherEnabled);
+        proposal.restartCampaign(sameFounders, undefined, weatherEnabled, undefined, foundingPhase);
         if (!sameFounders) {
             this.startCampaign(proposal);
             return;

@@ -1,3 +1,4 @@
+import { foundingTime, type FoundingPhase } from './FoundingPhase';
 import {eventFacts} from './EventFacts';
 import {canPartner} from './FamilyMechanics';
 import {farmyards} from './Farmyards';
@@ -14,11 +15,12 @@ export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials
 export type Cattle = {id:string;sex:'female'|'male';birthWinter:number;deathWinter:number|null;parentIds:string[];origin:'founding'|'reproduction';lastCalvingWinter:number|null;farmyardId:string|null;foodProgress:number};
 export type LandingState = {version:3;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>;cattleArchive?:Record<string,Cattle>};
 
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}):SimulationState {
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}, foundingPhase?:FoundingPhase):SimulationState {
     if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw new Error('Seed must be uint32');
     const config={...defaultLandingConfig,...overrides};
     for(const value of Object.values(config))if(!Number.isSafeInteger(value)||value<0)throw new Error('Invalid landing configuration');
-    const state:SimulationState={schemaVersion:1,seed,rngState:seed,ticksPerWinter:1000,time:{winter:800,tick:0},clan:{id:'founding-clan',name:'Landing party'},personas:{},families:{},households:{},residences:{},buildings:{},stocks:{food:config.initialFood,materials:config.initialMaterials},events:[]};
+    const state:SimulationState={schemaVersion:1,seed,rngState:seed,ticksPerWinter:1000,time:foundingTime(foundingPhase),clan:{id:'founding-clan',name:'Landing party'},personas:{},families:{},households:{},residences:{},buildings:{},stocks:{food:config.initialFood,materials:config.initialMaterials},events:[]};
+    if (foundingPhase !== undefined) state.foundingPhase = foundingPhase;
     const random=seededRandom(seed,'founding-party-v1');
     const sexes:('female'|'male')[]=['female','female','female','female','male','male','male','male',random()<.5?'female':'male',random()<.5?'female':'male'];
     for(let i=sexes.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[sexes[i],sexes[j]]=[sexes[j],sexes[i]];}
@@ -26,7 +28,7 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
     for(let i=0;i<10;i++){
         const id=`founder-${i+1}`,age=18+Math.floor(random()*23),dna={...generateCharacterDNA(Math.floor(random()*4294967296)),sex:sexes[i],age};
         const occupation=roles[Math.floor(random()*roles.length)],experience=Math.floor(random()*Math.min(6,age-15));
-        state.personas[id]={id,name:fullName(characterName(dna)),birthWinter:800-age,deathWinter:null,originClanId:state.clan.id,dna,parentIds:[],partnerId:null,occupation,occupationHistory:[{occupation,startedAt:{winter:800-experience,tick:0},endedAt:null}],workProgress:0};
+        state.personas[id]={id,name:fullName(characterName(dna)),birthWinter:800-age,deathWinter:null,originClanId:state.clan.id,dna,parentIds:[],partnerId:null,occupation,occupationHistory:[{occupation,startedAt:{winter:800-experience,tick:state.time.tick},endedAt:null}],workProgress:0};
         state.households[id]={id,memberIds:[id],residenceId:`tent-${id}`};
         state.residences[`tent-${id}`]={id:`tent-${id}`,kind:'tent',buildingId:null};
     }
