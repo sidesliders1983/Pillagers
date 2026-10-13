@@ -1,5 +1,5 @@
 import { validateSavedSites } from './ValidateSiteSelection';
-import { settlementGeneratorVersion } from './SettlementSites';
+import { settlementGeneratorVersion, isFoundationRotation } from './SettlementSites';
 import { normalizeWorldConfig } from './GenerateWorld';
 import { freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, WorldBlueprint } from './WorldBlueprint';
 import { natureAssetIds } from '../config/NatureAssets';
@@ -88,7 +88,8 @@ export function parseWorld(text: string): WorldBlueprint {
     requireValid(Array.isArray(site.buildings) && site.buildings.length === (world.config.preset === 'island' && !world.siteSelection?.selected ? 0 : 6) &&
         site.buildings.every(placement => point(placement) && typeof placement.id === 'string' &&
             buildings.some(source => source.key === placement.key && ('terrainKey' in source ? source.terrainKey : undefined) === placement.terrainKey &&
-                source.rotation === placement.rotation && source.halfWidth === placement.halfWidth &&
+                (source.rotation === placement.rotation || normalized.generatorVersion === settlementGeneratorVersion &&
+                    isFoundationRotation(source.rotation, placement.rotation)) && source.halfWidth === placement.halfWidth &&
                 source.halfDepth === placement.halfDepth && source.radius === placement.radius)));
     requireValid(Array.isArray(site.accessPaths) && site.accessPaths.length <= 7 &&
         site.accessPaths.every(route => Array.isArray(route) && route.length <= navSamples && route.every(point)));

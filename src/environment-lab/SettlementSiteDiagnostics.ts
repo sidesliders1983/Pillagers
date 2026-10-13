@@ -73,16 +73,32 @@ export function renderSettlementSiteDiagnostics(container: HTMLElement, world: W
         `neutral gap ${selection.rules.minimumBufferDistance}m · landing route ${selection.rules.minimumLandingRoute}m. ` +
         'Green: player. Pink: reserved rival, no population. Gold: buffers. Cyan: access. Orange: blocked sightlines.';
     container.append(introduction);
+    if (selection.compartments) {
+        const coverage = document.createElement('details');
+        const title = document.createElement('summary');
+        title.textContent = 'Geographical compartment coverage';
+        const description = document.createElement('pre');
+        description.style.whiteSpace = 'pre-wrap';
+        description.textContent = selection.compartments.map(c =>
+            `${c.id}: ${c.area}m� lowland; ${c.coreArea}m� broad core; ` +
+            `${c.candidateIds.length}/${c.eligibleAnchors} anchors evaluated; ${c.sixParcelFits} six-parcel fits. ` +
+            c.reasons.join(' ')).join('\n');
+        coverage.append(title, description);
+        container.append(coverage);
+    }
     const candidates = document.createElement('details');
     const candidateSummary = document.createElement('summary');
     candidateSummary.textContent = selection.candidates.length + ' candidate sites: dimensions, scores and buildability';
     candidates.append(candidateSummary);
     const candidateList = document.createElement('pre');
-    candidateList.textContent = selection.candidates.map(c => `${c.id} at ${c.center.x},${c.center.z}: ` +
+    candidateList.textContent = selection.candidates.map(c => `${c.id} (${c.compartmentId ?? 'legacy coverage'}) at ${c.center.x},${c.center.z}: ` +
         `score ${c.score}; area ${c.area}m²; mean/max slope ${c.meanSlope.toFixed(3)}/${c.maximumSlope.toFixed(3)}; ` +
         `elevation ${c.elevation.toFixed(1)}m; coast ${c.coastDistance.toFixed(1)}m; ` +
         `bounds X ${c.bounds.minX.toFixed(1)}…${c.bounds.maxX.toFixed(1)}, Z ${c.bounds.minZ.toFixed(1)}…${c.bounds.maxZ.toFixed(1)}; ` +
-        `foundations ${c.foundations.length}/6. ${c.reasons.join(' ')}`).join('\n');
+        `foundations ${c.foundations.length}/6. ` + (c.fitSearch ?
+            `Search: ${c.fitSearch.attempts} layouts/orders, ${c.fitSearch.nodes} placements tried, ` +
+            `${c.fitSearch.orientationCount} rotations; best partial ${c.fitSearch.maximumPlaced}/6. ` : '') +
+        c.reasons.join(' ')).join('\n');
     candidateList.style.whiteSpace = 'pre-wrap';
     candidates.append(candidateList);
     container.append(candidates);
@@ -106,7 +122,8 @@ export function renderSettlementSiteDiagnostics(container: HTMLElement, world: W
         evidence.textContent = pair ?
             `Center distance ${pair.centerDistance.toFixed(1)}m · neutral gap ${pair.bufferDistance.toFixed(1)}m\n` +
             `Landing route ${pair.routeLength ? pair.routeLength + 'm' : 'not evaluated'} · ` +
-            `exposed rays ${pair.exposedRays ?? 'not evaluated'}\n` +
+            `exposed rays ${pair.visibilityComplete === false ? 'at least ' : ''}${pair.exposedRays ?? 'not evaluated'}\n` +
+            (pair.visibilityComplete === false ? `Stopped after ${pair.visibilitySamples} samples: exposure already proves rejection.\n` : '') +
             (pair.reasons.length ? pair.reasons.join('\n') : 'Accepted: terrain-hidden and connected.') : selection.reasons.join('\n');
     };
     picker.addEventListener('change', display);

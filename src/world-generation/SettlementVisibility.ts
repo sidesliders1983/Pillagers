@@ -72,17 +72,21 @@ export interface StartingViewpoint extends ViewPoint {
 
 /** Every sampled point of the reserved area must be hidden, including roof height. */
 export function inspectSiteVisibility(world: Landscape, viewpoints: readonly StartingViewpoint[],
-    footprint: readonly Point2[], roofHeight: number) {
+    footprint: readonly Point2[], roofHeight: number, stopOnExposure = false) {
     if (!viewpoints.length || !footprint.length || !Number.isFinite(roofHeight) || roofHeight < 0) {
         throw new RangeError('Visibility needs viewpoints, a footprint and a non-negative roof height.');
     }
     const surface = createBlueprintSurface(world);
-    const rays = viewpoints.flatMap(view => footprint.map(point => ({
-        viewpointId: view.id,
-        ...traceTerrainSightline(world, view, {
+    const rays: (TerrainSightline & { viewpointId: string })[] = [];
+    for (const view of viewpoints) for (const point of footprint) {
+        const ray = { viewpointId: view.id, ...traceTerrainSightline(world, view, {
             ...point, y: surface.surfaceHeightAt(point.x, point.z) + roofHeight,
-        }),
-    })));
+        }) };
+        rays.push(ray);
+        // One exposed roof point is sufficient to reject a pair. Successful proofs
+        // still visit the complete grid, including every footprint edge.
+        if (stopOnExposure && ray.visible) return { hidden: false, exposedRays: 1, rays };
+    }
     const exposedRays = rays.filter(ray => ray.visible).length;
     return { hidden: exposedRays === 0, exposedRays, rays };
 }

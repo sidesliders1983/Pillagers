@@ -3,7 +3,7 @@ import { buildings, buildingDistance } from '../world/SettlementLayout';
 import { footprintSamples } from './PlanIslandSettlements';
 import { settlementStartingViews } from './SiteNavigation';
 import { inspectSiteVisibility } from './SettlementVisibility';
-import { normalizeSiteRules } from './SettlementSites';
+import { normalizeSiteRules, isFoundationRotation } from './SettlementSites';
 import type { WorldBlueprint, Bounds2, Point2 } from './WorldBlueprint';
 import type { FoundationReservation } from './SettlementSites';
 
@@ -24,7 +24,7 @@ export function validateSavedSites(world: WorldBlueprint, requireValid: (valid: 
         Number.isFinite(b.elevation) && Number.isFinite(b.adjustment) && b.adjustment >= 0 &&
         b.adjustment <= selection.rules.maximumFoundationAdjustment &&
         Number.isFinite(b.naturalSlope) && b.naturalSlope >= 0 && b.naturalSlope <= .12 &&
-        buildings.some(source => source.key === b.key && source.rotation === b.rotation &&
+        buildings.some(source => source.key === b.key && isFoundationRotation(source.rotation, b.rotation) &&
             source.halfWidth === b.halfWidth && source.halfDepth === b.halfDepth &&
             source.radius === b.radius && ('terrainKey' in source ? source.terrainKey : undefined) === b.terrainKey);
     requireValid(Array.isArray(selection.candidates) && selection.candidates.length <= selection.rules.maximumCandidates);
@@ -37,6 +37,33 @@ export function validateSavedSites(world: WorldBlueprint, requireValid: (valid: 
             Array.isArray(c.foundations) && (c.foundations.length === 0 || c.foundations.length === 6) &&
             c.foundations.every(foundation));
     }
+    if (selection.compartments !== undefined) {
+        const compartments = selection.compartments;
+        requireValid(Array.isArray(compartments) && compartments.length <= world.terrain.heights.length / 50);
+        requireValid(new Set(compartments.map(c => c.id)).size === compartments.length);
+        for (const compartment of compartments) {
+            const members = candidates.filter(c => c.compartmentId === compartment.id);
+            requireValid(typeof compartment.id === 'string' && point(compartment.center) &&
+                Number.isFinite(compartment.area) && Number.isFinite(compartment.coreArea) &&
+                compartment.area >= compartment.coreArea && compartment.coreArea >= 200 &&
+                Number.isInteger(compartment.eligibleAnchors) && compartment.eligibleAnchors >= members.length &&
+                equal(compartment.candidateIds, members.map(c => c.id)) &&
+                compartment.sixParcelFits === members.filter(c => c.foundations.length === 6).length &&
+                Array.isArray(compartment.reasons) && compartment.reasons.every(r => typeof r === 'string'));
+        }
+        for (const candidate of candidates) {
+            requireValid(compartments.some(c => c.id === candidate.compartmentId));
+            const fit = candidate.fitSearch;
+            requireValid(!!fit && Number.isInteger(fit.attempts) && fit.attempts >= 1 && fit.attempts <= 12 &&
+                Number.isInteger(fit.nodes) && fit.nodes >= 0 && fit.nodes <= 12000 &&
+                Number.isInteger(fit.maximumPlaced) && fit.maximumPlaced >= 0 && fit.maximumPlaced <= 6 &&
+                fit.maximumPlaced >= candidate.foundations.length &&
+                Number.isInteger(fit.orientationCount) && fit.orientationCount >= 8 && fit.orientationCount <= 9 &&
+                Array.isArray(fit.validPoses) && fit.validPoses.length === 6 &&
+                new Set(fit.validPoses.map(p => p.id)).size === 6 && fit.validPoses.every(p =>
+                    typeof p.id === 'string' && Number.isInteger(p.count) && p.count >= 0 && p.count <= 100000));
+        }
+    }
     requireValid(Array.isArray(selection.pairs) && selection.pairs.length <= candidates.length * (candidates.length - 1));
     for (const pair of selection.pairs) {
         requireValid(candidates.some(c => c.id === pair.playerId) && candidates.some(c => c.id === pair.rivalId) &&
@@ -44,6 +71,10 @@ export function validateSavedSites(world: WorldBlueprint, requireValid: (valid: 
             [pair.centerDistance, pair.bufferDistance, pair.routeLength, pair.score].every(Number.isFinite) &&
             (pair.exposedRays === null || Number.isInteger(pair.exposedRays) && pair.exposedRays >= 0) &&
             Array.isArray(pair.reasons) && pair.reasons.every(r => typeof r === 'string'));
+    }
+    for (const pair of selection.pairs) if (pair.visibilityComplete !== undefined) {
+        requireValid(pair.visibilityComplete === false && pair.exposedRays === 1 &&
+            Number.isInteger(pair.visibilitySamples) && pair.visibilitySamples! > 0 && pair.visibilitySamples! <= 12000);
     }
     requireValid(Array.isArray(selection.reasons) && selection.reasons.every(r => typeof r === 'string'));
     requireValid(Array.isArray(selection.connection) && selection.connection.length <= world.navigation.cells.length &&

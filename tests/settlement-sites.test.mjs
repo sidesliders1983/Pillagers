@@ -105,6 +105,12 @@ test('placement saves retain reservations and bounded local grading without resh
             assert.ok(Math.abs(surface.surfaceHeightAt(x, z) - building.elevation) < 1e-5);
         }
     }
+    const wrongCompartment = JSON.parse(serializeWorld(world));
+    wrongCompartment.blueprint.siteSelection.candidates[0].compartmentId = 'missing-compartment';
+    assert.throws(() => parseWorld(JSON.stringify(wrongCompartment)), /Invalid world blueprint/);
+    const impossibleSearch = JSON.parse(serializeWorld(world));
+    impossibleSearch.blueprint.siteSelection.candidates[0].fitSearch.maximumPlaced = 7;
+    assert.throws(() => parseWorld(JSON.stringify(impossibleSearch)), /Invalid world blueprint/);
     const corrupted = JSON.parse(serializeWorld(world));
     corrupted.blueprint.rivalSite.center = structuredClone(world.settlement.center);
     assert.throws(() => parseWorld(JSON.stringify(corrupted)), /Invalid world blueprint/);
@@ -189,4 +195,55 @@ test('an exposed low island is rejected for visibility even when distance limits
         assert.ok(pair.reasons.some(reason => reason.includes('visible')));
         assert.ok(pair.score < 0, 'exposure is penalized independently of distance');
     }
+});
+
+test('placement search represents distinct natural compartments before spending its candidate budget', () => {
+    const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
+    const world = generateWorld({ seed: 42, preset: 'island', generatorVersion: 'fjordside-island-v0.3e' });
+    const selection = world.siteSelection;
+    assert.ok(selection.compartments?.length >= 2, 'separate terrain pockets need separate coverage');
+    for (const compartment of selection.compartments) {
+        assert.ok(compartment.area > 0);
+        assert.ok(compartment.eligibleAnchors >= compartment.candidateIds.length);
+        assert.ok(compartment.candidateIds.length > 0 || compartment.reasons.length > 0);
+        for (const id of compartment.candidateIds) {
+            assert.equal(selection.candidates.find(c => c.id === id)?.compartmentId, compartment.id);
+        }
+    }
+    const represented = new Set(selection.candidates.map(c => c.compartmentId));
+    assert.ok(represented.size >= 2);
+    assert.ok(selection.candidates.length <= selection.rules.maximumCandidates);
+});
+
+test('six-parcel search tries alternative orientations and layouts within the original footprint and grading limits', () => {
+    const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
+    const { buildings } = load('../src/world/SettlementLayout.ts');
+    const world = generateWorld({ seed: 17, preset: 'island', generatorVersion: 'fjordside-island-v0.3e' });
+    const fit = world.siteSelection.candidates.find(c => c.foundations.length === 6);
+    assert.ok(fit, 'the original single greedy layout missed viable natural space');
+    assert.ok(fit.fitSearch.attempts > 0 && fit.fitSearch.attempts <= 12);
+    assert.ok(fit.fitSearch.orientationCount > 1);
+    assert.equal(fit.fitSearch.maximumPlaced, 6);
+    for (const foundation of fit.foundations) {
+        const source = buildings.find(b => b.key === foundation.key);
+        assert.equal(foundation.halfWidth, source.halfWidth);
+        assert.equal(foundation.halfDepth, source.halfDepth);
+        assert.ok(foundation.adjustment <= .6);
+        assert.ok(foundation.naturalSlope <= .12);
+    }
+});
+
+test('a rejected visibility query can stop at its first exposed roof sample while accepted evidence stays complete', () => {
+    const { inspectSiteVisibility } = load('../src/world-generation/SettlementVisibility.ts');
+    const world = ridgeWorld();
+    world.terrain.heights.fill(0);
+    const viewpoints = [{ id: 'landing-eye', x: -12, y: 1.7, z: 0 }];
+    const footprint = [{ x: 12, z: 0 }, { x: 12, z: 8 }];
+    const rejected = inspectSiteVisibility(world, viewpoints, footprint, 8, true);
+    assert.equal(rejected.hidden, false);
+    assert.equal(rejected.rays.length, 1);
+    assert.equal(inspectSiteVisibility(world, viewpoints, footprint, 8).rays.length, 2);
+    const hidden = inspectSiteVisibility(ridgeWorld(), viewpoints, footprint, 8, true);
+    assert.equal(hidden.hidden, true);
+    assert.equal(hidden.rays.length, 2);
 });

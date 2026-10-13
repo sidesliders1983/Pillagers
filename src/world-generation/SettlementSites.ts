@@ -41,7 +41,26 @@ export interface FoundationReservation extends BuildingPlacement {
     readonly adjustment: number;
     readonly naturalSlope: number;
 }
+export interface SiteCompartment {
+    readonly id: string;
+    readonly center: Point2;
+    readonly area: number;
+    readonly coreArea: number;
+    readonly eligibleAnchors: number;
+    readonly candidateIds: string[];
+    sixParcelFits: number;
+    readonly reasons: string[];
+}
+export interface FoundationSearchEvidence {
+    readonly attempts: number;
+    readonly nodes: number;
+    readonly maximumPlaced: number;
+    readonly orientationCount: number;
+    readonly validPoses: readonly { readonly id: string; readonly count: number }[];
+}
 export interface SiteCandidate {
+    readonly fitSearch?: FoundationSearchEvidence;
+    readonly compartmentId?: string;
     readonly id: string;
     readonly center: Point2;
     readonly bounds: Bounds2;
@@ -55,6 +74,8 @@ export interface SiteCandidate {
     readonly reasons: readonly string[];
 }
 export interface SitePairScore {
+    readonly visibilityComplete?: boolean;
+    readonly visibilitySamples?: number;
     readonly playerId: string;
     readonly rivalId: string;
     readonly centerDistance: number;
@@ -83,6 +104,7 @@ export interface SiteSelection {
     readonly version: 1;
     readonly rules: SiteRules;
     readonly candidates: readonly SiteCandidate[];
+    readonly compartments?: readonly SiteCompartment[];
     readonly pairs: readonly SitePairScore[];
     readonly selected: SitePairScore | null;
     readonly harborBerth: HarborBerth | null;
@@ -93,4 +115,9 @@ export interface SiteSelection {
     readonly connection: readonly Point2[];
     readonly buffers: readonly Bounds2[];
     readonly reasons: readonly string[];
+}
+
+/** Authored dimensions stay fixed; placement search may rotate the complete parcel. */
+export function isFoundationRotation(authored: number, rotation: number) {
+    return rotation === authored || Array.from({ length: 8 }, (_, i) => i * Math.PI / 4).includes(rotation);
 }

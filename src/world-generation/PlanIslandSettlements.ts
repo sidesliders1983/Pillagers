@@ -1,6 +1,6 @@
 import { findHarborBerth } from './HarborClearance';
-import { findNaturalSites } from './MacroIsland';
-import { fitSettlementFoundations, footprintBounds, gradeSettlementFoundations, planSettlement } from './PlanSettlement';
+import { compartmentCandidates } from './SettlementCompartments';
+import { createFoundationSearch, footprintBounds, gradeSettlementFoundations, planSettlement } from './PlanSettlement';
 import { createBlueprintSurface } from './TerrainQueries';
 import { inspectSiteVisibility } from './SettlementVisibility';
 import { settlementStartingViews, siteRoutes } from './SiteNavigation';
@@ -32,10 +32,13 @@ export function footprintSamples(bounds: Bounds2) {
 export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape {
     const rules = normalizeSiteRules(base.config.siteRules);
     const surface = createBlueprintSurface(base);
-    const natural = findNaturalSites(base).slice(0, rules.maximumCandidates);
+    const coverage = compartmentCandidates(base, rules.maximumCandidates);
+    const natural = coverage.candidates;
+    const fitFoundations = createFoundationSearch(base, rules.maximumFoundationAdjustment);
     const candidates: SiteCandidate[] = natural.map((site, i) => {
         const center = { x: site.x, z: site.z };
-        const foundations = fitSettlementFoundations(base, center, site.cells, rules.maximumFoundationAdjustment);
+        const fit = fitFoundations(center, site.cells);
+        const foundations = fit.foundations;
         const bounds = foundations.length ? foundations.reduce((bounds, building) => {
             const p = footprintBounds(building, 7);
             return { minX: Math.min(bounds.minX, p.minX), maxX: Math.max(bounds.maxX, p.maxX),
@@ -45,11 +48,19 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
         const meanSlope = slopes.reduce((sum, slope) => sum + slope, 0) / slopes.length;
         const maximumSlope = Math.max(...slopes);
         const score = Math.round(Math.min(100, site.area / 100) - meanSlope * 100 - site.shoreDistance / 10);
-        return { id: 'site-' + (i + 1), center, bounds, area: site.area, meanSlope, maximumSlope,
+        return { id: 'site-' + (i + 1), compartmentId: site.compartmentId, center, bounds, area: site.area, meanSlope, maximumSlope,
             elevation: surface.surfaceHeightAt(center.x, center.z), coastDistance: site.shoreDistance,
-            foundations, score, reasons: foundations.length === 6 ? [] :
+            foundations, fitSearch: fit.evidence, score, reasons: foundations.length === 6 ? [] :
                 ['Six authored house/Farmyard footprints do not fit within the foundation limits.'] };
     });
+    for (const compartment of coverage.compartments) {
+        const members = candidates.filter(c => c.compartmentId === compartment.id);
+        compartment.candidateIds.push(...members.map(c => c.id));
+        compartment.sixParcelFits = members.filter(c => c.foundations.length === 6).length;
+        if (members.length && !compartment.sixParcelFits) {
+            compartment.reasons.push('No evaluated anchor fits six authored parcels.');
+        }
+    }
     const pairs: SitePairScore[] = [];
     for (const player of candidates) for (const rival of candidates) {
         if (player.id === rival.id) continue;
@@ -75,6 +86,7 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
     let rivalSite: RivalSite | undefined;
     let buffers: Bounds2[] = [];
     const playerPlans = new Map<string, PlannedLandscape>();
+    const playerRoutes = new Map<string, ReturnType<typeof siteRoutes>>();
     for (let i = 0; i < pairs.length; i++) {
         const pair = pairs[i];
         if (pair.reasons.length) continue;
@@ -92,6 +104,15 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
             playerPlans.set(player.id, planned);
         }
         const reasons = [...planned.validation.reasons];
+        if (planned.settlement.harbor) {
+            let routes = playerRoutes.get(player.id);
+            if (!routes) {
+                routes = siteRoutes(planned.navigation, planned.settlement.harbor);
+                playerRoutes.set(player.id, routes);
+            }
+            // Adding rival obstacles cannot reconnect terrain already disconnected.
+            if (!routes(rival.center).length) reasons.push('No land connection before rival construction.');
+        }
         const berth = findHarborBerth(planned);
         if (!berth) reasons.push('No clear water berth for the authored longship.');
         const view = settlementStartingViews(planned);
@@ -100,9 +121,10 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
             reasons.push('A starting viewpoint falls outside canonical terrain.');
         }
         if (reasons.length) { pairs[i] = { ...pair, reasons }; continue; }
-        const sight = inspectSiteVisibility(planned, view, footprintSamples(rival.bounds), rules.rivalRoofHeight);
+        const sight = inspectSiteVisibility(planned, view, footprintSamples(rival.bounds), rules.rivalRoofHeight, true);
         if (!sight.hidden) {
             pairs[i] = { ...pair, exposedRays: sight.exposedRays,
+                visibilityComplete: false, visibilitySamples: sight.rays.length,
                 score: pair.score - 1000, reasons: ['The rival footprint is visible from a starting viewpoint.'] };
             continue;
         }
@@ -127,7 +149,7 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
             foundations: rival.foundations, buildableArea: rival.area };
     }
     const reasons = selected ? [] : ['No candidate pair meets foundation, neutral-buffer, visibility and access rules.'];
-    const siteSelection: SiteSelection = { version: 1, rules, candidates, pairs, selected,
+    const siteSelection: SiteSelection = { version: 1, rules, candidates, compartments: coverage.compartments, pairs, selected,
         harborBerth, viewpoints, visibility, connection, buffers, reasons };
     const result = accepted ?? base;
     return { ...result, siteSelection, ...(rivalSite ? { rivalSite } : {}),

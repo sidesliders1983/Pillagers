@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { openEnvironmentSettings } from './environment-settings.mjs';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const output = process.env.QA_OUTPUT || 'scratch/settlement-sites';
+const output = process.env.QA_OUTPUT || 'scratch/settlement-sites-refinement';
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const evidence = { browser: 'Edge Chromium', physicalIPad: false, checks: [], captures: [], errors: [] };
@@ -35,6 +35,7 @@ try {
     await page.locator('#world-sites-diagnostics > summary').click();
     assert.ok((await page.locator('#world-site-pair option').count()) > 1);
     assert.match(await page.locator('#world-sites-diagnostics').textContent(), /160.*40.*240/s);
+    assert.match(await page.locator('#world-sites-diagnostics').textContent(), /Geographical compartment coverage/);
     await page.selectOption('#world-overlay', 'sites');
     await page.selectOption('#environment-camera', 'island-overhead');
     await page.locator('#environment-nature').uncheck();
@@ -86,6 +87,44 @@ try {
     assert.equal(rejected.validation.accepted, false);
     assert.equal(rejected.siteSelection.rivalSite, null);
     assert.match(await page.locator('#world-generation-status').textContent(), /REJECTED/);
+    evidence.layouts = [];
+    for (const seed of [42, 1983, 211, 819]) {
+        await page.setViewportSize({ width: 1440, height: 1000 });
+        await openEnvironmentSettings(page);
+        const previous = JSON.parse(await canvas.getAttribute('data-world')).generations;
+        await page.locator('#world-seed').fill(String(seed));
+        await page.locator('#world-generate').click();
+        await page.waitForFunction(count => JSON.parse(document.querySelector('canvas').dataset.world).generations > count, previous);
+        const generated = JSON.parse(await canvas.getAttribute('data-world'));
+        assert.equal(generated.validation.accepted, true, `seed ${seed} should retain its accepted pair`);
+        await page.selectOption('#world-overlay', 'sites');
+        await page.selectOption('#environment-camera', 'island-overhead');
+        await page.locator('#environment-settings > summary').click();
+        await page.waitForTimeout(700);
+        await canvas.screenshot({ path: output + `/seed-${seed}-overhead.png` });
+        await openEnvironmentSettings(page);
+        await page.selectOption('#environment-camera', 'player-start');
+        await page.selectOption('#world-overlay', 'none');
+        await page.locator('#environment-settings > summary').click();
+        await page.waitForTimeout(700);
+        await canvas.screenshot({ path: output + `/seed-${seed}-start.png` });
+        const windows = [];
+        for (let i = 0; i < 4; i++) {
+            await page.waitForTimeout(600);
+            windows.push(JSON.parse(await canvas.getAttribute('data-metrics')));
+        }
+        evidence.layouts.push({ seed, world: generated, rendererWindows: windows,
+            camera: JSON.parse(await canvas.getAttribute('data-fixture')).camera });
+        evidence.captures.push(`seed-${seed}-overhead.png`, `seed-${seed}-start.png`);
+    }
+    // Capture the same composed view at tablet size, then exercise rotation again.
+    await page.setViewportSize({ width: 1024, height: 768 });
+    await page.waitForTimeout(700);
+    evidence.tabletMetrics = JSON.parse(await canvas.getAttribute('data-metrics'));
+    await canvas.screenshot({ path: output + '/tablet-start.png' });
+    evidence.captures.push('tablet-start.png');
+    evidence.checks.push('four additional distinct seeds: top-down reservations, exact player camera, renderer windows');
+    await openEnvironmentSettings(page);
     await page.locator('#world-reference').click();
     assert.equal(await page.locator('#world-sites-diagnostics').isVisible(), false);
     assert.equal(await page.locator('#environment-camera option[value="player-start"]').evaluate(el => el.disabled), true);

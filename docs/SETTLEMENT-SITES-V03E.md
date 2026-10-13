@@ -14,7 +14,7 @@ Choose **Settlement sites & sightlines** with **Island overhead** or **Island ob
 
 ## Shared contracts and versioning
 
-`GenerateWorld` remains the single generator. The new stage extends `PlanSettlement`, `SettlementLayout`, `PlanNature` and `ValidateNavigation`; it does not introduce a second house-layout engine or terrain renderer. Authored house and Farmyard dimensions and their rotations are preserved.
+`GenerateWorld` remains the single generator. The new stage extends `PlanSettlement`, `SettlementLayout`, `PlanNature` and `ValidateNavigation`; it does not introduce a second house-layout engine or terrain renderer. Authored house and Farmyard dimensions are preserved. The search rotates each complete parcel, including its Farmyard ground.
 
 The singular `settlement` field remains the player site. Optional version-1 `rivalSite` and `siteSelection` records add reservation geometry, bounded configuration, measured evidence and diagnostics. The full terrain and metadata are serialized. Loading validates them without rerunning generation or replacing the saved field. The original `fjordside-v0.1`, `fjordside-island-v0.3b` and `fjordside-island-v0.3b-r2` versions remain explicit and retain their generation behavior. Asset/quality changes retain the selected sites and graded terrain.
 
@@ -35,7 +35,13 @@ The singular `settlement` field remains the player site. Optional version-1 `riv
 
 The distance, buffer, walking-distance, roof-height, candidate-count and grading limits are saved in `config.siteRules`. They are prototype geometry limits, not travel time, gameplay balance or visibility/fog-of-war rules. The three separation limits and the foundation-grading limit were explicitly approved by the owner.
 
-The existing natural-pocket search supplies deterministic anchors. Each candidate must fit all six reference parcels, including the largest Farmyard, using the actual dimensions. Parcels are fitted largest first to suitable nearby grid positions, with clearance for the middle place, neighboring parcels and grading transitions. The bounded greedy fit can reject a region where a more exhaustive arrangement might exist; rejection is not proof that every conceivable layout is impossible.
+The existing natural-pocket search supplies deterministic anchors. The placement stage uses 10m anchor spacing and a 65m connected-pocket radius; the old macro generator retains its original search. Dry lowland below 10m and slope at most 0.12 is split at narrow necks: broad cores have at least 6m cardinal-grid clearance from water/steep/high terrain and at least 200m2 area. A geodesic flood assigns connected lowland to these cores. Compartments describe geographic candidate coverage; they do not replace the final terrain-occlusion and separation proof.
+
+The candidate budget is distributed round-robin across compartments with eligible anchors. Within each, area ranking is followed by spatially spread alternatives. Every core reports eligible anchors, evaluated candidates, six-parcel fits and explicit rejection/budget reasons. Compass sectors and evenly spaced angular divisions do not define these areas. The Lab's geographical coverage disclosure exposes this evidence.
+
+Each candidate must still fit all six reference parcels, including the largest Farmyard. At 4m position spacing, the physical search considers the authored rotation plus eight compass rotations. It tries up to twelve combinations of four layout directions and three orders (largest first, most constrained first, smallest first), with up to 1,000 placement nodes per combination and twelve distinct locations per branch. Backtracking can undo an earlier placement. At each location the first valid ranked orientation is used; this remains a bounded conservative search, not an exhaustive packing proof. Original 7m parcel margins and 14m center clearance remain in place, including space for grading transitions. No parcel is resized.
+
+Physical pose checks and player reachability are cached. Rejection stops at the first exposed roof sample: the pair explicitly reports a lower bound on exposed rays and the number sampled. Accepted pairs always retain the complete footprint/roof-height proof.
 
 Grading affects only individual player foundations and their narrow transition margins. It never creates a settlement-wide rectangular platform, raises submerged ground or changes the coastline. A support margin ensures every triangle below a flat authored parcel is level. The maximum change at any adjusted terrain vertex is 0.6m. Rival foundations record feasibility but leave the rival terrain unmodified until future construction.
 
@@ -55,11 +61,11 @@ Cardinal access is measured on the existing 1m navigation grid. Both sites' foot
 
 ## Evidence and current limitation
 
-See [review images](qa/settlement-sites/review.html), [the report](qa/settlement-sites/report.md) and [the ten-seed measurement](qa/settlement-sites/batch.json).
+The original [1/10 report](qa/settlement-sites/report.md) remains an unchanged historical record. The [refinement review](qa/settlement-sites-refinement/review.html) and [measurement](qa/settlement-sites-refinement/batch.json) report the current ten fixed seeds, including compartment coverage, placement attempts, measured time, repeated blueprint hashes and complete save/load.
 
-**Only seed 18 passes the initial ten-seed batch.** Seeds 17, 42, 91, 1983, 1337, 104, 211, 512 and 819 reject on foundation-fit and/or separation constraints. All ten repeat deterministically and round-trip their full saves. This strict site stage must not be mistaken for the earlier macro feasibility pass. The initial fixed reference arrangement also failed its slope check at every coarse anchor in seven of ten seeds; area alone was never sufficient proof of buildability.
+The refined search accepts **5/10 seeds**: 42, 1983, 18, 211 and 819. Seeds 17, 91, 1337 and 512 still lack two suitably separated six-parcel areas; seed 104 additionally fails route/visibility checks. This is an improvement but does not promise universal campaign generation. The opt-in Lab stage and draft PR remain under owner review. No reseeding or weaker acceptance is used.
 
-The low acceptance rate is a known limitation of the current natural shelves plus conservative six-parcel fit. This feature remains an explicit Lab option. Improving search yield must preserve the approved grading/geometry limits and geological terrain; it must not silently reseed or weaken acceptance. Physical iPad testing has not been performed for this slice; browser evidence uses a touch-enabled tablet viewport.
+See [founding versus expansion capacity](SETTLEMENT-CAPACITY-REVIEW.md). The six authored Lab parcels are a mixed expansion stress case, not the actual founding party's shelter count. Their acceptance requirement is unchanged. Physical iPad testing has not been performed; browser evidence uses a touch-enabled tablet viewport.
 
 ## Reproduction
 
@@ -70,4 +76,4 @@ node scripts/qa/check-settlement-sites.mjs
 pnpm run build
 ```
 
-QA output defaults to `scratch/settlement-sites`; `QA_OUTPUT` selects a different directory and `QA_ORIGIN` selects the Lab server (default `http://127.0.0.1:5191`). Timings are observations on the development laptop, not a millisecond release gate. No project formatter is configured; source formatting and `git diff --check` are reviewed directly.
+QA output defaults to `scratch/settlement-sites-refinement`; `QA_OUTPUT` selects a different directory and `QA_ORIGIN` selects the Lab server (default `http://127.0.0.1:5191`). Timings are observations on the development laptop, not a millisecond release gate. No project formatter is configured; source formatting and `git diff --check` are reviewed directly.

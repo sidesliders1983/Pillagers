@@ -1,0 +1,16 @@
+{
+  "suite": {
+    "total": 709,
+    "passed": 708,
+    "failed": 0,
+    "existingOptInSkipped": 1,
+    "durationMs": 507900.2508
+  },
+  "focusedTests": 13,
+  "build": "passed: TypeScript --noEmit and Vite build",
+  "characterValidation": "passed with --lab-previews: 20 assets, 36 GLBs, 12 Golden Characters, 19 modules",
+  "browser": "passed; physical iPad not tested",
+  "batch": "5/10 accepted, all ten deterministic and save/load preserved",
+  "formatting": "manual review and git diff --check; no configured formatter",
+  "CI": "tracked separately at PR head"
+}
