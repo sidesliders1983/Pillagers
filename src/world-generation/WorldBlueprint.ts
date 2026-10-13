@@ -2,8 +2,9 @@ import type { NatureAssetKey } from '../config/NatureAssets';
 
 /** A versioned geographical proposal. It contains no Simulation Core inhabitants or resources. */
 export const generatorVersion = 'fjordside-v0.1' as const;
+export const islandGeneratorVersion = 'fjordside-island-v0.3b' as const;
 export type ConiferSource = 'kaykit' | 'ez-tree';
-export type WorldPreset = 'fjord' | 'coastal-valley' | 'rocky-inlet';
+export type WorldPreset = 'fjord' | 'coastal-valley' | 'rocky-inlet' | 'island';
 export type Point2 = Readonly<{ x: number; z: number }>;
 export type Bounds2 = Readonly<{ minX: number; maxX: number; minZ: number; maxZ: number }>;
 
@@ -18,7 +19,7 @@ export interface GenerationRequest {
 
 export interface WorldGenerationConfig {
     readonly seed: number;
-    readonly generatorVersion: typeof generatorVersion;
+    readonly generatorVersion: typeof generatorVersion | typeof islandGeneratorVersion;
     readonly preset: WorldPreset;
     readonly width: number;
     readonly depth: number;
@@ -94,8 +95,23 @@ export interface AssetPlacement extends Point2 {
     readonly clearance: number;
 }
 
+export interface GlacialValley {
+    readonly id: string;
+    readonly parentId: string | null;
+    readonly points: readonly Point2[];
+    readonly floorHeights: readonly number[];
+    readonly widths: readonly number[];
+}
+
+export interface IslandGeology {
+    readonly model: 'rift-glacial-v1';
+    readonly rifts: readonly { a: Point2; b: Point2; width: number }[];
+    readonly valleys: readonly GlacialValley[];
+}
+
 export interface WorldBlueprint {
     readonly config: WorldGenerationConfig;
+    readonly geology?: IslandGeology;
     readonly waterLevel: number;
     readonly terrain: TerrainField;
     readonly coast: readonly CoastSegment[];

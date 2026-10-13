@@ -30,7 +30,7 @@ export function validateNavigation(world: WorldBlueprint) {
         return x >= bounds.minX && x <= bounds.maxX && z >= bounds.minZ && z <= bounds.maxZ;
     }).length * nav.spacing * nav.spacing;
     const reasons = [...world.validation.reasons];
-    if (connectedArea < suitability.connectedClearingArea &&
+    if (world.config.preset !== 'island' && connectedArea < suitability.connectedClearingArea &&
         !reasons.some(reason => reason.includes('clearing area'))) {
         reasons.push('Final scenery leaves less than 1500 square metres of connected clearing.');
     }

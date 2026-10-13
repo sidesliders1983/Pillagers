@@ -42,10 +42,12 @@ export function extractCoast(world: Landscape): CoastSegment[] {
 /** Cardinal paths prohibit corner-cutting through footprints or steep terrain. */
 export function planSettlement(world: Landscape, center: Point2, candidateDry: boolean) {
     const surface = createBlueprintSurface(world), bounds = settlementBoundsAt(center);
-    const placements = buildings.filter(b => b.key !== 'storehouse').map((b, i) => ({
+    const island = world.config.preset === 'island';
+    const placements = buildings.filter(b => !island && b.key !== 'storehouse').map((b, i) => ({
         ...b, id: 'reference-building-' + (i+1), x: b.x + center.x, z: b.z + center.z,
     }));
-    const columns = 181, rows = 181, gridBounds = world.terrain.bounds;
+    const gridBounds = world.terrain.bounds;
+    const columns = gridBounds.maxX - gridBounds.minX + 1, rows = gridBounds.maxZ - gridBounds.minZ + 1;
     const point = (i: number): Point2 => ({ x: gridBounds.minX + i % columns,
         z: gridBounds.minZ + Math.floor(i / columns) });
     const index = (p: Point2) => Math.round(p.z-gridBounds.minZ)*columns + Math.round(p.x-gridBounds.minX);
@@ -90,7 +92,8 @@ export function planSettlement(world: Landscape, center: Point2, candidateDry: b
         return points.reverse();
     };
     const paths: Point2[][] = [];
-    let connectedBuildings = 0, maximumFoundationSlope = 0, minimumFoundationElevation = Infinity;
+    let connectedBuildings = 0, maximumFoundationSlope = 0, minimumFoundationElevation = island ?
+        surface.surfaceHeightAt(center.x, center.z) - world.waterLevel : Infinity;
     for (const building of placements) {
         const c = Math.cos(building.rotation), s = Math.sin(building.rotation);
         for (const u of [-1, 0, 1]) for (const v of [-1, 0, 1]) {
@@ -124,18 +127,20 @@ export function planSettlement(world: Landscape, center: Point2, candidateDry: b
         return p.x >= bounds.minX && p.x <= bounds.maxX && p.z >= bounds.minZ && p.z <= bounds.maxZ;
     }).length;
     const reasons: string[] = [];
-    if (!candidateDry) reasons.push('No naturally dry settlement candidate fits the reference layout.');
+    if (!candidateDry) reasons.push(island ? 'No naturally usable lowland pocket.' :
+        'No naturally dry settlement candidate fits the reference layout.');
     if (maximumFoundationSlope > suitability.foundationSlope) reasons.push('Foundation slope exceeds 0.12 m/m.');
     if (minimumFoundationElevation < suitability.foundationElevation) reasons.push('A foundation is too close to water level.');
     if (connectedBuildings !== placements.length) reasons.push('Not every building has a connected pedestrian approach.');
     if (!harbor) reasons.push('No reachable dry approach within 2m of the coast.');
-    if (connectedArea < suitability.connectedClearingArea) reasons.push('Connected clearing area is below 1500 square metres.');
-    const settlement: SettlementSite = { center, bounds, elevation: 2.6,
+    if (!island && connectedArea < suitability.connectedClearingArea) reasons.push('Connected clearing area is below 1500 square metres.');
+    const settlement: SettlementSite = { center, bounds, elevation: world.config.preset === 'island' ?
+        surface.surfaceHeightAt(center.x, center.z) : 2.6,
         buildings: placements, accessPaths: paths, harbor };
     const navigation: WalkabilityField = { bounds: gridBounds, spacing: 1, columns, rows, cells };
     return { coast, settlement, navigation, validation: {
         accepted: reasons.length === 0, reasons, connectedBuildings, connectedArea,
         maximumFoundationSlope, minimumFoundationElevation,
-        score: Math.round(100 * connectedBuildings/placements.length * Math.min(1, connectedArea/3000)),
+        score: Math.round(100 * connectedBuildings/Math.max(1, placements.length) * Math.min(1, connectedArea/3000)),
     } };
 }

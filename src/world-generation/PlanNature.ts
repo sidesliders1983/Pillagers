@@ -1,3 +1,4 @@
+import { createCoastDistance } from './CoastDistance';
 import { createNoise2D } from 'simplex-noise';
 import { seededRandom } from '../config/worldConfig';
 import { natureAssetIds } from '../config/NatureAssets';
@@ -19,6 +20,7 @@ export function planNature(world: Landscape) {
     const random = seededRandom(world.config.seed ^ 0x39a16);
     const noise = createNoise2D(seededRandom(world.config.seed ^ 0x15fe));
     const bounds = world.settlement.bounds;
+    const coastDistance = world.config.preset === 'island' ? createCoastDistance(world.coast) : null;
     const cells: Biome[] = [], waterDistance: number[] = [], moisture: number[] = [], worn: number[] = [];
     const coverage = { water: 0, shore: 0, clearing: 0, grass: 0, forest: 0, rock: 0 };
     for (let row = 0; row < terrain.rows; row++) {
@@ -26,9 +28,10 @@ export function planNature(world: Landscape) {
             const p = { x: terrain.bounds.minX + col*terrain.spacing,
                 z: terrain.bounds.minZ + row*terrain.spacing };
             const h = surface.surfaceHeightAt(p.x, p.z), slope = surface.slopeAt(p.x, p.z);
-            const distance = Math.min(...world.coast.map(s => segmentDistance(p, s.a, s.b)));
+            const distance = coastDistance ? coastDistance(p) :
+                Math.min(...world.coast.map(s => segmentDistance(p, s.a, s.b)));
             const wet = h <= world.waterLevel;
-            const clearing = p.x >= bounds.minX && p.x <= bounds.maxX &&
+            let clearing = p.x >= bounds.minX && p.x <= bounds.maxX &&
                 p.z >= bounds.minZ && p.z <= bounds.maxZ;
             const soilMoisture = Math.max(0, Math.min(1, .5 + noise(p.x*.038, p.z*.038)*.3 - slope*.2));
             let wear = clearing ? .25 : 0;
@@ -37,6 +40,14 @@ export function planNature(world: Landscape) {
                     path.map(q => Math.hypot(p.x-q.x, p.z-q.z))));
                 wear = Math.max(wear, Math.exp(-routeDistance*routeDistance/2));
                 if (world.settlement.buildings.some(b => buildingDistance(p.x, p.z, b) < 1)) wear = 1;
+            }
+            if (world.config.preset === 'island') {
+                // Only paths and actual foundations wear the ground in a natural island proposal.
+                const nearBuilding = world.settlement.buildings.some(b => buildingDistance(p.x, p.z, b) < 1);
+                const onPath = clearing && world.settlement.accessPaths.some(path =>
+                    path.some(q => Math.hypot(p.x-q.x, p.z-q.z) < 1.5));
+                clearing = nearBuilding || onPath;
+                wear = nearBuilding ? 1 : onPath ? .65 : 0;
             }
             const biome: Biome = wet ? 'water' : slope > .48 ? 'rock' : distance < 4 ? 'shore' : clearing ? 'clearing' :
                 h > 21 ? 'rock' :
@@ -58,7 +69,9 @@ export function planNature(world: Landscape) {
         const count = Math.round((tree ? 30 : deciduous ? 12 : rock ? 26 : grass ? 65 : 36) *
             (tree || deciduous ? world.config.forestDensity : 1));
         for (let attempt = 0, placed = 0; placed < count && attempt < count*80; attempt++) {
-            const x = -85 + random()*170, z = -40 + random()*125;
+            const island = world.config.preset === 'island';
+            const x = island ? terrain.bounds.minX + 5 + random() * (world.config.width - 10) : -85 + random()*170;
+            const z = island ? terrain.bounds.minZ + 5 + random() * (world.config.depth - 10) : -40 + random()*125;
             const biome = biomeAt(x, z);
             if (tree && biome !== 'forest' || deciduous && !['forest','grass'].includes(biome) ||
                 rock && !['rock','shore'].includes(biome) ||
@@ -70,7 +83,7 @@ export function planNature(world: Landscape) {
             const footprint = world.config.conifers === 'ez-tree' && assetId in pineFootprints ?
                 pineFootprints[assetId as keyof typeof pineFootprints] : natureFootprints[assetId];
             const clearance = footprint.radius*scale+.25;
-            if (Math.abs(x)+clearance >= 90 || Math.abs(z)+clearance >= 90) continue;
+            if (Math.abs(x)+clearance >= world.config.width / 2 || Math.abs(z)+clearance >= world.config.depth / 2) continue;
             const y = surface.surfaceHeightAt(x, z);
             if (y < world.waterLevel+.15 || surface.slopeAt(x, z) > (rock ? .55 : .4)) continue;
             if ([[-1,0],[1,0],[0,-1],[0,1]].some(([dx,dz]) =>

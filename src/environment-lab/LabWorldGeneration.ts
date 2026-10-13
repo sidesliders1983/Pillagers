@@ -1,3 +1,5 @@
+import { inspectMacroIsland } from '../world-generation/MacroIsland';
+import { createMacroOverlay, disposeMacroOverlay } from './MacroOverlay';
 import { Group, Object3D, InstancedMesh, Mesh, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 import type { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { AssetManager } from '../core/AssetManager';
@@ -26,6 +28,7 @@ type Grounds = Awaited<ReturnType<typeof loadWorldGroundMaterials>>;
 type Preview = {
     root: Group;
     terrain: Mesh;
+    macroOverlay: Group;
     nature: Group;
     village: Group;
     water: FjordWater | FjordsideWater;
@@ -69,6 +72,7 @@ export class LabWorldGeneration {
                     <option value="fjord">Fjord</option>
                     <option value="coastal-valley">Coastal Valley</option>
                     <option value="rocky-inlet">Rocky Inlet</option>
+                    <option value="island">Nordic Island · v0.3b</option>
                 </select></label>
                 <label><input id="world-sand-study" type="checkbox">Sand study · approved ReferenceWater</label>
                 <label>Standard sand<select id="world-sand-resolution" disabled>
@@ -82,6 +86,9 @@ export class LabWorldGeneration {
                 <label>Import world<input id="world-import" type="file" accept=".json,application/json"></label>
                 <label>Diagnostic overlay<select id="world-overlay">
                     <option value="none">Source materials</option>
+                    <option value="form">Bare terrain form</option>
+                    <option value="macro">Macro regions &amp; coast</option>
+                    <option value="elevation">Elevation</option>
                     <option value="biomes">Biomes</option>
                     <option value="walkability">Walkability</option>
                 </select></label>
@@ -95,6 +102,8 @@ export class LabWorldGeneration {
         this.sandStudy = document.querySelector('#world-sand-study')!;
         this.sandResolution = document.querySelector('#world-sand-resolution')!;
         document.querySelector('#environment-camera')!.insertAdjacentHTML('beforeend',
+            '<option value="island-overhead" disabled>Island overhead</option>' +
+            '<option value="island-oblique" disabled>Island oblique</option>' +
             '<option value="sand-close" disabled>Sand shore close-up</option>' +
             '<option value="sand-shore" disabled>Sand shore gameplay distance</option>');
         this.sandStudy.addEventListener('change', () => {
@@ -165,6 +174,7 @@ export class LabWorldGeneration {
         try {
             const world = saved ?? generateWorld({ seed: Number(this.seed.value),
                 preset: this.preset.value as WorldPreset, conifers: this.coniferSource() });
+            const macro = world.config.preset === 'island' ? inspectMacroIsland(world) : null;
             const generationMs = performance.now()-start;
             const tier = this.quality();
             const sandPixels = tier === 'low' ? 128 : this.selectedSand();
@@ -182,13 +192,15 @@ export class LabWorldGeneration {
             // Opt-in study holds the accepted prior-slice water fixed for both sand resolutions.
             const water = this.sandStudy.checked ? new FjordsideWater(world.waterLevel,
                 world.settlement.harbor ?? world.settlement.center, tier) :
-                new FjordWater({ ...fjordWaterConfig, quality: tier }, surface, world.coast);
+                new FjordWater({ ...fjordWaterConfig, size: world.config.width * (world.config.preset === 'island' ? 4 : 1), quality: tier }, surface, world.coast);
             const root = new Group();
             root.name = 'Generated Fjordside proposal';
-            root.add(terrain, nature, village, water.mesh);
-            next = { root, terrain, nature, village, water,
+            const macroOverlay = createMacroOverlay(world, macro?.sitePair ?? [], macro?.terrainSeparation);
+            macroOverlay.visible = false;
+            root.add(terrain, nature, village, water.mesh, macroOverlay);
+            next = { root, terrain, macroOverlay, nature, village, water,
                 wind: new NatureWind(nature, conifers === 'ez-tree'), actors: [], movement: null };
-            if (world.validation.accepted) {
+            if (world.validation.accepted && world.settlement.buildings.length) {
                 for (let i = 0; i < 10; i++) {
                     // Same ten reference identities for every landscape, not a generated population.
                     const dna = generateCharacterDNA((worldConfig.seed+Math.imul(i+1,2654435761))>>>0);
@@ -226,15 +238,26 @@ export class LabWorldGeneration {
             this.status.textContent = (world.validation.accepted ? 'PASS' : 'REJECTED') +
                 ' · seed ' + world.config.seed + ' · ' + world.config.preset +
                 ' · ' + world.config.generatorVersion + '\nNormalized parameters: ' + JSON.stringify(world.config) + '\nWater level ' + world.waterLevel +
-                'm · site score ' + world.validation.score + ' · connected buildings ' +
-                world.validation.connectedBuildings + '/6 · connected clearing ' +
-                world.validation.connectedArea + 'm²\nBiomes: ' + JSON.stringify(world.biomes.coverage) +
+                (macro ? 'm · house placement deferred to site selection' :
+                    'm · site score ' + world.validation.score + ' · connected buildings ' +
+                    world.validation.connectedBuildings + '/6 · connected clearing ' +
+                    world.validation.connectedArea + 'm²') + '\nBiomes: ' + JSON.stringify(world.biomes.coverage) +
                 '\n' + world.placementPlan.length + ' source placements · ' + next.actors.length +
                 ' reference residents · generation ' + generationMs.toFixed(1) + 'ms' +
-                (world.validation.reasons.length ? '\n' + world.validation.reasons.join('\n') : '');
+                (world.validation.reasons.length ? '\n' + world.validation.reasons.join('\n') : '') +
+                (macro ? '\nMacro ' + (macro.accepted ? 'PASS' : 'REJECTED') + ' · ' +
+                    macro.landComponents + ' landmass · sea border ' + macro.seaBorder + ' · ' +
+                    macro.sitePair.length + ' natural lowland pockets · max elevation ' +
+                    macro.maximumElevation.toFixed(1) + 'm\n' + JSON.stringify(macro.regions) +
+                    (macro.terrainSeparation ? '\nTerrain ridge: ' +
+                        macro.terrainSeparation.heightAboveSites.toFixed(1) + 'm above sites · ' +
+                        macro.terrainSeparation.width.toFixed(1) + 'm wide · walking connection ' +
+                        ((macro.terrainSeparation.connection.length - 1) * world.terrain.spacing) + 'm' : '') +
+                    (macro.reasons.length ? '\n' + macro.reasons.join('\n') : '') : '');
             this.canvas.dataset.world = JSON.stringify({ seed: world.config.seed,
                 generatorVersion: world.config.generatorVersion, preset: world.config.preset, conifers,
-                validation: world.validation, biomeCoverage: world.biomes.coverage,
+                validation: world.validation, macro: macro ? { ...macro, candidates: macro.candidates.length,
+                    sitePair: macro.sitePair.map(({ cells: _cells, ...site }) => site) } : null, biomeCoverage: world.biomes.coverage,
                 naturePlacements: world.placementPlan.length, referenceResidents: next.actors.length,
                 bounds: world.terrain.bounds, site: world.settlement.center, waterLevel: world.waterLevel,
                 generationMs, previewPreparationMs: performance.now() - start,
@@ -265,7 +288,7 @@ export class LabWorldGeneration {
         this.sandStudy.disabled = this.generate.disabled;
         this.sandResolution.disabled = this.generate.disabled || !this.active ||
             !this.sandStudy.checked || this.quality() === 'low';
-        for (const view of ['sand-close', 'sand-shore']) {
+        for (const view of ['sand-close', 'sand-shore', 'island-overhead', 'island-oblique']) {
             (document.querySelector('#environment-camera option[value="' + view + '"]') as
                 HTMLOptionElement).disabled = !this.active;
         }
@@ -333,6 +356,8 @@ export class LabWorldGeneration {
         const previous = this.preview.terrain;
         const overlay = (document.querySelector('#world-overlay') as HTMLSelectElement).value;
         const next = createBlueprintTerrain(this.blueprint, grounds.materials, overlay);
+        this.preview.macroOverlay.visible = overlay === 'macro';
+        this.canvas.dataset.overlay = overlay;
         next.visible = previous.visible;
         this.preview.root.remove(previous);
         disposeBlueprintTerrain(previous);
@@ -401,6 +426,23 @@ export class LabWorldGeneration {
                 target: [shore.x,shore.y,shore.z] },
             close: { position: [x+8,7,z-2], target: [x-4,3,z+14] },
         };
+        const extent = world.config.width;
+        const fit = Math.max(1, 1 / this.camera.aspect);
+        presets['island-overhead'] = { position: [0, extent * 1.1 * fit, .01], target: [0, 0, 0] };
+        presets['island-oblique'] = { position: [extent * .4 * fit, extent * .62 * fit, -extent * .45 * fit], target: [0, 8, 0] };
+        if (world.config.preset === 'island' && view === 'shore') {
+            const surface = createBlueprintSurface(world);
+            const distance = Math.hypot(x-harbor.x,z-harbor.z) || 1;
+            const dx = (x-harbor.x)/distance, dz = (z-harbor.z)/distance;
+            const cameraX = harbor.x-dx*60-dz*20, cameraZ = harbor.z-dz*60+dx*20;
+            const targetX = harbor.x+dx*35, targetZ = harbor.z+dz*35;
+            presets.shore = {
+                position: [cameraX,Math.max(18,surface.surfaceHeightAt(cameraX,cameraZ)+12),cameraZ],
+                target: [targetX,surface.surfaceHeightAt(targetX,targetZ)+6,targetZ]
+            };
+        }
+        this.camera.far = world.config.preset === 'island' ? Math.max(1200, extent * 5 * fit) : view.startsWith('island-') ? 500 : 300;
+        this.camera.updateProjectionMatrix();
         const preset = presets[view] ?? presets.village;
         this.controls.enableDamping = false;
         this.camera.position.fromArray(preset.position);
@@ -435,6 +477,8 @@ export class LabWorldGeneration {
     }
 
     restore() {
+        this.camera.far = 300;
+        this.camera.updateProjectionMatrix();
         this.revision++;
         this.generate.disabled = false;
         this.release(this.preview);
@@ -470,6 +514,7 @@ export class LabWorldGeneration {
         preview.water.dispose();
         preview.wind.dispose();
         disposeBlueprintTerrain(preview.terrain);
+        disposeMacroOverlay(preview.macroOverlay);
         preview.nature.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); });
         for (const actor of preview.actors) actor.model.dispose();
         preview.root.clear();

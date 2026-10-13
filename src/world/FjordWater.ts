@@ -27,12 +27,16 @@ export class FjordWater {
   surface?:TerrainSurface,coast?:readonly CoastSegment[]){
   const height=surface?.surfaceHeightAt??surfaceHeightAt;
   const low=config.quality==='low';
-  this.mask=new WaterMask(low?256:512,config.size);
+  // Upstream exposes mask extent independently from the water plane. Keep shoreline
+  // precision on the canonical field when the visible sea extends beyond an island.
+  const maskExtent=surface?Math.min(config.size,
+   Math.max(surface.bounds.maxX-surface.bounds.minX,surface.bounds.maxZ-surface.bounds.minZ)):config.size;
+  this.mask=new WaterMask(low?256:512,maskExtent);
   // The source height texture adds to surface elevation, rather than representing
   // bathymetry. Keep its flat default for a level fjord; encode real depth in its mask.
   const texture=this.mask.getTexture(),data=texture.image.data as Float32Array,res=this.mask.resolution;
   for(let z=0;z<res;z++)for(let x=0;x<res;x++){
-   const depth=waterDepthAt((x+.5)/res*config.size-config.size/2,(z+.5)/res*config.size-config.size/2,config.level,height);
+   const depth=waterDepthAt((x+.5)/res*maskExtent-maskExtent/2,(z+.5)/res*maskExtent-maskExtent/2,config.level,height);
    const v=Math.max(0,Math.min(1,(depth+.03)/(config.shallowDepth+.03)));
    const i=(z*res+x)*4;data[i]=data[i+1]=data[i+2]=v;data[i+3]=1;
   }
