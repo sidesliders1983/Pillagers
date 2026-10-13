@@ -1,0 +1,386 @@
+{
+  "date": "2026-10-13T13:39:33.363Z",
+  "errors": [],
+  "seeds": [
+    {
+      "seed": 17,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 64.29000000022351,
+        "calls": 35,
+        "triangles": 4971618,
+        "geometries": 37,
+        "textures": 74,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -332.1666441854865,
+          17.999999999999996,
+          -216.15833220927436
+        ],
+        "target": [
+          -236.39021993924254,
+          10.145281554123507,
+          -200.28771285767087
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 42,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 64.2800000000745,
+        "calls": 71,
+        "triangles": 4790278,
+        "geometries": 38,
+        "textures": 87,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -20.023102251418894,
+          18.000000000000004,
+          160.623162118409
+        ],
+        "target": [
+          18.07118205271649,
+          7.076341509819031,
+          71.32688278183358
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 91,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 63.033333333002176,
+        "calls": 35,
+        "triangles": 4975700,
+        "geometries": 38,
+        "textures": 77,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -262.68227028363964,
+          18,
+          -146.97488936113712
+        ],
+        "target": [
+          -171.06241373928816,
+          6.507003534088596,
+          -114.86878578576606
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 1983,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 62.31000000014901,
+        "calls": 71,
+        "triangles": 5193022,
+        "geometries": 38,
+        "textures": 87,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          361.9428774672118,
+          17.99999999999999,
+          -79.35000889190516
+        ],
+        "target": [
+          269.1437377736304,
+          10.795530588331196,
+          -50.83124888851182
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 1337,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 80.4571428575686,
+        "calls": 35,
+        "triangles": 4946238,
+        "geometries": 38,
+        "textures": 77,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          291.65555669632323,
+          18,
+          -226.26902498634098
+        ],
+        "target": [
+          222.55875336182066,
+          9.264008862340154,
+          -158.07348430402755
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 18,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 68.3,
+        "calls": 71,
+        "triangles": 5207584,
+        "geometries": 38,
+        "textures": 87,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          152.81320787636835,
+          17.999999999999996,
+          230.39924096612384
+        ],
+        "target": [
+          87.14293303397828,
+          8.736063815144638,
+          158.89808711442052
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 7,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 58.260000000149006,
+        "calls": 71,
+        "triangles": 5195082,
+        "geometries": 38,
+        "textures": 87,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -66.64100588675687,
+          17.999999999999993,
+          66.0170215847752
+        ],
+        "target": [
+          -30.58549313211698,
+          8.385964641161495,
+          -24.12176030182453
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 73,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 61.55,
+        "calls": 35,
+        "triangles": 4574286,
+        "geometries": 38,
+        "textures": 77,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -268.47756307002714,
+          18.00000000000001,
+          -19.872206394599395
+        ],
+        "target": [
+          -179.77691550729065,
+          7.193815676337023,
+          -59.33351810558057
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 256,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 95.01428571449857,
+        "calls": 71,
+        "triangles": 5185048,
+        "geometries": 38,
+        "textures": 87,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -336.1243595126744,
+          17.999999999999993,
+          23.144199201058058
+        ],
+        "target": [
+          -244.25947639566076,
+          9.27464848322861,
+          -8.253941665837457
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    },
+    {
+      "seed": 65537,
+      "metrics": {
+        "variant": "candidate",
+        "ms": 77.71249999990687,
+        "calls": 71,
+        "triangles": 5162376,
+        "geometries": 38,
+        "textures": 87,
+        "callsIncludeShadows": true
+      },
+      "camera": {
+        "position": [
+          -221.25327332979214,
+          17.999999999999993,
+          69.13507512778367
+        ],
+        "target": [
+          -143.168393354497,
+          8.447428515744576,
+          11.448408390627197
+        ],
+        "fov": 45,
+        "zoom": 1
+      }
+    }
+  ],
+  "rendererComparison": [
+    {
+      "variant": "baseline",
+      "windows": [
+        {
+          "variant": "candidate",
+          "ms": 66.5124999997206,
+          "calls": 71,
+          "triangles": 5223930,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 70.47500000009313,
+          "calls": 71,
+          "triangles": 5223930,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 65.1875,
+          "calls": 71,
+          "triangles": 5223930,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 64.68750000000001,
+          "calls": 71,
+          "triangles": 5223930,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 66.36249999981374,
+          "calls": 71,
+          "triangles": 5223930,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 68.38750000018626,
+          "calls": 71,
+          "triangles": 5223930,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        }
+      ]
+    },
+    {
+      "variant": "zoned",
+      "windows": [
+        {
+          "variant": "candidate",
+          "ms": 72.98571428550139,
+          "calls": 71,
+          "triangles": 5207584,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 69.58749999990687,
+          "calls": 71,
+          "triangles": 5207584,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 74.28571428571429,
+          "calls": 71,
+          "triangles": 5207584,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 73.01428571396642,
+          "calls": 71,
+          "triangles": 5207584,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 69.10000000009313,
+          "calls": 71,
+          "triangles": 5207584,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        },
+        {
+          "variant": "candidate",
+          "ms": 81.71428571428571,
+          "calls": 71,
+          "triangles": 5207584,
+          "geometries": 38,
+          "textures": 87,
+          "callsIncludeShadows": true
+        }
+      ]
+    }
+  ]
+}

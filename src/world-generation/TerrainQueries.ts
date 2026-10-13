@@ -49,3 +49,19 @@ export function terrainTriangles(terrain: TerrainField) {
     }
     return triangles;
 }
+
+/** Exact gradient of the same canonical triangle used by surfaceHeightAt. +Z is north. */
+export function terrainGradientAt(world: Pick<WorldBlueprint, 'terrain' | 'waterLevel'>, x: number, z: number) {
+    const { bounds, spacing, columns, rows, heights } = world.terrain;
+    if (!Number.isFinite(x) || !Number.isFinite(z)) throw new RangeError('Coordinates must be finite.');
+    if (x < bounds.minX || x > bounds.maxX || z < bounds.minZ || z > bounds.maxZ) return { x: 0, z: 0 };
+    const gx = (x - bounds.minX) / spacing, gz = (z - bounds.minZ) / spacing;
+    const col = Math.min(columns - 2, Math.floor(gx)), row = Math.min(rows - 2, Math.floor(gz));
+    const u = gx - col, v = gz - row, index = row * columns + col;
+    const a = heights[index], b = heights[index + columns], c = heights[index + 1], d = heights[index + columns + 1];
+    if ((row + col) % 2 === 0) return u + v <= 1 ?
+        { x: (c - a) / spacing, z: (b - a) / spacing } :
+        { x: (d - b) / spacing, z: (d - c) / spacing };
+    return v >= u ? { x: (d - b) / spacing, z: (b - a) / spacing } :
+        { x: (c - a) / spacing, z: (d - c) / spacing };
+}

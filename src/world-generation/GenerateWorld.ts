@@ -1,3 +1,4 @@
+import { normalizeEnvironmentConfig, zoneEnvironment } from './EnvironmentZoning';
 import { measureGeneration, type GenerationObserver } from './GenerationProfile';
 import { planIslandSettlements } from './PlanIslandSettlements';
 import { normalizeSiteRules, settlementGeneratorVersion } from './SettlementSites';
@@ -45,6 +46,7 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
     const extent = preset === 'island' ? 800 : 180;
     return { seed: request.seed, preset, generatorVersion: version, width: extent, depth: extent,
         relief, forestDensity,
+        ...(request.environment ? { environment: normalizeEnvironmentConfig(request.environment) } : {}),
         ...(version === settlementGeneratorVersion ? { siteRules: normalizeSiteRules(request.siteRules) } : {}),
         ...(request.conifers === undefined ? {} : { conifers: request.conifers }) };
 }
@@ -136,7 +138,10 @@ export function generateWorld(request: GenerationRequest, observe?: GenerationOb
     const initial = { ...landscape, ...measureGeneration('initial-plan', () =>
         planSettlement(landscape, center, candidateDry), observe) };
     const planned = config.generatorVersion === settlementGeneratorVersion ? planIslandSettlements(initial, observe) : initial;
-    const world = { ...planned, ...measureGeneration('nature', () => planNature(planned), observe) };
+    const environment = config.environment ? measureGeneration('environment-zoning', () =>
+        zoneEnvironment(planned, config.environment!), observe) : undefined;
+    const zoned = { ...planned, ...(environment ? { environment } : {}) };
+    const world = { ...zoned, ...measureGeneration('nature', () => planNature(zoned), observe) };
     return measureGeneration('validation-and-freeze', () =>
         freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) }), observe);
 }

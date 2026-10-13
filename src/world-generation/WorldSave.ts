@@ -1,3 +1,4 @@
+import { validateEnvironment } from './ValidateEnvironment';
 import { validateSavedSites } from './ValidateSiteSelection';
 import { settlementGeneratorVersion, isFoundationRotation } from './SettlementSites';
 import { normalizeWorldConfig } from './GenerateWorld';
@@ -105,5 +106,6 @@ export function parseWorld(text: string): WorldBlueprint {
             .every(key => Number.isFinite(world.validation[key as keyof typeof world.validation])));
     if (normalized.generatorVersion === settlementGeneratorVersion) validateSavedSites(world, requireValid);
     else requireValid(world.siteSelection === undefined && world.rivalSite === undefined);
+    validateEnvironment(world, requireValid);
     return freezeBlueprint(world);
 }

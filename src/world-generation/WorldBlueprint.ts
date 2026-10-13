@@ -1,3 +1,4 @@
+import type { EnvironmentConfig, EnvironmentRequest, EnvironmentZones } from './EnvironmentZoning';
 import type { RivalSite, SiteSelection, SiteRules, settlementGeneratorVersion } from './SettlementSites';
 import type { NatureAssetKey } from '../config/NatureAssets';
 
@@ -18,6 +19,7 @@ export interface GenerationRequest {
     forestDensity?: number;
     conifers?: ConiferSource;
     siteRules?: Partial<SiteRules>;
+    environment?: EnvironmentRequest;
 }
 
 export interface WorldGenerationConfig {
@@ -31,6 +33,7 @@ export interface WorldGenerationConfig {
     /** Missing in original v0.1 blueprints means KayKit; old saves remain unchanged. */
     readonly conifers?: ConiferSource;
     readonly siteRules?: SiteRules;
+    readonly environment?: EnvironmentConfig;
 }
 
 export interface TerrainField {
@@ -125,6 +128,7 @@ export interface WorldBlueprint {
     readonly navigation: WalkabilityField;
     readonly validation: WorldValidation;
     readonly biomes: BiomeField;
+    readonly environment?: EnvironmentZones;
     readonly placementPlan: readonly AssetPlacement[];
 }
 

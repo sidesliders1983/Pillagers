@@ -1,3 +1,4 @@
+import { sampleEnvironment } from './EnvironmentZoning';
 import { createCoastDistance } from './CoastDistance';
 import { createNoise2D } from 'simplex-noise';
 import { seededRandom } from '../config/worldConfig';
@@ -33,7 +34,8 @@ export function planNature(world: Landscape) {
             const wet = h <= world.waterLevel;
             let clearing = p.x >= bounds.minX && p.x <= bounds.maxX &&
                 p.z >= bounds.minZ && p.z <= bounds.maxZ;
-            const soilMoisture = Math.max(0, Math.min(1, .5 + noise(p.x*.038, p.z*.038)*.3 - slope*.2));
+            const zone = world.environment ? sampleEnvironment(world, p.x, p.z) : null;
+            const soilMoisture = zone?.moisture ?? Math.max(0, Math.min(1, .5 + noise(p.x*.038, p.z*.038)*.3 - slope*.2));
             let wear = clearing ? .25 : 0;
             if (clearing) {
                 const routeDistance = Math.min(...world.settlement.accessPaths.flatMap(path =>
@@ -49,7 +51,13 @@ export function planNature(world: Landscape) {
                 clearing = nearBuilding || onPath;
                 wear = nearBuilding ? 1 : onPath ? .65 : 0;
             }
-            const biome: Biome = wet ? 'water' : slope > .48 ? 'rock' : distance < 4 ? 'shore' : clearing ? 'clearing' :
+            // Legacy material IDs remain a projection of the saved zoning extension.
+            // Mud keeps its own canonical substrate and uses grass/soil until #137.
+            const biome: Biome = zone ? (wet ? 'water' : clearing ? 'clearing' :
+                zone.primary === 'bedrock' ? 'rock' : zone.primary === 'sand' ||
+                zone.primary === 'water' && distance < 8 ? 'shore' :
+                zone.forestCover >= .42 ? 'forest' : 'grass') :
+                wet ? 'water' : slope > .48 ? 'rock' : distance < 4 ? 'shore' : clearing ? 'clearing' :
                 h > 21 ? 'rock' :
                 h > 2.8 && soilMoisture > .34 && noise(p.x*.018+7, p.z*.018) > -.25 ? 'forest' : 'grass';
             cells.push(biome);
@@ -76,6 +84,7 @@ export function planNature(world: Landscape) {
             const x = island ? terrain.bounds.minX + 5 + random() * (world.config.width - 10) : -85 + random()*170;
             const z = island ? terrain.bounds.minZ + 5 + random() * (world.config.depth - 10) : -40 + random()*125;
             const biome = biomeAt(x, z);
+            if (tree && world.environment && (sampleEnvironment(world, x, z)?.forestCover ?? 0) < .4) continue;
             if (tree && biome !== 'forest' || deciduous && !['forest','grass'].includes(biome) ||
                 rock && !['rock','shore'].includes(biome) ||
                 !tree && !deciduous && !rock && !['grass','forest','clearing'].includes(biome)) continue;
