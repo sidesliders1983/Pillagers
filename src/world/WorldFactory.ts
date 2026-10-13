@@ -7,7 +7,7 @@ import { parseWorld, serializeWorld } from '../world-generation/WorldSave';
 import { World } from './World';
 import { surfaceHeightAt } from './Terrain';
 import { walkable, randomWalkablePosition, MovementTerrain } from '../systems/MovementSystem';
-import { createBlueprintSurface, createBlueprintTerrain, disposeBlueprintTerrain, updateBlueprintWear } from './BlueprintTerrain';
+import { createBlueprintSurface, createBlueprintTerrainAsync, disposeBlueprintTerrain, updateBlueprintWear } from './BlueprintTerrain';
 import { loadWorldGroundMaterials } from './WorldGroundMaterials';
 import { loadPineModels } from './PineModels';
 import { createNatureFromPlan } from './KayKitNature';
@@ -21,6 +21,7 @@ import { hearth } from './SettlementLayout';
 import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './BuildingPlot';
 
 export interface WorldSelection {
+    preparation?: <T>(stage: string, operation: () => T | Promise<T>) => Promise<T>;
     mode: 'reference' | 'generated';
     settlement?: 'prototype' | 'canonical';
     blueprint?: WorldBlueprint;
@@ -60,6 +61,7 @@ export function parseFjordsideSave(text: string): WorldSelection {
 
 /** Production factory: consumes stored geography and never calls the generator. */
 export async function createWorld(assets: AssetManager, selection: WorldSelection) {
+    const prepare = selection.preparation ?? (async <T>(_stage: string, operation: () => T | Promise<T>) => operation());
     const island = selection.blueprint && campaignIslandPlan(selection.blueprint);
     const blueprint = selection.mode === 'generated' ?
         island ? selection.blueprint : parseWorld(serializeWorld(selection.blueprint!)) : undefined;
@@ -102,23 +104,23 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
     };
     try {
         if (blueprint) {
-            await assets.loadNature();
-            try { grounds = await loadWorldGroundMaterials(selection.quality, selection.anisotropy, 256,
-                island ? 'zoned' : 'baseline', island ? 'cool-grey' : 'source'); }
+            await prepare('nature-assets-fetch-decode', () => assets.loadNature());
+            try { grounds = await prepare('ground-textures-fetch-decode', () => loadWorldGroundMaterials(selection.quality, selection.anisotropy, 256,
+                island ? 'zoned' : 'baseline', island ? 'cool-grey' : 'source')); }
             catch (error) {
                 if (!canonical) throw error;
                 assets.diagnostics.push('Ground maps unavailable; native terrain material fallback.');
             }
             const surface = createBlueprintSurface(blueprint);
-            terrain = createBlueprintTerrain(blueprint,grounds?.materials,'none',
-                canonical ? blueprint.terrain.heights.map(() => 0) : undefined, island ? 'zoned' : 'baseline');
+            terrain = await prepare('terrain-mesh-and-masks', () => createBlueprintTerrainAsync(blueprint,grounds?.materials,'none',
+                canonical ? blueprint.terrain.heights.map(() => 0) : undefined, island ? 'zoned' : 'baseline'));
             if (blueprint.config.conifers === 'ez-tree') {
-                try { pines = await loadPineModels(assets); }
+                try { pines = await prepare('pine-assets-fetch-decode', () => loadPineModels(assets)); }
                 catch (error) { if (!canonical) throw error;
                     assets.diagnostics.push('EZ-Tree unavailable; existing KayKit conifer fallback.'); }
             }
-            const nature = createNatureFromPlan(assets,blueprint.placementPlan,
-                blueprint.config.seed,pines?.resolve);
+            const nature = await prepare('nature-instance-assembly', () => createNatureFromPlan(assets,blueprint.placementPlan,
+                blueprint.config.seed,pines?.resolve));
             root.add(nature); // Own instance buffers even if a required plot cannot be placed.
             try { attachments.push(...(island ? planCampaignDock(assets, blueprint) :
                 planWorldAttachments(assets,blueprint,includeTent))); }
@@ -161,7 +163,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 model.scale.setScalar(item.scale);
                 root.add(model);
             }
-            movement = blueprintMovement(blueprint);
+            movement = await prepare('movement-surface', () => blueprintMovement(blueprint));
         } else {
             classic = new World(assets, selection.quality);
             terrain = classic.terrain;

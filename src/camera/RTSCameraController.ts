@@ -3,6 +3,15 @@ import {worldConfig} from '../config/worldConfig';
 import {TouchGestures} from './TouchGestures';
 const initialElevation=Math.atan2(.8,.7),orbitScale=Math.hypot(.8,.7);
 export class RTSCameraController {
+    private inputEnabled = true;
+    get enabled() { return this.inputEnabled; }
+    set enabled(value: boolean) {
+        this.inputEnabled = value;
+        if (!value) {
+            this.keys.clear(); this.drag = false; this.rotateDrag = false; this.mouseStart = null;
+            this.touch.reset();
+        }
+    }
     readonly focus=new Vector3(0,0,16);
     private desired=new Vector3(0,0,16);
     private distance=worldConfig.camera.initialZoom;
@@ -88,7 +97,7 @@ export class RTSCameraController {
     }
     private listen<K extends keyof WindowEventMap>(target: Window | HTMLCanvasElement,
         type: K,handler: (event: WindowEventMap[K])=>void,options: AddEventListenerOptions = {}) {
-        target.addEventListener(type,handler as EventListener,{ ...options,signal:this.listeners.signal });
+        target.addEventListener(type,((event: WindowEventMap[K]) => { if (this.enabled) handler(event); }) as EventListener,{ ...options,signal:this.listeners.signal });
     }
     dispose() { this.listeners.abort();this.touch.reset();this.keys.clear(); }
     setNavigationSurface(surface:Object3D,center = this.homeFocus,

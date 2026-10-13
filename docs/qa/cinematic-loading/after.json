@@ -1,0 +1,480 @@
+{
+  "platform": "Windows Edge headless, touch emulation; not physical iPhone/iPad",
+  "reports": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 800,
+      "quality": "low",
+      "reducedMotion": false,
+      "errors": [],
+      "longTasks": [
+        {
+          "start": 105.5,
+          "duration": 71
+        },
+        {
+          "start": 42855.30000000447,
+          "duration": 698
+        },
+        {
+          "start": 43555.80000000447,
+          "duration": 1094
+        },
+        {
+          "start": 46832.10000000149,
+          "duration": 79
+        },
+        {
+          "start": 47509.40000000596,
+          "duration": 64
+        },
+        {
+          "start": 47791.80000000447,
+          "duration": 96
+        },
+        {
+          "start": 48131.20000000298,
+          "duration": 64
+        },
+        {
+          "start": 48199.20000000298,
+          "duration": 179
+        },
+        {
+          "start": 52934.40000000596,
+          "duration": 58
+        },
+        {
+          "start": 53026.20000000298,
+          "duration": 1416
+        },
+        {
+          "start": 54565.40000000596,
+          "duration": 121
+        },
+        {
+          "start": 54992.20000000298,
+          "duration": 861
+        },
+        {
+          "start": 56189.40000000596,
+          "duration": 60
+        },
+        {
+          "start": 56326,
+          "duration": 81
+        },
+        {
+          "start": 56422.20000000298,
+          "duration": 154
+        },
+        {
+          "start": 56581.60000000149,
+          "duration": 61
+        },
+        {
+          "start": 56647.70000000298,
+          "duration": 81
+        },
+        {
+          "start": 57088.60000000149,
+          "duration": 94
+        },
+        {
+          "start": 57838,
+          "duration": 306
+        },
+        {
+          "start": 58314.40000000596,
+          "duration": 2055
+        },
+        {
+          "start": 61927,
+          "duration": 259
+        },
+        {
+          "start": 64329.80000000447,
+          "duration": 260
+        },
+        {
+          "start": 70608.40000000596,
+          "duration": 278
+        },
+        {
+          "start": 71206.5,
+          "duration": 233
+        }
+      ],
+      "maxGap": 2125.2999999970198,
+      "stages": [
+        {
+          "stage": "Shaping coast & valleys",
+          "time": 1140.7000000029802
+        },
+        {
+          "stage": "Choosing settlement areas",
+          "time": 5620.5
+        },
+        {
+          "stage": "Ground & nature",
+          "time": 26236.10000000149
+        },
+        {
+          "stage": "Checking the island",
+          "time": 31949.60000000149
+        },
+        {
+          "stage": "Shaping coast & valleys",
+          "time": 32734.20000000298
+        },
+        {
+          "stage": "Choosing settlement areas",
+          "time": 37204.30000000447
+        },
+        {
+          "stage": "Ground & nature",
+          "time": 38223.30000000447
+        },
+        {
+          "stage": "Preparing Fjordside",
+          "time": 43625.90000000596
+        },
+        {
+          "stage": "Arriving at your settlement",
+          "time": 60370.20000000298
+        }
+      ],
+      "times": [
+        "{\"winter\":800,\"tick\":500,\"ticksPerWinter\":1000}"
+      ],
+      "qualitySet": true,
+      "frames": 3232,
+      "ready": 75764.40000000596,
+      "time": {
+        "winter": 800,
+        "tick": 500,
+        "ticksPerWinter": 1000
+      },
+      "season": "Summer",
+      "loading": {
+        "started": 1104.7000000029802,
+        "firstPreview": 5612.4000000059605,
+        "previewBytes": 327680,
+        "samples": [
+          {
+            "stage": "terrain",
+            "milliseconds": 4226.5999999940395
+          },
+          {
+            "stage": "initial-candidates",
+            "milliseconds": 328
+          },
+          {
+            "stage": "initial-plan",
+            "milliseconds": 503.5
+          },
+          {
+            "stage": "compartments",
+            "milliseconds": 796.5
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 3196.5
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 2508.89999999851
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 970.3999999985099
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 996.8999999985099
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 561.5999999940395
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 175.10000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 204.89999999850988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 488.79999999701977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 247.89999999850988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 598.2000000029802
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 396.40000000596046
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 446.79999999701977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 286.6000000014901
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 216.10000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 495.19999999552965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 662.8000000044703
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 316.5
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 362.90000000596046
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 297.30000000447035
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 259.30000000447035
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 144.69999999552965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 103.89999999850988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 95
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 140.20000000298023
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 162.5
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 138.60000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 101.29999999701977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 112.60000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 167.20000000298023
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 121.80000000447035
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 89.19999999552965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 62.20000000298023
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 122.10000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 49.79999999701977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 106.89999999850988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 72.90000000596046
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 48.100000001490116
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 72.30000000447035
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 94.89999999850988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 76.79999999701977
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 63.69999999552965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 59.100000001490116
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 80.89999999850988
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 141.10000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 93.69999999552965
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 84.10000000149012
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 64.5
+          },
+          {
+            "stage": "foundations",
+            "milliseconds": 75.70000000298023
+          },
+          {
+            "stage": "player-navigation",
+            "milliseconds": 853.3999999985099
+          },
+          {
+            "stage": "access",
+            "milliseconds": 28.399999998509884
+          },
+          {
+            "stage": "harbor",
+            "milliseconds": 1.6000000014901161
+          },
+          {
+            "stage": "visibility",
+            "milliseconds": 367
+          },
+          {
+            "stage": "final-navigation",
+            "milliseconds": 1228
+          },
+          {
+            "stage": "final-route",
+            "milliseconds": 20.899999998509884
+          },
+          {
+            "stage": "environment-zoning",
+            "milliseconds": 1496.1999999955297
+          },
+          {
+            "stage": "nature",
+            "milliseconds": 4213.5999999940395
+          },
+          {
+            "stage": "validation-and-freeze",
+            "milliseconds": 784.3999999985099
+          },
+          {
+            "stage": "campaign-natural-terrain",
+            "milliseconds": 4464.29999999702
+          },
+          {
+            "stage": "campaign-foundations",
+            "milliseconds": 394.30000000447035
+          },
+          {
+            "stage": "campaign-zoning",
+            "milliseconds": 1191.1000000014901
+          },
+          {
+            "stage": "campaign-nature-and-freeze",
+            "milliseconds": 2984
+          },
+          {
+            "stage": "receive-and-freeze",
+            "milliseconds": 69.69999999552965
+          },
+          {
+            "stage": "assets-fetch-decode",
+            "milliseconds": 1479.6000000014901
+          },
+          {
+            "stage": "nature-assets-fetch-decode",
+            "milliseconds": 629.1999999955297
+          },
+          {
+            "stage": "ground-textures-fetch-decode",
+            "milliseconds": 54.399999998509884
+          },
+          {
+            "stage": "terrain-mesh-and-masks",
+            "milliseconds": 5861.29999999702
+          },
+          {
+            "stage": "pine-assets-fetch-decode",
+            "milliseconds": 235.60000000149012
+          },
+          {
+            "stage": "nature-instance-assembly",
+            "milliseconds": 11.699999995529652
+          },
+          {
+            "stage": "movement-surface",
+            "milliseconds": 0.20000000298023224
+          },
+          {
+            "stage": "initial-character-scene-sync",
+            "milliseconds": 3203.2999999970198
+          },
+          {
+            "stage": "texture-upload",
+            "milliseconds": 832.1000000014901
+          },
+          {
+            "stage": "shader-compilation",
+            "milliseconds": 1219.8999999985099
+          },
+          {
+            "stage": "initial-gpu-render",
+            "milliseconds": 2045.4000000059605
+          }
+        ],
+        "arrived": 75697.70000000298
+      },
+      "memory": 147282794,
+      "resources": 16946337
+    }
+  ]
+}

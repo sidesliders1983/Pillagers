@@ -1,3 +1,6 @@
+import { IslandLoading, yieldForInput } from './IslandLoading';
+import { GameplaySession } from '../gameplay-lab/GameplaySession';
+import { activeSettlementKey } from '../play/SharedSettlement';
 import { campaignIslandPlan } from './CampaignIsland';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
@@ -13,7 +16,7 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
-import { Vector3, Clock, PerspectiveCamera, Scene } from 'three';
+import { Vector3, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import { updateView } from '../gameplay-lab/updateView';
@@ -40,12 +43,32 @@ export class FjordPlay {
     private queued = false;
     private lastPanelSelection = '';
     private worldRevision = 0;
+    private loading?: IslandLoading;
+    private disposeScene = () => {};
     async start() {
+        try { await this.initialize(); }
+        catch (error) {
+            this.disposeScene();
+            this.loading?.finish();
+            this.loading = undefined;
+            document.body.innerHTML = '<main class="fjord-load-error"><h1>Island not opened</h1><p role="status"></p><button type="button">Try again</button> <a href="/">Return to Fjordside</a></main>';
+            document.querySelector('[role="status"]')!.textContent = error instanceof DOMException && error.name === 'AbortError' ?
+                'Loading cancelled. Your saved campaign has not changed.' : 'Could not open the island. ' + String(error);
+            document.querySelector('button')!.addEventListener('click', () => location.reload());
+        }
+    }
+    private async initialize() {
         document.body.innerHTML = '<p role="status">Preparing your island campaign…</p>';
         await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
         const query = new URLSearchParams(location.search);
         // New and restarted Fjord campaigns arrive in Summer; stored campaigns remain authoritative.
         const foundingPhase = 'summer-800-v1';
+        let stored: string | null = null;
+        try { stored = sessionStorage.getItem(activeSettlementKey); } catch { /* Storage is optional. */ }
+        if (!stored) {
+            this.loading = new IslandLoading();
+            await this.loading.prepare(Number(query.get('seed') ?? 32));
+        }
         this.opened = openSettlement('fjord', Number(query.get('seed') ?? 32), foundingPhase);
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
@@ -58,6 +81,7 @@ export class FjordPlay {
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
+        this.loading?.mount();
         const header = new FjordHeader(document.querySelector('#fjord-header')!);
         const screenAwake = new ScreenAwakeControl(document.querySelector('#fjord-play')!);
         document.querySelector('#screen-awake-slot')!.outerHTML = screenAwake.html();
@@ -101,14 +125,14 @@ export class FjordPlay {
             persist();
         });
         bindViewSwitch(document.querySelector('#fjord-play')!, this.shared, say);
-        const persist = () => persistSettlement(this.shared, say);
+        const persist = () => { if (!this.loading) persistSettlement(this.shared, say); };
         const bookReader = new ClanBookReader(this.shared, persist);
         const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
         let previous = performance.now();
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
         const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring;
-        const canAdvance = () => ownsClock() && sceneLoads === 0;
+        const canAdvance = () => ownsClock() && sceneLoads === 0 && !this.loading;
         const setPlayback = (running: boolean) => {
             clockIntent++;
             previous = performance.now();
@@ -151,7 +175,7 @@ export class FjordPlay {
         let calendar: FjordCalendar;
         let canonicalTime = '';
         const refresh = () => {
-            bookReader.update();
+            if (!this.loading) bookReader.update();
             const view = this.campaign.project();
             const state = this.session.snapshot();
             calendar = view.calendar;
@@ -286,33 +310,58 @@ export class FjordPlay {
                 say('Campaign imported, paused.');
             });
         });
-        document.querySelector('#fjord-restart')!.addEventListener('click', () => {
+        const startNewCampaign = (restart: boolean) => {
+            const wasRunning = this.session.running;
             const completeAutoStart = beginAutoStart();
             action(async () => {
-                say('Restarting campaign…');
-                this.shared.restart(sameFounders.checked, weatherField.checked, foundingPhase);
-                resetProduction();
-                campaignFields();
-                if (world)
+                const backup = this.campaign.exportJSON();
+                const loading = this.loading = new IslandLoading();
+                controller.enabled = false;
+                drawingReady = false;
+                sceneLoads++;
+                try {
+                    const proposal = new GameplaySession();
+                    if (restart) {
+                        proposal.loadJSON(this.session.saveJSON());
+                        proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
+                    } else proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase);
+                    const geography = restart && !campaignIslandPlan(this.campaign.blueprint) ? 'legacy' : 'island-pool-v1';
+                    if (geography === 'island-pool-v1') await loading.prepare(proposal.snapshot().seed);
+                    else loading.previewWorld(this.campaign.blueprint);
+                    loading.check();
+                    this.campaign.startCampaign(proposal, geography);
+                    resetProduction();
+                    campaignFields();
                     await rebuildWorld();
-                completeAutoStart();
-                say('Campaign restarted.');
+                    await finishArrival(loading);
+                    loading.finish();
+                    this.loading = undefined;
+                    completeAutoStart();
+                    say(restart ? 'Campaign restarted.' : 'New campaign created.');
+                } catch (error) {
+                    const committed = this.campaign.exportJSON() !== backup;
+                    this.shared.importJSON(backup);
+                    campaignFields();
+                    resetProduction();
+                    // Restoration itself is not part of the cancelled operation.
+                    this.loading = undefined;
+                    if (committed && !this.stopped) await rebuildWorld();
+                    say(error instanceof DOMException && error.name === 'AbortError' ?
+                        'Loading cancelled. Your campaign is unchanged.' : 'Could not open the new island. Your campaign is retained. ' + String(error));
+                    loading.finish();
+                    setPlayback(wasRunning);
+                } finally {
+                    loading.finish();
+                    this.loading = undefined;
+                    sceneLoads--;
+                    controller.enabled = true;
+                    drawingReady = true;
+                    previous = performance.now();
+                }
             });
-        });
-        document.querySelector('#fjord-new')!.addEventListener('click', () => {
-            const completeAutoStart = beginAutoStart();
-            action(async () => {
-                say('Creating campaign…');
-                await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
-                this.shared.newCampaign(Number(seedField.value), weatherField.checked, true, 'island-pool-v1', foundingPhase);
-                resetProduction();
-                campaignFields();
-                if (world)
-                    await rebuildWorld();
-                completeAutoStart();
-                say('New campaign created.');
-            });
-        });
+        };
+        document.querySelector('#fjord-restart')!.addEventListener('click', () => startNewCampaign(true));
+        document.querySelector('#fjord-new')!.addEventListener('click', () => startNewCampaign(false));
         const select = (kind: string, id: string) => {
             showManagement(true);
             this.shared.select({ kind: kind as EntityKind, id });
@@ -375,6 +424,8 @@ export class FjordPlay {
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
         const controller = new RTSCameraController(camera, canvas, 'pan');
+        controller.enabled = !this.loading;
+        let drawingReady = false;
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
@@ -386,7 +437,9 @@ export class FjordPlay {
         reducedMotion.addEventListener('change', configureEffects);
         document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects);
         let weatherSignature = "";
-        window.addEventListener('pagehide', () => {
+        this.disposeScene = () => {
+            this.loading?.cancel();
+            this.loading?.finish();
             this.stopped = true;
             header.dispose();
             bookReader.dispose();
@@ -405,9 +458,12 @@ export class FjordPlay {
             assets?.dispose();
             lighting?.dispose();
             renderer.dispose();
-        }, { once: true });
+        };
+        window.addEventListener('pagehide', this.disposeScene, { once: true });
         assets = new AssetManager();
-        await assets.loadForSimulation();
+        if (this.loading) await this.loading.measure('assets-fetch-decode', () => assets!.loadForSimulation());
+        else await assets.loadForSimulation();
+        this.loading?.check();
         if (this.stopped) {
             assets.dispose();
             return;
@@ -417,6 +473,7 @@ export class FjordPlay {
         scene.add(layer.root);
         const cleared = new Set<string>();
         let groundSignature = "";
+        let arrivalPose: { position: number[]; target: number[] };
         const rebuildWorld = async (): Promise<void> => {
             sceneLoads++;
             try {
@@ -424,7 +481,13 @@ export class FjordPlay {
                 const revision = ++this.worldRevision;
                 const next = await createWorld(assets!, { mode: 'generated', blueprint,
                     settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
-                    anisotropy: renderer.capabilities.getMaxAnisotropy() });
+                    anisotropy: renderer.capabilities.getMaxAnisotropy(),
+                    preparation: async (stage, operation) => {
+                        if (this.loading) return this.loading.measure(stage, operation);
+                        await yieldForInput();
+                        return operation();
+                    } });
+                if (this.loading?.signal.aborted) { next.dispose(); this.loading.check(); }
                 if (this.stopped || this.shared.transferring || revision !== this.worldRevision) {
                     next.dispose();
                     return;
@@ -468,8 +531,9 @@ export class FjordPlay {
                 const x = (minX + maxX) / 2, z = (minZ + maxZ) / 2;
                 const span = Math.max(maxX - minX, maxZ - minZ, 40) + 16;
                 const height = next.movement.heightAt(x, z);
-                controller.setView({ position: [x + span * .6, height + span * .75, z - span * .65],
-                    target: [x, height, z] });
+                arrivalPose = { position: [x + span * .6, height + span * .75, z - span * .65],
+                    target: [x, height, z] };
+                controller.setView(arrivalPose);
             } finally {
                 sceneLoads--;
                 previous = performance.now();
@@ -529,7 +593,7 @@ export class FjordPlay {
                             }
                         }
                     sceneEntities = view.entities;
-                    await layer!.sync(view.entities);
+                    await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
                     campfireEffect!.setLit(inspectCampfire(this.session.snapshot()).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
                     const fireBounds = layer!.bounds('campfire:settlement-campfire')!;
@@ -563,18 +627,10 @@ export class FjordPlay {
             });
             return sceneWork;
         };
-        await syncScene();
+        if (this.loading) await this.loading.measure('initial-character-scene-sync', syncScene);
+        else await syncScene();
         if (this.stopped || this.shared.transferring)
             return;
-        // Start only after assets are ready; scene loading contributes no campaign time.
-        sceneLoads--;
-        initialAutoStart?.();
-        refresh();
-        canvas.dataset.ready = 'true';
-        previous = performance.now();
-        timer = window.setInterval(tickClock, 500);
-        document.querySelector<HTMLButtonElement>('#fjord-export')!.disabled = false;
-        say('Fjord ready. Desktop: left-click to select (empty ground clears selection), left-drag to pan, right-drag to rotate, wheel to zoom. Touch: tap empty ground to navigate, drag to rotate, pinch to zoom.');
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
             const quality = (event.target as HTMLSelectElement).value as 'low' | 'standard';
             world!.setQuality(quality);
@@ -608,6 +664,7 @@ export class FjordPlay {
         let lastDiagnostics = 0, activeTime = 0, lastFrameMs = 0;
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
         renderer.setAnimationLoop(() => {
+            if (!drawingReady) return;
             const frameStarted = performance.now();
             const elapsed = clock.getDelta(), delta = Math.min(elapsed, .1);
             time += delta;
@@ -660,5 +717,59 @@ export class FjordPlay {
             renderer.render(scene, camera);
             lastFrameMs = performance.now() - frameStarted;
         });
+        const finishArrival = async (loading: IslandLoading) => {
+            loading.stage('Preparing Fjordside');
+            const textures = new Set<Texture>();
+            scene.traverse(node => {
+                if (!(node instanceof Mesh)) return;
+                for (const material of Array.isArray(node.material) ? node.material : [node.material])
+                    for (const value of Object.values(material)) if (value instanceof Texture) textures.add(value);
+            });
+            await loading.measure('texture-upload', async () => {
+                for (const texture of textures) {
+                    loading.check();
+                    renderer.initTexture(texture);
+                    await yieldForInput();
+                }
+            });
+            await loading.measure('shader-compilation', () => renderer.compileAsync(scene, camera));
+            await loading.measure('initial-gpu-upload-and-draws', async () => {
+                const meshes: Mesh[] = [];
+                scene.traverseVisible(node => { if (node instanceof Mesh) meshes.push(node); });
+                for (const mesh of meshes) mesh.visible = false;
+                try {
+                    // Upload native geometry and first-use shadow programs in separate input turns.
+                    // The opaque preview covers these preparation draws; final scene quality is unchanged.
+                    for (const mesh of meshes) {
+                        loading.check();
+                        mesh.visible = true;
+                        renderer.render(scene, camera);
+                        mesh.visible = false;
+                        await yieldForInput();
+                    }
+                } finally { for (const mesh of meshes) mesh.visible = true; }
+                renderer.render(scene, camera);
+            });
+            loading.check();
+            drawingReady = true;
+            await loading.arrive(controller, this.campaign.blueprint, arrivalPose, world!.movement.heightAt);
+            canvas.dataset.loading = JSON.stringify(loading.evidence);
+        };
+        if (this.loading) {
+            await finishArrival(this.loading);
+            this.loading.finish();
+            this.loading = undefined;
+        }
+        controller.enabled = true;
+        drawingReady = true;
+        // Start only after assets are ready; scene loading contributes no campaign time.
+        sceneLoads--;
+        initialAutoStart?.();
+        refresh();
+        canvas.dataset.ready = 'true';
+        previous = performance.now();
+        timer = window.setInterval(tickClock, 500);
+        document.querySelector<HTMLButtonElement>('#fjord-export')!.disabled = false;
+        say('Fjord ready. Desktop: left-click to select (empty ground clears selection), left-drag to pan, right-drag to rotate, wheel to zoom. Touch: tap empty ground to navigate, drag to rotate, pinch to zoom.');
     }
 }

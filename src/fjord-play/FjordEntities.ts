@@ -80,7 +80,7 @@ export class FjordEntities {
         this.root.userData.markers = descriptions;
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
     }
-    async sync(entities: readonly FjordEntity[]) {
+    async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>) {
         const visible = entities.filter(e => e.transform !== null);
         const wanted = new Set(visible.map(e => e.selectionKey));
         for (const [key, entry] of this.entries)
@@ -92,6 +92,7 @@ export class FjordEntities {
         for (const entity of visible) {
             if (this.disposed)
                 return;
+            await yieldControl?.();
             const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
             if (!entry || entry.signature !== signature) {
