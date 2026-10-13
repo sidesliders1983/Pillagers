@@ -108,6 +108,26 @@ Specialist developer Environment Lab, Character Lab, Asset Lab and headless insp
 
 **Historical clarification:** the text-first implementation ordering in [#23](https://github.com/sidesliders1983/Pillagers/issues/23) is superseded only as a *current product UI* strategy. Its headless-core, determinism and command boundaries remain foundational. Refer to [the current architecture](docs/gameplay/GAMEPLAY-FIRST-ARCHITECTURE.md) and [consolidation issue #140](https://github.com/sidesliders1983/Pillagers/issues/140) for migration gates.
 
+## GP-008 — Exploration is strategic group-level action; knowledge belongs to communities
+
+**Status: Owner-approved direction, 2026-10-13.** Implements through [Fjordside Exploration epic #146](https://github.com/sidesliders1983/Pillagers/issues/146), after the 3D-first decision GP-007.
+
+> **Residents move and live autonomously. Only organized Expedition Groups receive direct player movement and mission orders.**
+
+Individual residents remain real living people, not RTS pawns: they choose routine movement, work tasks, social interactions and personal activities autonomously under Simulation Core rules. The player retains the previously approved strategic/management influence over occupations, homes, buildings, resources and meaningful life decisions, but **does not directly issue map-click movement/patrol/attack orders to an individual Persona**.
+
+An **Expedition Group** is persistent, comprises eligible named real residents, and is the player's controllable strategic unit. The player can form/edit a group and order it to explore a clicked island area or execute Recon, Surveillance, Pillage or an approved future mission. Group members and the route/execution remain autonomous. Mission eligibility, resources, outcomes, casualties, travel ticks, life consequences and events belong to deterministic Simulation Core. Never resolve missions from a Three.js object's position, framerate or camera visibility.
+
+**The world is not completely known at the start.** Only the founding settlement's actual surroundings are explored initially. Discovery belongs to the observing **community/clan**, is based on confirmed observation, and survives when scouts depart. Higher ground may reveal more; ridges can conceal valleys. Current line-of-sight/visibility, persistently mapped geography, and stale/scouted/surveyed intelligence about other people are **distinct**. The player must not learn up-to-date rival inventories or population merely by orbiting a free camera over unknown territory.
+
+The existing distance/weather **atmospheric fog** is not the authority for exploration. Add a separate saved, clan-scoped **fog-of-war / map-discovery state**, rendered in Fjordside 3D and enforced by player-visible projections, picking, labels and contextual commands. Camera zoom, debug fog toggles, rendering culling and day/night do not change knowledge. A discovered map cell stays discovered; live enemy intelligence may become stale.
+
+A **rival CPU community exists and evolves even before it is discovered**. Link its real pre-existing Simulation Core state to the physically reserved hidden site on the canonical island. The enemy's economy, residents, lineage and risks are not created when the fog clears and do not stop when its scene is not rendered. Reuse existing Expedition Groups, CPU states and the original four-direction Region Graph in historical saves, with an explicitly versioned mapping for new physical-island campaigns.
+
+The first playable milestone is: create an Expedition Group in the **3D Fjord**, click an unknown valley, observe autonomous travel and gradual confirmed map reveal, and return to a still-known explored landscape. Enemy-site reconnaissance and pillage follow after that. CPU-initiated raids, tactical individual unit controls, offline progression and a second 2D gameplay UI are **not approved by this principle**.
+
+Implementation details and owner review criteria: [Expedition/Discovery design contract](docs/gameplay/EXPLORATION-FOG-AND-RIVAL-CLANS.md) and [#146](https://github.com/sidesliders1983/Pillagers/issues/146). Prior implementation [#54](https://github.com/sidesliders1983/Pillagers/issues/54) remains the historical command/mission foundation, not the active four-arrow player UX.
+
 ## Scope and implementation status
 
 The calendar and age wording above are approved design decisions. They do not imply that the current code already implements them.
@@ -133,4 +153,4 @@ These are proposals, not requirements for Codex to implement automatically:
 
 ## Maintaining these principles
 
-When implementing time-related features, lore, cultural life, cohesion or personality-driven life events, check them against GP-001 through GP-007 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features, lore, cultural life, cohesion or personality-driven life events, check them against GP-001 through GP-008 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
