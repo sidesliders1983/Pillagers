@@ -22,9 +22,11 @@ Native terrain geometry and blend-mask/index construction yield between bounded 
 
 ## Validation and review
 
-- `tests/async-generation.test.mjs`: canonical worker/synchronous equality, pinned campaign metadata, bounded non-private preview, cancellation/supersession/timeout/errors, identical yielding terrain buffers.
+- `tests/async-generation.test.mjs`: canonical worker/synchronous equality, pinned campaign metadata, bounded non-private preview, cancellation/supersession/timeout/errors, identical yielding terrain buffers and initial ground-wear masks.
 - `scripts/qa/check-cinematic-loading.mjs`: immediate preview and initial cancellation.
 - `scripts/qa/check-cinematic-flows.mjs`: worker retry, cancellation before and after scene replacement, skip, and retained campaign.
+- `scripts/qa/check-cinematic-lab.mjs`: shared Lab worker, touch cancellation and conifer replanning.
+- `scripts/qa/check-cinematic-lifecycle.mjs`: page unload and the existing missing-ground-material fallback.
 - `scripts/qa/profile-cinematic-loading.mjs`: desktop, 390px mobile and 1024px tablet, Low/Standard, reduced motion and skip. These are browser emulations, not physical iPhone/iPad certification.
 - [Review and measurements](qa/cinematic-loading/review.html).
 

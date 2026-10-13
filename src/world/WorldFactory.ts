@@ -7,7 +7,7 @@ import { parseWorld, serializeWorld } from '../world-generation/WorldSave';
 import { World } from './World';
 import { surfaceHeightAt } from './Terrain';
 import { walkable, randomWalkablePosition, MovementTerrain } from '../systems/MovementSystem';
-import { createBlueprintSurface, createBlueprintTerrainAsync, disposeBlueprintTerrain, updateBlueprintWear } from './BlueprintTerrain';
+import { createBlueprintSurface, createBlueprintTerrainAsync, disposeBlueprintTerrain, updateBlueprintWear, updateBlueprintWearAsync } from './BlueprintTerrain';
 import { loadWorldGroundMaterials } from './WorldGroundMaterials';
 import { loadPineModels } from './PineModels';
 import { createNatureFromPlan } from './KayKitNature';
@@ -204,17 +204,24 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
         const fire = attachments.find(p => p.key === 'hearth') ??
             { ...hearth,y: surfaceHeightAt(hearth.x,hearth.z) };
         const center = blueprint?.settlement.center ?? { x: 0,z: 0 };
+        const treeSources = new Map((blueprint?.placementPlan ?? [])
+            .filter(p => /conifer|deciduous/.test(p.assetId))
+            .map(p => [p.assetId + '@' + p.x + ',' + p.z, p]));
         return {
             root,terrain,movement,blueprint,attachments,
             setGroundWeights(weights: readonly number[]) {
                 if (canonical && terrain) updateBlueprintWear(terrain,weights);
+            },
+            async prepareGroundWeights(weights: readonly number[]) {
+                if (canonical && terrain) await updateBlueprintWearAsync(terrain, weights);
             },
             standingTrees() {
                 const trees = new Map<string, { key: string; x: number; z: number; clearance: number }>();
                 root.traverse(node => {
                     if (!(node instanceof InstancedMesh) || !/conifer|deciduous/.test(node.name)) return;
                     for (const point of (node.userData.sourceAnchors ?? []).slice(0, node.count)) {
-                        const source = blueprint?.placementPlan.find(p => p.assetId === node.name &&
+                        const source = treeSources.get(node.name + '@' + point.x + ',' + point.z) ??
+                            blueprint?.placementPlan.find(p => p.assetId === node.name &&
                             Math.hypot(p.x - point.x, p.z - point.z) < .001);
                         if (!source) continue;
                         const key = source.assetId + '@' + source.x + ',' + source.z;

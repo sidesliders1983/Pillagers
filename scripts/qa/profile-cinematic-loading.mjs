@@ -38,7 +38,11 @@ try{
    await page.screenshot({path:output+'/sea.jpg',type:'jpeg',quality:85});
   }
   await page.locator('#island-loading[data-preview]').waitFor();
-  if(quality==='low')await page.screenshot({path:output+'/'+name+'-preview.jpg',type:'jpeg',quality:85});
+  // Wait for the actual terrain snapshot's 600 ms fade before capturing its evidence.
+  if(quality==='low'){
+   await page.waitForTimeout(700);
+   await page.screenshot({path:output+'/'+name+'-preview.jpg',type:'jpeg',quality:85});
+  }
   if(!reduced){
    await page.locator('#island-loading.island-loading-arrival').waitFor();
    if(name==='desktop'&&quality==='low'){

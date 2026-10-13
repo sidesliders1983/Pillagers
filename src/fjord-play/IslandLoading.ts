@@ -20,7 +20,7 @@ export class IslandLoading {
     readonly signal: AbortSignal;
     readonly root = document.createElement('section');
     readonly evidence = { started: performance.now(), firstPreview: 0, previewBytes: 0, resultJsonBytes: null as number | null,
-        samples: [] as { stage: string; milliseconds: number }[], arrived: 0 };
+        samples: [] as { stage: string; milliseconds: number; startedAt?: number }[], arrived: 0 };
     private abort = new AbortController();
     private worker = browserGeneration();
     private canvas: HTMLCanvasElement;
@@ -88,7 +88,7 @@ export class IslandLoading {
         await yieldForInput();
         const start = performance.now();
         try { return await operation(); }
-        finally { this.evidence.samples.push({ stage, milliseconds: performance.now() - start }); }
+        finally { this.evidence.samples.push({ stage, startedAt: start, milliseconds: performance.now() - start }); }
     }
     private progress = (event: GenerationProgress) => {
         if (this.signal.aborted) return;

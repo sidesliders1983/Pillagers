@@ -7,7 +7,7 @@ try{
  await page.goto('http://127.0.0.1:5180/fjord-play?seed=32',{waitUntil:'domcontentloaded'});
  await page.locator('#island-loading').waitFor({timeout:5000});
  assert.equal(await page.locator('#island-loading-status').textContent(),'Shaping coast & valleys');
- await page.getByRole('button',{name:'Cancel loading',exact:true}).click();
+ await page.getByRole('button',{name:'Cancel loading',exact:true}).tap();
  await page.getByRole('button',{name:'Try again',exact:true}).waitFor();
  assert.equal(await page.evaluate(()=>sessionStorage.getItem('pillagers.fjord-play.active.v1')),null);
  console.log('initial preview and cancellation passed');

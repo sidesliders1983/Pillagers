@@ -1,0 +1,12 @@
+{
+  "flows": [
+    "Generate World publishes the requested seed through the shared worker.",
+    "Touch cancellation retains the previous landscape and enables Generate World.",
+    "Conifer replanning uses the retained seed and publishes one replacement."
+  ],
+  "worker": {
+    "created": 3,
+    "terminated": 3
+  },
+  "errors": []
+}

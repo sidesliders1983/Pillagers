@@ -570,7 +570,10 @@ export class FjordPlay {
                     const signature = JSON.stringify([view.ground, grassPlots]);
                     if (signature !== groundSignature) {
                         const weights = fjordGroundWeights(this.campaign.blueprint, view.ground, grassPlots);
-                        world!.setGroundWeights(weights);
+                        if (this.loading) {
+                            await this.loading.measure('initial-ground-wear',
+                                () => world!.prepareGroundWeights(weights));
+                        } else world!.setGroundWeights(weights);
                         canvas.dataset.ground = JSON.stringify({ plots: view.ground.plots.map(p => p.id),
                             paths: view.ground.paths, soilSamples: weights.filter(w => w > 0).length });
                         for (const path of view.ground.paths)
@@ -603,7 +606,10 @@ export class FjordPlay {
                     canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                     canvas.dataset.campfireEffect = JSON.stringify(campfireEffect!.inspect());
                     motion!.reconcile(view.entities, view.ground);
-                    motion!.setStandingTrees(world!.standingTrees());
+                    const trees = this.loading
+                        ? await this.loading.measure('standing-tree-targets', () => world!.standingTrees())
+                        : world!.standingTrees();
+                    motion!.setStandingTrees(trees);
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
                     if (this.stopped || this.shared.transferring)

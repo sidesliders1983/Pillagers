@@ -89,3 +89,19 @@ test('yielding scene geometry preserves the canonical terrain mesh',async()=>{
  for(let i=1;i<sync.material.length;i++)assert.deepEqual(asyncMesh.material[i].alphaMap.image.data,sync.material[i].alphaMap.image.data);
  disposeBlueprintTerrain(sync);disposeBlueprintTerrain(asyncMesh);for(const material of sources.values())material.dispose();
 });
+
+test('initial ground wear can yield without changing the displayed material masks',async()=>{
+ const {createBlueprintTerrain,updateBlueprintWear,updateBlueprintWearAsync,disposeBlueprintTerrain}=load('../src/world/BlueprintTerrain.ts');
+ assert.equal(typeof updateBlueprintWearAsync,'function');
+ const {generateWorld}=load('../src/world-generation/GenerateWorld.ts');
+ const {MeshStandardMaterial}=await import('three');
+ const sources=new Map(['Ground037','Ground054','grass_path_2','mossy_rock'].map(id=>[id,new MeshStandardMaterial({name:id})]));
+ const world=generateWorld({seed:42,environment:{version:1}});
+ const make=()=>createBlueprintTerrain(world,sources,'none',undefined,'zoned');
+ const a=make(),b=make(),wear=world.terrain.heights.map((_,i)=>i%3===0?.6:0);
+ updateBlueprintWear(a,wear);let yields=0;
+ await updateBlueprintWearAsync(b,wear,async()=>{yields++;});assert.ok(yields>1);
+ assert.deepEqual(a.geometry.index.array,b.geometry.index.array);
+ for(let i=1;i<a.material.length;i++)assert.deepEqual(a.material[i].alphaMap.image.data,b.material[i].alphaMap.image.data);
+ disposeBlueprintTerrain(a);disposeBlueprintTerrain(b);for(const material of sources.values())material.dispose();
+});

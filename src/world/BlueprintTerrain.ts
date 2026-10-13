@@ -1,4 +1,4 @@
-import { blendedMaterialIds, createGroundBlendMasks, indexGroundLayers, groundBlendMaskSteps, groundLayerIndexSteps } from './GroundBlending';
+import { blendedMaterialIds, groundBlendMaskSteps, groundLayerIndexSteps } from './GroundBlending';
 import { createSpatialOverlay } from './SpatialOverlay';
 import { environmentColours } from './EnvironmentOverlay';
 import { macroRegions } from '../world-generation/MacroIsland';
@@ -214,13 +214,20 @@ export function disposeBlueprintTerrain(mesh: Mesh) {
 
 /** Update only the native soil alpha map; geometry and saved geography stay unchanged. */
 export function updateBlueprintWear(mesh: Mesh, weights: readonly number[]) {
+    for (const _ of groundWearSteps(mesh, weights)) { /* Synchronous live-update contract. */ }
+}
+export async function updateBlueprintWearAsync(mesh: Mesh, weights: readonly number[],
+    yieldControl: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0))) {
+    for (const _ of groundWearSteps(mesh, weights)) await yieldControl();
+}
+function* groundWearSteps(mesh: Mesh, weights: readonly number[]) {
     const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
     const blended = blendedWorlds.get(mesh);
     if (blended) {
         const { world, snow } = blended;
         if (weights.length !== world.terrain.heights.length) throw new Error('Ground mask does not match the terrain grid.');
-        const masks = createGroundBlendMasks(world, weights, snow);
-        indexGroundLayers(mesh.geometry, world, masks);
+        const masks = yield* groundBlendMaskSteps(world, weights, snow);
+        yield* groundLayerIndexSteps(mesh.geometry, world, masks);
         masks[0].dispose();
         for (let layer = 1; layer < materials.length; layer++) {
             const material = materials[layer] as MeshStandardMaterial;
