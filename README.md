@@ -1,4 +1,8 @@
-# Pillagers — World Prototype v0.2
+# Fjordside — World Prototype v0.2
+
+**Fjordside** is a living Viking settlement simulation where families, generations, occupations, relationships and emergent stories shape a community beside a fjord. *Every life becomes a legend.*
+
+The repository retains its original **Pillagers** name as a technical identifier; Fjordside is the player-facing game title. The prototype described below is an early technical slice, not the complete game.
 
 A small Three.js Viking settlement beside a fjord. v0.2 implements [GitHub issue #1](https://github.com/sidesliders1983/Pillagers/issues/1): a visual identity pass with a muted Nordic palette, warmer fill light, softer shadows, feathered building platforms, organic ground variation, connected informal paths and small prop clusters. Native TypeScript, Vite and Three.js; no backend or gameplay framework.
 
@@ -108,7 +112,7 @@ Production builds copy the licensed kit for use by the local application. The ra
 
 The scriptable Blender character optimization benchmark and /asset-lab comparison page are described in [Asset Optimization Pipeline v0.1](docs/ASSET-OPTIMIZATION-V01.md). Run npm run assets:optimize to generate three LODs and npm run assets:publish to compare them locally. Generated assets and downloaded tools remain Git-ignored. npm run assets:test runs the independent Blender fixture test.
 
-1. Build one production-direction Pillagers Viking, keeping the current placeholders for scale comparison.
+1. Build one production-direction Fjordside Viking, keeping the current placeholders for scale comparison.
 2. Validate that character at close, default and overview RTS camera distances; add a simple walk cycle.
 3. Tune the Character Lab distributions and occupation preferences through comparisons before expanding into VikingGenome.
 
