@@ -57,7 +57,7 @@ for (const seed of seeds) {
             peakAboveSea: world.terrain.heights.reduce((a, b) => Math.max(a, b), -Infinity) - world.waterLevel,
             landP90: quantile(world.terrain.heights.filter(h => h > world.waterLevel), .9) - world.waterLevel,
             highlandSlopeP90: quantile(highlandSlopes, .9), blueprintHash: hash(world),
-            previousFixturePreserved, deterministic: mode === 'after', saveLoad: true,
+            previousFixturePreserved, deterministic: mode === 'after' ? true : null, saveLoad: true,
             accepted: world.validation.accepted, reasons: world.validation.reasons,
             macroAccepted: macro.accepted, macroReasons: macro.reasons,
             terrainSeparation: macro.terrainSeparation && { width: macro.terrainSeparation.width,
