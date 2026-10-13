@@ -1,6 +1,7 @@
 import type { EnvironmentConfig, EnvironmentRequest, EnvironmentZones } from './EnvironmentZoning';
 import type {
     RivalSite, SiteSelection, SiteRules, settlementGeneratorVersion, gentlerSettlementGeneratorVersion,
+    discoverySettlementGeneratorVersion,
 } from './SettlementSites';
 import type { NatureAssetKey } from '../config/NatureAssets';
 
@@ -29,7 +30,8 @@ export interface WorldGenerationConfig {
     readonly seed: number;
     readonly generatorVersion: typeof generatorVersion | typeof firstIslandGeneratorVersion |
         typeof islandGeneratorVersion | typeof gentlerIslandGeneratorVersion |
-        typeof settlementGeneratorVersion | typeof gentlerSettlementGeneratorVersion;
+        typeof settlementGeneratorVersion | typeof gentlerSettlementGeneratorVersion |
+        typeof discoverySettlementGeneratorVersion;
     readonly preset: WorldPreset;
     readonly width: number;
     readonly depth: number;

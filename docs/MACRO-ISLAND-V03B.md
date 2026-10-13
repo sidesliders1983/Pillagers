@@ -55,7 +55,7 @@ Shape metrics screen obvious artifacts; visual acceptance still requires examini
 
 ## Gentler highlands — owner follow-up to #137
 
-After the owner accepted the ground-material direction, they requested lower central ridges. The Lab now explicitly selects `fjordside-island-v0.3b-r3` for new macro islands and `fjordside-island-v0.3e-r2` when settlement planning is enabled. Public API defaults and campaign presets stay unchanged; this does not adopt islands as the campaign default.
+After the owner accepted the ground-material direction, they requested lower central ridges. The Lab now explicitly selects `fjordside-island-v0.3b-r3` for new macro islands and `fjordside-island-v0.3e-r3` when settlement planning is enabled. This uses the same softened terrain as e-r2, with the [subsequently revised discovery/visibility policy](SETTLEMENT-SITES-V03E.md#discovery-policy-revision--13-october-2026). The original highland comparison remains a record of e-r2 and its stricter concealment requirement. Public API defaults and campaign presets stay unchanged; this does not adopt islands as the campaign default.
 
 The extra bounded weathering step lowers the existing eroded ridges above 6.2m over sea level. Across the next 12 vertical metres, the derivative transitions smoothly from 1 to a retained fraction of 0.40–0.58. The retained fraction varies over the same broad bedrock noise stream. Above that shoulder the same fraction continues; there is no hard clipping or constant-height summit. It adds no new peaks, changes no drainage route and stores no extra terrain fields. Sea, coastline and lowland samples remain exact before local foundation grading.
 
@@ -77,4 +77,4 @@ node scripts/qa/check-island-highlands.mjs
 node scripts/qa/publish-island-highlands.mjs
 ```
 
-The current highland QA scripts default to `scratch/island-highlands`. The earlier macro-island scripts and galleries describe their original r2 revision; use `QA_OUTPUT` for a new evidence folder and `QA_ORIGIN` for the preview server. Before/after process memory is not peak/GPU memory. Development-laptop timings are observational, not a few-millisecond release gate.
+The highland comparison and its browser-generation assertions target commit `e074986392ba47dba6ba88547eb2b5f3bb6b0547`, before the discovery-policy revision. Use that revision to reproduce the original e-r2 Lab-generation evidence; current placement/browser checks are documented in [Settlement sites](SETTLEMENT-SITES-V03E.md). The highland QA scripts default to `scratch/island-highlands`. The earlier macro-island scripts and galleries describe their original r2 revision; use `QA_OUTPUT` for a new evidence folder and `QA_ORIGIN` for the preview server. Before/after process memory is not peak/GPU memory. Development-laptop timings are observational, not a few-millisecond release gate.

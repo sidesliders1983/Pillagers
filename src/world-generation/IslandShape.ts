@@ -1,7 +1,7 @@
 import { createNoise2D } from 'simplex-noise';
 import { seededRandom } from '../config/worldConfig';
 import { islandDrainage } from './IslandDrainage';
-import { gentlerSettlementGeneratorVersion } from './SettlementSites';
+import { gentlerSettlementGeneratorVersion, discoverySettlementGeneratorVersion } from './SettlementSites';
 import { gentlerIslandGeneratorVersion } from './WorldBlueprint';
 import type { IslandGeology, Point2, TerrainField, WorldGenerationConfig } from './WorldBlueprint';
 
@@ -148,7 +148,8 @@ export function islandTerrain(config: WorldGenerationConfig, waterLevel: number)
         }
     }
     if (config.generatorVersion === gentlerIslandGeneratorVersion ||
-        config.generatorVersion === gentlerSettlementGeneratorVersion) {
+        config.generatorVersion === gentlerSettlementGeneratorVersion ||
+        config.generatorVersion === discoverySettlementGeneratorVersion) {
         softenHighlands(terrain, waterLevel, noise);
     }
     const geology: IslandGeology = { model: 'rift-glacial-v1', rifts, valleys };

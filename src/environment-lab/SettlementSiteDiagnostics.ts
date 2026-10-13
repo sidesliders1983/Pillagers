@@ -1,5 +1,6 @@
 import { BufferGeometry, Float32BufferAttribute, Group, LineBasicMaterial, LineSegments } from 'three';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+import { requiresTerrainOcclusion } from '../world-generation/SettlementSites';
 import { footprintBounds } from '../world-generation/PlanSettlement';
 import type { Bounds2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 
@@ -65,13 +66,17 @@ export function renderSettlementSiteDiagnostics(container: HTMLElement, world: W
     const selection = world.siteSelection;
     container.hidden = !selection;
     if (!selection) return;
+    const requireOcclusion = requiresTerrainOcclusion(world.config.generatorVersion);
     const summary = document.createElement('summary');
     summary.textContent = 'Settlement placement diagnostics';
     container.append(summary);
     const introduction = document.createElement('p');
     introduction.textContent = `Minimum center distance ${selection.rules.minimumCenterDistance}m · ` +
         `neutral gap ${selection.rules.minimumBufferDistance}m · landing route ${selection.rules.minimumLandingRoute}m. ` +
-        'Green: player. Pink: reserved rival, no population. Gold: buffers. Cyan: access. Orange: blocked sightlines.';
+        'Green: player. Pink: reserved rival, no population. Gold: buffers. Cyan: access. ' +
+        'Orange: blocked sightlines. Red: exposed sightlines. ' +
+        (requireOcclusion ? 'Terrain concealment is required by this saved generator version.' :
+            'Sightlines are diagnostic; terrain concealment is not required.');
     container.append(introduction);
     if (selection.compartments) {
         const coverage = document.createElement('details');
@@ -80,7 +85,7 @@ export function renderSettlementSiteDiagnostics(container: HTMLElement, world: W
         const description = document.createElement('pre');
         description.style.whiteSpace = 'pre-wrap';
         description.textContent = selection.compartments.map(c =>
-            `${c.id}: ${c.area}m� lowland; ${c.coreArea}m� broad core; ` +
+            `${c.id}: ${c.area}m² lowland; ${c.coreArea}m² broad core; ` +
             `${c.candidateIds.length}/${c.eligibleAnchors} anchors evaluated; ${c.sixParcelFits} six-parcel fits. ` +
             c.reasons.join(' ')).join('\n');
         coverage.append(title, description);
@@ -124,7 +129,9 @@ export function renderSettlementSiteDiagnostics(container: HTMLElement, world: W
             `Landing route ${pair.routeLength ? pair.routeLength + 'm' : 'not evaluated'} · ` +
             `exposed rays ${pair.visibilityComplete === false ? 'at least ' : ''}${pair.exposedRays ?? 'not evaluated'}\n` +
             (pair.visibilityComplete === false ? `Stopped after ${pair.visibilitySamples} samples: exposure already proves rejection.\n` : '') +
-            (pair.reasons.length ? pair.reasons.join('\n') : 'Accepted: terrain-hidden and connected.') : selection.reasons.join('\n');
+            (pair.reasons.length ? pair.reasons.join('\n') : requireOcclusion ?
+                'Accepted: terrain-hidden and connected.' :
+                'Accepted: separate natural compartments and connected.') : selection.reasons.join('\n');
     };
     picker.addEventListener('change', display);
     container.append(label, evidence);
@@ -132,6 +139,6 @@ export function renderSettlementSiteDiagnostics(container: HTMLElement, world: W
     const note = document.createElement('p');
     note.textContent = `${selection.visibility.rays.length} exact terrain sightlines checked for the selected pair; ` +
         'the overlay shows a representative subset. Complete rays and candidate evidence are included in Export world. ' +
-        'Starting-view hiddenness does not imply fog of war or concealment from an unrestricted overview camera.';
+        'Discovery fog is planned separately and is not implemented here. Atmospheric fog is a visual effect, not discovery masking.';
     container.append(note);
 }
