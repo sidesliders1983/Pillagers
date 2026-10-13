@@ -1,6 +1,6 @@
 # Responsive island loading — measured review
 
-Issue #153 introduces a worker-based geographical preview and camera arrival for **new campaigns and restarts**. The owner excluded saved-season introduction work. Existing load/import retains the established saved-world path. Owner visual acceptance and physical iPhone/iPad verification remain open; this PR does not auto-merge.
+Issue #153 introduces a worker-based geographical preview and camera arrival for **new campaigns and current-island restarts**. The owner excluded saved-season introduction work. Existing load/import and legacy-geography restart retain their established paths. Owner visual acceptance and physical iPhone/iPad verification remain open; this PR does not auto-merge.
 
 ## Measurement conditions
 
@@ -42,6 +42,7 @@ These are sequential development runs, not a controlled throughput comparison. *
 - Public contract tests cover canonical worker equality, pinned recipe identity, bounded previews, stale results, cancellation, timeout, worker failure and disposal, plus matching synchronous/yielding terrain and ground masks.
 - [flows.json](flows.json): unavailable worker → retry; cancellation during generation and during arrival; prior Core/geography restoration; a second campaign seed; skip arrival; explicit saved load without an intro. All four created generation workers terminated, with no page errors.
 - [lifecycle.json](lifecycle.json): navigating away terminates the worker without a partial save; a deliberately failed ground texture fetch uses the existing declared native-material fallback and reaches the playable Summer state.
+- [legacy.json](legacy.json): an old same-founder campaign restarts without a new-island introduction and preserves its exact saved geography. The browser test first reproduced the unintended introduction, then passed with the original restart route restored.
 - Initial cancellation also passed using a real emulated touch tap at 390px width.
 - [lab.json](lab.json): requested seed generation, touch cancellation retaining the old landscape, and conifer replanning retaining its seed. Three generation workers were created and terminated, with no page errors.
 - TypeScript and the focused terrain/generation regressions pass. Required GitHub checks run on the final PR head; their status is authoritative for release.

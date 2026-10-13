@@ -314,6 +314,18 @@ export class FjordPlay {
             const wasRunning = this.session.running;
             const completeAutoStart = beginAutoStart();
             action(async () => {
+                // Legacy saves keep their existing restart and geography policy.
+                // Only current island campaigns use the new generation introduction.
+                if (restart && !campaignIslandPlan(this.campaign.blueprint)) {
+                    say('Restarting campaign…');
+                    this.shared.restart(sameFounders.checked, weatherField.checked, foundingPhase);
+                    resetProduction();
+                    campaignFields();
+                    if (world) await rebuildWorld();
+                    completeAutoStart();
+                    say('Campaign restarted.');
+                    return;
+                }
                 const backup = this.campaign.exportJSON();
                 const loading = this.loading = new IslandLoading();
                 controller.enabled = false;
@@ -325,11 +337,9 @@ export class FjordPlay {
                         proposal.loadJSON(this.session.saveJSON());
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
                     } else proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase);
-                    const geography = restart && !campaignIslandPlan(this.campaign.blueprint) ? 'legacy' : 'island-pool-v1';
-                    if (geography === 'island-pool-v1') await loading.prepare(proposal.snapshot().seed);
-                    else loading.previewWorld(this.campaign.blueprint);
+                    await loading.prepare(proposal.snapshot().seed);
                     loading.check();
-                    this.campaign.startCampaign(proposal, geography);
+                    this.campaign.startCampaign(proposal, 'island-pool-v1');
                     resetProduction();
                     campaignFields();
                     await rebuildWorld();

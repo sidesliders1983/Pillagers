@@ -1,7 +1,7 @@
 import { browserGeneration } from '../world-generation/BrowserGeneration';
 import { adoptCampaignIsland } from './CampaignIsland';
 import type { GenerationProgress } from '../world-generation/GenerationTask';
-import { terrainPreview, type TerrainPreview } from '../world-generation/TerrainPreview';
+import type { TerrainPreview } from '../world-generation/TerrainPreview';
 import type { RTSCameraController } from '../camera/RTSCameraController';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import './island-loading.css';
@@ -132,7 +132,6 @@ export class IslandLoading {
             }
         }
     }
-    previewWorld(world: WorldBlueprint) { this.setPreview(terrainPreview(world)); }
     private setPreview(preview: TerrainPreview) {
         if (!this.evidence.firstPreview) this.evidence.firstPreview = performance.now();
         this.evidence.previewBytes += preview.heights.byteLength + preview.ground.byteLength;
