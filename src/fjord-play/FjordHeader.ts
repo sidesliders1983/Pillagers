@@ -34,7 +34,9 @@ export function fjordHeaderHTML(): string {
                         <button id="fjord-export" disabled>Export Fjord campaign</button>
                         <button id="fjord-export-core">Export canonical JSON</button>
                         <label>Import campaign<input id="fjord-import" type="file" accept="application/json,.json"></label>
-                        <label>Seed<input id="fjord-seed" type="number" min="0" max="4294967295"></label>
+                        <label>Campaign seed<input id="fjord-seed" type="number" min="0" max="4294967295"></label>
+                        <small id="fjord-geography"></small>
+                        <small>New campaigns select a validated island from a fixed set. Existing saves keep their geography.</small>
                         <label class="check"><input id="fjord-weather" type="checkbox"> Enable winter weather</label>
                         <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
                         <button id="fjord-new">New campaign from seed</button>

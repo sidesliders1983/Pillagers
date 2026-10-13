@@ -2,6 +2,20 @@ import type { BuildingPlacement, Bounds2, Point2 } from './WorldBlueprint';
 import type { StartingViewpoint, TerrainSightline } from './SettlementVisibility';
 
 export const settlementGeneratorVersion = 'fjordside-island-v0.3e' as const;
+export const gentlerSettlementGeneratorVersion = 'fjordside-island-v0.3e-r2' as const;
+export const discoverySettlementGeneratorVersion = 'fjordside-island-v0.3e-r3' as const;
+
+/** Older generators retain their terrain-only concealment contract. */
+export function requiresTerrainOcclusion(version: string | undefined) {
+    return version !== discoverySettlementGeneratorVersion;
+}
+
+export function isSettlementGeneratorVersion(version: string | undefined):
+    version is typeof settlementGeneratorVersion | typeof gentlerSettlementGeneratorVersion |
+        typeof discoverySettlementGeneratorVersion {
+    return version === settlementGeneratorVersion || version === gentlerSettlementGeneratorVersion ||
+        version === discoverySettlementGeneratorVersion;
+}
 export const defaultSiteRules = Object.freeze({
     minimumCenterDistance: 160,
     minimumBufferDistance: 40,

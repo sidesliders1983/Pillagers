@@ -11,7 +11,7 @@ export function openSettlement(view: SettlementView, seed = 32) {
     catch (error) {
         warning = 'Stored campaign could not be restored: ' + String(error);
     }
-    return { campaign: new SharedSettlement(seed), warning, autoStart: view === 'fjord' };
+    return { campaign: new SharedSettlement(seed, undefined, true, view === 'fjord' ? 'island-pool-v1' : 'legacy'), warning, autoStart: view === 'fjord' };
 }
 export function persistSettlement(campaign: SharedSettlement, say: (message: string) => void) {
     if (campaign.transferring)

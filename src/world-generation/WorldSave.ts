@@ -1,8 +1,8 @@
 import { validateEnvironment } from './ValidateEnvironment';
 import { validateSavedSites } from './ValidateSiteSelection';
-import { settlementGeneratorVersion, isFoundationRotation } from './SettlementSites';
+import { isSettlementGeneratorVersion, isFoundationRotation } from './SettlementSites';
 import { normalizeWorldConfig } from './GenerateWorld';
-import { freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, WorldBlueprint } from './WorldBlueprint';
+import { freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, gentlerIslandGeneratorVersion, WorldBlueprint } from './WorldBlueprint';
 import { natureAssetIds } from '../config/NatureAssets';
 import { buildings } from '../world/SettlementLayout';
 
@@ -21,7 +21,8 @@ export function parseWorld(text: string): WorldBlueprint {
     if (world?.config?.generatorVersion !== generatorVersion &&
         world?.config?.generatorVersion !== islandGeneratorVersion &&
         world?.config?.generatorVersion !== firstIslandGeneratorVersion &&
-        world?.config?.generatorVersion !== settlementGeneratorVersion) {
+        world?.config?.generatorVersion !== gentlerIslandGeneratorVersion &&
+        !isSettlementGeneratorVersion(world?.config?.generatorVersion)) {
         throw new Error('Unsupported generator version: ' + world?.config?.generatorVersion);
     }
     const requireValid = (condition: boolean) => {
@@ -37,7 +38,7 @@ export function parseWorld(text: string): WorldBlueprint {
     requireValid(Object.entries(normalized).every(([key, value]) =>
         JSON.stringify(world.config[key as keyof typeof normalized]) === JSON.stringify(value)));
     const maximumHeight = normalized.preset === 'island' ? 120 : 100;
-    const minimumHeight = (normalized.generatorVersion === islandGeneratorVersion || normalized.generatorVersion === settlementGeneratorVersion) ? -20 : -10;
+    const minimumHeight = (normalized.preset === 'island' && normalized.generatorVersion !== firstIslandGeneratorVersion) ? -20 : -10;
     const terrain = world.terrain;
     requireValid(!!terrain && terrain.columns === columns && terrain.rows === rows && terrain.spacing === 2);
     requireValid(terrain.bounds?.minX === -halfWidth && terrain.bounds.maxX === halfWidth &&
@@ -89,7 +90,7 @@ export function parseWorld(text: string): WorldBlueprint {
     requireValid(Array.isArray(site.buildings) && site.buildings.length === (world.config.preset === 'island' && !world.siteSelection?.selected ? 0 : 6) &&
         site.buildings.every(placement => point(placement) && typeof placement.id === 'string' &&
             buildings.some(source => source.key === placement.key && ('terrainKey' in source ? source.terrainKey : undefined) === placement.terrainKey &&
-                (source.rotation === placement.rotation || normalized.generatorVersion === settlementGeneratorVersion &&
+                (source.rotation === placement.rotation || isSettlementGeneratorVersion(normalized.generatorVersion) &&
                     isFoundationRotation(source.rotation, placement.rotation)) && source.halfWidth === placement.halfWidth &&
                 source.halfDepth === placement.halfDepth && source.radius === placement.radius)));
     requireValid(Array.isArray(site.accessPaths) && site.accessPaths.length <= 7 &&
@@ -104,7 +105,7 @@ export function parseWorld(text: string): WorldBlueprint {
         Array.isArray(world.validation.reasons) && world.validation.reasons.every(reason => typeof reason === 'string') &&
         ['connectedBuildings','connectedArea','maximumFoundationSlope','minimumFoundationElevation','score']
             .every(key => Number.isFinite(world.validation[key as keyof typeof world.validation])));
-    if (normalized.generatorVersion === settlementGeneratorVersion) validateSavedSites(world, requireValid);
+    if (isSettlementGeneratorVersion(normalized.generatorVersion)) validateSavedSites(world, requireValid);
     else requireValid(world.siteSelection === undefined && world.rivalSite === undefined);
     validateEnvironment(world, requireValid);
     return freezeBlueprint(world);

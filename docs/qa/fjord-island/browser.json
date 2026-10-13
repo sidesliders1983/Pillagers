@@ -1,0 +1,70 @@
+{
+  "saveBytes": 66055,
+  "environment": {
+    "mode": "generated",
+    "seed": 18,
+    "generatorVersion": "fjordside-island-v0.3e-r3",
+    "groundBlending": "zoned",
+    "island": {
+      "version": "island-pool-v1",
+      "generatorVersion": "fjordside-island-v0.3e-r3",
+      "seed": 18
+    },
+    "campaignPlots": 12,
+    "quality": "low",
+    "buildings": 0,
+    "populationSource": "existing-fjordside",
+    "groundTier": "low",
+    "source": "ez-tree",
+    "site": {
+      "x": 70,
+      "z": 146
+    },
+    "attachments": 2,
+    "tent": null,
+    "tentPlot": null,
+    "attachmentVersion": "authored-props-v4",
+    "validation": {
+      "accepted": true,
+      "reasons": [],
+      "connectedBuildings": 0,
+      "connectedArea": 17413,
+      "maximumFoundationSlope": 0,
+      "minimumFoundationElevation": 3.581789608001709,
+      "score": 0
+    },
+    "motion": {
+      "water": true,
+      "wind": true
+    },
+    "water": {
+      "source": "reference-water",
+      "quality": "low",
+      "triangles": 2048,
+      "normalSamples": 2,
+      "textureBytes": 87380,
+      "drawCalls": 1,
+      "time": 0.617,
+      "level": -0.12,
+      "center": {
+        "x": 100.5,
+        "z": 202.5
+      },
+      "denseSize": 80,
+      "extent": 2000,
+      "parameters": {
+        "waveAmplitude": 0.18,
+        "waveSpeed": 1,
+        "detailStrength": 0.65
+      },
+      "boat": null
+    }
+  },
+  "checks": [
+    "Fresh Fjord selects the pinned island, renders zoned materials and exports a compact recipe.",
+    "Build house and assign farmer use existing commands and visibly replace the tent in place.",
+    "2D → 3D transfer retains exact canonical state, placements, selected entity and geography.",
+    "New campaign from another seed selects the other validated island."
+  ],
+  "errors": []
+}

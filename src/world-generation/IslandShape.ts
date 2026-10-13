@@ -1,6 +1,8 @@
 import { createNoise2D } from 'simplex-noise';
 import { seededRandom } from '../config/worldConfig';
 import { islandDrainage } from './IslandDrainage';
+import { gentlerSettlementGeneratorVersion, discoverySettlementGeneratorVersion } from './SettlementSites';
+import { gentlerIslandGeneratorVersion } from './WorldBlueprint';
 import type { IslandGeology, Point2, TerrainField, WorldGenerationConfig } from './WorldBlueprint';
 
 const smooth = (value: number) => {
@@ -66,9 +68,9 @@ export function islandTerrain(config: WorldGenerationConfig, waterLevel: number)
             heights.push(Math.fround(waterLevel - 7 + edge * (lava * 61 + rolling * smooth(lava))));
         }
     }
-    const terrain: TerrainField = { columns, rows, spacing: 2, heights,
+    const terrain = { columns, rows, spacing: 2, heights,
         bounds: { minX: -config.width / 2, maxX: config.width / 2,
-            minZ: -config.depth / 2, maxZ: config.depth / 2 } };
+            minZ: -config.depth / 2, maxZ: config.depth / 2 } } satisfies TerrainField;
     const valleys = islandDrainage(terrain, waterLevel, random);
     // Erosion lowers a common heightfield. No individual mountain or inlet shapes are added.
     for (let i = 0; i < heights.length; i++) {
@@ -145,6 +147,33 @@ export function islandTerrain(config: WorldGenerationConfig, waterLevel: number)
             for (const cell of queue) heights[cell] = Math.fround(waterLevel - 1.5);
         }
     }
+    if (config.generatorVersion === gentlerIslandGeneratorVersion ||
+        config.generatorVersion === gentlerSettlementGeneratorVersion ||
+        config.generatorVersion === discoverySettlementGeneratorVersion) {
+        softenHighlands(terrain, waterLevel, noise);
+    }
     const geology: IslandGeology = { model: 'rift-glacial-v1', rifts, valleys };
     return { heights, geology };
+}
+
+/** Lower the existing eroded ridges; never change the coast or add mountain shapes. */
+function softenHighlands(terrain: TerrainField & { heights: number[] }, waterLevel: number,
+    noise: (x: number, z: number) => number) {
+    const { heights } = terrain;
+    const lowlandLimit = waterLevel + 6.2;
+    const shoulderHeight = 12;
+    for (let i = 0; i < heights.length; i++) {
+        const excess = heights[i] - lowlandLimit;
+        if (excess <= 0) continue;
+        const x = terrain.bounds.minX + i % terrain.columns * terrain.spacing;
+        const z = terrain.bounds.minZ + Math.floor(i / terrain.columns) * terrain.spacing;
+        // Reuse the bedrock noise stream. Broad variation leaves unequal surviving
+        // crests along a ridge; there are no additional peaks or stored fields.
+        const retained = .4 + .18 * (noise(x * .004 + 17, z * .004 - 11) + 1) / 2;
+        const t = Math.min(1, excess / shoulderHeight);
+        // Integral of 1 - smoothstep: slope starts at 1 at the lowland edge and
+        // falls continuously to retained. No clipped plateau or hard elevation seam.
+        const shoulder = shoulderHeight * (t - t ** 3 + t ** 4 / 2);
+        heights[i] = Math.fround(lowlandLimit + retained * excess + (1 - retained) * shoulder);
+    }
 }

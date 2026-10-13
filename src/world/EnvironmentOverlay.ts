@@ -1,9 +1,15 @@
+import { groundBlendWeights } from './GroundBlending';
 import { Color } from 'three';
 import { sampleEnvironment } from '../world-generation/EnvironmentZoning';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 
 export const environmentOverlays = {
     environment: 'Ground regions & boundaries',
+    'blend-dominant': 'Rendered blend · dominant material',
+    'blend-grass': 'Rendered blend · grass weight',
+    'blend-sand': 'Rendered blend · sand weight',
+    'blend-mud': 'Rendered blend · mud / wear weight',
+    'blend-rock': 'Rendered blend · rock weight',
     'forest-cover': 'Forest cover',
     moisture: 'Moisture',
     shelter: 'Shelter',
@@ -24,6 +30,15 @@ export function environmentColours(world: WorldBlueprint, overlay: string): Colo
         if (height <= world.waterLevel) return new Color(palette.water);
         const x = world.terrain.bounds.minX + index % world.terrain.columns * world.terrain.spacing;
         const z = world.terrain.bounds.minZ + Math.floor(index / world.terrain.columns) * world.terrain.spacing;
+        if (overlay.startsWith('blend-')) {
+            const weights = groundBlendWeights(world, x, z, world.biomes.worn[index]);
+            if (overlay === 'blend-dominant') {
+                const winner = weights.indexOf(Math.max(...weights));
+                return new Color([palette.grass, palette.sand, palette.mud, palette.bedrock][winner]);
+            }
+            const layer = ['blend-grass', 'blend-sand', 'blend-mud', 'blend-rock'].indexOf(overlay);
+            return new Color('#15212b').lerp(new Color('#fff0bb'), weights[layer]);
+        }
         const zone = sampleEnvironment(world, x, z)!;
         if (overlay === 'environment') {
             const colour = new Color(palette[zone.primary]);

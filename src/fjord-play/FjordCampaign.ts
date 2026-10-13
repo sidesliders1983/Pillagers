@@ -1,3 +1,4 @@
+import { createCampaignIsland, campaignIslandPlan, type CampaignGeography } from './CampaignIsland';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { generateWorld } from '../world-generation/GenerateWorld';
 import { parseWorld } from '../world-generation/WorldSave';
@@ -15,9 +16,10 @@ export class FjordCampaign {
         kind: string;
         id: string;
     } | null = null;
-    constructor(readonly session: GameplaySession) {
-        this.blueprint = generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
-        this.layout = createFjordLayout(this.blueprint);
+    constructor(readonly session: GameplaySession, private geography: CampaignGeography = 'legacy') {
+        this.blueprint = geography === 'island-pool-v1' ? createCampaignIsland(session.snapshot().seed) :
+            generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
+        this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
     }
     project() {
         const view = projectFjordSettlement(this.session.snapshot(), this.blueprint, this.layout);
@@ -32,8 +34,9 @@ export class FjordCampaign {
     }
     exportJSON() {
         this.project();
-        return JSON.stringify({ bridgeVersion: 1, campaign: JSON.parse(this.session.saveJSON()),
-            blueprint: this.blueprint, layout: this.layout, selection: this.selection,
+        const island = campaignIslandPlan(this.blueprint)?.recipe;
+        return JSON.stringify({ bridgeVersion: island ? 2 : 1, campaign: JSON.parse(this.session.saveJSON()),
+            ...(island ? { island } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
             narrative: this.session.book.save(this.session.snapshot()) });
     }
     importJSON(text: string) {
@@ -42,17 +45,19 @@ export class FjordCampaign {
         const saved = JSON.parse(text);
         const proposal = new GameplaySession();
         const extended = saved.bridgeVersion !== undefined;
-        if (extended && saved.bridgeVersion !== 1)
+        if (extended && ![1, 2].includes(saved.bridgeVersion))
             throw new Error('Unsupported Fjord campaign version.');
         proposal.loadJSON(extended ? JSON.stringify(saved.campaign) : text);
         if (saved.narrative) proposal.book.restore(saved.narrative, proposal.snapshot());
         const seed = proposal.snapshot().seed;
-        const blueprint = extended ? parseWorld(JSON.stringify({ schemaVersion: 1, blueprint: saved.blueprint })) :
-            seed === this.blueprint.config.seed ? this.blueprint : generateWorld({ seed, conifers: 'ez-tree' });
-        if (blueprint.config.seed !== seed)
+        if (saved.bridgeVersion === 2 && !saved.island) throw new Error('Missing campaign island recipe.');
+        const blueprint = saved.bridgeVersion === 2 ? createCampaignIsland(seed, saved.island) :
+            extended ? parseWorld(JSON.stringify({ schemaVersion: 1, blueprint: saved.blueprint })) :
+                seed === this.layout.seed ? this.blueprint : this.createGeography(seed);
+        if (!campaignIslandPlan(blueprint) && blueprint.config.seed !== seed)
             throw new Error('Campaign and geography seed identities do not match.');
         let layout = extended ? saved.layout as FjordLayout :
-            seed === this.layout.seed ? structuredClone(this.layout) : createFjordLayout(blueprint);
+            seed === this.layout.seed ? structuredClone(this.layout) : createFjordLayout(blueprint, undefined, seed);
         const legacyLayout = saved.layout?.version === 'fjord-layout-v1';
         if (!layout || layout.seed !== seed || layout.geographyId !== geographyIdentity(blueprint))
             throw new Error('Campaign and presentation identities do not match.');
@@ -64,6 +69,11 @@ export class FjordCampaign {
                 p.halfWidth === parcelHalfSize && p.halfDepth === parcelHalfSize) ||
             !Object.values(layout.points).every(finiteTransform))
             throw new Error('Invalid presentation layout.');
+        if (campaignIslandPlan(blueprint)) {
+            const expected = createFjordLayout(blueprint, undefined, seed).mooring;
+            if (JSON.stringify(layout.mooring) !== JSON.stringify(expected) || !layout.mooringResolved)
+                throw new Error('Invalid island mooring in presentation layout.');
+        }
         const plots = Object.values(layout.plots);
         const fire = settlementCampfire(blueprint);
         if (!legacyLayout && plots.some(p => Math.hypot(
@@ -87,25 +97,42 @@ export class FjordCampaign {
         // Rebuild presentation only; retain geography, mooring and every canonical fact.
         if (legacyLayout) {
             const resolved = layout.mooringResolved;
-            layout = createFjordLayout(blueprint, layout.mooring);
+            layout = createFjordLayout(blueprint, layout.mooring, seed);
             layout.mooringResolved = resolved;
         }
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
         this.session.loadJSON(proposal.saveJSON());
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
         this.blueprint = blueprint;
+        if (saved.bridgeVersion === 2) this.geography = 'island-pool-v1';
         this.layout = view.layout;
         this.selection = extended && saved.selection && typeof saved.selection.kind === 'string' &&
             typeof saved.selection.id === 'string' ? saved.selection : null;
     }
+    startCampaign(proposal: GameplaySession, geography = this.geography) {
+        const next = new FjordCampaign(proposal, geography);
+        // Project and validate the complete proposal before committing any canonical state.
+        this.importJSON(next.exportJSON());
+        this.geography = geography;
+    }
+    private createGeography(seed: number) {
+        return this.geography === 'island-pool-v1' ? createCampaignIsland(seed) :
+            generateWorld({ seed, conifers: 'ez-tree' });
+    }
     restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false) {
-        this.session.restartCampaign(sameFounders, undefined, weatherEnabled);
-        const seed = this.session.snapshot().seed;
-        if (seed !== this.blueprint.config.seed)
-            this.blueprint = generateWorld({ seed, conifers: 'ez-tree' });
-        const sameGeography = seed === this.layout.seed, resolved = this.layout.mooringResolved;
-        this.layout = createFjordLayout(this.blueprint, sameGeography ? this.layout.mooring : undefined);
-        this.layout.mooringResolved = sameGeography && resolved;
-        this.selection = null;
+        const proposal = new GameplaySession();
+        proposal.loadJSON(this.session.saveJSON());
+        proposal.restartCampaign(sameFounders, undefined, weatherEnabled);
+        if (!sameFounders) {
+            this.startCampaign(proposal);
+            return;
+        }
+        const saved = JSON.parse(this.exportJSON());
+        saved.campaign = JSON.parse(proposal.saveJSON());
+        saved.narrative = proposal.book.save(proposal.snapshot());
+        saved.layout = createFjordLayout(this.blueprint,
+            this.layout.mooringResolved ? this.layout.mooring : undefined, proposal.snapshot().seed);
+        saved.selection = null;
+        this.importJSON(JSON.stringify(saved));
     }
 }

@@ -1,7 +1,10 @@
+import { groundStudyViews, groundStudyCamera } from './GroundStudyViews';
+import type { GroundBlending, RockTone } from '../config/GroundBlendConfig';
 import { spatialOverlays } from '../world/SpatialOverlay';
 import { renderSpatialDiagnostics } from './SpatialDiagnostics';
 import { environmentOverlays, renderEnvironmentDiagnostics } from './EnvironmentDiagnostics';
-import { settlementGeneratorVersion } from '../world-generation/SettlementSites';
+import { gentlerIslandGeneratorVersion } from '../world-generation/WorldBlueprint';
+import { discoverySettlementGeneratorVersion } from '../world-generation/SettlementSites';
 import { settlementStartingViews } from '../world-generation/SiteNavigation';
 import { createSettlementSiteOverlay, renderSettlementSiteDiagnostics } from './SettlementSiteDiagnostics';
 import { inspectMacroIsland } from '../world-generation/MacroIsland';
@@ -79,10 +82,21 @@ export class LabWorldGeneration {
                     <option value="fjord">Fjord</option>
                     <option value="coastal-valley">Coastal Valley</option>
                     <option value="rocky-inlet">Rocky Inlet</option>
-                    <option value="island">Nordic Island · v0.3b</option>
+                    <option value="island">Nordic Island · gentler highlands</option>
                 </select></label>
-                <label><input id="world-site-planning" type="checkbox">Player &amp; hidden rival sites · v0.3e (islands)</label>
+                <label><input id="world-site-planning" type="checkbox">Player &amp; rival sites · v0.3e-r3 (islands)</label>
                 <label><input id="world-environment-zoning" type="checkbox">Environment zoning · v1 (new worlds)</label>
+                <label>Annual mean °C for new zoned worlds<input id="world-climate" type="number"
+                    min="-40" max="40" step="0.5" value="6" title="Normal: 6 °C. Optional cold study: −8 °C. Applies on Generate World."></label>
+                <label><input id="world-snow-study" type="checkbox" disabled>Potential snow cover · Lab study</label>
+                <label>Rock colour<select id="world-rock-tone" disabled>
+                    <option value="cool-grey">Cool grey · art direction candidate</option>
+                    <option value="source">Original mossy olive · comparison</option>
+                </select></label>
+                <label>Ground rendering<select id="world-ground-blending" disabled>
+                    <option value="baseline">Baseline · tiled biome masks</option>
+                    <option value="zoned">Zoned blend · native source atlas</option>
+                </select></label>
                 <label><input id="world-sand-study" type="checkbox">Sand study · approved ReferenceWater</label>
                 <label>Standard sand<select id="world-sand-resolution" disabled>
                     <option value="256">256 px · baseline</option>
@@ -118,11 +132,15 @@ export class LabWorldGeneration {
             '<option value="island-overhead" disabled>Island overhead</option>' +
             '<option value="island-oblique" disabled>Island oblique</option>' +
             '<option value="sand-close" disabled>Sand shore close-up</option>' +
-            '<option value="sand-shore" disabled>Sand shore gameplay distance</option>');
+            '<option value="sand-shore" disabled>Sand shore gameplay distance</option>' +
+            Object.entries(groundStudyViews).map(([key, label]) => '<option value="' + key + '" disabled>' + label + '</option>').join(''));
         this.sandStudy.addEventListener('change', () => {
             if (this.blueprint) void this.regenerate(this.blueprint);
         });
-        this.sandResolution.addEventListener('change', () => void this.changeSandResolution());
+        this.sandResolution.addEventListener('change', () => void this.changeGroundMaterials());
+        document.querySelector('#world-rock-tone')!.addEventListener('change', () => void this.changeGroundMaterials());
+        document.querySelector('#world-ground-blending')!.addEventListener('change', () => void this.changeGroundMaterials());
+        document.querySelector('#world-snow-study')!.addEventListener('change', () => { this.applyOverlay(); this.updateGroundSummary(); });
         document.querySelector('#world-review-seed')!.addEventListener('change', event => {
             const value = (event.target as HTMLSelectElement).value;
             if (value === '') return;
@@ -188,18 +206,20 @@ export class LabWorldGeneration {
             const world = saved ?? generateWorld({ seed: Number(this.seed.value),
                 preset: this.preset.value as WorldPreset, conifers: this.coniferSource(),
                 ...((document.querySelector('#world-environment-zoning') as HTMLInputElement).checked ?
-                    { environment: { version: 1 as const } } : {}),
-                ...(this.preset.value === 'island' &&
+                    { environment: { version: 1 as const, meanAnnualTemperatureC: Number((document.querySelector('#world-climate') as HTMLInputElement).value) } } : {}),
+                ...(this.preset.value === 'island' ? { generatorVersion:
                     (document.querySelector('#world-site-planning') as HTMLInputElement).checked ?
-                    { generatorVersion: settlementGeneratorVersion } : {}) });
+                        discoverySettlementGeneratorVersion : gentlerIslandGeneratorVersion } : {}) });
             const macro = world.config.preset === 'island' ? inspectMacroIsland(world) : null;
             const generationMs = performance.now()-start;
             const tier = this.quality();
+            const blending = this.selectedBlending(world);
             const sandPixels = tier === 'low' ? 128 : this.selectedSand();
-            grounds = this.grounds?.tier === tier && this.grounds.sandPixels === sandPixels ? this.grounds :
-                await loadWorldGroundMaterials(tier, this.renderer.capabilities.getMaxAnisotropy(), this.selectedSand());
+            grounds = this.grounds?.tier === tier && this.grounds.blending === blending && this.grounds.rockTone === this.selectedRockTone(world) &&
+                (blending === 'zoned' || this.grounds.sandPixels === sandPixels) ? this.grounds :
+                await loadWorldGroundMaterials(tier, this.renderer.capabilities.getMaxAnisotropy(), this.selectedSand(), blending, this.selectedRockTone(world));
             const surface = createBlueprintSurface(world);
-            const terrain = createBlueprintTerrain(world, grounds.materials);
+            const terrain = createBlueprintTerrain(world, grounds.materials, 'none', undefined, grounds.blending);
             const conifers = world.config.conifers ?? 'kaykit';
             const nature = createNatureFromPlan(this.assets, world.placementPlan, world.config.seed,
                 conifers === 'ez-tree' ? this.resolvePineModel : undefined);
@@ -243,6 +263,7 @@ export class LabWorldGeneration {
             this.grounds = grounds;
             this.preview = next;
             this.blueprint = world;
+            (document.querySelector('#world-climate') as HTMLInputElement).value = String(world.config.environment?.meanAnnualTemperatureC ?? 6);
             this.generations++;
             this.scene.add(root);
             this.syncEnvironmentControls();
@@ -313,14 +334,32 @@ export class LabWorldGeneration {
         }
     }
 
+    private selectedBlending(world = this.blueprint): GroundBlending {
+        return world?.environment && (document.querySelector('#world-ground-blending') as HTMLSelectElement).value === 'zoned' ? 'zoned' : 'baseline';
+    }
+
+    private selectedRockTone(world = this.blueprint): RockTone {
+        return this.selectedBlending(world) === 'zoned' ?
+            (document.querySelector('#world-rock-tone') as HTMLSelectElement).value as RockTone : 'source';
+    }
+
     private selectedSand(): 256 | 512 {
         return this.sandStudy.checked && this.sandResolution.value === '512' ? 512 : 256;
     }
 
     private syncSandControls() {
+        (document.querySelector('#world-ground-blending') as HTMLSelectElement).disabled =
+            this.generate.disabled || !this.blueprint?.environment;
+        (document.querySelector('#world-rock-tone') as HTMLSelectElement).disabled =
+            this.generate.disabled || this.selectedBlending() !== 'zoned';
+        (document.querySelector('#world-snow-study') as HTMLInputElement).disabled =
+            this.generate.disabled || this.selectedBlending() !== 'zoned';
         this.sandStudy.disabled = this.generate.disabled;
         this.sandResolution.disabled = this.generate.disabled || !this.active ||
-            !this.sandStudy.checked || this.quality() === 'low';
+            !this.sandStudy.checked || this.quality() === 'low' || this.selectedBlending() === 'zoned';
+        for (const view of Object.keys(groundStudyViews)) {
+            (document.querySelector('#environment-camera option[value="' + view + '"]') as HTMLOptionElement).disabled = !this.blueprint?.environment;
+        }
         for (const view of ['sand-close', 'sand-shore', 'island-overhead', 'island-oblique', 'player-start']) {
             (document.querySelector('#environment-camera option[value="' + view + '"]') as
                 HTMLOptionElement).disabled = !this.active;
@@ -329,11 +368,20 @@ export class LabWorldGeneration {
 
     private updateGroundSummary() {
         if (!this.grounds) return;
-        const { tier, sandPixels, materials } = this.grounds;
-        this.canvas.dataset.ground = JSON.stringify({ source: 'world-ground-v0.1',
-            nativeLayers: 4, masks: 'Native alphaMap on independent world UV channel',
+        const { tier, sandPixels, materials, blending, sourcePixels, rockTone } = this.grounds;
+        const terrain = this.preview?.terrain;
+        const layers = terrain ? (Array.isArray(terrain.material) ? terrain.material : [terrain.material]) : [];
+        this.canvas.dataset.ground = JSON.stringify({
+            source: blending === 'zoned' ? 'blended-ground-v1' : 'world-ground-v0.1', blending, rockTone,
+            terrainBytes: terrain ? Object.values(terrain.geometry.attributes)
+                .reduce((sum, attribute) => sum + attribute.array.byteLength, 0) : 0,
+            indexBytes: terrain?.geometry.getIndex()?.array.byteLength ?? 0,
+            maskBytes: layers.reduce((sum, material) => sum +
+                ((material as import('three').MeshStandardMaterial).alphaMap?.image?.data?.byteLength ?? 0), 0),
+            nativeLayers: layers.length, snowStudy: (document.querySelector('#world-snow-study') as HTMLInputElement).checked,
+            snowLayerActive: layers.some(material => material.name === 'Climate snow candidate'), masks: 'Native alphaMap on independent world UV channel',
             colourSpace: 'sRGB', dataSpace: 'NoColorSpace',
-            sourcePixels: tier === 'standard' ? 256 : 128, sandPixels,
+            sourcePixels, sandPixels,
             sandStudy: this.sandStudy.checked,
             waterSource: this.sandStudy.checked ? 'reference-water' : 'boona13',
             maps: [...materials].map(([id, material]) => ({ id,
@@ -348,21 +396,21 @@ export class LabWorldGeneration {
             })),
         });
         document.querySelector('#environment-status')!.textContent =
-            'Generated world · approved CC0 ground sources with native alpha masks · ' + tier +
+            'Generated world · ' + (blending === 'zoned' ? 'zoning blend + source atlas (Lab study)' : 'baseline tiled sources') + ' · ' + tier +
             ' · sand ' + sandPixels + ' px · ' +
             (this.sandStudy.checked ? 'ReferenceWater sand study (Lab only)' : 'boona13 water');
     }
 
     /** Replace render materials/mesh only; keep geography, water, actors and camera. */
-    private async changeSandResolution() {
-        if (!this.preview || !this.sandStudy.checked || this.generate.disabled) return;
+    private async changeGroundMaterials() {
+        if (!this.preview || this.generate.disabled) return;
         const revision = ++this.revision;
         this.generate.disabled = true;
         this.syncSandControls();
         let next: Grounds | null = null;
         try {
             next = await loadWorldGroundMaterials(this.quality(),
-                this.renderer.capabilities.getMaxAnisotropy(), this.selectedSand());
+                this.renderer.capabilities.getMaxAnisotropy(), this.selectedSand(), this.selectedBlending(), this.selectedRockTone());
             if (!this.alive || revision !== this.revision || !this.preview) {
                 next.dispose();
                 return;
@@ -374,7 +422,9 @@ export class LabWorldGeneration {
             this.updateGroundSummary();
         } catch (error) {
             if (next !== this.grounds) next?.dispose();
-            this.status.textContent = 'Sand update failed: ' +
+            (document.querySelector('#world-ground-blending') as HTMLSelectElement).value = this.grounds?.blending ?? 'baseline';
+            (document.querySelector('#world-rock-tone') as HTMLSelectElement).value = this.grounds?.rockTone ?? 'cool-grey';
+            this.status.textContent = 'Ground update failed: ' +
                 (error instanceof Error ? error.message : String(error));
         } finally {
             if (revision === this.revision) {
@@ -388,7 +438,8 @@ export class LabWorldGeneration {
         if (!this.preview || !this.blueprint || !grounds) return;
         const previous = this.preview.terrain;
         const overlay = (document.querySelector('#world-overlay') as HTMLSelectElement).value;
-        const next = createBlueprintTerrain(this.blueprint, grounds.materials, overlay === 'sites' ? 'form' : overlay);
+        const next = createBlueprintTerrain(this.blueprint, grounds.materials, overlay === 'sites' ? 'form' : overlay, undefined, grounds.blending,
+            (document.querySelector('#world-snow-study') as HTMLInputElement).checked);
         this.preview.macroOverlay.visible = overlay === 'macro';
         this.preview.siteOverlay.visible = overlay === 'sites';
         this.canvas.dataset.overlay = overlay;
@@ -499,7 +550,7 @@ export class LabWorldGeneration {
             target: [x, world.settlement.elevation + 6, z] };
         this.camera.far = world.config.preset === 'island' ? Math.max(1200, extent * 5 * fit) : view.startsWith('island-') ? 500 : 300;
         this.camera.updateProjectionMatrix();
-        const preset = presets[view] ?? presets.village;
+        const preset = groundStudyCamera(world, view) ?? presets[view] ?? presets.village;
         this.controls.enableDamping = false;
         this.camera.position.fromArray(preset.position);
         this.controls.target.fromArray(preset.target);

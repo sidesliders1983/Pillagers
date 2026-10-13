@@ -1,0 +1,4277 @@
+{
+  "date": "2026-10-13T16:46:43.200Z",
+  "errors": [],
+  "checks": [
+    "five fixed seeds: identical cameras and lighting for bare terrain and unchanged material pipeline",
+    "tablet touch: Generate World with/without placement; export equals measured blueprint; Low quality",
+    "previous version import/export preserves its full stored geography"
+  ],
+  "captures": [
+    {
+      "seed": 18,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "none",
+      "file": "18-before-overview-none.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "18-before-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "none",
+      "file": "18-after-overview-none.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.337514647765826
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            16.263413906097412,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            180.61228368159357,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1836.8773756099185,
+              "bottom": -1836.8773756099185,
+              "near": 0.1,
+              "far": 1487.4074604457355
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "18-after-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.337514647765826
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            16.263413906097412,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            180.61228368159357,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1836.8773756099185,
+              "bottom": -1836.8773756099185,
+              "near": 0.1,
+              "far": 1487.4074604457355
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "none",
+      "file": "42-before-overview-none.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            25.705228805541992,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            190.05409858103815,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1842.7462689333552,
+              "bottom": -1842.7462689333552,
+              "near": 0.1,
+              "far": 1495.8705234250892
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "42-before-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            25.705228805541992,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            190.05409858103815,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1842.7462689333552,
+              "bottom": -1842.7462689333552,
+              "near": 0.1,
+              "far": 1495.8705234250892
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "none",
+      "file": "42-after-overview-none.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.921195983886719,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            176.27006575938287,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1834.8913507191533,
+              "bottom": -1834.8913507191533,
+              "near": 0.1,
+              "far": 1484.5435723491523
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "42-after-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.921195983886719,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            176.27006575938287,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1834.8913507191533,
+              "bottom": -1834.8913507191533,
+              "near": 0.1,
+              "far": 1484.5435723491523
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "none",
+      "file": "1983-before-overview-none.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            22.49872875213623,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            186.84759852763239,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1840.5780866540235,
+              "bottom": -1840.5780866540235,
+              "near": 0.1,
+              "far": 1492.7439606866888
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "1983-before-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            22.49872875213623,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            186.84759852763239,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1840.5780866540235,
+              "bottom": -1840.5780866540235,
+              "near": 0.1,
+              "far": 1492.7439606866888
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "none",
+      "file": "1983-after-overview-none.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.768202781677246,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            176.1170725571734,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1834.4632286161852,
+              "bottom": -1834.4632286161852,
+              "near": 0.1,
+              "far": 1483.9262116099812
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "1983-after-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.768202781677246,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            176.1170725571734,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1834.4632286161852,
+              "bottom": -1834.4632286161852,
+              "near": 0.1,
+              "far": 1483.9262116099812
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "none",
+      "file": "7-before-overview-none.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.4649631377887222,
+          "maxHeight": 10.479231810703254
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            26.788416385650635,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            191.1372861611468,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1843.304840633187,
+              "bottom": -1843.304840633187,
+              "near": 0.1,
+              "far": 1496.675995123694
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "7-before-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.4649631377887222,
+          "maxHeight": 10.479231810703254
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            26.788416385650635,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            191.1372861611468,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1843.304840633187,
+              "bottom": -1843.304840633187,
+              "near": 0.1,
+              "far": 1496.675995123694
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "none",
+      "file": "7-after-overview-none.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.526790530949315,
+          "maxHeight": 10.54218014739953
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            14.238317966461182,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            178.58718774195734,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1836.1530877363102,
+              "bottom": -1836.1530877363102,
+              "near": 0.1,
+              "far": 1486.3630226698688
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "7-after-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.526790530949315,
+          "maxHeight": 10.54218014739953
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            14.238317966461182,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            178.58718774195734,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1836.1530877363102,
+              "bottom": -1836.1530877363102,
+              "near": 0.1,
+              "far": 1486.3630226698688
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "none",
+      "file": "256-before-overview-none.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            23.275121688842773,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            187.62399146433893,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1842.3254460058688,
+              "bottom": -1842.3254460058688,
+              "near": 0.1,
+              "far": 1495.2636882447234
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "256-before-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            23.275121688842773,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            187.62399146433893,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1842.3254460058688,
+              "bottom": -1842.3254460058688,
+              "near": 0.1,
+              "far": 1495.2636882447234
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "none",
+      "file": "256-after-overview-none.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.465625762939453,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            175.8144955384356,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1835.5957301201677,
+              "bottom": -1835.5957301201677,
+              "near": 0.1,
+              "far": 1485.5593017045207
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "none",
+      "file": "256-after-island-oblique-none.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.465625762939453,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            175.8144955384356,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1835.5957301201677,
+              "bottom": -1835.5957301201677,
+              "near": 0.1,
+              "far": 1485.5593017045207
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "after",
+      "view": "player-start",
+      "overlay": "none",
+      "file": "18-after-player-start-none.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.00669999999553,
+        "camera": {
+          "position": [
+            15.92005636311896,
+            18.000000000000014,
+            -300.9678722259018
+          ],
+          "target": [
+            -20,
+            8.7560396194458,
+            -170
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.337514647765826
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            16.97997006668345,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            181.3288398421796,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1837.2857096664395,
+              "bottom": -1837.2857096664395,
+              "near": 0.1,
+              "far": 1487.9962864213503
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "18-before-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000004,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            65.83519345193466,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.1736481776669304,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 430.81092810903993,
+              "bottom": -430.81092810903993,
+              "near": 0.1,
+              "far": 2388.2394848600743
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.096011797470034,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "form",
+      "file": "18-before-overview-form.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000004,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            65.83519345193466,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.1736481776669304,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 430.81092810903993,
+              "bottom": -430.81092810903993,
+              "near": 0.1,
+              "far": 2388.2394848600743
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.096011797470034,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "18-after-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.337514647765826
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            16.263413906097412,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            50.99304943948348,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 416.19426961425427,
+              "bottom": -416.19426961425427,
+              "near": 0.1,
+              "far": 2385.662173599642
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 18,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "form",
+      "file": "18-after-overview-form.jpg",
+      "fixture": {
+        "seed": 18,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.337514647765826
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            16.263413906097412,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            50.99304943948348,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 416.19426961425427,
+              "bottom": -416.19426961425427,
+              "near": 0.1,
+              "far": 2385.662173599642
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "42-before-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            25.705228805541992,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            60.43486433892806,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 426.33670630722685,
+              "bottom": -426.33670630722685,
+              "near": 0.1,
+              "far": 2387.450558838741
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "form",
+      "file": "42-before-overview-form.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            25.705228805541992,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            60.43486433892806,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 426.33670630722685,
+              "bottom": -426.33670630722685,
+              "near": 0.1,
+              "far": 2387.450558838741
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "42-after-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.921195983886719,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            46.650831517272785,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 412.7620839166861,
+              "bottom": -412.762083916686,
+              "near": 0.1,
+              "far": 2385.056986658359
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 42,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "form",
+      "file": "42-after-overview-form.jpg",
+      "fixture": {
+        "seed": 42,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 79,
+          "minHeight": 3.5804876652040507,
+          "maxHeight": 10.50034847566528
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.921195983886719,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            46.650831517272785,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 412.7620839166861,
+              "bottom": -412.762083916686,
+              "near": 0.1,
+              "far": 2385.056986658359
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "1983-before-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            22.49872875213623,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            57.2283642855223,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 422.5897219449229,
+              "bottom": -422.58972194492287,
+              "near": 0.1,
+              "far": 2386.789864399374
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "form",
+      "file": "1983-before-overview-form.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            22.49872875213623,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            57.2283642855223,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 422.5897219449229,
+              "bottom": -422.58972194492287,
+              "near": 0.1,
+              "far": 2386.789864399374
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "1983-after-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.768202781677246,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            46.49783831506331,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 412.02221677531605,
+              "bottom": -412.022216775316,
+              "near": 0.1,
+              "far": 2384.926528119196
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 1983,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "form",
+      "file": "1983-after-overview-form.jpg",
+      "fixture": {
+        "seed": 1983,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.433630148788769,
+          "maxHeight": 10.506472633533802
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.768202781677246,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            46.49783831506331,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 412.02221677531605,
+              "bottom": -412.022216775316,
+              "near": 0.1,
+              "far": 2384.926528119196
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "7-before-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.4649631377887222,
+          "maxHeight": 10.479231810703254
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            26.788416385650635,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            61.5180519190367,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 427.3020123354357,
+              "bottom": -427.3020123354358,
+              "near": 0.1,
+              "far": 2387.6207683361545
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "form",
+      "file": "7-before-overview-form.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.4649631377887222,
+          "maxHeight": 10.479231810703254
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            26.788416385650635,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            61.5180519190367,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 427.3020123354357,
+              "bottom": -427.3020123354358,
+              "near": 0.1,
+              "far": 2387.6207683361545
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "7-after-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.526790530949315,
+          "maxHeight": 10.54218014739953
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            14.238317966461182,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            48.96795349984725,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 414.9425781111517,
+              "bottom": -414.9425781111517,
+              "near": 0.1,
+              "far": 2385.4414666161215
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 7,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "form",
+      "file": "7-after-overview-form.jpg",
+      "fixture": {
+        "seed": 7,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.526790530949315,
+          "maxHeight": 10.54218014739953
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            14.238317966461182,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            48.96795349984725,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 414.9425781111517,
+              "bottom": -414.9425781111517,
+              "near": 0.1,
+              "far": 2385.4414666161215
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "before",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "256-before-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            23.275121688842773,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            58.00475722222884,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 425.6094533711512,
+              "bottom": -425.6094533711512,
+              "near": 0.1,
+              "far": 2387.3223245243107
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "before",
+      "view": "overview",
+      "overlay": "form",
+      "file": "256-before-overview-form.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            23.275121688842773,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            58.00475722222884,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 425.6094533711512,
+              "bottom": -425.6094533711512,
+              "near": 0.1,
+              "far": 2387.3223245243107
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "after",
+      "view": "island-oblique",
+      "overlay": "form",
+      "file": "256-after-island-oblique-form.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            416.0000000000001,
+            644.8000000000001,
+            -468.00000000000006
+          ],
+          "target": [
+            0,
+            8,
+            0
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.465625762939453,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            46.19526129632552,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 413.9793702241555,
+              "bottom": -413.9793702241555,
+              "near": 0.1,
+              "far": 2385.2716270776127
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    },
+    {
+      "seed": 256,
+      "mode": "after",
+      "view": "overview",
+      "overlay": "form",
+      "file": "256-after-overview-form.jpg",
+      "fixture": {
+        "seed": 256,
+        "time": 2.02409999999404,
+        "camera": {
+          "position": [
+            88,
+            77.99999999999999,
+            -78.00000000000001
+          ],
+          "target": [
+            0,
+            5,
+            16
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.599906502135277,
+          "maxHeight": 10.647186444693922
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "sun10",
+          "elevation": 10.000000000000002,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            11.465625762939453,
+            0
+          ],
+          "position": [
+            -165.6798168435637,
+            46.19526129632552,
+            106.5084536851481
+          ],
+          "direction": [
+            -0.8283990842178187,
+            0.17364817766693036,
+            0.5325422684257406
+          ],
+          "sun": {
+            "colour": "ffecd6",
+            "intensity": 2.8
+          },
+          "fill": {
+            "sky": "bfd4ee",
+            "ground": "716c65",
+            "intensity": 0.65
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 413.9793702241555,
+              "bottom": -413.9793702241555,
+              "near": 0.1,
+              "far": 2385.2716270776127
+            },
+            "bias": -0.00005,
+            "normalBias": 0.02,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -2.0960117974700343,
+            -1.1189668323556605,
+            2.409402601068241,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      }
+    }
+  ],
+  "passed": true,
+  "bareLightingReviewAt": "2026-10-13T17:09:01.799Z"
+}

@@ -4,7 +4,7 @@ Issue #133 adds **Nordic Island · v0.3b** to Environment Lab. It uses a determi
 
 ## Review
 
-In `/environment-lab`, expand **Settings**, select **Nordic Island · v0.3b**, enter a seed, then **Generate World**. Disable Nature and Meshy village before inspecting form. Compare **Island overhead** with **Elevation**, then **Island oblique** with **Bare terrain form**. Both use the canonical mesh without ground textures. **Source materials** restores the approved materials. **Macro regions & coast** adds the physical coastline, measured natural pockets, ridge crest and a terrain-only connecting route.
+In `/environment-lab`, expand **Settings**, select **Nordic Island · gentler highlands**, enter a seed, then **Generate World**. Disable Nature and Meshy village before inspecting form. Compare **Island overhead** with **Elevation**, then **Island oblique** with **Bare terrain form**. Both use the canonical mesh without ground textures. **Source materials** restores the approved materials. **Macro regions & coast** adds the physical coastline, measured natural pockets, ridge crest and a terrain-only connecting route.
 
 The gold line follows the triangle/water intersection. Yellow and pink outlines follow the sampled usable cells of two irregular lowland pockets. Their bounding boxes do not imply flat rectangular platforms. The orange cross marks a measured intervening ridge and cyan marks a traversable connection. No houses, residents or second clan are placed by the island proposal. Final settlement selection, house fitting, hiddenness, reservations and line-of-sight checks remain #134.
 
@@ -14,7 +14,7 @@ Rejected proposals keep their requested seed and explicit reasons. There is no h
 
 | Contract | Existing fjord presets | Nordic Island |
 | --- | --- | --- |
-| Generator version | `fjordside-v0.1` | `fjordside-island-v0.3b-r2` |
+| Generator version | `fjordside-v0.1` | `fjordside-island-v0.3b-r3` in the Lab; r2 remains explicitly reproducible |
 | Extent | 180 x 180m | 800 x 800m |
 | Heightfield | 91 x 91 | 401 x 401 |
 | Physical spacing | 2m | 2m |
@@ -53,9 +53,17 @@ Approved water, ground materials, KayKit/EZ-Tree assets and their existing budge
 
 Shape metrics screen obvious artifacts; visual acceptance still requires examining the bare terrain. The model approximates geological results at settlement scale, without tectonic time integration, glacier dynamics or sediment transport. Detailed biome zoning and ground transitions remain later slices.
 
+## Gentler highlands — owner follow-up to #137
+
+After the owner accepted the ground-material direction, they requested lower central ridges. The Lab now explicitly selects `fjordside-island-v0.3b-r3` for new macro islands and `fjordside-island-v0.3e-r3` when settlement planning is enabled. This uses the same softened terrain as e-r2, with the [subsequently revised discovery/visibility policy](SETTLEMENT-SITES-V03E.md#discovery-policy-revision--13-october-2026). The original highland comparison remains a record of e-r2 and its stricter concealment requirement. Public API defaults and campaign presets stay unchanged; this does not adopt islands as the campaign default.
+
+The extra bounded weathering step lowers the existing eroded ridges above 6.2m over sea level. Across the next 12 vertical metres, the derivative transitions smoothly from 1 to a retained fraction of 0.40–0.58. The retained fraction varies over the same broad bedrock noise stream. Above that shoulder the same fraction continues; there is no hard clipping or constant-height summit. It adds no new peaks, changes no drainage route and stores no extra terrain fields. Sea, coastline and lowland samples remain exact before local foundation grading.
+
+The existing settlement planner and #135 zoning rerun on the resulting canonical heightfield. Site selection may change; its original foundation, navigation and terrain-only visibility requirements remain intact. On the five reviewed seeds, peaks fall from 58.8–75.8m to 37.3–46.1m and all five retain accepted settlement pairs. See the [same-camera height comparison](qa/island-highlands/review.html) and [method, data and limits](qa/island-highlands/report.md). Earlier geological and material reviews remain historical evidence.
+
 ## Version preservation
 
-New island requests use `fjordside-island-v0.3b-r2`. The original `fjordside-island-v0.3b` algorithm remains available for explicit regeneration of first-pass worlds; its seed-17 blueprint hash is pinned by a regression test. Both full-blueprint imports load their exact stored field. Existing `fjordside-v0.1` preset hashes remain unchanged. No import silently upgrades geography.
+Requests without an explicit version still use `fjordside-island-v0.3b-r2`; the Lab explicitly requests r3 for new islands. Both r2 and r3 remain supported for deterministic regeneration. The original `fjordside-island-v0.3b` algorithm remains available for explicit regeneration of first-pass worlds; its seed-17 blueprint hash is pinned by a regression test. Both full-blueprint imports load their exact stored field. Existing `fjordside-v0.1` preset hashes remain unchanged. No import silently upgrades geography.
 
 ## Evidence and reproduction
 
@@ -63,8 +71,10 @@ See the [refinement comparison](qa/macro-island-refinement/review.html) and [ref
 
 ```text
 node --test tests/macro-island.test.mjs tests/world-generation.test.mjs
-node scripts/qa/measure-macro-island.mjs
-node scripts/qa/check-macro-island.mjs
+node --test tests/island-highlands.test.mjs
+node scripts/qa/measure-island-highlands.mjs
+node scripts/qa/check-island-highlands.mjs
+node scripts/qa/publish-island-highlands.mjs
 ```
 
-QA scripts default to `scratch/macro-island`; use `QA_OUTPUT` for a new evidence folder and `QA_ORIGIN` for the preview server. Before/after process memory is not peak/GPU memory. Development-laptop timings are observational, not a few-millisecond release gate.
+The highland comparison and its browser-generation assertions target commit `e074986392ba47dba6ba88547eb2b5f3bb6b0547`, before the discovery-policy revision. Use that revision to reproduce the original e-r2 Lab-generation evidence; current placement/browser checks are documented in [Settlement sites](SETTLEMENT-SITES-V03E.md). The highland QA scripts default to `scratch/island-highlands`. The earlier macro-island scripts and galleries describe their original r2 revision; use `QA_OUTPUT` for a new evidence folder and `QA_ORIGIN` for the preview server. Before/after process memory is not peak/GPU memory. Development-laptop timings are observational, not a few-millisecond release gate.

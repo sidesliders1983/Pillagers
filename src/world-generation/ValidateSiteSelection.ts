@@ -3,7 +3,7 @@ import { buildings, buildingDistance } from '../world/SettlementLayout';
 import { footprintSamples } from './PlanIslandSettlements';
 import { settlementStartingViews } from './SiteNavigation';
 import { inspectSiteVisibility } from './SettlementVisibility';
-import { normalizeSiteRules, isFoundationRotation } from './SettlementSites';
+import { normalizeSiteRules, isFoundationRotation, requiresTerrainOcclusion } from './SettlementSites';
 import type { WorldBlueprint, Bounds2, Point2 } from './WorldBlueprint';
 import type { FoundationReservation } from './SettlementSites';
 
@@ -114,7 +114,13 @@ export function validateSavedSites(world: WorldBlueprint, requireValid: (valid: 
     requireValid(!!selection.harborBerth && equal(findHarborBerth(world), selection.harborBerth));
     requireValid(equal(settlementStartingViews(world), selection.viewpoints));
     const sight = inspectSiteVisibility(world, selection.viewpoints, footprintSamples(rival.bounds), selection.rules.rivalRoofHeight);
-    requireValid(sight.hidden && equal(sight, selection.visibility));
+    const requireOcclusion = requiresTerrainOcclusion(world.config.generatorVersion);
+    requireValid((!requireOcclusion || sight.hidden) && equal(sight, selection.visibility) &&
+        selected.exposedRays === sight.exposedRays);
+    if (!requireOcclusion) {
+        requireValid(!!player.compartmentId && !!rival.compartmentId &&
+            player.compartmentId !== rival.compartmentId);
+    }
     for (const asset of world.placementPlan) {
         requireValid(rival.foundations.every(b => buildingDistance(asset.x, asset.z, b) >= asset.clearance));
     }

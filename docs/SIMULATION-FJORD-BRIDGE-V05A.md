@@ -1,5 +1,7 @@
 # Simulation-to-Fjord bridge v0.5A
 
+> Current island campaign integration: [Fjord island campaigns](FJORD-ISLAND-CAMPAIGNS.md). The owner approved a deterministic curated seed pool for new `/fjord-play` campaigns. Earlier sections below describe the original small Fjord integration; the linked contract covers new island campaigns.
+
 Issue: #87. Inspected base: `5ca0c0b` (main, including the compact Meshy tent from #90).
 
 ## Existing authorities and reusable systems

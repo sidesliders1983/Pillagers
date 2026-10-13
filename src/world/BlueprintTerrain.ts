@@ -1,3 +1,4 @@
+import { blendedMaterialIds, createGroundBlendMasks, indexGroundLayers } from './GroundBlending';
 import { createSpatialOverlay } from './SpatialOverlay';
 import { environmentColours } from './EnvironmentOverlay';
 import { macroRegions } from '../world-generation/MacroIsland';
@@ -11,6 +12,8 @@ import { createBlueprintSurface, terrainTriangles } from '../world-generation/Te
 export { createBlueprintSurface } from '../world-generation/TerrainQueries';
 export type { TerrainSurface } from '../world-generation/TerrainQueries';
 
+// Retain only the immutable source reference for live wear updates; no derived world data is saved.
+const blendedWorlds = new WeakMap<Mesh, { world: WorldBlueprint; snow: boolean }>();
 const materialIds = ['Ground037', 'Ground054', 'mossy_rock', 'grass_path_2'] as const;
 const biomePalette = {
     water: '#355962', shore: '#cfb986', clearing: '#bd8151',
@@ -38,7 +41,8 @@ function layerMask(world: WorldBlueprint, layer: number, wear?: readonly number[
 }
 
 export function createBlueprintTerrain(world: WorldBlueprint,
-    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[]) {
+    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[], blending: 'baseline' | 'zoned' = 'baseline', snow = false) {
+    const blended = blending === 'zoned' && !!world.environment && !!sources && overlay === 'none';
     const positions: number[] = [];
     const sourceUvs: number[] = [];
     const maskUvs: number[] = [];
@@ -110,27 +114,42 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     geometry.setAttribute('uv1', new Float32BufferAttribute(maskUvs, 2));
     geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
     geometry.computeVertexNormals();
+    if (blended) {
+        const sideX = new Float32Array(positions.length / 3 * 2);
+        const sideZ = new Float32Array(sideX.length);
+        for (let vertex = 0; vertex < positions.length / 3; vertex++) {
+            const x = positions[vertex * 3], y = positions[vertex * 3 + 1], z = positions[vertex * 3 + 2];
+            sideX.set([z / repeat, y / repeat], vertex * 2);
+            sideZ.set([x / repeat, y / repeat], vertex * 2);
+        }
+        geometry.setAttribute('uv2', new Float32BufferAttribute(sideX, 2));
+        geometry.setAttribute('uv3', new Float32BufferAttribute(sideZ, 2));
+    }
     const textureClones: Texture[] = [];
     const spatial = createSpatialOverlay(world, overlay);
     if (spatial) textureClones.push(spatial.texture);
-    const material = sources && overlay === 'none' ? materialIds.map((id, layer) => {
+    const masks = blended ? createGroundBlendMasks(world, wear, snow) : null;
+    // The first material is opaque; no mask is needed for it.
+    masks?.[0].dispose();
+    const material = sources && overlay === 'none' ? (blended ? blendedMaterialIds : materialIds).map((id, layer) => {
         const source = sources.get(id);
         if (!source) throw new Error('Missing required approved ground material: ' + id);
         const copy = source.clone();
-        const scale = repeat / regionalGroundConfig.sources[id].repeatMeters;
-        if (scale !== 1) {
+        const scale = repeat / (source.userData.repeatMeters ?? regionalGroundConfig.sources[id].repeatMeters);
+        if (scale !== 1 || (blended && layer >= 4)) {
             for (const property of ['map', 'normalMap', 'roughnessMap'] as const) {
                 const original = copy[property];
                 if (!original) continue;
                 const texture = original.clone();
                 texture.repeat.set(scale, scale);
+                if (blended && layer >= 4) texture.channel = layer - 2;
                 texture.needsUpdate = true;
                 copy[property] = texture;
                 textureClones.push(texture);
             }
         }
         if (layer > 0) {
-            copy.alphaMap = layerMask(world, layer, wear);
+            copy.alphaMap = masks?.[layer] ?? layerMask(world, layer, wear);
             copy.transparent = true;
             copy.depthWrite = false;
             copy.polygonOffset = true;
@@ -143,10 +162,18 @@ export function createBlueprintTerrain(world: WorldBlueprint,
         return copy;
     }) : new MeshStandardMaterial({ roughness: 1, flatShading: true,
         vertexColors: !spatial, map: spatial?.texture ?? null });
+    if (masks && masks.length === 7 && Array.isArray(material)) {
+        material.push(new MeshStandardMaterial({ name: 'Climate snow candidate', color: '#edf1f1',
+            roughness: 1, flatShading: true, vertexColors: true, alphaMap: masks[6],
+            transparent: true, depthWrite: false, polygonOffset: true,
+            polygonOffsetFactor: 0, polygonOffsetUnits: -6 }));
+    }
+    if (masks) indexGroundLayers(geometry, world, masks);
     const mesh = new Mesh(geometry, material);
     mesh.name = 'Generated canonical terrain';
     mesh.userData.textureClones = textureClones;
     mesh.userData.spatial = spatial?.diagnostics ?? null;
+    if (blended) blendedWorlds.set(mesh, { world, snow });
     mesh.receiveShadow = true;
     return mesh;
 }
@@ -164,6 +191,20 @@ export function disposeBlueprintTerrain(mesh: Mesh) {
 /** Update only the native soil alpha map; geometry and saved geography stay unchanged. */
 export function updateBlueprintWear(mesh: Mesh, weights: readonly number[]) {
     const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    const blended = blendedWorlds.get(mesh);
+    if (blended) {
+        const { world, snow } = blended;
+        if (weights.length !== world.terrain.heights.length) throw new Error('Ground mask does not match the terrain grid.');
+        const masks = createGroundBlendMasks(world, weights, snow);
+        indexGroundLayers(mesh.geometry, world, masks);
+        masks[0].dispose();
+        for (let layer = 1; layer < materials.length; layer++) {
+            const material = materials[layer] as MeshStandardMaterial;
+            material.alphaMap?.dispose();
+            material.alphaMap = masks[layer];
+        }
+        return;
+    }
     const material = materials[3];
     if (!(material instanceof MeshStandardMaterial) || !(material.alphaMap instanceof DataTexture)) return;
     const texture = material.alphaMap;

@@ -5,7 +5,7 @@ import { createFoundationSearch, footprintBounds, gradeSettlementFoundations, pl
 import { createBlueprintSurface } from './TerrainQueries';
 import { inspectSiteVisibility } from './SettlementVisibility';
 import { settlementStartingViews, siteRoutes } from './SiteNavigation';
-import { normalizeSiteRules } from './SettlementSites';
+import { normalizeSiteRules, requiresTerrainOcclusion } from './SettlementSites';
 import type { SiteCandidate, SitePairScore, SiteSelection, RivalSite } from './SettlementSites';
 import type { Bounds2, Point2, WorldBlueprint } from './WorldBlueprint';
 
@@ -32,6 +32,7 @@ export function footprintSamples(bounds: Bounds2) {
 /** Bounded deterministic search. Rejected proposals retain their original seed and evidence. */
 export function planIslandSettlements(base: PlannedLandscape, observe?: GenerationObserver): PlannedLandscape {
     const rules = normalizeSiteRules(base.config.siteRules);
+    const requireOcclusion = requiresTerrainOcclusion(base.config.generatorVersion);
     const surface = createBlueprintSurface(base);
     const coverage = measureGeneration('compartments', () =>
         compartmentCandidates(base, rules.maximumCandidates), observe);
@@ -69,6 +70,9 @@ export function planIslandSettlements(base: PlannedLandscape, observe?: Generati
         const centerDistance = Math.hypot(player.center.x - rival.center.x, player.center.z - rival.center.z);
         const bufferDistance = gap(player.bounds, rival.bounds);
         const reasons: string[] = [];
+        if (!requireOcclusion && player.compartmentId === rival.compartmentId) {
+            reasons.push('Sites share the same natural compartment.');
+        }
         if (player.reasons.length) reasons.push('Player foundations are unsuitable.');
         if (rival.reasons.length) reasons.push('Rival foundations are unsuitable.');
         if (centerDistance < rules.minimumCenterDistance) reasons.push('Centers are too close.');
@@ -132,8 +136,8 @@ export function planIslandSettlements(base: PlannedLandscape, observe?: Generati
         }
         if (reasons.length) { pairs[i] = { ...pair, reasons }; continue; }
         const sight = measureGeneration('visibility', () =>
-            inspectSiteVisibility(planned!, view, footprintSamples(rival.bounds), rules.rivalRoofHeight, true), observe);
-        if (!sight.hidden) {
+            inspectSiteVisibility(planned!, view, footprintSamples(rival.bounds), rules.rivalRoofHeight, requireOcclusion), observe);
+        if (requireOcclusion && !sight.hidden) {
             pairs[i] = { ...pair, exposedRays: sight.exposedRays,
                 visibilityComplete: false, visibilitySamples: sight.rays.length,
                 score: pair.score - 1000, reasons: ['The rival footprint is visible from a starting viewpoint.'] };
@@ -148,7 +152,7 @@ export function planIslandSettlements(base: PlannedLandscape, observe?: Generati
         const finalReasons = [...finalPlan.validation.reasons];
         if (!route.length) finalReasons.push('The rival site has no traversable land connection.');
         else if (routeLength < rules.minimumLandingRoute) finalReasons.push('The rival is too immediately reachable from the landing.');
-        pairs[i] = { ...pair, routeLength, exposedRays: 0, reasons: finalReasons };
+        pairs[i] = { ...pair, routeLength, exposedRays: sight.exposedRays, reasons: finalReasons };
         if (finalReasons.length) continue;
         selected = pairs[i];
         accepted = finalPlan;
@@ -161,7 +165,9 @@ export function planIslandSettlements(base: PlannedLandscape, observe?: Generati
         rivalSite = { version: 1, candidateId: rival.id, center: rival.center, bounds: rival.bounds,
             foundations: rival.foundations, buildableArea: rival.area };
     }
-    const reasons = selected ? [] : ['No candidate pair meets foundation, neutral-buffer, visibility and access rules.'];
+    const reasons = selected ? [] : [requireOcclusion ?
+        'No candidate pair meets foundation, neutral-buffer, visibility and access rules.' :
+        'No candidate pair meets foundation, distinct-compartment, neutral-buffer and access rules.'];
     const siteSelection: SiteSelection = { version: 1, rules, candidates, compartments: coverage.compartments, pairs, selected,
         harborBerth, viewpoints, visibility, connection, buffers, reasons };
     const result = accepted ?? base;

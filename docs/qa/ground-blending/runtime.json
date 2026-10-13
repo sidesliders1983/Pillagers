@@ -1,0 +1,4487 @@
+{
+  "date": "2026-10-13T16:01:59.842Z",
+  "errors": [],
+  "runs": [
+    {
+      "tier": "standard",
+      "mode": "baseline",
+      "run": 0,
+      "frames": [
+        50,
+        66.60000000000218,
+        100.09999999999854,
+        83.29999999999927,
+        83.5,
+        99.80000000000291,
+        50.099999999998545,
+        99.90000000000146,
+        66.69999999999709,
+        66.60000000000218,
+        66.70000000000073,
+        66.89999999999782,
+        83.10000000000218,
+        50.099999999998545,
+        99.90000000000146,
+        66.69999999999709,
+        100.10000000000218,
+        83.20000000000073,
+        66.69999999999709,
+        83.40000000000146,
+        83.40000000000146,
+        66.5,
+        83.39999999999782,
+        66.70000000000073,
+        83.29999999999927,
+        100,
+        66.70000000000073,
+        66.59999999999854,
+        83.40000000000146,
+        83.40000000000146,
+        83.19999999999709,
+        66.70000000000073,
+        66.70000000000073,
+        83.29999999999927,
+        83.29999999999927,
+        83.40000000000146,
+        83.29999999999927,
+        83.29999999999927,
+        66.70000000000073,
+        66.60000000000218,
+        66.69999999999709,
+        83.40000000000146,
+        66.70000000000073,
+        83.29999999999927,
+        66.59999999999854,
+        66.70000000000073,
+        100,
+        66.70000000000073,
+        66.59999999999854,
+        83.40000000000146,
+        66.59999999999854,
+        100.10000000000218,
+        66.70000000000073,
+        66.59999999999854,
+        66.70000000000073,
+        66.59999999999854,
+        66.60000000000218,
+        83.39999999999782,
+        83.5,
+        66.5,
+        83.40000000000146,
+        83.20000000000073,
+        66.69999999999709,
+        83.40000000000146,
+        99.90000000000146,
+        66.79999999999927,
+        83.29999999999927,
+        66.70000000000073,
+        66.59999999999854,
+        66.70000000000073,
+        83.29999999999927,
+        116.60000000000218,
+        66.69999999999709,
+        116.70000000000073,
+        66.60000000000218,
+        100,
+        50,
+        66.59999999999854,
+        116.90000000000146,
+        83.09999999999854,
+        66.70000000000073,
+        133.39999999999782,
+        83.40000000000146,
+        99.90000000000146,
+        66.79999999999927,
+        66.59999999999854,
+        83.29999999999927,
+        83.30000000000291,
+        50,
+        100.09999999999854,
+        66.59999999999854,
+        83.30000000000291,
+        66.69999999999709,
+        66.70000000000437,
+        66.69999999999709,
+        66.59999999999854,
+        83.40000000000146,
+        66.69999999999709,
+        83.30000000000291,
+        66.59999999999854,
+        66.70000000000437,
+        83.39999999999418,
+        66.70000000000437,
+        83.19999999999709,
+        66.70000000000437,
+        66.79999999999563,
+        66.59999999999854,
+        83.30000000000291,
+        83.40000000000146,
+        66.59999999999854,
+        83.30000000000291,
+        50,
+        100,
+        83.39999999999418,
+        33.30000000000291,
+        100,
+        66.59999999999854,
+        66.70000000000437,
+        66.69999999999709,
+        50
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "world-ground-v0.1",
+        "blending": "baseline",
+        "rockTone": "source",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 1929612,
+        "nativeLayers": 4,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 256,
+        "sandPixels": 256,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/Ground037-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground037-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground037-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/Ground054-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground054-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground054-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/mossy_rock-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/mossy_rock-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/mossy_rock-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/grass_path_2-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/grass_path_2-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/grass_path_2-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 74.20000000018625,
+        "calls": 4,
+        "triangles": 1280032,
+        "geometries": 37,
+        "textures": 90,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "standard",
+      "mode": "zoned",
+      "run": 0,
+      "frames": [
+        33.30000000000291,
+        66.69999999999709,
+        50,
+        50,
+        50.200000000004366,
+        66.5,
+        49.89999999999418,
+        33.400000000001455,
+        66.80000000000291,
+        50,
+        66.5,
+        50.19999999999709,
+        49.80000000000291,
+        50.099999999998545,
+        99.90000000000146,
+        66.90000000000146,
+        66.5,
+        66.59999999999854,
+        66.79999999999563,
+        50,
+        66.60000000000582,
+        50.099999999998545,
+        33.299999999995634,
+        33.400000000001455,
+        83.20000000000437,
+        66.69999999999709,
+        49.900000000001455,
+        50,
+        50.099999999998545,
+        66.69999999999709,
+        33.30000000000291,
+        33.400000000001455,
+        83.19999999999709,
+        33.30000000000291,
+        50.099999999998545,
+        49.900000000001455,
+        33.400000000001455,
+        83.29999999999563,
+        33.30000000000291,
+        50.099999999998545,
+        83.40000000000146,
+        33.19999999999709,
+        66.80000000000291,
+        49.900000000001455,
+        66.79999999999563,
+        66.59999999999854,
+        49.900000000001455,
+        83.40000000000146,
+        50,
+        49.900000000001455,
+        50.099999999998545,
+        50,
+        50,
+        50,
+        66.69999999999709,
+        66.60000000000582,
+        50,
+        66.69999999999709,
+        66.59999999999854,
+        66.70000000000437,
+        33.299999999995634,
+        50.099999999998545,
+        66.5,
+        50.10000000000582,
+        50,
+        66.69999999999709,
+        33.400000000001455,
+        66.59999999999854,
+        50,
+        33.19999999999709,
+        50.10000000000582,
+        66.69999999999709,
+        50,
+        50,
+        66.59999999999854,
+        66.80000000000291,
+        49.900000000001455,
+        49.89999999999418,
+        33.400000000001455,
+        83.5,
+        33.200000000004366,
+        83.39999999999418,
+        33.200000000004366,
+        83.40000000000146,
+        33.39999999999418,
+        66.60000000000582,
+        50,
+        50,
+        66.79999999999563,
+        66.59999999999854,
+        50,
+        33.200000000004366,
+        83.40000000000146,
+        67,
+        66.39999999999418,
+        66.60000000000582,
+        83.39999999999418,
+        66.60000000000582,
+        33.299999999995634,
+        66.70000000000437,
+        66.59999999999854,
+        33.400000000001455,
+        83.39999999999418,
+        33.30000000000291,
+        50,
+        83.40000000000146,
+        33.19999999999709,
+        50,
+        66.70000000000437,
+        33.299999999995634,
+        66.59999999999854,
+        50.10000000000582,
+        50,
+        66.69999999999709,
+        49.900000000001455,
+        50.099999999998545,
+        50,
+        66.59999999999854,
+        50.099999999998545,
+        66.70000000000437
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8957568,
+        "maskBytes": 3216020,
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 55.32000000029803,
+        "calls": 6,
+        "triangles": 746464,
+        "geometries": 37,
+        "textures": 92,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "standard",
+      "mode": "zoned",
+      "run": 1,
+      "frames": [
+        49.900000000001455,
+        50.19999999999709,
+        66.60000000000582,
+        50,
+        50,
+        50,
+        49.89999999999418,
+        50.10000000000582,
+        50,
+        50,
+        50.099999999998545,
+        66.5,
+        50.099999999998545,
+        33.30000000000291,
+        66.69999999999709,
+        66.59999999999854,
+        33.30000000000291,
+        66.79999999999563,
+        33.200000000004366,
+        83.40000000000146,
+        50,
+        33.39999999999418,
+        66.70000000000437,
+        66.59999999999854,
+        50.099999999998545,
+        66.59999999999854,
+        66.60000000000582,
+        50,
+        66.69999999999709,
+        49.900000000001455,
+        50.19999999999709,
+        49.900000000001455,
+        66.69999999999709,
+        49.900000000001455,
+        50,
+        66.70000000000437,
+        50,
+        50,
+        33.19999999999709,
+        66.90000000000146,
+        66.5,
+        50,
+        50,
+        50.099999999998545,
+        66.5,
+        66.80000000000291,
+        49.89999999999418,
+        50.10000000000582,
+        66.69999999999709,
+        50,
+        33.400000000001455,
+        66.5,
+        66.79999999999563,
+        83.30000000000291,
+        33.30000000000291,
+        66.79999999999563,
+        33.200000000004366,
+        50,
+        66.59999999999854,
+        66.69999999999709,
+        33.30000000000291,
+        66.79999999999563,
+        33.200000000004366,
+        33.400000000001455,
+        50.099999999998545,
+        66.59999999999854,
+        50,
+        49.900000000001455,
+        66.79999999999563,
+        49.900000000001455,
+        66.70000000000437,
+        50,
+        50,
+        83.29999999999563,
+        33.400000000001455,
+        66.59999999999854,
+        50,
+        66.70000000000437,
+        50,
+        33.19999999999709,
+        50.099999999998545,
+        50,
+        66.70000000000437,
+        66.89999999999418,
+        33.10000000000582,
+        50,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        66.69999999999709,
+        49.900000000001455,
+        33.400000000001455,
+        33.39999999999418,
+        50,
+        66.5,
+        50,
+        66.80000000000291,
+        66.59999999999854,
+        33.400000000001455,
+        66.59999999999854,
+        50,
+        100.09999999999854,
+        66.60000000000582,
+        66.69999999999709,
+        33.30000000000291,
+        66.69999999999709,
+        66.69999999999709,
+        50,
+        33.30000000000291,
+        83.30000000000291,
+        50,
+        33.5,
+        49.799999999995634,
+        66.80000000000291,
+        66.59999999999854,
+        33.30000000000291,
+        83.29999999999563,
+        83.40000000000146,
+        33.30000000000291,
+        66.69999999999709
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8957568,
+        "maskBytes": 3216020,
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 55.300000000000004,
+        "calls": 6,
+        "triangles": 746464,
+        "geometries": 37,
+        "textures": 92,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "standard",
+      "mode": "baseline",
+      "run": 1,
+      "frames": [
+        100,
+        66.69999999999709,
+        83.30000000000291,
+        66.59999999999854,
+        83.29999999999563,
+        100.10000000000582,
+        83.29999999999563,
+        66.59999999999854,
+        83.5,
+        83.20000000000437,
+        66.59999999999854,
+        66.69999999999709,
+        66.70000000000437,
+        100,
+        83.59999999999854,
+        66.40000000000146,
+        83.29999999999563,
+        100,
+        83.40000000000146,
+        83.30000000000291,
+        66.69999999999709,
+        83.30000000000291,
+        66.69999999999709,
+        66.59999999999854,
+        100.10000000000582,
+        83.29999999999563,
+        83.40000000000146,
+        83.30000000000291,
+        83.29999999999563,
+        66.59999999999854,
+        83.40000000000146,
+        83.30000000000291,
+        66.59999999999854,
+        83.59999999999854,
+        66.59999999999854,
+        66.60000000000582,
+        83.29999999999563,
+        66.70000000000437,
+        83.29999999999563,
+        83.40000000000146,
+        66.59999999999854,
+        66.70000000000437,
+        100,
+        66.69999999999709,
+        66.59999999999854,
+        100,
+        66.70000000000437,
+        66.59999999999854,
+        83.40000000000146,
+        83.29999999999563,
+        66.70000000000437,
+        66.69999999999709,
+        66.59999999999854,
+        66.70000000000437,
+        100,
+        66.69999999999709,
+        66.69999999999709,
+        99.90000000000146,
+        83.40000000000146,
+        100,
+        83.40000000000146,
+        66.59999999999854,
+        99.90000000000146,
+        50,
+        66.69999999999709,
+        66.80000000000291,
+        83.19999999999709,
+        50.099999999998545,
+        100,
+        83.40000000000146,
+        66.59999999999854,
+        49.900000000001455,
+        66.70000000000437,
+        83.39999999999418,
+        66.60000000000582,
+        66.69999999999709,
+        99.90000000000146,
+        66.69999999999709,
+        66.70000000000437,
+        66.69999999999709,
+        66.59999999999854,
+        83.40000000000146,
+        66.69999999999709,
+        83.19999999999709,
+        83.30000000000291,
+        50.10000000000582,
+        83.39999999999418,
+        66.60000000000582,
+        83.39999999999418,
+        66.5,
+        66.69999999999709,
+        108.70000000001164,
+        124.79999999998836,
+        83.10000000000582,
+        66.80000000000291,
+        66.59999999999127,
+        50.10000000000582,
+        83.19999999999709,
+        50,
+        94.5,
+        72.40000000000873,
+        99.89999999999418,
+        83.19999999999709,
+        100.19999999999709,
+        66.5,
+        100.20000000001164,
+        66.39999999999418,
+        66.80000000000291,
+        83.30000000000291,
+        66.69999999999709,
+        83.39999999999418,
+        83.19999999999709,
+        83.40000000000873,
+        83.39999999999418,
+        66.60000000000582,
+        100,
+        66.59999999999127,
+        83.40000000000873,
+        83.30000000000291,
+        83.39999999999418
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "world-ground-v0.1",
+        "blending": "baseline",
+        "rockTone": "source",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 1929612,
+        "nativeLayers": 4,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 256,
+        "sandPixels": 256,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/Ground037-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground037-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground037-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/Ground054-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground054-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground054-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/mossy_rock-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/mossy_rock-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/mossy_rock-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/grass_path_2-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/grass_path_2-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/grass_path_2-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 81.25714285671712,
+        "calls": 4,
+        "triangles": 1280032,
+        "geometries": 37,
+        "textures": 90,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "standard",
+      "mode": "baseline",
+      "run": 2,
+      "frames": [
+        100.10000000000582,
+        50,
+        66.60000000000582,
+        66.69999999999709,
+        83.30000000000291,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        66.69999999999709,
+        66.69999999999709,
+        66.80000000000291,
+        83.19999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        83.39999999999418,
+        100,
+        66.60000000000582,
+        83.39999999999418,
+        83.30000000000291,
+        66.60000000000582,
+        66.59999999999127,
+        66.80000000000291,
+        66.60000000000582,
+        66.59999999999127,
+        66.69999999999709,
+        66.80000000000291,
+        66.60000000000582,
+        50,
+        66.69999999999709,
+        66.69999999999709,
+        66.5,
+        83.40000000000873,
+        66.69999999999709,
+        99.89999999999418,
+        83.5,
+        66.60000000000582,
+        66.69999999999709,
+        83.39999999999418,
+        83.20000000001164,
+        66.69999999999709,
+        66.59999999999127,
+        83.30000000000291,
+        66.69999999999709,
+        66.90000000000873,
+        83.09999999999127,
+        66.70000000001164,
+        66.69999999999709,
+        50,
+        66.69999999999709,
+        83.30000000000291,
+        66.59999999999127,
+        83.40000000000873,
+        66.59999999999127,
+        100.10000000000582,
+        66.69999999999709,
+        83.30000000000291,
+        83.30000000000291,
+        66.59999999999127,
+        83.5,
+        49.90000000000873,
+        66.69999999999709,
+        83.30000000000291,
+        66.80000000000291,
+        83.19999999999709,
+        66.59999999999127,
+        66.70000000001164,
+        83.29999999998836,
+        100.10000000000582,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        66.69999999999709,
+        83.30000000000291,
+        83.39999999999418,
+        66.60000000000582,
+        83.19999999999709,
+        83.5,
+        66.60000000000582,
+        66.69999999999709,
+        66.69999999999709,
+        83.30000000000291,
+        66.60000000000582,
+        83.29999999998836,
+        83.40000000000873,
+        83.39999999999418,
+        83.19999999999709,
+        66.70000000001164,
+        83.29999999998836,
+        83.5,
+        66.5,
+        83.30000000000291,
+        83.40000000000873,
+        83.39999999999418,
+        66.60000000000582,
+        83.29999999998836,
+        66.70000000001164,
+        66.69999999999709,
+        83.39999999999418,
+        66.60000000000582,
+        66.59999999999127,
+        83.5,
+        66.5,
+        83.40000000000873,
+        66.69999999999709,
+        83.30000000000291,
+        66.59999999999127,
+        100,
+        66.70000000001164,
+        50,
+        66.69999999999709,
+        99.89999999999418,
+        83.60000000000582,
+        66.5,
+        66.59999999999127,
+        100,
+        66.80000000000291,
+        83.19999999999709,
+        83.30000000000291,
+        83.40000000000873,
+        66.79999999998836
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "world-ground-v0.1",
+        "blending": "baseline",
+        "rockTone": "source",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 1929612,
+        "nativeLayers": 4,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 256,
+        "sandPixels": 256,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/Ground037-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground037-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground037-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/Ground054-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground054-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/Ground054-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/mossy_rock-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/mossy_rock-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/mossy_rock-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/standard/grass_path_2-colour.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/grass_path_2-normal.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/standard/grass_path_2-roughness.webp",
+                "width": 256,
+                "height": 256,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 77.89999999957426,
+        "calls": 4,
+        "triangles": 1280032,
+        "geometries": 37,
+        "textures": 90,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "standard",
+      "mode": "zoned",
+      "run": 2,
+      "frames": [
+        100,
+        50,
+        50,
+        83.29999999998836,
+        66.80000000000291,
+        66.69999999999709,
+        66.5,
+        66.70000000001164,
+        66.59999999999127,
+        66.69999999999709,
+        66.70000000001164,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        66.69999999999709,
+        66.69999999999709,
+        83.5,
+        33.19999999999709,
+        83.30000000000291,
+        66.60000000000582,
+        33.39999999999418,
+        49.89999999999418,
+        66.60000000000582,
+        66.80000000000291,
+        50,
+        66.59999999999127,
+        66.70000000001164,
+        66.69999999999709,
+        50,
+        50,
+        50,
+        66.69999999999709,
+        66.69999999999709,
+        49.90000000000873,
+        66.69999999999709,
+        66.59999999999127,
+        66.70000000001164,
+        66.69999999999709,
+        33.30000000000291,
+        50.09999999999127,
+        66.69999999999709,
+        66.60000000000582,
+        33.39999999999418,
+        83.20000000001164,
+        50.09999999999127,
+        50,
+        66.5,
+        50.10000000000582,
+        33.39999999999418,
+        66.60000000000582,
+        66.59999999999127,
+        66.70000000001164,
+        33.39999999999418,
+        66.60000000000582,
+        50,
+        50.09999999999127,
+        33.30000000000291,
+        83.30000000000291,
+        66.69999999999709,
+        83.30000000000291,
+        50.19999999999709,
+        49.89999999999418,
+        66.5,
+        66.80000000000291,
+        33.19999999999709,
+        66.80000000000291,
+        83.30000000000291,
+        50,
+        66.60000000000582,
+        50,
+        50,
+        50.09999999999127,
+        66.5,
+        50.10000000000582,
+        83.30000000000291,
+        66.79999999998836,
+        33.20000000001164,
+        50,
+        66.79999999998836,
+        49.80000000000291,
+        100.10000000000582,
+        66.69999999999709,
+        66.60000000000582,
+        83.59999999999127,
+        33.19999999999709,
+        83.20000000001164,
+        66.69999999999709,
+        66.69999999999709,
+        83.30000000000291,
+        50,
+        83.39999999999418,
+        66.80000000000291,
+        49.80000000000291,
+        66.69999999999709,
+        33.30000000000291,
+        50,
+        83.30000000000291,
+        66.69999999999709,
+        66.59999999999127,
+        33.5,
+        83.30000000000291,
+        33.30000000000291,
+        83.39999999999418,
+        33.20000000001164,
+        50,
+        83.29999999998836,
+        66.70000000001164,
+        66.69999999999709,
+        66.59999999999127,
+        50.10000000000582,
+        33.30000000000291,
+        66.59999999999127,
+        66.70000000001164,
+        66.79999999998836,
+        49.90000000000873,
+        66.69999999999709,
+        66.60000000000582,
+        66.59999999999127,
+        33.40000000000873,
+        50
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8957568,
+        "maskBytes": 3216020,
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 60.69999999966886,
+        "calls": 6,
+        "triangles": 746464,
+        "geometries": 37,
+        "textures": 92,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "low",
+      "mode": "baseline",
+      "run": 0,
+      "frames": [
+        49.90000000000873,
+        66.69999999999709,
+        66.69999999999709,
+        83.19999999999709,
+        66.69999999999709,
+        83.30000000000291,
+        66.80000000000291,
+        83.30000000000291,
+        66.59999999999127,
+        83.40000000000873,
+        66.59999999999127,
+        66.80000000000291,
+        66.60000000000582,
+        50.09999999999127,
+        49.90000000000873,
+        66.59999999999127,
+        83.40000000000873,
+        66.59999999999127,
+        66.80000000000291,
+        50.10000000000582,
+        66.5,
+        66.69999999999709,
+        66.89999999999418,
+        33,
+        66.70000000001164,
+        66.59999999999127,
+        50,
+        50.10000000000582,
+        66.69999999999709,
+        66.60000000000582,
+        66.59999999999127,
+        66.69999999999709,
+        66.80000000000291,
+        49.90000000000873,
+        66.69999999999709,
+        83.30000000000291,
+        66.79999999998836,
+        49.80000000000291,
+        66.69999999999709,
+        66.70000000001164,
+        66.59999999999127,
+        66.80000000000291,
+        66.69999999999709,
+        66.60000000000582,
+        50,
+        66.69999999999709,
+        49.89999999999418,
+        50.20000000001164,
+        66.5,
+        49.89999999999418,
+        50.69999999999709,
+        82.69999999999709,
+        66.80000000000291,
+        66.60000000000582,
+        50,
+        66.59999999999127,
+        66.70000000001164,
+        50,
+        83.5,
+        33.19999999999709,
+        50,
+        66.69999999999709,
+        66.60000000000582,
+        66.79999999998836,
+        66.60000000000582,
+        83.30000000000291,
+        66.80000000000291,
+        49.79999999998836,
+        66.80000000000291,
+        50,
+        66.5,
+        100.10000000000582,
+        50.19999999999709,
+        33.10000000000582,
+        66.69999999999709,
+        66.59999999999127,
+        66.70000000001164,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        66.79999999998836,
+        66.60000000000582,
+        66.80000000000291,
+        49.89999999999418,
+        66.60000000000582,
+        66.69999999999709,
+        50,
+        66.69999999999709,
+        66.60000000000582,
+        66.59999999999127,
+        83.40000000000873,
+        49.89999999999418,
+        50,
+        66.90000000000873,
+        33.19999999999709,
+        83.39999999999418,
+        66.60000000000582,
+        66.59999999999127,
+        66.80000000000291,
+        66.69999999999709,
+        66.60000000000582,
+        50,
+        66.60000000000582,
+        67.89999999999418,
+        48.80000000000291,
+        50,
+        83.39999999999418,
+        49.90000000000873,
+        66.79999999998836,
+        50,
+        66.90000000000873,
+        33,
+        83.39999999999418,
+        66.60000000000582,
+        66.69999999999709,
+        50,
+        50,
+        50,
+        99.89999999999418,
+        33.40000000000873
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "world-ground-v0.1",
+        "blending": "baseline",
+        "rockTone": "source",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 1929612,
+        "nativeLayers": 4,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 128,
+        "sandPixels": 128,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/Ground037-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/Ground037-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/Ground054-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/Ground054-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/mossy_rock-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/mossy_rock-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/grass_path_2-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/grass_path_2-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 60.15555555538998,
+        "calls": 4,
+        "triangles": 1280032,
+        "geometries": 37,
+        "textures": 86,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "low",
+      "mode": "zoned",
+      "run": 0,
+      "frames": [
+        33.30000000000291,
+        33.30000000000291,
+        33.30000000000291,
+        66.69999999999709,
+        33.39999999999418,
+        66.60000000000582,
+        33.39999999999418,
+        33.30000000000291,
+        33.30000000000291,
+        50,
+        33.39999999999418,
+        49.90000000000873,
+        33.29999999998836,
+        50.10000000000582,
+        33.30000000000291,
+        50,
+        33.30000000000291,
+        66.69999999999709,
+        33.30000000000291,
+        33.39999999999418,
+        66.69999999999709,
+        33.19999999999709,
+        50.10000000000582,
+        33.30000000000291,
+        50.09999999999127,
+        33.20000000001164,
+        33.39999999999418,
+        33.30000000000291,
+        50,
+        33.39999999999418,
+        33.40000000000873,
+        66.5,
+        33.39999999999418,
+        66.69999999999709,
+        33.19999999999709,
+        33.40000000000873,
+        67.09999999999127,
+        49.5,
+        33.40000000000873,
+        50,
+        50,
+        33.39999999999418,
+        33.19999999999709,
+        50.10000000000582,
+        33.30000000000291,
+        50,
+        33.30000000000291,
+        33.39999999999418,
+        33.30000000000291,
+        66.89999999999418,
+        33.40000000000873,
+        49.69999999999709,
+        33.39999999999418,
+        66.60000000000582,
+        33.30000000000291,
+        50,
+        50.09999999999127,
+        33.19999999999709,
+        66.80000000000291,
+        33.30000000000291,
+        49.89999999999418,
+        33.30000000000291,
+        50.19999999999709,
+        33.30000000000291,
+        33.30000000000291,
+        50,
+        33.30000000000291,
+        33.19999999999709,
+        33.39999999999418,
+        33.30000000000291,
+        33.40000000000873,
+        33.29999999998836,
+        33.40000000000873,
+        33.39999999999418,
+        33.19999999999709,
+        33.40000000000873,
+        49.89999999999418,
+        16.69999999999709,
+        50,
+        33.40000000000873,
+        66.69999999999709,
+        33.19999999999709,
+        33.40000000000873,
+        33.19999999999709,
+        50.09999999999127,
+        50.10000000000582,
+        33.30000000000291,
+        50,
+        33.30000000000291,
+        50,
+        33.39999999999418,
+        50.10000000000582,
+        33.19999999999709,
+        33.39999999999418,
+        33.30000000000291,
+        33.30000000000291,
+        83.39999999999418,
+        33.30000000000291,
+        49.89999999999418,
+        50.10000000000582,
+        33.19999999999709,
+        50.10000000000582,
+        33.30000000000291,
+        33.39999999999418,
+        66.89999999999418,
+        33,
+        50,
+        50.10000000000582,
+        50,
+        33.39999999999418,
+        33.20000000001164,
+        50,
+        33.39999999999418,
+        50,
+        50.10000000000582,
+        33.19999999999709,
+        66.69999999999709,
+        33.30000000000291,
+        66.69999999999709,
+        33.30000000000291
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8957568,
+        "maskBytes": 3216020,
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 512,
+        "sandPixels": 512,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/Ground037-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/Ground037-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/Ground054-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/Ground054-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/mossy_rock-colour-cool-grey.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/mossy_rock-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/grass_path_2-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/grass_path_2-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 45.65833333383004,
+        "calls": 6,
+        "triangles": 746464,
+        "geometries": 37,
+        "textures": 88,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "low",
+      "mode": "zoned",
+      "run": 1,
+      "frames": [
+        33.5,
+        33.19999999999709,
+        66.69999999999709,
+        33.30000000000291,
+        33.39999999999418,
+        50.19999999999709,
+        66.40000000000873,
+        33.39999999999418,
+        49.90000000000873,
+        33.39999999999418,
+        33.30000000000291,
+        66.59999999999127,
+        33.90000000000873,
+        49.59999999999127,
+        66.5,
+        33.40000000000873,
+        50.09999999999127,
+        33.20000000001164,
+        83.29999999998836,
+        33.40000000000873,
+        50.19999999999709,
+        66.5,
+        33.30000000000291,
+        33.30000000000291,
+        66.69999999999709,
+        33.39999999999418,
+        49.90000000000873,
+        50,
+        33.39999999999418,
+        33.30000000000291,
+        66.69999999999709,
+        33.30000000000291,
+        50,
+        33.30000000000291,
+        50,
+        50.09999999999127,
+        66.60000000000582,
+        16.69999999999709,
+        66.60000000000582,
+        33.39999999999418,
+        33.39999999999418,
+        66.5,
+        33.40000000000873,
+        66.59999999999127,
+        33.30000000000291,
+        50.30000000000291,
+        49.80000000000291,
+        33.30000000000291,
+        66.69999999999709,
+        50,
+        33.30000000000291,
+        50.09999999999127,
+        50,
+        66.60000000000582,
+        66.69999999999709,
+        33.30000000000291,
+        33.30000000000291,
+        50,
+        33.29999999998836,
+        50.10000000000582,
+        33.19999999999709,
+        33.40000000000873,
+        66.59999999999127,
+        33.40000000000873,
+        50,
+        49.89999999999418,
+        33.39999999999418,
+        50,
+        50,
+        50.20000000001164,
+        49.79999999998836,
+        33.40000000000873,
+        33.19999999999709,
+        66.69999999999709,
+        66.69999999999709,
+        66.80000000000291,
+        33.19999999999709,
+        50,
+        33.30000000000291,
+        50,
+        66.69999999999709,
+        33.30000000000291,
+        66.80000000000291,
+        33.19999999999709,
+        50.10000000000582,
+        66.59999999999127,
+        33.40000000000873,
+        66.59999999999127,
+        33.40000000000873,
+        66.69999999999709,
+        33.30000000000291,
+        50,
+        33.39999999999418,
+        33.30000000000291,
+        33.30000000000291,
+        33.39999999999418,
+        49.90000000000873,
+        33.29999999998836,
+        66.80000000000291,
+        33.30000000000291,
+        50,
+        49.89999999999418,
+        50.10000000000582,
+        33.19999999999709,
+        66.69999999999709,
+        66.90000000000873,
+        33.19999999999709,
+        66.60000000000582,
+        33.29999999998836,
+        50.10000000000582,
+        33.30000000000291,
+        50,
+        50.09999999999127,
+        33.30000000000291,
+        50,
+        49.90000000000873,
+        33.29999999998836,
+        33.30000000000291,
+        50.10000000000582,
+        33.39999999999418
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8957568,
+        "maskBytes": 3216020,
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 512,
+        "sandPixels": 512,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/Ground037-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/Ground037-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/Ground054-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/Ground054-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/mossy_rock-colour-cool-grey.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/mossy_rock-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/grass_path_2-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/grass_path_2-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 42.058333333581686,
+        "calls": 6,
+        "triangles": 746464,
+        "geometries": 37,
+        "textures": 88,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "low",
+      "mode": "baseline",
+      "run": 1,
+      "frames": [
+        33.30000000000291,
+        83.30000000000291,
+        66.69999999999709,
+        50,
+        66.59999999999127,
+        50.10000000000582,
+        66.69999999999709,
+        49.80000000000291,
+        83.39999999999418,
+        66.60000000000582,
+        66.89999999999418,
+        66.5,
+        50.10000000000582,
+        66.69999999999709,
+        49.90000000000873,
+        50,
+        66.69999999999709,
+        66.80000000000291,
+        66.5,
+        66.59999999999127,
+        66.69999999999709,
+        50.10000000000582,
+        49.89999999999418,
+        66.80000000000291,
+        83.30000000000291,
+        66.60000000000582,
+        66.79999999998836,
+        49.90000000000873,
+        66.69999999999709,
+        33.30000000000291,
+        66.59999999999127,
+        66.70000000001164,
+        50.09999999999127,
+        66.60000000000582,
+        66.59999999999127,
+        66.70000000001164,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        50.09999999999127,
+        66.60000000000582,
+        66.59999999999127,
+        33.40000000000873,
+        66.69999999999709,
+        66.89999999999418,
+        33.10000000000582,
+        66.60000000000582,
+        66.69999999999709,
+        50,
+        50,
+        50.09999999999127,
+        66.70000000001164,
+        50,
+        66.59999999999127,
+        66.60000000000582,
+        33.39999999999418,
+        66.60000000000582,
+        83.39999999999418,
+        66.90000000000873,
+        49.79999999998836,
+        49.90000000000873,
+        66.69999999999709,
+        66.60000000000582,
+        66.79999999998836,
+        83.20000000001164,
+        33.29999999998836,
+        66.80000000000291,
+        66.69999999999709,
+        66.60000000000582,
+        33.30000000000291,
+        83.5,
+        66.5,
+        50.19999999999709,
+        49.80000000000291,
+        66.59999999999127,
+        50.10000000000582,
+        66.69999999999709,
+        66.69999999999709,
+        66.60000000000582,
+        50,
+        66.69999999999709,
+        49.90000000000873,
+        83.5,
+        66.59999999999127,
+        66.69999999999709,
+        66.5,
+        33.39999999999418,
+        66.60000000000582,
+        83.39999999999418,
+        66.60000000000582,
+        50.10000000000582,
+        66.70000000001164,
+        66.5,
+        16.699999999982538,
+        50,
+        83.39999999999418,
+        33.30000000001746,
+        83.39999999999418,
+        66.60000000000582,
+        66.69999999998254,
+        66.70000000001164,
+        66.60000000000582,
+        66.69999999998254,
+        66.60000000000582,
+        66.80000000001746,
+        66.69999999998254,
+        49.89999999999418,
+        83.30000000001746,
+        66.60000000000582,
+        50.19999999998254,
+        49.89999999999418,
+        50.10000000000582,
+        83.30000000001746,
+        66.59999999997672,
+        33.30000000001746,
+        50,
+        66.69999999998254,
+        66.70000000001164,
+        83.29999999998836,
+        33.30000000001746
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "world-ground-v0.1",
+        "blending": "baseline",
+        "rockTone": "source",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 1929612,
+        "nativeLayers": 4,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 128,
+        "sandPixels": 128,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/Ground037-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/Ground037-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/Ground054-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/Ground054-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/mossy_rock-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/mossy_rock-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/grass_path_2-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/grass_path_2-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 58.1111111111111,
+        "calls": 4,
+        "triangles": 1280032,
+        "geometries": 37,
+        "textures": 86,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "low",
+      "mode": "baseline",
+      "run": 2,
+      "frames": [
+        50,
+        83.39999999999418,
+        66.60000000000582,
+        66.70000000001164,
+        66.69999999998254,
+        50,
+        50,
+        33.20000000001164,
+        50.10000000000582,
+        66.69999999998254,
+        50,
+        50,
+        50,
+        33.30000000001746,
+        50,
+        83.39999999999418,
+        66.70000000001164,
+        66.69999999998254,
+        66.70000000001164,
+        66.60000000000582,
+        66.59999999997672,
+        50.10000000000582,
+        66.60000000000582,
+        33.29999999998836,
+        83.30000000001746,
+        50.10000000000582,
+        50,
+        66.5,
+        33.5,
+        83.29999999998836,
+        49.89999999999418,
+        50,
+        50.10000000000582,
+        66.70000000001164,
+        66.59999999997672,
+        66.60000000000582,
+        83.39999999999418,
+        33.30000000001746,
+        83.39999999999418,
+        66.60000000000582,
+        66.69999999998254,
+        33.30000000001746,
+        66.60000000000582,
+        50.09999999997672,
+        83.40000000002328,
+        49.89999999999418,
+        66.69999999998254,
+        33.20000000001164,
+        66.79999999998836,
+        66.70000000001164,
+        50,
+        49.89999999999418,
+        66.70000000001164,
+        66.69999999998254,
+        66.70000000001164,
+        49.89999999999418,
+        66.70000000001164,
+        66.79999999998836,
+        49.89999999999418,
+        50,
+        66.5,
+        66.90000000002328,
+        66.59999999997672,
+        66.60000000000582,
+        50.10000000000582,
+        49.89999999999418,
+        66.70000000001164,
+        83.39999999999418,
+        50,
+        66.70000000001164,
+        66.59999999997672,
+        49.90000000002328,
+        83.5,
+        49.89999999999418,
+        66.69999999998254,
+        33.30000000001746,
+        83.29999999998836,
+        66.89999999999418,
+        66.40000000002328,
+        50.09999999997672,
+        50,
+        50,
+        83.5,
+        33.10000000000582,
+        66.70000000001164,
+        83.39999999999418,
+        50,
+        66.70000000001164,
+        66.5,
+        66.69999999998254,
+        83.39999999999418,
+        50,
+        83.30000000001746,
+        66.60000000000582,
+        50.09999999997672,
+        66.60000000000582,
+        66.60000000000582,
+        66.79999999998836,
+        66.70000000001164,
+        66.70000000001164,
+        66.59999999997672,
+        83.20000000001164,
+        66.89999999999418,
+        49.89999999999418,
+        33.30000000001746,
+        83.29999999998836,
+        66.80000000001746,
+        33.29999999998836,
+        66.60000000000582,
+        50,
+        50,
+        100,
+        50,
+        66.69999999998254,
+        33.30000000001746,
+        83.29999999998836,
+        66.70000000001164,
+        50,
+        66.69999999998254,
+        66.60000000000582
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "world-ground-v0.1",
+        "blending": "baseline",
+        "rockTone": "source",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 1929612,
+        "nativeLayers": 4,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 128,
+        "sandPixels": 128,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/Ground037-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/Ground037-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/Ground054-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/Ground054-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/mossy_rock-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/mossy_rock-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "world-v01/low/grass_path_2-colour.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "world-v01/low/grass_path_2-roughness.webp",
+                "width": 128,
+                "height": 128,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 64.71250000037253,
+        "calls": 4,
+        "triangles": 1280032,
+        "geometries": 37,
+        "textures": 86,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "tier": "low",
+      "mode": "zoned",
+      "run": 2,
+      "frames": [
+        33.39999999999418,
+        33.30000000001746,
+        50,
+        33.39999999999418,
+        50.10000000000582,
+        33.19999999998254,
+        33.30000000001746,
+        50,
+        33.39999999999418,
+        33.29999999998836,
+        33.30000000001746,
+        33.39999999999418,
+        50,
+        33.29999999998836,
+        33.30000000001746,
+        50.10000000000582,
+        66.59999999997672,
+        33.30000000001746,
+        50,
+        33.29999999998836,
+        50.10000000000582,
+        33.29999999998836,
+        50.10000000000582,
+        33.20000000001164,
+        50,
+        33.5,
+        49.89999999999418,
+        33.29999999998836,
+        66.70000000001164,
+        33.29999999998836,
+        33.30000000001746,
+        83.39999999999418,
+        33.29999999998836,
+        33.30000000001746,
+        33.5,
+        66.5,
+        33.39999999999418,
+        50,
+        33.29999999998836,
+        50,
+        33.30000000001746,
+        33.39999999999418,
+        50,
+        33.29999999998836,
+        66.70000000001164,
+        33.29999999998836,
+        33.30000000001746,
+        50,
+        50.10000000000582,
+        33.29999999998836,
+        33.29999999998836,
+        33.40000000002328,
+        66.59999999997672,
+        33.30000000001746,
+        33.29999999998836,
+        50,
+        66.70000000001164,
+        33.29999999998836,
+        50.10000000000582,
+        33.29999999998836,
+        50,
+        33.30000000001746,
+        50.10000000000582,
+        33.19999999998254,
+        33.30000000001746,
+        33.39999999999418,
+        50,
+        50,
+        33.29999999998836,
+        33.39999999999418,
+        49.90000000002328,
+        50.19999999998254,
+        33.10000000000582,
+        50.29999999998836,
+        49.90000000002328,
+        33.19999999998254,
+        33.39999999999418,
+        50.10000000000582,
+        33.30000000001746,
+        33.29999999998836,
+        50.10000000000582,
+        33.10000000000582,
+        50.09999999997672,
+        33.30000000001746,
+        50,
+        33.29999999998836,
+        50.10000000000582,
+        33.29999999998836,
+        83.30000000001746,
+        33.39999999999418,
+        33.20000000001164,
+        50.09999999997672,
+        33.30000000001746,
+        66.69999999998254,
+        33.40000000002328,
+        50,
+        33.19999999998254,
+        33.5,
+        50,
+        49.80000000001746,
+        33.5,
+        49.89999999999418,
+        50,
+        33.29999999998836,
+        33.30000000001746,
+        33.39999999999418,
+        50.10000000000582,
+        50,
+        33.39999999999418,
+        33.19999999998254,
+        50,
+        33.40000000002328,
+        50,
+        49.89999999999418,
+        33.39999999999418,
+        33.39999999999418,
+        33.20000000001164,
+        16.699999999982538,
+        66.60000000000582,
+        33.39999999999418
+      ],
+      "fixture": {
+        "seed": 18,
+        "time": 2.4099999999999993,
+        "camera": {
+          "position": [
+            24.455510589864378,
+            57.064452362060564,
+            -201.1883266883877
+          ],
+          "target": [
+            56,
+            33.36445236206055,
+            -180
+          ],
+          "fov": 45,
+          "zoom": 1
+        },
+        "lighting": "day",
+        "fog": null,
+        "conifers": {
+          "source": "ez-tree",
+          "preset": "Large",
+          "count": 90,
+          "minHeight": 3.45485540613812,
+          "maxHeight": 10.607753029112642
+        },
+        "pixelRatio": 1,
+        "toneMapping": "ACESFilmic (shared renderer)",
+        "lightSettings": {
+          "preset": "day",
+          "elevation": 55.259792903217544,
+          "azimuth": -57.264773727892404,
+          "azimuthConvention": "atan2(x,z), +Z = 0°, +X = 90°",
+          "target": [
+            0,
+            31.105557918548584,
+            0
+          ],
+          "position": [
+            -95.8701740357061,
+            195.45442769404474,
+            61.63082616581106
+          ],
+          "direction": [
+            -0.4793508701785306,
+            0.8217443488774809,
+            0.30815413082905535
+          ],
+          "sun": {
+            "colour": "ffead5",
+            "intensity": 1.55
+          },
+          "fill": {
+            "sky": "f3eee3",
+            "ground": "b7b1a0",
+            "intensity": 2.45
+          },
+          "exposure": 1.05,
+          "shadow": {
+            "map": [
+              2048,
+              2048
+            ],
+            "frustum": {
+              "left": -2214.0977067040835,
+              "right": 2214.0977067040835,
+              "top": 1845.3352651731277,
+              "bottom": -1845.3352651731277,
+              "near": 0.1,
+              "far": 1499.603908413193
+            },
+            "bias": -0.00005,
+            "normalBias": 0.045,
+            "radius": 4,
+            "type": "native PCF"
+          },
+          "materialTreatment": "Unchanged source maps and parameters"
+        },
+        "environment": {
+          "requested": false,
+          "active": false,
+          "loaded": false,
+          "pmrem": null,
+          "source": "lonely_road_afternoon_puresky_1k.hdr",
+          "intensity": 0.15,
+          "rotation": [
+            -1.0340329729178337,
+            -0.1860250476362065,
+            1.4444759146085098,
+            "XYZ"
+          ],
+          "alignment": "HDR peak aligned to the native directional light using Scene.environmentRotation",
+          "background": "Unchanged Color",
+          "sourceTexture": "disposed after PMREM",
+          "failure": ""
+        }
+      },
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8957568,
+        "maskBytes": 3216020,
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 512,
+        "sandPixels": 512,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/Ground037-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/Ground037-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/Ground054-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/Ground054-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/mossy_rock-colour-cool-grey.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/mossy_rock-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/low/grass_path_2-colour.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/low/grass_path_2-roughness.webp",
+                "width": 512,
+                "height": 512,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 39.63846153823229,
+        "calls": 6,
+        "triangles": 746464,
+        "geometries": 37,
+        "textures": 88,
+        "callsIncludeShadows": true
+      }
+    }
+  ],
+  "method": "Isolated from repository tests and other QA. Three alternating-order runs per mode/tier, 120 raw rAF intervals after 2 s settle; seed 18 steep inland wall, day, bare terrain, paused, no fog. Browser wall time, not exclusive CPU/GPU. Background OS activity remains uncontrolled.",
+  "graphics": {
+    "vendor": "Google Inc. (Intel)",
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  }
+}
