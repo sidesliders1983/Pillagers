@@ -1,0 +1,612 @@
+{
+  "date": "2026-10-13T16:39:23.381Z",
+  "seeds": [
+    18,
+    42,
+    1983,
+    7,
+    256
+  ],
+  "results": [
+    {
+      "seed": 18,
+      "mode": "before",
+      "config": {
+        "seed": 18,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 12818.521200000001,
+      "peakAboveSea": 75.75997650146485,
+      "landP90": 49.393109436035154,
+      "highlandSlopeP90": 2.940290361549247,
+      "blueprintHash": "4a5569ab6e8095b71d776c14459593395e537ab6e059fc9758ab1396c8626810",
+      "previousFixturePreserved": true,
+      "deterministic": false,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 137.87716697763022,
+        "heightAboveSites": 55.558986494618075
+      },
+      "selected": {
+        "playerId": "site-1",
+        "rivalId": "site-2",
+        "centerDistance": 313.20919526731655,
+        "bufferDistance": 220.2018998786439,
+        "routeLength": 772,
+        "exposedRays": 0,
+        "score": 167,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1575,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5997567176818848
+    },
+    {
+      "seed": 18,
+      "mode": "after",
+      "config": {
+        "seed": 18,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r2",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 14873.323300000002,
+      "peakAboveSea": 46.0756884765625,
+      "landP90": 30.271327133178712,
+      "highlandSlopeP90": 1.449396052666545,
+      "blueprintHash": "10c661a14cc85c8d4b92eb99c70cf4da2dd9c3cb31531e162e57cfcac46789bb",
+      "previousFixturePreserved": null,
+      "deterministic": true,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 13.796866152318794,
+        "heightAboveSites": 9.541459739208221
+      },
+      "selected": {
+        "playerId": "site-2",
+        "rivalId": "site-1",
+        "centerDistance": 313.20919526731655,
+        "bufferDistance": 220.2018998786439,
+        "routeLength": 792,
+        "exposedRays": 0,
+        "score": 167,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1452,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5997567176818848
+    },
+    {
+      "seed": 42,
+      "mode": "before",
+      "config": {
+        "seed": 42,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 17339.0199,
+      "peakAboveSea": 65.81640350341797,
+      "landP90": 47.531552429199216,
+      "highlandSlopeP90": 2.793665528121886,
+      "blueprintHash": "93fd36c93b97556b0d9179078090d4bd3b5e23905a42fd8572369bca4f9a016f",
+      "previousFixturePreserved": true,
+      "deterministic": false,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 49.623306946864425,
+        "heightAboveSites": 63.03762849739621
+      },
+      "selected": {
+        "playerId": "site-2",
+        "rivalId": "site-27",
+        "centerDistance": 380.1315561749643,
+        "bufferDistance": 246.5125911310554,
+        "routeLength": 920,
+        "exposedRays": 0,
+        "score": 93,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1932,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5997992190038706
+    },
+    {
+      "seed": 42,
+      "mode": "after",
+      "config": {
+        "seed": 42,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r2",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 16458.9813,
+      "peakAboveSea": 38.24833786010742,
+      "landP90": 28.620362396240235,
+      "highlandSlopeP90": 1.2926440148305292,
+      "blueprintHash": "aa63cfa798468cad1b1ecaaff6f44ce5601be5d9449862a9ca47dcd89d7ae59b",
+      "previousFixturePreserved": null,
+      "deterministic": true,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 49.623306946864425,
+        "heightAboveSites": 33.586076985705986
+      },
+      "selected": {
+        "playerId": "site-2",
+        "rivalId": "site-3",
+        "centerDistance": 350,
+        "bufferDistance": 227.83954895451615,
+        "routeLength": 898,
+        "exposedRays": 0,
+        "score": 95,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 2304,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5997992190038706
+    },
+    {
+      "seed": 1983,
+      "mode": "before",
+      "config": {
+        "seed": 1983,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 14575.808399999994,
+      "peakAboveSea": 58.80511581420898,
+      "landP90": 33.541607971191404,
+      "highlandSlopeP90": 2.4714545240935095,
+      "blueprintHash": "591605d519b2881ec4273c154d48cc4d26ae8d9516f16400987bb8c8b6933e29",
+      "previousFixturePreserved": true,
+      "deterministic": false,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 37.98835865345246,
+        "heightAboveSites": 16.049155135652924
+      },
+      "selected": {
+        "playerId": "site-1",
+        "rivalId": "site-3",
+        "centerDistance": 522.398315464359,
+        "bufferDistance": 434.6,
+        "routeLength": 872,
+        "exposedRays": 0,
+        "score": 112,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1440,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5981599390506744
+    },
+    {
+      "seed": 1983,
+      "mode": "after",
+      "config": {
+        "seed": 1983,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r2",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 13958.357199999999,
+      "peakAboveSea": 37.34406387329101,
+      "landP90": 22.653220291137696,
+      "highlandSlopeP90": 1.24046630565697,
+      "blueprintHash": "7de5108867ea6218b75332669e38a44d909c205ecebf3fd76e1b0ffdd9ecb903",
+      "previousFixturePreserved": null,
+      "deterministic": true,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 29.99080946325194,
+        "heightAboveSites": 10.831460739249618
+      },
+      "selected": {
+        "playerId": "site-1",
+        "rivalId": "site-3",
+        "centerDistance": 522.398315464359,
+        "bufferDistance": 434.6,
+        "routeLength": 868,
+        "exposedRays": 0,
+        "score": 112,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1440,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5981599390506744
+    },
+    {
+      "seed": 7,
+      "mode": "before",
+      "config": {
+        "seed": 7,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 15977.715999999986,
+      "peakAboveSea": 67.8797885131836,
+      "landP90": 36.14798461914062,
+      "highlandSlopeP90": 2.6263567806587576,
+      "blueprintHash": "2319a488c586a1cc210abf5d82afa2bb9451f86af8dc8ce28df3f097f1ac1188",
+      "previousFixturePreserved": true,
+      "deterministic": false,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 43.73814118991571,
+        "heightAboveSites": 25.17620383656543
+      },
+      "selected": {
+        "playerId": "site-26",
+        "rivalId": "site-37",
+        "centerDistance": 174.6424919657298,
+        "bufferDistance": 77.3,
+        "routeLength": 353,
+        "exposedRays": 0,
+        "score": 131,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1386,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5981961214739103
+    },
+    {
+      "seed": 7,
+      "mode": "after",
+      "config": {
+        "seed": 7,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r2",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 13555.213199999998,
+      "peakAboveSea": 42.779591674804685,
+      "landP90": 24.39239227294922,
+      "highlandSlopeP90": 1.366545315146444,
+      "blueprintHash": "929e6ad342621818c55150f93497d41e451089b78e266cd4c351b64c01f65767",
+      "previousFixturePreserved": null,
+      "deterministic": true,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 43.73814118991571,
+        "heightAboveSites": 17.290122638577998
+      },
+      "selected": {
+        "playerId": "site-26",
+        "rivalId": "site-1",
+        "centerDistance": 196.9771560359221,
+        "bufferDistance": 97.46075298874412,
+        "routeLength": 363,
+        "exposedRays": 0,
+        "score": 133,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1575,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.5981961214739103
+    },
+    {
+      "seed": 256,
+      "mode": "before",
+      "config": {
+        "seed": 256,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 14527.944399999978,
+      "peakAboveSea": 62.647824401855466,
+      "landP90": 35.96125518798828,
+      "highlandSlopeP90": 1.9097908131933825,
+      "blueprintHash": "bb656cc291700b787648dbace3bb6050dbcdd1ed7df12896070df93031e300dc",
+      "previousFixturePreserved": true,
+      "deterministic": false,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 45.71516753999572,
+        "heightAboveSites": 14.83213012358721
+      },
+      "selected": {
+        "playerId": "site-2",
+        "rivalId": "site-1",
+        "centerDistance": 390,
+        "bufferDistance": 272.1103755028847,
+        "routeLength": 563,
+        "exposedRays": 0,
+        "score": 158,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1800,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.599892646074295
+    },
+    {
+      "seed": 256,
+      "mode": "after",
+      "config": {
+        "seed": 256,
+        "preset": "island",
+        "generatorVersion": "fjordside-island-v0.3e-r2",
+        "width": 800,
+        "depth": 800,
+        "relief": 1,
+        "forestDensity": 1,
+        "environment": {
+          "version": 1,
+          "meanAnnualTemperatureC": 6,
+          "lapseRateCPerKm": 6.5,
+          "windFromDegrees": 315
+        },
+        "siteRules": {
+          "minimumCenterDistance": 160,
+          "minimumBufferDistance": 40,
+          "minimumLandingRoute": 240,
+          "maximumFoundationAdjustment": 0.6,
+          "rivalRoofHeight": 8,
+          "maximumCandidates": 48
+        },
+        "conifers": "ez-tree"
+      },
+      "generationMs": 13900.26920000001,
+      "peakAboveSea": 39.028832550048826,
+      "landP90": 24.109194869995118,
+      "highlandSlopeP90": 0.9764614795998674,
+      "blueprintHash": "5ca6c266525c8547579ec754527258f48890c938dd726b9861f74885fdc7171d",
+      "previousFixturePreserved": null,
+      "deterministic": true,
+      "saveLoad": true,
+      "accepted": true,
+      "reasons": [],
+      "macroAccepted": true,
+      "macroReasons": [],
+      "terrainSeparation": {
+        "width": 35.77708763999664,
+        "heightAboveSites": 10.58693986780503
+      },
+      "selected": {
+        "playerId": "site-2",
+        "rivalId": "site-1",
+        "centerDistance": 390,
+        "bufferDistance": 272.1103755028847,
+        "routeLength": 553,
+        "exposedRays": 0,
+        "score": 159,
+        "reasons": []
+      },
+      "visibility": {
+        "hidden": true,
+        "rays": 1800,
+        "exposedRays": 0
+      },
+      "maximumFoundationAdjustment": 0.599892646074295
+    }
+  ]
+}

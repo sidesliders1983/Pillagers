@@ -1,6 +1,6 @@
 # Procedural ground blending — #137 native material study
 
-The Environment Lab study consumes the saved `environment.fields` from #135. It does not reclassify terrain, alter the canonical heightfield or serialize additional terrain values. Production rendering remains on the existing material recipe pending visual review.
+The Environment Lab study consumes the saved `environment.fields` from #135. It does not reclassify terrain, alter the canonical heightfield or serialize additional terrain values. Production rendering remains on the existing material recipe pending visual review. After accepting the material direction, the owner requested a separate lower-highland follow-up in the same PR. That change is implemented in explicitly versioned generation, not in this material layer; see the [height comparison](qa/island-highlands/review.html). The original material gallery retains its previous terrain.
 
 ## Comparison controls
 

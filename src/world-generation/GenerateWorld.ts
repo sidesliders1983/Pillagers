@@ -1,7 +1,7 @@
 import { normalizeEnvironmentConfig, zoneEnvironment } from './EnvironmentZoning';
 import { measureGeneration, type GenerationObserver } from './GenerationProfile';
 import { planIslandSettlements } from './PlanIslandSettlements';
-import { normalizeSiteRules, settlementGeneratorVersion } from './SettlementSites';
+import { normalizeSiteRules, isSettlementGeneratorVersion } from './SettlementSites';
 import { inspectMacroIsland, findNaturalSites } from './MacroIsland';
 import { islandTerrain } from './IslandShape';
 import { islandTerrain as firstIslandTerrain } from './IslandShapeV1';
@@ -13,8 +13,8 @@ import { planNature } from './PlanNature';
 import { planSettlement, settlementBoundsAt, extractCoast } from './PlanSettlement';
 import { fjordWaterConfig } from '../config/FjordWaterConfig';
 import {
-    freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, GenerationRequest, WorldBlueprint,
-    WorldGenerationConfig, Point2, ConiferSource,
+    freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion,
+    gentlerIslandGeneratorVersion, GenerationRequest, WorldBlueprint, WorldGenerationConfig, Point2, ConiferSource,
 } from './WorldBlueprint';
 
 export function normalizeWorldConfig(request: GenerationRequest): WorldGenerationConfig {
@@ -26,8 +26,9 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
         throw new Error('Unknown world preset.');
     }
     const version = preset === 'island' ?
-        (request.generatorVersion === settlementGeneratorVersion ? settlementGeneratorVersion :
-            request.generatorVersion === firstIslandGeneratorVersion ? firstIslandGeneratorVersion : islandGeneratorVersion) : generatorVersion;
+        (isSettlementGeneratorVersion(request.generatorVersion) ? request.generatorVersion :
+            request.generatorVersion === firstIslandGeneratorVersion ? firstIslandGeneratorVersion :
+                request.generatorVersion === gentlerIslandGeneratorVersion ? gentlerIslandGeneratorVersion : islandGeneratorVersion) : generatorVersion;
     if (request.generatorVersion && request.generatorVersion !== version) {
         throw new Error('Unsupported generator version: ' + request.generatorVersion);
     }
@@ -40,14 +41,14 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
         !Number.isFinite(forestDensity) || forestDensity < .3 || forestDensity > 1.3) {
         throw new RangeError('Relief must be 0.5–1.5 and forest density 0.3–1.3.');
     }
-    if (request.siteRules && version !== settlementGeneratorVersion) {
+    if (request.siteRules && !isSettlementGeneratorVersion(version)) {
         throw new Error('Settlement rules require the settlement-placement generator version.');
     }
     const extent = preset === 'island' ? 800 : 180;
     return { seed: request.seed, preset, generatorVersion: version, width: extent, depth: extent,
         relief, forestDensity,
         ...(request.environment ? { environment: normalizeEnvironmentConfig(request.environment) } : {}),
-        ...(version === settlementGeneratorVersion ? { siteRules: normalizeSiteRules(request.siteRules) } : {}),
+        ...(isSettlementGeneratorVersion(version) ? { siteRules: normalizeSiteRules(request.siteRules) } : {}),
         ...(request.conifers === undefined ? {} : { conifers: request.conifers }) };
 }
 
@@ -137,7 +138,7 @@ export function generateWorld(request: GenerationRequest, observe?: GenerationOb
     }
     const initial = { ...landscape, ...measureGeneration('initial-plan', () =>
         planSettlement(landscape, center, candidateDry), observe) };
-    const planned = config.generatorVersion === settlementGeneratorVersion ? planIslandSettlements(initial, observe) : initial;
+    const planned = isSettlementGeneratorVersion(config.generatorVersion) ? planIslandSettlements(initial, observe) : initial;
     const environment = config.environment ? measureGeneration('environment-zoning', () =>
         zoneEnvironment(planned, config.environment!), observe) : undefined;
     const zoned = { ...planned, ...(environment ? { environment } : {}) };

@@ -3,7 +3,8 @@ import type { GroundBlending, RockTone } from '../config/GroundBlendConfig';
 import { spatialOverlays } from '../world/SpatialOverlay';
 import { renderSpatialDiagnostics } from './SpatialDiagnostics';
 import { environmentOverlays, renderEnvironmentDiagnostics } from './EnvironmentDiagnostics';
-import { settlementGeneratorVersion } from '../world-generation/SettlementSites';
+import { gentlerIslandGeneratorVersion } from '../world-generation/WorldBlueprint';
+import { gentlerSettlementGeneratorVersion } from '../world-generation/SettlementSites';
 import { settlementStartingViews } from '../world-generation/SiteNavigation';
 import { createSettlementSiteOverlay, renderSettlementSiteDiagnostics } from './SettlementSiteDiagnostics';
 import { inspectMacroIsland } from '../world-generation/MacroIsland';
@@ -81,9 +82,9 @@ export class LabWorldGeneration {
                     <option value="fjord">Fjord</option>
                     <option value="coastal-valley">Coastal Valley</option>
                     <option value="rocky-inlet">Rocky Inlet</option>
-                    <option value="island">Nordic Island · v0.3b</option>
+                    <option value="island">Nordic Island · gentler highlands</option>
                 </select></label>
-                <label><input id="world-site-planning" type="checkbox">Player &amp; hidden rival sites · v0.3e (islands)</label>
+                <label><input id="world-site-planning" type="checkbox">Player &amp; hidden rival sites · v0.3e-r2 (islands)</label>
                 <label><input id="world-environment-zoning" type="checkbox">Environment zoning · v1 (new worlds)</label>
                 <label>Annual mean °C for new zoned worlds<input id="world-climate" type="number"
                     min="-40" max="40" step="0.5" value="6" title="Normal: 6 °C. Optional cold study: −8 °C. Applies on Generate World."></label>
@@ -206,9 +207,9 @@ export class LabWorldGeneration {
                 preset: this.preset.value as WorldPreset, conifers: this.coniferSource(),
                 ...((document.querySelector('#world-environment-zoning') as HTMLInputElement).checked ?
                     { environment: { version: 1 as const, meanAnnualTemperatureC: Number((document.querySelector('#world-climate') as HTMLInputElement).value) } } : {}),
-                ...(this.preset.value === 'island' &&
+                ...(this.preset.value === 'island' ? { generatorVersion:
                     (document.querySelector('#world-site-planning') as HTMLInputElement).checked ?
-                    { generatorVersion: settlementGeneratorVersion } : {}) });
+                        gentlerSettlementGeneratorVersion : gentlerIslandGeneratorVersion } : {}) });
             const macro = world.config.preset === 'island' ? inspectMacroIsland(world) : null;
             const generationMs = performance.now()-start;
             const tier = this.quality();

@@ -2,6 +2,11 @@ import type { BuildingPlacement, Bounds2, Point2 } from './WorldBlueprint';
 import type { StartingViewpoint, TerrainSightline } from './SettlementVisibility';
 
 export const settlementGeneratorVersion = 'fjordside-island-v0.3e' as const;
+export const gentlerSettlementGeneratorVersion = 'fjordside-island-v0.3e-r2' as const;
+export function isSettlementGeneratorVersion(version: string | undefined):
+    version is typeof settlementGeneratorVersion | typeof gentlerSettlementGeneratorVersion {
+    return version === settlementGeneratorVersion || version === gentlerSettlementGeneratorVersion;
+}
 export const defaultSiteRules = Object.freeze({
     minimumCenterDistance: 160,
     minimumBufferDistance: 40,

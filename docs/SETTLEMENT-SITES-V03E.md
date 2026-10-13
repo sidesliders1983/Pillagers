@@ -4,7 +4,7 @@ Issue #134 adds an explicit settlement-placement stage to the accepted r2 island
 
 ## Review in Environment Lab
 
-Open `/environment-lab`, expand **Settings**, choose **Nordic Island · v0.3b**, enable **Player & hidden rival sites · v0.3e (islands)**, enter **18** and choose **Generate World**. The checkbox explicitly selects generator version `fjordside-island-v0.3e`. Leaving it off preserves the accepted macro-only r2 generation. Existing gameplay routes still use their existing presets; this slice does not switch new campaigns to islands.
+Open `/environment-lab`, expand **Settings**, choose **Nordic Island · gentler highlands**, enable **Player & hidden rival sites · v0.3e-r2 (islands)**, enter **18** and choose **Generate World**. The checkbox now explicitly selects generator version `fjordside-island-v0.3e-r2`, combining the unchanged site rules with the [approved follow-up scope for gentler highlands](MACRO-ISLAND-V03B.md#gentler-highlands--owner-follow-up-to-137). Leaving it off generates macro-only r3 terrain. The earlier `fjordside-island-v0.3e` version remains explicitly reproducible and old imports retain their exact field. Existing gameplay routes still use their existing presets; this slice does not switch new campaigns to islands.
 
 Choose **Settlement sites & sightlines** with **Island overhead** or **Island oblique**. Green marks player construction bounds/foundations, pink marks the rival reservation/foundation feasibility, gold marks the neutral-space buffers, cyan marks the natural access route and measured berth, and orange marks sightlines stopped by terrain. Grey crosses mark other buildable candidate anchors. Every measured ray is saved; the overlay shows approximately eighteen representative rays to remain readable.
 
