@@ -1,67 +1,57 @@
 # Pillagers — Gameplay-first architecture
 
-Status: canonical design direction.
+**Status:** Canonical architecture, revised **2026-10-13** under [GP-007](../../GAME-PRINCIPLES.md#gp-007--fjordside-is-the-single-3d-player-facing-game) and [#140](https://github.com/sidesliders1983/Pillagers/issues/140).
 
-## Principle
+## Permanent principle
 
-Pillagers is primarily a simulation/strategy game. The 3D Fjord is a presentation layer, not the owner of gameplay truth.
+Pillagers is primarily a simulation/strategy game. **Simulation Core owns game truth; Three.js only presents it.**
 
 > Three.js is a consumer of Pillagers, not the place where Pillagers lives.
 
-The game must remain playable and deterministic without the 3D renderer.
+The canonical game must remain **deterministically executable without a renderer** for automated tests, repeated seeds, batch playtests and consistency checks. This is **not** a requirement to maintain a second player-facing 2D game.
 
-## Architecture
+## Current player-facing architecture
 
 ```text
-                    Simulation Core
-                    source of truth
-                    /            \
-                   /              \
-          Gameplay Lab          Fjord World
-          text / cards           Three.js
-                   \              /
-                    \            /
-                     Gameplay UI
+                 Simulation Core
+              deterministic game truth
+       (commands, time, rules, events, saves)
+                         │
+               Campaign / Session
+         shared management, lore, save/load
+                         │
+                Fjordside 3D Game
+       Three.js projection + gameplay interface
+
+          ┌───────────────────────────────┐
+          │ Developer labs / headless QA  │
+          │ No second player-facing game  │
+          └───────────────────────────────┘
 ```
 
 ### Hard boundaries
 
-- Simulation Core must not depend on Three.js.
-- Gameplay Lab must not depend on Three.js.
-- Rendering/animation state never owns canonical gameplay state.
-- Player actions become explicit Simulation Commands.
-- Same seed + same commands => same simulation result regardless of presentation.
-- Deleting/disabling the renderer must not change Winter 800 -> Winter N outcomes.
+- Simulation Core has **no Three.js or browser UI dependency**.
+- Every player action becomes an explicit, validated Simulation Command.
+- Rendering, visibility/culling, animation and visual entity positions never own canonical gameplay state.
+- Same seed + same commands/ticks => same simulated outcomes with or without the 3D renderer.
+- Existing state, lineage, occupation, housing, mortality, cattle, weather, economics and Lore/event authority remain unaffected by removal of a presentation surface.
+- Session time continues only under the existing rules while the player is present; this is not a switch to offline/persistent-world progression.
+- Preserve import/export, old saves and safe legacy routes during a staged migration.
 
-## Gameplay Lab
+## Status of the original text/card Gameplay Lab and 2D settlement board
 
-Before deeper 3D production, prove the core loop in a text/card-first web interface.
+The original plan in [#23](https://github.com/sidesliders1983/Pillagers/issues/23) was **correct for the initial prototyping phase**: a text-first Gameplay Lab proved the core game loop, and the [#49](https://github.com/sidesliders1983/Pillagers/issues/49) isometric board offered a second presentation. That sequencing is **historical, not a current product requirement**.
 
-Minimum surfaces:
-- settlement header: Winter, population, Food, Materials, trends;
-- Household/Building cards;
-- Person cards;
-- Lineage;
-- Event log;
-- direct actions for occupations, caregivers, housing and workplace upgrades;
-- advance Winter.
+**Approved change, 2026-10-13:** `/fjord-play` becomes the sole player-facing game. `/play` and `/gameplay-lab` stop receiving gameplay UI features and are retired after dependency isolation, UI parity checks and save compatibility tests. The specialized Environment/Character/Asset labs, headless mechanics tests and one-off developer diagnostics continue.
 
-Resources are integer stocks. Productivity changes work/time required to create the next integer resource unit rather than creating fractional Food/Materials.
+### Implementation seam (review current repository)
 
-The work model should remain compatible with fast headless `advanceWinter()` and later continuous presentation.
+Currently `src/fjord-play/FjordPlay.ts` reuses `src/play/SettlementPanel.ts`, `src/play/SettlementBrowser.ts`, `src/play/SharedSettlement.ts`, and `src/gameplay-lab/GameplaySession.ts` / `updateView.ts`. These contain reusable **non-2D gameplay/session services**, despite folder names. Extract or preserve such dependencies before deleting the obsolete view implementation; avoid duplicated state owners.
 
-## Fjord
+The current `src/main.ts` also distinguishes the `/` standalone world prototype from `/fjord-play`. Promoting one player route must not remove developer access or unintentionally start a new campaign for returning users.
 
-The current Fjord remains valuable as the immersive view of canonical state.
-
-Examples:
-- a Farm upgrade changes simulation state first, then the Fjord renders the richer Farm;
-- building collapse is decided by the Simulation Core, then visualized;
-- CharacterDNA determines persona identity; 3D represents it;
-- work animations visualize production but do not determine it.
-
-See issue #23 for the implementation brief.
-
+See [#140](https://github.com/sidesliders1983/Pillagers/issues/140) for the gated migration: documentation freeze → shared-service extraction → 3D entry/management parity → legacy UI removal. Preserve historical source documents for implementation provenance rather than rewriting them as though 2D had never existed.
 
 ## Canonical session-time model
 
@@ -94,7 +84,7 @@ Canonical simulation time remains:
 - age and long-term history are measured in Winters;
 - real-world seconds per Winter are **not canonical**.
 
-The Gameplay Lab should expose Winter duration / simulation speed as a development parameter so different rhythms can be playtested without changing simulation rules.
+The 3D Fjord gameplay controls (and headless test configuration) should expose Winter duration / simulation speed as a development parameter so different rhythms can be playtested without changing simulation rules.
 
 Initial test range:
 
