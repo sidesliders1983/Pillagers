@@ -62,7 +62,8 @@ export class RTSCameraController {
                 this.targetElevation = MathUtils.clamp(
                     this.targetElevation + event.movementY * settings.elevationSensitivity,
                     settings.minElevation, settings.maxElevation);
-            } else if (this.drag && this.dragMode === 'pan') {
+            } else if (this.drag && this.dragMode === 'pan' && this.mouseStart &&
+                this.mouseStart.distance >= settings.tapThreshold) {
                 this.pan(-event.movementX * this.distance * .0015,
                     -event.movementY * this.distance * .0015);
             }

@@ -359,7 +359,7 @@ export class FjordPlay {
         const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 400);
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
-        const controller = new RTSCameraController(camera, canvas, 'rotate');
+        const controller = new RTSCameraController(camera, canvas, 'pan');
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
@@ -557,7 +557,7 @@ export class FjordPlay {
         previous = performance.now();
         timer = window.setInterval(tickClock, 500);
         document.querySelector<HTMLButtonElement>('#fjord-export')!.disabled = false;
-        say('Fjord ready. Select a home, resident or animal to manage it. Click or tap empty ground to navigate. Drag to rotate. Pinch to zoom out; spread to zoom in.');
+        say('Fjord ready. Desktop: left-click to select (empty ground clears selection), left-drag to pan, right-drag to rotate, wheel to zoom. Touch: tap empty ground to navigate, drag to rotate, pinch to zoom.');
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
             const quality = (event.target as HTMLSelectElement).value as 'low' | 'standard';
             world!.setQuality(quality);
@@ -569,7 +569,9 @@ export class FjordPlay {
             if (!selected) {
                 this.shared.select(null);
                 refresh();
-                return false;
+                // A desktop left click is exclusively selection/deselection.
+                // Preserve the existing touch tap-on-empty-ground navigation.
+                return pointerType === 'mouse';
             }
             select(selected.kind, selected.id);
             return true;
