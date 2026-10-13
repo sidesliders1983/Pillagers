@@ -92,6 +92,22 @@ Begin with an optional **quarrel, mediation and reconciliation** pilot affecting
 
 Detailed direction: [Personality-driven Life Events](docs/gameplay/spec/12-PERSONALITY-LIFE-EVENTS.md). First test: [#120](https://github.com/sidesliders1983/Pillagers/issues/120). Exact formulas, rates and default adoption require measured review.
 
+## GP-007 — Fjordside is the single 3D player-facing game
+
+**Status: Owner-approved product/architecture direction, 2026-10-13. Implementation tracked in [#140](https://github.com/sidesliders1983/Pillagers/issues/140).**
+
+> **One living 3D game, one headless source of truth.**
+
+Fjordside's **3D settlement experience** is the only player-facing game going forward. The older isometric `/play` board and text/card `/gameplay-lab` served their prototyping purpose and are being retired **as player interfaces**. New gameplay interaction and UX work targets the shared 3D experience; do not maintain two complete gameplay presentations.
+
+**This changes presentation strategy, not simulation authority.** The deterministic headless Simulation Core remains the canonical owner of residents, families, economy, buildings, livestock, weather, social rules, simulation time, events, all Simulation Commands and persistence. 3D scenes, movement animation, rendering and camera visibility must never determine canonical simulation outcomes. Keep renderer-free regression tests, reproducible fast-forward/batch QA and debugging tools.
+
+Preserve the player-facing functionality already delivered: resident selection, occupation/housing/care management, seasons and pause/speed controls, lineage/Family Tree, personal history, Clan Book, import/export and saved campaigns. Extract any reusable campaign/session/management helpers out of legacy UI folders **before** removing their former views. Old browser links and saves must transition without accidental new campaign creation, hidden time advancement, data loss or changes to saved world geography.
+
+Specialist developer Environment Lab, Character Lab, Asset Lab and headless inspection/testing tools **remain supported**; retirement applies to duplicate player-facing 2D presentation, not developer instrumentation. No automatic offline progression is introduced by this decision; the established session-time rule remains.
+
+**Historical clarification:** the text-first implementation ordering in [#23](https://github.com/sidesliders1983/Pillagers/issues/23) is superseded only as a *current product UI* strategy. Its headless-core, determinism and command boundaries remain foundational. Refer to [the current architecture](docs/gameplay/GAMEPLAY-FIRST-ARCHITECTURE.md) and [consolidation issue #140](https://github.com/sidesliders1983/Pillagers/issues/140) for migration gates.
+
 ## Scope and implementation status
 
 The calendar and age wording above are approved design decisions. They do not imply that the current code already implements them.
@@ -117,4 +133,4 @@ These are proposals, not requirements for Codex to implement automatically:
 
 ## Maintaining these principles
 
-When implementing time-related features, lore, cultural life, cohesion or personality-driven life events, check them against GP-001 through GP-006 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
+When implementing time-related features, lore, cultural life, cohesion or personality-driven life events, check them against GP-001 through GP-007 and keep feature documentation consistent. Distinguish approved principles from proposals and temporary prototype settings. Change an approved principle only when the user explicitly revises that design decision.
