@@ -1,11 +1,21 @@
 # Pillagers — Core Gameplay Principles v0.1
 
 > **Status:** Canonical gameplay foundation  
-> **Last aligned with GAME-PRINCIPLES.md:** 2026-10-02
+> **Last aligned with GAME-PRINCIPLES.md:** 2026-10-13
 >
 > This document defines the core gameplay contract for Pillagers. Individual mechanics may evolve, but new systems should reinforce these principles rather than work around them.
 >
 > `GAME-PRINCIPLES.md` is the authority for approved cross-cutting decisions such as calendar wording, lore constraints, platform direction and settlement terminology. This document explains how those decisions fit together as gameplay.
+
+---
+
+# Current presentation delivery policy — 3D-first (approved 2026-10-13)
+
+This gameplay contract remains in force. **Only its player-facing presentation strategy has changed:** [GP-007](../GAME-PRINCIPLES.md#gp-007--fjordside-is-the-single-3d-player-facing-game) makes the **Fjordside 3D game (`/fjord-play`)** the sole current player experience. The former isometric `/play` board and text-first `/gameplay-lab` served as prototypes; no new player-facing features are to be built for them. Retire their UIs after [#140](https://github.com/sidesliders1983/Pillagers/issues/140)'s save/management-parity gates.
+
+**Gameplay principles do not move into the renderer.** Simulation Core retains all commands and authoritative resident/world state, deterministic Winters, family/lore history, economy, livestock and saved campaigns. Retain headless testing, simulation batch tools, Environment/Character/Asset developer labs and reusable campaign/session, management, lore and view utilities currently imported from 2D-named directories until safely moved. This is **not** an online/offline simulation change.
+
+For delivery prioritization, see the [updated active roadmap](gameplay/GAME-SIMULATOR-ROADMAP.md). The original mechanics sequence in section 23 remains useful conceptually; it is not a request to restore a parallel 2D game UI.
 
 ---
 
