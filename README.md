@@ -118,3 +118,7 @@ English is the default language for all user-facing UI: labels, buttons, help te
 
 
 
+
+### Hidden settlement site review
+
+Environment Lab can explicitly enable **Player & hidden rival sites · v0.3e** for the Nordic Island preset. Use seed **18** for the initial accepted demonstration. See [the placement contract and limitations](docs/SETTLEMENT-SITES-V03E.md) and [the review gallery](docs/qa/settlement-sites/review.html). This reserves CPU geography only; existing gameplay defaults and saved worlds remain unchanged. The initial strict batch accepts 1 of 10 seeds and retains explicit rejection evidence for the other nine.

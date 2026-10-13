@@ -1,3 +1,5 @@
+import { validateSavedSites } from './ValidateSiteSelection';
+import { settlementGeneratorVersion } from './SettlementSites';
 import { normalizeWorldConfig } from './GenerateWorld';
 import { freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, WorldBlueprint } from './WorldBlueprint';
 import { natureAssetIds } from '../config/NatureAssets';
@@ -17,7 +19,8 @@ export function parseWorld(text: string): WorldBlueprint {
     const world = saved.blueprint as WorldBlueprint;
     if (world?.config?.generatorVersion !== generatorVersion &&
         world?.config?.generatorVersion !== islandGeneratorVersion &&
-        world?.config?.generatorVersion !== firstIslandGeneratorVersion) {
+        world?.config?.generatorVersion !== firstIslandGeneratorVersion &&
+        world?.config?.generatorVersion !== settlementGeneratorVersion) {
         throw new Error('Unsupported generator version: ' + world?.config?.generatorVersion);
     }
     const requireValid = (condition: boolean) => {
@@ -31,9 +34,9 @@ export function parseWorld(text: string): WorldBlueprint {
         !!value && Number.isFinite(value.x) && Number.isFinite(value.z) &&
         Math.abs(value.x) <= halfWidth && Math.abs(value.z) <= halfDepth;
     requireValid(Object.entries(normalized).every(([key, value]) =>
-        world.config[key as keyof typeof normalized] === value));
+        JSON.stringify(world.config[key as keyof typeof normalized]) === JSON.stringify(value)));
     const maximumHeight = normalized.preset === 'island' ? 120 : 100;
-    const minimumHeight = normalized.generatorVersion === islandGeneratorVersion ? -20 : -10;
+    const minimumHeight = (normalized.generatorVersion === islandGeneratorVersion || normalized.generatorVersion === settlementGeneratorVersion) ? -20 : -10;
     const terrain = world.terrain;
     requireValid(!!terrain && terrain.columns === columns && terrain.rows === rows && terrain.spacing === 2);
     requireValid(terrain.bounds?.minX === -halfWidth && terrain.bounds.maxX === halfWidth &&
@@ -82,7 +85,7 @@ export function parseWorld(text: string): WorldBlueprint {
     const site = world.settlement;
     requireValid(!!site && point(site.center) && Number.isFinite(site.elevation));
     requireValid(!!site.bounds && Object.values(site.bounds).every(Number.isFinite));
-    requireValid(Array.isArray(site.buildings) && site.buildings.length === (world.config.preset === 'island' ? 0 : 6) &&
+    requireValid(Array.isArray(site.buildings) && site.buildings.length === (world.config.preset === 'island' && !world.siteSelection?.selected ? 0 : 6) &&
         site.buildings.every(placement => point(placement) && typeof placement.id === 'string' &&
             buildings.some(source => source.key === placement.key && ('terrainKey' in source ? source.terrainKey : undefined) === placement.terrainKey &&
                 source.rotation === placement.rotation && source.halfWidth === placement.halfWidth &&
@@ -99,5 +102,7 @@ export function parseWorld(text: string): WorldBlueprint {
         Array.isArray(world.validation.reasons) && world.validation.reasons.every(reason => typeof reason === 'string') &&
         ['connectedBuildings','connectedArea','maximumFoundationSlope','minimumFoundationElevation','score']
             .every(key => Number.isFinite(world.validation[key as keyof typeof world.validation])));
+    if (normalized.generatorVersion === settlementGeneratorVersion) validateSavedSites(world, requireValid);
+    else requireValid(world.siteSelection === undefined && world.rivalSite === undefined);
     return freezeBlueprint(world);
 }

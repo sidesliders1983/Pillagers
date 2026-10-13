@@ -62,6 +62,9 @@ export function planNature(world: Landscape) {
     const biomeAt = (x: number, z: number) => cells[Math.round((z-terrain.bounds.minZ)/2)*terrain.columns+
         Math.round((x-terrain.bounds.minX)/2)];
     const placementPlan: AssetPlacement[] = [];
+    const reservedFoundations = [...world.settlement.buildings, ...(world.rivalSite?.foundations ?? [])];
+    const criticalRoutes = [...world.settlement.accessPaths,
+        ...(world.siteSelection?.connection.length ? [world.siteSelection.connection] : [])];
     for (const assetId of natureAssetIds) {
         const tree = assetId.includes('conifer'), deciduous = assetId.includes('deciduous');
         const rock = assetId.includes('rock') || assetId.includes('boulder');
@@ -88,8 +91,8 @@ export function planNature(world: Landscape) {
             if (y < world.waterLevel+.15 || surface.slopeAt(x, z) > (rock ? .55 : .4)) continue;
             if ([[-1,0],[1,0],[0,-1],[0,1]].some(([dx,dz]) =>
                 surface.surfaceHeightAt(x+dx*clearance, z+dz*clearance) < world.waterLevel+.1)) continue;
-            if (world.settlement.buildings.some(b => buildingDistance(x, z, b) < clearance)) continue;
-            if (world.settlement.accessPaths.some(path => path.some(p =>
+            if (reservedFoundations.some(b => buildingDistance(x, z, b) < clearance)) continue;
+            if (criticalRoutes.some(path => path.some(p =>
                 Math.hypot(p.x-x, p.z-z) <= clearance+.65))) continue;
             if (!grass && placementPlan.some(p => !p.assetId.includes('grass') &&
                 Math.hypot(p.x-x, p.z-z) < Math.max(.7, (p.clearance+clearance)*.65))) continue;

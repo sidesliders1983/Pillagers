@@ -1,3 +1,6 @@
+import { settlementGeneratorVersion } from '../world-generation/SettlementSites';
+import { settlementStartingViews } from '../world-generation/SiteNavigation';
+import { createSettlementSiteOverlay, renderSettlementSiteDiagnostics } from './SettlementSiteDiagnostics';
 import { inspectMacroIsland } from '../world-generation/MacroIsland';
 import { createMacroOverlay, disposeMacroOverlay } from './MacroOverlay';
 import { Group, Object3D, InstancedMesh, Mesh, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
@@ -29,6 +32,7 @@ type Preview = {
     root: Group;
     terrain: Mesh;
     macroOverlay: Group;
+    siteOverlay: Group;
     nature: Group;
     village: Group;
     water: FjordWater | FjordsideWater;
@@ -74,6 +78,7 @@ export class LabWorldGeneration {
                     <option value="rocky-inlet">Rocky Inlet</option>
                     <option value="island">Nordic Island · v0.3b</option>
                 </select></label>
+                <label><input id="world-site-planning" type="checkbox">Player &amp; hidden rival sites · v0.3e (islands)</label>
                 <label><input id="world-sand-study" type="checkbox">Sand study · approved ReferenceWater</label>
                 <label>Standard sand<select id="world-sand-resolution" disabled>
                     <option value="256">256 px · baseline</option>
@@ -87,13 +92,14 @@ export class LabWorldGeneration {
                 <label>Diagnostic overlay<select id="world-overlay">
                     <option value="none">Source materials</option>
                     <option value="form">Bare terrain form</option>
+                    <option value="sites">Settlement sites &amp; sightlines</option>
                     <option value="macro">Macro regions &amp; coast</option>
                     <option value="elevation">Elevation</option>
                     <option value="biomes">Biomes</option>
                     <option value="walkability">Walkability</option>
                 </select></label>
                 <p>Lab proposal only · source assets preserved · production integration awaits review.</p>
-            </section><pre id="world-generation-status" role="status">Reference Fjordside · seed 1983</pre>
+            </section><pre id="world-generation-status" role="status">Reference Fjordside · seed 1983</pre><details id="world-sites-diagnostics" hidden></details>
         `);
         this.status = document.querySelector('#world-generation-status')!;
         this.seed = document.querySelector('#world-seed')!;
@@ -102,6 +108,7 @@ export class LabWorldGeneration {
         this.sandStudy = document.querySelector('#world-sand-study')!;
         this.sandResolution = document.querySelector('#world-sand-resolution')!;
         document.querySelector('#environment-camera')!.insertAdjacentHTML('beforeend',
+            '<option value="player-start" disabled>Player starting view</option>' +
             '<option value="island-overhead" disabled>Island overhead</option>' +
             '<option value="island-oblique" disabled>Island oblique</option>' +
             '<option value="sand-close" disabled>Sand shore close-up</option>' +
@@ -173,7 +180,10 @@ export class LabWorldGeneration {
         let next: Preview | null = null, grounds: Grounds | null = null;
         try {
             const world = saved ?? generateWorld({ seed: Number(this.seed.value),
-                preset: this.preset.value as WorldPreset, conifers: this.coniferSource() });
+                preset: this.preset.value as WorldPreset, conifers: this.coniferSource(),
+                ...(this.preset.value === 'island' &&
+                    (document.querySelector('#world-site-planning') as HTMLInputElement).checked ?
+                    { generatorVersion: settlementGeneratorVersion } : {}) });
             const macro = world.config.preset === 'island' ? inspectMacroIsland(world) : null;
             const generationMs = performance.now()-start;
             const tier = this.quality();
@@ -197,8 +207,10 @@ export class LabWorldGeneration {
             root.name = 'Generated Fjordside proposal';
             const macroOverlay = createMacroOverlay(world, macro?.sitePair ?? [], macro?.terrainSeparation);
             macroOverlay.visible = false;
-            root.add(terrain, nature, village, water.mesh, macroOverlay);
-            next = { root, terrain, macroOverlay, nature, village, water,
+            const siteOverlay = createSettlementSiteOverlay(world);
+            siteOverlay.visible = false;
+            root.add(terrain, nature, village, water.mesh, macroOverlay, siteOverlay);
+            next = { root, terrain, macroOverlay, siteOverlay, nature, village, water,
                 wind: new NatureWind(nature, conifers === 'ez-tree'), actors: [], movement: null };
             if (world.validation.accepted && world.settlement.buildings.length) {
                 for (let i = 0; i < 10; i++) {
@@ -238,7 +250,7 @@ export class LabWorldGeneration {
             this.status.textContent = (world.validation.accepted ? 'PASS' : 'REJECTED') +
                 ' · seed ' + world.config.seed + ' · ' + world.config.preset +
                 ' · ' + world.config.generatorVersion + '\nNormalized parameters: ' + JSON.stringify(world.config) + '\nWater level ' + world.waterLevel +
-                (macro ? 'm · house placement deferred to site selection' :
+                (macro && !world.siteSelection ? 'm · house placement deferred to site selection' :
                     'm · site score ' + world.validation.score + ' · connected buildings ' +
                     world.validation.connectedBuildings + '/6 · connected clearing ' +
                     world.validation.connectedArea + 'm²') + '\nBiomes: ' + JSON.stringify(world.biomes.coverage) +
@@ -254,10 +266,16 @@ export class LabWorldGeneration {
                         macro.terrainSeparation.width.toFixed(1) + 'm wide · walking connection ' +
                         ((macro.terrainSeparation.connection.length - 1) * world.terrain.spacing) + 'm' : '') +
                     (macro.reasons.length ? '\n' + macro.reasons.join('\n') : '') : '');
+            renderSettlementSiteDiagnostics(document.querySelector('#world-sites-diagnostics')!, world);
+            (document.querySelector('#world-site-planning') as HTMLInputElement).checked = !!world.siteSelection;
             this.canvas.dataset.world = JSON.stringify({ seed: world.config.seed,
                 generatorVersion: world.config.generatorVersion, preset: world.config.preset, conifers,
                 validation: world.validation, macro: macro ? { ...macro, candidates: macro.candidates.length,
                     sitePair: macro.sitePair.map(({ cells: _cells, ...site }) => site) } : null, biomeCoverage: world.biomes.coverage,
+                siteSelection: world.siteSelection ? { selected: world.siteSelection.selected,
+                    rivalSite: world.rivalSite ?? null, candidates: world.siteSelection.candidates.length,
+                    exposedRays: world.siteSelection.visibility.exposedRays,
+                    rayCount: world.siteSelection.visibility.rays.length } : null,
                 naturePlacements: world.placementPlan.length, referenceResidents: next.actors.length,
                 bounds: world.terrain.bounds, site: world.settlement.center, waterLevel: world.waterLevel,
                 generationMs, previewPreparationMs: performance.now() - start,
@@ -288,7 +306,7 @@ export class LabWorldGeneration {
         this.sandStudy.disabled = this.generate.disabled;
         this.sandResolution.disabled = this.generate.disabled || !this.active ||
             !this.sandStudy.checked || this.quality() === 'low';
-        for (const view of ['sand-close', 'sand-shore', 'island-overhead', 'island-oblique']) {
+        for (const view of ['sand-close', 'sand-shore', 'island-overhead', 'island-oblique', 'player-start']) {
             (document.querySelector('#environment-camera option[value="' + view + '"]') as
                 HTMLOptionElement).disabled = !this.active;
         }
@@ -355,8 +373,9 @@ export class LabWorldGeneration {
         if (!this.preview || !this.blueprint || !grounds) return;
         const previous = this.preview.terrain;
         const overlay = (document.querySelector('#world-overlay') as HTMLSelectElement).value;
-        const next = createBlueprintTerrain(this.blueprint, grounds.materials, overlay);
+        const next = createBlueprintTerrain(this.blueprint, grounds.materials, overlay === 'sites' ? 'form' : overlay);
         this.preview.macroOverlay.visible = overlay === 'macro';
+        this.preview.siteOverlay.visible = overlay === 'sites';
         this.canvas.dataset.overlay = overlay;
         next.visible = previous.visible;
         this.preview.root.remove(previous);
@@ -443,6 +462,9 @@ export class LabWorldGeneration {
                 target: [targetX,surface.surfaceHeightAt(targetX,targetZ)+6,targetZ]
             };
         }
+        const startView = settlementStartingViews(world).find(p => p.id === 'player-start-camera')!;
+        presets['player-start'] = { position: [startView.x, startView.y, startView.z],
+            target: [x, world.settlement.elevation + 6, z] };
         this.camera.far = world.config.preset === 'island' ? Math.max(1200, extent * 5 * fit) : view.startsWith('island-') ? 500 : 300;
         this.camera.updateProjectionMatrix();
         const preset = presets[view] ?? presets.village;
@@ -479,6 +501,7 @@ export class LabWorldGeneration {
     }
 
     restore() {
+        document.querySelector<HTMLElement>('#world-sites-diagnostics')!.hidden = true;
         this.camera.far = 300;
         this.camera.updateProjectionMatrix();
         this.revision++;
@@ -517,6 +540,7 @@ export class LabWorldGeneration {
         preview.wind.dispose();
         disposeBlueprintTerrain(preview.terrain);
         disposeMacroOverlay(preview.macroOverlay);
+        disposeMacroOverlay(preview.siteOverlay);
         preview.nature.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); });
         for (const actor of preview.actors) actor.model.dispose();
         preview.root.clear();

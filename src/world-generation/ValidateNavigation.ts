@@ -38,6 +38,10 @@ export function validateNavigation(world: WorldBlueprint) {
         !visited.has(index(point.x, point.z))))) {
         reasons.push('A critical approach is obstructed in the final scenery-aware grid.');
     }
+    if (world.siteSelection?.selected && world.siteSelection.connection.some(point =>
+        !visited.has(index(point.x, point.z)))) {
+        reasons.push('The reserved rival connection is obstructed in the final scenery-aware grid.');
+    }
     return { ...world.validation, accepted: reasons.length === 0, reasons, connectedArea,
         score: Math.round(100 * world.validation.connectedBuildings / 6 *
             Math.min(1, connectedArea / 3000)) };

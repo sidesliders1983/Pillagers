@@ -1,3 +1,5 @@
+import { planIslandSettlements } from './PlanIslandSettlements';
+import { normalizeSiteRules, settlementGeneratorVersion } from './SettlementSites';
 import { inspectMacroIsland, findNaturalSites } from './MacroIsland';
 import { islandTerrain } from './IslandShape';
 import { islandTerrain as firstIslandTerrain } from './IslandShapeV1';
@@ -22,7 +24,8 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
         throw new Error('Unknown world preset.');
     }
     const version = preset === 'island' ?
-        (request.generatorVersion === firstIslandGeneratorVersion ? firstIslandGeneratorVersion : islandGeneratorVersion) : generatorVersion;
+        (request.generatorVersion === settlementGeneratorVersion ? settlementGeneratorVersion :
+            request.generatorVersion === firstIslandGeneratorVersion ? firstIslandGeneratorVersion : islandGeneratorVersion) : generatorVersion;
     if (request.generatorVersion && request.generatorVersion !== version) {
         throw new Error('Unsupported generator version: ' + request.generatorVersion);
     }
@@ -35,9 +38,13 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
         !Number.isFinite(forestDensity) || forestDensity < .3 || forestDensity > 1.3) {
         throw new RangeError('Relief must be 0.5–1.5 and forest density 0.3–1.3.');
     }
+    if (request.siteRules && version !== settlementGeneratorVersion) {
+        throw new Error('Settlement rules require the settlement-placement generator version.');
+    }
     const extent = preset === 'island' ? 800 : 180;
     return { seed: request.seed, preset, generatorVersion: version, width: extent, depth: extent,
         relief, forestDensity,
+        ...(version === settlementGeneratorVersion ? { siteRules: normalizeSiteRules(request.siteRules) } : {}),
         ...(request.conifers === undefined ? {} : { conifers: request.conifers }) };
 }
 
@@ -124,7 +131,8 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
             }
         }
     }
-    const planned = { ...landscape, ...planSettlement(landscape, center, candidateDry) };
+    const initial = { ...landscape, ...planSettlement(landscape, center, candidateDry) };
+    const planned = config.generatorVersion === settlementGeneratorVersion ? planIslandSettlements(initial) : initial;
     const world = { ...planned, ...planNature(planned) };
     return freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) });
 }
@@ -134,7 +142,9 @@ export function changeWorldConifers(world: WorldBlueprint, conifers: ConiferSour
     const config = normalizeWorldConfig({ ...world.config, conifers });
     const candidateDry = !world.validation.reasons.some(reason =>
         reason.startsWith('No naturally '));
-    const foundation = planSettlement(world, world.settlement.center, candidateDry);
+    const foundation = planSettlement(world, world.settlement.center, candidateDry,
+        world.siteSelection?.selected ? { placements: world.settlement.buildings,
+            bounds: world.settlement.bounds, obstacles: world.rivalSite?.foundations } : undefined);
     const landscape = { ...world, config, navigation: foundation.navigation,
         validation: foundation.validation };
     const planned = { ...landscape, ...planNature(landscape) };
@@ -144,6 +154,6 @@ export function changeWorldConifers(world: WorldBlueprint, conifers: ConiferSour
 function validateGeneratedWorld(world: WorldBlueprint) {
     const navigation = validateNavigation(world);
     const reasons = world.config.preset === 'island' ? [...new Set([...navigation.reasons,
-        ...inspectMacroIsland(world).reasons])] : navigation.reasons;
+        ...inspectMacroIsland(world).reasons, ...(world.siteSelection?.reasons ?? [])])] : navigation.reasons;
     return { ...navigation, accepted: reasons.length === 0, reasons };
 }
