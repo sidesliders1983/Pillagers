@@ -1,12 +1,12 @@
 # Summer founding review — #157
 
-Status: implementation preview; owner visual acceptance and default activation pending. The ordinary new-game default is unchanged. PR #145 (island campaign integration) was merged before this branch.
+Status: owner visually accepted the Summer landing, label and opening passage on 2026-10-13. New Fjord campaigns and both restart choices now use it by default. PR #145 (island campaign integration) was merged before this branch.
 
 ## Reproduce
 
 - [Review page](review.html), [raw first-boundary results](first-boundary.json), [browser evidence](browser.json).
-- Open /fjord-play?start=summer&seed=32. Existing sessions are preserved: select Menu → Campaign → New campaign from seed to see the new opening.
-- Run node scripts/qa/measure-summer-founding.mjs and node scripts/qa/check-summer-founding.mjs from the repository root with the preview server on port 5180 (or QA_ORIGIN).
+- Open /fjord-play?seed=32. Existing sessions are preserved: select Menu → Campaign → New campaign from seed to see the new opening.
+- Run node scripts/qa/measure-summer-founding.mjs and node scripts/qa/check-summer-founding.mjs from the repository root with the server on port 5180 (or QA_ORIGIN).
 
 The browser captures use Edge/Chromium. A MutationObserver pauses immediately after readiness for a reproducible opening screenshot; production auto-start remains unchanged. Pre-ready saved clocks stay at 800:500. The ready frame projects Summer, all ordinary terrain/foliage snow amounts are zero, and tents/campfire have zero seasonal snow. Physical iPad and the future #153 cinematic are not claimed as verified.
 
@@ -43,4 +43,4 @@ The HUD uses Summer 800. The annual weather panel explicitly says Year 800 and a
 
 ## Validation status
 
-TypeScript, production build, full character validation (including Lab previews), the forty repeated measurement scenarios, and browser flows passed. The existing build chunk-size advisory remains. The full regression suite and current-head CI are still pending at the time of this report; the PR must remain draft until required checks pass. Default activation remains pending visual acceptance. The unimplemented #153 camera-flight/loading preview is a follow-up dependency, not part of these screenshots.
+TypeScript, production build, full character validation (including Lab previews), the forty repeated measurement scenarios, and browser flows passed. The existing build chunk-size advisory remains. Feature revision 6229b37 passed the full local suite: 745 tests, 744 passed, one existing optional frozen-GLB skip, zero failures; both CI runs also passed. The default-entry activation repeats the browser flows and required CI. See [PR #158](https://github.com/sidesliders1983/Pillagers/pull/158) for the final current-head check results; the PR remains draft while those checks run. The unimplemented #153 camera-flight/loading preview is a follow-up dependency, not part of these screenshots.

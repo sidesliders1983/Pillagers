@@ -44,8 +44,8 @@ export class FjordPlay {
         document.body.innerHTML = '<p role="status">Preparing your island campaign…</p>';
         await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
         const query = new URLSearchParams(location.search);
-        // Preview only until the owner accepts the Summer opening (#157). Loading stays authoritative.
-        const foundingPhase = query.get('start') === 'summer' ? 'summer-800-v1' : undefined;
+        // New and restarted Fjord campaigns arrive in Summer; stored campaigns remain authoritative.
+        const foundingPhase = 'summer-800-v1';
         this.opened = openSettlement('fjord', Number(query.get('seed') ?? 32), foundingPhase);
         this.shared = this.opened.campaign;
         this.session = this.shared.session;

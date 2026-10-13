@@ -2,7 +2,7 @@
 
 ## Activation
 
-The implementation is available for review at `/fjord-play?start=summer`. The normal fresh Fjord entry remains on its existing Winter start until the owner accepts the Summer introduction, as required by #157. On a browser with an active campaign, opening this URL preserves that campaign: use **Menu → Campaign → New campaign from seed** to create the Summer preview. Both restart choices on this URL also opt in.
+The owner accepted the Summer introduction on 2026-10-13 after reviewing the preview. New campaigns and both restart choices in `/fjord-play` now select `summer-800-v1` by default. On a browser with an active campaign, opening the route preserves that campaign: use **Menu → Campaign → New campaign from seed** for a fresh Summer landing. The earlier `?start=summer` review link remains usable but is no longer required.
 
 ## Canonical contract
 
@@ -14,9 +14,9 @@ The first annual boundary at 801:0 occurs after **500 played ticks**. Production
 
 ## Save and entry-point behavior
 
-The phase is an optional versioned Core field. The default headless factory, standalone Gameplay Lab and fresh 2D campaign remain at 800:0. Existing saves without this field retain that baseline; unknown explicit phases are rejected. Import/load never applies the URL option to a saved clock. The current phase survives save/load, explicit 2D ↔ 3D transfer and saved-rule restarts. A new game created in a Summer session retains its selected phase.
+The phase is an optional versioned Core field. The default headless factory, standalone Gameplay Lab and fresh 2D campaign remain at 800:0. Existing saves without this field retain that baseline; unknown explicit phases are rejected. Import/load never replaces a saved clock with the default founding phase. The current phase survives save/load, explicit 2D ↔ 3D transfer and saved-rule restarts. A new game created in a Summer session retains its selected phase.
 
-Fjord new/restart creation passes the explicit phase through the shared session factory. Loading an old campaign on the preview URL leaves it untouched; a subsequent explicit New/Restart action opts in. Geography selection, island recipes and historical worlds are unchanged.
+Fjord new/restart creation passes the explicit phase through the shared session factory. Loading an old campaign leaves it untouched; a subsequent explicit Fjord New/Restart action uses Summer. Geography selection, island recipes and historical worlds are unchanged.
 
 ## Scene and narrative
 
@@ -24,10 +24,10 @@ The normal seasonal projection supplies lighting, ground, foliage, structures an
 
 The frozen opening records a source-backed Summer arrival. The first five-Winter checkpoint is still 805:0, but its observed interval is 4.5 years (800:500 → 805:0). Its complete factual ledger reconciles that shorter interval; quiet prose does not call it five full elapsed years. Later chapter timing and “winters old” ages remain unchanged. Existing published books are not rewritten.
 
-This updates #32's historical Winter-start baseline only for opted-in new campaigns. It does not change the authoritative clock, economy or lifecycle rules.
+This updates #32's historical Winter-start baseline only for new Fjord campaigns. It does not change the authoritative clock, economy or lifecycle rules.
 
 ## Dependency on #153
 
 The cinematic top-down loading sequence and camera flight in #153 have not been implemented. This slice establishes the canonical phase and verifies the existing loading/first-scene path. #153 must consume this actual saved phase for preview and arrival, retain the loading pause, and reveal no hidden CPU settlement details. No claim of cinematic acceptance is made here.
 
-See [first-boundary measurements and browser review](qa/summer-founding/report.md). Balance changes and default activation require their own explicit acceptance; historical reports retain their original settings.
+See [first-boundary measurements and browser review](qa/summer-founding/report.md). Default activation has owner approval; balance changes still require separate acceptance; historical reports retain their original settings.

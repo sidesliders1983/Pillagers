@@ -39,6 +39,6 @@ Local saves and 2D ↔ 3D handoffs use this same compact format. Import/new/rest
 
 See [browser evidence and QA](qa/fjord-island/report.md). Historical capacity, terrain and material measurement reports retain their original scope and values.
 
-## Summer founding preview (#157)
+## Summer founding start (#157)
 
-New 3D campaigns can explicitly select `summer-800-v1`: Summer 800, tick 500, initialized directly with 15 Food and 5 Materials. The first full annual reckoning follows after 500 played ticks, with unchanged annual consumption and risk rules. Headless/standalone 2D defaults and existing saves retain their original time. Both Fjord restart choices use the selected phase; no pre-simulation is performed. The preview awaits owner visual acceptance before default activation. See [Summer founding rules, compatibility and QA](SUMMER-800-START.md).
+New Fjord 3D campaigns explicitly select `summer-800-v1`: Summer 800, tick 500, initialized directly with 15 Food and 5 Materials. The first full annual reckoning follows after 500 played ticks, with unchanged annual consumption and risk rules. Headless/standalone 2D defaults and existing saves retain their original time. Both Fjord restart choices use the selected phase; no pre-simulation is performed. The owner approved this as the new Fjord default on 2026-10-13. See [Summer founding rules, compatibility and QA](SUMMER-800-START.md).

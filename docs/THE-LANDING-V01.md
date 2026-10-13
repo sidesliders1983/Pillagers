@@ -89,6 +89,6 @@ The lower-level Landing factory retains its 30-Food default for CPU starts and h
 
 The population-continuity study observes current mortality, weather and cattle lifecycle through annual Core decisions. Additional fertility, mortality or feeding variants are QA proposals only; they do not change production defaults or migrate campaigns.
 
-## Summer founding preview (#157)
+## Summer founding start (#157)
 
-New 3D campaigns can explicitly select `summer-800-v1`: Summer 800, tick 500, initialized directly with 15 Food and 5 Materials. The first full annual reckoning follows after 500 played ticks, with unchanged annual consumption and risk rules. Headless/standalone 2D defaults and existing saves retain their original time. Both Fjord restart choices use the selected phase; no pre-simulation is performed. The preview awaits owner visual acceptance before default activation. See [Summer founding rules, compatibility and QA](SUMMER-800-START.md).
+New Fjord 3D campaigns explicitly select `summer-800-v1`: Summer 800, tick 500, initialized directly with 15 Food and 5 Materials. The first full annual reckoning follows after 500 played ticks, with unchanged annual consumption and risk rules. Headless/standalone 2D defaults and existing saves retain their original time. Both Fjord restart choices use the selected phase; no pre-simulation is performed. The owner approved this as the new Fjord default on 2026-10-13. See [Summer founding rules, compatibility and QA](SUMMER-800-START.md).

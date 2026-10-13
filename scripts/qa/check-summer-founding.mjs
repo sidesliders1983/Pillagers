@@ -33,7 +33,7 @@ await page.addInitScript(() => {
     }).observe(document, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['data-ready', 'data-time'] });
 });
 try {
-    await page.goto(origin + '/fjord-play?seed=32&start=summer', { waitUntil: 'domcontentloaded' });
+    await page.goto(origin + '/fjord-play?seed=32', { waitUntil: 'domcontentloaded' });
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
     const ready = await page.evaluate(() => window.readyEvidence);
     assert.equal(ready.season, 'Summer');
@@ -95,7 +95,7 @@ try {
         assert.deepEqual((await stored()).campaign, state);
         assert.equal(await page.locator('#fjord-run').textContent(), 'Start');
     }
-    flows.push('Preview URL leaves legacy tick 123 and Summer tick 700 imports exactly as saved, paused.');
+    flows.push('Default Fjord entry leaves legacy tick 123 and Summer tick 700 imports exactly as saved, paused.');
     await closeBook();
     const beforeTransfer = (await stored()).campaign;
     await menu();
