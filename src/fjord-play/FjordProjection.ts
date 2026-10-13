@@ -1,3 +1,4 @@
+import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
 export { settlementCampfire } from './SettlementCampfire';
 import { housingName } from '../simulation/HousingNames';
@@ -73,11 +74,20 @@ export function geographyIdentity(world: WorldBlueprint) {
     geographyIds.set(world, identity);
     return identity;
 }
-export function createFjordLayout(world: WorldBlueprint, mooring?: FjordTransform): FjordLayout {
+export function createFjordLayout(world: WorldBlueprint, mooring?: FjordTransform, campaignSeed = world.config.seed): FjordLayout {
     if (!world.validation.accepted)
         throw new Error('Fjord geography must be validated.');
     const harbor = world.settlement.harbor!;
-    return { version: 'fjord-layout-v2', seed: world.config.seed, geographyId: geographyIdentity(world),
+    const berth = campaignIslandPlan(world)?.berth;
+    if (!mooring && berth) {
+        // Layout v2 retains a faering anchor. Invert the existing longship offset so
+        // the rendered hull lands exactly in the validated, full-sized island berth.
+        const sine = Math.sin(berth.rotation), cosine = Math.cos(berth.rotation);
+        mooring = { x: berth.center.x - sine * 3.5 - cosine * 4.5,
+            z: berth.center.z - cosine * 3.5 + sine * 4.5,
+            y: world.waterLevel + .15, rotation: berth.rotation, scale: 1 };
+    }
+    return { version: 'fjord-layout-v2', seed: campaignSeed, geographyId: geographyIdentity(world),
         plots: {}, points: {}, mooringResolved: Boolean(mooring), mooring: mooring ??
             { x: harbor.x, y: world.waterLevel + .15, z: harbor.z - 6, rotation: 0, scale: 1 } };
 }
@@ -98,12 +108,15 @@ function longshipBerth(anchor: FjordTransform): FjordTransform {
 
 export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
     const surface = createBlueprintSurface(world);
+    const island = campaignIslandPlan(world);
+    if (island && !island.plots.some(q => q.x === p.x && q.z === p.z &&
+        q.halfWidth === p.halfWidth && q.halfDepth === p.halfDepth)) return false;
     return fitsBuildingFoundation(surface, p) &&
         Math.abs(p.y - surface.surfaceHeightAt(p.x, p.z)) < .000001;
 }
 /** Pure presentation: all gameplay facts come from canonical public inspection. */
 export function projectFjordSettlement(state: SimulationState, world: WorldBlueprint, previous: FjordLayout) {
-    if (state.seed !== world.config.seed || previous.seed !== state.seed ||
+    if ((!campaignIslandPlan(world) && state.seed !== world.config.seed) || previous.seed !== state.seed ||
         previous.geographyId !== geographyIdentity(world) || previous.version !== 'fjord-layout-v2')
         throw new Error('Campaign, geography and presentation identities do not match.');
     const layout = structuredClone(previous);
@@ -143,10 +156,10 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const center = campfire.transform;
     let candidates = plotCandidates.get(world);
     if (!candidates) {
-        candidates = [];
+        candidates = campaignIslandPlan(world)?.plots.map(p => ({ x: p.x, z: p.z })) ?? [];
         // Four columns and three rows around the middle place fit the validated
         // clearing, including ten separate founding households and future upgrades.
-        for (let row = -10; row <= 10; row++)
+        for (let row = -10; !campaignIslandPlan(world) && row <= 10; row++)
             for (let column = -10; column <= 10; column++) {
                 const x = center.x + 8.5 + column * 17, z = center.z + row * 17;
                 if (x >= world.terrain.bounds.minX + 8 && x <= world.terrain.bounds.maxX - 8 &&
@@ -203,7 +216,10 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                     x: preferred.x + Math.cos(angle * Math.PI / 4) * radius,
                     z: preferred.z + Math.sin(angle * Math.PI / 4) * radius
                 });
-        const point = options.find(p => permitted(p) &&
+        const bounds = world.settlement.bounds;
+        const point = options.find(p => (!campaignIslandPlan(world) ||
+            p.x >= bounds.minX + 1 && p.x <= bounds.maxX - 1 &&
+            p.z >= bounds.minZ + 1 && p.z <= bounds.maxZ - 1) && permitted(p) &&
             Math.hypot(p.x - center.x, p.z - center.z) > campfire.obstacleRadius + 1 &&
             surface.surfaceHeightAt(p.x, p.z) > world.waterLevel + .25 &&
             surface.slopeAt(p.x, p.z) <= suitability.walkingSlope &&

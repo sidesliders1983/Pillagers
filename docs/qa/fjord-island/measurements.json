@@ -1,0 +1,59 @@
+{
+  "timingContext": "Diagnostic local run; concurrent validation may affect timings. No frame-time acceptance threshold.",
+  "rows": [
+    {
+      "campaignSeed": 32,
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "plots": 12,
+      "maximumAdjustment": 0.58333420753479,
+      "access": {
+        "centerDistance": 328.5665838152139,
+        "reserveGap": 180.2,
+        "campRoute": 78,
+        "rivalRoute": 776,
+        "minimumDepth": 0.9383558082580566
+      },
+      "foundingHouseholds": 10,
+      "foundingResidents": 10,
+      "foundingCattle": 3,
+      "convertedHomes": 10,
+      "connectedHomePaths": 10,
+      "saveBytes": 78335,
+      "preparationMs": 28109.8555,
+      "repeat": true,
+      "saveLoad": true,
+      "coreUnchanged": true
+    },
+    {
+      "campaignSeed": 33,
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 7
+      },
+      "plots": 13,
+      "maximumAdjustment": 0.5971007347106934,
+      "access": {
+        "centerDistance": 197.36261044078233,
+        "reserveGap": 42.760752988744116,
+        "campRoute": 84,
+        "rivalRoute": 270,
+        "minimumDepth": 0.6210556077957153
+      },
+      "foundingHouseholds": 10,
+      "foundingResidents": 10,
+      "foundingCattle": 3,
+      "convertedHomes": 10,
+      "connectedHomePaths": 10,
+      "saveBytes": 76657,
+      "preparationMs": 24329.502699999997,
+      "repeat": true,
+      "saveLoad": true,
+      "coreUnchanged": true
+    }
+  ]
+}

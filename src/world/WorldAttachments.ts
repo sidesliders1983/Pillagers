@@ -1,3 +1,4 @@
+import { campaignIslandPlan } from '../fjord-play/CampaignIsland';
 import { Box3, Vector3 } from 'three';
 import type { AssetManager, AssetKey } from '../core/AssetManager';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -187,4 +188,43 @@ export function planReferenceTent(assets: AssetManager, classic: World): WorldAt
     if (!point) throw new Error('No safe Reference tent building plot.');
     return { id: 'tent',key: 'tent',...point,y: surfaceHeightAt(point.x,point.z),
         rotation: Math.PI,scale: 1,halfWidth: size.x/2,halfDepth: size.z/2,support: 'ground' };
+}
+
+/** The campaign ship uses the planner's full hull berth. Place the actual pier
+ * parallel beside it, choosing the side with a supported dry landing. */
+export function planCampaignDock(assets: AssetManager, world: WorldBlueprint): WorldAttachment[] {
+    const berth = campaignIslandPlan(world)?.berth;
+    if (!berth) throw new Error('Campaign island has no validated ship berth.');
+    const model = assets.get('jetty');
+    model.updateMatrixWorld(true);
+    const size = new Box3().setFromObject(model).getSize(new Vector3());
+    const forward = { x: Math.sin(berth.rotation), z: Math.cos(berth.rotation) };
+    const side = { x: Math.cos(berth.rotation), z: -Math.sin(berth.rotation) };
+    const surface = createBlueprintSurface(world), harbor = world.settlement.harbor!;
+    const distance = (berth.center.x - harbor.x) * forward.x +
+        (berth.center.z - harbor.z) * forward.z;
+    const lateral = berth.halfBeam + size.x / 2 + 1;
+    const candidates: { x: number; z: number; support: number; distance: number }[] = [];
+    for (const sign of [-1, 1]) for (let offset = -4; offset <= 4; offset++) {
+        const along = -distance + size.z / 2 - 2 + offset;
+        const x = berth.center.x + forward.x * along + side.x * lateral * sign;
+        const z = berth.center.z + forward.z * along + side.z * lateral * sign;
+        const end = { x: x - forward.x * size.z / 2, z: z - forward.z * size.z / 2 };
+        const support = surface.surfaceHeightAt(end.x, end.z) - world.waterLevel;
+        if (support >= .1 && support <= 1 && surface.slopeAt(end.x, end.z) <= .55)
+            candidates.push({ x, z, support, distance: Math.hypot(end.x - harbor.x, end.z - harbor.z) });
+    }
+    candidates.sort((a, b) => a.distance - b.distance);
+    const pier = candidates[0];
+    if (!pier) throw new Error('The curated island has no supported parallel pier landing.');
+    return [
+        { id: 'boat', key: 'boat',
+            x: berth.center.x - forward.x * 3.5 - side.x * 4.5,
+            z: berth.center.z - forward.z * 3.5 - side.z * 4.5,
+            y: world.waterLevel + .15, rotation: berth.rotation, scale: 1,
+            halfWidth: .75, halfDepth: 2, support: 'marine' },
+        { id: 'jetty', key: 'jetty', x: pier.x, z: pier.z, y: world.waterLevel - .25,
+            rotation: berth.rotation, scale: 1, halfWidth: Math.abs(side.x) * size.x / 2 + Math.abs(forward.x) * size.z / 2,
+            halfDepth: Math.abs(side.z) * size.x / 2 + Math.abs(forward.z) * size.z / 2, support: 'coast' },
+    ];
 }

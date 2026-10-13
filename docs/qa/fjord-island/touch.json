@@ -1,0 +1,24 @@
+{
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "device": "Edge touch emulation; not physical iPad Safari",
+  "island": {
+    "version": "island-pool-v1",
+    "generatorVersion": "fjordside-island-v0.3e-r3",
+    "seed": 7
+  },
+  "homes": 10,
+  "target": {
+    "key": "persona:founder-1",
+    "x": 486.1424142647861,
+    "y": 421.6614438599703
+  },
+  "rotation": true,
+  "spreadZoomIn": true,
+  "pinchZoomOut": true,
+  "selection": true,
+  "canonicalUnchanged": true,
+  "errors": []
+}

@@ -1,5 +1,7 @@
 # Fjordside integration v0.2
 
+> Current island campaign integration: [Fjord island campaigns](FJORD-ISLAND-CAMPAIGNS.md). The owner approved a deterministic curated seed pool for new `/fjord-play` campaigns. Earlier sections below describe the original small Fjord integration; the linked contract covers new island campaigns.
+
 Ordinary Fjordside now generates a fresh Fjord world with a random seed immediately on each load. This startup change was approved on 9 October 2026. Use `/?world=reference` for the original Reference scene. Open `/?worldDev=1` and choose Development tools → Debug for explicit generation and geography save/load. Promoting generated startup does not imply full Northstar visual parity.
 
 ## Creation, save/load and rollback

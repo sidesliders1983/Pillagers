@@ -1,3 +1,4 @@
+import { campaignIslandPlan } from './CampaignIsland';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
@@ -30,16 +31,22 @@ import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
 export class FjordPlay {
-    private opened = openSettlement('fjord', Number(new URLSearchParams(location.search).get('seed') ?? 32));
-    private shared = this.opened.campaign;
-    private session = this.shared.session;
-    private campaign = this.shared.fjord;
+    private opened!: ReturnType<typeof openSettlement>;
+    private shared!: ReturnType<typeof openSettlement>['campaign'];
+    private session!: ReturnType<typeof openSettlement>['campaign']['session'];
+    private campaign!: ReturnType<typeof openSettlement>['campaign']['fjord'];
     private panels = new SettlementPanel();
     private stopped = false;
     private queued = false;
     private lastPanelSelection = '';
     private worldRevision = 0;
     async start() {
+        document.body.innerHTML = '<p role="status">Preparing your island campaign…</p>';
+        await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+        this.opened = openSettlement('fjord', Number(new URLSearchParams(location.search).get('seed') ?? 32));
+        this.shared = this.opened.campaign;
+        this.session = this.shared.session;
+        this.campaign = this.shared.fjord;
         document.title = 'Pillagers · Fjord settlement';
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
@@ -74,6 +81,10 @@ export class FjordPlay {
         const cycleField = document.querySelector<HTMLSelectElement>('#fjord-cycle')!;
         const campaignFields = () => {
             seedField.value = String(this.session.snapshot().seed);
+            const island = campaignIslandPlan(this.campaign.blueprint);
+            document.querySelector('#fjord-geography')!.textContent = island ?
+                'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
+                'Original saved geography';
             weatherField.checked = this.session.snapshot().weather?.config.enabled ?? false;
             cycleField.value = String(this.session.minutesPerWinter);
         };
@@ -289,7 +300,8 @@ export class FjordPlay {
             const completeAutoStart = beginAutoStart();
             action(async () => {
                 say('Creating campaign…');
-                this.shared.newCampaign(Number(seedField.value), weatherField.checked);
+                await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+                this.shared.newCampaign(Number(seedField.value), weatherField.checked, true, 'island-pool-v1');
                 resetProduction();
                 campaignFields();
                 if (world)
@@ -356,7 +368,7 @@ export class FjordPlay {
             }
             previous = performance.now();
         });
-        const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 400);
+        const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 2400);
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
         const controller = new RTSCameraController(camera, canvas, 'rotate');
@@ -445,14 +457,16 @@ export class FjordPlay {
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
-                const view = this.campaign.project(), positions = view.entities.map(e => e.transform).filter(p => p !== null);
+                const view = this.campaign.project(), positions = view.entities.filter(e => e.kind !== 'longship').map(e => e.transform).filter(p => p !== null);
                 if (!positions.length)
                     positions.push({ x: next.center.x, y: next.center.y, z: next.center.z, rotation: 0, scale: 1 });
                 const minX = Math.min(...positions.map(p => p.x)), maxX = Math.max(...positions.map(p => p.x));
                 const minZ = Math.min(...positions.map(p => p.z)), maxZ = Math.max(...positions.map(p => p.z));
                 const x = (minX + maxX) / 2, z = (minZ + maxZ) / 2;
                 const span = Math.max(maxX - minX, maxZ - minZ, 40) + 16;
-                controller.setView({ position: [x + span * .6, span * .75, z - span * .65], target: [x, 2.6, z] });
+                const height = next.movement.heightAt(x, z);
+                controller.setView({ position: [x + span * .6, height + span * .75, z - span * .65],
+                    target: [x, height, z] });
             } finally {
                 sceneLoads--;
                 previous = performance.now();
@@ -630,6 +644,13 @@ export class FjordPlay {
                 canvas.dataset.camera = signature;
             }
             lighting!.update(time, calendar.visualProgress);
+            if (campaignIslandPlan(this.campaign.blueprint)) {
+                // A wider village needs a higher camera. Keep atmospheric distance
+                // relative to its focus, so zooming out cannot whiten the entire settlement.
+                const offset = Math.max(0, camera.position.distanceTo(controller.focus) - 60);
+                lighting!.fog.near += offset;
+                lighting!.fog.far += offset;
+            }
             world!.update(time, lighting, camera);
             renderer.render(scene, camera);
             lastFrameMs = performance.now() - frameStarted;

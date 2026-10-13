@@ -1,3 +1,4 @@
+import type { CampaignGeography } from '../fjord-play/CampaignIsland';
 import { historyIdentity } from '../lore/ClanBook';
 import { projectSelection } from './SelectionPresentation';
 import { applyCommand } from '../simulation/SimulationCore';
@@ -16,9 +17,9 @@ export class SharedSettlement {
     transferring = false;
     readonly session: GameplaySession;
     readonly fjord: FjordCampaign;
-    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true) {
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, geography: CampaignGeography = 'legacy') {
         this.session = new GameplaySession(seed, narrativeSeed, socialEnabled);
-        this.fjord = new FjordCampaign(this.session);
+        this.fjord = new FjordCampaign(this.session, geography);
     }
     get selection(): SettlementSelection {
         return this.fjord.selection as SettlementSelection;
@@ -45,12 +46,10 @@ export class SharedSettlement {
         if (selection && !(identities[selection.kind]?.[selection.id]))
             this.select(null);
     }
-    newCampaign(seed: number, weatherEnabled: boolean, socialEnabled = true) {
+    newCampaign(seed: number, weatherEnabled: boolean, socialEnabled = true, geography?: CampaignGeography) {
         const proposal = new GameplaySession();
         proposal.newCampaign(seed, weatherEnabled, socialEnabled);
-        this.importJSON(proposal.saveJSON());
-        // New campaigns reset all presentation plots, even when their seed repeats.
-        this.fjord.restart(true, weatherEnabled);
+        this.fjord.startCampaign(proposal, geography);
     }
     restart(sameFounders: boolean, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false) {
         this.fjord.restart(sameFounders, weatherEnabled);

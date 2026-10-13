@@ -1,5 +1,7 @@
 # Settlement capacity review - #134 / PR #139
 
+> Current island campaign integration: [Fjord island campaigns](FJORD-ISLAND-CAMPAIGNS.md). The owner approved a deterministic curated seed pool for new `/fjord-play` campaigns. The earlier Lab-only capacity review below remains the record of the pre-integration allocator.
+
 ## Current requirement stays in force
 
 Both regions must fit all six authored reference parcels, including the large Farmyard. No acceptance threshold, asset size, setback, 160m center separation, 40m construction gap, 240m route, harbor requirement or 0.6m cut/fill limit has been relaxed. This review does not authorize a smaller settlement.

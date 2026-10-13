@@ -1,3 +1,4 @@
+import { campaignIslandPlan } from '../fjord-play/CampaignIsland';
 import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
 import type { AssetManager } from '../core/AssetManager';
 import type { WorldLighting } from '../core/WorldLighting';
@@ -15,7 +16,7 @@ import { FjordsideWater } from './FjordsideWater';
 import { BoatFloat } from './BoatFloat';
 import { placeSettlement } from './PlaceSettlement';
 import { blueprintMovement } from './BlueprintMovement';
-import { planWorldAttachments, planReferenceTent, attachmentClearance, initialTentFootprint, WorldAttachment } from './WorldAttachments';
+import { planCampaignDock, planWorldAttachments, planReferenceTent, attachmentClearance, initialTentFootprint, WorldAttachment } from './WorldAttachments';
 import { hearth } from './SettlementLayout';
 import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './BuildingPlot';
 
@@ -59,8 +60,9 @@ export function parseFjordsideSave(text: string): WorldSelection {
 
 /** Production factory: consumes stored geography and never calls the generator. */
 export async function createWorld(assets: AssetManager, selection: WorldSelection) {
+    const island = selection.blueprint && campaignIslandPlan(selection.blueprint);
     const blueprint = selection.mode === 'generated' ?
-        parseWorld(serializeWorld(selection.blueprint!)) : undefined;
+        island ? selection.blueprint : parseWorld(serializeWorld(selection.blueprint!)) : undefined;
     if (selection.mode === 'generated' && !blueprint?.validation.accepted)
         throw new Error('Only a validated WorldBlueprint can be activated in Fjordside.');
     const attachmentVersion = selection.attachmentVersion === 'authored-props-v1' ?
@@ -101,14 +103,15 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
     try {
         if (blueprint) {
             await assets.loadNature();
-            try { grounds = await loadWorldGroundMaterials(selection.quality,selection.anisotropy); }
+            try { grounds = await loadWorldGroundMaterials(selection.quality, selection.anisotropy, 256,
+                island ? 'zoned' : 'baseline', island ? 'cool-grey' : 'source'); }
             catch (error) {
                 if (!canonical) throw error;
                 assets.diagnostics.push('Ground maps unavailable; native terrain material fallback.');
             }
             const surface = createBlueprintSurface(blueprint);
             terrain = createBlueprintTerrain(blueprint,grounds?.materials,'none',
-                canonical ? blueprint.terrain.heights.map(() => 0) : undefined);
+                canonical ? blueprint.terrain.heights.map(() => 0) : undefined, island ? 'zoned' : 'baseline');
             if (blueprint.config.conifers === 'ez-tree') {
                 try { pines = await loadPineModels(assets); }
                 catch (error) { if (!canonical) throw error;
@@ -117,9 +120,10 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             const nature = createNatureFromPlan(assets,blueprint.placementPlan,
                 blueprint.config.seed,pines?.resolve);
             root.add(nature); // Own instance buffers even if a required plot cannot be placed.
-            try { attachments.push(...planWorldAttachments(assets,blueprint,includeTent)); }
+            try { attachments.push(...(island ? planCampaignDock(assets, blueprint) :
+                planWorldAttachments(assets,blueprint,includeTent))); }
             catch (error) {
-                if (!canonical) throw error;
+                if (!canonical || island) throw error;
                 assets.diagnostics.push('Source attachment fit unavailable; only the coastal mooring placeholder remains. '+String(error));
                 const harbor=blueprint.settlement.harbor!;
                 const shore=blueprint.coast.map(s=>({x:(s.a.x+s.b.x)/2,z:(s.a.z+s.b.z)/2})).sort((a,b)=>
@@ -242,7 +246,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             },
             describe() {
                 return { mode: selection.mode,seed: blueprint?.config.seed ?? 1983,
-                    quality,buildings: canonical ? 0 : blueprint ? 6 : 7,
+                    generatorVersion: blueprint?.config.generatorVersion, groundBlending: island ? 'zoned' : 'baseline',
+                    island: island?.recipe, campaignPlots: island?.plots.length, quality,buildings: canonical ? 0 : blueprint ? 6 : 7,
                     populationSource: 'existing-fjordside',groundTier: grounds?.tier ?? 'reference',source: blueprint?.config.conifers ?? 'reference',
                     site: { x: center.x,z: center.z },attachments: attachments.length,
                     tent: attachments.find(item => item.key === 'tent') ?? null,tentPlot,attachmentVersion,
