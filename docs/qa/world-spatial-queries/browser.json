@@ -1,0 +1,142 @@
+{
+  "date": "2026-10-13T14:32:58.434Z",
+  "errors": [],
+  "checks": [
+    "touch query, bounds error, six cell overlays, byte-equivalent world data after queries",
+    "tablet-sized controls, legacy import without regeneration, reference clears query"
+  ],
+  "overlays": [
+    {
+      "overlay": "grid-ground",
+      "elapsedMs": 7073.033000000003,
+      "construction": {
+        "milliseconds": 3426.7000000029802,
+        "textureBytes": 2566404,
+        "spacing": 1,
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.651612903081602,
+        "calls": 1,
+        "triangles": 320008,
+        "geometries": 38,
+        "textures": 98,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "overlay": "grid-movement",
+      "elapsedMs": 5972.712600000006,
+      "construction": {
+        "milliseconds": 3308.39999999851,
+        "textureBytes": 2566404,
+        "spacing": 1,
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.735483871111942,
+        "calls": 1,
+        "triangles": 320008,
+        "geometries": 38,
+        "textures": 98,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "overlay": "grid-buildability",
+      "elapsedMs": 6841.791799999999,
+      "construction": {
+        "milliseconds": 3990.10000000149,
+        "textureBytes": 2566404,
+        "spacing": 1,
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.664516129080326,
+        "calls": 1,
+        "triangles": 320008,
+        "geometries": 38,
+        "textures": 98,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "overlay": "grid-reservations",
+      "elapsedMs": 5999.030099999996,
+      "construction": {
+        "milliseconds": 3316.1999999955297,
+        "textureBytes": 2566404,
+        "spacing": 1,
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.66666666666667,
+        "calls": 1,
+        "triangles": 320008,
+        "geometries": 38,
+        "textures": 98,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "overlay": "grid-slope",
+      "elapsedMs": 5943.669399999999,
+      "construction": {
+        "milliseconds": 3228.3000000044703,
+        "textureBytes": 2566404,
+        "spacing": 1,
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.676666666567325,
+        "calls": 1,
+        "triangles": 320008,
+        "geometries": 38,
+        "textures": 98,
+        "callsIncludeShadows": true
+      }
+    },
+    {
+      "overlay": "grid-aspect",
+      "elapsedMs": 6076.7431,
+      "construction": {
+        "milliseconds": 3370.2999999970198,
+        "textureBytes": 2566404,
+        "spacing": 1,
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "metrics": {
+        "variant": "candidate",
+        "ms": 16.673333333184324,
+        "calls": 1,
+        "triangles": 320008,
+        "geometries": 38,
+        "textures": 98,
+        "callsIncludeShadows": true
+      }
+    }
+  ]
+}

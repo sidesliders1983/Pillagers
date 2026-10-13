@@ -1,0 +1,421 @@
+{
+  "date": "2026-10-13T14:32:36.132Z",
+  "seeds": [
+    17,
+    42,
+    91,
+    1983,
+    1337,
+    18,
+    7,
+    73,
+    256,
+    65537
+  ],
+  "node": "v24.19.0",
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+    "cores": 8,
+    "memoryBytes": 17024413696
+  },
+  "results": [
+    {
+      "seed": 17,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, neutral-buffer, visibility and access rules."
+      ],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2638,
+        "available": 772,
+        "reserved": 115,
+        "zoneWaterMismatches": 51
+      },
+      "initializationMs": 1.927900000000136,
+      "navigationMs": 28.25940000000014,
+      "queryComparisonMs": 819.4645,
+      "heapDeltaObservation": -96488,
+      "storage": {
+        "bucketCount": 351,
+        "shapes": 390,
+        "references": 654,
+        "serializedBytes": 0
+      },
+      "sampleHash": "d34db8478df1aeadf6cf2e63410e0dbeaf0d846cabc4b1324b837838007d80d1",
+      "saveHash": "be6f3e1b4e6578a15b3e1b43b96312e2693f447df3934d6c71d094ee9afc31cf",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 42,
+      "accepted": true,
+      "reasons": [],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 3109,
+        "available": 657,
+        "reserved": 988,
+        "zoneWaterMismatches": 87
+      },
+      "initializationMs": 2.6384000000002743,
+      "navigationMs": 37.86799999999994,
+      "queryComparisonMs": 818.0936000000002,
+      "heapDeltaObservation": -25909224,
+      "storage": {
+        "bucketCount": 471,
+        "shapes": 1590,
+        "references": 2274,
+        "serializedBytes": 0
+      },
+      "sampleHash": "a293d1811f4fcb3b017fb7e9f35fef232ad201c8b506c48ebd58ffc34861491a",
+      "saveHash": "7fab36a72efd31255186a7e12ee7273d38b960b6dcc6f82865898bb7470fd717",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 91,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, neutral-buffer, visibility and access rules."
+      ],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2811,
+        "available": 833,
+        "reserved": 115,
+        "zoneWaterMismatches": 66
+      },
+      "initializationMs": 0.3455000000003565,
+      "navigationMs": 38.45799999999963,
+      "queryComparisonMs": 878.7066999999997,
+      "heapDeltaObservation": -28210528,
+      "storage": {
+        "bucketCount": 342,
+        "shapes": 426,
+        "references": 667,
+        "serializedBytes": 0
+      },
+      "sampleHash": "c256ab11cf096ce52a12f2fbe1c8077a1538fc93f9f2f5cc0a34acce841c3f2b",
+      "saveHash": "cdb2d72b7ad28449b8e437b06d3264bf40605076f500654812300d1738c05785",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 1983,
+      "accepted": true,
+      "reasons": [],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2748,
+        "available": 680,
+        "reserved": 878,
+        "zoneWaterMismatches": 59
+      },
+      "initializationMs": 2.7582000000002154,
+      "navigationMs": 37.44000000000051,
+      "queryComparisonMs": 821.7860000000001,
+      "heapDeltaObservation": -26168856,
+      "storage": {
+        "bucketCount": 441,
+        "shapes": 1466,
+        "references": 2221,
+        "serializedBytes": 0
+      },
+      "sampleHash": "9c4c336ffd3f4f452300e6f709f82b407f5aad65f9d6379c5adffb0a1f4c1772",
+      "saveHash": "c07fa7bcb9ce018ecd77cc04726a313f890af8cced2d25530eab46436c24803a",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 1337,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, neutral-buffer, visibility and access rules."
+      ],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2865,
+        "available": 1104,
+        "reserved": 115,
+        "zoneWaterMismatches": 68
+      },
+      "initializationMs": 0.4583999999995285,
+      "navigationMs": 30.45470000000023,
+      "queryComparisonMs": 679.8868999999995,
+      "heapDeltaObservation": -27651680,
+      "storage": {
+        "bucketCount": 287,
+        "shapes": 317,
+        "references": 520,
+        "serializedBytes": 0
+      },
+      "sampleHash": "fb62e7a7168395639a6b5cb6b36d7d6a084fae853eba7ce0e5447e68da6917b9",
+      "saveHash": "adc04f40dc9f3f8436fca9165f62e47dbf01a9d457ac8b4db3aa20eb26123ce7",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 18,
+      "accepted": true,
+      "reasons": [],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 3198,
+        "available": 797,
+        "reserved": 857,
+        "zoneWaterMismatches": 81
+      },
+      "initializationMs": 0.7364999999990687,
+      "navigationMs": 44.48309999999947,
+      "queryComparisonMs": 798.0340000000015,
+      "heapDeltaObservation": -25983528,
+      "storage": {
+        "bucketCount": 454,
+        "shapes": 1488,
+        "references": 2117,
+        "serializedBytes": 0
+      },
+      "sampleHash": "cfb3347ff0237da0d13e7dd85fbecabb494ace2c583a7b789f1e4c5a77e05eda",
+      "saveHash": "4fb40ef321de8f47e016ae9fb1dd0ba61bc766f6e908ed475a152067ab104618",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 7,
+      "accepted": true,
+      "reasons": [],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2445,
+        "available": 538,
+        "reserved": 795,
+        "zoneWaterMismatches": 51
+      },
+      "initializationMs": 0.5442999999995664,
+      "navigationMs": 35.31319999999869,
+      "queryComparisonMs": 765.6939999999995,
+      "heapDeltaObservation": -27728448,
+      "storage": {
+        "bucketCount": 370,
+        "shapes": 1013,
+        "references": 1567,
+        "serializedBytes": 0
+      },
+      "sampleHash": "05eb55709ca7544714d8a88375a9002f79263e272b9c21aaca8b098239bc50a8",
+      "saveHash": "c2dfcfeef0febc27c30d963d601733e0873b9befe30d9bdc73cbb94321a6600c",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 73,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, neutral-buffer, visibility and access rules."
+      ],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2629,
+        "available": 845,
+        "reserved": 116,
+        "zoneWaterMismatches": 79
+      },
+      "initializationMs": 0.28700000000026193,
+      "navigationMs": 28.740999999998166,
+      "queryComparisonMs": 745.8183000000026,
+      "heapDeltaObservation": -27246808,
+      "storage": {
+        "bucketCount": 304,
+        "shapes": 385,
+        "references": 590,
+        "serializedBytes": 0
+      },
+      "sampleHash": "9a96307c50dfaf76579b1f837d7cb0667573b06011b899c1b71905b38b4a2a4a",
+      "saveHash": "9e962d9c1e0c578f9f5956ea6bf8f2be9e1004452b27f31a2e4182431826e8a5",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 256,
+      "accepted": true,
+      "reasons": [],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2866,
+        "available": 951,
+        "reserved": 909,
+        "zoneWaterMismatches": 68
+      },
+      "initializationMs": 0.6111999999993714,
+      "navigationMs": 32.32339999999749,
+      "queryComparisonMs": 776.515800000001,
+      "heapDeltaObservation": -26321064,
+      "storage": {
+        "bucketCount": 386,
+        "shapes": 1194,
+        "references": 1836,
+        "serializedBytes": 0
+      },
+      "sampleHash": "cb1a6efcf2659c942e47813f5ba46d1f7dffa3e1fb9c2b0c9183111860d7b1fe",
+      "saveHash": "39e53bec7d6d5d68fafeffb880f77fe3634379ce95b1099ddb98a5baedad282a",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    },
+    {
+      "seed": 65537,
+      "accepted": true,
+      "reasons": [],
+      "grid": {
+        "bounds": {
+          "minX": -400,
+          "maxX": 400,
+          "minZ": -400,
+          "maxZ": 400
+        },
+        "spacing": 1,
+        "columns": 801,
+        "rows": 801
+      },
+      "counts": {
+        "sampled": 17341,
+        "traversable": 2358,
+        "available": 464,
+        "reserved": 1060,
+        "zoneWaterMismatches": 60
+      },
+      "initializationMs": 1.1393000000025495,
+      "navigationMs": 27.336299999999028,
+      "queryComparisonMs": 726.9359999999979,
+      "heapDeltaObservation": -27434712,
+      "storage": {
+        "bucketCount": 430,
+        "shapes": 1137,
+        "references": 1821,
+        "serializedBytes": 0
+      },
+      "sampleHash": "75252d3f9b7f1cced4929c8c03a70995c7208256edd791757da2cb82cc2f7544",
+      "saveHash": "dbf56d4c560a7761cd052fc5699c3312a6b794b602d177c6fb8d9c606c06c22a",
+      "preservedSave": true,
+      "residentParity": true,
+      "reservedRoutes": true,
+      "coastAligned": true
+    }
+  ]
+}

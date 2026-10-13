@@ -1,3 +1,5 @@
+import { spatialOverlays } from '../world/SpatialOverlay';
+import { renderSpatialDiagnostics } from './SpatialDiagnostics';
 import { environmentOverlays, renderEnvironmentDiagnostics } from './EnvironmentDiagnostics';
 import { settlementGeneratorVersion } from '../world-generation/SettlementSites';
 import { settlementStartingViews } from '../world-generation/SiteNavigation';
@@ -99,10 +101,11 @@ export class LabWorldGeneration {
                     <option value="elevation">Elevation</option>
                     <option value="biomes">Biomes</option>
                     <option value="walkability">Walkability</option>
+                    ${Object.entries(spatialOverlays).map(([key, label]) => '<option value="' + key + '" data-spatial-overlay disabled>' + label + '</option>').join('')}
                     ${Object.entries(environmentOverlays).map(([key, label]) => '<option value="' + key + '" data-environment-overlay disabled>' + label + '</option>').join('')}
                 </select></label>
                 <p>Lab proposal only · source assets preserved · production integration awaits review.</p>
-            </section><pre id="world-generation-status" role="status">Reference Fjordside · seed 1983</pre><details id="world-sites-diagnostics" hidden></details><details id="world-environment-diagnostics" hidden></details>
+            </section><pre id="world-generation-status" role="status">Reference Fjordside · seed 1983</pre><details id="world-sites-diagnostics" hidden></details><details id="world-environment-diagnostics" hidden></details><details id="world-spatial-diagnostics" hidden></details>
         `);
         this.status = document.querySelector('#world-generation-status')!;
         this.seed = document.querySelector('#world-seed')!;
@@ -274,6 +277,7 @@ export class LabWorldGeneration {
                     (macro.reasons.length ? '\n' + macro.reasons.join('\n') : '') : '');
             renderSettlementSiteDiagnostics(document.querySelector('#world-sites-diagnostics')!, world);
             renderEnvironmentDiagnostics(document.querySelector('#world-environment-diagnostics')!, world);
+            renderSpatialDiagnostics(document.querySelector('#world-spatial-diagnostics')!, world);
             (document.querySelector('#world-site-planning') as HTMLInputElement).checked = !!world.siteSelection;
             this.canvas.dataset.world = JSON.stringify({ seed: world.config.seed,
                 generatorVersion: world.config.generatorVersion, preset: world.config.preset, conifers,
@@ -393,16 +397,23 @@ export class LabWorldGeneration {
         disposeBlueprintTerrain(previous);
         this.preview.root.add(next);
         this.preview.terrain = next;
+        this.canvas.dataset.spatial = JSON.stringify(next.userData.spatial);
     }
 
     private syncEnvironmentControls() {
+        document.querySelectorAll<HTMLOptionElement>('[data-spatial-overlay]').forEach(option => {
+            option.disabled = !this.blueprint;
+        });
         const enabled = !!this.blueprint?.environment;
         (document.querySelector('#world-environment-zoning') as HTMLInputElement).checked = enabled;
         document.querySelectorAll<HTMLOptionElement>('[data-environment-overlay]').forEach(option => {
             option.disabled = !enabled;
         });
         const overlay = document.querySelector('#world-overlay') as HTMLSelectElement;
-        if (!enabled && overlay.value in environmentOverlays) overlay.value = 'none';
+        if ((!enabled && overlay.value in environmentOverlays) ||
+            (!this.blueprint && overlay.value in spatialOverlays)) {
+            overlay.value = 'none';
+        }
     }
 
     private rememberReference() {
@@ -522,6 +533,9 @@ export class LabWorldGeneration {
     }
 
     restore() {
+        document.querySelector<HTMLElement>('#world-spatial-diagnostics')!.hidden = true;
+        document.querySelector<HTMLElement>('#world-spatial-diagnostics')!.replaceChildren();
+        delete this.canvas.dataset.spatial;
         document.querySelector<HTMLElement>('#world-sites-diagnostics')!.hidden = true;
         document.querySelector<HTMLElement>('#world-environment-diagnostics')!.hidden = true;
         this.camera.far = 300;

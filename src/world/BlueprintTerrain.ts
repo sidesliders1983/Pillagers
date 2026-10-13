@@ -1,3 +1,4 @@
+import { createSpatialOverlay } from './SpatialOverlay';
 import { environmentColours } from './EnvironmentOverlay';
 import { macroRegions } from '../world-generation/MacroIsland';
 import {
@@ -110,6 +111,8 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
     geometry.computeVertexNormals();
     const textureClones: Texture[] = [];
+    const spatial = createSpatialOverlay(world, overlay);
+    if (spatial) textureClones.push(spatial.texture);
     const material = sources && overlay === 'none' ? materialIds.map((id, layer) => {
         const source = sources.get(id);
         if (!source) throw new Error('Missing required approved ground material: ' + id);
@@ -138,10 +141,12 @@ export function createBlueprintTerrain(world: WorldBlueprint,
         }
         geometry.addGroup(0, positions.length / 3, layer);
         return copy;
-    }) : new MeshStandardMaterial({ roughness: 1, flatShading: true, vertexColors: true });
+    }) : new MeshStandardMaterial({ roughness: 1, flatShading: true,
+        vertexColors: !spatial, map: spatial?.texture ?? null });
     const mesh = new Mesh(geometry, material);
     mesh.name = 'Generated canonical terrain';
     mesh.userData.textureClones = textureClones;
+    mesh.userData.spatial = spatial?.diagnostics ?? null;
     mesh.receiveShadow = true;
     return mesh;
 }
