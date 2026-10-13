@@ -1,12 +1,15 @@
+import { inspectMacroIsland, findNaturalSites } from './MacroIsland';
+import { islandTerrain } from './IslandShape';
+import { islandTerrain as firstIslandTerrain } from './IslandShapeV1';
 import { createNoise2D } from 'simplex-noise';
 import { seededRandom } from '../config/worldConfig';
 import { createBlueprintSurface } from './TerrainQueries';
 import { validateNavigation } from './ValidateNavigation';
 import { planNature } from './PlanNature';
-import { planSettlement, settlementBoundsAt } from './PlanSettlement';
+import { planSettlement, settlementBoundsAt, extractCoast } from './PlanSettlement';
 import { fjordWaterConfig } from '../config/FjordWaterConfig';
 import {
-    freezeBlueprint, generatorVersion, GenerationRequest, WorldBlueprint,
+    freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, GenerationRequest, WorldBlueprint,
     WorldGenerationConfig, Point2, ConiferSource,
 } from './WorldBlueprint';
 
@@ -14,12 +17,14 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
     if (!Number.isInteger(request.seed) || request.seed < 0 || request.seed > 0xffffffff) {
         throw new RangeError('Seed must be an integer from 0 to 4294967295.');
     }
-    if (request.generatorVersion && request.generatorVersion !== generatorVersion) {
-        throw new Error('Unsupported generator version: ' + request.generatorVersion);
-    }
     const preset = request.preset ?? 'fjord';
-    if (!['fjord', 'coastal-valley', 'rocky-inlet'].includes(preset)) {
+    if (!['fjord', 'coastal-valley', 'rocky-inlet', 'island'].includes(preset)) {
         throw new Error('Unknown world preset.');
+    }
+    const version = preset === 'island' ?
+        (request.generatorVersion === firstIslandGeneratorVersion ? firstIslandGeneratorVersion : islandGeneratorVersion) : generatorVersion;
+    if (request.generatorVersion && request.generatorVersion !== version) {
+        throw new Error('Unsupported generator version: ' + request.generatorVersion);
     }
     if (request.conifers !== undefined && !['kaykit', 'ez-tree'].includes(request.conifers)) {
         throw new Error('Unknown conifer source.');
@@ -30,7 +35,8 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
         !Number.isFinite(forestDensity) || forestDensity < .3 || forestDensity > 1.3) {
         throw new RangeError('Relief must be 0.5–1.5 and forest density 0.3–1.3.');
     }
-    return { seed: request.seed, preset, generatorVersion, width: 180, depth: 180,
+    const extent = preset === 'island' ? 800 : 180;
+    return { seed: request.seed, preset, generatorVersion: version, width: extent, depth: extent,
         relief, forestDensity,
         ...(request.conifers === undefined ? {} : { conifers: request.conifers }) };
 }
@@ -55,8 +61,11 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
     const radius = (config.preset === 'coastal-valley' ? 11 :
         config.preset === 'rocky-inlet' ? 15 : 19) + random() * 5;
     const waterLevel = fjordWaterConfig.level;
-    const heights: number[] = [];
-    for (let z = -90; z <= 90; z += 2) {
+    const island = config.preset === 'island';
+    const formIsland = config.generatorVersion === firstIslandGeneratorVersion ? firstIslandTerrain : islandTerrain;
+    const formation = island ? formIsland(config, waterLevel) : null;
+    const heights: number[] = formation?.heights ?? [];
+    for (let z = -90; !island && z <= 90; z += 2) {
         for (let x = -90; x <= 90; x += 2) {
             const seaDistance = z + 28 + noise(x * .025, 0) * 6;
             const inletDistance = Math.min(...channel.slice(1).map((b, i) =>
@@ -74,14 +83,16 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
             heights.push(Math.fround(surface));
         }
     }
-    const terrain = { bounds: { minX: -90, maxX: 90, minZ: -90, maxZ: 90 },
-        spacing: 2, columns: 91, rows: 91, heights };
-    const landscape = { config, waterLevel, terrain };
+    const halfWidth = config.width / 2, halfDepth = config.depth / 2;
+    const terrain = { bounds: { minX: -halfWidth, maxX: halfWidth, minZ: -halfDepth, maxZ: halfDepth },
+        spacing: 2, columns: config.width / 2 + 1, rows: config.depth / 2 + 1, heights };
+    const landscape = { config, waterLevel, terrain,
+        ...(formation ? { geology: formation.geology } : {}) };
     const naturalSurface = createBlueprintSurface(landscape);
     let center = { x: 20, z: 2 }, candidateDry = false;
     // Bounded candidate search retains the requested seed and records failure, never reseeds.
     const candidateOffset = Math.floor(random() * 12);
-    for (let attempt = 0; attempt < 12; attempt++) {
+    for (let attempt = 0; attempt < 12 && !island; attempt++) {
         const candidate = (candidateOffset + attempt) % 12;
         center = { x: 20 + (candidate % 6) * 6, z: Math.floor(candidate / 6) * 6 };
         const bounds = settlementBoundsAt(center);
@@ -93,11 +104,16 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
         }
         if (candidateDry) break;
     }
+    if (island) {
+        const candidates = findNaturalSites({ ...landscape, coast: extractCoast(landscape) });
+        candidateDry = candidates.length > 0;
+        if (candidateDry) center = { x: candidates[0].x, z: candidates[0].z };
+    }
     const siteBounds = settlementBoundsAt(center);
-    if (candidateDry) {
+    if (candidateDry && !island) {
         for (let row = 0; row < terrain.rows; row++) {
             for (let col = 0; col < terrain.columns; col++) {
-                const x = -90 + col*2, z = -90 + row*2, index = row*terrain.columns+col;
+                const x = terrain.bounds.minX + col*2, z = terrain.bounds.minZ + row*2, index = row*terrain.columns+col;
                 const distance = Math.hypot(Math.max(siteBounds.minX-x, 0, x-siteBounds.maxX),
                     Math.max(siteBounds.minZ-z, 0, z-siteBounds.maxZ));
                 const t = Math.min(1, distance/18), blend = 1-t*t*(3-2*t);
@@ -110,17 +126,24 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
     }
     const planned = { ...landscape, ...planSettlement(landscape, center, candidateDry) };
     const world = { ...planned, ...planNature(planned) };
-    return freezeBlueprint({ ...world, validation: validateNavigation(world) });
+    return freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) });
 }
 
 /** Replan scenery and its navigation while retaining the stored geography and settlement. */
 export function changeWorldConifers(world: WorldBlueprint, conifers: ConiferSource): WorldBlueprint {
     const config = normalizeWorldConfig({ ...world.config, conifers });
     const candidateDry = !world.validation.reasons.some(reason =>
-        reason.startsWith('No naturally dry settlement candidate'));
+        reason.startsWith('No naturally '));
     const foundation = planSettlement(world, world.settlement.center, candidateDry);
     const landscape = { ...world, config, navigation: foundation.navigation,
         validation: foundation.validation };
     const planned = { ...landscape, ...planNature(landscape) };
-    return freezeBlueprint({ ...planned, validation: validateNavigation(planned) });
+    return freezeBlueprint({ ...planned, validation: validateGeneratedWorld(planned) });
+}
+
+function validateGeneratedWorld(world: WorldBlueprint) {
+    const navigation = validateNavigation(world);
+    const reasons = world.config.preset === 'island' ? [...new Set([...navigation.reasons,
+        ...inspectMacroIsland(world).reasons])] : navigation.reasons;
+    return { ...navigation, accepted: reasons.length === 0, reasons };
 }

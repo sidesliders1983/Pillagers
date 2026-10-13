@@ -1,10 +1,11 @@
+import { macroRegions } from '../world-generation/MacroIsland';
 import {
     BufferGeometry, Float32BufferAttribute, Mesh, MeshStandardMaterial, Color,
     Texture, DataTexture, RGBAFormat, UnsignedByteType, LinearFilter, ClampToEdgeWrapping,
 } from 'three';
 import { regionalGroundConfig } from '../config/RegionalGroundConfig';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
-import { terrainTriangles } from '../world-generation/TerrainQueries';
+import { createBlueprintSurface, terrainTriangles } from '../world-generation/TerrainQueries';
 export { createBlueprintSurface } from '../world-generation/TerrainQueries';
 export type { TerrainSurface } from '../world-generation/TerrainQueries';
 
@@ -41,6 +42,9 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     const maskUvs: number[] = [];
     const colors: number[] = [];
     const { terrain } = world;
+    const macroPalette = { sea: '#244a68', shore: '#dac393', lowland: '#7fba66',
+        valley: '#438b69', upland: '#8b8971', highland: '#e0dcd3' };
+    const diagnosticColors = overlay === 'macro' ? macroRegions(world).map(region => macroPalette[region]) : [];
     // Independent source repeats are applied through native texture transforms.
     const repeat = regionalGroundConfig.sources.Ground037.repeatMeters;
     for (const triangle of terrainTriangles(terrain)) {
@@ -53,7 +57,15 @@ export function createBlueprintTerrain(world: WorldBlueprint,
             sourceUvs.push(x / repeat, -z / repeat);
             maskUvs.push((column + .5) / terrain.columns, (row + .5) / terrain.rows);
             const colour = new Color();
-            if (overlay === 'biomes') {
+            if (overlay === 'form') {
+                colour.set('#c9c1ad');
+            } else if (overlay === 'macro') {
+                colour.set(diagnosticColors[index]);
+            } else if (overlay === 'elevation') {
+                const elevation = terrain.heights[index] - world.waterLevel;
+                colour.set(elevation <= 0 ? '#244a68' : '#49765d');
+                if (elevation > 0) colour.lerp(new Color('#f5e4c9'), Math.min(1, elevation / 35));
+            } else if (overlay === 'biomes') {
                 colour.set(biomePalette[world.biomes.cells[index]]);
             } else if (overlay === 'walkability') {
                 const nav = world.navigation;
@@ -64,6 +76,27 @@ export function createBlueprintTerrain(world: WorldBlueprint,
                 colour.setScalar(world.biomes.cells[index] === 'water' ? .72 : 1);
             }
             colors.push(colour.r, colour.g, colour.b);
+        }
+    }
+    if (world.config.preset === 'island') {
+        // The canonical query already defines flat deep sea outside the heightfield. Render that
+        // same continuation so the bounded heightfield does not appear as a square underwater.
+        const surface = createBlueprintSurface(world), { minX, maxX, minZ, maxZ } = terrain.bounds;
+        const extent = world.config.width * 2;
+        const inner = [[minX,minZ],[minX,maxZ],[maxX,maxZ],[maxX,minZ]];
+        const outer = [[-extent,-extent],[-extent,extent],[extent,extent],[extent,-extent]];
+        const colour = new Color(overlay === 'form' ? '#c9c1ad' :
+            overlay === 'none' ? '#dddddd' : '#244a68');
+        for (let side = 0; side < 4; side++) {
+            const next = (side+1)%4;
+            const corners = [outer[side],outer[next],inner[next],inner[side]];
+            for (const i of [0,1,2,0,2,3]) {
+                const [x,z] = corners[i];
+                positions.push(x,surface.surfaceHeightAt(x,z),z);
+                sourceUvs.push(x/repeat,-z/repeat);
+                maskUvs.push((x-minX)/world.config.width,(z-minZ)/world.config.depth);
+                colors.push(colour.r,colour.g,colour.b);
+            }
         }
     }
     const geometry = new BufferGeometry();

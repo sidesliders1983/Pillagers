@@ -1,5 +1,7 @@
 # Procedural Fjordside Generator v0.1
 
+Current #133 addition: [Macro Island Shape v0.3b](MACRO-ISLAND-V03B.md) is an explicit 800m Environment Lab preset with geologically formed terrain and two measured natural lowland compartments. Existing presets and stored saves retain their geography.
+
 Issue #70 is an isolated Environment Lab proposal. Live Fjordside and Simulation Core saves keep their existing geometry and rules. Production adoption requires owner visual review, the pending #60 integration decision and a separate focused migration PR.
 
 ## Use the Lab

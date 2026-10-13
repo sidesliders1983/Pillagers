@@ -1,5 +1,7 @@
 # Environment Lab v0.1 — sourced water (#56)
 
+Current #133 addition: [Macro Island Shape v0.3b](MACRO-ISLAND-V03B.md) is an explicit 800m Environment Lab preset with geologically formed terrain and two measured natural lowland compartments. Existing presets and stored saves retain their geography.
+
 Current #75 note: Compatibility fallback now shares the approved ReferenceWater
 with Fjordside and follows current Lab lighting/camera. See
 [the fallback regression evidence](qa/environment-fallback-water/report.md).

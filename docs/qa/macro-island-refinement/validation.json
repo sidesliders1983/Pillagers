@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-13",
+  "targeted": {
+    "command": "node --test tests/macro-island.test.mjs tests/world-generation.test.mjs",
+    "tests": 26,
+    "passed": 26,
+    "failed": 0
+  },
+  "full": {
+    "command": "node --test --test-concurrency=2 tests/*.test.mjs",
+    "tests": 696,
+    "passed": 695,
+    "failed": 0,
+    "skipped": 1,
+    "skip": "Existing opt-in evidence test"
+  },
+  "build": {
+    "command": "pnpm run build",
+    "passed": true,
+    "advisory": "Existing chunks larger than 500 kB advisory"
+  },
+  "characters": {
+    "command": "pnpm run validate:characters --lab-previews",
+    "passed": true,
+    "assets": 20,
+    "glbs": 36
+  },
+  "browser": {
+    "command": "QA_SEEDS=17,42,91,1983,1337 node scripts/qa/check-macro-island.mjs",
+    "passed": true,
+    "evidence": "browser.json"
+  },
+  "formatting": {
+    "configuredFormatter": false,
+    "manualReview": true,
+    "gitDiffCheck": true
+  },
+  "redGreenEvidence": [
+    "Explicit new version failed before version routing; passed after preserving first-pass algorithm.",
+    "Rotation-independent dry-land proportions had insufficient spread before rift changes.",
+    "All initial main valleys had the same outlet depth before distinct basin profiles.",
+    "Coastal low-elevation fraction failed before spatial remapping.",
+    "Browser full-coast framing failed on seed 42 before the oblique camera adjustment."
+  ]
+}
