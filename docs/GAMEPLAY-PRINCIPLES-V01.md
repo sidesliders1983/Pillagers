@@ -1,11 +1,31 @@
 # Pillagers — Core Gameplay Principles v0.1
 
 > **Status:** Canonical gameplay foundation  
-> **Last aligned with GAME-PRINCIPLES.md:** 2026-10-02
+> **Last aligned with GAME-PRINCIPLES.md:** 2026-10-13
 >
 > This document defines the core gameplay contract for Pillagers. Individual mechanics may evolve, but new systems should reinforce these principles rather than work around them.
 >
 > `GAME-PRINCIPLES.md` is the authority for approved cross-cutting decisions such as calendar wording, lore constraints, platform direction and settlement terminology. This document explains how those decisions fit together as gameplay.
+
+---
+
+# Current presentation delivery policy — 3D-first (approved 2026-10-13)
+
+This gameplay contract remains in force. **Only its player-facing presentation strategy has changed:** [GP-007](../GAME-PRINCIPLES.md#gp-007--fjordside-is-the-single-3d-player-facing-game) makes the **Fjordside 3D game (`/fjord-play`)** the sole current player experience. The former isometric `/play` board and text-first `/gameplay-lab` served as prototypes; no new player-facing features are to be built for them. Retire their UIs after [#140](https://github.com/sidesliders1983/Pillagers/issues/140)'s save/management-parity gates.
+
+**Gameplay principles do not move into the renderer.** Simulation Core retains all commands and authoritative resident/world state, deterministic Winters, family/lore history, economy, livestock and saved campaigns. Retain headless testing, simulation batch tools, Environment/Character/Asset developer labs and reusable campaign/session, management, lore and view utilities currently imported from 2D-named directories until safely moved. This is **not** an online/offline simulation change.
+
+For delivery prioritization, see the [updated active roadmap](gameplay/GAME-SIMULATOR-ROADMAP.md). The original mechanics sequence in section 23 remains useful conceptually; it is not a request to restore a parallel 2D game UI.
+
+---
+
+# Current exploration control and world knowledge policy — GP-008 (2026-10-13)
+
+**Only Expedition Groups receive direct movement/mission orders.** Ordinary residents remain autonomous in everyday work and movement, while existing player-authorized management interventions (occupation, household, housing, caregiving, resource priorities) are not withdrawn. Form reusable groups from named real residents, select an unknown location in the 3D island to explore, and let the group choose and execute its route under canonical Simulation Core ticks.
+
+The player starts with only the founding settlement surroundings known. **Clans own persistent explored geography** and separate current observation and stale/scouted/surveyed opponent intelligence. Camera motion and atmospheric fog settings cannot change discovery. The hidden CPU community is a real independent Simulation Core clan associated with the physical `rivalSite`, evolving before discovery; no separate enemy economy inside the renderer.
+
+Do not use the legacy four-arrow Region Graph as an arbitrary X/Z map for new physical campaigns: add a versioned adapter while retaining existing saves. See [GP-008](../GAME-PRINCIPLES.md#gp-008--exploration-is-strategic-group-level-action-knowledge-belongs-to-communities), [design contract](gameplay/EXPLORATION-FOG-AND-RIVAL-CLANS.md) and [epic #146](https://github.com/sidesliders1983/Pillagers/issues/146).
 
 ---
 
