@@ -11,6 +11,7 @@ import type { NarrativeMemory } from './NarrativeMemory';
 import type { SimulationState } from '../simulation/SimulationCore';
 
 export type OpeningFacts = {
+    arrival?: { season: 'Summer'; winter: 800; tick: 500 };
     complete: boolean;
     livestock?: {
         youngAdultAge: number;
@@ -86,6 +87,8 @@ function validFacts(facts: OpeningFacts): boolean {
     if (!facts || typeof facts.complete !== 'boolean' ||
         !Array.isArray(facts.founders) || !Array.isArray(facts.households) ||
         !Array.isArray(facts.cattle) || !Array.isArray(facts.longships)) return false;
+    if (facts.arrival !== undefined && (!facts.arrival || facts.arrival.season !== 'Summer' ||
+        facts.arrival.winter !== 800 || facts.arrival.tick !== 500)) return false;
     if (facts.livestock && (!Number.isSafeInteger(facts.livestock.youngAdultAge) ||
         facts.livestock.youngAdultAge < 0 || !Number.isSafeInteger(facts.livestock.adultAge) ||
         facts.livestock.adultAge < facts.livestock.youngAdultAge || !Array.isArray(facts.livestock.animals) ||
@@ -134,6 +137,8 @@ export class ClanBook {
         const originWinter = arrival?.time.winter ?? state.events.find(e => e.type === 'ClanInitialized')?.time.winter ?? state.time.winter;
         const facts: OpeningFacts = fresh ? {
             complete: true, livestock: livestockFacts(state),
+            ...(state.foundingPhase === 'summer-800-v1' && arrival?.time.winter === 800 && arrival.time.tick === 500 ?
+                { arrival: { season: 'Summer' as const, winter: 800 as const, tick: 500 as const } } : {}),
             residences: structuredClone(Object.values(state.residences)),
             founders: Object.values(state.personas).map(p => ({
                 id: p.id, name: p.name, occupation: p.occupation, partnerId: p.partnerId
@@ -203,7 +208,8 @@ export class ClanBook {
             sourceEventIds: events.map(e => e.id),
             checkpoint: { version: 1, time: { ...state.time }, eventEnd: state.events.length,
                 identity: historyIdentity(JSON.stringify(state)) },
-            facts: { complete: cursor.time.tick === 0 &&
+            facts: { complete: (cursor.time.tick === 0 ||
+                this.data.chapters.length === 1 && this.data.chapters[0].facts.arrival?.tick === cursor.time.tick) &&
                 cursor.time.winter === this.data.nextWinter - 5 && ledger.food.complete && ledger.materials.complete,
                 period: { from: { ...cursor.time }, through: { ...state.time } },
                 livestock: livestockFacts(state),
@@ -227,7 +233,9 @@ export class ClanBook {
             chapter.composition.usedFallback = true;
             const paragraph: NarrativeParagraph = { templateId: 'clan-book.bounded-fallback', templateVersion: 4,
                 text: 'The ' + ordinal(chapter.index) + ' chapter carries the story through ' +
-                    cardinal(chapter.facts.period!.through.winter - chapter.facts.period!.from.winter) + ' more years.',
+                    (chapter.facts.period!.from.tick === chapter.facts.period!.through.tick ?
+                        cardinal(chapter.facts.period!.through.winter - chapter.facts.period!.from.winter) + ' more years.' :
+                        'the recorded interval.'),
                 sourceEventIds: [], factRefs: ['period', 'chapter.index'] };
             chapter.paragraphs!.push(paragraph);
             chapter.text += '\n\n' + paragraph.text;
@@ -258,7 +266,7 @@ export class ClanBook {
         const validReference = (reference: unknown, chapterIndex: number): boolean => {
             if (typeof reference !== 'string') return false;
             if (['founders', 'households', 'residences', 'stocks', 'cattle', 'longships',
-                'period', 'demographics', 'ledger', 'livestock', 'chapter.index'].includes(reference)) return true;
+                'period', 'demographics', 'ledger', 'livestock', 'arrival', 'chapter.index'].includes(reference)) return true;
             if (reference === 'chapters.0.checkpoint.time') return chapterIndex > 0 &&
                 !!saved.chapters[0] && validTime(saved.chapters[0].checkpoint.time, state);
             const callback = /^chapters\.(\d+)\.ledger\.food$/.exec(reference);
@@ -276,6 +284,9 @@ export class ClanBook {
             !validTime(saved.cursor.time, state) ||
             !Array.isArray(saved.chapters) || !saved.chapters.length ||
             saved.chapters.some((c, i) => c.index !== i || typeof c.text !== 'string' || typeof c.title !== 'string' || !validFacts(c.facts) ||
+                c.facts.arrival !== undefined && (state.foundingPhase !== 'summer-800-v1' ||
+                    !state.events.some(event => event.type === 'FoundingPartyLanded' &&
+                        event.time.winter === c.facts.arrival!.winter && event.time.tick === c.facts.arrival!.tick)) ||
                 c.checkpoint?.version !== 1 || typeof c.checkpoint.identity !== 'string' ||
                 !Number.isSafeInteger(c.checkpoint.eventEnd) || c.checkpoint.eventEnd < 0 ||
                 c.checkpoint.eventEnd > state.events.length || !validTime(c.checkpoint.time, state) || !Array.isArray(c.sourceEventIds) ||

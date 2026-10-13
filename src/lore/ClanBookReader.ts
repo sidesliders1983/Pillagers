@@ -11,6 +11,7 @@ function appendix(chapter: BookChapter): string {
     const facts = chapter.facts;
     let html = facts.complete ? '<p>Complete observed checkpoint.</p>' :
         '<p>Partial history: some founding facts or interval coverage are unavailable.</p>';
+    if (facts.arrival) html += '<p>Arrival: Summer 800 (calendar year), tick 500.</p>';
     if (facts.period) html += '<p>Observed interval: Winter ' + facts.period.from.winter +
         ', tick ' + facts.period.from.tick + ' through the completed boundary at Winter ' +
         facts.period.through.winter + ', tick ' + facts.period.through.tick + '.</p>';

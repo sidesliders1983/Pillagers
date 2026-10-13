@@ -1,3 +1,5 @@
+import { foundingTime, type FoundingPhase } from './FoundingPhase';
+export type { FoundingPhase } from './FoundingPhase';
 import { setCampfire, validateCampfire } from './Campfire';
 import type { CampfireState, CampfireCommand } from './Campfire';
 export { inspectCampfire } from './Campfire';
@@ -37,6 +39,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    foundingPhase?: FoundingPhase;
     campfire?: CampfireState; social?: SocialState; entityPrefix?:string;personaArchive?:Record<string,Persona>;world?:WorldState; weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
     families: Record<string, {id: string; memberIds: string[]}>;
@@ -49,16 +52,16 @@ export function createCampaign(
     seed: number, overrides: Partial<LandingConfig> = {},
     mechanicsOverrides: Partial<PrototypeConfig> = {}, weatherOverrides: Partial<WeatherConfig> = {},
     expeditionOverrides: Partial<ExpeditionConfig> = {}, socialOverrides: Partial<SocialConfig> = {},
-    targetLandingConfigs: Record<string, LandingConfig> = {},
+    targetLandingConfigs: Record<string, LandingConfig> = {}, foundingPhase?: FoundingPhase,
 ): SimulationState {
     // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
-    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides);
+    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase);
     initializeWeather(state, weatherOverrides);
     // A restarted world can contain new neighbours; inherit the first saved CPU rules for those.
     const savedTargetDefault = Object.keys(targetLandingConfigs).sort().map(id => targetLandingConfigs[id])[0];
     initializeWorld(state, (targetSeed, clanId) => {
         const targetConfig = targetLandingConfigs[clanId] ?? savedTargetDefault ?? overrides;
-        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides);
+        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides, foundingPhase);
         initializeWeather(target, weatherOverrides);
         return target;
     }, expeditionOverrides);
@@ -162,6 +165,11 @@ function validateState(state: SimulationState): void {
     if (state.ticksPerWinter !== ticksPerWinter) throw new Error('Unsupported tick scale');
     integer(state.time.winter, 'Winter'); integer(state.time.tick, 'Tick');
     if (state.time.winter < 800 || state.time.tick >= ticksPerWinter) throw new Error('Invalid calendar');
+    if (state.foundingPhase !== undefined) {
+        const start = foundingTime(state.foundingPhase);
+        if (state.time.winter === start.winter && state.time.tick < start.tick)
+            throw new Error('Campaign time precedes its founding phase.');
+    }
     integer(state.stocks.food, 'Food'); integer(state.stocks.materials, 'Materials');
     if (!state.clan.id || !state.clan.name || !Array.isArray(state.events)) throw new Error('Invalid clan/events');
     const occupations = ['farmer', 'herder', 'fisher', 'hunter', 'textileWorker', 'smith', 'woodworker', 'boatbuilder', 'trader', 'leatherAndJewelleryMaker'];

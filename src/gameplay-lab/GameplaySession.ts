@@ -2,7 +2,7 @@ import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
 import { createCampaign, applyCommand, serializeState, reconstructState } from '../simulation/SimulationCore';
-import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
+import type { FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
@@ -36,8 +36,8 @@ export class GameplaySession {
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true) {
-        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled});
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     snapshot(): SimulationState {
@@ -96,17 +96,17 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true): void {
-        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }));
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase): void {
+        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase));
     }
-    restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false, socialEnabled = this.state.social?.config.enabled ?? false): void {
+    restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false, socialEnabled = this.state.social?.config.enabled ?? false, foundingPhase = this.state.foundingPhase): void {
         let seed = sameFounders ? this.state.seed : drawSeed();
         if (!sameFounders && seed === this.state.seed)
             seed = (seed + 1) >>> 0;
         const targetLandingConfigs = Object.fromEntries(Object.entries(this.state.world?.targetClans ?? {})
             .filter(([, target]) => target.landing)
             .map(([id, target]) => [id, target.landing!.config]));
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs));
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.familyIndex = new FamilyTreeIndex();

@@ -1,0 +1,3050 @@
+{
+  "version": 1,
+  "seeds": [
+    1,
+    2,
+    3,
+    7,
+    17,
+    32,
+    42,
+    91,
+    1983,
+    1337
+  ],
+  "rules": "Unmodified current player defaults: 15 Food, 5 Materials, mortality, cattle lifecycle, weather and social events enabled.",
+  "observation": "First boundary only. Full annual consumption and risks are unchanged, with 500 versus 1000 played production ticks. Shortfall is recorded, not interpreted as starvation deaths.",
+  "results": [
+    {
+      "seed": 1,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5"
+        ]
+      },
+      "residentFoodProduced": 34,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 30,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "718d74315256b915bf6a13712e3ac680e775aab53ab054cf4d2948d7330439dd",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 15,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 9,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "757a7dcf37850aafacbf364e96aeb1b6e09ab6bc097c6db41cc167150289c634",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 2,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5"
+        ]
+      },
+      "residentFoodProduced": 20,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 16,
+        "materials": 1
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "524eb9241811199dcfd8e443860abfa4e133d0d2758f5a9a64c77dadd9ee125c",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 2,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5"
+        ]
+      },
+      "residentFoodProduced": 8,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 2,
+        "materials": 7
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "426529e2ca38c6c954cf0242164d57c4d93f649cdfbdb3822d509ee7b23680e6",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 3,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5"
+        ]
+      },
+      "residentFoodProduced": 25,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 21,
+        "materials": 9
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "fd61975e754f9180b6719d018ac22b7c7e0ec96b7fe209a0febd333769156980",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 3,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5"
+        ]
+      },
+      "residentFoodProduced": 11,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 5,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "2195643f63e80fc0498fc3fc02981ce34ce8de89b946186888da963a26a992dd",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 7,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "residentFoodProduced": 22,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 18,
+        "materials": 9
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 0,
+      "survivingResidents": 10,
+      "survivingCattle": 3,
+      "checkpointSha256": "88a05c80d52f45f73a979bdf482218a5e9fc163ec78bcf5aa4634e6ccd16d056",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 7,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "residentFoodProduced": 8,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 2,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 0,
+      "survivingResidents": 10,
+      "survivingCattle": 3,
+      "checkpointSha256": "dc539f53050eef42269f0dfa5810efbc3a8789f57b09dbdc0f06e4dabc4bd2b2",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 17,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 20,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 16,
+        "materials": 11
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "2b6f134649ce074f4c16cbd199c66c4507a742938b516ea9c501ddf954b7d4fd",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 17,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 8,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 2,
+        "materials": 7
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "44bc9ad849c12de5f9f93f8e6b723adabdbfd994764ca6aedd31b672e9e95b1f",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 32,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9",
+          "persona-1"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 28,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 24,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 1,
+      "cattleBirths": 1,
+      "survivingResidents": 11,
+      "survivingCattle": 4,
+      "checkpointSha256": "54021fbd55f3b2c1cc3d5296d1c026aee155fca39c586a378ebbff60eea331e1",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 32,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 12,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 6,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "b9b5b2b08cd088f900364e21de5f2b78ec89fd781907061497a5d2218aa77e78",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 42,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-3",
+          "founder-4",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 19,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 15,
+        "materials": 0
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "419c5cc30e9c65a512a513955ec96aee7b25ed8410886faac3c0fbba6f9ed20f",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 42,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 7,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 1,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "088a053bbebb3f0337477c28d598e27d8473c3c7783241e91e1cf7d941dbbae1",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 91,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 31,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 27,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "f17c1857764fdbb6386ad09c70ad9321ee63796bfa4d302852b819986931c21c",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 91,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 13,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 7,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "1c9d570b34b14301891f39f7664a5162d2934e57b4fdbd387135f7c6240e8eda",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1983,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Mild",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 32,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 28,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "8f154b4c31c7d76a074417e65c6cc00901266c0417dc1a29b053d2f1f869dd77",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1983,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Mild",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5"
+        ]
+      },
+      "residentFoodProduced": 14,
+      "cattleFoodProduced": 2,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 8,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "6962e96c6e81c70630d72a829e6649896dbe98a49c4f3ee96e0654cfe1f62f03",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1337,
+      "phase": "legacy-winter",
+      "strategy": "passive",
+      "playedTicks": 1000,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Harsh",
+      "incomingWeather": "Severe",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 0,
+      "cattleFoodProduced": 0,
+      "residentFoodConsumed": 10,
+      "cattleFoodConsumed": 5,
+      "residentFoodShortfall": 20,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 0,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "553a5efc98ebda2360b3fd4627b4594d6fb28a0b21a5f821454379b11e1336e8",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1337,
+      "phase": "summer-800-v1",
+      "strategy": "passive",
+      "playedTicks": 500,
+      "actions": [],
+      "initialStocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "outgoingWeather": "Harsh",
+      "incomingWeather": "Severe",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ]
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4"
+        ]
+      },
+      "residentFoodProduced": 0,
+      "cattleFoodProduced": 0,
+      "residentFoodConsumed": 10,
+      "cattleFoodConsumed": 5,
+      "residentFoodShortfall": 20,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 0,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "e0c4c4744027775a59b8d9fce3980e65007828cbd148fd5f62dcb8a3e7406c70",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 38,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 38,
+        "materials": 14
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "45404b1d2dcf60f92c6cc443f9ecf0aa542c5ff2283eb249b4a9e4bbec7a8a29",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 17,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 13,
+        "materials": 14
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "7a42bb0d74ee7585a4c20fb0e74e6e15ab368208fd4e60a68f1684e5b4c762b5",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 2,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 27,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 27,
+        "materials": 10
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 1,
+      "cattleBirths": 1,
+      "survivingResidents": 11,
+      "survivingCattle": 4,
+      "checkpointSha256": "f84f7c871d6fd6c8ea5529849fa2c6f2780954535f88fd0dde8b82ba3a01855b",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 2,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 12,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 8,
+        "materials": 6
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "4bc79617396b97b48fb5b5893924bdc82b63926b1d98aba1083131106d9980a6",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 3,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 29,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 29,
+        "materials": 18
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "a8bf20037f99899dcd5905d04333701528175a353c6a996cbedd47684cfba609",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 3,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 13,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 9,
+        "materials": 15
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "8c8e52a6b3a54035b4d920a4dc17bd14217fe59dc89cd07e4c499b834705d85b",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 7,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-6"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 28,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 28,
+        "materials": 8
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "57b0390bc22954658f1cee713c76543d05fdf29866e878688f377c121363f04b",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 7,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-6"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 12,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 8,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 0,
+      "survivingResidents": 10,
+      "survivingCattle": 3,
+      "checkpointSha256": "bbfadcfa3d50da04f9c9a95fecab7cdadee449843ffae9082358a6e9856093b0",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 17,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9",
+          "persona-1"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 24,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 24,
+        "materials": 22
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 1,
+      "cattleBirths": 0,
+      "survivingResidents": 11,
+      "survivingCattle": 3,
+      "checkpointSha256": "1c3ca720af7805f70fb4f25c8d4fb136cf7a8a57ff9df4341f230daf9b753127",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 17,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 10,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 6,
+        "materials": 17
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "c268fbd93321c68aa90a43f73fbf8b4e6b3511e4dc37122cda4daaaae4ef9933",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 32,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-6"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Mild",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9",
+          "persona-1"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 32,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 32,
+        "materials": 15
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 1,
+      "cattleBirths": 1,
+      "survivingResidents": 11,
+      "survivingCattle": 4,
+      "checkpointSha256": "b6bd667b2074fdf804be78b996af336d2d78dc53e4cb47bc2792bd68ae42ce17",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 32,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-6"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 14,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 10,
+        "materials": 14
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "e6ec185d85cae318b17fa8ab7336541dff5d7e7314ae0492d67c944caa70fa23",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 42,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-7"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-3",
+          "founder-4",
+          "founder-6",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 23,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 23,
+        "materials": 9
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 1,
+      "cattleBirths": 0,
+      "survivingResidents": 11,
+      "survivingCattle": 3,
+      "checkpointSha256": "83dce3562d7b3c43cd4bc4ed6936f77dcad349de990dcafe76b5f8774a43f31a",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 42,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-7"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-3",
+          "founder-4",
+          "founder-6",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 9,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 5,
+        "materials": 5
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "bed4a34a7f4db39354926ef6a24728ffa54ae5d62185e95216a68afb49b7339e",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 91,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 39,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 39,
+        "materials": 15
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "ed102bc0574cebef5bbeb84a9370d60e5f18185c900b0b8bc02e19647a01caaa",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 91,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Normal",
+      "incomingWeather": "Harsh",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 17,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 13,
+        "materials": 14
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "107833938ed5212172c0efa4ac7019298d51f9c8be75e910ffbbe7c83d66a208",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1983,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Mild",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 36,
+      "cattleFoodProduced": 8,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 36,
+        "materials": 15
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "8745f3884b5cf43dfc1c1b62146ce63784868d5c2d9220aba3374998c21dce4e",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1983,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Mild",
+      "incomingWeather": "Normal",
+      "initialExposure": {
+        "residentIds": [
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-10",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 16,
+      "cattleFoodProduced": 4,
+      "residentFoodConsumed": 20,
+      "cattleFoodConsumed": 3,
+      "residentFoodShortfall": 0,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 12,
+        "materials": 14
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 2,
+      "survivingResidents": 10,
+      "survivingCattle": 5,
+      "checkpointSha256": "4f9dfcfbb54b3b0dddecde6e2e897ecb3497096c26f512213280bc840a92d3b3",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1337,
+      "phase": "legacy-winter",
+      "strategy": "one-farmyard",
+      "playedTicks": 1000,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Harsh",
+      "incomingWeather": "Severe",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 0,
+      "cattleFoodProduced": 0,
+      "residentFoodConsumed": 10,
+      "cattleFoodConsumed": 5,
+      "residentFoodShortfall": 20,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 0,
+        "materials": 4
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "eccc427d3501948bab67bef55c2b934ab6ebc1c0d3c763991dd61152e90087e5",
+      "saveResumeEqual": true
+    },
+    {
+      "seed": 1337,
+      "phase": "summer-800-v1",
+      "strategy": "one-farmyard",
+      "playedTicks": 500,
+      "actions": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        },
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-3"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-1",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-2",
+          "farmyardId": "house-1"
+        },
+        {
+          "type": "AssignCattle",
+          "cattleId": "cattle-3",
+          "farmyardId": "house-1"
+        }
+      ],
+      "initialStocks": {
+        "food": 15,
+        "materials": 15
+      },
+      "outgoingWeather": "Harsh",
+      "incomingWeather": "Severe",
+      "initialExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7",
+          "founder-8",
+          "founder-9"
+        ],
+        "cattleIds": []
+      },
+      "finalExposure": {
+        "residentIds": [
+          "founder-1",
+          "founder-10",
+          "founder-2",
+          "founder-4",
+          "founder-5",
+          "founder-6",
+          "founder-7"
+        ],
+        "cattleIds": []
+      },
+      "residentFoodProduced": 0,
+      "cattleFoodProduced": 0,
+      "residentFoodConsumed": 10,
+      "cattleFoodConsumed": 5,
+      "residentFoodShortfall": 20,
+      "cattleFoodShortfall": 0,
+      "finalStocks": {
+        "food": 0,
+        "materials": 4
+      },
+      "residentDeaths": 0,
+      "cattleDeaths": 0,
+      "residentBirths": 0,
+      "cattleBirths": 1,
+      "survivingResidents": 10,
+      "survivingCattle": 4,
+      "checkpointSha256": "0e00091e5bb67c8944ac00986b26a5ce2097c9bd7b6347d166a409fb3015aba0",
+      "saveResumeEqual": true
+    }
+  ]
+}
