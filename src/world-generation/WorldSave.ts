@@ -1,5 +1,5 @@
 import { normalizeWorldConfig } from './GenerateWorld';
-import { freezeBlueprint, generatorVersion, islandGeneratorVersion, WorldBlueprint } from './WorldBlueprint';
+import { freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, WorldBlueprint } from './WorldBlueprint';
 import { natureAssetIds } from '../config/NatureAssets';
 import { buildings } from '../world/SettlementLayout';
 
@@ -16,7 +16,8 @@ export function parseWorld(text: string): WorldBlueprint {
     if (saved.schemaVersion !== schemaVersion) throw new Error('Unsupported world save version.');
     const world = saved.blueprint as WorldBlueprint;
     if (world?.config?.generatorVersion !== generatorVersion &&
-        world?.config?.generatorVersion !== islandGeneratorVersion) {
+        world?.config?.generatorVersion !== islandGeneratorVersion &&
+        world?.config?.generatorVersion !== firstIslandGeneratorVersion) {
         throw new Error('Unsupported generator version: ' + world?.config?.generatorVersion);
     }
     const requireValid = (condition: boolean) => {
@@ -31,15 +32,16 @@ export function parseWorld(text: string): WorldBlueprint {
         Math.abs(value.x) <= halfWidth && Math.abs(value.z) <= halfDepth;
     requireValid(Object.entries(normalized).every(([key, value]) =>
         world.config[key as keyof typeof normalized] === value));
-    const maximumHeight = normalized.generatorVersion === islandGeneratorVersion ? 120 : 100;
+    const maximumHeight = normalized.preset === 'island' ? 120 : 100;
+    const minimumHeight = normalized.generatorVersion === islandGeneratorVersion ? -20 : -10;
     const terrain = world.terrain;
     requireValid(!!terrain && terrain.columns === columns && terrain.rows === rows && terrain.spacing === 2);
     requireValid(terrain.bounds?.minX === -halfWidth && terrain.bounds.maxX === halfWidth &&
         terrain.bounds.minZ === -halfDepth && terrain.bounds.maxZ === halfDepth);
     requireValid(Array.isArray(terrain.heights) && terrain.heights.length === samples &&
-        terrain.heights.every(height => Number.isFinite(height) && height >= -10 && height <= maximumHeight));
+        terrain.heights.every(height => Number.isFinite(height) && height >= minimumHeight && height <= maximumHeight));
     requireValid(Number.isFinite(world.waterLevel));
-    if (normalized.generatorVersion === islandGeneratorVersion) {
+    if (normalized.preset === 'island') {
         const geology = world.geology;
         requireValid(!!geology && geology.model === 'rift-glacial-v1');
         requireValid(Array.isArray(geology!.rifts) && geology!.rifts.length >= 1 && geology!.rifts.length <= 3 &&
@@ -54,7 +56,7 @@ export function parseWorld(text: string): WorldBlueprint {
                 valley.points.every(point));
             requireValid(Array.isArray(valley.floorHeights) && valley.floorHeights.length === valley.points.length &&
                 valley.floorHeights.every((height, i, values) => Number.isFinite(height) &&
-                    height >= -10 && height <= 120 && (i === 0 || height <= values[i-1])));
+                    height >= minimumHeight && height <= 120 && (i === 0 || height <= values[i-1])));
             requireValid(Array.isArray(valley.widths) && valley.widths.length === valley.points.length &&
                 valley.widths.every(width => Number.isFinite(width) && width > 0 && width <= 100));
             if (valley.parentId !== null) {

@@ -1,5 +1,6 @@
 import { inspectMacroIsland, findNaturalSites } from './MacroIsland';
 import { islandTerrain } from './IslandShape';
+import { islandTerrain as firstIslandTerrain } from './IslandShapeV1';
 import { createNoise2D } from 'simplex-noise';
 import { seededRandom } from '../config/worldConfig';
 import { createBlueprintSurface } from './TerrainQueries';
@@ -8,7 +9,7 @@ import { planNature } from './PlanNature';
 import { planSettlement, settlementBoundsAt, extractCoast } from './PlanSettlement';
 import { fjordWaterConfig } from '../config/FjordWaterConfig';
 import {
-    freezeBlueprint, generatorVersion, islandGeneratorVersion, GenerationRequest, WorldBlueprint,
+    freezeBlueprint, generatorVersion, firstIslandGeneratorVersion, islandGeneratorVersion, GenerationRequest, WorldBlueprint,
     WorldGenerationConfig, Point2, ConiferSource,
 } from './WorldBlueprint';
 
@@ -20,7 +21,8 @@ export function normalizeWorldConfig(request: GenerationRequest): WorldGeneratio
     if (!['fjord', 'coastal-valley', 'rocky-inlet', 'island'].includes(preset)) {
         throw new Error('Unknown world preset.');
     }
-    const version = preset === 'island' ? islandGeneratorVersion : generatorVersion;
+    const version = preset === 'island' ?
+        (request.generatorVersion === firstIslandGeneratorVersion ? firstIslandGeneratorVersion : islandGeneratorVersion) : generatorVersion;
     if (request.generatorVersion && request.generatorVersion !== version) {
         throw new Error('Unsupported generator version: ' + request.generatorVersion);
     }
@@ -60,7 +62,8 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
         config.preset === 'rocky-inlet' ? 15 : 19) + random() * 5;
     const waterLevel = fjordWaterConfig.level;
     const island = config.preset === 'island';
-    const formation = island ? islandTerrain(config, waterLevel) : null;
+    const formIsland = config.generatorVersion === firstIslandGeneratorVersion ? firstIslandTerrain : islandTerrain;
+    const formation = island ? formIsland(config, waterLevel) : null;
     const heights: number[] = formation?.heights ?? [];
     for (let z = -90; !island && z <= 90; z += 2) {
         for (let x = -90; x <= 90; x += 2) {

@@ -105,7 +105,7 @@ test('island coast has substantial inlets and its high ground belongs to an exte
 
 test('the explicit island version produces one landmass inside a complete sea border', () => {
     const world = generateWorld({ seed: 17, preset: 'island' });
-    assert.equal(world.config.generatorVersion, 'fjordside-island-v0.3b');
+    assert.equal(world.config.generatorVersion, 'fjordside-island-v0.3b-r2');
     assert.equal(world.config.width, 800);
     assert.equal(world.config.depth, 800);
     assert.ok(dryComponents(world)[0] * 4 > 50_000, 'room for two full settlements and intervening landscape');
@@ -254,8 +254,9 @@ test('candidate footprints have a traversable terrain corridor to the actual coa
     }
 });
 
-test('unsuitable requested island configurations return named rejection reasons without reseeding', () => {
-    const world = generateWorld({ seed: 73, preset: 'island', relief: 1.5 });
+test('the first-pass unsuitable configuration retains its named rejection reasons without reseeding', () => {
+    const world = generateWorld({ seed: 73, preset: 'island', relief: 1.5,
+        generatorVersion: 'fjordside-island-v0.3b' });
     const { parseWorld, serializeWorld } = load('../src/world-generation/WorldSave.ts');
     assert.deepEqual(parseWorld(serializeWorld(world)), world, 'a rejected high-relief proposal remains inspectable after import');
     assert.equal(world.config.seed, 73);
@@ -283,4 +284,72 @@ test('island coast and query samples lie on the same rendered triangles, includi
     }
     mesh.geometry.dispose();
     mesh.material.dispose();
+});
+
+test('the refinement has its own generation version while the first island proposal replays intact', async () => {
+    const { createHash } = await import('node:crypto');
+    const { parseWorld, serializeWorld } = load('../src/world-generation/WorldSave.ts');
+    const old = generateWorld({ seed: 17, preset: 'island', conifers: 'ez-tree',
+        generatorVersion: 'fjordside-island-v0.3b' });
+    assert.equal(createHash('sha256').update(JSON.stringify(old)).digest('hex'),
+        '42d87bb598c23664d7c148ff79cad76e490f085cf37997469443fcf889e682e9');
+    assert.deepEqual(parseWorld(serializeWorld(old)), old);
+    const refined = generateWorld({ seed: 17, preset: 'island' });
+    assert.equal(refined.config.generatorVersion, 'fjordside-island-v0.3b-r2');
+    assert.deepEqual(parseWorld(serializeWorld(refined)), refined);
+    assert.deepEqual(generateWorld(refined.config), refined);
+});
+
+test('review seeds vary their rotation-independent land proportions rather than repeating one lobed template', () => {
+    const aspects = [];
+    for (const seed of [17, 42, 91, 1983, 1337]) {
+        const world = generateWorld({ seed, preset: 'island' });
+        const { heights, columns, spacing, bounds } = world.terrain;
+        const land = heights.flatMap((height, i) => height > world.waterLevel ? [{
+            x: bounds.minX + i % columns * spacing,
+            z: bounds.minZ + Math.floor(i / columns) * spacing
+        }] : []);
+        const center = land.reduce((sum, p) => ({ x: sum.x + p.x / land.length,
+            z: sum.z + p.z / land.length }), { x: 0, z: 0 });
+        let xx = 0, zz = 0, xz = 0;
+        for (const p of land) {
+            const x = p.x - center.x, z = p.z - center.z;
+            xx += x * x;
+            zz += z * z;
+            xz += x * z;
+        }
+        const spread = Math.sqrt((xx - zz) ** 2 + 4 * xz * xz);
+        aspects.push(Math.sqrt((xx + zz + spread) / (xx + zz - spread)));
+    }
+    // Coarse engineering screen: rotations alone cannot turn the same template
+    // into both a compact massif and an elongated ridge island. Visual review remains required.
+    assert.ok(Math.max(...aspects) - Math.min(...aspects) >= .45, JSON.stringify(aspects));
+});
+
+test('major glacial basins have different incision depths and flooded proportions', () => {
+    const depths = [], flooded = [];
+    for (const seed of [17, 42, 91, 1983, 1337]) {
+        const world = generateWorld({ seed, preset: 'island' });
+        for (const valley of world.geology.valleys.filter(value => value.parentId === null)) {
+            depths.push(world.waterLevel - valley.floorHeights.at(-1));
+            flooded.push(valley.floorHeights.filter(height => height < world.waterLevel).length /
+                valley.floorHeights.length);
+        }
+    }
+    assert.ok(Math.max(...depths) - Math.min(...depths) >= 2, 'outlet depths vary between drainage basins');
+    assert.ok(Math.max(...flooded) - Math.min(...flooded) >= .15,
+        'short flooded bays and longer fjords share the same connected drainage contract');
+});
+
+test('coastal shelves coexist with raised coast instead of a mostly compressed low-elevation ring', () => {
+    let variedCoasts = 0;
+    for (const seed of [17, 42, 91, 1983, 1337]) {
+        const world = generateWorld({ seed, preset: 'island' });
+        const coastal = world.terrain.heights.filter((height, i) => height > world.waterLevel &&
+            world.biomes.waterDistance[i] < 40);
+        const low = coastal.filter(height => height < world.waterLevel + 2).length;
+        if (low / coastal.length <= .55) variedCoasts++;
+        assert.ok(low * 4 >= 500, 'local low shelves remain, not uniformly steep coasts');
+    }
+    assert.ok(variedCoasts >= 3, `${variedCoasts}/5 coasts escape the compressed ring`);
 });

@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { PerspectiveCamera, Vector3 } from 'three';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { openEnvironmentSettings } from './environment-settings.mjs';
@@ -58,6 +59,21 @@ try {
         await page.waitForTimeout(850);
         await canvas.screenshot({ path: output + '/' + file });
         const world = await summary();
+        if (/^(?:before-)?seed-\d+-oblique.png$/.test(file)) {
+            const fixture = JSON.parse(await canvas.getAttribute('data-fixture'));
+            const box = await canvas.boundingBox();
+            const camera = new PerspectiveCamera(fixture.camera.fov, box.width / box.height, .1, 5000);
+            camera.position.fromArray(fixture.camera.position);
+            camera.lookAt(new Vector3().fromArray(fixture.camera.target));
+            camera.zoom = fixture.camera.zoom;
+            camera.updateProjectionMatrix();
+            camera.updateMatrixWorld(true);
+            const blueprint = generateWorld({ seed: world.seed, preset: 'island',
+                generatorVersion: world.generatorVersion });
+            const projected = blueprint.coast.map(({ a }) => new Vector3(a.x, blueprint.waterLevel, a.z).project(camera));
+            assert.ok(projected.every(point => Math.abs(point.x) < .97 && Math.abs(point.y) < .97),
+                file + ': the full coastline fits with a visible margin');
+        }
         if (Array.isArray(world?.macro?.candidates)) world.macro.candidates = world.macro.candidates.length;
         evidence.captures.push({ file, viewport: page.viewportSize(), world,
             fixture: JSON.parse(await canvas.getAttribute('data-fixture')),
@@ -84,7 +100,7 @@ try {
         assert.ok(separation.connection.length > 2);
         assert.match(await page.locator('#world-generation-status').textContent(), /Terrain ridge:.*walking connection/);
         assert.match(await page.locator('#world-generation-status').textContent(), /2 natural lowland pockets/);
-        assert.equal((await summary()).generatorVersion, 'fjordside-island-v0.3b');
+        assert.equal((await summary()).generatorVersion, 'fjordside-island-v0.3b-r2');
         await overlay('elevation');
         await page.selectOption('#environment-camera', 'island-overhead');
         await capture('seed-' + seed + '-overhead.png');
@@ -93,7 +109,17 @@ try {
         await capture('seed-' + seed + '-oblique.png');
         await page.selectOption('#environment-camera', 'shore');
         await capture('seed-' + seed + '-shore.png');
-        console.log('Captured island', seed);
+        const original = generateWorld({ seed, preset: 'island', conifers: 'ez-tree',
+            generatorVersion: 'fjordside-island-v0.3b' });
+        await changed(() => page.locator('#world-import').setInputFiles({ name: 'comparison-before.json',
+            mimeType: 'application/json', buffer: Buffer.from(serializeWorld(original)) }));
+        await overlay('elevation');
+        await page.selectOption('#environment-camera', 'island-overhead');
+        await capture('before-seed-' + seed + '-overhead.png');
+        await overlay('form');
+        await page.selectOption('#environment-camera', 'island-oblique');
+        await capture('before-seed-' + seed + '-oblique.png');
+        console.log('Captured island before/after', seed);
     }
     if (!process.env.QA_CAPTURE_ONLY) {
     await changed(async () => {
@@ -131,11 +157,17 @@ try {
     }
     assert.ok(evidence.regeneration.every(value => value.geometries === evidence.regeneration[0].geometries &&
         value.textures === evidence.regeneration[0].textures), 'Repeated replacement retains stable resources');
+    const firstIsland = generateWorld({ seed: 17, preset: 'island', conifers: 'ez-tree',
+        generatorVersion: 'fjordside-island-v0.3b' });
+    await changed(() => page.locator('#world-import').setInputFiles({ name: 'first-island.json',
+        mimeType: 'application/json', buffer: Buffer.from(serializeWorld(firstIsland)) }));
+    assert.deepEqual(await exportWorld(), firstIsland, 'The first island revision loads without new terrain');
     const old = parseWorld(await readFile('docs/qa/generated-sand-resolution/blueprint-17.json', 'utf8'));
     await changed(() => page.locator('#world-import').setInputFiles({ name: 'old.json',
         mimeType: 'application/json', buffer: Buffer.from(serializeWorld(old)) }));
     assert.deepEqual(await exportWorld(), old, 'Stored v0.1 blueprint is imported intact');
-    const rejected = generateWorld({ seed: 73, preset: 'island', relief: 1.5 });
+    const rejected = generateWorld({ seed: 73, preset: 'island', relief: 1.5,
+        generatorVersion: 'fjordside-island-v0.3b' });
     await changed(() => page.locator('#world-import').setInputFiles({ name: 'rejected.json',
         mimeType: 'application/json', buffer: Buffer.from(serializeWorld(rejected)) }));
     assert.match(await page.locator('#world-generation-status').textContent(), /REJECTED/);
@@ -176,7 +208,7 @@ try {
         'Physical ridge and traversable connection are reported for every seed',
         'Island camera controls disabled until a blueprint exists',
         'Export/import and repeated replacement preserve the full island',
-        'Old v0.1 geography loads intact; Reference fallback remains available',
+        'Old v0.1 and first v0.3b island geography load intact; Reference fallback remains available',
         'Rejected macro configuration shows reasons and does not spawn reference residents',
         'Low quality, 1024px touch and 390px layouts render without changing geography');
     }

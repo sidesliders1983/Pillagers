@@ -429,7 +429,9 @@ export class LabWorldGeneration {
         const extent = world.config.width;
         const fit = Math.max(1, 1 / this.camera.aspect);
         presets['island-overhead'] = { position: [0, extent * 1.1 * fit, .01], target: [0, 0, 0] };
-        presets['island-oblique'] = { position: [extent * .4 * fit, extent * .62 * fit, -extent * .45 * fit], target: [0, 8, 0] };
+        // Frame the full irregular coast, including headlands nearest the camera.
+        presets['island-oblique'] = { position: [extent * .52 * fit, extent * .806 * fit, -extent * .585 * fit],
+            target: [0, 8, 0] };
         if (world.config.preset === 'island' && view === 'shore') {
             const surface = createBlueprintSurface(world);
             const distance = Math.hypot(x-harbor.x,z-harbor.z) || 1;

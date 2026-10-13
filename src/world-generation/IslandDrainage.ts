@@ -87,14 +87,23 @@ export function islandDrainage(terrain: TerrainField, waterLevel: number, random
         return path.reverse();
     };
     const outlets = ordered.filter(i => original[i] > waterLevel && downstream[i] >= 0 &&
-        original[downstream[i]] <= waterLevel).sort((a, b) => accumulation[b] - accumulation[a] || a - b);
-    const maximum = 2 + Math.floor(random() * 3), selected: number[] = [];
+        original[downstream[i]] <= waterLevel);
+    // Both drainage area and travel through the upland contribute to glacial
+    // work; a large, short coastal catchment need not carve the dominant fjord.
+    const branchesByOutlet = new Map(outlets.map(outlet => [outlet, longestBranch(outlet)]));
+    const work = (outlet: number) => accumulation[outlet] * branchesByOutlet.get(outlet)!.length;
+    outlets.sort((a, b) => work(b) - work(a) || a - b);
+    const landArea = original.filter(height => height > waterLevel).length * spacing * spacing;
+    const maximum = Math.max(landArea > 240_000 ? 3 : 2, 2 + Math.floor(random() * 3));
+    const outletSpacing = 95 + random() * 75;
+    const selected: number[] = [];
     const valleys: GlacialValley[] = [];
     for (const outlet of outlets) {
         if (selected.length >= maximum) break;
         const mouth = point(outlet);
-        if (selected.some(other => Math.hypot(point(other).x - mouth.x, point(other).z - mouth.z) < 140)) continue;
-        const cells = longestBranch(outlet);
+        if (selected.some(other => Math.hypot(point(other).x - mouth.x,
+            point(other).z - mouth.z) < outletSpacing)) continue;
+        const cells = [...branchesByOutlet.get(outlet)!];
         if (cells.length < 15 || original[cells[0]] < waterLevel + 25) continue;
         cells.push(downstream[outlet]);
         const rawPoints = cells.map(point);
@@ -107,14 +116,29 @@ export function islandDrainage(terrain: TerrainField, waterLevel: number, random
             Math.hypot(points[i].x - points[i - 1].x, points[i].z - points[i - 1].z));
         const total = lengths.at(-1)!;
         const source = original[cells[0]] - waterLevel;
+        // Different catchments retain different upland reaches and incision depths.
+        // A continuous descending floor gives both short drowned bays and long fjords.
+        const dominant = selected.length === 0;
+        const uplandReach = (dominant ? .12 : .3) + random() * (dominant ? .15 : .25);
+        const valleyHead = (dominant ? .4 : 8) + random() * (dominant ? 2.4 : 7);
+        const mouthDepth = (dominant ? 12 : 3) + random() * (dominant ? 4 : 6);
+        const lowerProfile = .7 + random() * 1.2;
         const floorHeights = lengths.map(distance => {
             const t = distance / total;
-            const floor = t < .2 ? 1 + (source - 1) * (1 - t / .2) ** 2 :
-                1 - (t - .2) / .8 * 10;
+            const floor = t < uplandReach ? valleyHead + (source - valleyHead) *
+                (1 - t / uplandReach) ** 1.2 : valleyHead - (valleyHead + mouthDepth) *
+                ((t - uplandReach) / (1 - uplandReach)) ** lowerProfile;
             return waterLevel + floor;
         });
-        const mouthWidth = 60 + random() * 28;
-        const widths = lengths.map(distance => 20 + (mouthWidth - 20) * Math.sqrt(distance / total));
+        const mouthWidth = Math.min(98, 50 + Math.sqrt(accumulation[outlet]) * 2 + random() * 18);
+        const headWidth = (dominant ? 54 : 36) + random() * 20;
+        const widening = .55 + random() * .8;
+        const widths = lengths.map((distance, i) => {
+            const t = distance / total;
+            const flow = Math.sqrt(accumulation[cells[i]] / accumulation[outlet]);
+            return Math.min(98, headWidth + (mouthWidth - headWidth) *
+                (.55 * t ** widening + .45 * Math.min(1, flow)));
+        });
         const id = 'valley-' + (selected.length + 1);
         valleys.push({ id, parentId: null, points, floorHeights, widths });
         selected.push(outlet);
@@ -124,7 +148,8 @@ export function islandDrainage(terrain: TerrainField, waterLevel: number, random
             .filter(child => !mainCells.has(child) && accumulation[child] >= 4)
             .map(child => ({ child, index, cell })))
             .sort((a, b) => accumulation[b.child] - accumulation[a.child] || a.child - b.child);
-        for (const branch of branches.slice(0, 2)) {
+        const tributaryCount = 1 + Math.floor(random() * 2);
+        for (const branch of branches.slice(0, tributaryCount)) {
             const tributary = [...longestBranch(branch.child), branch.cell];
             if (tributary.length < 4) continue;
             const endHeight = floorHeights[branch.index];

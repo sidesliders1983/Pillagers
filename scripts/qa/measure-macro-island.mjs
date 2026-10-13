@@ -8,6 +8,35 @@ const { serializeWorld, parseWorld } = loadTypeScript(new URL('../../src/world-g
 const output = process.env.QA_OUTPUT || 'scratch/macro-island';
 await mkdir(output, { recursive: true });
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+function morphology(world) {
+    const { heights, columns, spacing, bounds } = world.terrain;
+    const land = heights.flatMap((height, i) => height > world.waterLevel ? [{
+        x: bounds.minX + i % columns * spacing,
+        z: bounds.minZ + Math.floor(i / columns) * spacing
+    }] : []);
+    const center = land.reduce((sum, point) => ({ x: sum.x + point.x / land.length,
+        z: sum.z + point.z / land.length }), { x: 0, z: 0 });
+    let xx = 0, zz = 0, xz = 0;
+    for (const point of land) {
+        const x = point.x - center.x, z = point.z - center.z;
+        xx += x * x;
+        zz += z * z;
+        xz += x * z;
+    }
+    const spread = Math.sqrt((xx - zz) ** 2 + 4 * xz * xz);
+    const coastal = heights.filter((height, i) => height > world.waterLevel &&
+        world.biomes.waterDistance[i] < 40).map(height => height - world.waterLevel).sort((a, b) => a - b);
+    const main = world.geology.valleys.filter(valley => valley.parentId === null);
+    return {
+        landAspectRatio: Math.sqrt((xx + zz + spread) / (xx + zz - spread)),
+        coastalAreaBelow2mFraction: coastal.filter(height => height < 2).length / coastal.length,
+        coastalElevationP80: coastal[Math.floor(coastal.length * .8)],
+        coastalElevationP95: coastal[Math.floor(coastal.length * .95)],
+        mainValleyOutletDepths: main.map(valley => world.waterLevel - valley.floorHeights.at(-1)),
+        mainValleyFloodedFractions: main.map(valley => valley.floorHeights.filter(height =>
+            height < world.waterLevel).length / valley.floorHeights.length)
+    };
+}
 const results = [];
 for (const seed of [17, 91, 1983, 42, 18, 104, 211, 512, 819, 1337]) {
     const before = process.memoryUsage(), start = performance.now();
@@ -27,7 +56,7 @@ for (const seed of [17, 91, 1983, 42, 18, 104, 211, 512, 819, 1337]) {
         ends.set(key, (ends.get(key) || 0) + 1);
     }
     assert.ok([...ends.values()].every(degree => degree === 2), 'No broken coast seams');
-    results.push({ seed, config: world.config, validation: world.validation,
+    results.push({ seed, morphology: morphology(world), config: world.config, validation: world.validation,
         macro: { ...macro, candidates: macro.candidates.length,
             sitePair: macro.sitePair.map(({ cells, ...site }) => site) },
         geology: { model: world.geology.model,
@@ -40,8 +69,16 @@ for (const seed of [17, 91, 1983, 42, 18, 104, 211, 512, 819, 1337]) {
         serializedBytes: Buffer.byteLength(saved), samples: world.terrain.heights.length });
     console.log('Measured island seed', seed);
 }
-const rejected = generateWorld({ seed: 73, preset: 'island', relief: 1.5 });
+const comparison = [];
+for (const seed of [17, 42, 91, 1983, 1337]) {
+    const first = generateWorld({ seed, preset: 'island', conifers: 'ez-tree',
+        generatorVersion: 'fjordside-island-v0.3b' });
+    comparison.push({ seed, before: morphology(first),
+        after: results.find(result => result.seed === seed).morphology });
+}
+const rejected = generateWorld({ seed: 73, preset: 'island', relief: 1.5,
+        generatorVersion: 'fjordside-island-v0.3b' });
 assert.equal(rejected.validation.accepted, false);
-await writeFile(output + '/batch.json', JSON.stringify({ date: '2026-10-13', results,
+await writeFile(output + '/batch.json', JSON.stringify({ date: '2026-10-13', results, comparison,
     rejectionFixture: { config: rejected.config, validation: rejected.validation },
     measurementLimits: 'Node before/after heap and RSS samples, not peak or GPU memory. Garbage collection can make deltas negative. Timings are development-machine observations, not a performance gate.' }, null, 2));

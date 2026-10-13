@@ -2,7 +2,8 @@ import type { NatureAssetKey } from '../config/NatureAssets';
 
 /** A versioned geographical proposal. It contains no Simulation Core inhabitants or resources. */
 export const generatorVersion = 'fjordside-v0.1' as const;
-export const islandGeneratorVersion = 'fjordside-island-v0.3b' as const;
+export const firstIslandGeneratorVersion = 'fjordside-island-v0.3b' as const;
+export const islandGeneratorVersion = 'fjordside-island-v0.3b-r2' as const;
 export type ConiferSource = 'kaykit' | 'ez-tree';
 export type WorldPreset = 'fjord' | 'coastal-valley' | 'rocky-inlet' | 'island';
 export type Point2 = Readonly<{ x: number; z: number }>;
@@ -19,7 +20,7 @@ export interface GenerationRequest {
 
 export interface WorldGenerationConfig {
     readonly seed: number;
-    readonly generatorVersion: typeof generatorVersion | typeof islandGeneratorVersion;
+    readonly generatorVersion: typeof generatorVersion | typeof firstIslandGeneratorVersion | typeof islandGeneratorVersion;
     readonly preset: WorldPreset;
     readonly width: number;
     readonly depth: number;
