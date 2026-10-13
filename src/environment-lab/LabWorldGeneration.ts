@@ -1,3 +1,4 @@
+import { environmentOverlays, renderEnvironmentDiagnostics } from './EnvironmentDiagnostics';
 import { settlementGeneratorVersion } from '../world-generation/SettlementSites';
 import { settlementStartingViews } from '../world-generation/SiteNavigation';
 import { createSettlementSiteOverlay, renderSettlementSiteDiagnostics } from './SettlementSiteDiagnostics';
@@ -79,6 +80,7 @@ export class LabWorldGeneration {
                     <option value="island">Nordic Island · v0.3b</option>
                 </select></label>
                 <label><input id="world-site-planning" type="checkbox">Player &amp; hidden rival sites · v0.3e (islands)</label>
+                <label><input id="world-environment-zoning" type="checkbox">Environment zoning · v1 (new worlds)</label>
                 <label><input id="world-sand-study" type="checkbox">Sand study · approved ReferenceWater</label>
                 <label>Standard sand<select id="world-sand-resolution" disabled>
                     <option value="256">256 px · baseline</option>
@@ -97,9 +99,10 @@ export class LabWorldGeneration {
                     <option value="elevation">Elevation</option>
                     <option value="biomes">Biomes</option>
                     <option value="walkability">Walkability</option>
+                    ${Object.entries(environmentOverlays).map(([key, label]) => '<option value="' + key + '" data-environment-overlay disabled>' + label + '</option>').join('')}
                 </select></label>
                 <p>Lab proposal only · source assets preserved · production integration awaits review.</p>
-            </section><pre id="world-generation-status" role="status">Reference Fjordside · seed 1983</pre><details id="world-sites-diagnostics" hidden></details>
+            </section><pre id="world-generation-status" role="status">Reference Fjordside · seed 1983</pre><details id="world-sites-diagnostics" hidden></details><details id="world-environment-diagnostics" hidden></details>
         `);
         this.status = document.querySelector('#world-generation-status')!;
         this.seed = document.querySelector('#world-seed')!;
@@ -181,6 +184,8 @@ export class LabWorldGeneration {
         try {
             const world = saved ?? generateWorld({ seed: Number(this.seed.value),
                 preset: this.preset.value as WorldPreset, conifers: this.coniferSource(),
+                ...((document.querySelector('#world-environment-zoning') as HTMLInputElement).checked ?
+                    { environment: { version: 1 as const } } : {}),
                 ...(this.preset.value === 'island' &&
                     (document.querySelector('#world-site-planning') as HTMLInputElement).checked ?
                     { generatorVersion: settlementGeneratorVersion } : {}) });
@@ -237,6 +242,7 @@ export class LabWorldGeneration {
             this.blueprint = world;
             this.generations++;
             this.scene.add(root);
+            this.syncEnvironmentControls();
             this.applyOverlay();
             (document.querySelector('#world-export') as HTMLButtonElement).disabled = false;
             for (const id of ['material','grass']) {
@@ -267,6 +273,7 @@ export class LabWorldGeneration {
                         ((macro.terrainSeparation.connection.length - 1) * world.terrain.spacing) + 'm' : '') +
                     (macro.reasons.length ? '\n' + macro.reasons.join('\n') : '') : '');
             renderSettlementSiteDiagnostics(document.querySelector('#world-sites-diagnostics')!, world);
+            renderEnvironmentDiagnostics(document.querySelector('#world-environment-diagnostics')!, world);
             (document.querySelector('#world-site-planning') as HTMLInputElement).checked = !!world.siteSelection;
             this.canvas.dataset.world = JSON.stringify({ seed: world.config.seed,
                 generatorVersion: world.config.generatorVersion, preset: world.config.preset, conifers,
@@ -276,6 +283,10 @@ export class LabWorldGeneration {
                     rivalSite: world.rivalSite ?? null, candidates: world.siteSelection.candidates.length,
                     exposedRays: world.siteSelection.visibility.exposedRays,
                     rayCount: world.siteSelection.visibility.rays.length } : null,
+                environment: world.environment ? { version: world.environment.version,
+                    coverage: world.environment.coverage, regions: world.environment.regions.length,
+                    climate: world.config.environment,
+                    maximumSnowPotential: Math.max(...world.environment.fields.snowRetentionPotential) } : null,
                 naturePlacements: world.placementPlan.length, referenceResidents: next.actors.length,
                 bounds: world.terrain.bounds, site: world.settlement.center, waterLevel: world.waterLevel,
                 generationMs, previewPreparationMs: performance.now() - start,
@@ -382,6 +393,16 @@ export class LabWorldGeneration {
         disposeBlueprintTerrain(previous);
         this.preview.root.add(next);
         this.preview.terrain = next;
+    }
+
+    private syncEnvironmentControls() {
+        const enabled = !!this.blueprint?.environment;
+        (document.querySelector('#world-environment-zoning') as HTMLInputElement).checked = enabled;
+        document.querySelectorAll<HTMLOptionElement>('[data-environment-overlay]').forEach(option => {
+            option.disabled = !enabled;
+        });
+        const overlay = document.querySelector('#world-overlay') as HTMLSelectElement;
+        if (!enabled && overlay.value in environmentOverlays) overlay.value = 'none';
     }
 
     private rememberReference() {
@@ -502,6 +523,7 @@ export class LabWorldGeneration {
 
     restore() {
         document.querySelector<HTMLElement>('#world-sites-diagnostics')!.hidden = true;
+        document.querySelector<HTMLElement>('#world-environment-diagnostics')!.hidden = true;
         this.camera.far = 300;
         this.camera.updateProjectionMatrix();
         this.revision++;
@@ -509,6 +531,7 @@ export class LabWorldGeneration {
         this.release(this.preview);
         this.preview = null;
         this.blueprint = null;
+        this.syncEnvironmentControls();
         this.sandStudy.checked = false;
         delete this.canvas.dataset.studyWater;
         this.syncSandControls();

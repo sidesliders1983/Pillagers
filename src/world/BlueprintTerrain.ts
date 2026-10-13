@@ -1,3 +1,4 @@
+import { environmentColours } from './EnvironmentOverlay';
 import { macroRegions } from '../world-generation/MacroIsland';
 import {
     BufferGeometry, Float32BufferAttribute, Mesh, MeshStandardMaterial, Color,
@@ -44,6 +45,7 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     const { terrain } = world;
     const macroPalette = { sea: '#244a68', shore: '#dac393', lowland: '#7fba66',
         valley: '#438b69', upland: '#8b8971', highland: '#e0dcd3' };
+    const environmentColors = environmentColours(world, overlay);
     const diagnosticColors = overlay === 'macro' ? macroRegions(world).map(region => macroPalette[region]) : [];
     // Independent source repeats are applied through native texture transforms.
     const repeat = regionalGroundConfig.sources.Ground037.repeatMeters;
@@ -57,7 +59,9 @@ export function createBlueprintTerrain(world: WorldBlueprint,
             sourceUvs.push(x / repeat, -z / repeat);
             maskUvs.push((column + .5) / terrain.columns, (row + .5) / terrain.rows);
             const colour = new Color();
-            if (overlay === 'form') {
+            if (environmentColors) {
+                colour.copy(environmentColors[index]);
+            } else if (overlay === 'form') {
                 colour.set('#c9c1ad');
             } else if (overlay === 'macro') {
                 colour.set(diagnosticColors[index]);
