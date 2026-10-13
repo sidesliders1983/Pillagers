@@ -25,7 +25,16 @@ Iteratively add/complete resident, household, family, occupations, cattle, const
 
 ### Stage 4 — Exploration, rival settlements, recon and pillaging
 
-Use canonical multi-clan / world-region simulation and commands; connect their projections and interactions to 3D rather than rebuilding separate 2D flows. CPU attacks/defense, diplomacy and endgame remain separate approved gameplay phases where applicable.
+**Active implementation epic: [#146 — Expedition Groups, Discovery & Living Rival Clan](https://github.com/sidesliders1983/Pillagers/issues/146).** This follows #132's physical island and #140's single 3D player game. Owner-approved rule **GP-008**: only Expedition Groups receive direct player map-movement/mission orders; ordinary residents continue autonomous life.
+
+1. **#147** — persistent clan-owned discovery/fog of war, distinct from the current atmospheric fog.
+2. **#148** — click an unknown 3D island area and send an eligible reusable group to explore it autonomously; terrain is revealed during confirmed travel. This is the **first playable milestone**, ahead of full enemy visualization.
+3. **#149** — physical hidden rival site linked to an existing headless CPU Simulation Core community that evolves even when unseen.
+4. **#150** — Recon/Surveillance/Pillage tied to known physical island areas/sites; preserve old #54 four-direction saves/missions unchanged.
+5. **#151** — integrated replay, visibility-leak and Low/Standard/mobile performance QA.
+
+Reuse prior canonical world-expedition rules and actual CPU clan state. Do not rebuild a second Expedition engine or create individual RTS movement controls. CPU attacks/defense, diplomacy and endgame remain separate future gameplay phases.
+
 
 ## Historical simulator milestones — delivered/proposed gameplay layers, not active 2D UI roadmap
 
