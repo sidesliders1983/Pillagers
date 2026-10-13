@@ -247,3 +247,44 @@ test('a rejected visibility query can stop at its first exposed roof sample whil
     assert.equal(hidden.hidden, true);
     assert.equal(hidden.rays.length, 2);
 });
+
+test('generation profiling reports phase costs without changing the blueprint or saved proof', () => {
+    const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
+    const request = { seed: 42, preset: 'island', generatorVersion: 'fjordside-island-v0.3e' };
+    const samples = [];
+    const profiled = generateWorld(request, sample => samples.push(sample));
+    assert.ok(samples.some(sample => sample.stage === 'compartments'));
+    assert.ok(samples.some(sample => sample.stage === 'foundations'));
+    assert.ok(samples.some(sample => sample.stage === 'visibility'));
+    assert.ok(samples.every(sample => Number.isFinite(sample.milliseconds) && sample.milliseconds >= 0));
+    assert.deepEqual(profiled, generateWorld(request));
+});
+
+test('campaign capacity audit uses real founding plots and reports flooded reservations without changing the world', async () => {
+    const { inspectCampaignCapacity } = await import('../scripts/qa/campaign-capacity.mjs');
+    const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
+    const world = structuredClone(generateWorld({ seed: 18 }));
+    world.terrain.heights.fill(world.waterLevel - 1);
+    const before = structuredClone(world);
+    const result = inspectCampaignCapacity(world, { id: 'flooded', ...world.settlement });
+    assert.equal(result.founding.residents, 10);
+    assert.equal(result.founding.cattle, 3);
+    assert.equal(result.founding.placedHouseholds, 0);
+    assert.equal(result.founding.viable, false);
+    assert.ok(result.founding.reasons.length > 0);
+    assert.deepEqual(world, before);
+});
+
+test('campaign capacity audit recognizes connected real households on a broad flat coastal reserve', async () => {
+    const { inspectCampaignCapacity } = await import('../scripts/qa/campaign-capacity.mjs');
+    const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
+    const world = structuredClone(generateWorld({ seed: 18 }));
+    world.terrain.heights = world.terrain.heights.map((_, index) =>
+        Math.max(-2, Math.min(2.6,
+            (world.terrain.bounds.minZ + Math.floor(index / world.terrain.columns) * 2 + 60) * .46 - 2)));
+    const result = inspectCampaignCapacity(world, { id: 'flat-coast', center: { x: 0, z: 0 },
+        bounds: { minX: -70, maxX: 70, minZ: -45, maxZ: 70 } });
+    assert.equal(result.founding.placedHouseholds, result.founding.households);
+    assert.equal(result.founding.connectedApproaches, result.founding.households);
+    assert.equal(result.founding.viable, true, result.founding.reasons.join('; '));
+});

@@ -25,3 +25,13 @@ In four rejected seeds, complete fits do not form a separated pair, while other 
 3. A staged four/five-building expansion requirement could be studied only after explicit approval. It would change the acceptance contract and would still need separate tent/cattle capacity, navigation, harbor and LOS validation. This PR does not implement it or predict its acceptance percentage.
 
 Reducing parcel dimensions, widening the grading limit, manufacturing a settlement plateau or silently choosing another seed are excluded alternatives.
+
+## Actual campaign experiment and adoption gate (2026-10-13)
+
+The [follow-up measurement](qa/settlement-capacity/report.md) now exercises the real `SimulationCore.createCampaign` and `projectFjordSettlement` allocator on both regions, rather than inferring capacity from Lab buildings. It compares the unchanged ten fixed seeds and five held-out seeds with the previous committed generator, records per-stage costs, checks exact blueprint replay/save-load, and publishes plot/circulation geometry.
+
+The existing allocator requires 15×15m plots on its fixed grid and less than 0.15m sampled height variation. It can seek plots outside a reservation. This is materially different from the six rotated authored parcels with at most 0.6m local grading; a successful six-parcel proof is **not** a founding-day guarantee. The experiment rejects escaped/missing plots, missing people/cattle, unsafe camp space and failed circulation/berth access explicitly.
+
+The expansion fixture uses real, explicitly funded BuildHouse commands for in-place conversions and a separately identified ten-unpaired-household sensitivity case. It does not promise indefinite growth or every source Farmyard upgrade. No hypothetical fixture is persisted into a gameplay campaign or used to accept a rejected world.
+
+The current authorization allows merging this work as an **opt-in Lab capability**. Default campaign adoption still requires an owner-approved founding/expansion contract and a new paired measurement of a region-aware allocator with bounded foundation grading. No acceptance/yield/performance target or automatic reroll is introduced here. Keep the six-Lab-parcel requirement until an explicit replacement is approved.

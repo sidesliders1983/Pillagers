@@ -77,3 +77,7 @@ pnpm run build
 ```
 
 QA output defaults to `scratch/settlement-sites-refinement`; `QA_OUTPUT` selects a different directory and `QA_ORIGIN` selects the Lab server (default `http://127.0.0.1:5191`). Timings are observations on the development laptop, not a millisecond release gate. No project formatter is configured; source formatting and `git diff --check` are reviewed directly.
+
+### Founding capacity and phase-cost evidence
+
+[Real campaign capacity and generation costs](qa/settlement-capacity/report.md) compare the actual Fjord allocator on both regions, including fixed and held-out seeds. Six authored Lab parcels remain the unchanged stress contract; campaign defaults remain unchanged. The optional `generateWorld(request, observer)` callback reports phase durations outside the saved blueprint and RNG. Timing measurements do not affect generation or define a new performance gate.

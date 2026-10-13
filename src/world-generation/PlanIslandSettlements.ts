@@ -1,3 +1,4 @@
+import { measureGeneration, type GenerationObserver } from './GenerationProfile';
 import { findHarborBerth } from './HarborClearance';
 import { compartmentCandidates } from './SettlementCompartments';
 import { createFoundationSearch, footprintBounds, gradeSettlementFoundations, planSettlement } from './PlanSettlement';
@@ -29,15 +30,16 @@ export function footprintSamples(bounds: Bounds2) {
 }
 
 /** Bounded deterministic search. Rejected proposals retain their original seed and evidence. */
-export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape {
+export function planIslandSettlements(base: PlannedLandscape, observe?: GenerationObserver): PlannedLandscape {
     const rules = normalizeSiteRules(base.config.siteRules);
     const surface = createBlueprintSurface(base);
-    const coverage = compartmentCandidates(base, rules.maximumCandidates);
+    const coverage = measureGeneration('compartments', () =>
+        compartmentCandidates(base, rules.maximumCandidates), observe);
     const natural = coverage.candidates;
     const fitFoundations = createFoundationSearch(base, rules.maximumFoundationAdjustment);
     const candidates: SiteCandidate[] = natural.map((site, i) => {
         const center = { x: site.x, z: site.z };
-        const fit = fitFoundations(center, site.cells);
+        const fit = measureGeneration('foundations', () => fitFoundations(center, site.cells), observe);
         const foundations = fit.foundations;
         const bounds = foundations.length ? foundations.reduce((bounds, building) => {
             const p = footprintBounds(building, 7);
@@ -86,6 +88,8 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
     let rivalSite: RivalSite | undefined;
     let buffers: Bounds2[] = [];
     const playerPlans = new Map<string, PlannedLandscape>();
+    const playerHarbors = new Map<string, ReturnType<typeof findHarborBerth>>();
+    const playerViews = new Map<string, ReturnType<typeof settlementStartingViews>>();
     const playerRoutes = new Map<string, ReturnType<typeof siteRoutes>>();
     for (let i = 0; i < pairs.length; i++) {
         const pair = pairs[i];
@@ -99,38 +103,47 @@ export function planIslandSettlements(base: PlannedLandscape): PlannedLandscape 
         let planned = playerPlans.get(player.id);
         if (!planned) {
             const landscape = { ...base, terrain: gradeSettlementFoundations(base, player.foundations) };
-            planned = { ...landscape, ...planSettlement(landscape, player.center, true,
-                { placements: player.foundations, bounds: player.bounds }) };
+            planned = { ...landscape, ...measureGeneration('player-navigation', () =>
+                planSettlement(landscape, player.center, true,
+                    { placements: player.foundations, bounds: player.bounds }), observe) };
             playerPlans.set(player.id, planned);
         }
         const reasons = [...planned.validation.reasons];
         if (planned.settlement.harbor) {
             let routes = playerRoutes.get(player.id);
             if (!routes) {
-                routes = siteRoutes(planned.navigation, planned.settlement.harbor);
+                routes = measureGeneration('access', () =>
+                    siteRoutes(planned!.navigation, planned!.settlement.harbor!), observe);
                 playerRoutes.set(player.id, routes);
             }
             // Adding rival obstacles cannot reconnect terrain already disconnected.
             if (!routes(rival.center).length) reasons.push('No land connection before rival construction.');
         }
-        const berth = findHarborBerth(planned);
+        if (!playerHarbors.has(player.id)) {
+            playerHarbors.set(player.id, measureGeneration('harbor', () => findHarborBerth(planned!), observe));
+            playerViews.set(player.id, settlementStartingViews(planned));
+        }
+        const berth = playerHarbors.get(player.id)!;
         if (!berth) reasons.push('No clear water berth for the authored longship.');
-        const view = settlementStartingViews(planned);
+        const view = playerViews.get(player.id)!;
         const bounds = planned.terrain.bounds;
         if (view.some(p => p.x < bounds.minX || p.x > bounds.maxX || p.z < bounds.minZ || p.z > bounds.maxZ)) {
             reasons.push('A starting viewpoint falls outside canonical terrain.');
         }
         if (reasons.length) { pairs[i] = { ...pair, reasons }; continue; }
-        const sight = inspectSiteVisibility(planned, view, footprintSamples(rival.bounds), rules.rivalRoofHeight, true);
+        const sight = measureGeneration('visibility', () =>
+            inspectSiteVisibility(planned!, view, footprintSamples(rival.bounds), rules.rivalRoofHeight, true), observe);
         if (!sight.hidden) {
             pairs[i] = { ...pair, exposedRays: sight.exposedRays,
                 visibilityComplete: false, visibilitySamples: sight.rays.length,
                 score: pair.score - 1000, reasons: ['The rival footprint is visible from a starting viewpoint.'] };
             continue;
         }
-        const finalPlan = { ...planned, ...planSettlement(planned, player.center, true,
-            { placements: player.foundations, bounds: player.bounds, obstacles: rival.foundations }) };
-        const route = siteRoutes(finalPlan.navigation, finalPlan.settlement.harbor!)(rival.center);
+        const finalPlan = { ...planned, ...measureGeneration('final-navigation', () =>
+            planSettlement(planned!, player.center, true,
+                { placements: player.foundations, bounds: player.bounds, obstacles: rival.foundations }), observe) };
+        const route = measureGeneration('final-route', () =>
+            siteRoutes(finalPlan.navigation, finalPlan.settlement.harbor!)(rival.center), observe);
         const routeLength = Math.max(0, route.length - 1) * finalPlan.navigation.spacing;
         const finalReasons = [...finalPlan.validation.reasons];
         if (!route.length) finalReasons.push('The rival site has no traversable land connection.');

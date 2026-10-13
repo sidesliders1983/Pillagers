@@ -1,6 +1,6 @@
 import type { FoundationReservation } from './SettlementSites';
 import { buildings, buildingDistance, settlementBounds } from '../world/SettlementLayout';
-import { createBlueprintSurface, terrainTriangles } from './TerrainQueries';
+import { createBlueprintSurface } from './TerrainQueries';
 import type {
     Bounds2, BuildingPlacement, CoastSegment, Point2, SettlementSite, WalkabilityField, WorldBlueprint,
 } from './WorldBlueprint';
@@ -26,16 +26,29 @@ export function extractCoast(world: Landscape): CoastSegment[] {
         z: terrain.bounds.minZ + Math.floor(i / terrain.columns) * terrain.spacing,
     });
     const coast: CoastSegment[] = [];
-    for (const triangle of terrainTriangles(terrain)) {
-        const crossings: Point2[] = [];
-        for (let edge = 0; edge < 3; edge++) {
-            const a = triangle[edge], b = triangle[(edge + 1) % 3];
-            const ah = terrain.heights[a], bh = terrain.heights[b];
-            if ((ah <= waterLevel) === (bh <= waterLevel)) continue;
-            const t = (waterLevel - ah) / (bh - ah), p = point(a), q = point(b);
-            crossings.push({ x: p.x + (q.x-p.x)*t, z: p.z + (q.z-p.z)*t });
+    // Most cells are entirely dry or submerged. Avoid allocating and traversing
+    // every triangle for each candidate's navigation rebuild. Crossing cells keep
+    // the exact canonical winding and segment order used by terrainTriangles.
+    for (let row = 0; row < terrain.rows - 1; row++) {
+        for (let col = 0; col < terrain.columns - 1; col++) {
+            const a = row * terrain.columns + col, b = a + terrain.columns;
+            const c = a + 1, d = b + 1;
+            const wet = [a, b, c, d].map(index => terrain.heights[index] <= waterLevel);
+            if (wet.every(value => value === wet[0])) continue;
+            const triangles = (row + col) % 2 === 0 ? [[a, b, c], [c, b, d]] :
+                [[a, b, d], [a, d, c]];
+            for (const triangle of triangles) {
+                const crossings: Point2[] = [];
+                for (let edge = 0; edge < 3; edge++) {
+                    const first = triangle[edge], second = triangle[(edge + 1) % 3];
+                    const ah = terrain.heights[first], bh = terrain.heights[second];
+                    if ((ah <= waterLevel) === (bh <= waterLevel)) continue;
+                    const t = (waterLevel - ah) / (bh - ah), p = point(first), q = point(second);
+                    crossings.push({ x: p.x + (q.x - p.x) * t, z: p.z + (q.z - p.z) * t });
+                }
+                if (crossings.length === 2) coast.push({ a: crossings[0], b: crossings[1] });
+            }
         }
-        if (crossings.length === 2) coast.push({ a: crossings[0], b: crossings[1] });
     }
     return coast;
 }

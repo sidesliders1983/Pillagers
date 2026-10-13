@@ -1,3 +1,4 @@
+import { measureGeneration, type GenerationObserver } from './GenerationProfile';
 import { planIslandSettlements } from './PlanIslandSettlements';
 import { normalizeSiteRules, settlementGeneratorVersion } from './SettlementSites';
 import { inspectMacroIsland, findNaturalSites } from './MacroIsland';
@@ -55,7 +56,7 @@ function segmentDistance(x: number, z: number, a: Point2, b: Point2) {
 }
 
 /** All stochastic geometry uses a private instance of the existing seeded RNG and pinned MIT noise. */
-export function generateWorld(request: GenerationRequest): WorldBlueprint {
+export function generateWorld(request: GenerationRequest, observe?: GenerationObserver): WorldBlueprint {
     const config = normalizeWorldConfig(request);
     const random = seededRandom(config.seed);
     const noise = createNoise2D(seededRandom(config.seed));
@@ -70,7 +71,7 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
     const waterLevel = fjordWaterConfig.level;
     const island = config.preset === 'island';
     const formIsland = config.generatorVersion === firstIslandGeneratorVersion ? firstIslandTerrain : islandTerrain;
-    const formation = island ? formIsland(config, waterLevel) : null;
+    const formation = island ? measureGeneration('terrain', () => formIsland(config, waterLevel), observe) : null;
     const heights: number[] = formation?.heights ?? [];
     for (let z = -90; !island && z <= 90; z += 2) {
         for (let x = -90; x <= 90; x += 2) {
@@ -112,7 +113,8 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
         if (candidateDry) break;
     }
     if (island) {
-        const candidates = findNaturalSites({ ...landscape, coast: extractCoast(landscape) });
+        const candidates = measureGeneration('initial-candidates', () =>
+            findNaturalSites({ ...landscape, coast: extractCoast(landscape) }), observe);
         candidateDry = candidates.length > 0;
         if (candidateDry) center = { x: candidates[0].x, z: candidates[0].z };
     }
@@ -131,10 +133,12 @@ export function generateWorld(request: GenerationRequest): WorldBlueprint {
             }
         }
     }
-    const initial = { ...landscape, ...planSettlement(landscape, center, candidateDry) };
-    const planned = config.generatorVersion === settlementGeneratorVersion ? planIslandSettlements(initial) : initial;
-    const world = { ...planned, ...planNature(planned) };
-    return freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) });
+    const initial = { ...landscape, ...measureGeneration('initial-plan', () =>
+        planSettlement(landscape, center, candidateDry), observe) };
+    const planned = config.generatorVersion === settlementGeneratorVersion ? planIslandSettlements(initial, observe) : initial;
+    const world = { ...planned, ...measureGeneration('nature', () => planNature(planned), observe) };
+    return measureGeneration('validation-and-freeze', () =>
+        freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) }), observe);
 }
 
 /** Replan scenery and its navigation while retaining the stored geography and settlement. */
