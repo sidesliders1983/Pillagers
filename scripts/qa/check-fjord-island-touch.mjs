@@ -5,8 +5,8 @@ import { Matrix4, Vector3 } from 'three';
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const output = 'docs/qa/fjord-island';
-const checkpoint = JSON.parse(await readFile('scratch/fjord-island-touch.json', 'utf8'));
+const output = process.env.QA_OUTPUT || 'docs/qa/fjord-island';
+const checkpoint = JSON.parse(await readFile(process.env.QA_CHECKPOINT || 'scratch/fjord-island-touch.json', 'utf8'));
 checkpoint.target = 'fjord';
 checkpoint.pace.running = false;
 const browser = await chromium.launch({ channel: 'msedge', headless: true });

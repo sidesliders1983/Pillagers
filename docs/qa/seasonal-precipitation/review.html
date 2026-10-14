@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seasonal precipitation · Pillagers</title>
+<style>
+:root {
+    color-scheme:dark;
+    font:16px/1.55 system-ui;
+    background:#132c29;
+    color:#e8e5d8
+}
+body {
+    max-width:1180px;
+    margin:32px auto;
+    padding:0 22px
+}
+h1,h2 {
+    font-family:Georgia,serif;
+    color:#dfc692
+}
+h1 {
+    font-size:2.5rem;
+    margin-bottom:8px
+}
+a {
+    color:#dfc692
+}
+p {
+    max-width:850px
+}
+.controls {
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:24px 0 12px
+}
+button {
+    font:inherit;
+    min-height:44px;
+    padding:7px 16px;
+    color:inherit;
+    background:#263f34;
+    border:1px solid #697958;
+    border-radius:6px;
+    cursor:pointer
+}
+button[aria-pressed=true] {
+    background:#dfc692;
+    color:#132c29
+}
+figure {
+    margin:0
+}
+img {
+    width:100%;
+    border:1px solid #697958;
+    border-radius:8px
+}
+figcaption {
+    padding:12px 0;
+    color:#cad0be
+}
+.cards {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:16px
+}
+.card {
+    padding:20px;
+    background:#203d35;
+    border:1px solid #536c59;
+    border-radius:8px
+}
+.small {
+    font-size:.88rem;
+    color:#c4c7b7
+}
+summary {
+    cursor:pointer
+}
+li {
+    margin:8px 0
+}
+
+</style>
+<p class="small">PILLAGERS · FJORD LOCAL EFFECTS</p>
+<h1>Rain and snow follow the seasonal colours.</h1>
+<p>Seasonal particles use the existing effects library. Rain builds after Summer begins. During Autumn it gradually turns into snow, following the same colour transition as the environment. Gameplay and saved history are unchanged.</p>
+<div class="cards">
+<div class="card">
+<strong>Low by default</strong>
+<br>Up to 300 flakes or 250 raindrops. Normal allows 700 / 600; both can coexist during the Autumn colour transition.</div>
+<div class="card">
+<strong>Pause and accessibility</strong>
+<br>Pause freezes the effect. Off and reduced motion clear particles. Touch selection continues through them.</div>
+<div class="card">
+<strong>Northern Spring</strong>
+<br>Falling snow and the existing snow cover follow the same gradual Spring thaw.</div>
+</div>
+<div class="controls" aria-label="Review image">
+<button data-image="winter-low" aria-pressed="true">Winter · Low</button>
+<button data-image="winter-normal" aria-pressed="false">Winter · Normal</button>
+<button data-image="winter-off" aria-pressed="false">Winter · Off</button>
+<button data-image="autumn" aria-pressed="false">Autumn → Winter</button>
+<button data-image="spring" aria-pressed="false">Early Spring</button>
+<button data-image="summer" aria-pressed="false">Summer rain</button>
+</div>
+<figure>
+<img id="frame" src="palette-timing/winter-low.png" alt="Falling snow at Low effect quality">
+<figcaption id="caption">Winter snowfall, Low. Stills show a frozen moment; the in-game particles fall while the clock runs.</figcaption>
+</figure>
+<h2>Review in the game</h2>
+<p>
+<a href="/fjord-play">Open Fjord settlement</a>. Keep the clock running, open Menu → Local effects, and compare Low, Normal and Off. Rain builds during ticks 500–750; snow builds during ticks 750–1,000. Both follow the smooth colour curve. The campaign's weather option controls economic rules, separately from these seasonal visuals.</p>
+<details>
+<summary>Validation and limits</summary>
+<ul>
+<li>Automated Edge Chromium touch emulation checks real rendering, menus, selection, live season transitions, pause, hidden tabs, imports and canonical-state equivalence.</li>
+<li>Particle counts and two render batches are bounded; zooming changes readable size rather than adding particles.</li>
+<li>No new accumulation, splashes, puddles, roof-collision or wind simulation. Existing surface snow is retained.</li>
+<li>The recorded frame intervals are from this development machine. They are not an isolated GPU-cost comparison or a physical iPad certification.</li>
+</ul>
+</details>
+<p>
+<a href="palette-timing/report.md">Validation report</a> · <a href="palette-timing/results.json">Browser observations and raw frame intervals</a> · <a href="../../FJORD-SEASONAL-PRECIPITATION.md">Implementation and source notes</a>
+</p>
+<script>
+const captions={
+'winter-low':'Winter snowfall, Low. Stills show a frozen moment; the in-game particles fall while the clock runs.',
+'winter-normal':'Winter snowfall, Normal. A fuller shower within a fixed particle budget.',
+'winter-off':'Local effects Off. The winter snow cover stays; falling particles are cleared.',
+autumn:'Autumn: rain fades and snow builds together with the Winter colour blend.',
+spring:'Early Spring: snowfall fades together with the established northern thaw.',
+summer:'Summer: rain already builds as the environment takes on Autumn colours.'};
+document.querySelectorAll('[data-image]').forEach(button=>button.addEventListener('click',()=>{
+ document.querySelectorAll('[data-image]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+ const frame=document.querySelector('#frame');frame.src='palette-timing/'+button.dataset.image+'.png';frame.alt=captions[button.dataset.image];
+ document.querySelector('#caption').textContent=captions[button.dataset.image];
+}));
+</script>
+</html>

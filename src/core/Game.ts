@@ -55,7 +55,8 @@ export class Game {
         renderer.setPixelRatio(Math.min(devicePixelRatio,world.quality === 'low' ? 1 : 1.5));
         scene.add(world.root);
         const lighting=new WorldLighting(scene,renderer,assets,world.hearth,world.blueprint?world.center:undefined,world.quality);
-        controller.setNavigationSurface(world.terrain,world.center,world.blueprint?.terrain.bounds,world.movement.heightAt);
+        controller.setNavigationSurface(world.terrain, world.center, world.blueprint?.terrain.bounds, world.movement.heightAt,
+            { terrain: world.blueprint?.terrain, waterLevel: world.blueprint?.waterLevel ?? 0 });
         const seasons=new SeasonTint(world.root,world.terrain);
         const characters=await Promise.all(Array.from({length:population},async (_,i)=>{
             const dna=generateCharacterDNA((config.seed+Math.imul(i+1,2654435761))>>>0);
@@ -162,14 +163,14 @@ export class Game {
                     target: [tent.x,tent.y + (interior ? .6 : .66),tent.z] };
             };
             if (view.startsWith('tent')) {
-                if (state.tent) controller.setView(tentView(view === 'tent-interior'));
+                if (state.tent) controller.setView(tentView(view === 'tent-interior'), { groundClearance: .2 });
                 return;
             }
             const poses = { village: { position: [site.x+34,15,site.z-20],target: [site.x,3,site.z+18] },
                 shore: { position: [site.x+46,20,site.z-50],target: [site.x-25,7,site.z+20] },
                 overlook: { position: [88,78,-78],target: [0,5,16] },
                 boat: boatView(4,2.5), grazing: boatView(6,1.2) };
-            controller.setView(poses[view as keyof typeof poses]);
+            controller.setView(poses[view as keyof typeof poses], view === 'grazing' ? { groundClearance: .2 } : {});
         });
         const populationSnapshot=()=>{canvas.dataset.population=JSON.stringify(characters.map(c=>({
             id:c.villager.id,seed:c.dna.seed,age:c.dna.age,x:c.villager.visual.position.x,

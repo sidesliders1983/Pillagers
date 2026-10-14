@@ -1,0 +1,37 @@
+{
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "touchEmulation": true,
+  "exactOpening": true,
+  "retainedAfterArrival": true,
+  "retainedScroll": true,
+  "playableTime": {
+    "winter": 800,
+    "tick": 500
+  },
+  "entrance": {
+    "distance": 52.62128846769148,
+    "precipitation": {
+      "targetSnow": 0,
+      "targetRain": 0,
+      "quality": "low",
+      "reducedMotion": false,
+      "enabled": true,
+      "time": 0,
+      "snow": 0,
+      "rain": 0,
+      "snowWeight": 0,
+      "rainWeight": 0,
+      "radius": 25,
+      "center": [
+        0,
+        0,
+        0
+      ],
+      "batches": 2
+    }
+  },
+  "errors": []
+}

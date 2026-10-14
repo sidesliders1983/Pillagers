@@ -1,4 +1,6 @@
-import {PerspectiveCamera,Vector2,Vector3,MathUtils,Object3D,Raycaster,Plane} from 'three';
+import { solveCameraClearance } from './CameraClearance';
+import type { TerrainField } from '../world-generation/WorldBlueprint';
+import {PerspectiveCamera,Vector2,Vector3,MathUtils,Object3D,Raycaster,Plane,Box3} from 'three';
 import {worldConfig} from '../config/worldConfig';
 import {TouchGestures} from './TouchGestures';
 const initialElevation=Math.atan2(.8,.7),orbitScale=Math.hypot(.8,.7);
@@ -25,6 +27,13 @@ export class RTSCameraController {
     private bounds = { minX:-worldConfig.camera.bounds,maxX:worldConfig.camera.bounds,
         minZ:-20,maxZ:worldConfig.camera.bounds };
     private height: ((x:number,z:number)=>number) | undefined;
+    private clearanceSource: { grid?: TerrainField; maximumHeight: number; waterLevel: number } | undefined;
+    private collisionLift = 0;
+    private viewGroundClearance = worldConfig.camera.clearance.ground;
+    private requestedEye = new Vector3();
+    private clearanceWorkspace = new Float64Array(worldConfig.camera.clearance.maxSamples * 2);
+    private clearanceDiagnostic: (ReturnType<typeof solveCameraClearance> & { milliseconds: number; maximumMs: number }) | null = null;
+    private maximumClearanceMs = 0;
     private ray=new Raycaster();private pointer=new Vector2();
     private fallback=new Plane(new Vector3(0,1,0),0);private hit=new Vector3();
     private minimumZoom = worldConfig.camera.minZoom;
@@ -100,16 +109,31 @@ export class RTSCameraController {
         target.addEventListener(type,((event: WindowEventMap[K]) => { if (this.enabled) handler(event); }) as EventListener,{ ...options,signal:this.listeners.signal });
     }
     dispose() { this.listeners.abort();this.touch.reset();this.keys.clear(); }
-    setNavigationSurface(surface:Object3D,center = this.homeFocus,
-        bounds?:typeof this.bounds,height?:typeof this.height) {
-        this.surface=surface;
+    setNavigationSurface(surface: Object3D, center = this.homeFocus,
+        bounds?: typeof this.bounds, height?: typeof this.height,
+        clearance?: { terrain?: TerrainField; waterLevel?: number }) {
+        this.surface = surface;
         this.homeFocus.copy(center);
-        this.height=height;
-        if(bounds)this.bounds={...bounds};
+        this.height = height;
+        const grid = clearance?.terrain;
+        const maximumHeight = grid ? grid.heights.reduce((max, value) => Math.max(max, value), -Infinity) :
+            new Box3().setFromObject(surface).max.y;
+        this.clearanceSource = height ? { grid, maximumHeight: Number.isFinite(maximumHeight) ? maximumHeight : 0,
+            waterLevel: clearance?.waterLevel ?? 0 } : undefined;
+        this.maximumClearanceMs = 0;
+        if (bounds) this.bounds = { ...bounds };
         this.home();
         this.focus.copy(this.desired);
+        this.update(0);
     }
-    setView(pose:{position:number[];target:number[]}) {
+    setView(pose: { position: number[]; target: number[] }, options: { groundClearance?: number } = {}) {
+        if (pose.position.length !== 3 || pose.target.length !== 3 ||
+            ![...pose.position, ...pose.target].every(value => Number.isFinite(value) && Math.abs(value) <= 1e9) ||
+            Math.hypot(...pose.position.map((value, i) => value - pose.target[i])) < 1e-6 ||
+            options.groundClearance !== undefined && (!Number.isFinite(options.groundClearance) || options.groundClearance < 0))
+            throw new RangeError('Camera view requires finite, distinct position and target points.');
+        this.collisionLift = 0;
+        this.viewGroundClearance = options.groundClearance ?? worldConfig.camera.clearance.ground;
         const position=new Vector3().fromArray(pose.position);
         this.focus.fromArray(pose.target);
         this.desired.copy(this.focus);
@@ -122,7 +146,15 @@ export class RTSCameraController {
         this.update(0);
     }
     setSelectionHandler(select:(x:number,y:number,pointerType:'mouse'|'touch')=>boolean){this.select=select;}
-    home(){this.minimumZoom=worldConfig.camera.minZoom;this.desired.copy(this.homeFocus);this.zoom=worldConfig.camera.initialZoom;this.yaw=.45;this.targetElevation=initialElevation;}
+    home() {
+        this.viewGroundClearance = worldConfig.camera.clearance.ground;
+        this.collisionLift = 0;
+        this.minimumZoom = worldConfig.camera.minZoom;
+        this.desired.copy(this.homeFocus);
+        this.zoom = worldConfig.camera.initialZoom;
+        this.yaw = .45;
+        this.targetElevation = initialElevation;
+    }
     private setZoom(value:number){this.zoom=MathUtils.clamp(value,this.minimumZoom,worldConfig.camera.maxZoom);}
     private navigate(x:number,y:number,pointerType:'mouse'|'touch'='mouse'){
         if(this.select?.(x,y,pointerType))return;
@@ -136,12 +168,48 @@ export class RTSCameraController {
     }
     private clampFocus(){const b=this.bounds;this.desired.x=MathUtils.clamp(this.desired.x,b.minX,b.maxX);this.desired.z=MathUtils.clamp(this.desired.z,b.minZ,b.maxZ);}
     private pan(x:number,z:number){if(x===0&&z===0)return;this.desired.x+=x*Math.cos(this.angle)+z*Math.sin(this.angle);this.desired.z+=-x*Math.sin(this.angle)+z*Math.cos(this.angle);this.clampFocus();if(this.height)this.desired.y=Math.max(0,this.height(this.desired.x,this.desired.z));}
-    update(dt:number){
-        const k=this.keys;
-        this.pan((Number(k.has('d')||k.has('arrowright'))-Number(k.has('a')||k.has('arrowleft')))*dt*worldConfig.camera.speed,(Number(k.has('s')||k.has('arrowdown'))-Number(k.has('w')||k.has('arrowup')))*dt*worldConfig.camera.speed);
-        this.yaw+=(Number(k.has('e'))-Number(k.has('q')))*dt*.8;
-        const t=1-Math.exp(-dt*8);this.focus.lerp(this.desired,t);this.distance=MathUtils.lerp(this.distance,this.zoom,t);this.angle=MathUtils.lerp(this.angle,this.yaw,t);this.elevation=MathUtils.lerp(this.elevation,this.targetElevation,t);
-        const horizontal=this.distance*Math.cos(this.elevation)*orbitScale,vertical=this.distance*Math.sin(this.elevation)*orbitScale;
-        this.camera.position.set(this.focus.x+Math.sin(this.angle)*horizontal,this.focus.y+vertical,this.focus.z+Math.cos(this.angle)*horizontal);this.camera.lookAt(this.focus);
+    /** Read-only presentation diagnostics; no simulation or saved camera state. */
+    inspectClearance() {
+        return this.clearanceDiagnostic && { ...this.clearanceDiagnostic,
+            focus: this.focus.toArray(), requestedEye: this.requestedEye.toArray(),
+            requestedZoom: this.zoom, requestedYaw: this.yaw };
+    }
+    update(dt: number) {
+        const k = this.keys;
+        this.pan((Number(k.has('d') || k.has('arrowright')) - Number(k.has('a') || k.has('arrowleft'))) * dt * worldConfig.camera.speed,
+            (Number(k.has('s') || k.has('arrowdown')) - Number(k.has('w') || k.has('arrowup'))) * dt * worldConfig.camera.speed);
+        this.yaw += (Number(k.has('e')) - Number(k.has('q'))) * dt * .8;
+        const t = 1 - Math.exp(-dt * 8);
+        const oldFocusX = this.focus.x, oldFocusZ = this.focus.z;
+        this.focus.lerp(this.desired, t);
+        if (this.height && (this.focus.x !== oldFocusX || this.focus.z !== oldFocusZ)) {
+            // Navigation follows the surface between destinations as well as at their endpoints.
+            // Orbit and authored stationary review targets keep their requested focus unchanged.
+            const ground = this.height(this.focus.x, this.focus.z);
+            if (Number.isFinite(ground)) this.focus.y = Math.max(this.focus.y, ground, this.clearanceSource?.waterLevel ?? 0);
+        }
+        this.distance = MathUtils.lerp(this.distance, this.zoom, t);
+        this.angle = MathUtils.lerp(this.angle, this.yaw, t);
+        this.elevation = MathUtils.lerp(this.elevation, this.targetElevation, t);
+        const horizontal = this.distance * Math.cos(this.elevation) * orbitScale;
+        const vertical = this.distance * Math.sin(this.elevation) * orbitScale;
+        this.camera.position.set(this.focus.x + Math.sin(this.angle) * horizontal,
+            this.focus.y + vertical, this.focus.z + Math.cos(this.angle) * horizontal);
+        this.requestedEye.copy(this.camera.position);
+        if (this.height && this.clearanceSource) {
+            const start = performance.now();
+            const tangent = Math.tan(MathUtils.degToRad(this.camera.fov) / 2);
+            const nearRadius = this.camera.near * Math.sqrt(1 + tangent * tangent * (1 + this.camera.aspect ** 2));
+            const correction = solveCameraClearance({ focus: this.focus, eye: this.requestedEye,
+                heightAt: this.height, ...this.clearanceSource, nearRadius,
+                previousLift: this.collisionLift, deltaSeconds: dt, workspace: this.clearanceWorkspace,
+                settings: { ground: this.viewGroundClearance } });
+            this.collisionLift = correction.lift;
+            this.camera.position.y = correction.eyeY;
+            const milliseconds = performance.now() - start;
+            this.maximumClearanceMs = Math.max(this.maximumClearanceMs, milliseconds);
+            this.clearanceDiagnostic = { ...correction, milliseconds, maximumMs: this.maximumClearanceMs };
+        } else this.clearanceDiagnostic = null;
+        this.camera.lookAt(this.focus);
     }
 }

@@ -3,6 +3,7 @@ import { IslandLoading, yieldForInput } from './IslandLoading';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { SharedSettlement, activeSettlementKey } from '../play/SharedSettlement';
 import { campaignIslandPlan } from './CampaignIsland';
+import { PrecipitationEffect } from '../effects/PrecipitationEffect';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
@@ -460,10 +461,13 @@ export class FjordPlay {
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
         let campfireEffect: CampfireEffect | undefined;
+        let precipitationEffect: PrecipitationEffect | undefined;
         const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-        const configureEffects = () => campfireEffect?.configure(
-            document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
-            reducedMotion.matches);
+        const configureEffects = () => {
+            const quality = document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality;
+            campfireEffect?.configure(quality, reducedMotion.matches);
+            precipitationEffect?.configure(quality, reducedMotion.matches);
+        };
         reducedMotion.addEventListener('change', configureEffects);
         document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects);
         let weatherSignature = "";
@@ -485,6 +489,7 @@ export class FjordPlay {
             models?.dispose();
             weatherTint?.dispose();
             campfireEffect?.dispose();
+            precipitationEffect?.dispose();
             world?.dispose();
             assets?.dispose();
             lighting?.dispose();
@@ -531,6 +536,7 @@ export class FjordPlay {
                 this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
                 weatherTint?.dispose();
                 campfireEffect?.dispose();
+                precipitationEffect?.dispose();
                 world?.dispose();
                 world = next;
                 const fire = this.campaign.project().campfire;
@@ -540,6 +546,9 @@ export class FjordPlay {
                 const fireState = inspectCampfire(this.session.snapshot());
                 campfireEffect = new CampfireEffect(fire.id, firePosition.clone().add(new Vector3(0, .9, 0)),
                     this.session.snapshot().seed, fireState.lit);
+                precipitationEffect = new PrecipitationEffect(this.session.snapshot().seed,
+                    (x, z) => Math.max(blueprint.waterLevel, next.movement.heightAt(x, z)));
+                scene.add(precipitationEffect.root);
                 configureEffects();
                 scene.add(campfireEffect.root);
                 layer!.setCampfireHeat(campfireEffect.inspect().heat);
@@ -553,17 +562,13 @@ export class FjordPlay {
                 lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
                 if (syncScene)
                     await syncScene();
-                controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
-                const view = this.campaign.project(), positions = view.entities.filter(e => e.kind !== 'longship').map(e => e.transform).filter(p => p !== null);
-                if (!positions.length)
-                    positions.push({ x: next.center.x, y: next.center.y, z: next.center.z, rotation: 0, scale: 1 });
-                const minX = Math.min(...positions.map(p => p.x)), maxX = Math.max(...positions.map(p => p.x));
-                const minZ = Math.min(...positions.map(p => p.z)), maxZ = Math.max(...positions.map(p => p.z));
-                const x = (minX + maxX) / 2, z = (minZ + maxZ) / 2;
-                const span = Math.max(maxX - minX, maxZ - minZ, 40) + 16;
-                const height = next.movement.heightAt(x, z);
-                arrivalPose = { position: [x + span * .6, height + span * .75, z - span * .65],
-                    target: [x, height, z] };
+                controller.setNavigationSurface(next.terrain, next.center, blueprint.terrain.bounds, next.movement.heightAt,
+                    { terrain: blueprint.terrain, waterLevel: blueprint.waterLevel });
+                // Arrive at the settlement nucleus, not at a fit-all bounding box.
+                arrivalPose = {
+                    position: [firePosition.x + 28, firePosition.y + 31, firePosition.z - 32],
+                    target: [firePosition.x, firePosition.y + 1, firePosition.z],
+                };
                 controller.setView(arrivalPose);
             } finally {
                 sceneLoads--;
@@ -584,6 +589,8 @@ export class FjordPlay {
                 do {
                     this.queued = false;
                     const view = this.campaign.project();
+                    precipitationEffect!.setWeather(view.precipitation);
+                    canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
                     if (nextWeather !== weatherSignature) {
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
@@ -713,6 +720,7 @@ export class FjordPlay {
             motion!.advance(motionDelta, running, !document.hidden);
             layer!.advance(motion!, motionDelta, running);
             campfireEffect!.update(delta, running && !document.hidden);
+            precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
             const fireVisual = campfireEffect!.inspect();
             layer!.setCampfireHeat(fireVisual.heat);
             lighting!.setCampfire(fireVisual.lit && fireVisual.quality !== 'off', fireVisual.time, fireVisual.reducedMotion);
@@ -729,8 +737,10 @@ export class FjordPlay {
                 });
                 canvas.dataset.motion = JSON.stringify(motion!.inspect());
                 canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
+                canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                 canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                 canvas.dataset.motionTime = String(activeTime);
+                canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
                 lastDiagnostics = performance.now();
             }
@@ -741,6 +751,7 @@ export class FjordPlay {
             if (signature !== cameraSignature) {
                 cameraSignature = signature;
                 canvas.dataset.camera = signature;
+                canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             }
             lighting!.update(time, calendar.visualProgress);
             if (campaignIslandPlan(this.campaign.blueprint)) {

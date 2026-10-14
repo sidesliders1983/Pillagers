@@ -107,3 +107,10 @@ Historical reports remain records of the rules and UI they originally measured.
 
 Northern thaw correction evidence: [browser report](qa/fjord-season-thaw/report.md).
 The original seasons/HUD report remains a record of the earlier transition timing.
+
+## Falling precipitation
+
+The Fjord adds precipitation through the shared Local effects setting. Rain builds after
+Summer starts; snowfall builds after Autumn starts, using the same environment colour blend.
+Winter snowfall then fades with the northern Spring thaw. See [seasonal precipitation](FJORD-SEASONAL-PRECIPITATION.md) for
+quality limits, accessibility, transitions and the distinction from economic weather rules.
