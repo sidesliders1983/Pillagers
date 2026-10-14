@@ -563,16 +563,11 @@ export class FjordPlay {
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
-                const view = this.campaign.project(), positions = view.entities.filter(e => e.kind !== 'longship').map(e => e.transform).filter(p => p !== null);
-                if (!positions.length)
-                    positions.push({ x: next.center.x, y: next.center.y, z: next.center.z, rotation: 0, scale: 1 });
-                const minX = Math.min(...positions.map(p => p.x)), maxX = Math.max(...positions.map(p => p.x));
-                const minZ = Math.min(...positions.map(p => p.z)), maxZ = Math.max(...positions.map(p => p.z));
-                const x = (minX + maxX) / 2, z = (minZ + maxZ) / 2;
-                const span = Math.max(maxX - minX, maxZ - minZ, 40) + 16;
-                const height = next.movement.heightAt(x, z);
-                arrivalPose = { position: [x + span * .6, height + span * .75, z - span * .65],
-                    target: [x, height, z] };
+                // Arrive at the settlement nucleus, not at a fit-all bounding box.
+                arrivalPose = {
+                    position: [firePosition.x + 28, firePosition.y + 31, firePosition.z - 32],
+                    target: [firePosition.x, firePosition.y + 1, firePosition.z],
+                };
                 controller.setView(arrivalPose);
             } finally {
                 sceneLoads--;

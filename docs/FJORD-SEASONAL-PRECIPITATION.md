@@ -76,3 +76,10 @@ materials and textures.
 The automated browser is Edge Chromium with tablet-sized touch emulation. It does not certify
 physical iPad Safari behavior. Frame intervals are local observations, not a performance gate
 or an isolated GPU cost measurement. Physical-device visual review remains useful.
+
+## Current integration review
+
+The 2026-10-14 main-based fixpass recovers the two original PR #130 commits.
+[Current evidence](qa/fjord-fixpass/report.md) verifies the Summer-800 dry opening and
+loading integration alongside the original precipitation browser suite. Historical
+reports above remain unchanged. This review does not mark #159 complete before merge.
