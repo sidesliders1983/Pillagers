@@ -18,7 +18,7 @@ export function fjordHeaderHTML(): string {
             <button id="fjord-next" type="button">+1 Year</button>
             <details id="fjord-menu"><summary aria-label="Game menu">Menu</summary>
                 <div class="fjord-settings">
-                    <h1>Pillagers · Fjord settlement</h1>
+                    <h1>FjordSide</h1>
                     <nav aria-label="Game views"><a href="/play" data-settlement-view="board">2D Settlement</a> ·
                         <a href="/gameplay-lab">Gameplay Lab</a> · <a href="/">Fjord prototype</a></nav>
                     <span id="fjord-menu-pacing-slot"></span>

@@ -45,7 +45,7 @@ export class IslandLoading {
         this.root.setAttribute('aria-modal', 'true');
         this.root.setAttribute('aria-label', 'Preparing a new island campaign');
         this.root.innerHTML = `<canvas aria-label="Top-down preview of the generated island"></canvas>
-            <div class="island-preview-space" aria-hidden="true"></div><div class="island-loading-copy"><p class="island-loading-eyebrow">Pillagers · a new shore</p>
+            <div class="island-preview-space" aria-hidden="true"></div><div class="island-loading-copy"><p class="island-loading-eyebrow">FjordSide · a new shore</p>
             <h1 id="island-loading-status" role="status" aria-live="polite">Shaping coast &amp; valleys</h1>
             <p class="island-loading-help">Preparing your Summer landing. The campaign clock has not started.</p>
             <div class="island-loading-actions"><button type="button" id="island-loading-cancel" ${canReturnToGame ? '' : 'hidden'}>Cancel &amp; Return to Game</button>
@@ -121,7 +121,7 @@ export class IslandLoading {
                 if (this.resultSentAt) this.evidence.samples.push({ stage: 'worker-result-transfer',
                     milliseconds: performance.timeOrigin + performance.now() - this.resultSentAt });
                 await this.measure('receive-and-freeze', () => adoptCampaignIsland(seed, result.world, result.plan!));
-                this.stage('Preparing Fjordside');
+                this.stage('Preparing FjordSide');
                 return;
             } catch (error) {
                 this.check();
