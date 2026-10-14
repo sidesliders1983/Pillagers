@@ -1,5 +1,9 @@
 {
-  "viewport": "390x844 touch emulation",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "touchEmulation": true,
   "exactOpening": true,
   "retainedAfterArrival": true,
   "retainedScroll": true,
@@ -8,7 +12,7 @@
     "tick": 500
   },
   "entrance": {
-    "distance": 52.62128846769149,
+    "distance": 52.62128846769148,
     "precipitation": {
       "targetSnow": 0,
       "targetRain": 0,
@@ -27,6 +31,31 @@
         0
       ],
       "batches": 2
+    },
+    "clearance": {
+      "eyeY": 34.461789608001716,
+      "lift": 0,
+      "requiredLift": 0,
+      "samples": 55,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 29.702428340911872,
+      "minimumBoomClearance": 3.1166219538630946,
+      "nearTargetDistance": 3,
+      "milliseconds": 0,
+      "maximumMs": 0.5999999940395355,
+      "focus": [
+        70,
+        4.461789608001709,
+        146
+      ],
+      "requestedEye": [
+        97.99999999999999,
+        34.461789608001716,
+        113.99999999999999
+      ],
+      "requestedZoom": 48.95365335693702,
+      "requestedYaw": 2.4227626539681686
     }
   },
   "errors": []

@@ -1,0 +1,156 @@
+{
+  "poses": [
+    {
+      "name": "tent-interior",
+      "camera": {
+        "position": [
+          10,
+          1.3474449351408397,
+          16.35
+        ],
+        "target": [
+          10,
+          1.3474449351408397,
+          17
+        ],
+        "fov": 45
+      },
+      "endpointClearance": 0.6307164502086666,
+      "boomClearance": null,
+      "tent": {
+        "id": "tent",
+        "key": "tent",
+        "x": 10,
+        "z": 17,
+        "y": 0.7474449351408399,
+        "rotation": 3.141592653589793,
+        "scale": 1,
+        "halfWidth": 0.9393381865822935,
+        "halfDepth": 0.9999000000000001,
+        "support": "ground"
+      }
+    },
+    {
+      "name": "grazing",
+      "camera": {
+        "position": [
+          -4.950350801201614,
+          1.0600729993252667,
+          -24.79794774862313
+        ],
+        "target": [
+          -8.2,
+          0.05909736524525283,
+          -15
+        ],
+        "fov": 45
+      },
+      "endpointClearance": 1.0600729993252667,
+      "boomClearance": 0.35038127476253683,
+      "tent": {
+        "id": "tent",
+        "key": "tent",
+        "x": 10,
+        "z": 17,
+        "y": 0.7474449351408399,
+        "rotation": 3.141592653589793,
+        "scale": 1,
+        "halfWidth": 0.9393381865822935,
+        "halfDepth": 0.9999000000000001,
+        "support": "ground"
+      }
+    },
+    {
+      "name": "village",
+      "camera": {
+        "position": [
+          34.00000000000002,
+          15,
+          -19.999999999999986
+        ],
+        "target": [
+          0,
+          3,
+          18
+        ],
+        "fov": 45
+      },
+      "endpointClearance": 15,
+      "boomClearance": 2.301172597705074,
+      "tent": {
+        "id": "tent",
+        "key": "tent",
+        "x": 10,
+        "z": 17,
+        "y": 0.7474449351408399,
+        "rotation": 3.141592653589793,
+        "scale": 1,
+        "halfWidth": 0.9393381865822935,
+        "halfDepth": 0.9999000000000001,
+        "support": "ground"
+      }
+    },
+    {
+      "name": "shore",
+      "camera": {
+        "position": [
+          46,
+          20,
+          -50
+        ],
+        "target": [
+          -25,
+          7,
+          20
+        ],
+        "fov": 45
+      },
+      "endpointClearance": 20,
+      "boomClearance": 2.7318215570898268,
+      "tent": {
+        "id": "tent",
+        "key": "tent",
+        "x": 10,
+        "z": 17,
+        "y": 0.7474449351408399,
+        "rotation": 3.141592653589793,
+        "scale": 1,
+        "halfWidth": 0.9393381865822935,
+        "halfDepth": 0.9999000000000001,
+        "support": "ground"
+      }
+    },
+    {
+      "name": "overlook",
+      "camera": {
+        "position": [
+          87.99999999999997,
+          78,
+          -77.99999999999999
+        ],
+        "target": [
+          0,
+          5,
+          16
+        ],
+        "fov": 45
+      },
+      "endpointClearance": 78,
+      "boomClearance": 5.446064647262599,
+      "tent": {
+        "id": "tent",
+        "key": "tent",
+        "x": 10,
+        "z": 17,
+        "y": 0.7474449351408399,
+        "rotation": 3.141592653589793,
+        "scale": 1,
+        "halfWidth": 0.9393381865822935,
+        "halfDepth": 0.9999000000000001,
+        "support": "ground"
+      }
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

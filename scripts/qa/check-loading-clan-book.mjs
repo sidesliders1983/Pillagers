@@ -39,9 +39,12 @@ try {
         const w = JSON.parse(element.dataset.camera).world;
         const fire = JSON.parse(element.dataset.campfire).transform;
         return { distance: Math.hypot(w[12] - fire.x, w[13] - fire.y, w[14] - fire.z),
-            precipitation: JSON.parse(element.dataset.precipitation) };
+            precipitation: JSON.parse(element.dataset.precipitation),
+            clearance: JSON.parse(element.dataset.cameraClearance) };
     });
     assert.ok(entrance.distance < 65, 'Arrival should bring the player close to the campfire: ' + entrance.distance);
+    assert.ok(entrance.clearance.groundClearance >= 2 - 1e-7);
+    assert.ok(entrance.clearance.minimumBoomClearance >= .35 - 1e-7);
     assert.equal(entrance.precipitation.targetSnow, 0);
     assert.equal(entrance.precipitation.targetRain, 0);
     assert.equal(entrance.precipitation.snow, 0);

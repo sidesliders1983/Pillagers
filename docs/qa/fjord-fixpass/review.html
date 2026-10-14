@@ -4,10 +4,13 @@
 body{margin:0;padding:24px;background:#172b27;color:#e8e2d1;font:16px/1.6 system-ui,sans-serif}main{max-width:1100px;margin:auto}a{color:#e4ca88}section{margin:32px 0}img{max-width:100%;height:auto;border:1px solid #829178;border-radius:6px}h1,h2{line-height:1.2}figure{margin:16px 0}figcaption{color:#c4c9bd}.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 </style></head><body><main><h1>Fjord fixpass review</h1><p>14 October 2026 · Loading shell, closer campfire arrival and recovered seasonal rain/snow.</p>
 <p><a href="/fjord-play?seed=32" target="_blank" rel="noopener">Open a fresh campaign in a new tab</a> · <a href="report.md">Validation report</a></p>
-<p>The camera terrain-clearance work in #144 is still pending. This review does not claim that work is complete.</p>
+<p>Terrain clearance from #144 is now included. Camera feel awaits owner review before merge. <a href="camera-review.html">Open the interactive terrain-camera review</a>.</p>
 <section><h2>Arrival at the campfire</h2><p>The camera now finishes about 53 m from the campfire, instead of 105 m in the previous seed-32 opening. The Summer founding remains dry and the chapter stays readable.</p>
 <figure><img src="tablet/arrival.png" alt="Tablet view after arriving at the campfire with the management panel collapsed"><figcaption>1024 × 768 touch emulation. The panel was collapsed for this view.</figcaption></figure>
-</section><section><h2>Seasonal precipitation recovered from PR #130</h2><div class="gallery">
+</section><section><h2>Camera above terrain</h2><p>The requested orbit is retained while the camera lifts above an intervening ridge. The final local solver sample measured a 0.10 ms median and 0.20 ms maximum; physical mobile timing is untested.</p><div class="gallery">
+<figure><img src="camera/ridge-before.png" alt="Uncorrected reference camera obscured by terrain"><figcaption>Before · eye above its local ground, but the ridge obstructs the focus.</figcaption></figure>
+<figure><img src="camera/ridge-after.png" alt="Corrected camera lifted above the intervening ridge"><figcaption>After · camera lifts to keep the terrain boom clear.</figcaption></figure>
+</div></section><section><h2>Seasonal precipitation recovered from PR #130</h2><div class="gallery">
 <figure><img src="precipitation/summer.png" alt="Rain during the Summer to Autumn palette transition"><figcaption>Summer transition: rain increases gradually.</figcaption></figure>
 <figure><img src="precipitation/autumn.png" alt="Snow and rain during the Autumn to Winter transition"><figcaption>Autumn transition: snow increases as rain fades.</figcaption></figure>
 <figure><img src="precipitation/winter-normal.png" alt="Winter with snowfall enabled"><figcaption>Winter · Normal local effects.</figcaption></figure>

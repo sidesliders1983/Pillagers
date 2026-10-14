@@ -562,7 +562,8 @@ export class FjordPlay {
                 lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
                 if (syncScene)
                     await syncScene();
-                controller.setNavigationSurface(next.terrain, next.center, this.campaign.blueprint.terrain.bounds, next.movement.heightAt);
+                controller.setNavigationSurface(next.terrain, next.center, blueprint.terrain.bounds, next.movement.heightAt,
+                    { terrain: blueprint.terrain, waterLevel: blueprint.waterLevel });
                 // Arrive at the settlement nucleus, not at a fit-all bounding box.
                 arrivalPose = {
                     position: [firePosition.x + 28, firePosition.y + 31, firePosition.z - 32],
@@ -739,6 +740,7 @@ export class FjordPlay {
                 canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                 canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                 canvas.dataset.motionTime = String(activeTime);
+                canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
                 lastDiagnostics = performance.now();
             }
@@ -749,6 +751,7 @@ export class FjordPlay {
             if (signature !== cameraSignature) {
                 cameraSignature = signature;
                 canvas.dataset.camera = signature;
+                canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             }
             lighting!.update(time, calendar.visualProgress);
             if (campaignIslandPlan(this.campaign.blueprint)) {
