@@ -17,12 +17,19 @@ export function groundBlendWeights(world: WorldBlueprint, x: number, z: number, 
     return weights.map((value, index) => value / total * (1 - worn) + (index === 2 ? worn : 0));
 }
 
-export function createGroundBlendMasks(world: WorldBlueprint, wear = world.biomes.worn, snow = false): DataTexture[] {
+export function createGroundBlendMasks(...args: Parameters<typeof groundBlendMaskSteps>): DataTexture[] {
+    const steps = groundBlendMaskSteps(...args);
+    let step = steps.next();
+    while (!step.done) step = steps.next();
+    return step.value;
+}
+export function* groundBlendMaskSteps(world: WorldBlueprint, wear = world.biomes.worn, snow = false): Generator<void, DataTexture[]> {
     const { terrain } = world;
     const buffers = blendedMaterialIds.map(() => new Uint8Array(terrain.heights.length * 4));
     const snowEnabled = snow && world.environment!.fields.snowRetentionPotential.some(value => value > 0);
     if (snowEnabled) buffers.push(new Uint8Array(terrain.heights.length * 4));
     for (let index = 0; index < terrain.heights.length; index++) {
+        if (index % 2048 === 0) yield;
         const x = terrain.bounds.minX + index % terrain.columns * terrain.spacing;
         const z = terrain.bounds.minZ + Math.floor(index / terrain.columns) * terrain.spacing;
         const [grass, sand, mud, rock] = groundBlendWeights(world, x, z, wear[index]);
@@ -56,7 +63,10 @@ export function createGroundBlendMasks(world: WorldBlueprint, wear = world.biome
 }
 
 /** Keep one draw group per material, omitting only quads whose bilinear alpha is entirely zero. */
-export function indexGroundLayers(geometry: BufferGeometry, world: WorldBlueprint, masks: DataTexture[]) {
+export function indexGroundLayers(...args: Parameters<typeof groundLayerIndexSteps>) {
+    for (const _ of groundLayerIndexSteps(...args)) { /* Synchronous contract for live wear updates. */ }
+}
+export function* groundLayerIndexSteps(geometry: BufferGeometry, world: WorldBlueprint, masks: DataTexture[]) {
     const count = geometry.getAttribute('position').count;
     const { columns, rows } = world.terrain;
     const gridVertices = (columns - 1) * (rows - 1) * 6;
@@ -66,6 +76,7 @@ export function indexGroundLayers(geometry: BufferGeometry, world: WorldBlueprin
         const start = indices.length;
         const data = masks[layer].image.data;
         for (let row = 0; row < rows - 1; row++) for (let col = 0; col < columns - 1; col++) {
+            if (col === 0 && row % 8 === 0) yield;
             const sample = row * columns + col;
             // All four corners matter: the unused corner of a triangle still affects bilinear alpha.
             if (layer > 0 && [sample, sample + 1, sample + columns, sample + columns + 1]

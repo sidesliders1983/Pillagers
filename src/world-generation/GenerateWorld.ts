@@ -99,6 +99,7 @@ export function generateWorld(request: GenerationRequest, observe?: GenerationOb
         spacing: 2, columns: config.width / 2 + 1, rows: config.depth / 2 + 1, heights };
     const landscape = { config, waterLevel, terrain,
         ...(formation ? { geology: formation.geology } : {}) };
+    observe?.preview?.(landscape);
     const naturalSurface = createBlueprintSurface(landscape);
     let center = { x: 20, z: 2 }, candidateDry = false;
     // Bounded candidate search retains the requested seed and records failure, never reseeds.
@@ -142,6 +143,7 @@ export function generateWorld(request: GenerationRequest, observe?: GenerationOb
     const environment = config.environment ? measureGeneration('environment-zoning', () =>
         zoneEnvironment(planned, config.environment!), observe) : undefined;
     const zoned = { ...planned, ...(environment ? { environment } : {}) };
+    observe?.preview?.(zoned);
     const world = { ...zoned, ...measureGeneration('nature', () => planNature(zoned), observe) };
     return measureGeneration('validation-and-freeze', () =>
         freezeBlueprint({ ...world, validation: validateGeneratedWorld(world) }), observe);

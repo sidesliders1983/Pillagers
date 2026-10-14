@@ -1,4 +1,4 @@
-import { blendedMaterialIds, createGroundBlendMasks, indexGroundLayers } from './GroundBlending';
+import { blendedMaterialIds, groundBlendMaskSteps, groundLayerIndexSteps } from './GroundBlending';
 import { createSpatialOverlay } from './SpatialOverlay';
 import { environmentColours } from './EnvironmentOverlay';
 import { macroRegions } from '../world-generation/MacroIsland';
@@ -40,8 +40,26 @@ function layerMask(world: WorldBlueprint, layer: number, wear?: readonly number[
     return texture;
 }
 
-export function createBlueprintTerrain(world: WorldBlueprint,
-    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[], blending: 'baseline' | 'zoned' = 'baseline', snow = false) {
+export function createBlueprintTerrain(...args: Parameters<typeof terrainBuildSteps>): Mesh {
+    const steps = terrainBuildSteps(...args);
+    let step = steps.next();
+    while (!step.done) step = steps.next();
+    return step.value;
+}
+
+/** Same buffers and materials, with bounded CPU batches between browser input opportunities. */
+export async function createBlueprintTerrainAsync(world: WorldBlueprint,
+    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[],
+    blending: 'baseline' | 'zoned' = 'baseline', snow = false,
+    yieldControl: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0))) {
+    const steps = terrainBuildSteps(world, sources, overlay, wear, blending, snow);
+    let step = steps.next();
+    while (!step.done) { await yieldControl(); step = steps.next(); }
+    return step.value;
+}
+
+function* terrainBuildSteps(world: WorldBlueprint,
+    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[], blending: 'baseline' | 'zoned' = 'baseline', snow = false): Generator<void, Mesh> {
     const blended = blending === 'zoned' && !!world.environment && !!sources && overlay === 'none';
     const positions: number[] = [];
     const sourceUvs: number[] = [];
@@ -54,7 +72,10 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     const diagnosticColors = overlay === 'macro' ? macroRegions(world).map(region => macroPalette[region]) : [];
     // Independent source repeats are applied through native texture transforms.
     const repeat = regionalGroundConfig.sources.Ground037.repeatMeters;
+    let vertices = 0;
     for (const triangle of terrainTriangles(terrain)) {
+        if (vertices % 6144 === 0) yield;
+        vertices += 3;
         for (const index of triangle) {
             const column = index % terrain.columns;
             const row = Math.floor(index / terrain.columns);
@@ -113,11 +134,14 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     geometry.setAttribute('uv', new Float32BufferAttribute(sourceUvs, 2));
     geometry.setAttribute('uv1', new Float32BufferAttribute(maskUvs, 2));
     geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
+    yield;
     geometry.computeVertexNormals();
+    yield;
     if (blended) {
         const sideX = new Float32Array(positions.length / 3 * 2);
         const sideZ = new Float32Array(sideX.length);
         for (let vertex = 0; vertex < positions.length / 3; vertex++) {
+            if (vertex % 8192 === 0) yield;
             const x = positions[vertex * 3], y = positions[vertex * 3 + 1], z = positions[vertex * 3 + 2];
             sideX.set([z / repeat, y / repeat], vertex * 2);
             sideZ.set([x / repeat, y / repeat], vertex * 2);
@@ -128,7 +152,7 @@ export function createBlueprintTerrain(world: WorldBlueprint,
     const textureClones: Texture[] = [];
     const spatial = createSpatialOverlay(world, overlay);
     if (spatial) textureClones.push(spatial.texture);
-    const masks = blended ? createGroundBlendMasks(world, wear, snow) : null;
+    const masks = blended ? yield* groundBlendMaskSteps(world, wear, snow) : null;
     // The first material is opaque; no mask is needed for it.
     masks?.[0].dispose();
     const material = sources && overlay === 'none' ? (blended ? blendedMaterialIds : materialIds).map((id, layer) => {
@@ -168,7 +192,7 @@ export function createBlueprintTerrain(world: WorldBlueprint,
             transparent: true, depthWrite: false, polygonOffset: true,
             polygonOffsetFactor: 0, polygonOffsetUnits: -6 }));
     }
-    if (masks) indexGroundLayers(geometry, world, masks);
+    if (masks) yield* groundLayerIndexSteps(geometry, world, masks);
     const mesh = new Mesh(geometry, material);
     mesh.name = 'Generated canonical terrain';
     mesh.userData.textureClones = textureClones;
@@ -190,13 +214,20 @@ export function disposeBlueprintTerrain(mesh: Mesh) {
 
 /** Update only the native soil alpha map; geometry and saved geography stay unchanged. */
 export function updateBlueprintWear(mesh: Mesh, weights: readonly number[]) {
+    for (const _ of groundWearSteps(mesh, weights)) { /* Synchronous live-update contract. */ }
+}
+export async function updateBlueprintWearAsync(mesh: Mesh, weights: readonly number[],
+    yieldControl: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0))) {
+    for (const _ of groundWearSteps(mesh, weights)) await yieldControl();
+}
+function* groundWearSteps(mesh: Mesh, weights: readonly number[]) {
     const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
     const blended = blendedWorlds.get(mesh);
     if (blended) {
         const { world, snow } = blended;
         if (weights.length !== world.terrain.heights.length) throw new Error('Ground mask does not match the terrain grid.');
-        const masks = createGroundBlendMasks(world, weights, snow);
-        indexGroundLayers(mesh.geometry, world, masks);
+        const masks = yield* groundBlendMaskSteps(world, weights, snow);
+        yield* groundLayerIndexSteps(mesh.geometry, world, masks);
         masks[0].dispose();
         for (let layer = 1; layer < materials.length; layer++) {
             const material = materials[layer] as MeshStandardMaterial;

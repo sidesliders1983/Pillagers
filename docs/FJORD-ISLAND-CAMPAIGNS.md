@@ -42,3 +42,7 @@ See [browser evidence and QA](qa/fjord-island/report.md). Historical capacity, t
 ## Summer founding start (#157)
 
 New Fjord 3D campaigns explicitly select `summer-800-v1`: Summer 800, tick 500, initialized directly with 15 Food and 5 Materials. The first full annual reckoning follows after 500 played ticks, with unchanged annual consumption and risk rules. Headless/standalone 2D defaults and existing saves retain their original time. Both Fjord restart choices use the selected phase; no pre-simulation is performed. The owner approved this as the new Fjord default on 2026-10-13. See [Summer founding rules, compatibility and QA](SUMMER-800-START.md).
+
+## New campaign loading
+
+New and restarted Fjord campaigns use [responsive worker generation and a top-down arrival](RESPONSIVE-ISLAND-LOADING.md). The existing pinned island recipe and Summer founding state remain authoritative; loading contributes no simulation ticks.

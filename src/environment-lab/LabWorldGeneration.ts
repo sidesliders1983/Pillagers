@@ -1,9 +1,10 @@
+import { browserGeneration } from '../world-generation/BrowserGeneration';
 import { groundStudyViews, groundStudyCamera } from './GroundStudyViews';
 import type { GroundBlending, RockTone } from '../config/GroundBlendConfig';
 import { spatialOverlays } from '../world/SpatialOverlay';
 import { renderSpatialDiagnostics } from './SpatialDiagnostics';
 import { environmentOverlays, renderEnvironmentDiagnostics } from './EnvironmentDiagnostics';
-import { gentlerIslandGeneratorVersion } from '../world-generation/WorldBlueprint';
+import { gentlerIslandGeneratorVersion, freezeBlueprint } from '../world-generation/WorldBlueprint';
 import { discoverySettlementGeneratorVersion } from '../world-generation/SettlementSites';
 import { settlementStartingViews } from '../world-generation/SiteNavigation';
 import { createSettlementSiteOverlay, renderSettlementSiteDiagnostics } from './SettlementSiteDiagnostics';
@@ -15,8 +16,7 @@ import type { AssetManager } from '../core/AssetManager';
 import type { ConiferSource, WorldBlueprint, WorldPreset } from '../world-generation/WorldBlueprint';
 import { reviewSeeds } from '../world-generation/ReviewSeeds';
 import { parseWorld, serializeWorld } from '../world-generation/WorldSave';
-import { changeWorldConifers, generateWorld } from '../world-generation/GenerateWorld';
-import { createBlueprintSurface, createBlueprintTerrain, disposeBlueprintTerrain } from '../world/BlueprintTerrain';
+import { createBlueprintSurface, createBlueprintTerrain, createBlueprintTerrainAsync, disposeBlueprintTerrain } from '../world/BlueprintTerrain';
 import { loadWorldGroundMaterials } from '../world/WorldGroundMaterials';
 import { createNatureFromPlan } from '../world/KayKitNature';
 import { NatureWind } from '../world/NatureWind';
@@ -49,6 +49,8 @@ type Preview = {
 
 /** Lab-only geographical proposal. Original Fjordside and Simulation Core are never mutated. */
 export class LabWorldGeneration {
+    private generator = browserGeneration();
+    private cancelGeneration = document.createElement('button');
     blueprint: WorldBlueprint | null = null;
     private preview: Preview | null = null;
     private grounds: Grounds | null = null;
@@ -149,6 +151,18 @@ export class LabWorldGeneration {
             this.preset.value = entry.preset;
         });
         this.generate.addEventListener('click', () => void this.regenerate());
+        this.cancelGeneration.type = 'button';
+        this.cancelGeneration.textContent = 'Cancel generation';
+        this.cancelGeneration.hidden = true;
+        this.cancelGeneration.addEventListener('click', () => {
+            this.revision++;
+            this.generator.cancel();
+            this.cancelGeneration.hidden = true;
+            this.generate.disabled = false;
+            this.status.textContent = 'Generation cancelled. The previous landscape is retained.';
+            this.syncSandControls();
+        });
+        this.generate.insertAdjacentElement('afterend', this.cancelGeneration);
         document.querySelector('#world-export')!.addEventListener('click', () => {
             if (!this.blueprint) return;
             const url = URL.createObjectURL(new Blob([serializeWorld(this.blueprint)], { type: 'application/json' }));
@@ -177,7 +191,7 @@ export class LabWorldGeneration {
         document.querySelector('#world-reference')!.addEventListener('click', () => this.restore());
         document.querySelector('#environment-conifers')!.addEventListener('change', () => {
             if (!this.blueprint) return;
-            void this.regenerate(changeWorldConifers(this.blueprint, this.coniferSource()));
+            void this.regenerate(this.blueprint, this.coniferSource());
         });
         document.querySelector('#environment-quality')!.addEventListener('change', () => {
             if (this.blueprint) void this.regenerate(this.blueprint);
@@ -195,21 +209,31 @@ export class LabWorldGeneration {
             'low' : 'standard';
     }
 
-    async regenerate(saved?: WorldBlueprint) {
+    async regenerate(saved?: WorldBlueprint, requestedConifers?: 'kaykit' | 'ez-tree') {
         const revision = ++this.revision;
+        this.generator.cancel();
+        this.cancelGeneration.hidden = false;
         this.generate.disabled = true;
         this.syncSandControls();
         this.status.textContent = 'Generating and validating the requested landscape…';
         const start = performance.now();
         let next: Preview | null = null, grounds: Grounds | null = null;
         try {
-            const world = saved ?? generateWorld({ seed: Number(this.seed.value),
+            const report = (event: import('../world-generation/GenerationTask').GenerationProgress) => {
+                if (event.type === 'phase' && revision === this.revision)
+                    this.status.textContent = 'Generating: ' + event.stage.replaceAll('-', ' ') + '…';
+            };
+            let world: WorldBlueprint;
+            if (saved) world = requestedConifers ? (await this.generator.generate({ kind: 'conifers', world: saved, conifers: requestedConifers }, report)).world : saved;
+            else world = (await this.generator.generate({ kind: 'world', config: { seed: Number(this.seed.value),
                 preset: this.preset.value as WorldPreset, conifers: this.coniferSource(),
                 ...((document.querySelector('#world-environment-zoning') as HTMLInputElement).checked ?
                     { environment: { version: 1 as const, meanAnnualTemperatureC: Number((document.querySelector('#world-climate') as HTMLInputElement).value) } } : {}),
                 ...(this.preset.value === 'island' ? { generatorVersion:
                     (document.querySelector('#world-site-planning') as HTMLInputElement).checked ?
-                        discoverySettlementGeneratorVersion : gentlerIslandGeneratorVersion } : {}) });
+                        discoverySettlementGeneratorVersion : gentlerIslandGeneratorVersion } : {}) } }, report)).world;
+            if (!this.alive || revision !== this.revision) return;
+            freezeBlueprint(world);
             const macro = world.config.preset === 'island' ? inspectMacroIsland(world) : null;
             const generationMs = performance.now()-start;
             const tier = this.quality();
@@ -219,7 +243,7 @@ export class LabWorldGeneration {
                 (blending === 'zoned' || this.grounds.sandPixels === sandPixels) ? this.grounds :
                 await loadWorldGroundMaterials(tier, this.renderer.capabilities.getMaxAnisotropy(), this.selectedSand(), blending, this.selectedRockTone(world));
             const surface = createBlueprintSurface(world);
-            const terrain = createBlueprintTerrain(world, grounds.materials, 'none', undefined, grounds.blending);
+            const terrain = await createBlueprintTerrainAsync(world, grounds.materials, 'none', undefined, grounds.blending);
             const conifers = world.config.conifers ?? 'kaykit';
             const nature = createNatureFromPlan(this.assets, world.placementPlan, world.config.seed,
                 conifers === 'ez-tree' ? this.resolvePineModel : undefined);
@@ -325,9 +349,11 @@ export class LabWorldGeneration {
         } catch (error) {
             this.release(next);
             if (grounds && grounds !== this.grounds) grounds.dispose();
-            this.status.textContent = 'World generation failed: ' + (error instanceof Error ? error.message : String(error));
+            if (!this.alive || revision !== this.revision) return;
+            this.status.textContent = 'World generation stopped: ' + (error instanceof Error ? error.message : String(error));
         } finally {
             if (revision === this.revision) {
+                this.cancelGeneration.hidden = true;
                 this.generate.disabled = false;
                 this.syncSandControls();
             }
@@ -592,6 +618,8 @@ export class LabWorldGeneration {
         this.camera.far = 300;
         this.camera.updateProjectionMatrix();
         this.revision++;
+        this.generator.cancel();
+        this.cancelGeneration.hidden = true;
         this.generate.disabled = false;
         this.release(this.preview);
         this.preview = null;
@@ -636,6 +664,7 @@ export class LabWorldGeneration {
 
     dispose() {
         this.alive = false;
+        this.generator.dispose();
         this.revision++;
         this.release(this.preview);
         this.preview = null;

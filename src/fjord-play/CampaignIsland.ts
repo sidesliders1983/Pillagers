@@ -1,3 +1,4 @@
+import { measureGeneration, type GenerationObserver } from '../world-generation/GenerationProfile';
 import { siteRoutes } from '../world-generation/SiteNavigation';
 import { harborDepth } from '../world-generation/HarborClearance';
 import { fitsBuildingFoundation } from '../world/BuildingPlot';
@@ -47,7 +48,7 @@ export function islandRecipe(campaignSeed: number): IslandRecipe {
 
 /** A pinned campaign recipe prepares the existing generator's canonical surface.
  * Only local foundations change. No second biome classifier or saved heightfield is introduced. */
-export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe): WorldBlueprint {
+export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe, observe?: GenerationObserver): WorldBlueprint {
     const recipe = islandRecipe(campaignSeed);
     if (saved && (saved.version !== recipe.version || saved.seed !== recipe.seed ||
         saved.generatorVersion !== recipe.generatorVersion))
@@ -55,20 +56,20 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe)
     const cached = worlds.get(recipe.seed);
     if (cached) return cached;
     const source = generateWorld({ seed: recipe.seed, preset: 'island',
-        generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } });
+        generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe);
     if (!source.validation.accepted || !source.siteSelection?.harborBerth || !source.rivalSite)
         throw new Error('The curated island no longer passes its geographical validation.');
     // The Lab's six demonstration buildings are not campaign houses. Start with the
     // same natural heightfield, retaining the rival's reserved foundations only.
     const natural = { ...source, terrain: { ...source.terrain,
-        heights: islandTerrain(source.config, source.waterLevel).heights } };
+        heights: measureGeneration('campaign-natural-terrain', () => islandTerrain(source.config, source.waterLevel), observe).heights } };
     const terrain = gradeSettlementFoundations(natural, source.rivalSite.foundations);
     const landscape = { ...natural, terrain };
     const bounds = {
         minX: source.settlement.bounds.minX - 40, maxX: source.settlement.bounds.maxX + 40,
         minZ: source.settlement.bounds.minZ - 40, maxZ: source.settlement.bounds.maxZ + 40,
     };
-    const layout = findCampaignPlots(landscape, bounds, source.settlement.center);
+    const layout = measureGeneration('campaign-foundations', () => findCampaignPlots(landscape, bounds, source.settlement.center), observe);
     const prepared = applyFoundations(landscape, layout.foundations);
     const foundation = planSettlement(prepared, layout.center, true, { placements: [], bounds });
     if (!foundation.validation.accepted)
@@ -76,8 +77,9 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe)
     const { siteSelection: _labProof, ...withoutLabProof } = source;
     const placed = { ...withoutLabProof, terrain: prepared.terrain, ...foundation,
         settlement: { ...foundation.settlement, harbor: source.settlement.harbor } };
-    const zoned = { ...placed, environment: zoneEnvironment(placed, source.config.environment!) };
-    const world = freezeBlueprint({ ...zoned, ...planNature(zoned) });
+    const zoned = { ...placed, environment: measureGeneration('campaign-zoning', () => zoneEnvironment(placed, source.config.environment!), observe) };
+    observe?.preview?.(zoned);
+    const world = measureGeneration('campaign-nature-and-freeze', () => freezeBlueprint({ ...zoned, ...planNature(zoned) }), observe);
     const surface = createBlueprintSurface(world);
     const plots = layout.foundations.slice(1).map(p => ({ x: p.x, z: p.z,
         y: surface.surfaceHeightAt(p.x, p.z), halfWidth: 7.5, halfDepth: 7.5,
@@ -102,6 +104,19 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe)
         berth: source.siteSelection.harborBerth }));
     worlds.set(recipe.seed, world);
     return world;
+}
+
+/** Accept a validated result from our generation worker, restoring metadata lost by structured clone.
+ * This is not an import/file-validation entry point. Only the trusted worker calls it. */
+export function adoptCampaignIsland(seed: number, world: WorldBlueprint, plan: CampaignIslandPlan) {
+    const expected = islandRecipe(seed);
+    if (!plan || JSON.stringify(plan.recipe) !== JSON.stringify(expected) ||
+        world.config.seed !== expected.seed || world.config.generatorVersion !== expected.generatorVersion ||
+        !world.validation.accepted || plan.plots.length < 10)
+        throw new Error('Worker campaign island recipe or validation does not match the request.');
+    freezeBlueprint(world);
+    plans.set(world, freezeBlueprint(plan));
+    worlds.set(expected.seed, world);
 }
 
 interface Foundation extends Point2 {

@@ -1,0 +1,85 @@
+{
+  "platform": "Windows Edge headless, touch emulation; not physical iPhone",
+  "results": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 800,
+      "longTasks": [
+        {
+          "start": 676.7999999970198,
+          "duration": 18738
+        },
+        {
+          "start": 21122,
+          "duration": 1948
+        },
+        {
+          "start": 23207.70000000298,
+          "duration": 842
+        },
+        {
+          "start": 24111.29999999702,
+          "duration": 61
+        },
+        {
+          "start": 24344.10000000149,
+          "duration": 414
+        },
+        {
+          "start": 24930,
+          "duration": 96
+        },
+        {
+          "start": 25026.79999999702,
+          "duration": 3499
+        }
+      ],
+      "start": 29.100000001490116,
+      "ready": 24984.10000000149,
+      "maxHeartbeatGap": 18775.80000000447,
+      "memory": 169289480,
+      "resources": 29560121
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 844,
+      "longTasks": [
+        {
+          "start": 999.1000000014901,
+          "duration": 20313
+        },
+        {
+          "start": 22618,
+          "duration": 1393
+        },
+        {
+          "start": 24126.70000000298,
+          "duration": 731
+        },
+        {
+          "start": 24922.60000000149,
+          "duration": 55
+        },
+        {
+          "start": 25109.5,
+          "duration": 408
+        },
+        {
+          "start": 25684,
+          "duration": 96
+        },
+        {
+          "start": 25780.20000000298,
+          "duration": 881
+        }
+      ],
+      "start": 196.30000000447035,
+      "ready": 25737.20000000298,
+      "maxHeartbeatGap": 20318.60000000149,
+      "memory": 381778172,
+      "resources": 29560121
+    }
+  ]
+}
