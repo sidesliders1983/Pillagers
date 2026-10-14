@@ -1,14 +1,15 @@
 {
   "flows": [
-    "worker unavailable: visible error, retry creates the requested campaign",
+    "worker unavailable: retry retains the same prepared founding chapter",
     "cancel during generation preserves the previous Core and campaign",
     "cancel during camera arrival rolls back Core, geography and scene",
-    "new seed and skip arrival: Summer 800:500 with the correct campaign",
+    "closing the new-seed chapter does not cancel loading or reopen it at arrival",
+    "same-founder restart allows touch cancellation back to the playable campaign",
     "explicit saved load remains outside the new-campaign intro and preserves Core"
   ],
   "worker": {
-    "created": 4,
-    "terminated": 4
+    "created": 5,
+    "terminated": 5
   },
   "errors": []
 }

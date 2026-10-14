@@ -1,6 +1,7 @@
+import { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { IslandLoading, yieldForInput } from './IslandLoading';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
-import { activeSettlementKey } from '../play/SharedSettlement';
+import { SharedSettlement, activeSettlementKey } from '../play/SharedSettlement';
 import { campaignIslandPlan } from './CampaignIsland';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
@@ -44,14 +45,16 @@ export class FjordPlay {
     private lastPanelSelection = '';
     private worldRevision = 0;
     private loading?: IslandLoading;
+    private foundingBook?: FoundingBookWindow;
     private disposeScene = () => {};
     async start() {
         try { await this.initialize(); }
         catch (error) {
             this.disposeScene();
+            this.foundingBook?.dispose();
             this.loading?.finish();
             this.loading = undefined;
-            document.body.innerHTML = '<main class="fjord-load-error"><h1>Island not opened</h1><p role="status"></p><button type="button">Try again</button> <a href="/">Return to Fjordside</a></main>';
+            document.body.innerHTML = '<main class="fjord-load-error"><h1>Island not opened</h1><p role="status"></p><button type="button">Try again</button></main>';
             document.querySelector('[role="status"]')!.textContent = error instanceof DOMException && error.name === 'AbortError' ?
                 'Loading cancelled. Your saved campaign has not changed.' : 'Could not open the island. ' + String(error);
             document.querySelector('button')!.addEventListener('click', () => location.reload());
@@ -66,14 +69,20 @@ export class FjordPlay {
         let stored: string | null = null;
         try { stored = sessionStorage.getItem(activeSettlementKey); } catch { /* Storage is optional. */ }
         if (!stored) {
-            this.loading = new IslandLoading();
-            await this.loading.prepare(Number(query.get('seed') ?? 32));
+            const proposal = new GameplaySession(Number(query.get('seed') ?? 32), undefined, true, foundingPhase);
+            this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
+            proposal.book.notifyPending();
+            this.loading = new IslandLoading(false, this.foundingBook);
+            await this.loading.prepare(proposal.snapshot().seed);
+            this.opened = { campaign: new SharedSettlement(proposal, undefined, true, 'island-pool-v1'),
+                warning: '', autoStart: true };
         }
-        this.opened = openSettlement('fjord', Number(query.get('seed') ?? 32), foundingPhase);
+        else this.opened = openSettlement('fjord', Number(query.get('seed') ?? 32), foundingPhase);
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
         document.title = 'Pillagers · Fjord settlement';
+        const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
             <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
@@ -82,6 +91,7 @@ export class FjordPlay {
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         this.loading?.mount();
+        this.foundingBook?.restoreScroll(readingPosition);
         const header = new FjordHeader(document.querySelector('#fjord-header')!);
         const screenAwake = new ScreenAwakeControl(document.querySelector('#fjord-play')!);
         document.querySelector('#screen-awake-slot')!.outerHTML = screenAwake.html();
@@ -277,6 +287,7 @@ export class FjordPlay {
             action(async () => {
                 say('Loading shared campaign…');
                 this.shared.loadLocal(localStorage);
+                this.foundingBook?.dispose();
                 resetProduction();
                 campaignFields();
                 if (world)
@@ -302,6 +313,7 @@ export class FjordPlay {
             action(async () => {
                 say('Importing campaign…');
                 this.shared.importJSON(await file.text());
+                this.foundingBook?.dispose();
                 resetProduction();
                 campaignFields();
                 input.value = '';
@@ -311,7 +323,9 @@ export class FjordPlay {
             });
         });
         const startNewCampaign = (restart: boolean) => {
-            const wasRunning = this.session.running;
+            const previousPace = this.session.pacing();
+            const wasRunning = previousPace.running;
+            this.foundingBook?.dispose();
             const completeAutoStart = beginAutoStart();
             action(async () => {
                 // Legacy saves keep their existing restart and geography policy.
@@ -327,7 +341,7 @@ export class FjordPlay {
                     return;
                 }
                 const backup = this.campaign.exportJSON();
-                const loading = this.loading = new IslandLoading();
+                let loading: IslandLoading | undefined;
                 controller.enabled = false;
                 drawingReady = false;
                 sceneLoads++;
@@ -337,6 +351,9 @@ export class FjordPlay {
                         proposal.loadJSON(this.session.saveJSON());
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
                     } else proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase);
+                    this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
+                    proposal.book.notifyPending();
+                    loading = this.loading = new IslandLoading(true, this.foundingBook);
                     await loading.prepare(proposal.snapshot().seed);
                     loading.check();
                     this.campaign.startCampaign(proposal, 'island-pool-v1');
@@ -344,11 +361,13 @@ export class FjordPlay {
                     campaignFields();
                     await rebuildWorld();
                     await finishArrival(loading);
-                    loading.finish();
+                    this.foundingBook.release();
+                    loading?.finish();
                     this.loading = undefined;
                     completeAutoStart();
                     say(restart ? 'Campaign restarted.' : 'New campaign created.');
                 } catch (error) {
+                    this.foundingBook?.dispose();
                     const committed = this.campaign.exportJSON() !== backup;
                     this.shared.importJSON(backup);
                     campaignFields();
@@ -358,10 +377,11 @@ export class FjordPlay {
                     if (committed && !this.stopped) await rebuildWorld();
                     say(error instanceof DOMException && error.name === 'AbortError' ?
                         'Loading cancelled. Your campaign is unchanged.' : 'Could not open the new island. Your campaign is retained. ' + String(error));
-                    loading.finish();
+                    loading?.finish();
+                    this.session.restorePacing({ ...previousPace, running: false });
                     setPlayback(wasRunning);
                 } finally {
-                    loading.finish();
+                    loading?.finish();
                     this.loading = undefined;
                     sceneLoads--;
                     controller.enabled = true;
@@ -453,6 +473,7 @@ export class FjordPlay {
             this.stopped = true;
             header.dispose();
             bookReader.dispose();
+            this.foundingBook?.dispose();
             personalHistory.dispose();
             setPlayback(false);
             clearInterval(timer);
@@ -773,6 +794,7 @@ export class FjordPlay {
         };
         if (this.loading) {
             await finishArrival(this.loading);
+            this.foundingBook?.release();
             this.loading.finish();
             this.loading = undefined;
         }

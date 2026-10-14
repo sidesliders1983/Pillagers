@@ -17,8 +17,9 @@ export class SharedSettlement {
     transferring = false;
     readonly session: GameplaySession;
     readonly fjord: FjordCampaign;
-    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, geography: CampaignGeography = 'legacy', foundingPhase?: FoundingPhase) {
-        this.session = new GameplaySession(seed, narrativeSeed, socialEnabled, foundingPhase);
+    constructor(seed: number | GameplaySession = 32, narrativeSeed?: number, socialEnabled = true, geography: CampaignGeography = 'legacy', foundingPhase?: FoundingPhase) {
+        this.session = typeof seed === 'number' ?
+            new GameplaySession(seed, narrativeSeed, socialEnabled, foundingPhase) : seed;
         this.fjord = new FjordCampaign(this.session, geography);
     }
     get selection(): SettlementSelection {

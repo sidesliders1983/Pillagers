@@ -1,0 +1,11 @@
+{
+  "viewport": "390x844 touch emulation",
+  "exactOpening": true,
+  "retainedAfterArrival": true,
+  "retainedScroll": true,
+  "playableTime": {
+    "winter": 800,
+    "tick": 500
+  },
+  "errors": []
+}

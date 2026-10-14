@@ -1,3 +1,4 @@
+import type { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { browserGeneration } from '../world-generation/BrowserGeneration';
 import { adoptCampaignIsland } from './CampaignIsland';
 import type { GenerationProgress } from '../world-generation/GenerationTask';
@@ -36,19 +37,24 @@ export class IslandLoading {
     private status: HTMLElement;
     private retry: HTMLButtonElement;
     private skip: HTMLButtonElement;
-    constructor() {
+    constructor(private canReturnToGame = false, book?: FoundingBookWindow) {
         this.signal = this.abort.signal;
         this.root.id = 'island-loading';
+        this.root.tabIndex = -1;
         this.root.setAttribute('role', 'dialog');
         this.root.setAttribute('aria-modal', 'true');
         this.root.setAttribute('aria-label', 'Preparing a new island campaign');
         this.root.innerHTML = `<canvas aria-label="Top-down preview of the generated island"></canvas>
-            <div class="island-loading-copy"><p class="island-loading-eyebrow">Pillagers · a new shore</p>
+            <div class="island-preview-space" aria-hidden="true"></div><div class="island-loading-copy"><p class="island-loading-eyebrow">Pillagers · a new shore</p>
             <h1 id="island-loading-status" role="status" aria-live="polite">Shaping coast &amp; valleys</h1>
             <p class="island-loading-help">Preparing your Summer landing. The campaign clock has not started.</p>
-            <div class="island-loading-actions"><button type="button" id="island-loading-cancel">Cancel loading</button>
+            <div class="island-loading-actions"><button type="button" id="island-loading-cancel" ${canReturnToGame ? '' : 'hidden'}>Cancel &amp; Return to Game</button>
             <button type="button" id="island-loading-retry" hidden>Retry generation</button>
             <button type="button" id="island-loading-skip" hidden>Skip camera arrival</button></div></div>`;
+        if (book) {
+            this.root.classList.add('island-has-book');
+            this.root.append(book.root);
+        }
         this.canvas = this.root.querySelector('canvas')!;
         this.status = this.root.querySelector('#island-loading-status')!;
         this.retry = this.root.querySelector('#island-loading-retry')!;
@@ -56,9 +62,11 @@ export class IslandLoading {
         this.root.querySelector('#island-loading-cancel')!.addEventListener('click', () => this.cancel());
         this.skip.addEventListener('click', () => { this.skipped = true; });
         this.root.addEventListener('keydown', event => {
-            if (event.key === 'Escape') this.cancel();
+            if (event.key === 'Escape' && this.canReturnToGame) this.cancel();
             if (event.key !== 'Tab') return;
-            const buttons = Array.from(this.root.querySelectorAll<HTMLButtonElement>('button')).filter(b => !b.hidden);
+            const buttons = Array.from(this.root.querySelectorAll<HTMLElement>('button, [tabindex="0"]'))
+                .filter(element => !element.hidden && element.getClientRects().length > 0);
+            if (!buttons.length) { event.preventDefault(); this.root.focus(); return; }
             const index = buttons.indexOf(document.activeElement as HTMLButtonElement);
             event.preventDefault();
             buttons[(index + (event.shiftKey ? buttons.length - 1 : 1)) % buttons.length].focus();
@@ -74,7 +82,7 @@ export class IslandLoading {
             if (!this.inertRoots.has(child)) this.inertRoots.set(child, child.inert);
             child.inert = true;
         }
-        this.root.querySelector<HTMLButtonElement>('button')!.focus();
+        (this.root.querySelector<HTMLButtonElement>('button:not([hidden])') ?? this.root).focus();
     }
     cancel = () => { this.abort.abort(); this.worker.cancel(); };
     check() { this.signal.throwIfAborted(); }
@@ -119,6 +127,7 @@ export class IslandLoading {
                 this.check();
                 this.status.textContent = 'Could not prepare the island. ' + (error instanceof Error ? error.message : String(error));
                 this.retry.hidden = false;
+                this.retry.focus();
                 await new Promise<void>((resolve, reject) => {
                     const done = () => { cleanup(); resolve(); };
                     const aborted = () => { cleanup(); reject(this.signal.reason); };
@@ -171,9 +180,10 @@ export class IslandLoading {
             }
         }
         if (this.map) {
-            const size = Math.min(width * .86, height * .64);
+            const area = this.root.querySelector('.island-preview-space')!.getBoundingClientRect();
+            const size = Math.min(area.width * .94, area.height * .94);
             ctx.imageSmoothingEnabled = true;
-            const x = (width - size) / 2, y = Math.max(16, (height * .72 - size) / 2);
+            const x = area.x + (area.width - size) / 2, y = area.y + (area.height - size) / 2;
             const fade = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : Math.min(1, (time - this.mapShownAt) / 600);
             if (this.previousMap) ctx.drawImage(this.previousMap, x, y, size, size);
             ctx.globalAlpha = fade;

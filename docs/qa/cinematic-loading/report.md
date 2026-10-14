@@ -40,7 +40,7 @@ These are sequential development runs, not a controlled throughput comparison. *
 ## Behaviour checks
 
 - Public contract tests cover canonical worker equality, pinned recipe identity, bounded previews, stale results, cancellation, timeout, worker failure and disposal, plus matching synchronous/yielding terrain and ground masks.
-- [flows.json](flows.json): unavailable worker → retry; cancellation during generation and during arrival; prior Core/geography restoration; a second campaign seed; skip arrival; explicit saved load without an intro. All four created generation workers terminated, with no page errors.
+- [Original flows.json](flows-2026-10-13.json): unavailable worker → retry; cancellation during generation and during arrival; prior Core/geography restoration; a second campaign seed; skip arrival; explicit saved load without an intro. All four created generation workers terminated, with no page errors.
 - [lifecycle.json](lifecycle.json): navigating away terminates the worker without a partial save; a deliberately failed ground texture fetch uses the existing declared native-material fallback and reaches the playable Summer state.
 - [legacy.json](legacy.json): an old same-founder campaign restarts without a new-island introduction and preserves its exact saved geography. The browser test first reproduced the unintended introduction, then passed with the original restart route restored.
 - Initial cancellation also passed using a real emulated touch tap at 390px width.
@@ -52,3 +52,18 @@ The source uses the repository's existing formatting conventions. No formatter i
 ## Owner review
 
 Open [the visual review](review.html), then use **Open a new review tab** or the game's New campaign/Restart action. Review the complete sequence: sea → actual relief → ground colours → overhead descent → playable Summer settlement. Check Cancel and Skip on the physical iPhone/iPad. Existing saved campaigns intentionally do not replay this introduction.
+
+
+## 14 October follow-up — contextual cancellation and the canonical Clan Book
+
+The owner approved the loading sequence and authorized merge after addressing the PR comments and passing current-head CI. The 13 October measurements and screenshots above remain historical observations; no new timing improvement is claimed here.
+
+- First launch hides cancellation and has no link to the separate root prototype. Worker failure keeps Retry generation. In-game new/restart offers Cancel & Return to Game; internal cancellation and pagehide disposal remain intact.
+- GameplaySession prepares the opening before the worker starts. Initial startup adopts that exact session rather than constructing another narrative or a throwaway geographic campaign. Existing new/restart commits retain the proposal's saved book.
+- A simple window has an upper-right ×, independent text scrolling and responsive map/text regions. Closing it does not cancel generation. Completion neither dismisses the window nor resets its reading position. The usual menu reader reuses the same chapter; no duplicate auto-popup appears.
+- The new public session regression was observed red before implementation, then green. TypeScript, production build and all 19 focused session/book/summer-start tests pass. The browser regression also caught and corrected a reading-position reset during scene mounting.
+- [390px chapter verification](book/results.json) checks exact saved/menu text, retained reading position, no duplicate popup, Summer 800:500 and no page errors. [Phone screenshot](book/mobile-reading.png) and [tablet screenshot](book/tablet-reading.png) were visually inspected. These new tests use Edge touch emulation; they do not claim a new physical iPhone test.
+
+Issue #161 owns soft return, BFCache, true cold restore and WebGL recovery. Saved loads remain outside the new-founding introduction. No claim is made that this follow-up fixes the owner's iOS resume report. A future returning-campaign shell must use the saved book and season instead of creating a new opening.
+
+The updated [recovery run](flows.json) passed all six cases: retry retains the prepared opening; generation cancellation and arrival cancellation restore the prior campaign; closing the new-seed chapter does not cancel or duplicate it; same-founder restart permits touch cancellation; explicit saved loading preserves Core and remains outside this intro. All five generation workers terminated and no page errors were recorded.
