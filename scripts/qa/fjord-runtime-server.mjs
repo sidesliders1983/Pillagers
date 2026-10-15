@@ -14,7 +14,7 @@ function instrument(source) {
             if (ts.isCallExpression(parent) && parent.expression.getText(file) === 'renderer.setAnimationLoop') name = 'frame.callback';
             if (name) {
                 edits.push({ position: node.body.getStart(file) + 1,
-                    text: `const __auditSpan = audit.enter('${name}'); try {` });
+                    text: `${name === 'clock.callback' ? 'if (audit.flags.manualClock) return;' : ''} const __auditSpan = audit.enter('${name}'); try {` });
                 edits.push({ position: node.body.end - 1, text: '} finally { audit.leave(__auditSpan); }' });
             }
         }
@@ -33,7 +33,12 @@ function instrument(source) {
     source = source.replace(anchor,
         `        audit.bind({ session: this.session, shared: this.shared, campaign: this.campaign,
             motion, layer, models, world, controller, camera, renderer, scene, lighting,
-            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback });
+            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
+            advanceTicks: async ticks => {
+                action(() => this.session.command({ type: 'AdvanceTicks', ticks }));
+                await actionWork;
+                await sceneWork;
+            } });
 ` + anchor);
     return "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" + source;
 }

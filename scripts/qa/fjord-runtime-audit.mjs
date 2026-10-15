@@ -9,7 +9,8 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
 const output = process.env.QA_OUTPUT || 'docs/qa/fjord-runtime-performance';
-const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5190';
+let origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5190';
+const variants = process.env.QA_VARIANTS ? JSON.parse(process.env.QA_VARIANTS) : [{ label: 'current', origin }];
 const group = process.env.QA_GROUP || 'baseline';
 const scenarioFilter = process.env.QA_FILTER ? JSON.parse(process.env.QA_FILTER) : null;
 const repeatCount = Number(process.env.QA_REPEATS || 3);
@@ -22,13 +23,13 @@ const errors = [], runs = [], fixtures = new Map();
 await mkdir(output + '/profiles', { recursive: true });
 const sha256 = value => createHash('sha256').update(value).digest('hex');
 const results = { group, assetEnvironment: process.env.QA_ASSET_VARIANT || 'Declared by the captured resource manifest', sourceCommit: process.env.QA_SOURCE_COMMIT || execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
-    sourceMode: 'Vite development modules, QA-only bridge; native profiling only in scenarios with profile=true',
+    variants, sourceMode: 'Vite development modules, QA-only bridge; native profiling only in scenarios with profile=true',
     origin, warmupMs, sampleMs, browserVersion: browser.version(), startedAt: new Date().toISOString(),
     fixtures: [], runs, errors };
 const write = () => writeFile(output + '/' + group + '.json', JSON.stringify(results, null, 2) + '\n');
 async function fixture(name) {
     if (fixtures.has(name)) return fixtures.get(name);
-    const input = await readFile(output + '/fixtures/' + name + '.json', 'utf8');
+    const input = await readFile((process.env.QA_FIXTURES || output + '/fixtures') + '/' + name + '.json', 'utf8');
     const data = JSON.parse(input);
     // Match the current view explicitly: never let the loader auto-start during preparation.
     data.target = 'fjord'; data.pace.running = false;
@@ -38,7 +39,9 @@ async function fixture(name) {
     return fixtures.get(name);
 }
 let scenarios;
-if (group === 'baseline' || group === 'previous') {
+if (process.env.QA_SCENARIOS) {
+    scenarios = JSON.parse(process.env.QA_SCENARIOS);
+} else if (group === 'baseline' || group === 'previous') {
     scenarios = ['summer-32', 'developed-810'].flatMap(fixture => [false, true].flatMap(running =>
         [false, true].map(cameraPath => ({ fixture, running, cameraPath }))));
 } else if (group === 'previous-boundary') {
@@ -82,6 +85,8 @@ try {
     for (let repeat = 1; repeat <= repeatCount; repeat++) {
         // Reverse alternate trials to reduce order/thermal bias.
         for (const scenario of repeat % 2 ? scenarios : [...scenarios].reverse()) {
+            for (const variant of repeat % 2 ? variants : [...variants].reverse()) {
+            origin = variant.origin;
             const loaded = await fixture(scenario.fixture);
 
             const page = await context.newPage(); await page.setViewportSize(scenario.mobile ? { width: 390, height: 844 } : { width: 1280, height: 800 });
@@ -118,7 +123,7 @@ try {
                     const effects = document.querySelector('#fjord-effects');
                     effects.value = scenario.effects || 'low'; effects.dispatchEvent(new Event('change'));
                     refs.session.setMinutesPerWinter(scenario.minutes || 3);
-                    audit.flags = { [scenario.ablation]: true };
+                    audit.flags = { [scenario.ablation]: true, manualClock: Boolean(scenario.commands) };
                     // Artificial reuse experiments, restricted to this isolated page. Never shipped save policy.
                     if (scenario.ablation === 'snapshot-cache' || scenario.ablation === 'projection-cache') {
                         const command = refs.session.command.bind(refs.session);
@@ -204,7 +209,17 @@ try {
                 const windows = [];
                 const samples = scenario.soak ? 10 : 1;
                 for (let window = 0; window < samples; window++) {
-                    await page.waitForTimeout(scenario.soak ? 30000 : sampleMs);
+                    if (scenario.commands) {
+                        // QA-only matched command schedule: no canonical ticks are skipped to claim a gain.
+                        await page.evaluate(async scenario => {
+                            const audit = window.__fjordAudit;
+                            for (let command = 1; command <= scenario.commands; command++) {
+                                const remaining = audit.started + command * 500 - performance.now();
+                                if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
+                                await audit.references.advanceTicks(scenario.ticksPerCommand || 3);
+                            }
+                        }, scenario);
+                    } else await page.waitForTimeout(scenario.soak ? 30000 : sampleMs);
                     const sample = await page.evaluate(() => window.__fjordAudit.stop());
                     windows.push(sample);
                     if (scenario.soak && window < samples - 1) await page.evaluate(() => window.__fjordAudit.start());
@@ -252,13 +267,15 @@ try {
                 const actual = await page.evaluate(() => window.__fjordAudit.references.session.saveJSON());
                 assert.deepEqual(JSON.parse(actual), core.applyCommand(loaded.state, { type: 'AdvanceTicks', ticks }),
                     'Rendered campaign must equal identical headless canonical commands');
-                const run = { scenario, repeat, before, after, actualTicksFromFixture: ticks,
+                const run = { scenario, repeat, variant: variant.label, sourceCommit: variant.sourceCommit || results.sourceCommit, before, after, actualTicksFromFixture: ticks,
                     canonicalReplayEqual: true, windows,
+                    canonicalSha256: sha256(actual), canonicalSaveBytes: Buffer.byteLength(actual),
+                    checkpointSha256: sha256(await page.evaluate(() => window.__fjordAudit.references.shared.persist())),
                     cdpMetrics: Object.fromEntries(metricsAfter.metrics.filter(m => /Duration|Count|HeapSize|Nodes|Documents/.test(m.name))
                         .map(m => [m.name, m.value - (metricsBefore.metrics.find(p => p.name === m.name)?.value || 0)])) };
                 if (scenario.profile) {
                     const { profile } = await cdp.send('Profiler.stop');
-                    const profileName = 'profiles/' + (scenario.fixture.startsWith('boundary') ? 'boundary-' : '') + (scenario.running ? (scenario.selected ? 'running-selected' : 'running') : (scenario.freezeAfterWarmup ? 'paused-frozen-' + scenario.fixture : 'paused'));
+                    const profileName = 'profiles/' + (process.env.QA_VARIANTS ? variant.label + '-r' + repeat + '-' + (scenario.minutes || 3) + '-' : '') + (scenario.fixture.startsWith('boundary') ? 'boundary-' : '') + (scenario.running ? (scenario.selected ? 'running-selected' : 'running') : (scenario.freezeAfterWarmup ? 'paused-frozen-' + scenario.fixture : 'paused'));
                     await writeFile(output + '/' + profileName + '.cpuprofile.gz', gzipSync(JSON.stringify(profile)));
                     const samples = new Map();
                     profile.samples.forEach((id, index) => samples.set(id, (samples.get(id) || 0) + profile.timeDeltas[index]));
@@ -288,6 +305,7 @@ try {
                     gpuMean: windows[0].gpu.mean, calls: after.renderer.render.calls,
                     ticks, maxCommand: windows[0].spans['session.command.inclusive']?.max }));
             } finally { await page.close(); }
+            }
         }
     }
     if (errors.length) throw Error('Browser errors were recorded');

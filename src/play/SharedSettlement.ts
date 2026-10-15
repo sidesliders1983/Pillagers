@@ -14,6 +14,8 @@ export type SettlementSelection = {
 export const activeSettlementKey = 'pillagers.fjord-play.active.v1';
 /** One canonical campaign, transferred explicitly when a full-page view switch replaces its owner. */
 export class SharedSettlement {
+    private availabilityRevision = -1;
+    private availabilityCache = new Map<string, ReturnType<typeof commandAvailability>>();
     transferring = false;
     readonly session: GameplaySession;
     readonly fjord: FjordCampaign;
@@ -29,10 +31,31 @@ export class SharedSettlement {
         this.fjord.selection = selection;
     }
     selectionPresentation() {
-        return projectSelection(this.session.snapshot(), this.selection, this.fjord.project().entities);
+        return projectSelection(this.session.readSnapshot(), this.selection, this.fjord.readProjection().entities);
     }
     availability(command: SimulationCommand) {
-        return commandAvailability(this.session.snapshot(), command);
+        if (this.availabilityRevision !== this.session.revision) {
+            this.availabilityRevision = this.session.revision;
+            this.availabilityCache.clear();
+        }
+        let cacheable = true;
+        let key: string;
+        try {
+            key = JSON.stringify(command, (_field, value) => {
+                if (value === undefined || typeof value === 'number' && !Number.isFinite(value) ||
+                    typeof value === 'function' || typeof value === 'symbol') cacheable = false;
+                return value;
+            });
+        } catch { cacheable = false; key = ''; }
+        if (!cacheable) return commandAvailability(this.session.readSnapshot(), command);
+        let status = this.availabilityCache.get(key);
+        if (!status) {
+            status = commandAvailability(this.session.readSnapshot(), command);
+            // Bound noncanonical UI probes even if an input produces many different commands.
+            if (this.availabilityCache.size >= 128) this.availabilityCache.clear();
+            this.availabilityCache.set(key, status);
+        }
+        return { ...status };
     }
     command(command: SimulationCommand) {
         this.session.command(command);
@@ -70,7 +93,7 @@ export class SharedSettlement {
                 narrative: saved.narrative?.canonicalIdentity === historyIdentity(canonical) ? saved.narrative : undefined }) : canonical);
     }
     persist() {
-        return JSON.stringify({ sharedVersion: 1, fjord: JSON.parse(this.fjord.exportJSON()),
+        return JSON.stringify({ sharedVersion: 1, fjord: this.fjord.exportData(),
             pace: this.session.pacing() });
     }
     handoff(target: SettlementView) {
