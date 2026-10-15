@@ -103,7 +103,7 @@ try {
         await page.evaluate(async () => { const module = await import('/scripts/qa/fjord-fit-stage.mjs'); window.__fitStage = await module.createFitStage(); });
         for (const spec of cases) for (const view of spec.hair ? ['front', 'detail'] : ['front', 'side']) {
             const result = await page.evaluate(({ spec, view }) => window.__fitStage.draw(spec, view), { spec, view });
-            assert.ok(result.hitCount > 0);
+            assert.ok(result.hitCount > 0, JSON.stringify({ spec, view, bounds: result.bounds }));
             assert.equal(result.age, spec.age + 1);
             const path = variant.label + '-' + spec.id + '-' + view + '.png';
             await page.screenshot({ path: output + '/' + path });

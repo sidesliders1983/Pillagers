@@ -59,11 +59,14 @@ export async function createFitStage() {
         camera.position.copy(target).add(new THREE.Vector3(Math.sin(angle) * distance, .03, Math.cos(angle) * distance));
         camera.lookAt(target); camera.updateMatrixWorld(true);
         renderer.render(scene, camera);
-        const hits = new THREE.Raycaster(camera.position, target.clone().sub(camera.position).normalize()).intersectObject(human.root, true);
+        // The full-body box centre can lie in the empty gap between a farmer's legs.
+        // Test an actual chest/head pixel while keeping identical full-body camera framing.
+        const pickingTarget = detail ? target : new THREE.Vector3(centre.x, box.min.y + size.y * .7, centre.z);
+        const hits = new THREE.Raycaster(camera.position, pickingTarget.clone().sub(camera.position).normalize()).intersectObject(human.root, true);
         return { spec, view, mobile, retained, age: human.dna.age,
             profile: human.root.userData.universalHumanProfile, selected: human.root.userData.selectedAssets,
             bounds: { min: box.min.toArray(), max: box.max.toArray() }, hitCount: hits.length,
-            firstHit: hits[0]?.distance, draw: { ...renderer.info.render }, memory: { ...renderer.info.memory },
+            firstHit: hits[0]?.distance, pickingTarget: pickingTarget.toArray(), draw: { ...renderer.info.render }, memory: { ...renderer.info.memory },
             modules: [...human.fit.modules.keys()], source: human.fit.body };
     };
     return { draw, dispose() { human?.dispose(); renderer.dispose(); } };
