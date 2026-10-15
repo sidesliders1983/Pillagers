@@ -6,7 +6,7 @@ import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {Vector3} from 'three';
 import {load} from './load-source.mjs';
 
-const {FjordWardrobe, fjordClothingSet, fjordClothingSets} = load('../src/fjord-play/FjordWardrobe.ts');
+const {FjordWardrobe, fjordClothingSet, fjordClothingSets, fjordHairAsset, fjordHairAssets} = load('../src/fjord-play/FjordWardrobe.ts');
 const {MeshyHumanFactory} = load('../src/characters/MeshyHuman.ts');
 const {defaultDNA} = load('../src/characters/CharacterDNA.ts');
 const {parseCharacterPresentation} = load('../src/characters/CharacterPresentation.ts');
@@ -44,7 +44,10 @@ function fixture(bindingHook = async () => {}) {
 }
 function expectSet(human, set, ids) {
     assert.equal(human.root.userData.clothingSet.id, set);
-    assert.deepEqual([...human.fit.modules.keys()].sort(), ids.slice().sort());
+    const hair = fjordHairAsset({kind: 'persona', dna: human.dna});
+    const expected = hair === 'none' ? ids : [...ids, hair];
+    assert.deepEqual([...human.fit.modules.keys()].sort(), expected.slice().sort());
+    assert.equal(human.root.userData.clothingSet.assets.hair, hair === 'none' ? null : hair);
     for (const group of human.fit.modules.values()) {
         for (const mesh of group.children) assert.equal(mesh.skeleton, human.fit.nativeSkeleton);
     }
@@ -194,5 +197,49 @@ test('footwear body masks cannot change DNA height normalization or lift a resid
                 Math.abs(value - original.elements[index]) < 1e-6),
             'The full source height is independent of the currently hidden foot triangles');
         }
+    } finally {human.dispose();}
+});
+
+test('approved hair variants are stable across occupation, sex and age without consuming Core identity', () => {
+    const variants = new Set();
+    for (let seed = 0; seed < 40; seed++) {
+        const person = entity();
+        person.dna.seed = seed;
+        const before = structuredClone(person);
+        const selected = fjordHairAsset(person);
+        assert.ok(fjordHairAssets.includes(selected));
+        variants.add(selected);
+        assert.deepEqual(person, before);
+        assert.equal(fjordHairAsset({...person, status: {...person.status, occupation: 'farmer'}}), selected);
+        assert.equal(fjordHairAsset({...person, dna: {...person.dna, sex: 'female', age: 85}}), selected);
+        assert.equal(fjordHairAsset({...person, dna: {...person.dna, age: 6}}), selected);
+    }
+    assert.equal(variants.size, 2);
+    assert.equal(fjordHairAsset({...entity(), dna: undefined}), 'none');
+    assert.equal(fjordHairAsset({...entity(), kind: 'cattle'}), 'none');
+    assert.equal(fjordHairAsset(entity(null, 'male', 5)), 'none');
+});
+
+test('changing resident DNA on the same model updates its hair variant and retains outfit caching', async () => {
+    const owner = fixture();
+    const first = entity();
+    const second = entity();
+    while (fjordHairAsset(second) === fjordHairAsset(first)) second.dna.seed++;
+    const human = await owner.factory.createWorld(first.dna);
+    try {
+        const root = human.root;
+        await owner.wardrobe.reconcile(human, first);
+        const firstHair = human.root.userData.selectedAssets.hair;
+        human.applyDNA(second.dna);
+        await owner.wardrobe.reconcile(human, second);
+        assert.notEqual(human.root.userData.selectedAssets.hair, firstHair);
+        expectSet(human, 'generic', [tunic, low]);
+        assert.equal(human.root, root);
+        const loadCount = owner.requests.length;
+        const fitCount = human.modules.fitRuns;
+        await owner.wardrobe.reconcile(human, second);
+        assert.equal(owner.requests.length, loadCount);
+        assert.equal(human.modules.fitRuns, fitCount);
+        assert.deepEqual(owner.diagnostics, []);
     } finally {human.dispose();}
 });

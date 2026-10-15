@@ -1,5 +1,6 @@
 import {defaultCharacterPresentation, type CharacterPresentation} from '../characters/CharacterPresentation';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
+import {identitySample} from '../characters/seededRandom';
 import type {FjordEntity} from './FjordProjection';
 import type {MeshyHuman, MeshyHumanFactory} from '../characters/MeshyHuman';
 
@@ -21,9 +22,17 @@ export function fjordClothingSet(entity: Pick<FjordEntity, 'kind' | 'dna' | 'sta
     return entity.dna.sex === 'female' ? 'farmerFemale' : 'farmerMale';
 }
 
+/** Owner-approved short styles use a separate visual seed stream, independent of occupation. */
+export const fjordHairAssets = ['hair/manual-fitted-short', 'hair/manual-fitted-short2'] as const;
+export function fjordHairAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): string {
+    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 6) return 'none';
+    const variant = Math.floor(identitySample(entity.dna.seed, 'fjord.hair.short.variant') * fjordHairAssets.length);
+    return fjordHairAssets[variant];
+}
+
 interface WardrobeState {
-    installed?: FjordClothingSet;
-    pending?: FjordClothingSet;
+    installed?: string;
+    pending?: string;
     equipRevision?: number;
     revision: number;
     task?: Promise<void>;
@@ -37,24 +46,26 @@ export class FjordWardrobe {
     async reconcile(human: MeshyHuman, entity: FjordEntity) {
         if (human.isDisposed) return;
         const selected = fjordClothingSet(entity);
+        const hair = fjordHairAsset(entity);
+        const key = selected + ':' + hair;
         let state = this.states.get(human);
         if (!state) {
             state = {revision: 0};
             this.states.set(human, state);
         }
-        if (state.installed === selected && !state.task) return;
-        if (state.pending === selected && state.equipRevision === human.equipRevision && state.task) {
+        if (state.installed === key && !state.task) return;
+        if (state.pending === key && state.equipRevision === human.equipRevision && state.task) {
             await state.task;
             return;
         }
         const revision = ++state.revision;
-        state.pending = selected;
-        const request = this.factory.equip(human, fjordClothingSets[selected] as CharacterPresentation);
+        state.pending = key;
+        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair} as CharacterPresentation);
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {
             if (human.isDisposed || state.revision !== revision || human.equipRevision !== equipRevision) return;
-            state.installed = selected;
+            state.installed = key;
             human.root.userData.clothingSet = {
                 id: selected,
                 assets: {...human.root.userData.selectedAssets},
