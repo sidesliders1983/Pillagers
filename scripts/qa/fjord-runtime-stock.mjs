@@ -10,20 +10,22 @@ const output = process.env.QA_OUTPUT || 'docs/qa/fjord-runtime-performance';
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5192';
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, deviceScaleFactor: 1 });
-const result = { sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+const result = { sourceCommit: process.env.QA_SOURCE_COMMIT || execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     mode: 'Unmodified production bundle; public controls only; GPU execution time UNKNOWN',
     assetEnvironment: process.env.QA_ASSET_VARIANT || 'Declared by the captured source/resource manifest',
     browserVersion: browser.version(), warmupMs: 5000, sampleMs: 20000, runs: [], errors: [] };
 try {
     for (let repeat = 1; repeat <= Number(process.env.QA_REPEATS || 3); repeat++) {
         const fixtureNames = process.env.QA_FIXTURE_SET === 'prepared' ? ['developed-810'] : ['summer-32', 'developed-810'];
-        const scenarios = fixtureNames.flatMap(fixture => [false, true].map(running => ({ fixture, running })));
-        scenarios.push({ fixture: 'boundary-810', running: true, boundary: true });
+        const scenarios = process.env.QA_SCENARIOS ? JSON.parse(process.env.QA_SCENARIOS) : [
+            ...fixtureNames.flatMap(fixture => [false, true].map(running => ({ fixture, running }))),
+            { fixture: 'boundary-810', running: true, boundary: true },
+        ];
         for (const scenario of repeat % 2 ? scenarios : scenarios.reverse()) {
             const page = await context.newPage();
             page.setDefaultTimeout(180000);
             page.on('pageerror', error => result.errors.push(error.message));
-            const fixture = JSON.parse(await readFile(output + '/fixtures/' + scenario.fixture + '.json', 'utf8'));
+            const fixture = JSON.parse(await readFile((process.env.QA_FIXTURES || output + '/fixtures') + '/' + scenario.fixture + '.json', 'utf8'));
             fixture.target = 'fjord'; fixture.pace.running = false;
             await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json), JSON.stringify(fixture));
             try {

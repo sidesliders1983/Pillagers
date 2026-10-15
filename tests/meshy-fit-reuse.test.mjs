@@ -108,6 +108,16 @@ test('hair, beard, source coverage edits, geometry versions, external scale and 
             a.sampleAnimation(clip, .6); b.sampleAnimation(clip, .6);
             sameGeometryAndPose(a, b, 'hair/beard/' + clip);
         }
+        const automatic = { ...presentation };
+        delete automatic.hairColor;
+        await factory.equip(a, automatic); await factory.equip(b, automatic);
+        a.applyDNA(dna, undefined, { forceRefit: true }); b.applyDNA(dna, undefined, { forceRefit: true });
+        const oldColor = a.profile.appearance.color;
+        assert.equal(a.applyDNA({ ...dna, age: 46 }), false, 'Actual aging hair colour must refit');
+        b.applyDNA({ ...dna, age: 46 }, undefined, { forceRefit: true });
+        assert.notEqual(a.profile.appearance.color, oldColor);
+        a.sampleAnimation('Walk', .6); b.sampleAnimation('Walk', .6);
+        sameGeometryAndPose(a, b, 'automatic greying');
         assert.equal(a.applyDNA({ ...dna, traits: { ...dna.traits, intelligence: .1 } }), false);
         assert.equal(a.applyDNA(dna), false, 'There is no historical-fit cache across DNA changes');
         a.sampleNativeNeutral();

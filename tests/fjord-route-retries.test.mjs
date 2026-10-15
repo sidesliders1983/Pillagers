@@ -135,3 +135,28 @@ test('an arrived worker can follow its verified outbound corridor home without r
     motion.reconcile([], { plots: [], paths: [] });
     assert.equal(motion.inspectMetrics().retainedHomeWaypoints, 0);
 });
+
+test('return corridors revalidate new obstacles and are released when the canonical home changes', () => {
+    const { motion, actor, state, view } = fixture();
+    const canonical = core.serializeState(state);
+    motion.reconcile([actor.entity], { plots: [], paths: [] });
+    const outbound = motion.route(actor);
+    assert.ok(outbound.length > 4);
+    actor.homeTrail = [{ x: actor.x, z: actor.z }, ...outbound.map(point => ({ ...point }))];
+    actor.x = outbound.at(-1).x;
+    actor.z = outbound.at(-1).z;
+    assert.ok(motion.homeTrailPath(actor));
+    const blocked = actor.homeTrail[Math.floor(actor.homeTrail.length / 2)];
+    const obstacle = { ...actor.entity, kind: 'building', id: 'new-obstacle',
+        selectionKey: 'building:new-obstacle',
+        plot: { x: blocked.x, z: blocked.z, halfWidth: .5, halfDepth: .5 } };
+    motion.reconcile([actor.entity, obstacle], { plots: [], paths: [] });
+    assert.equal(motion.homeTrailPath(actor), null, 'A saved route cannot bypass a newly occupied static corridor');
+    motion.reconcile([actor.entity], { plots: [], paths: [] });
+    assert.ok(motion.homeTrailPath(actor));
+    const moved = structuredClone(actor.entity);
+    moved.transform.x += 1;
+    motion.reconcile([moved], view.ground);
+    assert.equal(actor.homeTrail.length, 0);
+    assert.equal(core.serializeState(state), canonical);
+});

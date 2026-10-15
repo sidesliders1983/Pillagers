@@ -32,7 +32,9 @@ export async function createFitStage() {
         const initial = { ...generateCharacterDNA(spec.seed || 1983), sex: spec.sex, age: spec.age,
             morphology: { height: spec.height || 1.5, masculinity: spec.sex === 'female' ? .2 : .85 } };
         const presentation = age => ({ ...fjordClothingSets[age < 18 ? 'native' : spec.outfit || 'generic'],
-            ...(spec.hair ? { hair: 'hair/meshy-short-angular', beard: spec.sex === 'male' && age >= 18 ? 'beard/meshy-compact-wedge' : 'none', hairColor: spec.hairColor || '#512c1e' } : {}) });
+            ...(spec.hair ? { hair: 'hair/meshy-short-angular',
+                beard: spec.sex === 'male' && age >= 18 ? 'beard/meshy-compact-wedge' : 'none',
+                ...(!spec.autoColor ? { hairColor: spec.hairColor || '#512c1e' } : {}) } : {}) });
         human = await factory.create(initial, spec.lod ?? 2, undefined, presentation(initial.age));
         scene.add(human.root);
         human.setAnimation('Walk'); human.sample(.27);

@@ -12,6 +12,7 @@ const cases = [
     { id: 'farmer-female', age: 32, sex: 'female', outfit: 'farmerFemale', height: 1.28, seed: 17 },
     { id: 'farmer-male', age: 32, sex: 'male', outfit: 'farmerMale', seed: 32 },
     { id: 'tunic-hair-beard', age: 45, sex: 'male', hair: true },
+    { id: 'aging-hair-colour', age: 45, sex: 'male', hair: true, autoColor: true },
     { id: 'elder-entry', age: 50, sex: 'female', outfit: 'farmerFemale', hair: true, hairColor: '#9a9a92' },
     { id: 'elder-male', age: 75, sex: 'male', hair: true, hairColor: '#9a9a92' },
     { id: 'lod0-farmer', age: 32, sex: 'male', outfit: 'farmerMale', lod: 0 },
@@ -89,7 +90,7 @@ try {
             await page.screenshot({ path: output + '/' + path });
             captures.push({ variant: variant.label, sourceCommit: variant.sourceCommit, path, ...result });
         }
-        for (const spec of [cases[0], cases[7]]) {
+        for (const spec of cases.filter(spec => ['child-five', 'elder-male'].includes(spec.id))) {
             await page.setViewportSize({ width: 390, height: 844 });
             const result = await page.evaluate(spec => window.__fitStage.draw(spec, 'front', true), spec);
             assert.ok(result.hitCount > 0);
