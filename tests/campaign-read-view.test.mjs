@@ -104,3 +104,26 @@ test('developed saves and frozen chapters retain exact Core output through annua
         assert.equal(shared.session.saveJSON(), core.serializeState(reference));
     }
 });
+
+test('book read/notification flags and pacing serialize immediately without a new canonical revision', () => {
+    const shared = new SharedSettlement(32, 166);
+    const read = shared.session.readSnapshot();
+    const canonical = shared.session.saveJSON();
+    const revision = shared.session.revision;
+    const first = JSON.parse(shared.persist());
+    assert.equal(first.fjord.narrative.chapters[0].read, false);
+    shared.session.book.markRead(0);
+    shared.session.book.notifyPending();
+    shared.session.setMinutesPerWinter(1);
+    shared.session.setRunning(true);
+    shared.session.elapse(1);
+    const next = JSON.parse(shared.persist());
+    assert.equal(next.fjord.narrative.chapters[0].read, true);
+    assert.equal(next.fjord.narrative.chapters[0].notified, true);
+    assert.equal(next.pace.running, true);
+    assert.equal(next.pace.minutesPerWinter, 1);
+    assert.ok(next.pace.fractionalTicks > 0);
+    assert.equal(shared.session.revision, revision);
+    assert.equal(shared.session.readSnapshot(), read);
+    assert.equal(shared.session.saveJSON(), canonical);
+});

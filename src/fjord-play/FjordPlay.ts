@@ -175,8 +175,8 @@ export class FjordPlay {
             production.reset(this.session.readSnapshot().events);
             productionLabels.reset();
         };
-        const highlight = () => {
-            liveMarkers = this.shared.selectionPresentation();
+        const highlight = (state = this.session.readSnapshot(), view = this.campaign.readProjection()) => {
+            liveMarkers = this.shared.selectionPresentation(state, view.entities);
             layer?.select(liveMarkers);
             canvas.dataset.highlight = JSON.stringify(layer?.root.userData.selection ?? null);
             const markers = (layer?.root.userData.markers ?? []) as SelectionLabel[];
@@ -588,7 +588,12 @@ export class FjordPlay {
             sceneWork = (async () => {
                 do {
                     this.queued = false;
+                    // Keep one immutable revision through asynchronous model work. A queued revision
+                    // acquires a new pair on the next pass instead of mixing new facts into this scene.
+                    const state = this.session.readSnapshot();
                     const view = this.campaign.readProjection();
+                    const sceneCanonicalTime = 'Canonical time: Winter ' + view.time.winter +
+                        ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
                     precipitationEffect!.setWeather(view.precipitation);
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
@@ -635,7 +640,7 @@ export class FjordPlay {
                         }
                     sceneEntities = view.entities;
                     await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
-                    campfireEffect!.setLit(inspectCampfire(this.session.readSnapshot()).lit);
+                    campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
                     const fireBounds = layer!.bounds('campfire:settlement-campfire')!;
                     canvas.dataset.campfire = JSON.stringify({ ...view.campfire,
@@ -652,14 +657,14 @@ export class FjordPlay {
                     layer!.advance(motion!, 0, false);
                     if (this.stopped || this.shared.transferring)
                         return;
-                    highlight();
+                    highlight(state, view);
                     const rendered = layer!.describe();
                     productionLabels.setAnchors(rendered);
                     canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                         ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
-                        canonicalTime,
+                        sceneCanonicalTime,
                         'Reused Fjordside DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
                         'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                         'Geography: ' + view.layout.geographyId].join('\n');

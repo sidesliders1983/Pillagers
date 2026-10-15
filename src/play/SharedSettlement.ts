@@ -30,8 +30,8 @@ export class SharedSettlement {
     select(selection: SettlementSelection) {
         this.fjord.selection = selection;
     }
-    selectionPresentation() {
-        return projectSelection(this.session.readSnapshot(), this.selection, this.fjord.readProjection().entities);
+    selectionPresentation(state = this.session.readSnapshot(), entities = this.fjord.readProjection().entities) {
+        return projectSelection(state, this.selection, entities);
     }
     availability(command: SimulationCommand) {
         if (this.availabilityRevision !== this.session.revision) {
