@@ -28,6 +28,7 @@ class Distribution {
 }
 
 export const audit = {
+    harnessVersion: 'native-fit-v1',
     enabled: false, flags: {}, spans: {}, stack: [], active: false, references: null,
     enter(name) {
         if (!this.active || !this.enabled) return null;

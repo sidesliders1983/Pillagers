@@ -110,6 +110,8 @@ try {
             try {
                 await page.goto(origin + '/fjord-play', { waitUntil: 'domcontentloaded' });
                 await page.waitForFunction(() => window.__fjordAudit && document.querySelector('#fjord-canvas')?.dataset.ready);
+                if (process.env.QA_REQUIRED_HARNESS)
+                    assert.equal(await page.evaluate(() => window.__fjordAudit.harnessVersion), process.env.QA_REQUIRED_HARNESS);
                 if (process.env.QA_ASSET_VARIANT === 'owner-prepared-houses') {
                     const placeholders = await page.evaluate(() => window.__fjordAudit.references.layer.describe()
                         .filter(entity => entity.placeholder).map(entity => entity.key));
