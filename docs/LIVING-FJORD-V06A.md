@@ -63,7 +63,15 @@ this selection does not grant arbitrary preview assets automatic registry accept
 
 The rendered entity diagnostics include the installed clothing set and exact asset IDs.
 Regression coverage is in tests/fjord-clothing.test.mjs; the original fit limitations still
-apply to the source tunic and its animation skirt. Hair and beard selection remain unchanged.
+apply to the source tunic and its animation skirt. Beard selection remains unchanged.
+
+The two owner-approved manually fitted short hairstyles are explicitly assigned to
+residents from age six. A named visual DNA-seed sample selects one consistently,
+independent of occupation and sex. Both use the existing Head joint, DNA hair colour
+and age greying. Their choice consumes no Core RNG or save data. Wardrobe caching
+includes the selected hair ID, so changing DNA can update hair on the same Human
+without changing an occupation or rebuilding the resident. Long styles await their
+own Head/neck/back weighting and movement review.
 
 ## Verification
 

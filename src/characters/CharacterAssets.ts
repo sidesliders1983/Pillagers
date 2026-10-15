@@ -2,6 +2,8 @@ import { ModuleMetadata, appearanceMetadata, validateModule } from './Attachment
 import {meshyCharacterModules} from './MeshyModuleCatalog';
 import {gridTrialOutfitAsset, gridTrialOutfitPath} from './GridTrialOutfitCatalog';
 import {additionalOutfitAssets} from './AdditionalOutfitCatalog';
+import {manualHairAssets} from './ManualHairCatalog';
+import {manualHairMeasurements} from './ManualHairMeasurements';
 import {additionalOutfitMeasurements} from './AdditionalOutfitMeasurements';
 import {gridTrialOutfitMeasurement} from './GridTrialOutfitMeasurements';
 import {meshyModuleMeasurements} from './MeshyModuleMeasurements';
@@ -44,7 +46,7 @@ export const availableHairStyles=characterAssets.filter(asset=>asset.type==='hai
 export const availableBeardStyles=characterAssets.filter(asset=>asset.type==='beard'&&!asset.scope).map(asset=>asset.style as BeardStyle);
 /** Lab discovery adds explicit review candidates without publishing them to the world manifest. */
 export function availableCharacterAssets(): readonly CharacterAsset[] {
-    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets];
+    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...manualHairAssets];
 }
 export function characterAsset(id:string){const asset=availableCharacterAssets().find(asset=>asset.id===id);if(!asset)throw new Error(`Unknown character asset: ${id}`);return asset;}
 /** Compatibility is source identity, not a family name or a fallback fit guess. */
@@ -54,6 +56,7 @@ export function characterAssetFitsBody(asset:CharacterAsset,body?:BodyAssetIdent
 }
 export function assetMeasurement(path: string): AssetMeasurement {
     const measured = characterAssetMeasurements[path]
+        ?? (manualHairMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (additionalOutfitMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (path === gridTrialOutfitPath ? gridTrialOutfitMeasurement : undefined)
         ?? (meshyModuleMeasurements as Record<string, AssetMeasurement>)[path];
