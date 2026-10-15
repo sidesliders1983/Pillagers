@@ -5,6 +5,7 @@ const root = process.argv[2] || 'docs/qa/fjord-runtime-improvements/170';
 const plan = JSON.parse(await readFile(root + '/plan.json', 'utf8'));
 const data = JSON.parse(await readFile(root + '/paired.json', 'utf8'));
 assert.equal(data.failure, undefined); assert.deepEqual(data.errors, []);
+assert.equal(data.requiredHarness, plan.requiredHarness);
 assert.equal(data.runs.length, plan.scenarios.length * plan.repeats * 2);
 for (const fixture of data.fixtures) {
     const bytes = await readFile(root + '/fixtures/' + fixture.name + '.json');
@@ -25,6 +26,8 @@ for (const scenario of plan.scenarios) {
         for (const run of pair) {
             assert.equal(run.sourceCommit, plan[run.variant]);
             assert.equal(run.canonicalReplayEqual, true);
+            assert.equal(run.before.harnessVersion, plan.requiredHarness);
+            assert.equal(run.after.harnessVersion, plan.requiredHarness);
             assert.deepEqual(run.after.placeholders, []);
             assert.ok(run.windows[0].gpu.count > 0); assert.equal(run.windows[0].disjointQueries, 0);
             assert.equal(run.after.motion.bodyOverlaps, 0); assert.equal(run.after.motion.outOfZone, 0);

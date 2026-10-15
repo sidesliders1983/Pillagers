@@ -22,7 +22,7 @@ const context = await browser.newContext({ viewport: { width: 1280, height: 800 
 const errors = [], runs = [], fixtures = new Map();
 await mkdir(output + '/profiles', { recursive: true });
 const sha256 = value => createHash('sha256').update(value).digest('hex');
-const results = { group, assetEnvironment: process.env.QA_ASSET_VARIANT || 'Declared by the captured resource manifest', sourceCommit: process.env.QA_SOURCE_COMMIT || execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+const results = { group, requiredHarness: process.env.QA_REQUIRED_HARNESS, assetEnvironment: process.env.QA_ASSET_VARIANT || 'Declared by the captured resource manifest', sourceCommit: process.env.QA_SOURCE_COMMIT || execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     variants, sourceMode: 'Vite development modules, QA-only bridge; native profiling only in scenarios with profile=true',
     origin, warmupMs, sampleMs, browserVersion: browser.version(), startedAt: new Date().toISOString(),
     fixtures: [], runs, errors };

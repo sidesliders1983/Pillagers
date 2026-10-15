@@ -251,7 +251,7 @@ export const audit = {
                 if (material.alphaTest) counts.alphaTestMeshes++;
             }
         });
-        return { time: state.time, seed: state.seed, events: state.events.length,
+        return { harnessVersion: this.harnessVersion, time: state.time, seed: state.seed, events: state.events.length,
             residents: Object.values(state.personas).filter(p => p.deathWinter === null).length,
             cattle: Object.values(state.landing.cattle).filter(c => c.deathWinter === null).length,
             recipe: campaign.blueprint.config.seed, running: session.running, minutes: session.minutesPerWinter,
