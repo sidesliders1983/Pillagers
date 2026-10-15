@@ -303,7 +303,8 @@ try {
                     }
                 }
                 if (scenario.screenshot) {
-                    const path = group + '-' + variant.label + '-r' + repeat + '-' + scenario.fixture + '.png';
+                    const path = group + '-' + variant.label + '-r' + repeat + '-' + scenario.fixture +
+                        (scenario.minutes ? '-m' + scenario.minutes : '') + '.png';
                     await page.screenshot({ path: output + '/' + path });
                     run.screenshot = path;
                 }
