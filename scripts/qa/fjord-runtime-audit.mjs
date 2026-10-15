@@ -34,7 +34,10 @@ async function fixture(name) {
     // Match the current view explicitly: never let the loader auto-start during preparation.
     data.target = 'fjord'; data.pace.running = false;
     const json = JSON.stringify(data);
-    results.fixtures.push({ name, sha256: sha256(input), loadedSha256: sha256(json) });
+    const description = { name, sha256: sha256(input), loadedSha256: sha256(json) };
+    const previous = results.fixtures.find(fixture => fixture.name === name);
+    if (previous) assert.deepEqual(previous, description, 'Resumed fixture bytes changed');
+    else results.fixtures.push(description);
     fixtures.set(name, { json, state: data.fjord.campaign });
     return fixtures.get(name);
 }
@@ -81,11 +84,42 @@ if (scenarioFilter) {
     scenarios = scenarios.filter(scenario => filters.some(filter =>
         Object.entries(filter).every(([key, value]) => scenario[key] === value)));
 }
+// Resume only complete pinned cases after an interrupted measurement batch.
+// Completed raw distributions are retained; no timing or outcome is reconstructed.
+if (process.env.QA_RESUME === '1') {
+    const previous = JSON.parse(await readFile(output + '/' + group + '.json', 'utf8'));
+    assert.equal(previous.failure, undefined);
+    assert.deepEqual(previous.errors, []);
+    for (const key of ['group', 'sourceCommit', 'requiredHarness', 'warmupMs', 'sampleMs'])
+        assert.equal(previous[key], results[key], 'Resume input changed: ' + key);
+    assert.deepEqual(previous.variants, variants);
+    const identities = new Set();
+    for (const run of previous.runs) {
+        assert.ok(run.repeat >= 1 && run.repeat <= repeatCount);
+        const variant = variants.find(variant => variant.label === run.variant);
+        assert.equal(run.sourceCommit, variant?.sourceCommit);
+        assert.ok(scenarios.some(scenario => JSON.stringify(scenario) === JSON.stringify(run.scenario)));
+        const identity = JSON.stringify([run.repeat, run.variant, run.scenario]);
+        assert.ok(!identities.has(identity), 'Duplicate completed measurement');
+        identities.add(identity);
+    }
+    runs.push(...previous.runs);
+    results.startedAt = previous.startedAt;
+    results.fixtures = previous.fixtures;
+    results.resumptions = [...(previous.resumptions || []), {
+        at: new Date().toISOString(), completedCases: runs.length,
+        reason: process.env.QA_RESUME_REASON || 'Interrupted batch',
+        previousResultSha256: sha256(await readFile(output + '/' + group + '.json')),
+        runnerSha256: sha256(await readFile(new URL(import.meta.url))),
+    }];
+}
 try {
     for (let repeat = 1; repeat <= repeatCount; repeat++) {
         // Reverse alternate trials to reduce order/thermal bias.
         for (const scenario of repeat % 2 ? scenarios : [...scenarios].reverse()) {
             for (const variant of repeat % 2 ? variants : [...variants].reverse()) {
+            if (runs.some(run => run.repeat === repeat && run.variant === variant.label &&
+                JSON.stringify(run.scenario) === JSON.stringify(scenario))) continue;
             origin = variant.origin;
             const loaded = await fixture(scenario.fixture);
 
