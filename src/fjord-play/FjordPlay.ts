@@ -689,8 +689,10 @@ export class FjordPlay {
         controller.setSelectionHandler((x, y, pointerType) => {
             const selected = layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
             if (!selected) {
-                this.shared.select(null);
-                refresh();
+                if (this.shared.selection) {
+                    this.shared.select(null);
+                    refresh();
+                }
                 // A desktop left click is exclusively selection/deselection.
                 // Preserve the existing touch tap-on-empty-ground navigation.
                 return pointerType === 'mouse';
