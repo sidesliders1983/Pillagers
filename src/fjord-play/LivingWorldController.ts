@@ -1,3 +1,4 @@
+import { WaypointQueue } from './WaypointQueue';
 import { cattleVariants } from '../characters/CattlePresentation';
 import { passConversation, passNeighbours } from '../systems/ResidentPassing';
 import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
@@ -41,6 +42,7 @@ type Agent = {
     detour: Point2[];
     signature: string;
     pace: number;
+    failedRoutes: Map<string, { context: string; expires: number; reason: string }>;
 };
 /** Ephemeral presentation only. Neither simulation state nor its random stream enters this controller. */
 export class LivingWorldController {
@@ -50,7 +52,7 @@ export class LivingWorldController {
         updates: 0, lastUpdateMs: 0, maxUpdateMs: 0, totalUpdateMs: 0,
         yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0,
         presentationSteps: 0, activeSeconds: 0, visitsStarted: 0, occupationArrivals: 0,
-        activitiesCompleted: 0, homeArrivals: 0, visitsCancelled: 0, distanceWalked: 0 };
+        activitiesCompleted: 0, homeArrivals: 0, visitsCancelled: 0, distanceWalked: 0, failedRouteReuse: 0 };
     private routeObserver?: (observation: RouteObservation) => void;
     private navigationGeneration = 0;
     private navigationSignature = '';
@@ -135,7 +137,7 @@ export class LivingWorldController {
                     visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {},
                     state: 'Idle', interactionSeconds: 0, grazeSeconds: 0,
                     grazeRemaining: 0, grazeNext: true, blockedSeconds: 0,
-                    socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
+                    failedRoutes: new Map(), socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
                 };
                 this.agents.set(agent.key, agent);
             }
@@ -515,31 +517,55 @@ export class LivingWorldController {
         (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
         target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '') {
         this.metrics.routeAttempts++;
+        const key = goal ? JSON.stringify([purpose, target, goal.x, goal.z]) : '';
+        // Moving endpoint blockers invalidate immediately. Other transient traffic is retried
+        // within one active second; canonical/static obstacles and reservations invalidate now.
+        const context = goal ? JSON.stringify([a.x, a.z, this.navigationGeneration,
+            this.reservationGeneration, [...this.agents.values()].filter(other => other !== a &&
+                Math.hypot(other.x - goal.x, other.z - goal.z) < this.radius(a) + this.radius(other))
+                .map(other => [other.key, other.x, other.z])]) : '';
+        const failure = a.failedRoutes.get(key);
+        const reused = Boolean(failure && failure.context === context &&
+            failure.expires - this.metrics.activeSeconds > 1e-9);
         const measured = (nodes: number, path: Point2[]) => {
             this.metrics.routeNodes += nodes;
             this.metrics.maxRouteNodes = Math.max(this.metrics.maxRouteNodes, nodes);
-            if (!path.length) this.metrics.rejectedRoutes++;
+            const reason = path.length ? 'accepted' : reused ? 'cached-' + failure!.reason :
+                goal && !this.safe(a, goal) ? 'unsafe-goal' :
+                goal && !this.bodyClearance(a, goal, goal) ? 'occupied-endpoint' :
+                nodes >= (goal ? 2000 : 500) ? 'node-cap' : 'no-path';
+            if (!path.length) {
+                this.metrics.rejectedRoutes++;
+                if (goal && !reused) {
+                    if (a.failedRoutes.size >= 8 && !a.failedRoutes.has(key))
+                        a.failedRoutes.delete(a.failedRoutes.keys().next().value!);
+                    a.failedRoutes.set(key, { context, expires: this.metrics.activeSeconds + 1, reason });
+                }
+            } else if (goal) a.failedRoutes.delete(key);
             if (this.routeObserver) this.routeObserver({ agent: a.key, kind: a.kind, purpose, target,
                 goal: goal ? { ...goal } : null, from: { x: a.x, z: a.z }, nodes, accepted: path.length > 0,
-                reason: path.length ? 'accepted' : goal && !this.safe(a, goal) ? 'unsafe-goal' :
-                    goal && !this.bodyClearance(a, goal, goal) ? 'occupied-endpoint' :
-                    nodes >= (goal ? 2000 : 500) ? 'node-cap' : 'no-path',
+                reason,
                 navigationGeneration: this.navigationGeneration, reservationGeneration: this.reservationGeneration,
                 occupancy: [...this.agents.values()].filter(other => other !== a)
                     .map(other => [other.key, other.x, other.z].join(':')).join('|'),
                 step: this.metrics.presentationSteps, activeSeconds: this.metrics.activeSeconds });
             return path;
         };
+        if (reused) {
+            this.metrics.failedRouteReuse++;
+            return measured(0, []);
+        }
+        // Every valid final segment must end at a safe, unoccupied point.
+        if (goal && (!this.safe(a, goal) || !this.bodyClearance(a, goal, goal))) return measured(0, []);
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
         const spacing = a.entity.status.grazingZone === 'yard' ? .25 : 1;
         const nodes: Point2[] = [{ x: a.x, z: a.z }], parents = [-1], seen = new Set(['0,0']);
-        const open = [0], depth = [0];
+        const open = [0], depth = [0], priority = new WaypointQueue();
+        let cursor = 0;
+        if (goal) priority.push(0, Math.hypot(a.x - goal.x, a.z - goal.z));
         const maximumNodes = goal ? 2000 : 500;
-        while (open.length && nodes.length < maximumNodes) {
-            if (goal) open.sort((left, right) =>
-                depth[left] + Math.hypot(nodes[left].x - goal.x, nodes[left].z - goal.z) -
-                depth[right] - Math.hypot(nodes[right].x - goal.x, nodes[right].z - goal.z));
-            const i = open.shift()!, from = nodes[i];
+        while ((goal ? priority.length : cursor < open.length) && nodes.length < maximumNodes) {
+            const i = goal ? priority.shift() : open[cursor++], from = nodes[i];
             if (goal && Math.hypot(from.x - goal.x, from.z - goal.z) <= .75 &&
                 this.segment(a, from, goal) && this.bodyClearance(a, goal, from)) {
                 const path: Point2[] = [goal];
@@ -561,7 +587,8 @@ export class LivingWorldController {
                     continue;
                 parents.push(i);
                 depth.push(depth[i] + spacing);
-                open.push(nodes.length);
+                if (goal) priority.push(nodes.length, depth[depth.length - 1] + Math.hypot(to.x - goal.x, to.z - goal.z));
+                else open.push(nodes.length);
                 nodes.push(to);
             }
         }
