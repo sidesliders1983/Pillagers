@@ -1,3 +1,4 @@
+import { endCare } from './CareCalendar';
 import { compareBirths } from './ScheduledBirths';
 import {pruneSocialIncidents} from './PersonalityLifeEvents';
 import {resolveMortality} from './Mortality';
@@ -163,7 +164,8 @@ function transferPersona(source:SimulationState,destination:SimulationState,id:s
  if(p.partnerId!==null&&source.personas[p.partnerId]){source.personas[p.partnerId].partnerId=null;p.partnerId=null;}
  for(const home of Object.values(source.households)){home.memberIds=home.memberIds.filter(x=>x!==id);if(!home.memberIds.length)home.residenceId=null;}
  for(const control of Object.values(source.mechanics!.people))if(control.caregiverId===id){control.caregiverId=null;control.caregiverLocked=false;}
- info.caregiverId=null;info.caregiverLocked=false;info.childcareUntilWinter=Math.min(info.childcareUntilWinter,source.time.winter);
+ if(info.childcareUntilTick!==undefined)endCare(source,info);
+ else {info.caregiverId=null;info.caregiverLocked=false;info.childcareUntilWinter=Math.min(info.childcareUntilWinter,source.time.winter);}
  delete source.personas[id];delete source.mechanics!.people[id];
  delete destination.personaArchive[id];destination.personas[id]=p;destination.mechanics!.people[id]=info;
  const householdId=`arrival-${id}`,residenceId=`tent-${householdId}`;

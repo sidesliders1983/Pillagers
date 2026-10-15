@@ -118,7 +118,7 @@ export function stepMechanicsTick(state:SimulationState):void {
     for(const id of Object.keys(state.personas).sort()) {
         const person=state.personas[id], role=person.occupation;
         const care=state.mechanics!.people[id];
-        if(care.childcareUntilWinter===nextWinter&&(care.childcareUntilTick??0)===nextTick)careExpires=true;
+        if(care.childcareUntilTick!==undefined&&care.childcareUntilWinter===nextWinter&&care.childcareUntilTick===nextTick)careExpires=true;
         if(personaAway(state,id) || isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
         const work=inspectWork(state,id),job=config.occupations[role];
         if(job.resource===null)continue;

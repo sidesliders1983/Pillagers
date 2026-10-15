@@ -5,7 +5,9 @@ export function careEndpoint(state: SimulationState, info: PersonaMechanics): nu
     return info.childcareUntilWinter * state.ticksPerWinter + (info.childcareUntilTick ?? 0);
 }
 export function careActive(state: SimulationState, info: PersonaMechanics): boolean {
-    return careEndpoint(state, info) > state.time.winter * state.ticksPerWinter + state.time.tick;
+    // Legacy records end at the annual boundary; exact dates only need a tick comparison in that year.
+    return info.childcareUntilWinter > state.time.winter ||
+        info.childcareUntilWinter === state.time.winter && (info.childcareUntilTick ?? 0) > state.time.tick;
 }
 export function endCare(state: SimulationState, info: PersonaMechanics): void {
     if (careActive(state, info)) {

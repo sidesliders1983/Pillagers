@@ -314,3 +314,26 @@ test('a legacy receiving clan can retain a foreign delivery without changing its
     assert.deepEqual(child.time, { winter: 801, tick: 547 });
     assert.equal(state.events.some(event => event.type === 'BirthScheduled'), false);
 });
+
+test('maternal clan transfer ends exact care immediately when the children remain behind', () => {
+    let state = fertile();
+    for (const target of Object.values(state.world.targetClans)) target.stocks.food = 10000;
+    Object.assign(state.world.config.durations, { Recon: 1, Pillage: 1 });
+    Object.assign(state.world.config.successBps, { Recon: 10000, Pillage: 10000 });
+    Object.assign(state.world.config.casualtyBps, { Recon: 0, Pillage: 0 });
+    state = step(state, 500);
+    const mother = 'cpu-west:founder-1';
+    state = step(state, 547);
+    assert.ok(state.world.targetClans['cpu-west'].events.some(event =>
+        event.type === 'ChildBorn' && event.details.parentIds.includes(mother)));
+    const member = Object.values(state.personas).find(person => person.dna.sex === 'male').id;
+    state = core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Scouts', memberIds: [member] });
+    state = core.applyCommand(state, { type: 'DispatchExpedition', groupId: 'group-1', regionId: 'region-west', mission: 'Recon' });
+    state = step(state, 1);
+    state = core.applyCommand(state, { type: 'DispatchExpedition', groupId: 'group-1', regionId: 'region-west', mission: 'Pillage', priorities: ['People'] });
+    state = step(state, 1);
+    const care = state.mechanics.people[mother];
+    assert.ok(care);
+    assert.deepEqual({ winter: care.childcareUntilWinter, tick: care.childcareUntilTick }, state.time);
+    assert.notEqual(core.inspectWork(state, mother).reason, 'childcare');
+});
