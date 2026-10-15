@@ -391,8 +391,12 @@ export class MeshyModuleRuntime {
   this.restoreMask();
   const prepared = [...this.records.values()].filter(record => record.source.binding.precomputedNative);
   const full = prepared.filter(record => record.source.binding.precomputedNative!.version === 2);
-  fail(full.length <= 1 && (!full.length || prepared.length === 1),
-   'Prepared full outfits cannot be combined with separate prepared clothing');
+  const footwear = prepared.filter(record => record !== full[0]);
+  fail(full.length <= 1 && (!full.length || !footwear.length
+   || full[0].source.asset.metadata?.includesFootwear === false
+   && footwear.every(record => record.source.asset.metadata?.slot === 'footwear'
+    && record.source.binding.precomputedNative!.version === 3)),
+   'Prepared full outfits may combine only with explicitly separate footwear');
   if (prepared.length && !full.length) {
    this.mask = preparedModuleCoverage([...this.records.values()].map(record => record.source), this.fit);
    this.fit.mesh.geometry = this.mask;
@@ -412,12 +416,12 @@ export class MeshyModuleRuntime {
    return;
   }
   if (prepared.length) {
-   this.mask = preparedCoverage(prepared[0].source, this.fit);
+   this.mask = preparedCoverage(full[0].source, this.fit, footwear.map(record => record.source));
    this.fit.mesh.geometry = this.mask;
    this.originalBodyMaterial = this.fit.mesh.material;
    const originals = Array.isArray(this.originalBodyMaterial)
     ? this.originalBodyMaterial : [this.originalBodyMaterial];
-   const fullCoverage = prepared[0].source.binding.precomputedNative!;
+   const fullCoverage = full[0].source.binding.precomputedNative!;
    fail(fullCoverage.version === 2, 'Full outfit coverage requires version 2');
    this.coverageMaterials = originals.map(material => preparedCoverageMaterial(material, this.fit.encoding,
     fullCoverage.coverage));

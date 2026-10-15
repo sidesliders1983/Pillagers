@@ -7,7 +7,8 @@ on the current main branch.
 ## Available choices
 
 All choices use the existing Meshy Human and its native skeleton. They are explicit Lab
-previews and remain outside automatic occupation/world selection and the published registry.
+previews and remain outside the published registry. Fjordplay now uses the explicitly selected
+sets documented in [Living Fjord](../LIVING-FJORD-V06A.md#resident-clothing-in-fjordplay).
 
 | Field | Label | Asset ID |
 | --- | --- | --- |
@@ -23,8 +24,9 @@ UVs, reversed winding and the corresponding left/right native joints. The low sh
 the corrected posterior sole; its old heel flap is retained only as a regression fixture.
 
 Select Human, choose the Meshy Human body source, then select a Full outfit or individual
-clothing fields. A full outfit clears the separate clothing fields. Selecting a separate
-piece clears the full outfit. Existing snapshots acquire empty separate fields when absent;
+clothing fields. Full outfits normally clear the separate clothing fields. The original tunic
+explicitly leaves footwear separate, so its shoes can be selected independently. Selecting
+lower or upper clothing clears the full outfit. Existing snapshots acquire empty separate fields when absent;
 new snapshots pin exact body, clothing and binding identities.
 
 Convenience routes:

@@ -13,7 +13,7 @@ import { LabBodyPresentation, LabBodyPreset, defaultLabBodyPresentation, preview
 import { goldenLabBody, labBodyAsset, labCandidatePresetNames, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { characterAsset } from '../characters/CharacterAssets';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
-import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation } from '../characters/CharacterPresentation';
+import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation, outfitAllowsSeparateFootwear } from '../characters/CharacterPresentation';
 
 import { ModuleAgeRange, loadNativeModuleAgeRange, moduleAvailableAtAge, nativeModuleAgeKey } from '../characters/NativeModuleAgePolicy';
 
@@ -143,10 +143,12 @@ export class CharacterLabUI {
                 const key = choice.dataset.presentation;
                 const next = {...this.presentation, [key]: choice.value};
                 if (key === 'outfit' && choice.value !== 'none') {
-                    for (const slot of separateGarmentKeys) next[slot] = 'none';
+                    for (const slot of separateGarmentKeys) {
+                        if (slot !== 'shoes' || !outfitAllowsSeparateFootwear(choice.value)) next[slot] = 'none';
+                    }
                 } else if (separateGarmentKeys.includes(key as typeof separateGarmentKeys[number]) &&
                     choice.value !== 'none') {
-                    next.outfit = 'none';
+                    if (key !== 'shoes' || !outfitAllowsSeparateFootwear(next.outfit)) next.outfit = 'none';
                 }
                 this.onPresentation(next);
                 return;

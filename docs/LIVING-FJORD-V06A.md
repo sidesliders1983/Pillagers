@@ -34,6 +34,33 @@ The first living assigned cattle IDs up to the canonical capacity (normally four
 
 Residents reuse Walking/Idle_02, cattle Walk/Idle. Human pace is measured from the existing stance-foot sampling helper and DNA cadence; cattle use each source manifest's walkSpeedMps. Animation pace follows movement speed. Missing clips/assets produce explicit stable static fallbacks rather than invented animation. Rings, relation labels, production feedback and character cards follow live transforms; cached body bounds avoid measuring skinned vertices every frame.
 
+## Resident clothing in Fjordplay
+
+Fjordplay uses explicit owner-selected visual sets on the existing Meshy Human:
+
+| Resident | Clothing set |
+| --- | --- |
+| Generic adult (all occupations except farmer) | Original tunic and long trousers with low leather shoes |
+| Female farmer | Long woven skirt and low leather shoes; native undershirt, no tunic |
+| Male farmer | Short woven trousers and high leather boots; native undershirt, no tunic |
+
+Selection follows canonical DNA sex and current occupation. It updates on the same resident
+model when occupation, sex or age changes; it changes neither Core data nor production rules.
+The adult source garments retain their supported age range: residents below eighteen keep the
+native body presentation rather than receiving an unverified resized adult outfit.
+
+The original tunic ensemble explicitly leaves footwear independent. Its existing chest,
+neck and cuff masks compose with the selected shoes' measured ankle/foot masks. Height
+normalization measures the complete native body even while clothing hides foot triangles.
+All clothing uses the same native skeleton and DNA scaling. A slow obsolete clothing request
+cannot overwrite a newer occupation, and an unavailable garment retains the current live body
+with a diagnostic and a retry on later reconciliation. The existing assets remain frozen;
+this selection does not grant arbitrary preview assets automatic registry acceptance.
+
+The rendered entity diagnostics include the installed clothing set and exact asset IDs.
+Regression coverage is in tests/fjord-clothing.test.mjs; the original fit limitations still
+apply to the source tunic and its animation skirt. Hair and beard selection remain unchanged.
+
 ## Verification
 
 Run node --test tests/living-fjord.test.mjs for the public projection/controller and Core save/replay seams. Run node scripts/qa/check-living-fjord.mjs against the LAN/dev server for actual DNA bodies, movement, heritage popup, touch, pause, replay and five-animal Farmyard reconciliation. Run node scripts/qa/capture-living-herd.mjs for close views at capacity plus one, actual within-yard movement, and return to capacity through the real Slaughter command. Browser evidence is in docs/qa/living-fjord. Existing character validation, build and the complete test suite remain required.

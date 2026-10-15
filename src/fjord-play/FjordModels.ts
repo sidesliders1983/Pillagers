@@ -9,14 +9,18 @@ import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { AssetManager } from '../core/AssetManager';
 import { placeSettlement } from '../world/PlaceSettlement';
 import type { FjordEntity } from './FjordProjection';
+import {FjordWardrobe} from './FjordWardrobe';
 /** Reuse verified Fjordside DNA bodies and source livestock clips, with independent instance ownership. */
 export class FjordModels {
     readonly diagnostics: string[] = [];
     private humans = new MeshyHumanFactory();
+    private wardrobe = new FjordWardrobe(this.humans, message => {
+        if (!this.diagnostics.includes(message)) this.diagnostics.push(message);
+    });
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
         fingerprint?: string; resumeGrazeTime?: number; pace: number; groundSpeed: number; state: string }>();
-    reconcile(model: Object3D, entity: FjordEntity) {
+    async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
         const fingerprint = JSON.stringify(entity.dna);
@@ -36,6 +40,7 @@ export class FjordModels {
             actor.pace = actor.groundSpeed * profile.motion.cadence;
             actor.state = 'Idle';
         }
+        await this.wardrobe.reconcile(actor.human, entity);
         model.userData.appearance = model.userData.universalHumanProfile;
         model.userData.pace = actor.pace;
     }
@@ -147,7 +152,7 @@ export class FjordModels {
             try {
                 const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) });
                 this.actors.set(human.root, { human, pace: 0, groundSpeed: 0, state: 'Idle' });
-                this.reconcile(human.root, entity);
+                await this.reconcile(human.root, entity);
                 return human.root;
             } catch (error) {
                 this.diagnostics.push(entity.id + ': DNA body unavailable; explicit static fallback — ' + String(error));
