@@ -31,6 +31,7 @@ for (const scenario of plan.scenarios) {
         }
         const read = run => ({ refit: span(run, 'modules.refit') || { count: 0, total: 0, max: 0, p95: 0 },
             applyDNA: span(run, 'human.applyDNA') || null,
+            modelFits: run.windows[0].modelFits,
             dependencyKey: span(run, 'human.neutralFitSignature') || null,
             bounds: span(run, 'bounds.setFromObject') || null,
             modelReconcile: span(run, 'models.reconcile') || null,

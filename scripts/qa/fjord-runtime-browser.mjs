@@ -65,6 +65,14 @@ export const audit = {
                 if (audit.stack.length) audit.stack.at(-1).children += elapsed;
                 audit.record(name + '.inclusive', elapsed);
                 audit.record(name + '.self', Math.max(0, elapsed - entry.children));
+                if (name === 'human.applyDNA' || name === 'modules.refit' || name === 'bodyFit.refit') {
+                    const id = (this.root || this.fit?.root)?.name;
+                    const key = JSON.stringify([id, name]);
+                    if (id && (audit.modelFits.has(key) || audit.modelFits.size < 128)) {
+                        if (!audit.modelFits.has(key)) audit.modelFits.set(key, { id, stage: name, cpu: new Distribution() });
+                        audit.modelFits.get(key).cpu.add(elapsed);
+                    }
+                }
             }
         };
     },
@@ -203,6 +211,7 @@ export const audit = {
         this.spans = {}; this.stack = []; this.frames = new Distribution(); this.gpu = new Distribution();
         this.longTasks = new Distribution(); this.heartbeatGaps = new Distribution();
         if (!continuing) { this.previousFrame = 0; this.previousBeat = 0; }
+        this.modelFits = new Map();
         this.disjoint = 0; this.routeRows = new Map(); this.routeOverflow = 0;
         this.userTiming = userTiming; this.enabled = instrument; this.gpuEnabled = gpu; this.cameraPath = cameraPath;
         this.started = performance.now(); this.active = true;
@@ -210,7 +219,8 @@ export const audit = {
     stop() {
         this.active = false;
         const durationMs = performance.now() - this.started;
-        return { routeFailures: [...this.routeRows.values()], routeOverflow: this.routeOverflow,
+        return { modelFits: [...this.modelFits.values()].map(row => ({ id: row.id, stage: row.stage, cpu: row.cpu.read() })),
+            routeFailures: [...this.routeRows.values()], routeOverflow: this.routeOverflow,
             motion: this.references.motion.inspectMetrics(), actors: this.references.motion.inspect(),
             durationMs, fps: this.frames.count * 1000 / durationMs, frames: this.frames.read(),
             spans: Object.fromEntries(Object.entries(this.spans).map(([name, data]) => [name, data.read()])),
