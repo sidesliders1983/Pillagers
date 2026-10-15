@@ -211,16 +211,16 @@ try {
                 for (let window = 0; window < samples; window++) {
                     if (scenario.commands) {
                         // QA-only matched command schedule: no canonical ticks are skipped to claim a gain.
-                        await page.evaluate(async ({ scenario, window }) => {
+                        await page.evaluate(async ({ scenario, windowIndex }) => {
                             const audit = window.__fjordAudit;
                             for (let command = 1; command <= scenario.commands; command++) {
                                 const remaining = audit.started + command * 500 - performance.now();
                                 if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
                                 const pattern = scenario.tickPattern;
-                                const ticks = pattern ? pattern[(window * scenario.commands + command - 1) % pattern.length] : scenario.ticksPerCommand || 3;
+                                const ticks = pattern ? pattern[(windowIndex * scenario.commands + command - 1) % pattern.length] : scenario.ticksPerCommand || 3;
                                 await audit.references.advanceTicks(ticks);
                             }
-                        }, { scenario, window });
+                        }, { scenario, windowIndex: window });
                     } else await page.waitForTimeout(scenario.soak ? 30000 : sampleMs);
                     const sample = await page.evaluate(() => window.__fjordAudit.stop());
                     windows.push(sample);
