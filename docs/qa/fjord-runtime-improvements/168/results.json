@@ -3720,5 +3720,195 @@
       }
     }
   ],
-  "note": "CPU means are synchronous inclusive main-thread wall spans, not cycle counters. Native FPS/GC evidence and unchanged production controls are separate. GPU command query time is distinct from renderer JavaScript submission. Natural pacing has different achieved ticks; captureTicks excludes the separately recorded warmup ticks; scheduled cases compare exact identical commands/saves."
+  "note": "CPU means are synchronous inclusive main-thread wall spans, not cycle counters. Native FPS/GC evidence and unchanged production controls are separate. GPU command query time is distinct from renderer JavaScript submission. Natural pacing has different achieved ticks; captureTicks excludes the separately recorded warmup ticks; scheduled cases compare exact identical commands/saves.",
+  "finalConfirmation": {
+    "before": "46ee1b50630a978455b48731167507d33bff6b75",
+    "after": "9dbdb69a2fd1d7eb4241d46482e5440e0e360bef",
+    "trials": 6,
+    "pairs": [
+      {
+        "repeat": 1,
+        "cpuChangePercent": -65.62445159617711,
+        "beforeRefresh": {
+          "count": 40,
+          "total": 3419.000000074506,
+          "mean": 85.47500000186264,
+          "min": 78.70000000298023,
+          "max": 94.40000000596046,
+          "p50": 85.9,
+          "p95": 90.5,
+          "p99": 94.4,
+          "over33": 40,
+          "over50": 40
+        },
+        "afterRefresh": {
+          "count": 40,
+          "total": 1175.2999999523163,
+          "mean": 29.38249999880791,
+          "min": 24.30000001192093,
+          "max": 40.5,
+          "p50": 28.4,
+          "p95": 37.2,
+          "p99": 40.5,
+          "over33": 6,
+          "over50": 0
+        },
+        "beforeGpu": {
+          "count": 68,
+          "total": 4677.264480999999,
+          "mean": 68.78330119117646,
+          "min": 62.951164,
+          "max": 77.786355,
+          "p50": 66.3,
+          "p95": 76.7,
+          "p99": 77.8,
+          "over33": 68,
+          "over50": 68
+        },
+        "afterGpu": {
+          "count": 71,
+          "total": 4721.206145999998,
+          "mean": 66.49586121126757,
+          "min": 62.612666,
+          "max": 75.645363,
+          "p50": 65.2,
+          "p95": 73.8,
+          "p99": 75.6,
+          "over33": 71,
+          "over50": 71
+        },
+        "gpuChangePercent": -3.3255745803057346
+      },
+      {
+        "repeat": 2,
+        "cpuChangePercent": -69.28544813471986,
+        "beforeRefresh": {
+          "count": 40,
+          "total": 3488.900000035763,
+          "mean": 87.22250000089407,
+          "min": 78,
+          "max": 122.1000000089407,
+          "p50": 84.4,
+          "p95": 109.5,
+          "p99": 122.1,
+          "over33": 40,
+          "over50": 40
+        },
+        "afterRefresh": {
+          "count": 40,
+          "total": 1071.600000038743,
+          "mean": 26.790000000968575,
+          "min": 22.899999991059303,
+          "max": 37.20000000298023,
+          "p50": 26.5,
+          "p95": 30.6,
+          "p99": 37.2,
+          "over33": 1,
+          "over50": 0
+        },
+        "beforeGpu": {
+          "count": 72,
+          "total": 4711.108180000001,
+          "mean": 65.43205805555557,
+          "min": 62.406416,
+          "max": 75.468864,
+          "p50": 64.7,
+          "p95": 71.7,
+          "p99": 75.5,
+          "over33": 72,
+          "over50": 72
+        },
+        "afterGpu": {
+          "count": 73,
+          "total": 4783.368391999999,
+          "mean": 65.5255944109589,
+          "min": 63.239913,
+          "max": 74.521701,
+          "p50": 65.1,
+          "p95": 68.2,
+          "p99": 74.5,
+          "over33": 73,
+          "over50": 73
+        },
+        "gpuChangePercent": 0.14295187738693205
+      },
+      {
+        "repeat": 3,
+        "cpuChangePercent": -61.34398817029307,
+        "beforeRefresh": {
+          "count": 40,
+          "total": 3516.4000000059605,
+          "mean": 87.91000000014901,
+          "min": 78.09999999403954,
+          "max": 128.3999999910593,
+          "p50": 86,
+          "p95": 102.4,
+          "p99": 128.4,
+          "over33": 40,
+          "over50": 40
+        },
+        "afterRefresh": {
+          "count": 40,
+          "total": 1359.2999999821186,
+          "mean": 33.982499999552964,
+          "min": 25.400000005960464,
+          "max": 61.79999999701977,
+          "p50": 29.6,
+          "p95": 59.2,
+          "p99": 61.8,
+          "over33": 12,
+          "over50": 3
+        },
+        "beforeGpu": {
+          "count": 71,
+          "total": 4658.173307999999,
+          "mean": 65.60807476056337,
+          "min": 62.092,
+          "max": 77.428356,
+          "p50": 64.4,
+          "p95": 72,
+          "p99": 77.4,
+          "over33": 71,
+          "over50": 71
+        },
+        "afterGpu": {
+          "count": 70,
+          "total": 4751.745183,
+          "mean": 67.88207404285714,
+          "min": 60.256674,
+          "max": 83.872747,
+          "p50": 66.5,
+          "p95": 77.4,
+          "p99": 83.9,
+          "over33": 70,
+          "over50": 70
+        },
+        "gpuChangePercent": 3.466035683248947
+      }
+    ],
+    "medianCpuChangePercent": -65.62445159617711,
+    "medianGpuChangePercent": 0.14295187738693205,
+    "allRefreshP95Below50Ms": false,
+    "consistency": {
+      "sourceCommit": "9dbdb69a2fd1d7eb4241d46482e5440e0e360bef",
+      "expectedFireRevisions": [
+        true,
+        false
+      ],
+      "actualFireRevisions": [
+        true,
+        false
+      ],
+      "actualSelectionRevisions": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "placeholders": [],
+      "errors": [],
+      "canonicalReplayEqual": true,
+      "canonicalSha256": "f0a0f42e0cc21053aabe6a2e22ab639949a6b7b47145347f269d9a688396f49f"
+    }
+  }
 }
