@@ -1,0 +1,394 @@
+{
+  "captures": 24,
+  "variants": [
+    {
+      "label": "before",
+      "origin": "http://127.0.0.1:5196",
+      "sourceCommit": "06cd2f4718e0985cf267ca80edd30870331f93aa"
+    },
+    {
+      "label": "after",
+      "origin": "http://127.0.0.1:5190",
+      "sourceCommit": "44df1f9df402de3ea7225ef0883f1f76fb789db6"
+    }
+  ],
+  "rows": [
+    {
+      "running": false,
+      "pairs": [
+        {
+          "repeat": 1,
+          "tap": 1,
+          "beforeCpuMs": 160.5,
+          "afterCpuMs": 1.4000000059604645,
+          "cpuChangePercent": -99.12772585298414,
+          "beforeSubmissionMs": 193.19999998807907,
+          "afterSubmissionMs": 73.1000000089407
+        },
+        {
+          "repeat": 1,
+          "tap": 2,
+          "beforeCpuMs": 161.70000000298023,
+          "afterCpuMs": 1,
+          "cpuChangePercent": -99.38157081015365,
+          "beforeSubmissionMs": 183.70000000298023,
+          "afterSubmissionMs": 60.29999999701977
+        },
+        {
+          "repeat": 2,
+          "tap": 1,
+          "beforeCpuMs": 161.19999998807907,
+          "afterCpuMs": 1.6000000089406967,
+          "cpuChangePercent": -99.00744416311476,
+          "beforeSubmissionMs": 191.79999999701977,
+          "afterSubmissionMs": 70.40000000596046
+        },
+        {
+          "repeat": 2,
+          "tap": 2,
+          "beforeCpuMs": 153.79999999701977,
+          "afterCpuMs": 1.0999999940395355,
+          "cpuChangePercent": -99.2847854394923,
+          "beforeSubmissionMs": 174.59999999403954,
+          "afterSubmissionMs": 67.40000000596046
+        },
+        {
+          "repeat": 3,
+          "tap": 1,
+          "beforeCpuMs": 156.90000000596046,
+          "afterCpuMs": 1.5,
+          "cpuChangePercent": -99.04397705548564,
+          "beforeSubmissionMs": 186.80000001192093,
+          "afterSubmissionMs": 70.29999999701977
+        },
+        {
+          "repeat": 3,
+          "tap": 2,
+          "beforeCpuMs": 184.1000000089407,
+          "afterCpuMs": 2.6000000089406967,
+          "cpuChangePercent": -98.58772405822138,
+          "beforeSubmissionMs": 214.09999999403954,
+          "afterSubmissionMs": 63.20000000298023
+        }
+      ],
+      "cpuBefore": {
+        "count": 6,
+        "median": 160.84999999403954,
+        "min": 153.79999999701977,
+        "max": 184.1000000089407
+      },
+      "cpuAfter": {
+        "count": 6,
+        "median": 1.4500000029802322,
+        "min": 1,
+        "max": 2.6000000089406967
+      },
+      "pairedCpuChangePercent": {
+        "count": 6,
+        "median": -99.0858514542349,
+        "min": -99.38157081015365,
+        "max": -98.58772405822138
+      },
+      "firstCameraSubmissionBefore": {
+        "count": 6,
+        "median": 189.30000000447035,
+        "min": 174.59999999403954,
+        "max": 214.09999999403954
+      },
+      "firstCameraSubmissionAfter": {
+        "count": 6,
+        "median": 68.85000000149012,
+        "min": 60.29999999701977,
+        "max": 73.1000000089407
+      },
+      "cameraSolverMaxMs": 0.4000000059604645,
+      "resources": [
+        {
+          "variant": "before",
+          "repeat": 1,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 3,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 3,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 3,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 3,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        }
+      ]
+    },
+    {
+      "running": true,
+      "pairs": [
+        {
+          "repeat": 1,
+          "tap": 1,
+          "beforeCpuMs": 157.29999999701977,
+          "afterCpuMs": 0.7999999970197678,
+          "cpuChangePercent": -99.49141767512084,
+          "beforeSubmissionMs": 183.30000001192093,
+          "afterSubmissionMs": 68.80000001192093
+        },
+        {
+          "repeat": 1,
+          "tap": 2,
+          "beforeCpuMs": 161.59999999403954,
+          "afterCpuMs": 0.7999999970197678,
+          "cpuChangePercent": -99.50495049687544,
+          "beforeSubmissionMs": 185.20000000298023,
+          "afterSubmissionMs": 59.79999999701977
+        },
+        {
+          "repeat": 2,
+          "tap": 1,
+          "beforeCpuMs": 174.29999999701977,
+          "afterCpuMs": 1.1000000089406967,
+          "cpuChangePercent": -99.36890418304102,
+          "beforeSubmissionMs": 204.19999998807907,
+          "afterSubmissionMs": 66.5
+        },
+        {
+          "repeat": 2,
+          "tap": 2,
+          "beforeCpuMs": 155,
+          "afterCpuMs": 0.8999999910593033,
+          "cpuChangePercent": -99.41935484447787,
+          "beforeSubmissionMs": 176.3999999910593,
+          "afterSubmissionMs": 67.59999999403954
+        },
+        {
+          "repeat": 3,
+          "tap": 1,
+          "beforeCpuMs": 148.1000000089407,
+          "afterCpuMs": 0.9000000059604645,
+          "cpuChangePercent": -99.39230249432401,
+          "beforeSubmissionMs": 178.20000000298023,
+          "afterSubmissionMs": 57.80000001192093
+        },
+        {
+          "repeat": 3,
+          "tap": 2,
+          "beforeCpuMs": 151.70000000298023,
+          "afterCpuMs": 1,
+          "cpuChangePercent": -99.34080421886596,
+          "beforeSubmissionMs": 172.3999999910593,
+          "afterSubmissionMs": 64.5
+        }
+      ],
+      "cpuBefore": {
+        "count": 6,
+        "median": 156.14999999850988,
+        "min": 148.1000000089407,
+        "max": 174.29999999701977
+      },
+      "cpuAfter": {
+        "count": 6,
+        "median": 0.8999999985098839,
+        "min": 0.7999999970197678,
+        "max": 1.1000000089406967
+      },
+      "pairedCpuChangePercent": {
+        "count": 6,
+        "median": -99.40582866940093,
+        "min": -99.50495049687544,
+        "max": -99.34080421886596
+      },
+      "firstCameraSubmissionBefore": {
+        "count": 6,
+        "median": 180.75000000745058,
+        "min": 172.3999999910593,
+        "max": 204.19999998807907
+      },
+      "firstCameraSubmissionAfter": {
+        "count": 6,
+        "median": 65.5,
+        "min": 57.80000001192093,
+        "max": 68.80000001192093
+      },
+      "cameraSolverMaxMs": 0.4000000059604645,
+      "resources": [
+        {
+          "variant": "before",
+          "repeat": 1,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 68
+        },
+        {
+          "variant": "before",
+          "repeat": 1,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 68
+        },
+        {
+          "variant": "after",
+          "repeat": 1,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 68
+        },
+        {
+          "variant": "after",
+          "repeat": 2,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 68
+        },
+        {
+          "variant": "before",
+          "repeat": 2,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "before",
+          "repeat": 3,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 68
+        },
+        {
+          "variant": "before",
+          "repeat": 3,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        },
+        {
+          "variant": "after",
+          "repeat": 3,
+          "tap": 1,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 68
+        },
+        {
+          "variant": "after",
+          "repeat": 3,
+          "tap": 2,
+          "geometries": 62,
+          "textures": 69,
+          "drawCalls": 67
+        }
+      ]
+    }
+  ],
+  "note": "CPU handler duration and main-thread camera render submission, not physical display latency or GPU command time. Matched native points are equivalent within 1e-8m. Paused canonical bytes match; Running actual tick counts are separately replayed. Physical iOS is untested."
+}

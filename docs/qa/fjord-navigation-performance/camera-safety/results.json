@@ -1,0 +1,231 @@
+{
+  "browser": "Edge Chromium",
+  "physicalDevice": false,
+  "poses": [
+    {
+      "id": "ridge",
+      "eyeY": 97.98074648597023,
+      "lift": 84.10749981620094,
+      "requiredLift": 84.10749981620094,
+      "samples": 44,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 87.99028948477354,
+      "minimumBoomClearance": 0.3499999999999943,
+      "nearTargetDistance": 3,
+      "milliseconds": 0.09999999403953552,
+      "maximumMs": 0.7000000029802322,
+      "focus": [
+        -48,
+        3.5752553939819336,
+        96
+      ],
+      "requestedEye": [
+        17,
+        13.873246669769285,
+        96
+      ],
+      "requestedZoom": 61.909501639087445,
+      "requestedYaw": 1.5707963267948966,
+      "eye": [
+        17,
+        97.98074648597023,
+        96
+      ],
+      "independentlySampledBoom": 0.3523634460622205,
+      "endpointClearance": 88.10749981620094,
+      "seed": 18,
+      "reference": false
+    },
+    {
+      "id": "cliff",
+      "eyeY": 65.04568290710452,
+      "lift": 23.089994430542014,
+      "requiredLift": 23.089994430542014,
+      "samples": 29,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 19.08999443054202,
+      "minimumBoomClearance": 0.3500000000000014,
+      "nearTargetDistance": 3,
+      "milliseconds": 0.09999999403953552,
+      "maximumMs": 0.7000000029802322,
+      "focus": [
+        -46,
+        33.61249923706055,
+        -76
+      ],
+      "requestedEye": [
+        -76,
+        41.9556884765625,
+        -76
+      ],
+      "requestedZoom": 29.292676403372422,
+      "requestedYaw": -1.5707963267948966,
+      "eye": [
+        -76,
+        65.04568290710452,
+        -76
+      ],
+      "independentlySampledBoom": 0.350381704330438,
+      "endpointClearance": 19.08999443054202,
+      "seed": 18,
+      "reference": false
+    },
+    {
+      "id": "coast",
+      "eyeY": 17.880000000000003,
+      "lift": 0,
+      "requiredLift": 0,
+      "samples": 49,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 13.146001809459442,
+      "minimumBoomClearance": 1.7687045761596525,
+      "nearTargetDistance": 3,
+      "milliseconds": 0.10000000894069672,
+      "maximumMs": 0.7000000029802322,
+      "focus": [
+        105,
+        0.88,
+        189
+      ],
+      "requestedEye": [
+        130,
+        17.880000000000003,
+        161
+      ],
+      "requestedZoom": 38.764092498814385,
+      "requestedYaw": 2.4127379271371625,
+      "eye": [
+        130,
+        17.880000000000003,
+        161
+      ],
+      "independentlySampledBoom": 1.7696307435631742,
+      "endpointClearance": 13.16928327560425,
+      "seed": 18,
+      "reference": false
+    },
+    {
+      "id": "touch-home-1024",
+      "eyeY": 54.663731164041145,
+      "lift": 1.5997159420817453,
+      "requiredLift": 0,
+      "samples": 58,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 54.26394865722884,
+      "minimumBoomClearance": 3.5529750925926784,
+      "nearTargetDistance": 3,
+      "milliseconds": 0,
+      "maximumMs": 0.7000000029802322,
+      "focus": [
+        69.9653935561393,
+        3.4764279340235027,
+        145.9853362526014
+      ],
+      "requestedEye": [
+        88.84863204184659,
+        53.0640152219594,
+        185.06137172751596
+      ],
+      "requestedZoom": 62,
+      "requestedYaw": 0.45,
+      "eye": [
+        88.84863204184659,
+        54.663731164041145,
+        185.06137172751596
+      ],
+      "independentlySampledBoom": 3.5977495521230285,
+      "endpointClearance": 54.27633961667568,
+      "seed": 18,
+      "reference": false
+    },
+    {
+      "id": "touch-home-390",
+      "eyeY": 54.653927135904745,
+      "lift": 1.589906360957677,
+      "requiredLift": 0,
+      "samples": 58,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 54.256205555501865,
+      "minimumBoomClearance": 3.5523215437002094,
+      "nearTargetDistance": 3,
+      "milliseconds": 0,
+      "maximumMs": 0.7000000029802322,
+      "focus": [
+        69.96533814151256,
+        3.4764537777113564,
+        145.98531277182735
+      ],
+      "requestedEye": [
+        88.84858565003147,
+        53.06402077494707,
+        185.0613425229066
+      ],
+      "requestedZoom": 62,
+      "requestedYaw": 0.45,
+      "eye": [
+        88.84858565003147,
+        54.653927135904745,
+        185.0613425229066
+      ],
+      "independentlySampledBoom": 3.5970873047831855,
+      "endpointClearance": 54.26653323503176,
+      "seed": 18,
+      "reference": false
+    },
+    {
+      "id": "replacement-island",
+      "eyeY": 88.35767351878538,
+      "lift": 76.39833986056699,
+      "requiredLift": 76.39833986056699,
+      "samples": 59,
+      "conservative": false,
+      "invalidSamples": 0,
+      "groundClearance": 83.0498321310987,
+      "minimumBoomClearance": 0.3500000000000014,
+      "nearTargetDistance": 3,
+      "milliseconds": 0,
+      "maximumMs": 0.20000000298023224,
+      "focus": [
+        -144,
+        4.959333658218384,
+        24
+      ],
+      "requestedEye": [
+        -189.96194077712562,
+        11.959333658218386,
+        -21.961940777125598
+      ],
+      "requestedZoom": 61.500413697435846,
+      "requestedYaw": -2.356194490192345,
+      "eye": [
+        -189.96194077712562,
+        88.35767351878538,
+        -21.961940777125598
+      ],
+      "independentlySampledBoom": 0.3538400184378112,
+      "endpointClearance": 83.07055019633623,
+      "seed": 7,
+      "reference": false
+    }
+  ],
+  "checks": [
+    "Real desktop right-drag orbit, left-drag pan, wheel zoom and WASD/Q stay terrain-clear.",
+    "1024px tablet and 390px phone touch orbit, repeated pinch/spread reversals and Home are safe.",
+    "Changing from island 18 to island 7 rebinds the canonical terrain and clears old correction state."
+  ],
+  "errors": [],
+  "performance": {
+    "updates": 130,
+    "medianMs": 0,
+    "p95Ms": 0.10000000894069672,
+    "maxMs": 0.20000000298023224,
+    "maximumQueries": 59,
+    "conservativeUpdates": 0
+  },
+  "passed": true
+}

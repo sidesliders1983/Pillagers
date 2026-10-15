@@ -1,0 +1,16 @@
+✔ zoned ground blends the canonical continuous influences without changing saved terrain (576.5855ms)
+✔ steep rock uses height-aware native UVs while preserving canonical triangles and wear (480.8295ms)
+✔ existing clearing and path wear updates the blend without adding saved fields (420.1946ms)
+✔ empty blend layers do not redraw terrain, including after path wear changes (368.9642ms)
+✔ optional snow uses saved climate potential and leaves the normal-climate substrate untouched (616.0163ms)
+✔ material masks reproduce through save/load and legacy worlds retain their original renderer (1289.4617ms)
+✔ regional ground retains every canonical triangle and raycast height with continuous padded UVs (401.9619ms)
+✔ Low ground retains sourced colour and roughness while omitting the per-pixel normal layer (159.9929ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5119.8975
