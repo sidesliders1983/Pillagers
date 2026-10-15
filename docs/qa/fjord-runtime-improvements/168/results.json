@@ -1,0 +1,3724 @@
+{
+  "issue": 168,
+  "before": "46ee1b50630a978455b48731167507d33bff6b75",
+  "after": "156651a0d44b3a0c61581c1a1e25ac33e8839e55",
+  "trials": 54,
+  "exactCoreAndCheckpointPairs": 24,
+  "allCanonicalReplaysPass": true,
+  "gates": {
+    "refreshMeanReductionAtLeast40Percent": true,
+    "allDevelopedRefreshP95Below50Ms": true
+  },
+  "rows": [
+    {
+      "scenario": {
+        "fixture": "summer-32",
+        "running": true,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 14.23749999962747,
+          "min": 14.014999998733401,
+          "max": 14.584999999403953
+        },
+        "refreshP95": {
+          "median": 17.5,
+          "min": 16.9,
+          "max": 17.6
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 100.41049091304346,
+          "min": 98.5472380851064,
+          "max": 101.37107208695654
+        },
+        "frameP50": {
+          "median": 100.1,
+          "min": 100.1,
+          "max": 100.2
+        },
+        "frameP95": {
+          "median": 116.9,
+          "min": 116.9,
+          "max": 116.9
+        },
+        "frameP99": {
+          "median": 133.4,
+          "min": 116.9,
+          "max": 200.2
+        },
+        "frameMax": {
+          "median": 216.6999999999971,
+          "min": 200.10000000000582,
+          "max": 217
+        },
+        "longTasks": {
+          "median": 0,
+          "min": 0,
+          "max": 1
+        },
+        "longTaskTotal": {
+          "median": 0,
+          "min": 0,
+          "max": 50
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20036.70000000298,
+          "min": 20032.5,
+          "max": 20040.60000000894
+        },
+        "coreBytes": {
+          "median": 57643,
+          "min": 57643,
+          "max": 57643
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 250,
+              "calls": 84,
+              "triangles": 4403461,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 250,
+              "calls": 84,
+              "triangles": 4403459,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 248,
+              "calls": 84,
+              "triangles": 4403463,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 86,
+            "visibleMeshes": 85,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 75,
+            "bones": 2329
+          },
+          {
+            "meshes": 86,
+            "visibleMeshes": 85,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 75,
+            "bones": 2329
+          },
+          {
+            "meshes": 86,
+            "visibleMeshes": 85,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 75,
+            "bones": 2329
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 5.567500000447035,
+          "min": 5.3374999988824126,
+          "max": 5.615000000968576
+        },
+        "refreshP95": {
+          "median": 8,
+          "min": 7.8,
+          "max": 8.9
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 100.32826482978724,
+          "min": 99.6213933404255,
+          "max": 101.22160349999999
+        },
+        "frameP50": {
+          "median": 100.1,
+          "min": 100.1,
+          "max": 100.1
+        },
+        "frameP95": {
+          "median": 116.9,
+          "min": 116.8,
+          "max": 116.9
+        },
+        "frameP99": {
+          "median": 166.9,
+          "min": 117,
+          "max": 183.6
+        },
+        "frameMax": {
+          "median": 200.3000000000029,
+          "min": 200.3000000000029,
+          "max": 200.3000000000029
+        },
+        "longTasks": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "longTaskTotal": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20026.79999999702,
+          "min": 20021.10000000894,
+          "max": 20027.90000000596
+        },
+        "coreBytes": {
+          "median": 57643,
+          "min": 57643,
+          "max": 57643
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 249,
+              "calls": 84,
+              "triangles": 4403465,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 250,
+              "calls": 84,
+              "triangles": 4403463,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 251,
+              "calls": 84,
+              "triangles": 4403465,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 86,
+            "visibleMeshes": 85,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 75,
+            "bones": 2329
+          },
+          {
+            "meshes": 86,
+            "visibleMeshes": 85,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 75,
+            "bones": 2329
+          },
+          {
+            "meshes": 86,
+            "visibleMeshes": 85,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 75,
+            "bones": 2329
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -61.82721974168965,
+          "min": -62.51097454593805,
+          "max": -59.93578307901514
+        },
+        "gpuMean": {
+          "median": -0.08188993252450372,
+          "min": -1.7260138523840007,
+          "max": 2.713790327217458
+        },
+        "frameP95": {
+          "median": 0,
+          "min": -0.08554319931566301,
+          "max": 0
+        },
+        "longTaskTotal": {
+          "median": -100,
+          "min": -100,
+          "max": -100
+        }
+      },
+      "changePercent": {
+        "refreshMean": -61.82721974168965,
+        "gpuMean": -0.08188993252450372,
+        "frameP95": 0,
+        "longTaskTotal": -100
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "summer-17",
+        "running": true,
+        "cameraPath": true,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 19.770000000298023,
+          "min": 19.56000000014901,
+          "max": 20.072500001639128
+        },
+        "refreshP95": {
+          "median": 23.4,
+          "min": 22.6,
+          "max": 24.7
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 98.32759560416667,
+          "min": 98.2879568125,
+          "max": 98.72111327659573
+        },
+        "frameP50": {
+          "median": 100.1,
+          "min": 100.1,
+          "max": 100.1
+        },
+        "frameP95": {
+          "median": 116.9,
+          "min": 116.8,
+          "max": 116.9
+        },
+        "frameP99": {
+          "median": 200.2,
+          "min": 183.5,
+          "max": 200.2
+        },
+        "frameMax": {
+          "median": 200.3000000000029,
+          "min": 200.29999999999927,
+          "max": 200.3000000000029
+        },
+        "longTasks": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "longTaskTotal": {
+          "median": 199,
+          "min": 197,
+          "max": 208
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20044.29999999702,
+          "min": 20040.79999999702,
+          "max": 20044.70000000298
+        },
+        "coreBytes": {
+          "median": 92629,
+          "min": 92629,
+          "max": 92629
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 255,
+              "calls": 79,
+              "triangles": 4309793,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 255,
+              "calls": 79,
+              "triangles": 4309793,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 255,
+              "calls": 79,
+              "triangles": 4309791,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 87,
+            "visibleMeshes": 86,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 76,
+            "bones": 2329
+          },
+          {
+            "meshes": 87,
+            "visibleMeshes": 86,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 76,
+            "bones": 2329
+          },
+          {
+            "meshes": 87,
+            "visibleMeshes": 86,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 76,
+            "bones": 2329
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 7.4199999995529655,
+          "min": 7.305000000447035,
+          "max": 7.519999999552965
+        },
+        "refreshP95": {
+          "median": 11.4,
+          "min": 10,
+          "max": 11.4
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 97.49223445833333,
+          "min": 97.45112693750002,
+          "max": 101.79716253333333
+        },
+        "frameP50": {
+          "median": 100.1,
+          "min": 100.1,
+          "max": 100.2
+        },
+        "frameP95": {
+          "median": 116.9,
+          "min": 116.8,
+          "max": 133.4
+        },
+        "frameP99": {
+          "median": 200.2,
+          "min": 183.5,
+          "max": 216.7
+        },
+        "frameMax": {
+          "median": 200.20000000000437,
+          "min": 200.1999999999971,
+          "max": 217
+        },
+        "longTasks": {
+          "median": 1,
+          "min": 1,
+          "max": 1
+        },
+        "longTaskTotal": {
+          "median": 201,
+          "min": 198,
+          "max": 222
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20024.40000000596,
+          "min": 20018.20000000298,
+          "max": 20038.79999999702
+        },
+        "coreBytes": {
+          "median": 92629,
+          "min": 92629,
+          "max": 92629
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 244,
+              "calls": 79,
+              "triangles": 4309785,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 257,
+              "calls": 79,
+              "triangles": 4309793,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 256,
+              "calls": 79,
+              "triangles": 4309795,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 74,
+              "textures": 54
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 87,
+            "visibleMeshes": 86,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 76,
+            "bones": 2329
+          },
+          {
+            "meshes": 87,
+            "visibleMeshes": 86,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 76,
+            "bones": 2329
+          },
+          {
+            "meshes": 87,
+            "visibleMeshes": 86,
+            "skinnedMeshes": 52,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 76,
+            "bones": 2329
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -63.034001748924915,
+          "min": -63.05007587082996,
+          "max": -61.5541922316172
+        },
+        "gpuMean": {
+          "median": -0.8095827606678596,
+          "min": -0.8913760794019843,
+          "max": 3.1158980633850364
+        },
+        "frameP95": {
+          "median": 0,
+          "min": -0.08554319931566301,
+          "max": 14.212328767123307
+        },
+        "longTaskTotal": {
+          "median": 2.0304568527918843,
+          "min": -4.807692307692313,
+          "max": 11.557788944723612
+        }
+      },
+      "changePercent": {
+        "refreshMean": -63.034001748924915,
+        "gpuMean": -0.8095827606678596,
+        "frameP95": 0,
+        "longTaskTotal": 2.0304568527918843
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "developed-810",
+        "running": true,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 96.89750000014901,
+          "min": 96.06749999970198,
+          "max": 97.03500000014901
+        },
+        "refreshP95": {
+          "median": 104.2,
+          "min": 101.9,
+          "max": 106.3
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.44725144444445,
+          "min": 85.04143835185185,
+          "max": 85.57902498181816
+        },
+        "frameP50": {
+          "median": 83.4,
+          "min": 83.4,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 183.6,
+          "min": 183.6,
+          "max": 183.6
+        },
+        "frameP99": {
+          "median": 216.7,
+          "min": 200.3,
+          "max": 233.6
+        },
+        "frameMax": {
+          "median": 433.6999999999971,
+          "min": 383.70000000000437,
+          "max": 433.70000000000437
+        },
+        "longTasks": {
+          "median": 44,
+          "min": 44,
+          "max": 44
+        },
+        "longTaskTotal": {
+          "median": 7110,
+          "min": 7109,
+          "max": 7210
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20174.40000000596,
+          "min": 20170.40000000596,
+          "max": 20179.70000000298
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 289,
+              "calls": 77,
+              "triangles": 3730408,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 291,
+              "calls": 77,
+              "triangles": 3730396,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 289,
+              "calls": 77,
+              "triangles": 3730392,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 30.967500000074505,
+          "min": 30.799999998882413,
+          "max": 32.76250000111759
+        },
+        "refreshP95": {
+          "median": 36.6,
+          "min": 35.1,
+          "max": 39
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.10012098181816,
+          "min": 85.05728927272726,
+          "max": 86.33598105555558
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 83.5,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.2,
+          "min": 100.2,
+          "max": 100.3
+        },
+        "frameP99": {
+          "median": 233.6,
+          "min": 216.8,
+          "max": 233.6
+        },
+        "frameMax": {
+          "median": 350.40000000000146,
+          "min": 350.29999999999563,
+          "max": 367
+        },
+        "longTasks": {
+          "median": 44,
+          "min": 44,
+          "max": 44
+        },
+        "longTaskTotal": {
+          "median": 3459,
+          "min": 3375,
+          "max": 3566
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20065,
+          "min": 20063,
+          "max": 20078.40000000596
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 291,
+              "calls": 77,
+              "triangles": 3730398,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 289,
+              "calls": 77,
+              "triangles": 3730400,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 291,
+              "calls": 77,
+              "triangles": 3730398,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -67.76485283767083,
+          "min": -68.2588756646209,
+          "max": -66.18849815416579
+        },
+        "gpuMean": {
+          "median": 0.018639055480029754,
+          "min": -0.40625117456466464,
+          "max": 0.8845112151000034
+        },
+        "frameP95": {
+          "median": -45.424836601307184,
+          "min": -45.424836601307184,
+          "max": -45.370370370370374
+        },
+        "longTaskTotal": {
+          "median": -51.34336756224505,
+          "min": -53.19001386962552,
+          "max": -49.84528832630099
+        }
+      },
+      "changePercent": {
+        "refreshMean": -67.76485283767083,
+        "gpuMean": 0.018639055480029754,
+        "frameP95": -45.424836601307184,
+        "longTaskTotal": -51.34336756224505
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "developed-810",
+        "running": true,
+        "selected": true,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 160.44999999925494,
+          "min": 156.77499999962748,
+          "max": 165.27750000208616
+        },
+        "refreshP95": {
+          "median": 172.5,
+          "min": 167.4,
+          "max": 193.7
+        },
+        "snapshotCalls": {
+          "median": 520,
+          "min": 520,
+          "max": 520
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.39208688461538,
+          "min": 85.37514964150942,
+          "max": 85.77167792452828
+        },
+        "frameP50": {
+          "median": 83.4,
+          "min": 83.4,
+          "max": 83.4
+        },
+        "frameP95": {
+          "median": 217,
+          "min": 216.8,
+          "max": 217
+        },
+        "frameP99": {
+          "median": 300.3,
+          "min": 283.7,
+          "max": 350.4
+        },
+        "frameMax": {
+          "median": 550.5,
+          "min": 517.1999999999971,
+          "max": 583.9000000000015
+        },
+        "longTasks": {
+          "median": 44,
+          "min": 44,
+          "max": 44
+        },
+        "longTaskTotal": {
+          "median": 9864,
+          "min": 9566,
+          "max": 10035
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20232.29999999702,
+          "min": 20228.29999999702,
+          "max": 20244.90000000596
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 282,
+              "calls": 81,
+              "triangles": 3731192,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 64,
+              "textures": 69
+            },
+            "programs": 27,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 282,
+              "calls": 81,
+              "triangles": 3731188,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 64,
+              "textures": 69
+            },
+            "programs": 27,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 282,
+              "calls": 81,
+              "triangles": 3731194,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 64,
+              "textures": 69
+            },
+            "programs": 27,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 81,
+            "visibleMeshes": 80,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 12,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 81,
+            "visibleMeshes": 80,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 12,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 81,
+            "visibleMeshes": 80,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 12,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 76.59750000052153,
+          "min": 74.02999999895692,
+          "max": 78.3050000026822
+        },
+        "refreshP95": {
+          "median": 83.1,
+          "min": 80.7,
+          "max": 87.8
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.71323329629628,
+          "min": 85.58144147272728,
+          "max": 88.70946044444443
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 83.5,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.3,
+          "min": 100.3,
+          "max": 116.9
+        },
+        "frameP99": {
+          "median": 200.2,
+          "min": 183.7,
+          "max": 249.2
+        },
+        "frameMax": {
+          "median": 400.40000000000146,
+          "min": 367,
+          "max": 400.40000000000146
+        },
+        "longTasks": {
+          "median": 44,
+          "min": 44,
+          "max": 46
+        },
+        "longTaskTotal": {
+          "median": 5249,
+          "min": 5202,
+          "max": 5645
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20116.89999999106,
+          "min": 20116.70000000298,
+          "max": 20131
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 287,
+              "calls": 81,
+              "triangles": 3731168,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 64,
+              "textures": 69
+            },
+            "programs": 27,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 291,
+              "calls": 81,
+              "triangles": 3731168,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 64,
+              "textures": 69
+            },
+            "programs": 27,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 283,
+              "calls": 81,
+              "triangles": 3731170,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 64,
+              "textures": 69
+            },
+            "programs": 27,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 81,
+            "visibleMeshes": 80,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 12,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 81,
+            "visibleMeshes": 80,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 12,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 81,
+            "visibleMeshes": 80,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 12,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -52.77946101155616,
+          "min": -53.65521622752358,
+          "max": -51.1966344636673
+        },
+        "gpuMean": {
+          "median": 0.3959977302604667,
+          "min": -0.2217940191963974,
+          "max": 3.8848723351984527
+        },
+        "frameP95": {
+          "median": -53.73616236162362,
+          "min": -53.77880184331798,
+          "max": -46.12903225806452
+        },
+        "longTaskTotal": {
+          "median": -45.6199038260506,
+          "min": -47.69307424015944,
+          "max": -42.77169505271695
+        }
+      },
+      "changePercent": {
+        "refreshMean": -52.77946101155616,
+        "gpuMean": 0.3959977302604667,
+        "frameP95": -53.73616236162362,
+        "longTaskTotal": -45.6199038260506
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "developed-810",
+        "running": true,
+        "cameraPath": true,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 99.3349999975413,
+          "min": 97.82749999947846,
+          "max": 106.70999999903142
+        },
+        "refreshP95": {
+          "median": 109.9,
+          "min": 105.1,
+          "max": 134.5
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.71834118181816,
+          "min": 84.07641130909089,
+          "max": 89.06804351923077
+        },
+        "frameP50": {
+          "median": 83.4,
+          "min": 83.4,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 183.6,
+          "min": 183.6,
+          "max": 200.3
+        },
+        "frameP99": {
+          "median": 217,
+          "min": 183.7,
+          "max": 267
+        },
+        "frameMax": {
+          "median": 383.6999999999971,
+          "min": 367,
+          "max": 500.5
+        },
+        "longTasks": {
+          "median": 44,
+          "min": 44,
+          "max": 45
+        },
+        "longTaskTotal": {
+          "median": 7178,
+          "min": 7117,
+          "max": 7850
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20174.39999999106,
+          "min": 20168.59999999404,
+          "max": 20192.29999999702
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 292,
+              "calls": 78,
+              "triangles": 3735513,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 274,
+              "calls": 78,
+              "triangles": 3735501,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 293,
+              "calls": 78,
+              "triangles": 3735521,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 32.38999999947846,
+          "min": 30.662499998882414,
+          "max": 37.73750000074506
+        },
+        "refreshP95": {
+          "median": 38.6,
+          "min": 34.2,
+          "max": 57.7
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.09029810909091,
+          "min": 71.91305772307693,
+          "max": 86.61565734545457
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 66.8,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.2,
+          "min": 100.1,
+          "max": 100.3
+        },
+        "frameP99": {
+          "median": 250.2,
+          "min": 216.9,
+          "max": 250.3
+        },
+        "frameMax": {
+          "median": 367.3000000000029,
+          "min": 367.09999999999854,
+          "max": 500.5
+        },
+        "longTasks": {
+          "median": 45,
+          "min": 44,
+          "max": 45
+        },
+        "longTaskTotal": {
+          "median": 3575,
+          "min": 3462,
+          "max": 4583
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20079.89999999106,
+          "min": 20072.79999999702,
+          "max": 20090.29999999702
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 290,
+              "calls": 78,
+              "triangles": 3735505,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 290,
+              "calls": 78,
+              "triangles": 3735501,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 348,
+              "calls": 78,
+              "triangles": 3735513,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -69.13222932537238,
+          "min": -69.64670602589031,
+          "max": -61.42444609036698
+        },
+        "gpuMean": {
+          "median": -4.465962485502473,
+          "min": -16.105402027622862,
+          "max": 3.020164629801614
+        },
+        "frameP95": {
+          "median": -45.47930283224401,
+          "min": -49.92511233150275,
+          "max": -45.424836601307184
+        },
+        "longTaskTotal": {
+          "median": -51.76929506826414,
+          "min": -54.45859872611465,
+          "max": -35.60488970071659
+        }
+      },
+      "changePercent": {
+        "refreshMean": -69.13222932537238,
+        "gpuMean": -4.465962485502473,
+        "frameP95": -45.47930283224401,
+        "longTaskTotal": -51.76929506826414
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "developed-810",
+        "running": false,
+        "cameraPath": true
+      },
+      "before": {
+        "refreshMean": null,
+        "refreshP95": null,
+        "snapshotCalls": null,
+        "projectCalls": null,
+        "persistCalls": null,
+        "gpuMean": {
+          "median": 83.76826289090906,
+          "min": 65.53314371232877,
+          "max": 84.61225939999999
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 66.7,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.2,
+          "min": 83.4,
+          "max": 100.2
+        },
+        "frameP99": {
+          "median": 100.2,
+          "min": 83.6,
+          "max": 100.2
+        },
+        "frameMax": {
+          "median": 166.8000000000029,
+          "min": 83.60000000000582,
+          "max": 183.59999999999854
+        },
+        "longTasks": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "longTaskTotal": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "captureTicks": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "durationMs": {
+          "median": 20010.70000000298,
+          "min": 20008.30000001192,
+          "max": 20013.70000000298
+        },
+        "coreBytes": {
+          "median": 469629,
+          "min": 469629,
+          "max": 469629
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 295,
+              "calls": 81,
+              "triangles": 3743429,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 290,
+              "calls": 81,
+              "triangles": 3743429,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 381,
+              "calls": 81,
+              "triangles": 3743429,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": null,
+        "refreshP95": null,
+        "snapshotCalls": null,
+        "projectCalls": null,
+        "persistCalls": null,
+        "gpuMean": {
+          "median": 84.01476801818183,
+          "min": 64.25104093243243,
+          "max": 84.95549896363636
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 66.7,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.2,
+          "min": 66.9,
+          "max": 100.2
+        },
+        "frameP99": {
+          "median": 100.3,
+          "min": 83.4,
+          "max": 100.3
+        },
+        "frameMax": {
+          "median": 133.5,
+          "min": 100.30000000000291,
+          "max": 166.8000000000029
+        },
+        "longTasks": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "longTaskTotal": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "captureTicks": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        },
+        "durationMs": {
+          "median": 20005.29999999702,
+          "min": 20002.20000000298,
+          "max": 20007.20000000298
+        },
+        "coreBytes": {
+          "median": 469629,
+          "min": 469629,
+          "max": 469629
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 291,
+              "calls": 81,
+              "triangles": 3743429,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 292,
+              "calls": 81,
+              "triangles": 3743429,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 383,
+              "calls": 81,
+              "triangles": 3743429,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": null,
+        "gpuMean": {
+          "median": 0.29427031045610175,
+          "min": -1.9564188550520112,
+          "max": 0.405661739883012
+        },
+        "frameP95": {
+          "median": 0,
+          "min": -19.784172661870503,
+          "max": 0
+        },
+        "longTaskTotal": null
+      },
+      "changePercent": {
+        "refreshMean": null,
+        "gpuMean": 0.29427031045610175,
+        "frameP95": 0,
+        "longTaskTotal": null
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "boundary-810",
+        "running": true,
+        "minutes": 3,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 104.88999999985099,
+          "min": 90.50249999947846,
+          "max": 105.04749999940395
+        },
+        "refreshP95": {
+          "median": 112.8,
+          "min": 98.3,
+          "max": 117.7
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 87.52549272916666,
+          "min": 65.66644924615385,
+          "max": 88.35442516666667
+        },
+        "frameP50": {
+          "median": 83.4,
+          "min": 66.7,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 183.6,
+          "min": 150,
+          "max": 183.7
+        },
+        "frameP99": {
+          "median": 1351.4,
+          "min": 233.5,
+          "max": 1401.7
+        },
+        "frameMax": {
+          "median": 1902.0999999999985,
+          "min": 1735.0999999999985,
+          "max": 1952.0999999999985
+        },
+        "longTasks": {
+          "median": 40,
+          "min": 40,
+          "max": 41
+        },
+        "longTaskTotal": {
+          "median": 9269,
+          "min": 8096,
+          "max": 9339
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20250.09999999404,
+          "min": 20156.90000000596,
+          "max": 20259.70000000298
+        },
+        "coreBytes": {
+          "median": 499897,
+          "min": 499897,
+          "max": 499897
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 262,
+              "calls": 78,
+              "triangles": 3739846,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 63,
+              "textures": 73
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 264,
+              "calls": 78,
+              "triangles": 3739842,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 63,
+              "textures": 73
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 352,
+              "calls": 78,
+              "triangles": 3739832,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 63,
+              "textures": 73
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 80,
+            "visibleMeshes": 79,
+            "skinnedMeshes": 45,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 69,
+            "bones": 2030
+          },
+          {
+            "meshes": 80,
+            "visibleMeshes": 79,
+            "skinnedMeshes": 45,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 69,
+            "bones": 2030
+          },
+          {
+            "meshes": 80,
+            "visibleMeshes": 79,
+            "skinnedMeshes": 45,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 69,
+            "bones": 2030
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 35.36750000119209,
+          "min": 31.042499997839332,
+          "max": 35.889999999850986
+        },
+        "refreshP95": {
+          "median": 41,
+          "min": 34.3,
+          "max": 41.8
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 83.67740788235297,
+          "min": 65.5119135735294,
+          "max": 87.39978122000001
+        },
+        "frameP50": {
+          "median": 83.4,
+          "min": 66.7,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.3,
+          "min": 83.4,
+          "max": 100.3
+        },
+        "frameP99": {
+          "median": 250.3,
+          "min": 233.6,
+          "max": 267
+        },
+        "frameMax": {
+          "median": 1935.4000000000015,
+          "min": 1551.800000000003,
+          "max": 1952.2000000000044
+        },
+        "longTasks": {
+          "median": 41,
+          "min": 41,
+          "max": 42
+        },
+        "longTaskTotal": {
+          "median": 5549,
+          "min": 4647,
+          "max": 5574
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20088.59999999404,
+          "min": 20085.80000001192,
+          "max": 20114.09999999404
+        },
+        "coreBytes": {
+          "median": 499897,
+          "min": 499897,
+          "max": 499897
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 279,
+              "calls": 78,
+              "triangles": 3739856,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 63,
+              "textures": 73
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 272,
+              "calls": 78,
+              "triangles": 3739856,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 63,
+              "textures": 73
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 362,
+              "calls": 78,
+              "triangles": 3739856,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 63,
+              "textures": 73
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 80,
+            "visibleMeshes": 79,
+            "skinnedMeshes": 45,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 69,
+            "bones": 2030
+          },
+          {
+            "meshes": 80,
+            "visibleMeshes": 79,
+            "skinnedMeshes": 45,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 69,
+            "bones": 2030
+          },
+          {
+            "meshes": 80,
+            "visibleMeshes": 79,
+            "skinnedMeshes": 45,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 69,
+            "bones": 2030
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -65.83450343886848,
+          "min": -66.28134235747703,
+          "max": -65.69984254797578
+        },
+        "gpuMean": {
+          "median": -0.23533429079615198,
+          "min": -5.293472596863424,
+          "max": -0.1436284506910912
+        },
+        "frameP95": {
+          "median": -45.370370370370374,
+          "min": -45.40010887316276,
+          "max": -44.39999999999999
+        },
+        "longTaskTotal": {
+          "median": -40.582503480029985,
+          "min": -42.601284584980235,
+          "max": -39.86406300571799
+        }
+      },
+      "changePercent": {
+        "refreshMean": -65.83450343886848,
+        "gpuMean": -0.23533429079615198,
+        "frameP95": -45.370370370370374,
+        "longTaskTotal": -40.582503480029985
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "crowd-25",
+        "running": true,
+        "cameraPath": true,
+        "commands": 40
+      },
+      "before": {
+        "refreshMean": {
+          "median": 24.822500001639128,
+          "min": 22.40999999977648,
+          "max": 25.252500000596047
+        },
+        "refreshP95": {
+          "median": 28.5,
+          "min": 25.2,
+          "max": 30.4
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 158.01352237931036,
+          "min": 122.47710135897435,
+          "max": 161.16198675862069
+        },
+        "frameP50": {
+          "median": 166.8,
+          "min": 116.9,
+          "max": 166.8
+        },
+        "frameP95": {
+          "median": 183.7,
+          "min": 133.7,
+          "max": 216.9
+        },
+        "frameP99": {
+          "median": 333.7,
+          "min": 250.3,
+          "max": 333.9
+        },
+        "frameMax": {
+          "median": 433.6999999999971,
+          "min": 383.70000000000437,
+          "max": 433.90000000000146
+        },
+        "longTasks": {
+          "median": 50,
+          "min": 46,
+          "max": 50
+        },
+        "longTaskTotal": {
+          "median": 4461,
+          "min": 3986,
+          "max": 4642
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20106,
+          "min": 20080.80000001192,
+          "max": 20109.5
+        },
+        "coreBytes": {
+          "median": 115485,
+          "min": 115485,
+          "max": 115485
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 161,
+              "calls": 151,
+              "triangles": 6296087,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 147,
+              "textures": 92
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 162,
+              "calls": 151,
+              "triangles": 6296091,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 147,
+              "textures": 92
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 210,
+              "calls": 151,
+              "triangles": 6296071,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 147,
+              "textures": 92
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 169,
+            "visibleMeshes": 168,
+            "skinnedMeshes": 130,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 158,
+            "bones": 5846
+          },
+          {
+            "meshes": 169,
+            "visibleMeshes": 168,
+            "skinnedMeshes": 130,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 158,
+            "bones": 5846
+          },
+          {
+            "meshes": 169,
+            "visibleMeshes": 168,
+            "skinnedMeshes": 130,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 158,
+            "bones": 5846
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 9.630000000074507,
+          "min": 9.032499999180436,
+          "max": 9.692499999701976
+        },
+        "refreshP95": {
+          "median": 12.4,
+          "min": 12.3,
+          "max": 13.2
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 157.0323022068966,
+          "min": 153.2073541935484,
+          "max": 165.1224519285714
+        },
+        "frameP50": {
+          "median": 166.8,
+          "min": 166.7,
+          "max": 166.8
+        },
+        "frameP95": {
+          "median": 183.7,
+          "min": 183.6,
+          "max": 317.2
+        },
+        "frameP99": {
+          "median": 333.9,
+          "min": 333.8,
+          "max": 383.6
+        },
+        "frameMax": {
+          "median": 450.6000000000058,
+          "min": 433.90000000000146,
+          "max": 500.5
+        },
+        "longTasks": {
+          "median": 42,
+          "min": 38,
+          "max": 42
+        },
+        "longTaskTotal": {
+          "median": 3504,
+          "min": 3158,
+          "max": 3795
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "captureTicks": {
+          "median": 120,
+          "min": 120,
+          "max": 120
+        },
+        "durationMs": {
+          "median": 20069.10000000894,
+          "min": 20060.79999999702,
+          "max": 20079.09999999404
+        },
+        "coreBytes": {
+          "median": 115485,
+          "min": 115485,
+          "max": 115485
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 162,
+              "calls": 151,
+              "triangles": 6296085,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 147,
+              "textures": 92
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 157,
+              "calls": 151,
+              "triangles": 6296079,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 147,
+              "textures": 92
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 179,
+              "calls": 151,
+              "triangles": 6296081,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 147,
+              "textures": 92
+            },
+            "programs": 26,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 169,
+            "visibleMeshes": 168,
+            "skinnedMeshes": 130,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 158,
+            "bones": 5846
+          },
+          {
+            "meshes": 169,
+            "visibleMeshes": 168,
+            "skinnedMeshes": 130,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 158,
+            "bones": 5846
+          },
+          {
+            "meshes": 169,
+            "visibleMeshes": 168,
+            "skinnedMeshes": 130,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 158,
+            "bones": 5846
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -60.952764632644005,
+          "min": -61.865161865766936,
+          "max": -59.69433289035911
+        },
+        "gpuMean": {
+          "median": 4.498937459413188,
+          "min": -2.5624433123359935,
+          "max": 25.09061081099986
+        },
+        "frameP95": {
+          "median": 37.32236350037399,
+          "min": -15.306592899953909,
+          "max": 72.67283614589005
+        },
+        "longTaskTotal": {
+          "median": -20.772704465629698,
+          "min": -24.515295131408877,
+          "max": -14.929388029589774
+        }
+      },
+      "changePercent": {
+        "refreshMean": -60.952764632644005,
+        "gpuMean": 4.498937459413188,
+        "frameP95": 37.32236350037399,
+        "longTaskTotal": -20.772704465629698
+      }
+    },
+    {
+      "scenario": {
+        "fixture": "developed-810",
+        "running": true
+      },
+      "before": {
+        "refreshMean": {
+          "median": 97.35750000104308,
+          "min": 90.5699999999255,
+          "max": 97.47249999903143
+        },
+        "refreshP95": {
+          "median": 106.8,
+          "min": 102.1,
+          "max": 110.6
+        },
+        "snapshotCalls": {
+          "median": 440,
+          "min": 440,
+          "max": 440
+        },
+        "projectCalls": {
+          "median": 200,
+          "min": 200,
+          "max": 200
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 86.7431213888889,
+          "min": 67.23284494202899,
+          "max": 87.18524473584903
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 66.7,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 183.6,
+          "min": 150.1,
+          "max": 183.6
+        },
+        "frameP99": {
+          "median": 250.2,
+          "min": 200.1,
+          "max": 350.4
+        },
+        "frameMax": {
+          "median": 417.09999999999854,
+          "min": 383.79999999999563,
+          "max": 433.8000000000029
+        },
+        "longTasks": {
+          "median": 45,
+          "min": 44,
+          "max": 45
+        },
+        "longTaskTotal": {
+          "median": 7136,
+          "min": 6808,
+          "max": 7172
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 96,
+          "min": 95,
+          "max": 98
+        },
+        "captureTicks": {
+          "median": 77,
+          "min": 76,
+          "max": 79
+        },
+        "durationMs": {
+          "median": 20015.90000000596,
+          "min": 20004.59999999404,
+          "max": 20017.79999999702
+        },
+        "coreBytes": {
+          "median": 473949,
+          "min": 473947,
+          "max": 473949
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 286,
+              "calls": 77,
+              "triangles": 3730384,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 281,
+              "calls": 77,
+              "triangles": 3730382,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 364,
+              "calls": 77,
+              "triangles": 3730376,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "after": {
+        "refreshMean": {
+          "median": 30.72250000014901,
+          "min": 27.432499999925493,
+          "max": 30.99250000119209
+        },
+        "refreshP95": {
+          "median": 34.7,
+          "min": 33.9,
+          "max": 35.3
+        },
+        "snapshotCalls": {
+          "median": 40,
+          "min": 39,
+          "max": 40
+        },
+        "projectCalls": {
+          "median": 40,
+          "min": 39,
+          "max": 40
+        },
+        "persistCalls": {
+          "median": 40,
+          "min": 40,
+          "max": 40
+        },
+        "gpuMean": {
+          "median": 85.17623270909091,
+          "min": 65.80008202777779,
+          "max": 86.5025064259259
+        },
+        "frameP50": {
+          "median": 83.5,
+          "min": 66.7,
+          "max": 83.5
+        },
+        "frameP95": {
+          "median": 100.2,
+          "min": 83.4,
+          "max": 100.2
+        },
+        "frameP99": {
+          "median": 183.5,
+          "min": 183.4,
+          "max": 183.5
+        },
+        "frameMax": {
+          "median": 367.09999999999854,
+          "min": 317.09999999999854,
+          "max": 400.5
+        },
+        "longTasks": {
+          "median": 43,
+          "min": 41,
+          "max": 44
+        },
+        "longTaskTotal": {
+          "median": 3287,
+          "min": 2941,
+          "max": 3384
+        },
+        "processedTicksIncludingWarmup": {
+          "median": 121,
+          "min": 121,
+          "max": 121
+        },
+        "captureTicks": {
+          "median": 98,
+          "min": 98,
+          "max": 98
+        },
+        "durationMs": {
+          "median": 20006.39999999106,
+          "min": 20003.80000001192,
+          "max": 20014.79999999702
+        },
+        "coreBytes": {
+          "median": 474507,
+          "min": 474507,
+          "max": 474507
+        },
+        "renderer": [
+          {
+            "render": {
+              "frame": 290,
+              "calls": 77,
+              "triangles": 3730404,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 289,
+              "calls": 77,
+              "triangles": 3730406,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          },
+          {
+            "render": {
+              "frame": 377,
+              "calls": 77,
+              "triangles": 3730412,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 62,
+              "textures": 69
+            },
+            "programs": 25,
+            "width": 1264,
+            "height": 655,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                1024,
+                1024
+              ]
+            ]
+          }
+        ],
+        "sceneCounts": [
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          },
+          {
+            "meshes": 79,
+            "visibleMeshes": 78,
+            "skinnedMeshes": 44,
+            "transparentMeshes": 10,
+            "alphaTestMeshes": 3,
+            "shadowCasters": 68,
+            "bones": 1966
+          }
+        ]
+      },
+      "pairedChangePercent": {
+        "refreshMean": {
+          "median": -68.44362273084266,
+          "min": -69.71127304852814,
+          "max": -68.20385236707783
+        },
+        "gpuMean": {
+          "median": -1.8063549647623023,
+          "min": -2.1310460913658957,
+          "max": -0.7830892853391225
+        },
+        "frameP95": {
+          "median": -45.424836601307184,
+          "min": -45.424836601307184,
+          "max": -44.437041972018655
+        },
+        "longTaskTotal": {
+          "median": -53.93778026905829,
+          "min": -56.80082256169212,
+          "max": -52.81650864472951
+        }
+      },
+      "changePercent": {
+        "refreshMean": -68.44362273084266,
+        "gpuMean": -1.8063549647623023,
+        "frameP95": -45.424836601307184,
+        "longTaskTotal": -53.93778026905829
+      }
+    }
+  ],
+  "note": "CPU means are synchronous inclusive main-thread wall spans, not cycle counters. Native FPS/GC evidence and unchanged production controls are separate. GPU command query time is distinct from renderer JavaScript submission. Natural pacing has different achieved ticks; captureTicks excludes the separately recorded warmup ticks; scheduled cases compare exact identical commands/saves."
+}

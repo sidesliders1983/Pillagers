@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "156651a0d44b3a0c61581c1a1e25ac33e8839e55",
+  "expectedFireRevisions": [
+    true,
+    false
+  ],
+  "actualFireRevisions": [
+    false,
+    false
+  ],
+  "actualSelectionRevisions": [
+    true,
+    false,
+    false,
+    false
+  ],
+  "placeholders": [],
+  "errors": [],
+  "canonicalReplayEqual": true,
+  "canonicalSha256": "f0a0f42e0cc21053aabe6a2e22ab639949a6b7b47145347f269d9a688396f49f"
+}

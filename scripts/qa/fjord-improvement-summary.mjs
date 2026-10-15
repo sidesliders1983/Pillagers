@@ -94,7 +94,47 @@ for (const row of rows) lines.push('| ' + JSON.stringify(row.scenario) + ' | ' +
 lines.push('', 'Negative GPU change means a lower observed command interval. The crowd frame-time outliers and late host-wide GPU timing shift remain visible in the raw pair ranges; no universal frame-rate gain is claimed from #168 alone. Route-specific stalls are addressed separately in #169. UI work does not remove the fixed GPU load; small deltas under host drift are not a GPU optimization claim.', '',
     'The public snapshot still clones. Internal readSnapshot creates one isolated deeply frozen snapshot per committed revision, and readProjection caches a detached frozen presentation model. Core commands/import/restart/replacement invalidate it; rejected commands retain the previous valid read. Selection, playback and fractional pacing serialize their current values on every scheduled/explicit save. Canonical serializeState validation is retained once per immutable revision. Availability probes still call authoritative applyCommand, with bounded per-revision reuse of identical finite-JSON commands; no alternative eligibility rules were introduced.', '',
     'Remaining copies: one complete snapshot per new revision consumed by the UI; independent public snapshots on request; one small detached projection per changed canonical/layout/geography input; existing narrative and import/handoff ownership copies. Scheduled persistence is retained, and the matching save hashes include narrative publication/read flags, layout, selection and pacing.', '',
-    'Validation: TypeScript/production build and 50 focused tests pass, including four new read/caching/eligibility/exact-save tests. The inherited original-Human skin shader test remains tracked separately; no assertion is weakened. Current-head full suite/character validation/CI and final production-bundle isolation are recorded in the combined implementation handoff.', '',
+    'Validation: TypeScript/production build and 51 focused tests pass, including five new read/caching/eligibility/exact-save tests. A separate test repair verifies the actual 0.2 shader uniform, independent per-person ownership, native-neutral 0.0 and restored 0.2; all nine original-Human tests pass. Production shader code is unchanged and the original failed audit record is preserved. Current-head full suite/character validation/CI and final production-bundle isolation are recorded in the combined implementation handoff.', '',
     'Rollback: revert the #168 source commits as one slice; no save migration or gameplay-rule change is required. Layout/geometry/rendering source and default visual policies are unchanged. Owner review precedes merge.');
 await writeFile(directory + '/report.md', lines.join('\n') + '\n');
 console.log(JSON.stringify({ issue: plan.issue, trials: data.runs.length, exactPairs, gates: result.gates, developedCPUChangePercent: developed.changePercent.refreshMean }));
+
+const finalPlan = JSON.parse(await readFile(directory + '/final-plan.json', 'utf8'));
+const finalData = JSON.parse(await readFile(directory + '/final-paired.json', 'utf8'));
+assert.equal(finalData.failure, undefined);
+assert.deepEqual(finalData.errors, []);
+assert.equal(finalData.runs.length, 6);
+const finalPairs = [];
+for (let repeat = 1; repeat <= 3; repeat++) {
+    const pair = finalData.runs.filter(run => run.repeat === repeat);
+    const before = pair.find(run => run.variant === 'before');
+    const after = pair.find(run => run.variant === 'after');
+    for (const run of pair) {
+        assert.equal(run.sourceCommit, finalPlan[run.variant]);
+        assert.equal(run.actualTicksFromFixture, 120);
+        assert.equal(run.canonicalReplayEqual, true);
+        assert.deepEqual(run.after.placeholders, []);
+        assert.ok(run.windows[0].gpu.count > 0);
+        assert.equal(run.windows[0].disjointQueries, 0);
+    }
+    assert.equal(before.canonicalSha256, after.canonicalSha256);
+    assert.equal(before.checkpointSha256, after.checkpointSha256);
+    assert.ok(span(after, 'ui.refresh').p95 < 50);
+    const cpuChange = (span(after, 'ui.refresh').mean / span(before, 'ui.refresh').mean - 1) * 100;
+    assert.ok(cpuChange <= -40);
+    finalPairs.push({ repeat, cpuChangePercent: cpuChange,
+        beforeRefresh: span(before, 'ui.refresh'), afterRefresh: span(after, 'ui.refresh'),
+        beforeGpu: before.windows[0].gpu, afterGpu: after.windows[0].gpu,
+        gpuChangePercent: (after.windows[0].gpu.mean / before.windows[0].gpu.mean - 1) * 100 });
+}
+const consistency = JSON.parse(await readFile(directory + '/coalescing-after/read-consistency.json', 'utf8'));
+assert.equal(consistency.sourceCommit, finalPlan.after);
+result.finalConfirmation = { before: finalPlan.before, after: finalPlan.after, trials: 6, pairs: finalPairs,
+    medianCpuChangePercent: median(finalPairs.map(pair => pair.cpuChangePercent)),
+    medianGpuChangePercent: median(finalPairs.map(pair => pair.gpuChangePercent)), consistency };
+await writeFile(directory + '/results.json', JSON.stringify(result, null, 2) + '\n');
+await writeFile(directory + '/report.md', lines.join('\n') + '\n\nFinal implementation confirmation: `' + finalPlan.after +
+    '` was measured in three additional alternating pairs after capturing a consistent immutable state/view through asynchronous scene synchronization. All six replays, three complete checkpoint pairs and the delayed-layer coalescing check pass. Final paired median UI CPU change: ' +
+    n(result.finalConfirmation.medianCpuChangePercent) + '%. All final refresh p95 values remain below 50 ms. Observed paired GPU change: ' +
+    n(result.finalConfirmation.medianGpuChangePercent) + '%, with no rendering change or GPU improvement claim. See [final-plan.json](final-plan.json), [final-paired.json](final-paired.json) and finalConfirmation in results.json. The broad matrix above retains its original source pin.\n');
+console.log(JSON.stringify(result.finalConfirmation));
