@@ -219,7 +219,7 @@ export class FjordEntities {
             const clearance = canonical.stage === 'Young' ? .5 :
                 canonical.stage === 'Young Adult' ? .7 : .9;
             const sample = sampler.sample;
-            motion.setYardSurface(key, (x, z) => sample(x, z, clearance));
+            motion.setYardSurface(key, (x, z) => sample(x, z, clearance), farm.uuid + ':' + clearance);
         }
     }
     advance(motion: LivingWorldController, delta: number, running: boolean) {

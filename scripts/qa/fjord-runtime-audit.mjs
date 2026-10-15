@@ -200,29 +200,31 @@ try {
                     await cdp.send('Profiler.enable');
                     await cdp.send('Profiler.setSamplingInterval', { interval: 1000 });
                     await cdp.send('Profiler.start');
-                    await cdp.send('Tracing.start', { categories: 'devtools.timeline,v8,blink.user_timing,gpu',
+                    if (!scenario.cpuOnly) await cdp.send('Tracing.start', { categories: 'devtools.timeline,v8,blink.user_timing,gpu',
                         transferMode: 'ReturnAsStream', options: 'sampling-frequency=1000' });
                 }
                 await page.evaluate(options => { if (options.runningBoundary) window.__fjordAudit.references.setPlayback(true); window.__fjordAudit.start(options); }, {
                     runningBoundary: scenario.fixture.startsWith('boundary') && scenario.running,
-                    instrument: scenario.instrument !== false, gpu: scenario.gpu !== false, cameraPath: scenario.cameraPath, userTiming: scenario.profile });
+                    instrument: scenario.instrument !== false, gpu: scenario.gpu !== false, cameraPath: scenario.cameraPath, userTiming: scenario.profile && !scenario.cpuOnly });
                 const windows = [];
                 const samples = scenario.soak ? 10 : 1;
                 for (let window = 0; window < samples; window++) {
                     if (scenario.commands) {
                         // QA-only matched command schedule: no canonical ticks are skipped to claim a gain.
-                        await page.evaluate(async scenario => {
+                        await page.evaluate(async ({ scenario, window }) => {
                             const audit = window.__fjordAudit;
                             for (let command = 1; command <= scenario.commands; command++) {
                                 const remaining = audit.started + command * 500 - performance.now();
                                 if (remaining > 0) await new Promise(resolve => setTimeout(resolve, remaining));
-                                await audit.references.advanceTicks(scenario.ticksPerCommand || 3);
+                                const pattern = scenario.tickPattern;
+                                const ticks = pattern ? pattern[(window * scenario.commands + command - 1) % pattern.length] : scenario.ticksPerCommand || 3;
+                                await audit.references.advanceTicks(ticks);
                             }
-                        }, scenario);
+                        }, { scenario, window });
                     } else await page.waitForTimeout(scenario.soak ? 30000 : sampleMs);
                     const sample = await page.evaluate(() => window.__fjordAudit.stop());
                     windows.push(sample);
-                    if (scenario.soak && window < samples - 1) await page.evaluate(() => window.__fjordAudit.start());
+                    if (scenario.soak && window < samples - 1) await page.evaluate(() => window.__fjordAudit.start({ continuing: true }));
                     if (scenario.soak) console.log(JSON.stringify({ progress: 'soak', window, p95: sample.frames.p95, heap: sample.heap?.used }));
                 }
                 const metricsAfter = await cdp.send('Performance.getMetrics');
@@ -283,6 +285,7 @@ try {
                         topSelf: profile.nodes.map(node => ({ function: node.callFrame.functionName,
                             url: node.callFrame.url.replace(origin, ''), line: node.callFrame.lineNumber + 1,
                             ms: (samples.get(node.id) || 0) / 1000 })).sort((a, b) => b.ms - a.ms).slice(0, 45) };
+                    if (!scenario.cpuOnly) {
                     const complete = new Promise(resolve => cdp.once('Tracing.tracingComplete', resolve));
                     await cdp.send('Tracing.end');
                     const { stream } = await complete;
@@ -297,6 +300,12 @@ try {
                     const entries = JSON.parse(trace).traceEvents;
                     run.trace = { path: profileName + '.trace.json.gz', events: entries.length,
                         gc: entries.filter(e => e.ph === 'X' && /GC|Scavenge/.test(e.name)).map(e => ({ name: e.name, durationMs: e.dur / 1000 })) };
+                    }
+                }
+                if (scenario.screenshot) {
+                    const path = group + '-' + variant.label + '-r' + repeat + '-' + scenario.fixture + '.png';
+                    await page.screenshot({ path: output + '/' + path });
+                    run.screenshot = path;
                 }
                 runs.push(run); await write();
                 if (errors.length) throw Error('Browser error: ' + errors.at(-1).error);

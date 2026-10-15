@@ -6,6 +6,11 @@ import type { FjordEntity } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+export type RouteObservation = { agent: string; kind: string; purpose: string; target: string;
+    goal: Point2 | null; from: Point2; reason: string; nodes: number; accepted: boolean;
+    navigationGeneration: number; reservationGeneration: number; occupancy: string;
+    step: number; activeSeconds: number };
+
 type OccupationClip = 'Farm' | 'Attack' | 'Doze';
 type Visit = { target: Point2; face: Point2; source: string; phase: 'approach' | 'activity' | 'home';
     clip: OccupationClip | 'Idle'; remaining: number; travelRemaining?: number;
@@ -43,7 +48,20 @@ export class LivingWorldController {
     private metrics = { routeAttempts: 0, rejectedRoutes: 0, targetAttempts: 0,
         rejectedTargets: 0, routeNodes: 0, maxRouteNodes: 0,
         updates: 0, lastUpdateMs: 0, maxUpdateMs: 0, totalUpdateMs: 0,
-        yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0 };
+        yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0,
+        presentationSteps: 0, activeSeconds: 0, visitsStarted: 0, occupationArrivals: 0,
+        activitiesCompleted: 0, homeArrivals: 0, visitsCancelled: 0, distanceWalked: 0 };
+    private routeObserver?: (observation: RouteObservation) => void;
+    private navigationGeneration = 0;
+    private navigationSignature = '';
+    private treeSignature = '';
+    private yardVersions = new Map<string, unknown>();
+    private reservationGeneration = 0;
+    private reservationSignature = '';
+    /** Optional bounded QA consumer; no route rows are allocated during ordinary play. */
+    setRouteObserver(observer?: (observation: RouteObservation) => void) {
+        this.routeObserver = observer;
+    }
     private agents = new Map<string, Agent>();
     private social = new SocialEncounters();
     private surface;
@@ -59,6 +77,12 @@ export class LivingWorldController {
         this.campfire = settlementCampfire(world);
     }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
+        const navigationSignature = JSON.stringify([entities.map(entity => [entity.selectionKey,
+            entity.asset, entity.transform, entity.plot, entity.status]), ground]);
+        if (navigationSignature !== this.navigationSignature) {
+            this.navigationSignature = navigationSignature;
+            this.navigationGeneration++;
+        }
         this.parcels = entities.filter(e => e.plot);
         this.ground = ground;
         const active = entities.filter(e => e.transform && (e.kind === 'persona' || e.kind === 'cattle'));
@@ -85,6 +109,7 @@ export class LivingWorldController {
                 this.social.remove(key);
                 this.agents.delete(key);
                 this.yardSurfaces.delete(key);
+                this.yardVersions.delete(key);
             }
         for (const entity of active) {
             const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.status.assignment, entity.status.grazingZone]);
@@ -174,6 +199,7 @@ export class LivingWorldController {
         if (actor.visit && actor.visit.clip !== 'Idle' && !clips[actor.visit.clip]) this.cancelVisit(actor);
     }
     private cancelVisit(a: Agent) {
+        if (a.visit) this.metrics.visitsCancelled++;
         a.visit = null;
         a.path = [];
         a.detour = [];
@@ -182,6 +208,11 @@ export class LivingWorldController {
         a.visitDelay = 20;
     }
     setStandingTrees(trees: readonly { key: string; x: number; z: number; clearance: number }[]) {
+        const signature = JSON.stringify(trees);
+        if (signature !== this.treeSignature) {
+            this.treeSignature = signature;
+            this.navigationGeneration++;
+        }
         this.trees = trees.map(tree => ({ ...tree }));
         const sources = new Set(trees.map(tree => tree.key));
         for (const a of this.agents.values())
@@ -280,7 +311,7 @@ export class LivingWorldController {
         for (let i = 0; i < Math.min(8, targets.length); i++) {
             const visit = targets[(i + offset) % targets.length];
             this.metrics.targetAttempts++;
-            const path = this.route(a, visit.target);
+            const path = this.route(a, visit.target, 'occupation', visit.source);
             if (!path.length) {
                 this.metrics.rejectedTargets++;
                 continue;
@@ -288,6 +319,7 @@ export class LivingWorldController {
             visit.travelRemaining = this.visitBudget(a, path);
             visit.checkpoint = { x: a.x, z: a.z };
             visit.checkpointSeconds = 0;
+            this.metrics.visitsStarted++;
             a.visit = visit;
             a.path = path;
             a.detour = [];
@@ -322,7 +354,11 @@ export class LivingWorldController {
         if (!enabled) this.social.remove(key);
         this.clearReleasedPoses();
     }
-    setYardSurface(key: string, sample: (x: number, z: number) => number | null) {
+    setYardSurface(key: string, sample: (x: number, z: number) => number | null, version: unknown = sample) {
+        if (this.yardVersions.get(key) !== version) {
+            this.yardVersions.set(key, version);
+            this.navigationGeneration++;
+        }
         this.yardSurfaces.set(key, sample);
         const agent = this.agents.get(key);
         if (agent) {
@@ -475,12 +511,23 @@ export class LivingWorldController {
                 return false;
         return true;
     }
-    private route(a: Agent, goal?: Point2) {
+    private route(a: Agent, goal?: Point2, purpose = goal ?
+        (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
+        target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '') {
         this.metrics.routeAttempts++;
         const measured = (nodes: number, path: Point2[]) => {
             this.metrics.routeNodes += nodes;
             this.metrics.maxRouteNodes = Math.max(this.metrics.maxRouteNodes, nodes);
             if (!path.length) this.metrics.rejectedRoutes++;
+            if (this.routeObserver) this.routeObserver({ agent: a.key, kind: a.kind, purpose, target,
+                goal: goal ? { ...goal } : null, from: { x: a.x, z: a.z }, nodes, accepted: path.length > 0,
+                reason: path.length ? 'accepted' : goal && !this.safe(a, goal) ? 'unsafe-goal' :
+                    goal && !this.bodyClearance(a, goal, goal) ? 'occupied-endpoint' :
+                    nodes >= (goal ? 2000 : 500) ? 'node-cap' : 'no-path',
+                navigationGeneration: this.navigationGeneration, reservationGeneration: this.reservationGeneration,
+                occupancy: [...this.agents.values()].filter(other => other !== a)
+                    .map(other => [other.key, other.x, other.z].join(':')).join('|'),
+                step: this.metrics.presentationSteps, activeSeconds: this.metrics.activeSeconds });
             return path;
         };
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
@@ -617,6 +664,8 @@ export class LivingWorldController {
         }
     }
     private step(dt: number) {
+        this.metrics.presentationSteps++;
+        this.metrics.activeSeconds += dt;
         const actors = [...this.agents.values()];
         this.social.advance(dt, actors.map(a => this.encounterActor(a)), (first, second) => {
             const a = this.agents.get(first.key)!, b = this.agents.get(second.key)!;
@@ -624,6 +673,11 @@ export class LivingWorldController {
         });
         this.cattleEncounters();
         this.clearReleasedPoses();
+        const reservations = this.social.activePairs().map(pair => pair.a + ':' + pair.b).sort().join('|');
+        if (reservations !== this.reservationSignature) {
+            this.reservationSignature = reservations;
+            this.reservationGeneration++;
+        }
         for (const a of this.agents.values()) {
             const encounter = this.social.inspect(a.key);
             if (encounter.partnerKey !== null) {
@@ -652,6 +706,7 @@ export class LivingWorldController {
                     a.state = visit.clip;
                     visit.remaining -= dt;
                     if (visit.remaining > 0) continue;
+                    this.metrics.activitiesCompleted++;
                     visit.phase = 'home';
                     a.path = this.route(a, a.anchor);
                     visit.travelRemaining = this.visitBudget(a, a.path);
@@ -666,9 +721,14 @@ export class LivingWorldController {
                         const heading = Math.atan2(visit.face.x - a.x, visit.face.z - a.z);
                         a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
                         a.state = 'Idle';
-                        if (Math.cos(heading - a.rotation) > .99) visit.phase = 'activity';
+                        if (Math.cos(heading - a.rotation) > .99) {
+                            this.metrics.occupationArrivals++;
+                            visit.phase = 'activity';
+                        }
                         continue;
                     }
+                    if (visit.phase === 'home' && Math.hypot(a.x - a.anchor.x, a.z - a.anchor.z) < .15)
+                        this.metrics.homeArrivals++;
                     a.visit = null;
                     a.visitDelay = 20 + this.random(a) * 25;
                 }
@@ -760,6 +820,7 @@ export class LivingWorldController {
                 const angle = Math.atan2(Math.sin(heading - a.rotation), Math.cos(heading - a.rotation));
                 a.rotation += angle * Math.min(1, dt * 8);
             }
+            this.metrics.distanceWalked += step;
             a.x = p.x;
             a.z = p.z;
             a.y = this.height(a);
@@ -778,7 +839,8 @@ export class LivingWorldController {
             if (Math.hypot(actors[i].x - actors[j].x, actors[i].z - actors[j].z) <
                 this.radius(actors[i]) + this.radius(actors[j]) - 1e-6) bodyOverlaps++;
         }
-        return { ...this.metrics, agents: actors.length,
+        return { ...this.metrics, navigationGeneration: this.navigationGeneration,
+            reservationGeneration: this.reservationGeneration, agents: actors.length,
             reservations: this.social.activePairs().length,
             occupationVisits: actors.filter(a => a.visit).length,
             outOfZone: actors.filter(a => !this.safe(a, a)).length, bodyOverlaps };

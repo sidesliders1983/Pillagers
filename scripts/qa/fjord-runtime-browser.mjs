@@ -71,6 +71,30 @@ export const audit = {
         this.references = refs;
         const { motion, layer, models, world, controller, renderer, session, campaign, shared,
             lighting, campfireEffect, precipitationEffect, selectionLabels, productionLabels } = refs;
+        this.routeContexts = new Map();
+        motion.setRouteObserver?.(event => {
+            if (!this.active || !this.enabled) return;
+            const key = JSON.stringify([event.agent, event.purpose, event.target, event.goal, event.reason]);
+            let row = this.routeRows.get(key);
+            if (!row && this.routeRows.size < 1024) {
+                row = { agent: event.agent, kind: event.kind, purpose: event.purpose, target: event.target,
+                    goal: event.goal, reason: event.reason, attempts: 0, nodes: 0, identicalContext: 0,
+                    changedContext: 0, firstStep: event.step, firstSeconds: event.activeSeconds };
+                this.routeRows.set(key, row);
+            }
+            if (!row) { this.routeOverflow++; return; }
+            const context = JSON.stringify([event.from, event.navigationGeneration,
+                event.reservationGeneration, event.occupancy]);
+            if (this.routeContexts.get(key) === context) row.identicalContext++;
+            else row.changedContext++;
+            if (this.routeContexts.size >= 1024 && !this.routeContexts.has(key))
+                this.routeContexts.delete(this.routeContexts.keys().next().value);
+            this.routeContexts.set(key, context);
+            row.attempts++; row.nodes += event.nodes; row.lastStep = event.step;
+            row.lastSeconds = event.activeSeconds; row.from = event.from;
+            row.navigationGeneration = event.navigationGeneration;
+            row.reservationGeneration = event.reservationGeneration;
+        });
         const groups = [
             [motion, ['advance', 'route', 'reconcile', 'step', 'beginVisit', 'planPassing'], 'motion'],
             [motion.social, ['advance'], 'social'],
@@ -170,18 +194,21 @@ export const audit = {
             }
         };
     },
-    start({ instrument = true, gpu = true, cameraPath = false, userTiming = false } = {}) {
+    start({ instrument = true, gpu = true, cameraPath = false, userTiming = false, continuing = false } = {}) {
         this.active = false; this.clearQueries(); this.generation = (this.generation || 0) + 1;
         this.spans = {}; this.stack = []; this.frames = new Distribution(); this.gpu = new Distribution();
         this.longTasks = new Distribution(); this.heartbeatGaps = new Distribution();
-        this.previousFrame = 0; this.previousBeat = 0; this.disjoint = 0;
+        if (!continuing) { this.previousFrame = 0; this.previousBeat = 0; }
+        this.disjoint = 0; this.routeRows = new Map(); this.routeOverflow = 0;
         this.userTiming = userTiming; this.enabled = instrument; this.gpuEnabled = gpu; this.cameraPath = cameraPath;
         this.started = performance.now(); this.active = true;
     },
     stop() {
         this.active = false;
         const durationMs = performance.now() - this.started;
-        return { durationMs, fps: this.frames.count * 1000 / durationMs, frames: this.frames.read(),
+        return { routeFailures: [...this.routeRows.values()], routeOverflow: this.routeOverflow,
+            motion: this.references.motion.inspectMetrics(), actors: this.references.motion.inspect(),
+            durationMs, fps: this.frames.count * 1000 / durationMs, frames: this.frames.read(),
             spans: Object.fromEntries(Object.entries(this.spans).map(([name, data]) => [name, data.read()])),
             gpuSupported: this.gpuSupported, gpu: this.gpu.read(), disjointQueries: this.disjoint,
             longTasks: this.longTasks.read(), heartbeatGaps: this.heartbeatGaps.read(),
