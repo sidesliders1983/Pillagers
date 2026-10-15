@@ -1,6 +1,6 @@
 import { personaIdentity } from '../simulation/Identity';
 import { personaAge, personaAway } from '../simulation/SimulationCore';
-import type { SimulationState } from '../simulation/SimulationCore';
+import type { GameTime, SimulationState } from '../simulation/SimulationCore';
 import { occupationLabel } from './Chronicle';
 export type FamilyRelation = {
     id: string;
@@ -47,7 +47,7 @@ export function projectFamilyTree(state: SimulationState): FamilyTree {
     const founderSet = new Set(founders), community = new Set([...Object.keys(state.personas), ...founders]);
     const identities = { ...state.personaArchive, ...state.personas };
     const parents = new Map<string, string[]>(), pairs = new Map<string, FamilyEdge>(), diagnostics: string[] = [];
-    const departedAt = new Map<string, number>(), deathWork = new Map<string, string | null>();
+    const departedAt = new Map<string, GameTime>(), deathWork = new Map<string, string | null>();
     const pair = (a: string, b: string, status = 'Current partnership') => {
         if (a === b) {
             diagnostics.push('Self partnership reference: ' + a);
@@ -76,7 +76,7 @@ export function projectFamilyTree(state: SimulationState): FamilyTree {
         if (['PersonaTransferredIn', 'PersonaTransferredOut'].includes(event.type) && typeof id === 'string') {
             community.add(id);
             if (event.type === 'PersonaTransferredOut')
-                departedAt.set(id, event.time.winter);
+                departedAt.set(id, event.time);
             if (typeof details.formerPartnerId === 'string')
                 pair(id, details.formerPartnerId, 'Ended by departure');
         }
@@ -196,8 +196,8 @@ export function projectFamilyTree(state: SimulationState): FamilyTree {
             id: parentId, name: parent?.name ?? 'Name not recorded',
             role: unambiguous && sex === 'female' ? 'Mother' : unambiguous && sex === 'male' ? 'Father' : 'Parent',
             visibility: included.has(parentId) ? 'included' : parent ? 'external' : 'incomplete',
-            deathWinter: parent?.deathWinter ?? null, age: state.personas[parentId] ? personaAge(state, parentId) : parent?.deathWinter != null ? parent.deathWinter - parent.birthWinter :
-                parent && departedAt.has(parentId) ? departedAt.get(parentId)! - parent.birthWinter : null
+            deathWinter: parent?.deathWinter ?? null, age: state.personas[parentId] ? personaAge(state, parentId) : parent?.deathWinter != null ? personaAge(state, parentId) :
+                parent && departedAt.has(parentId) ? personaAge(state, parentId, departedAt.get(parentId)!) : null
         };
     };
     const nodes = ordered.map(id => {
@@ -207,10 +207,10 @@ export function projectFamilyTree(state: SimulationState): FamilyTree {
             id, name: person?.name ?? 'Name not recorded', founder: founderSet.has(id), row, column,
             branch: connectedToFounders.has(id) ? 'Founding families' : 'Independent family',
             occupation: !person ? 'Occupation not observed' : occupationLabel(person?.deathWinter != null ? (deathWork.has(id) ? deathWork.get(id)! : person.occupationHistory?.at(-1)?.occupation ?? null) : person?.occupation ?? null),
-            age: state.personas[id] ? personaAge(state, id) : person?.deathWinter != null ? person.deathWinter - person.birthWinter :
-                departedAt.has(id) && person ? departedAt.get(id)! - person.birthWinter : null,
+            age: state.personas[id] ? personaAge(state, id) : person?.deathWinter != null ? personaAge(state, id) :
+                departedAt.has(id) && person ? personaAge(state, id, departedAt.get(id)!) : null,
             sex: person?.dna.sex ?? 'Not recorded', status: !person ? 'Identity not observed' : person.deathWinter != null ? 'Deceased' : !state.personas[id] ? 'Departed · last known' : personaAway(state, id) ? 'Away on expedition' : 'Present',
-            deathWinter: person?.deathWinter ?? null, observedWinter: departedAt.get(id) ?? null, parentIds: parents.get(id) ?? [], parents: (parents.get(id) ?? []).map(parent => relation(parent, parents.get(id) ?? [])),
+            deathWinter: person?.deathWinter ?? null, observedWinter: departedAt.get(id)?.winter ?? null, parentIds: parents.get(id) ?? [], parents: (parents.get(id) ?? []).map(parent => relation(parent, parents.get(id) ?? [])),
             childIds: [...parents].filter(([, known]) => known.includes(id)).map(([child]) => child),
             children: [...parents].filter(([, known]) => known.includes(id)).map(([child, known]) => ({ ...relation(child, []), role: relation(id, known).role }))
         };
@@ -224,9 +224,11 @@ export class FamilyTreeIndex {
     private cached: FamilyTree | null = null;
     private cursor = 0;
     private winter = -1;
+    private nextBirthday = Infinity;
     private revision = 0;
     read(state: SimulationState): FamilyTree {
-        let topology = !this.cached, cards = this.winter !== state.time.winter;
+        const now = state.time.winter * state.ticksPerWinter + state.time.tick;
+        let topology = !this.cached, cards = this.winter !== state.time.winter || now >= this.nextBirthday;
         for (; this.cursor < state.events.length; this.cursor++) {
             const type = state.events[this.cursor].type;
             if (['ChildBorn', 'PartnershipFormed', 'FoundingPartnershipPresent', 'PersonaDied', 'PersonaTransferredIn', 'PersonaTransferredOut', 'FoundingPartyLanded'].includes(type))
@@ -248,8 +250,15 @@ export class FamilyTreeIndex {
                         children: node.children.map(child => ({ ...child, age: state.personas[child.id] ? personaAge(state, child.id) : child.age }))
                     };
                 }) };
-        if (topology || cards)
+        if (topology || cards) {
             this.cached!.revision = ++this.revision;
+            this.nextBirthday = Infinity;
+            for (const person of Object.values(state.personas)) if (person.deathWinter === null) {
+                const tick = person.birthTick ?? 0;
+                const due = (state.time.winter + (tick <= state.time.tick ? 1 : 0)) * state.ticksPerWinter + tick;
+                this.nextBirthday = Math.min(this.nextBirthday, due);
+            }
+        }
         this.winter = state.time.winter;
         return structuredClone(this.cached!);
     }

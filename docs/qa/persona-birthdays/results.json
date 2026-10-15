@@ -1,0 +1,127 @@
+{
+  "touchEmulation": true,
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "realNewCampaignOptIn": true,
+  "exactFifthBirthday": true,
+  "restoredAfterReload": true,
+  "time": {
+    "winter": 800,
+    "tick": 517,
+    "ticksPerWinter": 1000
+  },
+  "child": {
+    "key": "persona:astrid",
+    "renderId": "0bff430a-b678-4fa0-bd12-a51087672714",
+    "kind": "persona",
+    "id": "astrid",
+    "living": true,
+    "sex": "female",
+    "age": 5,
+    "indoorReason": null,
+    "occupation": null,
+    "workEligible": false,
+    "workHomeId": "house",
+    "position": [
+      87.6,
+      3.0442216396331787,
+      161
+    ],
+    "asset": "human",
+    "scale": [
+      0.9038461538461539,
+      0.9038461538461539,
+      0.9038461538461539
+    ],
+    "bounds": {
+      "min": [
+        87.10053104013394,
+        3.0266620051520254,
+        160.24567288594565
+      ],
+      "max": [
+        88.06051218870121,
+        3.860822691739829,
+        161.67408979248304
+      ]
+    },
+    "appearance": {
+      "seed": 34,
+      "height": 1.371478287531063,
+      "adultAge": 18,
+      "masculinity": 0.49,
+      "weightDeviation": 0.044042721630840116,
+      "age": 5,
+      "stage": "child",
+      "appearance": {
+        "hairStyle": "tied",
+        "beardStyle": "none",
+        "color": "#b8a079",
+        "greyAmount": 0
+      },
+      "appearanceFit": {
+        "hair": 1,
+        "beard": 1,
+        "clothing": 1
+      },
+      "motion": {
+        "cadence": 1.16688,
+        "stride": 0.44999999999999996,
+        "footfall": 0.7018
+      },
+      "weights": {
+        "Masculine": 0,
+        "Feminine": 0.0018000000000000017,
+        "Breasts": 0,
+        "Powerful": 0,
+        "Slight": 0,
+        "Agile": 0,
+        "Grounded": 0.0414,
+        "Tall": 0,
+        "Short": 0.24472040167477502,
+        "Overweight": 0.013212816489252035,
+        "Underweight": 0,
+        "Age": 0,
+        "HeadWidth": -0.05914973448961973,
+        "HeadLength": -0.1375450196675956,
+        "Jaw": 0.2825620856601745,
+        "Nose": -0.04725200249813497,
+        "LegRatio": -0.09308540273923427,
+        "ShoulderSlope": -0.15535995177924633,
+        "Asymmetry": 0.07529595786472781,
+        "BellyJiggle": 0,
+        "BreastJiggle": 0,
+        "Child": 1,
+        "ChildPower": 0,
+        "ChildAgility": 0,
+        "FemininePower": 0,
+        "MasculineAgility": 0,
+        "TallSlight": 0,
+        "ElderHeavy": 0
+      }
+    },
+    "motion": {
+      "state": "Idle",
+      "speed": 0,
+      "clipTime": 0.41890991999999994,
+      "sourceClip": "Idle_02",
+      "clip": "Idle"
+    },
+    "clothing": {
+      "id": "native",
+      "assets": {
+        "hair": null,
+        "beard": null,
+        "outfit": null,
+        "shoes": null,
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      }
+    },
+    "placeholder": false
+  },
+  "errors": []
+}

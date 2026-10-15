@@ -1,3 +1,5 @@
+import { careActive } from './CareCalendar';
+import { resolveScheduledBirths } from './ScheduledBirths';
 import { stepCampfire } from './Campfire';
 import {evaluateSocialYear, pruneSocialIncidents} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
@@ -54,7 +56,7 @@ export const defaultPrototypeConfig: PrototypeConfig = {
         leatherAndJewelleryMaker:job(null,0,[.1,.35,.3,.1,.15],[.45,.85,.8,.45,.3]),
     },
 };
-export type PersonaMechanics={dominantLegacy:Partial<Record<TraitKey,string>>; lastBirthWinter:number|null; childcareUntilWinter:number; caregiverId:string|null; caregiverLocked:boolean; caregiverWorkedWinter:number|null; occupationLocked:boolean; switchedUntilTick:number; progress:Partial<Record<Occupation,number>>};
+export type PersonaMechanics={dominantLegacy:Partial<Record<TraitKey,string>>; lastBirthWinter:number|null; childcareUntilWinter:number; childcareUntilTick?:number; caregiverId:string|null; caregiverLocked:boolean; caregiverWorkedWinter:number|null; occupationLocked:boolean; switchedUntilTick:number; progress:Partial<Record<Occupation,number>>};
 export type MechanicsState = {version:2; config:PrototypeConfig; people:Record<string,PersonaMechanics>; buildings:Record<string,{debtWinters:number; investedMaterials:number; upgradeLevel:number}>};
 export function initializeMechanics(state:SimulationState, overrides:Partial<PrototypeConfig> = {}):MechanicsState {
     return {version:2,config:structuredClone({...defaultPrototypeConfig,...overrides}), people:Object.fromEntries(Object.keys(state.personas).map(id=>[id,newPersonaMechanics()])), buildings:Object.fromEntries(Object.keys(state.buildings).map(id=>[id,{debtWinters:0,investedMaterials:10,upgradeLevel:0}]))};
@@ -109,9 +111,14 @@ export function stepMechanicsTick(state:SimulationState):void {
     let previousFarmyards=farmyards(state).map(f=>f.id);
     for(const id of Object.keys(state.personas))if(isCaregiver(state,id))state.mechanics!.people[id].caregiverWorkedWinter=state.time.winter;
     const unavailable=new Set(Object.keys(state.personas).filter(id=>state.mechanics!.people[id].caregiverWorkedWinter===state.time.winter));
+    const nextTick=(state.time.tick+1)%state.ticksPerWinter;
+    const nextWinter=state.time.winter+(nextTick===0?1:0);
+    let careExpires=false;
     const produced:{id:string;resource:'food'|'materials';units:number}[]=[];
     for(const id of Object.keys(state.personas).sort()) {
         const person=state.personas[id], role=person.occupation;
+        const care=state.mechanics!.people[id];
+        if(care.childcareUntilTick!==undefined&&care.childcareUntilWinter===nextWinter&&care.childcareUntilTick===nextTick)careExpires=true;
         if(personaAway(state,id) || isProvidingCare(state,id) || person.deathWinter!==null || role===null || personaAge(state,id)<config.workAge)continue;
         const work=inspectWork(state,id),job=config.occupations[role];
         if(job.resource===null)continue;
@@ -161,7 +168,10 @@ export function stepMechanicsTick(state:SimulationState):void {
         resolveCattleBirths(state,bps=>chance(state,bps));
         determineWeather(state);
     }
+    if(careExpires&&state.time.tick!==0)resolveCaregivers(state,(type,id,details)=>emit(state,type,id,details));
     stepWorld(state);
+    if(resolveScheduledBirths(state,(type,id,details)=>emit(state,type,id,details)))
+        resolveCaregivers(state,(type,id,details)=>emit(state,type,id,details));
     pruneSocialIncidents(state);
     if(annualFoodEvent)evaluateSocialYear(state,annualFoodEvent);
 }
@@ -338,6 +348,7 @@ export function validateMechanics(state:SimulationState):void {
         const person=state.personas[id],info=mechanics.people[id];if(!info)fail('Missing persona mechanics');
         if(!householdMembers.has(id)&&person.deathWinter===null)fail('Living persona needs a household');
         if(typeof info.occupationLocked!=='boolean'||typeof info.caregiverLocked!=='boolean')fail('Invalid player control');
+        if(info.childcareUntilTick!==undefined)uint(info.childcareUntilTick,'childcare tick',state.ticksPerWinter-1);
         uint(info.switchedUntilTick,'switch timestamp');uint(info.childcareUntilWinter,'childcare endpoint');
         if(info.caregiverWorkedWinter!==null){uint(info.caregiverWorkedWinter,'caregiver participation');if(info.caregiverWorkedWinter>state.time.winter)fail('Future caregiving');}
         if(info.lastBirthWinter!==null){uint(info.lastBirthWinter,'last birth');if(info.lastBirthWinter>state.time.winter||info.lastBirthWinter<person.birthWinter)fail('Invalid last birth');}
@@ -348,10 +359,10 @@ export function validateMechanics(state:SimulationState):void {
         for(const [trait,parent] of Object.entries(info.dominantLegacy))if(!traitKeys.includes(trait as TraitKey)||!person.parentIds.includes(parent))fail('Invalid dominant legacy source');
         if(info.caregiverId!==null){
             const donor=state.personas[info.caregiverId];
-            if(!donor||donor.deathWinter!==null||donor.dna.sex!=='female'||donor.occupation!==null||personaAge(state,donor.id)<config.adultAge||donor.id===id||info.childcareUntilWinter<=state.time.winter)fail('Invalid caregiver');
+            if(!donor||donor.deathWinter!==null||donor.dna.sex!=='female'||donor.occupation!==null||personaAge(state,donor.id)<config.adultAge||donor.id===id||!careActive(state,info))fail('Invalid caregiver');
             if(carers.has(donor.id))fail('Caregiver serves multiple groups');carers.add(donor.id);
         }
-        for(const parent of person.parentIds)if(personaIdentity(state,parent)!.birthWinter>=person.birthWinter)fail('Invalid genealogy chronology');
+        for(const parent of person.parentIds){const identity=personaIdentity(state,parent)!;if(identity.birthWinter*state.ticksPerWinter+(identity.birthTick??0)>=person.birthWinter*state.ticksPerWinter+(person.birthTick??0))fail('Invalid genealogy chronology');}
         if(person.partnerId!==null&&(state.personas[person.partnerId].partnerId!==id||prohibitedKinship(state,id,person.partnerId)))fail('Invalid partnership');
     }
     if(!mechanics.buildings||Object.keys(mechanics.buildings).length!==Object.keys(state.buildings).length)fail('Missing building mechanics');

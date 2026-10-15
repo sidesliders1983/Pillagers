@@ -1,0 +1,1161 @@
+{
+  "baseline": "a20bac1",
+  "implementationCommit": "96af0fadeb46646a7ab9625be059070784877cdc",
+  "ticksPerRun": 1000,
+  "repeats": 3,
+  "note": "Synthetic adult population fixtures; timing variants alternate order. Baseline and legacy-current use identical saved states. Individual mode preserves initial DNA/age with independent birthdays; its later economy may differ by design. No browser or wardrobe CPU is included.",
+  "rows": [
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 318.80330000000004,
+      "commands": {
+        "count": 100,
+        "totalMs": 318.56249999999955,
+        "medianMs": 2.9779000000000906,
+        "p95Ms": 4.113900000000058,
+        "maxMs": 21.608600000000024
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 302.14880000000016,
+      "commands": {
+        "count": 100,
+        "totalMs": 301.90119999999956,
+        "medianMs": 2.876800000000003,
+        "p95Ms": 4.144399999999905,
+        "maxMs": 4.830099999999902
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 367.0976999999998,
+      "commands": {
+        "count": 100,
+        "totalMs": 366.87179999999944,
+        "medianMs": 2.966899999999896,
+        "p95Ms": 6.853100000000268,
+        "maxMs": 7.926000000000386
+      },
+      "snapshotBytes": 78443
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 234.73560000000043,
+      "commands": {
+        "count": 100,
+        "totalMs": 234.62789999999723,
+        "medianMs": 2.23700000000008,
+        "p95Ms": 3.4101999999998043,
+        "maxMs": 5.5671000000002095
+      },
+      "snapshotBytes": 78443
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 227.5318000000002,
+      "commands": {
+        "count": 100,
+        "totalMs": 227.39820000000054,
+        "medianMs": 2.1368999999999687,
+        "p95Ms": 3.3258999999998196,
+        "maxMs": 3.73299999999972
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 246.87530000000015,
+      "commands": {
+        "count": 100,
+        "totalMs": 246.76689999999962,
+        "medianMs": 2.29300000000012,
+        "p95Ms": 3.9014000000001943,
+        "maxMs": 4.801500000000033
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 245.58780000000024,
+      "commands": {
+        "count": 100,
+        "totalMs": 245.45029999999815,
+        "medianMs": 2.302599999999984,
+        "p95Ms": 3.6709999999998217,
+        "maxMs": 4.439300000000003
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 227.0337999999997,
+      "commands": {
+        "count": 100,
+        "totalMs": 226.91709999999875,
+        "medianMs": 2.160500000000411,
+        "p95Ms": 3.167699999999968,
+        "maxMs": 3.8370999999997366
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 218.5056000000004,
+      "commands": {
+        "count": 100,
+        "totalMs": 218.40320000000065,
+        "medianMs": 2.094600000000355,
+        "p95Ms": 3.086899999999332,
+        "maxMs": 3.721799999999348
+      },
+      "snapshotBytes": 78443
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 47.10909999999967,
+      "commands": {
+        "count": 1,
+        "totalMs": 47.107199999999466,
+        "medianMs": 47.107199999999466,
+        "p95Ms": 47.107199999999466,
+        "maxMs": 47.107199999999466
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 49.46030000000064,
+      "commands": {
+        "count": 1,
+        "totalMs": 49.45809999999983,
+        "medianMs": 49.45809999999983,
+        "p95Ms": 49.45809999999983,
+        "maxMs": 49.45809999999983
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 48.05279999999948,
+      "commands": {
+        "count": 1,
+        "totalMs": 48.05109999999968,
+        "medianMs": 48.05109999999968,
+        "p95Ms": 48.05109999999968,
+        "maxMs": 48.05109999999968
+      },
+      "snapshotBytes": 78443
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 52.08560000000034,
+      "commands": {
+        "count": 1,
+        "totalMs": 52.08389999999963,
+        "medianMs": 52.08389999999963,
+        "p95Ms": 52.08389999999963,
+        "maxMs": 52.08389999999963
+      },
+      "snapshotBytes": 78443
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 48.14919999999984,
+      "commands": {
+        "count": 1,
+        "totalMs": 48.14730000000054,
+        "medianMs": 48.14730000000054,
+        "p95Ms": 48.14730000000054,
+        "maxMs": 48.14730000000054
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 44.72940000000017,
+      "commands": {
+        "count": 1,
+        "totalMs": 44.727499999999964,
+        "medianMs": 44.727499999999964,
+        "p95Ms": 44.727499999999964,
+        "maxMs": 44.727499999999964
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 46.5034999999998,
+      "commands": {
+        "count": 1,
+        "totalMs": 46.5016999999998,
+        "medianMs": 46.5016999999998,
+        "p95Ms": 46.5016999999998,
+        "maxMs": 46.5016999999998
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 53.10900000000038,
+      "commands": {
+        "count": 1,
+        "totalMs": 53.10690000000068,
+        "medianMs": 53.10690000000068,
+        "p95Ms": 53.10690000000068,
+        "maxMs": 53.10690000000068
+      },
+      "snapshotBytes": 77810
+    },
+    {
+      "populationPerClan": 10,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 58.17270000000008,
+      "commands": {
+        "count": 1,
+        "totalMs": 58.17119999999977,
+        "medianMs": 58.17119999999977,
+        "p95Ms": 58.17119999999977,
+        "maxMs": 58.17119999999977
+      },
+      "snapshotBytes": 78443
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 498.1930000000002,
+      "commands": {
+        "count": 100,
+        "totalMs": 498.0365000000029,
+        "medianMs": 4.891400000000431,
+        "p95Ms": 6.535799999999654,
+        "maxMs": 12.293899999999667
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 478.14820000000054,
+      "commands": {
+        "count": 100,
+        "totalMs": 477.99280000001,
+        "medianMs": 4.7739999999994325,
+        "p95Ms": 5.96140000000014,
+        "maxMs": 7.336900000000242
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 494.41269999999986,
+      "commands": {
+        "count": 100,
+        "totalMs": 494.2464999999993,
+        "medianMs": 4.869200000000092,
+        "p95Ms": 6.559900000000198,
+        "maxMs": 8.04910000000018
+      },
+      "snapshotBytes": 155035
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 467.1921999999995,
+      "commands": {
+        "count": 100,
+        "totalMs": 467.02219999999943,
+        "medianMs": 4.616399999999885,
+        "p95Ms": 5.887700000000223,
+        "maxMs": 6.362699999999677
+      },
+      "snapshotBytes": 155035
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 467.08760000000075,
+      "commands": {
+        "count": 100,
+        "totalMs": 466.92790000000514,
+        "medianMs": 4.6773999999995794,
+        "p95Ms": 6.311900000000605,
+        "maxMs": 6.962600000000748
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 471.16239999999925,
+      "commands": {
+        "count": 100,
+        "totalMs": 470.9653000000035,
+        "medianMs": 4.60360000000037,
+        "p95Ms": 6.291199999999662,
+        "maxMs": 6.770300000000134
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 444.6941000000006,
+      "commands": {
+        "count": 100,
+        "totalMs": 444.5417000000016,
+        "medianMs": 4.360800000000381,
+        "p95Ms": 5.708300000000236,
+        "maxMs": 5.860099999999875
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 530.972600000001,
+      "commands": {
+        "count": 100,
+        "totalMs": 530.7763000000032,
+        "medianMs": 5.023799999999028,
+        "p95Ms": 8.19170000000122,
+        "maxMs": 9.439400000001115
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 481.39650000000074,
+      "commands": {
+        "count": 100,
+        "totalMs": 481.19149999999354,
+        "medianMs": 4.74120000000039,
+        "p95Ms": 6.031800000000658,
+        "maxMs": 7.015099999998711
+      },
+      "snapshotBytes": 155035
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 151.57940000000053,
+      "commands": {
+        "count": 1,
+        "totalMs": 151.57690000000002,
+        "medianMs": 151.57690000000002,
+        "p95Ms": 151.57690000000002,
+        "maxMs": 151.57690000000002
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 163.89689999999973,
+      "commands": {
+        "count": 1,
+        "totalMs": 163.89420000000064,
+        "medianMs": 163.89420000000064,
+        "p95Ms": 163.89420000000064,
+        "maxMs": 163.89420000000064
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 169.3890999999985,
+      "commands": {
+        "count": 1,
+        "totalMs": 169.38680000000022,
+        "medianMs": 169.38680000000022,
+        "p95Ms": 169.38680000000022,
+        "maxMs": 169.38680000000022
+      },
+      "snapshotBytes": 155035
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 169.59640000000036,
+      "commands": {
+        "count": 1,
+        "totalMs": 169.59350000000086,
+        "medianMs": 169.59350000000086,
+        "p95Ms": 169.59350000000086,
+        "maxMs": 169.59350000000086
+      },
+      "snapshotBytes": 155035
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 172.14760000000024,
+      "commands": {
+        "count": 1,
+        "totalMs": 172.14459999999963,
+        "medianMs": 172.14459999999963,
+        "p95Ms": 172.14459999999963,
+        "maxMs": 172.14459999999963
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 149.95490000000063,
+      "commands": {
+        "count": 1,
+        "totalMs": 149.95249999999942,
+        "medianMs": 149.95249999999942,
+        "p95Ms": 149.95249999999942,
+        "maxMs": 149.95249999999942
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 151.01020000000062,
+      "commands": {
+        "count": 1,
+        "totalMs": 151.0070999999989,
+        "medianMs": 151.0070999999989,
+        "p95Ms": 151.0070999999989,
+        "maxMs": 151.0070999999989
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 165.5689000000002,
+      "commands": {
+        "count": 1,
+        "totalMs": 165.56540000000132,
+        "medianMs": 165.56540000000132,
+        "p95Ms": 165.56540000000132,
+        "maxMs": 165.56540000000132
+      },
+      "snapshotBytes": 153689
+    },
+    {
+      "populationPerClan": 25,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 174.15840000000026,
+      "commands": {
+        "count": 1,
+        "totalMs": 174.15480000000025,
+        "medianMs": 174.15480000000025,
+        "p95Ms": 174.15480000000025,
+        "maxMs": 174.15480000000025
+      },
+      "snapshotBytes": 155035
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 1176.9123,
+      "commands": {
+        "count": 100,
+        "totalMs": 1176.7155000000002,
+        "medianMs": 11.389400000000023,
+        "p95Ms": 15.663199999999051,
+        "maxMs": 18.03809999999976
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 1081.2284999999993,
+      "commands": {
+        "count": 100,
+        "totalMs": 1081.0125999999964,
+        "medianMs": 10.708400000001348,
+        "p95Ms": 12.647399999998015,
+        "maxMs": 13.825600000000122
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 1090.8407000000007,
+      "commands": {
+        "count": 100,
+        "totalMs": 1090.6238999999878,
+        "medianMs": 10.9529999999977,
+        "p95Ms": 12.699000000000524,
+        "maxMs": 13.601999999998952
+      },
+      "snapshotBytes": 285184
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 1078.0648,
+      "commands": {
+        "count": 100,
+        "totalMs": 1077.8650999999882,
+        "medianMs": 10.8679000000011,
+        "p95Ms": 12.358000000000175,
+        "maxMs": 13.553100000000995
+      },
+      "snapshotBytes": 285184
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 1087.1450000000004,
+      "commands": {
+        "count": 100,
+        "totalMs": 1086.952199999978,
+        "medianMs": 10.834599999998318,
+        "p95Ms": 12.850399999999354,
+        "maxMs": 13.716899999999441
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 1040.0761999999995,
+      "commands": {
+        "count": 100,
+        "totalMs": 1039.8909000000058,
+        "medianMs": 10.219700000001467,
+        "p95Ms": 12.504000000000815,
+        "maxMs": 14.577399999998306
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 1056.5594999999994,
+      "commands": {
+        "count": 100,
+        "totalMs": 1056.3774000000085,
+        "medianMs": 10.209399999999732,
+        "p95Ms": 14.16649999999936,
+        "maxMs": 17.238799999999173
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 1072.5927999999985,
+      "commands": {
+        "count": 100,
+        "totalMs": 1072.3996000000116,
+        "medianMs": 10.766300000002957,
+        "p95Ms": 12.664700000001176,
+        "maxMs": 13.052800000001298
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 1082.3244000000013,
+      "commands": {
+        "count": 100,
+        "totalMs": 1082.1292999999714,
+        "medianMs": 11.011200000000827,
+        "p95Ms": 12.366799999999785,
+        "maxMs": 13.039199999999255
+      },
+      "snapshotBytes": 285184
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 499.5632000000005,
+      "commands": {
+        "count": 1,
+        "totalMs": 499.5586000000003,
+        "medianMs": 499.5586000000003,
+        "p95Ms": 499.5586000000003,
+        "maxMs": 499.5586000000003
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 547.9995000000017,
+      "commands": {
+        "count": 1,
+        "totalMs": 547.9932999999983,
+        "medianMs": 547.9932999999983,
+        "p95Ms": 547.9932999999983,
+        "maxMs": 547.9932999999983
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 549.879200000003,
+      "commands": {
+        "count": 1,
+        "totalMs": 549.8765999999996,
+        "medianMs": 549.8765999999996,
+        "p95Ms": 549.8765999999996,
+        "maxMs": 549.8765999999996
+      },
+      "snapshotBytes": 285184
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 540.0451999999968,
+      "commands": {
+        "count": 1,
+        "totalMs": 540.0413000000008,
+        "medianMs": 540.0413000000008,
+        "p95Ms": 540.0413000000008,
+        "maxMs": 540.0413000000008
+      },
+      "snapshotBytes": 285184
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 542.5031999999992,
+      "commands": {
+        "count": 1,
+        "totalMs": 542.497500000005,
+        "medianMs": 542.497500000005,
+        "p95Ms": 542.497500000005,
+        "maxMs": 542.497500000005
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 491.82709999999497,
+      "commands": {
+        "count": 1,
+        "totalMs": 491.82130000000325,
+        "medianMs": 491.82130000000325,
+        "p95Ms": 491.82130000000325,
+        "maxMs": 491.82130000000325
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 509.57850000000326,
+      "commands": {
+        "count": 1,
+        "totalMs": 509.5757999999987,
+        "medianMs": 509.5757999999987,
+        "p95Ms": 509.5757999999987,
+        "maxMs": 509.5757999999987
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 539.7181000000055,
+      "commands": {
+        "count": 1,
+        "totalMs": 539.7160000000003,
+        "medianMs": 539.7160000000003,
+        "p95Ms": 539.7160000000003,
+        "maxMs": 539.7160000000003
+      },
+      "snapshotBytes": 282644
+    },
+    {
+      "populationPerClan": 50,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 546.3923000000068,
+      "commands": {
+        "count": 1,
+        "totalMs": 546.3886999999959,
+        "medianMs": 546.3886999999959,
+        "p95Ms": 546.3886999999959,
+        "maxMs": 546.3886999999959
+      },
+      "snapshotBytes": 285184
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 2877.6368,
+      "commands": {
+        "count": 100,
+        "totalMs": 2877.4787000000215,
+        "medianMs": 28.815699999999197,
+        "p95Ms": 31.813099999999395,
+        "maxMs": 37.25200000000041
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 2840.7672999999995,
+      "commands": {
+        "count": 100,
+        "totalMs": 2840.588100000001,
+        "medianMs": 27.929299999996147,
+        "p95Ms": 33.910799999997835,
+        "maxMs": 43.195299999999406
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 2781.2625000000044,
+      "commands": {
+        "count": 100,
+        "totalMs": 2781.053199999995,
+        "medianMs": 27.805099999997765,
+        "p95Ms": 31.728599999994913,
+        "maxMs": 36.90989999999874
+      },
+      "snapshotBytes": 543828
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 2773.4159,
+      "commands": {
+        "count": 100,
+        "totalMs": 2773.197199999966,
+        "medianMs": 27.4291000000012,
+        "p95Ms": 32.4745999999941,
+        "maxMs": 37.89140000000043
+      },
+      "snapshotBytes": 543828
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 2858.1581000000006,
+      "commands": {
+        "count": 100,
+        "totalMs": 2857.9584999999934,
+        "medianMs": 28.0170999999973,
+        "p95Ms": 37.45049999999901,
+        "maxMs": 40.84459999999672
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 2930.8975000000064,
+      "commands": {
+        "count": 100,
+        "totalMs": 2930.6760000000213,
+        "medianMs": 28.375599999999395,
+        "p95Ms": 40.52820000000065,
+        "maxMs": 45.31680000000051
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 2587.9047999999893,
+      "commands": {
+        "count": 100,
+        "totalMs": 2587.7399000000732,
+        "medianMs": 25.83200000000943,
+        "p95Ms": 29.066500000000815,
+        "maxMs": 33.26489999999467
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 2751.4079000000056,
+      "commands": {
+        "count": 100,
+        "totalMs": 2751.1992000000027,
+        "medianMs": 27.614399999991292,
+        "p95Ms": 30.669699999998556,
+        "maxMs": 34.90490000000864
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 10,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 2744.0598000000027,
+      "commands": {
+        "count": 100,
+        "totalMs": 2743.846899999946,
+        "medianMs": 27.43739999999525,
+        "p95Ms": 31.15110000000277,
+        "maxMs": 37.516499999997905
+      },
+      "snapshotBytes": 543828
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "baseline",
+      "elapsedMs": 1539.1201999999903,
+      "commands": {
+        "count": 1,
+        "totalMs": 1539.118100000007,
+        "medianMs": 1539.118100000007,
+        "p95Ms": 1539.118100000007,
+        "maxMs": 1539.118100000007
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "legacy-current",
+      "elapsedMs": 1732.6278999999922,
+      "commands": {
+        "count": 1,
+        "totalMs": 1732.625199999995,
+        "medianMs": 1732.625199999995,
+        "p95Ms": 1732.625199999995,
+        "maxMs": 1732.625199999995
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 0,
+      "variant": "individual",
+      "elapsedMs": 1707.9288000000088,
+      "commands": {
+        "count": 1,
+        "totalMs": 1707.9263999999966,
+        "medianMs": 1707.9263999999966,
+        "p95Ms": 1707.9263999999966,
+        "maxMs": 1707.9263999999966
+      },
+      "snapshotBytes": 543828
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "individual",
+      "elapsedMs": 1700.5354999999981,
+      "commands": {
+        "count": 1,
+        "totalMs": 1700.5299999999988,
+        "medianMs": 1700.5299999999988,
+        "p95Ms": 1700.5299999999988,
+        "maxMs": 1700.5299999999988
+      },
+      "snapshotBytes": 543828
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "legacy-current",
+      "elapsedMs": 1717.0493000000133,
+      "commands": {
+        "count": 1,
+        "totalMs": 1717.044900000008,
+        "medianMs": 1717.044900000008,
+        "p95Ms": 1717.044900000008,
+        "maxMs": 1717.044900000008
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 1,
+      "variant": "baseline",
+      "elapsedMs": 1570.6647000000085,
+      "commands": {
+        "count": 1,
+        "totalMs": 1570.6622000000061,
+        "medianMs": 1570.6622000000061,
+        "p95Ms": 1570.6622000000061,
+        "maxMs": 1570.6622000000061
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "baseline",
+      "elapsedMs": 1531.9353999999876,
+      "commands": {
+        "count": 1,
+        "totalMs": 1531.9302000000025,
+        "medianMs": 1531.9302000000025,
+        "p95Ms": 1531.9302000000025,
+        "maxMs": 1531.9302000000025
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "legacy-current",
+      "elapsedMs": 1838.7744999999995,
+      "commands": {
+        "count": 1,
+        "totalMs": 1838.772299999997,
+        "medianMs": 1838.772299999997,
+        "p95Ms": 1838.772299999997,
+        "maxMs": 1838.772299999997
+      },
+      "snapshotBytes": 538899
+    },
+    {
+      "populationPerClan": 100,
+      "clans": 3,
+      "batch": 1000,
+      "repeat": 2,
+      "variant": "individual",
+      "elapsedMs": 1738.9372999999905,
+      "commands": {
+        "count": 1,
+        "totalMs": 1738.9339999999938,
+        "medianMs": 1738.9339999999938,
+        "p95Ms": 1738.9339999999938,
+        "maxMs": 1738.9339999999938
+      },
+      "snapshotBytes": 543828
+    }
+  ]
+}

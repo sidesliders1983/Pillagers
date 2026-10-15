@@ -86,3 +86,17 @@ Rules:
 - player may assign/replace caregiver.
 
 Birth cooldown and care are independent: a birth at Winter 801 blocks birth opportunities at 802 and 803, with the next opportunity at 804 subject to existing fertility rules. Care lasts until 806 unless a younger child renews the group. Transferring care preserves both endpoints and assigns only the remaining care period. Explicit saved care settings/endpoints, including two-Winter playtest saves, are preserved on load and saved-rule restarts.
+
+
+## PERSON-005 / FAMILY-006 — Individual birthday calendar (#171)
+**Status:** Implemented as explicit review opt-in; owner acceptance required before default activation.
+
+New campaigns explicitly choosing individual-v1 store a version-1 birthdayCalendar extension. Founders use an independent named seed stream for birthTick (0–999); birthWinter is the literal historical year adjusted to preserve the generated age at Summer 800:500. Collisions are valid. CharacterDNA.age is not mutated as the authoritative clock. Completed age, productivity, eligibility and projected visual age use personaAge. Deaths in this mode retain deathTick, and archived departure ages stop at the observed transfer time.
+
+The annual tick-0 eligibility/probability decision remains once per year with the same configured chance and conditions. A success samples child DNA/parents and saves a delivery for tick 1–999 of that year. The actual child and ChildBorn event appear at delivery, with matching birthWinter/birthTick. No second fertility or Food check is applied. An away mother delivers on return; a transferred mother's pending plan and necessary parental identities follow her. Maternal death cancels the plan explicitly; paternal death/departure does not erase parentage. No conception or unborn-person life facts are narrated.
+
+Care lasts the configured number of full years from actual delivery, to the same tick in the end year. Later delivery renews it. A helper starting her own care at delivery is released from her prior care group. Existing maternal fertility policy is preserved: own childcare does not add a new exclusion; saved birth cooldown and annual helper-participation exclusions still apply. Legacy care endpoints retain their tick-0 interpretation.
+
+Annual economics, consumption, mortality rolls, weather, career/partnership reviews and Saga publication retain their existing schedule. They consult completed age at their execution tick. Birthday changes do not create additional mortality or career rolls. Large and single-tick advances process the same domestic and CPU-clan facts in the same order.
+
+Old saves are not backfilled or migrated. Missing birthTick means tick 0. Missing birthdayCalendar means annual legacy births. An old clan receiving a foreign pending delivery stores only that delivery with birthPolicy annual; its own births and existing birthday dates retain their old rules. New/Restart preserves the explicit chosen policy. Import preserves the saved mode. Default new-game activation remains gated on review; the opt-in URL is /fjord-play?birthdays=individual-v1.

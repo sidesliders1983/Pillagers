@@ -1,3 +1,4 @@
+import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import type { CampaignGeography } from '../fjord-play/CampaignIsland';
 import { historyIdentity } from '../lore/ClanBook';
 import { projectSelection } from './SelectionPresentation';
@@ -72,7 +73,7 @@ export class SharedSettlement {
     }
     newCampaign(seed: number, weatherEnabled: boolean, socialEnabled = true, geography?: CampaignGeography, foundingPhase = this.session.snapshot().foundingPhase) {
         const proposal = new GameplaySession();
-        proposal.newCampaign(seed, weatherEnabled, socialEnabled, foundingPhase);
+        proposal.newCampaign(seed, weatherEnabled, socialEnabled, foundingPhase, birthdayCalendarMode(this.session.readSnapshot()));
         this.fjord.startCampaign(proposal, geography);
     }
     restart(sameFounders: boolean, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false, foundingPhase = this.session.snapshot().foundingPhase) {

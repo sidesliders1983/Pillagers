@@ -1,3 +1,6 @@
+import { birthdayCalendarMode } from './BirthdayCalendar';
+import { careActive } from './CareCalendar';
+import { scheduleBirth } from './ScheduledBirths';
 import {personaIdentity} from './Identity';
 import {personaAway} from './WorldExpeditions';
 import {characterName, fullName} from '../characters/naming/generateName';
@@ -48,11 +51,13 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
     for(const motherId of Object.keys(state.personas).sort()){
         const mother=state.personas[motherId],info=state.mechanics!.people[motherId];
         const age=personaAge(state,motherId);
+        if(state.birthdayCalendar?.pendingBirths.some(birth => birth.motherId === motherId))continue;
         if(personaAway(state,motherId)||unavailable.has(motherId)||isCaregiver(state,motherId)||mother.deathWinter!==null||mother.dna.sex!=='female'||age<config.fertilityMinAge||age>config.fertilityMaxAge||mother.partnerId===null)continue;
         const father=state.personas[mother.partnerId];if(personaAway(state,father.id)||father.deathWinter!==null||father.dna.sex!=='male')continue;
         if(info.lastBirthWinter!==null&&state.time.winter-info.lastBirthWinter<=config.birthCooldownWinters)continue;
         if(state.stocks.food<foodNeed()||!roll(config.fertilityChanceBps))continue;
         const home=Object.values(state.households).find(h=>h.memberIds.includes(motherId));if(!home)continue;
+        if(birthdayCalendarMode(state)){scheduleBirth(state,motherId,father.id,roll,random,emit);continue;}
         let n=1;while(Object.hasOwn(state.personas,`${state.entityPrefix??''}persona-${n}`)||Object.hasOwn(state.personaArchive??{},`${state.entityPrefix??''}persona-${n}`))n++;const id=`${state.entityPrefix??''}persona-${n}`;
         const dna=generateCharacterDNA(random());dna.age=0;dna.sex=roll(5000)?'female':'male';
         dna.traits=Object.fromEntries(traitKeys.map(key=>[key,(mother.dna.traits[key]+father.dna.traits[key])/2])) as CoreTraits;
@@ -72,11 +77,11 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
 }
 
 export function isCaregiver(state:SimulationState,id:string):boolean {
-    return Object.values(state.mechanics!.people).some(info=>info.childcareUntilWinter>state.time.winter&&info.caregiverId===id);
+    return Object.values(state.mechanics!.people).some(info=>info.caregiverId===id&&careActive(state,info));
 }
 export function isProvidingCare(state:SimulationState,id:string):boolean {
     const info=state.mechanics!.people[id];
-    return isCaregiver(state,id)||(info.childcareUntilWinter>state.time.winter&&info.caregiverId===null);
+    return isCaregiver(state,id)||(careActive(state,info)&&info.caregiverId===null);
 }
 export function caregiverEligible(state:SimulationState,id:string):boolean {
     const person=state.personas[id];
@@ -84,7 +89,7 @@ export function caregiverEligible(state:SimulationState,id:string):boolean {
 }
 export function assignCaregiver(state:SimulationState,motherId:string,caregiverId:string|null,locked:boolean,emit:EventWriter):void {
     const mother=state.personas[motherId],info=state.mechanics!.people[motherId];
-    if(!mother||mother.deathWinter!==null||mother.dna.sex!=='female'||info.childcareUntilWinter<=state.time.winter)throw new Error('No active childcare group');
+    if(!mother||mother.deathWinter!==null||mother.dna.sex!=='female'||!careActive(state,info))throw new Error('No active childcare group');
     if(caregiverId!==null&&caregiverId!==info.caregiverId&&!caregiverEligible(state,caregiverId))throw new Error('Ineligible caregiver');
     info.caregiverId=caregiverId;info.caregiverLocked=locked;
     emit('CaregiverAssigned',motherId,{caregiverId,participants:caregiverId?[motherId,caregiverId]:[motherId],autonomous:!locked});
@@ -92,7 +97,7 @@ export function assignCaregiver(state:SimulationState,motherId:string,caregiverI
 export function resolveCaregivers(state:SimulationState,emit:EventWriter):void {
     for(const motherId of Object.keys(state.mechanics!.people).sort()){
         const info=state.mechanics!.people[motherId];
-        if(info.childcareUntilWinter<=state.time.winter){info.caregiverId=null;info.caregiverLocked=false;continue;}
+        if(!careActive(state,info)){info.caregiverId=null;info.caregiverLocked=false;continue;}
         // A new birth can renew an expired group after its donor resumed work this boundary.
         if(info.caregiverId!==null){
             const donor=state.personas[info.caregiverId];
