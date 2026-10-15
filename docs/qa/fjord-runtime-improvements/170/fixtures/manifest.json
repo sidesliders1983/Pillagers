@@ -1,0 +1,26 @@
+{
+  "records": [
+    {
+      "name": "boundary-810",
+      "sha256": "1d3e2e52fecae8f61e1951bb4c3a60dfcbff8be3a196fa2173f22be3b4c9bf61",
+      "copiedFrozenInput": true
+    },
+    {
+      "name": "developed-810",
+      "sha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "copiedFrozenInput": true
+    },
+    {
+      "name": "later-boundary-811",
+      "sha256": "14c90ed403c517c8b1d600074c7b6e269f60bc3f26dcc275c94fc2fcf1e5705a",
+      "derivedFrom": "boundary-810",
+      "commands": [
+        {
+          "type": "AdvanceTicks",
+          "ticks": 1000
+        }
+      ],
+      "note": "Restored complete frozen campaign/narrative identity and applied authoritative commands through SharedSettlement before persisting."
+    }
+  ]
+}

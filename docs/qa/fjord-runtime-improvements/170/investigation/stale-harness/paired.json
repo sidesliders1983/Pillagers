@@ -1,0 +1,2485 @@
+{
+  "group": "paired",
+  "assetEnvironment": "owner-prepared-houses",
+  "sourceCommit": "6a7582248cbb01d041a65c1c78a5ff8532a70693",
+  "variants": [
+    {
+      "label": "before",
+      "origin": "http://127.0.0.1:5193",
+      "sourceCommit": "8860e53ad4883f3bdf9663d629a42fcc75338f49"
+    },
+    {
+      "label": "after",
+      "origin": "http://127.0.0.1:5190",
+      "sourceCommit": "6a7582248cbb01d041a65c1c78a5ff8532a70693"
+    }
+  ],
+  "sourceMode": "Vite development modules, QA-only bridge; native profiling only in scenarios with profile=true",
+  "origin": "http://127.0.0.1:5190",
+  "warmupMs": 5000,
+  "sampleMs": 20000,
+  "browserVersion": "155.0.4283.45",
+  "startedAt": "2026-10-15T14:20:59.692Z",
+  "fixtures": [
+    {
+      "name": "boundary-810",
+      "sha256": "1d3e2e52fecae8f61e1951bb4c3a60dfcbff8be3a196fa2173f22be3b4c9bf61",
+      "loadedSha256": "ea50dee8dbec2d5c9e4b6f4422486d2ceeea01d08fe153fc6ea3313f67c20020"
+    }
+  ],
+  "runs": [
+    {
+      "scenario": {
+        "fixture": "boundary-810",
+        "running": true,
+        "minutes": 1,
+        "commands": 40,
+        "tickPattern": [
+          8,
+          8,
+          9
+        ],
+        "profile": true,
+        "cpuOnly": true,
+        "screenshot": true
+      },
+      "repeat": 1,
+      "variant": "before",
+      "sourceCommit": "8860e53ad4883f3bdf9663d629a42fcc75338f49",
+      "before": {
+        "time": {
+          "winter": 810,
+          "tick": 990
+        },
+        "seed": 32,
+        "events": 641,
+        "residents": 17,
+        "cattle": 8,
+        "recipe": 18,
+        "running": false,
+        "minutes": 1,
+        "motion": {
+          "routeAttempts": 0,
+          "rejectedRoutes": 0,
+          "targetAttempts": 0,
+          "rejectedTargets": 0,
+          "routeNodes": 0,
+          "maxRouteNodes": 0,
+          "updates": 0,
+          "lastUpdateMs": 0,
+          "maxUpdateMs": 0,
+          "totalUpdateMs": 0,
+          "yardRepackAttempts": 0,
+          "yardRepackNodes": 0,
+          "yardRepackFailures": 0,
+          "presentationSteps": 0,
+          "activeSeconds": 0,
+          "visitsStarted": 0,
+          "occupationArrivals": 0,
+          "activitiesCompleted": 0,
+          "homeArrivals": 0,
+          "visitsCancelled": 0,
+          "distanceWalked": 0,
+          "failedRouteReuse": 0,
+          "homeTrailReuse": 0,
+          "navigationGeneration": 6,
+          "reservationGeneration": 0,
+          "retainedHomeWaypoints": 0,
+          "agents": 18,
+          "reservations": 0,
+          "occupationVisits": 0,
+          "outOfZone": 0,
+          "bodyOverlaps": 0
+        },
+        "resources": {
+          "actors": 18,
+          "sourceTemplates": 4,
+          "ownedInstanceRoots": 0
+        },
+        "counts": {
+          "meshes": 79,
+          "visibleMeshes": 78,
+          "skinnedMeshes": 44,
+          "transparentMeshes": 10,
+          "alphaTestMeshes": 3,
+          "shadowCasters": 68,
+          "bones": 1966
+        },
+        "materials": 59,
+        "renderer": {
+          "render": {
+            "frame": 62,
+            "calls": 79,
+            "triangles": 3736873,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 62,
+            "textures": 69
+          },
+          "programs": 25,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "camera": {
+          "position": [
+            98,
+            34.46178960800171,
+            114
+          ],
+          "target": [
+            70,
+            4.461789608001709,
+            146
+          ]
+        },
+        "fire": {
+          "key": "settlement-campfire",
+          "lit": false,
+          "heat": 0,
+          "time": 0,
+          "quality": "low",
+          "reducedMotion": false,
+          "particles": 0,
+          "systems": 3,
+          "batches": 2,
+          "visible": true,
+          "snowMultiplier": 1
+        },
+        "precipitation": {
+          "targetSnow": 0.995328,
+          "targetRain": 0.0046720000000000095,
+          "quality": "low",
+          "reducedMotion": false,
+          "enabled": true,
+          "time": 0,
+          "snow": 0,
+          "rain": 0,
+          "snowWeight": 0,
+          "rainWeight": 0,
+          "radius": 25,
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "batches": 2
+        },
+        "visibility": "visible"
+      },
+      "after": {
+        "time": {
+          "winter": 811,
+          "tick": 323
+        },
+        "seed": 32,
+        "events": 674,
+        "residents": 18,
+        "cattle": 9,
+        "recipe": 18,
+        "running": false,
+        "minutes": 1,
+        "motion": {
+          "routeAttempts": 12,
+          "rejectedRoutes": 0,
+          "targetAttempts": 1,
+          "rejectedTargets": 0,
+          "routeNodes": 4240,
+          "maxRouteNodes": 431,
+          "updates": 143,
+          "lastUpdateMs": 0.5,
+          "maxUpdateMs": 48,
+          "totalUpdateMs": 310.0000000447035,
+          "yardRepackAttempts": 0,
+          "yardRepackNodes": 0,
+          "yardRepackFailures": 0,
+          "presentationSteps": 212,
+          "activeSeconds": 13.361200000002976,
+          "visitsStarted": 1,
+          "occupationArrivals": 0,
+          "activitiesCompleted": 0,
+          "homeArrivals": 0,
+          "visitsCancelled": 0,
+          "distanceWalked": 39.471881367447146,
+          "failedRouteReuse": 0,
+          "homeTrailReuse": 0,
+          "navigationGeneration": 10,
+          "reservationGeneration": 5,
+          "retainedHomeWaypoints": 36,
+          "agents": 19,
+          "reservations": 1,
+          "occupationVisits": 1,
+          "outOfZone": 0,
+          "bodyOverlaps": 0
+        },
+        "resources": {
+          "actors": 19,
+          "sourceTemplates": 5,
+          "ownedInstanceRoots": 0
+        },
+        "counts": {
+          "meshes": 80,
+          "visibleMeshes": 79,
+          "skinnedMeshes": 45,
+          "transparentMeshes": 10,
+          "alphaTestMeshes": 3,
+          "shadowCasters": 69,
+          "bones": 2030
+        },
+        "materials": 59,
+        "renderer": {
+          "render": {
+            "frame": 215,
+            "calls": 78,
+            "triangles": 3739840,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 63,
+            "textures": 73
+          },
+          "programs": 25,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "camera": {
+          "position": [
+            98.00000000000001,
+            34.4617896080017,
+            114.00000000000001
+          ],
+          "target": [
+            70,
+            4.461789608001709,
+            146
+          ]
+        },
+        "fire": {
+          "key": "settlement-campfire",
+          "lit": false,
+          "heat": 0,
+          "time": 7.906999999999994,
+          "quality": "low",
+          "reducedMotion": false,
+          "particles": 0,
+          "systems": 3,
+          "batches": 2,
+          "visible": true,
+          "snowMultiplier": 1
+        },
+        "precipitation": {
+          "targetSnow": 0.37518540800000055,
+          "targetRain": 0,
+          "quality": "low",
+          "reducedMotion": false,
+          "enabled": true,
+          "time": 7.906999999999994,
+          "snow": 290,
+          "rain": 0,
+          "snowWeight": 0.37518540800000055,
+          "rainWeight": 0,
+          "radius": 20.8153789300123,
+          "center": [
+            70,
+            4.461789608001709,
+            146
+          ],
+          "batches": 2
+        },
+        "visibility": "visible",
+        "effectiveWorld": {
+          "mode": "generated",
+          "seed": 18,
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "groundBlending": "zoned",
+          "island": {
+            "version": "island-pool-v1",
+            "generatorVersion": "fjordside-island-v0.3e-r3",
+            "seed": 18
+          },
+          "campaignPlots": 12,
+          "quality": "low",
+          "buildings": 0,
+          "populationSource": "existing-fjordside",
+          "groundTier": "low",
+          "source": "ez-tree",
+          "site": {
+            "x": 70,
+            "z": 146
+          },
+          "attachments": 2,
+          "tent": null,
+          "tentPlot": null,
+          "attachmentVersion": "authored-props-v4",
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 0,
+            "connectedArea": 17413,
+            "maximumFoundationSlope": 0,
+            "minimumFoundationElevation": 3.581789608001709,
+            "score": 0
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 13.758399999991047,
+            "level": -0.12,
+            "center": {
+              "x": 100.5,
+              "z": 202.5
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": null
+          }
+        },
+        "placeholders": [],
+        "presentationDiagnostics": "Canonical time: Winter 811 · tick 323/1000\nReused Fjordside DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.\nAmbient motion is presentation only. Young children and active caregivers stay indoors.\nGeography: fjordside-island-v0.3e-r3:18:53931e6c"
+      },
+      "actualTicksFromFixture": 333,
+      "canonicalReplayEqual": true,
+      "windows": [
+        {
+          "routeFailures": [
+            {
+              "agent": "persona:founder-2",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 374,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 20,
+              "firstSeconds": 1.0850000000000002,
+              "lastStep": 20,
+              "lastSeconds": 1.0850000000000002,
+              "from": {
+                "x": 57.8,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-8",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 369,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 26,
+              "firstSeconds": 1.6850000000000007,
+              "lastStep": 26,
+              "lastSeconds": 1.6850000000000007,
+              "from": {
+                "x": 101.8,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:persona-2",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 254,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 31,
+              "firstSeconds": 2.1827000000029813,
+              "lastStep": 31,
+              "lastSeconds": 2.1827000000029813,
+              "from": {
+                "x": 81.6,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-5",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 404,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 33,
+              "firstSeconds": 2.3827000000029814,
+              "lastStep": 33,
+              "lastSeconds": 2.3827000000029814,
+              "from": {
+                "x": 34,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-7",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 332,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 35,
+              "firstSeconds": 2.5827000000029816,
+              "lastStep": 35,
+              "lastSeconds": 2.5827000000029816,
+              "from": {
+                "x": 100,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-1",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 2,
+              "nodes": 838,
+              "identicalContext": 0,
+              "changedContext": 2,
+              "firstStep": 37,
+              "firstSeconds": 2.782700000002982,
+              "lastStep": 199,
+              "lastSeconds": 12.66392499999702,
+              "from": {
+                "x": 86,
+                "z": 163
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 5
+            },
+            {
+              "agent": "persona:persona-1",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 386,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 58,
+              "firstSeconds": 4.019166666666669,
+              "lastStep": 58,
+              "lastSeconds": 4.019166666666669,
+              "from": {
+                "x": 103.6,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:persona-3",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 360,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 61,
+              "firstSeconds": 4.220450000002983,
+              "lastStep": 61,
+              "lastSeconds": 4.220450000002983,
+              "from": {
+                "x": 59.6,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-4",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 238,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 65,
+              "firstSeconds": 4.4120000000000035,
+              "lastStep": 65,
+              "lastSeconds": 4.4120000000000035,
+              "from": {
+                "x": 78,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-6",
+              "kind": "persona",
+              "purpose": "wander",
+              "target": "",
+              "goal": null,
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 409,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 68,
+              "firstSeconds": 4.635100000008944,
+              "lastStep": 68,
+              "lastSeconds": 4.635100000008944,
+              "from": {
+                "x": 35.8,
+                "z": 139
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 0
+            },
+            {
+              "agent": "persona:founder-5",
+              "kind": "persona",
+              "purpose": "occupation",
+              "target": "building:house-5",
+              "goal": {
+                "x": 40,
+                "z": 120.5
+              },
+              "reason": "accepted",
+              "attempts": 1,
+              "nodes": 276,
+              "identicalContext": 0,
+              "changedContext": 1,
+              "firstStep": 140,
+              "firstSeconds": 9.301799999997021,
+              "lastStep": 140,
+              "lastSeconds": 9.301799999997021,
+              "from": {
+                "x": 35.45536034289735,
+                "z": 140.05250777872217
+              },
+              "navigationGeneration": 10,
+              "reservationGeneration": 2
+            }
+          ],
+          "routeOverflow": 0,
+          "motion": {
+            "routeAttempts": 12,
+            "rejectedRoutes": 0,
+            "targetAttempts": 1,
+            "rejectedTargets": 0,
+            "routeNodes": 4240,
+            "maxRouteNodes": 431,
+            "updates": 139,
+            "lastUpdateMs": 2,
+            "maxUpdateMs": 48,
+            "totalUpdateMs": 306.5000000447035,
+            "yardRepackAttempts": 0,
+            "yardRepackNodes": 0,
+            "yardRepackFailures": 0,
+            "presentationSteps": 208,
+            "activeSeconds": 13.218499999999997,
+            "visitsStarted": 1,
+            "occupationArrivals": 0,
+            "activitiesCompleted": 0,
+            "homeArrivals": 0,
+            "visitsCancelled": 0,
+            "distanceWalked": 39.27686470771233,
+            "failedRouteReuse": 0,
+            "homeTrailReuse": 0,
+            "navigationGeneration": 10,
+            "reservationGeneration": 5,
+            "retainedHomeWaypoints": 36,
+            "agents": 19,
+            "reservations": 1,
+            "occupationVisits": 1,
+            "outOfZone": 0,
+            "bodyOverlaps": 0
+          },
+          "actors": [
+            {
+              "key": "persona:founder-4",
+              "kind": "persona",
+              "x": 79.37113823573223,
+              "y": 3.9758687205941516,
+              "z": 140.23177858186426,
+              "rotation": 1.3848973863115732,
+              "state": "Walk",
+              "speed": 0.37534460831392663,
+              "visit": null,
+              "destination": {
+                "x": 88,
+                "z": 143
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 1.203799999997024,
+              "walkable": true
+            },
+            {
+              "key": "persona:persona-2",
+              "kind": "persona",
+              "x": 80.22178500092568,
+              "y": 4.097989082336426,
+              "z": 139.7585374010201,
+              "rotation": -0.4625356935557197,
+              "state": "Walk",
+              "speed": 0.4115817342029131,
+              "visit": null,
+              "destination": {
+                "x": 68.6,
+                "z": 134
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 1.203799999997024,
+              "walkable": true
+            },
+            {
+              "key": "persona:founder-5",
+              "kind": "persona",
+              "x": 36.45536034289735,
+              "y": 4.7469398063826205,
+              "z": 140.05250777872217,
+              "rotation": -2.5213563702412607,
+              "state": "Talk",
+              "speed": 0,
+              "visit": {
+                "target": {
+                  "x": 40,
+                  "z": 120.5
+                },
+                "face": {
+                  "x": 37,
+                  "z": 130
+                },
+                "source": "building:house-5",
+                "phase": "approach",
+                "clip": "Farm",
+                "remaining": 4.824112184712145,
+                "travelRemaining": 76.76178970354034,
+                "checkpoint": {
+                  "x": 35.45536034289735,
+                  "z": 140.05250777872217
+                },
+                "checkpointSeconds": 2.1985500000007447
+              },
+              "destination": {
+                "x": 40,
+                "z": 120.5
+              },
+              "activity": "resident",
+              "partnerKey": "persona:founder-6",
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "persona:founder-6",
+              "kind": "persona",
+              "x": 35.678059121665235,
+              "y": 4.748311519622803,
+              "z": 138.9642556916614,
+              "rotation": 6.903421590528119,
+              "state": "Listen",
+              "speed": 0,
+              "visit": null,
+              "destination": {
+                "x": 26.799999999999997,
+                "z": 136
+              },
+              "activity": "resident",
+              "partnerKey": "persona:founder-5",
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "persona:founder-7",
+              "kind": "persona",
+              "x": 101,
+              "y": 3.4973784888398063,
+              "z": 144.9831391989113,
+              "rotation": 0,
+              "state": "Walk",
+              "speed": 0.297730604566232,
+              "visit": null,
+              "destination": {
+                "x": 101,
+                "z": 148
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "persona:founder-8",
+              "kind": "persona",
+              "x": 103.64514900106121,
+              "y": 4.180811405181885,
+              "z": 139.88460889967124,
+              "rotation": 5.187395815644264,
+              "state": "Idle",
+              "speed": 0,
+              "visit": null,
+              "destination": {
+                "x": 110.8,
+                "z": 148
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0.33825000000000216,
+              "walkable": true
+            },
+            {
+              "key": "persona:persona-1",
+              "kind": "persona",
+              "x": 103.82563239373596,
+              "y": 4.180811405181885,
+              "z": 138.94062925813807,
+              "rotation": 3.7333946079690303,
+              "state": "Idle",
+              "speed": 0,
+              "visit": null,
+              "destination": {
+                "x": 91.6,
+                "z": 132
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0.33825000000000216,
+              "walkable": true
+            },
+            {
+              "key": "persona:founder-2",
+              "kind": "persona",
+              "x": 56.8,
+              "y": 3.983574104309082,
+              "z": 143,
+              "rotation": -1.5707963267948966,
+              "state": "Idle",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "persona:persona-3",
+              "kind": "persona",
+              "x": 57.125649404138805,
+              "y": 4.2312211990356445,
+              "z": 139,
+              "rotation": -1.5707963267948966,
+              "state": "Walk",
+              "speed": 0.32898937093229136,
+              "visit": null,
+              "destination": {
+                "x": 46.6,
+                "z": 136
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "persona:founder-1",
+              "kind": "persona",
+              "x": 86.14007942716435,
+              "y": 2.9112401008605957,
+              "z": 163,
+              "rotation": 1.5707963267948966,
+              "state": "Walk",
+              "speed": 0.6894096692312148,
+              "visit": null,
+              "destination": {
+                "x": 96,
+                "z": 154
+              },
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-1",
+              "kind": "cattle",
+              "x": 87.1000000000001,
+              "y": 3.1382296441286766,
+              "z": 148.8999999999998,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-10",
+              "kind": "cattle",
+              "x": 83.10000000000004,
+              "y": 3.144289247302426,
+              "z": 151.09999999999968,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-11",
+              "kind": "cattle",
+              "x": 84.10000000000005,
+              "y": 3.1452703545260148,
+              "z": 152.89999999999958,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-2",
+              "kind": "cattle",
+              "x": 78.56066017177982,
+              "y": 3.0442216396331787,
+              "z": 149.16066017177982,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-3",
+              "kind": "cattle",
+              "x": 77,
+              "y": 3.253005623817444,
+              "z": 148.1,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-4",
+              "kind": "cattle",
+              "x": 77,
+              "y": 3.253005623817444,
+              "z": 150.7,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-5",
+              "kind": "cattle",
+              "x": 77,
+              "y": 3.033561110496521,
+              "z": 153.29999999999998,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-6",
+              "kind": "cattle",
+              "x": 77,
+              "y": 3.0241453766822817,
+              "z": 155.9,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            },
+            {
+              "key": "cattle:cattle-12",
+              "kind": "cattle",
+              "x": 87.1000000000001,
+              "y": 3.149213412561548,
+              "z": 154.89999999999947,
+              "rotation": 0.5,
+              "state": "Graze",
+              "speed": 0,
+              "visit": null,
+              "destination": null,
+              "activity": null,
+              "partnerKey": null,
+              "cooldown": 0,
+              "walkable": true
+            }
+          ],
+          "durationMs": 20281.89999999106,
+          "fps": 7.198536626256137,
+          "frames": {
+            "count": 146,
+            "total": 20033.399999999994,
+            "mean": 137.21506849315065,
+            "min": 16.5,
+            "max": 4283.4000000000015,
+            "p50": 66.7,
+            "p95": 250,
+            "p99": 2449.9,
+            "over33": 109,
+            "over50": 89
+          },
+          "spans": {
+            "camera.update.inclusive": {
+              "count": 147,
+              "total": 31.90000006556511,
+              "mean": 0.21700680316710957,
+              "min": 0,
+              "max": 0.800000011920929,
+              "p50": 0.2,
+              "p95": 0.4,
+              "p99": 0.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "camera.update.self": {
+              "count": 147,
+              "total": 31.90000006556511,
+              "mean": 0.21700680316710957,
+              "min": 0,
+              "max": 0.800000011920929,
+              "p50": 0.2,
+              "p95": 0.4,
+              "p99": 0.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "social.advance.inclusive": {
+              "count": 208,
+              "total": 22.59999991953373,
+              "mean": 0.10865384576698908,
+              "min": 0,
+              "max": 1.2000000029802322,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "social.advance.self": {
+              "count": 208,
+              "total": 22.59999991953373,
+              "mean": 0.10865384576698908,
+              "min": 0,
+              "max": 1.2000000029802322,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.planPassing.inclusive": {
+              "count": 2089,
+              "total": 48.6000000089407,
+              "mean": 0.023264719965984056,
+              "min": 0,
+              "max": 1.4000000059604645,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.planPassing.self": {
+              "count": 2089,
+              "total": 48.6000000089407,
+              "mean": 0.023264719965984056,
+              "min": 0,
+              "max": 1.4000000059604645,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.step.inclusive": {
+              "count": 208,
+              "total": 304.10000006854534,
+              "mean": 1.4620192310987756,
+              "min": 0.20000000298023224,
+              "max": 20.900000005960464,
+              "p50": 0.7,
+              "p95": 8.5,
+              "p99": 17.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.step.self": {
+              "count": 208,
+              "total": 85.10000015795231,
+              "mean": 0.4091346161440015,
+              "min": 0.09999999403953552,
+              "max": 2.5,
+              "p50": 0.4,
+              "p95": 0.9,
+              "p99": 1.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.advance.inclusive": {
+              "count": 147,
+              "total": 307.60000002384186,
+              "mean": 2.0925170069649104,
+              "min": 0,
+              "max": 48,
+              "p50": 0.7,
+              "p95": 8.4,
+              "p99": 40.8,
+              "over33": 2,
+              "over50": 0
+            },
+            "motion.advance.self": {
+              "count": 147,
+              "total": 3.4999999552965164,
+              "mean": 0.02380952350541848,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "mixer.update.inclusive": {
+              "count": 4156,
+              "total": 392.9000003039837,
+              "mean": 0.09453801739749366,
+              "min": 0,
+              "max": 12.200000002980232,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "mixer.update.self": {
+              "count": 4156,
+              "total": 392.9000003039837,
+              "mean": 0.09453801739749366,
+              "min": 0,
+              "max": 12.200000002980232,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.shapePose.inclusive": {
+              "count": 2500,
+              "total": 223.2999995201826,
+              "mean": 0.08931999980807305,
+              "min": 0,
+              "max": 2.5,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.shapePose.self": {
+              "count": 2500,
+              "total": 223.2999995201826,
+              "mean": 0.08931999980807305,
+              "min": 0,
+              "max": 2.5,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.update.inclusive": {
+              "count": 1870,
+              "total": 502.7999998033047,
+              "mean": 0.26887700524240893,
+              "min": 0,
+              "max": 12.400000005960464,
+              "p50": 0.2,
+              "p95": 0.5,
+              "p99": 0.9,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.update.self": {
+              "count": 1870,
+              "total": 127.20000012218952,
+              "mean": 0.06802139043967353,
+              "min": 0,
+              "max": 1.5,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.animate.inclusive": {
+              "count": 3526,
+              "total": 732.5999998748302,
+              "mean": 0.2077708451148129,
+              "min": 0,
+              "max": 12.400000005960464,
+              "p50": 0.2,
+              "p95": 0.5,
+              "p99": 0.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.animate.self": {
+              "count": 3526,
+              "total": 59,
+              "mean": 0.016732841747022123,
+              "min": 0,
+              "max": 0.5,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.advance.inclusive": {
+              "count": 187,
+              "total": 807.6999999135733,
+              "mean": 4.319251336436221,
+              "min": 1.7999999970197678,
+              "max": 16.100000008940697,
+              "p50": 4.3,
+              "p95": 6.7,
+              "p99": 8.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.advance.self": {
+              "count": 187,
+              "total": 75.10000003874302,
+              "mean": 0.40160427828204825,
+              "min": 0.09999999403953552,
+              "max": 1.899999976158142,
+              "p50": 0.4,
+              "p95": 0.8,
+              "p99": 1.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "campfire.update.inclusive": {
+              "count": 147,
+              "total": 18.100000098347664,
+              "mean": 0.123129252369712,
+              "min": 0,
+              "max": 3.4000000059604645,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "campfire.update.self": {
+              "count": 147,
+              "total": 18.100000098347664,
+              "mean": 0.123129252369712,
+              "min": 0,
+              "max": 3.4000000059604645,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "precipitation.update.inclusive": {
+              "count": 147,
+              "total": 70.39999996125698,
+              "mean": 0.4789115643622924,
+              "min": 0,
+              "max": 3.2999999970197678,
+              "p50": 0.4,
+              "p95": 1.1,
+              "p99": 2.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "precipitation.update.self": {
+              "count": 147,
+              "total": 70.39999996125698,
+              "mean": 0.4789115643622924,
+              "min": 0,
+              "max": 3.2999999970197678,
+              "p50": 0.4,
+              "p95": 1.1,
+              "p99": 2.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.select.inclusive": {
+              "count": 227,
+              "total": 4.199999988079071,
+              "mean": 0.0185022025906567,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.select.self": {
+              "count": 227,
+              "total": 4.199999988079071,
+              "mean": 0.0185022025906567,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.setAnchors.inclusive": {
+              "count": 147,
+              "total": 0.30000001192092896,
+              "mean": 0.002040816407625367,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.setAnchors.self": {
+              "count": 147,
+              "total": 0.30000001192092896,
+              "mean": 0.002040816407625367,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.productionAnchors.inclusive": {
+              "count": 147,
+              "total": 10.99999988079071,
+              "mean": 0.07482993116184157,
+              "min": 0,
+              "max": 0.29999999701976776,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.productionAnchors.self": {
+              "count": 147,
+              "total": 10.99999988079071,
+              "mean": 0.07482993116184157,
+              "min": 0,
+              "max": 0.29999999701976776,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.setAnchors.inclusive": {
+              "count": 187,
+              "total": 7.900000095367432,
+              "mean": 0.0422459898147991,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.setAnchors.self": {
+              "count": 187,
+              "total": 7.900000095367432,
+              "mean": 0.0422459898147991,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.update.inclusive": {
+              "count": 147,
+              "total": 0.699999988079071,
+              "mean": 0.004761904680810007,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.update.self": {
+              "count": 147,
+              "total": 0.699999988079071,
+              "mean": 0.004761904680810007,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.update.inclusive": {
+              "count": 147,
+              "total": 73.40000003576279,
+              "mean": 0.49931972813444075,
+              "min": 0,
+              "max": 8.299999997019768,
+              "p50": 0.4,
+              "p95": 1.5,
+              "p99": 3.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.update.self": {
+              "count": 147,
+              "total": 73.40000003576279,
+              "mean": 0.49931972813444075,
+              "min": 0,
+              "max": 8.299999997019768,
+              "p50": 0.4,
+              "p95": 1.5,
+              "p99": 3.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.update.inclusive": {
+              "count": 158,
+              "total": 8.000000014901161,
+              "mean": 0.05063291148671621,
+              "min": 0,
+              "max": 0.5999999940395355,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.update.self": {
+              "count": 158,
+              "total": 8.000000014901161,
+              "mean": 0.05063291148671621,
+              "min": 0,
+              "max": 0.5999999940395355,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.update.inclusive": {
+              "count": 147,
+              "total": 5.199999958276749,
+              "mean": 0.0353741493760323,
+              "min": 0,
+              "max": 0.5999999940395355,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.update.self": {
+              "count": 147,
+              "total": 5.199999958276749,
+              "mean": 0.0353741493760323,
+              "min": 0,
+              "max": 0.5999999940395355,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "render.submit.inclusive": {
+              "count": 147,
+              "total": 2631.8000000715256,
+              "mean": 17.903401361030784,
+              "min": 4.200000002980232,
+              "max": 640.2000000029802,
+              "p50": 13.4,
+              "p95": 20.5,
+              "p99": 33.6,
+              "over33": 2,
+              "over50": 1
+            },
+            "render.submit.self": {
+              "count": 147,
+              "total": 2631.8000000715256,
+              "mean": 17.903401361030784,
+              "min": 4.200000002980232,
+              "max": 640.2000000029802,
+              "p50": 13.4,
+              "p95": 20.5,
+              "p99": 33.6,
+              "over33": 2,
+              "over50": 1
+            },
+            "frame.callback.inclusive": {
+              "count": 147,
+              "total": 4011.6000001579523,
+              "mean": 27.289795919441854,
+              "min": 7.100000008940697,
+              "max": 652.6000000089407,
+              "p50": 22.7,
+              "p95": 34.4,
+              "p99": 93.8,
+              "over33": 9,
+              "over50": 4
+            },
+            "frame.callback.self": {
+              "count": 147,
+              "total": 87.30000008642673,
+              "mean": 0.5938775516083451,
+              "min": 0,
+              "max": 4.4000000059604645,
+              "p50": 0.4,
+              "p95": 1.7,
+              "p99": 3,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.describe.inclusive": {
+              "count": 102,
+              "total": 183.99999997019768,
+              "mean": 1.8039215683352714,
+              "min": 0.5,
+              "max": 3.7000000029802322,
+              "p50": 1.8,
+              "p95": 2.7,
+              "p99": 3.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.describe.self": {
+              "count": 102,
+              "total": 183.99999997019768,
+              "mean": 1.8039215683352714,
+              "min": 0.5,
+              "max": 3.7000000029802322,
+              "p50": 1.8,
+              "p95": 2.7,
+              "p99": 3.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "frame.diagnostics.inclusive": {
+              "count": 22,
+              "total": 79.69999997317791,
+              "mean": 3.622727271508087,
+              "min": 1.5,
+              "max": 5.0999999940395355,
+              "p50": 3.5,
+              "p95": 5,
+              "p99": 5.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "frame.diagnostics.self": {
+              "count": 22,
+              "total": 35.49999998509884,
+              "mean": 1.6136363629590382,
+              "min": 0.5999999940395355,
+              "max": 2.8999999910593033,
+              "p50": 1.6,
+              "p95": 2.7,
+              "p99": 2.9,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.command.inclusive": {
+              "count": 40,
+              "total": 1478.1999999582767,
+              "mean": 36.95499999895692,
+              "min": 17.799999997019768,
+              "max": 66.8999999910593,
+              "p50": 33.4,
+              "p95": 59.2,
+              "p99": 66.9,
+              "over33": 21,
+              "over50": 7
+            },
+            "session.command.self": {
+              "count": 40,
+              "total": 1478.1999999582767,
+              "mean": 36.95499999895692,
+              "min": 17.799999997019768,
+              "max": 66.8999999910593,
+              "p50": 33.4,
+              "p95": 59.2,
+              "p99": 66.9,
+              "over33": 21,
+              "over50": 7
+            },
+            "session.snapshot.inclusive": {
+              "count": 40,
+              "total": 1036.4000000208616,
+              "mean": 25.910000000521542,
+              "min": 12.799999997019768,
+              "max": 47.900000005960464,
+              "p50": 22,
+              "p95": 44.9,
+              "p99": 47.9,
+              "over33": 11,
+              "over50": 0
+            },
+            "session.snapshot.self": {
+              "count": 40,
+              "total": 1036.4000000208616,
+              "mean": 25.910000000521542,
+              "min": 12.799999997019768,
+              "max": 47.900000005960464,
+              "p50": 22,
+              "p95": 44.9,
+              "p99": 47.9,
+              "over33": 11,
+              "over50": 0
+            },
+            "session.readSnapshot.inclusive": {
+              "count": 240,
+              "total": 1265.0000000447035,
+              "mean": 5.270833333519598,
+              "min": 0,
+              "max": 57.6000000089407,
+              "p50": 0,
+              "p95": 37.4,
+              "p99": 52.4,
+              "over33": 15,
+              "over50": 5
+            },
+            "session.readSnapshot.self": {
+              "count": 240,
+              "total": 228.60000002384186,
+              "mean": 0.9525000000993411,
+              "min": 0,
+              "max": 9.700000002980232,
+              "p50": 0,
+              "p95": 7,
+              "p99": 9.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.project.inclusive": {
+              "count": 40,
+              "total": 113.49999995529652,
+              "mean": 2.837499998882413,
+              "min": 1.0999999940395355,
+              "max": 5.799999997019768,
+              "p50": 2.6,
+              "p95": 4.5,
+              "p99": 5.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.project.self": {
+              "count": 40,
+              "total": 113.49999995529652,
+              "mean": 2.837499998882413,
+              "min": 1.0999999940395355,
+              "max": 5.799999997019768,
+              "p50": 2.6,
+              "p95": 4.5,
+              "p99": 5.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.readProjection.inclusive": {
+              "count": 160,
+              "total": 1444.5,
+              "mean": 9.028125,
+              "min": 0,
+              "max": 64.70000000298023,
+              "p50": 0.1,
+              "p95": 48.6,
+              "p99": 59.1,
+              "over33": 17,
+              "over50": 8
+            },
+            "campaign.readProjection.self": {
+              "count": 160,
+              "total": 67,
+              "mean": 0.41875,
+              "min": 0,
+              "max": 3.2000000029802322,
+              "p50": 0.1,
+              "p95": 2.3,
+              "p99": 2.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.enqueue.inclusive": {
+              "count": 40,
+              "total": 2.500000014901161,
+              "mean": 0.06250000037252904,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0.1,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.enqueue.self": {
+              "count": 40,
+              "total": 2.500000014901161,
+              "mean": 0.06250000037252904,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0.1,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.saveJSON.inclusive": {
+              "count": 40,
+              "total": 286.7999999523163,
+              "mean": 7.169999998807907,
+              "min": 2.5,
+              "max": 13.899999991059303,
+              "p50": 6,
+              "p95": 12.1,
+              "p99": 13.9,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.saveJSON.self": {
+              "count": 40,
+              "total": 286.7999999523163,
+              "mean": 7.169999998807907,
+              "min": 2.5,
+              "max": 13.899999991059303,
+              "p50": 6,
+              "p95": 12.1,
+              "p99": 13.9,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.exportData.inclusive": {
+              "count": 40,
+              "total": 747.4000000059605,
+              "mean": 18.68500000014901,
+              "min": 7.5999999940395355,
+              "max": 34.20000000298023,
+              "p50": 15.7,
+              "p95": 29.9,
+              "p99": 34.2,
+              "over33": 2,
+              "over50": 0
+            },
+            "campaign.exportData.self": {
+              "count": 40,
+              "total": 458.60000006854534,
+              "mean": 11.465000001713634,
+              "min": 5,
+              "max": 21.100000008940697,
+              "p50": 9.1,
+              "p95": 20.1,
+              "p99": 21.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "shared.persist.inclusive": {
+              "count": 40,
+              "total": 1091.0000000298023,
+              "mean": 27.27500000074506,
+              "min": 12,
+              "max": 49,
+              "p50": 22.6,
+              "p95": 44.5,
+              "p99": 49,
+              "over33": 14,
+              "over50": 0
+            },
+            "shared.persist.self": {
+              "count": 40,
+              "total": 343.60000002384186,
+              "mean": 8.590000000596046,
+              "min": 3.5,
+              "max": 15.5,
+              "p50": 7.5,
+              "p95": 14.6,
+              "p99": 15.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.setSeason.inclusive": {
+              "count": 11,
+              "total": 0.5999999791383743,
+              "mean": 0.05454545264894312,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0.1,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.setSeason.self": {
+              "count": 11,
+              "total": 0.19999998807907104,
+              "mean": 0.018181817098097366,
+              "min": 0,
+              "max": 0.09999999403953552,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.sync.inclusive": {
+              "count": 40,
+              "total": 3.2000000029802322,
+              "mean": 0.0800000000745058,
+              "min": 0,
+              "max": 0.30000001192092896,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.sync.self": {
+              "count": 40,
+              "total": 3.2000000029802322,
+              "mean": 0.0800000000745058,
+              "min": 0,
+              "max": 0.30000001192092896,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "scene.syncPrefix.inclusive": {
+              "count": 40,
+              "total": 39.599999979138374,
+              "mean": 0.9899999994784594,
+              "min": 0.19999998807907104,
+              "max": 17.700000002980232,
+              "p50": 0.4,
+              "p95": 1.3,
+              "p99": 17.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "scene.syncPrefix.self": {
+              "count": 40,
+              "total": 33.400000005960464,
+              "mean": 0.8350000001490117,
+              "min": 0.09999999403953552,
+              "max": 17.400000005960464,
+              "p50": 0.3,
+              "p95": 1,
+              "p99": 17.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "shared.selectionPresentation.inclusive": {
+              "count": 80,
+              "total": 0.4000000059604645,
+              "mean": 0.005000000074505806,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "shared.selectionPresentation.self": {
+              "count": 80,
+              "total": 0.4000000059604645,
+              "mean": 0.005000000074505806,
+              "min": 0,
+              "max": 0.10000000894069672,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.sync.inclusive": {
+              "count": 80,
+              "total": 6.900000020861626,
+              "mean": 0.08625000026077032,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.sync.self": {
+              "count": 80,
+              "total": 6.900000020861626,
+              "mean": 0.08625000026077032,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "ui.refresh.inclusive": {
+              "count": 40,
+              "total": 3565.6000000089407,
+              "mean": 89.14000000022352,
+              "min": 45.5,
+              "max": 145.70000000298023,
+              "p50": 78.1,
+              "p95": 137.7,
+              "p99": 145.7,
+              "over33": 40,
+              "over50": 39
+            },
+            "ui.refresh.self": {
+              "count": 40,
+              "total": 988.299999922514,
+              "mean": 24.70749999806285,
+              "min": 13.5,
+              "max": 54.29999999701977,
+              "p50": 23.3,
+              "p95": 34.7,
+              "p99": 54.3,
+              "over33": 4,
+              "over50": 1
+            },
+            "models.reconcile.inclusive": {
+              "count": 1039,
+              "total": 2758.5999998748302,
+              "mean": 2.6550529353944468,
+              "min": 0,
+              "max": 725.1000000089407,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.7,
+              "over33": 7,
+              "over50": 7
+            },
+            "models.reconcile.self": {
+              "count": 1039,
+              "total": 2688.7999998033047,
+              "mean": 2.587872954574884,
+              "min": 0,
+              "max": 716.9999998807907,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.7,
+              "over33": 7,
+              "over50": 7
+            },
+            "models.reconcile.asyncWall": {
+              "count": 1039,
+              "total": 2768.1999998241663,
+              "mean": 2.664292588858678,
+              "min": 0,
+              "max": 725.2000000029802,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.9,
+              "over33": 7,
+              "over50": 7
+            },
+            "entities.sync.asyncWall": {
+              "count": 40,
+              "total": 6132.300000011921,
+              "mean": 153.30750000029803,
+              "min": 21.799999997019768,
+              "max": 4518.800000011921,
+              "p50": 37,
+              "p95": 69.6,
+              "p99": 4518.8,
+              "over33": 25,
+              "over50": 14
+            },
+            "motion.reconcile.inclusive": {
+              "count": 40,
+              "total": 168.80000007152557,
+              "mean": 4.220000001788139,
+              "min": 1.7000000029802322,
+              "max": 8,
+              "p50": 4.2,
+              "p95": 6.7,
+              "p99": 8,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.reconcile.self": {
+              "count": 40,
+              "total": 168.80000007152557,
+              "mean": 4.220000001788139,
+              "min": 1.7000000029802322,
+              "max": 8,
+              "p50": 4.2,
+              "p95": 6.7,
+              "p99": 8,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.standingTrees.inclusive": {
+              "count": 40,
+              "total": 13.499999970197678,
+              "mean": 0.33749999925494195,
+              "min": 0.09999999403953552,
+              "max": 0.7000000029802322,
+              "p50": 0.3,
+              "p95": 0.6,
+              "p99": 0.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.standingTrees.self": {
+              "count": 40,
+              "total": 13.499999970197678,
+              "mean": 0.33749999925494195,
+              "min": 0.09999999403953552,
+              "max": 0.7000000029802322,
+              "p50": 0.3,
+              "p95": 0.6,
+              "p99": 0.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.configureMotion.inclusive": {
+              "count": 40,
+              "total": 345.49999998509884,
+              "mean": 8.63749999962747,
+              "min": 0.20000000298023224,
+              "max": 327.6000000089407,
+              "p50": 0.4,
+              "p95": 0.8,
+              "p99": 327.6,
+              "over33": 1,
+              "over50": 1
+            },
+            "entities.configureMotion.self": {
+              "count": 40,
+              "total": 345.49999998509884,
+              "mean": 8.63749999962747,
+              "min": 0.20000000298023224,
+              "max": 327.6000000089407,
+              "p50": 0.4,
+              "p95": 0.8,
+              "p99": 327.6,
+              "over33": 1,
+              "over50": 1
+            },
+            "scene.syncAsyncWall": {
+              "count": 40,
+              "total": 7020.599999964237,
+              "mean": 175.51499999910592,
+              "min": 29.799999997019768,
+              "max": 4874.79999999702,
+              "p50": 51.3,
+              "p95": 88.5,
+              "p99": 4874.8,
+              "over33": 36,
+              "over50": 21
+            },
+            "motion.route.inclusive": {
+              "count": 12,
+              "total": 145.3999999910593,
+              "mean": 12.116666665921608,
+              "min": 7.5999999940395355,
+              "max": 17.69999998807907,
+              "p50": 10.8,
+              "p95": 17.7,
+              "p99": 17.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.route.self": {
+              "count": 12,
+              "total": 145.3999999910593,
+              "mean": 12.116666665921608,
+              "min": 7.5999999940395355,
+              "max": 17.69999998807907,
+              "p50": 10.8,
+              "p95": 17.7,
+              "p99": 17.7,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.beginVisit.inclusive": {
+              "count": 1,
+              "total": 19.19999998807907,
+              "mean": 19.19999998807907,
+              "min": 19.19999998807907,
+              "max": 19.19999998807907,
+              "p50": 19.2,
+              "p95": 19.2,
+              "p99": 19.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.beginVisit.self": {
+              "count": 1,
+              "total": 2.3999999910593033,
+              "mean": 2.3999999910593033,
+              "min": 2.3999999910593033,
+              "max": 2.3999999910593033,
+              "p50": 2.4,
+              "p95": 2.4,
+              "p99": 2.4,
+              "over33": 0,
+              "over50": 0
+            }
+          },
+          "gpuSupported": true,
+          "gpu": {
+            "count": 36,
+            "total": 3058.0254869999994,
+            "mean": 84.94515241666664,
+            "min": 70.685967,
+            "max": 130.325228,
+            "p50": 79.5,
+            "p95": 113.7,
+            "p99": 130.3,
+            "over33": 36,
+            "over50": 36
+          },
+          "disjointQueries": 0,
+          "longTasks": {
+            "count": 35,
+            "total": 12018,
+            "mean": 343.37142857142857,
+            "min": 50,
+            "max": 3663,
+            "p50": 191,
+            "p95": 1806,
+            "p99": 3663,
+            "over33": 35,
+            "over50": 34
+          },
+          "heartbeatGaps": {
+            "count": 106,
+            "total": 20214.5,
+            "mean": 190.70283018867926,
+            "min": 16.099999994039536,
+            "max": 4352.5,
+            "p50": 99.8,
+            "p95": 352,
+            "p99": 1977.8,
+            "over33": 98,
+            "over50": 96
+          },
+          "heap": {
+            "used": 305797377,
+            "total": 350137565,
+            "limit": 4395630592
+          }
+        }
+      ],
+      "canonicalSha256": "47eb000bd135226d11835fae5037d2b0fe2522ab150489080dcdb7fc7f6ca968",
+      "canonicalSaveBytes": 505774,
+      "checkpointSha256": "25d35b0ae9f56bdab9f1b910462f60254dddceb81395948185defdc99838de1e",
+      "cdpMetrics": {
+        "Documents": 0,
+        "Nodes": 4060,
+        "LayoutCount": 55,
+        "RecalcStyleCount": 472,
+        "LayoutDuration": 0.03934,
+        "RecalcStyleDuration": 0.038555,
+        "DevToolsCommandDuration": 0.999602,
+        "ScriptDuration": 4.1027260000000005,
+        "V8CompileDuration": 0,
+        "TaskDuration": 16.654524000000002,
+        "TaskOtherDuration": 11.474300999999997
+      },
+      "cpuProfile": {
+        "path": "profiles/before-r1-1-boundary-running.cpuprofile.gz",
+        "durationMs": 22788.258,
+        "topSelf": [
+          {
+            "function": "(idle)",
+            "url": "",
+            "line": 0,
+            "ms": 5367.779
+          },
+          {
+            "function": "(program)",
+            "url": "",
+            "line": 0,
+            "ms": 1337.005
+          },
+          {
+            "function": "applyCommand",
+            "url": "/src/simulation/SimulationCore.ts",
+            "line": 102,
+            "ms": 1059.831
+          },
+          {
+            "function": "snapshot",
+            "url": "/src/gameplay-lab/GameplaySession.ts",
+            "line": 56,
+            "ms": 1040.663
+          },
+          {
+            "function": "setItem",
+            "url": "",
+            "line": 0,
+            "ms": 811.784
+          },
+          {
+            "function": "maskedBodyGeometry",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 2,
+            "ms": 512.743
+          },
+          {
+            "function": "getProgramInfoLog",
+            "url": "",
+            "line": 0,
+            "ms": 511.594
+          },
+          {
+            "function": "",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 4,
+            "ms": 389.324
+          },
+          {
+            "function": "save",
+            "url": "/src/lore/ClanBook.ts",
+            "line": 220,
+            "ms": 336.645
+          },
+          {
+            "function": "persist",
+            "url": "/src/play/SharedSettlement.ts",
+            "line": 93,
+            "ms": 332.043
+          },
+          {
+            "function": "update",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 14225,
+            "ms": 328.742
+          },
+          {
+            "function": "update",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 14225,
+            "ms": 298.011
+          },
+          {
+            "function": "multiplyMatrices",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 6652,
+            "ms": 187.757
+          },
+          {
+            "function": "serializeState",
+            "url": "/src/simulation/SimulationCore.ts",
+            "line": 172,
+            "ms": 177.716
+          },
+          {
+            "function": "(garbage collector)",
+            "url": "",
+            "line": 0,
+            "ms": 159.236
+          },
+          {
+            "function": "getY",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 13451,
+            "ms": 147.321
+          },
+          {
+            "function": "",
+            "url": "",
+            "line": 0,
+            "ms": 146.053
+          },
+          {
+            "function": "intersectTriangle",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 6154,
+            "ms": 131.663
+          },
+          {
+            "function": "getVertexPosition",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 11740,
+            "ms": 117.437
+          },
+          {
+            "function": "historyIdentity",
+            "url": "/src/lore/ClanBook.ts",
+            "line": 8,
+            "ms": 115.277
+          },
+          {
+            "function": "fromBufferAttribute",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 2786,
+            "ms": 111.604
+          },
+          {
+            "function": "getX",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 13440,
+            "ms": 111.45
+          },
+          {
+            "function": "",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 6,
+            "ms": 99.798
+          },
+          {
+            "function": "fromBufferAttribute",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 4687,
+            "ms": 95.345
+          },
+          {
+            "function": "update",
+            "url": "/src/fjord-play/ProductionLabels.ts",
+            "line": 52,
+            "ms": 89.947
+          },
+          {
+            "function": "applyBoneTransform",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 14092,
+            "ms": 87.582
+          },
+          {
+            "function": "applyMatrix4",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 2225,
+            "ms": 85.979
+          },
+          {
+            "function": "bufferData",
+            "url": "",
+            "line": 0,
+            "ms": 85.857
+          },
+          {
+            "function": "getZ",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 13462,
+            "ms": 82.566
+          },
+          {
+            "function": "getX",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 10531,
+            "ms": 79.92
+          },
+          {
+            "function": "preparedCoverage",
+            "url": "/src/characters/PreparedNativeOutfit.ts",
+            "line": 106,
+            "ms": 79.8
+          },
+          {
+            "function": "denormalize",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 395,
+            "ms": 77.241
+          },
+          {
+            "function": "meshyBoneProportion",
+            "url": "/src/characters/MeshyHumanDynamics.ts",
+            "line": 1,
+            "ms": 76.849
+          },
+          {
+            "function": "mix",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 31,
+            "ms": 76.521
+          },
+          {
+            "function": "denormalize",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 395,
+            "ms": 76.041
+          },
+          {
+            "function": "",
+            "url": "/src/fjord-play/FjordPlay.ts",
+            "line": 776,
+            "ms": 75.3
+          },
+          {
+            "function": "",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 68,
+            "ms": 73.372
+          },
+          {
+            "function": "maskedBodyGeometry",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 2,
+            "ms": 72.547
+          },
+          {
+            "function": "",
+            "url": "/src/characters/BodyCoverage.ts",
+            "line": 4,
+            "ms": 62.686
+          },
+          {
+            "function": "refresh",
+            "url": "/src/fjord-play/FjordPlay.ts",
+            "line": 193,
+            "ms": 60.239
+          },
+          {
+            "function": "toArray",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 7291,
+            "ms": 54.188
+          },
+          {
+            "function": "reconcile",
+            "url": "/src/fjord-play/LivingWorldController.ts",
+            "line": 61,
+            "ms": 53.427
+          },
+          {
+            "function": "copy",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 10383,
+            "ms": 51.169
+          },
+          {
+            "function": "getVertexPosition",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 11740,
+            "ms": 49.428
+          },
+          {
+            "function": "multiplyMatrices",
+            "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+            "line": 6652,
+            "ms": 48.473
+          }
+        ]
+      },
+      "screenshot": "paired-before-r1-boundary-810-m1.png"
+    }
+  ],
+  "errors": []
+}

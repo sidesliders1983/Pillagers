@@ -7,6 +7,16 @@ const data = JSON.parse(await readFile(root + '/paired.json', 'utf8'));
 assert.equal(data.failure, undefined); assert.deepEqual(data.errors, []);
 assert.equal(data.requiredHarness, plan.requiredHarness);
 assert.equal(data.runs.length, plan.scenarios.length * plan.repeats * 2);
+assert.equal(createHash('sha256').update(await readFile('scripts/qa/fjord-runtime-browser.mjs')).digest('hex'),
+    Object.entries(plan.harnessSha256).find(([path]) =>
+        path.replaceAll('\\', '/') === 'scripts/qa/fjord-runtime-browser.mjs')[1]);
+if (data.resumptions?.length) {
+    const preservedBytes = await readFile(root + '/investigation/disk-pause/five-completed-runs.json');
+    const preserved = JSON.parse(preservedBytes);
+    assert.equal(createHash('sha256').update(preservedBytes).digest('hex'), data.resumptions[0].previousResultSha256);
+    assert.equal(data.resumptions[0].completedCases, preserved.runs.length);
+    assert.deepEqual(data.runs.slice(0, preserved.runs.length), preserved.runs, 'Completed cases changed during resume');
+}
 for (const fixture of data.fixtures) {
     const bytes = await readFile(root + '/fixtures/' + fixture.name + '.json');
     assert.equal(createHash('sha256').update(bytes).digest('hex'), fixture.sha256);

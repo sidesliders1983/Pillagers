@@ -15,7 +15,10 @@ export async function createFitStage() {
     renderer.setClearColor('#b9bec2');
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1;
-    document.body.replaceChildren(renderer.domElement);
+    // Keep the application DOM alive for its pending status callbacks.
+    // The isolated fitting canvas is the only visible surface in this proof.
+    for (const child of document.body.children) child.style.display = 'none';
+    document.body.append(renderer.domElement);
     document.body.style.cssText = 'margin:0;background:#b9bec2;overflow:hidden';
     renderer.domElement.style.cssText = 'display:block;margin:auto';
     const scene = new THREE.Scene();

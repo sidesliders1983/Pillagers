@@ -20,12 +20,15 @@ const cases = [
 ];
 await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
-const errors = [], captures = [], worldChecks = [];
+const errors = [], captures = [], worldChecks = [], diagnostics = [];
+let currentPage;
 try {
     for (const variant of variants) {
         const page = await browser.newPage({ viewport: { width: 720, height: 800 }, deviceScaleFactor: 1 });
+        currentPage = page;
         page.setDefaultTimeout(180000);
-        page.on('pageerror', error => errors.push(error.message));
+        page.on('requestfailed', request => diagnostics.push({ variant: variant.label, url: request.url(), failure: request.failure() }));
+        page.on('pageerror', error => errors.push(error.stack || error.message));
         await page.addInitScript(json => {
             if (!sessionStorage.getItem('pillagers.fjord-play.active.v1'))
                 sessionStorage.setItem('pillagers.fjord-play.active.v1', json);
@@ -97,6 +100,7 @@ try {
         }, worldCheck.id);
         assert.equal(restored.canonical, reload.canonical);
         assert.equal(restored.age, worldCheck.offscreenAge);
+        console.log(JSON.stringify({ variant: variant.label, worldSaveReloadPassed: true }));
         worldChecks.push({ variant: variant.label, sourceCommit: variant.sourceCommit, ...worldCheck,
             reload: { age: restored.age, canonicalEqual: true, modules: restored.modules, source: restored.source,
                 canonicalSha256: createHash('sha256').update(restored.canonical).digest('hex') } });
@@ -124,6 +128,12 @@ try {
     await writeFile(output + '/captures.json', JSON.stringify({ captures, worldChecks, errors,
         note: 'Authored native assets at fixed poses under neutral lights; child below-five is an isolated fitting proof, not a change to indoor visibility. Viewport is not physical mobile hardware. Before is the pinned pre-170 full-refit app; after performs the birthday through the optimized path.' }, null, 2) + '\n');
 } catch (error) {
-    await writeFile(output + '/failed-captures.json', JSON.stringify({ captures, worldChecks, errors, failure: String(error) }, null, 2) + '\n');
+    if (currentPage && !currentPage.isClosed()) {
+        diagnostics.push(await currentPage.evaluate(() => ({ url: location.href, title: document.title,
+            text: document.body.innerText.slice(0, 8000), audit: typeof window.__fjordAudit,
+            canvas: document.querySelector('#fjord-canvas')?.dataset })));
+        await currentPage.screenshot({ path: output + '/failure.png' });
+    }
+    await writeFile(output + '/failed-captures.json', JSON.stringify({ captures, worldChecks, errors, diagnostics, failure: String(error) }, null, 2) + '\n');
     throw error;
 } finally { await browser.close(); }

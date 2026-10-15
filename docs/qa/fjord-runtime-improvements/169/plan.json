@@ -1,0 +1,59 @@
+{
+  "issue": 169,
+  "before": "5ef856fa336783f9045d5c9c1ded7baf7fb633e8",
+  "after": "9f01c0f1282f1d146803fdb12a22d82c65957794",
+  "profiledFirstPair": [
+    "investigation/identity.json",
+    "confirmation/optimized.json"
+  ],
+  "additionalRepeats": 2,
+  "fixtureRoot": "docs/qa/fjord-runtime-performance/fixtures",
+  "scenarios": [
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "commands": 60,
+      "tickPattern": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "soak": true,
+      "screenshot": true
+    },
+    {
+      "fixture": "developed-810",
+      "running": false
+    },
+    {
+      "fixture": "summer-17",
+      "running": true,
+      "commands": 40
+    },
+    {
+      "fixture": "summer-32",
+      "running": true,
+      "commands": 40
+    },
+    {
+      "fixture": "crowd-25",
+      "running": true,
+      "commands": 40
+    },
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "commands": 40,
+      "far": true
+    }
+  ],
+  "assets": "Both immutable source servers share the unchanged owner-prepared public bytes; Assets junction retains original licensed sources. No assets change in these issues.",
+  "finalAfter": "8860e53ad4883f3bdf9663d629a42fcc75338f49",
+  "finalChanges": "Verified outbound work corridors reused for return-home; current static segments and final home connection revalidated; actual motion/passing continues body checks. Bounded yard cache evicts one oldest point and source samplers invalidate on actual house matrix changes."
+}

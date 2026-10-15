@@ -1,0 +1,108 @@
+{
+  "issue": 170,
+  "before": "8860e53ad4883f3bdf9663d629a42fcc75338f49",
+  "after": "cc3d6181c210cf5547e85d5c634856e52e63312c",
+  "productionChangeCommit": "137102d0f999c588bac7acb337de76840f10bdc7",
+  "repeats": 3,
+  "fixtureRoot": "docs/qa/fjord-runtime-improvements/170/fixtures",
+  "scenarios": [
+    {
+      "fixture": "boundary-810",
+      "running": true,
+      "minutes": 1,
+      "commands": 40,
+      "tickPattern": [
+        8,
+        8,
+        9
+      ],
+      "profile": true,
+      "cpuOnly": true,
+      "screenshot": true
+    },
+    {
+      "fixture": "boundary-810",
+      "running": true,
+      "minutes": 3,
+      "commands": 40,
+      "tickPattern": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "profile": true,
+      "cpuOnly": true,
+      "screenshot": true
+    },
+    {
+      "fixture": "boundary-810",
+      "running": true,
+      "minutes": 5,
+      "commands": 40,
+      "tickPattern": [
+        1,
+        2,
+        2
+      ],
+      "profile": true,
+      "cpuOnly": true,
+      "screenshot": true
+    },
+    {
+      "fixture": "later-boundary-811",
+      "running": true,
+      "minutes": 3,
+      "commands": 40,
+      "tickPattern": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "profile": true,
+      "cpuOnly": true,
+      "screenshot": true
+    },
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "minutes": 3,
+      "commands": 40,
+      "tickPattern": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "fixture": "developed-810",
+      "running": false
+    }
+  ],
+  "assets": "Same immutable owner-prepared actual house and native Meshy body/module bytes, zero placeholders, Low quality/effects, DPR1, fixed camera. Both sources use the same new fitting measurement wrappers; production bundle separately verified without the bridge.",
+  "schedule": "Commands at 500ms deadlines approximate 1/3/5-minute years with exact matched integer tick patterns. These are controlled pacing comparisons, not claims of unthrottled physical mobile performance.",
+  "harnessSha256": {
+    "scripts\\qa\\fjord-runtime-browser.mjs": "47912460c98a3e516da31865c0ea0a6628c7c72536d5a63cdea4dbe9c956ae8f",
+    "scripts\\qa\\fjord-runtime-audit.mjs": "bac79bfbab7ba481a96676efdf78231b47b64a2e2a343939c0ba47391ba13621"
+  },
+  "requiredHarness": "native-fit-v1",
+  "resumeRunnerSha256": "0510a0a65f7e37513aea1b59951ad491cefd3dbde263ba967cd867af41876580",
+  "sourceNote": "Later commits modify only QA resume/report code. Pinned application source and native-fit-v1 browser instrumentation remain unchanged across the disk-space interruption."
+}
