@@ -1,13 +1,21 @@
 import { personaIdentity } from './Identity';
-import type { GameTime, SimulationState } from './SimulationCore';
+import type { GameTime, Persona, SimulationState } from './SimulationCore';
 
 /** Completed years; historical queries never age a person beyond their recorded death. */
 export function personaAge(state: SimulationState, personaId: string, at?: GameTime): number {
     const resident = state.personas[personaId];
-    // Living residents are the per-tick hot path. History/date resolution is only needed for other queries.
-    if (resident && !at && resident.deathWinter === null)
-        return state.time.winter - resident.birthWinter - (state.time.tick < (resident.birthTick ?? 0) ? 1 : 0);
-    const person = resident ?? personaIdentity(state, personaId);
+    // Keep the per-tick query small; archive/event resolution stays on the historical path.
+    return resident && resident.deathWinter === null && !at ? completedAge(resident, state.time) :
+        historicalAge(state, personaId, at);
+}
+
+function completedAge(person: Persona, at: GameTime): number {
+    return at.winter - person.birthWinter - (at.tick < (person.birthTick ?? 0) ? 1 : 0);
+}
+
+function historicalAge(state: SimulationState, personaId: string, at?: GameTime): number {
+    const person = personaIdentity(state, personaId);
+
     if (!person) throw new Error('Unknown persona');
     if (!at && !state.personas[personaId] && person.deathWinter === null) {
         for (let index = state.events.length - 1; index >= 0; index--) {
@@ -23,5 +31,5 @@ export function personaAge(state: SimulationState, personaId: string, at?: GameT
     at ??= state.time;
     const death = person.deathWinter === null ? at : { winter: person.deathWinter, tick: person.deathTick ?? 0 };
     const end = death.winter < at.winter || death.winter === at.winter && death.tick < at.tick ? death : at;
-    return end.winter - person.birthWinter - (end.tick < (person.birthTick ?? 0) ? 1 : 0);
+    return completedAge(person, end);
 }
