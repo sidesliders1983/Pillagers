@@ -3,7 +3,10 @@
 The native Meshy Human has two additional Hair choices: `Hair short · manual fit`
 and `Hair short 2 · manual fit`. Both are explicit Lab previews. They use the
 existing Human and its native skeleton; they are not separate character models.
-They are not assigned automatically to Fjordplay residents.
+After owner approval of these exact previews, Fjordplay explicitly assigns both styles.
+A named visual sample of the DNA seed selects the variant, independently of sex or
+occupation. DNA continues to supply hair colour and age greying. The Lab catalog
+remains separate from general automatic module acceptance.
 
 The authoring inputs are `Hair-short.glb` and `Hair-short2.glb` in the local,
 Git-ignored `Assets/Characters/Human/Manual-Fitting/` directory. Regenerate with:
@@ -49,3 +52,21 @@ Browser review uses the actual built Character Lab on LAN, with front, side and
 back views in Native neutral for both styles. Animation and colour controls use
 the normal Lab interface. Local inspection captures and detailed topology evidence
 are saved under `C:/CodexWorkspaces/Pillagers/scratch/manual-hair-qa/`.
+
+## Preparing longer styles
+
+Keep the hair in the existing fitting base's neutral pose and preserve its exported
+position and scale. Include a small clearance over the scalp, neck, shoulders and
+the intended clothing. A longer hairstyle still uses the same native skeleton.
+Scalp roots follow Head. Long hanging sections may blend Head and Neck influences
+into Spine2/upper-back influences; the transition must be smooth and checked while
+turning the head. Shoulder contact can use limited corresponding shoulder influence,
+without making hanging locks follow the upper arm. Each vertex has normalized
+weights with at most four native influences. The current short-hair preparation
+script intentionally binds everything to Head; a long-hair importer must preserve
+or author the additional influences instead of using this short-hair recipe.
+
+Blended native weights approximate deformation. They do not provide hair collision
+or swinging motion; these would need additional hair bones or a separate simulation.
+Longer variants need neutral, head-turn, shoulder/arm, Idle and Walk review with the
+selected clothing before assignment to residents.
