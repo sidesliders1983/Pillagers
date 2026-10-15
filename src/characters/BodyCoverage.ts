@@ -11,7 +11,7 @@ export interface BodyCutPlane {
 /** Own the coverage mesh and sew its cut edges to the module's exact LOD contacts. */
 export function maskedBodyGeometry(
     source: BufferGeometry,
-    surface: BodySurface,
+    surface: Omit<BodySurface, 'regions'> & {regions: readonly string[]},
     covered: ReadonlySet<number>,
     planes: readonly BodyCutPlane[] = [],
     rims: readonly SurfaceAnchor[] = [],

@@ -41,7 +41,7 @@ export interface ModuleMetadata {
     fitContactZones?:CoverageZone[];
     fitMode:'conform'|'drape'|'rigid';
     equipmentBindings?:EquipmentBindings;
-    slot?:'upper'|'lower'|'full'|'over';
+    slot?:'upper'|'lower'|'full'|'over'|'footwear';
     covers?:CoverageZone[];
     /** Partial sleeves keep the uncovered arm below the source cuff visible. */
     coverageBands?:Partial<Record<CoverageZone,{minY?:number;maxY?:number}>>;
@@ -65,7 +65,7 @@ export function validateModule(metadata:ModuleMetadata){
     if(metadata.version==='pillagers-fit/0.2'){
         const binding=metadata.nativeBinding;
         if(!metadata.id||!['hair','beard','garment','equipment'].includes(metadata.type)||metadata.authoringFrame!=='meshy-native'||!Object.hasOwn(socketDefinitions,metadata.anchor)||!binding||!/^\/[\w/-]+\.binding\.json$/.test(binding.path)||![/^[a-f0-9]{64}$/.test(binding.sha256),/^[a-f0-9]{64}$/.test(binding.rigSignature)].every(Boolean)||!Number.isFinite(metadata.clearance)||metadata.clearance<0)throw new Error('Invalid native body-bound module contract');
-        if(metadata.type==='garment'&&(metadata.fitMode!=='drape'||!['upper','lower','full','over'].includes(metadata.slot??'')))throw new Error('Native garments require wardrobe occupancy');
+        if(metadata.type==='garment'&&(metadata.fitMode!=='drape'||!['upper','lower','full','over','footwear'].includes(metadata.slot??'')))throw new Error('Native garments require wardrobe occupancy');
         if((metadata.type==='hair'||metadata.type==='beard')&&metadata.fitMode!=='conform')throw new Error('Native head modules require conform bindings');
         if(metadata.type==='equipment'&&(metadata.fitMode!=='rigid'||metadata.accessorySlot!=='belt'||!metadata.dependency?.module||!metadata.dependency.frame))throw new Error('Native accessories require a declared garment frame');
         return metadata;

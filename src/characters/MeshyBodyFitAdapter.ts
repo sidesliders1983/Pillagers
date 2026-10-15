@@ -1,6 +1,6 @@
 import {AxesHelper, Bone, Box3, BufferGeometry, Group, Matrix4, Mesh, MeshBasicMaterial, Quaternion, SkinnedMesh, SphereGeometry, Triangle, Vector3} from 'three';
 import {CoverageZone, SocketName} from './AttachmentContract';
-import {BodyFitAdapter, BodySurface, bodyFitVersion, SurfaceAnchor} from './BodyFitAdapter';
+import {BodyFitAdapter, BodySurface, bodyFitVersion, SurfaceAnchor, NativeBodyIdentity} from './BodyFitAdapter';
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {meshyNativeRig,meshyRigSignature} from './MeshyNativeRig';
 import type {FitDebugOptions} from './CharacterFitSystem';
@@ -55,11 +55,17 @@ export function anchorPoint(surface:BodySurface,anchor:SurfaceAnchor){
 }
 /** Native Meshy surfaces are captured before DNA/animation; masking never edits them. */
 export class MeshyBodyFitAdapter implements BodyFitAdapter {
- readonly version=bodyFitVersion;readonly body;readonly nativeSkeleton;readonly sockets=new Map<SocketName,Group>();readonly debug=new Group();
+ readonly version=bodyFitVersion;readonly body:NativeBodyIdentity;readonly nativeSkeleton;readonly sockets=new Map<SocketName,Group>();readonly debug=new Group();
  readonly modules=new Map<string,Group>();revision=0;readonly sourceGeometry:BufferGeometry;readonly source:BodySurface;readonly encoding:Matrix4;
  private anchors=new Map<SocketName,SurfaceAnchor>();private debugOptions?:FitDebugOptions;private topology:string;
- constructor(readonly mesh:SkinnedMesh,private root:Group,readonly bodyRoot:Group,lod:number){
-  this.nativeSkeleton=mesh.skeleton;this.sourceGeometry=mesh.geometry;this.body={id:'body/meshy-human',sha256:meshyHumanAssetIdentity[lod].sha256,lod,rigSignature:meshyRigSignature};
+ constructor(readonly mesh:SkinnedMesh,private root:Group,readonly bodyRoot:Group,lod:number,identity?:NativeBodyIdentity){
+  if (identity && (identity.id !== 'body/meshy-human' || identity.lod !== lod
+      || !/^[a-f0-9]{64}$/.test(identity.sha256) || identity.rigSignature !== meshyRigSignature)) {
+      throw new Error('Invalid native body source identity');
+  }
+  this.nativeSkeleton=mesh.skeleton;this.sourceGeometry=mesh.geometry;
+  this.body=identity ? {...identity, ...(identity.provenance ? {provenance: {...identity.provenance}} : {})}
+      : {id:'body/meshy-human',sha256:meshyHumanAssetIdentity[lod].sha256,lod,rigSignature:meshyRigSignature};
   root.updateMatrixWorld(true);
   if(mesh.skeleton.bones.length!==meshyNativeRig.length)throw new Error('Meshy native rig identity differs');
   mesh.skeleton.bones.forEach((bone,j)=>{const expected=meshyNativeRig[j];if(bone.name!==expected.name||bone.parent?.name!==expected.parent||bone.matrixWorld.elements.some((v,k)=>Math.abs(v-expected.matrix[k])>1e-5))throw new Error('Meshy native bind frame differs: '+bone.name);});

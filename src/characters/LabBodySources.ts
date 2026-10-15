@@ -4,6 +4,9 @@ import { v04BodyIdentity } from './V04ModuleCatalog';
 import type { CharacterPresentation } from './CharacterPresentation';
 
 export type LabBodySource='published'|'golden-v04-preview'|'meshy';
+export function isMeshyLabBodySource(source: unknown): source is 'meshy' {
+    return source === 'meshy';
+}
 export const publishedLabBodyStyle='pillagers-character-style/0.4-draft.1';
 /** Explicit Lab-only candidate; never an accepted production registry entry. */
 export const goldenLabBody=Object.freeze({
@@ -25,7 +28,7 @@ export const labCandidateBodyPresets=Object.freeze({
 });
 for(const recipe of Object.values(labCandidateBodyPresets)){Object.freeze(recipe.morphs);Object.freeze(recipe);}
 export function parseLabBodySource(value:unknown='published'):LabBodySource {
-    if(value!=='published'&&value!==goldenLabBody.source&&value!=='meshy')throw new Error('Unknown Lab body source.');
+    if(value!=='published'&&value!==goldenLabBody.source&&!isMeshyLabBodySource(value))throw new Error('Unknown Lab body source.');
     return value;
 }
 export function labBodyAsset(source:LabBodySource='published',lod=2){
@@ -44,8 +47,8 @@ export function labBodyAsset(source:LabBodySource='published',lod=2){
 /** Prevent silently fitting an old authoring frame to the new unreviewed source. */
 export function validateLabBodyUsage(source:LabBodySource,lod:number,presentation:CharacterPresentation){
     const asset=labBodyAsset(source,lod);
-    if((source===goldenLabBody.source||source==='meshy')&&presentation.technicalWaistWrap)throw new Error('The v0.4 body does not reuse the legacy waist demonstrator.');
-    for(const key of ['hair','beard','outfit','equipment'] as const){
+    if((source===goldenLabBody.source||isMeshyLabBodySource(source))&&presentation.technicalWaistWrap)throw new Error('Preview bodies do not reuse the legacy waist demonstrator.');
+    for(const key of ['hair','beard','outfit','shoes','trousers','top','equipment'] as const){
         const choice=presentation[key];
         if(choice&&choice!=='auto'&&choice!=='none'&&!characterAssetFitsBody(characterAsset(choice),asset))throw new Error(choice+': module is not compatible with this exact body source.');
     }

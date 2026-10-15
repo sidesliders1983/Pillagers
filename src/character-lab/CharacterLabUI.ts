@@ -10,9 +10,12 @@ import { fitPresetLabels } from '../characters/FitPresets';
 import { goldenCharacters } from '../characters/GoldenCharacters';
 import { serializeCharacterDNA } from '../characters/CharacterDNA';
 import { LabBodyPresentation, LabBodyPreset, defaultLabBodyPresentation, previewLabBodyPresentation, labBodyRanges, labBodyOppositePairs, resolveLabBodyProfile } from '../characters/LabBodyPresentation';
-import { goldenLabBody, labBodyAsset, labCandidatePresetNames } from '../characters/LabBodySources';
+import { goldenLabBody, labBodyAsset, labCandidatePresetNames, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { characterAsset } from '../characters/CharacterAssets';
-import { CharacterPresentation, defaultCharacterPresentation, presentationChoices, resolveCharacterPresentation } from '../characters/CharacterPresentation';
+import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
+import { CharacterPresentation, GarmentChoiceKey, defaultCharacterPresentation, presentationChoices, presentationModuleFields, separateGarmentKeys, resolveCharacterPresentation } from '../characters/CharacterPresentation';
+
+import { ModuleAgeRange, loadNativeModuleAgeRange, moduleAvailableAtAge, nativeModuleAgeKey } from '../characters/NativeModuleAgePolicy';
 
 const traitInfo:Record<TraitKey,{label:string;low:string;high:string}>={
     physicality:{label:'Physicality',low:'Slight / delicate',high:'Powerful / imposing'},
@@ -26,6 +29,8 @@ export class CharacterLabUI {
     private dna:CharacterDNA;
     private presentation:CharacterPresentation={...defaultCharacterPresentation};
     private body:LabBodyPresentation={...defaultLabBodyPresentation};
+    private moduleAges = new Map<string, ModuleAgeRange>();
+    private requestedModuleAges = new Set<string>();
     constructor(root:HTMLElement,dna:CharacterDNA,private onDNA:(dna:CharacterDNA)=>void,private onAction:(action:LabAction)=>void,private onPresentation:(value:CharacterPresentation)=>void=()=>{},private onBody:(value:LabBodyPresentation)=>void=()=>{}){
         this.dna=cloneDNA(dna);
         root.innerHTML=`<div class="lab">
@@ -49,7 +54,7 @@ export class CharacterLabUI {
                 <section class="lab-stage" aria-label="Live character preview">
                     <div class="lab-stage-heading"><span class="lab-eyebrow">LIVE PHENOTYPE</span><span id="lab-dominant"></span></div>
                     <canvas id="lab-preview" aria-label="Universal Human. Drag to rotate, scroll or pinch to zoom."></canvas>
-                    <div class="lab-source-controls"><label>Body source<select id="lab-body-source"><option value="meshy">Meshy Human · textured</option><option value="golden-v04-preview">v0.4 · new body preview</option><option value="published">Published body · existing modules</option></select></label><p class="lab-note" id="lab-source-status"></p></div>
+                    <div class="lab-source-controls"><label>Body source<select id="lab-body-source"><option value="meshy">Meshy Human · textured</option><option value="meshy-outfit-preview">Meshy outfit · corrected body preview</option><option value="golden-v04-preview">v0.4 · new body preview</option><option value="published">Published body · existing modules</option></select></label><p class="lab-note" id="lab-source-status"></p></div>
                     <label class="lab-source-controls">Animation<select id="lab-animation" aria-label="Available animations"></select></label>
                     <div id="lab-ground-controls" class="lab-ground-controls"></div>
                     <div class="lab-button-row lab-model-tools" aria-label="Level of detail"><button data-action="lod0">LOD0</button><button data-action="lod1">LOD1</button><button data-action="lod2">LOD2</button></div>
@@ -75,7 +80,7 @@ export class CharacterLabUI {
                     <div class="lab-panel lab-body-controls" aria-label="Body presentation"><h2>Body presentation · Lab override</h2><p class="lab-note" id="lab-body-status"></p><label>Build preset<select id="lab-body-preset"><option value="auto">Auto · source DNA</option><option value="neutral">Neutral · technical</option>${labCandidatePresetNames.map(id=>`<option value="${id}" disabled>${id[0].toUpperCase()+id.slice(1)} · preview</option>`).join('')}</select></label><div class="lab-slider"><label for="lab-body-height">Displayed adult height<output id="lab-body-height-value"></output></label><input id="lab-body-height" type="range" min="1.16" max="1.60" step="0.01"></div>
                     ${Object.entries(labBodyRanges).map(([key,[min,max]])=>`<div class="lab-slider"><label for="lab-body-${key}">${key.replace(/([a-z])([A-Z])/g,'$1 $2')}<output id="lab-body-value-${key}"></output></label><input id="lab-body-${key}" data-body-axis="${key}" type="range" min="${min}" max="${max}" step="0.01"></div>`).join('')}<button data-action="reset-body">Restore source DNA body</button><p class="lab-note">Existing visual morphs only; body-build strength stays at 60%. Real sex, age, personality, growth and movement retain their DNA meaning. Independent torso/arm/leg controls await authored targets. Head, hand and foot scale stays locked.</p></div>
                     <div class="lab-panel lab-module-controls" aria-label="Presentation modules"><h2>Presentation modules</h2><p class="lab-note">Current registry assets are available for inspection. Their v0.4 visual review is pending. These choices belong to this Lab view, not CharacterDNA.</p>
-                    ${(['hair','beard','garment','equipment'] as const).map(type=>{const key=type==='garment'?'outfit':type;return `<label>${key[0].toUpperCase()+key.slice(1)}<select id="lab-module-${key}" data-presentation="${key}"><option value="auto">Auto · profile</option><option value="none">None</option>${presentationChoices(type).map(({id,label})=>`<option value="${id}">${label}</option>`).join('')}</select></label>`;}).join('')}
+                    ${presentationModuleFields.map(({key,label})=>`<label>${label}<select id="lab-module-${key}" data-presentation="${key}"><option value="auto">Auto · profile</option><option value="none">None</option></select></label>`).join('')}
                     <label>Hair / beard colour<select id="lab-hair-color-mode"><option value="auto">Auto · heritage and age</option><option value="manual">Manual colour</option></select><input id="lab-hair-color" type="color" value="#986e55" aria-label="Manual hair and beard colour"></label>
                     <label>Equipment carry<select id="lab-equipment-socket" data-presentation="equipmentSocket"><option value="auto">Auto · authored grip</option></select></label><p id="lab-module-status" class="lab-note"></p><p id="lab-beard-eligibility" class="lab-note"></p><label class="lab-checkbox"><input id="lab-technical-waist" type="checkbox">Technical waist demonstrator</label><div class="lab-button-row"><button data-action="golden-base">Golden base view</button><button data-action="reset-presentation">Reset to Auto</button></div></div>
                     <div class="lab-panel" aria-label="Appearance size ratios"><h2>Appearance size</h2>
@@ -132,15 +137,78 @@ export class CharacterLabUI {
             const choice=event.target as HTMLInputElement;
             if(choice.id==='lab-character-type'){const url=new URL(location.href);if(choice.value==='cow')url.searchParams.set('model','cow');else{url.searchParams.delete('model');url.searchParams.delete('variant');url.searchParams.delete('animation');}location.href=url.pathname+url.search+url.hash;return;}
             if(choice.id==='lab-animation'){this.onAction(`animation-${choice.value}`);return;}
-            if(choice.id==='lab-body-source'){this.onBody(choice.value==='meshy'?{version:1,preset:'auto',source:'meshy'}:choice.value===goldenLabBody.source?{...previewLabBodyPresentation}:{...defaultLabBodyPresentation});return;}
+            if(choice.id==='lab-body-source'){this.onBody(isMeshyLabBodySource(choice.value)?{version:1,preset:'auto',source:choice.value}:choice.value===goldenLabBody.source?{...previewLabBodyPresentation}:{...defaultLabBodyPresentation});return;}
             if(choice.id==='lab-body-preset'){this.onBody({version:1,preset:choice.value as LabBodyPreset,...(this.body.source?{source:this.body.source}:{})});return;}
-            if(choice.dataset.presentation){this.onPresentation({...this.presentation,[choice.dataset.presentation]:choice.value});return;}
+            if (choice.dataset.presentation) {
+                const key = choice.dataset.presentation;
+                const next = {...this.presentation, [key]: choice.value};
+                if (key === 'outfit' && choice.value !== 'none') {
+                    for (const slot of separateGarmentKeys) next[slot] = 'none';
+                } else if (separateGarmentKeys.includes(key as typeof separateGarmentKeys[number]) &&
+                    choice.value !== 'none') {
+                    next.outfit = 'none';
+                }
+                this.onPresentation(next);
+                return;
+            }
             if(choice.id==='lab-hair-color-mode'){this.onPresentation({...this.presentation,hairColor:choice.value==='auto'?null:(document.getElementById('lab-hair-color') as HTMLInputElement).value});return;}
             if(choice.id==='lab-technical-waist'){this.onPresentation({...this.presentation,technicalWaistWrap:choice.checked});return;}
             if((event.target as HTMLElement).id==='lab-fit-preset'){const select=event.target as HTMLSelectElement;if(select.value)this.onAction(`preset-${select.value}` as LabAction);select.value='';}
             if((event.target as HTMLElement).id==='lab-golden-character'){const select=event.target as HTMLSelectElement;if(select.value)this.onAction(`golden-${select.value}`);select.value='';}
             if((event.target as HTMLElement).id==='lab-seed'&&!(event.target as HTMLInputElement).value){(event.target as HTMLInputElement).value=String(this.dna.seed);}
         });
+    }
+    private updateModuleChoices() {
+        const body = labBodyAsset(this.body.source ?? 'published', 2);
+        const selected = resolveCharacterPresentation(this.dna, this.presentation, body);
+        const availableAtAge = (id: string) => {
+            const asset = characterAsset(id);
+            if (!moduleAvailableAtAge(asset, this.dna.age, this.moduleAges.get(nativeModuleAgeKey(asset)))) {
+                return false;
+            }
+            const dependency = asset.metadata?.dependency?.module;
+            if (!dependency) return true;
+            const garment = characterAsset(dependency);
+            return selected.garmentIds.includes(dependency) &&
+                moduleAvailableAtAge(garment, this.dna.age, this.moduleAges.get(nativeModuleAgeKey(garment)));
+        };
+        for (const {key, type} of presentationModuleFields) {
+            const select = document.getElementById('lab-module-' + key) as HTMLSelectElement;
+            const entries = presentationChoices(type, body,
+                type === 'garment' ? key as GarmentChoiceKey : undefined);
+            const native = isMeshyLabBodySource(this.body.source);
+            const options = entries.map(entry => {
+                const asset = characterAsset(entry.id);
+                const ageKey = nativeModuleAgeKey(asset);
+                const range = this.moduleAges.get(ageKey);
+                const available = availableAtAge(asset.id);
+                const suffix = asset.metadata?.nativeBinding
+                    ? range ? ' · ages ' + range.min + '–' + range.max : ' · age support unverified'
+                    : '';
+                const option = new Option(entry.label + suffix, entry.id);
+                option.disabled = !available;
+                if (asset.metadata?.nativeBinding && !this.requestedModuleAges.has(ageKey)) {
+                    this.requestedModuleAges.add(ageKey);
+                    void loadNativeModuleAgeRange(asset).then(verified => {
+                        this.moduleAges.set(ageKey, verified);
+                        this.updateModuleChoices();
+                    }).catch(error => this.status((error as Error).message, true));
+                }
+                return option;
+            });
+            const automatic = new Option('Auto · profile', 'auto');
+            if (native) {
+                automatic.disabled = !entries.some(entry => {
+                    const asset = characterAsset(entry.id);
+                    return asset.reviewStatus === 'accepted' && availableAtAge(asset.id);
+                });
+            }
+            select.replaceChildren(automatic, new Option('None', 'none'), ...options);
+            select.value = this.presentation[key];
+            const separate = separateGarmentKeys.includes(key as typeof separateGarmentKeys[number]);
+            select.disabled = separate && !native ||
+                key === 'beard' && !(this.dna.age >= 18 && universalHumanProfile(this.dna).masculinity > .5);
+        }
     }
     update(dna:CharacterDNA,phenotype:Phenotype,comparison:CharacterDNA|null,presentation:CharacterPresentation=defaultCharacterPresentation,bodyPresentation:LabBodyPresentation=defaultLabBodyPresentation){
         this.dna=cloneDNA(dna);this.presentation={...presentation};this.body=bodyPresentation;
@@ -156,12 +224,7 @@ export class CharacterLabUI {
         text('lab-body-status',displayed.status==='unsupported-age'?'Adult override paused below age 18; the original child/teen body continues to grow.':displayed.status==='override'?`Lab body override displayed. Source DNA adult height ${Math.round(body.height*100)} cm; real age ${dna.age} and sex rules unchanged.`:'Source DNA body displayed. These controls are independent authoring overrides.');
         for(const key of Object.keys(labBodyRanges) as (keyof typeof labBodyRanges)[]){input(`lab-body-${key}`,String(displayed.rawControls[key]));text(`lab-body-value-${key}`,displayed.rawControls[key].toFixed(2));}
         document.querySelectorAll<HTMLInputElement|HTMLSelectElement>('.lab-body-controls input,.lab-body-controls select').forEach(control=>control.disabled=dna.age<18);
-        for(const [key,type] of [['hair','hair'],['beard','beard'],['outfit','garment'],['equipment','equipment']] as const){
-            const select=document.getElementById('lab-module-'+key) as HTMLSelectElement;
-            const entries=presentationChoices(type,labBodyAsset(bodyPresentation.source??'published',2));
-            select.replaceChildren(...[{id:'auto',label:'Auto · profile'},{id:'none',label:'None'},...entries].map(entry=>new Option(entry.label,entry.id)));
-            select.value=presentation[key];
-        }
+        this.updateModuleChoices();
         const carry=document.getElementById('lab-equipment-socket') as HTMLSelectElement;
         const sockets=selected.equipmentId?Object.keys(characterAsset(selected.equipmentId).metadata?.equipmentBindings?.sockets??{}):[];
         carry.replaceChildren(new Option('Auto · authored grip','auto'),...sockets.map(socket=>new Option(socket.replace('socket_','').replaceAll('_',' '),socket)));
@@ -175,19 +238,21 @@ export class CharacterLabUI {
         (document.getElementById('fit-beard') as HTMLInputElement).disabled=!availableBeardStyles.includes(body.appearance.beardStyle);
         (document.getElementById('fit-hair') as HTMLInputElement).disabled=!availableHairStyles.includes(body.appearance.hairStyle);
         if(!availableBeardStyles.includes(body.appearance.beardStyle))text('fit-beard-value',body.appearance.beardStyle==='none'?'Not applicable':'Reference asset pending');
-        for(const id of ['lab-module-hair','lab-module-outfit','lab-module-equipment','lab-hair-color-mode','fit-clothing'])(document.getElementById(id) as HTMLInputElement).disabled=false;
-        (document.getElementById('lab-technical-waist') as HTMLInputElement).disabled=candidate||bodyPresentation.source==='meshy';
+        for(const id of ['lab-hair-color-mode','fit-clothing'])(document.getElementById(id) as HTMLInputElement).disabled=false;
+        (document.getElementById('lab-technical-waist') as HTMLInputElement).disabled=candidate||isMeshyLabBodySource(bodyPresentation.source);
         (document.getElementById('lab-module-beard') as HTMLSelectElement).disabled=!eligible;
         (document.getElementById('lab-hair-color') as HTMLInputElement).disabled=presentation.hairColor===null;
         (document.getElementById('fit-hair') as HTMLInputElement).disabled=!selected.hairId;
         (document.getElementById('fit-beard') as HTMLInputElement).disabled=!selected.beardId;
-        if(bodyPresentation.source==='meshy'){
+        if(isMeshyLabBodySource(bodyPresentation.source)){
             for(const id of ['fit-hair','fit-beard','fit-clothing','lab-equipment-socket'])(document.getElementById(id) as HTMLInputElement).disabled=true;
-            for(const id of ['lab-module-outfit','lab-module-equipment'])(document.getElementById(id) as HTMLSelectElement).disabled=dna.age<18;
+
         }
         document.querySelectorAll<HTMLButtonElement>('[data-action^="debug-"]').forEach(button=>button.disabled=false);
-        const breasts=document.getElementById('lab-body-Breasts') as HTMLInputElement;breasts.disabled=dna.age<18||bodyPresentation.source==='meshy';
-        text('lab-module-status',bodyPresentation.source==='meshy'?'Tunic, trousers and boots · fitting test fixture. Check neutral, narrow and broad adults during Idle, Walk and Run. Artwork refinement is deferred.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
+        const breasts=document.getElementById('lab-body-Breasts') as HTMLInputElement;breasts.disabled=dna.age<18||isMeshyLabBodySource(bodyPresentation.source);
+        text('lab-module-status',isMeshyLabBodySource(bodyPresentation.source)?presentation.outfit === gridTrialOutfitId
+            ? 'Grid trial clothing on the selected Meshy body. Walking and Idle are available; tunic skirt deformation still needs review.'
+            : 'Separate shoes, trousers and upper clothing require prepared, source-bound assets. Each choice uses its declared age range. Preview choices do not establish female or child fitting approval.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
         (document.querySelector('[data-action="reset-presentation"]') as HTMLButtonElement).disabled=false;
         const name=characterName(dna);text('lab-name',fullName(name));input('lab-culture',name.dominantCulture);input('lab-name-seed',String(dna.naming?.seed??0));text('lab-name-derivation',JSON.stringify(name.derivation,null,2));
         for(const key of traitKeys.filter(key=>key!=='physicality')){input(`trait-${key}`,String(dna.traits[key]*100));text(`value-${key}`,`${Math.round(dna.traits[key]*100)}%`);}
@@ -197,7 +262,7 @@ export class CharacterLabUI {
         text('lab-current-label',`CURRENT · ${fullName(name)} · Seed ${dna.seed}`);text('lab-comparison-label',comparison?`PINNED · ${fullName(characterName(comparison))} · Seed ${comparison.seed}`:'');
         document.getElementById('lab-comparison-label')!.hidden=!comparison;document.getElementById('lab-unpin')!.hidden=!comparison;
         text('lab-pin',comparison?'Replace comparison':'Pin comparison');
-        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Displayed adult target height</span><strong>${Math.round(displayed.profile.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>DNA weight tendency</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${selected.hairId?.replace('hair/','')??'none'}<small>${selected.hairId?' · registry asset':' · no module'} / ${body.appearance.beardStyle}${selected.beardId?' · registry asset':''}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Outfit</span><strong>${selected.outfitId?.replace('garment/','').replaceAll('-',' ')??'none'}<small> · ${presentation.outfit==='auto'?(selected.outfitId?'seed assigned':'clothing redevelopment'):'Lab choice'}</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
+        document.getElementById('lab-dimensions')!.innerHTML=`<div><span>Displayed adult target height</span><strong>${Math.round(displayed.profile.height*100)}<small> cm</small></strong></div><div><span>Masculinity</span><strong>${Math.round(body.masculinity*100)}<small> %</small></strong></div><div><span>DNA weight tendency</span><strong>${body.weightDeviation<0?"Underweight":body.weightDeviation>0?"Overweight":"Balanced"}<small> ${Math.round(Math.abs(body.weightDeviation)*100)}%</small></strong></div><div><span>Life stage</span><strong>${body.stage}</strong></div><div><span>Hair / beard</span><strong>${selected.hairId?.replace('hair/','')??'none'}<small>${selected.hairId?' · registry asset':' · no module'} / ${body.appearance.beardStyle}${selected.beardId?' · registry asset':''}</small></strong></div><div><span>Hair colour</span><strong style="color:${body.appearance.color}">${body.appearance.color}<small> · ${Math.round(body.appearance.greyAmount*100)}% grey</small></strong></div><div><span>Outfit</span><strong>${selected.garmentIds.map(id=>id.replace('garment/','').replaceAll('-',' ')).join(' + ')||'none'}<small> · ${selected.garmentIds.length?'requested Lab clothing':'clothing redevelopment'}</small></strong></div><div><span>Learning tendency</span><strong>${phenotype.learningRate.toFixed(2)}<small> ×</small></strong></div><div><span>Movement tendency</span><strong>${phenotype.movementSpeed.toFixed(2)}<small> ×</small></strong></div>`;
         const scores=occupationScores(dna.traits);
         text('lab-fit-summary',`${scores[0].label} currently fits best${comparison?' · dark ticks show the pinned character':''}.`);
         for(const {key,fit} of scores){text(`fit-value-${key}`,`${(fit*100).toFixed(1)}%`);document.getElementById(`fit-bar-${key}`)!.style.width=`${fit*100}%`;

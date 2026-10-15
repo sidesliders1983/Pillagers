@@ -10,7 +10,8 @@ import { FitPreset, fitPreset } from '../characters/FitPresets';
 import { FitDebugOptions } from '../characters/CharacterFitSystem';
 import { CharacterPresentation, defaultCharacterPresentation, parseCharacterPresentation } from '../characters/CharacterPresentation';
 import { LabTestSnapshot, parseLabSnapshot } from './LabSnapshot';
-import { goldenLabBody } from '../characters/LabBodySources';
+import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
+import { goldenLabBody, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { LabBodyPresentation, defaultLabBodyPresentation, previewLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
 
 export class CharacterLab {
@@ -21,11 +22,29 @@ export class CharacterLab {
     private preview!:CharacterPreview;
     private ui!:CharacterLabUI;
     async start(){
+        const requestedOutfit = new URLSearchParams(location.search);
+        if (requestedOutfit.get('outfit') === 'grid-001' || requestedOutfit.get('outfit-trial') === 'grid-001') {
+            this.presentation.outfit = gridTrialOutfitId;
+        }
+        if (requestedOutfit.get('clothing') === 'pass-005') {
+            this.presentation.outfit = 'none';
+            this.presentation.trousers = 'garment/meshy-long-skirt-005';
+            this.presentation.shoes = 'garment/meshy-low-shoes-005';
+        }
+        if (requestedOutfit.get('clothing') === 'pass-006') {
+            this.presentation.outfit = 'none';
+            this.presentation.trousers = 'garment/meshy-short-trousers-006';
+            this.presentation.shoes = 'garment/meshy-high-shoes-005';
+        }
         if(new URLSearchParams(location.search).get('model')==='cow'){const {CowCharacterPreview}=await import('./CowCharacterPreview');await new CowCharacterPreview().start();return;}
         document.body.className='character-lab';document.title='Character Lab · Pillagers';
         document.body.replaceChildren();const root=document.createElement('main');document.body.append(root);
-        this.ui=new CharacterLabUI(root,this.dna,dna=>{this.dna=parseCharacterDNA(dna);this.update();},action=>{void this.action(action).catch(error=>this.ui.status(error.message,true));},presentation=>{try{this.presentation=parseCharacterPresentation(presentation);this.update();}catch(error){this.ui.status((error as Error).message,true);}},body=>{try{const next=parseLabBodyPresentation(body);if((next.source??'published')!==(this.body.source??'published'))this.presentation=next.source===goldenLabBody.source||next.source==='meshy'?{...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'}:{...defaultCharacterPresentation};this.body=next;this.update();}catch(error){this.ui.status((error as Error).message,true);}});
+        this.ui=new CharacterLabUI(root,this.dna,dna=>{this.dna=parseCharacterDNA(dna);this.update();},action=>{void this.action(action).catch(error=>this.ui.status(error.message,true));},presentation=>{try{this.setPresentation(presentation);}catch(error){this.ui.status((error as Error).message,true);}},body=>{try{const next=parseLabBodyPresentation(body);if((next.source??'published')!==(this.body.source??'published'))this.presentation=next.source===goldenLabBody.source||isMeshyLabBodySource(next.source)?{...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'}:{...defaultCharacterPresentation};this.body=next;this.update();}catch(error){this.ui.status((error as Error).message,true);}});
         this.preview=new CharacterPreview(document.getElementById('lab-preview') as HTMLCanvasElement,(message,error)=>this.ui.status(message,error));this.update();
+    }
+    private setPresentation(value: CharacterPresentation) {
+        this.presentation = parseCharacterPresentation(value);
+        this.update();
     }
     private update(){const phenotype=generatePhenotype(this.dna);this.preview.setCharacter(phenotype,this.dna,this.presentation,this.body);this.ui.update(this.dna,phenotype,this.comparison?.dna??null,this.presentation,this.body);}
     private newSeed(){const array=new Uint32Array(1);crypto.getRandomValues(array);return array[0]===this.dna.seed?(array[0]+1)>>>0:array[0];}
@@ -34,8 +53,8 @@ export class CharacterLab {
         if(action.startsWith('view-')){this.preview.fixedView(action.slice(5) as 'front'|'side'|'back');return;}
         if(action==='freeze-pose'){this.preview.setPose(this.ui.getPoseTime());return;}
         if(action==='play'){this.preview.resume();return;}
-        if(action==='golden-base'){this.presentation={...this.presentation,hair:'none',beard:'none',outfit:'none',technicalWaistWrap:false};this.update();this.ui.status('Body-only Golden presentation.');return;}
-        if(action==='reset-presentation'){this.presentation=this.body.source===goldenLabBody.source?{...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'}:{...defaultCharacterPresentation};this.update();return;}
+        if(action==='golden-base'){this.presentation={...this.presentation,hair:'none',beard:'none',outfit:'none',shoes:'none',trousers:'none',top:'none',equipment:'none',technicalWaistWrap:false};this.update();this.ui.status('Body-only Golden presentation.');return;}
+        if(action==='reset-presentation'){this.presentation=(this.body.source===goldenLabBody.source||isMeshyLabBodySource(this.body.source))?{...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'}:{...defaultCharacterPresentation};this.update();return;}
         if(action==='reset-body'){this.body={...defaultLabBodyPresentation,...(this.body.source?{source:this.body.source}:{})};this.update();return;}
         if(action==='reset-lab'){this.body={version:1,preset:'auto',source:'meshy'};this.dna=defaultDNA();this.presentation={...defaultCharacterPresentation,hair:'none',beard:'none',outfit:'none'};this.comparison=null;this.preview.setComparison(null);this.preview.setAnimation('Idle');this.preview.resetView();this.update();return;}
         if(action==='snapshot-export'){

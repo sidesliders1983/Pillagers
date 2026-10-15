@@ -2,10 +2,11 @@ import { LabBodyPresentation, defaultLabBodyPresentation, parseLabBodyPresentati
 import { CharacterDNA, parseCharacterDNA } from '../characters/CharacterDNA';
 import { CharacterPresentation, parseCharacterPresentation, resolveCharacterPresentation } from '../characters/CharacterPresentation';
 import { characterContract } from '../characters/CharacterContract';
-import { publishedLabBodyStyle, validateLabBodyUsage, labBodyAsset } from '../characters/LabBodySources';
+import { publishedLabBodyStyle, validateLabBodyUsage, labBodyAsset, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { assetMeasurement, characterAsset, characterAssetURL } from '../characters/CharacterAssets';
 
 import { meshyHumanAvailableClips } from '../characters/MeshyHumanAssetIdentity';
+import { nativeNeutralPose } from '../characters/NativeNeutralPose';
 import { humanExtraAnimations } from '../characters/HumanExtraAnimations';
 
 export const labSnapshotVersion='pillagers-lab-snapshot/1' as const;
@@ -26,11 +27,11 @@ export const fixedLabViews={
 } satisfies Record<string,{position:CameraPoint;target:CameraPoint}>;
 export function snapshotModules(dna:CharacterDNA,presentation:CharacterPresentation,lod:number,body:LabBodyPresentation=defaultLabBodyPresentation){
     const selected=resolveCharacterPresentation(dna,presentation,labBodyAsset(body.source??'published',lod)),source=validateLabBodyUsage(parseLabBodyPresentation(body).source??'published',lod,selected.presentation);
-    if(source.source!=='published')return [{id:source.id,path:source.path,sha256:source.sha256},...[selected.hairId,selected.beardId,selected.outfitId,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
+    if(source.source!=='published')return [{id:source.id,path:source.path,sha256:source.sha256},...[selected.hairId,selected.beardId,...selected.garmentIds,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
         const path=new URL(characterAssetURL(id,lod),'http://local.test').pathname;
         return {id,path,sha256:assetMeasurement(path).sha256,...(characterAsset(id).metadata?.nativeBinding?{binding:{...characterAsset(id).metadata!.nativeBinding}}:{})};
     })];
-    return ['body/universal-human',selected.hairId,selected.beardId,selected.outfitId,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
+    return ['body/universal-human',selected.hairId,selected.beardId,...selected.garmentIds,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
         const path=new URL(characterAssetURL(id,lod),'http://local.test').pathname;
         return {id,path,sha256:assetMeasurement(path).sha256};
     });
@@ -38,12 +39,13 @@ export function snapshotModules(dna:CharacterDNA,presentation:CharacterPresentat
 export function parseLabSnapshot(value:unknown):LabTestSnapshot {
     if(!value||typeof value!=='object'||Array.isArray(value))throw new Error('Lab snapshot must be an object.');
     const s=value as LabTestSnapshot;
-    if(s.version!==labSnapshotVersion||s.contractVersion!==characterContract.version||!(s.fitVersion===characterContract.attachmentVersion||(s.body?.source==='meshy'&&s.fitVersion==='pillagers-fit/0.2'))||s.lighting!=='lab-neutral/1')throw new Error('Unsupported Lab snapshot style, contract or version.');
+    if(s.version!==labSnapshotVersion||s.contractVersion!==characterContract.version||!(s.fitVersion===characterContract.attachmentVersion||(isMeshyLabBodySource(s.body?.source)&&s.fitVersion==='pillagers-fit/0.2'))||s.lighting!=='lab-neutral/1')throw new Error('Unsupported Lab snapshot style, contract or version.');
     const dna=parseCharacterDNA(s.dna),presentation=parseCharacterPresentation(s.presentation),body=parseLabBodyPresentation(s.body??defaultLabBodyPresentation);
     if(!Number.isInteger(s.lod)||s.lod<0||s.lod>2)throw new Error('Snapshot LOD must be 0, 1 or 2.');
     const source=validateLabBodyUsage(body.source??'published',s.lod,presentation);
     if(s.styleVersion!==source.styleVersion)throw new Error('Snapshot style differs from the selected body source.');
-    if(!s.pose||!([...characterContract.animations,...(body.source==='meshy'?[...meshyHumanAvailableClips,...humanExtraAnimations.clips]:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
+    if(!s.pose||!([...characterContract.animations,...(isMeshyLabBodySource(body.source)?[...meshyHumanAvailableClips,...humanExtraAnimations.clips,nativeNeutralPose]:[])] as readonly string[]).includes(s.pose.animation)||!Number.isFinite(s.pose.time)||s.pose.time<0||s.pose.time>60||typeof s.pose.paused!=='boolean')throw new Error('Invalid snapshot animation or clip time (0–60 seconds).');
+    if(s.pose.animation===nativeNeutralPose&&(s.pose.time!==0||!s.pose.paused))throw new Error('Native neutral snapshots must be paused at time zero.');
     if(!s.camera||!['perspective','orthographic'].includes(s.camera.type)||s.camera.fov!==38||(s.camera.type==='perspective'?s.camera.scale!==null:!Number.isFinite(s.camera.scale)||s.camera.scale!<.5||s.camera.scale!>10))throw new Error('Invalid snapshot camera type or fixed scale.');
     const point=(v:unknown)=>Array.isArray(v)&&v.length===3&&v.every(n=>typeof n==='number'&&Number.isFinite(n)&&Math.abs(n)<=60);
     if(!s.camera||!point(s.camera.position)||!point(s.camera.target)||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))<2-1e-6||Math.hypot(...s.camera.position.map((n,i)=>n-s.camera.target[i]))>14+1e-6||s.camera.position[1]<s.camera.target[1]-1e-6)throw new Error('Invalid snapshot camera.');

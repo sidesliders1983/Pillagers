@@ -1,5 +1,9 @@
 import { ModuleMetadata, appearanceMetadata, validateModule } from './AttachmentContract';
 import {meshyCharacterModules} from './MeshyModuleCatalog';
+import {gridTrialOutfitAsset, gridTrialOutfitPath} from './GridTrialOutfitCatalog';
+import {additionalOutfitAssets} from './AdditionalOutfitCatalog';
+import {additionalOutfitMeasurements} from './AdditionalOutfitMeasurements';
+import {gridTrialOutfitMeasurement} from './GridTrialOutfitMeasurements';
 import {meshyModuleMeasurements} from './MeshyModuleMeasurements';
 import { v04CharacterModules } from './V04ModuleCatalog';
 import { characterAssetMeasurements, AssetMeasurement } from './CharacterAssetMeasurements';
@@ -38,13 +42,24 @@ export const characterAssets:readonly CharacterAsset[]=[
 ];
 export const availableHairStyles=characterAssets.filter(asset=>asset.type==='hair'&&!asset.scope).map(asset=>asset.style as HairStyle);
 export const availableBeardStyles=characterAssets.filter(asset=>asset.type==='beard'&&!asset.scope).map(asset=>asset.style as BeardStyle);
-export function characterAsset(id:string){const asset=characterAssets.find(asset=>asset.id===id);if(!asset)throw new Error(`Unknown character asset: ${id}`);return asset;}
+/** Lab discovery adds explicit review candidates without publishing them to the world manifest. */
+export function availableCharacterAssets(): readonly CharacterAsset[] {
+    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets];
+}
+export function characterAsset(id:string){const asset=availableCharacterAssets().find(asset=>asset.id===id);if(!asset)throw new Error(`Unknown character asset: ${id}`);return asset;}
 /** Compatibility is source identity, not a family name or a fallback fit guess. */
 export function characterAssetFitsBody(asset:CharacterAsset,body?:BodyAssetIdentity){
     if(asset.scope==='lab-v04'||asset.scope==='body-bound')return !!body&&!!asset.compatibleBodies?.some(source=>source.id===body.id&&source.sha256===body.sha256);
     return !body||body.id==='body/universal-human';
 }
-export function assetMeasurement(path:string):AssetMeasurement {const measured=characterAssetMeasurements[path]??(meshyModuleMeasurements as Record<string,AssetMeasurement>)[path];if(!measured)throw new Error(`${path}: missing registry measurements; run assets:registry.`);return measured;}
+export function assetMeasurement(path: string): AssetMeasurement {
+    const measured = characterAssetMeasurements[path]
+        ?? (additionalOutfitMeasurements as Record<string, AssetMeasurement>)[path]
+        ?? (path === gridTrialOutfitPath ? gridTrialOutfitMeasurement : undefined)
+        ?? (meshyModuleMeasurements as Record<string, AssetMeasurement>)[path];
+    if (!measured) throw new Error(path + ': missing registry measurements; run assets:registry.');
+    return measured;
+}
 export function versionedCharacterAsset(path:string){return `${path}?v=${assetMeasurement(path).sha256.slice(0,12)}`;}
 export function characterAssetURL(id:string,lod:number){
     const asset=characterAsset(id);if(!Number.isInteger(lod)||lod<0||lod>2)throw new Error(`${id}: invalid LOD ${lod}`);
