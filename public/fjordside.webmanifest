@@ -1,0 +1,25 @@
+{
+  "id": "/fjord-play",
+  "name": "FjordSide",
+  "short_name": "FjordSide",
+  "lang": "en",
+  "start_url": "/fjord-play",
+  "scope": "/fjord-play",
+  "display": "standalone",
+  "background_color": "#172b27",
+  "theme_color": "#172b27",
+  "icons": [
+    {
+      "src": "/branding/fjordside/app-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/branding/fjordside/app-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

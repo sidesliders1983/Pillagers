@@ -82,7 +82,7 @@ export class FjordPlay {
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
-        document.title = 'Pillagers · Fjord settlement';
+        document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
@@ -225,7 +225,7 @@ export class FjordPlay {
                 list.innerHTML = identities;
             document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                 ...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? []),
-                'Residents reuse Fjordside DNA height, build and age; movement remains presentation only.',
+                'Residents reuse FjordSide DNA height, build and age; movement remains presentation only.',
                 canonicalTime,
                 'Geography: ' + view.layout.geographyId].join('\n');
             canvas.dataset.entities = JSON.stringify(view.entities);
@@ -304,8 +304,8 @@ export class FjordPlay {
             link.click();
             setTimeout(() => URL.revokeObjectURL(url), 60000);
         };
-        document.querySelector('#fjord-export')!.addEventListener('click', () => download(this.campaign.exportJSON(), 'pillagers-fjord.json'));
-        document.querySelector('#fjord-export-core')!.addEventListener('click', () => download(this.session.saveJSON(), 'pillagers-campaign.json'));
+        document.querySelector('#fjord-export')!.addEventListener('click', () => download(this.campaign.exportJSON(), 'fjordside-campaign.json'));
+        document.querySelector('#fjord-export-core')!.addEventListener('click', () => download(this.session.saveJSON(), 'fjordside-core.json'));
         document.querySelector('#fjord-import')!.addEventListener('change', event => {
             const input = event.target as HTMLInputElement, file = input.files?.[0];
             if (!file)
@@ -665,7 +665,7 @@ export class FjordPlay {
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                         ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
                         sceneCanonicalTime,
-                        'Reused Fjordside DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
+                        'Reused FjordSide DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
                         'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                         'Geography: ' + view.layout.geographyId].join('\n');
                 } while (this.queued && !this.stopped);
@@ -771,7 +771,7 @@ export class FjordPlay {
             lastFrameMs = performance.now() - frameStarted;
         });
         const finishArrival = async (loading: IslandLoading) => {
-            loading.stage('Preparing Fjordside');
+            loading.stage('Preparing FjordSide');
             const textures = new Set<Texture>();
             scene.traverse(node => {
                 if (!(node instanceof Mesh)) return;

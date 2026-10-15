@@ -1,0 +1,13 @@
+✔ revision reads are deeply immutable isolated copies; public snapshots stay independently owned (47.9128ms)
+✔ projection reads invalidate for state, mooring, layout and campaign replacement without freezing adapter ownership (480.3263ms)
+✔ cached command eligibility remains exactly authoritative after commands, imports, replacement and rejected probes (1130.9809ms)
+✔ developed saves and frozen chapters retain exact Core output through annual/checkpoint commands and handoffs (18362.6069ms)
+✔ book read/notification flags and pacing serialize immediately without a new canonical revision (314.4911ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 22151.2605

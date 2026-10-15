@@ -70,3 +70,5 @@ Full local validation: [804 passed, zero failed, one pre-existing opt-in r3 evid
 ## Limits and rollback
 
 Acceptance depends on the complete measured ranges and difficult visual cases, not just a fast average or a distant village screenshot. Existing source-garment fitting limitations are preserved; no new source geometry is invented or substituted. Keep the PR draft for owner review of age transitions and garment fidelity. Revert the separate fitting source commit to restore the complete previous annual work; no save migration is needed. Measurement scripts remain opt-in and are absent from the normal production entry/bundle.
+
+The final PR also incorporates main’s later FjordSide branding (`512bedc`); the combined report describes the diagnostics-only conflict resolution and fresh integration validation. The fitting algorithm and pinned pre-branding timing sources remain unchanged.
