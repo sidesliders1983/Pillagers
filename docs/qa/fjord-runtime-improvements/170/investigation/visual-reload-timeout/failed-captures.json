@@ -1,6 +1,0 @@
-{
-  "captures": [],
-  "worldChecks": [],
-  "errors": [],
-  "failure": "TimeoutError: page.waitForFunction: Timeout 180000ms exceeded."
-}

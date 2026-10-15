@@ -1,5 +1,7 @@
 # Fjordside runtime performance audit — issue #166
 
+> Evidence archive: bulky generated captures are retained at the pinned merged commit. See [access and restore instructions](../fjord-performance-evidence.md). Measurement results, source pins and limitations below are unchanged.
+
 Status: diagnostic review. No gameplay or rendering optimization is implemented by this change.
 
 **The Running-only hitch is reproduced in the normal production build with the owner's real
@@ -27,9 +29,9 @@ The audit starts on current main in an isolated worktree. Original local changes
 Only new QA tooling and this evidence are proposed for merge. `src/`, the production Vite
 configuration, dependencies, rules, saves, RNG and default UI/effects are unchanged.
 
-[Host and source hashes](host.json), [fixtures and Core samples](core.json),
-[baseline trials](baseline.json), [ablations](diagnostics.json), [native attribution](prepared/native-summary.json),
-[real-house production repeats](prepared/stock-production.json) and the [hashed result index](results.json)
+[Host and source hashes](host.json), [fixtures and Core samples](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/core.json),
+[baseline trials](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/baseline.json), [ablations](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/diagnostics.json), [native attribution](prepared/native-summary.json),
+[real-house production repeats](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/stock-production.json) and the [hashed result index](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/results.json)
 are the evidence. Text evidence is pinned to LF with a local .gitattributes so file hashes survive Windows/Linux checkouts.
 Histograms have 0.1 ms buckets; reported percentiles are quantized accordingly.
 No large per-frame JSON observer is installed. Existing game diagnostics remain enabled except
@@ -42,18 +44,18 @@ locally generated house files. Nine house requests (manifest and eight GLBs) use
 AssetManager placeholder path. This setup error was found in the final asset audit. The original
 series is retained as a labelled **house-fallback experiment**, not presented as the complete
 owner scene. Its GPU, culling and navigation numbers must not be substituted for the owner's
-houses. [Original resource manifest](asset-manifest.json) records the nine missing requests.
+houses. [Original resource manifest](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/asset-manifest.json) records the nine missing requests.
 
 The correction copies the owner's eight house GLBs and manifest into both pinned revisions,
 without modifying game source. The `prepared/` confirmation hard-fails on any entity placeholder.
 It repeats current native profiles, three parent annual crossings, three production Running/Paused
 pairs plus three production annual crossings, three Running/Paused fixed-orbit pairs, a continuous
 five-minute run, and native all-pass
-counters. [Prepared resource manifest](prepared/asset-manifest.json) verifies all 70 requested
+counters. [Prepared resource manifest](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/asset-manifest.json) verifies all 70 requested
 resources against source/built bytes, with zero missing. All 22 production JS/CSS resource hashes
 match the original build. Local licensed/generated binaries are not redistributed by this PR.
 
-![Developed settlement with real house models and zero placeholders](prepared/prepared-settlement.png)
+![Developed settlement with real house models and zero placeholders](https://raw.githubusercontent.com/sidesliders1983/Pillagers/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/prepared-settlement.png)
 
 ## Device and experimental limits
 
@@ -133,7 +135,7 @@ The complete-house all-pass capture records **145 native draws: 68 shadow plus 7
 contains 44 skinned meshes but 18 unique skeletons/822 unique bones. The canonical terrain
 geometry has 735,446 triangles and six material groups; large conifer instance batches are
 also present. These are submitted-geometry and resource counts, not measured per-pixel overdraw
-or VRAM. [Native GL/resource inventory](prepared/diagnostics.json).
+or VRAM. [Native GL/resource inventory](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/diagnostics.json).
 
 The ordinary Three.js r180 `renderer.info.render` counters reset **after shadow rendering**.
 They count the main scene pass, including material groups, and exclude shadow draws. The
@@ -210,8 +212,8 @@ establish which of those dominates the GPU.
    is the main annual presentation cost. Renderer-main GC is 55 minor/2 major outer markers,
    90.6 ms merged wall, maximum 10.2 ms; it does not explain the whole multi-second stall.
    Native profiles include a short inspection/export postlude, so aggregate Core samples are
-   not equivalent to timed command spans. Raw [profiles](prepared/profiles.json),
-   [parent repeats](prepared/previous-boundary.json), [native attribution](prepared/native-summary.json).
+   not equivalent to timed command spans. Raw [profiles](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles.json),
+   [parent repeats](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/previous-boundary.json), [native attribution](prepared/native-summary.json).
 3. **Persistent GPU limit on this adapter.** Actual GPU query means in the real-house native
    Paused/Running pair are 70.55/69.82 ms; renderer JS submission is a separate, much smaller
    CPU span. The ordinary main-pass counter is 79/77 calls, versus 53/51 in the earlier parent
@@ -230,7 +232,7 @@ establish which of those dominates the GPU.
    actor/goal that enters repeated failure is not traced here. Instrument that identity before
    choosing caching, retry budgeting or a queue change. The original house-fallback repeats
    have much smaller route maxima (39.7–47.2 ms): house footprints materially affect the problem.
-   Do not transfer that fallback bound to the owner's scene. [Real-house duration data](prepared/soak.json).
+   Do not transfer that fallback bound to the owner's scene. [Real-house duration data](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/soak.json).
 
 The real-house duration run advances from Summer 810 tick 520 to year 811 tick 655 during the
 capture, including a real annual age/population change. Frame p95 grows from about 133.5 ms to
@@ -497,16 +499,16 @@ Native profiles are separate from baseline timing. Self-samples below exclude th
 
 | Scenario | Native profile duration ms | Largest named self-samples | Renderer-main GC outer markers |
 | --- | ---: | --- | ---: |
-| House fallbacks: {"fixture":"developed-810","running":false,"profile":true} · [CPU](profiles/paused.cpuprofile.gz) · [trace](profiles/paused.trace.json.gz) | 20734.3 | measure: 280.0 ms; update: 171.2 ms; update: 164.9 ms; multiplyMatrices: 42.7 ms; multiplyMatrices: 36.6 ms; renderObject: 28.9 ms | 5 minor / 0 major; 3.3 ms merged wall |
-| House fallbacks: {"fixture":"developed-810","running":true,"profile":true} · [CPU](profiles/running.cpuprofile.gz) · [trace](profiles/running.trace.json.gz) | 20721.0 | snapshot: 637.2 ms; applyCommand: 387.3 ms; snapshot: 361.5 ms; snapshot: 346.1 ms; snapshot: 343.3 ms; snapshot: 340.1 ms | 31 minor / 3 major; 69.7 ms merged wall |
-| House fallbacks: {"fixture":"boundary-810","running":true,"minutes":3,"profile":true} · [CPU](profiles/boundary-running.cpuprofile.gz) · [trace](profiles/boundary-running.trace.json.gz) | 20535.8 | snapshot: 592.7 ms; applyCommand: 354.2 ms; snapshot: 337.8 ms; snapshot: 331.3 ms; setItem: 323.5 ms; snapshot: 317.9 ms | 45 minor / 3 major; 93.3 ms merged wall |
-| House fallbacks: {"fixture":"developed-810","running":true,"selected":true,"profile":true} · [CPU](profiles/running-selected.cpuprofile.gz) · [trace](profiles/running-selected.trace.json.gz) | 20615.2 | snapshot: 638.3 ms; snapshot: 634.6 ms; applyCommand: 632.2 ms; applyCommand: 370.4 ms; snapshot: 368.6 ms; snapshot: 357.7 ms | 42 minor / 4 major; 90.7 ms merged wall |
-| House fallbacks: {"fixture":"snow-811","running":false,"freezeAfterWarmup":true,"effects":"normal","profile":true} · [CPU](profiles/paused-frozen-snow-811.cpuprofile.gz) · [trace](profiles/paused-frozen-snow-811.trace.json.gz) | 20546.2 | measure: 289.5 ms; update: 176.9 ms; update: 155.1 ms; getParameter: 57.6 ms; multiplyMatrices: 44.1 ms; WebGLRenderer.renderBufferDirect: 38.2 ms | 51 minor / 1 major; 39.3 ms merged wall |
-| House fallbacks: {"fixture":"summer-32","running":false,"freezeAfterWarmup":true,"fire":true,"effects":"normal","profile":true} · [CPU](profiles/paused-frozen-summer-32.cpuprofile.gz) · [trace](profiles/paused-frozen-summer-32.trace.json.gz) | 20417.6 | measure: 254.8 ms; toArray: 134.8 ms; toArray: 59.5 ms; getParameters: 58.4 ms; WebGLRenderer.renderBufferDirect: 36.6 ms; getParameter: 34.4 ms | 5 minor / 0 major; 4.7 ms merged wall |
-| Real houses: {"fixture":"developed-810","running":false,"profile":true} · [CPU](prepared/profiles/paused.cpuprofile.gz) · [trace](prepared/profiles/paused.trace.json.gz) | 20668.3 | measure: 293.9 ms; update: 175.8 ms; update: 141.4 ms; multiplyMatrices: 44.6 ms; getParameter: 28.9 ms; multiplyMatrices: 28.1 ms | 50 minor / 1 major; 52.9 ms merged wall |
-| Real houses: {"fixture":"developed-810","running":true,"profile":true} · [CPU](prepared/profiles/running.cpuprofile.gz) · [trace](prepared/profiles/running.trace.json.gz) | 20768.7 | snapshot: 624.4 ms; applyCommand: 376.2 ms; snapshot: 372.3 ms; snapshot: 351.5 ms; snapshot: 331.7 ms; snapshot: 330.5 ms | 45 minor / 3 major; 88.0 ms merged wall |
-| Real houses: {"fixture":"boundary-810","running":true,"minutes":3,"profile":true} · [CPU](prepared/profiles/boundary-running.cpuprofile.gz) · [trace](prepared/profiles/boundary-running.trace.json.gz) | 20589.1 | snapshot: 570.9 ms; snapshot: 351.2 ms; setItem: 342.9 ms; applyCommand: 328.7 ms; snapshot: 324.9 ms; snapshot: 318.9 ms | 55 minor / 2 major; 90.6 ms merged wall |
-| Real houses: {"fixture":"developed-810","running":true,"selected":true,"profile":true} · [CPU](prepared/profiles/running-selected.cpuprofile.gz) · [trace](prepared/profiles/running-selected.trace.json.gz) | 20825.2 | applyCommand: 673.8 ms; snapshot: 670.0 ms; snapshot: 660.9 ms; snapshot: 385.6 ms; applyCommand: 379.2 ms; snapshot: 367.1 ms | 51 minor / 5 major; 111.5 ms merged wall |
+| House fallbacks: {"fixture":"developed-810","running":false,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/paused.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/paused.trace.json.gz) | 20734.3 | measure: 280.0 ms; update: 171.2 ms; update: 164.9 ms; multiplyMatrices: 42.7 ms; multiplyMatrices: 36.6 ms; renderObject: 28.9 ms | 5 minor / 0 major; 3.3 ms merged wall |
+| House fallbacks: {"fixture":"developed-810","running":true,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/running.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/running.trace.json.gz) | 20721.0 | snapshot: 637.2 ms; applyCommand: 387.3 ms; snapshot: 361.5 ms; snapshot: 346.1 ms; snapshot: 343.3 ms; snapshot: 340.1 ms | 31 minor / 3 major; 69.7 ms merged wall |
+| House fallbacks: {"fixture":"boundary-810","running":true,"minutes":3,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/boundary-running.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/boundary-running.trace.json.gz) | 20535.8 | snapshot: 592.7 ms; applyCommand: 354.2 ms; snapshot: 337.8 ms; snapshot: 331.3 ms; setItem: 323.5 ms; snapshot: 317.9 ms | 45 minor / 3 major; 93.3 ms merged wall |
+| House fallbacks: {"fixture":"developed-810","running":true,"selected":true,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/running-selected.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/running-selected.trace.json.gz) | 20615.2 | snapshot: 638.3 ms; snapshot: 634.6 ms; applyCommand: 632.2 ms; applyCommand: 370.4 ms; snapshot: 368.6 ms; snapshot: 357.7 ms | 42 minor / 4 major; 90.7 ms merged wall |
+| House fallbacks: {"fixture":"snow-811","running":false,"freezeAfterWarmup":true,"effects":"normal","profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/paused-frozen-snow-811.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/paused-frozen-snow-811.trace.json.gz) | 20546.2 | measure: 289.5 ms; update: 176.9 ms; update: 155.1 ms; getParameter: 57.6 ms; multiplyMatrices: 44.1 ms; WebGLRenderer.renderBufferDirect: 38.2 ms | 51 minor / 1 major; 39.3 ms merged wall |
+| House fallbacks: {"fixture":"summer-32","running":false,"freezeAfterWarmup":true,"fire":true,"effects":"normal","profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/paused-frozen-summer-32.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/profiles/paused-frozen-summer-32.trace.json.gz) | 20417.6 | measure: 254.8 ms; toArray: 134.8 ms; toArray: 59.5 ms; getParameters: 58.4 ms; WebGLRenderer.renderBufferDirect: 36.6 ms; getParameter: 34.4 ms | 5 minor / 0 major; 4.7 ms merged wall |
+| Real houses: {"fixture":"developed-810","running":false,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/paused.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/paused.trace.json.gz) | 20668.3 | measure: 293.9 ms; update: 175.8 ms; update: 141.4 ms; multiplyMatrices: 44.6 ms; getParameter: 28.9 ms; multiplyMatrices: 28.1 ms | 50 minor / 1 major; 52.9 ms merged wall |
+| Real houses: {"fixture":"developed-810","running":true,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/running.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/running.trace.json.gz) | 20768.7 | snapshot: 624.4 ms; applyCommand: 376.2 ms; snapshot: 372.3 ms; snapshot: 351.5 ms; snapshot: 331.7 ms; snapshot: 330.5 ms | 45 minor / 3 major; 88.0 ms merged wall |
+| Real houses: {"fixture":"boundary-810","running":true,"minutes":3,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/boundary-running.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/boundary-running.trace.json.gz) | 20589.1 | snapshot: 570.9 ms; snapshot: 351.2 ms; setItem: 342.9 ms; applyCommand: 328.7 ms; snapshot: 324.9 ms; snapshot: 318.9 ms | 55 minor / 2 major; 90.6 ms merged wall |
+| Real houses: {"fixture":"developed-810","running":true,"selected":true,"profile":true} · [CPU](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/running-selected.cpuprofile.gz) · [trace](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/profiles/running-selected.trace.json.gz) | 20825.2 | applyCommand: 673.8 ms; snapshot: 670.0 ms; snapshot: 660.9 ms; snapshot: 385.6 ms; applyCommand: 379.2 ms; snapshot: 367.1 ms | 51 minor / 5 major; 111.5 ms merged wall |
 
 ## Regression provenance
 
@@ -648,14 +650,14 @@ The full suite on unchanged application/tests reports **789 tests: 786 passed, o
 two skipped** (concurrency two, 636.6 seconds). The failure is inherited at
 `tests/meshy-human-runtime.test.mjs:142`: the skin test expects a literal `0.20` in the
 shader while current code uses `pillagersSkinTintStrength`. A focused rerun reproduces it
-(eight passed/one failed). [Failure output](validation-inherited.txt) is retained. This audit
+(eight passed/one failed). [Failure output](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/validation-inherited.txt) is retained. This audit
 neither changes the shader nor weakens the assertion. Full validation remains **failed**.
 
 After the house correction, all 27 housing, lifecycle, stability and clothing tests pass with
 zero skips. Production bundle inspection finds zero audit bridge identifiers; the stock control
 also asserts the bridge is absent. All new scripts receive `node --check`; formatting is
 reviewed manually and `git diff --check` is required because no formatter is configured.
-[Validation record](validation.json), [prepared record](prepared/validation.json) and
+[Validation record](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/validation.json), [prepared record](https://github.com/sidesliders1983/Pillagers/blob/933deeaf13aa005a14564eaea4cc3c724981f446/docs/qa/fjord-runtime-performance/prepared/validation.json) and
 [integrity record](integrity.json) distinguish measured-data integrity from project test status.
 The complete measurement audit passes **134 exact Core replays across 152 capture windows**;
 it verifies fixture/build/resource hashes, zero prepared placeholders, visible scheduling,

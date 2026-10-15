@@ -1,0 +1,19 @@
+# Keep generated capture output out of future source changes.
+# See docs/qa/fjord-performance-evidence.md for the pinned originals.
+*
+!*/
+!*.md
+!.gitignore
+!/.gitattributes
+!/168/final-plan.json
+!/168/plan.json
+!/169/native-summary.json
+!/169/plan.json
+!/170/fixtures/boundary-810.json
+!/170/fixtures/developed-810.json
+!/170/fixtures/later-boundary-811.json
+!/170/fixtures/manifest.json
+!/170/plan.json
+!/170/production-builds.json
+!/170/stock-results.json
+!/170/visual/comparison.json
