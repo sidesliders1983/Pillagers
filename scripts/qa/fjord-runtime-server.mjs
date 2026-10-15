@@ -43,6 +43,7 @@ function instrument(source) {
     return "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" + source;
 }
 const server = await createServer({
+    cacheDir: process.env.QA_CACHE_DIR || 'artifacts/fjord-runtime-vite-cache',
     server: { host: '127.0.0.1', port: Number(process.env.QA_PORT || 5190), strictPort: true },
     plugins: [{ name: 'fjord-runtime-audit-only', enforce: 'pre', transform(source, id) {
         if (id.replaceAll('\\', '/').endsWith('/src/fjord-play/FjordPlay.ts')) return { code: instrument(source), map: null };
