@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE || 'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const output = process.env.QA_OUTPUT;
@@ -25,7 +26,10 @@ try {
         const page = await browser.newPage({ viewport: { width: 720, height: 800 }, deviceScaleFactor: 1 });
         page.setDefaultTimeout(180000);
         page.on('pageerror', error => errors.push(error.message));
-        await page.addInitScript(json => sessionStorage.setItem('pillagers.fjord-play.active.v1', json), fixture);
+        await page.addInitScript(json => {
+            if (!sessionStorage.getItem('pillagers.fjord-play.active.v1'))
+                sessionStorage.setItem('pillagers.fjord-play.active.v1', json);
+        }, fixture);
         await page.goto(variant.origin + '/fjord-play');
         await page.waitForFunction(() => window.__fjordAudit && document.querySelector('#fjord-canvas')?.dataset.ready);
         const worldCheck = await page.evaluate(async () => {
@@ -67,6 +71,7 @@ try {
             await refs.layer.sync(entities);
             const newRoot = refs.layer.entries.get(key).model;
             const newHuman = refs.models.actors.get(newRoot).human;
+            window.__fitReload = { canonical, checkpoint: refs.shared.persist() };
             return { id, initialAge, age, boundsRetained, picking, offscreenAge, offscreenPicking,
                 disposed, distinctReappearance: newRoot !== root, restoredAge: newHuman.dna.age,
                 canonicalUnchangedByRemoval: canonical === refs.session.saveJSON(),
@@ -80,7 +85,21 @@ try {
         assert.equal(worldCheck.canonicalUnchangedByRemoval, true);
         assert.deepEqual(worldCheck.placeholders, []);
         if (variant.label === 'after') assert.equal(worldCheck.boundsRetained, true);
-        worldChecks.push({ variant: variant.label, sourceCommit: variant.sourceCommit, ...worldCheck });
+        const reload = await page.evaluate(() => window.__fitReload);
+        await page.evaluate(checkpoint => sessionStorage.setItem('pillagers.fjord-play.active.v1', checkpoint), reload.checkpoint);
+        await page.reload();
+        await page.waitForFunction(() => window.__fjordAudit && document.querySelector('#fjord-canvas')?.dataset.ready);
+        const restored = await page.evaluate(id => {
+            const refs = window.__fjordAudit.references;
+            const [, actor] = [...refs.models.actors].find(([root]) => root.userData.canonical.id === id);
+            return { age: actor.human.dna.age, canonical: refs.session.saveJSON(),
+                modules: [...actor.human.fit.modules.keys()], source: actor.human.fit.body };
+        }, worldCheck.id);
+        assert.equal(restored.canonical, reload.canonical);
+        assert.equal(restored.age, worldCheck.offscreenAge);
+        worldChecks.push({ variant: variant.label, sourceCommit: variant.sourceCommit, ...worldCheck,
+            reload: { age: restored.age, canonicalEqual: true, modules: restored.modules, source: restored.source,
+                canonicalSha256: createHash('sha256').update(restored.canonical).digest('hex') } });
         await page.evaluate(async () => { const module = await import('/scripts/qa/fjord-fit-stage.mjs'); window.__fitStage = await module.createFitStage(); });
         for (const spec of cases) for (const view of spec.hair ? ['front', 'detail'] : ['front', 'side']) {
             const result = await page.evaluate(({ spec, view }) => window.__fitStage.draw(spec, view), { spec, view });
@@ -104,4 +123,7 @@ try {
     assert.deepEqual(errors, []);
     await writeFile(output + '/captures.json', JSON.stringify({ captures, worldChecks, errors,
         note: 'Authored native assets at fixed poses under neutral lights; child below-five is an isolated fitting proof, not a change to indoor visibility. Viewport is not physical mobile hardware. Before is the pinned pre-170 full-refit app; after performs the birthday through the optimized path.' }, null, 2) + '\n');
+} catch (error) {
+    await writeFile(output + '/failed-captures.json', JSON.stringify({ captures, worldChecks, errors, failure: String(error) }, null, 2) + '\n');
+    throw error;
 } finally { await browser.close(); }
