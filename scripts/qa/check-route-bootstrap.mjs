@@ -15,10 +15,12 @@ try {
             await page.goto(origin + route, { waitUntil: 'commit' });
             await page.locator('body').waitFor({ state: 'attached' });
             console.log('Bootstrap:', route);
+            assert.equal(await page.title(), 'FjordSide');
+            assert.equal(await page.locator('meta[name="apple-mobile-web-app-title"]').getAttribute('content'), 'FjordSide');
             const text = await page.locator('body').innerText();
             assert.doesNotMatch(text, /1200 DC|Preparing the shore|WORLD PROTOTYPE|FPS:|Explore Fjordside/,
                 route + ' must not flash the prototype while its module loads');
-            await page.getByRole('status').filter({ hasText: 'Loading Pillagers' }).waitFor();
+            await page.getByRole('status').filter({ hasText: 'Loading FjordSide' }).waitFor();
         } finally { release(); await page.close(); }
     }
     console.log('All route documents show only the neutral bootstrap before JavaScript loads.');

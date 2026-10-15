@@ -25,6 +25,31 @@ try {
         { waitUntil: 'domcontentloaded' });
     const story = page.locator('#loading-clan-book-text');
     await story.waitFor({ timeout: 5000 });
+    assert.equal(await page.title(), 'FjordSide');
+    assert.equal(await page.locator('.island-loading-eyebrow').textContent(), 'FjordSide · a new shore');
+    assert.equal(await page.locator('meta[name="application-name"]').getAttribute('content'), 'FjordSide');
+    assert.equal(await page.locator('meta[name="apple-mobile-web-app-title"]').getAttribute('content'), 'FjordSide');
+    const manifestURL = await page.locator('link[rel="manifest"]').getAttribute('href');
+    const response = await page.request.get(new URL(manifestURL, page.url()).href);
+    assert.ok(response.ok());
+    const manifest = await response.json();
+    assert.equal(manifest.name, 'FjordSide');
+    assert.equal(manifest.short_name, 'FjordSide');
+    assert.equal(manifest.start_url, '/fjord-play');
+    assert.equal(manifest.display, 'standalone');
+    const icons = await page.evaluate(async manifestIcons => {
+        const links = [...document.querySelectorAll('link[rel="icon"], link[rel="apple-touch-icon"]')];
+        const definitions = [...links.map(link => ({ src: link.href, sizes: link.sizes.value })), ...manifestIcons];
+        return Promise.all(definitions.map(async icon => {
+            const image = new Image();
+            image.src = icon.src;
+            await image.decode();
+            return { src: new URL(icon.src, location.href).pathname, expected: icon.sizes,
+                actual: image.naturalWidth + 'x' + image.naturalHeight };
+        }));
+    }, manifest.icons);
+    assert.equal(icons.length, 6);
+    for (const icon of icons) assert.equal(icon.actual, icon.expected, icon.src);
     const opening = await story.textContent();
     assert.ok(opening.length > 100);
     assert.equal(await page.locator('#loading-clan-book-title').textContent(), 'The founding');
@@ -61,13 +86,28 @@ try {
     if (await collapse.isVisible()) await collapse.tap();
     await page.screenshot({ path: output + '/arrival.png' });
     await page.locator('#fjord-menu > summary').tap();
+    assert.equal(await page.locator('#fjord-menu h1').textContent(), 'FjordSide');
+    await page.screenshot({ path: output + '/menu.png' });
+    await page.locator('#fjord-campaign > summary').tap();
+    const exports = [];
+    for (const [selector, filename] of [
+        ['#fjord-export', 'fjordside-campaign.json'], ['#fjord-export-core', 'fjordside-core.json'],
+    ]) {
+        const downloaded = page.waitForEvent('download');
+        await page.locator(selector).tap();
+        const download = await downloaded;
+        assert.equal(download.suggestedFilename(), filename);
+        exports.push(filename);
+        await download.delete();
+    }
+    await page.locator('#fjord-campaign > summary').tap();
     await page.locator('#clan-book-open').tap();
     const inGameText = (await page.locator('#clan-book-story > p').allTextContents()).join('\n\n');
     assert.equal(inGameText, opening, 'The ordinary menu reader keeps the same published prose.');
     assert.deepEqual(errors, []);
     writeFileSync(output + '/results.json', JSON.stringify({ viewport, touchEmulation: true,
         exactOpening: true, retainedAfterArrival: true, retainedScroll: true,
-        playableTime: saved.fjord.campaign.time, entrance, errors }, null, 2));
+        playableTime: saved.fjord.campaign.time, entrance, branding: { title: await page.title(), icons, manifest, exports }, errors }, null, 2));
     console.log('Canonical founding chapter remains readable through loading and matches the in-game book.');
 } finally {
     await browser.close();
