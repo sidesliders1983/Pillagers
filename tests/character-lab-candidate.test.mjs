@@ -53,7 +53,9 @@ test('preview builds resolve once through existing strength composition, preserv
 
 test('candidate snapshots roundtrip their real source; legacy hashes, incompatible modules and LODs cannot masquerade as that source',()=>{
  const original=snapshot(),parsed=parseLabSnapshot(JSON.parse(JSON.stringify(original)));
- assert.deepEqual(parsed,original);assert.equal(parsed.modules[0].id,goldenLabBody.id);assert.equal(parsed.modules[0].sha256,goldenLabBody.sha256);
+ assert.deepEqual(parsed,{...original,presentation:{...original.presentation,shoes:'none',trousers:'none',top:'none'}});
+ assert.equal(original.presentation.shoes,undefined,'Legacy snapshot input stays unchanged while omitted slots receive defaults.');
+ assert.equal(parsed.modules[0].id,goldenLabBody.id);assert.equal(parsed.modules[0].sha256,goldenLabBody.sha256);
  const changes=[s=>s.modules[0].sha256='0'.repeat(64),s=>s.modules[0].id='body/universal-human',s=>s.modules[0].path='/universal-human/UniversalHuman_LOD2.glb',s=>s.styleVersion='pillagers-character-style/0.4-draft.1',s=>s.body.source='published',s=>s.lod=0,s=>s.presentation.hair='hair/short',s=>s.presentation.outfit='garment/cream-tunic',s=>s.presentation.technicalWaistWrap=true];
  for(const mutate of changes){const s=structuredClone(original);mutate(s);assert.throws(()=>parseLabSnapshot(s));}
  parsed.body.preset='raven';parsed.camera.position[0]=5;assert.equal(original.body.preset,'giant');assert.equal(original.camera.position[0],0);
