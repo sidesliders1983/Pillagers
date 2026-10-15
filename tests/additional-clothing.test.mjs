@@ -175,5 +175,3 @@ test('short trousers bind both leg openings and preserve the approved source mat
     assert.equal(selection.outfitId, null);
     assert.deepEqual(new Set(selection.garmentIds), new Set([asset.id, 'garment/meshy-high-shoes-005']));
 });
-
-
