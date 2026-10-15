@@ -77,7 +77,7 @@ export function resolveBirths(state:SimulationState,roll:(bps:number)=>boolean,r
 }
 
 export function isCaregiver(state:SimulationState,id:string):boolean {
-    return Object.values(state.mechanics!.people).some(info=>careActive(state,info)&&info.caregiverId===id);
+    return Object.values(state.mechanics!.people).some(info=>info.caregiverId===id&&careActive(state,info));
 }
 export function isProvidingCare(state:SimulationState,id:string):boolean {
     const info=state.mechanics!.people[id];
