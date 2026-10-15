@@ -1,2 +1,0 @@
-$ node scripts/validate-characters.mjs "--lab-previews"
-Character validation passed (including explicit Lab preview audits; visual approval pending): 20 assets / 36 GLBs, 12 Golden Characters, 19 equipped modules, Idle/Walk/Run + World.

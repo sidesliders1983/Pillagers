@@ -1,0 +1,14 @@
+# Keep generated capture output out of future source changes.
+# See docs/qa/fjord-performance-evidence.md for the pinned originals.
+*
+!*/
+!*.md
+!.gitignore
+!/camera-safety/results.json
+!/hair-integration/production-tap/result.json
+!/investigation/profile-harness.mjs
+!/plan.json
+!/production-selection/observations.json
+!/production-selection/result.json
+!/production-tap/result.json
+!/summary.json

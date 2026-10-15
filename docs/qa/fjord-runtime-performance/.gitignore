@@ -1,0 +1,19 @@
+# Keep generated capture output out of future source changes.
+# See docs/qa/fjord-performance-evidence.md for the pinned originals.
+*
+!*/
+!*.md
+!.gitignore
+!/.gitattributes
+!/fixtures/boundary-810.json
+!/fixtures/crowd-25.json
+!/fixtures/developed-810.json
+!/fixtures/rain-810.json
+!/fixtures/snow-811.json
+!/fixtures/summer-17.json
+!/fixtures/summer-32.json
+!/host.json
+!/integrity.json
+!/native-summary.json
+!/prepared/native-summary.json
+!/regression-provenance.json
