@@ -1,3 +1,6 @@
+import { validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
+import type { BirthdayCalendar, BirthdayCalendarMode } from './BirthdayCalendar';
+export type { BirthdayCalendarMode } from './BirthdayCalendar';
 import { foundingTime, type FoundingPhase } from './FoundingPhase';
 export type { FoundingPhase } from './FoundingPhase';
 import { setCampfire, validateCampfire } from './Campfire';
@@ -31,7 +34,7 @@ export const ticksPerWinter = 1000;
 export type Occupation = 'farmer' | 'herder' | 'fisher' | 'hunter' | 'textileWorker' | 'smith' | 'woodworker' | 'boatbuilder' | 'trader' | 'leatherAndJewelleryMaker';
 export type GameTime = {winter: number; tick: number};
 export type Persona = {
-    id: string; name: string; birthWinter: number; deathWinter: number | null;
+    id: string; name: string; birthWinter: number; birthTick?: number; deathWinter: number | null; deathTick?: number;
     originClanId: string; dna: CharacterDNA; parentIds: string[]; partnerId: string | null;
     occupation: Occupation | null;
     occupationHistory: {occupation: Occupation; startedAt: GameTime; endedAt: GameTime | null}[];
@@ -39,6 +42,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    birthdayCalendar?: BirthdayCalendar;
     foundingPhase?: FoundingPhase;
     campfire?: CampfireState; social?: SocialState; entityPrefix?:string;personaArchive?:Record<string,Persona>;world?:WorldState; weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
     clan: {id: string; name: string}; personas: Record<string, Persona>;
@@ -53,15 +57,16 @@ export function createCampaign(
     mechanicsOverrides: Partial<PrototypeConfig> = {}, weatherOverrides: Partial<WeatherConfig> = {},
     expeditionOverrides: Partial<ExpeditionConfig> = {}, socialOverrides: Partial<SocialConfig> = {},
     targetLandingConfigs: Record<string, LandingConfig> = {}, foundingPhase?: FoundingPhase,
+    calendarMode?: BirthdayCalendarMode,
 ): SimulationState {
     // Player defaults are separate from the shared Landing factory used by CPU clans and QA.
-    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase);
+    const state = generateCampaign(seed, {initialFood: 15, ...overrides}, mechanicsOverrides, foundingPhase, calendarMode);
     initializeWeather(state, weatherOverrides);
     // A restarted world can contain new neighbours; inherit the first saved CPU rules for those.
     const savedTargetDefault = Object.keys(targetLandingConfigs).sort().map(id => targetLandingConfigs[id])[0];
     initializeWorld(state, (targetSeed, clanId) => {
         const targetConfig = targetLandingConfigs[clanId] ?? savedTargetDefault ?? overrides;
-        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides, foundingPhase);
+        const target = generateCampaign(targetSeed, targetConfig, mechanicsOverrides, foundingPhase, calendarMode);
         initializeWeather(target, weatherOverrides);
         return target;
     }, expeditionOverrides);
@@ -180,6 +185,7 @@ function validateState(state: SimulationState): void {
     };
     for (const [id, person] of Object.entries(state.personas)) {
         if (id !== person.id || !person.name || !person.originClanId) throw new Error('Invalid persona identity');
+        validatePersonaDates(state,person);
         integer(person.birthWinter, 'Birth Winter'); integer(person.workProgress, 'Work progress');
         if (person.birthWinter > state.time.winter) throw new Error('Future birth');
         if (person.deathWinter !== null) {
@@ -228,7 +234,8 @@ function validateState(state: SimulationState): void {
         integer(event.time.winter, 'Event Winter'); integer(event.time.tick, 'Event tick');
         if (event.time.tick >= ticksPerWinter || event.time.winter < 800 || event.time.winter > state.time.winter || (event.time.winter === state.time.winter && event.time.tick > state.time.tick)) throw new Error('Invalid event time');
     });
-    for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');}
+    for(const [id,p] of Object.entries(state.personaArchive??{})){if(id!==p.id||!p.name||!p.originClanId)throw new Error('Invalid historical identity');parseCharacterDNA(p.dna);integer(p.birthWinter,'Historical birth');validatePersonaDates(state,p);}
+    validateBirthdayCalendar(state);
     validateCampfire(state);
     validateSocial(state);
     validateMechanics(state);

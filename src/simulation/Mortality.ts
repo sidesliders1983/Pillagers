@@ -1,3 +1,4 @@
+import { careActive, careEndpoint, endCare } from './CareCalendar';
 import {personaAway} from './WorldExpeditions';
 import {personaWeatherExposure,permanentlySheltered,weatherFacts} from './Weather';
 import type {SimulationState} from './SimulationCore';
@@ -24,6 +25,7 @@ export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolea
     for(const death of deaths){
         const person=state.personas[death.id],info=mechanics.people[death.id];
         person.deathWinter=state.time.winter;
+        if(person.birthTick!==undefined)person.deathTick=state.time.tick;
         const active=person.occupationHistory.at(-1);if(active?.endedAt===null)active.endedAt={...state.time};
         if(person.occupation!==null)info.progress[person.occupation]=person.workProgress;
         person.occupation=null;info.occupationLocked=false;
@@ -39,9 +41,19 @@ export function resolveMortality(state:SimulationState,roll:(bps:number)=>boolea
         const deadIds=new Set(deaths.map(d=>d.id));
         for(const id of Object.keys(mechanics.people).sort()){
             const person=state.personas[id],info=mechanics.people[id];
-            if(person.deathWinter!==null){info.childcareUntilWinter=Math.min(info.childcareUntilWinter,state.time.winter);info.caregiverId=null;info.caregiverLocked=false;continue;}
+            if(person.deathWinter!==null){endCare(state,info);continue;}
             if(info.caregiverId!==null&&deadIds.has(info.caregiverId)){info.caregiverId=null;info.caregiverLocked=false;}
-            if(info.childcareUntilWinter>state.time.winter&&deaths.some(d=>state.personas[d.id].parentIds.includes(id))){
+            if(careActive(state,info)&&deaths.some(d=>state.personas[d.id].parentIds.includes(id))){
+                if(info.childcareUntilTick!==undefined){
+                    const now=state.time.winter*state.ticksPerWinter+state.time.tick;
+                    const endpoints=Object.values(state.personas).filter(child=>child.deathWinter===null&&child.parentIds.includes(id))
+                        .map(child=>(child.birthWinter+mechanics.config.childcareWinters)*state.ticksPerWinter+(child.birthTick??0));
+                    const endpoint=Math.min(careEndpoint(state,info),Math.max(now,...endpoints));
+                    info.childcareUntilWinter=Math.floor(endpoint/state.ticksPerWinter);
+                    info.childcareUntilTick=endpoint%state.ticksPerWinter;
+                    if(!careActive(state,info))endCare(state,info);
+                    continue;
+                }
                 const endpoints=Object.values(state.personas).filter(child=>child.deathWinter===null&&child.parentIds.includes(id)).map(child=>child.birthWinter+mechanics.config.childcareWinters);
                 info.childcareUntilWinter=Math.min(info.childcareUntilWinter,Math.max(state.time.winter,...endpoints));
                 if(info.childcareUntilWinter<=state.time.winter){info.caregiverId=null;info.caregiverLocked=false;}

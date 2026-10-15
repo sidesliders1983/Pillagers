@@ -1,3 +1,4 @@
+import { compareBirths } from './ScheduledBirths';
 import {pruneSocialIncidents} from './PersonalityLifeEvents';
 import {resolveMortality} from './Mortality';
 import {farmyards,reconcileFarmyards} from './Farmyards';
@@ -152,6 +153,13 @@ function transferPersona(source:SimulationState,destination:SimulationState,id:s
  destination.personaArchive??={};const seen=new Set<string>();
  const archiveParents=(parentId:string)=>{if(seen.has(parentId)||destination.personas[parentId])return;seen.add(parentId);const parent=source.personas[parentId]??source.personaArchive?.[parentId];if(parent){destination.personaArchive![parentId]=historicalSnapshot(parent,source);parent.parentIds.forEach(archiveParents);}};
  p.parentIds.forEach(archiveParents);
+ const pending=source.birthdayCalendar?.pendingBirths.filter(birth=>birth.motherId===id)??[];
+ if(pending.length){
+  destination.birthdayCalendar??={version:1,birthPolicy:'annual',pendingBirths:[]};
+  for(const birth of pending){archiveParents(birth.fatherId);destination.birthdayCalendar.pendingBirths.push(birth);}
+  destination.birthdayCalendar!.pendingBirths.sort(compareBirths);
+  source.birthdayCalendar!.pendingBirths=source.birthdayCalendar!.pendingBirths.filter(birth=>birth.motherId!==id);
+ }
  if(p.partnerId!==null&&source.personas[p.partnerId]){source.personas[p.partnerId].partnerId=null;p.partnerId=null;}
  for(const home of Object.values(source.households)){home.memberIds=home.memberIds.filter(x=>x!==id);if(!home.memberIds.length)home.residenceId=null;}
  for(const control of Object.values(source.mechanics!.people))if(control.caregiverId===id){control.caregiverId=null;control.caregiverLocked=false;}

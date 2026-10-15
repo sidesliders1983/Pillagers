@@ -1,9 +1,10 @@
+import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import { freezeReadView } from './ReadView';
 import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
 import { createCampaign, applyCommand, serializeState, reconstructState } from '../simulation/SimulationCore';
-import type { FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
+import type { BirthdayCalendarMode, FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
@@ -50,8 +51,8 @@ export class GameplaySession {
     trend = { food: 0, materials: 0 };
     running = false;
     minutesPerWinter = 3;
-    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase) {
-        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase);
+    constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase, calendarMode?: BirthdayCalendarMode) {
+        this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode);
         this.book = new ClanBook(this.state, true, narrativeSeed);
     }
     snapshot(): SimulationState {
@@ -111,8 +112,8 @@ export class GameplaySession {
             throw new Error('This save has no gameplay mechanics');
         this.replace(state, false);
     }
-    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase): void {
-        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase));
+    newCampaign(seed: number, weatherEnabled = true, socialEnabled = true, foundingPhase = this.state.foundingPhase, calendarMode: BirthdayCalendarMode | undefined = birthdayCalendarMode(this.state)): void {
+        this.replace(createCampaign(seed, {}, {}, { enabled: weatherEnabled }, {}, { enabled: socialEnabled }, {}, foundingPhase, calendarMode));
     }
     restartCampaign(sameFounders = false, drawSeed: () => number = () => crypto.getRandomValues(new Uint32Array(1))[0], weatherEnabled = this.state.weather?.config.enabled ?? false, socialEnabled = this.state.social?.config.enabled ?? false, foundingPhase = this.state.foundingPhase): void {
         let seed = sameFounders ? this.state.seed : drawSeed();
@@ -121,7 +122,7 @@ export class GameplaySession {
         const targetLandingConfigs = Object.fromEntries(Object.entries(this.state.world?.targetClans ?? {})
             .filter(([, target]) => target.landing)
             .map(([id, target]) => [id, target.landing!.config]));
-        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase));
+        this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state)));
     }
     private replace(state: SimulationState, fresh = true): void {
         this.familyIndex = new FamilyTreeIndex();

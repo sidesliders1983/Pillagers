@@ -1,3 +1,4 @@
+import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { IslandLoading, yieldForInput } from './IslandLoading';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
@@ -67,10 +68,12 @@ export class FjordPlay {
         const query = new URLSearchParams(location.search);
         // New and restarted Fjord campaigns arrive in Summer; stored campaigns remain authoritative.
         const foundingPhase = 'summer-800-v1';
+        // Owner review gate: existing saves remain authoritative; only explicit new games opt in.
+        const calendarMode = query.get('birthdays') === 'individual-v1' ? 'individual-v1' : undefined;
         let stored: string | null = null;
         try { stored = sessionStorage.getItem(activeSettlementKey); } catch { /* Storage is optional. */ }
         if (!stored) {
-            const proposal = new GameplaySession(Number(query.get('seed') ?? 32), undefined, true, foundingPhase);
+            const proposal = new GameplaySession(Number(query.get('seed') ?? 32), undefined, true, foundingPhase, calendarMode);
             this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
             proposal.book.notifyPending();
             this.loading = new IslandLoading(false, this.foundingBook);
@@ -351,7 +354,7 @@ export class FjordPlay {
                     if (restart) {
                         proposal.loadJSON(this.session.saveJSON());
                         proposal.restartCampaign(sameFounders.checked, undefined, weatherField.checked, undefined, foundingPhase);
-                    } else proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase);
+                    } else proposal.newCampaign(Number(seedField.value), weatherField.checked, true, foundingPhase, calendarMode ?? (birthdayCalendarMode(this.session.readSnapshot())));
                     this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
                     proposal.book.notifyPending();
                     loading = this.loading = new IslandLoading(true, this.foundingBook);

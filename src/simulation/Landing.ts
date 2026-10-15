@@ -1,3 +1,4 @@
+import { initializeBirthdayCalendar, type BirthdayCalendarMode } from './BirthdayCalendar';
 import { foundingTime, type FoundingPhase } from './FoundingPhase';
 import {eventFacts} from './EventFacts';
 import {canPartner} from './FamilyMechanics';
@@ -15,7 +16,7 @@ export const defaultLandingConfig:LandingConfig={initialFood:30,initialMaterials
 export type Cattle = {id:string;sex:'female'|'male';birthWinter:number;deathWinter:number|null;parentIds:string[];origin:'founding'|'reproduction';lastCalvingWinter:number|null;farmyardId:string|null;foodProgress:number};
 export type LandingState = {version:3;config:LandingConfig;region:{id:string;settledByClanId:string|null};founderIds:string[];longships:Record<string,{id:string;acquiredWinter:number;salvagedWinter:number|null}>;cattle:Record<string,Cattle>;cattleArchive?:Record<string,Cattle>};
 
-export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}, foundingPhase?:FoundingPhase):SimulationState {
+export function createCampaign(seed:number, overrides:Partial<LandingConfig>={}, mechanicsOverrides:Partial<PrototypeConfig>={}, foundingPhase?:FoundingPhase, calendarMode?:BirthdayCalendarMode):SimulationState {
     if(!Number.isInteger(seed)||seed<0||seed>0xffffffff)throw new Error('Seed must be uint32');
     const config={...defaultLandingConfig,...overrides};
     for(const value of Object.values(config))if(!Number.isSafeInteger(value)||value<0)throw new Error('Invalid landing configuration');
@@ -32,6 +33,7 @@ export function createCampaign(seed:number, overrides:Partial<LandingConfig>={},
         state.households[id]={id,memberIds:[id],residenceId:`tent-${id}`};
         state.residences[`tent-${id}`]={id:`tent-${id}`,kind:'tent',buildingId:null};
     }
+    initializeBirthdayCalendar(state, calendarMode);
     state.mechanics=initializeMechanics(state,mechanicsOverrides);
     state.landing={version:3,config,region:{id:'landing-region',settledByClanId:null},founderIds:Object.keys(state.personas),longships:{'founding-longship':{id:'founding-longship',acquiredWinter:800,salvagedWinter:null}},cattle:{}};
     for(let i=1;i<=3;i++)state.landing.cattle[`cattle-${i}`]={id:`cattle-${i}`,sex:i===3?'male':'female',birthWinter:797,deathWinter:null,parentIds:[],origin:'founding',lastCalvingWinter:null,farmyardId:null,foodProgress:0};

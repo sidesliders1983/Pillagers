@@ -171,7 +171,7 @@ function emit(state: SimulationState, type: string, details: Record<string, unkn
     if (Array.isArray(details.participants)) facts.people = details.participants.map(id => {
         const person = personaIdentity(state, String(id));
         if (!person) throw new Error('Unknown social participant.');
-        return {id, name: person.name, age: (person.deathWinter ?? state.time.winter) - person.birthWinter};
+        return {id, name: person.name, age: personaAge(state, id)};
     });
     state.events.push({id, type, time: {...state.time}, details: facts});
     return id;
