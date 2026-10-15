@@ -38,6 +38,8 @@ test('projection reads invalidate for state, mooring, layout and campaign replac
     const view = shared.fjord.readProjection();
     assert.equal(shared.fjord.readProjection(), view);
     assert.ok(Object.isFrozen(view.entities[0]));
+    for (const plot of Object.values(shared.fjord.layout.plots)) assert.equal(Object.isFrozen(plot), false);
+    for (const point of Object.values(shared.fjord.layout.points)) assert.equal(Object.isFrozen(point), false);
     assert.throws(() => { view.layout.mooring.x++; }, TypeError);
     shared.select({ kind: 'persona', id: 'founder-1' });
     assert.equal(shared.fjord.readProjection(), view, 'selection is a separate change domain');

@@ -39,7 +39,7 @@ export class FjordCampaign {
             this.readBlueprint !== this.blueprint || this.readLayout !== layoutKey) {
             const view = this.project(this.session.readSnapshot());
             // The adapter owns a mutable layout; readers must not freeze or mutate it through the view.
-            this.readView = freezeReadView({ ...view, layout: structuredClone(view.layout) });
+            this.readView = freezeReadView(structuredClone(view));
             this.readRevision = this.session.revision;
             this.readBlueprint = this.blueprint;
             this.readLayout = JSON.stringify(this.layout);
