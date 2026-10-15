@@ -1,0 +1,122 @@
+{
+  "version": "pillagers-fit/0.2",
+  "id": "garment/meshy-low-shoes-005",
+  "moduleSha256": "0bd55b3eeb8abadaecc1e9ab4d824a5beaee454833473524173e17b14d7c2e2c",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "id": "approved-additional-outfit-native",
+    "version": 1,
+    "blender": "not-used",
+    "heelCorrection": "posterior-sole-envelope/1"
+  },
+  "coordinateFrame": {
+    "up": "+Y",
+    "front": "+Z",
+    "unit": "metre",
+    "origin": "Meshy source bind"
+  },
+  "construction": "bilateral",
+  "skinning": "authored-four-native",
+  "reviewScope": "Approved images; native motion and body-shape review",
+  "materialPolicy": {
+    "kind": "provider-original",
+    "provider": "Meshy",
+    "sourceSha256": "45cae28d4779b7dad4d186e9c86877466889dd45d7dc2904ed97083b722d2e4b",
+    "reviewOnly": true
+  },
+  "precomputedNative": {
+    "version": 3,
+    "coordinateFrame": "metre",
+    "meshes": [
+      {
+        "mesh": "Module_low-shoes_left_0",
+        "vertices": 27347
+      },
+      {
+        "mesh": "Module_low-shoes_right",
+        "vertices": 27347
+      }
+    ],
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "moduleCoverage": [
+      {
+        "regions": [
+          "LOWER_LEG_L",
+          "LOWER_LEG_R",
+          "FEET"
+        ],
+        "minimumY": -0.04,
+        "maximumY": 0.16211914062500002
+      }
+    ]
+  },
+  "supportedAges": {
+    "min": 18,
+    "max": 100
+  },
+  "lods": {
+    "0": {
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 0
+    },
+    "1": {
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 1
+    },
+    "2": {
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 2
+    }
+  },
+  "regions": {},
+  "seams": [],
+  "coverageRimContacts": [],
+  "coverageClipPlanes": [],
+  "garmentFrames": {}
+}

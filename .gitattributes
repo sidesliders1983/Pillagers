@@ -19,3 +19,8 @@ docs/qa/food-resilience-v03/report.md text eol=lf
 # Exact-byte receipts for occupation profile comparison.
 docs/qa/occupation-profiles-v03b/*.json text eol=lf
 docs/qa/occupation-profiles-v03b/*.md text eol=lf
+
+# Lab clothing sidecars are loaded by exact SHA-256 identity.
+public/character-lab/candidates/meshy-grid-trial-002/*.json -text
+public/character-lab/candidates/meshy-additional-005/*.json -text
+public/character-lab/candidates/meshy-short-trousers-006/*.json -text

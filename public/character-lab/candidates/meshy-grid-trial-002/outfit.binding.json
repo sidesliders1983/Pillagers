@@ -1,0 +1,175 @@
+{
+  "version": "pillagers-fit/0.2",
+  "id": "garment/meshy-grid-trial-001",
+  "moduleSha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "id": "accepted-grid-trial-preparation",
+    "version": 1,
+    "blender": "not-used"
+  },
+  "coordinateFrame": {
+    "up": "+Y",
+    "front": "+Z",
+    "unit": "metre",
+    "origin": "Meshy source bind"
+  },
+  "construction": "bilateral",
+  "skinning": "surface-barycentric-native",
+  "reviewScope": "Accepted neutral trial; motion skirt fit remains unapproved",
+  "materialPolicy": {
+    "kind": "provider-original",
+    "provider": "Meshy",
+    "sourceSha256": "d90e5e0dec9eabc065b7b22542c3ecf19a516681924755951add6fbc71e6d98e",
+    "reviewOnly": true
+  },
+  "precomputedNative": {
+    "version": 2,
+    "coordinateFrame": "metre",
+    "meshes": [
+      {
+        "mesh": "Module_grid_trial_top_0",
+        "vertices": 66875
+      },
+      {
+        "mesh": "Module_grid_trial_trousers_0",
+        "vertices": 26976
+      }
+    ],
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "coverage": {
+      "arms": [
+        {
+          "regions": [
+            "UPPER_ARM_L",
+            "LOWER_ARM_L"
+          ],
+          "normal": [
+            0.4355995121008511,
+            -0.8889758315869885,
+            0.14133306729751
+          ],
+          "constant": 0.7095078690336983,
+          "regionMatch": "any"
+        },
+        {
+          "regions": [
+            "UPPER_ARM_R",
+            "LOWER_ARM_R"
+          ],
+          "normal": [
+            -0.4254316623206472,
+            -0.8925295839946626,
+            0.14966242811542718
+          ],
+          "constant": 0.716630115518108,
+          "regionMatch": "any"
+        }
+      ],
+      "legs": [
+        {
+          "regions": [
+            "LOWER_LEG_L",
+            "FEET_L"
+          ],
+          "regionMatch": "any",
+          "normal": [
+            0.15179651673043448,
+            -0.968787005395479,
+            0.1959835597323595
+          ],
+          "constant": 0.11532627825509928
+        },
+        {
+          "regions": [
+            "LOWER_LEG_R",
+            "FEET_R"
+          ],
+          "regionMatch": "any",
+          "normal": [
+            -0.1535104434343697,
+            -0.9699279322938305,
+            0.18887654675156995
+          ],
+          "constant": 0.11452794931218864
+        }
+      ],
+      "headAbove": 1.45,
+      "neckAbove": 1.365,
+      "neckHalfWidth": 0.125,
+      "chestAbove": 1.13,
+      "chestFront": -0.005,
+      "chestHalfWidth": 0.016,
+      "chestSlope": 0.36
+    }
+  },
+  "supportedAges": {
+    "min": 18,
+    "max": 100
+  },
+  "lods": {
+    "0": {
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 0
+    },
+    "1": {
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 1
+    },
+    "2": {
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 2
+    }
+  },
+  "regions": {},
+  "seams": [],
+  "coverageRimContacts": [],
+  "coverageClipPlanes": [],
+  "garmentFrames": {}
+}
