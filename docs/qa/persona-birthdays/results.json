@@ -9,12 +9,12 @@
   "restoredAfterReload": true,
   "time": {
     "winter": 800,
-    "tick": 518,
+    "tick": 517,
     "ticksPerWinter": 1000
   },
   "child": {
     "key": "persona:astrid",
-    "renderId": "6cd85e3b-fd68-4db5-bfb4-28b9c123ea82",
+    "renderId": "0bff430a-b678-4fa0-bd12-a51087672714",
     "kind": "persona",
     "id": "astrid",
     "living": true,
@@ -105,7 +105,7 @@
     "motion": {
       "state": "Idle",
       "speed": 0,
-      "clipTime": 0.6774905279930447,
+      "clipTime": 0.41890991999999994,
       "sourceClip": "Idle_02",
       "clip": "Idle"
     },

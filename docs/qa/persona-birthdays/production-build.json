@@ -1,0 +1,146 @@
+{
+  "sourceCommit": "96af0fadeb46646a7ab9625be059070784877cdc",
+  "note": "Normal Vite production build served on LAN 5180. The QA browser bridge is absent; the separate docs review is copied after the build.",
+  "files": [
+    {
+      "path": "dist/index.html",
+      "sha256": "d692519597e35d00643040ef8bbf14624e65e09503ac2cdf38da931c2b518708"
+    },
+    {
+      "path": "dist/assets/AssetLab-DHkteCxH.js",
+      "sha256": "643b9090e1828d0b87df4c38d631de3cf2a4aa654178298247a0dce65b04d4fe"
+    },
+    {
+      "path": "dist/assets/BlueprintMovement-DZP41-WB.js",
+      "sha256": "5b78a361c0923c4e74eae12278d94c984c35f52ede779ced62e113805cfe943a"
+    },
+    {
+      "path": "dist/assets/BrowserGeneration-C3O_y5LI.js",
+      "sha256": "cce34d7a4c65dc55e7e83f414049399c885bcc44ff870060aced8859f7bac839"
+    },
+    {
+      "path": "dist/assets/CampaignIsland-BkkiyS5g.js",
+      "sha256": "4f3273039810c0d9f9f66b60dadbdbb59b8397b54f9fe36714c736c514e6123c"
+    },
+    {
+      "path": "dist/assets/CattlePresentation-BsbnPLU9.js",
+      "sha256": "482540002e051e02ec979fce973f5a3893e89ed2d8bde786e8d49b42390c41c8"
+    },
+    {
+      "path": "dist/assets/CharacterFactory-DL-fLZAj.js",
+      "sha256": "a7d8fdcec8fff379d4274b07a5e87cddd14d122f7ff68928636c894e7c5dc064"
+    },
+    {
+      "path": "dist/assets/CharacterLab-0PkTuy2l.js",
+      "sha256": "0ab8bde40fdaad01fbb028614160dd41831ac60e8f6e40256f32e079321ad83c"
+    },
+    {
+      "path": "dist/assets/CowCharacterPreview-TzW_e0BR.js",
+      "sha256": "9d7d154ad37f29592ac07052477d825819ac350e238b2ff65c57183a94a1c896"
+    },
+    {
+      "path": "dist/assets/EnvironmentLab-BVnJBa42.js",
+      "sha256": "5cccbd5feebe2779ac7b9438a022640c701e6f8020d12a19ace4780e477292e1"
+    },
+    {
+      "path": "dist/assets/FjordPlay-Xcjyhb3I.js",
+      "sha256": "f8fba1a9e41e277e26fff8566ddb3bee5e65fb4f901a61959d34437aa4633c28"
+    },
+    {
+      "path": "dist/assets/Game-BcPqjn_g.js",
+      "sha256": "0da48ae61aa557cbcbcef96f34d6fbab46ef2dfff2fbe0ef4892cfaf61c08a06"
+    },
+    {
+      "path": "dist/assets/GameplayLab-CFGEc22v.js",
+      "sha256": "3f389c5db4798aa63e3d1d40e945abb33f7d43b9a52f70a1b3518a2cb6e90025"
+    },
+    {
+      "path": "dist/assets/generateCharacterDNA-BY2EjofW.js",
+      "sha256": "289cf03451119a2084dad14d1527270996ca70a4806884d8cf6713ae86662181"
+    },
+    {
+      "path": "dist/assets/generateName-CXadswaC.js",
+      "sha256": "90076bbfc003c4cc5df93d67c9e3492d3c2c6dd0f40ff3868692fc55c0df5c77"
+    },
+    {
+      "path": "dist/assets/GenerationWorker-dO2cj1m6.js",
+      "sha256": "61a1c84b154672603153bc40764c59e8abf57dfbaa8235cab136ad4aa5628964"
+    },
+    {
+      "path": "dist/assets/GoldenBodySurfaceCalibration-C_5LNdMz.js",
+      "sha256": "a2ff5fceea792468e74a51cac31d81df6ecb880c429862bf3ebbebff4ab7dce6"
+    },
+    {
+      "path": "dist/assets/HumanPreviewPace-BvFsl6Zr.js",
+      "sha256": "3d3643a7e7ec4c8806bbab64f53b31944f218cc5ce8e0bafa4f052fdac61e07a"
+    },
+    {
+      "path": "dist/assets/index-DRHMRlIB.js",
+      "sha256": "35b078953d587bbcf06d3e4805a25e18f983cb2e07d90f2bf791037b1a4482e0"
+    },
+    {
+      "path": "dist/assets/lightingConfig-Dgrffatp.js",
+      "sha256": "20c62d40dcbe314eb659b067066c843b6a54811444720dda127b783d12e7cb7c"
+    },
+    {
+      "path": "dist/assets/MeshyCharacterLab-DHzwe_AM.js",
+      "sha256": "2590d6e7c94d83752d5bdf9f5997ef1918e6650cb7a7d2d879f45a86627b3806"
+    },
+    {
+      "path": "dist/assets/MeshyHuman-7ea2HZu6.js",
+      "sha256": "b7b15f576d0e15720acd1f0a9083f4be118d4586ee112839762a2c26b959be24"
+    },
+    {
+      "path": "dist/assets/OrbitControls-DbZguoY2.js",
+      "sha256": "ee8ba0d412132f1408ca7e5dc057c75ae44a286866d89bcd697a69f476765137"
+    },
+    {
+      "path": "dist/assets/PlayUI-BFmidiAj.js",
+      "sha256": "f24045786879138f6d833540b7ff2c25e16b9235332dbf38f47ada90aa9c5653"
+    },
+    {
+      "path": "dist/assets/PreviewGround-BAoMnWvv.js",
+      "sha256": "988d3b650d238a407d81127f06814b17da53d91d451729326a7fa785b51ea422"
+    },
+    {
+      "path": "dist/assets/ReferenceWater-pOybnhQ8.js",
+      "sha256": "9e4c7b00d88cf727a3f96561872daf64ff527311fe778b68803b7741850b57d3"
+    },
+    {
+      "path": "dist/assets/Renderer-ChEfEIIO.js",
+      "sha256": "b832d09a695b950fff6cbdc386898b0cc4fa1a12a80c8eaded079918ba3b6dd5"
+    },
+    {
+      "path": "dist/assets/RTSCameraController-Bs3zjafE.js",
+      "sha256": "f6462273dc2eced16a97329c1b13a0ed941ed115aa119f2d7a77018b8be430c0"
+    },
+    {
+      "path": "dist/assets/ScreenAwakeControl-BVMOEsJ-.js",
+      "sha256": "21fc00bb97f3e1c5c6253403975ee280556f92296bfbc52960085f6faaa6906e"
+    },
+    {
+      "path": "dist/assets/SettlementBrowser-HZUy3eVu.js",
+      "sha256": "58c2a761f4aa12f850d71297e971463ebab8847f21f57fbeb21259579c004d72"
+    },
+    {
+      "path": "dist/assets/three.module-CWd3l2Fu.js",
+      "sha256": "ae733b4e6ea185d29eefef155c79af17ee0224e340629cd70fcc99134f845d10"
+    },
+    {
+      "path": "dist/assets/Villager-CCw95FEC.js",
+      "sha256": "e72f623e89a3dac79e48d0c2a43633bca96caf2d19c0c9eedc2cd952c8b71467"
+    },
+    {
+      "path": "dist/assets/WaterLab-Ce7Ok_sj.js",
+      "sha256": "149a3caf52cf7543e05b6599e6f010877112278d8fb3e35b4657c1e7f7c87727"
+    },
+    {
+      "path": "dist/assets/world-shell-TLbBF_e2.js",
+      "sha256": "0b1e1c75ce825e3e80512db27dec2f3419889296522ee887dd80458dd2d4cf6b"
+    },
+    {
+      "path": "dist/assets/worldConfig-BCznhcbi.js",
+      "sha256": "cc1d06ff19641643adb3d35d2a5968ac07d4520f379e2dc01a34d51d01aa5524"
+    }
+  ]
+}

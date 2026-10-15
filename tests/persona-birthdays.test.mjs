@@ -326,6 +326,7 @@ test('maternal clan transfer ends exact care immediately when the children remai
     state = step(state, 547);
     assert.ok(state.world.targetClans['cpu-west'].events.some(event =>
         event.type === 'ChildBorn' && event.details.parentIds.includes(mother)));
+    state = step(state, 453); // Next year, before the former care endpoint's within-year tick.
     const member = Object.values(state.personas).find(person => person.dna.sex === 'male').id;
     state = core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Scouts', memberIds: [member] });
     state = core.applyCommand(state, { type: 'DispatchExpedition', groupId: 'group-1', regionId: 'region-west', mission: 'Recon' });

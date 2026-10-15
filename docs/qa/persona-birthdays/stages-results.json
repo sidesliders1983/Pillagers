@@ -1,0 +1,756 @@
+{
+  "origin": "http://127.0.0.1:5194",
+  "captures": [
+    {
+      "id": "founder-1",
+      "phase": "before",
+      "age": 17,
+      "modules": [
+        "hair/manual-fitted-short"
+      ],
+      "bounds": {
+        "min": [
+          55.622643457860114,
+          4.242220792318722,
+          138.32063592634913
+        ],
+        "max": [
+          56.39289920989573,
+          5.616615587914824,
+          139.73603957511665
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": null,
+        "shoes": null,
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 2031260111,
+        "height": 1.3507593083474785,
+        "adultAge": 18,
+        "masculinity": 0.51,
+        "weightDeviation": 0.27556993463397017,
+        "age": 17,
+        "stage": "teen",
+        "appearance": {
+          "hairStyle": "medium",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9851978666666666,
+          "stride": 0.9706666666666667,
+          "footfall": 1.0814080000000001
+        },
+        "weights": {
+          "Masculine": 0.01145600000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.240576,
+          "Tall": 0,
+          "Short": 0.3187167559018623,
+          "Overweight": 0.1609328418262386,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.29153090296313167,
+          "HeadLength": -0.220109481504187,
+          "Jaw": -0.23912441572174428,
+          "Nose": -0.2219244978390634,
+          "LegRatio": 0.20715733000542969,
+          "ShoulderSlope": -0.06901116203516722,
+          "Asymmetry": -0.0020919291768223044,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0.053333333333333344,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 40,
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "path": "adult-entry-before.png"
+    },
+    {
+      "id": "founder-2",
+      "phase": "before",
+      "age": 45,
+      "modules": [
+        "hair/manual-fitted-short",
+        "garment/meshy-grid-trial-001",
+        "garment/meshy-low-shoes-005"
+      ],
+      "bounds": {
+        "min": [
+          78.56575212409736,
+          4.05351403624466,
+          139.37274590026024
+        ],
+        "max": [
+          79.57367140384235,
+          5.6170501687839645,
+          140.82603655561715
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 384798914,
+        "height": 1.5114374553598464,
+        "adultAge": 45,
+        "masculinity": 0.51,
+        "weightDeviation": 0.4920189657317019,
+        "age": 45,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#986e55",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9556,
+          "stride": 1,
+          "footfall": 0.8799999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.444,
+          "Tall": 0.2976560639993603,
+          "Short": 0,
+          "Overweight": 0.29521137943902115,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.19916092450730502,
+          "HeadLength": 0.21074908054433764,
+          "Jaw": 0.29153659609146415,
+          "Nose": -0.21119068013504147,
+          "LegRatio": -0.08687297452706844,
+          "ShoulderSlope": -0.18356839483603837,
+          "Asymmetry": 0.09102893809322267,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 22,
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "path": "greying-before.png"
+    },
+    {
+      "id": "founder-3",
+      "phase": "before",
+      "age": 6,
+      "modules": [
+        "hair/manual-fitted-short"
+      ],
+      "bounds": {
+        "min": [
+          80.81262294117269,
+          4.090249371785007,
+          138.3173733534437
+        ],
+        "max": [
+          81.74207888601555,
+          5.020153036922558,
+          139.60147221812585
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": null,
+        "shoes": null,
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 2301918688,
+        "height": 1.4291886058449745,
+        "adultAge": 18,
+        "masculinity": 0.49,
+        "weightDeviation": 0.5416677897149189,
+        "age": 6,
+        "stage": "child",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.1308799999999999,
+          "stride": 0.44999999999999996,
+          "footfall": 0.5038
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.0018000000000000017,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.0864,
+          "Tall": 0,
+          "Short": 0.038612121982233606,
+          "Overweight": 0.16250033691447566,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.15692833964712918,
+          "HeadLength": -0.267049307981506,
+          "Jaw": -0.10014598276466131,
+          "Nose": 0.0017896848265081644,
+          "LegRatio": 0.048467602231539786,
+          "ShoulderSlope": -0.006805921252816916,
+          "Asymmetry": -0.08678364412626251,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 1,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 21,
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "path": "child-growth-before.png"
+    },
+    {
+      "id": "founder-4",
+      "phase": "before",
+      "age": 50,
+      "modules": [
+        "hair/manual-fitted-short",
+        "garment/meshy-grid-trial-001",
+        "garment/meshy-low-shoes-005"
+      ],
+      "bounds": {
+        "min": [
+          32.676987205607126,
+          4.749369860382217,
+          139.35848646401615
+        ],
+        "max": [
+          33.24036402756202,
+          6.143894806403897,
+          140.819841576443
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 1306284985,
+        "height": 1.360123860584572,
+        "adultAge": 50,
+        "masculinity": 0.51,
+        "weightDeviation": 0.8769548321248313,
+        "age": 50,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "medium",
+          "beardStyle": "none",
+          "color": "#816c5e",
+          "greyAmount": 0.125
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0492,
+          "stride": 1,
+          "footfall": 1.192
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.492,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.28527192648367117,
+          "Overweight": 0.5261728992748987,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.22559318686835467,
+          "HeadLength": 0.16866140076890587,
+          "Jaw": 0.08617175300605595,
+          "Nose": -0.021341033466160297,
+          "LegRatio": 0.17045198217965662,
+          "ShoulderSlope": 0.1639057258144021,
+          "Asymmetry": 0.04909121856326237,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.009840000000000008,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 20,
+      "time": {
+        "winter": 800,
+        "tick": 500
+      },
+      "path": "elder-entry-before.png"
+    },
+    {
+      "id": "founder-1",
+      "phase": "after",
+      "age": 18,
+      "modules": [
+        "hair/manual-fitted-short",
+        "garment/meshy-grid-trial-001",
+        "garment/meshy-low-shoes-005"
+      ],
+      "bounds": {
+        "min": [
+          55.630155141085275,
+          4.228535885977488,
+          138.32581765620978
+        ],
+        "max": [
+          56.39224779411741,
+          5.616183023525754,
+          139.74162759776206
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 2031260111,
+        "height": 1.3507593083474785,
+        "adultAge": 18,
+        "masculinity": 0.51,
+        "weightDeviation": 0.27556993463397017,
+        "age": 18,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9748,
+          "stride": 1,
+          "footfall": 1.108
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.252,
+          "Tall": 0,
+          "Short": 0.3187167559018623,
+          "Overweight": 0.1653419607803821,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.29153090296313167,
+          "HeadLength": -0.220109481504187,
+          "Jaw": -0.23912441572174428,
+          "Nose": -0.2219244978390634,
+          "LegRatio": 0.20715733000542969,
+          "ShoulderSlope": -0.06901116203516722,
+          "Asymmetry": -0.0020919291768223044,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 40,
+      "time": {
+        "winter": 800,
+        "tick": 501
+      },
+      "path": "adult-entry-after.png"
+    },
+    {
+      "id": "founder-2",
+      "phase": "after",
+      "age": 46,
+      "modules": [
+        "hair/manual-fitted-short",
+        "garment/meshy-grid-trial-001",
+        "garment/meshy-low-shoes-005"
+      ],
+      "bounds": {
+        "min": [
+          78.56575212409736,
+          4.05351403624466,
+          139.37274590026024
+        ],
+        "max": [
+          79.57367140384235,
+          5.6170501687839645,
+          140.82603655561715
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 384798914,
+        "height": 1.5114374553598464,
+        "adultAge": 46,
+        "masculinity": 0.51,
+        "weightDeviation": 0.4920189657317019,
+        "age": 46,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#997057",
+          "greyAmount": 0.025
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9556,
+          "stride": 1,
+          "footfall": 0.8799999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.444,
+          "Tall": 0.2976560639993603,
+          "Short": 0,
+          "Overweight": 0.29521137943902115,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.19916092450730502,
+          "HeadLength": 0.21074908054433764,
+          "Jaw": 0.29153659609146415,
+          "Nose": -0.21119068013504147,
+          "LegRatio": -0.08687297452706844,
+          "ShoulderSlope": -0.18356839483603837,
+          "Asymmetry": 0.09102893809322267,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 22,
+      "time": {
+        "winter": 800,
+        "tick": 501
+      },
+      "path": "greying-after.png"
+    },
+    {
+      "id": "founder-3",
+      "phase": "after",
+      "age": 7,
+      "modules": [
+        "hair/manual-fitted-short"
+      ],
+      "bounds": {
+        "min": [
+          80.80644023665411,
+          4.090777576765147,
+          138.3122351940187
+        ],
+        "max": [
+          81.74989164935404,
+          5.0748458600946496,
+          139.61331049259613
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": null,
+        "shoes": null,
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 2301918688,
+        "height": 1.4291886058449745,
+        "adultAge": 18,
+        "masculinity": 0.49,
+        "weightDeviation": 0.5416677897149189,
+        "age": 7,
+        "stage": "child",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.1132885333333333,
+          "stride": 0.5013333333333333,
+          "footfall": 0.542272
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.002752000000000003,
+          "Breasts": 0.00010453333333333352,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.13209600000000002,
+          "Tall": 0,
+          "Short": 0.038612121982233606,
+          "Overweight": 0.1776670350264934,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.15692833964712918,
+          "HeadLength": -0.267049307981506,
+          "Jaw": -0.10014598276466131,
+          "Nose": 0.0017896848265081644,
+          "LegRatio": 0.048467602231539786,
+          "ShoulderSlope": -0.006805921252816916,
+          "Asymmetry": -0.08678364412626251,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0.9066666666666666,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "rawAge": 21,
+      "time": {
+        "winter": 800,
+        "tick": 501
+      },
+      "path": "child-growth-after.png"
+    },
+    {
+      "id": "founder-4",
+      "phase": "after",
+      "age": 51,
+      "modules": [
+        "hair/manual-fitted-short",
+        "garment/meshy-grid-trial-001",
+        "garment/meshy-low-shoes-005"
+      ],
+      "bounds": {
+        "min": [
+          32.67485196872241,
+          4.748690464891232,
+          139.3563681689797
+        ],
+        "max": [
+          33.240606808418235,
+          6.14375977123535,
+          140.81831475197234
+        ]
+      },
+      "appearance": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      },
+      "profile": {
+        "seed": 1306284985,
+        "height": 1.360123860584572,
+        "adultAge": 51,
+        "masculinity": 0.51,
+        "weightDeviation": 0.8769548321248313,
+        "age": 51,
+        "stage": "elder",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#836e61",
+          "greyAmount": 0.15
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0439539999999998,
+          "stride": 0.994,
+          "footfall": 1.192
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.492,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.28527192648367117,
+          "Overweight": 0.5261728992748987,
+          "Underweight": 0,
+          "Age": 0.02,
+          "HeadWidth": 0.22559318686835467,
+          "HeadLength": 0.16866140076890587,
+          "Jaw": 0.08617175300605595,
+          "Nose": -0.021341033466160297,
+          "LegRatio": 0.17045198217965662,
+          "ShoulderSlope": 0.1639057258144021,
+          "Asymmetry": 0.04909121856326237,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.009840000000000008,
+          "TallSlight": 0,
+          "ElderHeavy": 0.010523457985497975
+        }
+      },
+      "rawAge": 20,
+      "time": {
+        "winter": 800,
+        "tick": 501
+      },
+      "path": "elder-entry-after.png"
+    }
+  ],
+  "ownership": {
+    "picking": {
+      "mouse": "founder-1",
+      "touch": "founder-1"
+    },
+    "disposed": true,
+    "canonicalUnchanged": true,
+    "resourcesBefore": {
+      "actors": 13,
+      "sourceTemplates": 3,
+      "ownedInstanceRoots": 0
+    },
+    "resourcesAfter": {
+      "actors": 13,
+      "sourceTemplates": 3,
+      "ownedInstanceRoots": 0
+    },
+    "placeholders": []
+  },
+  "errors": [],
+  "note": "Actual scene models across canonical tick 500 to 501. Controlled fixture dates; no historical migration. One removal/reappearance cycle checks ownership, not long-term heap stability. Desktop Edge, not physical mobile hardware."
+}

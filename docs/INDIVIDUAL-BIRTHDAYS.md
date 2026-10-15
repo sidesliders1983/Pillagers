@@ -1,6 +1,6 @@
 # Individual Persona birthdays — #171
 
-Status: delivery planning, exact childcare timing and public test boundaries approved by the owner. Implementation is opt-in pending the visual/performance review. Default activation additionally requires the visual/performance review requested by #171. The review opt-in is /fjord-play?birthdays=individual-v1, on a new campaign/browser session.
+Status: delivery planning, exact childcare timing and public test boundaries approved by the owner. Implementation is opt-in pending the visual/performance review. The review opt-in is /fjord-play?birthdays=individual-v1, on a new campaign/browser session.
 
 Base: main at a20bac1. The existing per-person fitting reuse from #170 is already present; its measured gains must not be credited to this calendar change.
 
@@ -30,9 +30,9 @@ Approved new-mode care ends after the configured number of complete years from d
 
 Annual economics, food/livestock consumption, mortality rolls, weather, career review, partnership review and five-Winter Saga publication stay at their existing annual boundaries. Each consults the canonical completed age at its execution time. Birthdays change immediate eligibility/productivity and visual age; they do not trigger extra mortality, career or partnership rolls.
 
-Detect due birthdays while traversing the people already processed by the tick engine. Do not introduce a second population scan or structuredClone for each birthday tick. Pending deliveries and exact care expiries are bounded due work. Process every crossed time in stable order, whether stepping individually, in mixed batches, across years or in CPU target clans.
+Age is derived by the existing per-person queries, without mutating CharacterDNA.age or scanning the population separately for birthdays. No extra full-state clone is introduced for a birthday tick. Pending deliveries and exact care expiries are bounded due work. Process every crossed time in stable order, whether stepping individually, in mixed batches, across years or in CPU target clans.
 
-FjordProjection already derives current visual DNA through personaAge. FjordModels.reconcile already fingerprints DNA; retain this to avoid new refits on unchanged ages. Correct the annual-only FamilyTreeIndex age invalidation and remaining direct year-subtraction readers (social event facts, expedition member UI and archived Family Tree cards).
+FjordProjection already derives current visual DNA through personaAge. FjordModels.reconcile already fingerprints DNA; retain this to avoid new refits on unchanged ages. FamilyTreeIndex refreshes on the next real birthday; the remaining direct year-subtraction readers now use the shared age query (social event facts, expedition member UI and archived Family Tree cards).
 
 ## Compatibility and rollout
 
@@ -40,9 +40,9 @@ No schemaVersion bump and no migration/backfill of old Alpha saves. Missing cale
 
 Implement opt-in review activation first, then request the issue's required owner review before making it the new-campaign default. Existing campaigns keep their own mode and dates.
 
-## Validation plan
+## Validation contract and evidence
 
-Proposed public seams: Simulation Core commands and canonical age projection; serialize/reconstruct and campaign restart; real CPU-clan progression and transfer; Fjord/browser presentation; repeatable Core and wardrobe measurements.
+Approved public seams: Simulation Core commands and canonical age projection; serialize/reconstruct and campaign restart; real CPU-clan progression and transfer; Fjord/browser presentation; repeatable Core and wardrobe measurements.
 
 Work vertically after seam approval: preserve founder identities/initial ages; exact birthday boundaries and collisions; saved scheduled delivery; cancellation/transfer/care; mixed-step equivalence; historical age and UI; measurements and visual acceptance.
 
@@ -51,3 +51,5 @@ Use worked boundary examples and real commands. Cover missing/invalid optional f
 Profile 10, 25, 50 and a larger population, with multiple CPU clans, reporting total year CPU and per-command/tick distributions. For fitting, use the retained real-house boundary/developed fixtures, same owned assets and GPU/graphics settings, and all three year speeds. Separate cached-main baseline, individual birthday spreading, and any forced-original-refit diagnostic; never double-credit #170. Report actual applied age changes, model refits, total fitting CPU, worst frames and retained resources. Preserve the historical 1.64–1.90 second report as historical evidence.
 
 Complete build, character validation, relevant/full regression suite and current-head CI. Keep the PR draft while any required check is pending or failing, and while owner acceptance required by the issue remains outstanding.
+
+Implementation and measured limitations: [owner review and numeric report](qa/persona-birthdays/report.md). The short-batch Core timing is approximately flat, but the single-1,000-tick no-overhead criterion is not proven. Individual dates remain opt-in pending owner visual/performance review.
