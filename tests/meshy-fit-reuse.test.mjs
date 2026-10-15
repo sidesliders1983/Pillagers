@@ -72,19 +72,29 @@ test('annual invariant fits exactly match forced full refits across growth, adul
             a.root.rotation.y = 3.14; b.root.rotation.y = 3.14;
             a.sampleAnimation('Walk', .37); b.sampleAnimation('Walk', .37);
             const before = a.modules.fitRuns, geometry = a.fit.mesh.geometry;
+            const hairColor = a.profile.appearance.color;
             const next = { ...dna, age: age + 1 }, key = a.boundsShapeSignature;
             const retained = a.applyDNA(next);
             b.applyDNA(next, undefined, { forceRefit: true });
-            const invariant = [4, 5, 18, 32, 45, 50, 75, 99].includes(age);
+            // World hair now follows DNA colour. Greying at 45/50/75 must refit,
+            // while the fully grey 99-year-old can retain its neutral geometry.
+            const invariant = [4, 5, 18, 32, 99].includes(age);
             assert.equal(retained, invariant, sex + '/' + age);
             if (retained) {
                 assert.equal(a.modules.fitRuns, before);
                 assert.equal(a.fit.mesh.geometry, geometry);
+            } else {
+                assert.ok(a.modules.fitRuns > before, sex + '/' + age + ' must refit');
+            }
+            if ([45, 50, 75].includes(age)) {
+                assert.notEqual(a.profile.appearance.color, hairColor, 'DNA greying changes installed hair');
+                assert.notEqual(a.root.userData.selectedAssets.hair, null, 'World hair must be installed');
             }
             assert.equal(a.dna.age, age + 1);
             assert.deepEqual(a.root.userData.universalHumanProfile, b.root.userData.universalHumanProfile);
             assert.deepEqual(a.root.userData.universalHumanProfile.weights, universalHumanProfile(next).weights);
-            if (age === 32 || age === 45) assert.equal(a.boundsShapeSignature, key);
+            if (age === 32) assert.equal(a.boundsShapeSignature, key);
+            if (age === 45) assert.notEqual(a.boundsShapeSignature, key, 'Greying refits invalidate bounds');
             if (age >= 50) assert.notEqual(a.boundsShapeSignature, key, 'Elder posture must invalidate bounds');
             await wardrobe.reconcile(a, entity(next, occupation));
             await wardrobe.reconcile(b, entity(next, occupation));
