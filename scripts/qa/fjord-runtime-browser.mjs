@@ -1,3 +1,4 @@
+import { Box3 } from 'three';
 // Imported only by fjord-runtime-server.mjs. Bounded histograms avoid per-frame JSON or sample arrays.
 class Distribution {
     count = 0; total = 0; max = 0; min = Infinity; over33 = 0; over50 = 0;
@@ -120,8 +121,11 @@ export const audit = {
         const human = [...models.actors.values()].find(actor => actor.human)?.human;
         if (human) {
             const prototype = Object.getPrototypeOf(human);
-            for (const method of ['update', 'shapePose']) this.wrap(prototype, method, 'human.' + method);
+            for (const method of ['update', 'shapePose', 'applyDNA', 'neutralFitSignature']) this.wrap(prototype, method, 'human.' + method);
             this.wrap(Object.getPrototypeOf(human.mixer), 'update', 'mixer.update');
+            this.wrap(Object.getPrototypeOf(human.modules), 'refit', 'modules.refit');
+            this.wrap(Object.getPrototypeOf(human.fit), 'refit', 'bodyFit.refit');
+            this.wrap(Box3.prototype, 'setFromObject', 'bounds.setFromObject');
         }
         const originalUpdate = controller.update.bind(controller);
         this.basePosition = refs.camera.position.clone();
@@ -240,7 +244,11 @@ export const audit = {
             residents: Object.values(state.personas).filter(p => p.deathWinter === null).length,
             cattle: Object.values(state.landing.cattle).filter(c => c.deathWinter === null).length,
             recipe: campaign.blueprint.config.seed, running: session.running, minutes: session.minutesPerWinter,
-            motion: motion.inspectMetrics(), resources: models.inspectResources(), counts, materials: materials.size,
+            motion: motion.inspectMetrics(), humanFits: [...models.actors].flatMap(([root, actor]) => actor.human ?
+                [{ id: root.name, age: actor.human.dna.age, fitRevision: actor.human.fit.revision,
+                    moduleFitRuns: actor.human.modules.fitRuns, retained: actor.human.lastFitRetained,
+                    signatureCodeUnits: actor.human.lastNeutralFit?.length || 0, boundsShape: actor.human.boundsShapeSignature,
+                    modules: [...actor.human.fit.modules.keys()] }] : []), resources: models.inspectResources(), counts, materials: materials.size,
             renderer: { render: { ...renderer.info.render }, memory: { ...renderer.info.memory },
                 programs: renderer.info.programs.length, width: renderer.domElement.width,
                 height: renderer.domElement.height, pixelRatio: renderer.getPixelRatio(),

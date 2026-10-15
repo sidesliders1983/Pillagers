@@ -133,7 +133,7 @@ export class FjordEntities {
             }
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
-            const boundsSignature = JSON.stringify([entity.asset, entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
+            const boundsSignature = JSON.stringify([entity.asset, this.models.boundsShape(entry.model) ?? entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
             if (entry.boundsSignature !== boundsSignature) {
                 entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
                 entry.boundsSignature = boundsSignature;
