@@ -39,6 +39,7 @@ type Agent = {
     random: number;
     wait: number;
     path: Point2[];
+    homeTrail: Point2[];
     detour: Point2[];
     signature: string;
     pace: number;
@@ -52,7 +53,7 @@ export class LivingWorldController {
         updates: 0, lastUpdateMs: 0, maxUpdateMs: 0, totalUpdateMs: 0,
         yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0,
         presentationSteps: 0, activeSeconds: 0, visitsStarted: 0, occupationArrivals: 0,
-        activitiesCompleted: 0, homeArrivals: 0, visitsCancelled: 0, distanceWalked: 0, failedRouteReuse: 0 };
+        activitiesCompleted: 0, homeArrivals: 0, visitsCancelled: 0, distanceWalked: 0, failedRouteReuse: 0, homeTrailReuse: 0 };
     private routeObserver?: (observation: RouteObservation) => void;
     private navigationGeneration = 0;
     private navigationSignature = '';
@@ -133,7 +134,7 @@ export class LivingWorldController {
                     key: entity.selectionKey, kind: entity.kind,
                     x: p.x, y: p.y, z: p.z, rotation: p.rotation,
                     anchor: { x: p.x, z: p.z }, entity, random: seed || 1,
-                    wait: 1 + seed % 40 / 10, path: [], detour: [], signature,
+                    wait: 1 + seed % 40 / 10, path: [], homeTrail: [], detour: [], signature,
                     visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {},
                     state: 'Idle', interactionSeconds: 0, grazeSeconds: 0,
                     grazeRemaining: 0, grazeNext: true, blockedSeconds: 0,
@@ -202,6 +203,7 @@ export class LivingWorldController {
     }
     private cancelVisit(a: Agent) {
         if (a.visit) this.metrics.visitsCancelled++;
+        a.homeTrail = [];
         a.visit = null;
         a.path = [];
         a.detour = [];
@@ -322,6 +324,7 @@ export class LivingWorldController {
             visit.checkpoint = { x: a.x, z: a.z };
             visit.checkpointSeconds = 0;
             this.metrics.visitsStarted++;
+            a.homeTrail = [{ x: a.x, z: a.z }, ...path.map(point => ({ ...point }))];
             a.visit = visit;
             a.path = path;
             a.detour = [];
@@ -513,6 +516,26 @@ export class LivingWorldController {
                 return false;
         return true;
     }
+    /** A successful outbound trip is already a bounded proof of the static corridor.
+     * Revalidate it against today's terrain/parcels/source obstacles before returning.
+     * Traffic remains owned by the normal per-step body checks and passing controller. */
+    private homeTrailPath(a: Agent) {
+        if (!a.homeTrail.length) return null;
+        let nearest = 0;
+        for (let i = 1; i < a.homeTrail.length; i++)
+            if (Math.hypot(a.x - a.homeTrail[i].x, a.z - a.homeTrail[i].z) <
+                Math.hypot(a.x - a.homeTrail[nearest].x, a.z - a.homeTrail[nearest].z)) nearest = i;
+        if (Math.hypot(a.x - a.homeTrail[nearest].x, a.z - a.homeTrail[nearest].z) > 1) return null;
+        const path = a.homeTrail.slice(0, nearest + 1).reverse().map(point => ({ ...point }));
+        path.push({ ...a.anchor });
+        let from: Point2 = a;
+        for (const point of path) {
+            if (!this.segment(a, from, point)) return null;
+            from = point;
+        }
+        while (path.length > 1 && Math.hypot(path[0].x - a.x, path[0].z - a.z) < .15) path.shift();
+        return path;
+    }
     private route(a: Agent, goal?: Point2, purpose = goal ?
         (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
         target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '') {
@@ -551,6 +574,13 @@ export class LivingWorldController {
                 step: this.metrics.presentationSteps, activeSeconds: this.metrics.activeSeconds });
             return path;
         };
+        if (goal === a.anchor) {
+            const trail = this.homeTrailPath(a);
+            if (trail) {
+                this.metrics.homeTrailReuse++;
+                return measured(0, trail);
+            }
+        }
         if (reused) {
             this.metrics.failedRouteReuse++;
             return measured(0, []);
@@ -754,8 +784,10 @@ export class LivingWorldController {
                         }
                         continue;
                     }
-                    if (visit.phase === 'home' && Math.hypot(a.x - a.anchor.x, a.z - a.anchor.z) < .15)
+                    if (visit.phase === 'home' && Math.hypot(a.x - a.anchor.x, a.z - a.anchor.z) < .15) {
                         this.metrics.homeArrivals++;
+                        a.homeTrail = [];
+                    }
                     a.visit = null;
                     a.visitDelay = 20 + this.random(a) * 25;
                 }
@@ -867,7 +899,8 @@ export class LivingWorldController {
                 this.radius(actors[i]) + this.radius(actors[j]) - 1e-6) bodyOverlaps++;
         }
         return { ...this.metrics, navigationGeneration: this.navigationGeneration,
-            reservationGeneration: this.reservationGeneration, agents: actors.length,
+            reservationGeneration: this.reservationGeneration,
+            retainedHomeWaypoints: actors.reduce((sum, actor) => sum + actor.homeTrail.length, 0), agents: actors.length,
             reservations: this.social.activePairs().length,
             occupationVisits: actors.filter(a => a.visit).length,
             outOfZone: actors.filter(a => !this.safe(a, a)).length, bodyOverlaps };

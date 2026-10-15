@@ -209,17 +209,19 @@ export class FjordEntities {
             const farm = this.entries.get('building:' + canonical.assignment)?.model;
             const yard = farm?.getObjectByName('farmHutTerrain') ?? farm?.getObjectByName('farmyardMarker');
             if (!yard || !farm) continue;
+            farm.updateWorldMatrix(true, false);
+            const yardVersion = farm.uuid + ':' + JSON.stringify(farm.matrixWorld.elements);
             let sampler = this.yardSamplers.get(canonical.assignment);
-            if (!sampler || sampler.signature !== farm.uuid) {
+            if (!sampler || sampler.signature !== yardVersion) {
                 const house = farm.getObjectByName(farm.userData.asset);
-                sampler = { signature: farm.uuid,
+                sampler = { signature: yardVersion,
                     sample: createFjordYardSurface(yard, house, farm.position.y) };
                 this.yardSamplers.set(canonical.assignment, sampler);
             }
             const clearance = canonical.stage === 'Young' ? .5 :
                 canonical.stage === 'Young Adult' ? .7 : .9;
             const sample = sampler.sample;
-            motion.setYardSurface(key, (x, z) => sample(x, z, clearance), farm.uuid + ':' + clearance);
+            motion.setYardSurface(key, (x, z) => sample(x, z, clearance), yardVersion + ':' + clearance);
         }
     }
     advance(motion: LivingWorldController, delta: number, running: boolean) {

@@ -108,3 +108,30 @@ test('optimized routes keep dry segment clearance and allow valid movement after
     assert.equal(core.serializeState(state), canonical);
 });
 
+
+
+test('an arrived worker can follow its verified outbound corridor home without repeating a distant search', () => {
+    const { motion, actor, state } = fixture();
+    const canonical = core.serializeState(state);
+    motion.reconcile([actor.entity], { plots: [], paths: [] });
+    const start = { x: actor.x, z: actor.z }, outbound = motion.route(actor);
+    assert.ok(outbound.length > 0);
+    actor.homeTrail = [start, ...outbound.map(point => ({ ...point }))];
+    actor.path = outbound;
+    const destination = { ...outbound.at(-1) };
+    for (let frame = 0; frame < 1500 && Math.hypot(actor.x - destination.x, actor.z - destination.z) > .15; frame++)
+        motion.advance(.1, true, true);
+    assert.ok(Math.hypot(actor.x - destination.x, actor.z - destination.z) < .15);
+    const before = motion.inspectMetrics();
+    actor.path = motion.route(actor, actor.anchor);
+    assert.equal(motion.inspectMetrics().homeTrailReuse, before.homeTrailReuse + 1);
+    assert.equal(motion.inspectMetrics().routeNodes, before.routeNodes, 'A verified corridor needs no second graph search');
+    for (let frame = 0; frame < 1500 && Math.hypot(actor.x - start.x, actor.z - start.z) > .15; frame++)
+        motion.advance(.1, true, true);
+    assert.ok(Math.hypot(actor.x - start.x, actor.z - start.z) < .15);
+    assert.equal(motion.inspectMetrics().bodyOverlaps, 0);
+    assert.equal(motion.inspectMetrics().outOfZone, 0);
+    assert.equal(core.serializeState(state), canonical);
+    motion.reconcile([], { plots: [], paths: [] });
+    assert.equal(motion.inspectMetrics().retainedHomeWaypoints, 0);
+});
