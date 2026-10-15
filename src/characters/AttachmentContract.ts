@@ -42,6 +42,8 @@ export interface ModuleMetadata {
     fitMode:'conform'|'drape'|'rigid';
     equipmentBindings?:EquipmentBindings;
     slot?:'upper'|'lower'|'full'|'over'|'footwear';
+    /** Full ensembles may explicitly leave footwear to a separate source-bound module. */
+    includesFootwear?:boolean;
     covers?:CoverageZone[];
     /** Partial sleeves keep the uncovered arm below the source cuff visible. */
     coverageBands?:Partial<Record<CoverageZone,{minY?:number;maxY?:number}>>;
@@ -62,6 +64,7 @@ export interface ModuleMetadata {
     trim?:{min:readonly (number|null)[];max:readonly (number|null)[]};
 }
 export function validateModule(metadata:ModuleMetadata){
+    if(metadata.includesFootwear!==undefined&&(typeof metadata.includesFootwear!=='boolean'||metadata.version!=='pillagers-fit/0.2'||metadata.type!=='garment'||metadata.slot!=='full'))throw new Error('Separate footwear requires an explicit native full ensemble');
     if(metadata.version==='pillagers-fit/0.2'){
         const binding=metadata.nativeBinding;
         if(!metadata.id||!['hair','beard','garment','equipment'].includes(metadata.type)||metadata.authoringFrame!=='meshy-native'||!Object.hasOwn(socketDefinitions,metadata.anchor)||!binding||!/^\/[\w/-]+\.binding\.json$/.test(binding.path)||![/^[a-f0-9]{64}$/.test(binding.sha256),/^[a-f0-9]{64}$/.test(binding.rigSignature)].every(Boolean)||!Number.isFinite(metadata.clearance)||metadata.clearance<0)throw new Error('Invalid native body-bound module contract');

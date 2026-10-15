@@ -117,7 +117,8 @@ export class FjordEntities {
             entry.model.name = entity.selectionKey;
             entry.model.position.set(p.x, p.y, p.z);
             entry.model.rotation.y = p.rotation;
-            this.models.reconcile(entry.model, entity);
+            await this.models.reconcile(entry.model, entity);
+            if (this.disposed) return;
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;
@@ -132,7 +133,7 @@ export class FjordEntities {
             }
             entry.model.userData.canonical = { kind: entity.kind, id: entity.id, ...entity.status };
             entry.model.updateMatrixWorld(true);
-            const boundsSignature = JSON.stringify([entity.asset, entity.dna, entity.transform!.scale, entity.transform!.rotation]);
+            const boundsSignature = JSON.stringify([entity.asset, entity.dna, entity.transform!.scale, entity.transform!.rotation, entry.model.userData.clothingSet?.id]);
             if (entry.boundsSignature !== boundsSignature) {
                 entry.localBounds = new Box3().setFromObject(entry.model, true).translate(entry.model.position.clone().negate());
                 entry.boundsSignature = boundsSignature;
@@ -246,6 +247,7 @@ export class FjordEntities {
             asset: entry.model.userData.asset, scale: entry.model.scale.toArray(),
             bounds: this.bounds(key),
             appearance: entry.model.userData.appearance, motion: entry.model.userData.motion,
+            clothing: entry.model.userData.clothingSet,
             placeholder: (() => {
                 let result = false;
                 entry.model.traverse(n => {

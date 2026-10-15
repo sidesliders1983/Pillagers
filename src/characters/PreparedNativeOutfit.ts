@@ -125,7 +125,9 @@ export function validatePreparedOutfit(source: NativeModuleSource, fit: MeshyBod
 }
 
 /** Clip the selected body's own surface, preserving its rig, UVs and source prefix. */
-export function preparedCoverage(source: NativeModuleSource, fit: MeshyBodyFitAdapter) {
+export function preparedCoverage(
+    source: NativeModuleSource, fit: MeshyBodyFitAdapter, footwear: NativeModuleSource[] = [],
+) {
     const prepared = source.binding.precomputedNative!;
     requireValue(prepared.version === 2, 'Full outfit coverage requires version 2');
     const config = prepared.coverage;
@@ -168,7 +170,35 @@ export function preparedCoverage(source: NativeModuleSource, fit: MeshyBodyFitAd
             || corners.every(vertex => ['PELVIS', 'UPPER_LEG_L', 'UPPER_LEG_R']
                 .includes(surface.regions[vertex]))) lowerCovered.add(triangle);
     }
-    fragments.push(clip([plane([0, -1, 0], .97), ...config.legs], lowerCovered));
+    // Shoes remove only their measured bands from the exposed lower-body fragments.
+    // Keep the source regions for masking: the legacy cuff planes use split FEET_L/R labels.
+    const bands = footwear.flatMap(item => {
+        const binding = item.binding.precomputedNative;
+        requireValue(item.asset.metadata?.slot === 'footwear' && binding?.version === 3,
+            'Only independently bound footwear may complement a full outfit');
+        return binding.moduleCoverage;
+    });
+    const boundaries = [...new Set(bands.flatMap(band => [band.minimumY, band.maximumY]))]
+        .sort((a, b) => a - b);
+    const intervals = [-Infinity, ...boundaries, Infinity];
+    for (let index = 0; index < intervals.length - 1; index++) {
+        const minimum = intervals[index], maximum = intervals[index + 1];
+        const middle = minimum === -Infinity ? maximum - 1 : maximum === Infinity
+            ? minimum + 1 : (minimum + maximum) / 2;
+        const active = bands.filter(band => middle > band.minimumY && middle < band.maximumY);
+        const covered = new Set(lowerCovered);
+        for (let triangle = 0; triangle < surface.triangles; triangle++) {
+            const corners = surface.indices.slice(triangle * 3, triangle * 3 + 3);
+            if (active.some(band => corners.some(vertex => band.regions.includes(original.regions[vertex]))
+                && !corners.some(vertex => band.preserveRegions?.includes(original.regions[vertex])))) {
+                covered.add(triangle);
+            }
+        }
+        const planes = [plane([0, -1, 0], .97), ...config.legs];
+        if (Number.isFinite(minimum)) planes.push(plane([0, 1, 0], -minimum));
+        if (Number.isFinite(maximum)) planes.push(plane([0, -1, 0], maximum));
+        fragments.push(clip(planes, covered));
+    }
     const geometry = mergeGeometries(fragments, false);
     for (const fragment of fragments) fragment.dispose();
     requireValue(geometry, 'Selected body coverage could not be combined');

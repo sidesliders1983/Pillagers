@@ -27,6 +27,6 @@ export const gridTrialOutfitAsset: CharacterAsset = {
         anchor: 'socket_chest', fitMode: 'drape', authoringFrame: 'meshy-native',
         nativeBinding: {path: '/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json',
             sha256: gridTrialBindingHash, rigSignature: meshyRigSignature},
-        clearance: .004, slot: 'full',
+        clearance: .004, slot: 'full', includesFootwear: false,
     },
 };

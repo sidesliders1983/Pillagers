@@ -47,6 +47,19 @@ export function garmentFitsChoice(asset: CharacterAsset, choice: GarmentChoiceKe
     return slot === 'upper' || slot === 'over';
 }
 
+/** An explicit ensemble can reserve only the upper/lower slots and leave shoes independent. */
+export function outfitAllowsSeparateFootwear(id: string) {
+    if (id === 'auto' || id === 'none') return false;
+    const asset = characterAsset(id);
+    return asset.type === 'garment' && asset.metadata?.slot === 'full'
+        && asset.metadata.includesFootwear === false;
+}
+
+function complementaryFootwear(presentation: CharacterPresentation) {
+    return presentation.trousers === 'none' && presentation.top === 'none'
+        && outfitAllowsSeparateFootwear(presentation.outfit);
+}
+
 export function parseCharacterPresentation(value: unknown = defaultCharacterPresentation): CharacterPresentation {
     if (!value || typeof value !== 'object' || Array.isArray(value)) {
         throw new Error('Presentation must be an object.');
@@ -67,7 +80,8 @@ export function parseCharacterPresentation(value: unknown = defaultCharacterPres
         }
     }
     const separateRequested = separateGarmentKeys.some(key => result[key] !== 'none');
-    if (separateRequested && result.outfit !== 'auto' && result.outfit !== 'none') {
+    if (separateRequested && result.outfit !== 'auto' && result.outfit !== 'none'
+        && !complementaryFootwear(result)) {
         throw new Error('A full outfit cannot be combined with separate shoes, trousers or upper clothing.');
     }
     if (result.equipmentSocket !== 'auto' && !equipmentSocketNames.includes(result.equipmentSocket)) {
@@ -145,7 +159,7 @@ export function resolveCharacterPresentation(
             base.appearance.beardStyle === 'none' ? '' : 'beard/' + base.appearance.beardStyle))
         : null;
     // Opting into separate slots suppresses the legacy automatic full ensemble.
-    const outfitId = separateRequested ? null :
+    const outfitId = separateRequested && !complementaryFootwear(presentation) ? null :
         select(presentation.outfit, automatic('garment', '', 'outfit'));
     const shoesId = select(presentation.shoes, automatic('garment', '', 'shoes'));
     const trousersId = select(presentation.trousers, automatic('garment', '', 'trousers'));

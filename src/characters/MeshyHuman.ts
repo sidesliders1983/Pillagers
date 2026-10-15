@@ -335,7 +335,13 @@ export class MeshyHuman {
   const parent=this.root.parent,position=this.root.position.clone(),rotation=this.root.quaternion.clone();
   this.root.removeFromParent();this.root.position.set(0,0,0);this.root.quaternion.identity();
   this.body.position.copy(this.basePosition);this.body.scale.setScalar(1);this.root.updateMatrixWorld(true);
-  const bounds=new Box3().setFromObject(this.fit.mesh,true),neutralHeight=bounds.max.y-bounds.min.y;
+  // Clothing masks can hide the feet. Always measure height on the complete source body.
+  const maskedGeometry = this.fit.mesh.geometry;
+  this.fit.mesh.geometry = this.fit.sourceGeometry;
+  let bounds: Box3;
+  try { bounds = new Box3().setFromObject(this.fit.mesh, true); }
+  finally { this.fit.mesh.geometry = maskedGeometry; }
+  const neutralHeight = bounds.max.y - bounds.min.y;
   this.body.scale.setScalar(height/neutralHeight);this.body.position.y-=bounds.min.y*height/neutralHeight;
   this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
   this.fit.refit();this.modules.refit(profile);this.updateSelectedAssets();
