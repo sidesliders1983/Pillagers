@@ -1,3 +1,4 @@
+import { freezeReadView } from './ReadView';
 import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
@@ -6,6 +7,19 @@ import type { FoundingPhase, SimulationCommand, SimulationState } from '../simul
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
+    private canonicalRevision = 0;
+    private readState?: Readonly<SimulationState>;
+    private serializedState?: string;
+    get revision(): number { return this.canonicalRevision; }
+    /** One deeply frozen, isolated UI copy per committed revision. snapshot() still returns owned copies. */
+    readSnapshot(): Readonly<SimulationState> {
+        return this.readState ??= freezeReadView(this.snapshot());
+    }
+    private invalidateRead(): void {
+        this.canonicalRevision++;
+        this.readState = undefined;
+        this.serializedState = undefined;
+    }
     private familyIndex = new FamilyTreeIndex();
     familyTree() {
         return this.familyIndex.read(this.state);
@@ -74,6 +88,7 @@ export class GameplaySession {
         this.trend = { food: next.stocks.food - this.state.stocks.food, materials: next.stocks.materials - this.state.stocks.materials };
         this.state = next;
         this.book = book;
+        this.invalidateRead();
     }
     pacing() {
         return { running: this.running, minutesPerWinter: this.minutesPerWinter,
@@ -88,7 +103,7 @@ export class GameplaySession {
         this.running = pace.running;
     }
     saveJSON(): string {
-        return serializeState(this.state);
+        return this.serializedState ??= serializeState(this.state);
     }
     loadJSON(serialized: string): void {
         const state = reconstructState(serialized);
@@ -114,6 +129,7 @@ export class GameplaySession {
         this.personalBookKey = '';
         this.historyGeneration++;
         this.state = state;
+        this.invalidateRead();
         this.book = new ClanBook(state, fresh);
         this.running = false;
         this.fractionalTicks = 0;

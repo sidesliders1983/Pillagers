@@ -1,0 +1,454 @@
+{
+  "profiles": [
+    {
+      "path": "profiles/after-r1-3-running.cpuprofile.gz",
+      "durationMs": 307453.713,
+      "topSelf": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "line": 0,
+          "selfMs": 206675.3270000037,
+          "inclusiveMs": 206675.3270000037
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "line": 102,
+          "selfMs": 7178.683999999994,
+          "inclusiveMs": 8765.365999999989
+        },
+        {
+          "function": "fromBufferAttribute",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 2786,
+          "selfMs": 7147.817000000007,
+          "inclusiveMs": 9860.082000000004
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "line": 56,
+          "selfMs": 6965.984999999984,
+          "inclusiveMs": 6988.674999999983
+        },
+        {
+          "function": "setItem",
+          "url": "",
+          "line": 0,
+          "selfMs": 6144.668999999998,
+          "inclusiveMs": 6144.668999999998
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 8325,
+          "selfMs": 5461.81,
+          "inclusiveMs": 6778.385999999996
+        },
+        {
+          "function": "update",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 14225,
+          "selfMs": 4700.138000000003,
+          "inclusiveMs": 5468.925999999996
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "line": 0,
+          "selfMs": 3675.1469999999968,
+          "inclusiveMs": 3675.1469999999968
+        },
+        {
+          "function": "intersectTriangle",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 6154,
+          "selfMs": 3086.4860000000012,
+          "inclusiveMs": 3089.0730000000012
+        },
+        {
+          "function": "getY",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 13451,
+          "selfMs": 2783.6279999999983,
+          "inclusiveMs": 2783.6279999999983
+        },
+        {
+          "function": "persist",
+          "url": "/src/play/SharedSettlement.ts",
+          "line": 93,
+          "selfMs": 2670.202,
+          "inclusiveMs": 7945.510000000015
+        },
+        {
+          "function": "save",
+          "url": "/src/lore/ClanBook.ts",
+          "line": 220,
+          "selfMs": 2557.477,
+          "inclusiveMs": 3353.8260000000005
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 6652,
+          "selfMs": 2185.5680000000025,
+          "inclusiveMs": 2185.5680000000025
+        },
+        {
+          "function": "getVertexPosition",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 11740,
+          "selfMs": 1853.1200000000022,
+          "inclusiveMs": 11103.54600000002
+        },
+        {
+          "function": "freezeReadView",
+          "url": "/src/gameplay-lab/ReadView.ts",
+          "line": 1,
+          "selfMs": 1527.2670000000003,
+          "inclusiveMs": 1527.2670000000003
+        },
+        {
+          "function": "projectObject",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 40593,
+          "selfMs": 1379.6990000000012,
+          "inclusiveMs": 1871.8810000000012
+        },
+        {
+          "function": "serializeState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "line": 172,
+          "selfMs": 1174.780999999999,
+          "inclusiveMs": 1847.2740000000006
+        },
+        {
+          "function": "renderObject",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 36700,
+          "selfMs": 1164.3239999999992,
+          "inclusiveMs": 10357.815999999968
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "line": 50,
+          "selfMs": 1137.021,
+          "inclusiveMs": 74833.61600000046
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 7436,
+          "selfMs": 1025.203999999999,
+          "inclusiveMs": 1025.203999999999
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "line": 0,
+          "selfMs": 1013.5539999999993,
+          "inclusiveMs": 1013.5539999999993
+        },
+        {
+          "function": "_computeIntersections",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 11790,
+          "selfMs": 864.0879999999997,
+          "inclusiveMs": 17321.876000000062
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 1316,
+          "selfMs": 834.2339999999995,
+          "inclusiveMs": 834.2339999999995
+        },
+        {
+          "function": "getX",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 10531,
+          "selfMs": 782.1629999999997,
+          "inclusiveMs": 816.6319999999996
+        },
+        {
+          "function": "historyIdentity",
+          "url": "/src/lore/ClanBook.ts",
+          "line": 8,
+          "selfMs": 743.438,
+          "inclusiveMs": 743.438
+        },
+        {
+          "function": "apply",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 27071,
+          "selfMs": 720.9300000000002,
+          "inclusiveMs": 1212.95
+        },
+        {
+          "function": "checkIntersection$1",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 11870,
+          "selfMs": 692.0469999999993,
+          "inclusiveMs": 3697.625000000005
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "line": 776,
+          "selfMs": 673.1229999999996,
+          "inclusiveMs": 43209.35700000007
+        },
+        {
+          "function": "meshyBoneProportion",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "line": 1,
+          "selfMs": 672.1319999999998,
+          "inclusiveMs": 672.1319999999998
+        },
+        {
+          "function": "checkGeometryIntersection",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 11888,
+          "selfMs": 648.8459999999999,
+          "inclusiveMs": 15406.69300000002
+        },
+        {
+          "function": "maskedBodyGeometry",
+          "url": "/src/characters/BodyCoverage.ts",
+          "line": 2,
+          "selfMs": 578.1380000000005,
+          "inclusiveMs": 1782.9329999999989
+        },
+        {
+          "function": "",
+          "url": "/src/characters/BodyCoverage.ts",
+          "line": 4,
+          "selfMs": 504.3259999999999,
+          "inclusiveMs": 806.2040000000011
+        },
+        {
+          "function": "evaluate",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 22115,
+          "selfMs": 502.4730000000001,
+          "inclusiveMs": 1909.9500000000012
+        },
+        {
+          "function": "update",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 28591,
+          "selfMs": 496.33699999999976,
+          "inclusiveMs": 3672.186999999999
+        },
+        {
+          "function": "shapePose",
+          "url": "/src/characters/MeshyHuman.ts",
+          "line": 504,
+          "selfMs": 442.79299999999995,
+          "inclusiveMs": 1686.0930000000014
+        },
+        {
+          "function": "getParameters",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 35492,
+          "selfMs": 416.2710000000001,
+          "inclusiveMs": 441.74600000000004
+        },
+        {
+          "function": "applyMeshyProportions",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "line": 18,
+          "selfMs": 411.09999999999985,
+          "inclusiveMs": 1094.0660000000005
+        },
+        {
+          "function": "bindVertexArray",
+          "url": "",
+          "line": 0,
+          "selfMs": 391.0700000000001,
+          "inclusiveMs": 391.0700000000001
+        },
+        {
+          "function": "WebGLRenderer.renderBufferDirect",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 40314,
+          "selfMs": 388.6999999999999,
+          "inclusiveMs": 7303.643999999985
+        },
+        {
+          "function": "refresh",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "line": 193,
+          "selfMs": 382.10999999999996,
+          "inclusiveMs": 25343.748999999818
+        },
+        {
+          "function": "readProjection",
+          "url": "/src/fjord-play/FjordCampaign.ts",
+          "line": 32,
+          "selfMs": 375.35499999999996,
+          "inclusiveMs": 9601.23800000003
+        },
+        {
+          "function": "record",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "line": 46,
+          "selfMs": 374.593,
+          "inclusiveMs": 471.9080000000001
+        },
+        {
+          "function": "persistSettlement",
+          "url": "/src/play/SettlementBrowser.ts",
+          "line": 17,
+          "selfMs": 367.14700000000016,
+          "inclusiveMs": 14470.429999999978
+        },
+        {
+          "function": "reconcile",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "line": 61,
+          "selfMs": 363.882,
+          "inclusiveMs": 648.6100000000001
+        },
+        {
+          "function": "setProgram",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 40855,
+          "selfMs": 362.3400000000002,
+          "inclusiveMs": 5232.972999999998
+        },
+        {
+          "function": "toArray",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 7291,
+          "selfMs": 361.45300000000015,
+          "inclusiveMs": 361.45300000000015
+        },
+        {
+          "function": "copySampleValue_",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 22203,
+          "selfMs": 338.2920000000002,
+          "inclusiveMs": 338.2920000000002
+        },
+        {
+          "function": "structuredClone",
+          "url": "",
+          "line": 0,
+          "selfMs": 334.8909999999999,
+          "inclusiveMs": 334.8909999999999
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "line": 614,
+          "selfMs": 330.6930000000001,
+          "inclusiveMs": 3744.1059999999934
+        },
+        {
+          "function": "texSubImage2D",
+          "url": "",
+          "line": 0,
+          "selfMs": 329.41700000000014,
+          "inclusiveMs": 329.41700000000014
+        }
+      ],
+      "relevant": [
+        {
+          "function": "safe",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "line": 486,
+          "selfMs": 320.06999999999994,
+          "inclusiveMs": 11863.59200000002
+        },
+        {
+          "function": "segment",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "line": 514,
+          "selfMs": 31.477,
+          "inclusiveMs": 11402.294000000025
+        },
+        {
+          "function": "route",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "line": 540,
+          "selfMs": 109.50100000000003,
+          "inclusiveMs": 5464.036999999985
+        },
+        {
+          "function": "refit",
+          "url": "/src/characters/MeshyModuleRuntime.ts",
+          "line": 357,
+          "selfMs": 8.952,
+          "inclusiveMs": 2720.5689999999977
+        },
+        {
+          "function": "applyDNA",
+          "url": "/src/characters/MeshyHuman.ts",
+          "line": 358,
+          "selfMs": 3.45,
+          "inclusiveMs": 2651.024
+        },
+        {
+          "function": "setFromObject",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 5113,
+          "selfMs": 2.083,
+          "inclusiveMs": 929.4970000000006
+        },
+        {
+          "function": "expandByObject",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 5223,
+          "selfMs": 10.703,
+          "inclusiveMs": 927.4140000000007
+        },
+        {
+          "function": "applyBoneTransform",
+          "url": "/artifacts/fjord-runtime-vite-cache/deps/chunk-EJSNPO4G.js?v=dc37ca45",
+          "line": 14092,
+          "selfMs": 114.077,
+          "inclusiveMs": 875.1740000000002
+        },
+        {
+          "function": "fitPart",
+          "url": "/src/characters/MeshyModuleRuntime.ts",
+          "line": 219,
+          "selfMs": 0,
+          "inclusiveMs": 656.3779999999997
+        },
+        {
+          "function": "humanPreviewGroundSpeed",
+          "url": "/src/character-lab/HumanPreviewPace.ts",
+          "line": 2,
+          "selfMs": 4.7059999999999995,
+          "inclusiveMs": 159.63599999999997
+        },
+        {
+          "function": "bodyClearance",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "line": 680,
+          "selfMs": 98.83999999999999,
+          "inclusiveMs": 139.78099999999995
+        },
+        {
+          "function": "refit",
+          "url": "/src/characters/MeshyBodyFitAdapter.ts",
+          "line": 167,
+          "selfMs": 1.984,
+          "inclusiveMs": 84.61299999999999
+        },
+        {
+          "function": "safeJson",
+          "url": "",
+          "line": 328,
+          "selfMs": 0,
+          "inclusiveMs": 16.081
+        }
+      ],
+      "note": "Sampled V8 self/inclusive CPU; inclusive call trees overlap and must not be summed. CPU-only profiles include the final inspection/export postlude."
+    }
+  ]
+}

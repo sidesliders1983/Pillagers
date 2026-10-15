@@ -1,0 +1,21 @@
+{
+  "sourceCommit": "3179f818374a749ba3466c8493f9530fa981e6d1",
+  "browser": "155.0.4283.45",
+  "physicalIOS": false,
+  "qaBridgeAbsent": true,
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "navigation": {
+    "pointerType": "touch",
+    "cameraSignatureChangedAfterMs": 81.20000000298023,
+    "selected": "",
+    "cameraBefore": "{\"world\":[-0.7525766947068779,0,-0.658504607868518,0,-0.3796258199762471,0.8170993839488748,0.4338580799728539,0,0.5380637094168615,0.576496831518066,-0.6149299536192705,0,98,34.46178960800171,114,1],\"projection\":[4.0297073219206325,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}",
+    "cameraAfter": "{\"world\":[-0.7525766947068779,0,-0.658504607868518,0,-0.3796258199762471,0.8170993839488748,0.4338580799728539,0,0.5380637094168615,0.576496831518066,-0.6149299536192705,0,101.80269912611635,33.84621311925317,114.44275415254455,1],\"projection\":[4.0297073219206325,0,0,0,0,2.4142135623730954,0,0,0,0,-1.0000833368057,-1,0,0,-0.20000833368057003,0]}"
+  },
+  "coreUnchanged": true,
+  "placeholders": [],
+  "errors": [],
+  "note": "Public controls of the ordinary production build. One functional smoke, not the repeated CPU benchmark or a physical display latency measurement."
+}

@@ -1,0 +1,21 @@
+{
+  "before": "06cd2f4718e0985cf267ca80edd30870331f93aa",
+  "after": "44df1f9df402de3ea7225ef0883f1f76fb789db6",
+  "repeats": 3,
+  "captures": 24,
+  "viewport": {
+    "width": 390,
+    "height": 844,
+    "hasTouch": true,
+    "dpr": 1
+  },
+  "quality": "Low",
+  "fixture": "docs/qa/fjord-runtime-improvements/170/fixtures/developed-810.json",
+  "fixtureSha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+  "harnessSha256": {
+    "scripts/qa/fjord-navigation-audit.mjs": "9040e509848e58ee40e1ddf04facc5cda04800d0c14fde73821ea45a331ec21f",
+    "scripts/qa/fjord-runtime-browser.mjs": "47912460c98a3e516da31865c0ea0a6628c7c72536d5a63cdea4dbe9c956ae8f"
+  },
+  "physicalIOS": false,
+  "note": "Alternating source order; actual touch coordinates and camera matrices are recorded. Native verification occurs after the timed interval. Running uses natural ticks, replayed individually."
+}

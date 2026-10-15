@@ -71,7 +71,8 @@ export function createFjordYardSurface(yard: Object3D, house: Object3D | undefin
                 floor = hit.point.y;
             }
         }
-        if (samples.size > 16000) samples.clear();
+        // Evict one old point rather than making every recent route probe cold at once.
+        if (samples.size >= 16000) samples.delete(samples.keys().next().value!);
         samples.set(key, floor);
         return floor;
     };

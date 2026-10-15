@@ -1,0 +1,28 @@
+{
+  "group": "identity",
+  "assetEnvironment": "owner-prepared-houses",
+  "sourceCommit": "128a1912e33636e30efe92ddd3e447443cef8dc9",
+  "variants": [
+    {
+      "label": "before",
+      "origin": "http://127.0.0.1:5190",
+      "sourceCommit": "128a1912e33636e30efe92ddd3e447443cef8dc9"
+    }
+  ],
+  "sourceMode": "Vite development modules, QA-only bridge; native profiling only in scenarios with profile=true",
+  "origin": "http://127.0.0.1:5190",
+  "warmupMs": 5000,
+  "sampleMs": 20000,
+  "browserVersion": "155.0.4283.45",
+  "startedAt": "2026-10-15T12:20:17.886Z",
+  "fixtures": [
+    {
+      "name": "developed-810",
+      "sha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "loadedSha256": "f68d96ef56eaab464a3076cc0843b006e806826f88067f851f19518a97131105"
+    }
+  ],
+  "runs": [],
+  "errors": [],
+  "failure": "Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'started')\n    at eval (eval at evaluate (:311:30), <anonymous>:4:57)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+}

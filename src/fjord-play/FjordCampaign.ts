@@ -1,3 +1,5 @@
+import { freezeReadView } from '../gameplay-lab/ReadView';
+import type { SimulationState } from '../simulation/SimulationCore';
 import { createCampaignIsland, campaignIslandPlan, type CampaignGeography } from './CampaignIsland';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { generateWorld } from '../world-generation/GenerateWorld';
@@ -10,6 +12,10 @@ export const sharedCampaignKey = 'pillagers.gameplay-lab.v1';
 export const fjordCampaignKey = 'pillagers.fjord-play.v1';
 /** Presentation adapter around the very same session used by both existing gameplay views. */
 export class FjordCampaign {
+    private readView?: Readonly<ReturnType<typeof projectFjordSettlement>>;
+    private readRevision = -1;
+    private readBlueprint?: WorldBlueprint;
+    private readLayout = '';
     blueprint: WorldBlueprint;
     layout: FjordLayout;
     selection: {
@@ -21,10 +27,24 @@ export class FjordCampaign {
             generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
     }
-    project() {
-        const view = projectFjordSettlement(this.session.snapshot(), this.blueprint, this.layout);
+    project(state: SimulationState = this.session.snapshot()) {
+        const view = projectFjordSettlement(state, this.blueprint, this.layout);
         this.layout = view.layout;
         return view;
+    }
+    /** Cached immutable presentation read; the public project() remains an owned mutable result. */
+    readProjection() {
+        const layoutKey = JSON.stringify(this.layout);
+        if (!this.readView || this.readRevision !== this.session.revision ||
+            this.readBlueprint !== this.blueprint || this.readLayout !== layoutKey) {
+            const view = this.project(this.session.readSnapshot());
+            // The adapter owns a mutable layout; readers must not freeze or mutate it through the view.
+            this.readView = freezeReadView(structuredClone(view));
+            this.readRevision = this.session.revision;
+            this.readBlueprint = this.blueprint;
+            this.readLayout = JSON.stringify(this.layout);
+        }
+        return this.readView;
     }
     setMooring(transform: FjordTransform) {
         if (this.layout.mooringResolved)
@@ -32,12 +52,18 @@ export class FjordCampaign {
         this.layout.mooring = { ...transform };
         this.layout.mooringResolved = true;
     }
-    exportJSON() {
-        this.project();
+    exportData() {
+        this.readProjection();
+        // Preserve authoritative serialization validation, once for each committed Core revision.
+        this.session.saveJSON();
+        const state = this.session.readSnapshot();
         const island = campaignIslandPlan(this.blueprint)?.recipe;
-        return JSON.stringify({ bridgeVersion: island ? 2 : 1, campaign: JSON.parse(this.session.saveJSON()),
+        return { bridgeVersion: island ? 2 : 1, campaign: state,
             ...(island ? { island } : { blueprint: this.blueprint }), layout: this.layout, selection: this.selection,
-            narrative: this.session.book.save(this.session.snapshot()) });
+            narrative: this.session.book.save(state) };
+    }
+    exportJSON() {
+        return JSON.stringify(this.exportData());
     }
     importJSON(text: string) {
         if (text.length > 24000000)

@@ -1,0 +1,10 @@
+{
+  "measurementIntegrityPass": true,
+  "projectValidationPass": false,
+  "captures": 152,
+  "replayChecks": 134,
+  "fullTestsExitCode": 1,
+  "checked": "Complete matrices, frozen fixture bytes, real prepared models, resource hashes, quantiles, visible scheduling, non-disjoint GPU queries, native draw parity and exact Core replay",
+  "note": "Project validation remains failed; see the inherited shader assertion. No validation was weakened.",
+  "checkerExitCode": 1
+}

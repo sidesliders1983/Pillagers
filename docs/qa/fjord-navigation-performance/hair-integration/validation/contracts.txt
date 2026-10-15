@@ -1,0 +1,43 @@
+✔ a ridge between an above-ground eye and focus lifts the eye without moving the requested orbit (8.5039ms)
+✔ grazing a canonical triangle edge cannot slip between regular boom samples (6.1658ms)
+✔ collision escape is immediate and downward recovery depends on time rather than frame rate (8.3806ms)
+✔ camera clearance protects the near-plane footprint beside a steep slope (0.8148ms)
+✔ the real RTS controller applies terrain safety immediately to an authored setView pose (16.2921ms)
+✔ invalid camera poses are rejected before mutation and unavailable terrain uses a finite conservative ceiling (2.581ms)
+✔ authored low review poses retain their explicit clearance and Home restores the gameplay margin (1.9239ms)
+✔ flat land, sea and bounded emergency fallback keep finite predictable clearance (0.6297ms)
+✔ orbiting away from a ridge recovers without changing requested zoom or focus; rebinding clears stale lift (38.5513ms)
+✔ panning across a ridge keeps the interpolated navigation focus on canonical ground (5.3004ms)
+✔ Fjordplay selects explicit generic and farmer sets from canonical sex and occupation without mutating identity (5.2973ms)
+✔ only an explicit ensemble without shoes can accept complementary footwear (1.48ms)
+✔ generic tunic and low shoes compose exact native masks, retain the chest and reuse cached equipment (1572.7372ms)
+✔ occupation, sex and adult-age changes update clothing on the same owned Human and restore native masks (2440.2721ms)
+✔ a slow previous occupation load cannot overwrite a newer farmer set (365.7712ms)
+✔ a failed garment load preserves the live body and can retry without creating a replacement resident (430.3169ms)
+✔ footwear body masks cannot change DNA height normalization or lift a resident off the ground (724.2391ms)
+✔ approved hair variants are stable across occupation, sex and age without consuming Core identity (1.8241ms)
+✔ changing resident DNA on the same model updates its hair variant and retains outfit caching (954.3489ms)
+✔ manual hair is discovered only on its exact native body and has textureless exports (304.8604ms)
+✔ both styles follow the existing Head through neutral, Idle and Walk at every body LOD (3560.6116ms)
+✔ annual invariant fits exactly match forced full refits across growth, adulthood, elders, sex, genetics and all world outfits (66259.3194ms)
+✔ hair, beard, source coverage edits, geometry versions, external scale and native-neutral invalidate only exact dependencies (1513.1789ms)
+✔ each body LOD retains identical authored coverage and scale through invariant birthdays and forced fallback (6704.731ms)
+✔ bounded navigation matches native triangles for alternating cells, edges, seams and front/back faces (105.0614ms)
+✔ navigation preserves deep-sea continuation, transformed parents, misses and parallel/vertical rays (8.2255ms)
+✔ layered material masks and legitimate wear-index replacement retain the same native physical surface (943.7652ms)
+✔ foreign, edited and disposed terrain decline the shortcut instead of retaining stale geometry (3.949ms)
+✔ a crossing ray tests at most two triangles per crossed cell plus eight sea triangles (76.8993ms)
+✔ actual touch navigation reaches the same point without scanning the terrain material layers (7.8727ms)
+✔ small finger movement remains a tap, dragging and cancellation never navigate (5.0978ms)
+✔ pinch has the requested direction and cannot become a tap or swipe after lifting a finger (1.7305ms)
+✔ touch camera centers terrain taps, orbits that center and clamps conventional pinch zoom (22.6961ms)
+✔ resident selection consumes taps and clicks while drags and pinch never select (2.5453ms)
+✔ right mouse drag orbits horizontally and vertically without panning or selecting, and stops on release (2.4388ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76824.5366

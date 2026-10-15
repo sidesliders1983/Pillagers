@@ -1,0 +1,1 @@
+An attempted visual run timed out after reloading the saved reference settlement. No screenshots or timing results were accepted. Network and page diagnostics were added before retrying; the completed controlled performance matrix is independent.

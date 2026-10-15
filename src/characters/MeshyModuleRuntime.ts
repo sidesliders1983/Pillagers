@@ -158,7 +158,7 @@ export function validateNativeModule(source: NativeModuleSource, fit: MeshyBodyF
  return source;
 }
 
-function eligible(source: NativeModuleSource, profile: HumanProfile) {
+export function nativeModuleEligible(source: NativeModuleSource, profile: HumanProfile) {
  const {asset, binding} = source;
  return profile.age >= binding.supportedAges.min && profile.age <= binding.supportedAges.max
   && !(asset.type === 'beard' && (profile.age < 18 || profile.masculinity <= .5));
@@ -182,7 +182,7 @@ export class MeshyModuleRuntime {
    'Native module IDs must be unique');
   this.clear();
   for (const source of sources) {
-   if (!eligible(source, profile)) continue;
+   if (!nativeModuleEligible(source, profile)) continue;
    const {asset, binding} = source;
    const originals = sourceMeshes(source.source).filter(mesh =>
     !mesh.name.startsWith('Coverage_'));
@@ -374,7 +374,7 @@ export class MeshyModuleRuntime {
  refit(profile: HumanProfile) {
   const started = performance.now();
   for (const [id, record] of [...this.records]) {
-   if (!eligible(record.source, profile)) this.remove(id);
+   if (!nativeModuleEligible(record.source, profile)) this.remove(id);
   }
   this.frames.forEach(frame => frame.removeFromParent());
   this.frames = [];

@@ -118,12 +118,12 @@ export class FjordPlay {
         const sameFounders = document.querySelector<HTMLInputElement>('#fjord-founders')!;
         const cycleField = document.querySelector<HTMLSelectElement>('#fjord-cycle')!;
         const campaignFields = () => {
-            seedField.value = String(this.session.snapshot().seed);
+            seedField.value = String(this.session.readSnapshot().seed);
             const island = campaignIslandPlan(this.campaign.blueprint);
             document.querySelector('#fjord-geography')!.textContent = island ?
                 'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
                 'Original saved geography';
-            weatherField.checked = this.session.snapshot().weather?.config.enabled ?? false;
+            weatherField.checked = this.session.readSnapshot().weather?.config.enabled ?? false;
             cycleField.value = String(this.session.minutesPerWinter);
         };
         campaignFields();
@@ -169,14 +169,14 @@ export class FjordPlay {
         let sceneWork: Promise<void> | undefined;
         const selectionLabels = new SelectionLabels(document.querySelector<HTMLElement>('#fjord-selection-labels')!,
             document.querySelector<SVGSVGElement>('#fjord-selection-leaders')!);
-        const production = new FjordProduction(this.session.snapshot().events);
+        const production = new FjordProduction(this.session.readSnapshot().events);
         const productionLabels = new ProductionLabels(document.querySelector<HTMLElement>('#fjord-production-labels')!);
         const resetProduction = () => {
-            production.reset(this.session.snapshot().events);
+            production.reset(this.session.readSnapshot().events);
             productionLabels.reset();
         };
-        const highlight = () => {
-            liveMarkers = this.shared.selectionPresentation();
+        const highlight = (state = this.session.readSnapshot(), view = this.campaign.readProjection()) => {
+            liveMarkers = this.shared.selectionPresentation(state, view.entities);
             layer?.select(liveMarkers);
             canvas.dataset.highlight = JSON.stringify(layer?.root.userData.selection ?? null);
             const markers = (layer?.root.userData.markers ?? []) as SelectionLabel[];
@@ -187,8 +187,8 @@ export class FjordPlay {
         let canonicalTime = '';
         const refresh = () => {
             if (!this.loading) bookReader.update();
-            const view = this.campaign.project();
-            const state = this.session.snapshot();
+            const view = this.campaign.readProjection();
+            const state = this.session.readSnapshot();
             calendar = view.calendar;
             canonicalTime = 'Canonical time: Winter ' + view.time.winter + ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
             productionLabels.enqueue(production.read(state.events));
@@ -253,7 +253,7 @@ export class FjordPlay {
                 residentProfile = '<details data-view-key="resident-profile"><summary>Character traits &amp; heritage</summary>' +
                     content.outerHTML + '</details>';
             }
-            updateView(panel, this.panels.render(this.session.snapshot(), this.shared.selection, personalHistory.render()) +
+            updateView(panel, this.panels.render(this.session.readSnapshot(), this.shared.selection, personalHistory.render()) +
                 residentProfile + '<button data-action="clear">Clear selection</button>', preserved);
             this.lastPanelSelection = selectionKey;
             updateManagementAvailability(panel, this.shared);
@@ -396,7 +396,7 @@ export class FjordPlay {
         const select = (kind: string, id: string) => {
             showManagement(true);
             this.shared.select({ kind: kind as EntityKind, id });
-            const entity = this.campaign.project().entities.find(e => e.kind === kind && e.id === id);
+            const entity = this.campaign.readProjection().entities.find(e => e.kind === kind && e.id === id);
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
             refresh();
         };
@@ -539,14 +539,14 @@ export class FjordPlay {
                 precipitationEffect?.dispose();
                 world?.dispose();
                 world = next;
-                const fire = this.campaign.project().campfire;
+                const fire = this.campaign.readProjection().campfire;
                 const firePosition = new Vector3(fire.transform.x, fire.transform.y, fire.transform.z);
                 next.clearPlot({ ...fire.transform, halfWidth: fire.clearingRadius,
                     halfDepth: fire.clearingRadius, futureAsset: 'hut' });
-                const fireState = inspectCampfire(this.session.snapshot());
+                const fireState = inspectCampfire(this.session.readSnapshot());
                 campfireEffect = new CampfireEffect(fire.id, firePosition.clone().add(new Vector3(0, .9, 0)),
-                    this.session.snapshot().seed, fireState.lit);
-                precipitationEffect = new PrecipitationEffect(this.session.snapshot().seed,
+                    this.session.readSnapshot().seed, fireState.lit);
+                precipitationEffect = new PrecipitationEffect(this.session.readSnapshot().seed,
                     (x, z) => Math.max(blueprint.waterLevel, next.movement.heightAt(x, z)));
                 scene.add(precipitationEffect.root);
                 configureEffects();
@@ -588,7 +588,12 @@ export class FjordPlay {
             sceneWork = (async () => {
                 do {
                     this.queued = false;
-                    const view = this.campaign.project();
+                    // Keep one immutable revision through asynchronous model work. A queued revision
+                    // acquires a new pair on the next pass instead of mixing new facts into this scene.
+                    const state = this.session.readSnapshot();
+                    const view = this.campaign.readProjection();
+                    const sceneCanonicalTime = 'Canonical time: Winter ' + view.time.winter +
+                        ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
                     precipitationEffect!.setWeather(view.precipitation);
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
@@ -635,7 +640,7 @@ export class FjordPlay {
                         }
                     sceneEntities = view.entities;
                     await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
-                    campfireEffect!.setLit(inspectCampfire(this.session.snapshot()).lit);
+                    campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
                     const fireBounds = layer!.bounds('campfire:settlement-campfire')!;
                     canvas.dataset.campfire = JSON.stringify({ ...view.campfire,
@@ -652,14 +657,14 @@ export class FjordPlay {
                     layer!.advance(motion!, 0, false);
                     if (this.stopped || this.shared.transferring)
                         return;
-                    highlight();
+                    highlight(state, view);
                     const rendered = layer!.describe();
                     productionLabels.setAnchors(rendered);
                     canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                         ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
-                        canonicalTime,
+                        sceneCanonicalTime,
                         'Reused FjordSide DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.',
                         'Ambient motion is presentation only. Young children and active caregivers stay indoors.',
                         'Geography: ' + view.layout.geographyId].join('\n');
@@ -684,8 +689,10 @@ export class FjordPlay {
         controller.setSelectionHandler((x, y, pointerType) => {
             const selected = layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
             if (!selected) {
-                this.shared.select(null);
-                refresh();
+                if (this.shared.selection) {
+                    this.shared.select(null);
+                    refresh();
+                }
                 // A desktop left click is exclusively selection/deselection.
                 // Preserve the existing touch tap-on-empty-ground navigation.
                 return pointerType === 'mouse';

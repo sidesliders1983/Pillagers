@@ -6,7 +6,7 @@ import {GLTF, GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {clone} from 'three/addons/utils/SkeletonUtils.js';
 import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {assetDigest} from './AssetDigest';
-import {MeshyModuleRuntime,NativeModuleSource} from './MeshyModuleRuntime';
+import {MeshyModuleRuntime,NativeModuleSource,nativeModuleEligible} from './MeshyModuleRuntime';
 import {ModuleBindingV2, NativeBodyIdentity, NativeBodySource} from './BodyFitAdapter';
 import {meshyRigSignature} from './MeshyNativeRig';
 import {resolveCharacterPresentation,parseCharacterPresentation,CharacterPresentation} from './CharacterPresentation';
@@ -17,8 +17,18 @@ import {generatePhenotype} from './generatePhenotype';
 import {SoftBodySpring} from '../character-lab/SoftBodySpring';
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {humanExtraAnimations} from './HumanExtraAnimations';
-import {applyMeshyProportions} from './MeshyHumanDynamics';
+import {applyMeshyProportions,meshyBoneProportion} from './MeshyHumanDynamics';
 import {HumanProfile, universalHumanProfile} from './UniversalHumanProfile';
+// One current exact snapshot per live binding, shared weakly across residents.
+// Comparing complete JSON detects in-place edits without retaining its large cages in every human key.
+const bindingDependencies = new WeakMap<ModuleBindingV2, { json: string; revision: number }>();
+function bindingDependencyRevision(binding: ModuleBindingV2) {
+ const json = JSON.stringify(binding), previous = bindingDependencies.get(binding);
+ if (previous?.json === json) return previous.revision;
+ const revision = (previous?.revision ?? 0) + 1;
+ bindingDependencies.set(binding, { json, revision });
+ return revision;
+}
 export const meshyAnimationClips={
  Idle:'Idle_02',Walk:'Walking',Run:'Running',Attack:'Attack',
  Death:'Fall_Dead_from_Abdominal_Injury',InjuredWalk:'Unsteady_Walk',Talk:'Talk_Passionately',
@@ -209,8 +219,70 @@ export class MeshyHuman {
  readonly fit:MeshyBodyFitAdapter;readonly modules:MeshyModuleRuntime;dna!:CharacterDNA;equipRevision=0;
  get isDisposed(){return this.disposed;}
  private nativeSources: NativeModuleSource[] = [];
+ private lastNeutralFit?: string;
+ private normalizedBody?: string;
+ private dependencyIds = new WeakMap<object, number>();
+ private nextDependencyId = 0;
+ private fitRetained = false;
+ private dependencyId(value: object) {
+  let id = this.dependencyIds.get(value);
+  if (id === undefined) { id = ++this.nextDependencyId; this.dependencyIds.set(value, id); }
+  return id;
+ }
+ private geometryDependencies(geometry: import('three').BufferGeometry) {
+  const attribute = (value: import('three').BufferAttribute | import('three').InterleavedBufferAttribute) =>
+   [this.dependencyId(value), 'data' in value ? value.data.version : value.version, value.count, value.itemSize];
+  return [this.dependencyId(geometry), geometry.index && attribute(geometry.index),
+   Object.entries(geometry.attributes).map(([name, value]) => [name, attribute(value)]),
+   Object.entries(geometry.morphAttributes).map(([name, values]) => [name, values?.map(attribute)])];
+ }
+ /** One last-result key per human. Full binding data detects even in-place coverage edits.
+  * Geometry identity/version, native rig, scale and exact neutral bone factors are required;
+  * age/heritage/name metadata alone is not a neutral fitting input. Pose shaping is still applied every time. */
+ private bodyFitDependencies(dna: CharacterDNA, profile: HumanProfile) {
+  // Heritage is normalized again by the existing parser and can drift by one ULP.
+  // It does not enter neutral body fitting: its skin output is updated every call,
+  // and installed hair/beard colour is guarded separately below. Names are metadata.
+  const {age: _age, heritage: _heritage, naming: _naming, ...identity} = dna;
+  return [identity, this.fit.version, this.fit.body, this.fit.encoding.elements,
+   this.baseHeight, this.basePosition.toArray(), this.geometryDependencies(this.fit.sourceGeometry),
+   this.fit.mesh.bindMatrix.elements, this.fit.mesh.position.toArray(),
+   this.fit.mesh.quaternion.toArray(), this.fit.mesh.scale.toArray(), this.fit.mesh.morphTargetInfluences,
+   this.fit.nativeSkeleton.boneInverses.map(matrix => matrix.elements),
+   this.bones.map(bone => [this.dependencyId(bone), bone.name, this.rest.get(bone),
+    meshyBoneProportion(bone.name, profile)]),
+   profile.height * (1 - .35 * profile.weights.Child), profile.appearanceFit,
+   this.root.scale.toArray(), this.body.position.toArray(), this.body.quaternion.toArray(), this.body.scale.toArray()];
+ }
+ private neutralFitSignature(dna: CharacterDNA, profile: HumanProfile) {
+  const meshes = (root: Object3D) => {
+   const values: unknown[] = [];
+   root.traverse(node => {
+    if ((node as Mesh).isMesh) values.push([node.uuid, this.geometryDependencies((node as Mesh).geometry),
+     node.position.toArray(), node.quaternion.toArray(), node.scale.toArray()]);
+   });
+   return values;
+  };
+  return JSON.stringify([this.bodyFitDependencies(dna, profile),
+   this.nativeSources.map(source => [source.asset, this.dependencyId(source.binding),
+    bindingDependencyRevision(source.binding), meshes(source.source.scene), nativeModuleEligible(source, profile)]),
+   this.nativeSources.some(source => source.asset.type === 'hair' || source.asset.type === 'beard')
+    ? profile.appearance.color : null,
+   this.fit.revision, this.modules.fitRuns, this.geometryDependencies(this.fit.mesh.geometry),
+   [...this.fit.modules].map(([id, group]) => [id, group.uuid, group.position.toArray(),
+    group.quaternion.toArray(), group.scale.toArray(), meshes(group)]),
+   [...this.fit.sockets].map(([id, socket]) => [id, socket.position.toArray(),
+    socket.quaternion.toArray(), socket.scale.toArray()])]);
+ }
+ get lastFitRetained() { return this.fitRetained; }
+ /** Same cached-bound policy as ordinary animation frames; actual shape changes invalidate it. */
+ get boundsShapeSignature() {
+  return JSON.stringify([this.fit.revision, this.modules.fitRuns, this.nativeNeutral,
+   this.profile.weights, this.profile.motion.stride, this.body.scale.toArray(), this.body.position.toArray()]);
+ }
  setNativeModules(sources: NativeModuleSource[], presentation: CharacterPresentation,
   appearance: HumanProfile['appearance']) {
+  this.lastNeutralFit = undefined;
   this.profile = {...this.profile, appearance};
   const pose = this.bones.map(bone => ({bone, position: bone.position.clone(),
    rotation: bone.quaternion.clone(), scale: bone.scale.clone()}));
@@ -236,6 +308,10 @@ export class MeshyHuman {
   this.nativeSources = sources;
   this.root.userData.presentation = presentation;
   this.updateSelectedAssets();
+  // Installing modules cannot validate a body that was externally scaled/edited
+  // after height normalization. Such a frame must take the complete path next time.
+  if (!this.nativeNeutral && this.normalizedBody === JSON.stringify(this.bodyFitDependencies(this.dna, this.profile)))
+   this.lastNeutralFit = this.neutralFitSignature(this.dna, this.profile);
  }
  private updateSelectedAssets() {
   const installed = this.nativeSources.filter(source => this.fit.modules.has(source.asset.id));
@@ -314,12 +390,17 @@ export class MeshyHuman {
   this.root.userData.capabilities={morphology:true,appearance:true,fitSizes:false,garmentSockets:true};
   this.applyDNA(dna,profile);this.setAnimation('Idle');
  }
- applyDNA(input:CharacterDNA,override?:HumanProfile){
+ /** forceRefit retains the complete original fitting path for verification and fallback. */
+ applyDNA(input:CharacterDNA,override?:HumanProfile,options:{forceRefit?:boolean}={}){
+  const wasNativeNeutral = this.nativeNeutral;
   this.nativeNeutral = false;
   this.root.userData.nativeNeutralPose = false;
   this.skinTintStrength.value = .2;
   const dna=parseCharacterDNA(input);this.dna=dna;this.equipRevision++;
   const presentation=this.root.userData.presentation,appearance=presentation?resolveCharacterPresentation(dna,presentation,this.fit.body).profile.appearance:undefined,profile={...(override??universalHumanProfile(dna)),...(appearance?{appearance}:{})};
+  const retain = !options.forceRefit && !wasNativeNeutral && !this.disposed &&
+   this.lastNeutralFit === this.neutralFitSignature(dna, profile);
+  this.fitRetained = retain;
   const height=profile.height*(1-.35*profile.weights.Child);
   const skinTone=generatePhenotype(dna).skinTone;this.skinUniform.value.set(skinTone);this.root.userData.skinTint={tone:skinTone,strength:.2};
   this.profile = profile;
@@ -331,20 +412,23 @@ export class MeshyHuman {
   this.mixer.stopAllAction();
   for(const bone of this.bones){const rest=this.rest.get(bone)!;bone.position.copy(rest.position);bone.quaternion.copy(rest.rotation);bone.scale.copy(rest.scale);}
   applyMeshyProportions(this.bones,this.scales,profile);
-  // Measure in a neutral local frame, independent of world placement and current animation.
-  const parent=this.root.parent,position=this.root.position.clone(),rotation=this.root.quaternion.clone();
-  this.root.removeFromParent();this.root.position.set(0,0,0);this.root.quaternion.identity();
-  this.body.position.copy(this.basePosition);this.body.scale.setScalar(1);this.root.updateMatrixWorld(true);
-  // Clothing masks can hide the feet. Always measure height on the complete source body.
-  const maskedGeometry = this.fit.mesh.geometry;
-  this.fit.mesh.geometry = this.fit.sourceGeometry;
-  let bounds: Box3;
-  try { bounds = new Box3().setFromObject(this.fit.mesh, true); }
-  finally { this.fit.mesh.geometry = maskedGeometry; }
-  const neutralHeight = bounds.max.y - bounds.min.y;
-  this.body.scale.setScalar(height/neutralHeight);this.body.position.y-=bounds.min.y*height/neutralHeight;
-  this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
-  this.fit.refit();this.modules.refit(profile);this.updateSelectedAssets();
+  if (!retain) {
+   // Measure in a neutral local frame, independent of world placement and current animation.
+   const parent=this.root.parent,position=this.root.position.clone(),rotation=this.root.quaternion.clone();
+   this.root.removeFromParent();this.root.position.set(0,0,0);this.root.quaternion.identity();
+   this.body.position.copy(this.basePosition);this.body.scale.setScalar(1);this.root.updateMatrixWorld(true);
+   // Clothing masks can hide the feet. Always measure height on the complete source body.
+   const maskedGeometry = this.fit.mesh.geometry;
+   this.fit.mesh.geometry = this.fit.sourceGeometry;
+   let bounds: Box3;
+   try { bounds = new Box3().setFromObject(this.fit.mesh, true); }
+   finally { this.fit.mesh.geometry = maskedGeometry; }
+   const neutralHeight = bounds.max.y - bounds.min.y;
+   this.body.scale.setScalar(height/neutralHeight);this.body.position.y-=bounds.min.y*height/neutralHeight;
+   this.root.position.copy(position);this.root.quaternion.copy(rotation);if(parent)parent.add(this.root);
+   this.fit.refit();this.modules.refit(profile);
+  }
+  this.updateSelectedAssets();
   if (clip) {
    this.action = this.mixer.clipAction(clip);
    this.action.reset().play();
@@ -355,6 +439,11 @@ export class MeshyHuman {
   }
 
   this.root.userData.character={seed:dna.seed,state:this.state,lod:this.lod,height};
+  if (!retain) {
+   this.normalizedBody = JSON.stringify(this.bodyFitDependencies(dna, profile));
+   this.lastNeutralFit = this.neutralFitSignature(dna, profile);
+  }
+  return retain;
  }
  /** Labs use the original GLB speed; world residents use DNA cadence by default. */
  setPlaybackRate(rate: number | null) {
@@ -393,6 +482,9 @@ export class MeshyHuman {
   this.mixer.stopAllAction();
   this.action = null;
   this.nativeNeutral = true;
+  this.normalizedBody = undefined;
+  this.lastNeutralFit = undefined;
+  this.fitRetained = false;
   this.root.userData.nativeNeutralPose = true;
   this.root.userData.nativeNeutralHeight = this.baseHeight;
   this.skinTintStrength.value = 0;
@@ -453,7 +545,7 @@ export class MeshyHuman {
   if (waist) waist.scale.z *= 1 + bounce * .025;
  }
  dispose(){
-  if(this.disposed)return;this.disposed=true;this.mixer.stopAllAction();this.mixer.uncacheRoot(this.body);
+  if(this.disposed)return;this.disposed=true;this.lastNeutralFit=undefined;this.normalizedBody=undefined;this.mixer.stopAllAction();this.mixer.uncacheRoot(this.body);
   this.modules.clear();this.fit.dispose();
   for(const material of this.materials)material.dispose();
   this.body.traverse(node=>{if((node as SkinnedMesh).isSkinnedMesh)(node as SkinnedMesh).skeleton.dispose();});this.root.clear();

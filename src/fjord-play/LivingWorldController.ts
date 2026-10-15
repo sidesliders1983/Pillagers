@@ -1,3 +1,4 @@
+import { WaypointQueue } from './WaypointQueue';
 import { cattleVariants } from '../characters/CattlePresentation';
 import { passConversation, passNeighbours } from '../systems/ResidentPassing';
 import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
@@ -6,6 +7,11 @@ import type { FjordEntity } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+export type RouteObservation = { agent: string; kind: string; purpose: string; target: string;
+    goal: Point2 | null; from: Point2; reason: string; nodes: number; accepted: boolean;
+    navigationGeneration: number; reservationGeneration: number; occupancy: string;
+    step: number; activeSeconds: number };
+
 type OccupationClip = 'Farm' | 'Attack' | 'Doze';
 type Visit = { target: Point2; face: Point2; source: string; phase: 'approach' | 'activity' | 'home';
     clip: OccupationClip | 'Idle'; remaining: number; travelRemaining?: number;
@@ -33,9 +39,11 @@ type Agent = {
     random: number;
     wait: number;
     path: Point2[];
+    homeTrail: Point2[];
     detour: Point2[];
     signature: string;
     pace: number;
+    failedRoutes: Map<string, { context: string; expires: number; reason: string }>;
 };
 /** Ephemeral presentation only. Neither simulation state nor its random stream enters this controller. */
 export class LivingWorldController {
@@ -43,7 +51,20 @@ export class LivingWorldController {
     private metrics = { routeAttempts: 0, rejectedRoutes: 0, targetAttempts: 0,
         rejectedTargets: 0, routeNodes: 0, maxRouteNodes: 0,
         updates: 0, lastUpdateMs: 0, maxUpdateMs: 0, totalUpdateMs: 0,
-        yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0 };
+        yardRepackAttempts: 0, yardRepackNodes: 0, yardRepackFailures: 0,
+        presentationSteps: 0, activeSeconds: 0, visitsStarted: 0, occupationArrivals: 0,
+        activitiesCompleted: 0, homeArrivals: 0, visitsCancelled: 0, distanceWalked: 0, failedRouteReuse: 0, homeTrailReuse: 0 };
+    private routeObserver?: (observation: RouteObservation) => void;
+    private navigationGeneration = 0;
+    private navigationSignature = '';
+    private treeSignature = '';
+    private yardVersions = new Map<string, unknown>();
+    private reservationGeneration = 0;
+    private reservationSignature = '';
+    /** Optional bounded QA consumer; no route rows are allocated during ordinary play. */
+    setRouteObserver(observer?: (observation: RouteObservation) => void) {
+        this.routeObserver = observer;
+    }
     private agents = new Map<string, Agent>();
     private social = new SocialEncounters();
     private surface;
@@ -59,6 +80,12 @@ export class LivingWorldController {
         this.campfire = settlementCampfire(world);
     }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
+        const navigationSignature = JSON.stringify([entities.map(entity => [entity.selectionKey,
+            entity.asset, entity.transform, entity.plot, entity.status]), ground]);
+        if (navigationSignature !== this.navigationSignature) {
+            this.navigationSignature = navigationSignature;
+            this.navigationGeneration++;
+        }
         this.parcels = entities.filter(e => e.plot);
         this.ground = ground;
         const active = entities.filter(e => e.transform && (e.kind === 'persona' || e.kind === 'cattle'));
@@ -85,6 +112,7 @@ export class LivingWorldController {
                 this.social.remove(key);
                 this.agents.delete(key);
                 this.yardSurfaces.delete(key);
+                this.yardVersions.delete(key);
             }
         for (const entity of active) {
             const p = entity.transform!, signature = JSON.stringify([p.x, p.z, entity.status.assignment, entity.status.grazingZone]);
@@ -106,11 +134,11 @@ export class LivingWorldController {
                     key: entity.selectionKey, kind: entity.kind,
                     x: p.x, y: p.y, z: p.z, rotation: p.rotation,
                     anchor: { x: p.x, z: p.z }, entity, random: seed || 1,
-                    wait: 1 + seed % 40 / 10, path: [], detour: [], signature,
+                    wait: 1 + seed % 40 / 10, path: [], homeTrail: [], detour: [], signature,
                     visit: null, visitDelay: 8 + seed % 130 / 10, occupationClips: {},
                     state: 'Idle', interactionSeconds: 0, grazeSeconds: 0,
                     grazeRemaining: 0, grazeNext: true, blockedSeconds: 0,
-                    socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
+                    failedRoutes: new Map(), socialEnabled: true, speed: 0, pace: entity.kind === 'persona' ? .8 : .28,
                 };
                 this.agents.set(agent.key, agent);
             }
@@ -174,6 +202,8 @@ export class LivingWorldController {
         if (actor.visit && actor.visit.clip !== 'Idle' && !clips[actor.visit.clip]) this.cancelVisit(actor);
     }
     private cancelVisit(a: Agent) {
+        if (a.visit) this.metrics.visitsCancelled++;
+        a.homeTrail = [];
         a.visit = null;
         a.path = [];
         a.detour = [];
@@ -182,6 +212,11 @@ export class LivingWorldController {
         a.visitDelay = 20;
     }
     setStandingTrees(trees: readonly { key: string; x: number; z: number; clearance: number }[]) {
+        const signature = JSON.stringify(trees);
+        if (signature !== this.treeSignature) {
+            this.treeSignature = signature;
+            this.navigationGeneration++;
+        }
         this.trees = trees.map(tree => ({ ...tree }));
         const sources = new Set(trees.map(tree => tree.key));
         for (const a of this.agents.values())
@@ -280,7 +315,7 @@ export class LivingWorldController {
         for (let i = 0; i < Math.min(8, targets.length); i++) {
             const visit = targets[(i + offset) % targets.length];
             this.metrics.targetAttempts++;
-            const path = this.route(a, visit.target);
+            const path = this.route(a, visit.target, 'occupation', visit.source);
             if (!path.length) {
                 this.metrics.rejectedTargets++;
                 continue;
@@ -288,6 +323,8 @@ export class LivingWorldController {
             visit.travelRemaining = this.visitBudget(a, path);
             visit.checkpoint = { x: a.x, z: a.z };
             visit.checkpointSeconds = 0;
+            this.metrics.visitsStarted++;
+            a.homeTrail = [{ x: a.x, z: a.z }, ...path.map(point => ({ ...point }))];
             a.visit = visit;
             a.path = path;
             a.detour = [];
@@ -322,7 +359,11 @@ export class LivingWorldController {
         if (!enabled) this.social.remove(key);
         this.clearReleasedPoses();
     }
-    setYardSurface(key: string, sample: (x: number, z: number) => number | null) {
+    setYardSurface(key: string, sample: (x: number, z: number) => number | null, version: unknown = sample) {
+        if (this.yardVersions.get(key) !== version) {
+            this.yardVersions.set(key, version);
+            this.navigationGeneration++;
+        }
         this.yardSurfaces.set(key, sample);
         const agent = this.agents.get(key);
         if (agent) {
@@ -475,24 +516,86 @@ export class LivingWorldController {
                 return false;
         return true;
     }
-    private route(a: Agent, goal?: Point2) {
+    /** A successful outbound trip is already a bounded proof of the static corridor.
+     * Revalidate it against today's terrain/parcels/source obstacles before returning.
+     * Traffic remains owned by the normal per-step body checks and passing controller. */
+    private homeTrailPath(a: Agent) {
+        if (!a.homeTrail.length) return null;
+        let nearest = 0;
+        for (let i = 1; i < a.homeTrail.length; i++)
+            if (Math.hypot(a.x - a.homeTrail[i].x, a.z - a.homeTrail[i].z) <
+                Math.hypot(a.x - a.homeTrail[nearest].x, a.z - a.homeTrail[nearest].z)) nearest = i;
+        if (Math.hypot(a.x - a.homeTrail[nearest].x, a.z - a.homeTrail[nearest].z) > 1) return null;
+        const path = a.homeTrail.slice(0, nearest + 1).reverse().map(point => ({ ...point }));
+        path.push({ ...a.anchor });
+        let from: Point2 = a;
+        for (const point of path) {
+            if (!this.segment(a, from, point)) return null;
+            from = point;
+        }
+        while (path.length > 1 && Math.hypot(path[0].x - a.x, path[0].z - a.z) < .15) path.shift();
+        return path;
+    }
+    private route(a: Agent, goal?: Point2, purpose = goal ?
+        (goal === a.anchor ? 'return-home' : a.visit?.phase === 'home' ? 'visit-home' : 'visit-approach') : 'wander',
+        target = goal === a.anchor ? String(a.entity.status.assignment ?? a.key) : a.visit?.source ?? '') {
         this.metrics.routeAttempts++;
+        const key = goal ? JSON.stringify([purpose, target, goal.x, goal.z]) : '';
+        // Moving endpoint blockers invalidate immediately. Other transient traffic is retried
+        // within one active second; canonical/static obstacles and reservations invalidate now.
+        const context = goal ? JSON.stringify([a.x, a.z, this.navigationGeneration,
+            this.reservationGeneration, [...this.agents.values()].filter(other => other !== a &&
+                Math.hypot(other.x - goal.x, other.z - goal.z) < this.radius(a) + this.radius(other))
+                .map(other => [other.key, other.x, other.z])]) : '';
+        const failure = a.failedRoutes.get(key);
+        const reused = Boolean(failure && failure.context === context &&
+            failure.expires - this.metrics.activeSeconds > 1e-9);
         const measured = (nodes: number, path: Point2[]) => {
             this.metrics.routeNodes += nodes;
             this.metrics.maxRouteNodes = Math.max(this.metrics.maxRouteNodes, nodes);
-            if (!path.length) this.metrics.rejectedRoutes++;
+            const reason = path.length ? 'accepted' : reused ? 'cached-' + failure!.reason :
+                goal && !this.safe(a, goal) ? 'unsafe-goal' :
+                goal && !this.bodyClearance(a, goal, goal) ? 'occupied-endpoint' :
+                nodes >= (goal ? 2000 : 500) ? 'node-cap' : 'no-path';
+            if (!path.length) {
+                this.metrics.rejectedRoutes++;
+                if (goal && !reused) {
+                    if (a.failedRoutes.size >= 8 && !a.failedRoutes.has(key))
+                        a.failedRoutes.delete(a.failedRoutes.keys().next().value!);
+                    a.failedRoutes.set(key, { context, expires: this.metrics.activeSeconds + 1, reason });
+                }
+            } else if (goal) a.failedRoutes.delete(key);
+            if (this.routeObserver) this.routeObserver({ agent: a.key, kind: a.kind, purpose, target,
+                goal: goal ? { ...goal } : null, from: { x: a.x, z: a.z }, nodes, accepted: path.length > 0,
+                reason,
+                navigationGeneration: this.navigationGeneration, reservationGeneration: this.reservationGeneration,
+                occupancy: [...this.agents.values()].filter(other => other !== a)
+                    .map(other => [other.key, other.x, other.z].join(':')).join('|'),
+                step: this.metrics.presentationSteps, activeSeconds: this.metrics.activeSeconds });
             return path;
         };
+        if (goal === a.anchor) {
+            const trail = this.homeTrailPath(a);
+            if (trail) {
+                this.metrics.homeTrailReuse++;
+                return measured(0, trail);
+            }
+        }
+        if (reused) {
+            this.metrics.failedRouteReuse++;
+            return measured(0, []);
+        }
+        // Every valid final segment must end at a safe, unoccupied point.
+        if (goal && (!this.safe(a, goal) || !this.bodyClearance(a, goal, goal))) return measured(0, []);
         // A bounded four-neighbour waypoint search works for tents as well as permanent paths.
         const spacing = a.entity.status.grazingZone === 'yard' ? .25 : 1;
         const nodes: Point2[] = [{ x: a.x, z: a.z }], parents = [-1], seen = new Set(['0,0']);
-        const open = [0], depth = [0];
+        const open = [0], depth = [0], priority = new WaypointQueue();
+        let cursor = 0;
+        if (goal) priority.push(0, Math.hypot(a.x - goal.x, a.z - goal.z));
         const maximumNodes = goal ? 2000 : 500;
-        while (open.length && nodes.length < maximumNodes) {
-            if (goal) open.sort((left, right) =>
-                depth[left] + Math.hypot(nodes[left].x - goal.x, nodes[left].z - goal.z) -
-                depth[right] - Math.hypot(nodes[right].x - goal.x, nodes[right].z - goal.z));
-            const i = open.shift()!, from = nodes[i];
+        while ((goal ? priority.length : cursor < open.length) && nodes.length < maximumNodes) {
+            const i = goal ? priority.shift() : open[cursor++], from = nodes[i];
             if (goal && Math.hypot(from.x - goal.x, from.z - goal.z) <= .75 &&
                 this.segment(a, from, goal) && this.bodyClearance(a, goal, from)) {
                 const path: Point2[] = [goal];
@@ -514,7 +617,8 @@ export class LivingWorldController {
                     continue;
                 parents.push(i);
                 depth.push(depth[i] + spacing);
-                open.push(nodes.length);
+                if (goal) priority.push(nodes.length, depth[depth.length - 1] + Math.hypot(to.x - goal.x, to.z - goal.z));
+                else open.push(nodes.length);
                 nodes.push(to);
             }
         }
@@ -617,6 +721,8 @@ export class LivingWorldController {
         }
     }
     private step(dt: number) {
+        this.metrics.presentationSteps++;
+        this.metrics.activeSeconds += dt;
         const actors = [...this.agents.values()];
         this.social.advance(dt, actors.map(a => this.encounterActor(a)), (first, second) => {
             const a = this.agents.get(first.key)!, b = this.agents.get(second.key)!;
@@ -624,6 +730,11 @@ export class LivingWorldController {
         });
         this.cattleEncounters();
         this.clearReleasedPoses();
+        const reservations = this.social.activePairs().map(pair => pair.a + ':' + pair.b).sort().join('|');
+        if (reservations !== this.reservationSignature) {
+            this.reservationSignature = reservations;
+            this.reservationGeneration++;
+        }
         for (const a of this.agents.values()) {
             const encounter = this.social.inspect(a.key);
             if (encounter.partnerKey !== null) {
@@ -652,6 +763,7 @@ export class LivingWorldController {
                     a.state = visit.clip;
                     visit.remaining -= dt;
                     if (visit.remaining > 0) continue;
+                    this.metrics.activitiesCompleted++;
                     visit.phase = 'home';
                     a.path = this.route(a, a.anchor);
                     visit.travelRemaining = this.visitBudget(a, a.path);
@@ -666,8 +778,15 @@ export class LivingWorldController {
                         const heading = Math.atan2(visit.face.x - a.x, visit.face.z - a.z);
                         a.rotation = turnToward(a.rotation, heading, dt, residentMovementConfig.turnSpeed);
                         a.state = 'Idle';
-                        if (Math.cos(heading - a.rotation) > .99) visit.phase = 'activity';
+                        if (Math.cos(heading - a.rotation) > .99) {
+                            this.metrics.occupationArrivals++;
+                            visit.phase = 'activity';
+                        }
                         continue;
+                    }
+                    if (visit.phase === 'home' && Math.hypot(a.x - a.anchor.x, a.z - a.anchor.z) < .15) {
+                        this.metrics.homeArrivals++;
+                        a.homeTrail = [];
                     }
                     a.visit = null;
                     a.visitDelay = 20 + this.random(a) * 25;
@@ -760,6 +879,7 @@ export class LivingWorldController {
                 const angle = Math.atan2(Math.sin(heading - a.rotation), Math.cos(heading - a.rotation));
                 a.rotation += angle * Math.min(1, dt * 8);
             }
+            this.metrics.distanceWalked += step;
             a.x = p.x;
             a.z = p.z;
             a.y = this.height(a);
@@ -778,7 +898,9 @@ export class LivingWorldController {
             if (Math.hypot(actors[i].x - actors[j].x, actors[i].z - actors[j].z) <
                 this.radius(actors[i]) + this.radius(actors[j]) - 1e-6) bodyOverlaps++;
         }
-        return { ...this.metrics, agents: actors.length,
+        return { ...this.metrics, navigationGeneration: this.navigationGeneration,
+            reservationGeneration: this.reservationGeneration,
+            retainedHomeWaypoints: actors.reduce((sum, actor) => sum + actor.homeTrail.length, 0), agents: actors.length,
             reservations: this.social.activePairs().length,
             occupationVisits: actors.filter(a => a.visit).length,
             outOfZone: actors.filter(a => !this.safe(a, a)).length, bodyOverlaps };

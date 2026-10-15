@@ -1,0 +1,13 @@
+{
+  "before": "46ee1b50630a978455b48731167507d33bff6b75",
+  "after": "9dbdb69a2fd1d7eb4241d46482e5440e0e360bef",
+  "repeats": 3,
+  "scenarios": [
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "commands": 40
+    }
+  ],
+  "note": "Focused current-head confirmation after the captured async revision fix; the complete broad matrix remains pinned separately."
+}

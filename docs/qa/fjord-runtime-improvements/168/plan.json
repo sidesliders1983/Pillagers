@@ -1,0 +1,61 @@
+{
+  "issue": 168,
+  "before": "46ee1b50630a978455b48731167507d33bff6b75",
+  "after": "156651a0d44b3a0c61581c1a1e25ac33e8839e55",
+  "fixtureRoot": "docs/qa/fjord-runtime-performance/fixtures",
+  "repeats": 3,
+  "warmupMs": 5000,
+  "sampleMs": 20000,
+  "note": "Scheduled cases execute exactly 40 AdvanceTicks(3) commands, every 500 ms, with the native clock disabled only by the opt-in QA server. Natural pacing and Paused controls are separate.",
+  "scenarios": [
+    {
+      "fixture": "summer-32",
+      "running": true,
+      "commands": 40
+    },
+    {
+      "fixture": "summer-17",
+      "running": true,
+      "cameraPath": true,
+      "commands": 40
+    },
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "commands": 40
+    },
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "selected": true,
+      "commands": 40
+    },
+    {
+      "fixture": "developed-810",
+      "running": true,
+      "cameraPath": true,
+      "commands": 40
+    },
+    {
+      "fixture": "developed-810",
+      "running": false,
+      "cameraPath": true
+    },
+    {
+      "fixture": "boundary-810",
+      "running": true,
+      "minutes": 3,
+      "commands": 40
+    },
+    {
+      "fixture": "crowd-25",
+      "running": true,
+      "cameraPath": true,
+      "commands": 40
+    },
+    {
+      "fixture": "developed-810",
+      "running": true
+    }
+  ]
+}

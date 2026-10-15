@@ -1,0 +1,483 @@
+{
+  "trials": 6,
+  "productionBridgeAbsent": true,
+  "rows": [
+    {
+      "variant": "before",
+      "sourceCommit": "8860e53ad4883f3bdf9663d629a42fcc75338f49",
+      "frameP95Median": 150,
+      "frameP99Median": 350.1,
+      "maximumFrameMedian": 2233.0999999999985,
+      "maximumFrameRange": [
+        1816.7999999999956,
+        2700
+      ],
+      "runs": [
+        {
+          "repeat": 1,
+          "actualTicksFromFixture": 71,
+          "frames": {
+            "durationMs": 20004.099999991056,
+            "fps": 11.097724966386853,
+            "count": 222,
+            "mean": 89.86441441441438,
+            "p50": 83.3,
+            "p95": 150,
+            "p99": 350.1,
+            "max": 2233.0999999999985,
+            "over33": 196,
+            "over50": 190,
+            "longTasks": {
+              "count": 40,
+              "total": 7468,
+              "max": 2129
+            },
+            "visibility": "visible",
+            "canvas": {
+              "width": 1264,
+              "height": 655
+            },
+            "publicDiagnostics": {
+              "time": {
+                "winter": 811,
+                "tick": 61,
+                "ticksPerWinter": 1000
+              },
+              "stability": {
+                "routeAttempts": 26,
+                "rejectedRoutes": 4,
+                "targetAttempts": 6,
+                "rejectedTargets": 4,
+                "routeNodes": 12979,
+                "maxRouteNodes": 2000,
+                "updates": 216,
+                "lastUpdateMs": 4.4000000059604645,
+                "maxUpdateMs": 535.1000000089407,
+                "totalUpdateMs": 1248.6999997794628,
+                "yardRepackAttempts": 0,
+                "yardRepackNodes": 0,
+                "yardRepackFailures": 0,
+                "presentationSteps": 262,
+                "activeSeconds": 17.596200000002973,
+                "visitsStarted": 2,
+                "occupationArrivals": 0,
+                "activitiesCompleted": 0,
+                "homeArrivals": 0,
+                "visitsCancelled": 0,
+                "distanceWalked": 61.1529616051538,
+                "failedRouteReuse": 0,
+                "homeTrailReuse": 0,
+                "navigationGeneration": 10,
+                "reservationGeneration": 6,
+                "retainedHomeWaypoints": 40,
+                "agents": 19,
+                "reservations": 0,
+                "occupationVisits": 2,
+                "outOfZone": 0,
+                "bodyOverlaps": 0,
+                "actors": 19,
+                "sourceTemplates": 5,
+                "ownedInstanceRoots": 0,
+                "lastFrameMs": 11.399999991059303,
+                "drawCalls": 78,
+                "triangles": 3739854,
+                "geometries": 63,
+                "textures": 73
+              }
+            }
+          },
+          "canonicalReplayEqual": true
+        },
+        {
+          "repeat": 2,
+          "actualTicksFromFixture": 66,
+          "frames": {
+            "durationMs": 20061.699999999997,
+            "fps": 10.46770712352393,
+            "count": 210,
+            "mean": 95.39666666666665,
+            "p50": 83.3,
+            "p95": 166.7,
+            "p99": 450,
+            "max": 2700,
+            "over33": 177,
+            "over50": 171,
+            "longTasks": {
+              "count": 40,
+              "total": 8701,
+              "max": 2561
+            },
+            "visibility": "visible",
+            "canvas": {
+              "width": 1264,
+              "height": 655
+            },
+            "publicDiagnostics": {
+              "time": {
+                "winter": 811,
+                "tick": 56,
+                "ticksPerWinter": 1000
+              },
+              "stability": {
+                "routeAttempts": 26,
+                "rejectedRoutes": 4,
+                "targetAttempts": 6,
+                "rejectedTargets": 4,
+                "routeNodes": 12981,
+                "maxRouteNodes": 2000,
+                "updates": 200,
+                "lastUpdateMs": 3.9000000059604645,
+                "maxUpdateMs": 519.8999999910593,
+                "totalUpdateMs": 1288.4999999254942,
+                "yardRepackAttempts": 0,
+                "yardRepackNodes": 0,
+                "yardRepackFailures": 0,
+                "presentationSteps": 253,
+                "activeSeconds": 16.94640000000595,
+                "visitsStarted": 2,
+                "occupationArrivals": 0,
+                "activitiesCompleted": 0,
+                "homeArrivals": 0,
+                "visitsCancelled": 0,
+                "distanceWalked": 57.410426673244956,
+                "failedRouteReuse": 0,
+                "homeTrailReuse": 0,
+                "navigationGeneration": 10,
+                "reservationGeneration": 6,
+                "retainedHomeWaypoints": 40,
+                "agents": 19,
+                "reservations": 0,
+                "occupationVisits": 2,
+                "outOfZone": 0,
+                "bodyOverlaps": 0,
+                "actors": 19,
+                "sourceTemplates": 5,
+                "ownedInstanceRoots": 0,
+                "lastFrameMs": 9.400000005960464,
+                "drawCalls": 78,
+                "triangles": 3739840,
+                "geometries": 63,
+                "textures": 73
+              }
+            }
+          },
+          "canonicalReplayEqual": true
+        },
+        {
+          "repeat": 3,
+          "actualTicksFromFixture": 76,
+          "frames": {
+            "durationMs": 20100.19999999702,
+            "fps": 11.790927453459922,
+            "count": 237,
+            "mean": 84.81054852320676,
+            "p50": 83.2,
+            "p95": 149.9,
+            "p99": 350,
+            "max": 1816.7999999999956,
+            "over33": 211,
+            "over50": 205,
+            "longTasks": {
+              "count": 42,
+              "total": 6996,
+              "max": 1754
+            },
+            "visibility": "visible",
+            "canvas": {
+              "width": 1264,
+              "height": 655
+            },
+            "publicDiagnostics": {
+              "time": {
+                "winter": 811,
+                "tick": 66,
+                "ticksPerWinter": 1000
+              },
+              "stability": {
+                "routeAttempts": 27,
+                "rejectedRoutes": 4,
+                "targetAttempts": 6,
+                "rejectedTargets": 4,
+                "routeNodes": 12966,
+                "maxRouteNodes": 2000,
+                "updates": 231,
+                "lastUpdateMs": 136,
+                "maxUpdateMs": 504.59999999403954,
+                "totalUpdateMs": 1384.4000000208616,
+                "yardRepackAttempts": 0,
+                "yardRepackNodes": 0,
+                "yardRepackFailures": 0,
+                "presentationSteps": 274,
+                "activeSeconds": 18.074399999991076,
+                "visitsStarted": 2,
+                "occupationArrivals": 0,
+                "activitiesCompleted": 0,
+                "homeArrivals": 0,
+                "visitsCancelled": 0,
+                "distanceWalked": 63.49818716881522,
+                "failedRouteReuse": 0,
+                "homeTrailReuse": 0,
+                "navigationGeneration": 10,
+                "reservationGeneration": 6,
+                "retainedHomeWaypoints": 40,
+                "agents": 19,
+                "reservations": 0,
+                "occupationVisits": 2,
+                "outOfZone": 0,
+                "bodyOverlaps": 0,
+                "actors": 19,
+                "sourceTemplates": 5,
+                "ownedInstanceRoots": 0,
+                "lastFrameMs": 14.600000008940697,
+                "drawCalls": 78,
+                "triangles": 3739850,
+                "geometries": 63,
+                "textures": 73
+              }
+            }
+          },
+          "canonicalReplayEqual": true
+        }
+      ]
+    },
+    {
+      "variant": "after",
+      "sourceCommit": "137102d0f999c588bac7acb337de76840f10bdc7",
+      "frameP95Median": 149.9,
+      "frameP99Median": 266.5,
+      "maximumFrameMedian": 450,
+      "maximumFrameRange": [
+        400,
+        583.3000000000029
+      ],
+      "runs": [
+        {
+          "repeat": 1,
+          "actualTicksFromFixture": 87,
+          "frames": {
+            "durationMs": 20212.999999997017,
+            "fps": 12.912482065999036,
+            "count": 261,
+            "mean": 77.4590038314176,
+            "p50": 67,
+            "p95": 149.9,
+            "p99": 300,
+            "max": 450,
+            "over33": 239,
+            "over50": 230,
+            "longTasks": {
+              "count": 45,
+              "total": 5532,
+              "max": 371
+            },
+            "visibility": "visible",
+            "canvas": {
+              "width": 1264,
+              "height": 655
+            },
+            "publicDiagnostics": {
+              "time": {
+                "winter": 811,
+                "tick": 77,
+                "ticksPerWinter": 1000
+              },
+              "stability": {
+                "routeAttempts": 29,
+                "rejectedRoutes": 4,
+                "targetAttempts": 7,
+                "rejectedTargets": 4,
+                "routeNodes": 14249,
+                "maxRouteNodes": 2000,
+                "updates": 258,
+                "lastUpdateMs": 71.59999999403954,
+                "maxUpdateMs": 360.6000000089407,
+                "totalUpdateMs": 1989.2000001370907,
+                "yardRepackAttempts": 0,
+                "yardRepackNodes": 0,
+                "yardRepackFailures": 0,
+                "presentationSteps": 308,
+                "activeSeconds": 20.16699999999998,
+                "visitsStarted": 3,
+                "occupationArrivals": 0,
+                "activitiesCompleted": 0,
+                "homeArrivals": 0,
+                "visitsCancelled": 0,
+                "distanceWalked": 76.03326677363508,
+                "failedRouteReuse": 0,
+                "homeTrailReuse": 0,
+                "navigationGeneration": 10,
+                "reservationGeneration": 7,
+                "retainedHomeWaypoints": 109,
+                "agents": 19,
+                "reservations": 1,
+                "occupationVisits": 3,
+                "outOfZone": 0,
+                "bodyOverlaps": 0,
+                "actors": 19,
+                "sourceTemplates": 5,
+                "ownedInstanceRoots": 0,
+                "lastFrameMs": 301.69999998807907,
+                "drawCalls": 78,
+                "triangles": 3739858,
+                "geometries": 63,
+                "textures": 73
+              }
+            }
+          },
+          "canonicalReplayEqual": true
+        },
+        {
+          "repeat": 2,
+          "actualTicksFromFixture": 89,
+          "frames": {
+            "durationMs": 20192.699999999997,
+            "fps": 12.578803230870564,
+            "count": 254,
+            "mean": 79.46181102362203,
+            "p50": 83.3,
+            "p95": 150,
+            "p99": 266.5,
+            "max": 583.3000000000029,
+            "over33": 238,
+            "over50": 228,
+            "longTasks": {
+              "count": 50,
+              "total": 5321,
+              "max": 570
+            },
+            "visibility": "visible",
+            "canvas": {
+              "width": 1264,
+              "height": 655
+            },
+            "publicDiagnostics": {
+              "time": {
+                "winter": 811,
+                "tick": 79,
+                "ticksPerWinter": 1000
+              },
+              "stability": {
+                "routeAttempts": 28,
+                "rejectedRoutes": 4,
+                "targetAttempts": 7,
+                "rejectedTargets": 4,
+                "routeNodes": 14253,
+                "maxRouteNodes": 2000,
+                "updates": 251,
+                "lastUpdateMs": 66.40000000596046,
+                "maxUpdateMs": 559.7000000029802,
+                "totalUpdateMs": 1857.900000065565,
+                "yardRepackAttempts": 0,
+                "yardRepackNodes": 0,
+                "yardRepackFailures": 0,
+                "presentationSteps": 296,
+                "activeSeconds": 19.926400000005945,
+                "visitsStarted": 3,
+                "occupationArrivals": 0,
+                "activitiesCompleted": 0,
+                "homeArrivals": 0,
+                "visitsCancelled": 0,
+                "distanceWalked": 71.68625623322781,
+                "failedRouteReuse": 0,
+                "homeTrailReuse": 0,
+                "navigationGeneration": 10,
+                "reservationGeneration": 8,
+                "retainedHomeWaypoints": 109,
+                "agents": 19,
+                "reservations": 2,
+                "occupationVisits": 3,
+                "outOfZone": 0,
+                "bodyOverlaps": 0,
+                "actors": 19,
+                "sourceTemplates": 5,
+                "ownedInstanceRoots": 0,
+                "lastFrameMs": 44.099999994039536,
+                "drawCalls": 78,
+                "triangles": 3739844,
+                "geometries": 63,
+                "textures": 73
+              }
+            }
+          },
+          "canonicalReplayEqual": true
+        },
+        {
+          "repeat": 3,
+          "actualTicksFromFixture": 91,
+          "frames": {
+            "durationMs": 20235.500000002983,
+            "fps": 12.799288379331463,
+            "count": 259,
+            "mean": 78.12123552123553,
+            "p50": 83.2,
+            "p95": 149.9,
+            "p99": 250.1,
+            "max": 400,
+            "over33": 240,
+            "over50": 237,
+            "longTasks": {
+              "count": 48,
+              "total": 4634,
+              "max": 402
+            },
+            "visibility": "visible",
+            "canvas": {
+              "width": 1264,
+              "height": 655
+            },
+            "publicDiagnostics": {
+              "time": {
+                "winter": 811,
+                "tick": 81,
+                "ticksPerWinter": 1000
+              },
+              "stability": {
+                "routeAttempts": 29,
+                "rejectedRoutes": 4,
+                "targetAttempts": 7,
+                "rejectedTargets": 4,
+                "routeNodes": 14323,
+                "maxRouteNodes": 2000,
+                "updates": 257,
+                "lastUpdateMs": 240.90000000596046,
+                "maxUpdateMs": 390.70000000298023,
+                "totalUpdateMs": 1828.099999949336,
+                "yardRepackAttempts": 0,
+                "yardRepackNodes": 0,
+                "yardRepackFailures": 0,
+                "presentationSteps": 291,
+                "activeSeconds": 19.830999999999975,
+                "visitsStarted": 3,
+                "occupationArrivals": 0,
+                "activitiesCompleted": 0,
+                "homeArrivals": 0,
+                "visitsCancelled": 0,
+                "distanceWalked": 73.74292528881364,
+                "failedRouteReuse": 0,
+                "homeTrailReuse": 0,
+                "navigationGeneration": 10,
+                "reservationGeneration": 7,
+                "retainedHomeWaypoints": 110,
+                "agents": 19,
+                "reservations": 1,
+                "occupationVisits": 3,
+                "outOfZone": 0,
+                "bodyOverlaps": 0,
+                "actors": 19,
+                "sourceTemplates": 5,
+                "ownedInstanceRoots": 0,
+                "lastFrameMs": 18.700000002980232,
+                "drawCalls": 78,
+                "triangles": 3739842,
+                "geometries": 63,
+                "textures": 73
+              }
+            }
+          },
+          "canonicalReplayEqual": true
+        }
+      ]
+    }
+  ],
+  "note": "Unmodified normal production bundles, public controls, natural wall-clock advance, three annual transitions per source. Every exported Core matches authoritative replay of its own actual tick count; natural wall-clock runs are not exact matched-command pairs. Use the controlled 36-run matrix for paired fitting CPU/GPU attribution. Actual GPU execution time is UNKNOWN in these bridge-free confirmations."
+}

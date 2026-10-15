@@ -1,0 +1,1570 @@
+{
+  "native": [
+    {
+      "path": "profiles/boundary-running.cpuprofile.gz",
+      "durationMs": 20535.771,
+      "note": "Self/inclusive V8 samples aggregated by function and URL; recursive duplicates are counted once per sample. Includes the short inspection/export postlude. Inclusive functions overlap; do not sum them.",
+      "self": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "selfMs": 10022.881999999958,
+          "inclusiveMs": 10022.881999999958
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 3464.8900000000062,
+          "inclusiveMs": 3477.2360000000067
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "selfMs": 688.2970000000007,
+          "inclusiveMs": 688.2970000000007
+        },
+        {
+          "function": "",
+          "url": "/src/characters/BodyCoverage.ts",
+          "selfMs": 411.403,
+          "inclusiveMs": 431.57099999999997
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 354.2070000000003,
+          "inclusiveMs": 448.0220000000003
+        },
+        {
+          "function": "measure",
+          "url": "",
+          "selfMs": 344.0789999999999,
+          "inclusiveMs": 344.0789999999999
+        },
+        {
+          "function": "setItem",
+          "url": "",
+          "selfMs": 339.21799999999985,
+          "inclusiveMs": 339.21799999999985
+        },
+        {
+          "function": "exportJSON",
+          "url": "/src/fjord-play/FjordCampaign.ts",
+          "selfMs": 301.05899999999997,
+          "inclusiveMs": 1210.3470000000016
+        },
+        {
+          "function": "maskedBodyGeometry",
+          "url": "/src/characters/BodyCoverage.ts",
+          "selfMs": 249.494,
+          "inclusiveMs": 704.0199999999992
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 233.00000000000014,
+          "inclusiveMs": 301.781
+        },
+        {
+          "function": "update",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 224.75,
+          "inclusiveMs": 661.0490000000003
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 224.5269999999999,
+          "inclusiveMs": 224.5269999999999
+        },
+        {
+          "function": "fromBufferAttribute",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 221.87699999999984,
+          "inclusiveMs": 271.6049999999999
+        },
+        {
+          "function": "persist",
+          "url": "/src/play/SharedSettlement.ts",
+          "selfMs": 160.705,
+          "inclusiveMs": 1375.3100000000018
+        },
+        {
+          "function": "toArray",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 139.854,
+          "inclusiveMs": 139.854
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "selfMs": 127.98400000000001,
+          "inclusiveMs": 127.98400000000001
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 99.32400000000001,
+          "inclusiveMs": 117.96399999999998
+        },
+        {
+          "function": "projectObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 91.06200000000001,
+          "inclusiveMs": 144.432
+        },
+        {
+          "function": "applyMatrix4",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 78.09500000000001,
+          "inclusiveMs": 226.60699999999997
+        },
+        {
+          "function": "serializeState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 76.206,
+          "inclusiveMs": 109.82300000000001
+        },
+        {
+          "function": "renderObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 68.64399999999999,
+          "inclusiveMs": 1014.2400000000001
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 68.132,
+          "inclusiveMs": 68.132
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "selfMs": 67.03099999999998,
+          "inclusiveMs": 7889.2449999999935
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 63.82699999999999,
+          "inclusiveMs": 8306.027999999988
+        },
+        {
+          "function": "save",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 56.40699999999999,
+          "inclusiveMs": 102.56599999999999
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 55.013000000000005,
+          "inclusiveMs": 55.013000000000005
+        },
+        {
+          "function": "copy",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 53.61500000000002,
+          "inclusiveMs": 103.84300000000002
+        },
+        {
+          "function": "getY",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 51.56700000000001,
+          "inclusiveMs": 51.56700000000001
+        },
+        {
+          "function": "getProgramInfoLog",
+          "url": "",
+          "selfMs": 51.102,
+          "inclusiveMs": 51.102
+        },
+        {
+          "function": "preparedCoverage",
+          "url": "/src/characters/PreparedNativeOutfit.ts",
+          "selfMs": 45.45899999999999,
+          "inclusiveMs": 642.7749999999994
+        },
+        {
+          "function": "historyIdentity",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 43.762,
+          "inclusiveMs": 43.762
+        },
+        {
+          "function": "projectFjordSettlement",
+          "url": "/src/fjord-play/FjordProjection.ts",
+          "selfMs": 42.01999999999999,
+          "inclusiveMs": 172.67299999999992
+        },
+        {
+          "function": "route",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 40.644,
+          "inclusiveMs": 216.86599999999993
+        },
+        {
+          "function": "safe",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 40.29,
+          "inclusiveMs": 127.02500000000002
+        },
+        {
+          "function": "applyBoneTransform",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 39.345,
+          "inclusiveMs": 282.45599999999996
+        }
+      ],
+      "relevant": [
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 3464.8900000000062,
+          "inclusiveMs": 3477.2360000000067
+        },
+        {
+          "function": "applyDNA",
+          "url": "/src/characters/MeshyHuman.ts",
+          "selfMs": 1.174,
+          "inclusiveMs": 1109.9070000000002
+        },
+        {
+          "function": "refit",
+          "url": "/src/characters/MeshyModuleRuntime.ts",
+          "selfMs": 1.972,
+          "inclusiveMs": 1067.9050000000002
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 354.2070000000003,
+          "inclusiveMs": 448.0220000000003
+        },
+        {
+          "function": "expandByObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 6.766,
+          "inclusiveMs": 346.4709999999999
+        },
+        {
+          "function": "setFromObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 0,
+          "inclusiveMs": 346.4709999999999
+        },
+        {
+          "function": "getVertexPosition",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 13.636000000000001,
+          "inclusiveMs": 329.346
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 233.00000000000014,
+          "inclusiveMs": 301.781
+        },
+        {
+          "function": "applyBoneTransform",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 39.345,
+          "inclusiveMs": 282.45599999999996
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 17.331,
+          "inclusiveMs": 95.306
+        },
+        {
+          "function": "humanPreviewGroundSpeed",
+          "url": "/src/character-lab/HumanPreviewPace.ts",
+          "selfMs": 0,
+          "inclusiveMs": 55.61600000000001
+        },
+        {
+          "function": "refit",
+          "url": "/src/characters/MeshyBodyFitAdapter.ts",
+          "selfMs": 0,
+          "inclusiveMs": 25.32
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 0,
+          "inclusiveMs": 3.5120000000000005
+        }
+      ],
+      "gc": {
+        "classifiedRendererThreads": 1,
+        "minorMarkers": 45,
+        "majorMarkers": 3,
+        "mergedOuterWallMs": 93.333,
+        "maxOuterMarkerMs": 6.255,
+        "allocationBytesPerSecond": "UNKNOWN; marker counts are not allocation measurements"
+      }
+    },
+    {
+      "path": "profiles/paused-frozen-snow-811.cpuprofile.gz",
+      "durationMs": 20546.178,
+      "note": "Self/inclusive V8 samples aggregated by function and URL; recursive duplicates are counted once per sample. Includes the short inspection/export postlude. Inclusive functions overlap; do not sum them.",
+      "self": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "selfMs": 17424.088999999993,
+          "inclusiveMs": 17424.088999999993
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "selfMs": 692.6720000000013,
+          "inclusiveMs": 692.6720000000013
+        },
+        {
+          "function": "update",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 390.77699999999993,
+          "inclusiveMs": 563.0609999999999
+        },
+        {
+          "function": "measure",
+          "url": "",
+          "selfMs": 293.28099999999955,
+          "inclusiveMs": 293.28099999999955
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 190.4350000000001,
+          "inclusiveMs": 222.5310000000001
+        },
+        {
+          "function": "renderObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 137.19400000000002,
+          "inclusiveMs": 1164.0650000000012
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 108.01400000000001,
+          "inclusiveMs": 108.01400000000001
+        },
+        {
+          "function": "projectObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 89.961,
+          "inclusiveMs": 106.72999999999998
+        },
+        {
+          "function": "WebGLRenderer.renderBufferDirect",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 61.99900000000002,
+          "inclusiveMs": 579.5789999999995
+        },
+        {
+          "function": "getParameter",
+          "url": "",
+          "selfMs": 59.172,
+          "inclusiveMs": 59.172
+        },
+        {
+          "function": "evaluate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 45.859,
+          "inclusiveMs": 79.79999999999998
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "selfMs": 40.12200000000001,
+          "inclusiveMs": 40.12200000000001
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 37.032,
+          "inclusiveMs": 37.032
+        },
+        {
+          "function": "setValue",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 37.025,
+          "inclusiveMs": 158.53399999999993
+        },
+        {
+          "function": "getParameters",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 33.288000000000004,
+          "inclusiveMs": 34.465999999999994
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "selfMs": 31.728,
+          "inclusiveMs": 2226.857000000003
+        },
+        {
+          "function": "texSubImage2D",
+          "url": "",
+          "selfMs": 29.499999999999996,
+          "inclusiveMs": 29.499999999999996
+        },
+        {
+          "function": "setProgram",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 29.302000000000003,
+          "inclusiveMs": 385.13599999999974
+        },
+        {
+          "function": "arraysEqual",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 28.685000000000002,
+          "inclusiveMs": 28.685000000000002
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 28.003000000000004,
+          "inclusiveMs": 28.003000000000004
+        },
+        {
+          "function": "toArray",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 26.159000000000002,
+          "inclusiveMs": 26.159000000000002
+        },
+        {
+          "function": "bindVertexArray",
+          "url": "",
+          "selfMs": 26.005000000000003,
+          "inclusiveMs": 26.005000000000003
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 22.702999999999996,
+          "inclusiveMs": 1932.784
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 21.464999999999996,
+          "inclusiveMs": 21.464999999999996
+        },
+        {
+          "function": "upload",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 20.276000000000003,
+          "inclusiveMs": 106.346
+        },
+        {
+          "function": "applyMeshyProportions",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "selfMs": 19.953,
+          "inclusiveMs": 34.487
+        },
+        {
+          "function": "needsUpdate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 18.11,
+          "inclusiveMs": 18.11
+        },
+        {
+          "function": "",
+          "url": "",
+          "selfMs": 17.372000000000003,
+          "inclusiveMs": 146.58899999999997
+        },
+        {
+          "function": "copy",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 15.577999999999998,
+          "inclusiveMs": 40.455000000000005
+        },
+        {
+          "function": "uniformMatrix4fv",
+          "url": "",
+          "selfMs": 15.356,
+          "inclusiveMs": 15.356
+        },
+        {
+          "function": "bindTexture",
+          "url": "",
+          "selfMs": 15.129000000000003,
+          "inclusiveMs": 15.129000000000003
+        },
+        {
+          "function": "shapePose",
+          "url": "/src/characters/MeshyHuman.ts",
+          "selfMs": 14.824999999999996,
+          "inclusiveMs": 50.71799999999999
+        },
+        {
+          "function": "drawElements",
+          "url": "",
+          "selfMs": 13.916000000000002,
+          "inclusiveMs": 13.916000000000002
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordEntities.ts",
+          "selfMs": 13.429999999999998,
+          "inclusiveMs": 29.287
+        },
+        {
+          "function": "meshyBoneProportion",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "selfMs": 13.367,
+          "inclusiveMs": 13.367
+        }
+      ],
+      "relevant": [
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 190.4350000000001,
+          "inclusiveMs": 222.5310000000001
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 28.003000000000004,
+          "inclusiveMs": 28.003000000000004
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 1.222,
+          "inclusiveMs": 4.5809999999999995
+        }
+      ],
+      "gc": {
+        "classifiedRendererThreads": 1,
+        "minorMarkers": 51,
+        "majorMarkers": 1,
+        "mergedOuterWallMs": 39.301,
+        "maxOuterMarkerMs": 16.481,
+        "allocationBytesPerSecond": "UNKNOWN; marker counts are not allocation measurements"
+      }
+    },
+    {
+      "path": "profiles/paused-frozen-summer-32.cpuprofile.gz",
+      "durationMs": 20417.623,
+      "note": "Self/inclusive V8 samples aggregated by function and URL; recursive duplicates are counted once per sample. Includes the short inspection/export postlude. Inclusive functions overlap; do not sum them.",
+      "self": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "selfMs": 18059.322999999982,
+          "inclusiveMs": 18059.322999999982
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "selfMs": 629.9610000000002,
+          "inclusiveMs": 629.9610000000002
+        },
+        {
+          "function": "measure",
+          "url": "",
+          "selfMs": 257.44899999999984,
+          "inclusiveMs": 257.44899999999984
+        },
+        {
+          "function": "toArray",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 220.869,
+          "inclusiveMs": 220.869
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 94.93000000000004,
+          "inclusiveMs": 110.53300000000002
+        },
+        {
+          "function": "renderObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 91.29800000000002,
+          "inclusiveMs": 928.0929999999997
+        },
+        {
+          "function": "projectObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 81.34300000000003,
+          "inclusiveMs": 99.93300000000005
+        },
+        {
+          "function": "getParameters",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 74.469,
+          "inclusiveMs": 75.223
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 71.84800000000001,
+          "inclusiveMs": 71.84800000000001
+        },
+        {
+          "function": "WebGLRenderer.renderBufferDirect",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 52.62300000000001,
+          "inclusiveMs": 557.4999999999997
+        },
+        {
+          "function": "getParameter",
+          "url": "",
+          "selfMs": 34.353,
+          "inclusiveMs": 34.353
+        },
+        {
+          "function": "update",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 33.76299999999999,
+          "inclusiveMs": 334.8170000000001
+        },
+        {
+          "function": "setValue",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 30.647,
+          "inclusiveMs": 108.817
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 26.138999999999996,
+          "inclusiveMs": 26.138999999999996
+        },
+        {
+          "function": "setProgram",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 25.322000000000003,
+          "inclusiveMs": 395.93899999999974
+        },
+        {
+          "function": "bindVertexArray",
+          "url": "",
+          "selfMs": 23.610000000000003,
+          "inclusiveMs": 23.610000000000003
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "selfMs": 21.273999999999997,
+          "inclusiveMs": 1666.8639999999994
+        },
+        {
+          "function": "meshyBoneProportion",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "selfMs": 20.672,
+          "inclusiveMs": 20.672
+        },
+        {
+          "function": "arraysEqual",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 19.845000000000002,
+          "inclusiveMs": 19.845000000000002
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 19.139999999999997,
+          "inclusiveMs": 1390.0529999999994
+        },
+        {
+          "function": "uniformMatrix4fv",
+          "url": "",
+          "selfMs": 18.927,
+          "inclusiveMs": 18.927
+        },
+        {
+          "function": "drawElements",
+          "url": "",
+          "selfMs": 18.241,
+          "inclusiveMs": 18.241
+        },
+        {
+          "function": "getProgramCacheKey",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 17.404000000000003,
+          "inclusiveMs": 24.208
+        },
+        {
+          "function": "evaluate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 16.779999999999998,
+          "inclusiveMs": 39.117000000000004
+        },
+        {
+          "function": "copy",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 16.758,
+          "inclusiveMs": 33.581999999999994
+        },
+        {
+          "function": "texSubImage2D",
+          "url": "",
+          "selfMs": 16.454,
+          "inclusiveMs": 16.454
+        },
+        {
+          "function": "upload",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 15.149000000000001,
+          "inclusiveMs": 126.03099999999998
+        },
+        {
+          "function": "needsUpdate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 14.923999999999998,
+          "inclusiveMs": 14.923999999999998
+        },
+        {
+          "function": "bindTexture",
+          "url": "",
+          "selfMs": 14.763,
+          "inclusiveMs": 14.763
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 12.930000000000001,
+          "inclusiveMs": 14.071000000000002
+        },
+        {
+          "function": "getProgram",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 12.202,
+          "inclusiveMs": 110.43500000000003
+        },
+        {
+          "function": "flatten",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 11.447,
+          "inclusiveMs": 36.112
+        },
+        {
+          "function": "record",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 10.619,
+          "inclusiveMs": 10.619
+        },
+        {
+          "function": "markUniformsLightsNeedsUpdate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 10.092999999999998,
+          "inclusiveMs": 10.092999999999998
+        },
+        {
+          "function": "update",
+          "url": "/src/characters/MeshyHuman.ts",
+          "selfMs": 9.748,
+          "inclusiveMs": 109.65099999999998
+        }
+      ],
+      "relevant": [
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 94.93000000000004,
+          "inclusiveMs": 110.53300000000002
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 3.1660000000000004,
+          "inclusiveMs": 3.1660000000000004
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 0,
+          "inclusiveMs": 2.078
+        }
+      ],
+      "gc": {
+        "classifiedRendererThreads": 1,
+        "minorMarkers": 5,
+        "majorMarkers": 0,
+        "mergedOuterWallMs": 4.718,
+        "maxOuterMarkerMs": 1.23,
+        "allocationBytesPerSecond": "UNKNOWN; marker counts are not allocation measurements"
+      }
+    },
+    {
+      "path": "profiles/paused.cpuprofile.gz",
+      "durationMs": 20734.296,
+      "note": "Self/inclusive V8 samples aggregated by function and URL; recursive duplicates are counted once per sample. Includes the short inspection/export postlude. Inclusive functions overlap; do not sum them.",
+      "self": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "selfMs": 17769.91700000009,
+          "inclusiveMs": 17769.91700000009
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "selfMs": 831.7629999999981,
+          "inclusiveMs": 831.7629999999981
+        },
+        {
+          "function": "update",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 375.169,
+          "inclusiveMs": 513.3509999999998
+        },
+        {
+          "function": "measure",
+          "url": "",
+          "selfMs": 284.3209999999997,
+          "inclusiveMs": 284.3209999999997
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 183.09500000000003,
+          "inclusiveMs": 217.53199999999998
+        },
+        {
+          "function": "projectObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 122.65400000000007,
+          "inclusiveMs": 138.495
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 121.93199999999997,
+          "inclusiveMs": 121.93199999999997
+        },
+        {
+          "function": "renderObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 113.18,
+          "inclusiveMs": 1081.1979999999996
+        },
+        {
+          "function": "WebGLRenderer.renderBufferDirect",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 52.044000000000025,
+          "inclusiveMs": 523.373
+        },
+        {
+          "function": "evaluate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 35.655,
+          "inclusiveMs": 48.306000000000004
+        },
+        {
+          "function": "arraysEqual",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 32.197,
+          "inclusiveMs": 32.197
+        },
+        {
+          "function": "setValue",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 30.226,
+          "inclusiveMs": 164.25099999999998
+        },
+        {
+          "function": "bindVertexArray",
+          "url": "",
+          "selfMs": 29.271,
+          "inclusiveMs": 29.271
+        },
+        {
+          "function": "getParameters",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 28.512999999999995,
+          "inclusiveMs": 37.899
+        },
+        {
+          "function": "texSubImage2D",
+          "url": "",
+          "selfMs": 25.582000000000004,
+          "inclusiveMs": 25.582000000000004
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 22.801,
+          "inclusiveMs": 22.801
+        },
+        {
+          "function": "copy",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 22.439999999999994,
+          "inclusiveMs": 45.557
+        },
+        {
+          "function": "toArray",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 22.11,
+          "inclusiveMs": 22.11
+        },
+        {
+          "function": "meshyBoneProportion",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "selfMs": 21.004,
+          "inclusiveMs": 21.004
+        },
+        {
+          "function": "setProgram",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 19.622,
+          "inclusiveMs": 371.0289999999998
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 18.516999999999996,
+          "inclusiveMs": 19.705999999999996
+        },
+        {
+          "function": "uniformMatrix4fv",
+          "url": "",
+          "selfMs": 18.006999999999998,
+          "inclusiveMs": 18.006999999999998
+        },
+        {
+          "function": "upload",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 17.919,
+          "inclusiveMs": 91.505
+        },
+        {
+          "function": "copyArray",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 15.269,
+          "inclusiveMs": 15.269
+        },
+        {
+          "function": "",
+          "url": "",
+          "selfMs": 14.925,
+          "inclusiveMs": 83.60200000000002
+        },
+        {
+          "function": "bindTexture",
+          "url": "",
+          "selfMs": 14.866,
+          "inclusiveMs": 14.866
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 12.841000000000001,
+          "inclusiveMs": 1764.6979999999987
+        },
+        {
+          "function": "getParameter",
+          "url": "",
+          "selfMs": 12.711,
+          "inclusiveMs": 12.711
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 12.650999999999998,
+          "inclusiveMs": 12.650999999999998
+        },
+        {
+          "function": "drawElements",
+          "url": "",
+          "selfMs": 12.643999999999998,
+          "inclusiveMs": 12.643999999999998
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "selfMs": 12.298000000000002,
+          "inclusiveMs": 2037.3480000000004
+        },
+        {
+          "function": "markUniformsLightsNeedsUpdate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 11.869,
+          "inclusiveMs": 11.869
+        },
+        {
+          "function": "setValueM4",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 11.423,
+          "inclusiveMs": 67.626
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordEntities.ts",
+          "selfMs": 10.737,
+          "inclusiveMs": 17.544
+        },
+        {
+          "function": "needsUpdate",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 10.27,
+          "inclusiveMs": 10.27
+        }
+      ],
+      "relevant": [
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 183.09500000000003,
+          "inclusiveMs": 217.53199999999998
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 22.801,
+          "inclusiveMs": 22.801
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 0,
+          "inclusiveMs": 3.9779999999999998
+        }
+      ],
+      "gc": {
+        "classifiedRendererThreads": 1,
+        "minorMarkers": 5,
+        "majorMarkers": 0,
+        "mergedOuterWallMs": 3.344,
+        "maxOuterMarkerMs": 0.953,
+        "allocationBytesPerSecond": "UNKNOWN; marker counts are not allocation measurements"
+      }
+    },
+    {
+      "path": "profiles/running-selected.cpuprofile.gz",
+      "durationMs": 20615.177,
+      "note": "Self/inclusive V8 samples aggregated by function and URL; recursive duplicates are counted once per sample. Includes the short inspection/export postlude. Inclusive functions overlap; do not sum them.",
+      "self": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "selfMs": 9152.608000000011,
+          "inclusiveMs": 9152.608000000011
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 4278.321000000003,
+          "inclusiveMs": 4290.799000000003
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 1668.939999999999,
+          "inclusiveMs": 2010.7639999999978
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "selfMs": 699.1909999999997,
+          "inclusiveMs": 699.1909999999997
+        },
+        {
+          "function": "measure",
+          "url": "",
+          "selfMs": 369.30399999999975,
+          "inclusiveMs": 369.30399999999975
+        },
+        {
+          "function": "update",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 345.32900000000006,
+          "inclusiveMs": 621.8370000000003
+        },
+        {
+          "function": "exportJSON",
+          "url": "/src/fjord-play/FjordCampaign.ts",
+          "selfMs": 323.50000000000017,
+          "inclusiveMs": 1254.8199999999993
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 286.1219999999999,
+          "inclusiveMs": 333.81299999999976
+        },
+        {
+          "function": "setItem",
+          "url": "",
+          "selfMs": 272.867,
+          "inclusiveMs": 272.867
+        },
+        {
+          "function": "persist",
+          "url": "/src/play/SharedSettlement.ts",
+          "selfMs": 172.01600000000002,
+          "inclusiveMs": 1428.0469999999975
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 124.64800000000001,
+          "inclusiveMs": 124.64800000000001
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 116.95699999999997,
+          "inclusiveMs": 135.67499999999993
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "selfMs": 116.20699999999998,
+          "inclusiveMs": 116.20699999999998
+        },
+        {
+          "function": "renderObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 86.76299999999999,
+          "inclusiveMs": 1063.0560000000005
+        },
+        {
+          "function": "update",
+          "url": "/src/fjord-play/SelectionLabels.ts",
+          "selfMs": 85.06299999999999,
+          "inclusiveMs": 88.18599999999998
+        },
+        {
+          "function": "projectObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 82.52800000000002,
+          "inclusiveMs": 111.76900000000003
+        },
+        {
+          "function": "validateSocial",
+          "url": "/src/simulation/PersonalityLifeEvents.ts",
+          "selfMs": 82.18699999999998,
+          "inclusiveMs": 84.11599999999999
+        },
+        {
+          "function": "getParameters",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 70.286,
+          "inclusiveMs": 75.94
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 68.38099999999997,
+          "inclusiveMs": 349.54299999999984
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "selfMs": 66.344,
+          "inclusiveMs": 10459.361000000014
+        },
+        {
+          "function": "save",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 60.637999999999984,
+          "inclusiveMs": 103.61899999999999
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 57.50199999999998,
+          "inclusiveMs": 8104.857000000006
+        },
+        {
+          "function": "serializeState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 57.03499999999999,
+          "inclusiveMs": 93.47700000000003
+        },
+        {
+          "function": "projectFjordSettlement",
+          "url": "/src/fjord-play/FjordProjection.ts",
+          "selfMs": 52.87099999999999,
+          "inclusiveMs": 145.04200000000003
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 49.21899999999999,
+          "inclusiveMs": 49.21899999999999
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 45.56,
+          "inclusiveMs": 45.56
+        },
+        {
+          "function": "historyIdentity",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 42.980999999999995,
+          "inclusiveMs": 42.980999999999995
+        },
+        {
+          "function": "apply",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 40.25299999999999,
+          "inclusiveMs": 65.05499999999998
+        },
+        {
+          "function": "",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 37.745999999999995,
+          "inclusiveMs": 57.92700000000001
+        },
+        {
+          "function": "route",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 37.464999999999996,
+          "inclusiveMs": 201.56900000000002
+        },
+        {
+          "function": "meshyBoneProportion",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "selfMs": 35.983000000000004,
+          "inclusiveMs": 35.983000000000004
+        },
+        {
+          "function": "validateMechanics",
+          "url": "/src/simulation/Mechanics.ts",
+          "selfMs": 33.922000000000004,
+          "inclusiveMs": 41.043000000000006
+        },
+        {
+          "function": "setProgram",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 33.198,
+          "inclusiveMs": 429.1119999999998
+        },
+        {
+          "function": "safe",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 32.87899999999999,
+          "inclusiveMs": 113.36800000000001
+        },
+        {
+          "function": "updateView",
+          "url": "/src/gameplay-lab/updateView.ts",
+          "selfMs": 32.253,
+          "inclusiveMs": 63.912
+        }
+      ],
+      "relevant": [
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 4278.321000000003,
+          "inclusiveMs": 4290.799000000003
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 1668.939999999999,
+          "inclusiveMs": 2010.7639999999978
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 68.38099999999997,
+          "inclusiveMs": 349.54299999999984
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 286.1219999999999,
+          "inclusiveMs": 333.81299999999976
+        },
+        {
+          "function": "getVertexPosition",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 3.0730000000000004,
+          "inclusiveMs": 4.907
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 0,
+          "inclusiveMs": 1.622
+        }
+      ],
+      "gc": {
+        "classifiedRendererThreads": 1,
+        "minorMarkers": 42,
+        "majorMarkers": 4,
+        "mergedOuterWallMs": 90.698,
+        "maxOuterMarkerMs": 5.671,
+        "allocationBytesPerSecond": "UNKNOWN; marker counts are not allocation measurements"
+      }
+    },
+    {
+      "path": "profiles/running.cpuprofile.gz",
+      "durationMs": 20721.016,
+      "note": "Self/inclusive V8 samples aggregated by function and URL; recursive duplicates are counted once per sample. Includes the short inspection/export postlude. Inclusive functions overlap; do not sum them.",
+      "self": [
+        {
+          "function": "(idle)",
+          "url": "",
+          "selfMs": 11668.668999999998,
+          "inclusiveMs": 11668.668999999998
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 3625.009999999994,
+          "inclusiveMs": 3634.2169999999937
+        },
+        {
+          "function": "(program)",
+          "url": "",
+          "selfMs": 756.5079999999997,
+          "inclusiveMs": 756.5079999999997
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 387.30799999999994,
+          "inclusiveMs": 483.516
+        },
+        {
+          "function": "measure",
+          "url": "",
+          "selfMs": 369.10099999999994,
+          "inclusiveMs": 369.10099999999994
+        },
+        {
+          "function": "update",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 359.388,
+          "inclusiveMs": 580.8810000000008
+        },
+        {
+          "function": "exportJSON",
+          "url": "/src/fjord-play/FjordCampaign.ts",
+          "selfMs": 318.12999999999994,
+          "inclusiveMs": 1256.9119999999982
+        },
+        {
+          "function": "setItem",
+          "url": "",
+          "selfMs": 273.813,
+          "inclusiveMs": 273.813
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 213.09700000000007,
+          "inclusiveMs": 288.141
+        },
+        {
+          "function": "persist",
+          "url": "/src/play/SharedSettlement.ts",
+          "selfMs": 173.731,
+          "inclusiveMs": 1430.6429999999978
+        },
+        {
+          "function": "multiplyMatrices",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 122.98699999999994,
+          "inclusiveMs": 122.98699999999994
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 116.65899999999999,
+          "inclusiveMs": 134.88
+        },
+        {
+          "function": "(garbage collector)",
+          "url": "",
+          "selfMs": 95.47500000000002,
+          "inclusiveMs": 95.47500000000002
+        },
+        {
+          "function": "projectObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 84.998,
+          "inclusiveMs": 116.55700000000003
+        },
+        {
+          "function": "renderObject",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 82.76199999999999,
+          "inclusiveMs": 980.0720000000006
+        },
+        {
+          "function": "object.<computed>",
+          "url": "/scripts/qa/fjord-runtime-browser.mjs",
+          "selfMs": 68.46600000000001,
+          "inclusiveMs": 7215.587999999992
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordPlay.ts",
+          "selfMs": 60.82900000000001,
+          "inclusiveMs": 7963.418999999993
+        },
+        {
+          "function": "save",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 59.486000000000026,
+          "inclusiveMs": 104.43500000000004
+        },
+        {
+          "function": "serializeState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 56.225,
+          "inclusiveMs": 95.259
+        },
+        {
+          "function": "route",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 54.053,
+          "inclusiveMs": 214.02199999999996
+        },
+        {
+          "function": "setFromRotationMatrix",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 46.847999999999985,
+          "inclusiveMs": 47.06299999999999
+        },
+        {
+          "function": "projectFjordSettlement",
+          "url": "/src/fjord-play/FjordProjection.ts",
+          "selfMs": 42.002,
+          "inclusiveMs": 155.43
+        },
+        {
+          "function": "slerpFlat",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 41.46800000000001,
+          "inclusiveMs": 41.46800000000001
+        },
+        {
+          "function": "getParameter",
+          "url": "",
+          "selfMs": 40.68399999999999,
+          "inclusiveMs": 40.68399999999999
+        },
+        {
+          "function": "historyIdentity",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 40.429,
+          "inclusiveMs": 40.429
+        },
+        {
+          "function": "safe",
+          "url": "/src/fjord-play/LivingWorldController.ts",
+          "selfMs": 39.845,
+          "inclusiveMs": 111.754
+        },
+        {
+          "function": "apply",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 39.172000000000004,
+          "inclusiveMs": 59.68100000000001
+        },
+        {
+          "function": "structuredClone",
+          "url": "",
+          "selfMs": 38.147,
+          "inclusiveMs": 38.147
+        },
+        {
+          "function": "WebGLRenderer.renderBufferDirect",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 36.232000000000006,
+          "inclusiveMs": 506.8460000000003
+        },
+        {
+          "function": "bindVertexArray",
+          "url": "",
+          "selfMs": 33.088,
+          "inclusiveMs": 33.088
+        },
+        {
+          "function": "meshyBoneProportion",
+          "url": "/src/characters/MeshyHumanDynamics.ts",
+          "selfMs": 32.449999999999996,
+          "inclusiveMs": 32.449999999999996
+        },
+        {
+          "function": "",
+          "url": "/src/fjord-play/FjordEntities.ts",
+          "selfMs": 31.885000000000005,
+          "inclusiveMs": 78.10700000000001
+        },
+        {
+          "function": "uniformMatrix4fv",
+          "url": "",
+          "selfMs": 30.884,
+          "inclusiveMs": 30.884
+        },
+        {
+          "function": "getParameters",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 28.764,
+          "inclusiveMs": 28.764
+        },
+        {
+          "function": "projectFjordGround",
+          "url": "/src/fjord-play/FjordGround.ts",
+          "selfMs": 28.663999999999998,
+          "inclusiveMs": 31.826
+        }
+      ],
+      "relevant": [
+        {
+          "function": "snapshot",
+          "url": "/src/gameplay-lab/GameplaySession.ts",
+          "selfMs": 3625.009999999994,
+          "inclusiveMs": 3634.2169999999937
+        },
+        {
+          "function": "applyCommand",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 387.30799999999994,
+          "inclusiveMs": 483.516
+        },
+        {
+          "function": "updateMatrixWorld",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 213.09700000000007,
+          "inclusiveMs": 288.141
+        },
+        {
+          "function": "validateState",
+          "url": "/src/simulation/SimulationCore.ts",
+          "selfMs": 11.116,
+          "inclusiveMs": 117.91300000000001
+        },
+        {
+          "function": "snapshot",
+          "url": "/src/lore/ClanBook.ts",
+          "selfMs": 7.676,
+          "inclusiveMs": 11.937999999999999
+        },
+        {
+          "function": "getVertexPosition",
+          "url": "/node_modules/.vite/deps/chunk-HBABQCPQ.js?v=7279712c",
+          "selfMs": 0,
+          "inclusiveMs": 5.094
+        }
+      ],
+      "gc": {
+        "classifiedRendererThreads": 1,
+        "minorMarkers": 31,
+        "majorMarkers": 3,
+        "mergedOuterWallMs": 69.747,
+        "maxOuterMarkerMs": 6.617,
+        "allocationBytesPerSecond": "UNKNOWN; marker counts are not allocation measurements"
+      }
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { registerTerrainNavigation, refreshTerrainNavigationIndex, releaseTerrainNavigation } from './TerrainNavigation';
 import { blendedMaterialIds, groundBlendMaskSteps, groundLayerIndexSteps } from './GroundBlending';
 import { createSpatialOverlay } from './SpatialOverlay';
 import { environmentColours } from './EnvironmentOverlay';
@@ -198,12 +199,14 @@ function* terrainBuildSteps(world: WorldBlueprint,
     mesh.userData.textureClones = textureClones;
     mesh.userData.spatial = spatial?.diagnostics ?? null;
     if (blended) blendedWorlds.set(mesh, { world, snow });
+    registerTerrainNavigation(mesh, terrain);
     mesh.receiveShadow = true;
     return mesh;
 }
 
 /** Cloned materials own only their masks. The source colour/normal/roughness maps remain shared. */
 export function disposeBlueprintTerrain(mesh: Mesh) {
+    releaseTerrainNavigation(mesh);
     mesh.geometry.dispose();
     for (const texture of mesh.userData.textureClones ?? []) texture.dispose();
     for (const material of Array.isArray(mesh.material) ? mesh.material : [mesh.material]) {
@@ -228,6 +231,7 @@ function* groundWearSteps(mesh: Mesh, weights: readonly number[]) {
         if (weights.length !== world.terrain.heights.length) throw new Error('Ground mask does not match the terrain grid.');
         const masks = yield* groundBlendMaskSteps(world, weights, snow);
         yield* groundLayerIndexSteps(mesh.geometry, world, masks);
+        refreshTerrainNavigationIndex(mesh);
         masks[0].dispose();
         for (let layer = 1; layer < materials.length; layer++) {
             const material = materials[layer] as MeshStandardMaterial;

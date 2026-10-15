@@ -53,3 +53,19 @@ presentation diagnostics; they are not persisted or sent into Simulation Core.
 [interactive camera review](qa/fjord-fixpass/camera-review.html).
 Physical iPhone/iPad Safari is not certified by Chromium touch emulation. Buildings and trees
 are outside this terrain-only camera constraint. Owner review of camera feel precedes merge.
+
+
+## Touch navigation query cost
+
+A tap first resolves entity selection and then its terrain destination. Generated canonical terrain
+registers the builder's existing six vertices per grid cell and eight deep-sea continuation triangles
+for a bounded near-to-far grid traversal. It uses the same native Three Ray.intersectTriangle tests,
+Float32 positions, winding, material side and world transform, returning the same closest point.
+Material layers do not repeat this physical search. No new terrain mesh, height formula, BVH, GPU
+buffer or simulation state is created. Reference/foreign terrain retains its native raycast.
+
+The registration is weakly owned by the mesh. Unexpected position/geometry/index/group/draw-range
+edits decline the shortcut; known material-mask index updates refresh only the index signature.
+Terrain disposal releases the registration, and a replacement world registers its own mesh. The
+camera's immediate collision lift, boom constraints, interpolation speed and recovery are unchanged.
+An empty-ground tap also skips rebuilding management UI when selection was already empty.

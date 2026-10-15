@@ -1,3 +1,4 @@
+import { intersectNavigationTerrain } from '../world/TerrainNavigation';
 import { solveCameraClearance } from './CameraClearance';
 import type { TerrainField } from '../world-generation/WorldBlueprint';
 import {PerspectiveCamera,Vector2,Vector3,MathUtils,Object3D,Raycaster,Plane,Box3} from 'three';
@@ -161,8 +162,10 @@ export class RTSCameraController {
         const rect=this.canvas.getBoundingClientRect();
         this.pointer.set((x-rect.left)/rect.width*2-1,-(y-rect.top)/rect.height*2+1);
         this.camera.updateMatrixWorld();this.ray.setFromCamera(this.pointer,this.camera);
-        const intersection=this.surface?this.ray.intersectObject(this.surface,false)[0]:undefined;
-        const point=intersection?.point??this.ray.ray.intersectPlane(this.fallback,this.hit);
+        const terrainPoint = this.surface ? intersectNavigationTerrain(this.surface, this.ray.ray, this.hit) : undefined;
+        const intersection = terrainPoint === undefined && this.surface ?
+            this.ray.intersectObject(this.surface, false)[0]?.point : terrainPoint;
+        const point = intersection ?? this.ray.ray.intersectPlane(this.fallback, this.hit);
         if(!point)return;
         this.desired.set(point.x,Math.max(0,point.y),point.z);this.clampFocus();
     }

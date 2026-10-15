@@ -1,0 +1,1840 @@
+{
+  "group": "diagnostics",
+  "assetEnvironment": "owner-prepared-houses",
+  "sourceCommit": "b6681d185eca14abd8f5250474e3a01dd472a8cc",
+  "sourceMode": "Vite development modules, QA-only bridge; native profiling only in scenarios with profile=true",
+  "origin": "http://127.0.0.1:5190",
+  "warmupMs": 5000,
+  "sampleMs": 20000,
+  "browserVersion": "155.0.4283.45",
+  "startedAt": "2026-10-15T10:33:21.128Z",
+  "fixtures": [
+    {
+      "name": "developed-810",
+      "sha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "loadedSha256": "f68d96ef56eaab464a3076cc0843b006e806826f88067f851f19518a97131105"
+    }
+  ],
+  "runs": [
+    {
+      "scenario": {
+        "fixture": "developed-810",
+        "running": true,
+        "allPasses": true
+      },
+      "repeat": 1,
+      "before": {
+        "time": {
+          "winter": 810,
+          "tick": 519
+        },
+        "seed": 32,
+        "events": 612,
+        "residents": 17,
+        "cattle": 8,
+        "recipe": 18,
+        "running": true,
+        "minutes": 3,
+        "motion": {
+          "routeAttempts": 10,
+          "rejectedRoutes": 0,
+          "targetAttempts": 0,
+          "rejectedTargets": 0,
+          "routeNodes": 3533,
+          "maxRouteNodes": 409,
+          "updates": 78,
+          "lastUpdateMs": 0.30000000447034836,
+          "maxUpdateMs": 6.100000001490116,
+          "totalUpdateMs": 57.00000000745058,
+          "yardRepackAttempts": 0,
+          "yardRepackNodes": 0,
+          "yardRepackFailures": 0,
+          "agents": 18,
+          "reservations": 0,
+          "occupationVisits": 0,
+          "outOfZone": 0,
+          "bodyOverlaps": 0
+        },
+        "resources": {
+          "actors": 18,
+          "sourceTemplates": 4,
+          "ownedInstanceRoots": 0
+        },
+        "counts": {
+          "meshes": 79,
+          "visibleMeshes": 78,
+          "skinnedMeshes": 44,
+          "transparentMeshes": 10,
+          "alphaTestMeshes": 3,
+          "shadowCasters": 68,
+          "bones": 1966
+        },
+        "materials": 59,
+        "renderer": {
+          "render": {
+            "frame": 80,
+            "calls": 144,
+            "triangles": 6614883,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 62,
+            "textures": 69
+          },
+          "programs": 25,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "camera": {
+          "position": [
+            98,
+            34.46178960800171,
+            114
+          ],
+          "target": [
+            70,
+            4.461789608001709,
+            146
+          ]
+        },
+        "fire": {
+          "key": "settlement-campfire",
+          "lit": false,
+          "heat": 0,
+          "time": 4.355100000008941,
+          "quality": "low",
+          "reducedMotion": false,
+          "particles": 0,
+          "systems": 3,
+          "batches": 2,
+          "visible": true,
+          "snowMultiplier": 1
+        },
+        "precipitation": {
+          "targetSnow": 0,
+          "targetRain": 0.016450048000000217,
+          "quality": "low",
+          "reducedMotion": false,
+          "enabled": true,
+          "time": 4.355100000008941,
+          "snow": 0,
+          "rain": 1,
+          "snowWeight": 0,
+          "rainWeight": 0.016450048000000217,
+          "radius": 20.8153789300123,
+          "center": [
+            70,
+            4.461789608001709,
+            146
+          ],
+          "batches": 2
+        },
+        "visibility": "visible"
+      },
+      "after": {
+        "time": {
+          "winter": 810,
+          "tick": 601
+        },
+        "seed": 32,
+        "events": 620,
+        "residents": 17,
+        "cattle": 8,
+        "recipe": 18,
+        "running": false,
+        "minutes": 3,
+        "motion": {
+          "routeAttempts": 28,
+          "rejectedRoutes": 4,
+          "targetAttempts": 7,
+          "rejectedTargets": 4,
+          "routeNodes": 14678,
+          "maxRouteNodes": 2000,
+          "updates": 375,
+          "lastUpdateMs": 0.4000000059604645,
+          "maxUpdateMs": 329.1000000014901,
+          "totalUpdateMs": 1337.8000000491738,
+          "yardRepackAttempts": 0,
+          "yardRepackNodes": 0,
+          "yardRepackFailures": 0,
+          "agents": 18,
+          "reservations": 0,
+          "occupationVisits": 3,
+          "outOfZone": 0,
+          "bodyOverlaps": 0
+        },
+        "resources": {
+          "actors": 18,
+          "sourceTemplates": 4,
+          "ownedInstanceRoots": 0
+        },
+        "counts": {
+          "meshes": 79,
+          "visibleMeshes": 78,
+          "skinnedMeshes": 44,
+          "transparentMeshes": 10,
+          "alphaTestMeshes": 3,
+          "shadowCasters": 68,
+          "bones": 1966
+        },
+        "materials": 59,
+        "renderer": {
+          "render": {
+            "frame": 377,
+            "calls": 145,
+            "triangles": 6616404,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 62,
+            "textures": 69
+          },
+          "programs": 25,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "camera": {
+          "position": [
+            98,
+            34.46178960800171,
+            114
+          ],
+          "target": [
+            70,
+            4.461789608001709,
+            146
+          ]
+        },
+        "fire": {
+          "key": "settlement-campfire",
+          "lit": false,
+          "heat": 0,
+          "time": 21.162600000008943,
+          "quality": "low",
+          "reducedMotion": false,
+          "particles": 0,
+          "systems": 3,
+          "batches": 2,
+          "visible": true,
+          "snowMultiplier": 1
+        },
+        "precipitation": {
+          "targetSnow": 0,
+          "targetRain": 0.3577694719999999,
+          "quality": "low",
+          "reducedMotion": false,
+          "enabled": true,
+          "time": 21.162600000008943,
+          "snow": 0,
+          "rain": 37,
+          "snowWeight": 0,
+          "rainWeight": 0.3577694719999999,
+          "radius": 20.8153789300123,
+          "center": [
+            70,
+            4.461789608001709,
+            146
+          ],
+          "batches": 2
+        },
+        "visibility": "visible",
+        "effectiveWorld": {
+          "mode": "generated",
+          "seed": 18,
+          "generatorVersion": "fjordside-island-v0.3e-r3",
+          "groundBlending": "zoned",
+          "island": {
+            "version": "island-pool-v1",
+            "generatorVersion": "fjordside-island-v0.3e-r3",
+            "seed": 18
+          },
+          "campaignPlots": 12,
+          "quality": "low",
+          "buildings": 0,
+          "populationSource": "existing-fjordside",
+          "groundTier": "low",
+          "source": "ez-tree",
+          "site": {
+            "x": 70,
+            "z": 146
+          },
+          "attachments": 2,
+          "tent": null,
+          "tentPlot": null,
+          "attachmentVersion": "authored-props-v4",
+          "validation": {
+            "accepted": true,
+            "reasons": [],
+            "connectedBuildings": 0,
+            "connectedArea": 17413,
+            "maximumFoundationSlope": 0,
+            "minimumFoundationElevation": 3.581789608001709,
+            "score": 0
+          },
+          "motion": {
+            "water": true,
+            "wind": true
+          },
+          "water": {
+            "source": "reference-water",
+            "quality": "low",
+            "triangles": 2048,
+            "normalSamples": 2,
+            "textureBytes": 87380,
+            "drawCalls": 1,
+            "time": 21.362600000008946,
+            "level": -0.12,
+            "center": {
+              "x": 100.5,
+              "z": 202.5
+            },
+            "denseSize": 80,
+            "extent": 2000,
+            "parameters": {
+              "waveAmplitude": 0.18,
+              "waveSpeed": 1,
+              "detailStrength": 0.65
+            },
+            "boat": null
+          }
+        },
+        "placeholders": [],
+        "presentationDiagnostics": "persona:founder-8: no reachable hunter target; ordinary wandering retained.\npersona:founder-6: no reachable fisher target; ordinary wandering retained.\npersona:founder-7: no reachable woodworker target; ordinary wandering retained.\npersona:founder-4: no reachable hunter target; ordinary wandering retained.\nCanonical time: Winter 810 · tick 601/1000\nReused Fjordside DNA, Talk/Listen and authored cattle activities; missing clip capabilities remain disabled.\nAmbient motion is presentation only. Young children and active caregivers stay indoors.\nGeography: fjordside-island-v0.3e-r3:18:53931e6c",
+        "nativeDrawCounters": {
+          "useProgram": 37,
+          "drawElements": 114,
+          "drawElementsInstanced": 31,
+          "shadowDrawCalls": 68
+        },
+        "uniqueRigInventory": {
+          "bones": 822,
+          "skeletons": 18
+        },
+        "geometryInventory": [
+          {
+            "name": "Generated canonical terrain",
+            "trianglesIncludingGroups": 735446,
+            "instances": 1,
+            "skinned": false,
+            "groups": 6,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "Ground037",
+              "Ground054",
+              "grass_path_2",
+              "mossy_rock",
+              "mossy_rock",
+              "mossy_rock"
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "trianglesIncludingGroups": 365760,
+            "instances": 30,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "branches"
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "trianglesIncludingGroups": 365760,
+            "instances": 30,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "branches"
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "trianglesIncludingGroups": 365760,
+            "instances": 30,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "branches"
+            ]
+          },
+          {
+            "name": "kaykit-conifer-a",
+            "trianglesIncludingGroups": 216000,
+            "instances": 30,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "leaves"
+            ]
+          },
+          {
+            "name": "kaykit-conifer-b",
+            "trianglesIncludingGroups": 216000,
+            "instances": 30,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "leaves"
+            ]
+          },
+          {
+            "name": "kaykit-conifer-c",
+            "trianglesIncludingGroups": 216000,
+            "instances": 30,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "leaves"
+            ]
+          },
+          {
+            "name": "Module_grid_trial_top_0",
+            "trianglesIncludingGroups": 92099,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_top_0",
+            "trianglesIncludingGroups": 92099,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_top_0",
+            "trianglesIncludingGroups": 92099,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_top_0",
+            "trianglesIncludingGroups": 92099,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": false,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_top_0",
+            "trianglesIncludingGroups": 92099,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "kaykit-bush-a",
+            "trianglesIncludingGroups": 34440,
+            "instances": 35,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "forest"
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-a",
+            "trianglesIncludingGroups": 33264,
+            "instances": 63,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "forest"
+            ]
+          },
+          {
+            "name": "kaykit-grass-cluster-b",
+            "trianglesIncludingGroups": 33264,
+            "instances": 63,
+            "skinned": false,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              "forest"
+            ]
+          },
+          {
+            "name": "Module_grid_trial_trousers_0",
+            "trianglesIncludingGroups": 33166,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_trousers_0",
+            "trianglesIncludingGroups": 33166,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_trousers_0",
+            "trianglesIncludingGroups": 33166,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_trousers_0",
+            "trianglesIncludingGroups": 33166,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": false,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_grid_trial_trousers_0",
+            "trianglesIncludingGroups": 33166,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_low-shoes_left_0",
+            "trianglesIncludingGroups": 27532,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_low-shoes_right",
+            "trianglesIncludingGroups": 27532,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_low-shoes_left_0",
+            "trianglesIncludingGroups": 27532,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_low-shoes_right",
+            "trianglesIncludingGroups": 27532,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          },
+          {
+            "name": "Module_low-shoes_left_0",
+            "trianglesIncludingGroups": 27532,
+            "instances": 1,
+            "skinned": true,
+            "groups": 0,
+            "visible": true,
+            "insideCameraFrustum": true,
+            "materials": [
+              ""
+            ]
+          }
+        ]
+      },
+      "actualTicksFromFixture": 101,
+      "canonicalReplayEqual": true,
+      "windows": [
+        {
+          "durationMs": 20142.30000000447,
+          "fps": 14.596148404101555,
+          "frames": {
+            "count": 294,
+            "total": 20055.5,
+            "mean": 68.21598639455782,
+            "min": 16.5,
+            "max": 416.90000000000146,
+            "p50": 66.7,
+            "p95": 133.6,
+            "p99": 283.8,
+            "over33": 249,
+            "over50": 239
+          },
+          "spans": {
+            "clock.callback.inclusive": {
+              "count": 41,
+              "total": 0.8000000044703484,
+              "mean": 0.019512195230984106,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "clock.callback.self": {
+              "count": 41,
+              "total": 0.8000000044703484,
+              "mean": 0.019512195230984106,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.command.inclusive": {
+              "count": 41,
+              "total": 455.30000001192093,
+              "mean": 11.104878049071242,
+              "min": 8.899999998509884,
+              "max": 18.5,
+              "p50": 10.7,
+              "p95": 14.1,
+              "p99": 18.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.command.self": {
+              "count": 41,
+              "total": 455.30000001192093,
+              "mean": 11.104878049071242,
+              "min": 8.899999998509884,
+              "max": 18.5,
+              "p50": 10.7,
+              "p95": 14.1,
+              "p99": 18.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.elapse.inclusive": {
+              "count": 41,
+              "total": 455.7000000104308,
+              "mean": 11.114634146595874,
+              "min": 8.899999998509884,
+              "max": 18.5,
+              "p50": 10.7,
+              "p95": 14.1,
+              "p99": 18.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.elapse.self": {
+              "count": 41,
+              "total": 0.3999999985098839,
+              "mean": 0.009756097524631314,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.snapshot.inclusive": {
+              "count": 451,
+              "total": 3376.500000014901,
+              "mean": 7.4866962306317095,
+              "min": 5.9000000059604645,
+              "max": 14.700000002980232,
+              "p50": 7.2,
+              "p95": 10,
+              "p99": 12.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.snapshot.self": {
+              "count": 451,
+              "total": 3376.500000014901,
+              "mean": 7.4866962306317095,
+              "min": 5.9000000059604645,
+              "max": 14.700000002980232,
+              "p50": 7.2,
+              "p95": 10,
+              "p99": 12.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.project.inclusive": {
+              "count": 205,
+              "total": 1709.0999999791384,
+              "mean": 8.337073170629944,
+              "min": 6.5,
+              "max": 15.599999994039536,
+              "p50": 7.9,
+              "p95": 10.8,
+              "p99": 14.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.project.self": {
+              "count": 205,
+              "total": 152.5999999716878,
+              "mean": 0.7443902437643307,
+              "min": 0.3999999985098839,
+              "max": 4.5,
+              "p50": 0.7,
+              "p95": 1.1,
+              "p99": 2.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.enqueue.inclusive": {
+              "count": 41,
+              "total": 1.300000011920929,
+              "mean": 0.0317073173639251,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.enqueue.self": {
+              "count": 41,
+              "total": 1.300000011920929,
+              "mean": 0.0317073173639251,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.saveJSON.inclusive": {
+              "count": 41,
+              "total": 87.20000003278255,
+              "mean": 2.1268292690922572,
+              "min": 1.5,
+              "max": 3.899999998509884,
+              "p50": 1.9,
+              "p95": 3.1,
+              "p99": 3.9,
+              "over33": 0,
+              "over50": 0
+            },
+            "session.saveJSON.self": {
+              "count": 41,
+              "total": 87.20000003278255,
+              "mean": 2.1268292690922572,
+              "min": 1.5,
+              "max": 3.899999998509884,
+              "p50": 1.9,
+              "p95": 3.1,
+              "p99": 3.9,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.exportJSON.inclusive": {
+              "count": 41,
+              "total": 1077.900000013411,
+              "mean": 26.29024390276612,
+              "min": 23,
+              "max": 33.29999999701977,
+              "p50": 25.8,
+              "p95": 30.6,
+              "p99": 33.3,
+              "over33": 0,
+              "over50": 0
+            },
+            "campaign.exportJSON.self": {
+              "count": 41,
+              "total": 365.200000025332,
+              "mean": 8.907317073788585,
+              "min": 7.5,
+              "max": 11.600000008940697,
+              "p50": 8.8,
+              "p95": 11.2,
+              "p99": 11.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "shared.persist.inclusive": {
+              "count": 41,
+              "total": 1231.3999999910593,
+              "mean": 30.03414634124535,
+              "min": 26.099999994039536,
+              "max": 37.899999998509884,
+              "p50": 29.7,
+              "p95": 35.1,
+              "p99": 37.9,
+              "over33": 4,
+              "over50": 0
+            },
+            "shared.persist.self": {
+              "count": 41,
+              "total": 153.49999997764826,
+              "mean": 3.7439024384792257,
+              "min": 3,
+              "max": 6,
+              "p50": 3.8,
+              "p95": 4.6,
+              "p99": 6,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.update.inclusive": {
+              "count": 336,
+              "total": 8.30000002682209,
+              "mean": 0.024702381032208603,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.update.self": {
+              "count": 336,
+              "total": 8.30000002682209,
+              "mean": 0.024702381032208603,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.setSeason.inclusive": {
+              "count": 41,
+              "total": 1.300000011920929,
+              "mean": 0.0317073173639251,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "lighting.setSeason.self": {
+              "count": 41,
+              "total": 0.19999999552965164,
+              "mean": 0.004878048671454918,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.sync.inclusive": {
+              "count": 41,
+              "total": 0.9999999701976776,
+              "mean": 0.024390243175553113,
+              "min": 0,
+              "max": 0.19999999552965164,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.sync.self": {
+              "count": 41,
+              "total": 0.9999999701976776,
+              "mean": 0.024390243175553113,
+              "min": 0,
+              "max": 0.19999999552965164,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "scene.syncPrefix.inclusive": {
+              "count": 41,
+              "total": 368.79999996721745,
+              "mean": 8.995121950419938,
+              "min": 7.399999998509884,
+              "max": 14,
+              "p50": 8.7,
+              "p95": 10.6,
+              "p99": 14,
+              "over33": 0,
+              "over50": 0
+            },
+            "scene.syncPrefix.self": {
+              "count": 41,
+              "total": 6.899999998509884,
+              "mean": 0.16829268289048496,
+              "min": 0,
+              "max": 0.4000000059604645,
+              "p50": 0.2,
+              "p95": 0.3,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "shared.selectionPresentation.inclusive": {
+              "count": 82,
+              "total": 1252.1000000312924,
+              "mean": 15.269512195503566,
+              "min": 12.799999997019768,
+              "max": 21,
+              "p50": 14.9,
+              "p95": 19.4,
+              "p99": 21,
+              "over33": 0,
+              "over50": 0
+            },
+            "shared.selectionPresentation.self": {
+              "count": 82,
+              "total": 2.0999999940395355,
+              "mean": 0.025609756024872383,
+              "min": 0,
+              "max": 0.3999999985098839,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.select.inclusive": {
+              "count": 377,
+              "total": 1.300000011920929,
+              "mean": 0.003448275893689467,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.select.self": {
+              "count": 377,
+              "total": 1.300000011920929,
+              "mean": 0.003448275893689467,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.sync.inclusive": {
+              "count": 82,
+              "total": 4.499999955296516,
+              "mean": 0.05487804823532337,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.sync.self": {
+              "count": 82,
+              "total": 4.499999955296516,
+              "mean": 0.05487804823532337,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "ui.refresh.inclusive": {
+              "count": 41,
+              "total": 3494.599999971688,
+              "mean": 85.23414634077287,
+              "min": 77.89999999850988,
+              "max": 108.19999999552965,
+              "p50": 82.8,
+              "p95": 103.2,
+              "p99": 108.2,
+              "over33": 41,
+              "over50": 41
+            },
+            "ui.refresh.self": {
+              "count": 41,
+              "total": 302.3000000193715,
+              "mean": 7.373170732179793,
+              "min": 5.899999998509884,
+              "max": 9.599999994039536,
+              "p50": 7.4,
+              "p95": 8.9,
+              "p99": 9.6,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.reconcile.inclusive": {
+              "count": 1025,
+              "total": 3.2000000029802322,
+              "mean": 0.003121951222419739,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.reconcile.self": {
+              "count": 1025,
+              "total": 3.2000000029802322,
+              "mean": 0.003121951222419739,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.reconcile.asyncWall": {
+              "count": 1025,
+              "total": 4.9000000059604645,
+              "mean": 0.004780487810693136,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.sync.asyncWall": {
+              "count": 41,
+              "total": 1407.900000013411,
+              "mean": 34.339024390571,
+              "min": 31.200000002980232,
+              "max": 42.30000000447035,
+              "p50": 33.4,
+              "p95": 41.5,
+              "p99": 42.3,
+              "over33": 21,
+              "over50": 0
+            },
+            "entities.describe.inclusive": {
+              "count": 118,
+              "total": 82.40000001341105,
+              "mean": 0.6983050848594157,
+              "min": 0.3999999985098839,
+              "max": 1.6000000014901161,
+              "p50": 0.6,
+              "p95": 1.1,
+              "p99": 1.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.describe.self": {
+              "count": 118,
+              "total": 82.40000001341105,
+              "mean": 0.6983050848594157,
+              "min": 0.3999999985098839,
+              "max": 1.6000000014901161,
+              "p50": 0.6,
+              "p95": 1.1,
+              "p99": 1.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.reconcile.inclusive": {
+              "count": 41,
+              "total": 53.999999947845936,
+              "mean": 1.317073169459657,
+              "min": 1,
+              "max": 2.1999999955296516,
+              "p50": 1.2,
+              "p95": 1.7,
+              "p99": 2.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.reconcile.self": {
+              "count": 41,
+              "total": 53.999999947845936,
+              "mean": 1.317073169459657,
+              "min": 1,
+              "max": 2.1999999955296516,
+              "p50": 1.2,
+              "p95": 1.7,
+              "p99": 2.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.standingTrees.inclusive": {
+              "count": 41,
+              "total": 6.100000038743019,
+              "mean": 0.14878048874982974,
+              "min": 0,
+              "max": 0.5,
+              "p50": 0.1,
+              "p95": 0.3,
+              "p99": 0.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.standingTrees.self": {
+              "count": 41,
+              "total": 6.100000038743019,
+              "mean": 0.14878048874982974,
+              "min": 0,
+              "max": 0.5,
+              "p50": 0.1,
+              "p95": 0.3,
+              "p99": 0.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.configureMotion.inclusive": {
+              "count": 41,
+              "total": 6.000000007450581,
+              "mean": 0.14634146359635564,
+              "min": 0,
+              "max": 0.3999999985098839,
+              "p50": 0.1,
+              "p95": 0.3,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.configureMotion.self": {
+              "count": 41,
+              "total": 6.000000007450581,
+              "mean": 0.14634146359635564,
+              "min": 0,
+              "max": 0.3999999985098839,
+              "p50": 0.1,
+              "p95": 0.3,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "mixer.update.inclusive": {
+              "count": 6048,
+              "total": 222.6999998614192,
+              "mean": 0.03682208992417645,
+              "min": 0,
+              "max": 0.30000000447034836,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "mixer.update.self": {
+              "count": 6048,
+              "total": 222.6999998614192,
+              "mean": 0.03682208992417645,
+              "min": 0,
+              "max": 0.30000000447034836,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.shapePose.inclusive": {
+              "count": 3360,
+              "total": 97.8999999910593,
+              "mean": 0.02913690475924384,
+              "min": 0,
+              "max": 0.29999999701976776,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.shapePose.self": {
+              "count": 3360,
+              "total": 97.8999999910593,
+              "mean": 0.02913690475924384,
+              "min": 0,
+              "max": 0.29999999701976776,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.update.inclusive": {
+              "count": 3360,
+              "total": 285.9999999329448,
+              "mean": 0.08511904759909071,
+              "min": 0,
+              "max": 0.3999999985098839,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "human.update.self": {
+              "count": 3360,
+              "total": 74.70000004023314,
+              "mean": 0.022232142869117004,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.animate.inclusive": {
+              "count": 6048,
+              "total": 420.59999987483025,
+              "mean": 0.06954365077295474,
+              "min": 0,
+              "max": 0.3999999985098839,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "models.animate.self": {
+              "count": 6048,
+              "total": 25.299999982118607,
+              "mean": 0.004183201055244478,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.advance.inclusive": {
+              "count": 336,
+              "total": 464.59999990463257,
+              "mean": 1.3827380949542636,
+              "min": 0.7999999970197678,
+              "max": 2.8000000044703484,
+              "p50": 1.3,
+              "p95": 2.1,
+              "p99": 2.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.advance.self": {
+              "count": 336,
+              "total": 44.00000002980232,
+              "mean": 0.13095238104107834,
+              "min": 0,
+              "max": 0.6000000014901161,
+              "p50": 0.1,
+              "p95": 0.3,
+              "p99": 0.4,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.setAnchors.inclusive": {
+              "count": 336,
+              "total": 5.5999999195337296,
+              "mean": 0.01666666642718372,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.setAnchors.self": {
+              "count": 336,
+              "total": 5.5999999195337296,
+              "mean": 0.01666666642718372,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "scene.syncAsyncWall": {
+              "count": 41,
+              "total": 2916.89999999851,
+              "mean": 71.14390243898805,
+              "min": 65.5,
+              "max": 87.30000000447035,
+              "p50": 69,
+              "p95": 81.6,
+              "p99": 87.3,
+              "over33": 41,
+              "over50": 41
+            },
+            "camera.update.inclusive": {
+              "count": 295,
+              "total": 26.700000025331974,
+              "mean": 0.09050847466214229,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "camera.update.self": {
+              "count": 295,
+              "total": 26.700000025331974,
+              "mean": 0.09050847466214229,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0.1,
+              "p95": 0.2,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "social.advance.inclusive": {
+              "count": 347,
+              "total": 16.10000006109476,
+              "mean": 0.04639769470056127,
+              "min": 0,
+              "max": 0.5,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "social.advance.self": {
+              "count": 347,
+              "total": 16.10000006109476,
+              "mean": 0.04639769470056127,
+              "min": 0,
+              "max": 0.5,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.planPassing.inclusive": {
+              "count": 3834,
+              "total": 27.900000020861626,
+              "mean": 0.007276995310605537,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.planPassing.self": {
+              "count": 3834,
+              "total": 27.900000020861626,
+              "mean": 0.007276995310605537,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.step.inclusive": {
+              "count": 347,
+              "total": 1278.100000038743,
+              "mean": 3.683285302705311,
+              "min": 0,
+              "max": 324.8999999985099,
+              "p50": 0.3,
+              "p95": 7.3,
+              "p99": 107.4,
+              "over33": 4,
+              "over50": 4
+            },
+            "motion.step.self": {
+              "count": 347,
+              "total": 399.59999994933605,
+              "mean": 1.1515850142632162,
+              "min": 0,
+              "max": 11,
+              "p50": 0.2,
+              "p95": 5.8,
+              "p99": 9.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.advance.inclusive": {
+              "count": 295,
+              "total": 1280.5000000447035,
+              "mean": 4.340677966253232,
+              "min": 0.09999999403953552,
+              "max": 329.1000000014901,
+              "p50": 0.3,
+              "p95": 8.9,
+              "p99": 161.4,
+              "over33": 5,
+              "over50": 4
+            },
+            "motion.advance.self": {
+              "count": 295,
+              "total": 2.4000000059604645,
+              "mean": 0.008135593240543948,
+              "min": 0,
+              "max": 0.19999999552965164,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "campfire.update.inclusive": {
+              "count": 295,
+              "total": 9.699999988079071,
+              "mean": 0.03288135589179346,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "campfire.update.self": {
+              "count": 295,
+              "total": 9.699999988079071,
+              "mean": 0.03288135589179346,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "precipitation.update.inclusive": {
+              "count": 295,
+              "total": 17.700000040233135,
+              "mean": 0.060000000136383506,
+              "min": 0,
+              "max": 0.29999999701976776,
+              "p50": 0.1,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "precipitation.update.self": {
+              "count": 295,
+              "total": 17.700000040233135,
+              "mean": 0.060000000136383506,
+              "min": 0,
+              "max": 0.29999999701976776,
+              "p50": 0.1,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.setAnchors.inclusive": {
+              "count": 295,
+              "total": 0.4000000059604645,
+              "mean": 0.0013559322235947948,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.setAnchors.self": {
+              "count": 295,
+              "total": 0.4000000059604645,
+              "mean": 0.0013559322235947948,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.productionAnchors.inclusive": {
+              "count": 295,
+              "total": 8.99999999254942,
+              "mean": 0.03050847455101498,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "entities.productionAnchors.self": {
+              "count": 295,
+              "total": 8.99999999254942,
+              "mean": 0.03050847455101498,
+              "min": 0,
+              "max": 0.20000000298023224,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.2,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.update.inclusive": {
+              "count": 295,
+              "total": 0.19999999552965164,
+              "mean": 0.000677966086541192,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0,
+              "over33": 0,
+              "over50": 0
+            },
+            "selectionLabels.update.self": {
+              "count": 295,
+              "total": 0.19999999552965164,
+              "mean": 0.000677966086541192,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0,
+              "p99": 0,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.update.inclusive": {
+              "count": 295,
+              "total": 21.00000000745058,
+              "mean": 0.0711864407032223,
+              "min": 0,
+              "max": 1.3999999985098839,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 0.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "productionLabels.update.self": {
+              "count": 295,
+              "total": 21.00000000745058,
+              "mean": 0.0711864407032223,
+              "min": 0,
+              "max": 1.3999999985098839,
+              "p50": 0,
+              "p95": 0.2,
+              "p99": 0.5,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.update.inclusive": {
+              "count": 295,
+              "total": 4.300000034272671,
+              "mean": 0.014576271302619223,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "world.update.self": {
+              "count": 295,
+              "total": 4.300000034272671,
+              "mean": 0.014576271302619223,
+              "min": 0,
+              "max": 0.10000000149011612,
+              "p50": 0,
+              "p95": 0.1,
+              "p99": 0.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "render.submit.inclusive": {
+              "count": 295,
+              "total": 1114.8000000864267,
+              "mean": 3.7789830511404294,
+              "min": 2.5,
+              "max": 8.600000001490116,
+              "p50": 3.7,
+              "p95": 5.4,
+              "p99": 7,
+              "over33": 0,
+              "over50": 0
+            },
+            "render.submit.self": {
+              "count": 295,
+              "total": 1114.8000000864267,
+              "mean": 3.7789830511404294,
+              "min": 2.5,
+              "max": 8.600000001490116,
+              "p50": 3.7,
+              "p95": 5.4,
+              "p99": 7,
+              "over33": 0,
+              "over50": 0
+            },
+            "frame.callback.inclusive": {
+              "count": 295,
+              "total": 3017.7000000476837,
+              "mean": 10.229491525585368,
+              "min": 4.5999999940395355,
+              "max": 334.90000000596046,
+              "p50": 6.3,
+              "p95": 14.4,
+              "p99": 167.9,
+              "over33": 5,
+              "over50": 4
+            },
+            "frame.callback.self": {
+              "count": 295,
+              "total": 52.49999991804361,
+              "mean": 0.17796610141709698,
+              "min": 0,
+              "max": 0.8000000044703484,
+              "p50": 0.1,
+              "p95": 0.5,
+              "p99": 0.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "frame.diagnostics.inclusive": {
+              "count": 36,
+              "total": 45.10000003129244,
+              "mean": 1.2527777786470122,
+              "min": 0.6999999955296516,
+              "max": 2.100000001490116,
+              "p50": 1.2,
+              "p95": 2.1,
+              "p99": 2.1,
+              "over33": 0,
+              "over50": 0
+            },
+            "frame.diagnostics.self": {
+              "count": 36,
+              "total": 17.400000013411045,
+              "mean": 0.48333333370586234,
+              "min": 0.29999999701976776,
+              "max": 0.8000000044703484,
+              "p50": 0.5,
+              "p95": 0.8,
+              "p99": 0.8,
+              "over33": 0,
+              "over50": 0
+            },
+            "motion.route.inclusive": {
+              "count": 18,
+              "total": 831.3000000044703,
+              "mean": 46.183333333581686,
+              "min": 0,
+              "max": 218,
+              "p50": 5.8,
+              "p95": 218,
+              "p99": 218,
+              "over33": 7,
+              "over50": 4
+            },
+            "motion.route.self": {
+              "count": 18,
+              "total": 831.3000000044703,
+              "mean": 46.183333333581686,
+              "min": 0,
+              "max": 218,
+              "p50": 5.8,
+              "p95": 218,
+              "p99": 218,
+              "over33": 7,
+              "over50": 4
+            },
+            "motion.beginVisit.inclusive": {
+              "count": 10,
+              "total": 176.5,
+              "mean": 17.65,
+              "min": 0,
+              "max": 146.39999999850988,
+              "p50": 0.1,
+              "p95": 146.4,
+              "p99": 146.4,
+              "over33": 1,
+              "over50": 1
+            },
+            "motion.beginVisit.self": {
+              "count": 10,
+              "total": 3.2000000029802322,
+              "mean": 0.3200000002980232,
+              "min": 0,
+              "max": 0.8999999985098839,
+              "p50": 0.1,
+              "p95": 0.9,
+              "p99": 0.9,
+              "over33": 0,
+              "over50": 0
+            }
+          },
+          "gpuSupported": true,
+          "gpu": {
+            "count": 72,
+            "total": 4763.655546999999,
+            "mean": 66.16188259722222,
+            "min": 62.702331,
+            "max": 73.749454,
+            "p50": 65.5,
+            "p95": 72.4,
+            "p99": 73.7,
+            "over33": 72,
+            "over50": 72
+          },
+          "disjointQueries": 0,
+          "longTasks": {
+            "count": 44,
+            "total": 6284,
+            "mean": 142.8181818181818,
+            "min": 113,
+            "max": 335,
+            "p50": 131,
+            "p95": 176,
+            "p99": 335,
+            "over33": 44,
+            "over50": 44
+          },
+          "heartbeatGaps": {
+            "count": 153,
+            "total": 19795.40000000596,
+            "mean": 129.38169934644418,
+            "min": 20.899999998509884,
+            "max": 533.2000000029802,
+            "p50": 100.3,
+            "p95": 231.3,
+            "p99": 390.6,
+            "over33": 150,
+            "over50": 150
+          },
+          "heap": {
+            "used": 285354534,
+            "total": 333337858,
+            "limit": 4395630592
+          }
+        }
+      ],
+      "cdpMetrics": {
+        "Documents": 0,
+        "Nodes": 0,
+        "LayoutCount": 61,
+        "RecalcStyleCount": 411,
+        "LayoutDuration": 0.014548000000000005,
+        "RecalcStyleDuration": 0.015319,
+        "DevToolsCommandDuration": 0.007058000000000009,
+        "ScriptDuration": 3.030569,
+        "V8CompileDuration": 0,
+        "TaskDuration": 8.907788999999998,
+        "TaskOtherDuration": 5.840294999999998
+      }
+    }
+  ],
+  "errors": []
+}

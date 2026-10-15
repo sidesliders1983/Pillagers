@@ -19,7 +19,7 @@ export class FjordModels {
     });
     private actors = new Map<Object3D, { human?: MeshyHuman; mixer?: AnimationMixer;
         clips?: import('three').AnimationClip[]; action?: import('three').AnimationAction;
-        fingerprint?: string; resumeGrazeTime?: number; pace: number; groundSpeed: number; state: string }>();
+        fingerprint?: string; paceSignature?: string; resumeGrazeTime?: number; pace: number; groundSpeed: number; state: string }>();
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
@@ -30,10 +30,14 @@ export class FjordModels {
             actor.fingerprint = fingerprint;
             const profile = universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) });
             model.scale.setScalar(entity.transform!.scale / (1 - .35 * profile.weights.Child));
-            const position = model.position.clone(), rotation = model.quaternion.clone();
-            model.position.set(0, 0, 0); model.quaternion.identity();
-            try { actor.groundSpeed = humanPreviewGroundSpeed(actor.human, 'Walk'); }
-            finally { model.position.copy(position); model.quaternion.copy(rotation); }
+            const paceSignature = JSON.stringify([model.scale.toArray(), profile.motion]);
+            if (!actor.human.lastFitRetained || actor.paceSignature !== paceSignature) {
+                const position = model.position.clone(), rotation = model.quaternion.clone();
+                model.position.set(0, 0, 0); model.quaternion.identity();
+                try { actor.groundSpeed = humanPreviewGroundSpeed(actor.human, 'Walk'); }
+                finally { model.position.copy(position); model.quaternion.copy(rotation); }
+                actor.paceSignature = paceSignature;
+            }
             if (!actor.human.clips.some(c => c.name === 'Walking'))
                 this.diagnostics.push(entity.id + ': missing Walking source clip; stable Idle pose fallback.');
             actor.human.setAnimation('Idle');
@@ -44,6 +48,7 @@ export class FjordModels {
         model.userData.appearance = model.userData.universalHumanProfile;
         model.userData.pace = actor.pace;
     }
+    boundsShape(model: Object3D) { return this.actors.get(model)?.human?.boundsShapeSignature; }
     pace(model: Object3D) { return this.actors.get(model)?.pace ?? 0; }
     activityClips(model: Object3D) {
         const actor = this.actors.get(model);

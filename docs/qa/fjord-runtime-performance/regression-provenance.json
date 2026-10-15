@@ -1,0 +1,117 @@
+{
+  "current": "b6681d185eca14abd8f5250474e3a01dd472a8cc",
+  "previous": "eda52e106619224dab6790deeba70d016eca0b36",
+  "previousIsOwnerConfirmedSmooth": false,
+  "archivedSources": [
+    {
+      "file": "src/fjord-play/FjordPlay.ts",
+      "sha256": "63b0812e31a2650a5935283065e40eef77f5bf65466795e6c08cbbeaee6e50aa",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/fjord-play/LivingWorldController.ts",
+      "sha256": "5ca2f94a87bdb97f0f4c297ce3136d7d874c4d71761d84cfcb1177f57b4d4184",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/fjord-play/FjordEntities.ts",
+      "sha256": "a1f3137ea5eac71b1bb8123c9fdfc90cd9694baa5862bb3ba9efdb082466688d",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/fjord-play/FjordModels.ts",
+      "sha256": "f84a79163bc9a473f1d42030fc5c86ab6a132bcc83b859f896338e1fef1cbda1",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/characters/MeshyHuman.ts",
+      "sha256": "8192a5272d7e630d53ccc4c64b7af24f645fcfb7a76ed18919b30377911993ef",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/world/BlueprintTerrain.ts",
+      "sha256": "36aa45730c686deb28a476921727ce53e0a5a6f850f1d19f1453d44de6d973ac",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/world/GroundBlending.ts",
+      "sha256": "defaaca158339f2541c4dbb211ade21c0a1fe33dc2d1f4d78ae430a21dd8e02e",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/simulation/SimulationCore.ts",
+      "sha256": "464d4460bc1aa355572c4a28c3f5b5967d3cdb6437c04700af4ce946d72b4761",
+      "matchesLFNormalizedPinnedGitBlob": true
+    },
+    {
+      "file": "src/gameplay-lab/GameplaySession.ts",
+      "sha256": "749b9b1612e97a4b9e0847ccb3bde34bb8e8f94afcb85edb4e96f86b0c3f236d",
+      "matchesLFNormalizedPinnedGitBlob": true
+    }
+  ],
+  "changedFiles": [
+    "docs/LIVING-FJORD-V06A.md",
+    "docs/characters/character-lab-clothing-restoration.md",
+    "src/character-lab/CharacterLabUI.ts",
+    "src/characters/AttachmentContract.ts",
+    "src/characters/CharacterPresentation.ts",
+    "src/characters/GridTrialOutfitCatalog.ts",
+    "src/characters/MeshyHuman.ts",
+    "src/characters/MeshyModuleRuntime.ts",
+    "src/characters/PreparedNativeOutfit.ts",
+    "src/fjord-play/FjordEntities.ts",
+    "src/fjord-play/FjordModels.ts",
+    "src/fjord-play/FjordWardrobe.ts",
+    "tests/fjord-clothing.test.mjs"
+  ],
+  "merged": [
+    {
+      "pr": 101,
+      "sha": "3610cc2"
+    },
+    {
+      "pr": 102,
+      "sha": "eefd91c"
+    },
+    {
+      "pr": 145,
+      "sha": "bec7765"
+    },
+    {
+      "pr": 158,
+      "sha": "bf5529f"
+    },
+    {
+      "pr": 160,
+      "sha": "6329910"
+    },
+    {
+      "pr": 162,
+      "sha": "e50d83e"
+    },
+    {
+      "pr": 164,
+      "sha": "eda52e1"
+    },
+    {
+      "pr": 165,
+      "sha": "b6681d1"
+    }
+  ],
+  "unmerged": [
+    {
+      "pr": 130,
+      "state": "open",
+      "recoveredInMergedPR": 162
+    }
+  ],
+  "trackingIssuesAreNotPRs": [
+    94,
+    95,
+    96,
+    137,
+    144,
+    157,
+    159
+  ]
+}

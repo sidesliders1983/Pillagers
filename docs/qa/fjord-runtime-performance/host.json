@@ -1,0 +1,84 @@
+{
+  "timestamp": "2026-10-15T08:02:23.5105673Z",
+  "os": {
+    "Caption": "Microsoft Windows 10 Pro",
+    "Version": "10.0.19045",
+    "TotalVisibleMemorySize": 16625404,
+    "FreePhysicalMemory": 3241260
+  },
+  "cpu": {
+    "Name": "Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz",
+    "NumberOfCores": 4,
+    "NumberOfLogicalProcessors": 8
+  },
+  "gpus": [
+    {
+      "Name": "NVIDIA GeForce GTX 1050",
+      "DriverVersion": "32.0.15.8278",
+      "CurrentHorizontalResolution": null,
+      "CurrentVerticalResolution": null
+    },
+    {
+      "Name": "Intel(R) HD Graphics 630",
+      "DriverVersion": "27.20.100.9664",
+      "CurrentHorizontalResolution": 1920,
+      "CurrentVerticalResolution": 1080
+    }
+  ],
+  "powerScheme": "Power Scheme GUID: 49ef8fc0-bb7f-488e-b6a0-f1fc77ec649b  (Dell)",
+  "battery": {
+    "BatteryStatus": 2,
+    "EstimatedChargeRemaining": 100
+  },
+  "sources": [
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "sha256": "63b0812e31a2650a5935283065e40eef77f5bf65466795e6c08cbbeaee6e50aa"
+    },
+    {
+      "path": "src/fjord-play/LivingWorldController.ts",
+      "sha256": "5ca2f94a87bdb97f0f4c297ce3136d7d874c4d71761d84cfcb1177f57b4d4184"
+    },
+    {
+      "path": "src/fjord-play/FjordEntities.ts",
+      "sha256": "8884451399357d1c23efed01fd4009226f706990787379c655c403a874cc3634"
+    },
+    {
+      "path": "src/fjord-play/FjordModels.ts",
+      "sha256": "5ce8df82b25a3922bbb8ec4ba86f93e0b618b77159b0519016f664bb805c429c"
+    },
+    {
+      "path": "src/characters/MeshyHuman.ts",
+      "sha256": "9a10583c613ad3b74e7f94109f2ea5483f21160f65518540ebaa944bb7cad38f"
+    },
+    {
+      "path": "src/simulation/SimulationCore.ts",
+      "sha256": "464d4460bc1aa355572c4a28c3f5b5967d3cdb6437c04700af4ce946d72b4761"
+    },
+    {
+      "path": "src/simulation/WorldExpeditions.ts",
+      "sha256": "c28c0eab60dfc7cb418db4465b213c5b77e7211bc2160b357736bca6ef7d2f55"
+    },
+    {
+      "path": "src/world/BlueprintTerrain.ts",
+      "sha256": "36aa45730c686deb28a476921727ce53e0a5a6f850f1d19f1453d44de6d973ac"
+    },
+    {
+      "path": "src/world/GroundBlending.ts",
+      "sha256": "defaaca158339f2541c4dbb211ade21c0a1fe33dc2d1f4d78ae430a21dd8e02e"
+    },
+    {
+      "path": "src/effects/CampfireEffect.ts",
+      "sha256": "f7a4debdd97b8c22300cd2cdd932572bd2263eb8cba307a57fa97841c91e72c3"
+    },
+    {
+      "path": "src/effects/PrecipitationEffect.ts",
+      "sha256": "3e3aecf76e76cd14a7d30ebadadd1801b711aa834eb29dbd8af8856b2a79df5b"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "b67279fc9fcc963817873e86fa580a48b5f86768e2cee61756d14a7feb21602d"
+    }
+  ],
+  "thermal": "Unmeasured; host is shared with the owner desktop. No temperature or GPU utilization telemetry collected."
+}
