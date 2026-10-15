@@ -139,7 +139,16 @@ test('Meshy skin follows DNA at 20% with independent uniforms and shared source 
  const materials=model=>{const values=[];model.root.traverse(node=>{if(node.isMesh)values.push(...(Array.isArray(node.material)?node.material:[node.material]));});return values;};
  const ma=materials(a)[0],mb=materials(b)[0];assert.equal(ma.map,mb.map);
  const shaderA={uniforms:{},fragmentShader:'#include <map_fragment>'},shaderB={uniforms:{},fragmentShader:'#include <map_fragment>'};ma.onBeforeCompile(shaderA);mb.onBeforeCompile(shaderB);
- assert.notEqual(shaderA.uniforms.pillagersSkinTone,shaderB.uniforms.pillagersSkinTone);assert.match(shaderA.fragmentShader,/blendedSkin=mix\(sourceSkin,.*0\.20\)/);
- const previousB=shaderB.uniforms.pillagersSkinTone.value.clone();a.applyDNA(other);assert.ok(shaderA.uniforms.pillagersSkinTone.value.equals(new Color(generatePhenotype(other).skinTone)));assert.ok(shaderB.uniforms.pillagersSkinTone.value.equals(previousB));assert.equal(a.root.userData.skinTint.strength,.2);
+ assert.notEqual(shaderA.uniforms.pillagersSkinTone,shaderB.uniforms.pillagersSkinTone);
+ assert.notEqual(shaderA.uniforms.pillagersSkinTintStrength,shaderB.uniforms.pillagersSkinTintStrength);
+ assert.equal(shaderA.uniforms.pillagersSkinTintStrength.value, .2);
+ assert.equal(shaderB.uniforms.pillagersSkinTintStrength.value, .2);
+ assert.match(shaderA.fragmentShader, /uniform float pillagersSkinTintStrength;/);
+ assert.match(shaderA.fragmentShader, /blendedSkin=mix\(sourceSkin,[^;]*,pillagersSkinTintStrength\)/);
+ // Native-source review has zero tint; it must not alter another resident's 20% shader.
+ a.sampleNativeNeutral();
+ assert.equal(shaderA.uniforms.pillagersSkinTintStrength.value, 0);
+ assert.equal(shaderB.uniforms.pillagersSkinTintStrength.value, .2);
+ const previousB=shaderB.uniforms.pillagersSkinTone.value.clone();a.applyDNA(other);assert.equal(shaderA.uniforms.pillagersSkinTintStrength.value,.2);assert.ok(shaderA.uniforms.pillagersSkinTone.value.equals(new Color(generatePhenotype(other).skinTone)));assert.ok(shaderB.uniforms.pillagersSkinTone.value.equals(previousB));assert.equal(a.root.userData.skinTint.strength,.2);
  a.dispose();b.dispose();
 });
