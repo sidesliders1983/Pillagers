@@ -8,10 +8,10 @@ await mkdir('artifacts/spatial-expeditions', { recursive: true });
 const entry = resolve('artifacts/spatial-expeditions/controls-entry.ts');
 await writeFile(entry, "export { ExpeditionPanel } from '../../src/fjord-play/ExpeditionPanel';\nexport { GameplaySession } from '../../src/gameplay-lab/GameplaySession';\nexport * as Core from '../../src/simulation/SimulationCore';\n");
 const bundle = await build({
-configFile: false, logLevel: 'silent', build: {
-write: false, minify: false,
+    configFile: false, logLevel: 'silent', build: {
+        write: false, minify: false,
         lib: { entry, name: 'ExpeditionControls', formats: ['iife'] }, outDir: 'artifacts/spatial-expeditions/controls-build'
-}
+    }
 });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 try {
@@ -48,17 +48,26 @@ waterLevel: -1, terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: A
         session.bindPhysicalWorld(world, 'controls-target-fixture');
         session.command({ type: 'CreateExpeditionGroup', name: 'Group 1', memberIds: ['founder-1'] });
         let marker;
-        const panel = new ExpeditionPanel(document.querySelector('#groups'), session,
-            command => session.command(command), point => marker = point, () => null, () => ({ 'founder-1': { x: 16, z: 64 } }));
+        let panel;
+        panel = new ExpeditionPanel(document.querySelector('#groups'), session,
+            command => { session.command(command); panel.committed(command.type === 'ExploreArea'); },
+            point => marker = point, () => null, () => ({ 'founder-1': { x: 16, z: 64 } }));
         panel.refresh();
         document.querySelector('[data-explore]').click();
+        const before = session.saveJSON();
+        panel.chooseTarget({ x: 300, z: 64 });
+        const rejectedUntouched = session.saveJSON() === before, rejectedStillChoosing = panel.targeting;
         panel.chooseTarget({ x: 216, z: 64 });
         const status = document.querySelector('#expedition-status').textContent;
-        document.querySelector('#expedition-confirm').click();
-        return { marker, status, target: session.readSnapshot().world.spatial.missions['explore-1'].target };
+        const mission = session.readSnapshot().world.spatial?.missions['explore-1'];
+        return { marker, status, rejectedUntouched, rejectedStillChoosing, autoSent: !!mission, confirmationControl: !!document.querySelector('#expedition-confirm'), target: mission?.target };
     });
+    assert.equal(targeting.rejectedUntouched, true, 'A rejected tap does not charge provisions or create a mission');
+    assert.equal(targeting.rejectedStillChoosing, true, 'A rejected tap lets the player choose another spot');
+    assert.equal(targeting.autoSent, true, 'One destination tap immediately sends the group');
+    assert.equal(targeting.confirmationControl, false, 'No redundant confirmation control');
     assert.deepEqual(targeting.marker, { x: 216, z: 56 }, 'The objective marker shows the actual accepted destination');
-    assert.match(targeting.status, /nearby walkable ground/i);
+
     assert.deepEqual(targeting.target, targeting.marker, 'Confirmation dispatches to the marked safe point');
     console.log('Adjusted destination, visible marker and confirmed Core journey agree.');
 } finally { await browser.close(); }

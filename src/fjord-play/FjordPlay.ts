@@ -43,6 +43,8 @@ import { inspectCampfire, inspectWeatherExposure } from '../simulation/Simulatio
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
+
+const campaignClockIntervalMs = 500;
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
 export class FjordPlay {
     private opened!: ReturnType<typeof openSettlement>;
@@ -556,7 +558,7 @@ export class FjordPlay {
         expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
             this.session, command => action(() => {
                 this.session.command(command);
-                expeditions!.committed();
+                expeditions!.committed(command.type === 'ExploreArea');
             }), point => {
                 targetMarker.visible = !!point;
                 if (!point && expeditions?.targeting) showManagement(false);
@@ -884,7 +886,7 @@ export class FjordPlay {
                             }
                         }
                     sceneEntities = view.entities;
-                    layer!.prepareExpeditions(state, this.campaign.blueprint);
+                    layer!.prepareExpeditions(state, this.campaign.blueprint, campaignClockIntervalMs / 1000);
                     await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
                     campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
@@ -1102,7 +1104,7 @@ export class FjordPlay {
         canvas.dataset.ready = 'true';
         trace.record('scene-ready');
         previous = performance.now();
-        timer = window.setInterval(tickClock, 500);
+        timer = window.setInterval(tickClock, campaignClockIntervalMs);
         document.querySelector<HTMLButtonElement>('#fjord-export')!.disabled = false;
         say('Fjord ready. Desktop: left-click to select (empty ground clears selection), left-drag to pan, right-drag to rotate, wheel to zoom. Touch: tap empty ground to navigate, drag to rotate, pinch to zoom.');
     }

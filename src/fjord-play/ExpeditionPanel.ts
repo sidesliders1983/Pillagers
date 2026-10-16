@@ -11,8 +11,7 @@ export class ExpeditionPanel {
     private groupId = '';
     private controlsHTML = '';
     private choosing = false;
-    private pending?: Point2;
-    private quotedCost?: number;
+    private showingDestination = false;
     constructor(private root: HTMLElement, private session: GameplaySession,
         private command: (command: SimulationCommand) => void,
         private targetChanged: (point?: Point2) => void,
@@ -21,7 +20,6 @@ export class ExpeditionPanel {
         root.innerHTML = '<div id="expedition-controls"></div>' +
             '<p id="expedition-status" role="status" aria-live="polite"></p>' +
             '<div id="expedition-proposal" hidden><p id="expedition-estimate"></p>' +
-            '<button id="expedition-confirm" type="button">Send group</button>' +
             '<button id="expedition-cancel" type="button">Cancel target</button></div>';
         root.addEventListener('click', event => {
             const button = (event.target as Element).closest<HTMLButtonElement>('button');
@@ -29,11 +27,10 @@ export class ExpeditionPanel {
             if (button.id === 'expedition-create') this.command({ type: 'CreateExplorationGroup' });
             if (button.dataset.explore) {
                 this.groupId = button.dataset.explore;
-                this.choosing = true; this.pending = undefined; this.targetChanged();
-                this.root.querySelector('#expedition-estimate')!.textContent = '';
-                this.status.textContent = 'Tap a land destination. Drag and pinch still control the camera.';
+                this.choosing = true; this.targetChanged();
+                this.root.querySelector('#expedition-estimate')!.textContent = 'Food is packed for the whole trip; the cost depends on distance. Recalling the group does not refund Food.';
+                this.status.textContent = 'Tap a land destination to send the group. Drag and pinch still control the camera.';
                 this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = false;
-                this.root.querySelector<HTMLButtonElement>('#expedition-confirm')!.disabled = true;
             }
             if (button.dataset.recall)
                 this.command({ type: 'RecallExpedition', groupId: button.dataset.recall });
@@ -46,57 +43,45 @@ export class ExpeditionPanel {
                         included: !button.dataset.remove
                     });
             }
-            if (button.id === 'expedition-confirm' && this.pending) {
-                try {
-                    const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
-                    const origins = this.origins(members);
-                    const offer = this.session.exploreOffer(this.groupId, this.pending, origins);
-                    if (offer.foodCost !== this.quotedCost) {
-                        this.showOffer(offer);
-                        this.status.textContent = 'The journey estimate changed as residents moved. Confirm the updated provisions.';
-                        return;
-                    }
-                    this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...this.pending }, origins });
-                } catch (error) {
-                    this.status.textContent = error instanceof Error ? error.message : String(error);
-                }
-            }
             if (button.id === 'expedition-cancel') this.cancelTarget();
         });
     }
     private get status() { return this.root.querySelector<HTMLElement>('#expedition-status')!; }
     get targeting() { return this.choosing; }
     cancelTarget() {
-        this.choosing = false; this.pending = undefined; this.quotedCost = undefined; this.targetChanged();
+        this.choosing = false; this.showingDestination = false; this.targetChanged();
         this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = true;
         this.status.textContent = '';
     }
-    committed() {
-        this.cancelTarget(); this.refresh();
+    committed(dispatched = false) {
+        this.cancelTarget();
+        if (dispatched) {
+            const mission = inspectSpatialExpeditions(this.session.readSnapshot()).missions
+                .find(m => m.groupId === this.groupId && m.status !== 'Returned');
+            if (mission) {
+                this.showingDestination = true;
+                this.targetChanged(mission.target);
+            }
+        }
+        this.refresh();
         const last = this.root.querySelectorAll<HTMLDetailsElement>('details[data-group]');
         if (last.length) last[last.length - 1].open = true;
-    }
-    private showOffer(offer: { plannedTicks: number; foodCost: number; members: number }) {
-        this.quotedCost = offer.foodCost;
-        this.root.querySelector('#expedition-estimate')!.textContent =
-            'Planned round trip: about ' + offer.plannedTicks + ' ticks · ' + offer.foodCost + ' Food for ' + offer.members +
-            ' members. Includes return provisions and waiting for the group. No refund on recall. Automatic return.';
     }
     chooseTarget(point: Point2) {
         if (!this.choosing) return false;
         try {
             const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
-            const offer = this.session.exploreOffer(this.groupId, point, this.origins(members));
-            this.pending = { ...offer.target }; this.targetChanged(offer.target); this.showOffer(offer);
-            this.root.querySelector<HTMLButtonElement>('#expedition-confirm')!.disabled = false;
-            this.status.textContent = offer.adjusted ?
-                'Destination adjusted to nearby walkable ground. Review the marker before sending the group.' :
-                'Destination selected. Send the group from their current positions.';
+            const origins = this.origins(members);
+            const offer = this.session.exploreOffer(this.groupId, point, origins);
+            this.targetChanged(offer.target);
+            this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
+            this.choosing = false;
+            this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = true;
+            this.status.textContent = (offer.adjusted ? 'Group sent to nearby walkable ground. ' : 'Group sent. ') +
+                offer.foodCost + ' Food packed for the whole trip.';
         } catch (error) {
-            this.pending = undefined; this.targetChanged();
-            this.root.querySelector('#expedition-estimate')!.textContent = '';
-            this.root.querySelector<HTMLButtonElement>('#expedition-confirm')!.disabled = true;
-            this.status.textContent = String(error);
+            this.targetChanged();
+            this.status.textContent = error instanceof Error ? error.message : String(error);
         }
         return true;
     }
@@ -145,6 +130,10 @@ export class ExpeditionPanel {
         }
         this.root.hidden = !html && !this.choosing;
         if (this.groupId && !state.world?.groups[this.groupId]) this.cancelTarget();
+        if (this.showingDestination && !inspectSpatialExpeditions(state).missions.some(m =>
+            m.groupId === this.groupId && m.status !== 'Returned')) {
+            this.showingDestination = false; this.targetChanged();
+        }
         if (!this.choosing) this.status.textContent = !state.discovery && !selected ?
             'Exploration is available in discovery prototype campaigns.' : '';
     }

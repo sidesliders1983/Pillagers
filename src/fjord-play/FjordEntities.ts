@@ -21,8 +21,8 @@ export class FjordEntities {
     }>();
     private expeditionSurface?: TerrainSurface;
     private expeditionWorld?: WorldBlueprint;
-    private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number }>();
-    prepareExpeditions(state: SimulationState, world: WorldBlueprint) {
+    private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number; duration: number }>();
+    prepareExpeditions(state: SimulationState, world: WorldBlueprint, updateIntervalSeconds = .5) {
         if (this.expeditionWorld !== world) {
             this.expeditionWorld = world;
             this.expeditionSurface = createBlueprintSurface(world);
@@ -34,17 +34,19 @@ export class FjordEntities {
         for (const mission of active) {
             const previous = this.expeditionFrames.get(mission.id);
             if (previous?.mission === mission) continue;
-            const ratio = previous ? Math.min(1, previous.elapsed/.18) : 1;
-            const from = previous ? previous.from+(previous.mission.travelled-previous.from)*ratio : mission.travelled;
-            this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0 });
+            const ratio = previous ? Math.min(1, previous.elapsed / previous.duration) : 1;
+            const from = previous ? previous.from + (previous.mission.travelled - previous.from) * ratio : mission.travelled;
+            // Spread a coalesced Core update across its actual cadence, instead of one 180ms tick.
+            const duration = Math.min(1, Math.max(updateIntervalSeconds, previous?.elapsed ?? updateIntervalSeconds));
+            this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0, duration });
         }
     }
     private expeditionPose(missionId: string, personaId: string) {
         const frame = this.expeditionFrames.get(missionId);
         if (!frame) return;
-        const travelled = frame.from+(frame.mission.travelled-frame.from)*Math.min(1,frame.elapsed/.18);
+        const travelled = frame.from + (frame.mission.travelled - frame.from) * Math.min(1, frame.elapsed / frame.duration);
         const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId);
-        return { ...point, y: this.expeditionSurface!.surfaceHeightAt(point.x,point.z) };
+        return { ...point, y: this.expeditionSurface!.surfaceHeightAt(point.x, point.z) };
     }
     private disposed = false;
     private seasonProgress: number | null = null;
@@ -105,8 +107,10 @@ export class FjordEntities {
             const color = marker.role === 'selected' ? '#ffdf6a' : '#79e0ed';
             entry.mesh.material.color.set(color);
             entry.mesh.position.set(center.x, box.min.y + .04, center.z);
-            descriptions.push({ ...marker, color, fill: 'transparent', radius,
-                position: entry.mesh.position.toArray(), anchor: [center.x, box.max.y + .4, center.z] });
+            descriptions.push({
+                ...marker, color, fill: 'transparent', radius,
+                position: entry.mesh.position.toArray(), anchor: [center.x, box.max.y + .4, center.z]
+            });
         }
         this.root.userData.markers = descriptions;
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
@@ -206,8 +210,10 @@ export class FjordEntities {
                 for (const py of [bounds.min.y, bounds.max.y])
                     for (const pz of [bounds.min.z, bounds.max.z]) {
                         const p = new Vector3(px, py, pz).project(camera);
-                        points.push({ x: viewport.left + (p.x + 1) * viewport.width / 2,
-                            y: viewport.top + (1 - p.y) * viewport.height / 2 });
+                        points.push({
+                            x: viewport.left + (p.x + 1) * viewport.width / 2,
+                            y: viewport.top + (1 - p.y) * viewport.height / 2
+                        });
                     }
             const minX = Math.min(...points.map(p => p.x)), maxX = Math.max(...points.map(p => p.x));
             const minY = Math.min(...points.map(p => p.y)), maxY = Math.max(...points.map(p => p.y));
@@ -246,8 +252,10 @@ export class FjordEntities {
             let sampler = this.yardSamplers.get(canonical.assignment);
             if (!sampler || sampler.signature !== yardVersion) {
                 const house = farm.getObjectByName(farm.userData.asset);
-                sampler = { signature: yardVersion,
-                    sample: createFjordYardSurface(yard, house, farm.position.y) };
+                sampler = {
+                    signature: yardVersion,
+                    sample: createFjordYardSurface(yard, house, farm.position.y)
+                };
                 this.yardSamplers.set(canonical.assignment, sampler);
             }
             const clearance = canonical.stage === 'Young' ? .5 :
@@ -262,7 +270,7 @@ export class FjordEntities {
             const facts = entry.model.userData.canonical;
             if (facts?.expedition) {
                 const pose = this.expeditionPose(facts.expedition, facts.id);
-                if (pose) { entry.model.position.set(pose.x,pose.y,pose.z); entry.model.rotation.y = pose.rotation; }
+                if (pose) { entry.model.position.set(pose.x, pose.y, pose.z); entry.model.rotation.y = pose.rotation; }
                 this.models.animate(entry.model, pose?.moving ? 'Run' : 'Idle', 1, running ? delta : 0);
             }
         }

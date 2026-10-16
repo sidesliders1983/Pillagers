@@ -75,17 +75,6 @@ try {
     }, points);
     const viewMatrix = new Matrix4().fromArray(target.camera.world).invert();
     const projection = new Matrix4().fromArray(target.camera.projection);
-    const fire = await page.evaluate(() => JSON.parse(document.querySelector('#fjord-canvas').dataset.entities)
-        .find(entity=>entity.kind==='campfire').transform);
-    const fireScreen = new Vector3(fire.x,fire.y,fire.z).applyMatrix4(viewMatrix).applyMatrix4(projection);
-    await page.touchscreen.tap(target.rect.left+(fireScreen.x+1)*target.rect.width/2,
-        target.rect.top+(1-fireScreen.y)*target.rect.height/2);
-    assert.match(await page.locator('#expedition-status').innerText(),/nearby walkable ground/i,
-        'A touch on the reserved middle place proposes safe nearby ground instead of the reported route error');
-    await page.locator('#expedition-confirm:enabled').waitFor();
-    await page.screenshot({path:'artifacts/spatial-expeditions/adjusted-target.png'});
-    await page.locator('#expedition-cancel').tap();
-    await page.locator('[data-explore="group-1"]').tap();
     const candidates = points.filter(p => discoveryAt(view,p.x,p.z) === 'unknown')
         .map(p => {
             const col = Math.round((p.x-fixture.terrain.bounds.minX)/fixture.terrain.spacing);
@@ -101,17 +90,16 @@ try {
     assert.ok(candidates.length, 'An unknown accessible route point can be targeted from the real camera');
     const goal = candidates[0];
     console.log('Target', JSON.stringify(goal));
+    const departure = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-rendered'));
     await page.touchscreen.tap(goal.screenX,goal.screenY);
     console.log('Target response:', await page.locator('#expedition-status').innerText());
-    await page.locator('#expedition-confirm:enabled').waitFor();
-    await page.locator('#expedition-confirm').scrollIntoViewIfNeeded();
-    await page.screenshot({ path: 'artifacts/spatial-expeditions/proposal.png' });
-    const departure = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-rendered'));
-    await page.locator('#expedition-confirm').tap();
+    assert.equal(await page.locator('#expedition-confirm').count(),0,'A destination tap is the only send action');
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial);
     console.log('Dispatched.');
     const dispatched = await saved();
     assert.deepEqual(dispatched.fjord.campaign.discovery, original.fjord.campaign.discovery);
+    assert.equal(original.fjord.campaign.stocks.food-dispatched.fjord.campaign.stocks.food,
+        dispatched.fjord.campaign.world.spatial.missions['explore-1'].foodCost,'One tap charges provisions exactly once');
     const departureMission=dispatched.fjord.campaign.world.spatial.missions['explore-1'];
     assert.deepEqual(departureMission.memberIds,memberIds);
     for (const id of memberIds) {
@@ -121,6 +109,7 @@ try {
             'Every route starts at the real body, without campfire teleportation');
     }
     await page.screenshot({path:'artifacts/spatial-expeditions/departure.png'});
+    await page.screenshot({path:'artifacts/spatial-expeditions/direct-dispatch.png'});
     await page.locator('#fjord-run').tap();
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
         .fjord.campaign.world.spatial.missions['explore-1'].travelled >= 90);
@@ -182,9 +171,9 @@ try {
         .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returned');
     assert.deepEqual(errors, []);
     const sourceHashes = {};
-    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts'])
+    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts'])
         sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
-    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
+    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
         runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group flow passed; '+(recallRequested ? 'recall requested.' : 'automatic return already underway.'));
 } finally { await browser.close(); }
