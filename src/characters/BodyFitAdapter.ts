@@ -31,12 +31,24 @@ export interface BodyFitAdapter {
  socketFrame(name:SocketName):RigidFrame & {scale:readonly [number,number,number]};
  refit():void;
 }
+export interface NativeHairRigBinding {
+ version: 1;
+ headJoint: number;
+ backJoint: number;
+ bones: {name: string; position: [number, number, number]}[];
+ /** Measured back envelope including braid radius and clothing clearance. */
+ rearProfile: [number, number][];
+ radius: number;
+ clearance: number;
+ fixedColor: {color: string; vertices: number[]};
+}
 export interface ModuleBindingV2 {
  version:typeof bodyFitVersion;id:string;moduleSha256:string;rigSignature:string;
  recipe:{id:string;version:number;blender:string};
  coordinateFrame:{up:'+Y';front:'+Z';unit:'metre';origin:'Meshy source bind'};
  construction:'bilateral'|'intentional-asymmetry';
- skinning?:'authored-four-native'|'rigid-native-head'|'surface-barycentric-native';reviewScope?:string;
+ skinning?:'authored-four-native'|'rigid-native-head'|'surface-barycentric-native'|'secondary-hair-chain';reviewScope?:string;
+ hairRig?: NativeHairRigBinding;
  materialPolicy?:{kind:'provider-original';provider:'Meshy';sourceSha256:string;reviewOnly:true};
  /** Explicit Lab appearance change; cached provider materials and textures remain intact. */
  appearanceOverride?: {kind: 'solid'; color: string; vertexColors?: boolean};

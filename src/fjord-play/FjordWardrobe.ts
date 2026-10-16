@@ -22,12 +22,19 @@ export function fjordClothingSet(entity: Pick<FjordEntity, 'kind' | 'dna' | 'sta
     return entity.dna.sex === 'female' ? 'farmerFemale' : 'farmerMale';
 }
 
-/** Owner-approved short styles use a separate visual seed stream, independent of occupation. */
-export const fjordHairAssets = ['hair/manual-fitted-short', 'hair/manual-fitted-short2'] as const;
+export const fjordShortHairAssets = ['hair/manual-fitted-short', 'hair/manual-fitted-short2'] as const;
+export const fjordHairAssets = [...fjordShortHairAssets,
+    'hair/manual-long-braided', 'hair/manual-long-2'] as const;
+
+/** Approved adult styles use a visual seed stream independent of sex and occupation. */
 export function fjordHairAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): string {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 6) return 'none';
-    const variant = Math.floor(identitySample(entity.dna.seed, 'fjord.hair.short.variant') * fjordHairAssets.length);
-    return fjordHairAssets[variant];
+    // Long hair has adult-only source bindings. Preserve children's existing short variants.
+    const adult = entity.dna.age >= 18;
+    const assets = adult ? fjordHairAssets : fjordShortHairAssets;
+    const stream = adult ? 'fjord.hair.adult.variant' : 'fjord.hair.short.variant';
+    const variant = Math.floor(identitySample(entity.dna.seed, stream) * assets.length);
+    return assets[variant];
 }
 
 interface WardrobeState {

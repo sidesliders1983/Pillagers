@@ -6,7 +6,8 @@ import {MeshoptDecoder} from 'three/addons/libs/meshopt_decoder.module.js';
 import {Vector3} from 'three';
 import {load} from './load-source.mjs';
 
-const {FjordWardrobe, fjordClothingSet, fjordClothingSets, fjordHairAsset, fjordHairAssets} = load('../src/fjord-play/FjordWardrobe.ts');
+const {FjordWardrobe, fjordClothingSet, fjordClothingSets, fjordHairAsset, fjordHairAssets,
+    fjordShortHairAssets} = load('../src/fjord-play/FjordWardrobe.ts');
 const {MeshyHumanFactory} = load('../src/characters/MeshyHuman.ts');
 const {defaultDNA} = load('../src/characters/CharacterDNA.ts');
 const {parseCharacterPresentation} = load('../src/characters/CharacterPresentation.ts');
@@ -48,8 +49,14 @@ function expectSet(human, set, ids) {
     const expected = hair === 'none' ? ids : [...ids, hair];
     assert.deepEqual([...human.fit.modules.keys()].sort(), expected.slice().sort());
     assert.equal(human.root.userData.clothingSet.assets.hair, hair === 'none' ? null : hair);
-    for (const group of human.fit.modules.values()) {
-        for (const mesh of group.children) assert.equal(mesh.skeleton, human.fit.nativeSkeleton);
+    for (const [id, group] of human.fit.modules) {
+        for (const mesh of group.children) {
+            if (id === 'hair/manual-long-braided') {
+                assert.equal(mesh.skeleton.bones.length, 50);
+                human.fit.nativeSkeleton.bones.forEach((bone, index) =>
+                    assert.equal(mesh.skeleton.bones[index], bone));
+            } else assert.equal(mesh.skeleton, human.fit.nativeSkeleton);
+        }
     }
 }
 
@@ -212,12 +219,73 @@ test('approved hair variants are stable across occupation, sex and age without c
         assert.deepEqual(person, before);
         assert.equal(fjordHairAsset({...person, status: {...person.status, occupation: 'farmer'}}), selected);
         assert.equal(fjordHairAsset({...person, dna: {...person.dna, sex: 'female', age: 85}}), selected);
-        assert.equal(fjordHairAsset({...person, dna: {...person.dna, age: 6}}), selected);
+        assert.equal(fjordHairAsset({...person, dna: {...person.dna, age: 18}}), selected);
     }
-    assert.equal(variants.size, 2);
+    assert.equal(variants.size, 4);
     assert.equal(fjordHairAsset({...entity(), dna: undefined}), 'none');
     assert.equal(fjordHairAsset({...entity(), kind: 'cattle'}), 'none');
     assert.equal(fjordHairAsset(entity(null, 'male', 5)), 'none');
+});
+
+test('children keep the existing short-hair selection until adult bindings become eligible', () => {
+    const {identitySample} = load('../src/characters/seededRandom.ts');
+    for (let seed = 0; seed < 40; seed++) {
+        const person = entity(null, 'male', 6);
+        person.dna.seed = seed;
+        const previous = fjordShortHairAssets[Math.floor(identitySample(seed, 'fjord.hair.short.variant') * 2)];
+        for (const age of [6, 12, 17]) {
+            assert.equal(fjordHairAsset({...person, dna: {...person.dna, age}}), previous);
+        }
+    }
+});
+
+test('both long hairstyles equip on world residents across generic and farmer sets and survive aging', async () => {
+    const owner = fixture();
+    const human = await owner.factory.createWorld(adult);
+    human.root.position.set(21, 3, -18);
+    human.root.rotation.y = .7;
+    try {
+        for (const hair of ['hair/manual-long-braided', 'hair/manual-long-2']) {
+            const person = entity();
+            while (fjordHairAsset(person) !== hair) person.dna.seed++;
+            for (const [occupation, sex, set, garments] of [
+                [null, 'male', 'generic', [tunic, low]],
+                ['farmer', 'female', 'farmerFemale', [skirt, low]],
+                ['farmer', 'male', 'farmerMale', [shorts, high]],
+            ]) {
+                person.status.occupation = occupation;
+                person.dna.sex = sex;
+                human.applyDNA(person.dna);
+                await owner.wardrobe.reconcile(human, person);
+                expectSet(human, set, garments);
+                assert.equal(human.root.userData.selectedAssets.hair, hair);
+                const mesh = human.fit.modules.get(hair).children[0];
+                for (const [clip, time] of [['Idle_02', .6], ['Walking', .3], ['Walking', .8]]) {
+                    human.sampleAnimation(clip, time);
+                    human.root.updateMatrixWorld(true);
+                    const head = human.fit.nativeSkeleton.bones[5].getWorldPosition(new Vector3());
+                    for (let vertex = 0; vertex < mesh.geometry.attributes.position.count; vertex += 19) {
+                        const point = mesh.localToWorld(mesh.getVertexPosition(vertex, new Vector3()));
+                        assert.ok(point.toArray().every(Number.isFinite));
+                        assert.ok(point.distanceTo(head) < .9, hair + ' detached from its translated resident');
+                    }
+                }
+                const loads = owner.requests.length;
+                const fitRuns = human.modules.fitRuns;
+                await owner.wardrobe.reconcile(human, person);
+                assert.equal(owner.requests.length, loads);
+                assert.equal(human.modules.fitRuns, fitRuns);
+            }
+            const young = {...person, dna: {...person.dna, age: 17}};
+            human.applyDNA(young.dna);
+            await owner.wardrobe.reconcile(human, young);
+            expectSet(human, 'native', []);
+            assert.ok(fjordShortHairAssets.includes(human.root.userData.selectedAssets.hair));
+            assert.equal(human.fit.nativeSkeleton.bones.length, 44);
+            assert.ok(!human.fit.nativeSkeleton.bones[5].children.some(bone => bone.name.startsWith('Hair_')));
+        }
+        assert.deepEqual(owner.diagnostics, []);
+    } finally {human.dispose();}
 });
 
 test('changing resident DNA on the same model updates its hair variant and retains outfit caching', async () => {

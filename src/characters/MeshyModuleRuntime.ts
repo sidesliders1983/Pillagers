@@ -5,6 +5,7 @@ import {
 import type {GLTF} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshyBodyFitAdapter, anchorPoint} from './MeshyBodyFitAdapter';
 import {ModuleBindingV2} from './BodyFitAdapter';
+import {NativeHairRig} from './NativeHairRig';
 import {maskedBodyGeometry} from './BodyCoverage';
 import {sewModuleOpenings, weldModuleOpeningCorners} from './ModuleRims';
 import {CharacterAsset, assetMeasurement} from './CharacterAssets';
@@ -13,7 +14,7 @@ import {validatePreparedOutfit, preparedCoverage, preparedCoverageMaterial, prep
 
 export interface NativeModuleSource {asset: CharacterAsset; source: GLTF; binding: ModuleBindingV2;}
 interface ModulePart {original: Mesh; mesh: Mesh; start: number; count: number;}
-interface ModuleRecord {source: NativeModuleSource; group: Group; parts: ModulePart[];}
+interface ModuleRecord {source: NativeModuleSource; group: Group; parts: ModulePart[]; hairRig?: NativeHairRig;}
 
 function fail(ok: unknown, message: string): asserts ok {
  if (!ok) throw new Error(message);
@@ -64,6 +65,27 @@ export function validateNativeModule(source: NativeModuleSource, fit: MeshyBodyF
   validatePreparedOutfit(source, fit);
   return;
  }
+ const hairRig = binding.hairRig;
+ if (hairRig) {
+  fail(asset.type === 'hair' && binding.skinning === 'secondary-hair-chain' && !binding.dependency
+   && hairRig.version === 1 && hairRig.headJoint === 5 && hairRig.backJoint === 3,
+  'Hair chains require their exact native Head and Spine2 parents');
+  fail(hairRig.bones.length >= 2 && hairRig.bones.length <= 12
+   && new Set(hairRig.bones.map(bone => bone.name)).size === hairRig.bones.length
+   && hairRig.bones.every((bone, i) => /^Hair_[A-Za-z0-9_]+$/.test(bone.name)
+    && bone.position.length === 3 && bone.position.every(Number.isFinite)
+    && (i === 0 || new Vector3(...bone.position).distanceTo(new Vector3(...hairRig.bones[i - 1].position)) > .001)),
+  'Invalid owned hair chain');
+  fail(hairRig.rearProfile.length >= 2 && hairRig.rearProfile.every((row, i) => row.length === 2
+   && row.every(Number.isFinite) && (i === 0 || row[0] > hairRig.rearProfile[i - 1][0]))
+   && Number.isFinite(hairRig.radius) && hairRig.radius > 0 && hairRig.radius < .1
+   && Number.isFinite(hairRig.clearance) && hairRig.clearance >= 0 && hairRig.clearance < .1,
+  'Invalid source-bound braid clearance');
+  fail(/^#[a-fA-F0-9]{6}$/.test(hairRig.fixedColor.color)
+   && hairRig.fixedColor.vertices.length > 0
+   && new Set(hairRig.fixedColor.vertices).size === hairRig.fixedColor.vertices.length,
+  'Invalid fixed hair accessory colour');
+ } else fail(binding.skinning !== 'secondary-hair-chain', 'Hair chain binding is missing');
  const provider = providerOriginal(binding);
  if (binding.materialPolicy !== undefined) {
   const policy = binding.materialPolicy;
@@ -124,10 +146,12 @@ export function validateNativeModule(source: NativeModuleSource, fit: MeshyBodyF
  for (const anchor of lod.anchors) anchorPoint(fit.source, anchor);
  fail(lod.weights.length === lod.anchors.length && lod.weights.every(value =>
   value.joints.length === 4 && value.weights.length === 4
-  && value.joints.every(joint => Number.isInteger(joint) && joint >= 0 && joint < 44)
+  && value.joints.every(joint => Number.isInteger(joint) && joint >= 0 && joint < 44 + (hairRig?.bones.length ?? 0))
   && value.weights.every(weight => Number.isFinite(weight) && weight >= 0 && weight <= 1)
   && Math.abs(value.weights.reduce((a, b) => a + b, 0) - 1) < .00001),
  'Invalid source-bound native weights');
+ if (hairRig) fail(hairRig.fixedColor.vertices.every(vertex =>
+  Number.isInteger(vertex) && vertex >= 0 && vertex < count), 'Invalid fixed-colour vertex range');
  const groups = Object.values(binding.regions ?? {});
  const known = new Set(groups.flatMap(region => [...region.contact, ...region.free]));
  fail(known.size === count && [...known].every(value =>
@@ -219,7 +243,8 @@ export class MeshyModuleRuntime {
     return part;
    });
    this.fit.bodyRoot.add(group);
-   this.records.set(asset.id, {source, group, parts});
+   this.records.set(asset.id, {source, group, parts,
+    hairRig: binding.hairRig ? new NativeHairRig(this.fit, binding.hairRig) : undefined});
    this.fit.modules.set(asset.id, group);
   }
   this.refit(profile);
@@ -284,7 +309,7 @@ export class MeshyModuleRuntime {
    }
    mesh.geometry.applyMatrix4(inverseEncoding);
    const skin = mesh as SkinnedMesh;
-   skin.bind(this.fit.nativeSkeleton, this.fit.mesh.bindMatrix);
+   skin.bind(record.hairRig?.skeleton ?? this.fit.nativeSkeleton, this.fit.mesh.bindMatrix);
    skin.bindMatrixInverse.copy(this.fit.mesh.bindMatrixInverse);
    mesh.geometry.computeBoundingSphere();
    return;
@@ -305,7 +330,7 @@ export class MeshyModuleRuntime {
   mesh.geometry.setAttribute('skinIndex', new BufferAttribute(joints, 4));
   mesh.geometry.setAttribute('skinWeight', new BufferAttribute(weights, 4));
   const skin = mesh as SkinnedMesh;
-  skin.bind(this.fit.nativeSkeleton, this.fit.mesh.bindMatrix);
+  skin.bind(record.hairRig?.skeleton ?? this.fit.nativeSkeleton, this.fit.mesh.bindMatrix);
   skin.bindMatrixInverse.copy(this.fit.mesh.bindMatrixInverse);
   if (providerOriginal(source.binding)) {
    // The binder emits source-metre normals. Positions and normals enter the same
@@ -329,7 +354,13 @@ export class MeshyModuleRuntime {
    if (source.asset.type === 'hair' || source.asset.type === 'beard') {
     const color = mesh.geometry.getAttribute('color');
     const selected = new Color(profile.appearance.color);
-    for (let vertex = 0; vertex < color.count; vertex++) color.setXYZ(vertex, selected.r, selected.g, selected.b);
+    const fixed = source.binding.hairRig?.fixedColor;
+    const retained = new Set(fixed?.vertices ?? []);
+    const leather = fixed ? new Color(fixed.color) : selected;
+    for (let vertex = 0; vertex < color.count; vertex++) {
+     const value = retained.has(start + vertex) ? leather : selected;
+     color.setXYZ(vertex, value.r, value.g, value.b);
+    }
     color.needsUpdate = true;
    }
   }
@@ -385,6 +416,10 @@ export class MeshyModuleRuntime {
    }
   }
   this.fit.rootForModulesUpdate();
+  const garments = [...this.records.values()].filter(record => record.source.asset.type === 'garment')
+   .flatMap(record => record.parts.map(part => part.mesh).filter((mesh): mesh is SkinnedMesh => (mesh as SkinnedMesh).isSkinnedMesh));
+  for (const record of this.records.values()) record.hairRig?.configureClearance(garments);
+  this.poseHair();
   for (const [id, record] of [...this.records]) {
    if (record.source.binding.dependency) this.attachDependency(id, record);
   }
@@ -454,6 +489,10 @@ export class MeshyModuleRuntime {
   this.lastFitMilliseconds = performance.now() - started;
  }
 
+ poseHair() {
+  for (const record of this.records.values()) record.hairRig?.pose();
+ }
+
  private restoreMask() {
   if (this.originalBodyMaterial) this.fit.mesh.material = this.originalBodyMaterial;
   this.originalBodyMaterial = null;
@@ -469,6 +508,7 @@ export class MeshyModuleRuntime {
  private remove(id: string) {
   const record = this.records.get(id);
   if (!record) return;
+  record.hairRig?.dispose();
   record.group.removeFromParent();
   const materials = new Set<Material>();
   for (const {mesh} of record.parts) {
@@ -492,6 +532,7 @@ export class MeshyModuleRuntime {
   return {
    bindings: [...this.records.values()].map(record => ({
     id: record.source.asset.id, ...record.source.asset.metadata!.nativeBinding,
+    ...(record.hairRig ? {hairRig: record.hairRig.inspect()} : {}),
     ...(record.source.binding.materialPolicy ? {
      materialPolicy: {...record.source.binding.materialPolicy},
      meshes: record.parts.map(part => ({mesh: part.mesh.name, start: part.start, count: part.count})),

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "route": "manual-long-hair",
+  "source": {
+    "path": "Assets/Characters/Human/Manual-Fitting/Long-hair-2.glb",
+    "sha256": "b2e910562be587a1afcee9c14feb33ec1fc8cd9fb6a0765397d0b79490115865",
+    "bytes": 29451876,
+    "nodeTransform": [
+      0.20619210600852966,
+      0,
+      0,
+      0,
+      0,
+      0.20619210600852966,
+      0,
+      0,
+      0,
+      0,
+      0.20619210600852966,
+      0,
+      0,
+      1.4768024682998657,
+      -0.01951499842107296,
+      1
+    ]
+  },
+  "output": {
+    "sha256": "4d9b26798bf511c5141a93abd2c73e9d4ca02b2ccb92daa53e0146b35ae4afe6",
+    "triangles": 5742,
+    "materials": 1,
+    "bytes": 358692,
+    "bounds": {
+      "min": [
+        -0.1616024358022159,
+        1.3051259012778278,
+        -0.15233959572411493
+      ],
+      "max": [
+        0.16134489870062474,
+        1.672968878007083,
+        0.11654537343660643
+      ]
+    },
+    "vertices": 8016
+  },
+  "bindingSha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d",
+  "pipeline": {
+    "path": "scripts/prepare-long-hair.mjs",
+    "sha256": "f7c6293a46fea041adae2f285340f492e737452cae9304edced603448ccf9f0d"
+  },
+  "operations": [
+    "Bake source transform; preserve all source vertices, normals and triangle indices",
+    "Remove baked textures and UVs; tint all hair with DNA colour",
+    "Blend existing Head, Neck and Spine2 weights over the lower locks; no arm influences"
+  ],
+  "reviewStatus": "preview"
+}
