@@ -1,3 +1,5 @@
+import { projectFjordCalendar } from './FjordCalendar';
+import type { SettlementRestoreMetadata } from '../play/SharedSettlement';
 import type { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { browserGeneration } from '../world-generation/BrowserGeneration';
 import { adoptCampaignIsland } from './CampaignIsland';
@@ -37,7 +39,7 @@ export class IslandLoading {
     private status: HTMLElement;
     private retry: HTMLButtonElement;
     private skip: HTMLButtonElement;
-    constructor(private canReturnToGame = false, book?: FoundingBookWindow) {
+    constructor(private canReturnToGame = false, book?: FoundingBookWindow, private resume?: SettlementRestoreMetadata) {
         this.signal = this.abort.signal;
         this.root.id = 'island-loading';
         this.root.tabIndex = -1;
@@ -51,6 +53,16 @@ export class IslandLoading {
             <div class="island-loading-actions"><button type="button" id="island-loading-cancel" ${canReturnToGame ? '' : 'hidden'}>Cancel &amp; Return to Game</button>
             <button type="button" id="island-loading-retry" hidden>Retry generation</button>
             <button type="button" id="island-loading-skip" hidden>Skip camera arrival</button></div></div>`;
+        this.root.dataset.mode = resume ? 'resume' : 'new';
+        if (resume) {
+            const calendar = projectFjordCalendar(resume.time, resume.ticksPerWinter);
+            this.root.setAttribute('aria-label', 'Returning to your settlement');
+            this.root.querySelector('.island-loading-eyebrow')!.textContent = 'FjordSide · saved campaign';
+            this.root.querySelector('#island-loading-status')!.textContent = 'Returning to your settlement…';
+            this.root.querySelector('.island-loading-help')!.textContent =
+                calendar.season + ' ' + calendar.year + ' · campaign ' + resume.seed + '. The clock is paused.';
+            this.root.querySelector('#island-loading-retry')!.textContent = 'Retry restoration';
+        }
         if (book) {
             this.root.classList.add('island-has-book');
             this.root.append(book.root);
@@ -88,7 +100,8 @@ export class IslandLoading {
     check() { this.signal.throwIfAborted(); }
     stage(label: string) {
         this.check();
-        if (this.status.textContent !== label) this.status.textContent = label;
+        if (this.resume) this.root.querySelector('.island-loading-eyebrow')!.textContent = 'FjordSide · ' + label;
+        else if (this.status.textContent !== label) this.status.textContent = label;
         this.root.dataset.stage = label;
     }
     async measure<T>(stage: string, operation: () => T | Promise<T>): Promise<T> {
@@ -100,9 +113,9 @@ export class IslandLoading {
     }
     private progress = (event: GenerationProgress) => {
         if (this.signal.aborted) return;
-        if (event.type === 'phase') this.stage(generationLabel(event.stage));
+        if (event.type === 'phase') this.stage(this.resume ? 'Restoring saved geography' : generationLabel(event.stage));
         if (event.type === 'timing') this.evidence.samples.push({ stage: event.stage, milliseconds: event.milliseconds });
-        if (event.type === 'preview') this.setPreview(event.preview);
+        if (event.type === 'preview' && !this.resume) this.setPreview(event.preview);
         if (event.type === 'transport') {
             this.evidence.resultJsonBytes = event.jsonBytes;
             this.evidence.samples.push({ stage: 'worker-serialization', milliseconds: event.serializationMs });
@@ -113,7 +126,7 @@ export class IslandLoading {
         for (;;) {
             this.check();
             this.retry.hidden = true;
-            this.stage('Shaping coast & valleys');
+            this.stage(this.resume ? 'Restoring saved terrain' : 'Shaping coast & valleys');
             try {
                 const result = await this.worker.generate({ kind: 'campaign', seed,
                     profile: new URLSearchParams(location.search).has('profileLoading') }, this.progress);
@@ -125,7 +138,7 @@ export class IslandLoading {
                 return;
             } catch (error) {
                 this.check();
-                this.status.textContent = 'Could not prepare the island. ' + (error instanceof Error ? error.message : String(error));
+                this.status.textContent = (this.resume ? 'Could not restore the settlement. ' : 'Could not prepare the island. ') + (error instanceof Error ? error.message : String(error));
                 this.retry.hidden = false;
                 this.retry.focus();
                 await new Promise<void>((resolve, reject) => {
@@ -191,10 +204,11 @@ export class IslandLoading {
             ctx.globalAlpha = 1;
             if (fade === 1) this.previousMap = undefined;
         }
-        this.frame = requestAnimationFrame(this.draw);
+        if (!this.resume) this.frame = requestAnimationFrame(this.draw);
     };
     async arrive(controller: RTSCameraController, world: WorldBlueprint, end: CameraPose,
         heightAt: (x: number, z: number) => number) {
+        if (this.resume) return;
         this.stage('Arriving at your settlement');
         this.skip.hidden = false;
         this.root.classList.add('island-loading-arrival');

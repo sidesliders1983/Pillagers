@@ -16,13 +16,15 @@ export class FjordCampaign {
     private readRevision = -1;
     private readBlueprint?: WorldBlueprint;
     private readLayout = '';
-    blueprint: WorldBlueprint;
-    layout: FjordLayout;
+    blueprint!: WorldBlueprint;
+    layout!: FjordLayout;
     selection: {
         kind: string;
         id: string;
     } | null = null;
-    constructor(readonly session: GameplaySession, private geography: CampaignGeography = 'legacy') {
+    constructor(readonly session: GameplaySession, private geography: CampaignGeography = 'legacy', restored?: string) {
+        // Import validates a complete proposal before committing. A known save needs no throwaway geography.
+        if (restored !== undefined) { this.importJSON(restored); return; }
         this.blueprint = geography === 'island-pool-v1' ? createCampaignIsland(session.snapshot().seed) :
             generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
@@ -79,11 +81,11 @@ export class FjordCampaign {
         if (saved.bridgeVersion === 2 && !saved.island) throw new Error('Missing campaign island recipe.');
         const blueprint = saved.bridgeVersion === 2 ? createCampaignIsland(seed, saved.island) :
             extended ? parseWorld(JSON.stringify({ schemaVersion: 1, blueprint: saved.blueprint })) :
-                seed === this.layout.seed ? this.blueprint : this.createGeography(seed);
+                seed === this.layout?.seed ? this.blueprint : this.createGeography(seed);
         if (!campaignIslandPlan(blueprint) && blueprint.config.seed !== seed)
             throw new Error('Campaign and geography seed identities do not match.');
         let layout = extended ? saved.layout as FjordLayout :
-            seed === this.layout.seed ? structuredClone(this.layout) : createFjordLayout(blueprint, undefined, seed);
+            seed === this.layout?.seed ? structuredClone(this.layout) : createFjordLayout(blueprint, undefined, seed);
         const legacyLayout = saved.layout?.version === 'fjord-layout-v1';
         if (!layout || layout.seed !== seed || layout.geographyId !== geographyIdentity(blueprint))
             throw new Error('Campaign and presentation identities do not match.');

@@ -41,7 +41,7 @@ export function fjordHeaderHTML(): string {
                         <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
                         <button id="fjord-new">New campaign from seed</button>
                         <button id="fjord-restart">Restart with same founders</button>
-                        <p>The clock starts when opening or restarting the Fjord. Explicit load/import pauses it.
+                        <p>New and restarted campaigns start when ready. Returning to the game or loading a save pauses the clock.
                             Switching 2D/3D retains your clock setting.</p>
                     </div></details>
                 </div>

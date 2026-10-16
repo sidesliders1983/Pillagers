@@ -1,0 +1,125 @@
+{
+  "browser": "155.0.4283.45",
+  "actualCached": true,
+  "sameCanvas": true,
+  "exactCampaign": true,
+  "notRestored": [],
+  "trace": [
+    {
+      "event": "navigation",
+      "page": 1,
+      "milliseconds": 659.3000000119209,
+      "type": "navigate"
+    },
+    {
+      "event": "cold-restore",
+      "page": 1,
+      "milliseconds": 780.3000000119209,
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b"
+    },
+    {
+      "event": "generation-start",
+      "page": 1,
+      "milliseconds": 795.8000000119209,
+      "reason": "saved-island"
+    },
+    {
+      "event": "generation-ready",
+      "page": 1,
+      "milliseconds": 21208.69999998808
+    },
+    {
+      "event": "scene-build",
+      "page": 1,
+      "milliseconds": 22902.40000000596,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false
+    },
+    {
+      "event": "scene-ready",
+      "page": 1,
+      "milliseconds": 40819.69999998808,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false
+    },
+    {
+      "event": "pagehide",
+      "page": 1,
+      "milliseconds": 41169.09999999404,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false,
+      "persisted": true
+    },
+    {
+      "event": "hidden",
+      "page": 1,
+      "milliseconds": 41231.40000000596,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false
+    },
+    {
+      "event": "visible",
+      "page": 1,
+      "milliseconds": 41475.19999998808,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false
+    },
+    {
+      "event": "pageshow",
+      "page": 1,
+      "milliseconds": 41475.59999999404,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false,
+      "persisted": true
+    },
+    {
+      "event": "warm-resume",
+      "page": 1,
+      "milliseconds": 41523.80000001192,
+      "campaignId": "249f6552-f085fb0d-63aa0965-5c7c741b",
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "running": false,
+      "kind": "cached-page"
+    }
+  ],
+  "note": "Actual Edge history navigation with the default Playwright BFCache-disabling flag removed; not physical Safari."
+}

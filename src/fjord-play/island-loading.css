@@ -96,3 +96,21 @@ body.island-preparing #fjord-canvas { border-radius:0; }
     .island-loading-eyebrow { margin:6px 0; }
     .island-loading-help { font-size:12px; margin:6px 0; }
 }
+
+.fjord-bootstrap { position:fixed; inset:0; margin:0; display:grid; align-content:center;
+    justify-items:center; padding:24px; color:#eee7d1; background:#163b48; text-align:center; }
+.fjord-bootstrap h1 { font:clamp(24px,4vw,36px) Georgia,serif; }
+.fjord-bootstrap p { font:16px/1.5 system-ui,sans-serif; }
+#campaign-recovery { display:block; overflow:auto; overscroll-behavior:contain; touch-action:pan-y;
+    padding:max(24px,env(safe-area-inset-top)) max(20px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)); }
+#campaign-recovery h1, #campaign-recovery p, #campaign-recovery section, #campaign-recovery > label {
+    display:block; max-width:42rem; margin:16px auto; }
+#campaign-recovery button, #campaign-recovery input { min-height:44px; padding:10px 14px; }
+#campaign-recovery button { margin:4px; color:#eee7d1; background:#253f3a; border:1px solid #acaa83; border-radius:6px; }
+#campaign-recovery :focus-visible { outline:3px solid #ffd780; outline-offset:3px; }
+#fjord-context-recovery { position:fixed; inset:0; z-index:11000; display:grid; place-items:center;
+    padding:20px; background:#102c3699; color:#eee7d1; font:16px/1.5 system-ui,sans-serif; }
+#fjord-context-recovery > div { max-width:36rem; padding:24px; border:1px solid #bdab75; border-radius:8px; background:#192c26; }
+#fjord-context-recovery button { min-height:44px; margin:4px; padding:10px 14px; color:inherit; background:#31463b;
+    border:1px solid #95855e; border-radius:6px; }
+#fjord-context-recovery :focus-visible { outline:3px solid #ffd780; outline-offset:3px; }

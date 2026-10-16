@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-16",
+  "source": "Owner response in this task",
+  "environment": "Physical iPhone/iPad requested; exact model unspecified",
+  "tenSeconds": "Owner reports working",
+  "twoMinutes": "Owner reports working",
+  "longerMemoryPressureInterval": "Not verified",
+  "returnClassification": "No exported trace or recording received; do not infer soft resume versus BFCache from the text report"
+}

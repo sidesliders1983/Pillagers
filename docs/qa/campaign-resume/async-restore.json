@@ -1,0 +1,14 @@
+{
+  "runtime": "v24.19.0",
+  "validationMs": 78.66499999999996,
+  "workerWallMs": 15294.8577,
+  "adoptionMs": 50.750599999999395,
+  "commitMs": 864.884399999999,
+  "totalMs": 16289.181100000002,
+  "exactCore": true,
+  "sourceSha256": {
+    "src/play/SharedSettlement.ts": "267b3bf89436254460480e2e4de60d61adf8fd4885e39e5371444cefe12bf90c",
+    "src/fjord-play/FjordCampaign.ts": "f9dc394102817a5de8b72a6d395e5f304c1991947434470a70d464fd5682ca54"
+  },
+  "note": "Diagnostic Node wall times, not a controlled speed benchmark or physical Safari/GPU measurement. Island generation uses a real worker; authoritative metadata and commit remain on the caller thread."
+}

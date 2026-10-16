@@ -1,0 +1,3 @@
+Synthetic persisted page lifecycle retains the exact live scene and pauses playback.
+Real WebGL context loss/restoration recovers the existing scene with exact paused Core.
+Cold saved-campaign restore is styled, responsive and exact.
