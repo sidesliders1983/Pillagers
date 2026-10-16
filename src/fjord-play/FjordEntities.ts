@@ -20,15 +20,20 @@ export class FjordEntities {
         boundsSignature?: string;
     }>();
     private expeditionSurface?: TerrainSurface;
+    private expeditionWorld?: WorldBlueprint;
     private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number }>();
     prepareExpeditions(state: SimulationState, world: WorldBlueprint) {
-        this.expeditionSurface ??= createBlueprintSurface(world);
+        if (this.expeditionWorld !== world) {
+            this.expeditionWorld = world;
+            this.expeditionSurface = createBlueprintSurface(world);
+            this.expeditionFrames.clear();
+        }
         const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned');
         const ids = new Set(active.map(m => m.id));
         for (const id of this.expeditionFrames.keys()) if (!ids.has(id)) this.expeditionFrames.delete(id);
         for (const mission of active) {
             const previous = this.expeditionFrames.get(mission.id);
-            if (previous?.mission.updatedAt === mission.updatedAt && previous.mission.status === mission.status) continue;
+            if (previous?.mission === mission) continue;
             const ratio = previous ? Math.min(1, previous.elapsed/.18) : 1;
             const from = previous ? previous.from+(previous.mission.travelled-previous.from)*ratio : mission.travelled;
             this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0 });
