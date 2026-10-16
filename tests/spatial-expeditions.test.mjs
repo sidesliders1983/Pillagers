@@ -121,7 +121,7 @@ test('land parties cannot cross canonical water or cliffs, and real deaths stop 
     const tampered = core.applyCommand(initial, dispatch, context);
     tampered.world.spatial.missions['explore-1'].route[1].x += 1;
     const { GameplaySession } = loadTypeScript(new URL('../src/gameplay-lab/GameplaySession.ts', import.meta.url));
-    // Internal length corruption is rejected on import before a session can advance it.
+    // Route-topology corruption is rejected on import before a session can advance it.
     assert.throws(() => new GameplaySession().loadJSON(JSON.stringify(tampered)), /spatial/i);
     let nearWinter = core.applyCommand(initial, { type: 'AdvanceTicks', ticks: 990 }, context);
     nearWinter.mechanics.config.mortalityBands = [{ minAge: 0, chanceBps: 10000 }];

@@ -8,7 +8,7 @@ The production browser flow creates a reusable group through the real menu, touc
 - Existing expedition/discovery/shared-session contracts passed (31 tests during integration). Full validation also runs in required CI; a PR remains draft until every required current-head check is green.
 - Browser: desktop Edge, 1024 × 768 with touch and a final 390 × 844 phone-size viewport. These are laptop measurements and emulation, not a physical iPad/Safari claim.
 - The real party reached 146 m of canonical route progress before the saved/reloaded checkpoint. One real resident, one Core identity, no extra presentation RNG.
-- Browser errors: none. Baseline and current quality both exercise the running campaign.
+- Browser errors: none. Both Low and Standard exercise the running campaign.
 - Handwritten source was manually formatted and checked with TypeScript and git diff --check; no formatter is configured.
 
 ## Frame samples during travel
