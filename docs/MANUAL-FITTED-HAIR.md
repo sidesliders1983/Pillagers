@@ -4,6 +4,12 @@ The native Meshy Human has two additional Hair choices: `Hair short · manual fi
 and `Hair short 2 · manual fit`. Both are explicit Lab previews. They use the
 existing Human and its native skeleton; they are not separate character models.
 After owner approval of these exact previews, Fjordplay explicitly assigns both styles.
+Adults now also receive the approved long braid and shoulder-length Long hair 2.
+A separate adult visual seed stream selects from all four hairstyles with equal
+probability from age 18. Ages 6–17 retain their original two short styles and
+original seed stream; younger children have no hair module. The long styles use
+their existing native body bindings and DNA colour, with the braid strap always
+remaining brown. See `BRAIDED-HAIR-V01.md` and `LONG-HAIR-V01.md` for rig details.
 A named visual sample of the DNA seed selects the variant, independently of sex or
 occupation. DNA continues to supply hair colour and age greying. The Lab catalog
 remains separate from general automatic module acceptance.

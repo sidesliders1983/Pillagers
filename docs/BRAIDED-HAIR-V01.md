@@ -2,7 +2,9 @@
 
 Character Lab offers `Long braided hair · manual fit` on the existing native
 Meshy Human. Open `/character-lab?hair=long-braided` to select it directly.
-It is an adult Lab preview; Fjordplay's approved short-hair assignment is unchanged.
+After owner approval it is also one of four explicitly assigned Fjordplay adult
+hairstyles. The native 44-bone body skeleton remains shared; each braid instance
+owns its six additional hair bones. Children retain the short-hair pool.
 
 The input is the local `Assets/Characters/Human/Manual-Fitting/Long-hair-braided.glb`.
 The original file is preserved. Rebuild the prepared candidate with:

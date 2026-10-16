@@ -28,7 +28,10 @@ The same binding is prepared against each exact body LOD, with no body masking.
 This is skinning, without hair physics or clothing collision. The high trial
 tunic collar covers some of the lowest hair points. Other collars and poses
 still need visual review; this preview does not guarantee universal clearance.
-It does not change Fjordplay's approved short-hair selection.
+After owner approval, Fjordplay also assigns this style to adult residents.
+Its independent visual seed stream selects among the two short styles, the long
+braid and this shoulder-length style, without depending on sex or occupation.
+Children retain the existing short styles.
 
 Verification covers source receipts, texture removal, normalized neck/back
 weights, fixed scalp attachment, finite geometry and local edge stretch in Idle

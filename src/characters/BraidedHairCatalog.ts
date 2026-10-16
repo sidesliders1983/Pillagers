@@ -3,7 +3,7 @@ import {braidedHairRecord} from './BraidedHairMeasurements';
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {meshyRigSignature} from './MeshyNativeRig';
 
-/** The long braid remains an explicit Lab candidate until movement review is approved. */
+/** Owner-approved braid, explicitly selectable in the Lab and Fjord wardrobe. */
 export const braidedHairAsset: CharacterAsset = {
     id: braidedHairRecord.id, type: 'hair', style: 'braid', version: 1,
     scope: 'body-bound', reviewStatus: 'preview', label: 'Long braided hair · manual fit',

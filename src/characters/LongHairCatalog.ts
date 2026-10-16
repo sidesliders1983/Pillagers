@@ -3,7 +3,7 @@ import {longHairRecord} from './LongHairMeasurements';
 import {meshyHumanAssetIdentity} from './MeshyHumanAssetIdentity';
 import {meshyRigSignature} from './MeshyNativeRig';
 
-/** Shoulder-length hair fitted by hand, awaiting visual movement review in the Lab. */
+/** Owner-approved shoulder-length hair for the Lab and explicit Fjord wardrobe. */
 export const longHairAsset: CharacterAsset = {
     id: longHairRecord.id, type: 'hair', style: 'long', version: 1,
     scope: 'body-bound', reviewStatus: 'preview', label: 'Long hair 2 · manual fit',
