@@ -153,6 +153,7 @@ try {
                 }
                 await page.evaluate(scenario => {
                     const audit = window.__fjordAudit, refs = audit.references;
+                    if (audit.golden) audit.golden.frozen = false;
                     refs.setPlayback(false);
                     const quality = document.querySelector('#fjord-quality');
                     quality.value = scenario.quality || 'low'; quality.dispatchEvent(new Event('change'));

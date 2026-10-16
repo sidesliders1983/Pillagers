@@ -1,8 +1,29 @@
 import { createServer } from 'vite';
 import ts from 'typescript';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+
+const goldenMode = process.env.QA_GOLDEN === '1';
+const sourceRef = process.env.QA_SOURCE_REF;
+if (sourceRef && !/^[a-f0-9]{40}$/.test(sourceRef)) throw Error('QA_SOURCE_REF requires an exact commit');
+// A paired baseline serves these unchanged sources through the same QA bridge, not HMR state.
+const pinnedFiles = sourceRef ? ['src/fjord-play/FjordPlay.ts', 'src/core/WorldLighting.ts'] : [];
+const pinnedSources = new Map(pinnedFiles.map(path => [path,
+    execFileSync('git', ['show', sourceRef + ':' + path], { encoding: 'utf8' })]));
+const servedSource = { ref: sourceRef ?? null, overrides: Object.fromEntries([...pinnedSources]
+    .map(([path, source]) => [path, createHash('sha256').update(source).digest('hex')])) };
 
 // QA-only: normal Vite builds never load this transform or its browser bridge.
 function instrument(source) {
+    if (goldenMode) {
+        const replaceOnce = (before, after) => {
+            if (source.split(before).length !== 2) throw Error('Golden frame anchor changed: ' + before);
+            source = source.replace(before, after);
+        };
+        replaceOnce('const elapsed = clock.getDelta(), delta = Math.min(elapsed, .1);',
+            'const elapsed = golden.frozen ? 0 : clock.getDelta(), delta = Math.min(elapsed, .1);');
+        replaceOnce('time += delta;', 'time = golden.frozen ? golden.time : time + delta;');
+    }
     const file = ts.createSourceFile('FjordPlay.ts', source, ts.ScriptTarget.Latest, true);
     const edits = [];
     function visit(node) {
@@ -34,19 +55,28 @@ function instrument(source) {
         `        audit.bind({ session: this.session, shared: this.shared, campaign: this.campaign,
             motion, layer, models, world, controller, camera, renderer, scene, lighting,
             campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
+            settle: async () => { await actionWork; await sceneWork; },
             advanceTicks: async ticks => {
                 action(() => this.session.command({ type: 'AdvanceTicks', ticks }));
                 await actionWork;
                 await sceneWork;
             } });
+${goldenMode ? '        golden.bind(audit);' : ''}
 ` + anchor);
-    return "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" + source;
+    return "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" +
+        'audit.servedSource = ' + JSON.stringify(servedSource) + ';\n' +
+        (goldenMode ? "import { golden } from '/scripts/qa/fjord-golden-browser.mjs';\naudit.flags.manualClock = true;\n" : '') + source;
 }
 const server = await createServer({
     cacheDir: process.env.QA_CACHE_DIR || 'artifacts/fjord-runtime-vite-cache',
-    server: { host: '127.0.0.1', port: Number(process.env.QA_PORT || 5190), strictPort: true },
+    server: { host: '127.0.0.1', port: Number(process.env.QA_PORT || 5190), strictPort: true,
+        watch: goldenMode ? null : undefined },
     plugins: [{ name: 'fjord-runtime-audit-only', enforce: 'pre', transform(source, id) {
-        if (id.replaceAll('\\', '/').endsWith('/src/fjord-play/FjordPlay.ts')) return { code: instrument(source), map: null };
+        const path = id.replaceAll('\\', '/').split('?')[0];
+        const pinned = [...pinnedSources.keys()].find(file => path.endsWith('/' + file));
+        if (pinned) source = pinnedSources.get(pinned);
+        if (path.endsWith('/src/fjord-play/FjordPlay.ts')) return { code: instrument(source), map: null };
+        if (pinned) return { code: source, map: null };
     } }],
 });
 await server.listen();
