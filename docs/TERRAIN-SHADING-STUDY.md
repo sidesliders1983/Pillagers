@@ -1,13 +1,11 @@
 # Terrain shading study — issue #173
 
 The owner selected B from the paired images, then reported trying B in the game and preferring it
-on 2026-10-16. A separate integration step enables B by default on `/fjord-play`.
-The study and reference APIs retain A as an explicit comparison. No instrumented physical
-Safari/iPhone performance measurements were collected; the owner gameplay trial is qualitative.
-Environment Lab offers A and B after generating or importing a world. Select **Zoned blend**
-when reviewing the approved island materials. The full campaign preview is available at
-`/fjord-play` (B by default), or explicitly `/fjord-play?terrain-study=smooth`.
-Use `/fjord-play?terrain-study=baseline` to compare A.
+on 2026-10-16. B is now the only terrain shading in `/fjord-play` and Environment Lab. The obsolete A selector
+and query override have been removed at the owner’s request. The paired gallery and measurement
+files remain historical evidence; no instrumented physical Safari/iPhone measurements were collected.
+The owner gameplay trial is qualitative. Select **Zoned blend** in the Lab when reviewing the
+approved island materials.
 
 ## B: shared heightfield normals
 
@@ -16,7 +14,7 @@ heightfield corners. Every duplicate grassy/soil vertex uses the same normalized
 The duplicate vertex layout, alternating diagonals, XYZ, indices, source UVs, mask UVs and
 six-layer ground stack remain unchanged. Native material clones use `flatShading: false`;
 source materials and character/house props retain their existing flags. The optional climate
-snow candidate follows the selected terrain flag too.
+snow candidate also uses shared normals.
 
 Canonical **bedrock** corners retain a proportion of their original face normal using the
 existing saved `rockExposure` field. Other existing primary zones receive fully shared normals.
@@ -44,22 +42,20 @@ texture source, extra fragment lookup or terrain subdivision is included in this
 
 ## State and loading contract
 
-The selected shading mode is ephemeral. It is absent from the exported WorldBlueprint and
-campaign save. Existing saves retain their canonical terrain. Switching A/B in the Lab prepares
-a replacement mesh asynchronously while the old mesh stays visible. The latest request wins;
-stale meshes are disposed. Returning to the reference scene invalidates pending replacements.
-Normal, colour, roughness, rock-axis and seasonal material behavior use the existing renderer.
+Shading adds no exported WorldBlueprint or campaign fields. Existing saves retain their canonical
+terrain. Changing a Lab diagnostic prepares a replacement mesh asynchronously while the old mesh
+stays visible. The latest request wins; stale meshes are disposed. Returning to the reference
+scene invalidates pending replacements. Normal, colour, roughness, rock-axis and seasonal material behavior use the existing renderer.
 
 ## Reproduce
 
 - `node --test tests/terrain-shading-study.test.mjs`
 - `node scripts/qa/check-terrain-default.mjs` against the normal production build on 5180.
-- Run the normal Vite development server on 5193, then `node scripts/qa/check-terrain-shading.mjs`.
-- Run the existing QA-only server with `QA_PORT=5194`, then
-  `node scripts/qa/measure-terrain-shading.mjs`. PowerShell users set environment variables with
-  `$env:QA_PORT='5194'` before starting `scripts/qa/fjord-runtime-server.mjs`.
-- Generate the review after copying the successful evidence into `docs/qa/terrain-shading`:
-  `node scripts/qa/report-terrain-shading.mjs`.
+- Run the normal Vite development server on 5193, then `node scripts/qa/check-terrain-shading.mjs`
+  to verify the B-only Lab, diagnostics, unchanged exports and quality switches.
+- The historical A/B capture and measurement runners are available at commit
+  `504051c4c1edcf6a26b0c18ca99be3c35e72759e`; reproduce that experiment on its pinned revision.
+  A has no runtime path in the current build.
 
 The QA bridge is injected only by the isolated QA server and is absent from normal builds.
 See [the measured review](qa/terrain-shading/report.md). B is approved after the image review and owner gameplay trial. The default-selection change

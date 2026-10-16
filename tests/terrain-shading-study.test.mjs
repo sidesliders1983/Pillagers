@@ -21,8 +21,7 @@ function near(actual, expected, message) {
 test('smooth terrain shares the area-weighted corner normal without changing its triangles or world', () => {
     const world = smallWorld([0, 0, 0, 0, 1, 0, 0, 0, 0]);
     const canonical = JSON.stringify(world);
-    const baseline = createBlueprintTerrain(world);
-    const smooth = createBlueprintTerrain(world, undefined, 'none', undefined, 'baseline', false, 'smooth');
+    const smooth = createBlueprintTerrain(world);
     try {
         const positions = smooth.geometry.getAttribute('position');
         const normals = smooth.geometry.getAttribute('normal');
@@ -35,13 +34,15 @@ test('smooth terrain shares the area-weighted corner normal without changing its
             }
         }
         assert.ok(shared >= 4);
-        assert.deepEqual(positions.array, baseline.geometry.getAttribute('position').array);
+        for (let vertex = 0; vertex < positions.count; vertex++) {
+            const x = positions.getX(vertex), z = positions.getZ(vertex);
+            assert.equal(positions.getY(vertex), world.terrain.heights[z * 3 + x]);
+        }
         assert.equal(positions.count, 24);
-        assert.equal(smooth.geometry.index, baseline.geometry.index);
+        assert.equal(smooth.geometry.index, null);
         assert.equal(smooth.material.flatShading, false);
-        assert.equal(baseline.material.flatShading, true);
         assert.equal(JSON.stringify(world), canonical);
-    } finally { disposeBlueprintTerrain(baseline); disposeBlueprintTerrain(smooth); }
+    } finally { disposeBlueprintTerrain(smooth); }
 });
 
 test('canonical exposed rock retains face definition while ground materials own their smooth flags', async () => {
@@ -52,18 +53,20 @@ test('canonical exposed rock retains face definition while ground materials own 
     world.environment.primary.fill('bedrock');
     const sources = new Map(['Ground037', 'Ground054', 'mossy_rock', 'grass_path_2'].map(id =>
         [id, new MeshStandardMaterial({ name: id, flatShading: true, map: new Texture(), normalMap: new Texture() })]));
-    const baseline = createBlueprintTerrain(world, sources);
-    const smooth = createBlueprintTerrain(world, sources, 'none', undefined, 'baseline', false, 'smooth');
+    const smooth = createBlueprintTerrain(world, sources, 'none', undefined, 'baseline', false);
     try {
-        const old = baseline.geometry.getAttribute('normal').array;
-        near(smooth.geometry.getAttribute('normal').array, old, 'Fully exposed rock keeps its original geometric face normals');
+        const geometric = smooth.geometry.clone();
+        geometric.computeVertexNormals();
+        near(smooth.geometry.getAttribute('normal').array, geometric.getAttribute('normal').array,
+            'Fully exposed rock keeps the canonical geometric face normals');
+        geometric.dispose();
         for (const material of smooth.material) {
             assert.equal(material.flatShading, false);
             assert.equal(sources.get(material.name).flatShading, true);
             assert.equal(material.normalMap.source, sources.get(material.name).normalMap.source);
         }
     } finally {
-        disposeBlueprintTerrain(baseline); disposeBlueprintTerrain(smooth);
+        disposeBlueprintTerrain(smooth);
         for (const material of sources.values()) { material.map.dispose(); material.normalMap.dispose(); material.dispose(); }
     }
 });
@@ -72,7 +75,7 @@ test('smooth island perimeter meets its canonical flat deep-sea continuation wit
     const world = smallWorld([-7, -7, -7, -7, 1, -7, -7, -7, -7]);
     world.config = { ...world.config, preset: 'island', width: 2, depth: 2 };
     world.waterLevel = 0;
-    const mesh = createBlueprintTerrain(world, undefined, 'form', undefined, 'baseline', false, 'smooth');
+    const mesh = createBlueprintTerrain(world, undefined, 'form', undefined, 'baseline', false);
     try {
         const positions = mesh.geometry.getAttribute('position'), normals = mesh.geometry.getAttribute('normal');
         for (let vertex = 0; vertex < positions.count; vertex++)
@@ -90,31 +93,27 @@ test('zoned smoothing preserves source UVs, native masks, layer indices and asyn
     const canonical = JSON.stringify(world);
     const sources = new Map(['Ground037', 'Ground054', 'mossy_rock', 'grass_path_2'].map(id =>
         [id, new MeshStandardMaterial({ name: id, flatShading: true, map: new Texture(), normalMap: new Texture(), roughnessMap: new Texture() })]));
-    const baseline = createBlueprintTerrain(world, sources, 'none', undefined, 'zoned', true);
-    const smooth = createBlueprintTerrain(world, sources, 'none', undefined, 'zoned', true, 'smooth');
+    const smooth = createBlueprintTerrain(world, sources, 'none', undefined, 'zoned', true);
     let yields = 0;
     const asynchronous = await createBlueprintTerrainAsync(world, sources, 'none', undefined, 'zoned', true,
-        async () => { yields++; }, 'smooth');
+        async () => { yields++; });
     try {
         for (const attribute of ['position', 'uv', 'uv1', 'uv2', 'uv3', 'color']) {
-            assert.deepEqual(smooth.geometry.getAttribute(attribute).array, baseline.geometry.getAttribute(attribute).array);
             assert.deepEqual(asynchronous.geometry.getAttribute(attribute).array, smooth.geometry.getAttribute(attribute).array);
         }
-        assert.deepEqual(smooth.geometry.index.array, baseline.geometry.index.array);
-        assert.deepEqual(smooth.geometry.groups, baseline.geometry.groups);
+        assert.deepEqual(smooth.geometry.index.array, asynchronous.geometry.index.array);
+        assert.deepEqual(smooth.geometry.groups, asynchronous.geometry.groups);
         assert.deepEqual(asynchronous.geometry.getAttribute('normal').array, smooth.geometry.getAttribute('normal').array);
-        assert.equal(smooth.material.length, baseline.material.length);
+        assert.equal(smooth.material.length, asynchronous.material.length);
         assert.equal(smooth.material.length, 7, 'The fixture exercises the optional climate snow layer');
         smooth.material.forEach((material, index) => {
             assert.equal(material.flatShading, false);
-            if (material.alphaMap) assert.deepEqual(material.alphaMap.image.data, baseline.material[index].alphaMap.image.data);
+            if (material.alphaMap) assert.deepEqual(material.alphaMap.image.data, asynchronous.material[index].alphaMap.image.data);
         });
         assert.ok(yields > 3, 'Asynchronous preparation continues yielding between CPU batches');
         assert.equal(JSON.stringify(world), canonical);
-        assert.throws(() => createBlueprintTerrain(world, undefined, 'none', undefined, 'baseline', false, 'invalid'),
-            /terrain shading/i);
     } finally {
-        for (const mesh of [baseline, smooth, asynchronous]) disposeBlueprintTerrain(mesh);
+        for (const mesh of [smooth, asynchronous]) disposeBlueprintTerrain(mesh);
         for (const material of sources.values()) { material.map.dispose(); material.normalMap.dispose(); material.roughnessMap.dispose(); material.dispose(); }
     }
 });
@@ -124,8 +123,8 @@ test('source-only diagnostic holds normals fixed and isolates the approved grass
     const world = smallWorld([0, 0, 0, 0, 1, 0, 0, 0, 0]);
     const source = new MeshStandardMaterial({ map: new Texture(), normalMap: new Texture() });
     source.userData.repeatMeters = 24;
-    const neutral = createBlueprintTerrain(world, undefined, 'form', undefined, 'baseline', false, 'smooth');
-    const diagnostic = createBlueprintTerrain(world, new Map([['Ground037', source]]), 'source-grass', undefined, 'baseline', false, 'smooth');
+    const neutral = createBlueprintTerrain(world, undefined, 'form', undefined, 'baseline', false);
+    const diagnostic = createBlueprintTerrain(world, new Map([['Ground037', source]]), 'source-grass', undefined, 'baseline', false);
     try {
         assert.ok(diagnostic.material.map);
         assert.equal(diagnostic.material.map.source, source.map.source);
@@ -143,7 +142,7 @@ test('grassy grid corners remain continuous even where the saved rock influence 
     world.environment = structuredClone(generateWorld({ seed: 17, environment: { version: 1 } }).environment);
     world.environment.primary.fill('grass');
     world.environment.fields.rockExposure.fill(.5);
-    const mesh = createBlueprintTerrain(world, undefined, 'form', undefined, 'baseline', false, 'smooth');
+    const mesh = createBlueprintTerrain(world, undefined, 'form', undefined, 'baseline', false);
     try {
         const p = mesh.geometry.getAttribute('position'), n = mesh.geometry.getAttribute('normal');
         for (let vertex = 0; vertex < p.count; vertex++)

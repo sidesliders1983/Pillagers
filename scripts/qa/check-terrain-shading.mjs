@@ -8,7 +8,7 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
 const { generateWorld } = loadTypeScript(new URL('../../src/world-generation/GenerateWorld.ts', import.meta.url));
 const { serializeWorld, parseWorld } = loadTypeScript(new URL('../../src/world-generation/WorldSave.ts', import.meta.url));
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5193';
-const output = process.env.QA_OUTPUT || 'artifacts/terrain-shading/lab';
+const output = process.env.QA_OUTPUT || 'artifacts/terrain-shading/b-only-lab';
 await mkdir(output, { recursive: true });
 const world = generateWorld({ seed: 18, preset: 'island', generatorVersion: 'fjordside-island-v0.3e-r3', conifers: 'ez-tree', environment: { version: 1 } });
 const fixture = serializeWorld(world);
@@ -24,18 +24,10 @@ async function exported() {
     await page.locator('#world-export').click();
     return readFile(await (await downloading).path(), 'utf8');
 }
-async function shading(mode) {
-    await page.locator('#world-terrain-shading').selectOption(mode);
-    await page.waitForFunction(mode => {
-        const canvas = document.querySelector('#environment-canvas');
-        return canvas.dataset.terrainStudyPending !== 'true' &&
-            JSON.parse(canvas.dataset.terrainShading || 'null')?.variant === mode;
-    }, mode);
-}
 try {
     await page.goto(origin + '/environment-lab');
     await page.locator('#world-generate').waitFor({ state: 'attached' });
-    assert.equal(await page.locator('#world-terrain-shading').count(), 1);
+    assert.equal(await page.locator('#world-terrain-shading').count(), 0, 'A/B selector removed');
     await page.locator('#environment-canvas[data-ready="true"]').waitFor();
     await page.locator('#environment-settings').evaluate(element => element.open = true);
     await page.locator('#environment-pause').check();
@@ -48,13 +40,12 @@ try {
     });
     assert.ok(await page.locator('#environment-canvas').getAttribute('data-world'),
         await page.locator('#world-generation-status').innerText());
-    await page.locator('#world-terrain-shading:not([disabled])').waitFor();
     await page.locator('#world-ground-blending').selectOption('zoned');
     await page.waitForFunction(() => !document.querySelector('#world-generate').disabled &&
         JSON.parse(document.querySelector('#environment-canvas').dataset.ground).blending === 'zoned');
     console.log('Imported Lab island and enabled approved zoned materials');
     await page.waitForFunction(() => document.querySelector('#environment-canvas').dataset.world);
-    assert.equal(await page.locator('#world-terrain-shading').inputValue(), 'baseline');
+    assert.equal(JSON.parse(await page.locator('#environment-canvas').getAttribute('data-terrain-shading')).variant, 'smooth');
     const initial = await exported();
     assert.deepEqual(JSON.parse(initial), JSON.parse(fixture));
     await page.locator('#environment-nature').uncheck();
@@ -75,10 +66,9 @@ try {
         await page.locator('#environment-light').selectOption(view.light);
         await page.locator('#world-overlay').selectOption(view.overlay);
         await page.waitForFunction(() => document.querySelector('#environment-canvas').dataset.terrainStudyPending !== 'true');
-        for (const mode of ['baseline', 'smooth']) {
-            await shading(mode);
+        for (const mode of ['smooth']) {
             const ground = JSON.parse(await page.locator('#environment-canvas').getAttribute('data-ground'));
-            assert.ok(ground.flatShading.every(flag => flag === (mode === 'baseline')));
+            assert.ok(ground.flatShading.every(flag => flag === false));
             await page.locator('#environment-settings').evaluate(element => element.open = false);
             await page.waitForTimeout(700);
             const path = view.id + '-' + mode + '.png';
@@ -87,26 +77,20 @@ try {
             captures.push({ ...view, mode, path, camera, ground });
             await page.locator('#environment-settings').evaluate(element => element.open = true);
         }
-        assert.deepEqual(captures.at(-1).camera, captures.at(-2).camera, 'A/B camera poses are identical');
         console.log('Captured ' + view.id);
     }
     await page.locator('#world-overlay').selectOption('none');
-    await shading('smooth');
     assert.equal(await exported(), initial, 'Rendering does not change the canonical exported world');
-    await page.locator('#world-terrain-shading').selectOption('baseline');
-    await page.locator('#world-terrain-shading').selectOption('smooth');
-    await shading('baseline');
     for (const tier of ['low', 'standard']) {
         await page.locator('#environment-quality').selectOption(tier);
         await page.waitForFunction(tier => document.querySelector('#environment-canvas').dataset.groundTier === tier &&
             !document.querySelector('#world-generate').disabled, tier);
-        await shading('smooth');
-        assert.equal(await exported(), initial);
+            assert.equal(await exported(), initial);
     }
     assert.deepEqual(errors, []);
     await writeFile(output + '/results.json', JSON.stringify({ origin, fixtureSha256: createHash('sha256').update(fixture).digest('hex'),
         seed: world.config.seed, generatorVersion: world.config.generatorVersion, identicalExports: true, captures, errors,
-        note: 'Same regular Lab blueprint for all A/B captures; separate full-scene pairs use the real campaign island. Paused waves/wind, no vegetation/props in diagnostic captures. Edge desktop; physical mobile untested.' }, null, 2));
+        note: 'Current B-only Lab diagnostic verification; historical A/B captures remain at the pinned experiment revision. Paused waves/wind, no vegetation/props in diagnostic captures. Edge desktop; physical mobile untested.' }, null, 2));
 } catch (error) {
     await writeFile(output + '/failure.txt', await page.locator('body').innerText());
     await page.screenshot({ path: output + '/failure.png' });

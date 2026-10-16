@@ -1,4 +1,3 @@
-import type { TerrainShading } from '../world/TerrainShading';
 import { browserGeneration } from '../world-generation/BrowserGeneration';
 import { groundStudyViews, groundStudyCamera } from './GroundStudyViews';
 import type { GroundBlending, RockTone } from '../config/GroundBlendConfig';
@@ -101,10 +100,6 @@ export class LabWorldGeneration {
                     <option value="baseline">Baseline · tiled biome masks</option>
                     <option value="zoned">Zoned blend · native source atlas</option>
                 </select></label>
-                <label>Terrain shading study<select id="world-terrain-shading" disabled>
-                    <option value="baseline">A · existing flat triangles</option>
-                    <option value="smooth">B · shared heightfield normals</option>
-                </select></label>
                 <label><input id="world-sand-study" type="checkbox">Sand study · approved ReferenceWater</label>
                 <label>Standard sand<select id="world-sand-resolution" disabled>
                     <option value="256">256 px · baseline</option>
@@ -150,7 +145,6 @@ export class LabWorldGeneration {
         document.querySelector('#world-rock-tone')!.addEventListener('change', () => void this.changeGroundMaterials());
         document.querySelector('#world-ground-blending')!.addEventListener('change', () => void this.changeGroundMaterials());
         document.querySelector('#world-snow-study')!.addEventListener('change', () => this.redrawTerrain());
-        document.querySelector('#world-terrain-shading')!.addEventListener('change', () => this.redrawTerrain());
         document.querySelector('#world-review-seed')!.addEventListener('change', event => {
             const value = (event.target as HTMLSelectElement).value;
             if (value === '') return;
@@ -252,7 +246,7 @@ export class LabWorldGeneration {
                 await loadWorldGroundMaterials(tier, this.renderer.capabilities.getMaxAnisotropy(), this.selectedSand(), blending, this.selectedRockTone(world));
             const surface = createBlueprintSurface(world);
             const terrain = await createBlueprintTerrainAsync(world, grounds.materials, 'none', undefined, grounds.blending,
-                false, undefined, this.selectedShading());
+                false);
             const conifers = world.config.conifers ?? 'kaykit';
             const nature = createNatureFromPlan(this.assets, world.placementPlan, world.config.seed,
                 conifers === 'ez-tree' ? this.resolvePineModel : undefined);
@@ -385,12 +379,7 @@ export class LabWorldGeneration {
         return this.sandStudy.checked && this.sandResolution.value === '512' ? 512 : 256;
     }
 
-    private selectedShading(): TerrainShading {
-        return (document.querySelector('#world-terrain-shading') as HTMLSelectElement).value as TerrainShading;
-    }
-
     private syncSandControls() {
-        (document.querySelector('#world-terrain-shading') as HTMLSelectElement).disabled = this.generate.disabled || !this.preview;
         (document.querySelector('#world-overlay') as HTMLSelectElement).disabled = this.generate.disabled;
         (document.querySelector('#world-ground-blending') as HTMLSelectElement).disabled =
             this.generate.disabled || !this.blueprint?.environment;
@@ -497,8 +486,7 @@ export class LabWorldGeneration {
         try {
             const next = await createBlueprintTerrainAsync(world, grounds.materials,
                 overlay === 'sites' ? 'form' : overlay, undefined, grounds.blending,
-                (document.querySelector('#world-snow-study') as HTMLInputElement).checked,
-                undefined, this.selectedShading());
+                (document.querySelector('#world-snow-study') as HTMLInputElement).checked);
             if (!this.alive || this.preview !== preview || this.blueprint !== world || revision !== this.terrainRevision) {
                 disposeBlueprintTerrain(next);
                 return false;

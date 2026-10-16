@@ -1,4 +1,4 @@
-import { heightfieldNormalSteps, type TerrainShading } from './TerrainShading';
+import { heightfieldNormalSteps } from './TerrainShading';
 import { registerTerrainNavigation, refreshTerrainNavigationIndex, releaseTerrainNavigation } from './TerrainNavigation';
 import { blendedMaterialIds, groundBlendMaskSteps, groundLayerIndexSteps } from './GroundBlending';
 import { createSpatialOverlay } from './SpatialOverlay';
@@ -53,18 +53,15 @@ export function createBlueprintTerrain(...args: Parameters<typeof terrainBuildSt
 export async function createBlueprintTerrainAsync(world: WorldBlueprint,
     sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[],
     blending: 'baseline' | 'zoned' = 'baseline', snow = false,
-    yieldControl: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0)),
-    shading: TerrainShading = 'baseline') {
-    const steps = terrainBuildSteps(world, sources, overlay, wear, blending, snow, shading);
+    yieldControl: () => Promise<void> = () => new Promise(resolve => setTimeout(resolve, 0))) {
+    const steps = terrainBuildSteps(world, sources, overlay, wear, blending, snow);
     let step = steps.next();
     while (!step.done) { await yieldControl(); step = steps.next(); }
     return step.value;
 }
 
 function* terrainBuildSteps(world: WorldBlueprint,
-    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[], blending: 'baseline' | 'zoned' = 'baseline', snow = false,
-    shading: TerrainShading = 'baseline'): Generator<void, Mesh> {
-    if (!['baseline', 'smooth'].includes(shading)) throw new Error('Invalid terrain shading variant.');
+    sources?: ReadonlyMap<string, MeshStandardMaterial>, overlay = 'none', wear?: readonly number[], blending: 'baseline' | 'zoned' = 'baseline', snow = false): Generator<void, Mesh> {
     const blended = blending === 'zoned' && !!world.environment && !!sources && overlay === 'none';
     const positions: number[] = [];
     const sourceUvs: number[] = [];
@@ -72,7 +69,7 @@ function* terrainBuildSteps(world: WorldBlueprint,
     const colors: number[] = [];
     const { terrain } = world;
     const triangles = terrainTriangles(terrain);
-    const smoothed = shading === 'smooth' ? yield* heightfieldNormalSteps(world, triangles) : null;
+    const smoothed = yield* heightfieldNormalSteps(world, triangles);
     const macroPalette = { sea: '#244a68', shore: '#dac393', lowland: '#7fba66',
         valley: '#438b69', upland: '#8b8971', highland: '#e0dcd3' };
     const environmentColors = environmentColours(world, overlay);
@@ -143,7 +140,7 @@ function* terrainBuildSteps(world: WorldBlueprint,
     geometry.setAttribute('color', new Float32BufferAttribute(colors, 3));
     yield;
     geometry.computeVertexNormals();
-    if (smoothed) {
+    {
         let started = performance.now();
         const normal = geometry.getAttribute('normal');
         const count = (terrain.columns - 1) * (terrain.rows - 1) * 6;
@@ -192,7 +189,7 @@ function* terrainBuildSteps(world: WorldBlueprint,
     const diagnostic = overlay === 'source-grass' ? sources?.get('Ground037')?.clone() : null;
     if (diagnostic) {
         diagnostic.name = 'Approved grass source only';
-        diagnostic.flatShading = shading === 'baseline';
+        diagnostic.flatShading = false;
         diagnostic.vertexColors = false;
         diagnostic.normalMap = diagnostic.roughnessMap = diagnostic.alphaMap = null;
         if (diagnostic.map) {
@@ -206,7 +203,7 @@ function* terrainBuildSteps(world: WorldBlueprint,
         const source = sources.get(id);
         if (!source) throw new Error('Missing required approved ground material: ' + id);
         const copy = source.clone();
-        copy.flatShading = shading === 'baseline';
+        copy.flatShading = false;
         const scale = repeat / (source.userData.repeatMeters ?? regionalGroundConfig.sources[id].repeatMeters);
         if (scale !== 1 || (blended && layer >= 4)) {
             for (const property of ['map', 'normalMap', 'roughnessMap'] as const) {
@@ -232,19 +229,19 @@ function* terrainBuildSteps(world: WorldBlueprint,
         }
         geometry.addGroup(0, positions.length / 3, layer);
         return copy;
-    }) : new MeshStandardMaterial({ roughness: 1, flatShading: shading === 'baseline',
+    }) : new MeshStandardMaterial({ roughness: 1, flatShading: false,
         vertexColors: !spatial, map: spatial?.texture ?? null }));
     if (masks && masks.length === 7 && Array.isArray(material)) {
         material.push(new MeshStandardMaterial({ name: 'Climate snow candidate', color: '#edf1f1',
-            roughness: 1, flatShading: shading === 'baseline', vertexColors: true, alphaMap: masks[6],
+            roughness: 1, flatShading: false, vertexColors: true, alphaMap: masks[6],
             transparent: true, depthWrite: false, polygonOffset: true,
             polygonOffsetFactor: 0, polygonOffsetUnits: -6 }));
     }
     if (masks) yield* groundLayerIndexSteps(geometry, world, masks);
     const mesh = new Mesh(geometry, material);
     mesh.name = 'Generated canonical terrain';
-    mesh.userData.terrainShading = { variant: shading, normalCpuMs: smoothed?.cpuMs ?? 0, maxNormalBatchMs: smoothed?.maxBatchMs ?? 0,
-        scratchBytes: smoothed?.scratchBytes ?? 0, retainedAttributeByteDelta: 0 };
+    mesh.userData.terrainShading = { variant: 'smooth', normalCpuMs: smoothed.cpuMs, maxNormalBatchMs: smoothed.maxBatchMs,
+        scratchBytes: smoothed.scratchBytes, retainedAttributeByteDelta: 0 };
     mesh.userData.textureClones = textureClones;
     mesh.userData.spatial = spatial?.diagnostics ?? null;
     if (blended) blendedWorlds.set(mesh, { world, snow });

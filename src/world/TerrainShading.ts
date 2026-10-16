@@ -1,8 +1,6 @@
 import { sampleEnvironment } from '../world-generation/EnvironmentZoning';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 
-export type TerrainShading = 'baseline' | 'smooth';
-
 /** Area-weight the canonical adjacent faces once. Duplicate render vertices reuse these corners. */
 export function* heightfieldNormalSteps(world: WorldBlueprint, triangles: readonly number[][]):
     Generator<void, { corners: Float64Array; rock: Float32Array; cpuMs: number; maxBatchMs: number; scratchBytes: number }> {

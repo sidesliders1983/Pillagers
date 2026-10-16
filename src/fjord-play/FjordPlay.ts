@@ -519,7 +519,6 @@ export class FjordPlay {
                 const blueprint = this.campaign.blueprint;
                 const revision = ++this.worldRevision;
                 const next = await createWorld(assets!, { mode: 'generated', blueprint,
-                    terrainShading: query.get('terrain-study') === 'baseline' ? 'baseline' : 'smooth',
                     settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                     anisotropy: renderer.capabilities.getMaxAnisotropy(),
                     preparation: async (stage, operation) => {
