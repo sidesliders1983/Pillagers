@@ -1,6 +1,6 @@
 # Terrain shading pilot — #173
 
-The owner selected B from the paired images on 2026-10-16. A remains the default in this pilot; B is an explicit Environment Lab and full-campaign preview. Physical iPhone/iPad gameplay has not yet been reviewed, and the separate default pass remains open.
+The owner selected B from the paired images and then reported trying B in the game and preferring it on 2026-10-16. A separate integration step enables B by default in /fjord-play. A remains the explicit Lab/reference variant. No instrumented physical Safari/iPhone frame measurements were collected; the owner gameplay trial is qualitative.
 
 ## Visual diagnosis
 
@@ -61,4 +61,4 @@ The browser runner asserts identical A/B position, UV0/1/2/3, colour and index h
 
 See [implementation contract](../../TERRAIN-SHADING-STUDY.md), [Lab data](lab/results.json), [full-scene distributions](full-scene/results.json) and [summary](summary.json) and [local asset hashes](asset-manifest.json). The gallery was captured at commit `374948fbe5db16485a77c5de740b9ac17ab65e2b`; later source changes before timing affect QA hashing/resume only, not terrain runtime. Histograms and run summaries are retained; individual frame samples are not. Fixture files are the existing `docs/qa/fjord-runtime-performance/fixtures` sources, identified by SHA-256 in every result.
 
-No default change is included. Visual choice B is recorded. The owner has reviewed the comparison images only; use `/fjord-play?terrain-study=smooth` for the physical-device gameplay check before the separate integration/default pass.
+Following the owner image review and subsequent gameplay trial, the separate integration commit enables B by default on `/fjord-play`. `/fjord-play?terrain-study=baseline` remains available for controlled A diagnostics. The measured normal algorithm is unchanged by this default-selection step.

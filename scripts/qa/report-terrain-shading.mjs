@@ -59,7 +59,7 @@ const gates = summary.map(group => '- ' + (group.mobile ? '390px' : '1280px') + 
     ': median ' + format(group.delta50) + '%, p95 ' + format(group.delta95) + '% — ' + group.provisionalGate + '.');
 const report = [
     '# Terrain shading pilot — #173', '',
-    'The owner selected B from the paired images on 2026-10-16. A remains the default in this pilot; B is an explicit Environment Lab and full-campaign preview. Physical iPhone/iPad gameplay has not yet been reviewed, and the separate default pass remains open.', '',
+    'The owner selected B from the paired images and then reported trying B in the game and preferring it on 2026-10-16. A separate integration step enables B by default in /fjord-play. A remains the explicit Lab/reference variant. No instrumented physical Safari/iPhone frame measurements were collected; the owner gameplay trial is qualitative.', '',
     '## Visual diagnosis', '',
     'The neutral, texture-free pass shows that shared normals reduce the regular triangular lighting pattern on grassy rolling slopes. Fully exposed bedrock retains deliberate face definition. Broad already-flat parcels show little difference. Source texture detail and zoning bands remain visible; this pilot does not claim to erase the heightfield silhouette or every material transition.', '',
     'The grass-only UV diagnostic holds normals fixed against the full material pass. B is the visually selected variant. C is omitted: the evidence does not establish a need for adding UV distortion to this focused normal correction. Source UVs and mask UVs remain byte-identical.', '',
@@ -81,7 +81,7 @@ const report = [
     '## Correctness and reproduction', '',
     'The browser runner asserts identical A/B position, UV0/1/2/3, colour and index hashes, restored time, Core and canonical world exports. The Lab runner asserts unchanged exports after variant and quality changes and checks latest-request behavior. The public mesh tests cover shared normals, rock definition, deep-sea join, all material flags including climate snow, identical masks/geometry/UVs and asynchronous output. Existing navigation, loading, seasons and deterministic campaign regressions remain in the repository suite.', '',
     'See [implementation contract](../../TERRAIN-SHADING-STUDY.md), [Lab data](lab/results.json), [full-scene distributions](full-scene/results.json) and [summary](summary.json) and [local asset hashes](asset-manifest.json). The gallery was captured at commit `' + full.gallerySourceCommit + '`; later source changes before timing affect QA hashing/resume only, not terrain runtime. Histograms and run summaries are retained; individual frame samples are not. Fixture files are the existing `docs/qa/fjord-runtime-performance/fixtures` sources, identified by SHA-256 in every result.', '',
-    'No default change is included. Visual choice B is recorded. The owner has reviewed the comparison images only; use `/fjord-play?terrain-study=smooth` for the physical-device gameplay check before the separate integration/default pass.', '',
+    'Following the owner image review and subsequent gameplay trial, the separate integration commit enables B by default on `/fjord-play`. `/fjord-play?terrain-study=baseline` remains available for controlled A diagnostics. The measured normal algorithm is unchanged by this default-selection step.', '',
 ];
 await writeFile(directory + '/report.md', report.join('\n'));
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
@@ -112,9 +112,9 @@ const html = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="v
 body{margin:0;background:#172b27;color:#eee6d2;font:16px/1.5 system-ui}main{max-width:1500px;margin:auto;padding:24px}a{color:#ebcb7e}
 h1,h2{line-height:1.2}.pairs{display:grid;grid-template-columns:1fr 1fr;gap:12px}figure{margin:0}img{width:100%;display:block}section{margin:32px 0;border-top:1px solid #708174;padding-top:16px}figcaption{padding:6px}small{color:#bfc9bb}button{font:inherit;padding:10px;margin:4px;background:#334c40;color:inherit;border:1px solid #a39468;border-radius:4px}@media(max-width:700px){main{padding:12px}.pairs{grid-template-columns:1fr}}
 </style><main><h1>Terrain shading: A / B</h1>
-<p>A is the existing default. B shares grassy heightfield normals while retaining exposed rock definition. Geometry, approved maps and saves stay identical.</p>
+<p>B is the approved game default. It shares grassy heightfield normals while retaining exposed rock definition. A remains available in the Lab for comparison. Geometry, approved maps and saves stay identical.</p>
 <p><a href="report.md">Measurements and limitations</a> · <a href="/environment-lab">Environment Lab</a> · <a href="/fjord-play?terrain-study=smooth">Open B in the full game</a></p>
-<p>C was not added. This review tests the normal correction without distorting the approved source UVs. The owner selected B visually. Physical iPhone/iPad gameplay and loading still need review before the separate default pass.</p>
+<p>C was not added. This review tests the normal correction without distorting the approved source UVs. The owner selected B visually, then tried B in the game and confirmed the preference. B is now the game default. Instrumented physical Safari/iPhone performance remains unmeasured.</p>
 ${pairs.map(pair => `<section><h2>${escape(pair.title)}</h2><p><small>${escape(pair.note)}</small></p><div class="pairs"><figure><a href="${pair.a}"><img loading="lazy" src="${pair.a}" alt="${escape(pair.title)} A existing flat normals"></a><figcaption>A · existing flat normals</figcaption></figure><figure><a href="${pair.b}"><img loading="lazy" src="${pair.b}" alt="${escape(pair.title)} B shared normals"></a><figcaption>B · shared normals</figcaption></figure></div></section>`).join('')}
 </main></html>`;
 await writeFile(directory + '/review.html', html);

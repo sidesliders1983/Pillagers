@@ -1,11 +1,13 @@
 # Terrain shading study — issue #173
 
-This is an opt-in presentation study. The owner selected B from the paired images on 2026-10-16.
-The existing flat terrain (A) remains the default until the separate integration/default pass;
-physical iPhone/iPad gameplay and loading have not yet been reviewed.
+The owner selected B from the paired images, then reported trying B in the game and preferring it
+on 2026-10-16. A separate integration step enables B by default on `/fjord-play`.
+The study and reference APIs retain A as an explicit comparison. No instrumented physical
+Safari/iPhone performance measurements were collected; the owner gameplay trial is qualitative.
 Environment Lab offers A and B after generating or importing a world. Select **Zoned blend**
 when reviewing the approved island materials. The full campaign preview is available at
-`/fjord-play?terrain-study=smooth`; omitting the parameter retains A.
+`/fjord-play` (B by default), or explicitly `/fjord-play?terrain-study=smooth`.
+Use `/fjord-play?terrain-study=baseline` to compare A.
 
 ## B: shared heightfield normals
 
@@ -51,6 +53,7 @@ Normal, colour, roughness, rock-axis and seasonal material behavior use the exis
 ## Reproduce
 
 - `node --test tests/terrain-shading-study.test.mjs`
+- `node scripts/qa/check-terrain-default.mjs` against the normal production build on 5180.
 - Run the normal Vite development server on 5193, then `node scripts/qa/check-terrain-shading.mjs`.
 - Run the existing QA-only server with `QA_PORT=5194`, then
   `node scripts/qa/measure-terrain-shading.mjs`. PowerShell users set environment variables with
@@ -59,5 +62,5 @@ Normal, colour, roughness, rock-axis and seasonal material behavior use the exis
   `node scripts/qa/report-terrain-shading.mjs`.
 
 The QA bridge is injected only by the isolated QA server and is absent from normal builds.
-See [the measured review](qa/terrain-shading/report.md). B is visually approved. Physical Safari/iPhone
-validation remains open before the separate default activation.
+See [the measured review](qa/terrain-shading/report.md). B is approved after the image review and owner gameplay trial. The default-selection change
+does not alter the measured normal algorithm or the quantitative evidence above.
