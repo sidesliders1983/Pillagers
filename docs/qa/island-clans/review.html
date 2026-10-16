@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Living island clan · FjordSide review</title>
+<style>
+:root { color-scheme: dark; font-family: system-ui, sans-serif; background: #122923; color: #eee6cd; }
+body { max-width: 1120px; margin: 0 auto; padding: 24px; line-height: 1.55; }
+h1,h2 { font-family: Georgia, serif; } a { color: #ebcf85; }
+button { color: inherit; background: #354e40; border: 1px solid #b0aa7f; border-radius: 8px; padding: 14px 20px; font: inherit; cursor: pointer; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; } .note { border-left: 3px solid #c6ac6c; padding-left: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,380px),1fr)); gap: 18px; }
+figure { margin: 0; } img { width: 100%; height: auto; border-radius: 8px; } figcaption,small { font-size: .9rem; color: #c1c8bd; }
+#status { min-height: 1.6em; } li { margin-block: 8px; }
+</style>
+<h1>One real community beyond the ridge</h1>
+<p>The rival exists from the summer landing and advances with the campaign clock, even while unseen. Its residents, tents, cattle and campfire come from its saved simulation.</p>
+<p class="note">Review prototype · draft PR #185 · #149. Existing campaigns retain their own world. These scenarios use genuine scout travel, without injected discovery or extra supplies.</p>
+<div class="actions"><button data-scenario="hidden">Open hidden valley</button><button data-scenario="observed">Open scout observation</button></div>
+<p id="status" role="status"></p>
+<small>Each button opens a paused test campaign in a new tab, with the camera facing the rival reserve. Your current tab keeps its session. The review tab can update the automatic resume checkpoint; export a valued campaign before testing. Close the founding Clan Book if it opens.</small>
+<h2>What to review</h2>
+<ol>
+<li><strong>Hidden valley:</strong> white discovery fog; no rival actors, names or inventory. Moving the camera alone must not discover the community.</li>
+<li><strong>Scout observation:</strong> actual tents, ten residents, three cattle and a campfire. Start the clock to see movement; Pause stops it.</li>
+<li>Try touch selection, rotation and zoom. Rival residents must not open the player's management or heritage panels. Food, Materials and population totals stay player-only.</li>
+<li>Let the scout return or use Return Home. Terrain stays mapped; unobserved live actors disappear. Save/reload preserves the same community.</li>
+</ol>
+<h2>Recorded production views</h2>
+<div class="grid">
+<figure><a href="unknown-desktop.png"><img src="unknown-desktop.png" alt="Unknown reserve through white discovery fog"></a><figcaption>Reserved valley before observation.</figcaption></figure>
+<figure><a href="observed-desktop.png"><img src="observed-desktop.png" alt="Rival tents, campfire and anonymous residents"></a><figcaption>Real scout observation; existing sourced models.</figcaption></figure>
+<figure><a href="observed-390-low.png"><img src="observed-390-low.png" alt="Observed rival at 390 px Low"></a><figcaption>390 px Low, desktop emulation.</figcaption></figure>
+<figure><a href="observed-390-standard.png"><img src="observed-390-standard.png" alt="Observed rival at 390 px Standard"></a><figcaption>390 px Standard, desktop emulation.</figcaption></figure>
+</div>
+<h2>Measured limits</h2>
+<p>All ten founding populations fit across the two curated island geometries. The existing 500-tick expedition pack reaches observations on island 7; tested trips on island 18 return before seeing the rival. Food, endurance and route-search budgets are unchanged.</p>
+<p>The 100-Winter replay matches an independent CPU run, including save/load halfway through. Seed 32 eventually loses all residents under existing rules; there is no hidden respawn, subsidy or new CPU management policy.</p>
+<p>Physical iPhone/iPad performance and owner acceptance remain open. Desktop emulation is reported separately.</p>
+<p><a href="report.md">Report</a> · <a href="measurements.json">Ten seeds and replay</a> · <a href="browser.json">Raw browser measurements</a> · <a href="models.json">Model and culling evidence</a> · <a href="https://github.com/sidesliders1983/Pillagers/pull/185">Draft PR #185</a></p>
+<script>
+for (const button of document.querySelectorAll('[data-scenario]')) button.addEventListener('click', async () => {
+    const tab = window.open('about:blank', '_blank');
+    const status = document.querySelector('#status');
+    if (!tab) { status.textContent = 'Allow a new tab to open the test campaign.'; return; }
+    tab.document.title = 'Preparing review campaign';
+    tab.document.body.textContent = 'Opening the review campaign…';
+    try {
+        const response = await fetch(button.dataset.scenario + '.json');
+        if (!response.ok) throw new Error('Could not read the review campaign.');
+        tab.sessionStorage.setItem('pillagers.fjord-play.active.v1', JSON.stringify(await response.json()));
+        tab.opener = null;
+        tab.location.replace('/fjord-play?discovery=1&debugDiscovery=1');
+        status.textContent = 'Opened a paused review campaign in a new tab.';
+    } catch (error) { tab.close(); status.textContent = String(error.message || error); }
+});
+</script>
+</html>

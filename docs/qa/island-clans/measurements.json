@@ -1,0 +1,244 @@
+{
+  "sourceHashes": {
+    "src/simulation/SimulationCore.ts": "022d7853036ba358607e8b0e6d87dca04695a070693ea802e3ac964bfc1f6489",
+    "src/simulation/WorldExpeditions.ts": "77729eb989f31f2a5d44e1fee74aef8874dcaa621133506a6b8e6bbc5575a578",
+    "src/simulation/IslandClans.ts": "1d6fd0aacc2db169d68d68c2ebd879eccdc9520331ae30d6d312c9a7155f0c17",
+    "src/fjord-play/RivalSettlement.ts": "a585181151e2cd55982f5f1474ac1b0716ad94f7bb712df4bfd52b48290a8ddb",
+    "src/fjord-play/RivalScene.ts": "3baf7eaacf885168900a351a2516c3422d11279bdf40406be18778d685519773",
+    "src/fjord-play/FjordCampaign.ts": "21d5e2203696852a719ebc356787080e5d1f5da4a8fcd4373f6ea3714c7e0398",
+    "src/fjord-play/FjordProjection.ts": "bd9d2d8278be8ddfa558ca673d4fae2513467f838415000538c1d727ac364af8"
+  },
+  "cases": [
+    {
+      "seed": 17,
+      "islandSeed": 7,
+      "foundingMs": 15768.775099999999,
+      "households": 9,
+      "foundingActors": 23,
+      "missing": [],
+      "observedAt": 84,
+      "visibleActors": 23,
+      "visibleResidents": 10,
+      "phase": "Traveling",
+      "routeOrders": 6,
+      "routeError": "Error: Choose a destination farther from the group.",
+      "totalMs": 17216.6976
+    },
+    {
+      "seed": 42,
+      "islandSeed": 18,
+      "foundingMs": 19290.358,
+      "households": 9,
+      "foundingActors": 23,
+      "missing": [],
+      "observedAt": null,
+      "visibleActors": 0,
+      "visibleResidents": 0,
+      "phase": "",
+      "routeOrders": 12,
+      "routeError": null,
+      "totalMs": 21992.4027
+    },
+    {
+      "seed": 91,
+      "islandSeed": 7,
+      "foundingMs": 122.39830000000075,
+      "households": 8,
+      "foundingActors": 22,
+      "missing": [],
+      "observedAt": 84,
+      "visibleActors": 22,
+      "visibleResidents": 10,
+      "phase": "Traveling",
+      "routeOrders": 6,
+      "routeError": "Error: Choose a destination farther from the group.",
+      "totalMs": 1448.024400000002
+    },
+    {
+      "seed": 1983,
+      "islandSeed": 7,
+      "foundingMs": 124.36160000000382,
+      "households": 8,
+      "foundingActors": 22,
+      "missing": [],
+      "observedAt": 84,
+      "visibleActors": 22,
+      "visibleResidents": 10,
+      "phase": "Traveling",
+      "routeOrders": 6,
+      "routeError": "Error: Choose a destination farther from the group.",
+      "totalMs": 1658.0755000000063
+    },
+    {
+      "seed": 1337,
+      "islandSeed": 7,
+      "foundingMs": 151.61539999999513,
+      "households": 8,
+      "foundingActors": 22,
+      "missing": [],
+      "observedAt": 84,
+      "visibleActors": 22,
+      "visibleResidents": 10,
+      "phase": "Traveling",
+      "routeOrders": 6,
+      "routeError": "Error: Choose a destination farther from the group.",
+      "totalMs": 1787.4634000000005
+    },
+    {
+      "seed": 7,
+      "islandSeed": 7,
+      "foundingMs": 136.62590000000637,
+      "households": 10,
+      "foundingActors": 24,
+      "missing": [],
+      "observedAt": 84,
+      "visibleActors": 24,
+      "visibleResidents": 10,
+      "phase": "Traveling",
+      "routeOrders": 6,
+      "routeError": "Error: Choose a destination farther from the group.",
+      "totalMs": 1483.8480000000054
+    },
+    {
+      "seed": 18,
+      "islandSeed": 18,
+      "foundingMs": 124.80359999999928,
+      "households": 9,
+      "foundingActors": 23,
+      "missing": [],
+      "observedAt": null,
+      "visibleActors": 0,
+      "visibleResidents": 0,
+      "phase": "",
+      "routeOrders": 12,
+      "routeError": null,
+      "totalMs": 2647.8076
+    },
+    {
+      "seed": 32,
+      "islandSeed": 18,
+      "foundingMs": 113.44100000000617,
+      "households": 8,
+      "foundingActors": 22,
+      "missing": [],
+      "observedAt": null,
+      "visibleActors": 0,
+      "visibleResidents": 0,
+      "phase": "",
+      "routeOrders": 12,
+      "routeError": null,
+      "totalMs": 2659.3396000000066
+    },
+    {
+      "seed": 64,
+      "islandSeed": 18,
+      "foundingMs": 120.81440000000293,
+      "households": 10,
+      "foundingActors": 24,
+      "missing": [],
+      "observedAt": null,
+      "visibleActors": 0,
+      "visibleResidents": 0,
+      "phase": "",
+      "routeOrders": 12,
+      "routeError": null,
+      "totalMs": 3053.005400000002
+    },
+    {
+      "seed": 127,
+      "islandSeed": 7,
+      "foundingMs": 158.24669999999605,
+      "households": 8,
+      "foundingActors": 22,
+      "missing": [],
+      "observedAt": 84,
+      "visibleActors": 22,
+      "visibleResidents": 10,
+      "phase": "Traveling",
+      "routeOrders": 6,
+      "routeError": "Error: Choose a destination farther from the group.",
+      "totalMs": 1587.7809999999954
+    }
+  ],
+  "curatedGeometries": [
+    7,
+    18
+  ],
+  "replay": {
+    "seed": 32,
+    "winters": 100,
+    "ticks": 100000,
+    "saveAtYear": 50,
+    "independentMs": 2474.104100000004,
+    "coupledAndProjectionMs": 11376.556999999993,
+    "exact": true,
+    "growth": [
+      {
+        "year": 1,
+        "time": {
+          "winter": 801,
+          "tick": 500
+        },
+        "living": 10,
+        "households": 7,
+        "houses": 0,
+        "missing": []
+      },
+      {
+        "year": 5,
+        "time": {
+          "winter": 805,
+          "tick": 500
+        },
+        "living": 10,
+        "households": 5,
+        "houses": 0,
+        "missing": []
+      },
+      {
+        "year": 10,
+        "time": {
+          "winter": 810,
+          "tick": 500
+        },
+        "living": 11,
+        "households": 5,
+        "houses": 0,
+        "missing": []
+      },
+      {
+        "year": 20,
+        "time": {
+          "winter": 820,
+          "tick": 500
+        },
+        "living": 11,
+        "households": 5,
+        "houses": 0,
+        "missing": []
+      },
+      {
+        "year": 50,
+        "time": {
+          "winter": 850,
+          "tick": 500
+        },
+        "living": 6,
+        "households": 3,
+        "houses": 1,
+        "missing": []
+      },
+      {
+        "year": 100,
+        "time": {
+          "winter": 900,
+          "tick": 500
+        },
+        "living": 0,
+        "households": 0,
+        "houses": 0,
+        "missing": []
+      }
+    ]
+  }
+}

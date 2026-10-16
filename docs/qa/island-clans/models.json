@@ -1,0 +1,3125 @@
+{
+  "hiddenResources": {
+    "actors": 0,
+    "sourceTemplates": 0,
+    "ownedInstanceRoots": 0
+  },
+  "hiddenEntities": [],
+  "visibleEntities": [
+    {
+      "key": "campfire:rival-models:campfire",
+      "renderId": "bf7d3799-da2b-4311-be36-2bd84ce6ad89",
+      "kind": "campfire",
+      "id": "rival-models:campfire",
+      "living": false,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        352,
+        0,
+        128
+      ],
+      "asset": "stoneCampfire",
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 348.7993942467509,
+          "y": 0,
+          "z": 124.77101361751556
+        },
+        "max": {
+          "x": 355.2006057532491,
+          "y": 1.500231595414382,
+          "z": 131.22898638248444
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-1",
+      "renderId": "bdaa3a1d-8dd8-4c42-888a-c5ca9a396dcf",
+      "kind": "household",
+      "id": "island-rival:founder-1",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        344,
+        0,
+        120
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 343.0606618134177,
+          "y": 0,
+          "z": 119.0001
+        },
+        "max": {
+          "x": 344.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 120.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-1",
+      "renderId": "7854f970-eaf9-48f2-b266-8e3ba15cd2ca",
+      "kind": "persona",
+      "id": "island-rival:founder-1",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        339.93933982822017,
+        0,
+        123.43933982822018
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 338.4525189975732,
+          "y": -0.015051590084572047,
+          "z": 122.80235198967354
+        },
+        "max": {
+          "x": 341.45750796612873,
+          "y": 1.4430810046187623,
+          "z": 124.13746972103299
+        }
+      },
+      "appearance": {
+        "seed": 3756661009,
+        "height": 1.4060316548962146,
+        "adultAge": 35,
+        "masculinity": 0.49,
+        "weightDeviation": -0.04142465721242101,
+        "age": 35,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9808,
+          "stride": 1,
+          "footfall": 0.7899999999999999
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.19199999999999998,
+          "Tall": 0,
+          "Short": 0.12131551822780472,
+          "Overweight": 0,
+          "Underweight": 0.024854794327452603,
+          "Age": 0,
+          "HeadWidth": -0.16439604484476147,
+          "HeadLength": 0.0349415629170835,
+          "Jaw": -0.05982530107721686,
+          "Nose": 0.19394127521663904,
+          "LegRatio": -0.06302037416025996,
+          "ShoulderSlope": 0.036502670496702194,
+          "Asymmetry": 0.11326863630674779,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-10",
+      "renderId": "7a699568-1df8-4829-9564-ba52391b9239",
+      "kind": "household",
+      "id": "island-rival:founder-10",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        360,
+        0,
+        120
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 359.0606618134177,
+          "y": 0,
+          "z": 119.0001
+        },
+        "max": {
+          "x": 360.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 120.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-10",
+      "renderId": "6fbf147d-fabd-4033-8647-728eb0e0393d",
+      "kind": "persona",
+      "id": "island-rival:founder-10",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        357,
+        0,
+        124.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 355.4384960437806,
+          "y": -0.009534899457755975,
+          "z": 123.87407967713041
+        },
+        "max": {
+          "x": 358.584516653913,
+          "y": 1.3993133214057143,
+          "z": 125.19550044511469
+        }
+      },
+      "appearance": {
+        "seed": 1730959402,
+        "height": 1.3626523313391954,
+        "adultAge": 28,
+        "masculinity": 0.51,
+        "weightDeviation": 0.32443984570374595,
+        "age": 28,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#49443f",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0432,
+          "stride": 1,
+          "footfall": 0.7959999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.432,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.27624167378858766,
+          "Overweight": 0.19466390742224757,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.13218574631027877,
+          "HeadLength": -0.24436404816806315,
+          "Jaw": -0.15228702882304787,
+          "Nose": -0.06405907636508346,
+          "LegRatio": -0.2278666776837781,
+          "ShoulderSlope": -0.0796510998159647,
+          "Asymmetry": 0.033012249902822074,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.008640000000000007,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-2",
+      "renderId": "a91e8ec7-2b4f-4db8-bdf5-2c863843cae2",
+      "kind": "household",
+      "id": "island-rival:founder-2",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        344,
+        0,
+        136
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 343.0606618134177,
+          "y": 0,
+          "z": 135.0001
+        },
+        "max": {
+          "x": 344.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 136.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-2",
+      "renderId": "2fd88f91-f9bb-4aaa-bdf5-0277034416cd",
+      "kind": "persona",
+      "id": "island-rival:founder-2",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        341,
+        0,
+        140.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 339.5077092715418,
+          "y": -0.015025747266846875,
+          "z": 139.78425698763454
+        },
+        "max": {
+          "x": 342.5322935727448,
+          "y": 1.517216562285147,
+          "z": 141.29152737483682
+        }
+      },
+      "appearance": {
+        "seed": 1610368848,
+        "height": 1.478046117099002,
+        "adultAge": 24,
+        "masculinity": 0.51,
+        "weightDeviation": 0.40060209012722153,
+        "age": 24,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "medium",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0048,
+          "stride": 1,
+          "footfall": 1.126
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.04800000000000004,
+          "Grounded": 0,
+          "Tall": 0.15852548791250864,
+          "Short": 0,
+          "Overweight": 0.2403612540763329,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.16822818140499293,
+          "HeadLength": -0.2279264084994793,
+          "Jaw": 0.08338061319664121,
+          "Nose": 0.08267491171136498,
+          "LegRatio": -0.12564353039488196,
+          "ShoulderSlope": 0.10890014693140984,
+          "Asymmetry": -0.08160224460298195,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.0009600000000000017,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-3",
+      "renderId": "cb0107a5-5ebf-429e-a54a-215f8b13da4f",
+      "kind": "household",
+      "id": "island-rival:founder-3",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        360,
+        0,
+        136
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 359.0606618134177,
+          "y": 0,
+          "z": 135.0001
+        },
+        "max": {
+          "x": 360.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 136.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-3",
+      "renderId": "b5657338-f5db-417f-b329-0861ea6febe8",
+      "kind": "persona",
+      "id": "island-rival:founder-3",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        357,
+        0,
+        140.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 355.46100053862114,
+          "y": -0.009446018171977422,
+          "z": 139.79864917546084
+        },
+        "max": {
+          "x": 358.5743865720062,
+          "y": 1.3656418343974064,
+          "z": 141.2595422674695
+        }
+      },
+      "appearance": {
+        "seed": 2831694642,
+        "height": 1.3266676140297204,
+        "adultAge": 36,
+        "masculinity": 0.49,
+        "weightDeviation": 0.22596594876735876,
+        "age": 36,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9976,
+          "stride": 1,
+          "footfall": 1.012
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.02400000000000002,
+          "Tall": 0,
+          "Short": 0.40475852132242673,
+          "Overweight": 0.13557956926041526,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.20324201504699885,
+          "HeadLength": 0.21700644688680767,
+          "Jaw": -0.26706169699318705,
+          "Nose": 0.2644159820862114,
+          "LegRatio": -0.06826654181350023,
+          "ShoulderSlope": 0.11026455741375685,
+          "Asymmetry": 0.06766274379333481,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-4",
+      "renderId": "9e0573be-e127-4539-ae4d-6daa031c5f61",
+      "kind": "household",
+      "id": "island-rival:founder-4",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        352,
+        0,
+        116
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 351.0606618134177,
+          "y": 0,
+          "z": 115.0001
+        },
+        "max": {
+          "x": 352.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 116.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-4",
+      "renderId": "467ea3f8-1c24-4256-8df5-b5690dd6cd21",
+      "kind": "persona",
+      "id": "island-rival:founder-4",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        349,
+        0,
+        120.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 347.4777202334748,
+          "y": -0.020911640898394174,
+          "z": 119.85799644361238
+        },
+        "max": {
+          "x": 350.5615840380888,
+          "y": 1.516704846093738,
+          "z": 121.19949087543088
+        }
+      },
+      "appearance": {
+        "seed": 3473329451,
+        "height": 1.4780664251931013,
+        "adultAge": 19,
+        "masculinity": 0.49,
+        "weightDeviation": 0.5977238110964052,
+        "age": 19,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0324,
+          "stride": 1,
+          "footfall": 1.144
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.324,
+          "Grounded": 0,
+          "Tall": 0.15861010497125555,
+          "Short": 0,
+          "Overweight": 0.3586342866578431,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.1779153838288039,
+          "HeadLength": -0.05732676386833191,
+          "Jaw": 0.015356149524450302,
+          "Nose": 0.2993035707157105,
+          "LegRatio": -0.03074575203936547,
+          "ShoulderSlope": 0.12056524613872172,
+          "Asymmetry": 0.16936556558357552,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-6",
+      "renderId": "2040635f-d6aa-4a2f-b061-e7df346ecd44",
+      "kind": "persona",
+      "id": "island-rival:founder-6",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        350.8,
+        0,
+        120.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 349.25674042454244,
+          "y": -0.008310996831776597,
+          "z": 119.9027286225895
+        },
+        "max": {
+          "x": 352.359452739157,
+          "y": 1.3948246976300847,
+          "z": 121.16918609109528
+        }
+      },
+      "appearance": {
+        "seed": 1226752555,
+        "height": 1.3589039219357073,
+        "adultAge": 24,
+        "masculinity": 0.51,
+        "weightDeviation": 0.22840958367808273,
+        "age": 24,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9448,
+          "stride": 1,
+          "footfall": 0.8799999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.552,
+          "Tall": 0,
+          "Short": 0.28962885022961654,
+          "Overweight": 0.13704575020684964,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.15510448766872287,
+          "HeadLength": 0.25886270035989584,
+          "Jaw": 0.21470534191466867,
+          "Nose": 0.1753836900461465,
+          "LegRatio": -0.14727909525390714,
+          "ShoulderSlope": -0.18799309358000757,
+          "Asymmetry": 0.04959275339497253,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-5",
+      "renderId": "9bbd9fad-72a5-4dfe-bee8-ec82c3e9fac9",
+      "kind": "household",
+      "id": "island-rival:founder-5",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        340,
+        0,
+        128
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 339.0606618134177,
+          "y": 0,
+          "z": 127.0001
+        },
+        "max": {
+          "x": 340.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 128.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-5",
+      "renderId": "c5541e35-d7d3-42fd-bfdb-595de78f386e",
+      "kind": "persona",
+      "id": "island-rival:founder-5",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "occupation": "farmer",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        337,
+        0,
+        132.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 335.50746549791575,
+          "y": -0.0191996875976643,
+          "z": 131.8556650899191
+        },
+        "max": {
+          "x": 338.508571550732,
+          "y": 1.4640752641896453,
+          "z": 133.22685638824055
+        }
+      },
+      "appearance": {
+        "seed": 2623371866,
+        "height": 1.4227715462259949,
+        "adultAge": 24,
+        "masculinity": 0.49,
+        "weightDeviation": 0.21135318064731504,
+        "age": 24,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0576,
+          "stride": 1,
+          "footfall": 1.27
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.576,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.061530192050018064,
+          "Overweight": 0.12681190838838902,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.18192480839788913,
+          "HeadLength": -0.20865731765516102,
+          "Jaw": 0.10286207464523613,
+          "Nose": -0.04832724630832672,
+          "LegRatio": 0.035948497243225574,
+          "ShoulderSlope": -0.18921959707513453,
+          "Asymmetry": -0.1266574037261307,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "farmerFemale",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "outfit": null,
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": "garment/meshy-long-skirt-005",
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-7",
+      "renderId": "f9ada503-b01b-4d32-b875-f72d94b91a5f",
+      "kind": "household",
+      "id": "island-rival:founder-7",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        364,
+        0,
+        128
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 363.0606618134177,
+          "y": 0,
+          "z": 127.0001
+        },
+        "max": {
+          "x": 364.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 128.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-7",
+      "renderId": "683ad214-f20a-4e94-ad62-e972b7de53d8",
+      "kind": "persona",
+      "id": "island-rival:founder-7",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        359.93933982822017,
+        0,
+        131.43933982822017
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 358.3496132487414,
+          "y": -0.01037774126831376,
+          "z": 130.79367952657446
+        },
+        "max": {
+          "x": 361.545810515037,
+          "y": 1.5176365517043529,
+          "z": 132.16791140708386
+        }
+      },
+      "appearance": {
+        "seed": 3150245269,
+        "height": 1.4793912889249623,
+        "adultAge": 40,
+        "masculinity": 0.49,
+        "weightDeviation": 0.30564344830440027,
+        "age": 40,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "bun",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9616,
+          "stride": 1,
+          "footfall": 0.8979999999999999
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.384,
+          "Tall": 0.16413037052067647,
+          "Short": 0,
+          "Overweight": 0.18338606898264015,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.07217270694673061,
+          "HeadLength": 0.14638411388732492,
+          "Jaw": 0.07737512066960335,
+          "Nose": -0.1033165372442454,
+          "LegRatio": 0.033685315982438624,
+          "ShoulderSlope": -0.19184565385803581,
+          "Asymmetry": -0.05078126677544787,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-9",
+      "renderId": "9a1ce215-4b82-48e7-bf01-9644eb4febae",
+      "kind": "persona",
+      "id": "island-rival:founder-9",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "occupation": "farmer",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        364.3,
+        0,
+        132.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 362.7077647860069,
+          "y": -0.021444351576009987,
+          "z": 131.83750644412206
+        },
+        "max": {
+          "x": 365.9171972594126,
+          "y": 1.4499630175210008,
+          "z": 133.23251129519699
+        }
+      },
+      "appearance": {
+        "seed": 3571356112,
+        "height": 1.4124708226695657,
+        "adultAge": 22,
+        "masculinity": 0.51,
+        "weightDeviation": -0.28353407318788443,
+        "age": 22,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#49443f",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.994,
+          "stride": 1,
+          "footfall": 1.018
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.059999999999999984,
+          "Tall": 0,
+          "Short": 0.0983184904658366,
+          "Overweight": 0,
+          "Underweight": 0.17012044391273065,
+          "Age": 0,
+          "HeadWidth": 0.07582185161300004,
+          "HeadLength": -0.03787577846087515,
+          "Jaw": 0.02243785886093974,
+          "Nose": 0.11353978724218905,
+          "LegRatio": -0.08660954586230218,
+          "ShoulderSlope": -0.06323348972946406,
+          "Asymmetry": 0.03337868272792548,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "farmerMale",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": null,
+          "shoes": "garment/meshy-high-shoes-005",
+          "trousers": "garment/meshy-short-trousers-006",
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-8",
+      "renderId": "e2d83c00-f6bb-4c25-a841-c99295b12b6a",
+      "kind": "household",
+      "id": "island-rival:founder-8",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        352,
+        0,
+        140
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 351.0606618134177,
+          "y": 0,
+          "z": 139.0001
+        },
+        "max": {
+          "x": 352.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 140.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-8",
+      "renderId": "9b43f492-702d-4d90-8151-105062abd886",
+      "kind": "persona",
+      "id": "island-rival:founder-8",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        349,
+        0,
+        144.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 347.4701539465305,
+          "y": -0.019211899022666477,
+          "z": 143.78488250550106
+        },
+        "max": {
+          "x": 350.5589072232828,
+          "y": 1.4931434300924642,
+          "z": 145.29336124189774
+        }
+      },
+      "appearance": {
+        "seed": 2512799758,
+        "height": 1.4547308795433491,
+        "adultAge": 30,
+        "masculinity": 0.51,
+        "weightDeviation": -0.15800415729592485,
+        "age": 30,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#986e55",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0444,
+          "stride": 1,
+          "footfall": 1.0539999999999998
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.444,
+          "Grounded": 0,
+          "Tall": 0.06137866476395489,
+          "Short": 0,
+          "Overweight": 0,
+          "Underweight": 0.0948024943775549,
+          "Age": 0,
+          "HeadWidth": 0.25908326329663395,
+          "HeadLength": 0.05938754472881555,
+          "Jaw": -0.08963033887557685,
+          "Nose": -0.05890460768714547,
+          "LegRatio": -0.04338424711022526,
+          "ShoulderSlope": -0.007816863246262074,
+          "Asymmetry": -0.11888793382095172,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.008880000000000008,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:island-rival:cattle-1",
+      "renderId": "d876c10d-901c-4db2-bdc8-7c189b263dae",
+      "kind": "cattle",
+      "id": "island-rival:cattle-1",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "stage": "Adult",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        345,
+        0,
+        125
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 344.4053117019689,
+          "y": 1.5239816786999372e-17,
+          "z": 124.12513110056062
+        },
+        "max": {
+          "x": 345.52516292953,
+          "y": 1.2438654015331976,
+          "z": 125.86929952242868
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle",
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:island-rival:cattle-2",
+      "renderId": "2e84573e-e337-4c8b-a8ba-6b276e36819a",
+      "kind": "cattle",
+      "id": "island-rival:cattle-2",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "stage": "Adult",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        347,
+        0,
+        125
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 346.40531170196886,
+          "y": 1.5239816786999372e-17,
+          "z": 124.12513110056071
+        },
+        "max": {
+          "x": 347.52516292953,
+          "y": 1.2438654015331976,
+          "z": 125.86929952242876
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle",
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:island-rival:cattle-3",
+      "renderId": "e1c63a03-4b9f-4b59-bdd4-5d26a116ec39",
+      "kind": "cattle",
+      "id": "island-rival:cattle-3",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "stage": "Adult",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        349,
+        0,
+        123.5
+      ],
+      "asset": "adult-male",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 348.33731901135974,
+          "y": 1.305108365129426e-17,
+          "z": 122.54381943136275
+        },
+        "max": {
+          "x": 349.7560410616131,
+          "y": 1.350370238071337,
+          "z": 124.5042093332164
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle",
+        "clip": "Idle"
+      },
+      "placeholder": false
+    }
+  ],
+  "appearanceMatches": true,
+  "moved": true,
+  "pauseExact": true,
+  "culledResources": {
+    "actors": 0,
+    "sourceTemplates": 2,
+    "ownedInstanceRoots": 0
+  },
+  "culledEntities": [],
+  "revealedAgain": [
+    {
+      "key": "campfire:rival-models:campfire",
+      "renderId": "1f986fd8-4875-43e6-985e-6b1efcd018d3",
+      "kind": "campfire",
+      "id": "rival-models:campfire",
+      "living": false,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        352,
+        0,
+        128
+      ],
+      "asset": "stoneCampfire",
+      "scale": [
+        2,
+        2,
+        2
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 348.7993942467509,
+          "y": 0,
+          "z": 124.77101361751556
+        },
+        "max": {
+          "x": 355.2006057532491,
+          "y": 1.500231595414382,
+          "z": 131.22898638248444
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-1",
+      "renderId": "6743b2ab-f945-4501-9613-21a26624d1a4",
+      "kind": "household",
+      "id": "island-rival:founder-1",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        344,
+        0,
+        120
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 343.0606618134177,
+          "y": 0,
+          "z": 119.0001
+        },
+        "max": {
+          "x": 344.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 120.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-1",
+      "renderId": "73d8510a-a703-4633-8f6b-a2729bc0a92b",
+      "kind": "persona",
+      "id": "island-rival:founder-1",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        339.93933982822017,
+        0,
+        123.43933982822018
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 338.4525189975732,
+          "y": -0.015051590084572047,
+          "z": 122.80235198967354
+        },
+        "max": {
+          "x": 341.45750796612873,
+          "y": 1.4430810046187623,
+          "z": 124.13746972103299
+        }
+      },
+      "appearance": {
+        "seed": 3756661009,
+        "height": 1.4060316548962146,
+        "adultAge": 35,
+        "masculinity": 0.49,
+        "weightDeviation": -0.04142465721242101,
+        "age": 35,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9808,
+          "stride": 1,
+          "footfall": 0.7899999999999999
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.19199999999999998,
+          "Tall": 0,
+          "Short": 0.12131551822780472,
+          "Overweight": 0,
+          "Underweight": 0.024854794327452603,
+          "Age": 0,
+          "HeadWidth": -0.16439604484476147,
+          "HeadLength": 0.0349415629170835,
+          "Jaw": -0.05982530107721686,
+          "Nose": 0.19394127521663904,
+          "LegRatio": -0.06302037416025996,
+          "ShoulderSlope": 0.036502670496702194,
+          "Asymmetry": 0.11326863630674779,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-10",
+      "renderId": "1a28da1a-3962-4636-8732-9d2924100815",
+      "kind": "household",
+      "id": "island-rival:founder-10",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        360,
+        0,
+        120
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 359.0606618134177,
+          "y": 0,
+          "z": 119.0001
+        },
+        "max": {
+          "x": 360.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 120.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-10",
+      "renderId": "90955859-6414-4b0a-8efd-97b8321b3c01",
+      "kind": "persona",
+      "id": "island-rival:founder-10",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        357,
+        0,
+        124.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 355.4384960437806,
+          "y": -0.009534899457755975,
+          "z": 123.87407967713041
+        },
+        "max": {
+          "x": 358.584516653913,
+          "y": 1.3993133214057143,
+          "z": 125.19550044511469
+        }
+      },
+      "appearance": {
+        "seed": 1730959402,
+        "height": 1.3626523313391954,
+        "adultAge": 28,
+        "masculinity": 0.51,
+        "weightDeviation": 0.32443984570374595,
+        "age": 28,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#49443f",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0432,
+          "stride": 1,
+          "footfall": 0.7959999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.432,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.27624167378858766,
+          "Overweight": 0.19466390742224757,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.13218574631027877,
+          "HeadLength": -0.24436404816806315,
+          "Jaw": -0.15228702882304787,
+          "Nose": -0.06405907636508346,
+          "LegRatio": -0.2278666776837781,
+          "ShoulderSlope": -0.0796510998159647,
+          "Asymmetry": 0.033012249902822074,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.008640000000000007,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-2",
+      "renderId": "d2c08b96-d651-493d-ba1d-dd51fdd7f22c",
+      "kind": "household",
+      "id": "island-rival:founder-2",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        344,
+        0,
+        136
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 343.0606618134177,
+          "y": 0,
+          "z": 135.0001
+        },
+        "max": {
+          "x": 344.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 136.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-2",
+      "renderId": "7cee6e75-6121-4f45-9d20-570eceecee37",
+      "kind": "persona",
+      "id": "island-rival:founder-2",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        341,
+        0,
+        140.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 339.5077092715418,
+          "y": -0.015025747266846875,
+          "z": 139.78425698763454
+        },
+        "max": {
+          "x": 342.5322935727448,
+          "y": 1.517216562285147,
+          "z": 141.29152737483682
+        }
+      },
+      "appearance": {
+        "seed": 1610368848,
+        "height": 1.478046117099002,
+        "adultAge": 24,
+        "masculinity": 0.51,
+        "weightDeviation": 0.40060209012722153,
+        "age": 24,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "medium",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0048,
+          "stride": 1,
+          "footfall": 1.126
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.04800000000000004,
+          "Grounded": 0,
+          "Tall": 0.15852548791250864,
+          "Short": 0,
+          "Overweight": 0.2403612540763329,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.16822818140499293,
+          "HeadLength": -0.2279264084994793,
+          "Jaw": 0.08338061319664121,
+          "Nose": 0.08267491171136498,
+          "LegRatio": -0.12564353039488196,
+          "ShoulderSlope": 0.10890014693140984,
+          "Asymmetry": -0.08160224460298195,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.0009600000000000017,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-3",
+      "renderId": "ee10dc88-1083-4f58-906f-6c48f1005277",
+      "kind": "household",
+      "id": "island-rival:founder-3",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        360,
+        0,
+        136
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 359.0606618134177,
+          "y": 0,
+          "z": 135.0001
+        },
+        "max": {
+          "x": 360.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 136.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-3",
+      "renderId": "5a8dc3e1-59df-4cb9-9677-bbad651bf5a0",
+      "kind": "persona",
+      "id": "island-rival:founder-3",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        357,
+        0,
+        140.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 355.46100053862114,
+          "y": -0.009446018171977422,
+          "z": 139.79864917546084
+        },
+        "max": {
+          "x": 358.5743865720062,
+          "y": 1.3656418343974064,
+          "z": 141.2595422674695
+        }
+      },
+      "appearance": {
+        "seed": 2831694642,
+        "height": 1.3266676140297204,
+        "adultAge": 36,
+        "masculinity": 0.49,
+        "weightDeviation": 0.22596594876735876,
+        "age": 36,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9976,
+          "stride": 1,
+          "footfall": 1.012
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.02400000000000002,
+          "Tall": 0,
+          "Short": 0.40475852132242673,
+          "Overweight": 0.13557956926041526,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.20324201504699885,
+          "HeadLength": 0.21700644688680767,
+          "Jaw": -0.26706169699318705,
+          "Nose": 0.2644159820862114,
+          "LegRatio": -0.06826654181350023,
+          "ShoulderSlope": 0.11026455741375685,
+          "Asymmetry": 0.06766274379333481,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-4",
+      "renderId": "b47a0882-15fb-4eba-9a3c-f75e78c7c119",
+      "kind": "household",
+      "id": "island-rival:founder-4",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        352,
+        0,
+        116
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 351.0606618134177,
+          "y": 0,
+          "z": 115.0001
+        },
+        "max": {
+          "x": 352.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 116.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-4",
+      "renderId": "a7773e63-2fb8-4d1c-839e-851d87947429",
+      "kind": "persona",
+      "id": "island-rival:founder-4",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        349,
+        0,
+        120.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 347.4777202334748,
+          "y": -0.020911640898394174,
+          "z": 119.85799644361238
+        },
+        "max": {
+          "x": 350.5615840380888,
+          "y": 1.516704846093738,
+          "z": 121.19949087543088
+        }
+      },
+      "appearance": {
+        "seed": 3473329451,
+        "height": 1.4780664251931013,
+        "adultAge": 19,
+        "masculinity": 0.49,
+        "weightDeviation": 0.5977238110964052,
+        "age": 19,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0324,
+          "stride": 1,
+          "footfall": 1.144
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.324,
+          "Grounded": 0,
+          "Tall": 0.15861010497125555,
+          "Short": 0,
+          "Overweight": 0.3586342866578431,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.1779153838288039,
+          "HeadLength": -0.05732676386833191,
+          "Jaw": 0.015356149524450302,
+          "Nose": 0.2993035707157105,
+          "LegRatio": -0.03074575203936547,
+          "ShoulderSlope": 0.12056524613872172,
+          "Asymmetry": 0.16936556558357552,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-6",
+      "renderId": "02b1c5f8-5e03-4941-bc0a-c3c2da61e430",
+      "kind": "persona",
+      "id": "island-rival:founder-6",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        350.8,
+        0,
+        120.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 349.25674042454244,
+          "y": -0.008310996831776597,
+          "z": 119.9027286225895
+        },
+        "max": {
+          "x": 352.359452739157,
+          "y": 1.3948246976300847,
+          "z": 121.16918609109528
+        }
+      },
+      "appearance": {
+        "seed": 1226752555,
+        "height": 1.3589039219357073,
+        "adultAge": 24,
+        "masculinity": 0.51,
+        "weightDeviation": 0.22840958367808273,
+        "age": 24,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9448,
+          "stride": 1,
+          "footfall": 0.8799999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.552,
+          "Tall": 0,
+          "Short": 0.28962885022961654,
+          "Overweight": 0.13704575020684964,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.15510448766872287,
+          "HeadLength": 0.25886270035989584,
+          "Jaw": 0.21470534191466867,
+          "Nose": 0.1753836900461465,
+          "LegRatio": -0.14727909525390714,
+          "ShoulderSlope": -0.18799309358000757,
+          "Asymmetry": 0.04959275339497253,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-5",
+      "renderId": "02f9f525-8292-4659-acff-bdb6128fa99f",
+      "kind": "household",
+      "id": "island-rival:founder-5",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        340,
+        0,
+        128
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 339.0606618134177,
+          "y": 0,
+          "z": 127.0001
+        },
+        "max": {
+          "x": 340.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 128.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-5",
+      "renderId": "254fe35f-51da-4094-90aa-7d81b69641c4",
+      "kind": "persona",
+      "id": "island-rival:founder-5",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "occupation": "farmer",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        337,
+        0,
+        132.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 335.50746549791575,
+          "y": -0.0191996875976643,
+          "z": 131.8556650899191
+        },
+        "max": {
+          "x": 338.508571550732,
+          "y": 1.4640752641896453,
+          "z": 133.22685638824055
+        }
+      },
+      "appearance": {
+        "seed": 2623371866,
+        "height": 1.4227715462259949,
+        "adultAge": 24,
+        "masculinity": 0.49,
+        "weightDeviation": 0.21135318064731504,
+        "age": 24,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0576,
+          "stride": 1,
+          "footfall": 1.27
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.576,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.061530192050018064,
+          "Overweight": 0.12681190838838902,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.18192480839788913,
+          "HeadLength": -0.20865731765516102,
+          "Jaw": 0.10286207464523613,
+          "Nose": -0.04832724630832672,
+          "LegRatio": 0.035948497243225574,
+          "ShoulderSlope": -0.18921959707513453,
+          "Asymmetry": -0.1266574037261307,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "farmerFemale",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "outfit": null,
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": "garment/meshy-long-skirt-005",
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-7",
+      "renderId": "34d181ac-3270-47c6-b344-33acd02990af",
+      "kind": "household",
+      "id": "island-rival:founder-7",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        364,
+        0,
+        128
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 363.0606618134177,
+          "y": 0,
+          "z": 127.0001
+        },
+        "max": {
+          "x": 364.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 128.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-7",
+      "renderId": "80446c76-e81e-4989-8797-d4d32c2f78de",
+      "kind": "persona",
+      "id": "island-rival:founder-7",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        359.93933982822017,
+        0,
+        131.43933982822017
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 358.3496132487414,
+          "y": -0.01037774126831376,
+          "z": 130.79367952657446
+        },
+        "max": {
+          "x": 361.545810515037,
+          "y": 1.5176365517043529,
+          "z": 132.16791140708386
+        }
+      },
+      "appearance": {
+        "seed": 3150245269,
+        "height": 1.4793912889249623,
+        "adultAge": 40,
+        "masculinity": 0.49,
+        "weightDeviation": 0.30564344830440027,
+        "age": 40,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "bun",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9616,
+          "stride": 1,
+          "footfall": 0.8979999999999999
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.384,
+          "Tall": 0.16413037052067647,
+          "Short": 0,
+          "Overweight": 0.18338606898264015,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.07217270694673061,
+          "HeadLength": 0.14638411388732492,
+          "Jaw": 0.07737512066960335,
+          "Nose": -0.1033165372442454,
+          "LegRatio": 0.033685315982438624,
+          "ShoulderSlope": -0.19184565385803581,
+          "Asymmetry": -0.05078126677544787,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-9",
+      "renderId": "8dd6ffac-3fd7-4157-84ca-f65853871e24",
+      "kind": "persona",
+      "id": "island-rival:founder-9",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "occupation": "farmer",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        364.3,
+        0,
+        132.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 362.7077647860069,
+          "y": -0.021444351576009987,
+          "z": 131.83750644412206
+        },
+        "max": {
+          "x": 365.9171972594126,
+          "y": 1.4499630175210008,
+          "z": 133.23251129519699
+        }
+      },
+      "appearance": {
+        "seed": 3571356112,
+        "height": 1.4124708226695657,
+        "adultAge": 22,
+        "masculinity": 0.51,
+        "weightDeviation": -0.28353407318788443,
+        "age": 22,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "long",
+          "beardStyle": "none",
+          "color": "#49443f",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.994,
+          "stride": 1,
+          "footfall": 1.018
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.059999999999999984,
+          "Tall": 0,
+          "Short": 0.0983184904658366,
+          "Overweight": 0,
+          "Underweight": 0.17012044391273065,
+          "Age": 0,
+          "HeadWidth": 0.07582185161300004,
+          "HeadLength": -0.03787577846087515,
+          "Jaw": 0.02243785886093974,
+          "Nose": 0.11353978724218905,
+          "LegRatio": -0.08660954586230218,
+          "ShoulderSlope": -0.06323348972946406,
+          "Asymmetry": 0.03337868272792548,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "farmerMale",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": null,
+          "shoes": "garment/meshy-high-shoes-005",
+          "trousers": "garment/meshy-short-trousers-006",
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "household:island-rival:founder-8",
+      "renderId": "9a31940d-85fe-455d-86fe-9f3ce58b4e1e",
+      "kind": "household",
+      "id": "island-rival:founder-8",
+      "living": true,
+      "workEligible": false,
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        352,
+        0,
+        140
+      ],
+      "asset": "tent",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 351.0606618134177,
+          "y": 0,
+          "z": 139.0001
+        },
+        "max": {
+          "x": 352.9393381865823,
+          "y": 1.5000733822601378,
+          "z": 140.9999
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:island-rival:founder-8",
+      "renderId": "765186a2-6c88-4046-980f-ffeef19e919d",
+      "kind": "persona",
+      "id": "island-rival:founder-8",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        349,
+        0,
+        144.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 347.4701539465305,
+          "y": -0.019211899022666477,
+          "z": 143.78488250550106
+        },
+        "max": {
+          "x": 350.5589072232828,
+          "y": 1.4931434300924642,
+          "z": 145.29336124189774
+        }
+      },
+      "appearance": {
+        "seed": 2512799758,
+        "height": 1.4547308795433491,
+        "adultAge": 30,
+        "masculinity": 0.51,
+        "weightDeviation": -0.15800415729592485,
+        "age": 30,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#986e55",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0444,
+          "stride": 1,
+          "footfall": 1.0539999999999998
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.444,
+          "Grounded": 0,
+          "Tall": 0.06137866476395489,
+          "Short": 0,
+          "Overweight": 0,
+          "Underweight": 0.0948024943775549,
+          "Age": 0,
+          "HeadWidth": 0.25908326329663395,
+          "HeadLength": 0.05938754472881555,
+          "Jaw": -0.08963033887557685,
+          "Nose": -0.05890460768714547,
+          "LegRatio": -0.04338424711022526,
+          "ShoulderSlope": -0.007816863246262074,
+          "Asymmetry": -0.11888793382095172,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.008880000000000008,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:island-rival:cattle-1",
+      "renderId": "3d5c5d02-1d48-4b3a-8e01-ca98f991fa0d",
+      "kind": "cattle",
+      "id": "island-rival:cattle-1",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "stage": "Adult",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        345,
+        0,
+        125
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 344.4053117019689,
+          "y": 1.5239816786999372e-17,
+          "z": 124.12513110056062
+        },
+        "max": {
+          "x": 345.52516292953,
+          "y": 1.2438654015331976,
+          "z": 125.86929952242868
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle",
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:island-rival:cattle-2",
+      "renderId": "43444326-7cff-4ce5-a73e-b8a1b79593c1",
+      "kind": "cattle",
+      "id": "island-rival:cattle-2",
+      "living": true,
+      "workEligible": false,
+      "sex": "female",
+      "stage": "Adult",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        347,
+        0,
+        125
+      ],
+      "asset": "adult-female",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 346.40531170196886,
+          "y": 1.5239816786999372e-17,
+          "z": 124.12513110056071
+        },
+        "max": {
+          "x": 347.52516292953,
+          "y": 1.2438654015331976,
+          "z": 125.86929952242876
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle",
+        "clip": "Idle"
+      },
+      "placeholder": false
+    },
+    {
+      "key": "cattle:island-rival:cattle-3",
+      "renderId": "dd0e4133-5840-4097-8a04-beb3b65f06ed",
+      "kind": "cattle",
+      "id": "island-rival:cattle-3",
+      "living": true,
+      "workEligible": false,
+      "sex": "male",
+      "stage": "Adult",
+      "assignment": null,
+      "grazingZone": "exposed",
+      "position": [
+        349,
+        0,
+        123.5
+      ],
+      "asset": "adult-male",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "isBox3": true,
+        "min": {
+          "x": 348.33731901135974,
+          "y": 1.305108365129426e-17,
+          "z": 122.54381943136275
+        },
+        "max": {
+          "x": 349.7560410616131,
+          "y": 1.350370238071337,
+          "z": 124.5042093332164
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle",
+        "clip": "Idle"
+      },
+      "placeholder": false
+    }
+  ],
+  "coreUntouched": true,
+  "disposedResources": {
+    "actors": 0,
+    "sourceTemplates": 2,
+    "ownedInstanceRoots": 0
+  }
+}
