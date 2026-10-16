@@ -290,7 +290,7 @@ export class FjordPlay {
                 .map(id => ({ kind: 'persona', id })));
             header.update(view.calendar, view.stocks,
                 Object.values(state.personas).filter(p => p.deathWinter === null).length,
-                view.entities.filter(e => e.kind === 'cattle').length);
+                view.entities.filter(e => e.kind === 'cattle').length, this.session.expeditionMode);
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
@@ -374,7 +374,9 @@ export class FjordPlay {
             setPlayback(!this.session.running);
             action(() => {});
         });
-        document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => this.session.command({ type: 'AdvanceWinter' })));
+        document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
+            if (!this.session.expeditionMode) this.session.command({ type: 'AdvanceWinter' });
+        }));
         document.querySelector('#fjord-save')!.addEventListener('click', () => action(() => {
             this.shared.saveLocal(localStorage);
             say('Campaign and exact Fjord saved locally.');

@@ -47,6 +47,7 @@ try {
     console.log('Group created.');
     if (!await page.locator('details[data-group="group-1"]').evaluate(el=>el.open))
         await page.locator('details[data-group="group-1"] summary').tap();
+    assert.equal(await page.locator('#fjord-next').isDisabled(), false);
     const beforeStart = await saved();
     await page.locator('[data-start="group-1"]').tap();
     await page.locator('#expedition-start-dialog').waitFor({ state: 'visible' });
@@ -63,6 +64,7 @@ try {
     assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
     assert.equal(await page.locator('#fjord-cycle').inputValue(), '10');
     assert.equal(await page.locator('#fjord-cycle').isDisabled(), true);
+    assert.equal(await page.locator('#fjord-next').isDisabled(), true);
     const preparedSnapshot = (await saved()).fjord.campaign;
     await page.screenshot({ path: 'artifacts/spatial-expeditions/prepared.png' });
     await page.locator('[data-explore="group-1"]').tap();
@@ -244,16 +246,18 @@ try {
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: 'artifacts/spatial-expeditions/phone.png' });
-    await page.locator('#fjord-next').tap();
-    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
-        .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returned');
-    assert.equal(await page.locator('#fjord-cycle').isDisabled(), false);
-    assert.equal(await page.locator('#fjord-cycle').inputValue(), '3');
+    assert.equal(await page.locator('#fjord-next').isDisabled(), true);
+    const beforeSkip = await saved();
+    await page.locator('#fjord-next').evaluate(button => button.dispatchEvent(new MouseEvent('click', { bubbles: true })));
+    await page.waitForTimeout(300);
+    assert.deepEqual((await saved()).fjord.campaign, beforeSkip.fjord.campaign,
+        'Even a dispatched click cannot skip time during Expedition Mode');
+    assert.equal(await page.locator('#fjord-cycle').isDisabled(), true);
     assert.deepEqual(errors, []);
     const sourceHashes = {};
-    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/ProductionLabels.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts','src/gameplay-lab/GameplaySession.ts','src/lore/BookLedger.ts'])
+    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordHeader.ts','src/fjord-play/ProductionLabels.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts','src/gameplay-lab/GameplaySession.ts','src/lore/BookLedger.ts'])
         sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
-    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, visibilityBoundarySimulated: true, hiddenStopsClockAndSupplies: true, noOfflineCatchup: true, startConfirmed: true, fixedFoodPerMember: 2, temporaryMinutesPer1000Ticks: 10, noRefund: true, noAwayProduction: true, noExplorerProductionLabels: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
+    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, visibilityBoundarySimulated: true, hiddenStopsClockAndSupplies: true, noOfflineCatchup: true, startConfirmed: true, fixedFoodPerMember: 2, temporaryMinutesPer1000Ticks: 10, noRefund: true, yearSkipDisabled: true, blockedYearSkipUntouched: true, noAwayProduction: true, noExplorerProductionLabels: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
         redirectedWhilePaused, seasonalColorStable: true, discoveredGroundColors, freshGroundColors, runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group flow passed; '+(recallRequested ? 'recall requested.' : 'automatic return already underway.'));
 } finally { await browser.close(); }

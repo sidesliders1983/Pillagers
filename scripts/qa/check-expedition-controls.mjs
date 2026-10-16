@@ -6,7 +6,7 @@ import { build } from 'vite';
 const { chromium } = createRequire(import.meta.url)('C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 await mkdir('artifacts/spatial-expeditions', { recursive: true });
 const entry = resolve('artifacts/spatial-expeditions/controls-entry.ts');
-await writeFile(entry, "export { ExpeditionPanel } from '../../src/fjord-play/ExpeditionPanel';\nexport { GameplaySession } from '../../src/gameplay-lab/GameplaySession';\nexport * as Core from '../../src/simulation/SimulationCore';\nexport { FjordProduction } from '../../src/fjord-play/FjordProduction';\nexport { ProductionLabels } from '../../src/fjord-play/ProductionLabels';\nexport { PerspectiveCamera } from 'three';\n");
+await writeFile(entry, "export { ExpeditionPanel } from '../../src/fjord-play/ExpeditionPanel';\nexport { GameplaySession } from '../../src/gameplay-lab/GameplaySession';\nexport * as Core from '../../src/simulation/SimulationCore';\nexport { FjordProduction } from '../../src/fjord-play/FjordProduction';\nexport { ProductionLabels } from '../../src/fjord-play/ProductionLabels';\nexport { PerspectiveCamera } from 'three';\nexport { FjordHeader, fjordHeaderHTML } from '../../src/fjord-play/FjordHeader';\nexport { projectFjordCalendar } from '../../src/fjord-play/FjordCalendar';\n");
 const bundle = await build({
     configFile: false, logLevel: 'silent', build: {
         write: false, minify: false,
@@ -203,5 +203,52 @@ waterLevel: -1, terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: A
     assert.deepEqual(production.workReasons, ['expedition', 'expedition']);
     assert.ok(production.displayed.length > 0, 'Home residents still display production feedback');
     console.log('Departure clears active and queued home-production popups without losing recorded awards.');
+
+
+    const timeControls = await page.evaluate(() => {
+        const { Core, GameplaySession, FjordHeader, fjordHeaderHTML, projectFjordCalendar } = ExpeditionControls;
+        const bounds = { minX: 0, maxX: 256, minZ: 0, maxZ: 128 };
+        const world = { waterLevel: -1,
+            terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: Array(561).fill(0) },
+            navigation: { bounds, spacing: 8, columns: 33, rows: 17, cells: Array(561).fill(true) },
+            settlement: { center: { x: 16, z: 64 }, harbor: null } };
+        const session = new GameplaySession();
+        session.loadJSON(Core.serializeState(Core.initializePhysicalDiscovery(Core.createCampaign(32,
+            { initialFood: 500 }), world, 'header-fixture')));
+        session.bindPhysicalWorld(world, 'header-fixture');
+        const root = document.createElement('main'); root.innerHTML = fjordHeaderHTML(); document.body.append(root);
+        const header = new FjordHeader(root), button = root.querySelector('#fjord-next');
+        const refresh = () => {
+            const state = session.readSnapshot();
+            header.update(projectFjordCalendar(state.time, state.ticksPerWinter), state.stocks, 10, 3, session.expeditionMode);
+        };
+        button.addEventListener('click', () => session.command({ type: 'AdvanceWinter' }));
+        refresh(); const ordinaryEnabled = !button.disabled;
+        session.command({ type: 'CreateExpeditionGroup', name: 'Group 1', memberIds: ['founder-1'] });
+        session.command({ type: 'CreateExpeditionGroup', name: 'Group 2', memberIds: ['founder-2'] });
+        session.command({ type: 'StartExpedition', groupId: 'group-1' });
+        refresh(); const preparedDisabled = button.disabled, before = session.saveJSON();
+        button.click(); const blockedClickUntouched = session.saveJSON() === before;
+        session.command({ type: 'StartExpedition', groupId: 'group-2' });
+        session.command({ type: 'ExploreArea', groupId: 'group-1', target: { x: 96, z: 64 } });
+        refresh(); const travelingDisabled = button.disabled;
+        session.command({ type: 'AdvanceTicks', ticks: 40 });
+        refresh(); const exploringDisabled = button.disabled;
+        session.command({ type: 'RecallExpedition', groupId: 'group-1' });
+        refresh(); const returningDisabled = button.disabled;
+        session.command({ type: 'AdvanceTicks', ticks: 40 });
+        refresh(); const anotherGroupDisabled = button.disabled;
+        session.loadJSON(session.saveJSON()); session.bindPhysicalWorld(world, 'header-fixture');
+        refresh(); const restoredDisabled = button.disabled;
+        session.command({ type: 'CancelExpedition', groupId: 'group-2' });
+        refresh(); const endedEnabled = !button.disabled;
+        header.dispose();
+        return { ordinaryEnabled, preparedDisabled, blockedClickUntouched, travelingDisabled, exploringDisabled,
+            returningDisabled, anotherGroupDisabled, restoredDisabled, endedEnabled };
+    });
+    assert.deepEqual(timeControls, { ordinaryEnabled: true, preparedDisabled: true, blockedClickUntouched: true,
+        travelingDisabled: true, exploringDisabled: true, returningDisabled: true, anotherGroupDisabled: true,
+        restoredDisabled: true, endedEnabled: true });
+    console.log('+1 Year is disabled throughout Expedition Mode and restored after the final expedition ends.');
 
 } finally { await browser.close(); }

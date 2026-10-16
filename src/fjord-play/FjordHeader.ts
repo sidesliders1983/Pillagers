@@ -59,7 +59,11 @@ export class FjordHeader {
         root.addEventListener('keydown', this.keydown);
         document.addEventListener('pointerdown', this.outside);
     }
-    update(calendar: FjordCalendar, stocks: { food: number; materials: number }, residents: number, cattle: number) {
+    update(calendar: FjordCalendar, stocks: { food: number; materials: number },
+        residents: number, cattle: number, expeditionMode = false) {
+        const nextYear = this.root.querySelector<HTMLButtonElement>('#fjord-next')!;
+        nextYear.disabled = expeditionMode;
+        nextYear.title = expeditionMode ? 'Unavailable during Expedition Mode' : '';
         const values = { 'fjord-season': calendar.season, 'fjord-year': calendar.year,
             'fjord-food': stocks.food, 'fjord-materials': stocks.materials,
             'fjord-residents': residents, 'fjord-cattle': cattle };
