@@ -146,12 +146,15 @@ try {
     const entities = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-entities'));
     assert.equal(entities.filter(e => e.id === memberId && e.status.expedition).length,1);
     await page.screenshot({ path: 'artifacts/spatial-expeditions/walking.png' });
+    const discoveredGroundColors = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-season-materials')).groundColors;
     console.log('Journey phase before reload:', mission.status);
     await writeFile('artifacts/spatial-expeditions/phase.json', JSON.stringify({ status: mission.status, travelled: mission.travelled, distance: mission.distance }));
     console.log('Walking; reloading.');
     await page.reload();
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
     assert.deepEqual((await saved()).fjord.campaign, walking.fjord.campaign);
+    const freshGroundColors = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-season-materials')).groundColors;
+    assert.deepEqual(discoveredGroundColors, freshGroundColors, 'Exploration must keep the same seasonal terrain colors as a fresh load at the identical time');
     await page.getByLabel('Game menu', { exact: true }).tap();
     await page.locator('#fjord-expeditions-open').tap();
     await page.locator('details[data-group="group-1"] summary').tap();
@@ -164,6 +167,37 @@ try {
         assert.ok(await page.locator('[data-recall="group-1"]').isDisabled(),
             'A party already returning/returned cannot receive a second recall');
     }
+    let redirectedWhilePaused = false;
+    if (recallRequested || mission.status === 'Returning') {
+        assert.equal(await page.locator('[data-explore="group-1"]').isDisabled(), false,
+            'A returning group can choose a new destination without starting the clock');
+        const beforeRedirect = (await saved()).fjord.campaign;
+        await page.locator('[data-explore="group-1"]').tap();
+        const cameraState = await page.evaluate(() => {
+            const canvas = document.querySelector('#fjord-canvas');
+            return { camera: JSON.parse(canvas.dataset.camera), rect: canvas.getBoundingClientRect().toJSON() };
+        });
+        const col = Math.round((mission.target.x - fixture.terrain.bounds.minX) / fixture.terrain.spacing);
+        const row = Math.round((mission.target.z - fixture.terrain.bounds.minZ) / fixture.terrain.spacing);
+        const projected = new Vector3(mission.target.x, fixture.terrain.heights[row * fixture.terrain.columns + col], mission.target.z)
+            .applyMatrix4(new Matrix4().fromArray(cameraState.camera.world).invert())
+            .applyMatrix4(new Matrix4().fromArray(cameraState.camera.projection));
+        const x = cameraState.rect.left + (projected.x + 1) * cameraState.rect.width / 2;
+        const y = cameraState.rect.top + (1 - projected.y) * cameraState.rect.height / 2;
+        assert.ok(x > cameraState.rect.left && x < cameraState.rect.right && y > cameraState.rect.top && y < cameraState.rect.bottom,
+            'The original destination remains visible to the real camera');
+        await page.touchscreen.tap(x, y);
+        await page.waitForFunction(() => {
+            const state = JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign;
+            return state.world.spatial.missions['explore-1'].homeOrigins && state.world.spatial.missions['explore-1'].status === 'Traveling';
+        });
+        const afterRedirect = (await saved()).fjord.campaign;
+        assert.deepEqual(afterRedirect.time, beforeRedirect.time, 'A paused order adds no campaign ticks');
+        assert.deepEqual(afterRedirect.discovery, beforeRedirect.discovery, 'A new order reveals no planned terrain');
+        assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
+        await page.screenshot({ path: 'artifacts/spatial-expeditions/redirected.png' });
+        redirectedWhilePaused = true;
+    }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: 'artifacts/spatial-expeditions/phone.png' });
     await page.locator('#fjord-next').tap();
@@ -171,9 +205,9 @@ try {
         .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returned');
     assert.deepEqual(errors, []);
     const sourceHashes = {};
-    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts'])
+    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts'])
         sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
     await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
-        runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
+        redirectedWhilePaused, seasonalColorStable: true, discoveredGroundColors, freshGroundColors, runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group flow passed; '+(recallRequested ? 'recall requested.' : 'automatic return already underway.'));
 } finally { await browser.close(); }

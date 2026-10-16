@@ -28,7 +28,7 @@ export class ExpeditionPanel {
             if (button.dataset.explore) {
                 this.groupId = button.dataset.explore;
                 this.choosing = true; this.targetChanged();
-                this.root.querySelector('#expedition-estimate')!.textContent = 'Food is packed for the whole trip; the cost depends on distance. Recalling the group does not refund Food.';
+                this.root.querySelector('#expedition-estimate')!.textContent = 'A new order replaces the current destination and packs Food for the remaining trip and return home. Previous provisions are not refunded.';
                 this.status.textContent = 'Tap a land destination to send the group. Drag and pinch still control the camera.';
                 this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = false;
             }
@@ -71,14 +71,15 @@ export class ExpeditionPanel {
         if (!this.choosing) return false;
         try {
             const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
-            const origins = this.origins(members);
+            const away = inspectSpatialExpeditions(this.session.readSnapshot()).missions.some(m => m.groupId === this.groupId && m.status !== 'Returned');
+            const origins = away ? undefined : this.origins(members);
             const offer = this.session.exploreOffer(this.groupId, point, origins);
             this.targetChanged(offer.target);
             this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
             this.choosing = false;
             this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = true;
             this.status.textContent = (offer.adjusted ? 'Group sent to nearby walkable ground. ' : 'Group sent. ') +
-                offer.foodCost + ' Food packed for the whole trip.';
+                offer.foodCost + ' Food packed for the whole trip.' + (this.session.running ? '' : ' Clock paused: press Start to travel.');
         } catch (error) {
             this.targetChanged();
             this.status.textContent = error instanceof Error ? error.message : String(error);
@@ -101,11 +102,11 @@ export class ExpeditionPanel {
                 return '<details data-group="' + escape(group.id) + '"><summary>' + escape(group.name) + ' · ' +
                     group.members.length + ' members · ' + group.status + '</summary><p>' + (group.members.length ?
                         group.members.map(p => escape(p.name)).join(', ') : 'Select residents on the island to add them to this group.') +
-                    '</p><button data-explore="' + escape(group.id) + '" ' + (group.status !== 'Ready' || !state.discovery ? 'disabled' : '') +
+                    '</p><button data-explore="' + escape(group.id) + '" ' + (group.status !== 'Ready' && !active || !state.discovery ? 'disabled' : '') +
                     '>Explore Area</button> <button data-recall="' + escape(group.id) + '" ' +
                     (!active || active.status === 'Returning' ? 'disabled' : '') + '>Return Home</button>' +
-                    (latest ? '<p>' + escape(latest.outcome ?? latest.status) + ' · ' + latest.foodCost + ' Food supplied</p>' : '') +
-                    '</details>';
+                    (latest ? '<p>' + escape(latest.status !== 'Returned' ? latest.status : latest.outcome ?? latest.status) + ' · ' + latest.foodCost + ' Food supplied</p>' : '') +
+                    (!this.session.running && active ? '<p>Clock paused: press Start to continue travelling. You can choose a new destination now.</p>' : '') + '</details>';
             }).join('');
         } else if (selected.kind === 'persona') {
             const current = Object.values(state.world?.groups ?? {}).find(g => g.memberIds.includes(selected.id));

@@ -70,4 +70,46 @@ waterLevel: -1, terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: A
 
     assert.deepEqual(targeting.target, targeting.marker, 'Confirmation dispatches to the marked safe point');
     console.log('Adjusted destination, visible marker and confirmed Core journey agree.');
+    const retask = await page.evaluate(() => {
+        const { GameplaySession, ExpeditionPanel, Core } = ExpeditionControls;
+        const bounds = { minX: 0, maxX: 256, minZ: 0, maxZ: 128 };
+        const world = {
+            waterLevel: -1, terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: Array(561).fill(0) },
+            navigation: { bounds, spacing: 8, columns: 33, rows: 17, cells: Array(561).fill(true) },
+            settlement: { center: { x: 16, z: 64 }, harbor: null }
+        };
+        const session = new GameplaySession();
+        session.loadJSON(Core.serializeState(Core.initializePhysicalDiscovery(Core.createCampaign(32,
+            { initialFood: 500 }), world, 'controls-retask-fixture')));
+        session.bindPhysicalWorld(world, 'controls-retask-fixture');
+        session.command({ type: 'CreateExpeditionGroup', name: 'Group 1', memberIds: ['founder-1'] });
+        session.command({ type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 } });
+        session.command({ type: 'AdvanceTicks', ticks: 20 });
+        session.command({ type: 'RecallExpedition', groupId: 'group-1' });
+        let panel;
+        panel = new ExpeditionPanel(document.querySelector('#groups'), session,
+            command => { session.command(command); panel.committed(command.type === 'ExploreArea'); },
+            () => {}, () => null, () => { throw new Error('Away origins must come from Core'); });
+        panel.refresh();
+        const enabled = !document.querySelector('[data-explore]').disabled;
+        const untouched = session.saveJSON();
+        const ordinaryTap = panel.chooseTarget({ x: 160, z: 96 });
+        const navigationUntouched = session.saveJSON() === untouched;
+        document.querySelector('[data-explore]').click();
+        const armed = panel.targeting;
+        panel.chooseTarget({ x: 160, z: 96 });
+        const mission = session.readSnapshot().world.spatial.missions['explore-1'];
+        return { enabled, ordinaryTap, navigationUntouched, armed, consumed: !panel.targeting,
+            phase: mission.status, target: mission.target, status: document.querySelector('#expedition-status').textContent };
+    });
+    assert.equal(retask.enabled, true, 'Explore Area remains available while returning with a paused clock');
+    assert.equal(retask.ordinaryTap, false, 'Ordinary navigation taps cannot give group orders');
+    assert.equal(retask.navigationUntouched, true);
+    assert.equal(retask.armed, true);
+    assert.equal(retask.consumed, true, 'Target mode consumes exactly one valid destination');
+    assert.equal(retask.phase, 'Traveling');
+    assert.deepEqual(retask.target, { x: 160, z: 96 });
+    assert.match(retask.status, /paused|Start/i, 'A paused journey explains how to begin movement');
+    console.log('Paused returning groups accept an explicit destination order.');
+
 } finally { await browser.close(); }

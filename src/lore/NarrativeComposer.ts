@@ -83,7 +83,7 @@ function datedPassage(
 function narrativeLine(event: SimulationEvent, original: string): string {
     const details = event.details ?? {};
     if (event.type === 'ExploreAreaDeparted' && typeof details.groupName === 'string')
-        return details.groupName + ' set out to explore, carrying Food for the journey.';
+        return details.groupName + (details.redirected ? ' changed course to explore another area, with Food packed for the remaining journey.' : ' set out to explore, carrying Food for the journey.');
     if (event.type === 'ExploreAreaReturned' && typeof details.groupName === 'string')
         return details.groupName + (details.outcome === 'Completed' ? ' returned after exploring.' :
             details.outcome === 'Cancelled' ? ' returned after being recalled.' : ' did not return from exploration.');

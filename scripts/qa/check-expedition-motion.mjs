@@ -64,7 +64,23 @@ try {
                     confirmedX: 16 + state.world.spatial.missions['explore-1'].travelled,
                     unchangedCore: canonical === Core.serializeState(state) });
             }
-            return { batches, actor: layer.describe()[0], diagnostics: models.diagnostics };
+            const beforeRedirect = [...layer.describe()[0].position];
+            state = Core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+            state = Core.applyCommand(state, { type: 'ExploreArea', groupId: 'group-1', target: { x: 160, z: 96 } }, context);
+            layer.prepareExpeditions(state, world);
+            await layer.sync([entity()]);
+            const afterRedirect = [...layer.describe()[0].position];
+            state = Core.applyCommand(state, { type: 'AdvanceTicks', ticks: 7 }, context);
+            layer.prepareExpeditions(state, world);
+            await layer.sync([entity()]);
+            layer.advance(motion, .5, true);
+            const beforeRecall = [...layer.describe()[0].position];
+            state = Core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+            layer.prepareExpeditions(state, world);
+            await layer.sync([entity()]);
+            const afterRecall = [...layer.describe()[0].position];
+            return { batches, beforeRedirect, afterRedirect, beforeRecall, afterRecall,
+                actor: layer.describe()[0], diagnostics: models.diagnostics };
         } finally { layer.dispose(); models.dispose(); }
     });
     result.sourceHashes = {};
@@ -81,5 +97,7 @@ try {
         assert.deepEqual(batch.paused, batch.afterPause, 'Pause freezes visual travel without catch-up');
         assert.equal(batch.unchangedCore, true);
     }
+    assert.deepEqual(result.afterRedirect, result.beforeRedirect, 'Replacing a destination keeps the real body at its reached position');
+    assert.deepEqual(result.afterRecall, result.beforeRecall, 'Recalling a redirected group does not teleport its real body');
     console.log('Real resident travel stays smooth across 500 ms batches; native Run, pause and Core authority verified.');
 } finally { await browser.close(); }

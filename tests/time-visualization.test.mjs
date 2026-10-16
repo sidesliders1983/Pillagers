@@ -34,3 +34,55 @@ test('animated lighting and foliage reuse lights, shadow map and geometry, resto
     assert.equal(scene.fog,null);assert.equal(lighting.directional.shadow.mapSize.x,2048);
     tint.dispose();geometry.dispose();material.dispose();ground.material.dispose();lighting.halo.geometry.dispose();lighting.halo.material.dispose();
 });
+
+test('discovery scenery refresh preserves seasonal terrain color and shader ownership', () => {
+    const root = new Group();
+    const material = new MeshStandardMaterial({ color: 0xb8c89a });
+    const ground = new Mesh(new BoxGeometry(), material);
+    root.add(ground);
+    const originalColor = material.color.clone();
+    const originalHook = material.onBeforeCompile;
+    const originalKey = material.customProgramCacheKey;
+    let expected;
+    for (let refresh = 0; refresh < 12; refresh++) {
+        const tint = new SeasonTint(root, ground);
+        tint.update(.5);
+        expected ??= material.color.clone();
+        assert.deepEqual(material.color, expected, 'Discovering more ground must not accumulate seasonal darkening');
+        const shader = { uniforms: {}, fragmentShader: '#include <color_fragment>' };
+        material.onBeforeCompile(shader);
+        assert.equal(shader.fragmentShader.match(/uniform float seasonSnowAmount/g).length, 1);
+        tint.dispose();
+        assert.deepEqual(material.color, originalColor);
+        assert.equal(material.onBeforeCompile, originalHook);
+        assert.equal(material.customProgramCacheKey, originalKey);
+    }
+    ground.geometry.dispose(); material.dispose();
+});
+
+test('newly discovered foliage updates without replacing terrain seasonal shader uniforms', () => {
+    const root = new Group(), geometry = new BoxGeometry();
+    const ground = new Mesh(geometry, new MeshStandardMaterial());
+    const source = new MeshStandardMaterial({ color: 0x628148 });
+    const tree = new Mesh(geometry, source); tree.userData.seasonalFoliage = true;
+    root.add(ground, tree);
+    const tint = new SeasonTint(root, ground);
+    const shader = { uniforms: {}, fragmentShader: '#include <color_fragment>' };
+    ground.material.onBeforeCompile(shader);
+    const hook = ground.material.onBeforeCompile, uniform = shader.uniforms.seasonSnowAmount;
+    tint.update(0);
+    tree.removeFromParent();
+    const discoveredTree = new Mesh(geometry, source); discoveredTree.userData.seasonalFoliage = true;
+    root.add(discoveredTree);
+    tint.refreshFoliage(root);
+    tint.update(.5);
+    assert.equal(ground.material.onBeforeCompile, hook, 'Discovery retains the live terrain shader');
+    assert.equal(shader.uniforms.seasonSnowAmount, uniform);
+    assert.equal(uniform.value, 0);
+    assert.notEqual(discoveredTree.material, source);
+    tint.update(0);
+    assert.equal(uniform.value, .65, 'The same GPU-bound terrain uniform still follows Winter');
+    tint.dispose();
+    assert.equal(discoveredTree.material, source);
+    geometry.dispose(); ground.material.dispose(); source.dispose();
+});

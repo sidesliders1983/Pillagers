@@ -832,8 +832,7 @@ export class FjordPlay {
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
-                            weatherTint?.dispose();
-                            weatherTint = new SeasonTint(world!.root, world!.terrain);
+                            weatherTint!.refreshFoliage(world!.root);
                             weatherSignature = '';
                         }
                         discoveryFog.setKnowledge(knownTerrain);

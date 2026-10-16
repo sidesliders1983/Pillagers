@@ -35,7 +35,9 @@ export class FjordEntities {
             const previous = this.expeditionFrames.get(mission.id);
             if (previous?.mission === mission) continue;
             const ratio = previous ? Math.min(1, previous.elapsed / previous.duration) : 1;
-            const from = previous ? previous.from + (previous.mission.travelled - previous.from) * ratio : mission.travelled;
+            // A new route starts at an authoritative reached position, not a distance on the old path.
+            const sameRoute = previous && JSON.stringify(previous.mission.route) === JSON.stringify(mission.route);
+            const from = sameRoute ? previous.from + (previous.mission.travelled - previous.from) * ratio : mission.travelled;
             // Spread a coalesced Core update across its actual cadence, instead of one 180ms tick.
             const duration = Math.min(1, Math.max(updateIntervalSeconds, previous?.elapsed ?? updateIntervalSeconds));
             this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0, duration });

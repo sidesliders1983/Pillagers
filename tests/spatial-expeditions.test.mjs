@@ -251,3 +251,71 @@ test('nearby target correction never jumps across a water channel or steep ridge
         assert.equal(core.serializeState(state),saved);
     }
 });
+
+test('an away group can replace its destination from confirmed positions and still return home', () => {
+    const spatial = loadTypeScript(new URL('../src/simulation/SpatialExpeditions.ts', import.meta.url));
+    let state = core.applyCommand(campaign(), { ...dispatch, origins: {
+        'founder-1': { x: 16, z: 64 }, 'founder-2': { x: 24, z: 64 }
+    } }, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, context);
+    state = core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 4 }, context);
+    const old = state.world.spatial.missions['explore-1'];
+    const positions = old.memberIds.map(id => spatial.spatialMemberPosition(old, id));
+    const before = core.serializeState(state), food = state.stocks.food;
+    const order = { ...dispatch, target: { x: 160, z: 96 }, origins: {
+        'founder-1': { x: 200, z: 16 }, 'founder-2': { x: 200, z: 16 }
+    } };
+    const offer = core.exploreOffer(state, order.groupId, order.target, context);
+    const redirected = core.applyCommand(state, order, context);
+    const mission = redirected.world.spatial.missions['explore-1'];
+    assert.equal(mission.status, 'Traveling');
+    assert.equal(redirected.stocks.food, food - offer.foodCost);
+    assert.deepEqual(redirected.discovery, state.discovery, 'An order does not reveal its planned route');
+    mission.memberIds.forEach((id, i) => {
+        const point = spatial.spatialMemberPosition(mission, id);
+        assert.equal(point.x, positions[i].x, 'Renderer-supplied origins cannot teleport an away resident');
+        assert.equal(point.z, positions[i].z);
+    });
+    assert.equal(core.serializeState(state), before);
+    const completed = core.applyCommand(redirected, { type: 'AdvanceTicks', ticks: offer.plannedTicks }, context);
+    assert.equal(core.inspectWorld(completed).groups[0].status, 'Ready');
+    const ended = completed.world.spatial.missions['explore-1'];
+    assert.equal(spatial.spatialMemberPosition(ended, 'founder-1').x, 16);
+    assert.equal(spatial.spatialMemberPosition(ended, 'founder-2').x, 24);
+    const restored = core.reconstructState(core.serializeState(redirected));
+    spatial.assertSpatialWorld(restored, context);
+    assert.deepEqual(core.applyCommand(restored, { type: 'AdvanceTicks', ticks: offer.plannedTicks }, context), completed);
+});
+
+test('redirects are atomic, repeated orders retain homes, and recall/save reject corrupt return routes', () => {
+    const spatial = loadTypeScript(new URL('../src/simulation/SpatialExpeditions.ts', import.meta.url));
+    let state = core.applyCommand(campaign(), dispatch, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 17 }, context);
+    state = core.applyCommand(state, { ...dispatch, target: { x: 160, z: 96 } }, context);
+    const saved = core.serializeState(state);
+    assert.throws(() => core.applyCommand(state, { ...dispatch, target: { x: 999, z: 999 } }, context), /land|island/i);
+    assert.equal(core.serializeState(state), saved);
+    const broke = structuredClone(state); broke.stocks.food = 0;
+    assert.throws(() => core.applyCommand(broke, dispatch, context), /Food/);
+    const corrupt = structuredClone(state);
+    corrupt.world.spatial.missions['explore-1'].returnRoutes['founder-1'][2].x += 1;
+    assert.throws(() => core.reconstructState(JSON.stringify(corrupt)), /spatial|expedition/i);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 12 }, context);
+    state = core.applyCommand(state, { ...dispatch, target: { x: 208, z: 32 } }, context);
+    const home = state.world.spatial.missions['explore-1'].homeOrigins['founder-1'];
+    assert.deepEqual(home, { x: 16, z: 64 });
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 9 }, context);
+    const position = spatial.spatialMemberPosition(state.world.spatial.missions['explore-1'], 'founder-1');
+    const recalled = core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+    const returning = recalled.world.spatial.missions['explore-1'];
+    const recalledPosition = spatial.spatialMemberPosition(returning, 'founder-1');
+    assert.equal(recalledPosition.x, position.x, 'Recall begins at the reached position, turning toward home');
+    assert.equal(recalledPosition.z, position.z);
+    const restored = core.reconstructState(core.serializeState(recalled));
+    spatial.assertSpatialWorld(restored, context);
+    const returned = core.applyCommand(restored, { type: 'AdvanceTicks', ticks: 200 }, context);
+    assert.equal(returned.world.spatial.missions['explore-1'].status, 'Returned');
+    assert.equal(spatial.spatialMemberPosition(returned.world.spatial.missions['explore-1'], 'founder-1').x, 16);
+    assert.equal(returned.events.filter(e => e.type === 'ExploreAreaReturned').length, 1, 'Redirecting is not a fictitious homecoming');
+});
