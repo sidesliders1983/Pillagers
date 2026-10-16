@@ -140,3 +140,18 @@ test('physical routing respects reserved homes and the middle-place footprint wi
     assert.ok(route.every(point => point.x < 80 || point.x > 120 || point.z < 56 || point.z > 72));
     assert.deepEqual(world.terrain.heights, heights);
 });
+test('a completed exploration keeps exact Food spending in the shared saved Clan Book', () => {
+    const { GameplaySession } = loadTypeScript(new URL('../src/gameplay-lab/GameplaySession.ts', import.meta.url));
+    const session = new GameplaySession(); session.loadJSON(core.serializeState(campaign()));
+    session.bindPhysicalWorld(world, context.worldId);
+    session.command(dispatch);
+    session.command({ type: 'AdvanceTicks', ticks: 5000 });
+    const chapter = session.book.snapshot().chapters.at(-1);
+    assert.equal(chapter.facts.ledger.food.residual, 0);
+    assert.equal(chapter.facts.ledger.food.complete, true);
+    assert.ok(chapter.facts.ledger.transactions.some(row => row.purpose === 'ExploreAreaDeparted' && row.units === 4));
+    const restored = new GameplaySession(); restored.loadJSON(session.saveJSON());
+    restored.bindPhysicalWorld(world, context.worldId);
+    restored.book.restore(session.book.save(session.snapshot()), restored.snapshot());
+    assert.deepEqual(restored.book.snapshot(), session.book.snapshot());
+});

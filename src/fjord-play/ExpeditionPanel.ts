@@ -91,6 +91,10 @@ export class ExpeditionPanel {
     }
     refresh() {
         const state = this.session.readSnapshot(), view = inspectWorld(state);
+        if (this.groupId && !state.world?.groups[this.groupId]) {
+            this.groupId = ''; this.name.value = ''; this.cancelTarget();
+            for (const field of this.members()) field.checked = false;
+        }
         const select = this.root.querySelector<HTMLSelectElement>('#expedition-group')!;
         const options = '<option value="">New group</option>'+view.groups.map(group =>
             `<option value="${escape(group.id)}">${escape(group.name)} · ${group.status}</option>`).join('');

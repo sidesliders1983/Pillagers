@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -128,7 +129,10 @@ try {
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
         .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returned');
     assert.deepEqual(errors, []);
-    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ touch: true, groupId: 'group-1', memberId,
+    const sourceHashes = {};
+    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts'])
+        sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
+    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, groupId: 'group-1', memberId,
         runtime, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group creation, touch targeting, paid dispatch, travel, discovery, reload and recall passed.');
 } finally { await browser.close(); }
