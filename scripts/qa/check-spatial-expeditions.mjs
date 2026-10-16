@@ -75,6 +75,17 @@ try {
     }, points);
     const viewMatrix = new Matrix4().fromArray(target.camera.world).invert();
     const projection = new Matrix4().fromArray(target.camera.projection);
+    const fire = await page.evaluate(() => JSON.parse(document.querySelector('#fjord-canvas').dataset.entities)
+        .find(entity=>entity.kind==='campfire').transform);
+    const fireScreen = new Vector3(fire.x,fire.y,fire.z).applyMatrix4(viewMatrix).applyMatrix4(projection);
+    await page.touchscreen.tap(target.rect.left+(fireScreen.x+1)*target.rect.width/2,
+        target.rect.top+(1-fireScreen.y)*target.rect.height/2);
+    assert.match(await page.locator('#expedition-status').innerText(),/nearby walkable ground/i,
+        'A touch on the reserved middle place proposes safe nearby ground instead of the reported route error');
+    await page.locator('#expedition-confirm:enabled').waitFor();
+    await page.screenshot({path:'artifacts/spatial-expeditions/adjusted-target.png'});
+    await page.locator('#expedition-cancel').tap();
+    await page.locator('[data-explore="group-1"]').tap();
     const candidates = points.filter(p => discoveryAt(view,p.x,p.z) === 'unknown')
         .map(p => {
             const col = Math.round((p.x-fixture.terrain.bounds.minX)/fixture.terrain.spacing);

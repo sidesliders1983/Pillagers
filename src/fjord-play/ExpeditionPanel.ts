@@ -58,7 +58,7 @@ export class ExpeditionPanel {
                     }
                     this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...this.pending }, origins });
                 } catch (error) {
-                    this.status.textContent = String(error);
+                    this.status.textContent = error instanceof Error ? error.message : String(error);
                 }
             }
             if (button.id === 'expedition-cancel') this.cancelTarget();
@@ -87,9 +87,11 @@ export class ExpeditionPanel {
         try {
             const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
             const offer = this.session.exploreOffer(this.groupId, point, this.origins(members));
-            this.pending = { ...point }; this.targetChanged(point); this.showOffer(offer);
+            this.pending = { ...offer.target }; this.targetChanged(offer.target); this.showOffer(offer);
             this.root.querySelector<HTMLButtonElement>('#expedition-confirm')!.disabled = false;
-            this.status.textContent = 'Destination selected. Send the group from their current positions.';
+            this.status.textContent = offer.adjusted ?
+                'Destination adjusted to nearby walkable ground. Review the marker before sending the group.' :
+                'Destination selected. Send the group from their current positions.';
         } catch (error) {
             this.pending = undefined; this.targetChanged();
             this.root.querySelector('#expedition-estimate')!.textContent = '';

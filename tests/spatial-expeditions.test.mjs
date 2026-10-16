@@ -218,3 +218,36 @@ test('saved individual routes reject diagonal shortcuts and inconsistent journey
     corrupt.world.spatial.missions['explore-1'].memberRoutes['founder-2'][2].x += .5;
     assert.throws(() => core.reconstructState(JSON.stringify(corrupt)), /spatial|route/i);
 });
+
+
+test('touch destinations near a blocked cell resolve to nearby safe ground before confirmation', () => {
+    const landscape = structuredClone(world);
+    landscape.navigation.cells[8*33+27] = false; // The tap rounds onto an unavailable cell on otherwise dry ground.
+    const bound = { ...context, world: landscape };
+    const state = campaign(), saved = core.serializeState(state);
+    const offer = core.exploreOffer(state, 'group-1', { x: 216, z: 64 }, bound);
+    assert.deepEqual(offer.target, { x: 216, z: 56 });
+    assert.equal(offer.adjusted, true);
+    assert.equal(core.serializeState(state), saved, 'Preview neither spends Food nor reveals terrain');
+    const dispatched = core.applyCommand(state, dispatch, bound);
+    assert.deepEqual(dispatched.world.spatial.missions['explore-1'].target, offer.target);
+    assert.deepEqual(dispatched.world.spatial.missions['explore-1'].route.at(-1), offer.target);
+    assert.deepEqual(dispatched.discovery, state.discovery);
+});
+
+
+test('nearby target correction never jumps across a water channel or steep ridge', () => {
+    for (const barrier of [-4, 8]) {
+        const landscape = structuredClone(world);
+        landscape.terrain = { bounds: { ...world.terrain.bounds }, spacing: 1, columns: 257, rows: 129,
+            heights: Array(257*129).fill(0) };
+        for (let x=215;x<=217;x++) landscape.terrain.heights[60*257+x]=barrier;
+        // The only navigation candidate within 8m lies on the other side of the barrier.
+        for (const [x,z] of [[216,64],[208,64],[224,64],[216,72]])
+            landscape.navigation.cells[z/8*33+x/8]=false;
+        const state=campaign(), saved=core.serializeState(state);
+        assert.throws(() => core.exploreOffer(state,'group-1',{x:216,z:64},{...context,world:landscape}),
+            /no safe destination nearby/i);
+        assert.equal(core.serializeState(state),saved);
+    }
+});

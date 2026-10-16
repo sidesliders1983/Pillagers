@@ -64,7 +64,7 @@ function requireContext(state: SimulationState, context?: PhysicalExpeditionCont
 }
 
 /** Bounded cardinal search on the existing walkability grid. No new terrain classification. */
-function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: Point2): Point2[] {
+function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: Point2) {
     const { world } = context, nav = world.navigation, surface = createBlueprintSurface(world);
     const bounds = nav.bounds;
     const inside = (p: Point2) => p && Number.isFinite(p.x) && Number.isFinite(p.z) &&
@@ -80,9 +80,38 @@ function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: 
         p.x >= b.minX - .4 && p.x <= b.maxX + .4 && p.z >= b.minZ - .4 && p.z <= b.maxZ + .4);
     const safe = (i: number) => i >= 0 && i < nav.cells.length && nav.cells[i] && inside(point(i)) &&
         free(point(i)) && surface.surfaceHeightAt(point(i).x, point(i).z) > world.waterLevel + .25;
-    const end = index(target);
-    if (!safe(end) || surface.surfaceHeightAt(target.x, target.z) <= world.waterLevel + .25)
-        throw new Error('No reachable land route to that destination.');
+    let end = index(target);
+    const adjusted = !safe(end);
+    if (surface.surfaceHeightAt(target.x, target.z) <= world.waterLevel + .25)
+        throw new Error('Choose a land destination. This spot is in the water.');
+    if (adjusted) {
+        // Touch need not hit one exact free cell. Propose nearby ground without crossing a shore or cliff.
+        const radius = 8, candidates: number[] = [];
+        const containing = context.exclusions?.filter(b => target.x >= b.minX - .4 && target.x <= b.maxX + .4 &&
+            target.z >= b.minZ - .4 && target.z <= b.maxZ + .4) ?? [];
+        const nearest = point(end), reach = Math.ceil(radius / nav.spacing);
+        for (let dz = -reach; dz <= reach; dz++) for (let dx = -reach; dx <= reach; dx++) {
+            const p = { x: nearest.x + dx * nav.spacing, z: nearest.z + dz * nav.spacing };
+            const distance = Math.hypot(p.x - target.x, p.z - target.z);
+            if (!inside(p) || distance > radius || !safe(index(p))) continue;
+            const samples = Math.max(1, Math.ceil(distance));
+            let previous = surface.surfaceHeightAt(target.x, target.z), connected = true;
+            for (let step = 1; step <= samples; step++) {
+                const q = { x: target.x + (p.x - target.x) * step / samples, z: target.z + (p.z - target.z) * step / samples };
+                const height = surface.surfaceHeightAt(q.x, q.z);
+                if (height <= world.waterLevel + .25 || Math.abs(height - previous) > .65 * distance / samples ||
+                    context.exclusions?.some(b => !containing.includes(b) && q.x >= b.minX - .4 && q.x <= b.maxX + .4 &&
+                        q.z >= b.minZ - .4 && q.z <= b.maxZ + .4)) { connected = false; break; }
+                previous = height;
+            }
+            if (connected) candidates.push(index(p));
+        }
+        candidates.sort((a, b) => Math.hypot(point(a).x - target.x, point(a).z - target.z) -
+            Math.hypot(point(b).x - target.x, point(b).z - target.z) || a - b);
+        if (!candidates.length)
+            throw new Error('No safe destination nearby. Tap open ground away from steep slopes or buildings.');
+        end = candidates[0];
+    }
     const home = origin ?? world.settlement.center;
     if (!inside(home)) throw new Error('Invalid expedition departure origin on this island.');
     const exits = context.exclusions?.filter(b => home.x >= b.minX - .4 && home.x <= b.maxX + .4 &&
@@ -181,7 +210,7 @@ function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: 
     route.reverse();
     if (origin && Math.hypot(route[0].x - origin.x, route[0].z - origin.z) > 1e-6)
         route.unshift({ ...origin });
-    return route;
+    return { route, target: point(end), adjusted };
 }
 function prepareExplore(state: SimulationState, groupId: string, target: Point2,
     context?: PhysicalExpeditionContext, origins?: Record<string, Point2>) {
@@ -192,22 +221,27 @@ function prepareExplore(state: SimulationState, groupId: string, target: Point2,
     if (origins && (group.memberIds.some(id => !origins[id] || !Number.isFinite(origins[id].x) || !Number.isFinite(origins[id].z)) || Object.keys(origins).length !== group.memberIds.length ||
         group.memberIds.some(id => !Object.hasOwn(origins, id))))
         throw new Error('Every expedition member needs an exact departure origin.');
-    const memberRoutes = origins ? Object.fromEntries(group.memberIds.map(id =>
-        [id, planRoute(bound, target, origins[id])])) : undefined;
-    const routes = memberRoutes ? Object.values(memberRoutes) : [planRoute(bound, target)];
+    const plans = origins ? group.memberIds.map(id => planRoute(bound, target, origins[id])) :
+        [planRoute(bound, target)];
+    const memberRoutes = origins ? Object.fromEntries(group.memberIds.map((id, i) => [id, plans[i].route])) : undefined;
+    const routes = plans.map(plan => plan.route);
     const route = routes.reduce((longest, next) => routeLength(next) > routeLength(longest) ? next : longest);
     const distance = routeLength(route);
     const policy = state.world!.spatial?.policy ?? prototypeExplorePolicy;
     const plannedTicks = Math.ceil(distance / policy.metresPerTick) * 2 + policy.exploringTicks;
     const foodCost = Math.ceil(plannedTicks / policy.foodIntervalTicks) * group.memberIds.length;
     if (state.stocks.food < foodCost) throw new Error(`Explore Area needs ${foodCost} Food.`);
-    return { bound, group, route, memberRoutes, distance, policy, plannedTicks, foodCost };
+    return {
+        bound, group, route, memberRoutes, distance, policy, plannedTicks, foodCost,
+        target: plans[0].target, adjusted: plans[0].adjusted
+    };
 }
 /** No route, terrain difficulty or hidden-site information is exposed by a proposal. */
 export function exploreOffer(state: SimulationState, groupId: string, target: Point2,
     context?: PhysicalExpeditionContext, origins?: Record<string, Point2>) {
     const offer = prepareExplore(state, groupId, target, context, origins);
     return {
+        target: { ...offer.target }, adjusted: offer.adjusted,
         plannedTicks: offer.plannedTicks, foodCost: offer.foodCost,
         members: offer.group.memberIds.length, estimate: 'Planned round trip; conditions may change.'
     };
@@ -266,7 +300,7 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
     const id = `explore-${Object.keys(spatial.missions).length + 1}`;
     spatial.missions[id] = {
         id, groupId: command.groupId, groupName: offer.group.name,
-        memberIds: [...offer.group.memberIds], target: { ...command.target }, route: offer.route,
+        memberIds: [...offer.group.memberIds], target: { ...offer.target }, route: offer.route,
         ...(offer.memberRoutes ? { memberRoutes: offer.memberRoutes } : {}),
         distance: offer.distance, travelled: 0, departedAt: absoluteTick(state), updatedAt: absoluteTick(state),
         exploringUntil: null, returnedAt: null, foodCost: offer.foodCost, status: 'Traveling', outcome: null
