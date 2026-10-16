@@ -13,18 +13,18 @@ export class ExpeditionPanel {
     constructor(private root: HTMLElement, private session: GameplaySession,
         private command: (command: SimulationCommand) => void,
         private targetChanged: (point?: { x: number; z: number }) => void) {
-        root.innerHTML = `<p>Residents remain autonomous. Only expedition groups receive travel orders.</p>
+        root.innerHTML = `<p>Only expedition groups receive travel orders.</p>
             <label>Group<select id="expedition-group"><option value="">New group</option></select></label>
-            <label>Group name<input id="expedition-name" maxlength="60" autocomplete="off"></label>
+            <div id="expedition-editor"><label>Group name<input id="expedition-name" maxlength="60" autocomplete="off"></label>
             <details><summary>Members</summary><div id="expedition-members"></div></details>
-            <button id="expedition-save" type="button">Create group</button>
+            <button id="expedition-save" type="button">Create group</button></div>
             <button id="expedition-explore" type="button">Explore Area</button>
             <button id="expedition-recall" type="button">Return home</button>
             <p id="expedition-status" role="status" aria-live="polite"></p>
             <div id="expedition-proposal" hidden><p id="expedition-estimate"></p>
                 <button id="expedition-confirm" type="button">Send group</button>
                 <button id="expedition-cancel" type="button">Cancel target</button></div>
-            <div id="expedition-history"></div>`;
+            <details><summary>Recent journeys</summary><div id="expedition-history"></div></details>`;
         root.querySelector('#expedition-group')!.addEventListener('change', event => {
             this.groupId = (event.target as HTMLSelectElement).value;
             const group = this.session.readSnapshot().world?.groups[this.groupId];
@@ -38,7 +38,9 @@ export class ExpeditionPanel {
                 name: this.name.value, memberIds } : { type: 'CreateExpeditionGroup', name: this.name.value, memberIds });
         });
         root.querySelector('#expedition-explore')!.addEventListener('click', () => {
+            this.root.querySelector<HTMLDetailsElement>('details')!.open = false;
             this.choosing = true; this.pending = undefined; this.targetChanged();
+            this.root.querySelector('#expedition-estimate')!.textContent = '';
             this.status.textContent = 'Tap a land destination on the island. Drag and pinch still control the camera.';
             this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = false;
             this.root.querySelector<HTMLButtonElement>('#expedition-confirm')!.disabled = true;
@@ -81,6 +83,7 @@ export class ExpeditionPanel {
             this.status.textContent = 'Destination selected. Confirm to send this group.';
         } catch (error) {
             this.pending = undefined; this.targetChanged();
+            this.root.querySelector('#expedition-estimate')!.textContent = '';
             this.root.querySelector<HTMLButtonElement>('#expedition-confirm')!.disabled = true;
             this.status.textContent = String(error);
         }
@@ -105,6 +108,7 @@ export class ExpeditionPanel {
         if (members.innerHTML !== rows) members.innerHTML = rows;
         const group = view.groups.find(group => group.id === this.groupId);
         const active = inspectSpatialExpeditions(state).missions.find(m => m.groupId === this.groupId && m.status !== 'Returned');
+        this.root.querySelector<HTMLElement>('#expedition-editor')!.hidden = !!active;
         this.root.querySelector('#expedition-save')!.textContent = this.groupId ? 'Save group' : 'Create group';
         this.root.querySelector<HTMLButtonElement>('#expedition-save')!.disabled = !!group && group.status !== 'Ready' && group.status !== 'Unavailable';
         this.root.querySelector<HTMLButtonElement>('#expedition-explore')!.disabled = group?.status !== 'Ready' || !state.discovery;

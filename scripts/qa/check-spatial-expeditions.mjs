@@ -24,7 +24,7 @@ try {
     await page.getByLabel('Game menu', { exact: true }).tap();
     await page.locator('#fjord-expeditions-open').click({ timeout: 5000 });
     await page.locator('#expedition-name').fill('Shore scouts');
-    await page.locator('#expedition-panel summary').click();
+    await page.locator('#expedition-editor summary').click();
     const member = page.locator('#expedition-members input:not(:disabled)').first();
     const memberId = await member.inputValue();
     await member.check();
@@ -38,7 +38,15 @@ try {
     await page.mouse.wheel(0,1800);
     await page.waitForTimeout(900);
     const { createCampaignIsland } = loadTypeScript(new URL('../../src/fjord-play/CampaignIsland.ts', import.meta.url));
-    const fixture = createCampaignIsland(original.fjord.campaign.seed);
+    const { geographyIdentity } = loadTypeScript(new URL('../../src/fjord-play/FjordProjection.ts', import.meta.url));
+    let fixture;
+    try {
+        fixture = JSON.parse(await readFile('artifacts/spatial-expeditions/geography.json', 'utf8'));
+        assert.equal(geographyIdentity(fixture), original.fjord.layout.geographyId);
+    } catch {
+        fixture = createCampaignIsland(original.fjord.campaign.seed);
+        await writeFile('artifacts/spatial-expeditions/geography.json', JSON.stringify(fixture));
+    }
     const points = [];
     const nav = fixture.navigation;
     for (let row = 0; row < nav.rows; row += 8) for (let col = 0; col < nav.columns; col += 8)
@@ -69,6 +77,7 @@ try {
     await page.touchscreen.tap(goal.screenX,goal.screenY);
     console.log('Target response:', await page.locator('#expedition-status').innerText());
     await page.locator('#expedition-confirm:enabled').waitFor();
+    await page.locator('#expedition-confirm').scrollIntoViewIfNeeded();
     await page.screenshot({ path: 'artifacts/spatial-expeditions/proposal.png' });
     await page.locator('#expedition-confirm').tap();
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial);
@@ -77,11 +86,30 @@ try {
     assert.deepEqual(dispatched.fjord.campaign.discovery, original.fjord.campaign.discovery);
     assert.equal(dispatched.fjord.campaign.world.spatial.missions['explore-1'].memberIds[0],memberId);
     await page.locator('#fjord-run').tap();
-    await page.waitForTimeout(3500);
+    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
+        .fjord.campaign.world.spatial.missions['explore-1'].travelled >= 90);
     await page.locator('#fjord-run').tap();
+    const runtime = [];
+    for (const quality of ['low', 'standard']) {
+        await page.getByLabel('Game menu', { exact: true }).tap();
+        await page.locator('#fjord-quality').selectOption(quality);
+        await page.getByLabel('Game menu', { exact: true }).tap();
+        await page.locator('#fjord-run').tap();
+        runtime.push({ quality, ...await page.evaluate(async () => {
+            const intervals = []; let previous = await new Promise(requestAnimationFrame);
+            while (intervals.length < 60) {
+                const now = await new Promise(requestAnimationFrame);
+                intervals.push(now-previous); previous = now;
+            }
+            return { intervals, stability: JSON.parse(document.querySelector('#fjord-canvas').dataset.stability) };
+        }) });
+        await page.locator('#fjord-run').tap();
+    }
     const walking = await saved(), mission = walking.fjord.campaign.world.spatial.missions['explore-1'];
     assert.ok(mission.travelled > 0);
-    assert.notDeepEqual(walking.fjord.campaign.discovery, dispatched.fjord.campaign.discovery);
+    assert.notEqual(walking.fjord.campaign.discovery.clans[walking.fjord.campaign.clan.id].explored,
+        dispatched.fjord.campaign.discovery.clans[walking.fjord.campaign.clan.id].explored,
+        'Reached positions map new ground, not merely an updated observation timestamp');
     const entities = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-entities'));
     assert.equal(entities.filter(e => e.id === memberId && e.status.expedition).length,1);
     await page.screenshot({ path: 'artifacts/spatial-expeditions/walking.png' });
@@ -96,8 +124,11 @@ try {
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial.missions['explore-1'].status === 'Returning');
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: 'artifacts/spatial-expeditions/phone.png' });
+    await page.locator('#fjord-next').tap();
+    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
+        .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returned');
     assert.deepEqual(errors, []);
     await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ touch: true, groupId: 'group-1', memberId,
-        travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
+        runtime, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group creation, touch targeting, paid dispatch, travel, discovery, reload and recall passed.');
 } finally { await browser.close(); }

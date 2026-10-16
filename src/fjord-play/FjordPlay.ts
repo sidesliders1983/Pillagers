@@ -559,6 +559,7 @@ export class FjordPlay {
                 expeditions!.committed();
             }), point => {
                 targetMarker.visible = !!point;
+                if (!point && expeditions?.targeting) showManagement(false);
                 if (point) targetMarker.position.set(point.x,
                     createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z)+.4, point.z);
             });
