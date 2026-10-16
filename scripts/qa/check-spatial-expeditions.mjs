@@ -1,0 +1,103 @@
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { Matrix4, Vector3 } from 'three';
+import { loadTypeScript } from '../load-typescript.mjs';
+const { chromium } = createRequire(import.meta.url)('C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const { discoveryAt, inspectClanDiscovery } = loadTypeScript(new URL('../../src/simulation/ClanDiscovery.ts', import.meta.url));
+const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5193';
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+await mkdir('artifacts/spatial-expeditions', { recursive: true });
+try {
+    const page = await browser.newPage({ viewport: { width: 1024, height: 768 }, hasTouch: true });
+    page.setDefaultTimeout(180000);
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto(origin+'/fjord-play?discovery=1&debugDiscovery=1');
+    await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
+    if (await page.locator('#fjord-run').innerText() === 'Pause') await page.locator('#fjord-run').tap();
+    if (await page.getByRole('button', { name: 'Close founding chapter' }).count())
+        await page.getByRole('button', { name: 'Close founding chapter' }).tap();
+    const saved = () => page.evaluate(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')));
+    console.log('Ready; campaign paused.');
+    const original = await saved();
+    await page.getByLabel('Game menu', { exact: true }).tap();
+    await page.locator('#fjord-expeditions-open').click({ timeout: 5000 });
+    await page.locator('#expedition-name').fill('Shore scouts');
+    await page.locator('#expedition-panel summary').click();
+    const member = page.locator('#expedition-members input:not(:disabled)').first();
+    const memberId = await member.inputValue();
+    await member.check();
+    await page.locator('#expedition-save').tap();
+    await page.waitForFunction(() => document.querySelector('#expedition-group').value === 'group-1');
+    console.log('Group created.');
+    await page.locator('#expedition-explore').tap();
+    if (await page.locator('#fjord-management-toggle').getAttribute('aria-expanded') === 'true')
+        await page.locator('#fjord-management-toggle').tap();
+    await page.mouse.move(500,450);
+    await page.mouse.wheel(0,1800);
+    await page.waitForTimeout(900);
+    const { createCampaignIsland } = loadTypeScript(new URL('../../src/fjord-play/CampaignIsland.ts', import.meta.url));
+    const fixture = createCampaignIsland(original.fjord.campaign.seed);
+    const points = [];
+    const nav = fixture.navigation;
+    for (let row = 0; row < nav.rows; row += 8) for (let col = 0; col < nav.columns; col += 8)
+        if (nav.cells[row*nav.columns+col]) points.push({ x: nav.bounds.minX+col*nav.spacing,
+            z: nav.bounds.minZ+row*nav.spacing });
+    const view = inspectClanDiscovery(original.fjord.campaign.discovery, original.fjord.campaign.clan.id);
+    const target = await page.evaluate(points => {
+        const canvas = document.querySelector('#fjord-canvas');
+        return { rect: canvas.getBoundingClientRect().toJSON(), camera: JSON.parse(canvas.dataset.camera), points };
+    }, points);
+    const viewMatrix = new Matrix4().fromArray(target.camera.world).invert();
+    const projection = new Matrix4().fromArray(target.camera.projection);
+    const candidates = points.filter(p => discoveryAt(view,p.x,p.z) === 'unknown')
+        .map(p => {
+            const col = Math.round((p.x-fixture.terrain.bounds.minX)/fixture.terrain.spacing);
+            const row = Math.round((p.z-fixture.terrain.bounds.minZ)/fixture.terrain.spacing);
+            const point = new Vector3(p.x,fixture.terrain.heights[row*fixture.terrain.columns+col],p.z)
+                .applyMatrix4(viewMatrix).applyMatrix4(projection);
+            return { ...p, screenX: target.rect.left+(point.x+1)*target.rect.width/2,
+                screenY: target.rect.top+(1-point.y)*target.rect.height/2, depth: point.z };
+        }).filter(p => p.depth > -1 && p.depth < 1 && p.screenX > target.rect.left+50 &&
+            p.screenX < target.rect.right-70 && p.screenY > target.rect.top+60 && p.screenY < target.rect.bottom-40);
+    await writeFile('artifacts/spatial-expeditions/target-projection.json', JSON.stringify({target,candidates},null,2));
+    await page.screenshot({ path: 'artifacts/spatial-expeditions/targeting.png' });
+    assert.ok(candidates.length, 'An unknown accessible route point can be targeted from the real camera');
+    const goal = candidates[0];
+    console.log('Target', JSON.stringify(goal));
+    await page.touchscreen.tap(goal.screenX,goal.screenY);
+    console.log('Target response:', await page.locator('#expedition-status').innerText());
+    await page.locator('#expedition-confirm:enabled').waitFor();
+    await page.screenshot({ path: 'artifacts/spatial-expeditions/proposal.png' });
+    await page.locator('#expedition-confirm').tap();
+    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial);
+    console.log('Dispatched.');
+    const dispatched = await saved();
+    assert.deepEqual(dispatched.fjord.campaign.discovery, original.fjord.campaign.discovery);
+    assert.equal(dispatched.fjord.campaign.world.spatial.missions['explore-1'].memberIds[0],memberId);
+    await page.locator('#fjord-run').tap();
+    await page.waitForTimeout(3500);
+    await page.locator('#fjord-run').tap();
+    const walking = await saved(), mission = walking.fjord.campaign.world.spatial.missions['explore-1'];
+    assert.ok(mission.travelled > 0);
+    assert.notDeepEqual(walking.fjord.campaign.discovery, dispatched.fjord.campaign.discovery);
+    const entities = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-entities'));
+    assert.equal(entities.filter(e => e.id === memberId && e.status.expedition).length,1);
+    await page.screenshot({ path: 'artifacts/spatial-expeditions/walking.png' });
+    console.log('Walking; reloading.');
+    await page.reload();
+    await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
+    assert.deepEqual((await saved()).fjord.campaign, walking.fjord.campaign);
+    await page.getByLabel('Game menu', { exact: true }).tap();
+    await page.locator('#fjord-expeditions-open').tap();
+    await page.locator('#expedition-group').selectOption('group-1');
+    await page.locator('#expedition-recall').tap();
+    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial.missions['explore-1'].status === 'Returning');
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: 'artifacts/spatial-expeditions/phone.png' });
+    assert.deepEqual(errors, []);
+    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ touch: true, groupId: 'group-1', memberId,
+        travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
+    console.log('Real 3D group creation, touch targeting, paid dispatch, travel, discovery, reload and recall passed.');
+} finally { await browser.close(); }

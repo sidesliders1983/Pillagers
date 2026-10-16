@@ -2,6 +2,8 @@
 
 Status: implemented prototype. UI text is English. Simulation Core owns the graph, clan knowledge, groups, missions, progression and consequences.
 
+The current 3D physical Explore Area prototype is documented in [Spatial Expedition Groups v0.4B](SPATIAL-EXPEDITIONS-V04B.md). The four-region rules below remain the historical and compatibility contract.
+
 ## Player flow
 
 Open **World** at the board's bottom-left. Create recon group, enter a name and select named living residents. Groups have stable IDs, show members/occupations/status/location, and can be edited when not away. A member belongs to at most one group. Eligibility starts at 16 Winters and excludes residents providing active childcare.

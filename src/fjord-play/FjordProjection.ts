@@ -1,3 +1,4 @@
+import { spatialMissionPosition } from '../simulation/SpatialExpeditions';
 import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
 export { settlementCampfire } from './SettlementCampfire';
@@ -47,6 +48,8 @@ export interface FjordEntity {
     plot?: FjordPlot;
     status: {
         living: boolean;
+        expedition?: string;
+        expeditionWalking?: boolean;
         occupation?: string | null;
         workEligible?: boolean;
         workHomeId?: string;
@@ -286,17 +289,21 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             add('household', home.id, housingName(state, 'household', home.id), 'tent', plot, { living: true }, plot);
         for (const [index, id] of home.memberIds.entries()) {
             const p = state.personas[id];
-            if (!p || p.deathWinter !== null || personaAway(state, id))
+            const mission = Object.values(state.world?.spatial?.missions ?? {}).find(m =>
+                m.status !== 'Returned' && m.memberIds.includes(id));
+            if (!p || p.deathWinter !== null || personaAway(state, id) && !mission)
                 continue;
             const age = personaAge(state, id);
             const indoorReason = age < 5 ? 'young-child' :
                 state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
-            const point = plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
+            const partyPoint = mission ? spatialMissionPosition(mission, mission.memberIds.indexOf(id)*1.1) : undefined;
+            const point = partyPoint ? { ...partyPoint, y: surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
+                { living: true, expedition: mission?.id, expeditionWalking: !!mission && mission.status !== 'Exploring',
+                    sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,
                     workHomeId: residence?.buildingId ?? undefined });
             entities[entities.length - 1].dna = { ...structuredClone(p.dna), age };

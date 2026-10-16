@@ -148,3 +148,11 @@ body.fjord-play #fjord-resident-profile .profile-minor > summary { color: #c6cbb
     .fjord-time-controls { grid-column: 1; grid-row: 2; }
     .fjord-kpis { grid-row: 3; }
 }
+
+#expedition-panel label { display: block; margin: .5rem 0; }
+#expedition-panel input:not([type="checkbox"]), #expedition-panel select { width: 100%; box-sizing: border-box; }
+#expedition-members { max-height: 14rem; overflow-y: auto; }
+#expedition-panel .expedition-member { display: flex; align-items: center; gap: .5rem; min-height: 44px; }
+#expedition-panel .expedition-member input { flex: none; }
+#expedition-panel button { min-height: 44px; margin: .25rem .25rem .25rem 0; }
+#expedition-status, #expedition-estimate { overflow-wrap: anywhere; }

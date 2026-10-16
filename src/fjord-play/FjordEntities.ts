@@ -1,3 +1,7 @@
+import { spatialMissionPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
+import type { SimulationState } from '../simulation/SimulationCore';
+import { createBlueprintSurface, type TerrainSurface } from '../world-generation/TerrainQueries';
+import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
 import { createFjordYardSurface } from './FjordYardSurface';
 import type { LivingWorldController } from './LivingWorldController';
@@ -15,6 +19,29 @@ export class FjordEntities {
         localBounds?: Box3;
         boundsSignature?: string;
     }>();
+    private expeditionSurface?: TerrainSurface;
+    private expeditionFrames = new Map<string, { mission: SpatialMission; from: number; elapsed: number }>();
+    prepareExpeditions(state: SimulationState, world: WorldBlueprint) {
+        this.expeditionSurface ??= createBlueprintSurface(world);
+        const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned');
+        const ids = new Set(active.map(m => m.id));
+        for (const id of this.expeditionFrames.keys()) if (!ids.has(id)) this.expeditionFrames.delete(id);
+        for (const mission of active) {
+            const previous = this.expeditionFrames.get(mission.id);
+            if (previous?.mission.updatedAt === mission.updatedAt && previous.mission.status === mission.status) continue;
+            const ratio = previous ? Math.min(1, previous.elapsed/.18) : 1;
+            const from = previous ? previous.from+(previous.mission.travelled-previous.from)*ratio : mission.travelled;
+            this.expeditionFrames.set(mission.id, { mission, from, elapsed: 0 });
+        }
+    }
+    private expeditionPose(missionId: string, personaId: string) {
+        const frame = this.expeditionFrames.get(missionId);
+        if (!frame) return;
+        const travelled = frame.from+(frame.mission.travelled-frame.from)*Math.min(1,frame.elapsed/.18);
+        const point = spatialMissionPosition({ ...frame.mission, travelled },
+            frame.mission.memberIds.indexOf(personaId)*1.1);
+        return { ...point, y: this.expeditionSurface!.surfaceHeightAt(point.x,point.z) };
+    }
     private disposed = false;
     private seasonProgress: number | null = null;
     private yardSamplers = new Map<string, { signature: string; sample: (x: number, z: number, clearance: number) => number | null }>();
@@ -115,8 +142,9 @@ export class FjordEntities {
             }
             const p = entity.transform!;
             entry.model.name = entity.selectionKey;
-            entry.model.position.set(p.x, p.y, p.z);
-            entry.model.rotation.y = p.rotation;
+            const display = entity.status.expedition ? this.expeditionPose(entity.status.expedition, entity.id) ?? p : p;
+            entry.model.position.set(display.x, display.y, display.z);
+            entry.model.rotation.y = display.rotation;
             await this.models.reconcile(entry.model, entity);
             if (this.disposed) return;
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
@@ -225,6 +253,15 @@ export class FjordEntities {
         }
     }
     advance(motion: LivingWorldController, delta: number, running: boolean) {
+        for (const frame of this.expeditionFrames.values()) frame.elapsed += running ? delta : 0;
+        for (const entry of this.entries.values()) {
+            const facts = entry.model.userData.canonical;
+            if (facts?.expedition) {
+                const pose = this.expeditionPose(facts.expedition, facts.id);
+                if (pose) { entry.model.position.set(pose.x,pose.y,pose.z); entry.model.rotation.y = pose.rotation; }
+                this.models.animate(entry.model, facts.expeditionWalking ? 'Walk' : 'Idle', 1, running ? delta : 0);
+            }
+        }
         for (const agent of motion.inspect()) {
             const model = this.entries.get(agent.key)?.model;
             if (!model) continue;
@@ -276,6 +313,7 @@ export class FjordEntities {
         }
         this.select([]);
         this.entries.clear();
+        this.expeditionFrames.clear();
         this.yardSamplers.clear();
         this.root.removeFromParent();
     }

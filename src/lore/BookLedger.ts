@@ -42,7 +42,7 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
             case 'BuildingSalvaged': case 'BuildingCollapsed': add(e, 'materials', 'otherReceipts', 'salvage'); break;
             case 'FoundingLongshipSalvaged': add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'CattleSlaughtered': add(e, 'food', 'otherReceipts', 'food'); break;
-            case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
+            case 'ExploreAreaDeparted': case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
             case 'ExpeditionReturned':
                 add(e, 'food', 'otherReceipts', 'food'); add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'SettlementPillaged':

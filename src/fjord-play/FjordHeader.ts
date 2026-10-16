@@ -22,7 +22,7 @@ export function fjordHeaderHTML(): string {
                     <nav aria-label="Game views"><a href="/play" data-settlement-view="board">2D Settlement</a> ·
                         <a href="/gameplay-lab">Gameplay Lab</a> · <a href="/">Fjord prototype</a></nav>
                     <span id="fjord-menu-pacing-slot"></span>
-                    <button id="clan-book-open" type="button">Clan Book</button>
+                    <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low">Low</option>
                         <option value="standard">Standard</option></select></label>
                     <label>Local effects<select id="fjord-effects"><option value="off">Off</option>
