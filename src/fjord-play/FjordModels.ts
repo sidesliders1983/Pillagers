@@ -23,12 +23,12 @@ export class FjordModels {
     async reconcile(model: Object3D, entity: FjordEntity) {
         const actor = this.actors.get(model);
         if (!actor?.human || !entity.dna) return;
-        const fingerprint = JSON.stringify(entity.dna);
+        const fingerprint = JSON.stringify([entity.dna, entity.visualProfile]);
         if (actor.fingerprint !== fingerprint) {
             model.scale.setScalar(1);
-            actor.human.applyDNA({ ...entity.dna, age: Math.min(100, entity.dna.age) });
+            const profile = entity.visualProfile ?? universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) });
+            actor.human.applyDNA({ ...entity.dna, age: Math.min(100, entity.dna.age) }, profile);
             actor.fingerprint = fingerprint;
-            const profile = universalHumanProfile({ ...entity.dna, age: Math.min(100, entity.dna.age) });
             model.scale.setScalar(entity.transform!.scale / (1 - .35 * profile.weights.Child));
             const paceSignature = JSON.stringify([model.scale.toArray(), profile.motion]);
             if (!actor.human.lastFitRetained || actor.paceSignature !== paceSignature) {
@@ -155,7 +155,7 @@ export class FjordModels {
     async create(entity: FjordEntity): Promise<Object3D> {
         if (entity.kind === 'persona' && entity.dna) {
             try {
-                const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) });
+                const human = await this.humans.createWorld({ ...entity.dna, age: Math.min(100, entity.dna.age) }, entity.visualProfile);
                 this.actors.set(human.root, { human, pace: 0, groundSpeed: 0, state: 'Idle' });
                 await this.reconcile(human.root, entity);
                 return human.root;

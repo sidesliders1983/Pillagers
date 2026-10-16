@@ -210,9 +210,9 @@ export class MeshyHumanFactory {
   model.setNativeModules(sources, selected.presentation, selected.profile.appearance);
  }
 
- async createWorld(dna: CharacterDNA) {
+ async createWorld(dna: CharacterDNA, profile?: HumanProfile) {
   if (this.bodySource) throw new Error('A review-only body cannot create a world resident');
-  return this.create(dna, 2);
+  return this.create(dna, 2, profile);
  }
 }
 export class MeshyHuman {

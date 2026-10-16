@@ -1,9 +1,11 @@
+import { seededRandom } from '../characters/seededRandom';
+import { assertIslandClanWorld, type IslandClanLandscape } from './IslandClans';
 import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
 import type { PhysicalExpeditionContext, SpatialExpeditionCommand } from './SpatialExpeditions';
 export { exploreOffer, startExpeditionOffer, inspectSpatialExpeditions } from './SpatialExpeditions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
-import { assertDiscoveryWorld, createClanDiscovery, validateClanDiscovery, type ClanDiscovery } from './ClanDiscovery';
-import { validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
+import { assertDiscoveryWorld, createClanDiscovery, commitClanObservation, validateClanDiscovery, type ClanDiscovery } from './ClanDiscovery';
+import { birthdayCalendarMode, validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
 import type { BirthdayCalendar, BirthdayCalendarMode } from './BirthdayCalendar';
 export type { BirthdayCalendarMode } from './BirthdayCalendar';
 import { foundingTime, type FoundingPhase } from './FoundingPhase';
@@ -15,7 +17,7 @@ import {initializeSocial, validateSocial} from './PersonalityLifeEvents';
 import type {SocialState, SocialConfig} from './PersonalityLifeEvents';
 export {defaultSocialConfig, socialProbabilities} from './PersonalityLifeEvents';
 import {personaIdentity} from './Identity';
-import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway} from './WorldExpeditions';
+import {initializeWorld,validateWorld,applyExpeditionCommand,personaAway,namespaceTarget} from './WorldExpeditions';
 import type {WorldState,ExpeditionCommand,ExpeditionConfig} from './WorldExpeditions';
 export {inspectWorld,missionOffer,defaultExpeditionConfig,missionTypes,personaAway} from './WorldExpeditions';
 import {initializeWeather,validateWeather} from './Weather';
@@ -93,6 +95,37 @@ export function initializePhysicalDiscovery(input: SimulationState,
     if (world.settlement.harbor) observers.push({ id: 'founding-landing', kind: 'settlement', ...world.settlement.harbor });
     state.discovery = createClanDiscovery(world, worldId, state.clan.id, observers,
         state.time.winter * state.ticksPerWinter + state.time.tick);
+    validateState(state);
+    return state;
+}
+/** Explicit fresh-campaign migration; existing graph campaigns are never silently reinterpreted. */
+export function initializeIslandClans(input: SimulationState, world: IslandClanLandscape, worldId: string): SimulationState {
+    validateState(input);
+    assertIslandClanWorld(input, world, worldId);
+    if (input.world?.version === 2) return structuredClone(input);
+    const founding = foundingTime(input.foundingPhase);
+    if (input.discovery || input.time.winter !== founding.winter || input.time.tick !== founding.tick ||
+        !input.world || Object.keys(input.world.groups).length || Object.keys(input.world.missions).length)
+        throw new Error('Physical rival clans require a fresh campaign; existing worlds retain their saved meaning.');
+    const state = initializePhysicalDiscovery(input, world, worldId);
+    const clanId = 'island-rival';
+    const random = seededRandom(state.seed, 'island-rival-clan-v1');
+    const targetSeed = Math.floor(random() * 4294967296);
+    const targetRules = Object.keys(input.world.targetClans).sort()
+        .map(id => input.world!.targetClans[id].landing?.config)[0];
+    const target = generateCampaign(targetSeed, targetRules, state.mechanics?.config,
+        state.foundingPhase, birthdayCalendarMode(state));
+    initializeWeather(target, state.weather?.config);
+    initializeSocial(target, state.social?.config ?? {});
+    const rival = namespaceTarget(target, clanId);
+    rival.clan.name = 'Island community';
+    state.world = { version: 2, config: structuredClone(input.world.config),
+        groups: {}, missions: {}, regions: {}, knowledge: {}, targetClans: { [clanId]: rival },
+        island: { version: 1, worldId, siteId: world.rivalSite!.candidateId, clanId,
+            foundedAt: state.time.winter * state.ticksPerWinter + state.time.tick } };
+    state.discovery = commitClanObservation(state.discovery!, world, worldId, clanId,
+        [{ id: 'rival-settlement', kind: 'settlement', ...world.rivalSite!.center }],
+        state.world.island!.foundedAt);
     validateState(state);
     return state;
 }

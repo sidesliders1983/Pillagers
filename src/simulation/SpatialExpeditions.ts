@@ -1,3 +1,4 @@
+import { assertIslandClanWorld } from './IslandClans';
 import type { Bounds2, Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { commitClanObservation, assertDiscoveryWorld } from './ClanDiscovery';
@@ -8,7 +9,7 @@ import { eventFacts } from './EventFacts';
 export interface PhysicalExpeditionContext {
     exclusions?: readonly Bounds2[];
     worldId: string;
-    world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'navigation' | 'settlement'>;
+    world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'navigation' | 'settlement' | 'rivalSite'>;
 }
 export interface ExplorePolicy {
     metresPerTick: number;
@@ -803,6 +804,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
 }
 /** Reattach regenerated geography on import; never serialize a second heightfield in Core. */
 export function assertSpatialWorld(state: SimulationState, context: PhysicalExpeditionContext) {
+    if (state.world?.island) assertIslandClanWorld(state, context.world, context.worldId);
     if (state.discovery) assertDiscoveryWorld(state.discovery, context.world, context.worldId);
     if (!state.world?.spatial) return;
     requireContext(state, context);

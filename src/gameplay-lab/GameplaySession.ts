@@ -5,7 +5,7 @@ import { freezeReadView } from './ReadView';
 import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
-import { createCampaign, applyCommand, serializeState, reconstructState, initializePhysicalDiscovery } from '../simulation/SimulationCore';
+import { createCampaign, applyCommand, serializeState, reconstructState, initializePhysicalDiscovery, initializeIslandClans } from '../simulation/SimulationCore';
 import type { BirthdayCalendarMode, FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
@@ -80,6 +80,13 @@ export class GameplaySession {
     }
     initializeDiscovery(world: WorldBlueprint, worldId: string): void {
         this.state = initializePhysicalDiscovery(this.state, world, worldId);
+        this.bindPhysicalWorld(world, worldId);
+        this.invalidateRead();
+    }
+    initializeIslandClans(world: WorldBlueprint, worldId: string): void {
+        const next = initializeIslandClans(this.state, world, worldId);
+        assertSpatialWorld(next, { world, worldId });
+        this.state = next;
         this.bindPhysicalWorld(world, worldId);
         this.invalidateRead();
     }
