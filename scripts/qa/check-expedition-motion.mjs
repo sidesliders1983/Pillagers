@@ -35,6 +35,7 @@ try {
         const context = { world, worldId: 'motion-fixture' };
         let state = Core.initializePhysicalDiscovery(Core.createCampaign(32, { initialFood: 500 }), world, context.worldId);
         state = Core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Group 1', memberIds: ['founder-1'] });
+        state = Core.applyCommand(state, { type: 'StartExpedition', groupId: 'group-1' }, context);
         state = Core.applyCommand(state, { type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 },
             origins: { 'founder-1': { x: 16, z: 64 } } }, context);
         const models = new FjordModels(new AssetManager()), layer = new FjordEntities(models);

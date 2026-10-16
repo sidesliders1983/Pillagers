@@ -28,7 +28,7 @@ export class FjordEntities {
             this.expeditionSurface = createBlueprintSurface(world);
             this.expeditionFrames.clear();
         }
-        const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned');
+        const active = Object.values(state.world?.spatial?.missions ?? {}).filter(m => m.status !== 'Returned' && m.status !== 'Prepared');
         const ids = new Set(active.map(m => m.id));
         for (const id of this.expeditionFrames.keys()) if (!ids.has(id)) this.expeditionFrames.delete(id);
         for (const mission of active) {

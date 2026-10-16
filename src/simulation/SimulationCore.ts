@@ -1,6 +1,6 @@
 import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
 import type { PhysicalExpeditionContext, SpatialExpeditionCommand } from './SpatialExpeditions';
-export { exploreOffer, inspectSpatialExpeditions } from './SpatialExpeditions';
+export { exploreOffer, startExpeditionOffer, inspectSpatialExpeditions } from './SpatialExpeditions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { assertDiscoveryWorld, createClanDiscovery, validateClanDiscovery, type ClanDiscovery } from './ClanDiscovery';
 import { validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
@@ -132,7 +132,8 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
-    if (command.type === 'ExploreArea' || command.type === 'RecallExpedition' ||
+    if (command.type === 'StartExpedition' || command.type === 'CancelExpedition' ||
+        command.type === 'ExploreArea' || command.type === 'RecallExpedition' ||
         command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {
         const state = structuredClone(input);
         applySpatialCommand(state, command, context);

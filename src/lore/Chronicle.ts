@@ -129,7 +129,17 @@ const templates:Record<string,Template>={
     },
     CaregiverAssigned:(e,d)=>{const mother=person(e,e.personaId);return mother&&(d.caregiverId===null||str(d,'caregiverId'))?d.caregiverId===null?`The mother was assigned to childcare for ${mother}.`:`${person(e,d.caregiverId as string)} was assigned as caregiver for ${mother}.`:null;},
     ExpeditionGroupCreated:(_e,d)=>str(d,'groupName')?`Expedition group ${d.groupName} was formed.`:null,
-    ExploreAreaDeparted:(_e,d)=>str(d,'groupName')?(d.redirected ? `${d.groupName} changed course, packing ${d.foodCost} additional Food for exploration and the return home.` : `${d.groupName} set out to explore, carrying ${d.foodCost} Food for the round trip.`):null,
+    ExploreAreaCancelled:(_e,d)=>str(d,'groupName')?`${d.groupName} ended its expedition preparations without leaving home.`:null,
+    ExploreAreaPrepared:(_e,d)=>str(d,'groupName')?`${d.groupName} prepared to explore, reserving ${d.foodCost} Food.`:null,
+    ExploreAreaSuppliesConsumed:(_e,d)=>str(d,'groupName')?`${d.groupName} opened ${d.units} carried Food for the next part of the journey.`:null,
+    ExploreAreaSuppliesDiscarded:(_e,d)=>str(d,'groupName')?`${d.groupName} ended with ${d.units} unused Food; it was not refunded.`:null,
+    ExploreAreaSuppliesLost:(_e,d)=>str(d,'groupName')?`${d.groupName} could not recover ${d.units} carried Food.`:null,
+    ExploreAreaReturnStarted:(_e,d)=>str(d,'groupName')?`${d.groupName} began returning home: ${d.reason}.`:null,
+    ExploreAreaStranded:(_e,d)=>str(d,'groupName')?`${d.groupName} is stranded: ${d.reason}`:null,
+    ExploreAreaDeparted:(_e,d)=>str(d,'groupName')?d.carriedSupplies ?
+        `${d.groupName} ${d.redirected ? 'changed course' : 'set out to explore'} using the same carried supplies.` :
+        (d.redirected ? `${d.groupName} changed course, packing ${d.foodCost} additional Food for exploration and the return home.` :
+            `${d.groupName} set out to explore, carrying ${d.foodCost} Food for the round trip.`):null,
     ExploreAreaReturned:(_e,d)=>str(d,'groupName')?`${d.groupName} exploration ended: ${d.outcome}.`:null,
     ExpeditionDeparted:(_e,d)=>str(d,'groupName')&&str(d,'mission')&&str(d,'regionId')?`${d.groupName} departed for ${d.mission} towards ${d.regionId}, carrying ${d.foodCost} Food.`:null,
     ExpeditionReturned:(_e,d)=>str(d,'mission')&&str(d,'regionId')&&typeof d.success==='boolean'?`${d.mission} towards ${d.regionId} returned: ${d.success?'completed':'failed'}, ${d.food??0} Food, ${d.materials??0} Materials, ${ids(d,'cattleIds')?.length??0} cattle and ${ids(d,'personaIds')?.length??0} people recovered; ${ids(d,'casualtyIds')?.length??0} casualties.`:null,

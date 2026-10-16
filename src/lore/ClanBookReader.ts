@@ -54,6 +54,13 @@ function appendix(chapter: BookChapter): string {
                 '</td><td>' + escape(facts.ledger.materials[key] ?? 'Not recorded') + '</td></tr>';
         html += '</tbody></table></div><p>Food accounting: ' + (facts.ledger.food.complete ? 'reconciled' : 'incomplete') +
             '. Materials accounting: ' + (facts.ledger.materials.complete ? 'reconciled' : 'incomplete') + '.</p>';
+        if (facts.ledger.provisions) {
+            const pack = facts.ledger.provisions;
+            html += '<h3>Carried expedition Food</h3><p>Recorded in this interval: ' + pack.reserved +
+                ' spent at departure preparation, ' + pack.consumed + ' consumed, ' + pack.discarded + ' unused and discarded, and ' + pack.lost +
+                ' unrecovered. Carried consumption is not charged to home stocks a second time. ' +
+                'Food is spent at Start Expedition and is never refunded.</p>';
+        }
         html += '<details><summary>Transaction sources</summary><ul>' + facts.ledger.transactions.map(t =>
             '<li>' + escape(t.eventId) + ' · ' + escape(t.resource) + ' · ' + escape(t.category) + ' · ' + escape(t.purpose) +
             ' · ' + t.units + '</li>').join('') + '</ul></details>';

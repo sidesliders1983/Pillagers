@@ -290,7 +290,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         for (const [index, id] of home.memberIds.entries()) {
             const p = state.personas[id];
             const mission = Object.values(state.world?.spatial?.missions ?? {}).find(m =>
-                m.status !== 'Returned' && m.memberIds.includes(id));
+                m.status !== 'Returned' && m.status !== 'Prepared' && m.memberIds.includes(id));
             if (!p || p.deathWinter !== null || personaAway(state, id) && !mission)
                 continue;
             const age = personaAge(state, id);

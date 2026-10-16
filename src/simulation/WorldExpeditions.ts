@@ -73,7 +73,7 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
 }
 export const absoluteTick=(state:SimulationState)=>state.time.winter*state.ticksPerWinter+state.time.tick;
 export function groupMission(state:SimulationState,groupId:string){return spatialGroupMission(state,groupId)??Object.values(state.world?.missions??{}).find(m=>m.groupId===groupId&&m.status==='Away');}
-export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
+export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.status!=='Prepared'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
 export function expeditionEligible(state:SimulationState,id:string,groupId?:string):boolean {
  const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
 }

@@ -17,6 +17,8 @@ function campaign() {
         { mortalityBands: [{ minAge: 0, chanceBps: 0 }], fertilityChanceBps: 0, partnershipChanceBps: 0 },
         { enabled: false });
     state = core.initializePhysicalDiscovery(state, world, context.worldId);
+    state.world.spatial = { version: 1, worldId: context.worldId,
+        policy: { metresPerTick: 2, exploringTicks: 25, foodIntervalTicks: 125 }, missions: {} };
     return core.applyCommand(state, { type: 'CreateExpeditionGroup', name: 'Coast scouts',
         memberIds: Object.keys(state.personas).slice(0, 2) });
 }

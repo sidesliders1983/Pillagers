@@ -47,6 +47,24 @@ try {
     console.log('Group created.');
     if (!await page.locator('details[data-group="group-1"]').evaluate(el=>el.open))
         await page.locator('details[data-group="group-1"] summary').tap();
+    const beforeStart = await saved();
+    await page.locator('[data-start="group-1"]').tap();
+    await page.locator('#expedition-start-dialog').waitFor({ state: 'visible' });
+    assert.equal(await page.locator('#expedition-start-summary').innerText(),
+        'This will cost 4 food (2 food per member). Are you sure?');
+    await page.screenshot({ path: 'artifacts/spatial-expeditions/start-confirmation.png' });
+    await page.locator('#expedition-start-cancel').tap();
+    assert.deepEqual((await saved()).fjord.campaign, beforeStart.fjord.campaign);
+    await page.locator('[data-start="group-1"]').tap();
+    await page.locator('#expedition-start-confirm').tap();
+    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
+        .fjord.campaign.world.spatial?.missions['explore-1']?.status === 'Prepared');
+    assert.equal((await saved()).fjord.campaign.stocks.food, beforeStart.fjord.campaign.stocks.food - 4);
+    assert.equal(await page.locator('#fjord-run').innerText(), 'Start');
+    assert.equal(await page.locator('#fjord-cycle').inputValue(), '10');
+    assert.equal(await page.locator('#fjord-cycle').isDisabled(), true);
+    const preparedSnapshot = (await saved()).fjord.campaign;
+    await page.screenshot({ path: 'artifacts/spatial-expeditions/prepared.png' });
     await page.locator('[data-explore="group-1"]').tap();
     if (await page.locator('#fjord-management-toggle').getAttribute('aria-expanded') === 'true')
         await page.locator('#fjord-management-toggle').tap();
@@ -94,8 +112,9 @@ try {
     await page.touchscreen.tap(goal.screenX,goal.screenY);
     console.log('Target response:', await page.locator('#expedition-status').innerText());
     assert.equal(await page.locator('#expedition-confirm').count(),0,'A destination tap is the only send action');
-    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial);
+    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial?.missions['explore-1']?.status === 'Traveling');
     console.log('Dispatched.');
+    assert.equal((await saved()).fjord.campaign.stocks.food, preparedSnapshot.stocks.food, 'Choosing a destination buys no extra Food');
     const dispatched = await saved();
     assert.deepEqual(dispatched.fjord.campaign.discovery, original.fjord.campaign.discovery);
     assert.equal(original.fjord.campaign.stocks.food-dispatched.fjord.campaign.stocks.food,
@@ -110,9 +129,28 @@ try {
     }
     await page.screenshot({path:'artifacts/spatial-expeditions/departure.png'});
     await page.screenshot({path:'artifacts/spatial-expeditions/direct-dispatch.png'});
+    // Headless Edge keeps background pages visible. Exercise the public visibilitychange boundary
+    // with an explicitly simulated browser visibility state, not a claim of physical-device coverage.
+    await page.locator('#fjord-run').tap();
+    await page.evaluate(() => {
+        Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+        Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
+        document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await page.waitForFunction(() => document.querySelector('#fjord-run').textContent === 'Start');
+    const hiddenState = (await saved()).fjord.campaign;
+    await page.waitForTimeout(1200);
+    assert.deepEqual((await saved()).fjord.campaign, hiddenState, 'Hidden-tab handling stops ticks and supplies');
+    await page.evaluate(() => {
+        delete document.hidden; delete document.visibilityState;
+        document.dispatchEvent(new Event('visibilitychange'));
+    });
+    await page.waitForTimeout(700);
+    assert.equal(await page.locator('#fjord-run').innerText(), 'Start', 'Returning from hidden stays paused');
+    assert.deepEqual((await saved()).fjord.campaign, hiddenState, 'No offline catch-up');
     await page.locator('#fjord-run').tap();
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
-        .fjord.campaign.world.spatial.missions['explore-1'].travelled >= 90);
+        .fjord.campaign.world.spatial.missions['explore-1'].travelled >= 36, undefined, { timeout: 90000 });
     await page.locator('#fjord-run').tap();
     await page.waitForTimeout(300);
     const movement = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-rendered'))
@@ -203,11 +241,13 @@ try {
     await page.locator('#fjord-next').tap();
     await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
         .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returned');
+    assert.equal(await page.locator('#fjord-cycle').isDisabled(), false);
+    assert.equal(await page.locator('#fjord-cycle').inputValue(), '3');
     assert.deepEqual(errors, []);
     const sourceHashes = {};
-    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts'])
+    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts','src/gameplay-lab/GameplaySession.ts','src/lore/BookLedger.ts'])
         sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
-    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
+    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, visibilityBoundarySimulated: true, hiddenStopsClockAndSupplies: true, noOfflineCatchup: true, startConfirmed: true, fixedFoodPerMember: 2, temporaryMinutesPer1000Ticks: 10, noRefund: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
         redirectedWhilePaused, seasonalColorStable: true, discoveredGroundColors, freshGroundColors, runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group flow passed; '+(recallRequested ? 'recall requested.' : 'automatic return already underway.'));
 } finally { await browser.close(); }

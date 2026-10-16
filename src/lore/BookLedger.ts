@@ -42,7 +42,7 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
             case 'BuildingSalvaged': case 'BuildingCollapsed': add(e, 'materials', 'otherReceipts', 'salvage'); break;
             case 'FoundingLongshipSalvaged': add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'CattleSlaughtered': add(e, 'food', 'otherReceipts', 'food'); break;
-            case 'ExploreAreaDeparted': case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
+            case 'ExploreAreaPrepared': case 'ExploreAreaDeparted': case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
             case 'ExpeditionReturned':
                 add(e, 'food', 'otherReceipts', 'food'); add(e, 'materials', 'otherReceipts', 'materials'); break;
             case 'SettlementPillaged':
@@ -57,5 +57,13 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
         row.residual = row.closing - (row.opening + row.production + row.otherReceipts - row.spending - row.losses);
         row.complete = row.complete && row.residual === 0;
     }
-    return { ...rows, transactions };
+    const supplyEvents = events.filter(e => ['ExploreAreaPrepared', 'ExploreAreaSuppliesConsumed',
+        'ExploreAreaSuppliesDiscarded', 'ExploreAreaSuppliesLost'].includes(e.type));
+    const supplyTotal = (type: string, field = 'units') => supplyEvents.filter(e => e.type === type)
+        .reduce((sum, e) => sum + (Number.isSafeInteger(e.details?.[field]) ? Number(e.details![field]) : 0), 0);
+    return { ...rows, transactions, ...(supplyEvents.length ? { provisions: {
+        reserved: supplyTotal('ExploreAreaPrepared', 'foodCost'), consumed: supplyTotal('ExploreAreaSuppliesConsumed'),
+        discarded: supplyTotal('ExploreAreaSuppliesDiscarded'), lost: supplyTotal('ExploreAreaSuppliesLost'),
+        sources: supplyEvents.map(e => e.id)
+    } } : {}) };
 }

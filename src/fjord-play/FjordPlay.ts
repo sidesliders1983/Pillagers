@@ -270,6 +270,15 @@ export class FjordPlay {
         let canonicalTime = '';
         let expeditions: ExpeditionPanel | undefined;
         const refresh = () => {
+            let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
+            if (!expeditionPace) {
+                expeditionPace = document.createElement('option'); expeditionPace.value = '10';
+                expeditionPace.textContent = 'Expedition · 10 min / 1,000 ticks'; cycleField.add(expeditionPace);
+            }
+            expeditionPace.hidden = !this.session.expeditionMode;
+            cycleField.disabled = this.session.expeditionMode;
+            cycleField.value = String(this.session.expeditionMode ? 10 : this.session.minutesPerWinter);
+
             expeditions?.refresh();
             if (!this.loading) bookReader.update();
             const view = this.campaign.readProjection();
