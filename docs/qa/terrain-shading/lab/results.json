@@ -1,0 +1,3063 @@
+{
+  "origin": "http://127.0.0.1:5193",
+  "fixtureSha256": "cb6caa96b94b0467972b411bb48041ab04931bd3ba708aaea4dd139cf5f5c6a9",
+  "seed": 18,
+  "generatorVersion": "fjordside-island-v0.3e-r3",
+  "identicalExports": true,
+  "captures": [
+    {
+      "id": "meadow-normal",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "form",
+      "light": "day",
+      "mode": "baseline",
+      "path": "meadow-normal-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 0,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true
+        ],
+        "nativeLayers": 1,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "meadow-normal",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "form",
+      "light": "day",
+      "mode": "smooth",
+      "path": "meadow-normal-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 0,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 1300.9000011384487,
+          "maxNormalBatchMs": 32.80000001192093,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false
+        ],
+        "nativeLayers": 1,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "meadow-textured",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "baseline",
+      "path": "meadow-textured-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "meadow-textured",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "smooth",
+      "path": "meadow-textured-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 841.0000012814999,
+          "maxNormalBatchMs": 23.5,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "source-uv",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "source-grass",
+      "light": "day",
+      "mode": "baseline",
+      "path": "source-uv-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 0,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true
+        ],
+        "nativeLayers": 1,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "source-uv",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "source-grass",
+      "light": "day",
+      "mode": "smooth",
+      "path": "source-uv-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 49921248,
+        "indexBytes": 0,
+        "maskBytes": 0,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 1156.999999344349,
+          "maxNormalBatchMs": 26.19999998807907,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false
+        ],
+        "nativeLayers": 1,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "bedrock",
+      "camera": {
+        "position": [
+          7.681959897976284,
+          48.349971008300784,
+          -159.18033823941832
+        ],
+        "target": [
+          44,
+          24.64997100830078,
+          -148
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "baseline",
+      "path": "bedrock-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "bedrock",
+      "camera": {
+        "position": [
+          7.681959897976284,
+          48.349971008300784,
+          -159.18033823941832
+        ],
+        "target": [
+          44,
+          24.64997100830078,
+          -148
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "smooth",
+      "path": "bedrock-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 1187.6999993920326,
+          "maxNormalBatchMs": 30.400000005960464,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "shoreline",
+      "camera": {
+        "position": [
+          120.99999999999999,
+          10.459332972764967,
+          168.99999999999997
+        ],
+        "target": [
+          103.99999999999999,
+          0.4593329727649688,
+          185.99999999999997
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "baseline",
+      "path": "shoreline-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "shoreline",
+      "camera": {
+        "position": [
+          120.99999999999999,
+          10.459332972764967,
+          168.99999999999997
+        ],
+        "target": [
+          103.99999999999999,
+          0.4593329727649688,
+          185.99999999999997
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "smooth",
+      "path": "shoreline-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 994.2000000178814,
+          "maxNormalBatchMs": 27.599999994039536,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "island-overhead",
+      "camera": {
+        "position": [
+          0,
+          880.0000000000001,
+          0.010000001124728776
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "baseline",
+      "path": "island-overhead-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "island-overhead",
+      "camera": {
+        "position": [
+          0,
+          880.0000000000001,
+          0.010000001124728776
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "smooth",
+      "path": "island-overhead-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 961.2999997138977,
+          "maxNormalBatchMs": 27.099999994039536,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "soil",
+      "camera": {
+        "position": [
+          119.7988,
+          23.574668121337893,
+          -235.7988
+        ],
+        "target": [
+          100,
+          6.374668121337891,
+          -216
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "baseline",
+      "path": "soil-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "soil",
+      "camera": {
+        "position": [
+          119.7988,
+          23.574668121337893,
+          -235.7988
+        ],
+        "target": [
+          100,
+          6.374668121337891,
+          -216
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "day",
+      "mode": "smooth",
+      "path": "soil-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 1778.400000244379,
+          "maxNormalBatchMs": 46.099999994039536,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "low-sun",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "sun20-front",
+      "mode": "baseline",
+      "path": "low-sun-baseline.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "baseline",
+          "normalCpuMs": 0,
+          "maxNormalBatchMs": 0,
+          "scratchBytes": 0,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "low-sun",
+      "camera": {
+        "position": [
+          71.29564018340947,
+          48.27450675964357,
+          -225.99347150825747
+        ],
+        "target": [
+          71.99999999999999,
+          24.574506759643555,
+          -188
+        ],
+        "fov": 45,
+        "zoom": 1
+      },
+      "overlay": "none",
+      "light": "sun20-front",
+      "mode": "smooth",
+      "path": "low-sun-smooth.png",
+      "ground": {
+        "source": "blended-ground-v1",
+        "blending": "zoned",
+        "rockTone": "cool-grey",
+        "terrainBytes": 65281632,
+        "indexBytes": 8824656,
+        "maskBytes": 3216020,
+        "shading": {
+          "variant": "smooth",
+          "normalCpuMs": 1337.8999996185303,
+          "maxNormalBatchMs": 33.60000002384186,
+          "scratchBytes": 4502428,
+          "retainedAttributeByteDelta": 0
+        },
+        "flatShading": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "nativeLayers": 6,
+        "snowStudy": false,
+        "snowLayerActive": false,
+        "masks": "Native alphaMap on independent world UV channel",
+        "colourSpace": "sRGB",
+        "dataSpace": "NoColorSpace",
+        "sourcePixels": 1024,
+        "sandPixels": 1024,
+        "sandStudy": false,
+        "waterSource": "boona13",
+        "maps": [
+          {
+            "id": "Ground037",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground037-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground037-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "Ground054",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/Ground054-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/Ground054-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "mossy_rock",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/mossy_rock-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          },
+          {
+            "id": "grass_path_2",
+            "normalScale": [
+              0.45,
+              0.45
+            ],
+            "roughness": 1,
+            "textures": [
+              {
+                "file": "blended-v1/standard/grass_path_2-colour.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "srgb",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-normal.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              },
+              {
+                "file": "blended-v1/standard/grass_path_2-roughness.webp",
+                "width": 1024,
+                "height": 1024,
+                "colourSpace": "",
+                "mipmaps": true,
+                "anisotropy": 4
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "note": "Same regular Lab blueprint for all A/B captures; separate full-scene pairs use the real campaign island. Paused waves/wind, no vegetation/props in diagnostic captures. Edge desktop; physical mobile untested."
+}
