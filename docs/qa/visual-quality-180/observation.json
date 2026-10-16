@@ -1,0 +1,214 @@
+{
+  "origin": "http://127.0.0.1:5182",
+  "commit": "9b11ad0d891d1b26131a68506f016c181ef9cd21",
+  "errors": [],
+  "world": {
+    "characterSource": "meshy",
+    "instances": "10",
+    "engine": "three.js r180",
+    "world": "{\"mode\":\"generated\",\"seed\":17,\"quality\":\"standard\",\"buildings\":6,\"populationSource\":\"existing-fjordside\",\"groundTier\":\"standard\",\"source\":\"ez-tree\",\"site\":{\"x\":38,\"z\":6},\"attachments\":20,\"validation\":{\"accepted\":true,\"reasons\":[],\"connectedBuildings\":6,\"connectedArea\":2785,\"maximumFoundationSlope\":4.440892098500626e-16,\"minimumFoundationElevation\":2.7199999046325685,\"score\":93},\"motion\":{\"water\":true,\"wind\":true},\"water\":{\"source\":\"reference-water\",\"quality\":\"medium\",\"triangles\":8192,\"normalSamples\":2,\"textureBytes\":87380,\"drawCalls\":1,\"time\":0,\"level\":-0.12,\"center\":{\"x\":36.1282916701127,\"z\":-37.63663388263755},\"denseSize\":80,\"extent\":2000,\"parameters\":{\"waveAmplitude\":0.18,\"waveSpeed\":1,\"detailStrength\":0.65},\"boat\":{\"time\":0,\"waterline\":0.24,\"heading\":-3.027936348766743,\"supportWidth\":0.76,\"supportLength\":2.5,\"supports\":[{\"x\":36.647604644272434,\"z\":-36.437795263444215,\"height\":-0.1596582410188665},{\"x\":35.89250810951879,\"z\":-36.35160232172021,\"height\":-0.1395751215502919},{\"x\":36.36407523070661,\"z\":-38.921665443554886,\"height\":-0.06775294880185602},{\"x\":35.60897869595297,\"z\":-38.83547250183088,\"height\":-0.016441053769963708}],\"position\":[36.1282916701127,-0.3353716093133315,-37.63663388263755],\"quaternion\":[-0.024631239554093166,-0.9978809534245282,-0.020104775042618,0.0567688545865534]}}}",
+    "population": "[{\"id\":0,\"seed\":2654437744,\"age\":69,\"x\":40.35077544878773,\"y\":2.5999999046325684,\"z\":14.513651458922213,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0.65,\"animation\":\"Walk\",\"screen\":[0.16169636083814956,-0.09061306918468984,0.9959429583898041]},{\"id\":1,\"seed\":1013906209,\"age\":46,\"x\":68.54122901108842,\"y\":2.5999999046325684,\"z\":33.15530047089539,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0.5660011180446853,\"animation\":\"Walk\",\"screen\":[-1.1449941728785713,-0.17156220880889816,0.9953871257546268]},{\"id\":2,\"seed\":3668341970,\"age\":75,\"x\":6.698506756685674,\"y\":2.5999999046325684,\"z\":38.5907408031635,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0,\"animation\":\"Idle\",\"screen\":[0.25359442027918944,0.21884463816356867,0.9980962672515019]},{\"id\":3,\"seed\":2027810435,\"age\":32,\"x\":22.311281213990767,\"y\":2.5999999046325684,\"z\":2.2224642131319374,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0.65,\"animation\":\"Walk\",\"screen\":[0.8711247455815124,-0.05356181034291588,0.9962164990424995]},{\"id\":4,\"seed\":387278900,\"age\":60,\"x\":51.04155281139538,\"y\":2.5999999046325684,\"z\":45.15479400823824,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0,\"animation\":\"Idle\",\"screen\":[-0.6246012541022595,0.07726647604156892,0.9971208919319591]},{\"id\":5,\"seed\":3041714661,\"age\":67,\"x\":36.96217049146071,\"y\":2.6314471977635048,\"z\":52.799383686622605,\"safe\":true,\"ground\":2.6314471977635048,\"speed\":0,\"animation\":\"Idle\",\"screen\":[-0.3871845500056222,0.17615766683700562,0.997792149725963]},{\"id\":6,\"seed\":1401183126,\"age\":50,\"x\":11.035423276710913,\"y\":2.5999999046325684,\"z\":2.84561175651606,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0.65,\"animation\":\"Walk\",\"screen\":[0.9745755665309281,0.03660176079066561,0.9968270629972474]},{\"id\":7,\"seed\":4055618887,\"age\":47,\"x\":3.852519019108982,\"y\":2.5999999046325684,\"z\":18.05492720648347,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0.5989776439219056,\"animation\":\"Walk\",\"screen\":[0.6506428986218904,0.15576442140103317,0.9976486947491233]},{\"id\":8,\"seed\":2415087352,\"age\":68,\"x\":63.635889436788105,\"y\":2.5999999046325684,\"z\":5.1401457053610535,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0.65,\"animation\":\"Walk\",\"screen\":[-0.46059557243458576,-0.754164023575913,0.9914072012011361]},{\"id\":9,\"seed\":774555817,\"age\":48,\"x\":73.7780401702039,\"y\":2.5999999046325684,\"z\":45.88210211787373,\"safe\":true,\"ground\":2.5999999046325684,\"speed\":0,\"animation\":\"Idle\",\"screen\":[-1.4237583525221709,-0.07802886650855732,0.9960515891448011]}]",
+    "ready": "true",
+    "paused": "true",
+    "yearProgress": "0.024064999999602637",
+    "fixture": "{\"time\":0,\"paused\":true,\"year\":1200,\"progress\":0.024064999999602637,\"camera\":{\"position\":[72,15,-13.999999999999993],\"target\":[38,3,24],\"fov\":45},\"lighting\":\"day\",\"visualization\":\"off\",\"quality\":\"standard\",\"pixelRatio\":1,\"world\":{\"mode\":\"generated\",\"seed\":17,\"quality\":\"standard\",\"buildings\":6,\"populationSource\":\"existing-fjordside\",\"groundTier\":\"standard\",\"source\":\"ez-tree\",\"site\":{\"x\":38,\"z\":6},\"attachments\":20,\"validation\":{\"accepted\":true,\"reasons\":[],\"connectedBuildings\":6,\"connectedArea\":2785,\"maximumFoundationSlope\":4.440892098500626e-16,\"minimumFoundationElevation\":2.7199999046325685,\"score\":93},\"motion\":{\"water\":true,\"wind\":true},\"water\":{\"source\":\"reference-water\",\"quality\":\"medium\",\"triangles\":8192,\"normalSamples\":2,\"textureBytes\":87380,\"drawCalls\":1,\"time\":0,\"level\":-0.12,\"center\":{\"x\":36.1282916701127,\"z\":-37.63663388263755},\"denseSize\":80,\"extent\":2000,\"parameters\":{\"waveAmplitude\":0.18,\"waveSpeed\":1,\"detailStrength\":0.65},\"boat\":{\"time\":0,\"waterline\":0.24,\"heading\":-3.027936348766743,\"supportWidth\":0.76,\"supportLength\":2.5,\"supports\":[{\"x\":36.647604644272434,\"z\":-36.437795263444215,\"height\":-0.1596582410188665},{\"x\":35.89250810951879,\"z\":-36.35160232172021,\"height\":-0.1395751215502919},{\"x\":36.36407523070661,\"z\":-38.921665443554886,\"height\":-0.06775294880185602},{\"x\":35.60897869595297,\"z\":-38.83547250183088,\"height\":-0.016441053769963708}],\"position\":[36.1282916701127,-0.3353716093133315,-37.63663388263755],\"quaternion\":[-0.024631239554093166,-0.9978809534245282,-0.020104775042618,0.0567688545865534]}}}}",
+    "metrics": "{\"ms\":91.20000000298023,\"calls\":50,\"triangles\":849331,\"geometries\":36,\"textures\":58,\"population\":10}",
+    "interactions": "[{\"id\":0,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":1,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":2,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":3,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":4,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":5,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":6,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":7,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":8,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0},{\"id\":9,\"radius\":0.48,\"state\":\"none\",\"detouring\":false,\"partnerId\":null,\"cooldown\":0}]"
+  },
+  "hardware": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+    "renderer": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "playDesktop": {
+    "text": "Gameplay Lab\nPillagers\nLanding party\nWINTER\n800\nTick 0/1000\nWEATHER\nNormal\nRESERVES\nFood 30\nMaterials 5\nSETTLEMENT\n10 residents\n3 cattle\nStart\n+1 Winter\nCycle\n1 min / Winter\n3 min / Winter\n5 min / Winter\nSettings\nWinter watch\n\n10 exposed residents\n3 exposed cattle\n\nFood output 100.0% · Materials output 100.0% · Resident Food consumption 100.0% · Livestock Food consumption 100.0%\n\nRecent events\nWinter 800: Normal weather.\nThe founding party of 10 residents arrived.\nKauppi and Sigfrid Bjarnardóttir were already partners at arrival.\nDervla and Kauppi were already partners at arrival.\nInghild Sigurdardóttir and MaelColuim were already partners at arrival.\nClan Chronicle\nTHE SETTLEMENT\n\nHomes, households and the living herd\n\n↗\nCoast · Unknown\n↘\nEast · Unknown\n↙\nSouth · Unknown\n↖\nWest · Unknown\nWorld\n−\nFit settlement\n+\nSettlement\n\nSelect a home, resident or animal on the board.\n\nDrag the board to pan. Scroll or use the controls to zoom. Select an entity below if sprites overlap.\n\nSelect entity\nChoose an entity…\nLongship\nMaelColuim\nKauppi\nDervla\nÁilu\nConán\nEaddis Olafsdóttir\nSigfrid Bjarnardóttir\nKauppi\nDaugirdė\nInghild Sigurdardóttir\nHousehold founder-1\nHousehold founder-2\nHousehold founder-4\nHousehold founder-5\nHousehold founder-6\nHousehold founder-7\nHousehold founder-9\ncattle-1\ncattle-2\ncattle-3\n\nSelect a resident, home or animal to manage the settlement.",
+    "width": 1400,
+    "scroll": 1400
+  },
+  "playNarrow": {
+    "width": 390,
+    "scroll": 390,
+    "height": 1340,
+    "targets": [
+      {
+        "text": "Start",
+        "width": 50.46875,
+        "height": 39.6875
+      },
+      {
+        "text": "+1 Winter",
+        "width": 84.296875,
+        "height": 39.6875
+      },
+      {
+        "text": "1 min / Winter\n3 min / Winter\n5 min / Winter",
+        "width": 113,
+        "height": 35
+      },
+      {
+        "text": null,
+        "width": 93.171875,
+        "height": 39.6875
+      },
+      {
+        "text": null,
+        "width": 94.734375,
+        "height": 39.6875
+      },
+      {
+        "text": null,
+        "width": 99.09375,
+        "height": 39.6875
+      },
+      {
+        "text": null,
+        "width": 100.796875,
+        "height": 39.6875
+      },
+      {
+        "text": null,
+        "width": 282,
+        "height": 21.6875
+      },
+      {
+        "text": null,
+        "width": 180.328125,
+        "height": 39.6875
+      },
+      {
+        "text": null,
+        "width": 129.109375,
+        "height": 39.6875
+      },
+      {
+        "text": "Clan Chronicle",
+        "width": 332,
+        "height": 21.6875
+      },
+      {
+        "text": "Select Household founder-1",
+        "width": 15.902374267578125,
+        "height": 12.721923828125
+      },
+      {
+        "text": "Select Longship",
+        "width": 38.16569519042969,
+        "height": 18.1741943359375
+      },
+      {
+        "text": "Select MaelColuim",
+        "width": 4.9070281982421875,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select Inghild Sigurdardóttir",
+        "width": 4.907012939453125,
+        "height": 8.17840576171875
+      },
+      {
+        "text": "Select Household founder-2",
+        "width": 15.902374267578125,
+        "height": 12.72186279296875
+      },
+      {
+        "text": "Select Household founder-5",
+        "width": 15.902374267578125,
+        "height": 12.72186279296875
+      },
+      {
+        "text": "Select Kauppi",
+        "width": 4.907012939453125,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select Conán",
+        "width": 4.907012939453125,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select Dervla",
+        "width": 4.907012939453125,
+        "height": 8.17840576171875
+      },
+      {
+        "text": "Select Household founder-4",
+        "width": 15.90234375,
+        "height": 12.72186279296875
+      },
+      {
+        "text": "Select Household founder-6",
+        "width": 15.902374267578125,
+        "height": 12.72186279296875
+      },
+      {
+        "text": "Select Household founder-9",
+        "width": 15.902374267578125,
+        "height": 12.72186279296875
+      },
+      {
+        "text": "Select Áilu",
+        "width": 4.90704345703125,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select Eaddis Olafsdóttir",
+        "width": 4.9070281982421875,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select Daugirdė",
+        "width": 4.907012939453125,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select Household founder-7",
+        "width": 15.902374267578125,
+        "height": 12.72186279296875
+      },
+      {
+        "text": "Select Sigfrid Bjarnardóttir",
+        "width": 4.907012939453125,
+        "height": 8.1783447265625
+      },
+      {
+        "text": "Select cattle-1 · Adult",
+        "width": 10.90447998046875,
+        "height": 10.90447998046875
+      },
+      {
+        "text": "Select Kauppi",
+        "width": 4.907012939453125,
+        "height": 8.17840576171875
+      },
+      {
+        "text": "Select cattle-2 · Adult",
+        "width": 10.904495239257812,
+        "height": 10.90447998046875
+      },
+      {
+        "text": "Select cattle-3 · Adult",
+        "width": 10.90447998046875,
+        "height": 10.90447998046875
+      },
+      {
+        "text": "−",
+        "width": 31.578125,
+        "height": 39.6875
+      },
+      {
+        "text": "Fit settlement",
+        "width": 106.328125,
+        "height": 39.6875
+      },
+      {
+        "text": "+",
+        "width": 31.578125,
+        "height": 39.6875
+      },
+      {
+        "text": "Choose an entity…\nLongship\nMaelColuim\nKauppi\nDervla\nÁilu\nConán\nEaddis Olafsdóttir\nSigfrid Bjarnardóttir\nKauppi\nDaugirdė\nInghild Sigurdardóttir\nHousehold founder-1\nHousehold founder-2\nHousehold founder-4\nHousehold founder-5\nHousehold founder-6\nHousehold founder-7\nHousehold founder-9\ncattle-1\ncattle-2\ncattle-3",
+        "width": 332,
+        "height": 39
+      }
+    ]
+  }
+}
