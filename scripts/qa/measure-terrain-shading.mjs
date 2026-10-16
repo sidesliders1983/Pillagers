@@ -82,9 +82,11 @@ async function open(name, quality, mobile, mode) {
         return { readyMs, loadingLongTasks: window.__terrainLoad.longTasks,
             core: await digest(JSON.stringify(refs.session.snapshot())),
             world: await digest(refs.world.exportSave()), geometry: await digest(JSON.stringify(arrays)),
-            description: refs.world.describe(), normalMaps, inspection: audit.inspect() };
+            description: refs.world.describe(), normalMaps, inspection: audit.inspect(),
+            placeholders: refs.layer.describe().filter(entity => entity.placeholder).map(entity => entity.key) };
     });
     assert.deepEqual(prepared.inspection.time, loaded.time, 'The pinned campaign was restored');
+    assert.deepEqual(prepared.placeholders, [], 'Use the real pinned houses, cattle and residents');
     assert.equal(prepared.description.groundTier, quality, 'Ground maps use the requested initial tier');
     assert.equal(prepared.description.terrainShading.variant, mode);
     assert.ok(prepared.normalMaps.every(flag => flag === (quality === 'standard')));
@@ -172,6 +174,7 @@ try {
                     assert.deepEqual(pair[0].prepared.inspection.camera, pair[1].prepared.inspection.camera);
                     assert.equal(pair[0].after.memory.geometryBytes, pair[1].after.memory.geometryBytes);
                     assert.equal(pair[0].after.memory.materials, pair[1].after.memory.materials);
+                    assert.equal(pair[0].after.memory.textures, pair[1].after.memory.textures);
                 }
             }
         }
