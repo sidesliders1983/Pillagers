@@ -82,17 +82,22 @@ async function open(name, quality, mobile, mode) {
         const close = document.querySelector('#clan-book-close');
         if (close && close.getClientRects().length) close.click();
         const readyMs = performance.now();
-        const digest = async value => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',
-            new TextEncoder().encode(value)))).map(n => n.toString(16).padStart(2, '0')).join('');
+        const digestBytes = async value => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', value)))
+            .map(n => n.toString(16).padStart(2, '0')).join('');
+        const digest = value => digestBytes(new TextEncoder().encode(value));
         const geometry = refs.world.terrain.geometry;
-        const arrays = Object.fromEntries(['position', 'uv', 'uv1', 'uv2', 'uv3', 'color'].map(key =>
-            [key, Array.from(geometry.getAttribute(key).array)]));
-        arrays.index = Array.from(geometry.index.array);
+        const arrays = Object.fromEntries(await Promise.all(['position', 'uv', 'uv1', 'uv2', 'uv3', 'color'].map(async key => {
+            const array = geometry.getAttribute(key).array;
+            return [key, await digestBytes(new Uint8Array(array.buffer, array.byteOffset, array.byteLength))];
+        })));
+        const indices = geometry.index.array;
+        arrays.index = await digestBytes(new Uint8Array(indices.buffer, indices.byteOffset, indices.byteLength));
         const normalMaps = (Array.isArray(refs.world.terrain.material) ? refs.world.terrain.material :
             [refs.world.terrain.material]).map(material => Boolean(material.normalMap));
         return { readyMs, loadingLongTasks: window.__terrainLoad.longTasks,
             core: await digest(JSON.stringify(refs.session.snapshot())),
             world: await digest(refs.world.exportSave()), geometry: await digest(JSON.stringify(arrays)),
+            geometryHashMethod: 'SHA-256 per raw attribute/index byte buffer',
             description: refs.world.describe(), normalMaps, inspection: audit.inspect(),
             placeholders: refs.layer.describe().filter(entity => entity.placeholder).map(entity => entity.key) };
     });
