@@ -16,6 +16,8 @@ With no selection, Create exploration group creates Group 1, Group 2, etc. Selec
 
 A Prepared group remains physically at home; its residents retain home autonomy/work/annual consumption, while the carried ration timer remains stopped. Explore Area arms one destination tap. Ordinary ground taps remain camera navigation outside this mode. One valid destination tap begins physical travel from the members' actual current rendered origins, checked and saved by Core. Invalid/unreachable targets leave the prepared state intact. Cancel expedition ends preparation but does **not** return its already-spent Food.
 
+Traveling, Exploring, Returning and Stranded members produce no home Food or Materials and accumulate no work progress. Pending or visible home-production popups are cleared on departure, so an earlier award cannot follow an explorer. Already recorded production and stock totals remain factual. Work resumes only after actual homecoming.
+
 While Traveling, Exploring or Returning, Explore Area and another destination tap replace the goal using the **same pack**, no purchase/refill/refund and no timer reset. Core uses confirmed positions for away members and ignores renderer-origin overrides. Return Home recalls the real reached group, not a projected destination. Invalid orders leave stocks, route, progress, supplies and discovery unchanged. Supplies remaining is shown as active ticks; no per-destination Food quote is displayed.
 
 ## Carried Food and accounting

@@ -22,3 +22,10 @@ Unused supplies are recorded as discarded; dead/stranded members' unrecovered su
 ## Review limits
 
 The latest physical iPhone/iPad check remains open. Existing reports are historical and unchanged. The PR remains draft while required checks run on this revision; no validation or performance threshold was weakened. Later ship/horse/cart capacity is not implemented.
+
+
+## Post-review: explorer production feedback
+
+The owner observed a +1 Food popup on an explorer. Core already excludes Traveling, Exploring, Returning and Stranded residents from home production. An earlier home-work popup could remain active for 2.8 seconds, or wait behind the six-label display limit, and follow that resident after departure. The presentation now clears both active and pending labels for away residents while retaining exact factual totals and stock history. Prepared residents are still home and retain work until departure.
+
+The browser/session regression first failed on the missing suppression, then passed with both an active and a queued resident label removed, home residents' labels retained and all factual award totals unchanged. A tenth public Core test verifies Food and Materials awards and work progress stop throughout actual travel/exploration/return, remain stopped through save/load, and resume after physical homecoming. The full 3D flow also checks no away-member production events or explorer labels. TypeScript and the isolated production build pass; no gameplay balance changed.

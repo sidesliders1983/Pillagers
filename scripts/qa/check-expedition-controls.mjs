@@ -6,7 +6,7 @@ import { build } from 'vite';
 const { chromium } = createRequire(import.meta.url)('C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 await mkdir('artifacts/spatial-expeditions', { recursive: true });
 const entry = resolve('artifacts/spatial-expeditions/controls-entry.ts');
-await writeFile(entry, "export { ExpeditionPanel } from '../../src/fjord-play/ExpeditionPanel';\nexport { GameplaySession } from '../../src/gameplay-lab/GameplaySession';\nexport * as Core from '../../src/simulation/SimulationCore';\n");
+await writeFile(entry, "export { ExpeditionPanel } from '../../src/fjord-play/ExpeditionPanel';\nexport { GameplaySession } from '../../src/gameplay-lab/GameplaySession';\nexport * as Core from '../../src/simulation/SimulationCore';\nexport { FjordProduction } from '../../src/fjord-play/FjordProduction';\nexport { ProductionLabels } from '../../src/fjord-play/ProductionLabels';\nexport { PerspectiveCamera } from 'three';\n");
 const bundle = await build({
     configFile: false, logLevel: 'silent', build: {
         write: false, minify: false,
@@ -157,5 +157,51 @@ waterLevel: -1, terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: A
     assert.deepEqual(retask.target, { x: 160, z: 96 });
     assert.match(retask.status, /paused|Start/i, 'A paused journey explains how to begin movement');
     console.log('Paused returning groups accept an explicit destination order.');
+
+
+    const production = await page.evaluate(() => {
+        const { GameplaySession, Core, FjordProduction, ProductionLabels, PerspectiveCamera } = ExpeditionControls;
+        const bounds = { minX: 0, maxX: 256, minZ: 0, maxZ: 128 };
+        const world = { waterLevel: -1,
+            terrain: { bounds, spacing: 8, columns: 33, rows: 17, heights: Array(561).fill(0) },
+            navigation: { bounds, spacing: 8, columns: 33, rows: 17, cells: Array(561).fill(true) },
+            settlement: { center: { x: 16, z: 64 }, harbor: null } };
+        const session = new GameplaySession();
+        session.loadJSON(Core.serializeState(Core.initializePhysicalDiscovery(Core.createCampaign(32,
+            { initialFood: 500 }, { fertilityChanceBps: 0 }, { enabled: false }), world, 'production-fixture')));
+        session.bindPhysicalWorld(world, 'production-fixture');
+        for (const id of Object.keys(session.readSnapshot().personas))
+            session.command({ type: 'AssignOccupation', personaId: id, occupation: 'fisher' });
+        const cursor = new FjordProduction(session.readSnapshot().events);
+        const root = document.createElement('div'); document.body.append(root);
+        const labels = new ProductionLabels(root), camera = new PerspectiveCamera();
+        session.command({ type: 'AdvanceTicks', ticks: 500 });
+        const outputs = cursor.read(session.readSnapshot().events);
+        labels.enqueue(outputs); labels.update(camera, 800, 600);
+        const activeId = root.querySelector('[data-persona-id]').dataset.personaId;
+        const pendingId = outputs.find(output => output.kind === 'persona' &&
+            !root.querySelector('[data-persona-id="' + output.id + '"]')).id;
+        session.command({ type: 'CreateExpeditionGroup', name: 'Group 1', memberIds: [activeId, pendingId] });
+        session.command({ type: 'StartExpedition', groupId: 'group-1' });
+        const before = root.querySelector('[data-persona-id="' + activeId + '"]').textContent;
+        session.command({ type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 } });
+        const snapshot = session.readSnapshot();
+        const away = Object.keys(snapshot.personas).filter(id => Core.personaAway(snapshot, id))
+            .map(id => ({ kind: 'persona', id }));
+        labels.suppress(away); labels.update(camera, 800, 600);
+        return { before, activeId, pendingId, displayed: [...root.querySelectorAll('[data-persona-id]')]
+            .map(element => element.dataset.personaId), pending: Number(root.dataset.pending),
+            expectedPending: Math.max(0, outputs.length - 2 - 6),
+            totals: JSON.parse(root.dataset.totals), outputs,
+            workReasons: away.map(person => Core.inspectWork(snapshot, person.id).reason) };
+    });
+    assert.match(production.before, /^\+\d+ Food$/);
+    assert.equal(production.displayed.includes(production.activeId), false, 'A home-work popup cannot follow a departing explorer');
+    assert.equal(production.displayed.includes(production.pendingId), false, 'Queued home-work popups cannot appear after departure');
+    assert.equal(production.pending, production.expectedPending);
+    assert.deepEqual(production.totals, production.outputs, 'Hiding stale feedback preserves all factual production totals');
+    assert.deepEqual(production.workReasons, ['expedition', 'expedition']);
+    assert.ok(production.displayed.length > 0, 'Home residents still display production feedback');
+    console.log('Departure clears active and queued home-production popups without losing recorded awards.');
 
 } finally { await browser.close(); }

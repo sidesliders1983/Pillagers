@@ -230,3 +230,42 @@ test('physical return keeps the override for another prepared group and restores
     assert.equal(session.effectiveMinutesPerWinter, 5);
     assert.equal(session.running, false);
 });
+
+
+test('departed members produce neither Food nor Materials until their actual homecoming', () => {
+    const members = ['founder-1', 'founder-2'];
+    let state = campaign(members);
+    for (const [index, personaId] of members.entries())
+        state = core.applyCommand(state, { type: 'AssignOccupation', personaId,
+            occupation: index === 0 ? 'fisher' : 'woodworker' }, context);
+    state = core.applyCommand(state, start, context);
+    const preparedFrom = state.events.length;
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 500 }, context);
+    assert.ok(state.events.slice(preparedFrom).some(event => event.type === 'ResourceProduced' &&
+        members.includes(event.personaId)), 'Prepared members still work at home');
+    const progress = members.map(id => state.personas[id].workProgress);
+    state = core.applyCommand(state, { ...goal, target: { x: 96, z: 64 } }, context);
+    const departure = state.events.length;
+    const advanceAway = ticks => {
+        state = core.applyCommand(state, { type: 'AdvanceTicks', ticks }, context);
+        assert.deepEqual(members.map(id => state.personas[id].workProgress), progress,
+            'Away members cannot accumulate work progress toward a later award');
+        assert.deepEqual(state.events.slice(departure).filter(event => event.type === 'ResourceProduced' &&
+            members.includes(event.personaId)), []);
+    };
+    assert.equal(state.world.spatial.missions['explore-1'].status, 'Traveling');
+    advanceAway(40);
+    assert.equal(state.world.spatial.missions['explore-1'].status, 'Exploring');
+    advanceAway(50);
+    state = core.reconstructState(core.serializeState(state));
+    assert.deepEqual(members.map(id => core.inspectWork(state, id).reason), ['expedition', 'expedition']);
+    state = core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+    assert.equal(state.world.spatial.missions['explore-1'].status, 'Returning');
+    advanceAway(40);
+    assert.equal(state.world.spatial.missions['explore-1'].status, 'Returned');
+    const homecoming = state.events.length;
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 500 }, context);
+    const resumed = state.events.slice(homecoming).filter(event => event.type === 'ResourceProduced');
+    assert.ok(resumed.some(event => event.personaId === members[0] && event.details.resource === 'food'));
+    assert.ok(resumed.some(event => event.personaId === members[1] && event.details.resource === 'materials'));
+});

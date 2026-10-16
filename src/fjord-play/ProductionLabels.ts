@@ -50,6 +50,19 @@ export class ProductionLabels {
         this.root.dataset.totals = JSON.stringify([...this.totals.values()]);
     }
 
+    /** Home-work feedback must not follow residents after they leave; factual totals remain intact. */
+    suppress(producers: readonly Pick<ProductionOutput, 'kind' | 'id'>[]) {
+        const hidden = new Set(producers.map(producer => producer.kind + ':' + producer.id));
+        for (const queue of [this.pending, this.active]) {
+            for (const [key, item] of queue) {
+                if (!hidden.has(item.kind + ':' + item.id)) continue;
+                item.element?.remove();
+                queue.delete(key);
+            }
+        }
+        this.root.dataset.pending = String(this.pending.size);
+    }
+
     private text(item: OutputLabel) {
         const element = item.element!;
         element.textContent = '+' + item.units + (item.resource === 'food' ? ' Food' : ' Materials');

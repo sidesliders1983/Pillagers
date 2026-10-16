@@ -39,7 +39,7 @@ import { SeasonTint } from '../world/SeasonTint';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { projectChronicle } from '../lore/Chronicle';
-import { inspectCampfire, inspectWeatherExposure } from '../simulation/SimulationCore';
+import { inspectCampfire, inspectWeatherExposure, personaAway } from '../simulation/SimulationCore';
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
@@ -286,6 +286,8 @@ export class FjordPlay {
             calendar = view.calendar;
             canonicalTime = 'Canonical time: Winter ' + view.time.winter + ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
             productionLabels.enqueue(production.read(state.events));
+            productionLabels.suppress(Object.keys(state.personas).filter(id => personaAway(state, id))
+                .map(id => ({ kind: 'persona', id })));
             header.update(view.calendar, view.stocks,
                 Object.values(state.personas).filter(p => p.deathWinter === null).length,
                 view.entities.filter(e => e.kind === 'cattle').length);

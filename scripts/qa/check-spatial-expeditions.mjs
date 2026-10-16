@@ -181,6 +181,12 @@ try {
     assert.notEqual(walking.fjord.campaign.discovery.clans[walking.fjord.campaign.clan.id].explored,
         dispatched.fjord.campaign.discovery.clans[walking.fjord.campaign.clan.id].explored,
         'Reached positions map new ground, not merely an updated observation timestamp');
+    assert.deepEqual(walking.fjord.campaign.events.slice(preparedSnapshot.events.length)
+        .filter(event => event.type === 'ResourceProduced' && memberIds.includes(event.personaId)), [],
+        'Explorers cannot produce home resources while away');
+    for (const id of memberIds)
+        assert.equal(await page.locator('#fjord-production-labels [data-persona-id="' + id + '"]').count(), 0,
+            'Production popups cannot follow explorers');
     const entities = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-entities'));
     assert.equal(entities.filter(e => e.id === memberId && e.status.expedition).length,1);
     await page.screenshot({ path: 'artifacts/spatial-expeditions/walking.png' });
@@ -245,9 +251,9 @@ try {
     assert.equal(await page.locator('#fjord-cycle').inputValue(), '3');
     assert.deepEqual(errors, []);
     const sourceHashes = {};
-    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts','src/gameplay-lab/GameplaySession.ts','src/lore/BookLedger.ts'])
+    for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts','src/fjord-play/ProductionLabels.ts','src/fjord-play/FjordEntities.ts','src/fjord-play/FjordModels.ts','src/world/SeasonTint.ts','src/gameplay-lab/GameplaySession.ts','src/lore/BookLedger.ts'])
         sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
-    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, visibilityBoundarySimulated: true, hiddenStopsClockAndSupplies: true, noOfflineCatchup: true, startConfirmed: true, fixedFoodPerMember: 2, temporaryMinutesPer1000Ticks: 10, noRefund: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
+    await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, visibilityBoundarySimulated: true, hiddenStopsClockAndSupplies: true, noOfflineCatchup: true, startConfirmed: true, fixedFoodPerMember: 2, temporaryMinutesPer1000Ticks: 10, noRefund: true, noAwayProduction: true, noExplorerProductionLabels: true, directDispatch: true, groupId: 'group-1', memberId, memberIds, individualOrigins:true, runningAnimation:true,
         redirectedWhilePaused, seasonalColorStable: true, discoveredGroundColors, freshGroundColors, runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
     console.log('Real 3D group flow passed; '+(recallRequested ? 'recall requested.' : 'automatic return already underway.'));
 } finally { await browser.close(); }
