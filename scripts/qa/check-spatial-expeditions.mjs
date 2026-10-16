@@ -114,6 +114,8 @@ try {
     const entities = JSON.parse(await page.locator('#fjord-canvas').getAttribute('data-entities'));
     assert.equal(entities.filter(e => e.id === memberId && e.status.expedition).length,1);
     await page.screenshot({ path: 'artifacts/spatial-expeditions/walking.png' });
+    console.log('Journey phase before reload:', mission.status);
+    await writeFile('artifacts/spatial-expeditions/phase.json', JSON.stringify({ status: mission.status, travelled: mission.travelled, distance: mission.distance }));
     console.log('Walking; reloading.');
     await page.reload();
     await page.locator('#fjord-canvas[data-ready="true"]').waitFor();
@@ -121,8 +123,15 @@ try {
     await page.getByLabel('Game menu', { exact: true }).tap();
     await page.locator('#fjord-expeditions-open').tap();
     await page.locator('#expedition-group').selectOption('group-1');
-    await page.locator('#expedition-recall').tap();
-    await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial.missions['explore-1'].status === 'Returning');
+    const recallRequested = mission.status === 'Traveling' || mission.status === 'Exploring';
+    if (recallRequested) {
+        await page.locator('#expedition-recall').tap();
+        await page.waitForFunction(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1'))
+            .fjord.campaign.world.spatial.missions['explore-1'].status === 'Returning');
+    } else {
+        assert.ok(await page.locator('#expedition-recall').isDisabled(),
+            'A party already returning/returned cannot receive a second recall');
+    }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: 'artifacts/spatial-expeditions/phone.png' });
     await page.locator('#fjord-next').tap();
@@ -133,6 +142,6 @@ try {
     for (const file of ['src/simulation/SpatialExpeditions.ts','src/fjord-play/ExpeditionPanel.ts','src/fjord-play/FjordPlay.ts'])
         sourceHashes[file] = createHash('sha256').update(await readFile(file)).digest('hex');
     await writeFile('artifacts/spatial-expeditions/browser.json',JSON.stringify({ sourceHashes, touch: true, groupId: 'group-1', memberId,
-        runtime, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
-    console.log('Real 3D group creation, touch targeting, paid dispatch, travel, discovery, reload and recall passed.');
+        runtime, recallRequested, automaticReturn: !recallRequested, travelled: mission.travelled, reloadExact: true, dispatchDoesNotReveal: true, errors }, null, 2));
+    console.log('Real 3D group flow passed; '+(recallRequested ? 'recall requested.' : 'automatic return already underway.'));
 } finally { await browser.close(); }
