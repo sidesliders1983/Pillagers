@@ -1,0 +1,320 @@
+{
+  "measuredAt": "2026-10-16T10:25:55.109Z",
+  "node": "v24.19.0",
+  "policy": {
+    "cellSize": 8,
+    "settlementRadius": 96,
+    "expeditionRadius": 64,
+    "eyeHeight": 1.7
+  },
+  "results": [
+    {
+      "seed": 17,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, distinct-compartment, neutral-buffer and access rules."
+      ],
+      "observationMs": 46.94720000000052,
+      "savedBytes": 5305,
+      "exploredCells": 430,
+      "totalCells": 10000,
+      "rivalVisibility": null,
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 108.64530000000013,
+          "savedBytes": 20305,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 23.22230000000127,
+          "savedBytes": 5305,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 6.459800000000541,
+          "savedBytes": 1556,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 42,
+      "accepted": true,
+      "reasons": [],
+      "observationMs": 35.23280000000159,
+      "savedBytes": 5306,
+      "exploredCells": 488,
+      "totalCells": 10000,
+      "rivalVisibility": "unknown",
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 115.80749999999898,
+          "savedBytes": 20306,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 27.101599999998143,
+          "savedBytes": 5306,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 7.637299999998504,
+          "savedBytes": 1557,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 91,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, distinct-compartment, neutral-buffer and access rules."
+      ],
+      "observationMs": 48.116900000000896,
+      "savedBytes": 5306,
+      "exploredCells": 534,
+      "totalCells": 10000,
+      "rivalVisibility": null,
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 117.0804000000062,
+          "savedBytes": 20306,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 33.120499999997264,
+          "savedBytes": 5306,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 5.699100000005274,
+          "savedBytes": 1557,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 1983,
+      "accepted": true,
+      "reasons": [],
+      "observationMs": 34.502300000000105,
+      "savedBytes": 5308,
+      "exploredCells": 457,
+      "totalCells": 10000,
+      "rivalVisibility": "unknown",
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 108.43950000000041,
+          "savedBytes": 20308,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 24.122000000003027,
+          "savedBytes": 5308,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 7.854700000003504,
+          "savedBytes": 1559,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 1337,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, distinct-compartment, neutral-buffer and access rules."
+      ],
+      "observationMs": 28.0341999999946,
+      "savedBytes": 5308,
+      "exploredCells": 578,
+      "totalCells": 10000,
+      "rivalVisibility": null,
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 107.94980000000214,
+          "savedBytes": 20308,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 33.00360000001092,
+          "savedBytes": 5308,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 7.6820000000006985,
+          "savedBytes": 1559,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 18,
+      "accepted": true,
+      "reasons": [],
+      "observationMs": 46.91019999999844,
+      "savedBytes": 5306,
+      "exploredCells": 554,
+      "totalCells": 10000,
+      "rivalVisibility": "unknown",
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 148.30539999999746,
+          "savedBytes": 20306,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 32.164300000004005,
+          "savedBytes": 5306,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 10.786000000007334,
+          "savedBytes": 1557,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 7,
+      "accepted": true,
+      "reasons": [],
+      "observationMs": 30.874599999995553,
+      "savedBytes": 5305,
+      "exploredCells": 493,
+      "totalCells": 10000,
+      "rivalVisibility": "unknown",
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 122.26780000000144,
+          "savedBytes": 20305,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 32.49159999999392,
+          "savedBytes": 5305,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 10.041499999992084,
+          "savedBytes": 1556,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 73,
+      "accepted": false,
+      "reasons": [
+        "No candidate pair meets foundation, distinct-compartment, neutral-buffer and access rules."
+      ],
+      "observationMs": 28.34100000000035,
+      "savedBytes": 5306,
+      "exploredCells": 553,
+      "totalCells": 10000,
+      "rivalVisibility": null,
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 117.12329999999201,
+          "savedBytes": 20306,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 32.78650000000198,
+          "savedBytes": 5306,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 6.851800000004005,
+          "savedBytes": 1557,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 256,
+      "accepted": true,
+      "reasons": [],
+      "observationMs": 32.70640000002459,
+      "savedBytes": 5307,
+      "exploredCells": 555,
+      "totalCells": 10000,
+      "rivalVisibility": "unknown",
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 175.76519999999437,
+          "savedBytes": 20307,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 33.46630000000005,
+          "savedBytes": 5307,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 12.06830000001355,
+          "savedBytes": 1558,
+          "rawMaskBytes": 626
+        }
+      ]
+    },
+    {
+      "seed": 65537,
+      "accepted": true,
+      "reasons": [],
+      "observationMs": 28.163100000005215,
+      "savedBytes": 5309,
+      "exploredCells": 477,
+      "totalCells": 10000,
+      "rivalVisibility": "unknown",
+      "variants": [
+        {
+          "cellSize": 4,
+          "milliseconds": 114.16719999999623,
+          "savedBytes": 20309,
+          "rawMaskBytes": 10000
+        },
+        {
+          "cellSize": 8,
+          "milliseconds": 28.13210000001709,
+          "savedBytes": 5309,
+          "rawMaskBytes": 2500
+        },
+        {
+          "cellSize": 16,
+          "milliseconds": 7.020199999999022,
+          "savedBytes": 1560,
+          "rawMaskBytes": 626
+        }
+      ]
+    }
+  ]
+}

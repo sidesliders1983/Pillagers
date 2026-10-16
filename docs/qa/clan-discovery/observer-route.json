@@ -1,0 +1,318 @@
+{
+  "kind": "Developer-only confirmed-observer fixture, not a Core expedition mission",
+  "foregroundPixel": [
+    255,
+    11,
+    8,
+    255
+  ],
+  "routeSamples": 25,
+  "observations": [
+    {
+      "point": {
+        "x": 105,
+        "z": 189
+      },
+      "timings": {
+        "observationMs": 55.400000005960464,
+        "presentationMs": 1.699999988079071
+      },
+      "exploredCells": 554,
+      "visibleCells": 554
+    },
+    {
+      "point": {
+        "x": 137,
+        "z": 189
+      },
+      "timings": {
+        "observationMs": 47.79999998211861,
+        "presentationMs": 59.80000001192093
+      },
+      "exploredCells": 558,
+      "visibleCells": 558
+    },
+    {
+      "point": {
+        "x": 169,
+        "z": 189
+      },
+      "timings": {
+        "observationMs": 46,
+        "presentationMs": 63.20000001788139
+      },
+      "exploredCells": 605,
+      "visibleCells": 605
+    },
+    {
+      "point": {
+        "x": 188,
+        "z": 176
+      },
+      "timings": {
+        "observationMs": 37.39999997615814,
+        "presentationMs": 61.900000005960464
+      },
+      "exploredCells": 673,
+      "visibleCells": 653
+    },
+    {
+      "point": {
+        "x": 188,
+        "z": 144
+      },
+      "timings": {
+        "observationMs": 40.80000001192093,
+        "presentationMs": 39.900000005960464
+      },
+      "exploredCells": 696,
+      "visibleCells": 639
+    },
+    {
+      "point": {
+        "x": 186,
+        "z": 114
+      },
+      "timings": {
+        "observationMs": 33.19999998807907,
+        "presentationMs": 42.400000005960464
+      },
+      "exploredCells": 783,
+      "visibleCells": 704
+    },
+    {
+      "point": {
+        "x": 185,
+        "z": 83
+      },
+      "timings": {
+        "observationMs": 45.5,
+        "presentationMs": 52.599999994039536
+      },
+      "exploredCells": 829,
+      "visibleCells": 694
+    },
+    {
+      "point": {
+        "x": 185,
+        "z": 51
+      },
+      "timings": {
+        "observationMs": 31.899999976158142,
+        "presentationMs": 37.10000002384186
+      },
+      "exploredCells": 840,
+      "visibleCells": 648
+    },
+    {
+      "point": {
+        "x": 185,
+        "z": 19
+      },
+      "timings": {
+        "observationMs": 31,
+        "presentationMs": 38.5
+      },
+      "exploredCells": 864,
+      "visibleCells": 643
+    },
+    {
+      "point": {
+        "x": 179,
+        "z": -7
+      },
+      "timings": {
+        "observationMs": 33.70000001788139,
+        "presentationMs": 40
+      },
+      "exploredCells": 987,
+      "visibleCells": 688
+    },
+    {
+      "point": {
+        "x": 151,
+        "z": -11
+      },
+      "timings": {
+        "observationMs": 30.799999982118607,
+        "presentationMs": 39.099999994039536
+      },
+      "exploredCells": 1016,
+      "visibleCells": 667
+    },
+    {
+      "point": {
+        "x": 122,
+        "z": -14
+      },
+      "timings": {
+        "observationMs": 28.30000001192093,
+        "presentationMs": 40.69999998807907
+      },
+      "exploredCells": 1062,
+      "visibleCells": 685
+    },
+    {
+      "point": {
+        "x": 119,
+        "z": -43
+      },
+      "timings": {
+        "observationMs": 31.400000005960464,
+        "presentationMs": 41.69999998807907
+      },
+      "exploredCells": 1119,
+      "visibleCells": 741
+    },
+    {
+      "point": {
+        "x": 123,
+        "z": -71
+      },
+      "timings": {
+        "observationMs": 38,
+        "presentationMs": 51.80000001192093
+      },
+      "exploredCells": 1175,
+      "visibleCells": 754
+    },
+    {
+      "point": {
+        "x": 124,
+        "z": -102
+      },
+      "timings": {
+        "observationMs": 33.80000001192093,
+        "presentationMs": 43.099999994039536
+      },
+      "exploredCells": 1199,
+      "visibleCells": 717
+    },
+    {
+      "point": {
+        "x": 124,
+        "z": -134
+      },
+      "timings": {
+        "observationMs": 32.5,
+        "presentationMs": 45.30000001192093
+      },
+      "exploredCells": 1218,
+      "visibleCells": 673
+    },
+    {
+      "point": {
+        "x": 119,
+        "z": -161
+      },
+      "timings": {
+        "observationMs": 33.29999998211861,
+        "presentationMs": 53.599999994039536
+      },
+      "exploredCells": 1265,
+      "visibleCells": 627
+    },
+    {
+      "point": {
+        "x": 112,
+        "z": -186
+      },
+      "timings": {
+        "observationMs": 39.19999998807907,
+        "presentationMs": 43.69999998807907
+      },
+      "exploredCells": 1296,
+      "visibleCells": 641
+    },
+    {
+      "point": {
+        "x": 99,
+        "z": -205
+      },
+      "timings": {
+        "observationMs": 29.100000023841858,
+        "presentationMs": 50.099999994039536
+      },
+      "exploredCells": 1325,
+      "visibleCells": 641
+    },
+    {
+      "point": {
+        "x": 78,
+        "z": -216
+      },
+      "timings": {
+        "observationMs": 32.599999994039536,
+        "presentationMs": 50.900000005960464
+      },
+      "exploredCells": 1378,
+      "visibleCells": 675
+    },
+    {
+      "point": {
+        "x": 46,
+        "z": -216
+      },
+      "timings": {
+        "observationMs": 29.799999982118607,
+        "presentationMs": 46.5
+      },
+      "exploredCells": 1485,
+      "visibleCells": 725
+    },
+    {
+      "point": {
+        "x": 20,
+        "z": -222
+      },
+      "timings": {
+        "observationMs": 31.099999994039536,
+        "presentationMs": 55.20000001788139
+      },
+      "exploredCells": 1543,
+      "visibleCells": 710
+    },
+    {
+      "point": {
+        "x": -12,
+        "z": -222
+      },
+      "timings": {
+        "observationMs": 32.80000001192093,
+        "presentationMs": 54.29999998211861
+      },
+      "exploredCells": 1606,
+      "visibleCells": 739
+    },
+    {
+      "point": {
+        "x": -20,
+        "z": -198
+      },
+      "timings": {
+        "observationMs": 34.400000005960464,
+        "presentationMs": 57
+      },
+      "exploredCells": 1651,
+      "visibleCells": 752
+    },
+    {
+      "point": {
+        "x": -20,
+        "z": -170
+      },
+      "timings": {
+        "observationMs": 30.099999994039536,
+        "presentationMs": 62.69999998807907
+      },
+      "exploredCells": 1698,
+      "visibleCells": 747
+    }
+  ],
+  "startingCells": 554,
+  "arrivedCells": 1698,
+  "departedCells": 1698,
+  "savedBeforeFadeFinishes": true,
+  "enemyHiddenAfterDeparture": true,
+  "errors": []
+}

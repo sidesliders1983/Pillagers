@@ -1,3 +1,5 @@
+import { DiscoveryFog } from './DiscoveryFog';
+import { discoveryAt, inspectClanDiscovery, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { LifecycleTrace } from './LifecycleTrace';
 import { readRecoverySources, resumeCheckpointKey } from '../play/SettlementRecovery';
 import { chooseSettlementRecovery } from './CampaignRecovery';
@@ -130,6 +132,7 @@ export class FjordPlay {
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
+        if (!stored && query.get('discovery') === '1') this.campaign.enableDiscovery();
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
@@ -235,6 +238,8 @@ export class FjordPlay {
         const initialAutoStart = this.opened.autoStart ? beginAutoStart() : undefined;
         let assets: AssetManager | undefined, models: FjordModels | undefined;
         let layer: FjordEntities | undefined, world: Awaited<ReturnType<typeof createWorld>> | undefined;
+        let discoveryFog: DiscoveryFog | undefined;
+        let knownTerrain: DiscoveryView | undefined;
         let motion: LivingWorldController | undefined;
         let liveMarkers: ReturnType<typeof this.shared.selectionPresentation> = [];
         let sceneEntities: readonly FjordEntity[] = [];
@@ -437,7 +442,9 @@ export class FjordPlay {
                     loading = this.loading = new IslandLoading(true, this.foundingBook);
                     await loading.prepare(proposal.snapshot().seed);
                     loading.check();
+                    const discoveryEnabled = !!this.session.readSnapshot().discovery || query.get('discovery') === '1';
                     this.campaign.startCampaign(proposal, 'island-pool-v1');
+                    if (discoveryEnabled) this.campaign.enableDiscovery();
                     resetProduction();
                     campaignFields();
                     await rebuildWorld();
@@ -585,6 +592,7 @@ export class FjordPlay {
             observer?.disconnect();
             controller.dispose();
             reducedMotion.removeEventListener('change', configureEffects);
+            discoveryFog?.dispose();
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
@@ -696,8 +704,10 @@ export class FjordPlay {
             try {
                 const blueprint = this.campaign.blueprint;
                 const revision = ++this.worldRevision;
+                const canonical = this.session.readSnapshot();
+                const discovery = canonical.discovery ? inspectClanDiscovery(canonical.discovery, canonical.clan.id) : undefined;
                 trace.record('scene-build');
-                const next = await createWorld(assets!, { mode: 'generated', blueprint,
+                const next = await createWorld(assets!, { mode: 'generated', blueprint, discovery,
                     settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                     anisotropy: renderer.capabilities.getMaxAnisotropy(),
                     preparation: async (stage, operation) => {
@@ -721,6 +731,10 @@ export class FjordPlay {
                 precipitationEffect?.dispose();
                 world?.dispose();
                 world = next;
+                discoveryFog?.dispose();
+                knownTerrain = discovery;
+                discoveryFog = discovery ? new DiscoveryFog(blueprint, discovery) : undefined;
+                if (discoveryFog) scene.add(discoveryFog.root);
                 const fire = this.campaign.readProjection().campfire;
                 const firePosition = new Vector3(fire.transform.x, fire.transform.y, fire.transform.z);
                 next.clearPlot({ ...fire.transform, halfWidth: fire.clearingRadius,
@@ -738,7 +752,8 @@ export class FjordPlay {
                 weatherSignature = "";
                 scene.add(next.root);
                 cleared.clear();
-                motion = new LivingWorldController(this.campaign.blueprint);
+                motion = new LivingWorldController(this.campaign.blueprint, discovery ?
+                    (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
                 groundSignature = "";
                 lighting?.dispose();
                 lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
@@ -775,6 +790,16 @@ export class FjordPlay {
                     // acquires a new pair on the next pass instead of mixing new facts into this scene.
                     const state = this.session.readSnapshot();
                     const view = this.campaign.readProjection();
+                    if (state.discovery && discoveryFog) {
+                        knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
+                        if (world!.setDiscovery(knownTerrain)) {
+                            weatherTint?.dispose();
+                            weatherTint = new SeasonTint(world!.root, world!.terrain);
+                            weatherSignature = '';
+                        }
+                        discoveryFog.setKnowledge(knownTerrain);
+                        if (query.has('debugDiscovery')) canvas.dataset.discovery = JSON.stringify(discoveryFog.inspect());
+                    } else if (query.has('debugDiscovery')) canvas.dataset.discovery = JSON.stringify({ active: false });
                     const sceneCanonicalTime = 'Canonical time: Winter ' + view.time.winter +
                         ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
                     precipitationEffect!.setWeather(view.precipitation);
@@ -953,6 +978,7 @@ export class FjordPlay {
                 lighting!.fog.far += offset;
             }
             world!.update(time, lighting, camera);
+            discoveryFog?.update(delta);
             renderer.render(scene, camera);
             lastFrameMs = performance.now() - frameStarted;
         });
@@ -1006,7 +1032,10 @@ export class FjordPlay {
             await prepareGpu(loading);
             loading.check();
             drawingReady = true;
-            await loading.arrive(controller, this.campaign.blueprint, arrivalPose, world!.movement.heightAt);
+            if (discoveryFog) discoveryFog.root.visible = false;
+            try {
+                await loading.arrive(controller, this.campaign.blueprint, arrivalPose, world!.movement.heightAt);
+            } finally { if (discoveryFog) discoveryFog.root.visible = true; }
             canvas.dataset.loading = JSON.stringify(loading.evidence);
         };
         if (this.loading) {

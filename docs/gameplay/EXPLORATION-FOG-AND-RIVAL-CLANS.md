@@ -1,19 +1,20 @@
 # Fjordside — Expedition Groups, Exploration, Fog of War and Rival Clans
 
-**Status:** Owner-approved design direction (2026-10-13); implementation pending.  
+**Status:** Owner-approved design direction (2026-10-13). #147 has an opt-in discovery/fog prototype; default activation and the remaining epic slices are pending review.
+
 **Authority:** [GP-008](../../GAME-PRINCIPLES.md#gp-008--exploration-is-strategic-group-level-action-knowledge-belongs-to-communities) · [Exploration Epic #146](https://github.com/sidesliders1983/Pillagers/issues/146).
 
 ## North star
 
 Fjordside is a living 3D island that the player must explore. Residents lead autonomous lives; **only Expedition Groups** receive direct strategic movement and mission orders. Exploration reveals terrain as observers actually visit/see it. A real CPU community grows independently at the hidden rival site before either side is discovered.
 
-## Current implementation inventory (not newly requested work)
+## Current implementation inventory
 
 - The authoritative headless `Simulation Core` already owns personal identity, family, occupations, resources, cattle, events, time and separate target CPU clan states.
 - `src/simulation/WorldExpeditions.ts` already supports persistent groups and `CreateExpeditionGroup`, `EditExpeditionGroup`, `DispatchExpedition`; Recon, Surveillance, Pillage; provisions, risk, absence, casualties, real loot transfers and clan-scoped Unknown/Scouted/Surveyed intelligence.
 - That historical simulation targets **exactly four abstract directional regions**. The retired isometric player interface (#54) selected those via arrows; its geographic identities must **not** be retroactively reinterpreted as physical island coordinates.
 - `WorldBlueprint` now contains a deterministic natural island with navigation, topographic information and a **reserved rival site** (#134). That reserve currently does not instantiate the rival CPU community.
-- `WorldLighting.fog` is Three.js atmospheric distance/weather fog, not saved knowledge. Fog of war is new and must never depend on camera distance.
+- `WorldLighting.fog` remains atmospheric distance/weather fog. The optional version-1 `SimulationState.discovery` prototype now stores per-clan explored/current masks tied to canonical geography; it is independent of camera motion. See [the current prototype contract](../CLAN-DISCOVERY-V04A.md). New campaigns opt in explicitly; old saves and the abstract Region Graph retain their original meaning.
 - GP-007 and #140 retire separate 2D player experiences. All new UI belongs in `/fjord-play`.
 
 ## Direct control policy

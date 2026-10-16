@@ -1,3 +1,4 @@
+import { discoveryAt, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { campaignIslandPlan } from '../fjord-play/CampaignIsland';
 import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
 import type { AssetManager } from '../core/AssetManager';
@@ -21,6 +22,7 @@ import { hearth } from './SettlementLayout';
 import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './BuildingPlot';
 
 export interface WorldSelection {
+    discovery?: DiscoveryView;
     preparation?: <T>(stage: string, operation: () => T | Promise<T>) => Promise<T>;
     mode: 'reference' | 'generated';
     settlement?: 'prototype' | 'canonical';
@@ -85,6 +87,11 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
     let pines: Awaited<ReturnType<typeof loadPineModels>> | undefined;
     let water: FjordsideWater | undefined;
     let wind: NatureWind | undefined;
+    let nature: Group | undefined;
+    let discovery = selection.discovery;
+    const clearedPlots = new Map<string, BuildingPlot>();
+    const knownPlan = () => blueprint!.placementPlan.filter(p =>
+        !discovery || discoveryAt(discovery, p.x, p.z) !== 'unknown');
     let floatingBoat: BoatFloat | undefined;
     let terrain: Mesh | undefined;
     let movement: MovementTerrain;
@@ -120,7 +127,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 catch (error) { if (!canonical) throw error;
                     assets.diagnostics.push('EZ-Tree unavailable; existing KayKit conifer fallback.'); }
             }
-            const nature = await prepare('nature-instance-assembly', () => createNatureFromPlan(assets,blueprint.placementPlan,
+            nature = await prepare('nature-instance-assembly', () => createNatureFromPlan(assets,knownPlan(),
                 blueprint.config.seed,pines?.resolve));
             root.add(nature); // Own instance buffers even if a required plot cannot be placed.
             try { attachments.push(...(island ? planCampaignDock(assets, blueprint) :
@@ -157,6 +164,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             if (!canonical) root.add(placeSettlement(assets,blueprint.settlement.buildings,surface.surfaceHeightAt));
             for (const item of attachments) {
                 if (canonical && item.key !== 'jetty' && item.key !== 'cliff') continue;
+                if (selection.discovery && discoveryAt(selection.discovery, item.x, item.z) === 'unknown') continue;
                 const model = assets.get(item.key);
                 model.name = item.id;
                 model.position.set(item.x,item.y,item.z);
@@ -210,6 +218,21 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             .map(p => [p.assetId + '@' + p.x + ',' + p.z, p]));
         return {
             root,terrain,movement,blueprint,attachments,
+            setDiscovery(view: DiscoveryView) {
+                if (!blueprint || !nature || view.worldId !== discovery?.worldId)
+                    throw new Error('Scenery discovery belongs to a different world.');
+                if (view.explored === discovery.explored) { discovery = view; return false; }
+                discovery = view;
+                const next = createNatureFromPlan(assets, knownPlan(), blueprint.config.seed, pines?.resolve);
+                for (const plot of clearedPlots.values()) clearBuildingPlotNature(next, plot);
+                wind?.dispose();
+                nature.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); });
+                nature.removeFromParent();
+                nature = next;
+                root.add(next);
+                wind = new NatureWind(next, !!pines);
+                return true;
+            },
             setGroundWeights(weights: readonly number[]) {
                 if (canonical && terrain) updateBlueprintWear(terrain,weights);
             },
@@ -231,7 +254,10 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 });
                 return [...trees.values()];
             },
-            clearPlot: (plot: BuildingPlot) => clearBuildingPlotNature(root,plot),
+            clearPlot: (plot: BuildingPlot) => {
+                clearedPlots.set([plot.x, plot.z, plot.halfWidth, plot.halfDepth].join(','), { ...plot });
+                return clearBuildingPlotNature(root, plot);
+            },
             hearth: new Vector3(fire.x,fire.y,fire.z),
             center: new Vector3(center.x,movement.heightAt(center.x,center.z),center.z+16),
             get quality() { return quality; },

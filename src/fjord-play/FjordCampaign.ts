@@ -1,3 +1,4 @@
+import { assertDiscoveryWorld } from '../simulation/ClanDiscovery';
 import { freezeReadView } from '../gameplay-lab/ReadView';
 import type { SimulationState } from '../simulation/SimulationCore';
 import { createCampaignIsland, campaignIslandPlan, type CampaignGeography } from './CampaignIsland';
@@ -28,6 +29,10 @@ export class FjordCampaign {
         this.blueprint = geography === 'island-pool-v1' ? createCampaignIsland(session.snapshot().seed) :
             generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
+    }
+    enableDiscovery(): void {
+        if (!campaignIslandPlan(this.blueprint)) throw new Error('Discovery requires a physical island campaign.');
+        this.session.initializeDiscovery(this.blueprint, geographyIdentity(this.blueprint));
     }
     project(state: SimulationState = this.session.snapshot()) {
         const view = projectFjordSettlement(state, this.blueprint, this.layout);
@@ -128,6 +133,8 @@ export class FjordCampaign {
             layout = createFjordLayout(blueprint, layout.mooring, seed);
             layout.mooringResolved = resolved;
         }
+        const discovery = proposal.readSnapshot().discovery;
+        if (discovery) assertDiscoveryWorld(discovery, blueprint, geographyIdentity(blueprint));
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
         this.session.loadJSON(proposal.saveJSON());
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
