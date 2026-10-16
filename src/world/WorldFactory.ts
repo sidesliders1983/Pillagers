@@ -1,3 +1,4 @@
+import type { TerrainShading } from './TerrainShading';
 import { campaignIslandPlan } from '../fjord-play/CampaignIsland';
 import { Camera, Group, InstancedMesh, Mesh, Vector3 } from 'three';
 import type { AssetManager } from '../core/AssetManager';
@@ -21,6 +22,8 @@ import { hearth } from './SettlementLayout';
 import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './BuildingPlot';
 
 export interface WorldSelection {
+    /** Explicit rendering study only; never serialized or used by physical queries. */
+    terrainShading?: TerrainShading;
     preparation?: <T>(stage: string, operation: () => T | Promise<T>) => Promise<T>;
     mode: 'reference' | 'generated';
     settlement?: 'prototype' | 'canonical';
@@ -113,7 +116,8 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             }
             const surface = createBlueprintSurface(blueprint);
             terrain = await prepare('terrain-mesh-and-masks', () => createBlueprintTerrainAsync(blueprint,grounds?.materials,'none',
-                canonical ? blueprint.terrain.heights.map(() => 0) : undefined, island ? 'zoned' : 'baseline'));
+                canonical ? blueprint.terrain.heights.map(() => 0) : undefined, island ? 'zoned' : 'baseline',
+                false, undefined, selection.terrainShading));
             if (blueprint.config.conifers === 'ez-tree') {
                 try { pines = await prepare('pine-assets-fetch-decode', () => loadPineModels(assets)); }
                 catch (error) { if (!canonical) throw error;
@@ -255,7 +259,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
             },
             describe() {
                 return { mode: selection.mode,seed: blueprint?.config.seed ?? 1983,
-                    generatorVersion: blueprint?.config.generatorVersion, groundBlending: island ? 'zoned' : 'baseline',
+                    generatorVersion: blueprint?.config.generatorVersion, terrainShading: terrain?.userData.terrainShading ?? null, groundBlending: island ? 'zoned' : 'baseline',
                     island: island?.recipe, campaignPlots: island?.plots.length, quality,buildings: canonical ? 0 : blueprint ? 6 : 7,
                     populationSource: 'existing-fjordside',groundTier: grounds?.tier ?? 'reference',source: blueprint?.config.conifers ?? 'reference',
                     site: { x: center.x,z: center.z },attachments: attachments.length,
