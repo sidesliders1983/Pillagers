@@ -1,4 +1,4 @@
-import { spatialMissionPosition } from '../simulation/SpatialExpeditions';
+import { spatialMemberPosition } from '../simulation/SpatialExpeditions';
 import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
 export { settlementCampfire } from './SettlementCampfire';
@@ -297,12 +297,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             const indoorReason = age < 5 ? 'young-child' :
                 state.mechanics && isProvidingCare(state, id) ? 'childcare' : null;
             const key = 'persona:' + id + '@' + (plot ? plot.x + ',' + plot.z : home.id);
-            const partyPoint = mission ? spatialMissionPosition(mission, mission.memberIds.indexOf(id)*1.1) : undefined;
+            const partyPoint = mission ? spatialMemberPosition(mission, id) : undefined;
             const point = partyPoint ? { ...partyPoint, y: surface.surfaceHeightAt(partyPoint.x, partyPoint.z), scale: 1 } : plot && !indoorReason ? allocatePoint(key, { x: plot.x - 3 + index % 5 * 1.8,
                 z: plot.z + plot.halfDepth + 1.5 + Math.floor(index / 5) * 1.8 }) : undefined;
             const growth = .4 + .6 * Math.min(16, Math.max(0, age)) / 16;
             add('persona', id, p.name, 'human', point ? { ...point, scale: growth } : undefined,
-                { living: true, expedition: mission?.id, expeditionWalking: !!mission && mission.status !== 'Exploring',
+                { living: true, expedition: mission?.id, expeditionWalking: partyPoint?.moving ?? false,
                     sex: p.dna.sex, age, indoorReason, occupation: p.occupation,
                     workEligible: state.mechanics ? inspectWork(state, id).reason === null : false,
                     workHomeId: residence?.buildingId ?? undefined });

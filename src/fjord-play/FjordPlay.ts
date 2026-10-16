@@ -141,7 +141,7 @@ export class FjordPlay {
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
             <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
-            <aside id="fjord-management"><details id="fjord-expeditions"><summary>Expedition groups</summary><section id="expedition-panel" aria-label="Expedition groups"></section></details><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
+            <aside id="fjord-management"><section id="expedition-panel" aria-label="Expedition groups"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
@@ -562,11 +562,19 @@ export class FjordPlay {
                 if (!point && expeditions?.targeting) showManagement(false);
                 if (point) targetMarker.position.set(point.x,
                     createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z)+.4, point.z);
+            }, () => this.shared.selection, memberIds => {
+                const rendered = layer?.describe() ?? [];
+                return Object.fromEntries(memberIds.map(id => {
+                    const person = rendered.find(entity => entity.kind==='persona' && entity.id===id);
+                    if (!person) throw new Error('A group member is not currently on the island.');
+                    return [id,{ x: person.position[0], z: person.position[2] }];
+                }));
             });
         document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             showManagement(true);
-            document.querySelector<HTMLDetailsElement>('#fjord-expeditions')!.open = true;
+            this.shared.select(null);
+            refresh();
             expeditions!.refresh();
         });
         const renderer = createRenderer(canvas);

@@ -132,7 +132,8 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
-    if (command.type === 'ExploreArea' || command.type === 'RecallExpedition') {
+    if (command.type === 'ExploreArea' || command.type === 'RecallExpedition' ||
+        command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {
         const state = structuredClone(input);
         applySpatialCommand(state, command, context);
         validateState(state);

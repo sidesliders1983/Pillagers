@@ -155,3 +155,66 @@ test('a completed exploration keeps exact Food spending in the shared saved Clan
     restored.book.restore(session.book.save(session.snapshot()), restored.snapshot());
     assert.deepEqual(restored.book.snapshot(), session.book.snapshot());
 });
+
+test('exploration groups start empty with numbered names and recruit selected residents through Core', () => {
+    let state = campaign();
+    state = core.applyCommand(state, { type: 'CreateExplorationGroup' }, context);
+    state = core.applyCommand(state, { type: 'CreateExplorationGroup' }, context);
+    assert.equal(core.inspectWorld(state).groups[1].name, 'Group 2');
+    assert.equal(core.inspectWorld(state).groups[2].name, 'Group 3');
+    assert.equal(core.inspectWorld(state).groups[1].status, 'Unavailable');
+    assert.throws(() => core.exploreOffer(state, 'group-2', dispatch.target, context), /members/i);
+    state = core.applyCommand(state, { type: 'SetExplorationMember', groupId: 'group-2',
+        personaId: 'founder-3', included: true }, context);
+    assert.deepEqual(state.world.groups['group-2'].memberIds, ['founder-3']);
+    assert.equal(core.inspectWorld(state).groups[1].status, 'Ready');
+    assert.throws(() => core.applyCommand(state, { type: 'SetExplorationMember', groupId: 'group-3',
+        personaId: 'founder-3', included: true }, context), /eligible|group/i);
+    assert.deepEqual(core.reconstructState(core.serializeState(state)), state);
+    state = core.applyCommand(state, { type: 'SetExplorationMember', groupId: 'group-2',
+        personaId: 'founder-3', included: false }, context);
+    assert.equal(core.inspectWorld(state).groups[1].status, 'Unavailable');
+});
+
+
+test('members depart from their own exact positions, wait for the group and recall along their own saved routes', () => {
+    const { spatialMemberPosition } = loadTypeScript(new URL('../src/simulation/SpatialExpeditions.ts', import.meta.url));
+    const origins = { 'founder-1': { x: 18, z: 65 }, 'founder-2': { x: 80, z: 32 } };
+    let state = core.applyCommand(campaign(), { ...dispatch, origins }, context);
+    let mission = state.world.spatial.missions['explore-1'];
+    for (const [id, origin] of Object.entries(origins)) {
+        const point = spatialMemberPosition(mission, id);
+        assert.equal(point.x, origin.x); assert.equal(point.z, origin.z);
+    }
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 10 }, context);
+    mission = state.world.spatial.missions['explore-1'];
+    for (const [id, origin] of Object.entries(origins)) {
+        const point = spatialMemberPosition(mission, id);
+        assert.ok(Math.hypot(point.x-origin.x, point.z-origin.z) <= 20.001);
+        assert.ok(Math.hypot(point.x-origin.x, point.z-origin.z) > 10);
+    }
+    const saved = core.serializeState(state);
+    state = core.applyCommand(state, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 10 }, context);
+    mission = state.world.spatial.missions['explore-1'];
+    assert.equal(mission.status, 'Returned');
+    for (const [id, origin] of Object.entries(origins)) {
+        const point = spatialMemberPosition(mission, id);
+        assert.equal(point.x, origin.x); assert.equal(point.z, origin.z);
+    }
+    let restored = core.reconstructState(saved);
+    restored = core.applyCommand(restored, { type: 'RecallExpedition', groupId: 'group-1' }, context);
+    restored = core.applyCommand(restored, { type: 'AdvanceTicks', ticks: 10 }, context);
+    assert.deepEqual(restored, state);
+    assert.throws(() => core.applyCommand(campaign(), { ...dispatch,
+        origins: { ...origins, 'founder-1': { x: -100, z: 40 } } }, context), /departure|origin|island/i);
+});
+
+
+test('saved individual routes reject diagonal shortcuts and inconsistent journey lengths', () => {
+    const state = core.applyCommand(campaign(), { ...dispatch, origins: {
+        'founder-1': { x: 18, z: 65 }, 'founder-2': { x: 80, z: 32 } } }, context);
+    const corrupt = structuredClone(state);
+    corrupt.world.spatial.missions['explore-1'].memberRoutes['founder-2'][2].x += .5;
+    assert.throws(() => core.reconstructState(JSON.stringify(corrupt)), /spatial|route/i);
+});

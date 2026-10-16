@@ -21,8 +21,8 @@ export class GameplaySession {
     private physicalContext() {
         return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.() };
     }
-    exploreOffer(groupId: string, target: { x: number; z: number }) {
-        return exploreOffer(this.state, groupId, target, this.physicalContext());
+    exploreOffer(groupId: string, target: { x: number; z: number }, origins?: Record<string, { x: number; z: number }>) {
+        return exploreOffer(this.state, groupId, target, this.physicalContext(), origins);
     }
     private canonicalRevision = 0;
     private readState?: Readonly<SimulationState>;

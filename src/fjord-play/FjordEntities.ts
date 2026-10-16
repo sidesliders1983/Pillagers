@@ -1,4 +1,4 @@
-import { spatialMissionPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
+import { spatialMemberPosition, type SpatialMission } from '../simulation/SpatialExpeditions';
 import type { SimulationState } from '../simulation/SimulationCore';
 import { createBlueprintSurface, type TerrainSurface } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -43,8 +43,7 @@ export class FjordEntities {
         const frame = this.expeditionFrames.get(missionId);
         if (!frame) return;
         const travelled = frame.from+(frame.mission.travelled-frame.from)*Math.min(1,frame.elapsed/.18);
-        const point = spatialMissionPosition({ ...frame.mission, travelled },
-            frame.mission.memberIds.indexOf(personaId)*1.1);
+        const point = spatialMemberPosition({ ...frame.mission, travelled }, personaId);
         return { ...point, y: this.expeditionSurface!.surfaceHeightAt(point.x,point.z) };
     }
     private disposed = false;
@@ -264,7 +263,7 @@ export class FjordEntities {
             if (facts?.expedition) {
                 const pose = this.expeditionPose(facts.expedition, facts.id);
                 if (pose) { entry.model.position.set(pose.x,pose.y,pose.z); entry.model.rotation.y = pose.rotation; }
-                this.models.animate(entry.model, facts.expeditionWalking ? 'Walk' : 'Idle', 1, running ? delta : 0);
+                this.models.animate(entry.model, pose?.moving ? 'Run' : 'Idle', 1, running ? delta : 0);
             }
         }
         for (const agent of motion.inspect()) {
