@@ -24,7 +24,7 @@ Issue #161, 2026-10-16. The owner approved pausing on return. No offline progres
   supplied, so these returns cannot be classified more precisely from the response alone.
   A longer memory-pressure interval remains unverified. See [owner report](physical-review.json).
 
-[Browser run](browser-run.log) · [recovery run](recovery-run.log) · [browser summary](browser.json).
+[Browser run](browser-run.txt) · [recovery run](recovery-run.txt) · [browser summary](browser.json).
 These automated checks use desktop Edge, including a touch-capable 390×844 viewport. They are
 separate from the physical owner report.
 

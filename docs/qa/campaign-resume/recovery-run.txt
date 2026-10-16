@@ -1,0 +1,1 @@
+Recovery offers the exact checkpoint, exports damaged input, and survives a worker failure without overwriting saves.
