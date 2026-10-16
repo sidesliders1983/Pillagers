@@ -11,6 +11,7 @@ import { FitDebugOptions } from '../characters/CharacterFitSystem';
 import { CharacterPresentation, defaultCharacterPresentation, parseCharacterPresentation } from '../characters/CharacterPresentation';
 import { LabTestSnapshot, parseLabSnapshot } from './LabSnapshot';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
+import {braidedHairAsset} from '../characters/BraidedHairCatalog';
 import { goldenLabBody, isMeshyLabBodySource } from '../characters/LabBodySources';
 import { LabBodyPresentation, defaultLabBodyPresentation, previewLabBodyPresentation, parseLabBodyPresentation } from '../characters/LabBodyPresentation';
 
@@ -23,6 +24,9 @@ export class CharacterLab {
     private ui!:CharacterLabUI;
     async start(){
         const requestedOutfit = new URLSearchParams(location.search);
+        if (requestedOutfit.get('hair') === 'long-braided') {
+            this.presentation.hair = braidedHairAsset.id;
+        }
         if (requestedOutfit.get('outfit') === 'grid-001' || requestedOutfit.get('outfit-trial') === 'grid-001') {
             this.presentation.outfit = gridTrialOutfitId;
         }

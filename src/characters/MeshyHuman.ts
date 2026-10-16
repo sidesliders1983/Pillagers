@@ -305,6 +305,7 @@ export class MeshyHuman {
    this.root.updateMatrixWorld(true);
    this.fit.nativeSkeleton.update();
   }
+  this.modules.poseHair();
   this.nativeSources = sources;
   this.root.userData.presentation = presentation;
   this.updateSelectedAssets();
@@ -436,6 +437,7 @@ export class MeshyHuman {
    this.mixer.update(0);
    this.captureAnimationRotations();
    this.shapePose();
+   this.modules.poseHair();
   }
 
   this.root.userData.character={seed:dna.seed,state:this.state,lod:this.lod,height};
@@ -476,6 +478,7 @@ export class MeshyHuman {
   this.mixer.update(0);
   this.captureAnimationRotations();
   this.shapePose();
+  this.modules.poseHair();
  }
  /** Restore the exact source skeleton and scale for reference views and initial review. */
  sampleNativeNeutral() {
@@ -534,6 +537,7 @@ export class MeshyHuman {
   this.mixer.update(delta);
   this.captureAnimationRotations();
   this.shapePose();
+  this.modules.poseHair();
 
   this.elapsed += Math.max(0, delta);
   const moving = this.state === 'Walk' || this.state === 'Run';

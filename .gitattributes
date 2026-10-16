@@ -27,3 +27,6 @@ public/character-lab/candidates/meshy-short-trousers-006/*.json -text
 
 # Preserve the hashed manual hair preparation script.
 scripts/prepare-manual-hair.mjs text eol=lf
+
+# The braided-hair receipt pins the preparation script bytes.
+scripts/prepare-braided-hair.mjs text eol=lf
