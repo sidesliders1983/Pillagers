@@ -21,6 +21,16 @@ const results = { sourceCommit, origin, repeats, sampleMs, warmupMs, startedAt: 
 const browser = await chromium.launch({ channel: 'msedge', headless: true,
     args: ['--enable-precise-memory-info'] });
 results.browserVersion = browser.version();
+if (process.env.QA_RESUME === '1') {
+    const previous = JSON.parse(await readFile(output + '/results.json', 'utf8'));
+    for (const key of ['sourceCommit', 'origin', 'repeats', 'sampleMs', 'warmupMs'])
+        assert.equal(previous[key], results[key], 'Resume inputs must be identical: ' + key);
+    assert.equal(previous.failure, undefined);
+    assert.deepEqual(previous.errors, []);
+    results.runs.push(...previous.runs);
+    results.captures.push(...previous.captures);
+    results.startedAt = previous.startedAt;
+}
 const fixtures = new Map();
 async function fixture(name) {
     if (fixtures.has(name)) return fixtures.get(name);
@@ -34,6 +44,7 @@ async function fixture(name) {
 }
 async function open(name, quality, mobile, mode) {
     const loaded = await fixture(name);
+    console.log('Loading', name, quality, mobile ? '390px' : 'desktop', mode);
     const context = await browser.newContext({ viewport: mobile ? { width: 390, height: 844 } :
         { width: 1280, height: 800 }, deviceScaleFactor: 1 });
     const page = await context.newPage();
@@ -131,6 +142,7 @@ try {
     if (process.env.QA_GALLERY !== '0') {
         for (const name of ['summer-32', 'developed-810', 'snow-811']) {
             for (const mode of ['baseline', 'smooth']) {
+                if (results.captures.some(row => row.name === name && row.mode === mode)) continue;
                 const { page, context, prepared, fixtureSha256 } = await open(name, 'standard', false, mode);
                 await page.waitForTimeout(warmupMs);
                 const path = name + '-' + mode + '.png';
@@ -154,6 +166,8 @@ try {
                 for (let repeat = 1; repeat <= repeats; repeat++) {
                     const pair = [];
                     for (const mode of repeat % 2 ? ['baseline', 'smooth'] : ['smooth', 'baseline']) {
+                        const previous = results.runs.find(row => row.mobile === mobile && row.quality === quality && row.repeat === repeat && row.mode === mode);
+                        if (previous) { pair.push(previous); continue; }
                         const { page, context, prepared, fixtureSha256 } = await open('developed-810', quality, mobile, mode);
                         await page.waitForTimeout(warmupMs);
                         await page.evaluate(() => window.__fjordAudit.start({ instrument: true, gpu: true, cameraPath: true }));
