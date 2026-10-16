@@ -1,3 +1,6 @@
+import { LifecycleTrace } from './LifecycleTrace';
+import { readRecoverySources, resumeCheckpointKey } from '../play/SettlementRecovery';
+import { chooseSettlementRecovery } from './CampaignRecovery';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { IslandLoading, yieldForInput } from './IslandLoading';
@@ -48,10 +51,13 @@ export class FjordPlay {
     private worldRevision = 0;
     private loading?: IslandLoading;
     private foundingBook?: FoundingBookWindow;
+    private trace?: LifecycleTrace;
     private disposeScene = () => {};
     async start() {
         try { await this.initialize(); }
         catch (error) {
+            this.trace?.record('restore-error');
+            this.trace?.dispose();
             this.disposeScene();
             this.foundingBook?.dispose();
             this.loading?.finish();
@@ -63,25 +69,64 @@ export class FjordPlay {
         }
     }
     private async initialize() {
-        document.body.innerHTML = '<p role="status">Preparing your island campaign…</p>';
+        document.title = 'FjordSide';
+        document.body.className = 'fjord-play';
+        document.body.innerHTML = '<main class="fjord-bootstrap"><h1>Opening FjordSide…</h1><p role="status">Reading your campaign.</p></main>';
         await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
         const query = new URLSearchParams(location.search);
+        let tracedBook: GameplaySession['book'] | undefined, tracedBookId: string | undefined;
+        const trace = this.trace = new LifecycleTrace(query.has('debugLifecycle'), () => {
+            if (!this.session) return {};
+            if (tracedBook !== this.session.book) {
+                tracedBook = this.session.book;
+                tracedBookId = tracedBook.snapshot().id;
+            }
+            const state = this.session.readSnapshot();
+            return { campaignId: tracedBookId, seed: state.seed, time: { ...state.time }, running: this.session.running };
+        });
         // New and restarted Fjord campaigns arrive in Summer; stored campaigns remain authoritative.
         const foundingPhase = 'summer-800-v1';
         // Owner review gate: existing saves remain authoritative; only explicit new games opt in.
         const calendarMode = query.get('birthdays') === 'individual-v1' ? 'individual-v1' : undefined;
-        let stored: string | null = null;
-        try { stored = sessionStorage.getItem(activeSettlementKey); } catch { /* Storage is optional. */ }
+        const recovery = readRecoverySources(key => sessionStorage.getItem(key), key => localStorage.getItem(key));
+        let stored = recovery.active;
+        if (recovery.requiresChoice) stored = await chooseSettlementRecovery(recovery);
+        while (stored) {
+            try {
+                const campaign = await SharedSettlement.restoreAsync(stored, 'fjord', async metadata => {
+                    trace.record('cold-restore', { seed: metadata.seed, time: metadata.time, campaignId: metadata.book?.id });
+                    this.loading = new IslandLoading(false, undefined, metadata);
+                    await yieldForInput();
+                    if (metadata.island) {
+                        trace.record('generation-start', { reason: 'saved-island' });
+                        await this.loading.prepare(metadata.seed);
+                        trace.record('generation-ready');
+                    }
+                    this.loading.check();
+                });
+                this.opened = { campaign, warning: '', autoStart: false };
+                break;
+            } catch (error) {
+                const aborted = this.loading?.signal.aborted;
+                this.loading?.finish();
+                this.loading = undefined;
+                if (aborted) throw error;
+                const alternatives = readRecoverySources(() => null, key => localStorage.getItem(key));
+                if (!alternatives.damaged.some(candidate => candidate.text === stored))
+                    alternatives.damaged.push({ source: 'Unrestored campaign', text: stored });
+                stored = await chooseSettlementRecovery(alternatives, 'Could not restore the saved campaign. ' + String(error));
+            }
+        }
         if (!stored) {
             const proposal = new GameplaySession(Number(query.get('seed') ?? 32), undefined, true, foundingPhase, calendarMode);
             this.foundingBook = new FoundingBookWindow(proposal.book.snapshot().chapters[0]);
             proposal.book.notifyPending();
             this.loading = new IslandLoading(false, this.foundingBook);
+            trace.record('new-campaign', { seed: proposal.snapshot().seed });
             await this.loading.prepare(proposal.snapshot().seed);
             this.opened = { campaign: new SharedSettlement(proposal, undefined, true, 'island-pool-v1'),
                 warning: '', autoStart: true };
         }
-        else this.opened = openSettlement('fjord', Number(query.get('seed') ?? 32), foundingPhase);
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
@@ -94,6 +139,12 @@ export class FjordPlay {
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
+        const savedPresentation = this.shared.presentation;
+        let restoredCamera = savedPresentation?.camera;
+        if (savedPresentation) {
+            document.querySelector<HTMLSelectElement>('#fjord-quality')!.value = savedPresentation.quality;
+            document.querySelector<HTMLSelectElement>('#fjord-effects')!.value = savedPresentation.effects;
+        }
         this.loading?.mount();
         this.foundingBook?.restoreScroll(readingPosition);
         const header = new FjordHeader(document.querySelector('#fjord-header')!);
@@ -138,14 +189,33 @@ export class FjordPlay {
             this.session.setMinutesPerWinter(Number(cycleField.value));
             persist();
         });
-        bindViewSwitch(document.querySelector('#fjord-play')!, this.shared, say);
-        const persist = () => { if (!this.loading) persistSettlement(this.shared, say); };
+        bindViewSwitch(document.querySelector('#fjord-play')!, this.shared, say, () => {
+            // An outgoing transferred owner is stale; an ordinary cached page still owns its scene.
+            if (this.shared.transferring) { trace.record('stale-owner'); location.reload(); }
+        });
+        let capturePresentation = () => {};
+        const persist = () => {
+            if (this.loading) return;
+            capturePresentation();
+            persistSettlement(this.shared, say);
+        };
+        const checkpointForResume = () => {
+            if (this.loading || this.shared.transferring) return;
+            persist();
+            try { localStorage.setItem(resumeCheckpointKey, this.shared.persist()); }
+            catch { say('Resume checkpoint unavailable. Save or export before leaving this view.'); }
+        };
         const bookReader = new ClanBookReader(this.shared, persist);
         const personalHistory = new PersonalHistoryView(document.querySelector<HTMLElement>('#fjord-play')!, this.shared);
         let clockIntent = 0;
         let previous = performance.now();
+        let pageSuspended = false;
+        let contextLost = false;
+        let contextEpoch = 0;
+        let resetFrameTime = () => { previous = performance.now(); };
+        const lifecycleEvents = new AbortController();
         let sceneLoads = 1; // Initial assets and models must finish before active time can advance.
-        const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring;
+        const ownsClock = () => !document.hidden && !this.stopped && !this.shared.transferring && !pageSuspended && !contextLost;
         const canAdvance = () => ownsClock() && sceneLoads === 0 && !this.loading;
         const setPlayback = (running: boolean) => {
             clockIntent++;
@@ -307,6 +377,13 @@ export class FjordPlay {
             link.click();
             setTimeout(() => URL.revokeObjectURL(url), 60000);
         };
+        if (query.has('debugLifecycle')) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = 'Download recovery diagnostics';
+            button.addEventListener('click', () => download(JSON.stringify(trace.snapshot(), null, 2), 'fjordside-recovery-diagnostics.json'));
+            document.querySelector('#fjord-menu .fjord-settings')!.append(button);
+        }
         document.querySelector('#fjord-export')!.addEventListener('click', () => download(this.campaign.exportJSON(), 'fjordside-campaign.json'));
         document.querySelector('#fjord-export-core')!.addEventListener('click', () => download(this.session.saveJSON(), 'fjordside-core.json'));
         document.querySelector('#fjord-import')!.addEventListener('change', event => {
@@ -448,18 +525,32 @@ export class FjordPlay {
             });
         };
         document.addEventListener('visibilitychange', () => {
+            trace.record(document.hidden ? 'hidden' : 'visible');
             if (document.hidden) {
                 setPlayback(false);
                 refresh();
+                checkpointForResume();
             }
-            previous = performance.now();
-        });
+            resetFrameTime();
+        }, { signal: lifecycleEvents.signal });
         const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 2400);
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
         const controller = new RTSCameraController(camera, canvas, 'pan');
+        capturePresentation = () => this.shared.setPresentation({
+            quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
+            effects: document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
+            camera: { position: camera.position.toArray(), target: controller.focus.toArray() },
+        });
         controller.enabled = !this.loading;
         let drawingReady = false;
+        let contextPanel: HTMLElement | undefined;
+        let contextFocus: HTMLElement | null = null;
+        let restoreSceneGpu = async (check: () => void) => {
+            check();
+            await renderer.compileAsync(scene, camera);
+            check();
+        };
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
@@ -478,6 +569,12 @@ export class FjordPlay {
             this.loading?.cancel();
             this.loading?.finish();
             this.stopped = true;
+            trace.record('scene-disposed');
+            trace.dispose();
+            lifecycleEvents.abort();
+            contextEpoch++;
+            contextPanel?.remove();
+            screenAwake.dispose();
             header.dispose();
             bookReader.dispose();
             this.foundingBook?.dispose();
@@ -498,7 +595,88 @@ export class FjordPlay {
             lighting?.dispose();
             renderer.dispose();
         };
-        window.addEventListener('pagehide', this.disposeScene, { once: true });
+        window.addEventListener('pagehide', event => {
+            trace.record('pagehide', { persisted: event.persisted });
+            pageSuspended = true;
+            setPlayback(false);
+            checkpointForResume();
+            resetFrameTime();
+            if (!event.persisted) this.disposeScene();
+        }, { signal: lifecycleEvents.signal });
+        window.addEventListener('pageshow', event => {
+            trace.record('pageshow', { persisted: event.persisted });
+            if (!event.persisted || this.stopped || this.shared.transferring) return;
+            pageSuspended = false;
+            resetFrameTime();
+            setPlayback(false);
+            refresh();
+            trace.record('warm-resume', { kind: 'cached-page' });
+            say('Welcome back. Your campaign is paused; select Start to continue.');
+        }, { signal: lifecycleEvents.signal });
+        canvas.addEventListener('webglcontextlost', event => {
+            trace.record('webglcontextlost');
+            event.preventDefault();
+            contextEpoch++;
+            contextLost = true;
+            setPlayback(false);
+            checkpointForResume();
+            resetFrameTime();
+            controller.enabled = false;
+            if (!contextPanel) {
+                contextFocus = document.activeElement as HTMLElement | null;
+                contextPanel = document.createElement('section');
+                contextPanel.id = 'fjord-context-recovery';
+                contextPanel.setAttribute('role', 'dialog');
+                contextPanel.setAttribute('aria-modal', 'true');
+                contextPanel.setAttribute('aria-label', 'Graphics recovery');
+                contextPanel.innerHTML = '<div><h2>Graphics interrupted</h2><p role="status">Waiting for the browser to restore the scene. Your campaign is paused.</p><button data-reload>Reload saved settlement</button><button data-export>Export recovery file</button></div>';
+                contextPanel.querySelector('[data-reload]')!.addEventListener('click', () => {
+                    try {
+                        sessionStorage.setItem(activeSettlementKey, this.shared.persist());
+                        location.reload();
+                    } catch {
+                        contextPanel!.querySelector('[role="status"]')!.textContent =
+                            'Could not save the current session. Export a recovery file before reloading.';
+                    }
+                });
+                contextPanel.querySelector('[data-export]')!.addEventListener('click', () =>
+                    download(this.shared.persist(), 'fjordside-recovery.json'));
+                contextPanel.addEventListener('keydown', event => {
+                    if (event.key !== 'Tab') return;
+                    event.preventDefault();
+                    const buttons = Array.from(contextPanel!.querySelectorAll('button'));
+                    const index = buttons.indexOf(document.activeElement as HTMLButtonElement);
+                    buttons[(index + (event.shiftKey ? buttons.length - 1 : 1)) % buttons.length].focus();
+                });
+                document.body.append(contextPanel);
+            }
+            if (!document.hidden) contextPanel.querySelector('button')!.focus();
+        }, { signal: lifecycleEvents.signal });
+        canvas.addEventListener('webglcontextrestored', () => {
+            trace.record('webglcontextrestored');
+            if (!contextLost || this.stopped) return;
+            const epoch = contextEpoch;
+            const check = () => {
+                if (this.stopped || epoch !== contextEpoch || renderer.getContext().isContextLost())
+                    throw new DOMException('Graphics restoration superseded.', 'AbortError');
+            };
+            void restoreSceneGpu(check).then(() => {
+                check();
+                contextLost = false;
+                resetFrameTime();
+                controller.enabled = !this.loading;
+                contextPanel?.remove();
+                contextPanel = undefined;
+                if (!document.hidden && contextFocus?.isConnected) contextFocus.focus();
+                refresh();
+                trace.record('graphics-ready');
+                say('Scene restored. Your campaign is paused; select Start to continue.');
+            }).catch(error => {
+                if (this.stopped || epoch !== contextEpoch || !contextPanel) return;
+                contextPanel.querySelector('[role="status"]')!.textContent =
+                    'Could not restore graphics. Your saved campaign is retained. ' + String(error);
+            });
+        }, { signal: lifecycleEvents.signal });
         assets = new AssetManager();
         if (this.loading) await this.loading.measure('assets-fetch-decode', () => assets!.loadForSimulation());
         else await assets.loadForSimulation();
@@ -518,6 +696,7 @@ export class FjordPlay {
             try {
                 const blueprint = this.campaign.blueprint;
                 const revision = ++this.worldRevision;
+                trace.record('scene-build');
                 const next = await createWorld(assets!, { mode: 'generated', blueprint,
                     settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                     anisotropy: renderer.capabilities.getMaxAnisotropy(),
@@ -572,7 +751,8 @@ export class FjordPlay {
                     position: [firePosition.x + 28, firePosition.y + 31, firePosition.z - 32],
                     target: [firePosition.x, firePosition.y + 1, firePosition.z],
                 };
-                controller.setView(arrivalPose);
+                controller.setView(restoredCamera ?? arrivalPose);
+                restoredCamera = undefined;
             } finally {
                 sceneLoads--;
                 previous = performance.now();
@@ -713,12 +893,13 @@ export class FjordPlay {
         observer.observe(canvas);
         resize();
         const clock = new Clock();
+        resetFrameTime = () => { previous = performance.now(); clock.start(); };
         let time = 0;
         let cameraSignature = '';
         let lastDiagnostics = 0, activeTime = 0, lastFrameMs = 0;
         // Public camera diagnostics let visual QA locate objects before exercising real pointer picking.
         renderer.setAnimationLoop(() => {
-            if (!drawingReady) return;
+            if (!drawingReady || pageSuspended || contextLost || document.hidden) return;
             const frameStarted = performance.now();
             const elapsed = clock.getDelta(), delta = Math.min(elapsed, .1);
             time += delta;
@@ -775,7 +956,7 @@ export class FjordPlay {
             renderer.render(scene, camera);
             lastFrameMs = performance.now() - frameStarted;
         });
-        const finishArrival = async (loading: IslandLoading) => {
+        const prepareGpu = async (loading: Pick<IslandLoading, 'stage' | 'measure' | 'check'>) => {
             loading.stage('Preparing FjordSide');
             const textures = new Set<Texture>();
             scene.traverse(node => {
@@ -809,6 +990,21 @@ export class FjordPlay {
                 renderer.render(scene, camera);
             });
             loading.check();
+        };
+        restoreSceneGpu = check => prepareGpu({
+            stage: label => { if (contextPanel) contextPanel.querySelector('[role="status"]')!.textContent = label + '…'; },
+            check,
+            async measure<T>(_stage: string, operation: () => T | Promise<T>): Promise<T> {
+                check();
+                await yieldForInput();
+                const result = await operation();
+                check();
+                return result;
+            },
+        });
+        const finishArrival = async (loading: IslandLoading) => {
+            await prepareGpu(loading);
+            loading.check();
             drawingReady = true;
             await loading.arrive(controller, this.campaign.blueprint, arrivalPose, world!.movement.heightAt);
             canvas.dataset.loading = JSON.stringify(loading.evidence);
@@ -826,6 +1022,7 @@ export class FjordPlay {
         initialAutoStart?.();
         refresh();
         canvas.dataset.ready = 'true';
+        trace.record('scene-ready');
         previous = performance.now();
         timer = window.setInterval(tickClock, 500);
         document.querySelector<HTMLButtonElement>('#fjord-export')!.disabled = false;

@@ -24,11 +24,13 @@ export function persistSettlement(campaign: SharedSettlement, say: (message: str
         say('Session storage unavailable. Save or export before leaving this view.');
     }
 }
-export function bindViewSwitch(root: HTMLElement, campaign: SharedSettlement, say: (message: string) => void) {
+export function bindViewSwitch(root: HTMLElement, campaign: SharedSettlement, say: (message: string) => void, cachedReturn?: () => void) {
     // A cached outgoing page no longer owns the campaign; restore the current checkpoint.
     window.addEventListener('pageshow', event => {
-        if (event.persisted)
-            location.reload();
+        if (event.persisted) {
+            if (cachedReturn) cachedReturn();
+            else location.reload();
+        }
     });
     root.addEventListener('click', event => {
         const link = (event.target as Element).closest<HTMLAnchorElement>('a[data-settlement-view]');

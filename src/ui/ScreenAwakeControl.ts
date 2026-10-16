@@ -137,7 +137,7 @@ export class ScreenAwakeControl {
             void this.acquire();
     };
 
-    private dispose = (): void => {
+    dispose = (): void => {
         this.disposed = true;
         this.wanted = false;
         this.suspend('');

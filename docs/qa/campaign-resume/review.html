@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Campaign resume review</title>
+<style>body{margin:0;background:#172b27;color:#eee7d1;font:17px/1.6 system-ui,sans-serif}main{max-width:70rem;margin:auto;padding:24px}a{color:#e2ca8a}h1,h2{font-family:Georgia,serif}section{padding:20px;margin:20px 0;border:1px solid #587267;border-radius:8px}img{max-width:390px;width:100%;border-radius:8px}li{margin:.7em 0}button,a.button{display:inline-block;min-height:44px;padding:8px 16px;box-sizing:border-box;border:1px solid #c4b57f;border-radius:6px}table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:12px;border-bottom:1px solid #587267}</style></head>
+<body><main><h1>Return to your settlement</h1>
+<p>Issue #161. Returning keeps the campaign paused. A normal return retains the live scene; a real reload restores the saved island without a new landing animation.</p>
+<p><a class="button" href="/fjord-play?debugLifecycle=1">Open the game with recovery diagnostics</a></p>
+<section><h2>Physical Safari review</h2><ol>
+<li>Open your existing campaign. Use Menu → Save locally as a backup. Note the season, year, resources and selected resident.</li>
+<li>Start the clock, leave Safari for 10 seconds, then return. Expect the same island and camera, a paused clock and no time gained while away.</li>
+<li>Repeat after 2 minutes in another app, then after a longer interval when practical. Safari may preserve the scene or genuinely reload the document. A cold return should say “Returning to your settlement…” and remain responsive.</li>
+<li>Use Start to continue, and confirm selection, camera gestures, people and resource totals still work.</li>
+<li>Open Menu → Download recovery diagnostics. Report the interval tested and whether the return was immediate, showed the resume screen, or became stuck. The trace distinguishes cached return from cold navigation.</li>
+</ol><p>The owner reports that the 10-second and 2-minute physical checks work. Exact device model and lifecycle classification were not supplied; a longer memory-pressure return remains unverified. Browser emulation is reported separately.</p></section>
+<section><h2>Automated evidence</h2><p><a href="report.md">Report and limitations</a> · <a href="browser.json">Browser results</a> · <a href="bfcache.json">Native history-navigation results</a></p>
+<p>Public session checks and Chromium touch-size browser checks verify campaign identity, pause, save safety and recovery. Synthetic persisted events, real WebGL context loss and actual history navigation are labelled separately.</p>
+<img src="restored-mobile.png" alt="Restored existing campaign in Chromium at a 390 pixel viewport"></section>
+<p><a href="../../IOS-CAMPAIGN-RESUME.md">Implementation contract</a></p></main></body></html>

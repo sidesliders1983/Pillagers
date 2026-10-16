@@ -1,0 +1,37 @@
+{
+  "revision": "8193982027668fc9cb10d600e2f291bb8eb3fc16",
+  "runtime": "v24.19.0",
+  "note": "Node restore CPU wall time; not physical Safari or page readiness. Run 2 reuses the island module cache.",
+  "results": [
+    {
+      "run": 0,
+      "milliseconds": 18635.641000000003,
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "coreEqual": true
+    },
+    {
+      "run": 1,
+      "milliseconds": 634.2658999999985,
+      "seed": 32,
+      "time": {
+        "winter": 810,
+        "tick": 500
+      },
+      "recipe": {
+        "version": "island-pool-v1",
+        "generatorVersion": "fjordside-island-v0.3e-r3",
+        "seed": 18
+      },
+      "coreEqual": true
+    }
+  ]
+}
