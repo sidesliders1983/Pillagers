@@ -75,7 +75,7 @@ export class LivingWorldController {
     private nature: WorldBlueprint['placementPlan'] = [];
     private natureCells = new Map<string, Array<WorldBlueprint['placementPlan'][number]>>();
     private ground: FjordGround = { plots: [], paths: [] };
-    constructor(private world: WorldBlueprint) {
+    constructor(private world: WorldBlueprint, private mapped?: (x: number, z: number) => boolean) {
         this.surface = createBlueprintSurface(world);
         this.campfire = settlementCampfire(world);
     }
@@ -476,6 +476,7 @@ export class LivingWorldController {
         return (a.random >>> 0) / 4294967296;
     }
     private safe(a: Agent, p: Point2) {
+        if (this.mapped && !this.mapped(p.x, p.z)) return false;
         if (Math.hypot(p.x - this.campfire.transform.x, p.z - this.campfire.transform.z) <=
             this.campfire.obstacleRadius + this.radius(a)) return false;
         if (this.yardSurfaces.has(a.key) && this.yardSurfaces.get(a.key)!(p.x, p.z) === null)

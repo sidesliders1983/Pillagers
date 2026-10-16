@@ -1,9 +1,10 @@
+import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import { freezeReadView } from './ReadView';
 import { FamilyTreeIndex } from '../lore/FamilyTree';
 import { PersonalHistoryIndex } from '../lore/PersonalHistory';
 import { ClanBook } from '../lore/ClanBook';
-import { createCampaign, applyCommand, serializeState, reconstructState } from '../simulation/SimulationCore';
+import { createCampaign, applyCommand, serializeState, reconstructState, initializePhysicalDiscovery } from '../simulation/SimulationCore';
 import type { BirthdayCalendarMode, FoundingPhase, SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
@@ -54,6 +55,10 @@ export class GameplaySession {
     constructor(seed = 32, narrativeSeed?: number, socialEnabled = true, foundingPhase?: FoundingPhase, calendarMode?: BirthdayCalendarMode) {
         this.state = createCampaign(seed, {}, {}, {}, {}, {enabled: socialEnabled}, {}, foundingPhase, calendarMode);
         this.book = new ClanBook(this.state, true, narrativeSeed);
+    }
+    initializeDiscovery(world: WorldBlueprint, worldId: string): void {
+        this.state = initializePhysicalDiscovery(this.state, world, worldId);
+        this.invalidateRead();
     }
     snapshot(): SimulationState {
         return structuredClone(this.state);

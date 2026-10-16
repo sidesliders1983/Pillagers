@@ -1,3 +1,5 @@
+import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
+import { assertDiscoveryWorld, createClanDiscovery, validateClanDiscovery, type ClanDiscovery } from './ClanDiscovery';
 import { validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
 import type { BirthdayCalendar, BirthdayCalendarMode } from './BirthdayCalendar';
 export type { BirthdayCalendarMode } from './BirthdayCalendar';
@@ -42,6 +44,7 @@ export type Persona = {
 };
 export type SimulationEvent = {id: string; time: GameTime; type: string; personaId?: string; details?: Record<string, unknown>};
 export type SimulationState = {
+    discovery?: ClanDiscovery;
     birthdayCalendar?: BirthdayCalendar;
     foundingPhase?: FoundingPhase;
     campfire?: CampfireState; social?: SocialState; entityPrefix?:string;personaArchive?:Record<string,Persona>;world?:WorldState; weather?:WeatherState; landing?: LandingState; mechanics?: MechanicsState; schemaVersion: 1; seed: number; rngState: number; ticksPerWinter: number; time: GameTime;
@@ -71,6 +74,22 @@ export function createCampaign(
         return target;
     }, expeditionOverrides);
     initializeSocial(state, socialOverrides);
+    validateState(state);
+    return state;
+}
+/** Explicit new-world binding. This configuration step consumes no RNG, resources or game time. */
+export function initializePhysicalDiscovery(input: SimulationState,
+    world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'settlement'>, worldId: string): SimulationState {
+    validateState(input);
+    if (input.discovery) {
+        assertDiscoveryWorld(input.discovery, world, worldId);
+        return structuredClone(input);
+    }
+    const state = structuredClone(input);
+    const observers = [{ id: 'founding-settlement', kind: 'settlement' as const, ...world.settlement.center }];
+    if (world.settlement.harbor) observers.push({ id: 'founding-landing', kind: 'settlement', ...world.settlement.harbor });
+    state.discovery = createClanDiscovery(world, worldId, state.clan.id, observers,
+        state.time.winter * state.ticksPerWinter + state.time.tick);
     validateState(state);
     return state;
 }
@@ -239,6 +258,11 @@ function validateState(state: SimulationState): void {
     validateCampfire(state);
     validateSocial(state);
     validateMechanics(state);
+    if (state.discovery !== undefined) {
+        validateClanDiscovery(state.discovery, state.time.winter * state.ticksPerWinter + state.time.tick);
+        if (!Object.hasOwn(state.discovery.clans, state.clan.id))
+            throw new Error('Missing owning clan discovery.');
+    }
     validateLanding(state);validateWeather(state);validateWorld(state,validateState);
 }
 
