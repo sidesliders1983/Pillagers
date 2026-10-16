@@ -1,0 +1,438 @@
+[
+  {
+    "mobile": false,
+    "quality": "low",
+    "variants": {
+      "baseline": {
+        "p50": 116.6,
+        "p95": 133.2,
+        "p99": 150,
+        "p50Range": "100.2–116.6",
+        "p95Range": "116.9–133.4",
+        "gpu": 103.9,
+        "renderCPU": 4.6,
+        "readyMs": 32088,
+        "readyRange": "31914.5–37346.6",
+        "normalCpuMs": 0,
+        "maxBatchMs": 0,
+        "scratchBytes": 0,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 89,
+            "triangles": 3784565,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 69
+          },
+          "programs": 23,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 51,
+          "geometryBytes": 235124238,
+          "rgba8TextureEstimateBytes": 316041193,
+          "shadowEstimateBytes": 4194304,
+          "totalEstimateBytes": 555359735
+        },
+        "heap": 296834432
+      },
+      "smooth": {
+        "p50": 116.6,
+        "p95": 133.3,
+        "p99": 133.5,
+        "p50Range": "116.5–116.6",
+        "p95Range": "116.8–133.3",
+        "gpu": 107.9,
+        "renderCPU": 4.8,
+        "readyMs": 34575.10000002384,
+        "readyRange": "34526.7–34629.9",
+        "normalCpuMs": 573.3000001609325,
+        "maxBatchMs": 22.400000005960464,
+        "scratchBytes": 4502428,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 89,
+            "triangles": 3784565,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 69
+          },
+          "programs": 23,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 51,
+          "geometryBytes": 235124238,
+          "rgba8TextureEstimateBytes": 316041193,
+          "shadowEstimateBytes": 4194304,
+          "totalEstimateBytes": 555359735
+        },
+        "heap": 302810555
+      }
+    },
+    "delta50": 0,
+    "delta95": 0.07507507507509281,
+    "provisionalGate": "within proposed bound; noise remains"
+  },
+  {
+    "mobile": false,
+    "quality": "standard",
+    "variants": {
+      "baseline": {
+        "p50": 116.7,
+        "p95": 133.5,
+        "p99": 150.1,
+        "p50Range": "116.7–116.7",
+        "p95Range": "133.4–150.0",
+        "gpu": 117.9,
+        "renderCPU": 4.9,
+        "readyMs": 33068,
+        "readyRange": "32310.7–33134.6",
+        "normalCpuMs": 0,
+        "maxBatchMs": 0,
+        "scratchBytes": 0,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 89,
+            "triangles": 3790709,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 73
+          },
+          "programs": 23,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              2048,
+              2048
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 57,
+          "geometryBytes": 235273998,
+          "rgba8TextureEstimateBytes": 399927273,
+          "shadowEstimateBytes": 16777216,
+          "totalEstimateBytes": 651978487
+        },
+        "heap": 279630360
+      },
+      "smooth": {
+        "p50": 116.7,
+        "p95": 133.4,
+        "p99": 149.8,
+        "p50Range": "116.7–116.7",
+        "p95Range": "133.4–133.5",
+        "gpu": 112.1,
+        "renderCPU": 4.4,
+        "readyMs": 34375.90000000596,
+        "readyRange": "34337.7–35883.2",
+        "normalCpuMs": 569.4000003039837,
+        "maxBatchMs": 19,
+        "scratchBytes": 4502428,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 89,
+            "triangles": 3790709,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 73
+          },
+          "programs": 23,
+          "width": 1264,
+          "height": 655,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              2048,
+              2048
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 57,
+          "geometryBytes": 235273998,
+          "rgba8TextureEstimateBytes": 399927273,
+          "shadowEstimateBytes": 16777216,
+          "totalEstimateBytes": 651978487
+        },
+        "heap": 280099460
+      }
+    },
+    "delta50": 0,
+    "delta95": -0.07490636704119424,
+    "provisionalGate": "within proposed bound; noise remains"
+  },
+  {
+    "mobile": true,
+    "quality": "low",
+    "variants": {
+      "baseline": {
+        "p50": 83.5,
+        "p95": 100.1,
+        "p99": 116.7,
+        "p50Range": "83.4–83.5",
+        "p95Range": "100.1–116.8",
+        "gpu": 88.4,
+        "renderCPU": 4.1,
+        "readyMs": 32609.09999999404,
+        "readyRange": "31761.3–32617.3",
+        "normalCpuMs": 0,
+        "maxBatchMs": 0,
+        "scratchBytes": 0,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 75,
+            "triangles": 3728118,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 60
+          },
+          "programs": 22,
+          "width": 374,
+          "height": 624,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 51,
+          "geometryBytes": 235124238,
+          "rgba8TextureEstimateBytes": 316041193,
+          "shadowEstimateBytes": 4194304,
+          "totalEstimateBytes": 555359735
+        },
+        "heap": 326797743
+      },
+      "smooth": {
+        "p50": 83.4,
+        "p95": 100.2,
+        "p99": 116.7,
+        "p50Range": "83.4–83.5",
+        "p95Range": "100.1–116.7",
+        "gpu": 87.1,
+        "renderCPU": 4.4,
+        "readyMs": 34649.09999999404,
+        "readyRange": "34582.2–36406.8",
+        "normalCpuMs": 597.2000001966953,
+        "maxBatchMs": 28.69999998807907,
+        "scratchBytes": 4502428,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 75,
+            "triangles": 3728118,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 60
+          },
+          "programs": 22,
+          "width": 374,
+          "height": 624,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              1024,
+              1024
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 51,
+          "geometryBytes": 235124238,
+          "rgba8TextureEstimateBytes": 316041193,
+          "shadowEstimateBytes": 4194304,
+          "totalEstimateBytes": 555359735
+        },
+        "heap": 285485772
+      }
+    },
+    "delta50": -0.11976047904190823,
+    "delta95": 0.09990009990010762,
+    "provisionalGate": "within proposed bound; noise remains"
+  },
+  {
+    "mobile": true,
+    "quality": "standard",
+    "variants": {
+      "baseline": {
+        "p50": 99.9,
+        "p95": 116.6,
+        "p99": 116.8,
+        "p50Range": "99.8–99.9",
+        "p95Range": "100.2–116.7",
+        "gpu": 87.7,
+        "renderCPU": 4.7,
+        "readyMs": 32252.5,
+        "readyRange": "32243.6–32387.8",
+        "normalCpuMs": 0,
+        "maxBatchMs": 0,
+        "scratchBytes": 0,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 75,
+            "triangles": 3734262,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 64
+          },
+          "programs": 22,
+          "width": 374,
+          "height": 624,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              2048,
+              2048
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 57,
+          "geometryBytes": 235273998,
+          "rgba8TextureEstimateBytes": 399927273,
+          "shadowEstimateBytes": 16777216,
+          "totalEstimateBytes": 651978487
+        },
+        "heap": 284777175
+      },
+      "smooth": {
+        "p50": 99.8,
+        "p95": 100.2,
+        "p99": 116.7,
+        "p50Range": "99.8–99.9",
+        "p95Range": "100.1–116.7",
+        "gpu": 86.9,
+        "renderCPU": 4.3,
+        "readyMs": 34702.5,
+        "readyRange": "34455.1–34780.0",
+        "normalCpuMs": 577.7000001072884,
+        "maxBatchMs": 27.19999998807907,
+        "scratchBytes": 4502428,
+        "renderer": {
+          "render": {
+            "frame": 1,
+            "calls": 75,
+            "triangles": 3734262,
+            "points": 0,
+            "lines": 0
+          },
+          "memory": {
+            "geometries": 72,
+            "textures": 64
+          },
+          "programs": 22,
+          "width": 374,
+          "height": 624,
+          "pixelRatio": 1,
+          "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+          "timerQuery": true,
+          "shadowEnabled": true,
+          "shadowMaps": [
+            [
+              2048,
+              2048
+            ]
+          ]
+        },
+        "memory": {
+          "geometries": 73,
+          "materials": 69,
+          "textures": 57,
+          "geometryBytes": 235273998,
+          "rgba8TextureEstimateBytes": 399927273,
+          "shadowEstimateBytes": 16777216,
+          "totalEstimateBytes": 651978487
+        },
+        "heap": 331068681
+      }
+    },
+    "delta50": -0.10010010010010895,
+    "delta95": -14.065180102915942,
+    "provisionalGate": "within proposed bound; noise remains"
+  }
+]

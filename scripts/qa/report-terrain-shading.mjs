@@ -67,32 +67,44 @@ const report = [
     '## Method and limits', '',
     'Pinned source: `' + full.sourceCommit + '`. Browser: ' + full.browserVersion + '. GPU: ' + full.runs[0].prepared.inspection.renderer.gpu + '.', '',
     'Three alternating-order trials per variant, quality and viewport; DPR 1; real houses, cattle and residents; fixed camera orbit; frozen campaign and presentation clock. Each sample follows ' + full.warmupMs + ' ms warm-up and lasts approximately ' + full.sampleMs + ' ms. Measurements use the existing QA-only bridge in Vite development modules, not an optimized production performance guarantee. Shader compilation occurs before sampling. No repository tests run concurrently with the timed matrix.', '',
-    'Mobile is 390 × 844 desktop Edge viewport emulation. Physical Safari/iPhone remains untested. p50/p95/p99 below are medians of the three per-run percentiles; p95 range exposes repeat variance. GPU duration uses EXT_disjoint_timer_query_webgl2 where samples are returned; unavailable values are unknown. Render CPU is synchronous renderer submission, not GPU execution.', '',
+    'Mobile is 390 × 844 desktop Edge viewport emulation. Physical Safari/iPhone remains untested. p50/p95/p99 below are medians of the three per-run percentiles; p95 range exposes repeat variance. GPU duration uses EXT_disjoint_timer_query_webgl2 where samples are returned; unavailable values are unknown. The Render CPU column is synchronous renderer-call wall time; it can include driver/GPU waits and is not exclusive CPU utilisation.', '',
     '## Frame and loading measurements', '',
     '| Viewport | Quality | Variant | p50 ms | p95 ms | p99 ms | p95 run range | GPU p50 ms | Render CPU p50 ms | Ready ms |',
     '| --- | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |', ...rows, '',
     ...gates, '',
     'These are bounded prototype checks on one older Intel laptop. Similar results within run variance are inconclusive evidence of cost, not proof of free GPU work. Ready time measures navigation to scene readiness in fresh contexts; network, decoding, normal baking and native setup overlap. See individual runs for ranges and loading long tasks; differences cannot be attributed solely to the normal bake.', '',
+    'B increases the measured median time to scene readiness by about 1.3–2.5 seconds (roughly 4–8%) on this host. The bake itself uses about 0.57–0.60 seconds of active CPU plus awaited preparation yields and 4.29 MiB of temporary storage. This pilot therefore does not claim free loading; physical iPhone input responsiveness and loading cost still need review.', '',
     '## Resource and bake costs', '',
     '| Viewport | Quality | Variant | Calls with shadows | Triangles with shadows | GPU geometries | GPU textures | Scene materials | Estimated MiB | Heap MiB | Bake CPU ms | Max bake batch ms | Scratch MiB |',
     '| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |', ...costs, '',
-    'Calls/triangles and GPU resource counts are the matched starting view, including shadow passes; the full moving-path inspections remain in the raw result. Heap is the median usedJSHeapSize at the end of sampling. Estimated memory counts referenced geometry and RGBA8 texture images with a mip allowance plus shadow texels; it is not measured VRAM and omits driver/program/framebuffer overhead. Bake CPU excludes awaited yields and common preparation. Scratch is temporary and released; retained attribute-byte delta is zero. No UV bake or extra textures are added.', '',
+    'Calls/triangles and GPU resource counts are the matched starting view, including shadow passes; the full moving-path inspections remain in the raw result. Heap is the median usedJSHeapSize at the end of sampling. Estimated memory counts referenced geometry and RGBA8 texture images with a mip allowance plus shadow texels; it is a partial inventory estimate, not measured VRAM. It omits shader-uniform textures, render targets, bone buffers and driver/program/framebuffer overhead; shared decoded texture images may also be counted more than once. Bake CPU excludes awaited yields and common preparation. Scratch is temporary and released; retained attribute-byte delta is zero. No UV bake or extra textures are added. Heap differences across fresh contexts are noisy and are not a retained-leak or physical mobile memory proof.', '',
     '## Correctness and reproduction', '',
     'The browser runner asserts identical A/B position, UV0/1/2/3, colour and index hashes, restored time, Core and canonical world exports. The Lab runner asserts unchanged exports after variant and quality changes and checks latest-request behavior. The public mesh tests cover shared normals, rock definition, deep-sea join, all material flags including climate snow, identical masks/geometry/UVs and asynchronous output. Existing navigation, loading, seasons and deterministic campaign regressions remain in the repository suite.', '',
-    'See [implementation contract](../../TERRAIN-SHADING-STUDY.md), [Lab data](lab/results.json), [full-scene distributions](full-scene/results.json) and [summary](summary.json). Histograms and run summaries are retained; individual frame samples are not. Fixture files are the existing `docs/qa/fjord-runtime-performance/fixtures` sources, identified by SHA-256 in every result.', '',
+    'See [implementation contract](../../TERRAIN-SHADING-STUDY.md), [Lab data](lab/results.json), [full-scene distributions](full-scene/results.json) and [summary](summary.json) and [local asset hashes](asset-manifest.json). The gallery was captured at commit `' + full.gallerySourceCommit + '`; later source changes before timing affect QA hashing/resume only, not terrain runtime. Histograms and run summaries are retained; individual frame samples are not. Fixture files are the existing `docs/qa/fjord-runtime-performance/fixtures` sources, identified by SHA-256 in every result.', '',
     'No default change is included. The owner can review `/fjord-play?terrain-study=smooth` and select A or B before a separate integration/default pass.', '',
 ];
 await writeFile(directory + '/report.md', report.join('\n'));
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
 const pairs = [];
+const labels = {
+    'meadow-normal': 'Rolling hillside · normals only',
+    'meadow-textured': 'Rolling hillside · approved materials',
+    'source-uv': 'Rolling hillside · grass source only',
+    bedrock: 'Exposed bedrock', shoreline: 'Shoreline and water edge',
+    'island-overhead': 'Whole island · overhead', soil: 'Wet ground · close view',
+    'low-sun': 'Rolling hillside · low sun',
+    'summer-32': 'Founding settlement · Summer',
+    'developed-810': 'Developed settlement · Summer',
+    'snow-811': 'Developed settlement · Winter',
+};
 for (let index = 0; index < lab.captures.length; index += 2) {
     const [a, b] = lab.captures.slice(index, index + 2);
-    pairs.push({ title: a.id, note: a.camera ? a.light + ' · ' + a.overlay : '',
+    pairs.push({ title: labels[a.id] || a.id, note: a.camera ? a.light + ' · ' + a.overlay : '',
         a: 'lab/' + a.path, b: 'lab/' + b.path });
 }
 for (let index = 0; index < full.captures.length; index += 2) {
     const [a, b] = full.captures.slice(index, index + 2);
-    pairs.push({ title: 'Full Fjord · ' + a.name, note: 'Real pinned models · Standard · identical camera and season',
+    pairs.push({ title: labels[a.name] || a.name, note: 'Real pinned models · Standard · identical camera and season',
         a: 'full-scene/' + a.path, b: 'full-scene/' + b.path });
 }
 const html = `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

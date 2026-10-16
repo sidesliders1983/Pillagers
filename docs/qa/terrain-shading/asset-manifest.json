@@ -1,0 +1,1060 @@
+{
+  "note": "Owner-prepared real game-assets and public material inventory used by this study; superset of scene requests, not a claim that all files are GPU-resident.",
+  "files": [
+    {
+      "path": "public/game-assets/cattle/adult-female/cow-female-adult.glb",
+      "bytes": 912644,
+      "sha256": "acb13e1283ba8e53f7fa7b537ae531febc2c9cf3c0ca237bfbc4972ee3d20fb9"
+    },
+    {
+      "path": "public/game-assets/cattle/adult-female/manifest.json",
+      "bytes": 2056,
+      "sha256": "f79267d6ebda791d1f2b473bdb8b3ef0e81ec0749761585b1a37b3b9f06b1238"
+    },
+    {
+      "path": "public/game-assets/cattle/adult-male/cow-male-adult.glb",
+      "bytes": 761356,
+      "sha256": "dda6ee2a327e07a36848ad7cb3e66f519b0cfa4bd74e78f589a807f3fccbbac4"
+    },
+    {
+      "path": "public/game-assets/cattle/adult-male/manifest.json",
+      "bytes": 2053,
+      "sha256": "383a51630df47962edfd57854d7521ba4280eac1786fcc97f74b3e38ffb5536f"
+    },
+    {
+      "path": "public/game-assets/cattle/baby/cow-baby.glb",
+      "bytes": 925360,
+      "sha256": "8365eb31f3988dca607dace82ddbc252e9a72e616bb4df682fbd2c97b086057f"
+    },
+    {
+      "path": "public/game-assets/cattle/baby/manifest.json",
+      "bytes": 2057,
+      "sha256": "f3ed132a74c29d0d3d76c2791f14762778778aa13f1d2aca88b434127cd7c005"
+    },
+    {
+      "path": "public/game-assets/cattle/young-adult/cow-young-adult.glb",
+      "bytes": 785824,
+      "sha256": "4bb7e690423a4c2c776efaeec861897cfdbd4e741b513aa9cff9a19cf53ded35"
+    },
+    {
+      "path": "public/game-assets/cattle/young-adult/manifest.json",
+      "bytes": 2057,
+      "sha256": "4fe697fc18fd1aecc81f7e6e43580adec4659230937304761c8b7a0c4a12caac"
+    },
+    {
+      "path": "public/game-assets/human/extra-animations.json",
+      "bytes": 551,
+      "sha256": "07d83b770c3dcac7f2a210d402525226c095f633491c9e98ffdaeabd9793c404"
+    },
+    {
+      "path": "public/game-assets/human/Human_ExtraAnimations.glb",
+      "bytes": 1022008,
+      "sha256": "a6f3884603041026f290fe0cffa2327c616ae490c779a48a456cb67edcb7a676"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD0.glb",
+      "bytes": 6167788,
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD1.glb",
+      "bytes": 6118484,
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+    },
+    {
+      "path": "public/game-assets/human/Human_LOD2.glb",
+      "bytes": 6118512,
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/grass_path_2-colour.webp",
+      "bytes": 69750,
+      "sha256": "131cd60790f810f6871fc02f981a065b6f4d402332e22e9656cd7c45a6a130ea"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/grass_path_2-roughness.webp",
+      "bytes": 25004,
+      "sha256": "10359196aaf200529b41c5ddf344cfc8bbbd89b43be58e05cef1b6e4c5a467ef"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/Ground037-colour.webp",
+      "bytes": 36044,
+      "sha256": "6fdc4aa7059514915c188d19a2407b5c03d09000168e15d97ba8cb9eb5e2b23c"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/Ground037-roughness.webp",
+      "bytes": 29270,
+      "sha256": "d5512da505d002fb8a71dde11e1ac93afdfb8b626cb4dca9d49d04f8737f879b"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/Ground054-colour.webp",
+      "bytes": 5990,
+      "sha256": "b61354cddd4e85d9f5c1ae31aff0789ffcdd4f2857ee0cedc41e1fc642797583"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/Ground054-roughness.webp",
+      "bytes": 26142,
+      "sha256": "4ee01466e7cdd974aef08a7b32d4216f70af91a9856daa5dad9a35a239873206"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/mossy_rock-colour-cool-grey.webp",
+      "bytes": 79546,
+      "sha256": "229e901ad993d2fdb202274baa347a0970db0047c09708e18966da8b2cff0fd0"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/mossy_rock-colour.webp",
+      "bytes": 81926,
+      "sha256": "826f25a7ffc0b5b4ad48a1121742906156e029f0d9a8153b682fe46e5e4004d2"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/low/mossy_rock-roughness.webp",
+      "bytes": 59898,
+      "sha256": "30af8374765a770e0e9b13f7cd3b54d6cf666c5ad8841a587194b3c687d086ce"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/manifest.json",
+      "bytes": 12529,
+      "sha256": "498751a12f8fa0470f10d68f009137098a5915bcf8cb7904c9cbff817f069aea"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/grass_path_2-colour.webp",
+      "bytes": 310834,
+      "sha256": "88fcc3522e46d4dc87a4dbbe5dc409331f246029ca3c8daeedea7d094e5207b1"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/grass_path_2-normal.webp",
+      "bytes": 1305510,
+      "sha256": "faf178c9f38a0d7ea1ff6972343405bd95904e2e42dae90aa099e4b9f49cb07f"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/grass_path_2-roughness.webp",
+      "bytes": 87460,
+      "sha256": "5a1bd5f03163dd16f67bcfce195ed62ab003d5733413eb161ba614f76b18439b"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/Ground037-colour.webp",
+      "bytes": 198690,
+      "sha256": "f9a69e48db0d2981a76f8342f2f17cae5dc1a30f9425d70cd7b777ea0d47c1ed"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/Ground037-normal.webp",
+      "bytes": 1017780,
+      "sha256": "c90d4afa44439aa6ce44cd3db42f6e3f47557232b4915797225ff8b435ac1865"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/Ground037-roughness.webp",
+      "bytes": 174406,
+      "sha256": "9456d6d7fe98e475435bc2f596d303609615138bd05d5ace3d4b39fb00f0de9c"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/Ground054-colour.webp",
+      "bytes": 43238,
+      "sha256": "d5c7b96321d5bc592b570664ef08febfd8e5346cf351e66b6a0f38d331dea350"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/Ground054-normal.webp",
+      "bytes": 1627106,
+      "sha256": "394eda1da37e2cd549c6bb7bf4f9148dd17a275510e0cf977760ce80d68872e7"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/Ground054-roughness.webp",
+      "bytes": 96946,
+      "sha256": "d50273fd274e6749c6fcf39a32d52400c92c93fea591ad90b09a7e9f606f73fc"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+      "bytes": 329860,
+      "sha256": "42fb39e612a3d8750b69a7d3a2e1877c04b4cd09a15bbaaccbfd04acb8758700"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/mossy_rock-colour.webp",
+      "bytes": 331654,
+      "sha256": "aa1a2d0024160d3cdd0efd2faa284077231e1f37c82158d2dd478ba4199c9deb"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/mossy_rock-normal.webp",
+      "bytes": 1372536,
+      "sha256": "c652f25ebbc6f7f385e8e92b4efe2e247aa43390514b9088ccf2eb3ebaf73961"
+    },
+    {
+      "path": "public/ground-materials/blended-v1/standard/mossy_rock-roughness.webp",
+      "bytes": 250790,
+      "sha256": "1046393b83c2da8fd21e43b306898402b22fd3c5e64a082e6f5ae02a525d9663"
+    },
+    {
+      "path": "public/ground-materials/v02/manifest.json",
+      "bytes": 3378,
+      "sha256": "1f5c5813bafdddb00c73a15ffae53874fb5b44a934a29762ea40adc6360455cd"
+    },
+    {
+      "path": "public/ground-materials/v02/normal.png",
+      "bytes": 1314919,
+      "sha256": "63c119f4d7675f4f8c166b68731ac935d96d92784042516250a3a61ef4816286"
+    },
+    {
+      "path": "public/ground-materials/v02/roughness.png",
+      "bytes": 392474,
+      "sha256": "57cc58e9411fb632737634b28474a4c241c519f3062a0dfc88bcbfd95ec1a9e8"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-0-colour.webp",
+      "bytes": 33694,
+      "sha256": "d7506f83a05ef0328588d61e09b92499e9d44ad877ebcaa20f172f6196472e2a"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-0-normal.webp",
+      "bytes": 328808,
+      "sha256": "5953140bab479a186ecd89ff74d9a04970ce98c97ead14c3957ff277c41f283d"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-0-roughness.webp",
+      "bytes": 1980,
+      "sha256": "253d793020b62a02ab8e13397a634d4fb275fc03ad87b346ff503bf01ded4e86"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-1-colour.webp",
+      "bytes": 53116,
+      "sha256": "d75ef1793f6d6ef37998759c0925af786c7973e4c5537a3a3138846b78c7b64f"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-1-normal.webp",
+      "bytes": 254340,
+      "sha256": "b05c9e106151e5f4c687aec4556d85230ddac070dcdcd918d5eb46031a805d25"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-1-roughness.webp",
+      "bytes": 1686,
+      "sha256": "53c8617a10cb329056f874777a42f56c8e4c34007e651e6e62f95caf724f6689"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-2-colour.webp",
+      "bytes": 50584,
+      "sha256": "b98db9c82ba7c6283f0f8edac48d6960dca7fbc233d791845c7c32ada9838613"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-2-normal.webp",
+      "bytes": 249760,
+      "sha256": "0f8eb55ed3e684cd90e7f4d77f276023b335ea54a214b5bae62cf2752025d6b0"
+    },
+    {
+      "path": "public/ground-materials/v04/low/0-2-roughness.webp",
+      "bytes": 1646,
+      "sha256": "7eef3243e697460751881b60a5bd7caf1bef468837b4fcab77b35d6694db0141"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-0-colour.webp",
+      "bytes": 41068,
+      "sha256": "3db86f768146ec010cc3ed491cd57dd6f550ce0a4e845f21accc14e3e2025d9f"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-0-normal.webp",
+      "bytes": 325044,
+      "sha256": "0b6d0df856bb8a3719374e1dd7a8cc8cc60e29d22f647a9cbb6653ef95651348"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-0-roughness.webp",
+      "bytes": 2782,
+      "sha256": "8745c4aae94564b226d5ed9f6b10635667e4247027079b37786d23f00b385ab0"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-1-colour.webp",
+      "bytes": 62338,
+      "sha256": "838cb5ec2b9abc5b9e89a0dcdb596a79ecbe1fd47676fc7427f54a7cdfc3ba4c"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-1-normal.webp",
+      "bytes": 283702,
+      "sha256": "7d0a3f76fa19e2d5a2de61bbe1ae2393054e5100b602cc4dc6b84bce36c26d83"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-1-roughness.webp",
+      "bytes": 3528,
+      "sha256": "363d8dafe8902812391771529247adcb520c6725783569d93e30a1a11c2dbf31"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-2-colour.webp",
+      "bytes": 52698,
+      "sha256": "2d31d6fb18ef83aa159894883aa4f33c2dcbf95f5a28bf0294f4a11a583e30f5"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-2-normal.webp",
+      "bytes": 251552,
+      "sha256": "8498c32502301ac00e98408ae67dfe3904dfb906b8ff458b56bddc32ade3de8c"
+    },
+    {
+      "path": "public/ground-materials/v04/low/1-2-roughness.webp",
+      "bytes": 1670,
+      "sha256": "eed5f3bd3d8d7c86c73ed3c2e8d8e7815969e8c40b7204c9423d3307b0ea337d"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-0-colour.webp",
+      "bytes": 35348,
+      "sha256": "1bf6b3d09e6124f4ab9167c56019a17f1e77f7df4fa08d20cb74422d86b7be84"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-0-normal.webp",
+      "bytes": 327098,
+      "sha256": "4f7ce988c9e49885d6b64b4d1c7c9c7c4b6a0e8763b7c6357889c4857d5cfa03"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-0-roughness.webp",
+      "bytes": 2466,
+      "sha256": "3f1cb8ae6a0f0495eeab57168b9c4bd8c4b61d121f81a5e0420da7d801b80034"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-1-colour.webp",
+      "bytes": 56956,
+      "sha256": "e5724bfdbb8b689986b8e89be5d2a77c31dfda8e714602962ce3ff9e14161f10"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-1-normal.webp",
+      "bytes": 257370,
+      "sha256": "738d3696aaf30b66fbdcb98e39c5d21a0c8e80682e7728e45a7c0a622cd83731"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-1-roughness.webp",
+      "bytes": 3054,
+      "sha256": "1995dbbd6cd2b52fad2c8a44ad0dbdb36dd7b6cffc98a01ef1bfe02b8c0df8fa"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-2-colour.webp",
+      "bytes": 52126,
+      "sha256": "ce4692d67877ca23bae1b306b07f5b3da20023ed4d355e1e280b0c194c8264d9"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-2-normal.webp",
+      "bytes": 250770,
+      "sha256": "5d119d818ee51d4b1531aa1b7c9bd4fdd3ab85e8bc29c1c18ac6e6a4f7f26958"
+    },
+    {
+      "path": "public/ground-materials/v04/low/2-2-roughness.webp",
+      "bytes": 1640,
+      "sha256": "fae8c2595e7cc0ddc25d4630a7bbf5748aaa9f624fa28570ac7984fae20c51e9"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-0-colour.webp",
+      "bytes": 32898,
+      "sha256": "bacafbc6ae8984470f8885aca30811c165198ba2db54ea98126c6c41f040f90a"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-0-normal.webp",
+      "bytes": 310750,
+      "sha256": "494b05ff44a58d97be44054754813b5ea17d32f42392ea64be97725304cb3e92"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-0-roughness.webp",
+      "bytes": 1736,
+      "sha256": "4a654062cc2eddd68690256ea74f67515d2353fb6d2985421ec33c03966df59d"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-1-colour.webp",
+      "bytes": 51192,
+      "sha256": "b5a02ed23419f4c5ff718657aeb7e37a2afa4604e49141c892bc3fa8cde74c79"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-1-normal.webp",
+      "bytes": 250848,
+      "sha256": "787d237822f11e91f518f7be70640580c39ed59caadede7941a69b8824de8fd4"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-1-roughness.webp",
+      "bytes": 1646,
+      "sha256": "1f8711f0f760a1b55335c15e891091e9df1dfae4c32b07e74958b3276522caab"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-2-colour.webp",
+      "bytes": 50932,
+      "sha256": "083d8a2379ff9b26392c1fab9202a7133bde1136c3bc7a8a4a2a602238687eac"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-2-normal.webp",
+      "bytes": 250060,
+      "sha256": "455cc7356e075c60b3506c478c74dece66ef5273372728cc0d450f468484f56f"
+    },
+    {
+      "path": "public/ground-materials/v04/low/3-2-roughness.webp",
+      "bytes": 1602,
+      "sha256": "0edf118ce46b471c3b4f76ae4c860fe75f80b1a48d01d4d712d4ebd86670b4ad"
+    },
+    {
+      "path": "public/ground-materials/v04/manifest.json",
+      "bytes": 39117,
+      "sha256": "828cfb5049e4588f7fd0ebc355a3309198105894574491a3a5e037816b88068c"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-0-colour.webp",
+      "bytes": 181154,
+      "sha256": "bb6dec4452c2040db67465aa2ce3f53fee40ddd61ea5fbaec40f0a702bd68214"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-0-normal.webp",
+      "bytes": 1492854,
+      "sha256": "da0dffc4995be89f4d42d3614e08e1d4b4e9f81004bfe9d93bc786ffc99a89e2"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-0-roughness.webp",
+      "bytes": 8590,
+      "sha256": "068088709f23901c8cae00236fbe698e1dfe5c58e84e9e7faacd63582684ed12"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-1-colour.webp",
+      "bytes": 269120,
+      "sha256": "4f9e324bf0500e147e3e7386ae1e4c0634907d689d87ffa2e0f8cc88e9431e35"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-1-normal.webp",
+      "bytes": 1228302,
+      "sha256": "43d9ad0576850979d66e7dcc3f360438128fd0d1b9121aab191597cfa66a769d"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-1-roughness.webp",
+      "bytes": 9044,
+      "sha256": "dff74efa2b337265bf7cfb134d46ca0548fb43ac38b09befa145e0b9ce9c01d8"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-2-colour.webp",
+      "bytes": 276404,
+      "sha256": "4965f29214ea09352c69cc3773289aa5393cca035d010aceb6e0f316f9c73b4c"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-2-normal.webp",
+      "bytes": 1219836,
+      "sha256": "d356767372a981d3f7e24946037fc0d5611b32e1bb6a5d8f7b124400ac186064"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/0-2-roughness.webp",
+      "bytes": 9310,
+      "sha256": "5258628f5d4eed9c94f8ab01125eb951e4ed98a8762c4fbd84991dccb7e6fc90"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-0-colour.webp",
+      "bytes": 200866,
+      "sha256": "5201944fbea5ab4b1ab0aa9bf05a9e0b5d66dee6c7fdf7d424a64707db35500f"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-0-normal.webp",
+      "bytes": 1476038,
+      "sha256": "55ac768763c7ea7ca84959eabcd7c832e9b25d95a3d30712784a4d43581ef354"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-0-roughness.webp",
+      "bytes": 8560,
+      "sha256": "e5a33e3866bbce14477e4462b0ae208a200d3b1b7dc755950b4ab9c167e1f654"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-1-colour.webp",
+      "bytes": 290274,
+      "sha256": "0620ffe9b3fcc62fd16b8a6d12816331267376c669997cc6439f0b3e6dc4f104"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-1-normal.webp",
+      "bytes": 1314164,
+      "sha256": "b2a4832f42755f5963517139585a56616eca40bd24d2e613a37ead353342484c"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-1-roughness.webp",
+      "bytes": 11434,
+      "sha256": "a9fed943b585fa77cec3252bf242f132c6f0cd1c93d9c8ee79bfecb54d6d0ee8"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-2-colour.webp",
+      "bytes": 271040,
+      "sha256": "6641f4faa32e2643e6023626543f62860b458352538736240259445b00ef2501"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-2-normal.webp",
+      "bytes": 1225678,
+      "sha256": "af4e5b225e4f8d10369534ee3922c7ee4736d10ad827579850498a026103544e"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/1-2-roughness.webp",
+      "bytes": 9088,
+      "sha256": "b74e3e645aaee6049f685e7c38acb51f06e7c19fb84d3ee96d092549bc0a6a68"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-0-colour.webp",
+      "bytes": 187386,
+      "sha256": "024fa6694440f3dae3df0bf9f03b582a3be40f5c395f9e66d4af761711c58f3c"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-0-normal.webp",
+      "bytes": 1489116,
+      "sha256": "71cf843b7fc0aa065d4370385ac83ab40392a976233f9203fc324f84998759e4"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-0-roughness.webp",
+      "bytes": 7810,
+      "sha256": "a32503ada8bb9d99ce4ab86b17c4b1a332dc03f14cc18016e3d67c28a9f5fbed"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-1-colour.webp",
+      "bytes": 288164,
+      "sha256": "abb3bb9a6b1924b24b6bcff08b0654e41ab898526a2151022c5bc745d9daf9a5"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-1-normal.webp",
+      "bytes": 1244876,
+      "sha256": "ef9b96b513a484d45ac811b70e218f61d0233fdb69615ec158a23bdbb1d1cba7"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-1-roughness.webp",
+      "bytes": 9948,
+      "sha256": "a8e2b5cddcb2e019818a6d8ca8f1e317df7447683238ba6a0c33ab0ed041bbad"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-2-colour.webp",
+      "bytes": 273410,
+      "sha256": "b5d361e576f019151f82f5a93fcbc982d007c72015636546be8515db29c212cd"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-2-normal.webp",
+      "bytes": 1223116,
+      "sha256": "520329d9094ce112f5505ee41e61ca1dd11cd0345ddd9f946e95fc2a52da32ff"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/2-2-roughness.webp",
+      "bytes": 9226,
+      "sha256": "ffe13be00eda5cddd4ad60ee79f1af8760fc2eca88fa61be00f85035d5a8345d"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-0-colour.webp",
+      "bytes": 182258,
+      "sha256": "2c8547cbc5d813f7591c2ebc82699bb8ae014afb221254fcb65c33da6f1611fa"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-0-normal.webp",
+      "bytes": 1432818,
+      "sha256": "fad182b4ece561a64d027eb93163b2e417f785cdf70510f4b78d365dc9a0673e"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-0-roughness.webp",
+      "bytes": 8502,
+      "sha256": "22a1c3f3de8b4c6b864777aef9eacaab1823b26e022a85cd69b6537eec803827"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-1-colour.webp",
+      "bytes": 267508,
+      "sha256": "f9be7c320fbde86d4884ac1cf69cd2521ce5b8257b6d543164566f0c1d381c54"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-1-normal.webp",
+      "bytes": 1221694,
+      "sha256": "247061ccf3837538fb1cb8957f28e378d960e17979d7b33087ed64ba3fb5e082"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-1-roughness.webp",
+      "bytes": 9202,
+      "sha256": "fe78174d9ae8a7fb9aa8f9129a655827ef0e3762dc6cd176d6b1e45982ce073c"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-2-colour.webp",
+      "bytes": 277208,
+      "sha256": "920ab472bbc5f822d00c6623050b2b2f835f88cb7ba1708d534dad3be8c3c6cf"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-2-normal.webp",
+      "bytes": 1220836,
+      "sha256": "5db46b66ab11912aed4086ecc745e671dbc720cb5d0c0cac8032b026b2208649"
+    },
+    {
+      "path": "public/ground-materials/v04/standard/3-2-roughness.webp",
+      "bytes": 9256,
+      "sha256": "ac294907bdbf81678df3ccfe46de1cb07b30600dc2b81fcc95a8420311568973"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/grass_path_2-colour.webp",
+      "bytes": 7376,
+      "sha256": "333de7f9e184b6ef0f0ab4f657ed28ccb41dc15f9cfc12fa66c80179d9c827ed"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/grass_path_2-roughness.webp",
+      "bytes": 2698,
+      "sha256": "6cd26cb5e5ee4062337e09c4b149c7158685cc25d4ec79bd8e8be55e5477d32e"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/Ground037-colour.webp",
+      "bytes": 5856,
+      "sha256": "2e65b5ef268b069fd8e74a49284a4fe854763b41da8e9cbc1d31d984a0938952"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/Ground037-roughness.webp",
+      "bytes": 4876,
+      "sha256": "4a20944140f2ded83f16af0cbaf0e3f9939119c2ef5ccbfa39847bd21d5c8e86"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/Ground054-colour.webp",
+      "bytes": 1806,
+      "sha256": "158d30336f75d465f342c371121ebd59b6884c6acdf4639e326c0f1d296f3d9b"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/Ground054-roughness.webp",
+      "bytes": 3096,
+      "sha256": "568850b2221dd6d92c9f97851ea4c05603cd89d653c2ae9247517cd85e6416f1"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/mossy_rock-colour.webp",
+      "bytes": 8090,
+      "sha256": "55f40ed9d1cfd9c68306ad779f1d74359248756538f37a9288cdbd13bb5415cd"
+    },
+    {
+      "path": "public/ground-materials/world-v01/low/mossy_rock-roughness.webp",
+      "bytes": 6002,
+      "sha256": "7582a64444bf214105c4f8d49e25ffcbeb0f3308df83a9139562facd6534bd39"
+    },
+    {
+      "path": "public/ground-materials/world-v01/manifest.json",
+      "bytes": 11766,
+      "sha256": "234e081b0bfe7b3d6a857bbf474b8dfb1fac27a26553dc78d0c037cd25d2703c"
+    },
+    {
+      "path": "public/ground-materials/world-v01/sand-standard-512/Ground054-colour.webp",
+      "bytes": 69866,
+      "sha256": "9084ce8c8163a7d17043f02fffa91cf69703837238fc9dd6ed06d76562912c54"
+    },
+    {
+      "path": "public/ground-materials/world-v01/sand-standard-512/Ground054-normal.webp",
+      "bytes": 472050,
+      "sha256": "888036bb081d76e1fb2e4268bc2b14b2e5d95eb409aacaeffda411b1d43a12ed"
+    },
+    {
+      "path": "public/ground-materials/world-v01/sand-standard-512/Ground054-roughness.webp",
+      "bytes": 69080,
+      "sha256": "41f6cdef6fe73a66bcb80c27062fb46857cee6ca874f9f82f68f5ba3f12983cf"
+    },
+    {
+      "path": "public/ground-materials/world-v01/sand-standard-512/manifest.json",
+      "bytes": 3248,
+      "sha256": "a9f758f652ed9a4b128d10e115ab46cd645e819e06d9b7bc4d09b24731e0f25b"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/grass_path_2-colour.webp",
+      "bytes": 31644,
+      "sha256": "5bdac7448b90166f7c34f721b83d64465ce6008653006e8274d52d44e9ee07f2"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/grass_path_2-normal.webp",
+      "bytes": 129908,
+      "sha256": "51c1f36222b2f0b3aa3edb3596be093087309eaabea66e64a1353c1290799abb"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/grass_path_2-roughness.webp",
+      "bytes": 10660,
+      "sha256": "1d73e1c484192b08d6541bedbeb618884d72627a94ef562dd6309e743fde2a1b"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/Ground037-colour.webp",
+      "bytes": 30010,
+      "sha256": "1615234012ab5f67a43fc493b2245a022ad0d54327ee34bb8aaca14ac6ee1b27"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/Ground037-normal.webp",
+      "bytes": 128060,
+      "sha256": "4320bd8159a2b5396819a2f91ad9882a159e26e0235e54d971a5a9bbcb9b25ed"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/Ground037-roughness.webp",
+      "bytes": 19762,
+      "sha256": "6b88101f50dc49de24268c97a3424213a3741110b47457f31062604813fbc2c4"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/Ground054-colour.webp",
+      "bytes": 11184,
+      "sha256": "e538bb9a910fdcc7e277416aa6b1f128930c34ff580218f1aad1802494862f69"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/Ground054-normal.webp",
+      "bytes": 118080,
+      "sha256": "6aa539e70b0cecfcae21129eaff260f7e0ab0779c8b86a67eaba98954357543b"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/Ground054-roughness.webp",
+      "bytes": 14106,
+      "sha256": "6e0d1e269274f328ef9bad3ed5f61f01b480847ed03005ff6600eee16823960a"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/mossy_rock-colour.webp",
+      "bytes": 31790,
+      "sha256": "9cf3af9132c2f807ad37eb8d45f2b75b95445cd6af4668fcae97ee8e599ea27d"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/mossy_rock-normal.webp",
+      "bytes": 111928,
+      "sha256": "42bea26c10079d2b56967ea541f256fbf23041b51ff073270f129a8181542f6d"
+    },
+    {
+      "path": "public/ground-materials/world-v01/standard/mossy_rock-roughness.webp",
+      "bytes": 23400,
+      "sha256": "762b9c5ba73276a517409c400a64e08fc4651adb02d1487988c103c1f9524357"
+    },
+    {
+      "path": "public/appearance/beards/braid/Beard_braid_LOD0.glb",
+      "bytes": 121400,
+      "sha256": "d597c85d352a06b39235cbd87ec07d44dd32ad37602b5dbf89917e9fb15d8571"
+    },
+    {
+      "path": "public/appearance/beards/braid/Beard_braid_LOD0.provenance.json",
+      "bytes": 25589,
+      "sha256": "79bcd736eb5e8bdb97dcdbb0afa5e926802af208d86698fc25a8aff46d3212e2"
+    },
+    {
+      "path": "public/appearance/beards/braid/Beard_braid_LOD1.glb",
+      "bytes": 121400,
+      "sha256": "b208d71746adc3c0ff580b8d10f92fda924e6e710c410293271399b8faf51502"
+    },
+    {
+      "path": "public/appearance/beards/braid/Beard_braid_LOD1.provenance.json",
+      "bytes": 25589,
+      "sha256": "2f6f0a30421cb8d5523f82e1bf31c8e3f4d68de520f0513a49217d6a3e4ebe04"
+    },
+    {
+      "path": "public/appearance/beards/braid/Beard_braid_LOD2.glb",
+      "bytes": 121400,
+      "sha256": "b4d6bdbe230b3c9f7455aa2db0738a4a4802f6d9200ba287ca5d9322eb0ea9ce"
+    },
+    {
+      "path": "public/appearance/beards/braid/Beard_braid_LOD2.provenance.json",
+      "bytes": 25590,
+      "sha256": "a660da9dce144716429a44df6c4da619ec31651bbf9193c22360763a5a9fbaae"
+    },
+    {
+      "path": "public/appearance/beards/long/Beard_long_LOD2.glb",
+      "bytes": 117964,
+      "sha256": "e6380a143e7325ed064b762fedb788a5512d202938bfc3dda7321f2073fa7c46"
+    },
+    {
+      "path": "public/appearance/beards/long/Beard_long_LOD2.provenance.json",
+      "bytes": 24305,
+      "sha256": "360aac9a90ada4ed924f4c72039548d8433b4ddfb2100f5ca4565314a8e811f1"
+    },
+    {
+      "path": "public/appearance/beards/medium/Beard_medium_LOD2.glb",
+      "bytes": 117964,
+      "sha256": "9ee762b232bf9e15a764b6bf2618511c7fecb9b4060ccaf8e4383e502466c657"
+    },
+    {
+      "path": "public/appearance/beards/medium/Beard_medium_LOD2.provenance.json",
+      "bytes": 24778,
+      "sha256": "17aac0d287ff58bee6f2ed31a5430a0e62f6e99c30369724cffe4ea5b2199069"
+    },
+    {
+      "path": "public/appearance/beards/short/Beard_short_LOD2.glb",
+      "bytes": 118124,
+      "sha256": "226a11f9898b8228ed10dc2e4cda536a1a55ca04899412f1c07e9128cf1d7bc3"
+    },
+    {
+      "path": "public/appearance/beards/short/Beard_short_LOD2.provenance.json",
+      "bytes": 24356,
+      "sha256": "bc1fb1d9c1d54c71ead2c721bc5655c0b40b08078da2a4262bc9a728792ebd58"
+    },
+    {
+      "path": "public/appearance/beards/split-braid/Beard_split-braid_LOD2.glb",
+      "bytes": 114856,
+      "sha256": "dbb68b8e3767e634fa621ced353960229640f64d1ce7d468b82987b85fa067fc"
+    },
+    {
+      "path": "public/appearance/beards/split-braid/Beard_split-braid_LOD2.provenance.json",
+      "bytes": 24980,
+      "sha256": "f30c1e32f1e48e365be310be6adcf66007f018c9f3aaf1e4279bfe4831f80af8"
+    },
+    {
+      "path": "public/appearance/beards/stubble/Beard_stubble_LOD2.glb",
+      "bytes": 85928,
+      "sha256": "08714ac62c7ae4c18130628c03641859ee81e48a71a934029fb3e809450a7da5"
+    },
+    {
+      "path": "public/appearance/beards/stubble/Beard_stubble_LOD2.provenance.json",
+      "bytes": 190321,
+      "sha256": "6be41fad49ef56b21d672260d443979d8614ad4e937a0e3f8ca1112a7d133b26"
+    },
+    {
+      "path": "public/appearance/braid/Hair_braid_LOD0.glb",
+      "bytes": 273364,
+      "sha256": "ce4d68d17a8c468c3ec9b149b821cc6900857ce3e80457a084c4bf021bfd3de3"
+    },
+    {
+      "path": "public/appearance/braid/Hair_braid_LOD0.provenance.json",
+      "bytes": 35705,
+      "sha256": "4599c1fff44584d2fa757355a936921fa3a82ce21d6d8cef724f3e033ac20f41"
+    },
+    {
+      "path": "public/appearance/braid/Hair_braid_LOD1.glb",
+      "bytes": 273364,
+      "sha256": "1fe4ee2ac30ba34929b93553c0ce9566209b233ec2702d2e5f393bd2ff35d3c9"
+    },
+    {
+      "path": "public/appearance/braid/Hair_braid_LOD1.provenance.json",
+      "bytes": 35705,
+      "sha256": "4e4fdb4507e9e31d1f06dea3a5376f763a93315a56b8fe1173c43fa07c46fc4e"
+    },
+    {
+      "path": "public/appearance/braid/Hair_braid_LOD2.glb",
+      "bytes": 273364,
+      "sha256": "ae921bb86772a0ec6827e3961ef68a1a401c80909c942148f019f303784a9d39"
+    },
+    {
+      "path": "public/appearance/braid/Hair_braid_LOD2.provenance.json",
+      "bytes": 36278,
+      "sha256": "d8f114091ce8e8b9b68aab59091fe1e578a3212a1f0caaf7df3f88a49cad0934"
+    },
+    {
+      "path": "public/appearance/bun/Hair_bun_LOD0.glb",
+      "bytes": 67688,
+      "sha256": "6cff53fdad67fdcd3a77c2b350e613ec17775e5faec76f67bb7823edb0d66f8b"
+    },
+    {
+      "path": "public/appearance/bun/Hair_bun_LOD0.provenance.json",
+      "bytes": 16760,
+      "sha256": "c2b30a59da9f1faaff683d94c4cc2777e755bef563db73f74a45218f88c6dc88"
+    },
+    {
+      "path": "public/appearance/bun/Hair_bun_LOD1.glb",
+      "bytes": 67688,
+      "sha256": "7ec063e4fe69a089c2cb772eb468992942dc18e74cbaccd5694826a458a99bd2"
+    },
+    {
+      "path": "public/appearance/bun/Hair_bun_LOD1.provenance.json",
+      "bytes": 16760,
+      "sha256": "aa122734c692cccabdfc7584b77616217030bd39d115d81a5f7d1ff811f77865"
+    },
+    {
+      "path": "public/appearance/bun/Hair_bun_LOD2.glb",
+      "bytes": 67692,
+      "sha256": "c47491e6446f70908fb85273a4fbe37389765626512212941eefb5eb79e95acd"
+    },
+    {
+      "path": "public/appearance/bun/Hair_bun_LOD2.provenance.json",
+      "bytes": 17333,
+      "sha256": "47f406801cf8efe41c35ac182f44630e8a8a2ded06f1901a034612b1080e097e"
+    },
+    {
+      "path": "public/appearance/long/Hair_long_LOD0.glb",
+      "bytes": 219524,
+      "sha256": "d1f3b20003da5cbe70d95138e818f3f1d42148ffc85ee09836794b821fe612d1"
+    },
+    {
+      "path": "public/appearance/long/Hair_long_LOD0.provenance.json",
+      "bytes": 36503,
+      "sha256": "6fcdf302b6a8138acc7b556ef8d3d7e7d9875ea34066999ffe640f23c6ae2dd8"
+    },
+    {
+      "path": "public/appearance/long/Hair_long_LOD1.glb",
+      "bytes": 219524,
+      "sha256": "d5bbf0f1b70f8d796ac111c194057af1a369d07e47b6adc78405928cffe77cc6"
+    },
+    {
+      "path": "public/appearance/long/Hair_long_LOD1.provenance.json",
+      "bytes": 36503,
+      "sha256": "f7ca1e7f486394d7774e12a2ce7ab712a638f11375a462023940227f0857b63a"
+    },
+    {
+      "path": "public/appearance/long/Hair_long_LOD2.glb",
+      "bytes": 219524,
+      "sha256": "bf764d2ee6a20df9c6b1f14e3df95215c229b9b5c1d2b0d6ca57baf4d38ccbe4"
+    },
+    {
+      "path": "public/appearance/long/Hair_long_LOD2.provenance.json",
+      "bytes": 37076,
+      "sha256": "74040e770152c1e7afb8751e8f71c1bc993e01bf06edded1762a742402c9a89a"
+    },
+    {
+      "path": "public/appearance/medium/Hair_medium_LOD0.glb",
+      "bytes": 68748,
+      "sha256": "21fc719d7f2e422427e6a10af1ab4e52e23aa005bab867f4ee61b56dc7455963"
+    },
+    {
+      "path": "public/appearance/medium/Hair_medium_LOD0.provenance.json",
+      "bytes": 14303,
+      "sha256": "60c650754ec6e1d146cde9f77b7399ce53dc81fabe30f1ea69e9a82dec932354"
+    },
+    {
+      "path": "public/appearance/medium/Hair_medium_LOD1.glb",
+      "bytes": 68748,
+      "sha256": "37f6f207af3545dee3b0a447ad4044d7e1c940632585863fa1d1ffb1a18d75c5"
+    },
+    {
+      "path": "public/appearance/medium/Hair_medium_LOD1.provenance.json",
+      "bytes": 14303,
+      "sha256": "ecfd8c6925403400ed48b71725f687ff3710b618507009d01a10ba624c9cb05d"
+    },
+    {
+      "path": "public/appearance/medium/Hair_medium_LOD2.glb",
+      "bytes": 68748,
+      "sha256": "a9bef6a69d362677e9d32a62ad76e73c98708af0adc4704487df23f01deb423a"
+    },
+    {
+      "path": "public/appearance/medium/Hair_medium_LOD2.provenance.json",
+      "bytes": 14876,
+      "sha256": "0612c1d7ee4b8a4d5550758efb4359cc6adc5a6b2f87fc0204006a9248a86a78"
+    },
+    {
+      "path": "public/appearance/short/Hair_short_LOD0.glb",
+      "bytes": 137472,
+      "sha256": "c2f5446acc30e2e1d2eeda0a11b874ac9ea14853c511f19476615a4e90da9cfd"
+    },
+    {
+      "path": "public/appearance/short/Hair_short_LOD0.provenance.json",
+      "bytes": 18041,
+      "sha256": "c5ee322aaa10deb1cc003a3696812386daf0a31a50ff43e69f67de75cb510484"
+    },
+    {
+      "path": "public/appearance/short/Hair_short_LOD1.glb",
+      "bytes": 137472,
+      "sha256": "f9a517851537ffae6b3e93eefc2928c58aed204db681cd3a0da66dcb8b4b7078"
+    },
+    {
+      "path": "public/appearance/short/Hair_short_LOD1.provenance.json",
+      "bytes": 18041,
+      "sha256": "4c8d66f6c65ed531ccab332df43e89c8477480d568f15ad2fc8241e411405414"
+    },
+    {
+      "path": "public/appearance/short/Hair_short_LOD2.glb",
+      "bytes": 137472,
+      "sha256": "cbde631ced7ed2f0df2ff0f7a3bbd221432b257ed085074a8402b5367e7f845b"
+    },
+    {
+      "path": "public/appearance/short/Hair_short_LOD2.provenance.json",
+      "bytes": 18614,
+      "sha256": "c0883fb07584a2327657f273449dcfb8771c6406d51bc7aebfcb897c38f10b86"
+    },
+    {
+      "path": "public/appearance/tied/Hair_tied_LOD0.glb",
+      "bytes": 217304,
+      "sha256": "febc9aae2de144a6e8471e852a08b2d1e82a3e47680c82d70356b241c54f4d0c"
+    },
+    {
+      "path": "public/appearance/tied/Hair_tied_LOD0.provenance.json",
+      "bytes": 33586,
+      "sha256": "3372cbab130992395c0ce81090b7ad33499426f04c0774ee8efa13fd7ae9a116"
+    },
+    {
+      "path": "public/appearance/tied/Hair_tied_LOD1.glb",
+      "bytes": 217304,
+      "sha256": "cc43319a2566a4bad37f37ddf2a1db96f7676ed05da332b86434c36a92ca37e5"
+    },
+    {
+      "path": "public/appearance/tied/Hair_tied_LOD1.provenance.json",
+      "bytes": 33586,
+      "sha256": "cca871e948f93792544d20ca3e4d67de8fca0d71854b87ad75875dc910e85897"
+    },
+    {
+      "path": "public/appearance/tied/Hair_tied_LOD2.glb",
+      "bytes": 217304,
+      "sha256": "d4c191df7d9d1b6fac229ed4e559c77d67b862353fc5b673fda70c61e1522364"
+    },
+    {
+      "path": "public/appearance/tied/Hair_tied_LOD2.provenance.json",
+      "bytes": 34159,
+      "sha256": "791372f531448e40abba00787071921f9733388f962be3ff4439007e2ca37537"
+    },
+    {
+      "path": "public/nature/ez-tree-pilot/manifest.json",
+      "bytes": 12353,
+      "sha256": "10acc05550007ae121221627c0436e4c36e5131ba33c11acb9c8a86b5e357dd3"
+    },
+    {
+      "path": "public/nature/ez-tree-pilot/texture-00e12de668fe6669.png",
+      "bytes": 3188072,
+      "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+    },
+    {
+      "path": "public/nature/ez-tree-pilot/texture-614ef034a298fef1.png",
+      "bytes": 2421052,
+      "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+    },
+    {
+      "path": "public/nature/ez-tree-pilot/texture-713a5cc87d11921a.png",
+      "bytes": 982844,
+      "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+    },
+    {
+      "path": "public/nature/ez-tree-pilot/texture-be24b5c0a3104eba.png",
+      "bytes": 1215172,
+      "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+    },
+    {
+      "path": "public/nature/kaykit-v1/forest_texture.png",
+      "bytes": 48679,
+      "sha256": "406c01e0ac1d3368fc7b26ff5fb0d3335ba5e48bd19a703540ed92ee3971ea39"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-boulder-a.glb",
+      "bytes": 56756,
+      "sha256": "7c1a45ba1ccbdfd3af7cbf76fa40cfd7825add355eb138e61e8ac6e2ec0cf8c4"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-boulder-b.glb",
+      "bytes": 56400,
+      "sha256": "ab5cc660e9fee3dff2c5f93d13ee4d4f79a63991c06fbe7656a7c99ab594cce6"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-bush-a.glb",
+      "bytes": 78040,
+      "sha256": "8a16e214d26fa77daa7633589c4b16730a05faeba1c48e7e2c382eac9367374a"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-bush-b.glb",
+      "bytes": 58388,
+      "sha256": "65522d3e8d44efe36bcbc61e427fe8be6662c9ac6f53ba3b3765f7aa73eacff2"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-conifer-a.glb",
+      "bytes": 81200,
+      "sha256": "09d02fb073a838eb1ef4086ea2bd2125a46977ae01eebc3f5fe31bae30b35534"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-conifer-b.glb",
+      "bytes": 66152,
+      "sha256": "1e882ae5eb32bf214711ba3b05c14e5393a443ca61ceef6ed799dbbbe592b330"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-conifer-c.glb",
+      "bytes": 62624,
+      "sha256": "3aa49ac7bf393cbc6eaed75fdb119b5f8fd22644a1274cf3ac1c99d8f1b74c11"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-deciduous-a.glb",
+      "bytes": 69068,
+      "sha256": "932e6bd20b791b7e9f52cadeb22e0434f1ada4e13ceab120a4977bb6e73d7a5c"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-grass-cluster-a.glb",
+      "bytes": 74732,
+      "sha256": "7e9a2d63dc2ac96954f1dc7ad77846bfbbdfb9016eadc373665e361a80680119"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-grass-cluster-b.glb",
+      "bytes": 74732,
+      "sha256": "e136d579d58fab636ed479180e5cc65c74ec965c54be18775177c4e95b3f8c70"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-rock-cluster-a.glb",
+      "bytes": 60760,
+      "sha256": "d8335b3a4cd2e2a3c5c0ea7f532c4ee15ce9b4f4026f8ad235ed1ccb2e9b1e8d"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-rock-cluster-b.glb",
+      "bytes": 80084,
+      "sha256": "236f953d913aa04a6f80822a970b2264b31c159b132013189af1205b811f1e3f"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-rock-small-a.glb",
+      "bytes": 54492,
+      "sha256": "15aaf57d60ddb2573fac07f77bb8713a40aaef8937839ee357b62de133d790b7"
+    },
+    {
+      "path": "public/nature/kaykit-v1/kaykit-rock-small-b.glb",
+      "bytes": 54624,
+      "sha256": "25817848542a5a807952965415dedce46030beb8f95e7ef4457347662ecf078c"
+    },
+    {
+      "path": "public/nature/kaykit-v1/manifest.json",
+      "bytes": 19095,
+      "sha256": "31b7803c9eeb855693749e55f83bb23629844d77f90e6a742f885f735231ab53"
+    },
+    {
+      "path": "public/lighting/lonely-road/source-lock.json",
+      "bytes": 1099,
+      "sha256": "ebb4160eabdc14de74dc3ed31349936ad1818f9920d0ecfc5a55d687de3d7b0b"
+    }
+  ]
+}
