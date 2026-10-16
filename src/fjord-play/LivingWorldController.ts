@@ -2,7 +2,7 @@ import { WaypointQueue } from './WaypointQueue';
 import { cattleVariants } from '../characters/CattlePresentation';
 import { passConversation, passNeighbours } from '../systems/ResidentPassing';
 import { SocialEncounters, residentMovementConfig, turnToward } from '../systems/SocialEncounters';
-import { settlementCampfire } from './SettlementCampfire';
+import { settlementCampfire, type SettlementCampfire } from './SettlementCampfire';
 import type { FjordEntity } from './FjordProjection';
 import type { FjordGround } from './FjordGround';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -75,9 +75,10 @@ export class LivingWorldController {
     private nature: WorldBlueprint['placementPlan'] = [];
     private natureCells = new Map<string, Array<WorldBlueprint['placementPlan'][number]>>();
     private ground: FjordGround = { plots: [], paths: [] };
-    constructor(private world: WorldBlueprint, private mapped?: (x: number, z: number) => boolean) {
+    constructor(private world: WorldBlueprint, private mapped?: (x: number, z: number) => boolean,
+        campfire: SettlementCampfire = settlementCampfire(world)) {
         this.surface = createBlueprintSurface(world);
-        this.campfire = settlementCampfire(world);
+        this.campfire = campfire;
     }
     reconcile(entities: readonly FjordEntity[], ground: FjordGround) {
         const navigationSignature = JSON.stringify([entities.map(entity => [entity.selectionKey,

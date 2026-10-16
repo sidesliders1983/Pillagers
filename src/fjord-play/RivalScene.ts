@@ -1,0 +1,48 @@
+import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
+import { discoveryAt, type DiscoveryView } from '../simulation/ClanDiscovery';
+import type { ObservedRivalSettlement } from './RivalSettlement';
+import { FjordEntities } from './FjordEntities';
+import type { FjordModels } from './FjordModels';
+import { LivingWorldController } from './LivingWorldController';
+
+/** Only sanitized observed actors reach the existing asset/motion pipeline. This class never ticks Core. */
+export class RivalScene {
+    private layer: FjordEntities;
+    private motion?: LivingWorldController;
+    private disposed = false;
+    constructor(private world: WorldBlueprint, models: FjordModels, private knowledge: () => DiscoveryView | undefined) {
+        this.layer = new FjordEntities(models);
+    }
+    get root() { return this.layer.root; }
+    async sync(view: ObservedRivalSettlement, season: number,
+        trees: Parameters<LivingWorldController['setStandingTrees']>[0]) {
+        if (this.disposed) return;
+        this.layer.setSeason(season);
+        await this.layer.sync(view.entities);
+        if (this.disposed) return;
+        if (!this.motion && view.entities.length && view.campfire) {
+            const bounds = this.world.rivalSite!.bounds;
+            this.motion = new LivingWorldController(this.world, (x, z) => {
+                const knowledge = this.knowledge();
+                return Boolean(knowledge && discoveryAt(knowledge, x, z) === 'visible' &&
+                    x >= bounds.minX && x <= bounds.maxX && z >= bounds.minZ && z <= bounds.maxZ);
+            }, view.campfire);
+        }
+        if (this.motion) {
+            this.motion.reconcile(view.entities, view.ground);
+            this.motion.setStandingTrees(trees);
+            this.layer.configureMotion(this.motion);
+            this.layer.advance(this.motion, 0, false);
+        }
+    }
+    advance(delta: number, running: boolean) {
+        this.motion?.advance(delta, running, true);
+        if (this.motion) this.layer.advance(this.motion, delta, running);
+    }
+    describe() { return this.layer.describe(); }
+    dispose() {
+        this.disposed = true;
+        this.layer.dispose();
+        this.motion = undefined;
+    }
+}

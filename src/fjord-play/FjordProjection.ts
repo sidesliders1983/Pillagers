@@ -1,3 +1,4 @@
+import type { HumanProfile } from '../characters/UniversalHumanProfile';
 import { spatialMemberPosition } from '../simulation/SpatialExpeditions';
 import { campaignIslandPlan } from './CampaignIsland';
 import { settlementCampfire } from './SettlementCampfire';
@@ -9,7 +10,7 @@ import type { CharacterDNA } from '../characters/CharacterDNA';
 import { inspectWork, inspectCattle, inspectWeather, landingSummary, personaAge, personaAway, isProvidingCare } from '../simulation/SimulationCore';
 import type { SimulationState } from '../simulation/SimulationCore';
 import type { EntityKind } from '../play/SettlementView';
-import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
+import type { Bounds2, Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { fitsBuildingFoundation } from '../world/BuildingPlot';
 import { suitability } from '../world-generation/PlanSettlement';
@@ -27,6 +28,12 @@ export type FjordPlot = FjordTransform & {
     halfWidth: number;
     halfDepth: number;
 };
+export interface FjordSettlementSite {
+    id: string;
+    center: Point2;
+    bounds: Bounds2;
+    candidates: Point2[];
+}
 export interface FjordLayout {
     version: 'fjord-layout-v2';
     seed: number;
@@ -44,6 +51,7 @@ export interface FjordEntity {
     asset: string;
     terrainAsset?: string;
     dna?: CharacterDNA;
+    visualProfile?: HumanProfile;
     transform: FjordTransform | null;
     plot?: FjordPlot;
     status: {
@@ -111,17 +119,19 @@ function longshipBerth(anchor: FjordTransform): FjordTransform {
     };
 }
 
-export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot) {
+export function fjordPlotFits(world: WorldBlueprint, p: FjordPlot, site?: FjordSettlementSite) {
     const surface = createBlueprintSurface(world);
     const island = campaignIslandPlan(world);
-    if (island && !island.plots.some(q => q.x === p.x && q.z === p.z &&
+    if (island && !site && !island.plots.some(q => q.x === p.x && q.z === p.z &&
         q.halfWidth === p.halfWidth && q.halfDepth === p.halfDepth)) return false;
+    if (site && (p.x - p.halfWidth < site.bounds.minX || p.x + p.halfWidth > site.bounds.maxX ||
+        p.z - p.halfDepth < site.bounds.minZ || p.z + p.halfDepth > site.bounds.maxZ)) return false;
     return fitsBuildingFoundation(surface, p) &&
         Math.abs(p.y - surface.surfaceHeightAt(p.x, p.z)) < .000001;
 }
 /** Pure presentation: all gameplay facts come from canonical public inspection. */
-export function projectFjordSettlement(state: SimulationState, world: WorldBlueprint, previous: FjordLayout) {
-    if ((!campaignIslandPlan(world) && state.seed !== world.config.seed) || previous.seed !== state.seed ||
+export function projectFjordSettlement(state: SimulationState, world: WorldBlueprint, previous: FjordLayout, site?: FjordSettlementSite) {
+    if ((!site && !campaignIslandPlan(world) && state.seed !== world.config.seed) || previous.seed !== state.seed ||
         previous.geographyId !== geographyIdentity(world) || previous.version !== 'fjord-layout-v2')
         throw new Error('Campaign, geography and presentation identities do not match.');
     const layout = structuredClone(previous);
@@ -157,9 +167,9 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const surface = createBlueprintSurface(world);
     const entities: FjordEntity[] = [];
     const diagnostics: string[] = [];
-    const campfire = settlementCampfire(world);
+    const campfire = settlementCampfire(world, site ? { id: site.id + ':campfire', center: site.center } : undefined);
     const center = campfire.transform;
-    let candidates = plotCandidates.get(world);
+    let candidates = site?.candidates ?? plotCandidates.get(world);
     if (!candidates) {
         candidates = campaignIslandPlan(world)?.plots.map(p => ({ x: p.x, z: p.z })) ?? [];
         // Four columns and three rows around the middle place fit the validated
@@ -175,10 +185,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             Math.hypot(b.x - center.x, b.z - center.z) || a.z - b.z || a.x - b.x);
         plotCandidates.set(world, candidates);
     }
-    const allocatePlot = (key: string): FjordPlot | undefined => {
-        if (layout.plots[key])
-            return layout.plots[key];
-        const halfWidth = 7.5, halfDepth = 7.5;
+    const allocatePlot = (key: string, halfSize = 7.5): FjordPlot | undefined => {
+        const stored = layout.plots[key];
+        if (stored && (!site || stored.halfWidth === halfSize && stored.halfDepth === halfSize))
+            return stored;
+        delete layout.plots[key];
+        const halfWidth = halfSize, halfDepth = halfSize;
         const found = candidates.find(p => Math.hypot(
             Math.max(0, Math.abs(p.x - center.x) - halfWidth),
             Math.max(0, Math.abs(p.z - center.z) - halfDepth)) >= campfire.clearingRadius &&
@@ -186,7 +198,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             Math.abs(p.z - q.z) > halfDepth + q.halfDepth + 1) &&
             Object.values(layout.points).every(q => Math.abs(p.x - q.x) > halfWidth + .8 || Math.abs(p.z - q.z) > halfDepth + .8) &&
             fjordPlotFits(world, { ...p, y: surface.surfaceHeightAt(p.x, p.z),
-                halfWidth, halfDepth, rotation: Math.PI, scale: 1 }));
+                halfWidth, halfDepth, rotation: Math.PI, scale: 1 }, site));
         if (!found) {
             diagnostics.push(key + ': no safe plot remains; identity retained without a 3D mesh. Gameplay is unchanged.');
             return undefined;
@@ -221,8 +233,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
                     x: preferred.x + Math.cos(angle * Math.PI / 4) * radius,
                     z: preferred.z + Math.sin(angle * Math.PI / 4) * radius
                 });
-        const bounds = world.settlement.bounds;
-        const point = options.find(p => (!campaignIslandPlan(world) ||
+        const bounds = site?.bounds ?? world.settlement.bounds;
+        const point = options.find(p => (!(site || campaignIslandPlan(world)) ||
             p.x >= bounds.minX + 1 && p.x <= bounds.maxX - 1 &&
             p.z >= bounds.minZ + 1 && p.z <= bounds.maxZ - 1) && permitted(p) &&
             Math.hypot(p.x - center.x, p.z - center.z) > campfire.obstacleRadius + 1 &&
@@ -245,11 +257,12 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
     const buildingPlots = new Map<string, FjordPlot>();
     for (const building of Object.values(state.buildings).sort((a, b) => a.id.localeCompare(b.id))) {
         const key = 'building:' + building.id;
-        const plot = allocatePlot(key);
-        if (plot)
-            buildingPlots.set(building.id, plot);
         const level = state.mechanics?.buildings[building.id]?.upgradeLevel ?? 0;
         const yard = yards.some(y => y.id === building.id);
+        const halfSize = site ? yard || level >= 2 ? 7.5 : level === 1 ? 6 : 3.5 : 7.5;
+        const plot = allocatePlot(key, halfSize);
+        if (plot)
+            buildingPlots.set(building.id, plot);
         let asset = ['hut', 'homestead', 'longhouse', 'greatHall'][Math.min(level, 3)];
         if (yard && level <= 1)
             asset = level === 0 ? 'farmHut' : 'farmHomestead';
@@ -278,7 +291,7 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             continue;
         const residence = home.residenceId ? state.residences[home.residenceId] : null;
         homePlots.set(home.id, residence?.buildingId ? buildingPlots.get(residence.buildingId) :
-            allocatePlot('household:' + home.id));
+            allocatePlot('household:' + home.id, site ? 3 : 7.5));
     }
     for (const home of homes) {
         if (!home.memberIds.some(id => state.personas[id]?.deathWinter === null))
@@ -337,11 +350,11 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
             { living: true, sex: c.sex, age: view.age, stage: view.stage, assignment: c.farmyardId,
                 sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds], grazingZone });
     }
-    for (const ship of Object.values(state.landing?.longships ?? {}))
+    for (const ship of site ? [] : Object.values(state.landing?.longships ?? {}))
         if (ship.salvagedWinter === null)
             add('longship', ship.id, 'Founding longship', 'longship', longshipBerth(layout.mooring), { living: true });
     for (const key of Object.keys(layout.points)) if (!usedPoints.has(key)) delete layout.points[key];
-    const ground = projectFjordGround(world, entities);
+    const ground = projectFjordGround(world, entities, campfire);
     if (ground.plots.length > 0 && ground.paths.length < ground.plots.length)
         diagnostics.push('Some permanent homes have no safe connecting path; no route across water or steep terrain is drawn.');
     const calendar = projectFjordCalendar(state.time, state.ticksPerWinter);

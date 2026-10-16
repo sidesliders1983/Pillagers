@@ -1,4 +1,4 @@
-import { settlementCampfire } from './SettlementCampfire';
+import { settlementCampfire, type SettlementCampfire } from './SettlementCampfire';
 import type { FjordEntity, FjordPlot } from './FjordProjection';
 import type { Point2, WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -20,16 +20,16 @@ const cached = new WeakMap<WorldBlueprint, {
 }>();
 /** Presentation paths use the authoritative terrain and the existing walking thresholds.
  * They never alter geography, navigation, household assignments or simulation rules. */
-export function projectFjordGround(world: WorldBlueprint, entities: readonly FjordEntity[]): FjordGround {
+export function projectFjordGround(world: WorldBlueprint, entities: readonly FjordEntity[],
+    campfire: SettlementCampfire = settlementCampfire(world)): FjordGround {
     const parcels = entities.filter(e => e.plot);
     const plots = parcels.filter(e => e.kind === 'building').map(e => ({ id: e.id, plot: e.plot! }));
-    const signature = JSON.stringify(parcels.map(e => [e.selectionKey, e.plot]));
+    const signature = JSON.stringify([campfire, parcels.map(e => [e.selectionKey, e.plot])]);
     const known = cached.get(world);
     if (known?.signature === signature)
         return structuredClone(known.ground);
     const ground: FjordGround = { plots, paths: [] };
     if (plots.length > 0) {
-        const campfire = settlementCampfire(world);
         const surface = createBlueprintSurface(world);
         const bounds = world.terrain.bounds;
         const columns = Math.floor(bounds.maxX - bounds.minX) + 1;

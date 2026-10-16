@@ -1,3 +1,4 @@
+import { RivalScene } from './RivalScene';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { ExpeditionPanel } from './ExpeditionPanel';
 import { intersectNavigationTerrain } from '../world/TerrainNavigation';
@@ -246,6 +247,7 @@ export class FjordPlay {
         let discoveryFog: DiscoveryFog | undefined;
         let knownTerrain: DiscoveryView | undefined;
         let motion: LivingWorldController | undefined;
+        let rivalScene: RivalScene | undefined;
         let liveMarkers: ReturnType<typeof this.shared.selectionPresentation> = [];
         let sceneEntities: readonly FjordEntity[] = [];
         let syncScene: (() => Promise<void>) | undefined;
@@ -645,6 +647,7 @@ export class FjordPlay {
             targetGeometry.dispose(); targetMaterial.dispose();
             reducedMotion.removeEventListener('change', configureEffects);
             discoveryFog?.dispose();
+            rivalScene?.dispose();
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
@@ -806,6 +809,9 @@ export class FjordPlay {
                 cleared.clear();
                 motion = new LivingWorldController(this.campaign.blueprint, discovery ?
                     (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
+                rivalScene?.dispose();
+                rivalScene = new RivalScene(blueprint, models!, () => knownTerrain);
+                scene.add(rivalScene.root);
                 groundSignature = "";
                 lighting?.dispose();
                 lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
@@ -868,17 +874,20 @@ export class FjordPlay {
                             exposure: renderer.toneMappingExposure
                         } });
                     }
-                    const grassPlots = view.entities.filter(e => e.kind === 'household' && e.plot).map(e => e.plot!);
-                    const signature = JSON.stringify([view.ground, grassPlots]);
+                    const observedEntities = [...view.entities, ...view.rival.entities];
+                    const observedGround = { plots: [...view.ground.plots, ...view.rival.ground.plots],
+                        paths: [...view.ground.paths, ...view.rival.ground.paths] };
+                    const grassPlots = observedEntities.filter(e => e.kind === 'household' && e.plot).map(e => e.plot!);
+                    const signature = JSON.stringify([observedGround, grassPlots]);
                     if (signature !== groundSignature) {
-                        const weights = fjordGroundWeights(this.campaign.blueprint, view.ground, grassPlots);
+                        const weights = fjordGroundWeights(this.campaign.blueprint, observedGround, grassPlots);
                         if (this.loading) {
                             await this.loading.measure('initial-ground-wear',
                                 () => world!.prepareGroundWeights(weights));
                         } else world!.setGroundWeights(weights);
-                        canvas.dataset.ground = JSON.stringify({ plots: view.ground.plots.map(p => p.id),
-                            paths: view.ground.paths, soilSamples: weights.filter(w => w > 0).length });
-                        for (const path of view.ground.paths)
+                        canvas.dataset.ground = JSON.stringify({ plots: observedGround.plots.map(p => p.id),
+                            paths: observedGround.paths, soilSamples: weights.filter(w => w > 0).length });
+                        for (const path of observedGround.paths)
                             for (const p of path.points)
                                 world!.clearPlot({ ...p, halfWidth: 1.5, halfDepth: 1.5, futureAsset: 'hut' });
                         groundSignature = signature;
@@ -888,7 +897,7 @@ export class FjordPlay {
                             world!.clearPlot({ ...plot, futureAsset: 'hut' });
                             cleared.add(id);
                         }
-                    for (const entity of view.entities)
+                    for (const entity of observedEntities)
                         if (entity.transform && !entity.status.expedition &&
                             (entity.kind === 'persona' || entity.kind === 'cattle')) {
                             const pointKey = entity.selectionKey + '@' + entity.transform.x + ',' + entity.transform.z;
@@ -897,6 +906,14 @@ export class FjordPlay {
                                 cleared.add(pointKey);
                             }
                         }
+                    for (const entity of view.rival.entities) {
+                        const p = entity.plot ?? (entity.kind === 'campfire' ? entity.transform : undefined);
+                        if (p && !cleared.has(entity.selectionKey)) {
+                            world!.clearPlot({ x: p.x, z: p.z, halfWidth: entity.plot?.halfWidth ?? 7,
+                                halfDepth: entity.plot?.halfDepth ?? 7, futureAsset: 'hut' });
+                            cleared.add(entity.selectionKey);
+                        }
+                    }
                     sceneEntities = view.entities;
                     layer!.prepareExpeditions(state, this.campaign.blueprint, campaignClockIntervalMs / 1000);
                     await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
@@ -915,6 +932,9 @@ export class FjordPlay {
                     motion!.setStandingTrees(trees);
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
+                    await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees);
+                    canvas.dataset.rival = JSON.stringify({ known: view.rival.known,
+                        currentlyObserved: view.rival.currentlyObserved, rendered: rivalScene?.describe() ?? [] });
                     if (this.stopped || this.shared.transferring)
                         return;
                     highlight(state, view);
@@ -998,6 +1018,7 @@ export class FjordPlay {
             if (running) activeTime += motionDelta;
             motion!.advance(motionDelta, running, !document.hidden);
             layer!.advance(motion!, motionDelta, running);
+            rivalScene?.advance(motionDelta, running);
             campfireEffect!.update(delta, running && !document.hidden);
             precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
             const fireVisual = campfireEffect!.inspect();
