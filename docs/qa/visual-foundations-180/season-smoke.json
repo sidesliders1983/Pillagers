@@ -1,0 +1,1679 @@
+{
+  "version": "fjord-golden-v1",
+  "sourceCommit": "c3027b4cd91ad355d89c1cc158f3993487af2503",
+  "diffSha256": "e19d395c000418dcd6b032b2e749b45277928bcf3a8c14929a55223aa69b8194",
+  "browser": "155.0.4283.45",
+  "viewport": {
+    "width": 1400,
+    "height": 900
+  },
+  "quality": "standard",
+  "reloads": 1,
+  "cases": [
+    {
+      "name": "summer-17",
+      "fixtureSha256": "f75303e98e3e0e2740ef7e394059f1a358507d128d3ead808c8a881c24653dde",
+      "loadedSha256": "a64bdf76ded2495d5710a002f5a5177b61f8319d9e8853c973cf4b36a7378a8e",
+      "captures": [
+        {
+          "canonicalSha256": "ee468d728bdc0bc644e5f1d4dc6938c2681e87ab38e0e8c7ee2b2bca407dcd84",
+          "blueprintSha256": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+          "stateSha256": "9ef5863c0fd70e81d72820194040511bd154232a0573815d1592af8eb2e2a152",
+          "pixelsSha256": "b6b02249425cdc2b14883d5dfe6d4e3a62dea05f64c6c812d88532b8c441801a",
+          "host": {
+            "render": {
+              "frame": 175,
+              "calls": 179,
+              "triangles": 7969915,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 80,
+              "textures": 57
+            },
+            "programs": 26,
+            "width": 1384,
+            "height": 752,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                2048,
+                2048
+              ]
+            ]
+          },
+          "state": {
+            "version": "fjord-golden-v1",
+            "servedSource": {
+              "ref": null,
+              "overrides": {}
+            },
+            "calendar": {
+              "season": "Summer",
+              "year": 800,
+              "progress": 0.5,
+              "visualProgress": 0.5,
+              "winterWeight": 0
+            },
+            "effectsTime": 0,
+            "actors": [
+              {
+                "id": "persona:founder-1",
+                "position": [
+                  155,
+                  3.3594307899475098,
+                  -120
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-2",
+                "position": [
+                  183,
+                  4.961004257202148,
+                  -144
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-8",
+                "position": [
+                  184.8,
+                  4.961004257202148,
+                  -144
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-3",
+                "position": [
+                  163,
+                  4.265697479248047,
+                  -98
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-10",
+                "position": [
+                  164.8,
+                  4.265697479248047,
+                  -98
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-4",
+                "position": [
+                  205,
+                  5.494503021240234,
+                  -138
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-5",
+                "position": [
+                  179,
+                  4.816851615905762,
+                  -166
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-6",
+                "position": [
+                  141,
+                  3.9407663345336914,
+                  -98
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-7",
+                "position": [
+                  159,
+                  4.664275646209717,
+                  -76
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-9",
+                "position": [
+                  119,
+                  3.9544601440429688,
+                  -96
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-1",
+                "position": [
+                  169,
+                  3.867154836654663,
+                  -139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-2",
+                "position": [
+                  171,
+                  4.374878883361816,
+                  -139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-3",
+                "position": [
+                  173,
+                  4.374878883361816,
+                  -140.5
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              }
+            ],
+            "camera": {
+              "position": [
+                204,
+                35.374878883361816,
+                -168
+              ],
+              "target": [
+                176,
+                5.374878883361816,
+                -136
+              ],
+              "fov": 45,
+              "aspect": 1.8393936247534004,
+              "projection": [
+                1.312505126626585,
+                0,
+                0,
+                0,
+                0,
+                2.4142135623730954,
+                0,
+                0,
+                0,
+                0,
+                -1.0000833368057,
+                -1,
+                0,
+                0,
+                -0.20000833368057003,
+                0
+              ]
+            },
+            "quality": "standard",
+            "effects": "off",
+            "lighting": {
+              "sun": [
+                1,
+                0.7454042095350284,
+                0.407240211891531
+              ],
+              "intensity": 2.0160000000000005,
+              "ambient": 2.067,
+              "fog": {
+                "near": 65,
+                "far": 155
+              },
+              "shadowMaps": [
+                [
+                  2048,
+                  2048
+                ]
+              ]
+            },
+            "renderer": {
+              "callsIncludingShadows": 179,
+              "trianglesIncludingShadows": 7969915,
+              "geometries": 80,
+              "textures": 57,
+              "pixelRatio": 1,
+              "width": 1384,
+              "height": 752
+            },
+            "placeholders": [],
+            "modelDiagnostics": []
+          },
+          "image": "summer-17-standard-0-world.png"
+        }
+      ]
+    },
+    {
+      "name": "snow-811",
+      "fixtureSha256": "1ad9d7a7f2ad8f56a4fb8e3708fe98e83e63a1a4a182c42854e443b631977e8a",
+      "loadedSha256": "b5238525614b3c9c8284371668df63d4fa602d32406b8cc38346539c1b9b2d5d",
+      "captures": [
+        {
+          "canonicalSha256": "2d845e50bfda4ceab14f5ef774ec07979ff192f83b8f4947f00f625bc6362077",
+          "blueprintSha256": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+          "stateSha256": "a85ce943b6d106f4e5f624d5c008ea0a484522dcc29dcb90146e8231e8ec74ab",
+          "pixelsSha256": "a3d3261344659b73425cb2cf18228bf1c3813133edb230363c7e5838f4063d72",
+          "host": {
+            "render": {
+              "frame": 172,
+              "calls": 164,
+              "triangles": 6742150,
+              "points": 0,
+              "lines": 0
+            },
+            "memory": {
+              "geometries": 68,
+              "textures": 73
+            },
+            "programs": 26,
+            "width": 1384,
+            "height": 752,
+            "pixelRatio": 1,
+            "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+            "timerQuery": true,
+            "shadowEnabled": true,
+            "shadowMaps": [
+              [
+                2048,
+                2048
+              ]
+            ]
+          },
+          "state": {
+            "version": "fjord-golden-v1",
+            "servedSource": {
+              "ref": null,
+              "overrides": {}
+            },
+            "calendar": {
+              "season": "Winter",
+              "year": 811,
+              "progress": 0,
+              "visualProgress": 0,
+              "winterWeight": 1
+            },
+            "effectsTime": 0,
+            "actors": [
+              {
+                "id": "persona:founder-4",
+                "position": [
+                  78,
+                  4.097989082336426,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:persona-2",
+                "position": [
+                  81.6,
+                  4.097989082336426,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  0.9785647716682199,
+                  0.9785647716682199,
+                  0.9785647716682199
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-5",
+                "position": [
+                  34,
+                  4.748311519622803,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-6",
+                "position": [
+                  35.8,
+                  4.748311519622803,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-7",
+                "position": [
+                  100,
+                  4.180811405181885,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-8",
+                "position": [
+                  101.8,
+                  4.180811405181885,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:persona-1",
+                "position": [
+                  103.6,
+                  4.180811405181885,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  0.9912598593050522,
+                  0.9912598593050522,
+                  0.9912598593050522
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-2",
+                "position": [
+                  57.8,
+                  4.2312211990356445,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:persona-3",
+                "position": [
+                  59.6,
+                  4.2312211990356445,
+                  139
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  0.970458984375,
+                  0.970458984375,
+                  0.970458984375
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "persona:founder-1",
+                "position": [
+                  84,
+                  3.0442216396331787,
+                  161
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-1",
+                "position": [
+                  84.10000000000005,
+                  3.143528669439049,
+                  150.6999999999997
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-10",
+                "position": [
+                  84.10000000000005,
+                  3.14531342573472,
+                  152.6999999999996
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-11",
+                "position": [
+                  87.1000000000001,
+                  3.1382296441286766,
+                  148.8999999999998
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-12",
+                "position": [
+                  82.10000000000002,
+                  3.1377259102594675,
+                  152.09999999999962
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-2",
+                "position": [
+                  76.50960735979838,
+                  3.3553917530533757,
+                  148.19754516100807
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-3",
+                "position": [
+                  77,
+                  3.253005623817444,
+                  150.7
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-4",
+                "position": [
+                  77,
+                  3.033561110496521,
+                  153.29999999999998
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-5",
+                "position": [
+                  77,
+                  3.0241453766822817,
+                  155.9
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              },
+              {
+                "id": "cattle:cattle-6",
+                "position": [
+                  78.06066017177982,
+                  3.0442216396331787,
+                  149.16066017177982
+                ],
+                "rotation": [
+                  0,
+                  0.24740395925452294,
+                  0,
+                  0.9689124217106447
+                ],
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "state": "Idle",
+                "animationTime": 0
+              }
+            ],
+            "camera": {
+              "position": [
+                98,
+                34.46178960800171,
+                114
+              ],
+              "target": [
+                70,
+                4.461789608001709,
+                146
+              ],
+              "fov": 45,
+              "aspect": 1.8393936247534004,
+              "projection": [
+                1.312505126626585,
+                0,
+                0,
+                0,
+                0,
+                2.4142135623730954,
+                0,
+                0,
+                0,
+                0,
+                -1.0000833368057,
+                -1,
+                0,
+                0,
+                -0.20000833368057003,
+                0
+              ]
+            },
+            "quality": "standard",
+            "effects": "off",
+            "lighting": {
+              "sun": [
+                0.7230551289161951,
+                0.8227857543924378,
+                1
+              ],
+              "intensity": 1.2320000000000002,
+              "ambient": 1.599,
+              "fog": {
+                "near": 65,
+                "far": 155
+              },
+              "shadowMaps": [
+                [
+                  2048,
+                  2048
+                ]
+              ]
+            },
+            "renderer": {
+              "callsIncludingShadows": 164,
+              "trianglesIncludingShadows": 6742150,
+              "geometries": 68,
+              "textures": 73,
+              "pixelRatio": 1,
+              "width": 1384,
+              "height": 752
+            },
+            "placeholders": [],
+            "modelDiagnostics": []
+          },
+          "image": "snow-811-standard-0-world.png"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "resources": [
+    {
+      "path": "/assets/Terrain/barrel.glb",
+      "status": 200,
+      "bytes": 6088,
+      "sha256": "84396d73fe8b66a36c7452d18d4845334a440a9bc938cf968ed9a49fd19ab812"
+    },
+    {
+      "path": "/assets/Terrain/birch-tree.glb",
+      "status": 200,
+      "bytes": 5660,
+      "sha256": "9967a6a0209d3a1659c9ed4ecc2a3f9c478c233e63959eafee2f2a019e06b899"
+    },
+    {
+      "path": "/assets/Terrain/boulder.glb",
+      "status": 200,
+      "bytes": 5004,
+      "sha256": "b82d92ce5e59ccbc606c71a91c92b927af8e969406c642e202dfc2bffdd95829"
+    },
+    {
+      "path": "/assets/Terrain/cooking-hearth.glb",
+      "status": 200,
+      "bytes": 5492,
+      "sha256": "76108020456c7cf40cb546a41c1b206159884ade446741c46962c48de1764575"
+    },
+    {
+      "path": "/assets/Terrain/faering-rowboat.glb",
+      "status": 200,
+      "bytes": 7112,
+      "sha256": "0ba8c8e764c2d08ed8052f67db136032958c60c6108439a1c34576f1eed931ce"
+    },
+    {
+      "path": "/assets/Terrain/fish-drying-rack.glb",
+      "status": 200,
+      "bytes": 13556,
+      "sha256": "19f2ea6ac69bc77d15709a72013a3a77db44184c4ece57fc5ec1ccfb2f60a0b5"
+    },
+    {
+      "path": "/assets/Terrain/fjord-cliff-rock.glb",
+      "status": 200,
+      "bytes": 5468,
+      "sha256": "48ea8e66651d6a0327e6da21e40afb80d5fe7d4e606c3a05b03be384fb32b580"
+    },
+    {
+      "path": "/assets/Terrain/grass-tuft.glb",
+      "status": 200,
+      "bytes": 4100,
+      "sha256": "8746782194c2abca3fef00580199433f01bf506d24dbfe24d497c933207391c4"
+    },
+    {
+      "path": "/assets/Terrain/heather-shrub.glb",
+      "status": 200,
+      "bytes": 5208,
+      "sha256": "5ee75f30d1793cd9fde1b251cd1af034ffd2cca505b5b130f47effe064a9d022"
+    },
+    {
+      "path": "/assets/Terrain/jetty-pier.glb",
+      "status": 200,
+      "bytes": 6108,
+      "sha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3"
+    },
+    {
+      "path": "/assets/Terrain/log-pile.glb",
+      "status": 200,
+      "bytes": 4792,
+      "sha256": "a0f90e16cb5bf356cbc05729e61c084401451c3f4828d08b29305b42136aa74a"
+    },
+    {
+      "path": "/assets/Terrain/longship-drakkar.glb",
+      "status": 200,
+      "bytes": 11940,
+      "sha256": "65a6e64e463ce78b50dfe266fae2c7e9a8578a57b7a6da80ff1cc8bc1d18dc35"
+    },
+    {
+      "path": "/assets/Terrain/runestone.glb",
+      "status": 200,
+      "bytes": 6500,
+      "sha256": "24de6bc269b1c01bba21c4815c04e3efebfb3747b054f01d167c9db7b81fb3e3"
+    },
+    {
+      "path": "/assets/Terrain/spruce-tree.glb",
+      "status": 200,
+      "bytes": 3556,
+      "sha256": "f14f210dddae06e7b61315dfec6351e0cc963b7a7ba3a656c541227d98326b25"
+    },
+    {
+      "path": "/assets/Terrain/stabbur-storehouse.glb",
+      "status": 200,
+      "bytes": 12412,
+      "sha256": "eb58a7d3e815c59dfaeabb892719a367d8b6dded21b3cc605d3aab4d8b848a59"
+    },
+    {
+      "path": "/assets/Terrain/storage-crate.glb",
+      "status": 200,
+      "bytes": 4640,
+      "sha256": "5a56130cd2f586071a798a8ec26aa23f3f7ec4b30ef202767d8d9f92e3b08db5"
+    },
+    {
+      "path": "/assets/Terrain/village-well.glb",
+      "status": 200,
+      "bytes": 5568,
+      "sha256": "3101276ff569871836bf015078df34700374be0ebcb05fbad31eb82d35fade98"
+    },
+    {
+      "path": "/branding/fjordside/favicon-32.png",
+      "status": 200,
+      "bytes": 3066,
+      "sha256": "b1c164dbe0abfc28a1d5bd689db6b73be4166ea56f6baff236bdb453ed7c6722"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/high-shoes.binding.json",
+      "status": 200,
+      "bytes": 3201,
+      "sha256": "20b04401fb107b2b8ac6590ef6e8234347a1bbb577e1ac70d78f9c2e07ae85ee"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/high-shoes.glb",
+      "status": 200,
+      "bytes": 2718016,
+      "sha256": "4b5250ee6b1a06b6f148a21f7428ea570632ab88f636c3a458d0904441d4d688"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.binding.json",
+      "status": 200,
+      "bytes": 3219,
+      "sha256": "851d86cb3e3aa37b1bdc499bca1e86254d7d277129ecac04266f85878885fb7c"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/long-skirt.glb",
+      "status": 200,
+      "bytes": 2569216,
+      "sha256": "77f3957563e94b01211a8204e85621e2196a619380b7b1dd9d7719cfa259a1a0"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+      "status": 200,
+      "bytes": 3251,
+      "sha256": "ad27c923a926d59c8c1de43649129749e7856108d45cf440bb31eed35d5ded97"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
+      "status": 200,
+      "bytes": 5108840,
+      "sha256": "0bd55b3eeb8abadaecc1e9ab4d824a5beaee454833473524173e17b14d7c2e2c"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+      "status": 200,
+      "bytes": 4518,
+      "sha256": "f3073f071dc8fa7955d55db9833a01cadd7d7b02a9ccd95a843eb03b88efeb03"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
+      "status": 200,
+      "bytes": 3848864,
+      "sha256": "79794137e3e2bb33da24429d084cec0e5fb84711fdc4fd87c1568b1dabb4d52e"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-short-trousers-006/short-trousers.binding.json",
+      "status": 200,
+      "bytes": 3239,
+      "sha256": "41b69b9c926c5401be8f98647e382fcb5235b8c981122a97fb14e3c719ac8333"
+    },
+    {
+      "path": "/character-lab/candidates/meshy-short-trousers-006/short-trousers.glb",
+      "status": 200,
+      "bytes": 2443800,
+      "sha256": "c37cfa685911390ff9ba0f9462c44c1331a686b388281573840b5012a98904f3"
+    },
+    {
+      "path": "/character-lab/modules/manual-braided-hair/braided.binding.json",
+      "status": 200,
+      "bytes": 2956229,
+      "sha256": "2b7ac5e3fb2e877b73c2b263bf4a89d1b9b22c31e7e98a857e2421b13f3b277e"
+    },
+    {
+      "path": "/character-lab/modules/manual-braided-hair/braided.glb",
+      "status": 200,
+      "bytes": 193240,
+      "sha256": "3cbe59c32ca7ccccce742b39596b7c62b708724c9992e2a7928cac929fa6cd44"
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short.binding.json",
+      "status": 200,
+      "bytes": 3619922,
+      "sha256": "96ade45ea283f249934f5b186f8ea58cc804f32d0b72d3c3f4b1b5e23ea4c52c"
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short.glb",
+      "status": 200,
+      "bytes": 255620,
+      "sha256": "9a6c057520eea8d57a9dc020d2a98d823f5f1966843fb8bd2cb4528303d959e6"
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short2.binding.json",
+      "status": 200,
+      "bytes": 4702561,
+      "sha256": "ba7307e86a9eb60d4dcdac71d4b7cab1e4b0149e85611a9bc1ff8e69a424bd8f"
+    },
+    {
+      "path": "/character-lab/modules/manual-hair/short2.glb",
+      "status": 200,
+      "bytes": 347196,
+      "sha256": "2ba6181451bef3a27d06a400e60b01e5c23710771995b40c9fcbd7c2a248e3bf"
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+      "status": 200,
+      "bytes": 5508145,
+      "sha256": "b808c552c30a68e7b6b2b3221227dc8af9d98deb4dcdba425133ef77f58f186d"
+    },
+    {
+      "path": "/character-lab/modules/manual-long-hair/long-2.glb",
+      "status": 200,
+      "bytes": 358692,
+      "sha256": "4d9b26798bf511c5141a93abd2c73e9d4ca02b2ccb92daa53e0146b35ae4afe6"
+    },
+    {
+      "path": "/draco/draco_decoder.wasm",
+      "status": 200,
+      "bytes": 192420,
+      "sha256": "a680d927bed9cb864ddbd63521868891af2bfbe755092761b4837487618df8ac"
+    },
+    {
+      "path": "/game-assets/cattle/adult-female/cow-female-adult.glb",
+      "status": 200,
+      "bytes": 912644,
+      "sha256": "acb13e1283ba8e53f7fa7b537ae531febc2c9cf3c0ca237bfbc4972ee3d20fb9"
+    },
+    {
+      "path": "/game-assets/cattle/adult-female/manifest.json",
+      "status": 200,
+      "bytes": 2056,
+      "sha256": "f79267d6ebda791d1f2b473bdb8b3ef0e81ec0749761585b1a37b3b9f06b1238"
+    },
+    {
+      "path": "/game-assets/cattle/adult-male/cow-male-adult.glb",
+      "status": 200,
+      "bytes": 761356,
+      "sha256": "dda6ee2a327e07a36848ad7cb3e66f519b0cfa4bd74e78f589a807f3fccbbac4"
+    },
+    {
+      "path": "/game-assets/cattle/adult-male/manifest.json",
+      "status": 200,
+      "bytes": 2053,
+      "sha256": "383a51630df47962edfd57854d7521ba4280eac1786fcc97f74b3e38ffb5536f"
+    },
+    {
+      "path": "/game-assets/cattle/baby/cow-baby.glb",
+      "status": 200,
+      "bytes": 925360,
+      "sha256": "8365eb31f3988dca607dace82ddbc252e9a72e616bb4df682fbd2c97b086057f"
+    },
+    {
+      "path": "/game-assets/cattle/baby/manifest.json",
+      "status": 200,
+      "bytes": 2057,
+      "sha256": "f3ed132a74c29d0d3d76c2791f14762778778aa13f1d2aca88b434127cd7c005"
+    },
+    {
+      "path": "/game-assets/houses/farm-homestead-terrain.glb",
+      "status": 200,
+      "bytes": 2842728,
+      "sha256": "7238fdf5aa432de73730ee475ba392e932cc51d14dca98bc268dea6778e76538"
+    },
+    {
+      "path": "/game-assets/houses/farm-homestead.glb",
+      "status": 200,
+      "bytes": 1252884,
+      "sha256": "f3067bc2131c2b48d44627ef47bcdb4a30a26683ab84d364ceb680e951765c45"
+    },
+    {
+      "path": "/game-assets/houses/farm-hut-terrain.glb",
+      "status": 200,
+      "bytes": 2760368,
+      "sha256": "f5e7dd600d157ae814e186b7a58e4a599fbf53b425dd01a9396b1fa0fbdea538"
+    },
+    {
+      "path": "/game-assets/houses/farm-hut.glb",
+      "status": 200,
+      "bytes": 2653744,
+      "sha256": "6715f69eb3ea6e62cdebc412e5532967952aedbc0e12c2e27471e79d9f57b019"
+    },
+    {
+      "path": "/game-assets/houses/house-greathouse.glb",
+      "status": 200,
+      "bytes": 2634544,
+      "sha256": "9687f83e1b43a48d4ef9830a292928da3a16873608e474838aa7fd87dc6cbe9d"
+    },
+    {
+      "path": "/game-assets/houses/house-homestead.glb",
+      "status": 200,
+      "bytes": 2369656,
+      "sha256": "74619d6205e87ab1514a0bdb83a22693224a9f689090d50986236586473e5ccd"
+    },
+    {
+      "path": "/game-assets/houses/house-hut.glb",
+      "status": 200,
+      "bytes": 2242716,
+      "sha256": "52c7736abf90942b2e2ecef86d5ad112b2021de7b44577bf0e2f534cb4a4071e"
+    },
+    {
+      "path": "/game-assets/houses/house-longhouse.glb",
+      "status": 200,
+      "bytes": 2400340,
+      "sha256": "b5fed3a66257fcd37ed1be5470ccaf3d6f461dd08d48af8b616644cad7d7cf91"
+    },
+    {
+      "path": "/game-assets/houses/manifest.json",
+      "status": 200,
+      "bytes": 4827,
+      "sha256": "3074f7913a309bc8d5da4445c87a76e1c4e0d2f53fa0c1f46bce112caae4f080"
+    },
+    {
+      "path": "/game-assets/human/Human_ExtraAnimations.glb",
+      "status": 200,
+      "bytes": 1022008,
+      "sha256": "a6f3884603041026f290fe0cffa2327c616ae490c779a48a456cb67edcb7a676"
+    },
+    {
+      "path": "/game-assets/human/Human_LOD2.glb",
+      "status": 200,
+      "bytes": 6118512,
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/grass_path_2-colour.webp",
+      "status": 200,
+      "bytes": 310834,
+      "sha256": "88fcc3522e46d4dc87a4dbbe5dc409331f246029ca3c8daeedea7d094e5207b1"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/grass_path_2-normal.webp",
+      "status": 200,
+      "bytes": 1305510,
+      "sha256": "faf178c9f38a0d7ea1ff6972343405bd95904e2e42dae90aa099e4b9f49cb07f"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/grass_path_2-roughness.webp",
+      "status": 200,
+      "bytes": 87460,
+      "sha256": "5a1bd5f03163dd16f67bcfce195ed62ab003d5733413eb161ba614f76b18439b"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/Ground037-colour.webp",
+      "status": 200,
+      "bytes": 198690,
+      "sha256": "f9a69e48db0d2981a76f8342f2f17cae5dc1a30f9425d70cd7b777ea0d47c1ed"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/Ground037-normal.webp",
+      "status": 200,
+      "bytes": 1017780,
+      "sha256": "c90d4afa44439aa6ce44cd3db42f6e3f47557232b4915797225ff8b435ac1865"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/Ground037-roughness.webp",
+      "status": 200,
+      "bytes": 174406,
+      "sha256": "9456d6d7fe98e475435bc2f596d303609615138bd05d5ace3d4b39fb00f0de9c"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/Ground054-colour.webp",
+      "status": 200,
+      "bytes": 43238,
+      "sha256": "d5c7b96321d5bc592b570664ef08febfd8e5346cf351e66b6a0f38d331dea350"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/Ground054-normal.webp",
+      "status": 200,
+      "bytes": 1627106,
+      "sha256": "394eda1da37e2cd549c6bb7bf4f9148dd17a275510e0cf977760ce80d68872e7"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/Ground054-roughness.webp",
+      "status": 200,
+      "bytes": 96946,
+      "sha256": "d50273fd274e6749c6fcf39a32d52400c92c93fea591ad90b09a7e9f606f73fc"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/mossy_rock-colour-cool-grey.webp",
+      "status": 200,
+      "bytes": 329860,
+      "sha256": "42fb39e612a3d8750b69a7d3a2e1877c04b4cd09a15bbaaccbfd04acb8758700"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/mossy_rock-normal.webp",
+      "status": 200,
+      "bytes": 1372536,
+      "sha256": "c652f25ebbc6f7f385e8e92b4efe2e247aa43390514b9088ccf2eb3ebaf73961"
+    },
+    {
+      "path": "/ground-materials/blended-v1/standard/mossy_rock-roughness.webp",
+      "status": 200,
+      "bytes": 250790,
+      "sha256": "1046393b83c2da8fd21e43b306898402b22fd3c5e64a082e6f5ae02a525d9663"
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-00e12de668fe6669.png",
+      "status": 200,
+      "bytes": 3188072,
+      "sha256": "00e12de668fe666983edad60327b98a1d4d9600d1438ef7827a7459a7b2cfae9"
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-614ef034a298fef1.png",
+      "status": 200,
+      "bytes": 2421052,
+      "sha256": "614ef034a298fef197bfe41209f3fc264f2e34a70880e40129ffa659a2f2266f"
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-713a5cc87d11921a.png",
+      "status": 200,
+      "bytes": 982844,
+      "sha256": "713a5cc87d11921a8b92f47bf3a8667aa7d04111ea51cf3bd1a3ca763333e8aa"
+    },
+    {
+      "path": "/nature/ez-tree-pilot/texture-be24b5c0a3104eba.png",
+      "status": 200,
+      "bytes": 1215172,
+      "sha256": "be24b5c0a3104ebaf0e38dcd396ba06e36f210f9cf3786f535ab1a47c08d5e34"
+    },
+    {
+      "path": "/nature/kaykit-v1/forest_texture.png",
+      "status": 200,
+      "bytes": 48679,
+      "sha256": "406c01e0ac1d3368fc7b26ff5fb0d3335ba5e48bd19a703540ed92ee3971ea39"
+    },
+    {
+      "path": "/nature/kaykit-v1/manifest.json",
+      "status": 200,
+      "bytes": 19095,
+      "sha256": "31b7803c9eeb855693749e55f83bb23629844d77f90e6a742f885f735231ab53"
+    },
+    {
+      "path": "/scenery/meshy-campfire-v1/campfire.glb",
+      "status": 200,
+      "bytes": 1925060,
+      "sha256": "666150e21cc0faea05c26703e32b41b0cb3d3558e175ed7209a9ea2085a0bf36"
+    },
+    {
+      "path": "/scenery/meshy-tent-v1/tent.glb",
+      "status": 200,
+      "bytes": 2014824,
+      "sha256": "c2769d0fab2dcd0fb23de903a146a524fe7ceedcded517c48de8edfae52f5dd3"
+    }
+  ],
+  "sourceHashes": {
+    "scripts/qa/capture-golden-fjord.mjs": "25629647963b3031da85920812360765df47163ce0bde352607a8869a968d360",
+    "scripts/qa/fjord-golden-browser.mjs": "7b228203035b12d8fee06e415de6bc20bacefa26bed95748a3410c0b9d302ac5",
+    "src/config/FjordPresentation.ts": "264499ccd22a85a2e5e95ec6d6b7d3807ea29950b4de9ee94655a0a4e74dcff6",
+    "src/fjord-play/desktop-foundations.css": "f32720119b8b6c2e4c0c4dbd4092cc19a51513344d5aa823a2cc8c18224bf94b",
+    "scripts/qa/fjord-runtime-browser.mjs": "47912460c98a3e516da31865c0ea0a6628c7c72536d5a63cdea4dbe9c956ae8f",
+    "scripts/qa/fjord-runtime-server.mjs": "a09fd8a7a29a121de921fcd9bcf66c4f69530280763949c9cbe806724959e24d",
+    "src/asset-lab/AssetLab.ts": "f727bb7d3372f7bf3820c563d86060745d231af770350c1354918d5073a6dcf2",
+    "src/asset-lab/asset-lab.css": "a3c3476f5fe19c7acb24f6e1dba3325febf2d573f75cc203b6a7df0efc73d154",
+    "src/camera/CameraClearance.ts": "7e90d60dcac77a83d88474ad81642d9a96233a0d62afd7878d4abbfa8d6a7ff1",
+    "src/camera/RTSCameraController.ts": "eba1e55b99679a0e2b50cabaf608dcc04cb914b4dfea4fadaadfaccf957e51a0",
+    "src/camera/TouchGestures.ts": "d78741ad37c076829546880c7e7fcd2362d7dafc6611dea8de0efd615d66e552",
+    "src/character-lab/AppearanceAssetVersions.ts": "d433d9a484c68c3a0fc25179728d5692830607755d30010c873c1d6657fa3aca",
+    "src/character-lab/AppearanceModules.ts": "5d0a6f57ecc12abe6e2d80bd26fd58c810d7bdd102ca3a7eba17d335584612bd",
+    "src/character-lab/CharacterLab.ts": "b1ee59a8655d22cd336206b38473aec6f75e1b79b802cc34fed40665a029fb2f",
+    "src/character-lab/CharacterLabUI.ts": "9df180da83fbc6d9f9adb1d3956e710ee50f7c81ecf08a21ae99a4376a738d82",
+    "src/character-lab/CharacterPreview.ts": "08a5dea69357bc68c54e1a502a2c7a9fdbbcfbaed0abe7b3460fd54be090d946",
+    "src/character-lab/CowCharacterPreview.ts": "5eb7559bfdb7702f5918e7eba77f1c1232759bcbb49e3c0d1c639ebdcb483c15",
+    "src/character-lab/GeneratedBeard.ts": "994f0619dad312af897eb117ee1aea5cb760e86ff7f7b0e337a0a41df361d55b",
+    "src/character-lab/GeneratedHair.ts": "0d6375e43b4831b96fba53a5d1d279520d9e8119fa0b7a828c9fe350e616fa57",
+    "src/character-lab/HeadSurfaceContactFit.ts": "ff1579e100bf54eabe652e99c30ddad56e82b69fc6ef690ea8337bb863dd51b7",
+    "src/character-lab/HumanPreviewPace.ts": "5af389e795dbf475698511de87b855d0788d7aeaaaaa80087c8e1b7c6f2e5b49",
+    "src/character-lab/LabSnapshot.ts": "5bc5e112d2611c562951af18992aaef3fe74e4b89c3a780210d797d1d678bcfa",
+    "src/character-lab/Mannequin.ts": "d7c423d48c71f799bba66b99697fd52a0b8702c3d44ba3e08d05aefd77d99fa6",
+    "src/character-lab/MeshyCharacterLab.ts": "2a5c530249c87c0ba9cee40324d1069098dcd93d507ddcaead5eeb331a29fd6c",
+    "src/character-lab/PreviewGround.css": "d6d34fd26d3ce9ccd43757317267db6d7ed02272479f265e7654d20580dc0dfd",
+    "src/character-lab/PreviewGround.ts": "563627ddd729af340f1ed1c4371c3eb6e5064ca5d241bdd82c5edce1d7ad0369",
+    "src/character-lab/ReferenceHeadFit.ts": "b3afdda1f7d7ed4f7259d0dcfa3f7b840b47ee2b8853fc662236ccb6cc841e95",
+    "src/character-lab/ReferenceHeadFrames.ts": "94522f2084aaff8e7cf48d526a381b30b03c08f8a0a1cea6d824d34546bfcf3a",
+    "src/character-lab/SkinTint.ts": "46f5986df4be6fefddae4e09c06c15476f3f56f9225907d60a2934ed55b5454a",
+    "src/character-lab/SoftBodySpring.ts": "e784e20ee64af460a3f0f947b31b1f3b8812e93e46e01a55b03b53c355c84a95",
+    "src/character-lab/StaticPoseExport.ts": "c31fc5bcfeb0615f0b2e4f3aa984ab790bc6c3db71fa770e8d4d32a75ab97e21",
+    "src/character-lab/UniversalHuman.ts": "25788d2aafc5ec2991d450039d8ddb473c4319f0951b53878e61555f45bfadb5",
+    "src/character-lab/character-lab.css": "fdf34737f9723a2a162111b9fe1fac707dfa6f1542221b878e147fd9a4499849",
+    "src/character-lab/meshy-lab.css": "1be030adc9c249f922e409012e3dce5ab7af9774dcc7cdd7b8c9758c392bd864",
+    "src/characters/AdditionalOutfitCatalog.ts": "6c3f4f91bae83d33bf7b67f55741535514e75e2914ba2f042689aa7107633d59",
+    "src/characters/AdditionalOutfitMeasurements.ts": "a63d4ca4a699b55f3bc99f534bd139b0c75776003040ddfebc063fee7b4ea076",
+    "src/characters/AppearanceTypes.ts": "be8a9545b12934da8d75b567b406406a815ffce9cd47309e58c2213723634289",
+    "src/characters/AssetDigest.ts": "bb2edce04a03e274097e759fc05e2022edd403c19130b5a9ec17a640683568f2",
+    "src/characters/AttachmentContract.ts": "e92e291c52fe4288963170b576715c0b73f478c0e696d725418ca80793c420bf",
+    "src/characters/BodyContactSurface.ts": "2941320b81d6a5baffab494c682b9e734eec02cf7c205a4d5cec86756cc2c2e9",
+    "src/characters/BodyCoverage.ts": "f170cef072c0f1a307391b4e2b37d9313b500338f7342fbc5f31361b65d7746b",
+    "src/characters/BodyFitAdapter.ts": "da1fc6ca49869200f1c466b08c601dbd46cd56b14fe74fe503c3ecefef56a822",
+    "src/characters/BodySurfaceCalibration.ts": "13040e1baef818ed3aaff321d371f7e8dd2b695736d6ac1c6e4d149916a78d5a",
+    "src/characters/BraidedHairCatalog.ts": "cb2c2f40293a929dc2db1e742ca2b60b587cec9155fc2b5d141a62e77d9e1246",
+    "src/characters/BraidedHairMeasurements.ts": "7f4ccaa39a1392607456308b503c10fc22f9e1d392830dcf43b9131b0d8efed2",
+    "src/characters/CattlePresentation.ts": "4d9e4356445c59039602ca9f2c92a7560a268fd6f029b5f5979f8dbe0344e6de",
+    "src/characters/CharacterAppearance.ts": "6036cee6e1f532e491a45d304867d10a7d49fc79b241fa7b29022a03b997b406",
+    "src/characters/CharacterAssetMeasurements.ts": "7353c2b3d0a433bc2f487f7460a813c82bfcb7b1e90819882d5bb536f223fdf5",
+    "src/characters/CharacterAssets.ts": "edc1fe018fa8907ee4848d16c3350686ef4d08edbab5d6c0e51eb2e4b2095fb2",
+    "src/characters/CharacterContract.ts": "7b72cbf7edad046f05369226d364c6acac594d9714f5a57c6312c411ec1cf8a5",
+    "src/characters/CharacterDNA.ts": "24bec3481d8c7c78e4d9542216292c6c012772b3aa5ad97f29b6edfcad763075",
+    "src/characters/CharacterExport.ts": "0c4afe98021b6d012a08eed02c3eaad2422c7f90e9a07c1472d0e4ab863a07f4",
+    "src/characters/CharacterFactory.ts": "57078e0116dc25afbb0f84c2f80b09ef3065030bb182a4cded15bb70bc10af26",
+    "src/characters/CharacterFitSystem.ts": "bf6b5b3440f368d68e95edb9eb8022731e893b7b4638d5d2127dafa49099d72e",
+    "src/characters/CharacterPresentation.ts": "f2feab3380bace9857aa4c80da90a4d09ecb9f30429edd7b58c403c8a102c9a7",
+    "src/characters/FitPresets.ts": "dddd874f495778a73fa0fddfd6deb37e1dc954bc93e88cb4cd3d895060efaa5f",
+    "src/characters/GarmentFit.ts": "e8a23d956558506630e22464a76d45ad602aa6cc34f3ef85a19593f2a7565121",
+    "src/characters/GoldenBodySurfaceCalibration.ts": "d98ff1609c8b98430415e50d723d08719efbacec510534ee5f3511a9cbbdfe8d",
+    "src/characters/GoldenCharacters.ts": "b67e732e627dd7eff99f3d7c72f43c9fbe74584072a777060a7c10e4fb0f2d9e",
+    "src/characters/GridTrialOutfitCatalog.ts": "a0cf7f6e2f55ebacac11daa3f2abc59fa8e9c1b0b5004ea62805cedb3d1b08d0",
+    "src/characters/GridTrialOutfitMeasurements.ts": "da28c181f5ad585995583a18383dced1cd96a9f173daaf100b3aeba7160ef88f",
+    "src/characters/HumanExtraAnimations.ts": "94c99cf03caf5f8c9eacaa4e86a43e2735492cd222ac8ebfc2f9bd4b98fffe92",
+    "src/characters/LabBodyPresentation.ts": "e2c573544a153d5a536f9905140243827a2c9d9df8f7f498abbd05b157fca8ec",
+    "src/characters/LabBodySources.ts": "1d69da72d53c696dfd37aac4b8bae1c690dd78e0aeb1be89b5b4a424d3a00eac",
+    "src/characters/LongHairCatalog.ts": "331aeab426db9c76ffe7ebf231e8404de927473dd3cd21f7973beae3b6381bcd",
+    "src/characters/LongHairMeasurements.ts": "125ed440b56ac13a036acfd20cc75804ddcc5fbdaabbd30726f7d2663ff297e6",
+    "src/characters/ManualHairCatalog.ts": "5a24fe37d25a82d900296cd2636b6b5ba5defb3733bf878944a09ef852d9a03e",
+    "src/characters/ManualHairMeasurements.ts": "74fb6a92632e10de37d7ce2b6af45afd2338e778cdceb2b61e41f67b1881d082",
+    "src/characters/MeshyBodyFitAdapter.ts": "2335022ce3442bdfa900f77dbb4b52bf4b31413e696146281b35feb1b5b0d9de",
+    "src/characters/MeshyHuman.ts": "1aa86378435693f4219e472bea205756f23df6789364630320c732346d3297b8",
+    "src/characters/MeshyHumanAssetIdentity.ts": "cddbedb997f23933b0610fa42df58ff4b6c14fbe03e8fbcab14d14d91a66b307",
+    "src/characters/MeshyHumanDynamics.ts": "40d841f77619d306a4936149c2cd317530a230990987572ed352536c05693222",
+    "src/characters/MeshyModuleCatalog.ts": "c2ac11e67d9d3d9fa134d1b2a177a0884b12446ef46c3150463079a6fde14347",
+    "src/characters/MeshyModuleMeasurements.ts": "7bb31f5cad1cf0eedcf90f2fed6b5dc70f8bd0eb4958697d789d05c9170bc9c9",
+    "src/characters/MeshyModuleRuntime.ts": "46ba92c002344e0982a16ba3c9c80b133898d878ac56cf2c4429483bb535e2af",
+    "src/characters/MeshyNativeRig.ts": "fc93a1e8f2b328f9929531e7e80d5df0a97794663364f7c111ff5c9a940f1dad",
+    "src/characters/ModuleRims.ts": "2c669257a4c5715d014d148e6e5ebe497122088647fd75cc79c43d929a121c3a",
+    "src/characters/NativeHairRig.ts": "3241e08a1c26e569631db41896af8d406b4799c669c7327041594cc9371e5dbb",
+    "src/characters/NativeModuleAgePolicy.ts": "996df2c1a1dbbaeb713a9535a963f60d668113347f55bcc18f3c6588e1e49278",
+    "src/characters/NativeNeutralPose.ts": "4b933d899f6e255c8d5d11ecc6eeaea3d484258ec011d50fd6ce2d34c24efc36",
+    "src/characters/OpeningSections.ts": "86ed26d359be2cd5ffd567437d5e32fe462ded417cf0f9867d2427a801255728",
+    "src/characters/Phenotype.ts": "e0911cf3695d822059c9181b29bfda92974403ef62986e46813c0144b5ececfa",
+    "src/characters/PreparedNativeOutfit.ts": "82842a2e41552353e84a188fb739264686a2822b4ad6e4492c5dc0a5a8da31a5",
+    "src/characters/UniversalHuman.ts": "09de1c633ef25c4839096bca2dee287a4deeceb7505f0d6e31898d6b34c401c7",
+    "src/characters/UniversalHumanProfile.ts": "5096a1946a9cf7d51e12e33986d5068d1c14f1057a4fddb5525bd22ec96be24b",
+    "src/characters/V04ModuleCatalog.ts": "c85a2ad04a0adbb1fb30516eb33ffc22abf29ca120d685e08b2d02f72f8b8e64",
+    "src/characters/generateCharacterDNA.ts": "411a33e3008c6b45dca82754a496e2d1c9398d77064d8d379a1fc36324b8146d",
+    "src/characters/generatePhenotype.ts": "921e1326954ee3ed7d7ecd78586db3e6818d23a4887a554fe28a5d19bfdfbf32",
+    "src/characters/heritageProfiles.ts": "08bfc758372fba1b6672f7407f7e2d739598694a7a41ef1cbb9bd1c5fda54fcb",
+    "src/characters/naming/NameProfile.ts": "953e7e4469f340a066a9971505da95fffd69f28b38faf1979745503e072aa3c2",
+    "src/characters/naming/generateName.ts": "d3e363cb0238f093ffc92e1c1719ea62fe825ab4e74a6d841cb7a89bbe4119ac",
+    "src/characters/naming/nameProfiles.ts": "01c1674ec9499353d3adf03f5d7a7f67ea7ce83d197afd7f8317fe3327992db6",
+    "src/characters/occupationFit.ts": "fb6eb0bdd780fdcb6c74522ea8e5da6d6a981e72b973377da6484dfcf489a9b2",
+    "src/characters/seededRandom.ts": "af8ad27c431893db1e86f67f146dade8e7bc548c3b1955f515a0819b0a8e4ce5",
+    "src/config/FjordWaterConfig.ts": "019d2113344fb6a67355f59ad451a54f96066149e61eb7453772a4f9885b38e5",
+    "src/config/GroundBlendConfig.ts": "8f451369728c89e7bbd0e85e1421067a9a15e0b8eaece064f5cd606c6f3cc4bd",
+    "src/config/GroundTreatmentConfig.ts": "5aafbdf8778783380fe65e44ffa97f8f25df22c585caa0450bfa2612e7bdf5a5",
+    "src/config/HousingAssets.ts": "2e34e245e5f5dd9eff475b4145dab1d0a3a551dc1e092961c41db4bf4de5a46b",
+    "src/config/NatureAssets.ts": "3c03973d3e71dc71eb8711e1cd5301c0f5ec0d8533dd9f37cda44daac51bd391",
+    "src/config/RegionalGroundConfig.ts": "642cacf0db047ba48fb427080e608f957d91a08692137bd04551cddbf4c52ef5",
+    "src/config/SettlementGrassConfig.ts": "ea67d836b1faa9da7695795fb5db201d7f01de67c58ca62684d816e4043b5256",
+    "src/config/lightingConfig.ts": "6e18841427b274ff59e65469cbd870114f1b2929957a83c75a03fb90ee1ea085",
+    "src/config/timeVisualization.ts": "ed555c28a37230faa97c43a032e10c2803fa705999d01d224961cf9a0d191e3b",
+    "src/config/worldConfig.ts": "02ec6765c289fef0e6a7c4caabb18c93ab297e0103d010a8884ff4096f69c740",
+    "src/core/AssetManager.ts": "9e0235220e07d5158f08c1af6d88b99472cc8a037350665d91b6f6144ba82086",
+    "src/core/EmissiveSurfaces.ts": "57a7a4877c706d7b1909e2fb6b06fcbe1e814632482baa8efb3d645951b4f9d0",
+    "src/core/Game.ts": "401057fac4ef576cf294637e66eff1c2a4c3e4c9e4aab80d3981aee5bf4f9625",
+    "src/core/Renderer.ts": "f3ccd06ecd071f1a2dd785735821e59d9fc5dfc135bca09e3f3d544d70128f79",
+    "src/core/WorldLighting.ts": "fe3bbc26564b629faa085cdad7b6d7b80df332f79009a9cb5cd80386b702c300",
+    "src/effects/CampfireEffect.ts": "f7a4debdd97b8c22300cd2cdd932572bd2263eb8cba307a57fa97841c91e72c3",
+    "src/effects/PrecipitationEffect.ts": "3e3aecf76e76cd14a7d30ebadadd1801b711aa834eb29dbd8af8856b2a79df5b",
+    "src/entities/Villager.ts": "e4f84ee1fce2fbfd1c8c4c052b0684e844d7556a3a7cf764cb5cea545d193c05",
+    "src/environment-lab/EnvironmentDiagnostics.ts": "79ccbb9b4f67cd08a09d1838d2ae3898587eb6a58df45a7036105561f36dedfa",
+    "src/environment-lab/EnvironmentLab.ts": "895ac6e0a8155353caba27d19775801623ee91a0d793bb6438852a64d42ea4ba",
+    "src/environment-lab/EnvironmentLabMarkup.ts": "a9a0099de109187b2c8f49231840fdfc50cf48b83035500f991b52e593bbd606",
+    "src/environment-lab/GroundStudyViews.ts": "a5f770eef43b2bddd1872dbd8d3d2b314b671e2faa9711901800efc981724044",
+    "src/environment-lab/LabEnvironment.ts": "bd7a94210de887a525a371ef6c0fa8d97305da2134d69a624bd6eb2dfa028f6d",
+    "src/environment-lab/LabLighting.ts": "e717032b91a16af9c1ed9eb02f0fc5fc747403e14d2059f8b3a5699ded08ed9b",
+    "src/environment-lab/LabPines.ts": "a17a4038fbb940a1b13752a377a33b057f2d5eeba43e872d0ce2889056bf0356",
+    "src/environment-lab/LabSceneAudit.ts": "fdb4acdd3f0511cdbfb6b96233befc05a16cf62d5c25a008a2e3ff022e48b5cf",
+    "src/environment-lab/LabWorldGeneration.ts": "2eb0d484b4e2c346f5b6c6197fe97e48b48a8852084de734f1c9b318a528cd3e",
+    "src/environment-lab/MacroOverlay.ts": "2fe135bcacc9959cd6cd722a88e2b5b879a7eae4cd72e2464f1b51547da50769",
+    "src/environment-lab/SettlementSiteDiagnostics.ts": "6e66cb851a0918f9b72040f9ccc4ec6e29439eac623d30023aaa2cd48a3b2a81",
+    "src/environment-lab/SpatialDiagnostics.ts": "818d909f0ee82880d89e8436583779cac5b90c19cd144c1879d6d2ca5c746f76",
+    "src/environment-lab/environment-lab.css": "510c388b484fcfc72bb98ac0c822800bdfdb08cf9516c0f33d1d1aa0b9ac9e71",
+    "src/fjord-play/CampaignIsland.ts": "363e75670aff214dbd39dfa87b2b521d51974d83f6ce982d9e375b3b864170c1",
+    "src/fjord-play/CampaignRecovery.ts": "44d4ce620a469acd932cb78eeb47c1e9839b73ee8f7753e7e3dc592c5c8afde0",
+    "src/fjord-play/DiscoveryFog.ts": "87a1217401bdae3f74015570185d31a36f95d8cb1b424296ba857094ac034e6d",
+    "src/fjord-play/ExpeditionPanel.ts": "08b5e98e40a9285cdf88f531f58732cf1c6fcb58840936c3c115a8f7d3f5e35f",
+    "src/fjord-play/FjordCalendar.ts": "2cd6929bab90a6f25e1a6509339dd3b261ce1748151c8dcc710486ef14df7fee",
+    "src/fjord-play/FjordCampaign.ts": "de285ea3302f34e9d57ce649e6c3dd70f5ce4b04f21b11b93732dc8d778906c9",
+    "src/fjord-play/FjordEntities.ts": "d4e08af6d495b9cff73bb2fce4390c451743a7e9972a3f7f9aab5831561f1378",
+    "src/fjord-play/FjordGround.ts": "5f505b81f7742894304d187dff1f17b258e15b75b52c79af2202b39284058dfa",
+    "src/fjord-play/FjordHeader.ts": "30e1218224827af6591b34d59b962a34f1f57e323a09fd90da9a57a29b153cdd",
+    "src/fjord-play/FjordModels.ts": "ec86596931ad26cc56de079d0c97f29501cbf7e46b278e6fd90faf6971d9e557",
+    "src/fjord-play/FjordPlay.ts": "b1b11fc3449afbe40bbf93cfddb3c8ec6177a7db174f8ef8528fed79d0aacde1",
+    "src/fjord-play/FjordProduction.ts": "6c420030fe2ea2431a49ad8824b6ddf13b3b80875958827aad2da7e42d8b280a",
+    "src/fjord-play/FjordProjection.ts": "b95638aed91aa841318e69a89298859714a6cec94d1260fe2e5f350bc6166169",
+    "src/fjord-play/FjordWardrobe.ts": "3727b55ed7bbc1cd7e445bf76c17f44a6ab2477cef9143b9db8cfc1fd91af4cb",
+    "src/fjord-play/FjordWeather.ts": "19d35446c06f9fe81b3df81aa553f5dbee96680d2eb8f035b2497b24d9155eaa",
+    "src/fjord-play/FjordYardSurface.ts": "2d012f85b747d0da5fe2c6f9c4b095a50aa85e0136d1a2655a958d1b35dea8ac",
+    "src/fjord-play/IslandLoading.ts": "2c4a7c3d7d7092e3298d970864df9004e6910631980eee688beaa2833ab57a04",
+    "src/fjord-play/LifecycleTrace.ts": "3ce6c74bc18f1d5462def3cc0123f29c5625d41ffb038f29734029acbef24276",
+    "src/fjord-play/LivingWorldController.ts": "4d8908cd4fa50f8f80f3bce72d3a9cf51cc5cbd0eb23ae9a977e4665bf0f53ef",
+    "src/fjord-play/ProductionLabels.ts": "b4c687a2c40a2d6d1032a080b55389c1f941e38ceeb0cfd90cb0aaa2a3d0b5fc",
+    "src/fjord-play/SelectionLabels.ts": "530292317cf4c51b1c587a46e4a7a2d98a7a0d8ea2cdb491c9f3c6e259f84358",
+    "src/fjord-play/SettlementCampfire.ts": "5a1836e6734f89693f9fee20cf21cea2aedab5beda4e1f0907f663a944d41a30",
+    "src/fjord-play/WaypointQueue.ts": "cf219ef5fa086d77f8f0b295301a7c0dc12e3abf136a9d31660172c07d7ca124",
+    "src/fjord-play/fjord-play.css": "ce0e831a6add178595360182e976e35b36b5f897affbbd637416e31922b832d7",
+    "src/fjord-play/island-loading.css": "95eae49adb211e11ec8b13069f96d0c1bbdf8990a8bce90b9d42bb78541ee244",
+    "src/gameplay-lab/GameplayLab.ts": "a71fcc3e196359bb2f6848ab23e93537ab25319e3e9159d758c452b6aa8d0378",
+    "src/gameplay-lab/GameplaySession.ts": "20f2980c503d9fab31a386602296f40d9f8288ea8e00031b55c78a151e34c265",
+    "src/gameplay-lab/ReadView.ts": "a63ffdc60e6a6884288043171a1ee0463d855ff3603091ac58e050ccf5c33472",
+    "src/gameplay-lab/gameplay-lab.css": "f2b1c875a34b992b1e23939f4daaf39638bf098cbf265c1988aa3549d7b63a02",
+    "src/gameplay-lab/updateView.ts": "c0e9f8146fd8f52f1f00dff7571710230a43b7a32ace6703e1f22f4c06943711",
+    "src/lore/BookLedger.ts": "5061f9c7f6edc537ca02ebf439ac57583d736097688726f410be5a24f69babcc",
+    "src/lore/Chronicle.ts": "0a049007dfd99ee10d8e51ca76ad685eda52e8bf2bf5b7678b3d4037b1bb509e",
+    "src/lore/ClanBook.ts": "1e6f3672e0f42afc878d5d64411008d7ddf5a249a471e72c2e47ba10c97de0c6",
+    "src/lore/ClanBookReader.ts": "6033b77689bbc14f47f91dade88399d6120c6fa818f6841b48fdb12d9f3566d3",
+    "src/lore/FamilyTree.ts": "72e3aaa7bb2fc129b3b1262edbfc31ad1c118ea62448b0b337d0d4be6778f131",
+    "src/lore/FamilyTreeView.ts": "e53a77c025ef7f3016ff6ea0b3089096bb89b5b222c0bcf501608f78b457fd75",
+    "src/lore/FoundingBookWindow.ts": "bc1f0a30ad21f626a2d0f63d26cc390305400613f166b87c9ce9b885b2c3881a",
+    "src/lore/LegacyNarrativeComposerV2.ts": "85858c0dac798038c06db56b10f11b07950cd40aa6f34899b418b8c7b02644df",
+    "src/lore/LegacyNarrativeComposerV3.ts": "d1c6c3302c61bc269cfc6b20f7beca1232300256adbfa7275cedeb632f378f2b",
+    "src/lore/LivestockNarrative.ts": "a5bce832a0aff74ef3d23be3c5d67dd9d74d5b245bc13d07a09ff163e3308c8d",
+    "src/lore/LocalLoreAdapter.ts": "3b08c984e1ae85c8688b8e2eb0f0c7e85793c9ba9936019c7820e3c3413d8454",
+    "src/lore/LoreBenchmark.ts": "a1f7156e45b0fc4ba39c1e01445b8add98f33427f235ea791f103dad7e84ed6c",
+    "src/lore/LoreExperimentQueue.ts": "2f82d3bfa9a6f10b7d6cc1be297b18ed7c9af8d19d400a2fc602c1e136a2685d",
+    "src/lore/NarrativeComposer.ts": "0499bc7785f7ec28497a180814c6a5ff7e3feb44de51651f6fdbbad58cdf7b12",
+    "src/lore/NarrativeMemory.ts": "19316d69d3cbaf99c1226c4a5fc91922ee11ffb298b88d33a349cf71703589c0",
+    "src/lore/NarrativePlan.ts": "4d61d45b74d325f5fc8a37096e7939995c70f28d23a84663af963e58320bb5f4",
+    "src/lore/NarrativeTime.ts": "978a5b92bc12fef756cf0ffd6bf9707d7debee4d2b86ea1c4b6f5c16f1152840",
+    "src/lore/PersonalHistory.ts": "f4b2f1ac81692c0314a91a1cd3b75979f10faef6a5d603bf41c6232273728fc9",
+    "src/lore/PersonalHistoryView.ts": "26c16667c3e6723251dfd30cdddd0e195bb096a2863d47d8aa3362cfc8a23eb4",
+    "src/lore/clan-book.css": "053dfcb118e20e9125fc7b089d58a0a0513fec2685c0e9bb70049323ccc94301",
+    "src/lore/family-tree.css": "0b2c8d9eba7fa3ed1cf14b47412219d8049513e848d3a063fee8c8673e6331a9",
+    "src/lore/personal-history.css": "858a1ee7b03716ba833ae876f9eee9999f7a085e7a1542a99136cea8353c492b",
+    "src/main.ts": "ab73ab4d2e572e1043085153e3aa7c2738494259f324298108f77b90af40b3b8",
+    "src/play/PlayUI.ts": "f731a8c54b02620090cdbdec2535ea401e9e0c4a861101a15a59d53db179d0ed",
+    "src/play/SelectionPresentation.ts": "20c39807131de62f29ee9b35d8ba84f2b5c038eb04358384fb4b396c46fd8028",
+    "src/play/SettlementBrowser.ts": "623b90c27da3637f918ade6f92a8d11d312b70bd2daa40ce184ffcd0e420c2b6",
+    "src/play/SettlementPanel.ts": "dea3052f88ba01fdb0c7ca6199004349386169f89ee6b8cce714d4da1060ada5",
+    "src/play/SettlementRecovery.ts": "282d689f62dfa14e3113dcb8c205d5c0ac61aaa3196ebcc7d28a3fdb6c73ae49",
+    "src/play/SettlementView.ts": "b8ec5b7c94f5213e0ae55b5113465dad37d9c8c6e4596d564ca0b9afba1eea46",
+    "src/play/SharedSettlement.ts": "aee737e2879d0f63612f4d9b255e25c42e30e8752534f3acd4a92c2e94899089",
+    "src/play/WorldControls.ts": "9f11b839e6889df736b4938afdc3327d9f240e690f2f23201e7e93d7817aafee",
+    "src/play/WorldView.ts": "0e3e365ae5cf547b9899a2378e164a1ef9ff8bba43eacb9f13f860f66849f112",
+    "src/play/play.css": "dd36855e7be034cdaf3f940a2057aa047483328f1d99be96007a68800ef40d90",
+    "src/simulation/BirthdayCalendar.ts": "f745a3882e826f5b646eb1d1ddc2a1d673359bff5e79e8559ca1e9f8ae50b764",
+    "src/simulation/Campfire.ts": "a415beb9e7cc56fc6cdc3cbb04bcf81474f5cf4bcff5c1983dfb097980d14367",
+    "src/simulation/CareCalendar.ts": "a4ac6b904be6275e5076e889fa13c69a82399ffc5eaf41741f3c51d83bd10227",
+    "src/simulation/ClanDiscovery.ts": "df791fdd1903654e729f283651264a278e65e7129de9b3cc608a28107faba369",
+    "src/simulation/EventFacts.ts": "57d574b5a1b6e9aaca26589d23290cef3ed8b52cd1e7fb544dcab4d0e8f9f3bc",
+    "src/simulation/FamilyMechanics.ts": "c313e23b4df4e5bd8990ce54728758a1ff5dabe675f73d43b53f057063ce05b0",
+    "src/simulation/Farmyards.ts": "e93fe164e6062077bcbef575c3d31e1e873ce00831621a142a69327ada4539e7",
+    "src/simulation/FoundingPhase.ts": "4d8d68a8ef3c29d0e89c5a3f2091a7fba009e1d54ee96aad110ba23c78a93627",
+    "src/simulation/HousingNames.ts": "6975f2c764b074c909b768357dd6e9cd853815aed35412623577392d7ba45974",
+    "src/simulation/Identity.ts": "cbcf1b001fd71d9246efb7cffda52a69b3d13957df2ea97f0fdf44f2f1841513",
+    "src/simulation/Landing.ts": "c52a0106d1f710287c731c18205fe7b64f99c5dc0b5a941a271be75289ff516b",
+    "src/simulation/Livestock.ts": "a3cfa4eb713253c9351b583ad1c85382eb044b2001d9d029ba3bdf4872865bb2",
+    "src/simulation/Mechanics.ts": "c513d636923df1816ba076c7743941b6cf4a92f0d01449f8833f6104967744ad",
+    "src/simulation/Mortality.ts": "9d8e61688eb2ee77db5b11ad0169edf1c3ef73baa248b69f0c82e7978dab9713",
+    "src/simulation/PersonaAge.ts": "2f63153673647cd2afa15df35f38db7faeb166cc243934a3d06feab3d5b4358a",
+    "src/simulation/PersonalityLifeEvents.ts": "7c9cbc4cfd989313149d81982fad68cd3f9574d653826103b6b92dfdad71c8ab",
+    "src/simulation/Random.ts": "15ae0cb079aa5f7210b40bb005dd31e434532b3183e65ea307bf1071fb34005d",
+    "src/simulation/ScheduledBirths.ts": "e44b527805204280829d9cf2a102bc330782ac9aa8963c664284a1c8d959ded8",
+    "src/simulation/SimulationCore.ts": "ec8b5165a5e1a762a71708d143808d8e435ebf89f7682826e4bd858f660f9ab4",
+    "src/simulation/SpatialExpeditions.ts": "606228252185349f6ada8686ce5aa65b916deb8ba873afb71bbe4944d34187f4",
+    "src/simulation/Weather.ts": "98f012e7918da6290b79b083b3d36d694c45fe0111305205adc595d5c0c5aac6",
+    "src/simulation/WorldExpeditions.ts": "5975963781b99bdd06539d0c8f7ba4cadcf3acccb48e834f9107bd43add602eb",
+    "src/style.css": "8224f5d129bda068cc4b1ebaf566f3eb2f8fbeafa115546221f21718cbfe3c8c",
+    "src/systems/AnnualCycle.ts": "13070b7d57478c47565ce51b830cd2128f696caddfa77e58db9a532da030e7dd",
+    "src/systems/MovementSystem.ts": "46ce6a417ad14e68e06765d173ae9be00d5d2483f2648c65fd6ec567d300ccdf",
+    "src/systems/ResidentPassing.ts": "c40dd7f9676872a6d5b60e72313854eb51faf06d26a56843516efed3517db42c",
+    "src/systems/SocialEncounters.ts": "8ffa0bad4cd443088589ec1f95aa9d16d5e72955615d94b0b78ab156edcf4d92",
+    "src/ui/CharacterProfileCard.ts": "f158393edde3a9932b9da62a86f96b1d52e894021811ef4500940e3a19989676",
+    "src/ui/CharacterProfileContent.ts": "da10ab787e4899546ef4b1807b70320e7d743df40caea5b982c7a5945d8d7163",
+    "src/ui/FjordsideControls.ts": "5cb0d79b7754dc6aed5e79487366959f33c42a67f4d4bc13ba325ea5a7cbe352",
+    "src/ui/MovementDebug.ts": "8cd92cc8570ad791f0aee34d7bb2e5814fef6a03f4db64c2118ba53344593152",
+    "src/ui/ScreenAwakeControl.ts": "d44e69f569956567d6c2c8d52c2796d1d9a0271e4834ea04d965b2e7940918ba",
+    "src/ui/WorldHUD.ts": "4324a2c259a0e3b67cecfe24d582846472fbe12cee5f19edc9c05fc4aca95a0c",
+    "src/ui/screen-awake.css": "e94127d867d45095477fcc1f565e89bf77cf4b6ff0fc3da7aca135fa1d1e2e61",
+    "src/vendor/boona13-grass/GrassField.ts": "96b64c1b718021cec21dfa1c970655c6d4d99fbd701801404a376f38779cccc6",
+    "src/vendor/boona13-grass/grassShader.glsl.ts": "f541dc9cb2f4dfa881c477443c215be073fd11e0367f8a872cdd10ffa53d39ff",
+    "src/vendor/boona13-grass/windNoise.glsl.ts": "a55e10ef10889793d310bc525938132b5b69942da2efb2db5594d56a991ad1b2",
+    "src/vendor/boona13-water/WaterMask.ts": "cbb4835515d591991ebb9b570f867970c6e501bcecc329ccd7bce6e75505da75",
+    "src/vendor/boona13-water/WaterNoiseLUT.ts": "c5363984998c6d3356d7bb1038654022031863b62d785e32403ae9404a8bad35",
+    "src/vendor/boona13-water/WaterPlane.ts": "78d1c8e996b98fb413bade93ef6b8c2b746ae35fb592a7bc1f149a1709f3cca0",
+    "src/vendor/boona13-water/waterShader.glsl.ts": "7e8ea802196be785e787157f86d603e1a6640157c4af3c30101d443120618bb3",
+    "src/vendor/ez-tree/LeafWind.ts": "427004021afac6736fc4c561dee0d5a6d8d40ace8d914dd1e4b00d83e7629ae1",
+    "src/water-lab/FloatingSample.ts": "d62192d21cb9173c6c1b750c0e69d7d4240dd475252c7c28589dadbc11ced9cc",
+    "src/water-lab/WaterLab.ts": "6be5b30fb88bb258e9c6a608bdbf8f5d2b05e93e8404573116fb2541b9cbe5d4",
+    "src/water-lab/water-lab.css": "9741d10ce21bb14cad868f9472634e3f57eddcc0ee34f25066538652f1ad1ff9",
+    "src/water/ReferenceWater.ts": "dc6dcd2f093b956662635159c9f97aa75c4e01827eb96e3ed869792938e55404",
+    "src/water/ReferenceWaterShaders.ts": "5188e8b98e66973818efe9e2113b34828b880b0a1e1afe40a6a52e33f63c2dca",
+    "src/water/ReferenceWaterTexture.ts": "47edf526a13bbee2cde3cbe5290fa7d4f593c0ec78fb1f139c29704cceea7806",
+    "src/water/ReferenceWaterWaves.ts": "847c86fa4b63eb313d9d213a151bd9c24a1f69948931c9bd172305afd4cf1e77",
+    "src/world-generation/BrowserGeneration.ts": "90d597c078215ead95012242155787bc2a9790dbb81aa53096533969157b7328",
+    "src/world-generation/CoastDistance.ts": "bb03ec068c546f0df62ea11cc5bfd3986f538bc32d34317817dde00b44060dd5",
+    "src/world-generation/EnvironmentZoning.ts": "a13a27428ec82e9054610ddad58ec2477832f88bae89381056d757b5b160da1c",
+    "src/world-generation/GenerateWorld.ts": "60f134d9f9bf5b68c234546d4bfb9aab20f8ab8c12dbe6d03714982d27fa7326",
+    "src/world-generation/GenerationClient.ts": "c36208680e164255ffb341b14b969aa2bf04acc5c4269d260aea4c92d564f204",
+    "src/world-generation/GenerationProfile.ts": "7ee16674b70bf977a41563e38e05eb8ed52d8047e01893e80a94fc7203e69ad2",
+    "src/world-generation/GenerationTask.ts": "7d3f872434b7eade93d746d0323ebbde25f220490d5b55370ace768eb6a23120",
+    "src/world-generation/GenerationWorker.ts": "b65f6992c321ab16d7b1d43d96239cedea369bf699d4f59aae5ec92aac2d5964",
+    "src/world-generation/HarborClearance.ts": "8ea17a5fd82991c471ee0da207546b021273b14185be13b3e7e5da854980a122",
+    "src/world-generation/IslandDrainage.ts": "7d04314dbb82f247e39c4980b1feef75f98204d43313b115dafa223d145d35c3",
+    "src/world-generation/IslandDrainageV1.ts": "c760b14b26a2ec01e84522b16ef1ca3924a8cf76d1ad4e7f115e683cb8f159f1",
+    "src/world-generation/IslandShape.ts": "34b832daaa23cae097d9495c0fde878d7c024b14b2e3760b5f00605716c9191b",
+    "src/world-generation/IslandShapeQuality.ts": "364b2593460983bb28417d8170a4c1fd8e5a9c28dc6697f57510bc1a59059603",
+    "src/world-generation/IslandShapeV1.ts": "4b5cf74ec33d432f71ef9d3cfabd54e254f0ff470709cf333678942d7fa3b2b0",
+    "src/world-generation/MacroIsland.ts": "5c53839e940b46e449c3b426ed7091d5046c6867fff2e397e56253b30627a3d7",
+    "src/world-generation/NatureFootprints.ts": "5060a39cffc198442b8dea7fc51d6b955ecc8d0dad1fbeb1616abd18d860a9d8",
+    "src/world-generation/PineFootprints.ts": "be5e6bd3e7913831b17b30cbd7f09b818c5593612f06f693a77459e534fcc452",
+    "src/world-generation/PlanIslandSettlements.ts": "c230785937326873bdff69028097aead2ac1dea25b0a8124cb9e43b4630d26dd",
+    "src/world-generation/PlanNature.ts": "5a2ed9a5e76c1b48bbc6fb226c5fecc0d0f9b2bf14fcf64a1be0d585456c5cdf",
+    "src/world-generation/PlanSettlement.ts": "dfe6fb366caff06a2b9a4214928b27fedffce46c7fb4af90242862d73885070b",
+    "src/world-generation/ReviewSeeds.ts": "2c0bf359eb43a45f550a712f08418fb2e5c86079baf86878a1b81d7c8cc3b2ff",
+    "src/world-generation/SettlementCompartments.ts": "2c44d7851ae54f4931f02a5d4be188b9ef284eb91bedbb3b12bd7fd0cebf4ad3",
+    "src/world-generation/SettlementSites.ts": "e6daa4e6b4c4c154e58fce79607479f1a16ea10c0120104c7832464672b0a355",
+    "src/world-generation/SettlementVisibility.ts": "3847f8317e50276b9fac6ecef9f7a53527b201f302a2aa3a9a7f5bb10ce4f687",
+    "src/world-generation/SiteNavigation.ts": "30dbff82146367ad80364c1424bbc127ab0531939b738a18e9e4a345a3bb210a",
+    "src/world-generation/SpatialConstraints.ts": "7f50e7e3e34adceb63d76a41640bc2c052bf381b38320d728af43f7076bc415e",
+    "src/world-generation/TerrainPreview.ts": "db573675a8c729ef2088bd731e48cdaa92f86cf1f39648f835bff5e80700a0bd",
+    "src/world-generation/TerrainQueries.ts": "a788ebf1b18eb6418ba7b874b3f185965a378d3f160ea6ea557e6295e3a8c2b1",
+    "src/world-generation/ValidateEnvironment.ts": "8a2d4a70ff284634439077aa5c139e36f8e6f9d9065327cdd06a70060a2a3ad0",
+    "src/world-generation/ValidateNavigation.ts": "4eb2a4d6a7ed02921c57e2cead8abfdadc07ea6d5da8bb6cbcdf4701419de865",
+    "src/world-generation/ValidateSiteSelection.ts": "add4803725a4851c3fab84ce959d6329f2d633b6bf09d3de1708d1e876aa239f",
+    "src/world-generation/WorldBlueprint.ts": "44be3cd3e077288f1837c0fbc3ddb51ce90c1016e0320a0eb110af4b63d2530a",
+    "src/world-generation/WorldSave.ts": "6a28d744bf62aff4927e7ec334353edcce465f7fa538c6f09d78a205d49b9eb9",
+    "src/world-generation/WorldSpatialQueries.ts": "5d21050a19286438c75ad205ee235c8b3c0dd8e5df656bdf8004d93069b4373e",
+    "src/world/BlueprintMovement.ts": "6df8b7d01b4bf0720781a6db5786de22e6c1b3d9e80e881ad034f03b9fc1d350",
+    "src/world/BlueprintTerrain.ts": "8bc6b94f86c0887b180ae468ffc495e10c8e9961a898b5e72769884a7848b63c",
+    "src/world/BoatFloat.ts": "8d6ac284d81f787aaada30e23fd6139834a51bf754b565f1de836c30be972a17",
+    "src/world/BuildingPlot.ts": "15f2d8c1643baca256149cecb95ed66b95a70bb5ad3960a53308c5c873a5d41c",
+    "src/world/Environment.ts": "620be0186b9220b77e48f6502cb3d2fc3e8a9cdc63bf0a7dac028b1f3556891f",
+    "src/world/EnvironmentOverlay.ts": "4dd28722a52a6a0b37c668a948760c52598f8ac8412cdd0c8017830d8aa22eea",
+    "src/world/FjordWater.ts": "c727a1178c1c7d14f82a7c3a65d588b39b55a00ee76b8b21339a2c9dc55ca81d",
+    "src/world/FjordsideWater.ts": "e29a5a9391a302ba2c2edaa2e655d3c8254f69b8dcfc692006fe4bad00dc65d4",
+    "src/world/GroundBlending.ts": "defaaca158339f2541c4dbb211ade21c0a1fe33dc2d1f4d78ae430a21dd8e02e",
+    "src/world/GroundMaterials.ts": "100e79717373743c566cb7370077d40fe3bde677c3d55446bacb961d76aeabbf",
+    "src/world/GroundTreatment.ts": "3739f3102e73ae73cf058399841708d3c715db01cfd41686f66a6b1c30d21230",
+    "src/world/KayKitNature.ts": "e87b7055fa0dc45b8525ffd024801b45cc3628ef1758b24523bbb81616b4317c",
+    "src/world/NatureWind.ts": "d37b062bf094b7da038fae8f2745e448a0d98be6c7a260680ccc0d44c35afa2a",
+    "src/world/Paths.ts": "e01b8724f199949becdb4f9189529d4227c0d7fe677bc1fb447680d9c1d5bfa6",
+    "src/world/PineModels.ts": "a0f3fee4c7e7c56314ef0df0967af5c7ce550263923afbfd16dc39d91a147ed4",
+    "src/world/PlaceSettlement.ts": "a122675490525bfcfc97ad32de482e19448caed463dcbc5f519bb13aac185fef",
+    "src/world/RegionalGroundMaterials.ts": "bdf1bfc6bbba60e54241d48a1cbe60b18fac5933679c1de9601421723bfee05f",
+    "src/world/SeasonTint.ts": "a44045ee5d1ccbb3b1ce139f412cb00b269c51fa1d8baa7d23e3c3256ebc6b98",
+    "src/world/SettlementGrass.ts": "e7fdb5a10abed725e1668e7149ec9ddb897be7e7537c27c55212f6f30d885d16",
+    "src/world/SettlementLayout.ts": "d6abe47532f2e0da1d932a4fd0b96b3cdd044f43ad925e2e687619a73cf06d57",
+    "src/world/SpatialOverlay.ts": "768bbfa4589ee5ee289e8bf890444f5416174919b59a1e0ba3338fb402b61753",
+    "src/world/StructureSeasonTint.ts": "070bbb828ceea35ef1c2f664c4589d2f620617a0207b3a7423a55cd6a595480b",
+    "src/world/Terrain.ts": "9a2a7bd8d14ad5147f32f7b2b6d1b1d1e4e9351652007800867d0521eeda660e",
+    "src/world/TerrainNavigation.ts": "b33d0cb12a8c5c58c121258e8e4f1db1cb589f622b7c1201bf1d1b6e17f2175c",
+    "src/world/TerrainShading.ts": "50a704b771bcd97ed0620112428932b4e2f6172d47560c6543cecf7fd56b3b12",
+    "src/world/Water.ts": "7f3d969196f8755312df76833cfea0294d73c506dd3100f4e6315f9464868d7b",
+    "src/world/World.ts": "a6bc6b8638621159d68b49133be63d162e04807ea3a22a16d7ea08dcd81fa3dd",
+    "src/world/WorldAttachments.ts": "35248aad2e7b5bab70636f1d730e6c8436790f54f890505b5479a92d75f5e0a1",
+    "src/world/WorldFactory.ts": "a4bf3202b56a1cd4cfad70a1ae78cb0fadc465838827b21cf8b04af1cd0b48f6",
+    "src/world/WorldGroundMaterials.ts": "ceb90e517eb8b3830ae9253a609489a0ea8746cea2e813153b3caf54deb5935b"
+  },
+  "status": "PASS"
+}

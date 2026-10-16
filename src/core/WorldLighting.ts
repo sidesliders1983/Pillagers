@@ -21,7 +21,8 @@ export class WorldLighting {
     private seasonWeather:DayLightingSettings|null=null;
     private fogEnabled=true;
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
-        private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard'){
+        private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard',
+        private seasonTreatment = { ambientScale: 1, directScale: 1 }){
         scene.background=new Color(config.day.sky);scene.add(this.ambient,this.directional,this.campfire);
         this.directional.castShadow=true;
         const sun=config.day;
@@ -156,6 +157,9 @@ export class WorldLighting {
                 MathUtils.lerp(1,weather.ambient/config.day.ambient,winter);
             this.directional.intensity=MathUtils.lerp(from.intensity,to.intensity,mix)*
                 MathUtils.lerp(1,weather.sunIntensity/config.day.sunIntensity,winter);
+            // Rebalance form after composing seasonal weather, preserving every weather ratio.
+            this.ambient.intensity *= this.seasonTreatment.ambientScale;
+            this.directional.intensity *= this.seasonTreatment.directScale;
             this.fog.near=MathUtils.lerp(config.day.fogNear,weather.fogNear,winter);
             this.fog.far=MathUtils.lerp(config.day.fogFar,weather.fogFar,winter);
             this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,weather.exposure,winter);

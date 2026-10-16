@@ -27,6 +27,8 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
+import './desktop-foundations.css';
+import { fjordPresentation } from '../config/FjordPresentation';
 import { Vector2, Vector3, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
@@ -808,7 +810,9 @@ export class FjordPlay {
                     (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
                 groundSignature = "";
                 lighting?.dispose();
-                lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
+                lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
+                    document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
+                    fjordPresentation.lighting);
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, blueprint.terrain.bounds, next.movement.heightAt,
