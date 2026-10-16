@@ -2,6 +2,7 @@ import {
     BufferGeometry, ClampToEdgeWrapping, DataTexture, DoubleSide, Float32BufferAttribute,
     Group, LinearFilter, Mesh, MeshBasicMaterial, RGBAFormat, UnsignedByteType,
 } from 'three';
+import { lightingConfig } from '../config/lightingConfig';
 import { discoveryAt, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { terrainTriangles } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -87,7 +88,7 @@ export class DiscoveryFog {
         texture.wrapS = texture.wrapT = ClampToEdgeWrapping;
         texture.generateMipmaps = false;
         texture.needsUpdate = true;
-        const mesh = new Mesh(this.geometry, new MeshBasicMaterial({ color: '#20333c',
+        const mesh = new Mesh(this.geometry, new MeshBasicMaterial({ color: lightingConfig.day.sky,
             alphaMap: texture, transparent: true, alphaTest: .002, depthWrite: false,
             depthTest: true, side: DoubleSide, forceSinglePass: true, fog: false, toneMapped: false }));
         mesh.renderOrder = 950;
