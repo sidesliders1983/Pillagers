@@ -1,0 +1,202 @@
+{
+  "batches": [
+    {
+      "ticks": 2,
+      "positions": [
+        16,
+        16.4,
+        16.8,
+        17.2,
+        17.6,
+        18,
+        18.4,
+        18.8,
+        19.2,
+        19.6,
+        20
+      ],
+      "paused": [
+        20,
+        0,
+        64
+      ],
+      "afterPause": [
+        20,
+        0,
+        64
+      ],
+      "confirmedX": 20,
+      "unchangedCore": true
+    },
+    {
+      "ticks": 3,
+      "positions": [
+        20,
+        20.6,
+        21.2,
+        21.8,
+        22.4,
+        23,
+        23.6,
+        24.2,
+        24.799999999999997,
+        25.4,
+        26
+      ],
+      "paused": [
+        26,
+        0,
+        64
+      ],
+      "afterPause": [
+        26,
+        0,
+        64
+      ],
+      "confirmedX": 26,
+      "unchangedCore": true
+    },
+    {
+      "ticks": 8,
+      "positions": [
+        26,
+        27.599999999999998,
+        29.2,
+        30.799999999999997,
+        32.4,
+        34,
+        35.599999999999994,
+        37.199999999999996,
+        38.8,
+        40.4,
+        42
+      ],
+      "paused": [
+        42,
+        0,
+        64
+      ],
+      "afterPause": [
+        42,
+        0,
+        64
+      ],
+      "confirmedX": 42,
+      "unchangedCore": true
+    }
+  ],
+  "actor": {
+    "key": "persona:founder-1",
+    "renderId": "61b7973a-9fd4-4523-a180-60774a1bc123",
+    "kind": "persona",
+    "id": "founder-1",
+    "living": true,
+    "expedition": "explore-1",
+    "expeditionWalking": true,
+    "age": 40,
+    "position": [
+      42,
+      0,
+      64
+    ],
+    "asset": "human",
+    "scale": [
+      1,
+      1,
+      1
+    ],
+    "bounds": {
+      "isBox3": true,
+      "min": {
+        "x": 41.79339785467584,
+        "y": -0.002685376108265851,
+        "z": 63.54313250733688
+      },
+      "max": {
+        "x": 42.23920897163342,
+        "y": 1.3849618244901074,
+        "z": 64.46630303645652
+      }
+    },
+    "appearance": {
+      "seed": 2031260111,
+      "height": 1.3507593083474785,
+      "adultAge": 40,
+      "masculinity": 0.51,
+      "weightDeviation": 0.27556993463397017,
+      "age": 40,
+      "stage": "adult",
+      "appearance": {
+        "hairStyle": "medium",
+        "beardStyle": "none",
+        "color": "#b8a079",
+        "greyAmount": 0
+      },
+      "appearanceFit": {
+        "hair": 1,
+        "beard": 1,
+        "clothing": 1
+      },
+      "motion": {
+        "cadence": 0.9748,
+        "stride": 1,
+        "footfall": 1.108
+      },
+      "weights": {
+        "Masculine": 0.01200000000000001,
+        "Feminine": 0,
+        "Breasts": 0,
+        "Powerful": 0,
+        "Slight": 0,
+        "Agile": 0,
+        "Grounded": 0.252,
+        "Tall": 0,
+        "Short": 0.3187167559018623,
+        "Overweight": 0.1653419607803821,
+        "Underweight": 0,
+        "Age": 0,
+        "HeadWidth": -0.29153090296313167,
+        "HeadLength": -0.220109481504187,
+        "Jaw": -0.23912441572174428,
+        "Nose": -0.2219244978390634,
+        "LegRatio": 0.20715733000542969,
+        "ShoulderSlope": -0.06901116203516722,
+        "Asymmetry": -0.0020919291768223044,
+        "BellyJiggle": 0,
+        "BreastJiggle": 0,
+        "Child": 0,
+        "ChildPower": 0,
+        "ChildAgility": 0,
+        "FemininePower": 0,
+        "MasculineAgility": 0,
+        "TallSlight": 0,
+        "ElderHeavy": 0
+      }
+    },
+    "motion": {
+      "state": "Run",
+      "speed": 1,
+      "clipTime": 0.616266626930237,
+      "sourceClip": "Running",
+      "clip": "Run"
+    },
+    "clothing": {
+      "id": "generic",
+      "assets": {
+        "hair": "hair/manual-fitted-short",
+        "beard": null,
+        "outfit": "garment/meshy-grid-trial-001",
+        "shoes": "garment/meshy-low-shoes-005",
+        "trousers": null,
+        "top": null,
+        "equipment": null
+      }
+    },
+    "placeholder": false
+  },
+  "diagnostics": [],
+  "sourceHashes": {
+    "src/fjord-play/FjordEntities.ts": "e7b370d7b194ace94d732ec76dc120d9bb8e3f24f0ad26640e144c086dcf5dc2",
+    "src/fjord-play/FjordPlay.ts": "825bf73bc567e42a49318ca759b41dfee8f47624a919ad7cdd82099a4f7fd418"
+  }
+}

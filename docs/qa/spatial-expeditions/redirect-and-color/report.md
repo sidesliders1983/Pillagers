@@ -1,0 +1,18 @@
+# Destination replacement and discovery terrain colors — PR #179
+
+## Corrections
+
+A paused Returning group previously disabled Explore Area until it had walked all the way home. Explore Area now arms one destination tap while Traveling, Exploring or Returning. Normal ground taps remain navigation outside that mode. Issuing an order does not start the clock or advance time; the panel explicitly explains Start when paused. The group starts at its confirmed Core positions, retains the original home destinations and spends new provisions for the newly planned outward/stay/homeward legs using the existing rule. Previous provisions are not refunded. Rejected orders change nothing; active reports show Returning rather than a premature Cancelled outcome.
+
+Repeated discoveries previously reconstructed SeasonTint over already-tinted persistent terrain materials, multiplying the seasonal color until terrain appeared brown/black and accumulating shader wrappers. Discovery now refreshes seasonal foliage alone; terrain colors, shader hooks and live snow uniforms remain attached. Disposal restores original material colors and hooks. New foliage receives the current season without tinting the ground again.
+
+## Verification
+
+- Fourteen spatial Core tests pass, including paused-state-independent redirect from confirmed positions, ignored renderer origins for away members, retained original homes, original/redirected recall, exact save/load replay, invalid/unaffordable order atomicity, corrupted homeward-route rejection, no invented homecoming and unchanged discovery on dispatch.
+- Four seasonal contracts pass. Repeated teardown/reattachment preserves original terrain color and exactly one shader wrapper. Foliage refresh preserves the actual ground callback and snow uniform object through Summer and back to Winter, while newly discovered trees receive their own seasonal material.
+- Eighty-seven related legacy expedition, discovery, Fjord bridge/season/living-world and narrative tests passed during this fix pass. TypeScript, production build and full character validation including Lab previews pass. The existing large-chunk build warning remains; checks were not weakened.
+- The real-session controls browser check verifies that an ordinary tap does not issue an order, while Explore Area then one valid tap replaces a paused returning group's target. Invalid taps preserve state and target mode. No redundant send/confirm control exists.
+- The actual native resident/model/Core browser check verifies even movement across 500 ms batches, no predicted travel, pause, unchanged Core JSON and exact body-position continuity when redirecting then recalling. Controlled frame inputs are not FPS measurements; smooth-motion.json records them.
+- The final production 3D flow passed in Edge touch emulation at 1024x768 and 390x844: two real residents, direct departure, gradual discovery, pause, exact reload, recall, a replacement order while Returning and paused, and completed return. Replacement adds no ticks or mapped terrain. Browser errors are empty. Its saved discovered-ground colors exactly equal a fresh world's colors at the identical paused campaign time/season. browser.json includes source hashes and the raw 12-frame diagnostic samples per quality; these are not performance gates.
+
+The screenshots show the corrected ground and available Explore Area while away. This revision awaits physical iPhone/iPad feedback. Earlier individual-travel, target-selection and direct-travel evidence remains unchanged. No project formatter is configured; formatting was manually reviewed and git diff --check passes. Full required CI runs on the new commit; the PR remains draft until that head is green.

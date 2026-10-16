@@ -29,10 +29,22 @@ export class FjordCampaign {
         this.blueprint = geography === 'island-pool-v1' ? createCampaignIsland(session.snapshot().seed) :
             generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
+        this.bindExpeditionWorld();
+    }
+    private bindExpeditionWorld() {
+        this.session.bindPhysicalWorld(this.blueprint, geographyIdentity(this.blueprint), () => {
+            const fire = settlementCampfire(this.blueprint);
+            return [...Object.values(this.layout.plots), ...(campaignIslandPlan(this.blueprint)?.plots ?? [])]
+                .map(plot => ({ minX: plot.x-plot.halfWidth, maxX: plot.x+plot.halfWidth,
+                    minZ: plot.z-plot.halfDepth, maxZ: plot.z+plot.halfDepth }))
+                .concat([{ minX: fire.transform.x-5, maxX: fire.transform.x+5,
+                    minZ: fire.transform.z-5, maxZ: fire.transform.z+5 }]);
+        });
     }
     enableDiscovery(): void {
         if (!campaignIslandPlan(this.blueprint)) throw new Error('Discovery requires a physical island campaign.');
         this.session.initializeDiscovery(this.blueprint, geographyIdentity(this.blueprint));
+        this.bindExpeditionWorld();
     }
     project(state: SimulationState = this.session.snapshot()) {
         const view = projectFjordSettlement(state, this.blueprint, this.layout);
@@ -135,12 +147,15 @@ export class FjordCampaign {
         }
         const discovery = proposal.readSnapshot().discovery;
         if (discovery) assertDiscoveryWorld(discovery, blueprint, geographyIdentity(blueprint));
+        proposal.bindPhysicalWorld(blueprint, geographyIdentity(blueprint));
         const view = projectFjordSettlement(proposal.snapshot(), blueprint, layout);
         this.session.loadJSON(proposal.saveJSON());
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
+
         this.blueprint = blueprint;
         if (saved.bridgeVersion === 2) this.geography = 'island-pool-v1';
         this.layout = view.layout;
+        this.bindExpeditionWorld();
         this.selection = extended && saved.selection && typeof saved.selection.kind === 'string' &&
             typeof saved.selection.id === 'string' ? saved.selection : null;
     }

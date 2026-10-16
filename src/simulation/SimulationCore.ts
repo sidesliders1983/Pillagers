@@ -1,3 +1,6 @@
+import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
+import type { PhysicalExpeditionContext, SpatialExpeditionCommand } from './SpatialExpeditions';
+export { exploreOffer, startExpeditionOffer, inspectSpatialExpeditions } from './SpatialExpeditions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { assertDiscoveryWorld, createClanDiscovery, validateClanDiscovery, type ClanDiscovery } from './ClanDiscovery';
 import { validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
@@ -119,7 +122,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -127,8 +130,16 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
     state.events.push({id: `event-${state.events.length + 1}`, time: {...state.time}, type,
         ...(personaId ? {personaId} : {}), ...(details||personaId?{details:eventFacts(state,details,personaId)}:{})});
 }
-export function applyCommand(input: SimulationState, command: SimulationCommand): SimulationState {
+export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'StartExpedition' || command.type === 'CancelExpedition' ||
+        command.type === 'ExploreArea' || command.type === 'RecallExpedition' ||
+        command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {
+        const state = structuredClone(input);
+        applySpatialCommand(state, command, context);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'SetCampfire') {
         const state = structuredClone(input);
         setCampfire(state, command.lit);
@@ -162,7 +173,7 @@ export function applyCommand(input: SimulationState, command: SimulationCommand)
     integer(total, 'Total ticks');
     integer(input.time.winter + Math.floor(total / input.ticksPerWinter), 'Winter');
     const state = structuredClone(input);
-    if(state.mechanics){for(let index=0;index<ticks;index++)stepMechanicsTick(state);validateState(state); return state;}
+    if(state.mechanics){requireSpatialAdvance(state,context);for(let index=0;index<ticks;index++){stepMechanicsTick(state);stepSpatialExpeditions(state,context);}validateState(state); return state;}
     const winter = state.time.winter + Math.floor(total / state.ticksPerWinter);
     while (state.time.winter < winter) {
         state.time = {winter: state.time.winter + 1, tick: 0};
@@ -263,7 +274,7 @@ function validateState(state: SimulationState): void {
         if (!Object.hasOwn(state.discovery.clans, state.clan.id))
             throw new Error('Missing owning clan discovery.');
     }
-    validateLanding(state);validateWeather(state);validateWorld(state,validateState);
+    validateLanding(state);validateWeather(state);validateWorld(state,validateState);validateSpatialExpeditions(state);
 }
 
 export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {

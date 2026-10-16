@@ -1,3 +1,4 @@
+import { assertSpatialWorld, exploreOffer, startExpeditionOffer, expeditionModeActive, type PhysicalExpeditionContext } from '../simulation/SpatialExpeditions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import { freezeReadView } from './ReadView';
@@ -9,6 +10,27 @@ import type { BirthdayCalendarMode, FoundingPhase, SimulationCommand, Simulation
 /** Browser pacing is transient; only explicit commands change canonical state. */
 export class GameplaySession {
     private state: SimulationState;
+    private physicalWorld?: PhysicalExpeditionContext;
+    private physicalExclusions?: () => PhysicalExpeditionContext['exclusions'];
+    bindPhysicalWorld(world: PhysicalExpeditionContext['world'], worldId: string, exclusions?: () => PhysicalExpeditionContext['exclusions']): void {
+        const context = { world, worldId };
+        assertSpatialWorld(this.state, context);
+        this.physicalWorld = context;
+        this.physicalExclusions = exclusions;
+    }
+    private physicalContext() {
+        return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.() };
+    }
+    startExpeditionOffer(groupId: string) {
+        return startExpeditionOffer(this.state, groupId, this.physicalContext());
+    }
+    get expeditionMode() { return expeditionModeActive(this.state); }
+    get effectiveMinutesPerWinter() {
+        return this.expeditionMode ? 10 * this.state.ticksPerWinter / 1000 : this.minutesPerWinter;
+    }
+    exploreOffer(groupId: string, target: { x: number; z: number }, origins?: Record<string, { x: number; z: number }>) {
+        return exploreOffer(this.state, groupId, target, this.physicalContext(), origins);
+    }
     private canonicalRevision = 0;
     private readState?: Readonly<SimulationState>;
     private serializedState?: string;
@@ -58,6 +80,7 @@ export class GameplaySession {
     }
     initializeDiscovery(world: WorldBlueprint, worldId: string): void {
         this.state = initializePhysicalDiscovery(this.state, world, worldId);
+        this.bindPhysicalWorld(world, worldId);
         this.invalidateRead();
     }
     snapshot(): SimulationState {
@@ -86,11 +109,11 @@ export class GameplaySession {
             while (remaining > 0) {
                 const until = (book.nextWinter - next.time.winter) * next.ticksPerWinter - next.time.tick;
                 const step = Math.min(remaining, until);
-                next = applyCommand(next, { type: 'AdvanceTicks', ticks: step });
+                next = applyCommand(next, { type: 'AdvanceTicks', ticks: step }, this.physicalContext());
                 remaining -= step;
                 if (step === until) book.closeCheckpoint(next);
             }
-        } else next = applyCommand(this.state, command);
+        } else next = applyCommand(this.state, command, this.physicalContext());
         this.trend = { food: next.stocks.food - this.state.stocks.food, materials: next.stocks.materials - this.state.stocks.materials };
         this.state = next;
         this.book = book;
@@ -130,6 +153,8 @@ export class GameplaySession {
         this.replace(createCampaign(seed, this.state.landing?.config, this.state.mechanics?.config, { ...this.state.weather?.config, enabled: weatherEnabled }, this.state.world?.config, { ...this.state.social?.config, enabled: socialEnabled }, targetLandingConfigs, foundingPhase, birthdayCalendarMode(this.state)));
     }
     private replace(state: SimulationState, fresh = true): void {
+        this.physicalWorld = undefined;
+        this.physicalExclusions = undefined;
         this.familyIndex = new FamilyTreeIndex();
         this.personalIndex = new PersonalHistoryIndex();
         this.personalBookKey = '';
@@ -146,10 +171,26 @@ export class GameplaySession {
             throw new Error('Invalid active elapsed time');
         if (!this.running)
             return;
-        const ticks = this.fractionalTicks + milliseconds * this.state.ticksPerWinter / (this.minutesPerWinter * 60000);
-        const whole = Math.floor(ticks + 1e-9);
-        if (whole)
-            this.command({ type: 'AdvanceTicks', ticks: whole });
-        this.fractionalTicks = Math.max(0, ticks - whole);
+        let remaining = milliseconds;
+        // Cross the final expedition tick at its own pace, then spend remaining active time normally.
+        // The normal user preference and fractional canonical tick are never replaced by mode state.
+        while (remaining > 1e-9) {
+            const tickMilliseconds = this.effectiveMinutesPerWinter * 60000 / this.state.ticksPerWinter;
+            if (!this.expeditionMode) {
+                const ticks = this.fractionalTicks + remaining / tickMilliseconds;
+                const whole = Math.floor(ticks + 1e-9);
+                if (whole) this.command({ type: 'AdvanceTicks', ticks: whole });
+                this.fractionalTicks = Math.max(0, ticks - whole);
+                break;
+            }
+            const untilTick = (1 - this.fractionalTicks) * tickMilliseconds;
+            if (remaining + 1e-9 < untilTick) {
+                this.fractionalTicks += remaining / tickMilliseconds;
+                break;
+            }
+            remaining = Math.max(0, remaining - untilTick);
+            this.command({ type: 'AdvanceTicks', ticks: 1 });
+            this.fractionalTicks = 0;
+        }
     }
 }

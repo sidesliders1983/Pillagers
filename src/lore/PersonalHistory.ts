@@ -67,7 +67,7 @@ function rolesFor(event: SimulationEvent, personaId: string, byId: ReadonlyMap<s
             prior.details?.success === true && prior.details.incidentId === details.incidentId &&
             prior.details.mediatorId === personaId ? ['mediator'] : [];
     }
-    if (['ExpeditionDeparted', 'ExpeditionReturned'].includes(event.type))
+    if (['ExpeditionDeparted', 'ExpeditionReturned', 'ExploreAreaDeparted', 'ExploreAreaReturned'].includes(event.type))
         return ids(details.participants).includes(personaId) ? ['expedition participant'] : [];
     if (housingKinds.has(event.type))
         return housingIds(event)?.includes(personaId) ? ['household resident'] : [];

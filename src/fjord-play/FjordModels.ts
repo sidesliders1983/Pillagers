@@ -89,7 +89,7 @@ export class FjordModels {
         }
         return available;
     }
-    animate(model: Object3D, state: 'Idle' | 'Walk' | 'Talk' | 'Listen' | 'Graze' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
+    animate(model: Object3D, state: 'Idle' | 'Walk' | 'Run' | 'Talk' | 'Listen' | 'Graze' | 'HumanInteraction' | 'Farm' | 'Attack' | 'Doze', speed: number, delta: number) {
         const actor = this.actors.get(model);
         if (!actor) return;
         if (actor.human) {

@@ -1,3 +1,5 @@
+import { spatialGroupMission } from './SpatialExpeditions';
+import type { SpatialExpeditions } from './SpatialExpeditions';
 import { endCare } from './CareCalendar';
 import { compareBirths } from './ScheduledBirths';
 import {pruneSocialIncidents} from './PersonalityLifeEvents';
@@ -20,11 +22,11 @@ export type MissionType=typeof missionTypes[number];
 export type Cargo='Food'|'Materials'|'Cattle'|'People';
 export type ExpeditionConfig={durations:Record<MissionType,number>;provisions:Record<MissionType,number>;successBps:Record<MissionType,number>;casualtyBps:Record<MissionType,number>;foodCapacity:number;materialsCapacity:number};
 export const defaultExpeditionConfig:ExpeditionConfig={durations:{Recon:250,Surveillance:400,Pillage:500},provisions:{Recon:2,Surveillance:4,Pillage:5},successBps:{Recon:8000,Surveillance:9000,Pillage:6000},casualtyBps:{Recon:200,Surveillance:300,Pillage:1000},foodCapacity:10,materialsCapacity:5};
-export type ExpeditionGroup={id:string;name:string;memberIds:string[]};
+export type ExpeditionGroup={exploration?:true;id:string;name:string;memberIds:string[]};
 export type ExpeditionResult={success:boolean;discovery:Knowledge|null;casualtyIds:string[];survivorIds:string[];food:number;materials:number;cattleIds:string[];personaIds:string[];summary:string};
 export type ExpeditionMission={id:string;groupId:string;groupName:string;regionId:string;type:MissionType;memberIds:string[];memberNames:string[];priorities:Cargo[];shipId:string|null;departedAt:number;returnsAt:number;foodCost:number;successBps:number;casualtyBps:number;status:'Away'|'Returned';returnedAt:number|null;result:ExpeditionResult|null};
 export type ExpeditionCommand={type:'CreateExpeditionGroup';name:string;memberIds:string[]}|{type:'EditExpeditionGroup';groupId:string;name:string;memberIds:string[]}|{type:'DispatchExpedition';groupId:string;regionId:string;mission:MissionType;priorities?:Cargo[]};
-export type WorldState={version:1;config:ExpeditionConfig;groups:Record<string,ExpeditionGroup>;missions:Record<string,ExpeditionMission>;regions:Record<string,Region>;knowledge:Record<string,Knowledge>;targetClans:Record<string,SimulationState>};
+export type WorldState={spatial?:SpatialExpeditions;version:1;config:ExpeditionConfig;groups:Record<string,ExpeditionGroup>;missions:Record<string,ExpeditionMission>;regions:Record<string,Region>;knowledge:Record<string,Knowledge>;targetClans:Record<string,SimulationState>};
 /** The graph is seeded independently: discovery never creates geography or changes the domestic RNG stream. */
 export function initializeWorld(state:SimulationState,createTarget:(seed:number,clanId:string)=>SimulationState,overrides:Partial<ExpeditionConfig>={}):void {
  const random=seededRandom(state.seed,'world-expeditions-v1'),world:WorldState={version:1,config:structuredClone({...defaultExpeditionConfig,...overrides}),groups:{},missions:{},regions:{},knowledge:{},targetClans:{}};
@@ -40,7 +42,7 @@ export function initializeWorld(state:SimulationState,createTarget:(seed:number,
 }
 export function inspectWorld(state:SimulationState){
  const world=state.world;
- return {enabled:!!world,carrying:world?{food:world.config.foodCapacity,materials:world.config.materialsCapacity}:null,eligible:world?Object.values(state.personas).filter(p=>expeditionEligible(state,p.id)).map(p=>({id:p.id,name:p.name,occupation:p.occupation,age:personaAge(state,p.id)})):[],groups:world?Object.values(world.groups).map(g=>({id:g.id,name:g.name,status:groupMission(state,g.id)?'Away':g.memberIds.every(id=>expeditionEligible(state,id,g.id))?'Ready':'Unavailable',location:groupMission(state,g.id)?.regionId??'Home',members:g.memberIds.map(id=>({id,name:state.personas[id]?.name??state.personaArchive?.[id]?.name??id,occupation:state.personas[id]?.occupation??null,alive:state.personas[id]?.deathWinter===null,age:state.personas[id]?personaAge(state,id):null}))})):[],missions:world?structuredClone(Object.values(world.missions)):[],regions:world?directions.map(direction=>{
+ return {enabled:!!world,carrying:world?{food:world.config.foodCapacity,materials:world.config.materialsCapacity}:null,eligible:world?Object.values(state.personas).filter(p=>expeditionEligible(state,p.id)).map(p=>({id:p.id,name:p.name,occupation:p.occupation,age:personaAge(state,p.id)})):[],groups:world?Object.values(world.groups).map(g=>({id:g.id,name:g.name,status:spatialGroupMission(state,g.id)?.status??(groupMission(state,g.id)?'Away':g.memberIds.length>0&&g.memberIds.every(id=>expeditionEligible(state,id,g.id))?'Ready':'Unavailable'),location:spatialGroupMission(state,g.id)?'Island':Object.values(world.missions).find(m=>m.groupId===g.id&&m.status==='Away')?.regionId??'Home',members:g.memberIds.map(id=>({id,name:state.personas[id]?.name??state.personaArchive?.[id]?.name??id,occupation:state.personas[id]?.occupation??null,alive:state.personas[id]?.deathWinter===null,age:state.personas[id]?personaAge(state,id):null}))})):[],missions:world?structuredClone(Object.values(world.missions)):[],regions:world?directions.map(direction=>{
   const region=Object.values(world.regions).find(r=>r.direction===direction)!,known=world.knowledge[region.id];
   return {id:region.id,direction,requiresShip:region.requiresShip,knowledge:known?.level??'Unknown',terrain:known?.terrain??null,resources:known?.resources? [...known.resources]:null,settlementName:known?.settlementName??null,opportunity:known?.opportunity??null,resistance:known?.resistance??null,observedAt:known?.observedAt??null};
  }):[]};
@@ -56,7 +58,7 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
  for(const kind of missionTypes){uint(w.config.durations[kind],1000000);if(w.config.durations[kind]===0)fail();uint(w.config.provisions[kind],1000000);uint(w.config.successBps[kind],10000);uint(w.config.casualtyBps[kind],10000);}
  uint(w.config.foodCapacity,1000000);uint(w.config.materialsCapacity,1000000);if(!w.config.foodCapacity||!w.config.materialsCapacity)fail();
  const grouped=new Set<string>(),away=new Set<string>(),ships=new Set<string>();
- for(const [id,g] of Object.entries(w.groups)){if(g.id!==id||!g.name?.trim()||g.name.length>60||!Array.isArray(g.memberIds)||!g.memberIds.length)fail();for(const member of g.memberIds){if(!state.personas[member]||grouped.has(member))fail();grouped.add(member);}}
+ for(const [id,g] of Object.entries(w.groups)){if(g.id!==id||!g.name?.trim()||g.name.length>60||!Array.isArray(g.memberIds)||!g.memberIds.length&&g.exploration!==true)fail();for(const member of g.memberIds){if(!state.personas[member]||grouped.has(member))fail();grouped.add(member);}}
  for(const [id,m] of Object.entries(w.missions)){
   if(m.id!==id||typeof m.groupName!=='string'||!m.groupName.trim()||!w.groups[m.groupId]||!w.regions[m.regionId]||!missionTypes.includes(m.type)||!['Away','Returned'].includes(m.status)||!Array.isArray(m.memberIds)||!m.memberIds.length||new Set(m.memberIds).size!==m.memberIds.length||m.memberIds.some(id=>!state.personas[id])||!Array.isArray(m.memberNames)||m.memberNames.length!==m.memberIds.length||!Array.isArray(m.priorities)||new Set(m.priorities).size!==m.priorities.length||m.priorities.some(p=>!['Food','Materials','Cattle','People'].includes(p)))fail();
   uint(m.departedAt,absoluteTick(state));uint(m.returnsAt);uint(m.foodCost);uint(m.successBps,10000);uint(m.casualtyBps,10000);if(m.returnsAt<=m.departedAt)fail();
@@ -70,8 +72,8 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
  for(const target of Object.values(w.targetClans)){if(!target.mechanics||!target.landing)throw new Error('Incomplete world target');if(absoluteTick(target)!==absoluteTick(state))throw new Error('Unsynchronised world target');if(target.world)throw new Error('Nested target world');validateTarget(target);}
 }
 export const absoluteTick=(state:SimulationState)=>state.time.winter*state.ticksPerWinter+state.time.tick;
-export function groupMission(state:SimulationState,groupId:string){return Object.values(state.world?.missions??{}).find(m=>m.groupId===groupId&&m.status==='Away');}
-export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
+export function groupMission(state:SimulationState,groupId:string){return spatialGroupMission(state,groupId)??Object.values(state.world?.missions??{}).find(m=>m.groupId===groupId&&m.status==='Away');}
+export function personaAway(state:SimulationState,id:string):boolean{return Object.values(state.world?.spatial?.missions??{}).some(m=>m.status!=='Returned'&&m.status!=='Prepared'&&m.memberIds.includes(id))||Object.values(state.world?.missions??{}).some(m=>m.status==='Away'&&m.memberIds.includes(id));}
 export function expeditionEligible(state:SimulationState,id:string,groupId?:string):boolean {
  const p=state.personas[id];return !!p&&p.deathWinter===null&&personaAge(state,id)>=(state.mechanics?.config.workAge??16)&&!isProvidingCare(state,id)&&!personaAway(state,id)&&!Object.values(state.world?.groups??{}).some(g=>g.id!==groupId&&g.memberIds.includes(id));
 }

@@ -1,3 +1,6 @@
+import { createBlueprintSurface } from '../world-generation/TerrainQueries';
+import { ExpeditionPanel } from './ExpeditionPanel';
+import { intersectNavigationTerrain } from '../world/TerrainNavigation';
 import { DiscoveryFog } from './DiscoveryFog';
 import { discoveryAt, inspectClanDiscovery, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { LifecycleTrace } from './LifecycleTrace';
@@ -24,7 +27,7 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
-import { Vector3, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
+import { Vector2, Vector3, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
 import { updateView } from '../gameplay-lab/updateView';
@@ -36,10 +39,12 @@ import { SeasonTint } from '../world/SeasonTint';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { projectChronicle } from '../lore/Chronicle';
-import { inspectCampfire, inspectWeatherExposure } from '../simulation/SimulationCore';
+import { inspectCampfire, inspectWeatherExposure, personaAway } from '../simulation/SimulationCore';
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
+
+const campaignClockIntervalMs = 500;
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
 export class FjordPlay {
     private opened!: ReturnType<typeof openSettlement>;
@@ -138,7 +143,7 @@ export class FjordPlay {
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
             <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
-            <aside id="fjord-management"><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
+            <aside id="fjord-management"><section id="expedition-panel" aria-label="Expedition groups"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
 
             <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
@@ -263,16 +268,29 @@ export class FjordPlay {
         };
         let calendar: FjordCalendar;
         let canonicalTime = '';
+        let expeditions: ExpeditionPanel | undefined;
         const refresh = () => {
+            let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
+            if (!expeditionPace) {
+                expeditionPace = document.createElement('option'); expeditionPace.value = '10';
+                expeditionPace.textContent = 'Expedition · 10 min / 1,000 ticks'; cycleField.add(expeditionPace);
+            }
+            expeditionPace.hidden = !this.session.expeditionMode;
+            cycleField.disabled = this.session.expeditionMode;
+            cycleField.value = String(this.session.expeditionMode ? 10 : this.session.minutesPerWinter);
+
+            expeditions?.refresh();
             if (!this.loading) bookReader.update();
             const view = this.campaign.readProjection();
             const state = this.session.readSnapshot();
             calendar = view.calendar;
             canonicalTime = 'Canonical time: Winter ' + view.time.winter + ' · tick ' + view.time.tick + '/' + state.ticksPerWinter;
             productionLabels.enqueue(production.read(state.events));
+            productionLabels.suppress(Object.keys(state.personas).filter(id => personaAway(state, id))
+                .map(id => ({ kind: 'persona', id })));
             header.update(view.calendar, view.stocks,
                 Object.values(state.personas).filter(p => p.deathWinter === null).length,
-                view.entities.filter(e => e.kind === 'cattle').length);
+                view.entities.filter(e => e.kind === 'cattle').length, this.session.expeditionMode);
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
             document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
@@ -356,7 +374,9 @@ export class FjordPlay {
             setPlayback(!this.session.running);
             action(() => {});
         });
-        document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => this.session.command({ type: 'AdvanceWinter' })));
+        document.querySelector('#fjord-next')!.addEventListener('click', () => action(() => {
+            if (!this.session.expeditionMode) this.session.command({ type: 'AdvanceWinter' });
+        }));
         document.querySelector('#fjord-save')!.addEventListener('click', () => action(() => {
             this.shared.saveLocal(localStorage);
             say('Campaign and exact Fjord saved locally.');
@@ -541,6 +561,37 @@ export class FjordPlay {
             resetFrameTime();
         }, { signal: lifecycleEvents.signal });
         const scene = new Scene(), camera = new PerspectiveCamera(45, 1, .1, 2400);
+        const targetGeometry = new RingGeometry(2.7, 3, 48);
+        const targetMaterial = new MeshBasicMaterial({ color: '#ffe09a', side: DoubleSide,
+            depthTest: false, depthWrite: false, transparent: true, opacity: .95 });
+        const targetMarker = new Mesh(targetGeometry, targetMaterial);
+        targetMarker.rotation.x = -Math.PI/2;
+        targetMarker.renderOrder = 1000; targetMarker.visible = false;
+        scene.add(targetMarker);
+        expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
+            this.session, command => action(() => {
+                this.session.command(command);
+                expeditions!.committed(command.type === 'ExploreArea');
+            }), point => {
+                targetMarker.visible = !!point;
+                if (!point && expeditions?.targeting) showManagement(false);
+                if (point) targetMarker.position.set(point.x,
+                    createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z)+.4, point.z);
+            }, () => this.shared.selection, memberIds => {
+                const rendered = layer?.describe() ?? [];
+                return Object.fromEntries(memberIds.map(id => {
+                    const person = rendered.find(entity => entity.kind==='persona' && entity.id===id);
+                    if (!person) throw new Error('A group member is not currently on the island.');
+                    return [id,{ x: person.position[0], z: person.position[2] }];
+                }));
+            });
+        document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
+            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
+            showManagement(true);
+            this.shared.select(null);
+            refresh();
+            expeditions!.refresh();
+        });
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
         const controller = new RTSCameraController(camera, canvas, 'pan');
@@ -591,6 +642,7 @@ export class FjordPlay {
             renderer.setAnimationLoop(null);
             observer?.disconnect();
             controller.dispose();
+            targetGeometry.dispose(); targetMaterial.dispose();
             reducedMotion.removeEventListener('change', configureEffects);
             discoveryFog?.dispose();
             layer?.dispose();
@@ -793,8 +845,7 @@ export class FjordPlay {
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
-                            weatherTint?.dispose();
-                            weatherTint = new SeasonTint(world!.root, world!.terrain);
+                            weatherTint!.refreshFoliage(world!.root);
                             weatherSignature = '';
                         }
                         discoveryFog.setKnowledge(knownTerrain);
@@ -838,7 +889,7 @@ export class FjordPlay {
                             cleared.add(id);
                         }
                     for (const entity of view.entities)
-                        if (entity.transform &&
+                        if (entity.transform && !entity.status.expedition &&
                             (entity.kind === 'persona' || entity.kind === 'cattle')) {
                             const pointKey = entity.selectionKey + '@' + entity.transform.x + ',' + entity.transform.z;
                             if (!cleared.has(pointKey)) {
@@ -847,6 +898,7 @@ export class FjordPlay {
                             }
                         }
                     sceneEntities = view.entities;
+                    layer!.prepareExpeditions(state, this.campaign.blueprint, campaignClockIntervalMs / 1000);
                     await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
                     campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
@@ -895,6 +947,17 @@ export class FjordPlay {
             renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.5));
         });
         controller.setSelectionHandler((x, y, pointerType) => {
+            if (expeditions?.targeting) {
+                const rect = canvas.getBoundingClientRect(), ray = new Raycaster();
+                camera.updateMatrixWorld();
+                ray.setFromCamera(new Vector2((x-rect.left)/rect.width*2-1,
+                    -(y-rect.top)/rect.height*2+1), camera);
+                const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
+                const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
+                if (point) expeditions.chooseTarget({ x: point.x, z: point.z });
+                showManagement(true);
+                return true;
+            }
             const selected = layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
             if (!selected) {
                 if (this.shared.selection) {
@@ -1053,7 +1116,7 @@ export class FjordPlay {
         canvas.dataset.ready = 'true';
         trace.record('scene-ready');
         previous = performance.now();
-        timer = window.setInterval(tickClock, 500);
+        timer = window.setInterval(tickClock, campaignClockIntervalMs);
         document.querySelector<HTMLButtonElement>('#fjord-export')!.disabled = false;
         say('Fjord ready. Desktop: left-click to select (empty ground clears selection), left-drag to pan, right-drag to rotate, wheel to zoom. Touch: tap empty ground to navigate, drag to rotate, pinch to zoom.');
     }

@@ -22,7 +22,7 @@ export function fjordHeaderHTML(): string {
                     <nav aria-label="Game views"><a href="/play" data-settlement-view="board">2D Settlement</a> ·
                         <a href="/gameplay-lab">Gameplay Lab</a> · <a href="/">Fjord prototype</a></nav>
                     <span id="fjord-menu-pacing-slot"></span>
-                    <button id="clan-book-open" type="button">Clan Book</button>
+                    <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low">Low</option>
                         <option value="standard">Standard</option></select></label>
                     <label>Local effects<select id="fjord-effects"><option value="off">Off</option>
@@ -59,7 +59,11 @@ export class FjordHeader {
         root.addEventListener('keydown', this.keydown);
         document.addEventListener('pointerdown', this.outside);
     }
-    update(calendar: FjordCalendar, stocks: { food: number; materials: number }, residents: number, cattle: number) {
+    update(calendar: FjordCalendar, stocks: { food: number; materials: number },
+        residents: number, cattle: number, expeditionMode = false) {
+        const nextYear = this.root.querySelector<HTMLButtonElement>('#fjord-next')!;
+        nextYear.disabled = expeditionMode;
+        nextYear.title = expeditionMode ? 'Unavailable during Expedition Mode' : '';
         const values = { 'fjord-season': calendar.season, 'fjord-year': calendar.year,
             'fjord-food': stocks.food, 'fjord-materials': stocks.materials,
             'fjord-residents': residents, 'fjord-cattle': cattle };

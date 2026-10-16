@@ -120,6 +120,12 @@ function validFacts(facts: OpeningFacts): boolean {
             !['production', 'otherReceipts', 'spending', 'losses'].includes(t.category) ||
             !Number.isSafeInteger(t.units) || t.units < 0)) return false;
     }
+    if (facts.ledger?.provisions) {
+        const pack = facts.ledger.provisions;
+        if (['reserved', 'consumed', 'discarded', 'lost'].some(key =>
+            !Number.isSafeInteger(pack[key as keyof typeof pack]) || Number(pack[key as keyof typeof pack]) < 0) ||
+            !Array.isArray(pack.sources) || pack.sources.some(id => typeof id !== 'string')) return false;
+    }
     return !facts.demographics || Array.isArray(facts.demographics) && facts.demographics.every(e =>
         e && typeof e.type === 'string' && typeof e.eventId === 'string' && e.time &&
         Number.isSafeInteger(e.time.winter) && Number.isSafeInteger(e.time.tick) &&
