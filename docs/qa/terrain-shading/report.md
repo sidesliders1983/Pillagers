@@ -1,12 +1,12 @@
 # Terrain shading pilot — #173
 
-A remains the default. B is an explicit Environment Lab and full-campaign preview. Owner selection and physical iPhone proof remain open.
+The owner selected B from the paired images on 2026-10-16. A remains the default in this pilot; B is an explicit Environment Lab and full-campaign preview. Physical iPhone/iPad gameplay has not yet been reviewed, and the separate default pass remains open.
 
 ## Visual diagnosis
 
 The neutral, texture-free pass shows that shared normals reduce the regular triangular lighting pattern on grassy rolling slopes. Fully exposed bedrock retains deliberate face definition. Broad already-flat parcels show little difference. Source texture detail and zoning bands remain visible; this pilot does not claim to erase the heightfield silhouette or every material transition.
 
-The grass-only UV diagnostic holds normals fixed against the full material pass. B is the candidate for owner review. C is omitted: the evidence does not establish a need for adding UV distortion to this focused normal correction. Source UVs and mask UVs remain byte-identical.
+The grass-only UV diagnostic holds normals fixed against the full material pass. B is the visually selected variant. C is omitted: the evidence does not establish a need for adding UV distortion to this focused normal correction. Source UVs and mask UVs remain byte-identical.
 
 [Open the paired gallery](review.html). Lab diagnostics use a regular seed-18 blueprint without decorations; full-scene pairs use the actual seed-32 campaign on canonical island 18. The blueprints differ between those two cohorts; each A/B pair has identical geometry, state and camera.
 
@@ -61,4 +61,4 @@ The browser runner asserts identical A/B position, UV0/1/2/3, colour and index h
 
 See [implementation contract](../../TERRAIN-SHADING-STUDY.md), [Lab data](lab/results.json), [full-scene distributions](full-scene/results.json) and [summary](summary.json) and [local asset hashes](asset-manifest.json). The gallery was captured at commit `374948fbe5db16485a77c5de740b9ac17ab65e2b`; later source changes before timing affect QA hashing/resume only, not terrain runtime. Histograms and run summaries are retained; individual frame samples are not. Fixture files are the existing `docs/qa/fjord-runtime-performance/fixtures` sources, identified by SHA-256 in every result.
 
-No default change is included. The owner can review `/fjord-play?terrain-study=smooth` and select A or B before a separate integration/default pass.
+No default change is included. Visual choice B is recorded. The owner has reviewed the comparison images only; use `/fjord-play?terrain-study=smooth` for the physical-device gameplay check before the separate integration/default pass.

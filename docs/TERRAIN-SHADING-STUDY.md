@@ -1,6 +1,8 @@
 # Terrain shading study — issue #173
 
-This is an opt-in presentation study. The existing flat terrain (A) remains the default.
+This is an opt-in presentation study. The owner selected B from the paired images on 2026-10-16.
+The existing flat terrain (A) remains the default until the separate integration/default pass;
+physical iPhone/iPad gameplay and loading have not yet been reviewed.
 Environment Lab offers A and B after generating or importing a world. Select **Zoned blend**
 when reviewing the approved island materials. The full campaign preview is available at
 `/fjord-play?terrain-study=smooth`; omitting the parameter retains A.
@@ -57,5 +59,5 @@ Normal, colour, roughness, rock-axis and seasonal material behavior use the exis
   `node scripts/qa/report-terrain-shading.mjs`.
 
 The QA bridge is injected only by the isolated QA server and is absent from normal builds.
-See [the measured review](qa/terrain-shading/report.md). Physical Safari/iPhone measurements and
-owner choice remain prerequisites for any later default activation.
+See [the measured review](qa/terrain-shading/report.md). B is visually approved. Physical Safari/iPhone
+validation remains open before the separate default activation.
