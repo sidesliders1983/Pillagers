@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fjordside · 3D lighting review</title>
+    <style>
+        :root { color-scheme: dark; font: 15px/1.5 system-ui, sans-serif; background: #111c1e; color: #e9e5db; }
+        * { box-sizing: border-box; }
+        body { max-width: 1600px; margin: auto; padding: 20px; }
+        header { display: flex; gap: 18px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
+        h1 { font: 30px Georgia, serif; margin: 0; }
+        a { color: #dbc391; }
+        .intro, .note { color: #bdc7c5; max-width: 1000px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 16px; margin: 20px 0; align-items: end; }
+        label { display: grid; gap: 5px; }
+        select, button { font: inherit; padding: 10px 14px; background: #243334; color: inherit; border: 1px solid #536360; border-radius: 5px; }
+        button { cursor: pointer; }
+        button[aria-pressed="true"] { border-color: #d3b57b; color: #f1d5a0; background: #34403b; }
+        button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #d3b57b; outline-offset: 3px; }
+        .variants { display: flex; flex-wrap: wrap; gap: 7px; }
+        .comparison { position: relative; overflow: hidden; background: #223132; border: 1px solid #536360; }
+        .comparison img { width: 100%; height: auto; display: block; }
+        #candidate { position: absolute; inset: 0; height: 100%; object-fit: fill; clip-path: inset(0 0 0 50%); }
+        .tag { position: absolute; top: 14px; padding: 5px 10px; background: #132124e8; color: #fff; border-radius: 4px; }
+        .tag:first-of-type { left: 14px; }
+        #candidate-label { right: 14px; }
+        .wipe { margin-top: 12px; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; }
+        input { width: 100%; accent-color: #d3b57b; min-height: 36px; }
+        .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 20px 0; }
+        .facts div { padding: 14px; border: 1px solid #3c504f; border-radius: 5px; }
+        .facts strong, .facts span { display: block; }
+        .facts span { color: #bdc7c5; margin-top: 4px; }
+        #settings { white-space: pre-wrap; background: #1b2b2d; padding: 14px; overflow-wrap: anywhere; }
+        @media (max-width: 650px) { body { padding: 12px; } h1 { font-size: 25px; } .controls > label { flex: 1; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fjordside · 3D lighting review</h1>
+        <a href="/docs/qa/desktop-ui-redesign-180/prototype-v2.html?variant=C&journey=resident&view=character">Selected UI direction: C →</a>
+    </header>
+    <p class="intro">Real 3D world captures, with matching camera, campaign, actors and effects time.
+        Compare the light balance first, then the lower sun. These are review candidates.</p>
+    <div class="controls">
+        <label>Scene <select id="scene"></select></label>
+        <label>Render quality <select id="quality"><option value="standard">Standard · 2048px shadow map</option><option value="low">Low · 1024px shadow map</option></select></label>
+        <div class="variants" aria-label="Lighting candidate">
+            <button data-variant="current" aria-pressed="false">Current</button>
+            <button data-variant="form" aria-pressed="true">Form and shade</button>
+            <button data-variant="north" aria-pressed="false">Northern sun · 25°</button>
+        </div>
+    </div>
+    <div class="comparison">
+        <img id="baseline" alt="Current 3D lighting">
+        <img id="candidate" alt="Selected 3D lighting candidate">
+        <span class="tag">Current · #186</span>
+        <span class="tag" id="candidate-label">Form and shade</span>
+    </div>
+    <label class="wipe"><span>Current</span><input id="wipe" type="range" min="0" max="100" value="50" aria-label="Compare current and candidate lighting"><span>Candidate</span></label>
+    <div class="facts">
+        <div><strong>Same world</strong><span>Canonical state, geography, camera and character poses are verified unchanged.</span></div>
+        <div><strong>Same assets and materials</strong><span>No new models, recolouring, normal maps, HDR or postprocessing.</span></div>
+        <div><strong>One shadow source</strong><span>Native PCF shadows and existing map sizes. Fine foot contact remains under review.</span></div>
+    </div>
+    <p class="note">Use the slider to inspect the same location under both settings. These are still images of
+        native 3D renders. This gallery does not run a campaign or measure animated performance.</p>
+    <details><summary>Exact settings and capture evidence</summary><pre id="settings"></pre><a href="observations.json">Full observations</a></details>
+    <p><a id="full-image" href="#">Open candidate image</a> · <a href="README.md">Review notes and next steps</a></p>
+    <script type="module">
+        const observations = await fetch('./observations.json').then(response => response.json());
+        const scene = document.querySelector('#scene');
+        const quality = document.querySelector('#quality');
+        const names = { 'summer-32': 'Founding · summer · seed 32', 'summer-17': 'Founding · summer · seed 17',
+            'developed-810': 'Developed settlement · summer 810', 'rain-810': 'Autumn rain · 810',
+            'snow-811': 'Winter snow · 811', 'boundary-810': 'Season boundary · 810' };
+        for (const name of [...new Set(observations.cases.map(entry => entry.fixture))]) {
+            const option = document.createElement('option');
+            option.value = name;
+            option.textContent = names[name] || name;
+            scene.append(option);
+        }
+        scene.value = 'developed-810';
+        let variant = 'form';
+        function render() {
+            const entry = observations.cases.find(entry => entry.fixture === scene.value && entry.quality === quality.value);
+            const baseline = entry.variants.find(item => item.variant === 'current');
+            const candidate = entry.variants.find(item => item.variant === variant);
+            document.querySelector('#baseline').src = baseline.image;
+            document.querySelector('#candidate').src = candidate.image;
+            document.querySelector('#candidate-label').textContent = candidate.lighting.preset.label;
+            document.querySelector('#full-image').href = candidate.image;
+            document.querySelector('#settings').textContent = JSON.stringify({ fixture: entry.fixture,
+                quality: entry.quality, calendar: entry.calendar, camera: entry.camera,
+                restoredExactly: entry.baselineRestoredExactly, lighting: candidate.lighting,
+                renderer: candidate.renderer }, null, 2);
+            for (const button of document.querySelectorAll('[data-variant]')) {
+                button.setAttribute('aria-pressed', String(button.dataset.variant === variant));
+            }
+        }
+        document.querySelectorAll('[data-variant]').forEach(button => button.addEventListener('click', () => {
+            variant = button.dataset.variant;
+            render();
+        }));
+        scene.addEventListener('change', render);
+        quality.addEventListener('change', render);
+        document.querySelector('#wipe').addEventListener('input', event => {
+            document.querySelector('#candidate').style.clipPath = `inset(0 0 0 ${event.target.value}%)`;
+        });
+        render();
+    </script>
+</body>
+</html>
