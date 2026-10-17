@@ -9,6 +9,7 @@ This is a disposable design study on branch codex/desktop-ui-prototypes-180. It 
 Run the repository's existing command **pnpm run dev:lan** and open:
 
 - [All household work plans](prototype-v2.html?variant=A&journey=work&view=work)
+- [Personal character card](prototype-v2.html?variant=A&journey=resident&view=character)
 - [Ordinary housing](prototype-v2.html?variant=A&journey=housing)
 - [Screenshot comparison](comparison-v2.html)
 
@@ -29,6 +30,16 @@ Coverage is measured at 1440 by 900. Ordinary housing preserves both residents' 
 Choose Smithing, Fishing, Hunting or another work plan to review an editable suitable resident, a proposed house and an optional specialization together. Housing can be excluded, leaving the tent and its existing animal assignments intact. An already suitable occupation keeps its career settings. The result names the occupation and housing decision and shows the building specialization. The frozen world image remains unchanged; this is called out in the study header.
 
 The new work chooser leaves 74.5, 64.4 and 67.3 percent of the world visible in A, B and C. B's chooser remains slightly below the proposed 65-percent task target, an explicit layout trade-off. During the smithing plan itself, coverage is 74.5, 67.2 and 68.7 percent. This is a design comparison with no winning layout selected.
+
+## Personal character card
+
+Selecting a person now shows identity, an available actual model portrait, sex, age, birth year, occupation, work status, aptitude, productivity, career control, recorded occupation time, output progress, five inherited traits, partner, children and household. Partner/child links open those residents; Family Tree opens the corresponding identity. More personal detail expands heritage, parents, all occupation aptitudes and up to five recent occupation-history entries. Change work and Personal history stay visible while the card scrolls. Children retain their personal/family data with work changes unavailable according to Core.
+
+The founding character card leaves 74.5, 72.5 and 74.8 percent of the world visible in A, B and C at 1440 by 900. At 1280 by 720 the corresponding values are 71.6, 62.0 and 72.1 percent; B's bottom tray remains a smaller-desktop trade-off. Extra details scroll within the card. [Card-only preview](screenshots-v2/A-character-card-v3.png), full scenes: [A](screenshots-v2/A-character.jpg), [B](screenshots-v2/B-character.jpg), [C](screenshots-v2/C-character.jpg).
+
+Experience is recorded time in an occupation, derived from its history and the campaign tick length. It includes recorded assignment spans and does not invent lifetime experience before those records, skill levels or XP thresholds. The five trait bars use actual DNA values; Health and Mood have no corresponding fields in this baseline. Work metrics come from inspectWork. When local UI actions change the occupation, housing or expedition state, metrics become pending rather than showing stale source productivity or output progress.
+
+The static portrait reuses the existing MaelColuim founding actor capture at the source baseline. study-data-v2.json records its fixture, subject, age, DNA hash and image hash. It appears only when identity, DNA and captured age match; other people use their initials. It adds no live portrait rendering and changes no character asset pipeline. The direct character link starts with the card open; ordinary person selection still takes one click from the declared scenario.
 
 Farmyard is one optional combined task inside Manage work. Its editable suggestions, occupation/autonomy consequences, optional farming specialization and cattle assignments appear only after that intention is chosen. It is not the tent's primary action. Future occupations can extend the same work entry point; their specific combined tasks need separate journey design.
 
@@ -83,6 +94,6 @@ Source characters keep their actual names, ages, occupations and household relat
 
 The capture uses the bundled Playwright runtime and the installed Edge browser. These add no project dependencies. See [observations-v2.json](observations-v2.json) for per-state click counts, coverage, geometry and storage observations.
 
-The 85 recorded states include 16 complete work-plan walkthroughs, ordinary housing in every layout, reuse of an existing home, mixed occupations, an individual smith assignment, work without a new house, the livestock list, a changed farmer, a variant switch retaining the draft, cancellation, insufficient Materials and the last-farmer risk review. Work-plan results are compared with the prepared Core outcomes, including occupations, specialization, house cost and animal assignments. The four captured UI/data source hashes match the reviewed files. JavaScript syntax checks pass. Formatting was reviewed manually because the project has no configured formatter. No production regression suite or live performance benchmark is claimed for this study.
+The 103 recorded states include 16 complete work-plan walkthroughs, ordinary housing in every layout, reuse of an existing home, mixed occupations, an individual smith assignment, work without a new house, the livestock list, a changed farmer, a variant switch retaining the draft, cancellation, insufficient Materials and the last-farmer risk review. Character cases cover all three layouts, expanded detail, partner navigation, Family Tree context, a developed adult, a child, small desktop and large desktop. Identity/trait/portrait data match the prepared source, stale work metrics are withheld, and character action footers remain visible. Work-plan results match the prepared Core outcomes. The five captured UI/data/portrait hashes match the reviewed files. JavaScript syntax checks pass. Formatting was reviewed manually because the project has no configured formatter. No production regression suite or live performance benchmark is claimed for this study.
 
 Earlier review.html, prototype.mjs, check-desktop-ui-study.mjs and their images predate these agreed journeys. They are not v2 acceptance evidence. Only the v2 files and shared source captures belong to this review.

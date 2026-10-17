@@ -13,7 +13,8 @@ const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
 const report = { browser: browser.version(), viewport: { width: 1440, height: 900 }, observations: [], errors: [] };
 report.sources = {};
-for (const file of ['prototype-v2.html', 'prototype-v2.css', 'prototype-v2.mjs', 'study-data-v2.json']) {
+for (const file of ['prototype-v2.html', 'prototype-v2.css', 'prototype-v2.mjs', 'study-data-v2.json',
+    'resident-maelcoluim-founding-v3.png']) {
     const bytes = await readFile('docs/qa/desktop-ui-redesign-180/' + file);
     report.sources[file] = createHash('sha256').update(bytes).digest('hex');
 }
@@ -41,6 +42,13 @@ async function record(name, screenshot = true) {
         const commit = document.querySelector('[data-action=confirm-farmyard], [data-action=confirm-work], [data-action=build-house]');
         const commitBox = commit?.getBoundingClientRect();
         const panelBox = commit?.closest('[data-overlay]')?.getBoundingClientRect();
+        const profile = document.querySelector('[data-overlay=character]');
+        const profileBox = profile?.getBoundingClientRect();
+        const profileActionsVisible = !profile || [...profile.querySelectorAll('.profile-actions button')]
+            .every(button => {
+                const box = button.getBoundingClientRect();
+                return box.top >= profileBox.top && box.bottom <= profileBox.bottom && box.bottom <= innerHeight;
+            });
         return {
             viewport: { width: innerWidth, height: innerHeight },
             state: window.fjordUiStudy.snapshot(),
@@ -49,11 +57,24 @@ async function record(name, screenshot = true) {
             horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
             commitVisible: !commitBox || (commitBox.top >= panelBox.top && commitBox.bottom <= panelBox.bottom),
             commitDisabled: commit?.disabled,
+            profileActionsVisible,
+            profile: profile && {
+                personId: profile.dataset.persona,
+                identity: profile.querySelector('.profile-identity').textContent,
+                occupation: profile.querySelector('[data-profile-field=occupation]').textContent,
+                productivity: profile.querySelector('[data-profile-field=productivity]').textContent,
+                experience: profile.querySelector('[data-profile-field=experience]').textContent,
+                traits: Object.fromEntries([...profile.querySelectorAll('.profile-traits [data-trait]')]
+                    .map(node => [node.dataset.trait, Number(node.dataset.value)])),
+                progress: profile.querySelector('[data-trait=work-progress]')?.dataset.value ?? null,
+                portraitLoaded: Boolean(profile.querySelector('.portrait-frame img')?.naturalWidth),
+                workDisabled: profile.querySelector('[data-action=work]').disabled,
+            },
             occupationChoices: [...document.querySelectorAll('[data-action^="occupation:"]')]
                 .map(button => ({ id: button.dataset.action.slice(11), disabled: button.disabled })),
             workTaskChoices: [...document.querySelectorAll('[data-action^="set-up-work:"]')]
                 .map(button => ({ id: button.dataset.action.slice(12), disabled: button.disabled })),
-            detailScrollRequired: [...document.querySelectorAll('.right > .body')]
+            detailScrollRequired: [...document.querySelectorAll('.right > .body, .resident-profile > .profile-body')]
                 .some(node => node.scrollHeight > node.clientHeight + 1),
             campaignStorage: [...Object.keys(sessionStorage), ...Object.keys(localStorage)]
                 .filter(key => key.startsWith('pillagers.')),
@@ -189,7 +210,42 @@ try {
     await page.locator('[data-action=confirm-work]').click();
     await record('A-work-without-house');
 
+    for (const variant of ['A', 'B', 'C']) {
+        await open(variant, 'resident');
+        await page.locator('[data-action="person:founder-1"]').click();
+        await record(variant + '-character');
+        if (variant === 'A') await page.locator('[data-overlay=character]').screenshot({
+            path: directory + '/A-character-card-v3.png',
+        });
+        await page.locator('[data-action=profile-details]').click();
+        await page.locator('.profile-extra').scrollIntoViewIfNeeded();
+        await record(variant + '-character-details');
+        await page.locator('[data-action=profile-details]').click();
+        await page.locator('[data-action="person:founder-10"]').click();
+        await record(variant + '-partner-character');
+        await page.locator('[data-action=person-family]').click();
+        await record(variant + '-profile-family', false);
+    }
+    await open('A', 'developed');
+    await page.locator('[data-action="person:founder-1"]').click();
+    await record('A-developed-character');
+    const child = studyData.scenes.developed.people.find(person => person.id === 'founder-1')
+        .familyRecords.children.find(relative => studyData.scenes.developed.people.some(person => person.id === relative.id));
+    await page.locator('[data-action="person:' + child.id + '"]').click();
+    await record('A-child-character');
+    await page.setViewportSize({ width: 1280, height: 720 });
+    for (const variant of ['A', 'B', 'C']) {
+        await open(variant, 'resident');
+        await page.locator('[data-action="person:founder-1"]').click();
+        await record(variant + '-character-1280');
+    }
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await open('A', 'resident');
+    await page.locator('[data-action="person:founder-1"]').click();
+    await record('A-character-1920');
+
     const workResults = report.observations.filter(item => item.name.endsWith('-work-result'));
+    const profiles = report.observations.filter(item => item.profile);
     report.review = {
         housingOnly: report.observations.filter(item => item.name.endsWith('-house-result'))
             .every(({ state }) => state.homeBuilt && !state.farmReady && state.spentMaterials === 10
@@ -216,6 +272,18 @@ try {
             .every(({ state }) => !state.homeBuilt && state.spentMaterials === 0
                 && state.buildingSpecialization === null && state.assignedCattleIds.length === 0
                 && state.roles[state.workerId] === 'smith' && state.clicks === 5),
+        personalDataMatchesSource: profiles.every(({ state, profile }) => {
+            const source = studyData.scenes[state.scene].people.find(person => person.id === profile.personId);
+            return profile.identity.includes(source.age + ' Winters')
+                && profile.identity.includes(String(source.birthYear))
+                && Object.entries(source.traits).every(([key, value]) => profile.traits[key] === Math.round(value * 100))
+                && Object.keys(profile.traits).length === 5
+                && profile.portraitLoaded === Boolean(source.portrait);
+        }),
+        changedWorkDoesNotReuseOldProductivity: report.observations.find(item => item.name === 'A-smith-result')
+            .profile.productivity.includes('Pending'),
+        childWorkUnavailable: report.observations.find(item => item.name === 'A-child-character').profile.workDisabled,
+        characterActionsAlwaysVisible: profiles.every(item => item.profileActionsVisible),
     };
     await page.setViewportSize({ width: 1500, height: 820 });
     await page.goto(origin + '/docs/qa/desktop-ui-redesign-180/comparison-v2.html',

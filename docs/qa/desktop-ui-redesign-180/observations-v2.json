@@ -45,7 +45,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.4,
       "boxes": [
@@ -109,6 +110,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -155,7 +158,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "House built · occupations preserved"
+        "result": "House built · occupations preserved",
+        "profileDetailsOpen": false
       },
       "worldPercent": 85.3,
       "boxes": [
@@ -218,6 +222,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -264,7 +270,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "House built · occupations preserved"
+        "result": "House built · occupations preserved",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -319,6 +326,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [
         {
@@ -406,7 +415,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 75.1,
       "boxes": [
@@ -462,6 +472,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -514,7 +526,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Farmer assigned · existing home used · 3 cattle sheltered"
+        "result": "Farmer assigned · existing home used · 3 cattle sheltered",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.1,
       "boxes": [
@@ -577,6 +590,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -623,7 +638,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 93.6,
       "boxes": [
@@ -678,6 +694,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -724,7 +742,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.4,
       "boxes": [
@@ -788,6 +807,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -834,7 +855,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 75.1,
       "boxes": [
@@ -890,6 +912,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -942,7 +966,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Farmer assigned · house built · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.3,
       "boxes": [
@@ -1005,6 +1030,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1055,7 +1082,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 79.4,
       "boxes": [
@@ -1110,6 +1138,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1160,7 +1190,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Destination assigned · same carried provisions"
+        "result": "Destination assigned · same carried provisions",
+        "profileDetailsOpen": false
       },
       "worldPercent": 87.8,
       "boxes": [
@@ -1215,6 +1246,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1265,7 +1298,8 @@
         "running": true,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Destination assigned · same carried provisions"
+        "result": "Destination assigned · same carried provisions",
+        "profileDetailsOpen": false
       },
       "worldPercent": 87.8,
       "boxes": [
@@ -1320,6 +1354,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1366,7 +1402,8 @@
         "running": false,
         "bookTab": "family",
         "familyPerson": "founder-1",
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 83.3,
       "boxes": [
@@ -1421,6 +1458,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1467,7 +1506,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 82.2,
       "boxes": [
@@ -1531,6 +1571,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1577,7 +1619,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "House built · occupations preserved"
+        "result": "House built · occupations preserved",
+        "profileDetailsOpen": false
       },
       "worldPercent": 79.9,
       "boxes": [
@@ -1640,6 +1683,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1686,7 +1731,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 93.6,
       "boxes": [
@@ -1741,6 +1787,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1787,7 +1835,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 82.2,
       "boxes": [
@@ -1851,6 +1900,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -1897,7 +1948,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 68.6,
       "boxes": [
@@ -1953,6 +2005,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2005,7 +2059,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Farmer assigned · house built · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered",
+        "profileDetailsOpen": false
       },
       "worldPercent": 82.5,
       "boxes": [
@@ -2068,6 +2123,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2118,7 +2175,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 67.7,
       "boxes": [
@@ -2173,6 +2231,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2223,7 +2283,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Destination assigned · same carried provisions"
+        "result": "Destination assigned · same carried provisions",
+        "profileDetailsOpen": false
       },
       "worldPercent": 80.6,
       "boxes": [
@@ -2278,6 +2339,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2328,7 +2391,8 @@
         "running": true,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Destination assigned · same carried provisions"
+        "result": "Destination assigned · same carried provisions",
+        "profileDetailsOpen": false
       },
       "worldPercent": 80.6,
       "boxes": [
@@ -2383,6 +2447,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2429,7 +2495,8 @@
         "running": false,
         "bookTab": "family",
         "familyPerson": "founder-1",
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 72.7,
       "boxes": [
@@ -2484,6 +2551,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2530,7 +2599,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.8,
       "boxes": [
@@ -2594,6 +2664,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2640,7 +2712,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "House built · occupations preserved"
+        "result": "House built · occupations preserved",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.4,
       "boxes": [
@@ -2703,6 +2776,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2749,7 +2824,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 93.6,
       "boxes": [
@@ -2804,6 +2880,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2850,7 +2928,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.8,
       "boxes": [
@@ -2914,6 +2993,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -2960,7 +3041,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 69.7,
       "boxes": [
@@ -3016,6 +3098,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3068,7 +3152,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Farmer assigned · house built · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered",
+        "profileDetailsOpen": false
       },
       "worldPercent": 87.1,
       "boxes": [
@@ -3131,6 +3216,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3181,7 +3268,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 71.5,
       "boxes": [
@@ -3236,6 +3324,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3286,7 +3376,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Destination assigned · same carried provisions"
+        "result": "Destination assigned · same carried provisions",
+        "profileDetailsOpen": false
       },
       "worldPercent": 88.2,
       "boxes": [
@@ -3341,6 +3432,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3391,7 +3484,8 @@
         "running": true,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Destination assigned · same carried provisions"
+        "result": "Destination assigned · same carried provisions",
+        "profileDetailsOpen": false
       },
       "worldPercent": 88.2,
       "boxes": [
@@ -3446,6 +3540,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3492,7 +3588,8 @@
         "running": false,
         "bookTab": "family",
         "familyPerson": "founder-1",
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 77.1,
       "boxes": [
@@ -3547,6 +3644,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3593,7 +3692,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 85.8,
       "boxes": [
@@ -3657,6 +3757,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3703,7 +3805,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -3759,6 +3862,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -3805,7 +3910,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 85.8,
       "boxes": [
@@ -3869,6 +3975,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -3915,7 +4023,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 72.8,
       "boxes": [
@@ -3971,6 +4080,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -4017,7 +4128,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 57.4,
       "boxes": [
@@ -4073,6 +4185,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -4119,7 +4233,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 58.7,
       "boxes": [
@@ -4175,6 +4290,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -4221,7 +4338,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 80.4,
       "boxes": [
@@ -4277,6 +4395,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -4323,9 +4443,10 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
-      "worldPercent": 89.3,
+      "worldPercent": 74.6,
       "boxes": [
         {
           "id": "brand",
@@ -4368,19 +4489,37 @@
           "inBounds": true
         },
         {
-          "id": "selection",
+          "id": "character",
           "x": 432,
-          "y": 612.21875,
-          "width": 300,
-          "height": 183.78125,
+          "y": 104,
+          "width": 356,
+          "height": 692,
           "inBounds": true
         }
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 50 Winters · born 760",
+        "occupation": "Farmer",
+        "productivity": "Productivity96%",
+        "experience": "10 Winters recorded in farming",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "11",
+        "portraitLoaded": false,
+        "workDisabled": false
+      },
       "occupationChoices": [],
       "workTaskChoices": [],
-      "detailScrollRequired": false,
+      "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
     },
@@ -4425,6 +4564,7 @@
         "bookTab": "story",
         "familyPerson": null,
         "result": "",
+        "profileDetailsOpen": false,
         "pendingOccupation": "hunter",
         "atRiskCattle": 8
       },
@@ -4481,6 +4621,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -4528,10 +4670,11 @@
         "bookTab": "story",
         "familyPerson": null,
         "result": "",
+        "profileDetailsOpen": false,
         "pendingOccupation": "hunter",
         "atRiskCattle": 8
       },
-      "worldPercent": 89.3,
+      "worldPercent": 74.6,
       "boxes": [
         {
           "id": "brand",
@@ -4574,19 +4717,37 @@
           "inBounds": true
         },
         {
-          "id": "selection",
+          "id": "character",
           "x": 432,
-          "y": 612.21875,
-          "width": 300,
-          "height": 183.78125,
+          "y": 104,
+          "width": 356,
+          "height": 692,
           "inBounds": true
         }
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 50 Winters · born 760",
+        "occupation": "Farmer",
+        "productivity": "Productivity96%",
+        "experience": "10 Winters recorded in farming",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "11",
+        "portraitLoaded": false,
+        "workDisabled": false
+      },
       "occupationChoices": [],
       "workTaskChoices": [],
-      "detailScrollRequired": false,
+      "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
     },
@@ -4630,7 +4791,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 75.1,
       "boxes": [
@@ -4686,6 +4848,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -4738,7 +4902,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Farmer assigned · house built · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.3,
       "boxes": [
@@ -4801,6 +4966,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -4847,7 +5014,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -4902,6 +5070,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [
         {
           "id": "farmer",
@@ -4991,9 +5161,10 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Occupation assigned · career autonomy replaced"
+        "result": "Occupation assigned · career autonomy replaced",
+        "profileDetailsOpen": false
       },
-      "worldPercent": 87.9,
+      "worldPercent": 74.5,
       "boxes": [
         {
           "id": "brand",
@@ -5036,19 +5207,37 @@
           "inBounds": true
         },
         {
-          "id": "selection",
-          "x": 1104,
+          "id": "character",
+          "x": 1066,
           "y": 105,
-          "width": 318,
-          "height": 239,
+          "width": 356,
+          "height": 704,
           "inBounds": true
         }
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Smith",
+        "productivity": "ProductivityPending",
+        "experience": "No time recorded in smithing",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": null,
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
       "occupationChoices": [],
       "workTaskChoices": [],
-      "detailScrollRequired": false,
+      "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
     },
@@ -5094,7 +5283,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Occupation assigned · career autonomy replaced"
+        "result": "Occupation assigned · career autonomy replaced",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.7,
       "boxes": [
@@ -5149,6 +5339,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5195,7 +5387,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -5251,6 +5444,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5299,7 +5494,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Farmer assigned · house built"
+        "result": "Farmer assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 86.3,
       "boxes": [
@@ -5362,6 +5558,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5408,7 +5606,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -5464,6 +5663,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5512,7 +5713,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Herder assigned · house built"
+        "result": "Herder assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -5575,6 +5777,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5621,7 +5825,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -5677,6 +5882,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -5723,7 +5930,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Fisher retained · house built"
+        "result": "Fisher retained · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -5786,6 +5994,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5832,7 +6042,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -5888,6 +6099,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -5934,7 +6147,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Hunter retained · house built"
+        "result": "Hunter retained · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -5997,6 +6211,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -6043,7 +6259,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -6099,6 +6316,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -6147,7 +6366,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Textile worker assigned · house built"
+        "result": "Textile worker assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -6210,6 +6430,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -6256,7 +6478,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -6311,6 +6534,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [
         {
@@ -6398,7 +6623,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -6454,6 +6680,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -6502,7 +6730,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Smith assigned · house built"
+        "result": "Smith assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -6565,6 +6794,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -6611,7 +6842,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -6667,6 +6899,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -6715,7 +6949,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Woodworker assigned · house built"
+        "result": "Woodworker assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -6778,6 +7013,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -6824,7 +7061,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -6880,6 +7118,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -6928,7 +7168,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Boatbuilder assigned · house built"
+        "result": "Boatbuilder assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -6991,6 +7232,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7037,7 +7280,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -7093,6 +7337,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7141,7 +7387,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Trader assigned · house built"
+        "result": "Trader assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.7,
       "boxes": [
@@ -7204,6 +7451,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7250,7 +7499,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -7306,6 +7556,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -7354,7 +7606,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Leather and jewellery maker assigned · house built"
+        "result": "Leather and jewellery maker assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.3,
       "boxes": [
@@ -7417,6 +7670,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7463,7 +7718,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 64.4,
       "boxes": [
@@ -7518,6 +7774,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [
         {
@@ -7605,7 +7863,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 67.2,
       "boxes": [
@@ -7661,6 +7920,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7709,7 +7970,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Smith assigned · house built"
+        "result": "Smith assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 79.7,
       "boxes": [
@@ -7772,6 +8034,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7818,7 +8082,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 67.2,
       "boxes": [
@@ -7874,6 +8139,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -7920,7 +8187,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Fisher retained · house built"
+        "result": "Fisher retained · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 79.7,
       "boxes": [
@@ -7983,6 +8251,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8029,7 +8299,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 67.2,
       "boxes": [
@@ -8085,6 +8356,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8131,7 +8404,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Hunter retained · house built"
+        "result": "Hunter retained · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 79.7,
       "boxes": [
@@ -8194,6 +8468,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8240,7 +8516,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 67.3,
       "boxes": [
@@ -8295,6 +8572,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [
         {
@@ -8382,7 +8661,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 68.7,
       "boxes": [
@@ -8438,6 +8718,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8486,7 +8768,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Smith assigned · house built"
+        "result": "Smith assigned · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 85.8,
       "boxes": [
@@ -8549,6 +8832,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8595,7 +8880,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 67.9,
       "boxes": [
@@ -8651,6 +8937,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8697,7 +8985,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Fisher retained · house built"
+        "result": "Fisher retained · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 85.8,
       "boxes": [
@@ -8760,6 +9049,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8806,7 +9097,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 68.7,
       "boxes": [
@@ -8862,6 +9154,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": false,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -8908,7 +9202,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Hunter retained · house built"
+        "result": "Hunter retained · house built",
+        "profileDetailsOpen": false
       },
       "worldPercent": 85.8,
       "boxes": [
@@ -8971,6 +9266,8 @@
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -9017,7 +9314,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": ""
+        "result": "",
+        "profileDetailsOpen": false
       },
       "worldPercent": 74.5,
       "boxes": [
@@ -9073,6 +9371,8 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": true,
+      "profileActionsVisible": true,
+      "profile": null,
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": true,
@@ -9121,7 +9421,8 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Smith assigned · tent kept"
+        "result": "Smith assigned · tent kept",
+        "profileDetailsOpen": false
       },
       "worldPercent": 84.6,
       "boxes": [
@@ -9185,6 +9486,2120 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "commitDisabled": true,
+      "profileActionsVisible": true,
+      "profile": null,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-character-details",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": true
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-partner-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-10",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-10",
+        "identity": "Female · 19 Winters · born 781",
+        "occupation": "Fisher",
+        "productivity": "Productivity42%",
+        "experience": "3 Winters recorded in fishing",
+        "traits": {
+          "physicality": 46,
+          "agility": 76,
+          "intelligence": 98,
+          "cunning": 91,
+          "temperament": 49
+        },
+        "progress": "0",
+        "portraitLoaded": false,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-profile-family",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "book",
+        "selection": "person",
+        "personId": "founder-10",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "family",
+        "familyPerson": "founder-10",
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 83.3,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "book",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 383.75,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 72.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 270,
+          "y": 501.828125,
+          "width": 900,
+          "height": 306.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-character-details",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": true
+      },
+      "worldPercent": 66,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 270,
+          "y": 408,
+          "width": 900,
+          "height": 400,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-partner-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-10",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 72.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 270,
+          "y": 501.828125,
+          "width": 900,
+          "height": 306.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-10",
+        "identity": "Female · 19 Winters · born 781",
+        "occupation": "Fisher",
+        "productivity": "Productivity42%",
+        "experience": "3 Winters recorded in fishing",
+        "traits": {
+          "physicality": 46,
+          "agility": 76,
+          "intelligence": 98,
+          "cunning": 91,
+          "temperament": 49
+        },
+        "progress": "0",
+        "portraitLoaded": false,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-profile-family",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "book",
+        "selection": "person",
+        "personId": "founder-10",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "family",
+        "familyPerson": "founder-10",
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 72.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "book",
+          "x": 295,
+          "y": 485.609375,
+          "width": 850,
+          "height": 322.390625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 74.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 432,
+          "y": 104,
+          "width": 356,
+          "height": 692,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-character-details",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": true
+      },
+      "worldPercent": 74.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 432,
+          "y": 104,
+          "width": 356,
+          "height": 692,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-partner-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-10",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 74.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 432,
+          "y": 104,
+          "width": 356,
+          "height": 692,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-10",
+        "identity": "Female · 19 Winters · born 781",
+        "occupation": "Fisher",
+        "productivity": "Productivity42%",
+        "experience": "3 Winters recorded in fishing",
+        "traits": {
+          "physicality": 46,
+          "agility": 76,
+          "intelligence": 98,
+          "cunning": 91,
+          "temperament": 49
+        },
+        "progress": "0",
+        "portraitLoaded": false,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-profile-family",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "book",
+        "selection": "person",
+        "personId": "founder-10",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "family",
+        "familyPerson": "founder-10",
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 77.1,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "book",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 339.765625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": null,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-developed-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "developed",
+        "scene": "developed",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 8,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 74.3,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 484.03125,
+          "y": 16,
+          "width": 471.9375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 50 Winters · born 760",
+        "occupation": "Farmer",
+        "productivity": "Productivity96%",
+        "experience": "10 Winters recorded in farming",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "11",
+        "portraitLoaded": false,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-child-character",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "developed",
+        "scene": "developed",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "persona-4",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 8,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 75.1,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 484.03125,
+          "y": 16,
+          "width": 471.9375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 672.328125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "persona-4",
+        "identity": "Male · 3 Winters · born 807",
+        "occupation": "No occupation",
+        "productivity": "Productivity0%",
+        "experience": "No occupation time recorded",
+        "traits": {
+          "physicality": 52,
+          "agility": 2,
+          "intelligence": 40,
+          "cunning": 59,
+          "temperament": 1
+        },
+        "progress": null,
+        "portraitLoaded": false,
+        "workDisabled": true
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-character-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "variant": "A",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 71.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 170.421875,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 447.7109375,
+          "y": 16,
+          "width": 384.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1084,
+          "y": 16,
+          "width": 180,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 645,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1142.875,
+          "y": 648,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 906,
+          "y": 105,
+          "width": 356,
+          "height": 524,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-character-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "variant": "B",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 62,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 170.421875,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 447.7109375,
+          "y": 16,
+          "width": 384.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1084,
+          "y": 16,
+          "width": 180,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 645,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1142.875,
+          "y": 648,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 190,
+          "y": 321.828125,
+          "width": 900,
+          "height": 306.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-character-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "variant": "C",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 72.1,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 170.421875,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 447.7109375,
+          "y": 16,
+          "width": 384.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1084,
+          "y": 16,
+          "width": 180,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 645,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1142.875,
+          "y": 648,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 384,
+          "y": 104,
+          "width": 356,
+          "height": 512,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-character-1920",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "state": {
+        "variant": "A",
+        "journey": "resident",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "profileDetailsOpen": false
+      },
+      "worldPercent": 84,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 744.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1705,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 1005,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1782.875,
+          "y": 1008,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "character",
+          "x": 1546,
+          "y": 105,
+          "width": 356,
+          "height": 704.71875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "profileActionsVisible": true,
+      "profile": {
+        "personId": "founder-1",
+        "identity": "Male · 40 Winters · born 760",
+        "occupation": "Hunter",
+        "productivity": "Productivity37%",
+        "experience": "No time recorded in hunting",
+        "traits": {
+          "physicality": 68,
+          "agility": 29,
+          "intelligence": 59,
+          "cunning": 33,
+          "temperament": 1
+        },
+        "progress": "0",
+        "portraitLoaded": true,
+        "workDisabled": false
+      },
       "occupationChoices": [],
       "workTaskChoices": [],
       "detailScrollRequired": false,
@@ -9195,9 +11610,10 @@
   "errors": [],
   "sources": {
     "prototype-v2.html": "1fe8b72e2271d29267a07d5d47f513f16b2f4bfe404ffb7789fbb39b99600df6",
-    "prototype-v2.css": "c5a9d32d40ada32f60f2ab9e71b34fa9caf1bbbb08fa39284d313c469e583256",
-    "prototype-v2.mjs": "b20667544aea3c10bf53e7f1a5871d144ea0bb94d3f518d9364340d2ea238655",
-    "study-data-v2.json": "62e59878608e59263cad0a42d5d0f4f92ed80aa138cebf7a7100f395322c1304"
+    "prototype-v2.css": "2c5d106af9bb140f638cc57a13aa265b4945aaa377d71ba2c6f95651853f249c",
+    "prototype-v2.mjs": "5f65bfe3bba5cbd3aeddde33f7b1800dd45a1849486191e68b0cfea586e9dd4d",
+    "study-data-v2.json": "3a80b6874cfb0552ccb0fa0d1c96c41fcb5a75309d73967be747c368d7aff23b",
+    "resident-maelcoluim-founding-v3.png": "ba5122c1343d6f0c7f014d96053e8a2e955249ded592fe2aadf7e8847127fc81"
   },
   "review": {
     "housingOnly": true,
@@ -9206,6 +11622,10 @@
     "canonicalWorkTaskCount": 10,
     "workPlansReviewed": 16,
     "workPlansMatchCore": true,
-    "workWithoutHouse": true
+    "workWithoutHouse": true,
+    "personalDataMatchesSource": true,
+    "changedWorkDoesNotReuseOldProductivity": true,
+    "childWorkUnavailable": true,
+    "characterActionsAlwaysVisible": true
   }
 }

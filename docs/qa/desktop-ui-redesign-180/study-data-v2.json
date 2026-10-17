@@ -23,6 +23,7 @@
       },
       "year": 800,
       "tick": 500,
+      "ticksPerWinter": 1000,
       "clan": "Landing party",
       "stocks": {
         "food": 15,
@@ -53,7 +54,56 @@
           "id": "founder-1",
           "name": "MaelColuim",
           "age": 40,
+          "sex": "male",
+          "birthYear": 760,
+          "traits": {
+            "physicality": 0.68,
+            "agility": 0.29,
+            "intelligence": 0.59,
+            "cunning": 0.33,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.23990253169008308,
+            "angloSaxon": 0.09897714551443601,
+            "gaelic": 0.26916520915143494,
+            "finnic": 0.25465008507953674,
+            "sami": 0.11596657512120911,
+            "baltic": 0.021338453443300206
+          },
+          "portrait": "resident-maelcoluim-founding-v3.png",
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 7356,
+            "productivityBps": 3678,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8887,
           "occupationFits": {
@@ -82,6 +132,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-10",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-10",
+              "name": "Inghild Sigurdardóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-1",
@@ -100,7 +159,56 @@
           "id": "founder-2",
           "name": "Kauppi",
           "age": 22,
+          "sex": "male",
+          "birthYear": 778,
+          "traits": {
+            "physicality": 0.3,
+            "agility": 0.13,
+            "intelligence": 0.37,
+            "cunning": 0.22,
+            "temperament": 0.67
+          },
+          "heritage": {
+            "scandinavian": 0.13874551814332875,
+            "angloSaxon": 0.18168798456746788,
+            "gaelic": 0.18083098134609826,
+            "finnic": 0.19664822448778735,
+            "sami": 0.12502723122630513,
+            "baltic": 0.17706006022901272
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 5729,
+            "productivityBps": 2864,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 799,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 1000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6842,
           "occupationFits": {
@@ -129,6 +237,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-3",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-3",
+              "name": "Dervla",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-2",
@@ -147,7 +264,56 @@
           "id": "founder-3",
           "name": "Dervla",
           "age": 21,
+          "sex": "female",
+          "birthYear": 779,
+          "traits": {
+            "physicality": 0.36,
+            "agility": 0.02,
+            "intelligence": 0.2,
+            "cunning": 0.84,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.11758792142283285,
+            "angloSaxon": 0.08540759015174525,
+            "gaelic": 0.4519884940672287,
+            "finnic": 0.11534071302446632,
+            "sami": 0.16071617426712786,
+            "baltic": 0.06895910706659913
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 5767,
+            "productivityBps": 2883,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6749,
           "occupationFits": {
@@ -176,6 +342,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-2",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-2",
+              "name": "Kauppi",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-2",
@@ -194,7 +369,56 @@
           "id": "founder-4",
           "name": "Áilu",
           "age": 20,
+          "sex": "male",
+          "birthYear": 780,
+          "traits": {
+            "physicality": 0.82,
+            "agility": 0.91,
+            "intelligence": 0.03,
+            "cunning": 0.5,
+            "temperament": 0.79
+          },
+          "heritage": {
+            "scandinavian": 0.07186054347036382,
+            "angloSaxon": 0.021079265771936577,
+            "gaelic": 0.09107936615671951,
+            "finnic": 0.2624591999492862,
+            "sami": 0.2821322453566308,
+            "baltic": 0.27138937929506324
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 8279,
+            "productivityBps": 4139,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 3000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6987,
           "occupationFits": {
@@ -223,6 +447,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-4",
@@ -240,7 +469,56 @@
           "id": "founder-5",
           "name": "Conán",
           "age": 25,
+          "sex": "male",
+          "birthYear": 775,
+          "traits": {
+            "physicality": 0.14,
+            "agility": 0.3,
+            "intelligence": 0.64,
+            "cunning": 0.26,
+            "temperament": 0.87
+          },
+          "heritage": {
+            "scandinavian": 0.17784646636723658,
+            "angloSaxon": 0.10697068338605917,
+            "gaelic": 0.2653357251623571,
+            "finnic": 0.20483679153935688,
+            "sami": 0.21511726163009048,
+            "baltic": 0.029893071914899875
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 6243,
+            "productivityBps": 3121,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 799,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 1000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6638,
           "occupationFits": {
@@ -269,6 +547,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-5",
@@ -286,7 +569,56 @@
           "id": "founder-6",
           "name": "Eaddis Olafsdóttir",
           "age": 35,
+          "sex": "female",
+          "birthYear": 765,
+          "traits": {
+            "physicality": 0.06,
+            "agility": 0.62,
+            "intelligence": 0.81,
+            "cunning": 0.56,
+            "temperament": 0.14
+          },
+          "heritage": {
+            "scandinavian": 0.2941613603415873,
+            "angloSaxon": 0.26502506858937713,
+            "gaelic": 0.2529232219645023,
+            "finnic": 0.021915609346260086,
+            "sami": 0.09121098937648316,
+            "baltic": 0.07476375038179012
+          },
+          "portrait": null,
           "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 7654,
+            "productivityBps": 3827,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "farmer",
+              "startedAt": {
+                "winter": 796,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 4000,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7654,
           "occupationFits": {
@@ -315,6 +647,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-6",
@@ -332,7 +669,56 @@
           "id": "founder-7",
           "name": "Sigfrid Bjarnardóttir",
           "age": 36,
+          "sex": "female",
+          "birthYear": 764,
+          "traits": {
+            "physicality": 0.97,
+            "agility": 0.49,
+            "intelligence": 0.21,
+            "cunning": 0.36,
+            "temperament": 0.26
+          },
+          "heritage": {
+            "scandinavian": 0.28240990718458703,
+            "angloSaxon": 0.1571211873499693,
+            "gaelic": 0.21557699835945124,
+            "finnic": 0.2010056370116353,
+            "sami": 0.09280187759880361,
+            "baltic": 0.05108439249555367
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 7922,
+            "productivityBps": 3961,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8436,
           "occupationFits": {
@@ -361,6 +747,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-8",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-8",
+              "name": "Kauppi",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-7",
@@ -379,7 +774,56 @@
           "id": "founder-8",
           "name": "Kauppi",
           "age": 36,
+          "sex": "male",
+          "birthYear": 764,
+          "traits": {
+            "physicality": 0.64,
+            "agility": 0.93,
+            "intelligence": 0.34,
+            "cunning": 0.65,
+            "temperament": 0.72
+          },
+          "heritage": {
+            "scandinavian": 0.17994873454797633,
+            "angloSaxon": 0.12249307670335179,
+            "gaelic": 0.13742748702005791,
+            "finnic": 0.20458203187892757,
+            "sami": 0.20246102864117563,
+            "baltic": 0.15308764120851087
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 9065,
+            "productivityBps": 4532,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 3000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7718,
           "occupationFits": {
@@ -408,6 +852,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-7",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-7",
+              "name": "Sigfrid Bjarnardóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-7",
@@ -426,7 +879,56 @@
           "id": "founder-9",
           "name": "Daugirdė",
           "age": 28,
+          "sex": "female",
+          "birthYear": 772,
+          "traits": {
+            "physicality": 0.03,
+            "agility": 0.52,
+            "intelligence": 0.47,
+            "cunning": 0.57,
+            "temperament": 0.07
+          },
+          "heritage": {
+            "scandinavian": 0.1623785483627361,
+            "angloSaxon": 0.16830416472116436,
+            "gaelic": 0.09805628139595114,
+            "finnic": 0.1544122503751412,
+            "sami": 0.19357754926238405,
+            "baltic": 0.22327120588262328
+          },
+          "portrait": null,
           "occupation": "woodworker",
+          "work": {
+            "aptitudeBps": 6796,
+            "productivityBps": 3398,
+            "unitsPerWinter": 5,
+            "resource": "materials",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "woodworker",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 3000,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7459,
           "occupationFits": {
@@ -455,6 +957,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-9",
@@ -472,7 +979,56 @@
           "id": "founder-10",
           "name": "Inghild Sigurdardóttir",
           "age": 19,
+          "sex": "female",
+          "birthYear": 781,
+          "traits": {
+            "physicality": 0.46,
+            "agility": 0.76,
+            "intelligence": 0.98,
+            "cunning": 0.91,
+            "temperament": 0.49
+          },
+          "heritage": {
+            "scandinavian": 0.2966651539702505,
+            "angloSaxon": 0.22613823428758353,
+            "gaelic": 0.09896474566414423,
+            "finnic": 0.025170911112456545,
+            "sami": 0.2928391782063112,
+            "baltic": 0.060221776759254074
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 8347,
+            "productivityBps": 4173,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7722,
           "occupationFits": {
@@ -501,6 +1057,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-1",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-1",
@@ -533,6 +1098,7 @@
       },
       "year": 800,
       "tick": 500,
+      "ticksPerWinter": 1000,
       "clan": "Landing party",
       "stocks": {
         "food": 15,
@@ -563,7 +1129,56 @@
           "id": "founder-1",
           "name": "MaelColuim",
           "age": 40,
+          "sex": "male",
+          "birthYear": 760,
+          "traits": {
+            "physicality": 0.68,
+            "agility": 0.29,
+            "intelligence": 0.59,
+            "cunning": 0.33,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.23990253169008308,
+            "angloSaxon": 0.09897714551443601,
+            "gaelic": 0.26916520915143494,
+            "finnic": 0.25465008507953674,
+            "sami": 0.11596657512120911,
+            "baltic": 0.021338453443300206
+          },
+          "portrait": "resident-maelcoluim-founding-v3.png",
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 7356,
+            "productivityBps": 3678,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8887,
           "occupationFits": {
@@ -592,6 +1207,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-10",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-10",
+              "name": "Inghild Sigurdardóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-1",
@@ -610,7 +1234,56 @@
           "id": "founder-2",
           "name": "Kauppi",
           "age": 22,
+          "sex": "male",
+          "birthYear": 778,
+          "traits": {
+            "physicality": 0.3,
+            "agility": 0.13,
+            "intelligence": 0.37,
+            "cunning": 0.22,
+            "temperament": 0.67
+          },
+          "heritage": {
+            "scandinavian": 0.13874551814332875,
+            "angloSaxon": 0.18168798456746788,
+            "gaelic": 0.18083098134609826,
+            "finnic": 0.19664822448778735,
+            "sami": 0.12502723122630513,
+            "baltic": 0.17706006022901272
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 5729,
+            "productivityBps": 2864,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 799,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 1000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6842,
           "occupationFits": {
@@ -639,6 +1312,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-3",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-3",
+              "name": "Dervla",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-2",
@@ -657,7 +1339,56 @@
           "id": "founder-3",
           "name": "Dervla",
           "age": 21,
+          "sex": "female",
+          "birthYear": 779,
+          "traits": {
+            "physicality": 0.36,
+            "agility": 0.02,
+            "intelligence": 0.2,
+            "cunning": 0.84,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.11758792142283285,
+            "angloSaxon": 0.08540759015174525,
+            "gaelic": 0.4519884940672287,
+            "finnic": 0.11534071302446632,
+            "sami": 0.16071617426712786,
+            "baltic": 0.06895910706659913
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 5767,
+            "productivityBps": 2883,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6749,
           "occupationFits": {
@@ -686,6 +1417,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-2",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-2",
+              "name": "Kauppi",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-2",
@@ -704,7 +1444,56 @@
           "id": "founder-4",
           "name": "Áilu",
           "age": 20,
+          "sex": "male",
+          "birthYear": 780,
+          "traits": {
+            "physicality": 0.82,
+            "agility": 0.91,
+            "intelligence": 0.03,
+            "cunning": 0.5,
+            "temperament": 0.79
+          },
+          "heritage": {
+            "scandinavian": 0.07186054347036382,
+            "angloSaxon": 0.021079265771936577,
+            "gaelic": 0.09107936615671951,
+            "finnic": 0.2624591999492862,
+            "sami": 0.2821322453566308,
+            "baltic": 0.27138937929506324
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 8279,
+            "productivityBps": 4139,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 3000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6987,
           "occupationFits": {
@@ -733,6 +1522,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-4",
@@ -750,7 +1544,56 @@
           "id": "founder-5",
           "name": "Conán",
           "age": 25,
+          "sex": "male",
+          "birthYear": 775,
+          "traits": {
+            "physicality": 0.14,
+            "agility": 0.3,
+            "intelligence": 0.64,
+            "cunning": 0.26,
+            "temperament": 0.87
+          },
+          "heritage": {
+            "scandinavian": 0.17784646636723658,
+            "angloSaxon": 0.10697068338605917,
+            "gaelic": 0.2653357251623571,
+            "finnic": 0.20483679153935688,
+            "sami": 0.21511726163009048,
+            "baltic": 0.029893071914899875
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 6243,
+            "productivityBps": 3121,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 799,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 1000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 6638,
           "occupationFits": {
@@ -779,6 +1622,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-5",
@@ -796,7 +1644,56 @@
           "id": "founder-6",
           "name": "Eaddis Olafsdóttir",
           "age": 35,
+          "sex": "female",
+          "birthYear": 765,
+          "traits": {
+            "physicality": 0.06,
+            "agility": 0.62,
+            "intelligence": 0.81,
+            "cunning": 0.56,
+            "temperament": 0.14
+          },
+          "heritage": {
+            "scandinavian": 0.2941613603415873,
+            "angloSaxon": 0.26502506858937713,
+            "gaelic": 0.2529232219645023,
+            "finnic": 0.021915609346260086,
+            "sami": 0.09121098937648316,
+            "baltic": 0.07476375038179012
+          },
+          "portrait": null,
           "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 7654,
+            "productivityBps": 3827,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "farmer",
+              "startedAt": {
+                "winter": 796,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 4000,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7654,
           "occupationFits": {
@@ -825,6 +1722,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-6",
@@ -842,7 +1744,56 @@
           "id": "founder-7",
           "name": "Sigfrid Bjarnardóttir",
           "age": 36,
+          "sex": "female",
+          "birthYear": 764,
+          "traits": {
+            "physicality": 0.97,
+            "agility": 0.49,
+            "intelligence": 0.21,
+            "cunning": 0.36,
+            "temperament": 0.26
+          },
+          "heritage": {
+            "scandinavian": 0.28240990718458703,
+            "angloSaxon": 0.1571211873499693,
+            "gaelic": 0.21557699835945124,
+            "finnic": 0.2010056370116353,
+            "sami": 0.09280187759880361,
+            "baltic": 0.05108439249555367
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 7922,
+            "productivityBps": 3961,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8436,
           "occupationFits": {
@@ -871,6 +1822,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-8",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-8",
+              "name": "Kauppi",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-7",
@@ -889,7 +1849,56 @@
           "id": "founder-8",
           "name": "Kauppi",
           "age": 36,
+          "sex": "male",
+          "birthYear": 764,
+          "traits": {
+            "physicality": 0.64,
+            "agility": 0.93,
+            "intelligence": 0.34,
+            "cunning": 0.65,
+            "temperament": 0.72
+          },
+          "heritage": {
+            "scandinavian": 0.17994873454797633,
+            "angloSaxon": 0.12249307670335179,
+            "gaelic": 0.13742748702005791,
+            "finnic": 0.20458203187892757,
+            "sami": 0.20246102864117563,
+            "baltic": 0.15308764120851087
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 9065,
+            "productivityBps": 4532,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 3000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7718,
           "occupationFits": {
@@ -918,6 +1927,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-7",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-7",
+              "name": "Sigfrid Bjarnardóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-7",
@@ -936,7 +1954,56 @@
           "id": "founder-9",
           "name": "Daugirdė",
           "age": 28,
+          "sex": "female",
+          "birthYear": 772,
+          "traits": {
+            "physicality": 0.03,
+            "agility": 0.52,
+            "intelligence": 0.47,
+            "cunning": 0.57,
+            "temperament": 0.07
+          },
+          "heritage": {
+            "scandinavian": 0.1623785483627361,
+            "angloSaxon": 0.16830416472116436,
+            "gaelic": 0.09805628139595114,
+            "finnic": 0.1544122503751412,
+            "sami": 0.19357754926238405,
+            "baltic": 0.22327120588262328
+          },
+          "portrait": null,
           "occupation": "woodworker",
+          "work": {
+            "aptitudeBps": 6796,
+            "productivityBps": 3398,
+            "unitsPerWinter": 5,
+            "resource": "materials",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "woodworker",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 3000,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7459,
           "occupationFits": {
@@ -965,6 +2032,11 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-9",
@@ -982,7 +2054,56 @@
           "id": "founder-10",
           "name": "Inghild Sigurdardóttir",
           "age": 19,
+          "sex": "female",
+          "birthYear": 781,
+          "traits": {
+            "physicality": 0.46,
+            "agility": 0.76,
+            "intelligence": 0.98,
+            "cunning": 0.91,
+            "temperament": 0.49
+          },
+          "heritage": {
+            "scandinavian": 0.2966651539702505,
+            "angloSaxon": 0.22613823428758353,
+            "gaelic": 0.09896474566414423,
+            "finnic": 0.025170911112456545,
+            "sami": 0.2928391782063112,
+            "baltic": 0.060221776759254074
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 8347,
+            "productivityBps": 4173,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7722,
           "occupationFits": {
@@ -1011,6 +2132,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-1",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-1",
@@ -1049,7 +2179,67 @@
           "id": "founder-1",
           "name": "MaelColuim",
           "age": 50,
+          "sex": "male",
+          "birthYear": 760,
+          "traits": {
+            "physicality": 0.68,
+            "agility": 0.29,
+            "intelligence": 0.59,
+            "cunning": 0.33,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.23990253169008308,
+            "angloSaxon": 0.09897714551443601,
+            "gaelic": 0.26916520915143494,
+            "finnic": 0.25465008507953674,
+            "sami": 0.11596657512120911,
+            "baltic": 0.021338453443300206
+          },
+          "portrait": null,
           "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 8887,
+            "productivityBps": 9579,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.11,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "farmer",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 10000,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 8887,
           "occupationFits": {
@@ -1078,6 +2268,21 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-3",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-3",
+              "name": "Dervla",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-4",
+                "name": "Fionnán",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-4"
           ],
@@ -1099,7 +2304,67 @@
           "id": "founder-2",
           "name": "Kauppi",
           "age": 32,
+          "sex": "male",
+          "birthYear": 778,
+          "traits": {
+            "physicality": 0.3,
+            "agility": 0.13,
+            "intelligence": 0.37,
+            "cunning": 0.22,
+            "temperament": 0.67
+          },
+          "heritage": {
+            "scandinavian": 0.13874551814332875,
+            "angloSaxon": 0.18168798456746788,
+            "gaelic": 0.18083098134609826,
+            "finnic": 0.19664822448778735,
+            "sami": 0.12502723122630513,
+            "baltic": 0.17706006022901272
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 6158,
+            "productivityBps": 6773,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.4115,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 799,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 10000,
+            "hunter": 1000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 6842,
           "occupationFits": {
@@ -1128,6 +2393,26 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-10",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-10",
+              "name": "Inghild Sigurdardóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-3",
+                "name": "Ingdis Sigurdardóttir",
+                "deceased": false
+              },
+              {
+                "id": "persona-6",
+                "name": "Inghild Bjarnardóttir",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-3",
             "persona-6"
@@ -1151,7 +2436,67 @@
           "id": "founder-3",
           "name": "Dervla",
           "age": 31,
+          "sex": "female",
+          "birthYear": 779,
+          "traits": {
+            "physicality": 0.36,
+            "agility": 0.02,
+            "intelligence": 0.2,
+            "cunning": 0.84,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.11758792142283285,
+            "angloSaxon": 0.08540759015174525,
+            "gaelic": 0.4519884940672287,
+            "finnic": 0.11534071302446632,
+            "sami": 0.16071617426712786,
+            "baltic": 0.06895910706659913
+          },
+          "portrait": null,
           "occupation": "woodworker",
+          "work": {
+            "aptitudeBps": 5555,
+            "productivityBps": 0,
+            "unitsPerWinter": 5,
+            "resource": "materials",
+            "progress": 0.58175,
+            "reason": "childcare"
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "woodworker",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 10000,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 6749,
           "occupationFits": {
@@ -1180,6 +2525,21 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-1",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-1",
+              "name": "MaelColuim",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-4",
+                "name": "Fionnán",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-4"
           ],
@@ -1201,7 +2561,56 @@
           "id": "founder-4",
           "name": "Áilu",
           "age": 30,
+          "sex": "male",
+          "birthYear": 780,
+          "traits": {
+            "physicality": 0.82,
+            "agility": 0.91,
+            "intelligence": 0.03,
+            "cunning": 0.5,
+            "temperament": 0.79
+          },
+          "heritage": {
+            "scandinavian": 0.07186054347036382,
+            "angloSaxon": 0.021079265771936577,
+            "gaelic": 0.09107936615671951,
+            "finnic": 0.2624591999492862,
+            "sami": 0.2821322453566308,
+            "baltic": 0.27138937929506324
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 8279,
+            "productivityBps": 9106,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.1935,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 13000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 6987,
           "occupationFits": {
@@ -1230,6 +2639,31 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-9",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-9",
+              "name": "Daugirdė",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-2",
+                "name": "Minmantė",
+                "deceased": false
+              },
+              {
+                "id": "persona-5",
+                "name": "Tautvydė",
+                "deceased": false
+              },
+              {
+                "id": "persona-7",
+                "name": "Daugirdė",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-2",
             "persona-5",
@@ -1255,7 +2689,67 @@
           "id": "founder-5",
           "name": "Conán",
           "age": 35,
+          "sex": "male",
+          "birthYear": 775,
+          "traits": {
+            "physicality": 0.14,
+            "agility": 0.3,
+            "intelligence": 0.64,
+            "cunning": 0.26,
+            "temperament": 0.87
+          },
+          "heritage": {
+            "scandinavian": 0.17784646636723658,
+            "angloSaxon": 0.10697068338605917,
+            "gaelic": 0.2653357251623571,
+            "finnic": 0.20483679153935688,
+            "sami": 0.21511726163009048,
+            "baltic": 0.029893071914899875
+          },
+          "portrait": null,
           "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 6638,
+            "productivityBps": 7301,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.7175,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 799,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "farmer",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 10000,
+            "herder": 0,
+            "fisher": 1000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 6638,
           "occupationFits": {
@@ -1284,6 +2778,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-6",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-6",
+              "name": "Eaddis Olafsdóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-5",
@@ -1302,7 +2805,67 @@
           "id": "founder-6",
           "name": "Eaddis Olafsdóttir",
           "age": 45,
+          "sex": "female",
+          "birthYear": 765,
+          "traits": {
+            "physicality": 0.06,
+            "agility": 0.62,
+            "intelligence": 0.81,
+            "cunning": 0.56,
+            "temperament": 0.14
+          },
+          "heritage": {
+            "scandinavian": 0.2941613603415873,
+            "angloSaxon": 0.26502506858937713,
+            "gaelic": 0.2529232219645023,
+            "finnic": 0.021915609346260086,
+            "sami": 0.09121098937648316,
+            "baltic": 0.07476375038179012
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 7497,
+            "productivityBps": 8246,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.634,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "farmer",
+              "startedAt": {
+                "winter": 796,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 4000,
+            "herder": 0,
+            "fisher": 10000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 7654,
           "occupationFits": {
@@ -1331,6 +2894,15 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-5",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-5",
+              "name": "Conán",
+              "deceased": false
+            },
+            "parents": [],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-5",
@@ -1349,7 +2921,67 @@
           "id": "founder-7",
           "name": "Sigfrid Bjarnardóttir",
           "age": 46,
+          "sex": "female",
+          "birthYear": 764,
+          "traits": {
+            "physicality": 0.97,
+            "agility": 0.49,
+            "intelligence": 0.21,
+            "cunning": 0.36,
+            "temperament": 0.26
+          },
+          "heritage": {
+            "scandinavian": 0.28240990718458703,
+            "angloSaxon": 0.1571211873499693,
+            "gaelic": 0.21557699835945124,
+            "finnic": 0.2010056370116353,
+            "sami": 0.09280187759880361,
+            "baltic": 0.05108439249555367
+          },
+          "portrait": null,
           "occupation": "woodworker",
+          "work": {
+            "aptitudeBps": 7250,
+            "productivityBps": 7250,
+            "unitsPerWinter": 5,
+            "resource": "materials",
+            "progress": 0.79675,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "woodworker",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 3000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 10000,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 8436,
           "occupationFits": {
@@ -1378,6 +3010,21 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-8",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-8",
+              "name": "Kauppi",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-1",
+                "name": "Thormund Sigurdarson",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-1"
           ],
@@ -1399,7 +3046,56 @@
           "id": "founder-8",
           "name": "Kauppi",
           "age": 46,
+          "sex": "male",
+          "birthYear": 764,
+          "traits": {
+            "physicality": 0.64,
+            "agility": 0.93,
+            "intelligence": 0.34,
+            "cunning": 0.65,
+            "temperament": 0.72
+          },
+          "heritage": {
+            "scandinavian": 0.17994873454797633,
+            "angloSaxon": 0.12249307670335179,
+            "gaelic": 0.13742748702005791,
+            "finnic": 0.20458203187892757,
+            "sami": 0.20246102864117563,
+            "baltic": 0.15308764120851087
+          },
+          "portrait": null,
           "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 9065,
+            "productivityBps": 9971,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.814,
+            "reason": null
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "hunter",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 13000,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 7718,
           "occupationFits": {
@@ -1428,6 +3124,21 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-7",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-7",
+              "name": "Sigfrid Bjarnardóttir",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-1",
+                "name": "Thormund Sigurdarson",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-1"
           ],
@@ -1449,7 +3160,67 @@
           "id": "founder-9",
           "name": "Daugirdė",
           "age": 38,
+          "sex": "female",
+          "birthYear": 772,
+          "traits": {
+            "physicality": 0.03,
+            "agility": 0.52,
+            "intelligence": 0.47,
+            "cunning": 0.57,
+            "temperament": 0.07
+          },
+          "heritage": {
+            "scandinavian": 0.1623785483627361,
+            "angloSaxon": 0.16830416472116436,
+            "gaelic": 0.09805628139595114,
+            "finnic": 0.1544122503751412,
+            "sami": 0.19357754926238405,
+            "baltic": 0.22327120588262328
+          },
+          "portrait": null,
           "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 7459,
+            "productivityBps": 0,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.4345,
+            "reason": "childcare"
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "woodworker",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": {
+                "winter": 800,
+                "tick": 500
+              }
+            },
+            {
+              "occupation": "farmer",
+              "startedAt": {
+                "winter": 800,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 10000,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 3000,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 7459,
           "occupationFits": {
@@ -1478,6 +3249,31 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-4",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-4",
+              "name": "Áilu",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-2",
+                "name": "Minmantė",
+                "deceased": false
+              },
+              {
+                "id": "persona-5",
+                "name": "Tautvydė",
+                "deceased": false
+              },
+              {
+                "id": "persona-7",
+                "name": "Daugirdė",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-2",
             "persona-5",
@@ -1503,7 +3299,56 @@
           "id": "founder-10",
           "name": "Inghild Sigurdardóttir",
           "age": 29,
+          "sex": "female",
+          "birthYear": 781,
+          "traits": {
+            "physicality": 0.46,
+            "agility": 0.76,
+            "intelligence": 0.98,
+            "cunning": 0.91,
+            "temperament": 0.49
+          },
+          "heritage": {
+            "scandinavian": 0.2966651539702505,
+            "angloSaxon": 0.22613823428758353,
+            "gaelic": 0.09896474566414423,
+            "finnic": 0.025170911112456545,
+            "sami": 0.2928391782063112,
+            "baltic": 0.060221776759254074
+          },
+          "portrait": null,
           "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 8347,
+            "productivityBps": 0,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.0485,
+            "reason": "childcare"
+          },
+          "away": false,
+          "occupationHistory": [
+            {
+              "occupation": "fisher",
+              "startedAt": {
+                "winter": 797,
+                "tick": 500
+              },
+              "endedAt": null
+            }
+          ],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 13000,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": true,
           "farmerFit": 7722,
           "occupationFits": {
@@ -1532,6 +3377,26 @@
             "leatherAndJewelleryMaker"
           ],
           "partner": "founder-2",
+          "familyRecords": {
+            "partner": {
+              "id": "founder-2",
+              "name": "Kauppi",
+              "deceased": false
+            },
+            "parents": [],
+            "children": [
+              {
+                "id": "persona-3",
+                "name": "Ingdis Sigurdardóttir",
+                "deceased": false
+              },
+              {
+                "id": "persona-6",
+                "name": "Inghild Bjarnardóttir",
+                "deceased": false
+              }
+            ]
+          },
           "children": [
             "persona-3",
             "persona-6"
@@ -1555,7 +3420,47 @@
           "id": "persona-1",
           "name": "Thormund Sigurdarson",
           "age": 9,
+          "sex": "male",
+          "birthYear": 801,
+          "traits": {
+            "physicality": 0.8049999999999999,
+            "agility": 0.71,
+            "intelligence": 0.275,
+            "cunning": 0.505,
+            "temperament": 0.26
+          },
+          "heritage": {
+            "scandinavian": 0.23117932086628168,
+            "angloSaxon": 0.13980713202666054,
+            "gaelic": 0.17650224268975456,
+            "finnic": 0.20279383444528143,
+            "sami": 0.14763145311998963,
+            "baltic": 0.10208601685203227
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8906,
           "occupationFits": {
@@ -1573,6 +3478,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-8",
+                "name": "Kauppi",
+                "deceased": false
+              },
+              {
+                "id": "founder-7",
+                "name": "Sigfrid Bjarnardóttir",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-7",
@@ -1592,7 +3513,47 @@
           "id": "persona-2",
           "name": "Minmantė",
           "age": 7,
+          "sex": "female",
+          "birthYear": 803,
+          "traits": {
+            "physicality": 0.03,
+            "agility": 0.7150000000000001,
+            "intelligence": 0.25,
+            "cunning": 0.5349999999999999,
+            "temperament": 0.43000000000000005
+          },
+          "heritage": {
+            "scandinavian": 0.11711954591654997,
+            "angloSaxon": 0.09469171524655047,
+            "gaelic": 0.09456782377633532,
+            "finnic": 0.2084357251622137,
+            "sami": 0.23785489730950743,
+            "baltic": 0.24733029258884326
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7040,
           "occupationFits": {
@@ -1610,6 +3571,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-4",
+                "name": "Áilu",
+                "deceased": false
+              },
+              {
+                "id": "founder-9",
+                "name": "Daugirdė",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-4",
@@ -1631,7 +3608,47 @@
           "id": "persona-3",
           "name": "Ingdis Sigurdardóttir",
           "age": 6,
+          "sex": "female",
+          "birthYear": 804,
+          "traits": {
+            "physicality": 0.38,
+            "agility": 0.76,
+            "intelligence": 0.675,
+            "cunning": 0.5650000000000001,
+            "temperament": 0.49
+          },
+          "heritage": {
+            "scandinavian": 0.21770533605678957,
+            "angloSaxon": 0.20391310942752566,
+            "gaelic": 0.1398978635051212,
+            "finnic": 0.11090956780012191,
+            "sami": 0.2089332047163081,
+            "baltic": 0.11864091849413337
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8183,
           "occupationFits": {
@@ -1649,6 +3666,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-2",
+                "name": "Kauppi",
+                "deceased": false
+              },
+              {
+                "id": "founder-10",
+                "name": "Inghild Sigurdardóttir",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "household-1",
@@ -1669,7 +3702,47 @@
           "id": "persona-4",
           "name": "Fionnán",
           "age": 3,
+          "sex": "male",
+          "birthYear": 807,
+          "traits": {
+            "physicality": 0.52,
+            "agility": 0.02,
+            "intelligence": 0.395,
+            "cunning": 0.585,
+            "temperament": 0.01
+          },
+          "heritage": {
+            "scandinavian": 0.17874522655645797,
+            "angloSaxon": 0.09219236783309062,
+            "gaelic": 0.36057685160933184,
+            "finnic": 0.18499539905200152,
+            "sami": 0.1383413746941685,
+            "baltic": 0.04514878025494967
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7597,
           "occupationFits": {
@@ -1687,6 +3760,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-1",
+                "name": "MaelColuim",
+                "deceased": false
+              },
+              {
+                "id": "founder-3",
+                "name": "Dervla",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "household-2",
@@ -1706,7 +3795,47 @@
           "id": "persona-5",
           "name": "Tautvydė",
           "age": 3,
+          "sex": "female",
+          "birthYear": 807,
+          "traits": {
+            "physicality": 0.425,
+            "agility": 0.52,
+            "intelligence": 0.25,
+            "cunning": 0.5349999999999999,
+            "temperament": 0.43000000000000005
+          },
+          "heritage": {
+            "scandinavian": 0.11711954591654997,
+            "angloSaxon": 0.09469171524655047,
+            "gaelic": 0.09456782377633532,
+            "finnic": 0.2084357251622137,
+            "sami": 0.23785489730950743,
+            "baltic": 0.24733029258884326
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 8107,
           "occupationFits": {
@@ -1724,6 +3853,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-4",
+                "name": "Áilu",
+                "deceased": false
+              },
+              {
+                "id": "founder-9",
+                "name": "Daugirdė",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-4",
@@ -1745,7 +3890,47 @@
           "id": "persona-6",
           "name": "Inghild Bjarnardóttir",
           "age": 2,
+          "sex": "female",
+          "birthYear": 808,
+          "traits": {
+            "physicality": 0.38,
+            "agility": 0.445,
+            "intelligence": 0.675,
+            "cunning": 0.91,
+            "temperament": 0.5800000000000001
+          },
+          "heritage": {
+            "scandinavian": 0.21770533605678957,
+            "angloSaxon": 0.20391310942752566,
+            "gaelic": 0.1398978635051212,
+            "finnic": 0.11090956780012191,
+            "sami": 0.2089332047163081,
+            "baltic": 0.11864091849413337
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7854,
           "occupationFits": {
@@ -1763,6 +3948,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-2",
+                "name": "Kauppi",
+                "deceased": false
+              },
+              {
+                "id": "founder-10",
+                "name": "Inghild Sigurdardóttir",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "household-1",
@@ -1783,7 +3984,47 @@
           "id": "persona-7",
           "name": "Daugirdė",
           "age": 0,
+          "sex": "female",
+          "birthYear": 810,
+          "traits": {
+            "physicality": 0.425,
+            "agility": 0.91,
+            "intelligence": 0.25,
+            "cunning": 0.5,
+            "temperament": 0.43000000000000005
+          },
+          "heritage": {
+            "scandinavian": 0.11711954591654997,
+            "angloSaxon": 0.09469171524655047,
+            "gaelic": 0.09456782377633532,
+            "finnic": 0.2084357251622137,
+            "sami": 0.23785489730950743,
+            "baltic": 0.24733029258884326
+          },
+          "portrait": null,
           "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "away": false,
+          "occupationHistory": [],
+          "occupationTime": {
+            "farmer": 0,
+            "herder": 0,
+            "fisher": 0,
+            "hunter": 0,
+            "textileWorker": 0,
+            "smith": 0,
+            "woodworker": 0,
+            "boatbuilder": 0,
+            "trader": 0,
+            "leatherAndJewelleryMaker": 0
+          },
           "occupationLocked": false,
           "farmerFit": 7731,
           "occupationFits": {
@@ -1801,6 +4042,22 @@
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
+          "familyRecords": {
+            "partner": null,
+            "parents": [
+              {
+                "id": "founder-4",
+                "name": "Áilu",
+                "deceased": false
+              },
+              {
+                "id": "founder-9",
+                "name": "Daugirdė",
+                "deceased": false
+              }
+            ],
+            "children": []
+          },
           "children": [],
           "home": {
             "id": "founder-4",
@@ -1994,11 +4251,23 @@
         "sha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766"
       },
       "tick": 500,
+      "ticksPerWinter": 1000,
       "clan": "Landing party",
       "houseUpkeep": 1,
       "capacity": 4,
       "cattleCount": 8
     }
+  },
+  "portraitSource": {
+    "path": "resident-maelcoluim-founding-v3.png",
+    "personId": "founder-1",
+    "name": "MaelColuim",
+    "age": 40,
+    "fixture": "summer-32",
+    "fixtureSha256": "4caf546615ebf176d17250c0662a774299612983251ee61268e52babf4418006",
+    "dnaSha256": "dde8f3f5351a391b54d9ba10c0da168f4dc3e6b34aa3f4e9a5664bfe5fb2cbef",
+    "imageSha256": "ba5122c1343d6f0c7f014d96053e8a2e955249ded592fe2aadf7e8847127fc81",
+    "note": "Existing founding QA actor capture from the actual model at eeba00d; reused as a static portrait. It is shown only for the matching identity, DNA and captured age. Other people use initials."
   },
   "chapter": "This book began from an imported campaign. Its founding details were incomplete.\n\nThe founding party of 10 residents arrived. Kauppi and Sigfrid Bjarnardóttir were already partners at arrival. Dervla and Kauppi were already partners at arrival. Inghild Sigurdardóttir and MaelColuim were already partners at arrival.",
   "housingResult": {

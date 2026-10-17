@@ -47,7 +47,7 @@ The current Food and Materials counters are read-only. Their proposed drilldowns
 
 Settlement opens named residents, households, buildings and livestock, with search/filtering as the lists grow. A person can be found even when indoors, very young, away or archived; presence and history must remain distinguishable.
 
-World selection opens a compact summary. Expanded details contain secondary information such as lineage, occupation history, traits and personal history. Actions name the player intention, including Build house, Set up farmyard, Assign livestock and Change occupation.
+World selection opens a contextual summary. A selected character shows personal information immediately: identity/portrait, age, sex, occupation, work status, aptitude/productivity, recorded occupation time, five inherited traits, partner, children and household. Heritage, parental identities, all occupation aptitudes and recent occupation history expand within that same card. Personal history and Family Tree remain linked actions. Other selected subjects retain their compact summaries. Actions name the player intention, including Build house, Set up farmyard, Assign livestock and Change occupation.
 
 Keep Household, Building, Occupation and Farmyard distinct according to [the glossary](../GLOSSARY.md). A Farmyard is a function of a permanent household home with a living farmer, not a separately placed structure. Building specialization is not the activation prerequisite.
 
@@ -174,7 +174,11 @@ Use a coherent pictogram family with consistent weight and silhouette. Keep shor
 
 Derive appearance from the supplied reference and existing Fjordside identity: compact charcoal surfaces, warm ivory text, restrained brass selection accents and small Nordic graphic details. Keep imagery decorative at panel edges so typography and icons remain legible. Keep controls within the existing TypeScript/CSS presentation stack without adding a UI framework.
 
-Residents should have recognisable names and occupation imagery. Character portraits can use suitable existing assets or a later measured capture path. Health, Mood, Experience and social-cohesion meters require actual defined data; the reference image alone does not justify adding them.
+Residents have recognisable names, occupation imagery and actual model portraits when captured for that identity and age. The prototype reuses the existing founding MaelColuim model capture with matching fixture, DNA, age and image hashes. Other subjects use initials; an unsupported identity never inherits that portrait. The image is static and adds no per-frame scene render.
+
+The character card follows the reference's information hierarchy using current data. Trait bars are Physicality, Agility, Intelligence, Cunning and Temperament. Work progress comes from inspectWork; productivity is shown with its actual value, including values over 100 percent if present. Aptitude describes the existing trait/job fit, while experience is recorded occupation duration derived from occupationHistory and the campaign tick length. Neither is a fabricated skill level or XP threshold. Health, Mood and social-cohesion meters still require their own defined data.
+
+Show relationships by actual identity, with clickable living resident profiles and an explicit Family Tree link. Keep Change work and Personal history visible while card details scroll. A child retains identity, traits and family information with occupation changes unavailable according to command availability. When a local draft changes work, housing or expedition presence, show pending work metrics rather than reusing the source occupation's productivity/progress. In production these fields should come from the current cached projection after canonical commands execute.
 
 New-story availability belongs in the attention system. Opening a chapter should be a player action rather than taking focus from an unfinished task.
 

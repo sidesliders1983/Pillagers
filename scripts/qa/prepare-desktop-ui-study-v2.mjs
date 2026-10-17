@@ -15,11 +15,16 @@ const data = {
 
 function project(state, backdrop, provenance) {
     const people = Object.values(state.personas).filter(person => person.deathWinter === null);
+    const identities = { ...state.personaArchive, ...state.personas };
+    const relative = id => identities[id] && ({
+        id, name: identities[id].name, deceased: identities[id].deathWinter !== null,
+    });
     return {
         backdrop,
         provenance,
         year: state.time.winter,
         tick: state.time.tick,
+        ticksPerWinter: state.ticksPerWinter,
         clan: state.clan.name,
         stocks: state.stocks,
         houseCost: state.mechanics.config.houseCost,
@@ -36,7 +41,24 @@ function project(state, backdrop, provenance) {
                 id: person.id,
                 name: person.name,
                 age: core.personaAge(state, person.id),
+                sex: person.dna.sex,
+                birthYear: person.birthWinter,
+                traits: person.dna.traits,
+                heritage: person.dna.heritage,
+                portrait: person.id === data.portraitSource.personId
+                    && core.personaAge(state, person.id) === data.portraitSource.age
+                    && createHash('sha256').update(JSON.stringify(person.dna)).digest('hex') === data.portraitSource.dnaSha256
+                    ? data.portraitSource.path : null,
                 occupation: person.occupation,
+                work: core.inspectWork(state, person.id),
+                away: core.personaAway(state, person.id),
+                occupationHistory: person.occupationHistory.slice(-5),
+                occupationTime: Object.fromEntries(occupationIds.map(occupation => [occupation,
+                    person.occupationHistory.filter(entry => entry.occupation === occupation).reduce((ticks, entry) => {
+                        const end = entry.endedAt ?? state.time;
+                        return ticks + (end.winter - entry.startedAt.winter) * state.ticksPerWinter
+                            + end.tick - entry.startedAt.tick;
+                    }, 0)])),
                 occupationLocked: state.mechanics.people[person.id].occupationLocked,
                 farmerFit: core.occupationAptitude(state, person.id, 'farmer'),
                 occupationFits: Object.fromEntries(occupationIds.map(occupation =>
@@ -48,6 +70,12 @@ function project(state, backdrop, provenance) {
                     type: 'AssignOccupation', personaId: person.id, occupation,
                 })),
                 partner: person.partnerId,
+                familyRecords: {
+                    partner: person.partnerId ? relative(person.partnerId) ?? null : null,
+                    parents: person.parentIds.map(relative).filter(Boolean),
+                    children: Object.values(identities).filter(child => child.parentIds.includes(person.id))
+                        .map(child => relative(child.id)),
+                },
                 children: people.filter(child => child.parentIds.includes(person.id)).map(child => child.id),
                 home: home && {
                     id: home.id,
@@ -69,6 +97,19 @@ function project(state, backdrop, provenance) {
 const raw = await readFile('docs/qa/fjord-runtime-performance/fixtures/summer-32.json', 'utf8');
 const fixture = JSON.parse(raw);
 const state = core.reconstructState(JSON.stringify(fixture.fjord.campaign));
+const portraitPath = 'resident-maelcoluim-founding-v3.png';
+data.portraitSource = {
+    path: portraitPath,
+    personId: 'founder-1',
+    name: state.personas['founder-1'].name,
+    age: core.personaAge(state, 'founder-1'),
+    fixture: 'summer-32',
+    fixtureSha256: createHash('sha256').update(raw).digest('hex'),
+    dnaSha256: createHash('sha256').update(JSON.stringify(state.personas['founder-1'].dna)).digest('hex'),
+    imageSha256: createHash('sha256').update(await readFile(directory + '/' + portraitPath)).digest('hex'),
+    note: 'Existing founding QA actor capture from the actual model at eeba00d; reused as a static portrait. '
+        + 'It is shown only for the matching identity, DNA and captured age. Other people use initials.',
+};
 data.chapter = fixture.fjord.narrative?.chapters?.[0]?.text || 'No published opening chapter in this fixture.';
 const source = {
     fixture: 'summer-32',

@@ -145,6 +145,7 @@ function reset(journey = 'housing') {
         spentMaterials: 0, spentFood: 0, clicks: 0, keys: 0,
         groupCreated: false, members: [], expedition: 'home', targeting: false,
         running: false, bookTab: 'story', familyPerson: null, result: '',
+        profileDetailsOpen: false,
     };
     state.homeBuilt = home().kind === 'house';
     state.buildingSpecialization = home().specialization ?? null;
@@ -153,6 +154,11 @@ function reset(journey = 'housing') {
     if (journey === 'work' && params.get('view') === 'work') {
         state.selection = 'home';
         state.screen = 'household-work';
+    }
+    if (['resident', 'developed'].includes(journey) && params.get('view') === 'character') {
+        state.personId = currentScene().people.find(person => person.id === params.get('person'))?.id || 'founder-1';
+        state.selection = 'person';
+        state.screen = 'compact';
     }
     params.set('journey', journey);
     params.set('variant', variant);
@@ -273,22 +279,126 @@ function layoutClass(compact = false) {
     return compact ? 'anchor' : 'focus';
 }
 
+const heritageLabels = {
+    scandinavian: 'Scandinavian', angloSaxon: 'Anglo-Saxon', gaelic: 'Gaelic',
+    finnic: 'Finnic', sami: 'Sámi', baltic: 'Baltic',
+};
+
+function recordedTime(person, occupation) {
+    const ticks = person.occupationTime[occupation] || 0;
+    return ticks ? (ticks / currentScene().ticksPerWinter).toLocaleString('en-GB', { maximumFractionDigits: 1 })
+        + ' Winters recorded' : 'No time recorded';
+}
+
+function meter(label, fraction, field) {
+    const value = Math.round(fraction * 100);
+    return h('div', { class: 'profile-meter', 'data-trait': field, 'data-value': value },
+        h('div', {}, h('span', {}, label), h('strong', {}, value + '%')),
+        h('div', { class: 'meter-track', role: 'meter', 'aria-label': label,
+            'aria-valuemin': 0, 'aria-valuemax': 100, 'aria-valuenow': value },
+        h('span', { style: { width: Math.max(0, Math.min(100, value)) + '%' } })));
+}
+
+function relativeLink(relative) {
+    if (!relative) return h('span', { class: 'muted' }, 'None recorded');
+    return currentScene().people.some(person => person.id === relative.id)
+        ? button('person:' + relative.id, relative.name, null, 'text-link')
+        : h('span', {}, relative.name + (relative.deceased ? ' · deceased' : ''));
+}
+
+function characterProfile(person) {
+    const occupation = role(person);
+    const knownOccupation = data.occupations.includes(occupation);
+    const preview = Boolean(state.roles[person.id]) || person.home?.id === home().id
+        && (state.homeBuilt !== (person.home.kind === 'house')
+            || state.buildingSpecialization !== person.home.specialization)
+        || state.members.includes(person.id) && state.expedition !== 'home';
+    const work = person.work;
+    const status = preview ? 'Work preview · awaiting simulation' : ({
+        expedition: 'Away on expedition', childcare: 'Providing childcare', underage: 'Below working age',
+        unassigned: 'No occupation assigned', 'inactive-role': 'Role assigned · production not active',
+    })[work.reason] || 'Working in the settlement';
+    const initials = person.name.split(/\s+/).map(part => part[0]).slice(0, 2).join('');
+    const family = person.familyRecords;
+    const heritage = Object.entries(person.heritage).sort((left, right) => right[1] - left[1]);
+    const identity = h('header', { class: 'profile-heading' },
+        h('div', { class: 'portrait-frame' }, person.portrait
+            ? h('img', { src: person.portrait, alt: person.name + '’s actual founding character model',
+                title: 'Founding model portrait · age ' + data.portraitSource.age })
+            : h('span', { class: 'portrait-initials', 'aria-label': person.name }, initials)),
+        h('div', { class: 'heading-text' }, h('p', { class: 'eyebrow' }, 'Resident'),
+            h('h2', {}, person.name), h('p', { class: 'profile-identity' },
+                (person.sex === 'male' ? 'Male' : 'Female') + ' · ' + person.age + ' Winters · born ' + person.birthYear),
+            h('div', { class: 'occupation-badge', 'data-profile-field': 'occupation' },
+                icon(occupationIcon(occupation)), occupationLabel(occupation))),
+        button('close', '', 'close', 'close', { 'aria-label': 'Close character' }));
+    const workSection = h('section', { class: 'profile-work' },
+        h('h3', { class: 'section-label' }, 'Work and experience'),
+        h('p', { class: 'profile-status', 'data-profile-field': 'status' }, status),
+        h('div', { class: 'profile-stats' },
+            fact('Aptitude', knownOccupation ? Math.round(person.occupationFits[occupation] / 100) + '%' : '—'),
+            h('div', { 'data-profile-field': 'productivity' },
+                fact('Productivity', preview ? 'Pending' : Math.round(work.productivityBps / 100) + '%'))),
+        fact('Career', !knownOccupation ? 'Unassigned'
+            : state.roles[person.id] || person.occupationLocked ? 'Assigned' : 'Autonomous'),
+        h('p', { class: 'profile-experience', 'data-profile-field': 'experience' },
+            knownOccupation ? recordedTime(person, occupation) + ' in ' + workLabel(occupation).toLowerCase()
+                : 'No occupation time recorded'),
+        !preview && work.reason === null && meter('Next ' + (work.resource === 'food' ? 'Food' : 'Materials')
+            + ' output', work.progress, 'work-progress'));
+    const traitsSection = h('section', { class: 'profile-traits' },
+        h('h3', { class: 'section-label' }, 'Character traits'),
+        ...Object.entries(person.traits).map(([trait, value]) => meter(occupationLabel(trait), value, trait)));
+    const familySection = h('section', { class: 'profile-family' },
+        h('h3', { class: 'section-label' }, 'Family and home'),
+        h('div', { class: 'profile-relation' }, h('span', {}, 'Partner'), relativeLink(family.partner)),
+        h('div', { class: 'profile-relation' }, h('span', {}, 'Children'),
+            family.children.length ? h('span', { class: 'relative-list' },
+                ...family.children.slice(0, 2).map(relativeLink),
+                family.children.length > 2 && button('person-family', '+' + (family.children.length - 2) + ' more', null, 'text-link'))
+                : h('span', {}, 'None recorded')),
+        h('p', { class: 'profile-home' }, icon(person.home?.kind === 'house' || person.home?.id === home().id
+            && state.homeBuilt ? 'home' : 'tent'), person.home?.label || 'No household recorded'),
+        button('person-family', 'Open Family Tree', 'tree', 'text-link'));
+    const details = h('section', { class: 'profile-details' },
+        button('profile-details', state.profileDetailsOpen ? 'Less personal detail' : 'More personal detail',
+            null, 'profile-disclosure', { 'aria-expanded': String(state.profileDetailsOpen) }),
+        state.profileDetailsOpen && h('div', { class: 'profile-extra' },
+            h('h3', { class: 'section-label' }, 'Heritage'),
+            ...heritage.map(([key, value]) => fact(heritageLabels[key], Math.round(value * 100) + '%')),
+            h('h3', { class: 'section-label' }, 'Parents'),
+            family.parents.length ? family.parents.map(relativeLink) : h('p', { class: 'muted' }, 'No parents recorded'),
+            h('h3', { class: 'section-label' }, 'Occupation aptitude'),
+            ...[...data.occupations].sort((left, right) => person.occupationFits[right] - person.occupationFits[left])
+                .map(occupation => fact(occupationLabel(occupation), Math.round(person.occupationFits[occupation] / 100) + '%')),
+            h('h3', { class: 'section-label' }, 'Recent occupation history'),
+            ...person.occupationHistory.map(entry => fact(occupationLabel(entry.occupation),
+                entry.startedAt.winter + '–' + (entry.endedAt?.winter ?? 'present')))));
+    const body = state.variant === 'B' ? [
+        h('div', { class: 'profile-column' }, identity, familySection),
+        h('div', { class: 'profile-column' }, workSection),
+        h('div', { class: 'profile-column' }, traitsSection, details),
+    ] : [workSection, traitsSection, familySection, details];
+    return h('section', { class: 'selection surface resident-profile ' + layoutClass(true),
+        'data-overlay': 'character', 'data-persona': person.id }, state.variant !== 'B' && identity,
+        h('div', { class: 'profile-body' },
+            state.result && h('p', { class: 'inline-status' }, icon('check'), state.result), ...body),
+        h('footer', { class: 'profile-actions' },
+            button('work', 'Change work', 'work', 'secondary', { disabled: !person.availableOccupations.length }),
+            button('personal-history', 'Personal history', 'book')));
+}
+
 function selectionSummary() {
     const resident = state.selection === 'person';
     const expedition = state.selection === 'group';
     const person = currentPerson();
-    const title = resident ? person.name : expedition ? 'Exploration group'
+    if (resident) return characterProfile(person);
+    const title = expedition ? 'Exploration group'
         : state.farmReady ? 'Home · farmyard active' : 'Household home';
-    const subtitle = resident ? person.age + ' Winters · ' + role(person) : expedition
-        ? state.members.length + ' residents · ' + state.expedition
+    const subtitle = expedition ? state.members.length + ' residents · ' + state.expedition
         : currentScene().people[0].name + '’s household';
     let content;
-    if (resident) {
-        content = h('div', { class: 'body' },
-            h('p', { class: 'muted' }, person.home?.label || 'No household'),
-            h('div', { class: 'actions' }, button('work', 'Change work', 'work'),
-                button('personal-history', 'Personal history', 'book')));
-    } else if (expedition) {
+    if (expedition) {
         content = h('div', { class: 'body' },
             h('p', { class: 'muted' }, state.running ? 'Destination assigned. Travel preview running.'
                 : 'Clock paused. Press Start to travel.'),
@@ -316,7 +426,7 @@ function selectionSummary() {
                 button('household-work', 'Manage work', 'work')));
     }
     return h('section', { class: 'selection surface ' + layoutClass(true), 'data-overlay': 'selection' },
-        heading(title, subtitle, resident ? 'people' : expedition ? 'route'
+        heading(title, subtitle, expedition ? 'route'
             : state.homeBuilt ? 'home' : 'tent'),
         state.result && h('div', { class: 'body inline-status' }, icon('check'), state.result),
         content);
@@ -619,9 +729,15 @@ function act(action) {
         state.result = '';
     } else if (action.startsWith('person:')) {
         state.personId = action.slice(7);
+        state.profileDetailsOpen = false;
         state.selection = 'person';
         state.screen = 'compact';
         state.result = '';
+    } else if (action === 'profile-details') state.profileDetailsOpen = !state.profileDetailsOpen;
+    else if (action === 'person-family') {
+        state.screen = 'book';
+        state.bookTab = 'family';
+        state.familyPerson = state.personId;
     } else if (action === 'build-house' && !state.homeBuilt && materials() >= housingCost()) {
         state.spentMaterials += housingCost();
         state.homeBuilt = true;
