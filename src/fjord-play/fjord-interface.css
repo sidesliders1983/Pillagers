@@ -18,7 +18,7 @@ body.fjord-play {
 #fjord-play select:focus-visible { outline: 2px solid var(--fjord-accent); outline-offset: 3px; }
 #fjord-play [hidden] { display: none !important; }
 #fjord-play #fjord-header { position: absolute; inset: 16px 16px auto; display: grid;
-    grid-template-columns: minmax(190px, 1fr) auto minmax(230px, 1fr); gap: 18px; padding: 0;
+    grid-template-columns: minmax(0, 1fr) auto minmax(max-content, 1fr); gap: 18px; padding: 0;
     background: none; border: 0; pointer-events: none; z-index: 12; }
 #fjord-header > * { pointer-events: auto; }
 .fjord-brand, #fjord-play .fjord-kpis, #fjord-play .fjord-time-controls,
@@ -27,8 +27,9 @@ body.fjord-play {
     box-shadow: 0 3px 14px #07101225;
 }
 .fjord-brand { display: flex; align-items: center; gap: 11px; width: max-content; max-width: 100%; padding: 10px 14px 10px 10px; }
+.fjord-brand > div { min-width: 0; }
 .fjord-brand img { width: 38px; height: 42px; object-fit: contain; }
-.fjord-brand strong { font: 17px/1.2 Georgia,serif; letter-spacing: .05em; display: block; max-width: 20ch; overflow: hidden; text-overflow: ellipsis; }
+.fjord-brand strong { font: 17px/1.2 Georgia,serif; letter-spacing: .05em; display: block; max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #fjord-play #fjord-winter { display: flex; gap: 6px; font-size: 11px; color: var(--fjord-muted); margin-top: 4px; }
 #fjord-play #fjord-winter::before { content: none; }
 #fjord-play .fjord-date strong { font: inherit; letter-spacing: normal; }
@@ -133,12 +134,27 @@ body.fjord-play {
 #fjord-command-review h2 { font: 26px Georgia,serif; }
 #fjord-command-review::backdrop { background: #07101399; }
 @media(max-width:1100px) {
-    #fjord-play #fjord-header { grid-template-columns: 1fr auto; gap: 8px; inset: 10px 10px auto; }
+    /* Compact one-row HUD: reserve the clock's intrinsic width before sharing free space. */
+    #fjord-play #fjord-header {
+        grid-template-columns: minmax(0, 1fr) auto minmax(max-content, 1fr);
+        gap: 8px;
+        inset: 10px 10px auto;
+    }
     .fjord-brand { grid-column: 1; grid-row: 1; }
-    #fjord-play .fjord-time-controls { grid-column: 2; grid-row: 1; }
-    #fjord-play .fjord-kpis { grid-column: 1/-1; grid-row: 2; justify-self: center; grid-template-columns: repeat(4, minmax(60px,max-content)); }
+    #fjord-play .fjord-time-controls { grid-column: 3; grid-row: 1; }
+    #fjord-play .fjord-kpis {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        grid-template-columns: repeat(4, minmax(60px, max-content));
+    }
     #fjord-play .fjord-stage #fjord-management { left: 18px; max-height: calc(100% - 260px); }
     #fjord-play .fjord-stage #fjord-management.fjord-focus, #fjord-play #fjord-workspace { top: 165px; max-height: calc(100% - 260px); }
+}
+@media(max-width:959px) {
+    #fjord-play #fjord-header { grid-template-columns: minmax(0, 1fr) auto; }
+    #fjord-play .fjord-time-controls { grid-column: 2; }
+    #fjord-play .fjord-kpis { grid-column: 1/-1; grid-row: 2; }
 }
 @media(max-width:600px) {
     .fjord-brand img { display: none; } .fjord-brand { padding: 8px; }

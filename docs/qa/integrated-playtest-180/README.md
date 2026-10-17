@@ -73,6 +73,14 @@ node scripts/qa/fjord-playtest-server.mjs
 
 The static host binds to loopback port 5199 by default. For native browser checks, start `fjord-runtime-server.mjs` with `QA_PORT=5198`, `QA_GOLDEN=0` and a separate cache, then run `capture-integrated-playtest-180.mjs`. `check-published-playtest-180.mjs` checks the normal static build; `QA_PUBLIC_ORIGIN` selects its host.
 
+## iPad landscape header correction · 17 October 2026
+
+The previous 1100px breakpoint forced resources onto a second row even when the landscape viewport had enough room. The compact header now retains three columns from 960px upwards, reserving the clock controls' intrinsic width and truncating long clan names. Below 960px, the existing second resource row remains available. Narrow-screen pacing placement stays unchanged.
+
+[Header layout evidence](ipad-header-layout.json) records 30 checks against the normal production build: 15 viewport widths from 320px to 1440px, each with the saved Winter 811 values and with a long clan name, six-digit Food/Materials, Running and the longer expedition pacing label. Checks cover the first row at 960px and above, readable fallback below that, non-overlapping clusters, unbroken numbers, horizontal overflow and pacing accessibility. The menu also fits at 1024 × 636. TypeScript and the normal Vite build pass; no gameplay code changed. Existing full-suite and eight-scene evidence above remains historical for its recorded source hashes.
+
+[1024 × 636 screenshot](ipad-header-1024.jpg) shows the actual winter campaign before synthetic layout stress values. The public tunnel was verified to serve the same current production index. Browser verification used headless Edge; physical iPad Safari review remains with the owner. To reproduce visually, load the winter scenario, resize across 959/960px and 1100/1101px, and inspect the resource row and menu.
+
 ## Scope and follow-up
 
 This confirms the integrated workflows and rendering, not a sustained frame-rate target or long-campaign CPU fix. The previous isolated material timing studies remain separate evidence. Hidden legacy forms and the attention chronicle now render only when needed, but prolonged simulation and larger populations still need profiling.
