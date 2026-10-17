@@ -1,0 +1,4139 @@
+{
+  "kind": "fisherman-native-motion-screen/1",
+  "status": "passed",
+  "clips": [
+    "Walking",
+    "Idle_02"
+  ],
+  "samplesPerClip": 24,
+  "threshold": {
+    "ratio": 4,
+    "edgeMetres": 0.05,
+    "collarGapMetres": 0.025,
+    "collarPenetrationMetres": 0.003
+  },
+  "qualification": "Finite sampled edge-stretch screening. Visual openings and occlusion require separate review; this is not exhaustive collision simulation.",
+  "collarFailures": [],
+  "browserErrors": [],
+  "meshes": [
+    {
+      "name": "Module_fisherman_shoe_left_0",
+      "bones": 44
+    },
+    {
+      "name": "Module_fisherman_shoe_right",
+      "bones": 44
+    },
+    {
+      "name": "Module_fisherman_trousers_left_0",
+      "bones": 44
+    },
+    {
+      "name": "Module_fisherman_tunic_left_0",
+      "bones": 44
+    }
+  ],
+  "results": [
+    {
+      "clip": "Walking",
+      "time": 0,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7080633281586628,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606219246816828,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7573731406339128,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379616140775715,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.484850772783701,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531331224985,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.2860972825213732,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15110998907988113,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.017718185686339236,
+          "p95Metres": 0.010125138782981083,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04895117730525038,
+          "p95Metres": 0.030197057021330295,
+          "insideBeyond3mm": 6,
+          "deepest": [
+            {
+              "distance": 0.02311944765362651,
+              "inside": true,
+              "signedDistance": -0.00402710434751641,
+              "vertex": 5266,
+              "rest": [
+                0.05139399063296261,
+                1.3327677350725664,
+                0.07962323856733833
+              ]
+            },
+            {
+              "distance": 0.0034751660285483104,
+              "inside": true,
+              "signedDistance": -0.0034751660285483104,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.0034751660285483104,
+              "inside": true,
+              "signedDistance": -0.0034751660285483104,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.0434027761220932,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6993279693808652,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060607325184819,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7558220152987278,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379587464287925,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.4196735225123305,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167530527232504,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.3194994617208646,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15127251725113552,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018269439183981072,
+          "p95Metres": 0.010115066491591272,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04800852982057164,
+          "p95Metres": 0.031036954643613324,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.0868055522441864,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.697582139403657,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606045662692974,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7554108539394353,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1037958016807514,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.4576196378309656,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531084999334,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.345658881766747,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15195483678413507,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018482416029266768,
+          "p95Metres": 0.010109430873272256,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04915222962138069,
+          "p95Metres": 0.031851457962315186,
+          "insideBeyond3mm": 11,
+          "deepest": [
+            {
+              "distance": 0.004795096564994819,
+              "inside": true,
+              "signedDistance": -0.004795096564994819,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.004795096564994819,
+              "inside": true,
+              "signedDistance": -0.004795096564994819,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.0044117891436183995,
+              "inside": true,
+              "signedDistance": -0.0044117891436183995,
+              "vertex": 1989,
+              "rest": [
+                -0.17179838221334182,
+                1.3938863076808656,
+                -0.007079069057108702
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.1302083283662796,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7052268987395367,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060617005802434,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7574315533809566,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379616874552507,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.5349107339150312,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531021909553,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.3762669803781633,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15863451826342925,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018590668887127546,
+          "p95Metres": 0.010162015140570416,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05032744973344315,
+          "p95Metres": 0.032330679757900806,
+          "insideBeyond3mm": 35,
+          "deepest": [
+            {
+              "distance": 0.007699345632678552,
+              "inside": true,
+              "signedDistance": -0.007699345632678552,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.007699345632678552,
+              "inside": true,
+              "signedDistance": -0.007699345632678552,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.007159023423151306,
+              "inside": true,
+              "signedDistance": -0.007159023423151306,
+              "vertex": 1828,
+              "rest": [
+                -0.18532447988308315,
+                1.3908262058188605,
+                -0.004833307875736848
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.1736111044883728,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.707686805375802,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060621224499952,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7632022748932148,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379723994674143,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.7309683524067443,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531322762787,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.4044398182445197,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.16497286379059745,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018607617042224803,
+          "p95Metres": 0.010200069103993367,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05122130736626149,
+          "p95Metres": 0.032661791534927716,
+          "insideBeyond3mm": 46,
+          "deepest": [
+            {
+              "distance": 0.010439133922553226,
+              "inside": true,
+              "signedDistance": -0.010439133922553228,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.010439133922553226,
+              "inside": true,
+              "signedDistance": -0.010439133922553228,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.009962328053070606,
+              "inside": true,
+              "signedDistance": -0.009962328053070606,
+              "vertex": 1828,
+              "rest": [
+                -0.18532447988308315,
+                1.3908262058188605,
+                -0.004833307875736848
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.217013880610466,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7106828313965434,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606264403634269,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7753061229923952,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379965383902112,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.924580528157216,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167530478231925,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.4141265811228116,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.16268915548062113,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01849332348749421,
+          "p95Metres": 0.010105023228566311,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05120107442629946,
+          "p95Metres": 0.032528441553766045,
+          "insideBeyond3mm": 52,
+          "deepest": [
+            {
+              "distance": 0.01131800923249268,
+              "inside": true,
+              "signedDistance": -0.011318009232492682,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.01131800923249268,
+              "inside": true,
+              "signedDistance": -0.011318009232492682,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.01083470254440025,
+              "inside": true,
+              "signedDistance": -0.010834702544400252,
+              "vertex": 1828,
+              "rest": [
+                -0.18532447988308315,
+                1.3908262058188605,
+                -0.004833307875736848
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.2604166567325592,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7163862906034035,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060636947391014,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.8096295992776474,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10380794813289847,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.061087818907179,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531578210119,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.389561149081192,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.16676583815030185,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01844165034719802,
+          "p95Metres": 0.010100216601943868,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05116811606958483,
+          "p95Metres": 0.03290404389021154,
+          "insideBeyond3mm": 50,
+          "deepest": [
+            {
+              "distance": 0.01000701936257118,
+              "inside": true,
+              "signedDistance": -0.01000701936257118,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.01000701936257118,
+              "inside": true,
+              "signedDistance": -0.01000701936257118,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.009443947752759998,
+              "inside": true,
+              "signedDistance": -0.009443947752759998,
+              "vertex": 1828,
+              "rest": [
+                -0.18532447988308315,
+                1.3908262058188605,
+                -0.004833307875736848
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.3038194328546524,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7100054036641088,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606253127499451,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.8349217136467322,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1053713011795694,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.1360020111156683,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531809568278,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.334339567632248,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.16834091865767883,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018492818963574333,
+          "p95Metres": 0.010110313710420421,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05072620151851094,
+          "p95Metres": 0.032439393487524004,
+          "insideBeyond3mm": 27,
+          "deepest": [
+            {
+              "distance": 0.007809007888872831,
+              "inside": true,
+              "signedDistance": -0.007809007888872829,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.007809007888872831,
+              "inside": true,
+              "signedDistance": -0.007809007888872829,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.007274769759686644,
+              "inside": true,
+              "signedDistance": -0.007274769759686643,
+              "vertex": 1989,
+              "rest": [
+                -0.17179838221334182,
+                1.3938863076808656,
+                -0.007079069057108702
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.3472222089767456,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7036801344674497,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606144306687923,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.8116641813165657,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10380866864400008,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.001880838543215,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531129419493,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.2630224554833833,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1559145104801709,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018377120401231628,
+          "p95Metres": 0.010036085337918195,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.049733123266746775,
+          "p95Metres": 0.031450687517430374,
+          "insideBeyond3mm": 16,
+          "deepest": [
+            {
+              "distance": 0.005463211956974661,
+              "inside": true,
+              "signedDistance": -0.005463211956974662,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.005463211956974661,
+              "inside": true,
+              "signedDistance": -0.005463211956974662,
+              "vertex": 1886,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            },
+            {
+              "distance": 0.005313153542807958,
+              "inside": true,
+              "signedDistance": -0.005313153542807958,
+              "vertex": 1989,
+              "rest": [
+                -0.17179838221334182,
+                1.3938863076808656,
+                -0.007079069057108702
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.3906249850988388,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.704328104890136,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606155251016354,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7898756853605644,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10380292112944026,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.690141268824457,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531287695336,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.20872325006444,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15243214102207836,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018233540953292566,
+          "p95Metres": 0.009976931618907444,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04883512540303633,
+          "p95Metres": 0.03130416342330741,
+          "insideBeyond3mm": 13,
+          "deepest": [
+            {
+              "distance": 0.03461405864632651,
+              "inside": true,
+              "signedDistance": -0.0051342345239016336,
+              "vertex": 4434,
+              "rest": [
+                0.029081995476650965,
+                1.3195937777717042,
+                0.1019002518834962
+              ]
+            },
+            {
+              "distance": 0.03461405864632651,
+              "inside": true,
+              "signedDistance": -0.0051342345239016336,
+              "vertex": 4732,
+              "rest": [
+                0.029081995476650965,
+                1.3195937777717042,
+                0.1019002518834962
+              ]
+            },
+            {
+              "distance": 0.004291648295248035,
+              "inside": true,
+              "signedDistance": -0.004291648295248035,
+              "vertex": 1989,
+              "rest": [
+                -0.17179838221334182,
+                1.3938863076808656,
+                -0.007079069057108702
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.434027761220932,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7047862595454901,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606162722389174,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7893506918813882,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1038027871614565,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.5284525841091796,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531063211941,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.1792065665221596,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14555783568933078,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.018004693652559734,
+          "p95Metres": 0.010041445834973082,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04714297614602366,
+          "p95Metres": 0.030263642687512523,
+          "insideBeyond3mm": 7,
+          "deepest": [
+            {
+              "distance": 0.0035248366749733376,
+              "inside": true,
+              "signedDistance": -0.0035248366749733376,
+              "vertex": 1989,
+              "rest": [
+                -0.17179838221334182,
+                1.3938863076808656,
+                -0.007079069057108702
+              ]
+            },
+            {
+              "distance": 0.0035248366749733376,
+              "inside": true,
+              "signedDistance": -0.0035248366749733376,
+              "vertex": 2177,
+              "rest": [
+                -0.17179838221334182,
+                1.3938863076808656,
+                -0.007079069057108702
+              ]
+            },
+            {
+              "distance": 0.0032618029520356103,
+              "inside": true,
+              "signedDistance": -0.0032618029520356103,
+              "vertex": 1811,
+              "rest": [
+                -0.18266481457622064,
+                1.3892526750103702,
+                -0.0028270633265451398
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.4774305373430252,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7039082535552932,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606148420970947,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.776642536688199,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379993685095971,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.5402684308534456,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531414990553,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.1419136825391116,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1441696529357959,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01756605882716101,
+          "p95Metres": 0.010266142032941957,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04686768389675126,
+          "p95Metres": 0.02883878987855499,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.5208333134651184,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7027366653911342,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606128851270794,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7707061306289287,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379870675119302,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.519454023360994,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531140930886,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.1574487063623526,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1459923532781886,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.017189817197485233,
+          "p95Metres": 0.010275289587768691,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.047853519647482044,
+          "p95Metres": 0.027747061872872205,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.5642360895872116,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7016231484790967,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606110743856738,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7659400819002835,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379775247418632,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.7113127177295542,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1116753185335513,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.3591716867659405,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14732126016027602,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01692542772749931,
+          "p95Metres": 0.010360427456649345,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.04949072973004541,
+          "p95Metres": 0.027735334312971822,
+          "insideBeyond3mm": 1,
+          "deepest": [
+            {
+              "distance": 0.0241333005365496,
+              "inside": true,
+              "signedDistance": -0.0035158148219255805,
+              "vertex": 5266,
+              "rest": [
+                0.05139399063296261,
+                1.3327677350725664,
+                0.07962323856733833
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.6076388657093048,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7010918379812314,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060610190283117,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7639116026521688,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379737070945415,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.9280163146922262,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1116753124535845,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.542482566068767,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14804631674368846,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.016679743568849176,
+          "p95Metres": 0.010378111509743005,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.051231051427900444,
+          "p95Metres": 0.02830589322502737,
+          "insideBeyond3mm": 10,
+          "deepest": [
+            {
+              "distance": 0.004307951275477959,
+              "inside": true,
+              "signedDistance": -0.004307951275477959,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.004307951275477959,
+              "inside": true,
+              "signedDistance": -0.004307951275477959,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.025097894567893998,
+              "inside": true,
+              "signedDistance": -0.004169084799984051,
+              "vertex": 5266,
+              "rest": [
+                0.05139399063296261,
+                1.3327677350725664,
+                0.07962323856733833
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.651041641831398,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7026624749278683,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606127649677835,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7652464087711042,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379762650321901,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.02312683982006,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167530672513692,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.695088486157223,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14978680871764324,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01637299658439409,
+          "p95Metres": 0.010300643739188084,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.053039146767028374,
+          "p95Metres": 0.028783598718898462,
+          "insideBeyond3mm": 22,
+          "deepest": [
+            {
+              "distance": 0.006142629015655226,
+              "inside": true,
+              "signedDistance": -0.006142629015655227,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.006142629015655226,
+              "inside": true,
+              "signedDistance": -0.006142629015655227,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.005704056080181617,
+              "inside": true,
+              "signedDistance": -0.005704056080181617,
+              "vertex": 7392,
+              "rest": [
+                0.18286364815997572,
+                1.338169205983374,
+                0.03289768101648395
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.6944444179534912,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.706784106822284,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606196843649895,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.763542909328121,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379729061281127,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.0672651731235225,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167530347780946,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.835108479243269,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15275377552243524,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.016098201009644757,
+          "p95Metres": 0.010339042093419876,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05461187656994674,
+          "p95Metres": 0.029190446515628615,
+          "insideBeyond3mm": 32,
+          "deepest": [
+            {
+              "distance": 0.007942608025765178,
+              "inside": true,
+              "signedDistance": -0.007942608025765178,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.007942608025765178,
+              "inside": true,
+              "signedDistance": -0.007942608025765178,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.0070637463010791695,
+              "inside": true,
+              "signedDistance": -0.007063746301079169,
+              "vertex": 7392,
+              "rest": [
+                0.18286364815997572,
+                1.338169205983374,
+                0.03289768101648395
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.7378471940755844,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7162318534078551,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606366377023276,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7737195901364242,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379931010315448,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.2392777849849157,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167529959080252,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.888165420997349,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15977525354973296,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.015986902562189736,
+          "p95Metres": 0.01035615042583216,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.055129897674228615,
+          "p95Metres": 0.029386579114370526,
+          "insideBeyond3mm": 47,
+          "deepest": [
+            {
+              "distance": 0.019589090218588234,
+              "inside": true,
+              "signedDistance": -0.010891567198255953,
+              "vertex": 5534,
+              "rest": [
+                0.08618059270880618,
+                1.3324736255825054,
+                0.08576360372358897
+              ]
+            },
+            {
+              "distance": 0.019589090218588234,
+              "inside": true,
+              "signedDistance": -0.010891567198255953,
+              "vertex": 5545,
+              "rest": [
+                0.08618059270880618,
+                1.3324736255825054,
+                0.08576360372358897
+              ]
+            },
+            {
+              "distance": 0.008701152931635621,
+              "inside": true,
+              "signedDistance": -0.008701152931635621,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.7812499701976776,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.753441198685251,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10607194590005493,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7848527830792402,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10380173589441757,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.4464850808400986,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11319098935179356,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.7801362217695673,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.16726282307124202,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.016219043603447204,
+          "p95Metres": 0.010340426898826407,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05435352008233437,
+          "p95Metres": 0.029220456493486483,
+          "insideBeyond3mm": 34,
+          "deepest": [
+            {
+              "distance": 0.01962131692678491,
+              "inside": true,
+              "signedDistance": -0.010935749482911952,
+              "vertex": 5534,
+              "rest": [
+                0.08618059270880618,
+                1.3324736255825054,
+                0.08576360372358897
+              ]
+            },
+            {
+              "distance": 0.01962131692678491,
+              "inside": true,
+              "signedDistance": -0.010935749482911952,
+              "vertex": 5545,
+              "rest": [
+                0.08618059270880618,
+                1.3324736255825054,
+                0.08576360372358897
+              ]
+            },
+            {
+              "distance": 0.007562305202419162,
+              "inside": true,
+              "signedDistance": -0.007562305202419162,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.8246527463197708,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.780206419713207,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10608015896199266,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7726651396386868,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379910419058042,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.483584170211115,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1142160671628414,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.5681808839245313,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.16738240222686518,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.016761243718875236,
+          "p95Metres": 0.01041112536296973,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05242904255798178,
+          "p95Metres": 0.02872143886504569,
+          "insideBeyond3mm": 13,
+          "deepest": [
+            {
+              "distance": 0.005389122586458853,
+              "inside": true,
+              "signedDistance": -0.005389122586458854,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.005389122586458853,
+              "inside": true,
+              "signedDistance": -0.005389122586458854,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.005138909088546823,
+              "inside": true,
+              "signedDistance": -0.005138909088546822,
+              "vertex": 1911,
+              "rest": [
+                -0.18744012985511171,
+                1.3027744496481963,
+                -0.14774758848372083
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.868055522441864,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.737438584846346,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606806937141736,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7624278473710304,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1037970906809492,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 2.2632944906547956,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167530293626558,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.4162275141387646,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.15789966879261033,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.017221919145892026,
+          "p95Metres": 0.010360169999854084,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.050936433823974225,
+          "p95Metres": 0.028221315931097345,
+          "insideBeyond3mm": 8,
+          "deepest": [
+            {
+              "distance": 0.004188397250314274,
+              "inside": true,
+              "signedDistance": -0.004188397250314273,
+              "vertex": 1911,
+              "rest": [
+                -0.18744012985511171,
+                1.3027744496481963,
+                -0.14774758848372083
+              ]
+            },
+            {
+              "distance": 0.004188397250314274,
+              "inside": true,
+              "signedDistance": -0.004188397250314273,
+              "vertex": 1914,
+              "rest": [
+                -0.18744012985511171,
+                1.3027744496481963,
+                -0.14774758848372083
+              ]
+            },
+            {
+              "distance": 0.004179122141085215,
+              "inside": true,
+              "signedDistance": -0.004179122141085215,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.9114582985639572,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7129258762196633,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606305896938632,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.762743613811218,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379714891831972,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.8778897517395146,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531112616534,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.4760706429645585,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14266939838372766,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.017285995429076384,
+          "p95Metres": 0.010351273403901538,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.050986314442588485,
+          "p95Metres": 0.02821778833615184,
+          "insideBeyond3mm": 6,
+          "deepest": [
+            {
+              "distance": 0.004741686266784612,
+              "inside": true,
+              "signedDistance": -0.004741686266784612,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.004741686266784612,
+              "inside": true,
+              "signedDistance": -0.004741686266784612,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.0042177835071674835,
+              "inside": true,
+              "signedDistance": -0.0042177835071674835,
+              "vertex": 7392,
+              "rest": [
+                0.18286364815997572,
+                1.338169205983374,
+                0.03289768101648395
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.9548610746860504,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.7132271994871142,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060631073351093,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7608408684390977,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379678932776118,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.5558107503211913,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167530285691576,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.535446459293458,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14040169638631592,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01733588845075078,
+          "p95Metres": 0.010352163434504165,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05097643790360638,
+          "p95Metres": 0.028662213391809816,
+          "insideBeyond3mm": 8,
+          "deepest": [
+            {
+              "distance": 0.005222538228812141,
+              "inside": true,
+              "signedDistance": -0.005222538228812141,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.005222538228812141,
+              "inside": true,
+              "signedDistance": -0.005222538228812141,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.004943373765821042,
+              "inside": true,
+              "signedDistance": -0.004943373765821041,
+              "vertex": 7392,
+              "rest": [
+                0.18286364815997572,
+                1.338169205983374,
+                0.03289768101648395
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Walking",
+      "time": 0.9982638508081436,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.710856911378693,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10606268616037809,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7588749255716494,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10379642102163479,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 1.5399266693298648,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.11167531431831267,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.449405114444318,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.14649123319083915,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.017603457459995104,
+          "p95Metres": 0.01029110065960881,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.05003662750060574,
+          "p95Metres": 0.029470452762604755,
+          "insideBeyond3mm": 6,
+          "deepest": [
+            {
+              "distance": 0.023673021773144634,
+              "inside": true,
+              "signedDistance": -0.0048521033980824975,
+              "vertex": 5266,
+              "rest": [
+                0.05139399063296261,
+                1.3327677350725664,
+                0.07962323856733833
+              ]
+            },
+            {
+              "distance": 0.004667934071495214,
+              "inside": true,
+              "signedDistance": -0.004667934071495214,
+              "vertex": 7493,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            },
+            {
+              "distance": 0.004667934071495214,
+              "inside": true,
+              "signedDistance": -0.004667934071495214,
+              "vertex": 7498,
+              "rest": [
+                0.18826943448234779,
+                1.3388748123224201,
+                0.03131960314121845
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6696162070976444,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060531512112383,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.700199766774213,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698847666752,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1927349025506233,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1259416317210905,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.22521643333919,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18655547706987105,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013090365810681435,
+          "p95Metres": 0.009810414369243396,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03352226988777178,
+          "p95Metres": 0.022629358204606306,
+          "insideBeyond3mm": 150,
+          "deepest": [
+            {
+              "distance": 0.027496034800810493,
+              "inside": true,
+              "signedDistance": -0.027496034800810493,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027496034800810493,
+              "inside": true,
+              "signedDistance": -0.027496034800810493,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02684133191718669,
+              "inside": true,
+              "signedDistance": -0.02684133191718669,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.078125,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.669500216324663,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605312980394019,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996908808747,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698255350659,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.194393689844826,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12603348786293284,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.237535944875859,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1864448313715594,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013065988681861372,
+          "p95Metres": 0.009889140665891109,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.033818314814492455,
+          "p95Metres": 0.02280407252166456,
+          "insideBeyond3mm": 152,
+          "deepest": [
+            {
+              "distance": 0.027605812419964577,
+              "inside": true,
+              "signedDistance": -0.027605812419964577,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027605812419964577,
+              "inside": true,
+              "signedDistance": -0.027605812419964577,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026905791367970302,
+              "inside": true,
+              "signedDistance": -0.0269057913679703,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.15625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6693186342568016,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605312828801117,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001997267128763,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698530100278,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1949344393730312,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12622307904749114,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.256965003821845,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18625024220670072,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013031741481284468,
+          "p95Metres": 0.009853662672827432,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.034020962140807076,
+          "p95Metres": 0.02317783078236021,
+          "insideBeyond3mm": 154,
+          "deepest": [
+            {
+              "distance": 0.027949966455935425,
+              "inside": true,
+              "signedDistance": -0.027949966455935425,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027949966455935425,
+              "inside": true,
+              "signedDistance": -0.027949966455935425,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027113723291904403,
+              "inside": true,
+              "signedDistance": -0.027113723291904403,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.234375,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6691256323162869,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605311064989409,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.700199740670978,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1037869862747177,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.197333022794321,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12661647314667848,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.267119195347879,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18609972125786056,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013093247394132096,
+          "p95Metres": 0.009842765800601599,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.034267238533226364,
+          "p95Metres": 0.023645411765700085,
+          "insideBeyond3mm": 156,
+          "deepest": [
+            {
+              "distance": 0.028360159191742906,
+              "inside": true,
+              "signedDistance": -0.028360159191742906,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.028360159191742906,
+              "inside": true,
+              "signedDistance": -0.028360159191742906,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027333064879765556,
+              "inside": true,
+              "signedDistance": -0.027333064879765556,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.3125,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6689366136718795,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060531018345343,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996432698068,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697866752835,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1988643736500593,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12699311436367974,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.266901680989974,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18594798709741592,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013248953672905494,
+          "p95Metres": 0.009783864134724464,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.034465886246029566,
+          "p95Metres": 0.023875971318964018,
+          "insideBeyond3mm": 156,
+          "deepest": [
+            {
+              "distance": 0.02868226005354895,
+              "inside": true,
+              "signedDistance": -0.028682260053548955,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02868226005354895,
+              "inside": true,
+              "signedDistance": -0.028682260053548955,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027486120732199394,
+              "inside": true,
+              "signedDistance": -0.027486120732199387,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.390625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6687444274778078,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605308399960028,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996794515857,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698129287522,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1955523038747202,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1272302308379478,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.255019436718132,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18574748360174367,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013336408445510081,
+          "p95Metres": 0.009786384884649474,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.034542542737534376,
+          "p95Metres": 0.023895546328943744,
+          "insideBeyond3mm": 156,
+          "deepest": [
+            {
+              "distance": 0.028739759726509453,
+              "inside": true,
+              "signedDistance": -0.02873975972650945,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.028739759726509453,
+              "inside": true,
+              "signedDistance": -0.02873975972650945,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02741369902794161,
+              "inside": true,
+              "signedDistance": -0.027413699027941614,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.46875,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6685600162289569,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605306756516159,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.700199657739998,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697940473454,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.191704654645593,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1273648388644265,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.202817913348616,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18563239626311104,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013365091149147868,
+          "p95Metres": 0.009782380135272566,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.034403110951271916,
+          "p95Metres": 0.023613120220296387,
+          "insideBeyond3mm": 158,
+          "deepest": [
+            {
+              "distance": 0.028418793799219567,
+              "inside": true,
+              "signedDistance": -0.028418793799219567,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.028418793799219567,
+              "inside": true,
+              "signedDistance": -0.028418793799219567,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02707303247288857,
+              "inside": true,
+              "signedDistance": -0.027073032472888572,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.546875,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6683793287378772,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605306260535186,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996812109266,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698144182374,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.189430302432081,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12749117544135952,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.118297586522902,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18564100733101072,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013359813937953748,
+          "p95Metres": 0.009857024146826694,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.0341731957847032,
+          "p95Metres": 0.023663513256122815,
+          "insideBeyond3mm": 158,
+          "deepest": [
+            {
+              "distance": 0.02780119426180382,
+              "inside": true,
+              "signedDistance": -0.027801194261803826,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02780119426180382,
+              "inside": true,
+              "signedDistance": -0.027801194261803826,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026482608173505357,
+              "inside": true,
+              "signedDistance": -0.026482608173505357,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.668196049882782,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605304588081245,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996988935617,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1037869831355999,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.181097151735554,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12742547763944836,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.02128733040976,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1855507616876022,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013334327635894904,
+          "p95Metres": 0.009954851207078445,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.034004348388021695,
+          "p95Metres": 0.023769058566118422,
+          "insideBeyond3mm": 155,
+          "deepest": [
+            {
+              "distance": 0.027061178988366172,
+              "inside": true,
+              "signedDistance": -0.027061178988366172,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027061178988366172,
+              "inside": true,
+              "signedDistance": -0.027061178988366172,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025782361206209876,
+              "inside": true,
+              "signedDistance": -0.025782361206209876,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.703125,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6681501509521444,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060530483708365,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996251394451,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697752659456,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1719501824823544,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12733641309266375,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.932138352028171,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18540105843347257,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013279799912460264,
+          "p95Metres": 0.009989181927691996,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03382589724749848,
+          "p95Metres": 0.02377689491148434,
+          "insideBeyond3mm": 152,
+          "deepest": [
+            {
+              "distance": 0.026412536775785127,
+              "inside": true,
+              "signedDistance": -0.026412536775785124,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026412536775785127,
+              "inside": true,
+              "signedDistance": -0.026412536775785124,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025102713511270757,
+              "inside": true,
+              "signedDistance": -0.02510271351127076,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.78125,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6681613776252864,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605305996931856,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996837314786,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698171165454,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1689240542062747,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12741584369731918,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.8758987541535714,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18546902315641514,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.01322904922413293,
+          "p95Metres": 0.009994393989992958,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.033747150104848384,
+          "p95Metres": 0.023395827242418815,
+          "insideBeyond3mm": 148,
+          "deepest": [
+            {
+              "distance": 0.025970250576819665,
+              "inside": true,
+              "signedDistance": -0.025970250576819662,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025970250576819665,
+              "inside": true,
+              "signedDistance": -0.025970250576819662,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.024656259542151306,
+              "inside": true,
+              "signedDistance": -0.02465625954215131,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.859375,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.668205822094699,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605306356388142,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001997398401925,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698596974491,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.169427414345736,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12753556574973696,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.856626238694392,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18563400773539335,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013151079871107226,
+          "p95Metres": 0.010013384720197277,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03365710536657417,
+          "p95Metres": 0.023086536727984476,
+          "insideBeyond3mm": 148,
+          "deepest": [
+            {
+              "distance": 0.02562013233433217,
+              "inside": true,
+              "signedDistance": -0.02562013233433217,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02562013233433217,
+              "inside": true,
+              "signedDistance": -0.02562013233433217,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.024629705875647955,
+              "inside": true,
+              "signedDistance": -0.024629705875647955,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 0.9375,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6682838209614899,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605306123334496,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996186555326,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697614821876,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1695934136083292,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12758498800178436,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.8558781391588663,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18580812567843732,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013078426555478646,
+          "p95Metres": 0.009950211531238403,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.0336115572695998,
+          "p95Metres": 0.02294614285566432,
+          "insideBeyond3mm": 150,
+          "deepest": [
+            {
+              "distance": 0.025436579088126042,
+              "inside": true,
+              "signedDistance": -0.025436579088126045,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025436579088126042,
+              "inside": true,
+              "signedDistance": -0.025436579088126045,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.024562204225711797,
+              "inside": true,
+              "signedDistance": -0.0245622042257118,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.015625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6683639557830137,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605307638113776,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001997106485518,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698360108657,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1679024935031257,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1275135523538278,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.865375988045378,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1859352673847772,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013077468908755328,
+          "p95Metres": 0.009971517571461174,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03362290599730401,
+          "p95Metres": 0.022869374625452736,
+          "insideBeyond3mm": 145,
+          "deepest": [
+            {
+              "distance": 0.025348829021393415,
+              "inside": true,
+              "signedDistance": -0.025348829021393415,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025348829021393415,
+              "inside": true,
+              "signedDistance": -0.025348829021393415,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.024652622072811905,
+              "inside": true,
+              "signedDistance": -0.02465262207281191,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.09375,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6684655204098955,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605308234534788,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996166056659,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697633177114,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1668204538430023,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12742682180416565,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.877859165247493,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18607176404037568,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013100188320843463,
+          "p95Metres": 0.009962458749158841,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.0336085190201299,
+          "p95Metres": 0.022491388101531687,
+          "insideBeyond3mm": 143,
+          "deepest": [
+            {
+              "distance": 0.025325284360382155,
+              "inside": true,
+              "signedDistance": -0.025325284360382155,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025325284360382155,
+              "inside": true,
+              "signedDistance": -0.025325284360382155,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.024807711811059306,
+              "inside": true,
+              "signedDistance": -0.024807711811059303,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.171875,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.668563091644279,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605308336419905,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996768569079,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698141472385,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.163002304380287,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12712402724097496,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.900408098277723,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1860991883915681,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013116810588373624,
+          "p95Metres": 0.009914003441096633,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03367024472183399,
+          "p95Metres": 0.022106860128272777,
+          "insideBeyond3mm": 143,
+          "deepest": [
+            {
+              "distance": 0.025368911476649023,
+              "inside": true,
+              "signedDistance": -0.025368911476649023,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025368911476649023,
+              "inside": true,
+              "signedDistance": -0.025368911476649023,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02500429919354627,
+              "inside": true,
+              "signedDistance": -0.02500429919354627,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.25,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.668665692684818,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605308979517485,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996735811893,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698099333242,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.161115717338085,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12685661391452227,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.9266661750555225,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18614164815088532,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013127660451280934,
+          "p95Metres": 0.00997392523079061,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03362262651487131,
+          "p95Metres": 0.021745228215722535,
+          "insideBeyond3mm": 141,
+          "deepest": [
+            {
+              "distance": 0.025451623294296167,
+              "inside": true,
+              "signedDistance": -0.02545162329429616,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025451623294296167,
+              "inside": true,
+              "signedDistance": -0.02545162329429616,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025211087300421927,
+              "inside": true,
+              "signedDistance": -0.025211087300421924,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.328125,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.668765509113476,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605309388238233,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001997361847694,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698574598236,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.159942401795691,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1266351555768954,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.9522946347216403,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1861623524427844,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013138435794594127,
+          "p95Metres": 0.009994180855238052,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.0335951146873155,
+          "p95Metres": 0.021494615223207385,
+          "insideBeyond3mm": 143,
+          "deepest": [
+            {
+              "distance": 0.025565003824875088,
+              "inside": true,
+              "signedDistance": -0.025565003824875088,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025565003824875088,
+              "inside": true,
+              "signedDistance": -0.025565003824875088,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02539436613178772,
+              "inside": true,
+              "signedDistance": -0.02539436613178772,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.40625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.668870447908562,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605309472258595,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996483349608,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697910568224,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1631547757000797,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12651484140263172,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 3.9803702023137215,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18625487398014803,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013150268348412191,
+          "p95Metres": 0.010028114940099314,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.033756538407241674,
+          "p95Metres": 0.021478088016252173,
+          "insideBeyond3mm": 143,
+          "deepest": [
+            {
+              "distance": 0.025778941231748686,
+              "inside": true,
+              "signedDistance": -0.025778941231748686,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025778941231748686,
+              "inside": true,
+              "signedDistance": -0.025778941231748686,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025607187896813814,
+              "inside": true,
+              "signedDistance": -0.025607187896813814,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.484375,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6689988757115923,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605310569209365,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001996923943619,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698266508553,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.167799417913393,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12642769752677235,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.024888202816595,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18635810676140463,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013156974995423303,
+          "p95Metres": 0.009988144781971124,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03366020155833855,
+          "p95Metres": 0.02178149888908586,
+          "insideBeyond3mm": 145,
+          "deepest": [
+            {
+              "distance": 0.026124537090070014,
+              "inside": true,
+              "signedDistance": -0.02612453709007001,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026124537090070014,
+              "inside": true,
+              "signedDistance": -0.02612453709007001,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.025904455552835742,
+              "inside": true,
+              "signedDistance": -0.025904455552835742,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.5625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6691486489779324,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1060531184449055,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.700199778278093,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698915568031,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1766547176942797,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12645608436921638,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.078170139460945,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1865517746235719,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013156771475864582,
+          "p95Metres": 0.009902273847578434,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.033444266033993725,
+          "p95Metres": 0.022141652916143038,
+          "insideBeyond3mm": 145,
+          "deepest": [
+            {
+              "distance": 0.02653720430334258,
+              "inside": true,
+              "signedDistance": -0.026537204303342582,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02653720430334258,
+              "inside": true,
+              "signedDistance": -0.026537204303342582,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02623806779685989,
+              "inside": true,
+              "signedDistance": -0.026238067796859887,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.640625,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6692980808615965,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605312300953351,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.700199648939378,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697934240363,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.185519109095452,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12646718122919462,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.131939553770392,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.1867134301152297,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013158307813228649,
+          "p95Metres": 0.009823674443621725,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03336553168059329,
+          "p95Metres": 0.022464952999904402,
+          "insideBeyond3mm": 145,
+          "deepest": [
+            {
+              "distance": 0.026902186516021855,
+              "inside": true,
+              "signedDistance": -0.026902186516021855,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026902186516021855,
+              "inside": true,
+              "signedDistance": -0.026902186516021855,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02657728286704528,
+              "inside": true,
+              "signedDistance": -0.026577282867045277,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.71875,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6694178842452216,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605312813838932,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.7001997002696039,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378698305255818,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.1896367270641064,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12626916441993857,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.179195806652892,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18667658917402113,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013148246805173828,
+          "p95Metres": 0.009782249249505916,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.033342901974970536,
+          "p95Metres": 0.022712818702322425,
+          "insideBeyond3mm": 147,
+          "deepest": [
+            {
+              "distance": 0.02722467333126006,
+              "inside": true,
+              "signedDistance": -0.027224673331260062,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.02722467333126006,
+              "inside": true,
+              "signedDistance": -0.027224673331260062,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026816648061348286,
+              "inside": true,
+              "signedDistance": -0.02681664806134828,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "clip": "Idle_02",
+      "time": 1.796875,
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_shoe_left_0",
+          "maximumRatio": 1.6695122538185396,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10605314616174186,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_shoe_right",
+          "maximumRatio": 1.700199658878381,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.10378697995201235,
+          "vertices": 3312,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_trousers_left_0",
+          "maximumRatio": 3.192643529964665,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.12610204218878104,
+          "vertices": 7781,
+          "worst": []
+        },
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "maximumRatio": 4.209928522848714,
+          "stretchedEdges": 0,
+          "maximumEdge": 0.18663748917623924,
+          "vertices": 9192,
+          "worst": []
+        }
+      ],
+      "contacts": {
+        "collar": {
+          "vertices": 817,
+          "maximumMetres": 0.013128567514913593,
+          "p95Metres": 0.009786399456718949,
+          "insideBeyond3mm": 0,
+          "deepest": []
+        },
+        "shoulders": {
+          "vertices": 1226,
+          "maximumMetres": 0.03340705098428708,
+          "p95Metres": 0.022661356338043528,
+          "insideBeyond3mm": 148,
+          "deepest": [
+            {
+              "distance": 0.027444094177792352,
+              "inside": true,
+              "signedDistance": -0.02744409417779235,
+              "vertex": 1818,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.027444094177792352,
+              "inside": true,
+              "signedDistance": -0.02744409417779235,
+              "vertex": 1905,
+              "rest": [
+                -0.178257908071396,
+                1.4156092416176487,
+                -0.06489926660657204
+              ]
+            },
+            {
+              "distance": 0.026949190987709613,
+              "inside": true,
+              "signedDistance": -0.026949190987709606,
+              "vertex": 1830,
+              "rest": [
+                -0.17959483162986586,
+                1.4144504032489593,
+                -0.0723345439445339
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "failures": []
+}

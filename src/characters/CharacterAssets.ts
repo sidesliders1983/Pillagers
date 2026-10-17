@@ -2,6 +2,12 @@ import { ModuleMetadata, appearanceMetadata, validateModule } from './Attachment
 import {meshyCharacterModules} from './MeshyModuleCatalog';
 import {gridTrialOutfitAsset, gridTrialOutfitPath} from './GridTrialOutfitCatalog';
 import {additionalOutfitAssets} from './AdditionalOutfitCatalog';
+import {fishermanOutfitAssets} from './FishermanOutfitCatalog';
+import {fishermanOutfitMeasurements} from './FishermanOutfitMeasurements';
+import {occupationToolAssets} from './OccupationToolCatalog';
+import {occupationToolMeasurements} from './OccupationToolMeasurements';
+import {occupationHatAssets} from './OccupationHatCatalog';
+import {occupationHatMeasurements} from './OccupationHatMeasurements';
 import {manualHairAssets} from './ManualHairCatalog';
 import {braidedHairAsset} from './BraidedHairCatalog';
 import {longHairAsset} from './LongHairCatalog';
@@ -50,7 +56,7 @@ export const availableHairStyles=characterAssets.filter(asset=>asset.type==='hai
 export const availableBeardStyles=characterAssets.filter(asset=>asset.type==='beard'&&!asset.scope).map(asset=>asset.style as BeardStyle);
 /** Lab discovery adds explicit review candidates without publishing them to the world manifest. */
 export function availableCharacterAssets(): readonly CharacterAsset[] {
-    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...manualHairAssets, braidedHairAsset, longHairAsset];
+    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...fishermanOutfitAssets, ...occupationHatAssets, ...occupationToolAssets, ...manualHairAssets, braidedHairAsset, longHairAsset];
 }
 export function characterAsset(id:string){const asset=availableCharacterAssets().find(asset=>asset.id===id);if(!asset)throw new Error(`Unknown character asset: ${id}`);return asset;}
 /** Compatibility is source identity, not a family name or a fallback fit guess. */
@@ -62,8 +68,11 @@ export function assetMeasurement(path: string): AssetMeasurement {
     const measured = characterAssetMeasurements[path]
         ?? (path === braidedHairRecord.path ? braidedHairMeasurement : undefined)
         ?? (path === longHairRecord.path ? longHairMeasurement : undefined)
+        ?? occupationHatMeasurements[path]
+        ?? occupationToolMeasurements[path]
         ?? (manualHairMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (additionalOutfitMeasurements as Record<string, AssetMeasurement>)[path]
+        ?? (fishermanOutfitMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (path === gridTrialOutfitPath ? gridTrialOutfitMeasurement : undefined)
         ?? (meshyModuleMeasurements as Record<string, AssetMeasurement>)[path];
     if (!measured) throw new Error(path + ': missing registry measurements; run assets:registry.');
@@ -88,7 +97,7 @@ export function validateCharacterRegistry(entries:readonly CharacterAsset[]=char
             if(!['lab-v04','body-bound'].includes(asset.scope)||asset.type==='body'||!['preview','accepted'].includes(asset.reviewStatus??''))fail('invalid scoped module lifecycle');
             if(!Array.isArray(asset.compatibleBodies)||!asset.compatibleBodies.length||new Set(asset.compatibleBodies.map(source=>asset.scope==='body-bound'?source.id+'/'+source.sha256:source.id)).size!==asset.compatibleBodies.length||asset.compatibleBodies.some(source=>!source.id||!(asset.scope==='body-bound'?source.id==='body/meshy-human':/^lab-body\/[\w/-]+$/.test(source.id))||!/^[a-f0-9]{64}$/.test(source.sha256)))fail('scoped module requires exact compatible body identities');
         }else if(asset.compatibleBodies!==undefined||asset.reviewStatus!==undefined)fail('body compatibility and review status require a scoped module');
-        if(!['body','hair','beard','mask','garment','equipment'].includes(asset.type))fail('unknown asset type');
+        if(!['body','hair','beard','mask','garment','equipment','headwear'].includes(asset.type))fail('unknown asset type');
         if(!['requested',2].includes(asset.runtimeLOD))fail('invalid runtime LOD policy');
         if(!asset.materialVariants.length)fail('material variants must be declared');
         if(!Object.keys(asset.lods).length)fail('LOD files must be declared');

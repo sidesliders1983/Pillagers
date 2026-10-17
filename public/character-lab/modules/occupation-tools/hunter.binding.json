@@ -1,0 +1,237 @@
+{
+  "version": "pillagers-fit/0.2",
+  "id": "equipment/occupation-hunter",
+  "moduleSha256": "c09b59ac929a36bfa1ba041de80d75ad93dd477e371de25679e4678801bc7781",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "id": "occupation-tool-native-grip",
+    "version": 2,
+    "blender": "not-required"
+  },
+  "coordinateFrame": {
+    "up": "+Y",
+    "front": "+Z",
+    "unit": "metre",
+    "origin": "Meshy source bind"
+  },
+  "construction": "intentional-asymmetry",
+  "skinning": "rigid-native-equipment",
+  "reviewScope": "Supplied carried tool; exact native hand/back bind, neutral and Walking/Idle review",
+  "materialPolicy": {
+    "kind": "provider-original",
+    "provider": "Meshy",
+    "sourceSha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10",
+    "reviewOnly": true
+  },
+  "precomputedNative": {
+    "version": 3,
+    "coordinateFrame": "metre",
+    "meshes": [
+      {
+        "mesh": "Module_tool_hunter_bow_0",
+        "vertices": 1130
+      },
+      {
+        "mesh": "Module_tool_hunter_quiver_0",
+        "vertices": 5261
+      },
+      {
+        "mesh": "Module_tool_hunter_string",
+        "vertices": 16
+      }
+    ],
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "moduleCoverage": []
+  },
+  "supportedAges": {
+    "min": 18,
+    "max": 100
+  },
+  "lods": {
+    "0": {
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 0
+    },
+    "1": {
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 1
+    },
+    "2": {
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 2
+    }
+  },
+  "regions": {},
+  "seams": [],
+  "coverageRimContacts": [],
+  "coverageClipPlanes": [],
+  "garmentFrames": {},
+  "rigidEquipment": {
+    "version": 1,
+    "parts": [
+      {
+        "mesh": "Module_tool_hunter_bow_0",
+        "joint": 11,
+        "socket": "socket_hand_L",
+        "grip": [
+          0.3175929624977574,
+          0.7984115182434144,
+          0.020897263010556714
+        ]
+      },
+      {
+        "mesh": "Module_tool_hunter_quiver_0",
+        "joint": 3,
+        "socket": "socket_back",
+        "grip": [
+          -0.155,
+          1.235,
+          -0.17
+        ]
+      },
+      {
+        "mesh": "Module_tool_hunter_string",
+        "joint": 11,
+        "socket": "socket_hand_L",
+        "grip": [
+          0.3175929624977574,
+          0.7984115182434144,
+          0.020897263010556714
+        ]
+      }
+    ],
+    "gripPose": {
+      "wristJoint": 11,
+      "wristRotation": [
+        -6.507313400691469e-9,
+        0.028401411428309407,
+        7.053922009361581e-8,
+        0.9995965985480718
+      ],
+      "forearmJoint": 10,
+      "forearmRotation": [
+        0.31600679573503304,
+        -0.11619124099407778,
+        -0.3031095063264039,
+        0.8914953324275439
+      ],
+      "forearmBlend": 0.8,
+      "upperArmJoint": 9,
+      "upperArmRotation": [
+        -0.36253346023450445,
+        0.5815993351088188,
+        -0.09957610792097266,
+        0.7213849889917919
+      ],
+      "upperArmBlend": 0.85,
+      "fingers": [
+        {
+          "joint": 13,
+          "rotation": [
+            -0.5856586532309866,
+            -0.7528825395823939,
+            -0.21179242658895714,
+            -0.21287499565387485
+          ]
+        },
+        {
+          "joint": 14,
+          "rotation": [
+            0.084317547379902,
+            -0.016368712413307757,
+            -0.1019666416172455,
+            0.9910728800132931
+          ]
+        },
+        {
+          "joint": 15,
+          "rotation": [
+            0.3259821593248796,
+            -0.09387094703712465,
+            -0.40823024903459837,
+            0.8475092562795632
+          ]
+        },
+        {
+          "joint": 17,
+          "rotation": [
+            -0.5173415127345181,
+            -0.8497349365749194,
+            -0.07567820102960976,
+            0.06768387071027825
+          ]
+        },
+        {
+          "joint": 18,
+          "rotation": [
+            -0.13513227564486685,
+            0.24989620733469056,
+            0.374701248629032,
+            0.8825475217197237
+          ]
+        },
+        {
+          "joint": 19,
+          "rotation": [
+            0.3498520767878992,
+            -0.5225478289853616,
+            -0.1698324654248678,
+            -0.7587517544096515
+          ]
+        }
+      ],
+      "axis": [
+        0.46473066906273575,
+        0.4761504858071911,
+        0.7465293832784334
+      ],
+      "fingerRadius": 0.04658697561008305
+    }
+  }
+}

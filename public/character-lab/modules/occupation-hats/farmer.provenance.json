@@ -1,0 +1,98 @@
+{
+  "source": {
+    "occupation": "farmer",
+    "filename": "Meshy_AI_viking_hat_farmer_mod_1017143048_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Hats/farmer.glb",
+    "sha256": "e778661174f0d4562551e937a8dbf9965a363c0ae7398a0cbc22dbf6e785505f",
+    "bytes": 45762504,
+    "triangles": 3108,
+    "vertices": 3930,
+    "skins": 0,
+    "clips": 0,
+    "images": [
+      {
+        "name": "normal",
+        "mime": "image/png",
+        "bytes": 16834753
+      },
+      {
+        "name": "texture_0",
+        "mime": "image/png",
+        "bytes": 20049075
+      },
+      {
+        "name": "texture_0_metallic_roughness",
+        "mime": "image/png",
+        "bytes": 8732524
+      }
+    ],
+    "bounds": {
+      "min": [
+        -0.1167035773396492,
+        0,
+        -0.1336563527584076
+      ],
+      "max": [
+        0.11624258011579514,
+        0.20000000298023224,
+        0.12960079312324524
+      ]
+    }
+  },
+  "output": {
+    "sha256": "d1d39b739a4157b08d765a4100d139b5f813a0a85a2c4d0ae676afdcb926d217",
+    "triangles": 3108,
+    "materials": 1,
+    "bytes": 607644,
+    "bounds": {
+      "min": [
+        -0.09916749049288993,
+        1.5689820066538966,
+        -0.0713927963456802
+      ],
+      "max": [
+        0.09750865698858534,
+        1.7290622146628618,
+        0.12836295967118055
+      ]
+    }
+  },
+  "bindingSha256": "7eb9d84b16cb19339ff1f1bfd488caa7d79ab403e01904786ae20617f780b411",
+  "nativeFrame": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    -0.000634807064279222,
+    1.605000052919203,
+    0.03002373197797754,
+    1
+  ],
+  "sourceRim": 0.045,
+  "sourceRadii": [
+    0.10846327046719316,
+    0.113519546244213
+  ],
+  "scale": [
+    0.8442987410903894,
+    0.8004010281179212,
+    0.758785693538822
+  ],
+  "skullClearance": 0.002,
+  "hairClearance": 0.002,
+  "operations": [
+    "Preserve supplied triangle topology and UVs",
+    "Bake measured cap seat in the unchanged native Head frame",
+    "Resize source albedo to 1024 pixels; remove high-frequency normal and PBR maps",
+    "Use source material colour independently from DNA hair colour",
+    "Rigid native Head weights; no copied skeleton, body masking or animation-derived fit"
+  ]
+}

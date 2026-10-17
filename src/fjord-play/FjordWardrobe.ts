@@ -8,6 +8,8 @@ const bare = {...defaultCharacterPresentation, hair: 'none', beard: 'none', outf
 export const fjordClothingSets = Object.freeze({
     native: Object.freeze({...bare}),
     generic: Object.freeze({...bare, outfit: gridTrialOutfitId, shoes: 'garment/meshy-low-shoes-005'}),
+    fisherman: Object.freeze({...bare, top: 'garment/meshy-fisherman-tunic-009',
+        trousers: 'garment/meshy-fisherman-trousers-009', shoes: 'garment/meshy-fisherman-shoe-009'}),
     farmerFemale: Object.freeze({...bare, trousers: 'garment/meshy-long-skirt-005',
         shoes: 'garment/meshy-low-shoes-005'}),
     farmerMale: Object.freeze({...bare, trousers: 'garment/meshy-short-trousers-006',
@@ -18,6 +20,7 @@ export type FjordClothingSet = keyof typeof fjordClothingSets;
 /** Render-only sets use canonical sex/occupation; adult clothing is never resized onto children. */
 export function fjordClothingSet(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): FjordClothingSet {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'native';
+    if (entity.status.occupation === 'fisher') return 'fisherman';
     if (entity.status.occupation !== 'farmer') return 'generic';
     return entity.dna.sex === 'female' ? 'farmerFemale' : 'farmerMale';
 }
@@ -37,6 +40,19 @@ export function fjordHairAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): strin
     return assets[variant];
 }
 
+/** Hats remain independent of hair and carried tools. */
+function occupationModuleAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>, type: 'headwear' | 'equipment'): string {
+    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'none';
+    const occupation = entity.status.occupation;
+    return occupation && ['farmer', 'fisher', 'hunter', 'smith'].includes(occupation)
+        ? type + '/occupation-' + occupation : 'none';
+}
+export function fjordHeadwearAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): string {
+    return occupationModuleAsset(entity, 'headwear');
+}
+export function fjordToolAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>): string {
+    return occupationModuleAsset(entity, 'equipment');
+}
 interface WardrobeState {
     installed?: string;
     pending?: string;
@@ -54,7 +70,9 @@ export class FjordWardrobe {
         if (human.isDisposed) return;
         const selected = fjordClothingSet(entity);
         const hair = fjordHairAsset(entity);
-        const key = selected + ':' + hair;
+        const headwear = fjordHeadwearAsset(entity);
+        const equipment = fjordToolAsset(entity);
+        const key = selected + ':' + hair + ':' + headwear + ':' + equipment;
         let state = this.states.get(human);
         if (!state) {
             state = {revision: 0};
@@ -67,7 +85,7 @@ export class FjordWardrobe {
         }
         const revision = ++state.revision;
         state.pending = key;
-        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair} as CharacterPresentation);
+        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair, headwear, equipment} as CharacterPresentation);
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {

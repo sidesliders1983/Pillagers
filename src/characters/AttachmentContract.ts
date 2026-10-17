@@ -34,7 +34,7 @@ export type GarmentBindBone=typeof garmentBindBones[number];
 export interface ModuleMetadata {
     version:typeof attachmentVersion|'pillagers-fit/0.2';
     id:string;
-    type:'hair'|'beard'|'mask'|'garment'|'equipment';
+    type:'hair'|'beard'|'mask'|'garment'|'equipment'|'headwear';
     anchor:SocketName;
     fitCage?:CageName;
     /** Optional authored contact subset; complete cage still governs collisions. */
@@ -63,14 +63,65 @@ export interface ModuleMetadata {
     garmentBind?:{joints:Record<GarmentBindBone,readonly [number,number,number]>};
     trim?:{min:readonly (number|null)[];max:readonly (number|null)[]};
 }
+function validateEquipmentBindingFrames(metadata: ModuleMetadata) {
+    if ('equipmentBindings' in metadata) {
+        const bindings = metadata.equipmentBindings;
+        const frame = (value: RigidFrame | undefined) => !!value
+            && typeof value === 'object' && !Array.isArray(value)
+            && Object.getPrototypeOf(value) === Object.prototype
+            && Object.keys(value).length === 2
+            && Object.hasOwn(value, 'position') && Object.hasOwn(value, 'quaternion')
+            && Array.isArray(value.position) && value.position.length === 3
+            && Array.from(value.position).every(v => Number.isFinite(v) && Math.abs(v) <= 5)
+            && Array.isArray(value.quaternion) && value.quaternion.length === 4
+            && Array.from(value.quaternion).every(Number.isFinite)
+            && Math.abs(Math.hypot(...value.quaternion) - 1) < 1e-6;
+        if (metadata.type !== 'equipment'
+            || !['canonical', 'meshy-native'].includes(metadata.authoringFrame)
+            || !bindings || typeof bindings !== 'object' || Array.isArray(bindings)
+            || Object.getPrototypeOf(bindings) !== Object.prototype
+            || Object.keys(bindings).some(key => !['grip', 'sockets', 'proportions'].includes(key))
+            || !Object.hasOwn(bindings, 'grip') || !Object.hasOwn(bindings, 'sockets')
+            || !frame(bindings.grip)
+            || !bindings.sockets || typeof bindings.sockets !== 'object'
+            || Array.isArray(bindings.sockets) || Object.keys(bindings.sockets).length === 0
+            || Object.entries(bindings.sockets).some(([socket, value]) =>
+                !equipmentSocketNames.includes(socket as EquipmentSocket) || !frame(value))
+            || !Object.hasOwn(bindings.sockets, metadata.anchor)) {
+            throw new Error('Equipment needs a measured grip and supported carry frames.');
+        }
+    }
+    if (metadata.equipmentBindings && 'proportions' in metadata.equipmentBindings) {
+        const proportion = metadata.equipmentBindings.proportions;
+        if (!Object.hasOwn(metadata.equipmentBindings, 'proportions')
+            || !proportion || typeof proportion !== 'object' || Array.isArray(proportion)
+            || Object.getPrototypeOf(proportion) !== Object.prototype
+            || Object.keys(proportion).length !== 3
+            || !Object.hasOwn(proportion, 'bodyCore')
+            || !['hand_L', 'hand_R'].includes(proportion.bodyCore)
+            || !Object.hasOwn(proportion, 'referenceRadius')
+            || !Number.isFinite(proportion.referenceRadius) || proportion.referenceRadius <= 1e-6
+            || !Object.hasOwn(proportion, 'sourceSHA256')
+            || !/^[a-f0-9]{64}$/.test(proportion.sourceSHA256)) {
+            throw new Error('Equipment proportions require a source-bound measured fixed hand core.');
+        }
+    }
+}
 export function validateModule(metadata:ModuleMetadata){
     if(metadata.includesFootwear!==undefined&&(typeof metadata.includesFootwear!=='boolean'||metadata.version!=='pillagers-fit/0.2'||metadata.type!=='garment'||metadata.slot!=='full'))throw new Error('Separate footwear requires an explicit native full ensemble');
     if(metadata.version==='pillagers-fit/0.2'){
         const binding=metadata.nativeBinding;
-        if(!metadata.id||!['hair','beard','garment','equipment'].includes(metadata.type)||metadata.authoringFrame!=='meshy-native'||!Object.hasOwn(socketDefinitions,metadata.anchor)||!binding||!/^\/[\w/-]+\.binding\.json$/.test(binding.path)||![/^[a-f0-9]{64}$/.test(binding.sha256),/^[a-f0-9]{64}$/.test(binding.rigSignature)].every(Boolean)||!Number.isFinite(metadata.clearance)||metadata.clearance<0)throw new Error('Invalid native body-bound module contract');
+        if(!metadata.id||!['hair','beard','garment','equipment','headwear'].includes(metadata.type)||metadata.authoringFrame!=='meshy-native'||!Object.hasOwn(socketDefinitions,metadata.anchor)||!binding||!/^\/[\w/-]+\.binding\.json$/.test(binding.path)||![/^[a-f0-9]{64}$/.test(binding.sha256),/^[a-f0-9]{64}$/.test(binding.rigSignature)].every(Boolean)||!Number.isFinite(metadata.clearance)||metadata.clearance<0)throw new Error('Invalid native body-bound module contract');
         if(metadata.type==='garment'&&(metadata.fitMode!=='drape'||!['upper','lower','full','over','footwear'].includes(metadata.slot??'')))throw new Error('Native garments require wardrobe occupancy');
         if((metadata.type==='hair'||metadata.type==='beard')&&metadata.fitMode!=='conform')throw new Error('Native head modules require conform bindings');
-        if(metadata.type==='equipment'&&(metadata.fitMode!=='rigid'||metadata.accessorySlot!=='belt'||!metadata.dependency?.module||!metadata.dependency.frame))throw new Error('Native accessories require a declared garment frame');
+        if(metadata.type==='headwear'&&(metadata.fitMode!=='rigid'||metadata.anchor!=='socket_head_top'||metadata.dependency||metadata.covers?.length))throw new Error('Native headwear requires a separate rigid head binding');
+        if(metadata.type==='equipment'){
+            if(metadata.equipmentBindings){
+                if(metadata.fitMode!=='rigid'||!['socket_hand_L','socket_hand_R'].includes(metadata.anchor)||metadata.dependency||metadata.accessorySlot)throw new Error('Native tools require an independent rigid hand grip');
+                validateEquipmentBindingFrames(metadata);
+                if(Object.keys(metadata.equipmentBindings.sockets).length!==1)throw new Error('Native tools expose only their measured authored hand');
+            }else if(metadata.fitMode!=='rigid'||metadata.accessorySlot!=='belt'||!metadata.dependency?.module||!metadata.dependency.frame)throw new Error('Native accessories require a declared garment frame');
+        }
         return metadata;
     }
     if(!['hair','beard','mask','garment','equipment'].includes(metadata.type)||!['conform','drape','rigid'].includes(metadata.fitMode)||!['canonical','measured-reference-head'].includes(metadata.authoringFrame))throw new Error('Unknown module type, fit mode or authoring frame.');
@@ -101,15 +152,7 @@ export function validateModule(metadata:ModuleMetadata){
     if(metadata.canonicalHeadSize&&(metadata.canonicalHeadSize.length!==3||metadata.canonicalHeadSize.some(value=>!Number.isFinite(value)||value<=0)))throw new Error('Invalid canonical head dimensions.');
     if((metadata.type==='hair'||metadata.type==='beard')&&metadata.fitMode!=='conform')throw new Error('Hair and beard modules use conform fitting.');
     if(metadata.type==='equipment'&&(metadata.fitMode!=='rigid'||!Object.hasOwn(metadata,'equipmentBindings')))throw new Error('Equipment uses a rigid socket.');
-    if('equipmentBindings' in metadata){
-        const bindings=metadata.equipmentBindings;
-        const frame=(value:RigidFrame|undefined)=>!!value&&typeof value==='object'&&!Array.isArray(value)&&Object.getPrototypeOf(value)===Object.prototype&&Object.keys(value).length===2&&Object.hasOwn(value,'position')&&Object.hasOwn(value,'quaternion')&&Array.isArray(value.position)&&value.position.length===3&&Array.from(value.position).every(v=>Number.isFinite(v)&&Math.abs(v)<=5)&&Array.isArray(value.quaternion)&&value.quaternion.length===4&&Array.from(value.quaternion).every(Number.isFinite)&&Math.abs(Math.hypot(...value.quaternion)-1)<1e-6;
-        if(metadata.type!=='equipment'||metadata.authoringFrame!=='canonical'||!bindings||typeof bindings!=='object'||Array.isArray(bindings)||Object.getPrototypeOf(bindings)!==Object.prototype||Object.keys(bindings).some(key=>!['grip','sockets','proportions'].includes(key))||!Object.hasOwn(bindings,'grip')||!Object.hasOwn(bindings,'sockets')||!frame(bindings.grip)||!bindings.sockets||typeof bindings.sockets!=='object'||Array.isArray(bindings.sockets)||Object.keys(bindings.sockets).length===0||Object.entries(bindings.sockets).some(([socket,value])=>!equipmentSocketNames.includes(socket as EquipmentSocket)||!frame(value))||!Object.hasOwn(bindings.sockets,metadata.anchor))throw new Error('Equipment needs a measured grip and supported canonical carry frames.');
-    }
-    if(metadata.equipmentBindings&&'proportions' in metadata.equipmentBindings){
-        const proportion=metadata.equipmentBindings.proportions;
-        if(!Object.hasOwn(metadata.equipmentBindings,'proportions')||!proportion||typeof proportion!=='object'||Array.isArray(proportion)||Object.getPrototypeOf(proportion)!==Object.prototype||Object.keys(proportion).length!==3||!Object.hasOwn(proportion,'bodyCore')||!['hand_L','hand_R'].includes(proportion.bodyCore)||!Object.hasOwn(proportion,'referenceRadius')||!Number.isFinite(proportion.referenceRadius)||proportion.referenceRadius<=1e-6||!Object.hasOwn(proportion,'sourceSHA256')||!/^[a-f0-9]{64}$/.test(proportion.sourceSHA256))throw new Error('Equipment proportions require a source-bound measured fixed hand core.');
-    }
+    validateEquipmentBindingFrames(metadata);
     if(metadata.authoringFrame==='measured-reference-head'&&!metadata.sourceStyle)throw new Error('Measured head modules need their source calibration key.');
     const band=metadata.attachmentBand;if(band){for(const value of [band.minimumY,band.maximumY])if(value!=null&&!Number.isFinite(value))throw new Error('Use null for an unbounded attachment band.');if((band.minimumY??-Infinity)>(band.maximumY??Infinity))throw new Error('Attachment band minimum exceeds maximum.');}
     if(metadata.projection!==undefined&&!['shell','outward'].includes(metadata.projection))throw new Error('Unknown contact projection policy.');
@@ -121,7 +164,7 @@ export function validateModule(metadata:ModuleMetadata){
 export function moduleAtEquipmentSocket(metadata:ModuleMetadata,socket?:EquipmentSocket):ModuleMetadata {
     validateModule(metadata);
     if(socket===undefined)return metadata;
-    if(metadata.version==='pillagers-fit/0.2')throw new Error('This accessory uses its garment frame; a body carry override is unsupported');
+    if(metadata.version==='pillagers-fit/0.2'&&!metadata.equipmentBindings)throw new Error('This accessory uses its garment frame; a body carry override is unsupported');
     if(metadata.type!=='equipment'||!metadata.equipmentBindings||!Object.hasOwn(metadata.equipmentBindings.sockets,socket))throw new Error('Unsupported equipment carry socket.');
     return validateModule({...metadata,anchor:socket});
 }

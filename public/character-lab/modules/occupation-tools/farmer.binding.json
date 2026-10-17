@@ -1,0 +1,209 @@
+{
+  "version": "pillagers-fit/0.2",
+  "id": "equipment/occupation-farmer",
+  "moduleSha256": "8a01ead0b858fb6af2a33d8568f0dc6183d6e0aef1c94202a2cb81a651d1eacc",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "id": "occupation-tool-native-grip",
+    "version": 2,
+    "blender": "not-required"
+  },
+  "coordinateFrame": {
+    "up": "+Y",
+    "front": "+Z",
+    "unit": "metre",
+    "origin": "Meshy source bind"
+  },
+  "construction": "intentional-asymmetry",
+  "skinning": "rigid-native-equipment",
+  "reviewScope": "Supplied carried tool; exact native hand/back bind, neutral and Walking/Idle review",
+  "materialPolicy": {
+    "kind": "provider-original",
+    "provider": "Meshy",
+    "sourceSha256": "38a7ca5dc06f9aa78c96b707ae27630499b42adf9a8eb58e26b42c9e2412463b",
+    "reviewOnly": true
+  },
+  "precomputedNative": {
+    "version": 3,
+    "coordinateFrame": "metre",
+    "meshes": [
+      {
+        "mesh": "Module_tool_farmer_0",
+        "vertices": 3722
+      }
+    ],
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "moduleCoverage": []
+  },
+  "supportedAges": {
+    "min": 18,
+    "max": 100
+  },
+  "lods": {
+    "0": {
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 0
+    },
+    "1": {
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 1
+    },
+    "2": {
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 2
+    }
+  },
+  "regions": {},
+  "seams": [],
+  "coverageRimContacts": [],
+  "coverageClipPlanes": [],
+  "garmentFrames": {},
+  "rigidEquipment": {
+    "version": 1,
+    "parts": [
+      {
+        "mesh": "Module_tool_farmer_0",
+        "joint": 24,
+        "socket": "socket_hand_R",
+        "grip": [
+          -0.31221641023987096,
+          0.794625134709556,
+          0.024209013734798713
+        ]
+      }
+    ],
+    "gripPose": {
+      "wristJoint": 24,
+      "wristRotation": [
+        -6.26099351733279e-8,
+        -0.02840140779422942,
+        1.8542906572634664e-8,
+        0.9995965986513268
+      ],
+      "forearmJoint": 23,
+      "forearmRotation": [
+        0.3161215852316397,
+        0.1162726401901684,
+        0.30327943237621,
+        0.8913862251523786
+      ],
+      "forearmBlend": 0.8,
+      "upperArmJoint": 22,
+      "upperArmRotation": [
+        -0.3484994045051457,
+        -0.5968665672076261,
+        0.07821896659238206,
+        0.7184568597171046
+      ],
+      "upperArmBlend": 0.85,
+      "fingers": [
+        {
+          "joint": 26,
+          "rotation": [
+            0.5856829285621643,
+            -0.7528582215309143,
+            -0.2117234468460083,
+            0.21296294033527374
+          ]
+        },
+        {
+          "joint": 27,
+          "rotation": [
+            0.10444678366184235,
+            0.026353448629379272,
+            0.11027310788631439,
+            0.9880466461181641
+          ]
+        },
+        {
+          "joint": 28,
+          "rotation": [
+            0.30512169003486633,
+            0.0926232784986496,
+            0.4022321403026581,
+            0.8582138419151306
+          ]
+        },
+        {
+          "joint": 30,
+          "rotation": [
+            0.48264867067337036,
+            -0.8729287385940552,
+            -0.004757090471684933,
+            0.0708734393119812
+          ]
+        },
+        {
+          "joint": 31,
+          "rotation": [
+            -0.020323023200035095,
+            -0.24551258981227875,
+            -0.4056101441383362,
+            0.8802220821380615
+          ]
+        },
+        {
+          "joint": 32,
+          "rotation": [
+            -0.34764793515205383,
+            -0.6196022033691406,
+            -0.24488264322280884,
+            0.659747302532196
+          ]
+        }
+      ],
+      "axis": [
+        -0.4800633526669236,
+        0.46862079109222976,
+        0.7415751692055808
+      ],
+      "fingerRadius": 0.045595199491245464
+    }
+  }
+}

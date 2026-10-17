@@ -44,7 +44,7 @@ Fjordplay uses explicit owner-selected visual sets on the existing Meshy Human:
 
 | Resident | Clothing set |
 | --- | --- |
-| Generic adult (all occupations except farmer) | Original tunic and long trousers with low leather shoes |
+| Generic adult (all occupations except farmer and fisher) | Original tunic and long trousers with low leather shoes |
 | Female farmer | Long woven skirt and low leather shoes; native undershirt, no tunic |
 | Male farmer | Short woven trousers and high leather boots; native undershirt, no tunic |
 
@@ -78,3 +78,15 @@ own Head/neck/back weighting and movement review.
 Run node --test tests/living-fjord.test.mjs for the public projection/controller and Core save/replay seams. Run node scripts/qa/check-living-fjord.mjs against the LAN/dev server for actual DNA bodies, movement, heritage popup, touch, pause, replay and five-animal Farmyard reconciliation. Run node scripts/qa/capture-living-herd.mjs for close views at capacity plus one, actual within-yard movement, and return to capacity through the real Slaughter command. Browser evidence is in docs/qa/living-fjord. Existing character validation, build and the complete test suite remain required.
 
 Selection framing uses cached asset/body bounds translated to the live position. Exact heading/pose framing remains approximate; turning cattle and extreme DNA builds should be checked in the later polish/performance pass. Existing Fjordside Talk/Listen and prepared cattle Graze/HumanInteraction integration remains #95, with one movement/animation owner per actor; no new interaction system is introduced here.
+
+### Approved fisherman clothing
+
+Adult residents with canonical occupation fisher use the owner-approved charcoal tunic, light trousers and mirrored low leather shoes from fisherman pass 009 (native-019). The set is explicit and shared by adult men and women; children keep the native fallback. Occupation changes reconcile these separate clothing pieces on the same existing Human and preserve DNA, hair and animation identity. Generic and farmer sets remain unchanged. This changes rendering only, not occupation rules, work output or simulation balance.
+
+### Occupation headwear
+
+Adult farmer, fisher, hunter and smith residents wear their supplied occupation hats in an independent Headwear slot. Hair and tools remain independent. Bald heads use the measured direct head seat; covered upper hair is tucked under the cap with tightly bounded hat expansion. Children and other occupations remain bare-headed. The native body, rig, occupation mechanics, save data and Core RNG remain unchanged. See docs/characters/occupation-hats.md for source identities, proportion references and verification.
+
+### Occupation tools
+
+Adult farmer, fisher, hunter and smith residents carry the supplied sickle, fishing rod, bow with back-mounted quiver, and hammer respectively. Equipment remains independent of clothing, hair and headwear and uses the same native hand/back bones. Children and other occupations receive no occupation tool. Occupation or age changes update the same resident through the existing wardrobe reconciliation. These are visual carry assets using existing Idle/Walking/Running clips with a bounded hand/arm carry layer; there are no new inventory, combat, harvesting or work-output rules. See docs/characters/occupation-tools.md for source identities, fitting and motion limitations.

@@ -1,0 +1,512 @@
+[
+  {
+    "schemaVersion": 1,
+    "source": {
+      "occupation": "farmer",
+      "filename": "Meshy_AI_viking_tool_farmer_si_1017150748_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Tools/farmer.glb",
+      "sha256": "38a7ca5dc06f9aa78c96b707ae27630499b42adf9a8eb58e26b42c9e2412463b",
+      "bytes": 50497416,
+      "triangles": 2901,
+      "vertices": 3722,
+      "bounds": {
+        "min": [
+          -0.12927979230880737,
+          0,
+          -0.029378509148955345
+        ],
+        "max": [
+          0.12923626601696014,
+          0.4000000059604645,
+          0.029120950028300285
+        ]
+      },
+      "skins": 0,
+      "animations": 0,
+      "optimizedBytes": 560552,
+      "optimizedSha256": "4671729babb2eadee4d3037108754933a1f6f8b73ba3f42808a196e01d649901"
+    },
+    "output": {
+      "sha256": "8a01ead0b858fb6af2a33d8568f0dc6183d6e0aef1c94202a2cb81a651d1eacc",
+      "triangles": 2901,
+      "materials": 1,
+      "bytes": 740996,
+      "bounds": {
+        "min": [
+          -0.5738693987666597,
+          0.7428890839996398,
+          -0.04392418779021788
+        ],
+        "max": [
+          -0.25943344227584725,
+          0.9528661363400647,
+          0.2632895285121317
+        ]
+      }
+    },
+    "bindingSha256": "b17cc2b9f955f2332665cebbab5c17967478d79f66e26974dda405a1debcc4c7",
+    "parts": [
+      {
+        "mesh": "Module_tool_farmer_0",
+        "triangles": 2901,
+        "vertices": 3722,
+        "joint": 24,
+        "socket": "socket_hand_R",
+        "grip": [
+          -0.31221641023987096,
+          0.794625134709556,
+          0.024209013734798713
+        ],
+        "transform": [
+          0.6985271979368028,
+          0.7155835057787167,
+          0,
+          0,
+          -0.4800633526669236,
+          0.46862079109222976,
+          0.7415751692055808,
+          0,
+          0.5306589593785745,
+          -0.5180104250046849,
+          0.6708697849938646,
+          0,
+          -0.3144994444673597,
+          0.7153144688473975,
+          -0.035028911038471555,
+          1
+        ]
+      }
+    ],
+    "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "operations": [
+      "Preserve supplied source triangles and UVs; compact separated render corners",
+      "Resize albedo to 1024 and metal/roughness map to 512; remove normal and occlusion maps",
+      "Narrow the sickle handle locally and align its shaft through the authored finger cavity",
+      "Use the unchanged native hand and back joints, with no copied bones, clips or body mask"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "source": {
+      "occupation": "fisher",
+      "filename": "Meshy_AI_viking_tool_fisherman_1017153106_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Tools/fisher.glb",
+      "sha256": "fbc6e833180e6600ed5de3a4da163737a84bf373d46bf21de9c0bb1c16287523",
+      "bytes": 49923532,
+      "triangles": 3112,
+      "vertices": 6276,
+      "bounds": {
+        "min": [
+          -0.8280337452888489,
+          0,
+          -0.10033369809389114
+        ],
+        "max": [
+          0.8319234251976013,
+          2,
+          0.10140201449394226
+        ]
+      },
+      "skins": 0,
+      "animations": 0,
+      "optimizedBytes": 628716,
+      "optimizedSha256": "74f1924ebb1d3562797644bc4a59da1009f2296c13519cfa3d061abc9fe10b53"
+    },
+    "output": {
+      "sha256": "323147f12193009739d2ac55f54f94d74b17655754fc59d750afd553397590d8",
+      "triangles": 3112,
+      "materials": 1,
+      "bytes": 861196,
+      "bounds": {
+        "min": [
+          -1.035645246863698,
+          0.6895566912207148,
+          -0.10599778958394672
+        ],
+        "max": [
+          -0.22814980351951752,
+          1.3884182294903868,
+          1.0468103297820752
+        ]
+      }
+    },
+    "bindingSha256": "2d072a7988c84cf766b509614dcd63765803e261a7621bfbabbf961389735629",
+    "parts": [
+      {
+        "mesh": "Module_tool_fisher_0",
+        "triangles": 3112,
+        "vertices": 6276,
+        "joint": 24,
+        "socket": "socket_hand_R",
+        "grip": [
+          -0.31221641023987096,
+          0.794625134709556,
+          0.024209013734798713
+        ],
+        "transform": [
+          0.5081158619697579,
+          0.17477659798058132,
+          -0.26696706091400907,
+          0,
+          0.02103938197712567,
+          0.4825480418046082,
+          0.3559560812186788,
+          0,
+          0.3183953756271447,
+          -0.3108062550028109,
+          0.40252187099631875,
+          0,
+          -0.6443752938186285,
+          0.5620414833894467,
+          0.10630117248918684,
+          1
+        ]
+      }
+    ],
+    "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "operations": [
+      "Preserve supplied source triangles and UVs; compact separated render corners",
+      "Resize albedo to 1024 and metal/roughness map to 512; remove normal and occlusion maps",
+      "Narrow the lower rod grip locally; retain the upper rod, line and hook proportions",
+      "Use the unchanged native hand and back joints, with no copied bones, clips or body mask"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "source": {
+      "occupation": "hunter",
+      "filename": "Meshy_AI_viking_tool_hunter_bo_1017150801_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Tools/hunter.glb",
+      "sha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10",
+      "bytes": 47663456,
+      "triangles": 3039,
+      "vertices": 6391,
+      "bounds": {
+        "min": [
+          -0.4614369869232178,
+          -0.9506109356880188,
+          -0.09036999195814133
+        ],
+        "max": [
+          0.45930400490760803,
+          0.9499120116233826,
+          0.09028499573469162
+        ]
+      },
+      "skins": 0,
+      "animations": 0,
+      "optimizedBytes": 622344,
+      "optimizedSha256": "4d75079bb22e90efe9b526e79e1ef3fae4c5198f1f7f6772e684fd4dee6fb0cc"
+    },
+    "output": {
+      "sha256": "c09b59ac929a36bfa1ba041de80d75ad93dd477e371de25679e4678801bc7781",
+      "triangles": 3055,
+      "materials": 2,
+      "bytes": 864092,
+      "bounds": {
+        "min": [
+          -0.30270421165246614,
+          0.3879509079684337,
+          -0.44562228252014874
+        ],
+        "max": [
+          0.765251246192423,
+          1.5439347842870488,
+          0.48610719150040965
+        ]
+      }
+    },
+    "bindingSha256": "1304364921d84f4a148ca7ea2e9958907af572a2367ee11dc6c8a6af4a6c9f93",
+    "parts": [
+      {
+        "mesh": "Module_tool_hunter_bow_0",
+        "triangles": 678,
+        "vertices": 1130,
+        "joint": 11,
+        "socket": "socket_hand_L",
+        "grip": [
+          0.3175929624977574,
+          0.7984115182434144,
+          0.020897263010556714
+        ],
+        "transform": [
+          -0.46516371399867434,
+          0.4540073999165207,
+          -1.6881165163874223e-17,
+          0,
+          0.30207493489077825,
+          0.3094978157746742,
+          0.48524409913098177,
+          0,
+          0.3389298642635253,
+          0.3472583805349359,
+          -0.4324790911229835,
+          0,
+          0.2668245535060455,
+          0.8476673617306063,
+          0.021085390733115612,
+          1
+        ]
+      },
+      {
+        "mesh": "Module_tool_hunter_quiver_0",
+        "triangles": 2361,
+        "vertices": 5261,
+        "joint": 3,
+        "socket": "socket_back",
+        "grip": [
+          -0.155,
+          1.235,
+          -0.17
+        ],
+        "transform": [
+          0.4267535916805609,
+          0.09543039130262773,
+          0,
+          0,
+          -0.09543039130262773,
+          0.4267535916805609,
+          0,
+          0,
+          0,
+          0,
+          0.43729347993816636,
+          0,
+          -0.279104924908415,
+          1.2703384236344433,
+          -0.16998141585283305,
+          1
+        ]
+      },
+      {
+        "mesh": "Module_tool_hunter_string",
+        "triangles": 16,
+        "vertices": 16,
+        "joint": 11,
+        "socket": "socket_hand_L",
+        "authored": "linen cord between original bow tips"
+      }
+    ],
+    "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "operations": [
+      "Preserve supplied source triangles and UVs; compact separated render corners",
+      "Resize albedo to 1024 and metal/roughness map to 512; remove normal and occlusion maps",
+      "Separate existing bow and quiver without cutting faces; add a 16-triangle linen bowstring and narrow the bow grip",
+      "Use the unchanged native hand and back joints, with no copied bones, clips or body mask"
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "source": {
+      "occupation": "smith",
+      "filename": "Meshy_AI_viking_tool_smith_ham_1017150612_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Tools/smith.glb",
+      "sha256": "7de8c1f4cf7aa3d9af0cf06fe436246afd578ac774c6433da565c862450723e1",
+      "bytes": 47083624,
+      "triangles": 2677,
+      "vertices": 3192,
+      "bounds": {
+        "min": [
+          -0.07722561061382294,
+          0,
+          -0.025132907554507256
+        ],
+        "max": [
+          0.07618296891450882,
+          0.20000000298023224,
+          0.02490994893014431
+        ]
+      },
+      "skins": 0,
+      "animations": 0,
+      "optimizedBytes": 465648,
+      "optimizedSha256": "5ccbb4cf2bc4337e437c20396e7b6f31d32063f52b10241e76cb7ae73aea6b04"
+    },
+    "output": {
+      "sha256": "ae59cfb02110ea0b9f4f1434eae1fead5281188c579e9e9612cd057ff43ffd82",
+      "triangles": 2677,
+      "materials": 1,
+      "bytes": 623880,
+      "bounds": {
+        "min": [
+          -0.5347390452837654,
+          0.7410149457518805,
+          -0.048319841411874294
+        ],
+        "max": [
+          -0.2581577111267719,
+          0.9972900818853686,
+          0.23524251227591497
+        ]
+      }
+    },
+    "bindingSha256": "886977fa360b82eee2380016feb74005334226e45f75f96fe9cf891c5e119918",
+    "parts": [
+      {
+        "mesh": "Module_tool_smith_0",
+        "triangles": 2677,
+        "vertices": 3192,
+        "joint": 24,
+        "socket": "socket_hand_R",
+        "grip": [
+          -0.31221641023987096,
+          0.794625134709556,
+          0.024209013734798713
+        ],
+        "transform": [
+          1.2224225963894049,
+          1.2522711351127542,
+          0,
+          0,
+          -0.8401108671671164,
+          0.8200863844114021,
+          1.2977565461097664,
+          0,
+          0.9286531789125054,
+          -0.9065182437581984,
+          1.1740221237392632,
+          0,
+          -0.2686088979728079,
+          0.7563733858595836,
+          -0.04138119029668268,
+          1
+        ]
+      }
+    ],
+    "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "operations": [
+      "Preserve supplied source triangles and UVs; compact separated render corners",
+      "Resize albedo to 1024 and metal/roughness map to 512; remove normal and occlusion maps",
+      "Narrow the hammer handle locally and align its shaft through the authored finger cavity",
+      "Use the unchanged native hand and back joints, with no copied bones, clips or body mask"
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "kind": "fisherman-image-approval/1",
+  "decision": "approved",
+  "userMessage": "Dit lijkt goed te passen, ga verder",
+  "recordedAt": "2026-10-17T14:03:46.663Z",
+  "reviewManifestSha256": "4433e471bd3002c4faea1c8599603dcc06149392bb70719847a27e438c96757a",
+  "inputManifestSha256": "96247f357db167a1cd9142e7d488a3b002698d0459ff3747d7d8ccc5179e17e1",
+  "scope": "Three separate Meshy conversions, one mirrored shoe pair, native Human fitting and Character Lab animation QA",
+  "qualification": "Image approval does not certify the eventual 3D result."
+}

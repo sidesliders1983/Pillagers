@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Occupation hats · Fit review</title>
+<style>body{margin:0;background:#dce1d6;color:#25352e;font:16px system-ui}header{padding:18px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}select,button{padding:8px;font:inherit}canvas{max-width:100%;height:auto}a{color:inherit}#status{padding:0 18px}</style>
+<header><strong>Occupation hats · Farmer / Fisher / Hunter / Smith</strong>
+<label>Hair <select id="hair"><option value="none">None · direct head fit</option><option value="hair/manual-fitted-short">Short</option><option value="hair/manual-fitted-short2">Short 2</option><option value="hair/manual-long-braided">Long braid</option><option value="hair/manual-long-2">Long 2</option></select></label>
+<label>View <select id="view"><option>front</option><option>back</option><option>side</option><option>top</option></select></label>
+<label>Pose <select id="clip"><option value="neutral">Native neutral</option><option value="Walking">Walking</option><option value="Idle_02">Idle 02</option></select></label>
+<a href="/character-lab?clothing=fisherman-009&hat=fisher&hair=long-braided">Fisher in Character Lab</a><a href="/fjord-play">Fjordplay</a>
+</header><p id="status">Loading verified body and hats…</p>
+<script type="module">
+import './fit-review.js';
+const status=document.getElementById('status');
+async function update(){try{status.textContent='Fitting…';await window.hatSet(document.getElementById('hair').value,document.getElementById('view').value,document.getElementById('clip').value,.6);status.textContent='Neutral fit: bald seat or bounded hair clearance. Walking/Idle are sampled at 0.6 seconds.';}catch(error){status.textContent=error.message;}}
+await window.hatSet();status.textContent='Ready. Select hair, view and pose to inspect all four hats.';
+document.querySelectorAll('select').forEach(select=>select.addEventListener('change',update));
+</script></html>

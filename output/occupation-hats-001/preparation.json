@@ -1,0 +1,394 @@
+[
+  {
+    "source": {
+      "occupation": "farmer",
+      "filename": "Meshy_AI_viking_hat_farmer_mod_1017143048_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Hats/farmer.glb",
+      "sha256": "e778661174f0d4562551e937a8dbf9965a363c0ae7398a0cbc22dbf6e785505f",
+      "bytes": 45762504,
+      "triangles": 3108,
+      "vertices": 3930,
+      "skins": 0,
+      "clips": 0,
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 16834753
+        },
+        {
+          "name": "texture_0",
+          "mime": "image/png",
+          "bytes": 20049075
+        },
+        {
+          "name": "texture_0_metallic_roughness",
+          "mime": "image/png",
+          "bytes": 8732524
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.1167035773396492,
+          0,
+          -0.1336563527584076
+        ],
+        "max": [
+          0.11624258011579514,
+          0.20000000298023224,
+          0.12960079312324524
+        ]
+      }
+    },
+    "output": {
+      "sha256": "d1d39b739a4157b08d765a4100d139b5f813a0a85a2c4d0ae676afdcb926d217",
+      "triangles": 3108,
+      "materials": 1,
+      "bytes": 607644,
+      "bounds": {
+        "min": [
+          -0.09916749049288993,
+          1.5689820066538966,
+          -0.0713927963456802
+        ],
+        "max": [
+          0.09750865698858534,
+          1.7290622146628618,
+          0.12836295967118055
+        ]
+      }
+    },
+    "bindingSha256": "7eb9d84b16cb19339ff1f1bfd488caa7d79ab403e01904786ae20617f780b411",
+    "nativeFrame": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      -0.000634807064279222,
+      1.605000052919203,
+      0.03002373197797754,
+      1
+    ],
+    "sourceRim": 0.045,
+    "sourceRadii": [
+      0.10846327046719316,
+      0.113519546244213
+    ],
+    "scale": [
+      0.8442987410903894,
+      0.8004010281179212,
+      0.758785693538822
+    ],
+    "skullClearance": 0.002,
+    "hairClearance": 0.002,
+    "operations": [
+      "Preserve supplied triangle topology and UVs",
+      "Bake measured cap seat in the unchanged native Head frame",
+      "Resize source albedo to 1024 pixels; remove high-frequency normal and PBR maps",
+      "Use source material colour independently from DNA hair colour",
+      "Rigid native Head weights; no copied skeleton, body masking or animation-derived fit"
+    ]
+  },
+  {
+    "source": {
+      "occupation": "fisher",
+      "filename": "Meshy_AI_viking_hat_fisherman__1017143227_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Hats/fisher.glb",
+      "sha256": "9a9b79ac8adad002ff1c163d611b52d6660245a4b7926bc9da8b0921cfacaf33",
+      "bytes": 50932972,
+      "triangles": 3069,
+      "vertices": 3651,
+      "skins": 0,
+      "clips": 0,
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 19330540
+        },
+        {
+          "name": "texture_0",
+          "mime": "image/png",
+          "bytes": 22067604
+        },
+        {
+          "name": "texture_0_metallic_roughness",
+          "mime": "image/png",
+          "bytes": 9397843
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.14463503658771515,
+          0,
+          -0.15787272155284882
+        ],
+        "max": [
+          0.14483444392681122,
+          0.20000000298023224,
+          0.1547919511795044
+        ]
+      }
+    },
+    "output": {
+      "sha256": "e32213f58413d166349af4ed526b9b208334214da3c229618b21e1e21958cc3f",
+      "triangles": 3069,
+      "materials": 1,
+      "bytes": 521536,
+      "bounds": {
+        "min": [
+          -0.1346697590113382,
+          1.515920156896119,
+          -0.10828978376349327
+        ],
+        "max": [
+          0.13358493795743304,
+          1.6804612124167304,
+          0.1700286710909572
+        ]
+      }
+    },
+    "bindingSha256": "31dc11b8d32cae7dd95a0e2278a13693fbc8f8492c4f545156748ae72d51c890",
+    "nativeFrame": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0.9781476007338057,
+      -0.20791169081775931,
+      0,
+      0,
+      0.20791169081775931,
+      0.9781476007338057,
+      0,
+      -0.000634807064279222,
+      1.555000052919203,
+      0.03002373197797754,
+      1
+    ],
+    "sourceRim": 0.04,
+    "sourceRadii": [
+      0.12846287470409046,
+      0.12628657750278055
+    ],
+    "scale": [
+      0.9267115016476134,
+      0.8018898829366039,
+      0.8866984293148674
+    ],
+    "skullClearance": 0.002,
+    "hairClearance": 0.002,
+    "operations": [
+      "Preserve supplied triangle topology and UVs",
+      "Bake measured cap seat in the unchanged native Head frame",
+      "Resize source albedo to 1024 pixels; remove high-frequency normal and PBR maps",
+      "Use source material colour independently from DNA hair colour",
+      "Rigid native Head weights; no copied skeleton, body masking or animation-derived fit"
+    ]
+  },
+  {
+    "source": {
+      "occupation": "hunter",
+      "filename": "Meshy_AI_viking_hat_hunter_mod_1017143300_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Hats/hunter.glb",
+      "sha256": "0dc760ed68e92bd24cb23bb359ab9f469ab3cdeff4110c3f04924aa8de7dfd26",
+      "bytes": 47936496,
+      "triangles": 3132,
+      "vertices": 5123,
+      "skins": 0,
+      "clips": 0,
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 18280904
+        },
+        {
+          "name": "texture_0",
+          "mime": "image/png",
+          "bytes": 20706362
+        },
+        {
+          "name": "texture_0_metallic_roughness",
+          "mime": "image/png",
+          "bytes": 8764767
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.141449436545372,
+          0,
+          -0.1523256152868271
+        ],
+        "max": [
+          0.14142654836177826,
+          0.15000000596046448,
+          0.1522742211818695
+        ]
+      }
+    },
+    "output": {
+      "sha256": "9f49a8daffa7e25913718f83f2194d57eb71f1db45029e2e7995d00bb93350a8",
+      "triangles": 3132,
+      "materials": 1,
+      "bytes": 630828,
+      "bounds": {
+        "min": [
+          -0.09288070632038642,
+          1.5895376706316648,
+          -0.05932736514153732
+        ],
+        "max": [
+          0.09159616571965877,
+          1.6823119680434135,
+          0.11934468236442464
+        ]
+      }
+    },
+    "bindingSha256": "8f4e4f0b1621ad629d871b523910667115cf691f931ab0157ee598b27f2da012",
+    "nativeFrame": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      -0.000634807064279222,
+      1.605000052919203,
+      0.03002373197797754,
+      1
+    ],
+    "sourceRim": 0.025,
+    "sourceRadii": [
+      0.14042130023343136,
+      0.1468462403793208
+    ],
+    "scale": [
+      0.652147520054051,
+      0.6184952915015305,
+      0.5865795910377118
+    ],
+    "skullClearance": 0.002,
+    "hairClearance": 0.002,
+    "operations": [
+      "Preserve supplied triangle topology and UVs",
+      "Bake measured cap seat in the unchanged native Head frame",
+      "Resize source albedo to 1024 pixels; remove high-frequency normal and PBR maps",
+      "Use source material colour independently from DNA hair colour",
+      "Rigid native Head weights; no copied skeleton, body masking or animation-derived fit"
+    ]
+  },
+  {
+    "source": {
+      "occupation": "smith",
+      "filename": "Meshy_AI_viking_hat_smith_mode_1017143137_image-to-3d-texture.glb",
+      "path": "Assets/Characters/Human/Hats/smith.glb",
+      "sha256": "b6ee637670ef8d57db1a3f73110b6d5351a34191597341bf502b567521b970a5",
+      "bytes": 44628740,
+      "triangles": 2981,
+      "vertices": 5533,
+      "skins": 0,
+      "clips": 0,
+      "images": [
+        {
+          "name": "normal",
+          "mime": "image/png",
+          "bytes": 15547382
+        },
+        {
+          "name": "texture_0",
+          "mime": "image/png",
+          "bytes": 19540027
+        },
+        {
+          "name": "texture_0_metallic_roughness",
+          "mime": "image/png",
+          "bytes": 9344647
+        }
+      ],
+      "bounds": {
+        "min": [
+          -0.1302480399608612,
+          0,
+          -0.14850813150405884
+        ],
+        "max": [
+          0.13002285361289978,
+          0.20000000298023224,
+          0.14845050871372223
+        ]
+      }
+    },
+    "output": {
+      "sha256": "5e82235c0d59ea911f981498ed2a957e6c586680f9c2807efdf2f494f99cda8c",
+      "triangles": 2981,
+      "materials": 1,
+      "bytes": 621816,
+      "bounds": {
+        "min": [
+          -0.09221397279529558,
+          1.5724553136371338,
+          -0.05937486795488274
+        ],
+        "max": [
+          0.09078602708734049,
+          1.6751790115781817,
+          0.11938764426964171
+        ]
+      }
+    },
+    "bindingSha256": "8821bdd6401c061649f6da641f37d29a8478b6a8cabe70b674533302a111d908",
+    "nativeFrame": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      -0.000634807064279222,
+      1.593000052919203,
+      0.03002373197797754,
+      1
+    ],
+    "sourceRim": 0.04,
+    "sourceRadii": [
+      0.12373055362073325,
+      0.13593550416202788
+    ],
+    "scale": [
+      0.7031135805078939,
+      0.5136184820517282,
+      0.6019778110966062
+    ],
+    "skullClearance": 0.002,
+    "hairClearance": 0.002,
+    "operations": [
+      "Preserve supplied triangle topology and UVs",
+      "Bake measured cap seat in the unchanged native Head frame",
+      "Resize source albedo to 1024 pixels; remove high-frequency normal and PBR maps",
+      "Use source material colour independently from DNA hair colour",
+      "Rigid native Head weights; no copied skeleton, body masking or animation-derived fit"
+    ]
+  }
+]

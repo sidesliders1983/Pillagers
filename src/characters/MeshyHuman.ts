@@ -182,7 +182,7 @@ export class MeshyHumanFactory {
   }
   const request = ++model.equipRevision;
   const selected = resolveCharacterPresentation(model.dna, value, model.fit.body);
-  const ids = [selected.hairId, selected.beardId, ...selected.garmentIds, selected.equipmentId]
+  const ids = [selected.hairId, selected.beardId, selected.headwearId, ...selected.garmentIds, selected.equipmentId]
    .filter((id): id is string => !!id);
   const sources = await Promise.all(ids.map(id => {
    let promise = this.modules.get(id);
@@ -305,6 +305,7 @@ export class MeshyHuman {
    this.root.updateMatrixWorld(true);
    this.fit.nativeSkeleton.update();
   }
+  if (!this.nativeNeutral) this.modules.poseEquipmentGrips(this.animationRotations, true, this.carryPoseEnabled);
   this.modules.poseHair();
   this.nativeSources = sources;
   this.root.userData.presentation = presentation;
@@ -320,7 +321,7 @@ export class MeshyHuman {
   const garmentAt = (...slots: string[]) => installed.find(source =>
    source.asset.type === 'garment' && slots.includes(source.asset.metadata?.slot ?? ''))?.asset.id ?? null;
   this.root.userData.selectedAssets = {
-   hair: assetOfType('hair'), beard: assetOfType('beard'),
+   hair: assetOfType('hair'), beard: assetOfType('beard'), headwear: assetOfType('headwear'),
    outfit: garmentAt('full'), shoes: garmentAt('footwear'),
    trousers: garmentAt('lower'), top: garmentAt('upper', 'over'),
    equipment: assetOfType('equipment'),
@@ -517,6 +518,9 @@ export class MeshyHuman {
   this.playClip(meshyAnimationClips[animation as MeshyAnimation]??animation);this.sample(time);
  }
  get duration(){return this.action?.getClip().duration??0;}
+ private get carryPoseEnabled() {
+  return ['Idle_02', 'Walking', 'Running'].includes(this.action?.getClip().name ?? '');
+ }
  private shapePose(){
   applyMeshyProportions(this.bones,this.scales,this.profile);
   const moving=this.state==='Walk'||this.state==='Run';
@@ -526,6 +530,7 @@ export class MeshyHuman {
    if(/(Arm|UpLeg)$/.test(bone.name))bone.scale.multiplyScalar(1+(bone.name.includes('Left')?1:-1)*this.profile.weights.Asymmetry*.15);
    if(bone.name.endsWith('Spine2'))bone.rotateX(this.profile.weights.Age*.10);
   }
+  this.modules.poseEquipmentGrips(this.animationRotations, false, this.carryPoseEnabled);
  }
  private captureAnimationRotations() {
   for (const bone of this.bones) this.animationRotations.get(bone)!.copy(bone.quaternion);

@@ -19,8 +19,72 @@ export function validatePreparedOutfit(source: NativeModuleSource, fit: MeshyBod
     requireValue((prepared?.version === 2 || prepared?.version === 3) && prepared.coordinateFrame === 'metre'
         && prepared.bodyBindings.length > 0,
     'Invalid prepared outfit contract');
+    const headwear = asset.type === 'headwear';
+    const equipment = asset.type === 'equipment';
+    if (equipment) {
+        const tool = binding.rigidEquipment;
+        const parents: Record<string, number> = {socket_hand_L: 11, socket_hand_R: 24, socket_back: 3};
+        requireValue(prepared.version === 3 && binding.skinning === 'rigid-native-equipment'
+            && asset.metadata?.equipmentBindings && !prepared.moduleCoverage.length
+            && !prepared.bodyOpenings?.length && !prepared.lowerUnderlap && !prepared.neckMaterial,
+        'Rigid tools require independent authored grips without body masking');
+        requireValue(tool?.version === 1 && tool.parts.length === prepared.meshes.length
+            && new Set(tool.parts.map(part => part.mesh)).size === tool.parts.length
+            && tool.parts.some(part => part.socket === asset.metadata!.anchor)
+            && tool.parts.every(part => prepared.meshes.some(mesh => mesh.mesh === part.mesh)
+                && parents[part.socket] === part.joint && part.grip.length === 3
+                && part.grip.every(Number.isFinite)),
+        'Invalid native equipment part bindings');
+        requireValue(tool.gripPose, 'Rigid tools require a measured native hand grasp');
+        if (tool.gripPose) {
+            const pose=tool.gripPose;
+            const fingerJoints=pose.wristJoint===11?[13,14,15,17,18,19]:[26,27,28,30,31,32];
+            const quaternion=(values:number[])=>Array.isArray(values)&&values.length===4
+                && values.every(Number.isFinite)&&Math.abs(Math.hypot(...values)-1)<1e-6;
+            requireValue([11,24].includes(pose.wristJoint)
+                && tool.parts.some(part=>part.joint===pose.wristJoint)
+                && quaternion(pose.wristRotation)&&pose.fingers.length===fingerJoints.length
+                && pose.forearmJoint===(pose.wristJoint===11?10:23)&&quaternion(pose.forearmRotation)
+                && pose.upperArmJoint===(pose.wristJoint===11?9:22)&&quaternion(pose.upperArmRotation)
+                && Number.isFinite(pose.upperArmBlend)&&pose.upperArmBlend>=0&&pose.upperArmBlend<=1
+                && pose.axis.length===3&&pose.axis.every(Number.isFinite)&&Math.abs(Math.hypot(...pose.axis)-1)<1e-6
+                && Number.isFinite(pose.fingerRadius)&&pose.fingerRadius>.01&&pose.fingerRadius<.10
+                && Number.isFinite(pose.forearmBlend)&&pose.forearmBlend>=0&&pose.forearmBlend<=1
+                && new Set(pose.fingers.map(finger=>finger.joint)).size===fingerJoints.length
+                && pose.fingers.every(finger=>fingerJoints.includes(finger.joint)&&quaternion(finger.rotation)),
+            'Invalid native equipment hand pose');
+        }
+    } else requireValue(!binding.rigidEquipment, 'Rigid equipment cannot be applied to hair or clothing');
+    if (headwear) {
+        const cap = binding.headwearFit;
+        requireValue(prepared.version === 3 && binding.skinning === 'rigid-native-head'
+            && asset.metadata?.anchor === 'socket_head_top' && asset.metadata.fitMode === 'rigid'
+            && !prepared.moduleCoverage.length && !prepared.bodyOpenings?.length
+            && !prepared.lowerUnderlap && !prepared.neckMaterial,
+        'Headwear requires an independent rigid cap without body masking');
+        requireValue(cap?.version === 1 && cap.headJoint === 5
+            && fit.nativeSkeleton.bones[cap.headJoint]?.name === 'mixamorigHead'
+            && cap.frame.length === 16 && cap.frame.every(Number.isFinite)
+            && Math.abs(new Matrix4().fromArray(cap.frame).determinant() - 1) < 1e-5
+            && [3, 7, 11].every(index => Math.abs(cap.frame[index]) < 1e-7)
+            && cap.frame[15] === 1
+            && [0, 4, 8].every(index =>
+                Math.abs(Math.hypot(...cap.frame.slice(index, index + 3)) - 1) < 1e-5)
+            && [[0, 4], [0, 8], [4, 8]].every(([a, b]) =>
+                Math.abs(cap.frame[a] * cap.frame[b] + cap.frame[a + 1] * cap.frame[b + 1]
+                    + cap.frame[a + 2] * cap.frame[b + 2]) < 1e-5)
+            && cap.profile.length >= 3 && cap.profile.every((row, index) =>
+                row.length === 3 && row.every(Number.isFinite) && row[0] >= -.1
+                && row[1] > 0 && row[2] > 0
+                && (!index || row[0] > cap.profile[index - 1][0]))
+            && Number.isFinite(cap.clearance) && cap.clearance >= 0 && cap.clearance <= .01
+            && Number.isFinite(cap.maximumLift) && cap.maximumLift >= 0 && cap.maximumLift <= .06
+            && Number.isFinite(cap.maximumRadialScale)
+            && cap.maximumRadialScale >= 1 && cap.maximumRadialScale <= 1.5,
+        'Invalid measured headwear cavity');
+    } else requireValue(!binding.headwearFit, 'Headwear fitting cannot be applied to clothing or hair');
     if (prepared.version === 3) {
-        requireValue(prepared.moduleCoverage?.length && prepared.moduleCoverage.every(band =>
+        requireValue((headwear || equipment || prepared.moduleCoverage?.length) && prepared.moduleCoverage.every(band =>
             band.regions.length > 0 && Number.isFinite(band.minimumY)
             && Number.isFinite(band.maximumY) && band.minimumY < band.maximumY
             && (band.preserveRegions === undefined || Array.isArray(band.preserveRegions)
@@ -66,7 +130,9 @@ export function validatePreparedOutfit(source: NativeModuleSource, fit: MeshyBod
     }
     requireValue(asset.scope === 'body-bound' && asset.reviewStatus === 'preview'
         && (binding.skinning === 'surface-barycentric-native'
-            || prepared.version === 3 && binding.skinning === 'authored-four-native')
+            || prepared.version === 3 && binding.skinning === 'authored-four-native'
+            || headwear && binding.skinning === 'rigid-native-head'
+            || equipment && binding.skinning === 'rigid-native-equipment')
         && binding.materialPolicy?.kind === 'provider-original'
         && binding.materialPolicy.reviewOnly === true && !binding.dependency,
     'Prepared outfits require an explicit source-bound Lab review');
@@ -117,6 +183,13 @@ export function validatePreparedOutfit(source: NativeModuleSource, fit: MeshyBod
                 requireValue(Number.isInteger(joint) && joint >= 0 && joint < fit.nativeSkeleton.bones.length
                     && Number.isFinite(weight) && weight >= 0 && weight <= 1,
                 'Invalid prepared native influence');
+                if (equipment) {
+                    const part = binding.rigidEquipment!.parts.find(part => part.mesh === mesh.name)!;
+                    requireValue(joint === (influence === 0 ? part.joint : 0)
+                        && weight === (influence === 0 ? 1 : 0), 'Rigid tools must retain their declared native joint');
+                }
+                if (headwear) requireValue(joint === (influence === 0 ? 5 : 0)
+                    && weight === (influence === 0 ? 1 : 0), 'Headwear must follow only the native Head bone');
                 sum += weight;
             }
             requireValue(Math.abs(sum - 1) < 1e-5, 'Prepared native weights are not normalized');

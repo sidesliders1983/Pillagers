@@ -1,0 +1,572 @@
+[
+  {
+    "name": "bald",
+    "view": "front",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      }
+    ]
+  },
+  {
+    "name": "bald",
+    "view": "back",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      }
+    ]
+  },
+  {
+    "name": "bald",
+    "view": "top",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      },
+      {
+        "lift": 0,
+        "radialScale": 1,
+        "support": "head",
+        "samples": 0,
+        "clearance": 0.003,
+        "tuckedVertices": 0
+      }
+    ]
+  },
+  {
+    "name": "short",
+    "view": "front",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2374,
+        "clearance": 0.003,
+        "tuckedVertices": 2387
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 4623,
+        "clearance": 0.003,
+        "tuckedVertices": 3072
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2374,
+        "clearance": 0.003,
+        "tuckedVertices": 1747
+      },
+      {
+        "lift": 0.006,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 3109,
+        "clearance": 0.003,
+        "tuckedVertices": 3530
+      }
+    ]
+  },
+  {
+    "name": "short",
+    "view": "back",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2374,
+        "clearance": 0.003,
+        "tuckedVertices": 2387
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 4623,
+        "clearance": 0.003,
+        "tuckedVertices": 3072
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2374,
+        "clearance": 0.003,
+        "tuckedVertices": 1747
+      },
+      {
+        "lift": 0.006,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 3109,
+        "clearance": 0.003,
+        "tuckedVertices": 3530
+      }
+    ]
+  },
+  {
+    "name": "short",
+    "view": "top",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2374,
+        "clearance": 0.003,
+        "tuckedVertices": 2387
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 4623,
+        "clearance": 0.003,
+        "tuckedVertices": 3072
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2374,
+        "clearance": 0.003,
+        "tuckedVertices": 1747
+      },
+      {
+        "lift": 0.006,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 3109,
+        "clearance": 0.003,
+        "tuckedVertices": 3530
+      }
+    ]
+  },
+  {
+    "name": "short2",
+    "view": "front",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1469,
+        "clearance": 0.003,
+        "tuckedVertices": 1262
+      },
+      {
+        "lift": 0.0108,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2368,
+        "clearance": 0.003,
+        "tuckedVertices": 1669
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1469,
+        "clearance": 0.003,
+        "tuckedVertices": 917
+      },
+      {
+        "lift": 0.012,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 1650,
+        "clearance": 0.003,
+        "tuckedVertices": 1141
+      }
+    ]
+  },
+  {
+    "name": "short2",
+    "view": "back",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1469,
+        "clearance": 0.003,
+        "tuckedVertices": 1262
+      },
+      {
+        "lift": 0.0108,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2368,
+        "clearance": 0.003,
+        "tuckedVertices": 1669
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1469,
+        "clearance": 0.003,
+        "tuckedVertices": 917
+      },
+      {
+        "lift": 0.012,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 1650,
+        "clearance": 0.003,
+        "tuckedVertices": 1141
+      }
+    ]
+  },
+  {
+    "name": "short2",
+    "view": "top",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1469,
+        "clearance": 0.003,
+        "tuckedVertices": 1262
+      },
+      {
+        "lift": 0.0108,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 2368,
+        "clearance": 0.003,
+        "tuckedVertices": 1669
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1469,
+        "clearance": 0.003,
+        "tuckedVertices": 917
+      },
+      {
+        "lift": 0.012,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 1650,
+        "clearance": 0.003,
+        "tuckedVertices": 1141
+      }
+    ]
+  },
+  {
+    "name": "braid",
+    "view": "front",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 636,
+        "clearance": 0.003,
+        "tuckedVertices": 290
+      },
+      {
+        "lift": 0.004200000000000001,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1107,
+        "clearance": 0.003,
+        "tuckedVertices": 459
+      },
+      {
+        "lift": 0.0012000000000000001,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 636,
+        "clearance": 0.003,
+        "tuckedVertices": 237
+      },
+      {
+        "lift": 0.006,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 793,
+        "clearance": 0.003,
+        "tuckedVertices": 559
+      }
+    ]
+  },
+  {
+    "name": "braid",
+    "view": "back",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 636,
+        "clearance": 0.003,
+        "tuckedVertices": 290
+      },
+      {
+        "lift": 0.004200000000000001,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1107,
+        "clearance": 0.003,
+        "tuckedVertices": 459
+      },
+      {
+        "lift": 0.0012000000000000001,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 636,
+        "clearance": 0.003,
+        "tuckedVertices": 237
+      },
+      {
+        "lift": 0.006,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 793,
+        "clearance": 0.003,
+        "tuckedVertices": 559
+      }
+    ]
+  },
+  {
+    "name": "braid",
+    "view": "top",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 636,
+        "clearance": 0.003,
+        "tuckedVertices": 290
+      },
+      {
+        "lift": 0.004200000000000001,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1107,
+        "clearance": 0.003,
+        "tuckedVertices": 459
+      },
+      {
+        "lift": 0.0012000000000000001,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 636,
+        "clearance": 0.003,
+        "tuckedVertices": 237
+      },
+      {
+        "lift": 0.006,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 793,
+        "clearance": 0.003,
+        "tuckedVertices": 559
+      }
+    ]
+  },
+  {
+    "name": "long2",
+    "view": "front",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 834,
+        "clearance": 0.003,
+        "tuckedVertices": 1185
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1941,
+        "clearance": 0.003,
+        "tuckedVertices": 1880
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 834,
+        "clearance": 0.003,
+        "tuckedVertices": 930
+      },
+      {
+        "lift": 0.0054,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 1198,
+        "clearance": 0.003,
+        "tuckedVertices": 1342
+      }
+    ]
+  },
+  {
+    "name": "long2",
+    "view": "back",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 834,
+        "clearance": 0.003,
+        "tuckedVertices": 1185
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1941,
+        "clearance": 0.003,
+        "tuckedVertices": 1880
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 834,
+        "clearance": 0.003,
+        "tuckedVertices": 930
+      },
+      {
+        "lift": 0.0054,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 1198,
+        "clearance": 0.003,
+        "tuckedVertices": 1342
+      }
+    ]
+  },
+  {
+    "name": "long2",
+    "view": "top",
+    "report": [
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 834,
+        "clearance": 0.003,
+        "tuckedVertices": 1185
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 1941,
+        "clearance": 0.003,
+        "tuckedVertices": 1880
+      },
+      {
+        "lift": 0,
+        "radialScale": 1.12,
+        "support": "hair",
+        "samples": 834,
+        "clearance": 0.003,
+        "tuckedVertices": 930
+      },
+      {
+        "lift": 0.0054,
+        "radialScale": 1.04,
+        "support": "hair",
+        "samples": 1198,
+        "clearance": 0.003,
+        "tuckedVertices": 1342
+      }
+    ]
+  }
+]

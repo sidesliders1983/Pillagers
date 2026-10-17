@@ -1,0 +1,10 @@
+{
+  "kind": "fisherman-image-approval/1",
+  "decision": "approved",
+  "userMessage": "Akkoord, converteer de nieuwe tuniek",
+  "recordedAt": "2026-10-17T15:08:44.440Z",
+  "reviewManifestSha256": "f22a582c6ab620430b6fc2d0fdd337c382df77934acea119de6b6db08a9b155b",
+  "inputManifestSha256": "ee8c59e17c29301998fcbb6592a820d09e5a36c8d76ab35840cd750b9ce5bfa8",
+  "scope": "One replacement tunic conversion from approved image-review-005, native Human fitting and Character Lab animation QA. Retain existing trousers and shoes.",
+  "qualification": "Image approval does not certify the eventual 3D result."
+}

@@ -1,0 +1,84 @@
+{
+  "revision": "native-019",
+  "reports": [
+    {
+      "part": "tunic",
+      "provenance": {
+        "part": "tunic-003",
+        "taskId": "01a14a68-abd9-74aa-a026-6e77f898bdd7",
+        "sha256": "1e76d2b2107b238bd6ca13a45919977f221e1aabca829ef86ec05cbf74c5b5ca",
+        "inputManifestSha256": "ee8c59e17c29301998fcbb6592a820d09e5a36c8d76ab35840cd750b9ce5bfa8",
+        "approvalSha256": "34bf89b76f2d42fd2d6830ab7b24d744377dceab46ab44900d8ff8f3edb667d6",
+        "intentSha256": "97a57c807675819b8ac2217e5a67960a688b4d317a6afb4d5283bba251761879",
+        "downloadedAt": "2026-10-17T15:11:02.894Z",
+        "bytes": 9272580,
+        "glbVersion": 2,
+        "assetVersion": "2.0"
+      },
+      "expected": {
+        "min": [
+          -0.3876314781657902,
+          0.7986651804637831,
+          -0.14247849095789852
+        ],
+        "max": [
+          0.3861504192863018,
+          1.4702976525096583,
+          0.16992850174278107
+        ]
+      },
+      "rawBounds": {
+        "min": [
+          -0.9517239928245544,
+          -0.7442449927330017,
+          -0.3664200007915497
+        ],
+        "max": [
+          0.9506180286407471,
+          0.7412949800491333,
+          0.3653779923915863
+        ]
+      },
+      "registration": {
+        "scale": [
+          0.4067522499745221,
+          0.4521133623809764,
+          0.42690331978335755
+        ],
+        "translation": [
+          -0.0005156027296667753,
+          1.1351482865635059,
+          0.013947423815034526
+        ]
+      },
+      "simplification": [
+        {
+          "before": 286266,
+          "after": 9000,
+          "error": 0.0023409759160131216
+        }
+      ],
+      "triangles": 9000,
+      "roundTrip": 6.10218146175505e-8,
+      "maximumSurfaceDistance": 0.05917837250924312,
+      "maximumLayerCorrection": 0.020951506971598144,
+      "upperFit": {
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "runtimeInfluences": 4,
+        "vertices": 4137,
+        "maximumCorrectionMetres": 0.04809612256242531,
+        "collarTargetClearanceMetres": 0.008,
+        "shoulderTargetClearanceMetres": 0.015,
+        "collarBlend": 0.8,
+        "shoulderBlend": 0.65,
+        "strategy": "continuous-damped-surface-field"
+      },
+      "meshes": [
+        {
+          "mesh": "Module_fisherman_tunic_left_0",
+          "vertices": 9192
+        }
+      ]
+    }
+  ]
+}

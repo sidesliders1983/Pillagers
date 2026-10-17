@@ -10,6 +10,7 @@ export type SeparateGarmentKey = typeof separateGarmentKeys[number];
 export const presentationModuleFields = [
     {key: 'hair', type: 'hair', label: 'Hair'},
     {key: 'beard', type: 'beard', label: 'Beard'},
+    {key: 'headwear', type: 'headwear', label: 'Headwear'},
     {key: 'outfit', type: 'garment', label: 'Full outfit'},
     {key: 'shoes', type: 'garment', label: 'Shoes'},
     {key: 'trousers', type: 'garment', label: 'Lower clothing'},
@@ -22,6 +23,7 @@ export type GarmentChoiceKey = 'outfit' | SeparateGarmentKey;
 export interface CharacterPresentation {
     hair: string;
     beard: string;
+    headwear: string;
     outfit: string;
     shoes: string;
     trousers: string;
@@ -32,7 +34,7 @@ export interface CharacterPresentation {
     technicalWaistWrap: boolean;
 }
 export const defaultCharacterPresentation: Readonly<CharacterPresentation> = Object.freeze({
-    hair: 'auto', beard: 'auto', outfit: 'auto',
+    hair: 'auto', beard: 'auto', headwear: 'none', outfit: 'auto',
     shoes: 'none', trousers: 'none', top: 'none',
     equipment: 'none', equipmentSocket: 'auto', hairColor: null, technicalWaistWrap: false,
 });
@@ -98,7 +100,7 @@ export function parseCharacterPresentation(value: unknown = defaultCharacterPres
 }
 
 export function presentationChoices(
-    type: 'hair' | 'beard' | 'garment' | 'equipment',
+    type: 'hair' | 'beard' | 'garment' | 'equipment' | 'headwear',
     body?: BodyAssetIdentity,
     garmentChoice?: GarmentChoiceKey,
 ) {
@@ -132,7 +134,7 @@ export function resolveCharacterPresentation(
         throw new Error('Separate clothing slots require a native Meshy body.');
     }
     const automatic = (
-        type: 'hair' | 'beard' | 'garment' | 'equipment',
+        type: 'hair' | 'beard' | 'garment' | 'equipment' | 'headwear',
         legacy: string,
         garmentChoice?: GarmentChoiceKey,
     ) => {
@@ -153,6 +155,7 @@ export function resolveCharacterPresentation(
     const select = (choice: string, automaticId: string) =>
         choice === 'none' ? null : choice === 'auto' ? automaticId || null : choice;
     const hairId = select(presentation.hair, automatic('hair', 'hair/' + base.appearance.hairStyle));
+    const headwearId = select(presentation.headwear, automatic('headwear', ''));
     const beardEligible = base.age >= 18 && base.masculinity > .5;
     const beardId = beardEligible
         ? select(presentation.beard, automatic('beard',
@@ -180,6 +183,6 @@ export function resolveCharacterPresentation(
         beardStyle: beardId ? characterAsset(beardId).style as BeardStyle : 'none' as const,
         color: presentation.hairColor ?? base.appearance.color,
     }};
-    return {presentation, profile, hairId, beardId, outfitId, shoesId, trousersId, topId,
+    return {presentation, profile, hairId, beardId, headwearId, outfitId, shoesId, trousersId, topId,
         garmentIds, equipmentId, equipmentSocket, beardEligible};
 }

@@ -7,7 +7,7 @@ import {Vector3} from 'three';
 import {load} from './load-source.mjs';
 
 const {FjordWardrobe, fjordClothingSet, fjordClothingSets, fjordHairAsset, fjordHairAssets,
-    fjordShortHairAssets} = load('../src/fjord-play/FjordWardrobe.ts');
+    fjordShortHairAssets, fjordHeadwearAsset, fjordToolAsset} = load('../src/fjord-play/FjordWardrobe.ts');
 const {MeshyHumanFactory} = load('../src/characters/MeshyHuman.ts');
 const {defaultDNA} = load('../src/characters/CharacterDNA.ts');
 const {parseCharacterPresentation} = load('../src/characters/CharacterPresentation.ts');
@@ -18,6 +18,7 @@ const low = 'garment/meshy-low-shoes-005';
 const high = 'garment/meshy-high-shoes-005';
 const skirt = 'garment/meshy-long-skirt-005';
 const shorts = 'garment/meshy-short-trousers-006';
+const fisherman = ['garment/meshy-fisherman-tunic-009', 'garment/meshy-fisherman-trousers-009', 'garment/meshy-fisherman-shoe-009'];
 const adult = {...defaultDNA(), age: 32};
 const entity = (occupation = null, sex = 'male', age = 32) => ({
     kind: 'persona', id: 'resident-1', selectionKey: 'persona:resident-1',
@@ -43,10 +44,14 @@ function fixture(bindingHook = async () => {}) {
     return {factory, requests, diagnostics,
         wardrobe: new FjordWardrobe(factory, message => diagnostics.push(message))};
 }
-function expectSet(human, set, ids) {
+function expectSet(human, set, ids, occupation = set.startsWith('farmer') ? 'farmer' : set === 'fisherman' ? 'fisher' : null) {
     assert.equal(human.root.userData.clothingSet.id, set);
     const hair = fjordHairAsset({kind: 'persona', dna: human.dna});
-    const expected = hair === 'none' ? ids : [...ids, hair];
+    const hat = fjordHeadwearAsset({kind: 'persona', dna: human.dna, status: {occupation}});
+    const tool = fjordToolAsset({kind: 'persona', dna: human.dna, status: {occupation}});
+    const expected = [...ids, ...[hair, hat, tool].filter(id => id !== 'none')];
+    assert.equal(human.root.userData.selectedAssets.equipment, tool === 'none' ? null : tool);
+    assert.equal(human.root.userData.selectedAssets.headwear, hat === 'none' ? null : hat);
     assert.deepEqual([...human.fit.modules.keys()].sort(), expected.slice().sort());
     assert.equal(human.root.userData.clothingSet.assets.hair, hair === 'none' ? null : hair);
     for (const [id, group] of human.fit.modules) {
@@ -66,7 +71,7 @@ test('Fjordplay selects explicit generic and farmer sets from canonical sex and 
             const person = entity(occupation, sex);
             const original = structuredClone(person);
             const selected = fjordClothingSet(person);
-            assert.equal(selected, occupation === 'farmer' ? sex === 'female' ? 'farmerFemale' : 'farmerMale' : 'generic');
+            assert.equal(selected, occupation === 'fisher' ? 'fisherman' : occupation === 'farmer' ? sex === 'female' ? 'farmerFemale' : 'farmerMale' : 'generic');
             assert.deepEqual(person, original);
             assert.doesNotThrow(() => parseCharacterPresentation(fjordClothingSets[selected]));
         }
@@ -134,11 +139,16 @@ test('occupation, sex and adult-age changes update clothing on the same owned Hu
             [entity('farmer', 'female'), 'farmerFemale', [skirt, low]],
             [entity('farmer', 'male'), 'farmerMale', [shorts, high]],
             [entity('farmer', 'male', 17), 'native', []],
-            [entity('fisher', 'female', 18), 'generic', [tunic, low]],
+            [entity('fisher', 'female', 18), 'fisherman', fisherman],
+            [entity('fisher', 'male', 32), 'fisherman', fisherman],
+            [entity('fisher', 'male', 17), 'native', []],
+            [entity('hunter'), 'generic', [tunic, low]],
+            [entity('smith'), 'generic', [tunic, low]],
+            [entity('woodworker'), 'generic', [tunic, low]],
         ]) {
             human.applyDNA(person.dna);
             await owner.wardrobe.reconcile(human, person);
-            expectSet(human, set, ids);
+            expectSet(human, set, ids, person.status.occupation);
             assert.equal(human.root, root, 'Occupation changes preserve the resident model identity');
             if (set === 'native') assert.equal(human.fit.mesh.geometry, source);
             if (set.startsWith('farmer')) {

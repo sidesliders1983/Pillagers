@@ -1,0 +1,162 @@
+[
+  {
+    "occupation": "farmer",
+    "filename": "Meshy_AI_viking_hat_farmer_mod_1017143048_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Hats/farmer.glb",
+    "sha256": "e778661174f0d4562551e937a8dbf9965a363c0ae7398a0cbc22dbf6e785505f",
+    "bytes": 45762504,
+    "triangles": 3108,
+    "vertices": 3930,
+    "skins": 0,
+    "clips": 0,
+    "images": [
+      {
+        "name": "normal",
+        "mime": "image/png",
+        "bytes": 16834753
+      },
+      {
+        "name": "texture_0",
+        "mime": "image/png",
+        "bytes": 20049075
+      },
+      {
+        "name": "texture_0_metallic_roughness",
+        "mime": "image/png",
+        "bytes": 8732524
+      }
+    ],
+    "bounds": {
+      "min": [
+        -0.1167035773396492,
+        0,
+        -0.1336563527584076
+      ],
+      "max": [
+        0.11624258011579514,
+        0.20000000298023224,
+        0.12960079312324524
+      ]
+    }
+  },
+  {
+    "occupation": "fisher",
+    "filename": "Meshy_AI_viking_hat_fisherman__1017143227_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Hats/fisher.glb",
+    "sha256": "9a9b79ac8adad002ff1c163d611b52d6660245a4b7926bc9da8b0921cfacaf33",
+    "bytes": 50932972,
+    "triangles": 3069,
+    "vertices": 3651,
+    "skins": 0,
+    "clips": 0,
+    "images": [
+      {
+        "name": "normal",
+        "mime": "image/png",
+        "bytes": 19330540
+      },
+      {
+        "name": "texture_0",
+        "mime": "image/png",
+        "bytes": 22067604
+      },
+      {
+        "name": "texture_0_metallic_roughness",
+        "mime": "image/png",
+        "bytes": 9397843
+      }
+    ],
+    "bounds": {
+      "min": [
+        -0.14463503658771515,
+        0,
+        -0.15787272155284882
+      ],
+      "max": [
+        0.14483444392681122,
+        0.20000000298023224,
+        0.1547919511795044
+      ]
+    }
+  },
+  {
+    "occupation": "hunter",
+    "filename": "Meshy_AI_viking_hat_hunter_mod_1017143300_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Hats/hunter.glb",
+    "sha256": "0dc760ed68e92bd24cb23bb359ab9f469ab3cdeff4110c3f04924aa8de7dfd26",
+    "bytes": 47936496,
+    "triangles": 3132,
+    "vertices": 5123,
+    "skins": 0,
+    "clips": 0,
+    "images": [
+      {
+        "name": "normal",
+        "mime": "image/png",
+        "bytes": 18280904
+      },
+      {
+        "name": "texture_0",
+        "mime": "image/png",
+        "bytes": 20706362
+      },
+      {
+        "name": "texture_0_metallic_roughness",
+        "mime": "image/png",
+        "bytes": 8764767
+      }
+    ],
+    "bounds": {
+      "min": [
+        -0.141449436545372,
+        0,
+        -0.1523256152868271
+      ],
+      "max": [
+        0.14142654836177826,
+        0.15000000596046448,
+        0.1522742211818695
+      ]
+    }
+  },
+  {
+    "occupation": "smith",
+    "filename": "Meshy_AI_viking_hat_smith_mode_1017143137_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Hats/smith.glb",
+    "sha256": "b6ee637670ef8d57db1a3f73110b6d5351a34191597341bf502b567521b970a5",
+    "bytes": 44628740,
+    "triangles": 2981,
+    "vertices": 5533,
+    "skins": 0,
+    "clips": 0,
+    "images": [
+      {
+        "name": "normal",
+        "mime": "image/png",
+        "bytes": 15547382
+      },
+      {
+        "name": "texture_0",
+        "mime": "image/png",
+        "bytes": 19540027
+      },
+      {
+        "name": "texture_0_metallic_roughness",
+        "mime": "image/png",
+        "bytes": 9344647
+      }
+    ],
+    "bounds": {
+      "min": [
+        -0.1302480399608612,
+        0,
+        -0.14850813150405884
+      ],
+      "max": [
+        0.13002285361289978,
+        0.20000000298023224,
+        0.14845050871372223
+      ]
+    }
+  }
+]

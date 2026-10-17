@@ -252,7 +252,9 @@ export class CharacterLabUI {
         }
         document.querySelectorAll<HTMLButtonElement>('[data-action^="debug-"]').forEach(button=>button.disabled=false);
         const breasts=document.getElementById('lab-body-Breasts') as HTMLInputElement;breasts.disabled=dna.age<18||isMeshyLabBodySource(bodyPresentation.source);
-        text('lab-module-status',isMeshyLabBodySource(bodyPresentation.source)?presentation.outfit === gridTrialOutfitId
+        text('lab-module-status',isMeshyLabBodySource(bodyPresentation.source)?presentation.top === 'garment/meshy-fisherman-tunic-009'
+            ? 'Fisherman tunic preview: regenerated neckline and shoulder fit on the shared native rig. Walking and Idle 02 screened. Inspect appearance before use.'
+            : presentation.outfit === gridTrialOutfitId
             ? 'Grid trial clothing on the selected Meshy body. Walking and Idle are available; tunic skirt deformation still needs review.'
             : 'Separate shoes, trousers and upper clothing require prepared, source-bound assets. Each choice uses its declared age range. Preview choices do not establish female or child fitting approval.':candidate?'New v0.4 Imagegen → Meshy modules only. Preview modules remain subject to independent fit and motion review.':'Legacy library inspection.');
         (document.querySelector('[data-action="reset-presentation"]') as HTMLButtonElement).disabled=false;

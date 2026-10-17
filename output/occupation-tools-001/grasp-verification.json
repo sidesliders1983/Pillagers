@@ -1,0 +1,46 @@
+{
+  "recipeVersion": 2,
+  "tests": {
+    "uniquePassed": 36,
+    "files": [
+      "occupation-tools",
+      "fjord-clothing",
+      "occupation-hats",
+      "equipment-proportions",
+      "meshy-animation-timing",
+      "meshy-fit-reuse"
+    ],
+    "fullSuiteRun": false
+  },
+  "build": "tsc --noEmit and vite build passed",
+  "pickingComparison": "Native torso target; carried accessories may move the full actor bounding-box centre into empty space",
+  "motion": {
+    "samples": 48,
+    "minimumY": 0.3989124258580936,
+    "errors": []
+  },
+  "browser": {
+    "selected": [
+      "equipment/occupation-farmer",
+      "equipment/occupation-fisher",
+      "equipment/occupation-hunter",
+      "equipment/occupation-smith"
+    ],
+    "emptyRestored": true,
+    "hatPreserved": true,
+    "errors": [],
+    "failed": []
+  },
+  "fitting": "Shaft axis and centre measured from curved native Middle1-Middle3 finger joints; locally narrowed handles",
+  "carryClips": [
+    "Idle_02",
+    "Walking",
+    "Running"
+  ],
+  "nativeNeutralUnchanged": true,
+  "attackPoseUnchanged": true,
+  "emptyArmRestoration": true,
+  "nonAccumulatingUpdates": true,
+  "rigBoneCount": 44,
+  "formatter": "Existing TypeScript printer on new sources; runtime and contract additions reviewed manually"
+}

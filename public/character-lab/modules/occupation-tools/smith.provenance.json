@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "occupation": "smith",
+    "filename": "Meshy_AI_viking_tool_smith_ham_1017150612_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Tools/smith.glb",
+    "sha256": "7de8c1f4cf7aa3d9af0cf06fe436246afd578ac774c6433da565c862450723e1",
+    "bytes": 47083624,
+    "triangles": 2677,
+    "vertices": 3192,
+    "bounds": {
+      "min": [
+        -0.07722561061382294,
+        0,
+        -0.025132907554507256
+      ],
+      "max": [
+        0.07618296891450882,
+        0.20000000298023224,
+        0.02490994893014431
+      ]
+    },
+    "skins": 0,
+    "animations": 0,
+    "optimizedBytes": 465648,
+    "optimizedSha256": "5ccbb4cf2bc4337e437c20396e7b6f31d32063f52b10241e76cb7ae73aea6b04"
+  },
+  "output": {
+    "sha256": "ae59cfb02110ea0b9f4f1434eae1fead5281188c579e9e9612cd057ff43ffd82",
+    "triangles": 2677,
+    "materials": 1,
+    "bytes": 623880,
+    "bounds": {
+      "min": [
+        -0.5347390452837654,
+        0.7410149457518805,
+        -0.048319841411874294
+      ],
+      "max": [
+        -0.2581577111267719,
+        0.9972900818853686,
+        0.23524251227591497
+      ]
+    }
+  },
+  "bindingSha256": "886977fa360b82eee2380016feb74005334226e45f75f96fe9cf891c5e119918",
+  "parts": [
+    {
+      "mesh": "Module_tool_smith_0",
+      "triangles": 2677,
+      "vertices": 3192,
+      "joint": 24,
+      "socket": "socket_hand_R",
+      "grip": [
+        -0.31221641023987096,
+        0.794625134709556,
+        0.024209013734798713
+      ],
+      "transform": [
+        1.2224225963894049,
+        1.2522711351127542,
+        0,
+        0,
+        -0.8401108671671164,
+        0.8200863844114021,
+        1.2977565461097664,
+        0,
+        0.9286531789125054,
+        -0.9065182437581984,
+        1.1740221237392632,
+        0,
+        -0.2686088979728079,
+        0.7563733858595836,
+        -0.04138119029668268,
+        1
+      ]
+    }
+  ],
+  "nativeRig": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "bodyBindings": [
+    {
+      "lod": 0,
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128"
+    },
+    {
+      "lod": 1,
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010"
+    },
+    {
+      "lod": 2,
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6"
+    },
+    {
+      "lod": 0,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    },
+    {
+      "lod": 1,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    },
+    {
+      "lod": 2,
+      "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+      "topology": "8216f232"
+    }
+  ],
+  "operations": [
+    "Preserve supplied source triangles and UVs; compact separated render corners",
+    "Resize albedo to 1024 and metal/roughness map to 512; remove normal and occlusion maps",
+    "Narrow the hammer handle locally and align its shaft through the authored finger cavity",
+    "Use the unchanged native hand and back joints, with no copied bones, clips or body mask"
+  ]
+}
