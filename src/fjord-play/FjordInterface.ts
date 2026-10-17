@@ -10,6 +10,8 @@ import { icon, occupationIcon, occupationLabel, workLabel, type FjordIcon } from
 import { proposeWork, previewWork, workCandidates, type WorkDraft } from './WorkPlan';
 import { homeImprovements, previewHomeSpecialization, homeLevel } from './HomeImprovements';
 import './fjord-interface.css';
+import './mobile-horizon.css';
+import { isMobileLayout } from './MobileShell';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -27,7 +29,7 @@ interface InterfaceHooks {
 }
 type Task = 'work-menu' | 'work-plan' | 'occupation' | 'specialization' | 'risk' | null;
 
-/** Option C: a compact context card, one focused task, and real canonical commands. */
+/** Shared commands and truthful data, with a mobile peek sheet and a focused task view. */
 export class FjordInterface {
     private task: Task = null;
     private draft?: WorkDraft;
@@ -38,6 +40,7 @@ export class FjordInterface {
     private directory = 'persona';
     private search = '';
     private advanced = false;
+    private expanded = false;
     private abort = new AbortController();
     private lastFocus?: HTMLElement;
     private panel = document.querySelector<HTMLElement>('#entity-panel')!;
@@ -45,6 +48,13 @@ export class FjordInterface {
     private workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
 
     constructor(private owner: SharedSettlement, private hooks: InterfaceHooks) {
+        document.addEventListener('fjord-layout-change', () => this.hooks.refresh(),
+            { signal: this.abort.signal });
+        for (const region of [this.panel, this.workspace]) {
+            region.addEventListener('keydown', event => {
+                if (isMobileLayout() && event.key !== 'Escape') event.stopPropagation();
+            }, { signal: this.abort.signal });
+        }
         document.querySelector('#fjord-navigation')!.addEventListener('click', event => {
             const target = (event.target as Element).closest<HTMLElement>('[data-surface]');
             if (target) this.open(target.dataset.surface!);
@@ -126,6 +136,15 @@ export class FjordInterface {
         const person = state.personas[id];
         const home = this.household();
         const work = inspectWork(state, id);
+        if (isMobileLayout() && !this.expanded) {
+            return this.heading(person.name,
+                `${personaAge(state, id)} Winters · ${occupationLabel(person.occupation)}`, 'people') +
+                `<div class="fjord-card-body"><p class="fjord-caption">${person.deathWinter !== null ?
+                    'Deceased · Winter ' + person.deathWinter : work.reason ? esc(work.reason.replaceAll('-', ' ')) :
+                    'Working · ' + esc(work.resource ?? 'occupation')}</p>
+                <div class="fjord-actions">${button('occupation', 'Change work', 'work')}
+                    ${button('expand-card', 'Personal details', 'book')}</div></div>`;
+        }
         const children = Object.values(state.personas).filter(p => p.parentIds.includes(id));
         const relative = (id: string) => this.link('persona', id,
             state.personas[id]?.name ?? state.personaArchive?.[id]?.name ?? id);
@@ -142,7 +161,8 @@ export class FjordInterface {
             <dl class="fjord-relations"><div><dt>Household</dt><dd>${home ? this.link('household', home.id, housingName(state, 'household', home.id)) : 'None'}</dd></div>
             <div><dt>Partner</dt><dd>${person.partnerId ? relative(person.partnerId) : 'None'}</dd></div>
             <div><dt>Children</dt><dd>${children.map(child => relative(child.id)).join('') || 'None'}</dd></div></dl>
-            <div class="fjord-actions">${button('occupation', 'Change work', 'work')}</div>
+            <div class="fjord-actions">${button('occupation', 'Change work', 'work')}
+                ${isMobileLayout() ? button('collapse-card', 'Show less', 'back') : ''}</div>
             <details data-view-key="profile-extra:${esc(id)}"><summary>Heritage, parents & occupation aptitudes</summary>
             <p>Parents: ${person.parentIds.map(relative).join('') || 'No recorded parents'}</p>
             ${heritageKeys.filter(key => person.dna.heritage[key] > 0).map(key => meter(heritageLabels[key], person.dna.heritage[key])).join('')}
@@ -156,10 +176,12 @@ export class FjordInterface {
             this.task = null;
             this.result = '';
             this.advanced = false;
+            this.expanded = false;
             if (selection) this.close(false);
         }
         this.management.hidden = !selection || !!this.surface;
         this.management.classList.toggle('fjord-focus', !!this.task);
+        this.management.classList.toggle('fjord-expanded', this.expanded || !!this.task);
         this.management.classList.toggle('fjord-home-card', !!selection &&
             ['household', 'building'].includes(selection.kind) && !this.task);
         let html = '';
@@ -177,17 +199,22 @@ export class FjordInterface {
                 html = this.heading(house ? 'Home' : home ? 'Tent' : 'Building',
                     `${buildingId ?? selection.id} · ` + (house ? 'Permanent home' + (yard ? ' · Active farmyard' : '') : home ? 'Household in a tent' : 'Vacant building'), house ? 'home' : 'tent') +
                     `<div class="fjord-card-body">${home ? `<details class="fjord-home-residents" data-view-key="home-residents:${esc(home.id)}"><summary><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></summary>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</details>` : '<p class="fjord-caption">Vacant home</p>'}
-                    ${house ? this.improvements(state, buildingId!) : ''}
+                    ${house && (!isMobileLayout() || this.expanded) ? this.improvements(state, buildingId!) : ''}
+                    ${house && isMobileLayout() && !this.expanded ? `<p>${esc(state.buildings[buildingId!].specialization ? workLabel(state.buildings[buildingId!].specialization!) : 'Unspecialized')} · Level ${homeLevel(homeImprovements(state, buildingId!).upgradeLevel)}</p>` : ''}
                     ${yard ? `<p>${yard.occupants}/${yard.capacity} livestock sheltered · overcrowding ${yard.overcrowding}</p>` : ''}
                     <div class="fjord-actions">${home && !house ? button('build', `Build house · ${state.mechanics!.config.houseCost} Materials`, 'home',
                         this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ? '' : 'disabled title="Insufficient Materials or household unavailable"') : ''}
                     ${home ? button('work-menu', 'Manage work', 'work') : ''}</div>
+                    ${isMobileLayout() ? button(this.expanded ? 'collapse-card' : 'expand-card',
+                        this.expanded ? 'Show less' : house ? 'Specialization & upgrades' : 'Household details',
+                        this.expanded ? 'back' : 'home') : ''}
                     ${home && !house && !this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ?
                         `<p class="fjord-caption">${esc(this.owner.availability({ type: 'BuildHouse', householdId: home.id }).reason)}</p>` : ''}</div>`;
             } else html = this.heading(selection.kind === 'cattle' ? 'Livestock · ' + selection.id :
                 selection.kind === 'campfire' ? 'Settlement campfire' : 'Longship', 'Current settlement record',
                 selection.kind === 'cattle' ? 'cattle' : selection.kind === 'longship' ? 'ship' : 'home');
-            if (!this.task) {
+            if (!this.task && (!isMobileLayout() || this.expanded ||
+                !['persona', 'building', 'household'].includes(selection.kind))) {
                 html += `<div class="fjord-card-body">${this.result ? `<p class="fjord-result" role="status">${esc(this.result)}</p>` : ''}
                     ${['cattle', 'campfire', 'longship'].includes(selection.kind) ? legacy() :
                         `<details data-legacy-management data-view-key="advanced:${esc(key)}"><summary>More management</summary>${this.advanced ? legacy() : ''}</details>`}</div>`;
@@ -264,6 +291,8 @@ export class FjordInterface {
         const state = this.state;
         const home = this.household();
         switch (action) {
+            case 'expand-card': this.expanded = true; break;
+            case 'collapse-card': this.expanded = false; break;
             case 'inspect': this.close(false); this.hooks.select(button.dataset.kind!, button.dataset.id!); return true;
             case 'close-workspace': this.close(); return true;
             case 'directory': this.directory = button.dataset.kind!; this.search = ''; this.renderSurface(); return true;
@@ -338,6 +367,13 @@ export class FjordInterface {
             default: return false;
         }
         this.hooks.refresh();
+        if (isMobileLayout() && ['expand-card', 'collapse-card', 'work-menu', 'occupation', 'specialization',
+            'plan', 'farmyard', 'cancel-task'].includes(action)) {
+            const heading = this.panel.querySelector<HTMLElement>('.fjord-card-heading h2');
+            heading?.setAttribute('tabindex', '-1');
+            heading?.focus({ preventScroll: true });
+            this.management.scrollTop = 0;
+        }
         return true;
     }
     private run(commands: SimulationCommand[] | (() => SimulationCommand[]), message: string) {

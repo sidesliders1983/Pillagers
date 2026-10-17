@@ -5,6 +5,7 @@ import type { GameplaySession } from '../gameplay-lab/GameplaySession';
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import type { Point2 } from '../world-generation/WorldBlueprint';
 import { icon, occupationIcon, occupationLabel, type FjordIcon } from './FjordIcons';
+import { isMobileLayout } from './MobileShell';
 
 type Mission = ReturnType<typeof inspectSpatialExpeditions>['missions'][number];
 type Group = NonNullable<SimulationState['world']>['groups'][string];
@@ -33,6 +34,7 @@ export class ExpeditionPanel {
     private pendingFood = 0;
     private controlsHTML = '';
     private toolbarHTML = '';
+    private toolbarExpanded = false;
     private message = '';
     private markerKey = '';
     private abort = new AbortController();
@@ -63,6 +65,7 @@ export class ExpeditionPanel {
         this.toolbar.hidden = true;
         root.closest('.fjord-stage')!.append(this.toolbar);
         root.addEventListener('click', this.click, { signal: this.abort.signal });
+        document.addEventListener('fjord-layout-change', () => this.refresh(), { signal: this.abort.signal });
         this.toolbar.addEventListener('click', this.click, { signal: this.abort.signal });
         root.addEventListener('change', event => {
             const input = event.target;
@@ -149,6 +152,10 @@ export class ExpeditionPanel {
             this.command({ type: 'CancelExpedition', groupId: target.dataset.cancelExpedition });
         if (target.id === 'expedition-cancel') this.cancelTarget();
         if (target.id === 'expedition-send') this.sendGroup();
+        if (target.id === 'expedition-details') {
+            this.toolbarExpanded = !this.toolbarExpanded;
+            this.refresh();
+        }
         if (target.dataset.expeditionAction === 'groups') {
             this.clearTarget();
             this.navigation.showGroups();
@@ -355,7 +362,7 @@ export class ExpeditionPanel {
                     <p class="fjord-expedition-crew">${icon('people')}${group.memberIds.map(id => escape(state.personas[id]?.name ?? id)).join(', ')}</p>
                     ${this.supplies(mission)}<div class="fjord-expedition-actions">${this.actions(mission)}
                         ${button('Show group on map', 'locate', 'data-expedition-action="focus"')}
-                        ${mission.status !== 'Prepared' && mission.status !== 'Stranded' ? button(this.session.running ? 'Pause travel' : 'Resume travel',
+                        ${!isMobileLayout() && mission.status !== 'Prepared' && mission.status !== 'Stranded' ? button(this.session.running ? 'Pause travel' : 'Resume travel',
                             this.session.running ? 'pause' : 'play', 'data-expedition-action="clock"') : ''}
                     </div><p class="fjord-caption">${!this.session.running ? 'Clock paused. Resume travel when you are ready.' :
                         'The clock is running.'} New destinations use the same carried supplies.</p>`;
@@ -384,6 +391,10 @@ export class ExpeditionPanel {
         this.toolbar.dataset.group = group.id;
         const targetReady = this.choosing && !!this.destination;
         const title = this.choosing ? targetReady ? 'Confirm destination' : 'Choose a destination' : phase(mission);
+        if (isMobileLayout()) {
+            this.renderMobileToolbar(group, mission, title, targetReady);
+            return;
+        }
         const instruction = this.choosing ? targetReady ?
             `${this.adjusted ? 'Flag moved to nearby walkable ground. ' : ''}Confirm this flag, or click another land destination.` :
             'Click land to place a flag. Drag to pan · scroll to zoom · Esc to cancel.' : this.missionDescription(mission);
@@ -402,6 +413,32 @@ export class ExpeditionPanel {
             <div class="fjord-expedition-actions">${controls}
                 ${button('Show group', 'locate', 'data-expedition-action="focus"')}
             </div><p class="fjord-exploration-hint">${this.choosing ? 'No extra Food charged. ' : ''}Travel, exploration and the return share this pack.</p>
+            <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
+        this.replace(this.toolbar, html, this.toolbarHTML);
+        this.toolbarHTML = html;
+    }
+
+    private renderMobileToolbar(group: Group, mission: Mission, title: string, targetReady: boolean) {
+        const controls = this.choosing ?
+            button(mission.status === 'Prepared' ? 'Send group' : 'Confirm destination', 'destination',
+                `id="expedition-send" class="fjord-primary" ${targetReady ? '' : 'disabled'}`) +
+            button('Cancel', 'close', 'id="expedition-cancel"') : this.actions(mission);
+        const instruction = this.choosing ? targetReady ?
+            `${this.adjusted ? 'Flag adjusted to walkable ground. ' : ''}Send to confirm, or tap another land destination.` :
+            'Tap land to place a flag. Drag to orbit · pinch to zoom.' :
+            mission.status === 'Prepared' ? 'Your pack is ready. Choose where to explore.' :
+            mission.status === 'Stranded' ? this.missionDescription(mission) :
+            this.session.running ? this.missionDescription(mission) : 'Clock paused. Resume using Play in the status strip.';
+        const html = `<div class="fjord-mobile-expedition-heading">
+                ${button(`<strong>${escape(group.name)}</strong><small>${title}</small>`, 'people',
+                    'data-expedition-action="groups" aria-label="Open expedition group"')}
+                ${button('Supplies', 'food', `id="expedition-details" aria-expanded="${this.toolbarExpanded}" aria-controls="expedition-mobile-details"`)}
+                ${button('', 'locate', 'data-expedition-action="focus" aria-label="Show group on map"')}
+            </div><p class="fjord-mobile-instruction">${instruction}</p>
+            <div id="expedition-mobile-details" ${this.toolbarExpanded ? '' : 'hidden'}>
+                <p class="fjord-caption">${group.memberIds.map(id => escape(this.session.readSnapshot().personas[id]?.name ?? id)).join(', ')}</p>
+                ${this.supplies(mission)}<p class="fjord-caption">Travel, exploration and return share this pack.</p>
+            </div><div class="fjord-expedition-actions">${controls}</div>
             <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
         this.replace(this.toolbar, html, this.toolbarHTML);
         this.toolbarHTML = html;

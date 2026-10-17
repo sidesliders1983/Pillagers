@@ -1,5 +1,6 @@
 import type { FjordCalendar } from './FjordCalendar';
 import { icon } from './FjordIcons';
+import { isMobileLayout, mobileLayoutQuery } from './MobileShell';
 
 export function fjordHeaderHTML(): string {
     return `<header id="fjord-header" aria-label="Settlement status and controls">
@@ -17,11 +18,12 @@ export function fjordHeaderHTML(): string {
                 <select id="fjord-cycle"><option value="1">1 min per year</option>
                     <option value="3">3 min per year</option><option value="5">5 min per year</option></select>
             </label></span>
-            <button id="fjord-next" type="button">+1 Year</button>
+            <span id="fjord-next-slot"><button id="fjord-next" type="button">+1 Year</button></span>
             <details id="fjord-menu"><summary aria-label="Game menu">${icon('menu')}</summary>
                 <div class="fjord-settings">
                     <h1>FjordSide</h1>
                     <span id="fjord-menu-pacing-slot"></span>
+                    <span id="fjord-menu-next-slot"></span>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low">Low</option>
                         <option value="standard">Standard</option></select></label>
@@ -31,7 +33,7 @@ export function fjordHeaderHTML(): string {
                     <span id="screen-awake-slot"></span>
                     <details><summary>Camera views &amp; controls</summary>
                         <button id="fjord-view-home" type="button">View settlement</button><button id="fjord-view-summit" type="button">View highlands</button>
-                        <p>Left drag to pan, right drag to rotate, mouse wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>
+                        <p>Touch: drag to orbit, pinch to zoom, tap open ground to centre the camera. Mouse: left drag to pan, right drag to rotate, wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>
                     </details>
                     <details id="fjord-campaign"><summary>Campaign</summary><div class="fjord-campaign-settings">
                         <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
@@ -58,7 +60,7 @@ export function fjordHeaderHTML(): string {
 
 /** Stable DOM keeps the open menu, field focus and timing intent across campaign refreshes. */
 export class FjordHeader {
-    private narrow = matchMedia('(max-width: 600px)');
+    private narrow = matchMedia(mobileLayoutQuery);
     constructor(private root: HTMLElement) {
         this.placePacing();
         this.narrow.addEventListener('change', this.placePacing);
@@ -79,6 +81,8 @@ export class FjordHeader {
     private placePacing = (): void => {
         const slot = this.root.querySelector(this.narrow.matches ? '#fjord-menu-pacing-slot' : '#fjord-pacing-slot')!;
         slot.append(this.root.querySelector('#fjord-pacing')!);
+        const nextSlot = this.root.querySelector(isMobileLayout() ? '#fjord-menu-next-slot' : '#fjord-next-slot')!;
+        nextSlot.append(this.root.querySelector('#fjord-next')!);
     };
     private keydown = (event: KeyboardEvent): void => {
         // Menu/form keyboard input belongs to the header, not global world navigation.

@@ -19,6 +19,7 @@ import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
 import type { FjordCalendar } from './FjordCalendar';
 import { FjordHeader, fjordHeaderHTML } from './FjordHeader';
+import { MobileShell } from './MobileShell';
 import { ScreenAwakeControl } from '../ui/ScreenAwakeControl';
 import { LivingWorldController } from './LivingWorldController';
 import { renderCharacterProfile } from '../ui/CharacterProfileContent';
@@ -157,10 +158,13 @@ export class FjordPlay {
                 <details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></div><ul id="fjord-identities" hidden></ul>
             </section></section>
             <nav id="fjord-navigation" aria-label="Settlement navigation">
-                <button type="button" data-surface="settlement">${icon('home')}Settlement</button>
+                <button type="button" id="fjord-mobile-menu" aria-label="Settlement navigation" aria-expanded="false" aria-controls="fjord-navigation-drawer">${icon('menu')}</button>
+                <div id="fjord-navigation-drawer">
+                    <button type="button" data-surface="settlement">${icon('home')}Settlement</button>
+                    <button type="button" id="fjord-book">${icon('book')}Clan Book</button>
+                </div>
                 <button type="button" data-surface="expeditions">${icon('route')}Expeditions</button>
-                <button type="button" id="fjord-book">${icon('book')}Clan Book</button>
-            </nav><button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}Attention <span id="fjord-attention-count">0</span></button>
+            </nav><button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}<span class="fjord-attention-label">Attention</span> <span id="fjord-attention-count">0</span></button>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         const savedPresentation = this.shared.presentation;
         let restoredCamera = savedPresentation?.camera;
@@ -170,6 +174,7 @@ export class FjordPlay {
         }
         this.loading?.mount();
         this.foundingBook?.restoreScroll(readingPosition);
+        const mobileShell = new MobileShell(document.querySelector('#fjord-play')!);
         const header = new FjordHeader(document.querySelector('#fjord-header')!);
         const screenAwake = new ScreenAwakeControl(document.querySelector('#fjord-play')!);
         document.querySelector('#screen-awake-slot')!.outerHTML = screenAwake.html();
@@ -668,6 +673,7 @@ export class FjordPlay {
             contextPanel?.remove();
             screenAwake.dispose();
             header.dispose();
+            mobileShell.dispose();
             bookReader.dispose();
             this.foundingBook?.dispose();
             personalHistory.dispose();
