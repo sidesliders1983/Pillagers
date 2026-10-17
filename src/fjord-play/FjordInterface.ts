@@ -361,7 +361,7 @@ export class FjordInterface {
                 `<h3>${homes.length} households in tents</h3>` + homes.map(h => this.link('household', h.id, housingName(state, 'household', h.id))).join('') +
                 `<h3>${cattle.length} livestock without shelter</h3>` + cattle.map(c => this.link('cattle', c.id, c.id)).join('');
         } else if (this.surface === 'settlement') {
-            const kinds = { persona: 'Residents', household: 'Homes', cattle: 'Livestock', longship: 'Longships' };
+            const kinds = { persona: 'Residents', household: 'Homes', cattle: 'Livestock', longship: 'Vehicles' };
             const records = this.directory === 'persona' ? Object.values({ ...state.personaArchive, ...state.personas }).map(p =>
                 ({ id: p.id, label: p.name, detail: state.personas[p.id] ? occupationLabel(p.occupation) + (p.deathWinter !== null ? ' · deceased' : '') : 'Historical record' })) :
                 this.directory === 'household' ? Object.values(state.households).map(h => ({ id: h.id, label: housingName(state, 'household', h.id),
