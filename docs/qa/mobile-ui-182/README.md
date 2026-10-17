@@ -64,7 +64,7 @@ The developed save has **benchmark stocks** (100,102 Food / 9,900 Materials), no
 | B. Selected persona / household | [Concise person](mock-A-person.jpg) · [Real traits/family expanded](mock-A-person-details.jpg) · [Edge sheet](mock-B-person.jpg) · [Action ribbon](mock-C-person.jpg) |
 | C. House selection / construction | [Existing home](mock-A-home.jpg) · [Tent and ordinary housing](mock-A-build.jpg) · [Optional farmyard review](mock-A-farmyard-review.jpg) |
 | D. Discovery and notifications | [Known-land map concept](mock-A-map.jpg) · [Attention & chronicle](mock-A-alerts.jpg) |
-| E. Compact phone | [667 × 375 default](mock-A-compact-default.jpg) · [Person](mock-A-compact-person.jpg) |
+| E. Compact phone | [667 × 375 default](mock-A-compact-default.jpg) · [Person](mock-A-compact-person.jpg) · [Portrait fallback](mock-A-portrait-default.jpg) |
 | F. Current exploration loop | [Prepared bar](mock-A-exploration.jpg) · [Compact prepared bar](mock-A-compact-exploration.jpg) · [Travel controls](mock-A-exploration-travel.jpg) |
 
 The map deliberately shows only known land and the player's home. Its cartographic styling and interactions are proposed; the data behind the mask is current. The mockups do not add a permanent minimap.

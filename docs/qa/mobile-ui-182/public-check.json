@@ -7,11 +7,11 @@
     },
     {
       "name": "prototype.css",
-      "sha256": "e302b3ace765f28d10dfef2ebcb053e310c6bbcc4219bae977a7033f5d980539"
+      "sha256": "182dd0c92df519a5155061cd606644b85d630e52e6026470d4ea3fabba1cda9c"
     },
     {
       "name": "prototype.mjs",
-      "sha256": "b36e6051c0adf10e3d331f60f8bfc7ee638c254d082b9f11727d5bcc77714479"
+      "sha256": "fb3bd7824d77384162a67c88be6f8a5e254d07b76b31c5909047230ec84bb2d6"
     },
     {
       "name": "fixture.json",
@@ -31,7 +31,7 @@
     },
     {
       "name": "README.md",
-      "sha256": "e308539a48b49cf3f6b4b5a6e0fa097ca1201eea337d947c969578df37d3109f"
+      "sha256": "ef8283c6fec8e70ff8637b718e36aa4d166ee46c92967380cffcb2107c1651f9"
     }
   ],
   "gameHead": "506033128e05d25d4a9a83f58463a3dc19ac417d",

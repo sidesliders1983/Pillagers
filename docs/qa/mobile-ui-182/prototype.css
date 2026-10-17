@@ -159,11 +159,12 @@ body.capture { padding: 0; background: #192529; }
 body.capture .review-heading,body.capture .review-tools,body.capture .review-state,body.capture .golden-comparison,body.capture .prototype-switcher { display: none; }
 body.capture .artboard { padding: 0; overflow: hidden; }
 body.capture #scene { margin: 0; border: 0; border-radius: 0; }
-#scene.portrait .horizon-hud { grid-template-columns: 1fr 44px 44px; }
-#scene.portrait .horizon-hud .counter,#scene.portrait .horizon-hud .population-pair { grid-row: 2; }
-#scene.portrait .horizon-hud .counter { grid-column: auto; }
-#scene.portrait .horizon-hud [data-action="clock"] { grid-column: 2; grid-row: 1; }
-#scene.portrait .horizon-hud [data-action="settings"] { grid-column: 3; grid-row: 1; }
+#scene.portrait .horizon-hud { grid-template-columns: repeat(6,minmax(0,1fr)); }
+#scene.portrait .horizon-hud .clan { grid-column: 1 / span 4; grid-row: 1; }
+#scene.portrait .horizon-hud .counter { grid-row: 2; grid-column: span 2; }
+#scene.portrait .horizon-hud > button:has(.population-pair) { grid-row: 2; grid-column: 5 / span 2; }
+#scene.portrait .horizon-hud [data-action="clock"] { grid-column: 5; grid-row: 1; justify-self: end; }
+#scene.portrait .horizon-hud [data-action="settings"] { grid-column: 6; grid-row: 1; justify-self: end; }
 #scene.portrait .bottom-sheet,#scene.portrait .edge-sheet,#scene.portrait .full-sheet { left: calc(var(--safe-l) + 8px); right: calc(var(--safe-r) + 8px); width: auto; top: auto; max-height: 55%; bottom: calc(var(--safe-b) + 8px); }
 #scene.portrait .island-map { grid-template-columns: 1fr; grid-template-rows: 1fr 190px; }
 #scene.portrait .map-legend { border-left: 0; border-top: 1px solid var(--line); }

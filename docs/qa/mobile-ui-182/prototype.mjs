@@ -106,7 +106,8 @@ function personSheet(detailed = false) {
     const actions = button('occupation','Change work','work') + button(detailed ? 'person' : 'details', detailed ? 'Summary' : 'Life & traits','book');
     if (state.variant === 'C' && !detailed) return commandRibbon(p.name, `${p.age} Winters · ${label(p.occupation)}`, actions);
     const details = detailed ? `<h3>Inherited traits</h3>${Object.entries(p.traits).map(([key,value]) => meter(key[0].toUpperCase()+key.slice(1),value*100)).join('')}
-        <h3>Family</h3><dl><div><dt>Partner</dt><dd>${escape(p.partner)}</dd></div><div><dt>Children</dt><dd>${p.children.map(escape).join(', ') || 'None recorded'}</dd></div></dl>
+        <h3>Family & household</h3><dl><div><dt>Household</dt><dd>${button('household',`Home · ${escape(fixture().home.id)}`,'home')}</dd></div>
+        <div><dt>Partner</dt><dd>${escape(p.partner)}</dd></div><div><dt>Children</dt><dd>${p.children.map(escape).join(', ') || 'None recorded'}</dd></div></dl>
         <details><summary>Heritage</summary>${Object.entries(p.heritage).filter(([,v]) => v>0).map(([k,v]) => meter(k,v*100)).join('')}</details>` : '';
     return sheet(p.name, `${p.age} Winters · ${label(p.occupation)}`, 'people',
         `${detailed ? stats + details : `<p class="muted">${p.work.reason ? escape(p.work.reason.replaceAll('-',' ')) : 'Working · '+escape(p.work.resource || 'occupation')}</p>${state.variant === 'B' ? stats : ''}`}
@@ -295,6 +296,7 @@ scene.addEventListener('click',event => {
     else if (action === 'close') { state.view='default'; state.menu=false; }
     else if (action === 'clock') state.paused=!state.paused;
     else if (action === 'speed') { state.speed=Number(control.dataset.speed); state.view='default'; }
+    else if (action === 'household') state.view=fixture().home.kind === 'house' || state.built ? 'home' : 'build';
     else if (action === 'choose-work' || action === 'farmyard') {
         state.role=action === 'farmyard' ? 'farmer' : control.dataset.role;
         state.goal=action === 'farmyard' ? 'farmyard' : 'work'; state.view='review';
