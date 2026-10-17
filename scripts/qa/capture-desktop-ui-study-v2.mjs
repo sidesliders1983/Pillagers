@@ -37,7 +37,7 @@ async function record(name, screenshot = true) {
             return { id: node.dataset.overlay, x: box.x, y: box.y, width: box.width, height: box.height,
                 inBounds: box.left >= 0 && box.top >= 0 && box.right <= root.right + 1 && box.bottom <= root.bottom + 1 };
         });
-        const commit = document.querySelector('[data-action=confirm-farmyard]');
+        const commit = document.querySelector('[data-action=confirm-farmyard], [data-action=build-house]');
         const commitBox = commit?.getBoundingClientRect();
         const panelBox = commit?.closest('[data-overlay]')?.getBoundingClientRect();
         return {
@@ -48,6 +48,8 @@ async function record(name, screenshot = true) {
             horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
             commitVisible: !commitBox || (commitBox.top >= panelBox.top && commitBox.bottom <= panelBox.bottom),
             commitDisabled: commit?.disabled,
+            occupationChoices: [...document.querySelectorAll('[data-action^="occupation:"]')]
+                .map(button => ({ id: button.dataset.action.slice(11), disabled: button.disabled })),
             detailScrollRequired: [...document.querySelectorAll('.right > .body')]
                 .some(node => node.scrollHeight > node.clientHeight + 1),
             campaignStorage: [...Object.keys(sessionStorage), ...Object.keys(localStorage)]
@@ -65,10 +67,24 @@ async function record(name, screenshot = true) {
 
 try {
     for (const variant of ['A', 'B', 'C']) {
+        await open(variant, 'housing');
+        await page.locator('[data-action=home]').click();
+        await record(variant + '-housing');
+        await page.locator('[data-action=build-house]').click();
+        await record(variant + '-house-result');
+        if (variant === 'A') {
+            await page.locator('[data-action=household-work]').click();
+            await record('A-household-work');
+            await page.locator('[data-action=set-up-farmyard]').click();
+            await record('A-existing-home-farmyard');
+            await page.locator('[data-action=confirm-farmyard]').click();
+            await record('A-existing-home-result');
+        }
         await open(variant, 'farmyard');
         await record(variant + '-observe');
         await page.locator('[data-action=home]').click();
         await record(variant + '-inspect');
+        await page.locator('[data-action=household-work]').click();
         await page.locator('[data-action=set-up-farmyard]').click();
         await record(variant + '-farmyard');
         await page.locator('[data-action=confirm-farmyard]').click();
@@ -96,6 +112,8 @@ try {
     }
     await open('A', 'blocked');
     await page.locator('[data-action=home]').click();
+    await record('A-blocked-housing');
+    await page.locator('[data-action=household-work]').click();
     await page.locator('[data-action=set-up-farmyard]').click();
     await record('A-blocked');
     await page.keyboard.press('Escape');
@@ -105,12 +123,14 @@ try {
     for (const variant of ['A', 'B', 'C']) {
         await open(variant, 'farmyard');
         await page.locator('[data-action=home]').click();
+        await page.locator('[data-action=household-work]').click();
         await page.locator('[data-action=set-up-farmyard]').click();
         await record(variant + '-1280');
     }
     await page.setViewportSize({ width: 1920, height: 1080 });
     await open('B', 'farmyard');
     await page.locator('[data-action=home]').click();
+    await page.locator('[data-action=household-work]').click();
     await page.locator('[data-action=set-up-farmyard]').click();
     await record('B-1920');
     await page.setViewportSize({ width: 1440, height: 900 });
@@ -126,12 +146,32 @@ try {
 
     await open('C', 'farmyard');
     await page.locator('[data-action=home]').click();
+    await page.locator('[data-action=household-work]').click();
     await page.locator('[data-action=set-up-farmyard]').click();
     await page.locator('[data-action="farmer:founder-10"]').click();
     await page.keyboard.press('ArrowRight');
     await record('A-kept-draft', false);
     await page.locator('[data-action=confirm-farmyard]').click();
     await record('A-alternate-farmer');
+
+    await open('A', 'resident');
+    await page.locator('[data-action="person:founder-1"]').click();
+    await page.locator('[data-action=work]').click();
+    await record('A-occupations');
+    await page.locator('[data-action="occupation:smith"]').click();
+    await record('A-smith-result');
+    await page.locator('[data-action=livestock]').click();
+    await record('A-livestock');
+    report.review = {
+        housingOnly: report.observations.filter(item => item.name.endsWith('-house-result'))
+            .every(({ state }) => state.homeBuilt && !state.farmReady && state.spentMaterials === 10
+                && Object.keys(state.roles).length === 0 && state.buildingSpecialization === null
+                && state.assignedCattleIds.length === 0 && state.clicks === 2),
+        existingHomeReused: report.observations.find(item => item.name === 'A-existing-home-result')
+            .state.spentMaterials === 10,
+        canonicalOccupationCount: report.observations.find(item => item.name === 'A-occupations')
+            .occupationChoices.length,
+    };
     await page.setViewportSize({ width: 1500, height: 820 });
     await page.goto(origin + '/docs/qa/desktop-ui-redesign-180/comparison-v2.html',
         { waitUntil: 'networkidle' });

@@ -31,7 +31,7 @@ Proposed placement:
 | Area | Contents | Visibility |
 | --- | --- | --- |
 | Upper left | Clan identity, season and year | Persistent and compact |
-| Upper centre | Food, Materials, Residents and Cattle, with icon, label and actual value | Persistent; each opens the relevant explanation or list |
+| Upper centre | Food, Materials, Residents and Livestock, with icon, label and actual value | Persistent; each opens the relevant explanation or list |
 | Upper right | Start/Pause, current pacing and Menu | Persistent; pacing reflects Expedition Mode restrictions |
 | Lower edge | Settlement, Expeditions and Clan Book navigation, plus attention indicator | Compact controls rather than a permanent building catalogue |
 | Selection area | Identity, current state, relevant relationships and a few actions | Appears on selection |
@@ -55,7 +55,34 @@ Choosing a valid target should require one click when it is already displayed. A
 
 Escape dismisses the current transient layer, retains the underlying selection and returns keyboard focus. Draft cancellation changes no proposed assignments. Existing committed expedition preparation retains its actual costs and cancellation rules. Reading, opening panels and reviewing drafts do not automatically pause or advance the simulation.
 
+## Housing and work are separate
+
+The initial mockup incorrectly made Set up farmyard the tent's main action. Replace that assumption with independent housing, person and building decisions:
+
+| Subject | Decision | What it does not imply |
+| --- | --- | --- |
+| Household residence | Build a house or move to an available home | No occupation assignment, career lock, building specialization or cattle assignment |
+| Individual resident | Keep an autonomous career or explicitly choose an occupation | Other household members do not receive the same occupation |
+| Building | Inspect or choose its occupation specialization | A specialization does not assign residents' occupations |
+| Active household function | Show what the actual residents and residence support | A permanent house is not automatically a Farmyard; a living resident farmer activates that function |
+
+For example, the founding test household contains a hunter and a fisher. Building their house preserves both occupations and their career settings. A smith, fisher, hunter or other resident can share a home with someone in a different occupation. Housing is useful independently of farming.
+
+The existing occupation registry contains farmer, herder, fisher, hunter, textileWorker, smith, woodworker, boatbuilder, trader and leatherAndJewelleryMaker. Render its English labels and actual command availability rather than defining a farming-only UI list. Future occupations should enter through the same work selection and detail pattern, with only their defined capabilities exposed.
+
+The tent summary offers Build house with its actual cost and Manage work. Manage work shows each resident separately. The optional farmyard task lives there; it is not the tent's primary action. Task suggestions appear only after the player chooses that intention. Other occupation-specific combined tasks require their own journey design before implementation.
+
+| Journey from no selection | Proposed pointer route | Budget |
+| --- | --- | ---: |
+| Build ordinary housing | Select tent, Build house with visible cost | 2 clicks |
+| Assign a known resident to smith, fisher, hunter or another eligible occupation | Select resident, Change work, choose occupation | 3 clicks |
+| Choose work through a household | Select household, Manage work, choose resident, choose occupation | 4 clicks |
+
+Building a home for a household that already has a farmer preserves that occupation and activates the existing Farmyard function. It does not automatically specialize the building or assign any animals. Reusing an existing house in a later combined task must not charge for a second house.
+
 ## Farmyard journey
+
+Farmyard is one optional combined task, not the default destination of a tent or household. The default inspection starts with housing and the residents' actual occupations.
 
 Test state: no selection, visible occupied tent, sufficient Materials, an available household member to become a farmer, and exactly three eligible unassigned cattle. The chosen arrangement must respect canonical command availability.
 
@@ -74,16 +101,34 @@ The owner's reported baseline is 16 action steps, with dropdown selection counte
 Proposed route when the player accepts the visible suggestions:
 
 1. Select the tent.
-2. Choose Set up farmyard.
-3. Review and confirm the proposed home, farmer and three cattle assignments.
+2. Open Manage work.
+3. Choose the optional Set up farmyard task.
+4. Review and confirm the proposed home, farmer and three cattle assignments.
 
-Changing the suggested resident adds one click when alternatives are directly visible. Choosing the all-three livestock group adds at most one click in this test state. The full standard scenario must fit within five physical clicks; three is the proposed unchanged-suggestions path. These are design targets, not measured implementation results. Custom selection from a larger herd needs its own measurement.
+Changing the suggested resident adds one click when alternatives are directly visible. All three unassigned cattle are visible editable suggestions. The unchanged-suggestions path is four clicks and choosing a different farmer is five, preserving the owner's five-click budget without making farming the default. Additional custom changes are counted individually. These are design targets, not measured production results. Custom selection from a larger herd needs its own measurement.
 
 The task shows housing cost and upkeep, the chosen person's current and proposed occupation, career autonomy consequences, cattle identities and the resulting shelter occupancy. If the setup includes farming specialization, name it in the same review without implying that specialization activates the Farmyard.
 
 Preserve an already suitable farmer's current career settings unless the player explicitly changes them. Suggest unassigned animals; moving an animal out of another Farmyard requires an explicit choice and visible consequences.
 
 The completed result retains the new home/Farmyard selection and states what succeeded. A validation failure preserves the draft and names the changed condition. Revalidate on commit. If existing command execution can only complete part of the task, report exactly what changed and what remains; never claim an atomic result without providing it.
+
+## Livestock across species
+
+Use Livestock as the navigation category. Its summary opens species groups and then the relevant animals or groups, showing only counts and assignments supplied by the simulation. The current review fixture contains cattle; future species must not appear as owned or available before their implementation.
+
+The owner also requires room for goats, geese, chickens, horses and pigs. Their management shares an entry point, not necessarily the same rules:
+
+| Concern | UI principle | Rule dependency |
+| --- | --- | --- |
+| Identity and quantity | Show species first, then the recorded individual or group | Species may use individual identities or a defined group model |
+| Shelter and location | Offer suitable destinations for that species, with actual occupancy and consequences | Define eligible shelter, capacity units and any mixed-species limits |
+| Household and work | Show the responsible household or occupation when the rules define one | Do not assume every species needs a farmer or a Farmyard |
+| Production and care | Show actual food, care and outputs | Do not copy cattle output, consumption or the current four-cattle capacity onto other species |
+| Transport and expeditions | A horse can also be found from vehicle/expedition preparation | Horse, wagon and expedition suitability depend on their gameplay rules |
+| Trade | Find animals by species, quantity or identity in an offer | Define ownership transfer, eligibility and travel/transport effects |
+
+The three-cattle Farmyard journey remains one specific benchmark. Later species need their own acquisition, assignment, care, transport and trade journeys once their rules exist. Shared batch controls should filter to eligible animals rather than silently assigning every animal to the same destination. Future features add contextual actions when available, without a row of permanent disabled controls.
 
 ## Other journey budgets
 
@@ -114,7 +159,7 @@ Use a coherent pictogram family with consistent weight and silhouette. Keep shor
 | Food | Bowl or food bundle | The actual combined Food stock |
 | Materials | Construction-material bundle | The actual combined Materials stock |
 | Residents | Person silhouettes | People currently resident, with presence/history explained in drilldown |
-| Cattle | Recognisable cattle silhouette | Actual livestock rather than a decorative farm symbol |
+| Livestock | Recognisable herd symbol; species icon and label in the drilldown | A category containing actual animal records; cattle is one species |
 | Home | Roof or house | Physical residence |
 | Occupation | Role symbol beside the resident's work label | A person's job |
 | Farmyard | Home with cattle/context badge | Active household farming function |
@@ -149,6 +194,7 @@ For each prototype and later implementation:
 - Use the same world seed, camera, season, simulation state and viewport for comparisons. Include founding, developed settlement, winter, unavailable resources, an away resident and an occupied/overcrowded Farmyard.
 - Record completion, click count, search time, wrong turns, world area covered and whether the player understood costs and results. An automatic suggestion is successful only when it is understood and correct.
 - Opening UI, inspecting and cancelling drafts must preserve canonical state, randomness and clock intent. Executed tasks must match the existing authorized commands, costs and consequences.
+- Building ordinary housing preserves each resident's occupation and career settings, building specialization and animal assignments. Include mixed-occupation households and smith/fisher/hunter choices, plus the existing-farmer housing case; do not validate only Farmyards.
 - Repeated events must not steal focus, erase drafts or charge a command twice. Feedback must remain readable after a panel collapses.
 - Compare UI CPU time, layout work and frame-time distributions on matched active runs. Preserve cached campaign reads, bounded event/list views and stable focus. Do not add per-frame full-history scans or additional scene rendering passes.
 - Treat unavailable projected data as unavailable; do not display an invented zero, forecast or benefit.

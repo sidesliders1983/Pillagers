@@ -121,6 +121,9 @@ h1, h2, h3, p { margin-top: 0; }
 .secondary .glyph { width: 18px; height: 18px; color: var(--gold); }
 .actions { display: flex; gap: 7px; margin-top: 12px; }
 .actions > * { flex: 1; }
+.household-facts { flex: 1; }
+.household-actions { display: grid; gap: 8px; margin-top: 12px; }
+.task-label { margin-top: 20px; }
 .risk { color: var(--danger); font-size: 11px; margin: 9px 0; }
 .success { color: var(--aqua); }
 .selection .body { padding-top: 13px; }
@@ -144,6 +147,7 @@ h1, h2, h3, p { margin-top: 0; }
 .tray.selection .body { display: flex; gap: 18px; align-items: center; padding: 12px 18px; }
 .tray.selection .body p { margin: 0; flex: 1; }
 .tray.selection .actions { margin: 0; flex: 1.3; }
+.tray.selection .household-actions { flex: 1; margin: 0; }
 .focus { left: 50%; top: 112px; transform: translateX(-50%); width: 636px; max-height: calc(100% - 208px); overflow-y: auto; }
 .focus > .panel-heading { padding: 19px 23px; }
 .focus-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 20px 23px; }
@@ -155,7 +159,7 @@ h1, h2, h3, p { margin-top: 0; }
 .focus .review > .primary { grid-column: 2; grid-row: 2; }
 .focus .review > .caption { grid-row: 3; }
 .focus .review > .risk { grid-column: 1 / -1; }
-.anchor { left: 25%; top: 59%; width: 300px; max-height: calc(100% - 200px); }
+.anchor { left: 30%; bottom: 104px; width: 300px; max-height: calc(100% - 208px); overflow-y: auto; }
 .anchor.selection .panel-heading { border-bottom: 0; }
 .anchor.selection .body { padding-top: 0; }
 .book, .list-panel { min-height: 240px; }
