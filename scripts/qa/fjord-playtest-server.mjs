@@ -1,6 +1,6 @@
 import { createServer } from 'node:http';
 import { createReadStream } from 'node:fs';
-import { readdir, stat } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, join, relative, extname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -30,6 +30,20 @@ export async function createPlaytestHandler(workspace) {
     await walk(buildRoot);
     const index = files.get('/index.html');
     if (!index) throw Error('Build index missing. Run the normal build first.');
+    // Generated housing is intentionally ignored by Git. A fresh checkout can
+    // build successfully while its playable homes have only fallback boxes.
+    const housingUrl = '/game-assets/houses/';
+    const housing = files.get(housingUrl + 'manifest.json');
+    const missingHousing = () => Error('Housing assets missing or incomplete. Run pnpm assets:houses and rebuild the playtest.');
+    if (!housing) throw missingHousing();
+    const manifest = JSON.parse(await readFile(housing.path, 'utf8'));
+    const required = ['greatHall', 'hut', 'homestead', 'longhouse', 'farmHut', 'farmHomestead', 'farmHutTerrain'];
+    if (manifest.schemaVersion !== 1 || !required.every(key => manifest.assets?.[key])) throw missingHousing();
+    for (const entry of Object.values(manifest.assets)) {
+        if (typeof entry?.file !== 'string' || !/^[a-z0-9-]+\.glb$/.test(entry.file)) throw missingHousing();
+        const model = files.get(housingUrl + entry.file);
+        if (!model || model.size < 12 || model.size !== entry.bytes) throw missingHousing();
+    }
     files.set('/fjord-play', index);
     files.set('/fjord-play/', index);
     if (files.has('/branding/fjordside/favicon-32.png')) files.set('/favicon.ico', files.get('/branding/fjordside/favicon-32.png'));

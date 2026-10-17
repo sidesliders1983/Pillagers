@@ -50,3 +50,17 @@ Reproduce in separate terminals with `QA_GOLDEN=1 QA_PORT=5194 node scripts/qa/f
 ![Winter Low](snow-811-highlands-low-after.jpg)
 
 ![Second saved world, Summer](summer-17-highlands-standard-after.jpg)
+
+## Housing pack recovery
+
+The review worktree was missing `public/game-assets/houses`, which is deliberately ignored by Git. A successful client build therefore did not guarantee usable house models. The eight existing prepared GLBs and their original manifest were restored unchanged from the prior integrated review worktree to the source cache and deployed build. The asset pipeline and generated geometry were not replaced.
+
+`createPlaytestHandler` now refuses to start when the required housing manifest, a required role, or a referenced model is absent or has a different size from its manifest. Fresh review checkouts must run the existing `pnpm assets:houses` preparation or carry over its verified cached output before building. Two host integration tests cover a complete read-only pack and rejection of incomplete packs, bringing focused validation to 27 passing tests.
+
+`scripts/qa/check-playtest-housing.mjs` verifies every original model byte against both review origins and loads the normal production game with `developed-810`. `housing-check.json` confirms five built homes, including three farmyards, without placeholders or browser errors; desktop and portrait screenshots are below. This check uses no development audit API and explicitly exercises built houses rather than only the starting tents.
+
+The earlier shadow measurements and images above are retained as their original records, before this housing-cache restoration. Their autumn timing fixture contains starting tents. The housing validation below records the restored production assets separately.
+
+![Restored prepared homes and farmyards](developed-homes.jpg)
+
+![Portrait house review](mobile-homes.jpg)
