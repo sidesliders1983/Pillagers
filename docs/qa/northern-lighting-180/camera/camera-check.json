@@ -1,0 +1,2460 @@
+{
+  "fixture": "developed-810",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "poses": [
+    {
+      "pose": "resident-contact",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          90.01120261499072,
+          8.037827777452101,
+          167.0337235285062
+        ],
+        "target": [
+          84.01120261499072,
+          3.8378277774521026,
+          161.0337235285062
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.011363636363636364,
+        0,
+        0,
+        0,
+        0,
+        0.015625,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.75,
+        0.2509765625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 3,
+        "milliseconds": 1.2999999970197678,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      },
+      "image": "resident-contact-standard.jpg"
+    },
+    {
+      "pose": "orbit-20-0",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          70,
+          18.46178960800171,
+          166
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-2",
+        "building:house-4",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-2",
+        "persona:persona-3",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.009615384615384616,
+        0,
+        0,
+        0,
+        0,
+        0.016666666666666666,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.853515625,
+        0.6728515625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 4,
+        "milliseconds": 1.5999999940395355,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-20-1.7",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          89.83329620904937,
+          18.46178960800171,
+          143.4231101140895
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-2",
+        "building:house-5",
+        "persona:founder-4",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-2",
+        "persona:persona-3",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.009615384615384616,
+        0,
+        0,
+        0,
+        0,
+        0.020833333333333332,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.8251953125,
+        -0.2392578125,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 5,
+        "milliseconds": 1.7999999932944775,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-20-3.8",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          57.76284218114562,
+          18.46178960800171,
+          130.18064576171167
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.011363636363636364,
+        0,
+        0,
+        0,
+        0,
+        0.019230769230769232,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.58984375,
+        0.2841796875,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 6,
+        "milliseconds": 1.8999999947845936,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-65-0",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          70,
+          49.9617896080017,
+          211
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.008064516129032258,
+        0,
+        0,
+        0,
+        0,
+        0.0125,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.5947265625,
+        0.23046875,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 7,
+        "milliseconds": 1.9999999962747097,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-65-1.7",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          134.45821267941045,
+          49.9617896080017,
+          137.62510787079088
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.008064516129032258,
+        0,
+        0,
+        0,
+        0,
+        0.015625,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.583984375,
+        -0.2451171875,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 8,
+        "milliseconds": 2.0999999940395355,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-65-3.8",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          30.229237088723266,
+          49.96178960800171,
+          94.5870987255629
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.009615384615384616,
+        0,
+        0,
+        0,
+        0,
+        0.013157894736842105,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.234375,
+        0.0634765625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 9,
+        "milliseconds": 2.2999999932944775,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-180-0",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          70,
+          130.4617896080017,
+          326
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.004545454545454545,
+        0,
+        0,
+        0,
+        0,
+        0.008620689655172414,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.34375,
+        0.1298828125,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 10,
+        "milliseconds": 2.3999999947845936,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-180-1.7",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          248.49966588144434,
+          130.4617896080017,
+          122.80799102680557
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.004464285714285714,
+        0,
+        0,
+        0,
+        0,
+        0.008064516129032258,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.34765625,
+        -0.267578125,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 11,
+        "milliseconds": 2.5999999940395355,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      },
+      "image": "orbit-180-1.7-standard.jpg"
+    },
+    {
+      "pose": "orbit-180-3.8",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          -40.13442036968938,
+          130.4617896080017,
+          3.6258118554049474
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.006097560975609756,
+        0,
+        0,
+        0,
+        0,
+        0.007142857142857143,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.056640625,
+        -0.1005859375,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 12,
+        "milliseconds": 2.7999999970197678,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "pan",
+      "quality": "standard",
+      "camera": {
+        "position": [
+          160,
+          44.4617896080017,
+          196
+        ],
+        "target": [
+          135,
+          4.461789608001709,
+          171
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "building:house-1",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-1",
+        "cattle:cattle-11"
+      ],
+      "excluded": [],
+      "projection": [
+        0.014705882352941176,
+        0,
+        0,
+        0,
+        0,
+        0.017857142857142856,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.3876953125,
+        0.4931640625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        2048,
+        2048
+      ],
+      "coverage": {
+        "passes": 13,
+        "milliseconds": 2.899999998509884,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "resident-contact",
+      "quality": "low",
+      "camera": {
+        "position": [
+          90.01120261499072,
+          8.037827777452101,
+          167.0337235285062
+        ],
+        "target": [
+          84.01120261499072,
+          3.8378277774521026,
+          161.0337235285062
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.011363636363636364,
+        0,
+        0,
+        0,
+        0,
+        0.015625,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.75,
+        0.25,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 14,
+        "milliseconds": 3.099999997764826,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      },
+      "image": "resident-contact-low.jpg"
+    },
+    {
+      "pose": "orbit-20-0",
+      "quality": "low",
+      "camera": {
+        "position": [
+          70,
+          18.46178960800171,
+          166
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-2",
+        "building:house-4",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-2",
+        "persona:persona-3",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.009615384615384616,
+        0,
+        0,
+        0,
+        0,
+        0.016666666666666666,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.853515625,
+        0.673828125,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 15,
+        "milliseconds": 3.2999999970197678,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-20-1.7",
+      "quality": "low",
+      "camera": {
+        "position": [
+          89.83329620904937,
+          18.46178960800171,
+          143.4231101140895
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-2",
+        "building:house-5",
+        "persona:founder-4",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-2",
+        "persona:persona-3",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.009615384615384616,
+        0,
+        0,
+        0,
+        0,
+        0.020833333333333332,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.82421875,
+        -0.240234375,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 16,
+        "milliseconds": 3.599999997764826,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-20-3.8",
+      "quality": "low",
+      "camera": {
+        "position": [
+          57.76284218114562,
+          18.46178960800171,
+          130.18064576171167
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.011363636363636364,
+        0,
+        0,
+        0,
+        0,
+        0.019230769230769232,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.58984375,
+        0.28515625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 17,
+        "milliseconds": 3.699999999254942,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-65-0",
+      "quality": "low",
+      "camera": {
+        "position": [
+          70,
+          49.9617896080017,
+          211
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.008064516129032258,
+        0,
+        0,
+        0,
+        0,
+        0.0125,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.59375,
+        0.23046875,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 18,
+        "milliseconds": 3.800000000745058,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-65-1.7",
+      "quality": "low",
+      "camera": {
+        "position": [
+          134.45821267941045,
+          49.9617896080017,
+          137.62510787079088
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6"
+      ],
+      "excluded": [],
+      "projection": [
+        0.008064516129032258,
+        0,
+        0,
+        0,
+        0,
+        0.015625,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.583984375,
+        -0.244140625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 19,
+        "milliseconds": 3.800000000745058,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-65-3.8",
+      "quality": "low",
+      "camera": {
+        "position": [
+          30.229237088723266,
+          49.96178960800171,
+          94.5870987255629
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.009615384615384616,
+        0,
+        0,
+        0,
+        0,
+        0.013157894736842105,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.234375,
+        0.064453125,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 20,
+        "milliseconds": 3.899999998509884,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-180-0",
+      "quality": "low",
+      "camera": {
+        "position": [
+          70,
+          130.4617896080017,
+          326
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.004545454545454545,
+        0,
+        0,
+        0,
+        0,
+        0.008620689655172414,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.34375,
+        0.12890625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 21,
+        "milliseconds": 4.099999997764826,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "orbit-180-1.7",
+      "quality": "low",
+      "camera": {
+        "position": [
+          248.49966588144434,
+          130.4617896080017,
+          122.80799102680557
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.004464285714285714,
+        0,
+        0,
+        0,
+        0,
+        0.008064516129032258,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        -0.34765625,
+        -0.267578125,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 22,
+        "milliseconds": 4.199999995529652,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      },
+      "image": "orbit-180-1.7-low.jpg"
+    },
+    {
+      "pose": "orbit-180-3.8",
+      "quality": "low",
+      "camera": {
+        "position": [
+          -40.13442036968938,
+          130.4617896080017,
+          3.6258118554049474
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "campfire:settlement-campfire",
+        "building:house-1",
+        "building:house-2",
+        "building:house-4",
+        "building:house-5",
+        "building:house-6",
+        "persona:founder-4",
+        "persona:persona-2",
+        "persona:founder-5",
+        "persona:founder-6",
+        "persona:founder-7",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-2",
+        "persona:persona-3",
+        "persona:founder-1",
+        "cattle:cattle-1",
+        "cattle:cattle-10",
+        "cattle:cattle-11",
+        "cattle:cattle-2",
+        "cattle:cattle-3",
+        "cattle:cattle-4",
+        "cattle:cattle-5",
+        "cattle:cattle-6",
+        "longship:founding-longship"
+      ],
+      "excluded": [],
+      "projection": [
+        0.006097560975609756,
+        0,
+        0,
+        0,
+        0,
+        0.007142857142857143,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.056640625,
+        -0.1015625,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 23,
+        "milliseconds": 4.199999995529652,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    },
+    {
+      "pose": "pan",
+      "quality": "low",
+      "camera": {
+        "position": [
+          160,
+          44.4617896080017,
+          196
+        ],
+        "target": [
+          135,
+          4.461789608001709,
+          171
+        ],
+        "fov": 45,
+        "aspect": 1.892555290208701,
+        "projection": [
+          1.2756370050921304,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "visible": [
+        "building:house-1",
+        "persona:founder-8",
+        "persona:persona-1",
+        "persona:founder-1",
+        "cattle:cattle-11"
+      ],
+      "excluded": [],
+      "projection": [
+        0.014705882352941176,
+        0,
+        0,
+        0,
+        0,
+        0.017857142857142856,
+        0,
+        0,
+        0,
+        0,
+        -0.002658003267701383,
+        0,
+        0.38671875,
+        0.4921875,
+        -6.345890501531133,
+        1
+      ],
+      "shadowSources": 1,
+      "mapSize": [
+        1024,
+        1024
+      ],
+      "coverage": {
+        "passes": 24,
+        "milliseconds": 4.399999994784594,
+        "maximumMs": 0.8999999985098839,
+        "receiverBounds": {
+          "min": [
+            -1602,
+            -15.428860664367676,
+            -1602
+          ],
+          "max": [
+            1602,
+            49.388800797734575,
+            1602
+          ]
+        },
+        "casterBounds": {
+          "min": [
+            -277.3022665589974,
+            -0.37,
+            -296.09748683422606
+          ],
+          "max": [
+            257.89462375564926,
+            47.388800797734575,
+            298.8508497159213
+          ]
+        },
+        "technique": "One native PCF map; visible receiver crop, full caster depth, snapped texels"
+      }
+    }
+  ],
+  "errors": [],
+  "canonicalSha256": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3",
+  "status": "PASS"
+}

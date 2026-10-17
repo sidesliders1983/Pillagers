@@ -7,7 +7,8 @@ const goldenMode = process.env.QA_GOLDEN === '1';
 const sourceRef = process.env.QA_SOURCE_REF;
 if (sourceRef && !/^[a-f0-9]{40}$/.test(sourceRef)) throw Error('QA_SOURCE_REF requires an exact commit');
 // A paired baseline serves these unchanged sources through the same QA bridge, not HMR state.
-const pinnedFiles = sourceRef ? ['src/fjord-play/FjordPlay.ts', 'src/core/WorldLighting.ts'] : [];
+const pinnedFiles = sourceRef ? ['src/fjord-play/FjordPlay.ts', 'src/core/WorldLighting.ts',
+    ...(process.env.QA_PIN_PRESENTATION === '1' ? ['src/config/FjordPresentation.ts'] : [])] : [];
 const pinnedSources = new Map(pinnedFiles.map(path => [path,
     execFileSync('git', ['show', sourceRef + ':' + path], { encoding: 'utf8' })]));
 const servedSource = { ref: sourceRef ?? null, overrides: Object.fromEntries([...pinnedSources]

@@ -28,11 +28,27 @@ There is no blur, texture/font download, runtime UI dependency or added world re
 The existing narrow-layout rules and pacing-control relocation are preserved.
 
 `src/config/FjordPresentation.ts` scopes lighting to the canonical `/fjord-play` scene.
-After seasonal/weather composition, hemisphere intensity is multiplied by 0.78 and direct
-intensity by 1.12. This strengthens illuminated planes against shadowed faces while retaining
-the existing weather ratios, seasonal sky, fog, sun direction, exposure and shadow resolution.
+The selected Northern sun treatment uses a fixed world direction at 25° elevation and 135°
+azimuth, cooler sky fill, restrained warm sunlight and a small lift in shaded faces. After
+seasonal/weather composition, hemisphere intensity is multiplied by `0.78 × 0.56` and direct
+intensity by `1.12 × 1.35`. Fill is 12% higher than the earlier selected lighting study; direct
+intensity and direction match that study. Existing seasonal sky, fog, exposure and weather
+ratios remain. These are presentation settings, not gameplay or seasonal balance changes.
 Native day/night modes, the legacy prototype and Environment Lab retain their previous defaults.
 The scene still has one directional shadow source and its existing unshadowed hearth.
+
+`src/core/DirectionalShadowCoverage.ts` fits that one native PCF map to visible receivers within
+the existing fog depth. X/Y extents are independent, quantized and snapped to shadow texels.
+Full scene caster depth retains upstream roofs and trees outside the player's view, while
+the receiver-only seabed skirt does not inflate that depth range. The world bounds are collected
+on creation/discovery; moving entity bounds extend them during the existing scene sync. Unchanged
+camera/direction/quality/bounds reuse the previous fit. Standard remains 2048px and Low 1024px.
+There is no extra shadow map, scene pass, SSAO, material replacement or new dependency. Far zooms
+and Low quality still have finite shadow detail; texel snapping does not guarantee flicker-free
+transitions when the quantized coverage span changes.
+
+The selected/refined native comparison and methodology are in
+[`docs/qa/northern-lighting-180/`](qa/northern-lighting-180/README.md).
 
 ## Golden scenes
 
@@ -83,7 +99,10 @@ PR #179 commit. It serves the pinned `FjordPlay.ts` and `WorldLighting.ts` throu
 bridge, thereby omitting the new desktop import and lighting treatment. Those override hashes
 are recorded in `servedSource`; all other files come from the current checkout. This is valid
 for this change's two production integration files, not a general historical-version emulator.
-For broader future changes, use a complete separate source checkout instead.
+`QA_PIN_PRESENTATION=1` additionally pins `src/config/FjordPresentation.ts`; this is needed to
+reproduce the selected Northern sun baseline from the exact foundation revision. It is opt-in
+so earlier #179 comparisons retain their original contract. Record the revision and transformed
+file hashes. For broader future changes, use a complete separate source checkout instead.
 
 Normal builds never import the QA browser bridge, capture clock or window binding.
 Existing runtime profiling automatically releases the golden presentation freeze before active
@@ -98,8 +117,9 @@ Record actual device/browser identity, warmup, sampling duration and instrumenta
 Main-thread submission/rAF intervals are not GPU execution time. Unavailable timer queries must
 remain unavailable in results, not be represented as zero cost.
 
-The remaining Phase A work includes a broader multi-seed/season/quality gallery, measured
-camera/framing studies, coherent material/terrain-mask trials, native contact-shadow coverage
+The Northern sun refinement adds a five-fixture Standard/Low lighting gallery and native shadow
+coverage checks. Remaining Phase A work includes broader seed/season qualification, measured
+camera/framing studies, coherent material/terrain-mask trials, temporal shadow refinement
 and current long-run CPU attribution. Existing performance reports and unresolved gates remain
 historical records. Placement/density changes still need explicit saved-world compatibility.
 Final gameplay HUD/combat/CPU-clan polish remains Phase B.

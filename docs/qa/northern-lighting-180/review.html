@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fjordside · Northern light refinement</title>
+    <style>
+        :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #101c1e; color: #ebe8df; }
+        * { box-sizing: border-box; }
+        body { margin: 0; }
+        main { max-width: 1440px; margin: auto; padding: 24px; }
+        a { color: #d8bd80; }
+        h1 { margin: 8px 0; font: 500 clamp(26px, 4vw, 42px) Georgia, serif; }
+        p { color: #b8c3c0; line-height: 1.6; max-width: 80ch; }
+        .eyebrow { color: #d8bd80; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+        .controls { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin: 24px 0; }
+        label { display: grid; gap: 8px; color: #d9dfdb; font-size: 14px; }
+        select, button { font: inherit; color: #ebe8df; background: #203134; border: 1px solid #63726e; border-radius: 5px; padding: 12px; }
+        button { cursor: pointer; }
+        button[aria-pressed="true"] { border-color: #d8bd80; background: #3b4134; }
+        button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #d8bd80; outline-offset: 4px; }
+        .comparison { position: relative; overflow: hidden; aspect-ratio: 1440 / 900; background: #203134; border: 1px solid #63726e; }
+        .comparison img { position: absolute; width: 100%; height: 100%; object-fit: contain; }
+        #refined { clip-path: inset(0 0 0 50%); }
+        #divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #e1c488; pointer-events: none; }
+        .tag { position: absolute; top: 12px; padding: 8px 12px; background: #101c1ee8; border-radius: 4px; font-size: 13px; }
+        #selected-tag { left: 12px; }
+        #refined-tag { right: 12px; }
+        .slider { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; margin: 18px 0 10px; }
+        input { width: 100%; accent-color: #d8bd80; cursor: ew-resize; }
+        .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        #status { min-height: 24px; color: #e1c488; }
+        .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+        .fact { padding: 18px; border: 1px solid #425653; border-radius: 5px; }
+        .fact strong { display: block; margin-bottom: 8px; }
+        .fact p { margin: 0; font-size: 14px; }
+        details { padding: 16px 0; border-top: 1px solid #425653; }
+        summary { cursor: pointer; }
+        #metrics { white-space: pre-wrap; font: 13px/1.6 ui-monospace, monospace; color: #b8c3c0; }
+        @media (max-width: 650px) {
+            main { padding: 16px; }
+            .controls { grid-template-columns: 1fr 1fr; }
+            .controls label:first-child { grid-column: 1 / -1; }
+            .facts { grid-template-columns: 1fr; }
+            .tag { top: 6px; padding: 5px 7px; font-size: 10px; }
+            #selected-tag { left: 6px; }
+            #refined-tag { right: 6px; }
+            .slider { gap: 8px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="eyebrow">Fjordside · 3D world · Issue #180</div>
+    <h1>Northern light, clearer shadows</h1>
+    <p>The selected 25° sun is the starting point. The refinement makes shaded faces slightly
+        easier to read and fits the existing shadow map to the visible world. These are captures
+        of the actual 3D renderer. The original Viking image remains the art reference.</p>
+    <div class="controls">
+        <label>Scene<select id="scene"></select></label>
+        <label>Render quality<select id="quality"><option value="standard">Standard · 2048px</option><option value="low">Low · 1024px</option></select></label>
+        <label>Camera<select id="subject"><option value="world">Settlement</option><option value="building">Building detail</option><option value="persona">Resident detail</option></select></label>
+    </div>
+    <div class="comparison" aria-label="Same scene with selected and refined Northern sun">
+        <img id="selected" alt="Selected Northern sun, unchanged starting point">
+        <img id="refined" alt="Refined Northern sun with sharper shadows and a little more fill light">
+        <div id="divider"></div>
+        <span id="selected-tag" class="tag">Selected Northern sun</span>
+        <span id="refined-tag" class="tag">Refined Northern sun</span>
+    </div>
+    <label class="slider"><span>Selected</span><input id="wipe" type="range" min="0" max="100" value="50" aria-label="Amount of refined lighting visible"><span>Refined</span></label>
+    <div class="actions">
+        <button id="show-selected" type="button">Show selected</button>
+        <button id="show-split" type="button">Compare</button>
+        <button id="show-refined" type="button">Show refined</button>
+    </div>
+    <p id="status" role="status" aria-live="polite">Loading verified captures…</p>
+    <div class="facts">
+        <div class="fact"><strong>Same world</strong><p>Matching saved state, procedural geography, camera and actor poses. Two seeds, a developed settlement, rain and snow.</p></div>
+        <div class="fact"><strong>Same assets and map sizes</strong><p>Native lighting and PCF shadows. One shadow source; no extra render pass, new models, material override or post-processing.</p></div>
+        <div class="fact"><strong>Review across scenes</strong><p>Look for readable roofs, clear tree silhouettes, grounded buildings and comfortable shade. Building and resident details are available for the developed and snowy scenes.</p></div>
+    </div>
+    <details><summary>Capture and renderer measurements</summary><pre id="metrics"></pre></details>
+    <p><a href="README.md">Method, checks and limitations</a> · <a href="observations.json">Capture evidence</a> ·
+        <a href="camera/resident-contact-standard.jpg">Resident shadow · side view</a> ·
+        <a href="/lighting/">Earlier lighting study</a> · <a href="/">Desktop UI · layout C</a></p>
+</main>
+<script type="module">
+    const data = await fetch('observations.json').then(response => response.json());
+    if (data.status !== 'PASS') throw new Error('The native capture matrix has not passed.');
+    const get = id => document.getElementById(id);
+    const names = {
+        'snow-811': 'Snow · winter 811',
+        'developed-810': 'Developed settlement · 810',
+        'summer-32': 'Summer · seed 32',
+        'summer-17': 'Summer · seed 17',
+        'rain-810': 'Rain · 810',
+    };
+    const scenes = [...new Set(data.cases.map(entry => entry.fixture))];
+    for (const value of scenes) get('scene').add(new Option(names[value] || value, value));
+    function wipe() {
+        const percent = Number(get('wipe').value);
+        get('refined').style.clipPath = `inset(0 0 0 ${100 - percent}%)`;
+        get('divider').style.left = `${100 - percent}%`;
+        get('divider').hidden = percent === 0 || percent === 100;
+        get('selected-tag').hidden = percent === 100;
+        get('refined-tag').hidden = percent === 0;
+        get('status').textContent = percent === 0 ? 'Showing selected Northern sun · 25°'
+            : percent === 100 ? 'Showing refined Northern sun · 25°'
+            : `Selected on the left · refined on the right (${percent}% visible)`;
+        for (const [id, value] of [['show-selected', 0], ['show-split', 50], ['show-refined', 100]])
+            get(id).setAttribute('aria-pressed', String(percent === value));
+    }
+    function show() {
+        const entry = data.cases.find(entry => entry.fixture === get('scene').value && entry.quality === get('quality').value);
+        for (const option of get('subject').options) {
+            option.disabled = option.value !== 'world' &&
+                !entry.variants.every(variant => variant.details?.some(detail => detail.subject === option.value));
+        }
+        if (get('subject').selectedOptions[0].disabled) get('subject').value = 'world';
+        const renderer = entry.variants[0].renderer;
+        document.querySelector('.comparison').style.aspectRatio = `${renderer.width} / ${renderer.height}`;
+        for (const variant of entry.variants) {
+            const detail = variant.details?.find(detail => detail.subject === get('subject').value);
+            get(variant.variant).src = detail?.image || variant.image;
+        }
+        get('metrics').textContent = entry.variants.map(variant => {
+            const shadow = variant.lighting.shadows;
+            const renderer = variant.details?.find(detail => detail.subject === get('subject').value)?.renderer || variant.renderer;
+            return `${variant.variant === 'selected' ? 'Selected' : 'Refined'} Northern sun\n` +
+                `Canvas ${renderer.width} × ${renderer.height} · DPR ${renderer.pixelRatio}\n` +
+                `Shadow map ${shadow.size.join(' × ')} · settlement coverage ${(shadow.right - shadow.left).toFixed(0)} × ${(shadow.top - shadow.bottom).toFixed(0)} m\n` +
+                `Draw calls ${renderer.callsIncludingShadows} · triangles ${renderer.trianglesIncludingShadows.toLocaleString('en-GB')} (including shadows)\n` +
+                `Geometries ${renderer.geometries} · textures ${renderer.textures}\n`;
+        }).join('\n') + '\n' + entry.variants[1].lighting.hardware.renderer;
+        wipe();
+    }
+    for (const id of ['scene', 'quality', 'subject']) get(id).addEventListener('change', show);
+    get('wipe').addEventListener('input', wipe);
+    for (const [id, value] of [['show-selected', 0], ['show-split', 50], ['show-refined', 100]])
+        get(id).addEventListener('click', () => { get('wipe').value = value; wipe(); });
+    show();
+</script>
+</body>
+</html>

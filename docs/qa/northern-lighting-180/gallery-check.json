@@ -1,0 +1,138 @@
+{
+  "url": "http://127.0.0.1:5193/docs/qa/northern-lighting-180/review.html",
+  "pairs": [
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "subject": "building",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "subject": "persona",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "subject": "building",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "subject": "persona",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "subject": "building",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "subject": "persona",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "subject": "building",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "subject": "persona",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "summer-32",
+      "quality": "standard",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "summer-32",
+      "quality": "low",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "rain-810",
+      "quality": "standard",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    },
+    {
+      "fixture": "rain-810",
+      "quality": "low",
+      "subject": "world",
+      "endpointPixels": "PASS",
+      "midpointClip": "PASS"
+    }
+  ],
+  "errors": [],
+  "phone": {
+    "width": 390,
+    "horizontalOverflow": false,
+    "endpointLabel": "PASS"
+  },
+  "status": "PASS"
+}

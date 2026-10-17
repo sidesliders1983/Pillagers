@@ -1,5 +1,6 @@
-import { Scene, Color, Fog, HemisphereLight, DirectionalLight, PointLight, WebGLRenderer, Mesh, ShaderMaterial, CircleGeometry, MathUtils, Vector3 } from 'three';
-import { lightingConfig as config, LightingMode, fireFlicker } from '../config/lightingConfig';
+import { Scene, Color, Fog, HemisphereLight, DirectionalLight, PointLight, WebGLRenderer, Mesh, ShaderMaterial, CircleGeometry, MathUtils, Vector3, Box3, Object3D, PerspectiveCamera } from 'three';
+import { lightingConfig as config, LightingMode, fireFlicker, type SeasonalLightingTreatment } from '../config/lightingConfig';
+import { DirectionalShadowCoverage } from './DirectionalShadowCoverage';
 import { AssetManager } from './AssetManager';
 import { hearth } from '../world/SettlementLayout';
 import { surfaceHeightAt } from '../world/Terrain';
@@ -20,9 +21,11 @@ export class WorldLighting {
     private dayColor=new Color();
     private seasonWeather:DayLightingSettings|null=null;
     private fogEnabled=true;
+    private readonly lightDirection = new Vector3();
+    private shadowCoverage?: DirectionalShadowCoverage;
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
         private worldAnchor?:Vector3,private quality: 'standard' | 'low' = 'standard',
-        private seasonTreatment = { ambientScale: 1, directScale: 1 }){
+        private seasonTreatment: SeasonalLightingTreatment = { ambientScale: 1, directScale: 1 }){
         scene.background=new Color(config.day.sky);scene.add(this.ambient,this.directional,this.campfire);
         this.directional.castShadow=true;
         const sun=config.day;
@@ -50,6 +53,7 @@ export class WorldLighting {
         this.setMode('day');
     }
     setMode(mode:LightingMode,day:DayLightingSettings=config.day){
+        this.shadowCoverage?.invalidate();
         this.visualization='off';
         this.seasonWeather=null;
         this.nightWeight=mode==='night'?1:0;
@@ -101,6 +105,34 @@ export class WorldLighting {
         this.renderer.shadowMap.needsUpdate = true;
     }
     get skyColor() { return this.scene.background as Color; }
+    /** Called on world creation/discovery, never as part of the animation-frame scene walk. */
+    includeWorldShadowBounds(root: Object3D) {
+        if (!this.seasonTreatment.shadows) return;
+        const bounds = new Box3(), casters = new Box3(), meshBounds = new Box3();
+        root.updateMatrixWorld(true);
+        root.traverse(node => {
+            if (node instanceof Mesh && (node.castShadow || node.receiveShadow)) {
+                meshBounds.setFromObject(node);
+                bounds.union(meshBounds);
+                if (node.castShadow) casters.union(meshBounds);
+            }
+        });
+        if (bounds.isEmpty()) return;
+        bounds.expandByScalar(2); // Include existing wind motion outside the static source bounds.
+        if (this.shadowCoverage) {
+            this.shadowCoverage.include(bounds, false);
+            this.shadowCoverage.include(casters);
+        } else this.shadowCoverage = new DirectionalShadowCoverage(bounds, this.seasonTreatment.shadows, casters);
+    }
+    includeEntityShadowBounds(bounds: { min: { x: number; y: number; z: number };
+        max: { x: number; y: number; z: number } } | null | undefined) {
+        if (bounds) this.shadowCoverage?.include(bounds);
+    }
+    updateShadowView(camera: PerspectiveCamera) {
+        if (this.visualization === 'seasons')
+            this.shadowCoverage?.update(this.directional, camera, this.fogEnabled ? this.fog.far : camera.far);
+    }
+    inspectShadowCoverage() { return this.shadowCoverage?.inspect() ?? null; }
     setFog(enabled:boolean){this.fogEnabled=enabled;this.scene.fog=enabled?this.fog:null;}
     setVisualization(mode:TimeVisualization){
         this.setMode('day');this.visualization=mode;
@@ -160,6 +192,22 @@ export class WorldLighting {
             // Rebalance form after composing seasonal weather, preserving every weather ratio.
             this.ambient.intensity *= this.seasonTreatment.ambientScale;
             this.directional.intensity *= this.seasonTreatment.directScale;
+            const treatment = this.seasonTreatment;
+            if (treatment.skyFill)
+                this.ambient.color.lerp(this.blendColor.setHex(treatment.skyFill.color), treatment.skyFill.mix);
+            if (treatment.groundFill)
+                this.ambient.groundColor.lerp(this.blendColor.setHex(treatment.groundFill.color), treatment.groundFill.mix);
+            if (treatment.sunTint)
+                this.directional.color.lerp(this.blendColor.setHex(treatment.sunTint.color), treatment.sunTint.mix);
+            if (treatment.sunDirection) {
+                this.lightDirection.fromArray(treatment.sunDirection).normalize();
+                this.directional.position.copy(this.directional.target.position).addScaledVector(this.lightDirection, 200);
+            }
+            if (treatment.shadows) {
+                this.directional.shadow.radius = treatment.shadows.radius;
+                this.directional.shadow.bias = treatment.shadows.bias;
+                this.directional.shadow.normalBias = treatment.shadows.normalBias;
+            }
             this.fog.near=MathUtils.lerp(config.day.fogNear,weather.fogNear,winter);
             this.fog.far=MathUtils.lerp(config.day.fogFar,weather.fogFar,winter);
             this.renderer.toneMappingExposure=MathUtils.lerp(config.day.exposure,weather.exposure,winter);
