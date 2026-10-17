@@ -1,0 +1,111 @@
+{
+  "version": "iceland-gallery-check-v1",
+  "origin": "http://127.0.0.1:5196/docs/qa/iceland-textures-180/",
+  "pairs": [
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "yard",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "coast",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "rock",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "yard",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "coast",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "rock",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true
+    }
+  ],
+  "errors": [],
+  "phoneReview": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "noHorizontalOverflow": true
+  },
+  "status": "PASS"
+}

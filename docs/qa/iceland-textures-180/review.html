@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22/%3E">
+  <title>Fjordside · Icelandic material study</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #111e21; color: #e9e5da; }
+    * { box-sizing: border-box; }
+    body { margin: 0 auto; padding: 28px 20px 60px; max-width: 1250px; }
+    a { color: #dbc58b; text-underline-offset: 3px; }
+    h1 { font: 500 clamp(26px, 4vw, 40px)/1.15 Georgia, serif; margin: 12px 0; }
+    h2 { font-size: 21px; margin-top: 36px; }
+    p { line-height: 1.6; max-width: 85ch; color: #bdc7c6; }
+    .eyebrow { color: #d2b77e; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    .note, details { border: 1px solid #3b5151; border-radius: 8px; padding: 16px; margin: 20px 0; }
+    .note strong { color: #e4cf9e; }
+    .controls { display: flex; flex-wrap: wrap; gap: 16px; margin: 24px 0 18px; }
+    label { display: grid; gap: 8px; color: #d9dedb; font-size: 14px; flex: 1 1 200px; }
+    select, button { background: #233537; border: 1px solid #526361; border-radius: 5px; color: #ece8df; padding: 12px; font: inherit; min-width: 0; width: 100%; }
+    .frame { position: relative; aspect-ratio: 1424/752; overflow: hidden; background: #283a37; border: 1px solid #526361; }
+    .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; display: block; }
+    .frame .candidate { position: absolute; inset: 0; clip-path: inset(0 0 0 50%); }
+    .tag { position: absolute; top: 12px; padding: 8px 10px; background: #132325e8; font-size: clamp(10px, 1.4vw, 15px); border-radius: 4px; }
+    .tag.left { left: 12px; } .tag.right { right: 12px; }
+    .divider { position: absolute; top: 0; bottom: 0; left: 50%; border-left: 2px solid #e9d2a0; pointer-events: none; }
+    .range { display: flex; align-items: center; gap: 16px; margin: 20px 0; font-size: 14px; }
+    input[type=range] { width: 100%; min-width: 0; accent-color: #d4b477; }
+    .range span { flex: 0 0 auto; }
+    #status { min-height: 24px; font-size: 13px; }
+    .native { width: 100%; display: block; margin-top: 16px; }
+    summary { cursor: pointer; color: #dbc58b; }
+    .materials { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .card { min-width: 0; border: 1px solid #3b5151; border-radius: 8px; overflow: hidden; }
+    .tile { aspect-ratio: 1; background-size: 33.333333% 33.333333%; background-repeat: repeat; }
+    .card div:last-child { padding: 12px; line-height: 1.5; }
+    .card h3 { font-size: 16px; margin: 0 0 8px; }
+    .card p { margin: 8px 0; font-size: 13px; }
+    footer { border-top: 1px solid #3b5151; margin-top: 32px; padding-top: 16px; font-size: 13px; }
+    @media (max-width: 700px) { body { padding: 20px 12px 40px; } .materials { grid-template-columns: repeat(2, minmax(0, 1fr)); } .range { gap: 8px; } }
+    select:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid #e9d2a0; outline-offset: 4px; }
+  </style>
+</head>
+<body>
+  <div class="eyebrow">Fjordside · Issue #180 · Material exploration</div>
+  <h1>Icelandic fjords, in the existing world</h1>
+  <p>Four AI-generated colour textures informed by real Icelandic coastal vegetation, weathered basalt, volcanic earth and shore sediment. The approved Northern sun lighting and the existing procedural world are retained.</p>
+  <div class="note"><strong>Albedo study · not final PBR materials.</strong> The comparison below disables terrain normal and roughness maps on both sides, using roughness 1. This isolates the colour texture choice. Existing seasonal tint, snow response, blending masks and UV scale remain active. Native materials are available separately for context.</div>
+  <div class="controls">
+    <label>Saved world<select id="fixture" aria-label="Saved world"></select></label>
+    <label>Camera<select id="view" aria-label="Camera"></select></label>
+    <label>Render quality<select id="quality" aria-label="Render quality"><option value="standard">Standard · 1024px colour</option><option value="low">Low · 512px colour</option></select></label>
+  </div>
+  <div class="frame" aria-label="Identical frozen world with current and Icelandic colour textures">
+    <img id="current" alt="Frozen native game scene using current colour textures, with terrain data maps disabled">
+    <img id="candidate" class="candidate" alt="The same frozen game scene using Icelandic colour candidates, with terrain data maps disabled">
+    <div class="divider"></div>
+    <span class="tag left">Current colour only</span><span class="tag right">Iceland colour only</span>
+  </div>
+  <div class="range"><span>Current</span><input id="wipe" type="range" min="0" max="100" value="50" aria-label="Reveal Icelandic colour candidate"><span>Iceland</span></div>
+  <p id="status" role="status">Loading verified captures…</p>
+  <details id="native-context"><summary>Open current native materials with normal and roughness maps</summary><p>This reference includes the current data maps. It is context, rather than a controlled colour comparison.</p><img id="native" class="native" loading="lazy" alt="Current native materials with their existing normal and roughness maps"></details>
+  <h2>Repeat check</h2>
+  <p>Each preview repeats the delivered atlas 3 × 3. Standard uses 1024px and Low 512px; both retain the existing 24m atlas period. Original 1254px generated sources are linked for inspection. The intended 4m source sample is an art direction choice, not measured surface calibration.</p>
+  <div class="materials" id="materials"></div>
+  <h2>What this can tell us</h2>
+  <p>Compare ground identity, contrast around buildings, shoreline colour and visible repetition at gameplay distance. Geometry, vegetation density and settlement composition need separate work. These samples do not establish a final Icelandic biome or a complete material library.</p>
+  <p>The next material pass needs matched normal and roughness maps, close-up and distance review, neutral-light and rotated-light checks, wet-weather review and longer performance measurements before changing the game defaults.</p>
+  <footer><a href="README.md">Study report</a> · <a href="generation.json">Exact generation prompts and references</a> · <a href="delivery.json">Source hashes and delivery measurements</a> · <a href="observations.json">Native capture evidence</a> · <a href="/lighting-next/">Approved lighting review</a></footer>
+  <script type="module">
+    const byId = id => document.getElementById(id);
+    const fixture = byId('fixture'), view = byId('view'), quality = byId('quality');
+    const labels = { 'developed-810': 'Seed 32 · Developed settlement · Summer 810', 'summer-17': 'Seed 17 · Founding settlement · Summer 800', 'snow-811': 'Seed 32 · Developed settlement · Winter 811' };
+    const viewLabels = { settlement: 'Settlement overview', yard: 'Building and yard', coast: 'Coast sediment', rock: 'High rock-exposure zone' };
+    const materialLabels = { 'coastal-turf': 'Coastal grass and moss', 'weathered-basalt': 'Weathered basalt', 'volcanic-earth': 'Dark volcanic earth', 'fjord-shore': 'Mixed shore sediment' };
+    const [evidence, delivery] = await Promise.all(['observations.json', 'delivery.json'].map(async file => {
+      const response = await fetch(file);
+      if (!response.ok) throw Error('Review data could not be loaded.');
+      return response.json();
+    }));
+    if (evidence.status !== 'PASS') throw Error('The native capture evidence did not pass.');
+    for (const name of new Set(evidence.cases.map(entry => entry.fixture))) fixture.add(new Option(labels[name] || name, name));
+    function selectView(reset = false) {
+      const entry = evidence.cases.find(entry => entry.fixture === fixture.value && entry.quality === quality.value);
+      if (!entry) throw Error('Missing verified scene.');
+      if (reset) {
+        view.replaceChildren(...entry.views.map(item => new Option(viewLabels[item.id] || item.id, item.id)));
+      }
+      const selected = entry.views.find(item => item.id === view.value);
+      for (const [id, variant] of [['current', 'current-albedo'], ['candidate', 'iceland-albedo'], ['native', 'native']]) {
+        byId(id).src = selected.variants.find(item => item.variant === variant).image;
+      }
+      byId('status').textContent = `Verified same saved world, camera, actors, geometry, UVs, masks and lighting. Native restoration matches exact pixels. ${entry.quality === 'low' ? 'Low' : 'Standard'} quality.`;
+      byId('materials').replaceChildren(...delivery.sourceAssets.map(source => {
+        const map = delivery.delivery.find(map => map.id === source.id && map.tier === quality.value);
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `<div class="tile" style="background-image:url('${map.file}')" role="img" aria-label="${materialLabels[source.id]}, repeated 3 by 3"></div><div><h3>${materialLabels[source.id]}</h3><a href="${source.file}" target="_blank" rel="noopener">Original generated source</a><p>${map.size}px atlas · ${(map.bytes / 1024).toFixed(0)} KiB · 24m repeat</p></div>`;
+        return card;
+      }));
+    }
+    fixture.addEventListener('change', () => selectView(true));
+    quality.addEventListener('change', () => selectView());
+    view.addEventListener('change', () => selectView());
+    byId('wipe').addEventListener('input', event => {
+      const value = Number(event.target.value);
+      const position = 100 - value;
+      // Remove the underlying image at the full-candidate endpoint to avoid
+      // fractional CSS image-edge blending with a different colour texture.
+      byId('current').style.visibility = value === 100 ? 'hidden' : '';
+      byId('candidate').style.clipPath = value === 100 ? 'none' : `inset(0 0 0 ${position}%)`;
+      document.querySelector('.divider').style.left = position + '%';
+    });
+    selectView(true);
+  </script>
+</body>
+</html>
