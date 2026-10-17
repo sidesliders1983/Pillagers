@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "origin": "https://acer-railway-fact-smaller.trycloudflare.com",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/textures/",
+      "status": 200
+    },
+    {
+      "path": "/lighting-next/",
+      "status": 200
+    },
+    {
+      "path": "/rocks/",
+      "status": 200
+    },
+    {
+      "path": "/summits/",
+      "status": 200
+    },
+    {
+      "path": "/summits/README.md",
+      "status": 200
+    },
+    {
+      "path": "/summits/gallery-check.json",
+      "status": 200
+    },
+    {
+      "path": "/summits/performance.json",
+      "status": 200
+    },
+    {
+      "path": "/scripts/qa/fjord-summit-snow-study-browser.mjs",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "path": "/summits/",
+      "method": "POST",
+      "status": 405
+    }
+  ],
+  "evidenceAndTimingBytesMatch": true,
+  "nativeImagesMatch": 12,
+  "phoneLoads": true,
+  "defaultFixture": "developed-810",
+  "defaultReveal": 100,
+  "errors": []
+}
