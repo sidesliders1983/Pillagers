@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "origin": "http://127.0.0.1:5176",
+  "checks": [
+    "Exploration-disabled save has a clear new-campaign route; opening settings changes no gameplay state",
+    "Global crew selection, keyboard checkbox, separate groups and canonical eligibility; cancelled packing spends nothing",
+    "Packing spends exactly 4 Food once, enters a separate map toolbar, stays paused; Escape and Cancel preserve the whole prepared campaign; flag preview reveals/spends nothing",
+    "Explicit Send, Resume, Show group, travel, discovery, redirect with unchanged Food, Recall and physical homecoming; exploration toolbar exits at completion",
+    "Reload restores an active paused expedition and its controls without charging again; ending it discards unused supplies without refund"
+  ],
+  "errors": [],
+  "layout": [
+    {
+      "width": 1440,
+      "height": 900,
+      "toolbar": {
+        "x": 375,
+        "y": 608.203125,
+        "width": 690,
+        "height": 203.796875
+      },
+      "worldAreaUncoveredByToolbar": 0.8914970341435186
+    },
+    {
+      "width": 1024,
+      "height": 636,
+      "toolbar": {
+        "x": 167,
+        "y": 300.8125,
+        "width": 690,
+        "height": 247.1875
+      },
+      "worldAreaUncoveredByToolbar": 0.7381102364018278
+    }
+  ],
+  "sourceHashes": {
+    "ExpeditionPanel.ts": "379e53bfe90545ec315ff25b430b3b735ea5a79d7d7aa103e21e3cb6aa416301",
+    "FjordInterface.ts": "b3e89ac9e5582cfab3027837ffa5f55261c245faeaf574bbad1049e7bde9014c",
+    "FjordPlay.ts": "3f4aa6080dfba6be662b2c3b9bcb66225543159d3f1e6da35619530bf6b5e312",
+    "FjordIcons.ts": "cdc6c1f34554d15e821058a12259f8ef57ee1d7f596052616a841bffd57d96b8",
+    "fjord-interface.css": "210fa24d2d553527e98cf8a99ee7bae74049c20339b156b3c226cf73316cdbbe"
+  }
+}

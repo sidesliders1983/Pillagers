@@ -21,6 +21,11 @@ const paths = {
     wood: 'm4 18 14-14 3 3L7 21H4v-3ZM4 3l8 8M3 4l2-2 5 5-2 2',
     ship: 'M2 17h20l-4 5H6l-4-5Zm10 0V2l8 11h-8M9 4 4 13h5',
     jewel: 'm3 8 4-5h10l4 5-9 13L3 8Zm0 0h18M7 3l5 18 5-18',
+    destination: 'M5 22V3m0 1c5-5 9 5 15 0v11c-6 5-10-5-15 0',
+    locate: 'M12 2v4m0 12v4M2 12h4m12 0h4M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14Zm0 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
+    check: 'm4 12 5 5L20 6',
+    plus: 'M12 4v16M4 12h16',
+    back: 'm10 5-7 7 7 7M3 12h18',
 };
 export type FjordIcon = keyof typeof paths;
 export function icon(name: FjordIcon): string {

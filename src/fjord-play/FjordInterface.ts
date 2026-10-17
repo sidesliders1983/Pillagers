@@ -359,8 +359,11 @@ export class FjordInterface {
             [...this.draft.cattleIds, input.dataset.cattle] : this.draft.cattleIds.filter(id => id !== input.dataset.cattle);
         this.hooks.refresh();
     };
-    setTargeting(hidden: boolean) {
-        if (this.surface === 'expeditions') this.workspace.hidden = hidden;
+    showExplorationMap() {
+        this.surface = 'expeditions';
+        this.workspace.dataset.surface = 'expeditions';
+        this.workspace.hidden = true;
+        this.management.hidden = true;
     }
     async approve(command: SimulationCommand): Promise<boolean> {
         const irreversible = ['SalvageBuilding', 'SalvageLongship', 'SlaughterCattle'].includes(command.type);
@@ -402,7 +405,7 @@ export class FjordInterface {
     }
     open(surface: string, force = false) {
         if (surface === 'livestock') { this.directory = 'cattle'; surface = 'settlement'; force = true; }
-        if (surface === this.surface && !force) { this.close(); return; }
+        if (surface === this.surface && !force && !this.workspace.hidden) { this.close(); return; }
         this.lastFocus = document.activeElement as HTMLElement;
         this.surface = surface;
         this.workspace.hidden = false;

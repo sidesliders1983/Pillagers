@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "origin": "https://acer-railway-fact-smaller.trycloudflare.com",
+  "checkedAt": "2026-10-17T17:05:01.288Z",
+  "files": [
+    {
+      "url": "/playtest/",
+      "sha256": "e0112536143401fb5e2e0b9f831350a88e0a6361050e7c2f1ba50a3602782e50",
+      "bytes": 6590
+    },
+    {
+      "url": "/playtest/exploration-800.json",
+      "sha256": "12749c37e3bf0c52b2695adc6a0f55ba331668eaf21ce0495a4a015b6faa4bba",
+      "bytes": 60924
+    },
+    {
+      "url": "/assets/FjordPlay-I-fo0-UJ.js",
+      "sha256": "513f6e792afe416a0cc07fe1804b13b60e7af97193cd904ba2470d3a91308135",
+      "bytes": 321291
+    },
+    {
+      "url": "/assets/FjordPlay-gHAVcEj4.css",
+      "sha256": "d6e7c92351d83016c45bf450afa9f9251b1c8aed6f389992e8704036635ffa0f",
+      "bytes": 35960
+    }
+  ],
+  "checks": [
+    "public launcher, exploration save, production JavaScript and CSS match local build bytes"
+  ]
+}

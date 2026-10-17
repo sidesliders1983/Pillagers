@@ -589,11 +589,9 @@ export class FjordPlay {
         expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
             this.session, command => action(() => {
                 this.session.command(command);
-                expeditions!.committed(command.type === 'ExploreArea');
+                expeditions!.committed(command);
             }), point => {
                 targetMarker.visible = !!point;
-                if (!point && expeditions?.targeting) { showManagement(false); desktopUI?.setTargeting(true); }
-                if (point) desktopUI?.setTargeting(false);
                 if (point) targetMarker.position.set(point.x,
                     createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z)+.4, point.z);
             }, memberIds => {
@@ -603,6 +601,19 @@ export class FjordPlay {
                     if (!person) throw new Error('A group member is not currently on the island.');
                     return [id,{ x: person.position[0], z: person.position[2] }];
                 }));
+            }, {
+                showMap: () => {
+                    desktopUI?.showExplorationMap();
+                    showManagement(false);
+                },
+                showGroups: () => desktopUI?.open('expeditions', true),
+                focus: point => {
+                    const height = createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z);
+                    const target = new Vector3(point.x, height, point.z);
+                    const offset = camera.position.clone().sub(controller.focus);
+                    controller.setView({ position: target.clone().add(offset).toArray(), target: target.toArray() });
+                },
+                toggleClock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.click(),
             });
         document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
@@ -648,6 +659,7 @@ export class FjordPlay {
             this.loading?.finish();
             this.stopped = true;
             desktopUI?.dispose();
+            expeditions?.dispose();
             clearTimeout(feedbackTimer);
             trace.record('scene-disposed');
             trace.dispose();
@@ -1017,7 +1029,6 @@ export class FjordPlay {
                 const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
                 const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
                 if (point) expeditions.chooseTarget({ x: point.x, z: point.z });
-                showManagement(true);
                 return true;
             }
             const selected = layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);

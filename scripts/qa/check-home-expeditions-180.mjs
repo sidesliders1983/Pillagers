@@ -127,7 +127,7 @@ try {
     console.log('PASS: Home specialization, upgrades, viewport visibility and advanced management');
     await page.locator('button[data-surface="expeditions"]').click();
     assert.ok(await page.locator('#expedition-create').isDisabled());
-    assert.ok((await page.locator('#expedition-controls').innerText()).includes('disabled in this saved campaign'));
+    assert.ok((await page.locator('#expedition-controls').innerText()).includes('exploration disabled'));
     await page.locator('[data-ui="campaign-settings"]').click();
     assert.ok(await page.locator('#fjord-exploration').isVisible());
     await page.locator('#fjord-exploration').check();
@@ -156,7 +156,7 @@ try {
     await homeSelection(Object.keys(state.households)[0]);
     await page.locator('button[data-surface="expeditions"]').click();
     assert.ok(await page.locator('#expedition-create').isEnabled());
-    await page.locator(`details[data-group="${groupId}"] > summary`).click();
+    await page.locator(`[data-expedition-group="${groupId}"]`).click();
     const member = page.locator(`[data-member-group="${groupId}"][data-member="${members[0]}"]`);
     await member.uncheck();
     await page.waitForFunction(({ groupId }) => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.groups[groupId].memberIds.length === 1, { groupId });
@@ -170,7 +170,7 @@ try {
     const suppliedFood = foodBefore - members.length * 2;
     await page.waitForFunction(expected => Number(document.querySelector('#fjord-food').textContent) === expected, suppliedFood);
     assert.equal((await saved()).pace.running, false);
-    await page.locator(`[data-explore="${groupId}"]`).click();
+    assert.ok(await page.locator('#expedition-mode').isVisible());
     const snapshot = await saved();
     const owner = SharedSettlement.restore(JSON.stringify(snapshot), 'fjord');
     const surface = createBlueprintSurface(owner.fjord.blueprint);
@@ -193,6 +193,7 @@ try {
     }
     assert.ok(destination, 'A real, visible reachable land destination must exist');
     await page.mouse.click(destination.screen.x, destination.screen.y);
+    await page.locator('#expedition-send').click();
     await page.waitForFunction(groupId => Object.values(JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign.world.spatial.missions)
         .some(mission => mission.groupId === groupId && mission.status === 'Traveling'), groupId);
     assert.equal((await core()).stocks.food, suppliedFood);
