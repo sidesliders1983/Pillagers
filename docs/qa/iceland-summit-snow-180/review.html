@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22/%3E">
+  <title>Fjordside · Permanent summit snow</title>
+  <style>
+    :root { color-scheme:dark; font-family:system-ui,sans-serif; background:#111e21; color:#e9e5da; }
+    * { box-sizing:border-box; } body { max-width:1250px; margin:auto; padding:28px 20px 56px; }
+    h1 { font:500 clamp(26px,4vw,40px)/1.15 Georgia,serif; margin:12px 0; }
+    p,li { line-height:1.6; color:#bdc7c6; max-width:90ch; } a { color:#dbc58b; text-underline-offset:3px; }
+    .eyebrow { color:#d2b77e; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+    .controls { display:flex; flex-wrap:wrap; gap:14px; margin:24px 0 16px; }
+    label { display:grid; gap:7px; flex:1 1 180px; font-size:14px; }
+    select { background:#233537; color:#ece8df; border:1px solid #526361; border-radius:5px; padding:11px; font:inherit; width:100%; min-width:0; }
+    .frame { position:relative; aspect-ratio:1424/752; overflow:hidden; border:1px solid #526361; background:#233537; }
+    .frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .candidate { clip-path:inset(0 0 0 50%); }
+    .tag { position:absolute; top:12px; padding:8px; border-radius:4px; background:#132325ed; font-size:clamp(10px,1.3vw,15px); }
+    .left { left:12px; } .right { right:12px; }
+    .divider { position:absolute; top:0; bottom:0; left:50%; border-left:2px solid #e9d2a0; pointer-events:none; }
+    .range { display:flex; align-items:center; gap:14px; margin-top:20px; font-size:14px; }
+    .range span { flex:0 0 auto; } input { width:100%; min-width:0; accent-color:#d4b477; }
+    #status { font-size:13px; min-height:24px; }
+    details { padding:16px; border:1px solid #3b5151; border-radius:8px; margin:20px 0; }
+    summary { cursor:pointer; color:#dbc58b; } footer { border-top:1px solid #3b5151; padding-top:20px; margin-top:28px; font-size:13px; line-height:2; }
+    select:focus-visible,input:focus-visible,a:focus-visible { outline:2px solid #e9d2a0; outline-offset:4px; }
+    @media(max-width:700px) { body { padding:20px 12px 40px; } .range { gap:8px; } }
+  </style>
+</head>
+<body>
+  <div class="eyebrow">Fjordside · Summit material study · #180</div>
+  <h1>Permanent snow. Flat summits. Sharp edges.</h1>
+  <p>A year-round cap on the flattest high surfaces, with a hard boundary against rock. Seasonal snow remains a separate treatment.</p>
+  <div class="controls">
+    <label>Saved world and season<select id="fixture" aria-label="Saved world and season"></select></label>
+    <label>Render quality<select id="quality" aria-label="Render quality"><option value="standard">Standard</option><option value="low">Low</option></select></label>
+  </div>
+  <select id="view" hidden><option value="summit">Summit</option></select>
+  <div class="frame" aria-label="The same existing summit, with and without permanent snow">
+    <img id="current" alt="Previously reviewed rock and seasonal snow, with no permanent summit cap">
+    <img id="candidate" class="candidate" alt="Same summit with permanent snow restricted to flat upper surfaces and a sharp edge">
+    <div class="divider"></div>
+    <span class="tag left">Seasonal snow only</span><span class="tag right">Permanent summit cap</span>
+  </div>
+  <div class="range"><span>Current</span><input id="wipe" type="range" min="0" max="100" value="100" aria-label="Reveal permanent summit snow"><span>Candidate</span></div>
+  <p id="status" role="status">Loading verified renders…</p>
+  <details><summary>Rules and scope of this preview</summary>
+    <ul>
+      <li>Permanent snow requires both the top 10% of the existing height range and a surface slope of approximately 14° or less.</li>
+      <li>Its height and slope boundaries are binary: no broad terrain-colour fade. The cap does not depend on the season.</li>
+      <li>Existing camera clearance, weather fog and vegetation remain visible. No exploration overlay is present in these saved fixtures.</li>
+      <li>The current islands peak at 43–46m. This is relative-scale art direction, with actual high-mountain form and altitude-aware vegetation still to be developed.</li>
+    </ul>
+    <p>No new terrain geometry, snow texture, material pass or simulation rule. The baseline is the reviewed rock treatment, with the same colour-only material setup on both sides.</p>
+  </details>
+  <footer><a href="README.md">Report and reproduction</a> · <a href="observations.json">Native evidence</a> · <a href="/rocks/">Rock and seasonal snow review</a> · <a href="/textures/">Original texture review</a> · <a href="https://github.com/sidesliders1983/Pillagers/pull/190">Draft PR #190</a></footer>
+  <script type="module">
+    const byId = id => document.getElementById(id);
+    const fixture = byId('fixture'), quality = byId('quality');
+    const labels = { 'developed-810':'Seed 32 · Summer 810', 'snow-811':'Seed 32 · Winter 811', 'summer-17':'Seed 17 · Summer 800' };
+    const response = await fetch('observations.json');
+    if (!response.ok) throw Error('Verified summit renders could not be loaded.');
+    const evidence = await response.json();
+    if (evidence.status !== 'PASS') throw Error('The summit study has not passed.');
+    for (const name of ['developed-810','snow-811','summer-17']) {
+      if (evidence.cases.some(entry => entry.fixture === name)) fixture.add(new Option(labels[name], name));
+    }
+    function selectView() {
+      const entry = evidence.cases.find(entry => entry.fixture === fixture.value && entry.quality === quality.value);
+      if (!entry) throw Error('Missing verified summit tier.');
+      const selected = entry.views.find(view => view.id === 'summit');
+      for (const id of ['current','candidate']) byId(id).src = selected.variants.find(item => item.variant === id).image;
+      byId('status').textContent = `${labels[entry.fixture]}. Same terrain, state, camera, lighting and vegetation on both sides.`;
+    }
+    function reveal(value) {
+      const position = 100 - value;
+      byId('current').style.visibility = value === 100 ? 'hidden' : '';
+      byId('candidate').style.clipPath = value === 100 ? 'none' : `inset(0 0 0 ${position}%)`;
+      document.querySelector('.divider').style.left = position + '%';
+      document.querySelector('.tag.left').hidden = value === 100;
+      document.querySelector('.tag.right').hidden = value === 0;
+    }
+    fixture.addEventListener('change', selectView);
+    quality.addEventListener('change', selectView);
+    byId('wipe').addEventListener('input', event => reveal(Number(event.target.value)));
+    selectView();
+    reveal(Number(byId('wipe').value));
+  </script>
+</body>
+</html>

@@ -5,16 +5,17 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root = 'docs/qa/iceland-rock-snow-180';
+const summitStudy = process.env.QA_STUDY === 'summit';
+const root = summitStudy ? 'docs/qa/iceland-summit-snow-180' : 'docs/qa/iceland-rock-snow-180';
 const observationsBytes = await readFile(root + '/observations.json');
 const observations = JSON.parse(observationsBytes);
 assert.equal(observations.status, 'PASS');
-const fixtureName = 'snow-811';
+const fixtureName = summitStudy ? 'developed-810' : 'snow-811';
 const fixture = JSON.parse(await readFile(`docs/qa/fjord-runtime-performance/fixtures/${fixtureName}.json`, 'utf8'));
 fixture.target = 'fjord';
 fixture.pace.running = false;
 const quantile = (values, fraction) => [...values].sort((a, b) => a - b)[Math.floor((values.length - 1) * fraction)];
-const result = { version: 'rock-snow-cadence-v1', fixture: fixtureName,
+const result = { version: summitStudy ? 'summit-snow-cadence-v1' : 'rock-snow-cadence-v1', fixture: fixtureName,
     observationsSha256: createHash('sha256').update(observationsBytes).digest('hex'),
     method: 'Animated rAF cadence, paused simulation; three alternating pairs, each 3s warm-up and 8s sample',
     regressionBudget: .05, timings: [], errors: [] };
@@ -46,11 +47,17 @@ try {
             await page.waitForFunction(() => window.__fjordAudit?.golden && document.querySelector('#fjord-canvas')?.dataset.ready === 'true');
             await page.addStyleTag({ content: '#fjord-management, #fjord-management-toggle, #fjord-selection-leaders, #fjord-selection-labels, #fjord-production-labels { visibility:hidden!important }' });
             const camera = observations.cases.find(entry => entry.fixture === fixtureName && entry.quality === quality)
-                .views.find(view => view.id === 'cliff').variants[0].camera;
-            await page.evaluate(async quality => {
-                const { installRockSnowStudy } = await import('/scripts/qa/fjord-rock-snow-study-browser.mjs');
-                window.__rockSnowStudy = await installRockSnowStudy(window.__fjordAudit, quality);
-            }, quality);
+                .views.find(view => view.id === (summitStudy ? 'summit' : 'cliff')).variants[0].camera;
+            await page.evaluate(async ({ quality, summitStudy }) => {
+                if (summitStudy) {
+                    const overlay = window.__fjordAudit.references.scene.getObjectByName('Clan discovery fog');
+                    if (overlay) overlay.visible = false;
+                }
+                const installer = summitStudy
+                    ? (await import('/scripts/qa/fjord-summit-snow-study-browser.mjs')).installSummitSnowStudy
+                    : (await import('/scripts/qa/fjord-rock-snow-study-browser.mjs')).installRockSnowStudy;
+                window.__rockSnowStudy = await installer(window.__fjordAudit, quality);
+            }, { quality, summitStudy });
             let invariant;
             for (let round = 1; round <= 3; round++) {
                 for (const mode of round % 2 ? ['current', 'candidate'] : ['candidate', 'current']) {

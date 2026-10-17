@@ -1,0 +1,69 @@
+{
+  "version": "rock-gallery-check-v1",
+  "origin": "http://127.0.0.1:5197/docs/qa/iceland-summit-snow-180/",
+  "pairs": [
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "summit",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "summit",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "view": "summit",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "view": "summit",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "view": "summit",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "view": "summit",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    }
+  ],
+  "errors": [],
+  "phoneReview": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "noHorizontalOverflow": true
+  },
+  "status": "PASS"
+}

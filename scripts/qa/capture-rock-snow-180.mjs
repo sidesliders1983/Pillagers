@@ -9,21 +9,25 @@ import { loadTypeScript } from '../load-typescript.mjs';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const core = loadTypeScript(new URL('../../src/simulation/SimulationCore.ts', import.meta.url));
-const root = 'docs/qa/iceland-rock-snow-180';
+const summitStudy = process.env.QA_STUDY === 'summit';
+const rockRoot = 'docs/qa/iceland-rock-snow-180';
+const root = summitStudy ? 'docs/qa/iceland-summit-snow-180' : rockRoot;
 const output = process.env.QA_OUTPUT || root;
 const fixtures = (process.env.QA_FIXTURES || 'developed-810,snow-811,summer-17').split(',');
 const tiers = (process.env.QA_TIERS || 'standard,low').split(',');
 const hash = value => createHash('sha256').update(value).digest('hex');
-const delivery = JSON.parse(await readFile(root + '/delivery.json', 'utf8'));
+const delivery = JSON.parse(await readFile(rockRoot + '/delivery.json', 'utf8'));
 const sourceFiles = ['src/world/SeasonTint.ts', 'src/world/GroundBlending.ts', 'src/world/BlueprintTerrain.ts',
     'src/core/WorldLighting.ts', 'src/config/FjordPresentation.ts', 'src/fjord-play/CampaignIsland.ts',
     'scripts/qa/fjord-rock-snow-study-browser.mjs', 'scripts/qa/capture-rock-snow-180.mjs',
-    'scripts/qa/prepare-rock-surface-180.mjs', root + '/delivery.json', delivery.sourceFile,
-    ...delivery.delivery.map(map => root + '/' + map.file)];
+    'scripts/qa/prepare-rock-surface-180.mjs', rockRoot + '/delivery.json', delivery.sourceFile,
+    ...(summitStudy ? ['scripts/qa/fjord-summit-snow-study-browser.mjs', 'src/fjord-play/DiscoveryFog.ts'] : []),
+    ...delivery.delivery.map(map => rockRoot + '/' + map.file)];
 const sourceHashes = Object.fromEntries(await Promise.all(sourceFiles.map(async file => [file, hash(await readFile(file))])));
-const evidence = { version: 'rock-snow-native-v1',
+const evidence = { version: summitStudy ? 'permanent-summit-native-v1' : 'rock-snow-native-v1',
     parent: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
-    viewport: { width: 1440, height: 900 }, sourceHashes, cases: [], errors: [] };
+    viewport: { width: 1440, height: 900 }, sourceHashes,
+    presentation: { discoveryOverlayHiddenForSummitInspection: summitStudy }, cases: [], errors: [] };
 await mkdir(output, { recursive: true });
 const save = () => writeFile(output + '/observations.json', JSON.stringify(evidence, null, 2) + '\n');
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
@@ -31,13 +35,15 @@ const browser = await chromium.launch({ channel: 'msedge', headless: true });
 async function captureState(page, camera) {
     const state = await page.evaluate(camera => window.__fjordAudit.golden.capture({ camera }), camera);
     const terrain = await page.evaluate(async () => {
-        const mesh = window.__fjordAudit.references.world.terrain;
+        const { world, scene } = window.__fjordAudit.references;
+        const mesh = world.terrain;
         const hash = async array => {
             const bytes = new Uint8Array(array.buffer, array.byteOffset, array.byteLength);
             const digest = await crypto.subtle.digest('SHA-256', bytes);
             return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, '0')).join('');
         };
-        return { attributes: Object.fromEntries(await Promise.all(Object.entries(mesh.geometry.attributes)
+        return { discoveryOverlayVisible: scene.getObjectByName('Clan discovery fog')?.visible ?? null,
+            attributes: Object.fromEntries(await Promise.all(Object.entries(mesh.geometry.attributes)
             .map(async ([name, attribute]) => [name, await hash(attribute.array)]))),
             index: await hash(mesh.geometry.index.array), groups: mesh.geometry.groups,
             masks: await Promise.all(mesh.material.map(material => material.alphaMap ? hash(material.alphaMap.image.data) : null)) };
@@ -80,14 +86,26 @@ try {
             await page.waitForFunction(() => window.__fjordAudit?.golden &&
                 document.querySelector('#fjord-canvas')?.dataset.ready === 'true');
             await page.addStyleTag({ content: '#fjord-management, #fjord-management-toggle, #fjord-selection-leaders, #fjord-selection-labels, #fjord-production-labels { visibility:hidden!important }' });
+            if (summitStudy) await page.evaluate(() => {
+                const fog = window.__fjordAudit.references.scene.getObjectByName('Clan discovery fog');
+                if (fog) fog.visible = false;
+            });
             const initial = await captureState(page);
             assert.deepEqual(JSON.parse(initial.state.canonicalJSON), expected);
-            const subjects = await page.evaluate(async () => {
+            const subjects = await page.evaluate(async summitStudy => {
                 const { world } = window.__fjordAudit.references;
                 const blueprint = world.blueprint, zones = blueprint.environment, terrain = blueprint.terrain;
                 const { createBlueprintSurface, terrainGradientAt } = await import('/src/world-generation/TerrainQueries.ts');
                 const surface = createBlueprintSurface(blueprint);
                 const center = blueprint.settlement.center;
+                if (summitStudy) {
+                    const peak = terrain.heights.reduce((best, y, index) => y > best.y ? { y, index } : best,
+                        { y: -Infinity, index: 0 });
+                    const x = terrain.bounds.minX + peak.index % terrain.columns * terrain.spacing;
+                    const z = terrain.bounds.minZ + Math.floor(peak.index / terrain.columns) * terrain.spacing;
+                    return [{ id: 'summit', subject: { x, y: peak.y, z },
+                        camera: { position: [x + 70, peak.y + 58, z - 80], target: [x, peak.y - 3, z] } }];
+                }
                 const points = zones.fields.rockExposure.map((rock, index) => {
                     const x = terrain.bounds.minX + index % zones.columns * zones.spacing;
                     const z = terrain.bounds.minZ + Math.floor(index / zones.columns) * zones.spacing;
@@ -103,16 +121,18 @@ try {
                     camera: { target: [point.x, point.y, point.z],
                         position: [point.x + dx * distance, point.y + elevation, point.z + dz * distance] } });
                 return [view('cliff', 40, 15), view('surface', 15, 7)];
-            });
-            const poses = [{ id: 'settlement', camera: initial.state.camera }, ...subjects];
-            await page.evaluate(async quality => {
-                const { installRockSnowStudy } = await import('/scripts/qa/fjord-rock-snow-study-browser.mjs');
-                window.__rockSnowStudy = await installRockSnowStudy(window.__fjordAudit, quality);
+            }, summitStudy);
+            const poses = summitStudy ? subjects : [{ id: 'settlement', camera: initial.state.camera }, ...subjects];
+            await page.evaluate(async ({ quality, summitStudy }) => {
+                const installer = summitStudy
+                    ? (await import('/scripts/qa/fjord-summit-snow-study-browser.mjs')).installSummitSnowStudy
+                    : (await import('/scripts/qa/fjord-rock-snow-study-browser.mjs')).installRockSnowStudy;
+                window.__rockSnowStudy = await installer(window.__fjordAudit, quality);
                 for (const mode of ['candidate', 'current']) {
                     window.__rockSnowStudy.select(mode);
                     await window.__fjordAudit.golden.capture();
                 }
-            }, quality);
+            }, { quality, summitStudy });
             for (const pose of poses) {
                 const view = { ...pose, variants: [] };
                 entry.views.push(view);

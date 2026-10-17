@@ -6,10 +6,11 @@ import sharp from 'sharp';
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const root = 'docs/qa/iceland-rock-snow-180';
+const summitStudy = process.env.QA_STUDY === 'summit';
+const root = summitStudy ? 'docs/qa/iceland-summit-snow-180' : 'docs/qa/iceland-rock-snow-180';
 const evidence = JSON.parse(await readFile(root + '/observations.json', 'utf8'));
 assert.equal(evidence.status, 'PASS');
-const origin = process.env.QA_GALLERY_ORIGIN || 'http://127.0.0.1:5197/docs/qa/iceland-rock-snow-180/';
+const origin = process.env.QA_GALLERY_ORIGIN || 'http://127.0.0.1:5197/' + root + '/';
 const result = { version: 'rock-gallery-check-v1', origin, pairs: [], errors: [] };
 const hash = value => createHash('sha256').update(value).digest('hex');
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
@@ -24,7 +25,7 @@ try {
         await page.selectOption('#fixture', entry.fixture);
         await page.selectOption('#quality', entry.quality);
         for (const view of entry.views) {
-            await page.selectOption('#view', view.id);
+            if (!summitStudy) await page.selectOption('#view', view.id);
             await page.evaluate(async () => Promise.all(['current', 'candidate'].map(id => document.getElementById(id).decode())));
             for (const id of ['current', 'candidate']) {
                 const variant = view.variants.find(item => item.variant === id);
@@ -61,7 +62,7 @@ try {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.selectOption('#fixture', 'snow-811');
     await page.selectOption('#quality', 'standard');
-    await page.selectOption('#view', 'cliff');
+    if (!summitStudy) await page.selectOption('#view', 'cliff');
     await page.evaluate(async () => Promise.all(['current', 'candidate'].map(id => document.getElementById(id).decode())));
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({ path: root + '/gallery-phone.jpg', fullPage: true, type: 'jpeg', quality: 85 });

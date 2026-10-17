@@ -1,0 +1,3668 @@
+{
+  "version": "permanent-summit-native-v1",
+  "parent": "af9e9f0abcd95dcbc6462e681b1c84e681e15320",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "sourceHashes": {
+    "src/world/SeasonTint.ts": "a44045ee5d1ccbb3b1ce139f412cb00b269c51fa1d8baa7d23e3c3256ebc6b98",
+    "src/world/GroundBlending.ts": "defaaca158339f2541c4dbb211ade21c0a1fe33dc2d1f4d78ae430a21dd8e02e",
+    "src/world/BlueprintTerrain.ts": "8bc6b94f86c0887b180ae468ffc495e10c8e9961a898b5e72769884a7848b63c",
+    "src/core/WorldLighting.ts": "80c27282b1bc0d6d33fb9d5190c1f08cbb1eecf5105bf86bb4225c7212ecf04c",
+    "src/config/FjordPresentation.ts": "2621528af265c689d9481ee7fdc601945a22c7e69ef72276ae7c0597773db46a",
+    "src/fjord-play/CampaignIsland.ts": "363e75670aff214dbd39dfa87b2b521d51974d83f6ce982d9e375b3b864170c1",
+    "scripts/qa/fjord-rock-snow-study-browser.mjs": "ac4d121a449dda338646542954e4b618e42e96d3c6b4aed6ed4df819b2dfa898",
+    "scripts/qa/capture-rock-snow-180.mjs": "f9265fa35e5442caa2b79de6da77a3d3f753fa3feb17e4c5a31b2e7ab6f24b55",
+    "scripts/qa/prepare-rock-surface-180.mjs": "c96e208d45216ddcb71e28a0ef3ebbea66710b81a133ed482bf1d88967a1b412",
+    "docs/qa/iceland-rock-snow-180/delivery.json": "41ad49fd5f5ff38bdfbff8d1b2ac7e3c989c54b6b0e13e89a5b89880be1374e1",
+    "docs/qa/iceland-textures-180/sources/weathered-basalt.png": "0e5b71a775788ed3045754ad6ad7cf2289eb329cb21dbd0eb4d22d9c0bc841ec",
+    "scripts/qa/fjord-summit-snow-study-browser.mjs": "40f63a3ad9c914765d36f91b4fb3f99c537dcd911bb867d10f5ea9440b390895",
+    "src/fjord-play/DiscoveryFog.ts": "87a1217401bdae3f74015570185d31a36f95d8cb1b424296ba857094ac034e6d",
+    "docs/qa/iceland-rock-snow-180/delivery/standard/readable-basalt.webp": "dec8c4c01866c79d575781a17e9bacb70cf7e6f03e762b24caa39d53cc7a193d",
+    "docs/qa/iceland-rock-snow-180/delivery/low/readable-basalt.webp": "dc24e039ff7615a8b8f27fd6461938c9a307dc266b2e7cdd0c605761a20dcade"
+  },
+  "presentation": {
+    "discoveryOverlayHiddenForSummitInspection": true
+  },
+  "cases": [
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "fixtureSha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "views": [
+        {
+          "id": "summit",
+          "subject": {
+            "x": -76,
+            "y": 45.9556884765625,
+            "z": -76
+          },
+          "camera": {
+            "position": [
+              -6,
+              103.9556884765625,
+              -156
+            ],
+            "target": [
+              -76,
+              42.9556884765625,
+              -76
+            ]
+          },
+          "variants": [
+            {
+              "variant": "current",
+              "image": "developed-810-standard-summit-current.jpg",
+              "jpegSha256": "56bfa169474707e28904cda3935eb0dd7f5429a1b71ee634d11331dc025dd282",
+              "rawPixelsSha256": "942ac02470d359f1f07927423c352ccbc19537b07865d60b7e5dbc5f09888c45",
+              "canonical": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "a13ffbf1d9bba88c4072d54bbce259d3e069184e50f7bf40c53376527aa19229",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    2048,
+                    2048
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 810,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6461880,
+                "geometries": 68,
+                "textures": 76,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "current",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            },
+            {
+              "variant": "candidate",
+              "image": "developed-810-standard-summit-candidate.jpg",
+              "jpegSha256": "a47bf58402dc158c524cc9d222fad1eef224583f3889ebaede7fbed788e23912",
+              "rawPixelsSha256": "913476c318c82545d4805bc9dcff476ff4b165d33403f6540db6813cebf1e718",
+              "canonical": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "a13ffbf1d9bba88c4072d54bbce259d3e069184e50f7bf40c53376527aa19229",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    2048,
+                    2048
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 810,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6461880,
+                "geometries": 68,
+                "textures": 76,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "candidate",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            }
+          ],
+          "restoredPixelsMatch": true
+        }
+      ]
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "fixtureSha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "views": [
+        {
+          "id": "summit",
+          "subject": {
+            "x": -76,
+            "y": 45.9556884765625,
+            "z": -76
+          },
+          "camera": {
+            "position": [
+              -6,
+              103.9556884765625,
+              -156
+            ],
+            "target": [
+              -76,
+              42.9556884765625,
+              -76
+            ]
+          },
+          "variants": [
+            {
+              "variant": "current",
+              "image": "developed-810-low-summit-current.jpg",
+              "jpegSha256": "cb241d61a9558c9816d429293a271e8a892101c686058eed11709ceff946a2ea",
+              "rawPixelsSha256": "bbb0bd28dc3071318356597488117b56366e3d0fb52bb4ca319693cead814b90",
+              "canonical": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "a13ffbf1d9bba88c4072d54bbce259d3e069184e50f7bf40c53376527aa19229",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    1024,
+                    1024
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 810,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6455736,
+                "geometries": 68,
+                "textures": 72,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "current",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            },
+            {
+              "variant": "candidate",
+              "image": "developed-810-low-summit-candidate.jpg",
+              "jpegSha256": "757131d2b839cd1808001f60df8febe0ba85d97fecbe9738da46e965fc5205a1",
+              "rawPixelsSha256": "e466b8b0b4b0155b668ae86098cb31137b2a2136f614cbfa8aaa14e29667cbb7",
+              "canonical": "d959eea44435e8864c1a1994a17ea9794362f82ba94469806de2ba747c2160c3",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "a13ffbf1d9bba88c4072d54bbce259d3e069184e50f7bf40c53376527aa19229",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    1024,
+                    1024
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 810,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6455736,
+                "geometries": 68,
+                "textures": 72,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "candidate",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            }
+          ],
+          "restoredPixelsMatch": true
+        }
+      ]
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "fixtureSha256": "1ad9d7a7f2ad8f56a4fb8e3708fe98e83e63a1a4a182c42854e443b631977e8a",
+      "views": [
+        {
+          "id": "summit",
+          "subject": {
+            "x": -76,
+            "y": 45.9556884765625,
+            "z": -76
+          },
+          "camera": {
+            "position": [
+              -6,
+              103.9556884765625,
+              -156
+            ],
+            "target": [
+              -76,
+              42.9556884765625,
+              -76
+            ]
+          },
+          "variants": [
+            {
+              "variant": "current",
+              "image": "snow-811-standard-summit-current.jpg",
+              "jpegSha256": "1fa683149cde99c857aca637e7066bbdf54b57d952bddbf41a2d1329f8eef982",
+              "rawPixelsSha256": "246a6e51e460d472098ed10657ef34f353eafdaa69d0fbf33b8b58e97b6d7f5a",
+              "canonical": "2d845e50bfda4ceab14f5ef774ec07979ff192f83b8f4947f00f625bc6362077",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "f916dddd1ab07e54421863a1187ebe26c7abbe15d631f3235f5d5efe3ee4216b",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  0.7784441031329561,
+                  0.8259884058613945,
+                  0.9344886313902027
+                ],
+                "intensity": 1.6632000000000005,
+                "ambient": 0.8954400000000001,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    2048,
+                    2048
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Winter",
+                "year": 811,
+                "progress": 0,
+                "visualProgress": 0,
+                "winterWeight": 1
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6461880,
+                "geometries": 68,
+                "textures": 77,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "current",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            },
+            {
+              "variant": "candidate",
+              "image": "snow-811-standard-summit-candidate.jpg",
+              "jpegSha256": "59b6ae064d8424bfb97ab40b31e5666bef7f0850673bf9130ea414b15cc83a2e",
+              "rawPixelsSha256": "603e94fcdfa1438290db34bf9df23cecf08da2c20b42747343ef7716ad88dc20",
+              "canonical": "2d845e50bfda4ceab14f5ef774ec07979ff192f83b8f4947f00f625bc6362077",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "f916dddd1ab07e54421863a1187ebe26c7abbe15d631f3235f5d5efe3ee4216b",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  0.7784441031329561,
+                  0.8259884058613945,
+                  0.9344886313902027
+                ],
+                "intensity": 1.6632000000000005,
+                "ambient": 0.8954400000000001,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    2048,
+                    2048
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Winter",
+                "year": 811,
+                "progress": 0,
+                "visualProgress": 0,
+                "winterWeight": 1
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6461880,
+                "geometries": 68,
+                "textures": 77,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "candidate",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            }
+          ],
+          "restoredPixelsMatch": true
+        }
+      ]
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "fixtureSha256": "1ad9d7a7f2ad8f56a4fb8e3708fe98e83e63a1a4a182c42854e443b631977e8a",
+      "views": [
+        {
+          "id": "summit",
+          "subject": {
+            "x": -76,
+            "y": 45.9556884765625,
+            "z": -76
+          },
+          "camera": {
+            "position": [
+              -6,
+              103.9556884765625,
+              -156
+            ],
+            "target": [
+              -76,
+              42.9556884765625,
+              -76
+            ]
+          },
+          "variants": [
+            {
+              "variant": "current",
+              "image": "snow-811-low-summit-current.jpg",
+              "jpegSha256": "0fd3bf62ff6849221a0a7bbd4e02264898e847b12588c1d9df5f6d19cba3510f",
+              "rawPixelsSha256": "63a8e76b39f86b9c610fe083ffea7ce8f52c271f413c3e1a7cc73a55379bda8a",
+              "canonical": "2d845e50bfda4ceab14f5ef774ec07979ff192f83b8f4947f00f625bc6362077",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "f916dddd1ab07e54421863a1187ebe26c7abbe15d631f3235f5d5efe3ee4216b",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  0.7784441031329561,
+                  0.8259884058613945,
+                  0.9344886313902027
+                ],
+                "intensity": 1.6632000000000005,
+                "ambient": 0.8954400000000001,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    1024,
+                    1024
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Winter",
+                "year": 811,
+                "progress": 0,
+                "visualProgress": 0,
+                "winterWeight": 1
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6455736,
+                "geometries": 68,
+                "textures": 73,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "current",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            },
+            {
+              "variant": "candidate",
+              "image": "snow-811-low-summit-candidate.jpg",
+              "jpegSha256": "8380321c1c4c3b4aaec7244bda9c65bf148fbc8a7ac68d5fd2922c51d47c9b8f",
+              "rawPixelsSha256": "2a1bcb0312e27969667c2428302ac4e106f5a6760baafebd7596b855bb16d8fe",
+              "canonical": "2d845e50bfda4ceab14f5ef774ec07979ff192f83b8f4947f00f625bc6362077",
+              "blueprint": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+              "actors": "f916dddd1ab07e54421863a1187ebe26c7abbe15d631f3235f5d5efe3ee4216b",
+              "camera": {
+                "position": [
+                  -6,
+                  158.73034092850864,
+                  -156
+                ],
+                "target": [
+                  -76,
+                  42.9556884765625,
+                  -76
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  0.7784441031329561,
+                  0.8259884058613945,
+                  0.9344886313902027
+                ],
+                "intensity": 1.6632000000000005,
+                "ambient": 0.8954400000000001,
+                "fog": {
+                  "near": 162.17433044352032,
+                  "far": 252.17433044352032
+                },
+                "shadowMaps": [
+                  [
+                    1024,
+                    1024
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "13b817af532419ac8b454e0e657b005973ababae999cc9a2e5187bba1398e5bd",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "408062697e4a333c6e8e3bb920bdc544d949c5e03cc13b282b3122cc5b2e8327",
+                  "normal": "f202be60e7bcabc912c267a62217942eb5f892ada63705c48dc2dc1278bf8618",
+                  "uv2": "cf7c1f9d312b3a6afad26d8436f5c32b85c6dbcaee88241205e7bd3b19f6840a",
+                  "uv3": "88ac93f0de150b3e6f5aec96f60cfb75ab5a66053e2e8bd83b893d85d5c7faaf"
+                },
+                "index": "06e1035701ead4f1683f46c173658008e0f32608119241af7a3ec58301b47225",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 703206,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1663230,
+                    "count": 99492,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1762722,
+                    "count": 286716,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2049438,
+                    "count": 79050,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2128488,
+                    "count": 77850,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "b4d3e82ee88996b7ebe1168bae87356d84216d61aa33de000556e20672de4917",
+                  "6eedea36f39bc600f9c1bc73e788184652012ac8a87e64da99b93382451773b3",
+                  "d3098713301a7a0c1f0301becc8f7855ba16d7e9592e901903d599fe87b5ef34",
+                  "f74f9b568176fc7f47f01d76bef78945bb71f8654d2fd77cde366b0083c1a2b4",
+                  "127f00f38c6c4af98a207ba0d354c3b13fa9a76f3b6abe8d855408a6b0ebcc51"
+                ]
+              },
+              "calendar": {
+                "season": "Winter",
+                "year": 811,
+                "progress": 0,
+                "visualProgress": 0,
+                "winterWeight": 1
+              },
+              "renderer": {
+                "callsIncludingShadows": 109,
+                "trianglesIncludingShadows": 6455736,
+                "geometries": 68,
+                "textures": 73,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "candidate",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 45.9556884765625,
+                  "waterY": -0.12,
+                  "snowLineY": 41.348119628906254,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            }
+          ],
+          "restoredPixelsMatch": true
+        }
+      ]
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "fixtureSha256": "f75303e98e3e0e2740ef7e394059f1a358507d128d3ead808c8a881c24653dde",
+      "views": [
+        {
+          "id": "summit",
+          "subject": {
+            "x": -16,
+            "y": 42.65959167480469,
+            "z": 40
+          },
+          "camera": {
+            "position": [
+              54,
+              100.65959167480469,
+              -40
+            ],
+            "target": [
+              -16,
+              39.65959167480469,
+              40
+            ]
+          },
+          "variants": [
+            {
+              "variant": "current",
+              "image": "summer-17-standard-summit-current.jpg",
+              "jpegSha256": "aa5f9039913d089d8b534e26783d2db0ba2808fbcbae26c331936fbb1c399122",
+              "rawPixelsSha256": "d91534e604befdd89202cc1f86e23a83f4ecb46c6e66d69f03acdcb0646e359c",
+              "canonical": "ee468d728bdc0bc644e5f1d4dc6938c2681e87ab38e0e8c7ee2b2bca407dcd84",
+              "blueprint": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+              "actors": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+              "camera": {
+                "position": [
+                  54,
+                  155.5854648193177,
+                  -39.999999999999986
+                ],
+                "target": [
+                  -16,
+                  39.65959167480469,
+                  40
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.28575289681427,
+                  "far": 252.28575289681427
+                },
+                "shadowMaps": [
+                  [
+                    2048,
+                    2048
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "c5a1da3627984f1b62abf2fd46e6fdc085a6f3e4f9d20ca73f73c438e49abd77",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "d1686b7268f2ed9b30d1e203999be9a9872db212f8089597e1b4e02c8c3a72d2",
+                  "normal": "dd34716da39767b73c002c84c7210a4bcab6b8ba0ccfd88c4f7cb37607b79e30",
+                  "uv2": "b094aedb3701a519ac0eafe9cab5dea2b13075cd6ea159bd15de498d62620a62",
+                  "uv3": "bf1bf6ffe3428a694b62fa387f98572d86184c48cbf2ca00f9babb8cffba8f02"
+                },
+                "index": "2b20476aeae81e948cd6d6cdd5531b5b26b3fbdb2a0c519d7df6034c64a6dde6",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 778404,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1738428,
+                    "count": 58902,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1797330,
+                    "count": 213558,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2010888,
+                    "count": 47838,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2058726,
+                    "count": 49650,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "8dbfde9ea76cc27375c2710eaddb80a11d10e85289e0e21db1d444e3224bc55e",
+                  "ad243c75c1a9dce16d1e2ec304a2ed3a2472bdad782c0e62085d9cb89babd189",
+                  "68d023b96a708b6982e2fe27925b38859dfea7f80b042394632fb57cd5aaffca",
+                  "6ee40ac99ae87d533a7c288fde92160df8ea7b1924d6a8ff19296c516d1bf6f4",
+                  "5dc9ec58ecd1a5bbee1b6897787aeb299a23432e2545d7f07453ae0e2ee2920a"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 800,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 135,
+                "trianglesIncludingShadows": 7783230,
+                "geometries": 80,
+                "textures": 61,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "current",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 42.65959167480469,
+                  "waterY": -0.12,
+                  "snowLineY": 38.38163250732422,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            },
+            {
+              "variant": "candidate",
+              "image": "summer-17-standard-summit-candidate.jpg",
+              "jpegSha256": "f8f4fd154e03d05a107e929cbc584434f8c455c4ea15fa5ae63dd114d0e0ebc4",
+              "rawPixelsSha256": "2e6f50c637a0ef3e50f09f0f48fd348ef0ffa939e6da206410277365f51be448",
+              "canonical": "ee468d728bdc0bc644e5f1d4dc6938c2681e87ab38e0e8c7ee2b2bca407dcd84",
+              "blueprint": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+              "actors": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+              "camera": {
+                "position": [
+                  54,
+                  155.5854648193177,
+                  -39.999999999999986
+                ],
+                "target": [
+                  -16,
+                  39.65959167480469,
+                  40
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.28575289681427,
+                  "far": 252.28575289681427
+                },
+                "shadowMaps": [
+                  [
+                    2048,
+                    2048
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "c5a1da3627984f1b62abf2fd46e6fdc085a6f3e4f9d20ca73f73c438e49abd77",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "d1686b7268f2ed9b30d1e203999be9a9872db212f8089597e1b4e02c8c3a72d2",
+                  "normal": "dd34716da39767b73c002c84c7210a4bcab6b8ba0ccfd88c4f7cb37607b79e30",
+                  "uv2": "b094aedb3701a519ac0eafe9cab5dea2b13075cd6ea159bd15de498d62620a62",
+                  "uv3": "bf1bf6ffe3428a694b62fa387f98572d86184c48cbf2ca00f9babb8cffba8f02"
+                },
+                "index": "2b20476aeae81e948cd6d6cdd5531b5b26b3fbdb2a0c519d7df6034c64a6dde6",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 778404,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1738428,
+                    "count": 58902,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1797330,
+                    "count": 213558,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2010888,
+                    "count": 47838,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2058726,
+                    "count": 49650,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "8dbfde9ea76cc27375c2710eaddb80a11d10e85289e0e21db1d444e3224bc55e",
+                  "ad243c75c1a9dce16d1e2ec304a2ed3a2472bdad782c0e62085d9cb89babd189",
+                  "68d023b96a708b6982e2fe27925b38859dfea7f80b042394632fb57cd5aaffca",
+                  "6ee40ac99ae87d533a7c288fde92160df8ea7b1924d6a8ff19296c516d1bf6f4",
+                  "5dc9ec58ecd1a5bbee1b6897787aeb299a23432e2545d7f07453ae0e2ee2920a"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 800,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 135,
+                "trianglesIncludingShadows": 7783230,
+                "geometries": 80,
+                "textures": 61,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "candidate",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 1024,
+                        "height": 1024,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        1024,
+                        1024
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 42.65959167480469,
+                  "waterY": -0.12,
+                  "snowLineY": 38.38163250732422,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            }
+          ],
+          "restoredPixelsMatch": true
+        }
+      ]
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "fixtureSha256": "f75303e98e3e0e2740ef7e394059f1a358507d128d3ead808c8a881c24653dde",
+      "views": [
+        {
+          "id": "summit",
+          "subject": {
+            "x": -16,
+            "y": 42.65959167480469,
+            "z": 40
+          },
+          "camera": {
+            "position": [
+              54,
+              100.65959167480469,
+              -40
+            ],
+            "target": [
+              -16,
+              39.65959167480469,
+              40
+            ]
+          },
+          "variants": [
+            {
+              "variant": "current",
+              "image": "summer-17-low-summit-current.jpg",
+              "jpegSha256": "bcfa7f2ae2696f070085ed2361c9ab6e08c5d352788fb3d7e333de81f716aa21",
+              "rawPixelsSha256": "ffc5e49d2d579d0b8befe037f63ef078710c4090a87acc70830a058497836346",
+              "canonical": "ee468d728bdc0bc644e5f1d4dc6938c2681e87ab38e0e8c7ee2b2bca407dcd84",
+              "blueprint": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+              "actors": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+              "camera": {
+                "position": [
+                  54,
+                  155.5854648193177,
+                  -39.999999999999986
+                ],
+                "target": [
+                  -16,
+                  39.65959167480469,
+                  40
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.28575289681427,
+                  "far": 252.28575289681427
+                },
+                "shadowMaps": [
+                  [
+                    1024,
+                    1024
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "c5a1da3627984f1b62abf2fd46e6fdc085a6f3e4f9d20ca73f73c438e49abd77",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "d1686b7268f2ed9b30d1e203999be9a9872db212f8089597e1b4e02c8c3a72d2",
+                  "normal": "dd34716da39767b73c002c84c7210a4bcab6b8ba0ccfd88c4f7cb37607b79e30",
+                  "uv2": "b094aedb3701a519ac0eafe9cab5dea2b13075cd6ea159bd15de498d62620a62",
+                  "uv3": "bf1bf6ffe3428a694b62fa387f98572d86184c48cbf2ca00f9babb8cffba8f02"
+                },
+                "index": "2b20476aeae81e948cd6d6cdd5531b5b26b3fbdb2a0c519d7df6034c64a6dde6",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 778404,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1738428,
+                    "count": 58902,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1797330,
+                    "count": 213558,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2010888,
+                    "count": 47838,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2058726,
+                    "count": 49650,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "8dbfde9ea76cc27375c2710eaddb80a11d10e85289e0e21db1d444e3224bc55e",
+                  "ad243c75c1a9dce16d1e2ec304a2ed3a2472bdad782c0e62085d9cb89babd189",
+                  "68d023b96a708b6982e2fe27925b38859dfea7f80b042394632fb57cd5aaffca",
+                  "6ee40ac99ae87d533a7c288fde92160df8ea7b1924d6a8ff19296c516d1bf6f4",
+                  "5dc9ec58ecd1a5bbee1b6897787aeb299a23432e2545d7f07453ae0e2ee2920a"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 800,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 135,
+                "trianglesIncludingShadows": 7777086,
+                "geometries": 80,
+                "textures": 57,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "current",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 42.65959167480469,
+                  "waterY": -0.12,
+                  "snowLineY": 38.38163250732422,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            },
+            {
+              "variant": "candidate",
+              "image": "summer-17-low-summit-candidate.jpg",
+              "jpegSha256": "1fabaaa58a9ca16c60a3da2135042c708ac1791ec064df4a14ae043fcfcd5f1f",
+              "rawPixelsSha256": "8b5ccff822319c690f3774aa829aacc54ab83d873398806500722caac9488752",
+              "canonical": "ee468d728bdc0bc644e5f1d4dc6938c2681e87ab38e0e8c7ee2b2bca407dcd84",
+              "blueprint": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+              "actors": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+              "camera": {
+                "position": [
+                  54,
+                  155.5854648193177,
+                  -39.999999999999986
+                ],
+                "target": [
+                  -16,
+                  39.65959167480469,
+                  40
+                ],
+                "fov": 45,
+                "aspect": 1.892555290208701,
+                "projection": [
+                  1.2756370050921304,
+                  0,
+                  0,
+                  0,
+                  0,
+                  2.4142135623730954,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.0000833368057,
+                  -1,
+                  0,
+                  0,
+                  -0.20000833368057003,
+                  0
+                ]
+              },
+              "lighting": {
+                "sun": [
+                  1,
+                  0.764083169975467,
+                  0.46028080090342743
+                ],
+                "intensity": 2.7216000000000005,
+                "ambient": 1.15752,
+                "fog": {
+                  "near": 162.28575289681427,
+                  "far": 252.28575289681427
+                },
+                "shadowMaps": [
+                  [
+                    1024,
+                    1024
+                  ]
+                ]
+              },
+              "terrain": {
+                "discoveryOverlayVisible": null,
+                "attributes": {
+                  "position": "c5a1da3627984f1b62abf2fd46e6fdc085a6f3e4f9d20ca73f73c438e49abd77",
+                  "uv": "25c12d42c97b5c9402fb7a09e77f0a6e069c4f76667f482947b1bc87382e3076",
+                  "uv1": "05c656fd5903cd53bb6bb6793056404ac9fac57e5aa08ba8189d9b54f5526837",
+                  "color": "d1686b7268f2ed9b30d1e203999be9a9872db212f8089597e1b4e02c8c3a72d2",
+                  "normal": "dd34716da39767b73c002c84c7210a4bcab6b8ba0ccfd88c4f7cb37607b79e30",
+                  "uv2": "b094aedb3701a519ac0eafe9cab5dea2b13075cd6ea159bd15de498d62620a62",
+                  "uv3": "bf1bf6ffe3428a694b62fa387f98572d86184c48cbf2ca00f9babb8cffba8f02"
+                },
+                "index": "2b20476aeae81e948cd6d6cdd5531b5b26b3fbdb2a0c519d7df6034c64a6dde6",
+                "groups": [
+                  {
+                    "start": 0,
+                    "count": 960024,
+                    "materialIndex": 0
+                  },
+                  {
+                    "start": 960024,
+                    "count": 778404,
+                    "materialIndex": 1
+                  },
+                  {
+                    "start": 1738428,
+                    "count": 58902,
+                    "materialIndex": 2
+                  },
+                  {
+                    "start": 1797330,
+                    "count": 213558,
+                    "materialIndex": 3
+                  },
+                  {
+                    "start": 2010888,
+                    "count": 47838,
+                    "materialIndex": 4
+                  },
+                  {
+                    "start": 2058726,
+                    "count": 49650,
+                    "materialIndex": 5
+                  }
+                ],
+                "masks": [
+                  null,
+                  "8dbfde9ea76cc27375c2710eaddb80a11d10e85289e0e21db1d444e3224bc55e",
+                  "ad243c75c1a9dce16d1e2ec304a2ed3a2472bdad782c0e62085d9cb89babd189",
+                  "68d023b96a708b6982e2fe27925b38859dfea7f80b042394632fb57cd5aaffca",
+                  "6ee40ac99ae87d533a7c288fde92160df8ea7b1924d6a8ff19296c516d1bf6f4",
+                  "5dc9ec58ecd1a5bbee1b6897787aeb299a23432e2545d7f07453ae0e2ee2920a"
+                ]
+              },
+              "calendar": {
+                "season": "Summer",
+                "year": 800,
+                "progress": 0.5,
+                "visualProgress": 0.5,
+                "winterWeight": 0
+              },
+              "renderer": {
+                "callsIncludingShadows": 135,
+                "trianglesIncludingShadows": 7777086,
+                "geometries": 80,
+                "textures": 57,
+                "pixelRatio": 1,
+                "width": 1424,
+                "height": 752
+              },
+              "materials": {
+                "mode": "candidate",
+                "parent": {
+                  "mode": "candidate",
+                  "parent": {
+                    "mode": "iceland-albedo",
+                    "addedColourSources": 4,
+                    "maps": [
+                      {
+                        "name": "Ground037",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "Ground054",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "grass_path_2",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 0,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 2,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      },
+                      {
+                        "name": "mossy_rock",
+                        "channel": 3,
+                        "repeat": [
+                          0.125,
+                          0.125
+                        ],
+                        "anisotropy": 4,
+                        "width": 512,
+                        "height": 512,
+                        "normalMap": false,
+                        "roughnessMap": false,
+                        "roughness": 1
+                      }
+                    ]
+                  },
+                  "addedRockColourSources": 1,
+                  "snow": {
+                    "from": "Existing canonical seasonSnowAmount uniform",
+                    "retentionNormalY": [
+                      0.72,
+                      0.96
+                    ],
+                    "newMaps": 0,
+                    "newPasses": 0,
+                    "textureSnowPainted": false
+                  },
+                  "rock": [
+                    {
+                      "channel": 0,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 2,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    },
+                    {
+                      "channel": 3,
+                      "repeat": [
+                        0.125,
+                        0.125
+                      ],
+                      "color": "ffffff",
+                      "pixels": [
+                        512,
+                        512
+                      ]
+                    }
+                  ]
+                },
+                "summit": {
+                  "peakY": 42.65959167480469,
+                  "waterY": -0.12,
+                  "snowLineY": 38.38163250732422,
+                  "relativeLine": 0.9,
+                  "minimumNormalY": 0.97,
+                  "maximumSlopeDegrees": 14.069867747572134,
+                  "boundary": "Binary height and slope steps; no terrain blend band",
+                  "iceColor": "dfedf4",
+                  "seasonalDependency": false,
+                  "newMaps": 0,
+                  "newPasses": 0,
+                  "limitation": "Relative game-scale art direction; existing islands are 43–46m high. Not real-world glaciology."
+                }
+              }
+            }
+          ],
+          "restoredPixelsMatch": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}
