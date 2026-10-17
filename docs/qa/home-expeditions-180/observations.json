@@ -1,0 +1,20 @@
+{
+  "checks": [
+    "Three physical clicks: world home selection, specialization chooser, occupation icon",
+    "A synthetic obsolete upgrade button is rejected without spending Materials",
+    "Direct upgrades, accurate stock costs, unchanged occupations/time/RNG, retained levels, unavailable reasons, advanced controls retained",
+    "Old save keeps discovery disabled; visible new-campaign option creates one live island rival",
+    "Selected home never hides Expeditions; inline membership works; real confirmation spends 4 Food once; actual world targeting, travel and return complete"
+  ],
+  "errors": [],
+  "origin": "http://127.0.0.1:5176",
+  "sourceHashes": {
+    "FjordInterface.ts": "6134c6e8e96cdf38e7f6e550801c3a1f22468b6f75fad7a3929927ddc68109a4",
+    "HomeImprovements.ts": "eb3a916c28f5e0b71ca91d7f206d1e08247aa9b936098bad117c096450dbfd28",
+    "ExpeditionPanel.ts": "599eb916234fbecaba0a7bda064e362a9661a1986703d514fb97672d65305f9c",
+    "FjordPlay.ts": "8492537b37b514f334f2345d936bdc5664f1f459105a1a364e8fdc7ef3e161d4",
+    "FjordHeader.ts": "e3165eb266d069f60ca59e516fc938bcc5c1da4d63f4c2bd6cc6886fa5316a1f",
+    "fjord-interface.css": "4a5c7e4476a81829ca0653e09a9f6eaf13f3d0f6333adc0e57d9fdd052cd3577"
+  },
+  "status": "PASS"
+}

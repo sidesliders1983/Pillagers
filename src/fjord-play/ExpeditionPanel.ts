@@ -6,7 +6,7 @@ import type { Point2 } from '../world-generation/WorldBlueprint';
 const escape = (value: string) => value.replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
 
-/** Selection supplies context; all membership, eligibility, costs and travel remain Core commands. */
+/** Global group overview; membership, eligibility, costs and travel remain Core-owned. */
 export class ExpeditionPanel {
     private groupId = '';
     private controlsHTML = '';
@@ -16,7 +16,6 @@ export class ExpeditionPanel {
     constructor(private root: HTMLElement, private session: GameplaySession,
         private command: (command: SimulationCommand) => void,
         private targetChanged: (point?: Point2) => void,
-        private selection: () => { kind: string; id: string } | null,
         private origins: (memberIds: readonly string[]) => Record<string, Point2>) {
         root.innerHTML = '<div id="expedition-controls"></div>' +
             '<p id="expedition-status" role="status" aria-live="polite"></p>' +
@@ -52,7 +51,10 @@ export class ExpeditionPanel {
             }
             if (button.dataset.cancelExpedition)
                 this.command({ type: 'CancelExpedition', groupId: button.dataset.cancelExpedition });
-            if (button.id === 'expedition-create') this.command({ type: 'CreateExplorationGroup' });
+            if (button.id === 'expedition-create') {
+                this.groupId = '';
+                this.command({ type: 'CreateExplorationGroup' });
+            }
             if (button.dataset.explore) {
                 this.groupId = button.dataset.explore;
                 this.choosing = true; this.targetChanged();
@@ -62,16 +64,14 @@ export class ExpeditionPanel {
             }
             if (button.dataset.recall)
                 this.command({ type: 'RecallExpedition', groupId: button.dataset.recall });
-            if (button.id === 'expedition-add' || button.dataset.remove) {
-                const person = this.selection();
-                const groupId = button.dataset.remove ?? this.root.querySelector<HTMLSelectElement>('#expedition-join')!.value;
-                if (person?.kind === 'persona' && groupId)
-                    this.command({
-                        type: 'SetExplorationMember', groupId, personaId: person.id,
-                        included: !button.dataset.remove
-                    });
-            }
             if (button.id === 'expedition-cancel') this.cancelTarget();
+        });
+        root.addEventListener('change', event => {
+            const input = event.target;
+            if (!(input instanceof HTMLInputElement) || !input.dataset.member || !input.dataset.memberGroup) return;
+            this.groupId = input.dataset.memberGroup;
+            this.command({ type: 'SetExplorationMember', groupId: this.groupId,
+                personaId: input.dataset.member, included: input.checked });
         });
     }
     private get status() { return this.root.querySelector<HTMLElement>('#expedition-status')!; }
@@ -93,7 +93,8 @@ export class ExpeditionPanel {
         }
         this.refresh();
         const last = this.root.querySelectorAll<HTMLDetailsElement>('details[data-group]');
-        if (last.length) last[last.length - 1].open = true;
+        const changed = Array.from(last).find(detail => detail.dataset.group === this.groupId) ?? last[last.length - 1];
+        if (changed) changed.open = true;
     }
     chooseTarget(point: Point2) {
         if (!this.choosing) return false;
@@ -114,64 +115,63 @@ export class ExpeditionPanel {
         }
         return true;
     }
+    private members(state: ReturnType<GameplaySession['readSnapshot']>, groupId: string): string {
+        const group = state.world!.groups[groupId];
+        return '<div class="fjord-expedition-members" aria-label="Group members">' + Object.values(state.personas)
+            .filter(person => person.deathWinter === null || group.memberIds.includes(person.id))
+            .map(person => {
+                const included = group.memberIds.includes(person.id);
+                const allowed = !!state.discovery && !groupMission(state, groupId) &&
+                    (included || expeditionEligible(state, person.id, groupId));
+                return `<label><input type="checkbox" data-member="${escape(person.id)}" data-member-group="${escape(groupId)}" ${included ? 'checked' : ''} ${allowed ? '' : 'disabled'}>
+                    <span>${escape(person.name)}${!allowed ? '<small>Unavailable for this group</small>' : ''}</span></label>`;
+            }).join('') + '</div>';
+    }
     refresh() {
-        const state = this.session.readSnapshot(), selected = this.selection(), view = inspectWorld(state);
+        const state = this.session.readSnapshot();
+        // Destination cleanup still runs while the directory is closed; roster rendering does not.
+        if (this.groupId && !state.world?.groups[this.groupId]) this.cancelTarget();
+        if (this.showingDestination && !Object.values(state.world?.spatial?.missions ?? {}).some(mission =>
+            mission.groupId === this.groupId && mission.status !== 'Returned')) {
+            this.showingDestination = false; this.targetChanged();
+        }
+        const workspace = this.root.closest<HTMLElement>('#fjord-workspace');
+        if (workspace && (workspace.hidden || workspace.dataset.surface !== 'expeditions')) return;
+        const view = inspectWorld(state);
         const controls = this.root.querySelector<HTMLElement>('#expedition-controls')!;
         const open = new Set(Array.from(controls.querySelectorAll<HTMLDetailsElement>('details[open]')).map(d => d.dataset.group));
-        const selectedGroup = controls.querySelector<HTMLSelectElement>('#expedition-join')?.value;
-        let html = '';
-        if (!selected) {
-            html = '<button id="expedition-create" type="button" ' + (!state.discovery ? 'disabled' : '') +
+        let html = !state.discovery ? '<p>Exploration is disabled in this saved campaign. Enable exploration &amp; rival clan when starting a new island campaign.</p>' +
+            '<button type="button" data-ui="campaign-settings">New campaign options</button>' :
+            '<p>Choose a group and its members here. Start Expedition reserves its Food; Explore Area lets you choose a destination on the island.</p>';
+        html += '<button id="expedition-create" type="button" ' + (!state.discovery ? 'disabled' : '') +
                 '>Create exploration group</button>';
-            html += view.groups.map(group => {
-                const journeys = inspectSpatialExpeditions(state).missions.filter(m => m.groupId === group.id);
-                const active = journeys.find(m => m.status !== 'Returned');
-                const latest = journeys.at(-1);
-                return '<details data-group="' + escape(group.id) + '"><summary>' + escape(group.name) + ' · ' +
-                    group.members.length + ' members · ' + group.status + '</summary><p>' + (group.members.length ?
-                        group.members.map(p => escape(p.name)).join(', ') : 'Select residents on the island to add them to this group.') +
-                    '</p>' + (!active ? '<button data-start="' + escape(group.id) + '" ' +
-                        (group.status !== 'Ready' || !state.discovery ? 'disabled' : '') + '>Start Expedition</button>' :
-                        '<button data-explore="' + escape(group.id) + '" ' + (active.status === 'Stranded' || !active.supplies ? 'disabled' : '') +
-                        '>Explore Area</button> ' + (active.status === 'Prepared' ? '<button data-cancel-expedition="' +
-                            escape(group.id) + '">Cancel expedition</button>' : '<button data-recall="' + escape(group.id) + '" ' +
-                            (active.status === 'Returning' || active.status === 'Stranded' ? 'disabled' : '') + '>Return Home</button>')) +
-                    (latest ? '<p>' + escape(latest.status !== 'Returned' ? latest.status : latest.outcome ?? latest.status) +
-                        ' · ' + latest.foodCost + ' Food supplied</p>' : '') +
-                    (latest?.supplies ? '<p>Supplies remaining: ' + latest.supplies.activeTicksRemaining +
-                        ' active ticks. No extra Food is charged for new destinations.</p>' : '') +
-                    (active && !active.supplies ? '<p>Return home to start a new expedition with carried supplies.</p>' : '') +
-                    (!this.session.running && active && active.status !== 'Stranded' ?
-                        '<p>Clock paused: press Start to travel. You can choose a destination now.</p>' : '') + '</details>';
-            }).join('');
-        } else if (selected.kind === 'persona') {
-            const current = Object.values(state.world?.groups ?? {}).find(g => g.memberIds.includes(selected.id));
-            if (current) html = '<p>Exploration group: ' + escape(current.name) + '</p><button data-remove="' + escape(current.id) + '" ' +
-                (groupMission(state, current.id) ? 'disabled' : '') + '>Leave group</button>';
-            else {
-                const groups = view.groups.filter(g => !groupMission(state, g.id));
-                const eligible = expeditionEligible(state, selected.id) && groups.length > 0;
-                html = '<label>Add to exploration group<select id="expedition-join" ' + (!eligible ? 'disabled' : '') + '>' +
-                    groups.map(g => '<option value="' + escape(g.id) + '">' + escape(g.name) + '</option>').join('') +
-                    '</select></label><button id="expedition-add" ' + (!eligible ? 'disabled' : '') + '>Add to group</button>' +
-                    (!groups.length ? '<p>Clear the selection to create an exploration group.</p>' : '');
-            }
-        }
+        html += view.groups.map(group => {
+            const journeys = inspectSpatialExpeditions(state).missions.filter(m => m.groupId === group.id);
+            const active = journeys.find(m => m.status !== 'Returned');
+            const latest = journeys.at(-1);
+            return '<details data-group="' + escape(group.id) + '"><summary>' + escape(group.name) + ' · ' +
+                group.members.length + ' members · ' + group.status + '</summary><p>' + (group.members.length ?
+                group.members.map(p => escape(p.name)).join(', ') : 'Choose residents below to form this group.') +
+                '</p>' + (!active ? this.members(state, group.id) : '') + (!active ? '<button data-start="' + escape(group.id) + '" ' +
+                    (group.status !== 'Ready' || !state.discovery ? 'disabled' : '') + '>Start Expedition</button>' :
+                    '<button data-explore="' + escape(group.id) + '" ' + (active.status === 'Stranded' || !active.supplies ? 'disabled' : '') +
+                    '>Explore Area</button> ' + (active.status === 'Prepared' ? '<button data-cancel-expedition="' +
+                        escape(group.id) + '">Cancel expedition</button>' : '<button data-recall="' + escape(group.id) + '" ' +
+                        (active.status === 'Returning' || active.status === 'Stranded' ? 'disabled' : '') + '>Return Home</button>')) +
+                (latest ? '<p>' + escape(latest.status !== 'Returned' ? latest.status : latest.outcome ?? latest.status) +
+                    ' · ' + latest.foodCost + ' Food supplied</p>' : '') +
+                (latest?.supplies ? '<p>Supplies remaining: ' + latest.supplies.activeTicksRemaining +
+                    ' active ticks. No extra Food is charged for new destinations.</p>' : '') +
+                (active && !active.supplies ? '<p>Return home to start a new expedition with carried supplies.</p>' : '') +
+                (!this.session.running && active && active.status !== 'Stranded' ?
+                    '<p>Clock paused: press Start to travel. You can choose a destination now.</p>' : '') + '</details>';
+        }).join('');
         if (this.controlsHTML !== html) {
             this.controlsHTML = html;
             controls.innerHTML = html;
             for (const detail of Array.from(controls.querySelectorAll<HTMLDetailsElement>('details[data-group]')))
                 detail.open = open.has(detail.dataset.group);
-            const join = controls.querySelector<HTMLSelectElement>('#expedition-join');
-            if (join && selectedGroup && Array.from(join.options).some(o => o.value === selectedGroup)) join.value = selectedGroup;
         }
         this.root.hidden = !html && !this.choosing;
-        if (this.groupId && !state.world?.groups[this.groupId]) this.cancelTarget();
-        if (this.showingDestination && !inspectSpatialExpeditions(state).missions.some(m =>
-            m.groupId === this.groupId && m.status !== 'Returned')) {
-            this.showingDestination = false; this.targetChanged();
-        }
-        if (!state.discovery && !selected && !this.choosing)
-            this.status.textContent = 'Exploration is available in discovery prototype campaigns.';
     }
 }

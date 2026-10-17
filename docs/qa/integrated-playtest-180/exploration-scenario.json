@@ -1,0 +1,29 @@
+{
+  "version": "exploration-playtest-180-v1",
+  "seed": 32,
+  "foundingPhase": "summer-800-v1",
+  "preparation": "Fresh SharedSettlement with island-pool-v1; FjordCampaign.enableDiscovery; canonical group commands.",
+  "commands": [
+    {
+      "type": "CreateExplorationGroup"
+    },
+    {
+      "type": "SetExplorationMember",
+      "groupId": "group-1",
+      "personaId": "founder-1",
+      "included": true
+    },
+    {
+      "type": "SetExplorationMember",
+      "groupId": "group-1",
+      "personaId": "founder-2",
+      "included": true
+    }
+  ],
+  "members": [
+    "founder-1",
+    "founder-2"
+  ],
+  "worldVersion": 2,
+  "sha256": "12749c37e3bf0c52b2695adc6a0f55ba331668eaf21ce0495a4a015b6faa4bba"
+}

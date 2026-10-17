@@ -36,7 +36,7 @@ export async function createPlaytestHandler(workspace) {
     const study = join(workspace, 'docs/qa/integrated-playtest-180');
     await add('/playtest/', join(study, 'launcher.html'));
     await add('/playtest', join(study, 'launcher.html'));
-    for (const name of ['funded-800', 'developed-810', 'snow-811', 'summer-17']) {
+    for (const name of ['funded-800', 'developed-810', 'snow-811', 'summer-17', 'exploration-800']) {
         await add('/playtest/' + name + '.json', join(study, name + '.json'));
     }
     return async (request, response) => {

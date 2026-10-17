@@ -128,7 +128,7 @@ export class GameplaySession {
     }
     /** UI task transaction: existing zero-time management rules, committed only after all succeed. */
     commandBatch(commands: readonly SimulationCommand[]): void {
-        const allowed = new Set(['BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle']);
+        const allowed = new Set(['BuildHouse', 'AssignOccupation', 'SpecializeBuilding', 'AssignCattle', 'UpgradeBuilding']);
         if (commands.length > 64 || commands.some(command => !allowed.has(command.type))) {
             throw new Error('This task contains unsupported management commands.');
         }

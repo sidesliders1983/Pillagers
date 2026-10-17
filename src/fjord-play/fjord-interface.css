@@ -105,6 +105,31 @@ body.fjord-play {
 .fjord-plan-review { border-top: 1px solid var(--fjord-line); margin-top: 15px; padding-top: 14px; }
 .fjord-task-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
 .fjord-task-columns:has(> section:only-child) { grid-template-columns: 1fr; }
+.fjord-home-improvements { margin: 14px 0; padding: 12px; border: 1px solid var(--fjord-line); border-radius: 4px; background: #0d191b45; }
+.fjord-home-specialization { display: flex; align-items: center; gap: 8px; color: var(--fjord-accent); margin-bottom: 10px; }
+.fjord-home-specialization span { margin-left: auto; font-size: 11px; white-space: nowrap; }
+.fjord-home-upgrade { border-top: 1px solid var(--fjord-line); margin-top: 14px; padding-top: 12px; }
+.fjord-upgrade-preview { display: grid; gap: 6px; }
+.fjord-upgrade-preview span { font-size: 11px; color: var(--fjord-muted); }
+#fjord-play .fjord-home-improvements p { margin-bottom: 7px; }
+.fjord-home-improvements .fjord-actions { margin-top: 8px; }
+.fjord-card-body details.fjord-worker-preview { margin: 8px 0; padding-top: 0; border: 0; }
+.fjord-card-body details.fjord-home-residents { margin: 0 0 10px; padding: 0; border: 0; }
+.fjord-home-residents summary { display: grid; gap: 3px; }
+.fjord-home-residents summary > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#fjord-play button.fjord-home-change { padding: 4px 6px; font-size: 11px; }
+#fjord-play .fjord-home-change .fjord-glyph { width: 16px; }
+@media(min-width:601px) {
+    #fjord-play .fjord-stage #fjord-management.fjord-home-card {
+        width: 400px;
+        max-height: calc(100% - 185px);
+    }
+}
+#expedition-controls > button { margin: 0 0 12px; }
+.fjord-expedition-members { max-height: 190px; overflow: auto; margin: 10px 0; padding: 4px 8px; background: #0d191b45; }
+.fjord-expedition-members label { display: flex !important; gap: 10px; align-items: center; min-height: 40px; font-size: 12px; }
+.fjord-expedition-members input { width: 17px !important; height: 17px; accent-color: var(--fjord-accent); flex-shrink: 0; }
+.fjord-expedition-members small { display: block; }
 .fjord-plan-review .fjord-actions button:first-child { border-color: var(--fjord-accent); color: var(--fjord-accent); }
 #fjord-play .fjord-risk { color: #f1b49e; }
 #fjord-play .fjord-result, #fjord-play .fjord-status { color: #c2d8ad; }

@@ -198,6 +198,7 @@ export class FjordPlay {
         document.querySelector('#fjord-attention')!.addEventListener('click', () => desktopUI?.open('attention'));
         const seedField = document.querySelector<HTMLInputElement>('#fjord-seed')!;
         const weatherField = document.querySelector<HTMLInputElement>('#fjord-weather')!;
+        const explorationField = document.querySelector<HTMLInputElement>('#fjord-exploration')!;
         const sameFounders = document.querySelector<HTMLInputElement>('#fjord-founders')!;
         const cycleField = document.querySelector<HTMLSelectElement>('#fjord-cycle')!;
         const campaignFields = () => {
@@ -207,9 +208,11 @@ export class FjordPlay {
                 'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
                 'Original saved geography';
             weatherField.checked = this.session.readSnapshot().weather?.config.enabled ?? false;
+            explorationField.checked = !!this.session.readSnapshot().discovery;
             cycleField.value = String(this.session.minutesPerWinter);
         };
         campaignFields();
+        if (query.get('discovery') === '1') explorationField.checked = true;
         sameFounders.addEventListener('change', () => {
             document.querySelector('#fjord-restart')!.textContent = sameFounders.checked ?
                 'Restart with same founders' : 'Restart with new founders';
@@ -355,7 +358,7 @@ export class FjordPlay {
                 void syncScene().catch(error => say('Presentation update failed: ' + String(error)));
             const panel = document.querySelector<HTMLElement>('#entity-panel')!;
             desktopUI?.refresh(state, this.shared.selection, personalHistory.render(),
-                () => this.panels.render(state, this.shared.selection));
+                () => this.panels.render(state, this.shared.selection, '', { homeImprovements: false }));
             updateManagementAvailability(panel, this.shared);
             document.querySelector('#fjord-clan-name')!.textContent = state.clan.name;
             highlight();
@@ -434,6 +437,7 @@ export class FjordPlay {
             });
         });
         const startNewCampaign = (restart: boolean) => {
+            const discoveryEnabled = explorationField.checked;
             const previousPace = this.session.pacing();
             const wasRunning = previousPace.running;
             this.foundingBook?.dispose();
@@ -467,7 +471,6 @@ export class FjordPlay {
                     loading = this.loading = new IslandLoading(true, this.foundingBook);
                     await loading.prepare(proposal.snapshot().seed);
                     loading.check();
-                    const discoveryEnabled = !!this.session.readSnapshot().discovery || query.get('discovery') === '1';
                     this.campaign.startCampaign(proposal, 'island-pool-v1');
                     if (discoveryEnabled) this.campaign.enableDiscovery();
                     resetProduction();
@@ -593,7 +596,7 @@ export class FjordPlay {
                 if (point) desktopUI?.setTargeting(false);
                 if (point) targetMarker.position.set(point.x,
                     createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z)+.4, point.z);
-            }, () => this.shared.selection, memberIds => {
+            }, memberIds => {
                 const rendered = layer?.describe() ?? [];
                 return Object.fromEntries(memberIds.map(id => {
                     const person = rendered.find(entity => entity.kind==='persona' && entity.id===id);

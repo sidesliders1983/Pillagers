@@ -22,7 +22,8 @@ export class SettlementPanel {
     private roles(current: string | null, state?: SimulationState, personaId?: string) {
         return option('', 'No occupation', current) + occupationIds.map(id => option(id, state && personaId ? `${id} · ${percent(occupationAptitude(state, personaId, id))} fit` : id, current)).join('');
     }
-    render(state: SimulationState, selection: SettlementSelection, history = ''): string {
+    render(state: SimulationState, selection: SettlementSelection, history = '',
+        options: { homeImprovements?: boolean } = {}): string {
         if (!selection)
             return '<h2>Settlement</h2><p>Select a home, resident or animal on the board.</p><p class="muted">Drag the board to pan. Scroll or use the controls to zoom. Select an entity below if sprites overlap.</p>';
         const { kind, id } = selection;
@@ -71,7 +72,11 @@ export class SettlementPanel {
         const house = building ?? (residence?.buildingId ? state.buildings[residence.buildingId] : null);
         if (house) {
             const status = inspectBuilding(state, house.id), yard = landingSummary(state).farmyards.find(f => f.id === house.id);
-            html += `<p>${this.select('building', house.id, housingName(state, 'building', house.id))} · ${status.occupied ? 'occupied' : 'vacant'}<br>Upkeep: ${status.upkeep} Materials/Winter<br>Debt: ${status.debtWinters} Winters<br>Upgrade level: ${status.upgradeLevel}</p><p>Farmyard: ${yard ? `active · ${yard.occupants}/${yard.capacity} livestock · overcrowding ${yard.overcrowding}` : 'inactive'}</p>${yard ? Object.values(state.landing!.cattle).filter(c => c.farmyardId === yard.id).map(c => this.select('cattle', c.id, c.id)).join(' ') : ''}<label>Specialization<select id="specialization">${this.roles(house.specialization)}</select></label><button data-action="specialize" data-building="${esc(house.id)}">Specialize</button><small data-availability hidden></small>${this.button(state, { type: 'SalvageBuilding', buildingId: house.id }, `Salvage house (${Math.floor(status.investedMaterials / 2)} Materials)`)}${this.button(state, { type: 'UpgradeBuilding', buildingId: house.id }, `Upgrade (${state.mechanics!.config.upgradeCosts[status.upgradeLevel] ?? 'max'} Materials)`)}`;
+            html += `<p>${this.select('building', house.id, housingName(state, 'building', house.id))} · ${status.occupied ? 'occupied' : 'vacant'}<br>Upkeep: ${status.upkeep} Materials/Winter<br>Debt: ${status.debtWinters} Winters<br>Upgrade level: ${status.upgradeLevel}</p><p>Farmyard: ${yard ? `active · ${yard.occupants}/${yard.capacity} livestock · overcrowding ${yard.overcrowding}` : 'inactive'}</p>${yard ? Object.values(state.landing!.cattle).filter(c => c.farmyardId === yard.id).map(c => this.select('cattle', c.id, c.id)).join(' ') : ''}`;
+            if (options.homeImprovements !== false) {
+                html += `<label>Specialization<select id="specialization">${this.roles(house.specialization)}</select></label><button data-action="specialize" data-building="${esc(house.id)}">Specialize</button><small data-availability hidden></small>${this.button(state, { type: 'UpgradeBuilding', buildingId: house.id }, `Upgrade (${state.mechanics!.config.upgradeCosts[status.upgradeLevel] ?? 'max'} Materials)`)}`;
+            }
+            html += this.button(state, { type: 'SalvageBuilding', buildingId: house.id }, `Salvage house (${Math.floor(status.investedMaterials / 2)} Materials)`);
         }
         return html;
     }

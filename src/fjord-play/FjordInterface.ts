@@ -8,6 +8,7 @@ import { heritageLabels } from '../characters/heritageProfiles';
 import { updateView } from '../gameplay-lab/updateView';
 import { icon, occupationIcon, occupationLabel, workLabel, type FjordIcon } from './FjordIcons';
 import { proposeWork, previewWork, workCandidates, type WorkDraft } from './WorkPlan';
+import { homeImprovements, previewHomeSpecialization, homeLevel } from './HomeImprovements';
 import './fjord-interface.css';
 
 const esc = (value: unknown) => String(value ?? '').replace(/[&<>"']/g,
@@ -24,7 +25,7 @@ interface InterfaceHooks {
     commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void) => void;
     notify: (message: string) => void;
 }
-type Task = 'work-menu' | 'work-plan' | 'occupation' | 'risk' | null;
+type Task = 'work-menu' | 'work-plan' | 'occupation' | 'specialization' | 'risk' | null;
 
 /** Option C: a compact context card, one focused task, and real canonical commands. */
 export class FjordInterface {
@@ -92,6 +93,35 @@ export class FjordInterface {
                 ? home.memberIds.includes(selection.id) : home.residenceId &&
                     state.residences[home.residenceId]?.buildingId === selection?.id);
     }
+    private homeBuildingId() {
+        const selection = this.owner.selection;
+        if (selection?.kind === 'building') return selection.id;
+        const home = this.household();
+        return home?.residenceId ? this.state.residences[home.residenceId]?.buildingId : null;
+    }
+    private improvements(state: SimulationState, buildingId: string): string {
+        const home = homeImprovements(state, buildingId);
+        const role = home.building.specialization;
+        const maintenance = home.occupied ? `${home.upkeep} Materials/year` :
+            `0 Materials/year while vacant · ${home.upkeep} when occupied`;
+        const reason = home.availability.reason;
+        const workerPreview = home.next?.workers.map(worker =>
+            `<p class="fjord-caption">${esc(state.personas[worker.id].name)}: ${pct(worker.before.productivityBps)} → ${pct(worker.after.productivityBps)} productivity${worker.after.reason ? ' · ' + esc(worker.after.reason.replaceAll('-', ' ')) : ''}</p>`).join('') ?? '';
+        return `<section class="fjord-home-improvements" aria-label="Home specialization and upgrades">
+            <div class="fjord-home-specialization">${icon(role ? occupationIcon(role) : 'home')}<strong>${role ? esc(workLabel(role)) : 'Unspecialized'}</strong><span>Level ${homeLevel(home.upgradeLevel)}</span>${button('specialization', 'Change', 'work', 'class="fjord-home-change" aria-label="Change specialization"')}</div>
+            <p>${home.matching.length} matching resident${home.matching.length === 1 ? '' : 's'} · +${home.bonusBps / 100}% bonus to matching work</p>
+            ${role && state.mechanics!.config.occupations[role].resource === null ? '<p class="fjord-caption">This occupation has no production output in the current campaign rules.</p>' : ''}
+            ${role && !home.matching.length ? '<p class="fjord-caption">No resident currently matches this specialization. Changing a specialization keeps every resident’s occupation.</p>' : ''}
+            <p>Upkeep: <strong>${maintenance}</strong></p>
+            ${home.debtWinters ? `<p class="fjord-risk">Maintenance debt: ${home.debtWinters}/${state.mechanics!.config.collapseDebtWinters} years before collapse.</p>` : ''}
+            <div class="fjord-home-upgrade">
+                ${home.cost !== undefined ? `<p class="fjord-upgrade-preview"><strong>Upgrade to ${homeLevel(home.upgradeLevel + 1)}</strong><span>Bonus +${home.bonusBps / 100}% → +${home.nextBonusBps / 100}%<br>Occupied upkeep ${home.upkeep} → ${home.nextUpkeep} Materials/year</span></p>` : '<p>Maximum upgrade level reached.</p>'}
+                ${home.cost !== undefined ? button('upgrade-home', `Upgrade to ${homeLevel(home.upgradeLevel + 1)} · ${home.cost} Materials`, 'home',
+                    `data-building="${esc(buildingId)}" data-upgrade-level="${home.upgradeLevel}" ${home.availability.allowed ? '' : 'disabled aria-describedby="fjord-upgrade-reason"'}`) : ''}
+                ${reason && home.cost !== undefined ? `<p id="fjord-upgrade-reason" class="fjord-caption">${esc(reason)}</p>` : ''}
+                ${workerPreview ? `<details class="fjord-worker-preview"><summary>Resident productivity preview</summary>${workerPreview}</details>` : ''}
+            </div></section>`;
+    }
     private person(state: SimulationState, id: string, history: string) {
         const person = state.personas[id];
         const home = this.household();
@@ -130,8 +160,10 @@ export class FjordInterface {
         }
         this.management.hidden = !selection || !!this.surface;
         this.management.classList.toggle('fjord-focus', !!this.task);
+        this.management.classList.toggle('fjord-home-card', !!selection &&
+            ['household', 'building'].includes(selection.kind) && !this.task);
         let html = '';
-        if (selection) {
+        if (selection && !this.surface) {
             if (this.task) html = this.renderTask(state);
             else if (selection.kind === 'persona' && state.personas[selection.id]) html = this.person(state, selection.id, history);
             else if (selection.kind === 'persona') html = this.heading(state.personaArchive?.[selection.id]?.name ?? 'Historical identity',
@@ -139,11 +171,13 @@ export class FjordInterface {
             else if (['household', 'building'].includes(selection.kind)) {
                 const home = this.household(selection);
                 const residence = home?.residenceId ? state.residences[home.residenceId] : null;
-                const house = residence?.kind === 'house';
-                const yard = residence?.buildingId && state.landing ? landingSummary(state).farmyards.find(y => y.id === residence.buildingId) : null;
-                html = this.heading(housingName(state, selection.kind as 'household' | 'building', selection.id),
-                    house ? 'Permanent home' + (yard ? ' · Active farmyard' : '') : home ? 'Household in a tent' : 'Vacant building', house ? 'home' : 'tent') +
-                    `<div class="fjord-card-body">${home ? home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('') : ''}
+                const buildingId = selection.kind === 'building' ? selection.id : residence?.buildingId;
+                const house = !!buildingId && state.buildings[buildingId]?.kind === 'house';
+                const yard = house && state.landing ? landingSummary(state).farmyards.find(y => y.id === buildingId) : null;
+                html = this.heading(house ? 'Home' : home ? 'Tent' : 'Building',
+                    `${buildingId ?? selection.id} · ` + (house ? 'Permanent home' + (yard ? ' · Active farmyard' : '') : home ? 'Household in a tent' : 'Vacant building'), house ? 'home' : 'tent') +
+                    `<div class="fjord-card-body">${home ? `<details class="fjord-home-residents" data-view-key="home-residents:${esc(home.id)}"><summary><span title="${esc(housingName(state, 'household', home.id))}">${esc(housingName(state, 'household', home.id))}</span><small>Residents · ${home.memberIds.length}</small></summary>${home.memberIds.map(id => `<div class="fjord-member">${this.link('persona', id, state.personas[id].name)}<small>${esc(occupationLabel(state.personas[id].occupation))}</small></div>`).join('')}</details>` : '<p class="fjord-caption">Vacant home</p>'}
+                    ${house ? this.improvements(state, buildingId!) : ''}
                     ${yard ? `<p>${yard.occupants}/${yard.capacity} livestock sheltered · overcrowding ${yard.overcrowding}</p>` : ''}
                     <div class="fjord-actions">${home && !house ? button('build', `Build house · ${state.mechanics!.config.houseCost} Materials`, 'home',
                         this.owner.availability({ type: 'BuildHouse', householdId: home.id }).allowed ? '' : 'disabled title="Insufficient Materials or household unavailable"') : ''}
@@ -172,6 +206,18 @@ export class FjordInterface {
         if (this.task === 'risk') return this.heading('Review consequences', 'Your campaign has not changed.', 'alert') +
             `<div class="fjord-card-body"><p class="fjord-risk">${esc(this.result)}</p><div class="fjord-actions">
             ${button('confirm-risk', 'Confirm change', 'work')}${button('cancel-task', 'Cancel', 'close')}</div></div>`;
+        if (this.task === 'specialization') {
+            const buildingId = this.homeBuildingId();
+            if (!buildingId || !state.buildings[buildingId]) return this.heading('Home unavailable', 'Select a permanent home.', 'home');
+            const home = homeImprovements(state, buildingId);
+            return this.heading('Change specialization', 'Choose the work this home supports. Occupations and upgrade level are kept.', 'work') +
+                `<div class="fjord-card-body"><p>Level ${homeLevel(home.upgradeLevel)} · +${home.bonusBps / 100}% matching-work bonus · ${home.upkeep} Materials/year when occupied.</p>
+                <div class="fjord-choice-grid">${[null, ...occupationIds].map(role => {
+                    const matching = home.residents.filter(id => role !== null && state.personas[id].occupation === role);
+                    return button('choose-specialization', `${role ? esc(workLabel(role)) : 'Unspecialized'}<small>${role ? matching.length + ' matching residents · no Materials cost' + (state.mechanics!.config.occupations[role].resource === null ? ' · no production output' : '') : 'No workplace bonus · level and upkeep kept'}</small>`,
+                        role ? occupationIcon(role) : 'home', `data-role="${role ?? ''}" aria-pressed="${home.building.specialization === role}"`);
+                }).join('')}</div>${button('cancel-task', 'Back', 'close')}</div>`;
+        }
         const home = this.household();
         if (this.task === 'occupation' && this.owner.selection?.kind === 'persona') {
             const id = this.owner.selection.id;
@@ -222,7 +268,36 @@ export class FjordInterface {
             case 'close-workspace': this.close(); return true;
             case 'directory': this.directory = button.dataset.kind!; this.search = ''; this.renderSurface(); return true;
             case 'close-card': this.hooks.select('', ''); return true;
+            case 'campaign-settings': {
+                this.close(false);
+                document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = true;
+                document.querySelector<HTMLDetailsElement>('#fjord-campaign')!.open = true;
+                document.querySelector<HTMLElement>('#fjord-exploration')!.focus();
+                return true;
+            }
             case 'cancel-task': this.task = null; this.pending = undefined; break;
+            case 'specialization': this.task = 'specialization'; break;
+            case 'choose-specialization': {
+                const buildingId = this.homeBuildingId();
+                if (!buildingId) return true;
+                const role = (button.dataset.role || null) as Occupation | null;
+                if (state.buildings[buildingId]?.specialization === role) { this.task = null; break; }
+                this.run(() => [previewHomeSpecialization(this.state, buildingId, role).command],
+                    'Home specialization updated. Occupations and upgrade level kept.');
+                return true;
+            }
+            case 'upgrade-home': {
+                const buildingId = button.dataset.building;
+                if (buildingId) {
+                    const level = Number(button.dataset.upgradeLevel);
+                    this.run(() => {
+                        if (this.state.mechanics?.buildings[buildingId]?.upgradeLevel !== level)
+                            throw new Error('The home has changed. Review the updated upgrade before trying again.');
+                        return [{ type: 'UpgradeBuilding', buildingId }];
+                    }, 'Home upgraded.');
+                }
+                return true;
+            }
             case 'work-menu': this.task = 'work-menu'; break;
             case 'occupation': this.task = 'occupation'; break;
             case 'plan': case 'farmyard':
