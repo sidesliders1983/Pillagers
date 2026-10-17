@@ -1,0 +1,124 @@
+{
+  "kind": "fisherman-approved-inputs/1",
+  "reviewManifestSha256": "f22a582c6ab620430b6fc2d0fdd337c382df77934acea119de6b6db08a9b155b",
+  "parts": [
+    "tunic"
+  ],
+  "views": [
+    "front",
+    "back",
+    "left",
+    "right"
+  ],
+  "records": [
+    {
+      "part": "tunic",
+      "view": "front",
+      "path": "conversion-inputs-005/tunic/front.png",
+      "sha256": "55c6df024ca0270d6b08cfc12dca98b144247d2d8025829be8851031be5dd79e",
+      "bytes": 441350,
+      "sourcePath": "image-review-005/tunic/front-fitted.png",
+      "sourceSha256": "92c989df686c88f040e487c6e8c20cb0a427f487c0cde4207887cb6febffb049",
+      "crop": {
+        "left": 312,
+        "top": 174,
+        "width": 401,
+        "height": 401
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.8716750967997163,
+        "centerY": 1.13490703909258,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "tunic",
+      "view": "back",
+      "path": "conversion-inputs-005/tunic/back.png",
+      "sha256": "f724ce9daed221ba6a234e5eec4945284f9678ab7575fcf0ec2aeee9901f3ca0",
+      "bytes": 409764,
+      "sourcePath": "image-review-005/tunic/back-fitted.png",
+      "sourceSha256": "a6a8fd8e079ccf64714398509d8b45d6cec4621faa247dc0bff0e4aee9326393",
+      "crop": {
+        "left": 312,
+        "top": 174,
+        "width": 401,
+        "height": 401
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.8716750967997163,
+        "centerY": 1.13490703909258,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "tunic",
+      "view": "left",
+      "path": "conversion-inputs-005/tunic/left.png",
+      "sha256": "447987324550e2f29f516c5eec785e3f149be47763befebcbad9ed9bd38cb221",
+      "bytes": 219799,
+      "sourcePath": "image-review-005/tunic/left-fitted.png",
+      "sourceSha256": "34bd99f973390d5b2658787db5bbdfaf6f3cf2064a742e2b953c9bdd67ed2028",
+      "crop": {
+        "left": 312,
+        "top": 174,
+        "width": 401,
+        "height": 401
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.8716750967997163,
+        "centerY": 1.13490703909258,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "tunic",
+      "view": "right",
+      "path": "conversion-inputs-005/tunic/right.png",
+      "sha256": "a82a70b7c9993f427e644d7d740e58fe7936c3c040f327c62d3a6414b9b4c6b3",
+      "bytes": 224360,
+      "sourcePath": "image-review-005/tunic/right-fitted.png",
+      "sourceSha256": "e5c20900365c1278d3c65d27076cf51eead14eb52a06cd6ff40cd53b4fd3b105",
+      "crop": {
+        "left": 312,
+        "top": 174,
+        "width": 401,
+        "height": 401
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.8716750967997163,
+        "centerY": 1.13490703909258,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    }
+  ],
+  "recipeSha256": "cab38277c3bbe757f2d0493e858494b8c849fcab4a395bd588897fa4b679becd"
+}

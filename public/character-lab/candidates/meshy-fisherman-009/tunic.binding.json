@@ -1,0 +1,188 @@
+{
+  "version": "pillagers-fit/0.2",
+  "id": "garment/meshy-fisherman-tunic-009",
+  "moduleSha256": "2a0d9a40392caa385c210cc26ee3afb4703b70ec3e10f12ff52cc40329cc8bc4",
+  "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc",
+  "recipe": {
+    "id": "fisherman-a20-native-transfer",
+    "version": 3,
+    "blender": "not-used"
+  },
+  "coordinateFrame": {
+    "up": "+Y",
+    "front": "+Z",
+    "unit": "metre",
+    "origin": "Meshy source bind"
+  },
+  "construction": "bilateral",
+  "skinning": "authored-four-native",
+  "reviewScope": "Approved images; adult native Walking/Idle screening; human 3D appearance review pending",
+  "materialPolicy": {
+    "kind": "provider-original",
+    "provider": "Meshy",
+    "sourceSha256": "1e76d2b2107b238bd6ca13a45919977f221e1aabca829ef86ec05cbf74c5b5ca",
+    "reviewOnly": true
+  },
+  "precomputedNative": {
+    "version": 3,
+    "coordinateFrame": "metre",
+    "meshes": [
+      {
+        "mesh": "Module_fisherman_tunic_left_0",
+        "vertices": 9192
+      }
+    ],
+    "bodyBindings": [
+      {
+        "lod": 0,
+        "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+        "topology": "411df128"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+        "topology": "0cf34010"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+        "topology": "74f95fa6"
+      },
+      {
+        "lod": 0,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 1,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      },
+      {
+        "lod": 2,
+        "bodySha256": "53bf9c43abbee28557968859d4e36d0842036b204ec5db010e4886784ccd8ff0",
+        "topology": "8216f232"
+      }
+    ],
+    "moduleCoverage": [
+      {
+        "regions": [
+          "PELVIS",
+          "TORSO_LOWER",
+          "TORSO_UPPER",
+          "UPPER_LEG_L",
+          "UPPER_LEG_R"
+        ],
+        "minimumY": 0.76,
+        "maximumY": 1.43
+      },
+      {
+        "regions": [
+          "UPPER_ARM_L",
+          "UPPER_ARM_R",
+          "LOWER_ARM_L",
+          "LOWER_ARM_R"
+        ],
+        "minimumY": 0.86,
+        "maximumY": 1.47
+      }
+    ],
+    "lowerUnderlap": {
+      "id": "garment/meshy-fisherman-trousers-009",
+      "moduleSha256": "9d4be04a6c5fb98812dc74a9a8ffbde93d48da74896777faa768aa293ef4c576",
+      "maximumY": 0.805
+    },
+    "bodyOpenings": [
+      {
+        "minimumY": 1.39,
+        "maximumY": 1.49,
+        "planes": [
+          {
+            "normal": [
+              1,
+              0,
+              0
+            ],
+            "constant": 0.09
+          },
+          {
+            "normal": [
+              -1,
+              0,
+              0
+            ],
+            "constant": 0.09
+          }
+        ]
+      },
+      {
+        "minimumY": 1.3,
+        "maximumY": 1.49,
+        "planes": [
+          {
+            "normal": [
+              1,
+              0,
+              0
+            ],
+            "constant": 0.04
+          },
+          {
+            "normal": [
+              -1,
+              0,
+              0
+            ],
+            "constant": 0.04
+          },
+          {
+            "normal": [
+              0,
+              0,
+              -1
+            ],
+            "constant": 0
+          }
+        ]
+      }
+    ]
+  },
+  "supportedAges": {
+    "min": 18,
+    "max": 100
+  },
+  "lods": {
+    "0": {
+      "bodySha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "topology": "411df128",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 0
+    },
+    "1": {
+      "bodySha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "topology": "0cf34010",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 1
+    },
+    "2": {
+      "bodySha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "topology": "74f95fa6",
+      "anchors": [],
+      "vertexAnchors": [],
+      "weights": [],
+      "coverageTriangles": [],
+      "lod": 2
+    }
+  },
+  "regions": {},
+  "seams": [],
+  "coverageRimContacts": [],
+  "coverageClipPlanes": [],
+  "garmentFrames": {}
+}

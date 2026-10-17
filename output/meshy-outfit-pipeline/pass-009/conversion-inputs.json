@@ -1,0 +1,342 @@
+{
+  "kind": "fisherman-approved-inputs/1",
+  "reviewManifestSha256": "4433e471bd3002c4faea1c8599603dcc06149392bb70719847a27e438c96757a",
+  "parts": [
+    "tunic",
+    "trousers",
+    "shoe"
+  ],
+  "views": [
+    "front",
+    "back",
+    "left",
+    "right"
+  ],
+  "records": [
+    {
+      "part": "tunic",
+      "view": "front",
+      "path": "conversion-inputs/tunic/front.png",
+      "sha256": "2fea9c81e7a8bfffab8b4709547e434fb55ec5099b533e20cb5909aa9627b9d1",
+      "bytes": 416213,
+      "sourcePath": "image-review-002/tunic/front-fitted.png",
+      "sourceSha256": "bec5db39aa427a1f9068059a805ec415d352b646100f2d08e6b2410bfdf51a3a",
+      "crop": {
+        "left": 303,
+        "top": 173,
+        "width": 418,
+        "height": 418
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.9086289038959636,
+        "centerY": 1.118603888903059,
+        "projectedCenter": 0,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "tunic",
+      "view": "back",
+      "path": "conversion-inputs/tunic/back.png",
+      "sha256": "db83f8ba0bd05909e38a79831d2adcb9cc837d2dbd642b3c625593c92ccfae68",
+      "bytes": 385644,
+      "sourcePath": "image-review-002/tunic/back-fitted.png",
+      "sourceSha256": "b2453f4419e2db062003bf7f8260ca33caa826c7ca4dc8cf070bb4210f722dde",
+      "crop": {
+        "left": 303,
+        "top": 173,
+        "width": 418,
+        "height": 418
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.9086289038959636,
+        "centerY": 1.118603888903059,
+        "projectedCenter": 0,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "tunic",
+      "view": "left",
+      "path": "conversion-inputs/tunic/left.png",
+      "sha256": "eb4150d15bb50f52ec75fb42b769324c1b39d8f485b6a30180ddf35ce0d89919",
+      "bytes": 214826,
+      "sourcePath": "image-review-002/tunic/left-fitted.png",
+      "sourceSha256": "7d128697fd494f03081b0fc990cbc99df05bfb5d0e4197861a28b6147d7f0906",
+      "crop": {
+        "left": 303,
+        "top": 173,
+        "width": 418,
+        "height": 418
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.9086289038959636,
+        "centerY": 1.118603888903059,
+        "projectedCenter": 0,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "tunic",
+      "view": "right",
+      "path": "conversion-inputs/tunic/right.png",
+      "sha256": "657bb56dcea3508f3f9f42d2236e340cb40cbb5a9e102e69d837ed3aecb67135",
+      "bytes": 226492,
+      "sourcePath": "image-review-002/tunic/right-fitted.png",
+      "sourceSha256": "a09e5adec71c2fac0fe31c43f7e0ee76d028c2130671136edd25aeb1cd7ce61a",
+      "crop": {
+        "left": 303,
+        "top": 173,
+        "width": 418,
+        "height": 418
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.9086289038959636,
+        "centerY": 1.118603888903059,
+        "projectedCenter": 0,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "trousers",
+      "view": "front",
+      "path": "conversion-inputs/trousers/front.png",
+      "sha256": "e99f48c1218794f34f61e1c1fb3b060d188c96315f5f86bf68a80c2b09ca2cc2",
+      "bytes": 386831,
+      "sourcePath": "image-review-002/trousers/front-fitted.png",
+      "sourceSha256": "614a4c94c8fc3b773a32f2728449325dd82aec6c8279fbdb24bc1056e5e75fb3",
+      "crop": {
+        "left": 302,
+        "top": 423,
+        "width": 421,
+        "height": 421
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.915150163971772,
+        "centerY": 0.5719049192144587,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "trousers",
+      "view": "back",
+      "path": "conversion-inputs/trousers/back.png",
+      "sha256": "072c1638963f810db8e253aa1b74bd56465a0a403f5d7598a1956c8768a8f940",
+      "bytes": 373740,
+      "sourcePath": "image-review-002/trousers/back-fitted.png",
+      "sourceSha256": "93ceeae2fc0a4dafa96b790679f7ebbb0bf8603da6d4d1ce9476eb1a78218357",
+      "crop": {
+        "left": 302,
+        "top": 423,
+        "width": 421,
+        "height": 421
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.915150163971772,
+        "centerY": 0.5719049192144587,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "trousers",
+      "view": "left",
+      "path": "conversion-inputs/trousers/left.png",
+      "sha256": "e44f64ebe843db4d05ac9f9b7e771adaf92258c4e0e2e4a0745288bd87538993",
+      "bytes": 234060,
+      "sourcePath": "image-review-002/trousers/left-fitted.png",
+      "sourceSha256": "b1f490ceb80e9484da73875cd5550c2ba49a65ce6b2bcdf75fa7a3cd95806922",
+      "crop": {
+        "left": 302,
+        "top": 423,
+        "width": 421,
+        "height": 421
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.915150163971772,
+        "centerY": 0.5719049192144587,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "trousers",
+      "view": "right",
+      "path": "conversion-inputs/trousers/right.png",
+      "sha256": "0613cc5b58ce948167fdedd69047633ff5a305a18f05b7abf5555df81f0126df",
+      "bytes": 234716,
+      "sourcePath": "image-review-002/trousers/right-fitted.png",
+      "sourceSha256": "acf8da9657abd8ed714796fb221eee50c891d8134ef815c003f9a93062177ae5",
+      "crop": {
+        "left": 302,
+        "top": 423,
+        "width": 421,
+        "height": 421
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.915150163971772,
+        "centerY": 0.5719049192144587,
+        "projectedCenter": 0.001086876679301392,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "shoe",
+      "view": "front",
+      "path": "conversion-inputs/shoe/front.png",
+      "sha256": "077d326bb7435cd9d738931a3c19550bc6ae61c9c6f26449476a99fc4df0a696",
+      "bytes": 199023,
+      "sourcePath": "image-review-002/shoe/front-fitted.png",
+      "sourceSha256": "5c9680cca183ed1d86187f337e1d638405fa65be3115b3f80ff421faa6a95a50",
+      "crop": {
+        "left": 521,
+        "top": 759,
+        "width": 191,
+        "height": 191
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.4151868914931317,
+        "centerY": 0.0915054269632436,
+        "projectedCenter": 0.2271572259739909,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "shoe",
+      "view": "back",
+      "path": "conversion-inputs/shoe/back.png",
+      "sha256": "b9a0841d097593f5609822145ea6130b02fd7b690fcaca550bf5883730c72f84",
+      "bytes": 174540,
+      "sourcePath": "image-review-002/shoe/back-fitted.png",
+      "sourceSha256": "75c19ff8afda961d1bf3f661504bb5ba446cc368c28bb1e2272338131efbc01e",
+      "crop": {
+        "left": 311,
+        "top": 759,
+        "width": 191,
+        "height": 191
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.4151868914931317,
+        "centerY": 0.0915054269632436,
+        "projectedCenter": -0.2293309793325937,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "shoe",
+      "view": "left",
+      "path": "conversion-inputs/shoe/left.png",
+      "sha256": "ad6cd44d5064177ab6c596f825566af60960e262f67f65c440a3a956ce47db44",
+      "bytes": 235720,
+      "sourcePath": "image-review-002/shoe/left-fitted.png",
+      "sourceSha256": "3c29aaa4a68c465992c60bd3041dacb76c7d2008cbc031bee413942c847de0b7",
+      "crop": {
+        "left": 404,
+        "top": 759,
+        "width": 191,
+        "height": 191
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.4151868914931317,
+        "centerY": 0.0915054269632436,
+        "projectedCenter": -0.027171916982534797,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    },
+    {
+      "part": "shoe",
+      "view": "right",
+      "path": "conversion-inputs/shoe/right.png",
+      "sha256": "3ed15c4a1aa22ccf7c8b6c327dfc1ff4ba923b6a9bba175ae108a695c54f3f88",
+      "bytes": 239462,
+      "sourcePath": "image-review-002/shoe/right-fitted.png",
+      "sourceSha256": "713e38959bb06a611e8482d8b2b46598d95df3b1aeb19c98b1b51dd36a3fa59d",
+      "crop": {
+        "left": 430,
+        "top": 759,
+        "width": 191,
+        "height": 191
+      },
+      "operation": "Crop transparent margins and resample only",
+      "frame": {
+        "frameMetres": 0.4151868914931317,
+        "centerY": 0.0915054269632436,
+        "projectedCenter": 0.02934567034113758,
+        "cameraTarget": [
+          -0.0005505383014678955,
+          0.836015952284697,
+          0.04417984187602997
+        ]
+      },
+      "garmentOnly": true
+    }
+  ],
+  "recipeSha256": "cab38277c3bbe757f2d0493e858494b8c849fcab4a395bd588897fa4b679becd"
+}

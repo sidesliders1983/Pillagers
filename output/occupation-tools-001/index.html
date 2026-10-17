@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Occupation tools · Fit review</title>
+<style>body{margin:0;background:#dce1d6;color:#25352e;font:16px system-ui}header{padding:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}select,button{padding:8px;font:inherit}canvas{max-width:100%;height:auto}a{color:inherit}#status{padding:0 16px}</style>
+<header><strong>Occupation tools · Native hand and back fit</strong>
+<label>Occupation <select id="occupation"><option>farmer</option><option>fisher</option><option>hunter</option><option>smith</option></select></label>
+<label>Hair <select id="hair"><option value="none">None</option><option value="hair/manual-fitted-short">Short</option><option value="hair/manual-long-braided">Long braid</option><option value="hair/manual-long-2">Long 2</option></select></label>
+<label><input id="clothing" type="checkbox" checked> Occupation clothing</label>
+<label>View <select id="view"><option>front</option><option>back</option><option>side</option><option>grip</option><option>grip-side</option><option>grip-back</option></select></label>
+<label>Pose <select id="clip"><option value="neutral">Native neutral · open hand reference</option><option value="Walking">Walking</option><option value="Idle_02" selected>Idle 02</option></select></label>
+<label>Time <input id="time" type="range" min="0" max="2" step="0.05" value="0.6"></label>
+<a id="lab" href="/character-lab?tool=farmer&hat=farmer">Character Lab</a><a href="/fjord-play">Fjordplay</a></header>
+<p id="status">Loading…</p><script type="module" src="./fit-review.js"></script></html>

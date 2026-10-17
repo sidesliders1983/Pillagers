@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "rejectedSourceCannotPublish": true,
+  "publicBytesUnchanged": true,
+  "lanAssets": 6,
+  "lanReviewStatus": 200,
+  "browserErrors": [],
+  "rejection": "selected tunic source was rejected for neck and shoulder fit. New approved inputs and a new source are required.",
+  "qualification": "Verifies rejection status and retained preview integrity. The current replacement remains a Lab appearance preview."
+}

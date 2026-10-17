@@ -1,0 +1,23 @@
+{
+  "kind": "fisherman-source-rejections/1",
+  "recordedAt": "2026-10-17T14:58:33.158Z",
+  "rejected": [
+    {
+      "part": "tunic",
+      "sha256": "796710fe6694e94d76bd69d1c910f78aafd7947e59fb381dff41b1097c3c9ef5",
+      "preparation": "native-011",
+      "reasons": [
+        "Oversized floating neckline",
+        "Excess shoulder volume",
+        "Body mask exposes the hollow garment"
+      ],
+      "evidence": "neck-shoulders-001/before/",
+      "repair": {
+        "status": "rejected-before-publication",
+        "excessiveVertices": 257,
+        "correctionLimitMetres": 0.07,
+        "worstRequiredCorrectionMetres": 0.10073834
+      }
+    }
+  ]
+}

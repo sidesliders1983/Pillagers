@@ -1,0 +1,75 @@
+{
+  "kind": "fisherman-tunic-replacement-review/1",
+  "status": "ready-for-human-3d-appearance-review",
+  "recordedAt": "2026-10-17T15:25:28.170Z",
+  "preparation": "native-019",
+  "approval": {
+    "kind": "fisherman-image-approval/1",
+    "decision": "approved",
+    "userMessage": "Akkoord, converteer de nieuwe tuniek",
+    "recordedAt": "2026-10-17T15:08:44.440Z",
+    "reviewManifestSha256": "f22a582c6ab620430b6fc2d0fdd337c382df77934acea119de6b6db08a9b155b",
+    "inputManifestSha256": "ee8c59e17c29301998fcbb6592a820d09e5a36c8d76ab35840cd750b9ce5bfa8",
+    "scope": "One replacement tunic conversion from approved image-review-005, native Human fitting and Character Lab animation QA. Retain existing trousers and shoes.",
+    "qualification": "Image approval does not certify the eventual 3D result."
+  },
+  "provenance": {
+    "part": "tunic-003",
+    "taskId": "01a14a68-abd9-74aa-a026-6e77f898bdd7",
+    "sha256": "1e76d2b2107b238bd6ca13a45919977f221e1aabca829ef86ec05cbf74c5b5ca",
+    "inputManifestSha256": "ee8c59e17c29301998fcbb6592a820d09e5a36c8d76ab35840cd750b9ce5bfa8",
+    "approvalSha256": "34bf89b76f2d42fd2d6830ab7b24d744377dceab46ab44900d8ff8f3edb667d6",
+    "intentSha256": "97a57c807675819b8ac2217e5a67960a688b4d317a6afb4d5283bba251761879",
+    "downloadedAt": "2026-10-17T15:11:02.894Z",
+    "bytes": 9272580,
+    "glbVersion": 2,
+    "assetVersion": "2.0"
+  },
+  "parts": [
+    {
+      "part": "tunic",
+      "sha256": "2a0d9a40392caa385c210cc26ee3afb4703b70ec3e10f12ff52cc40329cc8bc4",
+      "bindingSha256": "98580ee0976561b110af62585ada72fef89444700eaa1a0767f98c78362bf6c7"
+    },
+    {
+      "part": "trousers",
+      "sha256": "9d4be04a6c5fb98812dc74a9a8ffbde93d48da74896777faa768aa293ef4c576",
+      "bindingSha256": "5f7395d4d0f197881fe6df51628bdad086c3206d54311aea253b19dc7842dcb8"
+    },
+    {
+      "part": "shoe",
+      "sha256": "171358ff4718aac7747160228538de02a8313092d61a161e0c4f5912b0bf046f",
+      "bindingSha256": "563fd3b507df4a44c916ff477016092b3e7dc7321a4974588ec4f9983047f0a8"
+    }
+  ],
+  "unchangedLowerAssets": {
+    "trousers.glb": "9d4be04a6c5fb98812dc74a9a8ffbde93d48da74896777faa768aa293ef4c576",
+    "trousers.binding.json": "5f7395d4d0f197881fe6df51628bdad086c3206d54311aea253b19dc7842dcb8",
+    "shoe.glb": "171358ff4718aac7747160228538de02a8313092d61a161e0c4f5912b0bf046f",
+    "shoe.binding.json": "563fd3b507df4a44c916ff477016092b3e7dc7321a4974588ec4f9983047f0a8"
+  },
+  "sharedNativeRigBones": 44,
+  "sourceBound": true,
+  "motionSamples": 48,
+  "maximumAnimatedCollarGapMetres": 0.018607617042224803,
+  "maximumNeutralCollarGapMetres": 0.022641555929036532,
+  "maximumNeutralShoulderGapMetres": 0.022753624789862693,
+  "limits": {
+    "ratio": 4,
+    "edgeMetres": 0.05,
+    "collarGapMetres": 0.025,
+    "collarPenetrationMetres": 0.003
+  },
+  "collarFailures": 0,
+  "edgeFailures": 0,
+  "browserErrors": [],
+  "bodyPolicy": "Retain the actual neck and front slit. Covered chest/shoulders stay masked; no proxy body or replacement skeleton.",
+  "qualification": "Default adult DNA animation sample. Covered-body intersections are handled by masks. This is not exhaustive collision or extreme-DNA approval. Fine source facets remain visible at close range.",
+  "validation": {
+    "clothingTests": 31,
+    "typescript": "passed",
+    "productionBuild": "passed",
+    "browserErrors": 0,
+    "formatting": "Existing TypeScript printer on ten modified pipeline/QA files; syntax parsed before and after."
+  }
+}

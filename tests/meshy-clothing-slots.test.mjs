@@ -114,9 +114,10 @@ test('separate choices enforce native slots, occupancy, source identity and exac
     assert.throws(() => parseLabSnapshot(snapshot), /assets differ/);
     assert.deepEqual(presentationChoices('garment', body, 'shoes').map(entry => entry.id), [
         entries[0].id, 'garment/meshy-low-shoes-005', 'garment/meshy-high-shoes-005',
+        'garment/meshy-fisherman-shoe-009',
     ]);
     assert.deepEqual(presentationChoices('garment', body, 'top').map(entry => entry.id), [
-        entries[2].id,
+        entries[2].id, 'garment/meshy-fisherman-tunic-009',
     ]);
 });
 
@@ -161,7 +162,7 @@ test('native factory equips three separate modules and reports only installed sl
     const other = await factory.create(adult, 2, undefined, choices);
     try {
         assert.deepEqual([...model.fit.modules.keys()], entries.map(asset => asset.id));
-        assert.deepEqual(model.root.userData.selectedAssets, {hair: null, beard: null, outfit: null,
+        assert.deepEqual(model.root.userData.selectedAssets, {hair: null, beard: null, headwear: null, outfit: null,
             shoes: entries[0].id, trousers: entries[1].id, top: entries[2].id, equipment: null});
         for (const asset of entries) {
             const mesh = model.fit.modules.get(asset.id).children[0];
@@ -179,7 +180,7 @@ test('native factory equips three separate modules and reports only installed sl
         assert.equal(other.fit.modules.size, 3);
         await factory.equip(model, bare);
         assert.equal(model.fit.modules.size, 0);
-        assert.deepEqual(model.root.userData.selectedAssets, {hair: null, beard: null, outfit: null,
+        assert.deepEqual(model.root.userData.selectedAssets, {hair: null, beard: null, headwear: null, outfit: null,
             shoes: null, trousers: null, top: null, equipment: null});
     } finally {
         model.dispose();

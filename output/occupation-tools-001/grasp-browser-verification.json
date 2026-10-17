@@ -1,0 +1,12 @@
+{
+  "selected": [
+    "equipment/occupation-farmer",
+    "equipment/occupation-fisher",
+    "equipment/occupation-hunter",
+    "equipment/occupation-smith"
+  ],
+  "emptyRestored": true,
+  "hatPreserved": true,
+  "errors": [],
+  "failed": []
+}

@@ -5,6 +5,7 @@ import {
 import type {GLTF} from 'three/addons/loaders/GLTFLoader.js';
 import {MeshyBodyFitAdapter, anchorPoint} from './MeshyBodyFitAdapter';
 import {ModuleBindingV2} from './BodyFitAdapter';
+import {fitNativeHeadwear} from './NativeHeadwearFit';
 import {NativeHairRig} from './NativeHairRig';
 import {maskedBodyGeometry} from './BodyCoverage';
 import {sewModuleOpenings, weldModuleOpeningCorners} from './ModuleRims';
@@ -61,6 +62,10 @@ export function validateNativeModule(source: NativeModuleSource, fit: MeshyBodyF
    && asset.type === 'garment' && asset.scope === 'body-bound' && asset.reviewStatus === 'preview',
   'Solid appearance requires an explicit source-bound clothing review');
  }
+ fail(asset.type !== 'equipment' || !binding.rigidEquipment || binding.precomputedNative,
+  'Rigid tools require their prepared source binding');
+ fail(asset.type !== 'headwear' || binding.precomputedNative && binding.headwearFit,
+  'Headwear requires its prepared cavity and rigid native head binding');
  if (binding.precomputedNative) {
   validatePreparedOutfit(source, fit);
   return;
@@ -418,13 +423,25 @@ export class MeshyModuleRuntime {
   this.fit.rootForModulesUpdate();
   const garments = [...this.records.values()].filter(record => record.source.asset.type === 'garment')
    .flatMap(record => record.parts.map(part => part.mesh).filter((mesh): mesh is SkinnedMesh => (mesh as SkinnedMesh).isSkinnedMesh));
-  for (const record of this.records.values()) record.hairRig?.configureClearance(garments);
+  const backEquipment = [...this.records.values()].flatMap(record => record.parts
+   .filter(part => record.source.binding.rigidEquipment?.parts.some(binding =>
+    binding.mesh === part.mesh.name && binding.socket === 'socket_back'))
+   .map(part => part.mesh as SkinnedMesh));
+  for (const record of this.records.values()) record.hairRig?.configureClearance([...garments, ...backEquipment]);
   this.poseHair();
+  this.fit.rootForModulesUpdate();
+  const hair = [...this.records.values()].filter(record => record.source.asset.type === 'hair')
+   .flatMap(record => record.parts.map(part => part.mesh).filter((mesh): mesh is SkinnedMesh => (mesh as SkinnedMesh).isSkinnedMesh));
+  for (const record of this.records.values()) {
+   if (record.source.binding.headwearFit) for (const part of record.parts) {
+    fitNativeHeadwear(part.mesh as SkinnedMesh, record.source.binding.headwearFit, hair, this.fit);
+   }
+  }
   for (const [id, record] of [...this.records]) {
    if (record.source.binding.dependency) this.attachDependency(id, record);
   }
   this.restoreMask();
-  const prepared = [...this.records.values()].filter(record => record.source.binding.precomputedNative);
+  const prepared = [...this.records.values()].filter(record => record.source.asset.type === 'garment' && record.source.binding.precomputedNative);
   const full = prepared.filter(record => record.source.binding.precomputedNative!.version === 2);
   const footwear = prepared.filter(record => record !== full[0]);
   fail(full.length <= 1 && (!full.length || !footwear.length
@@ -487,6 +504,41 @@ export class MeshyModuleRuntime {
   }
   this.fitRuns++;
   this.lastFitMilliseconds = performance.now() - started;
+ }
+
+ private gripArm: {joint: number; rotation: Quaternion}[] = [];
+
+ /** Apply one carry layer over the original animation; equipment changes restore its saved arm. */
+ poseEquipmentGrips(
+  animationRotations: ReadonlyMap<import('three').Bone, Quaternion>,
+  restorePrevious = false,
+  enabled = true,
+ ) {
+  const bones = this.fit.nativeSkeleton.bones;
+  if (restorePrevious) {
+   for (const saved of this.gripArm) bones[saved.joint].quaternion.copy(saved.rotation);
+  }
+  this.gripArm = [];
+  // Native wrists, Thumb1–3 and Middle1–3; terminal/helper bones keep their authored transforms.
+  for (const joint of [11, 13, 14, 15, 17, 18, 19, 24, 26, 27, 28, 30, 31, 32]) {
+   const bone = bones[joint], rotation = animationRotations.get(bone);
+   if (rotation) bone.quaternion.copy(rotation);
+  }
+  if (!enabled) return;
+  for (const record of this.records.values()) {
+   const pose = record.source.binding.rigidEquipment?.gripPose;
+   if (!pose) continue;
+   for (const [joint, rotation, blend] of [
+    [pose.upperArmJoint, pose.upperArmRotation, pose.upperArmBlend],
+    [pose.forearmJoint, pose.forearmRotation, pose.forearmBlend],
+   ] as const) {
+    const bone = bones[joint];
+    this.gripArm.push({joint, rotation: bone.quaternion.clone()});
+    bone.quaternion.slerp(new Quaternion().fromArray(rotation), blend);
+   }
+   bones[pose.wristJoint].quaternion.fromArray(pose.wristRotation);
+   for (const finger of pose.fingers) bones[finger.joint].quaternion.fromArray(finger.rotation);
+  }
  }
 
  poseHair() {

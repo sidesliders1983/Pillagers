@@ -50,7 +50,11 @@ function sameGeometryAndPose(a, b, label) {
     }
     const x = new Box3().setFromObject(a.root, true), y = new Box3().setFromObject(b.root, true);
     assert.ok(x.min.distanceTo(y.min) < 1e-6 && x.max.distanceTo(y.max) < 1e-6, label + ' bounds');
-    const centre = x.getCenter(new Vector3());
+    // Carried items can shift the full bounds centre into empty space beside the resident.
+    // Keep the picking comparison aimed at the actual torso, independent of accessory extent.
+    const chest = a.fit.nativeSkeleton.bones.find(bone => bone.name === 'mixamorigSpine1');
+    assert.ok(chest, label + ' needs the native torso joint');
+    const centre = chest.getWorldPosition(new Vector3());
     const ray = new Raycaster(centre.clone().add(new Vector3(0, 0, 10)), new Vector3(0, 0, -1));
     const hitsA = ray.intersectObject(a.root, true), hitsB = ray.intersectObject(b.root, true);
     assert.ok(hitsA.length > 0, label + ' picking must hit the actual mesh');

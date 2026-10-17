@@ -48,7 +48,7 @@ export function labBodyAsset(source:LabBodySource='published',lod=2){
 export function validateLabBodyUsage(source:LabBodySource,lod:number,presentation:CharacterPresentation){
     const asset=labBodyAsset(source,lod);
     if((source===goldenLabBody.source||isMeshyLabBodySource(source))&&presentation.technicalWaistWrap)throw new Error('Preview bodies do not reuse the legacy waist demonstrator.');
-    for(const key of ['hair','beard','outfit','shoes','trousers','top','equipment'] as const){
+    for(const key of ['hair','beard','headwear','outfit','shoes','trousers','top','equipment'] as const){
         const choice=presentation[key];
         if(choice&&choice!=='auto'&&choice!=='none'&&!characterAssetFitsBody(characterAsset(choice),asset))throw new Error(choice+': module is not compatible with this exact body source.');
     }

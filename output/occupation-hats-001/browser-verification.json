@@ -1,0 +1,454 @@
+{
+  "selected": [
+    {
+      "key": "persona:founder-1",
+      "renderId": "9fc4dbbc-7f24-4561-b515-fcd4609224b3",
+      "kind": "persona",
+      "id": "founder-1",
+      "living": true,
+      "expeditionWalking": false,
+      "sex": "male",
+      "age": 36,
+      "indoorReason": null,
+      "occupation": "farmer",
+      "workEligible": true,
+      "position": [
+        26.5,
+        2.5999999046325684,
+        17.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          26.23155216182376,
+          2.568696242525958,
+          17.286851353332743
+        ],
+        "max": [
+          26.785963577811543,
+          4.074053989845392,
+          17.773173328349223
+        ]
+      },
+      "appearance": {
+        "seed": 4075047467,
+        "height": 1.3899468452949078,
+        "adultAge": 36,
+        "masculinity": 0.51,
+        "weightDeviation": 0.399618675645172,
+        "age": 36,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "tied",
+          "beardStyle": "none",
+          "color": "#49443f",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0048,
+          "stride": 1,
+          "footfall": 0.8859999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.04800000000000004,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.17876126680390067,
+          "Overweight": 0.2397712053871032,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.068821182847023,
+          "HeadLength": 0.01677391086705029,
+          "Jaw": 0.04405781691893935,
+          "Nose": -0.24937447747215627,
+          "LegRatio": 0.026506127673201263,
+          "ShoulderSlope": -0.020213687513023618,
+          "Asymmetry": 0.16201478557195514,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.0009600000000000017,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "farmerMale",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "headwear": "headwear/occupation-farmer",
+          "outfit": null,
+          "shoes": "garment/meshy-high-shoes-005",
+          "trousers": "garment/meshy-short-trousers-006",
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:founder-4",
+      "renderId": "fc53570c-0796-4106-9209-c3efc28820e5",
+      "kind": "persona",
+      "id": "founder-4",
+      "living": true,
+      "expeditionWalking": false,
+      "sex": "female",
+      "age": 39,
+      "indoorReason": null,
+      "occupation": "smith",
+      "workEligible": false,
+      "position": [
+        28.3,
+        2.5999999046325684,
+        17.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          28.009996865086354,
+          2.596733474115738,
+          17.243097242486044
+        ],
+        "max": [
+          28.604709672892447,
+          4.148961593223586,
+          17.792009397710647
+        ]
+      },
+      "appearance": {
+        "seed": 994112928,
+        "height": 1.4961360003147275,
+        "adultAge": 39,
+        "masculinity": 0.49,
+        "weightDeviation": 0.026425410851249845,
+        "age": 39,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0576,
+          "stride": 1,
+          "footfall": 1.2639999999999998
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.576,
+          "Grounded": 0,
+          "Tall": 0.23390000131136476,
+          "Short": 0,
+          "Overweight": 0.015855246510749908,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": -0.23195018246769905,
+          "HeadLength": -0.1490113883279264,
+          "Jaw": 0.10531868976540863,
+          "Nose": -0.059638496255502105,
+          "LegRatio": 0.044333422323688865,
+          "ShoulderSlope": -0.024638067465275526,
+          "Asymmetry": 0.012418919487390667,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "headwear": "headwear/occupation-smith",
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:founder-2",
+      "renderId": "e38b5345-ccb1-4ba8-8580-59552b9605c3",
+      "kind": "persona",
+      "id": "founder-2",
+      "living": true,
+      "expeditionWalking": false,
+      "sex": "female",
+      "age": 26,
+      "indoorReason": null,
+      "occupation": "fisher",
+      "workEligible": true,
+      "position": [
+        43.5,
+        2.5999999046325684,
+        17.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          43.176322412230164,
+          2.5912399628696208,
+          17.271721891733744
+        ],
+        "max": [
+          43.85886235806991,
+          4.083754979158821,
+          17.789413589785426
+        ]
+      },
+      "appearance": {
+        "seed": 1687558463,
+        "height": 1.4291686625964939,
+        "adultAge": 26,
+        "masculinity": 0.49,
+        "weightDeviation": 0.17100275586154484,
+        "age": 26,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#b8a079",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 0.9772,
+          "stride": 1,
+          "footfall": 1.192
+        },
+        "weights": {
+          "Masculine": 0,
+          "Feminine": 0.01200000000000001,
+          "Breasts": 0.01200000000000001,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0,
+          "Grounded": 0.22799999999999998,
+          "Tall": 0,
+          "Short": 0.03868334786966449,
+          "Overweight": 0.1026016535169269,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.2943485030438751,
+          "HeadLength": 0.20859494861215352,
+          "Jaw": -0.2867928644176572,
+          "Nose": 0.08205671044997871,
+          "LegRatio": -0.08739926049020141,
+          "ShoulderSlope": 0.07681008996441961,
+          "Asymmetry": 0.11302084216149523,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "fisherman",
+        "assets": {
+          "hair": "hair/manual-fitted-short2",
+          "beard": null,
+          "headwear": "headwear/occupation-fisher",
+          "outfit": null,
+          "shoes": "garment/meshy-fisherman-shoe-009",
+          "trousers": "garment/meshy-fisherman-trousers-009",
+          "top": "garment/meshy-fisherman-tunic-009",
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    },
+    {
+      "key": "persona:founder-3",
+      "renderId": "4a97ab49-ce99-4d3b-a7d2-85c373c26b8f",
+      "kind": "persona",
+      "id": "founder-3",
+      "living": true,
+      "expeditionWalking": false,
+      "sex": "male",
+      "age": 25,
+      "indoorReason": null,
+      "occupation": "hunter",
+      "workEligible": true,
+      "position": [
+        26.5,
+        2.5999999046325684,
+        51.5
+      ],
+      "asset": "human",
+      "scale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          26.2429673322815,
+          2.591723155236747,
+          51.16035164137342
+        ],
+        "max": [
+          26.77662193317861,
+          3.9668686616430806,
+          51.90024308480839
+        ]
+      },
+      "appearance": {
+        "seed": 146184794,
+        "height": 1.3241514832526446,
+        "adultAge": 25,
+        "masculinity": 0.51,
+        "weightDeviation": 0.25178897008384915,
+        "age": 25,
+        "stage": "adult",
+        "appearance": {
+          "hairStyle": "short",
+          "beardStyle": "none",
+          "color": "#786052",
+          "greyAmount": 0
+        },
+        "appearanceFit": {
+          "hair": 1,
+          "beard": 1,
+          "clothing": 1
+        },
+        "motion": {
+          "cadence": 1.0552,
+          "stride": 1,
+          "footfall": 1.1019999999999999
+        },
+        "weights": {
+          "Masculine": 0.01200000000000001,
+          "Feminine": 0,
+          "Breasts": 0,
+          "Powerful": 0,
+          "Slight": 0,
+          "Agile": 0.5519999999999999,
+          "Grounded": 0,
+          "Tall": 0,
+          "Short": 0.41374470266912605,
+          "Overweight": 0.15107338205030948,
+          "Underweight": 0,
+          "Age": 0,
+          "HeadWidth": 0.20084587312303484,
+          "HeadLength": -0.054211277235299345,
+          "Jaw": -0.21493161111138762,
+          "Nose": 0.07473515518940985,
+          "LegRatio": -0.0065043154172599316,
+          "ShoulderSlope": -0.007402832992374897,
+          "Asymmetry": 0.06989862764021382,
+          "BellyJiggle": 0,
+          "BreastJiggle": 0,
+          "Child": 0,
+          "ChildPower": 0,
+          "ChildAgility": 0,
+          "FemininePower": 0,
+          "MasculineAgility": 0.011040000000000008,
+          "TallSlight": 0,
+          "ElderHeavy": 0
+        }
+      },
+      "motion": {
+        "state": "Idle",
+        "speed": 0,
+        "clipTime": 0,
+        "sourceClip": "Idle_02",
+        "clip": "Idle"
+      },
+      "clothing": {
+        "id": "generic",
+        "assets": {
+          "hair": "hair/manual-fitted-short",
+          "beard": null,
+          "headwear": "headwear/occupation-hunter",
+          "outfit": "garment/meshy-grid-trial-001",
+          "shoes": "garment/meshy-low-shoes-005",
+          "trousers": null,
+          "top": null,
+          "equipment": null
+        }
+      },
+      "placeholder": false
+    }
+  ],
+  "errors": [],
+  "responses": []
+}

@@ -42,13 +42,35 @@ export interface NativeHairRigBinding {
  clearance: number;
  fixedColor: {color: string; vertices: number[]};
 }
+/** Measured cap cavity in the native Head frame. */
+export interface NativeHeadwearFitBinding {
+ version: 1;
+ headJoint: number;
+ frame: number[];
+ profile: [number, number, number][];
+ clearance: number;
+ maximumLift: number;
+ maximumRadialScale: number;
+}
 export interface ModuleBindingV2 {
  version:typeof bodyFitVersion;id:string;moduleSha256:string;rigSignature:string;
  recipe:{id:string;version:number;blender:string};
  coordinateFrame:{up:'+Y';front:'+Z';unit:'metre';origin:'Meshy source bind'};
  construction:'bilateral'|'intentional-asymmetry';
- skinning?:'authored-four-native'|'rigid-native-head'|'surface-barycentric-native'|'secondary-hair-chain';reviewScope?:string;
+ skinning?:'authored-four-native'|'rigid-native-head'|'rigid-native-equipment'|'surface-barycentric-native'|'secondary-hair-chain';reviewScope?:string;
  hairRig?: NativeHairRigBinding;
+ headwearFit?: NativeHeadwearFitBinding;
+ /** Source-baked rigid tools share the existing hand/back bones, without an auxiliary rig. */
+ rigidEquipment?: {version: 1;
+  gripPose?: {wristJoint: number; wristRotation: number[];
+   forearmJoint: number; forearmRotation: number[]; forearmBlend: number;
+   upperArmJoint: number; upperArmRotation: number[]; upperArmBlend: number;
+   axis: number[]; fingerRadius: number;
+   fingers: {joint: number; rotation: number[]}[]};
+  parts: {
+  mesh: string; joint: number; socket: import('./AttachmentContract').EquipmentSocket;
+  grip: [number, number, number];
+ }[]};
  materialPolicy?:{kind:'provider-original';provider:'Meshy';sourceSha256:string;reviewOnly:true};
  /** Explicit Lab appearance change; cached provider materials and textures remain intact. */
  appearanceOverride?: {kind: 'solid'; color: string; vertexColors?: boolean};

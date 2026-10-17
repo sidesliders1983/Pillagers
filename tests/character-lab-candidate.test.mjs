@@ -53,7 +53,8 @@ test('preview builds resolve once through existing strength composition, preserv
 
 test('candidate snapshots roundtrip their real source; legacy hashes, incompatible modules and LODs cannot masquerade as that source',()=>{
  const original=snapshot(),parsed=parseLabSnapshot(JSON.parse(JSON.stringify(original)));
- assert.deepEqual(parsed,{...original,presentation:{...original.presentation,shoes:'none',trousers:'none',top:'none'}});
+ assert.deepEqual(parsed,{...original,presentation:{...original.presentation,headwear:'none',shoes:'none',trousers:'none',top:'none'}});
+ assert.equal(original.presentation.headwear,undefined,'Legacy input is not mutated when the empty headwear default is filled.');
  assert.equal(original.presentation.shoes,undefined,'Legacy snapshot input stays unchanged while omitted slots receive defaults.');
  assert.equal(parsed.modules[0].id,goldenLabBody.id);assert.equal(parsed.modules[0].sha256,goldenLabBody.sha256);
  const changes=[s=>s.modules[0].sha256='0'.repeat(64),s=>s.modules[0].id='body/universal-human',s=>s.modules[0].path='/universal-human/UniversalHuman_LOD2.glb',s=>s.styleVersion='pillagers-character-style/0.4-draft.1',s=>s.body.source='published',s=>s.lod=0,s=>s.presentation.hair='hair/short',s=>s.presentation.outfit='garment/cream-tunic',s=>s.presentation.technicalWaistWrap=true];

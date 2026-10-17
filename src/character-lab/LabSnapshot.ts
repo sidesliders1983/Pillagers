@@ -27,11 +27,11 @@ export const fixedLabViews={
 } satisfies Record<string,{position:CameraPoint;target:CameraPoint}>;
 export function snapshotModules(dna:CharacterDNA,presentation:CharacterPresentation,lod:number,body:LabBodyPresentation=defaultLabBodyPresentation){
     const selected=resolveCharacterPresentation(dna,presentation,labBodyAsset(body.source??'published',lod)),source=validateLabBodyUsage(parseLabBodyPresentation(body).source??'published',lod,selected.presentation);
-    if(source.source!=='published')return [{id:source.id,path:source.path,sha256:source.sha256},...[selected.hairId,selected.beardId,...selected.garmentIds,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
+    if(source.source!=='published')return [{id:source.id,path:source.path,sha256:source.sha256},...[selected.hairId,selected.beardId,selected.headwearId,...selected.garmentIds,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
         const path=new URL(characterAssetURL(id,lod),'http://local.test').pathname;
         return {id,path,sha256:assetMeasurement(path).sha256,...(characterAsset(id).metadata?.nativeBinding?{binding:{...characterAsset(id).metadata!.nativeBinding}}:{})};
     })];
-    return ['body/universal-human',selected.hairId,selected.beardId,...selected.garmentIds,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
+    return ['body/universal-human',selected.hairId,selected.beardId,selected.headwearId,...selected.garmentIds,selected.equipmentId].filter((id):id is string=>!!id).map(id=>{
         const path=new URL(characterAssetURL(id,lod),'http://local.test').pathname;
         return {id,path,sha256:assetMeasurement(path).sha256};
     });

@@ -1,0 +1,102 @@
+[
+  {
+    "occupation": "farmer",
+    "filename": "Meshy_AI_viking_tool_farmer_si_1017150748_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Tools/farmer.glb",
+    "sha256": "38a7ca5dc06f9aa78c96b707ae27630499b42adf9a8eb58e26b42c9e2412463b",
+    "bytes": 50497416,
+    "triangles": 2901,
+    "vertices": 3722,
+    "bounds": {
+      "min": [
+        -0.12927979230880737,
+        0,
+        -0.029378509148955345
+      ],
+      "max": [
+        0.12923626601696014,
+        0.4000000059604645,
+        0.029120950028300285
+      ]
+    },
+    "skins": 0,
+    "animations": 0,
+    "optimizedBytes": 560552,
+    "optimizedSha256": "4671729babb2eadee4d3037108754933a1f6f8b73ba3f42808a196e01d649901"
+  },
+  {
+    "occupation": "fisher",
+    "filename": "Meshy_AI_viking_tool_fisherman_1017153106_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Tools/fisher.glb",
+    "sha256": "fbc6e833180e6600ed5de3a4da163737a84bf373d46bf21de9c0bb1c16287523",
+    "bytes": 49923532,
+    "triangles": 3112,
+    "vertices": 6276,
+    "bounds": {
+      "min": [
+        -0.8280337452888489,
+        0,
+        -0.10033369809389114
+      ],
+      "max": [
+        0.8319234251976013,
+        2,
+        0.10140201449394226
+      ]
+    },
+    "skins": 0,
+    "animations": 0,
+    "optimizedBytes": 628716,
+    "optimizedSha256": "74f1924ebb1d3562797644bc4a59da1009f2296c13519cfa3d061abc9fe10b53"
+  },
+  {
+    "occupation": "hunter",
+    "filename": "Meshy_AI_viking_tool_hunter_bo_1017150801_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Tools/hunter.glb",
+    "sha256": "63a79f5ed627b7a7d76ace0f1072a53d0d24204320e932fbfe7a68573d34ff10",
+    "bytes": 47663456,
+    "triangles": 3039,
+    "vertices": 6391,
+    "bounds": {
+      "min": [
+        -0.4614369869232178,
+        -0.9506109356880188,
+        -0.09036999195814133
+      ],
+      "max": [
+        0.45930400490760803,
+        0.9499120116233826,
+        0.09028499573469162
+      ]
+    },
+    "skins": 0,
+    "animations": 0,
+    "optimizedBytes": 622344,
+    "optimizedSha256": "4d75079bb22e90efe9b526e79e1ef3fae4c5198f1f7f6772e684fd4dee6fb0cc"
+  },
+  {
+    "occupation": "smith",
+    "filename": "Meshy_AI_viking_tool_smith_ham_1017150612_image-to-3d-texture.glb",
+    "path": "Assets/Characters/Human/Tools/smith.glb",
+    "sha256": "7de8c1f4cf7aa3d9af0cf06fe436246afd578ac774c6433da565c862450723e1",
+    "bytes": 47083624,
+    "triangles": 2677,
+    "vertices": 3192,
+    "bounds": {
+      "min": [
+        -0.07722561061382294,
+        0,
+        -0.025132907554507256
+      ],
+      "max": [
+        0.07618296891450882,
+        0.20000000298023224,
+        0.02490994893014431
+      ]
+    },
+    "skins": 0,
+    "animations": 0,
+    "optimizedBytes": 465648,
+    "optimizedSha256": "5ccbb4cf2bc4337e437c20396e7b6f31d32063f52b10241e76cb7ae73aea6b04"
+  }
+]

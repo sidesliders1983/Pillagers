@@ -1,0 +1,27 @@
+{
+  "build": "passed (TypeScript and Vite)",
+  "targetedTests": {
+    "count": 50,
+    "status": "passed after correcting legacy empty-headwear expectation",
+    "files": [
+      "braided-hair",
+      "character-lab-presentation",
+      "fjord-clothing",
+      "long-hair",
+      "manual-hair",
+      "meshy-clothing-slots",
+      "occupation-hats",
+      "character-lab-candidate"
+    ]
+  },
+  "browser": {
+    "characterLab": "fisherman outfit, headwear and bald/hair switching verified",
+    "fjordplay": "all four occupation hats and fisherman outfit verified, no page/HTTP errors",
+    "review": "all current hairstyles, neutral front/back/top/side and Walking/Idle rendered"
+  },
+  "formatting": "Existing TypeScript printer on four new authored sources; git diff --check passed",
+  "fullSuite": {
+    "status": "interrupted",
+    "reason": "Long unrelated terrain checks; the only observed failure was a legacy snapshot expectation, corrected and its complete 11-test file rerun successfully. Full-suite green is not claimed."
+  }
+}
