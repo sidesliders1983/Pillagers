@@ -1,0 +1,253 @@
+/* Horizon mobile presentation. Desktop retains its existing Context & Focus layout. */
+#fjord-play #fjord-mobile-menu { display: none; }
+#fjord-navigation-drawer { display: contents; }
+#fjord-navigation-drawer > [data-surface="settlement"] { order: 1; }
+#fjord-navigation > [data-surface="expeditions"] { order: 2; }
+#fjord-navigation-drawer > #fjord-book { order: 3; }
+#fjord-next-slot:empty, #fjord-menu-next-slot:empty { display: none; }
+
+#fjord-play.fjord-mobile {
+    --fjord-safe-top: env(safe-area-inset-top, 0px);
+    --fjord-safe-right: env(safe-area-inset-right, 0px);
+    --fjord-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --fjord-safe-left: env(safe-area-inset-left, 0px);
+    --fjord-hud-top: calc(var(--fjord-safe-top) + 8px);
+    --fjord-sheet-top: calc(var(--fjord-safe-top) + 70px);
+    --fjord-sheet-bottom: calc(var(--fjord-safe-bottom) + 8px);
+    height: min(100dvh, var(--fjord-viewport-height, 100dvh));
+    padding: 0;
+}
+#fjord-play.fjord-mobile button,
+#fjord-play.fjord-mobile summary,
+#fjord-play.fjord-mobile select,
+#fjord-play.fjord-mobile input:not([type=checkbox]) {
+    min-height: 44px;
+    min-width: 44px;
+    box-sizing: border-box;
+    font-size: 13px;
+    touch-action: manipulation;
+}
+#fjord-play.fjord-mobile button { -webkit-tap-highlight-color: transparent; }
+#fjord-play.fjord-mobile summary { cursor: pointer; align-content: center; }
+#fjord-play.fjord-mobile input:not([type=checkbox]),
+#fjord-play.fjord-mobile select { font-size: 16px; }
+
+/* A single quiet strip, inside real device insets; each counter remains a drilldown. */
+#fjord-play.fjord-mobile #fjord-header {
+    inset: var(--fjord-hud-top) calc(var(--fjord-safe-right) + 8px) auto calc(var(--fjord-safe-left) + 8px);
+    display: grid;
+    grid-template-columns: minmax(90px, 1fr) auto 92px;
+    align-items: center;
+    gap: 3px;
+    padding: 3px;
+    border: 1px solid var(--fjord-line);
+    border-radius: 6px;
+    background: var(--fjord-panel);
+    pointer-events: auto;
+}
+#fjord-play.fjord-mobile .fjord-brand,
+#fjord-play.fjord-mobile .fjord-kpis,
+#fjord-play.fjord-mobile .fjord-time-controls {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    grid-row: 1;
+    padding: 0;
+}
+#fjord-play.fjord-mobile .fjord-brand {
+    grid-column: 1;
+    width: auto;
+    min-width: 0;
+    gap: 7px;
+    padding-left: 7px;
+}
+#fjord-play.fjord-mobile .fjord-brand img { display: none; }
+#fjord-play.fjord-mobile #fjord-clan-name { font-size: 15px; max-width: 24ch; letter-spacing: 0; }
+#fjord-play.fjord-mobile #fjord-winter { gap: 4px; margin-top: 4px; font-size: 11px; }
+#fjord-play.fjord-mobile .fjord-kpis {
+    grid-column: 2;
+    grid-template-columns: repeat(4, minmax(64px, max-content));
+    margin: 0;
+    align-self: stretch;
+}
+#fjord-play.fjord-mobile .fjord-kpis > div { justify-content: center; }
+#fjord-play.fjord-mobile .fjord-kpis dt { display: none; }
+#fjord-play.fjord-mobile .fjord-kpis dd { font-size: 14px; }
+#fjord-play.fjord-mobile .fjord-kpis button { padding: 5px 7px; gap: 5px; font-size: 14px; }
+#fjord-play.fjord-mobile .fjord-kpis .fjord-glyph { width: 19px; height: 19px; }
+#fjord-play.fjord-mobile .fjord-time-controls { grid-column: 3; gap: 2px; justify-content: end; }
+#fjord-play.fjord-mobile #fjord-run,
+#fjord-play.fjord-mobile #fjord-menu > summary { width: 44px; height: 44px; padding: 9px; }
+#fjord-play.fjord-mobile #fjord-run > span { display: none; }
+#fjord-play.fjord-mobile #fjord-pacing-slot,
+#fjord-play.fjord-mobile #fjord-next-slot { display: none; }
+#fjord-play.fjord-mobile #fjord-menu-next-slot #fjord-next { display: inline-flex; }
+#fjord-play.fjord-mobile #fjord-menu .fjord-settings {
+    top: calc(100% + 7px);
+    right: 0;
+    width: min(360px, calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 24px));
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-safe-top) - var(--fjord-safe-bottom) - 80px);
+    padding: 12px;
+    background: var(--fjord-panel);
+}
+#fjord-play.fjord-mobile #fjord-cycle { width: 100%; min-height: 44px; font-size: 16px; }
+#fjord-play.fjord-mobile .fjord-settings button { margin: 4px 0; }
+#fjord-play.fjord-mobile .fjord-settings summary { padding: 5px 0; }
+
+/* Three thumb controls. The journal/directory drawer is transient and never covers the status strip. */
+#fjord-play.fjord-mobile #fjord-navigation {
+    left: auto;
+    right: calc(var(--fjord-safe-right) + 68px);
+    bottom: var(--fjord-sheet-bottom);
+    padding: 3px;
+    gap: 3px;
+}
+#fjord-play.fjord-mobile #fjord-mobile-menu { display: inline-flex; width: 44px; padding: 8px; }
+#fjord-play.fjord-mobile #fjord-navigation > [data-surface="expeditions"] {
+    width: 44px;
+    padding: 8px;
+    font-size: 0;
+    gap: 0;
+}
+#fjord-play.fjord-mobile #fjord-navigation .fjord-glyph { width: 22px; height: 22px; }
+#fjord-play.fjord-mobile #fjord-navigation-drawer { display: none; }
+#fjord-play.fjord-mobile #fjord-navigation-drawer.is-open {
+    position: absolute;
+    display: grid;
+    right: 0;
+    bottom: 59px;
+    width: 205px;
+    padding: 6px;
+    gap: 4px;
+    background: var(--fjord-panel);
+    border: 1px solid var(--fjord-line);
+    border-radius: 6px;
+}
+#fjord-play.fjord-mobile #fjord-navigation-drawer button { justify-content: start; padding: 8px 12px; }
+#fjord-play.fjord-mobile #fjord-attention {
+    right: calc(var(--fjord-safe-right) + 8px);
+    bottom: var(--fjord-sheet-bottom);
+    min-height: 52px;
+    width: 54px;
+    padding: 8px;
+    gap: 2px;
+}
+#fjord-play.fjord-mobile .fjord-attention-label { display: none; }
+#fjord-play.fjord-mobile #fjord-attention-count { font-size: 11px; color: var(--fjord-accent); }
+
+/* Peek, details and tasks all use one real selection/command surface. */
+#fjord-play.fjord-mobile .fjord-stage #fjord-management,
+#fjord-play.fjord-mobile .fjord-stage #fjord-management.fjord-home-card,
+#fjord-play.fjord-mobile .fjord-stage #fjord-management.fjord-focus,
+#fjord-play.fjord-mobile #fjord-workspace {
+    left: calc(var(--fjord-safe-left) + 8px);
+    right: auto;
+    top: auto;
+    bottom: var(--fjord-sheet-bottom);
+    width: min(440px, calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 184px));
+    max-width: none;
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-sheet-top) - var(--fjord-sheet-bottom));
+    height: auto;
+    transform: none;
+    padding: 0;
+    display: block;
+    border-radius: 7px;
+    box-sizing: border-box;
+    overflow: auto;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+}
+#fjord-play.fjord-mobile .fjord-stage #fjord-management.fjord-expanded,
+#fjord-play.fjord-mobile #fjord-workspace {
+    top: var(--fjord-sheet-top);
+    width: min(480px, calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 184px));
+}
+#fjord-play.fjord-mobile #fjord-workspace { padding: 12px; }
+#fjord-play.fjord-mobile .fjord-focus #entity-panel { display: block; max-height: none; }
+#fjord-play.fjord-mobile .fjord-card-heading { gap: 8px; padding: 8px 10px; }
+#fjord-play.fjord-mobile .fjord-card-heading h2 { font: 20px/1.15 Georgia,serif; margin: 2px 0 4px; }
+#fjord-play.fjord-mobile .fjord-card-heading small { display: none; }
+#fjord-play.fjord-mobile .fjord-emblem { border: 0; width: 28px; height: 36px; }
+#fjord-play.fjord-mobile .fjord-emblem .fjord-glyph { width: 26px; height: 26px; }
+#fjord-play.fjord-mobile .fjord-close { width: 44px; min-height: 44px; flex: 0 0 auto; }
+#fjord-play.fjord-mobile .fjord-card-body { padding: 8px 12px 12px; overflow: visible; }
+#fjord-play.fjord-mobile .fjord-card-body p { margin-bottom: 7px; }
+#fjord-play.fjord-mobile .fjord-actions { gap: 5px; margin-top: 6px; }
+#fjord-play.fjord-mobile #entity-panel .fjord-actions button { flex: 1 1 100px; padding: 7px; font-size: 12px; }
+#fjord-play.fjord-mobile .fjord-choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#fjord-play.fjord-mobile .fjord-task-columns { grid-template-columns: 1fr; gap: 7px; }
+#fjord-play.fjord-mobile .fjord-plan-review { position: static; padding: 8px 0 0; }
+#fjord-play.fjord-mobile .fjord-directory-list { grid-template-columns: 1fr; }
+#fjord-play.fjord-mobile .fjord-relations > div { align-items: center; }
+#fjord-play.fjord-mobile button.fjord-link { min-height: 44px; }
+#fjord-play.fjord-mobile label.fjord-check { min-height: 44px; }
+#fjord-play.fjord-mobile #fjord-selection-labels .related { display: none; }
+#fjord-play.fjord-mobile #fjord-selection-leaders { display: none; }
+#fjord-play.fjord-mobile .fjord-home-specialization { flex-wrap: wrap; }
+#fjord-play.fjord-mobile .fjord-home-change { font-size: 12px; }
+#fjord-play.fjord-mobile .fjord-workspace-heading { align-items: center; margin-bottom: 8px; }
+#fjord-play.fjord-mobile .fjord-workspace-heading h2 { font: 22px Georgia,serif; }
+#fjord-play.fjord-mobile #expedition-panel button { min-height: 44px; }
+#fjord-play.fjord-mobile .fjord-expedition-intro { align-items: start; }
+#fjord-play.fjord-mobile .fjord-expedition-steps { gap: 5px; }
+#fjord-play.fjord-mobile .fjord-expedition-steps li + li::before { display: none; }
+#fjord-play.fjord-mobile .fjord-expedition-members { grid-template-columns: 1fr; max-height: none; }
+#fjord-play.fjord-mobile .fjord-expedition-section-heading { flex-wrap: wrap; }
+
+/* Persistent map actions stay above the thumb row, with one global clock. */
+#fjord-play.fjord-mobile:has(#fjord-management:not([hidden])) #expedition-mode { display: none; }
+#fjord-play.fjord-mobile #expedition-mode {
+    left: calc(var(--fjord-safe-left) + 8px);
+    right: calc(var(--fjord-safe-right) + 8px);
+    top: auto;
+    bottom: calc(var(--fjord-safe-bottom) + 68px);
+    width: auto;
+    max-width: none;
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-safe-top) - var(--fjord-safe-bottom) - 138px);
+    padding: 7px 10px;
+    transform: none;
+    overflow: auto;
+}
+.fjord-mobile-expedition-heading { display: flex; gap: 5px; align-items: center; }
+#fjord-play.fjord-mobile .fjord-mobile-expedition-heading button { padding: 4px 8px; min-height: 44px; font-size: 12px; }
+#fjord-play.fjord-mobile .fjord-mobile-expedition-heading button:first-child { margin-right: auto; border: 0; background: transparent; text-align: left; justify-content: start; min-width: 0; }
+.fjord-mobile-expedition-heading strong,
+.fjord-mobile-expedition-heading small { display: block; }
+.fjord-mobile-expedition-heading small { font-size: 11px; color: var(--fjord-muted); }
+#fjord-play.fjord-mobile #expedition-mode .fjord-mobile-instruction { font-size: 12px; margin: 3px 0; color: var(--fjord-muted); }
+#fjord-play.fjord-mobile #expedition-mode .fjord-expedition-actions { margin: 5px 0 0; }
+#fjord-play.fjord-mobile #expedition-mode .fjord-expedition-actions button { min-height: 44px; font-size: 12px; }
+#fjord-play.fjord-mobile #expedition-mode .fjord-expedition-message { margin-top: 6px; }
+#fjord-play.fjord-mobile dialog {
+    box-sizing: border-box;
+    width: min(460px, calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 24px));
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-safe-top) - var(--fjord-safe-bottom) - 24px);
+    overflow: auto;
+    padding: 15px;
+}
+#fjord-play.fjord-mobile footer #fjord-notice:not(:empty).fjord-feedback {
+    left: auto;
+    right: calc(var(--fjord-safe-right) + 8px);
+    bottom: calc(var(--fjord-safe-bottom) + 72px);
+    max-width: min(240px, calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 24px));
+}
+
+@media (max-width: 600px) {
+    #fjord-play.fjord-mobile { --fjord-sheet-top: calc(var(--fjord-safe-top) + 116px); }
+    #fjord-play.fjord-mobile #fjord-header { grid-template-columns: minmax(0, 1fr) 92px; }
+    #fjord-play.fjord-mobile .fjord-time-controls { grid-column: 2; }
+    #fjord-play.fjord-mobile .fjord-kpis { grid-column: 1 / -1; grid-row: 2; width: 100%; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    #fjord-play.fjord-mobile .fjord-kpis button { padding: 5px 3px; font-size: 13px; }
+    #fjord-play.fjord-mobile .fjord-stage #fjord-management,
+    #fjord-play.fjord-mobile .fjord-stage #fjord-management.fjord-home-card,
+    #fjord-play.fjord-mobile .fjord-stage #fjord-management.fjord-focus,
+    #fjord-play.fjord-mobile .fjord-stage #fjord-management.fjord-expanded,
+    #fjord-play.fjord-mobile #fjord-workspace {
+        width: calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 16px);
+        bottom: calc(var(--fjord-safe-bottom) + 68px);
+        max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-sheet-top) - var(--fjord-safe-bottom) - 68px);
+    }
+    #fjord-play.fjord-mobile .fjord-choice-grid { grid-template-columns: 1fr; }
+    #fjord-play.fjord-mobile .fjord-profile-stats,
+    #fjord-play.fjord-mobile .fjord-traits { gap: 10px; }
+}

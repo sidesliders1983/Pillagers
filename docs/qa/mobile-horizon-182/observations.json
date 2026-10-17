@@ -1,0 +1,2471 @@
+{
+  "status": "PASS",
+  "origin": "http://127.0.0.1:5183",
+  "checks": [
+    "Six phone/tablet/portrait artboards; 44px controls, simulated safe areas, no horizontal overflow; personal peek/details preserve full campaign",
+    "Four actual touch activations: world tent → Manage work → Set up farmyard → Confirm; house, farmer and three cattle committed once; all ten occupations and independent upgrades remain available; journal/attention accessible",
+    "Desktop 1440px controls and full home card restored after viewport/input change; exploration-disabled save remains gated; stale upgrade error remains visible without a charge",
+    "Real mobile expedition: cancelled quote, exact 4-Food pack, read-only supplies/flag preview, Cancel, explicit Send and header Resume, discovery, conservative return and physical homecoming; no second clock",
+    "Native drag/pinch never confirms a flag; reload restores a prepared paused expedition without another charge; ending discards the pack without refund"
+  ],
+  "layouts": [
+    {
+      "name": "default-852",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "default-667",
+      "width": 667,
+      "height": 375,
+      "left": 44,
+      "right": 623,
+      "bottom": 354,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 563,
+        "height": 52
+      },
+      "nav": {
+        "x": 456,
+        "y": 294,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 561,
+        "y": 294,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 265.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 329.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 393.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 461.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 265.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 329.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 393.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 461.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 521,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 567,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 460,
+          "y": 298,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 507,
+          "y": 298,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 561,
+          "y": 294,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 667,
+      "defaultWorldFraction": 0.8511464267866067
+    },
+    {
+      "name": "default-932",
+      "width": 932,
+      "height": 430,
+      "left": 44,
+      "right": 888,
+      "bottom": 409,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 828,
+        "height": 52
+      },
+      "nav": {
+        "x": 721,
+        "y": 294,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 826,
+        "y": 294,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 530.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 594.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 658.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 726.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 530.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 594.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 658.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 726.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 786,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 832,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 725,
+          "y": 298,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 772,
+          "y": 298,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 826,
+          "y": 294,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 932,
+      "defaultWorldFraction": 0.8727118474897695
+    },
+    {
+      "name": "default-1024",
+      "width": 1024,
+      "height": 636,
+      "left": 44,
+      "right": 980,
+      "bottom": 615,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 920,
+        "height": 52
+      },
+      "nav": {
+        "x": 813,
+        "y": 349,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 918,
+        "y": 349,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 622.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 686.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 750.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 818.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 622.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 686.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 750.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 818.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 878,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 924,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 817,
+          "y": 353,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 864,
+          "y": 353,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 918,
+          "y": 349,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 1024,
+      "defaultWorldFraction": 0.9143266018081762
+    },
+    {
+      "name": "default-640",
+      "width": 640,
+      "height": 768,
+      "left": 0,
+      "right": 640,
+      "bottom": 747,
+      "header": {
+        "x": 8,
+        "y": 8,
+        "width": 624,
+        "height": 52
+      },
+      "nav": {
+        "x": 473,
+        "y": 555,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 578,
+        "y": 555,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 282.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 346.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 410.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 478.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 282.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 346.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 410.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 478.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 538,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 584,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 477,
+          "y": 559,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 524,
+          "y": 559,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578,
+          "y": 555,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 640,
+      "defaultWorldFraction": 0.9177978515625
+    },
+    {
+      "name": "default-390",
+      "width": 390,
+      "height": 844,
+      "left": 0,
+      "right": 390,
+      "bottom": 823,
+      "header": {
+        "x": 8,
+        "y": 8,
+        "width": 374,
+        "height": 99
+      },
+      "nav": {
+        "x": 223,
+        "y": 687,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 328,
+        "y": 687,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 35.703125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "x": 126.953125,
+          "y": 59,
+          "width": 45.578125,
+          "height": 44
+        },
+        {
+          "x": 219.203125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "x": 310.75,
+          "y": 59,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 35.703125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 126.953125,
+          "y": 59,
+          "width": 45.578125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 219.203125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 310.75,
+          "y": 59,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 288,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 334,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 227,
+          "y": 691,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 274,
+          "y": 691,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 328,
+          "y": 687,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 390,
+      "defaultWorldFraction": 0.8633430550492162
+    },
+    {
+      "name": "settings",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-cycle",
+          "tag": "SELECT",
+          "type": null,
+          "x": 452,
+          "y": 132.84375,
+          "width": 334,
+          "height": 44
+        },
+        {
+          "id": "fjord-next",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 452,
+          "y": 192.484375,
+          "width": 50.765625,
+          "height": 44
+        },
+        {
+          "id": "clan-book-open",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 506.609375,
+          "y": 190.84375,
+          "width": 73.890625,
+          "height": 44
+        },
+        {
+          "id": "fjord-expeditions-open",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 580.5,
+          "y": 190.84375,
+          "width": 120.1875,
+          "height": 44
+        },
+        {
+          "id": "fjord-quality",
+          "tag": "SELECT",
+          "type": null,
+          "x": 452,
+          "y": 274.375,
+          "width": 334,
+          "height": 44
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "person-peek",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "close-card",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 433,
+          "y": 216.609375,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "occupation",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 65,
+          "y": 307,
+          "width": 204.5,
+          "height": 44
+        },
+        {
+          "id": "expand-card",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 274.5,
+          "y": 307,
+          "width": 204.5,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "person-details",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "close-card",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 473,
+          "y": 84,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "portrait-person-details",
+      "width": 390,
+      "height": 844,
+      "left": 0,
+      "right": 390,
+      "bottom": 823,
+      "header": {
+        "x": 8,
+        "y": 8,
+        "width": 374,
+        "height": 99
+      },
+      "nav": {
+        "x": 223,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 328,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 35.703125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "x": 126.953125,
+          "y": 59,
+          "width": 45.578125,
+          "height": 44
+        },
+        {
+          "x": 219.203125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "x": 310.75,
+          "y": 59,
+          "width": 44,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 35.703125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 126.953125,
+          "y": 59,
+          "width": 45.578125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 219.203125,
+          "y": 59,
+          "width": 44.078125,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 310.75,
+          "y": 59,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 288,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 334,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "close-card",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 323,
+          "y": 130,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 227,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 274,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 328,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 390,
+      "defaultWorldFraction": 0.8633430550492162
+    },
+    {
+      "name": "farmyard-review",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.109375,
+          "y": 12,
+          "width": 54.78125,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "close-card",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 473,
+          "y": 84,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "worker",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 65,
+          "y": 192.390625,
+          "width": 223,
+          "height": 58.34375
+        },
+        {
+          "id": "worker",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 296,
+          "y": 192.390625,
+          "width": 223,
+          "height": 58.34375
+        },
+        {
+          "id": "",
+          "tag": "INPUT",
+          "type": "checkbox",
+          "x": 69,
+          "y": 274.234375,
+          "width": 17,
+          "height": 17
+        },
+        {
+          "id": "",
+          "tag": "INPUT",
+          "type": "checkbox",
+          "x": 69,
+          "y": 328.234375,
+          "width": 17,
+          "height": 17
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "home-improvements",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "close-card",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 473,
+          "y": 84,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "MaelColuim and Inghild Sigurdardóttir’s house",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 65,
+          "y": 150,
+          "width": 454,
+          "height": 44
+        },
+        {
+          "id": "specialization",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 426.90625,
+          "y": 226,
+          "width": 75.09375,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "attention",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 514.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 514.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "close-workspace",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 475,
+          "y": 83,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "inspect",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 65,
+          "y": 183.484375,
+          "width": 201.609375,
+          "height": 44
+        },
+        {
+          "id": "inspect",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 266.609375,
+          "y": 183.484375,
+          "width": 118.53125,
+          "height": 44
+        },
+        {
+          "id": "inspect",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 385.140625,
+          "y": 183.484375,
+          "width": 133.484375,
+          "height": 44
+        },
+        {
+          "id": "inspect",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 65,
+          "y": 227.484375,
+          "width": 198.109375,
+          "height": 44
+        },
+        {
+          "id": "inspect",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 65,
+          "y": 271.484375,
+          "width": 277.8125,
+          "height": 44
+        },
+        {
+          "id": "inspect",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 342.8125,
+          "y": 271.484375,
+          "width": 149.34375,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "packing-review",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 450.421875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 518.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "expedition-start-confirm",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 221,
+          "y": 307.265625,
+          "width": 122.390625,
+          "height": 44
+        },
+        {
+          "id": "expedition-start-cancel",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 350.390625,
+          "y": 307.265625,
+          "width": 76.5,
+          "height": 44
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "exploration-choose",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 451.21875,
+          "y": 12,
+          "width": 51.546875,
+          "height": 44
+        },
+        {
+          "x": 518.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 451.21875,
+          "y": 12,
+          "width": 51.546875,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 518.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Open expedition group",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 63,
+          "y": 182.609375,
+          "width": 148.15625,
+          "height": 44
+        },
+        {
+          "id": "expedition-details",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 643.53125,
+          "y": 182.609375,
+          "width": 92.46875,
+          "height": 44
+        },
+        {
+          "id": "Show group on map",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 741,
+          "y": 182.609375,
+          "width": 48,
+          "height": 44
+        },
+        {
+          "id": "expedition-send",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 63,
+          "y": 252,
+          "width": 107.921875,
+          "height": 44
+        },
+        {
+          "id": "expedition-cancel",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 177.921875,
+          "y": 252,
+          "width": 81.0625,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    },
+    {
+      "name": "exploration-active",
+      "width": 852,
+      "height": 393,
+      "left": 44,
+      "right": 808,
+      "bottom": 372,
+      "header": {
+        "x": 52,
+        "y": 8,
+        "width": 748,
+        "height": 52
+      },
+      "nav": {
+        "x": 641,
+        "y": 312,
+        "width": 99,
+        "height": 52
+      },
+      "attention": {
+        "x": 746,
+        "y": 312,
+        "width": 54,
+        "height": 52
+      },
+      "counters": [
+        {
+          "x": 451.21875,
+          "y": 12,
+          "width": 51.546875,
+          "height": 44
+        },
+        {
+          "x": 518.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        }
+      ],
+      "badTargets": [],
+      "outOfBounds": [],
+      "controls": [
+        {
+          "id": "Food stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 451.21875,
+          "y": 12,
+          "width": 51.546875,
+          "height": 44
+        },
+        {
+          "id": "Materials stocks",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 518.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "Settlement residents",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 578.921875,
+          "y": 12,
+          "width": 53.15625,
+          "height": 44
+        },
+        {
+          "id": "Settlement livestock",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 646.296875,
+          "y": 12,
+          "width": 46.390625,
+          "height": 44
+        },
+        {
+          "id": "fjord-run",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 706,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Game menu",
+          "tag": "SUMMARY",
+          "type": null,
+          "x": 752,
+          "y": 12,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Open expedition group",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 63,
+          "y": 143.21875,
+          "width": 91.515625,
+          "height": 44
+        },
+        {
+          "id": "expedition-details",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 643.53125,
+          "y": 143.21875,
+          "width": 92.46875,
+          "height": 44
+        },
+        {
+          "id": "Show group on map",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 741,
+          "y": 143.21875,
+          "width": 48,
+          "height": 44
+        },
+        {
+          "id": "Change destination",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 63,
+          "y": 212.609375,
+          "width": 148.84375,
+          "height": 44
+        },
+        {
+          "id": "Return home",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 218.84375,
+          "y": 212.609375,
+          "width": 114.65625,
+          "height": 44
+        },
+        {
+          "id": "fjord-mobile-menu",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 645,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "Expeditions",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 692,
+          "y": 316,
+          "width": 44,
+          "height": 44
+        },
+        {
+          "id": "fjord-attention",
+          "tag": "BUTTON",
+          "type": "button",
+          "x": 746,
+          "y": 312,
+          "width": 54,
+          "height": 52
+        }
+      ],
+      "scrollWidth": 852,
+      "defaultWorldFraction": 0.8600747828787825
+    }
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "MobileShell.ts": "b45b653b1547676f64c977199f1275b48239141f41e5e645f33530b1ef6b811b",
+    "mobile-horizon.css": "8941505882f60fa9d744b508dfb6c7994b3c1988d4d5dde53876bc9edf55020c",
+    "FjordHeader.ts": "8719a90a159b986a1de750e0fdb87ed665a00ad4234cf7766c4d139cf8d7b975",
+    "FjordInterface.ts": "3f4cfd9dff96161237aae9dafad76a684e940fee01ada4596f83fc917e2c0dcb",
+    "FjordPlay.ts": "9dc8fad49e88db22a4f90ae9a93fb370eb1f7b4ffc2cd4c68fa7f475cb7df353",
+    "ExpeditionPanel.ts": "3e90291e69549106f573e9b4b8565b47d5f873d4406cf8b1b8ff24c83d1c2b71"
+  }
+}
