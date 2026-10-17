@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fjordside UI prototypes</title>
+    <link rel="stylesheet" href="prototype-v2.css">
+</head>
+<body>
+    <header id="study-tools">
+        <a class="study-title" href="../../FJORDSIDE-DESKTOP-UI-DESIGN-V01.md">Fjordside <span>UI study</span></a>
+        <label>Try a journey
+            <select id="journey">
+                <option value="farmyard">Farmyard · funded test state</option>
+                <option value="blocked">Original start · insufficient Materials</option>
+                <option value="resident">Work and household</option>
+                <option value="expedition">Send an expedition</option>
+                <option value="history">Explore family history</option>
+                <option value="developed">Developed settlement</option>
+            </select>
+        </label>
+        <button id="reset">Reset journey</button>
+        <details id="review-state">
+            <summary>Scenario and review state</summary>
+            <p>Interactive UI proposal. Real captured world, frozen fixture facts and local draft actions.
+                No campaign is loaded, changed or saved. World images do not animate.</p>
+            <p id="scenario-source"></p>
+            <pre id="state-dump"></pre>
+        </details>
+        <a href="comparison-v2.html">Screenshot comparison</a>
+    </header>
+    <main id="game" aria-label="Fjordside desktop UI prototype">
+        <p class="loading">Preparing the design study…</p>
+    </main>
+    <footer id="variant-switcher" aria-label="Prototype comparison">
+        <button id="previous-variant" aria-label="Previous layout">←</button>
+        <div><strong id="variant-name"></strong><small id="trial-metrics"></small></div>
+        <button id="next-variant" aria-label="Next layout">→</button>
+    </footer>
+    <script type="module" src="prototype-v2.mjs"></script>
+</body>
+</html>

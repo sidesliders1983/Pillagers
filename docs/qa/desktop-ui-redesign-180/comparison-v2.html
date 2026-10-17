@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fjordside UI layout comparison</title>
+    <style>
+        :root { color-scheme: dark; font: 15px/1.5 "Segoe UI", system-ui, sans-serif; color: #eee8db; background: #162124; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 30px; max-width: 1600px; margin-inline: auto; }
+        header { display: flex; align-items: center; gap: 24px; justify-content: space-between; margin-bottom: 22px; }
+        h1 { font: 32px Georgia, serif; margin: 0 0 10px; }
+        p { color: #c4cabe; margin: 0; }
+        .eyebrow { color: #dfbd7e; font-size: 11px; letter-spacing: .12em; margin-bottom: 10px; }
+        a { color: #e6c98e; }
+        .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        figure { margin: 0; min-width: 0; }
+        figure > a { display: block; }
+        img { display: block; width: 100%; border: 1px solid #7f8a72; border-radius: 4px; }
+        h2 { font: 22px Georgia, serif; color: #f0d9aa; margin: 13px 0 8px; }
+        figure p { font-size: 13px; margin: 5px 0; }
+        .metric { color: #b8d6c8; }
+        .launch { display: inline-block; margin-top: 10px; }
+        section.notes { margin-top: 30px; border-top: 1px solid #687364; padding-top: 20px; }
+        section.notes p { max-width: 1000px; margin-bottom: 12px; font-size: 13px; }
+        .results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
+        .results strong { display: block; color: #e6c98e; font-size: 23px; font-weight: 400; }
+        .results span { font-size: 12px; color: #c4cabe; }
+        @media (max-width: 850px) {
+            body { padding: 20px; }
+            header { display: block; }
+            header > a { display: inline-block; margin-top: 15px; }
+            .variants { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <p class="eyebrow">FJORDSIDE / DESKTOP UI STUDY</p>
+            <h1>One task. Three different layouts.</h1>
+            <p>The same village, choices and commitment. Compare how much space each layout needs.</p>
+        </div>
+        <a href="prototype-v2.html?variant=A">Open interactive study →</a>
+    </header>
+    <main class="variants">
+        <figure>
+            <a href="screenshots-v2/A-farmyard.jpg"><img src="screenshots-v2/A-farmyard.jpg" alt="Layout A: vertical farmyard inspector at the right of the world"></a>
+            <figcaption>
+                <h2>A · Right inspector</h2>
+                <p>Choices and commitment stay at the edge. Best measured world coverage while setting up the farmyard.</p>
+                <p class="metric">75.5% world visible · 3 clicks to complete</p>
+                <a class="launch" href="prototype-v2.html?variant=A&journey=farmyard">Try layout A →</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <a href="screenshots-v2/B-farmyard.jpg"><img src="screenshots-v2/B-farmyard.jpg" alt="Layout B: residents, cattle and commitment beside each other in a bottom tray"></a>
+            <figcaption>
+                <h2>B · Bottom task tray</h2>
+                <p>Compare residents, animals and cost side by side. More of the foreground is covered.</p>
+                <p class="metric">69.0% world visible · 3 clicks to complete</p>
+                <a class="launch" href="prototype-v2.html?variant=B&journey=farmyard">Try layout B →</a>
+            </figcaption>
+        </figure>
+        <figure>
+            <a href="screenshots-v2/C-farmyard.jpg"><img src="screenshots-v2/C-farmyard.jpg" alt="Layout C: compact world selection followed by a focused central farmyard task"></a>
+            <figcaption>
+                <h2>C · Context and focus</h2>
+                <p>A small selection summary expands into a focused task. The decision occupies the centre of the world.</p>
+                <p class="metric">69.7% world visible · 3 clicks to complete</p>
+                <a class="launch" href="prototype-v2.html?variant=C&journey=farmyard">Try layout C →</a>
+            </figcaption>
+        </figure>
+    </main>
+    <div class="results">
+        <div><strong>3 clicks</strong><span>Farmyard: select household → set up → confirm suggestions</span></div>
+        <div><strong>8 clicks + 1</strong><span>Three-person expedition order, plus Start when paused</span></div>
+        <div><strong>3 clicks</strong><span>Clan Book → Family Tree → specific person</span></div>
+    </div>
+    <section class="notes">
+        <p>Measured at 1440 × 900. Coverage counts the union of UI rectangles, including translucent panels.
+            These are prototype input counts, not proof that the current game already provides these shortcuts.
+            No preference or winning layout has been selected.</p>
+        <p>The funded farmyard scenario is derived from the original five-Materials fixture using the existing
+            longship salvage command (+20 Materials). This prepares the fixture; farmyard setup never silently salvages a ship.
+            The original insufficient-Materials scenario is also available. Actions change only local review state.</p>
+        <p>Each layout uses the same actual world capture. Building a house in the prototype changes its summary and
+            resource preview; the captured world does not animate or rebuild. No FPS, simulation-performance or visual-world improvement is claimed.</p>
+    </section>
+</body>
+</html>

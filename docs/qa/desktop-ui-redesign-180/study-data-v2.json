@@ -1,0 +1,1661 @@
+{
+  "version": 2,
+  "sourceHead": "eeba00d09c4ea0350a9cfc8dd2cde948fd41c66c",
+  "scenes": {
+    "blocked": {
+      "backdrop": "world-founding.png",
+      "provenance": {
+        "fixture": "summer-32",
+        "sha256": "4caf546615ebf176d17250c0662a774299612983251ee61268e52babf4418006",
+        "commands": []
+      },
+      "year": 800,
+      "tick": 500,
+      "clan": "Landing party",
+      "stocks": {
+        "food": 15,
+        "materials": 5
+      },
+      "houseCost": 10,
+      "capacity": 4,
+      "cattle": [
+        {
+          "id": "cattle-1",
+          "sex": "female",
+          "farmyardId": null
+        },
+        {
+          "id": "cattle-2",
+          "sex": "female",
+          "farmyardId": null
+        },
+        {
+          "id": "cattle-3",
+          "sex": "male",
+          "farmyardId": null
+        }
+      ],
+      "people": [
+        {
+          "id": "founder-1",
+          "name": "MaelColuim",
+          "age": 40,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 8887,
+          "canFarm": true,
+          "partner": "founder-10",
+          "children": [],
+          "home": {
+            "id": "founder-1",
+            "label": "MaelColuim and Inghild Sigurdardóttir’s household",
+            "residence": "tent-founder-1",
+            "members": [
+              "founder-1",
+              "founder-10"
+            ]
+          }
+        },
+        {
+          "id": "founder-2",
+          "name": "Kauppi",
+          "age": 22,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 6842,
+          "canFarm": true,
+          "partner": "founder-3",
+          "children": [],
+          "home": {
+            "id": "founder-2",
+            "label": "Kauppi and Dervla’s household",
+            "residence": "tent-founder-2",
+            "members": [
+              "founder-2",
+              "founder-3"
+            ]
+          }
+        },
+        {
+          "id": "founder-3",
+          "name": "Dervla",
+          "age": 21,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 6749,
+          "canFarm": true,
+          "partner": "founder-2",
+          "children": [],
+          "home": {
+            "id": "founder-2",
+            "label": "Kauppi and Dervla’s household",
+            "residence": "tent-founder-2",
+            "members": [
+              "founder-2",
+              "founder-3"
+            ]
+          }
+        },
+        {
+          "id": "founder-4",
+          "name": "Áilu",
+          "age": 20,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 6987,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu’s household",
+            "residence": "tent-founder-4",
+            "members": [
+              "founder-4"
+            ]
+          }
+        },
+        {
+          "id": "founder-5",
+          "name": "Conán",
+          "age": 25,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 6638,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-5",
+            "label": "Conán’s household",
+            "residence": "tent-founder-5",
+            "members": [
+              "founder-5"
+            ]
+          }
+        },
+        {
+          "id": "founder-6",
+          "name": "Eaddis Olafsdóttir",
+          "age": 35,
+          "occupation": "farmer",
+          "occupationLocked": false,
+          "farmerFit": 7654,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-6",
+            "label": "Eaddis Olafsdóttir’s household",
+            "residence": "tent-founder-6",
+            "members": [
+              "founder-6"
+            ]
+          }
+        },
+        {
+          "id": "founder-7",
+          "name": "Sigfrid Bjarnardóttir",
+          "age": 36,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 8436,
+          "canFarm": true,
+          "partner": "founder-8",
+          "children": [],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir and Kauppi’s household",
+            "residence": "tent-founder-7",
+            "members": [
+              "founder-7",
+              "founder-8"
+            ]
+          }
+        },
+        {
+          "id": "founder-8",
+          "name": "Kauppi",
+          "age": 36,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 7718,
+          "canFarm": true,
+          "partner": "founder-7",
+          "children": [],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir and Kauppi’s household",
+            "residence": "tent-founder-7",
+            "members": [
+              "founder-7",
+              "founder-8"
+            ]
+          }
+        },
+        {
+          "id": "founder-9",
+          "name": "Daugirdė",
+          "age": 28,
+          "occupation": "woodworker",
+          "occupationLocked": false,
+          "farmerFit": 7459,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-9",
+            "label": "Daugirdė’s household",
+            "residence": "tent-founder-9",
+            "members": [
+              "founder-9"
+            ]
+          }
+        },
+        {
+          "id": "founder-10",
+          "name": "Inghild Sigurdardóttir",
+          "age": 19,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 7722,
+          "canFarm": true,
+          "partner": "founder-1",
+          "children": [],
+          "home": {
+            "id": "founder-1",
+            "label": "MaelColuim and Inghild Sigurdardóttir’s household",
+            "residence": "tent-founder-1",
+            "members": [
+              "founder-1",
+              "founder-10"
+            ]
+          }
+        }
+      ],
+      "events": []
+    },
+    "funded": {
+      "backdrop": "world-founding.png",
+      "provenance": {
+        "fixture": "summer-32",
+        "sha256": "4caf546615ebf176d17250c0662a774299612983251ee61268e52babf4418006",
+        "commands": [
+          {
+            "type": "SalvageLongship",
+            "longshipId": "founding-longship"
+          }
+        ],
+        "note": "Funded test state uses the existing 20-Materials longship salvage command. This is fixture preparation, not part of the farmyard journey. The common founding backdrop predates salvage; no vessel is visible in the captured frame."
+      },
+      "year": 800,
+      "tick": 500,
+      "clan": "Landing party",
+      "stocks": {
+        "food": 15,
+        "materials": 25
+      },
+      "houseCost": 10,
+      "capacity": 4,
+      "cattle": [
+        {
+          "id": "cattle-1",
+          "sex": "female",
+          "farmyardId": null
+        },
+        {
+          "id": "cattle-2",
+          "sex": "female",
+          "farmyardId": null
+        },
+        {
+          "id": "cattle-3",
+          "sex": "male",
+          "farmyardId": null
+        }
+      ],
+      "people": [
+        {
+          "id": "founder-1",
+          "name": "MaelColuim",
+          "age": 40,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 8887,
+          "canFarm": true,
+          "partner": "founder-10",
+          "children": [],
+          "home": {
+            "id": "founder-1",
+            "label": "MaelColuim and Inghild Sigurdardóttir’s household",
+            "residence": "tent-founder-1",
+            "members": [
+              "founder-1",
+              "founder-10"
+            ]
+          }
+        },
+        {
+          "id": "founder-2",
+          "name": "Kauppi",
+          "age": 22,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 6842,
+          "canFarm": true,
+          "partner": "founder-3",
+          "children": [],
+          "home": {
+            "id": "founder-2",
+            "label": "Kauppi and Dervla’s household",
+            "residence": "tent-founder-2",
+            "members": [
+              "founder-2",
+              "founder-3"
+            ]
+          }
+        },
+        {
+          "id": "founder-3",
+          "name": "Dervla",
+          "age": 21,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 6749,
+          "canFarm": true,
+          "partner": "founder-2",
+          "children": [],
+          "home": {
+            "id": "founder-2",
+            "label": "Kauppi and Dervla’s household",
+            "residence": "tent-founder-2",
+            "members": [
+              "founder-2",
+              "founder-3"
+            ]
+          }
+        },
+        {
+          "id": "founder-4",
+          "name": "Áilu",
+          "age": 20,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 6987,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu’s household",
+            "residence": "tent-founder-4",
+            "members": [
+              "founder-4"
+            ]
+          }
+        },
+        {
+          "id": "founder-5",
+          "name": "Conán",
+          "age": 25,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 6638,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-5",
+            "label": "Conán’s household",
+            "residence": "tent-founder-5",
+            "members": [
+              "founder-5"
+            ]
+          }
+        },
+        {
+          "id": "founder-6",
+          "name": "Eaddis Olafsdóttir",
+          "age": 35,
+          "occupation": "farmer",
+          "occupationLocked": false,
+          "farmerFit": 7654,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-6",
+            "label": "Eaddis Olafsdóttir’s household",
+            "residence": "tent-founder-6",
+            "members": [
+              "founder-6"
+            ]
+          }
+        },
+        {
+          "id": "founder-7",
+          "name": "Sigfrid Bjarnardóttir",
+          "age": 36,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 8436,
+          "canFarm": true,
+          "partner": "founder-8",
+          "children": [],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir and Kauppi’s household",
+            "residence": "tent-founder-7",
+            "members": [
+              "founder-7",
+              "founder-8"
+            ]
+          }
+        },
+        {
+          "id": "founder-8",
+          "name": "Kauppi",
+          "age": 36,
+          "occupation": "hunter",
+          "occupationLocked": false,
+          "farmerFit": 7718,
+          "canFarm": true,
+          "partner": "founder-7",
+          "children": [],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir and Kauppi’s household",
+            "residence": "tent-founder-7",
+            "members": [
+              "founder-7",
+              "founder-8"
+            ]
+          }
+        },
+        {
+          "id": "founder-9",
+          "name": "Daugirdė",
+          "age": 28,
+          "occupation": "woodworker",
+          "occupationLocked": false,
+          "farmerFit": 7459,
+          "canFarm": true,
+          "partner": null,
+          "children": [],
+          "home": {
+            "id": "founder-9",
+            "label": "Daugirdė’s household",
+            "residence": "tent-founder-9",
+            "members": [
+              "founder-9"
+            ]
+          }
+        },
+        {
+          "id": "founder-10",
+          "name": "Inghild Sigurdardóttir",
+          "age": 19,
+          "occupation": "fisher",
+          "occupationLocked": false,
+          "farmerFit": 7722,
+          "canFarm": true,
+          "partner": "founder-1",
+          "children": [],
+          "home": {
+            "id": "founder-1",
+            "label": "MaelColuim and Inghild Sigurdardóttir’s household",
+            "residence": "tent-founder-1",
+            "members": [
+              "founder-1",
+              "founder-10"
+            ]
+          }
+        }
+      ],
+      "events": []
+    },
+    "developed": {
+      "fixture": "developed-810",
+      "fixtureSha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "year": 810,
+      "season": "Summer",
+      "stocks": {
+        "food": 100102,
+        "materials": 9900
+      },
+      "residents": 17,
+      "cattle": null,
+      "exposed": {
+        "residentIds": [],
+        "cattleIds": []
+      },
+      "houseCost": 10,
+      "people": [
+        {
+          "id": "founder-1",
+          "name": "MaelColuim",
+          "age": 50,
+          "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 8887,
+            "productivityBps": 9579,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.11,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-3",
+          "parents": [],
+          "children": [
+            "persona-4"
+          ],
+          "home": {
+            "id": "household-2",
+            "label": "MaelColuim, Dervla and Fionnán’s household",
+            "residence": "house-1",
+            "members": [
+              "founder-1",
+              "founder-3",
+              "persona-4"
+            ]
+          },
+          "traits": {
+            "physicality": 0.68,
+            "agility": 0.29,
+            "intelligence": 0.59,
+            "cunning": 0.33,
+            "temperament": 0.01
+          }
+        },
+        {
+          "id": "founder-2",
+          "name": "Kauppi",
+          "age": 32,
+          "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 6158,
+            "productivityBps": 6773,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.4115,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-10",
+          "parents": [],
+          "children": [
+            "persona-3",
+            "persona-6"
+          ],
+          "home": {
+            "id": "household-1",
+            "label": "Inghild Sigurdardóttir, Kauppi, Ingdis Sigurdardóttir and Inghild Bjarnardóttir’s household",
+            "residence": "house-2",
+            "members": [
+              "founder-10",
+              "founder-2",
+              "persona-3",
+              "persona-6"
+            ]
+          },
+          "traits": {
+            "physicality": 0.3,
+            "agility": 0.13,
+            "intelligence": 0.37,
+            "cunning": 0.22,
+            "temperament": 0.67
+          }
+        },
+        {
+          "id": "founder-3",
+          "name": "Dervla",
+          "age": 31,
+          "occupation": "woodworker",
+          "work": {
+            "aptitudeBps": 5555,
+            "productivityBps": 0,
+            "unitsPerWinter": 5,
+            "resource": "materials",
+            "progress": 0.58175,
+            "reason": "childcare"
+          },
+          "occupationLocked": true,
+          "partner": "founder-1",
+          "parents": [],
+          "children": [
+            "persona-4"
+          ],
+          "home": {
+            "id": "household-2",
+            "label": "MaelColuim, Dervla and Fionnán’s household",
+            "residence": "house-1",
+            "members": [
+              "founder-1",
+              "founder-3",
+              "persona-4"
+            ]
+          },
+          "traits": {
+            "physicality": 0.36,
+            "agility": 0.02,
+            "intelligence": 0.2,
+            "cunning": 0.84,
+            "temperament": 0.01
+          }
+        },
+        {
+          "id": "founder-4",
+          "name": "Áilu",
+          "age": 30,
+          "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 8279,
+            "productivityBps": 9106,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.1935,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-9",
+          "parents": [],
+          "children": [
+            "persona-2",
+            "persona-5",
+            "persona-7"
+          ],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu, Daugirdė, Minmantė, Tautvydė and Daugirdė’s household",
+            "residence": "house-4",
+            "members": [
+              "founder-4",
+              "founder-9",
+              "persona-2",
+              "persona-5",
+              "persona-7"
+            ]
+          },
+          "traits": {
+            "physicality": 0.82,
+            "agility": 0.91,
+            "intelligence": 0.03,
+            "cunning": 0.5,
+            "temperament": 0.79
+          }
+        },
+        {
+          "id": "founder-5",
+          "name": "Conán",
+          "age": 35,
+          "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 6638,
+            "productivityBps": 7301,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.7175,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-6",
+          "parents": [],
+          "children": [],
+          "home": {
+            "id": "founder-5",
+            "label": "Conán and Eaddis Olafsdóttir’s household",
+            "residence": "house-5",
+            "members": [
+              "founder-5",
+              "founder-6"
+            ]
+          },
+          "traits": {
+            "physicality": 0.14,
+            "agility": 0.3,
+            "intelligence": 0.64,
+            "cunning": 0.26,
+            "temperament": 0.87
+          }
+        },
+        {
+          "id": "founder-6",
+          "name": "Eaddis Olafsdóttir",
+          "age": 45,
+          "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 7497,
+            "productivityBps": 8246,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.634,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-5",
+          "parents": [],
+          "children": [],
+          "home": {
+            "id": "founder-5",
+            "label": "Conán and Eaddis Olafsdóttir’s household",
+            "residence": "house-5",
+            "members": [
+              "founder-5",
+              "founder-6"
+            ]
+          },
+          "traits": {
+            "physicality": 0.06,
+            "agility": 0.62,
+            "intelligence": 0.81,
+            "cunning": 0.56,
+            "temperament": 0.14
+          }
+        },
+        {
+          "id": "founder-7",
+          "name": "Sigfrid Bjarnardóttir",
+          "age": 46,
+          "occupation": "woodworker",
+          "work": {
+            "aptitudeBps": 7250,
+            "productivityBps": 7250,
+            "unitsPerWinter": 5,
+            "resource": "materials",
+            "progress": 0.79675,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-8",
+          "parents": [],
+          "children": [
+            "persona-1"
+          ],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir, Kauppi and Thormund Sigurdarson’s household",
+            "residence": "house-6",
+            "members": [
+              "founder-7",
+              "founder-8",
+              "persona-1"
+            ]
+          },
+          "traits": {
+            "physicality": 0.97,
+            "agility": 0.49,
+            "intelligence": 0.21,
+            "cunning": 0.36,
+            "temperament": 0.26
+          }
+        },
+        {
+          "id": "founder-8",
+          "name": "Kauppi",
+          "age": 46,
+          "occupation": "hunter",
+          "work": {
+            "aptitudeBps": 9065,
+            "productivityBps": 9971,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.814,
+            "reason": null
+          },
+          "occupationLocked": true,
+          "partner": "founder-7",
+          "parents": [],
+          "children": [
+            "persona-1"
+          ],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir, Kauppi and Thormund Sigurdarson’s household",
+            "residence": "house-6",
+            "members": [
+              "founder-7",
+              "founder-8",
+              "persona-1"
+            ]
+          },
+          "traits": {
+            "physicality": 0.64,
+            "agility": 0.93,
+            "intelligence": 0.34,
+            "cunning": 0.65,
+            "temperament": 0.72
+          }
+        },
+        {
+          "id": "founder-9",
+          "name": "Daugirdė",
+          "age": 38,
+          "occupation": "farmer",
+          "work": {
+            "aptitudeBps": 7459,
+            "productivityBps": 0,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.4345,
+            "reason": "childcare"
+          },
+          "occupationLocked": true,
+          "partner": "founder-4",
+          "parents": [],
+          "children": [
+            "persona-2",
+            "persona-5",
+            "persona-7"
+          ],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu, Daugirdė, Minmantė, Tautvydė and Daugirdė’s household",
+            "residence": "house-4",
+            "members": [
+              "founder-4",
+              "founder-9",
+              "persona-2",
+              "persona-5",
+              "persona-7"
+            ]
+          },
+          "traits": {
+            "physicality": 0.03,
+            "agility": 0.52,
+            "intelligence": 0.47,
+            "cunning": 0.57,
+            "temperament": 0.07
+          }
+        },
+        {
+          "id": "founder-10",
+          "name": "Inghild Sigurdardóttir",
+          "age": 29,
+          "occupation": "fisher",
+          "work": {
+            "aptitudeBps": 8347,
+            "productivityBps": 0,
+            "unitsPerWinter": 10,
+            "resource": "food",
+            "progress": 0.0485,
+            "reason": "childcare"
+          },
+          "occupationLocked": true,
+          "partner": "founder-2",
+          "parents": [],
+          "children": [
+            "persona-3",
+            "persona-6"
+          ],
+          "home": {
+            "id": "household-1",
+            "label": "Inghild Sigurdardóttir, Kauppi, Ingdis Sigurdardóttir and Inghild Bjarnardóttir’s household",
+            "residence": "house-2",
+            "members": [
+              "founder-10",
+              "founder-2",
+              "persona-3",
+              "persona-6"
+            ]
+          },
+          "traits": {
+            "physicality": 0.46,
+            "agility": 0.76,
+            "intelligence": 0.98,
+            "cunning": 0.91,
+            "temperament": 0.49
+          }
+        },
+        {
+          "id": "persona-1",
+          "name": "Thormund Sigurdarson",
+          "age": 9,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-8",
+            "founder-7"
+          ],
+          "children": [],
+          "home": {
+            "id": "founder-7",
+            "label": "Sigfrid Bjarnardóttir, Kauppi and Thormund Sigurdarson’s household",
+            "residence": "house-6",
+            "members": [
+              "founder-7",
+              "founder-8",
+              "persona-1"
+            ]
+          },
+          "traits": {
+            "physicality": 0.8049999999999999,
+            "agility": 0.71,
+            "intelligence": 0.275,
+            "cunning": 0.505,
+            "temperament": 0.26
+          }
+        },
+        {
+          "id": "persona-2",
+          "name": "Minmantė",
+          "age": 7,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-4",
+            "founder-9"
+          ],
+          "children": [],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu, Daugirdė, Minmantė, Tautvydė and Daugirdė’s household",
+            "residence": "house-4",
+            "members": [
+              "founder-4",
+              "founder-9",
+              "persona-2",
+              "persona-5",
+              "persona-7"
+            ]
+          },
+          "traits": {
+            "physicality": 0.03,
+            "agility": 0.7150000000000001,
+            "intelligence": 0.25,
+            "cunning": 0.5349999999999999,
+            "temperament": 0.43000000000000005
+          }
+        },
+        {
+          "id": "persona-3",
+          "name": "Ingdis Sigurdardóttir",
+          "age": 6,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-2",
+            "founder-10"
+          ],
+          "children": [],
+          "home": {
+            "id": "household-1",
+            "label": "Inghild Sigurdardóttir, Kauppi, Ingdis Sigurdardóttir and Inghild Bjarnardóttir’s household",
+            "residence": "house-2",
+            "members": [
+              "founder-10",
+              "founder-2",
+              "persona-3",
+              "persona-6"
+            ]
+          },
+          "traits": {
+            "physicality": 0.38,
+            "agility": 0.76,
+            "intelligence": 0.675,
+            "cunning": 0.5650000000000001,
+            "temperament": 0.49
+          }
+        },
+        {
+          "id": "persona-4",
+          "name": "Fionnán",
+          "age": 3,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-1",
+            "founder-3"
+          ],
+          "children": [],
+          "home": {
+            "id": "household-2",
+            "label": "MaelColuim, Dervla and Fionnán’s household",
+            "residence": "house-1",
+            "members": [
+              "founder-1",
+              "founder-3",
+              "persona-4"
+            ]
+          },
+          "traits": {
+            "physicality": 0.52,
+            "agility": 0.02,
+            "intelligence": 0.395,
+            "cunning": 0.585,
+            "temperament": 0.01
+          }
+        },
+        {
+          "id": "persona-5",
+          "name": "Tautvydė",
+          "age": 3,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-4",
+            "founder-9"
+          ],
+          "children": [],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu, Daugirdė, Minmantė, Tautvydė and Daugirdė’s household",
+            "residence": "house-4",
+            "members": [
+              "founder-4",
+              "founder-9",
+              "persona-2",
+              "persona-5",
+              "persona-7"
+            ]
+          },
+          "traits": {
+            "physicality": 0.425,
+            "agility": 0.52,
+            "intelligence": 0.25,
+            "cunning": 0.5349999999999999,
+            "temperament": 0.43000000000000005
+          }
+        },
+        {
+          "id": "persona-6",
+          "name": "Inghild Bjarnardóttir",
+          "age": 2,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-2",
+            "founder-10"
+          ],
+          "children": [],
+          "home": {
+            "id": "household-1",
+            "label": "Inghild Sigurdardóttir, Kauppi, Ingdis Sigurdardóttir and Inghild Bjarnardóttir’s household",
+            "residence": "house-2",
+            "members": [
+              "founder-10",
+              "founder-2",
+              "persona-3",
+              "persona-6"
+            ]
+          },
+          "traits": {
+            "physicality": 0.38,
+            "agility": 0.445,
+            "intelligence": 0.675,
+            "cunning": 0.91,
+            "temperament": 0.5800000000000001
+          }
+        },
+        {
+          "id": "persona-7",
+          "name": "Daugirdė",
+          "age": 0,
+          "occupation": null,
+          "work": {
+            "aptitudeBps": 0,
+            "productivityBps": 0,
+            "unitsPerWinter": 0,
+            "resource": null,
+            "progress": 0,
+            "reason": "underage"
+          },
+          "occupationLocked": false,
+          "partner": null,
+          "parents": [
+            "founder-4",
+            "founder-9"
+          ],
+          "children": [],
+          "home": {
+            "id": "founder-4",
+            "label": "Áilu, Daugirdė, Minmantė, Tautvydė and Daugirdė’s household",
+            "residence": "house-4",
+            "members": [
+              "founder-4",
+              "founder-9",
+              "persona-2",
+              "persona-5",
+              "persona-7"
+            ]
+          },
+          "traits": {
+            "physicality": 0.425,
+            "agility": 0.91,
+            "intelligence": 0.25,
+            "cunning": 0.5,
+            "temperament": 0.43000000000000005
+          }
+        }
+      ],
+      "farmyards": [
+        {
+          "id": "house-4",
+          "householdId": "founder-4",
+          "capacity": 4,
+          "occupants": 0,
+          "overcrowding": 0
+        },
+        {
+          "id": "house-5",
+          "householdId": "founder-5",
+          "capacity": 4,
+          "occupants": 0,
+          "overcrowding": 0
+        },
+        {
+          "id": "house-1",
+          "householdId": "household-2",
+          "capacity": 4,
+          "occupants": 8,
+          "overcrowding": 4
+        }
+      ],
+      "events": [
+        {
+          "id": "event-569",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "CattleDied",
+          "details": {
+            "cattleId": "cattle-9",
+            "parentIds": [
+              "cattle-1",
+              "cattle-3"
+            ],
+            "sex": "female",
+            "age": 4,
+            "farmyardId": "house-1",
+            "mortalityRiskBps": 1050,
+            "sheltered": true,
+            "weatherExposureBps": 0,
+            "weatherClass": "Normal",
+            "weatherWinter": 809,
+            "regionId": "landing-region"
+          }
+        },
+        {
+          "id": "event-570",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "CattleFoodConsumed",
+          "details": {
+            "units": 6,
+            "required": 6,
+            "shortfall": 0,
+            "weatherClass": "Normal",
+            "weatherWinter": 809,
+            "regionId": "landing-region",
+            "cattleIds": [
+              "cattle-1",
+              "cattle-10",
+              "cattle-11",
+              "cattle-2",
+              "cattle-3",
+              "cattle-4",
+              "cattle-5",
+              "cattle-6"
+            ]
+          }
+        },
+        {
+          "id": "event-571",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "FoodConsumed",
+          "details": {
+            "units": 26,
+            "shortfall": 0
+          }
+        },
+        {
+          "id": "event-572",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "BuildingMaintained",
+          "details": {
+            "buildingId": "house-1",
+            "units": 1,
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-1",
+                "name": "MaelColuim, Dervla and Fionnán’s home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [
+                "household-2"
+              ],
+              "buildingId": "house-1",
+              "residenceId": null,
+              "residentIds": [
+                "founder-1",
+                "founder-3",
+                "persona-4"
+              ],
+              "people": [
+                {
+                  "id": "founder-1",
+                  "name": "MaelColuim",
+                  "age": 50
+                },
+                {
+                  "id": "founder-3",
+                  "name": "Dervla",
+                  "age": 31
+                },
+                {
+                  "id": "persona-4",
+                  "name": "Fionnán",
+                  "age": 3
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "event-573",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "BuildingMaintained",
+          "details": {
+            "buildingId": "house-2",
+            "units": 1,
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-2",
+                "name": "Inghild Sigurdardóttir, Kauppi, Ingdis Sigurdardóttir and Inghild Bjarnardóttir’s home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [
+                "household-1"
+              ],
+              "buildingId": "house-2",
+              "residenceId": null,
+              "residentIds": [
+                "founder-10",
+                "founder-2",
+                "persona-3",
+                "persona-6"
+              ],
+              "people": [
+                {
+                  "id": "founder-10",
+                  "name": "Inghild Sigurdardóttir",
+                  "age": 29
+                },
+                {
+                  "id": "founder-2",
+                  "name": "Kauppi",
+                  "age": 32
+                },
+                {
+                  "id": "persona-3",
+                  "name": "Ingdis Sigurdardóttir",
+                  "age": 6
+                },
+                {
+                  "id": "persona-6",
+                  "name": "Inghild Bjarnardóttir",
+                  "age": 2
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "event-574",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "MaintenanceDebtIncreased",
+          "details": {
+            "buildingId": "house-3",
+            "debtWinters": 3,
+            "reason": "vacant",
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-3",
+                "name": "A home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [],
+              "buildingId": "house-3",
+              "residenceId": null,
+              "residentIds": [],
+              "people": []
+            }
+          }
+        },
+        {
+          "id": "event-575",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "BuildingCollapsed",
+          "details": {
+            "buildingId": "house-3",
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-3",
+                "name": "A home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [],
+              "buildingId": "house-3",
+              "residenceId": null,
+              "residentIds": [],
+              "people": []
+            },
+            "salvage": 5
+          }
+        },
+        {
+          "id": "event-576",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "BuildingMaintained",
+          "details": {
+            "buildingId": "house-4",
+            "units": 1,
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-4",
+                "name": "Áilu, Daugirdė, Minmantė and Tautvydė’s home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [
+                "founder-4"
+              ],
+              "buildingId": "house-4",
+              "residenceId": null,
+              "residentIds": [
+                "founder-4",
+                "founder-9",
+                "persona-2",
+                "persona-5"
+              ],
+              "people": [
+                {
+                  "id": "founder-4",
+                  "name": "Áilu",
+                  "age": 30
+                },
+                {
+                  "id": "founder-9",
+                  "name": "Daugirdė",
+                  "age": 38
+                },
+                {
+                  "id": "persona-2",
+                  "name": "Minmantė",
+                  "age": 7
+                },
+                {
+                  "id": "persona-5",
+                  "name": "Tautvydė",
+                  "age": 3
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "event-577",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "BuildingMaintained",
+          "details": {
+            "buildingId": "house-5",
+            "units": 1,
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-5",
+                "name": "Conán and Eaddis Olafsdóttir’s home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [
+                "founder-5"
+              ],
+              "buildingId": "house-5",
+              "residenceId": null,
+              "residentIds": [
+                "founder-5",
+                "founder-6"
+              ],
+              "people": [
+                {
+                  "id": "founder-5",
+                  "name": "Conán",
+                  "age": 35
+                },
+                {
+                  "id": "founder-6",
+                  "name": "Eaddis Olafsdóttir",
+                  "age": 45
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "event-578",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "BuildingMaintained",
+          "details": {
+            "buildingId": "house-6",
+            "units": 1,
+            "housingNames": {
+              "version": 1,
+              "building": {
+                "id": "house-6",
+                "name": "Sigfrid Bjarnardóttir, Kauppi and Thormund Sigurdarson’s home"
+              }
+            },
+            "housingResidents": {
+              "version": 1,
+              "householdIds": [
+                "founder-7"
+              ],
+              "buildingId": "house-6",
+              "residenceId": null,
+              "residentIds": [
+                "founder-7",
+                "founder-8",
+                "persona-1"
+              ],
+              "people": [
+                {
+                  "id": "founder-7",
+                  "name": "Sigfrid Bjarnardóttir",
+                  "age": 46
+                },
+                {
+                  "id": "founder-8",
+                  "name": "Kauppi",
+                  "age": 46
+                },
+                {
+                  "id": "persona-1",
+                  "name": "Thormund Sigurdarson",
+                  "age": 9
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "event-579",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "ChildBorn",
+          "personaId": "persona-7",
+          "details": {
+            "participants": [
+              "founder-4",
+              "founder-9",
+              "persona-7"
+            ],
+            "parentIds": [
+              "founder-4",
+              "founder-9"
+            ],
+            "name": "Daugirdė",
+            "dna": {
+              "schemaVersion": 1,
+              "seed": 726975044,
+              "sex": "female",
+              "age": 0,
+              "traits": {
+                "physicality": 0.425,
+                "agility": 0.91,
+                "intelligence": 0.25,
+                "cunning": 0.5,
+                "temperament": 0.43000000000000005
+              },
+              "heritage": {
+                "scandinavian": 0.11711954591654997,
+                "angloSaxon": 0.09469171524655047,
+                "gaelic": 0.09456782377633532,
+                "finnic": 0.2084357251622137,
+                "sami": 0.23785489730950743,
+                "baltic": 0.24733029258884326
+              }
+            },
+            "people": [
+              {
+                "id": "persona-7",
+                "name": "Daugirdė",
+                "age": 0
+              },
+              {
+                "id": "founder-4",
+                "name": "Áilu",
+                "age": 30
+              },
+              {
+                "id": "founder-9",
+                "name": "Daugirdė",
+                "age": 38
+              }
+            ]
+          }
+        },
+        {
+          "id": "event-580",
+          "time": {
+            "winter": 810,
+            "tick": 0
+          },
+          "type": "WinterWeatherDetermined",
+          "details": {
+            "regionId": "landing-region",
+            "winter": 810,
+            "weatherClass": "Mild"
+          }
+        }
+      ],
+      "markers": [
+        {
+          "id": "founder-4",
+          "x": 684.8014057441447,
+          "y": 605.8703855698622
+        },
+        {
+          "id": "founder-1",
+          "x": 312.78004484066673,
+          "y": 446.8605031580969
+        }
+      ],
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "viewport": [
+          1440,
+          900
+        ]
+      },
+      "backdrop": "world-settled.png",
+      "provenance": {
+        "fixture": "developed-810",
+        "sha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766"
+      },
+      "clan": "Landing party",
+      "cattleCount": 8
+    }
+  },
+  "chapter": "This book began from an imported campaign. Its founding details were incomplete.\n\nThe founding party of 10 residents arrived. Kauppi and Sigfrid Bjarnardóttir were already partners at arrival. Dervla and Kauppi were already partners at arrival. Inghild Sigurdardóttir and MaelColuim were already partners at arrival.",
+  "farmyardResult": {
+    "candidateId": "founder-1",
+    "materials": 15,
+    "farmyard": {
+      "id": "house-1",
+      "householdId": "founder-1",
+      "capacity": 4,
+      "occupants": 3,
+      "overcrowding": 0
+    },
+    "note": "A headless feasibility check of existing commands, not implementation of a combined command."
+  }
+}

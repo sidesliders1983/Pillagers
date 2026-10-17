@@ -1,0 +1,3357 @@
+{
+  "browser": "155.0.4283.45",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "observations": [
+    {
+      "name": "A-observe",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "observe",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 0,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 93.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 287.640625,
+          "y": 530.5,
+          "width": 100.71875,
+          "height": 31,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-inspect",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 88.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 191,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-farmyard",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 75.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 666.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {
+          "founder-1": "farmer"
+        },
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Home built · farmer assigned · 3 cattle sheltered"
+      },
+      "worldPercent": 87.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 270,
+          "y": 530.5,
+          "width": 136,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 257.609375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-expedition",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "expedition",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 79.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "panel",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 522.75,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-dispatched",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "group",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 6,
+        "clicks": 8,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "travelling",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Destination assigned · same carried provisions"
+      },
+      "worldPercent": 87.9,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 243,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-running",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "group",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 6,
+        "clicks": 9,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "travelling",
+        "targeting": false,
+        "running": true,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Destination assigned · same carried provisions"
+      },
+      "worldPercent": 87.9,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 243,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-family",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "history",
+        "scene": "blocked",
+        "screen": "book",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "family",
+        "familyPerson": "founder-1",
+        "result": ""
+      },
+      "worldPercent": 83.3,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "book",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 383.75,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-observe",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "observe",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 0,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 93.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 287.640625,
+          "y": 530.5,
+          "width": 100.71875,
+          "height": 31,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-inspect",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 81.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 586.65625,
+          "width": 720,
+          "height": 221.34375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-farmyard",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 69,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 160,
+          "y": 520.796875,
+          "width": 1120,
+          "height": 287.203125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {
+          "founder-1": "farmer"
+        },
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Home built · farmer assigned · 3 cattle sheltered"
+      },
+      "worldPercent": 82.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 270,
+          "y": 530.5,
+          "width": 136,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 609.390625,
+          "width": 720,
+          "height": 198.609375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-expedition",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "expedition",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 67.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "expedition",
+          "x": 160,
+          "y": 506,
+          "width": 1120,
+          "height": 302,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-dispatched",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "group",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 6,
+        "clicks": 8,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "travelling",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Destination assigned · same carried provisions"
+      },
+      "worldPercent": 80.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 570.4375,
+          "width": 720,
+          "height": 237.5625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-running",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "group",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 6,
+        "clicks": 9,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "travelling",
+        "targeting": false,
+        "running": true,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Destination assigned · same carried provisions"
+      },
+      "worldPercent": 80.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 570.4375,
+          "width": 720,
+          "height": 237.5625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-family",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "history",
+        "scene": "blocked",
+        "screen": "book",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "family",
+        "familyPerson": "founder-1",
+        "result": ""
+      },
+      "worldPercent": 72.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "book",
+          "x": 295,
+          "y": 485.609375,
+          "width": 850,
+          "height": 322.390625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-observe",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "observe",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 0,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 93.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 287.640625,
+          "y": 530.5,
+          "width": 100.71875,
+          "height": 31,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-inspect",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 88.9,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 531,
+          "width": 300,
+          "height": 201.625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-farmyard",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 69.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 491.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {
+          "founder-1": "farmer"
+        },
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Home built · farmer assigned · 3 cattle sheltered"
+      },
+      "worldPercent": 88.1,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 270,
+          "y": 530.5,
+          "width": 136,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 531,
+          "width": 300,
+          "height": 238.390625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-expedition",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "expedition",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 71.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "expedition",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 453.765625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-dispatched",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "group",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 6,
+        "clicks": 8,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "travelling",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Destination assigned · same carried provisions"
+      },
+      "worldPercent": 88.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 531,
+          "width": 300,
+          "height": 240.625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-running",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "expedition",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "group",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 6,
+        "clicks": 9,
+        "keys": 0,
+        "groupCreated": true,
+        "members": [
+          "founder-1",
+          "founder-4",
+          "founder-5"
+        ],
+        "expedition": "travelling",
+        "targeting": false,
+        "running": true,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Destination assigned · same carried provisions"
+      },
+      "worldPercent": 88.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 531,
+          "width": 300,
+          "height": 240.625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-family",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "history",
+        "scene": "blocked",
+        "screen": "book",
+        "selection": null,
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "family",
+        "familyPerson": "founder-1",
+        "result": ""
+      },
+      "worldPercent": 77.1,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "book",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 339.765625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-blocked",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "blocked",
+        "scene": "blocked",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 699.546875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-cancelled",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "blocked",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 1,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 88.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 191,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 72.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 170.421875,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 449.828125,
+          "y": 16,
+          "width": 380.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1084,
+          "y": 16,
+          "width": 180,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 645,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1142.875,
+          "y": 648,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 927,
+          "y": 105,
+          "width": 335,
+          "height": 524,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "variant": "B",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 58,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 170.421875,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 449.828125,
+          "y": 16,
+          "width": 380.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1084,
+          "y": 16,
+          "width": 180,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 645,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1142.875,
+          "y": 648,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 80,
+          "y": 348.796875,
+          "width": 1120,
+          "height": 279.203125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-1280",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "state": {
+        "variant": "C",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 58.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 170.421875,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 449.828125,
+          "y": 16,
+          "width": 380.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1084,
+          "y": 16,
+          "width": 180,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 645,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1142.875,
+          "y": 648,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 322,
+          "y": 96,
+          "width": 636,
+          "height": 481.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-1920",
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "state": {
+        "variant": "B",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 80.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 744.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1705,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 1005,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1782.875,
+          "y": 1008,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 400,
+          "y": 700.796875,
+          "width": 1120,
+          "height": 287.203125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-developed",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "developed",
+        "scene": "developed",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 1,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 89.4,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 484.6484375,
+          "y": 16,
+          "width": 470.703125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 531,
+          "width": 300,
+          "height": 183.78125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-occupation-risk",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "developed",
+        "scene": "developed",
+        "screen": "occupation-risk",
+        "selection": "person",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "pendingOccupation": "hunter",
+        "atRiskCattle": 8
+      },
+      "worldPercent": 77.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 484.6484375,
+          "y": 16,
+          "width": 470.703125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "panel",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 327.359375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-kept-farmer",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "developed",
+        "scene": "developed",
+        "screen": "compact",
+        "selection": "person",
+        "personId": "founder-1",
+        "farmerId": "founder-1",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 1,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "",
+        "pendingOccupation": "hunter",
+        "atRiskCattle": 8
+      },
+      "worldPercent": 89.4,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 484.6484375,
+          "y": 16,
+          "width": 470.703125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 531,
+          "width": 300,
+          "height": 183.78125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-kept-draft",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "farmyard",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-10",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 75.1,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "farmyard",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 681.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-alternate-farmer",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "farmyard",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "farmerId": "founder-10",
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {
+          "founder-10": "farmer"
+        },
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Home built · farmer assigned · 3 cattle sheltered"
+      },
+      "worldPercent": 87.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.828125,
+          "y": 16,
+          "width": 430.34375,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 270,
+          "y": 530.5,
+          "width": 136,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 257.609375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    }
+  ],
+  "errors": [],
+  "sources": {
+    "prototype-v2.html": "7c728ccd7ac7961571ec14da0ba265814f850c282d3f15783d4a0caa465d79e4",
+    "prototype-v2.css": "2eac3071c40606b017e18c8c4d0039e7ac8a709546d8868ac90ca90d6288bbd3",
+    "prototype-v2.mjs": "39988a95e145f583113799981128a9ddafea3a84852cecc797958da912be7c1c",
+    "study-data-v2.json": "430d574ef41be983eb3409cadb0a557d66a0387e4dc131edfdf0c46a2b77ffa3"
+  }
+}
