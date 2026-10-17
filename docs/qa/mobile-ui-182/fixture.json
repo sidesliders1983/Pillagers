@@ -1,0 +1,3534 @@
+{
+  "developed": {
+    "campaign": {
+      "name": "Landing party",
+      "seed": 32,
+      "season": "Summer",
+      "year": 810,
+      "progress": 0.5,
+      "visualProgress": 0.5,
+      "winterWeight": 0,
+      "food": 100102,
+      "materials": 9900,
+      "people": 17,
+      "cattle": 8,
+      "discoveryEnabled": false,
+      "benchmarkStocks": true
+    },
+    "person": {
+      "id": "founder-1",
+      "name": "MaelColuim",
+      "age": 50,
+      "sex": "male",
+      "occupation": "farmer",
+      "work": {
+        "resource": "food",
+        "productivity": 95.79,
+        "aptitude": 88.87,
+        "reason": null
+      },
+      "traits": {
+        "physicality": 0.68,
+        "agility": 0.29,
+        "intelligence": 0.59,
+        "cunning": 0.33,
+        "temperament": 0.01
+      },
+      "partner": "Dervla",
+      "children": [
+        "Fionnán"
+      ],
+      "heritage": {
+        "scandinavian": 0.23990253169008308,
+        "angloSaxon": 0.09897714551443601,
+        "gaelic": 0.26916520915143494,
+        "finnic": 0.25465008507953674,
+        "sami": 0.11596657512120911,
+        "baltic": 0.021338453443300206
+      },
+      "household": "household-2"
+    },
+    "home": {
+      "id": "house-1",
+      "kind": "house",
+      "household": "household-2",
+      "residents": [
+        {
+          "name": "MaelColuim",
+          "occupation": "farmer"
+        },
+        {
+          "name": "Dervla",
+          "occupation": "woodworker"
+        },
+        {
+          "name": "Fionnán",
+          "occupation": null
+        }
+      ],
+      "specialization": null,
+      "level": 0,
+      "bonus": 0,
+      "cost": 5,
+      "nextBonus": 25,
+      "upkeep": 1
+    },
+    "houseCost": 10,
+    "occupations": [
+      {
+        "id": "farmer",
+        "output": "food",
+        "aptitude": 88.87
+      },
+      {
+        "id": "herder",
+        "output": null,
+        "aptitude": 85.21
+      },
+      {
+        "id": "fisher",
+        "output": "food",
+        "aptitude": 79.05
+      },
+      {
+        "id": "hunter",
+        "output": "food",
+        "aptitude": 73.56
+      },
+      {
+        "id": "textileWorker",
+        "output": null,
+        "aptitude": 73.35
+      },
+      {
+        "id": "smith",
+        "output": null,
+        "aptitude": 78.67
+      },
+      {
+        "id": "woodworker",
+        "output": "materials",
+        "aptitude": 80.03
+      },
+      {
+        "id": "boatbuilder",
+        "output": null,
+        "aptitude": 79.09
+      },
+      {
+        "id": "trader",
+        "output": null,
+        "aptitude": 71.27
+      },
+      {
+        "id": "leatherAndJewelleryMaker",
+        "output": null,
+        "aptitude": 71.31
+      }
+    ],
+    "events": [
+      {
+        "winter": 800,
+        "text": "Animal cattle-1 was assigned to the Farmyard at MaelColuim’s home."
+      },
+      {
+        "winter": 800,
+        "text": "Animal cattle-2 was assigned to the Farmyard at MaelColuim’s home."
+      },
+      {
+        "winter": 800,
+        "text": "Animal cattle-3 was assigned to the Farmyard at MaelColuim’s home."
+      },
+      {
+        "winter": 800,
+        "text": "The settlement produced 23 Food and 2 Materials this Winter."
+      },
+      {
+        "winter": 800,
+        "text": "The herd produced 2 Food this Winter."
+      }
+    ],
+    "hotspots": {
+      "person": {
+        "x": 29.162267822659494,
+        "y": 49.92295340661273
+      },
+      "home": {
+        "x": 30.329387861908568,
+        "y": 62.756057693003186
+      },
+      "cattle": {
+        "x": 34.13438881709683,
+        "y": 61.018471923798664
+      }
+    },
+    "conditions": [],
+    "vehicles": [
+      {
+        "id": "founding-longship",
+        "type": "Longship"
+      }
+    ],
+    "book": {
+      "title": "The founding",
+      "excerpt": "This book began from an imported campaign. Its founding details were incomplete.\n\nThe founding party of 10 residents arrived. Kauppi and Sigfrid Bjarnardóttir were already partners at arrival. Daugirdė and Áilu were already partners at arrival. Eaddis Olafsdóttir and Conán were already partners at arrival."
+    },
+    "plans": {
+      "farmer": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "farmer",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": {
+          "occupants": 8,
+          "capacity": 4
+        }
+      },
+      "herder": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "herder",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "fisher": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "fisher",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "hunter": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "hunter",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "textileWorker": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "textileWorker",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "smith": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "smith",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "woodworker": {
+        "allowed": true,
+        "worker": "Dervla",
+        "from": "woodworker",
+        "to": "woodworker",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": {
+          "occupants": 8,
+          "capacity": 4
+        }
+      },
+      "boatbuilder": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "boatbuilder",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "trader": {
+        "allowed": true,
+        "worker": "Dervla",
+        "from": "woodworker",
+        "to": "trader",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": {
+          "occupants": 8,
+          "capacity": 4
+        }
+      },
+      "leatherAndJewelleryMaker": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "leatherAndJewelleryMaker",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3",
+          "cattle-4",
+          "cattle-5",
+          "cattle-6",
+          "cattle-10",
+          "cattle-11"
+        ],
+        "farmyard": null
+      },
+      "farmyard": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "farmer",
+        "to": "farmer",
+        "materials": 0,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": {
+          "occupants": 8,
+          "capacity": 4
+        }
+      }
+    }
+  },
+  "starting": {
+    "campaign": {
+      "name": "Landing party",
+      "seed": 32,
+      "season": "Summer",
+      "year": 800,
+      "progress": 0.5,
+      "visualProgress": 0.5,
+      "winterWeight": 0,
+      "food": 15,
+      "materials": 25,
+      "people": 10,
+      "cattle": 3,
+      "discoveryEnabled": false,
+      "benchmarkStocks": false
+    },
+    "person": {
+      "id": "founder-1",
+      "name": "MaelColuim",
+      "age": 40,
+      "sex": "male",
+      "occupation": "hunter",
+      "work": {
+        "resource": "food",
+        "productivity": 36.78,
+        "aptitude": 73.56,
+        "reason": null
+      },
+      "traits": {
+        "physicality": 0.68,
+        "agility": 0.29,
+        "intelligence": 0.59,
+        "cunning": 0.33,
+        "temperament": 0.01
+      },
+      "partner": "Inghild Sigurdardóttir",
+      "children": [],
+      "heritage": {
+        "scandinavian": 0.23990253169008308,
+        "angloSaxon": 0.09897714551443601,
+        "gaelic": 0.26916520915143494,
+        "finnic": 0.25465008507953674,
+        "sami": 0.11596657512120911,
+        "baltic": 0.021338453443300206
+      },
+      "household": "founder-1"
+    },
+    "home": {
+      "id": "tent-founder-1",
+      "kind": "tent",
+      "household": "founder-1",
+      "residents": [
+        {
+          "name": "MaelColuim",
+          "occupation": "hunter"
+        },
+        {
+          "name": "Inghild Sigurdardóttir",
+          "occupation": "fisher"
+        }
+      ],
+      "specialization": null,
+      "level": 0,
+      "bonus": 0,
+      "cost": null,
+      "nextBonus": 0,
+      "upkeep": 0
+    },
+    "houseCost": 10,
+    "occupations": [
+      {
+        "id": "farmer",
+        "output": "food",
+        "aptitude": 88.87
+      },
+      {
+        "id": "herder",
+        "output": null,
+        "aptitude": 85.21
+      },
+      {
+        "id": "fisher",
+        "output": "food",
+        "aptitude": 79.05
+      },
+      {
+        "id": "hunter",
+        "output": "food",
+        "aptitude": 73.56
+      },
+      {
+        "id": "textileWorker",
+        "output": null,
+        "aptitude": 73.35
+      },
+      {
+        "id": "smith",
+        "output": null,
+        "aptitude": 78.67
+      },
+      {
+        "id": "woodworker",
+        "output": "materials",
+        "aptitude": 80.03
+      },
+      {
+        "id": "boatbuilder",
+        "output": null,
+        "aptitude": 79.09
+      },
+      {
+        "id": "trader",
+        "output": null,
+        "aptitude": 71.27
+      },
+      {
+        "id": "leatherAndJewelleryMaker",
+        "output": null,
+        "aptitude": 71.31
+      }
+    ],
+    "events": [
+      {
+        "winter": 800,
+        "text": "The founding party of 10 residents arrived."
+      },
+      {
+        "winter": 800,
+        "text": "Kauppi and Sigfrid Bjarnardóttir were already partners at arrival."
+      },
+      {
+        "winter": 800,
+        "text": "Dervla and Kauppi were already partners at arrival."
+      },
+      {
+        "winter": 800,
+        "text": "Inghild Sigurdardóttir and MaelColuim were already partners at arrival."
+      },
+      {
+        "winter": 800,
+        "text": "Our longship was salvaged for 20 Materials."
+      }
+    ],
+    "hotspots": {
+      "person": {
+        "x": 29.162267822659466,
+        "y": 49.92295340661273
+      },
+      "home": {
+        "x": 30.329387861908604,
+        "y": 62.756057693003186
+      },
+      "cattle": {
+        "x": 57.39737162714641,
+        "y": 48.761867350527396
+      }
+    },
+    "conditions": [
+      {
+        "label": "7 households in tents",
+        "detail": "Build homes when you are ready.",
+        "count": 7
+      },
+      {
+        "label": "3 livestock without shelter",
+        "detail": "Review farmyard assignments.",
+        "count": 3
+      }
+    ],
+    "vehicles": [],
+    "book": {
+      "title": "The founding",
+      "excerpt": "This book began from an imported campaign. Its founding details were incomplete.\n\nThe founding party of 10 residents arrived. Kauppi and Sigfrid Bjarnardóttir were already partners at arrival. Dervla and Kauppi were already partners at arrival. Inghild Sigurdardóttir and MaelColuim were already partners at arrival."
+    },
+    "plans": {
+      "farmer": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "hunter",
+        "to": "farmer",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": {
+          "occupants": 0,
+          "capacity": 4
+        }
+      },
+      "herder": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "hunter",
+        "to": "herder",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "fisher": {
+        "allowed": true,
+        "worker": "Inghild Sigurdardóttir",
+        "from": "fisher",
+        "to": "fisher",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "hunter": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "hunter",
+        "to": "hunter",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "textileWorker": {
+        "allowed": true,
+        "worker": "Inghild Sigurdardóttir",
+        "from": "fisher",
+        "to": "textileWorker",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "smith": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "hunter",
+        "to": "smith",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "woodworker": {
+        "allowed": true,
+        "worker": "Inghild Sigurdardóttir",
+        "from": "fisher",
+        "to": "woodworker",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "boatbuilder": {
+        "allowed": true,
+        "worker": "Inghild Sigurdardóttir",
+        "from": "fisher",
+        "to": "boatbuilder",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "trader": {
+        "allowed": true,
+        "worker": "Inghild Sigurdardóttir",
+        "from": "fisher",
+        "to": "trader",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "leatherAndJewelleryMaker": {
+        "allowed": true,
+        "worker": "Inghild Sigurdardóttir",
+        "from": "fisher",
+        "to": "leatherAndJewelleryMaker",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": null
+      },
+      "farmyard": {
+        "allowed": true,
+        "worker": "MaelColuim",
+        "from": "hunter",
+        "to": "farmer",
+        "materials": 10,
+        "upkeep": 1,
+        "unsheltered": [],
+        "farmyard": {
+          "occupants": 3,
+          "capacity": 4
+        }
+      }
+    }
+  },
+  "exploration": {
+    "campaign": {
+      "name": "Landing party",
+      "seed": 32,
+      "season": "Summer",
+      "year": 800,
+      "progress": 0.5,
+      "visualProgress": 0.5,
+      "winterWeight": 0,
+      "food": 15,
+      "materials": 5,
+      "people": 10,
+      "cattle": 3,
+      "discoveryEnabled": true,
+      "benchmarkStocks": false
+    },
+    "person": {
+      "id": "founder-1",
+      "name": "MaelColuim",
+      "age": 40,
+      "sex": "male",
+      "occupation": "hunter",
+      "work": {
+        "resource": "food",
+        "productivity": 36.78,
+        "aptitude": 73.56,
+        "reason": null
+      },
+      "traits": {
+        "physicality": 0.68,
+        "agility": 0.29,
+        "intelligence": 0.59,
+        "cunning": 0.33,
+        "temperament": 0.01
+      },
+      "partner": "Inghild Sigurdardóttir",
+      "children": [],
+      "heritage": {
+        "scandinavian": 0.23990253169008308,
+        "angloSaxon": 0.09897714551443601,
+        "gaelic": 0.26916520915143494,
+        "finnic": 0.25465008507953674,
+        "sami": 0.11596657512120911,
+        "baltic": 0.021338453443300206
+      },
+      "household": "founder-1"
+    },
+    "home": {
+      "id": "tent-founder-1",
+      "kind": "tent",
+      "household": "founder-1",
+      "residents": [
+        {
+          "name": "MaelColuim",
+          "occupation": "hunter"
+        },
+        {
+          "name": "Inghild Sigurdardóttir",
+          "occupation": "fisher"
+        }
+      ],
+      "specialization": null,
+      "level": 0,
+      "bonus": 0,
+      "cost": null,
+      "nextBonus": 0,
+      "upkeep": 0
+    },
+    "houseCost": 10,
+    "occupations": [
+      {
+        "id": "farmer",
+        "output": "food",
+        "aptitude": 88.87
+      },
+      {
+        "id": "herder",
+        "output": null,
+        "aptitude": 85.21
+      },
+      {
+        "id": "fisher",
+        "output": "food",
+        "aptitude": 79.05
+      },
+      {
+        "id": "hunter",
+        "output": "food",
+        "aptitude": 73.56
+      },
+      {
+        "id": "textileWorker",
+        "output": null,
+        "aptitude": 73.35
+      },
+      {
+        "id": "smith",
+        "output": null,
+        "aptitude": 78.67
+      },
+      {
+        "id": "woodworker",
+        "output": "materials",
+        "aptitude": 80.03
+      },
+      {
+        "id": "boatbuilder",
+        "output": null,
+        "aptitude": 79.09
+      },
+      {
+        "id": "trader",
+        "output": null,
+        "aptitude": 71.27
+      },
+      {
+        "id": "leatherAndJewelleryMaker",
+        "output": null,
+        "aptitude": 71.31
+      }
+    ],
+    "events": [
+      {
+        "winter": 800,
+        "text": "The founding party of 10 residents arrived."
+      },
+      {
+        "winter": 800,
+        "text": "Kauppi and Sigfrid Bjarnardóttir were already partners at arrival."
+      },
+      {
+        "winter": 800,
+        "text": "Dervla and Kauppi were already partners at arrival."
+      },
+      {
+        "winter": 800,
+        "text": "Inghild Sigurdardóttir and MaelColuim were already partners at arrival."
+      },
+      {
+        "winter": 800,
+        "text": "Expedition group Group 1 was formed."
+      }
+    ],
+    "map": {
+      "columns": 100,
+      "rows": 100,
+      "home": {
+        "x": 58.75,
+        "y": 68.25
+      },
+      "cells": [
+        {
+          "x": 56,
+          "y": 56,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 56,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 56,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 56,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 56,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 57,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 58,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 59,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 60,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 61,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 62,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 63,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 64,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 65,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 66,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 67,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 68,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 69,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 69,
+          "y": 70,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 69,
+          "y": 71,
+          "water": false
+        },
+        {
+          "x": 48,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 69,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 70,
+          "y": 72,
+          "water": false
+        },
+        {
+          "x": 48,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 60,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 61,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 62,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 63,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 64,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 65,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 69,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 70,
+          "y": 73,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 59,
+          "y": 74,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 74,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 74,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 74,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 74,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 74,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 66,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 67,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 74,
+          "water": false
+        },
+        {
+          "x": 49,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 58,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 75,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 68,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 69,
+          "y": 75,
+          "water": false
+        },
+        {
+          "x": 50,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 57,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 76,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 69,
+          "y": 76,
+          "water": false
+        },
+        {
+          "x": 51,
+          "y": 77,
+          "water": false
+        },
+        {
+          "x": 52,
+          "y": 77,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 77,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 77,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 77,
+          "water": false
+        },
+        {
+          "x": 56,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 70,
+          "y": 77,
+          "water": true
+        },
+        {
+          "x": 52,
+          "y": 78,
+          "water": false
+        },
+        {
+          "x": 53,
+          "y": 78,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 78,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 56,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 70,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 71,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 72,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 73,
+          "y": 78,
+          "water": true
+        },
+        {
+          "x": 53,
+          "y": 79,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 79,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 56,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 70,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 71,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 72,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 73,
+          "y": 79,
+          "water": true
+        },
+        {
+          "x": 53,
+          "y": 80,
+          "water": false
+        },
+        {
+          "x": 54,
+          "y": 80,
+          "water": false
+        },
+        {
+          "x": 55,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 56,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 70,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 71,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 72,
+          "y": 80,
+          "water": true
+        },
+        {
+          "x": 54,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 55,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 56,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 70,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 71,
+          "y": 81,
+          "water": true
+        },
+        {
+          "x": 55,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 56,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 70,
+          "y": 82,
+          "water": true
+        },
+        {
+          "x": 56,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 57,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 68,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 69,
+          "y": 83,
+          "water": true
+        },
+        {
+          "x": 58,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 59,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 60,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 65,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 66,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 67,
+          "y": 84,
+          "water": true
+        },
+        {
+          "x": 61,
+          "y": 85,
+          "water": true
+        },
+        {
+          "x": 62,
+          "y": 85,
+          "water": true
+        },
+        {
+          "x": 63,
+          "y": 85,
+          "water": true
+        },
+        {
+          "x": 64,
+          "y": 85,
+          "water": true
+        }
+      ]
+    },
+    "conditions": [
+      {
+        "label": "7 households in tents",
+        "detail": "Build homes when you are ready.",
+        "count": 7
+      },
+      {
+        "label": "3 livestock without shelter",
+        "detail": "Review farmyard assignments.",
+        "count": 3
+      }
+    ],
+    "vehicles": [
+      {
+        "id": "founding-longship",
+        "type": "Longship"
+      }
+    ],
+    "book": {
+      "title": "The founding",
+      "excerpt": "The founding party arrived in summer. It included MaelColuim, Kauppi, Dervla, Áilu, Conán, Eaddis Olafsdóttir, Sigfrid Bjarnardóttir, Kauppi, Daugirdė and Inghild Sigurdardóttir.\n\nThe founding party had two adult cows and one adult bull and 1 longship.\n\nMaelColuim and Inghild Sigurdardóttir were already partners. Kauppi and Dervla were already partners. Sigfrid Bjarnardóttir and Kauppi were already partners. Their first households lived in tents.\n\nMaelColuim, Kauppi, Áilu and Kauppi worked as hunters. Dervla, Conán, Sigfrid Bjarnardóttir and Inghild Sigurdardóttir worked as fishers. Eaddis Olafsdóttir worked as a farmer. Daugirdė worked as a woodworker."
+    },
+    "plans": {
+      "farmer": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "herder": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "fisher": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "hunter": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "textileWorker": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "smith": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "woodworker": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "boatbuilder": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "trader": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "leatherAndJewelleryMaker": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      },
+      "farmyard": {
+        "allowed": false,
+        "reason": "Error: Insufficient Materials"
+      }
+    }
+  }
+}

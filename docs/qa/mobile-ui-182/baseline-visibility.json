@@ -1,0 +1,166 @@
+{
+  "sourceHead": "506033128e05d25d4a9a83f58463a3dc19ac417d",
+  "viewport": {
+    "width": 852,
+    "height": 393
+  },
+  "scenario": "developed-810",
+  "method": "Exclude descendants hidden by closed details, then inspect live client rectangles",
+  "visibleControls": [
+    {
+      "id": "",
+      "label": "Food stocks",
+      "width": 108.546875,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 261.40625,
+      "y": 89
+    },
+    {
+      "id": "",
+      "label": "Materials stocks",
+      "width": 91.140625,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 370.953125,
+      "y": 89
+    },
+    {
+      "id": "",
+      "label": "Settlement residents",
+      "width": 67.5,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 463.09375,
+      "y": 89
+    },
+    {
+      "id": "",
+      "label": "Settlement livestock",
+      "width": 58.796875,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 531.6875,
+      "y": 89
+    },
+    {
+      "id": "fjord-run",
+      "label": "Start simulation",
+      "width": 81.640625,
+      "height": 40,
+      "checkVisibility": true,
+      "x": 530.59375,
+      "y": 22
+    },
+    {
+      "id": "fjord-next",
+      "label": "+1 Year",
+      "width": 50.765625,
+      "height": 40,
+      "checkVisibility": true,
+      "x": 734.234375,
+      "y": 22
+    },
+    {
+      "id": "",
+      "label": "Game menu",
+      "width": 44,
+      "height": 44,
+      "checkVisibility": true,
+      "x": 791,
+      "y": 20
+    },
+    {
+      "id": "",
+      "label": "Settlement",
+      "width": 115.4375,
+      "height": 44,
+      "checkVisibility": true,
+      "x": 24,
+      "y": 325
+    },
+    {
+      "id": "",
+      "label": "Expeditions",
+      "width": 118.78125,
+      "height": 44,
+      "checkVisibility": true,
+      "x": 142.4375,
+      "y": 325
+    },
+    {
+      "id": "fjord-book",
+      "label": "Clan Book",
+      "width": 111.4375,
+      "height": 44,
+      "checkVisibility": true,
+      "x": 264.21875,
+      "y": 325
+    },
+    {
+      "id": "fjord-attention",
+      "label": "Attention: 0 current conditions",
+      "width": 122.203125,
+      "height": 53,
+      "checkVisibility": true,
+      "x": 711.796875,
+      "y": 322
+    }
+  ],
+  "below44": [
+    {
+      "id": "",
+      "label": "Food stocks",
+      "width": 108.546875,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 261.40625,
+      "y": 89
+    },
+    {
+      "id": "",
+      "label": "Materials stocks",
+      "width": 91.140625,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 370.953125,
+      "y": 89
+    },
+    {
+      "id": "",
+      "label": "Settlement residents",
+      "width": 67.5,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 463.09375,
+      "y": 89
+    },
+    {
+      "id": "",
+      "label": "Settlement livestock",
+      "width": 58.796875,
+      "height": 30,
+      "checkVisibility": true,
+      "x": 531.6875,
+      "y": 89
+    },
+    {
+      "id": "fjord-run",
+      "label": "Start simulation",
+      "width": 81.640625,
+      "height": 40,
+      "checkVisibility": true,
+      "x": 530.59375,
+      "y": 22
+    },
+    {
+      "id": "fjord-next",
+      "label": "+1 Year",
+      "width": 50.765625,
+      "height": 40,
+      "checkVisibility": true,
+      "x": 734.234375,
+      "y": 22
+    }
+  ]
+}

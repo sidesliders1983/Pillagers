@@ -1,0 +1,335 @@
+{
+  "sourceHead": "506033128e05d25d4a9a83f58463a3dc19ac417d",
+  "viewport": {
+    "width": 852,
+    "height": 393
+  },
+  "inputs": {
+    "developed": "4f8c2ebcd3e2f6a5ce9197391bb2d8d246b52cab9bdd32f348ace65f7f88511c",
+    "starting": "b87049e58bd2c435432b73bc5b3e909a65be937862130ddd5538c0df6637ae67",
+    "exploration": "12749c37e3bf0c52b2695adc6a0f55ba331668eaf21ce0495a4a015b6faa4bba"
+  },
+  "captures": [
+    {
+      "scenario": "developed-810",
+      "paused": true,
+      "viewportMeta": "width=device-width,initial-scale=1,viewport-fit=cover",
+      "smallTargets": [
+        {
+          "id": "",
+          "label": "Food stocks",
+          "width": 108.546875,
+          "height": 30
+        },
+        {
+          "id": "",
+          "label": "Materials stocks",
+          "width": 91.140625,
+          "height": 30
+        },
+        {
+          "id": "",
+          "label": "Settlement residents",
+          "width": 67.5,
+          "height": 30
+        },
+        {
+          "id": "",
+          "label": "Settlement livestock",
+          "width": 58.796875,
+          "height": 30
+        },
+        {
+          "id": "fjord-run",
+          "label": "Start simulation",
+          "width": 81.640625,
+          "height": 40
+        },
+        {
+          "id": "fjord-next",
+          "label": "+1 Year",
+          "width": 50.765625,
+          "height": 40
+        },
+        {
+          "id": "clan-book-open",
+          "label": "Clan Book",
+          "width": 78.34375,
+          "height": 40
+        },
+        {
+          "id": "fjord-expeditions-open",
+          "label": "Expedition groups",
+          "width": 128.203125,
+          "height": 40
+        },
+        {
+          "id": "",
+          "label": "Keep screen awake",
+          "width": 132.96875,
+          "height": 40
+        },
+        {
+          "id": "fjord-view-home",
+          "label": "View settlement",
+          "width": 114.875,
+          "height": 40
+        },
+        {
+          "id": "fjord-view-summit",
+          "label": "View highlands",
+          "width": 109.46875,
+          "height": 40
+        },
+        {
+          "id": "fjord-save",
+          "label": "Save locally",
+          "width": 87.171875,
+          "height": 40
+        },
+        {
+          "id": "fjord-load",
+          "label": "Load locally",
+          "width": 88.734375,
+          "height": 40
+        },
+        {
+          "id": "fjord-export",
+          "label": "Export Fjord campaign",
+          "width": 155.328125,
+          "height": 40
+        },
+        {
+          "id": "fjord-export-core",
+          "label": "Export canonical JSON",
+          "width": 154.703125,
+          "height": 40
+        },
+        {
+          "id": "fjord-new",
+          "label": "New campaign from seed",
+          "width": 174.328125,
+          "height": 40
+        },
+        {
+          "id": "fjord-restart",
+          "label": "Restart with same founders",
+          "width": 183.640625,
+          "height": 40
+        }
+      ],
+      "camera": {
+        "world": [
+          -0.7525766947068779,
+          -2.7755575615628914e-17,
+          -0.6585046078685187,
+          0,
+          -0.37962581997624745,
+          0.8170993839488748,
+          0.43385807997285364,
+          0,
+          0.538063709416862,
+          0.576496831518066,
+          -0.6149299536192705,
+          0,
+          98.00000000000003,
+          34.461789608001716,
+          114,
+          1
+        ],
+        "projection": [
+          1.1135985094044911,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "hotspots": {
+        "person": {
+          "x": 29.162267822659494,
+          "y": 49.92295340661273
+        },
+        "home": {
+          "x": 30.329387861908568,
+          "y": 62.756057693003186
+        },
+        "cattle": {
+          "x": 34.13438881709683,
+          "y": 61.018471923798664
+        }
+      }
+    },
+    {
+      "scenario": "funded-800",
+      "paused": true,
+      "viewportMeta": "width=device-width,initial-scale=1,viewport-fit=cover",
+      "smallTargets": [
+        {
+          "id": "",
+          "label": "Food stocks",
+          "width": 67.5,
+          "height": 30
+        },
+        {
+          "id": "",
+          "label": "Materials stocks",
+          "width": 69.578125,
+          "height": 30
+        },
+        {
+          "id": "",
+          "label": "Settlement residents",
+          "width": 67.5,
+          "height": 30
+        },
+        {
+          "id": "",
+          "label": "Settlement livestock",
+          "width": 58.796875,
+          "height": 30
+        },
+        {
+          "id": "fjord-run",
+          "label": "Start simulation",
+          "width": 81.640625,
+          "height": 40
+        },
+        {
+          "id": "fjord-next",
+          "label": "+1 Year",
+          "width": 50.765625,
+          "height": 40
+        },
+        {
+          "id": "clan-book-open",
+          "label": "Clan Book",
+          "width": 78.34375,
+          "height": 40
+        },
+        {
+          "id": "fjord-expeditions-open",
+          "label": "Expedition groups",
+          "width": 128.203125,
+          "height": 40
+        },
+        {
+          "id": "",
+          "label": "Keep screen awake",
+          "width": 132.96875,
+          "height": 40
+        },
+        {
+          "id": "fjord-view-home",
+          "label": "View settlement",
+          "width": 114.875,
+          "height": 40
+        },
+        {
+          "id": "fjord-view-summit",
+          "label": "View highlands",
+          "width": 109.46875,
+          "height": 40
+        },
+        {
+          "id": "fjord-save",
+          "label": "Save locally",
+          "width": 87.171875,
+          "height": 40
+        },
+        {
+          "id": "fjord-load",
+          "label": "Load locally",
+          "width": 88.734375,
+          "height": 40
+        },
+        {
+          "id": "fjord-export",
+          "label": "Export Fjord campaign",
+          "width": 155.328125,
+          "height": 40
+        },
+        {
+          "id": "fjord-export-core",
+          "label": "Export canonical JSON",
+          "width": 154.703125,
+          "height": 40
+        },
+        {
+          "id": "fjord-new",
+          "label": "New campaign from seed",
+          "width": 174.328125,
+          "height": 40
+        },
+        {
+          "id": "fjord-restart",
+          "label": "Restart with same founders",
+          "width": 183.640625,
+          "height": 40
+        }
+      ],
+      "camera": {
+        "world": [
+          -0.7525766947068775,
+          5.551115123125783e-17,
+          -0.6585046078685185,
+          0,
+          -0.37962581997624734,
+          0.8170993839488748,
+          0.4338580799728537,
+          0,
+          0.5380637094168618,
+          0.5764968315180659,
+          -0.61492995361927,
+          0,
+          98.00000000000001,
+          34.46178960800171,
+          114.00000000000001,
+          1
+        ],
+        "projection": [
+          1.1135985094044911,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "hotspots": {
+        "person": {
+          "x": 29.162267822659466,
+          "y": 49.92295340661273
+        },
+        "home": null,
+        "cattle": {
+          "x": 57.39737162714641,
+          "y": 48.761867350527396
+        }
+      }
+    }
+  ],
+  "browserErrors": [],
+  "measurementNote": "Raw client rectangles include controls inside closed native details. Use baseline-visibility.json for default-HUD visibility."
+}

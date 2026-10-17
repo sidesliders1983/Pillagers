@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>FjordSide · mobile design reference #182</title>
+  <link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+  <header class="review-heading">
+    <div><small>FJORDSIDE · DESIGN REFERENCE #182</small><h1>More fjord. Less interface.</h1>
+      <p>Three mobile layouts using the actual game and campaign data. This prototype does not change your game.</p></div>
+    <a href="/playtest/">Open the real game ↗</a>
+  </header>
+  <nav class="review-tools" aria-label="Review scenarios">
+    <label>Viewport<select id="device"><option value="notched">Notched landscape · 852 × 393</option>
+      <option value="compact">Compact landscape · 667 × 375</option><option value="large">Large landscape · 932 × 430</option>
+      <option value="tablet">Tablet · 1024 × 636</option><option value="portrait">Portrait fallback · 390 × 844</option>
+      <option value="live">This screen · actual CSS size</option></select></label>
+    <label>Journey<select id="journey"><option value="default">A · Default HUD</option><option value="person">B · Selected person</option>
+      <option value="home">C · Home improvements</option><option value="build">C · Construction & work</option>
+      <option value="map">D · Discovery overlay</option><option value="alerts">D · Attention & chronicle</option>
+      <option value="exploration">F · Exploration mode</option></select></label>
+    <button id="reset" type="button">Reset journey</button>
+    <button id="live" type="button">Preview on this screen</button>
+  </nav>
+  <main>
+    <div class="artboard"><div id="scene" role="region" aria-label="Mobile game interface concept"></div></div>
+    <section class="review-state"><h2 id="variant-name"></h2><p id="design-note"></p>
+      <p><strong id="tap-count">0 taps</strong> · only actions inside the game concept are counted.</p>
+      <details><summary>Fixture, proposed state and capability notes</summary><pre id="prototype-state"></pre></details>
+      <p>Captured world: real 3D build at commit <code>5060331</code>. Outlined circles are review hotspots, not final selection graphics. Backgrounds are still images; camera gestures and travel are not simulated.
+        Safe insets on named viewports are illustrative. “This screen” uses the browser’s actual safe-area variables.</p>
+    </section>
+    <section class="golden-comparison"><h2>Grounded in the actual game</h2><div>
+      <figure><img src="desktop-reference.jpg" alt="User-supplied cinematic desktop reference"><figcaption>Visual inspiration · user-supplied desktop concept</figcaption></figure>
+      <figure><img src="native-developed.jpg" alt="Current real game at 852 by 393"><figcaption>Actual build · same paused Summer 810 scene as the developed mockups</figcaption></figure>
+    </div><p>The map overlay and mobile layouts are proposals. Current Core supplies identity, work, housing, stocks, family, chronicle and discovery data.
+      Health/mood bars, free building placement and future social/vehicle/trade systems are not presented as implemented.</p></section>
+  </main>
+  <nav class="prototype-switcher" aria-label="Prototype variants">
+    <button id="previous" type="button" aria-label="Previous variant">←</button>
+    <span><strong id="variant-label"></strong><small>DESIGN PROTOTYPE · GAME UNCHANGED</small></span>
+    <button id="next" type="button" aria-label="Next variant">→</button>
+    <button id="exit-live" type="button" hidden>Review</button>
+  </nav>
+  <script type="module" src="prototype.mjs"></script>
+</body>
+</html>

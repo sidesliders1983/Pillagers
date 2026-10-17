@@ -1,0 +1,77 @@
+{
+  "origin": "https://acer-railway-fact-smaller.trycloudflare.com",
+  "files": [
+    {
+      "name": "prototype.html",
+      "sha256": "11e7ff6e66b5993c5a3884a5350da9ca74e734b6f62fae5678e4bbad33e4a24f"
+    },
+    {
+      "name": "prototype.css",
+      "sha256": "e302b3ace765f28d10dfef2ebcb053e310c6bbcc4219bae977a7033f5d980539"
+    },
+    {
+      "name": "prototype.mjs",
+      "sha256": "b36e6051c0adf10e3d331f60f8bfc7ee638c254d082b9f11727d5bcc77714479"
+    },
+    {
+      "name": "fixture.json",
+      "sha256": "3524feb129599f5c7022698d8e9afb3dd26c24abbdb5549f4b1e8f67b91d7d48"
+    },
+    {
+      "name": "world-developed.jpg",
+      "sha256": "48308db379c976dc8b023ba0e6270abd09adba8cd59f4b6c163748d5fbcda835"
+    },
+    {
+      "name": "world-starting.jpg",
+      "sha256": "036b9eb0d9f5c9e49df2f04d0287f33066da6ee5ce367e971e90f526cb13e8ed"
+    },
+    {
+      "name": "desktop-reference.jpg",
+      "sha256": "084809db382ebaef077bb6a53ce609a6e2b4506870f7653ca8cd1c8ed43475be"
+    },
+    {
+      "name": "README.md",
+      "sha256": "e308539a48b49cf3f6b4b5a6e0fa097ca1201eea337d947c969578df37d3109f"
+    }
+  ],
+  "gameHead": "506033128e05d25d4a9a83f58463a3dc19ac417d",
+  "unchangedGameBundle": true,
+  "liveViews": [
+    {
+      "viewport": {
+        "width": 852,
+        "height": 393
+      },
+      "switcher": {
+        "x": 242.328125,
+        "y": 334,
+        "width": 367.34375,
+        "height": 56
+      },
+      "storage": {
+        "local": 0,
+        "session": 0
+      },
+      "variant": "C"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "switcher": {
+        "x": 37,
+        "y": 785,
+        "width": 316,
+        "height": 56
+      },
+      "storage": {
+        "local": 0,
+        "session": 0
+      },
+      "variant": "C"
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}
