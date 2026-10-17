@@ -167,3 +167,47 @@ test('Fjord integration caches coverage, keeps one map, and restores native day/
         material.dispose();
     }
 });
+
+test('canonical ridges enter the existing shadow map while the flat outer sea remains receiver-only', () => {
+    const { generateWorld } = load('../src/world-generation/GenerateWorld.ts');
+    const { createBlueprintTerrain, disposeBlueprintTerrain } = load('../src/world/BlueprintTerrain.ts');
+    const blueprint = structuredClone(generateWorld({ seed: 17 }));
+    blueprint.config = { ...blueprint.config, preset: 'island', width: 80, depth: 80 };
+    blueprint.waterLevel = 0;
+    blueprint.terrain = {
+        ...blueprint.terrain, columns: 3, rows: 3, spacing: 40,
+        bounds: { minX: -40, maxX: 40, minZ: -40, maxZ: 40 },
+        heights: [-7, -7, -7, -7, 35, -7, -7, -7, -7],
+    };
+    delete blueprint.environment;
+    const canonical = JSON.stringify(blueprint);
+    const terrain = createBlueprintTerrain(blueprint);
+    const scene = new Scene(), root = new Group();
+    root.position.set(8, 3, -12);
+    root.add(terrain);
+    scene.add(root);
+    const renderer = { shadowMap: { enabled: true }, toneMappingExposure: 1 };
+    const lighting = new WorldLighting(scene, renderer, { windowMaterials: [], fireMaterials: [] },
+        undefined, new Vector3(), 'standard', fjordPresentation.lighting);
+    const { camera } = fixture();
+    try {
+        assert.equal(terrain.castShadow, true);
+        assert.equal(terrain.receiveShadow, true);
+        lighting.includeWorldShadowBounds(root);
+        lighting.setSeason(.5);
+        lighting.updateShadowView(camera);
+        const coverage = lighting.inspectShadowCoverage();
+        assert.deepEqual(coverage.casterBounds, { min: [-32, -4, -52], max: [48, 38, 28] });
+        assert.ok(coverage.receiverBounds.min[0] < -150,
+            'The existing outer seabed still receives shadows and keeps its rendered geography.');
+        inShadow(lighting.directional, new Vector3(8, 38, -12));
+        assert.equal(scene.children.filter(node => node.isLight && node.castShadow).length, 1);
+        const passes = coverage.passes;
+        for (let frame = 0; frame < 10; frame++) lighting.updateShadowView(camera);
+        assert.equal(lighting.inspectShadowCoverage().passes, passes);
+        assert.equal(JSON.stringify(blueprint), canonical);
+    } finally {
+        lighting.dispose();
+        disposeBlueprintTerrain(terrain);
+    }
+});

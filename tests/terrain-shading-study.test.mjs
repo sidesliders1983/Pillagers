@@ -106,6 +106,20 @@ test('zoned smoothing preserves source UVs, native masks, layer indices and asyn
         assert.deepEqual(asynchronous.geometry.getAttribute('normal').array, smooth.geometry.getAttribute('normal').array);
         assert.equal(smooth.material.length, asynchronous.material.length);
         assert.equal(smooth.material.length, 7, 'The fixture exercises the optional climate snow layer');
+        for (const mesh of [smooth, asynchronous]) {
+            const range = { ...mesh.geometry.drawRange };
+            let shadowDraws = 0;
+            for (const group of mesh.geometry.groups) {
+                mesh.onBeforeShadow(null, mesh, null, null, mesh.geometry, null, group);
+                const { start, count } = mesh.geometry.drawRange;
+                if (Math.min(start + count, group.start + group.count) > Math.max(start, group.start))
+                    shadowDraws++;
+                mesh.onAfterShadow();
+                assert.deepEqual(mesh.geometry.drawRange, range,
+                    'Every shadow group restores all native colour and navigation indices.');
+            }
+            assert.equal(shadowDraws, 1, 'Coplanar snow, soil and rock layers share one physical depth draw.');
+        }
         smooth.material.forEach((material, index) => {
             assert.equal(material.flatShading, false);
             if (material.alphaMap) assert.deepEqual(material.alphaMap.image.data, asynchronous.material[index].alphaMap.image.data);
