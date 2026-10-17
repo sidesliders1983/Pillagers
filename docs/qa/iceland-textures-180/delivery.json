@@ -1,0 +1,248 @@
+{
+  "version": "iceland-albedo-delivery-v1",
+  "generationManifest": "generation.json",
+  "recipe": {
+    "seed": 137,
+    "patchCount": 12,
+    "periodMeters": 24,
+    "intendedSourceRepeatMeters": 4,
+    "method": "Existing periodic overlapping-patch colour recipe; quarter turns, offsets and linear-light mixing",
+    "qualification": "4m is authoring intent, not measured physical calibration. Albedo only; no tint or colour grading."
+  },
+  "toolchain": {
+    "node": "v24.19.0",
+    "sharp": "0.35.5"
+  },
+  "sourceAssets": [
+    {
+      "id": "coastal-turf",
+      "materialId": "Ground037",
+      "file": "sources/coastal-turf.png",
+      "bytes": 4634811,
+      "sha256": "854b889ce4f89b01ff75b097d9f2425edeb249f4de96cae0d6aab64f1b8f7ba3",
+      "inspection": {
+        "width": 1254,
+        "height": 1254,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 24.77485380116959,
+          "y": 24.35699096225412
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 20.267161470631038
+      }
+    },
+    {
+      "id": "weathered-basalt",
+      "materialId": "mossy_rock",
+      "file": "sources/weathered-basalt.png",
+      "bytes": 4241153,
+      "sha256": "0e5b71a775788ed3045754ad6ad7cf2289eb329cb21dbd0eb4d22d9c0bc841ec",
+      "inspection": {
+        "width": 1254,
+        "height": 1254,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 20.987506645401382,
+          "y": 20.028973950026582
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 15.249944524422618
+      }
+    },
+    {
+      "id": "volcanic-earth",
+      "materialId": "grass_path_2",
+      "file": "sources/volcanic-earth.png",
+      "bytes": 4404122,
+      "sha256": "c7cc4dd140af8528d2083392b3ea2847b343b204158a5a8cea9e449781f08d8c",
+      "inspection": {
+        "width": 1254,
+        "height": 1254,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 20.901116427432218,
+          "y": 21.44869750132908
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 17.614865418158566
+      }
+    },
+    {
+      "id": "fjord-shore",
+      "materialId": "Ground054",
+      "file": "sources/fjord-shore.png",
+      "bytes": 4742896,
+      "sha256": "11bde6835cee3c0ee24419388cdd00f5cb827cfc6d7fe17986f119afe1cc8771",
+      "inspection": {
+        "width": 1254,
+        "height": 1254,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 28.973950026581605,
+          "y": 33.31499202551834
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 22.411749812146756
+      }
+    }
+  ],
+  "delivery": [
+    {
+      "id": "coastal-turf",
+      "materialId": "Ground037",
+      "tier": "standard",
+      "file": "delivery/standard/coastal-turf.webp",
+      "size": 1024,
+      "bytes": 394972,
+      "sourceSha256": "854b889ce4f89b01ff75b097d9f2425edeb249f4de96cae0d6aab64f1b8f7ba3",
+      "sha256": "99e86e9055b2e0faf4e52a9d48b2134b248a08bdeb6c521e242347edef9437e2",
+      "inspection": {
+        "width": 1024,
+        "height": 1024,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 7.748372395833333,
+          "y": 7.830403645833333
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 6.35774294100277
+      }
+    },
+    {
+      "id": "coastal-turf",
+      "materialId": "Ground037",
+      "tier": "low",
+      "file": "delivery/low/coastal-turf.webp",
+      "size": 512,
+      "bytes": 80614,
+      "sourceSha256": "854b889ce4f89b01ff75b097d9f2425edeb249f4de96cae0d6aab64f1b8f7ba3",
+      "sha256": "91dc5a0b100fd17033571b65fa910ff36ea75e946fe07a014b6829bdab9b467a",
+      "inspection": {
+        "width": 512,
+        "height": 512,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 6.126302083333333,
+          "y": 6.301432291666667
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 4.516714953318656
+      }
+    },
+    {
+      "id": "weathered-basalt",
+      "materialId": "mossy_rock",
+      "tier": "standard",
+      "file": "delivery/standard/weathered-basalt.webp",
+      "size": 1024,
+      "bytes": 338404,
+      "sourceSha256": "0e5b71a775788ed3045754ad6ad7cf2289eb329cb21dbd0eb4d22d9c0bc841ec",
+      "sha256": "9ca45a9e0e4dce92bbea731660d10fe17f7cc3fd83b217236e928d7cdb974edd",
+      "inspection": {
+        "width": 1024,
+        "height": 1024,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 7.3017578125,
+          "y": 7.6943359375
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 6.219438907726458
+      }
+    },
+    {
+      "id": "weathered-basalt",
+      "materialId": "mossy_rock",
+      "tier": "low",
+      "file": "delivery/low/weathered-basalt.webp",
+      "size": 512,
+      "bytes": 73704,
+      "sourceSha256": "0e5b71a775788ed3045754ad6ad7cf2289eb329cb21dbd0eb4d22d9c0bc841ec",
+      "sha256": "d4871ce9046b42ff061c167c6380b1c841e8a5ecc49fab9d67acfc32a1d93183",
+      "inspection": {
+        "width": 512,
+        "height": 512,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 6.042317708333333,
+          "y": 6.481770833333333
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 5.071682745229941
+      }
+    },
+    {
+      "id": "volcanic-earth",
+      "materialId": "grass_path_2",
+      "tier": "standard",
+      "file": "delivery/standard/volcanic-earth.webp",
+      "size": 1024,
+      "bytes": 279302,
+      "sourceSha256": "c7cc4dd140af8528d2083392b3ea2847b343b204158a5a8cea9e449781f08d8c",
+      "sha256": "1f021d70a132dc8940b5914b0ea93efeaed852d6c44833bed320ca1c07c0c62d",
+      "inspection": {
+        "width": 1024,
+        "height": 1024,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 6.061197916666667,
+          "y": 6.619466145833333
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 5.0837503372943145
+      }
+    },
+    {
+      "id": "volcanic-earth",
+      "materialId": "grass_path_2",
+      "tier": "low",
+      "file": "delivery/low/volcanic-earth.webp",
+      "size": 512,
+      "bytes": 46000,
+      "sourceSha256": "c7cc4dd140af8528d2083392b3ea2847b343b204158a5a8cea9e449781f08d8c",
+      "sha256": "05db556a6769255d41e8ecd549d13672ab2103955313119c24ffc78bba727f81",
+      "inspection": {
+        "width": 512,
+        "height": 512,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 4.08203125,
+          "y": 4.255208333333333
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 3.0622349967384213
+      }
+    },
+    {
+      "id": "fjord-shore",
+      "materialId": "Ground054",
+      "tier": "standard",
+      "file": "delivery/standard/fjord-shore.webp",
+      "size": 1024,
+      "bytes": 401874,
+      "sourceSha256": "11bde6835cee3c0ee24419388cdd00f5cb827cfc6d7fe17986f119afe1cc8771",
+      "sha256": "85d40c2bc76f86356a1556fca3237da7715758c580b92ea9ded262d303432df0",
+      "inspection": {
+        "width": 1024,
+        "height": 1024,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 10.299153645833334,
+          "y": 9.493489583333334
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 8.12139970139907
+      }
+    },
+    {
+      "id": "fjord-shore",
+      "materialId": "Ground054",
+      "tier": "low",
+      "file": "delivery/low/fjord-shore.webp",
+      "size": 512,
+      "bytes": 69948,
+      "sourceSha256": "11bde6835cee3c0ee24419388cdd00f5cb827cfc6d7fe17986f119afe1cc8771",
+      "sha256": "c40d9a740615ff183ee98aaed142b4b468c4493b050c8435d92e9006ed3b86b0",
+      "inspection": {
+        "width": 512,
+        "height": 512,
+        "channels": 3,
+        "edgeMeanAbsoluteDifference255": {
+          "x": 5.764973958333333,
+          "y": 6.171875
+        },
+        "interiorAdjacentMeanAbsoluteDifference255": 5.143113864766797
+      }
+    }
+  ]
+}

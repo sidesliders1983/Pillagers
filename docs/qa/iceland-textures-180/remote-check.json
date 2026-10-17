@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "origin": "https://acer-railway-fact-smaller.trycloudflare.com",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/lighting/",
+      "status": 200
+    },
+    {
+      "path": "/lighting-next/",
+      "status": 200
+    },
+    {
+      "path": "/textures/",
+      "status": 200
+    },
+    {
+      "path": "/textures/README.md",
+      "status": 200
+    },
+    {
+      "path": "/textures/generation.json",
+      "status": 200
+    },
+    {
+      "path": "/textures/sources/coastal-turf.png",
+      "status": 200
+    },
+    {
+      "path": "/textures/delivery/standard/coastal-turf.webp",
+      "status": 200
+    },
+    {
+      "path": "/src/fjord-play/FjordPlay.ts",
+      "method": "GET",
+      "status": 404
+    },
+    {
+      "path": "/textures/",
+      "method": "POST",
+      "status": 405
+    }
+  ],
+  "observationsBytesMatch": true,
+  "candidateImageHashMatches": true,
+  "phonePageLoads": true,
+  "noHorizontalOverflow": true,
+  "errors": []
+}
