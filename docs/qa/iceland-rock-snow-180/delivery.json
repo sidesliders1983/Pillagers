@@ -1,0 +1,44 @@
+{
+  "version": "readable-basalt-v1",
+  "sourceFile": "docs/qa/iceland-textures-180/sources/weathered-basalt.png",
+  "sourceSha256": "0e5b71a775788ed3045754ad6ad7cf2289eb329cb21dbd0eb4d22d9c0bc841ec",
+  "generation": "Reuses the selected built-in imagegen basalt revision 2; no new painted snow texture.",
+  "promptManifest": "../iceland-textures-180/generation.json",
+  "recipe": {
+    "seed": 2120,
+    "patchCount": 4,
+    "periodMeters": 24,
+    "intendedSourceRepeatMeters": 12,
+    "colourTreatment": {
+      "saturation": 0.12,
+      "linearGain": 1.3,
+      "tint": [
+        0.96,
+        1,
+        1.055
+      ]
+    },
+    "sourceOriginalIntentMeters": 4,
+    "note": "Deliberately enlarges authored joint scale for gameplay readability; not measured physical calibration.",
+    "toolchain": {
+      "node": "v24.19.0",
+      "sharp": "0.35.5"
+    }
+  },
+  "delivery": [
+    {
+      "tier": "standard",
+      "size": 1024,
+      "file": "delivery/standard/readable-basalt.webp",
+      "bytes": 375474,
+      "sha256": "dec8c4c01866c79d575781a17e9bacb70cf7e6f03e762b24caa39d53cc7a193d"
+    },
+    {
+      "tier": "low",
+      "size": 512,
+      "file": "delivery/low/readable-basalt.webp",
+      "bytes": 88084,
+      "sha256": "dc24e039ff7615a8b8f27fd6461938c9a307dc266b2e7cdd0c605761a20dcade"
+    }
+  ]
+}

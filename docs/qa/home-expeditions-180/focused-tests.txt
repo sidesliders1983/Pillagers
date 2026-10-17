@@ -1,0 +1,37 @@
+✔ Start Expedition reserves six Food for three residents once, stages without eating and cancellation never refunds confirmed spending (88.682ms)
+✔ prepared groups depart from actual origins and redirects/recall reuse their reserved pack without new charges (87.3365ms)
+✔ early physical homecoming discards unused Food without refunds or a second stock charge (78.9118ms)
+✔ a distant destination triggers conservative return on the reached trail before rations run out (693.6332ms)
+✔ an actually blocked return is terminal and factual, without a teleport, refund or restored work availability (59.8663ms)
+✔ Expedition Mode preserves the normal session preference and pause across overlapping groups and saved staging (391.1587ms)
+✔ the Clan Book reconciles upfront spending, carried consumption and discarded Food without double spending (681.6682ms)
+✔ prepared cancellation creates no fictitious journey and terminal losses cannot recover carried Food (157.021ms)
+✔ physical return keeps the override for another prepared group and restores normal pace inside an elapsed batch (85.3622ms)
+✔ departed members produce neither Food nor Materials until their actual homecoming (266.6658ms)
+✔ specialization previews preserve resident occupations, time, RNG and the live state (67.1612ms)
+✔ upgrade availability and previews use the campaign configuration and actual matching workers (44.7529ms)
+✔ inactive occupations expose zero output rather than invented upgrade productivity (40.068ms)
+✔ changing or removing specialization retains upgrades, upkeep and independent farmyard function (46.4794ms)
+✔ home cards distinguish insufficient resources, maximum level and vacancy (43.6359ms)
+✔ upgrade transactions remain atomic and do not advance either clock (43.4494ms)
+✔ a fresh physical campaign binds exactly one real rival before discovery without changing the player RNG or stocks (56.2752ms)
+✔ the unseen rival advances through the same domestic Core with independent entropy and exact save/replay (574.1736ms)
+✔ the real rival founding population fits its reserved site with tents, livestock and a campfire, without authored demo houses (941.7937ms)
+✔ ten separate founding tent households fit the actual curated island-7 rival reserve without dropping residents (14456.1947ms)
+✔ the player sees no hidden rival information and only currently observed anonymous actors, while mapped geography persists (373.3381ms)
+✔ the shared Fjord campaign creates, saves and restores one rival without exposing or resetting it (584.1157ms)
+✔ invalid or mismatched rival sites and old campaigns are rejected without changing canonical saves (27.686ms)
+✔ a real exploration order respects the rival campfire footprint as well as the player settlement (158.8053ms)
+✔ all canonical occupations use the same real task without assigning other residents or cattle (448.934ms)
+✔ ordinary housing preserves independent work, specialization and animal choices (47.1496ms)
+✔ the optional farmyard task commits the house, farmer and three selected cattle together (79.8672ms)
+✔ a final-command failure leaves state, history, revision, trend and book untouched (79.7739ms)
+✔ work without new housing is possible; changing the last farmer explicitly reports shelter loss (108.3266ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 21764.7167

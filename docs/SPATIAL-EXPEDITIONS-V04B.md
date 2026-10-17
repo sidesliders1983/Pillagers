@@ -10,7 +10,9 @@ Prototype values are **2 Food per member**, **one carried ration per 250 active 
 
 ## Player flow and confirmation
 
-With no selection, Create exploration group creates Group 1, Group 2, etc. Select residents and use Add to group; membership can change only while no expedition is active. Clear selection or use Menu → Expedition groups to see the group actions.
+Expeditions opens the global group overview regardless of the selected home, resident or animal. Create exploration group creates Group 1, Group 2, etc. Each group has an inline resident checklist, using the canonical eligibility rules; membership can change only while no expedition is active. Group actions stay available without clearing the world selection.
+
+The Campaign menu exposes Enable exploration & rival clan for new island campaigns. Existing saves retain their discovery state. The QA launcher also offers a paused Exploration & rival clan campaign with ordinary starting resources, one hidden living rival and two eligible founders already assigned to a group. Changing the new-campaign checkbox alone never changes the active campaign.
 
 **Start Expedition** opens the concise owner-approved confirmation: “This will cost XX food (2 food per member). Are you sure?” with the fixed total price filled in. Three members cost **6 Food**. Cancel in this dialog changes no stock, time or mission. Confirm validates membership and Food atomically, spends the fixed price once, and creates a **Prepared** expedition. Insufficient stock, invalid/caregiving members, an already active group or capacity limits reject without mutation. Repeated confirmation cannot spend twice.
 

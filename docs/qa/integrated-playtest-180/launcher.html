@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>FjordSide · QA playtest</title>
+<style>
+:root{color-scheme:dark;background:#122023;color:#eee8dc;font:15px/1.55 system-ui,sans-serif}body{max-width:850px;margin:auto;padding:32px 20px 60px}
+h1,h2{font-family:Georgia,serif;font-weight:400}h1{font-size:42px;margin:12px 0}h2{font-size:23px}p{color:#bdcbc3}a{color:#e0bf80}
+.eyebrow{color:#dcbf84;text-transform:uppercase;letter-spacing:.13em;font-size:11px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:25px 0}
+article{background:#1c2d30;border:1px solid #83907166;border-radius:7px;padding:20px}article h2{margin:0 0 10px}button,.primary{font:inherit;color:#eedfbf;background:#30433e;border:1px solid #b3a77d;border-radius:4px;padding:12px 16px;cursor:pointer;display:inline-block;text-decoration:none}
+button:disabled{opacity:.5;cursor:wait}button:focus-visible,a:focus-visible{outline:2px solid #f6d590;outline-offset:4px}small{color:#aebeb6}.note{padding:16px;border:1px solid #61716b;border-radius:5px}li{margin:8px 0}#status{min-height:24px;color:#e6c996}
+</style></head><body>
+<div class="eyebrow">FjordSide · Integrated QA build · #180</div><h1>One world. Ready to play.</h1>
+<p>The real 3D game with the Context &amp; Focus interface, personal character data, combined work tasks, Northern lighting, Icelandic terrain, exposed rock and permanent snow on flat summits.</p>
+<a class="primary" href="/fjord-play">Open / resume FjordSide</a>
+<div class="grid">
+<article id="exploration"><h2>Exploration &amp; rival clan</h2><p>Summer 800 · seed 32. Discovery is enabled, one living rival starts hidden, and a group of two eligible founders is ready.</p><p>Open Expeditions → Prepare expedition → Pack supplies. On the map, click nearby land to preview a flag → Send group → Resume travel. The exploration bar keeps destinations, supplies and Return home within reach. Esc cancels a flag choice.</p><small>Normal starting resources and unchanged expedition rules. The founding longship is available.</small><p><button data-scenario="exploration-800">Load exploration &amp; rival clan</button></p></article>
+<article><h2>Found a settlement</h2><p>Summer 800 · seed 32. A prepared starting save with 25 Materials, gained through the existing longship salvage command.</p><button data-scenario="funded-800">Load funded starting scenario</button></article>
+<article><h2>A growing village</h2><p>Summer 810 · seed 32. Inspect residents, households, existing buildings, work and livestock.</p><small>Saved benchmark with high resource stocks; use the starting scenarios for economy testing.</small><p><button data-scenario="developed-810">Load developed settlement</button></p></article>
+<article><h2>Winter terrain</h2><p>Winter 811 · seed 32. Review seasonal snow, exposed rock and the year-round summit cap.</p><small>Saved benchmark with high resource stocks.</small><p><button data-scenario="snow-811">Load winter settlement</button></p></article>
+<article><h2>Another island</h2><p>Summer 800 · seed 17. Test the same interface and terrain rules on a different procedural island.</p><button data-scenario="summer-17">Load second island</button></article>
+</div>
+<p class="note">Loading a scenario replaces the active session in this browser tab and retains one recovery copy. Your downloaded saves remain yours. Use Menu → Export Fjord campaign before a longer test.</p>
+<button id="restore" hidden>Restore previous browser session</button><p id="status" role="status"></p>
+<h2>Suggested checks</h2><ol>
+<li>Select a tent → Manage work → choose a work plan → review and confirm. Farming is one option among ten occupations.</li>
+<li>In the funded scenario: select a tent → Manage work → Set up farmyard → Confirm setup. The default proposal includes three unassigned cattle.</li>
+<li>Select residents and inspect traits, productivity, occupation fit, family, heritage and personal history.</li>
+<li>Select a permanent home. Change specialization using the occupation icons; review the next upgrade’s bonus, cost and upkeep directly on the home card. Residents keep their occupations.</li>
+<li>Use the exploration scenario for expeditions. Other scenarios retain their original discovery settings. Choose crew inside Expeditions, then explore through the compact map bar. Previewing or cancelling a flag changes no journey, Food or discoveries. Changing destinations uses the same carried pack.</li>
+<li>Open Settlement, Expeditions, Clan Book and Attention; try save/load and a second seed.</li>
+<li>Pan with left drag, rotate with right drag and zoom with the wheel. Start/Pause controls the actual simulation.</li>
+<li>Use Menu → Camera views &amp; controls → View highlands to inspect the rock and permanent summit snow. View settlement returns to the village.</li>
+</ol><p>These are existing gameplay systems with a new interface. Future cultural gatherings, apprentice recruitment, carts and clan trading are outside this build. Terrain remains the current game-scale geography.</p>
+<p><a href="/summits/">Summit comparison</a> · <a href="/rocks/">Rock comparison</a> · <a href="/textures/">Texture study</a></p>
+<script type="module">
+const active='pillagers.fjord-play.active.v1',backup='pillagers.qa180.previous-session';
+const restore=document.getElementById('restore'),status=document.getElementById('status');
+restore.hidden=!sessionStorage.getItem(backup);
+restore.addEventListener('click',()=>{sessionStorage.setItem(active,sessionStorage.getItem(backup));location.href='/fjord-play'});
+for(const button of document.querySelectorAll('[data-scenario]'))button.addEventListener('click',async()=>{
+ const previous=sessionStorage.getItem(active);
+ if(previous&&!confirm('Replace this tab’s active campaign with the QA scenario? A recovery copy will be kept.'))return;
+ button.disabled=true;status.textContent='Preparing the scenario…';
+ try{const response=await fetch('/playtest/'+button.dataset.scenario+'.json');if(!response.ok)throw Error('Scenario unavailable');
+ const data=await response.json();data.target='fjord';data.pace.running=false;
+ if(previous)sessionStorage.setItem(backup,previous);sessionStorage.setItem(active,JSON.stringify(data));location.href='/fjord-play';
+ }catch(error){status.textContent='Could not open the scenario. '+error.message;button.disabled=false}
+});
+</script></body></html>

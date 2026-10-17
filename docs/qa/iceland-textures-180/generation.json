@@ -1,0 +1,60 @@
+{
+  "version": "iceland-albedo-study-v1",
+  "status": "Experimental colour textures; not production PBR materials",
+  "tool": "Built-in image_gen",
+  "actualModel": "Not returned by the tool",
+  "parent": "52cae9c7cb40aa78ffc7bf7c0ba17247c167b117",
+  "intendedSourceRepeatMeters": 4,
+  "references": [
+    {
+      "url": "https://www.westfjords.is/en/destinations/nature-reserves/hornstrandir-nature-reserve",
+      "role": "Observed green coastal slopes and weathered rock; official photo inspected."
+    },
+    {
+      "url": "https://www.westfjords.is/en/place/dynjandi",
+      "role": "Layered lava geology and intervening weathered strata."
+    },
+    {
+      "url": "https://www.westfjords.is/en/moya/extras/5/raudasandur",
+      "role": "Coastal sediment colour is diverse; do not classify all Icelandic shores as black sand."
+    },
+    {
+      "url": "https://www.vatnajokulsthjodgardur.is/en/nature--history/biome",
+      "role": "Moss/heath/grass and wetter/drier habitats vary by region; not a Westfjords-specific vegetation map."
+    }
+  ],
+  "assets": [
+    {
+      "id": "coastal-turf",
+      "file": "sources/coastal-turf.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: standalone square seamless game-terrain BASE COLOR / ALBEDO texture candidate for Fjordside, a naturalistic stylized Viking settlement game.\nOutput exactly one 1024 x 1024 square surface texture filling every pixel edge to edge. Flat orthographic scan of the surface, no horizon, perspective, border, panel, sphere, text, labels or watermark. Seamless periodic matching opposite edges; stochastic even coverage with no obvious central feature or repeating landmark. Neutral white diffuse illumination everywhere; de-lit surface reflectance, no cast shadows, directional shading, ambient occlusion painted into cracks, specular highlights, sun gradients or vignetting. This is an albedo candidate only, not a normal/roughness map. Real material structure informed by Icelandic fjord coasts, subtly simplified to read clearly at city-builder camera distance, avoiding noisy oversharpened photogrammetry. Calm medium-frequency variation plus small-scale texture, no fantasy neon colour.\nSubject: a 4 by 4 metre continuous patch of low Icelandic coastal grass and moss-heath on a sheltered Westfjords slope. Mixed natural medium grass green, muted olive moss, a few straw-ochre blades and occasional tiny dark soil gaps. Ground-hugging finely interwoven vegetation rather than lawn stripes or giant pillowy lava boulders. The real Hornstrandir reference has green slopes with occasional exposed grey stone; preserve the natural green identity under neutral lighting. Modest irregular patches, no large isolated stones, flowers, trees, objects, paths or snow. Avoid making the entire surface yellow-brown.",
+      "selectedRevision": 1
+    },
+    {
+      "id": "weathered-basalt",
+      "file": "sources/weathered-basalt.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: standalone square seamless game-terrain BASE COLOR / ALBEDO texture candidate for Fjordside, a naturalistic stylized Viking settlement game.\nOutput exactly one 1024 x 1024 square surface texture filling every pixel edge to edge. Flat orthographic scan of the surface, no horizon, perspective, border, panel, sphere, text, labels or watermark. Seamless periodic matching opposite edges; stochastic even coverage with no obvious central feature or repeating landmark. Neutral white diffuse illumination everywhere; de-lit surface reflectance, no cast shadows, directional shading, ambient occlusion painted into cracks, specular highlights, sun gradients or vignetting. This is an albedo candidate only, not a normal/roughness map. Real material structure informed by Icelandic fjord coasts, subtly simplified to read clearly at city-builder camera distance, avoiding noisy oversharpened photogrammetry. Calm medium-frequency variation plus small-scale texture, no fantasy neon colour.\nSubject: a 4 by 4 metre continuous exposed weathered Icelandic basalt surface, suitable as bedrock on a fjord cliff. Mid-dark cool charcoal grey stone with subtle brown-violet mineral variations and sparse desaturated yellow-grey lichen flecks. Worn irregular shallow fractures and softly readable horizontal geological laminations, irregular spacing, no perfect stone-brick grid or repeated hexagonal columns. A continuous rock skin rather than a pile of separated pebbles. Retain moderate albedo luminance so real directional lighting can model the cliff. No moss carpet, vegetation clumps, ice, white snow, waterfalls or water. No perspective or black painted crevice shadows.",
+      "selectedRevision": 2,
+      "correctionPrompt": "Use case: stylized-concept. Edit the provided rock albedo candidate ONLY to correct the material identity. It currently looks like thinly foliated slate. Replace that foliation with the massive, fine-grained, slightly porous WEATHERED BASALT found in Icelandic fjord bedrock: irregular angular/blocky cooling joints, occasional shallow horizontal fracture, sparse mineral pitting and restrained grey-yellow lichen specks. No repeated hexagonal column pattern. Avoid thin sedimentary bedding, shale, schist, slate, marble veins, ribbon-like layers, brickwork or manufactured slabs. Preserve its medium-dark charcoal/cool-grey albedo range, square full-frame surface presentation, restrained naturalistic game-texture finish, neutral diffuse illumination and small brown mineral variations. Keep it suitable for a 4x4 metre surface sample. Make opposite edges seamless and tileable; no central focal feature. No directional light, cast shadows, black ambient-occlusion crevices, highlights, perspective, text, border, objects, grass carpet or snow. Output a single opaque square BASE COLOR texture, not a scene render, PBR map sheet or normal map.",
+      "rejectedRevisionReason": "Thin slate-like foliation rather than massive weathered basalt."
+    },
+    {
+      "id": "volcanic-earth",
+      "file": "sources/volcanic-earth.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: standalone square seamless game-terrain BASE COLOR / ALBEDO texture candidate for Fjordside, a naturalistic stylized Viking settlement game.\nOutput exactly one 1024 x 1024 square surface texture filling every pixel edge to edge. Flat orthographic scan of the surface, no horizon, perspective, border, panel, sphere, text, labels or watermark. Seamless periodic matching opposite edges; stochastic even coverage with no obvious central feature or repeating landmark. Neutral white diffuse illumination everywhere; de-lit surface reflectance, no cast shadows, directional shading, ambient occlusion painted into cracks, specular highlights, sun gradients or vignetting. This is an albedo candidate only, not a normal/roughness map. Real material structure informed by Icelandic fjord coasts, subtly simplified to read clearly at city-builder camera distance, avoiding noisy oversharpened photogrammetry. Calm medium-frequency variation plus small-scale texture, no fantasy neon colour.\nSubject: a 4 by 4 metre patch of dark Icelandic silty volcanic earth used on worn village clearings and paths. Natural cool umber, brown-charcoal fine gritty soil with a restrained scatter of tiny dull grey basalt gravel and a few dry tan plant fibres. Matte compacted soil without wet specular reflections. No grass carpet, prominent rocks, footprints, tyre tracks, wheel ruts, path boundaries, geometric cracks, snow, water or directional grooves. Keep broad coverage calm and readable; avoid pitch black or orange mud.",
+      "selectedRevision": 1
+    },
+    {
+      "id": "fjord-shore",
+      "file": "sources/fjord-shore.png",
+      "prompt": "Use case: stylized-concept.\nAsset type: standalone square seamless game-terrain BASE COLOR / ALBEDO texture candidate for Fjordside, a naturalistic stylized Viking settlement game.\nOutput exactly one 1024 x 1024 square surface texture filling every pixel edge to edge. Flat orthographic scan of the surface, no horizon, perspective, border, panel, sphere, text, labels or watermark. Seamless periodic matching opposite edges; stochastic even coverage with no obvious central feature or repeating landmark. Neutral white diffuse illumination everywhere; de-lit surface reflectance, no cast shadows, directional shading, ambient occlusion painted into cracks, specular highlights, sun gradients or vignetting. This is an albedo candidate only, not a normal/roughness map. Real material structure informed by Icelandic fjord coasts, subtly simplified to read clearly at city-builder camera distance, avoiding noisy oversharpened photogrammetry. Calm medium-frequency variation plus small-scale texture, no fantasy neon colour.\nSubject: a 4 by 4 metre homogeneous stretch of Icelandic fjord shoreline sediment. Muted grey-brown fine volcanic sand, small rounded dark basalt gravel and restrained pale mineral/shell grains. Natural mixed grain sizes, mostly fine sand so it blends with earth and vegetation at a coast. Maritime neutral grey/taupe palette rather than tropical yellow beach or pure black obsidian. No water, foam, shoreline edge, tide marks, large pebbles, footprints, objects, vegetation or snow. Matte de-lit surface with no glossy wet highlights.",
+      "selectedRevision": 1
+    }
+  ],
+  "notes": [
+    "Prompts request seamless albedo; tileability must be measured and visually reviewed.",
+    "Colour only; no matched normal, roughness, AO or height outputs have been generated.",
+    "Requested 1024px; actual tool outputs are 1254px square and are retained without alteration.",
+    "No third-party reference photograph is delivered as a game texture."
+  ]
+}

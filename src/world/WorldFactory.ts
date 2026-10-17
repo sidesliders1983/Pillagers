@@ -22,6 +22,7 @@ import { hearth } from './SettlementLayout';
 import { tentBuildingPlot, clearBuildingPlotNature, BuildingPlot } from './BuildingPlot';
 
 export interface WorldSelection {
+    groundStyle?: 'iceland-v1';
     discovery?: DiscoveryView;
     preparation?: <T>(stage: string, operation: () => T | Promise<T>) => Promise<T>;
     mode: 'reference' | 'generated';
@@ -113,7 +114,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
         if (blueprint) {
             await prepare('nature-assets-fetch-decode', () => assets.loadNature());
             try { grounds = await prepare('ground-textures-fetch-decode', () => loadWorldGroundMaterials(selection.quality, selection.anisotropy, 256,
-                island ? 'zoned' : 'baseline', island ? 'cool-grey' : 'source')); }
+                island ? 'zoned' : 'baseline', island ? 'cool-grey' : 'source', selection.groundStyle)); }
             catch (error) {
                 if (!canonical) throw error;
                 assets.diagnostics.push('Ground maps unavailable; native terrain material fallback.');

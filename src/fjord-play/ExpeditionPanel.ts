@@ -1,177 +1,464 @@
-import { expeditionEligible, groupMission, inspectWorld } from '../simulation/WorldExpeditions';
+import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
 import { inspectSpatialExpeditions } from '../simulation/SpatialExpeditions';
+import { isProvidingCare, personaAge } from '../simulation/SimulationCore';
 import type { GameplaySession } from '../gameplay-lab/GameplaySession';
-import type { SimulationCommand } from '../simulation/SimulationCore';
+import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
 import type { Point2 } from '../world-generation/WorldBlueprint';
+import { icon, occupationIcon, occupationLabel, type FjordIcon } from './FjordIcons';
+import { isMobileLayout } from './MobileShell';
+
+type Mission = ReturnType<typeof inspectSpatialExpeditions>['missions'][number];
+type Group = NonNullable<SimulationState['world']>['groups'][string];
+interface ExpeditionNavigation {
+    showMap: () => void;
+    showGroups: () => void;
+    focus: (point: Point2) => void;
+    toggleClock: () => void;
+}
 const escape = (value: string) => value.replace(/[&<>"']/g,
     char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
+const button = (label: string, glyph: FjordIcon, attrs = '') =>
+    `<button type="button" ${attrs}>${icon(glyph)}<span>${label}</span></button>`;
+const phase = (mission?: Mission) => ({ Prepared: 'Ready to depart', Traveling: 'Travelling',
+    Exploring: 'Exploring', Returning: 'Returning home', Returned: 'Home again',
+    Stranded: 'Stranded' })[mission?.status ?? 'Returned'];
 
-/** Selection supplies context; all membership, eligibility, costs and travel remain Core commands. */
+/** A preparation workspace and a persistent map toolbar, backed by the same Core commands. */
 export class ExpeditionPanel {
     private groupId = '';
-    private controlsHTML = '';
     private choosing = false;
+    private destination?: Point2;
+    private adjusted = false;
     private pendingStart = '';
-    private showingDestination = false;
-    constructor(private root: HTMLElement, private session: GameplaySession,
+    private pendingCrew = '';
+    private pendingFood = 0;
+    private controlsHTML = '';
+    private toolbarHTML = '';
+    private toolbarExpanded = false;
+    private message = '';
+    private markerKey = '';
+    private abort = new AbortController();
+    private toolbar: HTMLElement;
+
+    constructor(
+        private root: HTMLElement,
+        private session: GameplaySession,
         private command: (command: SimulationCommand) => void,
         private targetChanged: (point?: Point2) => void,
-        private selection: () => { kind: string; id: string } | null,
-        private origins: (memberIds: readonly string[]) => Record<string, Point2>) {
-        root.innerHTML = '<div id="expedition-controls"></div>' +
-            '<p id="expedition-status" role="status" aria-live="polite"></p>' +
-            '<div id="expedition-proposal" hidden><p id="expedition-estimate"></p>' +
-            '<button id="expedition-cancel" type="button">Cancel target</button></div>' +
-            '<dialog id="expedition-start-dialog" aria-labelledby="expedition-start-title">' +
-            '<h2 id="expedition-start-title">Start Expedition</h2><p id="expedition-start-summary"></p>' +
-            '<button id="expedition-start-confirm" type="button">Start Expedition</button> ' +
-            '<button id="expedition-start-cancel" type="button">Cancel</button></dialog>';
-        root.addEventListener('click', event => {
-            const button = (event.target as Element).closest<HTMLButtonElement>('button');
-            if (!button || button.disabled) return;
-            const dialog = this.root.querySelector<HTMLDialogElement>('#expedition-start-dialog')!;
-            if (button.dataset.start) {
-                try {
-                    const offer = this.session.startExpeditionOffer(button.dataset.start);
-                    this.groupId = this.pendingStart = button.dataset.start;
-                    this.root.querySelector('#expedition-start-summary')!.textContent =
-                        'This will cost ' + offer.foodCost + ' food (2 food per member). Are you sure?';
-                    dialog.showModal();
-                } catch (error) { this.status.textContent = error instanceof Error ? error.message : String(error); }
-            }
-            if (button.id === 'expedition-start-cancel') { dialog.close(); this.pendingStart = ''; }
-            if (button.id === 'expedition-start-confirm' && this.pendingStart) {
-                try {
-                    this.session.startExpeditionOffer(this.pendingStart);
-                    const groupId = this.pendingStart;
-                    dialog.close(); this.pendingStart = '';
-                    this.command({ type: 'StartExpedition', groupId });
-                } catch (error) {
-                    this.root.querySelector('#expedition-start-summary')!.textContent = error instanceof Error ? error.message : String(error);
-                }
-            }
-            if (button.dataset.cancelExpedition)
-                this.command({ type: 'CancelExpedition', groupId: button.dataset.cancelExpedition });
-            if (button.id === 'expedition-create') this.command({ type: 'CreateExplorationGroup' });
-            if (button.dataset.explore) {
-                this.groupId = button.dataset.explore;
-                this.choosing = true; this.targetChanged();
-                this.root.querySelector('#expedition-estimate')!.textContent = 'Choose a land destination. The same carried supplies cover travel, exploring and a safe return. No Food is bought when choosing or changing destinations.';
-                this.status.textContent = 'Tap a land destination. Drag and pinch still control the camera.';
-                this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = false;
-            }
-            if (button.dataset.recall)
-                this.command({ type: 'RecallExpedition', groupId: button.dataset.recall });
-            if (button.id === 'expedition-add' || button.dataset.remove) {
-                const person = this.selection();
-                const groupId = button.dataset.remove ?? this.root.querySelector<HTMLSelectElement>('#expedition-join')!.value;
-                if (person?.kind === 'persona' && groupId)
-                    this.command({
-                        type: 'SetExplorationMember', groupId, personaId: person.id,
-                        included: !button.dataset.remove
-                    });
-            }
-            if (button.id === 'expedition-cancel') this.cancelTarget();
-        });
+        private origins: (memberIds: readonly string[]) => Record<string, Point2>,
+        private navigation: ExpeditionNavigation,
+    ) {
+        root.innerHTML = `<div id="expedition-controls"></div>
+            <p id="expedition-status" class="fjord-expedition-message" role="status" aria-live="polite"></p>
+            <dialog id="expedition-start-dialog" aria-labelledby="expedition-start-title">
+                <span class="fjord-expedition-eyebrow">Expedition supplies</span>
+                <h2 id="expedition-start-title">Prepare for the island</h2>
+                <div id="expedition-start-summary"></div>
+                <div class="fjord-expedition-actions">
+                    ${button('Pack supplies', 'food', 'id="expedition-start-confirm" class="fjord-primary"')}
+                    ${button('Back', 'back', 'id="expedition-start-cancel"')}
+                </div>
+            </dialog>`;
+        this.toolbar = document.createElement('aside');
+        this.toolbar.id = 'expedition-mode';
+        this.toolbar.setAttribute('aria-label', 'Exploration controls');
+        this.toolbar.hidden = true;
+        root.closest('.fjord-stage')!.append(this.toolbar);
+        root.addEventListener('click', this.click, { signal: this.abort.signal });
+        document.addEventListener('fjord-layout-change', () => this.refresh(), { signal: this.abort.signal });
+        this.toolbar.addEventListener('click', this.click, { signal: this.abort.signal });
+        root.addEventListener('change', event => {
+            const input = event.target;
+            if (!(input instanceof HTMLInputElement) || !input.dataset.memberGroup || !input.dataset.member) return;
+            this.groupId = input.dataset.memberGroup;
+            this.command({ type: 'SetExplorationMember', groupId: this.groupId,
+                personaId: input.dataset.member, included: input.checked });
+        }, { signal: this.abort.signal });
+        root.querySelector('dialog')!.addEventListener('close', () => { this.pendingStart = ''; },
+            { signal: this.abort.signal });
+        document.addEventListener('keydown', event => {
+            if (event.key !== 'Escape' || !this.choosing || document.querySelector('dialog[open]')) return;
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            this.cancelTarget();
+            this.toolbar.querySelector<HTMLButtonElement>('[data-explore]')?.focus();
+        }, { capture: true, signal: this.abort.signal });
     }
-    private get status() { return this.root.querySelector<HTMLElement>('#expedition-status')!; }
+
+    dispose() { this.abort.abort(); this.toolbar.remove(); }
     get targeting() { return this.choosing; }
-    cancelTarget() {
-        this.choosing = false; this.showingDestination = false; this.targetChanged();
-        this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = true;
-        this.status.textContent = '';
+    private get dialog() { return this.root.querySelector<HTMLDialogElement>('#expedition-start-dialog')!; }
+    private activeMission(state = this.session.readSnapshot(), groupId = this.groupId) {
+        return inspectSpatialExpeditions(state).missions
+            .find(mission => mission.groupId === groupId && mission.status !== 'Returned');
     }
-    committed(dispatched = false) {
-        this.cancelTarget();
-        if (dispatched) {
-            const mission = inspectSpatialExpeditions(this.session.readSnapshot()).missions
-                .find(m => m.groupId === this.groupId && m.status !== 'Returned');
+    private notify(message: string) { this.message = message; this.refresh(); }
+    private showTarget(point?: Point2) {
+        const key = point ? `${point.x},${point.z}` : 'none';
+        if (key !== this.markerKey) { this.markerKey = key; this.targetChanged(point); }
+    }
+    private clearTarget() {
+        this.choosing = false;
+        this.destination = undefined;
+        this.showTarget();
+    }
+    cancelTarget() {
+        this.clearTarget();
+        this.notify('Destination selection cancelled. The current expedition is unchanged.');
+    }
+    private beginTargeting(groupId: string) {
+        this.groupId = groupId;
+        this.destination = undefined;
+        this.choosing = true;
+        this.message = '';
+        this.showTarget();
+        this.navigation.showMap();
+        this.refresh();
+        this.toolbar.querySelector<HTMLButtonElement>('#expedition-cancel')?.focus();
+    }
+
+    private click = (event: Event) => {
+        const target = (event.target as Element).closest<HTMLButtonElement>('button');
+        if (!target || target.disabled) return;
+        if (this.toolbar.contains(target) && this.toolbar.dataset.group) this.groupId = this.toolbar.dataset.group;
+        if (target.dataset.expeditionGroup) {
+            this.clearTarget();
+            this.groupId = target.dataset.expeditionGroup;
+            this.message = '';
+            this.refresh();
+            return;
+        }
+        if (target.id === 'expedition-create') {
+            this.groupId = '';
+            this.command({ type: 'CreateExplorationGroup' });
+        }
+        if (target.dataset.start) this.reviewDeparture(target.dataset.start);
+        if (target.id === 'expedition-start-cancel') this.dialog.close();
+        if (target.id === 'expedition-start-confirm' && this.pendingStart) {
+            try {
+                const offer = this.session.startExpeditionOffer(this.pendingStart);
+                const crew = this.session.readSnapshot().world!.groups[this.pendingStart].memberIds.join(',');
+                if (offer.foodCost !== this.pendingFood || crew !== this.pendingCrew)
+                    throw new Error('The crew or supplies have changed. Go back and review the departure again.');
+                const groupId = this.pendingStart;
+                this.pendingStart = '';
+                this.dialog.close();
+                this.command({ type: 'StartExpedition', groupId });
+            } catch (error) { this.root.querySelector('#expedition-start-summary')!.textContent = String(error); }
+        }
+        if (target.dataset.explore) this.beginTargeting(target.dataset.explore);
+        if (target.dataset.recall) this.command({ type: 'RecallExpedition', groupId: target.dataset.recall });
+        if (target.dataset.cancelExpedition)
+            this.command({ type: 'CancelExpedition', groupId: target.dataset.cancelExpedition });
+        if (target.id === 'expedition-cancel') this.cancelTarget();
+        if (target.id === 'expedition-send') this.sendGroup();
+        if (target.id === 'expedition-details') {
+            this.toolbarExpanded = !this.toolbarExpanded;
+            this.refresh();
+        }
+        if (target.dataset.expeditionAction === 'groups') {
+            this.clearTarget();
+            this.navigation.showGroups();
+            this.refresh();
+        }
+        if (target.dataset.expeditionAction === 'focus') {
+            const mission = this.activeMission();
             if (mission) {
-                this.showingDestination = true;
-                this.targetChanged(mission.target);
+                this.navigation.showMap();
+                this.navigation.focus(mission.position);
+                this.refresh();
             }
         }
-        this.refresh();
-        const last = this.root.querySelectorAll<HTMLDetailsElement>('details[data-group]');
-        if (last.length) last[last.length - 1].open = true;
+        if (target.dataset.expeditionAction === 'clock') this.navigation.toggleClock();
+    };
+
+    private reviewDeparture(groupId: string) {
+        try {
+            const offer = this.session.startExpeditionOffer(groupId);
+            this.groupId = this.pendingStart = groupId;
+            this.pendingFood = offer.foodCost;
+            this.pendingCrew = this.session.readSnapshot().world!.groups[groupId].memberIds.join(',');
+            this.root.querySelector('#expedition-start-summary')!.innerHTML = `
+                <div class="fjord-expedition-quote">${icon('food')}<strong>${offer.foodCost}</strong><span>Food from clan stocks</span></div>
+                <p>${escape(this.session.readSnapshot().world!.groups[groupId].name)} · ${offer.members} residents · ${offer.foodPerMember} Food each · packed once.</p>
+                <p>Next, choose a destination on the island. Travel, exploration and returning home share this pack.</p>
+                <p class="fjord-caption">Unused supplies are discarded when the expedition ends. The clock stays ${this.session.running ? 'running' : 'paused'}.</p>`;
+            this.dialog.showModal();
+            this.root.querySelector<HTMLButtonElement>('#expedition-start-cancel')!.focus();
+        } catch (error) { this.notify(error instanceof Error ? error.message : String(error)); }
     }
+
+    committed(command: SimulationCommand) {
+        const state = this.session.readSnapshot();
+        if (command.type === 'CreateExplorationGroup') this.groupId = Object.keys(state.world!.groups).at(-1)!;
+        if ('groupId' in command) this.groupId = command.groupId;
+        if (command.type === 'StartExpedition') { this.beginTargeting(command.groupId); return; }
+        if (['ExploreArea', 'RecallExpedition', 'CancelExpedition'].includes(command.type)) this.clearTarget();
+        if (command.type === 'ExploreArea') this.message = 'Destination confirmed. No extra Food was charged.';
+        if (command.type === 'RecallExpedition') this.message = 'Return home ordered.';
+        if (command.type === 'CancelExpedition') this.message = 'Expedition ended. Unused supplies were discarded.';
+        this.refresh();
+    }
+
+    /** Preview only. Navigation and Food remain unchanged until the player confirms the flag. */
     chooseTarget(point: Point2) {
         if (!this.choosing) return false;
         try {
             const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
-            const away = inspectSpatialExpeditions(this.session.readSnapshot()).missions.some(m => m.groupId === this.groupId && m.status !== 'Returned' && m.status !== 'Prepared');
-            const origins = away ? undefined : this.origins(members);
+            const mission = this.activeMission();
+            const origins = mission?.status === 'Prepared' ? this.origins(members) : undefined;
             const offer = this.session.exploreOffer(this.groupId, point, origins);
-            this.targetChanged(offer.target);
-            this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
-            this.choosing = false;
-            this.root.querySelector<HTMLElement>('#expedition-proposal')!.hidden = true;
-            this.status.textContent = (offer.adjusted ? 'Group sent to nearby walkable ground. ' : 'Group sent. ') +
-                (away ? 'Using the same carried supplies.' : 'Using the reserved supplies.') + (this.session.running ? '' : ' Clock paused: press Start to travel.');
+            this.destination = offer.target;
+            this.adjusted = offer.adjusted;
+            this.showTarget(offer.target);
+            this.message = '';
         } catch (error) {
-            this.targetChanged();
-            this.status.textContent = error instanceof Error ? error.message : String(error);
+            this.destination = undefined;
+            this.showTarget();
+            this.message = error instanceof Error ? error.message : String(error);
         }
+        this.refresh();
         return true;
     }
+    private sendGroup() {
+        if (!this.choosing || !this.destination) return;
+        try {
+            const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
+            const origins = this.activeMission()?.status === 'Prepared' ? this.origins(members) : undefined;
+            // Requote at commit: residents may have moved or used supplies while the flag was displayed.
+            const offer = this.session.exploreOffer(this.groupId, this.destination, origins);
+            this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
+            this.clearTarget();
+            this.notify('Confirming destination…');
+        } catch (error) { this.notify(error instanceof Error ? error.message : String(error)); }
+    }
+
+    private unavailableReason(state: SimulationState, id: string, groupId: string) {
+        const person = state.personas[id];
+        if (person.deathWinter !== null) return 'Deceased';
+        if (personaAge(state, id) < (state.mechanics?.config.workAge ?? 16)) return 'Below working age';
+        if (isProvidingCare(state, id)) return 'Providing childcare';
+        if (personaAway(state, id)) return 'Away on an expedition';
+        if (Object.values(state.world!.groups).some(group => group.id !== groupId && group.memberIds.includes(id)))
+            return 'Assigned to another group';
+        return 'Unavailable';
+    }
+    private crew(state: SimulationState, group: Group) {
+        const people = Object.values(state.personas).filter(person => person.deathWinter === null ||
+            group.memberIds.includes(person.id));
+        const row = (id: string, available: boolean) => {
+            const person = state.personas[id];
+            const included = group.memberIds.includes(id);
+            return `<label class="fjord-crew-choice ${included ? 'is-selected' : ''}">
+                <input type="checkbox" data-member="${escape(id)}" data-member-group="${escape(group.id)}"
+                    ${included ? 'checked' : ''} ${available || included ? '' : 'disabled'}>
+                ${icon(occupationIcon(person.occupation))}<span><strong>${escape(person.name)}</strong>
+                    <small>${escape(available ? occupationLabel(person.occupation) : this.unavailableReason(state, id, group.id))}</small></span>
+            </label>`;
+        };
+        const available = people.filter(person => expeditionEligible(state, person.id, group.id));
+        const unavailable = people.filter(person => !expeditionEligible(state, person.id, group.id));
+        available.sort((a, b) => Number(group.memberIds.includes(b.id)) - Number(group.memberIds.includes(a.id)));
+        return `<div class="fjord-expedition-section-heading"><h3>${icon('people')}Choose your crew</h3>
+                <span>${group.memberIds.length} selected</span></div>
+            <div class="fjord-expedition-members" aria-label="Group members">${available.map(person => row(person.id, true)).join('')}</div>
+            ${unavailable.length ? `<details class="fjord-crew-unavailable"><summary>Unavailable residents · ${unavailable.length}</summary>
+                <div class="fjord-expedition-members">${unavailable.map(person => row(person.id, false)).join('')}</div></details>` : ''}`;
+    }
+    private supplies(mission: Mission) {
+        if (!mission.supplies) return '<p class="fjord-caption">Return home to prepare a new expedition with carried supplies.</p>';
+        const remaining = mission.supplies.activeTicksRemaining;
+        const total = mission.supplies.foodPerMember * mission.supplies.ticksPerFood;
+        const percentage = Math.round(remaining / total * 100);
+        const seconds = Math.round(remaining * this.session.effectiveMinutesPerWinter * 60 /
+            this.session.readSnapshot().ticksPerWinter);
+        return `<div class="fjord-expedition-supplies ${percentage <= 25 ? 'is-low' : ''}">
+            <div>${icon('food')}<span>Travel supplies</span><strong>${percentage}%</strong></div>
+            <meter min="0" max="${total}" value="${remaining}" aria-label="Travel supplies">${percentage}%</meter>
+            <small title="${remaining} active simulation ticks remaining">${mission.status === 'Stranded' ? 'Movement unavailable' :
+                `≈ ${Math.floor(seconds / 60)}m ${String(seconds % 60).padStart(2, '0')}s active · return included`}</small>
+        </div>`;
+    }
+    private actions(mission: Mission) {
+        const stranded = mission.status === 'Stranded';
+        return button(mission.status === 'Prepared' ? 'Choose destination' : 'Change destination', 'destination',
+            `data-explore="${escape(mission.groupId)}" class="fjord-primary" ${stranded || !mission.supplies ? 'disabled' : ''}`) +
+            (mission.status === 'Prepared' ? button('End expedition', 'close', `data-cancel-expedition="${escape(mission.groupId)}"`) :
+                button(mission.status === 'Returning' ? 'Returning home' : 'Return home', 'home',
+                    `data-recall="${escape(mission.groupId)}" ${stranded || mission.status === 'Returning' ? 'disabled' : ''}`));
+    }
+    private journey(group: Group, mission?: Mission) {
+        const step = !mission ? 0 : mission.status === 'Prepared' ? 1 : 2;
+        return `<ol class="fjord-expedition-steps" aria-label="Expedition steps">${[
+            ['people', 'Crew'], ['destination', 'Destination'], ['route', 'Explore & return'],
+        ].map(([glyph, label], index) => `<li ${index === step ? 'aria-current="step"' : ''} class="${index < step ? 'is-complete' : ''}">
+            ${icon(index < step ? 'check' : glyph as FjordIcon)}<span>${label}</span></li>`).join('')}</ol>
+            <div class="fjord-expedition-group-heading"><h3>${escape(group.name)}</h3>
+                <span class="fjord-expedition-badge">${mission ? phase(mission) : 'At home'}</span></div>`;
+    }
+    private preparation(state: SimulationState, group: Group) {
+        let offer: ReturnType<GameplaySession['startExpeditionOffer']> | undefined;
+        let reason = 'Choose at least one available resident.';
+        if (group.memberIds.length) {
+            try { offer = this.session.startExpeditionOffer(group.id); reason = ''; }
+            catch (error) { reason = error instanceof Error ? error.message : String(error); }
+        }
+        return `${this.crew(state, group)}<div class="fjord-expedition-departure">
+            <div>${icon('food')}<span>${offer ? `<strong>${offer.foodCost} Food</strong><small>${offer.foodPerMember} per resident · paid once</small>` :
+                '<strong>Prepare supplies</strong><small>Food is confirmed before packing</small>'}</span></div>
+            ${button('Prepare expedition', 'route', `data-start="${escape(group.id)}" class="fjord-primary" ${offer ? '' : 'disabled'}`)}
+            ${reason ? `<p class="fjord-caption">${escape(reason)}</p>` : ''}
+        </div>`;
+    }
+    private missionDescription(mission: Mission) {
+        return ({ Prepared: 'Supplies are packed. Choose a flag on the island to leave home.',
+            Traveling: 'The group is travelling to your flag. You can redirect them or call them home.',
+            Exploring: 'The group is revealing nearby land. Choose another destination to continue.',
+            Returning: 'The group is on its way home. You can still choose another destination using the same pack.',
+            Returned: 'This expedition has ended.',
+            Stranded: 'This group cannot travel or return. Its expedition is stranded.' })[mission.status];
+    }
+
     refresh() {
-        const state = this.session.readSnapshot(), selected = this.selection(), view = inspectWorld(state);
+        const state = this.session.readSnapshot();
+        const groups = Object.values(state.world?.groups ?? {});
+        const rawMissions = Object.values(state.world?.spatial?.missions ?? {});
+        const activeGroups = new Set(rawMissions.filter(mission => mission.status !== 'Returned').map(mission => mission.groupId));
+        if (!groups.some(group => group.id === this.groupId)) {
+            this.clearTarget();
+            this.groupId = groups.find(group => activeGroups.has(group.id))?.id ?? groups[0]?.id ?? '';
+        }
+        const workspace = this.root.closest<HTMLElement>('#fjord-workspace')!;
+        // Changing workspace cancels only the unconfirmed flag, never the canonical expedition.
+        if (this.choosing && !workspace.hidden) this.clearTarget();
+        const open = !workspace.hidden && workspace.dataset.surface === 'expeditions';
+        if (!open && !activeGroups.size && !this.choosing) { this.toolbar.hidden = true; this.showTarget(); return; }
+        const group = groups.find(candidate => candidate.id === this.groupId);
+        const missions = inspectSpatialExpeditions(state).missions;
+        const mission = missions.find(candidate => candidate.groupId === this.groupId && candidate.status !== 'Returned');
+        if (this.choosing && (!mission || mission.status === 'Stranded')) this.clearTarget();
+        this.renderToolbar(group, mission, groups.filter(candidate => activeGroups.has(candidate.id)));
+        if (!open) return;
         const controls = this.root.querySelector<HTMLElement>('#expedition-controls')!;
-        const open = new Set(Array.from(controls.querySelectorAll<HTMLDetailsElement>('details[open]')).map(d => d.dataset.group));
-        const selectedGroup = controls.querySelector<HTMLSelectElement>('#expedition-join')?.value;
-        let html = '';
-        if (!selected) {
-            html = '<button id="expedition-create" type="button" ' + (!state.discovery ? 'disabled' : '') +
-                '>Create exploration group</button>';
-            html += view.groups.map(group => {
-                const journeys = inspectSpatialExpeditions(state).missions.filter(m => m.groupId === group.id);
-                const active = journeys.find(m => m.status !== 'Returned');
-                const latest = journeys.at(-1);
-                return '<details data-group="' + escape(group.id) + '"><summary>' + escape(group.name) + ' · ' +
-                    group.members.length + ' members · ' + group.status + '</summary><p>' + (group.members.length ?
-                        group.members.map(p => escape(p.name)).join(', ') : 'Select residents on the island to add them to this group.') +
-                    '</p>' + (!active ? '<button data-start="' + escape(group.id) + '" ' +
-                        (group.status !== 'Ready' || !state.discovery ? 'disabled' : '') + '>Start Expedition</button>' :
-                        '<button data-explore="' + escape(group.id) + '" ' + (active.status === 'Stranded' || !active.supplies ? 'disabled' : '') +
-                        '>Explore Area</button> ' + (active.status === 'Prepared' ? '<button data-cancel-expedition="' +
-                            escape(group.id) + '">Cancel expedition</button>' : '<button data-recall="' + escape(group.id) + '" ' +
-                            (active.status === 'Returning' || active.status === 'Stranded' ? 'disabled' : '') + '>Return Home</button>')) +
-                    (latest ? '<p>' + escape(latest.status !== 'Returned' ? latest.status : latest.outcome ?? latest.status) +
-                        ' · ' + latest.foodCost + ' Food supplied</p>' : '') +
-                    (latest?.supplies ? '<p>Supplies remaining: ' + latest.supplies.activeTicksRemaining +
-                        ' active ticks. No extra Food is charged for new destinations.</p>' : '') +
-                    (active && !active.supplies ? '<p>Return home to start a new expedition with carried supplies.</p>' : '') +
-                    (!this.session.running && active && active.status !== 'Stranded' ?
-                        '<p>Clock paused: press Start to travel. You can choose a destination now.</p>' : '') + '</details>';
-            }).join('');
-        } else if (selected.kind === 'persona') {
-            const current = Object.values(state.world?.groups ?? {}).find(g => g.memberIds.includes(selected.id));
-            if (current) html = '<p>Exploration group: ' + escape(current.name) + '</p><button data-remove="' + escape(current.id) + '" ' +
-                (groupMission(state, current.id) ? 'disabled' : '') + '>Leave group</button>';
+        let html: string;
+        if (!state.discovery) {
+            html = `<div class="fjord-expedition-empty">${icon('destination')}<h3>A new island to discover</h3>
+                <p>This saved campaign has exploration disabled. Enable exploration &amp; rival clan when starting a new island campaign.</p>
+                ${button('New campaign options', 'route', 'data-ui="campaign-settings"')}
+                ${button('New group', 'plus', 'id="expedition-create" disabled')}</div>`;
+        } else {
+            html = `<div class="fjord-expedition-intro"><p>Prepare a crew. Place a flag. Discover your island.</p>
+                ${button('New group', 'plus', 'id="expedition-create"')}</div>
+                <nav class="fjord-expedition-groups" aria-label="Exploration groups">${groups.map(candidate =>
+                    button(`<strong>${escape(candidate.name)}</strong><small>${candidate.memberIds.length} residents${activeGroups.has(candidate.id) ? ' · active' : ''}</small>`, 'people',
+                        `data-expedition-group="${escape(candidate.id)}" aria-pressed="${candidate.id === this.groupId}"`)).join('')}</nav>`;
+            if (!group) html += `<div class="fjord-expedition-empty">${icon('route')}<h3>Your first expedition</h3>
+                <p>Create a group, choose available residents and pack supplies. No journey starts until you confirm a destination.</p></div>`;
             else {
-                const groups = view.groups.filter(g => !groupMission(state, g.id));
-                const eligible = expeditionEligible(state, selected.id) && groups.length > 0;
-                html = '<label>Add to exploration group<select id="expedition-join" ' + (!eligible ? 'disabled' : '') + '>' +
-                    groups.map(g => '<option value="' + escape(g.id) + '">' + escape(g.name) + '</option>').join('') +
-                    '</select></label><button id="expedition-add" ' + (!eligible ? 'disabled' : '') + '>Add to group</button>' +
-                    (!groups.length ? '<p>Clear the selection to create an exploration group.</p>' : '');
+                html += this.journey(group, mission);
+                if (!mission && groupMission(state, group.id)) html += '<p>This group is away on an earlier expedition. Its crew can be edited after it returns.</p>';
+                else if (!mission) html += this.preparation(state, group);
+                else html += `<p class="fjord-expedition-description">${this.missionDescription(mission)}</p>
+                    <p class="fjord-expedition-crew">${icon('people')}${group.memberIds.map(id => escape(state.personas[id]?.name ?? id)).join(', ')}</p>
+                    ${this.supplies(mission)}<div class="fjord-expedition-actions">${this.actions(mission)}
+                        ${button('Show group on map', 'locate', 'data-expedition-action="focus"')}
+                        ${!isMobileLayout() && mission.status !== 'Prepared' && mission.status !== 'Stranded' ? button(this.session.running ? 'Pause travel' : 'Resume travel',
+                            this.session.running ? 'pause' : 'play', 'data-expedition-action="clock"') : ''}
+                    </div><p class="fjord-caption">${!this.session.running ? 'Clock paused. Resume travel when you are ready.' :
+                        'The clock is running.'} New destinations use the same carried supplies.</p>`;
+                const latest = missions.filter(candidate => candidate.groupId === group.id).at(-1);
+                if (!mission && latest) html += `<p class="fjord-expedition-history">${icon('check')}Previous expedition: ${escape(latest.outcome ?? latest.status)} · ${latest.foodCost} Food supplied</p>`;
             }
         }
-        if (this.controlsHTML !== html) {
-            this.controlsHTML = html;
-            controls.innerHTML = html;
-            for (const detail of Array.from(controls.querySelectorAll<HTMLDetailsElement>('details[data-group]')))
-                detail.open = open.has(detail.dataset.group);
-            const join = controls.querySelector<HTMLSelectElement>('#expedition-join');
-            if (join && selectedGroup && Array.from(join.options).some(o => o.value === selectedGroup)) join.value = selectedGroup;
+        this.replace(controls, html, this.controlsHTML);
+        this.controlsHTML = html;
+        const status = this.root.querySelector<HTMLElement>('#expedition-status')!;
+        status.textContent = this.message;
+        status.hidden = !this.message;
+        this.root.hidden = false;
+    }
+
+    private renderToolbar(group: Group | undefined, mission: Mission | undefined, activeGroups: Group[]) {
+        // An idle selected group must not hide another group's active expedition.
+        if (!mission && !this.choosing && activeGroups.length) {
+            group = activeGroups[0];
+            mission = this.activeMission(this.session.readSnapshot(), group.id);
         }
-        this.root.hidden = !html && !this.choosing;
-        if (this.groupId && !state.world?.groups[this.groupId]) this.cancelTarget();
-        if (this.showingDestination && !inspectSpatialExpeditions(state).missions.some(m =>
-            m.groupId === this.groupId && m.status !== 'Returned')) {
-            this.showingDestination = false; this.targetChanged();
+        const workspace = this.root.closest<HTMLElement>('#fjord-workspace')!;
+        this.toolbar.hidden = !group || !mission || !workspace.hidden;
+        if (!group || !mission) { this.showTarget(); return; }
+        if (!this.choosing) this.showTarget(mission.status === 'Prepared' || mission.status === 'Stranded' ? undefined : mission.target);
+        this.toolbar.dataset.group = group.id;
+        const targetReady = this.choosing && !!this.destination;
+        const title = this.choosing ? targetReady ? 'Confirm destination' : 'Choose a destination' : phase(mission);
+        if (isMobileLayout()) {
+            this.renderMobileToolbar(group, mission, title, targetReady);
+            return;
         }
-        if (!state.discovery && !selected && !this.choosing)
-            this.status.textContent = 'Exploration is available in discovery prototype campaigns.';
+        const instruction = this.choosing ? targetReady ?
+            `${this.adjusted ? 'Flag moved to nearby walkable ground. ' : ''}Confirm this flag, or click another land destination.` :
+            'Click land to place a flag. Drag to pan · scroll to zoom · Esc to cancel.' : this.missionDescription(mission);
+        const controls = this.choosing ?
+            button(mission.status === 'Prepared' ? 'Send group' : 'Confirm destination', 'destination',
+                `id="expedition-send" class="fjord-primary" ${targetReady ? '' : 'disabled'}`) +
+            button('Cancel', 'close', 'id="expedition-cancel"') :
+            this.actions(mission) + (mission.status !== 'Prepared' && mission.status !== 'Stranded' ?
+                button(this.session.running ? 'Pause travel' : 'Resume travel', this.session.running ? 'pause' : 'play',
+                    'data-expedition-action="clock"') : '');
+        const html = `<div class="fjord-exploration-overline">${icon('destination')}<span>Exploration mode</span>
+                ${button(`${escape(group.name)}${activeGroups.length > 1 ? ` · ${activeGroups.length} active groups` : ''}`, 'people', 'data-expedition-action="groups"')}
+                <span class="fjord-exploration-clock">${this.session.running ? 'Clock running' : 'Clock paused'}</span></div>
+            <div class="fjord-exploration-content"><div class="fjord-exploration-instruction"><h2>${title}</h2><p>${instruction}</p></div>
+                ${this.supplies(mission)}</div>
+            <div class="fjord-expedition-actions">${controls}
+                ${button('Show group', 'locate', 'data-expedition-action="focus"')}
+            </div><p class="fjord-exploration-hint">${this.choosing ? 'No extra Food charged. ' : ''}Travel, exploration and the return share this pack.</p>
+            <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
+        this.replace(this.toolbar, html, this.toolbarHTML);
+        this.toolbarHTML = html;
+    }
+
+    private renderMobileToolbar(group: Group, mission: Mission, title: string, targetReady: boolean) {
+        const controls = this.choosing ?
+            button(mission.status === 'Prepared' ? 'Send group' : 'Confirm destination', 'destination',
+                `id="expedition-send" class="fjord-primary" ${targetReady ? '' : 'disabled'}`) +
+            button('Cancel', 'close', 'id="expedition-cancel"') : this.actions(mission);
+        const instruction = this.choosing ? targetReady ?
+            `${this.adjusted ? 'Flag adjusted to walkable ground. ' : ''}Send to confirm, or tap another land destination.` :
+            'Tap land to place a flag. Drag to orbit · pinch to zoom.' :
+            mission.status === 'Prepared' ? 'Your pack is ready. Choose where to explore.' :
+            mission.status === 'Stranded' ? this.missionDescription(mission) :
+            this.session.running ? this.missionDescription(mission) : 'Clock paused. Resume using Play in the status strip.';
+        const html = `<div class="fjord-mobile-expedition-heading">
+                ${button(`<strong>${escape(group.name)}</strong><small>${title}</small>`, 'people',
+                    'data-expedition-action="groups" aria-label="Open expedition group"')}
+                ${button('Supplies', 'food', `id="expedition-details" aria-expanded="${this.toolbarExpanded}" aria-controls="expedition-mobile-details"`)}
+                ${button('', 'locate', 'data-expedition-action="focus" aria-label="Show group on map"')}
+            </div><p class="fjord-mobile-instruction">${instruction}</p>
+            <div id="expedition-mobile-details" ${this.toolbarExpanded ? '' : 'hidden'}>
+                <p class="fjord-caption">${group.memberIds.map(id => escape(this.session.readSnapshot().personas[id]?.name ?? id)).join(', ')}</p>
+                ${this.supplies(mission)}<p class="fjord-caption">Travel, exploration and return share this pack.</p>
+            </div><div class="fjord-expedition-actions">${controls}</div>
+            <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
+        this.replace(this.toolbar, html, this.toolbarHTML);
+        this.toolbarHTML = html;
+    }
+
+    private replace(element: HTMLElement, html: string, previous: string) {
+        if (html === previous) return;
+        const focused = element.contains(document.activeElement) ? document.activeElement as HTMLElement : undefined;
+        const focusAttribute = focused && ['data-member', 'data-expedition-group', 'data-expedition-action',
+            'data-explore', 'data-recall', 'data-cancel-expedition', 'data-start', 'id'].find(attribute => focused.hasAttribute(attribute));
+        const focusKey = focusAttribute && focused?.getAttribute(focusAttribute);
+        const roster = element.querySelector<HTMLElement>('.fjord-expedition-members');
+        const scrollTop = roster?.scrollTop ?? 0;
+        const expanded = element.querySelector<HTMLDetailsElement>('.fjord-crew-unavailable')?.open;
+        element.innerHTML = html;
+        const nextRoster = element.querySelector<HTMLElement>('.fjord-expedition-members');
+        if (nextRoster) nextRoster.scrollTop = scrollTop;
+        const details = element.querySelector<HTMLDetailsElement>('.fjord-crew-unavailable');
+        if (details) details.open = !!expanded;
+        if (focusAttribute && focusKey) Array.from(element.querySelectorAll<HTMLElement>('button,input'))
+            .find(candidate => candidate.getAttribute(focusAttribute) === focusKey)?.focus({ preventScroll: true });
     }
 }

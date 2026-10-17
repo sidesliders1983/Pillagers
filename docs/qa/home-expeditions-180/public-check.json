@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "origin": "https://acer-railway-fact-smaller.trycloudflare.com",
+  "chunk": "FjordPlay-Bv38DhVl.js",
+  "chunkSHA256": "5ae0137331f998db8a5165b9cf3fd8b37fe1e00ed2f661d478ae6e9b0a88fa3a",
+  "scenarioSHA256": "12749c37e3bf0c52b2695adc6a0f55ba331668eaf21ce0495a4a015b6faa4bba",
+  "checks": [
+    "published launcher contains the exploration scenario",
+    "published scenario matches the prepared save",
+    "normal paused discovery campaign with one island rival",
+    "published production chunk matches the checked build"
+  ]
+}

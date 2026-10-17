@@ -19,6 +19,7 @@ import { PersonalHistoryView } from '../lore/PersonalHistoryView';
 import { ClanBookReader } from '../lore/ClanBookReader';
 import type { FjordCalendar } from './FjordCalendar';
 import { FjordHeader, fjordHeaderHTML } from './FjordHeader';
+import { MobileShell } from './MobileShell';
 import { ScreenAwakeControl } from '../ui/ScreenAwakeControl';
 import { LivingWorldController } from './LivingWorldController';
 import { renderCharacterProfile } from '../ui/CharacterProfileContent';
@@ -28,6 +29,11 @@ import { ProductionLabels } from './ProductionLabels';
 import { FjordProduction } from './FjordProduction';
 import type { SelectionLabel } from './SelectionLabels';
 import './fjord-play.css';
+import './desktop-foundations.css';
+import { FjordInterface } from './FjordInterface';
+import { icon } from './FjordIcons';
+import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
+import { fjordPresentation } from '../config/FjordPresentation';
 import { Vector2, Vector3, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { SettlementPanel, panelCommand, updateManagementAvailability } from '../play/SettlementPanel';
 import { openSettlement, persistSettlement, bindViewSwitch } from '../play/SettlementBrowser';
@@ -143,10 +149,22 @@ export class FjordPlay {
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
         document.body.innerHTML = `<main id="fjord-play">${fjordHeaderHTML()}<section class="fjord-stage"><canvas id="fjord-canvas" aria-label="Canonical Fjord settlement"></canvas><svg id="fjord-selection-leaders" aria-hidden="true"></svg><div id="fjord-selection-labels" aria-hidden="true"></div><div id="fjord-production-labels" aria-label="Resident production feedback"></div>
-            <button id="fjord-management-toggle" type="button" aria-label="Collapse management panel" aria-expanded="true" aria-controls="fjord-management">▲</button>
-            <aside id="fjord-management"><section id="expedition-panel" aria-label="Expedition groups"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><details><summary>Settlement identities</summary><ul id="fjord-identities"></ul></details>
-
-            <p id="fjord-selected">Select an entity on the board or in the list.</p><section id="entity-panel" aria-label="Settlement management"></section><details><summary>Clan Chronicle</summary><div id="fjord-chronicle"></div></details><details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></aside></section>
+            <button id="fjord-management-toggle" type="button" aria-label="Toggle management" aria-expanded="false" aria-controls="fjord-management" hidden>▲</button>
+            <aside id="fjord-management" aria-label="Selection and tasks" hidden><p id="fjord-selected" hidden></p><section id="entity-panel" aria-label="Settlement management"></section></aside>
+            <section id="fjord-workspace" tabindex="-1" aria-label="Settlement workspace" hidden>
+                <div class="fjord-workspace-heading"><h2 id="fjord-workspace-title">Settlement</h2><button type="button" data-ui="close-workspace" aria-label="Close workspace">×</button></div>
+                <div id="fjord-directory"></div><section id="expedition-panel" data-workspace-area="expeditions" aria-label="Expedition groups" hidden></section>
+                <div data-workspace-area="attention" hidden><section id="fjord-attention-summary" aria-label="Current conditions"></section><section id="fjord-weather-information" aria-label="Annual weather forecast"></section><h3>Recent events</h3><div id="fjord-chronicle"></div>
+                <details><summary>Developer diagnostics</summary><pre id="fjord-diagnostics"></pre></details></div><ul id="fjord-identities" hidden></ul>
+            </section></section>
+            <nav id="fjord-navigation" aria-label="Settlement navigation">
+                <button type="button" id="fjord-mobile-menu" aria-label="Settlement navigation" aria-expanded="false" aria-controls="fjord-navigation-drawer">${icon('menu')}</button>
+                <div id="fjord-navigation-drawer">
+                    <button type="button" data-surface="settlement">${icon('home')}Settlement</button>
+                    <button type="button" id="fjord-book">${icon('book')}Clan Book</button>
+                </div>
+                <button type="button" data-surface="expeditions">${icon('route')}Expeditions</button>
+            </nav><button id="fjord-attention" type="button" data-surface="attention">${icon('alert')}<span class="fjord-attention-label">Attention</span> <span id="fjord-attention-count">0</span></button>
             <footer><p id="fjord-notice" role="status">Loading the Fjord. Simulation controls remain available.</p></footer></main>`;
         const savedPresentation = this.shared.presentation;
         let restoredCamera = savedPresentation?.camera;
@@ -156,6 +174,7 @@ export class FjordPlay {
         }
         this.loading?.mount();
         this.foundingBook?.restoreScroll(readingPosition);
+        const mobileShell = new MobileShell(document.querySelector('#fjord-play')!);
         const header = new FjordHeader(document.querySelector('#fjord-header')!);
         const screenAwake = new ScreenAwakeControl(document.querySelector('#fjord-play')!);
         document.querySelector('#screen-awake-slot')!.outerHTML = screenAwake.html();
@@ -171,13 +190,20 @@ export class FjordPlay {
         };
         managementToggle.addEventListener('click', () => showManagement(management.hidden));
         const notice = document.querySelector<HTMLElement>('#fjord-notice')!;
+        let feedbackTimer: number | undefined;
         const say = (message: string) => {
             notice.textContent = message;
+            notice.classList.add('fjord-feedback');
+            if (message.startsWith('Fjord ready.')) notice.classList.remove('fjord-feedback');
+            clearTimeout(feedbackTimer);
+            feedbackTimer = window.setTimeout(() => notice.classList.remove('fjord-feedback'), 8000);
         };
         if (this.opened.warning)
             say(this.opened.warning);
+        document.querySelector('#fjord-attention')!.addEventListener('click', () => desktopUI?.open('attention'));
         const seedField = document.querySelector<HTMLInputElement>('#fjord-seed')!;
         const weatherField = document.querySelector<HTMLInputElement>('#fjord-weather')!;
+        const explorationField = document.querySelector<HTMLInputElement>('#fjord-exploration')!;
         const sameFounders = document.querySelector<HTMLInputElement>('#fjord-founders')!;
         const cycleField = document.querySelector<HTMLSelectElement>('#fjord-cycle')!;
         const campaignFields = () => {
@@ -187,9 +213,11 @@ export class FjordPlay {
                 'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
                 'Original saved geography';
             weatherField.checked = this.session.readSnapshot().weather?.config.enabled ?? false;
+            explorationField.checked = !!this.session.readSnapshot().discovery;
             cycleField.value = String(this.session.minutesPerWinter);
         };
         campaignFields();
+        if (query.get('discovery') === '1') explorationField.checked = true;
         sameFounders.addEventListener('change', () => {
             document.querySelector('#fjord-restart')!.textContent = sameFounders.checked ?
                 'Restart with same founders' : 'Restart with new founders';
@@ -230,7 +258,10 @@ export class FjordPlay {
             clockIntent++;
             previous = performance.now();
             this.session.setRunning(running && ownsClock());
-            document.querySelector('#fjord-run')!.textContent = this.session.running ? 'Pause' : 'Start';
+            const runButton = document.querySelector<HTMLButtonElement>('#fjord-run')!;
+            runButton.innerHTML = icon(this.session.running ? 'pause' : 'play') + '<span>' + (this.session.running ? 'Running' : 'Paused') + '</span>';
+            runButton.setAttribute('aria-label', this.session.running ? 'Pause simulation' : 'Start simulation');
+            runButton.title = this.session.running ? 'Pause simulation' : 'Start simulation';
             persist();
         };
         const beginAutoStart = () => {
@@ -271,6 +302,7 @@ export class FjordPlay {
         let calendar: FjordCalendar;
         let canonicalTime = '';
         let expeditions: ExpeditionPanel | undefined;
+        let desktopUI: FjordInterface | undefined;
         const refresh = () => {
             let expeditionPace = cycleField.querySelector<HTMLOptionElement>('option[value="10"]');
             if (!expeditionPace) {
@@ -295,32 +327,30 @@ export class FjordPlay {
                 view.entities.filter(e => e.kind === 'cattle').length, this.session.expeditionMode);
             canvas.dataset.time = JSON.stringify({ ...view.time, ticksPerWinter: state.ticksPerWinter });
             canvas.dataset.calendar = JSON.stringify(view.calendar);
-            document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
-                .slice(0, 10).map(w => '<h3>Winter ' + w.winter + '</h3>' +
-                w.entries.map(e => '<p>' + escape(e.text) + '</p>').join('')).join('');
-            const profile = view.weather.enabled ? view.weather.modifiers : null;
-            const exposure = inspectWeatherExposure(state);
-            const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
-                '<p>Food output ' + profile.foodProductionBps / 100 + '% · Materials output ' +
-                (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
-                (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
-                (profile.cattleConsumptionBps ?? profile.cattleConsumptionMultiplier * 10000) / 10000 + '</p>' +
-                '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed cattle</p>' +
-                (profile.tentMortalityBps || profile.exposedCattleMortalityBps ?
-                    '<p class="weather-warning">Shelter exposed residents and cattle before the Winter reckoning.</p>' : '') :
-                '<strong>Winter weather disabled</strong>';
-            const weatherInfo = document.querySelector('#fjord-weather-information')!;
-            if (weatherInfo.innerHTML !== forecast) weatherInfo.innerHTML = forecast;
+            const workspace = document.querySelector<HTMLElement>('#fjord-workspace')!;
+            if (!workspace.hidden && workspace.dataset.surface === 'attention') {
+                document.querySelector('#fjord-chronicle')!.innerHTML = projectChronicle(state.events, state.time.winter)
+                    .slice(0, 3).map(w => '<h3>Winter ' + w.winter + '</h3>' +
+                    w.entries.slice(-8).map(e => '<p>' + escape(e.text) + '</p>').join('')).join('');
+                const profile = view.weather.enabled ? view.weather.modifiers : null;
+                const exposure = inspectWeatherExposure(state);
+                const forecast = profile ? '<strong>Year ' + view.time.winter + ' · ' + view.weather.class + ' annual weather</strong>' +
+                    '<p>Food output ' + profile.foodProductionBps / 100 + '% · Materials output ' +
+                    (profile.materialsProductionBps ?? 10000) / 100 + '%<br>Resident Food ×' +
+                    (profile.residentConsumptionBps ?? 10000) / 10000 + ' · Adult cattle Food ×' +
+                    (profile.cattleConsumptionBps ?? profile.cattleConsumptionMultiplier * 10000) / 10000 + '</p>' +
+                    '<p>' + exposure.residentIds.length + ' exposed residents · ' + exposure.cattleIds.length + ' exposed cattle</p>' +
+                    (profile.tentMortalityBps || profile.exposedCattleMortalityBps ?
+                        '<p class="weather-warning">Shelter exposed residents and cattle before the Winter reckoning.</p>' : '') :
+                    '<strong>Winter weather disabled</strong>';
+                const weatherInfo = document.querySelector('#fjord-weather-information')!;
+                if (weatherInfo.innerHTML !== forecast) weatherInfo.innerHTML = forecast;
+                }
             canvas.dataset.selected = this.shared.selection ? this.shared.selection.kind + ':' + this.shared.selection.id : '';
-            document.querySelector('#fjord-run')!.textContent = this.session.running ? 'Pause' : 'Start';
-            const historicalPeople = Object.values({...state.personaArchive, ...state.personas})
-                .filter(person => !view.entities.some(entity => entity.kind === 'persona' && entity.id === person.id))
-                .map(person => ({kind:'persona', id:person.id, label:person.name,
-                    status:{level:undefined, stage:!state.personas[person.id]?'archived':person.deathWinter!==null?'deceased':'resident record'}}));
-            const identities = [...view.entities, ...historicalPeople].map(e => `<li><button data-kind="${e.kind}" data-id="${escape(e.id)}">${escape(e.label)}</button> · ${e.status.level !== undefined ? 'level ' + e.status.level : e.status.stage ?? e.kind}</li>`).join('');
-            const list = document.querySelector('#fjord-identities')!;
-            if (list.innerHTML !== identities)
-                list.innerHTML = identities;
+            const runButton = document.querySelector<HTMLButtonElement>('#fjord-run')!;
+            runButton.innerHTML = icon(this.session.running ? 'pause' : 'play') + '<span>' + (this.session.running ? 'Running' : 'Paused') + '</span>';
+            runButton.setAttribute('aria-label', this.session.running ? 'Pause simulation' : 'Start simulation');
+            runButton.title = this.session.running ? 'Pause simulation' : 'Start simulation';
             document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                 ...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? []),
                 'Residents reuse FjordSide DNA height, build and age; movement remains presentation only.',
@@ -332,29 +362,10 @@ export class FjordPlay {
             if (layer && syncScene)
                 void syncScene().catch(error => say('Presentation update failed: ' + String(error)));
             const panel = document.querySelector<HTMLElement>('#entity-panel')!;
-            const selectionKey = this.shared.selection ? this.shared.selection.kind + ':' + this.shared.selection.id : '';
-            const sameSelection = selectionKey === this.lastPanelSelection;
-            // Ticks retain the user's panel preference; a new selection brings its actions back.
-            if (selectionKey && !sameSelection)
-                showManagement(true);
-            const preserved = new Set(Array.from(panel.querySelectorAll<HTMLInputElement | HTMLSelectElement>('input,select'))
-                .filter(field => sameSelection && (this.session.running || field === document.activeElement)).map(field => field.id));
-            const resident = this.shared.selection?.kind === 'persona' ?
-                view.entities.find(entity => entity.kind === 'persona' && entity.id === this.shared.selection!.id) : undefined;
-            let residentProfile = '';
-            if (resident?.dna) {
-                const content = document.createElement('section');
-                content.id = 'fjord-resident-profile';
-                renderCharacterProfile(content, resident.dna, resident.label, resident.id);
-                content.querySelector('.profile-close')?.remove();
-                content.querySelector('.profile-eyebrow')?.remove();
-                residentProfile = '<details data-view-key="resident-profile"><summary>Character traits &amp; heritage</summary>' +
-                    content.outerHTML + '</details>';
-            }
-            updateView(panel, this.panels.render(this.session.readSnapshot(), this.shared.selection, personalHistory.render()) +
-                residentProfile + '<button data-action="clear">Clear selection</button>', preserved);
-            this.lastPanelSelection = selectionKey;
+            desktopUI?.refresh(state, this.shared.selection, personalHistory.render(),
+                () => this.panels.render(state, this.shared.selection, '', { homeImprovements: false }));
             updateManagementAvailability(panel, this.shared);
+            document.querySelector('#fjord-clan-name')!.textContent = state.clan.name;
             highlight();
             const selected = this.campaign.selection;
             document.querySelector('#fjord-selected')!.textContent = selected ?
@@ -431,6 +442,7 @@ export class FjordPlay {
             });
         });
         const startNewCampaign = (restart: boolean) => {
+            const discoveryEnabled = explorationField.checked;
             const previousPace = this.session.pacing();
             const wasRunning = previousPace.running;
             this.foundingBook?.dispose();
@@ -464,7 +476,6 @@ export class FjordPlay {
                     loading = this.loading = new IslandLoading(true, this.foundingBook);
                     await loading.prepare(proposal.snapshot().seed);
                     loading.check();
-                    const discoveryEnabled = !!this.session.readSnapshot().discovery || query.get('discovery') === '1';
                     this.campaign.startCampaign(proposal, 'island-pool-v1');
                     if (discoveryEnabled) this.campaign.enableDiscovery();
                     resetProduction();
@@ -504,17 +515,27 @@ export class FjordPlay {
         document.querySelector('#fjord-new')!.addEventListener('click', () => startNewCampaign(false));
         const select = (kind: string, id: string) => {
             showManagement(true);
-            this.shared.select({ kind: kind as EntityKind, id });
+            this.shared.select(kind ? { kind: kind as EntityKind, id } : null);
             const entity = this.campaign.readProjection().entities.find(e => e.kind === kind && e.id === id);
             document.querySelector('#fjord-selected')!.textContent = entity ? entity.label + ' · ' + kind : 'Entity is no longer active.';
             refresh();
         };
+        desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
+            commit: (commands, done) => action(async () => {
+                this.session.commandBatch(typeof commands === 'function' ? commands() : commands);
+                done();
+                if (syncScene) await syncScene();
+            }) });
+        document.querySelector('#fjord-book')!.addEventListener('click', () =>
+            document.querySelector<HTMLButtonElement>('#clan-book-open')!.click());
         const panelRoot = document.querySelector<HTMLElement>('#entity-panel')!;
         panelRoot.addEventListener('change', () => updateManagementAvailability(panelRoot, this.shared));
         panelRoot.addEventListener('click', event => {
             const button = (event.target as Element).closest<HTMLButtonElement>('button');
             if (!button || button.disabled)
                 return;
+            try { if (desktopUI?.handle(button)) return; }
+            catch (error) { say(error instanceof Error ? error.message : String(error)); return; }
             if (button.dataset.select) {
                 select(button.dataset.kind!, button.dataset.select);
                 return;
@@ -526,13 +547,13 @@ export class FjordPlay {
             }
             const field = (id: string) => panelRoot.querySelector<HTMLInputElement | HTMLSelectElement>('#' + id)?.value ?? '';
             const command = panelCommand(button, this.shared.selection, field);
-            if (command)
-                action(async () => {
+            if (command) void desktopUI!.approve(command).then(approved => {
+                if (approved) action(async () => {
                     this.shared.command(command);
-                    if (syncScene)
-                        await syncScene();
+                    if (syncScene) await syncScene();
                     say('Action completed.');
                 });
+            }).catch(error => say(error instanceof Error ? error.message : String(error)));
         });
         document.querySelector('#fjord-identities')!.addEventListener('click', event => {
             const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button[data-kind]');
@@ -573,19 +594,31 @@ export class FjordPlay {
         expeditions = new ExpeditionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
             this.session, command => action(() => {
                 this.session.command(command);
-                expeditions!.committed(command.type === 'ExploreArea');
+                expeditions!.committed(command);
             }), point => {
                 targetMarker.visible = !!point;
-                if (!point && expeditions?.targeting) showManagement(false);
                 if (point) targetMarker.position.set(point.x,
                     createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z)+.4, point.z);
-            }, () => this.shared.selection, memberIds => {
+            }, memberIds => {
                 const rendered = layer?.describe() ?? [];
                 return Object.fromEntries(memberIds.map(id => {
                     const person = rendered.find(entity => entity.kind==='persona' && entity.id===id);
                     if (!person) throw new Error('A group member is not currently on the island.');
                     return [id,{ x: person.position[0], z: person.position[2] }];
                 }));
+            }, {
+                showMap: () => {
+                    desktopUI?.showExplorationMap();
+                    showManagement(false);
+                },
+                showGroups: () => desktopUI?.open('expeditions', true),
+                focus: point => {
+                    const height = createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z);
+                    const target = new Vector3(point.x, height, point.z);
+                    const offset = camera.position.clone().sub(controller.focus);
+                    controller.setView({ position: target.clone().add(offset).toArray(), target: target.toArray() });
+                },
+                toggleClock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.click(),
             });
         document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
@@ -593,6 +626,7 @@ export class FjordPlay {
             this.shared.select(null);
             refresh();
             expeditions!.refresh();
+            desktopUI?.open('expeditions');
         });
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
@@ -629,6 +663,9 @@ export class FjordPlay {
             this.loading?.cancel();
             this.loading?.finish();
             this.stopped = true;
+            desktopUI?.dispose();
+            expeditions?.dispose();
+            clearTimeout(feedbackTimer);
             trace.record('scene-disposed');
             trace.dispose();
             lifecycleEvents.abort();
@@ -636,6 +673,7 @@ export class FjordPlay {
             contextPanel?.remove();
             screenAwake.dispose();
             header.dispose();
+            mobileShell.dispose();
             bookReader.dispose();
             this.foundingBook?.dispose();
             personalHistory.dispose();
@@ -754,6 +792,15 @@ export class FjordPlay {
         const cleared = new Set<string>();
         let groundSignature = "";
         let arrivalPose: { position: number[]; target: number[] };
+        let highlandPose: { position: number[]; target: number[] };
+        document.querySelector('#fjord-view-home')!.addEventListener('click', () => {
+            if (arrivalPose) controller.setView(arrivalPose);
+            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
+        });
+        document.querySelector('#fjord-view-summit')!.addEventListener('click', () => {
+            if (highlandPose) controller.setView(highlandPose);
+            document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
+        });
         const rebuildWorld = async (): Promise<void> => {
             sceneLoads++;
             try {
@@ -763,7 +810,7 @@ export class FjordPlay {
                 const discovery = canonical.discovery ? inspectClanDiscovery(canonical.discovery, canonical.clan.id) : undefined;
                 trace.record('scene-build');
                 const next = await createWorld(assets!, { mode: 'generated', blueprint, discovery,
-                    settlement: 'canonical', quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
+                    settlement: 'canonical', groundStyle: campaignIslandPlan(blueprint) ? fjordTerrain.style : undefined, quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                     anisotropy: renderer.capabilities.getMaxAnisotropy(),
                     preparation: async (stage, operation) => {
                         if (this.loading) return this.loading.measure(stage, operation);
@@ -803,7 +850,10 @@ export class FjordPlay {
                 configureEffects();
                 scene.add(campfireEffect.root);
                 layer!.setCampfireHeat(campfireEffect.inspect().heat);
-                weatherTint = new SeasonTint(next.root, next.terrain);
+                const summitLine = campaignIslandPlan(blueprint) ? fjordSnowLine(blueprint) : null;
+                weatherTint = new SeasonTint(next.root, next.terrain, summitLine);
+                canvas.dataset.terrainStyle = JSON.stringify({ style: summitLine !== null ? fjordTerrain.style : 'native',
+                    summitLineY: summitLine, minimumUp: fjordTerrain.permanentMinimumUp });
                 weatherSignature = "";
                 scene.add(next.root);
                 cleared.clear();
@@ -814,7 +864,10 @@ export class FjordPlay {
                 scene.add(rivalScene.root);
                 groundSignature = "";
                 lighting?.dispose();
-                lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center, document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard');
+                lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
+                    document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
+                    fjordPresentation.lighting);
+                lighting.includeWorldShadowBounds(next.root);
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, blueprint.terrain.bounds, next.movement.heightAt,
@@ -824,6 +877,11 @@ export class FjordPlay {
                     position: [firePosition.x + 28, firePosition.y + 31, firePosition.z - 32],
                     target: [firePosition.x, firePosition.y + 1, firePosition.z],
                 };
+                const peak = blueprint.terrain.heights.reduce((best, y, index) => y > best.y ? { y, index } : best,
+                    { y: -Infinity, index: 0 });
+                const peakX = blueprint.terrain.bounds.minX + peak.index % blueprint.terrain.columns * blueprint.terrain.spacing;
+                const peakZ = blueprint.terrain.bounds.minZ + Math.floor(peak.index / blueprint.terrain.columns) * blueprint.terrain.spacing;
+                highlandPose = { position: [peakX + 70, peak.y + 58, peakZ - 80], target: [peakX, peak.y - 3, peakZ] };
                 controller.setView(restoredCamera ?? arrivalPose);
                 restoredCamera = undefined;
             } finally {
@@ -851,6 +909,7 @@ export class FjordPlay {
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
+                            lighting!.includeWorldShadowBounds(world!.root);
                             weatherTint!.refreshFoliage(world!.root);
                             weatherSignature = '';
                         }
@@ -939,6 +998,7 @@ export class FjordPlay {
                         return;
                     highlight(state, view);
                     const rendered = layer!.describe();
+                    for (const entity of rendered) lighting!.includeEntityShadowBounds(entity.bounds);
                     productionLabels.setAnchors(rendered);
                     canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
@@ -975,7 +1035,6 @@ export class FjordPlay {
                 const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
                 const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
                 if (point) expeditions.chooseTarget({ x: point.x, z: point.z });
-                showManagement(true);
                 return true;
             }
             const selected = layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
@@ -1041,6 +1100,7 @@ export class FjordPlay {
                 canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                 canvas.dataset.motionTime = String(activeTime);
                 canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
+                canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
                 lastDiagnostics = performance.now();
             }
@@ -1061,6 +1121,7 @@ export class FjordPlay {
                 lighting!.fog.near += offset;
                 lighting!.fog.far += offset;
             }
+            lighting!.updateShadowView(camera);
             world!.update(time, lighting, camera);
             discoveryFog?.update(delta);
             renderer.render(scene, camera);

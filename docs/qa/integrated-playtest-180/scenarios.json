@@ -1,0 +1,38 @@
+{
+  "version": "integrated-playtest-fixtures-v1",
+  "scenarios": [
+    {
+      "name": "funded-800",
+      "source": "docs/qa/fjord-runtime-performance/fixtures/summer-32.json",
+      "commands": [
+        {
+          "type": "SalvageLongship",
+          "longshipId": "founding-longship"
+        }
+      ],
+      "sourceSha256": "4caf546615ebf176d17250c0662a774299612983251ee61268e52babf4418006",
+      "sha256": "414d29e43e54dc9d6adfe0859b06a02775af6bda6a1065eae034fc0d1c8864b7"
+    },
+    {
+      "name": "developed-810",
+      "source": "docs/qa/fjord-runtime-performance/fixtures/developed-810.json",
+      "commands": [],
+      "sourceSha256": "b1128c7a19f792294949d097aca5f206de4c1747c648920f9432162698bf6766",
+      "sha256": "74e989325ce8e5ea69fa10ba2d0e51291c87b4a8a10c41df4c4d6714cd36bdf6"
+    },
+    {
+      "name": "snow-811",
+      "source": "docs/qa/fjord-runtime-performance/fixtures/snow-811.json",
+      "commands": [],
+      "sourceSha256": "1ad9d7a7f2ad8f56a4fb8e3708fe98e83e63a1a4a182c42854e443b631977e8a",
+      "sha256": "7938a507280d706622cb73ab3ec34d54a629cc7ae0f4e570ff828ddfd447ed32"
+    },
+    {
+      "name": "summer-17",
+      "source": "docs/qa/fjord-runtime-performance/fixtures/summer-17.json",
+      "commands": [],
+      "sourceSha256": "f75303e98e3e0e2740ef7e394059f1a358507d128d3ead808c8a881c24653dde",
+      "sha256": "607f7135c5fd1afaa4efa9f2d76fc79fef836ed7c24fca9ed345564c5e07f87f"
+    }
+  ]
+}

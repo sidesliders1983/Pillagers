@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22/%3E">
+  <title>Fjordside · Rock faces and seasonal snow</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui,sans-serif; background:#111e21; color:#e9e5da; }
+    * { box-sizing:border-box; }
+    body { max-width:1250px; margin:auto; padding:28px 20px 56px; }
+    h1 { font:500 clamp(26px,4vw,40px)/1.15 Georgia,serif; margin:12px 0; }
+    h2 { font-size:21px; margin-top:32px; }
+    p,li { line-height:1.6; color:#bdc7c6; max-width:90ch; }
+    a { color:#dbc58b; text-underline-offset:3px; }
+    .eyebrow { color:#d2b77e; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+    .controls { display:flex; flex-wrap:wrap; gap:14px; margin:24px 0 16px; }
+    label { display:grid; gap:7px; flex:1 1 180px; font-size:14px; }
+    select { background:#233537; color:#ece8df; border:1px solid #526361; border-radius:5px; padding:11px; font:inherit; width:100%; min-width:0; }
+    .frame { position:relative; aspect-ratio:1424/752; overflow:hidden; border:1px solid #526361; background:#233537; }
+    .frame img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .candidate { clip-path:inset(0 0 0 50%); }
+    .tag { position:absolute; top:12px; padding:8px; border-radius:4px; background:#132325ed; font-size:clamp(10px,1.3vw,15px); }
+    .left { left:12px; } .right { right:12px; }
+    .divider { position:absolute; top:0; bottom:0; left:50%; border-left:2px solid #e9d2a0; pointer-events:none; }
+    .range { display:flex; align-items:center; gap:14px; margin-top:20px; font-size:14px; }
+    .range span { flex:0 0 auto; } input { width:100%; min-width:0; accent-color:#d4b477; }
+    #status { font-size:13px; min-height:24px; }
+    details { padding:16px; border:1px solid #3b5151; border-radius:8px; margin:20px 0; }
+    summary { cursor:pointer; color:#dbc58b; }
+    .tiles { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .tile { aspect-ratio:1.7; background-repeat:repeat; background-size:50% 50%; border:1px solid #526361; }
+    .tile-label { display:block; margin:10px 0; font-size:14px; }
+    footer { border-top:1px solid #3b5151; padding-top:20px; margin-top:28px; font-size:13px; line-height:2; }
+    select:focus-visible,input:focus-visible,a:focus-visible { outline:2px solid #e9d2a0; outline-offset:4px; }
+    @media(max-width:700px) { body { padding:20px 12px 40px; } .controls { gap:12px; } label { flex-basis:160px; } .range { gap:8px; } }
+  </style>
+</head>
+<body>
+  <div class="eyebrow">Fjordside · Material study · #180</div>
+  <h1>Rock faces &amp; seasonal snow</h1>
+  <p>Neutral basalt, larger readable joints and snow on upward-facing rock. Same procedural terrain, settlements and Northern sun lighting.</p>
+  <div class="controls">
+    <label>Saved world and season<select id="fixture" aria-label="Saved world and season"></select></label>
+    <label>Camera<select id="view" aria-label="Camera"></select></label>
+    <label>Render quality<select id="quality" aria-label="Render quality"><option value="standard">Standard</option><option value="low">Low</option></select></label>
+  </div>
+  <div class="frame" aria-label="Same frozen game scene with current materials and proposed rock treatment">
+    <img id="current" alt="Previously reviewed Icelandic colour textures with the current general seasonal tint">
+    <img id="candidate" class="candidate" alt="The same scene with neutral basalt, larger joints and orientation-based seasonal rock snow">
+    <div class="divider"></div>
+    <span class="tag left">Current textures</span><span class="tag right">Rock &amp; seasonal snow</span>
+  </div>
+  <div class="range"><span>Current</span><input id="wipe" type="range" min="0" max="100" value="100" aria-label="Reveal rock and snow candidate"><span>Candidate</span></div>
+  <p id="status" role="status">Loading verified renders…</p>
+  <details><summary>What changes in this comparison?</summary>
+    <ul>
+      <li>The same generated basalt source is delivered at a larger authored joint scale. Grass, soil and shore textures retain the previous candidate.</li>
+      <li>Rock retains neutral mineral colour instead of receiving the grass-coloured seasonal multiplier.</li>
+      <li>Existing seasonal snow strength is masked by rock orientation: upward-facing surfaces retain snow; steep walls stay more exposed. No snow is painted into the texture.</li>
+      <li>Both sides are colour studies with terrain normal and roughness maps disabled. Existing terrain normals still provide lighting and slope. No new geometry, snow map, rendering pass or dependency.</li>
+    </ul>
+    <p>This targets material readability. Large mountain silhouettes and additional ledges require a separate procedural geometry study. The existing heightmap is retained here.</p>
+  </details>
+  <h2>Rock surface at two authored scales</h2>
+  <div class="tiles">
+    <div><span class="tile-label">Previous · 4m source intent</span><div id="old-tile" class="tile" role="img" aria-label="Previous fine basalt atlas repeated"></div></div>
+    <div><span class="tile-label">Candidate · 12m source intent</span><div id="new-tile" class="tile" role="img" aria-label="Candidate larger basalt joints repeated"></div></div>
+  </div>
+  <p>The atlas period remains 24m and delivery remains 1024px / 512px. Source scale is an art direction choice for readability, not a measured rock scan.</p>
+  <footer><a href="README.md">Report</a> · <a href="delivery.json">Source and delivery recipe</a> · <a href="observations.json">Native evidence</a> · <a href="/textures/">Previous texture review</a> · <a href="https://github.com/sidesliders1983/Pillagers/pull/190">Draft PR #190</a></footer>
+  <script type="module">
+    const byId = id => document.getElementById(id);
+    const fixture = byId('fixture'), quality = byId('quality'), view = byId('view');
+    const labels = { 'developed-810':'Seed 32 · Summer 810', 'snow-811':'Seed 32 · Winter 811', 'summer-17':'Seed 17 · Summer 800' };
+    const cameras = { settlement:'Settlement overview', cliff:'Cliff face', surface:'Rock surface close-up' };
+    const response = await fetch('observations.json');
+    if (!response.ok) throw Error('The verified renders could not be loaded.');
+    const evidence = await response.json();
+    if (evidence.status !== 'PASS') throw Error('The native rock study has not passed.');
+    for (const name of ['snow-811','developed-810','summer-17']) {
+      if (evidence.cases.some(entry => entry.fixture === name)) fixture.add(new Option(labels[name], name));
+    }
+    function selectView(reset = false) {
+      const entry = evidence.cases.find(entry => entry.fixture === fixture.value && entry.quality === quality.value);
+      if (!entry) throw Error('Missing verified render tier.');
+      if (reset) {
+        const previous = view.value || 'cliff';
+        view.replaceChildren(...entry.views.map(item => new Option(cameras[item.id], item.id)));
+        if (entry.views.some(item => item.id === previous)) view.value = previous;
+      }
+      const selected = entry.views.find(item => item.id === view.value);
+      for (const id of ['current','candidate']) byId(id).src = selected.variants.find(item => item.variant === id).image;
+      const previousRoot = location.pathname.startsWith('/docs/') ? '../iceland-textures-180/' : '/textures/';
+      byId('old-tile').style.backgroundImage = `url('${previousRoot}delivery/${quality.value}/weathered-basalt.webp')`;
+      byId('new-tile').style.backgroundImage = `url('delivery/${quality.value}/readable-basalt.webp')`;
+      byId('status').textContent = `${labels[entry.fixture]} · ${cameras[selected.id]}. Same state, camera, terrain buffers, masks and lighting. Exact restoration verified.`;
+    }
+    function reveal(value) {
+      const position = 100 - value;
+      byId('current').style.visibility = value === 100 ? 'hidden' : '';
+      byId('candidate').style.clipPath = value === 100 ? 'none' : `inset(0 0 0 ${position}%)`;
+      document.querySelector('.divider').style.left = position + '%';
+      document.querySelector('.tag.left').hidden = value === 100;
+      document.querySelector('.tag.right').hidden = value === 0;
+    }
+    fixture.addEventListener('change', () => selectView(true));
+    quality.addEventListener('change', () => selectView());
+    view.addEventListener('change', () => selectView());
+    byId('wipe').addEventListener('input', event => reveal(Number(event.target.value)));
+    selectView(true);
+    reveal(Number(byId('wipe').value));
+  </script>
+</body>
+</html>

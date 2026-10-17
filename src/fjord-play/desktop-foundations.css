@@ -1,0 +1,160 @@
+/* Desktop foundations share existing controls and data. Mobile layout belongs to issue #182. */
+@media (min-width: 1101px) {
+    body.fjord-play {
+        --fjord-surface: #1d2529;
+        --fjord-panel: #1b2327f5;
+        --fjord-control: #303b3c;
+        --fjord-control-hover: #414e4b;
+        --fjord-text: #f0e9dc;
+        --fjord-muted: #bec7c1;
+        --fjord-accent: #ddbd87;
+        --fjord-line: #737b6b;
+        font: 14px/1.45 system-ui, sans-serif;
+        color: var(--fjord-text);
+        background: #172126;
+    }
+
+    #fjord-play header,
+    #fjord-play footer,
+    #fjord-management,
+    #fjord-menu .fjord-settings {
+        color: var(--fjord-text);
+        background: var(--fjord-panel);
+        border: 1px solid var(--fjord-line);
+        border-radius: 6px;
+    }
+
+    #fjord-play #fjord-header {
+        background: var(--fjord-surface);
+    }
+
+    #fjord-winter::before {
+        content: 'FJORDSIDE';
+        grid-column: 1 / -1;
+        color: var(--fjord-accent);
+        font: 600 11px/1 system-ui, sans-serif;
+        letter-spacing: .18em;
+    }
+
+    .fjord-date {
+        row-gap: 4px;
+        font-size: 18px;
+    }
+
+    .fjord-kpis > div + div {
+        border-left: 1px solid #737b6b66;
+        padding-left: 12px;
+    }
+
+    .fjord-kpis dt,
+    #fjord-pacing,
+    #fjord-play small,
+    #fjord-play footer p {
+        color: var(--fjord-muted);
+        font-size: 12px;
+    }
+
+    .fjord-kpis dd {
+        color: var(--fjord-text);
+        font-size: 18px;
+        line-height: 1.25;
+    }
+
+    #fjord-play button,
+    #fjord-play select,
+    #fjord-play input,
+    #fjord-menu > summary {
+        color: var(--fjord-text);
+        background: var(--fjord-control);
+        border-color: var(--fjord-line);
+        font-family: inherit;
+    }
+
+    #fjord-play button:hover:not(:disabled),
+    #fjord-menu > summary:hover {
+        background: var(--fjord-control-hover);
+        border-color: var(--fjord-accent);
+    }
+
+    #fjord-play button:focus-visible,
+    #fjord-play a:focus-visible,
+    #fjord-play select:focus-visible,
+    #fjord-play input:focus-visible,
+    #fjord-play summary:focus-visible {
+        outline: 2px solid var(--fjord-accent);
+        outline-offset: 3px;
+    }
+
+    #fjord-play #fjord-run {
+        border-color: var(--fjord-accent);
+        color: var(--fjord-accent);
+        min-width: 56px;
+    }
+
+    .fjord-time-controls {
+        gap: 6px;
+    }
+
+    #fjord-cycle {
+        width: 128px;
+        font-size: 13px;
+    }
+
+    #fjord-next,
+    #fjord-menu > summary {
+        white-space: nowrap;
+    }
+
+    #fjord-management {
+        padding: 54px 14px 14px;
+        scrollbar-gutter: stable;
+    }
+
+    #fjord-management p,
+    #fjord-chronicle,
+    #fjord-weather-information {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    #fjord-management > details {
+        border-top: 1px solid #737b6b66;
+        margin-top: 12px;
+        padding-top: 10px;
+    }
+
+    #fjord-management summary {
+        color: var(--fjord-muted);
+        cursor: pointer;
+        padding: 4px 0;
+    }
+
+    #fjord-selected {
+        color: var(--fjord-accent);
+        border-bottom: 1px solid #737b6b66;
+        padding-bottom: 12px;
+        overflow-wrap: anywhere;
+    }
+
+    #entity-panel h2,
+    #fjord-play a {
+        color: var(--fjord-accent);
+    }
+
+    #entity-panel h2 {
+        font: 600 22px/1.2 Georgia, serif;
+    }
+
+    #entity-panel .entity-link {
+        background: transparent;
+        color: var(--fjord-accent);
+    }
+
+    #fjord-play #fjord-management-toggle {
+        border-color: var(--fjord-accent);
+    }
+
+    #fjord-play footer {
+        border-color: #737b6b66;
+    }
+}
