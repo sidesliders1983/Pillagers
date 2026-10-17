@@ -1,0 +1,177 @@
+{
+  "version": "rock-gallery-check-v1",
+  "origin": "http://127.0.0.1:5197/docs/qa/iceland-rock-snow-180/",
+  "pairs": [
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "view": "cliff",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "view": "surface",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "view": "cliff",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "view": "surface",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "cliff",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "view": "surface",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "cliff",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "view": "surface",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "view": "cliff",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "view": "surface",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "view": "settlement",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "view": "cliff",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "view": "surface",
+      "endpointsMatch": true,
+      "midpoint": true,
+      "imageBytesMatch": true,
+      "imagesDiffer": true
+    }
+  ],
+  "errors": [],
+  "phoneReview": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "noHorizontalOverflow": true
+  },
+  "status": "PASS"
+}
