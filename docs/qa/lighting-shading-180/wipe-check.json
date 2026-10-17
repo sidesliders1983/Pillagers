@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "checkedAt": "2026-10-17T09:42:59.604Z",
+  "url": "https://acer-railway-fact-smaller.trycloudflare.com/lighting/",
+  "expectation": "Slider left shows current; slider right shows selected candidate.",
+  "endpointAndMidpointChecks": [
+    {
+      "variant": "form",
+      "value": 0,
+      "clip": "inset(0px 0px 0px 100%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": true,
+      "status": "Showing current lighting · baseline.",
+      "aria": "0% candidate"
+    },
+    {
+      "variant": "form",
+      "value": 50,
+      "clip": "inset(0px 0px 0px 50%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": false,
+      "status": "Split view: current lighting on the left; Form and shade on the right.",
+      "aria": "50% candidate"
+    },
+    {
+      "variant": "form",
+      "value": 100,
+      "clip": "inset(0px 0px 0px 0%)",
+      "currentLabelHidden": true,
+      "candidateLabelHidden": false,
+      "status": "Showing Form and shade · review candidate.",
+      "aria": "100% candidate"
+    },
+    {
+      "variant": "north",
+      "value": 0,
+      "clip": "inset(0px 0px 0px 100%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": true,
+      "status": "Showing current lighting · baseline.",
+      "aria": "0% candidate"
+    },
+    {
+      "variant": "north",
+      "value": 50,
+      "clip": "inset(0px 0px 0px 50%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": false,
+      "status": "Split view: current lighting on the left; Northern sun · 25° on the right.",
+      "aria": "50% candidate"
+    },
+    {
+      "variant": "north",
+      "value": 100,
+      "clip": "inset(0px 0px 0px 0%)",
+      "currentLabelHidden": true,
+      "candidateLabelHidden": false,
+      "status": "Showing Northern sun · 25° · review candidate.",
+      "aria": "100% candidate"
+    },
+    {
+      "variant": "current",
+      "value": 0,
+      "clip": "inset(0px 0px 0px 100%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": true,
+      "status": "Showing current lighting · baseline.",
+      "aria": "0% candidate"
+    },
+    {
+      "variant": "current",
+      "value": 50,
+      "clip": "inset(0px 0px 0px 50%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": true,
+      "status": "Showing current lighting · baseline.",
+      "aria": "50% candidate"
+    },
+    {
+      "variant": "current",
+      "value": 100,
+      "clip": "inset(0px 0px 0px 0%)",
+      "currentLabelHidden": false,
+      "candidateLabelHidden": true,
+      "status": "Showing current lighting · baseline.",
+      "aria": "100% candidate"
+    }
+  ],
+  "phoneNoHorizontalOverflow": true,
+  "errors": []
+}

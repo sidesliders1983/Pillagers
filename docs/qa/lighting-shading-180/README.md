@@ -13,7 +13,20 @@ It does not promote a new production lighting default.
 ## Review
 
 Open [the comparison gallery](review.html). Select a scene and render tier, then move the
-slider across the same world position. The three treatments are:
+slider across the same world position.
+
+The slider moves from **Current** (fully left, 0% candidate) to the selected **Candidate**
+(fully right, 100% candidate). At the midpoint the current image occupies the left half and
+the candidate the right half. Endpoint labels and a live status identify the visible image.
+The control direction was corrected after owner review; the original capture evidence and
+gallery-check record are preserved. The visual target remains the original Viking settlement
+reference; no final lighting preset has been selected.
+
+The corrected controls passed nine endpoint/midpoint checks across all three choices, with
+matching visible labels and status text. Both full-image endpoints were visually inspected at
+390px. These follow-up checks are recorded in [wipe-check.json](wipe-check.json).
+
+The three treatments are:
 
 | Treatment | Purpose | Settings relative to the current #186 seasonal treatment |
 | --- | --- | --- |

@@ -40,8 +40,9 @@
         <h1>Fjordside · 3D lighting review</h1>
         <a href="/docs/qa/desktop-ui-redesign-180/prototype-v2.html?variant=C&journey=resident&view=character">Selected UI direction: C →</a>
     </header>
-    <p class="intro">Real 3D world captures, with matching camera, campaign, actors and effects time.
-        Compare the light balance first, then the lower sun. These are review candidates.</p>
+    <p class="intro"><strong>Target: the original Viking settlement reference.</strong>
+        Warm sunlight, readable cool shadows and clear material shapes.
+        These are lighting experiments; a final lighting preset has not been selected.</p>
     <div class="controls">
         <label>Scene <select id="scene"></select></label>
         <label>Render quality <select id="quality"><option value="standard">Standard · 2048px shadow map</option><option value="low">Low · 1024px shadow map</option></select></label>
@@ -54,10 +55,11 @@
     <div class="comparison">
         <img id="baseline" alt="Current 3D lighting">
         <img id="candidate" alt="Selected 3D lighting candidate">
-        <span class="tag">Current · #186</span>
+        <span class="tag" id="baseline-label">Current · #186</span>
         <span class="tag" id="candidate-label">Form and shade</span>
     </div>
     <label class="wipe"><span>Current</span><input id="wipe" type="range" min="0" max="100" value="50" aria-label="Compare current and candidate lighting"><span>Candidate</span></label>
+    <p id="comparison-status" class="note" aria-live="polite"></p>
     <div class="facts">
         <div><strong>Same world</strong><span>Canonical state, geography, camera and character poses are verified unchanged.</span></div>
         <div><strong>Same assets and materials</strong><span>No new models, recolouring, normal maps, HDR or postprocessing.</span></div>
@@ -71,6 +73,7 @@
         const observations = await fetch('./observations.json').then(response => response.json());
         const scene = document.querySelector('#scene');
         const quality = document.querySelector('#quality');
+        const wipe = document.querySelector('#wipe');
         const names = { 'summer-32': 'Founding · summer · seed 32', 'summer-17': 'Founding · summer · seed 17',
             'developed-810': 'Developed settlement · summer 810', 'rain-810': 'Autumn rain · 810',
             'snow-811': 'Winter snow · 811', 'boundary-810': 'Season boundary · 810' };
@@ -82,6 +85,18 @@
         }
         scene.value = 'developed-810';
         let variant = 'form';
+        function updateWipe() {
+            const candidatePercent = Number(wipe.value);
+            const label = document.querySelector('#candidate-label').textContent;
+            document.querySelector('#candidate').style.clipPath = `inset(0 0 0 ${100 - candidatePercent}%)`;
+            document.querySelector('#baseline-label').hidden = variant !== 'current' && candidatePercent === 100;
+            document.querySelector('#candidate-label').hidden = variant === 'current' || candidatePercent === 0;
+            wipe.setAttribute('aria-valuetext', `${candidatePercent}% candidate`);
+            document.querySelector('#comparison-status').textContent = variant === 'current' || candidatePercent === 0
+                ? 'Showing current lighting · baseline.'
+                : candidatePercent === 100 ? `Showing ${label} · review candidate.`
+                    : `Split view: current lighting on the left; ${label} on the right.`;
+        }
         function render() {
             const entry = observations.cases.find(entry => entry.fixture === scene.value && entry.quality === quality.value);
             const baseline = entry.variants.find(item => item.variant === 'current');
@@ -97,6 +112,7 @@
             for (const button of document.querySelectorAll('[data-variant]')) {
                 button.setAttribute('aria-pressed', String(button.dataset.variant === variant));
             }
+            updateWipe();
         }
         document.querySelectorAll('[data-variant]').forEach(button => button.addEventListener('click', () => {
             variant = button.dataset.variant;
@@ -104,9 +120,7 @@
         }));
         scene.addEventListener('change', render);
         quality.addEventListener('change', render);
-        document.querySelector('#wipe').addEventListener('input', event => {
-            document.querySelector('#candidate').style.clipPath = `inset(0 0 0 ${event.target.value}%)`;
-        });
+        wipe.addEventListener('input', updateWipe);
         render();
     </script>
 </body>
