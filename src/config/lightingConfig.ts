@@ -1,5 +1,15 @@
 import { worldConfig } from './worldConfig';
 export type LightingMode='day'|'night';
+export interface SeasonalLightingTreatment {
+    ambientScale: number;
+    directScale: number;
+    skyFill?: { color: number; mix: number };
+    groundFill?: { color: number; mix: number };
+    sunTint?: { color: number; mix: number };
+    sunDirection?: readonly number[];
+    shadows?: { radius: number; bias: number; normalBias: number;
+        padding: number; minimumSpan: number; spanStep: number };
+}
 export const lightingConfig={
     day:worldConfig.lighting,
     night:{sky:0x273c52,fogColor:0x324b62,fogNear:32,fogFar:108,

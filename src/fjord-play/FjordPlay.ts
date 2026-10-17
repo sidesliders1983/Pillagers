@@ -819,6 +819,7 @@ export class FjordPlay {
                 lighting = new WorldLighting(scene, renderer, assets!, firePosition, next.center,
                     document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                     fjordPresentation.lighting);
+                lighting.includeWorldShadowBounds(next.root);
                 if (syncScene)
                     await syncScene();
                 controller.setNavigationSurface(next.terrain, next.center, blueprint.terrain.bounds, next.movement.heightAt,
@@ -855,6 +856,7 @@ export class FjordPlay {
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
+                            lighting!.includeWorldShadowBounds(world!.root);
                             weatherTint!.refreshFoliage(world!.root);
                             weatherSignature = '';
                         }
@@ -943,6 +945,7 @@ export class FjordPlay {
                         return;
                     highlight(state, view);
                     const rendered = layer!.describe();
+                    for (const entity of rendered) lighting!.includeEntityShadowBounds(entity.bounds);
                     productionLabels.setAnchors(rendered);
                     canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
@@ -1045,6 +1048,7 @@ export class FjordPlay {
                 canvas.dataset.structureSnow = JSON.stringify(layer!.inspectSeason());
                 canvas.dataset.motionTime = String(activeTime);
                 canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
+                canvas.dataset.shadowCoverage = JSON.stringify(lighting!.inspectShadowCoverage());
                 canvas.dataset.markers = JSON.stringify(layer!.root.userData.markers ?? []);
                 lastDiagnostics = performance.now();
             }
@@ -1065,6 +1069,7 @@ export class FjordPlay {
                 lighting!.fog.near += offset;
                 lighting!.fog.far += offset;
             }
+            lighting!.updateShadowView(camera);
             world!.update(time, lighting, camera);
             discoveryFog?.update(delta);
             renderer.render(scene, camera);
