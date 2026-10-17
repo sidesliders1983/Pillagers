@@ -368,8 +368,9 @@ export class FjordInterface {
                     detail: h.residenceId && state.residences[h.residenceId]?.kind === 'house' ? 'Permanent home' : 'Tent' })) :
                 this.directory === 'cattle' ? Object.values(state.landing?.cattle ?? {}).map(c => ({ id: c.id, label: c.id,
                     detail: c.deathWinter !== null ? 'Died · Winter ' + c.deathWinter : c.farmyardId ? 'Assigned to a farmyard' : 'Unassigned cattle' })) :
-                Object.values(state.landing?.longships ?? {}).map(s => ({ id: s.id, label: s.id,
-                    detail: s.salvagedWinter !== null ? 'Salvaged · Winter ' + s.salvagedWinter : 'Longship' }));
+                Object.values(state.landing?.longships ?? {})
+                    .filter(ship => ship.salvagedWinter === null)
+                    .map(ship => ({ id: ship.id, label: ship.id, detail: 'Longship' }));
             const html = `<div class="fjord-tabs">${Object.entries(kinds).map(([kind, label]) => button('directory', label, kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : kind === 'longship' ? 'ship' : 'home', `data-kind="${kind}" aria-pressed="${kind === this.directory}"`)).join('')}</div>
                 <label class="fjord-search-label">Find an identity<input id="fjord-search" type="search" value="${esc(this.search)}" placeholder="Name or identifier"></label>
                 <div class="fjord-directory-list">${records.filter(r => (r.label + ' ' + r.id).toLocaleLowerCase().includes(this.search.toLocaleLowerCase())).map(r =>
