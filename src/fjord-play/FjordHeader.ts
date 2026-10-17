@@ -1,26 +1,26 @@
 import type { FjordCalendar } from './FjordCalendar';
+import { icon } from './FjordIcons';
 
 export function fjordHeaderHTML(): string {
     return `<header id="fjord-header" aria-label="Settlement status and controls">
-        <div id="fjord-winter" class="fjord-date" aria-label="Calendar"><span id="fjord-season"></span> <strong id="fjord-year"></strong></div>
+        <div class="fjord-brand"><img src="/branding/fjordside-mark.png" alt=""><div><strong id="fjord-clan-name">FJORDSIDE</strong>
+            <div id="fjord-winter" class="fjord-date" aria-label="Calendar"><span id="fjord-season"></span> <strong id="fjord-year"></strong></div></div></div>
         <dl id="fjord-stocks" class="fjord-kpis" aria-label="Settlement resources and population">
-            <div><dt>Food</dt><dd id="fjord-food"></dd></div>
-            <div><dt>Materials</dt><dd id="fjord-materials"></dd></div>
-            <div><dt>Residents</dt><dd id="fjord-residents"></dd></div>
-            <div><dt>Cattle</dt><dd id="fjord-cattle"></dd></div>
+            <div><dt>Food</dt><dd><button type="button" data-stock="food" aria-label="Food stocks">${icon('food')}<strong id="fjord-food"></strong></button></dd></div>
+            <div><dt>Materials</dt><dd><button type="button" data-stock="materials" aria-label="Materials stocks">${icon('materials')}<strong id="fjord-materials"></strong></button></dd></div>
+            <div><dt>Residents</dt><dd><button type="button" data-stock="settlement" aria-label="Settlement residents">${icon('people')}<strong id="fjord-residents"></strong></button></dd></div>
+            <div><dt>Livestock</dt><dd><button type="button" data-stock="livestock" aria-label="Settlement livestock">${icon('cattle')}<strong id="fjord-cattle"></strong></button></dd></div>
         </dl>
         <div class="fjord-time-controls">
-            <button id="fjord-run" type="button">Start</button>
+            <button id="fjord-run" type="button" aria-label="Start simulation">${icon('play')}</button>
             <span id="fjord-pacing-slot"><label id="fjord-pacing">Year length
                 <select id="fjord-cycle"><option value="1">1 min per year</option>
                     <option value="3">3 min per year</option><option value="5">5 min per year</option></select>
             </label></span>
             <button id="fjord-next" type="button">+1 Year</button>
-            <details id="fjord-menu"><summary aria-label="Game menu">Menu</summary>
+            <details id="fjord-menu"><summary aria-label="Game menu">${icon('menu')}</summary>
                 <div class="fjord-settings">
                     <h1>FjordSide</h1>
-                    <nav aria-label="Game views"><a href="/play" data-settlement-view="board">2D Settlement</a> ·
-                        <a href="/gameplay-lab">Gameplay Lab</a> · <a href="/">Fjord prototype</a></nav>
                     <span id="fjord-menu-pacing-slot"></span>
                     <button id="clan-book-open" type="button">Clan Book</button><button id="fjord-expeditions-open" type="button">Expedition groups</button>
                     <label>Quality<select id="fjord-quality"><option value="low">Low</option>
@@ -29,6 +29,10 @@ export function fjordHeaderHTML(): string {
                         <option value="low" selected>Low</option><option value="normal">Normal</option></select></label>
                     <small>Snow, rain and fire particles. Visual quality only; burning still uses fuel. Reduced motion disables particles.</small>
                     <span id="screen-awake-slot"></span>
+                    <details><summary>Camera views &amp; controls</summary>
+                        <button id="fjord-view-home" type="button">View settlement</button><button id="fjord-view-summit" type="button">View highlands</button>
+                        <p>Left drag to pan, right drag to rotate, mouse wheel to zoom. Select residents, homes and livestock in the world or through Settlement.</p>
+                    </details>
                     <details id="fjord-campaign"><summary>Campaign</summary><div class="fjord-campaign-settings">
                         <button id="fjord-save">Save locally</button><button id="fjord-load">Load locally</button>
                         <button id="fjord-export" disabled>Export Fjord campaign</button>
@@ -42,7 +46,7 @@ export function fjordHeaderHTML(): string {
                         <button id="fjord-new">New campaign from seed</button>
                         <button id="fjord-restart">Restart with same founders</button>
                         <p>New and restarted campaigns start when ready. Returning to the game or loading a save pauses the clock.
-                            Switching 2D/3D retains your clock setting.</p>
+                            Your browser keeps the campaign locally.</p>
                     </div></details>
                 </div>
             </details>

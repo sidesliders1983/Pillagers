@@ -1,0 +1,444 @@
+{
+  "version": "integrated-fjord-playtest-v1",
+  "cases": [
+    {
+      "fixture": "summer-32",
+      "quality": "standard",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "four physical clicks: visible tent → Manage work → Set up farmyard → Confirm; three real cattle sheltered",
+        "irreversible action review cancels without state changes",
+        "ordinary housing preserves occupations; Smithing uses the shared task without assigning cattle",
+        "personal data and all ten canonical occupation choices",
+        "real expedition controls and Clan Book remain connected",
+        "exact local save/load and real Start/Pause clock",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "summer-32-standard-observe.jpg",
+        "summer-32-standard-farmyard-review.jpg",
+        "summer-32-standard-farmyard-result.jpg",
+        "summer-32-standard-character.jpg",
+        "summer-32-standard-expeditions.jpg",
+        "summer-32-standard-clan-book.jpg",
+        "summer-32-standard-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ],
+      "farmyardClicks": 4
+    },
+    {
+      "fixture": "summer-32",
+      "quality": "low",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "four physical clicks: visible tent → Manage work → Set up farmyard → Confirm; three real cattle sheltered",
+        "irreversible action review cancels without state changes",
+        "personal data and all ten canonical occupation choices",
+        "real expedition controls and Clan Book remain connected",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "summer-32-low-observe.jpg",
+        "summer-32-low-farmyard-review.jpg",
+        "summer-32-low-farmyard-result.jpg",
+        "summer-32-low-character.jpg",
+        "summer-32-low-expeditions.jpg",
+        "summer-32-low-clan-book.jpg",
+        "summer-32-low-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ],
+      "farmyardClicks": 4
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "standard",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "developed-810-standard-observe.jpg",
+        "developed-810-standard-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ]
+    },
+    {
+      "fixture": "developed-810",
+      "quality": "low",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "developed-810-low-observe.jpg",
+        "developed-810-low-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ]
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "standard",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "snow-811-standard-observe.jpg",
+        "snow-811-standard-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ]
+    },
+    {
+      "fixture": "snow-811",
+      "quality": "low",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "snow-811-low-observe.jpg",
+        "snow-811-low-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ]
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "standard",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "summer-17-standard-observe.jpg",
+        "summer-17-standard-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 1024,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ]
+    },
+    {
+      "fixture": "summer-17",
+      "quality": "low",
+      "checks": [
+        "canonical restore; integrated terrain; unobstructed observe state",
+        "native highland camera and integrated snow shader"
+      ],
+      "images": [
+        "summer-17-low-observe.jpg",
+        "summer-17-low-highlands.jpg"
+      ],
+      "materials": [
+        {
+          "name": "Ground037",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "Ground054",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "grass_path_2",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        },
+        {
+          "name": "mossy_rock",
+          "width": 512,
+          "normalMap": false,
+          "roughnessMap": false
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/fjord-play/FjordPlay.ts": "807e3dfdaedf5d3c1d25a4e7a150f54ebd1e590d01b0ccfab9c28e10fe38da05",
+    "src/fjord-play/FjordInterface.ts": "e974cdc9ab77b4fa991d961bc6fb1ba68ba7933c30bb455a6bdaab9d8b78ac23",
+    "src/fjord-play/FjordHeader.ts": "72b09b6ddbda110ffa688dcdcbab6cff0fcdf35fbdc27e3e11a5540d99aca1a8",
+    "src/fjord-play/WorkPlan.ts": "01c0097de082aad2e30e2d24c1002f2238a3e6267a6ea86081f3c6ee6f66ead8",
+    "src/world/SeasonTint.ts": "91a447fc0e7dd4440e38250592f0aa18ecad642b63030713fb1434977e438aa6",
+    "src/world/WorldGroundMaterials.ts": "269596511533e4406ae6c01e18a89a2cde479fd70037b18471e561e49ca996fc",
+    "src/config/FjordTerrain.ts": "310a15a201194f81fda5431b092fa9ebb5d2b2fa280974825be7ca003fc10447",
+    "src/gameplay-lab/GameplaySession.ts": "d7a3669321446d6946e8ab9c6eafb1e540f712a041ef6a5462afeeb98e929209",
+    "src/fjord-play/fjord-interface.css": "ea130800f3f5120b4b07eb5b334792a9410853b0d0162c77a8176581c949a420",
+    "src/fjord-play/FjordIcons.ts": "596942a3b432db1e31f11da9008cf4506a0a4479896e98c62dbed6e2d1c6536d",
+    "src/world/WorldFactory.ts": "4f6730eedfda67e0b2fbb838f8d376bbc71ec4cddcf21c8e31b08013c6354cb5",
+    "src/config/FjordPresentation.ts": "2621528af265c689d9481ee7fdc601945a22c7e69ef72276ae7c0597773db46a",
+    "scripts/qa/capture-integrated-playtest-180.mjs": "07437b481410e03a0a226a70788f709ff2f1dbe3a71f5340fa9397d864d8f1ca"
+  },
+  "status": "PASS"
+}

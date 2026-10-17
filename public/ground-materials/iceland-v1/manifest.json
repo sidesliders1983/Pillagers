@@ -1,0 +1,78 @@
+{
+  "version": "fjord-iceland-v1",
+  "periodMeters": 24,
+  "channels": [
+    "colour"
+  ],
+  "origin": {
+    "textures": "docs/qa/iceland-textures-180/delivery.json",
+    "rocks": "docs/qa/iceland-rock-snow-180/delivery.json",
+    "prompts": "docs/qa/iceland-textures-180/generation.json"
+  },
+  "delivery": [
+    {
+      "tier": "standard",
+      "materialId": "Ground037",
+      "file": "standard/Ground037-colour.webp",
+      "bytes": 394972,
+      "sha256": "99e86e9055b2e0faf4e52a9d48b2134b248a08bdeb6c521e242347edef9437e2",
+      "from": "docs/qa/iceland-textures-180/delivery/standard/coastal-turf.webp"
+    },
+    {
+      "tier": "standard",
+      "materialId": "Ground054",
+      "file": "standard/Ground054-colour.webp",
+      "bytes": 401874,
+      "sha256": "85d40c2bc76f86356a1556fca3237da7715758c580b92ea9ded262d303432df0",
+      "from": "docs/qa/iceland-textures-180/delivery/standard/fjord-shore.webp"
+    },
+    {
+      "tier": "standard",
+      "materialId": "mossy_rock",
+      "file": "standard/mossy_rock-colour.webp",
+      "bytes": 375474,
+      "sha256": "dec8c4c01866c79d575781a17e9bacb70cf7e6f03e762b24caa39d53cc7a193d",
+      "from": "docs/qa/iceland-rock-snow-180/delivery/standard/readable-basalt.webp"
+    },
+    {
+      "tier": "standard",
+      "materialId": "grass_path_2",
+      "file": "standard/grass_path_2-colour.webp",
+      "bytes": 279302,
+      "sha256": "1f021d70a132dc8940b5914b0ea93efeaed852d6c44833bed320ca1c07c0c62d",
+      "from": "docs/qa/iceland-textures-180/delivery/standard/volcanic-earth.webp"
+    },
+    {
+      "tier": "low",
+      "materialId": "Ground037",
+      "file": "low/Ground037-colour.webp",
+      "bytes": 80614,
+      "sha256": "91dc5a0b100fd17033571b65fa910ff36ea75e946fe07a014b6829bdab9b467a",
+      "from": "docs/qa/iceland-textures-180/delivery/low/coastal-turf.webp"
+    },
+    {
+      "tier": "low",
+      "materialId": "Ground054",
+      "file": "low/Ground054-colour.webp",
+      "bytes": 69948,
+      "sha256": "c40d9a740615ff183ee98aaed142b4b468c4493b050c8435d92e9006ed3b86b0",
+      "from": "docs/qa/iceland-textures-180/delivery/low/fjord-shore.webp"
+    },
+    {
+      "tier": "low",
+      "materialId": "mossy_rock",
+      "file": "low/mossy_rock-colour.webp",
+      "bytes": 88084,
+      "sha256": "dc24e039ff7615a8b8f27fd6461938c9a307dc266b2e7cdd0c605761a20dcade",
+      "from": "docs/qa/iceland-rock-snow-180/delivery/low/readable-basalt.webp"
+    },
+    {
+      "tier": "low",
+      "materialId": "grass_path_2",
+      "file": "low/grass_path_2-colour.webp",
+      "bytes": 46000,
+      "sha256": "05db556a6769255d41e8ecd549d13672ab2103955313119c24ffc78bba727f81",
+      "from": "docs/qa/iceland-textures-180/delivery/low/volcanic-earth.webp"
+    }
+  ]
+}

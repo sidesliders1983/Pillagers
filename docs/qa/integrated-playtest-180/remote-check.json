@@ -1,0 +1,45 @@
+{
+  "version": "published-playtest-v1",
+  "origin": "https://acer-railway-fact-smaller.trycloudflare.com",
+  "routes": [
+    {
+      "path": "/fjord-play",
+      "status": 200
+    },
+    {
+      "path": "/playtest/",
+      "status": 200
+    },
+    {
+      "path": "/favicon.ico",
+      "status": 200
+    },
+    {
+      "path": "/fjordside.webmanifest",
+      "status": 200
+    },
+    {
+      "path": "/playtest/funded-800.json",
+      "status": 200
+    },
+    {
+      "path": "/assets/Terrain/spruce-tree.glb",
+      "status": 200
+    },
+    {
+      "path": "/ground-materials/iceland-v1/standard/mossy_rock-colour.webp",
+      "status": 200
+    }
+  ],
+  "checks": [
+    "normal static build, no dev audit API",
+    "all ten occupations",
+    "real task commits and exported canonical state agree",
+    "three cattle sheltered, 10 Materials spent",
+    "no time or RNG advance while paused",
+    "personal data",
+    "source and environment paths inaccessible"
+  ],
+  "errors": [],
+  "status": "PASS"
+}

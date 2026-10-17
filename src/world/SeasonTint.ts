@@ -1,5 +1,6 @@
 import { Color, Group, Mesh, MeshStandardMaterial } from 'three';
 import { seasonBlend, seasonPresets } from '../config/timeVisualization';
+import { fjordTerrain } from '../config/FjordTerrain';
 
 /** Only material uniforms change during the cycle; geometry and instancing stay intact. */
 export class SeasonTint {
@@ -15,7 +16,7 @@ export class SeasonTint {
     private snow = new Map<MeshStandardMaterial, { value: number }>();
     private snowTone = new Color('#edf2f3');
 
-    constructor(root: Group, terrain: Mesh) {
+    constructor(root: Group, terrain: Mesh, private summitLine: number | null = null) {
         // Generated terrain has child sand, rock and path layers. Tint their existing materials too.
         terrain.traverse(node => {
             if (!(node instanceof Mesh)) return;
@@ -78,8 +79,28 @@ export class SeasonTint {
             shader.fragmentShader = 'uniform float seasonSnowAmount; uniform vec3 seasonSnowTone;\n' + shader.fragmentShader;
             const mask = foliage ? '\n#ifdef USE_COLOR\nseasonMask=smoothstep(1.0,1.2,vColor.g/max(max(vColor.r,vColor.b),0.001));\n#endif\n' : '';
             shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>\nfloat seasonMask=1.0;${mask}\ndiffuseColor.rgb=mix(diffuseColor.rgb,seasonSnowTone,seasonSnowAmount*seasonMask);`);
+            if (!foliage && this.summitLine !== null) {
+                shader.uniforms.fjordSummitLine = { value: this.summitLine };
+                shader.uniforms.fjordIceTone = { value: new Color(fjordTerrain.permanentColor) };
+                shader.vertexShader = 'varying vec3 fjordWorldNormal; varying float fjordWorldY;\n' +
+                    shader.vertexShader.replace('#include <defaultnormal_vertex>',
+                        '#include <defaultnormal_vertex>\nfjordWorldNormal=inverseTransformDirection(transformedNormal,viewMatrix);')
+                        .replace('#include <project_vertex>',
+                            '#include <project_vertex>\nfjordWorldY=(modelMatrix*vec4(transformed,1.0)).y;');
+                shader.fragmentShader = 'varying vec3 fjordWorldNormal; varying float fjordWorldY;\n' +
+                    'uniform float fjordSummitLine; uniform vec3 fjordIceTone;\n' + shader.fragmentShader;
+                if (material.name === 'mossy_rock') {
+                    shader.fragmentShader = shader.fragmentShader.replace('float seasonMask=1.0;',
+                        `float seasonMask=smoothstep(${fjordTerrain.rockSnowRetention[0]},${fjordTerrain.rockSnowRetention[1]},normalize(fjordWorldNormal).y);`);
+                }
+                shader.fragmentShader = shader.fragmentShader.replace('seasonSnowAmount*seasonMask);',
+                    'seasonSnowAmount*seasonMask);\n' +
+                    `float summitCap=step(fjordSummitLine,fjordWorldY)*step(${fjordTerrain.permanentMinimumUp},fjordWorldNormal.y);\n` +
+                    'diffuseColor.rgb=mix(diffuseColor.rgb,fjordIceTone,summitCap);');
+            }
         };
-        material.customProgramCacheKey = () => key + (foliage ? 'season-foliage-v1' : 'season-ground-v1');
+        material.customProgramCacheKey = () => key + (foliage ? 'season-foliage-v1' : 'season-ground-v1') +
+            (!foliage && this.summitLine !== null ? '|fjord-summit-v1:' + material.name : '');
     }
 
     update(progress: number | null) {
@@ -93,7 +114,10 @@ export class SeasonTint {
         const winter = from.name === 'Winter' ? 1 - mix : to.name === 'Winter' ? mix : 0;
         for (const amount of this.snow.values()) amount.value = winter * .65;
         this.tint.setHex(from.ground).lerp(this.next.setHex(to.ground), mix);
-        for (const [ground, base] of this.grounds) ground.color.copy(base).multiply(this.tint);
+        for (const [ground, base] of this.grounds) {
+            ground.color.copy(base);
+            if (this.summitLine === null || ground.name !== 'mossy_rock') ground.color.multiply(this.tint);
+        }
         this.tint.setHex(from.foliage).lerp(this.next.setHex(to.foliage), mix);
         for (const [material, base] of this.materials) material.color.copy(base).multiply(this.tint);
     }
@@ -104,7 +128,10 @@ export class SeasonTint {
         const winter = seasonPresets.find(preset => preset.name === 'Winter')!;
         for (const snow of this.snow.values()) snow.value = amount * .65;
         this.tint.setHex(0xffffff).lerp(this.next.setHex(winter.ground), amount);
-        for (const [ground, base] of this.grounds) ground.color.copy(base).multiply(this.tint);
+        for (const [ground, base] of this.grounds) {
+            ground.color.copy(base);
+            if (this.summitLine === null || ground.name !== 'mossy_rock') ground.color.multiply(this.tint);
+        }
         this.tint.setHex(0xffffff).lerp(this.next.setHex(winter.foliage), amount);
         for (const [material, base] of this.materials) material.color.copy(base).multiply(this.tint);
     }
