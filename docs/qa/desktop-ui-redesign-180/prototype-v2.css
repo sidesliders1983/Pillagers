@@ -123,6 +123,19 @@ h1, h2, h3, p { margin-top: 0; }
 .actions > * { flex: 1; }
 .household-facts { flex: 1; }
 .household-actions { display: grid; gap: 8px; margin-top: 12px; }
+.work-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+.work-choice { min-height: 42px; }
+.work-options + .caption { margin-bottom: 18px; }
+.work-menu .work-options + .caption { margin-bottom: 0; }
+.work-side { margin-top: 16px; }
+.work-side > section + section { margin-top: 14px; }
+.tray.work-menu { max-width: 960px; }
+.tray.work-menu > .body { display: grid; grid-template-columns: 2fr 1fr; gap: 14px 20px; align-items: start; }
+.tray.work-menu .work-context { grid-column: 1 / -1; }
+.tray.work-menu .work-side { margin-top: 0; }
+.tray.work-menu .work-options, .focus.work-menu .work-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tray.work-menu .work-context, .focus.work-menu .work-context { display: flex; gap: 24px; justify-content: space-between; }
+.focus.work-menu .household-residents { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .task-label { margin-top: 20px; }
 .risk { color: var(--danger); font-size: 11px; margin: 9px 0; }
 .success { color: var(--aqua); }

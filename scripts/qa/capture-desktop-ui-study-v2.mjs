@@ -7,6 +7,7 @@ const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODUL
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5175';
 const directory = 'docs/qa/desktop-ui-redesign-180/screenshots-v2';
 const route = origin + '/docs/qa/desktop-ui-redesign-180/prototype-v2.html';
+const studyData = JSON.parse(await readFile('docs/qa/desktop-ui-redesign-180/study-data-v2.json', 'utf8'));
 await mkdir(directory, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
@@ -37,7 +38,7 @@ async function record(name, screenshot = true) {
             return { id: node.dataset.overlay, x: box.x, y: box.y, width: box.width, height: box.height,
                 inBounds: box.left >= 0 && box.top >= 0 && box.right <= root.right + 1 && box.bottom <= root.bottom + 1 };
         });
-        const commit = document.querySelector('[data-action=confirm-farmyard], [data-action=build-house]');
+        const commit = document.querySelector('[data-action=confirm-farmyard], [data-action=confirm-work], [data-action=build-house]');
         const commitBox = commit?.getBoundingClientRect();
         const panelBox = commit?.closest('[data-overlay]')?.getBoundingClientRect();
         return {
@@ -50,6 +51,8 @@ async function record(name, screenshot = true) {
             commitDisabled: commit?.disabled,
             occupationChoices: [...document.querySelectorAll('[data-action^="occupation:"]')]
                 .map(button => ({ id: button.dataset.action.slice(11), disabled: button.disabled })),
+            workTaskChoices: [...document.querySelectorAll('[data-action^="set-up-work:"]')]
+                .map(button => ({ id: button.dataset.action.slice(12), disabled: button.disabled })),
             detailScrollRequired: [...document.querySelectorAll('.right > .body')]
                 .some(node => node.scrollHeight > node.clientHeight + 1),
             campaignStorage: [...Object.keys(sessionStorage), ...Object.keys(localStorage)]
@@ -148,7 +151,7 @@ try {
     await page.locator('[data-action=home]').click();
     await page.locator('[data-action=household-work]').click();
     await page.locator('[data-action=set-up-farmyard]').click();
-    await page.locator('[data-action="farmer:founder-10"]').click();
+    await page.locator('[data-action="worker:founder-10"]').click();
     await page.keyboard.press('ArrowRight');
     await record('A-kept-draft', false);
     await page.locator('[data-action=confirm-farmyard]').click();
@@ -162,6 +165,31 @@ try {
     await record('A-smith-result');
     await page.locator('[data-action=livestock]').click();
     await record('A-livestock');
+
+    for (const variant of ['A', 'B', 'C']) {
+        const occupations = variant === 'A' ? studyData.occupations : ['smith', 'fisher', 'hunter'];
+        for (const occupation of occupations) {
+            const capture = ['smith', 'fisher', 'hunter'].includes(occupation);
+            await open(variant, 'work');
+            await page.locator('[data-action=home]').click();
+            await page.locator('[data-action=household-work]').click();
+            if (occupation === 'smith') await record(variant + '-work-options');
+            await page.locator('[data-action="set-up-work:' + occupation + '"]').click();
+            await record(variant + '-' + occupation + '-work-setup', capture);
+            await page.locator('[data-action=confirm-work]').click();
+            await record(variant + '-' + occupation + '-work-result', capture);
+        }
+    }
+    await open('A', 'blocked');
+    await page.locator('[data-action=home]').click();
+    await page.locator('[data-action=household-work]').click();
+    await page.locator('[data-action="set-up-work:smith"]').click();
+    await record('A-work-needs-materials');
+    await page.locator('[data-action=toggle-house]').click();
+    await page.locator('[data-action=confirm-work]').click();
+    await record('A-work-without-house');
+
+    const workResults = report.observations.filter(item => item.name.endsWith('-work-result'));
     report.review = {
         housingOnly: report.observations.filter(item => item.name.endsWith('-house-result'))
             .every(({ state }) => state.homeBuilt && !state.farmReady && state.spentMaterials === 10
@@ -171,6 +199,23 @@ try {
             .state.spentMaterials === 10,
         canonicalOccupationCount: report.observations.find(item => item.name === 'A-occupations')
             .occupationChoices.length,
+        canonicalWorkTaskCount: report.observations.find(item => item.name === 'A-work-options')
+            .workTaskChoices.length,
+        workPlansReviewed: workResults.length,
+        workPlansMatchCore: workResults.every(({ state }) => {
+            const canonical = studyData.workResults[state.workOccupation];
+            const worker = studyData.scenes.funded.people.find(person => person.id === state.workerId);
+            return state.workerId === canonical.workerId && state.homeBuilt
+                && (state.roles[worker.id] || worker.occupation) === canonical.occupation
+                && state.buildingSpecialization === canonical.specialization
+                && studyData.scenes.funded.stocks.materials - state.spentMaterials === canonical.materials
+                && state.farmReady === Boolean(canonical.farmyard)
+                && state.assignedCattleIds.length === 0 && state.clicks === 4;
+        }),
+        workWithoutHouse: report.observations.filter(item => item.name === 'A-work-without-house')
+            .every(({ state }) => !state.homeBuilt && state.spentMaterials === 0
+                && state.buildingSpecialization === null && state.assignedCattleIds.length === 0
+                && state.roles[state.workerId] === 'smith' && state.clicks === 5),
     };
     await page.setViewportSize({ width: 1500, height: 820 });
     await page.goto(origin + '/docs/qa/desktop-ui-redesign-180/comparison-v2.html',

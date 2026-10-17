@@ -23,13 +23,15 @@ function project(state, backdrop, provenance) {
         clan: state.clan.name,
         stocks: state.stocks,
         houseCost: state.mechanics.config.houseCost,
-        houseUpkeep: state.mechanics.config.houseUpkeep,
+        houseUpkeep: state.mechanics.config.baseUpkeep,
         capacity: state.landing.config.farmyardCapacity,
         cattle: Object.values(state.landing.cattle)
             .filter(animal => animal.deathWinter === null)
             .map(animal => ({ id: animal.id, sex: animal.sex, farmyardId: animal.farmyardId })),
         people: people.map(person => {
             const home = Object.values(state.households).find(home => home.memberIds.includes(person.id));
+            const residence = home?.residenceId ? state.residences[home.residenceId] : undefined;
+            const building = residence?.buildingId ? state.buildings[residence.buildingId] : undefined;
             return {
                 id: person.id,
                 name: person.name,
@@ -37,6 +39,8 @@ function project(state, backdrop, provenance) {
                 occupation: person.occupation,
                 occupationLocked: state.mechanics.people[person.id].occupationLocked,
                 farmerFit: core.occupationAptitude(state, person.id, 'farmer'),
+                occupationFits: Object.fromEntries(occupationIds.map(occupation =>
+                    [occupation, core.occupationAptitude(state, person.id, occupation)])),
                 canFarm: core.canApplyCommand(state, {
                     type: 'AssignOccupation', personaId: person.id, occupation: 'farmer',
                 }),
@@ -49,8 +53,10 @@ function project(state, backdrop, provenance) {
                     id: home.id,
                     label: housingName(state, 'household', home.id),
                     residence: home.residenceId,
-                    kind: state.residences[home.residenceId]?.kind || 'tent',
-                    specialization: state.buildings[state.residences[home.residenceId]?.buildingId]?.specialization ?? null,
+                    kind: residence?.kind || 'tent',
+                    specialization: building?.specialization ?? null,
+                    upkeep: building ? state.mechanics.config.baseUpkeep
+                        + state.mechanics.buildings[building.id].upgradeLevel : 0,
                     members: home.memberIds,
                 },
             };
@@ -132,6 +138,39 @@ data.farmyardResult = {
     farmyard: core.landingSummary(completed).farmyards.find(yard => yard.id === buildingId),
     note: 'A headless feasibility check of existing commands, not implementation of a combined command.',
 };
+
+// Compare the same optional house + occupation + specialization task for every current role.
+data.workResults = {};
+for (const occupation of occupationIds) {
+    const worker = data.scenes.funded.people
+        .filter(person => home.members.includes(person.id) && person.availableOccupations.includes(occupation))
+        .sort((left, right) => Number(right.occupation === occupation) - Number(left.occupation === occupation)
+            || right.occupationFits[occupation] - left.occupationFits[occupation])[0];
+    const commands = [{ type: 'BuildHouse', householdId: home.id }];
+    if (worker.occupation !== occupation) {
+        commands.push({ type: 'AssignOccupation', personaId: worker.id, occupation });
+    }
+    commands.push({ type: 'SpecializeBuilding', buildingId, occupation });
+    const result = commands.reduce((snapshot, command) => core.applyCommand(snapshot, command), funded);
+    data.workResults[occupation] = {
+        workerId: worker.id,
+        commands,
+        occupation: result.personas[worker.id].occupation,
+        specialization: result.buildings[buildingId].specialization,
+        materials: result.stocks.materials,
+        farmyard: core.landingSummary(result).farmyards.find(yard => yard.id === buildingId) ?? null,
+        cattleAssignmentsUnchanged: Object.values(funded.landing.cattle)
+            .every(animal => result.landing.cattle[animal.id].farmyardId === animal.farmyardId),
+    };
+}
+const smithId = data.workResults.smith.workerId;
+const tentWorker = core.applyCommand(funded, { type: 'AssignOccupation', personaId: smithId, occupation: 'smith' });
+data.workWithoutHouseResult = {
+    occupation: tentWorker.personas[smithId].occupation,
+    residence: tentWorker.residences[tentWorker.households[home.id].residenceId].kind,
+    materials: tentWorker.stocks.materials,
+    note: 'An occupation can be assigned without building a house or changing animal assignments.',
+};
 const developedRaw = await readFile('docs/qa/fjord-runtime-performance/fixtures/developed-810.json', 'utf8');
 const developed = core.reconstructState(JSON.stringify(JSON.parse(developedRaw).fjord.campaign));
 data.scenes.developed = {
@@ -144,6 +183,6 @@ data.scenes.developed = {
 // Only aggregate livestock counts are used for the developed visual-density scenario.
 data.scenes.developed.cattleCount = original.scenes.settled.cattle;
 await writeFile(directory + '/study-data-v2.json', JSON.stringify(data, null, 2) + '\n');
-console.log('Prepared neutral housing and all canonical occupation choices; checked housing separately from farmyard setup.');
+console.log('Prepared neutral housing, ten complete work plans, the optional Farmyard and work without new housing.');
 console.log(JSON.stringify(data.housingResult));
 console.log(JSON.stringify(data.farmyardResult));

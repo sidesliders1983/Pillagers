@@ -70,11 +70,16 @@ For example, the founding test household contains a hunter and a fisher. Buildin
 
 The existing occupation registry contains farmer, herder, fisher, hunter, textileWorker, smith, woodworker, boatbuilder, trader and leatherAndJewelleryMaker. Render its English labels and actual command availability rather than defining a farming-only UI list. Future occupations should enter through the same work selection and detail pattern, with only their defined capabilities exposed.
 
-The tent summary offers Build house with its actual cost and Manage work. Manage work shows each resident separately. The optional farmyard task lives there; it is not the tent's primary action. Task suggestions appear only after the player chooses that intention. Other occupation-specific combined tasks require their own journey design before implementation.
+The tent summary offers Build house with its actual cost and Manage work. Manage work exposes a complete work-plan choice for every existing occupation, plus individual resident actions and the optional farmyard task. The earlier revision only provided a combined task for Farmyard; listing the other occupations inside person details was insufficient for comparing these journeys.
+
+Choosing Smithing, Fishing, Hunting or another work plan opens the same review pattern: an editable suitable resident, optional permanent housing, optional occupation specialization and visible cost/career consequences. Housing and specialization are visible editable proposals. Excluding a new house keeps the tent and removes the unavailable specialization choice; occupation assignment itself remains possible when canonical commands allow it. A work plan does not silently assign animals. The separate Farmyard task adds explicit eligible cattle assignments and requires a permanent home.
+
+Use the actual occupation registry and aptitude/availability data for these tasks. A current occupation is kept without resetting career settings when already suitable. Other household members keep their occupations. Reusing a home costs no second house. If a plan changes the last farmer, its combined review names the cattle losing shelter before confirmation. These are prototype plans over existing commands; they do not introduce separate smithy, fishing-hut or hunting-lodge building types or define future occupation mechanics.
 
 | Journey from no selection | Proposed pointer route | Budget |
 | --- | --- | ---: |
 | Build ordinary housing | Select tent, Build house with visible cost | 2 clicks |
+| Set up household work with the displayed resident/housing/specialization proposal | Select household, Manage work, choose work plan, confirm | 4 clicks |
 | Assign a known resident to smith, fisher, hunter or another eligible occupation | Select resident, Change work, choose occupation | 3 clicks |
 | Choose work through a household | Select household, Manage work, choose resident, choose occupation | 4 clicks |
 

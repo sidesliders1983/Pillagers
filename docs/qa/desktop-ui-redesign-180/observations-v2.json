@@ -18,7 +18,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -107,6 +110,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -124,7 +128,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -212,6 +219,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -229,7 +237,10 @@
         "screen": "household-work",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -255,7 +266,7 @@
         "familyPerson": null,
         "result": "House built · occupations preserved"
       },
-      "worldPercent": 80.7,
+      "worldPercent": 74.5,
       "boxes": [
         {
           "id": "brand",
@@ -302,14 +313,56 @@
           "x": 1066,
           "y": 105,
           "width": 356,
-          "height": 478.5625,
+          "height": 704,
           "inBounds": true
         }
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
-      "detailScrollRequired": false,
+      "workTaskChoices": [
+        {
+          "id": "farmer",
+          "disabled": false
+        },
+        {
+          "id": "herder",
+          "disabled": false
+        },
+        {
+          "id": "fisher",
+          "disabled": false
+        },
+        {
+          "id": "hunter",
+          "disabled": false
+        },
+        {
+          "id": "textileWorker",
+          "disabled": false
+        },
+        {
+          "id": "smith",
+          "disabled": false
+        },
+        {
+          "id": "woodworker",
+          "disabled": false
+        },
+        {
+          "id": "boatbuilder",
+          "disabled": false
+        },
+        {
+          "id": "trader",
+          "disabled": false
+        },
+        {
+          "id": "leatherAndJewelleryMaker",
+          "disabled": false
+        }
+      ],
+      "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
     },
@@ -326,7 +379,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -350,9 +406,9 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "House built · occupations preserved"
+        "result": ""
       },
-      "worldPercent": 75.5,
+      "worldPercent": 75.1,
       "boxes": [
         {
           "id": "brand",
@@ -395,11 +451,11 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 1066,
           "y": 105,
           "width": 356,
-          "height": 666.15625,
+          "height": 681.15625,
           "inBounds": true
         }
       ],
@@ -407,6 +463,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -424,7 +481,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -454,9 +514,9 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Existing home used · farmer · 3 cattle sheltered"
+        "result": "Farmer assigned · existing home used · 3 cattle sheltered"
       },
-      "worldPercent": 86.3,
+      "worldPercent": 86.1,
       "boxes": [
         {
           "id": "brand",
@@ -511,13 +571,14 @@
           "x": 1104,
           "y": 105,
           "width": 318,
-          "height": 294.234375,
+          "height": 302.015625,
           "inBounds": true
         }
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -535,7 +596,10 @@
         "screen": "observe",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -615,6 +679,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -632,7 +697,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -721,6 +789,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -738,7 +807,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -764,7 +836,7 @@
         "familyPerson": null,
         "result": ""
       },
-      "worldPercent": 75.5,
+      "worldPercent": 75.1,
       "boxes": [
         {
           "id": "brand",
@@ -807,11 +879,11 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 1066,
           "y": 105,
           "width": 356,
-          "height": 666.15625,
+          "height": 681.15625,
           "inBounds": true
         }
       ],
@@ -819,6 +891,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -836,7 +909,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -866,7 +942,7 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Home built · farmer · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered"
       },
       "worldPercent": 86.3,
       "boxes": [
@@ -930,6 +1006,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -947,7 +1024,10 @@
         "screen": "expedition",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1031,6 +1111,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1048,7 +1129,10 @@
         "screen": "compact",
         "selection": "group",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1132,6 +1216,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1149,7 +1234,10 @@
         "screen": "compact",
         "selection": "group",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1233,6 +1321,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1250,7 +1339,10 @@
         "screen": "book",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1330,6 +1422,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1347,7 +1440,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1436,6 +1532,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1453,7 +1550,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1541,6 +1641,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1558,7 +1659,10 @@
         "screen": "observe",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1638,6 +1742,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1655,7 +1760,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1744,6 +1852,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1761,7 +1870,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1787,7 +1899,7 @@
         "familyPerson": null,
         "result": ""
       },
-      "worldPercent": 69,
+      "worldPercent": 68.6,
       "boxes": [
         {
           "id": "brand",
@@ -1830,11 +1942,11 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 160,
-          "y": 520.796875,
+          "y": 516.796875,
           "width": 1120,
-          "height": 287.203125,
+          "height": 291.203125,
           "inBounds": true
         }
       ],
@@ -1842,6 +1954,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1859,7 +1972,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -1889,7 +2005,7 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Home built · farmer · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered"
       },
       "worldPercent": 82.5,
       "boxes": [
@@ -1953,6 +2069,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -1970,7 +2087,10 @@
         "screen": "expedition",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2054,6 +2174,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2071,7 +2192,10 @@
         "screen": "compact",
         "selection": "group",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2155,6 +2279,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2172,7 +2297,10 @@
         "screen": "compact",
         "selection": "group",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2256,6 +2384,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2273,7 +2402,10 @@
         "screen": "book",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2353,6 +2485,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2370,7 +2503,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2459,6 +2595,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2476,7 +2613,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2564,6 +2704,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2581,7 +2722,10 @@
         "screen": "observe",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2661,6 +2805,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2678,7 +2823,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2767,6 +2915,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2784,7 +2933,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2853,7 +3005,7 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 402,
           "y": 112,
           "width": 636,
@@ -2865,6 +3017,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2882,7 +3035,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -2912,9 +3068,9 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Home built · farmer · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered"
       },
-      "worldPercent": 87.3,
+      "worldPercent": 87.1,
       "boxes": [
         {
           "id": "brand",
@@ -2967,15 +3123,16 @@
         {
           "id": "selection",
           "x": 432,
-          "y": 528.765625,
+          "y": 520.984375,
           "width": 300,
-          "height": 267.234375,
+          "height": 275.015625,
           "inBounds": true
         }
       ],
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -2993,7 +3150,10 @@
         "screen": "expedition",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3077,6 +3237,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3094,7 +3255,10 @@
         "screen": "compact",
         "selection": "group",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3178,6 +3342,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3195,7 +3360,10 @@
         "screen": "compact",
         "selection": "group",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3279,6 +3447,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3296,7 +3465,10 @@
         "screen": "book",
         "selection": null,
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3376,6 +3548,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3393,7 +3566,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3482,6 +3658,7 @@
       "commitVisible": true,
       "commitDisabled": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3499,7 +3676,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3525,7 +3705,7 @@
         "familyPerson": null,
         "result": ""
       },
-      "worldPercent": 74.6,
+      "worldPercent": 74.5,
       "boxes": [
         {
           "id": "brand",
@@ -3568,11 +3748,11 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 1066,
           "y": 105,
           "width": 356,
-          "height": 699.546875,
+          "height": 704,
           "inBounds": true
         }
       ],
@@ -3580,7 +3760,8 @@
       "commitVisible": true,
       "commitDisabled": true,
       "occupationChoices": [],
-      "detailScrollRequired": false,
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
     },
@@ -3597,7 +3778,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3686,6 +3870,7 @@
       "commitVisible": true,
       "commitDisabled": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3703,7 +3888,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3772,7 +3960,7 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 927,
           "y": 105,
           "width": 335,
@@ -3784,6 +3972,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3801,7 +3990,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3827,7 +4019,7 @@
         "familyPerson": null,
         "result": ""
       },
-      "worldPercent": 57.9,
+      "worldPercent": 57.4,
       "boxes": [
         {
           "id": "brand",
@@ -3870,11 +4062,11 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 80,
-          "y": 348.796875,
+          "y": 344.796875,
           "width": 1120,
-          "height": 279.203125,
+          "height": 283.203125,
           "inBounds": true
         }
       ],
@@ -3882,6 +4074,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3899,7 +4092,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -3968,7 +4164,7 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 322,
           "y": 96,
           "width": 636,
@@ -3980,6 +4176,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -3997,7 +4194,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4023,7 +4223,7 @@
         "familyPerson": null,
         "result": ""
       },
-      "worldPercent": 80.6,
+      "worldPercent": 80.4,
       "boxes": [
         {
           "id": "brand",
@@ -4066,11 +4266,11 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 400,
-          "y": 700.796875,
+          "y": 696.796875,
           "width": 1120,
-          "height": 287.203125,
+          "height": 291.203125,
           "inBounds": true
         }
       ],
@@ -4078,6 +4278,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4095,7 +4296,10 @@
         "screen": "compact",
         "selection": "person",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4175,6 +4379,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4192,7 +4397,10 @@
         "screen": "occupation-risk",
         "selection": "person",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4274,6 +4482,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4291,7 +4500,10 @@
         "screen": "compact",
         "selection": "person",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4373,6 +4585,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4390,7 +4603,10 @@
         "screen": "farmyard",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-10",
+        "workerId": "founder-10",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4459,7 +4675,7 @@
           "inBounds": true
         },
         {
-          "id": "farmyard",
+          "id": "work-task",
           "x": 1066,
           "y": 105,
           "width": 356,
@@ -4471,6 +4687,7 @@
       "commitVisible": true,
       "commitDisabled": false,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4488,7 +4705,10 @@
         "screen": "compact",
         "selection": "home",
         "personId": "founder-1",
-        "farmerId": "founder-10",
+        "workerId": "founder-10",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4518,7 +4738,7 @@
         "running": false,
         "bookTab": "story",
         "familyPerson": null,
-        "result": "Home built · farmer · 3 cattle sheltered"
+        "result": "Farmer assigned · house built · 3 cattle sheltered"
       },
       "worldPercent": 86.3,
       "boxes": [
@@ -4582,6 +4802,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4599,7 +4820,10 @@
         "screen": "work",
         "selection": "person",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4720,6 +4944,7 @@
           "disabled": false
         }
       ],
+      "workTaskChoices": [],
       "detailScrollRequired": true,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4737,7 +4962,10 @@
         "screen": "compact",
         "selection": "person",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4819,6 +5047,7 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4836,7 +5065,10 @@
         "screen": "livestock",
         "selection": "person",
         "personId": "founder-1",
-        "farmerId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
         "cattleIds": [
           "cattle-1",
           "cattle-2",
@@ -4918,6 +5150,4043 @@
       "horizontalOverflow": false,
       "commitVisible": true,
       "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-farmer-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 702.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-farmer-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": true,
+        "roles": {
+          "founder-1": "farmer"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "farmer",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Farmer assigned · house built"
+      },
+      "worldPercent": 86.3,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 270,
+          "y": 530.5,
+          "width": 136,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 294.234375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-herder-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "herder",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 702.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-herder-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "herder",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-1": "herder"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "herder",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Herder assigned · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-fisher-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "fisher",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-fisher-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "fisher",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": "fisher",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Fisher retained · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-hunter-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "hunter",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 702.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-hunter-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "hunter",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": "hunter",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Hunter retained · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-textileWorker-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "textileWorker",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-textileWorker-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "textileWorker",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-10": "textileWorker"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "textileWorker",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Textile worker assigned · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-work-options",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "household-work",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "panel",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [
+        {
+          "id": "farmer",
+          "disabled": false
+        },
+        {
+          "id": "herder",
+          "disabled": false
+        },
+        {
+          "id": "fisher",
+          "disabled": false
+        },
+        {
+          "id": "hunter",
+          "disabled": false
+        },
+        {
+          "id": "textileWorker",
+          "disabled": false
+        },
+        {
+          "id": "smith",
+          "disabled": false
+        },
+        {
+          "id": "woodworker",
+          "disabled": false
+        },
+        {
+          "id": "boatbuilder",
+          "disabled": false
+        },
+        {
+          "id": "trader",
+          "disabled": false
+        },
+        {
+          "id": "leatherAndJewelleryMaker",
+          "disabled": false
+        }
+      ],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-smith-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 702.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-smith-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-1": "smith"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "smith",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Smith assigned · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-woodworker-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "woodworker",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-woodworker-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "woodworker",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-10": "woodworker"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "woodworker",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Woodworker assigned · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-boatbuilder-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "boatbuilder",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-boatbuilder-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "boatbuilder",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-10": "boatbuilder"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "boatbuilder",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Boatbuilder assigned · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-trader-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "trader",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 702.15625,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-trader-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "trader",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-10": "trader"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "trader",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Trader assigned · house built"
+      },
+      "worldPercent": 84.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 357,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-leatherAndJewelleryMaker-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "leatherAndJewelleryMaker",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-leatherAndJewelleryMaker-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "leatherAndJewelleryMaker",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-10": "leatherAndJewelleryMaker"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "leatherAndJewelleryMaker",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Leather and jewellery maker assigned · house built"
+      },
+      "worldPercent": 84.3,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 373.796875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-work-options",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "household-work",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 64.4,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "panel",
+          "x": 240,
+          "y": 411,
+          "width": 960,
+          "height": 397,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [
+        {
+          "id": "farmer",
+          "disabled": false
+        },
+        {
+          "id": "herder",
+          "disabled": false
+        },
+        {
+          "id": "fisher",
+          "disabled": false
+        },
+        {
+          "id": "hunter",
+          "disabled": false
+        },
+        {
+          "id": "textileWorker",
+          "disabled": false
+        },
+        {
+          "id": "smith",
+          "disabled": false
+        },
+        {
+          "id": "woodworker",
+          "disabled": false
+        },
+        {
+          "id": "boatbuilder",
+          "disabled": false
+        },
+        {
+          "id": "trader",
+          "disabled": false
+        },
+        {
+          "id": "leatherAndJewelleryMaker",
+          "disabled": false
+        }
+      ],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-smith-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 67.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 160,
+          "y": 499.796875,
+          "width": 1120,
+          "height": 308.203125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-smith-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-1": "smith"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "smith",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Smith assigned · house built"
+      },
+      "worldPercent": 79.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 561,
+          "width": 720,
+          "height": 247,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-fisher-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "fisher",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 67.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 160,
+          "y": 499.796875,
+          "width": 1120,
+          "height": 308.203125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-fisher-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "fisher",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": "fisher",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Fisher retained · house built"
+      },
+      "worldPercent": 79.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 561,
+          "width": 720,
+          "height": 247,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-hunter-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "hunter",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 67.2,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 160,
+          "y": 499.796875,
+          "width": 1120,
+          "height": 308.203125,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "B-hunter-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "B",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "hunter",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": "hunter",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Hunter retained · house built"
+      },
+      "worldPercent": 79.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 360,
+          "y": 561,
+          "width": 720,
+          "height": 247,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-work-options",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "household-work",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "farmer",
+        "workKind": "farmyard",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 2,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 67.3,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "panel",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 539.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [
+        {
+          "id": "farmer",
+          "disabled": false
+        },
+        {
+          "id": "herder",
+          "disabled": false
+        },
+        {
+          "id": "fisher",
+          "disabled": false
+        },
+        {
+          "id": "hunter",
+          "disabled": false
+        },
+        {
+          "id": "textileWorker",
+          "disabled": false
+        },
+        {
+          "id": "smith",
+          "disabled": false
+        },
+        {
+          "id": "woodworker",
+          "disabled": false
+        },
+        {
+          "id": "boatbuilder",
+          "disabled": false
+        },
+        {
+          "id": "trader",
+          "disabled": false
+        },
+        {
+          "id": "leatherAndJewelleryMaker",
+          "disabled": false
+        }
+      ],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-smith-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 68.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 512.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-smith-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {
+          "founder-1": "smith"
+        },
+        "homeBuilt": true,
+        "buildingSpecialization": "smith",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Smith assigned · house built"
+      },
+      "worldPercent": 85.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 432,
+          "y": 466,
+          "width": 300,
+          "height": 330,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-fisher-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "fisher",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 67.9,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 527.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-fisher-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-10",
+        "workOccupation": "fisher",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": "fisher",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Fisher retained · house built"
+      },
+      "worldPercent": 85.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 432,
+          "y": 466,
+          "width": 300,
+          "height": 330,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-hunter-work-setup",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "hunter",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 68.7,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 402,
+          "y": 112,
+          "width": 636,
+          "height": 512.171875,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": false,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "C-hunter-work-result",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "C",
+        "journey": "work",
+        "scene": "funded",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "hunter",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": true,
+        "buildingSpecialization": "hunter",
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 10,
+        "spentFood": 0,
+        "clicks": 4,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Hunter retained · house built"
+      },
+      "worldPercent": 85.8,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 432,
+          "y": 466,
+          "width": 300,
+          "height": 330,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": false,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-work-needs-materials",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "blocked",
+        "scene": "blocked",
+        "screen": "work-setup",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": true,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": true,
+        "farmReady": false,
+        "roles": {},
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 3,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": ""
+      },
+      "worldPercent": 74.5,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "work-task",
+          "x": 1066,
+          "y": 105,
+          "width": 356,
+          "height": 704,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
+      "detailScrollRequired": true,
+      "campaignStorage": [],
+      "campaignBridge": "undefined"
+    },
+    {
+      "name": "A-work-without-house",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "state": {
+        "variant": "A",
+        "journey": "blocked",
+        "scene": "blocked",
+        "screen": "compact",
+        "selection": "home",
+        "personId": "founder-1",
+        "workerId": "founder-1",
+        "workOccupation": "smith",
+        "workKind": "occupation",
+        "includeHouse": false,
+        "cattleIds": [
+          "cattle-1",
+          "cattle-2",
+          "cattle-3"
+        ],
+        "specialize": false,
+        "farmReady": false,
+        "roles": {
+          "founder-1": "smith"
+        },
+        "homeBuilt": false,
+        "buildingSpecialization": null,
+        "assignedCattleIds": [],
+        "shelteredCattleCount": 0,
+        "spentMaterials": 0,
+        "spentFood": 0,
+        "clicks": 5,
+        "keys": 0,
+        "groupCreated": false,
+        "members": [],
+        "expedition": "home",
+        "targeting": false,
+        "running": false,
+        "bookTab": "story",
+        "familyPerson": null,
+        "result": "Smith assigned · tent kept"
+      },
+      "worldPercent": 84.6,
+      "boxes": [
+        {
+          "id": "brand",
+          "x": 16,
+          "y": 16,
+          "width": 183.015625,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "resources",
+          "x": 504.2109375,
+          "y": 16,
+          "width": 431.578125,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "clock",
+          "x": 1225,
+          "y": 16,
+          "width": 199,
+          "height": 66,
+          "inBounds": true
+        },
+        {
+          "id": "navigation",
+          "x": 18,
+          "y": 825,
+          "width": 352.65625,
+          "height": 57,
+          "inBounds": true
+        },
+        {
+          "id": "attention",
+          "x": 1302.875,
+          "y": 828,
+          "width": 119.125,
+          "height": 54,
+          "inBounds": true
+        },
+        {
+          "id": "marker",
+          "x": 266.1953125,
+          "y": 530.5,
+          "width": 143.609375,
+          "height": 31,
+          "inBounds": true
+        },
+        {
+          "id": "selection",
+          "x": 1104,
+          "y": 105,
+          "width": 318,
+          "height": 362.59375,
+          "inBounds": true
+        }
+      ],
+      "horizontalOverflow": false,
+      "commitVisible": true,
+      "commitDisabled": true,
+      "occupationChoices": [],
+      "workTaskChoices": [],
       "detailScrollRequired": false,
       "campaignStorage": [],
       "campaignBridge": "undefined"
@@ -4925,14 +9194,18 @@
   ],
   "errors": [],
   "sources": {
-    "prototype-v2.html": "8316a04686d85e691f6c6ce2eee03b7088e62984f6ee911c6b906ba6b63b5589",
-    "prototype-v2.css": "20c2bba03859a3259c6353a0318b7176f38199dab6174eb00755007d9af7777a",
-    "prototype-v2.mjs": "794457da4fd24523521333c57e31ad61b0a33c184e6ca6d13da4d20c78328fde",
-    "study-data-v2.json": "cec5caf9f52c13ddb3ad23c9d4c344a1614c3969a3d39622c3295a744719c397"
+    "prototype-v2.html": "1fe8b72e2271d29267a07d5d47f513f16b2f4bfe404ffb7789fbb39b99600df6",
+    "prototype-v2.css": "c5a9d32d40ada32f60f2ab9e71b34fa9caf1bbbb08fa39284d313c469e583256",
+    "prototype-v2.mjs": "b20667544aea3c10bf53e7f1a5871d144ea0bb94d3f518d9364340d2ea238655",
+    "study-data-v2.json": "62e59878608e59263cad0a42d5d0f4f92ed80aa138cebf7a7100f395322c1304"
   },
   "review": {
     "housingOnly": true,
     "existingHomeReused": true,
-    "canonicalOccupationCount": 10
+    "canonicalOccupationCount": 10,
+    "canonicalWorkTaskCount": 10,
+    "workPlansReviewed": 16,
+    "workPlansMatchCore": true,
+    "workWithoutHouse": true
   }
 }

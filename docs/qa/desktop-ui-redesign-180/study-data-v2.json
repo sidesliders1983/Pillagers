@@ -29,6 +29,7 @@
         "materials": 5
       },
       "houseCost": 10,
+      "houseUpkeep": 1,
       "capacity": 4,
       "cattle": [
         {
@@ -55,6 +56,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 8887,
+          "occupationFits": {
+            "farmer": 8887,
+            "herder": 8521,
+            "fisher": 7905,
+            "hunter": 7356,
+            "textileWorker": 7335,
+            "smith": 7867,
+            "woodworker": 8003,
+            "boatbuilder": 7909,
+            "trader": 7127,
+            "leatherAndJewelleryMaker": 7131
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -76,6 +89,7 @@
             "residence": "tent-founder-1",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-1",
               "founder-10"
@@ -89,6 +103,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 6842,
+          "occupationFits": {
+            "farmer": 6842,
+            "herder": 7204,
+            "fisher": 6158,
+            "hunter": 5729,
+            "textileWorker": 6268,
+            "smith": 6664,
+            "woodworker": 6273,
+            "boatbuilder": 6052,
+            "trader": 5873,
+            "leatherAndJewelleryMaker": 5967
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -110,6 +136,7 @@
             "residence": "tent-founder-2",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-2",
               "founder-3"
@@ -123,6 +150,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 6749,
+          "occupationFits": {
+            "farmer": 6749,
+            "herder": 6813,
+            "fisher": 5767,
+            "hunter": 6001,
+            "textileWorker": 5542,
+            "smith": 5504,
+            "woodworker": 5555,
+            "boatbuilder": 5244,
+            "trader": 7522,
+            "leatherAndJewelleryMaker": 5223
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -144,6 +183,7 @@
             "residence": "tent-founder-2",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-2",
               "founder-3"
@@ -157,6 +197,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 6987,
+          "occupationFits": {
+            "farmer": 6987,
+            "herder": 6796,
+            "fisher": 7816,
+            "hunter": 8279,
+            "textileWorker": 6583,
+            "smith": 7420,
+            "woodworker": 6817,
+            "boatbuilder": 5992,
+            "trader": 5635,
+            "leatherAndJewelleryMaker": 6876
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -178,6 +230,7 @@
             "residence": "tent-founder-4",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-4"
             ]
@@ -190,6 +243,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 6638,
+          "occupationFits": {
+            "farmer": 6638,
+            "herder": 7068,
+            "fisher": 6243,
+            "hunter": 6205,
+            "textileWorker": 7004,
+            "smith": 6515,
+            "woodworker": 6745,
+            "boatbuilder": 6766,
+            "trader": 6417,
+            "leatherAndJewelleryMaker": 6804
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -211,6 +276,7 @@
             "residence": "tent-founder-5",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-5"
             ]
@@ -223,6 +289,18 @@
           "occupation": "farmer",
           "occupationLocked": false,
           "farmerFit": 7654,
+          "occupationFits": {
+            "farmer": 7654,
+            "herder": 8147,
+            "fisher": 7497,
+            "hunter": 7573,
+            "textileWorker": 8661,
+            "smith": 6383,
+            "woodworker": 7981,
+            "boatbuilder": 7930,
+            "trader": 8763,
+            "leatherAndJewelleryMaker": 8661
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -244,6 +322,7 @@
             "residence": "tent-founder-6",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-6"
             ]
@@ -256,6 +335,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 8436,
+          "occupationFits": {
+            "farmer": 8436,
+            "herder": 8385,
+            "fisher": 7922,
+            "hunter": 7212,
+            "textileWorker": 7144,
+            "smith": 7811,
+            "woodworker": 7250,
+            "boatbuilder": 6643,
+            "trader": 6685,
+            "leatherAndJewelleryMaker": 6855
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -277,6 +368,7 @@
             "residence": "tent-founder-7",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-7",
               "founder-8"
@@ -290,6 +382,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 7718,
+          "occupationFits": {
+            "farmer": 7718,
+            "herder": 7645,
+            "fisher": 8334,
+            "hunter": 9065,
+            "textileWorker": 7522,
+            "smith": 7505,
+            "woodworker": 7718,
+            "boatbuilder": 7136,
+            "trader": 7051,
+            "leatherAndJewelleryMaker": 7722
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -311,6 +415,7 @@
             "residence": "tent-founder-7",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-7",
               "founder-8"
@@ -324,6 +429,18 @@
           "occupation": "woodworker",
           "occupationLocked": false,
           "farmerFit": 7459,
+          "occupationFits": {
+            "farmer": 7459,
+            "herder": 7943,
+            "fisher": 7114,
+            "hunter": 7318,
+            "textileWorker": 7654,
+            "smith": 5563,
+            "woodworker": 6796,
+            "boatbuilder": 6477,
+            "trader": 7794,
+            "leatherAndJewelleryMaker": 7424
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -345,6 +462,7 @@
             "residence": "tent-founder-9",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-9"
             ]
@@ -357,6 +475,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 7722,
+          "occupationFits": {
+            "farmer": 7722,
+            "herder": 7926,
+            "fisher": 8347,
+            "hunter": 8334,
+            "textileWorker": 8683,
+            "smith": 7709,
+            "woodworker": 8593,
+            "boatbuilder": 8759,
+            "trader": 8793,
+            "leatherAndJewelleryMaker": 8632
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -378,6 +508,7 @@
             "residence": "tent-founder-1",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-1",
               "founder-10"
@@ -408,6 +539,7 @@
         "materials": 25
       },
       "houseCost": 10,
+      "houseUpkeep": 1,
       "capacity": 4,
       "cattle": [
         {
@@ -434,6 +566,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 8887,
+          "occupationFits": {
+            "farmer": 8887,
+            "herder": 8521,
+            "fisher": 7905,
+            "hunter": 7356,
+            "textileWorker": 7335,
+            "smith": 7867,
+            "woodworker": 8003,
+            "boatbuilder": 7909,
+            "trader": 7127,
+            "leatherAndJewelleryMaker": 7131
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -455,6 +599,7 @@
             "residence": "tent-founder-1",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-1",
               "founder-10"
@@ -468,6 +613,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 6842,
+          "occupationFits": {
+            "farmer": 6842,
+            "herder": 7204,
+            "fisher": 6158,
+            "hunter": 5729,
+            "textileWorker": 6268,
+            "smith": 6664,
+            "woodworker": 6273,
+            "boatbuilder": 6052,
+            "trader": 5873,
+            "leatherAndJewelleryMaker": 5967
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -489,6 +646,7 @@
             "residence": "tent-founder-2",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-2",
               "founder-3"
@@ -502,6 +660,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 6749,
+          "occupationFits": {
+            "farmer": 6749,
+            "herder": 6813,
+            "fisher": 5767,
+            "hunter": 6001,
+            "textileWorker": 5542,
+            "smith": 5504,
+            "woodworker": 5555,
+            "boatbuilder": 5244,
+            "trader": 7522,
+            "leatherAndJewelleryMaker": 5223
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -523,6 +693,7 @@
             "residence": "tent-founder-2",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-2",
               "founder-3"
@@ -536,6 +707,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 6987,
+          "occupationFits": {
+            "farmer": 6987,
+            "herder": 6796,
+            "fisher": 7816,
+            "hunter": 8279,
+            "textileWorker": 6583,
+            "smith": 7420,
+            "woodworker": 6817,
+            "boatbuilder": 5992,
+            "trader": 5635,
+            "leatherAndJewelleryMaker": 6876
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -557,6 +740,7 @@
             "residence": "tent-founder-4",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-4"
             ]
@@ -569,6 +753,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 6638,
+          "occupationFits": {
+            "farmer": 6638,
+            "herder": 7068,
+            "fisher": 6243,
+            "hunter": 6205,
+            "textileWorker": 7004,
+            "smith": 6515,
+            "woodworker": 6745,
+            "boatbuilder": 6766,
+            "trader": 6417,
+            "leatherAndJewelleryMaker": 6804
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -590,6 +786,7 @@
             "residence": "tent-founder-5",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-5"
             ]
@@ -602,6 +799,18 @@
           "occupation": "farmer",
           "occupationLocked": false,
           "farmerFit": 7654,
+          "occupationFits": {
+            "farmer": 7654,
+            "herder": 8147,
+            "fisher": 7497,
+            "hunter": 7573,
+            "textileWorker": 8661,
+            "smith": 6383,
+            "woodworker": 7981,
+            "boatbuilder": 7930,
+            "trader": 8763,
+            "leatherAndJewelleryMaker": 8661
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -623,6 +832,7 @@
             "residence": "tent-founder-6",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-6"
             ]
@@ -635,6 +845,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 8436,
+          "occupationFits": {
+            "farmer": 8436,
+            "herder": 8385,
+            "fisher": 7922,
+            "hunter": 7212,
+            "textileWorker": 7144,
+            "smith": 7811,
+            "woodworker": 7250,
+            "boatbuilder": 6643,
+            "trader": 6685,
+            "leatherAndJewelleryMaker": 6855
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -656,6 +878,7 @@
             "residence": "tent-founder-7",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-7",
               "founder-8"
@@ -669,6 +892,18 @@
           "occupation": "hunter",
           "occupationLocked": false,
           "farmerFit": 7718,
+          "occupationFits": {
+            "farmer": 7718,
+            "herder": 7645,
+            "fisher": 8334,
+            "hunter": 9065,
+            "textileWorker": 7522,
+            "smith": 7505,
+            "woodworker": 7718,
+            "boatbuilder": 7136,
+            "trader": 7051,
+            "leatherAndJewelleryMaker": 7722
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -690,6 +925,7 @@
             "residence": "tent-founder-7",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-7",
               "founder-8"
@@ -703,6 +939,18 @@
           "occupation": "woodworker",
           "occupationLocked": false,
           "farmerFit": 7459,
+          "occupationFits": {
+            "farmer": 7459,
+            "herder": 7943,
+            "fisher": 7114,
+            "hunter": 7318,
+            "textileWorker": 7654,
+            "smith": 5563,
+            "woodworker": 6796,
+            "boatbuilder": 6477,
+            "trader": 7794,
+            "leatherAndJewelleryMaker": 7424
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -724,6 +972,7 @@
             "residence": "tent-founder-9",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-9"
             ]
@@ -736,6 +985,18 @@
           "occupation": "fisher",
           "occupationLocked": false,
           "farmerFit": 7722,
+          "occupationFits": {
+            "farmer": 7722,
+            "herder": 7926,
+            "fisher": 8347,
+            "hunter": 8334,
+            "textileWorker": 8683,
+            "smith": 7709,
+            "woodworker": 8593,
+            "boatbuilder": 8759,
+            "trader": 8793,
+            "leatherAndJewelleryMaker": 8632
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -757,6 +1018,7 @@
             "residence": "tent-founder-1",
             "kind": "tent",
             "specialization": null,
+            "upkeep": 0,
             "members": [
               "founder-1",
               "founder-10"
@@ -790,6 +1052,18 @@
           "occupation": "farmer",
           "occupationLocked": true,
           "farmerFit": 8887,
+          "occupationFits": {
+            "farmer": 8887,
+            "herder": 8521,
+            "fisher": 7905,
+            "hunter": 7356,
+            "textileWorker": 7335,
+            "smith": 7867,
+            "woodworker": 8003,
+            "boatbuilder": 7909,
+            "trader": 7127,
+            "leatherAndJewelleryMaker": 7131
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -813,6 +1087,7 @@
             "residence": "house-1",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-1",
               "founder-3",
@@ -827,6 +1102,18 @@
           "occupation": "fisher",
           "occupationLocked": true,
           "farmerFit": 6842,
+          "occupationFits": {
+            "farmer": 6842,
+            "herder": 7204,
+            "fisher": 6158,
+            "hunter": 5729,
+            "textileWorker": 6268,
+            "smith": 6664,
+            "woodworker": 6273,
+            "boatbuilder": 6052,
+            "trader": 5873,
+            "leatherAndJewelleryMaker": 5967
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -851,6 +1138,7 @@
             "residence": "house-2",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-10",
               "founder-2",
@@ -866,6 +1154,18 @@
           "occupation": "woodworker",
           "occupationLocked": true,
           "farmerFit": 6749,
+          "occupationFits": {
+            "farmer": 6749,
+            "herder": 6813,
+            "fisher": 5767,
+            "hunter": 6001,
+            "textileWorker": 5542,
+            "smith": 5504,
+            "woodworker": 5555,
+            "boatbuilder": 5244,
+            "trader": 7522,
+            "leatherAndJewelleryMaker": 5223
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -889,6 +1189,7 @@
             "residence": "house-1",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-1",
               "founder-3",
@@ -903,6 +1204,18 @@
           "occupation": "hunter",
           "occupationLocked": true,
           "farmerFit": 6987,
+          "occupationFits": {
+            "farmer": 6987,
+            "herder": 6796,
+            "fisher": 7816,
+            "hunter": 8279,
+            "textileWorker": 6583,
+            "smith": 7420,
+            "woodworker": 6817,
+            "boatbuilder": 5992,
+            "trader": 5635,
+            "leatherAndJewelleryMaker": 6876
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -928,6 +1241,7 @@
             "residence": "house-4",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-4",
               "founder-9",
@@ -944,6 +1258,18 @@
           "occupation": "farmer",
           "occupationLocked": true,
           "farmerFit": 6638,
+          "occupationFits": {
+            "farmer": 6638,
+            "herder": 7068,
+            "fisher": 6243,
+            "hunter": 6205,
+            "textileWorker": 7004,
+            "smith": 6515,
+            "woodworker": 6745,
+            "boatbuilder": 6766,
+            "trader": 6417,
+            "leatherAndJewelleryMaker": 6804
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -965,6 +1291,7 @@
             "residence": "house-5",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-5",
               "founder-6"
@@ -978,6 +1305,18 @@
           "occupation": "fisher",
           "occupationLocked": true,
           "farmerFit": 7654,
+          "occupationFits": {
+            "farmer": 7654,
+            "herder": 8147,
+            "fisher": 7497,
+            "hunter": 7573,
+            "textileWorker": 8661,
+            "smith": 6383,
+            "woodworker": 7981,
+            "boatbuilder": 7930,
+            "trader": 8763,
+            "leatherAndJewelleryMaker": 8661
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -999,6 +1338,7 @@
             "residence": "house-5",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-5",
               "founder-6"
@@ -1012,6 +1352,18 @@
           "occupation": "woodworker",
           "occupationLocked": true,
           "farmerFit": 8436,
+          "occupationFits": {
+            "farmer": 8436,
+            "herder": 8385,
+            "fisher": 7922,
+            "hunter": 7212,
+            "textileWorker": 7144,
+            "smith": 7811,
+            "woodworker": 7250,
+            "boatbuilder": 6643,
+            "trader": 6685,
+            "leatherAndJewelleryMaker": 6855
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -1035,6 +1387,7 @@
             "residence": "house-6",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-7",
               "founder-8",
@@ -1049,6 +1402,18 @@
           "occupation": "hunter",
           "occupationLocked": true,
           "farmerFit": 7718,
+          "occupationFits": {
+            "farmer": 7718,
+            "herder": 7645,
+            "fisher": 8334,
+            "hunter": 9065,
+            "textileWorker": 7522,
+            "smith": 7505,
+            "woodworker": 7718,
+            "boatbuilder": 7136,
+            "trader": 7051,
+            "leatherAndJewelleryMaker": 7722
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -1072,6 +1437,7 @@
             "residence": "house-6",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-7",
               "founder-8",
@@ -1086,6 +1452,18 @@
           "occupation": "farmer",
           "occupationLocked": true,
           "farmerFit": 7459,
+          "occupationFits": {
+            "farmer": 7459,
+            "herder": 7943,
+            "fisher": 7114,
+            "hunter": 7318,
+            "textileWorker": 7654,
+            "smith": 5563,
+            "woodworker": 6796,
+            "boatbuilder": 6477,
+            "trader": 7794,
+            "leatherAndJewelleryMaker": 7424
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -1111,6 +1489,7 @@
             "residence": "house-4",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-4",
               "founder-9",
@@ -1127,6 +1506,18 @@
           "occupation": "fisher",
           "occupationLocked": true,
           "farmerFit": 7722,
+          "occupationFits": {
+            "farmer": 7722,
+            "herder": 7926,
+            "fisher": 8347,
+            "hunter": 8334,
+            "textileWorker": 8683,
+            "smith": 7709,
+            "woodworker": 8593,
+            "boatbuilder": 8759,
+            "trader": 8793,
+            "leatherAndJewelleryMaker": 8632
+          },
           "canFarm": true,
           "availableOccupations": [
             "farmer",
@@ -1151,6 +1542,7 @@
             "residence": "house-2",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-10",
               "founder-2",
@@ -1166,6 +1558,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 8906,
+          "occupationFits": {
+            "farmer": 8906,
+            "herder": 8721,
+            "fisher": 8982,
+            "hunter": 8538,
+            "textileWorker": 8043,
+            "smith": 7973,
+            "woodworker": 8172,
+            "boatbuilder": 7493,
+            "trader": 7352,
+            "leatherAndJewelleryMaker": 7845
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1176,6 +1580,7 @@
             "residence": "house-6",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-7",
               "founder-8",
@@ -1190,6 +1595,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 7040,
+          "occupationFits": {
+            "farmer": 7040,
+            "herder": 7794,
+            "fisher": 7599,
+            "hunter": 7629,
+            "textileWorker": 7858,
+            "smith": 5557,
+            "woodworker": 6919,
+            "boatbuilder": 6194,
+            "trader": 7099,
+            "leatherAndJewelleryMaker": 7601
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1200,6 +1617,7 @@
             "residence": "house-4",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-4",
               "founder-9",
@@ -1216,6 +1634,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 8183,
+          "occupationFits": {
+            "farmer": 8183,
+            "herder": 8602,
+            "fisher": 8712,
+            "hunter": 8746,
+            "textileWorker": 9258,
+            "smith": 7701,
+            "woodworker": 8710,
+            "boatbuilder": 8243,
+            "trader": 8281,
+            "leatherAndJewelleryMaker": 9014
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1226,6 +1656,7 @@
             "residence": "house-2",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-10",
               "founder-2",
@@ -1241,6 +1672,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 7597,
+          "occupationFits": {
+            "farmer": 7597,
+            "herder": 7633,
+            "fisher": 6464,
+            "hunter": 6575,
+            "textileWorker": 6079,
+            "smith": 6570,
+            "woodworker": 6500,
+            "boatbuilder": 6356,
+            "trader": 7227,
+            "leatherAndJewelleryMaker": 5954
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1251,6 +1694,7 @@
             "residence": "house-1",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-1",
               "founder-3",
@@ -1265,6 +1709,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 8107,
+          "occupationFits": {
+            "farmer": 8107,
+            "herder": 8525,
+            "fisher": 7858,
+            "hunter": 7720,
+            "textileWorker": 7571,
+            "smith": 7065,
+            "woodworker": 7344,
+            "boatbuilder": 6753,
+            "trader": 7276,
+            "leatherAndJewelleryMaker": 7356
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1275,6 +1731,7 @@
             "residence": "house-4",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-4",
               "founder-9",
@@ -1291,6 +1748,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 7854,
+          "occupationFits": {
+            "farmer": 7854,
+            "herder": 8088,
+            "fisher": 7475,
+            "hunter": 7612,
+            "textileWorker": 8022,
+            "smith": 7779,
+            "woodworker": 7822,
+            "boatbuilder": 7688,
+            "trader": 8802,
+            "leatherAndJewelleryMaker": 7669
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1301,6 +1770,7 @@
             "residence": "house-2",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-10",
               "founder-2",
@@ -1316,6 +1786,18 @@
           "occupation": null,
           "occupationLocked": false,
           "farmerFit": 7731,
+          "occupationFits": {
+            "farmer": 7731,
+            "herder": 8164,
+            "fisher": 8379,
+            "hunter": 8449,
+            "textileWorker": 8092,
+            "smith": 6749,
+            "woodworker": 7507,
+            "boatbuilder": 6717,
+            "trader": 6976,
+            "leatherAndJewelleryMaker": 8190
+          },
           "canFarm": false,
           "availableOccupations": [],
           "partner": null,
@@ -1326,6 +1808,7 @@
             "residence": "house-4",
             "kind": "house",
             "specialization": null,
+            "upkeep": 1,
             "members": [
               "founder-4",
               "founder-9",
@@ -1512,6 +1995,7 @@
       },
       "tick": 500,
       "clan": "Landing party",
+      "houseUpkeep": 1,
       "capacity": 4,
       "cattleCount": 8
     }
@@ -1563,5 +2047,249 @@
       "overcrowding": 0
     },
     "note": "A headless feasibility check of existing commands, not implementation of a combined command."
+  },
+  "workResults": {
+    "farmer": {
+      "workerId": "founder-1",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-1",
+          "occupation": "farmer"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "farmer"
+        }
+      ],
+      "occupation": "farmer",
+      "specialization": "farmer",
+      "materials": 15,
+      "farmyard": {
+        "id": "house-1",
+        "householdId": "founder-1",
+        "capacity": 4,
+        "occupants": 0,
+        "overcrowding": 0
+      },
+      "cattleAssignmentsUnchanged": true
+    },
+    "herder": {
+      "workerId": "founder-1",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-1",
+          "occupation": "herder"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "herder"
+        }
+      ],
+      "occupation": "herder",
+      "specialization": "herder",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "fisher": {
+      "workerId": "founder-10",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "fisher"
+        }
+      ],
+      "occupation": "fisher",
+      "specialization": "fisher",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "hunter": {
+      "workerId": "founder-1",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "hunter"
+        }
+      ],
+      "occupation": "hunter",
+      "specialization": "hunter",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "textileWorker": {
+      "workerId": "founder-10",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "textileWorker"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "textileWorker"
+        }
+      ],
+      "occupation": "textileWorker",
+      "specialization": "textileWorker",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "smith": {
+      "workerId": "founder-1",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-1",
+          "occupation": "smith"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "smith"
+        }
+      ],
+      "occupation": "smith",
+      "specialization": "smith",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "woodworker": {
+      "workerId": "founder-10",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "woodworker"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "woodworker"
+        }
+      ],
+      "occupation": "woodworker",
+      "specialization": "woodworker",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "boatbuilder": {
+      "workerId": "founder-10",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "boatbuilder"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "boatbuilder"
+        }
+      ],
+      "occupation": "boatbuilder",
+      "specialization": "boatbuilder",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "trader": {
+      "workerId": "founder-10",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "trader"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "trader"
+        }
+      ],
+      "occupation": "trader",
+      "specialization": "trader",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    },
+    "leatherAndJewelleryMaker": {
+      "workerId": "founder-10",
+      "commands": [
+        {
+          "type": "BuildHouse",
+          "householdId": "founder-1"
+        },
+        {
+          "type": "AssignOccupation",
+          "personaId": "founder-10",
+          "occupation": "leatherAndJewelleryMaker"
+        },
+        {
+          "type": "SpecializeBuilding",
+          "buildingId": "house-1",
+          "occupation": "leatherAndJewelleryMaker"
+        }
+      ],
+      "occupation": "leatherAndJewelleryMaker",
+      "specialization": "leatherAndJewelleryMaker",
+      "materials": 15,
+      "farmyard": null,
+      "cattleAssignmentsUnchanged": true
+    }
+  },
+  "workWithoutHouseResult": {
+    "occupation": "smith",
+    "residence": "tent",
+    "materials": 25,
+    "note": "An occupation can be assigned without building a house or changing animal assignments."
   }
 }

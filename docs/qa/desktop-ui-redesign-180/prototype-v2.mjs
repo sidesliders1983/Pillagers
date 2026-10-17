@@ -80,11 +80,13 @@ function currentPerson() {
     return currentScene().people.find(person => person.id === state.personId) || currentScene().people[0];
 }
 function home() { return currentScene().people[0].home; }
-function candidates() {
-    return currentScene().people.filter(person => home().members.includes(person.id) && person.canFarm);
+function candidates(occupation = state.workOccupation) {
+    return householdMembers().filter(person => person.availableOccupations.includes(occupation))
+        .sort((left, right) => Number(role(right) === occupation) - Number(role(left) === occupation)
+            || right.occupationFits[occupation] - left.occupationFits[occupation]);
 }
-function selectedFarmer() {
-    return candidates().find(person => person.id === state.farmerId) || candidates()[0];
+function selectedWorker() {
+    return candidates().find(person => person.id === state.workerId) || candidates()[0];
 }
 function cattle() { return currentScene().cattle || []; }
 function materials() { return currentScene().stocks.materials - state.spentMaterials; }
@@ -97,6 +99,24 @@ function occupationLabel(occupation) {
 function occupationIcon(occupation) {
     return ({ farmer: 'food', herder: 'cattle', fisher: 'fisher', hunter: 'hunter',
         boatbuilder: 'route', trader: 'materials' })[occupation] || 'work';
+}
+function workLabel(occupation) {
+    return ({ farmer: 'Farming', herder: 'Herding', fisher: 'Fishing', hunter: 'Hunting',
+        textileWorker: 'Textile work', smith: 'Smithing', woodworker: 'Woodworking',
+        boatbuilder: 'Boatbuilding', trader: 'Trading', leatherAndJewelleryMaker: 'Leather and jewellery work' })[occupation];
+}
+function workTaskCost() { return state.includeHouse ? housingCost() : 0; }
+function workTaskTitle() {
+    return state.workKind === 'farmyard' ? 'Set up farmyard' : 'Set up ' + workLabel(state.workOccupation).toLowerCase();
+}
+function beginWork(occupation, kind = 'occupation') {
+    state.workOccupation = occupation;
+    state.workKind = kind;
+    state.workerId = candidates()[0]?.id;
+    state.includeHouse = true;
+    state.specialize = true;
+    state.screen = kind === 'farmyard' ? 'farmyard' : 'work-setup';
+    state.result = '';
 }
 function householdMembers() {
     return currentScene().people.filter(person => home().members.includes(person.id));
@@ -116,9 +136,9 @@ function reset(journey = 'housing') {
     state = {
         variant, journey,
         scene: journey === 'developed' ? 'developed'
-            : ['housing', 'farmyard'].includes(journey) ? 'funded' : 'blocked',
+            : ['housing', 'work', 'farmyard'].includes(journey) ? 'funded' : 'blocked',
         screen: 'observe', selection: null, personId: 'founder-1',
-        farmerId: data.farmyardResult.candidateId,
+        workerId: data.farmyardResult.candidateId, workOccupation: 'farmer', workKind: 'farmyard', includeHouse: true,
         cattleIds: data.scenes.funded.cattle.map(animal => animal.id),
         specialize: true, farmReady: false, roles: {},
         homeBuilt: false, buildingSpecialization: null, assignedCattleIds: [], shelteredCattleCount: 0,
@@ -130,6 +150,10 @@ function reset(journey = 'housing') {
     state.buildingSpecialization = home().specialization ?? null;
     state.shelteredCattleCount = currentScene().farmyards?.find(yard => yard.householdId === home().id)?.occupants || 0;
     updateHouseholdFunction();
+    if (journey === 'work' && params.get('view') === 'work') {
+        state.selection = 'home';
+        state.screen = 'household-work';
+    }
     params.set('journey', journey);
     params.set('variant', variant);
     history.replaceState(null, '', '?' + params);
@@ -145,14 +169,29 @@ function choice(action, name, subtitle, glyph, selected, extra = {}) {
     ], null, 'choice', { 'aria-pressed': String(selected), ...extra });
 }
 
-function farmerSection() {
+function workerSection() {
+    const occupation = state.workOccupation;
     return h('section', { class: 'field-section' },
-        h('h3', { class: 'section-label' }, 'Who will farm here?'),
-        h('div', { class: 'choices' }, candidates().map(person => choice('farmer:' + person.id,
-            person.name, role(person) === 'farmer' ? 'Farmer · keep current career settings'
-                : occupationLabel(role(person)) + ' → farmer · ' + Math.round(person.farmerFit / 100) + '% fit',
-            'people', state.farmerId === person.id))),
+        h('h3', { class: 'section-label' }, 'Who will do this work?'),
+        h('div', { class: 'choices' }, candidates().map(person => choice('worker:' + person.id,
+            person.name, role(person) === occupation ? occupationLabel(occupation) + ' · keep current career settings'
+                : occupationLabel(role(person)) + ' → ' + occupationLabel(occupation) + ' · '
+                    + Math.round(person.occupationFits[occupation] / 100) + '% fit',
+            'people', state.workerId === person.id))),
         h('p', { class: 'caption' }, 'Suggested resident. Changing their occupation assigns the career.'));
+}
+
+function buildingSection() {
+    return h('section', { class: 'field-section' },
+        h('h3', { class: 'section-label' }, 'Housing and work'),
+        state.homeBuilt ? fact('Housing', 'Use existing house')
+            : button('toggle-house', 'Build house · ' + currentScene().houseCost + ' Materials',
+                state.includeHouse ? 'check' : 'circle', 'bulk', { 'aria-pressed': String(state.includeHouse) }),
+        fact('Residence after', state.homeBuilt || state.includeHouse ? 'House' : 'Tent'),
+        (state.homeBuilt || state.includeHouse) && fact('Upkeep',
+            (state.homeBuilt ? home().upkeep || currentScene().houseUpkeep : currentScene().houseUpkeep) + ' Materials / Winter'),
+        h('p', { class: 'caption' }, 'Housing is optional for this occupation. Keep the tent or include a permanent home.'),
+        h('p', { class: 'caption' }, 'Building specialization is reviewed separately. Other residents keep their occupations.'));
 }
 
 function livestockSection() {
@@ -169,42 +208,63 @@ function livestockSection() {
             + ' sheltered · only unassigned cattle are suggested.'));
 }
 
-function farmReview() {
-    const cost = housingCost();
+function workReview() {
+    const cost = workTaskCost();
     const funded = materials() >= cost;
-    const alreadyFarmer = role(selectedFarmer()) === 'farmer';
+    const occupation = state.workOccupation;
+    const worker = selectedWorker();
+    const unchanged = role(worker) === occupation;
+    const permanent = state.homeBuilt || state.includeHouse;
+    const farmyard = state.workKind === 'farmyard';
+    const removesShelter = state.farmReady && role(worker) === 'farmer' && occupation !== 'farmer'
+        && householdMembers().filter(member => role(member) === 'farmer').length === 1;
     return h('section', { class: 'review' },
         button('toggle-specialization',
-            state.specialize ? 'Farming specialization included' : 'Include farming specialization',
-            state.specialize ? 'check' : 'circle', 'bulk'),
-        h('div', {}, fact(state.homeBuilt ? 'Use existing home' : 'Build home', cost + ' Materials'),
+            state.specialize ? occupationLabel(occupation) + ' specialization included'
+                : 'Include ' + occupationLabel(occupation).toLowerCase() + ' specialization',
+            state.specialize ? 'check' : 'circle', 'bulk', { disabled: !permanent }),
+        h('div', {}, fact(state.homeBuilt ? 'Use existing home' : state.includeHouse ? 'Build home' : 'Keep tent', cost + ' Materials'),
             fact('Stock after', funded ? (materials() - cost) + ' Materials' : 'Unavailable')),
-        h('p', { class: 'caption' }, 'Home + ' + selectedFarmer().name + ' as farmer + '
-            + state.cattleIds.length + ' cattle. '
-            + (alreadyFarmer ? 'Current career settings preserved.' : 'Career becomes assigned.')),
+        h('p', { class: 'caption' }, worker.name + ' · ' + occupationLabel(role(worker)) + ' → '
+            + occupationLabel(occupation) + '. '
+            + (unchanged ? 'Current career settings preserved.' : 'Career becomes assigned.')
+            + (farmyard ? ' ' + state.cattleIds.length + ' cattle assigned.'
+                : removesShelter ? ' Cattle lose shelter.' : ' Animal assignments stay unchanged.')
+            + (state.specialize ? ' Specialization: '
+                + (state.buildingSpecialization ? occupationLabel(state.buildingSpecialization) : 'None')
+                + ' → ' + occupationLabel(occupation) + '.' : '')),
+        removesShelter && h('p', { class: 'risk' }, 'Last farmer changes work: '
+            + state.shelteredCattleCount + ' cattle become unassigned and lose shelter.'),
         !funded && h('p', { class: 'risk' }, (cost - materials()) + ' more Materials needed. No changes made.'),
-        button('confirm-farmyard', 'Confirm farmyard', 'check', 'primary', { disabled: !funded }));
+        button(farmyard ? 'confirm-farmyard' : 'confirm-work', farmyard ? 'Confirm farmyard' : 'Confirm work setup',
+            'check', 'primary', { disabled: !funded || !worker }));
+}
+
+function workContext() { return state.workKind === 'farmyard' ? livestockSection() : buildingSection(); }
+function workSubtitle() {
+    return state.workKind === 'farmyard' ? 'A permanent home, a farmer and shelter for your cattle.'
+        : 'Review the resident, housing and specialization together.';
 }
 
 // Deliberately different compositions: a vertical inspector, a horizontal task, a focused brief.
 export function VariantA() {
-    return h('section', { class: 'task-shell right surface', 'data-overlay': 'farmyard' },
-        heading('Set up farmyard', 'A permanent home, a farmer and shelter for your cattle.', 'farm'),
-        h('div', { class: 'body' }, farmerSection(), livestockSection()),
-        farmReview());
+    return h('section', { class: 'task-shell right surface', 'data-overlay': 'work-task' },
+        heading(workTaskTitle(), workSubtitle(), state.workKind === 'farmyard' ? 'farm' : occupationIcon(state.workOccupation)),
+        h('div', { class: 'body' }, workerSection(), workContext()),
+        workReview());
 }
 
 export function VariantB() {
-    return h('section', { class: 'task-shell tray surface', 'data-overlay': 'farmyard' },
-        heading('Make this a farmyard', 'One household. Review the people, livestock and commitment together.', 'farm'),
-        h('div', { class: 'tray-columns' }, farmerSection(), livestockSection(), farmReview()));
+    return h('section', { class: 'task-shell tray surface', 'data-overlay': 'work-task' },
+        heading(workTaskTitle(), workSubtitle(), state.workKind === 'farmyard' ? 'farm' : occupationIcon(state.workOccupation)),
+        h('div', { class: 'tray-columns' }, workerSection(), workContext(), workReview()));
 }
 
 export function VariantC() {
-    return h('section', { class: 'task-shell focus surface', 'data-overlay': 'farmyard' },
-        heading('A home for the herd', 'Set up a farmyard for ' + currentScene().people[0].name + '’s household.', 'farm'),
-        h('div', { class: 'focus-columns' }, farmerSection(), livestockSection()),
-        farmReview());
+    return h('section', { class: 'task-shell focus surface', 'data-overlay': 'work-task' },
+        heading(workTaskTitle(), workSubtitle(), state.workKind === 'farmyard' ? 'farm' : occupationIcon(state.workOccupation)),
+        h('div', { class: 'focus-columns' }, workerSection(), workContext()),
+        workReview());
 }
 
 function layoutClass(compact = false) {
@@ -235,7 +295,7 @@ function selectionSummary() {
             button('expeditions', 'Group details', 'route', 'primary'));
     } else if (state.farmReady) {
         content = h('div', { class: 'body' },
-            h('div', { class: 'inline-status' }, icon('check'), state.shelteredCattleCount + ' / 4 sheltered'),
+            h('div', { class: 'inline-status' }, icon('check'), state.shelteredCattleCount + ' / ' + currentScene().capacity + ' sheltered'),
             h('p', { class: 'caption' }, activeFarmer().name + ' · farmer'),
             h('div', { class: 'actions' }, button('farm-details', 'View farmyard', 'farm'),
                 button('household-work', 'Manage work', 'work')));
@@ -244,6 +304,7 @@ function selectionSummary() {
             h('div', { class: 'household-facts' },
                 fact('Residence', state.homeBuilt ? 'House' : 'Tent'),
                 fact('Current work', householdMembers().map(member => occupationLabel(role(member))).join(' · ')),
+                state.buildingSpecialization && fact('Specialization', occupationLabel(state.buildingSpecialization)),
                 h('p', { class: 'caption' }, state.homeBuilt ? 'Permanent housing. Residents keep their occupations.'
                     : 'Build permanent housing. Residents keep their occupations.'),
                 !state.homeBuilt && materials() < housingCost()
@@ -354,21 +415,30 @@ function genericPanel() {
     }
     if (state.screen === 'home-details' || state.screen === 'household-work') {
         return panel(state.screen === 'household-work' ? 'Household work' : 'Household', home().label, 'home', [
-            fact('Residence', state.homeBuilt ? 'House' : 'Tent'),
-            fact('Building specialization', state.buildingSpecialization
-                ? occupationLabel(state.buildingSpecialization) : 'None'),
-            h('h3', { class: 'section-label' }, 'Residents and occupations'),
-            h('div', { class: 'choices' }, householdMembers().map(member => choice('person-work:' + member.id,
-                member.name, occupationLabel(role(member)) + ' · change work', occupationIcon(role(member)), false))),
-            h('p', { class: 'caption' }, 'Each resident has their own occupation. Housing and building specialization are separate choices.'),
-            h('h3', { class: 'section-label task-label' }, 'Optional household task'),
-            button('set-up-farmyard', 'Set up farmyard', 'farm', 'secondary', { disabled: !candidates().length }),
-            h('p', { class: 'caption' }, 'Review a farmer and cattle assignments together. Other occupations do not require this task.'),
-        ]);
+            h('div', { class: 'work-context' }, fact('Residence', state.homeBuilt ? 'House' : 'Tent'),
+                fact('Building specialization', state.buildingSpecialization
+                    ? occupationLabel(state.buildingSpecialization) : 'None')),
+            h('section', {}, h('h3', { class: 'section-label' }, 'Choose work to set up'),
+                h('div', { class: 'work-options' }, data.occupations.map(occupation =>
+                    button('set-up-work:' + occupation, [icon(occupationIcon(occupation)),
+                        h('span', { class: 'choice-copy' }, h('strong', {}, workLabel(occupation)))],
+                    null, 'choice work-choice', { disabled: !candidates(occupation).length,
+                        'aria-label': 'Set up ' + workLabel(occupation).toLowerCase() }))),
+                h('p', { class: 'caption' }, 'Choose a resident, optional housing and building specialization in one review.')),
+            h('div', { class: 'work-side' },
+                h('section', {}, h('h3', { class: 'section-label' }, 'Residents and occupations'),
+                    h('div', { class: 'choices household-residents' }, householdMembers().map(member =>
+                        choice('person-work:' + member.id, member.name,
+                            occupationLabel(role(member)) + ' · change work', occupationIcon(role(member)), false)))),
+                h('section', {}, h('h3', { class: 'section-label' }, 'Livestock shelter'),
+                    button('set-up-farmyard', 'Set up farmyard', 'farm', 'secondary', { disabled: !candidates('farmer').length }),
+                    h('p', { class: 'caption' }, 'Include a farmer, permanent home and eligible cattle assignments. '
+                        + 'Farming above also works without assigning cattle.'))),
+        ], 'work-menu');
     }
     if (state.screen === 'farm-details') {
         return panel('Farmyard', home().label, 'farm', [
-            fact('Sheltered cattle', state.shelteredCattleCount + ' / 4'),
+            fact('Sheltered cattle', state.shelteredCattleCount + ' / ' + currentScene().capacity),
             fact('Farmer', activeFarmer().name),
             fact('Building specialization', state.buildingSpecialization
                 ? occupationLabel(state.buildingSpecialization) : 'None'),
@@ -499,7 +569,7 @@ function render() {
             null, 'attention surface', { 'data-overlay': 'attention' }),
     ];
     if (!state.targeting) {
-        if (['housing', 'farmyard', 'blocked'].includes(state.journey) && state.screen === 'observe') {
+        if (['housing', 'work', 'farmyard', 'blocked'].includes(state.journey) && state.screen === 'observe') {
             nodes.push(hotspot('home', 'Household', state.homeBuilt ? 'home' : 'tent', 338, 555));
         } else if (['resident', 'history', 'developed'].includes(state.journey) && state.screen === 'observe') {
             nodes.push(hotspot('person:founder-1', scene.people[0].name, 'people', 313, 447));
@@ -516,7 +586,7 @@ function render() {
             button('cancel-target', 'Cancel target', 'close')));
     } else if (state.screen === 'compact' && state.selection) {
         nodes.push(selectionSummary());
-    } else if (state.screen === 'farmyard') {
+    } else if (state.screen === 'farmyard' || state.screen === 'work-setup') {
         nodes.push(({ A: VariantA, B: VariantB, C: VariantC }[state.variant])());
     } else if (state.screen !== 'observe') {
         nodes.push(genericPanel());
@@ -562,26 +632,34 @@ function act(action) {
         state.selection = 'person';
         state.screen = 'work';
         state.result = '';
-    } else if (action === 'set-up-farmyard') {
-        state.farmerId = activeFarmer()?.id || state.farmerId;
-        state.screen = 'farmyard';
-    } else if (action.startsWith('farmer:')) state.farmerId = action.slice(7);
+    } else if (action === 'set-up-farmyard') beginWork('farmer', 'farmyard');
+    else if (action.startsWith('set-up-work:')) beginWork(action.slice(12));
+    else if (action.startsWith('worker:')) state.workerId = action.slice(7);
     else if (action.startsWith('cattle:')) {
         const id = action.slice(7);
         state.cattleIds = state.cattleIds.includes(id) ? state.cattleIds.filter(other => other !== id) : [...state.cattleIds, id];
     } else if (action === 'all-cattle') state.cattleIds = cattle().map(animal => animal.id);
-    else if (action === 'toggle-specialization') state.specialize = !state.specialize;
-    else if (action === 'confirm-farmyard' && materials() >= housingCost()) {
-        const builtNow = !state.homeBuilt;
-        state.spentMaterials += housingCost();
-        state.homeBuilt = true;
-        if (role(selectedFarmer()) !== 'farmer') state.roles[state.farmerId] = 'farmer';
-        if (state.specialize) state.buildingSpecialization = 'farmer';
-        state.assignedCattleIds = [...state.cattleIds];
-        state.shelteredCattleCount = state.assignedCattleIds.length;
+    else if (action === 'toggle-house' && state.workKind !== 'farmyard' && !state.homeBuilt) {
+        state.includeHouse = !state.includeHouse;
+        if (!state.includeHouse) state.specialize = false;
+    } else if (action === 'toggle-specialization') state.specialize = !state.specialize;
+    else if (['confirm-farmyard', 'confirm-work'].includes(action) && materials() >= workTaskCost()) {
+        const worker = selectedWorker();
+        const occupation = state.workOccupation;
+        const builtNow = !state.homeBuilt && state.includeHouse;
+        const changed = role(worker) !== occupation;
+        state.spentMaterials += workTaskCost();
+        state.homeBuilt ||= state.includeHouse;
+        if (changed) state.roles[worker.id] = occupation;
+        if (state.specialize && state.homeBuilt) state.buildingSpecialization = occupation;
+        if (state.workKind === 'farmyard') {
+            state.assignedCattleIds = [...state.cattleIds];
+            state.shelteredCattleCount = state.assignedCattleIds.length;
+        }
         state.selection = 'home';
-        state.result = (builtNow ? 'Home built' : 'Existing home used') + ' · farmer · '
-            + state.shelteredCattleCount + ' cattle sheltered';
+        state.result = occupationLabel(occupation) + (changed ? ' assigned' : ' retained') + ' · '
+            + (builtNow ? 'house built' : state.homeBuilt ? 'existing home used' : 'tent kept')
+            + (state.workKind === 'farmyard' ? ' · ' + state.shelteredCattleCount + ' cattle sheltered' : '');
         state.screen = 'compact';
     } else if (action === 'close') {
         state.screen = state.selection ? 'compact' : 'observe';
