@@ -49,6 +49,11 @@ then applies the exact archived study helper from `1b4ddba3d9ad2e52ad96f6bb8b021
 modules with no browser lighting override. Everything else comes from the implementation
 checkout; this limited override mechanism is not a general historical build emulator.
 
+`sourceHashes` retain the exact Windows checkout bytes used during capture. Git normalizes
+tracked CRLF files to LF. [source-provenance.json](source-provenance.json) records both hashes
+and verifies that the committed source differs only by that newline conversion, so the receipts
+can also be checked against GitHub's LF bytes. The original capture manifests are preserved.
+
 Start two local QA servers, using distinct empty caches and restarting them after source edits:
 
 ```powershell

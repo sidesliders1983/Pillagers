@@ -1,0 +1,54 @@
+{
+  "sourceCommit": "c2f1133941a55f15c12d2fd61ce3ba8a32c0e2b1",
+  "contract": "Captured checkout bytes are unchanged. Git source equals those bytes after CRLF to LF conversion only.",
+  "files": [
+    {
+      "path": "src/core/WorldLighting.ts",
+      "capturedSha256": "80c27282b1bc0d6d33fb9d5190c1f08cbb1eecf5105bf86bb4225c7212ecf04c",
+      "committedLFSha256": "8d8de4b2c7504c551b2cfc1687bfc49e8f275bcc4536e2636102838963c7af0a",
+      "onlyNewlineConversion": true
+    },
+    {
+      "path": "src/core/DirectionalShadowCoverage.ts",
+      "capturedSha256": "706a69e18599d1a6a60e62b8198a14f56efa2a2d6f2ec9aa434478bb8b92c74c",
+      "committedLFSha256": "706a69e18599d1a6a60e62b8198a14f56efa2a2d6f2ec9aa434478bb8b92c74c",
+      "onlyNewlineConversion": false
+    },
+    {
+      "path": "src/config/FjordPresentation.ts",
+      "capturedSha256": "2621528af265c689d9481ee7fdc601945a22c7e69ef72276ae7c0597773db46a",
+      "committedLFSha256": "3776a9219071bee856ddf16676b19990525e86f6978cf12273066f379c471bc9",
+      "onlyNewlineConversion": true
+    },
+    {
+      "path": "src/config/lightingConfig.ts",
+      "capturedSha256": "46e0d7008d8b7fb282552994311f7a2f3b87a559fa1a6daffb4f82ccf75b33f7",
+      "committedLFSha256": "1365c6ead0d78fae7f6f86e4aa388595ea84f9839fc200f4462145ca38cfdd70",
+      "onlyNewlineConversion": true
+    },
+    {
+      "path": "src/fjord-play/FjordPlay.ts",
+      "capturedSha256": "c01fb0bde221d86c56377e4f2482b45782c8131732ce952b57836e55cae2f53b",
+      "committedLFSha256": "ae5e12bd8425c502ff71b8814b3d5cfb2f01c2a02050191945853e8146854d4a",
+      "onlyNewlineConversion": true
+    },
+    {
+      "path": "scripts/qa/fjord-runtime-server.mjs",
+      "capturedSha256": "8933791e917ef91456d4d5fd1d661ee2137bd6b53120ee311177458c98d38bce",
+      "committedLFSha256": "39613ecc11bcdce2ad9c30a9bb28b3b2c784e681c4c46e4df0866a99d8b78376",
+      "onlyNewlineConversion": true
+    },
+    {
+      "path": "scripts/qa/fjord-golden-browser.mjs",
+      "capturedSha256": "df0b6ebd3fd7239bbb9b2a215d97436a5fcd70765d716138f4c1264fedbcfa2e",
+      "committedLFSha256": "7b228203035b12d8fee06e415de6bc20bacefa26bed95748a3410c0b9d302ac5",
+      "onlyNewlineConversion": true
+    },
+    {
+      "path": "scripts/qa/capture-northern-lighting-180.mjs",
+      "capturedSha256": "d81c1beff148891ff9d04516ddaf0b957a0d74fcdaeaf11b800659e6e2f4e838",
+      "committedLFSha256": "d81c1beff148891ff9d04516ddaf0b957a0d74fcdaeaf11b800659e6e2f4e838",
+      "onlyNewlineConversion": false
+    }
+  ]
+}
