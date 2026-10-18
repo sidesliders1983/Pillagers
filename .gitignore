@@ -5,19 +5,18 @@ Assets/
 artifacts/
 tools/
 scratch/
-public/game-assets/*
-# Keep the prepared cattle models available in fresh checkouts.
-!public/game-assets/cattle/
-# Frozen Meshy body LODs are the shared fitting authority and CI fixtures.
-!public/game-assets/human/
-public/model-preview/
+# Runtime publications under public/ are shared with every checkout.
+# Keep original authoring files in the ignored Assets/ directory.
 trellis-test-error.png
 __pycache__/
 scripts/sprites/imagegen-input.local.json
-public/sprites/imagegen-drafts/
 
 # Meshy server-side credentials: never commit or expose through Vite.
 .env.meshy.local
 
 # Local decoded video frames and extraction runtime.
 /output/water-reference/
+
+# Everything published for the browser must survive a fresh checkout.
+!public/
+!public/**

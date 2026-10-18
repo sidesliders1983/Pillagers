@@ -1,28 +1,40 @@
 import { defineConfig } from 'vite';
 import { readFileSync, existsSync, cpSync, mkdirSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
-// Serve the original local kit without relocating or tracking third-party files.
+
+// Scenery is committed in public/. Only the locked Three.js decoder needs a build copy.
 export default defineConfig({
-    optimizeDeps: { entries: ['index.html','src/core/Game.ts','src/environment-lab/EnvironmentLab.ts','src/play/PlayUI.ts','src/gameplay-lab/GameplayLab.ts','src/character-lab/CharacterLab.ts','src/character-lab/MeshyCharacterLab.ts','src/asset-lab/AssetLab.ts'], include: ['three', 'three/addons/loaders/GLTFLoader.js', 'three/addons/controls/OrbitControls.js'] },
+    optimizeDeps: {
+        entries: [
+            'index.html', 'src/core/Game.ts', 'src/environment-lab/EnvironmentLab.ts',
+            'src/play/PlayUI.ts', 'src/gameplay-lab/GameplayLab.ts', 'src/character-lab/CharacterLab.ts',
+            'src/character-lab/MeshyCharacterLab.ts', 'src/asset-lab/AssetLab.ts'
+        ],
+        include: [
+            'three', 'three/addons/loaders/GLTFLoader.js', 'three/addons/controls/OrbitControls.js'
+        ]
+    },
     server: { watch: { ignored: ['**/tools/**', '**/scratch/**', '**/artifacts/**'] } },
-    plugins: [{ name: 'local-world-assets',
-            configureServer(server) {
-                server.middlewares.use((req, res, next) => {
-                    const url = (req.url ?? '').split('?')[0];
-                    const root = url.startsWith('/assets/') ? resolve('Assets') : url.startsWith('/draco/') ? resolve('node_modules/three/examples/jsm/libs/draco/gltf') : null;
-                    if (!root)
-                        return next();
-                    const path = resolve(root, decodeURIComponent(url.replace(/^\/(assets|draco)\//, '')));
-                    if (!path.startsWith(root + sep) || !existsSync(path))
-                        return next();
-                    res.setHeader('Content-Type', path.endsWith('.wasm') ? 'application/wasm' : path.endsWith('.js') ? 'application/javascript' : 'model/gltf-binary');
-                    res.end(readFileSync(path));
-                });
-            },
-            closeBundle() {
-                mkdirSync('dist', { recursive: true });
-                if(existsSync('Assets/Terrain'))cpSync('Assets/Terrain', 'dist/assets/Terrain', { recursive: true });
-                else console.warn('Local scenery kit absent: Character Lab builds normally; supply licensed Assets/ to run the World.');
-                cpSync('node_modules/three/examples/jsm/libs/draco/gltf', 'dist/draco', { recursive: true });
-            }
-        }] });
+    plugins: [{
+        name: 'three-draco-decoder',
+        configureServer(server) {
+            server.middlewares.use((req, res, next) => {
+                const url = (req.url ?? '').split('?')[0];
+                if (!url.startsWith('/draco/')) return next();
+                const root = resolve('node_modules/three/examples/jsm/libs/draco/gltf');
+                const path = resolve(root, decodeURIComponent(url.slice('/draco/'.length)));
+                if (!path.startsWith(root + sep) || !existsSync(path)) return next();
+                res.setHeader('Content-Type', path.endsWith('.wasm')
+                    ? 'application/wasm' : 'application/javascript');
+                res.end(readFileSync(path));
+            });
+        },
+        writeBundle(options) {
+            const output = options.dir ?? 'dist';
+            mkdirSync(output, { recursive: true });
+            cpSync('node_modules/three/examples/jsm/libs/draco/gltf', resolve(output, 'draco'), {
+                recursive: true
+            });
+        }
+    }]
+});

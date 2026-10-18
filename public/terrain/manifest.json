@@ -1,0 +1,1087 @@
+{
+  "schemaVersion": 1,
+  "optimization": "Smallest verified Draco or lossless Meshopt payload; no geometry simplification.",
+  "assets": {
+    "barrel": {
+      "file": "barrel.glb",
+      "bytes": 6088,
+      "sha256": "84396d73fe8b66a36c7452d18d4845334a440a9bc938cf968ed9a49fd19ab812",
+      "bounds": {
+        "min": [
+          -0.25181058049201965,
+          -0.273499995470047,
+          -0.25856073945760727
+        ],
+        "max": [
+          0.2518180310726166,
+          0.273499995470047,
+          0.2585567459464073
+        ]
+      },
+      "triangles": 437,
+      "materials": 1,
+      "source": "Assets/Terrain/barrel.glb",
+      "sourceBytes": 6088,
+      "sourceSha256": "84396d73fe8b66a36c7452d18d4845334a440a9bc938cf968ed9a49fd19ab812",
+      "encoding": "original-draco"
+    },
+    "birch-tree": {
+      "file": "birch-tree.glb",
+      "bytes": 5660,
+      "sha256": "9967a6a0209d3a1659c9ed4ecc2a3f9c478c233e63959eafee2f2a019e06b899",
+      "bounds": {
+        "min": [
+          -1.138644278049469,
+          -2.486804574728012,
+          -1.0919893980026245
+        ],
+        "max": [
+          1.1385359168052673,
+          2.486804574728012,
+          1.09199059009552
+        ]
+      },
+      "triangles": 456,
+      "materials": 1,
+      "source": "Assets/Terrain/birch-tree.glb",
+      "sourceBytes": 5660,
+      "sourceSha256": "9967a6a0209d3a1659c9ed4ecc2a3f9c478c233e63959eafee2f2a019e06b899",
+      "encoding": "original-draco"
+    },
+    "boardwalk-plank": {
+      "file": "boardwalk-plank.glb",
+      "bytes": 6060,
+      "sha256": "2b2d31ce3dde9949064c994eb9d9adfb584a16111087f45776af1bba41198932",
+      "bounds": {
+        "min": [
+          -2,
+          -0.27773174509406084,
+          -2
+        ],
+        "max": [
+          2,
+          0.27772208914160723,
+          2
+        ]
+      },
+      "triangles": 732,
+      "materials": 1,
+      "source": "Assets/Terrain/boardwalk-plank.glb",
+      "sourceBytes": 6060,
+      "sourceSha256": "2b2d31ce3dde9949064c994eb9d9adfb584a16111087f45776af1bba41198932",
+      "encoding": "original-draco"
+    },
+    "boathouse-naust": {
+      "file": "boathouse-naust.glb",
+      "bytes": 9796,
+      "sha256": "09d7675e547b55923305397261a6dfe824153ad36841309c5beaa96b5bd2d5d6",
+      "bounds": {
+        "min": [
+          -2.2731456756591797,
+          -1.9753660154342647,
+          -4.900000095367432
+        ],
+        "max": [
+          2.2730302810668945,
+          1.9756196928024288,
+          4.900000095367432
+        ]
+      },
+      "triangles": 1648,
+      "materials": 1,
+      "source": "Assets/Terrain/boathouse-naust.glb",
+      "sourceBytes": 9796,
+      "sourceSha256": "09d7675e547b55923305397261a6dfe824153ad36841309c5beaa96b5bd2d5d6",
+      "encoding": "original-draco"
+    },
+    "boulder": {
+      "file": "boulder.glb",
+      "bytes": 5004,
+      "sha256": "b82d92ce5e59ccbc606c71a91c92b927af8e969406c642e202dfc2bffdd95829",
+      "bounds": {
+        "min": [
+          -0.9618751704692841,
+          -0.5568989012390375,
+          -0.8130615949630737
+        ],
+        "max": [
+          0.9618752300739288,
+          0.55686373449862,
+          0.8130199909210205
+        ]
+      },
+      "triangles": 384,
+      "materials": 1,
+      "source": "Assets/Terrain/boulder.glb",
+      "sourceBytes": 5004,
+      "sourceSha256": "b82d92ce5e59ccbc606c71a91c92b927af8e969406c642e202dfc2bffdd95829",
+      "encoding": "original-draco"
+    },
+    "cooking-hearth": {
+      "file": "cooking-hearth.glb",
+      "bytes": 5492,
+      "sha256": "76108020456c7cf40cb546a41c1b206159884ade446741c46962c48de1764575",
+      "bounds": {
+        "min": [
+          -0.6318837702274323,
+          -0.6456866357475519,
+          -0.620357096195221
+        ],
+        "max": [
+          0.6319011151790619,
+          0.6456866357475519,
+          0.6203323006629944
+        ]
+      },
+      "triangles": 461,
+      "materials": 1,
+      "source": "Assets/Terrain/cooking-hearth.glb",
+      "sourceBytes": 5492,
+      "sourceSha256": "76108020456c7cf40cb546a41c1b206159884ade446741c46962c48de1764575",
+      "encoding": "original-draco"
+    },
+    "dirt-path-ground": {
+      "file": "dirt-path-ground.glb",
+      "bytes": 3988,
+      "sha256": "0fe4c983d0b99de39c38ce04ff25cc8824a467cc8a47f13a72853ee5b4dbb637",
+      "bounds": {
+        "min": [
+          -2,
+          -0.27080255612730975,
+          -2
+        ],
+        "max": [
+          2,
+          0.2707343684136867,
+          2
+        ]
+      },
+      "triangles": 348,
+      "materials": 1,
+      "source": "Assets/Terrain/dirt-path-ground.glb",
+      "sourceBytes": 3988,
+      "sourceSha256": "0fe4c983d0b99de39c38ce04ff25cc8824a467cc8a47f13a72853ee5b4dbb637",
+      "encoding": "original-draco"
+    },
+    "faering-rowboat": {
+      "file": "faering-rowboat.glb",
+      "bytes": 7112,
+      "sha256": "0ba8c8e764c2d08ed8052f67db136032958c60c6108439a1c34576f1eed931ce",
+      "bounds": {
+        "min": [
+          -0.6619383096694946,
+          -0.590460910461843,
+          -2.47717547416687
+        ],
+        "max": [
+          0.6620041131973267,
+          0.5904425522312522,
+          2.47717547416687
+        ]
+      },
+      "triangles": 730,
+      "materials": 1,
+      "source": "Assets/Terrain/faering-rowboat.glb",
+      "sourceBytes": 7112,
+      "sourceSha256": "0ba8c8e764c2d08ed8052f67db136032958c60c6108439a1c34576f1eed931ce",
+      "encoding": "original-draco"
+    },
+    "fish-drying-rack": {
+      "file": "fish-drying-rack.glb",
+      "bytes": 13556,
+      "sha256": "19f2ea6ac69bc77d15709a72013a3a77db44184c4ece57fc5ec1ccfb2f60a0b5",
+      "bounds": {
+        "min": [
+          -1.7999999523162842,
+          -1.3275770572945476,
+          -0.8015411198139191
+        ],
+        "max": [
+          1.7999999523162842,
+          1.3275408176705241,
+          0.8014620244503021
+        ]
+      },
+      "triangles": 1372,
+      "materials": 1,
+      "source": "Assets/Terrain/fish-drying-rack.glb",
+      "sourceBytes": 13556,
+      "sourceSha256": "19f2ea6ac69bc77d15709a72013a3a77db44184c4ece57fc5ec1ccfb2f60a0b5",
+      "encoding": "original-draco"
+    },
+    "fjord-cliff-rock": {
+      "file": "fjord-cliff-rock.glb",
+      "bytes": 5468,
+      "sha256": "48ea8e66651d6a0327e6da21e40afb80d5fe7d4e606c3a05b03be384fb32b580",
+      "bounds": {
+        "min": [
+          -1.8930218815803528,
+          -1.823661932721734,
+          -1.5064143240451813
+        ],
+        "max": [
+          1.8930217623710632,
+          1.8237241599708796,
+          1.5063826143741608
+        ]
+      },
+      "triangles": 516,
+      "materials": 1,
+      "source": "Assets/Terrain/fjord-cliff-rock.glb",
+      "sourceBytes": 5468,
+      "sourceSha256": "48ea8e66651d6a0327e6da21e40afb80d5fe7d4e606c3a05b03be384fb32b580",
+      "encoding": "original-draco"
+    },
+    "fjord-turf-tile": {
+      "file": "fjord-turf-tile.glb",
+      "bytes": 4624,
+      "sha256": "9ab70e641eb3e2be659ffd3c16c9c6c3b9e3cf6857f1726e3b2bcbb7041bc9ec",
+      "bounds": {
+        "min": [
+          -2,
+          -0.2769679115712642,
+          -2
+        ],
+        "max": [
+          2,
+          0.2770209597051143,
+          2
+        ]
+      },
+      "triangles": 464,
+      "materials": 1,
+      "source": "Assets/Terrain/fjord-turf-tile.glb",
+      "sourceBytes": 4624,
+      "sourceSha256": "9ab70e641eb3e2be659ffd3c16c9c6c3b9e3cf6857f1726e3b2bcbb7041bc9ec",
+      "encoding": "original-draco"
+    },
+    "grass-tuft": {
+      "file": "grass-tuft.glb",
+      "bytes": 4100,
+      "sha256": "8746782194c2abca3fef00580199433f01bf506d24dbfe24d497c933207391c4",
+      "bounds": {
+        "min": [
+          -0.25654386729002,
+          -0.3776785412337631,
+          -0.22747691720724106
+        ],
+        "max": [
+          0.256525419652462,
+          0.3776785412337631,
+          0.2274986132979393
+        ]
+      },
+      "triangles": 314,
+      "materials": 1,
+      "source": "Assets/Terrain/grass-tuft.glb",
+      "sourceBytes": 4100,
+      "sourceSha256": "8746782194c2abca3fef00580199433f01bf506d24dbfe24d497c933207391c4",
+      "encoding": "original-draco"
+    },
+    "great-hall": {
+      "file": "great-hall.glb",
+      "bytes": 12016,
+      "sha256": "c8ac72b48b9ec138f622dfc0f54a5040da96210a6c630f580662ff00b35161df",
+      "bounds": {
+        "min": [
+          -2.9729586839675903,
+          -2.722115741111338,
+          -4.141387462615967
+        ],
+        "max": [
+          2.973065733909607,
+          2.721875892020762,
+          4.141387462615967
+        ]
+      },
+      "triangles": 1656,
+      "materials": 1,
+      "source": "Assets/Terrain/great-hall.glb",
+      "sourceBytes": 12016,
+      "sourceSha256": "c8ac72b48b9ec138f622dfc0f54a5040da96210a6c630f580662ff00b35161df",
+      "encoding": "original-draco"
+    },
+    "ground-slope-tile": {
+      "file": "ground-slope-tile.glb",
+      "bytes": 5592,
+      "sha256": "44751fd3dceda7594d3f5e918aa6e55bbedda5a5e2271096cbb8cdef299aa98c",
+      "bounds": {
+        "min": [
+          -2,
+          -0.8204370766878128,
+          -2
+        ],
+        "max": [
+          2,
+          0.8205322057008744,
+          2
+        ]
+      },
+      "triangles": 596,
+      "materials": 1,
+      "source": "Assets/Terrain/ground-slope-tile.glb",
+      "sourceBytes": 5592,
+      "sourceSha256": "44751fd3dceda7594d3f5e918aa6e55bbedda5a5e2271096cbb8cdef299aa98c",
+      "encoding": "original-draco"
+    },
+    "harbor-marker-post": {
+      "file": "harbor-marker-post.glb",
+      "bytes": 5136,
+      "sha256": "5a77fb6d6e084f01f1bb1dbe6ece73cc13f77683119614474b01c0d84661d0ae",
+      "bounds": {
+        "min": [
+          -0.331188827753067,
+          -1.4164999816566706,
+          -0.2940370514988899
+        ],
+        "max": [
+          0.3311068117618561,
+          1.4164999816566706,
+          0.2940746024250984
+        ]
+      },
+      "triangles": 462,
+      "materials": 1,
+      "source": "Assets/Terrain/harbor-marker-post.glb",
+      "sourceBytes": 5136,
+      "sourceSha256": "5a77fb6d6e084f01f1bb1dbe6ece73cc13f77683119614474b01c0d84661d0ae",
+      "encoding": "original-draco"
+    },
+    "hay-bale": {
+      "file": "hay-bale.glb",
+      "bytes": 3496,
+      "sha256": "651682b5070a51135f9407769ab87545900aef06d808ff8b9b2ab3498fc25212",
+      "bounds": {
+        "min": [
+          -0.5713885426521301,
+          -0.3165539805777371,
+          -0.3687428832054138
+        ],
+        "max": [
+          0.5713885426521301,
+          0.31653180764988065,
+          0.36876440048217773
+        ]
+      },
+      "triangles": 292,
+      "materials": 1,
+      "source": "Assets/Terrain/hay-bale.glb",
+      "sourceBytes": 3496,
+      "sourceSha256": "651682b5070a51135f9407769ab87545900aef06d808ff8b9b2ab3498fc25212",
+      "encoding": "original-draco"
+    },
+    "heather-shrub": {
+      "file": "heather-shrub.glb",
+      "bytes": 5208,
+      "sha256": "5ee75f30d1793cd9fde1b251cd1af034ffd2cca505b5b130f47effe064a9d022",
+      "bounds": {
+        "min": [
+          -0.44798266887664795,
+          -0.28052848775405437,
+          -0.501855343580246
+        ],
+        "max": [
+          0.44796228408813477,
+          0.28053987224120647,
+          0.5018554031848907
+        ]
+      },
+      "triangles": 416,
+      "materials": 1,
+      "source": "Assets/Terrain/heather-shrub.glb",
+      "sourceBytes": 5208,
+      "sourceSha256": "5ee75f30d1793cd9fde1b251cd1af034ffd2cca505b5b130f47effe064a9d022",
+      "encoding": "original-draco"
+    },
+    "jetty-pier": {
+      "file": "jetty-pier.glb",
+      "bytes": 6108,
+      "sha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3",
+      "bounds": {
+        "min": [
+          -2,
+          -0.7275000256299973,
+          -2
+        ],
+        "max": [
+          2,
+          0.7274227780103684,
+          2
+        ]
+      },
+      "triangles": 998,
+      "materials": 1,
+      "source": "Assets/Terrain/jetty-pier.glb",
+      "sourceBytes": 6108,
+      "sourceSha256": "3f80cd720c6f61dc2a840c1feb8b02dcd39db3d6981093696f98f269f9142ef3",
+      "encoding": "original-draco"
+    },
+    "log-pile": {
+      "file": "log-pile.glb",
+      "bytes": 4792,
+      "sha256": "a0f90e16cb5bf356cbc05729e61c084401451c3f4828d08b29305b42136aa74a",
+      "bounds": {
+        "min": [
+          -1.4273147583007812,
+          -0.6185376906068996,
+          -1.014001190662384
+        ],
+        "max": [
+          1.4273147583007812,
+          0.6185905003221706,
+          1.0140177607536316
+        ]
+      },
+      "triangles": 492,
+      "materials": 1,
+      "source": "Assets/Terrain/log-pile.glb",
+      "sourceBytes": 4792,
+      "sourceSha256": "a0f90e16cb5bf356cbc05729e61c084401451c3f4828d08b29305b42136aa74a",
+      "encoding": "original-draco"
+    },
+    "longship-drakkar": {
+      "file": "longship-drakkar.glb",
+      "bytes": 11940,
+      "sha256": "65a6e64e463ce78b50dfe266fae2c7e9a8578a57b7a6da80ff1cc8bc1d18dc35",
+      "bounds": {
+        "min": [
+          -1.7400000095367432,
+          -2.6000001057982445,
+          -7.2330546379089355
+        ],
+        "max": [
+          1.7398838996887207,
+          2.5999581441283226,
+          7.2330546379089355
+        ]
+      },
+      "triangles": 1291,
+      "materials": 1,
+      "source": "Assets/Terrain/longship-drakkar.glb",
+      "sourceBytes": 11940,
+      "sourceSha256": "65a6e64e463ce78b50dfe266fae2c7e9a8578a57b7a6da80ff1cc8bc1d18dc35",
+      "encoding": "original-draco"
+    },
+    "market-stall": {
+      "file": "market-stall.glb",
+      "bytes": 4604,
+      "sha256": "d55b81e0bca6bb9bcf8a98f980d9626f8bc22db841668d57abcd2ee08d2b19cf",
+      "bounds": {
+        "min": [
+          -1.0199999809265137,
+          -1.119279987812042,
+          -0.6112710237503052
+        ],
+        "max": [
+          1.0200231075286865,
+          1.119279987812042,
+          0.6112399101257324
+        ]
+      },
+      "triangles": 496,
+      "materials": 1,
+      "source": "Assets/Terrain/market-stall.glb",
+      "sourceBytes": 4604,
+      "sourceSha256": "d55b81e0bca6bb9bcf8a98f980d9626f8bc22db841668d57abcd2ee08d2b19cf",
+      "encoding": "original-draco"
+    },
+    "palisade-corner": {
+      "file": "palisade-corner.glb",
+      "bytes": 8460,
+      "sha256": "310dffaca7191c9822091cad239d9dfe3d312dd273211d1cc40a022a5cd21dab",
+      "bounds": {
+        "min": [
+          -1.230091780424118,
+          -1.8566615730524063,
+          -1.1819476634263992
+        ],
+        "max": [
+          1.2300443947315216,
+          1.8566615730524063,
+          1.1818592995405197
+        ]
+      },
+      "triangles": 1008,
+      "materials": 1,
+      "source": "Assets/Terrain/palisade-corner.glb",
+      "sourceBytes": 8460,
+      "sourceSha256": "310dffaca7191c9822091cad239d9dfe3d312dd273211d1cc40a022a5cd21dab",
+      "encoding": "original-draco"
+    },
+    "palisade-gate": {
+      "file": "palisade-gate.glb",
+      "bytes": 11300,
+      "sha256": "5884119a13f2806b3c772b2618e0050b34d309c20e83573cd16fff6889fab082",
+      "bounds": {
+        "min": [
+          -2.0634647607803345,
+          -2.049413057975471,
+          -0.6784395575523376
+        ],
+        "max": [
+          2.0634645223617554,
+          2.049302908591926,
+          0.6785627007484436
+        ]
+      },
+      "triangles": 1604,
+      "materials": 1,
+      "source": "Assets/Terrain/palisade-gate.glb",
+      "sourceBytes": 11300,
+      "sourceSha256": "5884119a13f2806b3c772b2618e0050b34d309c20e83573cd16fff6889fab082",
+      "encoding": "original-draco"
+    },
+    "palisade-torch": {
+      "file": "palisade-torch.glb",
+      "bytes": 5236,
+      "sha256": "05c27ebb7784d2a6f45bc1aa4baed71f217ba1e60b71e180819a946e8ff22606",
+      "bounds": {
+        "min": [
+          -0.2512294799089432,
+          -1.1723709704820067,
+          -0.2708238959312439
+        ],
+        "max": [
+          0.25126634538173676,
+          1.1723709704820067,
+          0.27088695764541626
+        ]
+      },
+      "triangles": 461,
+      "materials": 1,
+      "source": "Assets/Terrain/palisade-torch.glb",
+      "sourceBytes": 5236,
+      "sourceSha256": "05c27ebb7784d2a6f45bc1aa4baed71f217ba1e60b71e180819a946e8ff22606",
+      "encoding": "original-draco"
+    },
+    "palisade-wall": {
+      "file": "palisade-wall.glb",
+      "bytes": 7276,
+      "sha256": "2431a96f62b9406dec48d768881724dfebdcd79a2eedfa50587ad34cadee2455",
+      "bounds": {
+        "min": [
+          -2.046905040740967,
+          -1.6204508692026138,
+          -0.5146161690354347
+        ],
+        "max": [
+          2.046905040740967,
+          1.6205133348703384,
+          0.5146461352705956
+        ]
+      },
+      "triangles": 796,
+      "materials": 1,
+      "source": "Assets/Terrain/palisade-wall.glb",
+      "sourceBytes": 7276,
+      "sourceSha256": "2431a96f62b9406dec48d768881724dfebdcd79a2eedfa50587ad34cadee2455",
+      "encoding": "original-draco"
+    },
+    "road-dirt-4way": {
+      "file": "road-dirt-4way.glb",
+      "bytes": 5500,
+      "sha256": "c383a0bda2d5718c191f03c92a521f9abce2d5296615ae70d63450a168199e0e",
+      "bounds": {
+        "min": [
+          -2,
+          -0.27156975835561753,
+          -2
+        ],
+        "max": [
+          2,
+          0.27167627185583115,
+          2
+        ]
+      },
+      "triangles": 524,
+      "materials": 1,
+      "source": "Assets/Terrain/road-dirt-4way.glb",
+      "sourceBytes": 5500,
+      "sourceSha256": "c383a0bda2d5718c191f03c92a521f9abce2d5296615ae70d63450a168199e0e",
+      "encoding": "original-draco"
+    },
+    "road-dirt-corner": {
+      "file": "road-dirt-corner.glb",
+      "bytes": 5104,
+      "sha256": "28ab3d7282433f976d96205cbee822b01af919f2b9a44e619eaf22ef9d5394d8",
+      "bounds": {
+        "min": [
+          -2,
+          -0.2758238610625267,
+          -2
+        ],
+        "max": [
+          2,
+          0.27572348684072495,
+          2
+        ]
+      },
+      "triangles": 508,
+      "materials": 1,
+      "source": "Assets/Terrain/road-dirt-corner.glb",
+      "sourceBytes": 5104,
+      "sourceSha256": "28ab3d7282433f976d96205cbee822b01af919f2b9a44e619eaf22ef9d5394d8",
+      "encoding": "original-draco"
+    },
+    "road-dirt-straight": {
+      "file": "road-dirt-straight.glb",
+      "bytes": 3092,
+      "sha256": "deed6c4a9a98ab72846c27f81aabc793657223323d6e5aa6e8c75997d70a2010",
+      "bounds": {
+        "min": [
+          -2,
+          -0.2733822163939476,
+          -2
+        ],
+        "max": [
+          2,
+          0.2732820209860802,
+          2
+        ]
+      },
+      "triangles": 240,
+      "materials": 1,
+      "source": "Assets/Terrain/road-dirt-straight.glb",
+      "sourceBytes": 3092,
+      "sourceSha256": "deed6c4a9a98ab72846c27f81aabc793657223323d6e5aa6e8c75997d70a2010",
+      "encoding": "original-draco"
+    },
+    "road-dirt-t": {
+      "file": "road-dirt-t.glb",
+      "bytes": 4096,
+      "sha256": "db45b756120d957a14db1c7cd1e9b0ac145aaf94a183dedaeb5d2eb4788c120c",
+      "bounds": {
+        "min": [
+          -2,
+          -0.2747088369727135,
+          -2
+        ],
+        "max": [
+          2,
+          0.27464106649160386,
+          2
+        ]
+      },
+      "triangles": 360,
+      "materials": 1,
+      "source": "Assets/Terrain/road-dirt-t.glb",
+      "sourceBytes": 4096,
+      "sourceSha256": "db45b756120d957a14db1c7cd1e9b0ac145aaf94a183dedaeb5d2eb4788c120c",
+      "encoding": "original-draco"
+    },
+    "rock-cluster": {
+      "file": "rock-cluster.glb",
+      "bytes": 5948,
+      "sha256": "65bd90c30da862822254b42c3cec40d9a37726dc1f73d5685a1c3dd51e4f4a6a",
+      "bounds": {
+        "min": [
+          -0.7800568640232086,
+          -0.3309903834015131,
+          -0.7866756618022919
+        ],
+        "max": [
+          0.7800416648387909,
+          0.3309831116348505,
+          0.7866757214069366
+        ]
+      },
+      "triangles": 444,
+      "materials": 1,
+      "source": "Assets/Terrain/rock-cluster.glb",
+      "sourceBytes": 5948,
+      "sourceSha256": "65bd90c30da862822254b42c3cec40d9a37726dc1f73d5685a1c3dd51e4f4a6a",
+      "encoding": "original-draco"
+    },
+    "runestone": {
+      "file": "runestone.glb",
+      "bytes": 6500,
+      "sha256": "24de6bc269b1c01bba21c4815c04e3efebfb3747b054f01d167c9db7b81fb3e3",
+      "bounds": {
+        "min": [
+          -0.6041025817394257,
+          -1.2283302638679743,
+          -0.6322991251945496
+        ],
+        "max": [
+          0.6040591299533844,
+          1.2283302638679743,
+          0.6322445273399353
+        ]
+      },
+      "triangles": 908,
+      "materials": 1,
+      "source": "Assets/Terrain/runestone.glb",
+      "sourceBytes": 6500,
+      "sourceSha256": "24de6bc269b1c01bba21c4815c04e3efebfb3747b054f01d167c9db7b81fb3e3",
+      "encoding": "original-draco"
+    },
+    "shield-rack": {
+      "file": "shield-rack.glb",
+      "bytes": 5172,
+      "sha256": "4eca186ef8ac5aa1aec131a82a4ca7aac1ca0d25272d4071d88d6af1f52dc3d5",
+      "bounds": {
+        "min": [
+          -1,
+          -0.5749999877437949,
+          -0.25999999046325684
+        ],
+        "max": [
+          1,
+          0.5749725696071982,
+          0.26005125045776367
+        ]
+      },
+      "triangles": 812,
+      "materials": 1,
+      "source": "Assets/Terrain/shield-rack.glb",
+      "sourceBytes": 5172,
+      "sourceSha256": "4eca186ef8ac5aa1aec131a82a4ca7aac1ca0d25272d4071d88d6af1f52dc3d5",
+      "encoding": "original-draco"
+    },
+    "shore-corner-in-fjord": {
+      "file": "shore-corner-in-fjord.glb",
+      "bytes": 6004,
+      "sha256": "15ffce461634aa675c9851cb9911a961bc49a24a7d65ead4092929f31898fcee",
+      "bounds": {
+        "min": [
+          -2,
+          -0.27741238512098787,
+          -2.024703025817871
+        ],
+        "max": [
+          1.999971628189087,
+          0.27748695053160194,
+          2.024703025817871
+        ]
+      },
+      "triangles": 690,
+      "materials": 1,
+      "source": "Assets/Terrain/shore-corner-in-fjord.glb",
+      "sourceBytes": 6004,
+      "sourceSha256": "15ffce461634aa675c9851cb9911a961bc49a24a7d65ead4092929f31898fcee",
+      "encoding": "original-draco"
+    },
+    "shore-corner-out-fjord": {
+      "file": "shore-corner-out-fjord.glb",
+      "bytes": 6284,
+      "sha256": "ae3911fc933b285a2bb1c2279d2085731482b7c9dfc90dafaac5d6020f808d0f",
+      "bounds": {
+        "min": [
+          -2,
+          -0.27691227234899995,
+          -2
+        ],
+        "max": [
+          2,
+          0.27683246172964576,
+          2
+        ]
+      },
+      "triangles": 758,
+      "materials": 1,
+      "source": "Assets/Terrain/shore-corner-out-fjord.glb",
+      "sourceBytes": 6284,
+      "sourceSha256": "ae3911fc933b285a2bb1c2279d2085731482b7c9dfc90dafaac5d6020f808d0f",
+      "encoding": "original-draco"
+    },
+    "shore-straight-fjord": {
+      "file": "shore-straight-fjord.glb",
+      "bytes": 5536,
+      "sha256": "df8314e67ab19a5c1a27c86ec0e7a83765b656a59a3a4fa631356bddc818e541",
+      "bounds": {
+        "min": [
+          -2,
+          -0.27411145009100435,
+          -2
+        ],
+        "max": [
+          2,
+          0.2740176919847727,
+          2
+        ]
+      },
+      "triangles": 644,
+      "materials": 1,
+      "source": "Assets/Terrain/shore-straight-fjord.glb",
+      "sourceBytes": 5536,
+      "sourceSha256": "df8314e67ab19a5c1a27c86ec0e7a83765b656a59a3a4fa631356bddc818e541",
+      "encoding": "original-draco"
+    },
+    "sky-aurora-night-dome": {
+      "file": "sky-aurora-night-dome.glb",
+      "bytes": 13844,
+      "sha256": "f72f1ff4ad1907cd03b2b25fb0d591c6babec8377ba930387c67547be8c1adf4",
+      "bounds": {
+        "min": [
+          -2.5999999046325684,
+          -1.3108503818511963,
+          -2.5395171642303467
+        ],
+        "max": [
+          2.5999999046325684,
+          1.3108916282653806,
+          2.5395524501800537
+        ]
+      },
+      "triangles": 2782,
+      "materials": 1,
+      "source": "Assets/Terrain/sky-aurora-night-dome.glb",
+      "sourceBytes": 13844,
+      "sourceSha256": "f72f1ff4ad1907cd03b2b25fb0d591c6babec8377ba930387c67547be8c1adf4",
+      "encoding": "original-draco"
+    },
+    "sky-fjord-day-dome": {
+      "file": "sky-fjord-day-dome.glb",
+      "bytes": 8100,
+      "sha256": "d4baf27a862ee891b93dfb303cb27565ef263d797102e44236e7ff3ec04a3bca",
+      "bounds": {
+        "min": [
+          -2.5999999046325684,
+          -1.2999999523162842,
+          -2.5348126888275146
+        ],
+        "max": [
+          2.5999999046325684,
+          1.3001587390899656,
+          2.5347349643707275
+        ]
+      },
+      "triangles": 1142,
+      "materials": 1,
+      "source": "Assets/Terrain/sky-fjord-day-dome.glb",
+      "sourceBytes": 8100,
+      "sourceSha256": "d4baf27a862ee891b93dfb303cb27565ef263d797102e44236e7ff3ec04a3bca",
+      "encoding": "original-draco"
+    },
+    "smithy-forge": {
+      "file": "smithy-forge.glb",
+      "bytes": 10896,
+      "sha256": "60f11948737accdada1dae45c913f9df407912bbf0b08463356a70574596d9c7",
+      "bounds": {
+        "min": [
+          -1.7999999523162842,
+          -1.6074736276641488,
+          -1.4700000286102295
+        ],
+        "max": [
+          1.7999999523162842,
+          1.607542053796351,
+          1.4699010848999023
+        ]
+      },
+      "triangles": 1517,
+      "materials": 1,
+      "source": "Assets/Terrain/smithy-forge.glb",
+      "sourceBytes": 10896,
+      "sourceSha256": "60f11948737accdada1dae45c913f9df407912bbf0b08463356a70574596d9c7",
+      "encoding": "original-draco"
+    },
+    "spruce-tree": {
+      "file": "spruce-tree.glb",
+      "bytes": 3556,
+      "sha256": "f14f210dddae06e7b61315dfec6351e0cc963b7a7ba3a656c541227d98326b25",
+      "bounds": {
+        "min": [
+          -1.2938470840454102,
+          -3.1044473533984274,
+          -1.3144685626029968
+        ],
+        "max": [
+          1.2938556671142578,
+          3.1044473533984274,
+          1.3145435452461243
+        ]
+      },
+      "triangles": 244,
+      "materials": 1,
+      "source": "Assets/Terrain/spruce-tree.glb",
+      "sourceBytes": 3556,
+      "sourceSha256": "f14f210dddae06e7b61315dfec6351e0cc963b7a7ba3a656c541227d98326b25",
+      "encoding": "original-draco"
+    },
+    "stabbur-storehouse": {
+      "file": "stabbur-storehouse.glb",
+      "bytes": 12412,
+      "sha256": "eb58a7d3e815c59dfaeabb892719a367d8b6dded21b3cc605d3aab4d8b848a59",
+      "bounds": {
+        "min": [
+          -1.5800000429153442,
+          -2.2923884205520153,
+          -2.208500027656555
+        ],
+        "max": [
+          1.5800622701644897,
+          2.2923884205520153,
+          2.2083672285079956
+        ]
+      },
+      "triangles": 1528,
+      "materials": 1,
+      "source": "Assets/Terrain/stabbur-storehouse.glb",
+      "sourceBytes": 12412,
+      "sourceSha256": "eb58a7d3e815c59dfaeabb892719a367d8b6dded21b3cc605d3aab4d8b848a59",
+      "encoding": "original-draco"
+    },
+    "standing-stone-ring": {
+      "file": "standing-stone-ring.glb",
+      "bytes": 13252,
+      "sha256": "7e0aa658962c654571d130c7fd6355b7f1959d37654e529b0aa115cfe633810b",
+      "bounds": {
+        "min": [
+          -3.5404574871063232,
+          -1.5439808461815119,
+          -3.3499999046325684
+        ],
+        "max": [
+          3.5404574871063232,
+          1.5441675279289484,
+          3.3501367568969727
+        ]
+      },
+      "triangles": 1532,
+      "materials": 1,
+      "source": "Assets/Terrain/standing-stone-ring.glb",
+      "sourceBytes": 13252,
+      "sourceSha256": "7e0aa658962c654571d130c7fd6355b7f1959d37654e529b0aa115cfe633810b",
+      "encoding": "original-draco"
+    },
+    "storage-crate": {
+      "file": "storage-crate.glb",
+      "bytes": 4640,
+      "sha256": "5a56130cd2f586071a798a8ec26aa23f3f7ec4b30ef202767d8d9f92e3b08db5",
+      "bounds": {
+        "min": [
+          -0.38552626967430115,
+          -0.3165027799084782,
+          -0.3180258721113205
+        ],
+        "max": [
+          0.38552626967430115,
+          0.3165105285122991,
+          0.31804658472537994
+        ]
+      },
+      "triangles": 486,
+      "materials": 1,
+      "source": "Assets/Terrain/storage-crate.glb",
+      "sourceBytes": 4640,
+      "sourceSha256": "5a56130cd2f586071a798a8ec26aa23f3f7ec4b30ef202767d8d9f92e3b08db5",
+      "encoding": "original-draco"
+    },
+    "stream-beck": {
+      "file": "stream-beck.glb",
+      "bytes": 8064,
+      "sha256": "45d20285fd5787f3d87685bd159e92ef25355fe3a50d721e4e3fe83098728403",
+      "bounds": {
+        "min": [
+          -2,
+          -0.33521292731165886,
+          -2
+        ],
+        "max": [
+          2,
+          0.33523814007639885,
+          2
+        ]
+      },
+      "triangles": 928,
+      "materials": 1,
+      "source": "Assets/Terrain/stream-beck.glb",
+      "sourceBytes": 8064,
+      "sourceSha256": "45d20285fd5787f3d87685bd159e92ef25355fe3a50d721e4e3fe83098728403",
+      "encoding": "original-draco"
+    },
+    "turf-dwelling": {
+      "file": "turf-dwelling.glb",
+      "bytes": 10292,
+      "sha256": "8265a32562044f38b40936135b0f1ca5c1b28c6f5b768b701823f64344f0406c",
+      "bounds": {
+        "min": [
+          -1.8056913614273071,
+          -1.954306423664093,
+          -2.167981743812561
+        ],
+        "max": [
+          1.8056262731552124,
+          1.9542270302772522,
+          2.167981505393982
+        ]
+      },
+      "triangles": 1348,
+      "materials": 1,
+      "source": "Assets/Terrain/turf-dwelling.glb",
+      "sourceBytes": 10292,
+      "sourceSha256": "8265a32562044f38b40936135b0f1ca5c1b28c6f5b768b701823f64344f0406c",
+      "encoding": "original-draco"
+    },
+    "village-well": {
+      "file": "village-well.glb",
+      "bytes": 5568,
+      "sha256": "3101276ff569871836bf015078df34700374be0ebcb05fbad31eb82d35fade98",
+      "bounds": {
+        "min": [
+          -0.784550666809082,
+          -1.1024999690055846,
+          -0.6670225858688354
+        ],
+        "max": [
+          0.7845081090927124,
+          1.1024999690055846,
+          0.6670408248901367
+        ]
+      },
+      "triangles": 469,
+      "materials": 1,
+      "source": "Assets/Terrain/village-well.glb",
+      "sourceBytes": 5568,
+      "sourceSha256": "3101276ff569871836bf015078df34700374be0ebcb05fbad31eb82d35fade98",
+      "encoding": "original-draco"
+    },
+    "water-open-fjord": {
+      "file": "water-open-fjord.glb",
+      "bytes": 2388,
+      "sha256": "80367000d85e7c9cadf3aeed995826246489ad78ee5e7848e89ec0923952d48a",
+      "bounds": {
+        "min": [
+          -2,
+          -0.05999999903142453,
+          -2
+        ],
+        "max": [
+          2,
+          0.05988036505877972,
+          2
+        ]
+      },
+      "triangles": 332,
+      "materials": 1,
+      "source": "Assets/Terrain/water-open-fjord.glb",
+      "sourceBytes": 2388,
+      "sourceSha256": "80367000d85e7c9cadf3aeed995826246489ad78ee5e7848e89ec0923952d48a",
+      "encoding": "original-draco"
+    },
+    "waypost": {
+      "file": "waypost.glb",
+      "bytes": 5352,
+      "sha256": "e3d63b6e741604a2e30d5a0ef2f77dc71ce00f2ab0e4be56c275800163a03710",
+      "bounds": {
+        "min": [
+          -0.5198503732681274,
+          -1.1200000140815973,
+          -0.5306532233953476
+        ],
+        "max": [
+          0.519822359085083,
+          1.1200000140815973,
+          0.5306224972009659
+        ]
+      },
+      "triangles": 460,
+      "materials": 1,
+      "source": "Assets/Terrain/waypost.glb",
+      "sourceBytes": 5352,
+      "sourceSha256": "e3d63b6e741604a2e30d5a0ef2f77dc71ce00f2ab0e4be56c275800163a03710",
+      "encoding": "original-draco"
+    }
+  }
+}

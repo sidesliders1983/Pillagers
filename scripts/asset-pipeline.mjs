@@ -28,7 +28,7 @@ if(action==='nature'){
     if(sourceName===report.lods[0].file)throw new Error('Invalid LOD0 filename');
     const assets=[{...report.source,label:'Source',file:sourceName},...report.lods];
     const files=[resolve(source),...report.lods.map(lod=>resolve(dirname(reportFile),lod.file))];
-    // Validate the entire set before copying. Assets stay local and ignored by Git.
+    // Validate the entire set before copying. Commit the public benchmark with its runtime files.
     for(let i=0;i<assets.length;i++){
         if(!/^[\w.-]+\.glb$/.test(assets[i].file)||!existsSync(files[i]))throw new Error('Missing or invalid local GLB');
         if(createHash('sha256').update(readFileSync(files[i])).digest('hex')!==assets[i].sha256)throw new Error('GLB does not match report: '+files[i]);

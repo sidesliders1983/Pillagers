@@ -1,0 +1,1165 @@
+{
+  "sourceAssetsPresent": false,
+  "desktopOnly": true,
+  "hashes": {
+    "src/core/AssetManager.ts": "788257845c2c8a8e8586920af45881cbb1616babb3119254d30269eafb1d8f88",
+    "src/fjord-play/FjordModels.ts": "e4c6867966aa1dbe9fb7b5402a28e7377c5400782dae1bf9d5d8dd30037fa922",
+    "vite.config.ts": "77346135527033a986186e18d783e8089aebbe6aeeaace33718b7befadd2f35d",
+    "src/config/TerrainAssets.ts": "9ed1cb6b179fdebe1389dc504c28ed76499fd0f1f93950d4fbd90dc4de974680",
+    "scripts/validate-public-assets.mjs": "0870e2845764888ed6ba62f9c4bdd7e2034a81e0a162dc50ee4e514475a036ae"
+  },
+  "results": [
+    {
+      "origin": "http://127.0.0.1:5320",
+      "route": "/",
+      "loadMs": 8453,
+      "errors": [],
+      "resources": [
+        {
+          "path": "/game-assets/houses/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/terrain/spruce-tree.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/birch-tree.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/boulder.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/fjord-cliff-rock.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/stabbur-storehouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/cooking-hearth.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/village-well.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/log-pile.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/barrel.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/storage-crate.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/faering-rowboat.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/jetty-pier.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/heather-shrub.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/grass-tuft.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/fish-drying-rack.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/runestone.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-greathouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-hut.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-homestead.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-longhouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-hut.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-homestead.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-hut-terrain.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-homestead-terrain.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/scenery/meshy-tent-v1/tent.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/scenery/meshy-campfire-v1/campfire.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/draco/draco_decoder.wasm",
+          "status": 200,
+          "type": "application/wasm"
+        },
+        {
+          "path": "/nature/kaykit-v1/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-c.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-c.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-deciduous-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-deciduous-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/ez-tree-pilot/pine-large.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/ez-tree-pilot/pine-large.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/human/Human_ExtraAnimations.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        }
+      ]
+    },
+    {
+      "origin": "http://127.0.0.1:5321",
+      "route": "/",
+      "loadMs": 6360,
+      "errors": [],
+      "resources": [
+        {
+          "path": "/game-assets/houses/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/terrain/spruce-tree.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/birch-tree.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/boulder.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/fjord-cliff-rock.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/cooking-hearth.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/village-well.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/log-pile.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/barrel.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/stabbur-storehouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/storage-crate.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/jetty-pier.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/heather-shrub.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/runestone.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/faering-rowboat.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/grass-tuft.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/fish-drying-rack.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-greathouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-hut.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-homestead.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-longhouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-hut.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-homestead.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-hut-terrain.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-homestead-terrain.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/scenery/meshy-tent-v1/tent.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/scenery/meshy-campfire-v1/campfire.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/draco/draco_decoder.wasm",
+          "status": 200,
+          "type": "application/wasm"
+        },
+        {
+          "path": "/nature/kaykit-v1/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-c.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-c.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-deciduous-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-deciduous-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/ez-tree-pilot/pine-large.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/ez-tree-pilot/pine-large.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/human/Human_ExtraAnimations.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        }
+      ]
+    },
+    {
+      "origin": "http://127.0.0.1:5321",
+      "route": "/fjord-play",
+      "loadMs": 46191,
+      "errors": [],
+      "resources": [
+        {
+          "path": "/game-assets/houses/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/terrain/spruce-tree.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/birch-tree.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/boulder.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/fjord-cliff-rock.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/stabbur-storehouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/cooking-hearth.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/village-well.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/log-pile.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/barrel.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/storage-crate.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/faering-rowboat.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/heather-shrub.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/jetty-pier.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/grass-tuft.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/fish-drying-rack.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/runestone.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-greathouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-hut.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-homestead.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/house-longhouse.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-hut.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-homestead.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-hut-terrain.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/houses/farm-homestead-terrain.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/scenery/meshy-tent-v1/tent.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/scenery/meshy-campfire-v1/campfire.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/draco/draco_decoder.wasm",
+          "status": 200,
+          "type": "application/wasm"
+        },
+        {
+          "path": "/nature/kaykit-v1/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-c.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-conifer-c.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-deciduous-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-deciduous-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-small-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-boulder-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-rock-cluster-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-bush-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-a.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/kaykit-v1/kaykit-grass-cluster-b.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/nature/ez-tree-pilot/pine-large.gltf",
+          "status": 200,
+          "type": "model/gltf+json"
+        },
+        {
+          "path": "/nature/ez-tree-pilot/pine-large.bin",
+          "status": 200,
+          "type": "application/octet-stream"
+        },
+        {
+          "path": "/game-assets/human/Human_LOD2.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/human/Human_ExtraAnimations.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/manual-hair/short2.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-grid-trial-002/outfit.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-additional-005/low-shoes.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/manual-hair/short2.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-additional-005/low-shoes.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/manual-long-hair/long-2.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-hats/hunter.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-tools/hunter.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/manual-long-hair/long-2.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/occupation-tools/hunter.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/occupation-hats/hunter.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/manual-hair/short.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/manual-hair/short.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-hats/farmer.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/occupation-hats/farmer.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-tools/farmer.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-additional-005/long-skirt.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-additional-005/long-skirt.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-tools/farmer.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/manual-braided-hair/braided.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-fisherman-009/shoe.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/manual-braided-hair/braided.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-hats/fisher.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-fisherman-009/trousers.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/occupation-hats/fisher.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-fisherman-009/trousers.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-fisherman-009/tunic.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-fisherman-009/shoe.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/modules/occupation-tools/fisher.binding.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/character-lab/modules/occupation-tools/fisher.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/character-lab/candidates/meshy-fisherman-009/tunic.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/cattle/adult-female/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/game-assets/cattle/adult-female/cow-female-adult.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/cattle/adult-male/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/game-assets/cattle/adult-male/cow-male-adult.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/game-assets/cattle/baby/manifest.json",
+          "status": 200,
+          "type": "application/json"
+        },
+        {
+          "path": "/game-assets/cattle/baby/cow-baby.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/terrain/longship-drakkar.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        },
+        {
+          "path": "/draco/draco_decoder.wasm",
+          "status": 200,
+          "type": "application/wasm"
+        }
+      ]
+    },
+    {
+      "origin": "http://127.0.0.1:5321",
+      "route": "/model-preview/",
+      "loadMs": 2989,
+      "errors": [],
+      "resources": [
+        {
+          "path": "/game-assets/characters/dwarf_source.glb",
+          "status": 200,
+          "type": "model/gltf-binary"
+        }
+      ]
+    }
+  ]
+}

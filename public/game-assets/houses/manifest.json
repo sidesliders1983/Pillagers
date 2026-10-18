@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "assets": {
+    "greatHall": {
+      "file": "house-greathouse.glb",
+      "source": "Assets/Houses/Standard/GreatHouse/house-greathouse.glb",
+      "sourceBytes": 10824544,
+      "textureLimit": 1024,
+      "sourceTriangles": 4820,
+      "sourceSha256": "51b9957178f67cd85f06899f6a4011cbee145f2516ae159cd14efe98cfe17466",
+      "bytes": 2634544,
+      "bounds": {
+        "min": [
+          -5.578573703765869,
+          2.384185791015625e-7,
+          -4.223706245422363
+        ],
+        "max": [
+          5.535860538482666,
+          5.999999523162842,
+          4.377712249755859
+        ]
+      },
+      "triangles": 4820
+    },
+    "hut": {
+      "file": "house-hut.glb",
+      "source": "Assets/Houses/Standard/Hut/house-hut.glb",
+      "sourceBytes": 9639388,
+      "textureLimit": 1024,
+      "sourceTriangles": 2728,
+      "sourceSha256": "a4418270ded80c031b91fbfba5448b7e583332cdc382c1f771e524a4d720836a",
+      "bytes": 2242716,
+      "bounds": {
+        "min": [
+          -2.179342269897461,
+          0,
+          -1.8758610486984253
+        ],
+        "max": [
+          2.1834826469421387,
+          4,
+          1.8856197595596313
+        ]
+      },
+      "triangles": 2728
+    },
+    "homestead": {
+      "file": "house-homestead.glb",
+      "source": "Assets/Houses/Standard/Homestead/house-homestead.glb",
+      "sourceBytes": 9786632,
+      "textureLimit": 1024,
+      "sourceTriangles": 2802,
+      "sourceSha256": "b0e30138b3352e5f2fa01e08315ca28a6f792663041a1e93038029c40582962c",
+      "bytes": 2369656,
+      "bounds": {
+        "min": [
+          -4.735342025756836,
+          0,
+          -3.2040493488311768
+        ],
+        "max": [
+          4.737016201019287,
+          5,
+          3.167757272720337
+        ]
+      },
+      "triangles": 2802
+    },
+    "longhouse": {
+      "file": "house-longhouse.glb",
+      "source": "Assets/Houses/Standard/LongHouse/house-longhouse.glb",
+      "sourceBytes": 10047240,
+      "textureLimit": 1024,
+      "sourceTriangles": 7184,
+      "sourceSha256": "780337184ea803c560faccdb5bc704934c1c012576c6747e58961c7881e7105b",
+      "bytes": 2400340,
+      "bounds": {
+        "min": [
+          -4.716489315032959,
+          -2.384185791015625e-7,
+          -2.8706753253936768
+        ],
+        "max": [
+          4.708924293518066,
+          4,
+          2.9157023429870605
+        ]
+      },
+      "triangles": 7184
+    },
+    "farmHut": {
+      "file": "farm-hut.glb",
+      "source": "Assets/Houses/Farmyard/Hut/farm-hut.glb",
+      "sourceBytes": 10509844,
+      "textureLimit": 1024,
+      "sourceTriangles": 7221,
+      "sourceSha256": "1cc484693aba97a18f43f5d9751860a8bfba6a85cb83f700ac907038f88b9303",
+      "bytes": 2653744,
+      "bounds": {
+        "min": [
+          -2.040004014968872,
+          -1.1920928955078125e-7,
+          -2.4183528423309326
+        ],
+        "max": [
+          2.042839527130127,
+          3.999999761581421,
+          2.412994384765625
+        ]
+      },
+      "triangles": 7221
+    },
+    "farmHomestead": {
+      "file": "farm-homestead.glb",
+      "source": "Assets/Houses/Farmyard/Homestead/farm-homestead.glb",
+      "sourceBytes": 29705352,
+      "textureLimit": 1024,
+      "sourceTriangles": 5721,
+      "sourceSha256": "ac2f1e01f6a6e0a3c60bbf0ea2448f1196820426d57ce75461956d6b54066c97",
+      "bytes": 1252884,
+      "bounds": {
+        "min": [
+          -3.0456392765045166,
+          0,
+          -2.377755880355835
+        ],
+        "max": [
+          3.0549964904785156,
+          4,
+          2.7059028148651123
+        ]
+      },
+      "triangles": 5721
+    },
+    "farmHutTerrain": {
+      "file": "farm-hut-terrain.glb",
+      "source": "Assets/Houses/Farmyard/Hut/farm-hut-terrain.glb",
+      "sourceBytes": 18842004,
+      "textureLimit": 1024,
+      "sourceTriangles": 9846,
+      "sourceSha256": "d9c81e67d9042dde8bb2a8dcc3aca73b416fb1b8f5a9ab0ffb1dd665cc05d40d",
+      "bytes": 2760368,
+      "bounds": {
+        "min": [
+          -5.858217239379883,
+          0,
+          -5.890837669372559
+        ],
+        "max": [
+          5.560717582702637,
+          4,
+          5.758095741271973
+        ]
+      },
+      "triangles": 9846
+    },
+    "farmHomesteadTerrain": {
+      "file": "farm-homestead-terrain.glb",
+      "source": "Assets/Houses/Farmyard/Homestead/farm-homestead-terrain.glb",
+      "sourceBytes": 97250116,
+      "textureLimit": 1024,
+      "sourceTriangles": 3001777,
+      "sourceSha256": "35972d6a7607dc0150edada18f8992c27db325f276258d6b402d82e9cb15fd6c",
+      "bytes": 2842728,
+      "bounds": {
+        "min": [
+          -8.314866065979004,
+          0,
+          -9.31059741973877
+        ],
+        "max": [
+          8.574871063232422,
+          4,
+          9.315382957458496
+        ]
+      },
+      "triangles": 45631
+    }
+  }
+}
