@@ -1,6 +1,7 @@
 import { validateIslandClans, type IslandClanLink } from './IslandClans';
 import { spatialGroupMission } from './SpatialExpeditions';
 import type { SpatialExpeditions } from './SpatialExpeditions';
+import { validateIslandIntel, type IslandIntel } from './IslandMissions';
 import { endCare } from './CareCalendar';
 import { compareBirths } from './ScheduledBirths';
 import {pruneSocialIncidents} from './PersonalityLifeEvents';
@@ -31,6 +32,7 @@ export type WorldState = {
  version: 1 | 2;
  spatial?: SpatialExpeditions;
  island?: IslandClanLink;
+ islandIntel?: IslandIntel;
  config: ExpeditionConfig;
  groups: Record<string, ExpeditionGroup>;
  missions: Record<string, ExpeditionMission>;
@@ -63,6 +65,7 @@ export function validateWorld(state:SimulationState,validateTarget:(target:Simul
  if(![1,2].includes(w.version)||!w.regions||!w.knowledge||!w.targetClans)throw new Error('Invalid world graph');
  if(w.version===1&&(Object.keys(w.regions).length!==4||w.island))throw new Error('Invalid legacy world graph');
  validateIslandClans(state);
+ validateIslandIntel(state);
  for(const direction of w.version===1?directions:[]){const r=w.regions[`region-${direction.toLowerCase()}`];if(!r||r.direction!==direction||r.id!==`region-${direction.toLowerCase()}`||typeof r.terrain!=='string'||!Array.isArray(r.resources)||r.resources.some(x=>typeof x!=='string')||r.requiresShip!==(direction==='North')||(r.targetClanId!==null&&!w.targetClans[r.targetClanId]))throw new Error('Invalid world region');}
  for(const [id,k] of Object.entries(w.knowledge))if(!w.regions[id]||!['Scouted','Surveyed'].includes(k.level)||!Number.isSafeInteger(k.observedAt)||k.observedAt<800000||k.observedAt>state.time.winter*1000+state.time.tick||typeof k.opportunity!=='boolean'||!Array.isArray(k.resources)||k.resources.some(x=>typeof x!=='string'))throw new Error('Invalid world knowledge');
  const fail=()=>{throw new Error('Invalid expedition state');};
@@ -130,21 +133,26 @@ export function stepWorld(state:SimulationState):void {
  const w=state.world;if(!w)return;
  for(const target of Object.values(w.targetClans))stepMechanicsTick(target);
  for(const m of Object.values(w.missions).filter(m=>m.status==='Away'&&m.returnsAt<=absoluteTick(state))){
-  const previousFarmyards=farmyards(state).map(f=>f.id);
-  const casualties=new Set(m.memberIds.filter(id=>state.personas[id]?.deathWinter===null&&chance(state,m.casualtyBps)));
-  resolveMortality(state,()=>true,(type,id,details)=>record(state,type,{...details,cause:'Expedition',missionId:m.id,mortalityRiskBps:m.casualtyBps},id),casualties);
-  reconcileFarmyards(state,previousFarmyards);
-  const live=m.memberIds.filter(id=>state.personas[id]?.deathWinter===null),success=live.length>0&&chance(state,m.successBps);
+  const {live,success}=resolveExpeditionCrew(state,m);
   const discovery=success&&m.type!=='Pillage'?discover(state,w.regions[m.regionId],m.type==='Surveillance'?'Surveyed':w.knowledge[m.regionId]?.level??'Scouted'):null;
   if(discovery)w.knowledge[m.regionId]=discovery;
-  const loot=success&&m.type==='Pillage'?recoverCargo(state,m,live):{food:0,materials:0,cattleIds:[],personaIds:[]};
+  const loot=success&&m.type==='Pillage'?recoverExpeditionCargo(state,m,live,w.regions[m.regionId].targetClanId):{food:0,materials:0,cattleIds:[],personaIds:[]};
   m.status='Returned';m.returnedAt=absoluteTick(state);m.result={success,discovery,casualtyIds:m.memberIds.filter(id=>!live.includes(id)),survivorIds:live,...loot,summary:success?m.type==='Pillage'&&!loot.food&&!loot.materials&&!loot.cattleIds.length&&!loot.personaIds.length?'Raid succeeded but no available assets were recovered.':'Mission completed.':'Mission failed; no discoveries or recovered assets.'};
   record(state,'ExpeditionReturned',{missionId:m.id,groupName:m.groupName,mission:m.type,regionId:m.regionId,participants:[...m.memberIds],...m.result});
  }
 }
 
-function recoverCargo(state:SimulationState,m:ExpeditionMission,survivors:string[]){
- const w=state.world!,region=w.regions[m.regionId],target=region.targetClanId?w.targetClans[region.targetClanId]:null;
+/** Both mission adapters use the same mortality order, risk and RNG stream. */
+export function resolveExpeditionCrew(state:SimulationState,m:Pick<ExpeditionMission,'id'|'memberIds'|'casualtyBps'|'successBps'>){
+ const previousFarmyards=farmyards(state).map(f=>f.id);
+ const casualties=new Set(m.memberIds.filter(id=>state.personas[id]?.deathWinter===null&&chance(state,m.casualtyBps)));
+ resolveMortality(state,()=>true,(type,id,details)=>record(state,type,{...details,cause:'Expedition',missionId:m.id,mortalityRiskBps:m.casualtyBps},id),casualties);
+ reconcileFarmyards(state,previousFarmyards);
+ const live=m.memberIds.filter(id=>state.personas[id]?.deathWinter===null);
+ return {live,success:live.length>0&&chance(state,m.successBps)};
+}
+export function recoverExpeditionCargo(state:SimulationState,m:Pick<ExpeditionMission,'id'|'priorities'>,survivors:string[],targetClanId:string|null){
+ const w=state.world!,target=targetClanId?w.targetClans[targetClanId]:null;
  const loot={food:0,materials:0,cattleIds:[] as string[],personaIds:[] as string[]};if(!target)return loot;
  for(const member of survivors){
   for(const priority of m.priorities){

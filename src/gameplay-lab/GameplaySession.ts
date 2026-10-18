@@ -1,4 +1,6 @@
 import { assertSpatialWorld, exploreOffer, startExpeditionOffer, expeditionModeActive, type PhysicalExpeditionContext } from '../simulation/SpatialExpeditions';
+import { islandMissionOffer, type IslandTarget } from '../simulation/IslandMissions';
+import type { Cargo, MissionType } from '../simulation/WorldExpeditions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { birthdayCalendarMode } from '../simulation/BirthdayCalendar';
 import { freezeReadView } from './ReadView';
@@ -23,6 +25,10 @@ export class GameplaySession {
     }
     startExpeditionOffer(groupId: string) {
         return startExpeditionOffer(this.state, groupId, this.physicalContext());
+    }
+    islandMissionOffer(groupId: string, target: IslandTarget, type: MissionType,
+        priorities: Cargo[] = [], origins?: Record<string, { x: number; z: number }>) {
+        return islandMissionOffer(this.state, groupId, target, type, priorities, this.physicalContext(), origins);
     }
     get expeditionMode() { return expeditionModeActive(this.state); }
     get effectiveMinutesPerWinter() {

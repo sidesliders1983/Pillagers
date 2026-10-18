@@ -1,0 +1,20 @@
+{
+  "parent": "255ef2d",
+  "results": [
+    {
+      "seed": 17,
+      "commands": 9,
+      "exactCanonicalEquality": true
+    },
+    {
+      "seed": 42,
+      "commands": 9,
+      "exactCanonicalEquality": true
+    },
+    {
+      "seed": 91,
+      "commands": 9,
+      "exactCanonicalEquality": true
+    }
+  ]
+}

@@ -5,11 +5,13 @@ import { commitClanObservation, assertDiscoveryWorld } from './ClanDiscovery';
 import type { SimulationState } from './SimulationCore';
 import { absoluteTick, expeditionEligible, groupMission } from './WorldExpeditions';
 import { eventFacts } from './EventFacts';
+import { completeIslandMission, observeIslandMission, recordIslandSightings, validateIslandMission, type IslandMissionTask } from './IslandMissions';
 
 export interface PhysicalExpeditionContext {
     exclusions?: readonly Bounds2[];
     worldId: string;
-    world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'navigation' | 'settlement' | 'rivalSite'>;
+    world: Pick<WorldBlueprint, 'terrain' | 'waterLevel' | 'navigation' | 'settlement' | 'rivalSite'> &
+        Partial<Pick<WorldBlueprint, 'biomes'>>;
 }
 export interface ExplorePolicy {
     metresPerTick: number;
@@ -19,6 +21,7 @@ export interface ExplorePolicy {
 export const prototypeExplorePolicy: ExplorePolicy = {
     metresPerTick: 2, exploringTicks: 25, foodIntervalTicks: 125,
 };
+const maximumTargetCorrection = 8;
 export interface ExpeditionProvisions {
     version: 1;
     foodPerMember: number;
@@ -26,6 +29,7 @@ export interface ExpeditionProvisions {
     members: Record<string, { food: number; rationTicks: number; consumed: number; discarded: number; lost: number }>;
 }
 export interface SpatialMission {
+    task?: IslandMissionTask;
     id: string;
     groupId: string;
     groupName: string;
@@ -50,7 +54,7 @@ export interface SpatialMission {
     outcome: 'Completed' | 'Cancelled' | 'Lost' | null;
 }
 export interface SpatialExpeditions {
-    version: 1 | 2;
+    version: 1 | 2 | 3;
     worldId: string;
     policy: ExplorePolicy;
     missions: Record<string, SpatialMission>;
@@ -78,10 +82,10 @@ function requireContext(state: SimulationState, context?: PhysicalExpeditionCont
 
 /** Pacing is derived from canonical activity, never stored as a second gameplay clock. */
 export function expeditionModeActive(state: SimulationState) {
-    return Object.values(state.world?.spatial?.missions ?? {}).some(m => m.provisions &&
+    return Object.values(state.world?.spatial?.missions ?? {}).some(m => (m.provisions || m.task) &&
         m.status !== 'Returned' && m.status !== 'Stranded');
 }
-export function startExpeditionOffer(state: SimulationState, groupId: string, context?: PhysicalExpeditionContext) {
+export function requireReadyExpeditionGroup(state: SimulationState, groupId: string, context?: PhysicalExpeditionContext) {
     requireContext(state, context);
     const group = state.world!.groups[groupId];
     if (!group || groupMission(state, groupId)) throw new Error('Group already active or unavailable.');
@@ -91,6 +95,10 @@ export function startExpeditionOffer(state: SimulationState, groupId: string, co
     if (active.length >= 16 || group.memberIds.length + active.reduce((sum, m) => sum +
         (m.provisions || m.memberRoutes ? m.memberIds.length : 1), 0) > 62)
         throw new Error('At most 16 groups and 62 residents can explore at once.');
+    return group;
+}
+export function startExpeditionOffer(state: SimulationState, groupId: string, context?: PhysicalExpeditionContext) {
+    const group = requireReadyExpeditionGroup(state, groupId, context);
     const foodPerMember = 2, ticksPerFood = 250, foodCost = group.memberIds.length * foodPerMember;
     if (state.stocks.food < foodCost) throw new Error(`Start Expedition needs ${foodCost} Food.`);
     return { foodPerMember, ticksPerFood, foodCost, members: group.memberIds.length,
@@ -115,7 +123,7 @@ function settleProvisions(state: SimulationState, mission: SpatialMission, atHom
 }
 
 /** Bounded cardinal search on the existing walkability grid. No new terrain classification. */
-function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: Point2) {
+export function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: Point2) {
     const { world } = context, nav = world.navigation, surface = createBlueprintSurface(world);
     const bounds = nav.bounds;
     const inside = (p: Point2) => p && Number.isFinite(p.x) && Number.isFinite(p.z) &&
@@ -137,7 +145,7 @@ function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: 
         throw new Error('Choose a land destination. This spot is in the water.');
     if (adjusted) {
         // Touch need not hit one exact free cell. Propose nearby ground without crossing a shore or cliff.
-        const radius = 8, candidates: number[] = [];
+        const radius = maximumTargetCorrection, candidates: number[] = [];
         const containing = context.exclusions?.filter(b => target.x >= b.minX - .4 && target.x <= b.maxX + .4 &&
             target.z >= b.minZ - .4 && target.z <= b.maxZ + .4) ?? [];
         const nearest = point(end), reach = Math.ceil(radius / nav.spacing);
@@ -296,6 +304,7 @@ function modeReturnTrail(mission: SpatialMission, member: string) {
         return splitRoute(route, Math.min(length, elapsed)).suffix;
     }
     const reached = splitRoute(route, Math.min(length, mission.travelled)).prefix.reverse();
+    if (mission.task) return joinRoutes(reached, []);
     return joinRoutes(reached, mission.returnRoutes![member]);
 }
 
@@ -303,6 +312,7 @@ function prepareExplore(state: SimulationState, groupId: string, target: Point2,
     context?: PhysicalExpeditionContext, origins?: Record<string, Point2>) {
     const bound = requireContext(state, context), group = state.world!.groups[groupId];
     const active = spatialGroupMission(state, groupId);
+    if (active?.task) throw new Error('A separate mission must return home before choosing another destination.');
     if (!group || !active && groupMission(state, groupId)) throw new Error('Choose an available expedition group.');
     if (!active && state.world!.spatial?.version !== 1) throw new Error('Start Expedition before choosing a destination.');
     if (active?.status === 'Stranded') throw new Error('This group is stranded and cannot receive new destinations.');
@@ -358,7 +368,7 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
         const group = state.world!.groups[command.groupId], now = absoluteTick(state);
         const spatial = state.world!.spatial ??= { version: 2, worldId: context!.worldId,
             policy: { ...prototypeExplorePolicy }, missions: {} };
-        spatial.version = 2;
+        if (spatial.version !== 3) spatial.version = 2;
         const id = `explore-${Object.keys(spatial.missions).length + 1}`;
         const home = { ...context!.world.settlement.center };
         const mission: SpatialMission = {
@@ -414,7 +424,7 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
     if (command.type === 'RecallExpedition') {
         const bound = requireContext(state, context), mission = spatialGroupMission(state, command.groupId);
         if (!mission || mission.status === 'Returning') throw new Error('No traveling expedition to recall.');
-        if (mission.provisions) {
+        if (mission.provisions || mission.task) {
             beginRedirectedReturn(mission, Object.fromEntries(mission.memberIds.map(id => [id, modeReturnTrail(mission, id)])));
         } else if (mission.homeOrigins) {
             const routes = Object.fromEntries(mission.memberIds.map(id => [id,
@@ -470,7 +480,7 @@ function beginRedirectedReturn(mission: SpatialMission, routes = mission.returnR
     mission.returnFrom = mission.distance;
     mission.status = 'Returning';
 }
-function routeLength(route: readonly Point2[]) {
+export function routeLength(route: readonly Point2[]) {
     return route.slice(1).reduce((sum, p, i) => sum + Math.hypot(p.x - route[i].x, p.z - route[i].z), 0);
 }
 /** Every member follows its own confirmed route; shorter routes wait at the destination. */
@@ -552,6 +562,8 @@ export function inspectSpatialExpeditions(state: SimulationState) {
             status: mission.status, outcome: mission.outcome, foodCost: mission.foodCost,
             departedAt: mission.departedAt, returnedAt: mission.returnedAt,
             position: spatialMissionPosition(mission), supplies: inspectSupplies(state, mission),
+            missionType: mission.task?.type ?? null,
+            result: mission.status === 'Returned' ? structuredClone(mission.task?.result ?? null) : null,
         }))
     };
 }
@@ -559,6 +571,7 @@ function finish(state: SimulationState, mission: SpatialMission, outcome: Spatia
     const prepared = mission.status === 'Prepared';
     settleProvisions(state, mission, outcome !== 'Lost');
     mission.status = 'Returned'; mission.outcome = outcome; mission.returnedAt = absoluteTick(state); mission.updatedAt = absoluteTick(state);
+    if (mission.task) { completeIslandMission(state, mission); return; }
     state.events.push({
         id: `event-${state.events.length + 1}`, time: { ...state.time },
         type: prepared ? 'ExploreAreaCancelled' : 'ExploreAreaReturned', details: eventFacts(state, {
@@ -575,7 +588,7 @@ function strand(state: SimulationState, mission: SpatialMission, reason: string)
     recordSpatial(state, 'ExploreAreaStranded', mission, { reason });
 }
 function modeStepPassable(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
-    const speed = state.world!.spatial!.policy.metresPerTick;
+    const speed = mission.task?.speed ?? state.world!.spatial!.policy.metresPerTick;
     const next = { ...mission, travelled: mission.status === 'Returning' ? Math.max(0, mission.travelled - speed) :
         mission.status === 'Traveling' ? Math.min(mission.distance, mission.travelled + speed) : mission.travelled };
     const nav = context.world.navigation, surface = createBlueprintSurface(context.world);
@@ -635,23 +648,38 @@ export function stepSpatialExpeditions(state: SimulationState, context?: Physica
             finish(state, mission, 'Lost'); observe = true; continue;
         }
         if (status === 'Prepared') { mission.updatedAt = now; continue; }
+        if (mission.task && !modeStepPassable(state, mission, bound)) {
+            if (mission.status === 'Returning') {
+                strand(state, mission, 'The confirmed return route is blocked.');
+                observe = true; continue;
+            }
+            mission.outcome = 'Cancelled';
+            beginRedirectedReturn(mission, Object.fromEntries(mission.memberIds.map(id => [id, modeReturnTrail(mission, id)])));
+            if (!mission.distance) { finish(state, mission, 'Cancelled'); observe = true; continue; }
+            if (!modeStepPassable(state, mission, bound)) {
+                strand(state, mission, 'No safe physical return from the reached position.');
+                observe = true; continue;
+            }
+            status = mission.status;
+        }
         if (mission.provisions) {
             if (!prepareModeTick(state, mission, bound)) { observe = true; continue; }
             status = mission.status;
             consumeCarriedFood(state, mission);
         }
         if (status === 'Traveling') {
-            mission.travelled = Math.min(mission.distance, mission.travelled + spatial!.policy.metresPerTick);
+            mission.travelled = Math.min(mission.distance, mission.travelled + (mission.task?.speed ?? spatial!.policy.metresPerTick));
             if (mission.travelled === mission.distance) {
-                mission.status = 'Exploring'; mission.exploringUntil = mission.provisions ? null : now + spatial!.policy.exploringTicks;
+                mission.status = 'Exploring'; mission.exploringUntil = mission.task?.operateUntil ?? (mission.provisions ? null : now + spatial!.policy.exploringTicks);
             }
         } else if (!mission.provisions && status === 'Exploring' && now >= mission.exploringUntil!) {
+            if (mission.task) observeIslandMission(state, mission, bound);
             if (mission.homeOrigins) {
                 beginRedirectedReturn(mission);
                 if (!mission.distance) finish(state, mission, 'Completed');
             } else { mission.returnFrom = mission.travelled; mission.status = 'Returning'; }
         } else if (status === 'Returning') {
-            mission.travelled = Math.max(0, mission.travelled - spatial!.policy.metresPerTick);
+            mission.travelled = Math.max(0, mission.travelled - (mission.task?.speed ?? spatial!.policy.metresPerTick));
             if (!mission.travelled || mission.provisions && mission.memberIds.filter(id => state.personas[id]?.deathWinter === null)
                 .every(id => !spatialMemberPosition(mission, id).moving)) finish(state, mission, mission.outcome ?? 'Completed');
         }
@@ -677,6 +705,7 @@ function refreshSpatialObservations(state: SimulationState, context: PhysicalExp
     const unique = parties.filter((p, i) => parties.findIndex(q => q.x === p.x && q.z === p.z) === i);
     state.discovery = commitClanObservation(state.discovery!, context.world, context.worldId,
         state.clan.id, [...observations, ...unique], absoluteTick(state));
+    recordIslandSightings(state, context, unique);
 }
 export function requireSpatialAdvance(state: SimulationState, context?: PhysicalExpeditionContext) {
     if (Object.values(state.world?.spatial?.missions ?? {}).some(m => m.status !== 'Returned'))
@@ -686,7 +715,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
     const spatial = state.world?.spatial;
     if (!spatial) return;
     const fail = () => { throw new Error('Invalid spatial expedition state.'); };
-    if (![1, 2].includes(spatial.version) || !state.discovery || spatial.worldId !== state.discovery.worldId ||
+    if (![1, 2, 3].includes(spatial.version) || !state.discovery || spatial.worldId !== state.discovery.worldId ||
         !spatial.policy || !spatial.missions || Array.isArray(spatial.missions)) fail();
     const policy = spatial.policy;
     if (!Number.isFinite(policy.metresPerTick) || policy.metresPerTick < .1 || policy.metresPerTick > 8 ||
@@ -715,6 +744,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
     };
     let active = 0, observers = 0;
     for (const [id, mission] of Object.entries(spatial.missions)) {
+        if (mission.task) validateIslandMission(state, mission);
         const group = state.world!.groups[mission.groupId];
         if (mission.id !== id || !id.startsWith('explore-') || !group || !mission.groupName?.trim() ||
             !Array.isArray(mission.memberIds) || !mission.memberIds.length ||
@@ -732,7 +762,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
                 mission.exploringUntil < mission.departedAt)) fail();
         if (mission.provisions) {
             const pack = mission.provisions;
-            if (spatial.version !== 2 || pack.version !== 1 || pack.foodPerMember !== 2 || pack.ticksPerFood !== 250 ||
+            if (spatial.version < 2 || pack.version !== 1 || pack.foodPerMember !== 2 || pack.ticksPerFood !== 250 ||
                 !pack.members || Object.keys(pack.members).length !== mission.memberIds.length ||
                 mission.foodCost !== pack.foodPerMember * mission.memberIds.length) fail();
             for (const member of mission.memberIds) {
@@ -748,14 +778,14 @@ export function validateSpatialExpeditions(state: SimulationState) {
                 Object.values(pack.members).some(p => p.food || p.rationTicks)) fail();
             if (mission.status === 'Prepared' && (mission.distance !== 0 || mission.travelled !== 0 ||
                 mission.memberRoutes || Object.values(pack.members).some(p => p.consumed || p.rationTicks))) fail();
-        } else if (mission.status === 'Prepared' || mission.status === 'Stranded') fail();
+        } else if (mission.status === 'Prepared' || mission.status === 'Stranded' && !mission.task) fail();
         if (mission.memberRoutes) {
             if (Object.keys(mission.memberRoutes).length !== mission.memberIds.length ||
                 mission.memberIds.some(id => !Object.hasOwn(mission.memberRoutes!, id)) ||
                 mission.returnFrom !== undefined && (!Number.isFinite(mission.returnFrom) ||
                     mission.returnFrom < mission.travelled || mission.returnFrom > mission.distance)) fail();
             for (const route of Object.values(mission.memberRoutes)) {
-                validateMemberRoute(route, !!mission.provisions);
+                validateMemberRoute(route, !!(mission.provisions || mission.task));
                 if (routeLength(route) > mission.distance + 1e-6) fail();
             }
             if (!Object.values(mission.memberRoutes).some(route =>
@@ -769,7 +799,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
                 Object.keys(mission.returnRoutes).length !== mission.memberIds.length) fail();
             for (const member of mission.memberIds) {
                 const home = mission.homeOrigins![member], route = mission.returnRoutes![member];
-                validateMemberRoute(route, !!mission.provisions);
+                validateMemberRoute(route, !!(mission.provisions || mission.task));
                 if (!finitePoint(home) || Math.hypot(route.at(-1)!.x - home.x, route.at(-1)!.z - home.z) > 12) fail();
                 if (mission.status === 'Returning' && JSON.stringify(route) !== JSON.stringify(mission.memberRoutes![member])) fail();
                 if (!mission.provisions && (mission.status === 'Traveling' || mission.status === 'Exploring')) {
@@ -779,7 +809,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
         }
         const stepLength = Math.hypot(mission.route[1].x - mission.route[0].x,
             mission.route[1].z - mission.route[0].z);
-        for (let i = mission.provisions ? mission.route.length : mission.memberRoutes ? 2 : 1; i < mission.route.length; i++) {
+        for (let i = mission.provisions || mission.task ? mission.route.length : mission.memberRoutes ? 2 : 1; i < mission.route.length; i++) {
             const dx = Math.abs(mission.route[i].x - mission.route[i - 1].x);
             const dz = Math.abs(mission.route[i].z - mission.route[i - 1].z);
             if (dx > 0 && dz > 0 || dx + dz <= 0 && mission.route.length !== 2 || !mission.memberRoutes && Math.abs(dx + dz - stepLength) > 1e-6) fail();
@@ -810,6 +840,16 @@ export function assertSpatialWorld(state: SimulationState, context: PhysicalExpe
     requireContext(state, context);
     const nav = context.world.navigation, surface = createBlueprintSurface(context.world);
     for (const mission of Object.values(state.world.spatial.missions)) {
+        if (mission.task) {
+            const ref = mission.task.target;
+            const cellId = `area-${Math.round((ref.position.z - nav.bounds.minZ) / nav.spacing) * nav.columns +
+                Math.round((ref.position.x - nav.bounds.minX) / nav.spacing)}`;
+            const site = context.world.rivalSite;
+            if (ref.kind === 'area' ? ref.id !== cellId : !site || ref.id !== site.candidateId ||
+                Math.hypot(ref.position.x - site.center.x, ref.position.z - site.center.z) >
+                    Math.max(maximumTargetCorrection, nav.spacing / Math.SQRT2) + 1e-6)
+                throw new Error('Invalid physical mission target.');
+        }
         if (mission.provisions && mission.distance === 0) continue;
         if (mission.status === 'Stranded') {
             for (const member of mission.memberIds) {
@@ -824,19 +864,19 @@ export function assertSpatialWorld(state: SimulationState, context: PhysicalExpe
             const start = route[0], end = route.at(-1)!;
             const homeward = mission.homeOrigins && (mission.returnFrom !== undefined || route === mission.returnRoutes?.[member]);
             const destination = homeward ? mission.homeOrigins![member] : mission.target;
-            const tolerance = homeward ? mission.provisions ? 1e-6 : Math.max(12, nav.spacing) : nav.spacing;
+            const tolerance = homeward ? mission.provisions || mission.task ? 1e-6 : Math.max(12, nav.spacing) : nav.spacing;
             if ((!mission.memberRoutes && Math.hypot(start.x - context.world.settlement.center.x,
                 start.z - context.world.settlement.center.z) > Math.max(18, nav.spacing * 2)) ||
                 Math.hypot(end.x - destination.x, end.z - destination.z) > tolerance)
                 throw new Error('Invalid spatial expedition route endpoints.');
             for (let i = 0; i < route.length; i++) {
                 const p = route[i], col = (p.x - nav.bounds.minX) / nav.spacing, row = (p.z - nav.bounds.minZ) / nav.spacing;
-                const exactOrigin = !!mission.memberRoutes && (i === 0 || !!mission.provisions && i === route.length - 1 && homeward);
-                if ((!exactOrigin && ((mission.provisions ? !Number.isInteger(col) && !Number.isInteger(row) : !Number.isInteger(col) || !Number.isInteger(row)) || col < 0 || row < 0 ||
+                const exactOrigin = !!mission.memberRoutes && (i === 0 || !!(mission.provisions || mission.task) && i === route.length - 1 && homeward);
+                if ((!exactOrigin && ((mission.provisions || mission.task ? !Number.isInteger(col) && !Number.isInteger(row) : !Number.isInteger(col) || !Number.isInteger(row)) || col < 0 || row < 0 ||
                     col >= nav.columns || row >= nav.rows || !nav.cells[Math.round(row) * nav.columns + Math.round(col)])) ||
                     surface.surfaceHeightAt(p.x, p.z) <= context.world.waterLevel + .25)
                     throw new Error('Invalid spatial expedition walkability.');
-                if (!mission.provisions && i > (mission.memberRoutes ? 1 : 0) && Math.abs(Math.abs(p.x - route[i - 1].x) +
+                if (!mission.provisions && !mission.task && i > (mission.memberRoutes ? 1 : 0) && Math.abs(Math.abs(p.x - route[i - 1].x) +
                     Math.abs(p.z - route[i - 1].z) - nav.spacing) > 1e-6)
                     throw new Error('Invalid spatial expedition route segment.');
                 if (!i) continue;

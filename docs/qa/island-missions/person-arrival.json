@@ -1,0 +1,12 @@
+{
+  "seed": 1983,
+  "defaultRules": true,
+  "success": true,
+  "arrivals": [
+    {
+      "id": "island-rival:founder-1",
+      "rendered": true
+    }
+  ],
+  "diagnostics": []
+}

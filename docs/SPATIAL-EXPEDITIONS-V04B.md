@@ -1,6 +1,6 @@
 # Spatial Expedition Groups v0.4B — Expedition Mode (#148 / PR #179)
 
-New `/fjord-play` islands enable exploration and one physical rival by default from 2026-10-18. Expedition Groups reuse the existing Simulation Core, canonical physical routes, native resident Run and clan discovery. Ordinary residents stay autonomous. Existing saves keep their original rules; spatial raids remain #150 and larger ship/horse/cart carrying capacities are not implemented.
+New `/fjord-play` islands enable exploration and one physical rival by default from 2026-10-18. Expedition Groups reuse the existing Simulation Core, canonical physical routes, native resident Run and clan discovery. Ordinary residents stay autonomous. Existing saves keep their original rules; separate spatial missions are documented in v0.4D (#150), and larger ship/horse/cart carrying capacities are not implemented.
 
 ## Current owner decisions
 
@@ -51,3 +51,7 @@ Starting, changing targets and mode changes never unpause a manual, hidden-tab, 
 New starts upgrade the optional `world.spatial` extension to version 2. Its carried balances, Prepared/Stranded states, routes, confirmed progress and factual events are deterministic headless data. Geography is reattached on load; no duplicate world is saved in Core. Pacing intent/preference remains session state and the active override is derived from canonical expeditions. Save/load, replay and view handoff retain it without replacing the user's preference or resuming time automatically.
 
 Existing version-1 spatial missions and old four-region Recon/Surveillance/Pillage saves retain their recorded movement/economy semantics. The 3D UI guides an already underway version-1 group home before starting the fixed-pack mode; it cannot silently purchase new route-priced provisions through the new UI. Old paid journeys are not assigned invented reserves. New gameplay uses the explicit confirmed start contract.
+
+## Physical mission adapter (#150)
+
+The [v0.4D physical mission contract](ISLAND-MISSIONS-V04D.md) now connects the same groups to separate Recon, Surveillance and Pillage journeys from home. It retains the existing mission prices/durations and actual recovery limits; it does not extend an Explore pack or change its endurance. Spatial version 3 allows old Explore packets and new versioned mission tasks to coexist without changing the old records.

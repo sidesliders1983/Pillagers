@@ -266,6 +266,7 @@ export class ExpeditionPanel {
                 <div class="fjord-expedition-members">${unavailable.map(person => row(person.id, false)).join('')}</div></details>` : ''}`;
     }
     private supplies(mission: Mission) {
+        if (mission.missionType) return `<p class="fjord-caption">${escape(mission.missionType)} · ${mission.foodCost} Food paid. Travel and return are included in the mission duration.</p>`;
         if (!mission.supplies) return '<p class="fjord-caption">Return home to prepare a new expedition with carried supplies.</p>';
         const remaining = mission.supplies.activeTicksRemaining;
         const total = mission.supplies.foodPerMember * mission.supplies.ticksPerFood;
@@ -281,6 +282,8 @@ export class ExpeditionPanel {
     }
     private actions(mission: Mission) {
         const stranded = mission.status === 'Stranded';
+        if (mission.missionType) return button(mission.status === 'Returning' ? 'Returning home' : 'Return home', 'home',
+            `data-recall="${escape(mission.groupId)}" ${stranded || mission.status === 'Returning' ? 'disabled' : ''}`);
         return button(mission.status === 'Prepared' ? 'Choose destination' : 'Change destination', 'destination',
             `data-explore="${escape(mission.groupId)}" class="fjord-primary" ${stranded || !mission.supplies ? 'disabled' : ''}`) +
             (mission.status === 'Prepared' ? button('End expedition', 'close', `data-cancel-expedition="${escape(mission.groupId)}"`) :
@@ -290,7 +293,7 @@ export class ExpeditionPanel {
     private journey(group: Group, mission?: Mission) {
         const step = !mission ? 0 : mission.status === 'Prepared' ? 1 : 2;
         return `<ol class="fjord-expedition-steps" aria-label="Expedition steps">${[
-            ['people', 'Crew'], ['destination', 'Destination'], ['route', 'Explore & return'],
+            ['people', 'Crew'], ['destination', 'Destination'], ['route', mission?.missionType ? 'Mission & return' : 'Explore & return'],
         ].map(([glyph, label], index) => `<li ${index === step ? 'aria-current="step"' : ''} class="${index < step ? 'is-complete' : ''}">
             ${icon(index < step ? 'check' : glyph as FjordIcon)}<span>${label}</span></li>`).join('')}</ol>
             <div class="fjord-expedition-group-heading"><h3>${escape(group.name)}</h3>
@@ -311,6 +314,10 @@ export class ExpeditionPanel {
         </div>`;
     }
     private missionDescription(mission: Mission) {
+        if (mission.missionType) return mission.status === 'Exploring' ? `${mission.missionType} in progress. Results are reported after returning home.` :
+            mission.status === 'Traveling' ? `Travelling for ${mission.missionType}. Return home to change missions.` :
+            mission.status === 'Returning' ? 'The group is returning home with its report.' :
+            mission.status === 'Stranded' ? 'The return route is blocked. The group is stranded.' : 'Mission completed.';
         return ({ Prepared: 'Supplies are packed. Choose a flag on the island to leave home.',
             Traveling: 'The group is travelling to your flag. You can redirect them or call them home.',
             Exploring: 'The group is revealing nearby land. Choose another destination to continue.',
@@ -365,7 +372,7 @@ export class ExpeditionPanel {
                         ${!isMobileLayout() && mission.status !== 'Prepared' && mission.status !== 'Stranded' ? button(this.session.running ? 'Pause travel' : 'Resume travel',
                             this.session.running ? 'pause' : 'play', 'data-expedition-action="clock"') : ''}
                     </div><p class="fjord-caption">${!this.session.running ? 'Clock paused. Resume travel when you are ready.' :
-                        'The clock is running.'} New destinations use the same carried supplies.</p>`;
+                        'The clock is running.'} ${mission.missionType ? 'Return home before starting another mission.' : 'New destinations use the same carried supplies.'}</p>`;
                 const latest = missions.filter(candidate => candidate.groupId === group.id).at(-1);
                 if (!mission && latest) html += `<p class="fjord-expedition-history">${icon('check')}Previous expedition: ${escape(latest.outcome ?? latest.status)} · ${latest.foodCost} Food supplied</p>`;
             }
@@ -405,14 +412,14 @@ export class ExpeditionPanel {
             this.actions(mission) + (mission.status !== 'Prepared' && mission.status !== 'Stranded' ?
                 button(this.session.running ? 'Pause travel' : 'Resume travel', this.session.running ? 'pause' : 'play',
                     'data-expedition-action="clock"') : '');
-        const html = `<div class="fjord-exploration-overline">${icon('destination')}<span>Exploration mode</span>
+        const html = `<div class="fjord-exploration-overline">${icon('destination')}<span>${mission.missionType ?? 'Exploration'} mode</span>
                 ${button(`${escape(group.name)}${activeGroups.length > 1 ? ` · ${activeGroups.length} active groups` : ''}`, 'people', 'data-expedition-action="groups"')}
                 <span class="fjord-exploration-clock">${this.session.running ? 'Clock running' : 'Clock paused'}</span></div>
             <div class="fjord-exploration-content"><div class="fjord-exploration-instruction"><h2>${title}</h2><p>${instruction}</p></div>
                 ${this.supplies(mission)}</div>
             <div class="fjord-expedition-actions">${controls}
                 ${button('Show group', 'locate', 'data-expedition-action="focus"')}
-            </div><p class="fjord-exploration-hint">${this.choosing ? 'No extra Food charged. ' : ''}Travel, exploration and the return share this pack.</p>
+            </div><p class="fjord-exploration-hint">${mission.missionType ? 'Travel and return are included in the paid mission.' : `${this.choosing ? 'No extra Food charged. ' : ''}Travel, exploration and the return share this pack.`}</p>
             <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
         this.replace(this.toolbar, html, this.toolbarHTML);
         this.toolbarHTML = html;
@@ -432,12 +439,12 @@ export class ExpeditionPanel {
         const html = `<div class="fjord-mobile-expedition-heading">
                 ${button(`<strong>${escape(group.name)}</strong><small>${title}</small>`, 'people',
                     'data-expedition-action="groups" aria-label="Open expedition group"')}
-                ${button('Supplies', 'food', `id="expedition-details" aria-expanded="${this.toolbarExpanded}" aria-controls="expedition-mobile-details"`)}
+                ${button(mission.missionType ? 'Mission' : 'Supplies', 'food', `id="expedition-details" aria-expanded="${this.toolbarExpanded}" aria-controls="expedition-mobile-details"`)}
                 ${button('', 'locate', 'data-expedition-action="focus" aria-label="Show group on map"')}
             </div><p class="fjord-mobile-instruction">${instruction}</p>
             <div id="expedition-mobile-details" ${this.toolbarExpanded ? '' : 'hidden'}>
                 <p class="fjord-caption">${group.memberIds.map(id => escape(this.session.readSnapshot().personas[id]?.name ?? id)).join(', ')}</p>
-                ${this.supplies(mission)}<p class="fjord-caption">Travel, exploration and return share this pack.</p>
+                ${this.supplies(mission)}<p class="fjord-caption">${mission.missionType ? 'The paid mission includes travel and return.' : 'Travel, exploration and return share this pack.'}</p>
             </div><div class="fjord-expedition-actions">${controls}</div>
             <p class="fjord-expedition-message" role="status" aria-live="polite" ${this.message ? '' : 'hidden'}>${escape(this.message)}</p>`;
         this.replace(this.toolbar, html, this.toolbarHTML);

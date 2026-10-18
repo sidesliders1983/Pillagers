@@ -35,3 +35,9 @@ Recon may reveal estimates such as population, defenses, resource abundance, liv
 ## Implemented v0.4 slice
 
 [World Expeditions v0.4](../../WORLD-EXPEDITIONS-V04.md) records the implemented region graph, reusable groups, optional Surveillance, mission provisions/risk and one-category carrying capacity. Named residents and actual target assets move through Simulation Core commands; the player UI is /play and Gameplay Lab retains shared-save debugging.
+
+## Physical island missions (#150)
+
+For new physical island campaigns, [Spatial Recon, Surveillance and Pillage v0.4D](../../ISLAND-MISSIONS-V04D.md) is the implemented adapter to the existing rules. Missions depart from home with the existing weather-adjusted 2/4/5 Food per member and 250/400/500-tick durations. Every member travels a real land route; the round trip must fit the duration or departure is rejected. These are separate missions, not upgrades of a paid Explore expedition.
+
+Walking can mark an unidentified settlement. A returned successful Recon must identify the CPU clan before Surveillance is allowed; Pillage needs a dated viable opportunity. Operation-time observations become public at homecoming and never update from unseen remote changes. Actual recovery and identity transfers reuse the existing capacity and target state. `/fjord-play` is the player UI; the four-region graph remains for older saves.
