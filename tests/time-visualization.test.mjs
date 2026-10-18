@@ -25,7 +25,7 @@ test('animated lighting and foliage reuse lights, shadow map and geometry, resto
     foliage.userData.seasonalFoliage=true;root.add(foliage,ground);const tint=new SeasonTint(root,ground);
     const own=foliage.material;assert.notEqual(own,material);
     const shader={uniforms:{},vertexShader:'#include <color_vertex>',fragmentShader:'#include <color_fragment>'};own.onBeforeCompile(shader);
-    tint.update(0);assert.equal(shader.uniforms.seasonSnowAmount.value,.65);assert.match(shader.fragmentShader,/seasonMask=smoothstep/);
+    tint.update(0);assert.equal(shader.uniforms.seasonSnowAmount.value,.65);assert.match(shader.fragmentShader,/float seasonMask=1.0/);assert.doesNotMatch(shader.fragmentShader,/vSeasonFoliageMask/);
     lighting.setVisualization('seasons');
     for(const p of [0,.25,.5,.75,1]){lighting.update(p*60,p);tint.update(p);assert.equal(foliage.geometry,geometry);assert.equal(foliage.material,own);assert.deepEqual(scene.children,resources);}
     assert.notDeepEqual(own.color,material.color);assert.equal(lighting.directional.shadow.map,shadow);
@@ -100,9 +100,15 @@ test('foliage snow classifies source colours before per-instance tint and treats
         const shader = { uniforms: {}, vertexShader: '#include <color_vertex>',
             fragmentShader: '#include <color_fragment>' };
         tree.material.onBeforeCompile(shader);
-        assert.match(shader.vertexShader, /vSeasonSourceColor=vec3\(0.0,1.0,0.0\)/);
-        assert.match(shader.vertexShader, /#ifdef USE_COLOR\nvSeasonSourceColor=color.rgb/);
-        assert.match(shader.fragmentShader, /vSeasonSourceColor.g\/max/);
+        if (tree === canopy) {
+            assert.doesNotMatch(shader.vertexShader, /vSeasonFoliageMask/,
+                'Textured canopies add no varying or per-vertex classification work');
+            assert.match(shader.fragmentShader, /float seasonMask=1.0;/);
+        } else {
+            assert.match(shader.vertexShader, /varying float vSeasonFoliageMask/);
+            assert.match(shader.vertexShader, /smoothstep\(1.0,1.2,color.g/);
+            assert.match(shader.fragmentShader, /seasonMask=vSeasonFoliageMask/);
+        }
         assert.doesNotMatch(shader.fragmentShader, /vColor\.g/,
             'The built-in vColor already includes random instance tints in the fragment stage');
         tint.update(0);

@@ -21,6 +21,8 @@ const sourceFiles = ['src/fjord-play/VillageNature.ts', 'src/fjord-play/Campaign
     'src/fjord-play/FjordCampaign.ts', 'src/play/SharedSettlement.ts',
     'src/world-generation/GenerationTask.ts', 'src/fjord-play/IslandLoading.ts',
     'src/fjord-play/FjordPlay.ts', 'src/play/SettlementBrowser.ts'];
+const replayRoot = process.env.QA_REPLAY_ROOT;
+const replay = replayRoot ? JSON.parse(await readFile(resolve(replayRoot, 'measurements.json'), 'utf8')) : null;
 const sourceHashes = Object.fromEntries(await Promise.all(sourceFiles.map(async name =>
     [name, hash(await readFile(new URL('../../' + name, import.meta.url), 'utf8'))])));
 const report = { baseline: 'ce9b57c660c8d034abb5c7761da248ccef526304', sourceHashes,
@@ -44,7 +46,11 @@ if (process.env.QA_PROFILE_READY) {
 const browser = await chromium.launch({ channel: process.env.QA_BROWSER || 'msedge', headless: true });
 try {
     for (const seed of seeds) {
-        const fixtures = versions.map(version => {
+        const prior = replay?.cases.find(item => item.name === 'village-summer-standard-' + seed);
+        const fixtures = replay ? await Promise.all(versions.map(async (version, side) => ({
+            saved: JSON.parse(await readFile(resolve(replayRoot, 'village-' + seed + '-' + version + '.json'), 'utf8')),
+            blueprintHash: side ? prior.after.blueprintHash : prior.before.blueprintHash
+        }))) : versions.map(version => {
             const shared = new SharedSettlement(seed, 123, true, version, 'summer-800-v1');
             shared.fjord.enableDiscovery();
             shared.session.setRunning(false);
@@ -61,21 +67,34 @@ try {
             for (const chapter of saved.fjord.narrative.chapters) chapter.read = chapter.notified = true;
             return { saved, world, fire, center: campaignIslandPlan(world).center };
         });
-        for (const key of ['terrain', 'environment', 'settlement'])
-            assert.equal(hash(fixtures[0].world[key]), hash(fixtures[1].world[key]), key);
+        let woodlandCamera;
+        let nearby;
+        if (replay) {
+            const previous = replay.cases.find(item => item.name === 'woodland-summer-standard-' + seed).after.camera;
+            woodlandCamera = { position: previous.position, target: previous.target };
+            nearby = prior.trees;
+        } else {
+            for (const key of ['terrain', 'environment', 'settlement'])
+                assert.equal(hash(fixtures[0].world[key]), hash(fixtures[1].world[key]), key);
+            const candidate = fixtures[1], fire = candidate.fire;
+            const originalTrees = new Set(fixtures[0].world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId))
+                .map(p => p.assetId + '@' + p.x + ',' + p.z));
+            const added = candidate.world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId) &&
+                !originalTrees.has(p.assetId + '@' + p.x + ',' + p.z)).sort((a, b) =>
+                Math.hypot(a.x - fire.x, a.z - fire.z) - Math.hypot(b.x - fire.x, b.z - fire.z));
+            assert.ok(added.length);
+            const edge = added[0];
+            woodlandCamera = { position: [edge.x + 19, edge.y + 18, edge.z - 23],
+                target: [(edge.x + fire.x) / 2, edge.y + 1, (edge.z + fire.z) / 2] };
+            nearby = fixtures.map(({ world, center }) => ({
+                total: world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId)).length,
+                within55: world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId) &&
+                    Math.hypot(p.x - center.x, p.z - center.z) < 55).length
+            }));
+        }
         for (let side = 0; side < fixtures.length; side++)
             await writeFile(output + '/village-' + seed + '-' + versions[side] + '.json',
                 JSON.stringify(fixtures[side].saved));
-        const candidate = fixtures[1], fire = candidate.fire;
-        const originalTrees = new Set(fixtures[0].world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId))
-            .map(p => p.assetId + '@' + p.x + ',' + p.z));
-        const added = candidate.world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId) &&
-            !originalTrees.has(p.assetId + '@' + p.x + ',' + p.z)).sort((a, b) =>
-            Math.hypot(a.x - fire.x, a.z - fire.z) - Math.hypot(b.x - fire.x, b.z - fire.z));
-        assert.ok(added.length);
-        const edge = added[0];
-        const woodlandCamera = { position: [edge.x + 19, edge.y + 18, edge.z - 23],
-            target: [(edge.x + fire.x) / 2, edge.y + 1, (edge.z + fire.z) / 2] };
         const pair = [];
         for (let side = 0; side < 2; side++) {
             const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
@@ -100,6 +119,13 @@ try {
                     (side ? '-after.jpg' : '-before.jpg'), type: 'jpeg', quality: 88 });
                 const { canonicalJSON, blueprintJSON, actors, ...rest } = data.golden;
                 const canonical = JSON.parse(canonicalJSON);
+                if (replay) {
+                    assert.equal(hash(blueprintJSON), fixtures[side].blueprintHash,
+                        'Reused fixtures require identical complete world/navigation fingerprints');
+                    const oldCase = replay.cases.find(item => item.name === name + '-' + seed);
+                    assert.equal(hash(canonicalJSON), (side ? oldCase.after : oldCase.before).canonicalHash,
+                        'Reused fixture commands must retain the complete Core state and RNG');
+                }
                 results[name] = { ...rest, canonicalHash: hash(canonicalJSON), blueprintHash: hash(blueprintJSON),
                     actorHash: hash(actors), rng: canonical.rng, stocks: canonical.stocks,
                     roster: hash(canonical.personas), households: hash(canonical.households),
@@ -163,11 +189,6 @@ try {
         for (const name of Object.keys(pair[0])) {
             for (const key of ['camera', 'calendar', 'lighting', 'quality', 'stocks', 'roster', 'households'])
                 assert.deepEqual(pair[0][name][key], pair[1][name][key], seed + ': ' + name + ': ' + key);
-            const nearby = fixtures.map(({ world, center }) => ({
-                total: world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId)).length,
-                within55: world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId) &&
-                    Math.hypot(p.x - center.x, p.z - center.z) < 55).length
-            }));
             report.cases.push({ seed, name: name + '-' + seed, trees: nearby, before: pair[0][name], after: pair[1][name] });
         }
         await writeFile(output + '/measurements.json', JSON.stringify(report, null, 2));

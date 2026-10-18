@@ -29,7 +29,8 @@ per-instance foliage tones. Rotation/scale do not alter source geometry. The nat
 wind receives an independent world-position phase, while trunks remain fixed. Existing
 wind controls and seasonal tint/frost continue to own motion and winter appearance.
 Foliage snow classifies the original vertex colour before instance tints; textured pine
-canopies without vertex colours receive full foliage coverage. Per-tree hue variation
+canopies without vertex colours receive full foliage coverage without any extra varying
+or per-vertex mask work. Mixed vertex-coloured foliage passes one source mask float. Per-tree hue variation
 therefore cannot accidentally suppress snow, while mixed birch/spruce bark keeps its
 original source-colour mask.
 
@@ -84,3 +85,7 @@ rebuilds. Ten quality cycles check retained geometry, textures and instance coun
 measurements are desktop evidence; they do not certify physical mobile thermal performance.
 
 Results and visual acceptance are recorded in the accompanying QA report before delivery.
+
+For a renderer-only recapture, `QA_REPLAY_ROOT` can point at a previous successful capture
+directory. The runner reuses its canonical saves/cameras, but still loads the real game and
+asserts exact full blueprint/navigation and Core/RNG hashes against that earlier run.

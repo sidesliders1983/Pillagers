@@ -77,19 +77,18 @@ export class SeasonTint {
             shader.uniforms.seasonSnowAmount = amount;
             shader.uniforms.seasonSnowTone = { value: this.snowTone };
             shader.fragmentShader = 'uniform float seasonSnowAmount; uniform vec3 seasonSnowTone;\n' + shader.fragmentShader;
-            if (foliage) {
-                // Fragment USE_COLOR also includes instanceColor. Classify the original
-                // vertex colour instead, so a per-tree tint cannot remove winter snow.
-                // Textured canopies without vertex colours are entirely foliage.
-                shader.vertexShader = 'varying vec3 vSeasonSourceColor;\n' + shader.vertexShader;
+            // Fragment USE_COLOR includes instance tints. Pure textured canopies need
+            // no classification; mixed vertex-coloured foliage keeps one source mask.
+            const sourceMask = foliage && material.vertexColors;
+            if (sourceMask) {
+                shader.vertexShader = 'varying float vSeasonFoliageMask;\n' + shader.vertexShader;
                 shader.vertexShader = shader.vertexShader.replace('#include <color_vertex>',
                     '#include <color_vertex>\n' +
-                    'vSeasonSourceColor=vec3(0.0,1.0,0.0);\n' +
-                    '#ifdef USE_COLOR\nvSeasonSourceColor=color.rgb;\n#endif');
-                shader.fragmentShader = 'varying vec3 vSeasonSourceColor;\n' + shader.fragmentShader;
+                    'vSeasonFoliageMask=1.0;\n#ifdef USE_COLOR\n' +
+                    'vSeasonFoliageMask=smoothstep(1.0,1.2,color.g/max(max(color.r,color.b),0.001));\n#endif');
+                shader.fragmentShader = 'varying float vSeasonFoliageMask;\n' + shader.fragmentShader;
             }
-            const mask = foliage ? '\n#ifdef USE_COLOR\nseasonMask=smoothstep(1.0,1.2,' +
-                'vSeasonSourceColor.g/max(max(vSeasonSourceColor.r,vSeasonSourceColor.b),0.001));\n#endif\n' : '';
+            const mask = sourceMask ? '\nseasonMask=vSeasonFoliageMask;\n' : '';
             shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', `#include <color_fragment>\nfloat seasonMask=1.0;${mask}\ndiffuseColor.rgb=mix(diffuseColor.rgb,seasonSnowTone,seasonSnowAmount*seasonMask);`);
             if (!foliage && this.summitLine !== null) {
                 shader.uniforms.fjordSummitLine = { value: this.summitLine };
@@ -111,7 +110,7 @@ export class SeasonTint {
                     'diffuseColor.rgb=mix(diffuseColor.rgb,fjordIceTone,summitCap);');
             }
         };
-        material.customProgramCacheKey = () => key + (foliage ? 'season-foliage-v2-source-color' : 'season-ground-v1') +
+        material.customProgramCacheKey = () => key + (foliage ? 'season-foliage-v3-source-mask' : 'season-ground-v1') +
             (!foliage && this.summitLine !== null ? '|fjord-summit-v1:' + material.name : '');
     }
 
