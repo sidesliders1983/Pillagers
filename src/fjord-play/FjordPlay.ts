@@ -1,4 +1,5 @@
 import { RivalScene } from './RivalScene';
+import { IslandMap } from './IslandMap';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
 import { ExpeditionPanel } from './ExpeditionPanel';
 import { IslandMissionPanel } from './IslandMissionPanel';
@@ -49,7 +50,7 @@ import { SeasonTint } from '../world/SeasonTint';
 import { createWorld } from '../world/WorldFactory';
 import { RTSCameraController } from '../camera/RTSCameraController';
 import { projectChronicle } from '../lore/Chronicle';
-import { inspectCampfire, inspectWeatherExposure, personaAway } from '../simulation/SimulationCore';
+import { inspectCampfire, inspectWeatherExposure, personaAway, inspectSpatialExpeditions } from '../simulation/SimulationCore';
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
@@ -528,6 +529,7 @@ export class FjordPlay {
             refresh();
         };
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
+            home: () => controller.home(),
             commit: (commands, done) => action(async () => {
                 this.session.commandBatch(typeof commands === 'function' ? commands() : commands);
                 done();
@@ -621,12 +623,7 @@ export class FjordPlay {
                     showManagement(false);
                 },
                 showGroups: () => desktopUI?.open('expeditions', true),
-                focus: point => {
-                    const height = createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z);
-                    const target = new Vector3(point.x, height, point.z);
-                    const offset = camera.position.clone().sub(controller.focus);
-                    controller.setView({ position: target.clone().add(offset).toArray(), target: target.toArray() });
-                },
+                focus: point => controller.focusAt(point),
                 toggleClock: () => document.querySelector<HTMLButtonElement>('#fjord-run')!.click(),
             });
         islandMissions = new IslandMissionPanel(document.querySelector<HTMLElement>('#expedition-panel')!,
@@ -641,12 +638,8 @@ export class FjordPlay {
                     if (!person) throw new Error('A group member is not currently on the island.');
                     return [id, { x: person.position[0], z: person.position[2] }];
                 }));
-            }, () => desktopUI?.showExplorationMap(), () => desktopUI?.open('expeditions', true), point => {
-                const height = createBlueprintSurface(this.campaign.blueprint).surfaceHeightAt(point.x, point.z);
-                const target = new Vector3(point.x, height, point.z);
-                const offset = camera.position.clone().sub(controller.focus);
-                controller.setView({ position: target.clone().add(offset).toArray(), target: target.toArray() });
-            });
+            }, () => desktopUI?.showExplorationMap(), () => desktopUI?.open('expeditions', true),
+            point => controller.focusAt(point));
         document.querySelector('#fjord-expeditions-open')!.addEventListener('click', () => {
             document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
             showManagement(true);
@@ -658,6 +651,9 @@ export class FjordPlay {
         const renderer = createRenderer(canvas);
         renderer.setPixelRatio(1);
         const controller = new RTSCameraController(camera, canvas, 'pan');
+        const islandMap = new IslandMap(document.querySelector('#fjord-play')!, {
+            focus: point => controller.focusAt(point),
+        });
         capturePresentation = () => this.shared.setPresentation({
             quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
             effects: document.querySelector<HTMLSelectElement>('#fjord-effects')!.value as EffectQuality,
@@ -711,6 +707,7 @@ export class FjordPlay {
             renderer.setAnimationLoop(null);
             observer?.disconnect();
             controller.dispose();
+            islandMap.dispose();
             targetGeometry.dispose(); targetMaterial.dispose();
             reducedMotion.removeEventListener('change', configureEffects);
             discoveryFog?.dispose();
@@ -899,8 +896,10 @@ export class FjordPlay {
                 lighting.includeWorldShadowBounds(next.root);
                 if (syncScene)
                     await syncScene();
-                controller.setNavigationSurface(next.terrain, next.center, blueprint.terrain.bounds, next.movement.heightAt,
+                controller.setNavigationSurface(next.terrain, firePosition, blueprint.terrain.bounds, next.movement.heightAt,
                     { terrain: blueprint.terrain, waterLevel: blueprint.waterLevel });
+                islandMap.setWorld(blueprint, { x: firePosition.x, z: firePosition.z }, discovery, next.terrain);
+                islandMap.setExpeditions(inspectSpatialExpeditions(this.session.readSnapshot()).missions);
                 // Arrive at the settlement nucleus, not at a fit-all bounding box.
                 arrivalPose = {
                     position: [firePosition.x + 28, firePosition.y + 31, firePosition.z - 32],
@@ -935,6 +934,7 @@ export class FjordPlay {
                     // acquires a new pair on the next pass instead of mixing new facts into this scene.
                     const state = this.session.readSnapshot();
                     const view = this.campaign.readProjection();
+                    islandMap.setExpeditions(inspectSpatialExpeditions(state).missions);
                     if (state.discovery && discoveryFog) {
                         knownTerrain = inspectClanDiscovery(state.discovery, state.clan.id);
                         if (world!.setDiscovery(knownTerrain)) {
@@ -943,6 +943,7 @@ export class FjordPlay {
                             weatherSignature = '';
                         }
                         discoveryFog.setKnowledge(knownTerrain);
+                        islandMap.setKnowledge(knownTerrain);
                         if (query.has('debugDiscovery')) canvas.dataset.discovery = JSON.stringify(discoveryFog.inspect());
                     } else if (query.has('debugDiscovery')) canvas.dataset.discovery = JSON.stringify({ active: false });
                     const sceneCanonicalTime = 'Canonical time: Winter ' + view.time.winter +
@@ -1114,6 +1115,7 @@ export class FjordPlay {
             time += delta;
             controller.update(delta);
             camera.updateMatrixWorld();
+            islandMap.update(camera, controller.focus, frameStarted);
             const running = this.session.running && canAdvance();
             const motionDelta = Math.min(elapsed, 1);
             if (running) activeTime += motionDelta;
@@ -1136,6 +1138,7 @@ export class FjordPlay {
                     triangles: renderer.info.render.triangles,
                     geometries: renderer.info.memory.geometries, textures: renderer.info.memory.textures
                 });
+                canvas.dataset.islandMap = JSON.stringify(islandMap.inspect());
                 canvas.dataset.motion = JSON.stringify(motion!.inspect());
                 canvas.dataset.campfireEffect = JSON.stringify(fireVisual);
                 canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());

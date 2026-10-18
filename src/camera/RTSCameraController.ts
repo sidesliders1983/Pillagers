@@ -156,6 +156,13 @@ export class RTSCameraController {
         this.yaw = .45;
         this.targetElevation = initialElevation;
     }
+    /** Camera-only geographic navigation with existing bounds, terrain clearance and orbit intent. */
+    focusAt(point: { x: number; z: number }) {
+        if (!Number.isFinite(point.x) || !Number.isFinite(point.z)) throw new RangeError('Camera focus must be finite.');
+        this.desired.set(point.x, this.desired.y, point.z);
+        this.clampFocus();
+        if (this.height) this.desired.y = Math.max(0, this.height(this.desired.x, this.desired.z));
+    }
     private setZoom(value:number){this.zoom=MathUtils.clamp(value,this.minimumZoom,worldConfig.camera.maxZoom);}
     private navigate(x:number,y:number,pointerType:'mouse'|'touch'='mouse'){
         if(this.select?.(x,y,pointerType))return;

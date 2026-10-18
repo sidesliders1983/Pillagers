@@ -90,6 +90,12 @@ export class IslandMissionPanel {
         if (button.hasAttribute('data-island-area')) {
             this.choosing = true; this.message = ''; this.showMap(); this.targetBar.hidden = false;
         }
+        if (button.hasAttribute('data-island-return')) {
+            try {
+                this.command({ type: 'RecallExpedition', groupId: this.groupId });
+                this.message = 'The group is returning home. Missions can depart after homecoming.';
+            } catch (error) { this.message = error instanceof Error ? error.message : String(error); }
+        }
         if (button.dataset.islandSite) this.selectSite(button.dataset.islandSite);
         if (button.dataset.islandFocus) {
             const site = inspectIslandMissions(this.session.readSnapshot()).sites.find(site => site.id === this.siteId);
@@ -145,6 +151,22 @@ export class IslandMissionPanel {
         const available = !!group?.memberIds.length && !groupMission(state, this.groupId) &&
             group.memberIds.every(id => expeditionEligible(state, id, group.id));
         const active = Object.values(state.world!.spatial?.missions ?? {}).find(m => m.groupId === this.groupId && m.status !== 'Returned');
+        let groupReason = '';
+        if (!group) groupReason = 'Create or choose a group to send a mission.';
+        else if (!group.memberIds.length) groupReason = 'Add eligible residents to this group first.';
+        else if (active?.status === 'Returning') groupReason = `${group.name} is returning home. Wait for homecoming, or choose another group at home.`;
+        else if (active?.status === 'Stranded') groupReason = `${group.name} is stranded and cannot start another mission.`;
+        else if (active?.status === 'Prepared') groupReason = `${group.name} has a prepared expedition. Cancel it first, or choose another group at home.`;
+        else if (active) groupReason = `${group.name} is away on ${active.task?.type ?? 'Explore'}. Return this group home, or choose another available group at home.`;
+        else if (!available) groupReason = 'This group has unavailable members. Choose a group at home with eligible residents.';
+        const canRecall = active && !['Returning', 'Stranded', 'Prepared'].includes(active.status);
+        const missionReason = (type: MissionType) => {
+            if (type !== 'Recon' && !site?.knowledge?.settlementName)
+                return 'A successful Recon must return home and identify this settlement first.';
+            if (type === 'Pillage' && !site?.knowledge?.opportunity)
+                return 'No viable Pillage opportunity has been reported.';
+            return groupReason;
+        };
         const reports = Object.values(state.world!.spatial?.missions ?? {}).filter(m => m.groupId === this.groupId && m.task?.result);
         const latest = reports.at(-1)?.task?.result;
         const observationAge = site?.knowledge ? Math.floor((state.time.winter * state.ticksPerWinter +
@@ -152,18 +174,19 @@ export class IslandMissionPanel {
         const html = `<h3>Island missions</h3><p class="fjord-caption">Separate missions depart from home. Explore first to map possible destinations.</p>
             <label>Mission group <select id="island-mission-group"><option value="" ${group ? 'hidden' : ''}>Create a group above</option>${groups.map(g =>
                 `<option value="${escape(g.id)}" ${g.id === this.groupId ? 'selected' : ''}>${escape(g.name)}</option>`).join('')}</select></label>
-            ${group && !available ? '<p class="fjord-caption">Choose a group at home with eligible members.</p>' : ''}
+            ${groupReason ? `<p class="fjord-caption" id="island-mission-group-block">${escape(groupReason)}</p>` : ''}
+            ${canRecall ? '<button type="button" data-island-return>Return group home</button>' : ''}
             ${active?.task ? `<p>${escape(active.task.type)} · ${escape(active.status)}</p>` : ''}
-            <button type="button" data-island-area ${available ? '' : 'disabled'}>Recon mapped area</button>
+            <button type="button" data-island-area title="${escape(groupReason)}" ${available ? '' : 'disabled aria-describedby="island-mission-group-block"'}>Recon mapped area</button>
             <h4>Known places</h4>${sites.length ? sites.map(s => `<button type="button" data-island-site="${escape(s.id)}"
                 aria-pressed="${s.id === this.siteId}">${escape(s.knowledge?.settlementName ?? 'Unidentified settlement')}</button>`).join('') :
                 '<p>No settlement has been sighted.</p>'}
-            ${site ? `<p>${site.knowledge ? `${escape(site.knowledge.level)} · recorded ${observationAge ? `${observationAge} year${observationAge === 1 ? '' : 's'} ago` : 'this year'}` : 'Sighted. Recon is needed to identify this settlement.'}</p>
+            ${site ? `<p>${site.knowledge ? `${escape(site.knowledge.level)} · recorded ${observationAge ? `${observationAge} year${observationAge === 1 ? '' : 's'} ago` : 'this year'}` : 'Sighted. Send Recon from home to identify this settlement.'}</p>
                 ${site.knowledge?.resistance ? `<p>Observed resistance: ${site.knowledge.resistance}</p>` : ''}
                 <button type="button" data-island-focus="true">Show place on map</button>
                 <div class="fjord-expedition-actions">${(['Recon', 'Surveillance', 'Pillage'] as const).map(type =>
-                    `<button type="button" data-island-type="${type}" ${available && (type === 'Recon' || !!site.knowledge?.settlementName &&
-                        (type !== 'Pillage' || site.knowledge.opportunity)) ? '' : 'disabled'}>${type}</button>`).join('')}</div>
+                    `<button type="button" data-island-type="${type}" title="${escape(missionReason(type))}" ${missionReason(type) ? 'disabled' : ''}>${type}</button>`).join('')}</div>
+                ${!site.knowledge?.settlementName ? '<p class="fjord-caption">Surveillance and Pillage unlock after a successful Recon returns home.</p>' : ''}
                 ${site.knowledge?.opportunity ? `<details data-island-cargo-options><summary>Pillage priorities</summary>
                     <p class="fjord-caption">First available category, top to bottom. One category per survivor.</p>
                     <fieldset><legend>Choose cargo</legend>${(['Food', 'Materials', 'Cattle', 'People'] as const).map(cargo =>
