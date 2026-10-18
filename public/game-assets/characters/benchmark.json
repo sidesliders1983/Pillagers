@@ -1,0 +1,37 @@
+{
+  "name": "dwarf",
+  "height": 1.8,
+  "assets": [
+    {
+      "label": "Source",
+      "file": "dwarf_source.glb",
+      "triangles": 966646,
+      "vertices": 680287,
+      "bytes": 35851976
+    },
+    {
+      "label": "LOD0",
+      "file": "dwarf_LOD0.glb",
+      "triangles": 7998,
+      "vertices": 23994,
+      "bytes": 932480,
+      "textureSize": 1024
+    },
+    {
+      "label": "LOD1",
+      "file": "dwarf_LOD1.glb",
+      "triangles": 3998,
+      "vertices": 11994,
+      "bytes": 465316,
+      "textureSize": 512
+    },
+    {
+      "label": "LOD2",
+      "file": "dwarf_LOD2.glb",
+      "triangles": 1198,
+      "vertices": 3594,
+      "bytes": 144952,
+      "textureSize": 256
+    }
+  ]
+}

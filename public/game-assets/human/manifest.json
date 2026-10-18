@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "source": "Assets/Characters/Human/Human-textured.glb",
+  "sourceSha256": "be5173fa4f3b6e63fa7bc3506b3d61b4def28b7f67477b9a29b5eb527d80f8fe",
+  "sourceBytes": 11459716,
+  "rig": "SmartRigArmature",
+  "morphology": false,
+  "appearance": false,
+  "textures": "authored Meshy textures",
+  "animations": [
+    "Running",
+    "Walking",
+    "01a11653-99cc-7579-b58e-8682f15317fa",
+    "Attack",
+    "Fall_Dead_from_Abdominal_Injury",
+    "Idle_02",
+    "Idle_03",
+    "Idle_11",
+    "Idle_7",
+    "Listening_Gesture",
+    "Pull_Radish",
+    "Talk_Passionately",
+    "Unsteady_Walk",
+    "01a11653-99cc-7579-b58e-8682f15317fa.001"
+  ],
+  "lods": [
+    {
+      "level": 0,
+      "file": "Human_LOD0.glb",
+      "triangles": 7644,
+      "bytes": 6167788,
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe"
+    },
+    {
+      "level": 1,
+      "file": "Human_LOD1.glb",
+      "triangles": 3221,
+      "bytes": 6118484,
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd"
+    },
+    {
+      "level": 2,
+      "file": "Human_LOD2.glb",
+      "triangles": 3219,
+      "bytes": 6118512,
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682"
+    }
+  ]
+}

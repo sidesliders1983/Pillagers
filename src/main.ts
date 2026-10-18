@@ -30,5 +30,5 @@ if (route === '/fjord-play') {
     Promise.all([import('./core/Game'), import('./core/world-shell.html?raw')]).then(([{ Game }, shell]) => {
         document.body.innerHTML = shell.default;
         return new Game().start(document.querySelector<HTMLCanvasElement>('#world')!);
-    }).catch(error => { console.error(error); (document.querySelector('#status') ?? document.querySelector('#app-bootstrap') ?? document.body).textContent = `Could not load the world. Check local Assets/Terrain files and WebGL support. ${error.message}`; });
+    }).catch(error => { console.error(error); (document.querySelector('#status') ?? document.querySelector('#app-bootstrap') ?? document.body).textContent = `Could not load the world. Check the published assets in public/ and WebGL support. ${error.message}`; });
 }

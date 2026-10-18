@@ -7,6 +7,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { AssetManager } from '../core/AssetManager';
+import { longshipModel, terrainAssetPath } from '../config/TerrainAssets';
 import { placeSettlement } from '../world/PlaceSettlement';
 import type { FjordEntity } from './FjordProjection';
 import {FjordWardrobe} from './FjordWardrobe';
@@ -260,7 +261,7 @@ export class FjordModels {
                 pace = manifest.walkSpeedMps ?? .28;
             }
             else
-                url = 'assets/Terrain/longship-drakkar.glb';
+                url = terrainAssetPath(longshipModel);
             const gltf = await this.loader.loadAsync(import.meta.env.BASE_URL + url);
             const source = gltf.scene;
             source.updateMatrixWorld(true);

@@ -8,21 +8,25 @@ A small Three.js Viking settlement beside a fjord. v0.2 implements [GitHub issue
 
 ## Run
 
-Use Node.js 22.12+ (Node 24 recommended). Supply your licensed GLBs in `Assets/Terrain/` with the original filenames, then:
+Use Node.js 22.12+ (Node 24 recommended). Runtime assets are committed under `public/`; a fresh checkout does not need the original `Assets/` folder. Then:
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. For production:
+Open `/fjord-play` at the local URL printed by Vite for the current game. `/` retains the earlier Fjord prototype. For production:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-The provided pnpm lockfile also supports `pnpm install`, `pnpm dev`, and `pnpm build`. This workstation has bundled pnpm but no npm, so validation used pnpm and Node 24. Do not commit `Assets/` or `dist/`.
+The provided pnpm lockfile also supports `pnpm install`, `pnpm dev`, and `pnpm build`. Do not commit `Assets/` or `dist/`. All runtime publications under `public/` are versioned, including house manifests, prepared GLBs and the Terrain kit in `public/terrain/`.
+
+`npm run validate:public` checks runtime manifests, hashes, GLB containers and external glTF resources. CI also uses `--tracked` to reject public files omitted from Git. This check needs no original source files.
+
+To republish Terrain after editing its local sources, run `npm run assets:terrain -- /path/to/Assets/Terrain`. The publisher compares lossless Meshopt output with the existing Draco-compressed payload and keeps the smaller verified model without simplifying geometry. Its manifest records source/published hashes, sizes, triangle counts and bounds. Review and commit the resulting `public/terrain/` changes. Other authoring commands may still require local `Assets/` or an explicit source directory; they are not setup steps for collaborators.
 
 ## LAN / mobile testing
 
@@ -110,7 +114,7 @@ Production builds copy the licensed kit for use by the local application. The ra
 
 ## Next steps
 
-The scriptable Blender character optimization benchmark and /asset-lab comparison page are described in [Asset Optimization Pipeline v0.1](docs/ASSET-OPTIMIZATION-V01.md). Run npm run assets:optimize to generate three LODs and npm run assets:publish to compare them locally. Generated assets and downloaded tools remain Git-ignored. npm run assets:test runs the independent Blender fixture test.
+The scriptable Blender character optimization benchmark and /asset-lab comparison page are described in [Asset Optimization Pipeline v0.1](docs/ASSET-OPTIMIZATION-V01.md). Run npm run assets:optimize to generate three LODs and npm run assets:publish to compare them locally. Original sources, intermediate output and downloaded tools remain Git-ignored; published files in public/ are committed. npm run assets:test runs the independent Blender fixture test.
 
 1. Build one production-direction Fjordside Viking, keeping the current placeholders for scale comparison.
 2. Validate that character at close, default and overview RTS camera distances; add a simple walk cycle.
