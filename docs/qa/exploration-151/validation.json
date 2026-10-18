@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "recordedAt": "2026-10-18T08:48:09.521Z",
+  "recordedAt": "2026-10-18T09:07:41.137Z",
   "node": "v24.19.0",
   "baseRevision": "76f357f3409e8b485c17c3d4d629d1bc8bbbef1d",
   "tests": {
@@ -53,6 +53,15 @@
       "reason": "Existing opt-in R3 evidence test; RUN_R3_EVIDENCE is unset."
     }
   ],
+  "localFullSuiteRevision": "776526c806ea377612f1ad7953859855d8a04451",
+  "finalQaOnlyFollowUp": {
+    "tests": 7,
+    "passed": 7,
+    "skipped": 0,
+    "failures": 0,
+    "command": "node --test tests/fjord-runtime-instrumentation.test.mjs tests/discovery-cache.test.mjs tests/exploration-integration.test.mjs",
+    "productionSourcesUnchanged": true
+  },
   "commands": {
     "fullSuite": "node --test tests/*.test.mjs",
     "build": "tsc --noEmit && vite build",
@@ -72,7 +81,9 @@
     "scripts/qa/exploration-review-server.mjs",
     "scripts/qa/replay-exploration-without-renderer.mjs",
     "tests/discovery-cache.test.mjs",
-    "tests/exploration-integration.test.mjs"
+    "tests/exploration-integration.test.mjs",
+    "scripts/qa/fjord-runtime-server.mjs",
+    "tests/fjord-runtime-instrumentation.test.mjs"
   ],
   "qaSourceHashes": {
     "scripts/qa/benchmark-exploration-los.mjs": "0cf6ede38056e1a5beb70158868cc4f1ab444cc4d7729935f8ce72947aa1ad65",
@@ -85,7 +96,9 @@
     "scripts/qa/exploration-review-server.mjs": "b197e47be88c53d100b7102811b24c71c5472018917c9cb4e0e44251da500154",
     "scripts/qa/replay-exploration-without-renderer.mjs": "2388de90e37401005ce01239b96f857d9825faaa7999160196ad7829591c7d08",
     "tests/discovery-cache.test.mjs": "42357c1ef9b1688ef58d1f8b3be240672d84cb8bc9ecb606e8e401ae0b4c748f",
-    "tests/exploration-integration.test.mjs": "4e72e165a8699ef3170c23577349320efbb19fefde9b4c249f6fc517daf0f6d0"
+    "tests/exploration-integration.test.mjs": "4e72e165a8699ef3170c23577349320efbb19fefde9b4c249f6fc517daf0f6d0",
+    "scripts/qa/fjord-runtime-server.mjs": "dc1ef924b398b521f8bbb3d650fc7744e5c0e83abd093ef646453c00048c3acb",
+    "tests/fjord-runtime-instrumentation.test.mjs": "720037270824b2d41963884bb211d090a1e7b27e2cfc47ce6d116d257bcd0464"
   },
   "formatting": "No configured formatter; manual source review and git diff --check.",
   "ci": "Consult the pull request checks for the exact final head; not asserted by this local record."
