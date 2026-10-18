@@ -1,0 +1,51 @@
+{
+  "status": "PASS",
+  "normalBuild": true,
+  "sourceHashes": {
+    "src/fjord-play/FjordPlay.ts": "a51021ae4dbb2426c8a6b0abb04a7ead4517d760eb26a6b0c0c5da6b6d4cfb39",
+    "src/fjord-play/FjordHeader.ts": "0a375162489e5ed9735876f7a57a54612d16d9c6dc0ac05ab23b49ca081388e4",
+    "src/fjord-play/DiscoveryFog.ts": "6d0df5fc5874fad2743f60aa07f6dc938615104e94769a4b68d29e2749d950d2",
+    "src/config/FjordFog.ts": "d5605a6463fcfd955a94da70209d8baac177e9c51e1dad7929a5ae58da8ba27f"
+  },
+  "cases": [
+    {
+      "name": "fresh-default-and-reload",
+      "coreSha256": "52f68d0aec8b0ae0f0456187af563705be5fc0c41428d2d2fb04c6c7bf89de7b",
+      "fog": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 531,
+        "visibleCells": 531,
+        "unknownCells": 9469,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 320008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 7056436
+      },
+      "rivalPopulation": 10,
+      "hiddenRival": true,
+      "cameraAndQualityPreserveState": true
+    },
+    {
+      "name": "explicit-opt-out-and-legacy-reload",
+      "coreSha256": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969",
+      "legacyWorldPreserved": true,
+      "fog": {
+        "active": false
+      }
+    },
+    {
+      "name": "menu-new-island-after-legacy",
+      "coreSha256": "52f68d0aec8b0ae0f0456187af563705be5fc0c41428d2d2fb04c6c7bf89de7b",
+      "oneHiddenRival": true,
+      "discoveryEnabled": true
+    }
+  ],
+  "regressionBefore": "AssertionError [ERR_ASSERTION]: A fresh ordinary /fjord-play campaign must have fog of war.",
+  "provenance": "Lifecycle checks and the explicit camera-movement screenshot check ran separately against the same production build. Canonical fresh-campaign hashes match.",
+  "errors": []
+}

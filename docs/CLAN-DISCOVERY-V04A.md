@@ -1,6 +1,6 @@
 # Clan Discovery v0.4A — prototype contract
 
-Status: opt-in implementation of #147, the first slice of exploration epic #146. Normal new campaigns and existing campaigns remain unchanged until the owner approves rollout. Expedition Group controls and authoritative travel are #148; physical rival-clan placement is #149; spatial Recon/Surveillance/Pillage is #150.
+Status: enabled by default for new `/fjord-play` islands following owner feedback on 2026-10-18. Existing saves keep their saved exploration rules. Expedition Group travel (#148) and the physical rival clan (#149) use the same discovery state; spatial Recon/Surveillance/Pillage remain #150.
 
 ## Canonical knowledge
 
@@ -24,7 +24,7 @@ Saved game bytes and developer fixtures are inspectable locally. This is informa
 
 ## Presentation
 
-The production prototype uses native Three.js `MeshBasicMaterial.alphaMap`, a world-aligned texture and a mesh following the existing canonical terrain triangles. There is no custom fog shader, new terrain renderer or multipass render target. The veil uses the shared pale daytime atmospheric-fog colour, including at night. Unknown cells are opaque; the feather lies inside known cells. Mapped, currently unobserved terrain receives a light veil. The surface is 0.2 m above ground/sea, above the approved water's maximum 0.18 m displacement. Native depth testing preserves visible foreground objects. A sea apron closes the discovery boundary.
+The production prototype uses native Three.js `MeshBasicMaterial.alphaMap`, a world-aligned texture and a mesh following the existing canonical terrain triangles. There is no custom fog shader, new terrain renderer or multipass render target. The veil uses the configured discovery-shroud tint; the Nordic profile uses seasonal slate and native distance fog at the horizon. Unknown cells are opaque; the feather lies inside known cells. Mapped, currently unobserved terrain receives a light veil. The surface is 0.2 m above ground/sea, above the approved water's maximum 0.18 m displacement. Native depth testing preserves visible foreground objects. A sea apron closes the discovery boundary.
 
 Steady fog adds one native draw call. A 0.8-second previous-mask fade can temporarily add a second. Interrupted fades preserve the current visual alpha before the next transition. Knowledge commits immediately and is never delayed by animation; reloading during a fade restores the committed map. Masks/textures are rebuilt only on canonical knowledge changes, not per frame. Geometry, textures and native materials are disposed with the scene and survive the existing warm-resume lifecycle.
 
@@ -32,6 +32,6 @@ Atmospheric distance/weather fog remains separate. The cinematic loading preview
 
 ## Review and rollout
 
-Use the [review gallery](qa/clan-discovery/review.html). `?discovery=1` opts **explicitly created new island campaigns** into the prototype. Existing active/imported campaigns retain their saved setting, even if the query is present. A saved prototype retains fog when reopened without the query. `?debugDiscovery=1` adds read-only coverage/allocation diagnostics; it provides no reveal action.
+Use the [review gallery](qa/clan-discovery/review.html) for the original prototype evidence. Fresh `/fjord-play` islands now include discovery and one physical rival without URL flags. `?discovery=0` is an explicit new-campaign development opt-out; `?discovery=1` remains supported. Existing active/imported campaigns retain their saved setting regardless of the query. A saved discovery campaign retains fog when reopened without a query. `?debugDiscovery=1` adds read-only coverage/allocation diagnostics; it provides no reveal action.
 
-The developer-only `scene.html` fixture is served by Vite and deliberately labeled. It is not part of the production game and is not shipped as an alternate player map. Production review uses the image gallery and the real `/fjord-play` route. Actual Core expedition travel, mobile Safari performance and owner visual acceptance remain separate gates. The first playable milestone is #147 + #148; default activation is deferred until that experience is reviewed.
+The developer-only `scene.html` fixture is served by Vite and deliberately labeled. It is not part of the production game and is not shipped as an alternate player map. Production review uses the image gallery and the real `/fjord-play` route. The original QA measurements remain historical prototype evidence. Mobile Safari performance and the remaining exploration-epic acceptance work stay separate; default activation does not certify those gates. See [the new-campaign regression check](qa/fjord-fog-191/discovery-default.md).

@@ -1,5 +1,7 @@
 # Nordic fog enabled — issue #191
 
+New-game startup also enables fog of war and one living rival by default. See the [startup regression and screenshots](discovery-default.md) for the ordinary `/fjord-play` path and existing-save behavior.
+
 The owner selected treatment C and requested implementation after reviewing its seasonal and
 winter-severity behavior. `fjordPresentation.fogProfile` is now `nordic` in the normal 3D game.
 No URL parameter, QA bridge or new-campaign reset is required. Existing saves use the same treatment.

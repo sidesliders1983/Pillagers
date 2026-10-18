@@ -145,7 +145,8 @@ export class FjordPlay {
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
-        if (!stored && query.get('discovery') === '1') this.campaign.enableDiscovery();
+        // New islands include physical exploration; restored campaigns retain their saved rules.
+        if (!stored && query.get('discovery') !== '0') this.campaign.enableDiscovery();
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
@@ -214,11 +215,10 @@ export class FjordPlay {
                 'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
                 'Original saved geography';
             weatherField.checked = this.session.readSnapshot().weather?.config.enabled ?? false;
-            explorationField.checked = !!this.session.readSnapshot().discovery;
             cycleField.value = String(this.session.minutesPerWinter);
         };
         campaignFields();
-        if (query.get('discovery') === '1') explorationField.checked = true;
+        if (query.has('discovery')) explorationField.checked = query.get('discovery') !== '0';
         sameFounders.addEventListener('change', () => {
             document.querySelector('#fjord-restart')!.textContent = sameFounders.checked ?
                 'Restart with same founders' : 'Restart with new founders';
