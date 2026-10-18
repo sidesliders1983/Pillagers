@@ -4,6 +4,8 @@ import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 
 const goldenMode = process.env.QA_GOLDEN === '1';
+const fogStudyMode = process.env.QA_FOG_STUDY === '1';
+if (fogStudyMode && !goldenMode) throw Error('The fog study requires the frozen golden capture clock.');
 const sourceRef = process.env.QA_SOURCE_REF;
 if (sourceRef && !/^[a-f0-9]{40}$/.test(sourceRef)) throw Error('QA_SOURCE_REF requires an exact commit');
 // A paired baseline serves these unchanged sources through the same QA bridge, not HMR state.
@@ -55,7 +57,7 @@ function instrument(source) {
     source = source.replace(anchor,
         `        audit.bind({ session: this.session, shared: this.shared, campaign: this.campaign,
             motion, layer, models, world, controller, camera, renderer, scene, lighting,
-            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
+${fogStudyMode ? '            discoveryFog, rivalScene,\n' : ''}            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
             settle: async () => { await actionWork; await sceneWork; },
             advanceTicks: async ticks => {
                 action(() => this.session.command({ type: 'AdvanceTicks', ticks }));
@@ -63,10 +65,12 @@ function instrument(source) {
                 await sceneWork;
             } });
 ${goldenMode ? '        golden.bind(audit);' : ''}
+${fogStudyMode ? '        fogStudy.bind(audit);' : ''}
 ` + anchor);
     return "import { audit } from '/scripts/qa/fjord-runtime-browser.mjs';\n" +
         'audit.servedSource = ' + JSON.stringify(servedSource) + ';\n' +
-        (goldenMode ? "import { golden } from '/scripts/qa/fjord-golden-browser.mjs';\naudit.flags.manualClock = true;\n" : '') + source;
+        (goldenMode ? "import { golden } from '/scripts/qa/fjord-golden-browser.mjs';\naudit.flags.manualClock = true;\n" : '') +
+        (fogStudyMode ? "import { fogStudy } from '/scripts/qa/fjord-fog-study.mjs';\n" : '') + source;
 }
 const server = await createServer({
     cacheDir: process.env.QA_CACHE_DIR || 'artifacts/fjord-runtime-vite-cache',

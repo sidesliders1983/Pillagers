@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FjordSide · Nordic fog review #191</title>
+<style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #101c20; color: #e8e7df; font: 16px/1.45 system-ui, sans-serif; }
+    main { max-width: 1380px; margin: auto; padding: 18px; }
+    h1 { font: 600 26px Georgia, serif; margin: 0 0 6px; }
+    p { margin: 6px 0 14px; color: #bac9cc; }
+    a { color: #e6c681; }
+    .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+    button, select { min-height: 44px; padding: 9px 12px; border: 1px solid #527078;
+        border-radius: 5px; background: #22353b; color: #f3f1e6; font: inherit; }
+    button { cursor: pointer; }
+    button[aria-pressed="true"] { border-color: #e3c383; background: #3d4845; color: #f9deab; }
+    select { max-width: 100%; }
+    figure { margin: 0; position: relative; max-height: 77vh; overflow: hidden; background: #091014; }
+    figure img { display: block; width: 100%; max-height: 77vh; object-fit: contain; }
+    #baseline { position: absolute; inset: 0; height: 100%; clip-path: inset(0 50% 0 0); }
+    .labels { display: flex; justify-content: space-between; color: #e6c681; }
+    input[type="range"] { flex: 1; min-width: 120px; accent-color: #dfc185; }
+    .note { border-left: 3px solid #d9bd80; padding: 8px 12px; background: #1b2c31; }
+    details { margin: 16px 0; }
+    #facts { font-variant-numeric: tabular-nums; }
+    @media (max-width: 600px) { main { padding: 12px; } h1 { font-size: 23px; } .controls { gap: 6px; } }
+</style>
+<main>
+    <h1>Nordic fog · Review #191</h1>
+    <p>Fixed gameplay frames. Same seed, camera, time and knowledge within each A/B/C set.</p>
+    <div class="controls"><label for="scene">Scene</label><select id="scene"></select>
+        <button id="day">Daylight</button><button id="snow">Snow retention</button></div>
+    <div class="controls" aria-label="Fog treatment">
+        <button data-variant="current" aria-pressed="false">A · Previous</button>
+        <button data-variant="atmospheric-only" aria-pressed="false">B · Atmosphere only (QA)</button>
+        <button data-variant="candidate" aria-pressed="true">C · Nordic</button>
+    </div>
+    <p id="caption"></p>
+    <figure><img id="selected" alt="Selected fog treatment"><img id="baseline" alt="Previous treatment for comparison"></figure>
+    <div class="labels"><span>Previous</span><span id="treatment">Nordic</span></div>
+    <div class="controls"><label for="wipe">Compare</label><input id="wipe" type="range" min="0" max="100" value="50">
+        <a id="full" target="_blank" rel="noopener">Full image</a></div>
+    <p id="facts"></p>
+    <p class="note">Snow is intentional and unchanged. Unknown territory stays opaque. B suppresses only the
+        visual shroud in this QA capture; private rival entities remain filtered. This diagnostic is absent from player builds.</p>
+    <details><summary>Review limits and measurements</summary>
+        <p>The owner selected C; Nordic fog is now the game default. This gallery preserves the original
+            fixed-state comparisons. These are native desktop Edge captures at DPR 1, including 390px and tablet viewports.
+            Physical iPhone Safari performance still needs validation.</p>
+        <p>Wider atmospheric visibility can increase the existing shadow fit at high viewpoints.
+            Geometry and opacity-mask resources are unchanged; the report records total, main and shadow draws separately.</p>
+        <p><a href="activation.md">Implementation status</a> · <a href="report.md">Original technical report</a> · <a href="results.json">Capture and timing data</a> ·
+            <a href="https://github.com/sidesliders1983/Pillagers/issues/191">Issue #191</a> ·
+            <a href="/fjord-play">Play Nordic fog on LAN</a></p>
+    </details>
+</main>
+<script type="module">
+    const report = await (await fetch('results.json')).json();
+    const scene = document.querySelector('#scene');
+    const selected = document.querySelector('#selected');
+    const baseline = document.querySelector('#baseline');
+    let variant = 'candidate';
+    for (const item of report.cases) scene.add(new Option(item.name.replaceAll('-', ' '), item.name));
+    scene.value = 'summer-fjord';
+    function paint() {
+        const item = report.cases.find(item => item.name === scene.value);
+        const sample = item.samples.find(item => item.variant === variant);
+        const current = item.samples.find(item => item.variant === 'current');
+        selected.src = sample.file;
+        baseline.src = current.file;
+        document.querySelector('#caption').textContent = item.caption;
+        document.querySelector('#full').href = sample.file;
+        document.querySelector('#treatment').textContent = variant === 'candidate' ? 'Nordic' :
+            variant === 'current' ? 'Previous' : 'Atmosphere only (QA diagnostic)';
+        document.querySelector('#facts').textContent = `${item.viewport.width} × ${item.viewport.height} CSS px · ` +
+            `fog ${sample.fog.near.toFixed(0)}–${sample.fog.far.toFixed(0)} m · ` +
+            `${sample.main.calls} main + ${sample.shadow.calls} shadow draws · ` +
+            (sample.discovery ? `${sample.discovery.visibleCells} visible / ` +
+                `${sample.discovery.exploredCells - sample.discovery.visibleCells} mapped / ` +
+                `${sample.discovery.unknownCells} unknown cells` : 'Legacy save without discovery');
+        for (const button of document.querySelectorAll('[data-variant]'))
+            button.setAttribute('aria-pressed', String(button.dataset.variant === variant));
+    }
+    scene.addEventListener('change', paint);
+    for (const button of document.querySelectorAll('[data-variant]'))
+        button.addEventListener('click', () => { variant = button.dataset.variant; paint(); });
+    document.querySelector('#wipe').addEventListener('input', event => {
+        baseline.style.clipPath = `inset(0 ${100 - event.target.value}% 0 0)`;
+    });
+    document.querySelector('#day').addEventListener('click', () => { scene.value = 'summer-fjord'; paint(); });
+    document.querySelector('#snow').addEventListener('click', () => { scene.value = 'winter-retention'; paint(); });
+    paint();
+</script>
+</html>

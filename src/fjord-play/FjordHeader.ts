@@ -44,8 +44,8 @@ export function fjordHeaderHTML(): string {
                         <small id="fjord-geography"></small>
                         <small>New campaigns select a validated island from a fixed set. Existing saves keep their geography.</small>
                         <label class="check"><input id="fjord-weather" type="checkbox"> Enable winter weather</label>
-                        <label class="check"><input id="fjord-exploration" type="checkbox"> Enable exploration &amp; rival clan</label>
-                        <small>Applies when starting a new island campaign. Loading a saved campaign keeps its exploration rules.</small>
+                        <label class="check"><input id="fjord-exploration" type="checkbox" checked> Enable exploration &amp; rival clan</label>
+                        <small>Enabled by default for new and restarted islands. Loading a saved campaign keeps its exploration rules.</small>
                         <label class="check"><input id="fjord-founders" type="checkbox" checked> Use the same founders</label>
                         <button id="fjord-new">New campaign from seed</button>
                         <button id="fjord-restart">Restart with same founders</button>

@@ -1,6 +1,6 @@
 # Spatial Expedition Groups v0.4B — Expedition Mode (#148 / PR #179)
 
-This opt-in `/fjord-play?discovery=1` slice reuses the existing Simulation Core groups, canonical physical routes, native resident Run and clan discovery. Ordinary residents stay autonomous. Rival presentation and spatial raids remain #149/#150; larger ship/horse/cart carrying capacities are not implemented.
+New `/fjord-play` islands enable exploration and one physical rival by default from 2026-10-18. Expedition Groups reuse the existing Simulation Core, canonical physical routes, native resident Run and clan discovery. Ordinary residents stay autonomous. Existing saves keep their original rules; spatial raids remain #150 and larger ship/horse/cart carrying capacities are not implemented.
 
 ## Current owner decisions
 
@@ -12,7 +12,7 @@ Prototype values are **2 Food per member**, **one carried ration per 250 active 
 
 Expeditions opens the global group overview regardless of the selected home, resident or animal. Create exploration group creates Group 1, Group 2, etc. Each group has an inline resident checklist, using the canonical eligibility rules; membership can change only while no expedition is active. Group actions stay available without clearing the world selection.
 
-The Campaign menu exposes Enable exploration & rival clan for new island campaigns. Existing saves retain their discovery state. The QA launcher also offers a paused Exploration & rival clan campaign with ordinary starting resources, one hidden living rival and two eligible founders already assigned to a group. Changing the new-campaign checkbox alone never changes the active campaign.
+The Campaign menu defaults Enable exploration & rival clan on for new and restarted islands. This is a proposal for the next island, rather than an indicator of the active save. Existing saves retain their discovery state. The QA launcher also offers a paused Exploration & rival clan campaign with ordinary starting resources, one hidden living rival and two eligible founders already assigned to a group. Changing the new-campaign checkbox alone never changes the active campaign.
 
 **Start Expedition** opens the concise owner-approved confirmation: “This will cost XX food (2 food per member). Are you sure?” with the fixed total price filled in. Three members cost **6 Food**. Cancel in this dialog changes no stock, time or mission. Confirm validates membership and Food atomically, spends the fixed price once, and creates a **Prepared** expedition. Insufficient stock, invalid/caregiving members, an already active group or capacity limits reject without mutation. Repeated confirmation cannot spend twice.
 

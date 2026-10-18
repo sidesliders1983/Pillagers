@@ -1,0 +1,528 @@
+{
+  "note": "Normal production build, no QA transform, DPR 1 desktop Edge.",
+  "scenery": [
+    {
+      "url": "/assets/Terrain/barrel.glb",
+      "bytes": 6088
+    },
+    {
+      "url": "/assets/Terrain/birch-tree.glb",
+      "bytes": 5660
+    },
+    {
+      "url": "/assets/Terrain/boardwalk-plank.glb",
+      "bytes": 6060
+    },
+    {
+      "url": "/assets/Terrain/boathouse-naust.glb",
+      "bytes": 9796
+    },
+    {
+      "url": "/assets/Terrain/boulder.glb",
+      "bytes": 5004
+    },
+    {
+      "url": "/assets/Terrain/cooking-hearth.glb",
+      "bytes": 5492
+    },
+    {
+      "url": "/assets/Terrain/dirt-path-ground.glb",
+      "bytes": 3988
+    },
+    {
+      "url": "/assets/Terrain/faering-rowboat.glb",
+      "bytes": 7112
+    },
+    {
+      "url": "/assets/Terrain/fish-drying-rack.glb",
+      "bytes": 13556
+    },
+    {
+      "url": "/assets/Terrain/fjord-cliff-rock.glb",
+      "bytes": 5468
+    },
+    {
+      "url": "/assets/Terrain/fjord-turf-tile.glb",
+      "bytes": 4624
+    },
+    {
+      "url": "/assets/Terrain/grass-tuft.glb",
+      "bytes": 4100
+    },
+    {
+      "url": "/assets/Terrain/great-hall.glb",
+      "bytes": 12016
+    },
+    {
+      "url": "/assets/Terrain/ground-slope-tile.glb",
+      "bytes": 5592
+    },
+    {
+      "url": "/assets/Terrain/harbor-marker-post.glb",
+      "bytes": 5136
+    },
+    {
+      "url": "/assets/Terrain/hay-bale.glb",
+      "bytes": 3496
+    },
+    {
+      "url": "/assets/Terrain/heather-shrub.glb",
+      "bytes": 5208
+    },
+    {
+      "url": "/assets/Terrain/jetty-pier.glb",
+      "bytes": 6108
+    },
+    {
+      "url": "/assets/Terrain/log-pile.glb",
+      "bytes": 4792
+    },
+    {
+      "url": "/assets/Terrain/longship-drakkar.glb",
+      "bytes": 11940
+    },
+    {
+      "url": "/assets/Terrain/market-stall.glb",
+      "bytes": 4604
+    },
+    {
+      "url": "/assets/Terrain/palisade-corner.glb",
+      "bytes": 8460
+    },
+    {
+      "url": "/assets/Terrain/palisade-gate.glb",
+      "bytes": 11300
+    },
+    {
+      "url": "/assets/Terrain/palisade-torch.glb",
+      "bytes": 5236
+    },
+    {
+      "url": "/assets/Terrain/palisade-wall.glb",
+      "bytes": 7276
+    },
+    {
+      "url": "/assets/Terrain/road-dirt-4way.glb",
+      "bytes": 5500
+    },
+    {
+      "url": "/assets/Terrain/road-dirt-corner.glb",
+      "bytes": 5104
+    },
+    {
+      "url": "/assets/Terrain/road-dirt-straight.glb",
+      "bytes": 3092
+    },
+    {
+      "url": "/assets/Terrain/road-dirt-t.glb",
+      "bytes": 4096
+    },
+    {
+      "url": "/assets/Terrain/rock-cluster.glb",
+      "bytes": 5948
+    },
+    {
+      "url": "/assets/Terrain/runestone.glb",
+      "bytes": 6500
+    },
+    {
+      "url": "/assets/Terrain/shield-rack.glb",
+      "bytes": 5172
+    },
+    {
+      "url": "/assets/Terrain/shore-corner-in-fjord.glb",
+      "bytes": 6004
+    },
+    {
+      "url": "/assets/Terrain/shore-corner-out-fjord.glb",
+      "bytes": 6284
+    },
+    {
+      "url": "/assets/Terrain/shore-straight-fjord.glb",
+      "bytes": 5536
+    },
+    {
+      "url": "/assets/Terrain/sky-aurora-night-dome.glb",
+      "bytes": 13844
+    },
+    {
+      "url": "/assets/Terrain/sky-fjord-day-dome.glb",
+      "bytes": 8100
+    },
+    {
+      "url": "/assets/Terrain/smithy-forge.glb",
+      "bytes": 10896
+    },
+    {
+      "url": "/assets/Terrain/spruce-tree.glb",
+      "bytes": 3556
+    },
+    {
+      "url": "/assets/Terrain/stabbur-storehouse.glb",
+      "bytes": 12412
+    },
+    {
+      "url": "/assets/Terrain/standing-stone-ring.glb",
+      "bytes": 13252
+    },
+    {
+      "url": "/assets/Terrain/storage-crate.glb",
+      "bytes": 4640
+    },
+    {
+      "url": "/assets/Terrain/stream-beck.glb",
+      "bytes": 8064
+    },
+    {
+      "url": "/assets/Terrain/turf-dwelling.glb",
+      "bytes": 10292
+    },
+    {
+      "url": "/assets/Terrain/village-well.glb",
+      "bytes": 5568
+    },
+    {
+      "url": "/assets/Terrain/water-open-fjord.glb",
+      "bytes": 2388
+    },
+    {
+      "url": "/assets/Terrain/waypost.glb",
+      "bytes": 5352
+    }
+  ],
+  "cases": [
+    {
+      "name": "summer-discovery",
+      "expectedRange": [
+        160,
+        400
+      ],
+      "diagnostics": {
+        "bridgePresent": false,
+        "weather": {
+          "class": "Normal",
+          "lighting": {
+            "sky": 13950687,
+            "sun": 16771797,
+            "sunIntensity": 1.55,
+            "ambientSky": 15986403,
+            "ambientGround": 12038560,
+            "ambient": 2.45,
+            "sunPosition": [
+              -28,
+              48,
+              18
+            ],
+            "shadowMapSize": 2048,
+            "shadowRadius": 4,
+            "shadowBlurSamples": 8,
+            "shadowNormalBias": 0.045,
+            "exposure": 1.05,
+            "fogNear": 65,
+            "fogFar": 155
+          },
+          "snow": 0,
+          "observed": {
+            "sky": 12244963,
+            "fogNear": 160,
+            "fogFar": 400,
+            "sunIntensity": 2.7216000000000005,
+            "ambient": 1.15752,
+            "exposure": 1.05
+          }
+        },
+        "discovery": {
+          "active": true,
+          "cellSize": 8,
+          "exploredCells": 531,
+          "visibleCells": 531,
+          "unknownCells": 9469,
+          "maskBytes": 2500,
+          "textureBytes": 646416,
+          "drawCalls": 1,
+          "triangles": 320008,
+          "nativeMaterial": true,
+          "fadeSeconds": 0.8,
+          "transitioning": false,
+          "geometryBytes": 7056436
+        },
+        "snow": {
+          "groundColors": [
+            15917748,
+            15917748,
+            15917748,
+            16777215,
+            16777215,
+            16777215
+          ],
+          "foliageColors": [
+            12835734,
+            9153643
+          ],
+          "snowAmounts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "b1050e5b-c3c5-4b89-9fbf-a745b572eadd",
+            "c75762dd-2229-4356-8cde-756554601c80",
+            "6bacb738-2f5b-4be0-baf8-d6f4a060667c",
+            "c78261b2-feba-43af-b597-c258db664929",
+            "c3ec6d37-8764-4051-9bc9-4e7b24a5dedd",
+            "8a814a2b-30c6-4c35-ab68-07d10780c7a0",
+            "54c620c1-3980-46a1-818a-22fb971d173d",
+            "706a8a62-b5d4-4a61-95c9-a08999cbf884"
+          ]
+        }
+      },
+      "samples": [
+        {
+          "quality": "low",
+          "file": "summer-discovery-low.jpg",
+          "models": 22,
+          "placeholders": []
+        },
+        {
+          "quality": "standard",
+          "file": "summer-discovery-standard.jpg",
+          "models": 22,
+          "placeholders": []
+        }
+      ],
+      "canonicalSha256": "2886a2a721b9f72fe28db021edfaa8042c40f8989933e546ed1fe890c2433b38"
+    },
+    {
+      "name": "winter-normal-legacy",
+      "expectedRange": [
+        125,
+        400
+      ],
+      "diagnostics": {
+        "bridgePresent": false,
+        "weather": {
+          "class": "Normal",
+          "lighting": {
+            "sky": 13950687,
+            "sun": 16771797,
+            "sunIntensity": 1.55,
+            "ambientSky": 15986403,
+            "ambientGround": 12038560,
+            "ambient": 2.45,
+            "sunPosition": [
+              -28,
+              48,
+              18
+            ],
+            "shadowMapSize": 2048,
+            "shadowRadius": 4,
+            "shadowBlurSamples": 8,
+            "shadowNormalBias": 0.045,
+            "exposure": 1.05,
+            "fogNear": 65,
+            "fogFar": 155
+          },
+          "snow": 0,
+          "observed": {
+            "sky": 13359588,
+            "fogNear": 125,
+            "fogFar": 400,
+            "sunIntensity": 1.6632000000000005,
+            "ambient": 0.8954400000000001,
+            "exposure": 1.05
+          }
+        },
+        "discovery": {
+          "active": false
+        },
+        "snow": {
+          "groundColors": [
+            16119023,
+            16119023,
+            16119023,
+            16777215,
+            16777215,
+            16777215
+          ],
+          "foliageColors": [
+            14738915,
+            10532003
+          ],
+          "snowAmounts": [
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "materials": [
+            "c4a425d7-cdf6-47d7-a8c8-89ada988c53a",
+            "4e1696de-85ef-459e-91e4-b4d79e025975",
+            "bfd14716-0c71-49fb-aa32-350526217690",
+            "fcaddf29-5d15-489c-b8d5-2c6da16e9c07",
+            "1f17acbd-0771-411b-945a-c80d01bf3446",
+            "dfbd6d1f-bf43-4be4-8e4a-bef5d0636331",
+            "08fa98b4-fc38-4b00-a59b-c14913c41bc7",
+            "4c5950e8-e3ba-471b-b43a-cac30e6f1416"
+          ]
+        }
+      },
+      "samples": [
+        {
+          "quality": "low",
+          "file": "winter-normal-legacy-low.jpg",
+          "models": 26,
+          "buildingIds": [
+            "house-1",
+            "house-2",
+            "house-4",
+            "house-5",
+            "house-6"
+          ],
+          "placeholders": []
+        },
+        {
+          "quality": "standard",
+          "file": "winter-normal-legacy-standard.jpg",
+          "models": 26,
+          "buildingIds": [
+            "house-1",
+            "house-2",
+            "house-4",
+            "house-5",
+            "house-6"
+          ],
+          "placeholders": []
+        }
+      ],
+      "canonicalSha256": "2d845e50bfda4ceab14f5ef774ec07979ff192f83b8f4947f00f625bc6362077"
+    },
+    {
+      "name": "winter-harsh-qa-preset",
+      "expectedRange": [
+        45,
+        260
+      ],
+      "diagnostics": {
+        "bridgePresent": false,
+        "weather": {
+          "class": "Harsh",
+          "lighting": {
+            "sky": 10926021,
+            "sun": 14543615,
+            "sunIntensity": 0.9,
+            "ambientSky": 12899557,
+            "ambientGround": 12038560,
+            "ambient": 2.1,
+            "sunPosition": [
+              -28,
+              48,
+              18
+            ],
+            "shadowMapSize": 2048,
+            "shadowRadius": 4,
+            "shadowBlurSamples": 8,
+            "shadowNormalBias": 0.045,
+            "exposure": 0.95,
+            "fogNear": 35,
+            "fogFar": 185
+          },
+          "snow": 0.35,
+          "observed": {
+            "sky": 10072523,
+            "fogNear": 45,
+            "fogFar": 260,
+            "sunIntensity": 0.9657290322580648,
+            "ambient": 0.76752,
+            "exposure": 0.95
+          }
+        },
+        "discovery": {
+          "active": false
+        },
+        "snow": {
+          "groundColors": [
+            16119023,
+            16119023,
+            16119023,
+            16777215,
+            16777215,
+            16777215
+          ],
+          "foliageColors": [
+            14738915,
+            10532003
+          ],
+          "snowAmounts": [
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65,
+            0.65
+          ],
+          "materials": [
+            "7919ed2d-528a-49fc-b47d-5a12a7d248bb",
+            "00f0f9ea-596c-41de-91c4-02f23d301e0a",
+            "19eef42c-4641-494f-833e-5433d8c376b7",
+            "d61e128e-3453-4bdc-aa04-4ffa8a9656b7",
+            "53d63bfc-b5c0-47aa-ad4d-74d74f911e44",
+            "0264c046-ac61-4ce8-a2aa-e69f6f9c8221",
+            "a76917a1-c33b-4843-898d-5ec6ced8e58c",
+            "d91d7a23-8e24-4327-a902-e017039707b9"
+          ]
+        }
+      },
+      "samples": [
+        {
+          "quality": "low",
+          "file": "winter-harsh-qa-preset-low.jpg",
+          "models": 26,
+          "buildingIds": [
+            "house-1",
+            "house-2",
+            "house-4",
+            "house-5",
+            "house-6"
+          ],
+          "placeholders": []
+        },
+        {
+          "quality": "standard",
+          "file": "winter-harsh-qa-preset-standard.jpg",
+          "models": 26,
+          "buildingIds": [
+            "house-1",
+            "house-2",
+            "house-4",
+            "house-5",
+            "house-6"
+          ],
+          "placeholders": []
+        }
+      ],
+      "canonicalSha256": "258991e4b8e62a804a65d4f9c76d0a1220374abf5be4856e0682e179694f01fd"
+    }
+  ],
+  "errors": [],
+  "sourceHashes": {
+    "src/config/FjordPresentation.ts": "58db50ed1ea198cb63c64d83bc09976a81428c4aa7a68674497fbbecbac1db2c",
+    "src/config/FjordFog.ts": "d5605a6463fcfd955a94da70209d8baac177e9c51e1dad7929a5ae58da8ba27f",
+    "src/fjord-play/FjordPlay.ts": "0a6bc9b5008908fa7254142d1509d8f1810c927f347917ef6e488bf51213479e",
+    "src/core/WorldLighting.ts": "d93b6a5a7b929647eb367b554fadd3c3b19126f96311ed441a8fc5408dc5d728",
+    "src/fjord-play/DiscoveryFog.ts": "6d0df5fc5874fad2743f60aa07f6dc938615104e94769a4b68d29e2749d950d2"
+  },
+  "status": "PASS",
+  "physicalIPhoneTested": false,
+  "provenance": "Summer passed in the earlier attempt. Winter checks were rerun after correcting non-semantic UUID and household/building assertions; runtime hashes are identical."
+}

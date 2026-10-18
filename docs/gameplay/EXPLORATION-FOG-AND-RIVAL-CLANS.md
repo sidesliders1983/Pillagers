@@ -1,6 +1,6 @@
 # Fjordside — Expedition Groups, Exploration, Fog of War and Rival Clans
 
-**Status:** Owner-approved design direction (2026-10-13). #147 has an opt-in discovery/fog prototype; default activation and the remaining epic slices are pending review.
+**Status:** Owner-approved design direction (2026-10-13). Fog of war, Expedition Groups and one physical CPU clan are enabled by default for new `/fjord-play` islands from 2026-10-18. Existing saves retain their saved rules. Remaining epic slices and physical-device acceptance stay open.
 
 **Authority:** [GP-008](../../GAME-PRINCIPLES.md#gp-008--exploration-is-strategic-group-level-action-knowledge-belongs-to-communities) · [Exploration Epic #146](https://github.com/sidesliders1983/Pillagers/issues/146).
 
@@ -13,8 +13,8 @@ Fjordside is a living 3D island that the player must explore. Residents lead aut
 - The authoritative headless `Simulation Core` already owns personal identity, family, occupations, resources, cattle, events, time and separate target CPU clan states.
 - `src/simulation/WorldExpeditions.ts` already supports persistent groups and `CreateExpeditionGroup`, `EditExpeditionGroup`, `DispatchExpedition`; Recon, Surveillance, Pillage; provisions, risk, absence, casualties, real loot transfers and clan-scoped Unknown/Scouted/Surveyed intelligence.
 - That historical simulation targets **exactly four abstract directional regions**. The retired isometric player interface (#54) selected those via arrows; its geographic identities must **not** be retroactively reinterpreted as physical island coordinates.
-- `WorldBlueprint` now contains a deterministic natural island with navigation, topographic information and a **reserved rival site** (#134). New opt-in discovery prototypes bind one real CPU community there under [world version 2](../ISLAND-CLANS-V04C.md). Old worlds retain their saved semantics.
-- `WorldLighting.fog` remains atmospheric distance/weather fog. The optional version-1 `SimulationState.discovery` prototype now stores per-clan explored/current masks tied to canonical geography; it is independent of camera motion. See [the current prototype contract](../CLAN-DISCOVERY-V04A.md). New campaigns opt in explicitly; old saves and the abstract Region Graph retain their original meaning.
+- `WorldBlueprint` now contains a deterministic natural island with navigation, topographic information and a **reserved rival site** (#134). New Fjord islands bind one real CPU community there under [world version 2](../ISLAND-CLANS-V04C.md). Old worlds retain their saved semantics.
+- `WorldLighting.fog` remains atmospheric distance/weather fog. The optional version-1 `SimulationState.discovery` prototype now stores per-clan explored/current masks tied to canonical geography; it is independent of camera motion. See [the current prototype contract](../CLAN-DISCOVERY-V04A.md). New Fjord islands enable discovery by default; old saves and the abstract Region Graph retain their original meaning.
 - GP-007 and #140 retire separate 2D player experiences. All new UI belongs in `/fjord-play`.
 
 ## Direct control policy
@@ -58,7 +58,7 @@ A new island may have at least player and rival settlement IDs; old four-directi
 
 - [#147](https://github.com/sidesliders1983/Pillagers/issues/147): per-clan discovery, fog masking, visible-state projection and sightlines.
 - [#148](https://github.com/sidesliders1983/Pillagers/issues/148): 3D Expedition Groups and click-to-explore.
-- [#149](https://github.com/sidesliders1983/Pillagers/issues/149): fresh discovery prototypes bind one existing domestic Core to the reserved rival site. See [the current implementation contract](../ISLAND-CLANS-V04C.md); old graph saves retain their original meaning and default rollout remains pending.
+- [#149](https://github.com/sidesliders1983/Pillagers/issues/149): fresh discovery prototypes bind one existing domestic Core to the reserved rival site. See [the current implementation contract](../ISLAND-CLANS-V04C.md); old graph saves retain their original meaning. Fresh Fjord islands enable this binding by default.
 - [#150](https://github.com/sidesliders1983/Pillagers/issues/150): physical site Recon/Surveillance/Pillage without breaking abstract old graph.
 - [#151](https://github.com/sidesliders1983/Pillagers/issues/151): save/replay, visibility-leak, mobile and CPU/performance validation.
 

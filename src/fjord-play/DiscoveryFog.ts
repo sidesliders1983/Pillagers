@@ -3,6 +3,7 @@ import {
     Group, LinearFilter, Mesh, MeshBasicMaterial, RGBAFormat, UnsignedByteType,
 } from 'three';
 import { lightingConfig } from '../config/lightingConfig';
+import type { FogPresentation } from '../config/FjordFog';
 import { discoveryAt, type DiscoveryView } from '../simulation/ClanDiscovery';
 import { terrainTriangles } from '../world-generation/TerrainQueries';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
@@ -18,6 +19,7 @@ export class DiscoveryFog {
     private signature = '';
     private view: DiscoveryView;
     private readonly fadeSeconds = .8;
+    private presentation?: FogPresentation;
     constructor(world: Pick<WorldBlueprint, 'terrain' | 'waterLevel'>, view: DiscoveryView) {
         this.view = view;
         this.root.name = 'Clan discovery fog';
@@ -88,13 +90,28 @@ export class DiscoveryFog {
         texture.wrapS = texture.wrapT = ClampToEdgeWrapping;
         texture.generateMipmaps = false;
         texture.needsUpdate = true;
-        const mesh = new Mesh(this.geometry, new MeshBasicMaterial({ color: lightingConfig.day.sky,
+        const mesh = new Mesh(this.geometry, new MeshBasicMaterial({
+            color: this.presentation?.shroudColor ?? lightingConfig.day.sky,
             alphaMap: texture, transparent: true, alphaTest: .002, depthWrite: false,
-            depthTest: true, side: DoubleSide, forceSinglePass: true, fog: false, toneMapped: false }));
+            depthTest: true, side: DoubleSide, forceSinglePass: true,
+            fog: this.presentation?.shroudDistanceFog ?? false, toneMapped: false }));
         mesh.renderOrder = 950;
         mesh.frustumCulled = false;
         mesh.raycast = () => {};
         return mesh;
+    }
+    /** Tint both fade layers without regenerating masks or changing canonical knowledge. */
+    setPresentation(presentation?: FogPresentation) {
+        this.presentation = presentation;
+        for (const mesh of [this.current, this.previous]) {
+            if (!mesh) continue;
+            mesh.material.color.setHex(presentation?.shroudColor ?? lightingConfig.day.sky);
+            const distanceFog = presentation?.shroudDistanceFog ?? false;
+            if (mesh.material.fog !== distanceFog) {
+                mesh.material.fog = distanceFog;
+                mesh.material.needsUpdate = true;
+            }
+        }
     }
     setKnowledge(view: DiscoveryView) {
         if (view.worldId !== this.view.worldId) throw new Error('Fog belongs to a different world.');

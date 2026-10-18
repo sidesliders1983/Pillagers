@@ -13,6 +13,7 @@ import { IslandLoading, yieldForInput } from './IslandLoading';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { SharedSettlement, activeSettlementKey } from '../play/SharedSettlement';
 import { campaignIslandPlan } from './CampaignIsland';
+import { fjordFogPresentation } from '../config/FjordFog';
 import { PrecipitationEffect } from '../effects/PrecipitationEffect';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
 import { PersonalHistoryView } from '../lore/PersonalHistoryView';
@@ -144,7 +145,8 @@ export class FjordPlay {
         this.shared = this.opened.campaign;
         this.session = this.shared.session;
         this.campaign = this.shared.fjord;
-        if (!stored && query.get('discovery') === '1') this.campaign.enableDiscovery();
+        // New islands include physical exploration; restored campaigns retain their saved rules.
+        if (!stored && query.get('discovery') !== '0') this.campaign.enableDiscovery();
         document.title = 'FjordSide';
         const readingPosition = this.foundingBook?.scrollTop ?? 0;
         document.body.className = 'fjord-play';
@@ -213,11 +215,10 @@ export class FjordPlay {
                 'Island ' + island.recipe.seed + ' · validated set v1 · ' + island.plots.length + ' home plots' :
                 'Original saved geography';
             weatherField.checked = this.session.readSnapshot().weather?.config.enabled ?? false;
-            explorationField.checked = !!this.session.readSnapshot().discovery;
             cycleField.value = String(this.session.minutesPerWinter);
         };
         campaignFields();
-        if (query.get('discovery') === '1') explorationField.checked = true;
+        if (query.has('discovery')) explorationField.checked = query.get('discovery') !== '0';
         sameFounders.addEventListener('change', () => {
             document.querySelector('#fjord-restart')!.textContent = sameFounders.checked ?
                 'Restart with same founders' : 'Restart with new founders';
@@ -922,6 +923,14 @@ export class FjordPlay {
                     canvas.dataset.precipitation = JSON.stringify(precipitationEffect!.inspect());
                     const nextWeather = JSON.stringify([view.calendar.visualProgress, view.weatherVisual]);
                     if (nextWeather !== weatherSignature) {
+                        const fogPresentation = fjordFogPresentation(fjordPresentation.fogProfile, {
+                            width: this.campaign.blueprint.config.width,
+                            winterWeight: view.calendar.winterWeight,
+                            rainWeight: view.precipitation.rain,
+                            weather: view.weatherVisual.class,
+                        });
+                        lighting!.setFogPresentation(fogPresentation);
+                        discoveryFog?.setPresentation(fogPresentation);
                         lighting!.setSeason(view.calendar.visualProgress, view.weatherVisual.lighting);
                         weatherTint!.update(view.calendar.visualProgress);
                         layer!.setSeason(view.calendar.visualProgress);
@@ -1113,14 +1122,9 @@ export class FjordPlay {
                 canvas.dataset.camera = signature;
                 canvas.dataset.cameraClearance = JSON.stringify(controller.inspectClearance());
             }
+            lighting!.setFogViewDistance(campaignIslandPlan(this.campaign.blueprint) ?
+                camera.position.distanceTo(controller.focus) : 60);
             lighting!.update(time, calendar.visualProgress);
-            if (campaignIslandPlan(this.campaign.blueprint)) {
-                // A wider village needs a higher camera. Keep atmospheric distance
-                // relative to its focus, so zooming out cannot whiten the entire settlement.
-                const offset = Math.max(0, camera.position.distanceTo(controller.focus) - 60);
-                lighting!.fog.near += offset;
-                lighting!.fog.far += offset;
-            }
             lighting!.updateShadowView(camera);
             world!.update(time, lighting, camera);
             discoveryFog?.update(delta);
