@@ -71,7 +71,10 @@
     function update() {
         before.src = scene.value + '-before.jpg';
         after.src = scene.value + '-after.jpg';
-        after.style.clipPath = 'inset(0 ' + (100 - Number(comparison.value)) + '% 0 0)';
+        const amount = Number(comparison.value);
+        after.style.clipPath = 'inset(0 0 0 ' + (100 - amount) + '%)';
+        document.querySelector('.badge.before').hidden = amount === 100;
+        document.querySelector('.badge.after').hidden = amount === 0;
         const data = measurements.find(item => item.name === scene.value);
         document.querySelector('#summary').textContent = data
             ? data.instances + ' dressing instances · ' + data.triangles.toLocaleString() +
