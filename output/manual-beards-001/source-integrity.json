@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "filename": "Braid-beard.glb",
+      "sourceSha256": "25089fcb28d31431900b20123e943c4b9dac93e490ada93f7dd214194dd3fae8",
+      "originalSourceUnchanged": true,
+      "triangles": 2911,
+      "vertices": 5526,
+      "maximumPositionErrorMetres": 5.968601768441394e-8,
+      "scaleOrPlacementChanged": false
+    },
+    {
+      "filename": "double-beard.glb",
+      "sourceSha256": "702ee332b8476ef91fbfc420cd3a5c2d1409ce713d6c8494be341d465054a918",
+      "originalSourceUnchanged": true,
+      "triangles": 2885,
+      "vertices": 5300,
+      "maximumPositionErrorMetres": 5.966889945199415e-8,
+      "scaleOrPlacementChanged": false
+    },
+    {
+      "filename": "normal-beard.glb",
+      "sourceSha256": "34ce850d1c78bc3b7c389bddb09a53f52711ddcfea18937c52c4a5b0dc322901",
+      "originalSourceUnchanged": true,
+      "triangles": 2980,
+      "vertices": 5192,
+      "maximumPositionErrorMetres": 5.9601451925754165e-8,
+      "scaleOrPlacementChanged": false
+    },
+    {
+      "filename": "pointed-beard.glb",
+      "sourceSha256": "6fa387ec53dafcbfe4370202e595987b81417b20677f26bb4b66c025086d1963",
+      "originalSourceUnchanged": true,
+      "triangles": 2730,
+      "vertices": 4821,
+      "maximumPositionErrorMetres": 5.963446626576167e-8,
+      "scaleOrPlacementChanged": false
+    }
+  ]
+}

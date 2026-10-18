@@ -40,3 +40,6 @@ output/occupation-hats-001/*.json -text
 output/occupation-tools-001/*.json -text
 output/meshy-outfit-pipeline/pass-009/**/*.json -text
 output/meshy-outfit-pipeline/pass-009/*.json -text
+
+# Manual beard provenance pins the preparation script bytes.
+scripts/prepare-manual-beards.mjs text eol=lf

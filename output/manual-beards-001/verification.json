@@ -1,0 +1,33 @@
+{
+  "body": "Existing Meshy Human, native rig",
+  "sourceShapeAndPlacement": "unchanged",
+  "textureMaps": 0,
+  "nativeHeadJoint": 5,
+  "bodyLODs": [
+    0,
+    1,
+    2
+  ],
+  "clips": [
+    "NativeNeutral",
+    "Walking",
+    "Idle_02"
+  ],
+  "tests": {
+    "targetedPassed": 31,
+    "failed": 0
+  },
+  "productionBuild": "passed",
+  "visualReview": {
+    "inspected": [
+      "neutral-front.png",
+      "neutral-side.png",
+      "Idle_02-front.png",
+      "lab-braid.png"
+    ],
+    "status": "ready for owner inspection"
+  },
+  "fullSuiteRun": false,
+  "sourceAudit": "source-integrity.json",
+  "browserAudit": "browser.json"
+}

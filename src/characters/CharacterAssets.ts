@@ -8,6 +8,8 @@ import {occupationToolAssets} from './OccupationToolCatalog';
 import {occupationToolMeasurements} from './OccupationToolMeasurements';
 import {occupationHatAssets} from './OccupationHatCatalog';
 import {occupationHatMeasurements} from './OccupationHatMeasurements';
+import {manualBeardAssets} from './ManualBeardCatalog';
+import {manualBeardMeasurements} from './ManualBeardMeasurements';
 import {manualHairAssets} from './ManualHairCatalog';
 import {braidedHairAsset} from './BraidedHairCatalog';
 import {longHairAsset} from './LongHairCatalog';
@@ -56,7 +58,7 @@ export const availableHairStyles=characterAssets.filter(asset=>asset.type==='hai
 export const availableBeardStyles=characterAssets.filter(asset=>asset.type==='beard'&&!asset.scope).map(asset=>asset.style as BeardStyle);
 /** Lab discovery adds explicit review candidates without publishing them to the world manifest. */
 export function availableCharacterAssets(): readonly CharacterAsset[] {
-    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...fishermanOutfitAssets, ...occupationHatAssets, ...occupationToolAssets, ...manualHairAssets, braidedHairAsset, longHairAsset];
+    return [...characterAssets, gridTrialOutfitAsset, ...additionalOutfitAssets, ...fishermanOutfitAssets, ...occupationHatAssets, ...occupationToolAssets, ...manualHairAssets, ...manualBeardAssets, braidedHairAsset, longHairAsset];
 }
 export function characterAsset(id:string){const asset=availableCharacterAssets().find(asset=>asset.id===id);if(!asset)throw new Error(`Unknown character asset: ${id}`);return asset;}
 /** Compatibility is source identity, not a family name or a fallback fit guess. */
@@ -71,6 +73,7 @@ export function assetMeasurement(path: string): AssetMeasurement {
         ?? occupationHatMeasurements[path]
         ?? occupationToolMeasurements[path]
         ?? (manualHairMeasurements as Record<string, AssetMeasurement>)[path]
+        ?? (manualBeardMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (additionalOutfitMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (fishermanOutfitMeasurements as Record<string, AssetMeasurement>)[path]
         ?? (path === gridTrialOutfitPath ? gridTrialOutfitMeasurement : undefined)

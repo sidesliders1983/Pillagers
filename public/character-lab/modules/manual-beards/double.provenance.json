@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "route": "manual-fitted-beard",
+  "moduleId": "beard/manual-fitted-double",
+  "source": {
+    "path": "Assets/Characters/Human/Beards/double-beard.glb",
+    "sha256": "702ee332b8476ef91fbfc420cd3a5c2d1409ce713d6c8494be341d465054a918",
+    "bytes": 36090184,
+    "nodeTransform": [
+      0.4864746332168579,
+      0,
+      0,
+      0,
+      0,
+      0.6011195542045656,
+      0.13567936409327605,
+      0,
+      0,
+      -0.169434478214287,
+      0.7506696297679867,
+      0,
+      0,
+      1.4540410041809082,
+      0.08432213962078094,
+      1
+    ]
+  },
+  "output": {
+    "sha256": "dd89de8ddc3ae9595ff2b04abd36fd825b4b64dddc7f8addcc32cbcbe3cbdde6",
+    "bytes": 226624,
+    "triangles": 2885,
+    "vertices": 5300
+  },
+  "bindingSha256": "5b7f7e3a8e387806c4e450ed25ad6aca82d75af6f0dbe71019abb8cfc826199a",
+  "pipeline": {
+    "path": "scripts/prepare-manual-beards.mjs",
+    "sha256": "5e6d53a6a80c302a0340b9bd35f3ae144177b18c3502d5273ac05d6256336443"
+  },
+  "operations": [
+    "Bake existing node transform into metre positions",
+    "Preserve vertex count and triangle indices",
+    "Remove texture maps and UVs; use DNA vertex colour",
+    "Bind every vertex to existing native Head joint for all three body LODs"
+  ],
+  "reviewStatus": "preview",
+  "bodyBindings": [
+    {
+      "id": "body/meshy-human",
+      "sha256": "8e07d3e1fcf61f4114557e36bc08f2f2fd8c634fb5b3c09b4f746e387caeadfe",
+      "lod": 0,
+      "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+    },
+    {
+      "id": "body/meshy-human",
+      "sha256": "d5639e39b84e3a8616b28722db31be643585d10483fee74088a5477bf6df7bfd",
+      "lod": 1,
+      "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+    },
+    {
+      "id": "body/meshy-human",
+      "sha256": "d2a05aa67337187686325f40e9dd2c4c5867517c933a09aefb857594f2faa682",
+      "lod": 2,
+      "rigSignature": "2d2ac28dd1d76d8f20566c7a55ac2e2ebd826ba674b73ccfd54962fc08ef22bc"
+    }
+  ]
+}

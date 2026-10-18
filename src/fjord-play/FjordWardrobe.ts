@@ -1,6 +1,7 @@
 import {defaultCharacterPresentation, type CharacterPresentation} from '../characters/CharacterPresentation';
 import {gridTrialOutfitId} from '../characters/GridTrialOutfitCatalog';
 import {identitySample} from '../characters/seededRandom';
+import {characterAppearance} from '../characters/CharacterAppearance';
 import type {FjordEntity} from './FjordProjection';
 import type {MeshyHuman, MeshyHumanFactory} from '../characters/MeshyHuman';
 
@@ -40,6 +41,19 @@ export function fjordHairAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): strin
     return assets[variant];
 }
 
+export const fjordBeardAssets = [
+    'beard/manual-fitted-braid', 'beard/manual-fitted-double',
+    'beard/manual-fitted-normal', 'beard/manual-fitted-pointed',
+] as const;
+
+/** Preserve DNA beard presence; select an approved style without consuming Core RNG. */
+export function fjordBeardAsset(entity: Pick<FjordEntity, 'kind' | 'dna'>): string {
+    if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'none';
+    if (characterAppearance(entity.dna).beardStyle === 'none') return 'none';
+    const variant = Math.floor(identitySample(entity.dna.seed, 'fjord.beard.adult.variant') * fjordBeardAssets.length);
+    return fjordBeardAssets[variant];
+}
+
 /** Hats remain independent of hair and carried tools. */
 function occupationModuleAsset(entity: Pick<FjordEntity, 'kind' | 'dna' | 'status'>, type: 'headwear' | 'equipment'): string {
     if (entity.kind !== 'persona' || !entity.dna || entity.dna.age < 18) return 'none';
@@ -70,9 +84,10 @@ export class FjordWardrobe {
         if (human.isDisposed) return;
         const selected = fjordClothingSet(entity);
         const hair = fjordHairAsset(entity);
+        const beard = fjordBeardAsset(entity);
         const headwear = fjordHeadwearAsset(entity);
         const equipment = fjordToolAsset(entity);
-        const key = selected + ':' + hair + ':' + headwear + ':' + equipment;
+        const key = selected + ':' + hair + ':' + beard + ':' + headwear + ':' + equipment;
         let state = this.states.get(human);
         if (!state) {
             state = {revision: 0};
@@ -85,7 +100,7 @@ export class FjordWardrobe {
         }
         const revision = ++state.revision;
         state.pending = key;
-        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair, headwear, equipment} as CharacterPresentation);
+        const request = this.factory.equip(human, {...fjordClothingSets[selected], hair, beard, headwear, equipment} as CharacterPresentation);
         const equipRevision = human.equipRevision;
         state.equipRevision = equipRevision;
         state.task = request.then(() => {

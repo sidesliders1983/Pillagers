@@ -7,7 +7,7 @@ import {Vector3} from 'three';
 import {load} from './load-source.mjs';
 
 const {FjordWardrobe, fjordClothingSet, fjordClothingSets, fjordHairAsset, fjordHairAssets,
-    fjordShortHairAssets, fjordHeadwearAsset, fjordToolAsset} = load('../src/fjord-play/FjordWardrobe.ts');
+    fjordShortHairAssets, fjordHeadwearAsset, fjordToolAsset, fjordBeardAsset, fjordBeardAssets} = load('../src/fjord-play/FjordWardrobe.ts');
 const {MeshyHumanFactory} = load('../src/characters/MeshyHuman.ts');
 const {defaultDNA} = load('../src/characters/CharacterDNA.ts');
 const {parseCharacterPresentation} = load('../src/characters/CharacterPresentation.ts');
@@ -47,9 +47,11 @@ function fixture(bindingHook = async () => {}) {
 function expectSet(human, set, ids, occupation = set.startsWith('farmer') ? 'farmer' : set === 'fisherman' ? 'fisher' : null) {
     assert.equal(human.root.userData.clothingSet.id, set);
     const hair = fjordHairAsset({kind: 'persona', dna: human.dna});
+    const beard = fjordBeardAsset({kind: 'persona', dna: human.dna});
     const hat = fjordHeadwearAsset({kind: 'persona', dna: human.dna, status: {occupation}});
     const tool = fjordToolAsset({kind: 'persona', dna: human.dna, status: {occupation}});
-    const expected = [...ids, ...[hair, hat, tool].filter(id => id !== 'none')];
+    const expected = [...ids, ...[hair, beard, hat, tool].filter(id => id !== 'none')];
+    assert.equal(human.root.userData.selectedAssets.beard, beard === 'none' ? null : beard);
     assert.equal(human.root.userData.selectedAssets.equipment, tool === 'none' ? null : tool);
     assert.equal(human.root.userData.selectedAssets.headwear, hat === 'none' ? null : hat);
     assert.deepEqual([...human.fit.modules.keys()].sort(), expected.slice().sort());
@@ -318,6 +320,85 @@ test('changing resident DNA on the same model updates its hair variant and retai
         await owner.wardrobe.reconcile(human, second);
         assert.equal(owner.requests.length, loadCount);
         assert.equal(human.modules.fitRuns, fitCount);
+        assert.deepEqual(owner.diagnostics, []);
+    } finally {human.dispose();}
+});
+
+
+test('approved beards preserve DNA presence, derived sex and adult eligibility without mutating identity', () => {
+    const {characterAppearance} = load('../src/characters/CharacterAppearance.ts');
+    const styles = new Set();
+    for (let seed = 0; seed < 200; seed++) {
+        const person = entity('farmer');
+        person.dna.seed = seed;
+        const before = structuredClone(person);
+        const selected = fjordBeardAsset(person);
+        const present = characterAppearance(person.dna).beardStyle !== 'none';
+        assert.equal(selected !== 'none', present);
+        if (present) {
+            assert.ok(fjordBeardAssets.includes(selected));
+            styles.add(selected);
+        }
+        assert.deepEqual(person, before);
+        for (const occupation of [null, 'fisher', 'hunter', 'smith', 'woodworker']) {
+            assert.equal(fjordBeardAsset({...person, status: {...person.status, occupation}}), selected);
+        }
+        for (const age of [18, 60, 100]) {
+            assert.equal(fjordBeardAsset({...person, dna: {...person.dna, age}}), selected);
+        }
+        assert.equal(fjordBeardAsset({...person, dna: {...person.dna, age: 17}}), 'none');
+        assert.equal(fjordBeardAsset({...person, dna: {...person.dna, sex: 'female'}}), 'none');
+        assert.equal(fjordBeardAsset({...person, dna: {...person.dna,
+            morphology: {masculinity: .15, height: 1.4}}}), 'none');
+    }
+    assert.equal(styles.size, 4);
+    assert.equal(fjordBeardAsset({...entity(), dna: undefined}), 'none');
+    assert.equal(fjordBeardAsset({...entity(), kind: 'cattle'}), 'none');
+});
+
+test('all four beards equip on world residents, follow Head and reconcile aging and removal', async () => {
+    const owner = fixture();
+    const person = entity('fisher');
+    const human = await owner.factory.createWorld(person.dna);
+    const root = human.root;
+    try {
+        for (const beard of fjordBeardAssets) {
+            person.dna.seed = 0;
+            while (fjordBeardAsset(person) !== beard) person.dna.seed++;
+            human.applyDNA(person.dna);
+            await owner.wardrobe.reconcile(human, person);
+            expectSet(human, 'fisherman', fisherman);
+            assert.equal(human.root.userData.selectedAssets.beard, beard);
+            const mesh = human.fit.modules.get(beard).children[0];
+            assert.equal(mesh.material.map, null);
+            const head = human.fit.nativeSkeleton.bones[5];
+            const points = () => {
+                human.root.updateMatrixWorld(true);
+                return [0, 101, mesh.geometry.attributes.position.count - 1].map(vertex =>
+                    head.worldToLocal(mesh.localToWorld(mesh.getVertexPosition(vertex, new Vector3()))));
+            };
+            human.sampleAnimation('Idle_02', .6);
+            const reference = points();
+            for (const time of [0, .3, .8, 1.1]) {
+                human.sampleAnimation('Walking', time);
+                points().forEach((point, index) => assert.ok(point.distanceTo(reference[index]) < 1e-5));
+            }
+            const loads = owner.requests.length, fitRuns = human.modules.fitRuns;
+            await owner.wardrobe.reconcile(human, person);
+            assert.equal(owner.requests.length, loads);
+            assert.equal(human.modules.fitRuns, fitRuns);
+            const elder = {...person, dna: {...person.dna, age: 85}};
+            human.applyDNA(elder.dna);
+            await owner.wardrobe.reconcile(human, elder);
+            expectSet(human, 'fisherman', fisherman);
+            assert.equal(human.root.userData.selectedAssets.beard, beard);
+            const young = {...person, dna: {...person.dna, age: 17}};
+            human.applyDNA(young.dna);
+            await owner.wardrobe.reconcile(human, young);
+            expectSet(human, 'native', []);
+            assert.ok(!human.fit.modules.has(beard));
+            assert.equal(human.root, root);
+        }
         assert.deepEqual(owner.diagnostics, []);
     } finally {human.dispose();}
 });
