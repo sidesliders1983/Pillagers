@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FjordSide · Settlement dressing review</title>
+    <style>
+        :root { color-scheme: dark; font: 16px/1.5 system-ui, sans-serif; }
+        body { margin: 0; color: #e7e5da; background: #101b1d; }
+        main { max-width: 1400px; margin: auto; padding: 24px; }
+        h1 { font: 600 30px Georgia, serif; margin: 0 0 10px; }
+        p { max-width: 880px; color: #bdc8c5; }
+        a { color: #d2b77e; }
+        label { display: block; margin: 16px 0 6px; }
+        select { width: 100%; padding: 12px; border: 1px solid #68766a;
+            background: #243432; color: inherit; font: inherit; border-radius: 6px; }
+        figure { position: relative; margin: 20px 0 0; aspect-ratio: 14 / 9;
+            border: 1px solid #68766a; background: #192928; overflow: hidden; }
+        figure img { position: absolute; width: 100%; height: 100%; inset: 0; }
+        .badge { position: absolute; top: 12px; padding: 8px 12px;
+            background: #101b1de8; border-radius: 4px; font-size: 14px; }
+        .before { left: 12px; }
+        .after { right: 12px; }
+        input[type=range] { width: 100%; min-height: 44px; accent-color: #d2b77e; }
+        #summary { padding: 12px 16px; border: 1px solid #455753; border-radius: 6px; }
+        nav { display: flex; gap: 24px; flex-wrap: wrap; }
+        @media (max-width: 600px) { main { padding: 14px; } h1 { font-size: 25px; }
+            .badge { top: 6px; padding: 4px 8px; font-size: 11px; } }
+    </style>
+</head>
+<body>
+<main>
+    <h1>Settlement dressing review · #203</h1>
+    <p>Real 3D campaign captures. The comparison uses identical Core, terrain, actor poses,
+        camera, season and lighting. Only the settlement dressing layer changes.</p>
+    <nav>
+        <a href="/fjord-play">Play the current build</a>
+        <a href="README.md">Read the validation report</a>
+        <a href="https://github.com/sidesliders1983/Pillagers/issues/203">Issue #203</a>
+    </nav>
+    <label for="scene">Review scene</label>
+    <select id="scene">
+        <option value="village-17-summer-standard">Seed 17 · Paid two-house village · Summer · Standard</option>
+        <option value="house-17-summer-standard">Seed 17 · Ordinary woodworker home · Close view</option>
+        <option value="landing-17-summer-standard">Seed 17 · Normal landing party · Summer</option>
+        <option value="village-17-winter-standard">Seed 17 · Paid village · Winter · Standard</option>
+        <option value="developed-qa-17-summer-standard">Seed 17 · Developed QA fixture · Summer · Standard</option>
+        <option value="village-32-summer-standard">Seed 32 · Paid village · Summer · Standard</option>
+        <option value="developed-qa-32-summer-low">Seed 32 · Developed QA fixture · Summer · Low</option>
+    </select>
+    <figure>
+        <img id="before" alt="Same campaign without the new settlement dressing">
+        <img id="after" alt="Same campaign with the new settlement dressing">
+        <span class="badge before">Before</span>
+        <span class="badge after">With settlement dressing</span>
+    </figure>
+    <label for="comparison">Before / With settlement dressing</label>
+    <input id="comparison" type="range" min="0" max="100" value="100">
+    <p id="summary" aria-live="polite">Loading measured scene counts…</p>
+    <p>Developed QA fixtures use explicitly increased stock to exercise mixed house levels
+        and occupations. Landing and paid village scenes use normal campaign resources.
+        Large trees and canonical rocks have not been redistributed. This is the first local
+        props and nature pass; the broader visual epic remains open.</p>
+</main>
+<script>
+    const scene = document.querySelector('#scene');
+    const before = document.querySelector('#before');
+    const after = document.querySelector('#after');
+    const comparison = document.querySelector('#comparison');
+    let measurements = [];
+    function update() {
+        before.src = scene.value + '-before.jpg';
+        after.src = scene.value + '-after.jpg';
+        const amount = Number(comparison.value);
+        after.style.clipPath = 'inset(0 0 0 ' + (100 - amount) + '%)';
+        document.querySelector('.badge.before').hidden = amount === 100;
+        document.querySelector('.badge.after').hidden = amount === 0;
+        const data = measurements.find(item => item.name === scene.value);
+        document.querySelector('#summary').textContent = data
+            ? data.instances + ' dressing instances · ' + data.triangles.toLocaleString() +
+                ' instanced triangles before culling · +' + data.extraCalls + ' draws including shadows · ' +
+                'Matched state and camera verified.'
+            : 'Matched state and camera verified in the validation report.';
+    }
+    scene.addEventListener('change', update);
+    comparison.addEventListener('input', update);
+    fetch('review-metrics.json').then(response => response.json()).then(data => {
+        measurements = data;
+        update();
+    });
+    update();
+</script>
+</body>
+</html>

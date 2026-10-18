@@ -1,0 +1,86 @@
+[
+  {
+    "name": "landing-17-summer-standard",
+    "instances": 212,
+    "triangles": 111952,
+    "extraCalls": 8
+  },
+  {
+    "name": "village-17-summer-standard",
+    "instances": 210,
+    "triangles": 112734,
+    "extraCalls": 12
+  },
+  {
+    "name": "house-17-summer-standard",
+    "instances": 210,
+    "triangles": 112734,
+    "extraCalls": 12
+  },
+  {
+    "name": "village-17-summer-low",
+    "instances": 176,
+    "triangles": 94734,
+    "extraCalls": 8
+  },
+  {
+    "name": "village-17-winter-standard",
+    "instances": 210,
+    "triangles": 112734,
+    "extraCalls": 12
+  },
+  {
+    "name": "developed-qa-17-summer-standard",
+    "instances": 206,
+    "triangles": 111766,
+    "extraCalls": 12
+  },
+  {
+    "name": "developed-qa-17-summer-low",
+    "instances": 181,
+    "triangles": 98530,
+    "extraCalls": 7
+  },
+  {
+    "name": "landing-32-summer-standard",
+    "instances": 258,
+    "triangles": 137729,
+    "extraCalls": 8
+  },
+  {
+    "name": "village-32-summer-standard",
+    "instances": 241,
+    "triangles": 128279,
+    "extraCalls": 14
+  },
+  {
+    "name": "house-32-summer-standard",
+    "instances": 241,
+    "triangles": 128279,
+    "extraCalls": 14
+  },
+  {
+    "name": "village-32-summer-low",
+    "instances": 175,
+    "triangles": 92915,
+    "extraCalls": 9
+  },
+  {
+    "name": "village-32-winter-standard",
+    "instances": 241,
+    "triangles": 128279,
+    "extraCalls": 14
+  },
+  {
+    "name": "developed-qa-32-summer-standard",
+    "instances": 245,
+    "triangles": 130991,
+    "extraCalls": 14
+  },
+  {
+    "name": "developed-qa-32-summer-low",
+    "instances": 182,
+    "triangles": 97211,
+    "extraCalls": 9
+  }
+]

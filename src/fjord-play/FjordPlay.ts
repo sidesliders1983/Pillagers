@@ -51,6 +51,8 @@ import { inspectCampfire, inspectWeatherExposure, personaAway } from '../simulat
 import { FjordModels } from './FjordModels';
 import { FjordEntities } from './FjordEntities';
 import { fjordGroundWeights } from './FjordGround';
+import { dressingHomes } from './SettlementDressing';
+import { SettlementDressingLayer } from './SettlementDressingLayer';
 
 const campaignClockIntervalMs = 500;
 const escape = (value: string) => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]!));
@@ -649,6 +651,7 @@ export class FjordPlay {
         let observer: ResizeObserver | undefined;
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
+        let dressing: SettlementDressingLayer | undefined;
         let campfireEffect: CampfireEffect | undefined;
         let precipitationEffect: PrecipitationEffect | undefined;
         const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -687,6 +690,7 @@ export class FjordPlay {
             reducedMotion.removeEventListener('change', configureEffects);
             discoveryFog?.dispose();
             rivalScene?.dispose();
+            dressing?.dispose();
             layer?.dispose();
             models?.dispose();
             weatherTint?.dispose();
@@ -830,6 +834,7 @@ export class FjordPlay {
                 const anchor = next.attachments.find(item => item.key === 'boat')!;
                 this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
                 weatherTint?.dispose();
+                dressing?.dispose();
                 campfireEffect?.dispose();
                 precipitationEffect?.dispose();
                 world?.dispose();
@@ -857,6 +862,8 @@ export class FjordPlay {
                     summitLineY: summitLine, minimumUp: fjordTerrain.permanentMinimumUp });
                 weatherSignature = "";
                 scene.add(next.root);
+                dressing = new SettlementDressingLayer(assets!, blueprint, next.quality);
+                scene.add(dressing.root);
                 cleared.clear();
                 motion = new LivingWorldController(this.campaign.blueprint, discovery ?
                     (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown' : undefined);
@@ -983,6 +990,10 @@ export class FjordPlay {
                         }
                     }
                     sceneEntities = view.entities;
+                    dressing!.sync({ seed: state.seed, homes: dressingHomes(state, view.entities),
+                        ground: view.ground, campfire: view.campfire }, knownTerrain);
+                    dressing!.setSeason(view.calendar.visualProgress);
+                    canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, this.campaign.blueprint, campaignClockIntervalMs / 1000);
                     await layer!.sync(view.entities, this.loading ? yieldForInput : undefined);
                     campfireEffect!.setLit(inspectCampfire(state).lit);
@@ -1032,6 +1043,8 @@ export class FjordPlay {
         document.querySelector('#fjord-quality')!.addEventListener('change', event => {
             const quality = (event.target as HTMLSelectElement).value as 'low' | 'standard';
             world!.setQuality(quality);
+            dressing!.setQuality(quality);
+            canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
             lighting!.setQuality(quality);
             renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.5));
         });

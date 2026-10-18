@@ -16,7 +16,8 @@ const common = ['motion', 'layer', 'models', 'world', 'controller', 'camera', 'r
     'lighting', 'campfireEffect', 'precipitationEffect', 'selectionLabels', 'productionLabels',
     'refresh', 'setPlayback'];
 
-for (const available of [[], ['discoveryFog'], ['discoveryFog', 'rivalScene']]) {
+for (const available of [[], ['discoveryFog'], ['discoveryFog', 'rivalScene'],
+    ['discoveryFog', 'rivalScene', 'dressing']]) {
     test('QA bridge executes with scene bindings: ' + (available.join(', ') || 'legacy lighting only'), () => {
         const locals = [...common, ...available].map(name => name === 'renderer' ?
             'const renderer = { setAnimationLoop(callback) { callback(); } };' : 'let ' + name + ' = { name: "' + name + '" };');
@@ -38,7 +39,7 @@ for (const available of [[], ['discoveryFog'], ['discoveryFog', 'rivalScene']]) 
             return { audit };
         } }, { timeout: 1000 });
         module.exports.init.call({ session: {}, shared: {}, campaign: {} });
-        for (const name of ['discoveryFog', 'rivalScene']) {
+        for (const name of ['discoveryFog', 'rivalScene', 'dressing']) {
             assert.equal(Object.hasOwn(bound, name), available.includes(name));
             if (available.includes(name)) assert.equal(bound[name].name, name);
         }

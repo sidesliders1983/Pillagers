@@ -33,7 +33,7 @@ function instrument(source) {
     function visit(node) {
         // Pinned lighting baselines can predate discovery or the living rival scene.
         if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) &&
-            ['discoveryFog', 'rivalScene'].includes(node.name.text))
+            ['discoveryFog', 'rivalScene', 'dressing'].includes(node.name.text))
             observationReferences.add(node.name.text);
         if (ts.isArrowFunction(node) && ts.isBlock(node.body) && !node.modifiers?.some(m => m.kind === ts.SyntaxKind.AsyncKeyword)) {
             const parent = node.parent;
