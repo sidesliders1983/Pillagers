@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "origin": "http://127.0.0.1:5198",
+  "normalBuild": true,
+  "cases": [
+    {
+      "name": "fresh-default-and-reload",
+      "coreSha256": "52f68d0aec8b0ae0f0456187af563705be5fc0c41428d2d2fb04c6c7bf89de7b",
+      "fog": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 531,
+        "visibleCells": 531,
+        "unknownCells": 9469,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 320008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 7056436
+      },
+      "rivalPopulation": 10,
+      "hiddenRival": true,
+      "cameraAndQualityPreserveState": true
+    },
+    {
+      "name": "explicit-opt-out-and-legacy-reload",
+      "coreSha256": "64cb6d859c1a26497d2833e16e227a774f1629d8236c8f4ae56ecc5235408969",
+      "legacyWorldPreserved": true,
+      "fog": {
+        "active": false
+      }
+    },
+    {
+      "name": "menu-new-island-after-legacy",
+      "coreSha256": "52f68d0aec8b0ae0f0456187af563705be5fc0c41428d2d2fb04c6c7bf89de7b",
+      "oneHiddenRival": true,
+      "discoveryEnabled": true
+    }
+  ],
+  "errors": []
+}

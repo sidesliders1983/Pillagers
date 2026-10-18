@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "normalBuild": true,
+  "cases": [
+    {
+      "name": "fresh",
+      "paused": true,
+      "currentlyObserved": false,
+      "known": false,
+      "rivalEntities": 0,
+      "coreSha256": "330dd3dcf39cfe1740740757dd20884808ac8e7cf0e0253a3059820a70981460"
+    },
+    {
+      "name": "observed",
+      "paused": true,
+      "currentlyObserved": true,
+      "known": true,
+      "rivalEntities": 7,
+      "coreSha256": "c34293fa73911822ccf9f6b2622450129759af9d9435c6e12a39f544e8c186cc",
+      "actualFileExportImportExact": true,
+      "invalidFileAtomic": true
+    },
+    {
+      "name": "returned",
+      "paused": true,
+      "currentlyObserved": false,
+      "known": true,
+      "rivalEntities": 0,
+      "coreSha256": "4b5f3d3f1966c4b42d0992f711a8b82f23c1a486c4b1efc829fa1355b0d88e83"
+    }
+  ],
+  "errors": []
+}

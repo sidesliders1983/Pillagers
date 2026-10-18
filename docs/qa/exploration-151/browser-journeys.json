@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "physicalDevice": false,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36 Edg/155.0.0.0",
+  "journeys": [
+    {
+      "viewport": {
+        "width": 1200,
+        "height": 850,
+        "touch": false
+      },
+      "firstTrace": {
+        "status": "PASS",
+        "seed": 17,
+        "commands": 9,
+        "coreSha256": "9f336a66d3aca40fc402a9b901ac2c749ec5ec5271451e77f312e83053f06d4d",
+        "threeImports": 0,
+        "renderer": false,
+        "traceFile": "journey-1200-departure-trace.json"
+      },
+      "secondTrace": {
+        "status": "PASS",
+        "seed": 17,
+        "commands": 27,
+        "coreSha256": "5f1cd63ee33dc8779c6ad393f9b082248e6a4df4fd6e1ecfe30971dd2cb6faea",
+        "threeImports": 0,
+        "renderer": false,
+        "traceFile": "journey-1200-return-trace.json"
+      },
+      "localSaveExact": true,
+      "reloadPaused": true,
+      "previewAndCancelExact": true,
+      "groupsReturned": true,
+      "actualClockReplayed": true,
+      "simulatedVisibilityPausesWithoutCatchup": true,
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768,
+        "touch": true
+      },
+      "firstTrace": {
+        "status": "PASS",
+        "seed": 17,
+        "commands": 9,
+        "coreSha256": "9f336a66d3aca40fc402a9b901ac2c749ec5ec5271451e77f312e83053f06d4d",
+        "threeImports": 0,
+        "renderer": false,
+        "traceFile": "journey-1024-departure-trace.json"
+      },
+      "secondTrace": {
+        "status": "PASS",
+        "seed": 17,
+        "commands": 27,
+        "coreSha256": "5f1cd63ee33dc8779c6ad393f9b082248e6a4df4fd6e1ecfe30971dd2cb6faea",
+        "threeImports": 0,
+        "renderer": false,
+        "traceFile": "journey-1024-return-trace.json"
+      },
+      "localSaveExact": true,
+      "reloadPaused": true,
+      "previewAndCancelExact": true,
+      "groupsReturned": true,
+      "actualClockReplayed": true,
+      "simulatedVisibilityPausesWithoutCatchup": true,
+      "overflow": false
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "touch": true
+      },
+      "firstTrace": {
+        "status": "PASS",
+        "seed": 17,
+        "commands": 9,
+        "coreSha256": "9f336a66d3aca40fc402a9b901ac2c749ec5ec5271451e77f312e83053f06d4d",
+        "threeImports": 0,
+        "renderer": false,
+        "traceFile": "journey-390-departure-trace.json"
+      },
+      "secondTrace": {
+        "status": "PASS",
+        "seed": 17,
+        "commands": 27,
+        "coreSha256": "5f1cd63ee33dc8779c6ad393f9b082248e6a4df4fd6e1ecfe30971dd2cb6faea",
+        "threeImports": 0,
+        "renderer": false,
+        "traceFile": "journey-390-return-trace.json"
+      },
+      "localSaveExact": true,
+      "reloadPaused": true,
+      "previewAndCancelExact": true,
+      "groupsReturned": true,
+      "actualClockReplayed": true,
+      "simulatedVisibilityPausesWithoutCatchup": true,
+      "overflow": false
+    }
+  ],
+  "profiles": [],
+  "errors": [],
+  "note": "Native desktop Edge; touch viewports are emulation, not iPhone/iPad certification."
+}

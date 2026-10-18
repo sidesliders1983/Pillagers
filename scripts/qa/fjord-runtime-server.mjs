@@ -29,7 +29,12 @@ function instrument(source) {
     }
     const file = ts.createSourceFile('FjordPlay.ts', source, ts.ScriptTarget.Latest, true);
     const edits = [];
+    const observationReferences = new Set();
     function visit(node) {
+        // Pinned lighting baselines can predate discovery or the living rival scene.
+        if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) &&
+            ['discoveryFog', 'rivalScene'].includes(node.name.text))
+            observationReferences.add(node.name.text);
         if (ts.isArrowFunction(node) && ts.isBlock(node.body) && !node.modifiers?.some(m => m.kind === ts.SyntaxKind.AsyncKeyword)) {
             const parent = node.parent;
             let name;
@@ -37,9 +42,10 @@ function instrument(source) {
             if (ts.isBinaryExpression(parent) && parent.left.getText(file) === 'syncScene') name = 'scene.syncPrefix';
             if (ts.isCallExpression(parent) && parent.expression.getText(file) === 'renderer.setAnimationLoop') name = 'frame.callback';
             if (name) {
+                // Insert the suffix first when an empty body gives both edits the same offset.
+                edits.push({ position: node.body.end - 1, text: '} finally { audit.leave(__auditSpan); }' });
                 edits.push({ position: node.body.getStart(file) + 1,
                     text: `${name === 'clock.callback' ? 'if (audit.flags.manualClock) return;' : ''} const __auditSpan = audit.enter('${name}'); try {` });
-                edits.push({ position: node.body.end - 1, text: '} finally { audit.leave(__auditSpan); }' });
             }
         }
         ts.forEachChild(node, visit);
@@ -57,7 +63,8 @@ function instrument(source) {
     source = source.replace(anchor,
         `        audit.bind({ session: this.session, shared: this.shared, campaign: this.campaign,
             motion, layer, models, world, controller, camera, renderer, scene, lighting,
-${fogStudyMode ? '            discoveryFog, rivalScene,\n' : ''}            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
+            ${[...observationReferences].map(name => name + ',').join(' ')}
+            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
             settle: async () => { await actionWork; await sceneWork; },
             advanceTicks: async ticks => {
                 action(() => this.session.command({ type: 'AdvanceTicks', ticks }));
