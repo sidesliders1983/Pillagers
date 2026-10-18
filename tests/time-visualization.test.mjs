@@ -24,8 +24,8 @@ test('animated lighting and foliage reuse lights, shadow map and geometry, resto
     const root=new Group(),geometry=new BoxGeometry(),material=new MeshStandardMaterial(),foliage=new Mesh(geometry,material),ground=new Mesh(geometry,material.clone());
     foliage.userData.seasonalFoliage=true;root.add(foliage,ground);const tint=new SeasonTint(root,ground);
     const own=foliage.material;assert.notEqual(own,material);
-    const shader={uniforms:{},fragmentShader:'#include <color_fragment>'};own.onBeforeCompile(shader);
-    tint.update(0);assert.equal(shader.uniforms.seasonSnowAmount.value,.65);assert.match(shader.fragmentShader,/seasonMask=smoothstep/);
+    const shader={uniforms:{},vertexShader:'#include <color_vertex>',fragmentShader:'#include <color_fragment>'};own.onBeforeCompile(shader);
+    tint.update(0);assert.equal(shader.uniforms.seasonSnowAmount.value,.65);assert.match(shader.fragmentShader,/float seasonMask=1.0/);assert.doesNotMatch(shader.fragmentShader,/vSeasonFoliageMask/);
     lighting.setVisualization('seasons');
     for(const p of [0,.25,.5,.75,1]){lighting.update(p*60,p);tint.update(p);assert.equal(foliage.geometry,geometry);assert.equal(foliage.material,own);assert.deepEqual(scene.children,resources);}
     assert.notDeepEqual(own.color,material.color);assert.equal(lighting.directional.shadow.map,shadow);
@@ -85,4 +85,37 @@ test('newly discovered foliage updates without replacing terrain seasonal shader
     tint.dispose();
     assert.equal(discoveredTree.material, source);
     geometry.dispose(); ground.material.dispose(); source.dispose();
+});
+
+
+test('foliage snow classifies source colours before per-instance tint and treats uncoloured canopies as foliage', () => {
+    const root = new Group(), geometry = new BoxGeometry();
+    const ground = new Mesh(geometry, new MeshStandardMaterial());
+    const canopy = new Mesh(geometry, new MeshStandardMaterial());
+    const mixed = new Mesh(geometry, new MeshStandardMaterial({ vertexColors: true }));
+    for (const tree of [canopy, mixed]) tree.userData.seasonalFoliage = true;
+    root.add(ground, canopy, mixed);
+    const tint = new SeasonTint(root, ground);
+    for (const tree of [canopy, mixed]) {
+        const shader = { uniforms: {}, vertexShader: '#include <color_vertex>',
+            fragmentShader: '#include <color_fragment>' };
+        tree.material.onBeforeCompile(shader);
+        if (tree === canopy) {
+            assert.doesNotMatch(shader.vertexShader, /vSeasonFoliageMask/,
+                'Textured canopies add no varying or per-vertex classification work');
+            assert.match(shader.fragmentShader, /float seasonMask=1.0;/);
+        } else {
+            assert.match(shader.vertexShader, /varying float vSeasonFoliageMask/);
+            assert.match(shader.vertexShader, /smoothstep\(1.0,1.2,color.g/);
+            assert.match(shader.fragmentShader, /seasonMask=vSeasonFoliageMask/);
+        }
+        assert.doesNotMatch(shader.fragmentShader, /vColor\.g/,
+            'The built-in vColor already includes random instance tints in the fragment stage');
+        tint.update(0);
+        assert.equal(shader.uniforms.seasonSnowAmount.value, .65);
+        tint.update(.5);
+        assert.equal(shader.uniforms.seasonSnowAmount.value, 0);
+    }
+    tint.dispose();
+    geometry.dispose(); ground.material.dispose(); canopy.material.dispose(); mixed.material.dispose();
 });

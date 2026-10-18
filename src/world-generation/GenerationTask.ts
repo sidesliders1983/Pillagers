@@ -1,10 +1,10 @@
-import { createCampaignIsland, campaignIslandPlan, type CampaignIslandPlan } from '../fjord-play/CampaignIsland';
+import { createCampaignIsland, campaignIslandPlan, type CampaignIslandPlan, type IslandRecipe } from '../fjord-play/CampaignIsland';
 import { generateWorld, changeWorldConifers } from './GenerateWorld';
 import { terrainPreview, type TerrainPreview } from './TerrainPreview';
 import type { GenerationObserver } from './GenerationProfile';
 import type { GenerationRequest, WorldBlueprint } from './WorldBlueprint';
 
-export type GenerationTask = ({ kind: 'world'; config: GenerationRequest } | { kind: 'campaign'; seed: number } |
+export type GenerationTask = ({ kind: 'world'; config: GenerationRequest } | { kind: 'campaign'; seed: number; recipe?: IslandRecipe } |
     { kind: 'conifers'; world: WorldBlueprint; conifers: 'kaykit' | 'ez-tree' }) & { profile?: boolean };
 export type GenerationProgress = { type: 'phase'; stage: string } |
     { type: 'timing'; stage: string; milliseconds: number } |
@@ -18,7 +18,7 @@ export function runGenerationTask(task: GenerationTask, emit: (event: Generation
     observer.begin = stage => emit({ type: 'phase', stage });
     observer.preview = source => emit({ type: 'preview', preview: terrainPreview(source) });
     emit({ type: 'phase', stage: 'terrain' });
-    const world = task.kind === 'campaign' ? createCampaignIsland(task.seed, undefined, observer) :
+    const world = task.kind === 'campaign' ? createCampaignIsland(task.seed, task.recipe, observer) :
         task.kind === 'conifers' ? changeWorldConifers(task.world, task.conifers) : generateWorld(task.config, observer);
     observer.preview(world);
     return { world, ...(task.kind === 'campaign' ? { plan: campaignIslandPlan(world)! } : {}) };

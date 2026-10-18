@@ -2,7 +2,7 @@ import { projectFjordCalendar } from './FjordCalendar';
 import type { SettlementRestoreMetadata } from '../play/SharedSettlement';
 import type { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { browserGeneration } from '../world-generation/BrowserGeneration';
-import { adoptCampaignIsland } from './CampaignIsland';
+import { adoptCampaignIsland, islandRecipe } from './CampaignIsland';
 import type { GenerationProgress } from '../world-generation/GenerationTask';
 import type { TerrainPreview } from '../world-generation/TerrainPreview';
 import type { RTSCameraController } from '../camera/RTSCameraController';
@@ -128,12 +128,12 @@ export class IslandLoading {
             this.retry.hidden = true;
             this.stage(this.resume ? 'Restoring saved terrain' : 'Shaping coast & valleys');
             try {
-                const result = await this.worker.generate({ kind: 'campaign', seed,
+                const result = await this.worker.generate({ kind: 'campaign', seed, recipe: this.resume?.island ?? islandRecipe(seed),
                     profile: new URLSearchParams(location.search).has('profileLoading') }, this.progress);
                 this.check();
                 if (this.resultSentAt) this.evidence.samples.push({ stage: 'worker-result-transfer',
                     milliseconds: performance.timeOrigin + performance.now() - this.resultSentAt });
-                await this.measure('receive-and-freeze', () => adoptCampaignIsland(seed, result.world, result.plan!));
+                await this.measure('receive-and-freeze', () => adoptCampaignIsland(seed, result.world, result.plan!, this.resume?.island ?? islandRecipe(seed)));
                 this.stage('Preparing FjordSide');
                 return;
             } catch (error) {

@@ -7,7 +7,7 @@ import { buildingDistance } from '../world/SettlementLayout';
 import { natureFootprints } from './NatureFootprints';
 import { pineFootprints } from './PineFootprints';
 import { createBlueprintSurface } from './TerrainQueries';
-import type { AssetPlacement, Biome, WorldBlueprint, Point2 } from './WorldBlueprint';
+import type { AssetPlacement, Biome, WorldBlueprint, Point2, WalkabilityField } from './WorldBlueprint';
 
 type Landscape = Omit<WorldBlueprint, 'biomes' | 'placementPlan'>;
 function segmentDistance(p: Point2, a: Point2, b: Point2) {
@@ -109,7 +109,13 @@ export function planNature(world: Landscape) {
             placed++;
         }
     }
-    const nav = world.navigation, navCells = [...nav.cells];
+    return { biomes: { cells, waterDistance, moisture, worn, coverage }, placementPlan,
+        navigation: natureNavigation(world.navigation, placementPlan) };
+}
+
+/** Carve static nature once from the foundation navigation. Shared by pinned campaign recipes. */
+export function natureNavigation(nav: WalkabilityField, placementPlan: readonly AssetPlacement[]) {
+    const navCells = [...nav.cells];
     for (const p of placementPlan) {
         if (p.assetId.includes('grass')) continue;
         const radius = p.clearance+.65;
@@ -123,6 +129,5 @@ export function planNature(world: Landscape) {
             }
         }
     }
-    return { biomes: { cells, waterDistance, moisture, worn, coverage }, placementPlan,
-        navigation: { ...nav, cells: navCells } };
+    return { ...nav, cells: navCells };
 }

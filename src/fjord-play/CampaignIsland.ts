@@ -5,15 +5,18 @@ import { fitsBuildingFoundation } from '../world/BuildingPlot';
 import { generateWorld } from '../world-generation/GenerateWorld';
 import { islandTerrain } from '../world-generation/IslandShape';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
-import { planSettlement, gradeSettlementFoundations } from '../world-generation/PlanSettlement';
+import { planSettlement, gradeSettlementFoundations, footprintBounds } from '../world-generation/PlanSettlement';
 import { zoneEnvironment } from '../world-generation/EnvironmentZoning';
 import { planNature } from '../world-generation/PlanNature';
+import { planVillageNature } from './VillageNature';
 import { freezeBlueprint, type Bounds2, type Point2, type WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { discoverySettlementGeneratorVersion } from '../world-generation/SettlementSites';
 
-export type CampaignGeography = 'legacy' | 'island-pool-v1';
+export const currentIslandVersion = 'island-pool-v2' as const;
+export type IslandRecipeVersion = 'island-pool-v1' | typeof currentIslandVersion;
+export type CampaignGeography = 'legacy' | IslandRecipeVersion;
 export interface IslandRecipe {
-    version: 'island-pool-v1';
+    version: IslandRecipeVersion;
     generatorVersion: typeof discoverySettlementGeneratorVersion;
     seed: number;
 }
@@ -35,25 +38,28 @@ export interface CampaignIslandPlan {
 const pool = [18, 7] as const;
 const plans = new WeakMap<WorldBlueprint, CampaignIslandPlan>();
 // Bounded cache: world geometry is shared, while every campaign owns its layout and Core.
-const worlds = new Map<number, WorldBlueprint>();
+const worlds = new Map<string, WorldBlueprint>();
 export const campaignIslandPlan = (world: WorldBlueprint) => plans.get(world);
 
-export function islandRecipe(campaignSeed: number): IslandRecipe {
+export function islandRecipe(campaignSeed: number, version: IslandRecipeVersion = currentIslandVersion): IslandRecipe {
+    if (version !== 'island-pool-v1' && version !== currentIslandVersion)
+        throw new Error('Unsupported campaign island recipe version.');
     if (!Number.isInteger(campaignSeed) || campaignSeed < 0 || campaignSeed > 0xffffffff)
         throw new RangeError('Seed must be an integer from 0 to 4294967295.');
     const hash = Math.imul(campaignSeed ^ (campaignSeed >>> 16), 0x45d9f3b) >>> 0;
-    return { version: 'island-pool-v1', generatorVersion: discoverySettlementGeneratorVersion,
+    return { version, generatorVersion: discoverySettlementGeneratorVersion,
         seed: pool[hash % pool.length] };
 }
 
 /** A pinned campaign recipe prepares the existing generator's canonical surface.
  * Only local foundations change. No second biome classifier or saved heightfield is introduced. */
 export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe, observe?: GenerationObserver): WorldBlueprint {
-    const recipe = islandRecipe(campaignSeed);
+    const recipe = islandRecipe(campaignSeed, saved?.version);
     if (saved && (saved.version !== recipe.version || saved.seed !== recipe.seed ||
         saved.generatorVersion !== recipe.generatorVersion))
         throw new Error('Campaign island recipe does not match its seed or supported version.');
-    const cached = worlds.get(recipe.seed);
+    const cacheKey = recipe.version + ':' + recipe.seed;
+    const cached = worlds.get(cacheKey);
     if (cached) return cached;
     const source = generateWorld({ seed: recipe.seed, preset: 'island',
         generatorVersion: recipe.generatorVersion, conifers: 'ez-tree', environment: { version: 1 } }, observe);
@@ -79,7 +85,18 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
         settlement: { ...foundation.settlement, harbor: source.settlement.harbor } };
     const zoned = { ...placed, environment: measureGeneration('campaign-zoning', () => zoneEnvironment(placed, source.config.environment!), observe) };
     observe?.preview?.(zoned);
-    const world = measureGeneration('campaign-nature-and-freeze', () => freezeBlueprint({ ...zoned, ...planNature(zoned) }), observe);
+    const world = measureGeneration('campaign-nature-and-freeze', () => {
+        const nature = recipe.version === 'island-pool-v1' ? planNature(zoned) : planVillageNature(zoned, {
+            sites: [layout.center, source.rivalSite!.center],
+            foundations: [...layout.foundations.map(p => ({ minX: p.x - p.halfSize,
+                maxX: p.x + p.halfSize, minZ: p.z - p.halfSize, maxZ: p.z + p.halfSize })),
+                source.rivalSite!.bounds, ...source.rivalSite!.foundations.map(p => footprintBounds(p))],
+            routes: [[layout.center, ...source.siteSelection!.connection],
+                [layout.center, source.settlement.harbor!],
+                ...layout.foundations.slice(1).map(p => [layout.center, p])]
+        });
+        return freezeBlueprint({ ...zoned, ...nature });
+    }, observe);
     const surface = createBlueprintSurface(world);
     const plots = layout.foundations.slice(1).map(p => ({ x: p.x, z: p.z,
         y: surface.surfaceHeightAt(p.x, p.z), halfWidth: 7.5, halfDepth: 7.5,
@@ -102,21 +119,24 @@ export function createCampaignIsland(campaignSeed: number, saved?: IslandRecipe,
         throw new Error('The curated campaign fails its foundation, separation or access contract.');
     plans.set(world, freezeBlueprint({ recipe, center: layout.center, plots, maximumAdjustment, access,
         berth: source.siteSelection.harborBerth }));
-    worlds.set(recipe.seed, world);
+    worlds.set(cacheKey, world);
     return world;
 }
 
 /** Accept a validated result from our generation worker, restoring metadata lost by structured clone.
  * This is not an import/file-validation entry point. Only the trusted worker calls it. */
-export function adoptCampaignIsland(seed: number, world: WorldBlueprint, plan: CampaignIslandPlan) {
-    const expected = islandRecipe(seed);
-    if (!plan || JSON.stringify(plan.recipe) !== JSON.stringify(expected) ||
+export function adoptCampaignIsland(seed: number, world: WorldBlueprint, plan: CampaignIslandPlan,
+    requested?: IslandRecipe) {
+    const expected = islandRecipe(seed, requested?.version ?? plan?.recipe?.version);
+    if (requested && (requested.version !== expected.version || requested.seed !== expected.seed ||
+        requested.generatorVersion !== expected.generatorVersion) ||
+        !plan || JSON.stringify(plan.recipe) !== JSON.stringify(expected) ||
         world.config.seed !== expected.seed || world.config.generatorVersion !== expected.generatorVersion ||
         !world.validation.accepted || plan.plots.length < 10)
         throw new Error('Worker campaign island recipe or validation does not match the request.');
     freezeBlueprint(world);
     plans.set(world, freezeBlueprint(plan));
-    worlds.set(expected.seed, world);
+    worlds.set(expected.version + ':' + expected.seed, world);
 }
 
 interface Foundation extends Point2 {

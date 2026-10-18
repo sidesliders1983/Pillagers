@@ -1,3 +1,4 @@
+import { currentIslandVersion } from '../fjord-play/CampaignIsland';
 import { SharedSettlement, activeSettlementKey } from './SharedSettlement';
 import type { FoundingPhase } from '../simulation/SimulationCore';
 import type { SettlementView } from './SharedSettlement';
@@ -12,7 +13,7 @@ export function openSettlement(view: SettlementView, seed = 32, foundingPhase?: 
     catch (error) {
         warning = 'Stored campaign could not be restored: ' + String(error);
     }
-    return { campaign: new SharedSettlement(seed, undefined, true, view === 'fjord' ? 'island-pool-v1' : 'legacy', view === 'fjord' ? foundingPhase : undefined), warning, autoStart: view === 'fjord' };
+    return { campaign: new SharedSettlement(seed, undefined, true, view === 'fjord' ? currentIslandVersion : 'legacy', view === 'fjord' ? foundingPhase : undefined), warning, autoStart: view === 'fjord' };
 }
 export function persistSettlement(campaign: SharedSettlement, say: (message: string) => void) {
     if (campaign.transferring)

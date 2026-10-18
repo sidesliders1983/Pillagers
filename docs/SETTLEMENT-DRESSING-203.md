@@ -61,8 +61,8 @@ home/rival ground caches from #202 remain intact.
 | Low | 40 | 160 | Off |
 | Standard | 64 | 320 | Existing directional shadow map |
 
-Low selects a stable subset of the same plan. Batching uses nine already-loaded asset roles,
-each currently one primitive/material. The upper limit is nine color draws plus five
+Low selects a stable subset of the same plan. Batching uses eleven already-loaded asset roles,
+each currently one primitive/material. The upper limit is eleven color draws plus five
 Standard prop shadow draws, without a new pass, light, transparent overlay or texture.
 The grass/shrub/stone budget limits geometry as well as draw calls: instancing is not a
 claim of zero GPU cost. Actual visible counts and all-pass costs are recorded in the
@@ -105,10 +105,10 @@ counts. They are native desktop Edge measurements, not physical iOS validation.
 
 ## Remaining work
 
-The owner still needs to accept the visual result across seeds and seasons. This slice
-does not complete the broader #180 reference gap. Redistributing full-size canonical
-trees/rocks requires a separately reviewed generator-version/new-campaign change;
-existing saved recipes must keep reproducing their terrain, tree targets and navigation.
+The owner accepted the first local dressing slice and PR #206 was merged. This slice
+does not complete the broader #180 reference gap. The follow-up [village nature composition](VILLAGE-NATURE-203.md) introduces a pinned v2
+campaign recipe for tree groups, while saved v1 recipes retain their exact terrain, tree
+targets and navigation. Large rocks retain their canonical placements.
 Observed rival domestic dressing needs its own public-facts contract. Large coastal cargo
 or additional communal furniture needs a real reserved footprint before it can obstruct
 walking. Existing activity animation, cultural events, apprentices, new fauna, vehicles and

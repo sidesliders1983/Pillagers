@@ -23,7 +23,7 @@ test('saved island restores through asynchronous preparation without changing Co
                 if (message.type === 'error') reject(new Error(message.message));
                 if (message.type === 'result') resolve(message.result);
             });
-            worker.postMessage({ kind: 'campaign', seed: metadata.seed });
+            worker.postMessage({ kind: 'campaign', seed: metadata.seed, recipe: metadata.island });
         }).finally(() => worker.terminate());
         adoptCampaignIsland(metadata.seed, result.world, result.plan);
     });

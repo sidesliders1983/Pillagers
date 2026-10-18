@@ -15,6 +15,17 @@ export class NatureWind {
             if (!material) {
                 material = source.clone();
                 applyLeafWind(material, this.time);
+                const compile = material.onBeforeCompile;
+                material.onBeforeCompile = (shader, renderer) => {
+                    compile.call(material, shader, renderer);
+                    // Independent world-position phase; trunks stay fixed and no CPU tree animation is added.
+                    shader.vertexShader = shader.vertexShader.replace(
+                        'float windOffset = 2.0 * 3.14 * simplex3(mvPosition.xyz / uWindScale);',
+                        'float windOffset = 2.0 * 3.14 * simplex3(mvPosition.xyz / uWindScale);' +
+                        '\n#ifdef USE_INSTANCING\n' +
+                        'windOffset += dot(instanceMatrix[3].xz, vec2(0.37, 0.23));\n#endif');
+                };
+                material.customProgramCacheKey = () => 'ez-tree-dcf309b-instanced-wind-v1:world-phase';
                 this.materials.set(source, material);
             }
             node.material = material;

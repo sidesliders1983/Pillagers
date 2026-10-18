@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Village nature review · FjordSide</title>
+<style>
+:root {
+    color-scheme: dark;
+    font-family: system-ui, sans-serif;
+    background: #101c1f;
+    color: #e8e4d9;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: clamp(16px, 3vw, 40px); }
+main { max-width: 1400px; margin: auto; }
+a { color: #dfc58e; }
+h1 { font: 600 clamp(28px, 4vw, 44px) Georgia, serif; margin: 8px 0 12px; }
+p { line-height: 1.6; max-width: 85ch; color: #bfc9c4; }
+.eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #dfc58e; }
+.controls, .range, .links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 22px 0;
+}
+label { font-size: 14px; }
+select, button {
+    font: inherit;
+    color: inherit;
+    background: #223235;
+    border: 1px solid #63736e;
+    border-radius: 5px;
+    padding: 12px;
+}
+select { max-width: 100%; }
+button { cursor: pointer; }
+button:focus-visible, select:focus-visible, input:focus-visible {
+    outline: 3px solid #dfc58e;
+    outline-offset: 3px;
+}
+.stage {
+    position: relative;
+    border: 1px solid #63736e;
+    overflow: hidden;
+    background: #172326;
+    aspect-ratio: 14 / 9;
+}
+.stage img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.stage #after { position: absolute; inset: 0; clip-path: inset(0); }
+.badge {
+    position: absolute;
+    top: 14px;
+    padding: 8px 12px;
+    background: #15262dea;
+    border-radius: 4px;
+    font-size: 14px;
+}
+#before-label { left: 14px; }
+#after-label { right: 14px; }
+.range input { flex: 1; min-width: 120px; accent-color: #dfc58e; }
+.range output { min-width: 4ch; text-align: right; }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+}
+.stats article, .note { padding: 18px; border: 1px solid #435853; border-radius: 6px; }
+.stats h2 { font-size: 14px; font-weight: 500; color: #bac8c0; margin: 0 0 12px; }
+.stats strong { font-size: 22px; font-weight: 600; }
+.stats small { display: block; color: #aabbb2; margin-top: 8px; }
+.note p { margin: 0; }
+.links a { padding: 8px 0; }
+@media (max-width: 600px) {
+    .controls { align-items: stretch; flex-direction: column; }
+    .controls button { display: none; }
+    .badge { top: 7px; padding: 5px; font-size: 11px; }
+    .stage { margin-inline: -8px; }
+    .range { gap: 8px; }
+}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">FjordSide · issue #203 · desktop world</div>
+<h1>Village-edge trees and nature</h1>
+<p>Mixed tree groups, young spruces, birches, shrubs, grass and small stones around real campaign villages. Use the slider to compare the previous release with the candidate.</p>
+<div class="controls"><label for="scene">Review scene</label><select id="scene"></select><button id="show-before">Previous</button><button id="show-after">Candidate</button></div>
+<div class="stage"><img id="before" alt="Previous release at the selected campaign camera"><img id="after" alt="Candidate with mixed village-edge nature"><span class="badge" id="before-label">Previous · v1</span><span class="badge" id="after-label">Candidate · v2</span></div>
+<div class="range"><span>Previous</span><input id="compare" type="range" min="0" max="100" value="100" aria-label="Amount of candidate image visible"><span>Candidate</span><output id="amount" for="compare">100%</output></div>
+<div class="stats"><article><h2>Trees within 55 m</h2><strong id="trees">Loading…</strong><small>The full-island tree quota remains 102.</small></article><article><h2>All-pass draw calls</h2><strong id="calls">Loading…</strong><small>Includes native shadow-map rendering.</small></article><article><h2>All-pass triangles</h2><strong id="triangles">Loading…</strong><small>Geometry cost for this exact camera.</small></article></div>
+<div class="note"><p><strong>Comparison boundary.</strong> Both sides use the same terrain, seed, season, camera and normally paid two-home village. Tree positions, navigation and derived actor paths intentionally differ between the pinned recipe versions. Winter includes the same elapsed campaign ticks on both sides.</p></div>
+<p><strong>Playtest:</strong> start a new campaign to see the v2 tree layout. Existing saves keep their original trees and routes; their low groundcover and leaf wind still receive the presentation improvements.</p>
+<p><button id="play-scenario">Play this test village</button> <button id="restore-session" hidden>Restore previous browser session</button></p>
+<p id="scenario-status" role="status">Loading a test village replaces this tab’s active session and keeps one recovery copy.</p>
+<nav class="links"><a href="/fjord-play">Open game</a><a href="https://github.com/sidesliders1983/Pillagers/pull/207">Draft PR #207</a><a href="README.md">QA report</a><a href="review-metrics.json">Recorded measurements</a></nav>
+</main>
+<script>
+const scene = document.querySelector('#scene'), range = document.querySelector('#compare');
+const labels = {
+    'village-summer-standard': 'Village · Summer · Standard',
+    'woodland-summer-standard': 'Woodland edge · Summer · Standard',
+    'village-summer-low': 'Village · Summer · Low',
+    'village-winter-standard': 'Village · Winter · Standard'
+};
+const choices = [17, 32].flatMap(seed => Object.entries(labels).map(([name, label]) => ({ name: name + '-' + seed, label: 'Seed ' + seed + ' · ' + label })));
+for (const choice of choices) {
+    const option = document.createElement('option');
+    option.value = choice.name;
+    option.textContent = choice.label;
+    scene.append(option);
+}
+let metrics;
+function wipe() { const value = Number(range.value); document.querySelector('#after').style.clipPath = 'inset(0 0 0 ' + (100 - value) + '%)'; document.querySelector('#amount').value = value + '%'; document.querySelector('#before-label').hidden = value === 100; document.querySelector('#after-label').hidden = value === 0; }
+function show() { const name = scene.value; document.querySelector('#before').src = name + '-before.jpg'; document.querySelector('#after').src = name + '-after.jpg'; const record = metrics?.cases.find(item => item.name === name); if (record) {
+    document.querySelector('#trees').textContent = record.trees.map(item => item.within55).join(' → ');
+    document.querySelector('#calls').textContent = record.render.map(item => item.callsIncludingShadows).join(' → ');
+    document.querySelector('#triangles').textContent = record.render.map(item => Math.round(item.trianglesIncludingShadows).toLocaleString('en')).join(' → ');
+} wipe(); }
+scene.addEventListener('change', show);
+range.addEventListener('input', wipe);
+document.querySelector('#show-before').addEventListener('click', () => { range.value = 0; wipe(); });
+document.querySelector('#show-after').addEventListener('click', () => { range.value = 100; wipe(); });
+fetch('review-metrics.json').then(response => { if (!response.ok)
+    throw Error('Review metrics unavailable'); return response.json(); }).then(data => { metrics = data; show(); }).catch(() => { for (const id of ['trees', 'calls', 'triangles'])
+    document.querySelector('#' + id).textContent = 'See QA report'; });
+show();
+
+const activeKey = 'pillagers.fjord-play.active.v1';
+const backupKey = 'pillagers.qa180.previous-session';
+const restore = document.querySelector('#restore-session');
+restore.hidden = !sessionStorage.getItem(backupKey);
+restore.addEventListener('click', () => {
+    sessionStorage.setItem(activeKey, sessionStorage.getItem(backupKey));
+    location.href = '/fjord-play';
+});
+document.querySelector('#play-scenario').addEventListener('click', async event => {
+    const previous = sessionStorage.getItem(activeKey);
+    if (previous && !confirm('Replace this tab’s active campaign with the QA village? A recovery copy will be kept.')) return;
+    const button = event.currentTarget;
+    const status = document.querySelector('#scenario-status');
+    button.disabled = true;
+    status.textContent = 'Preparing the test village…';
+    try {
+        const seed = scene.value.split('-').at(-1);
+        const season = scene.value.includes('-winter-') ? 'winter' : 'village';
+        const response = await fetch(season + '-' + seed + '-island-pool-v2.json');
+        if (!response.ok) throw Error('Test village unavailable.');
+        const data = await response.json();
+        data.target = 'fjord';
+        data.pace.running = false;
+        data.presentation.quality = scene.value.includes('-low-') ? 'low' : 'standard';
+        const record = metrics?.cases.find(item => item.name === scene.value);
+        if (record) data.presentation.camera = { position: record.camera.position, target: record.camera.target };
+        if (previous) sessionStorage.setItem(backupKey, previous);
+        sessionStorage.setItem(activeKey, JSON.stringify(data));
+        location.href = '/fjord-play';
+    } catch (error) {
+        status.textContent = 'Could not open the test village. ' + error.message;
+        button.disabled = false;
+    }
+});
+</script></body></html>

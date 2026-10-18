@@ -9,7 +9,7 @@ import type { SettlementCampfire } from './SettlementCampfire';
 export const dressingAssetKeys = [
     'logs', 'barrel', 'crate', 'fish', 'well',
     'kaykit-grass-cluster-a', 'kaykit-grass-cluster-b',
-    'kaykit-bush-a', 'kaykit-rock-small-a'
+    'kaykit-bush-a', 'kaykit-bush-b', 'kaykit-rock-small-a', 'kaykit-rock-small-b'
 ] as const;
 export type DressingAsset = typeof dressingAssetKeys[number];
 export interface DressingBounds extends Bounds2 { height: number }
@@ -251,35 +251,38 @@ export function planSettlementDressing(world: WorldBlueprint, input: DressingInp
     }
     // Dress only the existing local tree groups, without adding or moving canonical trees.
     const trees = world.placementPlan.filter(p => /conifer|deciduous/.test(p.assetId) &&
-        Math.hypot(p.x - input.campfire.transform.x, p.z - input.campfire.transform.z) < 65);
+        Math.hypot(p.x - input.campfire.transform.x, p.z - input.campfire.transform.z) < 85);
     for (const tree of trees) {
         const owner = 'tree:' + tree.assetId + '@' + tree.x + ',' + tree.z;
         const random = randomFor(input.seed, owner);
-        for (let index = 0; index < 2; index++) {
-            const angle = random() * Math.PI * 2, radius = 1.5 + random() * 2;
+        for (let index = 0; index < 3; index++) {
+            const angle = random() * Math.PI * 2, radius = 1.5 + random() * 3;
             const point = { x: tree.x + Math.cos(angle) * radius, z: tree.z + Math.sin(angle) * radius };
             if (homes.some(home => overlaps({ minX: point.x - .7, maxX: point.x + .7,
                 minZ: point.z - .7, maxZ: point.z + .7 }, parcelBounds(home.plot), .3))) continue;
-            patches.push({ owner: owner + ':' + index, point, rank: index + 1 });
+            patches.push({ owner: owner + ':' + index, point, rank: index % 2 });
         }
     }
     patches.sort((a, b) => a.rank - b.rank || a.owner.localeCompare(b.owner));
     for (const patch of patches) {
         const random = randomFor(input.seed, patch.owner);
-        for (let index = 0; index < 7; index++) {
-            const asset: DressingAsset = index === 6
-                ? random() < .6 ? 'kaykit-bush-a' : 'kaykit-rock-small-a'
+        const woodland = patch.owner.startsWith('tree:');
+        for (let index = 0; index < (woodland ? 9 : 7); index++) {
+            const asset: DressingAsset = index >= 6
+                ? index === 8 ? (random() < .5 ? 'kaykit-rock-small-a' : 'kaykit-rock-small-b')
+                    : random() < .65 ? (random() < .5 ? 'kaykit-bush-a' : 'kaykit-bush-b')
+                        : (random() < .5 ? 'kaykit-rock-small-a' : 'kaykit-rock-small-b')
                 : index % 2 === 0 ? 'kaykit-grass-cluster-a' : 'kaykit-grass-cluster-b';
             const source = sources[asset];
             if (!source) continue;
             const width = Math.max(source.maxX - source.minX, source.maxZ - source.minZ);
-            const size = index === 6 ? .5 + random() * .3 : 1.1 + random() * .5;
+            const size = index >= 6 ? .65 + random() * .5 : 1.1 + random() * .7;
             const scale = Math.min(size / Math.max(.1, width),
                 (asset.includes('rock') ? .18 : asset.includes('bush') ? .5 : .4) /
                 Math.max(.1, source.height));
             place(patch.owner, 'cover-' + index, asset, {
-                x: patch.point.x + (random() - .5) * 3.4,
-                z: patch.point.z + (random() - .5) * 3.4
+                x: patch.point.x + (random() - .5) * (woodland ? 5 : 3.4),
+                z: patch.point.z + (random() - .5) * (woodland ? 5 : 3.4)
             }, random() * Math.PI * 2, scale, 'cover');
         }
     }

@@ -159,7 +159,7 @@ export function inspectSettlementSave(text: string): SettlementRestoreMetadata {
     const state = session.readSnapshot();
     if (saved.narrative) session.book.restore(saved.narrative, session.snapshot());
     if (saved.bridgeVersion === 2) {
-        const expected = islandRecipe(state.seed), actual = saved.island;
+        const actual = saved.island, expected = islandRecipe(state.seed, actual?.version);
         if (!actual || expected.version !== actual.version || expected.seed !== actual.seed ||
             expected.generatorVersion !== actual.generatorVersion)
             throw new Error('Saved island recipe does not match the campaign seed or supported version.');
