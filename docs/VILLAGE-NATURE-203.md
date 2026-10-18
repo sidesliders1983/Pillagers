@@ -28,6 +28,10 @@ width/height variation within their existing canonical clearance and a restraine
 per-instance foliage tones. Rotation/scale do not alter source geometry. The native leaf
 wind receives an independent world-position phase, while trunks remain fixed. Existing
 wind controls and seasonal tint/frost continue to own motion and winter appearance.
+Foliage snow classifies the original vertex colour before instance tints; textured pine
+canopies without vertex colours receive full foliage coverage. Per-tree hue variation
+therefore cannot accidentally suppress snow, while mixed birch/spruce bark keeps its
+original source-colour mask.
 
 The local dressing layer adds a second existing shrub silhouette and small-stone family,
 slightly larger irregular groundcover drifts and more understory around local trees.
