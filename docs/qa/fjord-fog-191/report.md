@@ -1,5 +1,9 @@
 # Nordic fog review — issue #191
 
+Historical review snapshot at `6dd88e4`. The owner subsequently selected C and requested activation.
+See [activation.md](activation.md) for the enabled default and current validation; measurements below
+retain their original settings and conclusions.
+
 Status: review candidate, **production default remains `current`**. Daylight and snowy image approval,
 physical iPhone measurements, and the shadow draw-budget decision remain open. Do not close #191
 or merge this as an approved visual default.

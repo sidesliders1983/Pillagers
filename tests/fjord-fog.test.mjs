@@ -10,8 +10,8 @@ const { DiscoveryFog } = load('../src/fjord-play/DiscoveryFog.ts');
 const { createClanDiscovery, commitClanObservation, inspectClanDiscovery } =
     load('../src/simulation/ClanDiscovery.ts');
 
-test('Nordic fog is opt-in and composes clear, rain, severe winter and night visibility', () => {
-    assert.equal(fjordPresentation.fogProfile, 'current', 'Owner image approval is still pending.');
+test('the approved Nordic default composes clear, rain, severe winter and night visibility', () => {
+    assert.equal(fjordPresentation.fogProfile, 'nordic');
     assert.equal(fjordFogPresentation('current', { width: 800 }), undefined);
     const clear = fjordFogPresentation('nordic', { width: 800 });
     const rain = fjordFogPresentation('nordic', { width: 800, rainWeight: 1 });
@@ -29,6 +29,28 @@ test('Nordic fog is opt-in and composes clear, rain, severe winter and night vis
         assert.ok(profile.near >= 0 && profile.far > profile.near);
     }
     assert.throws(() => fjordFogPresentation('nordic', { width: Infinity }), /width/);
+});
+
+test('winter severity changes visibility smoothly without imposing winter haze on summer', () => {
+    const expected = new Map([
+        [null, [125, 400]], ['Mild', [125, 400]], ['Normal', [125, 400]],
+        ['Harsh', [45, 260]], ['Severe', [15, 200]],
+    ]);
+    for (const [weather, winterRange] of expected) {
+        const summer = fjordFogPresentation('nordic', { width: 800, winterWeight: 0, weather });
+        const winter = fjordFogPresentation('nordic', { width: 800, winterWeight: 1, weather });
+        assert.deepEqual([summer.near, summer.far], [160, 400]);
+        assert.deepEqual([winter.near, winter.far], winterRange);
+        let previous = summer;
+        for (let step = 1; step <= 100; step++) {
+            const next = fjordFogPresentation('nordic', { width: 800, winterWeight: step / 100, weather });
+            assert.ok(next.near <= previous.near && next.far <= previous.far);
+            assert.ok(next.near >= winter.near && next.far >= winter.far);
+            assert.ok(previous.near - next.near < 3 && previous.far - next.far < 5,
+                'Small seasonal changes cannot abruptly flood the world with fog.');
+            previous = next;
+        }
+    }
 });
 
 test('fog view distance composes once with cycle off, seasons, night and quality changes', () => {

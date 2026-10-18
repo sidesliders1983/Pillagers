@@ -1,7 +1,7 @@
 /** Presentation-only treatment for the canonical Fjord. Other worlds retain their lighting. */
 export const fjordPresentation = {
-    // Owner approval of daylight and snowy comparisons is required before enabling Nordic fog.
-    fogProfile: 'current',
+    // Nordic treatment C approved after the fixed-state daylight and snow review (#191).
+    fogProfile: 'nordic',
     lighting: {
         // Northern sun study: a small fill lift keeps shade and water readable.
         ambientScale: .78 * .56,

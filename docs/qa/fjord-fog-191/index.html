@@ -32,27 +32,27 @@
     <div class="controls"><label for="scene">Scene</label><select id="scene"></select>
         <button id="day">Daylight</button><button id="snow">Snow retention</button></div>
     <div class="controls" aria-label="Fog treatment">
-        <button data-variant="current" aria-pressed="false">A · Current</button>
+        <button data-variant="current" aria-pressed="false">A · Previous</button>
         <button data-variant="atmospheric-only" aria-pressed="false">B · Atmosphere only (QA)</button>
-        <button data-variant="candidate" aria-pressed="true">C · Nordic candidate</button>
+        <button data-variant="candidate" aria-pressed="true">C · Nordic</button>
     </div>
     <p id="caption"></p>
-    <figure><img id="selected" alt="Selected fog treatment"><img id="baseline" alt="Current treatment for comparison"></figure>
-    <div class="labels"><span>Current</span><span id="treatment">Nordic candidate</span></div>
+    <figure><img id="selected" alt="Selected fog treatment"><img id="baseline" alt="Previous treatment for comparison"></figure>
+    <div class="labels"><span>Previous</span><span id="treatment">Nordic</span></div>
     <div class="controls"><label for="wipe">Compare</label><input id="wipe" type="range" min="0" max="100" value="50">
         <a id="full" target="_blank" rel="noopener">Full image</a></div>
     <p id="facts"></p>
     <p class="note">Snow is intentional and unchanged. Unknown territory stays opaque. B suppresses only the
         visual shroud in this QA capture; private rival entities remain filtered. This diagnostic is absent from player builds.</p>
     <details><summary>Review limits and measurements</summary>
-        <p>The existing game keeps its current fog pending owner approval of daylight and snowy images.
-            These are native desktop Edge captures at DPR 1, including 390px and tablet viewports.
+        <p>The owner selected C; Nordic fog is now the game default. This gallery preserves the original
+            fixed-state comparisons. These are native desktop Edge captures at DPR 1, including 390px and tablet viewports.
             Physical iPhone Safari performance still needs validation.</p>
         <p>Wider atmospheric visibility can increase the existing shadow fit at high viewpoints.
             Geometry and opacity-mask resources are unchanged; the report records total, main and shadow draws separately.</p>
-        <p><a href="report.md">Technical report</a> · <a href="results.json">Capture and timing data</a> ·
+        <p><a href="activation.md">Implementation status</a> · <a href="report.md">Original technical report</a> · <a href="results.json">Capture and timing data</a> ·
             <a href="https://github.com/sidesliders1983/Pillagers/issues/191">Issue #191</a> ·
-            <a href="/fjord-play">Current LAN game</a></p>
+            <a href="/fjord-play">Play Nordic fog on LAN</a></p>
     </details>
 </main>
 <script type="module">
@@ -71,8 +71,8 @@
         baseline.src = current.file;
         document.querySelector('#caption').textContent = item.caption;
         document.querySelector('#full').href = sample.file;
-        document.querySelector('#treatment').textContent = variant === 'candidate' ? 'Nordic candidate' :
-            variant === 'current' ? 'Current' : 'Atmosphere only (QA diagnostic)';
+        document.querySelector('#treatment').textContent = variant === 'candidate' ? 'Nordic' :
+            variant === 'current' ? 'Previous' : 'Atmosphere only (QA diagnostic)';
         document.querySelector('#facts').textContent = `${item.viewport.width} × ${item.viewport.height} CSS px · ` +
             `fog ${sample.fog.near.toFixed(0)}–${sample.fog.far.toFixed(0)} m · ` +
             `${sample.main.calls} main + ${sample.shadow.calls} shadow draws · ` +
