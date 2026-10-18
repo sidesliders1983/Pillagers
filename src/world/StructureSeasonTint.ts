@@ -10,7 +10,7 @@ export class StructureSeasonTint {
     private materials = new Map<MeshStandardMaterial, MeshStandardMaterial>();
     private bindings: { mesh: Mesh; original: Mesh['material'] }[] = [];
 
-    constructor(root: Object3D) {
+    constructor(root: Object3D, private coverage: 'upward' | 'all' = 'upward') {
         root.traverse(node => {
             if (!(node instanceof Mesh)) return;
             const original = node.material;
@@ -47,12 +47,14 @@ export class StructureSeasonTint {
             ].join('\n');
             shader.fragmentShader = shader.fragmentShader.replace('#include <color_fragment>', [
                 '#include <color_fragment>',
-                'float structureSnowMask = smoothstep(0.25, 0.8, normalize(vStructureWorldNormal).y);',
+                this.coverage === 'all' ? 'float structureSnowMask = 1.0;' :
+                    'float structureSnowMask = smoothstep(0.25, 0.8, normalize(vStructureWorldNormal).y);',
                 'diffuseColor.rgb = mix(diffuseColor.rgb, structureSnowTone,',
                 '    structureSnowAmount * structureSnowMask);'
             ].join('\n'));
         };
-        material.customProgramCacheKey = () => sourceKey + ':structure-season-snow-v1';
+        material.customProgramCacheKey = () => sourceKey + ':structure-season-snow-v1' +
+            (this.coverage === 'all' ? ':all-faces' : '');
         this.materials.set(source, material);
         return material;
     }

@@ -1,0 +1,3014 @@
+{
+  "date": "2026-10-18",
+  "base": "255ef2d34d611677844b6d89e2226659da3671a5",
+  "sourceHashes": {
+    "src/fjord-play/FjordPlay.ts": "e29f2d5f7c3b40c0224cb282df07d2c74669904a2bab7d7d6bcc8ef0164a7de1",
+    "src/fjord-play/SettlementDressing.ts": "df3afb421901a309fac7c94e440bae12f7d381a775504c4ff1cdd135d31618a4",
+    "src/fjord-play/SettlementDressingLayer.ts": "d4f715ec3dc9b7ebf5dda009d32b13a0f0a98fdae49b35ed580db67c50254985",
+    "src/world/StructureSeasonTint.ts": "2255a421079d501bc4c3728e6992d4e2eda77d7aa20f4727a3be5300958f4240"
+  },
+  "method": "Same production scene with only the independent dressing root hidden/shown.",
+  "errors": [],
+  "cases": [
+    {
+      "seed": 17,
+      "name": "landing-17-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "330dd3dcf39cfe1740740757dd20884808ac8e7cf0e0253a3059820a70981460",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 214,
+        "trianglesIncludingShadows": 5046126,
+        "geometries": 103,
+        "textures": 62,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 222,
+        "trianglesIncludingShadows": 5165462,
+        "geometries": 103,
+        "textures": 62,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 212,
+        "triangles": 111952,
+        "batches": [
+          {
+            "asset": "barrel",
+            "instances": 8,
+            "triangles": 3496,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 8,
+            "triangles": 3888,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 83,
+            "triangles": 43824,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 83,
+            "triangles": 43824,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 16,
+            "triangles": 15744,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 14,
+            "triangles": 1176,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "name": "village-17-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "a8ab27ca5e49adc7a6ae27a889b9d794e5b28bfc32ba302a145f78f9b1da9ceb",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 215,
+        "trianglesIncludingShadows": 5057429,
+        "geometries": 108,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 227,
+        "trianglesIncludingShadows": 5177585,
+        "geometries": 108,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 210,
+        "triangles": 112734,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "triangles": 42240,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 84,
+            "triangles": 44352,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 18,
+            "triangles": 17712,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 12,
+            "triangles": 1008,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "name": "house-17-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "a8ab27ca5e49adc7a6ae27a889b9d794e5b28bfc32ba302a145f78f9b1da9ceb",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+      "camera": {
+        "position": [
+          171,
+          15.359430789947512,
+          -144
+        ],
+        "target": [
+          158,
+          3.95943078994751,
+          -129
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 204,
+        "trianglesIncludingShadows": 5008785,
+        "geometries": 108,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 216,
+        "trianglesIncludingShadows": 5128941,
+        "geometries": 108,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 210,
+        "triangles": 112734,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "triangles": 42240,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 84,
+            "triangles": 44352,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 18,
+            "triangles": 17712,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 12,
+            "triangles": 1008,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "name": "village-17-summer-low",
+      "quality": "low",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "a8ab27ca5e49adc7a6ae27a889b9d794e5b28bfc32ba302a145f78f9b1da9ceb",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "ee39fcaf19bb2b9550aabc6395f9580ec18f781d7ed9a9f08ce5f2f8b84be0fc",
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 215,
+        "trianglesIncludingShadows": 5051285,
+        "geometries": 108,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 223,
+        "trianglesIncludingShadows": 5146019,
+        "geometries": 108,
+        "textures": 71,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 176,
+        "triangles": 94734,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 70,
+            "triangles": 36960,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 68,
+            "triangles": 35904,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 14,
+            "triangles": 13776,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 8,
+            "triangles": 672,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "name": "village-17-winter-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Winter",
+        "year": 801,
+        "progress": 0,
+        "visualProgress": 0,
+        "winterWeight": 1
+      },
+      "canonicalHash": "39f1a7bceb96039e0f2148eaa1ad087c9f3ed2e6feea83b1d0e76c26337b0325",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "c045f987dbd9f032afca863f2f5cf530e654e99f2341d46ab255aa9704d162fe",
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 217,
+        "trianglesIncludingShadows": 5071029,
+        "geometries": 109,
+        "textures": 75,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 229,
+        "trianglesIncludingShadows": 5191185,
+        "geometries": 109,
+        "textures": 75,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 210,
+        "triangles": 112734,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 80,
+            "triangles": 42240,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 84,
+            "triangles": 44352,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 18,
+            "triangles": 17712,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 12,
+            "triangles": 1008,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "name": "developed-qa-17-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 801,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "e080eebe7303089c97791624209028b6ec98afb3089bdf1ab4bdfeb4e229c104",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "c045f987dbd9f032afca863f2f5cf530e654e99f2341d46ab255aa9704d162fe",
+      "camera": {
+        "position": [
+          214,
+          63.494503021240234,
+          -178
+        ],
+        "target": [
+          166,
+          5.494503021240234,
+          -126
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 224,
+        "trianglesIncludingShadows": 5065943,
+        "geometries": 114,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 236,
+        "trianglesIncludingShadows": 5186630,
+        "geometries": 114,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 206,
+        "triangles": 111766,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 5,
+            "triangles": 2460,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 1,
+            "triangles": 1372,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 73,
+            "triangles": 38544,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 83,
+            "triangles": 43824,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 18,
+            "triangles": 17712,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 11,
+            "triangles": 924,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 17,
+      "name": "developed-qa-17-summer-low",
+      "quality": "low",
+      "calendar": {
+        "season": "Summer",
+        "year": 801,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "e080eebe7303089c97791624209028b6ec98afb3089bdf1ab4bdfeb4e229c104",
+      "blueprintHash": "49403b70494f860507dee3c7d7d2798b38ced1edfb5643393633b2a2f36c6eba",
+      "actorHash": "c045f987dbd9f032afca863f2f5cf530e654e99f2341d46ab255aa9704d162fe",
+      "camera": {
+        "position": [
+          214,
+          63.494503021240234,
+          -178
+        ],
+        "target": [
+          166,
+          5.494503021240234,
+          -126
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 224,
+        "trianglesIncludingShadows": 5059799,
+        "geometries": 114,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 231,
+        "trianglesIncludingShadows": 5156488,
+        "geometries": 114,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 181,
+        "triangles": 98530,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 5,
+            "triangles": 2460,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 1,
+            "triangles": 1372,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 66,
+            "triangles": 34848,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 71,
+            "triangles": 37488,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 15,
+            "triangles": 14760,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 8,
+            "triangles": 672,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "landing-32-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "52f68d0aec8b0ae0f0456187af563705be5fc0c41428d2d2fb04c6c7bf89de7b",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "b09a49c09bed80139a850c3aa34f91d94d1194957fd56d98f6518cc472b90d2a",
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 224,
+        "trianglesIncludingShadows": 4244693,
+        "geometries": 109,
+        "textures": 62,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 232,
+        "trianglesIncludingShadows": 4388883,
+        "geometries": 109,
+        "textures": 62,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 258,
+        "triangles": 137729,
+        "batches": [
+          {
+            "asset": "barrel",
+            "instances": 7,
+            "triangles": 3059,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 7,
+            "triangles": 3402,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 106,
+            "triangles": 55968,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 107,
+            "triangles": 56496,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 18,
+            "triangles": 17712,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 13,
+            "triangles": 1092,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "village-32-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "d18751ab0effd9af13d0dc5b4b3a8f6d4c8a89542c35004b715a0020f6b0ae81",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "b09a49c09bed80139a850c3aa34f91d94d1194957fd56d98f6518cc472b90d2a",
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 225,
+        "trianglesIncludingShadows": 4255221,
+        "geometries": 115,
+        "textures": 68,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 239,
+        "trianglesIncludingShadows": 4391371,
+        "geometries": 115,
+        "textures": 68,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 241,
+        "triangles": 128279,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 6,
+            "triangles": 2622,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 6,
+            "triangles": 2916,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 1,
+            "triangles": 1372,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 100,
+            "triangles": 52800,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 96,
+            "triangles": 50688,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 16,
+            "triangles": 15744,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 14,
+            "triangles": 1176,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "house-32-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "d18751ab0effd9af13d0dc5b4b3a8f6d4c8a89542c35004b715a0020f6b0ae81",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "b09a49c09bed80139a850c3aa34f91d94d1194957fd56d98f6518cc472b90d2a",
+      "camera": {
+        "position": [
+          100,
+          15.04422163963318,
+          137
+        ],
+        "target": [
+          87,
+          3.644221639633179,
+          152
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 212,
+        "trianglesIncludingShadows": 4200789,
+        "geometries": 115,
+        "textures": 68,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 226,
+        "trianglesIncludingShadows": 4336939,
+        "geometries": 115,
+        "textures": 68,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 241,
+        "triangles": 128279,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 6,
+            "triangles": 2622,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 6,
+            "triangles": 2916,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 1,
+            "triangles": 1372,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 100,
+            "triangles": 52800,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 96,
+            "triangles": 50688,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 16,
+            "triangles": 15744,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 14,
+            "triangles": 1176,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "village-32-summer-low",
+      "quality": "low",
+      "calendar": {
+        "season": "Summer",
+        "year": 800,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "d18751ab0effd9af13d0dc5b4b3a8f6d4c8a89542c35004b715a0020f6b0ae81",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "b09a49c09bed80139a850c3aa34f91d94d1194957fd56d98f6518cc472b90d2a",
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 225,
+        "trianglesIncludingShadows": 4249077,
+        "geometries": 115,
+        "textures": 68,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 234,
+        "trianglesIncludingShadows": 4341992,
+        "geometries": 115,
+        "textures": 68,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 175,
+        "triangles": 92915,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 6,
+            "triangles": 2622,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 6,
+            "triangles": 2916,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 1,
+            "triangles": 1372,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 73,
+            "triangles": 38544,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 68,
+            "triangles": 35904,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 10,
+            "triangles": 9840,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 9,
+            "triangles": 756,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "village-32-winter-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Winter",
+        "year": 801,
+        "progress": 0,
+        "visualProgress": 0,
+        "winterWeight": 1
+      },
+      "canonicalHash": "6103af6dffc6b09c98b7bdadefeb73c5154e5f65732913bae8a7155349a824a5",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "3cc167d50fb6f40553990fbd3313fd298ae8f0c79e8b022e13a2339111a797e5",
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 229,
+        "trianglesIncludingShadows": 4271760,
+        "geometries": 116,
+        "textures": 72,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 243,
+        "trianglesIncludingShadows": 4407910,
+        "geometries": 116,
+        "textures": 72,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 241,
+        "triangles": 128279,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 1,
+            "triangles": 492,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 6,
+            "triangles": 2622,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 6,
+            "triangles": 2916,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 1,
+            "triangles": 1372,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 100,
+            "triangles": 52800,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 96,
+            "triangles": 50688,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 16,
+            "triangles": 15744,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 14,
+            "triangles": 1176,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "developed-qa-32-summer-standard",
+      "quality": "standard",
+      "calendar": {
+        "season": "Summer",
+        "year": 801,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "342e2af496c90d85806ad32cc3473aba0cece7ddc23b3e4b82aaf98002709fa7",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "3cc167d50fb6f40553990fbd3313fd298ae8f0c79e8b022e13a2339111a797e5",
+      "camera": {
+        "position": [
+          121,
+          62.7483115196228,
+          74.85714285714285
+        ],
+        "target": [
+          73,
+          4.748311519622803,
+          126.85714285714286
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 231,
+        "trianglesIncludingShadows": 4272238,
+        "geometries": 116,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 245,
+        "trianglesIncludingShadows": 4417184,
+        "geometries": 116,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 245,
+        "triangles": 130991,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 5,
+            "triangles": 2460,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 6,
+            "triangles": 2622,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 6,
+            "triangles": 2916,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 4,
+            "triangles": 5488,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 96,
+            "triangles": 50688,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 95,
+            "triangles": 50160,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 15,
+            "triangles": 14760,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 17,
+            "triangles": 1428,
+            "primitives": 1
+          }
+        ]
+      }
+    },
+    {
+      "seed": 32,
+      "name": "developed-qa-32-summer-low",
+      "quality": "low",
+      "calendar": {
+        "season": "Summer",
+        "year": 801,
+        "progress": 0.5,
+        "visualProgress": 0.5,
+        "winterWeight": 0
+      },
+      "canonicalHash": "342e2af496c90d85806ad32cc3473aba0cece7ddc23b3e4b82aaf98002709fa7",
+      "blueprintHash": "60a7d74db1afcadeadb7a76385d8872b622cae57044f3f4c9b577fd27645cef6",
+      "actorHash": "3cc167d50fb6f40553990fbd3313fd298ae8f0c79e8b022e13a2339111a797e5",
+      "camera": {
+        "position": [
+          121,
+          62.7483115196228,
+          74.85714285714285
+        ],
+        "target": [
+          73,
+          4.748311519622803,
+          126.85714285714286
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "matched": true,
+      "before": {
+        "callsIncludingShadows": 231,
+        "trianglesIncludingShadows": 4266094,
+        "geometries": 116,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "after": {
+        "callsIncludingShadows": 240,
+        "trianglesIncludingShadows": 4363305,
+        "geometries": 116,
+        "textures": 84,
+        "pixelRatio": 1,
+        "width": 1400,
+        "height": 900
+      },
+      "dressing": {
+        "instances": 182,
+        "triangles": 97211,
+        "batches": [
+          {
+            "asset": "logs",
+            "instances": 5,
+            "triangles": 2460,
+            "primitives": 1
+          },
+          {
+            "asset": "barrel",
+            "instances": 6,
+            "triangles": 2622,
+            "primitives": 1
+          },
+          {
+            "asset": "crate",
+            "instances": 6,
+            "triangles": 2916,
+            "primitives": 1
+          },
+          {
+            "asset": "fish",
+            "instances": 4,
+            "triangles": 5488,
+            "primitives": 1
+          },
+          {
+            "asset": "well",
+            "instances": 1,
+            "triangles": 469,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-a",
+            "instances": 71,
+            "triangles": 37488,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-grass-cluster-b",
+            "instances": 68,
+            "triangles": 35904,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-bush-a",
+            "instances": 9,
+            "triangles": 8856,
+            "primitives": 1
+          },
+          {
+            "asset": "kaykit-rock-small-a",
+            "instances": 12,
+            "triangles": 1008,
+            "primitives": 1
+          }
+        ]
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "seed": 17,
+      "enabled": false,
+      "durationMs": 9028.89999999851,
+      "frameInterval": {
+        "count": 118,
+        "total": 8959,
+        "mean": 75.92372881355932,
+        "min": 16.59999999999127,
+        "max": 266.8999999999942,
+        "p50": 66.7,
+        "p95": 183.6,
+        "p99": 250.2,
+        "over33": 109,
+        "over50": 88
+      },
+      "frameCallbackWall": {
+        "count": 119,
+        "total": 6559.300000000745,
+        "mean": 55.12016806723315,
+        "min": 14.300000000745058,
+        "max": 256.5,
+        "p50": 51.7,
+        "p95": 113.8,
+        "p99": 148.1,
+        "over33": 81,
+        "over50": 61
+      },
+      "renderSubmitWall": {
+        "count": 119,
+        "total": 4627.500000007451,
+        "mean": 38.88655462191135,
+        "min": 9.300000000745058,
+        "max": 226.5,
+        "p50": 29,
+        "p95": 81.3,
+        "p99": 108.2,
+        "over33": 53,
+        "over50": 42
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 1.9000000059604645,
+        "mean": 0.1583333338300387,
+        "min": 0.09999999776482582,
+        "max": 0.30000000074505806,
+        "p50": 0.1,
+        "p95": 0.3,
+        "p99": 0.3,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 0.29999999701976776,
+        "mean": 0.024999999751647312,
+        "min": 0,
+        "max": 0.10000000149011612,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 28,
+        "total": 1913.707997,
+        "mean": 68.34671417857143,
+        "min": 62.770248,
+        "max": 75.900113,
+        "p50": 67,
+        "p95": 75,
+        "p99": 75.9,
+        "over33": 28,
+        "over50": 28
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 63,
+        "total": 5086,
+        "mean": 80.73015873015873,
+        "min": 51,
+        "max": 257,
+        "p50": 72,
+        "p95": 122,
+        "p99": 257,
+        "over33": 63,
+        "over50": 63
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 108,
+        "textures": 71
+      },
+      "programs": 35,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 554,
+          "calls": 212,
+          "triangles": 5039320,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 108,
+          "textures": 71
+        },
+        "programs": 35,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 11,
+        "rejectedRoutes": 0,
+        "targetAttempts": 1,
+        "rejectedTargets": 0,
+        "routeNodes": 3123,
+        "maxRouteNodes": 403,
+        "updates": 118,
+        "lastUpdateMs": 2,
+        "maxUpdateMs": 78,
+        "totalUpdateMs": 544.8999999910593,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 144,
+        "activeSeconds": 8.955699999999258,
+        "visitsStarted": 1,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 38.3986650786532,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 2,
+        "retainedHomeWaypoints": 24,
+        "agents": 13,
+        "reservations": 0,
+        "occupationVisits": 1,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 17,
+      "enabled": true,
+      "durationMs": 8285.39999999851,
+      "frameInterval": {
+        "count": 104,
+        "total": 8141.399999999994,
+        "mean": 78.28269230769226,
+        "min": 16.5,
+        "max": 467.1999999999971,
+        "p50": 66.8,
+        "p95": 200.2,
+        "p99": 245.3,
+        "over33": 87,
+        "over50": 71
+      },
+      "frameCallbackWall": {
+        "count": 105,
+        "total": 5103.299999982119,
+        "mean": 48.602857142686844,
+        "min": 15.100000001490116,
+        "max": 253.10000000149012,
+        "p50": 33.3,
+        "p95": 100.1,
+        "p99": 222.6,
+        "over33": 54,
+        "over50": 37
+      },
+      "renderSubmitWall": {
+        "count": 105,
+        "total": 3481.299999989569,
+        "mean": 33.155238095138756,
+        "min": 9.699999999254942,
+        "max": 210.69999999925494,
+        "p50": 21.5,
+        "p95": 80.1,
+        "p99": 95.8,
+        "over33": 33,
+        "over50": 24
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 2.099999997764826,
+        "mean": 0.17499999981373549,
+        "min": 0.09999999776482582,
+        "max": 0.6999999992549419,
+        "p50": 0.1,
+        "p95": 0.7,
+        "p99": 0.7,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 0.4999999962747097,
+        "mean": 0.04166666635622581,
+        "min": 0,
+        "max": 0.10000000149011612,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 26,
+        "total": 1808.66833,
+        "mean": 69.56416653846154,
+        "min": 64.860573,
+        "max": 77.864188,
+        "p50": 68.6,
+        "p95": 74.9,
+        "p99": 77.9,
+        "over33": 26,
+        "over50": 26
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 37,
+        "total": 3284,
+        "mean": 88.75675675675676,
+        "min": 53,
+        "max": 289,
+        "p50": 79,
+        "p95": 223,
+        "p99": 289,
+        "over33": 37,
+        "over50": 37
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 108,
+        "textures": 71
+      },
+      "programs": 36,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 662,
+          "calls": 220,
+          "triangles": 5134054,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 108,
+          "textures": 71
+        },
+        "programs": 36,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 16,
+        "rejectedRoutes": 0,
+        "targetAttempts": 3,
+        "rejectedTargets": 0,
+        "routeNodes": 4442,
+        "maxRouteNodes": 1119,
+        "updates": 223,
+        "lastUpdateMs": 19.099999997764826,
+        "maxUpdateMs": 177.39999999850988,
+        "totalUpdateMs": 854.8999999798834,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 278,
+        "activeSeconds": 17.403800000000754,
+        "visitsStarted": 3,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 90.67284082490966,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 4,
+        "retainedHomeWaypoints": 99,
+        "agents": 13,
+        "reservations": 2,
+        "occupationVisits": 3,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 17,
+      "enabled": true,
+      "durationMs": 9548.5,
+      "frameInterval": {
+        "count": 109,
+        "total": 9509.5,
+        "mean": 87.24311926605505,
+        "min": 16.69999999999709,
+        "max": 267,
+        "p50": 83.4,
+        "p95": 216.8,
+        "p99": 266.9,
+        "over33": 104,
+        "over50": 87
+      },
+      "frameCallbackWall": {
+        "count": 110,
+        "total": 7265.200000014156,
+        "mean": 66.04727272740142,
+        "min": 17.100000001490116,
+        "max": 136,
+        "p50": 72,
+        "p95": 116.2,
+        "p99": 127.7,
+        "over33": 96,
+        "over50": 69
+      },
+      "renderSubmitWall": {
+        "count": 110,
+        "total": 5166.79999999702,
+        "mean": 46.970909090881996,
+        "min": 10.699999999254942,
+        "max": 108.19999999925494,
+        "p50": 36.9,
+        "p95": 85.3,
+        "p99": 94.6,
+        "over33": 62,
+        "over50": 49
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 2.099999997764826,
+        "mean": 0.17499999981373549,
+        "min": 0.09999999776482582,
+        "max": 0.30000000074505806,
+        "p50": 0.2,
+        "p95": 0.3,
+        "p99": 0.3,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 0.5999999977648258,
+        "mean": 0.049999999813735485,
+        "min": 0,
+        "max": 0.19999999925494194,
+        "p50": 0,
+        "p95": 0.2,
+        "p99": 0.2,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 26,
+        "total": 1961.608974,
+        "mean": 75.446499,
+        "min": 64.969656,
+        "max": 88.264313,
+        "p50": 74.5,
+        "p95": 87.8,
+        "p99": 88.3,
+        "over33": 26,
+        "over50": 26
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 76,
+        "total": 6459,
+        "mean": 84.98684210526316,
+        "min": 50,
+        "max": 139,
+        "p50": 83,
+        "p95": 127,
+        "p99": 139,
+        "over33": 76,
+        "over50": 74
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 108,
+        "textures": 71
+      },
+      "programs": 36,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 774,
+          "calls": 220,
+          "triangles": 5134054,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 108,
+          "textures": 71
+        },
+        "programs": 36,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 19,
+        "rejectedRoutes": 0,
+        "targetAttempts": 5,
+        "rejectedTargets": 0,
+        "routeNodes": 5531,
+        "maxRouteNodes": 1119,
+        "updates": 333,
+        "lastUpdateMs": 0.5999999977648258,
+        "maxUpdateMs": 177.39999999850988,
+        "totalUpdateMs": 1095.9000000171363,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 421,
+        "activeSeconds": 27.261099999997775,
+        "visitsStarted": 5,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 149.79424659304757,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 7,
+        "retainedHomeWaypoints": 173,
+        "agents": 13,
+        "reservations": 1,
+        "occupationVisits": 5,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 17,
+      "enabled": false,
+      "durationMs": 10967.300000000745,
+      "frameInterval": {
+        "count": 109,
+        "total": 10844.100000000006,
+        "mean": 99.48715596330281,
+        "min": 16.60000000000582,
+        "max": 399.5,
+        "p50": 83.5,
+        "p95": 250.1,
+        "p99": 283.5,
+        "over33": 106,
+        "over50": 94
+      },
+      "frameCallbackWall": {
+        "count": 110,
+        "total": 8809.39999999851,
+        "mean": 80.085454545441,
+        "min": 21.800000000745058,
+        "max": 258.30000000074506,
+        "p50": 76.7,
+        "p95": 140.6,
+        "p99": 255.1,
+        "over33": 98,
+        "over50": 78
+      },
+      "renderSubmitWall": {
+        "count": 110,
+        "total": 6011.299999978393,
+        "mean": 54.648181817985396,
+        "min": 12.899999998509884,
+        "max": 141.79999999701977,
+        "p50": 44.9,
+        "p95": 110.9,
+        "p99": 138,
+        "over33": 75,
+        "over50": 50
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 4.000000007450581,
+        "mean": 0.33333333395421505,
+        "min": 0.10000000149011612,
+        "max": 1.4000000022351742,
+        "p50": 0.2,
+        "p95": 1.4,
+        "p99": 1.4,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 0.8000000044703484,
+        "mean": 0.0666666670391957,
+        "min": 0,
+        "max": 0.20000000298023224,
+        "p50": 0.1,
+        "p95": 0.2,
+        "p99": 0.2,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 27,
+        "total": 2477.198329,
+        "mean": 91.74808625925925,
+        "min": 78.595185,
+        "max": 120.366185,
+        "p50": 88.5,
+        "p95": 118.9,
+        "p99": 120.4,
+        "over33": 27,
+        "over50": 27
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 82,
+        "total": 8003,
+        "mean": 97.59756097560975,
+        "min": 50,
+        "max": 261,
+        "p50": 93,
+        "p95": 147,
+        "p99": 261,
+        "over33": 82,
+        "over50": 81
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 108,
+        "textures": 71
+      },
+      "programs": 36,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 886,
+          "calls": 212,
+          "triangles": 5044625,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 108,
+          "textures": 71
+        },
+        "programs": 36,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 21,
+        "rejectedRoutes": 0,
+        "targetAttempts": 5,
+        "rejectedTargets": 0,
+        "routeNodes": 6097,
+        "maxRouteNodes": 1119,
+        "updates": 443,
+        "lastUpdateMs": 0.9000000022351742,
+        "maxUpdateMs": 177.39999999850988,
+        "totalUpdateMs": 1459.7000000588596,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 581,
+        "activeSeconds": 38.349099999997726,
+        "visitsStarted": 5,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 207.30588683939118,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 9,
+        "retainedHomeWaypoints": 173,
+        "agents": 13,
+        "reservations": 1,
+        "occupationVisits": 5,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 32,
+      "enabled": false,
+      "durationMs": 6812.199999999255,
+      "frameInterval": {
+        "count": 90,
+        "total": 6723.300000000003,
+        "mean": 74.70333333333336,
+        "min": 66.5,
+        "max": 100.39999999999418,
+        "p50": 66.8,
+        "p95": 83.5,
+        "p99": 100.4,
+        "over33": 90,
+        "over50": 90
+      },
+      "frameCallbackWall": {
+        "count": 91,
+        "total": 2198.6000000089407,
+        "mean": 24.16043956053781,
+        "min": 13.100000001490116,
+        "max": 43,
+        "p50": 24.6,
+        "p95": 33.1,
+        "p99": 43,
+        "over33": 4,
+        "over50": 0
+      },
+      "renderSubmitWall": {
+        "count": 91,
+        "total": 1373.4999999962747,
+        "mean": 15.093406593365657,
+        "min": 7.5,
+        "max": 25.199999999254942,
+        "p50": 14.7,
+        "p95": 22.7,
+        "p99": 25.2,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 1.5999999977648258,
+        "mean": 0.13333333314706883,
+        "min": 0,
+        "max": 0.29999999701976776,
+        "p50": 0.1,
+        "p95": 0.3,
+        "p99": 0.3,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 0.5999999977648258,
+        "mean": 0.049999999813735485,
+        "min": 0,
+        "max": 0.10000000149011612,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 21,
+        "total": 1463.687801,
+        "mean": 69.6994190952381,
+        "min": 62.059585,
+        "max": 80.540343,
+        "p50": 68.9,
+        "p95": 75.4,
+        "p99": 80.5,
+        "over33": 21,
+        "over50": 21
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 0,
+        "total": 0,
+        "mean": null,
+        "min": null,
+        "max": 0,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "over33": 0,
+        "over50": 0
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 115,
+        "textures": 68
+      },
+      "programs": 35,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 414,
+          "calls": 225,
+          "triangles": 4256855,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 115,
+          "textures": 68
+        },
+        "programs": 35,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 10,
+        "rejectedRoutes": 0,
+        "targetAttempts": 0,
+        "rejectedTargets": 0,
+        "routeNodes": 3309,
+        "maxRouteNodes": 412,
+        "updates": 90,
+        "lastUpdateMs": 0.5,
+        "maxUpdateMs": 16.399999998509884,
+        "totalUpdateMs": 176.2999999895692,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 91,
+        "activeSeconds": 6.687000000000001,
+        "visitsStarted": 0,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 20.85565803121327,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 1,
+        "retainedHomeWaypoints": 0,
+        "agents": 13,
+        "reservations": 1,
+        "occupationVisits": 0,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 32,
+      "enabled": true,
+      "durationMs": 7185.5,
+      "frameInterval": {
+        "count": 90,
+        "total": 6973.600000000006,
+        "mean": 77.4844444444445,
+        "min": 16.69999999999709,
+        "max": 100.19999999999709,
+        "p50": 83.4,
+        "p95": 100,
+        "p99": 100.2,
+        "over33": 89,
+        "over50": 89
+      },
+      "frameCallbackWall": {
+        "count": 91,
+        "total": 3156.099999997765,
+        "mean": 34.68241758239302,
+        "min": 16.300000000745058,
+        "max": 178.69999999925494,
+        "p50": 34.3,
+        "p95": 47.9,
+        "p99": 178.7,
+        "over33": 50,
+        "over50": 2
+      },
+      "renderSubmitWall": {
+        "count": 91,
+        "total": 2127.400000002235,
+        "mean": 23.37802197804654,
+        "min": 10.600000001490116,
+        "max": 36.399999998509884,
+        "p50": 24.1,
+        "p95": 33.2,
+        "p99": 36.4,
+        "over33": 4,
+        "over50": 0
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 3.099999997764826,
+        "mean": 0.2583333331470688,
+        "min": 0.09999999776482582,
+        "max": 0.3999999985098839,
+        "p50": 0.3,
+        "p95": 0.4,
+        "p99": 0.4,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 1.7000000029802322,
+        "mean": 0.14166666691501936,
+        "min": 0,
+        "max": 0.9000000022351742,
+        "p50": 0.1,
+        "p95": 0.9,
+        "p99": 0.9,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 22,
+        "total": 1675.8875309999999,
+        "mean": 76.17670595454545,
+        "min": 65.248655,
+        "max": 88.489145,
+        "p50": 74.3,
+        "p95": 86.3,
+        "p99": 88.5,
+        "over33": 22,
+        "over50": 22
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 3,
+        "total": 153,
+        "mean": 51,
+        "min": 50,
+        "max": 52,
+        "p50": 51,
+        "p95": 52,
+        "p99": 52,
+        "over33": 3,
+        "over50": 2
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 115,
+        "textures": 68
+      },
+      "programs": 35,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 507,
+          "calls": 235,
+          "triangles": 4351968,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 115,
+          "textures": 68
+        },
+        "programs": 35,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 12,
+        "rejectedRoutes": 0,
+        "targetAttempts": 1,
+        "rejectedTargets": 0,
+        "routeNodes": 5033,
+        "maxRouteNodes": 1672,
+        "updates": 181,
+        "lastUpdateMs": 127.60000000149012,
+        "maxUpdateMs": 127.60000000149012,
+        "totalUpdateMs": 388.2999999895692,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 192,
+        "activeSeconds": 13.936600000001482,
+        "visitsStarted": 1,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 56.309579198218,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 4,
+        "retainedHomeWaypoints": 80,
+        "agents": 13,
+        "reservations": 0,
+        "occupationVisits": 1,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 32,
+      "enabled": true,
+      "durationMs": 7167.099999997765,
+      "frameInterval": {
+        "count": 72,
+        "total": 7107.199999999997,
+        "mean": 98.71111111111107,
+        "min": 16.59999999999127,
+        "max": 200.1999999999971,
+        "p50": 100.1,
+        "p95": 116.9,
+        "p99": 200.2,
+        "over33": 70,
+        "over50": 70
+      },
+      "frameCallbackWall": {
+        "count": 73,
+        "total": 2739.3999999836087,
+        "mean": 37.52602739703573,
+        "min": 24.800000000745058,
+        "max": 77.29999999701977,
+        "p50": 36.5,
+        "p95": 50.4,
+        "p99": 77.3,
+        "over33": 49,
+        "over50": 4
+      },
+      "renderSubmitWall": {
+        "count": 73,
+        "total": 1759.0000000111759,
+        "mean": 24.095890411112,
+        "min": 16,
+        "max": 36.400000002235174,
+        "p50": 23.3,
+        "p95": 33.9,
+        "p99": 36.4,
+        "over33": 4,
+        "over50": 0
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 2.900000002235174,
+        "mean": 0.24166666685293117,
+        "min": 0.09999999776482582,
+        "max": 0.4000000022351742,
+        "p50": 0.2,
+        "p95": 0.4,
+        "p99": 0.4,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 1.1000000014901161,
+        "mean": 0.09166666679084301,
+        "min": 0,
+        "max": 0.19999999925494194,
+        "p50": 0.1,
+        "p95": 0.2,
+        "p99": 0.2,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 17,
+        "total": 1671.6194700000003,
+        "mean": 98.33055705882354,
+        "min": 86.440487,
+        "max": 125.748996,
+        "p50": 92.9,
+        "p95": 125.7,
+        "p99": 125.7,
+        "over33": 17,
+        "over50": 17
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 5,
+        "total": 289,
+        "mean": 57.8,
+        "min": 50,
+        "max": 79,
+        "p50": 52,
+        "p95": 79,
+        "p99": 79,
+        "over33": 5,
+        "over50": 4
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 115,
+        "textures": 68
+      },
+      "programs": 35,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 583,
+          "calls": 235,
+          "triangles": 4351968,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 115,
+          "textures": 68
+        },
+        "programs": 35,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 17,
+        "rejectedRoutes": 0,
+        "targetAttempts": 3,
+        "rejectedTargets": 0,
+        "routeNodes": 5847,
+        "maxRouteNodes": 1672,
+        "updates": 254,
+        "lastUpdateMs": 2.300000000745058,
+        "maxUpdateMs": 127.60000000149012,
+        "totalUpdateMs": 553.8000000081956,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 297,
+        "activeSeconds": 21.465399999998496,
+        "visitsStarted": 3,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 100.38943602938377,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 7,
+        "retainedHomeWaypoints": 128,
+        "agents": 13,
+        "reservations": 1,
+        "occupationVisits": 3,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    },
+    {
+      "seed": 32,
+      "enabled": false,
+      "durationMs": 6994.400000002235,
+      "frameInterval": {
+        "count": 60,
+        "total": 6907,
+        "mean": 115.11666666666666,
+        "min": 33.30000000000291,
+        "max": 216.89999999999418,
+        "p50": 116.7,
+        "p95": 133.7,
+        "p99": 216.9,
+        "over33": 60,
+        "over50": 59
+      },
+      "frameCallbackWall": {
+        "count": 61,
+        "total": 2141.000000014901,
+        "mean": 35.098360655981985,
+        "min": 24.5,
+        "max": 62.19999999925494,
+        "p50": 32.8,
+        "p95": 48.5,
+        "p99": 62.2,
+        "over33": 29,
+        "over50": 3
+      },
+      "renderSubmitWall": {
+        "count": 61,
+        "total": 1377.4999999925494,
+        "mean": 22.581967212992613,
+        "min": 16.400000002235174,
+        "max": 42.30000000074506,
+        "p50": 20.1,
+        "p95": 35.1,
+        "p99": 42.3,
+        "over33": 4,
+        "over50": 0
+      },
+      "dressingSync": {
+        "count": 12,
+        "total": 3.399999998509884,
+        "mean": 0.283333333209157,
+        "min": 0.09999999776482582,
+        "max": 0.4000000022351742,
+        "p50": 0.3,
+        "p95": 0.4,
+        "p99": 0.4,
+        "over33": 0,
+        "over50": 0
+      },
+      "dressingSeason": {
+        "count": 12,
+        "total": 0.6999999992549419,
+        "mean": 0.05833333327124516,
+        "min": 0,
+        "max": 0.19999999925494194,
+        "p50": 0,
+        "p95": 0.2,
+        "p99": 0.2,
+        "over33": 0,
+        "over50": 0
+      },
+      "planOrBatchReconcileCalls": 0,
+      "gpuSupported": true,
+      "gpu": {
+        "count": 14,
+        "total": 1561.172577,
+        "mean": 111.51232692857143,
+        "min": 98.99552,
+        "max": 137.3577,
+        "p50": 110.5,
+        "p95": 137.4,
+        "p99": 137.4,
+        "over33": 14,
+        "over50": 14
+      },
+      "disjointQueries": 0,
+      "longTasks": {
+        "count": 4,
+        "total": 231,
+        "mean": 57.75,
+        "min": 50,
+        "max": 65,
+        "p50": 53,
+        "p95": 65,
+        "p99": 65,
+        "over33": 4,
+        "over50": 3
+      },
+      "gpuName": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "memory": {
+        "geometries": 115,
+        "textures": 68
+      },
+      "programs": 35,
+      "visibility": "visible",
+      "renderer": {
+        "render": {
+          "frame": 646,
+          "calls": 226,
+          "triangles": 4259053,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 115,
+          "textures": 68
+        },
+        "programs": 35,
+        "width": 1400,
+        "height": 900,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "motion": {
+        "routeAttempts": 18,
+        "rejectedRoutes": 0,
+        "targetAttempts": 3,
+        "rejectedTargets": 0,
+        "routeNodes": 6103,
+        "maxRouteNodes": 1672,
+        "updates": 315,
+        "lastUpdateMs": 13.699999999254942,
+        "maxUpdateMs": 127.60000000149012,
+        "totalUpdateMs": 662.5000000111759,
+        "yardRepackAttempts": 0,
+        "yardRepackNodes": 0,
+        "yardRepackFailures": 0,
+        "presentationSteps": 414,
+        "activeSeconds": 28.733199999999236,
+        "visitsStarted": 3,
+        "occupationArrivals": 0,
+        "activitiesCompleted": 0,
+        "homeArrivals": 0,
+        "visitsCancelled": 0,
+        "distanceWalked": 141.68870350137487,
+        "failedRouteReuse": 0,
+        "homeTrailReuse": 0,
+        "navigationGeneration": 3,
+        "reservationGeneration": 8,
+        "retainedHomeWaypoints": 128,
+        "agents": 13,
+        "reservations": 0,
+        "occupationVisits": 3,
+        "outOfZone": 0,
+        "bodyOverlaps": 0
+      }
+    }
+  ],
+  "cycles": [
+    {
+      "seed": 17,
+      "count": 10,
+      "first": {
+        "geometries": 114,
+        "textures": 84,
+        "instances": 181
+      },
+      "last": {
+        "geometries": 114,
+        "textures": 84,
+        "instances": 181
+      }
+    },
+    {
+      "seed": 32,
+      "count": 10,
+      "first": {
+        "geometries": 116,
+        "textures": 84,
+        "instances": 182
+      },
+      "last": {
+        "geometries": 116,
+        "textures": 84,
+        "instances": 182
+      }
+    }
+  ]
+}

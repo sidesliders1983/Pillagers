@@ -115,6 +115,7 @@ export const audit = {
             [campaign, ['project', 'readProjection', 'exportData', 'exportJSON'], 'campaign'],
             [shared, ['persist', 'selectionPresentation'], 'shared'],
             [lighting, ['update', 'setSeason'], 'lighting'],
+            [refs.dressing, ['sync', 'reconcile', 'setSeason'], 'dressing'],
             [campfireEffect, ['update'], 'campfire'], [precipitationEffect, ['update'], 'precipitation'],
             [selectionLabels, ['update', 'setAnchors', 'sync'], 'selectionLabels'],
             [productionLabels, ['update', 'setAnchors', 'enqueue'], 'productionLabels'],
