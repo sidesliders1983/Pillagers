@@ -1,0 +1,25 @@
+{
+  "errors": [],
+  "selections": [
+    {
+      "name": "braid",
+      "beard": "beard/manual-fitted-braid",
+      "hairColor": null
+    },
+    {
+      "name": "double",
+      "beard": "beard/manual-fitted-double",
+      "hairColor": null
+    },
+    {
+      "name": "normal",
+      "beard": "beard/manual-fitted-normal",
+      "hairColor": null
+    },
+    {
+      "name": "pointed",
+      "beard": "beard/manual-fitted-pointed",
+      "hairColor": null
+    }
+  ]
+}

@@ -90,3 +90,7 @@ Adult farmer, fisher, hunter and smith residents wear their supplied occupation 
 ### Occupation tools
 
 Adult farmer, fisher, hunter and smith residents carry the supplied sickle, fishing rod, bow with back-mounted quiver, and hammer respectively. Equipment remains independent of clothing, hair and headwear and uses the same native hand/back bones. Children and other occupations receive no occupation tool. Occupation or age changes update the same resident through the existing wardrobe reconciliation. These are visual carry assets using existing Idle/Walking/Running clips with a bounded hand/arm carry layer; there are no new inventory, combat, harvesting or work-output rules. See docs/characters/occupation-tools.md for source identities, fitting and motion limitations.
+
+### Approved beards
+
+Adult male residents retain the existing DNA beard-presence rule. When present, their beard is one of four approved manually fitted styles: braided, double, normal or pointed. The independent visual seed stream keeps style stable across occupations and adult ages. Beards share DNA hair colour, including heritage and greying, and follow the existing native Head bone. Women and children have no beard. Wardrobe reconciliation updates age and identity changes on the same resident. See docs/characters/manual-beards.md.

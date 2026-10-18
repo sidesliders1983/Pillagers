@@ -33,6 +33,10 @@ export class CharacterLab {
         if (hat && ['farmer', 'fisher', 'hunter', 'smith'].includes(hat)) {
             this.presentation.headwear = 'headwear/occupation-' + hat;
         }
+        const beard = requestedOutfit.get('beard');
+        if (beard && ['braid', 'double', 'normal', 'pointed'].includes(beard)) {
+            this.presentation.beard = 'beard/manual-fitted-' + beard;
+        }
         const shortHair = requestedOutfit.get('hair');
         if (shortHair === 'short' || shortHair === 'short2') {
             this.presentation.hair = 'hair/manual-fitted-' + shortHair;
