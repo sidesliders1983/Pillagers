@@ -1,0 +1,342 @@
+{
+  "status": "PASS",
+  "checks": [
+    "A fresh seed-32 campaign physically reaches and observes its real rival with a paid test pack",
+    "The actual /fjord-play renderer loads observed tent, resident, cattle and campfire assets without placeholders",
+    "Reload preserves the exact paused campaign and observed rival actors"
+  ],
+  "errors": [],
+  "campaignSeed": 32,
+  "landscapeSeed": 18,
+  "confirmedTicks": 368,
+  "position": {
+    "x": 11,
+    "z": -222,
+    "rotation": -1.5707963267948966
+  },
+  "supplies": {
+    "foodPerMember": 10,
+    "ticksPerFood": 250,
+    "testCapacity": true,
+    "activeTicksRemaining": 2132,
+    "returnTicksReserved": 349,
+    "explorationTicksRemaining": 1783,
+    "unopenedFood": 8,
+    "consumedFood": 2,
+    "discardedFood": 0,
+    "lostFood": 0
+  },
+  "rendered": {
+    "known": true,
+    "currentlyObserved": true,
+    "rendered": [
+      {
+        "key": "campfire:site-2:campfire",
+        "renderId": "3009e4ae-fac8-447e-8ed1-45371785922b",
+        "kind": "campfire",
+        "id": "site-2:campfire",
+        "living": false,
+        "workEligible": false,
+        "assignment": null,
+        "grazingZone": "exposed",
+        "position": [
+          -20,
+          2.756039619445801,
+          -170
+        ],
+        "asset": "stoneCampfire",
+        "scale": [
+          2,
+          2,
+          2
+        ],
+        "bounds": {
+          "min": [
+            -23.20060575324906,
+            2.756039619445801,
+            -173.22898638248444
+          ],
+          "max": [
+            -16.79939424675094,
+            4.256271214860183,
+            -166.77101361751556
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "household:island-rival:founder-1",
+        "renderId": "375bbf55-6558-4ecf-82de-aaddcff5dbd9",
+        "kind": "household",
+        "id": "island-rival:founder-1",
+        "living": true,
+        "workEligible": false,
+        "assignment": null,
+        "grazingZone": "exposed",
+        "position": [
+          -16,
+          1.9266183376312256,
+          -185
+        ],
+        "asset": "tent",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -16.939338186582294,
+            1.9266183376312256,
+            -185.9999
+          ],
+          "max": [
+            -15.060661813417706,
+            3.4266917198913633,
+            -184.0001
+          ]
+        },
+        "placeholder": false
+      },
+      {
+        "key": "persona:island-rival:founder-1",
+        "renderId": "92aba1a8-9424-4767-81fc-58080a691667",
+        "kind": "persona",
+        "id": "island-rival:founder-1",
+        "living": true,
+        "workEligible": false,
+        "sex": "female",
+        "assignment": null,
+        "grazingZone": "exposed",
+        "position": [
+          -19,
+          2.1579878628253937,
+          -180.5
+        ],
+        "asset": "human",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -19.273112996036208,
+            2.142936337053872,
+            -181.36929545840292
+          ],
+          "max": [
+            -18.711923753378326,
+            3.601068867444156,
+            -179.59189539563033
+          ]
+        },
+        "appearance": {
+          "seed": 3756661009,
+          "height": 1.4060316548962146,
+          "adultAge": 35,
+          "masculinity": 0.49,
+          "weightDeviation": -0.04142465721242101,
+          "age": 35,
+          "stage": "adult",
+          "appearance": {
+            "hairStyle": "long",
+            "beardStyle": "none",
+            "color": "#b8a079",
+            "greyAmount": 0
+          },
+          "appearanceFit": {
+            "hair": 1,
+            "beard": 1,
+            "clothing": 1
+          },
+          "motion": {
+            "cadence": 0.9808,
+            "stride": 1,
+            "footfall": 0.7899999999999999
+          },
+          "weights": {
+            "Masculine": 0,
+            "Feminine": 0.01200000000000001,
+            "Breasts": 0.01200000000000001,
+            "Powerful": 0,
+            "Slight": 0,
+            "Agile": 0,
+            "Grounded": 0.19199999999999998,
+            "Tall": 0,
+            "Short": 0.12131551822780472,
+            "Overweight": 0,
+            "Underweight": 0.024854794327452603,
+            "Age": 0,
+            "HeadWidth": -0.16439604484476147,
+            "HeadLength": 0.0349415629170835,
+            "Jaw": -0.05982530107721686,
+            "Nose": 0.19394127521663904,
+            "LegRatio": -0.06302037416025996,
+            "ShoulderSlope": 0.036502670496702194,
+            "Asymmetry": 0.11326863630674779,
+            "BellyJiggle": 0,
+            "BreastJiggle": 0,
+            "Child": 0,
+            "ChildPower": 0,
+            "ChildAgility": 0,
+            "FemininePower": 0,
+            "MasculineAgility": 0,
+            "TallSlight": 0,
+            "ElderHeavy": 0
+          }
+        },
+        "motion": {
+          "state": "Idle",
+          "speed": 0,
+          "clipTime": 0,
+          "sourceClip": "Idle_02",
+          "clip": "Idle"
+        },
+        "clothing": {
+          "id": "generic",
+          "assets": {
+            "hair": "hair/manual-fitted-short",
+            "beard": null,
+            "headwear": null,
+            "outfit": "garment/meshy-grid-trial-001",
+            "shoes": "garment/meshy-low-shoes-005",
+            "trousers": null,
+            "top": null,
+            "equipment": null
+          }
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:island-rival:cattle-1",
+        "renderId": "73b44ebe-8723-454b-b799-c5c3d6c6353c",
+        "kind": "cattle",
+        "id": "island-rival:cattle-1",
+        "living": true,
+        "workEligible": false,
+        "sex": "female",
+        "stage": "Adult",
+        "assignment": null,
+        "grazingZone": "exposed",
+        "position": [
+          -27,
+          2.6040464639663696,
+          -173
+        ],
+        "asset": "adult-female",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -27.594688298030984,
+            2.6040464639663705,
+            -173.8748688994393
+          ],
+          "max": [
+            -26.474837070470016,
+            3.847911865499567,
+            -172.13070047757125
+          ]
+        },
+        "motion": {
+          "state": "Idle",
+          "speed": 0,
+          "clipTime": 0,
+          "sourceClip": "Idle",
+          "clip": "Idle"
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:island-rival:cattle-2",
+        "renderId": "781346f7-10e1-4eb5-bc1d-ce7aa3529a2e",
+        "kind": "cattle",
+        "id": "island-rival:cattle-2",
+        "living": true,
+        "workEligible": false,
+        "sex": "female",
+        "stage": "Adult",
+        "assignment": null,
+        "grazingZone": "exposed",
+        "position": [
+          -25,
+          2.591282367706299,
+          -173
+        ],
+        "asset": "adult-female",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -25.594688298030984,
+            2.5912823677062997,
+            -173.87486889943926
+          ],
+          "max": [
+            -24.474837070470016,
+            3.835147769239496,
+            -172.13070047757122
+          ]
+        },
+        "motion": {
+          "state": "Idle",
+          "speed": 0,
+          "clipTime": 0,
+          "sourceClip": "Idle",
+          "clip": "Idle"
+        },
+        "placeholder": false
+      },
+      {
+        "key": "cattle:island-rival:cattle-3",
+        "renderId": "af019458-133c-4910-a238-c1ff4b030fe5",
+        "kind": "cattle",
+        "id": "island-rival:cattle-3",
+        "living": true,
+        "workEligible": false,
+        "sex": "male",
+        "stage": "Adult",
+        "assignment": null,
+        "grazingZone": "exposed",
+        "position": [
+          -23,
+          2.5200588703155518,
+          -174.5
+        ],
+        "asset": "adult-male",
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -23.662680988640155,
+            2.520058870315552,
+            -175.4561805686374
+          ],
+          "max": [
+            -22.24395893838684,
+            3.8704291083868894,
+            -173.49579066678365
+          ]
+        },
+        "motion": {
+          "state": "Idle",
+          "speed": 0,
+          "clipTime": 0,
+          "sourceClip": "Idle",
+          "clip": "Idle"
+        },
+        "placeholder": false
+      }
+    ]
+  }
+}

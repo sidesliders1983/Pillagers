@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FjordSide · Rival visibility</title>
+    <style>
+        body { margin: auto; max-width: 1100px; padding: 24px; background: #192529; color: #eee8dc; font: 17px/1.55 system-ui; }
+        h1 { color: #dcbf84; font-family: Georgia, serif; }
+        a { color: #f4d59a; }
+        button { min-height: 44px; padding: 12px; color: inherit; background: #304b3e; border: 1px solid #a3a174; border-radius: 6px; font: inherit; cursor: pointer; }
+        img { width: 100%; border-radius: 8px; }
+        figure { margin: 24px 0; }
+    </style>
+</head>
+<body>
+    <h1>Rival visibility · seed 32</h1>
+    <p>Actual expedition movement reaches the reserved rival site. Observed founding tents, people, livestock and the campfire use the existing models. Only currently visible actors are shown.</p>
+    <p><a href="report.md">Validation and diagnosis</a> · <a href="browser.json">Browser results</a> · <a href="/fjord-play">Your settlement</a></p>
+    <button id="open-review" type="button">Open paused review copy</button>
+    <p id="status" role="status">The review opens in a separate tab.</p>
+    <figure><img src="seed-32-observed.png" alt="Observed rival tent, resident, livestock and campfire at the edge of the discovery fog"><figcaption>First sighting from a confirmed expedition position. The rest of the settlement remains concealed by terrain and fog.</figcaption></figure>
+    <p>New orders use eight directions, at the existing speed and without cutting blocked corners. Existing saved route geometry is retained.</p>
+    <script>
+        document.querySelector('#open-review').onclick = async () => {
+            const tab = window.open('about:blank', '_blank');
+            if (!tab) { document.querySelector('#status').textContent = 'Allow this review page to open a tab.'; return; }
+            try {
+                const response = await fetch('visited-review.json');
+                if (!response.ok) throw Error('Review save unavailable.');
+                tab.sessionStorage.setItem('pillagers.fjord-play.active.v1', JSON.stringify(await response.json()));
+                tab.location.href = '/fjord-play';
+            } catch (error) {
+                tab.close(); document.querySelector('#status').textContent = String(error);
+            }
+        };
+    </script>
+</body>
+</html>

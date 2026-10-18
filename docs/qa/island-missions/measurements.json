@@ -1,0 +1,555 @@
+{
+  "seeds": [
+    17,
+    42,
+    91,
+    1983,
+    1337,
+    7,
+    18,
+    32,
+    64,
+    127
+  ],
+  "physicalDeviceTested": false,
+  "results": [
+    {
+      "seed": 17,
+      "islandSeed": 7,
+      "sighted": true,
+      "missions": [
+        {
+          "type": "Recon",
+          "duration": 250,
+          "foodCost": 2,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Scouted",
+              "observedAt": 800799,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": null
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Surveillance",
+          "duration": 400,
+          "foodCost": 4,
+          "foodPerMember": 4,
+          "successBps": 9000,
+          "casualtyBps": 300,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Surveyed",
+              "observedAt": 801199,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": "Medium"
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        }
+      ],
+      "errors": [
+        "Pillage: Mission needs 7 Food."
+      ],
+      "elapsedMs": 30006.721700000002
+    },
+    {
+      "seed": 42,
+      "islandSeed": 18,
+      "sighted": false,
+      "missions": [],
+      "errors": [],
+      "elapsedMs": 21015.966800000002
+    },
+    {
+      "seed": 91,
+      "islandSeed": 7,
+      "sighted": true,
+      "missions": [
+        {
+          "type": "Recon",
+          "duration": 250,
+          "foodCost": 2,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Scouted",
+              "observedAt": 800799,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": null
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Surveillance",
+          "duration": 400,
+          "foodCost": 4,
+          "foodPerMember": 4,
+          "successBps": 9000,
+          "casualtyBps": 300,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Surveyed",
+              "observedAt": 801199,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": "Medium"
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        }
+      ],
+      "errors": [
+        "Pillage: Mission needs 7 Food."
+      ],
+      "elapsedMs": 2771.2862000000023
+    },
+    {
+      "seed": 1983,
+      "islandSeed": 7,
+      "sighted": true,
+      "missions": [
+        {
+          "type": "Recon",
+          "duration": 250,
+          "foodCost": 2,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Scouted",
+              "observedAt": 800799,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": null
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Surveillance",
+          "duration": 400,
+          "foodCost": 4,
+          "foodPerMember": 4,
+          "successBps": 9000,
+          "casualtyBps": 300,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Surveyed",
+              "observedAt": 801199,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": "Medium"
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Pillage",
+          "duration": 500,
+          "foodCost": 5,
+          "foodPerMember": 5,
+          "successBps": 6000,
+          "casualtyBps": 1000,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": null,
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 10,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Raid completed."
+          }
+        }
+      ],
+      "errors": [],
+      "elapsedMs": 3747.5639999999985
+    },
+    {
+      "seed": 1337,
+      "islandSeed": 7,
+      "sighted": true,
+      "missions": [
+        {
+          "type": "Recon",
+          "duration": 313,
+          "foodCost": 3,
+          "foodPerMember": 3,
+          "successBps": 8000,
+          "casualtyBps": 700,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 149,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Scouted",
+              "observedAt": 800832,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": null
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Surveillance",
+          "duration": 500,
+          "foodCost": 5,
+          "foodPerMember": 5,
+          "successBps": 9000,
+          "casualtyBps": 800,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 149,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Surveyed",
+              "observedAt": 801332,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": "Medium"
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        }
+      ],
+      "errors": [
+        "Pillage: Mission needs 8 Food."
+      ],
+      "elapsedMs": 2813.320899999999
+    },
+    {
+      "seed": 7,
+      "islandSeed": 7,
+      "sighted": true,
+      "missions": [
+        {
+          "type": "Recon",
+          "duration": 250,
+          "foodCost": 2,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Scouted",
+              "observedAt": 800799,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": null
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Surveillance",
+          "duration": 400,
+          "foodCost": 4,
+          "foodPerMember": 4,
+          "successBps": 9000,
+          "casualtyBps": 300,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": false,
+            "discovery": null,
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Mission failed; no discoveries or recovered assets."
+          }
+        },
+        {
+          "type": "Pillage",
+          "duration": 500,
+          "foodCost": 5,
+          "foodPerMember": 5,
+          "successBps": 6000,
+          "casualtyBps": 1000,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": null,
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 10,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Raid completed."
+          }
+        }
+      ],
+      "errors": [],
+      "elapsedMs": 3868.8064000000013
+    },
+    {
+      "seed": 18,
+      "islandSeed": 18,
+      "sighted": false,
+      "missions": [],
+      "errors": [],
+      "elapsedMs": 2258.3582999999926
+    },
+    {
+      "seed": 32,
+      "islandSeed": 18,
+      "sighted": false,
+      "missions": [],
+      "errors": [],
+      "elapsedMs": 2211.000199999995
+    },
+    {
+      "seed": 64,
+      "islandSeed": 18,
+      "sighted": false,
+      "missions": [],
+      "errors": [],
+      "elapsedMs": 2495.027900000001
+    },
+    {
+      "seed": 127,
+      "islandSeed": 7,
+      "sighted": true,
+      "missions": [
+        {
+          "type": "Recon",
+          "duration": 250,
+          "foodCost": 2,
+          "foodPerMember": 2,
+          "successBps": 8000,
+          "casualtyBps": 200,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": true,
+            "discovery": {
+              "level": "Scouted",
+              "observedAt": 800799,
+              "terrain": "Forest",
+              "resources": [],
+              "settlementName": "Island community",
+              "opportunity": true,
+              "resistance": null
+            },
+            "survivorIds": [
+              "founder-1"
+            ],
+            "casualtyIds": [],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Settlement observed."
+          }
+        },
+        {
+          "type": "Surveillance",
+          "duration": 400,
+          "foodCost": 4,
+          "foodPerMember": 4,
+          "successBps": 9000,
+          "casualtyBps": 300,
+          "target": {
+            "x": -10,
+            "z": -76
+          },
+          "travelTicks": 119,
+          "result": {
+            "success": false,
+            "discovery": null,
+            "survivorIds": [],
+            "casualtyIds": [
+              "founder-1"
+            ],
+            "food": 0,
+            "materials": 0,
+            "cattleIds": [],
+            "personaIds": [],
+            "summary": "Mission failed; no discoveries or recovered assets."
+          }
+        }
+      ],
+      "errors": [
+        "Pillage: Group member is unavailable after the preceding mission."
+      ],
+      "elapsedMs": 2741.939699999988
+    }
+  ]
+}

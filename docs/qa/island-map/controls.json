@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Map is one icon-and-label item in the existing bar, starts closed, toggles; known points focus only and unknown points reject",
+    "Phone Map is a deliberate modal sheet; Escape closes; there is no extra row or standalone Home button"
+  ],
+  "errors": []
+}

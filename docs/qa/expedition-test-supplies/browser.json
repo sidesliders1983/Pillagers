@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "checks": [
+    "The normal two-Food pack stays default; the test input allows 1–10 and rejects 11 without changing Core",
+    "The dialog quotes 24 Food for three residents; cancel is free and confirm purchases exactly the chosen pack without unpausing",
+    "The custom pack keeps exploring beyond normal endurance, retains its exact remaining rations through save/load and stays visibly labelled as a test pack",
+    "After real homecoming a new pack can be selected; the maximum quotes 30 Food for three residents without phone overflow"
+  ],
+  "errors": []
+}

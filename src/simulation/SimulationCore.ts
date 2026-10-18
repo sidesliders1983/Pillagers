@@ -3,6 +3,8 @@ import { assertIslandClanWorld, type IslandClanLandscape } from './IslandClans';
 import { applySpatialCommand, stepSpatialExpeditions, requireSpatialAdvance, validateSpatialExpeditions } from './SpatialExpeditions';
 import type { PhysicalExpeditionContext, SpatialExpeditionCommand } from './SpatialExpeditions';
 export { exploreOffer, startExpeditionOffer, inspectSpatialExpeditions } from './SpatialExpeditions';
+export { islandMissionOffer, inspectIslandMissions } from './IslandMissions';
+import { dispatchIslandMission, type IslandMissionCommand } from './IslandMissions';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { assertDiscoveryWorld, createClanDiscovery, commitClanObservation, validateClanDiscovery, type ClanDiscovery } from './ClanDiscovery';
 import { birthdayCalendarMode, validateBirthdayCalendar, validatePersonaDates } from './BirthdayCalendar';
@@ -155,7 +157,7 @@ export function createSettlement(seed:number, overrides:Partial<PrototypeConfig>
     }
     initializeSocial(state,socialOverrides);validateState(state); return state;
 }
-export type SimulationCommand = SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
+export type SimulationCommand = IslandMissionCommand | SpatialExpeditionCommand | CampfireCommand | ExpeditionCommand | LandingCommand | MechanicsCommand | {type: 'AdvanceTicks'; ticks: number} | {type: 'AdvanceWinter'} | {type: 'AssignOccupation'; personaId: string; occupation: Occupation | null};
 function integer(value: number, label: string) {
     if (!Number.isSafeInteger(value) || value < 0) throw new Error(`${label} must be a nonnegative safe integer`);
 }
@@ -165,6 +167,12 @@ function emit(state: SimulationState, type: string, personaId?: string, details?
 }
 export function applyCommand(input: SimulationState, command: SimulationCommand, context?: PhysicalExpeditionContext): SimulationState {
     validateState(input);
+    if (command.type === 'DispatchIslandMission') {
+        const state = structuredClone(input);
+        dispatchIslandMission(state, command, context);
+        validateState(state);
+        return state;
+    }
     if (command.type === 'StartExpedition' || command.type === 'CancelExpedition' ||
         command.type === 'ExploreArea' || command.type === 'RecallExpedition' ||
         command.type === 'CreateExplorationGroup' || command.type === 'SetExplorationMember') {

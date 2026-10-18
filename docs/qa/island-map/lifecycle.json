@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "checks": [
+    "DPR 2 import replaces terrain 7 with terrain 18 and exact canonical state, with one map/control instance",
+    "Restart rebinds the founding map and removes old expedition flags without duplicate controls"
+  ],
+  "errors": []
+}

@@ -22,6 +22,7 @@ const meter = (label: string, value: number) => `<div class="fjord-meter"><div><
     <strong>${Math.round(value * 100)}%</strong></div><meter min="0" max="1" value="${value}">${Math.round(value * 100)}%</meter></div>`;
 
 interface InterfaceHooks {
+    home?: () => void;
     select: (kind: string, id: string) => void;
     refresh: () => void;
     commit: (commands: SimulationCommand[] | (() => SimulationCommand[]), done: () => void) => void;
@@ -291,6 +292,7 @@ export class FjordInterface {
         const state = this.state;
         const home = this.household();
         switch (action) {
+            case 'camera-home': this.close(false); this.hooks.home?.(); return true;
             case 'expand-card': this.expanded = true; break;
             case 'collapse-card': this.expanded = false; break;
             case 'inspect': this.close(false); this.hooks.select(button.dataset.kind!, button.dataset.id!); return true;
@@ -485,7 +487,8 @@ export class FjordInterface {
                 Object.values(state.landing?.longships ?? {})
                     .filter(ship => ship.salvagedWinter === null)
                     .map(ship => ({ id: ship.id, label: ship.id, detail: 'Longship' }));
-            const html = `<div class="fjord-tabs">${Object.entries(kinds).map(([kind, label]) => button('directory', label, kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : kind === 'longship' ? 'ship' : 'home', `data-kind="${kind}" aria-pressed="${kind === this.directory}"`)).join('')}</div>
+            const html = `${this.hooks.home ? button('camera-home', 'View settlement', 'home') : ''}
+                <div class="fjord-tabs">${Object.entries(kinds).map(([kind, label]) => button('directory', label, kind === 'persona' ? 'people' : kind === 'cattle' ? 'cattle' : kind === 'longship' ? 'ship' : 'home', `data-kind="${kind}" aria-pressed="${kind === this.directory}"`)).join('')}</div>
                 <label class="fjord-search-label">Find an identity<input id="fjord-search" type="search" value="${esc(this.search)}" placeholder="Name or identifier"></label>
                 <div class="fjord-directory-list">${records.filter(r => (r.label + ' ' + r.id).toLocaleLowerCase().includes(this.search.toLocaleLowerCase())).map(r =>
                     `<div>${this.link(this.directory, r.id, r.label)}<small>${esc(r.detail)}</small></div>`).join('') || '<p>No matching identities.</p>'}</div>`;

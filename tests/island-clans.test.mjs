@@ -138,6 +138,31 @@ test('the player sees no hidden rival information and only currently observed an
 });
 
 
+test('visible rival actors are not hidden merely because the settlement centre is outside the current view', () => {
+    const { inspectRivalSettlement, projectRivalSettlement } = loadTypeScript(new URL('../src/fjord-play/RivalSettlement.ts', import.meta.url));
+    const { commitClanObservation, discoveryAt, inspectClanDiscovery } = loadTypeScript(new URL('../src/simulation/ClanDiscovery.ts', import.meta.url));
+    const landscape = { ...world, config: { seed: 32 } };
+    let state = core.initializeIslandClans(core.createCampaign(32), landscape, worldId);
+    const projection = projectRivalSettlement(state.world.targetClans['island-rival'], landscape);
+    const center = landscape.rivalSite.center;
+    const tent = projection.entities.filter(entity => entity.kind === 'household').sort((a, b) =>
+        Math.hypot(b.transform.x - center.x, b.transform.z - center.z) -
+        Math.hypot(a.transform.x - center.x, a.transform.z - center.z))[0];
+    const distance = Math.hypot(tent.transform.x - center.x, tent.transform.z - center.z);
+    const observer = { id: 'confirmed-party', kind: 'expedition',
+        x: tent.transform.x + (tent.transform.x - center.x) / distance * 56,
+        z: tent.transform.z + (tent.transform.z - center.z) / distance * 56 };
+    state.discovery = commitClanObservation(state.discovery, landscape, worldId, state.clan.id, [observer], 800000);
+    const knowledge = inspectClanDiscovery(state.discovery, state.clan.id);
+    assert.equal(discoveryAt(knowledge, center.x, center.z), 'unknown');
+    assert.equal(discoveryAt(knowledge, tent.transform.x, tent.transform.z), 'visible');
+    const observed = inspectRivalSettlement(state, landscape);
+    assert.ok(observed.entities.some(entity => entity.id === tent.id), 'A directly observed tent must reach the renderer');
+    assert.equal(observed.currentlyObserved, true);
+    assert.equal(observed.site, undefined, 'An unseen settlement centre must not be disclosed');
+    assert.ok(observed.entities.every(entity => discoveryAt(knowledge, entity.transform.x, entity.transform.z) === 'visible'));
+});
+
 test('the shared Fjord campaign creates, saves and restores one rival without exposing or resetting it', () => {
     const { SharedSettlement } = loadTypeScript(new URL('../src/play/SharedSettlement.ts', import.meta.url));
     const shared = new SharedSettlement(7, 123, true, 'island-pool-v1', 'summer-800-v1');

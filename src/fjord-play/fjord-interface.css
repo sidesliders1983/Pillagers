@@ -185,12 +185,21 @@ body.fjord-play {
 .fjord-expedition-empty p { font-size: 13px; color: var(--fjord-muted); margin: 0; max-width: 55ch; }
 .fjord-expedition-history { display: flex; align-items: center; gap: 8px; color: var(--fjord-muted); font-size: 11px; margin: 14px 0 0; }
 .fjord-expedition-message { margin: 10px 0 0; padding: 8px 10px; background: #dcbf8414; color: var(--fjord-text); border-left: 2px solid var(--fjord-accent); font-size: 12px; }
-#fjord-play #expedition-mode { position: absolute; z-index: 9; bottom: 88px; left: 50%; transform: translateX(-50%);
+.fjord-expedition-test-supplies { margin: 12px 0; padding: 8px; border: 1px solid var(--fjord-line); border-radius: 4px; }
+.fjord-expedition-test-supplies summary { cursor: pointer; min-height: 44px; align-content: center; }
+.fjord-expedition-test-supplies label { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#fjord-play .fjord-expedition-test-supplies input { width: 80px; min-height: 44px; font-size: 16px; }
+#fjord-play #expedition-mode { position: absolute; z-index: 9; bottom: calc(88px + var(--fjord-shortcut-space, 0px)); left: 50%; transform: translateX(-50%);
     top: auto; right: auto; max-width: none; max-height: calc(100% - 190px); height: auto;
     box-sizing: border-box; width: min(690px, calc(100vw - 32px)); padding: 12px 15px;
     border: 1px solid var(--fjord-line); border-top: 2px solid var(--fjord-accent); border-radius: 5px;
     background: var(--fjord-panel); box-shadow: 0 4px 20px #07101240; }
-#fjord-canvas:has(~ #expedition-mode:not([hidden]) #expedition-send) { cursor: crosshair; }
+#fjord-canvas:has(~ #expedition-mode:not([hidden]) #expedition-cancel) { cursor: crosshair; }
+#expedition-group-shortcuts { position: absolute; bottom: calc(100% + 8px); right: 0;
+    display: grid; gap: 6px; justify-items: end; max-height: 144px; overflow: auto; }
+#fjord-play #expedition-group-shortcuts button { min-height: 44px; min-width: 44px;
+    border: 1px solid var(--fjord-line); gap: 6px; background: var(--fjord-panel); }
+#fjord-play #expedition-group-shortcuts button[aria-expanded="true"] { border-color: var(--fjord-accent); }
 .fjord-exploration-overline { display: flex; align-items: center; gap: 8px; color: var(--fjord-accent); }
 .fjord-exploration-overline > span:first-of-type { font-size: 9px; text-transform: uppercase; letter-spacing: .13em; }
 #fjord-play .fjord-exploration-overline > .fjord-glyph { width: 17px; height: 17px; }
@@ -215,7 +224,7 @@ body.fjord-play {
     .fjord-expedition-steps li + li::before { display: none; }
     .fjord-expedition-members { grid-template-columns: 1fr; }
     .fjord-exploration-content { grid-template-columns: 1fr; gap: 8px; }
-    #fjord-play #expedition-mode { bottom: 76px; padding: 10px; }
+    #fjord-play #expedition-mode { bottom: calc(76px + var(--fjord-shortcut-space, 0px)); padding: 10px; }
     .fjord-exploration-overline { flex-wrap: wrap; }
     .fjord-exploration-clock { margin-left: 0; }
 }
@@ -283,3 +292,44 @@ body.fjord-play {
     .fjord-directory-list { grid-template-columns: 1fr; }
     .fjord-task-columns { grid-template-columns: 1fr; }
 }
+
+/* A small targeting prompt leaves the island available for touch navigation. */
+#island-mission-target {
+    box-sizing: border-box;
+    position: absolute;
+    top: auto;
+    right: auto;
+    left: 12px;
+    bottom: 88px;
+    height: auto;
+    width: min(380px, calc(100% - 24px));
+    z-index: 10;
+    max-width: min(380px, calc(100% - 24px));
+    max-height: min(220px, calc(100% - 180px));
+    overflow: auto;
+    padding: 12px;
+    color: var(--fjord-text, #eee4cc);
+    background: #1c302bea;
+    border: 1px solid #b3a26b;
+    border-radius: 10px;
+}
+#island-mission-target[hidden] { display: none; }
+#island-mission-panel { border-top: 1px solid #7d8761; margin-top: 18px; padding-top: 12px; }
+#island-mission-panel select { max-width: 100%; }
+#island-mission-panel fieldset label { display: block; }
+#island-mission-panel fieldset { border: 1px solid var(--fjord-border, #6c8064); border-radius: 6px; }
+#island-mission-panel fieldset label { min-height: 36px; }
+#island-mission-target button { min-height: 44px; }
+#island-mission-dialog {
+    box-sizing: border-box;
+    max-width: min(420px, calc(100vw - 32px));
+    max-height: calc(100dvh - 32px);
+    overflow: auto;
+    padding: 24px;
+    color: var(--fjord-text);
+    background: var(--fjord-panel);
+    border: 1px solid var(--fjord-accent);
+    border-radius: 8px;
+}
+#island-mission-dialog::backdrop { background: #07101399; }
+#island-mission-dialog button { min-height: 44px; margin: 4px; }

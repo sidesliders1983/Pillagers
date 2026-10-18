@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "checks": [
+    "An away Explore group explains its blocked Recon action and can be recalled from Known places without another charge or elapsed time",
+    "Surveillance/Pillage still require a returned successful Recon; no at-site mission conversion is introduced",
+    "Actual homecoming enables Recon for the same group without prematurely unlocking Surveillance",
+    "The production Expeditions workspace displays the explanation and return action"
+  ]
+}

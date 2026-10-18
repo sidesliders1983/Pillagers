@@ -49,3 +49,7 @@ Player-initiated raids come first. CPU reconnaissance/raids and defenses are a l
 ## Implemented v0.4 slice
 
 [World Expeditions v0.4](../../WORLD-EXPEDITIONS-V04.md) records the implemented region graph, reusable groups, optional Surveillance, mission provisions/risk and one-category carrying capacity. Named residents and actual target assets move through Simulation Core commands; the player UI is /play and Gameplay Lab retains shared-save debugging.
+
+## Physical Pillage adapter (#150)
+
+[Spatial missions v0.4D](../../ISLAND-MISSIONS-V04D.md) connects the existing Pillage rules to the single saved island rival. A group must return from Explore and leave home on a separate confirmed mission. Normal cost is 5 Food per member for 500 ticks, adjusted by existing weather. The real land round trip must fit that duration. A dated Recon opportunity is required; Surveillance remains optional and is only available after a CPU clan has been identified. The existing one-category-per-survivor limits, actual target debits, mortality and identity transfers remain in force. CPU raids and tactical combat are not introduced.

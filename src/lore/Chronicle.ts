@@ -141,8 +141,8 @@ const templates:Record<string,Template>={
         (d.redirected ? `${d.groupName} changed course, packing ${d.foodCost} additional Food for exploration and the return home.` :
             `${d.groupName} set out to explore, carrying ${d.foodCost} Food for the round trip.`):null,
     ExploreAreaReturned:(_e,d)=>str(d,'groupName')?`${d.groupName} exploration ended: ${d.outcome}.`:null,
-    ExpeditionDeparted:(_e,d)=>str(d,'groupName')&&str(d,'mission')&&str(d,'regionId')?`${d.groupName} departed for ${d.mission} towards ${d.regionId}, carrying ${d.foodCost} Food.`:null,
-    ExpeditionReturned:(_e,d)=>str(d,'mission')&&str(d,'regionId')&&typeof d.success==='boolean'?`${d.mission} towards ${d.regionId} returned: ${d.success?'completed':'failed'}, ${d.food??0} Food, ${d.materials??0} Materials, ${ids(d,'cattleIds')?.length??0} cattle and ${ids(d,'personaIds')?.length??0} people recovered; ${ids(d,'casualtyIds')?.length??0} casualties.`:null,
+    ExpeditionDeparted:(_e,d)=>str(d,'groupName')&&str(d,'mission')&&(str(d,'destination')||str(d,'regionId'))?`${d.groupName} departed for ${d.mission} towards ${d.destination??d.regionId}, carrying ${d.foodCost} Food.`:null,
+    ExpeditionReturned:(_e,d)=>str(d,'mission')&&(str(d,'destination')||str(d,'regionId'))&&typeof d.success==='boolean'?`${d.mission} towards ${d.destination??d.regionId} returned: ${d.success?'completed':'failed'}, ${d.food??0} Food, ${d.materials??0} Materials, ${ids(d,'cattleIds')?.length??0} cattle and ${ids(d,'personaIds')?.length??0} people recovered; ${ids(d,'casualtyIds')?.length??0} casualties.`:null,
     PersonaTransferredIn:(e,d)=>str(d,'name')?`${d.name} arrived from ${d.originClanId}.`:null,
     PersonaTransferredOut:(_e,d)=>str(d,'name')?`${d.name} was transferred to ${d.destinationClanId}.`:null,
     FoodConsumed:(_e,d)=>number(d,'units')!==null&&number(d,'shortfall')!==null?`Residents consumed ${d.units} Food; the recorded shortfall was ${d.shortfall} Food.`:null,

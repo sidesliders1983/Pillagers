@@ -200,10 +200,10 @@
     left: calc(var(--fjord-safe-left) + 8px);
     right: calc(var(--fjord-safe-right) + 8px);
     top: auto;
-    bottom: calc(var(--fjord-safe-bottom) + 68px);
+    bottom: calc(var(--fjord-safe-bottom) + 68px + var(--fjord-shortcut-space, 0px));
     width: auto;
     max-width: none;
-    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-safe-top) - var(--fjord-safe-bottom) - 138px);
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-safe-top) - var(--fjord-safe-bottom) - 138px - var(--fjord-shortcut-space, 0px));
     padding: 7px 10px;
     transform: none;
     overflow: auto;

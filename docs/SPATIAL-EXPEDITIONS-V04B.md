@@ -1,6 +1,6 @@
 # Spatial Expedition Groups v0.4B — Expedition Mode (#148 / PR #179)
 
-New `/fjord-play` islands enable exploration and one physical rival by default from 2026-10-18. Expedition Groups reuse the existing Simulation Core, canonical physical routes, native resident Run and clan discovery. Ordinary residents stay autonomous. Existing saves keep their original rules; spatial raids remain #150 and larger ship/horse/cart carrying capacities are not implemented.
+New `/fjord-play` islands enable exploration and one physical rival by default from 2026-10-18. Expedition Groups reuse the existing Simulation Core, canonical physical routes, native resident Run and clan discovery. Ordinary residents stay autonomous. Existing saves keep their original rules; separate spatial missions are documented in v0.4D (#150), and larger ship/horse/cart carrying capacities are not implemented.
 
 ## Current owner decisions
 
@@ -9,6 +9,22 @@ The 2026-10-16 Expedition Mode brief replaces destination-distance prices and re
 Prototype values are **2 Food per member**, **one carried ration per 250 active canonical ticks**, **500 ticks of endurance**, **2 m movement per canonical tick**, and a temporary **10 minutes per 1,000 ticks** for the whole running simulation. These values are prototype tuning, not historical claims. The former 25-tick automatic stay is retained only for old version-1 journeys; new expeditions can explore/wait at the target until recalled, redirected or required to return safely.
 
 ## Player flow and confirmation
+
+### Test carrying capacity — 2026-10-18
+
+To test distant exploration without changing normal balance, group preparation includes a collapsed **Test supplies** section. **Food per resident (test)** accepts a whole number from **1 to 10**; the normal default remains **2**. Three members taking 8 each cost **24 Food** and receive **2,000 active ticks** each at the existing 250 ticks per Food. Ten each is the maximum: **2,500 active ticks**, including the unchanged protected physical return allowance.
+
+The paid departure dialog shows the actual total, per-person amount and a test-pack label. Back/cancel spends nothing; confirmation revalidates the crew, amount and clan stock, then spends once. Invalid amounts or insufficient Food reject atomically. There is no free Food, refund, timer reset, resupply while away or change to production, casualties, discovery or separate Recon/Surveillance/Pillage provisions.
+
+`StartExpedition.testFoodPerMember` is an explicit optional playtest command field. A custom purchase stores its amount in the existing provisions and an optional `testCapacity: true` marker. Save validation bounds marked packs to 1–10 and still requires unmarked normal packs to carry exactly 2; all ration accounting checks remain. Save/load and replay retain the purchased custom pack and its remaining rations. The unpurchased input draft is presentation state for the next departure, not a persistent campaign-wide balance setting. Ongoing custom supplies remain labelled **Test pack** in the UI.
+
+### Navigation and mobile visibility — 2026-10-18
+
+Only the paid **Start Expedition** action requires confirmation. Choose/Change destination arms a single ground tap; a valid tap immediately applies the new route using the same pack. An invalid tap leaves the existing expedition unchanged and keeps destination selection active. Separate Recon, Surveillance and Pillage departures retain their own paid confirmation.
+
+Each active group has a numbered route-icon shortcut above Expeditions in the navigation dock. It hides or restores that group's map controls without changing its mission, supplies, camera or clock. Hiding also leaves destination-selection mode so ordinary map navigation is available. Multiple groups have independent visibility controls; visibility is transient presentation state.
+
+The **Exploration supplies** bar excludes the existing protected journey-home allowance (actual reached return trail at canonical speed plus the existing two-tick safety margin). Its time estimate is available exploration time, not total pack endurance including return. Automatic low-supply return shows zero exploration time and an explicit reason, including while paused. Remaining rations still fund the real homeward journey. This changes presentation only: prices, consumption, safe-return rules, save data and pacing are unchanged. A general attention/warning system is outside this pass.
 
 Expeditions opens the global group overview regardless of the selected home, resident or animal. Create exploration group creates Group 1, Group 2, etc. Each group has an inline resident checklist, using the canonical eligibility rules; membership can change only while no expedition is active. Group actions stay available without clearing the world selection.
 
@@ -32,7 +48,9 @@ Canonical per-member balances distinguish unopened Food, the active ration's rem
 
 ## Safe movement, return and terminal failure
 
-Core plans with bounded deterministic A* on the existing navigation grid and canonical heightfield. Cardinal routes, sampled dry ground, a maximum local grade of 0.65 and reserved home/campfire exclusions remain in use. A tap on an unavailable cell can resolve to safe local ground within 8 m without jumping water or a ridge. Search remains bounded at 40,000 nodes. No second terrain classification, saved heightfield, renderer authority or new random casualty system is added.
+Core plans with bounded deterministic A* on the existing navigation grid and canonical heightfield. New fixed-pack orders use eight directions, with diagonal distance charged at its actual length: movement remains 2 m per tick, rather than becoming faster on diagonals. A diagonal requires both adjacent cardinal cells to be safe, so it cannot cut blocked terrain or building corners. Sampled dry ground, a maximum local grade of 0.65 and reserved home/campfire exclusions remain in use. A tap on an unavailable cell can resolve to safe local ground within 8 m without jumping water or a ridge. Search remains bounded at 40,000 nodes. No second terrain classification, saved heightfield, renderer authority or new random casualty system is added.
+
+Each new route stores `routeMode: eight-way-v1`; old saved journeys retain their recorded cardinal geometry until a new order is given. Partial diagonal redirects and exact homeward trails survive save/load. Per-tick slope checks follow the actual crossed polyline edges: a valid hillside corner must not be mistaken for a steeper straight chord and trigger a false return. This requires no new path search per tick or frame.
 
 Every new leg retains its confirmed origin and a validated trail back to the original home. Redirecting extends/reuses actual reached geometry. Core compares each living member's remaining endurance with the actual traversable return trail before the next active tick, using a conservative two-tick margin. A distant target can be accepted without promising it will be reached: the group turns back before its return budget would become unsafe. Return uses the reached trail, including partial edges and exact home origins, rather than teleporting or inventing progress. It requires no new path search on each render frame/tick.
 
@@ -51,3 +69,7 @@ Starting, changing targets and mode changes never unpause a manual, hidden-tab, 
 New starts upgrade the optional `world.spatial` extension to version 2. Its carried balances, Prepared/Stranded states, routes, confirmed progress and factual events are deterministic headless data. Geography is reattached on load; no duplicate world is saved in Core. Pacing intent/preference remains session state and the active override is derived from canonical expeditions. Save/load, replay and view handoff retain it without replacing the user's preference or resuming time automatically.
 
 Existing version-1 spatial missions and old four-region Recon/Surveillance/Pillage saves retain their recorded movement/economy semantics. The 3D UI guides an already underway version-1 group home before starting the fixed-pack mode; it cannot silently purchase new route-priced provisions through the new UI. Old paid journeys are not assigned invented reserves. New gameplay uses the explicit confirmed start contract.
+
+## Physical mission adapter (#150)
+
+The [v0.4D physical mission contract](ISLAND-MISSIONS-V04D.md) now connects the same groups to separate Recon, Surveillance and Pillage journeys from home. It retains the existing mission prices/durations and actual recovery limits; it does not extend an Explore pack or change its endurance. Spatial version 3 allows old Explore packets and new versioned mission tasks to coexist without changing the old records.
