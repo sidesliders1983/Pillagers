@@ -1,0 +1,47 @@
+#fjord-map-controls {
+    position: absolute; left: max(16px, env(safe-area-inset-left));
+    bottom: calc(80px + env(safe-area-inset-bottom)); z-index: 13;
+    display: flex; gap: 5px; padding: 3px; background: var(--fjord-panel);
+    border: 1px solid var(--fjord-line); border-radius: 5px;
+}
+#fjord-play #fjord-map-controls button { width: 44px; height: 44px; padding: 8px; }
+#fjord-play #fjord-island-map {
+    position: absolute; inset: auto auto calc(140px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    margin: 0; padding: 12px; width: min(300px, calc(100vw - 48px)); box-sizing: border-box;
+    max-height: calc(100dvh - 245px); overflow: auto; color: var(--fjord-text);
+    background: var(--fjord-panel); border: 1px solid var(--fjord-accent); border-radius: 7px;
+    z-index: 14; overscroll-behavior: contain;
+}
+#fjord-island-map:not([open]) { display: none; }
+.fjord-map-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+#fjord-play .fjord-map-heading h2 { margin: 0; font: 19px Georgia, serif; }
+#fjord-play .fjord-map-heading [data-map-home] { margin-left: auto; }
+#fjord-play .fjord-map-heading button { width: 44px; height: 44px; padding: 9px; }
+.fjord-map-image { position: relative; aspect-ratio: var(--island-map-aspect); overflow: hidden; background: #132b32; }
+#fjord-map-canvas { display: block; width: 100%; height: 100%; cursor: crosshair; touch-action: manipulation; }
+#fjord-map-canvas:focus-visible { outline: 2px solid var(--fjord-accent); outline-offset: -3px; }
+.fjord-map-image > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.fjord-map-north { position: absolute; top: 4px; right: 7px; color: #fff4ce; pointer-events: none; font-size: 12px; }
+.fjord-map-view { fill: #f7deaa16; stroke: #f7deaa; stroke-width: 5; }
+.fjord-map-direction { fill: none; stroke: #8de2f0; stroke-width: 6; }
+.fjord-map-home { fill: #f5d17c; stroke: #172126; stroke-width: 5; }
+.fjord-map-focus { fill: #8de2f0; stroke: #172126; stroke-width: 5; }
+.fjord-map-eye { fill: #8de2f0; }
+.fjord-map-cursor { fill: none; stroke: #fff; stroke-width: 4; stroke-dasharray: 6 6; }
+.fjord-map-expedition path { fill: #efcb78; stroke: #101d22; stroke-width: 5; }
+.fjord-map-expedition text { fill: #101d22; font: bold 29px system-ui; }
+.fjord-map-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; color: var(--fjord-muted); }
+#fjord-island-map p { font-size: 11px; margin: 7px 0 0; }
+#fjord-play.fjord-mobile #fjord-map-controls { left: calc(var(--fjord-safe-left) + 8px); bottom: var(--fjord-sheet-bottom); }
+#fjord-play.fjord-mobile #fjord-island-map {
+    position: fixed; inset: 0; margin: auto; padding: 14px;
+    width: min(540px, calc(100vw - var(--fjord-safe-left) - var(--fjord-safe-right) - 24px));
+    max-height: calc(100dvh - var(--fjord-safe-top) - var(--fjord-safe-bottom) - 24px);
+}
+#fjord-play.fjord-mobile #fjord-island-map .fjord-map-image { width: min(100%, calc((100dvh - 185px) * var(--island-map-aspect))); margin: auto; }
+#fjord-island-map::backdrop { background: #081416b8; }
+#fjord-play.fjord-mobile:has(#fjord-map-controls) .fjord-stage #fjord-management,
+#fjord-play.fjord-mobile:has(#fjord-map-controls) #fjord-workspace {
+    bottom: calc(var(--fjord-sheet-bottom) + 58px);
+    max-height: calc(var(--fjord-viewport-height, 100dvh) - var(--fjord-sheet-top) - var(--fjord-sheet-bottom) - 58px);
+}
