@@ -1,0 +1,2576 @@
+{
+  "baseline": "ce9b57c660c8d034abb5c7761da248ccef526304",
+  "runtimeCommit": "fb9b0091d2cfb8a58c34b4144721d32def331897",
+  "timingCommit": "9c4949c7c7a8b62fb70b3718ae562e86d0daedf8",
+  "comparison": "Same geography, seed, paid village, camera and calendar. Explicit v1/v2 recipes; tree/navigation identities differ intentionally.",
+  "sourceHashes": {
+    "src/fjord-play/VillageNature.ts": "5cd838d268ffbad4ac4433b3be3df148482f5bd0d49f7be3a42de308e6ab24b7",
+    "src/fjord-play/CampaignIsland.ts": "5bee5168c9f7e22220e166541e4c36fd8804077fcbdcf0f9aa91132da4a3874f",
+    "src/world/NatureVariation.ts": "b2a05ff9a08b7c7f30d663ae0a8946fda05ab01a30324ea970c4d250d1304b63",
+    "src/world/SeasonTint.ts": "a8490243510c9d972c4c526def9809e7cc8d66f30ec4cc9f0bf293968fd8e9ad",
+    "src/world/VillageNatureModels.ts": "9661f7529a3b5847e953efa6a57b51d23a1455f5ba04d3f55d1488f1106ffa3a",
+    "src/world/KayKitNature.ts": "d16e33040bc9ca852dd0def53c07f0f07c3c65fc8120b99e89c9935f54ff92f4",
+    "src/world/NatureWind.ts": "524180476fc071a227aca596c35ff8c081d1b02133502875f855348d3c3d9669",
+    "src/fjord-play/SettlementDressing.ts": "41e5e339357facdfa8d21ad42f8241630aa11a70586ebea1bf2e280d14c87e8d",
+    "src/fjord-play/SettlementDressingLayer.ts": "363482dca8f39c4b938c2d24acd6b3453ac7c4a1c3cb83994a4470f3056034a1",
+    "src/world/WorldFactory.ts": "8a3d905b69691e225e55b72c413d5ed8cad129f3b8e2244b51582cc44bf661a6",
+    "src/world/BuildingPlot.ts": "066eec80f66a3e4ed63426b00f4228cb0bc5199bb9908337d7b6d607e471ae4f",
+    "src/world-generation/PlanNature.ts": "8079f0266713d1ab265da544195d128131980446439d1c412b5af1af9d64f392",
+    "src/fjord-play/FjordCampaign.ts": "180725d51ae6933d8fecc7b543ba3dd43b8a91df69c46eb73e601d23f5c37ef1",
+    "src/play/SharedSettlement.ts": "7f23f0693f6a04f5149122342744cfe76b3801efa498e3ae5b5d226f60c628b1",
+    "src/world-generation/GenerationTask.ts": "7f17af1316e43d596e7c63fe63de0da703f266594ec0af1eef37ac92cd54780f",
+    "src/fjord-play/IslandLoading.ts": "0e2e6ce79bff6a055f6384cf0ea2a1008d4cc9d701f01965af4c1ce1848f6b19",
+    "src/fjord-play/FjordPlay.ts": "89dd37cd98a84c8bacce0ec58f2dd8faeb4eacf30af8021677f32aee89453f98",
+    "src/play/SettlementBrowser.ts": "f5e73f4992eec859d09fcf351103b8ada8fbf798e52fd5785c478f513a8c2039"
+  },
+  "committedSourceHashes": {
+    "src/fjord-play/VillageNature.ts": "dc21173c545ef3e41760e3fe6f56eb02cf3ff0f9bd307835a322ce1a3996bfce",
+    "src/fjord-play/CampaignIsland.ts": "d30c97583e23e53184b13e196a94d368dfb69f97f030354f08b7f7eed031efe1",
+    "src/world/NatureVariation.ts": "a6b1606e59b6451e5f7a12ae4698eaf462adeaca88ca6e53d75098356beb7a25",
+    "src/world/SeasonTint.ts": "31d80c09874766cb55779d362c29414f15b12e972e35dca8555fb75d54b2fbe9",
+    "src/world/VillageNatureModels.ts": "b13e3ab4ee39e0c8c59278beb8f37e8e27a0ad26909fe002c08ca2042647df57",
+    "src/world/KayKitNature.ts": "7792ca4c7887a7276ca55413b9c4841efb830708c3e4b3f131a595213f087806",
+    "src/world/NatureWind.ts": "b33c1280621f3ddaf08e4d3b349496df9a90e31b548b5a86af9ad0b465dcc6ae",
+    "src/fjord-play/SettlementDressing.ts": "5f806bcd944fc95e7a8e54d2e4c7c9bf0cbb2d7211917b292c838877479b05f3",
+    "src/fjord-play/SettlementDressingLayer.ts": "1ceb4d082b60357eece643c6150c99b1fe89f9e904322777f234ecabe82c55ce",
+    "src/world/WorldFactory.ts": "de6c830131de8242258683760ae712fb48f621f69e0f7485f9ae62362356f315",
+    "src/world/BuildingPlot.ts": "b2848f022c605712a8dc2b993834debacf2b8b31967f3390680ea9f8145ba444",
+    "src/world-generation/PlanNature.ts": "101397523f142f362f9dc179c4e107384f9f3eee36d723e329c3926c86597912",
+    "src/fjord-play/FjordCampaign.ts": "60a0b7b3c474a59c60f584abe3fdfc22f3ee3db755d6b3f9149afe97485a0721",
+    "src/play/SharedSettlement.ts": "c7a371c4e8f36ff99812798e5455e85ba433dea28c22c7f60aa2c2c7251c9390",
+    "src/world-generation/GenerationTask.ts": "78a456d3f1391df91798713fac9eee670641a9df4b302990269f4da3de39dd7a",
+    "src/fjord-play/IslandLoading.ts": "cffceacadb2f8c11d598ee1b564a91c9d44d8be2cf1306ba181f5655b4519a5f",
+    "src/fjord-play/FjordPlay.ts": "2e4035624d868175217a1a53627a7a47be2b8e852f849cfffa3a243611e37f0d",
+    "src/play/SettlementBrowser.ts": "ff18e9bbff90cd30c5a31bc46e15f0194263976395e80d7f1f3f0b3a84c2c29c"
+  },
+  "cases": [
+    {
+      "name": "village-summer-standard-17",
+      "seed": 17,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 6
+        },
+        {
+          "total": 102,
+          "within55": 14
+        }
+      ],
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 233,
+          "trianglesIncludingShadows": 5190473,
+          "geometries": 110,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 235,
+          "trianglesIncludingShadows": 5281421,
+          "geometries": 111,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 8,
+          "planned": 204,
+          "instances": 202,
+          "triangles": 108054,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "a96664a2-3b2b-4b96-a823-3f91758e1159"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "469ec079-2765-40cf-8782-b97100dae4ed"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "e892cf0f-83e8-4087-abe9-0b04c5654e3a"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "576648ce-ca7e-4cc4-81be-e3c2f14f6624"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 76,
+              "triangles": 40128,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "5e9a4a1a-f9f1-438a-bfb4-8643d879b6c3"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 81,
+              "triangles": 42768,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "349657f4-05f0-4ca0-b746-b9d30ef3114e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 17,
+              "triangles": 16728,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "8c2b19c3-86ac-436f-9b01-d9e274489236"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 12,
+              "triangles": 1008,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "7b8764a2-cd9d-456a-8431-d60ac48e1277"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 10,
+          "planned": 433,
+          "instances": 336,
+          "triangles": 154554,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "079f1198-db71-4548-b35f-85347c39f578"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "f491925c-e098-4739-8964-18cf17872605"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6d196aa0-6a43-4515-8bbb-e34b4aba41d9"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "c3269889-cf51-4ade-8585-19b745367100"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 113,
+              "triangles": 59664,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "9a794a55-0cb3-4c5b-9f15-a6b0df5f85dc"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 122,
+              "triangles": 64416,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "1ac957a2-2538-482f-8d18-f01f18b370dd"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 12,
+              "triangles": 11808,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "a17d7d74-0485-4141-9cc5-908074b14bbd"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 18,
+              "triangles": 6624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "ede577f3-f1b4-400a-96cc-ca2066b6ce9e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 30,
+              "triangles": 2520,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "02093dc2-21d8-4efc-b271-a7b8e4d446cd"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 25,
+              "triangles": 2100,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "8697e6ae-6ce8-4eb0-8c78-533fca022ddd"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "woodland-summer-standard-17",
+      "seed": 17,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 6
+        },
+        {
+          "total": 102,
+          "within55": 14
+        }
+      ],
+      "camera": {
+        "position": [
+          201.80263845575973,
+          22.80821192838771,
+          -149.028953588102
+        ],
+        "target": [
+          179.40131922787987,
+          5.80821192838771,
+          -131.014476794051
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 228,
+          "trianglesIncludingShadows": 5167493,
+          "geometries": 110,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 232,
+          "trianglesIncludingShadows": 5277833,
+          "geometries": 111,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 8,
+          "planned": 204,
+          "instances": 202,
+          "triangles": 108054,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "a96664a2-3b2b-4b96-a823-3f91758e1159"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "469ec079-2765-40cf-8782-b97100dae4ed"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "e892cf0f-83e8-4087-abe9-0b04c5654e3a"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "576648ce-ca7e-4cc4-81be-e3c2f14f6624"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 76,
+              "triangles": 40128,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "5e9a4a1a-f9f1-438a-bfb4-8643d879b6c3"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 81,
+              "triangles": 42768,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "349657f4-05f0-4ca0-b746-b9d30ef3114e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 17,
+              "triangles": 16728,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "8c2b19c3-86ac-436f-9b01-d9e274489236"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 12,
+              "triangles": 1008,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "7b8764a2-cd9d-456a-8431-d60ac48e1277"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 10,
+          "planned": 433,
+          "instances": 336,
+          "triangles": 154554,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "079f1198-db71-4548-b35f-85347c39f578"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "f491925c-e098-4739-8964-18cf17872605"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6d196aa0-6a43-4515-8bbb-e34b4aba41d9"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "c3269889-cf51-4ade-8585-19b745367100"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 113,
+              "triangles": 59664,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "9a794a55-0cb3-4c5b-9f15-a6b0df5f85dc"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 122,
+              "triangles": 64416,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "1ac957a2-2538-482f-8d18-f01f18b370dd"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 12,
+              "triangles": 11808,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "a17d7d74-0485-4141-9cc5-908074b14bbd"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 18,
+              "triangles": 6624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "ede577f3-f1b4-400a-96cc-ca2066b6ce9e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 30,
+              "triangles": 2520,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "02093dc2-21d8-4efc-b271-a7b8e4d446cd"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 25,
+              "triangles": 2100,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "8697e6ae-6ce8-4eb0-8c78-533fca022ddd"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "village-summer-low-17",
+      "seed": 17,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 6
+        },
+        {
+          "total": 102,
+          "within55": 14
+        }
+      ],
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 229,
+          "trianglesIncludingShadows": 5164043,
+          "geometries": 110,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 231,
+          "trianglesIncludingShadows": 5194671,
+          "geometries": 111,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "low",
+          "planBuilds": 1,
+          "batchBuilds": 16,
+          "planned": 204,
+          "instances": 176,
+          "triangles": 95190,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "a10b2f57-ec87-4388-9918-3160a216f9e1"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "99e27d00-2ded-4f0e-a819-70b89652abc3"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "88cc9a24-f6a0-43d5-8ad4-04f5a036f0aa"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "ef382f06-cde8-46a9-9e61-f03bb213b079"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 69,
+              "triangles": 36432,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "7828ca05-159f-4a83-b8aa-ed4984a6c332"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 68,
+              "triangles": 35904,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "97bc4796-98cd-49b2-a362-3868e773fae8"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 15,
+              "triangles": 14760,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "91091c1d-ea3d-45b1-9a39-f94ca3a8fb4d"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 8,
+              "triangles": 672,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "d504a62a-e5fd-40ed-890d-3a2d81a057a3"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "low",
+          "planBuilds": 1,
+          "batchBuilds": 20,
+          "planned": 433,
+          "instances": 176,
+          "triangles": 81370,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "2effff2b-dc6c-401d-954c-0a9f1884da12"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "4440c5ec-c4f7-4770-b14a-8061b661e94a"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "0b6d6209-0ab8-4796-9525-a51bfa765286"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "5d293eac-2f82-4fc3-b088-10e61f80d64a"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 58,
+              "triangles": 30624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "2f08c1c9-a8a5-43c9-8037-d4f7dc488a79"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 61,
+              "triangles": 32208,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "8fe6110f-173d-4bc8-8469-47e177477e8c"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 6,
+              "triangles": 5904,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "27d232cc-b0b4-49eb-a103-9d0264dd1fb4"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 8,
+              "triangles": 2944,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "dccc38cd-f197-4e87-8811-002c29423a9b"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 17,
+              "triangles": 1428,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "e019bf70-7d84-4c5f-a503-ffba29c6ee9a"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 10,
+              "triangles": 840,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "d803a480-a464-40a8-9dd6-15dbfc1e79e4"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "village-winter-standard-17",
+      "seed": 17,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 6
+        },
+        {
+          "total": 102,
+          "within55": 14
+        }
+      ],
+      "camera": {
+        "position": [
+          204,
+          35.374878883361816,
+          -168
+        ],
+        "target": [
+          176,
+          5.374878883361816,
+          -136
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 235,
+          "trianglesIncludingShadows": 5204073,
+          "geometries": 111,
+          "textures": 75,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 237,
+          "trianglesIncludingShadows": 5295021,
+          "geometries": 112,
+          "textures": 75,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 184,
+          "planned": 204,
+          "instances": 202,
+          "triangles": 108054,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "9c25551d-8faa-4080-b304-7a94d669875c"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "3de8e068-4058-4f31-a0db-42ea44a4c7db"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "08af6f8d-013c-49f7-a0a3-95e490ef18ee"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "780d2fb6-3f66-4e1d-b3b0-5726e42aaa28"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 76,
+              "triangles": 40128,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "0cf505d1-e68d-4987-aa4e-9c24dae589a1"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 81,
+              "triangles": 42768,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "30ee2bdb-24af-4072-a89b-5438a9c1d661"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 17,
+              "triangles": 16728,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "6a78c228-2556-4c6a-8ee3-c1172ddac28a"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 12,
+              "triangles": 1008,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "e0ff710f-030a-4323-81c0-082456864406"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 230,
+          "planned": 433,
+          "instances": 336,
+          "triangles": 154554,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "a5a66271-01ea-4965-b165-1f9158e6a91e"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 7,
+              "triangles": 3059,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "a4c882f2-425b-4026-827a-8310606e0548"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 7,
+              "triangles": 3402,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "398422bf-73ce-4379-97cf-779f1d64ec6f"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "6553e313-9897-4317-af37-fbd042088649"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 113,
+              "triangles": 59664,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "e3ed54b3-d567-4422-b59f-8441e83104b9"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 122,
+              "triangles": 64416,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "e8e29f64-4642-40ed-93eb-fb3c21101232"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 12,
+              "triangles": 11808,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "e50e69f3-c1e2-47d8-8ced-f7701e588df7"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 18,
+              "triangles": 6624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "c63a1ab5-d402-490c-bad8-a4f60e8fbd93"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 30,
+              "triangles": 2520,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "e4173139-540f-4ad7-b619-17aced52bc71"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 25,
+              "triangles": 2100,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "cd43839b-da4a-4d1c-a001-e1d94c39ee20"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "village-summer-standard-32",
+      "seed": 32,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 8
+        },
+        {
+          "total": 102,
+          "within55": 17
+        }
+      ],
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 244,
+          "trianglesIncludingShadows": 4408240,
+          "geometries": 117,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 244,
+          "trianglesIncludingShadows": 4514232,
+          "geometries": 118,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 9,
+          "planned": 243,
+          "instances": 243,
+          "triangles": 128435,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "47a23dc3-5f15-4f01-8fbc-8a62b5bb3990"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "71500f90-dc44-42a1-b432-ead8d6ad69a5"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "40a1119c-96a9-47e5-bc52-5b68fa4a7957"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "66eeb227-a802-450e-ac96-fc9566abc65a"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "c77b31d7-2f39-4718-82da-fc4c1b61eb8c"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 101,
+              "triangles": 53328,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "fab2c7af-a8ed-4ca1-be85-9d7259c3e8b7"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 97,
+              "triangles": 51216,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "14275eca-0ab9-4069-b346-df5499d160c5"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 15,
+              "triangles": 14760,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "d289e77b-8194-453d-b45d-cb6e939249f2"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 15,
+              "triangles": 1260,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "0991584c-6c9e-45da-9cac-ef13f50a8802"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 11,
+          "planned": 547,
+          "instances": 335,
+          "triangles": 154163,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6037e907-41b2-4321-b998-3b69d1c68367"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "f2ee72ca-43af-4c8b-bc53-8d5647a6e56c"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "51b2e0e7-fd44-4944-b4f6-7fc1f51eb3fd"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "9cf92a34-7372-47c4-9e54-1fde44753a9b"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "801a568c-18cf-4b80-9bd7-f4b3095e913e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 112,
+              "triangles": 59136,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6b5e5781-e586-4cb1-9d03-1e67d5312b20"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 113,
+              "triangles": 59664,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "3c700bbf-f87e-416e-bb51-098ddf8c149b"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 16,
+              "triangles": 15744,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "33304b85-72e6-4ffc-8eeb-955534425614"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 18,
+              "triangles": 6624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "2fc367ae-55a4-45fd-aaae-11b7459449a4"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 29,
+              "triangles": 2436,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "425d7fbb-ed5d-4eef-aef8-53d15e0900e9"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 32,
+              "triangles": 2688,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "224426ad-9579-41ae-ae78-ccf2bfda7c97"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "woodland-summer-standard-32",
+      "seed": 32,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 8
+        },
+        {
+          "total": 102,
+          "within55": 17
+        }
+      ],
+      "camera": {
+        "position": [
+          69.17366600645202,
+          21.838668543516828,
+          124.7208000763952
+        ],
+        "target": [
+          60.08683300322601,
+          4.838668543516829,
+          146.8604000381976
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 234,
+          "trianglesIncludingShadows": 4379301,
+          "geometries": 117,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 234,
+          "trianglesIncludingShadows": 4485293,
+          "geometries": 118,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 9,
+          "planned": 243,
+          "instances": 243,
+          "triangles": 128435,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "47a23dc3-5f15-4f01-8fbc-8a62b5bb3990"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "71500f90-dc44-42a1-b432-ead8d6ad69a5"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "40a1119c-96a9-47e5-bc52-5b68fa4a7957"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "66eeb227-a802-450e-ac96-fc9566abc65a"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "c77b31d7-2f39-4718-82da-fc4c1b61eb8c"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 101,
+              "triangles": 53328,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "fab2c7af-a8ed-4ca1-be85-9d7259c3e8b7"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 97,
+              "triangles": 51216,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "14275eca-0ab9-4069-b346-df5499d160c5"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 15,
+              "triangles": 14760,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "d289e77b-8194-453d-b45d-cb6e939249f2"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 15,
+              "triangles": 1260,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "0991584c-6c9e-45da-9cac-ef13f50a8802"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 11,
+          "planned": 547,
+          "instances": 335,
+          "triangles": 154163,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6037e907-41b2-4321-b998-3b69d1c68367"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "f2ee72ca-43af-4c8b-bc53-8d5647a6e56c"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "51b2e0e7-fd44-4944-b4f6-7fc1f51eb3fd"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "9cf92a34-7372-47c4-9e54-1fde44753a9b"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "801a568c-18cf-4b80-9bd7-f4b3095e913e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 112,
+              "triangles": 59136,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6b5e5781-e586-4cb1-9d03-1e67d5312b20"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 113,
+              "triangles": 59664,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "3c700bbf-f87e-416e-bb51-098ddf8c149b"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 16,
+              "triangles": 15744,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "33304b85-72e6-4ffc-8eeb-955534425614"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 18,
+              "triangles": 6624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "2fc367ae-55a4-45fd-aaae-11b7459449a4"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 29,
+              "triangles": 2436,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "425d7fbb-ed5d-4eef-aef8-53d15e0900e9"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 32,
+              "triangles": 2688,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "224426ad-9579-41ae-ae78-ccf2bfda7c97"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "village-summer-low-32",
+      "seed": 32,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 8
+        },
+        {
+          "total": 102,
+          "within55": 17
+        }
+      ],
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 239,
+          "trianglesIncludingShadows": 4357805,
+          "geometries": 117,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 239,
+          "trianglesIncludingShadows": 4428825,
+          "geometries": 118,
+          "textures": 71,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "low",
+          "planBuilds": 1,
+          "batchBuilds": 18,
+          "planned": 243,
+          "instances": 175,
+          "triangles": 92015,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "80f3f681-b36c-4d37-9559-4ef5cc00f316"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6daf3d7c-9755-4b2c-9018-5a6995e6a690"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "6ecc8e21-7388-42bb-b819-bfdc1421e4e7"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "f2cee5de-9586-4225-ae86-62c445776f4c"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "3deae6a0-4c4b-4605-ac60-8d42b2dc4727"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 73,
+              "triangles": 38544,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "57b2353f-e8da-4e1a-a152-1fef3ccc2849"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 68,
+              "triangles": 35904,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "cc3641c9-d419-475d-acb2-7f19d883f9c6"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 9,
+              "triangles": 8856,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "a1631bb9-b257-41cb-b42f-bc214e8dd92f"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 10,
+              "triangles": 840,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "7772e25a-50f6-47c6-8a06-5bae59bda600"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "low",
+          "planBuilds": 1,
+          "batchBuilds": 22,
+          "planned": 547,
+          "instances": 175,
+          "triangles": 82771,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "f89fde45-16a7-4859-a62c-8d17d87e3c69"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "ee202950-e48a-4fa6-9fb2-98cd69db4e98"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "8016d699-8c92-4818-a5a3-f03f0788f960"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "bd2914e2-8649-4b03-a6e4-8d420f7d0706"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "c644702c-2af8-49e1-a762-4410a7c3503a"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 63,
+              "triangles": 33264,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "5cb98a94-e042-444e-8a37-b1ac1fed4fce"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 59,
+              "triangles": 31152,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "32f12089-253d-480c-944e-87d92d5ed567"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 4,
+              "triangles": 3936,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "64be5e6f-0b09-423d-b3fa-1b99738112e2"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 13,
+              "triangles": 4784,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "094ee5bc-5bdc-4068-922a-d5b6665f5644"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 8,
+              "triangles": 672,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "7ba3137e-d9eb-4506-a5c1-e9c8cf7a95e3"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 13,
+              "triangles": 1092,
+              "primitives": 1,
+              "snow": {
+                "amount": 0,
+                "materials": [
+                  "789e7748-fcde-4413-8bf0-d887c4534cf6"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "village-winter-standard-32",
+      "seed": 32,
+      "trees": [
+        {
+          "total": 102,
+          "within55": 8
+        },
+        {
+          "total": 102,
+          "within55": 17
+        }
+      ],
+      "camera": {
+        "position": [
+          98,
+          34.46178960800171,
+          114
+        ],
+        "target": [
+          70,
+          4.461789608001709,
+          146
+        ],
+        "fov": 45,
+        "aspect": 1.5555555555555556,
+        "projection": [
+          1.5519944329541324,
+          0,
+          0,
+          0,
+          0,
+          2.4142135623730954,
+          0,
+          0,
+          0,
+          0,
+          -1.0000833368057,
+          -1,
+          0,
+          0,
+          -0.20000833368057003,
+          0
+        ]
+      },
+      "render": [
+        {
+          "callsIncludingShadows": 246,
+          "trianglesIncludingShadows": 4421840,
+          "geometries": 118,
+          "textures": 75,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        },
+        {
+          "callsIncludingShadows": 246,
+          "trianglesIncludingShadows": 4527832,
+          "geometries": 119,
+          "textures": 75,
+          "pixelRatio": 1,
+          "width": 1400,
+          "height": 900
+        }
+      ],
+      "dressing": [
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 207,
+          "planned": 243,
+          "instances": 243,
+          "triangles": 128435,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "97a2524a-0369-4481-96e6-32e3028d29df"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "b37de3db-dfd6-4505-b6ea-3a4336e347cd"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "392073a1-d506-4999-8991-50d70da1d372"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "a2fb7caa-ce2b-4c38-b69b-42ab2c27469a"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "db82ef29-0f04-446b-b397-03a753310344"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 101,
+              "triangles": 53328,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "f1026d63-b9f1-4a07-983c-09394e1d8c0e"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 97,
+              "triangles": 51216,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "7f21a7fa-a6a2-438b-9ae9-5d5067803c10"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 15,
+              "triangles": 14760,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "86745217-34b1-433e-a1e9-9462cf0917be"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 15,
+              "triangles": 1260,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "0f217fdf-992b-4788-b5c0-67305fc94c59"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "quality": "standard",
+          "planBuilds": 1,
+          "batchBuilds": 253,
+          "planned": 547,
+          "instances": 335,
+          "triangles": 154163,
+          "batches": [
+            {
+              "asset": "logs",
+              "instances": 1,
+              "triangles": 492,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "ec4021c0-2076-4ca5-bc56-9e6cc8840e56"
+                ]
+              }
+            },
+            {
+              "asset": "barrel",
+              "instances": 6,
+              "triangles": 2622,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "8247b21c-fe9b-473b-96f3-1be0aa29eca4"
+                ]
+              }
+            },
+            {
+              "asset": "crate",
+              "instances": 6,
+              "triangles": 2916,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "9f9a093b-994e-4aaf-b71e-74053bd77d20"
+                ]
+              }
+            },
+            {
+              "asset": "fish",
+              "instances": 1,
+              "triangles": 1372,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "a3ec048a-da8d-48f5-94cd-1e35fa1d072e"
+                ]
+              }
+            },
+            {
+              "asset": "well",
+              "instances": 1,
+              "triangles": 469,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "012b3559-4c9c-4839-b881-7a600db87e41"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-a",
+              "instances": 112,
+              "triangles": 59136,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "0b254666-af91-4b07-bb35-b42b308272bb"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-grass-cluster-b",
+              "instances": 113,
+              "triangles": 59664,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "35fec5e0-d61a-4551-86f3-0a97466ba7b0"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-a",
+              "instances": 16,
+              "triangles": 15744,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "d4dce9bd-0c5a-4d53-a937-2e809c5c9726"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-bush-b",
+              "instances": 18,
+              "triangles": 6624,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "21402e74-7012-4bcd-a58f-b6675c0fcfd0"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-a",
+              "instances": 29,
+              "triangles": 2436,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "22a44002-53c4-4ae9-9012-66fa455a24e5"
+                ]
+              }
+            },
+            {
+              "asset": "kaykit-rock-small-b",
+              "instances": 32,
+              "triangles": 2688,
+              "primitives": 1,
+              "snow": {
+                "amount": 0.65,
+                "materials": [
+                  "2ca10237-c299-4a22-bebe-f14fda1d250c"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
