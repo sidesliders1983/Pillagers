@@ -1,0 +1,102 @@
+{
+  "note": "Isolated Node CPU mask construction; no WebGL or GPU upload. ABBA order.",
+  "samples": [
+    {
+      "profile": "current",
+      "durationsMs": [
+        36.45920000000115,
+        32.785799999997835,
+        34.276700000002165,
+        32.14990000000034
+      ],
+      "resources": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 531,
+        "visibleCells": 531,
+        "unknownCells": 9469,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 320008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 7056436
+      }
+    },
+    {
+      "profile": "nordic",
+      "durationsMs": [
+        33.05499999999665,
+        33.64559999999983,
+        32.18019999999888,
+        32.15030000000115
+      ],
+      "resources": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 531,
+        "visibleCells": 531,
+        "unknownCells": 9469,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 320008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 7056436
+      }
+    },
+    {
+      "profile": "nordic",
+      "durationsMs": [
+        32.098000000001775,
+        32.863499999999476,
+        32.61059999999998,
+        31.478100000000268
+      ],
+      "resources": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 531,
+        "visibleCells": 531,
+        "unknownCells": 9469,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 320008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 7056436
+      }
+    },
+    {
+      "profile": "current",
+      "durationsMs": [
+        32.290100000001985,
+        35.942299999998795,
+        31.845299999997223,
+        34.88750000000073
+      ],
+      "resources": {
+        "active": true,
+        "cellSize": 8,
+        "exploredCells": 531,
+        "visibleCells": 531,
+        "unknownCells": 9469,
+        "maskBytes": 2500,
+        "textureBytes": 646416,
+        "drawCalls": 1,
+        "triangles": 320008,
+        "nativeMaterial": true,
+        "fadeSeconds": 0.8,
+        "transitioning": false,
+        "geometryBytes": 7056436
+      }
+    }
+  ],
+  "status": "PASS"
+}

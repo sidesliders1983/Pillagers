@@ -5,6 +5,7 @@ import { AssetManager } from './AssetManager';
 import { hearth } from '../world/SettlementLayout';
 import { surfaceHeightAt } from '../world/Terrain';
 import { TimeVisualization, daylight, seasonBlend } from '../config/timeVisualization';
+import type { FogPresentation } from '../config/FjordFog';
 type DayLightingSettings = {[K in keyof typeof config.day]: K extends 'sunPosition' ? readonly number[] : number};
 export class WorldLighting {
     readonly ambient=new HemisphereLight();
@@ -21,6 +22,9 @@ export class WorldLighting {
     private dayColor=new Color();
     private seasonWeather:DayLightingSettings|null=null;
     private fogEnabled=true;
+    private fogPresentation?: FogPresentation;
+    private fogViewOffset = 0;
+    private baseFog = { near: config.day.fogNear, far: config.day.fogFar, color: new Color(config.day.sky) };
     private readonly lightDirection = new Vector3();
     private shadowCoverage?: DirectionalShadowCoverage;
     constructor(private scene:Scene,private renderer:WebGLRenderer,private assets:AssetManager,fireAnchor?:Vector3,
@@ -60,6 +64,7 @@ export class WorldLighting {
         this.mode=mode;const night=mode==='night',preset=night?config.night:day;
         (this.scene.background as Color).setHex(preset.sky);this.fog.color.setHex(night?config.night.fogColor:day.sky);
         this.fog.near=preset.fogNear;this.fog.far=preset.fogFar;this.scene.fog=this.fogEnabled?this.fog:null;
+        this.rememberFog();
         this.ambient.color.setHex(preset.ambientSky);this.ambient.groundColor.setHex(preset.ambientGround);this.ambient.intensity=preset.ambient;
         this.directional.color.setHex(night?config.night.moon:day.sun);
         this.directional.intensity=night?config.night.moonIntensity:day.sunIntensity;
@@ -105,6 +110,23 @@ export class WorldLighting {
         this.renderer.shadowMap.needsUpdate = true;
     }
     get skyColor() { return this.scene.background as Color; }
+    setFogPresentation(presentation?: FogPresentation) { this.fogPresentation = presentation; }
+    /** Compose from an unmodified base each frame, including when the lighting cycle is off. */
+    setFogViewDistance(distance: number) {
+        this.fogViewOffset = Number.isFinite(distance) ? Math.max(0, distance - 60) : 0;
+    }
+    private rememberFog() {
+        this.baseFog.near = this.fog.near;
+        this.baseFog.far = this.fog.far;
+        this.baseFog.color.copy(this.fog.color);
+    }
+    private composeFog() {
+        const presentation = this.fogPresentation;
+        this.fog.near = (presentation?.near ?? this.baseFog.near) + this.fogViewOffset;
+        this.fog.far = (presentation?.far ?? this.baseFog.far) + this.fogViewOffset;
+        this.fog.color.copy(this.baseFog.color);
+        if (presentation) this.fog.color.lerp(this.skyColor, presentation.skyMix);
+    }
     /** Called on world creation/discovery, never as part of the animation-frame scene walk. */
     includeWorldShadowBounds(root: Object3D) {
         if (!this.seasonTreatment.shadows) return;
@@ -223,7 +245,11 @@ export class WorldLighting {
         this.fireOverride = { lit, time, reducedMotion };
     }
     update(time:number,progress?:number){
-        if(this.visualization!=='off')this.cycle(progress??0);
+        if(this.visualization!=='off') {
+            this.cycle(progress??0);
+            this.rememberFog();
+        }
+        this.composeFog();
         if(this.visualization==='day-night')this.placeWorldLight();
         const flicker=fireFlicker(time),night=this.nightWeight;
         const fire = this.fireOverride;
