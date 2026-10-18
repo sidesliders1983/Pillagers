@@ -27,8 +27,6 @@ const phase = (mission?: Mission) => ({ Prepared: 'Ready to depart', Traveling: 
 export class ExpeditionPanel {
     private groupId = '';
     private choosing = false;
-    private destination?: Point2;
-    private adjusted = false;
     private pendingStart = '';
     private pendingCrew = '';
     private pendingFood = 0;
@@ -39,6 +37,9 @@ export class ExpeditionPanel {
     private markerKey = '';
     private abort = new AbortController();
     private toolbar: HTMLElement;
+    private shortcuts: HTMLElement;
+    private shortcutsHTML = '';
+    private hiddenGroups = new Set<string>();
 
     constructor(
         private root: HTMLElement,
@@ -64,6 +65,11 @@ export class ExpeditionPanel {
         this.toolbar.setAttribute('aria-label', 'Exploration controls');
         this.toolbar.hidden = true;
         root.closest('.fjord-stage')!.append(this.toolbar);
+        this.shortcuts = document.createElement('div');
+        this.shortcuts.id = 'expedition-group-shortcuts';
+        this.shortcuts.setAttribute('aria-label', 'Active expedition controls');
+        document.querySelector('#fjord-navigation')!.append(this.shortcuts);
+        this.shortcuts.addEventListener('click', this.click, { signal: this.abort.signal });
         root.addEventListener('click', this.click, { signal: this.abort.signal });
         document.addEventListener('fjord-layout-change', () => this.refresh(), { signal: this.abort.signal });
         this.toolbar.addEventListener('click', this.click, { signal: this.abort.signal });
@@ -85,7 +91,7 @@ export class ExpeditionPanel {
         }, { capture: true, signal: this.abort.signal });
     }
 
-    dispose() { this.abort.abort(); this.toolbar.remove(); }
+    dispose() { this.abort.abort(); this.toolbar.remove(); this.shortcuts.remove(); }
     get targeting() { return this.choosing; }
     private get dialog() { return this.root.querySelector<HTMLDialogElement>('#expedition-start-dialog')!; }
     private activeMission(state = this.session.readSnapshot(), groupId = this.groupId) {
@@ -99,7 +105,6 @@ export class ExpeditionPanel {
     }
     private clearTarget() {
         this.choosing = false;
-        this.destination = undefined;
         this.showTarget();
     }
     cancelTarget() {
@@ -108,7 +113,7 @@ export class ExpeditionPanel {
     }
     private beginTargeting(groupId: string) {
         this.groupId = groupId;
-        this.destination = undefined;
+        this.hiddenGroups.delete(groupId);
         this.choosing = true;
         this.message = '';
         this.showTarget();
@@ -120,6 +125,16 @@ export class ExpeditionPanel {
     private click = (event: Event) => {
         const target = (event.target as Element).closest<HTMLButtonElement>('button');
         if (!target || target.disabled) return;
+        if (target.dataset.expeditionToggle) {
+            const groupId = target.dataset.expeditionToggle;
+            const hide = !this.toolbar.hidden && this.toolbar.dataset.group === groupId;
+            this.clearTarget();
+            this.groupId = groupId;
+            if (hide) this.hiddenGroups.add(groupId);
+            else { this.hiddenGroups.delete(groupId); this.navigation.showMap(); }
+            this.refresh();
+            return;
+        }
         if (this.toolbar.contains(target) && this.toolbar.dataset.group) this.groupId = this.toolbar.dataset.group;
         if (target.dataset.expeditionGroup) {
             this.clearTarget();
@@ -151,7 +166,6 @@ export class ExpeditionPanel {
         if (target.dataset.cancelExpedition)
             this.command({ type: 'CancelExpedition', groupId: target.dataset.cancelExpedition });
         if (target.id === 'expedition-cancel') this.cancelTarget();
-        if (target.id === 'expedition-send') this.sendGroup();
         if (target.id === 'expedition-details') {
             this.toolbarExpanded = !this.toolbarExpanded;
             this.refresh();
@@ -194,13 +208,13 @@ export class ExpeditionPanel {
         if ('groupId' in command) this.groupId = command.groupId;
         if (command.type === 'StartExpedition') { this.beginTargeting(command.groupId); return; }
         if (['ExploreArea', 'RecallExpedition', 'CancelExpedition'].includes(command.type)) this.clearTarget();
-        if (command.type === 'ExploreArea') this.message = 'Destination confirmed. No extra Food was charged.';
+        if (command.type === 'ExploreArea') this.message = 'Destination set. No extra Food was charged.';
         if (command.type === 'RecallExpedition') this.message = 'Return home ordered.';
         if (command.type === 'CancelExpedition') this.message = 'Expedition ended. Unused supplies were discarded.';
         this.refresh();
     }
 
-    /** Preview only. Navigation and Food remain unchanged until the player confirms the flag. */
+    /** A valid destination uses the already purchased pack immediately; invalid taps keep targeting active. */
     chooseTarget(point: Point2) {
         if (!this.choosing) return false;
         try {
@@ -208,29 +222,14 @@ export class ExpeditionPanel {
             const mission = this.activeMission();
             const origins = mission?.status === 'Prepared' ? this.origins(members) : undefined;
             const offer = this.session.exploreOffer(this.groupId, point, origins);
-            this.destination = offer.target;
-            this.adjusted = offer.adjusted;
-            this.showTarget(offer.target);
-            this.message = '';
+            this.message = 'Setting destination…';
+            this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
         } catch (error) {
-            this.destination = undefined;
             this.showTarget();
             this.message = error instanceof Error ? error.message : String(error);
         }
         this.refresh();
         return true;
-    }
-    private sendGroup() {
-        if (!this.choosing || !this.destination) return;
-        try {
-            const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
-            const origins = this.activeMission()?.status === 'Prepared' ? this.origins(members) : undefined;
-            // Requote at commit: residents may have moved or used supplies while the flag was displayed.
-            const offer = this.session.exploreOffer(this.groupId, this.destination, origins);
-            this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
-            this.clearTarget();
-            this.notify('Confirming destination…');
-        } catch (error) { this.notify(error instanceof Error ? error.message : String(error)); }
     }
 
     private unavailableReason(state: SimulationState, id: string, groupId: string) {
@@ -268,16 +267,17 @@ export class ExpeditionPanel {
     private supplies(mission: Mission) {
         if (mission.missionType) return `<p class="fjord-caption">${escape(mission.missionType)} · ${mission.foodCost} Food paid. Travel and return are included in the mission duration.</p>`;
         if (!mission.supplies) return '<p class="fjord-caption">Return home to prepare a new expedition with carried supplies.</p>';
-        const remaining = mission.supplies.activeTicksRemaining;
+        const remaining = mission.supplies.explorationTicksRemaining;
         const total = mission.supplies.foodPerMember * mission.supplies.ticksPerFood;
         const percentage = Math.round(remaining / total * 100);
         const seconds = Math.round(remaining * this.session.effectiveMinutesPerWinter * 60 /
             this.session.readSnapshot().ticksPerWinter);
         return `<div class="fjord-expedition-supplies ${percentage <= 25 ? 'is-low' : ''}">
-            <div>${icon('food')}<span>Travel supplies</span><strong>${percentage}%</strong></div>
-            <meter min="0" max="${total}" value="${remaining}" aria-label="Travel supplies">${percentage}%</meter>
-            <small title="${remaining} active simulation ticks remaining">${mission.status === 'Stranded' ? 'Movement unavailable' :
-                `≈ ${Math.floor(seconds / 60)}m ${String(seconds % 60).padStart(2, '0')}s active · return included`}</small>
+            <div>${icon('food')}<span>Exploration supplies</span><strong>${percentage}%</strong></div>
+            <meter min="0" max="${total}" value="${remaining}" aria-label="Exploration supplies">${percentage}%</meter>
+            <small title="${remaining} active ticks available before the protected return allowance">${mission.status === 'Stranded' ? 'Movement unavailable' :
+                `≈ ${Math.floor(seconds / 60)}m ${String(seconds % 60).padStart(2, '0')}s exploration remaining`}</small>
+            <small>Supplies for the journey home are reserved.</small>
         </div>`;
     }
     private actions(mission: Mission) {
@@ -318,6 +318,10 @@ export class ExpeditionPanel {
             mission.status === 'Traveling' ? `Travelling for ${mission.missionType}. Return home to change missions.` :
             mission.status === 'Returning' ? 'The group is returning home with its report.' :
             mission.status === 'Stranded' ? 'The return route is blocked. The group is stranded.' : 'Mission completed.';
+        if (mission.returnReason === 'low-supplies')
+            return 'Returning home — supplies needed for the journey home. No exploration time remains.';
+        if (mission.returnReason === 'outward-route-blocked')
+            return 'Returning home — the onward route is blocked.';
         return ({ Prepared: 'Supplies are packed. Choose a flag on the island to leave home.',
             Traveling: 'The group is travelling to your flag. You can redirect them or call them home.',
             Exploring: 'The group is revealing nearby land. Choose another destination to continue.',
@@ -339,7 +343,13 @@ export class ExpeditionPanel {
         // Changing workspace cancels only the unconfirmed flag, never the canonical expedition.
         if (this.choosing && !workspace.hidden) this.clearTarget();
         const open = !workspace.hidden && workspace.dataset.surface === 'expeditions';
-        if (!open && !activeGroups.size && !this.choosing) { this.toolbar.hidden = true; this.showTarget(); return; }
+        if (!open && !activeGroups.size && !this.choosing) {
+            this.toolbar.hidden = true;
+            this.shortcuts.replaceChildren();
+            this.shortcutsHTML = '';
+            this.showTarget();
+            return;
+        }
         const group = groups.find(candidate => candidate.id === this.groupId);
         const missions = inspectSpatialExpeditions(state).missions;
         const mission = missions.find(candidate => candidate.groupId === this.groupId && candidate.status !== 'Returned');
@@ -360,7 +370,7 @@ export class ExpeditionPanel {
                     button(`<strong>${escape(candidate.name)}</strong><small>${candidate.memberIds.length} residents${activeGroups.has(candidate.id) ? ' · active' : ''}</small>`, 'people',
                         `data-expedition-group="${escape(candidate.id)}" aria-pressed="${candidate.id === this.groupId}"`)).join('')}</nav>`;
             if (!group) html += `<div class="fjord-expedition-empty">${icon('route')}<h3>Your first expedition</h3>
-                <p>Create a group, choose available residents and pack supplies. No journey starts until you confirm a destination.</p></div>`;
+                <p>Create a group, choose available residents and pack supplies. Tap a valid destination to begin travelling.</p></div>`;
             else {
                 html += this.journey(group, mission);
                 if (!mission && groupMission(state, group.id)) html += '<p>This group is away on an earlier expedition. Its crew can be edited after it returns.</p>';
@@ -392,22 +402,28 @@ export class ExpeditionPanel {
             mission = this.activeMission(this.session.readSnapshot(), group.id);
         }
         const workspace = this.root.closest<HTMLElement>('#fjord-workspace')!;
-        this.toolbar.hidden = !group || !mission || !workspace.hidden;
+        this.toolbar.hidden = !group || !mission || !workspace.hidden || this.hiddenGroups.has(group.id);
+        this.toolbar.style.setProperty('--fjord-shortcut-space', `${Math.min(activeGroups.length, 3) * 50}px`);
+        const shortcutsHTML = activeGroups.map(candidate => button(
+            escape(candidate.name.replace(/^Group\s+/i, '')), 'route',
+            `data-expedition-toggle="${escape(candidate.id)}" aria-label="Toggle ${escape(candidate.name)} controls"
+                aria-controls="expedition-mode" aria-expanded="${!this.toolbar.hidden && candidate.id === group?.id}"`
+        )).join('');
+        if (this.shortcutsHTML !== shortcutsHTML) {
+            this.shortcuts.innerHTML = shortcutsHTML;
+            this.shortcutsHTML = shortcutsHTML;
+        }
         if (!group || !mission) { this.showTarget(); return; }
         if (!this.choosing) this.showTarget(mission.status === 'Prepared' || mission.status === 'Stranded' ? undefined : mission.target);
         this.toolbar.dataset.group = group.id;
-        const targetReady = this.choosing && !!this.destination;
-        const title = this.choosing ? targetReady ? 'Confirm destination' : 'Choose a destination' : phase(mission);
+        const title = this.choosing ? 'Choose a destination' : phase(mission);
         if (isMobileLayout()) {
-            this.renderMobileToolbar(group, mission, title, targetReady);
+            this.renderMobileToolbar(group, mission, title);
             return;
         }
-        const instruction = this.choosing ? targetReady ?
-            `${this.adjusted ? 'Flag moved to nearby walkable ground. ' : ''}Confirm this flag, or click another land destination.` :
-            'Click land to place a flag. Drag to pan · scroll to zoom · Esc to cancel.' : this.missionDescription(mission);
+        const instruction = this.choosing ?
+            'Click walkable land to travel there. Drag to pan · scroll to zoom · Esc to cancel.' : this.missionDescription(mission);
         const controls = this.choosing ?
-            button(mission.status === 'Prepared' ? 'Send group' : 'Confirm destination', 'destination',
-                `id="expedition-send" class="fjord-primary" ${targetReady ? '' : 'disabled'}`) +
             button('Cancel', 'close', 'id="expedition-cancel"') :
             this.actions(mission) + (mission.status !== 'Prepared' && mission.status !== 'Stranded' ?
                 button(this.session.running ? 'Pause travel' : 'Resume travel', this.session.running ? 'pause' : 'play',
@@ -425,16 +441,13 @@ export class ExpeditionPanel {
         this.toolbarHTML = html;
     }
 
-    private renderMobileToolbar(group: Group, mission: Mission, title: string, targetReady: boolean) {
+    private renderMobileToolbar(group: Group, mission: Mission, title: string) {
         const controls = this.choosing ?
-            button(mission.status === 'Prepared' ? 'Send group' : 'Confirm destination', 'destination',
-                `id="expedition-send" class="fjord-primary" ${targetReady ? '' : 'disabled'}`) +
             button('Cancel', 'close', 'id="expedition-cancel"') : this.actions(mission);
-        const instruction = this.choosing ? targetReady ?
-            `${this.adjusted ? 'Flag adjusted to walkable ground. ' : ''}Send to confirm, or tap another land destination.` :
-            'Tap land to place a flag. Drag to orbit · pinch to zoom.' :
+        const instruction = this.choosing ?
+            'Tap walkable land to travel there. Drag to orbit · pinch to zoom.' :
             mission.status === 'Prepared' ? 'Your pack is ready. Choose where to explore.' :
-            mission.status === 'Stranded' ? this.missionDescription(mission) :
+            mission.status === 'Stranded' || mission.returnReason === 'low-supplies' ? this.missionDescription(mission) :
             this.session.running ? this.missionDescription(mission) : 'Clock paused. Resume using Play in the status strip.';
         const html = `<div class="fjord-mobile-expedition-heading">
                 ${button(`<strong>${escape(group.name)}</strong><small>${title}</small>`, 'people',

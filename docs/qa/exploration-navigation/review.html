@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FjordSide · Exploration navigation</title>
+    <style>
+        body { margin: auto; max-width: 1100px; padding: 24px; background: #192529; color: #eee8dc; font: 17px/1.55 system-ui; }
+        h1, h2 { color: #dcbf84; font-family: Georgia, serif; }
+        a { color: #f4d59a; }
+        img { display: block; width: 100%; border-radius: 8px; }
+        figure { margin: 24px 0; }
+        figcaption { color: #bbc8c0; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Exploration navigation</h1>
+    <p><a href="/fjord-play">Open your settlement</a> · <a href="report.md">Validation report</a> · <a href="browser.json">Browser results</a></p>
+    <h2>Try on iPad</h2>
+    <ol>
+        <li>Use the numbered route button above Expeditions to hide and restore an active group's controls. The map remains available when hidden.</li>
+        <li>Choose or change a destination, then tap valid land. The group receives the order immediately. Invalid land keeps the current expedition unchanged.</li>
+        <li>Open Supplies. The bar shows exploration allowance, excluding supplies reserved for the journey home. Automatic return explains that those supplies are needed to get home.</li>
+    </ol>
+    <p>Starting a new expedition still requires confirmation of the Food cost. New destinations do not buy another pack. The existing safe-return rules are preserved.</p>
+    <figure><img src="scene-ipad-open.png" alt="Real saved Fjord scene with group controls and a separate numbered route shortcut"><figcaption>Controls open, with the group shortcut clear of the panel.</figcaption></figure>
+    <figure><img src="scene-ipad-hidden.png" alt="Same saved Fjord scene with the controls hidden and the numbered shortcut still available"><figcaption>The same settlement with the controls hidden.</figcaption></figure>
+    <figure><img src="scene-ipad-travelling.png" alt="Real expedition travelling after one ground tap"><figcaption>One valid tap dispatches the group using its existing pack.</figcaption></figure>
+    <p>Browser touch emulation covers phone, tablet and desktop layouts. Physical iPad UAT remains open.</p>
+</body>
+</html>

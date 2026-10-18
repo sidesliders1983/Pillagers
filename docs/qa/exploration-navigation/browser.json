@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "checks": [
+    "A valid destination dispatches immediately using the already purchased pack",
+    "The numbered group shortcut hides/reopens the toolbar without changing the campaign",
+    "Redirects apply in one tap; invalid taps are atomic; no second Food charge or confirmation",
+    "Automatic supply return is explicit while paused and shows zero exploration allowance",
+    "Multiple groups retain independent visibility controls across phone, tablet and desktop layouts",
+    "Real /fjord-play: iPad toolbar hides/restores and one terrain tap dispatches without another confirmation or charge",
+    "Reloading an active real 3D exploration restores the exact paused campaign and group shortcut"
+  ],
+  "errors": []
+}

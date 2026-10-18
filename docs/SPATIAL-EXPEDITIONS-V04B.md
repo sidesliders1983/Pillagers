@@ -10,6 +10,14 @@ Prototype values are **2 Food per member**, **one carried ration per 250 active 
 
 ## Player flow and confirmation
 
+### Navigation and mobile visibility — 2026-10-18
+
+Only the paid **Start Expedition** action requires confirmation. Choose/Change destination arms a single ground tap; a valid tap immediately applies the new route using the same pack. An invalid tap leaves the existing expedition unchanged and keeps destination selection active. Separate Recon, Surveillance and Pillage departures retain their own paid confirmation.
+
+Each active group has a numbered route-icon shortcut above Expeditions in the navigation dock. It hides or restores that group's map controls without changing its mission, supplies, camera or clock. Hiding also leaves destination-selection mode so ordinary map navigation is available. Multiple groups have independent visibility controls; visibility is transient presentation state.
+
+The **Exploration supplies** bar excludes the existing protected journey-home allowance (actual reached return trail at canonical speed plus the existing two-tick safety margin). Its time estimate is available exploration time, not total pack endurance including return. Automatic low-supply return shows zero exploration time and an explicit reason, including while paused. Remaining rations still fund the real homeward journey. This changes presentation only: prices, consumption, safe-return rules, save data and pacing are unchanged. A general attention/warning system is outside this pass.
+
 Expeditions opens the global group overview regardless of the selected home, resident or animal. Create exploration group creates Group 1, Group 2, etc. Each group has an inline resident checklist, using the canonical eligibility rules; membership can change only while no expedition is active. Group actions stay available without clearing the world selection.
 
 The Campaign menu defaults Enable exploration & rival clan on for new and restarted islands. This is a proposal for the next island, rather than an indicator of the active save. Existing saves retain their discovery state. The QA launcher also offers a paused Exploration & rival clan campaign with ordinary starting resources, one hidden living rival and two eligible founders already assigned to a group. Changing the new-campaign checkbox alone never changes the active campaign.

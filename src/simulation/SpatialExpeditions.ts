@@ -546,12 +546,29 @@ function inspectSupplies(state: SimulationState, mission: SpatialMission) {
     if (!mission.provisions) return undefined;
     const pack = mission.provisions;
     const living = mission.memberIds.filter(id => state.personas[id]?.deathWinter === null);
+    const activeTicksRemaining = living.length ? Math.min(...living.map(id => supplyEndurance(mission, id))) : 0;
+    // Use the same reached trails and safety margin as automatic return, without saving derived values.
+    const returnTicksReserved = living.length && mission.status !== 'Prepared' && mission.status !== 'Returned' ?
+        Math.max(...living.map(id => Math.ceil(routeLength(modeReturnTrail(mission, id)) /
+            state.world!.spatial!.policy.metresPerTick))) + 2 : 0;
     return { foodPerMember: pack.foodPerMember, ticksPerFood: pack.ticksPerFood,
-        activeTicksRemaining: living.length ? Math.min(...living.map(id => supplyEndurance(mission, id))) : 0,
+        activeTicksRemaining, returnTicksReserved,
+        explorationTicksRemaining: Math.max(0, activeTicksRemaining - returnTicksReserved),
         unopenedFood: Object.values(pack.members).reduce((sum, p) => sum + p.food, 0),
         consumedFood: Object.values(pack.members).reduce((sum, p) => sum + p.consumed, 0),
         discardedFood: Object.values(pack.members).reduce((sum, p) => sum + p.discarded, 0),
         lostFood: Object.values(pack.members).reduce((sum, p) => sum + p.lost, 0) };
+}
+function inspectReturnReason(state: SimulationState, mission: SpatialMission) {
+    if (mission.status !== 'Returning') return null;
+    if (mission.outcome === 'Cancelled') return 'recalled';
+    for (let index = state.events.length - 1; index >= 0; index--) {
+        const event = state.events[index];
+        const details = event.details;
+        if (event.type === 'ExploreAreaReturnStarted' && details?.missionId === mission.id)
+            return typeof details.reason === 'string' ? details.reason : null;
+    }
+    return null;
 }
 export function inspectSpatialExpeditions(state: SimulationState) {
     return {
@@ -560,6 +577,7 @@ export function inspectSpatialExpeditions(state: SimulationState) {
             id: mission.id, groupId: mission.groupId, groupName: mission.groupName,
             target: { ...mission.target }, memberIds: [...mission.memberIds],
             status: mission.status, outcome: mission.outcome, foodCost: mission.foodCost,
+            returnReason: inspectReturnReason(state, mission),
             departedAt: mission.departedAt, returnedAt: mission.returnedAt,
             position: spatialMissionPosition(mission), supplies: inspectSupplies(state, mission),
             missionType: mission.task?.type ?? null,

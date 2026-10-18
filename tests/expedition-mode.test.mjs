@@ -21,6 +21,19 @@ function campaign(members = ['founder-1', 'founder-2', 'founder-3'], landscape =
 const start = { type: 'StartExpedition', groupId: 'group-1' };
 const goal = { type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 } };
 
+test('exploration supplies exclude the protected homeward allowance without changing saved rations', () => {
+    let state = core.applyCommand(campaign(['founder-1']), start, context);
+    state = core.applyCommand(state, goal, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, context);
+    const saved = core.serializeState(state);
+    const supplies = core.inspectSpatialExpeditions(state).missions[0].supplies;
+    assert.equal(supplies.activeTicksRemaining, 480);
+    assert.equal(supplies.returnTicksReserved, 22, '20 ticks home plus the existing two-tick safety margin');
+    assert.equal(supplies.explorationTicksRemaining, 458);
+    assert.equal(core.serializeState(state), saved, 'Projection never consumes or stores derived supplies');
+    assert.deepEqual(core.inspectSpatialExpeditions(core.reconstructState(saved)).missions[0].supplies, supplies);
+});
+
 test('Start Expedition reserves six Food for three residents once, stages without eating and cancellation never refunds confirmed spending', () => {
     const state = campaign(), saved = core.serializeState(state);
     const offer = core.startExpeditionOffer(state, 'group-1', context);
@@ -107,6 +120,10 @@ test('a distant destination triggers conservative return on the reached trail be
     state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 300 }, bound);
     const mission = state.world.spatial.missions['explore-1'];
     assert.equal(mission.status, 'Returning');
+    const returning = core.inspectSpatialExpeditions(state).missions[0];
+    assert.equal(returning.returnReason, 'low-supplies');
+    assert.equal(returning.supplies.explorationTicksRemaining, 0,
+        'Protected homeward supplies must not appear as available exploration time');
     assert.ok(spatial.spatialMemberPosition(mission, 'founder-1').x < 904, 'An unaffordable distance is never fabricated');
     assert.ok(core.inspectSpatialExpeditions(state).missions[0].supplies.activeTicksRemaining >=
         Math.ceil(mission.travelled / 2), 'Remaining endurance covers the confirmed return');
