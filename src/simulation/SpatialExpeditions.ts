@@ -22,8 +22,11 @@ export const prototypeExplorePolicy: ExplorePolicy = {
     metresPerTick: 2, exploringTicks: 25, foodIntervalTicks: 125,
 };
 const maximumTargetCorrection = 8;
+export const maximumTestExpeditionFoodPerMember = 10;
 export interface ExpeditionProvisions {
     version: 1;
+    /** Explicit playtest override; ordinary packs retain the two-Food carrying limit. */
+    testCapacity?: true;
     foodPerMember: number;
     ticksPerFood: number;
     members: Record<string, { food: number; rationTicks: number; consumed: number; discarded: number; lost: number }>;
@@ -60,7 +63,7 @@ export interface SpatialExpeditions {
     missions: Record<string, SpatialMission>;
 }
 export type SpatialExpeditionCommand =
-    { type: 'StartExpedition'; groupId: string } |
+    { type: 'StartExpedition'; groupId: string; testFoodPerMember?: number } |
     { type: 'CancelExpedition'; groupId: string } |
     { type: 'CreateExplorationGroup' } |
     { type: 'SetExplorationMember'; groupId: string; personaId: string; included: boolean } |
@@ -97,9 +100,14 @@ export function requireReadyExpeditionGroup(state: SimulationState, groupId: str
         throw new Error('At most 16 groups and 62 residents can explore at once.');
     return group;
 }
-export function startExpeditionOffer(state: SimulationState, groupId: string, context?: PhysicalExpeditionContext) {
+export function startExpeditionOffer(state: SimulationState, groupId: string, context?: PhysicalExpeditionContext,
+    testFoodPerMember?: number) {
     const group = requireReadyExpeditionGroup(state, groupId, context);
-    const foodPerMember = 2, ticksPerFood = 250, foodCost = group.memberIds.length * foodPerMember;
+    if (testFoodPerMember !== undefined && (!Number.isSafeInteger(testFoodPerMember) ||
+        testFoodPerMember < 1 || testFoodPerMember > maximumTestExpeditionFoodPerMember))
+        throw new Error(`Test supplies must be a whole number from 1 to ${maximumTestExpeditionFoodPerMember} Food per resident.`);
+    const foodPerMember = testFoodPerMember ?? 2;
+    const ticksPerFood = 250, foodCost = group.memberIds.length * foodPerMember;
     if (state.stocks.food < foodCost) throw new Error(`Start Expedition needs ${foodCost} Food.`);
     return { foodPerMember, ticksPerFood, foodCost, members: group.memberIds.length,
         activeTicks: foodPerMember * ticksPerFood, minutesPer1000Ticks: 10 };
@@ -364,7 +372,7 @@ export function exploreOffer(state: SimulationState, groupId: string, target: Po
 export function applySpatialCommand(state: SimulationState, command: SpatialExpeditionCommand,
     context?: PhysicalExpeditionContext) {
     if (command.type === 'StartExpedition') {
-        const offer = startExpeditionOffer(state, command.groupId, context);
+        const offer = startExpeditionOffer(state, command.groupId, context, command.testFoodPerMember);
         const group = state.world!.groups[command.groupId], now = absoluteTick(state);
         const spatial = state.world!.spatial ??= { version: 2, worldId: context!.worldId,
             policy: { ...prototypeExplorePolicy }, missions: {} };
@@ -376,12 +384,14 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
             route: [home, { ...home }], distance: 0, travelled: 0, departedAt: now, updatedAt: now,
             exploringUntil: null, returnedAt: null, foodCost: offer.foodCost, status: 'Prepared', outcome: null,
             provisions: { version: 1, foodPerMember: offer.foodPerMember, ticksPerFood: offer.ticksPerFood,
+                ...(command.testFoodPerMember !== undefined ? { testCapacity: true as const } : {}),
                 members: Object.fromEntries(group.memberIds.map(member => [member,
                     { food: offer.foodPerMember, rationTicks: 0, consumed: 0, discarded: 0, lost: 0 }])) }
         };
         spatial.missions[id] = mission;
         state.stocks.food -= offer.foodCost;
-        recordSpatial(state, 'ExploreAreaPrepared', mission, { foodCost: offer.foodCost, foodPerMember: offer.foodPerMember });
+        recordSpatial(state, 'ExploreAreaPrepared', mission, { foodCost: offer.foodCost, foodPerMember: offer.foodPerMember,
+            ...(command.testFoodPerMember !== undefined ? { testCapacity: true } : {}) });
         return;
     }
     if (command.type === 'CancelExpedition') {
@@ -552,6 +562,7 @@ function inspectSupplies(state: SimulationState, mission: SpatialMission) {
         Math.max(...living.map(id => Math.ceil(routeLength(modeReturnTrail(mission, id)) /
             state.world!.spatial!.policy.metresPerTick))) + 2 : 0;
     return { foodPerMember: pack.foodPerMember, ticksPerFood: pack.ticksPerFood,
+        testCapacity: pack.testCapacity === true,
         activeTicksRemaining, returnTicksReserved,
         explorationTicksRemaining: Math.max(0, activeTicksRemaining - returnTicksReserved),
         unopenedFood: Object.values(pack.members).reduce((sum, p) => sum + p.food, 0),
@@ -780,7 +791,11 @@ export function validateSpatialExpeditions(state: SimulationState) {
                 mission.exploringUntil < mission.departedAt)) fail();
         if (mission.provisions) {
             const pack = mission.provisions;
-            if (spatial.version < 2 || pack.version !== 1 || pack.foodPerMember !== 2 || pack.ticksPerFood !== 250 ||
+            if (spatial.version < 2 || pack.version !== 1 ||
+                pack.testCapacity !== undefined && pack.testCapacity !== true ||
+                (pack.testCapacity ? !Number.isSafeInteger(pack.foodPerMember) || pack.foodPerMember < 1 ||
+                    pack.foodPerMember > maximumTestExpeditionFoodPerMember : pack.foodPerMember !== 2) ||
+                pack.ticksPerFood !== 250 ||
                 !pack.members || Object.keys(pack.members).length !== mission.memberIds.length ||
                 mission.foodCost !== pack.foodPerMember * mission.memberIds.length) fail();
             for (const member of mission.memberIds) {

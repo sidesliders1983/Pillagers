@@ -10,6 +10,14 @@ Prototype values are **2 Food per member**, **one carried ration per 250 active 
 
 ## Player flow and confirmation
 
+### Test carrying capacity — 2026-10-18
+
+To test distant exploration without changing normal balance, group preparation includes a collapsed **Test supplies** section. **Food per resident (test)** accepts a whole number from **1 to 10**; the normal default remains **2**. Three members taking 8 each cost **24 Food** and receive **2,000 active ticks** each at the existing 250 ticks per Food. Ten each is the maximum: **2,500 active ticks**, including the unchanged protected physical return allowance.
+
+The paid departure dialog shows the actual total, per-person amount and a test-pack label. Back/cancel spends nothing; confirmation revalidates the crew, amount and clan stock, then spends once. Invalid amounts or insufficient Food reject atomically. There is no free Food, refund, timer reset, resupply while away or change to production, casualties, discovery or separate Recon/Surveillance/Pillage provisions.
+
+`StartExpedition.testFoodPerMember` is an explicit optional playtest command field. A custom purchase stores its amount in the existing provisions and an optional `testCapacity: true` marker. Save validation bounds marked packs to 1–10 and still requires unmarked normal packs to carry exactly 2; all ration accounting checks remain. Save/load and replay retain the purchased custom pack and its remaining rations. The unpurchased input draft is presentation state for the next departure, not a persistent campaign-wide balance setting. Ongoing custom supplies remain labelled **Test pack** in the UI.
+
 ### Navigation and mobile visibility — 2026-10-18
 
 Only the paid **Start Expedition** action requires confirmation. Choose/Change destination arms a single ground tap; a valid tap immediately applies the new route using the same pack. An invalid tap leaves the existing expedition unchanged and keeps destination selection active. Separate Recon, Surveillance and Pillage departures retain their own paid confirmation.

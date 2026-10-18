@@ -23,8 +23,8 @@ export class GameplaySession {
     private physicalContext() {
         return this.physicalWorld && { ...this.physicalWorld, exclusions: this.physicalExclusions?.() };
     }
-    startExpeditionOffer(groupId: string) {
-        return startExpeditionOffer(this.state, groupId, this.physicalContext());
+    startExpeditionOffer(groupId: string, testFoodPerMember?: number) {
+        return startExpeditionOffer(this.state, groupId, this.physicalContext(), testFoodPerMember);
     }
     islandMissionOffer(groupId: string, target: IslandTarget, type: MissionType,
         priorities: Cargo[] = [], origins?: Record<string, { x: number; z: number }>) {

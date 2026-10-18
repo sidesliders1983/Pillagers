@@ -185,6 +185,10 @@ body.fjord-play {
 .fjord-expedition-empty p { font-size: 13px; color: var(--fjord-muted); margin: 0; max-width: 55ch; }
 .fjord-expedition-history { display: flex; align-items: center; gap: 8px; color: var(--fjord-muted); font-size: 11px; margin: 14px 0 0; }
 .fjord-expedition-message { margin: 10px 0 0; padding: 8px 10px; background: #dcbf8414; color: var(--fjord-text); border-left: 2px solid var(--fjord-accent); font-size: 12px; }
+.fjord-expedition-test-supplies { margin: 12px 0; padding: 8px; border: 1px solid var(--fjord-line); border-radius: 4px; }
+.fjord-expedition-test-supplies summary { cursor: pointer; min-height: 44px; align-content: center; }
+.fjord-expedition-test-supplies label { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#fjord-play .fjord-expedition-test-supplies input { width: 80px; min-height: 44px; font-size: 16px; }
 #fjord-play #expedition-mode { position: absolute; z-index: 9; bottom: calc(88px + var(--fjord-shortcut-space, 0px)); left: 50%; transform: translateX(-50%);
     top: auto; right: auto; max-width: none; max-height: calc(100% - 190px); height: auto;
     box-sizing: border-box; width: min(690px, calc(100vw - 32px)); padding: 12px 15px;

@@ -21,6 +21,40 @@ function campaign(members = ['founder-1', 'founder-2', 'founder-3'], landscape =
 const start = { type: 'StartExpedition', groupId: 'group-1' };
 const goal = { type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 } };
 
+test('a test pack quotes and pays the chosen Food per member once and retains its extended endurance after save/load', () => {
+    const initial = campaign();
+    const offer = core.startExpeditionOffer(initial, 'group-1', context, 8);
+    assert.equal(offer.foodPerMember, 8);
+    assert.equal(offer.foodCost, 24);
+    assert.equal(offer.activeTicks, 2000);
+    const prepared = core.applyCommand(initial, { ...start, testFoodPerMember: 8 }, context);
+    assert.equal(prepared.stocks.food, 476);
+    const walking = core.applyCommand(prepared, goal, context);
+    const exploring = core.applyCommand(walking, { type: 'AdvanceTicks', ticks: 600 }, context);
+    const mission = core.inspectSpatialExpeditions(exploring).missions[0];
+    assert.equal(mission.status, 'Exploring', 'The chosen pack must last beyond the normal 500-tick allowance');
+    assert.equal(mission.supplies.activeTicksRemaining, 1400);
+    assert.equal(mission.supplies.testCapacity, true);
+    const restored = core.reconstructState(core.serializeState(exploring));
+    assert.deepEqual(core.applyCommand(restored, { type: 'AdvanceTicks', ticks: 20 }, context),
+        core.applyCommand(exploring, { type: 'AdvanceTicks', ticks: 20 }, context));
+    assert.deepEqual(restored.events.filter(event => event.type === 'ExploreAreaPrepared')
+        .map(event => event.details.foodCost), [24], 'The chosen pack is purchased once');
+});
+
+test('test packs reject more than ten Food per member and invalid or unaffordable choices atomically', () => {
+    const state = campaign();
+    const saved = core.serializeState(state);
+    for (const testFoodPerMember of [11, 0, -1, 1.5, NaN, Infinity, '8', null]) {
+        assert.throws(() => core.applyCommand(state, { ...start, testFoodPerMember }, context), /whole number.*1.*10/i);
+        assert.equal(core.serializeState(state), saved);
+    }
+    const poor = structuredClone(state);
+    poor.stocks.food = 23;
+    assert.throws(() => core.applyCommand(poor, { ...start, testFoodPerMember: 8 }, context), /24 Food/);
+    assert.equal(poor.stocks.food, 23);
+});
+
 test('exploration supplies exclude the protected homeward allowance without changing saved rations', () => {
     let state = core.applyCommand(campaign(['founder-1']), start, context);
     state = core.applyCommand(state, goal, context);

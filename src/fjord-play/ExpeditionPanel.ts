@@ -1,5 +1,5 @@
 import { expeditionEligible, groupMission, personaAway } from '../simulation/WorldExpeditions';
-import { inspectSpatialExpeditions } from '../simulation/SpatialExpeditions';
+import { inspectSpatialExpeditions, maximumTestExpeditionFoodPerMember } from '../simulation/SpatialExpeditions';
 import { isProvidingCare, personaAge } from '../simulation/SimulationCore';
 import type { GameplaySession } from '../gameplay-lab/GameplaySession';
 import type { SimulationCommand, SimulationState } from '../simulation/SimulationCore';
@@ -30,6 +30,8 @@ export class ExpeditionPanel {
     private pendingStart = '';
     private pendingCrew = '';
     private pendingFood = 0;
+    private pendingTestFoodPerMember?: number;
+    private testFoodDrafts = new Map<string, string>();
     private controlsHTML = '';
     private toolbarHTML = '';
     private toolbarExpanded = false;
@@ -79,6 +81,12 @@ export class ExpeditionPanel {
             this.groupId = input.dataset.memberGroup;
             this.command({ type: 'SetExplorationMember', groupId: this.groupId,
                 personaId: input.dataset.member, included: input.checked });
+        }, { signal: this.abort.signal });
+        root.addEventListener('input', event => {
+            const input = event.target;
+            if (!(input instanceof HTMLInputElement) || !input.dataset.testFood) return;
+            this.testFoodDrafts.set(input.dataset.testFood, input.value);
+            this.refresh();
         }, { signal: this.abort.signal });
         root.querySelector('dialog')!.addEventListener('close', () => { this.pendingStart = ''; },
             { signal: this.abort.signal });
@@ -151,14 +159,16 @@ export class ExpeditionPanel {
         if (target.id === 'expedition-start-cancel') this.dialog.close();
         if (target.id === 'expedition-start-confirm' && this.pendingStart) {
             try {
-                const offer = this.session.startExpeditionOffer(this.pendingStart);
+                const testFoodPerMember = this.pendingTestFoodPerMember;
+                const offer = this.session.startExpeditionOffer(this.pendingStart, testFoodPerMember);
                 const crew = this.session.readSnapshot().world!.groups[this.pendingStart].memberIds.join(',');
                 if (offer.foodCost !== this.pendingFood || crew !== this.pendingCrew)
                     throw new Error('The crew or supplies have changed. Go back and review the departure again.');
                 const groupId = this.pendingStart;
                 this.pendingStart = '';
                 this.dialog.close();
-                this.command({ type: 'StartExpedition', groupId });
+                this.command({ type: 'StartExpedition', groupId,
+                    ...(testFoodPerMember === undefined ? {} : { testFoodPerMember }) });
             } catch (error) { this.root.querySelector('#expedition-start-summary')!.textContent = String(error); }
         }
         if (target.dataset.explore) this.beginTargeting(target.dataset.explore);
@@ -188,13 +198,16 @@ export class ExpeditionPanel {
 
     private reviewDeparture(groupId: string) {
         try {
-            const offer = this.session.startExpeditionOffer(groupId);
+            const testFoodPerMember = this.testFoodPerMember(groupId);
+            const offer = this.session.startExpeditionOffer(groupId, testFoodPerMember);
             this.groupId = this.pendingStart = groupId;
+            this.pendingTestFoodPerMember = testFoodPerMember;
             this.pendingFood = offer.foodCost;
             this.pendingCrew = this.session.readSnapshot().world!.groups[groupId].memberIds.join(',');
             this.root.querySelector('#expedition-start-summary')!.innerHTML = `
                 <div class="fjord-expedition-quote">${icon('food')}<strong>${offer.foodCost}</strong><span>Food from clan stocks</span></div>
                 <p>${escape(this.session.readSnapshot().world!.groups[groupId].name)} · ${offer.members} residents · ${offer.foodPerMember} Food each · packed once.</p>
+                ${testFoodPerMember === undefined ? '' : '<p class="fjord-caption">Test pack: custom carrying capacity for this expedition.</p>'}
                 <p>Next, choose a destination on the island. Travel, exploration and returning home share this pack.</p>
                 <p class="fjord-caption">Unused supplies are discarded when the expedition ends. The clock stays ${this.session.running ? 'running' : 'paused'}.</p>`;
             this.dialog.showModal();
@@ -278,6 +291,7 @@ export class ExpeditionPanel {
             <small title="${remaining} active ticks available before the protected return allowance">${mission.status === 'Stranded' ? 'Movement unavailable' :
                 `≈ ${Math.floor(seconds / 60)}m ${String(seconds % 60).padStart(2, '0')}s exploration remaining`}</small>
             <small>Supplies for the journey home are reserved.</small>
+            ${mission.supplies.testCapacity ? `<small>Test pack · ${mission.supplies.foodPerMember} Food per resident</small>` : ''}
         </div>`;
     }
     private actions(mission: Mission) {
@@ -299,14 +313,26 @@ export class ExpeditionPanel {
             <div class="fjord-expedition-group-heading"><h3>${escape(group.name)}</h3>
                 <span class="fjord-expedition-badge">${mission ? phase(mission) : 'At home'}</span></div>`;
     }
+    private testFoodPerMember(groupId: string) {
+        const draft = this.testFoodDrafts.get(groupId) ?? '2';
+        const amount = draft.trim() ? Number(draft) : NaN;
+        return amount === 2 ? undefined : amount;
+    }
     private preparation(state: SimulationState, group: Group) {
         let offer: ReturnType<GameplaySession['startExpeditionOffer']> | undefined;
         let reason = 'Choose at least one available resident.';
         if (group.memberIds.length) {
-            try { offer = this.session.startExpeditionOffer(group.id); reason = ''; }
+            try { offer = this.session.startExpeditionOffer(group.id, this.testFoodPerMember(group.id)); reason = ''; }
             catch (error) { reason = error instanceof Error ? error.message : String(error); }
         }
-        return `${this.crew(state, group)}<div class="fjord-expedition-departure">
+        return `${this.crew(state, group)}
+            <details class="fjord-expedition-test-supplies" data-expedition-test-options>
+                <summary>Test supplies</summary>
+                <label><span>Food per resident (test)</span>
+                    <input type="number" inputmode="numeric" min="1" max="${maximumTestExpeditionFoodPerMember}" step="1"
+                        data-test-food="${escape(group.id)}" value="${escape(this.testFoodDrafts.get(group.id) ?? '2')}"></label>
+                <p class="fjord-caption">Normal pack: 2 per resident. Choose up to ${maximumTestExpeditionFoodPerMember} for testing. Food is paid once from clan stocks.</p>
+            </details><div class="fjord-expedition-departure">
             <div>${icon('food')}<span>${offer ? `<strong>${offer.foodCost} Food</strong><small>${offer.foodPerMember} per resident · paid once</small>` :
                 '<strong>Prepare supplies</strong><small>Food is confirmed before packing</small>'}</span></div>
             ${button('Prepare expedition', 'route', `data-start="${escape(group.id)}" class="fjord-primary" ${offer ? '' : 'disabled'}`)}
@@ -467,17 +493,20 @@ export class ExpeditionPanel {
     private replace(element: HTMLElement, html: string, previous: string) {
         if (html === previous) return;
         const focused = element.contains(document.activeElement) ? document.activeElement as HTMLElement : undefined;
-        const focusAttribute = focused && ['data-member', 'data-expedition-group', 'data-expedition-action',
+        const focusAttribute = focused && ['data-test-food', 'data-member', 'data-expedition-group', 'data-expedition-action',
             'data-explore', 'data-recall', 'data-cancel-expedition', 'data-start', 'id'].find(attribute => focused.hasAttribute(attribute));
         const focusKey = focusAttribute && focused?.getAttribute(focusAttribute);
         const roster = element.querySelector<HTMLElement>('.fjord-expedition-members');
         const scrollTop = roster?.scrollTop ?? 0;
         const expanded = element.querySelector<HTMLDetailsElement>('.fjord-crew-unavailable')?.open;
+        const testOptionsOpen = element.querySelector<HTMLDetailsElement>('[data-expedition-test-options]')?.open;
         element.innerHTML = html;
         const nextRoster = element.querySelector<HTMLElement>('.fjord-expedition-members');
         if (nextRoster) nextRoster.scrollTop = scrollTop;
         const details = element.querySelector<HTMLDetailsElement>('.fjord-crew-unavailable');
         if (details) details.open = !!expanded;
+        const testOptions = element.querySelector<HTMLDetailsElement>('[data-expedition-test-options]');
+        if (testOptions) testOptions.open = !!testOptionsOpen;
         if (focusAttribute && focusKey) Array.from(element.querySelectorAll<HTMLElement>('button,input'))
             .find(candidate => candidate.getAttribute(focusAttribute) === focusKey)?.focus({ preventScroll: true });
     }
