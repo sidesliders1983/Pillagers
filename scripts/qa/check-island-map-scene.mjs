@@ -25,6 +25,12 @@ try {
         await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
         if (await page.locator('#clan-book-close').isVisible()) await page.locator('#clan-book-close').click();
         const snapshot = () => page.evaluate(() => JSON.parse(sessionStorage.getItem('pillagers.fjord-play.active.v1')).fjord.campaign);
+        const returnCameraHome = async () => {
+            if (await page.locator('#fjord-island-map').isVisible()) await page.locator('[data-map-close]').click();
+            if (await page.locator('#fjord-mobile-menu').isVisible()) await page.locator('#fjord-mobile-menu').click();
+            await page.locator('[data-surface="settlement"]').first().click();
+            await page.locator('[data-ui="camera-home"]').click();
+        };
         const before = await snapshot();
         const run = { campaign: before.seed, terrain: save.fjord.island.seed, checks: [], measurements: [] };
         assert.equal(await page.locator('#fjord-island-map').isVisible(), false);
@@ -37,7 +43,7 @@ try {
         await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
         await page.waitForTimeout(700);
         assert.deepEqual(await snapshot(), before, 'A map point must not mutate paused Core, routes, resources or discovery');
-        await page.locator('#fjord-map-home').click();
+        await returnCameraHome();
         await page.waitForTimeout(1000);
         const clearance = await page.locator('#fjord-canvas').evaluate(canvas => JSON.parse(canvas.dataset.cameraClearance));
         const fire = await page.locator('#fjord-canvas').evaluate(canvas => JSON.parse(canvas.dataset.campfire).transform);
@@ -45,7 +51,8 @@ try {
             'Home returns to the actual campfire nucleus');
         assert.ok(clearance.focus.every(Number.isFinite));
         assert.deepEqual(await snapshot(), before);
-        run.checks.push('Map click and Home change camera only; the paused campaign stays exact');
+        run.checks.push('Map is one item in the existing bar; Settlement → View settlement returns the camera without extra icons or Core changes');
+        await page.locator('#fjord-map-toggle').click();
         await page.screenshot({ path: `${output}/desktop-${label}-home.png` });
         const canvas = page.locator('#fjord-canvas');
         const sceneBox = await canvas.boundingBox();
@@ -94,7 +101,7 @@ try {
                 await page.locator('[data-map-close]').click();
                 await page.screenshot({ path: `${output}/mobile-${viewport.width}-closed.png` });
             }
-            run.checks.push('Phone portrait/landscape and tablet use a closable modal map, with direct Home and no horizontal overflow');
+            run.checks.push('Phone portrait/landscape and tablet use a closable modal map and the existing navigation bar, without horizontal overflow');
             await page.reload({ waitUntil: 'domcontentloaded' });
             await page.locator('#fjord-canvas[data-ready="true"]').waitFor({ timeout: 180000 });
             assert.deepEqual(await snapshot(), before);

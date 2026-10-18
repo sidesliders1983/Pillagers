@@ -37,4 +37,6 @@ While any physical mission is active the existing Expedition Mode pacing applies
 
 Expeditions contains the reused group selector, **Recon mapped area**, and known settlement actions. Tap a known gold site ring in the 3D scene to open its actions; drag/pinch remain navigation outside explicit targeting. Tapping mapped land during Recon targeting opens the cost confirmation. Separate missions cannot receive Explore redirects; Return home remains available. Results appear after actual homecoming and also feed existing Chronicle/Clan Book resource accounting.
 
+Known places explains why the selected group cannot depart: an away group must return first, or the player can choose another eligible group at home. **Return group home** is available beside that explanation for an active trip. Returning groups show a homecoming reminder. Sighted settlements explain that Surveillance and Pillage require a successful Recon to return home; disabled actions retain the reason in their title.
+
 Validation and measurements are recorded in [the QA report](qa/island-missions/report.md). Browser touch emulation is not a physical iPad test.

@@ -8,12 +8,10 @@ import './island-map.css';
 
 interface MapActions {
     focus(point: { x: number; z: number }): void;
-    home(): void;
 }
 
 /** Cached 2D geography plus cheap SVG camera marks. It owns no simulation or WebGL renderer. */
 export class IslandMap {
-    private controls = document.createElement('div');
     private dialog = document.createElement('dialog');
     private canvas: HTMLCanvasElement;
     private toggle: HTMLButtonElement;
@@ -35,28 +33,30 @@ export class IslandMap {
         cameraUpdates: 0, maximumCameraMs: 0, rasterBytes: 0 };
 
     constructor(private root: HTMLElement, private actions: MapActions) {
-        this.controls.id = 'fjord-map-controls';
-        this.controls.innerHTML = `<button id="fjord-map-toggle" type="button" aria-label="Show island map" title="Map" aria-controls="fjord-island-map" aria-expanded="false">${icon('map')}</button>
-            <button id="fjord-map-home" type="button" aria-label="Return camera home" title="Return camera home">${icon('home')}</button>`;
+        this.toggle = document.createElement('button');
+        this.toggle.id = 'fjord-map-toggle';
+        this.toggle.type = 'button';
+        this.toggle.setAttribute('aria-label', 'Show island map');
+        this.toggle.setAttribute('aria-controls', 'fjord-island-map');
+        this.toggle.setAttribute('aria-expanded', 'false');
+        this.toggle.title = 'Map';
+        this.toggle.innerHTML = `${icon('map')}<span class="map-label">Map</span>`;
         this.dialog.id = 'fjord-island-map';
         this.dialog.setAttribute('aria-labelledby', 'fjord-map-heading');
         this.dialog.innerHTML = `<div class="fjord-map-heading"><h2 id="fjord-map-heading">Island map</h2>
-            <button type="button" data-map-home aria-label="Return camera home" title="Return camera home">${icon('home')}</button>
             <button type="button" data-map-close aria-label="Close island map" title="Close map">${icon('close')}</button></div>
-            <div class="fjord-map-image"><canvas id="fjord-map-canvas" tabindex="0" aria-label="Island map. Use arrow keys to choose a point, Enter to focus the camera, or Home to return to the settlement."></canvas>
+            <div class="fjord-map-image"><canvas id="fjord-map-canvas" tabindex="0" aria-label="Island map. Use arrow keys to choose a point and Enter to focus the camera."></canvas>
             <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg><span class="fjord-map-north">N ↑</span></div>
             <p class="fjord-map-legend"><span>◇ Home</span><span>● Camera focus</span><span>⚑ Group destinations</span><span>Dim: unexplored</span></p>
             <p data-map-status role="status">Choose explored ground to move the camera.</p>`;
-        this.root.append(this.controls, this.dialog);
+        this.root.querySelector('#fjord-navigation')!.append(this.toggle);
+        this.root.append(this.dialog);
         this.canvas = this.dialog.querySelector('canvas')!;
         this.svg = this.dialog.querySelector('.fjord-map-image > svg')!;
         this.status = this.dialog.querySelector('[data-map-status]')!;
-        this.toggle = this.controls.querySelector('#fjord-map-toggle')!;
         const options = { signal: this.abort.signal };
         this.toggle.addEventListener('click', () => this.dialog.open ? this.close() : this.open(), options);
-        this.controls.querySelector('#fjord-map-home')!.addEventListener('click', () => this.actions.home(), options);
         this.dialog.querySelector('[data-map-close]')!.addEventListener('click', () => this.close(), options);
-        this.dialog.querySelector('[data-map-home]')!.addEventListener('click', () => this.actions.home(), options);
         this.dialog.addEventListener('close', () => {
             this.toggle.setAttribute('aria-expanded', 'false');
             this.toggle.setAttribute('aria-label', 'Show island map');
@@ -66,7 +66,7 @@ export class IslandMap {
             event.stopPropagation();
             if (event.key === 'Escape') { event.preventDefault(); this.close(); }
         }, options);
-        this.controls.addEventListener('keydown', event => event.stopPropagation(), options);
+        this.toggle.addEventListener('keydown', event => event.stopPropagation(), options);
         this.canvas.addEventListener('click', event => {
             const rect = this.canvas.getBoundingClientRect();
             this.choose({ x: (event.clientX - rect.left) / rect.width, y: (event.clientY - rect.top) / rect.height });
@@ -81,8 +81,6 @@ export class IslandMap {
                 this.cameraSignature = '';
             } else if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault(); this.choose(this.cursor);
-            } else if (event.key === 'Home') {
-                event.preventDefault(); this.actions.home();
             }
         }, options);
         document.addEventListener('fjord-layout-change', () => { if (this.dialog.open) this.close(); }, options);
@@ -184,7 +182,7 @@ export class IslandMap {
         columns: this.model?.preview.columns, rows: this.model?.preview.rows,
         canvasBytes: this.canvas.width * this.canvas.height * 4 }; }
     dispose() {
-        this.abort.abort(); this.dialog.close(); this.dialog.remove(); this.controls.remove();
+        this.abort.abort(); this.dialog.close(); this.dialog.remove(); this.toggle.remove();
         this.model = undefined; this.source = undefined; this.surface = undefined;
         this.canvas.width = this.canvas.height = 1;
     }

@@ -22,21 +22,24 @@ try {
             const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = path; document.head.append(link);
         }
         document.body.className = 'fjord-play';
-        document.body.innerHTML = '<main id="fjord-play"><canvas id="scene"></canvas></main>';
+        document.body.innerHTML = '<main id="fjord-play"><canvas id="scene"></canvas><nav id="fjord-navigation"></nav></main>';
         const bounds = { minX: -100, maxX: 300, minZ: -50, maxZ: 150 };
         const world = { terrain: { bounds, spacing: 100, columns: 5, rows: 3,
             heights: [0,0,0,0,0,0,3,8,2,0,0,0,0,0,0] }, waterLevel: 0 };
         const discovery = { version: 1, worldId: 'map-fixture', cellSize: 100,
             grid: { bounds, columns: 4, rows: 2 }, explored: '02', visible: '02' };
         const calls = [];
-        const map = new IslandMap(document.querySelector('#fjord-play'), { focus: point => calls.push(point),
-            home: () => calls.push('home') });
+        const map = new IslandMap(document.querySelector('#fjord-play'), { focus: point => calls.push(point) });
         map.setWorld(world, { x: 50, z: 0 }, discovery);
         const camera = new PerspectiveCamera(45, 1.6, .1, 2000);
         camera.position.set(80, 80, 40); camera.lookAt(50, 0, 0); camera.updateMatrixWorld();
         map.update(camera, new Vector3(50, 0, 0), performance.now());
         window.mapQA = { map, camera, calls, discovery };
     });
+    assert.equal(await page.locator('#fjord-navigation > #fjord-map-toggle').count(), 1,
+        'Map is an item in the existing navigation bar');
+    assert.equal(await page.locator('#fjord-map-controls').count(), 0, 'No extra row of navigation icons');
+    assert.equal(await page.locator('#fjord-map-home').count(), 0, 'Home belongs to the Settlement menu');
     await page.locator('#fjord-map-toggle').click();
     await page.evaluate(() => {
         mapQA.map.setExpeditions([{ groupId: 'group-1', groupName: 'Group 1', status: 'Traveling', target: { x: 200, z: 0 } },
@@ -56,11 +59,9 @@ try {
     assert.ok(Math.abs(chosen.x - 50) < 2 && Math.abs(chosen.z) < 2, 'Pointer rounding stays within one displayed pixel');
     await page.mouse.click(box.x + box.width * .75, box.y + box.height * .25);
     assert.equal(await page.evaluate(() => mapQA.calls.length), 1);
-    await page.locator('#fjord-map-home').click();
-    assert.deepEqual(await page.evaluate(() => mapQA.calls.at(-1)), 'home');
     await page.locator('#fjord-map-toggle').click();
     assert.equal(await page.locator('#fjord-island-map').isVisible(), false);
-    report.checks.push('The lower-left Map toggle starts closed, opens/closes; known points focus only, unknown points reject, Home is direct');
+    report.checks.push('Map is one icon-and-label item in the existing bar, starts closed, toggles; known points focus only and unknown points reject');
     await page.setViewportSize({ width: 390, height: 844 });
     await page.evaluate(() => { document.querySelector('#fjord-play').classList.add('fjord-mobile'); document.dispatchEvent(new Event('fjord-layout-change')); });
     await page.locator('#fjord-map-toggle').click();
@@ -70,9 +71,7 @@ try {
     await page.screenshot({ path: output + '/phone-open.png' });
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#fjord-island-map').isVisible(), false);
-    await page.locator('#fjord-map-home').click();
-    assert.equal(await page.evaluate(() => mapQA.calls.at(-1)), 'home');
-    report.checks.push('Phone Map is a deliberate modal sheet; Escape closes and direct Home remains available');
+    report.checks.push('Phone Map is a deliberate modal sheet; Escape closes; there is no extra row or standalone Home button');
     await context.close();
     assert.deepEqual(report.errors, []);
     report.status = 'PASS';

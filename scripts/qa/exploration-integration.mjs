@@ -155,9 +155,14 @@ export function runExplorationScenario(seed, { encounter = false } = {}) {
             const view = shared.fjord.readProjection();
             if (view.rival.currentlyObserved && observedAt === null) {
                 observedAt = ticks;
+                checkpoint('rival-currently-observed');
+            }
+            // The first visible outskirts may be an empty tent. Continue the actual journey
+            // until a resident's own LOS cell is visible before testing live-actor projection.
+            if (view.rival.entities.some(entity => entity.kind === 'persona') && observedProjection === null) {
                 observedProjection = structuredClone(view.rival);
                 observedSave = shared.persist();
-                checkpoint('rival-currently-observed');
+                checkpoint('rival-resident-observed');
                 if (encounter && mission('group-1')?.status !== 'Returning')
                     command({ type: 'RecallExpedition', groupId: 'group-1' });
             }
@@ -165,7 +170,7 @@ export function runExplorationScenario(seed, { encounter = false } = {}) {
             if (!current) break;
             if (current.status === 'Stranded') throw new Error('A validated local trip stranded on seed ' + seed);
             if (current.status === 'Exploring') {
-                if (!encounter || observedAt !== null || nextGoal >= goals.length)
+                if (!encounter || observedProjection !== null || nextGoal >= goals.length)
                     command({ type: 'RecallExpedition', groupId: 'group-1' });
                 else command({ type: 'ExploreArea', groupId: 'group-1', target: goals[nextGoal++] });
             }
@@ -188,7 +193,8 @@ export function runExplorationScenario(seed, { encounter = false } = {}) {
         }
         if (encounter && world.config.seed === 7) {
             assert.ok(observedAt !== null, 'The reachable rival must be observed by actual exploration.');
-            assert.ok(observedProjection.entities.some(entity => entity.kind === 'persona'));
+            assert.ok(observedProjection?.entities.some(entity => entity.kind === 'persona'),
+                'Continue past the outskirts until an actual rival resident is visible.');
             assert.equal(shared.fjord.readProjection().rival.known, true);
             assert.equal(shared.fjord.readProjection().rival.currentlyObserved, false);
             assert.deepEqual(shared.fjord.readProjection().rival.entities, [], 'Mapped land is not live enemy intel.');

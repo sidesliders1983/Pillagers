@@ -529,6 +529,7 @@ export class FjordPlay {
             refresh();
         };
         desktopUI = new FjordInterface(this.shared, { select, refresh, notify: say,
+            home: () => controller.home(),
             commit: (commands, done) => action(async () => {
                 this.session.commandBatch(typeof commands === 'function' ? commands() : commands);
                 done();
@@ -652,7 +653,6 @@ export class FjordPlay {
         const controller = new RTSCameraController(camera, canvas, 'pan');
         const islandMap = new IslandMap(document.querySelector('#fjord-play')!, {
             focus: point => controller.focusAt(point),
-            home: () => controller.home(),
         });
         capturePresentation = () => this.shared.setPresentation({
             quality: document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',

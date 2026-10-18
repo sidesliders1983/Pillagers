@@ -4,7 +4,7 @@ This is an orientation surface for the existing Fjord scene. It sends no Simulat
 
 ## Owner decisions
 
-The owner's 18 October clarification supersedes the issue's original bottom-right persistent desktop proposal: **Map is an icon in the lower-left, collapsed by default, with show/hide controls.** A direct Home camera button sits beside it. On phone and compact touch tablets, Map opens a deliberate modal window with Close and Home actions; the normal Horizon shell remains in use. Desktop opens a small non-modal map above the lower-left controls. Layout changes close the map; its open state is transient UI state.
+The owner's 18 October clarifications supersede the issue's original bottom-right persistent desktop proposal and the first extra-row implementation: **Map is one icon-and-label item in the existing bottom navigation bar, collapsed by default. There is no additional icon row or standalone Home button.** Camera Home is **Settlement → View settlement**. On phone and compact touch tablets, Map opens a deliberate modal window with Close; the normal Horizon shell remains in use. Desktop opens a small non-modal map above the bar. Layout changes close the map; its open state is transient UI state.
 
 The map shows one numbered destination flag per active expedition group, never individual members. Traveling and Exploring flags use the group's ordered destination. Returning flags point to the settlement nucleus. Prepared, Returned and Stranded groups have no active destination flag. A player's own order can be shown in unknown terrain without granting knowledge of that terrain. Flags never reveal enemy identities or contents.
 
@@ -22,7 +22,7 @@ The geographic raster is cached for the current blueprint and reused during qual
 
 The map consumes only the player's public mission projection for flags. Group labels are written as SVG text, not interpolated HTML. A fixed raster's backing bytes and generation/update timings are reported separately from scene diagnostics. Restart/import replaces the map source; disposing the scene removes map controls, dialog, listeners and raster references. No map pixels or collapse preferences enter campaign saves.
 
-Keyboard users can open Map/Home from the ordinary tab order. On the map, arrows move a local cursor, Enter/Space focuses a known point, Home returns the camera and Escape closes. Mobile modal containment prevents touches reaching the scene; map keyboard events do not reach camera movement handlers. Controls have 44 CSS pixel targets and use the existing safe-area tokens.
+Keyboard users can reach Map and Settlement → View settlement from the ordinary tab order. On the map, arrows move a local cursor, Enter/Space focuses a known point and Escape closes. Mobile modal containment prevents touches reaching the scene; map keyboard events do not reach camera movement handlers. Controls have 44 CSS pixel targets and use the existing safe-area tokens.
 
 ## Review
 
