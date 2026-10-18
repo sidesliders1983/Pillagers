@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "canonicalHashesExact": 14,
+  "worldHashesExact": 14,
+  "longRunCpuExact": true,
+  "identityCheckedWinters": 100,
+  "queryReductionPercent": {
+    "minimum": 78.67734517484736,
+    "maximum": 79.6590320041469
+  }
+}

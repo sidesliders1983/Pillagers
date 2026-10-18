@@ -1,0 +1,92 @@
+{
+  "status": "PASS",
+  "recordedAt": "2026-10-18T08:48:09.521Z",
+  "node": "v24.19.0",
+  "baseRevision": "76f357f3409e8b485c17c3d4d629d1bc8bbbef1d",
+  "tests": {
+    "tests": 942,
+    "pass": 932,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 10,
+    "todo": 0
+  },
+  "skips": [
+    {
+      "test": "runtime export preserves all source clips and sampled bone motion",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "40 residents share source geometry but own independent skeletons and mixers",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "each LOD decodes with a rig, all source clips and decreasing triangle counts",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "optimized geometry preserves the animated silhouette within 5 mm",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "each LOD preserves all authored texture images unchanged",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "child proportions change head-to-height ratio and remain grounded through age changes",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "proportion changes remain stable under all clips and DNA updates preserve world placement",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "LOD2 preserves animated body bounds of LOD1 within 2 cm for children and adults",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "Meshy skin follows DNA at 20% with independent uniforms and shared source textures",
+      "reason": "Existing optional legacy Meshy runtime/LOD fixture assets are absent."
+    },
+    {
+      "test": "actual r3 neutral/female/Giant/compound/child frozen GLBs are portable",
+      "reason": "Existing opt-in R3 evidence test; RUN_R3_EVIDENCE is unset."
+    }
+  ],
+  "commands": {
+    "fullSuite": "node --test tests/*.test.mjs",
+    "build": "tsc --noEmit && vite build",
+    "characters": "node scripts/validate-characters.mjs --lab-previews"
+  },
+  "build": "PASS; existing >500kB bundle advisory retained.",
+  "characters": "Character validation passed (including explicit Lab preview audits; visual approval pending): 20 assets / 36 GLBs, 12 Golden Characters, 19 equipped modules, Idle/Walk/Run + World.",
+  "sourceHashesMatchMeasuredCandidate": true,
+  "syntaxChecked": [
+    "scripts/qa/benchmark-exploration-los.mjs",
+    "scripts/qa/check-exploration-browser.mjs",
+    "scripts/qa/check-exploration-core.mjs",
+    "scripts/qa/check-exploration-review.mjs",
+    "scripts/qa/exploration-browser.mjs",
+    "scripts/qa/exploration-integration.mjs",
+    "scripts/qa/exploration-replay.mjs",
+    "scripts/qa/exploration-review-server.mjs",
+    "scripts/qa/replay-exploration-without-renderer.mjs",
+    "tests/discovery-cache.test.mjs",
+    "tests/exploration-integration.test.mjs"
+  ],
+  "qaSourceHashes": {
+    "scripts/qa/benchmark-exploration-los.mjs": "0cf6ede38056e1a5beb70158868cc4f1ab444cc4d7729935f8ce72947aa1ad65",
+    "scripts/qa/check-exploration-browser.mjs": "aaae1d3090a15ddd0a5b966bf551521c8cdca82b961ba668544af06cacd28cc6",
+    "scripts/qa/check-exploration-core.mjs": "35a2c37b4a435a95e91e44903ce4b37f1b57eee199f5f8d21687fb92354e9815",
+    "scripts/qa/check-exploration-review.mjs": "a381fd3e1bed3ad904b52ab2ca36a9cf0ea5ac990fb059fbc35a4859f3c871b7",
+    "scripts/qa/exploration-browser.mjs": "f19a506fc02185968c75a85af9b7546f2cd24e83fdf396fd83f733b6cfbe4609",
+    "scripts/qa/exploration-integration.mjs": "7f9e2b81dce01cc3a20e3c8d168928fb9d20e90f7f789138c47c8f02f9f54e1b",
+    "scripts/qa/exploration-replay.mjs": "61000e96125c2bfe69ed544438ec21ab263359a65a81ac5d6eb7434ae3bd145d",
+    "scripts/qa/exploration-review-server.mjs": "b197e47be88c53d100b7102811b24c71c5472018917c9cb4e0e44251da500154",
+    "scripts/qa/replay-exploration-without-renderer.mjs": "2388de90e37401005ce01239b96f857d9825faaa7999160196ad7829591c7d08",
+    "tests/discovery-cache.test.mjs": "42357c1ef9b1688ef58d1f8b3be240672d84cb8bc9ecb606e8e401ae0b4c748f",
+    "tests/exploration-integration.test.mjs": "4e72e165a8699ef3170c23577349320efbb19fefde9b4c249f6fc517daf0f6d0"
+  },
+  "formatting": "No configured formatter; manual source review and git diff --check.",
+  "ci": "Consult the pull request checks for the exact final head; not asserted by this local record."
+}

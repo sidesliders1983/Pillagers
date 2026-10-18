@@ -57,7 +57,8 @@ function instrument(source) {
     source = source.replace(anchor,
         `        audit.bind({ session: this.session, shared: this.shared, campaign: this.campaign,
             motion, layer, models, world, controller, camera, renderer, scene, lighting,
-${fogStudyMode ? '            discoveryFog, rivalScene,\n' : ''}            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
+            discoveryFog, rivalScene,
+            campfireEffect, precipitationEffect, selectionLabels, productionLabels, refresh, setPlayback,
             settle: async () => { await actionWork; await sceneWork; },
             advanceTicks: async ticks => {
                 action(() => this.session.command({ type: 'AdvanceTicks', ticks }));

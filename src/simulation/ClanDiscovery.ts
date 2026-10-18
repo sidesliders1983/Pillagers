@@ -43,7 +43,24 @@ const decode = (hex: string) => Uint8Array.from(hex.match(/../g) ?? [], n => par
 const flag = (hex: string, index: number) =>
     (parseInt(hex.slice((index >> 3) * 2, (index >> 3) * 2 + 2), 16) & (1 << (index & 7))) !== 0;
 
-/** New physical campaigns opt in explicitly; old graph and domestic saves remain untouched. */
+const maximumStationaryViews = 8;
+const stationaryViews = new WeakMap<Landscape, Map<string, Uint16Array>>();
+
+/** LOS depends only on the immutable surface and exact observation parameters.
+ * Cache stationary cell indices, never a clan's knowledge or a moving party's observations. */
+function stationaryView(world: Landscape, grid: DiscoveryGrid, policy: DiscoveryPolicy,
+    observer: ClanObservation, radius: number) {
+    if (observer.kind === 'expedition' || !Object.isFrozen(world) ||
+        !Object.isFrozen(world.terrain) || !Object.isFrozen(world.terrain.bounds) ||
+        !Object.isFrozen(world.terrain.heights)) return undefined;
+    let entries = stationaryViews.get(world);
+    if (!entries) { entries = new Map(); stationaryViews.set(world, entries); }
+    const key = JSON.stringify([grid.columns, grid.rows, policy.cellSize, policy.eyeHeight,
+        radius, observer.x, observer.z]);
+    return { entries, key };
+}
+
+/** Explicit physical-world initialization; old graph and domestic saves remain untouched. */
 export function createClanDiscovery(world: Landscape, worldId: string, clanId: string,
     observations: readonly ClanObservation[], atTick: number,
     policy: DiscoveryPolicy = prototypeDiscoveryPolicy): ClanDiscovery {
@@ -75,6 +92,13 @@ export function commitClanObservation(input: ClanDiscovery, world: Landscape, wo
             observer.z < bounds.minZ || observer.z >= bounds.maxZ)
             throw new Error('Invalid discovery observer.');
         const radius = observer.kind === 'expedition' ? policy.expeditionRadius : policy.settlementRadius;
+        const cached = stationaryView(world, grid, policy, observer, radius);
+        const indices = cached?.entries.get(cached.key);
+        if (indices) {
+            for (const index of indices) visible[index >> 3] |= 1 << (index & 7);
+            continue;
+        }
+        const stationaryIndices: number[] | undefined = cached ? [] : undefined;
         const from = { x: observer.x, z: observer.z,
             y: Math.max(world.waterLevel, surface.surfaceHeightAt(observer.x, observer.z)) + policy.eyeHeight };
         const minCol = Math.max(0, Math.floor((observer.x - radius - bounds.minX) / policy.cellSize));
@@ -90,7 +114,13 @@ export function commitClanObservation(input: ClanDiscovery, world: Landscape, wo
                 if (!traceTerrainSightline(world, from, to).visible) continue;
                 const index = row * grid.columns + col;
                 visible[index >> 3] |= 1 << (index & 7);
+                stationaryIndices?.push(index);
             }
+        }
+        if (cached) {
+            if (cached.entries.size >= maximumStationaryViews)
+                cached.entries.delete(cached.entries.keys().next().value!);
+            cached.entries.set(cached.key, Uint16Array.from(stationaryIndices!));
         }
     }
     for (let i = 0; i < length; i++) explored[i] |= visible[i];

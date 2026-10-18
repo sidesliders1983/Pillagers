@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploration integration review · FjordSide</title>
+<style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #132025; color: #e5e8df; }
+    body { max-width: 1100px; margin: 32px auto; padding: 0 20px; line-height: 1.6; }
+    h1, h2 { font-family: Georgia, serif; font-weight: 500; }
+    a { color: #e4c88b; }
+    button { padding: 12px 16px; border: 1px solid #cbb782; border-radius: 5px;
+        background: #233338; color: inherit; font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 3px solid #e4c88b; outline-offset: 3px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 20px; }
+    figure { margin: 0 0 24px; }
+    img { display: block; width: 100%; height: auto; border: 1px solid #526269; }
+    figcaption, small { color: #b8c6c8; }
+    #status { min-height: 1.6em; }
+</style>
+<h1>Discovery, travel and a living rival</h1>
+<p>Review genuine exploration saves on the current 3D island. The same population and world replay exactly without a renderer. The stationary LOS cache lowers CPU observation cost; rendering performance still needs work.</p>
+<div class="actions">
+    <button data-scenario="fresh">Open unknown valley</button>
+    <button data-scenario="observed">Open first contact</button>
+    <button data-scenario="returned">Open mapped valley</button>
+</div>
+<p id="status" role="status"></p>
+<small>Each opens a paused campaign in a new tab. It can update the automatic resume checkpoint; export a valued campaign before QA. Close the Clan Book if it opens. This is the normal game build, without an audit bridge.</small>
+<h2>Try the boundaries</h2>
+<ol>
+    <li>In the unknown valley, pan, zoom and change quality. No enemy actors or identities should appear.</li>
+    <li>First contact shows only the currently observed edge of the real settlement. Use Change destination and Resume travel to continue exploring, or Return home to withdraw. Rival residents cannot open player management.</li>
+    <li>After return, terrain stays mapped while unseen rival actors disappear. The CPU population keeps advancing with the real campaign clock.</li>
+    <li>Save and reload mid-trip. The campaign should stay paused, retain the route and charge no second pack.</li>
+</ol>
+<p><strong>Open acceptance:</strong> physical Recon/Surveillance/Pillage (#150), actual iPhone/iPad Safari, dense encounters and owner daylight/night review. This is a QA checkpoint, not closure of #151 or epic #146.</p>
+<h2>Recorded scenes</h2>
+<div class="grid">
+    <figure><a href="fresh-1200-standard.jpg"><img src="fresh-1200-standard.jpg" alt="Unknown rival valley hidden by the discovery shroud"></a><figcaption>Unknown valley. Camera proximity does not reveal actors.</figcaption></figure>
+    <figure><a href="observed-1200-standard.jpg"><img src="observed-1200-standard.jpg" alt="First contact with the edge of the real rival settlement"></a><figcaption>First contact: seven visible rival entities, including two residents.</figcaption></figure>
+    <figure><a href="returned-1200-standard.jpg"><img src="returned-1200-standard.jpg" alt="Mapped valley after the explorers return"></a><figcaption>Withdrawal: mapped terrain, zero live rival instances.</figcaption></figure>
+    <figure><a href="observed-native-night-preview.jpg"><img src="observed-native-night-preview.jpg" alt="Native night lighting preview of first contact"></a><figcaption>Native night preview. Canonical time and knowledge are unchanged.</figcaption></figure>
+    <figure><a href="physical-autumn-standard.jpg"><img src="physical-autumn-standard.jpg" alt="Actual autumn rain in the player's settlement"></a><figcaption>Actual autumn rain, under the foreground simulation clock.</figcaption></figure>
+    <figure><a href="physical-winter-standard.jpg"><img src="physical-winter-standard.jpg" alt="Actual Mild winter snow with the discovery shroud active"></a><figcaption>Mild winter snow. Unknown territory stays hidden at Low and Standard.</figcaption></figure>
+</div>
+<p><a href="README.md">Full report and remaining gates</a> · <a href="candidate-core.json">Fourteen seeds and 100 Winters</a> · <a href="los-abba.json">Alternating CPU measurement</a> · <a href="browser-profiles.json">Rendering samples</a> · <a href="journey-390.jpg">390px journey</a></p>
+<script type="module">
+    const status = document.querySelector('#status');
+    for (const button of document.querySelectorAll('[data-scenario]')) {
+        button.addEventListener('click', async () => {
+            const tab = window.open('about:blank', '_blank');
+            if (!tab) {
+                status.textContent = 'Allow a new tab to open the review campaign.';
+                return;
+            }
+            tab.document.title = 'Preparing review campaign';
+            tab.document.body.textContent = 'Opening the review campaign…';
+            try {
+                const response = await fetch(button.dataset.scenario + '.json');
+                if (!response.ok) throw new Error('Could not read the review campaign.');
+                tab.sessionStorage.setItem('pillagers.fjord-play.active.v1', JSON.stringify(await response.json()));
+                tab.opener = null;
+                tab.location.replace('/fjord-play');
+                status.textContent = 'Opened a paused review campaign in a new tab.';
+            } catch (error) {
+                tab.close();
+                status.textContent = error.message || String(error);
+            }
+        });
+    }
+</script>
+</html>
