@@ -28,6 +28,19 @@ const report = { baseline: 'ce9b57c660c8d034abb5c7761da248ccef526304', sourceHas
     cases: [], profiles: [], cycles: [], errors: [] };
 const requested = process.argv.find(arg => arg.startsWith('--seed='))?.split('=')[1];
 const seeds = requested ? [Number(requested)] : [17, 32];
+// Keep the review browser closed while other local validation runs, so an idle
+// golden scene cannot compete with the normal-build startup or GPU measurement.
+if (process.env.QA_PROFILE_READY) {
+    console.log(JSON.stringify({ status: 'waiting-for-idle-profile-gate' }));
+    const deadline = Date.now() + 1800000;
+    for (;;) {
+        try { await access(process.env.QA_PROFILE_READY); break; }
+        catch {
+            if (Date.now() > deadline) throw Error('Idle profile gate timed out');
+            await new Promise(resolve => setTimeout(resolve, 2500));
+        }
+    }
+}
 const browser = await chromium.launch({ channel: process.env.QA_BROWSER || 'msedge', headless: true });
 try {
     for (const seed of seeds) {
@@ -99,17 +112,6 @@ try {
             await capture('village-summer-low', summerCamera);
             await page.locator('#fjord-quality').selectOption('standard', { force: true });
             if (process.argv.includes('--profile')) {
-                if (process.env.QA_PROFILE_READY) {
-                    console.log(JSON.stringify({ seed, side, status: 'waiting-for-idle-profile-gate' }));
-                    const deadline = Date.now() + 1800000;
-                    for (;;) {
-                        try { await access(process.env.QA_PROFILE_READY); break; }
-                        catch {
-                            if (Date.now() > deadline) throw Error('Idle profile gate timed out');
-                            await new Promise(resolve => setTimeout(resolve, 2500));
-                        }
-                    }
-                }
                 await page.evaluate(camera => window.__fjordAudit.references.controller.setView(camera), summerCamera);
                 const before = await page.evaluate(() => window.__fjordAudit.references.dressing.inspect());
                 await page.evaluate(() => {

@@ -7,7 +7,7 @@ and [#180](https://github.com/sidesliders1983/Pillagers/issues/180).
 
 New `/fjord-play` campaigns use `island-pool-v2`. Both curated island geographies keep their
 exact terrain, coastline, zoning, foundations, campfire, berth and nature asset quotas.
-The recipe redistributes a bounded part of the existing 102-tree budget into up to four
+The recipe redistributes a bounded part of the existing 102-tree budget into up to five
 loose pockets of three trees around each settlement, with deliberate open gaps. Mature
 conifers, smaller conifers and deciduous trees share those pockets. Wider forests retain
 as much of the original distribution as fits the new reservations. A bounded habitat

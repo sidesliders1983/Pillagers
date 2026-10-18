@@ -13,6 +13,7 @@ export interface VillageNatureContext {
     foundations: readonly Bounds2[];
     routes: readonly (readonly Point2[])[];
 }
+const pocketsPerSite = 5;
 const isTree = (asset: string) => /conifer|deciduous/.test(asset);
 const distanceToBox = (point: Point2, box: Bounds2) => Math.hypot(
     Math.max(box.minX - point.x, point.x - box.maxX, 0),
@@ -66,12 +67,12 @@ export function planVillageNature(world: Landscape, context: VillageNatureContex
     const roles = ['kaykit-conifer-a', 'kaykit-conifer-c', 'kaykit-deciduous-a',
         'kaykit-conifer-b', 'kaykit-conifer-c', 'kaykit-deciduous-a',
         'kaykit-conifer-a', 'kaykit-conifer-b', 'kaykit-conifer-c'] as const;
-    // Four loose pockets per site leave broad gaps. They follow geographical reservations,
+    // Five loose pockets per site leave broad gaps. They follow geographical reservations,
     // not current household/occupation facts, so discovery never leaks a rival's private state.
     for (const site of context.sites) {
         const startAngle = random() * Math.PI * 2;
-        for (let pocket = 0; pocket < 4; pocket++) {
-            const angle = startAngle + pocket * Math.PI * 2 / 4;
+        for (let pocket = 0; pocket < pocketsPerSite; pocket++) {
+            const angle = startAngle + pocket * Math.PI * 2 / pocketsPerSite;
             let anchor: Point2 | undefined;
             for (let attempt = 0; attempt < 48; attempt++) {
                 const direction = angle + (random() - .5) * 1.1;

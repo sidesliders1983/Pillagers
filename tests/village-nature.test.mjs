@@ -45,7 +45,7 @@ test('v2 groups trees near each village without raising asset quotas or changing
         assert.deepEqual(byAsset(world.placementPlan), byAsset(old.placementPlan));
         const local = w => w.placementPlan.filter(p => tree(p) &&
             Math.hypot(p.x - plan.center.x, p.z - plan.center.z) < 65).length;
-        assert.ok(local(world) >= local(old) + 5, 'A visible village-edge improvement on both geographies');
+        assert.ok(local(world) >= local(old) + 5, 'At least five additional trees within 65 m: ' + local(old) + ' → ' + local(world));
         const surface = createBlueprintSurface(world);
         for (const p of world.placementPlan.filter(tree)) {
             assert.ok(p.y > world.waterLevel + .4);
