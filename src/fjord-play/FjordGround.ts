@@ -14,10 +14,11 @@ export interface FjordGround {
         points: Point2[];
     }[];
 }
-const cached = new WeakMap<WorldBlueprint, {
+const maxCachedSettlements = 8;
+const cached = new WeakMap<WorldBlueprint, Map<string, {
     signature: string;
     ground: FjordGround;
-}>();
+}>>();
 /** Presentation paths use the authoritative terrain and the existing walking thresholds.
  * They never alter geography, navigation, household assignments or simulation rules. */
 export function projectFjordGround(world: WorldBlueprint, entities: readonly FjordEntity[],
@@ -25,7 +26,8 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
     const parcels = entities.filter(e => e.plot);
     const plots = parcels.filter(e => e.kind === 'building').map(e => ({ id: e.id, plot: e.plot! }));
     const signature = JSON.stringify([campfire, parcels.map(e => [e.selectionKey, e.plot])]);
-    const known = cached.get(world);
+    // Home and rival projections alternate on the same island. Each nucleus keeps its latest layout.
+    const known = cached.get(world)?.get(campfire.id);
     if (known?.signature === signature)
         return structuredClone(known.ground);
     const ground: FjordGround = { plots, paths: [] };
@@ -104,7 +106,11 @@ export function projectFjordGround(world: WorldBlueprint, entities: readonly Fjo
         }
     }
     // Each consumer owns its presentation result; never expose the shared cache.
-    cached.set(world, { signature, ground: structuredClone(ground) });
+    const settlements = cached.get(world) ?? new Map();
+    if (!settlements.has(campfire.id) && settlements.size >= maxCachedSettlements)
+        settlements.delete(settlements.keys().next().value!);
+    settlements.set(campfire.id, { signature, ground: structuredClone(ground) });
+    cached.set(world, settlements);
     return ground;
 }
 /** Soil appears only at permanent parcels and their connecting paths. */

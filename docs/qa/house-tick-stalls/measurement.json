@@ -1,0 +1,699 @@
+{
+  "recordedAt": "2026-10-18T09:43:07.009Z",
+  "baseCommit": "6e26ff6fdcf259d220bf6662c4fbd827e9751a29",
+  "sourceByteHashes": {
+    "control": "7233773936157c20ea1b31cdf0b7ad3277a0177a649e7d564c6e21251c28856f",
+    "candidate": "1caff9c145ad5725c98d6dd5b67336e94837651939c99d76778260a88854816a"
+  },
+  "fixtures": [
+    {
+      "seed": 17,
+      "terrainSeed": 7,
+      "phases": {
+        "tents": {
+          "control": {
+            "count": 3,
+            "p50": 3.159699999998338,
+            "p95": 5.401799999999639,
+            "max": 5.401799999999639
+          },
+          "candidate": {
+            "count": 3,
+            "p50": 2.9288000000015018,
+            "p95": 5.095400000000154,
+            "max": 5.095400000000154
+          }
+        },
+        "1-house": {
+          "control": {
+            "count": 8,
+            "p50": 229.70709999999963,
+            "p95": 274.6926999999996,
+            "max": 274.6926999999996
+          },
+          "candidate": {
+            "count": 8,
+            "p50": 3.026499999999942,
+            "p95": 3.354700000001685,
+            "max": 3.354700000001685
+          }
+        },
+        "2-house": {
+          "control": {
+            "count": 8,
+            "p50": 228.36610000000292,
+            "p95": 243.04320000000007,
+            "max": 243.04320000000007
+          },
+          "candidate": {
+            "count": 8,
+            "p50": 3.1327999999994063,
+            "p95": 6.43710000000101,
+            "max": 6.43710000000101
+          }
+        }
+      }
+    },
+    {
+      "seed": 32,
+      "terrainSeed": 18,
+      "phases": {
+        "tents": {
+          "control": {
+            "count": 3,
+            "p50": 2.2643000000025495,
+            "p95": 3.096399999994901,
+            "max": 3.096399999994901
+          },
+          "candidate": {
+            "count": 3,
+            "p50": 2.610000000000582,
+            "p95": 7.95089999999982,
+            "max": 7.95089999999982
+          }
+        },
+        "1-house": {
+          "control": {
+            "count": 8,
+            "p50": 260.8943999999974,
+            "p95": 272.67849999999453,
+            "max": 272.67849999999453
+          },
+          "candidate": {
+            "count": 8,
+            "p50": 1.9661999999989348,
+            "p95": 3.545399999999063,
+            "max": 3.545399999999063
+          }
+        },
+        "2-house": {
+          "control": {
+            "count": 8,
+            "p50": 268.21650000000227,
+            "p95": 296.5223000000042,
+            "max": 296.5223000000042
+          },
+          "candidate": {
+            "count": 8,
+            "p50": 2.5988999999972293,
+            "p95": 2.715700000000652,
+            "max": 2.715700000000652
+          }
+        }
+      }
+    }
+  ],
+  "browser": {
+    "control": {
+      "renderer": {
+        "render": {
+          "frame": 212,
+          "calls": 102,
+          "triangles": 2450807,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 111,
+          "textures": 64
+        },
+        "programs": 32,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "physicalIOS": false,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "touch": true
+      },
+      "errors": [],
+      "phases": [
+        {
+          "phase": "tents",
+          "projection": {
+            "count": 20,
+            "total": 25.000000001862645,
+            "mean": 1.2500000000931322,
+            "min": 0.6999999992549419,
+            "max": 4.200000001117587,
+            "p50": 0.9,
+            "p95": 2.6,
+            "p99": 4.2,
+            "over33": 0,
+            "over50": 0
+          },
+          "frames": {
+            "count": 165,
+            "total": 9926.599999999999,
+            "mean": 60.16121212121211,
+            "min": 49.700000000004366,
+            "max": 83.39999999999418,
+            "p50": 66.7,
+            "p95": 66.9,
+            "p99": 83.2,
+            "over33": 165,
+            "over50": 128
+          },
+          "longTasks": {
+            "count": 0,
+            "total": 0,
+            "mean": null,
+            "min": null,
+            "max": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "over33": 0,
+            "over50": 0
+          },
+          "durationMs": 10006.800000000745
+        },
+        {
+          "phase": "one-house",
+          "projection": {
+            "count": 20,
+            "total": 4369.60000000149,
+            "mean": 218.4800000000745,
+            "min": 207.69999999925494,
+            "max": 241.7999999988824,
+            "p50": 217.6,
+            "p95": 230.9,
+            "p99": 241.8,
+            "over33": 20,
+            "over50": 20
+          },
+          "frames": {
+            "count": 161,
+            "total": 9926.5,
+            "mean": 61.65527950310559,
+            "min": 16.400000000001455,
+            "max": 266.8999999999942,
+            "p50": 50,
+            "p95": 233.5,
+            "p99": 233.8,
+            "over33": 100,
+            "over50": 78
+          },
+          "longTasks": {
+            "count": 19,
+            "total": 4478,
+            "mean": 235.68421052631578,
+            "min": 224,
+            "max": 260,
+            "p50": 233,
+            "p95": 260,
+            "p99": 260,
+            "over33": 19,
+            "over50": 19
+          },
+          "durationMs": 10191.199999999255
+        }
+      ]
+    },
+    "candidate": {
+      "renderer": {
+        "render": {
+          "frame": 213,
+          "calls": 102,
+          "triangles": 2450807,
+          "points": 0,
+          "lines": 0
+        },
+        "memory": {
+          "geometries": 111,
+          "textures": 64
+        },
+        "programs": 32,
+        "width": 390,
+        "height": 844,
+        "pixelRatio": 1,
+        "gpu": "ANGLE (Intel, Intel(R) HD Graphics 630 (0x0000591B) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "timerQuery": true,
+        "shadowEnabled": true,
+        "shadowMaps": [
+          [
+            1024,
+            1024
+          ]
+        ]
+      },
+      "physicalIOS": false,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "touch": true
+      },
+      "errors": [],
+      "phases": [
+        {
+          "phase": "tents",
+          "projection": {
+            "count": 20,
+            "total": 28.30000000447035,
+            "mean": 1.4150000002235175,
+            "min": 0.6999999992549419,
+            "max": 3.200000001117587,
+            "p50": 1,
+            "p95": 2.3,
+            "p99": 3.2,
+            "over33": 0,
+            "over50": 0
+          },
+          "frames": {
+            "count": 135,
+            "total": 9926.599999999999,
+            "mean": 73.53037037037036,
+            "min": 50,
+            "max": 150.09999999999854,
+            "p50": 66.8,
+            "p95": 83.5,
+            "p99": 133.5,
+            "over33": 135,
+            "over50": 134
+          },
+          "longTasks": {
+            "count": 0,
+            "total": 0,
+            "mean": null,
+            "min": null,
+            "max": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "over33": 0,
+            "over50": 0
+          },
+          "durationMs": 10014.900000000373
+        },
+        {
+          "phase": "one-house",
+          "projection": {
+            "count": 20,
+            "total": 29.700000001117587,
+            "mean": 1.4850000000558794,
+            "min": 0.7000000011175871,
+            "max": 3.099999999627471,
+            "p50": 1.2,
+            "p95": 2.6,
+            "p99": 3.1,
+            "over33": 0,
+            "over50": 0
+          },
+          "frames": {
+            "count": 132,
+            "total": 9943.300000000003,
+            "mean": 75.32803030303033,
+            "min": 50.10000000000582,
+            "max": 100.19999999999709,
+            "p50": 66.9,
+            "p95": 83.5,
+            "p99": 100.2,
+            "over33": 132,
+            "over50": 132
+          },
+          "longTasks": {
+            "count": 0,
+            "total": 0,
+            "mean": null,
+            "min": null,
+            "max": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "over33": 0,
+            "over50": 0
+          },
+          "durationMs": 10018.099999999627
+        }
+      ]
+    }
+  },
+  "comparedSnapshots": 44,
+  "allSnapshotsIdentical": true,
+  "equality": [
+    {
+      "seed": 17,
+      "step": 0,
+      "phase": "tents",
+      "coreSha256": "ec63ceb9c962367f83a6fe334173fa41c665b91a1039719886c559c360e94984",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "b87bb35adddaed1b848eec15946658fccd2afa0631412222fdcacb9c7544bdcc"
+    },
+    {
+      "seed": 17,
+      "step": 1,
+      "phase": "tents",
+      "coreSha256": "c542ff01723131bdd9a05ee1df62905557abbf4cc20ecb6458c19d747b74e377",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "b87bb35adddaed1b848eec15946658fccd2afa0631412222fdcacb9c7544bdcc"
+    },
+    {
+      "seed": 17,
+      "step": 2,
+      "phase": "tents",
+      "coreSha256": "3f8f642a03b3cbe0aa1f1f6307856683907e08a519b3f262cf21d78ca99febac",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "b87bb35adddaed1b848eec15946658fccd2afa0631412222fdcacb9c7544bdcc"
+    },
+    {
+      "seed": 17,
+      "step": 3,
+      "phase": "salvage-longship",
+      "coreSha256": "f7c08a6530daa74b0b5a8bb9166e92b0850777e587910f05468b9cfc3daca618",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "f6e958bc29f1beb808ae6232fe85fe8702ed8a3c53031060161b370c673eefb9"
+    },
+    {
+      "seed": 17,
+      "step": 4,
+      "phase": "build-1",
+      "coreSha256": "3aff292c78a30b670f541a28b11f168285c7456c9b73588e998df92f6761fbf1",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 5,
+      "phase": "1-house",
+      "coreSha256": "bd4ea033aa2059609e51f4fff8618440c15fbef6bc24c0298ef574d0123d06a9",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 6,
+      "phase": "1-house",
+      "coreSha256": "a13f2446de846b1acaba32cf6037417d2acc2174915a5b10a1c34ccd12729356",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 7,
+      "phase": "1-house",
+      "coreSha256": "6b6c7ad4e3c0fcb44b2ec087cce7daf9fa0981737ce4c3ebe05ceb77d3b60b83",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 8,
+      "phase": "1-house",
+      "coreSha256": "42ce072953f75d350753e9e5524612a9724b70121507bb548be29e0bec4a29e8",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 9,
+      "phase": "1-house",
+      "coreSha256": "89a1d9143b575d702e027bbd93ac1a7696d28fd787b5e1febcb80dd0d27ff21c",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 10,
+      "phase": "1-house",
+      "coreSha256": "e310b6efd7a42ae8eb4ecb547dc98189deacc2b42d1ae98ca1e036a51e09147a",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 11,
+      "phase": "1-house",
+      "coreSha256": "a2b173d3b28ca58e43ead2c4dd730c1a0790845aaa73f8b05d710d86cfd074a5",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 12,
+      "phase": "1-house",
+      "coreSha256": "6395c840a361e724dc622cf20ed308943dec6d32168e9b576c15104980382154",
+      "groundSha256": "63433ccf8fb4063f46eebd77f2e363242efebb6f57cad7c9886d840d11078d25",
+      "layoutSha256": "4c1074e1abf22ed24e20e6b2d6922476addfa3edd07329e0dc9685c755ca1af6"
+    },
+    {
+      "seed": 17,
+      "step": 13,
+      "phase": "build-2",
+      "coreSha256": "a7f091cfce18072445945497fe52767f37cfe654557e750d8d6e001fb269abc7",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 14,
+      "phase": "2-house",
+      "coreSha256": "e4c3e7cccfeb9394d773e7e83b22c6adef76635ac6207e0035fb5d9f4ff871ed",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 15,
+      "phase": "2-house",
+      "coreSha256": "13b29cfb335fa2b98ea8e88186e5948f16b44139194e6e56a7dbb42af3acb654",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 16,
+      "phase": "2-house",
+      "coreSha256": "0c7a3660e0fec40c51fd712f395b96dfe6a385ae72d142eb6ab74469aecd27c0",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 17,
+      "phase": "2-house",
+      "coreSha256": "ff826f642ce3abf928de10a97487c9f446f3336d4bec7d8e40f050dc339e269f",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 18,
+      "phase": "2-house",
+      "coreSha256": "d84c928f4e7e744a1f63682dde5ca6e7974c31296585788a74d5ffb844234e21",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 19,
+      "phase": "2-house",
+      "coreSha256": "e721835d4f6dbac529884213a581e39063708ef2cc974d828d739cf6d0d4a6f9",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 20,
+      "phase": "2-house",
+      "coreSha256": "3e5901c8dd66895b756d2b9d814e4fe61e5923f84be0a74e81e44ba4bba17c8f",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 17,
+      "step": 21,
+      "phase": "2-house",
+      "coreSha256": "81b193d3f880e78e7cd501ece62b5cff7cf6045c1fbdff3cfef6ac0f178bf7cb",
+      "groundSha256": "56c5324826153333251d3612d15d7efdf34cfe870f7c228411207e3ec47c9a5b",
+      "layoutSha256": "fb4b66762e8142c688294f7333ce0ec04cba88d0840d683bc51f034ae17d64d1"
+    },
+    {
+      "seed": 32,
+      "step": 0,
+      "phase": "tents",
+      "coreSha256": "50e193113bbdff4b4dc522f7fd85c26a0e50dca4b0c8cc7de89137c126bec8b9",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "bd287b1f8ba8503c1ebf51780ee50eb71db9fca06ee22db0e68010457b0a0c88"
+    },
+    {
+      "seed": 32,
+      "step": 1,
+      "phase": "tents",
+      "coreSha256": "154b0719e3a588fc153cee8600b4599c5e031c002c4f1037bf55a1c60790d959",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "bd287b1f8ba8503c1ebf51780ee50eb71db9fca06ee22db0e68010457b0a0c88"
+    },
+    {
+      "seed": 32,
+      "step": 2,
+      "phase": "tents",
+      "coreSha256": "9a63226066f438881dcdc53e78100a0cd7b3753a88db2ad2e2d1badf14d22a4d",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "bd287b1f8ba8503c1ebf51780ee50eb71db9fca06ee22db0e68010457b0a0c88"
+    },
+    {
+      "seed": 32,
+      "step": 3,
+      "phase": "salvage-longship",
+      "coreSha256": "67cfa48d4279fe26f587b9b2adfd33b9ee873cbc4aaf3f0afba87ecc26d69dba",
+      "groundSha256": "87bba35419990e5b017e791be97397cbdbe8edd1c7a4bd87303adaee85370e9e",
+      "layoutSha256": "59d5c080527f1567f8166c192335a9275be939a3011a415fe6657f98e57b5768"
+    },
+    {
+      "seed": 32,
+      "step": 4,
+      "phase": "build-1",
+      "coreSha256": "b82ac050846ec1295f060e380a978dba5cecd5bb4f2b37b093fa5dbdc2b584cb",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 5,
+      "phase": "1-house",
+      "coreSha256": "ba989395eec6964f4c1d48f8e172150b1a8f5d1acd70ce59c2f36bf0b08d36d6",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 6,
+      "phase": "1-house",
+      "coreSha256": "fcfc290a076e93f2a7e9636e9b12fd2eefb8b316a98b3576e1440be0318d72bd",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 7,
+      "phase": "1-house",
+      "coreSha256": "b957efc70455395a4fd33d091bd5aaa1701f7ea37bc9c27a691ee5ad14de40ea",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 8,
+      "phase": "1-house",
+      "coreSha256": "c603fc088017878eea170748067de3133e67a694a413000778071798b1f23010",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 9,
+      "phase": "1-house",
+      "coreSha256": "cf7d0b30249598c1f123014c94e556c0f255a4e9f2642f573f4f5897430e4623",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 10,
+      "phase": "1-house",
+      "coreSha256": "ca0254a14fa4dcb9cef0eb4a006ad529eb5f8502ea290a3508618f2ff0fb93d0",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 11,
+      "phase": "1-house",
+      "coreSha256": "354390224adf48752e08174880d6248ffa4d9f99810759b6b4ba773f49433ae9",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 12,
+      "phase": "1-house",
+      "coreSha256": "b1d2d233c8bf5860a9e01da6516ba6d1e367f02e594cf9573a3ac005bb99080b",
+      "groundSha256": "25ba4267a65875f15cee87d9963c288ac111d01343a2fa9b69fe0abac4cb33b7",
+      "layoutSha256": "c44b7f178f2f16acc59a9e72330dd3c3ce47c389c3aa29fe22991724ceb00c7d"
+    },
+    {
+      "seed": 32,
+      "step": 13,
+      "phase": "build-2",
+      "coreSha256": "226d086f2f7f69f8601fb2f463bd86b886da9de5d9e2bc486c6b191098cfe1bd",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 14,
+      "phase": "2-house",
+      "coreSha256": "b0a4100acd8995fc5c854b16a95ddf99f26659822cfc16843317c72a78ac4116",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 15,
+      "phase": "2-house",
+      "coreSha256": "cbe9b29e6907fd694a8bbb698d28fb96e18cfdc9b9bbd9fb8991822e949b37f1",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 16,
+      "phase": "2-house",
+      "coreSha256": "e938b5a11ec19b6a1bfed71746528ba81b3e3f7d4148bc2beef7474284b12546",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 17,
+      "phase": "2-house",
+      "coreSha256": "83b112b3f0139c463606638f91bcfab28844af541b8e8a62f4e26195c6e244ef",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 18,
+      "phase": "2-house",
+      "coreSha256": "9c66adb65a9c7a4e8f6c0579ffa27fd1818f5c24cb228aa556baed7f480636da",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 19,
+      "phase": "2-house",
+      "coreSha256": "97c72200cbb9341ad05ad69295d29fe9c62f29f7e8f3c156929a38425194e38b",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 20,
+      "phase": "2-house",
+      "coreSha256": "1f140c480513a83c21bf033131bea930d140a76c63d955faeeefb8b1988d8ee1",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    },
+    {
+      "seed": 32,
+      "step": 21,
+      "phase": "2-house",
+      "coreSha256": "671f19b7a357f8aac2f4c929db07745315d44d5eb7a9c980e77dcf32727709a6",
+      "groundSha256": "160f9cca7ce92fd5770da80e5aac842df235d0d21f547f5f7f81db3dedc782a0",
+      "layoutSha256": "4eb797ea9135611dbc807c8f27f3108aa5d4f8e5fa94a501a7a8b3d89e97daee"
+    }
+  ],
+  "limits": "Paired local CPU measurements and instrumented native desktop Edge. Touch emulation is not physical iOS. Initial construction/path generation remains real work. No overall GPU/FPS improvement is claimed."
+}
