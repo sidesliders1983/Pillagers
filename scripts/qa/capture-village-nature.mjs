@@ -17,7 +17,7 @@ await mkdir(output, { recursive: true });
 const sourceFiles = ['src/fjord-play/VillageNature.ts', 'src/fjord-play/CampaignIsland.ts',
     'src/world/NatureVariation.ts', 'src/world/SeasonTint.ts', 'src/world/VillageNatureModels.ts', 'src/world/KayKitNature.ts', 'src/world/NatureWind.ts',
     'src/fjord-play/SettlementDressing.ts', 'src/fjord-play/SettlementDressingLayer.ts',
-    'src/world/WorldFactory.ts', 'src/world-generation/PlanNature.ts',
+    'src/world/WorldFactory.ts', 'src/world/BuildingPlot.ts', 'src/world-generation/PlanNature.ts',
     'src/fjord-play/FjordCampaign.ts', 'src/play/SharedSettlement.ts',
     'src/world-generation/GenerationTask.ts', 'src/fjord-play/IslandLoading.ts',
     'src/fjord-play/FjordPlay.ts', 'src/play/SettlementBrowser.ts'];
@@ -159,9 +159,15 @@ try {
                 });
                 assert.equal(metrics.dressing.planBuilds, before.planBuilds);
                 assert.equal(metrics.dressing.batchBuilds, before.batchBuilds);
-                report.profiles.push({ seed, side, ...metrics });
-                console.log(JSON.stringify({ seed, side, cpuP95: metrics.timings.frames.p95,
+                report.profiles.push({ seed, side, warmTickCommands: 12, ...metrics });
+                console.log(JSON.stringify({ seed, side, frameIntervalP95: metrics.timings.frames.p95,
                     gpuP95: metrics.timings.gpu.p95, planRebuilds: 0 }));
+            }
+            const priorProfile = replay?.profiles.find(profile => profile.seed === seed && profile.side === side);
+            if (priorProfile && !process.argv.includes('--profile')) {
+                // Replay the identical Core command trace without rerunning an unrelated GPU profile.
+                for (let tick = 0; tick < (priorProfile.warmTickCommands ?? 12); tick++)
+                    await page.evaluate(() => window.__fjordAudit.references.advanceTicks(1));
             }
             const cycles = [];
             for (let cycle = 0; cycle < 10; cycle++) {

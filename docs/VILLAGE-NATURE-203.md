@@ -67,6 +67,8 @@ Local decoration retains the existing Low limit of 40 solid props / 160 cover in
 and Standard limit of 64 / 320. Eleven shared source families bound it to eleven color
 batches plus the existing five Standard prop shadow batches. Cover casts no native shadows.
 Instance colors add one small per-instance attribute, not material/texture variants.
+Plot clearing compacts those colours together with matrices and source anchors, so any
+removed instance cannot reassign another tree’s tint.
 
 Run `pnpm build`, `pnpm validate:characters`, `pnpm test` and `git diff --check`. The project
 has no formatter; follow the existing four-space style and manually inspect changed code.

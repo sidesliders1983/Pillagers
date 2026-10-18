@@ -64,11 +64,13 @@ export function clearBuildingPlotNature(root: Object3D, plot: BuildingPlot) {
             kept.forEach((source,index) => {
                 mesh.getMatrixAt(source,instance);
                 mesh.setMatrixAt(index,instance);
+                if (mesh.instanceColor) mesh.instanceColor.copyAt(index, mesh.instanceColor, source);
             });
             if (mesh.userData.sourceAnchors)
                 mesh.userData.sourceAnchors = kept.map(index => mesh.userData.sourceAnchors[index]);
             mesh.count = kept.length;
             mesh.instanceMatrix.needsUpdate = true;
+            if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
             mesh.computeBoundingBox();
             mesh.computeBoundingSphere();
         }

@@ -11,8 +11,9 @@ const { createBlueprintSurface } = load('../src/world-generation/TerrainQueries.
 const { natureNavigation } = load('../src/world-generation/PlanNature.ts');
 const { createNatureFromPlan } = load('../src/world/KayKitNature.ts');
 const { createVillageNatureResolver } = load('../src/world/VillageNatureModels.ts');
+const { clearBuildingPlotNature } = load('../src/world/BuildingPlot.ts');
 const { NatureWind } = load('../src/world/NatureWind.ts');
-const { Box3, BoxGeometry, Group, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, Vector3 } =
+const { Box3, BoxGeometry, Color, Group, InstancedMesh, Matrix4, Mesh, MeshStandardMaterial, Vector3 } =
     createRequire(import.meta.url)('three');
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const tree = p => /conifer|deciduous/.test(p.assetId);
@@ -184,4 +185,32 @@ test('v2 birch/sapling reuse registered models within canonical role extents and
         ('kaykit-conifer-c'), fallback);
     assert.deepEqual(source.scale.toArray(), [1, 1, 1]);
     geometry.dispose(); material.dispose();
+});
+
+
+test('plot compaction keeps per-tree colours aligned with matrices and stable source anchors', () => {
+    const geometry = new BoxGeometry(1, 2, 1), material = new MeshStandardMaterial();
+    const root = new Group(), instances = new InstancedMesh(geometry, material, 3);
+    instances.name = 'kaykit-conifer-a';
+    instances.userData.sourceAnchors = [0, 10, 20].map(x => ({ x, z: 0 }));
+    for (const [index, x] of [0, 10, 20].entries()) {
+        instances.setMatrixAt(index, new Matrix4().makeTranslation(x, 1, 0));
+        instances.setColorAt(index, new Color([0xff0000, 0x00ff00, 0x0000ff][index]));
+    }
+    root.add(instances);
+    const result = clearBuildingPlotNature(root, { x: 0, z: 0, halfWidth: 2,
+        halfDepth: 2, futureAsset: 'hut' });
+    assert.equal(result.removed, 1);
+    assert.equal(instances.count, 2);
+    assert.deepEqual(instances.userData.sourceAnchors, [{ x: 10, z: 0 }, { x: 20, z: 0 }]);
+    assert.deepEqual(Array.from(instances.instanceColor.array.slice(0, 6)), [0, 1, 0, 0, 0, 1]);
+    const matrix = new Matrix4();
+    instances.getMatrixAt(0, matrix);
+    assert.equal(matrix.elements[12], 10);
+    instances.getMatrixAt(1, matrix);
+    assert.equal(matrix.elements[12], 20);
+    const retained = Array.from(instances.instanceColor.array.slice(0, 6));
+    clearBuildingPlotNature(root, { x: 0, z: 0, halfWidth: 2, halfDepth: 2, futureAsset: 'hut' });
+    assert.deepEqual(Array.from(instances.instanceColor.array.slice(0, 6)), retained);
+    instances.dispose(); geometry.dispose(); material.dispose();
 });
