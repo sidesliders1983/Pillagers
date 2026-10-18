@@ -79,13 +79,14 @@ export function inspectRivalSettlement(state: SimulationState, world: WorldBluep
     assertIslandClanWorld(state, world, state.discovery.worldId);
     const knowledge = inspectClanDiscovery(state.discovery, state.clan.id), center = world.rivalSite!.center;
     const visibility = discoveryAt(knowledge, center.x, center.z);
-    if (visibility === 'unknown') return empty;
-    const site = { id: link.siteId, center: { ...center } };
-    if (visibility !== 'visible') return { ...empty, known: true, site };
+    const site = visibility === 'unknown' ? undefined : { id: link.siteId, center: { ...center } };
     const target = state.world!.targetClans[link.clanId];
     const projection = prepared ?? projectRivalSettlement(target, world);
     const visible = projection.entities.filter(entity => entity.transform &&
         discoveryAt(knowledge, entity.transform.x, entity.transform.z) === 'visible');
+    // Each actor has its own LOS cell. An unseen centre must not suppress observed outskirts.
+    if (!visible.length && visibility === 'unknown') return empty;
+    if (!visible.length && visibility !== 'visible') return { ...empty, known: true, site };
     const visibleBuildings = new Set(visible.filter(entity => entity.kind === 'building').map(entity => entity.id));
     const visibleConnections = new Set(visible.filter(entity => entity.kind === 'building' || entity.kind === 'campfire').map(entity => entity.id));
     const entities = visible.map(entity => {

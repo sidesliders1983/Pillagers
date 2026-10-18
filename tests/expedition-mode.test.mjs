@@ -21,6 +21,63 @@ function campaign(members = ['founder-1', 'founder-2', 'founder-3'], landscape =
 const start = { type: 'StartExpedition', groupId: 'group-1' };
 const goal = { type: 'ExploreArea', groupId: 'group-1', target: { x: 216, z: 64 } };
 
+test('new expeditions take diagonal routes at the same speed and retain them through redirect, recall and save/load', () => {
+    let state = core.applyCommand(campaign(['founder-1']), start, context);
+    state = core.applyCommand(state, { ...goal, target: { x: 32, z: 80 } }, context);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 8 }, context);
+    const position = spatial.spatialMemberPosition(state.world.spatial.missions['explore-1'], 'founder-1');
+    assert.ok(position.x > 16 && position.z > 64, 'An open diagonal target must advance in both axes');
+    assert.ok(Math.abs(Math.hypot(position.x - 16, position.z - 64) - 16) < 1e-8,
+        'Diagonal travel still covers two metres per tick');
+    state = core.applyCommand(state, { ...goal, target: { x: 48, z: 96 } }, context);
+    const saved = core.reconstructState(core.serializeState(state));
+    spatial.assertSpatialWorld(saved, context);
+    const returnHome = initial => core.applyCommand(core.applyCommand(initial,
+        { type: 'RecallExpedition', groupId: 'group-1' }, context), { type: 'AdvanceTicks', ticks: 20 }, context);
+    assert.deepEqual(returnHome(saved), returnHome(state));
+    const home = spatial.spatialMemberPosition(returnHome(state).world.spatial.missions['explore-1'], 'founder-1');
+    assert.ok(Math.hypot(home.x - 16, home.z - 64) < 1e-8);
+});
+
+test('an accepted route follows uphill corners without a false blocked-route return, including the way home', () => {
+    const uphill = { ...world, terrain: { ...world.terrain, heights: world.terrain.heights.map((_, index) =>
+        .6 * ((index % 33) * 8 + Math.floor(index / 33) * 8)) } };
+    const bound = { ...context, world: uphill };
+    let state = core.applyCommand(campaign(['founder-1'], uphill), start, bound);
+    state = core.applyCommand(state, { type: 'ExploreArea', groupId: 'group-1', target: { x: 32, z: 80 },
+        origins: { 'founder-1': { x: 17, z: 64 } } }, bound);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, bound);
+    assert.equal(core.inspectSpatialExpeditions(state).missions[0].status, 'Exploring',
+        'The committed cardinal route is safe even when one tick spans a corner');
+    assert.equal(state.events.some(event => event.type === 'ExploreAreaReturnStarted'), false);
+    const saved = core.reconstructState(core.serializeState(state));
+    const returnHome = initial => core.applyCommand(core.applyCommand(initial,
+        { type: 'RecallExpedition', groupId: 'group-1' }, bound), { type: 'AdvanceTicks', ticks: 20 }, bound);
+    const returned = returnHome(state);
+    assert.deepEqual(returnHome(saved), returned);
+    assert.equal(core.inspectSpatialExpeditions(returned).missions[0].status, 'Returned');
+    const home = spatial.spatialMemberPosition(returned.world.spatial.missions['explore-1'], 'founder-1');
+    assert.deepEqual({ x: home.x, z: home.z }, { x: 17, z: 64 });
+    assert.equal(home.moving, false);
+});
+
+test('diagonal journeys go around blocked corners and reject a saved shortcut through them', () => {
+    const blocked = structuredClone(world);
+    blocked.navigation.cells[8 * 33 + 3] = false; // (24, 64), beside the departure cell.
+    const bound = { ...context, world: blocked };
+    let state = core.applyCommand(campaign(['founder-1'], blocked), start, bound);
+    state = core.applyCommand(state, { ...goal, target: { x: 32, z: 80 } }, bound);
+    const mission = state.world.spatial.missions['explore-1'];
+    assert.ok(mission.distance > Math.hypot(16, 16), 'The blocked corner requires a real detour');
+    spatial.assertSpatialWorld(core.reconstructState(core.serializeState(state)), bound);
+    const corrupt = structuredClone(state);
+    corrupt.world.spatial.missions['explore-1'].memberRoutes['founder-1'] =
+        [{ x: 16, z: 64 }, { x: 24, z: 72 }, { x: 32, z: 80 }];
+    assert.throws(() => spatial.assertSpatialWorld(corrupt, bound), /diagonal walkability/);
+    state = core.applyCommand(state, { type: 'AdvanceTicks', ticks: 20 }, bound);
+    assert.equal(core.inspectSpatialExpeditions(state).missions[0].status, 'Exploring');
+});
+
 test('a test pack quotes and pays the chosen Food per member once and retains its extended endurance after save/load', () => {
     const initial = campaign();
     const offer = core.startExpeditionOffer(initial, 'group-1', context, 8);

@@ -75,7 +75,7 @@ function prepareMission(state: SimulationState, groupId: string, target: IslandT
         !origins[id] || !Number.isFinite(origins[id].x) || !Number.isFinite(origins[id].z) ||
         Math.hypot(origins[id].x - home.x, origins[id].z - home.z) > state.discovery!.policy.settlementRadius)))
         throw new Error('Every member must depart from home.');
-    const plans = group.memberIds.map(id => planRoute(context, position, origins?.[id]));
+    const plans = group.memberIds.map(id => planRoute(context, position, origins?.[id], true));
     const memberRoutes = Object.fromEntries(group.memberIds.map((id, i) => [id, plans[i].route]));
     const route = plans.reduce((a, b) => routeLength(a.route) >= routeLength(b.route) ? a : b).route;
     const distance = routeLength(route);
@@ -114,7 +114,7 @@ export function dispatchIslandMission(state: SimulationState, command: IslandMis
     spatial.version = 3;
     const id = `explore-${Object.keys(spatial.missions).length + 1}`, now = absoluteTick(state);
     const mission: SpatialMission = {
-        id, groupId: offer.group.id, groupName: offer.group.name, memberIds: [...offer.group.memberIds],
+        id, routeMode: 'eight-way-v1', groupId: offer.group.id, groupName: offer.group.name, memberIds: [...offer.group.memberIds],
         target: offer.ref.position, route: offer.route, memberRoutes: offer.memberRoutes,
         homeOrigins: Object.fromEntries(offer.group.memberIds.map(id => [id, { ...offer.memberRoutes[id][0] }])),
         returnRoutes: Object.fromEntries(offer.group.memberIds.map(id => [id, [...offer.memberRoutes[id]].reverse()])),

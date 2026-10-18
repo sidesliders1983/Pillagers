@@ -33,6 +33,8 @@ export interface ExpeditionProvisions {
 }
 export interface SpatialMission {
     task?: IslandMissionTask;
+    /** New route geometry; absent on preserved cardinal journeys. */
+    routeMode?: 'eight-way-v1';
     id: string;
     groupId: string;
     groupName: string;
@@ -130,8 +132,8 @@ function settleProvisions(state: SimulationState, mission: SpatialMission, atHom
     if (lostFood) recordSpatial(state, 'ExploreAreaSuppliesLost', mission, { units: lostFood });
 }
 
-/** Bounded cardinal search on the existing walkability grid. No new terrain classification. */
-export function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: Point2) {
+/** Bounded search on the existing grid. Diagonals cannot cut blocked cell or building corners. */
+export function planRoute(context: PhysicalExpeditionContext, target: Point2, origin?: Point2, eightWay = false) {
     const { world } = context, nav = world.navigation, surface = createBlueprintSurface(world);
     const bounds = nav.bounds;
     const inside = (p: Point2) => p && Number.isFinite(p.x) && Number.isFinite(p.z) &&
@@ -238,8 +240,11 @@ export function planRoute(context: PhysicalExpeditionContext, target: Point2, or
         }
         return first;
     };
-    const estimate = (i: number) => Math.abs(i % nav.columns - end % nav.columns) +
-        Math.abs(Math.floor(i / nav.columns) - Math.floor(end / nav.columns));
+    const estimate = (i: number) => {
+        const dx = Math.abs(i % nav.columns - end % nav.columns);
+        const dz = Math.abs(Math.floor(i / nav.columns) - Math.floor(end / nav.columns));
+        return eightWay ? Math.max(dx, dz) + (Math.SQRT2 - 1) * Math.min(dx, dz) : dx + dz;
+    };
     costs[start] = 0; parents[start] = start; push({ id: start, score: estimate(start), cost: 0 });
     let expanded = 0;
     while (heap.length && expanded++ < 40000) {
@@ -247,23 +252,34 @@ export function planRoute(context: PhysicalExpeditionContext, target: Point2, or
         if (current.cost !== costs[i]) continue;
         if (i === end) break;
         const col = i % nav.columns, row = Math.floor(i / nav.columns);
-        for (const next of [col > 0 ? i - 1 : -1, col < nav.columns - 1 ? i + 1 : -1,
-        row > 0 ? i - nav.columns : -1, row < nav.rows - 1 ? i + nav.columns : -1]) {
-            if (!safe(next) || costs[next] <= costs[i] + 1) continue;
+        const neighbours = [col > 0 ? i - 1 : -1, col < nav.columns - 1 ? i + 1 : -1,
+            row > 0 ? i - nav.columns : -1, row < nav.rows - 1 ? i + nav.columns : -1];
+        if (eightWay) {
+            for (const dz of [-1, 1]) for (const dx of [-1, 1]) {
+                if (col + dx >= 0 && col + dx < nav.columns && row + dz >= 0 && row + dz < nav.rows &&
+                    safe(i + dx) && safe(i + dz * nav.columns)) neighbours.push(i + dx + dz * nav.columns);
+            }
+        }
+        for (const next of neighbours) {
+            if (!safe(next)) continue;
+            const diagonal = col !== next % nav.columns && row !== Math.floor(next / nav.columns);
+            const nextCost = costs[i] + (diagonal ? Math.SQRT2 : 1);
+            if (costs[next] <= nextCost) continue;
             const a = point(i), b = point(next);
             let passable = true;
-            const samples = Math.max(1, Math.ceil(nav.spacing));
+            const distance = Math.hypot(b.x - a.x, b.z - a.z);
+            const samples = Math.max(1, Math.ceil(distance));
             let previous = surface.surfaceHeightAt(a.x, a.z);
             for (let step = 1; step <= samples; step++) {
                 const h = surface.surfaceHeightAt(a.x + (b.x - a.x) * step / samples,
                     a.z + (b.z - a.z) * step / samples);
-                if (h <= world.waterLevel + .25 || Math.abs(h - previous) / (nav.spacing / samples) > .65) {
+                if (h <= world.waterLevel + .25 || Math.abs(h - previous) / (distance / samples) > .65) {
                     passable = false; break;
                 }
                 previous = h;
             }
             if (!passable) continue;
-            costs[next] = costs[i] + 1; parents[next] = i;
+            costs[next] = nextCost; parents[next] = i;
             push({ id: next, cost: costs[next], score: costs[next] + estimate(next) });
         }
     }
@@ -331,8 +347,9 @@ function prepareExplore(state: SimulationState, groupId: string, target: Point2,
     if (origins && (group.memberIds.some(id => !origins[id] || !Number.isFinite(origins[id].x) || !Number.isFinite(origins[id].z)) || Object.keys(origins).length !== group.memberIds.length ||
         group.memberIds.some(id => !Object.hasOwn(origins, id))))
         throw new Error('Every expedition member needs an exact departure origin.');
-    const plans = origins ? group.memberIds.map(id => planRoute(bound, target, origins[id])) :
-        [planRoute(bound, target)];
+    const eightWay = !!active?.provisions;
+    const plans = origins ? group.memberIds.map(id => planRoute(bound, target, origins[id], eightWay)) :
+        [planRoute(bound, target, undefined, eightWay)];
     const memberRoutes = origins || active?.provisions ? Object.fromEntries(group.memberIds.map((id, i) =>
         [id, plans[origins ? i : 0].route])) : undefined;
     const routes = plans.map(plan => plan.route);
@@ -465,6 +482,7 @@ export function applySpatialCommand(state: SimulationState, command: SpatialExpe
         ...(offer.memberRoutes ? { memberRoutes: offer.memberRoutes } : {}),
         ...(offer.homeOrigins ? { homeOrigins: offer.homeOrigins, returnRoutes: offer.returnRoutes } : {}),
         ...(offer.active?.provisions ? { provisions: offer.active.provisions } : {}),
+        ...(offer.active?.provisions ? { routeMode: 'eight-way-v1' as const } : {}),
         distance: offer.distance, travelled: 0,
         departedAt: offer.active?.provisions && offer.active.status !== 'Prepared' ? offer.active.departedAt : absoluteTick(state),
         updatedAt: absoluteTick(state),
@@ -618,21 +636,41 @@ function strand(state: SimulationState, mission: SpatialMission, reason: string)
 }
 function modeStepPassable(state: SimulationState, mission: SpatialMission, context: PhysicalExpeditionContext) {
     const speed = mission.task?.speed ?? state.world!.spatial!.policy.metresPerTick;
-    const next = { ...mission, travelled: mission.status === 'Returning' ? Math.max(0, mission.travelled - speed) :
-        mission.status === 'Traveling' ? Math.min(mission.distance, mission.travelled + speed) : mission.travelled };
     const nav = context.world.navigation, surface = createBlueprintSurface(context.world);
     for (const id of mission.memberIds.filter(id => state.personas[id]?.deathWinter === null)) {
-        const from = spatialMemberPosition(mission, id), to = spatialMemberPosition(next, id);
-        const length = Math.hypot(to.x - from.x, to.z - from.z), samples = Math.max(1, Math.ceil(length));
-        let previous = surface.surfaceHeightAt(from.x, from.z);
-        for (let step = 1; step <= samples; step++) {
-            const x = from.x + (to.x - from.x) * step / samples, z = from.z + (to.z - from.z) * step / samples;
-            const col = Math.round((x - nav.bounds.minX) / nav.spacing), row = Math.round((z - nav.bounds.minZ) / nav.spacing);
-            const height = surface.surfaceHeightAt(x, z);
-            if (col < 0 || row < 0 || col >= nav.columns || row >= nav.rows || !nav.cells[row * nav.columns + col] ||
-                height <= context.world.waterLevel + .25 || length > 0 && Math.abs(height - previous) > .65 * length / samples)
-                return false;
-            previous = height;
+        const route = mission.memberRoutes![id], total = routeLength(route);
+        let progress = mission.travelled;
+        let advance = mission.status === 'Traveling' ? speed : 0;
+        if (mission.status === 'Returning') {
+            progress = mission.homeOrigins ? (mission.returnFrom ?? mission.distance) - mission.travelled : mission.travelled;
+            advance = mission.homeOrigins ? speed : -speed;
+        }
+        const fromDistance = Math.max(0, Math.min(total, progress));
+        const toDistance = Math.max(0, Math.min(total, progress + advance));
+        // Check every crossed route edge rather than a chord cutting across an accepted corner.
+        const low = Math.min(fromDistance, toDistance), high = Math.max(fromDistance, toDistance);
+        let traversed = 0;
+        for (let edge = 1; edge < route.length; edge++) {
+            const a = route[edge - 1], b = route[edge], edgeLength = Math.hypot(b.x - a.x, b.z - a.z);
+            const edgeStart = traversed;
+            traversed += edgeLength;
+            if (traversed < low) continue;
+            if (edgeStart > high) break;
+            const start = edgeLength ? Math.max(0, (low - edgeStart) / edgeLength) : 0;
+            const end = edgeLength ? Math.min(1, (high - edgeStart) / edgeLength) : 0;
+            const from = { x: a.x + (b.x - a.x) * start, z: a.z + (b.z - a.z) * start };
+            const to = { x: a.x + (b.x - a.x) * end, z: a.z + (b.z - a.z) * end };
+            const length = Math.hypot(to.x - from.x, to.z - from.z), samples = Math.max(1, Math.ceil(length));
+            let previous = surface.surfaceHeightAt(from.x, from.z);
+            for (let step = 1; step <= samples; step++) {
+                const x = from.x + (to.x - from.x) * step / samples, z = from.z + (to.z - from.z) * step / samples;
+                const col = Math.round((x - nav.bounds.minX) / nav.spacing), row = Math.round((z - nav.bounds.minZ) / nav.spacing);
+                const height = surface.surfaceHeightAt(x, z);
+                if (col < 0 || row < 0 || col >= nav.columns || row >= nav.rows || !nav.cells[row * nav.columns + col] ||
+                    height <= context.world.waterLevel + .25 || length > 0 && Math.abs(height - previous) > .65 * length / samples)
+                    return false;
+                previous = height;
+            }
         }
     }
     return true;
@@ -753,13 +791,13 @@ export function validateSpatialExpeditions(state: SimulationState) {
     const bounds = state.discovery!.grid.bounds, now = absoluteTick(state), away = new Set<string>();
     const finitePoint = (p: Point2) => p && Number.isFinite(p.x) && Number.isFinite(p.z) &&
         p.x >= bounds.minX && p.x < bounds.maxX && p.z >= bounds.minZ && p.z < bounds.maxZ;
-    const validateMemberRoute = (route: Point2[], mode = false) => {
+    const validateMemberRoute = (route: Point2[], mode = false, eightWay = false) => {
         if (!Array.isArray(route) || route.length < 2 || route.length > 40002 || !route.every(finitePoint) ||
             Math.hypot(route[1].x - route[0].x, route[1].z - route[0].z) > 24) fail();
         if (mode) {
             for (let i = 1; i < route.length; i++) {
                 const dx = Math.abs(route[i].x - route[i - 1].x), dz = Math.abs(route[i].z - route[i - 1].z);
-                if (dx + dz > 24 || dx > 0 && dz > 0 && i !== 1 && i !== route.length - 1 ||
+                if (dx + dz > 24 || !eightWay && dx > 0 && dz > 0 && i !== 1 && i !== route.length - 1 ||
                     dx + dz === 0 && route.length !== 2) fail();
             }
             return;
@@ -775,6 +813,8 @@ export function validateSpatialExpeditions(state: SimulationState) {
     for (const [id, mission] of Object.entries(spatial.missions)) {
         if (mission.task) validateIslandMission(state, mission);
         const group = state.world!.groups[mission.groupId];
+        if (mission.routeMode !== undefined &&
+            (mission.routeMode !== 'eight-way-v1' || !mission.provisions && !mission.task)) fail();
         if (mission.id !== id || !id.startsWith('explore-') || !group || !mission.groupName?.trim() ||
             !Array.isArray(mission.memberIds) || !mission.memberIds.length ||
             new Set(mission.memberIds).size !== mission.memberIds.length ||
@@ -818,7 +858,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
                 mission.returnFrom !== undefined && (!Number.isFinite(mission.returnFrom) ||
                     mission.returnFrom < mission.travelled || mission.returnFrom > mission.distance)) fail();
             for (const route of Object.values(mission.memberRoutes)) {
-                validateMemberRoute(route, !!(mission.provisions || mission.task));
+                validateMemberRoute(route, !!(mission.provisions || mission.task), mission.routeMode === 'eight-way-v1');
                 if (routeLength(route) > mission.distance + 1e-6) fail();
             }
             if (!Object.values(mission.memberRoutes).some(route =>
@@ -832,7 +872,7 @@ export function validateSpatialExpeditions(state: SimulationState) {
                 Object.keys(mission.returnRoutes).length !== mission.memberIds.length) fail();
             for (const member of mission.memberIds) {
                 const home = mission.homeOrigins![member], route = mission.returnRoutes![member];
-                validateMemberRoute(route, !!(mission.provisions || mission.task));
+                validateMemberRoute(route, !!(mission.provisions || mission.task), mission.routeMode === 'eight-way-v1');
                 if (!finitePoint(home) || Math.hypot(route.at(-1)!.x - home.x, route.at(-1)!.z - home.z) > 12) fail();
                 if (mission.status === 'Returning' && JSON.stringify(route) !== JSON.stringify(mission.memberRoutes![member])) fail();
                 if (!mission.provisions && (mission.status === 'Traveling' || mission.status === 'Exploring')) {
@@ -905,7 +945,12 @@ export function assertSpatialWorld(state: SimulationState, context: PhysicalExpe
             for (let i = 0; i < route.length; i++) {
                 const p = route[i], col = (p.x - nav.bounds.minX) / nav.spacing, row = (p.z - nav.bounds.minZ) / nav.spacing;
                 const exactOrigin = !!mission.memberRoutes && (i === 0 || !!(mission.provisions || mission.task) && i === route.length - 1 && homeward);
-                if ((!exactOrigin && ((mission.provisions || mission.task ? !Number.isInteger(col) && !Number.isInteger(row) : !Number.isInteger(col) || !Number.isInteger(row)) || col < 0 || row < 0 ||
+                const eightWay = mission.routeMode === 'eight-way-v1';
+                // A redirect may retain a partial diagonal or departure connector inside the return trail.
+                // Its physical segments are checked below instead of assuming cardinal grid vertices.
+                const aligned = eightWay || (mission.provisions || mission.task ?
+                    Number.isInteger(col) || Number.isInteger(row) : Number.isInteger(col) && Number.isInteger(row));
+                if ((!exactOrigin && (!aligned || col < 0 || row < 0 ||
                     col >= nav.columns || row >= nav.rows || !nav.cells[Math.round(row) * nav.columns + Math.round(col)])) ||
                     surface.surfaceHeightAt(p.x, p.z) <= context.world.waterLevel + .25)
                     throw new Error('Invalid spatial expedition walkability.');
@@ -916,9 +961,23 @@ export function assertSpatialWorld(state: SimulationState, context: PhysicalExpe
                 const previous = route[i - 1], length = Math.hypot(p.x - previous.x, p.z - previous.z);
                 const samples = Math.max(1, Math.ceil(length));
                 let height = surface.surfaceHeightAt(previous.x, previous.z);
+                let previousCol = Math.round((previous.x - nav.bounds.minX) / nav.spacing);
+                let previousRow = Math.round((previous.z - nav.bounds.minZ) / nav.spacing);
                 for (let step = 1; step <= samples; step++) {
-                    const next = surface.surfaceHeightAt(previous.x + (p.x - previous.x) * step / samples,
-                        previous.z + (p.z - previous.z) * step / samples);
+                    const x = previous.x + (p.x - previous.x) * step / samples;
+                    const z = previous.z + (p.z - previous.z) * step / samples;
+                    const next = surface.surfaceHeightAt(x, z);
+                    if (eightWay) {
+                        const sampleCol = Math.round((x - nav.bounds.minX) / nav.spacing);
+                        const sampleRow = Math.round((z - nav.bounds.minZ) / nav.spacing);
+                        if (sampleCol < 0 || sampleRow < 0 || sampleCol >= nav.columns || sampleRow >= nav.rows ||
+                            !nav.cells[sampleRow * nav.columns + sampleCol] ||
+                            sampleCol !== previousCol && sampleRow !== previousRow &&
+                            (!nav.cells[previousRow * nav.columns + sampleCol] || !nav.cells[sampleRow * nav.columns + previousCol]))
+                            throw new Error('Invalid spatial expedition diagonal walkability.');
+                        previousCol = sampleCol;
+                        previousRow = sampleRow;
+                    }
                     if (next <= context.world.waterLevel + .25 || Math.abs(next - height) > .65 * length / samples)
                         throw new Error('Invalid spatial expedition route slope.');
                     height = next;
