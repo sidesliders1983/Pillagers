@@ -114,7 +114,12 @@ export class WorldLighting {
             if (node instanceof Mesh && (node.castShadow || node.receiveShadow)) {
                 meshBounds.setFromObject(node);
                 bounds.union(meshBounds);
-                if (node.castShadow) casters.union(meshBounds);
+                if (node.castShadow) {
+                    const localCasterBounds = node.userData.shadowCasterBounds;
+                    if (localCasterBounds instanceof Box3)
+                        meshBounds.copy(localCasterBounds).applyMatrix4(node.matrixWorld);
+                    casters.union(meshBounds);
+                }
             }
         });
         if (bounds.isEmpty()) return;

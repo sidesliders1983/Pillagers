@@ -246,7 +246,37 @@ function* terrainBuildSteps(world: WorldBlueprint,
     mesh.userData.spatial = spatial?.diagnostics ?? null;
     if (blended) blendedWorlds.set(mesh, { world, snow });
     registerTerrainNavigation(mesh, terrain);
+    // The native back-face shadow pass lets ridges occlude the valley without
+    // making the overlapping ground layers shadow their own sun-facing surface.
+    mesh.castShadow = true;
     mesh.receiveShadow = true;
+    // Every colour layer covers the same physical surface. Draw the opaque base
+    // once for depth, then restore the full range before the colour/navigation pass.
+    const shadowDrawRange = { start: 0, count: Infinity };
+    mesh.onBeforeShadow = (_renderer, _object, _camera, _shadowCamera, _geometry, _material, group: unknown) => {
+        shadowDrawRange.start = geometry.drawRange.start;
+        shadowDrawRange.count = geometry.drawRange.count;
+        const base = Array.isArray(mesh.material) ? geometry.groups[0] : undefined;
+        if (base) {
+            if (group && group !== base) {
+                geometry.setDrawRange(0, 0);
+                return;
+            }
+            const start = Math.max(base.start, shadowDrawRange.start);
+            const end = Math.min(base.start + base.count, shadowDrawRange.start + shadowDrawRange.count);
+            geometry.setDrawRange(start, Math.max(0, end - start));
+        }
+    };
+    mesh.onAfterShadow = () => geometry.setDrawRange(shadowDrawRange.start, shadowDrawRange.count);
+    geometry.computeBoundingBox();
+    const shadowBounds = geometry.boundingBox!.clone();
+    // The flat outer seabed cannot block an above-horizon sun. Keep it as a
+    // receiver without letting its distant corners dilute caster-depth precision.
+    shadowBounds.min.x = terrain.bounds.minX;
+    shadowBounds.max.x = terrain.bounds.maxX;
+    shadowBounds.min.z = terrain.bounds.minZ;
+    shadowBounds.max.z = terrain.bounds.maxZ;
+    mesh.userData.shadowCasterBounds = shadowBounds;
     return mesh;
 }
 
