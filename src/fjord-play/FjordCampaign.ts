@@ -4,7 +4,7 @@ import { inspectRivalSettlement, projectRivalSettlement, type ObservedRivalSettl
 import { assertDiscoveryWorld } from '../simulation/ClanDiscovery';
 import { freezeReadView } from '../gameplay-lab/ReadView';
 import type { SimulationState } from '../simulation/SimulationCore';
-import { createCampaignIsland, campaignIslandPlan, type CampaignGeography } from './CampaignIsland';
+import { createCampaignIsland, campaignIslandPlan, islandRecipe, type CampaignGeography } from './CampaignIsland';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { generateWorld } from '../world-generation/GenerateWorld';
 import { parseWorld } from '../world-generation/WorldSave';
@@ -32,8 +32,7 @@ export class FjordCampaign {
     constructor(readonly session: GameplaySession, private geography: CampaignGeography = 'legacy', restored?: string) {
         // Import validates a complete proposal before committing. A known save needs no throwaway geography.
         if (restored !== undefined) { this.importJSON(restored); return; }
-        this.blueprint = geography === 'island-pool-v1' ? createCampaignIsland(session.snapshot().seed) :
-            generateWorld({ seed: session.snapshot().seed, conifers: 'ez-tree' });
+        this.blueprint = this.createGeography(session.snapshot().seed);
         this.layout = createFjordLayout(this.blueprint, undefined, session.snapshot().seed);
         this.bindExpeditionWorld();
     }
@@ -184,7 +183,7 @@ export class FjordCampaign {
         this.session.book.restore(proposal.book.save(proposal.snapshot()), this.session.snapshot());
 
         this.blueprint = blueprint;
-        if (saved.bridgeVersion === 2) this.geography = 'island-pool-v1';
+        if (saved.bridgeVersion === 2) this.geography = saved.island.version;
         this.layout = view.layout;
         this.rivalLayout = rival?.layout;
         this.bindExpeditionWorld();
@@ -200,7 +199,7 @@ export class FjordCampaign {
         this.fresh = true;
     }
     private createGeography(seed: number) {
-        return this.geography === 'island-pool-v1' ? createCampaignIsland(seed) :
+        return this.geography !== 'legacy' ? createCampaignIsland(seed, islandRecipe(seed, this.geography)) :
             generateWorld({ seed, conifers: 'ez-tree' });
     }
     restart(sameFounders = true, weatherEnabled = this.session.snapshot().weather?.config.enabled ?? false, foundingPhase = this.session.snapshot().foundingPhase) {

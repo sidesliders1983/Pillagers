@@ -3,6 +3,7 @@ import type { AssetManager, AssetKey } from '../core/AssetManager';
 import type { DiscoveryView } from '../simulation/ClanDiscovery';
 import type { WorldBlueprint } from '../world-generation/WorldBlueprint';
 import { StructureSeasonTint } from '../world/StructureSeasonTint';
+import { natureVariation } from '../world/NatureVariation';
 import { seasonBlend } from '../config/timeVisualization';
 import {
     dressingAssetKeys, planSettlementDressing, visibleDressing,
@@ -125,6 +126,8 @@ export class SettlementDressingLayer {
                 mesh.name = asset;
                 transforms.forEach((transform, index) => mesh.setMatrixAt(index,
                     matrix.multiplyMatrices(transform, child.matrixWorld)));
+                if (/grass|bush/.test(asset)) items.forEach((item, index) =>
+                    mesh.setColorAt(index, new Color(natureVariation(this.world.config.seed, item.id).color)));
                 mesh.castShadow = castShadow;
                 mesh.receiveShadow = true;
                 mesh.computeBoundingSphere();

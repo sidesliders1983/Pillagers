@@ -17,7 +17,7 @@ const restored = await SharedSettlement.restoreAsync(fixture, 'fjord', async met
             if (message.type === 'error') reject(new Error(message.message));
             if (message.type === 'result') resolve(message.result);
         });
-        worker.postMessage({ kind: 'campaign', seed: metadata.seed });
+        worker.postMessage({ kind: 'campaign', seed: metadata.seed, recipe: metadata.island });
     }).finally(() => worker.terminate());
     workerWallMs = performance.now() - workerStarted;
     const adoptStarted = performance.now();

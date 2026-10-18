@@ -2,9 +2,11 @@
 
 ## Default and identity
 
-New campaigns created in `/fjord-play` use `island-pool-v1`. The campaign seed deterministically selects geography seed **18 or 7** through a pinned integer hash. The Simulation Core keeps its original seed, founders, rules, RNG, events and resources. The geography seed is displayed separately under **Menu → Campaign**.
+New campaigns created in `/fjord-play` use `island-pool-v2`. The campaign seed deterministically selects geography seed **18 or 7** through a pinned integer hash. The Simulation Core keeps its original seed, founders, rules, RNG, events and resources. The geography seed is displayed separately under **Menu → Campaign**.
 
 Both entries use the existing `fjordside-island-v0.3e-r3` generator, the canonical 800 × 800 m heightfield, its geological compartments and the existing environment-zoning function. There is no random retry or silent seed substitution inside the generator. Changing this pool, selection mapping or preparation algorithm after release requires a new recipe version.
+
+The v2 recipe keeps the same terrain, foundations, berth, asset families and tree quotas, and composes a bounded share of trees into mixed-size village-edge groups. It reserves every future household plot and carves navigation from the actual new placements. Existing `island-pool-v1` saves reconstruct their original trees and navigation byte for byte; the two versions have separate worker/cache identities. See [village nature composition](VILLAGE-NATURE-203.md).
 
 Existing campaign saves retain their original geography. A same-founders restart also retains that geography. **New campaign from seed** in the Fjord menu explicitly creates an island campaign. A transferred 2D campaign preserves whichever geography it already owns; a fresh standalone 2D campaign retains its existing behavior.
 
@@ -16,6 +18,8 @@ The campaign adapter replaces the player's six demonstration foundations with re
 
 The search examines a bounded extension of the original natural pocket (40 m on each side), uses the existing dry/slope limits, and rejects any foundation requiring more than **0.6 m** of cut or fill. Full support triangles take precedence over neighboring feathered edges. Each plot is locally leveled; no settlement-wide elevation or island silhouette is imposed. The campfire is selected on supported terrain near the original pocket, rather than at the middle of an arbitrary bounding rectangle.
 
+The table below records the original v1 access measurements. V2 retains the same foundations, grading, separation and berth; route lengths are recomputed around its own trees and must pass the same access constraints.
+
 | Geography seed | Reserved home plots | Maximum terrain adjustment | Gap to rival reserve | Center separation | Landing → rival walk |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | 18 | 12 | 0.5834 m | 180.2 m | 328.6 m | 776 m |
@@ -23,7 +27,7 @@ The search examines a bounded extension of the original natural pocket (40 m on 
 
 Both are checked with ten independent founder households, all ten house conversions, a Farmyard, assigned cattle and a Longhouse upgrade. House plots remain in place and permanent homes receive connecting paths. Tents retain grass and create no dirt paths. The finite reserved capacity is shown in the menu; this is not a promise of indefinite settlement expansion or support for every larger authored Farmyard terrain variant.
 
-The adapter also checks the original 160 m center separation, 40 m construction gap, 240 m rival access route and full-hull water depth. Terrain-only invisibility is not required. Discovery fog and a rendered rival clan remain future work.
+The adapter also checks the original 160 m center separation, 40 m construction gap, 240 m rival access route and full-hull water depth. Terrain-only invisibility is not required. The existing discovery fog and observed rival presentation remain active; scenery follows geographical facts and does not expose private rival household data.
 
 ## Presentation
 

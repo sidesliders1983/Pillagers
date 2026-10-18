@@ -37,7 +37,7 @@ for (const [key, entry] of Object.entries(houseManifest.assets)) {
 sources.tent = { minX: -.94, maxX: .94, minZ: -1, maxZ: 1, height: 1.5 };
 
 function flatWorld(height = 5) {
-    return { waterLevel: 0, placementPlan: [], terrain: { bounds: { minX: -80, maxX: 80,
+    return { config: { seed: 17 }, waterLevel: 0, placementPlan: [], terrain: { bounds: { minX: -80, maxX: 80,
         minZ: -80, maxZ: 80 }, columns: 41, rows: 41, spacing: 4, heights: Array(41 * 41).fill(height) } };
 }
 function home(key = 'house', asset = 'hut', x = 0, z = 0) {

@@ -12,7 +12,7 @@ import { FoundingBookWindow } from '../lore/FoundingBookWindow';
 import { IslandLoading, yieldForInput } from './IslandLoading';
 import { GameplaySession } from '../gameplay-lab/GameplaySession';
 import { SharedSettlement, activeSettlementKey } from '../play/SharedSettlement';
-import { campaignIslandPlan } from './CampaignIsland';
+import { campaignIslandPlan, currentIslandVersion } from './CampaignIsland';
 import { fjordFogPresentation } from '../config/FjordFog';
 import { PrecipitationEffect } from '../effects/PrecipitationEffect';
 import { CampfireEffect, type EffectQuality } from '../effects/CampfireEffect';
@@ -141,7 +141,7 @@ export class FjordPlay {
             this.loading = new IslandLoading(false, this.foundingBook);
             trace.record('new-campaign', { seed: proposal.snapshot().seed });
             await this.loading.prepare(proposal.snapshot().seed);
-            this.opened = { campaign: new SharedSettlement(proposal, undefined, true, 'island-pool-v1'),
+            this.opened = { campaign: new SharedSettlement(proposal, undefined, true, currentIslandVersion),
                 warning: '', autoStart: true };
         }
         this.shared = this.opened.campaign;
@@ -479,7 +479,7 @@ export class FjordPlay {
                     loading = this.loading = new IslandLoading(true, this.foundingBook);
                     await loading.prepare(proposal.snapshot().seed);
                     loading.check();
-                    this.campaign.startCampaign(proposal, 'island-pool-v1');
+                    this.campaign.startCampaign(proposal, currentIslandVersion);
                     if (discoveryEnabled) this.campaign.enableDiscovery();
                     resetProduction();
                     campaignFields();

@@ -1,7 +1,8 @@
 import type { AssetPlacement } from '../world-generation/WorldBlueprint';
-import {Box3,Group,InstancedMesh,Matrix4,Mesh,Object3D,Vector3} from 'three';
+import {Box3,Color,Group,InstancedMesh,Matrix4,Mesh,Object3D,Vector3} from 'three';
 import {AssetManager} from '../core/AssetManager';
 import {natureAssetIds,NatureAssetKey} from '../config/NatureAssets';
+import { natureVariation } from './NatureVariation';
 import {seededRandom} from '../config/worldConfig';
 import {shoreAt,surfaceHeightAt} from './Terrain';
 import {buildings,buildingDistance,pathWeight} from './SettlementLayout';
@@ -36,7 +37,7 @@ export function createNature(assets:AssetManager,seed=1983,resolveModel:(id:Natu
 }
 
 function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
-    transforms: readonly Matrix4[], heights: number[]) {
+    transforms: readonly Matrix4[], heights: number[], colors?: readonly Color[]) {
     model.updateMatrixWorld(true);
     if (id.includes('conifer')) {
         const height = new Box3().setFromObject(model).getSize(new Vector3()).y;
@@ -52,6 +53,8 @@ function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
             ({ x: transform.elements[12], z: transform.elements[14] }));
         transforms.forEach((transform, i) => instances.setMatrixAt(i,
             matrix.multiplyMatrices(transform, child.matrixWorld)));
+        if (colors && (child.material as import('three').Material).name !== 'branches')
+            colors.forEach((color, i) => instances.setColorAt(i, color));
         instances.castShadow = !id.includes('grass') && !id.includes('bush');
         instances.receiveShadow = true;
         instances.userData.seasonalFoliage = !id.includes('rock') && !id.includes('boulder') &&
@@ -63,18 +66,25 @@ function appendNatureModel(group: Group, model: Object3D, id: NatureAssetKey,
 
 /** Same authored primitives and instancing path for reference and generated scenery. */
 export function createNatureFromPlan(assets: AssetManager, plan: readonly AssetPlacement[],
-    seed: number, resolveModel: (id: NatureAssetKey) => Object3D = id => assets.get(id)) {
+    seed: number, resolveModel: (id: NatureAssetKey) => Object3D = id => assets.get(id),
+    varied = false) {
     const group = new Group(), dummy = new Object3D(), heights: number[] = [];
     group.name = 'Seeded KayKit FREE placement';
     for (const id of natureAssetIds) {
+        const colors: Color[] = [];
         const transforms = plan.filter(p => p.assetId === id).map(p => {
             dummy.position.set(p.x, p.y, p.z);
             dummy.rotation.y = p.rotation;
             dummy.scale.setScalar(p.scale);
+            if (varied && /conifer|deciduous/.test(id)) {
+                const variation = natureVariation(seed, id + '@' + p.x + ',' + p.z);
+                dummy.scale.multiply(new Vector3(variation.width, variation.height, variation.width));
+                colors.push(new Color(variation.color));
+            }
             dummy.updateMatrix();
             return dummy.matrix.clone();
         });
-        appendNatureModel(group, resolveModel(id), id, transforms, heights);
+        appendNatureModel(group, resolveModel(id), id, transforms, heights, colors.length ? colors : undefined);
     }
     group.userData.seed = seed;
     group.userData.coniferHeights = heights;

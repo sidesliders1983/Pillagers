@@ -12,6 +12,7 @@ import { createBlueprintSurface, createBlueprintTerrainAsync, disposeBlueprintTe
 import { loadWorldGroundMaterials } from './WorldGroundMaterials';
 import { loadPineModels } from './PineModels';
 import { createNatureFromPlan } from './KayKitNature';
+import { createVillageNatureResolver } from './VillageNatureModels';
 import { NatureWind } from './NatureWind';
 import { FjordsideWater } from './FjordsideWater';
 import { BoatFloat } from './BoatFloat';
@@ -89,6 +90,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
     let water: FjordsideWater | undefined;
     let wind: NatureWind | undefined;
     let nature: Group | undefined;
+    let resolveNature: ReturnType<typeof createVillageNatureResolver> | undefined;
     let discovery = selection.discovery;
     const clearedPlots = new Map<string, BuildingPlot>();
     const knownPlan = () => blueprint!.placementPlan.filter(p =>
@@ -128,8 +130,10 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                 catch (error) { if (!canonical) throw error;
                     assets.diagnostics.push('EZ-Tree unavailable; existing KayKit conifer fallback.'); }
             }
+            resolveNature = island?.recipe.version === 'island-pool-v2'
+                ? createVillageNatureResolver(assets, pines?.resolve) : pines?.resolve;
             nature = await prepare('nature-instance-assembly', () => createNatureFromPlan(assets,knownPlan(),
-                blueprint.config.seed,pines?.resolve));
+                blueprint.config.seed,resolveNature, island?.recipe.version === 'island-pool-v2'));
             root.add(nature); // Own instance buffers even if a required plot cannot be placed.
             try { attachments.push(...(island ? planCampaignDock(assets, blueprint) :
                 planWorldAttachments(assets,blueprint,includeTent))); }
@@ -224,7 +228,7 @@ export async function createWorld(assets: AssetManager, selection: WorldSelectio
                     throw new Error('Scenery discovery belongs to a different world.');
                 if (view.explored === discovery.explored) { discovery = view; return false; }
                 discovery = view;
-                const next = createNatureFromPlan(assets, knownPlan(), blueprint.config.seed, pines?.resolve);
+                const next = createNatureFromPlan(assets, knownPlan(), blueprint.config.seed, resolveNature, island?.recipe.version === 'island-pool-v2');
                 for (const plot of clearedPlots.values()) clearBuildingPlotNature(next, plot);
                 wind?.dispose();
                 nature.traverse(node => { if (node instanceof InstancedMesh) node.dispose(); });
