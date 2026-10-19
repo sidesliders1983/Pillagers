@@ -1,5 +1,6 @@
 import {eventFacts} from './EventFacts';
 import type {SimulationState} from './SimulationCore';
+import { animalProfile } from './LivestockSpecies';
 /** Farmyard is a live function of an occupied permanent home, not another building. */
 export function farmyards(state:SimulationState) {
     if(!state.mechanics)return [];
@@ -7,9 +8,16 @@ export function farmyards(state:SimulationState) {
         const residence=home.residenceId?state.residences[home.residenceId]:null;
         const building=residence?.buildingId?state.buildings[residence.buildingId]:null;
         if(residence?.kind!=='house'||building?.kind!=='house'||!home.memberIds.some(id=>state.personas[id].deathWinter===null&&state.personas[id].occupation==='farmer'))return [];
-        const occupants=Object.values(state.landing?.cattle??{}).filter(c=>c.deathWinter===null&&c.farmyardId===building.id).length;
+        const animals = Object.values(state.landing?.cattle ?? {})
+            .filter(animal => animal.deathWinter === null && animal.farmyardId === building.id);
+        const occupants = animals.length;
+        const occupiedUnits = animals.reduce((units, animal) =>
+            units + animalProfile(state, animal).capacityWeightBps, 0);
         const capacity=state.landing?.config.farmyardCapacity??4;
-        return [{id:building.id,householdId:home.id,capacity,occupants,overcrowding:Math.max(0,occupants-capacity)}];
+        const overcrowdingUnits = Math.max(0, occupiedUnits - capacity * 10000);
+        return [{ id: building.id, householdId: home.id, capacity, occupants,
+            occupancy: occupiedUnits / 10000, overcrowding: overcrowdingUnits / 10000,
+            overcrowdingUnits }];
     });
 }
 export function reconcileFarmyards(state:SimulationState,previousIds:string[]):void {

@@ -18,9 +18,10 @@ export class FjordProduction {
         const outputs = new Map<string, ProductionOutput>();
         for (const event of events.slice(this.cursor)) {
             const cow = event.type === 'CattleFoodProduced';
-            if (!cow && event.type !== 'ResourceProduced') continue;
-            const kind = cow ? 'cattle' : 'persona';
-            const id = cow ? event.details?.cattleId : event.personaId;
+            const livestock = cow || event.type === 'LivestockResourceProduced';
+            if (!livestock && event.type !== 'ResourceProduced') continue;
+            const kind = livestock ? 'cattle' : 'persona';
+            const id = cow ? event.details?.cattleId : livestock ? event.details?.livestockId : event.personaId;
             const resource = cow ? 'food' : event.details?.resource;
             const units = event.details?.units;
             if (typeof id !== 'string' || !id || (resource !== 'food' && resource !== 'materials') ||

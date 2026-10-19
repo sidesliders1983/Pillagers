@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "checks": [
+    "desktop: real management, mixed roster, species details, cancel/confirm slaughter, stable surviving names; mouse",
+    "tablet: real management, mixed roster, species details, cancel/confirm slaughter, stable surviving names; touch taps",
+    "phone: real management, mixed roster, species details, cancel/confirm slaughter, stable surviving names; touch taps"
+  ],
+  "errors": []
+}

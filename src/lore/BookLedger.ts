@@ -17,7 +17,8 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
         if (!Number.isSafeInteger(units) || (units as number) < 0) { rows[resource].complete = false; return; }
         rows[resource][category] += units as number;
         if (category === 'spending') {
-            const consumed = e.type === 'FoodConsumed' || e.type === 'CattleFoodConsumed';
+            const consumed = e.type === 'FoodConsumed' || e.type === 'CattleFoodConsumed' ||
+                e.type === 'LivestockFoodConsumed';
             rows[resource][consumed ? 'consumption' : 'otherSpending'] += units as number;
         }
         if (actor) rows[resource][actor === 'resident' ? 'residentProduction' : 'cattleProduction'] += units as number;
@@ -31,7 +32,12 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
                 else rows.food.complete = rows.materials.complete = false;
                 break;
             case 'CattleFoodProduced': add(e, 'food', 'production', 'units', 'cattle'); break;
-            case 'FoodConsumed': case 'CattleFoodConsumed':
+            case 'LivestockResourceProduced':
+                if (e.details?.resource === 'food' || e.details?.resource === 'materials')
+                    add(e, e.details.resource, 'production', 'units', 'cattle');
+                else rows.food.complete = rows.materials.complete = false;
+                break;
+            case 'FoodConsumed': case 'CattleFoodConsumed': case 'LivestockFoodConsumed':
                 add(e, 'food', 'spending', 'units');
                 if (Number.isSafeInteger(e.details?.shortfall) && (e.details!.shortfall as number) >= 0)
                     rows.food.unmetNeed = (rows.food.unmetNeed ?? 0) + (e.details!.shortfall as number);
@@ -41,7 +47,8 @@ export function bookLedger(events: readonly SimulationEvent[], opening: Record<R
             case 'CampfireFuelConsumed': case 'BuildingMaintained': add(e, 'materials', 'spending', 'units'); break;
             case 'BuildingSalvaged': case 'BuildingCollapsed': add(e, 'materials', 'otherReceipts', 'salvage'); break;
             case 'FoundingLongshipSalvaged': add(e, 'materials', 'otherReceipts', 'materials'); break;
-            case 'CattleSlaughtered': add(e, 'food', 'otherReceipts', 'food'); break;
+            case 'CattleSlaughtered': case 'LivestockSlaughtered':
+                add(e, 'food', 'otherReceipts', 'food'); break;
             case 'ExploreAreaPrepared': case 'ExploreAreaDeparted': case 'ExpeditionDeparted': add(e, 'food', 'spending', 'foodCost'); break;
             case 'ExpeditionReturned':
                 add(e, 'food', 'otherReceipts', 'food'); add(e, 'materials', 'otherReceipts', 'materials'); break;

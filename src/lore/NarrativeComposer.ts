@@ -139,7 +139,9 @@ export function composeChapter(
         if (theme === 'herd') {
             clauses = livestockGroups(selected).map(group => ({ event: group[0], text: livestockAction(group, facts) }));
             if (threads.some(thread => thread.callbackEventIds.length))
-                links.push('A calf was assigned to the same Farmyard as its mother.');
+                links.push(selected.some(event => event.type === 'LivestockBorn') ?
+                    'A young animal shared its mother’s Farmyard assignment.' :
+                    'A calf was assigned to the same Farmyard as its mother.');
         } else {
             clauses = selected.filter(event => byId.has(event.id) && event.type !== 'FoundingPartyLanded')
                 .map(event => ({ event, text: narrativeLine(event, byId.get(event.id)!.text) }));

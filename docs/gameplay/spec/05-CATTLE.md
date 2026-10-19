@@ -1,5 +1,7 @@
 # 05 — Cattle (Simulator v0.3)
 
+Current implementation extension: [Livestock v0.1A](../LIVESTOCK-V01A.md) generalizes the shared Core to six explicitly configured species and introduces stable local `Livestock N` titles. Founding herds and cattle coefficients remain unchanged. Species selection and new economic coefficients are deferred to #219; native assets/capture expansion to #220. The Farmyard is the existing live household function; the Pen direction below is not a second implemented building system.
+
 ## CATTLE-001 — Farm module
 **Status:** Canonical direction; values Prototype
 

@@ -62,6 +62,8 @@ export interface FjordEntity {
         workEligible?: boolean;
         workHomeId?: string;
         stage?: string;
+        species?: string;
+        sexTerm?: string;
         sex?: string;
         age?: number;
         level?: number;
@@ -323,7 +325,8 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         }
     }
     const livingCattle = Object.values(state.landing?.cattle ?? {})
-        .filter(c => c.deathWinter === null).sort((a, b) => a.id.localeCompare(b.id));
+        .filter(c => c.deathWinter === null && (c.species ?? 'cattle') === 'cattle')
+        .sort((a, b) => a.id.localeCompare(b.id));
     for (const [index, c] of livingCattle.entries()) {
         const view = inspectCattle(state, c.id);
         const assigned = c.farmyardId ? buildingPlots.get(c.farmyardId) : null;
@@ -345,9 +348,10 @@ export function projectFjordSettlement(state: SimulationState, world: WorldBluep
         const point = allocatePoint(key, { x, z }, assigned ?? undefined, {
             halfWidth: widths[Math.min(level, 3)] + .7, halfDepth: depths[Math.min(level, 3)] + .7
         }, permitted);
-        add('cattle', c.id, c.id, view.stage === 'Young' ? 'baby' :
+        add('cattle', c.id, view.name, view.stage === 'Young' ? 'baby' :
             view.stage === 'Young Adult' ? 'young-adult' : c.sex === 'female' ? 'adult-female' : 'adult-male', point,
-            { living: true, sex: c.sex, age: view.age, stage: view.stage, assignment: c.farmyardId,
+            { living: true, sex: c.sex, species: view.species, sexTerm: view.sexTerm,
+                age: view.age, stage: view.stage, assignment: c.farmyardId,
                 sheltered: view.sheltered, overcrowding: view.overcrowding, parentIds: [...view.parentIds], grazingZone });
     }
     for (const ship of site ? [] : Object.values(state.landing?.longships ?? {}))

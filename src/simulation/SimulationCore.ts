@@ -321,4 +321,21 @@ function validateState(state: SimulationState): void {
 export function canApplyCommand(state:SimulationState,command:SimulationCommand):boolean {
     try{applyCommand(state,command);return true;}catch{return false;}
 }
-export {inspectCattle} from './Livestock';
+export { inspectCattle, inspectLivestock } from './Livestock';
+export type { LivestockSpecies, LivestockProfile, LivestockProfiles } from './LivestockSpecies';
+export type { LivestockAnimal } from './Landing';
+
+/** Explicit setup for headless species trials; this does not select or create founding animals. */
+export function configureLivestock(
+    input: SimulationState, profiles: import('./LivestockSpecies').LivestockProfiles,
+): SimulationState {
+    validateState(input);
+    if (!input.landing) throw new Error('Livestock rules require a landing campaign');
+    const founding = foundingTime(input.foundingPhase);
+    if (input.time.winter !== founding.winter || input.time.tick !== founding.tick)
+        throw new Error('Livestock profile setup requires the saved founding phase');
+    const state = structuredClone(input);
+    state.landing!.livestock = { version: 1, profiles: structuredClone(profiles) };
+    validateState(state);
+    return state;
+}
