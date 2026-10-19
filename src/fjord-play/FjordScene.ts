@@ -1,3 +1,4 @@
+import { WildlifeLayer } from '../wildlife/WildlifeLayer';
 import { RivalScene } from './RivalScene';
 import { IslandMap } from './IslandMap';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -19,7 +20,7 @@ import type { SelectionLabel } from './SelectionLabels';
 import { fjordTerrain, fjordSnowLine } from '../config/FjordTerrain';
 import { fjordPresentation } from '../config/FjordPresentation';
 import { resolvePresentationQuality, type PresentationQuality } from '../config/PresentationQuality';
-import { Vector2, Vector3, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
+import { Vector2, Vector3, Plane, Raycaster, RingGeometry, MeshBasicMaterial, DoubleSide, Clock, PerspectiveCamera, Scene, Mesh, Texture } from 'three';
 import { AssetManager } from '../core/AssetManager';
 import { createRenderer } from '../core/Renderer';
 import { WorldLighting } from '../core/WorldLighting';
@@ -68,6 +69,7 @@ export function createFjordScene(options: {
     let assets: AssetManager | undefined, models: FjordModels | undefined;
     let layer: FjordEntities | undefined, world: Awaited<ReturnType<typeof createWorld>> | undefined;
     let discoveryFog: DiscoveryFog | undefined;
+    let wildlife: WildlifeLayer | undefined;
     let knownTerrain: DiscoveryView | undefined;
     let motion: LivingWorldController | undefined;
     let rivalScene: RivalScene | undefined;
@@ -80,7 +82,8 @@ export function createFjordScene(options: {
     const targetGeometry = new RingGeometry(2.7, 3, 48);
     const targetMaterial = new MeshBasicMaterial({
         color: '#ffe09a', side: DoubleSide,
-        depthTest: false, depthWrite: false, transparent: true, opacity: .95
+        depthTest: false, depthWrite: false, toneMapped: false, fog: false,
+        transparent: true, opacity: 1
     });
     const targetMarker = new Mesh(targetGeometry, targetMaterial);
     targetMarker.rotation.x = -Math.PI / 2;
@@ -163,6 +166,22 @@ export function createFjordScene(options: {
                 next.dispose();
                 return rebuildWorld();
             }
+            let nextWildlife: WildlifeLayer | undefined;
+            if (wildlife?.population.world !== blueprint) {
+                try {
+                    nextWildlife = await WildlifeLayer.create(blueprint,
+                        (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown');
+                } catch (error) {
+                    next.dispose();
+                    throw error;
+                }
+                if (inactive() || shared.transferring || revision !== worldRevision
+                    || blueprint !== campaign.blueprint) {
+                    nextWildlife.dispose();
+                    next.dispose();
+                    return;
+                }
+            }
             const anchor = next.attachments.find(item => item.key === 'boat')!;
             campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
             weatherTint?.dispose();
@@ -171,6 +190,11 @@ export function createFjordScene(options: {
             precipitationEffect?.dispose();
             world?.dispose();
             world = next;
+            if (nextWildlife) {
+                wildlife?.dispose();
+                wildlife = nextWildlife;
+                scene.add(wildlife.root);
+            }
             activeBlueprint = blueprint;
             appliedRevision = -1;
             discoveryFog?.dispose();
@@ -364,6 +388,8 @@ export function createFjordScene(options: {
                         }
                     }
                     sceneEntities = view.entities;
+                    wildlife?.setObstacles(view.entities.flatMap(entity =>
+                        entity.kind === 'building' && entity.plot ? [entity.plot] : []));
                     dressing!.sync({
                         seed: state.seed, homes: dressingHomes(state, view.entities),
                         ground: view.ground, campfire: view.campfire
@@ -464,6 +490,8 @@ export function createFjordScene(options: {
         motion!.advance(motionDelta, running, !document.hidden);
         layer!.advance(motion!, motionDelta, running);
         rivalScene?.advance(motionDelta, running);
+        wildlife?.setHumans([...layer!.humanPositions(), ...(rivalScene?.humanPositions() ?? [])]);
+        wildlife?.advance(motionDelta, running, camera);
         campfireEffect!.update(delta, running && !document.hidden);
         precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
         const fireVisual = campfireEffect!.inspect();
@@ -474,6 +502,9 @@ export function createFjordScene(options: {
         productionLabels.setAnchors(layer!.productionAnchors());
         if (performance.now() - lastDiagnostics > 500) {
             canvas.dataset.rendered = JSON.stringify(layer!.describe());
+            if (import.meta.env.DEV && query.has('debugWildlife')) {
+                canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
+            }
             canvas.dataset.stability = JSON.stringify({
                 ...motion!.inspectMetrics(), ...models!.inspectResources(),
                 lastFrameMs, drawCalls: renderer.info.render.calls,
@@ -567,6 +598,7 @@ export function createFjordScene(options: {
         targetGeometry.dispose(); targetMaterial.dispose();
         reducedMotion.removeEventListener('change', configureEffects);
         discoveryFog?.dispose();
+        wildlife?.dispose();
         rivalScene?.dispose();
         dressing?.dispose();
         layer?.dispose();
@@ -595,10 +627,16 @@ export function createFjordScene(options: {
         resetFrameTime: () => clock.start(),
         get hasWorld() { return !!world; },
         get diagnostics() { return [...(assets?.diagnostics ?? []), ...(models?.diagnostics ?? [])]; },
-        setTarget(point: { x: number; z: number } | null | undefined) {
+        setTarget(point: { x: number; z: number } | null | undefined, valid?: boolean) {
             targetMarker.visible = !!point;
-            if (point) targetMarker.position.set(point.x,
-                createBlueprintSurface(campaign.blueprint).surfaceHeightAt(point.x, point.z) + .4, point.z);
+            targetMaterial.color.set(valid === undefined ? '#ffe09a' : valid ? '#22ff44' : '#ff2030');
+            if (import.meta.env.DEV) {
+                canvas.dataset.destinationPreview = JSON.stringify({
+                    point, valid, color: targetMaterial.color.getHexString(),
+                });
+            }
+            if (point) targetMarker.position.set(point.x, Math.max(campaign.blueprint.waterLevel,
+                createBlueprintSurface(campaign.blueprint).surfaceHeightAt(point.x, point.z)) + .4, point.z);
         },
         origins(memberIds: readonly string[]) {
             const rendered = layer?.describe() ?? [];
@@ -611,13 +649,15 @@ export function createFjordScene(options: {
         pick(x: number, y: number, pointerType: 'mouse' | 'touch') {
             return layer!.pick(camera, x, y, canvas.getBoundingClientRect(), pointerType);
         },
-        groundPoint(x: number, y: number) {
+        groundPoint(x: number, y: number, fallbackToWater = false) {
             const rect = canvas.getBoundingClientRect(), ray = new Raycaster();
             camera.updateMatrixWorld();
             ray.setFromCamera(new Vector2((x - rect.left) / rect.width * 2 - 1,
                 -(y - rect.top) / rect.height * 2 + 1), camera);
             const hit = intersectNavigationTerrain(world!.terrain, ray.ray, new Vector3());
-            return hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
+            const point = hit === undefined ? ray.intersectObject(world!.terrain, false)[0]?.point : hit;
+            return point ?? (fallbackToWater ? ray.ray.intersectPlane(
+                new Plane(new Vector3(0, 1, 0), -campaign.blueprint.waterLevel), new Vector3()) : undefined);
         },
     };
 }

@@ -47,7 +47,7 @@ export class ExpeditionPanel {
         private root: HTMLElement,
         private session: GameplaySession,
         private command: (command: SimulationCommand) => void,
-        private targetChanged: (point?: Point2) => void,
+        private targetChanged: (point?: Point2, valid?: boolean) => void,
         private origins: (memberIds: readonly string[]) => Record<string, Point2>,
         private navigation: ExpeditionNavigation,
     ) {
@@ -95,39 +95,69 @@ export class ExpeditionPanel {
             event.preventDefault();
             event.stopImmediatePropagation();
             this.cancelTarget();
-            this.toolbar.querySelector<HTMLButtonElement>('[data-explore]')?.focus();
+            this.shortcuts.querySelector<HTMLButtonElement>('[aria-expanded]')?.focus();
         }, { capture: true, signal: this.abort.signal });
     }
 
-    dispose() { this.abort.abort(); this.toolbar.remove(); this.shortcuts.remove(); }
+    dispose() {
+        this.abort.abort();
+        this.clearTarget();
+        this.root.closest('.fjord-stage')?.classList.remove('is-choosing-expedition');
+        this.toolbar.remove(); this.shortcuts.remove();
+    }
     get targeting() { return this.choosing; }
+    get targetingGroup() { return this.choosing ? this.groupId : undefined; }
     private get dialog() { return this.root.querySelector<HTMLDialogElement>('#expedition-start-dialog')!; }
     private activeMission(state = this.session.readSnapshot(), groupId = this.groupId) {
         return inspectSpatialExpeditions(state).missions
             .find(mission => mission.groupId === groupId && mission.status !== 'Returned');
     }
     private notify(message: string) { this.message = message; this.refresh(); }
-    private showTarget(point?: Point2) {
-        const key = point ? `${point.x},${point.z}` : 'none';
-        if (key !== this.markerKey) { this.markerKey = key; this.targetChanged(point); }
+    private showTarget(point?: Point2, valid?: boolean) {
+        const key = point ? `${point.x},${point.z},${valid}` : 'none';
+        if (key !== this.markerKey) { this.markerKey = key; this.targetChanged(point, valid); }
+    }
+    private destinationOffer(point: Point2) {
+        const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
+        const mission = this.activeMission();
+        const origins = mission?.status === 'Prepared' ? this.origins(members) : undefined;
+        return { offer: this.session.exploreOffer(this.groupId, point, origins), origins };
+    }
+    /** Read-only, using the same route authority as confirmation; never dispatches a command. */
+    previewTarget(point?: Point2) {
+        if (!this.choosing) return;
+        if (!point) {
+            this.showTarget();
+            return;
+        }
+        try {
+            this.destinationOffer(point);
+            this.showTarget(point, true);
+            return true;
+        } catch {
+            this.showTarget(point, false);
+            return false;
+        }
     }
     private clearTarget() {
         this.choosing = false;
         this.showTarget();
     }
     cancelTarget() {
+        this.hiddenGroups.delete(this.groupId);
         this.clearTarget();
         this.notify('Destination selection cancelled. The current expedition is unchanged.');
     }
     private beginTargeting(groupId: string) {
         this.groupId = groupId;
-        this.hiddenGroups.delete(groupId);
+        this.hiddenGroups.add(groupId);
         this.choosing = true;
         this.message = '';
         this.showTarget();
         this.navigation.showMap();
         this.refresh();
-        this.toolbar.querySelector<HTMLButtonElement>('#expedition-cancel')?.focus();
+        Array.from(this.shortcuts.querySelectorAll<HTMLButtonElement>('button'))
+            .find(button => button.dataset.expeditionToggle === groupId)?.focus({ preventScroll: true });
     }
 
     private click = (event: Event) => {
@@ -136,7 +166,7 @@ export class ExpeditionPanel {
         if (target.dataset.expeditionToggle) {
             const groupId = target.dataset.expeditionToggle;
             const hide = !this.toolbar.hidden && this.toolbar.dataset.group === groupId;
-            this.clearTarget();
+            if (groupId !== this.groupId) this.clearTarget();
             this.groupId = groupId;
             if (hide) this.hiddenGroups.add(groupId);
             else { this.hiddenGroups.delete(groupId); this.navigation.showMap(); }
@@ -221,7 +251,10 @@ export class ExpeditionPanel {
         if ('groupId' in command) this.groupId = command.groupId;
         if (command.type === 'StartExpedition') { this.beginTargeting(command.groupId); return; }
         if (['ExploreArea', 'RecallExpedition', 'CancelExpedition'].includes(command.type)) this.clearTarget();
-        if (command.type === 'ExploreArea') this.message = 'Destination set. No extra Food was charged.';
+        if (command.type === 'ExploreArea') {
+            this.hiddenGroups.add(command.groupId);
+            this.message = 'Destination set. No extra Food was charged.';
+        }
         if (command.type === 'RecallExpedition') this.message = 'Return home ordered.';
         if (command.type === 'CancelExpedition') this.message = 'Expedition ended. Unused supplies were discarded.';
         this.refresh();
@@ -231,15 +264,13 @@ export class ExpeditionPanel {
     chooseTarget(point: Point2) {
         if (!this.choosing) return false;
         try {
-            const members = this.session.readSnapshot().world!.groups[this.groupId].memberIds;
-            const mission = this.activeMission();
-            const origins = mission?.status === 'Prepared' ? this.origins(members) : undefined;
-            const offer = this.session.exploreOffer(this.groupId, point, origins);
+            const { offer, origins } = this.destinationOffer(point);
             this.message = 'Setting destination…';
             this.command({ type: 'ExploreArea', groupId: this.groupId, target: { ...offer.target }, origins });
         } catch (error) {
-            this.showTarget();
+            this.showTarget(point, false);
             this.message = error instanceof Error ? error.message : String(error);
+            this.hiddenGroups.delete(this.groupId);
         }
         this.refresh();
         return true;
@@ -367,7 +398,8 @@ export class ExpeditionPanel {
         }
         const workspace = this.root.closest<HTMLElement>('#fjord-workspace')!;
         // Changing workspace cancels only the unconfirmed flag, never the canonical expedition.
-        if (this.choosing && !workspace.hidden) this.clearTarget();
+        if (this.choosing && (!workspace.hidden || !activeGroups.has(this.groupId))) this.clearTarget();
+        this.root.closest('.fjord-stage')!.classList.toggle('is-choosing-expedition', this.choosing);
         const open = !workspace.hidden && workspace.dataset.surface === 'expeditions';
         if (!open && !activeGroups.size && !this.choosing) {
             this.toolbar.hidden = true;
@@ -431,12 +463,12 @@ export class ExpeditionPanel {
         this.toolbar.hidden = !group || !mission || !workspace.hidden || this.hiddenGroups.has(group.id);
         this.toolbar.style.setProperty('--fjord-shortcut-space', `${Math.min(activeGroups.length, 3) * 50}px`);
         const shortcutsHTML = activeGroups.map(candidate => button(
-            escape(candidate.name.replace(/^Group\s+/i, '')), 'route',
+            escape(candidate.name), 'route',
             `data-expedition-toggle="${escape(candidate.id)}" aria-label="Toggle ${escape(candidate.name)} controls"
                 aria-controls="expedition-mode" aria-expanded="${!this.toolbar.hidden && candidate.id === group?.id}"`
         )).join('');
         if (this.shortcutsHTML !== shortcutsHTML) {
-            this.shortcuts.innerHTML = shortcutsHTML;
+            this.replace(this.shortcuts, shortcutsHTML, this.shortcutsHTML);
             this.shortcutsHTML = shortcutsHTML;
         }
         if (!group || !mission) { this.showTarget(); return; }
@@ -494,7 +526,7 @@ export class ExpeditionPanel {
         if (html === previous) return;
         const focused = element.contains(document.activeElement) ? document.activeElement as HTMLElement : undefined;
         const focusAttribute = focused && ['data-test-food', 'data-member', 'data-expedition-group', 'data-expedition-action',
-            'data-explore', 'data-recall', 'data-cancel-expedition', 'data-start', 'id'].find(attribute => focused.hasAttribute(attribute));
+            'data-explore', 'data-recall', 'data-cancel-expedition', 'data-start', 'data-expedition-toggle', 'id'].find(attribute => focused.hasAttribute(attribute));
         const focusKey = focusAttribute && focused?.getAttribute(focusAttribute);
         const roster = element.querySelector<HTMLElement>('.fjord-expedition-members');
         const scrollTop = roster?.scrollTop ?? 0;

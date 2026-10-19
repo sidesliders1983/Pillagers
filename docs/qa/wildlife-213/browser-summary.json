@@ -1,0 +1,15 @@
+{
+  "islandRecipe": 7,
+  "game": {
+    "errors": [],
+    "failedRequests": [],
+    "instances": 26,
+    "sharedAssets": 11,
+    "diagnostics": []
+  },
+  "motionReview": {
+    "errors": [],
+    "instances": 26,
+    "sharedAssets": 11
+  }
+}

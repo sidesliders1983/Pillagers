@@ -39,6 +39,7 @@ export class RivalScene {
         this.motion?.advance(delta, running, true);
         if (this.motion) this.layer.advance(this.motion, delta, running);
     }
+    humanPositions() { return this.layer.humanPositions(); }
     describe() { return this.layer.describe(); }
     dispose() {
         this.disposed = true;

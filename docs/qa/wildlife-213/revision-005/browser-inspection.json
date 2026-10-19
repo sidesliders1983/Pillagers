@@ -1,0 +1,90 @@
+{
+  "mode": "Actual WildlifeLayer and curated campaign terrain, controlled one-second steps via visible review controls",
+  "checked": [
+    {
+      "id": "otter:shore:0",
+      "time": [
+        0,
+        2
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    },
+    {
+      "id": "seal:haul-out:0",
+      "time": [
+        10,
+        11
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    },
+    {
+      "id": "brown-bear:roaming:0",
+      "time": [
+        11,
+        12
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    },
+    {
+      "id": "wolf:roaming:0",
+      "time": [
+        12,
+        13
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    },
+    {
+      "id": "red-fox:roaming:0",
+      "time": [
+        13,
+        14
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    },
+    {
+      "id": "lynx:roaming:0",
+      "time": [
+        14,
+        15
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    },
+    {
+      "id": "reindeer:alpine:0",
+      "time": [
+        15,
+        16
+      ],
+      "headChanged": true,
+      "positionUnchanged": true
+    }
+  ],
+  "gull": {
+    "id": "great-black-backed-gull:grounded:0",
+    "neutral": {
+      "time": 2,
+      "morphs": [
+        1,
+        0,
+        0
+      ]
+    },
+    "look": {
+      "time": 10,
+      "morphs": [
+        1,
+        0,
+        1
+      ]
+    },
+    "interpretation": "Folded-wing influence stays one while the independent head target changes"
+  },
+  "layerDiagnostics": [],
+  "finalFreshBrowserErrors": []
+}

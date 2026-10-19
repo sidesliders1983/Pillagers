@@ -1,0 +1,85 @@
+[
+  {
+    "id": "bear",
+    "file": "Grizzly-animate-walking.glb",
+    "reference": "shoulder-height",
+    "metres": 1.15,
+    "sourceDimension": 0.00204
+  },
+  {
+    "id": "fox",
+    "file": "Fox-animated.glb",
+    "reference": "shoulder-height",
+    "metres": 0.4,
+    "sourceDimension": 0.0020905010284525995
+  },
+  {
+    "id": "wolf",
+    "file": "Wolf-animated.glb",
+    "reference": "shoulder-height",
+    "metres": 0.75,
+    "sourceDimension": 0.0021
+  },
+  {
+    "id": "moose",
+    "file": "Elk.glb",
+    "reference": "shoulder-height",
+    "metres": 1.9,
+    "sourceDimension": 1.24
+  },
+  {
+    "id": "reindeer",
+    "file": "Reindeer-animated.glb",
+    "reference": "shoulder-height",
+    "metres": 1.15,
+    "sourceDimension": 0.0014673360090781556,
+    "repairRightHindLeg": true
+  },
+  {
+    "id": "lynx",
+    "file": "Lynx-animated.glb",
+    "reference": "shoulder-height",
+    "metres": 0.62,
+    "sourceDimension": 0.0015581426167843593
+  },
+  {
+    "id": "puffin",
+    "file": "Puffin.glb",
+    "reference": "standing-height",
+    "metres": 0.32,
+    "foldWings": true,
+    "pitch": -0.7853981633974483
+  },
+  {
+    "id": "otter",
+    "file": "Sea-otter-animated.glb",
+    "reference": "body-height",
+    "metres": 0.3,
+    "sourceDimension": 0.0018861880085896004
+  },
+  {
+    "id": "seal",
+    "file": "Seal-animated.glb",
+    "reference": "body-height",
+    "metres": 0.6,
+    "sourceDimension": 0.0018693116255900871
+  },
+  {
+    "id": "gull-flying",
+    "file": "Seagull-flying.glb",
+    "reference": "wingspan",
+    "metres": 1.6
+  },
+  {
+    "id": "gull-standing",
+    "file": "Seagull-standing.glb",
+    "reference": "standing-height",
+    "metres": 0.6
+  },
+  {
+    "id": "rabbit",
+    "file": "bunny.glb",
+    "reference": "standing-height",
+    "metres": 0.42
+  }
+]

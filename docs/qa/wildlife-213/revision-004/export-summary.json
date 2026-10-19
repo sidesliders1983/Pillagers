@@ -1,0 +1,146 @@
+{
+  "replaced": [
+    {
+      "id": "fox",
+      "source": "Assets/Characters/Wildlife/Fox-animated.glb",
+      "sourceSha256": "d1e08d538898b24fcac8234d5bfbd247c67cc7047a90b0ffef6599075d2f4593",
+      "sha256": "c90c5043b8ccd270e3ceadde7ca31bcaf267b0be1210902a3f75382ec9d50aa3",
+      "bytes": 153936,
+      "joints": 27,
+      "clips": [
+        {
+          "name": "Walk",
+          "duration": 1
+        }
+      ],
+      "priorBodyLength": 0.8014246916043852,
+      "bodyLength": 0.8014246916043857,
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Keep source walk loop; remove only horizontal Hips root motion",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    },
+    {
+      "id": "reindeer",
+      "source": "Assets/Characters/Wildlife/Reindeer-animated.glb",
+      "sourceSha256": "464665f030b1017db3559c6e859c97ab1fc765d5ec9ebbe4c06e0006c9de31e4",
+      "sha256": "599290165c65b90c15718233a4825e4e6e453031fb9b3175dd5f8192762536c9",
+      "bytes": 138836,
+      "joints": 27,
+      "clips": [
+        {
+          "name": "Walk",
+          "duration": 1
+        }
+      ],
+      "priorBodyLength": 2.01881658698649,
+      "bodyLength": 2.01881658698649,
+      "operations": [
+        "Preserve supplied geometry, UVs and unaffected rig/clip channels",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Repair crossed right hind chain, inverse binds and weights from mirrored left surface; mirror opposite-phase leg motion",
+        "Keep source walk loop; remove only horizontal Hips root motion",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    },
+    {
+      "id": "lynx",
+      "source": "Assets/Characters/Wildlife/Lynx-animated.glb",
+      "sourceSha256": "ba75a5572c350a9a0403acf28cc5dd91df1c37b59c98d88a2440d0f0e61b7e95",
+      "sha256": "d40d0675fbb597626bea1d312ab6699071816b3dfe163ec1b34196fc4a7544e8",
+      "bytes": 158220,
+      "joints": 27,
+      "clips": [
+        {
+          "name": "Walk",
+          "duration": 1
+        }
+      ],
+      "priorBodyLength": 1.108772982919391,
+      "bodyLength": 1.1087729829193917,
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Keep source walk loop; remove only horizontal Hips root motion",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    },
+    {
+      "id": "otter",
+      "source": "Assets/Characters/Wildlife/Sea-otter-animated.glb",
+      "sourceSha256": "5d63f9b50913175e9e8738b1dc3bec85d94fce2c64441670cfd1f06e3412c3c0",
+      "sha256": "92ef6f30a3dbd6471d24d606f2a1383f4179f26120f940f26d27ba04ac5266cb",
+      "bytes": 141528,
+      "joints": 27,
+      "clips": [
+        {
+          "name": "Walk",
+          "duration": 1
+        }
+      ],
+      "priorBodyLength": 1.0810280260956273,
+      "bodyLength": 1.0810280260956273,
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Keep source walk loop; remove only horizontal Hips root motion",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    },
+    {
+      "id": "seal",
+      "source": "Assets/Characters/Wildlife/Seal-animated.glb",
+      "sourceSha256": "80cd0fac97ebf3efbbfea85ce159718ac3d43609129ca8466255f8d70f47fc82",
+      "sha256": "18bb89448497d824ce611c3b3aa170a8c593c050d123a284027a460e27b5fa1c",
+      "bytes": 135296,
+      "joints": 27,
+      "clips": [
+        {
+          "name": "Walk",
+          "duration": 1
+        }
+      ],
+      "priorBodyLength": 1.9025821833212748,
+      "bodyLength": 1.9025821833212744,
+      "operations": [
+        "Preserve supplied geometry, UVs, rig and source clip rotations",
+        "Normalize once to canonical metre scale in an authoring wrapper",
+        "Keep source walk loop; remove only horizontal Hips root motion",
+        "Resize albedo to 512px WebP and remove high-frequency surface maps"
+      ]
+    }
+  ],
+  "unchangedAssets": [
+    "bear",
+    "wolf",
+    "moose",
+    "puffin",
+    "gull-flying",
+    "gull-standing",
+    "rabbit"
+  ],
+  "totalRuntimeBytes": 1600056,
+  "reindeer": {
+    "processedVertices": 897,
+    "maximumMirroredDonorDistanceSource": 0.000009411500840377258,
+    "rawLongestEdgeAtRuntimeScale": 0.9385383886913321,
+    "repairedLongestEdge": 0.43679742380286957,
+    "samples": 20
+  },
+  "authoringRepairChecks": {
+    "unaffectedAnimationChannels": 69,
+    "unchangedVertexAttributes": [
+      "POSITION",
+      "NORMAL",
+      "TEXCOORD_0"
+    ],
+    "unchangedTopology": true,
+    "repair": {
+      "changedVertices": 897,
+      "maximumDonorDistance": 0.000009411500840377258,
+      "operation": "Repair crossed right hind chain, inverse binds and weights from mirrored left surface; mirror opposite-phase leg motion"
+    }
+  }
+}

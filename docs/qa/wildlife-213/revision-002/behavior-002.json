@@ -1,0 +1,103 @@
+{
+  "errors": [],
+  "evidence": {
+    "rising": {
+      "id": "great-black-backed-gull:airborne:0",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 129.1775842215787,
+        "y": 18.38233835804816,
+        "z": -172.9975315883896
+      },
+      "anchor": {
+        "x": 152.27748145513306,
+        "z": -195.30904523922516
+      },
+      "radius": 44,
+      "heading": 0.9856042634271428,
+      "climbRate": 0.7847594332787367,
+      "wingEffort": 0.7361353273714873,
+      "shyDistance": null,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    "gliding": {
+      "id": "great-black-backed-gull:airborne:0",
+      "species": "great-black-backed-gull",
+      "variant": "airborne",
+      "movement": "air",
+      "habitat": "coast",
+      "state": "glide",
+      "position": {
+        "x": 188.49086292818288,
+        "y": 33.57513933005609,
+        "z": -195.4051923339993
+      },
+      "anchor": {
+        "x": 152.27748145513306,
+        "z": -195.30904523922516
+      },
+      "radius": 44,
+      "heading": -3.137444215424746,
+      "climbRate": -0.10346977929238221,
+      "wingEffort": 0.010845826161758255,
+      "shyDistance": null,
+      "flightHeight": [
+        12,
+        30
+      ]
+    },
+    "before": {
+      "id": "red-fox:roaming:0",
+      "species": "red-fox",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "lowland",
+      "state": "roam",
+      "position": {
+        "x": 60.79423490771661,
+        "y": 2.1608165225891875,
+        "z": -156.19915438958887
+      },
+      "anchor": {
+        "x": 60,
+        "z": -164
+      },
+      "radius": 14,
+      "heading": 1.3664426021439176,
+      "climbRate": 0,
+      "wingEffort": 0,
+      "shyDistance": 28,
+      "flightHeight": null
+    },
+    "after": {
+      "id": "red-fox:roaming:0",
+      "species": "red-fox",
+      "variant": "roaming",
+      "movement": "ground",
+      "habitat": "lowland",
+      "state": "flee",
+      "position": {
+        "x": 64.99423490771659,
+        "y": 1.755868278075389,
+        "z": -156.19915438958887
+      },
+      "anchor": {
+        "x": 60,
+        "z": -164
+      },
+      "radius": 14,
+      "heading": 1.570788855298945,
+      "climbRate": 0,
+      "wingEffort": 0,
+      "shyDistance": 28,
+      "flightHeight": null
+    }
+  }
+}
