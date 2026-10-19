@@ -1,0 +1,85 @@
+export type WildlifeMovement = 'ground' | 'air' | 'water' | 'shore';
+export type HabitatTag = 'coast' | 'fjord_water' | 'rocky_shore' | 'cliff' | 'forest_edge' | 'deep_forest' | 'lowland' | 'wet_lowland' | 'foothill' | 'mountain' | 'alpine';
+export interface WildlifeVariant {
+    id: string;
+    asset: string;
+    movement: WildlifeMovement;
+    count: number;
+    habitats: readonly HabitatTag[];
+    radius: number;
+    speed: number;
+    clearance: number;
+    avoidSettlement: number;
+    maximumCoastDistance?: number;
+    minimumCoastDistance?: number;
+    flightHeight?: readonly [
+        number,
+        number
+    ];
+}
+export interface WildlifeSpecies {
+    id: string;
+    label: string;
+    group: 'solo' | 'pair' | 'small_group' | 'flock';
+    groupRadius?: number;
+    variants: readonly WildlifeVariant[];
+}
+/** Population and habitat rules are independent of simulation residents and Core RNG. */
+export const wildlifeSpecies: readonly WildlifeSpecies[] = [
+    { id: 'brown-bear', label: 'Brown bear', group: 'solo', variants: [
+            { id: 'roaming', asset: 'bear', movement: 'ground', count: 1,
+                habitats: ['deep_forest', 'foothill'], radius: 28, speed: .65, clearance: .95, avoidSettlement: 85 },
+        ] },
+    { id: 'red-fox', label: 'Red fox', group: 'solo', variants: [
+            { id: 'roaming', asset: 'fox', movement: 'ground', count: 1,
+                habitats: ['forest_edge', 'lowland'], radius: 14, speed: .8, clearance: .45, avoidSettlement: 38 },
+        ] },
+    { id: 'wolf', label: 'Wolf', group: 'solo', variants: [
+            { id: 'roaming', asset: 'wolf', movement: 'ground', count: 1,
+                habitats: ['deep_forest', 'forest_edge', 'foothill'], radius: 38, speed: .9, clearance: .85, avoidSettlement: 90 },
+        ] },
+    { id: 'moose', label: 'Moose', group: 'solo', variants: [
+            { id: 'roaming', asset: 'moose', movement: 'ground', count: 1,
+                habitats: ['wet_lowland', 'forest_edge'], radius: 22, speed: .65, clearance: 1.5, avoidSettlement: 70, minimumCoastDistance: 25 },
+        ] },
+    { id: 'reindeer', label: 'Reindeer', group: 'solo', variants: [
+            { id: 'alpine', asset: 'reindeer', movement: 'ground', count: 1,
+                habitats: ['alpine'], radius: 24, speed: .7, clearance: 1.05, avoidSettlement: 80 },
+        ] },
+    { id: 'lynx', label: 'Lynx', group: 'solo', variants: [
+            { id: 'roaming', asset: 'lynx', movement: 'ground', count: 1,
+                habitats: ['deep_forest', 'foothill'], radius: 18, speed: .6, clearance: .6, avoidSettlement: 80 },
+        ] },
+    { id: 'great-black-backed-gull', label: 'Great black-backed gull', group: 'flock', groupRadius: 36, variants: [
+            { id: 'airborne', asset: 'gull-flying', movement: 'air', count: 6,
+                habitats: ['coast', 'fjord_water', 'cliff'], radius: 44, speed: 6, clearance: .85,
+                avoidSettlement: 0, maximumCoastDistance: 65, flightHeight: [12, 30] },
+            { id: 'grounded', asset: 'gull-standing', movement: 'shore', count: 3,
+                habitats: ['coast', 'rocky_shore'], radius: 3, speed: 0, clearance: 1.1,
+                avoidSettlement: 12, maximumCoastDistance: 10 },
+        ] },
+    { id: 'puffin', label: 'Puffin', group: 'small_group', groupRadius: 10, variants: [
+            { id: 'land', asset: 'puffin', movement: 'shore', count: 3,
+                habitats: ['coast', 'rocky_shore'], radius: 3, speed: 0, clearance: .16,
+                avoidSettlement: 25, maximumCoastDistance: 10 },
+            { id: 'water', asset: 'puffin', movement: 'water', count: 2,
+                habitats: ['fjord_water'], radius: 5, speed: .18, clearance: .16,
+                avoidSettlement: 25, maximumCoastDistance: 22 },
+        ] },
+    { id: 'otter', label: 'Otter', group: 'pair', groupRadius: 12, variants: [
+            { id: 'shore', asset: 'otter', movement: 'shore', count: 1,
+                habitats: ['coast', 'rocky_shore'], radius: 5, speed: .3, clearance: .6,
+                avoidSettlement: 35, maximumCoastDistance: 9 },
+            { id: 'water', asset: 'otter', movement: 'water', count: 1,
+                habitats: ['fjord_water'], radius: 6, speed: .4, clearance: .25,
+                avoidSettlement: 35, maximumCoastDistance: 22 },
+        ] },
+    { id: 'seal', label: 'Seal', group: 'small_group', groupRadius: 20, variants: [
+            { id: 'haul-out', asset: 'seal', movement: 'shore', count: 2,
+                habitats: ['coast', 'rocky_shore'], radius: 3, speed: 0, clearance: .55,
+                avoidSettlement: 35, maximumCoastDistance: 10 },
+            { id: 'water', asset: 'seal', movement: 'water', count: 2,
+                habitats: ['fjord_water'], radius: 9, speed: .45, clearance: .55,
+                avoidSettlement: 35, maximumCoastDistance: 28 },
+        ] },
+];

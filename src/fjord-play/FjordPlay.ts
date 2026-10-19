@@ -1,3 +1,4 @@
+import { WildlifeLayer } from '../wildlife/WildlifeLayer';
 import { RivalScene } from './RivalScene';
 import { IslandMap } from './IslandMap';
 import { createBlueprintSurface } from '../world-generation/TerrainQueries';
@@ -674,6 +675,7 @@ export class FjordPlay {
         let lighting: WorldLighting | undefined;
         let weatherTint: SeasonTint | undefined;
         let dressing: SettlementDressingLayer | undefined;
+        let wildlife: WildlifeLayer | undefined;
         let campfireEffect: CampfireEffect | undefined;
         let precipitationEffect: PrecipitationEffect | undefined;
         const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -721,6 +723,7 @@ export class FjordPlay {
             weatherTint?.dispose();
             campfireEffect?.dispose();
             precipitationEffect?.dispose();
+            wildlife?.dispose();
             world?.dispose();
             assets?.dispose();
             lighting?.dispose();
@@ -856,6 +859,16 @@ export class FjordPlay {
                     next.dispose();
                     return rebuildWorld();
                 }
+                let nextWildlife: WildlifeLayer | undefined;
+                if (wildlife?.population.world !== blueprint) {
+                    try {
+                        nextWildlife = await WildlifeLayer.create(blueprint,
+                            (x, z) => !knownTerrain || discoveryAt(knownTerrain, x, z) !== 'unknown');
+                    } catch (error) { next.dispose(); throw error; }
+                    if (this.stopped || this.shared.transferring || revision !== this.worldRevision) {
+                        nextWildlife.dispose(); next.dispose(); return;
+                    }
+                }
                 const anchor = next.attachments.find(item => item.key === 'boat')!;
                 this.campaign.setMooring({ x: anchor.x, y: anchor.y, z: anchor.z, rotation: anchor.rotation, scale: 1 });
                 weatherTint?.dispose();
@@ -864,6 +877,11 @@ export class FjordPlay {
                 precipitationEffect?.dispose();
                 world?.dispose();
                 world = next;
+                if (nextWildlife) {
+                    wildlife?.dispose();
+                    wildlife = nextWildlife;
+                    scene.add(wildlife.root);
+                }
                 discoveryFog?.dispose();
                 knownTerrain = discovery;
                 discoveryFog = discovery ? new DiscoveryFog(blueprint, discovery) : undefined;
@@ -1019,6 +1037,8 @@ export class FjordPlay {
                         }
                     }
                     sceneEntities = view.entities;
+                    wildlife?.setObstacles(view.entities.flatMap(entity =>
+                        entity.kind === 'building' && entity.plot ? [entity.plot] : []));
                     dressing!.sync({ seed: state.seed, homes: dressingHomes(state, view.entities),
                         ground: view.ground, campfire: view.campfire }, knownTerrain);
                     dressing!.setSeason(view.calendar.visualProgress);
@@ -1135,6 +1155,7 @@ export class FjordPlay {
             motion!.advance(motionDelta, running, !document.hidden);
             layer!.advance(motion!, motionDelta, running);
             rivalScene?.advance(motionDelta, running);
+            wildlife?.advance(motionDelta, running, camera);
             campfireEffect!.update(delta, running && !document.hidden);
             precipitationEffect!.update(delta, running && !document.hidden, controller.focus, camera.position);
             const fireVisual = campfireEffect!.inspect();
@@ -1145,6 +1166,9 @@ export class FjordPlay {
             productionLabels.setAnchors(layer!.productionAnchors());
             if (performance.now() - lastDiagnostics > 500) {
                 canvas.dataset.rendered = JSON.stringify(layer!.describe());
+                if (import.meta.env.DEV && query.has('debugWildlife')) {
+                    canvas.dataset.wildlife = JSON.stringify(wildlife?.inspect());
+                }
                 canvas.dataset.stability = JSON.stringify({
                     ...motion!.inspectMetrics(), ...models!.inspectResources(),
                     lastFrameMs, drawCalls: renderer.info.render.calls,

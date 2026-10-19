@@ -33,6 +33,9 @@ for (const variant of ['adult-female', 'adult-male', 'baby', 'young-adult']) {
     await verifyEntry(directory, await json(directory + '/manifest.json'));
 }
 
+const wildlife = await json('wildlife/manifest.json');
+for (const entry of wildlife.entries) await verifyEntry('wildlife', entry);
+
 const terrain = await json('terrain/manifest.json');
 for (const name of [...Object.values(terrainModels), longshipModel])
     assert.ok(terrain.assets[name], 'Missing Terrain model: ' + name);
@@ -78,5 +81,5 @@ if (process.argv.includes('--tracked')) {
         .filter(file => !tracked.has(file));
     assert.deepEqual(missing, [], 'Public runtime files missing from Git');
 }
-console.log('Validated ' + files.length + ' public files, house/human/cattle manifests and ' +
+console.log('Validated ' + files.length + ' public files, house/human/cattle/wildlife manifests and ' +
     Object.keys(terrain.assets).length + ' decoded Terrain models without Assets/.');
