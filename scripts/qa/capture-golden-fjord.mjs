@@ -118,6 +118,26 @@ try {
                 entry.captures.push({ canonicalSha256, blueprintSha256, stateSha256,
                     pixelsSha256: digest(pixels), host, state, image: label + '-world.png' });
                 console.log('PASS golden', label, state.calendar.season, state.renderer.callsIncludingShadows, 'calls');
+                if (process.env.QA_PROFILE_MS) {
+                    const milliseconds = Number(process.env.QA_PROFILE_MS);
+                    assert.ok(Number.isFinite(milliseconds) && milliseconds >= 5000 && milliseconds <= 60000);
+                    const before = await page.evaluate(() => window.__fjordAudit.inspect());
+                    await page.evaluate(() => {
+                        window.__fjordAudit.golden.frozen = false;
+                        window.__fjordAudit.start();
+                    });
+                    await page.waitForTimeout(milliseconds);
+                    const observation = await page.evaluate(() => {
+                        const sample = window.__fjordAudit.stop();
+                        window.__fjordAudit.golden.frozen = true;
+                        return { sample, after: window.__fjordAudit.inspect(),
+                            canonicalJSON: window.__fjordAudit.references.session.saveJSON() };
+                    });
+                    assert.equal(digest(observation.canonicalJSON), canonicalSha256);
+                    delete observation.canonicalJSON;
+                    entry.profiles ??= [];
+                    entry.profiles.push({ reload, requestedMs: milliseconds, before, ...observation });
+                }
                 await write();
             } catch (error) {
                 entry.failure = { message: String(error), url: page.url(),

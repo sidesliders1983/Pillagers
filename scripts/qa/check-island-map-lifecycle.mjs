@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_MODULE ||
     'C:/Users/Devoteam/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const origin = process.env.QA_ORIGIN || 'http://127.0.0.1:5180';
+const output = process.env.QA_OUTPUT || 'artifacts/island-map';
+await mkdir(output, { recursive: true });
 const browser = await chromium.launch({ channel: 'msedge', headless: true });
 const report = { status: 'RUNNING', checks: [], errors: [] };
 let page;
@@ -52,10 +54,10 @@ try {
 } catch (error) {
     if (page) {
         report.notice = await page.locator('#fjord-notice').textContent().catch(() => null);
-        await page.screenshot({ path: 'artifacts/island-map/lifecycle-failure.png' }).catch(() => {});
+        await page.screenshot({ path: output + '/lifecycle-failure.png' }).catch(() => {});
     }
     report.status = 'FAIL'; report.failure = String(error.stack); throw error;
 } finally {
-    await writeFile('artifacts/island-map/lifecycle.json', JSON.stringify(report, null, 2));
+    await writeFile(output + '/lifecycle.json', JSON.stringify(report, null, 2));
     await browser.close();
 }

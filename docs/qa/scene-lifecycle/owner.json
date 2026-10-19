@@ -1,0 +1,65 @@
+{
+  "status": "PASS",
+  "checks": [
+    "Dispose twice during a real delayed asset request: late completion attaches no roots or UI, leaves no pending work and preserves exact Core",
+    "Disposal during a real native body load drains without stale scene writes, exceptions, pending work or Core changes",
+    "Three world replacements retain native resident instances and stabilize owned roots, GPU geometry/texture counters and one map; final disposal removes control bindings",
+    "Replacing campaign 17 with 32 during a delayed native load publishes only current-campaign presentation, with exact Core and no stale completion"
+  ],
+  "errors": [],
+  "cycles": {
+    "samples": [
+      {
+        "roots": 12,
+        "geometries": 111,
+        "textures": 71,
+        "residentRetained": true,
+        "maps": 1,
+        "work": 0
+      },
+      {
+        "roots": 12,
+        "geometries": 111,
+        "textures": 71,
+        "residentRetained": true,
+        "maps": 1,
+        "work": 0
+      },
+      {
+        "roots": 12,
+        "geometries": 111,
+        "textures": 71,
+        "residentRetained": true,
+        "maps": 1,
+        "work": 0
+      },
+      {
+        "roots": 12,
+        "geometries": 111,
+        "textures": 71,
+        "residentRetained": true,
+        "maps": 1,
+        "work": 0
+      }
+    ],
+    "unchangedCore": true,
+    "rootsAfterDisposal": 0
+  },
+  "replacement": {
+    "errors": [
+      null,
+      null
+    ],
+    "expected": {
+      "x": 70,
+      "z": 146
+    },
+    "observed": [
+      {
+        "x": 70,
+        "z": 146
+      }
+    ],
+    "exactCore": true
+  }
+}
