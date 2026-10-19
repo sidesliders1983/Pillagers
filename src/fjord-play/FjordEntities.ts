@@ -117,7 +117,8 @@ export class FjordEntities {
         this.root.userData.markers = descriptions;
         this.root.userData.selection = descriptions.find(marker => marker.role === 'selected') ?? null;
     }
-    async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>) {
+    async sync(entities: readonly FjordEntity[], yieldControl?: () => Promise<void>, current = () => true) {
+        if (this.disposed || !current()) return;
         const visible = entities.filter(e => e.transform !== null);
         const wanted = new Set(visible.map(e => e.selectionKey));
         for (const [key, entry] of this.entries)
@@ -130,12 +131,13 @@ export class FjordEntities {
             if (this.disposed)
                 return;
             await yieldControl?.();
+            if (this.disposed || !current()) return;
             const signature = entity.asset + ':' + (entity.terrainAsset ?? '');
             let entry = this.entries.get(entity.selectionKey);
             if (!entry || entry.signature !== signature) {
                 const model = await this.models.create(entity);
                 model.userData.asset = entity.asset;
-                if (this.disposed) {
+                if (this.disposed || !current()) {
                     this.remove(model);
                     return;
                 }
@@ -156,7 +158,7 @@ export class FjordEntities {
             entry.model.position.set(display.x, display.y, display.z);
             entry.model.rotation.y = display.rotation;
             await this.models.reconcile(entry.model, entity);
-            if (this.disposed) return;
+            if (this.disposed || !current()) return;
             if (entity.kind === 'persona' && !entry.model.userData.appearance) entry.model.scale.setScalar(p.scale);
             if (entity.kind === 'cattle' && entity.status.assignment) {
                 const home = this.entries.get('building:' + entity.status.assignment)?.model;

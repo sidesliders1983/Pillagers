@@ -54,7 +54,16 @@ export function createFjordScene(options: {
     const query = new URLSearchParams(location.search);
     let restoredCamera = options.restoredCamera;
     let disposed = false, queued = false, worldRevision = 0;
+    let activeBlueprint: typeof campaign.blueprint | undefined;
+    let appliedRevision = -1;
+    const pending = new Set<Promise<void>>();
+    const track = (operation: Promise<void>) => {
+        pending.add(operation);
+        void operation.then(() => pending.delete(operation), () => pending.delete(operation));
+        return operation;
+    };
     const inactive = () => disposed || host.stopped;
+    const bindings = new AbortController();
     let assets: AssetManager | undefined, models: FjordModels | undefined;
     let layer: FjordEntities | undefined, world: Awaited<ReturnType<typeof createWorld>> | undefined;
     let discoveryFog: DiscoveryFog | undefined;
@@ -96,8 +105,8 @@ export function createFjordScene(options: {
         campfireEffect?.configure(quality, reducedMotion.matches);
         precipitationEffect?.configure(quality, reducedMotion.matches);
     };
-    reducedMotion.addEventListener('change', configureEffects);
-    document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects);
+    reducedMotion.addEventListener('change', configureEffects, { signal: bindings.signal });
+    document.querySelector('#fjord-effects')!.addEventListener('change', configureEffects, { signal: bindings.signal });
     let weatherSignature = "";
 
     const cleared = new Set<string>();
@@ -107,11 +116,11 @@ export function createFjordScene(options: {
     document.querySelector('#fjord-view-home')!.addEventListener('click', () => {
         if (arrivalPose) controller.setView(arrivalPose);
         document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
-    });
+    }, { signal: bindings.signal });
     document.querySelector('#fjord-view-summit')!.addEventListener('click', () => {
         if (highlandPose) controller.setView(highlandPose);
         document.querySelector<HTMLDetailsElement>('#fjord-menu')!.open = false;
-    });
+    }, { signal: bindings.signal });
 
     const highlight = (state = session.readSnapshot(), view = campaign.readProjection()) => {
         liveMarkers = shared.selectionPresentation(state, view.entities);
@@ -123,6 +132,7 @@ export function createFjordScene(options: {
     };
 
     const rebuildWorld = async (): Promise<void> => {
+        if (inactive()) return;
         host.work(1);
         try {
             const blueprint = campaign.blueprint;
@@ -157,6 +167,8 @@ export function createFjordScene(options: {
             precipitationEffect?.dispose();
             world?.dispose();
             world = next;
+            activeBlueprint = blueprint;
+            appliedRevision = -1;
             discoveryFog?.dispose();
             knownTerrain = discovery;
             discoveryFog = discovery ? new DiscoveryFog(blueprint, discovery) : undefined;
@@ -198,8 +210,15 @@ export function createFjordScene(options: {
                 document.querySelector<HTMLSelectElement>('#fjord-quality')!.value as 'low' | 'standard',
                 fjordPresentation.lighting);
             lighting.includeWorldShadowBounds(next.root);
-            if (syncScene)
+            if (syncScene) {
                 await syncScene();
+                // A superseded in-flight sync can have been joined above. Reconcile this
+                // world once that work drains, rather than accepting its obsolete result.
+                if (!inactive() && revision === worldRevision && appliedRevision !== revision)
+                    await syncScene();
+            }
+            if (inactive() || shared.transferring || revision !== worldRevision || blueprint !== campaign.blueprint)
+                return;
             controller.setNavigationSurface(next.terrain, firePosition, blueprint.terrain.bounds, next.movement.heightAt,
                 { terrain: blueprint.terrain, waterLevel: blueprint.waterLevel });
             islandMap.setWorld(blueprint, { x: firePosition.x, z: firePosition.z }, discovery, next.terrain);
@@ -238,7 +257,7 @@ export function createFjordScene(options: {
         await rebuildWorld();
         if (inactive() || shared.transferring) return;
         syncScene = () => {
-            if (inactive() || shared.transferring)
+            if (inactive() || shared.transferring || activeBlueprint !== campaign.blueprint)
                 return Promise.resolve();
             queued = true;
             if (sceneWork)
@@ -247,6 +266,9 @@ export function createFjordScene(options: {
             sceneWork = (async () => {
                 do {
                     queued = false;
+                    const revision = worldRevision, activeWorld = world;
+                    const current = () => !inactive() && !shared.transferring &&
+                        revision === worldRevision && activeWorld === world && activeBlueprint === campaign.blueprint;
                     // Keep one immutable revision through asynchronous model work. A queued revision
                     // acquires a new pair on the next pass instead of mixing new facts into this scene.
                     const state = session.readSnapshot();
@@ -302,6 +324,7 @@ export function createFjordScene(options: {
                         if (host.loading) {
                             await host.loading.measure('initial-ground-wear',
                                 () => world!.prepareGroundWeights(weights));
+                            if (!current()) return;
                         } else world!.setGroundWeights(weights);
                         canvas.dataset.ground = JSON.stringify({
                             plots: observedGround.plots.map(p => p.id),
@@ -344,7 +367,8 @@ export function createFjordScene(options: {
                     dressing!.setSeason(view.calendar.visualProgress);
                     canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
                     layer!.prepareExpeditions(state, campaign.blueprint, host.tickIntervalSeconds);
-                    await layer!.sync(view.entities, host.loading ? yieldForInput : undefined);
+                    await layer!.sync(view.entities, host.loading ? yieldForInput : undefined, current);
+                    if (!current()) return;
                     campfireEffect!.setLit(inspectCampfire(state).lit);
                     layer!.setCampfireHeat(campfireEffect!.inspect().heat);
                     const fireBounds = layer!.bounds('campfire:settlement-campfire')!;
@@ -359,10 +383,12 @@ export function createFjordScene(options: {
                     const trees = host.loading
                         ? await host.loading.measure('standing-tree-targets', () => world!.standingTrees())
                         : world!.standingTrees();
+                    if (!current()) return;
                     motion!.setStandingTrees(trees);
                     layer!.configureMotion(motion!);
                     layer!.advance(motion!, 0, false);
                     await rivalScene?.sync(view.rival, view.calendar.visualProgress, trees);
+                    if (!current()) return;
                     canvas.dataset.rival = JSON.stringify({
                         known: view.rival.known,
                         currentlyObserved: view.rival.currentlyObserved, rendered: rivalScene?.describe() ?? []
@@ -375,6 +401,7 @@ export function createFjordScene(options: {
                     productionLabels.setAnchors(rendered);
                     canvas.dataset.rendered = JSON.stringify(rendered);
                     canvas.dataset.environment = JSON.stringify(world!.describe());
+                    appliedRevision = revision;
                     document.querySelector('#fjord-diagnostics')!.textContent = [...view.diagnostics,
                     ...assets!.diagnostics, ...models!.diagnostics, ...motion!.diagnostics,
                         sceneCanonicalTime,
@@ -400,7 +427,7 @@ export function createFjordScene(options: {
             canvas.dataset.dressing = JSON.stringify(dressing!.inspect());
             lighting!.setQuality(quality);
             renderer.setPixelRatio(Math.min(devicePixelRatio, quality === 'low' ? 1 : 1.5));
-        });
+        }, { signal: bindings.signal });
 
         const resize = () => {
             const rect = canvas.getBoundingClientRect();
@@ -419,6 +446,7 @@ export function createFjordScene(options: {
     let lastDiagnostics = 0, activeTime = 0, lastFrameMs = 0;
 
     const frame = (calendar: FjordCalendar, running: boolean) => {
+        if (inactive()) return;
         const frameStarted = performance.now();
         const elapsed = clock.getDelta(), delta = Math.min(elapsed, .1);
         time += delta;
@@ -522,7 +550,10 @@ export function createFjordScene(options: {
         canvas.dataset.loading = JSON.stringify(loading.evidence);
     };
     const dispose = () => {
+        if (disposed) return;
         disposed = true;
+        worldRevision++;
+        bindings.abort();
         renderer.setAnimationLoop(null);
         observer?.disconnect();
         controller.dispose();
@@ -533,19 +564,27 @@ export function createFjordScene(options: {
         rivalScene?.dispose();
         dressing?.dispose();
         layer?.dispose();
-        models?.dispose();
         weatherTint?.dispose();
         campfireEffect?.dispose();
         precipitationEffect?.dispose();
         world?.dispose();
-        assets?.dispose();
         lighting?.dispose();
         renderer.dispose();
+        scene.clear();
+        const releaseSources = () => {
+            models?.dispose();
+            assets?.dispose();
+            models = undefined;
+            assets = undefined;
+        };
+        if (pending.size) void Promise.allSettled([...pending]).then(releaseSources);
+        else releaseSources();
     };
     return {
         root: scene, camera, renderer, controller,
-        initialize, replace: rebuildWorld,
-        sync: () => syncScene?.() ?? Promise.resolve(),
+        initialize: () => inactive() ? Promise.resolve() : track(initialize()),
+        replace: () => inactive() ? Promise.resolve() : track(rebuildWorld()),
+        sync: () => inactive() ? Promise.resolve() : track(syncScene?.() ?? Promise.resolve()),
         frame, prepareGpu, arrive, dispose, highlight,
         resetFrameTime: () => clock.start(),
         get hasWorld() { return !!world; },
