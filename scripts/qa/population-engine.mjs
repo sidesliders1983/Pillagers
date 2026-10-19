@@ -13,7 +13,7 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
     const sources = new Map();
     let rows = [], dropped = 0, counters = {};
     const consumption = new WeakMap();
-    let mechanics, livestock, weather, family, farmyard, expeditions;
+    let mechanics, livestock, species, weather, family, farmyard, expeditions;
     function record(state, kind, data) {
         if (!diagnostics || state.entityPrefix) return;
         counters[kind] = (counters[kind] ?? 0) + 1;
@@ -46,15 +46,19 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
             sheltered: weather.permanentlySheltered(state, id), away: expeditions.personaAway(state, id) });
     }
     function cattleMortality(state, entry, died) {
-        const { c, risk, sheltered, weatherExposureBps } = entry;
+        const { animal: c, risk, sheltered, weatherExposureBps } = entry;
         const yard = farmyard.farmyards(state).find(y => y.id === c.farmyardId);
         const age = state.time.winter - c.birthWinter, config = state.landing.config;
-        const naturalBps = age < 2 ? config.cattleMortalityYoungBps : age < 10 ? config.cattleMortalityAdultBps
-            : age < 15 ? config.cattleMortalityOlderBps : config.cattleMortalityOldBps;
+        const profile = species.animalProfile(state, c);
+        let naturalBps = 0;
+        for (const band of profile.mortalityBands) {
+            if (band.minAge > age) break;
+            naturalBps = band.chanceBps;
+        }
         record(state, 'cattle-mortality', { id: c.id, age, sex: c.sex, farmyardId: c.farmyardId,
             sheltered, capacity: config.farmyardCapacity, overcrowding: yard?.overcrowding ?? 0,
-            naturalBps, crowdingBps: (yard?.overcrowding ?? 0) * config.cattleCrowdingBps,
-            flatBps: config.cattleWeatherMortalityBps, exposureBps: weatherExposureBps, risk, died });
+            naturalBps, crowdingBps: Math.floor((yard?.overcrowdingUnits ?? 0) * profile.crowdingBps / 10000),
+            flatBps: profile.weatherMortalityBps, exposureBps: weatherExposureBps, risk, died });
     }
     function breedingBlock(state, mother) {
         if (candidate === 'feeding') {
@@ -83,7 +87,7 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
             const context = consumption.get(state);
             context.after = state.stocks.food;
             const events = state.events.slice(-2);
-            context.cattle = events.find(e => e.type === 'CattleFoodConsumed')?.details;
+            context.cattle = events.find(e => ['CattleFoodConsumed', 'LivestockFoodConsumed'].includes(e.type))?.details;
             context.residents = events.find(e => e.type === 'FoodConsumed')?.details;
             record(state, 'feeding', { ...context });
         }
@@ -98,15 +102,15 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
                 'const died=roll(risk); study.humanMortality(state,id,age,band?.chanceBps??0,weatherExposureBps,risk,died); if(!died)return [];');
         }
         if (url.pathname.endsWith('/simulation/Livestock.ts')) {
-            source = replace(source, 'if(mother.lastCalvingWinter!==null&&winter-mother.lastCalvingWinter<config.cattleBirthInterval)continue;',
-                "if(mother.lastCalvingWinter!==null&&winter-mother.lastCalvingWinter<config.cattleBirthInterval){study.breeding(state,mother,'cooldown');continue;}");
-            source = replace(source, 'if(!father||!chance(config.cattleBirthChanceBps))continue;',
+            source = replace(source, 'if (mother.lastCalvingWinter !== null && winter - mother.lastCalvingWinter < profile.birthInterval)\n            continue;',
+                "if(mother.lastCalvingWinter!==null&&winter-mother.lastCalvingWinter<profile.birthInterval){study.breeding(state,mother,'cooldown');continue;}");
+            source = replace(source, 'if (!father || !chance(profile.birthChanceBps)) continue;',
                 "if(!father){study.breeding(state,mother,'no-bull');continue;}" +
                 "const blocked=study.breedingBlock(state,mother);if(blocked){study.breeding(state,mother,blocked);continue;}" +
-                "if(!chance(config.cattleBirthChanceBps)){study.breeding(state,mother,'roll-failed',false,father.id);continue;}");
-            source = replace(source, '        landing.cattle[calf.id]=calf;',
-                "        study.breeding(state,mother,'born',true,father.id,calf.id);\n        landing.cattle[calf.id]=calf;");
-            source = replace(source, '.filter(({risk})=>chance(risk));',
+                "if(!chance(profile.birthChanceBps)){study.breeding(state,mother,'roll-failed',false,father.id);continue;}");
+            source = replace(source, '        landing.cattle[young.id] = young;',
+                "        study.breeding(state,mother,'born',true,father.id,young.id);\n        landing.cattle[young.id] = young;");
+            source = replace(source, '.filter(({ risk }) => chance(risk));',
                 '.filter(entry=>{const died=chance(entry.risk);study.cattleMortality(state,entry,died);return died;});');
         }
         if (url.pathname.endsWith('/simulation/Mechanics.ts')) {
@@ -159,6 +163,7 @@ export function populationEngine(candidate = 'baseline15', { detailLimit = 50000
     const landing = load(new URL('Landing.ts', root));
     mechanics = load(new URL('Mechanics.ts', root));
     livestock = load(new URL('Livestock.ts', root));
+    species = load(new URL('LivestockSpecies.ts', root));
     weather = load(new URL('Weather.ts', root));
     family = load(new URL('FamilyMechanics.ts', root));
     farmyard = load(new URL('Farmyards.ts', root));

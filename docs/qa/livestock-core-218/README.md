@@ -33,3 +33,4 @@ See [the visual review](review.html). Current balance and compatibility details 
 - Desktop, tablet-touch and phone-touch browser flows passed with no page errors. Screenshots were inspected; there was no horizontal page overflow.
 - TypeScript, production build, all 478 tracked public files/47 decoded Terrain models, and explicit character Lab previews passed (20 assets, 36 GLBs, 12 Golden Characters, 19 equipped modules). The existing large-chunk build warning remains.
 - Final archive-key validation: 17 Core/compatibility tests passed after rejecting aliased registrations; all legacy canonical checkpoints remained identical.
+- The existing population-study observer was updated to the shared lifecycle branches and now reads mortality coefficients from the saved species profile. All 14 population/diagnostic tests passed, including exact equality with uninstrumented Core, RNG, save/load and paired study output. Historical measurement reports were preserved.
